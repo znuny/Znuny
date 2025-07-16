@@ -104,6 +104,7 @@ creates a new calendar for given user.
     );
 
 returns Calendar hash if successful:
+
     %Calendar = (
         CalendarID   => 2,
         GroupID      => 3,
@@ -116,6 +117,7 @@ returns Calendar hash if successful:
     );
 
 Events:
+
     CalendarCreate
 
 =cut
@@ -2062,11 +2064,11 @@ Get list of ticket appointments based on a rule.
 
 Returns list of ticket appointments, where key will be either TicketID (default) or AppointmentID:
 
-%Appointments = (
-    1 => 1,
-    2 => 2,
-    # ...
-);
+    %Appointments = (
+        1 => 1,
+        2 => 2,
+        # ...
+    );
 
 =cut
 

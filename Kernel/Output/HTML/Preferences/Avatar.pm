@@ -11,6 +11,7 @@ package Kernel::Output::HTML::Preferences::Avatar;
 
 use strict;
 use warnings;
+use utf8;
 
 use Digest::MD5 qw(md5_hex);
 
@@ -29,6 +30,9 @@ sub new {
     for my $Needed (qw(UserID UserObject ConfigItem)) {
         die "Got no $Needed!" if ( !$Self->{$Needed} );
     }
+
+    my $AvatarEngine = $Kernel::OM->Get('Kernel::Config')->Get('Frontend::AvatarEngine');
+    return if $AvatarEngine eq 'None';
 
     return $Self;
 }

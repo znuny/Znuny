@@ -37,7 +37,7 @@ sub Run {
     my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
     # Ignore all inline parts as these are actually part of the email body.
-    my @Attachments = $Self->{ParserObject}->GetAttachments();
+    my @Attachments = $Self->{ParserObject}->GetAttachments( UserType => 'Agent' );
     @Attachments = grep { defined $_->{ContentDisposition} && $_->{ContentDisposition} ne 'inline' } @Attachments;
 
     $Self->{CommunicationLogObject}->ObjectLog(

@@ -10,25 +10,36 @@
 #
 #   This module allows for some configuration, which can be added to the include code:
 #
-#   Single:         whether it should be allowed to upload only one file (difference to MaxFiles: if Single, the user can't *select* more than one file from the start) (e.g. true)
+#   ID:             The value for the HTML ID attribute the file input should receive (defaults to FileUpload)
+#   Name:           The value for the HTML name attribute the file input should receive (defaults to FileUpload)
+#   FormID:         A custom FormID if needed. Otherwise the FormID of the surrounding form is considered for the uploads.
 #   MaxFiles:       Maximum number of files which should be allowed to be uploaded (e.g. 2)
-#   MaxSizePerFile: the maximum file size per file (in bytes, e.g. 20000)
-#   FileTypes:      a comma-separated list of file extensions which should be allowed (e.g. pdf, jpeg)
-#   Mandatory:      if it should be mandatory to upload at least one file (e.g. true)
-#   FieldID:        the value for the HTML ID attribute the file input should receive (defaults to FileUpload)
-#   FieldName:      the value for the HTML name attribute the file input should receive (defaults to FileUpload)
-#   FormID:         a custom FormID if needed. Otherwise the FormID of the surrounding form is considered for the uploads.
+#   MaxSizePerFile: The maximum file size per file (in bytes, e.g. 20000)
+#   FileTypes:      A comma-separated list of file extensions which should be allowed (e.g. pdf, jpeg)
+#   Mandatory:      If it should be mandatory to upload at least one file (e.g. true)
+#   Single:         Whether it should be allowed to upload only one file (difference to MaxFiles: if Single, the user can't *select* more than one file from the start) (e.g. true)
+#   Filesize:       If filesize is set, the column is displayed.
+#   Filetype:       If filetype is set, the column is displayed.
+#   Preview:        If preview is set, the button is displayed.
+#   Download:       If download is set, the button is displayed.
+#   Delete:         If delete is set, the button is displayed.
 #
 #   Example:
 #
 #   [% INCLUDE "FormElements/AttachmentList.tt"
-#       Single="true"
-#       FieldID="MyID"
-#       FieldName="MyName"
-#       MaxFiles="2"
+#       ID="MyID"
+#       Name="MyName"
 #       Mandatory="true"
-#       FileTypes="pdf,jpg,jpeg"
 #       FormID="3849738474.3343434"
+#       MaxFiles="2"
+#       MaxSizePerFile="23"
+#       FileTypes="pdf,jpg,jpeg"
+#       Single="true"
+#       Filesize="true"
+#       Filetype="true"
+#       Preview="true"
+#       Download="true"
+#       Delete="true"
 #   %]
 #
 #   Please note: all validation is done in JavaScript only. Please take care of any backend validation on your own.
@@ -36,27 +47,94 @@
 #   Please note: If you want to use multiple drag & drop upload fields on the same page, they must not be child elements of the same <div class="Field" />
 #
 
+[% DEFAULT
+    Single = Data.Single,
+    Filesize = Data.Filesize || 'true',
+    Filetype = Data.Filetype || 'true',
+    Preview = Data.Preview,
+    Download = Data.Download || 'true',
+    Delete = Data.Delete || 'true',
+%]
+
+[% IF Single == 'false' %]
+    [% Single = undef %]
+[% END %]
+
+[% IF Filesize == 'false' %]
+    [% Filesize = undef %]
+[% END %]
+
+[% IF Filetype == 'false' %]
+    [% Filetype = undef %]
+[% END %]
+
+[% IF Preview == 'false' %]
+    [% Preview = undef %]
+[% END %]
+
+[% IF Download == 'false' %]
+    [% Download = undef %]
+[% END %]
+
+[% IF Delete == 'false' %]
+    [% Delete = undef %]
+[% END %]
+
 <div class="AttachmentListContainer">
-    <table class="Hidden Small DataTable AttachmentList">
+    <table class="Hidden Small DataTable AttachmentList" data-single="[% Single | html %]" data-filesize="[% Filesize | html %]" data-filetype="[% Filetype | html %]" data-preview="[% Preview | html %]" data-download="[% Download | html %]" data-delete="[% Delete | html %]">
         <thead>
             <th class="Filename">[% Translate("Filename") | html %]</th>
-            <th class="Filetype">[% Translate("Type") | html %]</th>
+            [% IF Filesize %]
             <th class="Filesize">[% Translate("Size") | html %]</th>
-            <th class="Delete"></th>
+            [% END %]
+            [% IF Filetype %]
+            <th class="Filetype">[% Translate("Type") | html %]</th>
+            [% END %]
+            [% IF Preview %]
+            <th class="Preview">[% Translate("Preview") | html %]</th>
+            [% END %]
+            [% IF Download %]
+            <th class="Download">[% Translate("Download") | html %]</th>
+            [% END %]
+            [% IF Delete %]
+            <th class="Delete">[% Translate("Delete") | html %]</th>
+            [% END %]
         </thead>
         <tbody>
-        [% FOREACH Data IN Data.AttachmentList %]
-            <tr>
-                <td class="Filename">[% Data.Filename | html %]</td>
-                <td class="Filetype">[% Data.ContentType | html %]</td>
-                <td class="Filesize" data-file-size="[% Data.Filesize | html %]">[% Data.Filesize | Localize('Filesize') | html %]</td>
-                <td class="Delete">
-                    <a href="#" class="AttachmentDelete icon-hover-sm" aria-label="[% Translate("Click to delete this attachment.") | html %]" tabindex="0" data-file-id="[% Data.FileID | html %]" data-object-id="[% Data.ObjectID | html %]" data-field-id="[% Data.FieldID | html %]" data-delete-action="[% Data.DeleteAction | html %]">
-                        <i class="fa fa-times"></i>
-                    </a>
-                </td>
-            </tr>
-        [% END %]
+            [% IF Data.AttachmentList %]
+                [% FOREACH File IN Data.AttachmentList %]
+                    <tr>
+                        <td class="Filename">[% File.Filename | html %]</td>
+                        [% IF Filetype %]
+                        <td class="Filetype">[% File.ContentType | html %]</td>
+                        [% END %]
+                        [% IF Filesize %]
+                        <td class="Filesize" data-file-size="[% File.Filesize | html %]">[% File.Filesize | Localize('Filesize') | html %]</td>
+                        [% END %]
+                        <td class="Preview OptionIcon">
+                            [% IF Preview || File.Preview %]
+                            <a href="#" class="AttachmentPreview icon-hover-sm" aria-label="[% Translate("Click to preview this file.") | html %]" tabindex="0" data-file-id="[% File.FileID | html %]" data-object-id="[% File.ObjectID | html %]" data-field-id="[% File.FieldID | html %]" data-preview-action="[% File.PreviewAction | html %]">
+                                <i class="fa fa-search"></i>
+                            </a>
+                            [% END %]
+                        </td>
+                        [% IF Download %]
+                        <td class="Download OptionIcon">
+                            <a href="[% Env('Baselink') %]Action=AjaxAttachment;Subaction=Download;FileID=[% File.FileID | html %];FormID=[% Data.FormID | html %];[% Env('ChallengeTokenParam') | html %]" class="AttachmentDownload icon-hover-sm" aria-label="[% Translate("Click to download this file.") | html %]" tabindex="1" data-file-id="[% File.FileID | html %]" data-object-id="[% File.ObjectID | html %]" data-field-id="[% File.FieldID | html %]" data-download-action="[% File.DownloadAction | html %]">
+                                <i class="fa fa-download"></i>
+                            </a>
+                        </td>
+                        [% END %]
+                        [% IF Delete %]
+                        <td class="Delete OptionIcon">
+                            <a href="#" class="AttachmentDelete icon-hover-sm" aria-label="[% Translate("Click to delete this attachment.") | html %]" tabindex="2" data-file-id="[% File.FileID | html %]" data-object-id="[% File.ObjectID | html %]" data-field-id="[% File.FieldID | html %]" data-delete-action="[% File.DeleteAction | html %]">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </td>
+                        [% END %]
+                    </tr>
+                [% END %]
+            [% END %]
         </tbody>
     </table>
     <span class="Busy">
@@ -64,20 +142,28 @@
     </span>
 </div>
 
-<div class="outer-upload-file">
-    <input
-        class="AjaxDnDUpload [% IF Mandatory %]Validate_DnDUpload[% END %]"
-        [% IF !Single %] multiple="multiple"[% END %]
-        id="[% IF FieldID %][% FieldID | html %][% ELSE %]FileUpload[% END %]"
-        name="[% IF FieldName %][% FieldName | html %][% ELSE %]FileUpload[% END %]"
-        data-max-files="[% MaxFiles | html %]"
-        data-file-types="[% FileTypes | html %]"
-        data-max-size-per-file="[% MaxSizePerFile | html %]"
-        data-max-size-per-file-hr="[% IF MaxSizePerFile %][% MaxSizePerFile | Localize('Filesize') | html %][% END %]"
-        # Hin: See Kernel::System::Main::FilenameCleanUp for max. length of filename (200 instead of 220 because meta file name extensions (like .ContentType) count to the file length)
-        data-max-filename-length="200"
-        data-form-id="[% FormID | html %]"
-        type="file"
-        size="40"
-    />
-</div>
+<input
+    type="file"
+    id="[% IF Data.ID %][% Data.ID | html %][% ELSIF ID %][% ID | html %][% ELSE %]FileUpload[% END %]"
+    name="[% IF Data.Name %][% Data.Name | html %][% ELSIF Name %][% Name | html %][% ELSE %]FileUpload[% END %]"
+    class="AjaxDnDUpload[% IF Mandatory or Data.Mandatory %] Validate_DnDUpload[% END %] [% Data.Class | html %]"
+    data-form-id="[% Data.FormID | html %]"
+    data-max-files="[% IF Data.MaxFiles %][% Data.MaxFiles | html %][% ELSIF MaxFiles %][% MaxFiles | html %][% END %]"
+    data-max-size-per-file="[% IF Data.MaxSizePerFile %][% Data.MaxSizePerFile | html %][% ELSIF MaxSizePerFile %][% MaxSizePerFile | html %][% END %]"
+    data-file-types="[% IF Data.FileTypes %][% Data.FileTypes | html %][% ELSIF FileTypes %][% FileTypes | html %][% END %]"
+    data-max-size-per-file-hr="[% IF Data.MaxSizePerFile %][% Data.MaxSizePerFile | Localize('Filesize') | html %][% END %]"
+    size="40"
+    # Hin: See Kernel::System::Main::FilenameCleanUp for max. length of filename (200 instead of 220 because meta file name extensions (like .ContentType) count to the file length)
+    data-max-filename-length="200"
+    [% IF !Single or !Data.Single %] multiple="multiple"[% END %]
+/>
+
+# Add hidden field for FormID if needed.
+# This is needed if you use multiple drag & drop upload fields on the same page.
+# The FormID is used to identify the correct form for the uploads.
+# Get Files via $UploadCacheObject->FormIDGetAllFilesData(FormID => $ID . '::FormID');
+# $ParamObject->GetParams(); returns 'AttachmentExists' a string or list of id's from the respective input fields of the type 'file' for which a new file was uploaded
+
+[% IF Data.FormID %]
+<input type="hidden" name="[% Data.ID | html %]::FormID" value="[% Data.FormID | html %]"/>
+[% END %]

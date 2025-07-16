@@ -151,10 +151,6 @@ msgid "Set up what you want to change if the criteria match. Keep in mind that '
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
-msgid "Check the official %sdocumentation%s."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
 msgid "Edit ACL %s"
 msgstr "Muuda pääsuloendit %s"
 
@@ -770,7 +766,7 @@ msgstr ""
 msgid "Filter for communications"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLog.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
 msgid "Hint"
 msgstr "Vihje"
 
@@ -1362,7 +1358,7 @@ msgstr ""
 msgid "To add a new field, select the field type from one of the object's list, the object defines the boundary of the field and it can't be changed after the field creation."
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
 msgid "Import and export of configurations"
 msgstr ""
 
@@ -1374,11 +1370,11 @@ msgstr ""
 msgid "Overwrite existing configurations"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
 msgid "Import configurations"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
 msgid "Export configurations"
 msgstr ""
 
@@ -1418,23 +1414,23 @@ msgstr "Object"
 msgid "Delete this field"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
 msgid "Go back to overview"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
 msgid "Dynamic Fields"
 msgstr "Dünaamilised väljad"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
 msgid "General"
 msgstr "Üldine"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
 msgid "This field is required, and the value should be alphabetic and numeric characters only."
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
 msgid "Must be unique and only accept alphabetic and numeric characters."
 msgstr ""
 
@@ -1442,19 +1438,19 @@ msgstr ""
 msgid "Changing this value will require manual changes in the system."
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
 msgid "This is the name to be shown on the screens where the field is active."
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
 msgid "Field order"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
 msgid "This field is required and must be numeric."
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
 msgid "This is the order in which this field will be shown on the screens where is active."
 msgstr ""
 
@@ -1462,19 +1458,19 @@ msgstr ""
 msgid "Is not possible to invalidate this entry, all config settings have to be changed beforehand."
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
 msgid "Field type"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
 msgid "Object type"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
 msgid "Internal field"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
 msgid "This field is protected and can't be deleted."
 msgstr ""
 
@@ -1482,7 +1478,7 @@ msgstr ""
 msgid "This dynamic field is used in the following config settings:"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldCheckbox.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
 msgid "Field Settings"
 msgstr ""
 
@@ -2402,7 +2398,7 @@ msgstr ""
 msgid "Add Note"
 msgstr "Lisa märkus"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
 msgid "Visible for customer"
 msgstr ""
 
@@ -4090,7 +4086,7 @@ msgstr ""
 msgid "View the admin manual on Github"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
 msgid "Filter for Items"
 msgstr ""
 
@@ -4866,7 +4862,7 @@ msgstr ""
 msgid "Edit Priority"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPriority.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
 msgid "Color"
 msgstr ""
 
@@ -5098,7 +5094,7 @@ msgstr ""
 msgid "Filter assigned fields"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
 msgid "Communication Channel"
 msgstr ""
 
@@ -6346,11 +6342,11 @@ msgstr "Käivita otsing"
 msgid "Go back to Deployment Details"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
 msgid "View a custom List of Settings"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
 msgid "View single Setting: %s"
 msgstr ""
 
@@ -6470,7 +6466,7 @@ msgstr "Muuda malli"
 msgid "Attachments"
 msgstr "Manused"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Overview.tt
 msgid "Delete this entry"
 msgstr "Kustuta see kirje"
 
@@ -7518,7 +7514,7 @@ msgstr ""
 msgid "Created by"
 msgstr "Loonud:"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsView.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Overview.tt
 msgid "Changed by"
 msgstr "Muutnud:"
 
@@ -8194,7 +8190,7 @@ msgstr ""
 msgid "Archive Search"
 msgstr "Arhiivist otsimine"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
 msgid "Sender Type"
 msgstr "Saatja tüüp"
 
@@ -8600,10 +8596,6 @@ msgstr "Uus intsident"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
 msgid "Service level agreement"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketMessage.tt
-msgid "Dymanic Info"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerTicketOverview.tt
@@ -9670,7 +9662,7 @@ msgstr ""
 msgid "Go back to admin: "
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/Sidebar/Actions.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Overview.tt
 msgid "Deployment"
 msgstr ""
 
@@ -9899,8 +9891,8 @@ msgid "Edit the system configuration settings."
 msgstr "Süsteemi konfiguratsiooniseadete muutmine."
 
 #. Perl Module: Kernel/Config/Defaults.pm
-msgid "Update and extend your system with software packages."
-msgstr "Süsteemi uuendamine ja laiendamine tarkvarapakettide abil."
+msgid "Manage add-ons."
+msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "ACL information from database is not in sync with the system configuration, please deploy all ACLs."
@@ -9994,7 +9986,7 @@ msgstr ""
 msgid "System was unable to create Calendar!"
 msgstr ""
 
-#. Perl Module: Kernel/Modules/AdminAppointmentCalendarManage.pm
+#. Perl Module: Kernel/Modules/AJAXAttachment.pm
 msgid "Please contact the administrator."
 msgstr ""
 
@@ -10334,7 +10326,7 @@ msgstr ""
 msgid "Need %s"
 msgstr ""
 
-#. Perl Module: Kernel/Modules/AdminDynamicFieldCheckbox.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
 msgid "Add %s field"
 msgstr ""
 
@@ -10366,7 +10358,7 @@ msgstr ""
 msgid "Could not get data for dynamic field %s"
 msgstr ""
 
-#. Perl Module: Kernel/Modules/AdminDynamicFieldCheckbox.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
 msgid "Change %s field"
 msgstr ""
 
@@ -10378,7 +10370,7 @@ msgstr ""
 msgid "Could not update the field %s"
 msgstr ""
 
-#. Perl Module: Kernel/Modules/AdminDynamicFieldCheckbox.pm
+#. Perl Module: Kernel/Modules/AdminDynamicFieldAutoConfig.pm
 msgid "Currently"
 msgstr ""
 
@@ -12526,11 +12518,11 @@ msgstr ""
 msgid "Show all articles"
 msgstr ""
 
-#. Perl Module: Kernel/Modules/AjaxAttachment.pm
+#. Perl Module: Kernel/Modules/AJAXAttachment.pm
 msgid "Got no FormID."
 msgstr ""
 
-#. Perl Module: Kernel/Modules/AjaxAttachment.pm
+#. Perl Module: Kernel/Modules/AJAXAttachment.pm
 msgid "Error: the file could not be deleted properly. Please contact your administrator (missing FileID)."
 msgstr ""
 
@@ -22705,7 +22697,7 @@ msgstr "Jaapani"
 msgid "Korean"
 msgstr ""
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Form.tt
 msgid "Language"
 msgstr "Keel"
 
@@ -23710,7 +23702,7 @@ msgid "This key is not certified with a trusted signature!"
 msgstr ""
 
 #. SysConfig
-msgid "This module is part of the admin area of OTRS."
+msgid "This module is part of the admin area of Znuny."
 msgstr ""
 
 #. SysConfig
@@ -24337,7 +24329,535 @@ msgstr ""
 msgid "Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values."
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
+msgid "Source"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminLog.tt
+msgid "Line"
+msgstr ""
+
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Do not verify the signer's certificate of a signed message."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACLEdit.tt
+msgid "A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s."
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.UI.js
+msgid "The following files types are allowed: %s"
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default)."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AgentStatistics.pm
+msgid "This stat does not exist, or you don't have permissions to access it."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
+msgid "Changing this value will require manual changes to the system."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldAutoConfig.tt
+msgid "There is no configuration available for this dynamic field."
+msgstr ""
+
+#. SysConfig
+msgid "Dynamic fields administration"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+msgid "Translation"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+msgid "Translation Management"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+msgid "Add Translation"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+msgid "Edit Translation"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Form.tt
+msgid "Update Translation"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Form.tt
+msgid "An entry with this name already exists!"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Form.tt
+msgid "Destination"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Overview.tt
+msgid "Copy this object"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation/Overview.tt
+msgid "Do you really want to delete this object? All associated data will be lost!"
+msgstr ""
+
+#. Perl Module: Kernel/Output/HTML/Notification/TranslationCheck.pm
+msgid "The translations in the database are not synchronous. Please synchronize all translations."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Frontend module registration for the agent admin interface."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "This configuration defines the cache settings for the Znuny-DatabasBackend (default: 1 day)."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines a module to display a notification if translation deployment is needed."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the format of exported files when using the admin interface."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the separator for export csv files."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the quote for export csv files."
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.DBCRUD.js
+msgid "Deleting the object and its data. This may take a while..."
+msgstr ""
+
+#. SysConfig
+msgid "Create and manage translation."
+msgstr ""
+
+#. SysConfig
+msgid "Manage translation."
+msgstr ""
+
+#. SysConfig
+msgid "YAML"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
+msgid "Here you can see all possible article combination that are theoretically available in your system."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
+msgid "You can define a background color for each article combination. Click on the color code."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
+msgid "Article Color Management"
+msgstr ""
+
+#. SysConfig
+msgid "Article Color"
+msgstr ""
+
+#. SysConfig
+msgid "Manage ticket article color."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
+msgid "Upload a file in YAML format (as provided by the export) to import appointment notifications."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
+msgid "Here you can upload a configuration file to import auto responses to your system. The file needs to be in the .yml format as generated by the auto response export."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
+msgid "Overwrite existing auto responses?"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
+msgid "Upload a file in YAML format (as provided by the export) to import ticket notifications."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Import configuration"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSalutation.tt
+msgid "Upload a file in YAML format (as provided by the export) to import salutations."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSalutation.tt
+msgid "Overwrite existing salutations?"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSignature.tt
+msgid "Upload a file in YAML format (as provided by the export) to import signatures."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSignature.tt
+msgid "Overwrite existing signatures?"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
+msgid "Upload a file in YAML format (as provided by the export) to import standard templates."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
+msgid "Overwrite existing standard templates?"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
+msgid "Notifications could not be imported due to an unknown error, please check logs for more information."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
+msgid "The following notifications have been added successfully: %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
+msgid "The following notifications have been updated successfully: %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
+msgid "The following notifications were not updated: %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
+msgid "There where errors adding/updating the following notifications: %s. Please check the log file for more information."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAutoResponse.pm
+msgid "Error exporting auto response with ID %s!"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAutoResponse.pm
+msgid "Error creating the auto response."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAutoResponse.pm
+msgid "Auto responses could not be imported due to an unknown error. Please check logs for more information."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAutoResponse.pm
+msgid "The following auto responses have been added successfully: %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAutoResponse.pm
+msgid "The following auto responses have been updated successfully: %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAutoResponse.pm
+msgid "The following auto responses were not updated: %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAutoResponse.pm
+msgid "Errors adding/updating the following auto responses: %s. Please check logs for more information."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminNotificationEvent.pm
+msgid "Errors adding/updating the following notifications: %s. Please check logs for more information."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminSalutation.pm
+msgid "Error exporting salutation with ID %s!"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminSalutation.pm
+msgid "Error creating the salutation."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminSalutation.pm
+msgid "Salutations could not be imported due to an unknown error. Please check logs for more information."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminSalutation.pm
+msgid "The following salutations have been added successfully: %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminSalutation.pm
+msgid "The following salutations have been updated successfully: %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminSalutation.pm
+msgid "The following salutations were not updated: %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminSalutation.pm
+msgid "Errors adding/updating the following salutations: %s. Please check logs for more information."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminSignature.pm
+msgid "Error exporting signature with ID %s!"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminSignature.pm
+msgid "Error creating the signature."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminSignature.pm
+msgid "Signatures could not be imported due to an unknown error. Please check logs for more information."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminSignature.pm
+msgid "The following signatures have been added successfully: %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminSignature.pm
+msgid "The following signatures have been updated successfully: %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminSignature.pm
+msgid "The following signatures were not updated: %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminSignature.pm
+msgid "Errors adding/updating the following signatures: %s. Please check logs for more information."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTemplate.pm
+msgid "Error exporting standard template with ID %s!"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTemplate.pm
+msgid "Error creating the standard template."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTemplate.pm
+msgid "Standard templates could not be imported due to an unknown error. Please check logs for more information."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTemplate.pm
+msgid "The following standard templates have been added successfully: %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTemplate.pm
+msgid "The following standard templates have been updated successfully: %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTemplate.pm
+msgid "The following standard templates were not updated: %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTemplate.pm
+msgid "Errors adding/updating the following standard templates: %s. Please check logs for more information."
+msgstr ""
+
+#. Perl Module: Kernel/System/AutoResponse.pm
+msgid "Couldn't read auto response configuration file. Please make sure the file is valid."
+msgstr ""
+
+#. Perl Module: Kernel/System/Salutation.pm
+msgid "Couldn't read salutation configuration file. Please make sure the file is valid."
+msgstr ""
+
+#. Perl Module: Kernel/System/Signature.pm
+msgid "Couldn't read signature configuration file. Please make sure the file is valid."
+msgstr ""
+
+#. Perl Module: Kernel/System/StandardTemplate.pm
+msgid "Couldn't read standard template configuration file. Please make sure the file is valid."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines which objects are supported for object export using command \"Admin::Object::Export\"."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines which objects are supported for object import using command \"Admin::Object::Import\"."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines web communication channel."
+msgstr ""
+
+#. SysConfig
+msgid "Web"
+msgstr ""
+
+#. SysConfig
+msgid "Web communication channel."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
+msgid "Mark tickets as"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AJAXAttachment.pm
+msgid "%s is missing. The file could not be downloaded properly."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AJAXAttachment.pm
+msgid "%s is missing. The file could not be previewed properly."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
+msgid "Preview"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
+msgid "Click to preview this file."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
+msgid "Click to download this file."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Maximum time, in seconds, to wait for a response from server. Only applies to modules that support timeouts."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
+msgid "Process Preferences"
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Define a process category."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module CustomerPreferences. These are regular expressions."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Path to RichText content CSS file that will be used to apply internal style to articles. The style will be appended into articles body when using agent interface. Customer internal article styles should match the same or very simillar rules."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Path to RichText content CSS file that will be used to apply internal style to articles. The styles will be appended into articles body when using customer interface. Agent internal article styles should match the same or very simillar rules."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the additional default CSS used in rich text editors content. The style will be appended into articles body."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the minimum height for the rich text editor component. Enter number (pixels) or percent value (relative)."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the selectable format tags in the rich text editor. Each option is an JSON equivalent of heading options used in CKEditor5, more info: https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#configuring-heading-levels."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines enabled plugins that are available from the CKEditor build."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines additional plugins in the rich text editor."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines plugins that will be excluded from usage in the rich text editor."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines content that is allowed for use in the rich text editor."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines content that is disallowed for use in the rich text editor."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "General settings for autocompletion in rich text editor. By default \"ItemTemplate\" uses \"li\" html tag to show the option that is matching (list format). The value of the key is used to define html inside it."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcessCategory.tt
+msgid "Process Ticket Category"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcessCategory.tt
+msgid "Categories"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcessCategory.tt
+msgid "Favourites"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcessCategory.tt
+msgid "No process found."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Frontend module registration (disable ticket processes screen if no process available) for Agent."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the LinkTarget for AgentTicketProcessCategory."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the LinkTarget for CustomerTicketProcessCategory."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Define a process link target."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Define a process icon."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines which ContentTypes are permitted for the attachment preview."
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.UI.js
+msgid "An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator."
+msgstr ""
+
+#. SysConfig
+msgid "AsPopup"
+msgstr ""
+
+#. SysConfig
+msgid "Create new process ticket via category."
+msgstr ""
+
+#. SysConfig
+msgid "Icon"
+msgstr ""
+
+#. SysConfig
+msgid "LinkTarget"
+msgstr ""
+
+#. SysConfig
+msgid "Process Ticket Catalog"
+msgstr ""
+
+#. SysConfig
+msgid "Process Ticket Category: Define a process category."
+msgstr ""
+
+#. SysConfig
+msgid "Process Ticket Category: Define a process icon."
+msgstr ""
+
+#. SysConfig
+msgid "Process Ticket Category: Define a process link target."
+msgstr ""
+
+#. SysConfig
+msgid "Process Ticket Catalog."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Limits the amount of emails which are sent within one batch. Disable this setting to have no limit."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Applies the limit defined in 'SendmailModule::RateLimit' per sender address."
 msgstr ""
 

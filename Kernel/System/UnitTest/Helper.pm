@@ -2341,13 +2341,14 @@ Creates a Ticket with dummy data and tests the creation. All Ticket attributes a
         UserID       => 1,
     );
 
-    To overwrite:
+To overwrite:
 
     my $TicketID = $HelperObject->TicketCreate(
         CustomerUser => 'another_customer@example.com',
     );
 
-    Result:
+Result:
+
     $TicketID = 1337;
 
 =cut
@@ -2419,14 +2420,15 @@ Creates an Article with dummy data and tests the creation. All Article attribute
         NoAgentNotify  => 1,
     );
 
-    To overwrite:
+To overwrite:
 
     my $ArticleID = $HelperObject->ArticleCreate(
         TicketID   => 1337,
         SenderType => 'customer',
     );
 
-    Result:
+Result:
+
     $ArticleID = 1337;
 
 =cut

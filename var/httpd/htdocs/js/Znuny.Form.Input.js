@@ -215,8 +215,8 @@ Znuny.Form.Input = (function (TargetNS) {
 
         var Result = Znuny.Form.Input.FieldIDMapping('AdminQueue',
             {
-                EscalationStep1Color: 'EscalationStep1Color' # FirstParam = AccessKey
-                                                             # SecondParam = ID of the HTML element on page
+                EscalationStep1Color: 'EscalationStep1Color'    # FirstParam = AccessKey
+                                                                # SecondParam = ID of the HTML element on page
             }
         );
 
@@ -276,6 +276,7 @@ Znuny.Form.Input = (function (TargetNS) {
         var Type;
         var Value;
         var $Element;
+        var CKEditorObj;
 
         Options = Options || {};
 
@@ -293,11 +294,11 @@ Znuny.Form.Input = (function (TargetNS) {
         }
 
         if (FieldID === 'RichText' || Type === 'RichText') {
+            CKEditorObj = Core.UI.RichTextEditor.GetInstance(FieldID);
             if (
-                typeof CKEDITOR !== 'undefined'
-                && CKEDITOR.instances[FieldID]
+                CKEditorObj !== undefined
             ) {
-                return CKEDITOR.instances[FieldID].getData();
+                return CKEditorObj.getData();
             }
             else {
                 return $('#'+ FieldID).val();
@@ -566,7 +567,8 @@ Znuny.Form.Input = (function (TargetNS) {
             TriggerChange,
             Type,
             SetAsTicketCustomer,
-            Modernize;
+            Modernize,
+            CKEditorObj;
 
         Options = Options || {};
 
@@ -595,14 +597,14 @@ Znuny.Form.Input = (function (TargetNS) {
         }
 
         if (FieldID === 'RichText' || Type == 'RichText') {
+            CKEditorObj = Core.UI.RichTextEditor.GetInstance(FieldID);
             if (
-                typeof CKEDITOR !== 'undefined'
-                && CKEDITOR.instances[FieldID]
+                CKEditorObj !== undefined
             ) {
                 // Attention: No 'change' event will get triggered
                 // and the content will get re-rendered, so all events are lost :)
                 // See: https://dev.ckeditor.com/ticket/6633
-                CKEDITOR.instances[FieldID].setData(Content || '');
+                CKEditorObj.setData(Content || '');
                 Core.App.Publish('Znuny.Form.Input.Change.'+ Attribute);
             }
             else {
@@ -976,7 +978,7 @@ Znuny.Form.Input = (function (TargetNS) {
 
                 // cast to strings
                 SetSelected = jQuery.map(SetSelected, function(Element) {
-                  return Element.toString();
+                    return Element.toString();
                 });
 
                 $('#'+ FieldID +' option').filter(function() {
@@ -1294,38 +1296,34 @@ Znuny.Form.Input = (function (TargetNS) {
     Manipulates the configuration of RichText input fields. It takes a config structure where the key is the Editor FieldID and the value is another structure with the config items it should set. It's possible to use the meta key 'Global' to set the config of all RichText instances on the current site. Notice that old configurations will be kept and extended instead of removed. For a complete list of possible config attributes visit the CKEdior documentation: http://docs.ckeditor.com/#!/api/CKEDITOR.config
 
     var Result = Znuny.Form.Input.RichTextConfig({
-      'RichText': {
-        toolbarCanCollapse:     true,
-        toolbarStartupExpanded: false,
-      }
+        'RichText': {
+            toolbarCanCollapse:     true,
+            toolbarStartupExpanded: false,
+        }
     });
 
     Returns:
 
-      Result = true
+        Result = true
     */
+    // TODO: check if this is needed at all
+    // TODO: probably to migrate in it's own way
     TargetNS.RichTextConfig = function (NewConfig) {
-        if (typeof CKEDITOR === 'undefined') {
+        if (typeof ZnunyEditor === 'undefined') {
             return;
         }
 
         // remove all rte's
         $('textarea.RichText').each(function () {
             var EditorID = $(this).attr('id');
-            var Editor   = CKEDITOR.instances[EditorID];
-
-            if (!Editor) return true;
-
-            $(this).removeClass('HasCKEInstance');
-            Editor.destroy(true);
+            Core.UI.RichTextEditor.DestroyInstance(EditorID)
         });
-
         // add hack to overwrite config at its lowest place
         CKEDITOR.replaceZnunyFormInput = CKEDITOR.replace;
         CKEDITOR.replace = function(EditorID, EditorConfig) {
             var ExtendedConfig = NewConfig[ EditorID ] || NewConfig['Global'];
             $.each(ExtendedConfig, function(Attribute, Value) {
-              EditorConfig[ Attribute ] = Value;
+                EditorConfig[ Attribute ] = Value;
             });
 
             return CKEDITOR.replaceZnunyFormInput(EditorID, EditorConfig);
@@ -1438,7 +1436,7 @@ Znuny.Form.Input = (function (TargetNS) {
     }
 
     function escapeRegExp(str) {
-      return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+        return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
     }
 
     //

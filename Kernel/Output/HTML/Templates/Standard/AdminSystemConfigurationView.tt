@@ -30,24 +30,6 @@
 
     <div class="ContentColumn">
         <h1 class="InvisibleText">[% Translate("System configuration") | html %]</h1>
-
-        [% BreadcrumbPath = [
-                {
-                    Name => Translate('System Configuration'),
-                    Link => 'AdminSystemConfiguration',
-                },
-            ]
-        %]
-
-    [% IF Data.Type and Data.Type == 'CustomList' %]
-        [% BreadcrumbPath.push({ Name => Translate('View a custom List of Settings') }) %]
-    [% ELSE %]
-        [% View = Data.View | uri %]
-        [% BreadcrumbPath.push({ Name => Translate('View single Setting: %s', Data.View), Link => 'AdminSystemConfiguration;Subaction=View;Setting=' _ View }) %]
-    [% END %]
-
-        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-
         [% INCLUDE "SystemConfiguration/SettingsList.tt" %]
     </div>
 </div>

@@ -79,6 +79,12 @@ sub new {
         || $Kernel::OM->Get('Kernel::Config')->Get('Ticket::SearchIndexModule')
         || 'Kernel::System::Ticket::ArticleSearchIndex::RuntimeDB';
 
+    # Get all customer visibility types
+    $Self->{IsVisibleForCustomer} = {
+        0 => 'NotVisibleForCustomer',
+        1 => 'VisibleForCustomer',
+    };
+
     return $Self;
 }
 
@@ -655,6 +661,371 @@ sub ArticleAccountedTimeDelete {
     );
 
     return 1;
+}
+
+=head2 ArticleColorGet()
+
+Get article color.
+
+    my %ArticleColor = $ArticleObject->ArticleColorGet(
+        Name => 'agent::Email::VisibleForCustomer',     # required, Name or ID of the article color
+        # or
+        ID => '1',                                      # required, ID or Name of the article color
+    );
+
+
+Returns:
+
+    my %ArticleColor = (
+        ID                   => 1,
+        Name                 => 'agent::Email::VisibleForCustomer', # Name of the article color
+        SenderType           => 'agent',                            # agent|customer|system
+        CommunicationChannel => 'Email',                            # Email|Phone|Chat|...
+        IsVisibleForCustomer => 'VisibleForCustomer',               # VisibleForCustomer|NotVisibleForCustomer
+        Color                => '#D1E8D1',
+        CreateTime           => '2017-03-01 00:00:00',
+        CreateBy             => 1,
+        ChangeTime           => '2017-03-01 00:00:00',
+        ChangeBy             => 1,
+    );
+
+=cut
+
+sub ArticleColorGet {
+    my ( $Self, %Param ) = @_;
+
+    my $DBObject  = $Kernel::OM->Get('Kernel::System::DB');
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    if ( !$Param{ID} && !$Param{Name} ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => 'Need ArticleColor ID or Name!'
+        );
+        return;
+    }
+
+    # Get article color
+    if ( $Param{ID} ) {
+        return if !$DBObject->Prepare(
+            SQL  => 'SELECT * FROM article_color WHERE id = ?',
+            Bind => [ \$Param{ID} ],
+        );
+    }
+    else {
+        return if !$DBObject->Prepare(
+            SQL  => 'SELECT * FROM article_color WHERE name = ?',
+            Bind => [ \$Param{Name} ],
+        );
+    }
+
+    my %ArticleColor;
+    while ( my @Row = $DBObject->FetchrowArray() ) {
+
+        my ( $SenderType, $CommunicationChannel, $IsVisibleForCustomer ) = split( /::/, $Row[1] );
+
+        %ArticleColor = (
+            ID         => $Row[0],
+            Name       => $Row[1],
+            Color      => $Row[2],
+            CreateTime => $Row[3],
+            CreateBy   => $Row[4],
+            ChangeTime => $Row[5],
+            ChangeBy   => $Row[6],
+
+            SenderType           => $SenderType,
+            CommunicationChannel => $CommunicationChannel,
+            IsVisibleForCustomer => $IsVisibleForCustomer,
+        );
+    }
+    if ( !%ArticleColor ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "ArticleColor $Param{Name} was not found!",
+        );
+        return;
+    }
+
+    return %ArticleColor;
+}
+
+=head2 ArticleColorSet()
+
+Set article color.
+
+    my $ArticleColorID = $ArticleObject->ArticleColorSet(
+        Name                 => 'agent::Email::VisibleForCustomer',     # required, Name of the article color
+        # or
+        SenderType           => 'agent',                                # agent|customer|system
+        CommunicationChannel => 'Email',                                # Email|Phone|Chat|...
+        IsVisibleForCustomer => 1,                                      # 1|VisibleForCustomer or 0|NotVisibleForCustomer
+
+        Color                => '#FFCCDD',                              # required, Color of the article
+        UserID               => 1,
+    );
+
+Returns:
+
+    my $ArticleColorID = 1;
+
+=cut
+
+sub ArticleColorSet {
+    my ( $Self, %Param ) = @_;
+
+    my $DBObject    = $Kernel::OM->Get('Kernel::System::DB');
+    my $LogObject   = $Kernel::OM->Get('Kernel::System::Log');
+    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
+
+    if ( IsInteger( $Param{IsVisibleForCustomer} ) ) {
+        $Param{IsVisibleForCustomer} = $Self->{IsVisibleForCustomer}->{ $Param{IsVisibleForCustomer} };
+    }
+
+    # Check if all needed parameters are set
+    if ( !$Param{Name} && $Param{SenderType} && $Param{CommunicationChannel} && $Param{IsVisibleForCustomer} ) {
+        $Param{Name} = $Param{SenderType} . '::' . $Param{CommunicationChannel} . '::' . $Param{IsVisibleForCustomer};
+    }
+
+    NEEDED:
+    for my $Needed (qw(Name Color UserID)) {
+
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    # Check if article color already exists
+    return if !$DBObject->Prepare(
+        SQL  => 'SELECT id FROM article_color WHERE name = ?',
+        Bind => [ \$Param{Name} ],
+    );
+
+    my $ArticleColorID;
+    while ( my @Row = $DBObject->FetchrowArray() ) {
+        $ArticleColorID = $Row[0];
+    }
+
+    # If article color already exists, update it
+    if ($ArticleColorID) {
+        return if !$DBObject->Do(
+            SQL  => 'UPDATE article_color SET color = ?, change_time = current_timestamp, change_by = ? WHERE id = ?',
+            Bind => [
+                \$Param{Color}, \$Param{UserID}, \$ArticleColorID
+            ],
+        );
+
+        $CacheObject->Delete(
+            Type => $Self->{CacheType},
+            Key  => 'ArticleColorList',
+        );
+
+        return $ArticleColorID;
+    }
+
+    # If article color does not exist, insert it
+    else {
+        # Insert new article color
+        return if !$DBObject->Do(
+            SQL => 'INSERT INTO article_color (name, color, create_time, create_by, change_time, change_by)'
+                . ' VALUES (?, ?, current_timestamp, ?, current_timestamp, ?)',
+            Bind => [
+                \$Param{Name}, \$Param{Color}, \$Param{UserID}, \$Param{UserID}
+            ],
+        );
+
+        # Get the ID of the new article color
+        my $ArticleColorID;
+        return if !$DBObject->Prepare(
+            SQL  => 'SELECT id FROM article_color WHERE name = ?',
+            Bind => [ \$Param{Name} ],
+        );
+        while ( my @Row = $DBObject->FetchrowArray() ) {
+            $ArticleColorID = $Row[0];
+        }
+
+        $CacheObject->Delete(
+            Type => $Self->{CacheType},
+            Key  => 'ArticleColorList',
+        );
+
+        return if !$ArticleColorID;
+        return $ArticleColorID;
+    }
+}
+
+=head2 ArticleColorInit()
+
+Add all article combination of sender types, communication channel and customer visibility to the database if they do not exist yet.
+
+    my $Success = $ArticleObject->ArticleColorInit();
+
+Returns:
+
+    my $Success = 1;
+
+=cut
+
+sub ArticleColorInit {
+    my ( $Self, %Param ) = @_;
+
+    my $CommunicationChannelObject = $Kernel::OM->Get('Kernel::System::CommunicationChannel');
+    my $DBObject                   = $Kernel::OM->Get('Kernel::System::DB');
+
+    my @ArticleColorList;
+
+    # Get all article sender types
+    my %ArticleSenderTypeList = $Self->ArticleSenderTypeList();
+
+    # Get all communication channels
+    my @CommunicationChannelsValid = $CommunicationChannelObject->ChannelList(
+        ValidID => 1,
+    );
+    my @CommunicationChannelsInvalid = $CommunicationChannelObject->ChannelList(
+        ValidID => 0,
+    );
+
+    my @CommunicationChannels = ( @CommunicationChannelsValid, @CommunicationChannelsInvalid );
+
+    # Default Color Mapping
+    # Use regex to match the article name and set the color accordingly.
+    my @DefaultColorMapping = (
+        {
+            # Default Colors
+            'agent'    => '#D1E8D1',
+            'customer' => '#F9F9F9',
+            'system'   => '#FFF7BE',
+        },
+        {
+            'agent.*VisibleForCustomer'    => '#D1E8D1',
+            'customer.*VisibleForCustomer' => '#D4DEFC',
+        },
+        {
+            '.*NotVisibleForCustomer' => '#FFCCCC',
+        },
+        {
+            'agent\:\:Internal\:\:VisibleForCustomer' => '#CCCCCC',
+        },
+    );
+
+    # Create a array of all article combination of sender types, communication channel and customer visibility.
+    for my $SenderTypeID ( sort keys %ArticleSenderTypeList ) {
+        for my $CommunicationChannel (@CommunicationChannels) {
+            for my $Visibility ( sort keys %{ $Self->{IsVisibleForCustomer} } ) {
+
+                my $Name = $ArticleSenderTypeList{$SenderTypeID} . "::"
+                    . $CommunicationChannel->{ChannelName} . "::"
+                    . $Self->{IsVisibleForCustomer}->{$Visibility};
+
+                my $Color = '#D1E8D1';
+                for my $ColorMapping (@DefaultColorMapping) {
+                    for my $Key ( sort keys %{$ColorMapping} ) {
+                        if ( $Name =~ m{$Key} ) {
+                            $Color = $ColorMapping->{$Key};
+                        }
+                    }
+                }
+
+                push @ArticleColorList, {
+                    Name  => $Name,
+                    Color => $Color,
+                };
+            }
+        }
+    }
+
+    my @ArticleColorListExists = $Self->ArticleColorList();
+
+    ARTICLECOLOR:
+    for my $ArticleColor (@ArticleColorList) {
+
+        # Check if article color already exists
+        my $ArticleColorExists = grep { $_->{Name} eq $ArticleColor->{Name} } @ArticleColorListExists;
+        next ARTICLECOLOR if $ArticleColorExists;
+
+        my $ArticleColorID = $Self->ArticleColorSet(
+            %{$ArticleColor},
+            UserID => 1,
+        );
+    }
+
+    return 1;
+
+}
+
+=head2 ArticleColorList()
+
+List all article combination of sender types, communication channel and customer visibility.
+
+    my @ArticleColorList = $ArticleObject->ArticleColorList();
+
+Returns:
+
+    my @ArticleColorList = (
+        {
+            Name                 => 'agent::Email::VisibleForCustomer',     # Name of the article color
+            SenderType           => 'agent',                                # agent|customer|system
+            CommunicationChannel => 'Email',                                # Email|Phone|Chat|...
+            IsVisibleForCustomer => 'VisibleForCustomer',                   # VisibleForCustomer|NotVisibleForCustomer
+        },
+        {}
+    )
+
+=cut
+
+sub ArticleColorList {
+    my ( $Self, %Param ) = @_;
+
+    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
+    my $DBObject    = $Kernel::OM->Get('Kernel::System::DB');
+
+    my $CacheKey = 'ArticleColorList';
+
+    # Is there a cached value yet?
+    my $Cache = $CacheObject->Get(
+        Type => $Self->{CacheType},
+        Key  => $CacheKey,
+    );
+
+    # return @{$Cache} if ref $Cache eq 'ARRAY';
+
+    return if !$DBObject->Prepare(
+        SQL => "SELECT * FROM article_color",
+    );
+
+    my @ArticleColorList;
+    while ( my @Row = $DBObject->FetchrowArray() ) {
+
+        my ( $SenderType, $CommunicationChannel, $IsVisibleForCustomer ) = split( /::/, $Row[1] );
+
+        my %ArticleColor = (
+            ID         => $Row[0],
+            Name       => $Row[1],
+            Color      => $Row[2],
+            CreateTime => $Row[3],
+            CreateBy   => $Row[4],
+            ChangeTime => $Row[5],
+            ChangeBy   => $Row[6],
+
+            SenderType           => $SenderType,
+            CommunicationChannel => $CommunicationChannel,
+            IsVisibleForCustomer => $IsVisibleForCustomer,
+        );
+
+        push @ArticleColorList, \%ArticleColor;
+    }
+
+    $CacheObject->Set(
+        Type  => $Self->{CacheType},
+        TTL   => $Self->{CacheTTL},
+        Key   => $CacheKey,
+        Value => \@ArticleColorList,
+    );
+
+    return @ArticleColorList;
 }
 
 =head2 ArticleSenderTypeList()

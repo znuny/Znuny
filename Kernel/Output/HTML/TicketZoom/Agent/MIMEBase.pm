@@ -44,6 +44,7 @@ Returns article html.
     );
 
 Result:
+
     $HTML = "<div>...</div>";
 
 =cut
@@ -368,7 +369,7 @@ sub _CalendarEventsOutput {
                     EVENTPROPERTYITEM:
                     for my $EventProperty ( @{ $Event->{$Property} } ) {
                         next EVENTPROPERTYITEM if !$EventProperty;
-                        $Value .= $Value . "\n" . $EventProperty;
+                        $Value = $Value . "\n" . $EventProperty;
                     }
 
                     push @PropertiesToDisplay, {

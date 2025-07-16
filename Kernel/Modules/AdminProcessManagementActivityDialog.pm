@@ -914,9 +914,9 @@ sub _ShowEdit {
 
     my @ChannelList = $Kernel::OM->Get('Kernel::System::CommunicationChannel')->ChannelList();
 
-    # Allow only Internal and Phone communication channels, this has to be hard coded at the moment.
+    # Allow only Internal, Phone and Web communication channels, this has to be hard coded at the moment.
     my %Channels = map { $_->{ChannelName} => $_->{DisplayName} }
-        grep { $_->{ChannelName} eq 'Internal' || $_->{ChannelName} eq 'Phone' }
+        grep { $_->{ChannelName} eq 'Internal' || $_->{ChannelName} eq 'Phone' || $_->{ChannelName} eq 'Web' }
         @ChannelList;
 
     # create Communication Channel selection ()

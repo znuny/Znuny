@@ -6,6 +6,7 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 ## nofilter(TidyAll::Plugin::Znuny::Perl::Pod::NamePod)
+## nofilter(TidyAll::Plugin::Znuny::Deprecated::AjaxAttachment)
 
 package scripts::Migration::Znuny::MigrateSysConfigSettings;    ## no critic
 
@@ -46,17 +47,11 @@ sub _GetMigrateSysConfigSettings {
 
     my %MigrateSysConfigSettings = (
 
-        "Loader::Agent::CommonJS###000-Framework" => {
-            UpdateEffectiveValue => {
-                'thirdparty/jquery-jstree-3.3.7/jquery.jstree.js' => 'thirdparty/jquery-jstree-3.3.8/jquery.jstree.js',
-                'thirdparty/nunjucks-3.2.2/nunjucks.min.js'       => 'thirdparty/nunjucks-3.2.3/nunjucks.min.js',
-            },
+        "Frontend::Module###AjaxAttachment" => {
+            UpdateName => 'Frontend::Module###AJAXAttachment'
         },
-        "Loader::Customer::CommonJS###000-Framework" => {
-            UpdateEffectiveValue => {
-                'thirdparty/jquery-jstree-3.3.7/jquery.jstree.js' => 'thirdparty/jquery-jstree-3.3.8/jquery.jstree.js',
-                'thirdparty/nunjucks-3.2.2/nunjucks.min.js'       => 'thirdparty/nunjucks-3.2.3/nunjucks.min.js',
-            },
+        "CustomerFrontend::Module###AjaxAttachment" => {
+            UpdateName => 'CustomerFrontend::Module###AJAXAttachment'
         },
     );
 

@@ -55,6 +55,13 @@ sub Configure {
         HasValue => 0,
     );
     $Self->AddOption(
+        Name        => 'regnerate',
+        Description => "All translation files are regenerated so that all unused translations are removed.",
+        Required    => 0,
+        HasValue    => 0,
+    );
+
+    $Self->AddOption(
         Name => 'keep-old',
         Description =>
             "Keep old language files (e.g. Kernel/Language/de_GeneralCatalog.pm). This is only needed if you want to diff these files.",
@@ -474,16 +481,28 @@ sub WritePOFile {
 
     my $POEntries = Locale::PO->load_file_asarray( $Param{TargetPOFile} );
     my %POLookup;
+    my @POEntries;
 
-    for my $Entry ( @{$POEntries} ) {
-        my $Source = $Entry->dequote( $Entry->msgid() );
-        $Source =~ s/\\{2}/\\/g;
-        $EncodeObject->EncodeInput( \$Source );
-        $POLookup{$Source} = $Entry;
+    if ( $Self->GetOption('regnerate') ) {
+
+        # Add the first entry again with comments and po header lines
+        push @POEntries, $POEntries->[0] if defined $POEntries->[0];
+    }
+    else {
+        for my $Entry ( @{$POEntries} ) {
+            my $Source = $Entry->dequote( $Entry->msgid() );
+            $Source =~ s/\\{2}/\\/g;
+            $EncodeObject->EncodeInput( \$Source );
+            $POLookup{$Source} = $Entry;
+        }
+
+        # Get the current entries
+        @POEntries = @{$POEntries};
     }
 
     for my $String ( @{ $Param{TranslationStrings} } ) {
 
+        # Encode the strings
         my $Source = $String->{Source};
         $Source =~ s/\\/\\\\/g;
         $EncodeObject->EncodeOutput( \$Source );
@@ -491,27 +510,36 @@ sub WritePOFile {
         $Translation =~ s/\\/\\\\/g;
         $EncodeObject->EncodeOutput( \$Translation );
 
-        # Is there an entry in the PO already?
-        if ( exists $POLookup{ $String->{Source} } ) {
+        if ( $Self->GetOption('regnerate') ) {
 
-            # Yes, update it
-            $POLookup{ $String->{Source} }->msgstr($Translation);
-            $POLookup{ $String->{Source} }->automatic( $String->{Location} );
-        }
-        else {
-
-            # No PO entry yet, create one.
-            push @{$POEntries}, Locale::PO->new(
+            # Create new one.
+            push @POEntries, Locale::PO->new(
                 -msgid     => $Source,
                 -msgstr    => $Translation,
                 -automatic => $String->{Location},
             );
         }
+        else {
+            # Is there an entry in the PO already and you want to keep them?
+            if ( exists $POLookup{ $String->{Source} } ) {
+
+                # Yes, update it.
+                $POLookup{ $String->{Source} }->msgstr($Translation);
+                $POLookup{ $String->{Source} }->automatic( $String->{Location} );
+            }
+            else {
+
+                # No PO entry yet, create one.
+                push @POEntries, Locale::PO->new(
+                    -msgid     => $Source,
+                    -msgstr    => $Translation,
+                    -automatic => $String->{Location},
+                );
+            }
+        }
     }
 
-    # Theoretically we could now also check for removed strings, but since the translations
-    #   are handled by Weblate, this will not be needed as Weblate will handle that for us.
-    Locale::PO->save_file_fromarray( $Param{TargetPOFile}, $POEntries )
+    Locale::PO->save_file_fromarray( $Param{TargetPOFile}, \@POEntries )
         || die "Could not save file $Param{TargetPOFile}: $!";
 
     return 1;

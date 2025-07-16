@@ -873,7 +873,8 @@ get items needed for AllocationList initialization.
         PrefKey => "LinkObject::ComplexTable-Ticket",
     );
 
-returns:
+Returns:
+
     %Preferences =  {
         'ColumnsAvailable' => '["Age","Changed","CustomerID","CustomerName","CustomerUserID",...]',
         'Block' => 'AllocationList',

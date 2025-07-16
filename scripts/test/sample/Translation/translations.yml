@@ -1,0 +1,9 @@
+---
+- LanguageID: de
+  Source: Tickets
+  Destination: Tickets (DE)
+  ValidID: 1
+- LanguageID: en
+  Source: Tickets
+  Destination: Tickets (EN)
+  ValidID: 1

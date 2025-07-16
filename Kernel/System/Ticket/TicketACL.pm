@@ -117,6 +117,7 @@ or to restrict ticket states:
     );
 
 returns:
+
     $Success = 1,                                     # if an ACL matches, or false otherwise.
 
 If ACL modules are configured in the C<Ticket::Acl::Module> config key, they are invoked
@@ -1017,6 +1018,7 @@ static ticket data stored in the DB) with the required data to use as a basis to
     );
 
 returns:
+
     $ChecksResult = {
         Checks => {
             # ...

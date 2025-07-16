@@ -469,7 +469,7 @@ Core.Agent.TicketZoom = (function (TargetNS) {
      * @description
      *      This function initializes calendar events for article.
      */
-     function InitCalendarEvents() {
+    function InitCalendarEvents() {
         var $FieldContainer,
             OverlayTitle,
             OverlayHTML;
@@ -512,7 +512,7 @@ Core.Agent.TicketZoom = (function (TargetNS) {
      * @description
      *      This function initializes events for process widget.
      */
-     function InitProcessWidget() {
+    function InitProcessWidget() {
         var WidgetWidth, FieldsPerRow, FieldMargin, FieldWidth;
 
         if ($('.DynamicFieldAutoResize').length > 0) {
@@ -625,7 +625,13 @@ Core.Agent.TicketZoom = (function (TargetNS) {
                     return false;
                 });
 
-                $('#' + ElementID).find('.WidgetSimple').hide().fadeIn();
+                // Check if the widget has no content and hide it to remove unnecessary gaps between widgets
+                if ($('#' + ElementID).text().trim() === '') {
+                    $('#' + ElementID).hide();
+                }else {
+                    $('#' + ElementID).find('.WidgetSimple').hide().fadeIn();
+                }
+
                 Core.UI.InitWidgetActionToggle();
             });
         });

@@ -392,14 +392,12 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
             width: 100%;
             height: 100vh;
             background: transparent;
-            padding: 50px 20px;
             box-sizing: border-box;
         }
 
         .Popup #AppWrapper {
             background: var(--white);
             padding: 0;
-            max-width: 800px;
             width: 100%;
             min-height: unset;
             margin: 0 auto;
@@ -540,8 +538,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         border: var(--border-width) var(--border-solid) var(--border-color);
         border-radius: var(--border-radius-sm) var(--border-radius-sm);
     }
-
-
 
 
     /* .LayoutPopup.manageLinks > .Content:not(.LayoutFixedSidebar) .card-item,
@@ -803,6 +799,10 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         padding-bottom: var(--padding-xs);
     }
 
+    #SearchInsert .Field input {
+        flex: 1;
+    }
+
 
     /*.moveTickets .Footer .CallForAction:first-child{
         margin-left: auto;
@@ -922,7 +922,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         gap: var(--padding-xs);
         line-height: normal;
         min-height: 28px;
-      }
+    }
 
     .RTL .LayoutPopup > .Content {
         padding: 5px 20px 5px 5px;
@@ -1019,7 +1019,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         justify-content: flex-start;
         align-items: center;
         gap: var(--gap-sm);
-        padding: var(--padding-lg) 0;
     }
 
     .ActionsSideBar.LayoutFixedSidebar .ContentWrapper {
@@ -1061,6 +1060,10 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         width: 100%;
     }
 
+    .ItemListGrid.Hidden {
+        display: none;
+    }
+
     .ItemListGrid > li {
         float: initial;
         display: flex;
@@ -1069,6 +1072,91 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         max-width: 100%;
         min-height: 200px;
         margin: 0;
+    }
+
+    .ItemListGrid > li > a > .Favourite {
+        display: none !important;
+        right: 10px;
+        transition: all ease 0.25s;
+        color: var(--primary-color);
+        background: var(--primary-color);
+        font-size: 20px;
+        position: absolute;
+        top: 10px;
+        opacity: 0;
+    }
+
+    .ItemListGrid > li > a:hover > .Favourite {
+        color: var(--white);
+        background: var(--white);
+        opacity: 1;
+    }
+
+    .ItemListGrid > li.IsFavourite > a {
+        box-shadow: none;
+        border-color: var(--primary-color);
+    }
+
+    .ItemListGrid > li.IsFavourite > a .Favourite {
+        right: 10px;
+        top: 10px;
+    }
+
+    .ItemListGrid > li > a:hover > .Favourite,
+    .ItemListGrid > li.IsFavourite > a > .Favourite {
+        display: flex !important;
+    }
+
+    .ItemListGrid > li > a > .Favourite.Clicked .fa-star {
+        display: flex !important;
+    }
+
+    .ItemListGrid > li > a > .Favourite > .fa {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+    }
+
+    .ItemListGrid > li > a:hover > .Favourite .fa-star-o {
+        opacity: 1;
+    }
+
+    .ItemListGrid > li > a > .Favourite .fa-star {
+        opacity: 0;
+    }
+
+    .ItemListGrid > li.IsFavourite > a:hover > .Favourite .fa-star {
+        opacity: 1;
+    }
+
+    .ItemListGrid > li > a:hover > .Favourite,
+    .ItemListGrid > li > a > .Favourite.Clicked {
+        right: 10px;
+    }
+
+    .ItemListGrid > li > a:hover > .Favourite .fa {
+        transition: all ease 0.2s;
+    }
+
+    .ItemListGrid > li > a:hover > .Favourite:hover .fa {
+        color: var(--white);
+    }
+
+    .ItemListGrid > li > a:hover > .Favourite:hover .fa-star-o {
+        opacity: 0;
+    }
+
+    .ItemListGrid > li > a:hover > .Favourite:hover .fa-star {
+        opacity: 1;
+        display: block;
+    }
+
+    .ItemListGrid > li > a > .Favourite .fa-check {
+        color: var(--white) !important;
+        font-size: var(--icon-main-size);
+        background: var(--primary-color);
+        padding: 5px;
+        border-radius: var(--border-radius-xs);
     }
 
     @media only screen and (min-width: 2400px) {
@@ -1095,9 +1183,9 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         }
     }
 
-    @media only screen and (max-width: 1024px) {
+    @media only screen and (max-width: 900px) {
         .ItemListGrid > li {
-            width: calc(33.5% - var(--margin-md));
+            width: calc(100% - var(--margin-md));
         }
     }
 
@@ -1116,9 +1204,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         display: none;
     }
 
-    .ItemListGrid > li > a
-    /*.ItemListGrid > li > a:not(.Disabled):focus,
-    .ItemListGrid > li > a.Active:focus*/ {
+    .ItemListGrid > li > a {
         position: relative;
         display: flex;
         flex-direction: column;

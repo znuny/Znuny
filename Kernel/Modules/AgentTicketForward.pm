@@ -406,11 +406,11 @@ sub Form {
     if ( $LayoutObject->{BrowserRichText} ) {
 
         # prepare body, subject, ReplyTo ...
-        $Data{Body} = '<br/>' . $Data{Body};
+        $Data{Body} = "<p></p>\n" . $Data{Body};
         if ( $Data{CreateTime} ) {
             $Data{CreateTime} = $LayoutObject->{LanguageObject}->FormatTimeString( $Data{CreateTime} );
-            $Data{Body}       = $LayoutObject->{LanguageObject}->Translate('Date') .
-                ": $Data{CreateTime}<br/>" . $Data{Body};
+            $Data{Body}       = '<p>' . $LayoutObject->{LanguageObject}->Translate('Date') .
+                ": $Data{CreateTime}</p>" . $Data{Body};
         }
         for my $Key (qw(Subject ReplyTo Reply-To Cc To From Sender)) {
             if ( $Data{$Key} ) {
@@ -419,7 +419,7 @@ sub Form {
                 my $Value = $LayoutObject->Ascii2RichText(
                     String => $Data{$Key},
                 );
-                $Data{Body} = "$KeyText: $Value<br/>" . $Data{Body};
+                $Data{Body} = "<p>$KeyText: $Value</p>" . $Data{Body};
             }
         }
 
@@ -437,7 +437,7 @@ sub Form {
             );
         }
         else {
-            $Data{Body} = "<br/>" . $Data{Body};
+            $Data{Body} = "<p></p>" . $Data{Body};
         }
         my $From = $LayoutObject->Ascii2RichText(
             String => $Data{From} || $Data{Sender},
@@ -446,12 +446,12 @@ sub Form {
         my $ForwardedMessageFrom = $LayoutObject->{LanguageObject}->Translate('Forwarded message from');
         my $EndForwardedMessage  = $LayoutObject->{LanguageObject}->Translate('End forwarded message');
 
-        $Data{Body} = "<br/>---- $ForwardedMessageFrom $From ---<br/><br/>" . $Data{Body};
-        $Data{Body} .= "<br/>---- $EndForwardedMessage ---<br/>";
+        $Data{Body} = "<p>---- $ForwardedMessageFrom $From ---</p><p></p>" . $Data{Body};
+        $Data{Body} .= "\n<p>---- $EndForwardedMessage ---</p>";
         $Data{Body} = $Data{Signature} . $Data{Body};
 
         if ( $GetParam{ForwardTemplateID} ) {
-            $Data{Body} = $Data{StdTemplate} . '<br/>' . $Data{Body};
+            $Data{Body} = $Data{StdTemplate} . '<p></p>' . $Data{Body};
         }
 
         $Data{ContentType} = 'text/html';

@@ -852,8 +852,8 @@ sub _SendSuccess {
 
 Handles Send errors.
 Situations where the mail queue item is deleted:
-    - SMTP 5?? errors codes, considered permanent errors.
-    - reached maximum attempts
+- SMTP 5?? errors codes, considered permanent errors.
+- reached maximum attempts
 
     $Object->_SendError(
         Item       => '...',

@@ -1541,6 +1541,7 @@ Checks if the given time zone is valid.
     my $Valid = Kernel::System::DateTime->IsTimeZoneValid( TimeZone => 'Europe/Berlin' );
 
 Returns:
+
     $Valid = 1;    # if given time zone is valid, 0 otherwise.
 
 =cut

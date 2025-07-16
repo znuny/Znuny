@@ -583,7 +583,7 @@ sub GetMentionedUserIDsFromString {
 
     while (
         $Param{HTMLString}
-        =~ m{<a[^>]*class="Mention"[^(id)|>]*id="([^"]*)"[^>]*>\Q$MentionsTriggerConfig->{User}\E(.*?)<\/a>}sg
+        =~ m{<a[^>]*mention-type="Users"[^(id)|>]*id="([^"]*)"[^>]*>\Q$MentionsTriggerConfig->{User}\E(.*?)<\/a>}sg
         )
     {
         $UserNameByFullname{$2} = $1;
@@ -592,7 +592,7 @@ sub GetMentionedUserIDsFromString {
 
     my @MentionedGroups = (
         $Param{HTMLString}
-            =~ m{<a\b[^>]*?\bclass="GroupMention"[^>]*?>\Q$MentionsTriggerConfig->{Group}\E(.*?)<\/a>}sg
+            =~ m{<a\b[^>]*?\bmention-type="Groups"[^>]*?>\Q$MentionsTriggerConfig->{Group}\E(.*?)<\/a>}sg
     );
 
     # Mentions cannot be removed from quotations in HTML string because

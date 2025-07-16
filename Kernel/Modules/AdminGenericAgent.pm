@@ -1113,7 +1113,7 @@ sub _MaskUpdate {
         );
 
         $LayoutObject->Block(
-            Name => 'SearchInArchive',
+            Name => 'TicketArchive',
             Data => {%JobData},
         );
 

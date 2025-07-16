@@ -71,6 +71,7 @@ Check if provided EffectiveValue matches structure defined in XMLContentParsed.
     );
 
 Result:
+
     %Result = (
         EffectiveValue => 'Kernel::System::Log::SysLog',        # Note for PerlModule ValueTypes EffectiveValue is not changed.
         Success => 1,

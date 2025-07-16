@@ -2839,6 +2839,7 @@ values (hour, minute and second) as in Time.
     );
 
 Returns:
+
     $Result = '2016-02-01 00:01:00';
 
 =cut
@@ -2879,6 +2880,7 @@ Returns how many calendar weeks has passed between two unix times.
     );
 
 returns:
+
     $CWDiff = 5;
 
 =cut

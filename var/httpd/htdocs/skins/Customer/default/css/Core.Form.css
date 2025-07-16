@@ -12,6 +12,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
  * @section     Customer
  */
 
+/* TODO check (SN): Some commented rules seems to apply to the dialog plugin which is no longer accessible in CKEditor5, delete them?*/
 /* button,
 .Button,
 .cke_dialog_footer_buttons a.cke_dialog_ui_button {
@@ -95,10 +96,11 @@ label {
     text-align: left;
 }
 
+/* TODO check (SN): Rule seems to apply to the dialog plugin which is no longer accessible in CKEditor5, delete them?*/
 /* Fix bug#8673: labels in CKEditor  popups should be ignored by our css */
-.cke label {
+/*.cke label {
     float: none;
-}
+}*/
 
 /**
  * @note        Give the user a hint about linked label elements (they are clickable and
@@ -161,47 +163,47 @@ input[type=text].ArticleFreeKey {
 }
 
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color: #555;
-   transition: color ease 0.3s;
-   opacity: 1;
+    color: #555;
+    transition: color ease 0.3s;
+    opacity: 1;
 }
 
 ::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color: var(--gray-dark-semi);
-   transition: color ease 0.3s;
-   opacity: 1;
+    color: var(--gray-dark-semi);
+    transition: color ease 0.3s;
+    opacity: 1;
 }
 
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color: #555;
-   transition: color ease 0.3s;
+    color: #555;
+    transition: color ease 0.3s;
 }
 
 ::-ms-input-placeholder { /* Microsoft Edge */
-   color: #555;
-   transition: color ease 0.3s;
+    color: #555;
+    transition: color ease 0.3s;
 }
 
 :focus::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color: #ccc;
+  color: #ccc;
 }
 
 :focus:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color: #ccc;
-   opacity: 1;
+    color: #ccc;
+    opacity: 1;
 }
 
 :focus::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color: #ccc;
-   opacity: 1;
+    color: #ccc;
+    opacity: 1;
 }
 
 :focus:-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color: #ccc;
+    color: #ccc;
 }
 
 :focus::-ms-input-placeholder { /* Microsoft Edge */
-   color: #ccc;
+    color: #ccc;
 }
 
 input.DateSelection {
@@ -369,11 +371,11 @@ fieldset .field-wrapper {
         left: -100px;
         bottom: 0;
         background: var(--border-color);
-      }
+    }
 
-      .Card fieldset .card-item:nth-last-child(1)::after {
+    .Card fieldset .card-item:nth-last-child(1)::after {
         background: transparent;
-      }
+    }
 
 }
 
@@ -748,7 +750,7 @@ table.AttachmentList tbody tr:hover {
 
 table.AttachmentList tbody tr:hover td {
     border-right-color: #fff;
-  }
+}
 
 /* table.AttachmentList tbody tr,
 table.AttachmentList tbody tr td {
@@ -783,7 +785,7 @@ table.AttachmentList tbody tr td:last-child {
     text-align: right;
     padding-top: 0;
     padding-bottom: 0;
-  }
+}
 
 table.AttachmentList .Filename {
     color: var(--primary-color);
@@ -807,7 +809,7 @@ table.AttachmentList .Filesize {
 
 table.AttachmentList .AttachmentDelete {
     display: inline-flex;
-  }
+}
 
 table.AttachmentList.DataTable thead th {
     line-height: 12px;
@@ -928,17 +930,11 @@ div.TooltipErrorMessage {
     background: var(--primary-color) !important;
 }
 
-
 .ui-datepicker .ui-datepicker-days-cell-over {
     background: var(--primary-color);
     border-radius: var(--border-radius-sm);
     pointer-events: none;
 }
-
-
-
-
-
 
 .ui-widget.ui-widget-content {
     /*font-family: Inter;*/
@@ -950,7 +946,6 @@ div.TooltipErrorMessage {
     width: 100%;
     max-width: 300px;
 }
-
 
 .ui-widget-header {
     background: none !important;
@@ -983,7 +978,6 @@ div.TooltipErrorMessage {
 .ui-widget-header .ui-state-focus {
     background: var(--gray-light-semi);
 }
-
 
 .ui-datepicker .ui-datepicker-days-cell-over .ui-state-default,
 .ui-datepicker .ui-datepicker-days-cell-over .ui-widget-content .ui-state-default,

@@ -107,8 +107,9 @@ Runs TransitionAction TicketCreate.
             TimeUnit => 123,
 
             # Attachment optional:
-            Attachments      => '1',                                    # optional, 1|0
-            AttachmentsReuse => 1                                       # optional, 1|0 - Reuse of attachments stored in the dynamic field configured in Process::DynamicFieldProcessManagementAttachment.
+            Attachments      => 'StdAttachmentName1,StdAttachmentName2', # optional, comma separated StandardAttachment Names
+            AttachmentIDs    => '1,2,3',                                 # optional, comma separated StandardAttachment ID
+            AttachmentsReuse => 1                                        # optional, 1|0 - Reuse of attachments stored in the dynamic field configured in Process::DynamicFieldProcessManagementAttachment.
 
             # other:
             DynamicField_NameX => $Value,

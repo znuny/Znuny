@@ -218,6 +218,8 @@
                 <Item Key="AgentCustomerUserInformationCenter::Backend###0110-CUIC-TicketEscalation">DashboardWidget CUIC-TicketEscalation</Item>
                 <Item Key="AgentCustomerUserInformationCenter::Backend###0120-CUIC-TicketNew">DashboardWidget CUIC-TicketNew</Item>
                 <Item Key="AgentCustomerUserInformationCenter::Backend###0130-CUIC-TicketOpen">DashboardWidget CUIC-TicketOpen</Item>
+
+                <Item Key="LinkObject::ComplexTable###Ticket">LinkObject ComplexTable</Item>
             </Hash>
         </Value>
     </Setting>
@@ -1158,6 +1160,7 @@
                         <Item Key="DashboardBackend###0120-TicketNew">DashboardWidget TicketNew</Item>
                         <Item Key="DashboardBackend###0130-TicketOpen">DashboardWidget TicketOpen</Item>
                         <Item Key="DashboardBackend###0140-RunningTicketProcess">DashboardWidget RunningTicketProcess</Item>
+                        <Item Key="LinkObject::ComplexTable###Ticket">LinkObject ComplexTable</Item>
                     </Hash>
                 </Item>
                 <Item Key="Article">
@@ -1695,6 +1698,23 @@
         <Navigation>Core::Email</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex=""></Item>
+        </Value>
+    </Setting>
+    <Setting Name="SendmailModule::RateLimit" Required="0" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Limits the amount of emails which are sent within one batch. Disable this setting to have no limit.</Description>
+        <Navigation>Core::Email</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^[0-9]{1,6}$">30</Item>
+        </Value>
+    </Setting>
+    <Setting Name="SendmailModule::RateLimitPerSenderAddress" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Applies the limit defined in 'SendmailModule::RateLimit' per sender address.</Description>
+        <Navigation>Core::Email</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="0">
+                <Item ValueType="Option" Value="1" Translatable="1">yes</Item>
+                <Item ValueType="Option" Value="0" Translatable="1">no</Item>
+            </Item>
         </Value>
     </Setting>
     <Setting Name="MailAccount::POP3::Auth::SplitOAuth2MethodAndToken::Hosts" Required="1" Valid="1" ConfigLevel="200">
@@ -2277,6 +2297,27 @@
     </Setting>
 
     <!--
+        RTE
+    -->
+    <Setting Name="Loader::Agent::CommonCSS###999-RichTextEditor" Required="1" Valid="1">
+        <Description Translatable="1">List of CSS files to always be loaded for the agent interface.</Description>
+        <Navigation>Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Znuny.RichTextEditor.css</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Customer::CommonCSS###999-RichTextEditor" Required="1" Valid="1">
+        <Description Translatable="1">List of CSS files to always be loaded for the customer interface.</Description>
+        <Navigation>Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Znuny.RichTextEditor.css</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <!--
         RTE autocompletion
     -->
     <Setting Name="Frontend::Module###AJAXRichTextAutocompletion" Required="0" Valid="1">
@@ -2343,11 +2384,11 @@
         </Value>
     </Setting>
     <Setting Name="Frontend::RichText::Autocompletion::General" Required="0" Valid="1">
-        <Description Translatable="1">General settings for autocompletion in rich text editor.</Description>
+        <Description Translatable="1">General settings for autocompletion in rich text editor. By default "ItemTemplate" uses "li" html tag to show the option that is matching (list format). The value of the key is used to define html inside it.</Description>
         <Navigation>Core</Navigation>
         <Value>
             <Hash>
-                <Item Key="ItemTemplate">&lt;li data-id="{id}"&gt;{selection_list_title}&lt;/li&gt;</Item>
+                <Item Key="ItemTemplate">&lt;div class="AutocompletionItem" data-id="{id}"&gt;{selection_list_title}&lt;/div&gt;</Item>
                 <Item Key="OutputTemplate">{inserted_value}</Item>
                 <Item Key="MinSearchLength">3</Item>
                 <!-- <Item Key="PreviewLength">50</Item> -->
@@ -2377,6 +2418,15 @@
                     </Array>
                 </Item>
             </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Agent::CommonCSS###999-Autocompletion" Required="1" Valid="1">
+        <Description Translatable="1">List of CSS files to always be loaded for the agent interface.</Description>
+        <Navigation>Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Znuny.Agent.Autocompletion.css</Item>
+            </Array>
         </Value>
     </Setting>
 
@@ -2433,14 +2483,14 @@
             <Hash>
                 <Item Key="Users">
                     <Hash>
-                        <Item Key="ItemTemplate">&lt;li class="Mention" data-id="{id}"&gt;{fullname}&lt;/li&gt;</Item>
-                        <Item Key="OutputTemplate">&lt;a class="Mention" id="{username}" href="#"&gt;@{fullname}&lt;/a&gt; </Item>
+                        <Item Key="ItemTemplate">{fullname}</Item>
+                        <Item Key="OutputTemplate">{trigger}{fullname}</Item>
                     </Hash>
                 </Item>
                 <Item Key="Groups">
                     <Hash>
-                        <Item Key="ItemTemplate">&lt;li class="Mention" data-id="{id}"&gt;{name} ({mentionLabel})&lt;/li&gt;</Item>
-                        <Item Key="OutputTemplate">&lt;a class="GroupMention" href="#"&gt;{name}&lt;/a&gt; </Item>
+                        <Item Key="ItemTemplate">{name} ({mentionLabel})</Item>
+                        <Item Key="OutputTemplate">{trigger}{name}</Item>
                     </Hash>
                 </Item>
             </Hash>
@@ -2565,16 +2615,27 @@
                         <Item Key="LastMention" SelectedID="2"></Item>
                     </Hash>
                 </Item>
+                <Item Key="DefaultPageShown">
+                    <Hash>
+                        <Item Key="5">  5</Item>
+                        <Item Key="10"> 10</Item>
+                        <Item Key="15"> 15</Item>
+                        <Item Key="20"> 20</Item>
+                        <Item Key="25"> 25</Item>
+                        <Item Key="50"> 50</Item>
+                        <Item Key="100">100</Item>
+                    </Hash>
+                </Item>
                 <Item Key="Mandatory">0</Item>
             </Hash>
         </Value>
     </Setting>
     <Setting Name="Loader::Agent::CommonCSS###999-Mentions" Required="1" Valid="1">
-        <Description Translatable="1">List of CSS files to always be loaded for the customer interface.</Description>
+        <Description Translatable="1">List of CSS files to always be loaded for the agent interface.</Description>
         <Navigation>Frontend::Base::Loader</Navigation>
         <Value>
             <Array>
-                <Item>Core.RichTextEditor.css</Item>
+                <Item>Znuny.Agent.Mentions.css</Item>
             </Array>
         </Value>
     </Setting>
@@ -3405,7 +3466,7 @@
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
+            <Item ValueType="String" ValueRegex="^\d+%?$">100%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###RichTextHeight" Required="0" Valid="1">
@@ -3425,6 +3486,109 @@
                     <Item ValueType="Option" Value="1" Translatable="1">1 - Enabled</Item>
                     <Item ValueType="Option" Value="2" Translatable="1">2 - Enabled and required</Item>
                 </DefaultItem>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+        Object import/export
+    -->
+    <Setting Name="Admin::Object::Export::Command###ExportableObjects###001-Znuny" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Defines which objects are supported for object export using command "Admin::Object::Export".</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="AutoResponse">
+                    <Hash>
+                        <Item Key="ExportModule">Kernel::System::AutoResponse</Item>
+                        <Item Key="ExportFunctionName">AutoResponseExport</Item>
+                        <Item Key="ModuleHandler">Base</Item>
+                    </Hash>
+                </Item>
+                <Item Key="StandardTemplate">
+                    <Hash>
+                        <Item Key="ExportModule">Kernel::System::StandardTemplate</Item>
+                        <Item Key="ExportFunctionName">StandardTemplateExport</Item>
+                        <Item Key="ModuleHandler">Base</Item>
+                    </Hash>
+                </Item>
+                <Item Key="Signature">
+                    <Hash>
+                        <Item Key="ExportModule">Kernel::System::Signature</Item>
+                        <Item Key="ExportFunctionName">SignatureExport</Item>
+                        <Item Key="ModuleHandler">Base</Item>
+                    </Hash>
+                </Item>
+                <Item Key="Salutation">
+                    <Hash>
+                        <Item Key="ExportModule">Kernel::System::Salutation</Item>
+                        <Item Key="ExportFunctionName">SalutationExport</Item>
+                        <Item Key="ModuleHandler">Base</Item>
+                    </Hash>
+                </Item>
+                <Item Key="NotificationEvent">
+                    <Hash>
+                        <Item Key="ModuleHandler">NotificationEvent</Item>
+                    </Hash>
+                </Item>
+                <Item Key="ProcessManagement">
+                    <Hash>
+                        <Item Key="ModuleHandler">ProcessManagement</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Admin::Object::Import::Command###ImportableObjects###001-Znuny" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Defines which objects are supported for object import using command "Admin::Object::Import".</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="AutoResponse">
+                    <Hash>
+                        <Item Key="ImportModule">Kernel::System::AutoResponse</Item>
+                        <Item Key="ImportFunctionName">AutoResponseImport</Item>
+                        <Item Key="ImportOverwriteParameter">OverwriteExistingAutoResponses</Item>
+                        <Item Key="ModuleHandler">Base</Item>
+                    </Hash>
+                </Item>
+                <Item Key="StandardTemplate">
+                    <Hash>
+                        <Item Key="ImportModule">Kernel::System::StandardTemplate</Item>
+                        <Item Key="ImportFunctionName">StandardTemplateImport</Item>
+                        <Item Key="ImportOverwriteParameter">OverwriteExistingTemplates</Item>
+                        <Item Key="ModuleHandler">Base</Item>
+                    </Hash>
+                </Item>
+                <Item Key="Signature">
+                    <Hash>
+                        <Item Key="ImportModule">Kernel::System::Signature</Item>
+                        <Item Key="ImportFunctionName">SignatureImport</Item>
+                        <Item Key="ImportOverwriteParameter">OverwriteExistingSignatures</Item>
+                        <Item Key="ModuleHandler">Base</Item>
+                    </Hash>
+                </Item>
+                <Item Key="Salutation">
+                    <Hash>
+                        <Item Key="ImportModule">Kernel::System::Salutation</Item>
+                        <Item Key="ImportFunctionName">SalutationImport</Item>
+                        <Item Key="ImportOverwriteParameter">OverwriteExistingSalutations</Item>
+                        <Item Key="ModuleHandler">Base</Item>
+                    </Hash>
+                </Item>
+                <Item Key="NotificationEvent">
+                    <Hash>
+                        <Item Key="ImportModule">Kernel::System::NotificationEvent</Item>
+                        <Item Key="ImportFunctionName">NotificationImport</Item>
+                        <Item Key="ImportOverwriteParameter">OverwriteExistingNotifications</Item>
+                        <Item Key="ModuleHandler">NotificationEvent</Item>
+                    </Hash>
+                </Item>
+                <Item Key="ProcessManagement">
+                    <Hash>
+                        <Item Key="ModuleHandler">ProcessManagement</Item>
+                    </Hash>
+                </Item>
             </Hash>
         </Value>
     </Setting>
@@ -3587,7 +3751,7 @@
                 <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
                 <Item Key="Name" Translatable="1">Mark as unseen</Item>
                 <Item Key="Description" Translatable="1">Mark ticket as unseen</Item>
-                <Item Key="Action"></Item>
+                <Item Key="Action">AgentTicketMarkSeenUnseen</Item>
                 <Item Key="Link">Action=AgentTicketMarkSeenUnseen;Subaction=Unseen;TicketID=[% Data.TicketID | html %]</Item>
                 <Item Key="Target"></Item>
                 <Item Key="PopupType"></Item>
@@ -3602,7 +3766,7 @@
                 <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
                 <Item Key="Name" Translatable="1">Mark as seen</Item>
                 <Item Key="Description" Translatable="1">Mark ticket as seen</Item>
-                <Item Key="Action"></Item>
+                <Item Key="Action">AgentTicketMarkSeenUnseen</Item>
                 <Item Key="Link">Action=AgentTicketMarkSeenUnseen;Subaction=Seen;TicketID=[% Data.TicketID | html %]</Item>
                 <Item Key="Target"></Item>
                 <Item Key="PopupType"></Item>
@@ -3617,7 +3781,7 @@
                 <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
                 <Item Key="Name" Translatable="1">Mark as unseen</Item>
                 <Item Key="Description" Translatable="1">Mark ticket as unseen</Item>
-                <Item Key="Action"></Item>
+                <Item Key="Action">AgentTicketMarkSeenUnseen</Item>
                 <Item Key="Link">Action=AgentTicketMarkSeenUnseen;Subaction=Unseen;TicketID=[% Data.TicketID | html %];RedirectToSearch=1;</Item>
                 <Item Key="Target"></Item>
                 <Item Key="PopupType"></Item>
@@ -3632,7 +3796,7 @@
                 <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
                 <Item Key="Name" Translatable="1">Mark as seen</Item>
                 <Item Key="Description" Translatable="1">Mark ticket as seen</Item>
-                <Item Key="Action"></Item>
+                <Item Key="Action">AgentTicketMarkSeenUnseen</Item>
                 <Item Key="Link">Action=AgentTicketMarkSeenUnseen;Subaction=Seen;TicketID=[% Data.TicketID | html %];RedirectToSearch=1;</Item>
                 <Item Key="Target"></Item>
                 <Item Key="PopupType"></Item>
@@ -3666,12 +3830,597 @@
             </Hash>
         </Value>
     </Setting>
-
     <Setting Name="AutoAttributFieldIDMapping" Required="0" Valid="1">
         <Description Translatable="1">Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
             <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+
+    <!--
+        Znuny-DynamicFieldAdminAutoConfig
+    -->
+    <Setting Name="Frontend::Module###AdminDynamicFieldAutoConfig" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Admin</Item>
+                    <Item Key="Title" Translatable="1">Dynamic fields administration</Item>
+                    <Item Key="NavBarName"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Navigation###AdminDynamicFieldAutoConfig###003-DynamicFieldAdminAutoConfig" Required="0" Valid="0">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+            </Array>
+        </Value>
+    </Setting>
+
+    <!-- Limit for watched tickets -->
+    <Setting Name="Ticket::WatcherLimit" Required="0" Valid="1">
+        <Description Translatable="1">Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).</Description>
+        <Navigation>Core::Ticket</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+$">0</Item>
+        </Value>
+    </Setting>
+
+    <!-- Znuny-ArticleColor -->
+    <Setting Name="Frontend::Module###AdminArticleColor" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
+                    <Item Key="Title" Translatable="1">Article Color</Item>
+                    <Item Key="NavBarName">Admin</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Navigation###AdminArticleColor###002-Ticket" Required="0" Valid="0">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::NavigationModule###AdminArticleColor" Required="0" Valid="1">
+        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Group">
+                    <Array>
+                        <Item>admin</Item>
+                    </Array>
+                </Item>
+                <Item Key="GroupRo">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
+                <Item Key="Name" Translatable="1">Article Color</Item>
+                <Item Key="Block">Ticket</Item>
+                <Item Key="Description" Translatable="1">Manage ticket article color.</Item>
+                <Item Key="IconBig">fa-list</Item>
+                <Item Key="IconSmall"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!-- AgentPreferences -->
+    <Setting Name="AgentPreferences::AJAXUpdate::AllowedKeys###Framework" Required="0" Valid="1">
+        <Description Translatable="1">List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions.</Description>
+        <Navigation>Core::AgentPreferences</Navigation>
+        <Value>
+            <Array>
+                <Item>\AAdminNavigationBarFavourites\z</Item>
+                <Item>\AUserAgentDoNotShowBrowserLinkMessage\z</Item>
+                <Item>\AUserPopupProfile.+</Item>
+                <Item>\AUserSystemConfigurationCategory\z</Item>
+                <Item>\AUserSystemConfigurationFavourites\z</Item>
+                <Item>\AUserTicketZoomArticleTableHeight\z</Item>
+                <Item>\AUserDashboardWidgetExpand\z</Item>
+                <Item>\AUserToolBar\z</Item>
+                <Item>\AUserToolBarSearchBackend\z</Item>
+                <Item>\AUserNavBarItemsOrder\z</Item>
+                <Item>\ATicketProcessCategoryFavourites\z</Item>
+
+                <!-- Core.Agent.Admin.SystemConfiguration.Init, sidebar action widget toggle -->
+                <Item>\AUserWidgetState.+</Item>
+
+                <!-- Core.UI.AdvancedChart.UpdatePreferences, line diagram dashboard widgets -->
+                <Item>\AGraphWidget.+</Item>
+            </Array>
+        </Value>
+    </Setting>
+
+    <!-- CustomerPreferences -->
+    <Setting Name="CustomerPreferences::AJAXUpdate::AllowedKeys###Framework" Required="0" Valid="1">
+        <Description Translatable="1">List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module CustomerPreferences. These are regular expressions.</Description>
+        <Navigation>Core::CustomerPreferences</Navigation>
+        <Value>
+            <Array>
+                <Item>\ATicketProcessCategoryFavourites\z</Item>
+            </Array>
+        </Value>
+    </Setting>
+
+    <!-- Znuny-Translation -->
+    <Setting Name="Frontend::Module###AdminTranslation" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the admin interface.</Description>
+        <Navigation>Core::Znuny::Translation</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">Create and manage translation.</Item>
+                    <Item Key="NavBarName">Admin</Item>
+                    <Item Key="Title" Translatable="1">Translation</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Navigation###AdminTranslation###001-Translation" Required="0" Valid="1">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::NavigationModule###AdminTranslation" Required="0" Valid="1">
+        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Group">
+                    <Array>
+                        <Item>admin</Item>
+                    </Array>
+                </Item>
+                <Item Key="GroupRo">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
+                <Item Key="Name" Translatable="1">Translation</Item>
+                <Item Key="Block">Administration</Item>
+                <Item Key="Description" Translatable="1">Manage translation.</Item>
+                <Item Key="IconBig">fa-language</Item>
+                <Item Key="IconSmall">fa-wrench</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AdminTranslation###001-Framework" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.DBCRUD.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="DBCRUD::Translation::CacheTTL" Required="1" Valid="1">
+        <Description Translatable="1">Cache settings for DBCRUD modules (default: 1 day).</Description>
+        <Navigation>Core::Znuny::Translation</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="\d+">86400</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::NotifyModule###100-TranslationCheck" Required="1" Valid="1">
+        <Description Translatable="1">Defines a module to display a notification if translation deployment is needed.</Description>
+        <Navigation>Frontend::Agent::FrontendNotification</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::Notification::TranslationCheck</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Translation###Export###DefaultFormat" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Defines the format of exported files when using the admin interface.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="xlsx">
+                <Item ValueType="Option" Value="xlsx" Translatable="1">Excel</Item>
+                <Item ValueType="Option" Value="yml" Translatable="1">YAML</Item>
+                <Item ValueType="Option" Value="csv" Translatable="1">CSV</Item>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Translation###Export###CSV###Separator" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Defines the separator for export csv files.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">;</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Translation###Export###CSV###Quote" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Defines the quote for export csv files.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">"</Item>
+        </Value>
+    </Setting>
+
+    <!-- TicketProcessCategory - ProcessPreferences -->
+    <Setting Name="ProcessPreferences###001-TicketProcessCategory-Category" Required="0" Valid="1">
+        <Description Translatable="1">Define a process category.</Description>
+        <Navigation>Core::ProcessManagement</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::ProcessPreferences::Generic</Item>
+                <Item Key="Label" Translatable="1">Category</Item>
+                <Item Key="Desc" Translatable="1">Process Ticket Category: Define a process category.</Item>
+                <Item Key="PrefKey">Category</Item>
+                <Item Key="ClusterName" Translatable="1">Category</Item>
+                <Item Key="ClusterPriority">1</Item>
+                <Item Key="Block">Option</Item>
+                <Item Key="TreeView">1</Item>
+                <Item Key="Multiple">1</Item>
+                <Item Key="PossibleNone">1</Item>
+                <Item Key="Data">
+                    <Hash>
+                        <Item Key="Category 1">Category 1</Item>
+                        <Item Key="Category 2">Category 2</Item>
+                        <Item Key="Category 3">Category 2::SecondCategory1</Item>
+                        <Item Key="Category 4">Category 2::SecondCategory1::ThirdCategory1</Item>
+                        <Item Key="Category 5">Category 2::SecondCategory2</Item>
+                        <Item Key="Category 6">Category 2::SecondCategory2::ThirdCategory2</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!-- TicketProcessCategory -->
+    <!-- AgentTicketProcessCategory -->
+    <Setting Name="Frontend::Module###AgentTicketProcessCategory" Required="0" Valid="0">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">Process Ticket Catalog.</Item>
+                    <Item Key="NavBarName">Ticket</Item>
+                    <Item Key="Title" Translatable="1">Process Ticket Catalog</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Navigation###AgentTicketProcessCategory###001-ProcessManagement" Required="0" Valid="0">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+                <Item>
+                    <Hash>
+                        <Item Key="Group">
+                            <Array>
+                            </Array>
+                        </Item>
+                        <Item Key="GroupRo">
+                            <Array>
+                            </Array>
+                        </Item>
+                        <Item Key="Description" Translatable="1">Create new process ticket via category.</Item>
+                        <Item Key="Name" Translatable="1">Process Ticket Category</Item>
+                        <Item Key="Link">Action=AgentTicketProcessCategory</Item>
+                        <Item Key="LinkOption"></Item>
+                        <Item Key="NavBar">Ticket</Item>
+                        <Item Key="Type"></Item>
+                        <Item Key="Block"></Item>
+                        <Item Key="AccessKey">p</Item>
+                        <Item Key="Prio">225</Item>
+                    </Hash>
+                </Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::NavBarModule###000-AgentTicketProcessCategory" Required="0" Valid="0">
+        <Description Translatable="1">Frontend module registration (disable ticket processes screen if no process available) for Agent.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::NavBar::AgentTicketProcessCategory</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AgentTicketProcessCategory###001-ProcessManagement" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.Agent.TicketProcessCategory.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.TicketProcessCategory.js</Item>
+                        <Item>Core.UI.Table.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketProcessCategory###LinkTarget" Required="1" Valid="1">
+        <Description Translatable="1">Defines the LinkTarget for AgentTicketProcessCategory.</Description>
+        <Navigation>Frontend::Agent::View::TicketProcess</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="_blank">
+                <Item ValueType="Option" Value="AsPopup" Translatable="1">AsPopup</Item>
+                <Item ValueType="Option" Value="_blank">Blank</Item>
+                <Item ValueType="Option" Value="_self">Self</Item>
+                <!--
+                    Can be used, but make little sense at this point.
+                    There is no frame and therefore no difference to `self`.
+                <Item ValueType="Option" Value="_parent">Parent</Item>
+                <Item ValueType="Option" Value="_top">Top</Item>
+                -->
+            </Item>
+        </Value>
+    </Setting>
+
+    <!-- CustomerTicketProcessCategory -->
+    <Setting Name="CustomerFrontend::Module###CustomerTicketProcessCategory" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the customer interface.</Description>
+        <Navigation>Frontend::Customer::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">Process Ticket Catalog.</Item>
+                    <Item Key="NavBarName">Ticket</Item>
+                    <Item Key="Title" Translatable="1">Process Ticket Catalog</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="CustomerFrontend::Navigation###CustomerTicketProcessCategory###001-ProcessManagement" Required="0" Valid="1">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>Frontend::Customer::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+                <Item>
+                    <Hash>
+                        <Item Key="Group">
+                            <Array>
+                            </Array>
+                        </Item>
+                        <Item Key="GroupRo">
+                            <Array>
+                            </Array>
+                        </Item>
+                        <Item Key="Description" Translatable="1">Create new process ticket via category.</Item>
+                        <Item Key="Name" Translatable="1">Process Ticket Category</Item>
+                        <Item Key="Link">Action=CustomerTicketProcessCategory</Item>
+                        <Item Key="LinkOption"></Item>
+                        <Item Key="NavBar">Ticket</Item>
+                        <Item Key="Type">Menu</Item>
+                        <Item Key="Block"></Item>
+                        <Item Key="AccessKey">t</Item>
+                        <Item Key="Prio">0011</Item>
+                    </Hash>
+                </Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="CustomerFrontend::NavBarModule###000-CustomerTicketProcessCategory" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration (disable ticket processes screen if no process available) for Customer.</Description>
+        <Navigation>Frontend::Customer::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::NavBar::CustomerTicketProcessCategory</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::CustomerTicketProcessCategory###001-ProcessManagement" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the customer interface.</Description>
+        <Navigation>Frontend::Customer::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.Customer.TicketProcessCategory.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Customer.TicketProcessCategory.js</Item>
+                        <Item>Core.UI.Table.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::CustomerTicketProcessCategory###LinkTarget" Required="1" Valid="1">
+        <Description Translatable="1">Defines the LinkTarget for CustomerTicketProcessCategory.</Description>
+        <Navigation>Frontend::Customer::View::TicketProcess</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="_blank">
+                <Item ValueType="Option" Value="AsPopup" Translatable="1">AsPopup</Item>
+                <Item ValueType="Option" Value="_blank">Blank</Item>
+                <Item ValueType="Option" Value="_self">Self</Item>
+                <!--
+                    Can be used, but make little sense at this point.
+                    There is no frame and therefore no difference to `self`.
+                <Item ValueType="Option" Value="_parent">Parent</Item>
+                <Item ValueType="Option" Value="_top">Top</Item>
+                -->
+            </Item>
+        </Value>
+    </Setting>
+
+    <!-- TicketProcessCategory - ProcessPreferences -->
+    <Setting Name="ProcessPreferences###001-TicketProcessCategory-Category" Required="0" Valid="1">
+        <Description Translatable="1">Define a process category.</Description>
+        <Navigation>Core::ProcessManagement</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::ProcessPreferences::Generic</Item>
+                <Item Key="Label" Translatable="1">Category</Item>
+                <Item Key="Desc" Translatable="1">Process Ticket Category: Define a process category.</Item>
+                <Item Key="PrefKey">Category</Item>
+                <Item Key="ClusterName" Translatable="1">Category</Item>
+                <Item Key="ClusterPriority">1</Item>
+                <Item Key="Block">Option</Item>
+                <Item Key="TreeView">1</Item>
+                <Item Key="Multiple">1</Item>
+                <Item Key="PossibleNone">1</Item>
+                <Item Key="Data">
+                    <Hash>
+                        <Item Key="Category 1">Category 1</Item>
+                        <Item Key="Category 2">Category 2</Item>
+                        <Item Key="Category 3">Category 2::SecondCategory1</Item>
+                        <Item Key="Category 4">Category 2::SecondCategory1::ThirdCategory1</Item>
+                        <Item Key="Category 5">Category 2::SecondCategory2</Item>
+                        <Item Key="Category 6">Category 2::SecondCategory2::ThirdCategory2</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <!-- Optional - see Ticket::Frontend::CustomerTicketProcessCategory###LinkTarget -->
+    <Setting Name="ProcessPreferences###002-TicketProcessCategory-LinkTarget" Required="0" Valid="1">
+        <Description Translatable="1">Define a process link target.</Description>
+        <Navigation>Core::ProcessManagement</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::ProcessPreferences::Generic</Item>
+                <Item Key="Label" Translatable="1">LinkTarget</Item>
+                <Item Key="Desc" Translatable="1">Process Ticket Category: Define a process link target.</Item>
+                <Item Key="PrefKey" ValueRegex="^(?!.*\b(?:Activities|ChangeTime|Config|CreateTime|EntityID|ID|Layout|Name|State|StateEntityID|TransitionActions|Transitions(?!\w))\b).*">LinkTarget</Item>
+                <Item Key="ClusterName" Translatable="1">Category</Item>
+                <Item Key="ClusterPriority">2</Item>
+                <Item Key="Block">Option</Item>
+                <Item Key="Data">
+                    <Hash>
+                        <Item Key="AsPopup">AsPopup</Item>
+                        <Item Key="_blank">Blank</Item>
+                        <Item Key="_self">Self</Item>
+                    </Hash>
+                </Item>
+                <Item Key="SelectedID">_blank</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ProcessPreferences###003-TicketProcessCategory-Icon" Required="0" Valid="1">
+        <Description Translatable="1">Define a process icon.</Description>
+        <Navigation>Core::ProcessManagement</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::ProcessPreferences::Generic</Item>
+                <Item Key="Label" Translatable="1">Icon</Item>
+                <Item Key="Desc" Translatable="1">Process Ticket Category: Define a process icon.</Item>
+                <Item Key="PrefKey" ValueRegex="^(?!.*\b(?:Activities|ChangeTime|Config|CreateTime|EntityID|ID|Layout|Name|State|StateEntityID|TransitionActions|Transitions(?!\w))\b).*">Icon</Item>
+                <Item Key="ClusterName" Translatable="1">Category</Item>
+                <Item Key="ClusterPriority">3</Item>
+                <Item Key="Block">File</Item>
+                <Item Key="MaxFiles">1</Item>
+                <Item Key="FileTypes">png,jpg,jpeg,gif</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!-- Attachment Settings -->
+    <Setting Name="Attachment###PreviewContentTypes" Required="1" Valid="1">
+        <Description Translatable="1">Defines which ContentTypes are permitted for the attachment preview.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="application/pdf">pdf</Item>
+                <Item Key="application/json">json</Item>
+                <Item Key="text/markdown">markdown</Item>
+                <Item Key="text/html">html</Item>
+                <Item Key="text/xml">xml</Item>
+                <Item Key="text/plain">plain</Item>
+                <Item Key="text/x-sh">sh</Item>
+                <Item Key="image/svg+xml">svg</Item>
+                <Item Key="image/png">png</Item>
+                <Item Key="image/jpeg">jpeg</Item>
+                <Item Key="image/gif">gif</Item>
+            </Hash>
         </Value>
     </Setting>
 

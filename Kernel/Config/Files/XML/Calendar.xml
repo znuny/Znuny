@@ -631,7 +631,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Appointment Notifications</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -702,14 +702,14 @@
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Admin::View::NotificationEvent</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100%</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::Admin::AdminAppointmentNotificationEvent###RichTextHeight" Required="0" Valid="1">
         <Description Translatable="1">Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Admin::View::NotificationEvent</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">320</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">320px</Item>
         </Value>
     </Setting>
     <Setting Name="PreferencesGroups###AppointmentNotificationEvent" Required="0" Valid="1">

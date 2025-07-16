@@ -48,7 +48,7 @@ sub Run {
     }
 
     # Get attachments.
-    my @Attachments = $Self->{ParserObject}->GetAttachments();
+    my @Attachments = $Self->{ParserObject}->GetAttachments( UserType => 'Agent' );
 
     my $AttachmentCount = 0;
     for my $Attachment (@Attachments) {

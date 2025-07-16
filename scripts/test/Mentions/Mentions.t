@@ -244,12 +244,15 @@ my $MentionsRichtTextEditorConfig = $ConfigObject->Get('Mentions::RichTextEditor
 my $MentionsTriggerConfig         = $MentionsRichtTextEditorConfig->{Triggers};
 
 # Single user
-my $HTMLString = 'A single user is <a class="Mention" id="'
-    . $UserLoginByUserID{ $UserIDs[0] }
+my $HTMLString = 'A single user is <a class="mention" data-mention="'
+    . 'some user'
+    . ' mention-type="Users"'
+    . " id=\"$UserLoginByUserID{ $UserIDs[0] }\""
     . '" href="https://example.org" target="_blank">'
     . $MentionsTriggerConfig->{User}
     . $UserFullNames[0]
     . '</a>mentioned.';
+
 my $MentionedUserIDs = $MentionObject->GetMentionedUserIDsFromString(
     HTMLString => $HTMLString,
 );
@@ -264,7 +267,10 @@ $Self->IsDeeply(
 # Multiple users
 $HTMLString
     .= "\n"
-    . '<br />A second user is <a href="https://example.org" class="Mention" id="'
+    . '<br />A second user is <a'
+    . ' href="https://example.org" class="mention"'
+    . ' mention-type="Users"'
+    . ' id="'
     . $UserLoginByUserID{ $UserIDs[1] } . '">'
     . $MentionsTriggerConfig->{User}
     . $UserFullNames[1]
@@ -281,13 +287,17 @@ $Self->IsDeeply(
 );
 
 # Single group
-$HTMLString = 'A single group is <a class="GroupMention" href="https://example.org" target="_blank">'
+$HTMLString = 'A single group is <a class="mention"'
+    . ' data-mention="some-group (2 users will be mentioned)"'
+    . ' mention-type="Groups"'
+    . ' href=\"https://example.org\" target=\"_blank\">'
     . $MentionsTriggerConfig->{Group}
     . $GroupByGroupID{ $GroupIDs[0] }
     . '</a>mentioned.';
 $MentionedUserIDs = $MentionObject->GetMentionedUserIDsFromString(
     HTMLString => $HTMLString,
 );
+
 @ExpectedMentionedUserIDs = ( @UserIDs[ 2 .. 4 ] );
 
 $Self->IsDeeply(
@@ -299,7 +309,8 @@ $Self->IsDeeply(
 # Single blocked group
 $MentionsConfig->{BlockedGroups} = [ $GroupByGroupID{ $GroupIDs[0] } ];
 
-$HTMLString = 'A single group is <a class="GroupMention" href="https://example.org" target="_blank">'
+$HTMLString = 'A single group is <a class="mention" href="https://example.org" target="_blank"'
+    . ' mention-type="Groups">'
     . $MentionsTriggerConfig->{Group}
     . $GroupByGroupID{ $GroupIDs[0] }
     . '</a>mentioned.';
@@ -318,7 +329,9 @@ $MentionsConfig->{BlockedGroups} = [];
 
 # Two groups
 # Note that here, the first user is also part of second group.
-$HTMLString .= 'And another group is <a class="GroupMention">'
+$HTMLString .= 'And another group is <a class="mention"'
+    . ' data-mention="some-group"'
+    . ' mention-type="Groups">'
     . $MentionsTriggerConfig->{Group}
     . $GroupByGroupID{ $GroupIDs[1] }
     . '</a>mentioned.';
@@ -334,22 +347,30 @@ $Self->IsDeeply(
 );
 
 # All users and groups
-$HTMLString = 'A single user is <a class="Mention" href="https://example.org" target="_blank" id="'
+$HTMLString = 'A single user is <a class="mention" href="https://example.org" target="_blank"'
+    . ' mention-type="Users"'
+    . ' id="'
     . $UserLoginByUserID{ $UserIDs[0] } . '">'
     . $MentionsTriggerConfig->{User}
     . $UserFullNames[0]
     . '</a>mentioned.';
-$HTMLString .= 'A single group is <a class="GroupMention" href="https://example.org" target="_blank">'
+$HTMLString .= 'A single group is <a class="mention" href="https://example.org" target="_blank"'
+    . ' data-mention="some-group"'
+    . ' mention-type="Groups">'
     . $MentionsTriggerConfig->{Group}
     . $GroupByGroupID{ $GroupIDs[0] }
     . '</a>mentioned.';
 $HTMLString .= "\n"
-    . '<br />A second user is <a href="https://example.org" class="Mention" id="'
+    . '<br />A second user is <a href="https://example.org" class="mention"'
+    . ' mention-type="Users"'
+    . ' id="'
     . $UserLoginByUserID{ $UserIDs[1] } . '">'
     . $MentionsTriggerConfig->{User}
     . $UserFullNames[1]
     . '</a>mentioned.';
-$HTMLString .= 'And another group is <a class="GroupMention">'
+$HTMLString .= 'And another group is <a class="mention"'
+    . ' data-mention="some-group"'
+    . ' mention-type="Groups">'
     . $MentionsTriggerConfig->{Group}
     . $GroupByGroupID{ $GroupIDs[1] }
     . '</a>mentioned.';
@@ -372,22 +393,30 @@ $MentionsConfig->{BlockedGroups} = [
     $GroupByGroupID{ $GroupIDs[1] },
 ];
 
-$HTMLString = 'A single user is <a class="Mention" href="https://example.org" target="_blank" id="'
+$HTMLString = 'A single user is <a class="mention" href="https://example.org" target="_blank"'
+    . ' mention-type="Users"'
+    . ' id="'
     . $UserLoginByUserID{ $UserIDs[0] } . '">'
     . $MentionsTriggerConfig->{User}
     . $UserFullNames[0]
     . '</a>mentioned.';
-$HTMLString .= 'A single group is <a class="GroupMention" href="https://example.org" target="_blank">'
+$HTMLString .= 'A single group is <a class="mention" href="https://example.org" target="_blank"'
+    . ' data-mention="some-group"'
+    . ' mention-type="Groups">'
     . $MentionsTriggerConfig->{Group}
     . $GroupByGroupID{ $GroupIDs[0] }
     . '</a>mentioned.';
 $HTMLString .= "\n"
-    . '<br />A second user is <a href="https://example.org" class="Mention" id="'
+    . '<br />A second user is <a href="https://example.org" class="mention"'
+    . ' mention-type="Users"'
+    . ' id="'
     . $UserLoginByUserID{ $UserIDs[1] } . '">'
     . $MentionsTriggerConfig->{User}
     . $UserFullNames[1]
     . '</a>mentioned.';
-$HTMLString .= 'And another group is <a class="GroupMention">'
+$HTMLString .= 'And another group is <a class="mention"'
+    . ' data-mention="some-group"'
+    . ' mention-type="Groups">'
     . $MentionsTriggerConfig->{Group}
     . $GroupByGroupID{ $GroupIDs[1] }
     . '</a>mentioned.';
@@ -412,22 +441,30 @@ $MentionsConfig->{BlockedGroups} = [
     $GroupByGroupID{ $GroupIDs[1] },
 ];
 
-$HTMLString = 'A single user is <a class="Mention" href="https://example.org" target="_blank" id="'
+$HTMLString = 'A single user is <a class="mention" href="https://example.org" target="_blank"'
+    . ' mention-type="Users"'
+    . ' id="'
     . $UserLoginByUserID{ $UserIDs[0] } . '">'
     . $MentionsTriggerConfig->{User}
     . $UserFullNames[0]
     . '</a>mentioned.';
-$HTMLString .= 'A single group is <a class="GroupMention" href="https://example.org" target="_blank">'
+$HTMLString .= 'A single group is <a class="mention" href="https://example.org" target="_blank"'
+    . ' data-mention="some-group"'
+    . ' mention-type="Groups">'
     . $MentionsTriggerConfig->{Group}
     . $GroupByGroupID{ $GroupIDs[0] }
     . '</a>mentioned.';
 $HTMLString .= "\n"
-    . '<br />A second user is <a href="https://example.org" class="Mention" id="'
+    . '<br />A second user is <a href="https://example.org" class="mention"'
+    . ' mention-type="Users"'
+    . ' id="'
     . $UserLoginByUserID{ $UserIDs[1] } . '">'
     . $MentionsTriggerConfig->{User}
     . $UserFullNames[1]
     . '</a>mentioned.';
-$HTMLString .= 'And another group is <a class="GroupMention">'
+$HTMLString .= 'And another group is <a class="mention"'
+    . ' data-mention="some-group"'
+    . ' mention-type="Groups">'
     . $MentionsTriggerConfig->{Group}
     . $GroupByGroupID{ $GroupIDs[1] }
     . '</a>mentioned.';
@@ -437,7 +474,9 @@ $MentionsConfig->{BlockedGroups} = [];
 # Single user with quoted text that contains mentions which must be ignored.
 # The plain text string is also given to make it possible to reliably recognize
 # mentions in quoted text which should be ignored.
-$HTMLString = 'A single user is <a class="Mention" href="https://example.org" target="_blank" id="'
+$HTMLString = 'A single user is <a class="mention" href="https://example.org" target="_blank"'
+    . ' mention-type="Users"'
+    . ' id="'
     . $UserLoginByUserID{ $UserIDs[0] } . '">'
     . $MentionsTriggerConfig->{User}
     . $UserFullNames[0]
@@ -445,12 +484,13 @@ $HTMLString = 'A single user is <a class="Mention" href="https://example.org" ta
 $HTMLString .= "\n"
     . '<div style="border:none; border-left:solid blue 1.5pt; padding:0cm 0cm 0cm 4.0pt" type="cite">Dear John,<br />'
     . '<br />'
-    . '<a class="Mention" href="#" target="_blank" id="' . $UserLoginByUserID{ $UserIDs[1] } . '">'
+    . '<a class="mention" href="#" target="_blank"'
+    . ' mention-type="Users" id="' . $UserLoginByUserID{ $UserIDs[1] } . '">'
     . $MentionsTriggerConfig->{User}
     . $UserFullNames[1]
     . '</a><br />'
     . '<div style="border:none; border-left:solid blue 1.5pt; padding:0cm 0cm 0cm 4.0pt" type="cite">'
-    . '<a class="GroupMention" href="#" target="_blank">'
+    . '<a class="mention" data-mention="some-group" mention-type="Groups"> href="#" target="_blank">'
     . $MentionsTriggerConfig->{Group}
     . $GroupByGroupID{ $GroupIDs[0] }
     . '</a><br />'
@@ -460,12 +500,14 @@ $HTMLString .= "\n"
     . 'Thank you for your request.<br />'
     . '</div>';
 $HTMLString .= "\n"
-    . 'Another user is <a class="Mention" href="https://example.org" target="_blank" id="'
+    . 'Another user is <a class="mention" href="https://example.org" target="_blank"'
+    . ' mention-type="Users"'
+    . ' id="'
     . $UserLoginByUserID{ $UserIDs[4] } . '">'
     . $MentionsTriggerConfig->{User}
     . $UserFullNames[4]
     . '</a>mentioned.'
-    . '<a class="GroupMention" href="#" target="_blank">'
+    . '<a class="mention"  href="#" target="_blank" data-mention="some-group" mention-type="Groups">'
     . $MentionsTriggerConfig->{Group}
     . $GroupByGroupID{ $GroupIDs[1] }
     . '</a><br />';

@@ -142,7 +142,8 @@ sub NotificationEvent {
     if ( $Self->{RichText} && $Notification{ContentType} =~ /text\/plain/i ) {
         $Notification{ContentType} = 'text/html';
         $Notification{Body}        = $HTMLUtilsObject->ToHTML(
-            String => $Notification{Body},
+            String                     => $Notification{Body},
+            DoNotReplaceWithParagraphs => 1,
         );
     }
 
@@ -520,7 +521,8 @@ sub _Replace {
         {
             my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
             $Replacement = $HTMLUtilsObject->ToHTML(
-                String => $Appointment{$Attribute},
+                String                     => $Appointment{$Attribute},
+                DoNotReplaceWithParagraphs => 1,
             );
         }
 
@@ -652,7 +654,8 @@ sub _Replace {
             for my $Attribute ( sort keys %Recipient ) {
                 next ATTRIBUTE if !$Recipient{$Attribute};
                 $Recipient{$Attribute} = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToHTML(
-                    String => $Recipient{$Attribute},
+                    String                     => $Recipient{$Attribute},
+                    DoNotReplaceWithParagraphs => 1,
                 );
             }
         }
@@ -662,6 +665,10 @@ sub _Replace {
 
     # cleanup
     $Param{Text} =~ s/$RecipientTag.+?$End/-/gi;
+
+    $Param{Text} = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToHTMLReplaceWithParagraphs(
+        String => $Param{Text},
+    ) if ( $Param{RichText} );
 
     return $Param{Text};
 }

@@ -387,10 +387,11 @@ sub LoadDefaults {
     $Self->{'SendmailModule'}      = 'Kernel::System::Email::Sendmail';
     $Self->{'SendmailModule::CMD'} = '/usr/sbin/sendmail -i -f';
 
-#    $Self->{'SendmailModule'} = 'Kernel::System::Email::SMTP';
-#    $Self->{'SendmailModule::Host'} = 'mail.example.com';
-#    $Self->{'SendmailModule::Port'} = '25';
-#    $Self->{'SendmailModule::AuthUser'} = '';
+#    $Self->{'SendmailModule'}               = 'Kernel::System::Email::SMTP';
+#    $Self->{'SendmailModule::Host'}         = 'mail.example.com';
+#    $Self->{'SendmailModule::Port'}         = '25';
+#    $Self->{'SendmailModule::Timeout'}      = 30;
+#    $Self->{'SendmailModule::AuthUser'}     = '';
 #    $Self->{'SendmailModule::AuthPassword'} = '';
 
     # SendmailBcc
@@ -1878,7 +1879,7 @@ via the Preferences button after logging in.
         GroupRo      => [],
         IconBig     => 'fa-plug',
         IconSmall => '',
-        Description => Translatable('Update and extend your system with software packages.'),
+        Description => Translatable('Manage add-ons.'),
         Module      => 'Kernel::Output::HTML::NavBar::ModuleAdmin',
         Name        => Translatable('Package Manager'),
         Block => 'Administration',

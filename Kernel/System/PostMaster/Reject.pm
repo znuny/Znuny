@@ -166,7 +166,7 @@ sub Run {
     );
 
     # write attachments to the storage
-    for my $Attachment ( $Self->{ParserObject}->GetAttachments() ) {
+    for my $Attachment ( $Self->{ParserObject}->GetAttachments( UserType => 'Agent' ) ) {
         $ArticleBackendObject->ArticleWriteAttachment(
             Filename           => $Attachment->{Filename},
             Content            => $Attachment->{Content},

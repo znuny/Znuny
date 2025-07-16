@@ -239,7 +239,7 @@ my @Tests = (
         Config => {
             FieldConfig => $DynamicFieldConfigs{Text},
         },
-        ExpectedResutls => {
+        ExpectedResults => {
             Functions => {
                 DummyFunction1 => 1,
                 DummyFunction2 => undef,
@@ -255,7 +255,7 @@ my @Tests = (
         Config => {
             FieldConfig => $DynamicFieldConfigs{TextArea},
         },
-        ExpectedResutls => {
+        ExpectedResults => {
             Functions => {
                 DummyFunction1 => 'TextArea',
                 DummyFunction2 => undef,
@@ -271,7 +271,7 @@ my @Tests = (
         Config => {
             FieldConfig => $DynamicFieldConfigs{Checkbox},
         },
-        ExpectedResutls => {
+        ExpectedResults => {
             Functions => {
                 DummyFunction1 => 1,
                 DummyFunction2 => 2,
@@ -287,7 +287,7 @@ my @Tests = (
         Config => {
             FieldConfig => $DynamicFieldConfigs{Dropdown},
         },
-        ExpectedResutls => {
+        ExpectedResults => {
             Functions => {
                 DummyFunction1 => undef,
                 DummyFunction2 => 1,
@@ -303,7 +303,7 @@ my @Tests = (
         Config => {
             FieldConfig => $DynamicFieldConfigs{Multiselect},
         },
-        ExpectedResutls => {
+        ExpectedResults => {
             Functions => {
                 DummyFunction1 => undef,
                 DummyFunction2 => 'Multiselect',
@@ -319,7 +319,7 @@ my @Tests = (
         Config => {
             FieldConfig => $DynamicFieldConfigs{Multiselect},
         },
-        ExpectedResutls => {
+        ExpectedResults => {
             Functions => {
                 DummyFunction1 => undef,
                 DummyFunction2 => 'Multiselect',
@@ -335,7 +335,7 @@ my @Tests = (
         Config => {
             FieldConfig => $DynamicFieldConfigs{Date},
         },
-        ExpectedResutls => {
+        ExpectedResults => {
             Functions => {
                 DummyFunction1 => 1,
                 DummyFunction2 => 1,
@@ -351,7 +351,7 @@ my @Tests = (
         Config => {
             FieldConfig => $DynamicFieldConfigs{DateTime},
         },
-        ExpectedResutls => {
+        ExpectedResults => {
             Functions => {
                 DummyFunction1 => 'DateTime',
                 DummyFunction2 => 'DynamicField',
@@ -374,7 +374,7 @@ for my $Test (@Tests) {
 
         $Self->Is(
             $HasBehaviorResult,
-            $Test->{ExpectedResutls}->{Behaviors}->{$Behavior},
+            $Test->{ExpectedResults}->{Behaviors}->{$Behavior},
             "$Test->{Name} HasBehavior $Behavior",
         );
         for my $FunctionName ( @{ $Functions{$Behavior} } ) {
@@ -384,7 +384,7 @@ for my $Test (@Tests) {
 
             $Self->Is(
                 $FunctionResult,
-                $Test->{ExpectedResutls}->{Functions}->{$FunctionName},
+                $Test->{ExpectedResults}->{Functions}->{$FunctionName},
                 "$Test->{Name} Function $FunctionName",
             );
         }

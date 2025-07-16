@@ -229,7 +229,7 @@ Core.UI.InputFields = (function (TargetNS) {
                 $ShowTreeObj = $SelectObj.next('.ShowTreeSelection');
 
             if ($SelectObj.data('modernized')) {
-                 $('#' + Core.App.EscapeSelector($SelectObj.data('modernized'))).parents('.InputField_Container')
+                $('#' + Core.App.EscapeSelector($SelectObj.data('modernized'))).parents('.InputField_Container')
                     .blur()
                     .remove();
                 $SelectObj.show()
@@ -1119,7 +1119,7 @@ Core.UI.InputFields = (function (TargetNS) {
      *      Remove all diacritic characters from supplied string (accent folding).
      *      Taken from https://gist.github.com/instanceofme/1731620
      */
-     TargetNS.RemoveDiacritics = function (Str) {
+    TargetNS.RemoveDiacritics = function (Str) {
         var Chars = Str.split(''),
             i = Chars.length - 1,
             Alter = false,
@@ -1223,7 +1223,7 @@ Core.UI.InputFields = (function (TargetNS) {
                 $ShowTreeObj = $SelectObj.next('.ShowTreeSelection');
                 if ($SelectObj.data('tree') || $ShowTreeObj.length) {
                     if ($ShowTreeObj.length) {
-                        $ShowTreeObj.hide();
+                        $ShowTreeObj.show();
                     }
                     $SelectObj.data('tree', true);
                     TreeView = true;
@@ -1237,6 +1237,9 @@ Core.UI.InputFields = (function (TargetNS) {
                 // Container for input field
                 $InputContainerObj = $('<div />').appendTo($ContainerObj);
                 $InputContainerObj.addClass('InputField_InputContainer');
+
+                // Move tree view icon directly "behind" input element
+                $ShowTreeObj.insertAfter($InputContainerObj);
 
                 // Deduce ID of original field
                 SearchID = $SelectObj.attr('id');

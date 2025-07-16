@@ -35,6 +35,7 @@ Core.Form.Validate = (function (TargetNS) {
         ServerErrorClass: 'ServerError',
         ServerLabelClass: 'ServerLabelError',
         IgnoreClass: 'ValidationIgnore',
+        MandatoryRTEIgnoreClass : '.ck-content, .ck-editor__editable, .ck',
         SubmitFunction: {}
     };
 
@@ -88,7 +89,8 @@ Core.Form.Validate = (function (TargetNS) {
         // If the element, which has an validation error, is a richtext element, than manually trigger the focus event
         if (Core.UI.RichTextEditor.IsEnabled($Element)) {
             window.setTimeout(function () {
-                $Element.focus();
+                Core.UI.RichTextEditor.Focus($Element);
+                Core.UI.ScrollTo($("label[for=" + $Element.attr('id') + "]"));
             }, 0);
         }
 
@@ -129,7 +131,7 @@ Core.Form.Validate = (function (TargetNS) {
 
         if (InputErrorMessageHTML && InputErrorMessageHTML.length) {
             // If error field is a RTE, it is a little bit more difficult.
-            if ($('#cke_' + Core.App.EscapeSelector(Element.id)).length) {
+            if (Core.UI.RichTextEditor.GetInstance(Core.App.EscapeSelector(Element.id))) {
                 Core.Form.ErrorTooltips.InitRTETooltip($Element, InputErrorMessageHTML);
             }
             // If server error field is RTE, action must be subscribed and loaded when event is finished because RTE is not loaded yet.
@@ -195,7 +197,7 @@ Core.Form.Validate = (function (TargetNS) {
             $Element.attr('aria-invalid', false);
 
             // if error field is a RTE, it is a little bit more difficult
-            if ($('#cke_' + Core.App.EscapeSelector(Element.id)).length) {
+            if (Core.UI.RichTextEditor.GetInstance(Element.id)) {
                 Core.Form.ErrorTooltips.RemoveRTETooltip($Element);
             } else {
                 Core.Form.ErrorTooltips.RemoveTooltip($Element);
@@ -256,7 +258,8 @@ Core.Form.Validate = (function (TargetNS) {
      */
     function ValidatorMethodRequired(Value, Element) {
         var Text,
-            $Element = $(Element);
+            $Element = $(Element),
+            CKEditor;
 
         // special treatment of <select> elements in OTRS
         if (Element.nodeName.toLowerCase() === 'select') {
@@ -268,8 +271,9 @@ Core.Form.Validate = (function (TargetNS) {
         // keep tags if images are embedded because of inline-images
         // keep tags if codemirror plugin is used (for XSLT editor)
         if (Core.UI.RichTextEditor.IsEnabled($Element)) {
-            Value = CKEDITOR.instances[Element.id].getData();
-            if (typeof CKEDITOR.instances[Element.id].config.codemirror === 'undefined' && !Value.match(/<img/)) {
+            CKEditor = Core.UI.RichTextEditor.GetInstance(Element.id);
+            Value = CKEditor.getData();
+            if (typeof CKEditor.config.codemirror === 'undefined' && !Value.match(/<img/)) {
                 Value = Value.replace(/\s+|&nbsp;|<\/?\w+[^>]*\/?>/g, '');
             }
         }
@@ -798,7 +802,14 @@ Core.Form.Validate = (function (TargetNS) {
             ServerErrorDialogCloseFunction,
             ChangedStateID = parseInt($('#ComposeStateID, #NewStateID, #NextStateID').val(), 10),
             PendingStateIDs = Core.Config.Get('PendingStateIDs') || [],
-            Index;
+            Index,
+            Ignore = '.' + Options.IgnoreClass;
+
+        // when RichText is enabled, make sure that validator ignores some of it's elements
+        // to prevent errors
+        if(Core.Config.Get('RichTextSet')){
+            Ignore += ', ' + Options.MandatoryRTEIgnoreClass;
+        }
 
         if (Options.FormClass) {
             FormSelector = 'form.' + Options.FormClass;
@@ -823,7 +834,7 @@ Core.Form.Validate = (function (TargetNS) {
                 unhighlight: TargetNS.UnHighlightError,
                 errorPlacement: OnErrorElement,
                 submitHandler: OnSubmit,
-                ignore: '.' + Options.IgnoreClass
+                ignore: Ignore,
             });
         });
 
