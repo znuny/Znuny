@@ -319,13 +319,13 @@ sub Run {
         }
 
         # something went wrong
-        my $JobDataReference;
-        $JobDataReference = $Self->_MaskUpdate(
+        my $JobDataReference = $Self->_MaskUpdate(
             %Param,
             %GetParam,
             %DynamicFieldValues,
             %Errors,
             StopWordsAlreadyChecked => 1,
+            UpdateAction            => 1,
         );
 
         # generate search mask
@@ -543,9 +543,14 @@ sub _MaskUpdate {
 
     my %JobData;
 
-    if ( $Self->{Profile} ) {
+    # keep request form parameters when updating/adding job
+    if ( $Param{UpdateAction} ) {
+        %JobData = %Param;
+    }
+    elsif ( $Self->{Profile} ) {
 
-        # get db job data
+        # by default use job parameters from db
+        # used to display job data on edit/add screen
         %JobData = $Kernel::OM->Get('Kernel::System::GenericAgent')->JobGet(
             Name => $Self->{Profile},
         );
@@ -911,8 +916,8 @@ sub _MaskUpdate {
     $LayoutObject->Block(
         Name => 'Edit',
         Data => {
-            %JobData,
             %Param,
+            %JobData,
             %StopWordsServerErrors,
         },
     );
@@ -1154,7 +1159,12 @@ sub _MaskUpdate {
             };
 
             # Decide if dynamic field go to add fields dropdown or selected fields area.
-            if ( defined $JobData{$Key} ) {
+            my $DataIsEmptyArray = ref $JobData{$Key} eq 'ARRAY' && !IsArrayRefWithData( $JobData{$Key} );
+            if (
+                defined $JobData{$Key}
+                && !$DataIsEmptyArray
+                )
+            {
 
                 # Get field HTML.
                 my $DynamicFieldHTML = $DynamicFieldBackendObject->SearchFieldRender(
@@ -1289,6 +1299,12 @@ sub _MaskUpdate {
         # a checkbox "flag" for including its value to GA config. It must return
         # false if checkbox is unchecked (in DB value is 0, not empty string or undef),
         # otherwise must be true (for other dynamic fields or checked checkbox).
+        #
+        # Fourth statement part - used to determine if value is an empty array
+        # which is a case for all multi-valued dynamic fields that have by default
+        # empty array as initial value, but in the interface wasn't even selected
+        # or was selected but not filled with any values.
+        my $DataIsEmptyArray = ref $JobData{$Key} eq 'ARRAY' && !IsArrayRefWithData( $JobData{$Key} );
         if (
             defined $JobData{$Key}
             && (
@@ -1296,6 +1312,7 @@ sub _MaskUpdate {
                 || $JobData{$Key} ne ''
             )
             && ( !$Used || $JobData{$Key} )
+            && !$DataIsEmptyArray
             )
         {
 
