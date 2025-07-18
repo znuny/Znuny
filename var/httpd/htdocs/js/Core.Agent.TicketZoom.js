@@ -398,7 +398,7 @@ Core.Agent.TicketZoom = (function (TargetNS) {
                             $('#CommunicationChannelFilter').val('').trigger('redraw.InputField');
                             $('#ArticleSenderTypeFilter').val('').trigger('redraw.InputField');
                         },
-                        Class: 'btn-cancel-ghost align-left-auto'
+                        Class: 'align-left-auto'
                     },
                     {
                         Label: Core.Language.Translate("Apply"),

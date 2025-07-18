@@ -1,4 +1,7 @@
 # 7.2.1 2025-??-??
+ - 2025-07-17 Fixed: The “btn-cancel-ghost” class is duplicated for the button in the ‘Article filter’ dialogue box. Thanks for reporting to @BuilderNSV. [#614](https://github.com/znuny/Znuny/issues/614)
+ - 2025-07-14 Fixed: ACLs of ticket attribute relations could lead to empty selection fields. Thanks for reporting to @lis975. [#675](https://github.com/znuny/Znuny/issues/675)
+ - 2025-07-14 Sector Nord AG: Allow table row highlighting for even rows in all DataTables. Thanks to Ziggy Trotter (@ZTrotter). [PR#683](https://github.com/znuny/Znuny/pull/683)
  - 2025-07-14 Fixed: The ticket menu is not available if only one ticket with activated bulk function has been selected in the small mode of the ticket view. Thanks for reporting to @BuilderNSV. [#687](https://github.com/znuny/Znuny/issues/687)
  - 2025-07-14 Fixed: Avatar area in agent preferences should disappear if no Avatar Engine is in use.
  - 2025-07-07 Added new views ProcessShop (AgentTicketProcessCategory/CustomerTicketProcessCategory) - The possible processes are arranged in tiles and divided by categories. Category, LinkTarget and Icon can now be defined per process.
@@ -9,7 +12,7 @@
  - 2025-06-24 Fixed: Wrong otrs.Daemon.pl exit code after valid termination. Thanks to Paweł Bogusławski (@pboguslawski). [#401](https://github.com/znuny/Znuny/pull/401)
  - 2025-06-24 Updated DatePicker - Keep icon displayed but not clickable for disabled DatePicker. Thanks for reporting to @BuilderNSV. [#670](https://github.com/znuny/Znuny/issues/670)
  - 2025-06-23 Added config option SendmailModule::Timeout to configure a timeout for mail server connections. Thanks to Paweł Bogusławski (@pboguslawski). [PR#677](https://github.com/znuny/Znuny/pull/677)
- - 2025-06-23 Sector Nord AG: Update entry for AgentPreferences::AJAXUpdate::AllowedKeys. Thanks to @LuBroering (Lukas Bröring Sector Nord AG). [PR#688](https://github.com/znuny/Znuny/pull/688)
+ - 2025-06-23 Sector Nord AG: Update entry for AgentPreferences::AJAXUpdate::AllowedKeys. Thanks to Lukas Bröring (@LuBroering). [PR#688](https://github.com/znuny/Znuny/pull/688)
  - 2025-06-23 Added and updated FormElements templates.
  - 2025-06-23 Added Download and Preview function to Kernel/Modules/AJAXAttachment.pm.
  - 2025-06-23 Fixed: The agent toolbar does not remain expanded.
@@ -27,7 +30,7 @@
  - 2025-05-26 Added AgentTicketMarkSeenUnseen to ACLKeysLevel3::Actions###100-Default.
  - 2025-05-22 Fixed: Generic interface operation Session::SessionRemove requires a user login instead of just a valid session ID. [#638](https://github.com/znuny/Znuny/issues/638).
  - 2025-05-21 Fixed: AdminACL: Wrong fallback for ACLKeysLevel3::Actions variable. Thanks for reporting to Stefan Härter (@stefanhaerter). [#629](https://github.com/znuny/Znuny/issues/629)
- - 2025-05-21 Sector Nord AG: Added missing Action for AgentTicketMarkSeenUnseen in Ticket::Frontend::MenuModule. Thanks to @LuBroering (Lukas Bröring Sector Nord AG). [PR#654](https://github.com/znuny/Znuny/pull/654)
+ - 2025-05-21 Sector Nord AG: Added missing Action for AgentTicketMarkSeenUnseen in Ticket::Frontend::MenuModule. Thanks to Lukas Bröring (@LuBroering). [PR#654](https://github.com/znuny/Znuny/pull/654)
  - 2025-05-21 Integrated package Znuny-ArticleColors: Admin module to edit article colors directly in Znuny.
  - 2025-05-20 Fixed: Multiple spaces in templates not replaced correctly when using placeholders (e.g. OTRS_CUSTOMER_BODY).
  - 2025-05-19 Integrated package Znuny-Translations: Admin module to edit translations directly in Znuny.
