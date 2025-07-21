@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.918140881312319;
+    $Self->{Completeness}        = 0.917845659163987;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8025,6 +8025,10 @@ sub Data {
         'Agent interface notification module to show the number of mentions.' =>
             '',
         'Module to grant access to the mentioned agents of a ticket.' => '',
+        'Defines the default ticket attribute for ticket sorting in the mention ticket view of the agent interface.' =>
+            '',
+        'Defines the default ticket order in the ticket mention view of the agent interface. Up: oldest on top. Down: latest on top.' =>
+            '',
         'Mapping of non-standard time zones to official ones.' => '',
         'Start date (YYYYMMDD) of the range to use when parsing ICS files. The used CPAN module iCal::Parser needs this to be able to parse ICS files with events in a year before the current one. The end date of the range is automatically set to 10 years in the future from the time of parsing/execution.' =>
             '',

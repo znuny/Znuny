@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-06-05 14:42+0000\n"
+"POT-Creation-Date: 2025-07-18 11:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20776,6 +20776,14 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Module to grant access to the mentioned agents of a ticket."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the default ticket attribute for ticket sorting in the mention ticket view of the agent interface."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the default ticket order in the ticket mention view of the agent interface. Up: oldest on top. Down: latest on top."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml

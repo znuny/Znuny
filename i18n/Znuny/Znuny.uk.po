@@ -25761,3 +25761,11 @@ msgstr ""
 msgid "Applies the limit defined in 'SendmailModule::RateLimit' per sender address."
 msgstr ""
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the default ticket attribute for ticket sorting in the mention ticket view of the agent interface."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the default ticket order in the ticket mention view of the agent interface. Up: oldest on top. Down: latest on top."
+msgstr ""
+

@@ -2674,6 +2674,30 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketMentionView###SortBy::Default" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Defines the default ticket attribute for ticket sorting in the mention ticket view of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketMention</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="Age">
+                <Item ValueType="Option" Value="Age" Translatable="1">Age</Item>
+                <Item ValueType="Option" Value="TicketNumber" Translatable="1">TicketNumber</Item>
+                <Item ValueType="Option" Value="Title" Translatable="1">Title</Item>
+                <Item ValueType="Option" Value="Queue" Translatable="1">Queue</Item>
+                <Item ValueType="Option" Value="Priority" Translatable="1">Priority</Item>
+                <Item ValueType="Option" Value="EscalationTime" Translatable="1">EscalationTime</Item>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketMentionView###Order::Default" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Defines the default ticket order in the ticket mention view of the agent interface. Up: oldest on top. Down: latest on top.</Description>
+        <Navigation>Frontend::Agent::View::TicketMention</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="Up">
+                <Item ValueType="Option" Value="Down" Translatable="1">Down</Item>
+                <Item ValueType="Option" Value="Up" Translatable="1">Up</Item>
+            </Item>
+        </Value>
+    </Setting>
 
     <!--
         Non-standard time zone mapping for ICS support
