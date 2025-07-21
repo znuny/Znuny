@@ -262,7 +262,7 @@ Core.AJAX = (function (TargetNS) {
             // object of the popup window. But if we're on a mobile environment, the popup would instead open as an iframe, which would cause
             // parent.CKEDITOR to be the CKEDITOR object of the parent window which contains the iframe. This is why we want to use only
             // CKEDITOR in this case (see bug#12680).
-            if (Core.App.Responsive.IsSmallerOrEqual(Core.App.Responsive.GetScreenSize(), 'ScreenL') && (!localStorage.getItem("DesktopMode") || parseInt(localStorage.getItem("DesktopMode"), 10) <= 0)) {
+            if (typeof CKEDITOR !== 'undefined' && Core.App.Responsive.IsSmallerOrEqual(Core.App.Responsive.GetScreenSize(), 'ScreenL') && (!localStorage.getItem("DesktopMode") || parseInt(localStorage.getItem("DesktopMode"), 10) <= 0)) {
                 CKEditorObj = CKEDITOR;
             }
 
