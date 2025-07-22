@@ -10,14 +10,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
-"PO-Revision-Date: 2018-09-20 13:03+0000\n"
-"Last-Translator: Krikor Maroukian <krikor.maroukian@gmail.com>, 2019\n"
-"Language-Team: Greek (https://www.transifex.com/otrs/teams/23435/el/)\n"
+"PO-Revision-Date: 2025-07-22 11:59+0000\n"
+"Last-Translator: Spyros <spyros.veronikis@gmail.com>\n"
+"Language-Team: Greek <https://translations.znuny.org/projects/znuny-lts/"
+"znuny/el/>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "ACL Management"
@@ -6474,7 +6476,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
 msgid "The current ticket state is"
-msgstr "Η κατάσταση του παρόντος δελτίου είναι"
+msgstr "Η τρέχουσα κατάσταση δελτίου είναι"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
 msgid "Your email address is"
@@ -25346,7 +25348,7 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
 msgid "Impact"
-msgstr ""
+msgstr "Αντίκτυπος"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAttachment.tt
 msgid "Related Actions"
@@ -25478,11 +25480,11 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSLA.tt
 msgid "Minimum Time Between Incidents"
-msgstr ""
+msgstr "Ελάχιστος Χρόνος μεταξύ Συμβάντων"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
 msgid "Criticality"
-msgstr ""
+msgstr "Κρισιμότητα"
 
 #. SysConfig
 msgid "Web service (Dropdown)"
@@ -25767,4 +25769,3 @@ msgstr ""
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Defines the default ticket order in the ticket mention view of the agent interface. Up: oldest on top. Down: latest on top."
 msgstr ""
-
