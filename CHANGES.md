@@ -2,6 +2,7 @@
  - 2025-07-21 Added missing value 'UserNavBarItemsOrder' to AgentPreferences::AJAXUpdate::AllowedKeys###Framework.
  - 2025-07-21 Added missing SysConfig settings `SortBy::Default` and `Order::Default`.
  - 2025-07-21 Fixed: CKEDITOR is not defined when CKEDITOR is disabled and the window is too small when loading the text template. Thanks to @VeldoraTheDragon. [#609](https://github.com/znuny/Znuny/issues/609)
+ - 2025-07-16 Fixed: Users mentioned in quoted text will not be notified again.
  - 2025-07-15 Sector Nord AG: Update entry for AgentPreferences::AJAXUpdate::AllowedKeys. Thanks to @LuBroering (Lukas Bröring Sector Nord AG). [PR#688](https://github.com/znuny/Znuny/pull/688)
  - 2025-07-14 Fixed: ACLs of ticket attribute relations could lead to empty selection fields. Thanks for reporting to @lis975. [#675](https://github.com/znuny/Znuny/issues/675)
  - 2025-07-09 Fixed: Avatar area in agent preferences should disappear if no Avatar Engine is in use.

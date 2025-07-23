@@ -45,6 +45,21 @@ o Name:    CPAN HTTP::Date
   License: GNU v2 - http://www.gnu.org/licenses/gpl.html
   Note:    # Copyright 1995-1999, Gisle Aas
 
+o Name:    HTML::TreeBuilder
+  Web;     n/a
+  License: GNU v2 - http://www.gnu.org/licenses/gpl.html
+  Note:    # Copyright 1995-1998, Gisle Aas
+           # Copyright 1999-2004 Sean M. Burke
+           # Copyright 2005 Andy Lester
+           # Copyright 2006 Pete Krawczyk
+           # Copyright 2010 Jeff Fearn
+           # Copyright 2012 Christopher J. Madsen
+
+o Name:    HTML::TreeBuilder::XPath
+  Web;     n/a
+  License: GNU v2 - http://www.gnu.org/licenses/gpl.html
+  Note:    # Copyright (C) 2006-2011 by Michel Rodriguez
+
 o Name:    CPAN IO::Interactive
   Web:     n/a
   License: GNU v2 - http://www.gnu.org/licenses/gpl.html
@@ -153,6 +168,12 @@ o Name:    CPAN XML::TreePP
 o Name:    CPAN XML::Parser::Lite
   Web:     n/a
   License: GNU v2 - http://www.gnu.org/licenses/gpl.html
+
+o Name:    CPAN XML::PathEngine
+  Web:     n/a
+  License: GNU v2 - http://www.gnu.org/licenses/gpl.html
+  Note:    # Copyright (C) 2006 Michel Rodriguez
+           # Copyright (C) 2000 AxKit.com Ltd
 
 o Name:    CPAN JSON::PP
   Web:     n/a

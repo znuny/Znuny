@@ -470,8 +470,7 @@ Another user is [4]$MentionsTriggerConfig->{User}$UserLoginByUserID{ $UserIDs[4]
 [5]$MentionsTriggerConfig->{Group}$GroupByGroupID{ $GroupIDs[1] }";
 
 $MentionedUserIDs = $MentionObject->GetMentionedUserIDsFromString(
-    HTMLString      => $HTMLString,
-    PlainTextString => $PlainTextString,
+    HTMLString => $HTMLString,
 );
 
 @ExpectedMentionedUserIDs = ( $UserIDs[0], $UserIDs[4], $UserIDs[5], $UserIDs[6], );
@@ -484,9 +483,8 @@ $Self->IsDeeply(
 
 # Also test for optional limit
 $MentionedUserIDs = $MentionObject->GetMentionedUserIDsFromString(
-    HTMLString      => $HTMLString,
-    PlainTextString => $PlainTextString,
-    Limit           => 2,                  # outside of quote: both mentioned users
+    HTMLString => $HTMLString,
+    Limit      => 2,             # outside of quote: both mentioned users
 );
 
 @ExpectedMentionedUserIDs = ( $UserIDs[0], $UserIDs[4], );
@@ -498,9 +496,8 @@ $Self->IsDeeply(
 );
 
 $MentionedUserIDs = $MentionObject->GetMentionedUserIDsFromString(
-    HTMLString      => $HTMLString,
-    PlainTextString => $PlainTextString,
-    Limit           => 3,                  # outside of quote: both mentioned users + one from second group
+    HTMLString => $HTMLString,
+    Limit      => 3,             # outside of quote: both mentioned users + one from second group
 );
 
 my $ExpectedNumberOfMentionedUserIDs = 3;

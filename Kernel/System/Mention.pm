@@ -11,6 +11,10 @@ package Kernel::System::Mention;
 use strict;
 use warnings;
 
+use utf8;
+
+use HTML::TreeBuilder::XPath;
+
 use Kernel::Language qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
@@ -542,11 +546,6 @@ sub GetDashboardWidgetTicketData {
         HTMLString => '...<a class="Mention" href="..." target="...">@root@localhost<\/a>...',
 
         # optional
-        # plain text string must be given if mentions in quoted text should be ignored.
-        # they are not reliably parsable from the HTML string.
-        PlainTextString => '...@root@localhost...',
-
-        # optional
         # Limit for number of returned user IDs. The rest will silently be ignored.
         Limit => 5,
     );
@@ -577,46 +576,32 @@ sub GetMentionedUserIDsFromString {
     my $MentionsTriggerConfig         = $MentionsRichtTextEditorConfig->{Triggers};
     return [] if !IsHashRefWithData($MentionsTriggerConfig);
 
+    #
+    # Remove quotes so that mentioned users/groups in quotes will not be notified again.
+    #
+    my $HTMLString = $Param{HTMLString};
+
+    my $HTMLTree = HTML::TreeBuilder::XPath->new();
+    $HTMLTree->parse_content($HTMLString);
+
+    my @HTMLTreeNodes = $HTMLTree->findnodes('//div[@type="cite"]');
+    for my $HTMLTreeNode (@HTMLTreeNodes) {
+        $HTMLTreeNode->detach();
+    }
+    $HTMLString = $HTMLTree->as_HTML();
+
+    #
+    # Determine mentioned users/groups.
+    #
     my @MentionedUsers = (
-        $Param{HTMLString}
+        $HTMLString
             =~ m{<a\b[^>]*?\bclass="Mention"[^>]*?>\Q$MentionsTriggerConfig->{User}\E(.*?)<\/a>}sg
     );
 
     my @MentionedGroups = (
-        $Param{HTMLString}
+        $HTMLString
             =~ m{<a\b[^>]*?\bclass="GroupMention"[^>]*?>\Q$MentionsTriggerConfig->{Group}\E(.*?)<\/a>}sg
     );
-
-    # If plain text has additionally been given, use it to remove quoted text (lines starting
-    # with characters configured in Ticket::Frontend::Quote) and match the remaining
-    # contained mentions with those of the given HTML string.
-    #
-    # This avoids notification for mentions contained in quoted text.
-    #
-    # Mentions cannot be removed from quotations in HTML string because
-    # parsing is not reliably possible.
-    my $QuoteMarker = $ConfigObject->Get('Ticket::Frontend::Quote');
-    if (
-        IsStringWithData( $Param{PlainTextString} )
-        && IsStringWithData($QuoteMarker)
-        )
-    {
-        # Remove every line that starts with a quote marker.
-        ( my $PlainTextStringWithoutQuote = $Param{PlainTextString} ) =~ s{^\Q$QuoteMarker\E.*}{}mig;
-
-        # Drop found mentioned users that are not part of the plain text without quotes.
-        if ( defined $PlainTextStringWithoutQuote ) {
-            @MentionedUsers = grep { $PlainTextStringWithoutQuote =~ m{\[\d+\]\Q$MentionsTriggerConfig->{User}\E$_\b}m }
-                @MentionedUsers;
-        }
-
-        # Drop found mentioned groups that are not part of the plain text without quotes.
-        if ( defined $PlainTextStringWithoutQuote ) {
-            @MentionedGroups
-                = grep { $PlainTextStringWithoutQuote =~ m{\[\d+\]\Q$MentionsTriggerConfig->{Group}\E$_\b}m }
-                @MentionedGroups;
-        }
-    }
 
     # Filter out blocked groups
     @MentionedGroups = grep { !$Self->IsGroupBlocked( Group => $_ ) } @MentionedGroups;
@@ -629,7 +614,6 @@ sub GetMentionedUserIDsFromString {
             push @MentionedUsers, @{$GroupUsers};
         }
     }
-
     return [] if !@MentionedUsers;
 
     # Remove duplicate users but keep their order because of possible configured limit.
