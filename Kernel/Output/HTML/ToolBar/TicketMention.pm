@@ -57,10 +57,14 @@ sub Run {
 
     if ( IsArrayRefWithData($Mentions) ) {
 
-        # set mention count of all mentions
-        $MentionsCount = @{$Mentions};
-
         my @MentionedTicketIDs = map { $_->{TicketID} } @{$Mentions};
+
+        # get mention count of all mentions
+        $MentionsCount = $TicketObject->TicketSearch(
+            Result   => 'COUNT',
+            TicketID => \@MentionedTicketIDs,
+            UserID   => $Self->{UserID},
+        );
 
         # get mention count of unseen mentions
         $NewMentionsCount = $TicketObject->TicketSearch(
