@@ -457,12 +457,22 @@ Message
                 ID => $DynamicFieldID,
             );
 
-            $DynamicFieldBackendObject->ValueSet(
-                DynamicFieldConfig => $DynamicFieldGet,
-                ObjectID           => $TicketID,
-                Value              => $GetParam{$Key},
-                UserID             => $Param{InmailUserID},
-            );
+            if ($DynamicFieldGet->{FieldType} eq "Multiselect") {
+                my @Values = split(" ", $GetParam{$Key});
+                $DynamicFieldBackendObject->ValueSet(
+                    DynamicFieldConfig => $DynamicFieldGet,
+                    ObjectID           => $TicketID,
+                    Value              => \@Values,
+                    UserID             => $Param{InmailUserID},
+                );
+            } else {
+                $DynamicFieldBackendObject->ValueSet(
+                    DynamicFieldConfig => $DynamicFieldGet,
+                    ObjectID           => $TicketID,
+                    Value              => $GetParam{$Key},
+                    UserID             => $Param{InmailUserID},
+                );
+            }
 
             $Self->{CommunicationLogObject}->ObjectLog(
                 ObjectLogType => 'Message',
