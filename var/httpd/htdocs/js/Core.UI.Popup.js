@@ -514,10 +514,11 @@ Core.UI.Popup = (function (TargetNS) {
                     PopupFeatures = PopupProfiles[PopupProfile].WindowURLParams;
 
                     // Convert strings to numbers to avoid surprises like concatenation instead of sum.
-                    PopupProfiles[PopupProfile].Width = Number(PopupProfiles[PopupProfile].Width);
-                    PopupProfiles[PopupProfile].Height = Number(PopupProfiles[PopupProfile].Height);
-                    PopupProfiles[PopupProfile].Top = Number(PopupProfiles[PopupProfile].Top);
-                    PopupProfiles[PopupProfile].Left = Number(PopupProfiles[PopupProfile].Left);
+                    // Note: Don't do this for width/height because these can pe given as percentages.
+                    // PopupProfiles[PopupProfile].Width  = Number(PopupProfiles[PopupProfile].Width);
+                    // PopupProfiles[PopupProfile].Height = Number(PopupProfiles[PopupProfile].Height);
+                    PopupProfiles[PopupProfile].Top    = Number(PopupProfiles[PopupProfile].Top);
+                    PopupProfiles[PopupProfile].Left   = Number(PopupProfiles[PopupProfile].Left);
 
                     // get pixel or percent of width and height
                     // convert to a valid pixel value for window.open
