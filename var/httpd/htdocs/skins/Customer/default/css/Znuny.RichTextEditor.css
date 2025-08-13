@@ -11,6 +11,17 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
  * @section     RichTextEditor
  */
 
+/*
+    Use this css file to stylize RTE related visuals that excludes changes
+    that should be visible in article message. Proper usage for: toolbar, 
+    resizer, fullscreen mode, main editable node, other objects that are not
+    visible in article message. 
+*/
+
+:root {
+    --ck-border-radius: 15px !important;
+}
+
 /* revert fullscreen properties to default, those would be otherwise applied
 based on configuration for the view - that is invalid as fullscreen
 view should not be affected by it
@@ -87,4 +98,28 @@ make some content near border radius visible */
     display: block;
     flex-flow: unset;
     gap: unset;    
+}
+
+.ck.ck-rounded-corners .ck.ck-button,.ck > .ck.ck-rounded-corners .ck > a.ck.ck-button, .ck > .ck.ck-button.ck-rounded-corners, .ck > a.ck.ck-button.ck-rounded-corners{
+    border-radius:5px;
+}
+
+.ck-editor__top {
+    background-color: transparent !important;
+}
+
+.ck-toolbar__items > .ck-button:hover {
+    border-radius: 5px !important ;
+    padding: var(--ck-spacing-small);
+    cursor: pointer;
+}
+
+.ck-balloon-panel > .ck-balloon-rotator > .ck-balloon-rotator__content > .ck-link-form {
+    flex-flow: row;
+    gap: unset;
+}
+
+.ck-balloon-panel .ck-link-form .ck-labeled-field-view .ck-label,
+.ck-toolbar__items .ck-labeled-field-view .ck-label {
+    min-height: unset;
 }

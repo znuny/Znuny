@@ -53,19 +53,11 @@ sub Run {
         UserID => $Self->{UserID},
     ) // [];
 
-    my $MentionsCount;
     my $NewMentionsCount;
+    my $MentionsCount;
 
     if ( IsArrayRefWithData($Mentions) ) {
-
         my @MentionedTicketIDs = map { $_->{TicketID} } @{$Mentions};
-
-        # get mention count of all mentions
-        $MentionsCount = $TicketObject->TicketSearch(
-            Result   => 'COUNT',
-            TicketID => \@MentionedTicketIDs,
-            UserID   => $Self->{UserID},
-        );
 
         # get mention count of unseen mentions
         $NewMentionsCount = $TicketObject->TicketSearch(
@@ -77,10 +69,16 @@ sub Run {
                 MentionSeen => 0,
             }
         );
+
+        # get mention count of all mentions
+        $MentionsCount = $TicketObject->TicketSearch(
+            Result   => 'COUNT',
+            TicketID => \@MentionedTicketIDs,
+            UserID   => $Self->{UserID},
+        );
     }
 
     my $MentionsConfig = $ConfigObject->Get('Mentions') // {};
-
     if ( $MentionsConfig->{ToolbarCount} ) {
         $AdditionalParams{Mentions}->{Count}    = $MentionsCount;
         $AdditionalParams{NewMentions}->{Count} = $NewMentionsCount;
@@ -96,17 +94,6 @@ sub Run {
         = $AdditionalParams{NewMentions}->{Count} ? Translatable('Total new mentions') : Translatable('New mentions');
 
     my %Return;
-    if ($MentionsCount) {
-        $Return{ $Priority++ } = {
-            %{ $AdditionalParams{Mentions} },
-            Block       => $Param{Config}->{Block} || 'ToolBarItem',
-            Description => $MentionLabel,
-            Class       => $Param{Config}->{CssClass},
-            Icon        => $Icon,
-            Link        => $URL . 'Action=AgentTicketMentionView',
-            AccessKey   => $Param{Config}->{AccessKey} || '',
-        };
-    }
     if ($NewMentionsCount) {
         $Return{ $Priority++ } = {
             %{ $AdditionalParams{NewMentions} },
@@ -115,6 +102,17 @@ sub Run {
             Class       => $Param{Config}->{CssClassNew},
             Icon        => $Icon,
             Link        => $URL . 'Action=AgentTicketMentionView;Filter=New',
+            AccessKey   => $Param{Config}->{AccessKey} || '',
+        };
+    }
+    if ($MentionsCount) {
+        $Return{ $Priority++ } = {
+            %{ $AdditionalParams{Mentions} },
+            Block       => 'ToolBarItem',
+            Description => $MentionLabel,
+            Class       => $Param{Config}->{CssClass},
+            Icon        => $Icon,
+            Link        => $URL . 'Action=AgentTicketMentionView',
             AccessKey   => $Param{Config}->{AccessKey} || '',
         };
     }

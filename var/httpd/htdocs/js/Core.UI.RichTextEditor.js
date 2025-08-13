@@ -751,9 +751,9 @@ Core.UI.RichTextEditor = (function (TargetNS) {
 
             RTEContentCSSToApply = [
                 {
-                    Type : 'StyleTag',
-                    CSS : RTEContentCssDefault,
-                    Id : 'RTEContentCssDefaultGlobal',
+                    Type: 'File',
+                    CSS : RTEContentCssInternal,
+                    Id : 'RTEContentCssInternalGlobal'
                 },
                 {
                     Type: 'File',
@@ -761,22 +761,22 @@ Core.UI.RichTextEditor = (function (TargetNS) {
                     Id : 'RTEContentCssSkinGlobal'
                 },
                 {
-                    Type: 'File',
-                    CSS : RTEContentCssInternal,
-                    Id : 'RTEContentCssInternalGlobal'
-                }
+                    Type : 'StyleTag',
+                    CSS : RTEContentCssDefault,
+                    Id : 'RTEContentCssDefaultGlobal',
+                },
             ];
 
             $(RTEContentCSSToApply).each(function(Index, ContentData){
                 if(typeof ContentData['CSS'] === 'string' &&
                     ContentData['CSS'] !== '' && $('#' +ContentData['Id']).length === 0){
-                        if(ContentData['Type'] === 'StyleTag'){
+                        if(ContentData['Type'] === 'StyleTag' && $('style#' + ContentData['Id']).length === 0){
                             document.head.innerHTML +=
                             '<style id="' + ContentData['Id'] + '">' +
                                 '.ck.ck-content { ' + ContentData['CSS'] + ' }' +
                             '</style>'
                         }
-                        else if(ContentData['Type'] === 'File'){
+                        else if(ContentData['Type'] === 'File' && $('link#' + ContentData['Id']).length === 0){
                             document.head.innerHTML +=
                             '<link id="' + ContentData['Id'] + '" ' +
                             'rel="stylesheet" type="text/css" href="' +

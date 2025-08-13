@@ -17,6 +17,8 @@ use Kernel::System::VariableCheck qw(:all);
 use parent qw(Kernel::System::AsynchronousExecutor);
 use parent qw(Kernel::System::EventHandler);
 
+use MIME::Base64;
+
 our $ObjectManagerDisabled = 1;
 
 =head1 NAME
@@ -323,6 +325,27 @@ sub HandleResponse {
                         "Missing parameter '$Needed' on action '$Key'. Failed to execute!",
                 );
             }
+
+            #
+            # Base-64-decode article attachments.
+            #
+            my $Attachments = $Param{Data}->{$Key}->{Attachment};
+            if ( IsHashRefWithData($Attachments) ) {
+                $Attachments = [$Attachments];
+            }
+            if ( !IsArrayRefWithData($Attachments) ) {
+                $Attachments = [];
+            }
+
+            ATTACHMENT:
+            for my $Attachment ( @{$Attachments} ) {
+                next ATTACHMENT if !IsHashRefWithData($Attachment);
+                next ATTACHMENT if !IsStringWithData( $Attachment->{Content} );
+
+                $Attachment->{Content} = MIME::Base64::decode_base64( $Attachment->{Content} );
+            }
+
+            $Param{Data}->{$Key}->{Attachment} = $Attachments;
 
             $Success = $ArticleObject->ArticleCreate(
                 TicketID             => $Self->{RequestData}->{Ticket}->{TicketID},

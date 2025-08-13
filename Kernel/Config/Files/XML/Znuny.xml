@@ -2064,7 +2064,7 @@
                 <Item Key="AccessKey"></Item>
                 <Item Key="AccessKeyNew"></Item>
                 <Item Key="AccessKeyReached"></Item>
-                <Item Key="Priority">1030031</Item>
+                <Item Key="Priority">1030040</Item>
             </Hash>
         </Value>
     </Setting>
@@ -2639,7 +2639,7 @@
             </Array>
         </Value>
     </Setting>
-    <Setting Name="Frontend::ToolBarModule###191-Ticket::TicketMention" Required="0" Valid="1">
+    <Setting Name="Frontend::ToolBarModule###192-Ticket::TicketMention" Required="0" Valid="1">
         <Description Translatable="1">Agent interface notification module to show the number of mentions.</Description>
         <Navigation>Frontend::Agent::ToolBar</Navigation>
         <Value>
@@ -2652,7 +2652,7 @@
                 <Item Key="IconNew">fa fa-comment</Item>
                 <Item Key="IconReached">fa fa-comment</Item>
                 <Item Key="AccessKey"></Item>
-                <Item Key="Priority">1030040</Item>
+                <Item Key="Priority">1030050</Item>
             </Hash>
         </Value>
     </Setting>

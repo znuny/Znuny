@@ -604,15 +604,6 @@ sub Run {
                 $GetParam{$Key} = $ParamObject->GetParam( Param => $Key );
             }
 
-            # get time stamp based on user time zone
-            %Time = $LayoutObject->TransformDateSelection(
-                Year   => $ParamObject->GetParam( Param => 'Year' ),
-                Month  => $ParamObject->GetParam( Param => 'Month' ),
-                Day    => $ParamObject->GetParam( Param => 'Day' ),
-                Hour   => $ParamObject->GetParam( Param => 'Hour' ),
-                Minute => $ParamObject->GetParam( Param => 'Minute' ),
-            );
-
             if ( $GetParam{'MergeToSelection'} eq 'OptionMergeTo' ) {
                 $GetParam{'MergeToChecked'} = 'checked';
             }
@@ -672,6 +663,15 @@ sub Run {
                 }
 
                 if ( $StateData{TypeName} =~ /^pending/i ) {
+
+                    # get time stamp based on user time zone
+                    %Time = $LayoutObject->TransformDateSelection(
+                        Year   => $ParamObject->GetParam( Param => 'Year' ),
+                        Month  => $ParamObject->GetParam( Param => 'Month' ),
+                        Day    => $ParamObject->GetParam( Param => 'Day' ),
+                        Hour   => $ParamObject->GetParam( Param => 'Hour' ),
+                        Minute => $ParamObject->GetParam( Param => 'Minute' ),
+                    );
 
                     # create datetime object
                     my $PendingDateTimeObject = $Kernel::OM->Create(
@@ -1319,26 +1319,28 @@ sub Run {
                 }
 
                 # watch or unwatch tickets
-                if ( $GetParam{'Watch'} eq '1' ) {
-                    $Result = $TicketObject->TicketWatchSubscribe(
-                        TicketID    => $TicketID,
-                        WatchUserID => $Self->{UserID},
-                        UserID      => $Self->{UserID},
-                    );
+                if ( defined $GetParam{'Watch'} ) {
+                    if ( $GetParam{'Watch'} eq '1' ) {
+                        $Result = $TicketObject->TicketWatchSubscribe(
+                            TicketID    => $TicketID,
+                            WatchUserID => $Self->{UserID},
+                            UserID      => $Self->{UserID},
+                        );
 
-                    if ( !$Result ) {
-                        push @NonUpdatedTickets, $Ticket{TicketNumber};
+                        if ( !$Result ) {
+                            push @NonUpdatedTickets, $Ticket{TicketNumber};
+                        }
                     }
-                }
-                elsif ( $GetParam{'Watch'} eq '0' ) {
-                    $Result = $TicketObject->TicketWatchUnsubscribe(
-                        TicketID    => $TicketID,
-                        WatchUserID => $Self->{UserID},
-                        UserID      => $Self->{UserID},
-                    );
+                    elsif ( $GetParam{'Watch'} eq '0' ) {
+                        $Result = $TicketObject->TicketWatchUnsubscribe(
+                            TicketID    => $TicketID,
+                            WatchUserID => $Self->{UserID},
+                            UserID      => $Self->{UserID},
+                        );
 
-                    if ( !$Result ) {
-                        push @NonUpdatedTickets, $Ticket{TicketNumber};
+                        if ( !$Result ) {
+                            push @NonUpdatedTickets, $Ticket{TicketNumber};
+                        }
                     }
                 }
 

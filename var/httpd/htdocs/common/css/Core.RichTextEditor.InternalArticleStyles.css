@@ -18,34 +18,32 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
  * Edit this file to change styles of content for Agent and Customer.
  * Additionally styles will be appended in article body, so new visuals should also
  * be visible for any email clients when article is sent.
- * Fortunately Agent & Customer CSS file Core.Reset.css is not different which
- * makes it all be compatible between both interfaces. Some reset styles might be missing.
  */
 
-/* Apply CSS that is matched with all of Core.Reset.css rules. */
-
-.ck-content html, .ck-content body, .ck-content div, .ck-content span, .ck-content applet, .ck-content object, .ck-content iframe,
-.ck-content h1, .ck-content h2, .ck-content h3, .ck-content h4, .ck-content h5, .ck-content h6, .ck-content p, .ck-content blockquote, .ck-content pre,
-.ck-content a, .ck-content abbr, .ck-content acronym, .ck-content address, .ck-content big, .ck-content cite, .ck-content code,
-.ck-content del, .ck-content dfn, .ck-content em, .ck-content font, .ck-content img, .ck-content ins, .ck-content kbd, .ck-content q, .ck-content s, .ck-content samp,
-.ck-content small, .ck-content strike, .ck-content strong, .ck-content sub, .ck-content sup, .ck-content tt, .ck-content var,
-.ck-content dl, .ck-content dt, .ck-content dd, .ck-content ol, .ck-content ul, .ck-content li,
-.ck-content fieldset, .ck-content form, .ck-content label, .ck-content legend,
-.ck-content table, .ck-content caption, .ck-content tbody, .ck-content tfoot, .ck-content thead, .ck-content tr, .ck-content th, .ck-content td, .ck-content hr {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-    font-weight: inherit;
-    font-style: inherit;
-    font-size: inherit;
-    font-family: inherit;
-    vertical-align: baseline;
-    background-image: none;
-    direction: inherit;
+/* revert all ck-editor styles with low priority to overwrite default Znuny css styles */
+/* IE/Opera mini is not supported but in such case visual differences will be minor */
+.ck-content * {
+    all: revert;
 }
 
-body.ck-content {
+/*  Use body.ck.ck-content as pre/parent-selector to overwrite article content.
+    Use div.ck.ck-content as pre/parent-selector to overwrite rte component content styles.
+    Use .ck.ck-content as pre/parent-selector to overwrite both.
+
+    It is needed to adjust different content type as ckeditor does html conversion while 
+    filling it's textarea field.
+
+    Example 1
+        CKEditor content in the component: 
+            '<div class="ck-horizontal-line ck-widget" contenteditable="false"><hr> {some more html here} </div>'
+        is converted into textarea content:
+            '<hr>'
+
+        That leads to differences in visuals in the component and ticket article zoom view that can be 
+        adjusted here by using pre-selectors as described above.
+*/
+
+.ck.ck-content {
     line-height: 1;
     color: black;
     background: white;
@@ -54,48 +52,64 @@ body.ck-content {
     padding: 0;
 }
 
-.ck-content ol, .ck-content ul {
-    list-style: none;
-}
-
-.ck-content table {
+.ck.ck-content table {
     border-collapse: collapse;
     border-spacing: 0;
 }
 
-.ck-content caption, .ck-content th, .ck-content td {
+.ck.ck-content caption, .ck.ck-content th, .ck.ck-content td {
     text-align: left;
     font-weight: normal;
 }
 
-.ck-content blockquote:before, .ck-content blockquote:after, .ck-content q:before, .ck-content q:after {
+.ck.ck-content blockquote:before, .ck.ck-content blockquote:after, .ck.ck-content q:before, .ck.ck-content q:after {
     content: "";
 }
 
-.ck-content blockquote, .ck-content q {
+.ck.ck-content blockquote, .ck.ck-content q {
     quotes: "" "";
 }
 
-.ck-content a {
+.ck.ck-content a {
     text-decoration: none;
 }
 
-.ck-content strong {
+.ck.ck-content strong {
     font-weight: bold;
 }
 
-.ck-content select {
+.ck.ck-content select {
     margin-top: -1px;
+    margin-top: 2px;
 }
 
-.ck-content html, .ck-content body, .ck-content div, .ck-content span, .ck-content applet, .ck-content object, .ck-content iframe,
-.ck-content h1, .ck-content h2, .ck-content h3, .ck-content h4, .ck-content h5, .ck-content h6, .ck-content p, .ck-content blockquote, .ck-content pre,
-.ck-content a, .ck-content abbr, .ck-content acronym, .ck-content address, .ck-content big, .ck-content cite, .ck-content code,
-.ck-content del, .ck-content dfn, .ck-content em, .ck-content font, .ck-content img, .ck-content ins, .ck-content kbd, .ck-content q, .ck-content s, .ck-content samp,
-.ck-content small, .ck-content strike, .ck-content strong, .ck-content sub, .ck-content sup, .ck-content tt, .ck-content var,
-.ck-content dl, .ck-content dt, .ck-content dd, .ck-content ol, .ck-content ul, .ck-content li,
-.ck-content fieldset, .ck-content form, .ck-content label, .ck-content legend,
-.ck-content table, .ck-content caption, .ck-content tbody, .ck-content tfoot, .ck-content thead, .ck-content tr, .ck-content th, .ck-content td, .ck-content hr,
-.ck-content input, .ck-content textarea {
+.ck.ck-editor__editable_inline ol,.ck.ck-editor__editable_inline ul,.ck.ck-editor__editable_inline dl
+{
+    /* IE7: reset rtl list margin. (#7334) */
+    *margin-right: 0px;
+    /* Preserved spaces for list items with text direction different than the list. (#6249,#8049)*/
+    padding: 0 40px;
+}
+
+.ck.ck-editor .ck.ck-editor__editable_inline {
+    padding: 2px 10px 2px 10px  !important;
+}
+
+body.ck.ck-content hr{
+    margin:30px 0;
+    height:4px;
+    background:hsl(0, 0%, 87%);
+    border:0;
+}
+
+.ck.ck-content html, .ck.ck-content body, .ck.ck-content div, .ck.ck-content span, .ck.ck-content applet, .ck.ck-content object, .ck.ck-content iframe,
+.ck.ck-content h1, .ck.ck-content h2, .ck.ck-content h3, .ck.ck-content h4, .ck.ck-content h5, .ck.ck-content h6, .ck.ck-content p, .ck.ck-content blockquote, .ck.ck-content pre,
+.ck.ck-content a, .ck.ck-content abbr, .ck.ck-content acronym, .ck.ck-content address, .ck.ck-content big, .ck.ck-content cite, .ck.ck-content code,
+.ck.ck-content del, .ck.ck-content dfn, .ck.ck-content em, .ck.ck-content font, .ck.ck-content img, .ck.ck-content ins, .ck.ck-content kbd, .ck.ck-content q, .ck.ck-content s, .ck.ck-content samp,
+.ck.ck-content small, .ck.ck-content strike, .ck.ck-content strong, .ck.ck-content sub, .ck.ck-content sup, .ck.ck-content tt, .ck.ck-content var,
+.ck.ck-content dl, .ck.ck-content dt, .ck.ck-content dd, .ck.ck-content ol, .ck.ck-content ul, .ck.ck-content li,
+.ck.ck-content fieldset, .ck.ck-content form, .ck.ck-content label, .ck.ck-content legend,
+.ck.ck-content table, .ck.ck-content caption, .ck.ck-content tbody, .ck.ck-content tfoot, .ck.ck-content thead, .ck.ck-content tr, .ck.ck-content th, .ck.ck-content td, .ck.ck-content hr,
+.ck.ck-content input, .ck.ck-content textarea {
     box-sizing: border-box;
 }

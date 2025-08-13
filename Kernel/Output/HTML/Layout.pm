@@ -6449,9 +6449,10 @@ sub SetRichTextParameters {
             '|',               'undo',             'redo',              '|',
             'selectAll',
             '-',
-            'heading',       'fontFamily',          'fontSize',     '|',
+            'blockQuote',    '|',
+            'heading',       'fontFamily', 'fontSize', '|',
             'fontColor',     'fontBackgroundColor', 'removeFormat', '|',
-            'sourceEditing', 'specialCharacters',   '|',            'fullscreen',
+            'sourceEditing', 'specialCharacters', '|', 'fullscreen',
         );
         @ToolbarWithoutImage = (
             'bold',            'italic',           'underline',         'strikethrough',
@@ -6462,9 +6463,10 @@ sub SetRichTextParameters {
             '|',               'undo',             'redo',              '|',
             'selectAll',
             '-',
-            'heading',       'fontFamily',          'fontSize',     '|',
+            'blockQuote',    '|',
+            'heading',       'fontFamily', 'fontSize', '|',
             'fontColor',     'fontBackgroundColor', 'removeFormat', '|',
-            'sourceEditing', 'specialCharacters',   '|',            'fullscreen',
+            'sourceEditing', 'specialCharacters', '|', 'fullscreen',
         );
     }
 
@@ -6609,9 +6611,10 @@ sub CustomerSetRichTextParameters {
             '|',               'undo',             'redo',              '|',
             'selectAll',
             '-',
-            'heading',       'fontFamily',          'fontSize',     '|',
+            'blockQuote',    '|',
+            'heading',       'fontFamily', 'fontSize', '|',
             'fontColor',     'fontBackgroundColor', 'removeFormat', '|',
-            'sourceEditing', 'specialCharacters',   '|',            'fullscreen',
+            'sourceEditing', 'specialCharacters', '|', 'fullscreen',
         );
         @ToolbarWithoutImage = (
             'bold',            'italic',           'underline',         'strikethrough',
@@ -6622,9 +6625,10 @@ sub CustomerSetRichTextParameters {
             '|',               'undo',             'redo',              '|',
             'selectAll',
             '-',
-            'heading',       'fontFamily',          'fontSize',     '|',
+            'blockQuote',    '|',
+            'heading',       'fontFamily', 'fontSize', '|',
             'fontColor',     'fontBackgroundColor', 'removeFormat', '|',
-            'sourceEditing', 'specialCharacters',   '|',            'fullscreen',
+            'sourceEditing', 'specialCharacters', '|', 'fullscreen',
         );
     }
 
