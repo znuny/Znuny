@@ -154,12 +154,13 @@ sub PluginFunction {
     }
 
     my $PluginObject   = $Self->{Plugins}->{ $Param{PluginKey} }->{Object};
+    my $PluginModule   = $Self->{Plugins}->{ $Param{PluginKey} }->{Module};
     my $PluginFunction = $Param{PluginFunction};
 
-    if ( $MainObject->Require( $PluginObject, Silent => 1 ) ) {
+    if ( !$MainObject->Require( $PluginModule, Silent => 1 ) ) {
         $LogObject->Log(
             Priority => 'error',
-            Message  => "Sorry, can't load $PluginObject!",
+            Message  => "Sorry, can't load $PluginModule!",
         );
         return;
     }
@@ -168,7 +169,7 @@ sub PluginFunction {
     if ( !$Exists ) {
         $LogObject->Log(
             Priority => 'notice',
-            Message  => "Sorry, can't load function $PluginFunction in $PluginObject!",
+            Message  => "Sorry, can't load function $PluginFunction in $PluginModule!",
         );
         return;
     }
