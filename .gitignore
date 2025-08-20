@@ -44,6 +44,13 @@ var/cron/*
 .viminfo
 .bash*
 
+# Packages
+.mysql_history
+doc/en/
+doc/de/
+development/
+development/webservices
+
 # Fred
 Fred.sopm
 CHANGES-Fred
