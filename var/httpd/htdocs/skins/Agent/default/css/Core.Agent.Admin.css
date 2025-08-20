@@ -93,7 +93,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 .ItemListGrid > li > a:hover > .Favourite,
 .ItemListGrid > li.IsFavourite > a > .Favourite {
-    display: flex !important;
+    display: none !important;
 }
 
 .ItemListGrid > li > a > .Favourite.Clicked .fa-star {
