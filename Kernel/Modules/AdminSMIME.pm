@@ -173,11 +173,6 @@ sub Run {
                     }
                 }
             }
-
-            if ( defined $Attributes{Private} && $Attributes{Private} eq 'Yes' ) {
-                %Result = $SMIMEObject->PrivateRemove( Filename => $Filename );
-                push @Result, \%Result if %Result;
-            }
         }
 
         my $Output = $LayoutObject->Header();

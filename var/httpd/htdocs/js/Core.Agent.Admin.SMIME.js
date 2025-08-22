@@ -45,7 +45,7 @@ Core.Agent.Admin.SMIME = (function (TargetNS) {
 
         // Bind click function to remove button
         $('#SMIME a.TrashCan').on('click', function () {
-            if (window.confirm(Core.Language.Translate('Do you really want to delete this certificate?'))) {
+            if (window.confirm(Core.Language.Translate('Do you really want to delete this item?'))) {
                 return true;
             }
             return false;
