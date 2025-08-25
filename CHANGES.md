@@ -1,3 +1,6 @@
+# 6.5.17 2025-??-??
+ - 2025-08-25 Fixed: Updated Google Mail OAuth2 token configuration template to enable Google's consent dialog when obtaining first token.
+
 # 6.5.16 2025-08-20
  - 2025-08-18 Fixed: Calendar bug in Kernel/System/Calendar/Plugin.pm uninitialized value and fixed module check for calendar plugin.
  - 2025-08-13 CVE-2025-3573: Updated jquery-validate to 1.21.0.
