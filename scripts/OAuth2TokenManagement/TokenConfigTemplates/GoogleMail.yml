@@ -1,5 +1,6 @@
 ---
 - Config:
+    AuthFlow: AuthorizationCode
     ClientID:
     ClientSecret:
     Requests:

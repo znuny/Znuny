@@ -10,6 +10,8 @@ package Kernel::System::OAuth2TokenConfig;
 use strict;
 use warnings;
 
+use utf8;
+
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
@@ -454,6 +456,43 @@ sub IsOAuth2TokenConfigInUse {
 
         return 1;
     }
+
+    return;
+}
+
+=head2 IsAuthFlowSupported()
+
+    Checks if the given auth flow is supported.
+
+    my $AuthFlowIsSupported = $OAuth2TokenConfigObject->IsAuthFlowSupported(
+        AuthFlow => 'AuthorizationCode', # or 'ClientCredentials'
+    );
+
+    Returns true value if given auth flow is supported.
+
+=cut
+
+sub IsAuthFlowSupported {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw( AuthFlow )) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    my %SupportedAuthFlows = (
+        AuthorizationCode => 1,
+        ClientCredentials => 1,
+    );
+    return 1 if $SupportedAuthFlows{ $Param{AuthFlow} };
 
     return;
 }

@@ -167,7 +167,7 @@ sub PluginFunction {
     if ( !$Exists ) {
         $LogObject->Log(
             Priority => 'notice',
-            Message  => "Sorry, can't load function $PluginFunction in $PluginObject!",
+            Message  => "Sorry, can't load function $PluginFunction in $PluginModule!",
         );
         return;
     }

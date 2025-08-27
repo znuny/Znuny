@@ -1171,7 +1171,6 @@ Core.UI.RichTextEditor = (function (TargetNS) {
             'FontColor',
             'FontFamily',
             'FontSize',
-            'FullPage',
             'Fullscreen',
             'GeneralHtmlSupport',
             'Heading',

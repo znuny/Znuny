@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.852993383895433;
+    $Self->{Completeness}        = 0.852281890017739;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1393,7 +1393,7 @@ sub Data {
         'Delete account' => 'Удалить учётную запись',
         'Do you really want to delete this mail account?' => 'Вы действительно хотите удалить эту почтовую учётную запись?',
         'Example: mail.example.com' => 'Пример: mail.example.com',
-        'IMAP Folder' => 'Папка IMAP',
+        'Folder' => '',
         'Only modify this if you need to fetch mail from a different folder than INBOX.' =>
             'Измените только в том случае, если нужно забирать почту из папки, отличной от INBOX.',
         'Trusted' => 'Доверенная',
@@ -1459,6 +1459,7 @@ sub Data {
         'URL for authorization code' => 'URL для получения кода авторизации',
         'URL for token by authorization code' => 'URL для получения ключа доступа (token) по коду авторизации',
         'URL for token by refresh token' => 'URL для получения ключа доступа (token) по ключу обновления (refresh token)',
+        'URL for token by client credentials' => '',
         'Access token scope' => 'Область действия ключа (token)',
         'Template' => 'Шаблон',
         'This is the template that was used to create this OAuth2 token configuration.' =>
@@ -1482,6 +1483,7 @@ sub Data {
         'Import token configurations' => 'Импорт конфигураций ключей (tokens)',
         'Export token configurations' => 'Экспорт конфигураций ключей (tokens)',
         'OAuth2 token configurations' => 'Конфигурации OAuth2 ключей (tokens)',
+        'Auth flow' => '',
         'Token status' => 'Статус ключа (token)',
         'Refresh token status' => 'Статус ключа обновления (refresh token)',
         'Validity of token configuration' => 'Актуальность конфигурации ключа',
@@ -1496,6 +1498,7 @@ sub Data {
         'Refresh token is valid (without expiration date).' => 'Ключ обновления (refresh token) действительный (бессрочный).',
         'No refresh token was requested yet.' => 'Ключ обновления (refresh token) еще не был запрошен.',
         'Refresh token request is not configured.' => 'Запрос ключа обновления (refresh token) не настроен.',
+        'Not available for this auth flow.' => '',
         'Request new token' => 'Запросить новый ключ (token)',
         'Delete this token and its configuration.' => 'Удалить этот ключ (token) и его конфигурацию.',
 
@@ -3910,6 +3913,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminOAuth2TokenManagement.pm
         'Authorization code parameters not found.' => '',
+        'OAuth2 token error: %s' => '',
 
         # Perl Module: Kernel/Modules/AdminPGP.pm
         'PGP environment is not working. Please check log for more info!' =>
@@ -8067,11 +8071,11 @@ sub Data {
             '',
         'Defines the separator for export csv files.' => '',
         'Defines the quote for export csv files.' => '',
-        'Define a process category.' => '',
         'Frontend module registration (disable ticket processes screen if no process available) for Agent.' =>
             '',
         'Defines the LinkTarget for AgentTicketProcessCategory.' => '',
         'Defines the LinkTarget for CustomerTicketProcessCategory.' => '',
+        'Define a process category.' => '',
         'Define a process link target.' => '',
         'Define a process icon.' => '',
         'Defines which ContentTypes are permitted for the attachment preview.' =>
@@ -9119,12 +9123,12 @@ Thanks for your help!
         'Process Management Path GUI' => 'Управление процессами Интерфейс Схема',
         'Process Management Transition Action GUI' => 'Управление процессами Интерфейс Действия Переходов',
         'Process Management Transition GUI' => 'Управление процессами Интерфейс Переходы',
-        'Process Ticket Catalog' => '',
-        'Process Ticket Catalog.' => '',
+        'Process Ticket Category.' => '',
         'Process Ticket Category: Define a process category.' => '',
         'Process Ticket Category: Define a process icon.' => '',
         'Process Ticket Category: Define a process link target.' => '',
         'Process Ticket.' => 'Процессная заявка.',
+        'Process ticket category' => '',
         'ProcessID' => 'ProcessID',
         'Processes & Automation' => 'Процессы и автоматизация',
         'Provides a matrix overview of the tickets per state per queue' =>

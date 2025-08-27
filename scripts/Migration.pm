@@ -230,6 +230,10 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Znuny::UpgradeDatabaseStructure',
         },
         {
+            Message => 'Alter old entry to avoid conflicts with MariaDB. (AjaxAttachment -> AJAXAttachment)',
+            Module  => 'scripts::Migration::Znuny::UpgradeAJAXAttachmentSysConfig',
+        },
+        {
             Message => 'Migrate database to utf8mb4',
             Module  => 'scripts::Migration::Znuny::MigrateUTF8MB4',
         },

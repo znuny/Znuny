@@ -121,15 +121,11 @@ sub _DisplayProcessCategory {
     ) || [];
 
     my $CategoryData = $ProcessPreferences->{'001-TicketProcessCategory-Category'}->{Data} || {};
-    my %ProcessList  = reverse %{ $Param{ProcessList} };
-
     my %CategoryCount;
     my @Process;
 
     PROCESSENTITY:
-    for my $ProcessEntity ( sort keys %ProcessList ) {
-
-        my $ProcessEntityID = $ProcessList{$ProcessEntity};
+    for my $ProcessEntityID ( sort keys %{ $Param{ProcessList} } ) {
 
         my $ProcessData = $ProcessObject->ProcessGet(
             EntityID => $ProcessEntityID,
@@ -187,8 +183,7 @@ sub _DisplayProcessCategory {
             for my $CategoryID ( @{ $ProcessData->{Category} } ) {
                 next CATEGORYID if !$CategoryData->{$CategoryID};
 
-                $CategoryCount{ $CategoryData->{$CategoryID} }++;
-
+                $CategoryCount{$CategoryID}++;
                 my @CategoryStructure = split /::/, $CategoryData->{$CategoryID};
 
                 $Category .= ', ' if IsStringWithData($Category);
@@ -200,7 +195,15 @@ sub _DisplayProcessCategory {
             }
         }
         else {
-            $Category = $ProcessData->{Category};
+            my $CategoryID = $ProcessData->{Category};
+            $CategoryCount{$CategoryID}++;
+
+            my @CategoryStructure = split /::/, $CategoryData->{$CategoryID};
+            $Category .= ', ' if IsStringWithData($Category);
+
+            my $CategoryTranslation
+                = $LayoutObject->{LanguageObject}->Translate( $CategoryStructure[-1] ) || $CategoryStructure[-1];
+            $Category .= $CategoryTranslation;
         }
 
         my $IsFavourite = grep { $_ eq $ProcessData->{ID} } @{$Favourites};
@@ -221,6 +224,7 @@ sub _DisplayProcessCategory {
         );
     }
 
+    CATEGORY:
     for my $CategoryID ( sort keys %{$CategoryData} ) {
         my @CategoryStructure = split /::/, $CategoryData->{$CategoryID};
         my $Placeholder;
@@ -238,8 +242,15 @@ sub _DisplayProcessCategory {
             $Placeholder .= '-';
         }
 
-        my $CategoryCount = $CategoryCount{ $CategoryData->{$CategoryID} };
+        my $CategoryCount = $CategoryCount{$CategoryID};
         my $Category      = $CategoryStructure[-1];
+
+        # Check if this category or its subcategories contain items
+        next CATEGORY if !$Self->_HasCategoryItemsOrChildItems(
+            CategoryID    => $CategoryID,
+            CategoryData  => $CategoryData,
+            CategoryCount => \%CategoryCount,
+        );
 
         $LayoutObject->Block(
             Name => 'Category',
@@ -288,6 +299,40 @@ sub _GetIcon {
 
     return %Icon;
 
+}
+
+# Check if a category or any of its subcategories contain items
+sub _HasCategoryItemsOrChildItems {
+    my ( $Self, %Param ) = @_;
+
+    my $CategoryID    = $Param{CategoryID};
+    my $CategoryData  = $Param{CategoryData};
+    my $CategoryCount = $Param{CategoryCount};
+
+    # Direct items in this category
+    return 1 if $CategoryCount->{$CategoryID};
+
+    # Check all subcategories
+    for my $ChildCategoryID ( sort keys %{$CategoryData} ) {
+        my $ChildCategoryPath      = $CategoryData->{$ChildCategoryID};
+        my @ChildCategoryStructure = split /::/, $ChildCategoryPath;
+
+        # If this category is a parent of the child category
+        if ( scalar @ChildCategoryStructure > 1 ) {
+            my $ParentPath = join '::', @ChildCategoryStructure[ 0 .. $#ChildCategoryStructure - 1 ];
+            if ( $ParentPath eq $CategoryData->{$CategoryID} ) {
+
+                # Recursively check if the child category has items
+                return 1 if $Self->_HasCategoryItemsOrChildItems(
+                    CategoryID    => $ChildCategoryID,
+                    CategoryData  => $CategoryData,
+                    CategoryCount => $CategoryCount,
+                );
+            }
+        }
+    }
+
+    return 0;
 }
 
 1;

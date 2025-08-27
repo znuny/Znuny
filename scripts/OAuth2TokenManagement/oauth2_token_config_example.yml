@@ -1,5 +1,6 @@
 ---
 - Config:
+    AuthFlow: AuthorizationCode
     ClientID: 1111
     ClientSecret: 1111
     Requests:
@@ -59,8 +60,9 @@
     Notifications:
         NotifyOnExpiredToken: 1
         NotifyOnExpiredRefreshToken: 1
-  Name: Microsoft Outlook (example@outlook.com)
+  Name: Microsoft Outlook auth code flow (example@outlook.com)
 - Config:
+    AuthFlow: AuthorizationCode
     ClientID: 2222.apps.googleusercontent.com
     ClientSecret: 2222
     Requests:
@@ -115,5 +117,29 @@
     Notifications:
         NotifyOnExpiredToken: 1
         NotifyOnExpiredRefreshToken: 1
-  Name: Google Mail (example@gmail.com)
-
+  Name: Google Mail auth code flow (example@gmail.com)
+- Config:
+    AuthFlow: ClientCredentials
+    ClientID: 3333
+    ClientSecret: 3333
+    Requests:
+      TokenByClientCredentials:
+        Request:
+          AutofilledParametersMapping:
+            client_id: ClientID
+            client_secret: ClientSecret
+            scope: Scope
+          Parameters:
+            grant_type: client_credentials
+          URL: https://login.microsoftonline.com/common/oauth2/v2.0/token
+        Response:
+          ParametersMapping:
+            access_token: Token
+            error: ErrorMessage
+            error_codes: ErrorCode
+            error_description: ErrorDescription
+            expires: TokenExpirationDate
+    Scope: https://outlook.office.com/IMAP.AccessAsUser.All https://outlook.office.com/POP.AccessAsUser.All https://outlook.office.com/SMTP.Send offline_access
+    Notifications:
+      NotifyOnExpiredToken: 0
+  Name: Microsoft Outlook credentials flow (example@outlook.com)

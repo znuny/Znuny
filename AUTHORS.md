@@ -142,6 +142,6 @@ The following persons contributed to Znuny:
 * Walter Souto <walter.souto@saude.go.gov.br>
 * Wojciech Kuchta <klapi85@gmail.com>
 * Yuri Myasoedov <ymyasoedov@yandex.ru>
-* Zigfield Trotter <142500923+ZTrotter@users.noreply.github.com>
+* Zigfield Trotter <zt@znuny.com>
 * Znuny Weblate <do-not-reply@znuny.com>
 * Zoran Ilibasic <zilibasic@s7designcreative.com>

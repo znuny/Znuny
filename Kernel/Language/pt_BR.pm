@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.842343069227045;
+    $Self->{Completeness}        = 0.84163844541203;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1385,7 +1385,7 @@ sub Data {
         'Delete account' => 'Excluir conta',
         'Do you really want to delete this mail account?' => 'Você realmente quer excluir esta conta de e-mail?',
         'Example: mail.example.com' => 'Exemplo: mail.exemplo.com',
-        'IMAP Folder' => 'Pasta IMAP',
+        'Folder' => '',
         'Only modify this if you need to fetch mail from a different folder than INBOX.' =>
             'Apenas modifique aqui se você deseja obter e-mails de uma pasta diferente que INBOX.',
         'Trusted' => 'Confiável',
@@ -1451,6 +1451,7 @@ sub Data {
         'URL for authorization code' => '',
         'URL for token by authorization code' => '',
         'URL for token by refresh token' => '',
+        'URL for token by client credentials' => '',
         'Access token scope' => '',
         'Template' => 'Modelo',
         'This is the template that was used to create this OAuth2 token configuration.' =>
@@ -1474,6 +1475,7 @@ sub Data {
         'Import token configurations' => 'Importar configurações do token',
         'Export token configurations' => 'Exportar configurações do token',
         'OAuth2 token configurations' => 'Configurações do token OAuth2',
+        'Auth flow' => '',
         'Token status' => 'Status do token',
         'Refresh token status' => 'Atualizar status do token',
         'Validity of token configuration' => 'Validade da configuração do token',
@@ -1488,6 +1490,7 @@ sub Data {
         'Refresh token is valid (without expiration date).' => '',
         'No refresh token was requested yet.' => '',
         'Refresh token request is not configured.' => '',
+        'Not available for this auth flow.' => '',
         'Request new token' => 'Solicitar novo token',
         'Delete this token and its configuration.' => 'Apagar este token e suas configurações.',
 
@@ -3902,6 +3905,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminOAuth2TokenManagement.pm
         'Authorization code parameters not found.' => '',
+        'OAuth2 token error: %s' => '',
 
         # Perl Module: Kernel/Modules/AdminPGP.pm
         'PGP environment is not working. Please check log for more info!' =>
@@ -8059,11 +8063,11 @@ sub Data {
             '',
         'Defines the separator for export csv files.' => '',
         'Defines the quote for export csv files.' => '',
-        'Define a process category.' => '',
         'Frontend module registration (disable ticket processes screen if no process available) for Agent.' =>
             '',
         'Defines the LinkTarget for AgentTicketProcessCategory.' => '',
         'Defines the LinkTarget for CustomerTicketProcessCategory.' => '',
+        'Define a process category.' => '',
         'Define a process link target.' => '',
         'Define a process icon.' => '',
         'Defines which ContentTypes are permitted for the attachment preview.' =>
@@ -9111,12 +9115,12 @@ Obrigado pela ajuda!
         'Process Management Path GUI' => 'Interface de Gerenciamento de Caminho de Processo',
         'Process Management Transition Action GUI' => 'Interface de Gerenciamento de Atividade de Transição de Processo',
         'Process Management Transition GUI' => 'Interface de Gerenciamento de Transição de Processo',
-        'Process Ticket Catalog' => '',
-        'Process Ticket Catalog.' => '',
+        'Process Ticket Category.' => '',
         'Process Ticket Category: Define a process category.' => '',
         'Process Ticket Category: Define a process icon.' => '',
         'Process Ticket Category: Define a process link target.' => '',
         'Process Ticket.' => '',
+        'Process ticket category' => '',
         'ProcessID' => 'ID de Processo',
         'Processes & Automation' => 'Processos e Automação',
         'Provides a matrix overview of the tickets per state per queue' =>

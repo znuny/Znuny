@@ -1,5 +1,6 @@
 ---
 - Config:
+    AuthFlow: AuthorizationCode
     ClientID: 1111
     ClientSecret: 1111
     Requests:
@@ -61,6 +62,7 @@
         NotifyOnExpiredRefreshToken: 1
   Name: Microsoft Outlook (example@outlook.com)
 - Config:
+    AuthFlow: AuthorizationCode
     ClientID: 2222.apps.googleusercontent.com
     ClientSecret: 2222
     Requests:

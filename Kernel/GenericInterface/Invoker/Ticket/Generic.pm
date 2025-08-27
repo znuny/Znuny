@@ -23,7 +23,11 @@ our $ObjectManagerDisabled = 1;
 
 =head1 NAME
 
-Kernel::GenericInterface::Invoker::Ticket::Generic
+Kernel::GenericInterface::Invoker::Ticket::Generic - Generic Interface Invoker for ticket-related requester calls
+
+=head1 DESCRIPTION
+
+Invoker that prepares requests and processes responses for ticket-related Generic Interface requester calls.
 
 =head1 PUBLIC INTERFACE
 
@@ -58,15 +62,23 @@ prepare the invocation of the configured remote web service.
 
     my $Result = $InvokerObject->PrepareRequest(
         Data => {                               # data payload
-            ...
+            TicketID                 => 1,      # optional
+            ArticleID                => 7,      # optional
+            GetAllArticleAttachments => 1,      # optional, 0 as default. 0|1,
         },
+
+        InvokerName => 'Generic',
+        Webservice  => { ... },                 # optional
     );
+
+Returns:
 
     $Result = {
         Success         => 1,                   # 0 or 1
-        ErrorMessage    => '',                  # in case of error
-        Data            => {                    # data payload after Invoker
-            ...
+        ErrorMessage    => '...',               # in case of error
+        Data => {
+            Ticket => { ... },
+            Event  => { ... },
         },
     };
 
@@ -177,6 +189,8 @@ handle response data of the configured remote web service.
             ...
         },
     );
+
+Returns:
 
     $Result = {
         Success         => 1,                   # 0 or 1
@@ -455,6 +469,12 @@ sub HandleResponse {
     };
 }
 
+=head2 HandleError()
+
+Calls HandleResponse() with ResponseSuccess = 0 and the provided Data.
+
+=cut
+
 sub HandleError {
     my ( $Self, %Param ) = @_;
 
@@ -467,3 +487,7 @@ sub HandleError {
 }
 
 1;
+
+=head1 SEE ALSO
+
+L<Kernel::GenericInterface::Invoker>
