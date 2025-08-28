@@ -24939,3 +24939,31 @@ msgstr ""
 msgid "Toggle block comment"
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
+msgid "Folder"
+msgstr ""
+
+#. SysConfig
+msgid "Process Ticket Category."
+msgstr ""
+
+#. SysConfig
+msgid "Process ticket category"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
+msgid "URL for token by client credentials"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
+msgid "Auth flow"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
+msgid "Not available for this auth flow."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminOAuth2TokenManagement.pm
+msgid "OAuth2 token error: %s"
+msgstr ""
+

@@ -46,12 +46,24 @@ sub _GetMigrateSysConfigSettings {
     my ( $Self, %Param ) = @_;
 
     my %MigrateSysConfigSettings = (
-
-        "Frontend::Module###AjaxAttachment" => {
+        'Frontend::Module###AjaxAttachment' => {
             UpdateName => 'Frontend::Module###AJAXAttachment'
         },
-        "CustomerFrontend::Module###AjaxAttachment" => {
+        'CustomerFrontend::Module###AjaxAttachment' => {
             UpdateName => 'CustomerFrontend::Module###AJAXAttachment'
+        },
+
+        "Loader::Agent::CommonJS###000-Framework" => {
+            UpdateEffectiveValue => {
+                'thirdparty/jquery-validate-1.16.0/jquery.validate.js' =>
+                    'thirdparty/jquery-validation-1.21.0/jquery.validate.js',
+            },
+        },
+        "Loader::Customer::CommonJS###000-Framework" => {
+            UpdateEffectiveValue => {
+                'thirdparty/jquery-validate-1.16.0/jquery.validate.js' =>
+                    'thirdparty/jquery-validation-1.21.0/jquery.validate.js',
+            },
         },
     );
 

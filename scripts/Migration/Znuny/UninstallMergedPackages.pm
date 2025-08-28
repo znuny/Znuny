@@ -53,12 +53,14 @@ sub Run {
         'Znuny4OTRS-ArticleColors',
         'Znuny-CustomPriorityColor',
         'Znuny4OTRS-CustomPriorityColor',
+        'Znuny-OAuth2ClientCredentialsFlow',
         'Znuny-DynamicFieldAdminAutoConfig',
         'Znuny4OTRS-DynamicFieldAdminAutoConfig',
         'Znuny-MarkTicketSeenUnseen',
         'Znuny4OTRS-MarkTicketSeenUnseen',
         'Znuny-Translations',
         'Znuny4OTRS-Translations',
+        'Znuny-MSGraphMail',
     );
 
     PACKAGENAME:

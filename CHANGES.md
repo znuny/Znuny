@@ -1,4 +1,11 @@
-# 7.2.1 2025-??-??
+# 7.2.2 2025-xx-xx
+ - 2025-08-25 Fixed: UpgradeAJAXAttachmentSysConfig - Problems with Updating PostgreSQL and Oracle.
+ - 2025-08-25 Fixed: When using Dark Skin, article colors should not invert.
+
+# 7.2.1 2025-08-20
+ - 2025-08-13 CVE-2025-3573: Updated jquery-validate to 1.21.0.
+ - 2025-08-18 Fixed: Calendar bug in Kernel/System/Calendar/Plugin.pm uninitialized value and fixed module check for calendar plugin.
+ - 2025-08-12 Disabled CKEditor5 "FullPage" plugin due to causing problems with "empty" text.
  - 2025-08-11 Fixed: Popup profiles with percentage values for width and height not working correctly. Thanks for reporting to Tim Püttmanns (maxence). [#634](https://github.com/znuny/Znuny/issues/634)
  - 2025-08-11 Fixed: Changed "Blockquote" CKEditor feature toolbar icon to be rendered also when enhanced mode of editor is disabled.
  - 2025-08-11 Fixed: Date/time of state change in AgentTicketBulk will now only be checked if a (pending) state has been selected instead of logging an error. Also fixed similar check for "watch ticket" selection. Thanks for reporting to @BuilderNSV. [#685](https://github.com/znuny/Znuny/issues/685)
@@ -28,6 +35,7 @@
  - 2025-06-23 Added and updated FormElements templates.
  - 2025-06-23 Added Download and Preview function to Kernel/Modules/AJAXAttachment.pm.
  - 2025-06-23 Fixed: The agent toolbar does not remain expanded.
+ - 2025-06-17 Integrated package Znuny-MSGraphMail.
  - 2025-06-17 Fixed AgentTicketBulk MarkTicketsAs selection- MarkTicketsAsSeen and MarkTicketsAsUnseen can be set simultaneously. This makes handling complicated and unnecessarily confusing.
  - 2025-06-17 Fixed: Added missing parameter TwoFactorToken in Kernel::GenericInterface::Operation::Session::Common->CreateSessionID() to Perldoc.
  - 2025-06-17 Improve error message when exiting due to PackageIsDownloadable = 0. Thanks for reporting to Darko (@dpalic). [#684](https://github.com/znuny/Znuny/issues/684)
@@ -59,6 +67,7 @@
  - 2025-04-30 Fixed: OTRS_CUSTOMER_REALNAME placeholder expansion in AgentTicketMerge.
  - 2025-03-26 Fixed tree view icon not showing up for dynamic field types Dropdown and Multiselect.
  - 2025-03-25 Generic interface operation TicketUpdate now checks detailed ticket permissions of customer user.
+ - 2024-09-03 Added client credentials flow to OAuth2 token management.
  - 2024-07-30 Auto responses, notifications, processes, salutations, signatures and standard templates can now all be deleted, copied, imported and exported.
 
 # 7.1.7 2025-04-30
@@ -453,6 +462,37 @@
  - 2022-08-22 Core.UI.InputFields.js - Changed the behaviour of the Core.UI.InputFields.js. Now no fields are automatically enlarged or reduced.
  - 2022-08-08 Admin - Added counter of AdminSettingPages per widget and additional focus by filter.
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
+
+# 6.5.16 2025-08-20
+ - 2025-08-18 Fixed: Calendar bug in Kernel/System/Calendar/Plugin.pm uninitialized value and fixed module check for calendar plugin.
+ - 2025-08-13 CVE-2025-3573: Updated jquery-validate to 1.21.0.
+ - 2025-08-11 Fixed: Popup profiles with percentage values for width and height not working correctly. Thanks for reporting to Tim Püttmanns (maxence). [#634](https://github.com/znuny/Znuny/issues/634)
+ - 2025-08-11 Fixed: Date/time of state change in AgentTicketBulk will now only be checked if a (pending) state has been selected instead of logging an error. Thanks for reporting to @BuilderNSV. [#685](https://github.com/znuny/Znuny/issues/685)
+ - 2025-08-11 Fixed: Generic interface invoker Ticket::Generic now always base-64-decodes article attachment content of the response. Thanks for reporting to @lis975. [#694](https://github.com/znuny/Znuny/issues/694)
+ - 2025-07-25 Fixed: Order of toolbar icons for mentioned tickets (new and total) differed from other toolbar icons.
+ - 2025-07-25 Fixed: Wrong priority of ticket owner toolbar could lead to the icon(s) not being shown.
+ - 2025-07-24 Fixed: An archived ticket is shown in mentions list (AgentTicketMentionView). Archived tickets should not be counted in the mention icon, nor be visible in AgentTicketMentionView. Thanks for reporting to @Fainsy. [#620](https://github.com/znuny/Znuny/issues/620)
+ - 2025-07-21 Added missing value 'UserNavBarItemsOrder' to AgentPreferences::AJAXUpdate::AllowedKeys###Framework.
+ - 2025-07-21 Added missing SysConfig settings `SortBy::Default` and `Order::Default`.
+ - 2025-07-21 Fixed: CKEDITOR is not defined when CKEDITOR is disabled and the window is too small when loading the text template. Thanks to @VeldoraTheDragon. [#609](https://github.com/znuny/Znuny/issues/609)
+ - 2025-07-16 Fixed: Users mentioned in quoted text will not be notified again.
+ - 2025-07-15 Sector Nord AG: Update entry for AgentPreferences::AJAXUpdate::AllowedKeys. Thanks to @LuBroering (Lukas Bröring Sector Nord AG). [PR#688](https://github.com/znuny/Znuny/pull/688)
+ - 2025-07-14 Fixed: ACLs of ticket attribute relations could lead to empty selection fields. Thanks for reporting to @lis975. [#675](https://github.com/znuny/Znuny/issues/675)
+ - 2025-07-09 Fixed: Avatar area in agent preferences should disappear if no Avatar Engine is in use.
+ - 2025-07-03 Fixed: Admin interface of generic agent loses some of the submitted form data if any errors occur.
+ - 2025-06-24 Fixed: Wrong otrs.Daemon.pl exit code after valid termination. Thanks to Paweł Bogusławski (@pboguslawski). [#401](https://github.com/znuny/Znuny/pull/401)
+ - 2025-06-17 Fixed: Added missing parameter TwoFactorToken in Kernel::GenericInterface::Operation::Session::Common->CreateSessionID() to Perldoc.
+ - 2025-06-06 Fixed: Some HTTP headers have a semicolon at the end of the value. Thanks to Paweł Bogusławski (@pboguslawski) for reporting. [#653](https://github.com/znuny/Znuny/issues/653)
+ - 2025-06-06 Fixed: TLD of email address in S/MIME certificates is limited in length to two to four characters. Thanks for reporting to @dsm-museum-it. [#674](https://github.com/znuny/Znuny/issues/674)
+ - 2025-06-05 Integrated package Znuny-SMTPRateLimit. Adds configuration options 'SendmailModule::RateLimit' and 'SendmailModule::RateLimitPerSenderAddress' to limit amount of sent emails per batch.
+ - 2025-06-05 Fixed: Added missing required parameter UserType in Kernel::System::AuthSession->() to Perldoc. Added optional parameter SessionSource to Perldoc.
+ - 2025-05-22 Fixed: Generic interface operation Session::SessionRemove requires a user login instead of just a valid session ID. [#638](https://github.com/znuny/Znuny/issues/638).
+ - 2025-05-20 Fixed: Multiple spaces in templates not replaced correctly when using placeholders (e.g. OTRS_CUSTOMER_BODY).
+ - 2025-05-15 Fixed: Process Management: Dynamic field long description is on the wrong side of Label.
+ - 2025-05-05 Fixed: Memory overflow in calendar event when displayed in the ticket detail view. Thanks to @DonMarlowne. [PR#652](https://github.com/znuny/Znuny/pull/652)
+ - 2025-04-30 Fixed: broken OTRS_CUSTOMER_REALNAME placeholder expansion in AgentTicketMerge.
+ - 2025-03-26 Fixed: Tree view icon not showing up for dynamic field types Dropdown and Multiselect.
+ - 2025-03-25 Generic interface operation TicketUpdate now checks detailed ticket permissions of customer user.
 
 # 6.5.15 2025-04-30
  - 2025-04-24 Fixed bug - Setting the password does not reset preferences UserLoginFailed and UserLastPwChangeTime.

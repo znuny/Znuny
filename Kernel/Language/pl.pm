@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.646280458286268;
+    $Self->{Completeness}        = 0.645702306079665;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1386,7 +1386,7 @@ sub Data {
         'Delete account' => 'Usuń konto',
         'Do you really want to delete this mail account?' => 'Czy naprawdę chcesz usunąć to konto e-mail?',
         'Example: mail.example.com' => 'Na przykład: mail.example.com',
-        'IMAP Folder' => 'Folder IMAP',
+        'Folder' => '',
         'Only modify this if you need to fetch mail from a different folder than INBOX.' =>
             'Zmień to jeśli potrzebujesz pobirać pocztę z innego foldera niż INBOX.',
         'Trusted' => 'Zaufane',
@@ -1452,6 +1452,7 @@ sub Data {
         'URL for authorization code' => '',
         'URL for token by authorization code' => '',
         'URL for token by refresh token' => '',
+        'URL for token by client credentials' => '',
         'Access token scope' => '',
         'Template' => 'Szablon',
         'This is the template that was used to create this OAuth2 token configuration.' =>
@@ -1475,6 +1476,7 @@ sub Data {
         'Import token configurations' => '',
         'Export token configurations' => '',
         'OAuth2 token configurations' => '',
+        'Auth flow' => '',
         'Token status' => '',
         'Refresh token status' => '',
         'Validity of token configuration' => '',
@@ -1489,6 +1491,7 @@ sub Data {
         'Refresh token is valid (without expiration date).' => '',
         'No refresh token was requested yet.' => '',
         'Refresh token request is not configured.' => '',
+        'Not available for this auth flow.' => '',
         'Request new token' => '',
         'Delete this token and its configuration.' => '',
 
@@ -3903,6 +3906,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminOAuth2TokenManagement.pm
         'Authorization code parameters not found.' => '',
+        'OAuth2 token error: %s' => '',
 
         # Perl Module: Kernel/Modules/AdminPGP.pm
         'PGP environment is not working. Please check log for more info!' =>
@@ -8060,11 +8064,11 @@ sub Data {
             '',
         'Defines the separator for export csv files.' => '',
         'Defines the quote for export csv files.' => '',
-        'Define a process category.' => '',
         'Frontend module registration (disable ticket processes screen if no process available) for Agent.' =>
             '',
         'Defines the LinkTarget for AgentTicketProcessCategory.' => '',
         'Defines the LinkTarget for CustomerTicketProcessCategory.' => '',
+        'Define a process category.' => '',
         'Define a process link target.' => '',
         'Define a process icon.' => '',
         'Defines which ContentTypes are permitted for the attachment preview.' =>
@@ -9111,12 +9115,12 @@ Twój Zespół Helpdesk.
         'Process Management Path GUI' => 'Zarządzanie procesem interfejsu ścieżki',
         'Process Management Transition Action GUI' => 'Zarządzanie procesem interfejsu akcji przejścia',
         'Process Management Transition GUI' => 'Zarządzanie procesem interfejsu przejścia',
-        'Process Ticket Catalog' => '',
-        'Process Ticket Catalog.' => '',
+        'Process Ticket Category.' => '',
         'Process Ticket Category: Define a process category.' => '',
         'Process Ticket Category: Define a process icon.' => '',
         'Process Ticket Category: Define a process link target.' => '',
         'Process Ticket.' => 'Zgłoszenie procesowe.',
+        'Process ticket category' => '',
         'ProcessID' => '',
         'Processes & Automation' => '',
         'Provides a matrix overview of the tickets per state per queue' =>

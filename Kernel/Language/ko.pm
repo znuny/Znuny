@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D %T';
-    $Self->{Completeness}        = 0.848636436985638;
+    $Self->{Completeness}        = 0.847927753588131;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1381,7 +1381,7 @@ sub Data {
         'Delete account' => '계정 삭제',
         'Do you really want to delete this mail account?' => '정말로 이 메일 계정을 삭제 하시겠습니까?',
         'Example: mail.example.com' => '예 : mail.example.com',
-        'IMAP Folder' => 'IMAP 폴더',
+        'Folder' => '',
         'Only modify this if you need to fetch mail from a different folder than INBOX.' =>
             'INBOX가 아닌 다른 폴더에서 메일을 가져와야하는 경우에만 수정하십시오.',
         'Trusted' => '신뢰할 수 있는',
@@ -1447,6 +1447,7 @@ sub Data {
         'URL for authorization code' => '',
         'URL for token by authorization code' => '',
         'URL for token by refresh token' => '',
+        'URL for token by client credentials' => '',
         'Access token scope' => '',
         'Template' => '템플릿',
         'This is the template that was used to create this OAuth2 token configuration.' =>
@@ -1470,6 +1471,7 @@ sub Data {
         'Import token configurations' => '',
         'Export token configurations' => '',
         'OAuth2 token configurations' => '',
+        'Auth flow' => '',
         'Token status' => '',
         'Refresh token status' => '',
         'Validity of token configuration' => '',
@@ -1484,6 +1486,7 @@ sub Data {
         'Refresh token is valid (without expiration date).' => '',
         'No refresh token was requested yet.' => '',
         'Refresh token request is not configured.' => '',
+        'Not available for this auth flow.' => '',
         'Request new token' => '',
         'Delete this token and its configuration.' => '',
 
@@ -3898,6 +3901,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminOAuth2TokenManagement.pm
         'Authorization code parameters not found.' => '',
+        'OAuth2 token error: %s' => '',
 
         # Perl Module: Kernel/Modules/AdminPGP.pm
         'PGP environment is not working. Please check log for more info!' =>
@@ -8055,11 +8059,11 @@ sub Data {
             '',
         'Defines the separator for export csv files.' => '',
         'Defines the quote for export csv files.' => '',
-        'Define a process category.' => '',
         'Frontend module registration (disable ticket processes screen if no process available) for Agent.' =>
             '',
         'Defines the LinkTarget for AgentTicketProcessCategory.' => '',
         'Defines the LinkTarget for CustomerTicketProcessCategory.' => '',
+        'Define a process category.' => '',
         'Define a process link target.' => '',
         'Define a process icon.' => '',
         'Defines which ContentTypes are permitted for the attachment preview.' =>
@@ -9107,12 +9111,12 @@ Thanks for your help!
         'Process Management Path GUI' => '프로세스 관리 경로 GUI',
         'Process Management Transition Action GUI' => '프로세스 관리 전환 액션 GUI',
         'Process Management Transition GUI' => '프로세스 관리 전환 GUI',
-        'Process Ticket Catalog' => '',
-        'Process Ticket Catalog.' => '',
+        'Process Ticket Category.' => '',
         'Process Ticket Category: Define a process category.' => '',
         'Process Ticket Category: Define a process icon.' => '',
         'Process Ticket Category: Define a process link target.' => '',
         'Process Ticket.' => '프로세스 티켓.',
+        'Process ticket category' => '',
         'ProcessID' => 'ProcessID',
         'Processes & Automation' => '프로세스 및 자동화',
         'Provides a matrix overview of the tickets per state per queue' =>

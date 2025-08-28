@@ -11,6 +11,8 @@ package Kernel::System::Console::Command::Admin::OAuth2TokenManagement::Generate
 use strict;
 use warnings;
 
+use utf8;
+
 use parent qw(Kernel::System::Console::BaseCommand);
 
 our @ObjectDependencies = (
@@ -22,7 +24,7 @@ sub Configure {
     my ( $Self, %Param ) = @_;
 
     $Self->Description(
-        'Generates a URL to request an authorization code for an OAuth 2 token. URL can then be called with a browser.'
+        'Generates a URL to request an authorization code for an OAuth 2 token. URL can then be called with a browser. Only available for auth flow "AuthorizationCode".'
     );
 
     $Self->AddArgument(
@@ -50,6 +52,12 @@ sub Run {
     );
     if ( !%TokenConfig ) {
         $Self->PrintError("Token config with name '$TokenConfigName' not found.");
+        return $Self->ExitCodeError();
+    }
+
+    my $AuthFlow = $TokenConfig{Config}->{AuthFlow} // 'AuthorizationCode';
+    if ( $AuthFlow ne 'AuthorizationCode' ) {
+        $Self->PrintError("Token config with name '$TokenConfigName' does not use auth flow 'AuthorizationCode'.");
         return $Self->ExitCodeError();
     }
 

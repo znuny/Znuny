@@ -420,7 +420,7 @@
         <Description Translatable="1">Defines the URL rich text editor path.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Frontend::WebPath&gt;js/thirdparty/ckeditor5-classic-45.0.0/</Item>
+            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Frontend::WebPath&gt;js/thirdparty/ckeditor5-classic-46.0.0/</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::RichText::CSS::Content::Path###InternalArticleStyles" Required="1" Valid="1" ConfigLevel="200">
@@ -429,7 +429,7 @@
         <Value>
             <Array>
                 <DefaultItem ValueType="String">*path_to_file*/*filename*.css</DefaultItem>
-                <Item ValueType="String" ValueRegex="">common/css/ckeditor5-45.0.0-content.css</Item>
+                <Item ValueType="String" ValueRegex="">common/css/ckeditor5-46.0.0-content.css</Item>
                 <Item ValueType="String" ValueRegex="">common/css/Core.RichTextEditor.InternalArticleStyles.css</Item>
             </Array>
         </Value>
@@ -440,7 +440,7 @@
         <Value>
             <Array>
                 <DefaultItem ValueType="String">*path_to_file*/*filename*.css</DefaultItem>
-                <Item ValueType="String" ValueRegex="">common/css/ckeditor5-45.0.0-content.css</Item>
+                <Item ValueType="String" ValueRegex="">common/css/ckeditor5-46.0.0-content.css</Item>
                 <Item ValueType="String" ValueRegex="">common/css/Core.RichTextEditor.InternalArticleStyles.css</Item>
             </Array>
         </Value>
@@ -550,7 +550,6 @@
                 <Item>FontColor</Item>
                 <Item>FontFamily</Item>
                 <Item>FontSize</Item>
-                <Item>FullPage</Item>
                 <Item>Fullscreen</Item>
                 <Item>GeneralHtmlSupport</Item>
                 <Item>Heading</Item>
@@ -7940,7 +7939,7 @@ via the Preferences button after logging in.
                 <Item>thirdparty/jquery-browser-detection/jquery-browser-detection.js</Item>
                 <Item>thirdparty/jquery-ui-1.13.3/jquery-ui.js</Item>
                 <Item>thirdparty/jquery-ui-touch-punch-0.2.3/jquery.ui.touch-punch.js</Item>
-                <Item>thirdparty/jquery-validate-1.16.0/jquery.validate.js</Item>
+                <Item>thirdparty/jquery-validation-1.21.0/jquery.validate.js</Item>
                 <Item>thirdparty/jquery-pubsub/pubsub.js</Item>
                 <Item>thirdparty/jquery-jstree-3.3.8/jquery.jstree.js</Item>
                 <Item>thirdparty/nunjucks-3.2.3/nunjucks.min.js</Item>
@@ -8048,7 +8047,7 @@ via the Preferences button after logging in.
             <Array>
                 <Item>thirdparty/jquery-3.7.0/jquery.js</Item>
                 <Item>thirdparty/jquery-browser-detection/jquery-browser-detection.js</Item>
-                <Item>thirdparty/jquery-validate-1.16.0/jquery.validate.js</Item>
+                <Item>thirdparty/jquery-validation-1.21.0/jquery.validate.js</Item>
                 <Item>thirdparty/jquery-ui-1.13.3/jquery-ui.js</Item>
                 <Item>thirdparty/jquery-pubsub/pubsub.js</Item>
                 <Item>thirdparty/jquery-jstree-3.3.8/jquery.jstree.js</Item>

@@ -120,7 +120,7 @@
                         </td>
                         [% IF Download %]
                         <td class="Download OptionIcon">
-                            <a href="[% Env('Baselink') %]Action=AjaxAttachment;Subaction=Download;FileID=[% File.FileID | html %];FormID=[% Data.FormID | html %];[% Env('ChallengeTokenParam') | html %]" class="AttachmentDownload icon-hover-sm" aria-label="[% Translate("Click to download this file.") | html %]" tabindex="1" data-file-id="[% File.FileID | html %]" data-object-id="[% File.ObjectID | html %]" data-field-id="[% File.FieldID | html %]" data-download-action="[% File.DownloadAction | html %]">
+                            <a href="[% Env('Baselink') %]Action=AJAXAttachment;Subaction=Download;FileID=[% File.FileID | html %];FormID=[% Data.FormID | html %];[% Env('ChallengeTokenParam') | html %]" class="AttachmentDownload icon-hover-sm" aria-label="[% Translate("Click to download this file.") | html %]" tabindex="1" data-file-id="[% File.FileID | html %]" data-object-id="[% File.ObjectID | html %]" data-field-id="[% File.FieldID | html %]" data-download-action="[% File.DownloadAction | html %]">
                                 <i class="fa fa-download"></i>
                             </a>
                         </td>

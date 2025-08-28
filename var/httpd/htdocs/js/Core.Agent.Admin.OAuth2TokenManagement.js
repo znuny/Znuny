@@ -57,6 +57,52 @@ Core.Agent.Admin.OAuth2TokenManagement = (function (TargetNS) {
             return false;
         });
 
+        // Request new token by client credentials
+        $('a[data-action-request-token-by-client-credentials]').on('click', function(Event) {
+            var $TableRow = $(this).closest('tr'),
+                $Link         = $(this),
+                TokenConfigID = $(this).attr('data-token-config-id'),
+                URL           = Core.Config.Get('Baselink'),
+                Data          = {
+                    Action:        'AdminOAuth2TokenManagement',
+                    Subaction:     'AJAXRequestTokenByClientCredentials',
+                    TokenConfigID: TokenConfigID
+                };
+
+            $Link.hide();
+
+            Core.AJAX.FunctionCall(
+                URL,
+                Data,
+                function (Response) {
+                    var TokenStatus = Response.TranslatedTokenStatusMessage;
+
+                    if (Response.TranslatedErrorMessage) {
+                        Core.UI.ShowNotification(
+                            Response.TranslatedErrorMessage,
+                            'Error',
+                            null,
+                            null,
+                            null,
+                            'fa-exclamation-circle'
+                        );
+                    }
+
+                    if (Response.TokenErrorMessage) {
+                        TokenStatus += '<p><code>' + Response.TokenErrorMessage + '</code></p>';
+                    }
+
+                    $TableRow.find('td[data-token-status-message]').html(TokenStatus);
+                    $Link.show();
+                },
+                'json'
+            );
+
+            Event.stopPropagation();
+            Event.preventDefault();
+            return false;
+        });
+
         return true;
     }
 

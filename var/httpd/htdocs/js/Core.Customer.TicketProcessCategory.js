@@ -85,7 +85,7 @@ Core.Customer.TicketProcessCategory = (function (TargetNS) {
             var Value = $(this).data('category'),
                 Category = 1;
 
-            if (Value == 'IsFavourite'){
+            if (Value == 'IsFavourite') {
                 Category = 0;
             }
 
@@ -119,8 +119,9 @@ Core.Customer.TicketProcessCategory = (function (TargetNS) {
 
         // Check if all processes are hidden.
         $(".ItemListGrid").children().each(function() {
-            if(!$(this).is(":hidden")){
+            if (!$(this).is(":hidden")) {
                 AllHidden = 0;
+
                 return false;
             }
         });
@@ -145,12 +146,12 @@ Core.Customer.TicketProcessCategory = (function (TargetNS) {
     * @description
     *      This function handles all about the Favourites-functionality on TicketProcessCategory.
     */
-    TargetNS.InitFavourite = function () {
-        var Favourites = Core.Config.Get('Favourites') || [];
-
-        $('.AddFavourite').off('click.AddFavourite').on('click.AddFavourite', function(Event) {
+        TargetNS.InitFavourite = function () {
+        // Use event delegation to handle dynamically added elements
+        $(document).off('click.AddFavourite').on('click.AddFavourite', '.AddFavourite', function(Event) {
             var $TriggerObj = $(this),
-                ProcessID = $(this).data('id');
+                ProcessID = $(this).data('id'),
+                Favourites = Core.Config.Get('Favourites') || [];
 
             if ($TriggerObj.hasClass('Clicked')) {
                 return false;
@@ -173,41 +174,41 @@ Core.Customer.TicketProcessCategory = (function (TargetNS) {
                 // Add the category filter if it does not exist yet
                 if (!$('.SidebarColumn .Content .Favourites').length) {
                     $('.SidebarColumn .Content').prepend('<a href="#" class="CategoryFilter Level-1 Favourites" data-category="IsFavourite"><i class="fa fa-star"></i> ' + Core.Language.Translate('Favourites') + ' <i class="fa fa-star"></i></a>');
+                    // Re-initialize category filter to bind the new element
+                    TargetNS.InitCategoryFilter();
                 }
 
-                // Fade the original icon out and display a success icon
-                $TriggerObj.find('i').fadeOut(function() {
-                    $(this).closest('li').find('.AddFavourite').append('<i class="fa fa-check" style="display: none;"></i>').find('i.fa-check').fadeIn().delay(1000).fadeOut(function() {
-                        $(this)
-                            .closest('.AddFavourite')
-                            .hide()
-                            .find('i.fa-check')
-                            .remove();
-                        });
+                // Simple DOM manipulation without complex animations
 
-                    $(this).hide();
-                    $TriggerObj.addClass('RemoveFavourite');
-                    $TriggerObj.removeClass('AddFavourite');
-                    $TriggerObj.closest('li').addClass('IsFavourite');
-                    $TriggerObj.closest('li').find('.Information').append('<span class="IsFavourite InvisibleText">IsFavourite</span>');
-
-                    Core.Config.Set('Favourites', Favourites);
-                    TargetNS.InitFavourite();
+                // Add the category filter if it does not exist yet
+                if (!$('.SidebarColumn .Content .Favourites').length) {
+                    $('.SidebarColumn .Content').prepend('<a href="#" class="CategoryFilter Level-1 Favourites" data-category="IsFavourite"><i class="fa fa-star"></i> ' + Core.Language.Translate('Favourites') + ' <i class="fa fa-star"></i></a>');
+                    // Re-initialize category filter to bind the new element
                     TargetNS.InitCategoryFilter();
-                });
+                }
+
+                // Simple class changes without animations
+                $TriggerObj.addClass('RemoveFavourite');
+                $TriggerObj.removeClass('AddFavourite');
+                $TriggerObj.closest('li').addClass('IsFavourite');
+                $TriggerObj.closest('li').find('.Information').append('<span class="IsFavourite InvisibleText">IsFavourite</span>');
+
+
+                Core.Config.Set('Favourites', Favourites);
 
             });
 
             return false;
         });
 
-        $('.RemoveFavourite').off('click.RemoveFavourite').on('click.RemoveFavourite', function() {
+        $(document).off('click.RemoveFavourite').on('click.RemoveFavourite', '.RemoveFavourite', function() {
             var $TriggerObj = $(this),
-                ProcessID = $(this).data('id');
+                ProcessID = $(this).data('id'),
+                Favourites = Core.Config.Get('Favourites') || [];
 
             // Remove the process from the favourites list
             Favourites = $.grep(Favourites, function(num) {
-                return num !== ProcessID.toString();
+                return num.toString() !== ProcessID.toString();
             });
 
             Core.Customer.PreferencesUpdate('TicketProcessCategoryFavourites', JSON.stringify(Favourites), function() {
@@ -223,6 +224,7 @@ Core.Customer.TicketProcessCategory = (function (TargetNS) {
                     $(this).hide();
                     $TriggerObj.addClass('AddFavourite');
                     $TriggerObj.removeClass('RemoveFavourite');
+                    $TriggerObj.removeClass('Clicked'); // Remove the Clicked class
                     $TriggerObj.closest('li').removeClass('IsFavourite');
                     $TriggerObj.closest('li').find('.Information').find('.IsFavourite').remove();
 
@@ -230,14 +232,11 @@ Core.Customer.TicketProcessCategory = (function (TargetNS) {
                     $TriggerObj.find('i.fa-star-o').show();
 
                     // Remove the category filter if there are no favourites left
-                    if ($('.IsFavourite').length == 0) {
+                    if (Favourites.length === 0) {
                         $('.SidebarColumn .Content .Favourites').remove();
                     }
 
                     Core.Config.Set('Favourites', Favourites);
-                    TargetNS.InitFavourite();
-                    TargetNS.InitCategoryFilter();
-
                 });
             });
 

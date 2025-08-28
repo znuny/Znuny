@@ -17,17 +17,17 @@ jobs:
   ZnunyCodePolicy:
     name: ZnunyCodePolicy
     runs-on: ubuntu-latest
-    container: debian:10-slim
+    container: debian:11-slim
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         env:
           fetch-depth: "1"
         with:
           path: znuny
 
       - name: Check out code policy
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         env:
           fetch-depth: "1"
         with:
@@ -51,10 +51,10 @@ jobs:
   Contributors:
     name: Contributors
     runs-on: ubuntu-latest
-    container: debian:10-slim
+    container: debian:11-slim
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         env:
           fetch-depth: "0"
 
@@ -74,10 +74,10 @@ jobs:
   Database-Schema:
     name: Database:Schema
     runs-on: ubuntu-latest
-    container: debian:10-slim
+    container: debian:11-slim
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         env:
           fetch-depth: "1"
 
@@ -102,10 +102,10 @@ jobs:
   Database-InitialInsert:
     name: Database:InitialInsert
     runs-on: ubuntu-latest
-    container: debian:10-slim
+    container: debian:11-slim
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         env:
           fetch-depth: "1"
 
@@ -130,7 +130,7 @@ jobs:
   Migration:
     name: Migration
     runs-on: ubuntu-latest
-    container: debian:10-slim
+    container: debian:11-slim
     env:
       DB: mysql
       MYSQL_USER: "znuny"
@@ -147,7 +147,7 @@ jobs:
           MYSQL_DATABASE: "znuny"
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         env:
           fetch-depth: "1"
 
@@ -166,7 +166,7 @@ jobs:
   RPMSpec:
     name: RPMSpec
     runs-on: ubuntu-latest
-    container: debian:10-slim
+    container: debian:11-slim
     env:
       DB: mysql
       MYSQL_USER: "znuny"
@@ -183,7 +183,7 @@ jobs:
           MYSQL_DATABASE: "znuny"
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         env:
           fetch-depth: "1"
 
@@ -204,7 +204,7 @@ jobs:
   UnitTest-MySQL:
     name: UnitTest:MySQL
     runs-on: ubuntu-latest
-    container: debian:10-slim
+    container: debian:11-slim
     needs: [
       ZnunyCodePolicy,
       Contributors,
@@ -229,7 +229,7 @@ jobs:
           MYSQL_DATABASE: "znuny"
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         env:
           fetch-depth: "1"
 
@@ -247,7 +247,7 @@ jobs:
   Selenium-Base:
     name: Selenium:Base
     runs-on: ubuntu-latest
-    container: debian:10-slim
+    container: debian:11-slim
     needs: UnitTest-MySQL
     env:
       DB: mysql
@@ -271,7 +271,7 @@ jobs:
           - ${{ github.workspace }}:/opt/znuny
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         env:
           fetch-depth: "1"
 
@@ -299,7 +299,7 @@ jobs:
   Selenium-Admin:
     name: Selenium:Admin
     runs-on: ubuntu-latest
-    container: debian:10-slim
+    container: debian:11-slim
     needs: UnitTest-MySQL
     env:
       DB: mysql
@@ -323,7 +323,7 @@ jobs:
           - ${{ github.workspace }}:/opt/znuny
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         env:
           fetch-depth: "1"
 
@@ -351,7 +351,7 @@ jobs:
   Selenium-Agent:
     name: Selenium:Agent
     runs-on: ubuntu-latest
-    container: debian:10-slim
+    container: debian:11-slim
     needs: UnitTest-MySQL
     env:
       DB: mysql
@@ -375,7 +375,7 @@ jobs:
           - ${{ github.workspace }}:/opt/znuny
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         env:
           fetch-depth: "1"
 
@@ -403,7 +403,7 @@ jobs:
   Selenium-Customer:
     name: Selenium:Customer
     runs-on: ubuntu-latest
-    container: debian:10-slim
+    container: debian:11-slim
     needs: UnitTest-MySQL
     env:
       DB: mysql
@@ -427,7 +427,7 @@ jobs:
           - ${{ github.workspace }}:/opt/znuny
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         env:
           fetch-depth: "1"
 
@@ -455,7 +455,7 @@ jobs:
   Selenium-JavaScript:
     name: Selenium:JavaScript
     runs-on: ubuntu-latest
-    container: debian:10-slim
+    container: debian:11-slim
     needs: UnitTest-MySQL
     env:
       DB: mysql
@@ -479,7 +479,7 @@ jobs:
           - ${{ github.workspace }}:/opt/znuny
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         env:
           fetch-depth: "1"
 
@@ -507,7 +507,7 @@ jobs:
   Selenium-Output:
     name: Selenium:Output
     runs-on: ubuntu-latest
-    container: debian:10-slim
+    container: debian:11-slim
     needs: UnitTest-MySQL
     env:
       DB: mysql
@@ -531,7 +531,7 @@ jobs:
           - ${{ github.workspace }}:/opt/znuny
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         env:
           fetch-depth: "1"
 
@@ -559,7 +559,7 @@ jobs:
   Selenium-SysConfig:
     name: Selenium:SysConfig
     runs-on: ubuntu-latest
-    container: debian:10-slim
+    container: debian:11-slim
     needs: UnitTest-MySQL
     env:
       DB: mysql
@@ -583,7 +583,7 @@ jobs:
           - ${{ github.workspace }}:/opt/znuny
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         env:
           fetch-depth: "1"
 

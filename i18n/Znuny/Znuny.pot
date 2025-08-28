@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-07-23 13:45+0000\n"
+"POT-Creation-Date: 2025-08-20 07:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4143,7 +4143,7 @@ msgid "Example: mail.example.com"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
-msgid "IMAP Folder"
+msgid "Folder"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
@@ -4323,6 +4323,10 @@ msgid "URL for token by refresh token"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
+msgid "URL for token by client credentials"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
 msgid "Access token scope"
 msgstr ""
 
@@ -4387,6 +4391,10 @@ msgid "OAuth2 token configurations"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
+msgid "Auth flow"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
 msgid "Token status"
 msgstr ""
 
@@ -4440,6 +4448,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
 msgid "Refresh token request is not configured."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
+msgid "Not available for this auth flow."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Overview.tt
@@ -11308,6 +11320,10 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminOAuth2TokenManagement.pm
 msgid "Authorization code parameters not found."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminOAuth2TokenManagement.pm
+msgid "OAuth2 token error: %s"
 msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminPGP.pm
@@ -20731,10 +20747,6 @@ msgid "Defines the quote for export csv files."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "Define a process category."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Frontend module registration (disable ticket processes screen if no process available) for Agent."
 msgstr ""
 
@@ -20744,6 +20756,10 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Defines the LinkTarget for CustomerTicketProcessCategory."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Define a process category."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
@@ -23914,11 +23930,7 @@ msgid "Process Management Transition GUI"
 msgstr ""
 
 #. SysConfig
-msgid "Process Ticket Catalog"
-msgstr ""
-
-#. SysConfig
-msgid "Process Ticket Catalog."
+msgid "Process Ticket Category."
 msgstr ""
 
 #. SysConfig
@@ -23935,6 +23947,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Process Ticket."
+msgstr ""
+
+#. SysConfig
+msgid "Process ticket category"
 msgstr ""
 
 #. SysConfig

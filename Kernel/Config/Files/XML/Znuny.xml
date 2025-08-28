@@ -4123,39 +4123,9 @@
         </Value>
     </Setting>
 
-    <!-- TicketProcessCategory - ProcessPreferences -->
-    <Setting Name="ProcessPreferences###001-TicketProcessCategory-Category" Required="0" Valid="1">
-        <Description Translatable="1">Define a process category.</Description>
-        <Navigation>Core::ProcessManagement</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::Output::HTML::ProcessPreferences::Generic</Item>
-                <Item Key="Label" Translatable="1">Category</Item>
-                <Item Key="Desc" Translatable="1">Process Ticket Category: Define a process category.</Item>
-                <Item Key="PrefKey">Category</Item>
-                <Item Key="ClusterName" Translatable="1">Category</Item>
-                <Item Key="ClusterPriority">1</Item>
-                <Item Key="Block">Option</Item>
-                <Item Key="TreeView">1</Item>
-                <Item Key="Multiple">1</Item>
-                <Item Key="PossibleNone">1</Item>
-                <Item Key="Data">
-                    <Hash>
-                        <Item Key="Category 1">Category 1</Item>
-                        <Item Key="Category 2">Category 2</Item>
-                        <Item Key="Category 3">Category 2::SecondCategory1</Item>
-                        <Item Key="Category 4">Category 2::SecondCategory1::ThirdCategory1</Item>
-                        <Item Key="Category 5">Category 2::SecondCategory2</Item>
-                        <Item Key="Category 6">Category 2::SecondCategory2::ThirdCategory2</Item>
-                    </Hash>
-                </Item>
-            </Hash>
-        </Value>
-    </Setting>
-
     <!-- TicketProcessCategory -->
     <!-- AgentTicketProcessCategory -->
-    <Setting Name="Frontend::Module###AgentTicketProcessCategory" Required="0" Valid="0">
+    <Setting Name="Frontend::Module###AgentTicketProcessCategory" Required="0" Valid="1">
         <Description Translatable="1">Frontend module registration for the agent interface.</Description>
         <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
         <Value>
@@ -4169,14 +4139,14 @@
                         <Array>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">Process Ticket Catalog.</Item>
+                    <Item Key="Description" Translatable="1">Process Ticket Category.</Item>
                     <Item Key="NavBarName">Ticket</Item>
-                    <Item Key="Title" Translatable="1">Process Ticket Catalog</Item>
+                    <Item Key="Title" Translatable="1">Process Ticket Category</Item>
                 </Hash>
             </Item>
         </Value>
     </Setting>
-    <Setting Name="Frontend::Navigation###AgentTicketProcessCategory###001-ProcessManagement" Required="0" Valid="0">
+    <Setting Name="Frontend::Navigation###AgentTicketProcessCategory###001-ProcessManagement" Required="0" Valid="1">
         <Description Translatable="1">Main menu item registration.</Description>
         <Navigation>Frontend::Agent::ModuleRegistration::MainMenu</Navigation>
         <Value>
@@ -4196,7 +4166,7 @@
                             </Array>
                         </Item>
                         <Item Key="Description" Translatable="1">Create new process ticket via category.</Item>
-                        <Item Key="Name" Translatable="1">Process Ticket Category</Item>
+                        <Item Key="Name" Translatable="1">Process ticket category</Item>
                         <Item Key="Link">Action=AgentTicketProcessCategory</Item>
                         <Item Key="LinkOption"></Item>
                         <Item Key="NavBar">Ticket</Item>
@@ -4209,7 +4179,7 @@
             </Array>
         </Value>
     </Setting>
-    <Setting Name="Frontend::NavBarModule###000-AgentTicketProcessCategory" Required="0" Valid="0">
+    <Setting Name="Frontend::NavBarModule###000-AgentTicketProcessCategory" Required="0" Valid="1">
         <Description Translatable="1">Frontend module registration (disable ticket processes screen if no process available) for Agent.</Description>
         <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
         <Value>
@@ -4270,9 +4240,9 @@
                         <Array>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">Process Ticket Catalog.</Item>
+                    <Item Key="Description" Translatable="1">Process Ticket Category.</Item>
                     <Item Key="NavBarName">Ticket</Item>
-                    <Item Key="Title" Translatable="1">Process Ticket Catalog</Item>
+                    <Item Key="Title" Translatable="1">Process Ticket Category</Item>
                 </Hash>
             </Item>
         </Value>
@@ -4297,7 +4267,7 @@
                             </Array>
                         </Item>
                         <Item Key="Description" Translatable="1">Create new process ticket via category.</Item>
-                        <Item Key="Name" Translatable="1">Process Ticket Category</Item>
+                        <Item Key="Name" Translatable="1">Process ticket category</Item>
                         <Item Key="Link">Action=CustomerTicketProcessCategory</Item>
                         <Item Key="LinkOption"></Item>
                         <Item Key="NavBar">Ticket</Item>
