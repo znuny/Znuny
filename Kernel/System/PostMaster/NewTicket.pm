@@ -458,7 +458,7 @@ Message
             );
 
             if ($DynamicFieldGet->{FieldType} eq "Multiselect") {
-                my @Values = split(" ", $GetParam{$Key});
+                my @Values = split(/[,;]\s*/, $GetParam{$Key});
                 $DynamicFieldBackendObject->ValueSet(
                     DynamicFieldConfig => $DynamicFieldGet,
                     ObjectID           => $TicketID,
