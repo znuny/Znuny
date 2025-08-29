@@ -46,7 +46,7 @@ sub _CreateArticleColorTable {
         '<Table Name="article_color">
             <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="SMALLINT"/>
             <Column Name="name" Required="true" Size="200" Type="VARCHAR"/>
-            <Column Name="color" Required="true" Size="7" Type="VARCHAR" />
+            <Column Name="color" Required="true" Size="10" Type="VARCHAR" />
             <Column Name="create_time" Required="true" Type="DATE"/>
             <Column Name="create_by" Required="true" Type="INTEGER"/>
             <Column Name="change_time" Required="true" Type="DATE"/>

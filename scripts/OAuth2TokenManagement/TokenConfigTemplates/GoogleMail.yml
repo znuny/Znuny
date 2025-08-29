@@ -14,6 +14,7 @@
           Parameters:
             access_type: offline
             response_type: code
+            prompt: consent
           URL: https://accounts.google.com/o/oauth2/v2/auth
         Response:
           ParametersMapping:
@@ -53,7 +54,6 @@
             expires_in: TokenExpirationDate
     Scope: https://mail.google.com/
     Notifications:
-        NotifyOnExpiredToken: 0
-        NotifyOnExpiredRefreshToken: 1
+      NotifyOnExpiredToken: 0
+      NotifyOnExpiredRefreshToken: 1
   Name: Google Mail
-
