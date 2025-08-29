@@ -458,15 +458,16 @@ Message
             );
 
             # If the dynamic field is a multiselect, we need to split the value into an array
-            if ($DynamicFieldGet->{FieldType} =~ /Multiselect$/) {
-                my @Values = split(/[,;]\s*/, $GetParam{$Key});
+            if ( $DynamicFieldGet->{FieldType} =~ /Multiselect$/ ) {
+                my @Values = split( /[,;]\s*/, $GetParam{$Key} );
                 $DynamicFieldBackendObject->ValueSet(
                     DynamicFieldConfig => $DynamicFieldGet,
                     ObjectID           => $TicketID,
                     Value              => \@Values,
                     UserID             => $Param{InmailUserID},
                 );
-            } else {
+            }
+            else {
                 $DynamicFieldBackendObject->ValueSet(
                     DynamicFieldConfig => $DynamicFieldGet,
                     ObjectID           => $TicketID,
