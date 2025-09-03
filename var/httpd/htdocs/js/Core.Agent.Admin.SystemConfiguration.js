@@ -828,7 +828,7 @@ Core.Agent.Admin.SystemConfiguration = (function (TargetNS) {
         // show a custom title tooltip for disabled keys to let users understand why some keys cant be edited
         $('.SettingsList').on('mouseenter', 'input.Key[readonly]', function() {
             $(this).data('original-title', $(this).attr('title'));
-            $(this).attr('title', Core.Language.Translate('Keys with values can\'t be renamed. Please remove this key/value pair instead and re-add it afterwards.'));
+            $(this).attr('title', $(this).val() + '\n\n' + Core.Language.Translate('Keys with values can\'t be renamed. Please remove this key/value pair instead and re-add it afterwards.'));
         });
         $('.SettingsList').on('mouseleave', 'input.Key[readonly]', function() {
             var OriginalTitle = $(this).data('original-title');
