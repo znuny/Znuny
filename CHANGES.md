@@ -1,6 +1,7 @@
 # 6.5.17 2025-??-??
  - 2025-08-29 AdminSystemConfiguration: Current value of the settings key has been added to the HTML title attribute in the settings list when hovering over it.
  - 2025-08-25 Fixed: Updated Google Mail OAuth2 token configuration template to enable Google's consent dialog when obtaining first token.
+ - 2025-08-22 Fixed: Issue with setting empty value for multiselect input fields.
  - 2025-08-22 Fixed: Installer was not able to check settings of outgoing email account.
 
 # 6.5.16 2025-08-20
