@@ -844,4 +844,19 @@ input[type=text].ArticleFreeKey {
     width: 50%;
 }
 
+/**
+ * @subsection Datepicker Overrides
+ */
+.ui-state-highlight,
+.ui-widget-content .ui-state-highlight,
+.ui-widget-header .ui-state-highlight { 
+    background: #FF8A2599 !important;
+    font-weight: bold !important;
+    border: 1px dashed #00000088 !important; 
+}
+
+.ui-datepicker .ui-datepicker-days-cell-over .ui-state-default{
+    border: 2px solid #000000 !important; 
+}
+
 } /* end @media */
