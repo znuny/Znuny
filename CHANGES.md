@@ -1,4 +1,5 @@
 # 6.5.17 2025-??-??
+ - 2025-09-05 Fixed: Deleting a valid Webservice should not be possible.
  - 2025-09-02 Fixed: Updated date picker highlight styles for better readability
  - 2025-08-29 AdminSystemConfiguration: Current value of the settings key has been added to the HTML title attribute in the settings list when hovering over it.
  - 2025-08-25 Fixed: Updated Google Mail OAuth2 token configuration template to enable Google's consent dialog when obtaining first token.
