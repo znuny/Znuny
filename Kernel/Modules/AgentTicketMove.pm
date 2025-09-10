@@ -1567,28 +1567,12 @@ sub AgentMove {
 
         # show time accounting box
         if ( $ConfigObject->Get('Ticket::Frontend::AccountTime') ) {
-            if ( $ConfigObject->Get('Ticket::Frontend::NeedAccountedTime') ) {
-                $LayoutObject->Block(
-                    Name => 'TimeUnitsLabelMandatory',
-                    Data => \%Param,
-                );
-            }
-            else {
-                $LayoutObject->Block(
-                    Name => 'TimeUnitsLabel',
-                    Data => \%Param,
-                );
-            }
+            $Param{TimeUnitsBlock} = $LayoutObject->TimeUnits(
+                %Param,
+            );
             $LayoutObject->Block(
                 Name => 'TimeUnits',
-                Data => {
-                    %Param,
-                    TimeUnitsRequired => (
-                        $ConfigObject->Get('Ticket::Frontend::NeedAccountedTime')
-                        ? 'Validate_Required'
-                        : ''
-                    ),
-                }
+                Data => \%Param,
             );
         }
 
@@ -1643,9 +1627,11 @@ sub AgentMove {
         }
     }
 
+    my $FormDraftObject = $Kernel::OM->Get('Kernel::System::FormDraft');
+
     my $LoadedFormDraft;
     if ( $Self->{LoadedFormDraftID} ) {
-        $LoadedFormDraft = $Kernel::OM->Get('Kernel::System::FormDraft')->FormDraftGet(
+        $LoadedFormDraft = $FormDraftObject->FormDraftGet(
             FormDraftID => $Self->{LoadedFormDraftID},
             GetContent  => 0,
             UserID      => $Self->{UserID},
@@ -1691,14 +1677,23 @@ sub AgentMove {
         );
     }
 
+    # Check if the user has already any form draft for this action
+    my $FormDraftList = $FormDraftObject->FormDraftListGet(
+        ObjectType => 'Ticket',
+        ObjectID   => $Self->{TicketID},
+        Action     => $Self->{Action},
+        UserID     => $Self->{UserID},
+    ) // [];
+
     return $LayoutObject->Output(
         TemplateFile => 'AgentTicketMove',
         Data         => {
             %Param,
-            FormDraft      => $Config->{FormDraft},
-            FormDraftID    => $Self->{LoadedFormDraftID},
-            FormDraftTitle => $LoadedFormDraft ? $LoadedFormDraft->{Title} : '',
-            FormDraftMeta  => $LoadedFormDraft,
+            FormDraft          => $Config->{FormDraft},
+            FormDraftID        => $Self->{LoadedFormDraftID},
+            FormDraftTitle     => $LoadedFormDraft ? $LoadedFormDraft->{Title} : '',
+            FormDraftMeta      => $LoadedFormDraft,
+            FormDraftForAction => scalar @{$FormDraftList},
         },
     );
 }
@@ -1706,10 +1701,12 @@ sub AgentMove {
 sub _GetUsers {
     my ( $Self, %Param ) = @_;
 
+    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+
     # get users
     my %ShownUsers;
-    my %AllGroupsMembers = $Kernel::OM->Get('Kernel::System::User')->UserList(
-        Type  => 'Long',
+    my %AllGroupsMembers = $UserObject->UserList(
+        Type  => 'Short',
         Valid => 1,
     );
 
@@ -1761,7 +1758,16 @@ sub _GetUsers {
         UserID        => $Self->{UserID},
     );
 
-    return { $TicketObject->TicketAclData() } if $ACL;
+    if ($ACL) {
+        %ShownUsers = $TicketObject->TicketAclData();
+    }
+
+    my %AllGroupsMembersFullnames = $UserObject->UserList(
+        Type  => 'Long',
+        Valid => 1,
+    );
+
+    @ShownUsers{ keys %ShownUsers } = @AllGroupsMembersFullnames{ keys %ShownUsers };
 
     return \%ShownUsers;
 }
