@@ -1,4 +1,4 @@
-# 6.5.17 2025-??-??
+# 6.5.17 2025-09-17
  - 2025-09-05 Fixed: Deleting a valid Webservice should not be possible.
  - 2025-09-02 Fixed: Updated date picker highlight styles for better readability
  - 2025-08-29 AdminSystemConfiguration: Current value of the settings key has been added to the HTML title attribute in the settings list when hovering over it.
