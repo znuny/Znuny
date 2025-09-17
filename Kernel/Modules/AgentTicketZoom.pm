@@ -1258,7 +1258,14 @@ sub MaskAgentZoom {
                     },
                 );
 
-                for my $SubItem ( sort { ($ZoomMenuItems{$Item}->{Items}->{$a}->{Priority} // 999) <=> ($ZoomMenuItems{$Item}->{Items}->{$b}->{Priority} // 999) } keys %{ $ZoomMenuItems{$Item}->{Items} } ) {
+
+                for my $SubItem (
+                    sort {
+                        ( $ZoomMenuItems{$Item}->{Items}->{$a}->{Priority} // 999 )
+                            <=> ( $ZoomMenuItems{$Item}->{Items}->{$b}->{Priority} // 999 )
+                    } keys %{ $ZoomMenuItems{$Item}->{Items} }
+                    )
+                {
                     $LayoutObject->Block(
                         Name => 'TicketMenuSubContainerItem',
                         Data => $ZoomMenuItems{$Item}->{Items}->{$SubItem},
