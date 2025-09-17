@@ -23,8 +23,8 @@
             </div>
 [% RenderBlockEnd("TicketBack") %]
 [% RenderBlockStart("PropertiesLock") %]
-            <div>
-                [% Translate("The ticket has been locked") | html %].
+            <div class="ticket-locked">
+                <span>[% Translate("The ticket has been locked") | html %].</span>
                 <a class="UndoClosePopup btn-cancel-ghost btn-main btn-width-md" href="[% Env("Baselink") %]Action=AgentTicketLock;Subaction=Unlock;TicketID=[% Data.TicketID | uri %][% IF Data.PreviousOwner %];PreviousOwner=[% Data.PreviousOwner %][% END %];[% Env("ChallengeTokenParam") | html %]">
                     [% Translate("Cancel") | html %]
                 </a>

@@ -1532,17 +1532,17 @@ sub Run {
 
                 }
                 else {
-                    $Data{Body} = "<br/>" . $Data{Body};
+                    $Data{Body} = "<p></p>\n" . $Data{Body};
 
                     if ( $Data{CreateTime} ) {
-                        $Data{Body} = $LayoutObject->{LanguageObject}->Translate('Date') .
-                            ": $Data{CreateTime}<br/>" . $Data{Body};
+                        $Data{Body} = '<p>' . $LayoutObject->{LanguageObject}->Translate('Date') .
+                            ": $Data{CreateTime}</p>" . $Data{Body};
                     }
 
                     for my $Key (qw(Subject ReplyTo Reply-To Cc To From)) {
                         if ( $Data{$Key} ) {
-                            $Data{Body} = $LayoutObject->{LanguageObject}->Translate($Key) .
-                                ": $Data{$Key}<br/>" . $Data{Body};
+                            $Data{Body} = '<p>' . $LayoutObject->{LanguageObject}->Translate($Key) .
+                                ": $Data{$Key}</p>" . $Data{Body};
                         }
                     }
 
@@ -1553,8 +1553,8 @@ sub Run {
                     my $MessageFrom = $LayoutObject->{LanguageObject}->Translate('Message from');
                     my $EndMessage  = $LayoutObject->{LanguageObject}->Translate('End message');
 
-                    $Data{Body} = "<br/>---- $MessageFrom $From ---<br/><br/>" . $Data{Body};
-                    $Data{Body} .= "<br/>---- $EndMessage ---<br/>";
+                    $Data{Body} = "<p>---- $MessageFrom $From ---</p><p></p>" . $Data{Body};
+                    $Data{Body} .= "\n<p>---- $EndMessage ---</p>";
                 }
             }
         }

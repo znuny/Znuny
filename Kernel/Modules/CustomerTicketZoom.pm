@@ -393,7 +393,7 @@ sub Run {
 
         my $UploadCacheObject = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
 
-        if ( !$GetParam{Body} || $GetParam{Body} eq '<br />' ) {
+        if ( !$GetParam{Body} || $GetParam{Body} eq '<p>&nbsp;</p>' ) {
             $Error{RichTextInvalid}    = 'ServerError';
             $GetParam{FollowUpVisible} = 'Visible';
         }
@@ -589,7 +589,7 @@ sub Run {
             );
         }
 
-        my $ArticleID = $Kernel::OM->Get('Kernel::System::Ticket::Article::Backend::Internal')->ArticleCreate(
+        my $ArticleID = $Kernel::OM->Get('Kernel::System::Ticket::Article::Backend::Web')->ArticleCreate(
             TicketID             => $Self->{TicketID},
             IsVisibleForCustomer => 1,
             SenderType           => $Config->{SenderType},

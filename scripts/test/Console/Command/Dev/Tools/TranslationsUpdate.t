@@ -40,6 +40,13 @@ my @Tests = (
         STDERR    => undef,
     },
     {
+        Name      => "Run for language de with generate-po and regnerate. ",
+        Parameter => [ '--language=de', '--generate-po', '--regnerate' ],
+        ExitCode  => 0,
+        STDOUT    => 'Starting...',
+        STDERR    => undef,
+    },
+    {
         Name      => "Run for language de with generate-po.",
         Parameter => [ '--language=de', '--generate-po' ],
         ExitCode  => 0,
@@ -59,6 +66,7 @@ my @Tests = (
         Data      => {
             TemplateFile => '<h1>[% Translate("TranslationsUpdate") | html %]</h1>',
             POTFile      => ' ',
+            LanguageFile => ' ',
         },
         ExitCode => 0,
         STDOUT   => 'Starting...',
@@ -98,8 +106,8 @@ for my $Test (@Tests) {
             );
         }
         if ( $Test->{Data}->{LanguageFile} ) {
-            my $PotLocation = $MainObject->FileWrite(
-                Directory  => $I18nDir,
+            my $LangLocation = $MainObject->FileWrite(
+                Directory  => $LanguageDir,
                 Filename   => 'de_TranslationsUpdate.pm',
                 Content    => \$Test->{Data}->{LanguageFile} || '',
                 Permission => '644',

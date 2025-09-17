@@ -22,6 +22,7 @@ Kernel/Config/Defaults.pm
 Kernel/Config/GenericAgent.pm
 Kernel/Config.pm
 Kernel/Language/*.old
+Kernel/Language/*zzzTranslationAuto.pm
 bin/cgi-bin/.htaccess
 scripts/apache2-perl-startup2.pl
 var/virtualfs
@@ -74,6 +75,7 @@ Kernel/Modules/DevelFred.pm
 Kernel/System/Fred
 Kernel/System/Dev/
 var/fred
+var/log/dev/fred
 var/httpd/htdocs/js/*Fred*js
 var/httpd/htdocs/skins/Agent/default/css/*Fred*css
 var/httpd/htdocs/skins/Customer/default/css/*Fred*css

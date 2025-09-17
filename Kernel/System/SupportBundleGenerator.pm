@@ -400,6 +400,7 @@ Generates a .csv file with all installed packages
     my ( $Content, $Filename ) = $SupportBundleGeneratorObject->GeneratePackageList();
 
 Returns:
+
     $Content  = $FileContentsRef;
     $Filename = 'InstalledPackages.csv';
 
@@ -441,6 +442,7 @@ Generates a <.yml> file with the otrs system configuration information
     my ( $Content, $Filename ) = $SupportBundleGeneratorObject->GenerateConfigurationDump();
 
 Returns:
+
     $Content  = $FileContentsRef;
     $Filename = <'ModifiedSettings.yml'>;
 

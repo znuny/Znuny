@@ -48,7 +48,7 @@ Kernel::System::UnitTest::Selenium - run front end tests
 
 This class inherits from Selenium::Remote::Driver. You can use
 its full API (see
-L<http://search.cpan.org/~aivaturi/Selenium-Remote-Driver-0.15/lib/Selenium/Remote/Driver.pm>).
+L<https://metacpan.org/release/AIVATURI/Selenium-Remote-Driver-0.15/view/lib/Selenium/Remote/Driver.pm>).
 
 Every successful Selenium command will be logged as a successful unit test.
 In case of an error, an exception will be thrown that you can catch in your

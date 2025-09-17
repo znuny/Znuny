@@ -1789,7 +1789,7 @@ sub Run {
         my $MimeType = 'text/plain';
         if ( $LayoutObject->{BrowserRichText} ) {
             $MimeType = 'text/html';
-            $GetParam{Body} .= '<br/><br/>' . $Signature;
+            $GetParam{Body} .= '<p></p><p></p>' . $Signature;
 
             # remove unused inline images
             my @NewAttachmentData;

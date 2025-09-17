@@ -9,7 +9,7 @@ use IO::Socket;
 use IO::Select;
 use Net::IMAP::Simple::PipeSocket;
 
-our $VERSION = "1.2209";
+our $VERSION = "1.2212.5f869c62078ddaf2d93883bd3c3cb4232f93ffa7";
 
 BEGIN {
     # I'd really rather the pause/cpan indexers miss this "package"
@@ -676,7 +676,8 @@ sub search_body    { my $self = shift; my $t = _process_qstring(shift); return $
 sub get {
     my ( $self, $number, $part ) = @_;
     my $arg = $part ? "BODY[$part]" : 'RFC822';
-	return $self->fetch( $number, $part );
+
+    return $self->fetch( $number, $arg );
 }
 
 sub fetch {
@@ -876,7 +877,7 @@ sub logout {
 
 sub quit {
     my ( $self, $hq ) = @_;
-    $self->_send_cmd('EXPUNGE'); # XXX: $self->expunge_mailbox?
+    $self->_process_cmd( cmd => ['EXPUNGE'], final => sub { 1 }, process => sub { } ); # XXX: $self->expunge_mailbox?
 
     if ( !$hq ) {
         # XXX: $self->logout?

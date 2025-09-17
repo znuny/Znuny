@@ -294,7 +294,9 @@ Core.UI.Datepicker = (function (TargetNS) {
         }
 
         $('#' + Core.App.EscapeSelector(Element.Day.attr('id')) + 'DatepickerIcon').off('click.Datepicker').on('click.Datepicker', function () {
-            $DatepickerElement.datepicker('show');
+            if (!(typeof Element.Disabled !== 'undefined' && Element.Disabled === true)) {
+                $DatepickerElement.datepicker('show');
+            }
             return false;
         });
 

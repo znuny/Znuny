@@ -486,11 +486,16 @@ sub Run {
             }
         }
 
+        my @Path = $SysConfigObject->SettingNavigationToPath(
+            Navigation => $RootNavigation,
+        );
+
         my $Output = $LayoutObject->Output(
             TemplateFile => 'SystemConfiguration/SettingsList',
             Data         => {
                 SettingList => \@SettingList,
-                ConfigLevel => $ConfigLevel
+                ConfigLevel => $ConfigLevel,
+                Path        => \@Path,
             },
         );
 

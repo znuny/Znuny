@@ -20,7 +20,8 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
     'Kernel::System::Valid',
     'Kernel::System::YAML',
-    'Kernel::System::Cache'
+    'Kernel::System::Cache',
+    'Kernel::Language',
 );
 
 =head1 NAME
@@ -727,25 +728,157 @@ sub NotificationEventCheck {
     return @IDs;
 }
 
+=head2 NotificationExport()
+
+export a notification
+
+    my $ExportData = $NotificationEventObject->NotificationExport(
+        # required either ID or ExportAll
+        ID                       => $NotificationID,
+        ExportAll                => 0,               # possible: 0, 1
+
+        UserID                   => 1,               # required
+        Type                     => 'Ticket',        # optional, default: 'Ticket'
+        All                      => 1                # optional, default: undef
+    }
+
+returns Notification hashes in an array with data:
+
+    my $ExportData =
+    [
+        {
+            'ChangeTime' => '2024-02-06 14:49:56',
+            'ValidID' => 1,
+            'ID' => 16,
+            'CreateBy' => 1,
+            'Data' => {
+                'Transports' => [
+                    'Email'
+                ],
+                'LanguageID' => [
+                    'en'
+                ],
+                'VisibleForAgent' => [
+                    '1'
+                ],
+                'Events' => [
+                    'UserMention'
+                ],
+                'ArticleAttachmentInclude' => [
+                    '0'
+                ],
+                'AgentEnabledByDefault' => [
+                    'Email'
+                ],
+                'TransportEmailTemplate' => [
+                    'Default'
+                ]
+            },
+            'Name' => 'Mention notification',
+            'ChangeBy' => 1,
+            'Comment' => '',
+            'CreateTime' => '2024-02-06 14:49:56',
+            'Message' => {
+                'en' => {
+                    'ContentType' => 'text/plain',
+                    'Body' => 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+
+you have been mentioned in ticket <OTRS_TICKET_NUMBER>.
+<OTRS_AGENT_BODY[5]>
+
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+
+-- <OTRS_CONFIG_NotificationSenderName>',
+                    'Subject' => 'Mention in ticket: <OTRS_TICKET_Title>'
+                },
+                'de' => {
+                    'ContentType' => 'text/plain',
+                    'Body' => "Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+
+Sie wurden erw\x{e4}hnt in Ticket <OTRS_TICKET_NUMBER>.
+<OTRS_AGENT_BODY[5]>
+
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+
+-- <OTRS_CONFIG_NotificationSenderName>",
+                    'Subject' => "Erw\x{e4}hnung in Ticket: <OTRS_TICKET_Title>"
+                }
+            }
+        }
+    ]
+
+=cut
+
+sub NotificationExport {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    my $NotificationData;
+
+    if ( $Param{ExportAll} ) {
+        my %NotificationList = $Self->NotificationList(
+            Type => $Param{Type},
+            All  => $Param{All},
+        );
+
+        my @Data;
+        for my $ItemID ( sort keys %NotificationList ) {
+            my %NotificationSingleData = $Self->NotificationExportDataGet(
+                ID => $ItemID,
+            );
+
+            push @Data, \%NotificationSingleData if %NotificationSingleData;
+        }
+        $NotificationData = \@Data;
+    }
+    elsif ( $Param{ID} ) {
+        my %NotificationSingleData = $Self->NotificationExportDataGet(
+            ID => $Param{ID},
+        );
+
+        return if !%NotificationSingleData;
+
+        $NotificationData = [ \%NotificationSingleData ];
+    }
+    else {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => 'Need either "ExportAll" or "ID" parameter!',
+        );
+        return;
+    }
+
+    return $NotificationData;
+}
+
 =head2 NotificationImport()
 
 import an Notification YAML file/content
 
     my $NotificationImport = $NotificationEventObject->NotificationImport(
-        Content                        => $YAMLContent,  # mandatory, YAML format
-        OverwriteExistingNotifications => 0,             # 0 || 1
-        UserID                         => 1,             # mandatory
+        Content                        => $YAMLContent, # mandatory, YAML format
+        OverwriteExistingNotifications => 0,            # optional, possible: 0, 1
+        UserID                         => 1,            # mandatory
     );
 
 Returns:
 
     $NotificationImport = {
-        Success              => 1,                                  # 1 if success or undef if operation could not
-                                                                    #    be performed
-        Message              => 'The Message to show.',             # error message
-        AddedNotifications   => 'Notification1, Notification2',     # list of Notifications correctly added
-        UpdatedNotifications => 'Notification3, Notification4',     # list of Notifications correctly updated
-        NotificationErrors   => 'Notification5',                    # list of Notifications that could not be added or updated
+        Success          => 1,                                  # 1 if success or undef if operation could not
+                                                                # be performed
+        Message          => 'The Message to show.',             # error message
+        Added            => 'Notification1, Notification2',     # string list of Notifications correctly added
+        Updated          => 'Notification3, Notification4',     # string list of Notifications correctly updated
+        NotUpdated       => 'Notification5, Notification6',     # string of Notifications not updated due to existing entity
+                                                                # with the same name
+        Errors           => 'Notification5',                    # string list of Notifications that could not be added or updated
+        AdditionalErrors => ['Some error occured!', 'Error2!'], # list of additional error not necessarily related to specified Notification
+
+        # for compatibility with existing code
+        AddedNotifications   => 'Notification1, Notification2',     # string list of Notifications correctly added
+        UpdatedNotifications => 'Notification3, Notification4',     # string list of Notifications correctly updated
+        NotificationErrors   => 'Notification5',                    # string list of Notifications that could not be added or updated
     };
 
 =cut
@@ -753,11 +886,14 @@ Returns:
 sub NotificationImport {
     my ( $Self, %Param ) = @_;
 
+    my $LogObject  = $Kernel::OM->Get('Kernel::System::Log');
+    my $YAMLObject = $Kernel::OM->Get('Kernel::System::YAML');
+
     for my $Needed (qw(Content UserID)) {
 
         # check needed stuff
         if ( !$Param{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => "Need $Needed!",
             );
@@ -768,7 +904,7 @@ sub NotificationImport {
         }
     }
 
-    my $NotificationData = $Kernel::OM->Get('Kernel::System::YAML')->Load(
+    my $NotificationData = $YAMLObject->Load(
         Data => $Param{Content},
     );
 
@@ -797,22 +933,40 @@ sub NotificationImport {
     }
 
     my @UpdatedNotifications;
+    my @NotUpdatedNotifications;
     my @AddedNotifications;
     my @NotificationErrors;
 
     my %CurrentNotifications = $Self->NotificationList(
         %Param,
         UserID => $Param{UserID},
+        All    => 1,
     );
     my %ReverseCurrentNotifications = reverse %CurrentNotifications;
+    my %AdditionalErrors;
 
-    Notification:
+    NOTIFICATION:
     for my $Notification ( @{$NotificationData} ) {
 
-        next Notification if !$Notification;
-        next Notification if ref $Notification ne 'HASH';
+        next NOTIFICATION if !$Notification;
+        next NOTIFICATION if ref $Notification ne 'HASH';
 
-        if ( $Param{OverwriteExistingNotifications} && $ReverseCurrentNotifications{ $Notification->{Name} } ) {
+        if ( !$Notification->{Name} ) {
+            my $StandardMessage = "One or more notifications \"Name\" parameter is missing!";
+            $AdditionalErrors{DataMissing} = $StandardMessage
+                if !$AdditionalErrors{DataMissing};
+
+            $LogObject->Log(
+                Priority => 'error',
+                Message  => $StandardMessage,
+            );
+
+            next NOTIFICATION;
+        }
+
+        my $NotificationExists = $ReverseCurrentNotifications{ $Notification->{Name} };
+
+        if ( $Param{OverwriteExistingNotifications} && $NotificationExists ) {
             my $Success = $Self->NotificationUpdate(
                 %{$Notification},
                 ID     => $ReverseCurrentNotifications{ $Notification->{Name} },
@@ -827,6 +981,10 @@ sub NotificationImport {
             }
         }
         else {
+            if ($NotificationExists) {
+                push @NotUpdatedNotifications, $Notification->{Name};
+                next NOTIFICATION;
+            }
 
             # now add the Notification
             my $Success = $Self->NotificationAdd(
@@ -843,12 +1001,78 @@ sub NotificationImport {
         }
     }
 
+    my @NotificationAdditionalErrors;
+
+    for my $ErrorKey ( sort keys %AdditionalErrors ) {
+        my $ErrorMessage = $AdditionalErrors{$ErrorKey};
+
+        push @NotificationAdditionalErrors, $ErrorMessage;
+    }
+
     return {
-        Success              => 1,
-        AddedNotifications   => join( ', ', @AddedNotifications ) || '',
+        Success => 1,
+
+        Added      => join( ', ', @AddedNotifications )      || '',
+        Updated    => join( ', ', @UpdatedNotifications )    || '',
+        NotUpdated => join( ', ', @NotUpdatedNotifications ) || '',
+        Errors     => join( ', ', @NotificationErrors )      || '',
+        AdditionalErrors => \@NotificationAdditionalErrors,
+
+        # For compatibility with existing code
+        AddedNotifications   => join( ', ', @AddedNotifications )   || '',
         UpdatedNotifications => join( ', ', @UpdatedNotifications ) || '',
-        NotificationErrors   => join( ', ', @NotificationErrors ) || '',
+
+        # Compatibility "NotificationErrors" are different as it counts
+        # not updated notifications as errors
+        NotificationErrors => join( ', ', ( @NotificationErrors, @NotUpdatedNotifications ) ) || '',
     };
+}
+
+=head2 NotificationCopy()
+
+copy a notification
+
+    my $NewNotificationID = $NotificationEventObject->NotificationCopy(
+        ID     => 1, # mandatory
+        UserID => 1, # mandatory
+    );
+
+=cut
+
+sub NotificationCopy {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject      = $Kernel::OM->Get('Kernel::System::Log');
+    my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
+
+    NEEDED:
+    for my $Needed (qw(ID UserID)) {
+
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    my %NotificationData = $Self->NotificationGet(
+        ID     => $Param{ID},
+        UserID => $Param{UserID},
+    );
+    return if !IsHashRefWithData( \%NotificationData );
+
+    # create new notification name
+    my $NotificationName = $LanguageObject->Translate( '%s (copy)', $NotificationData{Name} );
+
+    my $NewNotificationID = $Self->NotificationAdd(
+        %NotificationData,
+        Name   => $NotificationName,
+        UserID => $Param{UserID},
+    );
+
+    return $NewNotificationID;
 }
 
 =head2 NotificationBodyCheck()
@@ -893,6 +1117,150 @@ sub NotificationBodyCheck {
     }
 
     return 1;
+}
+
+=head2 NotificationExportDataGet()
+
+get data to export notification
+
+    my %NotificationData = $NotificationEventObject->NotificationExportDataGet(
+        ID               => 1, # mandatory
+    );
+
+Returns:
+
+    my %NotificationData = (
+        'ChangeTime' => '2024-02-06 14:49:56',
+        'ValidID' => 1,
+        'ID' => 16,
+        'CreateBy' => 1,
+        'Data' => {
+            'Transports' => [
+                'Email'
+            ],
+            'LanguageID' => [
+                'en'
+            ],
+            'VisibleForAgent' => [
+                '1'
+            ],
+            'Events' => [
+                'UserMention'
+            ],
+            'ArticleAttachmentInclude' => [
+                '0'
+            ],
+            'AgentEnabledByDefault' => [
+                'Email'
+            ],
+            'TransportEmailTemplate' => [
+                'Default'
+            ]
+        },
+        'Name' => 'Mention notification',
+        'ChangeBy' => 1,
+        'Comment' => '',
+        'CreateTime' => '2024-02-06 14:49:56',
+        'Message' => {
+            'en' => {
+                'ContentType' => 'text/plain',
+                'Body' => 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+
+you have been mentioned in ticket <OTRS_TICKET_NUMBER>.
+<OTRS_AGENT_BODY[5]>
+
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+
+-- <OTRS_CONFIG_NotificationSenderName>',
+                'Subject' => 'Mention in ticket: <OTRS_TICKET_Title>'
+            },
+            'de' => {
+                'ContentType' => 'text/plain',
+                'Body' => "Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+
+Sie wurden erw\x{e4}hnt in Ticket <OTRS_TICKET_NUMBER>.
+<OTRS_AGENT_BODY[5]>
+
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+
+-- <OTRS_CONFIG_NotificationSenderName>",
+                'Subject' => "Erw\x{e4}hnung in Ticket: <OTRS_TICKET_Title>"
+            }
+        }
+    )
+
+=cut
+
+sub NotificationExportDataGet {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(ID)) {
+
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    my %Notification = $Self->NotificationGet(
+        ID => $Param{ID},
+    );
+
+    return if !%Notification;
+
+    $Notification{Data}->{NotificationType} ||= ['Ticket'];
+
+    return %Notification;
+}
+
+=head2 NotificationExportFilenameGet()
+
+get export file name based on notification name & type
+
+    my $Filename = $NotificationEventObject->NotificationExportFilenameGet(
+        Type => 'Appointment',
+        Name => 'notification_1',
+        Format => 'YAML',
+    );
+
+=cut
+
+sub NotificationExportFilenameGet {
+    my ( $Self, %Param ) = @_;
+
+    my $Type = $Param{Type};
+
+    my $Extension = '';
+    if ( $Param{Format} =~ /yml|yaml/i ) {
+        $Extension = '.yaml';
+    }
+
+    return "Export_Notification$Extension"              if !$Type && !$Param{Name};
+    return "Export_Notification_$Param{Type}$Extension" if $Type  && !$Param{Name};
+
+    # no type specified but it can be recognized by the name
+    # get notification with it's type
+    if ( !$Param{Type} && $Param{Name} ) {
+        my %NotificationData = $Self->NotificationGet(
+            Name => $Param{Name},
+        );
+
+        $Type = $NotificationData{Data}->{NotificationType} ||= ['Ticket'];
+        $Type = $Type->[0];
+    }
+
+    my $DisplayName = "Export_Notification_${Type}_" . $Param{Name};
+    $DisplayName =~ s{[^a-zA-Z0-9-_]}{_}xmsg;
+    $DisplayName =~ s{_{2,}}{_}g;
+    $DisplayName =~ s{_$}{};
+
+    return "$DisplayName$Extension";
 }
 
 1;

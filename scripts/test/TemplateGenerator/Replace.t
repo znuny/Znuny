@@ -556,11 +556,11 @@ mailto-Link <a href="mailto:skywalker@otrs.org?body=From%3A%20test%40home.com">E
         },
         RichText => 1,
         Template => 'Test &lt;OTRS_AGENT_BODY&gt; - &lt;OTRS_CUSTOMER_BODY&gt;',
-        Result   => "Test Line1<br/>
-Line2<br/>
-Line3 - Line1<br/>
-Line2<br/>
-Line3",
+        Result   => "Test <p>Line1</p>
+<p>Line2</p>
+<p>Line3</p> - <p>Line1</p>
+<p>Line2</p>
+<p>Line3</p>",
     },
     {
         Name => 'OTRS AGENT + CUSTOMER BODY[2]',
@@ -585,19 +585,19 @@ Line3",
         RichText => 1,
         Template => 'Test &lt;OTRS_AGENT_BODY[7]&gt; - &lt;OTRS_CUSTOMER_BODY[7]&gt;',
         Result =>
-            'Test <div  type="cite" style="border:none;border-left:solid blue 1.5pt;padding:0cm 0cm 0cm 4.0pt">Line1<br/>
-Line2<br/>
-Line3<br/>
-Line4<br/>
-Line5<br/>
-Line6<br/>
-Line7</div> - <div  type="cite" style="border:none;border-left:solid blue 1.5pt;padding:0cm 0cm 0cm 4.0pt">Line1<br/>
-Line2<br/>
-Line3<br/>
-Line4<br/>
-Line5<br/>
-Line6<br/>
-Line7</div>',
+            'Test <div  type="cite" style="border:none;border-left:solid blue 1.5pt;padding:0cm 0cm 0cm 4.0pt"><p>Line1</p>
+<p>Line2</p>
+<p>Line3</p>
+<p>Line4</p>
+<p>Line5</p>
+<p>Line6</p>
+<p>Line7</p></div> - <div  type="cite" style="border:none;border-left:solid blue 1.5pt;padding:0cm 0cm 0cm 4.0pt"><p>Line1</p>
+<p>Line2</p>
+<p>Line3</p>
+<p>Line4</p>
+<p>Line5</p>
+<p>Line6</p>
+<p>Line7</p></div>',
     },
     {
         Name => 'OTRS AGENT + CUSTOMER EMAIL',    # EMAIL without [ ] does not exists
@@ -897,9 +897,9 @@ my $Result = $Kernel::OM->Get('Kernel::System::CalendarTemplateGenerator')->_Rep
 );
 $Self->Is(
     $Result,
-    "Description Test<br/>
-description<br/>
-$RandomID",
+    "<p>Description Test</p>
+<p>description</p>
+<p>$RandomID</p>",
     "Appointment description tag correctly replaced.",
 );
 

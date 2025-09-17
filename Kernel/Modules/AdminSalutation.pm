@@ -13,6 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::Language qw(Translatable);
+use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
 
@@ -32,6 +33,7 @@ sub Run {
     my $ParamObject      = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $LayoutObject     = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $SalutationObject = $Kernel::OM->Get('Kernel::System::Salutation');
+    my $YAMLObject       = $Kernel::OM->Get('Kernel::System::YAML');
 
     # ------------------------------------------------------------ #
     # change
@@ -223,6 +225,191 @@ sub Run {
         return $Output;
     }
 
+    # ------------------------------------------------------------ #
+    # Delete
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'Delete' ) {
+
+        # challenge token check for write action
+        $LayoutObject->ChallengeTokenCheck();
+
+        my %GetParam;
+        for my $Parameter (qw(ID)) {
+            $GetParam{$Parameter} = $ParamObject->GetParam( Param => $Parameter ) || '';
+        }
+
+        my $Delete = $SalutationObject->SalutationDelete(
+            ID     => $GetParam{ID},
+            UserID => $Self->{UserID},
+        );
+
+        return $LayoutObject->ErrorScreen() if !$Delete;
+        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+    }
+
+    # ------------------------------------------------------------ #
+    # SalutationExport
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'SalutationExport' ) {
+
+        my $SalutationID = $ParamObject->GetParam( Param => 'ID' ) || '';
+        my $SalutationData;
+        my $SalutationName;
+        if ($SalutationID) {
+            $SalutationData = $SalutationObject->SalutationExport(
+                ID => $SalutationID,
+            );
+
+            return $LayoutObject->ErrorScreen(
+                Message => $LayoutObject->{LanguageObject}
+                    ->Translate( 'Error exporting salutation with ID %s!', $SalutationID ),
+            ) if !IsArrayRefWithData($SalutationData);
+
+            $SalutationName = $SalutationData->[0]->{Name};
+        }
+        else {
+            $SalutationData = $SalutationObject->SalutationExport(
+                ExportAll => 1,
+            );
+        }
+
+        my $Filename = $SalutationObject->SalutationExportFilenameGet(
+            Name   => $SalutationName,
+            Format => 'YAML',
+        );
+
+        # convert the Salutation data hash to string
+        my $SalutationDataYAML = $YAMLObject->Dump( Data => $SalutationData );
+
+        # send the result to the browser
+        return $LayoutObject->Attachment(
+            ContentType => 'text/html; charset=' . $LayoutObject->{Charset},
+            Content     => $SalutationDataYAML,
+            Type        => 'attachment',
+            Filename    => $Filename,
+            NoCache     => 1,
+        );
+    }
+
+    # ------------------------------------------------------------ #
+    # SalutationCopy
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'SalutationCopy' ) {
+
+        my $SalutationID = $ParamObject->GetParam( Param => 'ID' ) || '';
+
+        # challenge token check for write action
+        $LayoutObject->ChallengeTokenCheck();
+
+        my $NewResponseID = $SalutationObject->SalutationCopy(
+            ID     => $SalutationID,
+            UserID => $Self->{UserID},
+        );
+
+        return $LayoutObject->ErrorScreen(
+            Message => Translatable("Error creating the salutation."),
+        ) if !$NewResponseID;
+
+        # return to overview
+        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+    }
+
+    # ------------------------------------------------------------ #
+    # SalutationImport
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'SalutationImport' ) {
+
+        # challenge token check for write action
+        $LayoutObject->ChallengeTokenCheck();
+
+        my $FormID      = $ParamObject->GetParam( Param => 'FormID' ) || '';
+        my %UploadStuff = $ParamObject->GetUploadAll(
+            Param  => 'FileUpload',
+            Source => 'string',
+        );
+
+        my $OverwriteExistingSalutations = $ParamObject->GetParam( Param => 'OverwriteExistingSalutations' ) || '';
+
+        my $SalutationImport = $SalutationObject->SalutationImport(
+            Content                      => $UploadStuff{Content},
+            OverwriteExistingSalutations => $OverwriteExistingSalutations,
+            UserID                       => $Self->{UserID},
+        );
+
+        if ( !$SalutationImport->{Success} ) {
+            my $Message = $SalutationImport->{Message}
+                || Translatable(
+                'Salutations could not be imported due to an unknown error. Please check logs for more information.'
+                );
+            return $LayoutObject->ErrorScreen(
+                Message => $Message,
+            );
+        }
+
+        if ( $SalutationImport->{Added} ) {
+            push @{ $Param{NotifyData} }, {
+                Info => $LayoutObject->{LanguageObject}->Translate(
+                    'The following salutations have been added successfully: %s.',
+                    $SalutationImport->{Added}
+                ),
+            };
+        }
+        if ( $SalutationImport->{Updated} ) {
+            push @{ $Param{NotifyData} }, {
+                Info => $LayoutObject->{LanguageObject}->Translate(
+                    'The following salutations have been updated successfully: %s.',
+                    $SalutationImport->{Updated}
+                ),
+            };
+        }
+        if ( $SalutationImport->{NotUpdated} ) {
+            push @{ $Param{NotifyData} }, {
+                Info => $LayoutObject->{LanguageObject}->Translate(
+                    'The following salutations were not updated: %s.',
+                    $SalutationImport->{NotUpdated}
+                ),
+            };
+        }
+        if ( $SalutationImport->{Errors} ) {
+            push @{ $Param{NotifyData} }, {
+                Priority => 'Error',
+                Info     => $LayoutObject->{LanguageObject}->Translate(
+                    'Errors adding/updating the following salutations: %s. Please check logs for more information.',
+                    $SalutationImport->{Errors}
+                ),
+            };
+        }
+        if ( IsArrayRefWithData( $SalutationImport->{AdditionalErrors} ) ) {
+            for my $Error ( @{ $SalutationImport->{AdditionalErrors} } ) {
+                push @{ $Param{NotifyData} }, {
+                    Priority => 'Error',
+                    Info     => $LayoutObject->{LanguageObject}->Translate($Error),
+                };
+            }
+        }
+
+        $Self->_Overview();
+        my $Output = $LayoutObject->Header();
+        $Output .= $LayoutObject->NavigationBar();
+
+        # show Salutations if any
+        if ( $Param{NotifyData} ) {
+            for my $Salutation ( @{ $Param{NotifyData} } ) {
+                $Output .= $LayoutObject->Notify(
+                    %{$Salutation},
+                );
+            }
+        }
+
+        $Output .= $LayoutObject->Output(
+            TemplateFile => 'AdminSalutation',
+            Data         => \%Param,
+        );
+        $Output .= $LayoutObject->Footer();
+
+        return $Output;
+    }
+
     # ------------------------------------------------------------
     # overview
     # ------------------------------------------------------------
@@ -321,6 +508,10 @@ sub _Overview {
 
     $LayoutObject->Block(
         Name => 'ActionAdd',
+    );
+
+    $LayoutObject->Block(
+        Name => 'ActionImportExport',
     );
 
     $LayoutObject->Block(

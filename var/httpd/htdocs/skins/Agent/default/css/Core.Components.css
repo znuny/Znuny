@@ -282,8 +282,20 @@ handheld {
         border: 0;
         float: left;
         border-radius: var(--border-radius-xl);
+        background: var(--primary-color);
     }
 
+    .pill.Info,
+    .pill.Error,
+    .pill.Success,
+    .pill.Warning {
+        color: var(--main-font-color) !important;
+    }
+
+    .pill.contrast {
+        border: var(--border-width) solid var(--main-font-color);
+        color: var(--main-font-color) !important;
+    }
 
     /* **************************************** Scrollbar **************************************** */
     ::-webkit-scrollbar,
@@ -736,6 +748,7 @@ handheld {
 
     /* ************************************* Attachment Component ********************************* */
 
+    .component-file,
     .component-attachment {
         display: flex;
         flex-direction: column;
@@ -754,18 +767,6 @@ handheld {
     .LayoutPopup .card .card-item .Field.component-attachment,
     .AgentTicketActionCommon fieldset .Field.component-attachment {
         margin-top: var(--margin-sm);
-    }
-
-    .outer-upload-file {
-        display: flex;
-        min-width: 100%;
-    }
-
-    .outer-upload-file .DnDUpload {}
-
-    .outer-upload-file .DnDUpload .ReadyForUpload {
-        display: flex;
-        align-content: center;
     }
 
     .AttachmentListContainer {
@@ -886,9 +887,24 @@ handheld {
         font-weight: var(--medium);
         text-overflow: ellipsis;
         overflow: hidden;
-        white-space: pre;
+        white-space: pre-line;
         min-width: 125px;
         max-width: 300px;
+        height: 50px;
+        max-height: 50px;
+        line-height: normal;
+    }
+
+    table.AttachmentList tbody tr td.OptionIcon,
+    table.AttachmentList tbody tr td:has(a){
+        padding: 0;
+        min-width: 40px;
+    }
+
+    table.AttachmentList tbody tr td a.AttachmentPreview{
+        border: unset;
+        float: unset;
+        background-color: unset;
     }
 
     table.AttachmentList tbody tr:nth-child(2n) td {
@@ -903,14 +919,16 @@ handheld {
         display: block;
     }
 
-    table.AttachmentList tbody tr,
-    table.AttachmentList tbody tr td {
-        max-height: 50px;
-        line-height: normal;
-    }
-
     table.AttachmentList tbody tr td {
         border-top: var(--border-width) var(--border-solid) var(--border-color);
+    }
+
+    table.AttachmentList tbody tr td:first-child {
+        width: 100%;
+        /* width: 40em; */
+        /* min-width: 40em; */
+        /* max-width: 40em; */
+        word-break: break-all;
     }
 
     table.AttachmentList tbody tr:first-child td {
@@ -921,9 +939,6 @@ handheld {
         color: var(--primary-color);
     }
 
-    table.AttachmentList .Filetype {
-        display: none;
-    }
 
     table.AttachmentList .Filesize {
         color: var(--gray-dark-semi);
@@ -941,15 +956,14 @@ handheld {
     }*/
 
     table.AttachmentList tbody tr td:last-child {
-        width: 100%;
         text-align: right;
         padding-top: 0;
         padding-bottom: 0;
     }
-
+/*
     table.AttachmentList .AttachmentDelete {
         display: inline-flex;
-    }
+    } */
 
     table.AttachmentList .AttachmentDelete i {
         width: 16px;
@@ -1983,11 +1997,6 @@ handheld {
     }
 
     @media only screen and (max-width: 1024px) {
-
-        .WidgetSimple span.Pagination {
-            display: none;
-        }
-
         .WidgetSimple span.Pagination.AsBlock {
             display: flex;
         }

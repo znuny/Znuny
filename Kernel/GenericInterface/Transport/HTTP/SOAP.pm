@@ -1286,42 +1286,44 @@ If entries exist that are not mentioned in sorting config,
 they will be added after the sorted entries in ascending alphanumerical order.
 
 Example:
-$Data = {
-    Key1 => 'Value',
-    Key2 => {
-        Key3 => 'Value',
-        Key4 => [
-            'Value',
-            'Value',
-            {
-                Key5 => 'Value',
-            },
-        ],
-    },
-};
-$Sort = [                                  # wrapper for level 1
-    {                                      # first entry for level 1
-        Key2 => [                          # wrapper for level 2
-            {                              # first entry for level 2
-                Key4 => [
-                    undef,
-                    undef,
-                    [                      # wrapper for level 3
-                        {
-                            Key5 => undef, # first entry for level 3
-                        },
-                    ],                     # wrapper for level 3
-                ],
-            },                             # first entry for level 2
-            {                              # second entry for level 2
-                Key3 => undef,
-            },                             # second entry for level 2
-        ],                                 # wrapper for level 2
-    }                                      # first entry for level 1
-    {                                      # second entry for level 1
-        Key1 => undef,
-    }                                      # second entry for level 1
-];                                         # wrapper for level 1
+
+    $Data = {
+        Key1 => 'Value',
+        Key2 => {
+            Key3 => 'Value',
+            Key4 => [
+                'Value',
+                'Value',
+                {
+                    Key5 => 'Value',
+                },
+            ],
+        },
+    };
+
+    $Sort = [                                  # wrapper for level 1
+        {                                      # first entry for level 1
+            Key2 => [                          # wrapper for level 2
+                {                              # first entry for level 2
+                    Key4 => [
+                        undef,
+                        undef,
+                        [                      # wrapper for level 3
+                            {
+                                Key5 => undef, # first entry for level 3
+                            },
+                        ],                     # wrapper for level 3
+                    ],
+                },                             # first entry for level 2
+                {                              # second entry for level 2
+                    Key3 => undef,
+                },                             # second entry for level 2
+            ],                                 # wrapper for level 2
+        }                                      # first entry for level 1
+        {                                      # second entry for level 1
+            Key1 => undef,
+        }                                      # second entry for level 1
+    ];                                         # wrapper for level 1
 
     my $Result = $TransportObject->_SOAPOutputRecursion(
         Data => {           # data payload

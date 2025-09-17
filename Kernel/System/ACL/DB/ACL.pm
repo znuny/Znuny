@@ -822,6 +822,7 @@ gets a complete ACL information dump from the DB
     );
 
 Returns:
+
     $ACLDump = '/opt/znuny/var/myfile.txt';          # or undef if can't write the file
 
 =cut

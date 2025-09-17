@@ -205,7 +205,13 @@ sub Run {
         # Check if attribute is already set in ACL.
         next TICKETATTRIBUTERELATIONS if $ACLAttributeSet{$Attribute2};
 
-        my $PossibleData = $ACLRelatedAttributeData->{$Attribute2} || ( $AlwaysPossibleNone ? [''] : [] );
+        # Issue 1147: Empty selection only is allowed for dynamic fields
+        # because otherwise non-DF attributes (like queue selection)
+        # are not working anymore.
+        my $PossibleData = $ACLRelatedAttributeData->{$Attribute2};
+        if ( $Attribute2 =~ m{\ADynamicField_}i ) {
+            $PossibleData ||= $AlwaysPossibleNone ? [''] : [];
+        }
 
         $Param{Acl}->{ $ACLCounter . '-TicketAttributeRelations' } = {
             'Properties' => {

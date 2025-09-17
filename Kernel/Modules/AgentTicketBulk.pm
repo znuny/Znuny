@@ -594,7 +594,7 @@ sub Run {
                 qw(ServiceID OwnerID Owner ResponsibleID Responsible PriorityID Priority QueueID Queue Subject
                 Body IsVisibleForCustomer TypeID StateID State MergeToSelection MergeTo LinkTogether
                 EmailSubject EmailBody EmailTimeUnits
-                LinkTogetherParent Unlock MergeToChecked MergeToOldestChecked MarkTicketsAsSeen MarkTicketsAsUnseen)
+                LinkTogetherParent Unlock MergeToChecked MergeToOldestChecked MarkTicketsAs)
                 )
             {
                 $GetParam{$Key} = $ParamObject->GetParam( Param => $Key ) || '';
@@ -603,15 +603,6 @@ sub Run {
             for my $Key (qw(TimeUnits Watch)) {
                 $GetParam{$Key} = $ParamObject->GetParam( Param => $Key );
             }
-
-            # get time stamp based on user time zone
-            %Time = $LayoutObject->TransformDateSelection(
-                Year   => $ParamObject->GetParam( Param => 'Year' ),
-                Month  => $ParamObject->GetParam( Param => 'Month' ),
-                Day    => $ParamObject->GetParam( Param => 'Day' ),
-                Hour   => $ParamObject->GetParam( Param => 'Hour' ),
-                Minute => $ParamObject->GetParam( Param => 'Minute' ),
-            );
 
             if ( $GetParam{'MergeToSelection'} eq 'OptionMergeTo' ) {
                 $GetParam{'MergeToChecked'} = 'checked';
@@ -672,6 +663,15 @@ sub Run {
                 }
 
                 if ( $StateData{TypeName} =~ /^pending/i ) {
+
+                    # get time stamp based on user time zone
+                    %Time = $LayoutObject->TransformDateSelection(
+                        Year   => $ParamObject->GetParam( Param => 'Year' ),
+                        Month  => $ParamObject->GetParam( Param => 'Month' ),
+                        Day    => $ParamObject->GetParam( Param => 'Day' ),
+                        Hour   => $ParamObject->GetParam( Param => 'Hour' ),
+                        Minute => $ParamObject->GetParam( Param => 'Minute' ),
+                    );
 
                     # create datetime object
                     my $PendingDateTimeObject = $Kernel::OM->Create(
@@ -1319,36 +1319,44 @@ sub Run {
                 }
 
                 # watch or unwatch tickets
-                if ( $GetParam{'Watch'} eq '1' ) {
-                    $Result = $TicketObject->TicketWatchSubscribe(
-                        TicketID    => $TicketID,
-                        WatchUserID => $Self->{UserID},
-                        UserID      => $Self->{UserID},
-                    );
+                if ( defined $GetParam{'Watch'} ) {
+                    if ( $GetParam{'Watch'} eq '1' ) {
+                        $Result = $TicketObject->TicketWatchSubscribe(
+                            TicketID    => $TicketID,
+                            WatchUserID => $Self->{UserID},
+                            UserID      => $Self->{UserID},
+                        );
 
-                    if ( !$Result ) {
-                        push @NonUpdatedTickets, $Ticket{TicketNumber};
+                        if ( !$Result ) {
+                            push @NonUpdatedTickets, $Ticket{TicketNumber};
+                        }
+                    }
+                    elsif ( $GetParam{'Watch'} eq '0' ) {
+                        $Result = $TicketObject->TicketWatchUnsubscribe(
+                            TicketID    => $TicketID,
+                            WatchUserID => $Self->{UserID},
+                            UserID      => $Self->{UserID},
+                        );
+
+                        if ( !$Result ) {
+                            push @NonUpdatedTickets, $Ticket{TicketNumber};
+                        }
                     }
                 }
-                elsif ( $GetParam{'Watch'} eq '0' ) {
-                    $Result = $TicketObject->TicketWatchUnsubscribe(
-                        TicketID    => $TicketID,
-                        WatchUserID => $Self->{UserID},
-                        UserID      => $Self->{UserID},
-                    );
 
-                    if ( !$Result ) {
-                        push @NonUpdatedTickets, $Ticket{TicketNumber};
-                    }
-                }
+                if ( $GetParam{'MarkTicketsAs'} eq 'Seen' || $GetParam{'MarkTicketsAs'} eq 'Unseen' ) {
 
-                if ( $GetParam{'MarkTicketsAsSeen'} || $GetParam{'MarkTicketsAsUnseen'} ) {
-                    my $TicketActionFunction  = 'TicketFlagDelete';
-                    my $ArticleActionFunction = 'ArticleFlagDelete';
+                    my $TicketActionFunction;
+                    my $ArticleActionFunction;
 
-                    if ( $GetParam{'MarkTicketsAsSeen'} ) {
+                    if ( $GetParam{'MarkTicketsAs'} eq 'Seen' ) {
                         $TicketActionFunction  = 'TicketFlagSet';
                         $ArticleActionFunction = 'ArticleFlagSet';
+
+                    }
+                    elsif ( $GetParam{'MarkTicketsAs'} eq 'Unseen' ) {
+                        $TicketActionFunction  = 'TicketFlagDelete';
+                        $ArticleActionFunction = 'ArticleFlagDelete';
                     }
 
                     my @ArticleIDs = $ArticleObject->ArticleIndex(
@@ -1839,18 +1847,16 @@ sub _Mask {
         );
     }
 
-    $Param{MarkTicketsAsSeenOption} = $LayoutObject->BuildSelection(
-        Data       => $ConfigObject->Get('YesNoOptions'),
-        Name       => 'MarkTicketsAsSeen',
-        SelectedID => $Param{MarkTicketsAsSeen} // 0,
-        Class      => 'Modernize',
-    );
-
-    $Param{MarkTicketsAsUnseenOption} = $LayoutObject->BuildSelection(
-        Data       => $ConfigObject->Get('YesNoOptions'),
-        Name       => 'MarkTicketsAsUnseen',
-        SelectedID => $Param{MarkTicketsAsUnseen} // 0,
-        Class      => 'Modernize',
+    $Param{MarkTicketsAsOption} = $LayoutObject->BuildSelection(
+        Data => {
+            Seen   => 'Mark as seen',
+            Unseen => 'Mark as unseen',
+        },
+        Name         => 'MarkTicketsAs',
+        SelectedID   => $Param{MarkTicketsAs} // 0,
+        PossibleNone => 1,
+        Translation  => 1,
+        Class        => 'Modernize',
     );
 
     # add rich text editor for note & email

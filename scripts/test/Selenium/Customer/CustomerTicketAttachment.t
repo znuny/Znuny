@@ -105,9 +105,6 @@ $Selenium->RunTest(
         # Click on test created ticket on CustomerTicketOverview screen.
         $Selenium->find_element( $TicketNumber, 'link_text' )->VerifiedClick();
 
-        use Data::Dumper;
-        print STDERR 'Debug Dump -  - $AttachmentName = ' . Dumper( \$AttachmentName ) . "\n";
-
         # Click on attachment to open it.
         $Selenium->find_element( "#VisibleMessageContent span[title*=\"$AttachmentName\"]", 'css' )->click();
 

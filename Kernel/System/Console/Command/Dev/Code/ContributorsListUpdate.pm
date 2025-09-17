@@ -25,6 +25,13 @@ sub Configure {
 
     $Self->Description('Update the list of contributors based on git commit information.');
 
+    $Self->AddOption(
+        Name        => 'generate',
+        Description => "Generate (regenerate) the complete AUTHORS.md file instead of just adding new authors.",
+        Required    => 0,
+        HasValue    => 0,
+    );
+
     return;
 }
 
@@ -33,24 +40,82 @@ sub Run {
 
     chdir $Kernel::OM->Get('Kernel::Config')->Get('Home');
 
-    my @Lines = qx{git log --format="%aN <%aE>"};
-    my %Seen;
-    map { $Seen{$_}++ } @Lines;
+    # Check if we should generate the whole file
+    my $Generate = $Self->GetOption('generate');
 
-    my $FileHandle = IO::File->new( 'AUTHORS.md', 'w' );
-    $FileHandle->print("The following persons contributed to Znuny:\n\n");
+    if ($Generate) {
+        my @Lines = qx{git log --format="%aN <%aE>"};
+        my %Authors;
+        map { chomp; $Authors{$_} = 1 if $_ !~ m/^[^<>]+ \s <>\s?$/smx } @Lines;
 
-    AUTHOR:
-    for my $Author ( sort keys %Seen ) {
-        chomp $Author;
-        if ( $Author =~ m/^[^<>]+ \s <>\s?$/smx ) {
-            $Self->Print("<yellow>Could not find Author $Author, skipping.</yellow>\n");
-            next AUTHOR;
+        my $FileHandle = IO::File->new( 'AUTHORS.md', 'w' );
+        $FileHandle->print("The following persons contributed to Znuny:\n\n");
+
+        for my $Author ( sort { lc($a) cmp lc($b) } keys %Authors ) {
+            $FileHandle->print("* $Author\n");
         }
-        $FileHandle->print("* $Author\n");
+        $FileHandle->close();
+        $Self->Print("<green>AUTHORS.md has been completely generated.</green>\n");
     }
+    else {
+        # First read existing authors
+        my %ExistingAuthors;
+        my $Header = "The following persons contributed to Znuny:\n\n";
 
-    $FileHandle->close();
+        if ( -f 'AUTHORS.md' ) {
+            my $FileHandle = IO::File->new( 'AUTHORS.md', 'r' );
+            my $IsHeader   = 1;
+
+            LINE:
+            while ( my $Line = <$FileHandle> ) {
+                if ($IsHeader) {
+                    $IsHeader = 0;
+                    next LINE;
+                }
+                if ( $Line !~ /^\* (.+)$/ ) {
+                    next LINE;
+                }
+                $ExistingAuthors{$1} = 1;
+            }
+            $FileHandle->close();
+        }
+
+        # Get authors from recent commits
+        my @Lines = qx{git log --format="%aN <%aE>"};
+        my %NewAuthors;
+        my $HasNewAuthors = 0;
+
+        AUTHOR:
+        for my $Author (@Lines) {
+            chomp $Author;
+            next AUTHOR if $Author =~ m/^[^<>]+ \s <>\s?$/smx;
+
+            if ( !$ExistingAuthors{$Author} ) {
+                $NewAuthors{$Author} = 1;
+                $HasNewAuthors = 1;
+            }
+        }
+
+        # Merge and sort all authors
+        my %AllAuthors = ( %ExistingAuthors, %NewAuthors );
+
+        if ($HasNewAuthors) {
+            my $FileHandle = IO::File->new( 'AUTHORS.md', 'w' );
+            $FileHandle->print($Header);
+
+            for my $Author ( sort { lc($a) cmp lc($b) } keys %AllAuthors ) {
+                $FileHandle->print("* $Author\n");
+            }
+            $FileHandle->close();
+
+            for my $Author ( sort { lc($a) cmp lc($b) } keys %NewAuthors ) {
+                $Self->Print("<green>Added new author: $Author</green>\n");
+            }
+        }
+        else {
+            $Self->Print("<yellow>No new authors found.</yellow>\n");
+        }
+    }
 
     return $Self->ExitCodeOk();
 }

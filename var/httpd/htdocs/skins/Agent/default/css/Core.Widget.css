@@ -1147,16 +1147,17 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         margin-top: -5px;
     }
 
+    /* TODO check (SN): Those rules seems to apply to the dialog plugin which is no longer accessible in CKEditor5*/
     /*.CallForAction,*/
-    .cke_dialog_footer_buttons a.cke_dialog_ui_button {
+    /*.cke_dialog_footer_buttons a.cke_dialog_ui_button {*/
         /*width: 100%;
         background: var(--primary-color);
         color: var(--white);
         border: none;*/
-        border-radius: var(--border-radius-sm);
+     /*   border-radius: var(--border-radius-sm);
         min-height: var(--btn-min-height);
         font-weight: var(--semi-bold);
-    }
+    }*/
 
     .ActionsSideBar .ActionsSideBarComp .CallForAction {
         max-width: 100%;
@@ -1175,14 +1176,15 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         cursor: default;
     }
 
-    .cke_dialog_footer_buttons a.cke_dialog_ui_button {
+    /* TODO check (SN): Those rules seems to apply to the dialog plugin which is no longer accessible in CKEditor5*/
+    /*.cke_dialog_footer_buttons a.cke_dialog_ui_button {
         font-weight: bold !important;
     }
 
     .cke_dialog_footer_buttons a.cke_dialog_ui_button:hover {
         background-color: #e5e5e5;
         border-color: #999;
-    }
+    }*/
 
     .CallForAction.Hidden {
         display: none;
@@ -1224,11 +1226,13 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         padding: 0;
     }
 
-    .CallForAction span,
-    .cke_dialog_footer_buttons td a.cke_dialog_ui_button span {
+    /* TODO check (SN): Those rules seems to apply to the dialog plugin which is no longer accessible in CKEditor5*/
+    /*.cke_dialog_footer_buttons td a.cke_dialog_ui_button span */
+    .CallForAction span
+    {
         min-height: 12px;
         /*padding: var(--padding-sm); parent element (btn) already has side paddings */
-        line-height: 14px;
+        /*line-height: 14px;*/
         /*color: var(--white); -- currently overrides text color in Dashboard Toolbar buttons*/
         font-size: var(--font-size-sm);
         border: none;
@@ -1258,12 +1262,13 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         opacity: .5;
     }
 
-    .cke_dialog_footer_buttons td a.cke_dialog_ui_button span {
+    /* TODO check (SN): Those rules seems to apply to the dialog plugin which is no longer accessible in CKEditor5*/
+    /*.cke_dialog_footer_buttons td a.cke_dialog_ui_button span {
         font-size: 11px;
         line-height: auto;
         color: #000;
         font-weight: bold;
-    }
+    }*/
 
     #SelectionCustomerID {
         background: 0;

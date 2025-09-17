@@ -131,7 +131,7 @@ Core.Form.ErrorTooltips = (function (TargetNS) {
          * Now determine if the tongue needs to be right or left, depending on the
          * position of the target element on the screen.
          */
-        if (($(document).width() - $Element.offset().left) < 250) {
+        if ($Element.offset() && ($(document).width() - $Element.offset().left) < 250) {
             TongueClass = 'TongueRight';
         }
 
@@ -142,12 +142,14 @@ Core.Form.ErrorTooltips = (function (TargetNS) {
         $TooltipContent.html(TooltipContent);
         $Tooltip.append($TooltipContent);
 
-        Offset = $Element.offset();
+        Offset = $Element.offset() || {};
 
         $TooltipContainer
             .empty()
             .append($Tooltip)
             .show();
+
+        if(Object.keys(Offset).length === 0) return;
 
         if (TooltipPosition === 'TongueBottom') {
             TopOffset = Offset.top + TooltipOffsetTop;
@@ -210,12 +212,14 @@ Core.Form.ErrorTooltips = (function (TargetNS) {
      * @name ShowRTETooltip
      * @memberof Core.Form.ErrorTooltips
      * @function
-     * @param {Object} Event - The event object.
+     * @param {jQueryObject} $RTEElement - Rich text editor main element.
+     * @param {String} Message - The string content that will be show in tooltip.
      * @description
      *      This function shows the tooltip for a rich text editor.
      */
-    function ShowRTETooltip(Event) {
-        TargetNS.ShowTooltip($('#cke_' + Event.listenerData.ElementID + ' .cke_contents'), Event.listenerData.Message);
+    function ShowRTETooltip($RTEElement, Message) {
+        var $EditorContentDiv = $RTEElement.closest('div').find('div.ck.ck-content[contenteditable="true"]');
+        TargetNS.ShowTooltip($EditorContentDiv, Message);
     }
 
     /**
@@ -240,9 +244,26 @@ Core.Form.ErrorTooltips = (function (TargetNS) {
      *      This function initializes the necessary stuff for a tooltip in a rich text editor.
      */
     TargetNS.InitRTETooltip = function ($Element, Message) {
-        var ElementID = $Element.attr('id');
-        CKEDITOR.instances[ElementID].on('focus', ShowRTETooltip, null, {ElementID: ElementID, Message: Message});
-        CKEDITOR.instances[ElementID].on('blur', RemoveRTETooltip, null, ElementID);
+        var ElementID = $Element.attr('id'),
+            CKEditorInstance = Core.UI.RichTextEditor.GetInstance(ElementID),
+            Value;
+
+        // transform RichText editor content from tags into real text
+        // based on we can identify if the content is really empty
+        CKEditorInstance.ui.focusTracker.on('change:isFocused', function(evt, name, isFocused){
+            if (isFocused) {
+                if (!$Element.val().match(/<img/)) {
+                    Value = $Element.val().replace(/\s+|&nbsp;|<\/?\w+[^>]*\/?>/g, '');
+                } else {
+                    Value = ' ';
+                }
+                if(Value == ""){
+                    ShowRTETooltip($Element, Message);
+                }
+            } else {
+                RemoveRTETooltip($Element);
+            }
+        });
     };
 
     /**
@@ -253,10 +274,7 @@ Core.Form.ErrorTooltips = (function (TargetNS) {
      * @description
      *      This function removes the tooltip in a rich text editor.
      */
-    TargetNS.RemoveRTETooltip = function ($Element) {
-        var ElementID = $Element.attr('id');
-        CKEDITOR.instances[ElementID].removeListener('focus', ShowRTETooltip);
-        CKEDITOR.instances[ElementID].removeListener('blur', RemoveRTETooltip);
+    TargetNS.RemoveRTETooltip = function () {
         TargetNS.HideTooltip();
     };
 

@@ -3262,6 +3262,7 @@ system data.
     my %Result = $PackageObject->PackageUpgradeAllIsRunning();
 
 Returns:
+
     %Result = (
         IsRunning      => 1,             # or 0 if it is not running
         UpgradeStatus  => 'Running',     # (optional) 'Running' or 'Finished' or 'TimedOut',

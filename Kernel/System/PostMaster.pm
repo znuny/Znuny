@@ -663,7 +663,9 @@ sub GetEmailParams {
     $GetParam{Charset}               = $Self->{ParserObject}->GetReturnCharset();
 
     # Get attachments.
-    my @Attachments = $Self->{ParserObject}->GetAttachments();
+    my @Attachments = $Self->{ParserObject}->GetAttachments(
+        UserType => 'Agent'
+    );
     $GetParam{Attachment} = \@Attachments;
 
     return \%GetParam;

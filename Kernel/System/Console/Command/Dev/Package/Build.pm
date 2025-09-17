@@ -104,7 +104,7 @@ sub Run {
         && !$Structure{PackageIsDownloadable}->{Content}
         )
     {
-        $Self->PrintError("Package cannot be built.\n");
+        $Self->PrintError("Package cannot be built. You have disabled or unset PackageIsDownloadable.\n");
         return $Self->ExitCodeError();
     }
 

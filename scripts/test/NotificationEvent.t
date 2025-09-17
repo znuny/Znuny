@@ -15,6 +15,8 @@ use vars (qw($Self));
 
 use Kernel::System::VariableCheck qw(:all);
 
+my $YAMLObject = $Kernel::OM->Get('Kernel::System::YAML');
+
 # get notification event object
 my $NotificationEventObject = $Kernel::OM->Get('Kernel::System::NotificationEvent');
 
@@ -1161,21 +1163,33 @@ for my $Count ( 1 .. 5 ) {
     );
 
     $Self->Is(
-        $NotificationImport->{AddedNotifications},
+        $NotificationImport->{Added},
         'Ticket create notification',
         "ImportTest - Count $Count: AddedNotifications",
     );
 
     $Self->Is(
-        $NotificationImport->{NotificationErrors},
+        $NotificationImport->{Errors},
         '',
         "ImportTest - Count $Count: NotificationErrors",
     );
 
     $Self->Is(
-        $NotificationImport->{UpdatedNotifications},
+        $NotificationImport->{Updated},
         '',
         "ImportTest - Count $Count: UpdatedNotifications",
+    );
+
+    $Self->Is(
+        $NotificationImport->{NotUpdated},
+        '',
+        "ImportTest - Count $Count: NotUpdatedNotifications",
+    );
+
+    $Self->IsDeeply(
+        $NotificationImport->{AdditionalErrors},
+        [],
+        "ImportTest - Count $Count: NotificationAdditionalErrors",
     );
 
     # import the notification for the second time
@@ -1191,21 +1205,295 @@ for my $Count ( 1 .. 5 ) {
     );
 
     $Self->Is(
-        $NotificationImport->{AddedNotifications},
+        $NotificationImport->{Added},
         '',
         "ImportTest - Count $Count: AddedNotifications",
     );
 
     $Self->Is(
-        $NotificationImport->{NotificationErrors},
+        $NotificationImport->{Errors},
         '',
         "ImportTest - Count $Count: NotificationErrors",
     );
 
     $Self->Is(
-        $NotificationImport->{UpdatedNotifications},
+        $NotificationImport->{Updated},
         'Ticket create notification',
         "ImportTest - Count $Count: UpdatedNotifications",
+    );
+
+    $Self->Is(
+        $NotificationImport->{NotUpdated},
+        '',
+        "ImportTest - Count $Count: NotUpdatedNotifications",
+    );
+
+    $Self->IsDeeply(
+        $NotificationImport->{AdditionalErrors},
+        [],
+        "ImportTest - Count $Count: NotificationAdditionalErrors",
+    );
+}
+
+# NotificationExport
+my %ExampleNotificationDataParams = (
+    Events           => ['TicketQueueUpdate'],
+    Queue            => ['SomeQueue'],
+    NotificationType => ['Ticket'],
+);
+
+my %ExampleNotificationParams = (
+    Name    => 'notification-name-' . $RandomID,
+    Message => {
+        en => {
+            Subject     => 'Hello',
+            Body        => 'Hello World',
+            ContentType => 'text/plain',
+        },
+        de => {
+            Subject     => 'Hallo',
+            Body        => 'Hallo Welt',
+            ContentType => 'text/plain',
+        },
+    },
+    Comment => 'An optional comment',    # (optional)
+    ValidID => 1,
+    UserID  => 1,
+);
+
+my %AddNotifications = (
+    Name   => 'Add notifications',
+    Params => [
+        {
+            %ExampleNotificationParams,    ## no critic
+            Name => $ExampleNotificationParams{Name} . ' - 1 (ticket)',
+            Data => \%ExampleNotificationDataParams,
+        },
+        {
+            %ExampleNotificationParams,
+            Name => $ExampleNotificationParams{Name} . ' - 2 (appointment)',
+            Data => { %ExampleNotificationDataParams, NotificationType => ['Appointment'] },
+        },
+    ],
+);
+
+my @ImportTests;
+
+for my $Notification ( @{ $AddNotifications{Params} } ) {
+
+    # add notification
+    my $NotificationID = $NotificationEventObject->NotificationAdd( %{$Notification} );
+
+    $Self->True(
+        $NotificationID,
+        $AddNotifications{Name} . $Notification->{Name} . " - NotificationAdd()",
+    );
+
+    my $ExportExpectedData = $Notification;
+    $ExportExpectedData->{ID} = $NotificationID;
+    delete $ExportExpectedData->{UserID};
+
+    # export notification
+    my $ExportData = $NotificationEventObject->NotificationExport(
+        ID => $NotificationID,
+    );
+
+    my $ExportContentDump = $YAMLObject->Dump(
+        Data => $ExportData,
+    );
+
+    for my $Row ( @{$ExportData} ) {
+        delete $Row->{CreateBy};
+        delete $Row->{CreateTime};
+        delete $Row->{ChangeTime};
+        delete $Row->{ChangeBy};
+    }
+
+    my $IsDeeply = $Self->IsDeeply(
+        [$ExportExpectedData],
+        $ExportData,
+        "$Notification->{Name} - NotificationExport() - 1",
+    );
+
+    push @ImportTests, {
+        ID               => $NotificationID,
+        Name             => $Notification->{Name},
+        NotificationType => $Notification->{Data}->{NotificationType}->[0],
+        Content          => $ExportContentDump,
+    } if $IsDeeply;
+}
+
+# NotificationImport
+for my $ImportTest (@ImportTests) {
+
+    # case 1: create a copy, then try to overwrite it without overwrite parameter
+    my $NotificationCopyID = $NotificationEventObject->NotificationCopy(
+        ID     => $ImportTest->{ID},
+        UserID => 1,
+    );
+
+    $Self->True(
+        $NotificationCopyID,
+        $ImportTest->{Name} . " - NotificationCopy()",
+    );
+
+    my %NotificationCopy = $NotificationEventObject->NotificationGet(
+        ID => $NotificationCopyID,
+    );
+
+    # get notification copy name
+    my $NotificationCopyName = $NotificationCopy{Name};
+
+    # unpack YAML content and modify it to contain notification copy name
+    my $YAMLContent = $ImportTest->{Content};
+    my $Content     = $YAMLObject->Load( Data => $YAMLContent );
+
+    my @ContentWithCopyName = @{$Content};
+    $ContentWithCopyName[0]->{Name} = $NotificationCopyName;
+
+    my $YAMLContentWithCopyName = $YAMLObject->Dump(
+        Data => \@ContentWithCopyName,
+    );
+
+    # try to import without overwrite permission parameter, check for all notification types
+    my $ImportResultNoPermissions = $NotificationEventObject->NotificationImport(
+        Content                        => $YAMLContentWithCopyName,
+        OverwriteExistingNotifications => 0,
+        UserID                         => 1,
+        All                            => 1,
+    );
+
+    $Self->IsDeeply(
+        $ImportResultNoPermissions,
+        {
+            Added                => '',
+            AddedNotifications   => '',
+            Errors               => '',
+            NotificationErrors   => $NotificationCopyName,
+            Success              => 1,
+            Updated              => '',
+            UpdatedNotifications => '',
+            NotUpdated           => $NotificationCopyName,
+            AdditionalErrors     => [],
+        },
+        "$NotificationCopyName - NotificationImport() - case where notification exists and import is performed without permissions to overwrite (check for all notification types)",
+    );
+
+    # case 2: import with overwrite permissions, check for all notification types
+    my $ImportResultWithPermissions = $NotificationEventObject->NotificationImport(
+        Content                        => $YAMLContentWithCopyName,
+        OverwriteExistingNotifications => 1,
+        UserID                         => 1,
+        All                            => 1,
+    );
+
+    $Self->IsDeeply(
+        $ImportResultWithPermissions,
+        {
+            Added                => '',
+            AddedNotifications   => '',
+            Errors               => '',
+            NotificationErrors   => '',
+            Success              => 1,
+            Updated              => $NotificationCopyName,
+            UpdatedNotifications => $NotificationCopyName,
+            NotUpdated           => '',
+            AdditionalErrors     => [],
+        },
+        "$NotificationCopyName - NotificationImport() - case where notification exists and import is performed with permissions to overwrite (check for all notification types)",
+    );
+
+    # case 3: import with overwrite permissions, but check for invalid notification type
+    # if we try to import ticket/appointment notification type, but notification import specifies
+    # invalid notification type, for example: import ticket notification, but specify
+    # to import appointment in the function
+    my $InvalidType = $ImportTest->{NotificationType} eq 'Ticket' ? 'Appointment' : 'Ticket';
+
+    my $ImportResultInvalidType = $NotificationEventObject->NotificationImport(
+        Content                        => $YAMLContentWithCopyName,
+        OverwriteExistingNotifications => 1,
+        UserID                         => 1,
+        Type                           => $InvalidType,
+    );
+
+    $Self->IsDeeply(
+        $ImportResultInvalidType,
+        {
+            Added                => '',
+            AddedNotifications   => '',
+            Errors               => '',
+            NotificationErrors   => '',
+            Success              => 1,
+            Updated              => $NotificationCopyName,
+            UpdatedNotifications => $NotificationCopyName,
+            NotUpdated           => '',
+            AdditionalErrors     => [],
+        },
+        "$NotificationCopyName - NotificationImport() - case where notification exists and import is performed with permissions to overwrite (check for invalid notification type)",
+    );
+
+    # case 4: import with overwrite permissions, and correct notification type
+    my $ImportResultValidType = $NotificationEventObject->NotificationImport(
+        Content                        => $YAMLContentWithCopyName,
+        OverwriteExistingNotifications => 1,
+        UserID                         => 1,
+        Type                           => $ImportTest->{NotificationType},
+    );
+
+    $Self->IsDeeply(
+        $ImportResultValidType,
+        {
+            Added                => '',
+            AddedNotifications   => '',
+            Errors               => '',
+            NotificationErrors   => '',
+            Success              => 1,
+            Updated              => $NotificationCopyName,
+            UpdatedNotifications => $NotificationCopyName,
+            NotUpdated           => '',
+            AdditionalErrors     => [],
+        },
+        "$NotificationCopyName - NotificationImport() - case where notification exists and import is performed with permissions to overwrite (check for valid notification type)",
+    );
+}
+
+# test case where content parameters are missing
+my $ImportMissingNameTest = <<"EOF";
+---
+- some-property: some-value
+EOF
+@ImportTests = (
+    {
+        ImportParams => {
+            Content => $ImportMissingNameTest,
+        },
+        ExpectedData => {
+            Errors               => '',
+            NotificationErrors   => '',
+            AdditionalErrors     => ['One or more notifications "Name" parameter is missing!'],
+            Added                => '',
+            AddedNotifications   => '',
+            Success              => 1,
+            Updated              => '',
+            UpdatedNotifications => '',
+            NotUpdated           => '',
+        },
+        Name => 'NotificationImport() - test response when missing Name parameter.'
+    }
+);
+
+for my $ImportTest (@ImportTests) {
+
+    my $ImportResult = $NotificationEventObject->NotificationImport(
+        %{ $ImportTest->{ImportParams} },
+        OverwriteExistingNotifications => 1,
+        UserID                         => 1,
+    );
+
+    $Self->IsDeeply(
+        $ImportResult,
+        $ImportTest->{ExpectedData},
+        $ImportTest->{Name},
     );
 }
 

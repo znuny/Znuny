@@ -12,6 +12,8 @@ use strict;
 use warnings;
 use utf8;
 
+use HTML::TreeBuilder::XPath;
+
 use Kernel::Language qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
@@ -543,11 +545,6 @@ sub GetDashboardWidgetTicketData {
         HTMLString => '...<a class="Mention" href="..." target="...">@root@localhost<\/a>...',
 
         # optional
-        # plain text string must be given if mentions in quoted text should be ignored.
-        # they are not reliably parsable from the HTML string.
-        PlainTextString => '...@root@localhost...',
-
-        # optional
         # Limit for number of returned user IDs. The rest will silently be ignored.
         Limit => 5,
     );
@@ -578,54 +575,41 @@ sub GetMentionedUserIDsFromString {
     my $MentionsTriggerConfig         = $MentionsRichtTextEditorConfig->{Triggers};
     return [] if !IsHashRefWithData($MentionsTriggerConfig);
 
-    my @MentionedUsers;
-    my %UserNameByFullname;
+    #
+    # Remove quotes so that mentioned users/groups in quotes will not be notified again.
+    #
+    my $HTMLString = $Param{HTMLString};
 
+    my $HTMLTree = HTML::TreeBuilder::XPath->new();
+    $HTMLTree->parse_content($HTMLString);
+
+    my @HTMLTreeNodes = $HTMLTree->findnodes('//div[@type="cite"]');
+    for my $HTMLTreeNode (@HTMLTreeNodes) {
+        $HTMLTreeNode->detach();
+    }
+    $HTMLString = $HTMLTree->as_HTML();
+
+    #
+    # Determine mentioned users/groups.
+    #
+    my @MentionedUsers;
+
+    HTMLSTRING:
     while (
-        $Param{HTMLString}
-        =~ m{<a[^>]*class="Mention"[^(id)|>]*id="([^"]*)"[^>]*>\Q$MentionsTriggerConfig->{User}\E(.*?)<\/a>}sg
+        $HTMLString
+        =~ m{(<a[^>]*?mention-type="Users")}smg
         )
     {
-        $UserNameByFullname{$2} = $1;
+        my $Mention = $1;
+        next HTMLSTRING if $Mention !~ m{\bid="(.*?)"};
+
         push @MentionedUsers, $1;
     }
 
     my @MentionedGroups = (
-        $Param{HTMLString}
-            =~ m{<a\b[^>]*?\bclass="GroupMention"[^>]*?>\Q$MentionsTriggerConfig->{Group}\E(.*?)<\/a>}sg
+        $HTMLString
+            =~ m{<a\b[^>]*?\bmention-type="Groups"[^>]*?>\Q$MentionsTriggerConfig->{Group}\E(.*?)<\/a>}smg
     );
-
-    # Mentions cannot be removed from quotations in HTML string because
-    # parsing is not reliably possible.
-    # Therefore, if plain text has additionally been given, use it to remove quoted text (lines starting
-    # with characters configured in Ticket::Frontend::Quote) and match the remaining
-    # contained mentions with those of the given HTML string. So the sole purpose of giving plain text
-    # is to be able to remove mentions from quotes.
-    #
-    # This avoids notifications for mentions contained in quoted text.
-    my $QuoteMarker = $ConfigObject->Get('Ticket::Frontend::Quote');
-    if (
-        IsStringWithData( $Param{PlainTextString} )
-        && IsStringWithData($QuoteMarker)
-        )
-    {
-        # Remove every line that starts with a quote marker.
-        ( my $PlainTextStringWithoutQuote = $Param{PlainTextString} ) =~ s{^\Q$QuoteMarker\E.*}{}mig;
-
-        # Drop found mentioned users that are not part of the plain text without quotes.
-        if ( defined $PlainTextStringWithoutQuote ) {
-            @MentionedUsers = map { $UserNameByFullname{$_} }
-                grep { $PlainTextStringWithoutQuote =~ m{\[\d+\]\Q$MentionsTriggerConfig->{User}\E\Q$_\E(\s|\b)}m }
-                keys %UserNameByFullname;
-        }
-
-        # Drop found mentioned groups that are not part of the plain text without quotes.
-        if ( defined $PlainTextStringWithoutQuote ) {
-            @MentionedGroups
-                = grep { $PlainTextStringWithoutQuote =~ m{\[\d+\]\Q$MentionsTriggerConfig->{Group}\E\Q$_\E(\s|\b)}m }
-                @MentionedGroups;
-        }
-    }
 
     # Filter out blocked groups
     @MentionedGroups = grep { !$Self->IsGroupBlocked( Group => $_ ) } @MentionedGroups;
@@ -638,7 +622,6 @@ sub GetMentionedUserIDsFromString {
             push @MentionedUsers, @{$GroupUsers};
         }
     }
-
     return [] if !@MentionedUsers;
 
     # Remove duplicate users but keep their order because of possible configured limit.

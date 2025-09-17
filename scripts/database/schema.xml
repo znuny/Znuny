@@ -971,6 +971,50 @@
     </Index>
 </Table>
 
+<!-- translation -->
+<Table Name="translation">
+    <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
+    <Column Name="dbcrud_uuid" Required="false" Size="36" Type="VARCHAR"/>
+    <Column Name="language_id" Required="true" Size="5" Type="VARCHAR"/>
+    <Column Name="source_string" Required="true" Size="1000" Type="VARCHAR"/>
+    <Column Name="destination_string" Required="true" Size="1000" Type="VARCHAR"/>
+    <Column Name="valid_id" Default="1" Required="true" Type="SMALLINT"/>
+    <Column Name="create_time" Required="true" Type="DATE"/>
+    <Column Name="create_by" Required="true" Type="INTEGER"/>
+    <Column Name="change_time" Required="true" Type="DATE"/>
+    <Column Name="change_by" Required="true" Type="INTEGER"/>
+    <Column Name="deployment_state" Default="0" Required="true" Type="SMALLINT"/>
+    <Unique Name="translation_uuid">
+        <UniqueColumn Name="dbcrud_uuid"/>
+    </Unique>
+    <ForeignKey ForeignTable="valid">
+        <Reference Local="valid_id" Foreign="id"/>
+    </ForeignKey>
+    <ForeignKey ForeignTable="users">
+        <Reference Local="create_by" Foreign="id"/>
+        <Reference Local="change_by" Foreign="id"/>
+    </ForeignKey>
+</Table>
+
+
+<!-- article_color -->
+<Table Name="article_color">
+    <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="SMALLINT"/>
+    <Column Name="name" Required="true" Size="200" Type="VARCHAR"/>
+    <Column Name="color" Required="true" Size="10" Type="VARCHAR" />
+    <Column Name="create_time" Required="true" Type="DATE"/>
+    <Column Name="create_by" Required="true" Type="INTEGER"/>
+    <Column Name="change_time" Required="true" Type="DATE"/>
+    <Column Name="change_by" Required="true" Type="INTEGER"/>
+    <Unique Name="article_color_name">
+        <UniqueColumn Name="name"/>
+    </Unique>
+    <ForeignKey ForeignTable="users">
+        <Reference Local="create_by" Foreign="id"/>
+        <Reference Local="change_by" Foreign="id"/>
+    </ForeignKey>
+</Table>
+
 <!-- article_sender_type - all possibles sender types (e. g. agent, system, customer, ...) -->
 <Table Name="article_sender_type">
     <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="SMALLINT"/>
@@ -2182,6 +2226,18 @@
     <ForeignKey ForeignTable="users">
         <Reference Local="create_by" Foreign="id"/>
         <Reference Local="change_by" Foreign="id"/>
+    </ForeignKey>
+</Table>
+
+<Table Name="pm_process_preferences">
+    <Column Name="process_entity_id" Required="true" Type="VARCHAR" Size="50"/>
+    <Column Name="preferences_key" Required="true" Size="150" Type="VARCHAR"/>
+    <Column Name="preferences_value" Required="false" Size="3000" Type="VARCHAR"/>
+    <Index Name="pm_process_preferences_process_entity_id">
+        <IndexColumn Name="process_entity_id"/>
+    </Index>
+    <ForeignKey ForeignTable="pm_process">
+        <Reference Local="process_entity_id" Foreign="entity_id"/>
     </ForeignKey>
 </Table>
 

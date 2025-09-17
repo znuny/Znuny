@@ -48,7 +48,11 @@ sub CheckAccess {
         }
     }
 
+    # check if module is registered
     return if !$ConfigObject->Get('Frontend::Module')->{AgentTicketMarkSeenUnseen};
+
+    # check Acl
+    return if !$Param{AclActionLookup}->{AgentTicketMarkSeenUnseen};
 
     my $TicketPermission = $TicketObject->TicketPermission(
         Type     => 'ro',

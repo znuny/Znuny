@@ -986,6 +986,22 @@ sub SetPassword {
         Message  => "User: '$Param{UserLogin}' changed password successfully!",
     );
 
+    my $SystemTime = $Kernel::OM->Get('Kernel::System::Time')->SystemTime();
+
+    # Set password change time
+    $Self->SetPreferences(
+        Key    => 'UserLastPwChangeTime',
+        Value  => $SystemTime,
+        UserID => $User{UserID},
+    );
+
+    # Reset UserLoginFailed
+    $Self->SetPreferences(
+        Key    => 'UserLoginFailed',
+        Value  => 0,
+        UserID => $User{UserID},
+    );
+
     return 1;
 }
 
@@ -1361,26 +1377,16 @@ sub _UserCacheClear {
 
     my $Login = $Self->UserLookup( UserID => $Param{UserID} );
 
-    my @CacheKeys;
-
-    # Delete cache for all possible FirstnameLastNameOrder settings as this might be overridden by users.
-    for my $FirstnameLastNameOrder ( 0 .. 9 ) {
-        for my $ActiveLevel1 ( 0 .. 1 ) {
-            for my $ActiveLevel2 ( 0 .. 1 ) {
-                push @CacheKeys, (
-                    "GetUserData::User::${Login}::${ActiveLevel1}::${FirstnameLastNameOrder}::${ActiveLevel2}",
-                    "GetUserData::UserID::$Param{UserID}::${ActiveLevel1}::${FirstnameLastNameOrder}::${ActiveLevel2}",
-                    "UserList::Short::${ActiveLevel1}::${FirstnameLastNameOrder}::${ActiveLevel2}",
-                    "UserList::Long::${ActiveLevel1}::${FirstnameLastNameOrder}::${ActiveLevel2}",
-                );
-            }
-        }
-        push @CacheKeys, (
-            'UserLookup::ID::' . $Login,
-            'UserLookup::Login::' . $Param{UserID},
-        );
-    }
-
+    my @CacheKeys = (
+        "UserLookup::ID::$Login",
+        "UserLookup::Login::$Param{UserID}",
+        glob <<EOF,
+GetUserData::User::${Login}::{0,1}::{0,1,2,3,4,5,6,7,8,9}::{0,1}
+GetUserData::UserID::$Param{UserID}::{0,1}::{0,1,2,3,4,5,6,7,8,9}::{0,1}
+UserList::Short::{0,1}::{0,1,2,3,4,5,6,7,8,9}::{0,1}
+UserList::Long::{0,1}::{0,1,2,3,4,5,6,7,8,9}::{0,1}
+EOF
+    );
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
     for my $CacheKey (@CacheKeys) {

@@ -1243,8 +1243,8 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                                     FieldConfigElement.Config = {};
                                 }
 
-                                if (typeof CKEDITOR !== 'undefined') {
-                                    CKEDITOR.instances['Body'].updateElement();
+                                if (Core.UI.RichTextEditor.GetInstance('Body') !== undefined) {
+                                    Core.UI.RichTextEditor.GetInstance('Body').updateSourceElement();
                                 }
                                 FieldConfigElement.Config.Subject = $('#Subject').val();
                                 FieldConfigElement.Config.Body = $('#Body').val();

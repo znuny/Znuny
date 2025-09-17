@@ -124,7 +124,7 @@ Core.UI.ActionRow = (function (TargetNS) {
                 .find('#BulkAction').addClass('Inactive');
         }
         // Exactly one checkbox is selected
-        else if ($Checkboxes.length === 1 && !$('#SelectAllTickets').is(':checked')) {
+        else if ($Checkboxes.length === 1) {
             // Update actions and activate bulk action
             $ActionRow.find('#BulkAction').removeClass('Inactive');
 

@@ -61,7 +61,7 @@ textarea:focus, input:focus{
     font-size: 14px;
     line-height: 22px;
     letter-spacing: .1px;
-    text-align: center; 
+    text-align: center;
 }
 
 .GettingStarted li p a {
@@ -181,7 +181,7 @@ h2.SearchResults {
  * @subsection      Settings
  */
 
- div.Setting div.Hash input[type="text"]:not(:checked), 
+ div.Setting div.Hash input[type="text"]:not(:checked),
  div.Setting div.SettingContent > input[disabled="disabled"].Key,
  div.Setting div.SettingContent > textarea {
     background: var(--main-bg-color);
@@ -1050,8 +1050,7 @@ li > div:not(.IsLockedByMe) .HashItem .HashItem > .SettingContent > div.InputFie
 .Array button.AddArrayItem,
 .ArrayItem button.RemoveButton,
 .Hash button.AddHashKey,
-.HashItem button.RemoveButton,
-.HashItem button.AddKey {
+.HashItem button.RemoveButton {
     position: absolute;
     width: 20px;
     background: var(--gray-light-ultra);
@@ -1070,9 +1069,21 @@ li > div:not(.IsLockedByMe) .HashItem .HashItem > .SettingContent > div.InputFie
 }
 
 .HashItem button.AddKey {
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    transition: var(--main-transition);
+    font-size: var(--font-size-md);
+    border-top-right-radius: var(--border-radius-sm);
+    border-bottom-right-radius: var(--border-radius-sm);
+    padding: 0;
     position: relative;
     height: 24px;
     width: 24px;
+    margin-top: auto;
+    margin-bottom: auto;
+    min-height: 24px;
+    min-width: 24px;
     max-height: 24px;
     max-width: 24px;
     border: 0;
@@ -1155,7 +1166,7 @@ li > div:not(.IsLockedByMe) .HashItem .HashItem > .SettingContent > div.InputFie
     flex-direction: row;
     flex-wrap: wrap;
   }
-  
+
 
 /*.IsLockedByMe .ArrayItem,
 .IsLockedByMe .HashItem {
@@ -1254,9 +1265,9 @@ li > div:not(.IsLockedByMe) .HashItem .HashItem > .SettingContent > div.InputFie
     /*min-width: unset;*/
 }
 
-/*.IsLockedByMe .SettingContent input[type="text"][readonly], 
-.IsLockedByMe .SettingContent input[type="password"][readonly], 
-.IsLockedByMe .SettingContent .InputField_Search[readonly], 
+/*.IsLockedByMe .SettingContent input[type="text"][readonly],
+.IsLockedByMe .SettingContent input[type="password"][readonly],
+.IsLockedByMe .SettingContent .InputField_Search[readonly],
 .IsLockedByMe .Setting input.Key[readonly],
 .IsLockedByMe .Setting input.Key[readonly]:not(:checked)*/
 .IsLockedByMe .Setting input[type="text"][readonly]:not(:checked) {
@@ -1282,9 +1293,9 @@ li > div:not(.IsLockedByMe) .HashItem .HashItem > .SettingContent > div.InputFie
     /*width: 100%;
 }*/
 
-.Setting.IsLockedByMe .SettingContent input[type="text"]:not(:checked), 
-.Setting.IsLockedByMe .SettingContent input[type="password"], 
-.Setting.IsLockedByMe .SettingContent .InputField_Search, 
+.Setting.IsLockedByMe .SettingContent input[type="text"]:not(:checked),
+.Setting.IsLockedByMe .SettingContent input[type="password"],
+.Setting.IsLockedByMe .SettingContent .InputField_Search,
 .Setting.IsLockedByMe .SettingContent > input.Entry[type="password"],
 .Setting.IsLockedByMe .SettingContent > textarea {
     background: var(--white);
@@ -1438,7 +1449,7 @@ li > div:not(.IsLockedByMe) .HashItem .HashItem > .SettingContent > div.InputFie
 }
 
 .IsLockedByMe .HashItem .SettingContent {
-    min-width: calc(100% - 196px); /* full width minus key + arrow width */
+    min-width: calc(100% - 225px); /* full width minus key + arrow width */
 }
 
 .ArrayItem .HashItem .SettingContent,

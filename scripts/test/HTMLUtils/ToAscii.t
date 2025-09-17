@@ -68,11 +68,11 @@ More Text',
 <div>--Shawn</div>
 <div>&nbsp;</div>',
         Result => 'Martin,
- ' . chr(160) . '
- I am lost. Martin says that...
- ' . chr(160) . '
- --Shawn
- ' . chr(160) . '
+' . chr(160) . '
+I am lost. Martin says that...
+' . chr(160) . '
+--Shawn
+' . chr(160) . '
 ',
         Name => 'ToAscii - simple'
     },
@@ -100,8 +100,7 @@ test<br />
 test<br />
 </p>
 <ul><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li></ul></body></html>',
-        Result => '
-test
+        Result => 'test
 test
 test
 test
@@ -118,12 +117,12 @@ test
     },
     {
         Input  => "<pre>Some Text\n\nWith new Lines</pre>",
-        Result => "\nSome Text\n\nWith new Lines\n\n",
+        Result => "Some Text\n\nWith new Lines\n\n",
         Name   => 'ToAscii - <pre>'
     },
     {
         Input  => "<code>Some Text\n\nWith new Lines  </code><br />Some Other Text",
-        Result => "\nSome Text\n\nWith new Lines  \n\nSome Other Text",
+        Result => "Some Text\n\nWith new Lines \n\nSome Other Text",
         Name   => 'ToAscii - <code>'
     },
     {
@@ -147,7 +146,7 @@ Line 3</div>",
     {
         Input =>
             "<pre><a class=\"moz-txt-link-freetext\"\rhref=\"mailto:html\@example.com\">mailto:html\@example.com</a></pre>",
-        Result => "\n[1]mailto:html\@example.com\n\n\n\n[1] mailto:html\@example.com\n",
+        Result => "[1]mailto:html\@example.com\n\n\n\n[1] mailto:html\@example.com\n",
         Name   => 'ToAscii - <a class ... href ..>'
     },
     {

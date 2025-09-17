@@ -284,14 +284,15 @@ Core.Agent.TicketAction = (function (TargetNS) {
      */
     TargetNS.ConfirmTemplateOverwrite = function (FieldName, $TemplateSelect, Callback) {
         var Content = '',
-            LastValue = $TemplateSelect.data('LastValue') || '';
+            LastValue = $TemplateSelect.data('LastValue') || '',
+            RTEditor = Core.UI.RichTextEditor.GetInstance('FieldName');
 
         // Fallback for non-richtext content
         Content = $('#' + FieldName).val();
 
         // get RTE content
-        if (typeof CKEDITOR !== 'undefined' && CKEDITOR.instances[FieldName]) {
-            Content = CKEDITOR.instances[FieldName].getData();
+        if (RTEditor !== undefined) {
+            Content = RTEditor.getData();
         }
 
         // if content already exists let user confirm to really overwrite that content with a template

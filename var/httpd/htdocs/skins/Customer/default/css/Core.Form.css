@@ -12,6 +12,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
  * @section     Customer
  */
 
+/* TODO check (SN): Some commented rules seems to apply to the dialog plugin which is no longer accessible in CKEditor5, delete them?*/
 /* button,
 .Button,
 .cke_dialog_footer_buttons a.cke_dialog_ui_button {
@@ -95,10 +96,11 @@ label {
     text-align: left;
 }
 
+/* TODO check (SN): Rule seems to apply to the dialog plugin which is no longer accessible in CKEditor5, delete them?*/
 /* Fix bug#8673: labels in CKEditor  popups should be ignored by our css */
-.cke label {
+/*.cke label {
     float: none;
-}
+}*/
 
 /**
  * @note        Give the user a hint about linked label elements (they are clickable and

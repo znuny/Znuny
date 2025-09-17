@@ -6,7 +6,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
-Content-Type: text/html; charset=utf-8;
+Content-Type: text/html; charset=utf-8
 [% IF Data.ContentDisposition -%]
 Content-Disposition: [% Data.ContentDisposition %]
 [% END -%]
@@ -18,10 +18,10 @@ X-UA-Compatible: IE=edge,chrome=1
 X-Frame-Options: SAMEORIGIN
 [% END -%]
 [% IF !Config("DisableContentSecurityPolicy") -%]
-Content-Security-Policy: default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob:; img-src * 'unsafe-inline' 'unsafe-eval' data: blob:;
+Content-Security-Policy: default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob:; img-src * 'unsafe-inline' 'unsafe-eval' data: blob:
 [% END -%]
-X-Content-Type-Options: nosniff;
-Referrer-Policy: no-referrer;
+X-Content-Type-Options: nosniff
+Referrer-Policy: no-referrer
 [% IF Data.XLoginHeader -%]
 # With this X-Header, Core.AJAX can recognize that the AJAX request returned the login page (session timeout) and perform a redirect.
 X-OTRS-Login: [% Env("Baselink") %]

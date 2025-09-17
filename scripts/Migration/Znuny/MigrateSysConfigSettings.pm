@@ -6,6 +6,7 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 ## nofilter(TidyAll::Plugin::Znuny::Perl::Pod::NamePod)
+## nofilter(TidyAll::Plugin::Znuny::Deprecated::AjaxAttachment)
 
 package scripts::Migration::Znuny::MigrateSysConfigSettings;    ## no critic
 
@@ -45,17 +46,23 @@ sub _GetMigrateSysConfigSettings {
     my ( $Self, %Param ) = @_;
 
     my %MigrateSysConfigSettings = (
+        'Frontend::Module###AjaxAttachment' => {
+            UpdateName => 'Frontend::Module###AJAXAttachment'
+        },
+        'CustomerFrontend::Module###AjaxAttachment' => {
+            UpdateName => 'CustomerFrontend::Module###AJAXAttachment'
+        },
 
         "Loader::Agent::CommonJS###000-Framework" => {
             UpdateEffectiveValue => {
-                'thirdparty/jquery-jstree-3.3.7/jquery.jstree.js' => 'thirdparty/jquery-jstree-3.3.8/jquery.jstree.js',
-                'thirdparty/nunjucks-3.2.2/nunjucks.min.js'       => 'thirdparty/nunjucks-3.2.3/nunjucks.min.js',
+                'thirdparty/jquery-validate-1.16.0/jquery.validate.js' =>
+                    'thirdparty/jquery-validation-1.21.0/jquery.validate.js',
             },
         },
         "Loader::Customer::CommonJS###000-Framework" => {
             UpdateEffectiveValue => {
-                'thirdparty/jquery-jstree-3.3.7/jquery.jstree.js' => 'thirdparty/jquery-jstree-3.3.8/jquery.jstree.js',
-                'thirdparty/nunjucks-3.2.2/nunjucks.min.js'       => 'thirdparty/nunjucks-3.2.3/nunjucks.min.js',
+                'thirdparty/jquery-validate-1.16.0/jquery.validate.js' =>
+                    'thirdparty/jquery-validation-1.21.0/jquery.validate.js',
             },
         },
     );
