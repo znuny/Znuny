@@ -165,6 +165,7 @@ Create an article. Override this method in your class.
     );
 
 Events:
+
     ArticleCreate
 
 =cut
@@ -186,6 +187,7 @@ Update an article. Override this method in your class.
     );
 
 Events:
+
     ArticleUpdate
 
 =cut
@@ -423,6 +425,7 @@ Note: Keys C<SenderType>, C<SenderTypeID> and C<IsVisibleForCustomer> are implem
     );
 
 Events:
+
     MetaArticleUpdate
 
 =cut
@@ -630,6 +633,7 @@ Returns article content with dynamic fields.
     );
 
 Returns:
+
     %Data = (
         TicketID  => 1,
         ArticleID => 1,

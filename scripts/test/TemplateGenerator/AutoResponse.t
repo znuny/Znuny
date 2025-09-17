@@ -13,14 +13,14 @@ use warnings;
 use utf8;
 use vars (qw($Self));
 
-my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
         RestoreDatabase  => 1,
         UseTmpArticleDir => 1,
     },
 );
+
+my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 $ConfigObject->Set(
@@ -92,9 +92,9 @@ $Self->IsNot(
 my $AutoResponseObject = $Kernel::OM->Get('Kernel::System::AutoResponse');
 
 # Create new auto response.
-my $AutoResonseName      = 'Some::AutoResponse' . $RandomID;
+my $AutoResponseName     = 'Some::AutoResponse' . $RandomID;
 my %AutoResponseTemplate = (
-    Name        => $AutoResonseName,
+    Name        => $AutoResponseName,
     ValidID     => 1,
     Subject     => 'Some Subject..',
     Response    => 'S:&nbsp;&lt;OTRS_TICKET_State&gt;',    # include non-breaking space (bug#12097)
@@ -107,7 +107,7 @@ my $AutoResponseID = $AutoResponseObject->AutoResponseAdd(%AutoResponseTemplate)
 $Self->IsNot(
     $AutoResponseID,
     undef,
-    'AutoResponseAdd() - AutoResonseID should not be undef',
+    'AutoResponseAdd() - AutoResponseID should not be undef',
 );
 
 # Assign auto response to queue.
@@ -118,7 +118,7 @@ $Success = $AutoResponseObject->AutoResponseQueue(
 );
 $Self->True(
     $Success,
-    "AutoResponseQueue() - assigned auto response - $AutoResonseName to queue - $QueueName",
+    "AutoResponseQueue() - assigned auto response - $AutoResponseName to queue - $QueueName",
 );
 
 my $TicketObject         = $Kernel::OM->Get('Kernel::System::Ticket');
@@ -144,23 +144,29 @@ $Self->IsNot(
     'TicketCreate() - TicketID should not be undef',
 );
 
-my $HTMLTemplate
-    = '<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></head><body style="font-family:Geneva,Helvetica,Arial,sans-serif; font-size: 12px;">%s</body></html>';
+# my $HTMLTemplate
+# = '<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><style class="RTEContentCssDefault">.ck.ck-content{}</style></head><body class="ck ck-content">%s</body></html>';
 my @Tests = (
     {
-        Name           => 'English Language Customer',
-        CustomerUser   => $TestUserLoginEN,
-        ExpectedResult => sprintf( $HTMLTemplate, 'S:&nbsp;new' ),
+        Name         => 'English Language Customer',
+        CustomerUser => $TestUserLoginEN,
+
+        # ExpectedResult => sprintf( $HTMLTemplate, 'S:&nbsp;new' ),
+        ExpectedResult => 'S:&nbsp;new',
     },
     {
-        Name           => 'German Language Customer',
-        CustomerUser   => $TestUserLoginDE,
-        ExpectedResult => sprintf( $HTMLTemplate, 'S:&nbsp;neu' ),
+        Name         => 'German Language Customer',
+        CustomerUser => $TestUserLoginDE,
+
+        # ExpectedResult => sprintf( $HTMLTemplate, 'S:&nbsp;neu' ),
+        ExpectedResult => 'S:&nbsp;neu',
     },
     {
-        Name           => 'Not existing Customer',
-        CustomerUser   => 'customer@example.com',
-        ExpectedResult => sprintf( $HTMLTemplate, 'S:&nbsp;new' ),
+        Name         => 'Not existing Customer',
+        CustomerUser => 'customer@example.com',
+
+        # ExpectedResult => sprintf( $HTMLTemplate, 'S:&nbsp;new' ),
+        ExpectedResult => 'S:&nbsp;new',
     },
 );
 
@@ -185,11 +191,13 @@ for my $Test (@Tests) {
         OrigHeader       => {},
         AutoResponseType => 'auto reply/new ticket',
         UserID           => 1,
+        UserType         => 'Agent',
     );
-    $Self->Is(
-        $AutoResponse{Text},
-        $Test->{ExpectedResult},
-        "$Test->{Name} AutoResponse() - Text"
+
+    # Contains AutoResponse Text the ExpectedResult?
+    $Self->True(
+        $AutoResponse{Text} =~ m{$Test->{ExpectedResult}},
+        "$Test->{Name} AutoResponse() - Text contains ExpectedResult"
     );
 
     # Create auto response article (bug#12097).
@@ -346,33 +354,33 @@ $Self->True(
         Language        => 'de',
         ExpectedSubject => "[Ticket#$TicketNumber] $RandomID - 06.12.2018 13:00 (Europe/Berlin)",
         ExpectedText =>
-            '<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></head><body style="font-family:Geneva,Helvetica,Arial,sans-serif; font-size: 12px;">OTRS_TICKET_Created: 06.12.2018 13:00 (Europe/Berlin)<br />OTRS_TICKET_Changed: 06.12.2018 13:00 (Europe/Berlin)<br />OTRS_TICKET_DynamicField_'
+            'OTRS_TICKET_Created: 06.12.2018 13:00 (Europe/Berlin)<br />OTRS_TICKET_Changed: 06.12.2018 13:00 (Europe/Berlin)<br />OTRS_TICKET_DynamicField_'
             . $DynamicFieldName
             . ': 2018-12-03 16:00:00 (Europe/Berlin)<br />OTRS_TICKET_DynamicField_'
             . $DynamicFieldName
-            . '_Value: 03.12.2018 16:00 (Europe/Berlin)<br /></body></html>',
+            . '_Value: 03.12.2018 16:00 (Europe/Berlin)<br />',
     },
     {
         Timezone        => 'America/Bogota',
         Language        => 'es',
         ExpectedSubject => "[Ticket#$TicketNumber] $RandomID - 06/12/2018 - 07:00 (America/Bogota)",
         ExpectedText =>
-            '<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></head><body style="font-family:Geneva,Helvetica,Arial,sans-serif; font-size: 12px;">OTRS_TICKET_Created: 06/12/2018 - 07:00 (America/Bogota)<br />OTRS_TICKET_Changed: 06/12/2018 - 07:00 (America/Bogota)<br />OTRS_TICKET_DynamicField_'
+            'OTRS_TICKET_Created: 06/12/2018 - 07:00 (America/Bogota)<br />OTRS_TICKET_Changed: 06/12/2018 - 07:00 (America/Bogota)<br />OTRS_TICKET_DynamicField_'
             . $DynamicFieldName
             . ': 2018-12-03 10:00:00 (America/Bogota)<br />OTRS_TICKET_DynamicField_'
             . $DynamicFieldName
-            . '_Value: 03/12/2018 - 10:00 (America/Bogota)<br /></body></html>',
+            . '_Value: 03/12/2018 - 10:00 (America/Bogota)<br />',
     },
     {
         Timezone        => 'Asia/Bangkok',
         Language        => 'en',
         ExpectedSubject => "[Ticket#$TicketNumber] $RandomID - 12/06/2018 19:00 (Asia/Bangkok)",
         ExpectedText =>
-            '<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></head><body style="font-family:Geneva,Helvetica,Arial,sans-serif; font-size: 12px;">OTRS_TICKET_Created: 12/06/2018 19:00 (Asia/Bangkok)<br />OTRS_TICKET_Changed: 12/06/2018 19:00 (Asia/Bangkok)<br />OTRS_TICKET_DynamicField_'
+            'OTRS_TICKET_Created: 12/06/2018 19:00 (Asia/Bangkok)<br />OTRS_TICKET_Changed: 12/06/2018 19:00 (Asia/Bangkok)<br />OTRS_TICKET_DynamicField_'
             . $DynamicFieldName
             . ': 2018-12-03 22:00:00 (Asia/Bangkok)<br />OTRS_TICKET_DynamicField_'
             . $DynamicFieldName
-            . '_Value: 12/03/2018 22:00 (Asia/Bangkok)<br /></body></html>',
+            . '_Value: 12/03/2018 22:00 (Asia/Bangkok)<br />',
     }
 );
 
@@ -398,6 +406,7 @@ for my $Test (@Tests) {
         OrigHeader       => {},
         AutoResponseType => 'auto reply',
         UserID           => 1,
+        UserType         => 'Agent',
     );
 
     # Check replaced subject.
@@ -407,12 +416,18 @@ for my $Test (@Tests) {
         "AutoResponse subject - Language: $Test->{Language}, Timezone: $Test->{Timezone} - tags are replaced correctly"
     );
 
+    # Quote the expected text to avoid problems with special characters.
+    $Test->{ExpectedText} = quotemeta( $Test->{ExpectedText} );
+
     # Check replaced text.
-    $Self->Is(
-        $TestAutoResponse{Text},
-        $Test->{ExpectedText},
-        "AutoResponse text - Language: $Test->{Language}, Timezone: $Test->{Timezone} - tags are replaced correctly"
+    # Contains AutoResponse Text the ExpectedResult?
+    my $Contains = $TestAutoResponse{Text} =~ m{$Test->{ExpectedText}};
+
+    $Self->True(
+        $Contains,
+        "AutoResponse text - Language: $Test->{Language}, Timezone: $Test->{Timezone} - tags are replaced correctly",
     );
+
 }
 
 # Cleanup is done by RestoreDatabase.

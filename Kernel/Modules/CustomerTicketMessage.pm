@@ -227,7 +227,7 @@ sub Run {
     elsif ( $Self->{Subaction} eq 'StoreNew' ) {
 
         my $ArticleObject        = $Kernel::OM->Get('Kernel::System::Ticket::Article');
-        my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Internal' );
+        my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Web' );
 
         my $NextScreen = $Config->{NextScreenAfterNewTicket};
         my %Error;
@@ -551,7 +551,8 @@ sub Run {
         my $FullName = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerName(
             UserLogin => $Self->{UserLogin},
         );
-        my $From      = "\"$FullName\" <$Self->{UserEmail}>";
+        my $From = "\"$FullName\" <$Self->{UserEmail}>";
+
         my $ArticleID = $ArticleBackendObject->ArticleCreate(
             TicketID             => $TicketID,
             IsVisibleForCustomer => 1,

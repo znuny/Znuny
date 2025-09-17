@@ -3,7 +3,7 @@ Debugger:
   DebugThreshold: debug
   TestMode: '0'
 Description: Ticket Connector SOAP Sample
-FrameworkVersion: 6.0.x git
+FrameworkVersion: 7.2.x git
 Provider:
   Operation:
     SessionCreate:

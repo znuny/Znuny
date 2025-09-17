@@ -584,7 +584,9 @@ sub GetMessageBody {
 
 Returns an array of the email attachments.
 
-    my @Attachments = $ParserObject->GetAttachments();
+    my @Attachments = $ParserObject->GetAttachments(
+        UserType => 'Agent' # optional, but recommended
+    );
     for my $Attachment (@Attachments) {
         print $Attachment->{Filename};
         print $Attachment->{Charset};
@@ -610,7 +612,10 @@ sub GetAttachments {
     return @{ $Self->{Attachments} } if $Self->{Attachments};
 
     # parse email
-    $Self->PartsAttachments( Part => $Self->{ParserParts} );
+    $Self->PartsAttachments(
+        Part     => $Self->{ParserParts},
+        UserType => $Param{UserType}
+    );
 
     # return if no attachments are found
     return if !$Self->{Attachments};
@@ -864,8 +869,9 @@ sub PartsAttachments {
                         String => $PartData{Content},
                     );
                     $PartData{Content} = $HTMLUtilsObject->DocumentComplete(
-                        String  => $HTMLContent,
-                        Charset => 'utf-8',
+                        String   => $HTMLContent,
+                        Charset  => 'utf-8',
+                        UserType => $Param{UserType},
                     );
                 }
                 else {

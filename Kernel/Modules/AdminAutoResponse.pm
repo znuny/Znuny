@@ -13,6 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::Language qw(Translatable);
+use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
 
@@ -32,6 +33,7 @@ sub Run {
     my $LayoutObject       = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ParamObject        = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $AutoResponseObject = $Kernel::OM->Get('Kernel::System::AutoResponse');
+    my $YAMLObject         = $Kernel::OM->Get('Kernel::System::YAML');
 
     # ------------------------------------------------------------ #
     # change
@@ -216,6 +218,192 @@ sub Run {
         return $Output;
     }
 
+    # ------------------------------------------------------------ #
+    # Delete
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'Delete' ) {
+
+        # challenge token check for write action
+        $LayoutObject->ChallengeTokenCheck();
+
+        my %GetParam;
+        for my $Parameter (qw(ID)) {
+            $GetParam{$Parameter} = $ParamObject->GetParam( Param => $Parameter ) || '';
+        }
+
+        my $Delete = $AutoResponseObject->AutoResponseDelete(
+            ID     => $GetParam{ID},
+            UserID => $Self->{UserID},
+        );
+
+        return $LayoutObject->ErrorScreen() if !$Delete;
+        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+    }
+
+    # ------------------------------------------------------------ #
+    # AutoResponseExport
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'AutoResponseExport' ) {
+
+        my $AutoResponseID = $ParamObject->GetParam( Param => 'ID' ) || '';
+        my $AutoResponseData;
+        my $AutoResponseName;
+        if ($AutoResponseID) {
+            $AutoResponseData = $AutoResponseObject->AutoResponseExport(
+                ID => $AutoResponseID,
+            );
+
+            return $LayoutObject->ErrorScreen(
+                Message => $LayoutObject->{LanguageObject}
+                    ->Translate( 'Error exporting auto response with ID %s!', $AutoResponseID ),
+            ) if !IsArrayRefWithData($AutoResponseData);
+
+            $AutoResponseName = $AutoResponseData->[0]->{Name};
+        }
+        else {
+            $AutoResponseData = $AutoResponseObject->AutoResponseExport(
+                ExportAll => 1,
+            );
+        }
+
+        my $Filename = $AutoResponseObject->AutoResponseExportFilenameGet(
+            Name   => $AutoResponseName,
+            Format => 'YAML',
+        );
+
+        # convert the AutoResponse data hash to string
+        my $AutoResponseDataYAML = $YAMLObject->Dump( Data => $AutoResponseData );
+
+        # send the result to the browser
+        return $LayoutObject->Attachment(
+            ContentType => 'text/html; charset=' . $LayoutObject->{Charset},
+            Content     => $AutoResponseDataYAML,
+            Type        => 'attachment',
+            Filename    => $Filename,
+            NoCache     => 1,
+        );
+    }
+
+    # ------------------------------------------------------------ #
+    # AutoResponseCopy
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'AutoResponseCopy' ) {
+
+        my $AutoResponseID = $ParamObject->GetParam( Param => 'ID' ) || '';
+
+        # challenge token check for write action
+        $LayoutObject->ChallengeTokenCheck();
+
+        my $NewResponseID = $AutoResponseObject->AutoResponseCopy(
+            ID     => $AutoResponseID,
+            UserID => $Self->{UserID},
+        );
+
+        return $LayoutObject->ErrorScreen(
+            Message => Translatable("Error creating the auto response."),
+        ) if !$NewResponseID;
+
+        # return to overview
+        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+    }
+
+    # ------------------------------------------------------------ #
+    # AutoResponseImport
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'AutoResponseImport' ) {
+
+        # challenge token check for write action
+        $LayoutObject->ChallengeTokenCheck();
+
+        my $FormID      = $ParamObject->GetParam( Param => 'FormID' ) || '';
+        my %UploadStuff = $ParamObject->GetUploadAll(
+            Param  => 'FileUpload',
+            Source => 'string',
+        );
+
+        my $OverwriteExistingAutoResponses = $ParamObject->GetParam( Param => 'OverwriteExistingAutoResponses' ) || '';
+
+        my $AutoResponseImport = $AutoResponseObject->AutoResponseImport(
+            Content                        => $UploadStuff{Content},
+            OverwriteExistingAutoResponses => $OverwriteExistingAutoResponses,
+            UserID                         => $Self->{UserID},
+            ValidID                        => 0,
+        );
+
+        if ( !$AutoResponseImport->{Success} ) {
+            my $Message = $AutoResponseImport->{Message}
+                || Translatable(
+                'Auto responses could not be imported due to an unknown error. Please check logs for more information.'
+                );
+            return $LayoutObject->ErrorScreen(
+                Message => $Message,
+            );
+        }
+
+        if ( $AutoResponseImport->{Added} ) {
+            push @{ $Param{NotifyData} }, {
+                Info => $LayoutObject->{LanguageObject}->Translate(
+                    'The following auto responses have been added successfully: %s.',
+                    $AutoResponseImport->{Added}
+                ),
+            };
+        }
+        if ( $AutoResponseImport->{Updated} ) {
+            push @{ $Param{NotifyData} }, {
+                Info => $LayoutObject->{LanguageObject}->Translate(
+                    'The following auto responses have been updated successfully: %s.',
+                    $AutoResponseImport->{Updated}
+                ),
+            };
+        }
+        if ( $AutoResponseImport->{NotUpdated} ) {
+            push @{ $Param{NotifyData} }, {
+                Info => $LayoutObject->{LanguageObject}->Translate(
+                    'The following auto responses were not updated: %s.',
+                    $AutoResponseImport->{NotUpdated}
+                ),
+            };
+        }
+        if ( $AutoResponseImport->{Errors} ) {
+            push @{ $Param{NotifyData} }, {
+                Priority => 'Error',
+                Info     => $LayoutObject->{LanguageObject}->Translate(
+                    'Errors adding/updating the following auto responses: %s. Please check logs for more information.',
+                    $AutoResponseImport->{Errors}
+                ),
+            };
+        }
+        if ( IsArrayRefWithData( $AutoResponseImport->{AdditionalErrors} ) ) {
+            for my $Error ( @{ $AutoResponseImport->{AdditionalErrors} } ) {
+                push @{ $Param{NotifyData} }, {
+                    Priority => 'Error',
+                    Info     => $LayoutObject->{LanguageObject}->Translate($Error),
+                };
+            }
+        }
+
+        $Self->_Overview();
+        my $Output = $LayoutObject->Header();
+        $Output .= $LayoutObject->NavigationBar();
+
+        # show AutoResponses if any
+        if ( $Param{NotifyData} ) {
+            for my $AutoResponse ( @{ $Param{NotifyData} } ) {
+                $Output .= $LayoutObject->Notify(
+                    %{$AutoResponse},
+                );
+            }
+        }
+
+        $Output .= $LayoutObject->Output(
+            TemplateFile => 'AdminAutoResponse',
+            Data         => \%Param,
+        );
+        $Output .= $LayoutObject->Footer();
+
+        return $Output;
+    }
+
     # ------------------------------------------------------------
     # overview
     # ------------------------------------------------------------
@@ -327,6 +515,7 @@ sub _Overview {
 
     $LayoutObject->Block( Name => 'ActionList' );
     $LayoutObject->Block( Name => 'ActionAdd' );
+    $LayoutObject->Block( Name => 'ActionImportExport' );
     $LayoutObject->Block( Name => 'Filter' );
 
     $LayoutObject->Block(

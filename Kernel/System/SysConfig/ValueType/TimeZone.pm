@@ -71,6 +71,7 @@ Check if provided EffectiveValue matches structure defined in XMLContentParsed.
     );
 
 Result:
+
     %Result = (
         EffectiveValue => 'UTC',    # Note for common TimeZone EffectiveValue is not changed.
         Success => 1,

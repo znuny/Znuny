@@ -11,6 +11,8 @@ package Kernel::System::Console::Command::Admin::OAuth2TokenManagement::ExportTo
 use strict;
 use warnings;
 
+use utf8;
+
 use parent qw(Kernel::System::Console::BaseCommand);
 
 our @ObjectDependencies = (

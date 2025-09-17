@@ -607,6 +607,38 @@ CREATE TABLE ticket_loop_protection (
     INDEX ticket_loop_protection_sent_to (sent_to)
 );
 # ----------------------------------------------------------
+#  create table translation
+# ----------------------------------------------------------
+CREATE TABLE translation (
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    dbcrud_uuid VARCHAR (36) NULL,
+    language_id VARCHAR (5) NOT NULL,
+    source_string TEXT NOT NULL,
+    destination_string TEXT NOT NULL,
+    valid_id SMALLINT NOT NULL DEFAULT 1,
+    create_time DATETIME NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time DATETIME NOT NULL,
+    change_by INTEGER NOT NULL,
+    deployment_state SMALLINT NOT NULL DEFAULT 0,
+    PRIMARY KEY(id),
+    UNIQUE INDEX translation_uuid (dbcrud_uuid)
+);
+# ----------------------------------------------------------
+#  create table article_color
+# ----------------------------------------------------------
+CREATE TABLE article_color (
+    id SMALLINT NOT NULL AUTO_INCREMENT,
+    name VARCHAR (200) NOT NULL,
+    color VARCHAR (10) NOT NULL,
+    create_time DATETIME NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time DATETIME NOT NULL,
+    change_by INTEGER NOT NULL,
+    PRIMARY KEY(id),
+    UNIQUE INDEX article_color_name (name)
+);
+# ----------------------------------------------------------
 #  create table article_sender_type
 # ----------------------------------------------------------
 CREATE TABLE article_sender_type (
@@ -1471,6 +1503,15 @@ CREATE TABLE pm_process (
     change_by INTEGER NOT NULL,
     PRIMARY KEY(id),
     UNIQUE INDEX pm_process_entity_id (entity_id)
+);
+# ----------------------------------------------------------
+#  create table pm_process_preferences
+# ----------------------------------------------------------
+CREATE TABLE pm_process_preferences (
+    process_entity_id VARCHAR (50) NOT NULL,
+    preferences_key VARCHAR (150) NOT NULL,
+    preferences_value TEXT NULL,
+    INDEX pm_process_preferences_process_entity_id (process_entity_id)
 );
 # ----------------------------------------------------------
 #  create table pm_activity

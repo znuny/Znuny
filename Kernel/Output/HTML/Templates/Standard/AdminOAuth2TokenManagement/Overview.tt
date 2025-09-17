@@ -108,6 +108,7 @@
                     <thead>
                         <tr>
                             <th>[% Translate("Name") | html %]</th>
+                            <th>[% Translate("Auth flow") | html %]</th>
                             <th>[% Translate("Token status") | html %]</th>
                             <th>[% Translate("Refresh token status") | html %]</th>
                             <th>[% Translate("Validity of token configuration") | html %]</th>
@@ -127,8 +128,18 @@
                                         <a href="[% Env("Baselink") %]Action=AdminOAuth2TokenManagement;Subaction=EditTokenConfig;ID=[% TokenConfig.TokenConfigID | uri %]" title="[% TokenConfig.Name | html %]" class="MasterActionLink">[% TokenConfig.Name %]</a>
                                     </td>
                                     <td>
+                                        [% TokenData.AuthFlow | html %]
+                                    </td>
+                                    <td data-token-status-message>
                                         [% IF TokenData.LastTokenRequestFailed %]
                                             [% Translate("Last token request failed.") | html %]
+                                            [% IF TokenData.TokenErrorMessage %]
+                                                <p>
+                                                    <code>
+                                                        [% TokenData.TokenErrorMessage | html %]
+                                                    </code>
+                                                </p>
+                                            [% END %]
                                         [% ELSE %]
                                             [% IF TokenData.TokenPresent %]
                                                 [% IF TokenData.TokenHasExpired %]
@@ -142,39 +153,56 @@
                                         [% END %]
                                     </td>
                                     <td>
-                                        [% IF TokenData.RefreshTokenRequestConfigured %]
-                                            [% IF TokenData.LastTokenRequestFailed %]
-                                                [% Translate("Last (refresh) token request failed.") | html %]
-                                            [% ELSE %]
-                                                [% IF TokenData.RefreshTokenPresent %]
-                                                    [% IF TokenData.RefreshTokenHasExpired %]
-                                                        [% IF RefreshTokenExpirationDate %]
-                                                            [% Translate("Refresh token has expired on %s.", RefreshTokenExpirationDate) | html %]
-                                                        [% ELSE %]
-                                                            [% Translate("Refresh token has expired.") | html %]
-                                                        [% END %]
-                                                    [% ELSE %]
-                                                        [% IF RefreshTokenExpirationDate %]
-                                                            [% Translate("Refresh token is valid until %s.", RefreshTokenExpirationDate) | html %]
-                                                        [% ELSE %]
-                                                            [% Translate("Refresh token is valid (without expiration date).") | html %]
-                                                        [% END %]
+                                        [% IF TokenData.AuthFlow == 'AuthorizationCode' %]
+                                            [% IF TokenData.RefreshTokenRequestConfigured %]
+                                                [% IF TokenData.LastTokenRequestFailed %]
+                                                    [% Translate("Last (refresh) token request failed.") | html %]
+                                                    [% IF TokenData.TokenErrorMessage %]
+                                                        <p>
+                                                            <code>
+                                                                [% TokenData.TokenErrorMessage | html %]
+                                                            </code>
+                                                        </p>
                                                     [% END %]
                                                 [% ELSE %]
-                                                    [% Translate("No refresh token was requested yet.") | html %]
+                                                    [% IF TokenData.RefreshTokenPresent %]
+                                                        [% IF TokenData.RefreshTokenHasExpired %]
+                                                            [% IF RefreshTokenExpirationDate %]
+                                                                [% Translate("Refresh token has expired on %s.", RefreshTokenExpirationDate) | html %]
+                                                            [% ELSE %]
+                                                                [% Translate("Refresh token has expired.") | html %]
+                                                            [% END %]
+                                                        [% ELSE %]
+                                                            [% IF RefreshTokenExpirationDate %]
+                                                                [% Translate("Refresh token is valid until %s.", RefreshTokenExpirationDate) | html %]
+                                                            [% ELSE %]
+                                                                [% Translate("Refresh token is valid (without expiration date).") | html %]
+                                                            [% END %]
+                                                        [% END %]
+                                                    [% ELSE %]
+                                                        [% Translate("No refresh token was requested yet.") | html %]
+                                                    [% END %]
                                                 [% END %]
+                                            [% ELSE %]
+                                                [% Translate("Refresh token request is not configured.") | html %]
                                             [% END %]
-                                        [% ELSE %]
-                                            [% Translate("Refresh token request is not configured.") | html %]
+                                        [% ELSIF TokenData.AuthFlow == 'ClientCredentials' %]
+                                            [% Translate("Not available for this auth flow.") | html %]
                                         [% END %]
                                     </td>
                                     <td>
                                         [% Translate(Data.ValidIDs.item(TokenConfig.ValidID)) | html %]
                                     </td>
                                     <td>
-                                        <a class="CallForAction AsPopup PopupType_AdminOAuth2TokenManagement table-actions-button table-icon-hover-md" href="[% TokenData.AuthorizationCodeRequestURL | html %]" title="[% Translate("Request new token") | html %]">
-                                            <i class="fa fa-refresh" title="[% Translate("Request new token") | html %]"></i>
-                                        </a>
+                                        [% IF TokenData.AuthFlow == 'AuthorizationCode' %]
+                                            <a class="CallForAction AsPopup PopupType_AdminOAuth2TokenManagement table-actions-button table-icon-hover-md" href="[% TokenData.AuthorizationCodeRequestURL | html %]" title="[% Translate("Request new token") | html %]">
+                                                <i class="fa fa-refresh" title="[% Translate("Request new token") | html %]"></i>
+                                            </a>
+                                        [% ELSIF TokenData.AuthFlow == 'ClientCredentials' %]
+                                            <a class="CallForAction table-actions-button table-icon-hover-md" href="#" title="[% Translate("Request new token") | html %]" data-action-request-token-by-client-credentials data-token-config-id="[% TokenConfig.TokenConfigID | html %]">
+                                                <i class="fa fa-refresh" title="[% Translate("Request new token") | html %]"></i>
+                                            </a>
+                                        [% END %]
                                     </td>
                                     <td>
                                         [% IF !TokenConfig.Used %]

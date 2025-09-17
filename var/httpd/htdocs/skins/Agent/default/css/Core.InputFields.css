@@ -538,38 +538,6 @@ form select:first-child {
     text-align: center;
 }
 
-/*.cke_top {
-    background-color: transparent !important;
-}*/
-
-.cke_toolbar_separator {
-    display: none !important;
-}
-
-a.cke_button:hover {
-    background-color: #E2E2EA !important;
-    border-radius: 5px !important ;
-    border: none !important;
-    padding: 4px 6px !important;
-    cursor: pointer;
-}
-
-.RichTextField #cke_RichText,
-.RichTextField #cke_Body,
-.RichTextField #cke_EmailBody,
-.RichTextField .cke {
-    width: 100% !important;
-    max-width: 99.7%; /* to avoid bug where border-right disappears in some containers*/
-    /*max-width: var(--main-field-size) !important;*/
-    border-radius: 10px !important;
-    border: var(--border-width) var(-border-solid) var(--border-color) !important;
-    overflow: hidden;
-}
-
-.cke_inner {
-    border-radius: 10px !important;
-}
-
 .jstree-InputField .jstree-ocl {
     cursor: pointer;
 }

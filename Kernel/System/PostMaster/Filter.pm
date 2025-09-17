@@ -234,6 +234,221 @@ sub FilterGet {
     return %Data;
 }
 
+=head2 FilterLookup()
+
+lookup for PostMaster filter id or name
+
+    my $ID = $PMFilterObject->FilterLookup(
+        Name => 'postmaster_filter',
+    );
+
+    # OR
+
+    my $Name = $PMFilterObject->FilterLookup(
+        ID => 10,
+    );
+
+=cut
+
+sub FilterLookup {
+    my ( $Self, %Param ) = @_;
+
+    my $DBObject  = $Kernel::OM->Get('Kernel::System::DB');
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    my $LookupValue;
+    if ( $Param{Name} ) {
+        return if !$DBObject->Prepare(
+            SQL => 'SELECT id
+                    FROM postmaster_filter
+                    WHERE f_name = ?',
+            Bind  => [ \$Param{Name} ],
+            Limit => 1,
+        );
+
+        my @Row = $DBObject->FetchrowArray();
+        $LookupValue = $Row[0];
+    }
+    elsif ( $Param{ID} ) {
+        return if !$DBObject->Prepare(
+            SQL => 'SELECT f_name
+                    FROM postmaster_filter
+                    WHERE id = ?',
+            Bind  => [ \$Param{ID} ],
+            Limit => 1,
+        );
+
+        my @Row = $DBObject->FetchrowArray();
+        $LookupValue = $Row[0];
+    }
+    else {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => 'Need either "ID" or "Name" parameter!',
+        );
+        return;
+    }
+
+    return $LookupValue;
+}
+
+=head2 FilterExport()
+
+export a PostMaster filter
+
+    my $ExportData = $PostMasterObject->FilterExport(
+        # required either ID or ExportAll
+        Name                     => 'postmaster1'  # required
+                                                   # or
+        ID                       => $PostMasterID, # required
+                                                   # or
+        ExportAll                => 0,             # required, possible: 0, 1
+
+        UserID                   => 1,             # required
+    }
+
+returns PostMaster filters hashes in an array with data:
+
+    my $ExportData =
+    [
+        {
+          'Name' => 'postmaster1',
+          'StopAfterMatch' => 0,
+          'Set' => [{
+            'Value' => '2',
+            'Key' => 'X-OTRS-AttachmentExists'
+          }],
+          'Match' => [{
+            'Value' => '2',
+            'Key' => 'Message-ID'
+          }],
+          'Not' => [{
+            'Value' => undef,
+            'Key' => 'Message-ID'
+          }]
+        }, {
+          'Match' => [{
+            'Value' => '3',
+            'Key' => 'Precedence'
+          }],
+          'Not' => [{
+            'Key' => 'Precedence',
+            'Value' => undef
+          }],
+          'Name' => 'postmaster2',
+          'Set' => [{
+            'Value' => '3',
+            'Key' => 'X-OTRS-AttachmentExists'
+          }],
+          'StopAfterMatch' => 0
+        }
+    ]
+
+=cut
+
+sub FilterExport {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    my $PostMasterData;
+
+    if ( $Param{ExportAll} ) {
+        my %PostMasterList = $Self->FilterList();
+
+        my @Data;
+        for my $ItemName ( sort keys %PostMasterList ) {
+            my %PostMasterSingleData = $Self->FilterExportDataGet(
+                Name => $ItemName,
+            );
+
+            push @Data, \%PostMasterSingleData if %PostMasterSingleData;
+        }
+        $PostMasterData = \@Data;
+    }
+    elsif ( $Param{ID} || $Param{Name} ) {
+
+        my $Name = $Param{Name};
+        if ( !$Name ) {
+            $Name = $Self->FilterLookup(
+                ID => $Param{ID},
+            );
+        }
+
+        return if !$Name;
+
+        my %PostMasterSingleData = $Self->FilterExportDataGet(
+            Name => $Name,
+        );
+
+        return if !%PostMasterSingleData;
+
+        $PostMasterData = [ \%PostMasterSingleData ];
+    }
+    else {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => 'Need either "ExportAll" or "ID" or "Name" parameter!',
+        );
+        return;
+    }
+
+    return $PostMasterData;
+}
+
+=head2 FilterExportDataGet()
+
+get data to export PostMaster filter
+
+    my %PostMasterData = $PostMasterObject->FilterExportDataGet(
+        Name => 'postmaster1', # mandatory
+    );
+
+Returns:
+
+    my %PostMasterData = (
+      'Name' => 'postmaster1',
+      'StopAfterMatch' => 0,
+      'Set' => [{
+        'Value' => '2',
+        'Key' => 'X-OTRS-AttachmentExists'
+      }],
+      'Match' => [{
+        'Value' => '2',
+        'Key' => 'Message-ID'
+      }],
+      'Not' => [{
+        'Value' => undef,
+        'Key' => 'Message-ID'
+      }]
+    )
+
+=cut
+
+sub FilterExportDataGet {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(Name)) {
+
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    my %PostMaster = $Self->FilterGet(
+        Name => $Param{Name},
+    );
+
+    return %PostMaster;
+}
+
 1;
 
 =head1 TERMS AND CONDITIONS

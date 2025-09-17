@@ -12,12 +12,24 @@ package Kernel::Modules::AdminProcessManagement;
 
 use strict;
 use warnings;
+use utf8;
 use Data::Dumper;
+use MIME::Base64;
 
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
+
+=head1 NAME
+
+Kernel::Modules::AdminProcessManagement - Module for managing processes.
+
+=head1 SYNOPSIS
+
+This module handles the management of processes.
+
+=cut
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -223,8 +235,21 @@ sub Run {
             );
         }
 
-        my $ProcessData = $Self->_GetProcessData(
-            ID => $ProcessID
+        my $ProcessData = $ProcessObject->ProcessExport(
+            ID     => $ProcessID,
+            UserID => $Self->{UserID},
+        );
+
+        if ( !$ProcessData ) {
+            return $LayoutObject->ErrorScreen(
+                Message => $LayoutObject->{LanguageObject}->Translate( 'Unknown Process %s!', $ProcessID ),
+            );
+        }
+
+        my $EntityID = $ProcessData->{Process}->{Name};
+        my $Filename = $ProcessObject->ProcessExportFilenameGet(
+            Name   => $EntityID,
+            Format => 'YAML',
         );
 
         # convert the processdata hash to string
@@ -235,7 +260,7 @@ sub Run {
             ContentType => 'text/html; charset=' . $LayoutObject->{Charset},
             Content     => $ProcessDataYAML,
             Type        => 'attachment',
-            Filename    => 'Export_ProcessEntityID_' . $ProcessData->{Process}->{EntityID} . '.yml',
+            Filename    => $Filename,
             NoCache     => 1,
         );
     }
@@ -263,8 +288,10 @@ sub Run {
             2 => Translatable('Yes (mandatory)'),
         };
 
-        my $ProcessData = $Self->_GetProcessData(
-            ID => $ProcessID
+        # get process data
+        my $ProcessData = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process')->ProcessExport(
+            ID     => $Param{ID},
+            UserID => $Self->{UserID},
         );
 
         my $Output = $LayoutObject->Header(
@@ -767,6 +794,63 @@ sub Run {
             UserID        => $Self->{UserID},
         );
 
+        # Get Process Preferences keys (Process->Config->Preferences)
+        my $PreferencesConfig = $ConfigObject->Get('ProcessPreferences');
+
+        # Add ProcessPreferences if they are defined in the config and exist in export.
+        if (
+            IsHashRefWithData($PreferencesConfig)
+            && IsHashRefWithData( $ProcessData->{Config}->{Preferences} )
+            )
+        {
+            PREFERENCEKEY:
+            for my $PreferenceKey ( sort keys %{ $ProcessData->{Config}->{Preferences} } ) {
+                my %PreferenceConfig = %{ $ProcessData->{Config}->{Preferences}->{$PreferenceKey} };
+                next PREFERENCEKEY if !$ProcessData->{$PreferenceKey};
+
+                my @PreferenceValues;
+
+                # Check if the preference is a single value or an array
+                if ( IsStringWithData( $ProcessData->{$PreferenceKey} ) ) {
+                    @PreferenceValues = $ProcessData->{$PreferenceKey};
+                }
+                elsif ( IsArrayRefWithData( $ProcessData->{$PreferenceKey} ) ) {
+                    @PreferenceValues = @{ $ProcessData->{$PreferenceKey} };
+                }
+
+                for my $Value (@PreferenceValues) {
+                    if ( $PreferenceConfig{Block} eq 'File' ) {
+                        my %File;
+
+                        $File{Content}     = $Value->{Content};
+                        $File{Preferences} = $Value->{Preferences};
+
+                        # To store the file in the VirtualFS, we need to create a unique filename
+                        # $Filename = StorageID::ProcessEntityID::PrefKey::Filename;
+                        my $Filename = 'VirtualFS::'
+                            . $EntityID . '::'
+                            . $PreferenceKey . '::'
+                            . $File{Preferences}->{Filename};
+
+                        $Kernel::OM->Get('Kernel::System::VirtualFS')->Write(
+                            Content     => $File{Content},
+                            Filename    => $Filename,
+                            Mode        => 'binary',
+                            Preferences => $File{Preferences},
+                        );
+
+                        $Value = $Filename;
+                    }
+
+                    $ProcessObject->ProcessPreferencesSet(
+                        ProcessEntityID => $EntityID,
+                        Key             => $PreferenceKey,
+                        Value           => $Value,
+                    );
+                }
+            }
+        }
+
         # show error if can't create
         if ( !$ProcessID ) {
             return $LayoutObject->ErrorScreen(
@@ -904,6 +988,11 @@ sub Run {
                 ),
             );
         }
+
+        $Self->_ProcessPreferencesSet(
+            %Param,
+            ProcessData => $ProcessData,
+        );
 
         # redirect to process edit screen
         return $LayoutObject->Redirect(
@@ -1061,6 +1150,11 @@ sub Run {
                 ),
             );
         }
+
+        $Self->_ProcessPreferencesSet(
+            %Param,
+            ProcessData => $ProcessData,
+        );
 
         if (
             defined $ParamObject->GetParam( Param => 'ContinueAfterSave' )
@@ -1800,6 +1894,11 @@ sub _ShowEdit {
     my $Output = $LayoutObject->Header();
     $Output .= $LayoutObject->NavigationBar();
 
+    # Render Process Preference Widgets
+    $Self->_ProcessPreferencesGet(
+        %Param,
+    );
+
     # show notifications if any
     if ( $Param{NotifyData} ) {
         for my $Notification ( @{ $Param{NotifyData} } ) {
@@ -2058,70 +2157,230 @@ sub _PushSessionScreen {
     return 1;
 }
 
-sub _GetProcessData {
+=head2 _ProcessPreferencesGet()
 
+Gets process preferences. This is a helper function for _ShowEdit().
+It creates the HTML Input fields for the preferences.
+
+    my $Success = $Self->_ProcessPreferencesGet(
+        ProcessData => {},
+        UserID      => 123,
+    );
+
+Returns:
+
+    my $Success = 1;
+
+=cut
+
+sub _ProcessPreferencesGet {
     my ( $Self, %Param ) = @_;
 
-    my %ProcessData;
+    my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
+    my $MainObject        = $Kernel::OM->Get('Kernel::System::Main');
+    my $LayoutObject      = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $UploadCacheObject = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
 
-    # get needed objects
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $PreferenceConfig = $ConfigObject->Get('ProcessPreferences');
+    my $AttachmentConfig = $ConfigObject->Get('Attachment');
+    return 1 if !$PreferenceConfig;
 
-    # get process data
-    my $Process = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process')->ProcessGet(
-        ID     => $Param{ID},
-        UserID => $Self->{UserID},
-    );
-    if ( !$Process ) {
-        return $LayoutObject->ErrorScreen(
-            Message => $LayoutObject->{LanguageObject}->Translate( 'Unknown Process %s!', $Param{ID} ),
-        );
+    # Group preferences by ClusterName and sort by ClusterPriority
+    my %ClusteredPreferences;
+    for my $Preference ( sort keys %{$PreferenceConfig} ) {
+        my $ClusterName     = $PreferenceConfig->{$Preference}->{ClusterName}     || 'Default';
+        my $ClusterPriority = $PreferenceConfig->{$Preference}->{ClusterPriority} || 0;
+        push @{ $ClusteredPreferences{$ClusterName} }, {
+            Preference      => $Preference,
+            ClusterPriority => $ClusterPriority,
+        };
     }
-    $ProcessData{Process} = $Process;
 
-    # get all used activities
-    for my $ActivityEntityID ( @{ $Process->{Activities} } ) {
+    # Sort clusters by ClusterPriority
+    for my $ClusterName ( sort keys %ClusteredPreferences ) {
+        @{ $ClusteredPreferences{$ClusterName} } = sort {
+            $a->{ClusterPriority} <=> $b->{ClusterPriority}
+        } @{ $ClusteredPreferences{$ClusterName} };
+    }
 
-        my $Activity = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Activity')->ActivityGet(
-            EntityID => $ActivityEntityID,
-            UserID   => $Self->{UserID},
+    # Show each preferences setting
+    for my $ClusterName ( sort keys %ClusteredPreferences ) {
+
+        $LayoutObject->Block(
+            Name => 'Cluster',
+            Data => {
+                ClusterName => $ClusterName,
+            },
         );
-        $ProcessData{Activities}->{$ActivityEntityID} = $Activity;
 
-        # get all used activity dialogs
-        for my $ActivityDialogEntityID ( @{ $Activity->{ActivityDialogs} } ) {
+        for my $PreferenceData ( @{ $ClusteredPreferences{$ClusterName} } ) {
+            my $Preference = $PreferenceData->{Preference};
+            my $Module
+                = $PreferenceConfig->{$Preference}->{Module} || 'Kernel::Output::HTML::ProcessPreferences::Generic';
 
-            my $ActivityDialog
-                = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::ActivityDialog')->ActivityDialogGet(
-                EntityID => $ActivityDialogEntityID,
-                UserID   => $Self->{UserID},
+            # load module
+            if ( !$MainObject->Require($Module) ) {
+                return $LayoutObject->FatalError();
+            }
+            my $Object = $Module->new(
+                %{$Self},
+                ConfigItem => $PreferenceConfig->{$Preference},
+                Debug      => $Self->{Debug},
+            );
+
+            my @Params = $Object->Param( ProcessData => $Param{ProcessData} );
+            for my $ParamItem (@Params) {
+
+                # Prepare Data for BuildSelection
+                if (
+                    ref $ParamItem->{Data} eq 'HASH'
+                    || ref $PreferenceConfig->{$Preference}->{Data} eq 'HASH'
+                    )
+                {
+                    my %BuildSelectionParams = (
+                        %{ $PreferenceConfig->{$Preference} },
+                        %{$ParamItem},
+                        SelectedID => $ParamItem->{Value} || $PreferenceConfig->{$Preference}->{SelectedID},
+                    );
+                    $BuildSelectionParams{Class} = join( ' ', $BuildSelectionParams{Class} // '', 'Modernize' );
+
+                    $ParamItem->{'Option'} = $LayoutObject->BuildSelection(
+                        %BuildSelectionParams
+                    );
+                }
+
+                # File
+                if ( $ParamItem->{Block} eq 'File' ) {
+
+                    # Create FormID for each file field
+                    $ParamItem->{FormID} = $UploadCacheObject->FormIDCreate();
+
+                    for my $File ( @{ $ParamItem->{Value} || [] } ) {
+
+                        # Add existing files to upload cache
+                        $UploadCacheObject->FormIDAddFile(
+                            FormID      => $ParamItem->{FormID},
+                            Content     => ${ $File->{Content} },
+                            Filename    => $File->{Preferences}->{Filename},
+                            ContentID   => $File->{Preferences}->{Filename},
+                            ContentType => $File->{Preferences}->{ContentType},
+                            Disposition => 'File',
+                        );
+                    }
+
+                    # Get all attachments meta data
+                    my @Attachments = $UploadCacheObject->FormIDGetAllFilesData(
+                        FormID => $ParamItem->{FormID},
+                    );
+
+                    if (@Attachments) {
+                        for my $Attachment (@Attachments) {
+
+                            my %PreviewContentTypes = %{ $AttachmentConfig->{PreviewContentTypes} || {} };
+                            my $IsPreview
+                                = grep { $_ eq $Attachment->{ContentType} || '' } sort keys %PreviewContentTypes;
+
+                            if ($IsPreview) {
+                                $Attachment->{Preview} = 1;
+                            }
+                        }
+                        @{ $ParamItem->{AttachmentList} } = @Attachments;
+                    }
+                }
+
+                # RichText set RichText parameters
+                if ( $ParamItem->{Block} eq 'RichText' ) {
+                    $LayoutObject->SetRichTextParameters(
+                        Data => $ParamItem,
+                    );
+                }
+
+                $LayoutObject->Block(
+                    Name => $ParamItem->{Block} || $PreferenceConfig->{$Preference}->{Block} || 'Option',
+                    Data => {
+                        %{ $PreferenceConfig->{$Preference} },
+                        %{$ParamItem},
+                        Name => $ParamItem->{PrefKey},
+                        ID   => $ParamItem->{PrefKey},
+                    },
                 );
-            $ProcessData{ActivityDialogs}->{$ActivityDialogEntityID} = $ActivityDialog;
+            }
         }
     }
 
-    # get all used transitions
-    for my $TransitionEntityID ( @{ $Process->{Transitions} } ) {
+    return 1;
+}
 
-        my $Transition = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Transition')->TransitionGet(
-            EntityID => $TransitionEntityID,
-            UserID   => $Self->{UserID},
+=head2 _ProcessPreferencesSet()
+
+Sets process preferences.
+This is a helper function for _ShowEdit().
+It processes the preferences and saves the data.
+
+    my $Success = $Self->_ProcessPreferencesSet(
+        ProcessData => {
+
+        },
+        UserID => 123,
+    );
+
+Returns:
+
+    my $Success = 1;
+
+=cut
+
+sub _ProcessPreferencesSet {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
+
+    my $PreferenceConfig = $ConfigObject->Get('ProcessPreferences');
+    return 1 if !$PreferenceConfig;
+
+    # Loop through all preferences and set them
+    for my $Preference ( sort keys %{$PreferenceConfig} ) {
+
+        my $Module
+            = $PreferenceConfig->{$Preference}->{Module} || 'Kernel::Output::HTML::ProcessPreferenceConfig::Generic';
+
+        # Load module
+        if ( !$MainObject->Require($Module) ) {
+            return $LayoutObject->FatalError();
+        }
+        my $Object = $Module->new(
+            %{$Self},
+            ConfigItem => $PreferenceConfig->{$Preference},
+            Debug      => $Self->{Debug},
         );
-        $ProcessData{Transitions}->{$TransitionEntityID} = $Transition;
-    }
 
-    # get all used transition actions
-    for my $TransitionActionEntityID ( @{ $Process->{TransitionActions} } ) {
+        my @Params = $Object->Param( ProcessData => $Param{ProcessData} );
 
-        my $TransitionAction
-            = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::TransitionAction')->TransitionActionGet(
-            EntityID => $TransitionActionEntityID,
-            UserID   => $Self->{UserID},
+        if (@Params) {
+            my %GetParam;
+
+            PARAM:
+            for my $ParamItem (@Params) {
+
+                my @Array = $ParamObject->GetArray(
+                    Param => $ParamItem->{Name},
+                );
+                $GetParam{ $ParamItem->{Name} } = \@Array;
+            }
+
+            # Set preferences
+            $Object->Run(
+                GetParam         => \%GetParam,
+                ProcessData      => $Param{ProcessData},
+                PreferenceConfig => $PreferenceConfig->{$Preference},
             );
-        $ProcessData{TransitionActions}->{$TransitionActionEntityID} = $TransitionAction;
+        }
     }
 
-    return \%ProcessData;
+    return 1;
 }
 
 1;

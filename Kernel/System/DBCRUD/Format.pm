@@ -10,6 +10,7 @@ package Kernel::System::DBCRUD::Format;
 
 use strict;
 use warnings;
+use utf8;
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -62,7 +63,6 @@ sub new {
         my $Module       = "Kernel::System::DBCRUD::Format::$Backend";
         my $LoadedModule = $MainObject->Require(
             $Module,
-            Silent => 1,
         );
 
         if ( !$LoadedModule ) {

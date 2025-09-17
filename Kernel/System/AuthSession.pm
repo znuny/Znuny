@@ -135,8 +135,10 @@ sub GetSessionIDData {
 create a new session with given data
 
     my $SessionID = $SessionObject->CreateSessionID(
-        UserLogin => 'root',
-        UserEmail => 'root@example.com',
+        UserType      => 'User',                # required, 'User' or 'Customer'
+        UserLogin     => 'root',
+        UserEmail     => 'root@example.com',
+        SessionSource => 'GenericInterface',    # optional, used to identify the source of the session
     );
 
 =cut

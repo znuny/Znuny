@@ -82,13 +82,35 @@ Core.Agent.Admin.MailAccount = (function (TargetNS) {
     */
     TargetNS.Init = function () {
 
-        // Show IMAP Folder selection only for IMAP backends
+        var $AuthenticationTypePasswordOption = $('#AuthenticationType option[value="password"]');
+
+        // Show folder selection only for IMAP and MSGraph backends
         $('select#TypeAdd, select#Type').on('change', function(){
-            if (/IMAP/.test($(this).val())) {
+
+            // Also handle MSGraph folder selection
+            if (/^(?:IMAP|MSGraph)/.test($(this).val())) {
                 $('.Row_IMAPFolder').show();
             }
             else {
                 $('.Row_IMAPFolder').hide();
+            }
+
+            // Pre-select OAuth2 token auth method if MSGraph has been selected
+            if (/^MSGraph$/.test($(this).val())) {
+                $('#AuthenticationType').val('oauth2_token');
+
+                // Remove authentication type option 'password'
+                $('#AuthenticationType option[value="password"]').remove();
+
+                $('#AuthenticationType').trigger('redraw.InputField').trigger('change');
+            }
+            else {
+                // Re-add authentication type option 'password'
+                if (!$('#AuthenticationType option[value="password"]').length) {
+                    $('#AuthenticationType').append($AuthenticationTypePasswordOption);
+
+                    $('#AuthenticationType').trigger('redraw.InputField').trigger('change');
+                }
             }
         }).trigger('change');
 

@@ -326,7 +326,7 @@ sub Check {
                     );
 
                     # Write decrypted attachments to the storage.
-                    for my $Attachment ( $ParserObject->GetAttachments() ) {
+                    for my $Attachment ( $ParserObject->GetAttachments( UserType => 'Agent' ) ) {
                         $ArticleBackendObject->ArticleWriteAttachment(
                             %{$Attachment},
                             ArticleID => $Self->{ArticleID},

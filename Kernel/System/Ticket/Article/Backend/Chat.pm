@@ -74,6 +74,7 @@ Create a chat article.
     );
 
 Events:
+
     ArticleCreate
 
 =cut
@@ -430,6 +431,7 @@ Note: Keys C<ChatMessageList>, C<SenderType>, C<SenderTypeID> and C<IsVisibleFor
     );
 
 Events:
+
     ArticleUpdate
 
 =cut
@@ -647,26 +649,26 @@ Get article attachment index as hash.
 
 Returns:
 
-my %ArticleSearchData = {
-    'ChatterName'    => {
-        String     => 'John Doe Jane Doe Joe Doe',
-        Key        => 'ChatterName',
-        Type       => 'Text',
-        Filterable => 0,
-    },
-    'ChatterType'    => {
-        String     => 'User User1 User2 User3',
-        Key        => 'ChatterType',
-        Type       => 'Text',
-        Filterable => 0,
-    },
-    'MessageText'    => {
-        String     => 'Chat message Second chat message Third chat message',
-        Key        => 'Body',
-        Type       => 'Text',
-        Filterable => 1,
-    }
-};
+    my %ArticleSearchData = {
+        'ChatterName'    => {
+            String     => 'John Doe Jane Doe Joe Doe',
+            Key        => 'ChatterName',
+            Type       => 'Text',
+            Filterable => 0,
+        },
+        'ChatterType'    => {
+            String     => 'User User1 User2 User3',
+            Key        => 'ChatterType',
+            Type       => 'Text',
+            Filterable => 0,
+        },
+        'MessageText'    => {
+            String     => 'Chat message Second chat message Third chat message',
+            Key        => 'Body',
+            Type       => 'Text',
+            Filterable => 1,
+        }
+    };
 
 =cut
 

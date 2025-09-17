@@ -330,15 +330,15 @@ $Selenium->RunTest(
                     # wait for the CKE to load
                     $Selenium->WaitFor(
                         JavaScript =>
-                            "return \$('body.cke_editable', \$('.cke_wysiwyg_frame').contents()).length == 1;"
+                            "return \$('.ck-editor__editable').contents().length >= 1;"
                     );
 
                     $Selenium->execute_script(
-                        "return CKEDITOR.instances.RichText.setData('$Test->{Fields}->{$Field}->{Value}');"
+                        "return window.editor.setData('$Test->{Fields}->{$Field}->{Value}');"
                     );
 
                     $Selenium->execute_script(
-                        "return CKEDITOR.instances.RichText.updateElement();"
+                        "return window.editor.updateSourceElement();"
                     );
                 }
                 else {
@@ -505,21 +505,21 @@ $Selenium->RunTest(
                     # wait for the CKE to load
                     $Selenium->WaitFor(
                         JavaScript =>
-                            "return \$('body.cke_editable', \$('.cke_wysiwyg_frame').contents()).length == 1;"
+                            "return \$('.ck-editor__editable').contents().length >= 1;"
                     );
 
                     $Self->Is(
-                        $Selenium->execute_script('return CKEDITOR.instances.RichText.getData();'),
+                        $Selenium->execute_script('return window.editor.getData();'),
                         $Test->{Fields}->{$FieldValue}->{Value},
                         "Initial Draft value for $Test->{Module} field $FieldValue is correct"
                     );
 
                     $Selenium->execute_script(
-                        "return CKEDITOR.instances.RichText.setData('$Test->{Fields}->{$FieldValue}->{Update}');"
+                        "return window.editor.setData('$Test->{Fields}->{$FieldValue}->{Update}');"
                     );
 
                     $Selenium->execute_script(
-                        "return CKEDITOR.instances.RichText.updateElement();"
+                        "return window.editor.updateSourceElement();"
                     );
                 }
                 else {

@@ -47,6 +47,7 @@ sub Run {
     my $LayoutObject            = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $NotificationEventObject = $Kernel::OM->Get('Kernel::System::NotificationEvent');
     my $MainObject              = $Kernel::OM->Get('Kernel::System::Main');
+    my $YAMLObject              = $Kernel::OM->Get('Kernel::System::YAML');
     my $Notification            = $ParamObject->GetParam( Param => 'Notification' );
 
     # get registered transport layers
@@ -453,46 +454,33 @@ sub Run {
 
         my $NotificationID = $ParamObject->GetParam( Param => 'ID' ) || '';
         my $NotificationData;
-        my %NotificationSingleData;
-        my $Filename = 'Export_Notification.yml';
-
+        my $NotificationName;
         if ($NotificationID) {
-
-            %NotificationSingleData = $NotificationEventObject->NotificationGet(
-                ID     => $NotificationID,
-                UserID => $Self->{UserID},
+            $NotificationData = $NotificationEventObject->NotificationExport(
+                ID => $NotificationID,
             );
 
-            if ( !IsHashRefWithData( \%NotificationSingleData ) ) {
-                return $LayoutObject->ErrorScreen(
-                    Message => $LayoutObject->{LanguageObject}
-                        ->Translate( 'There was an error getting data for Notification with ID:%s!', $NotificationID ),
-                );
-            }
+            return $LayoutObject->ErrorScreen(
+                Message => $LayoutObject->{LanguageObject}
+                    ->Translate( 'There was an error getting data for Notification with ID:%s!', $NotificationID ),
+            ) if !IsArrayRefWithData($NotificationData);
 
-            my $NotificationName = $NotificationSingleData{Name};
-            $NotificationName =~ s{[^a-zA-Z0-9-_]}{_}xmsg;    # cleanup name for saving
-
-            $Filename         = 'Export_Notification_' . $NotificationName . '.yml';
-            $NotificationData = [ \%NotificationSingleData ];
+            $NotificationName = $NotificationData->[0]->{Name};
         }
         else {
-
-            my %Notificationdetails = $NotificationEventObject->NotificationList(
-                Type    => 'Appointment',
-                UserID  => $Self->{UserID},
-                Details => 1,
+            $NotificationData = $NotificationEventObject->NotificationExport(
+                ExportAll => 1,
+                Type      => 'Appointment',
             );
-
-            my @Data;
-            for my $ItemID ( sort keys %Notificationdetails ) {
-                push @Data, $Notificationdetails{$ItemID};
-            }
-            $NotificationData = \@Data;
         }
 
+        my $Filename = $NotificationEventObject->NotificationExportFilenameGet(
+            Name => $NotificationName,
+            Type => 'Appointment',
+        );
+
         # convert the Notification data hash to string
-        my $NotificationDataYAML = $Kernel::OM->Get('Kernel::System::YAML')->Dump( Data => $NotificationData );
+        my $NotificationDataYAML = $YAMLObject->Dump( Data => $NotificationData );
 
         # send the result to the browser
         return $LayoutObject->Attachment(
@@ -572,37 +560,53 @@ sub Run {
         if ( !$NotificationImport->{Success} ) {
             my $Message = $NotificationImport->{Message}
                 || Translatable(
-                'Notifications could not be Imported due to a unknown error, please check Znuny logs for more information'
+                'Notifications could not be imported due to an unknown error, please check logs for more information.'
                 );
             return $LayoutObject->ErrorScreen(
                 Message => $Message,
             );
         }
 
-        if ( $NotificationImport->{AddedNotifications} ) {
+        if ( $NotificationImport->{Added} ) {
             push @{ $Param{NotifyData} }, {
                 Info => $LayoutObject->{LanguageObject}->Translate(
-                    'The following Notifications have been added successfully: %s',
-                    $NotificationImport->{AddedNotifications}
+                    'The following notifications have been added successfully: %s.',
+                    $NotificationImport->{Added}
                 ),
             };
         }
-        if ( $NotificationImport->{UpdatedNotifications} ) {
+        if ( $NotificationImport->{Updated} ) {
             push @{ $Param{NotifyData} }, {
                 Info => $LayoutObject->{LanguageObject}->Translate(
-                    'The following Notifications have been updated successfully: %s',
-                    $NotificationImport->{UpdatedNotifications}
+                    'The following notifications have been updated successfully: %s.',
+                    $NotificationImport->{Updated}
                 ),
             };
         }
-        if ( $NotificationImport->{NotificationErrors} ) {
+        if ( $NotificationImport->{NotUpdated} ) {
+            push @{ $Param{NotifyData} }, {
+                Info => $LayoutObject->{LanguageObject}->Translate(
+                    'The following notifications were not updated: %s.',
+                    $NotificationImport->{NotUpdated}
+                ),
+            };
+        }
+        if ( $NotificationImport->{Errors} ) {
             push @{ $Param{NotifyData} }, {
                 Priority => 'Error',
                 Info     => $LayoutObject->{LanguageObject}->Translate(
-                    'There where errors adding/updating the following Notifications: %s. Please check the log file for more information.',
-                    $NotificationImport->{NotificationErrors}
+                    'There where errors adding/updating the following notifications: %s. Please check the log file for more information.',
+                    $NotificationImport->{Errors}
                 ),
             };
+        }
+        if ( IsArrayRefWithData( $NotificationImport->{AdditionalErrors} ) ) {
+            for my $Error ( @{ $NotificationImport->{AdditionalErrors} } ) {
+                push @{ $Param{NotifyData} }, {
+                    Priority => 'Error',
+                    Info     => $LayoutObject->{LanguageObject}->Translate($Error),
+                };
+            }
         }
 
         $Self->_Overview();
@@ -1144,7 +1148,7 @@ sub _Overview {
 
     $LayoutObject->Block( Name => 'ActionList' );
     $LayoutObject->Block( Name => 'ActionAdd' );
-    $LayoutObject->Block( Name => 'ActionImport' );
+    $LayoutObject->Block( Name => 'ActionImportExport' );
     $LayoutObject->Block( Name => 'Filter' );
 
     $LayoutObject->Block(

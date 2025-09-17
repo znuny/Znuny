@@ -21,7 +21,9 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         background-color: #111;
     }
 
-    img, video, svg {
+    img,
+    video,
+    svg {
         filter: invert(0%);
     }
 

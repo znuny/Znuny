@@ -1,0 +1,25 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+[% RenderBlockStart("RichText") %]
+    <label for="RichText">[% Translate(Data.Label) | html %]:</label>
+    <div class="RichTextField">
+        <textarea id="[% Data.ID | html %]" name="[% Data.Name | html %]" class="RichText Validate_RequiredRichText [% Data.Class | html %]" rows="[% Data.Rows | html %]" cols="[% Data.Cols | html %]" [% Data.Attribute | html %]>[% Data.Value | html %]</textarea>
+        [% IF Data.Description %]
+        <p class="FieldExplanation">
+            [% Translate(Data.Description) | html %]
+        </p>
+        [% END %]
+        <div id="RichTextError" class="TooltipErrorMessage">
+            <p>[% Translate("This field is required.") | html %]</p>
+        </div>
+        <div id="RichTextServerError" class="TooltipErrorMessage">
+            <p>[% Translate("This field is required.") | html %]</p>
+        </div>
+    </div>
+[% RenderBlockEnd("RichText") %]

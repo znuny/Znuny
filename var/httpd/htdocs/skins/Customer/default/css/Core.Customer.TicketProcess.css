@@ -97,6 +97,10 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     white-space: pre-line;
 }
 
+.TicketProcess fieldset {
+    max-width: unset;
+}
+
 
 /* TicketProcess Updates */
 
@@ -142,6 +146,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     padding: 0;
 }
 
+.TicketProcess fieldset.TableLike,
 .TicketProcess .inner-page-display #MainBox .TableLike {
     gap: var(--gap-md)
 }
@@ -151,22 +156,31 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     display: none;
 }
 
+.TicketProcess .PopupHeader {
+    gap: inherit;
+}
+
 .TicketProcess .PopupFooter {
+    padding: var(--main-page-padding);
+
     display: flex;
-    flex-direction: column;
-    gap: var(--gap-md);
-    background: transparent;
-    border: 0;
-    padding: var(--padding-xl) 0 0;
+    flex-flow: column;
+    width: 100%;
+    align-items: flex-end;
+}
+
+.inner-page-display .TicketProcess .PopupFooter {
+    padding: 0;
 }
 
 .TicketProcess .PopupFooter .AdviceText {
+    width: 100%;
     display: flex;
-    padding: var(--padding-sm);
-    background: var(--gray-light-semi);
-    color: var(--black);
-    border-radius: var(--border-radius-xs);
     justify-content: center;
+    background: var(--gray-light-semi);
+    padding: var(--padding-sm);
+    border-radius: var(--border-radius-xxs);
+    margin: var(--margin-lg) 0;
 }
 
 .TicketProcess .PopupFooter .btn-primary {

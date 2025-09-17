@@ -387,10 +387,11 @@ sub LoadDefaults {
     $Self->{'SendmailModule'}      = 'Kernel::System::Email::Sendmail';
     $Self->{'SendmailModule::CMD'} = '/usr/sbin/sendmail -i -f';
 
-#    $Self->{'SendmailModule'} = 'Kernel::System::Email::SMTP';
-#    $Self->{'SendmailModule::Host'} = 'mail.example.com';
-#    $Self->{'SendmailModule::Port'} = '25';
-#    $Self->{'SendmailModule::AuthUser'} = '';
+#    $Self->{'SendmailModule'}               = 'Kernel::System::Email::SMTP';
+#    $Self->{'SendmailModule::Host'}         = 'mail.example.com';
+#    $Self->{'SendmailModule::Port'}         = '25';
+#    $Self->{'SendmailModule::Timeout'}      = 30;
+#    $Self->{'SendmailModule::AuthUser'}     = '';
 #    $Self->{'SendmailModule::AuthPassword'} = '';
 
     # SendmailBcc
@@ -999,7 +1000,7 @@ sub LoadDefaults {
     $Self->{'Loader::Customer::CommonJS'}->{'000-Framework'} = [
         'thirdparty/jquery-3.7.0/jquery.js',
         'thirdparty/jquery-browser-detection/jquery-browser-detection.js',
-        'thirdparty/jquery-validate-1.16.0/jquery.validate.js',
+        'thirdparty/jquery-validation-1.21.0/jquery.validate.js',
         'thirdparty/jquery-ui-1.13.3/jquery-ui.js',
         'thirdparty/jquery-pubsub/pubsub.js',
         'thirdparty/jquery-jstree-3.3.8/jquery.jstree.js',
@@ -1039,7 +1040,7 @@ sub LoadDefaults {
         'thirdparty/jquery-browser-detection/jquery-browser-detection.js',
         'thirdparty/jquery-ui-1.13.3/jquery-ui.js',
         'thirdparty/jquery-ui-touch-punch-0.2.3/jquery.ui.touch-punch.js',
-        'thirdparty/jquery-validate-1.16.0/jquery.validate.js',
+        'thirdparty/jquery-validation-1.21.0/jquery.validate.js',
         'thirdparty/jquery-pubsub/pubsub.js',
         'thirdparty/jquery-jstree-3.3.8/jquery.jstree.js',
         'thirdparty/nunjucks-3.2.3/nunjucks.min.js',
@@ -1878,7 +1879,7 @@ via the Preferences button after logging in.
         GroupRo      => [],
         IconBig     => 'fa-plug',
         IconSmall => '',
-        Description => Translatable('Update and extend your system with software packages.'),
+        Description => Translatable('Manage add-ons.'),
         Module      => 'Kernel::Output::HTML::NavBar::ModuleAdmin',
         Name        => Translatable('Package Manager'),
         Block => 'Administration',

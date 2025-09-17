@@ -92,9 +92,9 @@ Runs TransitionAction ArticleSend.
             Queue   => 'Misc',                                                     # optional, use system address of queue as "From" parameter
             QueueID => 123,                                                        # optional, use system address of queue id as "From" parameter
 
-            Attachments   => 'Attachment 1, Attachment 2, Attachment 3',           # Add attachment of the admin interface for the ArticleSend
-            AttachmentIDs => '15,34,42',                                           # Add attachment ids of the admin interface for the ArticleSend
-
+            # Attachment optional:
+            Attachments      => 'StdAttachmentName1,StdAttachmentName2',           # optional, comma separated StandardAttachment Names
+            AttachmentIDs    => '1,2,3',                                           # optional, comma separated StandardAttachment ID
             AttachmentsReuse => 1                                                  # optional, 1|0 - Reuse of attachments stored in the dynamic field configured in Process::DynamicFieldProcessManagementAttachment.
 
             Template   => 'Template 1',                                            # Use template to replace in Body by Tag <OTRS_TA_TEMPLATE>

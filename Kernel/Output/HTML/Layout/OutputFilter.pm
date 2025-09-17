@@ -50,12 +50,11 @@ sub _OutputFilterHookShift {
 
 Example html for a hook:
 
-<!--HookStartDynamicField-->
+    <!--HookStartDynamicField-->
         <div class="Row Row_DynamicField_ProcessManagementProcessID">
             <label id="LabelDynamicField_ProcessManagementProcessID" for="DynamicField_ProcessManagementProcessID">
                 Prozess:
             </label>
-
             <div class="Field">
                 <input type="text" class="DynamicFieldText W50pc" id="DynamicField_ProcessManagementProcessID" name="DynamicField_ProcessManagementProcessID" title="Process" value="" />
             </div>
@@ -121,18 +120,17 @@ sub _OutputFilterHookReplace {
 
 Example html for a hook:
 
-<!--HookStartDynamicField-->
+    <!--HookStartDynamicField-->
         <div class="Row Row_DynamicField_ProcessManagementProcessID">
             <label id="LabelDynamicField_ProcessManagementProcessID" for="DynamicField_ProcessManagementProcessID">
                 Prozess:
             </label>
-
             <div class="Field">
                 <input type="text" class="DynamicFieldText W50pc" id="DynamicField_ProcessManagementProcessID" name="DynamicField_ProcessManagementProcessID" title="Process" value="" />
             </div>
             <div class="Clear"></div>
         </div>
-<!--HookEndDynamicField-->
+    <!--HookEndDynamicField-->
 
 =cut
 
@@ -187,18 +185,17 @@ sub _OutputFilterHookExists {
 
 Example html for a hook:
 
-<!--HookStartDynamicField-->
+    <!--HookStartDynamicField-->
         <div class="Row Row_DynamicField_ProcessManagementProcessID">
             <label id="LabelDynamicField_ProcessManagementProcessID" for="DynamicField_ProcessManagementProcessID">
                 Prozess:
             </label>
-
             <div class="Field">
                 <input type="text" class="DynamicFieldText W50pc" id="DynamicField_ProcessManagementProcessID" name="DynamicField_ProcessManagementProcessID" title="Process" value="" />
             </div>
             <div class="Clear"></div>
         </div>
-<!--HookEndDynamicField-->
+    <!--HookEndDynamicField-->
 
 =cut
 
@@ -237,18 +234,17 @@ sub _OutputFilterHookInsertAfter {
 
 Example html for a hook:
 
-<!--HookStartDynamicField-->
+    <!--HookStartDynamicField-->
         <div class="Row Row_DynamicField_ProcessManagementProcessID">
             <label id="LabelDynamicField_ProcessManagementProcessID" for="DynamicField_ProcessManagementProcessID">
                 Prozess:
             </label>
-
             <div class="Field">
                 <input type="text" class="DynamicFieldText W50pc" id="DynamicField_ProcessManagementProcessID" name="DynamicField_ProcessManagementProcessID" title="Process" value="" />
             </div>
             <div class="Clear"></div>
         </div>
-<!--HookEndDynamicField-->
+    <!--HookEndDynamicField-->
 
 =cut
 
@@ -292,18 +288,17 @@ sub _OutputFilterHookInsertBefore {
 
 Example html for a hook:
 
-<!--HookStartDynamicField-->
+    <!--HookStartDynamicField-->
         <div class="Row Row_DynamicField_ProcessManagementProcessID">
             <label id="LabelDynamicField_ProcessManagementProcessID" for="DynamicField_ProcessManagementProcessID">
                 Prozess:
             </label>
-
             <div class="Field">
                 <input type="text" class="DynamicFieldText W50pc" id="DynamicField_ProcessManagementProcessID" name="DynamicField_ProcessManagementProcessID" title="Process" value="" />
             </div>
             <div class="Clear"></div>
         </div>
-<!--HookEndDynamicField-->
+    <!--HookEndDynamicField-->
 
 =cut
 

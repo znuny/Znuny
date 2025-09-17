@@ -8,11 +8,13 @@
 # --
 ## nofilter(TidyAll::Plugin::Znuny::TT::ScriptUsage)
 
-<script type="text/javascript">//<![CDATA[
-    "use strict";
+[% IF Data.JSConfig.RichTextSet %]
+    <script src="[% Config("Frontend::RichText::Path") _ "ckeditor-znuny.js" | html %]"></script>
+[% IF Data.JSConfig.IncludeRichTextTranslation %]
+    <script src="[% Config("Frontend::RichText::Path") _ "translations/" | html %][% Data.JSConfig.CKEUserLanguage | html %].js"></script>
+[% END %]
+[% END %]
 
-    var CKEDITOR_BASEPATH = [% Config("Frontend::RichText::Path") | JSON %];
-//]]></script>
 [% RenderBlockStart("CommonJS") %]
 <script type="text/javascript" src="[% Config("Frontend::JavaScriptPath") | html %][% Data.JSDirectory | html %][% Data.Filename | html %]"></script>
 [% RenderBlockEnd("CommonJS") %]

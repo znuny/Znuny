@@ -485,7 +485,11 @@ Core.UI.InputFields = (function (TargetNS) {
                                             .data('value');
                                     Selection.splice(Selection.indexOf(SelectedValue), 1);
                                     if (HasEmptyElement && Selection.length === 0) {
-                                        $SelectObj.val('');
+                                        if(Multiple){
+                                            $SelectObj.val([]);
+                                        } else {
+                                            $SelectObj.val('');
+                                        }
                                     }
                                     else {
                                         $SelectObj.val(Selection);
@@ -1223,7 +1227,7 @@ Core.UI.InputFields = (function (TargetNS) {
                 $ShowTreeObj = $SelectObj.next('.ShowTreeSelection');
                 if ($SelectObj.data('tree') || $ShowTreeObj.length) {
                     if ($ShowTreeObj.length) {
-                        $ShowTreeObj.hide();
+                        $ShowTreeObj.show();
                     }
                     $SelectObj.data('tree', true);
                     TreeView = true;
@@ -1237,6 +1241,9 @@ Core.UI.InputFields = (function (TargetNS) {
                 // Container for input field
                 $InputContainerObj = $('<div />').appendTo($ContainerObj);
                 $InputContainerObj.addClass('InputField_InputContainer');
+
+                // Move tree view icon directly "behind" input element
+                $ShowTreeObj.insertAfter($InputContainerObj);
 
                 // Deduce ID of original field
                 SearchID = $SelectObj.attr('id');
@@ -1812,7 +1819,7 @@ Core.UI.InputFields = (function (TargetNS) {
                             // Set selected nodes as selected in initial select box
                             // (which is hidden but is still used for the action)
                             if (HasEmptyElement && SelectedNodes.length === 0) {
-                                $SelectObj.val('');
+                                $SelectObj.val([]);
                             }
                             else {
                                 $SelectObj.val(SelectedNodes);

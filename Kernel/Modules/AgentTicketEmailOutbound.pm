@@ -350,7 +350,7 @@ sub Form {
 
         # add the temp
         if ( $GetParam{StandardTemplateID} ) {
-            $Data{Body} = $Data{StdTemplate} . '<br/>' . $Data{Body};
+            $Data{Body} = $Data{StdTemplate} . '<p></p>' . $Data{Body};
         }
 
         $Data{Body} = $Data{Body} . $Data{Signature};
@@ -1502,7 +1502,7 @@ sub AjaxUpdateTemplate {
 
         # append the signature to the body text
         if ( $LayoutObject->{BrowserRichText} ) {
-            $TemplateText = $TemplateText . '<br><br>' . $Signature;
+            $TemplateText = $TemplateText . '<p></p><p></p>' . $Signature;
         }
         else {
             $TemplateText = $TemplateText . "\n\n" . $Signature;

@@ -16,10 +16,16 @@ use utf8;
 
 use MIME::Base64;
 
+use Kernel::System::VariableCheck qw(:all);
+
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Encode',
     'Kernel::System::Log',
+    'Kernel::System::Cache',
+    'Kernel::System::HTMLUtils',
+    'Kernel::System::Loader',
+    'Kernel::System::Main'
 );
 
 =head1 NAME
@@ -166,37 +172,57 @@ sub ToAscii {
     # for the regex engine
     $Param{String} =~ s{<!-- .*? -->}{}xmgsi;
 
-    # remove empty lines
-    $Param{String} =~ s/^\s*//mg;
-
     # fix some bad stuff from opera and others
     $Param{String} =~ s/(\n\r|\r\r\n|\r\n)/\n/gs;
-
-    # remove new line after <br>
-    $Param{String} =~ s/(\<br(\s{0,3}|\s{1,3}.+?)(\/|)\>)(\n|\r)/$1/gsi;
-
-    # replace new lines with one space
-    $Param{String} =~ s/\n/ /gs;
-    $Param{String} =~ s/\r/ /gs;
 
     # remove style tags
     $Param{String} =~ s{<style [^>]*? />}{}xgsi;
     $Param{String} =~ s{<style [^>]*? > .*? </style[^>]*>}{}xgsi;
 
+    # remove br tags with new line before removing br without new line
+    $Param{String} =~ s/\<br(\s{0,3}|\s{1,3}.+?)(\/|)\>[\r\n]?/\n/gsi;
+
     # remove <br>,<br/>,<br />, <br class="name"/>, tags and replace it with \n
     $Param{String} =~ s/\<br(\s{0,3}|\s{1,3}.+?)(\/|)\>/\n/gsi;
 
-    # remove </div> tags and replace it with \n
-    $Param{String} =~ s/<\/(\s{0,3})div>/\n/gsi;
+    # remove closing div tags, newline and replace it with \n
+    $Param{String} =~ s/<\/(\s{0,3})div>[\r\n]?/\n/gsi;
 
-    # remove hr tags and replace it with \n
-    $Param{String} =~ s/\<(hr|hr.+?)\>/\n\n/gsi;
+    # remove opening div tags and replace it with space
+    $Param{String} =~ s/<(\s{0,3})div>/ /gsi;
 
-    # remove p, table tags and replace it with \n
-    $Param{String} =~ s/\<(\/|)(p|p.+?|table|table.+?)\>/\n\n/gsi;
+    # remove closing hr tags, newline and replace it with \n
+    $Param{String} =~ s/\<(\/)(hr|hr.+?)\>[\r\n]?/\n/gsi;
 
-    # remove opening tr, th tags and replace them with \n
-    $Param{String} =~ s/\<(tr|tr.+?|th|th.+?)\>/\n\n/gsi;
+    # remove opening hr tags and replace it with space
+    $Param{String} =~ s/\<(hr|hr.+?)\>/ /gsi;
+
+    # remove closing p, table tags, newline and replace it with \n
+    $Param{String} =~ s/\<(\/)(p|p.+?|table|table.+?)\>[\r\n]?/\n/gsi;
+
+    # remove opening p, table tags and replace it with space
+    $Param{String} =~ s/\<(\/|)(p|p.+?|table|table.+?)\>/ /gsi;
+
+    # remove closing tr, th tags, newline and replace them with \n
+    $Param{String} =~ s/\<(\/)(tr|tr.+?|th|th.+?)\>[\r\n]?/\n/gsi;
+
+    # remove opening tr, th tags and replace them with space
+    $Param{String} =~ s/\<(tr|tr.+?|th|th.+?)\>/ /gsi;
+
+    # remember <pre> and <code> tags and replace it
+    for my $Key ( sort keys %One2One ) {
+        $Param{String} =~ s/$Key/\n\n\n$One2One{$Key}\n\n/g;
+    }
+
+    # strip most other other tags beside </ul>, </ol>, </td>, <li>
+    $Param{String} =~ s/(?!(?:<(?:(?:\/(?:ul|ol|td))|li)>))<.+?\>//gs;
+
+    # clean string
+    $Param{String} =~ s/^[ ]//gm;    # spaces are needed only between text, remove anything from the start
+
+    $Param{String} =~ s/^\s*\n\s*\n/\n/mg;
+
+    $Param{String} =~ s/^[\r\n]//s;
 
     # convert li tags to \n -
     $Param{String} =~ s/\<li\>/\n - /gsi;
@@ -210,13 +236,8 @@ sub ToAscii {
     # replace multiple spaces with just one space
     $Param{String} =~ s/[ ]{2,}/ /mg;
 
-    # remember <pre> and <code> tags and replace it
-    for my $Key ( sort keys %One2One ) {
-        $Param{String} =~ s/$Key/\n\n\n$One2One{$Key}\n\n/g;
-    }
-
-    # strip all other tags
-    $Param{String} =~ s/\<.+?\>//gs;
+    # replace the rest of selectors
+    $Param{String} =~ s/\<\/{0,1}(ul|ol|li|td)?\><.+?\>//gs;
 
     # html encode based on cpan's HTML::Entities v1.35
     my %Entity = (
@@ -579,7 +600,7 @@ sub ToAscii {
     }egx;
 
     # remove empty lines
-    $Param{String} =~ s/^\s*\n\s*\n/\n/mg;
+    $Param{String} =~ s/^\s*\n\s*\n/\n/mgaa;
 
     # force line breaking
     if ( length $Param{String} > $LineLength ) {
@@ -604,8 +625,17 @@ sub ToAscii {
 convert an ASCII string to an HTML string
 
     my $HTMLString = $HTMLUtilsObject->ToHTML(
-        String             => $String,
-        ReplaceDoubleSpace => 0,        # replace &nbsp;&nbsp; with "  ", optional 1 or 0 (defaults to 1)
+        String                     => $String,
+        ReplaceDoubleSpace         => 0,       # replace &nbsp;&nbsp; with "  ", optional 1 or 0 (defaults to 1)
+        DoNotReplaceWithParagraphs => 0,       # this is additional feature required due to CKEditor 5 using
+                                               # rule of paragraphs being the "core" selector
+                                               # inside it's text data
+                                                # do not replace end of lines with paragraphs
+                                                # usually used to parse string (for example for template)
+                                                # before fixing paragrapth for ckeditor 5
+                                                # IMPORTANT!
+                                                # if enabled, then after string processing you need
+                                                # to execute "ToHTMLFixHardBreaks" function!
     );
 
 =cut
@@ -627,32 +657,34 @@ sub ToHTML {
     # fix some bad stuff from opera and others
     $Param{String} =~ s/(\n\r|\r\r\n|\r\n)/\n/gs;
 
-    $Param{String} =~ s/&/&amp;/g;
     $Param{String} =~ s/</&lt;/g;
     $Param{String} =~ s/>/&gt;/g;
     $Param{String} =~ s/"/&quot;/g;
-    $Param{String} =~ s/(\n|\r)/<br\/>\n/g;
+
+    $Param{String} = $Self->ToHTMLReplaceWithParagraphs(
+        String => $Param{String},
+    ) if ( !$Param{DoNotReplaceWithParagraphs} );
+
     $Param{String} =~ s/  /&nbsp;&nbsp;/g if $Param{ReplaceDoubleSpace};
 
     return $Param{String};
 }
 
-=head2 DocumentComplete()
+=head2 ToHTMLReplaceWithParagraphs()
 
-check and e. g. add <html> and <body> tags to given html string
+replace & fix hard breaks/paragraphs for ckeditor 5
 
-    my $HTMLDocument = $HTMLUtilsObject->DocumentComplete(
-        String  => $String,
-        Charset => $Charset,
+    my $HTMLString = $HTMLUtilsObject->ToHTMLReplaceWithParagraphs(
+        String => $String,
     );
 
 =cut
 
-sub DocumentComplete {
+sub ToHTMLReplaceWithParagraphs {
     my ( $Self, %Param ) = @_;
 
     # check needed stuff
-    for my $Needed (qw(String Charset)) {
+    for my $Needed (qw(String)) {
         if ( !defined $Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
@@ -662,20 +694,228 @@ sub DocumentComplete {
         }
     }
 
-    return $Param{String} if $Param{String} =~ /<html>/i;
+    if ( $Param{String} =~ s/^(?!.*(?:\[%.*?%\]))(?!.*(?:<p>.*<\/p>))(.*?)([\r\n])/<p>$1<\/p>$2/gm ) {
+        $Param{String} =~ s/(<\/p>([\r\n])){1}(?!<p>)(.+)/$1<p>$3<\/p>/sm;
+    }
+    $Param{String} =~ s/^(?=.*\[%.*?%\])(.*?)([\r\n])/$1$2<p><\/p>$2/gm;
 
-    my $Css = $Kernel::OM->Get('Kernel::Config')->Get('Frontend::RichText::DefaultCSS')
-        || 'font-size: 12px; font-family:Courier,monospace,fixed;';
+    return $Param{String};
+}
+
+=head2 RTEContentCssDefaultFromSysconfigGet()
+
+get RTE css content styles from system configuration
+
+    my $RTEContentCssDefault = $HTMLUtilsObject->RTEContentCssDefaultFromSysconfigGet();
+
+=cut
+
+sub RTEContentCssDefaultFromSysconfigGet {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    # get default content CSS
+    my $DefaultCSS = $ConfigObject->Get('Frontend::RichText::CSS::Content::Default') // '';
 
     # escape special characters like double-quotes, e.g. used in font names with spaces
-    $Css = $Self->ToHTML( String => $Css );
+    $DefaultCSS = $Self->ToHTML( String => $DefaultCSS ) if $DefaultCSS;
+    $DefaultCSS = ".ck.ck-content{$DefaultCSS}";
+
+    return $DefaultCSS;
+}
+
+=head2 RTEContentCssInternalGet()
+
+get internal RTE css content styles from path
+
+    my $RTEContentCss = $HTMLUtilsObject->RTEContentCssInternalGet(
+        UserType => 'Agent' # required
+    );
+
+=cut
+
+sub RTEContentCssInternalGet {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(UserType)) {
+
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
+    my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
+    my $LoaderObject = $Kernel::OM->Get('Kernel::System::Loader');
+
+    my $Interface = $Param{UserType};
+
+    # get content CSS using path to the files
+    my $ContentCSSPath = $Interface eq 'Agent'
+        ?
+        $ConfigObject->Get('Frontend::RichText::CSS::Content::Path')
+        :
+        $ConfigObject->Get('Frontend::RichText::CSS::Content::Path::Customer');
+
+    my $InternalArticleStylesPaths = $ContentCSSPath->{InternalArticleStyles};
+
+    return if !IsArrayRefWithData($InternalArticleStylesPaths);
+
+    @{$InternalArticleStylesPaths} = map {
+        $ConfigObject->Get('Home') . '/var/httpd/htdocs/' . $_
+    } @{$InternalArticleStylesPaths};
+
+    my $RTEContentPrefix = 'MinifiedRTEContentStyles';
+
+    my $TargetDirectory = $ConfigObject->Get('Home') . "/var/httpd/htdocs/skins/$Interface/default/css-cache/";
+
+    # minify files only once if not changed
+    my $ActualMinifiedFilename = $LoaderObject->MinifyFiles(
+        List                 => $InternalArticleStylesPaths,
+        Type                 => 'CSS',
+        TargetDirectory      => $TargetDirectory,
+        TargetFilenamePrefix => $RTEContentPrefix,
+    );
+
+    my $CachedMinifiedFilename = $CacheObject->Get(
+        Type => 'HTMLUtils',
+        Key  => "${RTEContentPrefix}_Filename_$Interface",
+    ) // '';
+
+    my $MinifiedRTEContentCSS;
+    my $FilenameVersionMatch;
+
+    my %Styles;
+
+    # check for minification success
+    if ($ActualMinifiedFilename) {
+
+        # actual cached file found
+        $FilenameVersionMatch = $ActualMinifiedFilename eq $CachedMinifiedFilename;
+
+        $MinifiedRTEContentCSS = $CacheObject->Get(
+            Type => 'HTMLUtils',
+            Key  => "${RTEContentPrefix}_$Interface",
+        ) || '' if $FilenameVersionMatch;
+
+        if ( !$MinifiedRTEContentCSS ) {
+
+            # minified content wasn't found
+            # or cache expired
+            # update filename modified
+            $CacheObject->Set(
+                Type  => 'HTMLUtils',
+                Key   => "${RTEContentPrefix}_Filename_$Interface",
+                Value => $ActualMinifiedFilename
+            ) if !$FilenameVersionMatch;
+
+            $MinifiedRTEContentCSS = $MainObject->FileRead(
+                Location        => $TargetDirectory . '/' . $ActualMinifiedFilename,
+                Type            => 'Local',
+                DisableWarnings => 1,
+            );
+
+            # update cached content
+            $CacheObject->Set(
+                Type  => 'HTMLUtils',
+                Key   => "${RTEContentPrefix}_$Interface",
+                Value => $MinifiedRTEContentCSS,
+            );
+
+            # delete old cached file
+            $MainObject->FileDelete(
+                Location        => "$TargetDirectory/$CachedMinifiedFilename",
+                Type            => 'Local',
+                DisableWarnings => 1,
+            ) if !$FilenameVersionMatch;
+        }
+    }
+    else {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => 'Error while minifying content css file!',
+        );
+    }
+
+    # clean new lines that are still present
+    # after minification of multiple files
+    ${$MinifiedRTEContentCSS} =~ s/\n//g;
+
+    return $MinifiedRTEContentCSS;
+}
+
+=head2 DocumentComplete()
+
+check and e. g. add <html> and <body> tags to given html string
+
+    my $HTMLDocument = $HTMLUtilsObject->DocumentComplete(
+        String   => $String,  # required
+        Charset  => $Charset, # required
+        UserType => 'Agent'   # optional
+    );
+
+=cut
+
+sub DocumentComplete {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    # check needed stuff
+    for my $Needed (qw(String Charset)) {
+        if ( !defined $Param{$Needed} ) {
+            $LogObject->Log(
+                Priority => 'error',
+                Message  => "Need $Needed!"
+            );
+            return;
+        }
+    }
+
+    # get content CSS from sysconfig & file path
+    my $RTEContentCssDefault      = $Self->RTEContentCssDefaultFromSysconfigGet() // '';
+    my $RTEContentCssInternalData = $Self->RTEContentCssInternalGet(
+        UserType => $Param{UserType} || 'Agent',
+    );
+
+    my $RTEContentCssInternal = '';
+    if ( defined $RTEContentCssInternalData && ref $RTEContentCssInternalData eq 'SCALAR' ) {
+        $RTEContentCssInternal = ${$RTEContentCssInternalData};
+    }
+
+    if ( $Param{String} =~ m{<html>}i ) {
+
+        my $Styles = '<style class="RTEContentCssInternal">' . $RTEContentCssInternal . '</style>'
+            . '<style class="RTEContentCssDefault">' . $RTEContentCssDefault . '</style>';
+
+        if ( $Param{String} !~ m{<style class="(?:RTEContentCssInternal|RTEContentCssDefault)">} ) {
+            $Param{String} =~ s{( <html> .*? <head> )( .*? )( <\/head> )}{$1$2$Styles$3}xs;
+        }
+
+        if ( $Param{String} !~ m{<body .*? class="ck ck-content">}x ) {
+            $Param{String} =~ s{( <html> .*? <head>  .*?  <\/head> .*? <body)> }{$1 class="ck ck-content">}xs;
+        }
+
+        return $Param{String};
+    }
 
     # Use the HTML5 doctype because it is compatible with HTML4 and causes the browsers
-    #   to render the content in standards mode, which is more safe than quirks mode.
+    # to render the content in standards mode, which is more safe than quirks mode.
     my $Body = '<!DOCTYPE html><html><head>';
-    $Body
-        .= '<meta http-equiv="Content-Type" content="text/html; charset=' . $Param{Charset} . '"/>';
-    $Body .= '</head><body style="' . $Css . '">' . $Param{String} . '</body></html>';
+    $Body .= '<meta http-equiv="Content-Type" content="text/html; charset=' . $Param{Charset} . '"/>';
+    $Body .= '<style class="RTEContentCssInternal">' . $RTEContentCssInternal . '</style>';
+    $Body .= '<style class="RTEContentCssDefault">' . $RTEContentCssDefault . '</style>';
+    $Body .= '</head><body class="ck ck-content">' . $Param{String} . '</body></html>';
+
     return $Body;
 }
 
@@ -713,10 +953,7 @@ sub DocumentStrip {
 
 =head2 DocumentCleanup()
 
-perform some sanity checks on HTML content.
-
- -  Replace MS Word 12 <p|div> with class "MsoNormal" by using <br/> because
-    it's not used as <p><div> (margin:0cm; margin-bottom:.0001pt;).
+perform some sanity checks on HTML content
 
  -  Replace <blockquote> by using
     "<div style="border:none;border-left:solid blue 1.5pt;padding:0cm 0cm 0cm 4.0pt" type="cite">"

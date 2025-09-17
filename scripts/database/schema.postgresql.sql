@@ -1168,6 +1168,38 @@ END IF;
 END$$;
 ;
 -- ----------------------------------------------------------
+--  create table translation
+-- ----------------------------------------------------------
+CREATE TABLE translation (
+    id serial NOT NULL,
+    dbcrud_uuid VARCHAR (36) NULL,
+    language_id VARCHAR (5) NOT NULL,
+    source_string VARCHAR (1000) NOT NULL,
+    destination_string VARCHAR (1000) NOT NULL,
+    valid_id SMALLINT DEFAULT 1 NOT NULL,
+    create_time timestamp(0) NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time timestamp(0) NOT NULL,
+    change_by INTEGER NOT NULL,
+    deployment_state SMALLINT DEFAULT 0 NOT NULL,
+    PRIMARY KEY(id),
+    CONSTRAINT translation_uuid UNIQUE (dbcrud_uuid)
+);
+-- ----------------------------------------------------------
+--  create table article_color
+-- ----------------------------------------------------------
+CREATE TABLE article_color (
+    id serial NOT NULL,
+    name VARCHAR (200) NOT NULL,
+    color VARCHAR (10) NOT NULL,
+    create_time timestamp(0) NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time timestamp(0) NOT NULL,
+    change_by INTEGER NOT NULL,
+    PRIMARY KEY(id),
+    CONSTRAINT article_color_name UNIQUE (name)
+);
+-- ----------------------------------------------------------
 --  create table article_sender_type
 -- ----------------------------------------------------------
 CREATE TABLE article_sender_type (
@@ -2543,6 +2575,25 @@ CREATE TABLE pm_process (
     PRIMARY KEY(id),
     CONSTRAINT pm_process_entity_id UNIQUE (entity_id)
 );
+-- ----------------------------------------------------------
+--  create table pm_process_preferences
+-- ----------------------------------------------------------
+CREATE TABLE pm_process_preferences (
+    process_entity_id VARCHAR (50) NOT NULL,
+    preferences_key VARCHAR (150) NOT NULL,
+    preferences_value VARCHAR (3000) NULL
+);
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_indexes
+    WHERE LOWER(indexname) = LOWER('pm_process_preferences_process_entity_id')
+    ) THEN
+    CREATE INDEX pm_process_preferences_process_entity_id ON pm_process_preferences (process_entity_id);
+END IF;
+END$$;
+;
 -- ----------------------------------------------------------
 --  create table pm_activity
 -- ----------------------------------------------------------

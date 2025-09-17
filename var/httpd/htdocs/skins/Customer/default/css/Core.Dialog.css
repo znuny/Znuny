@@ -193,8 +193,9 @@ fieldset.TableLike > .Row > .Field {
 
 .PopupFooter {
     display: flex;
-    justify-content: flex-end;
-    padding: 0 var(--padding-lg) var(--padding-lg);
+    flex-flow: column;
+    width: 100%;
+    align-items: flex-end;
 }
 
 

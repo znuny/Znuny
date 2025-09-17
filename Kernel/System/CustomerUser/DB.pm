@@ -1834,6 +1834,22 @@ sub SetPassword {
             Message  => "CustomerUser: '$Param{UserLogin}' changed password successfully!",
         );
 
+        my $SystemTime = $Kernel::OM->Get('Kernel::System::Time')->SystemTime();
+
+        # Set password change time
+        $Self->SetPreferences(
+            Key    => 'UserLastPwChangeTime',
+            Value  => $SystemTime,
+            UserID => $Param{UserLogin},
+        );
+
+        # Reset UserLoginFailed
+        $Self->SetPreferences(
+            Key    => 'UserLoginFailed',
+            Value  => 0,
+            UserID => $Param{UserLogin},
+        );
+
         $Self->_CustomerUserCacheClear( UserLogin => $Param{UserLogin} );
 
         return 1;

@@ -18,6 +18,8 @@ use DBI;
 use Net::Domain qw(hostfqdn);
 use Kernel::Language qw(Translatable);
 
+use Kernel::System::VariableCheck qw(:all);
+
 our $ObjectManagerDisabled = 1;
 
 use vars qw(%INC);
@@ -1197,17 +1199,24 @@ sub ConnectToDB {
 sub CheckDBRequirements {
     my ( $Self, %Param ) = @_;
 
-    my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     my %Result = $Self->ConnectToDB(
         %Param,
     );
 
-    if ( $Result{Successful} == 1 && $Result{DBH} ) {
+    if ( $Result{Successful} == 1 && IsHashRefWithData( $Result{DB} ) ) {
+        $Kernel::OM->ObjectsDiscard( Objects => ['Kernel::System::DB'] );
 
-        # Version check needs a DB handle but $DBObject does not have it at this point.
-        $DBObject->{dbh} = $Result{DBH};
+        $Kernel::OM->ObjectParamAdd(
+            'Kernel::System::DB' => {
+                DatabaseDSN  => $Result{DB}->{DSN},
+                DatabaseUser => $Result{DB}->{DBUser},
+                DatabasePw   => $Result{DB}->{DBPassword},
+                Type         => $Result{DB}->{DBType},
+            },
+        );
+        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
         # Check if the correct database version is installed.
         my %VersionInfo = $DBObject->CheckRequiredDatabaseVersion();
@@ -1216,7 +1225,7 @@ sub CheckDBRequirements {
             $Result{Successful} = 0;
             $Result{Message}    = $LayoutObject->{LanguageObject}->Translate(
                 "Error: You have the wrong database version installed (%s). You need at least version %s! ",
-                $VersionInfo{VersionString}, $VersionInfo{MinimumVersion}
+                $VersionInfo{VersionString} // 'unknown', $VersionInfo{MinimumVersion} // 'unknown'
             );
         }
     }

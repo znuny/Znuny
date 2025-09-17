@@ -35,6 +35,7 @@ Returns invalid article HTML.
     );
 
 Result:
+
     $HTML = "<div>...</div>";
 
 =cut

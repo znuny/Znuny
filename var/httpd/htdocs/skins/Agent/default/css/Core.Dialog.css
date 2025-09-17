@@ -243,6 +243,10 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     width: calc(100% - var(--margin-xl));
 }
 
+.Dialog.modal-xl {
+    width: 80%;
+}
+
 .Dialog .Content {
     display: flex;
     flex-direction: column;
@@ -912,6 +916,4 @@ ul#Service .Header*/
     color: var(--white);
 }
 
-
 } /* end @media */
-

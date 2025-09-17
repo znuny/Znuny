@@ -13,6 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::Language qw(Translatable);
+use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
 
@@ -33,6 +34,7 @@ sub Run {
     my $LayoutObject           = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');
     my $StdAttachmentObject    = $Kernel::OM->Get('Kernel::System::StdAttachment');
+    my $YAMLObject             = $Kernel::OM->Get('Kernel::System::YAML');
 
     my $Notification = $ParamObject->GetParam( Param => 'Notification' ) || '';
 
@@ -323,6 +325,170 @@ sub Run {
         );
     }
 
+    # ------------------------------------------------------------ #
+    # TemplateExport
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'TemplateExport' ) {
+
+        my $TemplateID = $ParamObject->GetParam( Param => 'ID' ) || '';
+        my $TemplateData;
+        my $TemplateName;
+        if ($TemplateID) {
+            $TemplateData = $StandardTemplateObject->StandardTemplateExport(
+                ID => $TemplateID,
+            );
+
+            return $LayoutObject->ErrorScreen(
+                Message => $LayoutObject->{LanguageObject}
+                    ->Translate( 'Error exporting standard template with ID %s!', $TemplateID ),
+            ) if !IsArrayRefWithData($TemplateData);
+
+            $TemplateName = $TemplateData->[0]->{Name};
+        }
+        else {
+            $TemplateData = $StandardTemplateObject->StandardTemplateExport(
+                ExportAll => 1,
+            );
+        }
+
+        my $Filename = $StandardTemplateObject->StandardTemplateExportFilenameGet(
+            Name   => $TemplateName,
+            Format => 'YAML',
+        );
+
+        # convert the Template data hash to string
+        my $TemplateDataYAML = $YAMLObject->Dump( Data => $TemplateData );
+
+        # send the result to the browser
+        return $LayoutObject->Attachment(
+            ContentType => 'text/html; charset=' . $LayoutObject->{Charset},
+            Content     => $TemplateDataYAML,
+            Type        => 'attachment',
+            Filename    => $Filename,
+            NoCache     => 1,
+        );
+    }
+
+    # ------------------------------------------------------------ #
+    # TemplateCopy
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'TemplateCopy' ) {
+
+        my $TemplateID = $ParamObject->GetParam( Param => 'ID' ) || '';
+
+        # challenge token check for write action
+        $LayoutObject->ChallengeTokenCheck();
+
+        my $NewResponseID = $StandardTemplateObject->StandardTemplateCopy(
+            ID     => $TemplateID,
+            UserID => $Self->{UserID},
+        );
+
+        return $LayoutObject->ErrorScreen(
+            Message => Translatable("Error creating the standard template."),
+        ) if !$NewResponseID;
+
+        # return to overview
+        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+    }
+
+    # ------------------------------------------------------------ #
+    # TemplateImport
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'TemplateImport' ) {
+
+        # challenge token check for write action
+        $LayoutObject->ChallengeTokenCheck();
+
+        my $FormID      = $ParamObject->GetParam( Param => 'FormID' ) || '';
+        my %UploadStuff = $ParamObject->GetUploadAll(
+            Param  => 'FileUpload',
+            Source => 'string',
+        );
+
+        my $OverwriteExistingTemplates = $ParamObject->GetParam( Param => 'OverwriteExistingTemplates' ) || '';
+
+        my $TemplateImport = $StandardTemplateObject->StandardTemplateImport(
+            Content                    => $UploadStuff{Content},
+            OverwriteExistingTemplates => $OverwriteExistingTemplates,
+            UserID                     => $Self->{UserID},
+            ValidID                    => 0,
+        );
+
+        if ( !$TemplateImport->{Success} ) {
+            my $Message = $TemplateImport->{Message}
+                || Translatable(
+                'Standard templates could not be imported due to an unknown error. Please check logs for more information.'
+                );
+            return $LayoutObject->ErrorScreen(
+                Message => $Message,
+            );
+        }
+
+        if ( $TemplateImport->{Added} ) {
+            push @{ $Param{NotifyData} }, {
+                Info => $LayoutObject->{LanguageObject}->Translate(
+                    'The following standard templates have been added successfully: %s.',
+                    $TemplateImport->{Added}
+                ),
+            };
+        }
+        if ( $TemplateImport->{Updated} ) {
+            push @{ $Param{NotifyData} }, {
+                Info => $LayoutObject->{LanguageObject}->Translate(
+                    'The following standard templates have been updated successfully: %s.',
+                    $TemplateImport->{Updated}
+                ),
+            };
+        }
+        if ( $TemplateImport->{NotUpdated} ) {
+            push @{ $Param{NotifyData} }, {
+                Info => $LayoutObject->{LanguageObject}->Translate(
+                    'The following standard templates were not updated: %s.',
+                    $TemplateImport->{NotUpdated}
+                ),
+            };
+        }
+        if ( $TemplateImport->{Errors} ) {
+            push @{ $Param{NotifyData} }, {
+                Priority => 'Error',
+                Info     => $LayoutObject->{LanguageObject}->Translate(
+                    'Errors adding/updating the following standard templates: %s. Please check logs for more information.',
+                    $TemplateImport->{Errors}
+                ),
+            };
+        }
+        if ( IsArrayRefWithData( $TemplateImport->{AdditionalErrors} ) ) {
+            for my $Error ( @{ $TemplateImport->{AdditionalErrors} } ) {
+                push @{ $Param{NotifyData} }, {
+                    Priority => 'Error',
+                    Info     => $LayoutObject->{LanguageObject}->Translate($Error),
+                };
+            }
+        }
+
+        $Self->_Overview();
+        my $Output = $LayoutObject->Header();
+        $Output .= $LayoutObject->NavigationBar();
+
+        # show Templates if any
+        if ( $Param{NotifyData} ) {
+            for my $Template ( @{ $Param{NotifyData} } ) {
+                $Output .= $LayoutObject->Notify(
+                    %{$Template},
+                );
+            }
+        }
+
+        $Output .= $LayoutObject->Output(
+            TemplateFile => 'AdminTemplate',
+            Data         => \%Param,
+        );
+        $Output .= $LayoutObject->Footer();
+
+        return $Output;
+    }
+
     # ------------------------------------------------------------
     # overview
     # ------------------------------------------------------------
@@ -454,6 +620,8 @@ sub _Overview {
 
     $LayoutObject->Block( Name => 'ActionList' );
     $LayoutObject->Block( Name => 'ActionAdd' );
+    $LayoutObject->Block( Name => 'ActionImportExport' );
+
     $LayoutObject->Block( Name => 'Filter' );
 
     $LayoutObject->Block(

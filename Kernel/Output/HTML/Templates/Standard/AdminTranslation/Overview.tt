@@ -1,0 +1,76 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+[% RenderBlockStart("Overview") %]
+            <div class="Header filter-items">
+                <h2>[% Translate("List") | html %]</h2>
+                <a href="#" id="ValidFilter" title="[% Translate("Filter") | html %]">
+                    <span class="show-valid">[% Translate("Show Valid") | html %]</span>
+                    <span class="show-all">[% Translate("Show All") | html %]</span>
+                </a>
+            </div>
+            <div class="Content">
+                <table class="DataTable" id="Translations">
+                    <thead>
+                        <tr>
+                            <th>[% Translate("Language") | html %]</th>
+                            <th>[% Translate("Source") | html %]</th>
+                            <th>[% Translate("Destination") | html %]</th>
+                            <th>[% Translate("Validity") | html %]</th>
+                            <th>[% Translate("Changed by") | html %]</th>
+                            <th>[% Translate("Changed") | html %]</th>
+                            <th>[% Translate("Deployment") | html %]</th>
+                            <th class="Center">[% Translate("Copy") | html %]</th>
+[% RenderBlockStart("DeleteHeader") %]
+                            <th class="Center">[% Translate("Delete") | html %]</th>
+[% RenderBlockEnd("DeleteHeader") %]
+                        </tr>
+                    </thead>
+                    <tbody>
+[% RenderBlockStart("NoDataFoundMsg") %]
+                        <tr >
+                            <td colspan="8">
+                                [% Translate("No data found.") | html %]
+                            </td>
+                        </tr>
+[% RenderBlockEnd("NoDataFoundMsg") %]
+[% RenderBlockStart("OverviewRow") %]
+                        <tr [% IF Data.ValidID != 1 %]class="Invalid"[% END %]>
+                            <td >[% Data.LanguageID | html %]</td>
+                            <td><a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Update;ID=[% Data.ID | uri %]">[% Data.Source | html %]</a></td>
+                            <td>[% Data.Destination | html %]</td>
+                            <td>[% Translate(Data.Valid) | html %]</td>
+                            <td>[% Data.ChangeBy | html %]</td>
+                            <td>[% Data.ChangeTime | Localize("TimeShort") %]</td>
+                            <td>
+                                <span class="pill [% Data.DeploymentStateCSS | html %]">[% Translate(Data.DeploymentState) | html %]</span>
+                            </td>
+                            <td class="Center">
+                                <a class="Copy" href="#" data-query-string="Action=[% Env('Action') %];Subaction=Copy;ID=[% Data.ID | uri %]" title="[% Translate('Copy this object') | html %]">
+                                    <i class="fa fa-copy"></i>
+                                    <span class="InvisibleText">[% Translate("Copy this object") | html %]</span>
+                                </a>
+                            </td>
+                            <td class="Center">
+[% RenderBlockStart("DeleteRow") %]
+                                <a class="Delete table-icon-hover-md" href="#" data-query-string="Action=[% Env("Action") %];Subaction=Delete;ID=[% Data.ID | uri %]" title="[% Translate("Delete this entry") | html %]">[% Translate("Delete this entry") | html %]
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+[% RenderBlockEnd("DeleteRow") %]
+                            </td>
+                        </tr>
+[% RenderBlockEnd("OverviewRow") %]
+                    </tbody>
+                </table>
+            </div>
+            <div class="Hidden" id="DeleteDialogContainer">
+                <div id ="DeleteDialog" class="InnerContent GenericInterfaceDialog">
+                    <p class="Center Spacing">[% Translate("Do you really want to delete this object? All associated data will be lost!") | html %]</p>
+                    <div class="SpacingTop"></div>
+                </div>
+            </div>
+[% RenderBlockEnd("Overview") %]

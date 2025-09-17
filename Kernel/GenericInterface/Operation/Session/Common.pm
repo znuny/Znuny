@@ -30,7 +30,8 @@ performs user authentication and return a new SessionID value
             # or
             CustomerUserLogin => 'Customer1',       # optional, provide UserLogin or CustomerUserLogin
 
-            Password          => 'some password',   # plain text password
+            Password       => 'some password',      # plain text password
+            TwoFactorToken => '23071988',           # optional, two factor token
         }
     );
 

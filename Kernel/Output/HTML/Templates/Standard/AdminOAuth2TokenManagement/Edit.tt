@@ -57,6 +57,9 @@
                 </div>
                 <div class="Content">
                     <fieldset class="TableLike">
+
+                        <input type="hidden" id="AuthFlow" name="AuthFlow" value="[% Data.AuthFlow | html %]" />
+
                         <div class="field-wrapper">
                             <label class="Mandatory" for="Name">
                                 <span class="Marker">*</span> [% Translate("Name") | html %]
@@ -106,51 +109,67 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="field-wrapper">
-                            <label class="Mandatory" for="AuthorizationCodeRequestURL">
-                                <span class="Marker">*</span> [% Translate("URL for authorization code") | html %]
-                            </label>
-                            <div class="Field">
-                                <input type="text" id="AuthorizationCodeRequestURL" name="AuthorizationCodeRequestURL" value="[% Data.AuthorizationCodeRequestURL | html %]" class="W33pc Validate_Required [% Data.AuthorizationCodeRequestURLInvalid | html %]" />
-                                <div id="AuthorizationCodeRequestURLError" class="TooltipErrorMessage">
-                                    <p>[% Translate("This field is required.") | html %]</p>
-                                </div>
-                                <div id="AuthorizationCodeRequestURLServerError" class="TooltipErrorMessage">
-                                    <p>[% Translate("This field is required.") | html %]</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="field-wrapper">
-                            <label class="Mandatory" for="TokenByAuthorizationCodeRequestURL">
-                                <span class="Marker">*</span> [% Translate("URL for token by authorization code") | html %]
-                            </label>
-                            <div class="Field">
-                                <input type="text" id="TokenByAuthorizationCodeRequestURL" name="TokenByAuthorizationCodeRequestURL" value="[% Data.TokenByAuthorizationCodeRequestURL | html %]" class="W33pc Validate_Required [% Data.TokenByAuthorizationCodeRequestURLInvalid | html %]" />
-                                <div id="TokenByAuthorizationCodeRequestURLError" class="TooltipErrorMessage">
-                                    <p>[% Translate("This field is required.") | html %]</p>
-                                </div>
-                                <div id="TokenByAuthorizationCodeRequestURLServerError" class="TooltipErrorMessage">
-                                    <p>[% Translate("This field is required.") | html %]</p>
+                        [% IF !Data.AuthFlow || Data.AuthFlow == 'AuthorizationCode' %]
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="AuthorizationCodeRequestURL">
+                                    <span class="Marker">*</span> [% Translate("URL for authorization code") | html %]
+                                </label>
+                                <div class="Field">
+                                    <input type="text" id="AuthorizationCodeRequestURL" name="AuthorizationCodeRequestURL" value="[% Data.AuthorizationCodeRequestURL | html %]" class="W33pc Validate_Required [% Data.AuthorizationCodeRequestURLInvalid | html %]" />
+                                    <div id="AuthorizationCodeRequestURLError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                    <div id="AuthorizationCodeRequestURLServerError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="field-wrapper">
-                            <label class="Mandatory" for="TokenByRefreshTokenRequestURL">
-                                <span class="Marker">*</span> [% Translate("URL for token by refresh token") | html %]
-                            </label>
-                            <div class="Field">
-                                <input type="text" id="TokenByRefreshTokenRequestURL" name="TokenByRefreshTokenRequestURL" value="[% Data.TokenByRefreshTokenRequestURL | html %]" class="W33pc Validate_Required [% Data.TokenByRefreshTokenRequestURLInvalid | html %]" />
-                                <div id="TokenByRefreshTokenRequestURLError" class="TooltipErrorMessage">
-                                    <p>[% Translate("This field is required.") | html %]</p>
-                                </div>
-                                <div id="TokenByRefreshTokenRequestURLServerError" class="TooltipErrorMessage">
-                                    <p>[% Translate("This field is required.") | html %]</p>
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="TokenByAuthorizationCodeRequestURL">
+                                    <span class="Marker">*</span> [% Translate("URL for token by authorization code") | html %]
+                                </label>
+                                <div class="Field">
+                                    <input type="text" id="TokenByAuthorizationCodeRequestURL" name="TokenByAuthorizationCodeRequestURL" value="[% Data.TokenByAuthorizationCodeRequestURL | html %]" class="W33pc Validate_Required [% Data.TokenByAuthorizationCodeRequestURLInvalid | html %]" />
+                                    <div id="TokenByAuthorizationCodeRequestURLError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                    <div id="TokenByAuthorizationCodeRequestURLServerError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="TokenByRefreshTokenRequestURL">
+                                    <span class="Marker">*</span> [% Translate("URL for token by refresh token") | html %]
+                                </label>
+                                <div class="Field">
+                                    <input type="text" id="TokenByRefreshTokenRequestURL" name="TokenByRefreshTokenRequestURL" value="[% Data.TokenByRefreshTokenRequestURL | html %]" class="W33pc Validate_Required [% Data.TokenByRefreshTokenRequestURLInvalid | html %]" />
+                                    <div id="TokenByRefreshTokenRequestURLError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                    <div id="TokenByRefreshTokenRequestURLServerError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                </div>
+                            </div>
+                        [% ELSIF Data.AuthFlow == 'ClientCredentials' %]
+                            <div class="field-wrapper">
+                                <label class="Mandatory" for="TokenByClientCredentialsRequestURL">
+                                    <span class="Marker">*</span> [% Translate("URL for token by client credentials") | html %]
+                                </label>
+                                <div class="Field">
+                                    <input type="text" id="TokenByClientCredentialsRequestURL" name="TokenByClientCredentialsRequestURL" value="[% Data.TokenByClientCredentialsRequestURL | html %]" class="W33pc Validate_Required [% Data.TokenByClientCredentialsRequestURLInvalid | html %]" />
+                                    <div id="TokenByClientCredentialsRequestURLError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                    <div id="TokenByClientCredentialsRequestURLServerError" class="TooltipErrorMessage">
+                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    </div>
+                                </div>
+                            </div>
+                        [% END %]
 
                         <div class="field-wrapper">
                             <label for="Scope">
@@ -206,15 +225,17 @@
                             </div>
                         </div>
 
-                        <div class="field-wrapper">
-                            <label for="NotifyOnExpiredRefreshToken">[% Translate("Expired refresh token") | html %]</label>
-                            <div class="Field">
-                                <input type="checkbox" name="NotifyOnExpiredRefreshToken" id="NotifyOnExpiredRefreshToken" value="1" [% Data.NotifyOnExpiredRefreshToken ? 'checked="checked"' : '' %] />
-                                <p class="FieldExplanation">
-                                    [% Translate("Shows a notification for admins below the top menu if the OAuth2 refresh token has expired.") | html %]
-                                </p>
+                        [% IF !Data.AuthFlow || Data.AuthFlow == 'AuthorizationCode' %]
+                            <div class="field-wrapper">
+                                <label for="NotifyOnExpiredRefreshToken">[% Translate("Expired refresh token") | html %]</label>
+                                <div class="Field">
+                                    <input type="checkbox" name="NotifyOnExpiredRefreshToken" id="NotifyOnExpiredRefreshToken" value="1" [% Data.NotifyOnExpiredRefreshToken ? 'checked="checked"' : '' %] />
+                                    <p class="FieldExplanation">
+                                        [% Translate("Shows a notification for admins below the top menu if the OAuth2 refresh token has expired.") | html %]
+                                    </p>
+                                </div>
                             </div>
-                        </div>
+                        [% END %]
                     </fieldset>
                 </div>
             </div>

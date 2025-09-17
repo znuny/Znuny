@@ -1,0 +1,125 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+/**
+ * @package     Skin "Default"
+ * @section     RichTextEditor
+ */
+
+/*
+    Use this css file to stylize RTE related visuals that excludes changes
+    that should be visible in article message. Proper usage for: toolbar, 
+    resizer, fullscreen mode, main editable node, other objects that are not
+    visible in article message. 
+*/
+
+:root {
+    --ck-border-radius: 15px !important;
+}
+
+/* revert fullscreen properties to default, those would be otherwise applied
+based on configuration for the view - that is invalid as fullscreen
+view should not be affected by it
+*/
+.ck.ck-fullscreen__editable > .ck.ck-editor__editable {
+    height: fit-content !important;
+    min-height: 297mm !important;
+    width: 210.52917mm !important;
+}
+
+/* fix for source button that for some reason does not have it's full width
+cousing other menu items to overlap
+*/
+.ck.ck-fullscreen__toolbar .ck.ck-toolbar__items .ck.ck-source-editing-button {
+    width:100%;
+}
+
+/* make toolbar for image plugin visible in fullscreen mode */
+.ck-znuny-fullscreen .ck.ck-balloon-panel.ck-balloon-panel_visible.ck-toolbar-container{
+    z-index: calc(var(--ck-z-panel) + 50);
+}
+
+/* fix for round border corners of sticky panel that would 
+make some content near border radius visible */
+.ck-rounded-corners .ck.ck-editor__top .ck-sticky-panel div.ck-sticky-panel__content.ck-sticky-panel__content_sticky,
+.ck-rounded-corners .ck.ck-editor__top .ck-sticky-panel div.ck-sticky-panel__content.ck-sticky-panel__content_sticky > .ck-toolbar {
+    border-radius: 0;
+}
+
+.ck.ck-editor p, .ck.ck-fullscreen__main-wrapper p {
+    color: var(--black);
+}
+
+/* fix for fullscreen resizing */
+.ck-fullscreen__sidebar.ck-fullscreen__left-sidebar, .ck-fullscreen__sidebar.ck-fullscreen__right-sidebar{
+    flex-shrink: 1;
+}
+
+.ck-fullscreen__editable {
+    max-width: 92vw;
+}
+.ck-fullscreen__editable .ck-content.ck-editor__editable {
+    max-width: 100%;
+}
+
+.ck-editor .ck-editor__editable {
+    overflow: auto;
+}
+
+.ck.ck-resizer{
+    position: absolute;
+    right: -2px;
+    bottom: 0.5px;
+    z-index: 9000;
+    width: 11px;
+    height: 12px;
+    user-select: none;
+    cursor: ns-resize;
+    color: grey;
+}
+
+.ck.ck-editor.ck-has-resizer .ck.ck-editor__main .ck.ck-editor__editable_inline{
+    border-bottom-right-radius: 0;
+}
+
+/* reset some properties that are applied in the framework */
+.ck-body-wrapper form label[for], .ck.ck-editor form label, .ck.ck-editor label {
+    min-height: unset;
+}
+
+.ck-body-wrapper form{
+    width: unset;
+    overflow: unset;
+    display: block;
+    flex-flow: unset;
+    gap: unset;    
+}
+
+.ck.ck-rounded-corners .ck.ck-button,.ck > .ck.ck-rounded-corners .ck > a.ck.ck-button, .ck > .ck.ck-button.ck-rounded-corners, .ck > a.ck.ck-button.ck-rounded-corners{
+    border-radius:5px;
+}
+
+.ck-editor__top {
+    background-color: transparent !important;
+}
+
+.ck-toolbar__items > .ck-button:hover {
+    border-radius: 5px !important ;
+    padding: var(--ck-spacing-small);
+    cursor: pointer;
+}
+
+.ck-balloon-panel > .ck-balloon-rotator > .ck-balloon-rotator__content > .ck-link-form {
+    flex-flow: row;
+    gap: unset;
+}
+
+.ck-balloon-panel .ck-link-form .ck-labeled-field-view .ck-label,
+.ck-toolbar__items .ck-labeled-field-view .ck-label {
+    min-height: unset;
+}

@@ -19,15 +19,16 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::Language',
     'Kernel::Output::HTML::Layout',
     'Kernel::System::DateTime',
     'Kernel::System::Log',
     'Kernel::System::Main',
+    'Kernel::System::OAuth2Token',
+    'Kernel::System::OAuth2TokenConfig',
     'Kernel::System::Valid',
     'Kernel::System::Web::Request',
     'Kernel::System::YAML',
-    'Kernel::System::OAuth2Token',
-    'Kernel::System::OAuth2TokenConfig',
 );
 
 sub new {
@@ -70,6 +71,9 @@ sub Run {
     }
     elsif ( $Self->{Subaction} eq 'ExportTokenConfigurations' ) {
         return $Self->_ExportTokenConfigurations(%Param);
+    }
+    elsif ( $Self->{Subaction} eq 'AJAXRequestTokenByClientCredentials' ) {
+        return $Self->_AJAXRequestTokenByClientCredentials(%Param);
     }
 
     # Overview
@@ -203,16 +207,7 @@ sub _Overview {
 
     # Assemble details about tokens and refresh tokens
     for my $TokenConfig (@TokenConfigs) {
-        my %TokenData = (
-            TokenPresent                  => undef,
-            TokenExpirationDate           => undef,
-            TokenHasExpired               => undef,
-            LastTokenRequestFailed        => undef,
-            RefreshTokenPresent           => undef,
-            RefreshTokenExpirationDate    => undef,
-            RefreshTokenHasExpired        => undef,
-            RefreshTokenRequestConfigured => undef,
-        );
+        my $AuthFlow = $TokenConfig->{Config}->{AuthFlow} ||= 'AuthorizationCode';
 
         # Because ID column is configurable in database backend and using simply 'ID'
         # in template might cause problems in the future.
@@ -229,30 +224,39 @@ sub _Overview {
             UserID        => $Self->{UserID},
         );
 
-        my $RefreshTokenHasExpired = $OAuth2TokenObject->HasRefreshTokenExpired(
-            TokenConfigID => $TokenConfigID,
-            UserID        => $Self->{UserID},
-        );
+        my $RefreshTokenHasExpired;
+        if ( $AuthFlow eq 'AuthorizationCode' ) {
+            $RefreshTokenHasExpired = $OAuth2TokenObject->HasRefreshTokenExpired(
+                TokenConfigID => $TokenConfigID,
+                UserID        => $Self->{UserID},
+            );
+        }
 
         my $TokenErrorMessage = $OAuth2TokenObject->GetTokenErrorMessage(
             TokenConfigID => $TokenConfigID,
             UserID        => $Self->{UserID},
         );
 
-        my $RefreshTokenRequestConfigured = IsHashRefWithData(
-            $TokenConfig->{Config}->{Requests}->{TokenByRefreshToken}
-        );
+        my $RefreshTokenRequestConfigured;
+        my $AuthorizationCodeRequestURL;
+        if ( $AuthFlow eq 'AuthorizationCode' ) {
+            $RefreshTokenRequestConfigured = IsHashRefWithData(
+                $TokenConfig->{Config}->{Requests}->{TokenByRefreshToken}
+            );
 
-        my $AuthorizationCodeRequestURL = $OAuth2TokenObject->GenerateAuthorizationCodeRequestURL(
-            TokenConfigID => $TokenConfigID,
-            UserID        => $Self->{UserID},
-        );
+            $AuthorizationCodeRequestURL = $OAuth2TokenObject->GenerateAuthorizationCodeRequestURL(
+                TokenConfigID => $TokenConfigID,
+                UserID        => $Self->{UserID},
+            );
+        }
 
-        %TokenData = (
+        my %TokenData = (
+            AuthFlow                      => $AuthFlow,
             TokenPresent                  => $Token{Token} ? 1 : undef,
             TokenExpirationDate           => $Token{TokenExpirationDate},
             TokenHasExpired               => $TokenHasExpired,
             LastTokenRequestFailed        => defined $TokenErrorMessage ? 1 : undef,
+            TokenErrorMessage             => $TokenErrorMessage,
             AuthorizationCodeRequestURL   => $AuthorizationCodeRequestURL,
             RefreshTokenPresent           => $Token{RefreshToken} ? 1 : undef,
             RefreshTokenExpirationDate    => $Token{RefreshTokenExpirationDate},
@@ -305,6 +309,9 @@ sub _EditTokenConfig {
         );
     }
 
+    # For old token configs without an auth flow yet.
+    $TokenConfig{Config}->{AuthFlow} ||= 'AuthorizationCode';
+
     my %ValidIDs         = $ValidObject->ValidList();
     my $ValidIDSelection = $LayoutObject->BuildSelection(
         Data       => \%ValidIDs,
@@ -321,6 +328,7 @@ sub _EditTokenConfig {
         Data         => {
             ID           => $TokenConfigID,
             TemplateName => $TokenConfig{Config}->{TemplateName},
+            AuthFlow     => $TokenConfig{Config}->{AuthFlow},
             Name         => $TokenConfig{Name},
             ClientID     => $TokenConfig{Config}->{ClientID},
             ClientSecret => $TokenConfig{Config}->{ClientSecret},
@@ -330,6 +338,8 @@ sub _EditTokenConfig {
                 $TokenConfig{Config}->{Requests}->{TokenByAuthorizationCode}->{Request}->{URL},
             TokenByRefreshTokenRequestURL =>
                 $TokenConfig{Config}->{Requests}->{TokenByRefreshToken}->{Request}->{URL},
+            TokenByClientCredentialsRequestURL =>
+                $TokenConfig{Config}->{Requests}->{TokenByClientCredentials}->{Request}->{URL},
             Scope =>
                 $TokenConfig{Config}->{Scope},
             NotifyOnExpiredToken        => $TokenConfig{Config}->{Notifications}->{NotifyOnExpiredToken},
@@ -390,6 +400,8 @@ sub _AddTokenConfigByTemplateFile {
             TokenConfigTemplateFilename => $TokenConfigTemplateFilename,
             TokenConfigTemplateName     => $TokenConfigTemplate->{Name},
 
+            AuthFlow => $TokenConfigTemplate->{Config}->{AuthFlow},
+
             # Leave name initially empty for admin to fill out.
             Name         => '',
             ClientID     => $TokenConfigTemplate->{Config}->{ClientID},
@@ -400,6 +412,8 @@ sub _AddTokenConfigByTemplateFile {
                 $TokenConfigTemplate->{Config}->{Requests}->{TokenByAuthorizationCode}->{Request}->{URL},
             TokenByRefreshTokenRequestURL =>
                 $TokenConfigTemplate->{Config}->{Requests}->{TokenByRefreshToken}->{Request}->{URL},
+            TokenByClientCredentialsRequestURL =>
+                $TokenConfigTemplate->{Config}->{Requests}->{TokenByClientCredentials}->{Request}->{URL},
             Scope =>
                 $TokenConfigTemplate->{Config}->{Scope},
             NotifyOnExpiredToken => $TokenConfigTemplate->{Config}->{Notifications}->{NotifyOnExpiredToken},
@@ -425,26 +439,46 @@ sub _SaveTokenConfig {
     my %GetParam;
     for my $GetParam (
         qw(
-        ID TokenConfigTemplateFilename TokenConfigTemplateName Name ClientID ClientSecret
-        AuthorizationCodeRequestURL TokenByAuthorizationCodeRequestURL TokenByRefreshTokenRequestURL Scope ValidID
-        NotifyOnExpiredToken NotifyOnExpiredRefreshToken ContinueAfterSave
+        ID TokenConfigTemplateFilename TokenConfigTemplateName AuthFlow Name ClientID ClientSecret
+        AuthorizationCodeRequestURL
+        TokenByAuthorizationCodeRequestURL TokenByRefreshTokenRequestURL
+        TokenByClientCredentialsRequestURL
+        Scope ValidID NotifyOnExpiredToken NotifyOnExpiredRefreshToken ContinueAfterSave
         )
         )
     {
         $GetParam{$GetParam} = $ParamObject->GetParam( Param => $GetParam );
     }
 
+    # Backwards compatibility: Fall back to auth flow AuthorizationCode.
+    $GetParam{AuthFlow} ||= 'AuthorizationCode';
+
+    my $AuthFlowIsSupported = $OAuth2TokenConfigObject->IsAuthFlowSupported( AuthFlow => $GetParam{AuthFlow} );
+    if ( !$AuthFlowIsSupported ) {
+        return $LayoutObject->ErrorScreen(
+            Message => "Auth flow '$GetParam{AuthFlow}' is not supported.",
+            Comment => Translatable('Please contact the administrator.'),
+        );
+    }
+
     my %Errors;
 
     # Check for required fields
+    my %RequiredFieldsByAuthFlow = (
+        AuthorizationCode => [
+            qw (Name ClientID ClientSecret AuthorizationCodeRequestURL TokenByAuthorizationCodeRequestURL TokenByRefreshTokenRequestURL ValidID)
+        ],
+        ClientCredentials => [
+            qw (Name ClientID ClientSecret TokenByClientCredentialsRequestURL ValidID)
+        ],
+    );
+
     REQUIREDFIELD:
-    for my $RequiredField (
-        qw(Name ClientID ClientSecret AuthorizationCodeRequestURL TokenByAuthorizationCodeRequestURL TokenByRefreshTokenRequestURL ValidID)
-        )
-    {
+    for my $RequiredField ( @{ $RequiredFieldsByAuthFlow{ $GetParam{AuthFlow} } // [] } ) {
         next REQUIREDFIELD if defined $GetParam{$RequiredField} && length $GetParam{$RequiredField};
 
         $Errors{ $RequiredField . 'Invalid' } = 'ServerError';
+
         if ( $RequiredField eq 'Name' ) {
             $LayoutObject->Block(
                 Name => 'NameRequiredServerError',
@@ -495,12 +529,14 @@ sub _SaveTokenConfig {
                 ID                                 => $GetParam{ID},
                 TokenConfigTemplateFilename        => $GetParam{TokenConfigTemplateFilename},
                 TokenConfigTemplateName            => $GetParam{TokenConfigTemplateName},
+                AuthFlow                           => $GetParam{AuthFlow},
                 Name                               => $GetParam{Name},
                 ClientID                           => $GetParam{ClientID},
                 ClientSecret                       => $GetParam{ClientSecret},
                 AuthorizationCodeRequestURL        => $GetParam{AuthorizationCodeRequestURL},
                 TokenByAuthorizationCodeRequestURL => $GetParam{TokenByAuthorizationCodeRequestURL},
                 TokenByRefreshTokenRequestURL      => $GetParam{TokenByRefreshTokenRequestURL},
+                TokenByClientCredentialsRequestURL => $GetParam{TokenByClientCredentialsRequestURL},
                 Scope                              => $GetParam{Scope},
                 NotifyOnExpiredToken               => $GetParam{NotifyOnExpiredToken},
                 NotifyOnExpiredRefreshToken        => $GetParam{NotifyOnExpiredRefreshToken},
@@ -527,20 +563,33 @@ sub _SaveTokenConfig {
             );
         }
 
+        # Note: Don't update/change auth flow, it's only set once on creation of the token config.
+        # But: Set auth flow to AuthorizationCode for old token configs that don't have an auth flow stored yet.
+        $TokenConfig{Config}->{AuthFlow} ||= 'AuthorizationCode';
+
         $TokenConfig{Name}                   = $GetParam{Name};
         $TokenConfig{Config}->{ClientID}     = $GetParam{ClientID};
         $TokenConfig{Config}->{ClientSecret} = $GetParam{ClientSecret};
-        $TokenConfig{Config}->{Requests}->{AuthorizationCode}->{Request}->{URL}
-            = $GetParam{AuthorizationCodeRequestURL};
-        $TokenConfig{Config}->{Requests}->{TokenByAuthorizationCode}->{Request}->{URL}
-            = $GetParam{TokenByAuthorizationCodeRequestURL};
-        $TokenConfig{Config}->{Requests}->{TokenByRefreshToken}->{Request}->{URL}
-            = $GetParam{TokenByRefreshTokenRequestURL};
-        $TokenConfig{Config}->{Scope} = $GetParam{Scope};
+
+        if ( $GetParam{AuthFlow} eq 'AuthorizationCode' ) {
+            $TokenConfig{Config}->{Requests}->{AuthorizationCode}->{Request}->{URL}
+                = $GetParam{AuthorizationCodeRequestURL};
+            $TokenConfig{Config}->{Requests}->{TokenByAuthorizationCode}->{Request}->{URL}
+                = $GetParam{TokenByAuthorizationCodeRequestURL};
+            $TokenConfig{Config}->{Requests}->{TokenByRefreshToken}->{Request}->{URL}
+                = $GetParam{TokenByRefreshTokenRequestURL};
+
+            $TokenConfig{Config}->{Notifications}->{NotifyOnExpiredRefreshToken}
+                = $GetParam{NotifyOnExpiredRefreshToken} ? 1 : 0;
+        }
+        elsif ( $GetParam{AuthFlow} eq 'ClientCredentials' ) {
+            $TokenConfig{Config}->{Requests}->{TokenByClientCredentials}->{Request}->{URL}
+                = $GetParam{TokenByClientCredentialsRequestURL};
+        }
+
+        $TokenConfig{Config}->{Scope}                                 = $GetParam{Scope};
         $TokenConfig{Config}->{Notifications}->{NotifyOnExpiredToken} = $GetParam{NotifyOnExpiredToken} ? 1 : 0;
-        $TokenConfig{Config}->{Notifications}->{NotifyOnExpiredRefreshToken}
-            = $GetParam{NotifyOnExpiredRefreshToken} ? 1 : 0;
-        $TokenConfig{ValidID} = $GetParam{ValidID};
+        $TokenConfig{ValidID}                                         = $GetParam{ValidID};
 
         my $TokenConfigUpdated = $OAuth2TokenConfigObject->DataUpdate(
             %TokenConfig,
@@ -568,20 +617,30 @@ sub _SaveTokenConfig {
 
         my %TokenConfig = %{$TokenConfigTemplate};
         $TokenConfig{Name}                   = $GetParam{Name};
+        $TokenConfig{Config}->{AuthFlow}     = $GetParam{AuthFlow};
         $TokenConfig{Config}->{TemplateName} = $GetParam{TokenConfigTemplateName};
         $TokenConfig{Config}->{ClientID}     = $GetParam{ClientID};
         $TokenConfig{Config}->{ClientSecret} = $GetParam{ClientSecret};
-        $TokenConfig{Config}->{Requests}->{AuthorizationCode}->{Request}->{URL}
-            = $GetParam{AuthorizationCodeRequestURL};
-        $TokenConfig{Config}->{Requests}->{TokenByAuthorizationCode}->{Request}->{URL}
-            = $GetParam{TokenByAuthorizationCodeRequestURL};
-        $TokenConfig{Config}->{Requests}->{TokenByRefreshToken}->{Request}->{URL}
-            = $GetParam{TokenByRefreshTokenRequestURL};
-        $TokenConfig{Config}->{Scope} = $GetParam{Scope};
+
+        if ( $GetParam{AuthFlow} eq 'AuthorizationCode' ) {
+            $TokenConfig{Config}->{Requests}->{AuthorizationCode}->{Request}->{URL}
+                = $GetParam{AuthorizationCodeRequestURL};
+            $TokenConfig{Config}->{Requests}->{TokenByAuthorizationCode}->{Request}->{URL}
+                = $GetParam{TokenByAuthorizationCodeRequestURL};
+            $TokenConfig{Config}->{Requests}->{TokenByRefreshToken}->{Request}->{URL}
+                = $GetParam{TokenByRefreshTokenRequestURL};
+
+            $TokenConfig{Config}->{Notifications}->{NotifyOnExpiredRefreshToken}
+                = $GetParam{NotifyOnExpiredRefreshToken} ? 1 : 0;
+        }
+        elsif ( $GetParam{AuthFlow} eq 'ClientCredentials' ) {
+            $TokenConfig{Config}->{Requests}->{TokenByClientCredentials}->{Request}->{URL}
+                = $GetParam{TokenByClientCredentialsRequestURL};
+        }
+
+        $TokenConfig{Config}->{Scope}                                 = $GetParam{Scope};
         $TokenConfig{Config}->{Notifications}->{NotifyOnExpiredToken} = $GetParam{NotifyOnExpiredToken} ? 1 : 0;
-        $TokenConfig{Config}->{Notifications}->{NotifyOnExpiredRefreshToken}
-            = $GetParam{NotifyOnExpiredRefreshToken} ? 1 : 0;
-        $TokenConfig{ValidID} = $GetParam{ValidID};
+        $TokenConfig{ValidID}                                         = $GetParam{ValidID};
 
         my $TokenConfigAdded = $OAuth2TokenConfigObject->DataAdd(
             %TokenConfig,
@@ -725,12 +784,118 @@ sub _ExportTokenConfigurations {
     return $Output;
 }
 
+sub _AJAXRequestTokenByClientCredentials {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject               = $Kernel::OM->Get('Kernel::System::Log');
+    my $LayoutObject            = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $LanguageObject          = $Kernel::OM->Get('Kernel::Language');
+    my $ParamObject             = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $OAuth2TokenObject       = $Kernel::OM->Get('Kernel::System::OAuth2Token');
+    my $OAuth2TokenConfigObject = $Kernel::OM->Get('Kernel::System::OAuth2TokenConfig');
+
+    my $TokenConfigID = $ParamObject->GetParam( Param => 'TokenConfigID' );
+    if ( !$TokenConfigID ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter 'TokenConfigID' is needed!",
+        );
+        return;
+    }
+
+    my %TokenConfig = $OAuth2TokenConfigObject->DataGet(
+        $OAuth2TokenConfigObject->{Identifier} => $TokenConfigID,
+        UserID                                 => $Self->{UserID},
+    );
+    if ( !%TokenConfig ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Token config with ID $TokenConfigID not found.",
+        );
+        return;
+    }
+
+    my $AuthFlow = $TokenConfig{Config}->{AuthFlow} ||= 'AuthorizationCode';
+    if ( $AuthFlow ne 'ClientCredentials' ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Token config with ID $TokenConfigID is not configured for auth flow ClientCredentials.",
+        );
+        return;
+    }
+
+    # Request a new token and assemble data about status.
+    my %Token = $OAuth2TokenObject->RequestTokenByClientCredentials(
+        TokenConfigID => $TokenConfigID,
+        UserID        => $Self->{UserID},
+    );
+
+    my $TokenHasExpired = $OAuth2TokenObject->HasTokenExpired(
+        TokenConfigID => $TokenConfigID,
+        UserID        => $Self->{UserID},
+    );
+
+    my $TokenErrorMessage = $OAuth2TokenObject->GetTokenErrorMessage(
+        TokenConfigID => $TokenConfigID,
+        UserID        => $Self->{UserID},
+    );
+
+    my $TranslatedErrorMessage;
+    my $TranslatedTokenStatusMessage = $LanguageObject->Translate('No token was requested yet.');
+    if ( IsStringWithData($TokenErrorMessage) ) {
+        $TranslatedErrorMessage = $LanguageObject->Translate(
+            'OAuth2 token error: %s',
+            $TokenErrorMessage,
+        );
+
+        $TranslatedTokenStatusMessage = $LanguageObject->Translate('Last token request failed.');
+    }
+    elsif ( $Token{Token} ) {
+        my $LocalizedTokenExpirationDate = $LanguageObject->FormatTimeString(
+            $Token{TokenExpirationDate},
+            'DateFormat',
+            'NoSeconds',
+        );
+
+        if ($TokenHasExpired) {
+            $TranslatedTokenStatusMessage = $LanguageObject->Translate(
+                "Token has expired on %s.",
+                $LocalizedTokenExpirationDate,
+            );
+        }
+        else {
+            $TranslatedTokenStatusMessage = $LanguageObject->Translate(
+                "Token is valid until %s.",
+                $LocalizedTokenExpirationDate,
+            );
+        }
+    }
+
+    my %TokenData = (
+        TranslatedTokenStatusMessage => $TranslatedTokenStatusMessage,
+        TranslatedErrorMessage       => $TranslatedErrorMessage,
+        TokenErrorMessage            => $TokenErrorMessage,
+    );
+
+    my $JSON = $LayoutObject->JSONEncode(
+        Data => \%TokenData,
+    );
+
+    return $LayoutObject->Attachment(
+        ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
+        Content     => $JSON // '',
+        Type        => 'inline',
+        NoCache     => 1,
+    );
+}
+
 sub _GetTokenConfigTemplateSelection {
     my ( $Self, %Param ) = @_;
 
-    my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $YAMLObject   = $Kernel::OM->Get('Kernel::System::YAML');
+    my $MainObject     = $Kernel::OM->Get('Kernel::System::Main');
+    my $LayoutObject   = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
+    my $YAMLObject     = $Kernel::OM->Get('Kernel::System::YAML');
 
     my @TokenConfigTemplateFilePaths = $MainObject->DirectoryRead(
         Directory => $Self->{TokenConfigTemplateFilesBasePath},
@@ -740,6 +905,11 @@ sub _GetTokenConfigTemplateSelection {
     return if !@TokenConfigTemplateFilePaths;
 
     my %TokenConfigTemplateSelection;
+
+    my %AuthFlowDescriptionByAuthFlow = (
+        AuthorizationCode => 'Authorization code flow',
+        ClientCredentials => 'Client credentials flow',
+    );
 
     FILEPATH:
     for my $FilePath (@TokenConfigTemplateFilePaths) {
@@ -759,9 +929,16 @@ sub _GetTokenConfigTemplateSelection {
             next TOKENCONFIGTEMPLATE if !defined $TokenConfigTemplate->{Name};
             next TOKENCONFIGTEMPLATE if !length $TokenConfigTemplate->{Name};
 
+            my $AuthFlow                      = $TokenConfigTemplate->{Config}->{AuthFlow} || 'AuthorizationCode';
+            my $AuthFlowDescription           = $AuthFlowDescriptionByAuthFlow{$AuthFlow} // '';
+            my $TranslatedAuthFlowDescription = $LanguageObject->Translate($AuthFlowDescription);
+
             my $Filename = fileparse( $FilePath, '.yml' );
 
             $TokenConfigTemplateSelection{$Filename} = $TokenConfigTemplate->{Name};
+            if ( IsStringWithData($TranslatedAuthFlowDescription) ) {
+                $TokenConfigTemplateSelection{$Filename} .= " ($TranslatedAuthFlowDescription)";
+            }
 
             # Only one template is allowed per file. Any other templates will be ignored.
             last TOKENCONFIGTEMPLATE;

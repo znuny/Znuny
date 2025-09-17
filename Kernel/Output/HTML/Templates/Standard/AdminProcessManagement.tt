@@ -55,7 +55,7 @@
                                 <label for="OverwriteExistingEntitiesImport">[% Translate("Overwrite existing entities") | html %]</label>
                             </fieldset>
                             <button class="CallForAction btn-main btn-primary-ghost" type="submit" value="[% Translate("Upload process configuration") | html %]">
-                                <span>[% Translate("Import process configuration") | html %]</span>
+                                <span>[% Translate("Import configuration") | html %]</span>
                             </button>
                         </form>
                     </li>

@@ -12,6 +12,8 @@ package Kernel::System::MailAccount;
 use strict;
 use warnings;
 
+use utf8;
+
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::DB',
@@ -123,9 +125,9 @@ sub MailAccountAdd {
         return;
     }
 
-    # only set IMAP folder on IMAP type accounts
+    # only set folder on IMAP and MSGraph accounts
     # fallback to 'INBOX' if none given
-    if ( $Param{Type} =~ m{ IMAP .* }xmsi ) {
+    if ( $Param{Type} =~ m{\A(?:IMAP|MSGraph)}i ) {
         if ( !defined $Param{IMAPFolder} || !$Param{IMAPFolder} ) {
             $Param{IMAPFolder} = 'INBOX';
         }
@@ -249,9 +251,9 @@ sub MailAccountGetAll {
             $Data{DispatchingBy} = 'Queue';
         }
 
-        # only return IMAP folder on IMAP type accounts
+        # only return folder on IMAP and MSGraph accounts
         # fallback to 'INBOX' if none given
-        if ( $Data{Type} =~ m{ IMAP .* }xmsi ) {
+        if ( $Data{Type} =~ m{\A(?:IMAP|MSGraph)}i ) {
             if ( defined $Data{IMAPFolder} && !$Data{IMAPFolder} ) {
                 $Data{IMAPFolder} = 'INBOX';
             }
@@ -361,9 +363,9 @@ sub MailAccountGet {
         $Data{DispatchingBy} = 'Queue';
     }
 
-    # only return IMAP folder on IMAP type accounts
+    # only return folder on IMAP and MSGraph accounts
     # fallback to 'INBOX' if none given
-    if ( $Data{Type} =~ m{ IMAP .* }xmsi ) {
+    if ( $Data{Type} =~ m{\A(?:IMAP|MSGraph)}i ) {
         if ( defined $Data{IMAPFolder} && !$Data{IMAPFolder} ) {
             $Data{IMAPFolder} = 'INBOX';
         }
@@ -444,9 +446,9 @@ sub MailAccountUpdate {
         return;
     }
 
-    # only set IMAP folder on IMAP type accounts
+    # only set folder on IMAP and MSGraph accounts
     # fallback to 'INBOX' if none given
-    if ( $Param{Type} =~ m{ IMAP .* }xmsi ) {
+    if ( $Param{Type} =~ m{\A(?:IMAP|MSGraph)}i ) {
         if ( !defined $Param{IMAPFolder} || !$Param{IMAPFolder} ) {
             $Param{IMAPFolder} = 'INBOX';
         }

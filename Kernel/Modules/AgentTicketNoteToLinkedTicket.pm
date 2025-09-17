@@ -1469,7 +1469,7 @@ sub Run {
                     );
 
                     if ( $LayoutObject->{BrowserRichText} ) {
-                        $TemplateText = $TemplateText . '<br><br>' . $Body;
+                        $TemplateText = $TemplateText . '<p></p><p></p>' . $Body;
                     }
                     else {
                         $TemplateText = $TemplateText . "\n\n" . $Body;
@@ -3084,17 +3084,17 @@ sub _GetQuotedReplyBody {
 
             }
             else {
-                $Param{Body} = "<br/>" . $Param{Body};
+                $Param{Body} = "<p></p>\n" . $Param{Body};
 
                 if ( $Param{CreateTime} ) {
-                    $Param{Body} = $LayoutObject->{LanguageObject}->Translate('Date') .
-                        ": $Param{CreateTime}<br/>" . $Param{Body};
+                    $Param{Body} = '<p>' . $LayoutObject->{LanguageObject}->Translate('Date') .
+                        ": $Param{CreateTime}</p>" . $Param{Body};
                 }
 
                 for my $Key (qw(Subject ReplyTo Reply-To Cc To From)) {
                     if ( $Param{$Key} ) {
-                        $Param{Body} = $LayoutObject->{LanguageObject}->Translate($Key) .
-                            ": $Param{$Key}<br/>" . $Param{Body};
+                        $Param{Body} = '<p>' . $LayoutObject->{LanguageObject}->Translate($Key) .
+                            ": $Param{$Key}</p>" . $Param{Body};
                     }
                 }
 
@@ -3105,8 +3105,8 @@ sub _GetQuotedReplyBody {
                 my $MessageFrom = $LayoutObject->{LanguageObject}->Translate('Message from');
                 my $EndMessage  = $LayoutObject->{LanguageObject}->Translate('End message');
 
-                $Param{Body} = "<br/>---- $MessageFrom $From ---<br/><br/>" . $Param{Body};
-                $Param{Body} .= "<br/>---- $EndMessage ---<br/>";
+                $Param{Body} = "<p>---- $MessageFrom $From ---</p><p></p>" . $Param{Body};
+                $Param{Body} .= "\n<p>---- $EndMessage ---</p>";
             }
         }
     }
