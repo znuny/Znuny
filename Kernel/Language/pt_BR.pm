@@ -2168,6 +2168,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'Go back to Deployment Details' => 'Retornar para Detalhes de Implantação',
+        'View a custom List of Settings' => 'Visualizar uma lista customizada de configurações',
+        'View single Setting: %s' => 'Ver apenas a Definição: %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -3368,8 +3370,6 @@ sub Data {
             'Lembre-se de que a escala do Eixo Y tem que ser maior do que a escala do Eixo X (Por exemplo, Eixo X => Mês, Eixo Y => Ano).',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-        'View a custom List of Settings' => 'Visualizar uma lista customizada de configurações',
-        'View single Setting: %s' => 'Ver apenas a Definição: %s',
         'This setting is disabled.' => 'Esta definição está desativada.',
         'This setting is fixed but not deployed yet!' => 'Esta definição está fixa mas não foi implantada ainda!',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>

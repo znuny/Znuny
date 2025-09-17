@@ -2169,6 +2169,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'Go back to Deployment Details' => 'Wróć do szczegółów wdrożenia',
+        'View a custom List of Settings' => '',
+        'View single Setting: %s' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -3369,8 +3371,6 @@ sub Data {
             'Pamiętaj proszę, że skala osi Y musi być większa niż skala osi X (np.: OS X => Miesiąc, oś Y => Rok).',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-        'View a custom List of Settings' => '',
-        'View single Setting: %s' => '',
         'This setting is disabled.' => 'To ustawienie jest wyłączone.',
         'This setting is fixed but not deployed yet!' => 'To ustawienie jest przygotowane ale jeszcze nie wdrożone!',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>

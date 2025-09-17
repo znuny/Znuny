@@ -485,7 +485,11 @@ Core.UI.InputFields = (function (TargetNS) {
                                             .data('value');
                                     Selection.splice(Selection.indexOf(SelectedValue), 1);
                                     if (HasEmptyElement && Selection.length === 0) {
-                                        $SelectObj.val('');
+                                        if(Multiple){
+                                            $SelectObj.val([]);
+                                        } else {
+                                            $SelectObj.val('');
+                                        }
                                     }
                                     else {
                                         $SelectObj.val(Selection);
@@ -1815,7 +1819,7 @@ Core.UI.InputFields = (function (TargetNS) {
                             // Set selected nodes as selected in initial select box
                             // (which is hidden but is still used for the action)
                             if (HasEmptyElement && SelectedNodes.length === 0) {
-                                $SelectObj.val('');
+                                $SelectObj.val([]);
                             }
                             else {
                                 $SelectObj.val(SelectedNodes);

@@ -37,12 +37,19 @@ Core.Customer.TicketZoom = (function (TargetNS) {
         Iframe = isJQueryObject(Iframe) ? Iframe.get(0) : Iframe;
 
         setTimeout(function () {
-            var $IframeContent = $(Iframe.contentWindow.document.body || Iframe.contentDocument || ''),
-                NewHeight = $IframeContent.height();
-            if (!NewHeight || isNaN(NewHeight)) {
+            var $IframeContent = '',
                 NewHeight = 100;
+
+            if (Iframe.contentWindow && Iframe.contentWindow.document) {
+                $IframeContent = $(Iframe.contentWindow.document.body);
             }
-            else {
+            else if (Iframe.contentDocument) {
+                $IframeContent = $(Iframe.contentDocument);
+            }
+
+            // var $IframeContent = $(Iframe.contentWindow.document.body || Iframe.contentDocument || ''),
+            if ($IframeContent) {
+                NewHeight = $IframeContent.height();
                 if (NewHeight > 2500) {
                     NewHeight = 2500;
                 }
@@ -114,7 +121,6 @@ Core.Customer.TicketZoom = (function (TargetNS) {
      *      immediately when the site loads. So we set the url in this function.
      */
     function LoadMessage($Message){
-
         var $SubjectHolder = $('span h3', $Message),
             Subject       = $SubjectHolder.text(),
             LoadingString = $SubjectHolder.attr('title'),
@@ -128,13 +134,19 @@ Core.Customer.TicketZoom = (function (TargetNS) {
         $('#VisibleMessageContent .ArticleBody').addClass('Hidden');
         $('#VisibleMessageContent .Iframe').removeClass('Hidden');
 
+        // Show unshortened plain-text article body if the message has no iframe (= no iframe load
+        // of HTML body).
+        if (!$SourceIframe.length) {
+            $('#VisibleMessageContent .UnshortenedArticleBody').removeClass('Hidden');
+        }
+
         $Iframe = $('#VisibleMessageContent iframe');
 
         /*  Change Subject to Loading */
         $SubjectHolder.text(LoadingString);
 
         /*  Load iframe -> get title and put it in src */
-        if (Source !== 'about:blank') {
+        if ($Iframe.length && Source !== 'about:blank') {
             $Iframe.attr('src', Source);
         }
 

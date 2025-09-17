@@ -6342,11 +6342,11 @@ msgstr "搜索"
 msgid "Go back to Deployment Details"
 msgstr "返回到部署详情"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
 msgid "View a custom List of Settings"
 msgstr "查看设置的自定义列表"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
 msgid "View single Setting: %s"
 msgstr "查看单个设置：%s"
 

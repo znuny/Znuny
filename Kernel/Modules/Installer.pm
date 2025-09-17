@@ -1211,8 +1211,8 @@ sub CheckDBRequirements {
         $Kernel::OM->ObjectParamAdd(
             'Kernel::System::DB' => {
                 DatabaseDSN  => $Result{DB}->{DSN},
-                DatabaseUser => $Result{DB}->{OTRSDBUser},
-                DatabasePw   => $Result{DB}->{OTRSDBPassword},
+                DatabaseUser => $Result{DB}->{DBUser},
+                DatabasePw   => $Result{DB}->{DBPassword},
                 Type         => $Result{DB}->{DBType},
             },
         );

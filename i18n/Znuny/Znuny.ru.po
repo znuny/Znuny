@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2023-03-23 09:27+0000\n"
-"PO-Revision-Date: 2025-07-16 17:26+0000\n"
+"PO-Revision-Date: 2025-09-03 08:20+0000\n"
 "Last-Translator: BuilderNSV <nikitin.sergey.v@gmail.com>\n"
 "Language-Team: Russian <https://translations.znuny.org/projects/znuny/znuny/ru/>\n"
 "Language: ru\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 5.13\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "Actions"
@@ -1070,7 +1070,7 @@ msgstr "Этими группами можно управлять в настр�
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
 msgid "Filter for Groups"
-msgstr "Фильтры для Групп"
+msgstr "Фильтр Групп"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
 msgid "Select the customer:group permissions."
@@ -5678,11 +5678,11 @@ msgstr "Добавить агента"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRoleUser.tt
 msgid "Filter for Agents"
-msgstr "Фильтр для Агентов"
+msgstr "Фильтр Агентов"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRoleUser.tt
 msgid "Filter for agents"
-msgstr "Фильтр для агентов"
+msgstr "Фильтр агентов"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminRoleUser.tt
 msgid "Agents"
@@ -6344,11 +6344,11 @@ msgstr "Выполнить поиск"
 msgid "Go back to Deployment Details"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
 msgid "View a custom List of Settings"
 msgstr "Просмотр пользовательского Списка Изменений"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
 msgid "View single Setting: %s"
 msgstr "Просмотр единственного параметра: %s"
 
@@ -13674,7 +13674,7 @@ msgstr ""
 
 #. Perl Module: Kernel/System/Mention.pm
 msgid "LastMention"
-msgstr "ПоследнееУпоминание"
+msgstr "Последнее упоминание"
 
 #. Perl Module: Kernel/System/NotificationEvent.pm
 msgid "Couldn't read Notification configuration file. Please make sure the file is valid."
@@ -23540,7 +23540,7 @@ msgstr ""
 
 #. SysConfig
 msgid "Shows last mention of tickets."
-msgstr ""
+msgstr "Показывает последнее упоминание в заявках."
 
 #. SysConfig
 msgid "Signature data."

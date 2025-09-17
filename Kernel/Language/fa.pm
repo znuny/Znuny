@@ -2170,6 +2170,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'Go back to Deployment Details' => '',
+        'View a custom List of Settings' => '',
+        'View single Setting: %s' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -3370,8 +3372,6 @@ sub Data {
             'لطفا به یاد داشته باشید که این مقیاس برای محور Y را به بزرگتر از مقیاس برای محور X (به عنوان مثال محور X => ماه، محور Y => سال).',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-        'View a custom List of Settings' => '',
-        'View single Setting: %s' => '',
         'This setting is disabled.' => '',
         'This setting is fixed but not deployed yet!' => '',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>

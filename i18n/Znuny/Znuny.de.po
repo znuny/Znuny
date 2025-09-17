@@ -6344,11 +6344,11 @@ msgstr "Suche starten"
 msgid "Go back to Deployment Details"
 msgstr "Zurück zu den Inbetriebnahme-Details gehen"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
 msgid "View a custom List of Settings"
 msgstr "Eine eigene Liste an Einstellungen anzeigen"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
 msgid "View single Setting: %s"
 msgstr "Einstellung: %s anzeigen"
 

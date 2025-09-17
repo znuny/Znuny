@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.852281890017739;
+    $Self->{Completeness}        = 0.852443154329947;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -391,7 +391,7 @@ sub Data {
         'These groups are automatically assigned to all customers.' => 'Эти группы автоматически назначаются всем клиентам.',
         'You can manage these groups via the configuration setting "CustomerGroupCompanyAlwaysGroups".' =>
             'Этими группами можно управлять в настройке конфигурации "CustomerGroupAlwaysGroups".',
-        'Filter for Groups' => 'Фильтры для Групп',
+        'Filter for Groups' => 'Фильтр Групп',
         'Select the customer:group permissions.' => 'Выберите разрешения клиент:группа.',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Если ничего не выбрано, тогда у клиентов в этой группе не будет прав (заявки будут недоступны клиенту).',
@@ -1927,8 +1927,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminRoleUser.tt
         'Add Agent' => 'Добавить агента',
-        'Filter for Agents' => 'Фильтр для Агентов',
-        'Filter for agents' => 'Фильтр для агентов',
+        'Filter for Agents' => 'Фильтр Агентов',
+        'Filter for agents' => 'Фильтр агентов',
         'Agents' => 'Агенты',
         'Manage Agent-Role Relations' => 'Управление связями Агент ↔ Роли',
         'Manage Role-Agent Relations' => 'Управление связями Роль ↔ Агенты',
@@ -2176,6 +2176,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'Go back to Deployment Details' => '',
+        'View a custom List of Settings' => 'Просмотр пользовательского Списка Изменений',
+        'View single Setting: %s' => 'Просмотр единственного параметра: %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -3376,8 +3378,6 @@ sub Data {
             'Помните, что масштаб для групп значений должен быть больше, чем масштаб для оси X (например, ось Х — месяц, группы значений — год).',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-        'View a custom List of Settings' => 'Просмотр пользовательского Списка Изменений',
-        'View single Setting: %s' => 'Просмотр единственного параметра: %s',
         'This setting is disabled.' => 'Данный параметр отключен.',
         'This setting is fixed but not deployed yet!' => 'Этот параметр исправлен, но пока не применен!',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>
@@ -5017,7 +5017,7 @@ sub Data {
         'Error while validating Recipient email address.' => '',
 
         # Perl Module: Kernel/System/Mention.pm
-        'LastMention' => 'ПоследнееУпоминание',
+        'LastMention' => 'Последнее упоминание',
 
         # Perl Module: Kernel/System/NotificationEvent.pm
         'Couldn\'t read Notification configuration file. Please make sure the file is valid.' =>
@@ -9204,7 +9204,7 @@ Thanks for your help!
         'Shows a preview of the ticket overview (CustomerInfo => 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
             'Допускает использование режима предпросмотра при просмотре заявок (CustomerInfo => 1 - показывает также информацию о клиенте, CustomerInfoMaxSize макс. размер в символах для Customer-Info).',
         'Shows information on how to start OTRS Daemon' => '',
-        'Shows last mention of tickets.' => '',
+        'Shows last mention of tickets.' => 'Показывает последнее упоминание в заявках.',
         'Signature data.' => '',
         'Simple' => 'Простой',
         'Skin' => 'Окрас',

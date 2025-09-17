@@ -2296,7 +2296,7 @@ sub _Mask {
             %Ticket,
             Action        => $Self->{Action},
             ReturnType    => 'Ticket',
-            ReturnSubType => 'Responsible',
+            ReturnSubType => 'NewResponsible',
             Data          => \%ShownUsers,
             UserID        => $Self->{UserID},
         );
@@ -2894,7 +2894,7 @@ sub _GetResponsible {
         %Param,
         Action        => $Self->{Action},
         ReturnType    => 'Ticket',
-        ReturnSubType => 'Responsible',
+        ReturnSubType => 'NewResponsible',
         Data          => \%ShownUsers,
         UserID        => $Self->{UserID},
     );

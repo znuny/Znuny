@@ -6342,11 +6342,11 @@ msgstr "Покрени претрагу"
 msgid "Go back to Deployment Details"
 msgstr "Назад на детаље распоређивања"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
 msgid "View a custom List of Settings"
 msgstr "Преглед листе подешавања"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
 msgid "View single Setting: %s"
 msgstr "Преглед појединачног подешавања: %s"
 

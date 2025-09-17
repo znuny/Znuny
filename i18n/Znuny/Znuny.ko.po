@@ -6342,11 +6342,11 @@ msgstr "검색 실행"
 msgid "Go back to Deployment Details"
 msgstr "배치 세부 사항으로 돌아가기"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
 msgid "View a custom List of Settings"
 msgstr "사용자 정의 설정 목록보기"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
 msgid "View single Setting: %s"
 msgstr "단일보기 설정 : %s"
 

@@ -2164,6 +2164,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'Go back to Deployment Details' => '배치 세부 사항으로 돌아가기',
+        'View a custom List of Settings' => '사용자 정의 설정 목록보기',
+        'View single Setting: %s' => '단일보기 설정 : %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -3364,8 +3366,6 @@ sub Data {
             'Y 축의 축척은 X 축의 축척보다 커야합니다 (예 : X 축 => 월, Y 축 => 연도).',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-        'View a custom List of Settings' => '사용자 정의 설정 목록보기',
-        'View single Setting: %s' => '단일보기 설정 : %s',
         'This setting is disabled.' => '이 설정은 사용할 수 없습니다.',
         'This setting is fixed but not deployed yet!' => '이 설정은 고정되어 있지만 아직 배포되지 않았습니다!',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>

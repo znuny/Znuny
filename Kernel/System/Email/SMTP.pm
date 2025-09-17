@@ -49,20 +49,20 @@ sub Check {
 
     $Param{CommunicationLogObject}->ObjectLogStart(
         ObjectLogType => 'Connection',
-    );
+    ) if $Param{CommunicationLogObject};
 
     my $Return = sub {
         my %LocalParam = @_;
         $Param{CommunicationLogObject}->ObjectLogStop(
             ObjectLogType => 'Connection',
             Status        => $LocalParam{Success} ? 'Successful' : 'Failed',
-        );
+        ) if $Param{CommunicationLogObject};
 
         return %LocalParam;
     };
 
-    my $ReturnSuccess = sub { return $Return->( @_, Success => 1, ); };
-    my $ReturnError   = sub { return $Return->( @_, Success => 0, ); };
+    my $ReturnSuccess = sub { return $Return->( @_, Successful => 1, ); };
+    my $ReturnError   = sub { return $Return->( @_, Successful => 0, ); };
 
     # get config object
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
@@ -83,7 +83,7 @@ sub Check {
         Priority      => 'Debug',
         Key           => 'Kernel::System::Email::' . $Self->{EmailModuleName},
         Value         => 'Testing connection to SMTP service (3 attempts max.).',
-    );
+    ) if $Param{CommunicationLogObject};
 
     # 3 possible attempts to connect to the SMTP server.
     # (MS Exchange Servers have sometimes problems on port 25)
@@ -95,6 +95,7 @@ sub Check {
         ( $Self->{SMTPPort} ? ':' . $Self->{SMTPPort} : '' ),
         $Self->{FQDN},
         $Self->{SMTPType};
+
     TRY:
     for my $Try ( 1 .. 3 ) {
 
@@ -103,7 +104,7 @@ sub Check {
             Priority      => 'Debug',
             Key           => 'Kernel::System::Email::' . $Self->{EmailModuleName},
             Value         => sprintf( $TryConnectMessage, $Try, ),
-        );
+        ) if $Param{CommunicationLogObject};
 
         # connect to mail server
         eval {
@@ -117,6 +118,7 @@ sub Check {
             return 1;
         } || do {
             my $Error = $@;
+
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => sprintf(
@@ -134,7 +136,7 @@ sub Check {
             Priority      => 'Debug',
             Key           => 'Kernel::System::Email::' . $Self->{EmailModuleName},
             Value         => "$Try: Connection could not be established. Waiting for 0.3 seconds.",
-        );
+        ) if $Param{CommunicationLogObject};
 
         # sleep 0,3 seconds;
         select( undef, undef, undef, 0.3 );    ## no critic
@@ -148,7 +150,7 @@ sub Check {
             Priority      => 'Error',
             Key           => 'Kernel::System::Email::' . $Self->{EmailModuleName},
             Value         => "Could not connect to host '$Self->{MailHost}'. ErrorMessage: $!",
-        );
+        ) if $Param{CommunicationLogObject};
 
         return $ReturnError->(
             ErrorMessage => "Can't connect to $Self->{MailHost}: $!!",
@@ -176,7 +178,7 @@ sub Check {
             Priority      => 'Debug',
             Key           => 'Kernel::System::Email::' . $Self->{EmailModuleName},
             Value         => "Using SMTP authentication with user '$Self->{User}' and (hidden) password.",
-        );
+        ) if $Param{CommunicationLogObject};
 
         $AuthenticationSuccessful = $SMTP->( 'auth', $Self->{User}, $Self->{Password} );
     }
@@ -220,7 +222,7 @@ sub Check {
             Key           => 'Kernel::System::Email::' . $Self->{EmailModuleName},
             Value =>
                 "Using SMTP authentication with user '$Self->{User}' and OAuth2 token config '$Self->{OAuth2TokenConfigName}'.",
-        );
+        ) if $Param{CommunicationLogObject};
 
         my $SASLObject = Authen::SASL->new(
             mechanism => 'XOAUTH2',
@@ -245,7 +247,7 @@ sub Check {
             Priority      => 'Error',
             Key           => 'Kernel::System::Email::' . $Self->{EmailModuleName},
             Value         => "SMTP authentication failed (SMTP code: $Code, ErrorMessage: $Error).",
-        );
+        ) if $Param{CommunicationLogObject};
 
         return $ReturnError->(
             ErrorMessage => "SMTP authentication failed: $Error!",

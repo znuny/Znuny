@@ -931,6 +931,7 @@ sub _ShowEdit {
     $LayoutObject->Block( Name => 'ActionOverview' );
 
     if ( $Param{Action} eq 'Change' ) {
+
         $LayoutObject->Block(
             Name => 'ActionClone',
             Data => \%Param,
@@ -943,10 +944,14 @@ sub _ShowEdit {
             Name => 'ActionHistory',
             Data => \%Param,
         );
-        $LayoutObject->Block(
-            Name => 'ActionDelete',
-            Data => \%Param,
-        );
+
+        # Only show delete button for invalid web services
+        if ( $WebserviceData->{ValidID} ne '1' ) {
+            $LayoutObject->Block(
+                Name => 'ActionDelete',
+                Data => \%Param,
+            );
+        }
         $LayoutObject->Block(
             Name => 'ActionDebugger',
             Data => \%Param,

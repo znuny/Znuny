@@ -2165,6 +2165,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'Go back to Deployment Details' => 'Zurück zu den Inbetriebnahme-Details gehen',
+        'View a custom List of Settings' => 'Eine eigene Liste an Einstellungen anzeigen',
+        'View single Setting: %s' => 'Einstellung: %s anzeigen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => 'Systemdatei-Support',
@@ -3365,8 +3367,6 @@ sub Data {
             'Bitte beachten Sie, dass die Skalierung der Y-Achse größer sein muss als die Skalierung der X-Achse (z. B. X-Achse => Monat, Y-Achse => Jahr).',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-        'View a custom List of Settings' => 'Eine eigene Liste an Einstellungen anzeigen',
-        'View single Setting: %s' => 'Einstellung: %s anzeigen',
         'This setting is disabled.' => 'Diese Einstellung ist deaktiviert.',
         'This setting is fixed but not deployed yet!' => 'Die Einstellung wurde korrigiert, aber bislang nicht in Betrieb genommen!',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>

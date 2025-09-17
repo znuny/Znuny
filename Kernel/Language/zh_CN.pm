@@ -2171,6 +2171,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'Go back to Deployment Details' => '返回到部署详情',
+        'View a custom List of Settings' => '查看设置的自定义列表',
+        'View single Setting: %s' => '查看单个设置：%s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -3371,8 +3373,6 @@ sub Data {
             '请记住：Y轴的时间刻度必须大于X轴的时间刻度（例如：X轴=>月，Y轴=>年）。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-        'View a custom List of Settings' => '查看设置的自定义列表',
-        'View single Setting: %s' => '查看单个设置：%s',
         'This setting is disabled.' => '这个设置已被禁用。',
         'This setting is fixed but not deployed yet!' => '这个设置已修正，但尚未部署！',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>

@@ -3967,6 +3967,19 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="Loader::Module::AdminArticleColor###900-Framework" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the admin interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.ArticleColor.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
 
     <!-- AgentPreferences -->
     <Setting Name="AgentPreferences::AJAXUpdate::AllowedKeys###Framework" Required="0" Valid="1">

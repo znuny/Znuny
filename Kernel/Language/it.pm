@@ -2173,6 +2173,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'Go back to Deployment Details' => 'Torna ai dettagli di attivazione',
+        'View a custom List of Settings' => 'Visualizza un elenco personalizzato di impostazioni',
+        'View single Setting: %s' => 'Visualizza impostazione singola: %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -3373,8 +3375,6 @@ sub Data {
             'Ricordare che la scala per l\'asse Y deve essere più grande della scala per l\'asse X (ad es. Asse X => mese, asse Y => anno).',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-        'View a custom List of Settings' => 'Visualizza un elenco personalizzato di impostazioni',
-        'View single Setting: %s' => 'Visualizza impostazione singola: %s',
         'This setting is disabled.' => 'Questa impostazione è disabilitata.',
         'This setting is fixed but not deployed yet!' => 'Questa impostazione è fissa ma non ancora distribuita!',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>

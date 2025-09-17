@@ -2165,6 +2165,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'Go back to Deployment Details' => 'Назад на детаље распоређивања',
+        'View a custom List of Settings' => 'Преглед листе подешавања',
+        'View single Setting: %s' => 'Преглед појединачног подешавања: %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -3365,8 +3367,6 @@ sub Data {
             'Молимо запамтите, да скала за Y-осу треба да буде већа од скале за Х-осу (нпр. Х-Оса => месец; Y-оса => година).',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-        'View a custom List of Settings' => 'Преглед листе подешавања',
-        'View single Setting: %s' => 'Преглед појединачног подешавања: %s',
         'This setting is disabled.' => 'Ово подешавање је искључено.',
         'This setting is fixed but not deployed yet!' => 'Ово подешавање је статичко, али није још распоређено!',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>

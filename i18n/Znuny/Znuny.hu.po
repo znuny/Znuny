@@ -6342,11 +6342,11 @@ msgstr "Keresés futtatása"
 msgid "Go back to Deployment Details"
 msgstr "Vissza az üzembe állítás részleteihez"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
 msgid "View a custom List of Settings"
 msgstr "Egyéni beállításlista megtekintése"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
 msgid "View single Setting: %s"
 msgstr "Önálló beállítás megtekintése: %s"
 

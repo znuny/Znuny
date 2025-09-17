@@ -2170,6 +2170,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'Go back to Deployment Details' => 'Vissza az üzembe állítás részleteihez',
+        'View a custom List of Settings' => 'Egyéni beállításlista megtekintése',
+        'View single Setting: %s' => 'Önálló beállítás megtekintése: %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -3370,8 +3372,6 @@ sub Data {
             'Ne feledje, hogy az Y-tengely méretezésének nagyobbnak kell lennie az X-tengely méretezésénél (például X-tengely => Hónap, Y-tengely => Év).',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-        'View a custom List of Settings' => 'Egyéni beállításlista megtekintése',
-        'View single Setting: %s' => 'Önálló beállítás megtekintése: %s',
         'This setting is disabled.' => 'Ez a beállítás le van tiltva.',
         'This setting is fixed but not deployed yet!' => 'Ez a beállítás javítva lett, de még nincs üzembe állítva!',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>

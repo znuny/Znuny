@@ -2165,6 +2165,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'Go back to Deployment Details' => 'Regrese a Detalles de implementación',
+        'View a custom List of Settings' => 'Ver una lista personalizada de configuraciones',
+        'View single Setting: %s' => 'Ver únicamente una configuración: %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -3365,8 +3367,6 @@ sub Data {
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-        'View a custom List of Settings' => 'Ver una lista personalizada de configuraciones',
-        'View single Setting: %s' => 'Ver únicamente una configuración: %s',
         'This setting is disabled.' => 'Esta configuración no está habilitada.',
         'This setting is fixed but not deployed yet!' => '¡Esta configuración es definida pero aún no está implementada!',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>

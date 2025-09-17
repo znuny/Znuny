@@ -2170,6 +2170,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt
         'Go back to Deployment Details' => '',
+        'View a custom List of Settings' => 'カスタム設定の一覧を表示',
+        'View single Setting: %s' => '単一の設定を表示：%s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemFiles.tt
         'System file support' => '',
@@ -3370,8 +3372,6 @@ sub Data {
             'Y軸の目盛はX軸の目盛より大きくする必要があります (例: X軸=>月、Y軸=>年)',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/SystemConfiguration/SettingsList.tt
-        'View a custom List of Settings' => 'カスタム設定の一覧を表示',
-        'View single Setting: %s' => '単一の設定を表示：%s',
         'This setting is disabled.' => 'この設定は無効です。',
         'This setting is fixed but not deployed yet!' => 'この設定は確定しましたが、まだデプロイされていません！',
         'This setting is currently being overridden in %s and can\'t thus be changed here!' =>

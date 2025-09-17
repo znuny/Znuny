@@ -290,7 +290,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: Download all selenium screenshots
+          name: Upload Selenium Screenshots - Base
           retention-days: 1
           path: /opt/znuny/var/httpd/htdocs/SeleniumScreenshots/**/*
           if-no-files-found: ignore
@@ -342,7 +342,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: Download all selenium screenshots
+          name: Upload Selenium Screenshots - Admin
           retention-days: 1
           path: /opt/znuny/var/httpd/htdocs/SeleniumScreenshots/**/*
           if-no-files-found: ignore
@@ -394,7 +394,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: Download all selenium screenshots
+          name: Upload Selenium Screenshots - Agent
           retention-days: 1
           path: /opt/znuny/var/httpd/htdocs/SeleniumScreenshots/**/*
           if-no-files-found: ignore
@@ -446,7 +446,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: Download all selenium screenshots
+          name: Upload Selenium Screenshots - Customer
           retention-days: 1
           path: /opt/znuny/var/httpd/htdocs/SeleniumScreenshots/**/*
           if-no-files-found: ignore
@@ -498,7 +498,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: Download all selenium screenshots
+          name: Upload Selenium Screenshots - JavaScript
           retention-days: 1
           path: /opt/znuny/var/httpd/htdocs/SeleniumScreenshots/**/*
           if-no-files-found: ignore
@@ -550,7 +550,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: Download all selenium screenshots
+          name: Upload Selenium Screenshots - Output
           retention-days: 1
           path: /opt/znuny/var/httpd/htdocs/SeleniumScreenshots/**/*
           if-no-files-found: ignore
@@ -602,7 +602,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: Download all selenium screenshots
+          name: Upload Selenium Screenshots - SysConfig
           retention-days: 1
           path: |
             /opt/znuny/var/httpd/htdocs/SeleniumScreenshots/**/*

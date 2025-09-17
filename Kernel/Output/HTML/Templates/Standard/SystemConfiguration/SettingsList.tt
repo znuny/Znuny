@@ -7,32 +7,6 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-[% BreadcrumbPath = [
-        {
-            Name => Translate('System Configuration'),
-            Link => 'AdminSystemConfiguration',
-        },
-    ]
-%]
-
-<!-- Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt -->
-[% IF Data.Type and Data.Type == 'CustomList' %]
-    [% BreadcrumbPath.push({ Name => Translate('View a custom List of Settings') }) %]
-[% ELSIF Data.View %]
-    [% View = Data.View | uri %]
-    [% BreadcrumbPath.push({ Name => Translate('View single Setting: %s', Data.View), Link => 'AdminSystemConfiguration;Subaction=View;Setting=' _ View }) %]
-[% END %]
-
-<!-- Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationGroup.tt -->
-[% FOREACH Item IN Data.Path %]
-    [% BreadcrumbPath.push({ Name => Item.Name, Link => 'AdminSystemConfigurationGroup;RootNavigation=' _ Item.Value }) %]
-[% END %]
-
-[% FOREACH Item IN Data.Parameters %]
-    [% BreadcrumbPath.push({ Name => Item.Name, Link => 'AdminSystemConfiguration;Subaction=' _ Item.Value }) %]
-[% END %]
-
-[% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
 
 [% IF Data.SettingList.size %]
 <ul class="SettingsList">

@@ -61,6 +61,7 @@ sub Run {
         'Znuny-Translations',
         'Znuny4OTRS-Translations',
         'Znuny-MSGraphMail',
+        'Znuny-BugfixIssue1206',
     );
 
     PACKAGENAME:

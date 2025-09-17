@@ -1,9 +1,19 @@
-# 7.2.2 2025-??-??
+# 7.2.2 2025-09-17
+ - 2025-09-10 Fixed: Added NewResponsible as Change Property in ACL.
+ - 2025-09-09 Fixed: AdminArticleColor search filter.
+ - 2025-09-09 Fixed: Installer using wrong credentials for database requirements checks.
+ - 2025-09-05 Fixed: Double Breadcrumb in SysConfig.
+ - 2025-09-05 Fixed: Deleting a valid Webservice should not be possible.
+ - 2025-09-03 Fixed: Installer was not able to check email account settings.
+ - 2025-09-01 Sector Nord AG: Fixed: Duplicate favorites in AdminMenu. Thanks to Lukas Bröring (@LuBroering). [PR#705](https://github.com/znuny/Znuny/pull/705)
+ - 2025-09-01 Sector Nord AG: Fixed: Enter/Ctrl+Enter leads to saving the draft instead of submitting the form. Thanks to Lukas Bröring (@LuBroering). [PR#704](https://github.com/znuny/Znuny/pull/704)
  - 2025-08-29 AdminSystemConfiguration: Current value of the settings key has been added to the HTML title attribute in the settings list when hovering over it.
  - 2025-08-28 Fixed: Table article_color color size to small if system is migrated.
+ - 2025-08-26 Fixed: Body of selected plain-text article not visible in customer ticket zoom.
  - 2025-08-25 Fixed: Updated Google Mail OAuth2 token configuration template to enable Google's consent dialog when obtaining first token.
  - 2025-08-25 Fixed: UpgradeAJAXAttachmentSysConfig - Problems with Updating PostgreSQL and Oracle.
  - 2025-08-25 Fixed: When using Dark Skin, article colors should not invert.
+ - 2025-08-22 Fixed: Issue with setting empty value for multiselect input fields.
 
 # 7.2.1 2025-08-20
  - 2025-08-13 CVE-2025-3573: Updated jquery-validate to 1.21.0.
