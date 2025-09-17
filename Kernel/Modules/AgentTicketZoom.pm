@@ -1231,7 +1231,11 @@ sub MaskAgentZoom {
         }
 
         # display all items, the lowest Prio will be displayed first
-        for my $Item ( sort { ($ZoomMenuItems{$a}->{Prio} // 999) <=> ($ZoomMenuItems{$b}->{Prio} // 999) } keys %ZoomMenuItems ) {
+        for my $Item (
+            sort { ( $ZoomMenuItems{$a}->{Prio} // 999 ) <=> ( $ZoomMenuItems{$b}->{Prio} // 999 ) }
+            keys %ZoomMenuItems
+            )
+        {
             if ( $ZoomMenuItems{$Item}->{ExternalLink} && $ZoomMenuItems{$Item}->{ExternalLink} == 1 ) {
                 $LayoutObject->Block(
                     Name => 'TicketMenuExternalLink',
