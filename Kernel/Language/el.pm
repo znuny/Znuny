@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.137299035369775;
+    $Self->{Completeness}        = 0.137781350482315;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1994,7 +1994,7 @@ sub Data {
         'Filter for SLAs' => '',
         'Configure SLA Visibility and Defaults' => '',
         'Please write only numbers!' => '',
-        'Minimum Time Between Incidents' => '',
+        'Minimum Time Between Incidents' => 'Ελάχιστος Χρόνος μεταξύ Συμβάντων',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSMIME.tt
         'S/MIME Management' => 'Διαχειριση S/MIME',
@@ -2079,7 +2079,7 @@ sub Data {
         'Service name maximum length is 200 characters (with Sub-service).' =>
             '',
         'Sub-service of' => '',
-        'Criticality' => '',
+        'Criticality' => 'Κρισιμότητα',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSession.tt
         'Session Management' => 'Διαχείριση Σύνδεσης',
@@ -2804,7 +2804,7 @@ sub Data {
         'First Response Time' => 'Χρόνος πρώτης απάντησης',
         'Update Time' => 'Χρόνος ενημερωσης',
         'Solution Time' => 'Χρόνος επίλυσης',
-        'Impact' => '',
+        'Impact' => 'Αντίκτυπος',
         'Move ticket to a different queue' => '',
         'Change queue' => 'Αλλαγή Ουράς',
 
