@@ -90,7 +90,7 @@ sub Send {
     # check availability
     my %Result = $Self->Check();
 
-    if ( !$Result{Success} ) {
+    if ( !$Result{Successful} ) {
 
         $Param{CommunicationLogObject}->ObjectLog(
             ObjectLogType => 'Message',
@@ -225,7 +225,7 @@ sub Check {
     $SendmailBinary =~ s/^(.+?)\s.+?$/$1/;
     if ( !-f $SendmailBinary ) {
         return (
-            Success      => 0,
+            Successful   => 0,
             ErrorMessage => "No such binary: $SendmailBinary!"
         );
     }

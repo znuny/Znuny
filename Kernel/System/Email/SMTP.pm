@@ -292,7 +292,7 @@ sub Send {
     # connect to smtp server
     my %Result = $Self->Check(%Param);
 
-    if ( !$Result{Success} ) {
+    if ( !$Result{Successful} ) {
         return $Self->_SendError( %Param, %Result, );
     }
 
