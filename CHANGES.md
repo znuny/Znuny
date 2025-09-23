@@ -1,3 +1,6 @@
+# 6.5.18 2025-09-24
+ - 2025-09-22 Fixed: Fix for installer email setting checks lead to issues with sending emails.
+
 # 6.5.17 2025-09-17
  - 2025-09-05 Fixed: Deleting a valid Webservice should not be possible.
  - 2025-09-02 Fixed: Updated date picker highlight styles for better readability
