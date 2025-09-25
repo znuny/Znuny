@@ -116,7 +116,10 @@ Core.Form.ErrorTooltips = (function (TargetNS) {
      */
     TargetNS.ShowTooltip = function($Element, TooltipContent, TooltipPosition) {
         var $TooltipContainer = $('#' + TooltipContainerID),
-            TopOffset;
+            TopOffset,
+            OffsetTopFileUpload,
+            OffsetLeftFileUpload,
+            FileUploadElement = $Element.attr('id') === 'FileUpload';
 
         if (TooltipPosition == null) {
             TooltipPosition = TonguePosition;
@@ -127,12 +130,24 @@ Core.Form.ErrorTooltips = (function (TargetNS) {
             $TooltipContainer = $('#' + TooltipContainerID);
         }
 
+        if (FileUploadElement) {
+            OffsetTopFileUpload = 55;
+            OffsetLeftFileUpload = 40;
+        }
+        else {
+            OffsetTopFileUpload = TooltipOffsetTop;
+            OffsetLeftFileUpload = TooltipOffsetLeft;
+        }
+
         /*
          * Now determine if the tongue needs to be right or left, depending on the
          * position of the target element on the screen.
          */
         if ($Element.offset() && ($(document).width() - $Element.offset().left) < 250) {
             TongueClass = 'TongueRight';
+        }
+        else {
+            TongueClass = 'TongueLeft';
         }
 
         /*
@@ -152,14 +167,14 @@ Core.Form.ErrorTooltips = (function (TargetNS) {
         if(Object.keys(Offset).length === 0) return;
 
         if (TooltipPosition === 'TongueBottom') {
-            TopOffset = Offset.top + TooltipOffsetTop;
+            TopOffset = Offset.top + OffsetTopFileUpload;
         }
         else if (TooltipPosition === 'TongueTop') {
-            TopOffset = Offset.top + $Element.height() - $TooltipContainer.height() - TooltipOffsetTop + TongueHeight;
+            TopOffset = Offset.top + $Element.height() - $TooltipContainer.height() - OffsetTopFileUpload + TongueHeight;
         }
 
         $TooltipContainer
-            .css('left', Offset.left + TooltipOffsetLeft)
+            .css('left', Offset.left + OffsetLeftFileUpload)
             .css('top', TopOffset);
     };
 
