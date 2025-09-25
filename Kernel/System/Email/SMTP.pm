@@ -61,8 +61,8 @@ sub Check {
         return %LocalParam;
     };
 
-    my $ReturnSuccess = sub { return $Return->( @_, Successful => 1, ); };
-    my $ReturnError   = sub { return $Return->( @_, Successful => 0, ); };
+    my $ReturnSuccess = sub { return $Return->( @_, Success => 1, Successful => 1, ); };
+    my $ReturnError   = sub { return $Return->( @_, Success => 0, Successful => 0, ); };
 
     # get config object
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');

@@ -8038,11 +8038,11 @@ sub Data {
         'Loader module registration for the public interface.' => '',
         'Deletes orphaned sessions.' => '',
         'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketUnseenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
-            'Определяет параметры конфигурации, доступные в персональных настройках. Если сотрудник не выберет значение, он будет перенаправлен на URL-адрес страницы по умолчанию, заданный \'MarkTicketUnseenRedirectDefaultURL\' параметром системной конфигурации.',
+            'Определяет параметры конфигурации, доступные в персональных настройках. Если агент не выберет значение, он будет перенаправлен на URL-адрес страницы по умолчанию, заданный \'MarkTicketUnseenRedirectDefaultURL\' параметром системной конфигурации.',
         'Defines the redirect URL for setting a ticket article to \'unseen\'.' =>
             'Определяет URL-адрес страницы для отметки сообщения заявки как \'непрочитанное\'.',
         'Defines the config parameters available in the preferences view. The default redirect URL from SysConfig \'MarkTicketSeenRedirectDefaultURL\' is used if no selection is made by the agent.' =>
-            'Определяет параметры конфигурации, доступные в персональных настройках. Если сотрудник не выберет значение, он будет перенаправлен на URL-адрес страницы по умолчанию, заданный \'MarkTicketSeenRedirectDefaultURL\' параметром системной конфигурации.',
+            'Определяет параметры конфигурации, доступные в персональных настройках. Если агент не выберет значение, он будет перенаправлен на URL-адрес страницы по умолчанию, заданный \'MarkTicketSeenRedirectDefaultURL\' параметром системной конфигурации.',
         'Defines the redirect URL for setting a ticket article to \'seen\'.' =>
             'Определяет URL-адрес страницы для пометки сообщения заявки как \'прочитанное\'.',
         'Registers a link in the ticket menu to mark a ticket as unseen.' =>
@@ -9661,6 +9661,7 @@ Thanks for your help!
         'Status',
         'Stream',
         'Su',
+        'Successful',
         'Sun',
         'Sunday',
         'Support Bundle',

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2023-03-23 09:27+0000\n"
-"PO-Revision-Date: 2025-09-03 08:20+0000\n"
+"PO-Revision-Date: 2025-09-18 10:38+0000\n"
 "Last-Translator: BuilderNSV <nikitin.sergey.v@gmail.com>\n"
 "Language-Team: Russian <https://translations.znuny.org/projects/znuny/znuny/ru/>\n"
 "Language: ru\n"
@@ -24184,7 +24184,7 @@ msgstr "Пометить как непрочитанное"
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Defines the config parameters available in the preferences view. The default redirect URL from SysConfig 'MarkTicketUnseenRedirectDefaultURL' is used if no selection is made by the agent."
-msgstr "Определяет параметры конфигурации, доступные в персональных настройках. Если сотрудник не выберет значение, он будет перенаправлен на URL-адрес страницы по умолчанию, заданный 'MarkTicketUnseenRedirectDefaultURL' параметром системной конфигурации."
+msgstr "Определяет параметры конфигурации, доступные в персональных настройках. Если агент не выберет значение, он будет перенаправлен на URL-адрес страницы по умолчанию, заданный 'MarkTicketUnseenRedirectDefaultURL' параметром системной конфигурации."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Defines the redirect URL for setting a ticket article to 'unseen'."
@@ -24192,7 +24192,7 @@ msgstr "Определяет URL-адрес страницы для отметк
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Defines the config parameters available in the preferences view. The default redirect URL from SysConfig 'MarkTicketSeenRedirectDefaultURL' is used if no selection is made by the agent."
-msgstr "Определяет параметры конфигурации, доступные в персональных настройках. Если сотрудник не выберет значение, он будет перенаправлен на URL-адрес страницы по умолчанию, заданный 'MarkTicketSeenRedirectDefaultURL' параметром системной конфигурации."
+msgstr "Определяет параметры конфигурации, доступные в персональных настройках. Если агент не выберет значение, он будет перенаправлен на URL-адрес страницы по умолчанию, заданный 'MarkTicketSeenRedirectDefaultURL' параметром системной конфигурации."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Defines the redirect URL for setting a ticket article to 'seen'."
