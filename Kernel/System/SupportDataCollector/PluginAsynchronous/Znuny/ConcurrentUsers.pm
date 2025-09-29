@@ -14,7 +14,7 @@ use warnings;
 
 use parent qw(Kernel::System::SupportDataCollector::PluginAsynchronous);
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (

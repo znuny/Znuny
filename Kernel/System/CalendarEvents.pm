@@ -132,7 +132,7 @@ sub Parse {
         my $AttachmentsData = $Param{Attachments}->{Data};
 
         # parse attachments
-        if ( IsHashRefWithData $AttachmentsData) {
+        if ( IsHashRefWithData $AttachmentsData ) {
 
             ATTACHMENTINDEX:
             for my $AttachmentIndex ( sort keys %{$AttachmentsData} ) {

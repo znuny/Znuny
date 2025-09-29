@@ -15,7 +15,7 @@ use strict;
 use warnings;
 
 use DBI;
-use Net::Domain qw(hostfqdn);
+use Net::Domain      qw(hostfqdn);
 use Kernel::Language qw(Translatable);
 
 use Kernel::System::VariableCheck qw(:all);

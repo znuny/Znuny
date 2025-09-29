@@ -133,7 +133,7 @@ sub FilterAdd {
                     'INSERT INTO postmaster_filter (f_name, f_stop, f_type, f_key, f_value, f_not)'
                     . ' VALUES (?, ?, ?, ?, ?, ?)',
                 Bind => [
-                    \$Param{Name}, \$Param{StopAfterMatch}, \$Type,
+                    \$Param{Name},         \$Param{StopAfterMatch}, \$Type,
                     \$Data[$Index]->{Key}, \$Data[$Index]->{Value}, \$Not[$Index]->{Value},
                 ],
             );

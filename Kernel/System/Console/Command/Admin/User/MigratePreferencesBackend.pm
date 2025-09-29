@@ -27,7 +27,7 @@ sub Configure {
     );
 
     $Self->AddArgument(
-        Name => 'source-backend',
+        Name        => 'source-backend',
         Description =>
             'Source backend (DB or DBJSON) whose preferences will be migrated to the destination backend. Preferences in source backend will be kept.',
         Required   => 1,
@@ -35,7 +35,7 @@ sub Configure {
     );
 
     $Self->AddArgument(
-        Name => 'destination-backend',
+        Name        => 'destination-backend',
         Description =>
             'Destination backend (DB or DBSJON) for preferences of source backend. Preferences in the destination backend that are not present in the source backend will be kept.',
         Required   => 1,

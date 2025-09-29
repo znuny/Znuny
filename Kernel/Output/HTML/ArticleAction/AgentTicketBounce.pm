@@ -108,7 +108,7 @@ sub GetConfig {
         Description => Translatable('Bounce Article to a different mail address'),
         Name        => Translatable('Bounce'),
         Class       => 'AsPopup PopupType_TicketAction',
-        Link =>
+        Link        =>
             "Action=AgentTicketBounce;TicketID=$Param{Ticket}->{TicketID};ArticleID=$Param{Article}->{ArticleID}",
     );
 

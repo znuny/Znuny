@@ -442,7 +442,7 @@ my @SalutationQueueChangeTests = (
         },
         ExpectedData => {
             SalutationQueueLinkBySalutation => undef,
-            SalutationQueuesList =>
+            SalutationQueuesList            =>
                 $AfterImportTests[0]->{ExpectedData},
 
         },

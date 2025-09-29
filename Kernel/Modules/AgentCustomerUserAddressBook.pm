@@ -14,7 +14,7 @@ use warnings;
 
 use List::Util qw(first);
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
@@ -62,12 +62,12 @@ sub Run {
     $Self->{OrderBy} = $ParamObject->GetParam( Param => 'OrderBy' )
         || $Self->{Config}->{SearchParameters}->{ $Self->{RecipientType} }->{'Order::Default'}
         || 'Up';
-    $Self->{Profile}        = $ParamObject->GetParam( Param => 'Profile' )        || '';
-    $Self->{SaveProfile}    = $ParamObject->GetParam( Param => 'SaveProfile' )    || '';
-    $Self->{TakeLastSearch} = $ParamObject->GetParam( Param => 'TakeLastSearch' ) || '';
-    $Self->{SelectTemplate} = $ParamObject->GetParam( Param => 'SelectTemplate' ) || '';
-    $Self->{EraseTemplate}  = $ParamObject->GetParam( Param => 'EraseTemplate' )  || '';
-    $Self->{RecipientField} = $ParamObject->GetParam( Param => 'RecipientField' );
+    $Self->{Profile}             = $ParamObject->GetParam( Param => 'Profile' )        || '';
+    $Self->{SaveProfile}         = $ParamObject->GetParam( Param => 'SaveProfile' )    || '';
+    $Self->{TakeLastSearch}      = $ParamObject->GetParam( Param => 'TakeLastSearch' ) || '';
+    $Self->{SelectTemplate}      = $ParamObject->GetParam( Param => 'SelectTemplate' ) || '';
+    $Self->{EraseTemplate}       = $ParamObject->GetParam( Param => 'EraseTemplate' )  || '';
+    $Self->{RecipientField}      = $ParamObject->GetParam( Param => 'RecipientField' );
     $Self->{RecipientFieldLabel} = $ParamObject->GetParam( Param => 'RecipientFieldLabel' ) || $Self->{RecipientField};
 
     if ( !$Self->{RecipientField} ) {
@@ -470,24 +470,24 @@ sub Run {
             }
 
             $Output .= $LayoutObject->CustomerUserAddressBookListShow(
-                CustomerUserIDs     => $ViewableCustomerUserLogins,
-                Total               => scalar @{$ViewableCustomerUserLogins},
-                View                => $Self->{View},
-                Env                 => $Self,
-                LinkPage            => $LinkPage,
-                LinkSort            => $LinkSort,
-                LinkFilter          => $LinkFilter,
-                LinkBack            => $LinkBack,
-                Profile             => $Self->{Profile},
-                TitleName           => Translatable('Customer User Address Book'),
-                ShowColumns         => \@ShowColumns,
-                SortBy              => $LayoutObject->Ascii2Html( Text => $Self->{SortBy} ),
-                OrderBy             => $LayoutObject->Ascii2Html( Text => $Self->{OrderBy} ),
-                RequestedURL        => 'Action=' . $Self->{Action} . ';' . $LinkPage,
-                Recipients          => $Recipients || {},
-                RecipientType       => $Self->{RecipientType},
-                RecipientField      => $Self->{RecipientField},
-                RecipientFieldLabel => $Self->{RecipientFieldLabel},
+                CustomerUserIDs         => $ViewableCustomerUserLogins,
+                Total                   => scalar @{$ViewableCustomerUserLogins},
+                View                    => $Self->{View},
+                Env                     => $Self,
+                LinkPage                => $LinkPage,
+                LinkSort                => $LinkSort,
+                LinkFilter              => $LinkFilter,
+                LinkBack                => $LinkBack,
+                Profile                 => $Self->{Profile},
+                TitleName               => Translatable('Customer User Address Book'),
+                ShowColumns             => \@ShowColumns,
+                SortBy                  => $LayoutObject->Ascii2Html( Text => $Self->{SortBy} ),
+                OrderBy                 => $LayoutObject->Ascii2Html( Text => $Self->{OrderBy} ),
+                RequestedURL            => 'Action=' . $Self->{Action} . ';' . $LinkPage,
+                Recipients              => $Recipients || {},
+                RecipientType           => $Self->{RecipientType},
+                RecipientField          => $Self->{RecipientField},
+                RecipientFieldLabel     => $Self->{RecipientFieldLabel},
                 CustomerTicketTextField =>
                     $Self->{Config}->{SearchParameters}->{ $Self->{RecipientType} }->{CustomerTicketTextField}
                     || 'UserMailString',

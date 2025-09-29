@@ -47,7 +47,7 @@ $Self->Is(
 my %ExpectedCertificate = (
     Serial    => '0DFA',
     IsExpired => 1,
-    Issuer =>
+    Issuer    =>
         'C=JP, ST=Tokyo, L=Chuo-ku, O=Frank4DD, OU=WebCert Support, CN=Frank4DD Web CA, emailAddress=support@frank4dd.com',
     Email                  => '',
     Version                => '00',

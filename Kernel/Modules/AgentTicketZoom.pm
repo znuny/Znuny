@@ -18,7 +18,7 @@ our $ObjectManagerDisabled = 1;
 use POSIX qw/ceil/;
 use Kernel::System::EmailParser;
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -513,8 +513,8 @@ sub Run {
     if ( $Self->{Subaction} eq 'ArticleFilterSet' ) {
 
         # get params
-        my $TicketID     = $ParamObject->GetParam( Param => 'TicketID' );
-        my $SaveDefaults = $ParamObject->GetParam( Param => 'SaveDefaults' );
+        my $TicketID                      = $ParamObject->GetParam( Param => 'TicketID' );
+        my $SaveDefaults                  = $ParamObject->GetParam( Param => 'SaveDefaults' );
         my @CommunicationChannelFilterIDs = $ParamObject->GetArray( Param => 'CommunicationChannelFilter' );
         my $CustomerVisibility            = $ParamObject->GetParam( Param => 'CustomerVisibilityFilter' );
         my @ArticleSenderTypeFilterIDs    = $ParamObject->GetArray( Param => 'ArticleSenderTypeFilter' );
@@ -586,8 +586,8 @@ sub Run {
     if ( $Self->{Subaction} eq 'EvenTypeFilterSet' ) {
 
         # get params
-        my $TicketID     = $ParamObject->GetParam( Param => 'TicketID' );
-        my $SaveDefaults = $ParamObject->GetParam( Param => 'SaveDefaults' );
+        my $TicketID           = $ParamObject->GetParam( Param => 'TicketID' );
+        my $SaveDefaults       = $ParamObject->GetParam( Param => 'SaveDefaults' );
         my @EventTypeFilterIDs = $ParamObject->GetArray( Param => 'EventTypeFilter' );
 
         # build session string
@@ -1014,7 +1014,7 @@ sub MaskAgentZoom {
             if ( !$Config->{Location} ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         "The configuration for $Config->{Module} must contain a Location, because it is marked as Async.",
                 );
                 next WIDGET;
@@ -1257,7 +1257,6 @@ sub MaskAgentZoom {
                         Name => $ZoomMenuItems{$Item}->{Name},
                     },
                 );
-
 
                 for my $SubItem (
                     sort {

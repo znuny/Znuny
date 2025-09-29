@@ -318,7 +318,7 @@ sub LoaderCreateJavaScriptTemplateData {
     if ( !-e $JSTemplateDir ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "No existing template directory found ('$JSTemplateDir')!.
                 Default theme used instead.",
         );

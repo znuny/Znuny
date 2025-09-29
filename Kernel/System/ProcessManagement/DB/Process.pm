@@ -194,7 +194,7 @@ sub ProcessAdd {
             VALUES (?, ?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
             \$Param{EntityID}, \$Param{Name}, \$Param{StateEntityID}, \$Layout, \$Config,
-            \$Param{UserID}, \$Param{UserID},
+            \$Param{UserID},   \$Param{UserID},
         ],
     );
 
@@ -746,7 +746,7 @@ sub ProcessUpdate {
             WHERE id = ?',
         Bind => [
             \$Param{EntityID}, \$Param{Name}, \$Param{StateEntityID}, \$Layout, \$Config,
-            \$Param{UserID}, \$Param{ID},
+            \$Param{UserID},   \$Param{ID},
         ],
     );
 
@@ -1325,9 +1325,9 @@ sub ProcessDump {
             ChangeTime          => $ProcessData->{ChangeTime},
             StateEntityID       => $ProcessData->{StateEntityID},
             State               => $ProcessData->{State},
-            StartActivity       => $ProcessData->{Config}->{StartActivity} || '',
+            StartActivity       => $ProcessData->{Config}->{StartActivity}       || '',
             StartActivityDialog => $ProcessData->{Config}->{StartActivityDialog} || '',
-            Path                => $ProcessData->{Config}->{Path} || {},
+            Path                => $ProcessData->{Config}->{Path}                || {},
         };
     }
 
@@ -1364,13 +1364,13 @@ sub ProcessDump {
             Name             => $ActivityDialogData->{Name},
             CreateTime       => $ActivityDialogData->{CreateTime},
             ChangeTime       => $ActivityDialogData->{ChangeTime},
-            Interface        => $ActivityDialogData->{Config}->{Interface} || '',
+            Interface        => $ActivityDialogData->{Config}->{Interface}        || '',
             DescriptionShort => $ActivityDialogData->{Config}->{DescriptionShort} || '',
-            DescriptionLong  => $ActivityDialogData->{Config}->{DescriptionLong} || '',
-            Fields           => $ActivityDialogData->{Config}->{Fields} || {},
-            FieldOrder       => $ActivityDialogData->{Config}->{FieldOrder} || [],
-            Permission       => $ActivityDialogData->{Config}->{Permission} || '',
-            RequiredLock     => $ActivityDialogData->{Config}->{RequiredLock} || '',
+            DescriptionLong  => $ActivityDialogData->{Config}->{DescriptionLong}  || '',
+            Fields           => $ActivityDialogData->{Config}->{Fields}           || {},
+            FieldOrder       => $ActivityDialogData->{Config}->{FieldOrder}       || [],
+            Permission       => $ActivityDialogData->{Config}->{Permission}       || '',
+            RequiredLock     => $ActivityDialogData->{Config}->{RequiredLock}     || '',
             SubmitAdviceText => $ActivityDialogData->{Config}->{SubmitAdviceText} || '',
             SubmitButtonText => $ActivityDialogData->{Config}->{SubmitButtonText} || '',
         };
@@ -1390,7 +1390,7 @@ sub ProcessDump {
             Name             => $TransitionData->{Name},
             CreateTime       => $TransitionData->{CreateTime},
             ChangeTime       => $TransitionData->{ChangeTime},
-            Condition        => $TransitionData->{Config}->{Condition} || {},
+            Condition        => $TransitionData->{Config}->{Condition}        || {},
             ConditionLinking => $TransitionData->{Config}->{ConditionLinking} || '',
         };
     }

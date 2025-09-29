@@ -19,7 +19,7 @@ use vars (qw($Self));
 #   See https://rt.perl.org/Public/Bug/Display.html?id=52610 and
 #   http://rt.perl.org/rt3/Public/Bug/Display.html?id=78186
 
-no warnings 'redefine';    ## no critic
+no warnings 'redefine';                ## no critic
 use Carp;
 local *Carp::caller_info = sub { };    ## no critic # no-op
 use warnings 'redefine';

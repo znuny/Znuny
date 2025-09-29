@@ -128,7 +128,7 @@ sub new {
 
     # Store backend in $Self for fastest access.
     $Self->{CacheObject}    = $Kernel::OM->Get($CacheModule);
-    $Self->{CacheInMemory}  = $Kernel::OM->Get('Kernel::Config')->Get('Cache::InMemory') // 1;
+    $Self->{CacheInMemory}  = $Kernel::OM->Get('Kernel::Config')->Get('Cache::InMemory')  // 1;
     $Self->{CacheInBackend} = $Kernel::OM->Get('Kernel::Config')->Get('Cache::InBackend') // 1;
 
     return $Self;
@@ -216,7 +216,7 @@ sub Set {
     if ( $Param{Type} !~ m{ \A [a-zA-Z0-9_]+ \z}smx ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Cache Type '$Param{Type}' contains invalid characters, use [a-zA-Z0-9_] only!",
         );
         return;

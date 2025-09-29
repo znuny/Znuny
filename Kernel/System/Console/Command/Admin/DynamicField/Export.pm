@@ -39,7 +39,7 @@ sub Configure {
     );
 
     $Self->AddOption(
-        Name => 'include-all-config-keys',
+        Name        => 'include-all-config-keys',
         Description =>
             'Additionally includes the following config keys: ChangeTime, CreateTime, ID, InternalField, ValidID.',
         Required => 0,

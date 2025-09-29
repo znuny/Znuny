@@ -220,7 +220,7 @@ sub Check {
             ObjectLogType => 'Connection',
             Priority      => 'Debug',
             Key           => 'Kernel::System::Email::' . $Self->{EmailModuleName},
-            Value =>
+            Value         =>
                 "Using SMTP authentication with user '$Self->{User}' and OAuth2 token config '$Self->{OAuth2TokenConfigName}'.",
         ) if $Param{CommunicationLogObject};
 
@@ -474,7 +474,7 @@ sub _Connect {
 
     my $SMTPDefaultPort = $Self->_GetSMTPDefaultPort();
     my $SMTPPort        = $Param{SMTPPort} || $SMTPDefaultPort;
-    my $Timeout         = $Param{Timeout} || 30;
+    my $Timeout         = $Param{Timeout}  || 30;
 
     # set up connection connection
     my $SMTP = Net::SMTP->new(

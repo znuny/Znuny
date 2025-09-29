@@ -321,12 +321,12 @@ sub Run {
         );
     }
 
-    my $DynamicFields = $Param{Data}->{DynamicFields} || 0;
-    my $Extended      = $Param{Data}->{Extended}      || 0;
-    my $AllArticles   = $Param{Data}->{AllArticles}   || 0;
-    my $ArticleOrder  = $Param{Data}->{ArticleOrder}  || 'ASC';
-    my $ArticleLimit  = $Param{Data}->{ArticleLimit}  || 0;
-    my $Attachments   = $Param{Data}->{Attachments}   || 0;
+    my $DynamicFields         = $Param{Data}->{DynamicFields} || 0;
+    my $Extended              = $Param{Data}->{Extended}      || 0;
+    my $AllArticles           = $Param{Data}->{AllArticles}   || 0;
+    my $ArticleOrder          = $Param{Data}->{ArticleOrder}  || 'ASC';
+    my $ArticleLimit          = $Param{Data}->{ArticleLimit}  || 0;
+    my $Attachments           = $Param{Data}->{Attachments}   || 0;
     my $GetAttachmentContents = $Param{Data}->{GetAttachmentContents} // 1;
 
     my $ReturnData = {

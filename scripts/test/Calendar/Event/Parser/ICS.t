@@ -383,10 +383,10 @@ my $Summary     = $Self->{AttachmentDataProperties}->{Summary};
 
 my $AttachmentsData = [
     {
-        Name        => 'Basic invite',
-        Filename    => 'invite0.ics',
-        Content     => $AdditionalInvites->{BasicInvite},
-        ContentType => 'text/calendar;',
+        Name           => 'Basic invite',
+        Filename       => 'invite0.ics',
+        Content        => $AdditionalInvites->{BasicInvite},
+        ContentType    => 'text/calendar;',
         ExpectedResult =>
             {
             'Data' => {
@@ -435,7 +435,7 @@ my $AttachmentsData = [
                         'OriginalTimeZone' => 'Europe/Warsaw',
                         'Summary'          => 'Default summary.',
                         'TimeZone'         => 'UTC',
-                        'UID' =>
+                        'UID'              =>
                             '2AD840A9B960C4A369C1F6040010000000C200E00074C5B7101A82E0080000000090A64A98E413D8010077ACF613F0000080000000000000'
                     }
                 ]
@@ -482,7 +482,7 @@ END:VCALENDAR
                     {
                         'Attendee' => [ 'attendee1@mail.com', 'attendee2@mail.com' ],
                         'TimeZone' => 'UTC',
-                        'UID' =>
+                        'UID'      =>
                             '2AD840A9B960C4A369C1F6040010000000C200E00074C5B7101A82E0080000000090A64A98E413D8010077ACF613F0000080000000000000@google.com',
                         'Summary'   => ' Default summary.',
                         'Organizer' => 'organizer1@mail.com',
@@ -615,8 +615,8 @@ END:VCALENDAR
             'Data' => {
                 'Calendars' => [
                     {
-                        'Index' => 1,
-                        'Name'  => 'Calendar 1',
+                        'Index'  => 1,
+                        'Name'   => 'Calendar 1',
                         'ProdID' =>
                             '-//Microsoft Corporation//Outlook 16.0 MIMEDIR//EN',
                         'Timezone' => 'America/Los_Angeles'
@@ -656,7 +656,7 @@ END:VCALENDAR
                         'OriginalTimeZone' => 'America/Los_Angeles',
                         'Summary'          => 'Default summary.',
                         'TimeZone'         => 'UTC',
-                        'UID' =>
+                        'UID'              =>
                             '2AD840A9B960C4A369C1F6040010000000C200E00074C5B7101A82E0080000000090A64A98E413D8010077ACF613F0000080000000000000'
                     }
                 ]
@@ -705,7 +705,7 @@ LOCATION:$Location->{Default}->[0]
 END:VEVENT
 END:VCALENDAR
         ",
-        ContentType => 'application/vnd.swiftview-ics;',
+        ContentType    => 'application/vnd.swiftview-ics;',
         ExpectedResult =>
             {
             'Data' => {
@@ -760,10 +760,10 @@ END:VCALENDAR
             },
     },
     {
-        Name        => 'Basic invite with properties to encode',
-        Filename    => 'invite4.ics',
-        Content     => $AdditionalInvites->{PropertiesToEncode},
-        ContentType => 'application/vnd.swiftview-ics;',
+        Name           => 'Basic invite with properties to encode',
+        Filename       => 'invite4.ics',
+        Content        => $AdditionalInvites->{PropertiesToEncode},
+        ContentType    => 'application/vnd.swiftview-ics;',
         ExpectedResult =>
             {
             'Data' => {
@@ -810,7 +810,7 @@ END:VCALENDAR
                         'OriginalTimeZone' => 'Europe/Warsaw',
                         'Summary'          => 'Pour résumer.',
                         'TimeZone'         => 'UTC',
-                        'UID' =>
+                        'UID'              =>
                             '2AD840A9B960C4A369C1F6040010000000C200E00074C5B7101A82E0080000000090A64A98E413D8010077ACF613F0000080000000000000'
                     }
                 ]
@@ -819,10 +819,10 @@ END:VCALENDAR
             },
     },
     {
-        Name        => 'Basic invite with some empty properties',
-        Filename    => 'invite5.ics',
-        Content     => $AdditionalInvites->{EmptyProperties},
-        ContentType => 'text/x-vcalendar;',
+        Name           => 'Basic invite with some empty properties',
+        Filename       => 'invite5.ics',
+        Content        => $AdditionalInvites->{EmptyProperties},
+        ContentType    => 'text/x-vcalendar;',
         ExpectedResult =>
             {
             'Data' => {
@@ -867,7 +867,7 @@ END:VCALENDAR
                         'OriginalTimeZone' => 'Europe/Warsaw',
                         'Summary'          => '',
                         'TimeZone'         => 'UTC',
-                        'UID' =>
+                        'UID'              =>
                             '2AD840A9B960C4A369C1F6040010000000C200E00074C5B7101A82E0080000000090A64A98E413D8010077ACF613F0000080000000000000'
                     }
                 ]
@@ -902,10 +902,10 @@ $AdditionalInvites->{InviteWithNoTimezone} = $BasicInvite->(
 
 my $StringData = [
     {
-        Name        => 'Basic invite as string param',
-        Filename    => 'invite8.ics',
-        Content     => $AdditionalInvites->{BasicInvite},
-        ContentType => 'text/x-vcalendar;',
+        Name           => 'Basic invite as string param',
+        Filename       => 'invite8.ics',
+        Content        => $AdditionalInvites->{BasicInvite},
+        ContentType    => 'text/x-vcalendar;',
         ExpectedResult =>
             {
             'String' => [
@@ -954,7 +954,7 @@ my $StringData = [
                                 'OriginalTimeZone' => 'Europe/Warsaw',
                                 'Summary'          => 'Default summary.',
                                 'TimeZone'         => 'UTC',
-                                'UID' =>
+                                'UID'              =>
                                     '2AD840A9B960C4A369C1F6040010000000C200E00074C5B7101A82E0080000000090A64A98E413D8010077ACF613F0000080000000000000'
                             }
                         ]
@@ -965,10 +965,10 @@ my $StringData = [
             },
     },
     {
-        Name        => 'Invite with unrelated content',
-        Filename    => 'invite9.ics',
-        Content     => $AdditionalInvites->{InviteWithUnrelatedContent},
-        ContentType => 'text/x-vcalendar;',
+        Name           => 'Invite with unrelated content',
+        Filename       => 'invite9.ics',
+        Content        => $AdditionalInvites->{InviteWithUnrelatedContent},
+        ContentType    => 'text/x-vcalendar;',
         ExpectedResult =>
             {
             'String' => [
@@ -1017,7 +1017,7 @@ my $StringData = [
                                 'OriginalTimeZone' => 'Europe/Warsaw',
                                 'Summary'          => 'Default summary.',
                                 'TimeZone'         => 'UTC',
-                                'UID' =>
+                                'UID'              =>
                                     '2AD840A9B960C4A369C1F6040010000000C200E00074C5B7101A82E0080000000090A64A98E413D8010077ACF613F0000080000000000000'
                             }
                         ]
@@ -1097,7 +1097,7 @@ my $AttachmentsWithStringInvite = {
                             'OriginalTimeZone' => 'Europe/Warsaw',
                             'Summary'          => 'Default summary.',
                             'TimeZone'         => 'UTC',
-                            'UID' =>
+                            'UID'              =>
                                 '2AD840A9B960C4A369C1F6040010000000C200E00074C5B7101A82E0080000000090A64A98E413D8010077ACF613F0000080000000000000'
                         }
                     ]

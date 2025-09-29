@@ -49,7 +49,7 @@ The following persons contributed to Znuny:
 * Hog Duske <hog.duske@dusketech.de>
 * IB Development Team <dev@ib.pl>
 * Igor Djuric <igor.djuric@otrs.com>
-* itweserems <info@it-weser-ems.de>
+* IT.WESER-EMS <info@it-weser-ems.de>
 * Ivo Oliveira <128880860+Bashizz@users.noreply.github.com>
 * Jan Steinweg <jan.steinweg@otrs.com>
 * JannisKleinrensing <71767611+JannisKleinrensing@users.noreply.github.com>

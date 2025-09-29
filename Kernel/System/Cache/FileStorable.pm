@@ -14,8 +14,8 @@ use warnings;
 
 use POSIX;
 use Digest::MD5 qw();
-use File::Path qw();
-use File::Find qw();
+use File::Path  qw();
+use File::Find  qw();
 
 our @ObjectDependencies = (
     'Kernel::Config',

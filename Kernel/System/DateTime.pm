@@ -28,7 +28,7 @@ Exporter::export_ok_tags('all');
 
 use DateTime;
 use DateTime::TimeZone;
-use Scalar::Util qw( looks_like_number );
+use Scalar::Util                  qw( looks_like_number );
 use Kernel::System::VariableCheck qw( IsArrayRefWithData IsHashRefWithData );
 
 our %ObjectManagerFlags = (

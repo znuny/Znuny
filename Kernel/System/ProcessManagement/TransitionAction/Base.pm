@@ -646,7 +646,7 @@ sub _ReplaceAdditionalAttributes {
 
     my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
     my $DefaultLanguage = $ConfigObject->Get('DefaultLanguage') || 'en';
-    my $Language        = $User{UserLanguage} || $DefaultLanguage;
+    my $Language        = $User{UserLanguage}                   || $DefaultLanguage;
 
     # get and store richtext information
     my $RichText = $ConfigObject->Get('Frontend::RichText');

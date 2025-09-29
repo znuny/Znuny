@@ -592,7 +592,7 @@ sub Verify {
         %Return = (
             SignatureFound => 1,
             Successful     => 0,
-            Message =>
+            Message        =>
                 'OpenSSL: self signed certificate, to use it send the \'Certificate\' parameter : '
                 . $Message,
             MessageLong =>
@@ -608,7 +608,7 @@ sub Verify {
         %Return = (
             SignatureFound => 1,
             Successful     => 0,
-            Message =>
+            Message        =>
                 'OpenSSL: The signature does not match the message content : ' . $Message,
             MessageLong =>
                 'OpenSSL: The signature does not match the message content : ' . $MessageLong,
@@ -1057,7 +1057,7 @@ sub ConvertCertFormat {
             Convert => "pkcs7 -in $TmpCertificate -print_certs -out $CertFile",
         },
         PFX => {
-            Read => "pkcs12 -in $TmpCertificate -noout -nomacver -passin pass:'$PassPhrase'",
+            Read    => "pkcs12 -in $TmpCertificate -noout -nomacver -passin pass:'$PassPhrase'",
             Convert =>
                 "pkcs12 -in $TmpCertificate -out $CertFile -nomacver -clcerts -nokeys -passin pass:'$PassPhrase'",
         },
@@ -1815,8 +1815,8 @@ sub PrivateAdd {
                     VALUES
                     (?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 Bind => [
-                    \$CertificateAttributes{Hash}, \$Attributes{Type},
-                    \$Certificates[0]->{Filename}, \$CertificateAttributes{Email},
+                    \$CertificateAttributes{Hash},         \$Attributes{Type},
+                    \$Certificates[0]->{Filename},         \$CertificateAttributes{Email},
                     \$CertificateAttributes{ShortEndDate}, \$CertificateAttributes{Fingerprint},
                     \$CertificateAttributes{Subject},      \$DateTimeObject->ToString(),
                     \$UserID,
@@ -1963,7 +1963,7 @@ sub PrivateRemove {
     if ( !$SecretDelete ) {
         %Return = (
             Successful => 0,
-            Message =>
+            Message    =>
                 "Delete private aborted, not possible to delete Secret: $Self->{PrivatePath}/$Param{Filename}.P, $!!",
         );
         return %Return;
@@ -2701,8 +2701,8 @@ sub ReIndexCertificate {
                 VALUES
                 (?, ?, ?, ?, ?, ?, ?, ?, ?)",
             Bind => [
-                \$Attributes{Hash}, \$Attributes{Type},
-                \$Filename, \$Attributes{Email},
+                \$Attributes{Hash},         \$Attributes{Type},
+                \$Filename,                 \$Attributes{Email},
                 \$Attributes{ShortEndDate}, \$Attributes{Fingerprint},
                 \$Attributes{Subject},      \$DateTimeObject->ToString(),
                 \1,
@@ -2839,8 +2839,8 @@ sub ReIndexPrivate {
                 VALUES
                 (?, ?, ?, ?, ?, ?, ?, ?, ?)",
             Bind => [
-                \$CertificateAttributes{Hash}, \$PrivateAttributes{Type},
-                \$Filename, \$CertificateAttributes{Email},
+                \$CertificateAttributes{Hash},         \$PrivateAttributes{Type},
+                \$Filename,                            \$CertificateAttributes{Email},
                 \$CertificateAttributes{ShortEndDate}, \$CertificateAttributes{Fingerprint},
                 \$CertificateAttributes{Subject},      \$DateTimeObject->ToString(),
                 \1,

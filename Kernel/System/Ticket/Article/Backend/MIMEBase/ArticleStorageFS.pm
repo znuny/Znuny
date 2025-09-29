@@ -12,9 +12,9 @@ package Kernel::System::Ticket::Article::Backend::MIMEBase::ArticleStorageFS;
 use strict;
 use warnings;
 
-use File::Path qw();
-use MIME::Base64 qw();
-use Time::HiRes qw();
+use File::Path         qw();
+use MIME::Base64       qw();
+use Time::HiRes        qw();
 use Unicode::Normalize qw();
 
 use parent qw(Kernel::System::Ticket::Article::Backend::MIMEBase::Base);

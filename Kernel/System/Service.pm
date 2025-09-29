@@ -776,7 +776,7 @@ sub ServiceAdd {
                 . 'VALUES (?, ?, ?, current_timestamp, ?, current_timestamp, ?, ?, ?)',
             Bind => [
                 \$Param{FullName}, \$Param{ValidID}, \$Param{Comment},
-                \$Param{UserID}, \$Param{UserID}, \$Param{TypeID}, \$Param{Criticality},
+                \$Param{UserID},   \$Param{UserID},  \$Param{TypeID}, \$Param{Criticality},
             ],
         );
     }
@@ -787,7 +787,7 @@ sub ServiceAdd {
                 . 'VALUES (?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
             Bind => [
                 \$Param{FullName}, \$Param{ValidID}, \$Param{Comment},
-                \$Param{UserID}, \$Param{UserID},
+                \$Param{UserID},   \$Param{UserID},
             ],
         );
     }
@@ -943,7 +943,7 @@ sub ServiceUpdate {
                 . ' WHERE id = ?',
             Bind => [
                 \$Param{FullName}, \$Param{ValidID}, \$Param{Comment},
-                \$Param{UserID}, \$Param{TypeID}, \$Param{Criticality}, \$Param{ServiceID},
+                \$Param{UserID},   \$Param{TypeID},  \$Param{Criticality}, \$Param{ServiceID},
             ],
         );
     }
@@ -953,7 +953,7 @@ sub ServiceUpdate {
                 . ' change_time = current_timestamp, change_by = ? WHERE id = ?',
             Bind => [
                 \$Param{FullName}, \$Param{ValidID}, \$Param{Comment},
-                \$Param{UserID}, \$Param{ServiceID},
+                \$Param{UserID},   \$Param{ServiceID},
             ],
         );
     }

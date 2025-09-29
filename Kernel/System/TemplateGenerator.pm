@@ -645,7 +645,7 @@ sub Attributes {
     $Param{Data}->{Subject} = $TicketObject->TicketSubjectBuild(
         TicketNumber => $Ticket{TicketNumber},
         Subject      => $Param{Data}->{Subject} || '',
-        Action       => $Param{Action} || '',
+        Action       => $Param{Action}          || '',
     );
 
     # get sender address

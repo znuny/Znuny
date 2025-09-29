@@ -161,15 +161,15 @@ Core.Form.ErrorTooltips = (function (TargetNS) {
         if(Object.keys(Offset).length === 0) return;
 
         if (TooltipPosition === 'TongueBottom') {
-            TopOffset = Offset.top + OffsetTopFileUpload;
+            TopOffset = Offset.top + TooltipOffsetTop;
         }
         else if (TooltipPosition === 'TongueTop') {
-            TopOffset = Offset.top + $Element.height() - $TooltipContainer.height() - OffsetTopFileUpload + TongueHeight;
+            TopOffset = Offset.top + $Element.height() - $TooltipContainer.height() - TooltipOffsetTop + TongueHeight;
         }
 
         $TooltipContainer
-            .css('left', Offset.left + OffsetLeftFileUpload)
-            .css('top', TopOffset);
+          .css("left", Offset.left + TooltipOffsetLeft)
+          .css("top", TopOffset);
     };
 
     /**

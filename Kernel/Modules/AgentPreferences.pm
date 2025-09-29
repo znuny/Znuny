@@ -16,7 +16,7 @@ use utf8;
 our $ObjectManagerDisabled = 1;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -103,7 +103,7 @@ sub Run {
         else {
             $LogObject->Log(
                 Priority => 'debug',
-                Message =>
+                Message  =>
                     "User preference key $Key is not configured in AgentPreferences::AJAXUpdate::AllowedKeys to be allowed to be set via UpdateAJAX.",
             );
         }
@@ -387,7 +387,7 @@ sub Run {
 
         my $Category               = $ParamObject->GetParam( Param => 'Category' )               || '';
         my $UserModificationActive = $ParamObject->GetParam( Param => 'UserModificationActive' ) || '0';
-        my $IsValid = $ParamObject->GetParam( Param => 'IsValid' ) // undef;
+        my $IsValid                = $ParamObject->GetParam( Param => 'IsValid' ) // undef;
 
         my %Tree = $Kernel::OM->Get('Kernel::System::SysConfig')->ConfigurationNavigationTree(
             Action                 => 'AgentPreferences',

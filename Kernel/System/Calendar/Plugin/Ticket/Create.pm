@@ -758,7 +758,7 @@ sub TicketCreate {
 
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Ticket for appointment with ID $Param{AppointmentID} and creation date $Param{Config}->{TicketCreateTime} was not created because catch-up threshold of $TicketCreateCatchUpThresholdMinutes minutes was exceeded.",
         );
         return 0;
@@ -813,11 +813,11 @@ sub TicketCreate {
             ChannelName          => $Config->{ArticleChannelName},
             IsVisibleForCustomer => $Config->{ArticleIsVisibleForCustomer},
             SenderType           => $Config->{SenderType},
-            From                 => $Calendar{CalendarName} || $Config->{From},
-            Subject              => $Appointment{Title} || $Config->{Title},
+            From                 => $Calendar{CalendarName}   || $Config->{From},
+            Subject              => $Appointment{Title}       || $Config->{Title},
             Body                 => $Appointment{Description} || $Config->{Body},
-            ContentType          => $Config->{ContentType} || 'text/plain; charset=ISO-8859-15',
-            HistoryType          => $Config->{HistoryType} || 'NewTicket',
+            ContentType          => $Config->{ContentType}    || 'text/plain; charset=ISO-8859-15',
+            HistoryType          => $Config->{HistoryType}    || 'NewTicket',
             HistoryComment       => $Config->{HistoryComment},
             UserID               => $Param{UserID},
         );

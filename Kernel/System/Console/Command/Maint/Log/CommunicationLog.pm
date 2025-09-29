@@ -31,7 +31,7 @@ sub Configure {
         HasValue    => 0,
     );
     $Self->AddOption(
-        Name => 'purge',
+        Name        => 'purge',
         Description =>
             'Purge successful communications older than a week and all communications older than a month. These durations are specified in SysConfig.',
         Required => 0,
@@ -59,7 +59,7 @@ sub Configure {
         ValueRegex  => qr/^.+$/smx,
     );
     $Self->AddOption(
-        Name => 'verbose',
+        Name        => 'verbose',
         Description =>
             'Display debug information (can be used with --purge). Example: --purge --verbose',
         Required => 0,

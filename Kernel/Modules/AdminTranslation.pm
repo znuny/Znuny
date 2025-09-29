@@ -11,7 +11,7 @@ use strict;
 use warnings;
 use utf8;
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
@@ -258,7 +258,7 @@ sub _OverviewActionList {
         Name => 'ImportExport',
         Data => {
             %Param,
-            Label => 'Import / Export',
+            Label       => 'Import / Export',
             Explanation =>
                 'Here you can upload a configuration file to import %s to your system. The file needs to be in .yml | .csv | .xlsx format.',
             Action => $Param{Action} || $LayoutObject->{Action},

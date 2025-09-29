@@ -28,9 +28,9 @@ use lib dirname($RealBin);
 use lib dirname($RealBin) . '/Kernel/cpan-lib';
 use lib dirname($RealBin) . '/Custom';
 
-use File::Path qw();
+use File::Path  qw();
 use Time::HiRes qw(sleep);
-use Fcntl qw(:flock);
+use Fcntl       qw(:flock);
 
 use Kernel::System::ObjectManager;
 
@@ -101,9 +101,9 @@ if ( !@ARGV ) {
 }
 
 my $Action     = lc shift @ARGV;
-my $Debug      = ( grep { lc $_ eq '--debug' } @ARGV ) ? 1 : 0;
+my $Debug      = ( grep { lc $_ eq '--debug' } @ARGV )      ? 1 : 0;
 my $Foreground = ( grep { lc $_ eq '--foreground' } @ARGV ) ? 1 : 0;
-my $ForceStop  = ( grep { lc $_ eq '--force' } @ARGV ) ? 1 : 0;
+my $ForceStop  = ( grep { lc $_ eq '--force' } @ARGV )      ? 1 : 0;
 
 # Remove options: --debug, --foreground, --force so that only daemon names are left
 my @Daemons = grep { lc $_ !~ m{\A--(?:debug|foreground|force)\z} } @ARGV;
@@ -160,10 +160,10 @@ sub PrintUsage {
         'Reduce the time the main daemon waits other daemons to stop.' . "\n";
     $UsageText .= sprintf " %-22s - %s", '[--foreground]', 'Run the daemon in foreground.' . "\n";
     $UsageText .= "\nActions:\n";
-    $UsageText .= sprintf " %-22s - %s", 'start',          'Start the daemon process.' . "\n";
-    $UsageText .= sprintf " %-22s - %s", 'stop',           'Stop the daemon process.' . "\n";
-    $UsageText .= sprintf " %-22s - %s", 'status',         'Show daemon process current state.' . "\n";
-    $UsageText .= sprintf " %-22s - %s", 'help',           'Display help for this command.' . "\n";
+    $UsageText .= sprintf " %-22s - %s", 'start',  'Start the daemon process.' . "\n";
+    $UsageText .= sprintf " %-22s - %s", 'stop',   'Stop the daemon process.' . "\n";
+    $UsageText .= sprintf " %-22s - %s", 'status', 'Show daemon process current state.' . "\n";
+    $UsageText .= sprintf " %-22s - %s", 'help',   'Display help for this command.' . "\n";
     $UsageText .= "\nHelp:\n";
     $UsageText
         .= "In debug mode if a daemon module is specified the debug mode will be activated only for that daemon.\n";

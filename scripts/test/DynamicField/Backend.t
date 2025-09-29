@@ -532,9 +532,9 @@ my @Tests = (
         },
         ObjectID  => $TicketID,
         Value     => -1,
-        UserID    => 1,
-        Success   => 0,
-        ShouldGet => 0,
+        UserID    =>  1,
+        Success   =>  0,
+        ShouldGet =>  0,
     },
     {
         Name               => 'Checkbox - Invalid Option (Letter)',
@@ -854,7 +854,7 @@ for my $Test (@Tests) {
             FieldType  => 'Text',
         },
         ObjectID => -1,
-        UserID   => 1,
+        UserID   =>  1,
     },
 );
 

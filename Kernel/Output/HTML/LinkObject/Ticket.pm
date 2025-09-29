@@ -16,7 +16,7 @@ use List::Util qw(first);
 
 use Kernel::Output::HTML::Layout;
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -293,7 +293,7 @@ sub TableCreateComplex {
         # user has no own settings
         for my $Column ( sort keys %UserColumns ) {
             if ( !$SortOrder{$Column} ) {
-                $SortOrder{$Column} = 0;               # Set 0, it system will hide this item anyways
+                $SortOrder{$Column} = 0;    # Set 0, it system will hide this item anyways
             }
         }
     }

@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::System::DB',
@@ -100,9 +100,9 @@ sub AutoResponseAdd {
             VALUES
                 (?, ?, ?, ?, ?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
-            \$Param{Name}, \$Param{ValidID}, \$Param{Comment}, \$Param{Response},
-            \$Param{Subject},     \$Param{TypeID}, \$Param{AddressID},
-            \$Param{ContentType}, \$Param{UserID}, \$Param{UserID},
+            \$Param{Name},        \$Param{ValidID}, \$Param{Comment}, \$Param{Response},
+            \$Param{Subject},     \$Param{TypeID},  \$Param{AddressID},
+            \$Param{ContentType}, \$Param{UserID},  \$Param{UserID},
         ],
     );
 
@@ -117,7 +117,7 @@ sub AutoResponseAdd {
                 AND content_type = ?
                 AND create_by = ?',
         Bind => [
-            \$Param{Name}, \$Param{TypeID}, \$Param{AddressID},
+            \$Param{Name},        \$Param{TypeID}, \$Param{AddressID},
             \$Param{ContentType}, \$Param{UserID},
         ],
         Limit => 1,
@@ -240,9 +240,9 @@ sub AutoResponseUpdate {
                 change_time = current_timestamp, change_by = ?
             WHERE id = ?',
         Bind => [
-            \$Param{Name}, \$Param{Response}, \$Param{Comment}, \$Param{Subject}, \$Param{TypeID},
+            \$Param{Name},      \$Param{Response},    \$Param{Comment}, \$Param{Subject}, \$Param{TypeID},
             \$Param{AddressID}, \$Param{ContentType}, \$Param{ValidID},
-            \$Param{UserID}, \$Param{ID},
+            \$Param{UserID},    \$Param{ID},
         ],
     );
 
@@ -631,7 +631,7 @@ sub AutoResponseImport {
             if ($QueueErrorMessage) {
                 $LogObject->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         $QueueErrorMessage . '.',
                 );
                 push @AutoResponseErrors, $AutoResponse->{Name};
@@ -704,10 +704,10 @@ sub AutoResponseImport {
 
     return {
         Success          => 1,
-        Added            => join( ', ', @AddedAutoResponses ) || '',
-        Updated          => join( ', ', @UpdatedAutoResponses ) || '',
+        Added            => join( ', ', @AddedAutoResponses )      || '',
+        Updated          => join( ', ', @UpdatedAutoResponses )    || '',
         NotUpdated       => join( ', ', @NotUpdatedAutoResponses ) || '',
-        Errors           => join( ', ', @AutoResponseErrors ) || '',
+        Errors           => join( ', ', @AutoResponseErrors )      || '',
         AdditionalErrors => \@AutoResponseAdditionalErrors,
     };
 }

@@ -32,7 +32,7 @@ sub Configure {
         HasValue    => 0,
     );
     $Self->AddOption(
-        Name => 'send-timeout',
+        Name        => 'send-timeout',
         Description =>
             "Timeout in seconds to kill the process that sends emails (default: 600).",
         Required   => 0,
@@ -62,7 +62,7 @@ sub Configure {
         ValueRegex  => qr/^.+$/smx,
     );
     $Self->AddOption(
-        Name => 'filter',
+        Name        => 'filter',
         Description =>
             'Filter actions on messages (can be used with --list and --delete). Example: --filter="ID::1" (Possible filters: ID|ArticleID|CommunicationID|Sender|Recipient|Attempts)',
         Required   => 0,
@@ -71,7 +71,7 @@ sub Configure {
         ValueRegex => qr/^.+$/smx,
     );
     $Self->AddOption(
-        Name => 'force',
+        Name        => 'force',
         Description =>
             'Force the send of the messages even if send time hasn\'t been reached (can be used with --send). Example: --send --force',
         Required => 0,
@@ -79,7 +79,7 @@ sub Configure {
         HasValue => 0,
     );
     $Self->AddOption(
-        Name => 'verbose',
+        Name        => 'verbose',
         Description =>
             'Display debug information (can be used with --send). Example: --send --verbose',
         Required => 0,

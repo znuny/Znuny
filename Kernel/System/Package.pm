@@ -22,7 +22,7 @@ use Kernel::System::SysConfig;
 use Kernel::System::WebUserAgent;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 use parent qw(Kernel::System::EventHandler);
 
@@ -390,7 +390,7 @@ sub RepositoryAdd {
             . Translatable('not installed') . '\', '
             . ' current_timestamp, 1, current_timestamp, 1)',
         Bind => [
-            \$Structure{Name}->{Content}, \$Structure{Version}->{Content},
+            \$Structure{Name}->{Content},   \$Structure{Version}->{Content},
             \$Structure{Vendor}->{Content}, \$FileName, \$Content,
         ],
     );
@@ -863,7 +863,7 @@ sub PackageUpgrade {
         if ( $Structure{Version}->{Content} eq $InstalledVersion ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Can't upgrade, package '$Structure{Name}->{Content}-$InstalledVersion' already installed!",
             );
 
@@ -872,7 +872,7 @@ sub PackageUpgrade {
         else {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Can't upgrade, installed package '$InstalledVersion' is newer as '$Structure{Version}->{Content}'!",
             );
 
@@ -1672,7 +1672,7 @@ sub RepositoryPackageListGet {
     if ( @Packages && !$PackageForRequestedFramework ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'notice',
-            Message =>
+            Message  =>
                 Translatable(
                 'No packages for your framework version found in this repository, it only contains packages for other framework versions.'
                 ),
@@ -3317,7 +3317,7 @@ sub PackageUpgradeAllIsRunning {
 
     return (
         IsRunning      => $IsRunning // 0,
-        UpgradeStatus  => $SystemData{Status} || '',
+        UpgradeStatus  => $SystemData{Status}  || '',
         UpgradeSuccess => $SystemData{Success} || '',
     );
 }
@@ -3853,7 +3853,7 @@ sub _CheckPackageDepends {
                 if ( $Param{Name} eq $Module->{Content} && !$Param{Force} ) {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => 'error',
-                        Message =>
+                        Message  =>
                             "Sorry, can't uninstall package $Param{Name}, "
                             . "because package $Local->{Name}->{Content} depends on it!",
                     );

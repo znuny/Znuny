@@ -142,18 +142,18 @@ for my $Hours ( sort keys %WorkingHours ) {
         $QueueName = "Queue-$UniqueSignature";
         $QueueID   = $QueueObject->QueueAdd(
             Name                => $QueueName,
-            ValidID             => 1,
-            GroupID             => 1,
+            ValidID             =>  1,
+            GroupID             =>  1,
             FirstResponseTime   => -10,
-            FirstResponseNotify => 80,
+            FirstResponseNotify =>  80,
             UpdateTime          => -20,
-            UpdateNotify        => 80,
+            UpdateNotify        =>  80,
             SolutionTime        => -40,
-            SolutionNotify      => 80,
-            SystemAddressID     => 1,
-            SalutationID        => 1,
-            SignatureID         => 1,
-            UserID              => 1,
+            SolutionNotify      =>  80,
+            SystemAddressID     =>  1,
+            SalutationID        =>  1,
+            SignatureID         =>  1,
+            UserID              =>  1,
             Comment             => "Queue for OTRSEscalationEvents.t for test run at $StartingTimeStamp",
         );
         $Self->True( $QueueID, "QueueAdd() $QueueName" );
@@ -388,7 +388,7 @@ for my $Hours ( sort keys %WorkingHours ) {
             HistoryType          => 'OwnerUpdate',
             HistoryComment       => 'first response',
             UserID               => 1,
-            NoAgentNotify => 1,    # if you don't want to send agent notifications
+            NoAgentNotify        => 1,    # if you don't want to send agent notifications
         );
 
         if ( $WorkingHours{$Hours} ) {
@@ -464,7 +464,7 @@ for my $Hours ( sort keys %WorkingHours ) {
             HistoryType          => 'OwnerUpdate',
             HistoryComment       => 'Some free text!',
             UserID               => 1,
-            NoAgentNotify => 1,    # if you don't want to send agent notifications
+            NoAgentNotify        => 1,    # if you don't want to send agent notifications
         );
 
         # Renew objects because of transaction.

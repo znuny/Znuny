@@ -1179,16 +1179,16 @@ sub _SendRecipientNotification {
                 $_->{HistoryType} eq 'SendCustomerNotification'
                     && $_->{Name} eq
                     "\%\%$Param{Recipient}->{UserEmail}"
-            }
-            reverse @HistoryLines;
+                }
+                reverse @HistoryLines;
         }
         else {
             $LastNotificationHistory = first {
                 $_->{HistoryType} eq 'SendAgentNotification'
                     && $_->{Name} eq
                     "\%\%$Param{Notification}->{Name}\%\%$Param{Recipient}->{UserLogin}\%\%$Param{Transport}"
-            }
-            reverse @HistoryLines;
+                }
+                reverse @HistoryLines;
         }
 
         if ( $LastNotificationHistory && $LastNotificationHistory->{CreateTime} ) {

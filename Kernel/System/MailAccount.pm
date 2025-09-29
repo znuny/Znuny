@@ -146,10 +146,10 @@ sub MailAccountAdd {
             . ' imap_folder, trusted, authentication_type, oauth2_token_config_id, create_time, create_by, change_time, change_by)'
             . ' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
-            \$Param{Login},   \$Param{Password}, \$Param{Host},    \$Param{Type},
-            \$Param{ValidID}, \$Param{Comment},  \$Param{QueueID}, \$Param{IMAPFolder},
+            \$Param{Login},   \$Param{Password},           \$Param{Host},    \$Param{Type},
+            \$Param{ValidID}, \$Param{Comment},            \$Param{QueueID}, \$Param{IMAPFolder},
             \$Param{Trusted}, \$Param{AuthenticationType}, \$Param{OAuth2TokenConfigID},
-            \$Param{UserID}, \$Param{UserID},
+            \$Param{UserID},  \$Param{UserID},
         ],
     );
 
@@ -319,7 +319,7 @@ sub MailAccountGet {
 
     # check cache
     my $CacheKey = join '::', 'MailAccountGet', 'ID', $Param{ID};
-    my $Cache = $Kernel::OM->Get('Kernel::System::Cache')->Get(
+    my $Cache    = $Kernel::OM->Get('Kernel::System::Cache')->Get(
         Type => $Self->{CacheType},
         Key  => $CacheKey,
     );
@@ -464,10 +464,10 @@ sub MailAccountUpdate {
             . ' valid_id = ?, change_time = current_timestamp, '
             . ' change_by = ?, queue_id = ? WHERE id = ?',
         Bind => [
-            \$Param{Login}, \$Param{Password}, \$Param{Host}, \$Param{Type},
-            \$Param{Comment}, \$Param{IMAPFolder}, \$Param{Trusted},
+            \$Param{Login},              \$Param{Password},   \$Param{Host}, \$Param{Type},
+            \$Param{Comment},            \$Param{IMAPFolder}, \$Param{Trusted},
             \$Param{AuthenticationType}, \$Param{OAuth2TokenConfigID},
-            \$Param{ValidID}, \$Param{UserID}, \$Param{QueueID}, \$Param{ID},
+            \$Param{ValidID},            \$Param{UserID}, \$Param{QueueID}, \$Param{ID},
         ],
     );
 
@@ -530,7 +530,7 @@ sub MailAccountList {
 
     # check cache
     my $CacheKey = join '::', 'MailAccountList', ( $Param{Valid} ? 'Valid::1' : '' );
-    my $Cache = $Kernel::OM->Get('Kernel::System::Cache')->Get(
+    my $Cache    = $Kernel::OM->Get('Kernel::System::Cache')->Get(
         Type => $Self->{CacheType},
         Key  => $CacheKey,
     );

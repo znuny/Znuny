@@ -31,8 +31,8 @@ sub Run {
 
     if ($ForceUnfilteredStorage) {
         $Self->AddResultWarning(
-            Label => Translatable('Ticket Search Index Module'),
-            Value => 'Ticket::SearchIndex::ForceUnfilteredStorage',
+            Label   => Translatable('Ticket Search Index Module'),
+            Value   => 'Ticket::SearchIndex::ForceUnfilteredStorage',
             Message =>
                 Translatable(
                 'The indexing process forces the storage of the original article text in the article search index, without executing filters or applying stop word lists. This will increase the size of the search index and thus may slow down fulltext searches.'

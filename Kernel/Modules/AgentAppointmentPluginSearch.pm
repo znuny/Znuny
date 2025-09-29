@@ -34,8 +34,8 @@ sub Run {
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
     # get needed params
-    my $Search    = $ParamObject->GetParam( Param => 'Term' ) || '';
-    my $PluginKey = $ParamObject->GetParam( Param => 'PluginKey' );
+    my $Search     = $ParamObject->GetParam( Param => 'Term' ) || '';
+    my $PluginKey  = $ParamObject->GetParam( Param => 'PluginKey' );
     my $MaxResults = int( $ParamObject->GetParam( Param => 'MaxResults' ) || 20 );
 
     # workaround, all auto completion requests get posted by utf8 anyway

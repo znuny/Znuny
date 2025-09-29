@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -1380,7 +1380,7 @@ sub Run {
                     $TicketObject->$TicketActionFunction(
                         TicketID => $TicketID,
                         Key      => 'Seen',
-                        Value    => 1,                      # irrelevant in case of delete
+                        Value    => 1,                 # irrelevant in case of delete
                         UserID   => $Self->{UserID},
                     );
                 }
@@ -1632,7 +1632,7 @@ sub _Mask {
                 %Param,
                 Format               => 'DateInputFormatLong',
                 DiffTime             => $ConfigObject->Get('Ticket::Frontend::PendingDiffTime') || 0,
-                Class                => $Param{Errors}->{DateInvalid} || '',
+                Class                => $Param{Errors}->{DateInvalid}                           || '',
                 Validate             => 1,
                 ValidateDateInFuture => 1,
             );
@@ -1944,7 +1944,7 @@ sub _Mask {
         $DynamicFieldConfigs{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = {
             Name              => $DynamicFieldConfig->{Name},
             RequireActivation => $RequireActivation || 'false',
-            IsChecked         => $IsChecked || 'false',
+            IsChecked         => $IsChecked         || 'false',
         };
 
         push @DynamicFieldNames, 'DynamicField_' . $DynamicFieldConfig->{Name};

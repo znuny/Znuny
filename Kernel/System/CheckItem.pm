@@ -179,7 +179,7 @@ sub CheckEmail {
 
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => 'debug',
-                        Message =>
+                        Message  =>
                             "$Host has no mail exchanger (MX) defined, trying A resource record instead.",
                     );
 
