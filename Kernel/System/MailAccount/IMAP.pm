@@ -261,7 +261,7 @@ sub _Fetch {
         my $Error = $@;
         %Connect = (
             Successful => 0,
-            Message =>
+            Message    =>
                 "Something went wrong while trying to connect to '$Self->{MailAccountModuleName} => $Param{Login}/$Param{Host}': ${ Error }",
         );
     };

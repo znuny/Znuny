@@ -107,7 +107,7 @@ for my $ChannelName (qw(Email Phone Internal)) {
             Ticket-Article-Test-utf8-1.txt
             Ticket-Article-Test-utf8-1.bin
             Ticket-Article-Test-empty.txt
-            )
+        )
     );
 
     for my $File (@File) {

@@ -149,7 +149,7 @@ sub Run {
                     %CustomerUser,
                     Label => $Label,
                     Value => $Value,
-                    URL =>
+                    URL   =>
                         '[% Env("Baselink") %]Action=AdminCustomerCompany;Subaction=Change;CustomerID=[% Data.UserCustomerID | uri %];Nav=Agent',
                     Target => '',
                 },
@@ -165,7 +165,7 @@ sub Run {
                     %CustomerUser,
                     Label => $Label,
                     Value => $Value,
-                    URL =>
+                    URL   =>
                         '[% Env("Baselink") %]Action=AdminCustomerUser;Subaction=Change;ID=[% Data.UserLogin | uri %];Nav=Agent',
                     Target => '',
                 },

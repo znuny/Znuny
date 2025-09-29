@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -1170,7 +1170,7 @@ sub _MaskUpdate {
                 my $DynamicFieldHTML = $DynamicFieldBackendObject->SearchFieldRender(
                     DynamicFieldConfig => $DynamicFieldConfig,
                     Profile            => \%JobData,
-                    DefaultValue =>
+                    DefaultValue       =>
                         $Self->{Config}->{Defaults}->{DynamicField}->{ $DynamicFieldConfig->{Name} },
                     LayoutObject           => $LayoutObject,
                     ConfirmationCheckboxes => 1,

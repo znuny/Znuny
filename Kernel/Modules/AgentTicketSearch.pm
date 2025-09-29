@@ -14,7 +14,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -94,9 +94,9 @@ sub Run {
     if ( $Self->{Subaction} eq 'AJAXAutocomplete' ) {
         $LayoutObject->ChallengeTokenCheck();
 
-        my $Skip   = $ParamObject->GetParam( Param => 'Skip' )   || '';
-        my $Search = $ParamObject->GetParam( Param => 'Term' )   || '';
-        my $Filter = $ParamObject->GetParam( Param => 'Filter' ) || '{}';
+        my $Skip       = $ParamObject->GetParam( Param => 'Skip' )   || '';
+        my $Search     = $ParamObject->GetParam( Param => 'Term' )   || '';
+        my $Filter     = $ParamObject->GetParam( Param => 'Filter' ) || '{}';
         my $MaxResults = int( $ParamObject->GetParam( Param => 'MaxResults' ) || 20 );
 
         # Remove leading and trailing spaces from search term.
@@ -548,12 +548,12 @@ sub Run {
                     my $DateTimeObject = $Kernel::OM->Create(
                         'Kernel::System::DateTime',
                         ObjectParams => {
-                            Year   => $GetParam{ $TimeType . 'TimeStartYear' },
-                            Month  => $GetParam{ $TimeType . 'TimeStartMonth' },
-                            Day    => $GetParam{ $TimeType . 'TimeStartDay' },
-                            Hour   => 0,                                           # midnight
-                            Minute => 0,
-                            Second => 0,
+                            Year     => $GetParam{ $TimeType . 'TimeStartYear' },
+                            Month    => $GetParam{ $TimeType . 'TimeStartMonth' },
+                            Day      => $GetParam{ $TimeType . 'TimeStartDay' },
+                            Hour     => 0,                                           # midnight
+                            Minute   => 0,
+                            Second   => 0,
                             TimeZone => $Self->{UserTimeZone} || Kernel::System::DateTime->UserDefaultTimeZoneGet(),
                         },
                     );
@@ -571,12 +571,12 @@ sub Run {
                     my $DateTimeObject = $Kernel::OM->Create(
                         'Kernel::System::DateTime',
                         ObjectParams => {
-                            Year   => $GetParam{ $TimeType . 'TimeStopYear' },
-                            Month  => $GetParam{ $TimeType . 'TimeStopMonth' },
-                            Day    => $GetParam{ $TimeType . 'TimeStopDay' },
-                            Hour   => 23,                                         # just before midnight
-                            Minute => 59,
-                            Second => 59,
+                            Year     => $GetParam{ $TimeType . 'TimeStopYear' },
+                            Month    => $GetParam{ $TimeType . 'TimeStopMonth' },
+                            Day      => $GetParam{ $TimeType . 'TimeStopDay' },
+                            Hour     => 23,                                         # just before midnight
+                            Minute   => 59,
+                            Second   => 59,
                             TimeZone => $Self->{UserTimeZone} || Kernel::System::DateTime->UserDefaultTimeZoneGet(),
                         },
                     );
@@ -1004,7 +1004,7 @@ sub Run {
 
                 # return Excel to download
                 return $LayoutObject->Attachment(
-                    Filename => $FileName . '.xlsx',
+                    Filename    => $FileName . '.xlsx',
                     ContentType =>
                         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                     Content => $Excel,
@@ -1800,7 +1800,7 @@ sub Run {
                     DynamicFieldConfig   => $DynamicFieldConfig,
                     Profile              => \%GetParam,
                     PossibleValuesFilter => $PossibleValuesFilter,
-                    DefaultValue =>
+                    DefaultValue         =>
                         $Config->{Defaults}->{DynamicField}
                         ->{ $DynamicFieldConfig->{Name} },
                     LayoutObject => $LayoutObject,

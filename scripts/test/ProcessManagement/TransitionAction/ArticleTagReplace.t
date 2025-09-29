@@ -169,7 +169,7 @@ for my $Mail (qw(Inline HTML Plain HTML_ISO)) {
 
         # Article:
         IsVisibleForCustomer => 0,
-        Body =>
+        Body                 =>
             '<u>Der erste Artikel</u>:<br><OTRS_FIRST_ARTICLE_BODY><br><u>der letzte Artikel:</u><br> <OTRS_LAST_ARTICLE_BODY>',
         ContentType    => 'text/html; charset=ISO-8859-15',
         Subject        => '<OTRS_FIRST_ARTICLE_SUBJECT>',

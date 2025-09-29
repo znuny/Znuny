@@ -256,9 +256,9 @@ sub ArticleWriteAttachment {
                 change_time, change_by)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
-            \$Param{ArticleID}, \$Param{Filename}, \$Param{ContentType}, \$Param{Filesize},
-            \$Param{Content}, \$Param{ContentID}, \$Param{ContentAlternative},
-            \$Disposition, \$Param{UserID}, \$Param{UserID},
+            \$Param{ArticleID}, \$Param{Filename},  \$Param{ContentType}, \$Param{Filesize},
+            \$Param{Content},   \$Param{ContentID}, \$Param{ContentAlternative},
+            \$Disposition,      \$Param{UserID},    \$Param{UserID},
         ],
     );
     return 1;

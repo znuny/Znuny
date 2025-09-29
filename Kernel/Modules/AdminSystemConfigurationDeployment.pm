@@ -110,7 +110,7 @@ sub Run {
 
         my $SysConfigObject   = $Kernel::OM->Get('Kernel::System::SysConfig');
         my $SysConfigDBObject = $Kernel::OM->Get('Kernel::System::SysConfig::DB');
-        my $AdvancedMode      = $ParamObject->GetParam( Param => 'AdvancedMode' ) || '';
+        my $AdvancedMode      = $ParamObject->GetParam( Param => 'AdvancedMode' )      || '';
         my $DeploymentRestore = $ParamObject->GetParam( Param => 'DeploymentRestore' ) || '';
 
         my @ModifiedSettingNames;

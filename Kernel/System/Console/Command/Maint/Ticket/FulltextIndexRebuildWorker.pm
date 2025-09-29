@@ -17,7 +17,7 @@ use warnings;
 use parent qw(Kernel::System::Console::BaseCommand);
 
 use POSIX ":sys_wait_h";
-use Time::HiRes qw(sleep);
+use Time::HiRes                   qw(sleep);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (

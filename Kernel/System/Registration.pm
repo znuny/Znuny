@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -309,7 +309,7 @@ sub Register {
                         APIVersion  => $Self->{APIVersion},
                         State       => 'active',
                         OldUniqueID => $OldRegistration{UniqueID} || '',
-                        OldAPIKey   => $OldRegistration{APIKey} || '',
+                        OldAPIKey   => $OldRegistration{APIKey}   || '',
                         Token       => $Param{Token},
                         OTRSID      => $Param{OTRSID},
                         Type        => $Param{Type},
@@ -415,8 +415,8 @@ sub Register {
         APIKey             => $ResponseData->{APIKey},
         LastUpdateID       => $ResponseData->{LastUpdateID},
         LastUpdateTime     => $CurrentTimestamp,
-        Type               => $ResponseData->{Type} || $Param{Type},
-        Description        => $ResponseData->{Description} || $Param{Description},
+        Type               => $ResponseData->{Type}               || $Param{Type},
+        Description        => $ResponseData->{Description}        || $Param{Description},
         SupportDataSending => $ResponseData->{SupportDataSending} || $SupportDataSending,
         NextUpdateTime     => $NextUpdateTime,
     );

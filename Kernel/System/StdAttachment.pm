@@ -237,7 +237,7 @@ sub StdAttachmentUpdate {
         SQL => 'UPDATE standard_attachment SET name = ?, comments = ?, valid_id = ?, '
             . 'change_time = current_timestamp, change_by = ? WHERE id = ?',
         Bind => [
-            \$Param{Name}, \$Param{Comment},
+            \$Param{Name},    \$Param{Comment},
             \$Param{ValidID}, \$Param{UserID}, \$Param{ID},
         ],
     );

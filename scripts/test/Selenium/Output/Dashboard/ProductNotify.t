@@ -138,7 +138,7 @@ EOS
         # Make sure cache is correct.
         $Kernel::OM->Get('Kernel::System::Cache')->Delete(
             Type => 'DashboardProductNotify',
-            Key =>
+            Key  =>
                 "CloudService::PublicFeeds::Operation::ProductFeed::Language::en::Product::${Product}::Version::$Version",
         );
 

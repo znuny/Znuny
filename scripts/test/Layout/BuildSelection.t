@@ -291,7 +291,7 @@ my @Tests = (
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    '7', "\xA0\xA0\xA0\xA0Value2",
+                    '7',        "\xA0\xA0\xA0\xA0Value2",
                     $JSONFalse, $JSONFalse,
                     $JSONFalse,
                 ],
@@ -396,7 +396,7 @@ my @Tests = (
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    '7', 'Object1::AttributeB::Value2',
+                    '7',        'Object1::AttributeB::Value2',
                     $JSONFalse, $JSONFalse,
                     $JSONFalse,
                 ],
@@ -433,17 +433,17 @@ my @Tests = (
   <option value="a &amp; b">a &amp; b</option>
   <option value="c &amp; d" selected="selected">c &amp; d</option>
 </select>',
-        Success     => 1,
-        ExecuteJSON => 1,
+        Success      => 1,
+        ExecuteJSON  => 1,
         JSONResponse =>
             {
             'Select1' => [
                 [
-                    'a & b', 'a & b',
+                    'a & b',    'a & b',
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    'c & d', 'c & d',
+                    'c & d',   'c & d',
                     $JSONTrue, $JSONTrue, $JSONFalse,
                 ],
             ],
@@ -716,7 +716,7 @@ my @Tests = (
         JSONResponse => {
             'Select1' => [
                 [
-                    'Object1', 'Object1',
+                    'Object1',  'Object1',
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
@@ -744,7 +744,7 @@ my @Tests = (
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    'Object2', 'Object2',
+                    'Object2',  'Object2',
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
@@ -829,7 +829,7 @@ my @Tests = (
         JSONResponse => {
             'Select1' => [
                 [
-                    'Object1', 'Object1',
+                    'Object1',  'Object1',
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
@@ -939,7 +939,7 @@ my @Tests = (
         JSONResponse => {
             'Select1' => [
                 [
-                    'Object1', 'Object1',
+                    'Object1',  'Object1',
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
@@ -967,7 +967,7 @@ my @Tests = (
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    'Object2', 'Object2',
+                    'Object2',  'Object2',
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
@@ -1055,7 +1055,7 @@ my @Tests = (
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    '7', 'Objec[...]',
+                    '7',        'Objec[...]',
                     $JSONFalse, $JSONFalse,
                     $JSONFalse,
                 ],
@@ -1108,7 +1108,7 @@ my @Tests = (
         JSONResponse => {
             'Select1' => [
                 [
-                    'Object1', 'Object1',
+                    'Object1',  'Object1',
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
@@ -1133,7 +1133,7 @@ my @Tests = (
                 ],
                 [
                     'Object1::AttributeB::Value2', 'Objec[...]',
-                    $JSONFalse, $JSONFalse,
+                    $JSONFalse,                    $JSONFalse,
                     $JSONFalse,
                 ],
             ],
@@ -1237,7 +1237,7 @@ my @Tests = (
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    '7', 'Objec[...]',
+                    '7',        'Objec[...]',
                     $JSONFalse, $JSONFalse,
                     $JSONFalse,
                 ],
@@ -1314,7 +1314,7 @@ my @Tests = (
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    '7', "\xA0\xA0\xA0\xA0Value2",
+                    '7',        "\xA0\xA0\xA0\xA0Value2",
                     $JSONFalse, $JSONFalse,
                     $JSONFalse,
                 ],
@@ -1393,7 +1393,7 @@ my @Tests = (
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    '7', "\xA0\xA0\xA0\xA0Value2<test3>",
+                    '7',        "\xA0\xA0\xA0\xA0Value2<test3>",
                     $JSONFalse, $JSONFalse,
                     $JSONFalse,
                 ],
@@ -1486,7 +1486,7 @@ my @Tests = (
             'Select1' => [
                 [
                     'DeleteFilter', 'DELETE',
-                    $JSONFalse, $JSONFalse, $JSONFalse,
+                    $JSONFalse,     $JSONFalse, $JSONFalse,
                 ],
                 [
                     '-', '-',
@@ -1517,7 +1517,7 @@ my @Tests = (
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    '7', 'Objec[...]',
+                    '7',        'Objec[...]',
                     $JSONFalse, $JSONFalse,
                     $JSONFalse,
                 ],
@@ -1610,7 +1610,7 @@ my @Tests = (
             'Select1' => [
                 [
                     'DeleteFilter', 'DELETE',
-                    $JSONFalse, $JSONFalse, $JSONFalse,
+                    $JSONFalse,     $JSONFalse, $JSONFalse,
                 ],
                 [
                     '-', '-',
@@ -1641,7 +1641,7 @@ my @Tests = (
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    '7', 'Objec[...]',
+                    '7',        'Objec[...]',
                     $JSONFalse, $JSONFalse,
                     $JSONFalse,
                 ],

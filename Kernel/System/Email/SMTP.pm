@@ -218,7 +218,7 @@ sub Check {
             ObjectLogType => 'Connection',
             Priority      => 'Debug',
             Key           => 'Kernel::System::Email::' . $Self->{EmailModuleName},
-            Value =>
+            Value         =>
                 "Using SMTP authentication with user '$Self->{User}' and OAuth2 token config '$Self->{OAuth2TokenConfigName}'.",
         ) if $Param{CommunicationLogObject};
 

@@ -14,7 +14,7 @@ use warnings;
 use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -78,7 +78,7 @@ sub Run {
         },
         UpdateOk => {
             Priority => 'Success',
-            Data =>
+            Data     =>
                 $LayoutObject->{LanguageObject}->Translate( 'Your %s was successfully updated.', $OTRSBusinessLabel ),
         },
         UpdateError => {

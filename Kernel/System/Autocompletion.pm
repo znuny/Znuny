@@ -146,7 +146,7 @@ sub GetAutocompletionSettings {
         if ( !IsStringWithData( $ModuleSettings->{Trigger} ) ) {
             $LogObject->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Trigger is missing in configuration of autocompletion module in SysConfig option 'Frontend::RichText::Autocompletion::Modules###$Module'.",
             );
 
@@ -157,7 +157,7 @@ sub GetAutocompletionSettings {
         if ( exists( $AutocompletionSettings->{Triggers}->{ $ModuleSettings->{Trigger} } ) ) {
             $LogObject->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Trigger '$ModuleSettings->{Trigger}' is used for more than one autocompletion module in SysConfig option 'Frontend::RichText::Autocompletion::Modules'.",
             );
 

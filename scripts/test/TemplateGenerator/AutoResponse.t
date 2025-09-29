@@ -345,7 +345,7 @@ $Self->True(
         Timezone        => 'Europe/Berlin',
         Language        => 'de',
         ExpectedSubject => "[Ticket#$TicketNumber] $RandomID - 06.12.2018 13:00 (Europe/Berlin)",
-        ExpectedText =>
+        ExpectedText    =>
             '<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></head><body style="font-family:Geneva,Helvetica,Arial,sans-serif; font-size: 12px;">OTRS_TICKET_Created: 06.12.2018 13:00 (Europe/Berlin)<br />OTRS_TICKET_Changed: 06.12.2018 13:00 (Europe/Berlin)<br />OTRS_TICKET_DynamicField_'
             . $DynamicFieldName
             . ': 2018-12-03 16:00:00 (Europe/Berlin)<br />OTRS_TICKET_DynamicField_'
@@ -356,7 +356,7 @@ $Self->True(
         Timezone        => 'America/Bogota',
         Language        => 'es',
         ExpectedSubject => "[Ticket#$TicketNumber] $RandomID - 06/12/2018 - 07:00 (America/Bogota)",
-        ExpectedText =>
+        ExpectedText    =>
             '<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></head><body style="font-family:Geneva,Helvetica,Arial,sans-serif; font-size: 12px;">OTRS_TICKET_Created: 06/12/2018 - 07:00 (America/Bogota)<br />OTRS_TICKET_Changed: 06/12/2018 - 07:00 (America/Bogota)<br />OTRS_TICKET_DynamicField_'
             . $DynamicFieldName
             . ': 2018-12-03 10:00:00 (America/Bogota)<br />OTRS_TICKET_DynamicField_'
@@ -367,7 +367,7 @@ $Self->True(
         Timezone        => 'Asia/Bangkok',
         Language        => 'en',
         ExpectedSubject => "[Ticket#$TicketNumber] $RandomID - 12/06/2018 19:00 (Asia/Bangkok)",
-        ExpectedText =>
+        ExpectedText    =>
             '<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></head><body style="font-family:Geneva,Helvetica,Arial,sans-serif; font-size: 12px;">OTRS_TICKET_Created: 12/06/2018 19:00 (Asia/Bangkok)<br />OTRS_TICKET_Changed: 12/06/2018 19:00 (Asia/Bangkok)<br />OTRS_TICKET_DynamicField_'
             . $DynamicFieldName
             . ': 2018-12-03 22:00:00 (Asia/Bangkok)<br />OTRS_TICKET_DynamicField_'

@@ -40,8 +40,8 @@ sub Run {
 
     # print WebUserAgent settings if any
     my $ConfigObject           = $Kernel::OM->Get('Kernel::Config');
-    my $Timeout                = $ConfigObject->Get('WebUserAgent::Timeout') || '';
-    my $Proxy                  = $ConfigObject->Get('WebUserAgent::Proxy') || '';
+    my $Timeout                = $ConfigObject->Get('WebUserAgent::Timeout')                || '';
+    my $Proxy                  = $ConfigObject->Get('WebUserAgent::Proxy')                  || '';
     my $DisableSSLVerification = $ConfigObject->Get('WebUserAgent::DisableSSLVerification') || '';
 
     # remove credentials if any

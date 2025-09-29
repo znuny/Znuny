@@ -220,7 +220,7 @@ sub Run {
                     HistoryType          => 'AddNote',
                     HistoryComment       => 'Some free text!',
                     UserID               => $UserIDs[ int( rand($#UserIDs) ) ],
-                    NoAgentNotify => 1,    # if you don't want to send agent notifications
+                    NoAgentNotify        => 1,    # if you don't want to send agent notifications
                 );
 
                 if ( $Self->GetOption('mark-tickets-as-seen') ) {

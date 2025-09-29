@@ -284,7 +284,7 @@ my @Tests = (
             SearchType => 'XMLContent',
             Valid      => 1,
         },
-        ExpectedResultsInclude => [qw()],
+        ExpectedResultsInclude    => [qw()],
         ExpectedResultsNotInclude =>
             [qw(Ticket::WatcherGroup Ticket::NumberGenerator Daemon::Log::STDERR AdminEmail )],
         Success => 1,

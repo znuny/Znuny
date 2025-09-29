@@ -12,7 +12,7 @@ package Kernel::Output::HTML::ArticleAction::AgentTicketMessageLog;
 use strict;
 use warnings;
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(IsHashRefWithData);
 
 our @ObjectDependencies = (
@@ -111,7 +111,7 @@ sub GetConfig {
         ItemType    => 'Link',
         Description => Translatable('View message log details for this article'),
         Name        => Translatable('Message Log'),
-        Link =>
+        Link        =>
             "Action=AdminCommunicationLog;Subaction=Zoom;CommunicationID=$CommunicationID;ObjectLogID=$ObjectLogID"
     );
 

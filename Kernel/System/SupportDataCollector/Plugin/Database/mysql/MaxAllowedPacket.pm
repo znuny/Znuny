@@ -43,8 +43,8 @@ sub Run {
             )
         {
             $Self->AddResultProblem(
-                Label => Translatable('Maximum Query Size'),
-                Value => $Row[1] / 1024 / 1024 . ' MB',
+                Label   => Translatable('Maximum Query Size'),
+                Value   => $Row[1] / 1024 / 1024 . ' MB',
                 Message =>
                     Translatable("The setting 'max_allowed_packet' must be higher than 64 MB."),
             );

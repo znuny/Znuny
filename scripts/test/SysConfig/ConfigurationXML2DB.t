@@ -209,7 +209,7 @@ my @Tests = (
                 'ChangeBy'                 => 1,
                 'UserModificationPossible' => '0',
                 'UserPreferencesGroup'     => '',
-                'Description' =>
+                'Description'              =>
                     "Parameters with UTF8 \x{2202}\x{e7}\x{2248}\x{df}\x{10d}\x{107}\x{111}\x{161}\x{17e}\x{e5}",
                 'EffectiveValue' => {
                     Module         => 'Kernel::Output::HTML::Dashboard::TicketGeneric',
@@ -983,7 +983,7 @@ my @Tests = (
                 ExclusiveLockGUID        => '0',
                 ExclusiveLockUserID      => undef,
                 XMLFilename              => 'Sample.xml',
-                XMLContentRaw =>
+                XMLContentRaw            =>
                     '<Setting Name="TestWithLineBreaks" Required="0" Valid="1">
         <Description>Test.</Description>
         <Navigation>Core::CustomerUser</Navigation>
@@ -1022,7 +1022,7 @@ my @Tests = (
                                 {
                                     Item => [
                                         {
-                                            Key => 'Column',
+                                            Key     => 'Column',
                                             Content =>
                                                 'Other Settings',
                                         },
@@ -1032,7 +1032,7 @@ my @Tests = (
                                                 {
                                                     Item => [
                                                         {
-                                                            Key => '0',
+                                                            Key     => '0',
                                                             Content =>
                                                                 "\n                            off\n                        ",
                                                         },
@@ -1082,7 +1082,7 @@ my @Tests = (
                 ExclusiveLockGUID        => '0',
                 ExclusiveLockUserID      => undef,
                 XMLFilename              => 'Sample.xml',
-                XMLContentRaw =>
+                XMLContentRaw            =>
                     '<Setting Name="EmptyString" Required="0" Valid="1">
         <Description>Test.</Description>
         <Navigation>Dev</Navigation>
@@ -1135,7 +1135,7 @@ my @Tests = (
                 ExclusiveLockGUID        => '0',
                 ExclusiveLockUserID      => undef,
                 XMLFilename              => 'Sample.xml',
-                XMLContentRaw =>
+                XMLContentRaw            =>
                     '<Setting Name="EmptyHash" Required="0" Valid="1">
         <Description>Test.</Description>
         <Navigation>Dev</Navigation>
@@ -1188,7 +1188,7 @@ my @Tests = (
                 ExclusiveLockGUID        => '0',
                 ExclusiveLockUserID      => undef,
                 XMLFilename              => 'Sample.xml',
-                XMLContentRaw =>
+                XMLContentRaw            =>
                     '<Setting Name="EmptyArray" Required="0" Valid="1">
         <Description>Test.</Description>
         <Navigation>Dev</Navigation>
@@ -1241,7 +1241,7 @@ my @Tests = (
                 ExclusiveLockGUID        => '0',
                 ExclusiveLockUserID      => undef,
                 XMLFilename              => 'Sample.xml',
-                XMLContentRaw =>
+                XMLContentRaw            =>
                     '<Setting Name="Empty###String" Required="0" Valid="1">
         <Description>Test.</Description>
         <Navigation>Dev</Navigation>
@@ -1294,7 +1294,7 @@ my @Tests = (
                 ExclusiveLockGUID        => '0',
                 ExclusiveLockUserID      => undef,
                 XMLFilename              => 'Sample.xml',
-                XMLContentRaw =>
+                XMLContentRaw            =>
                     '<Setting Name="Empty###Hash" Required="0" Valid="1">
         <Description>Test.</Description>
         <Navigation>Dev</Navigation>
@@ -1347,7 +1347,7 @@ my @Tests = (
                 ExclusiveLockGUID        => '0',
                 ExclusiveLockUserID      => undef,
                 XMLFilename              => 'Sample.xml',
-                XMLContentRaw =>
+                XMLContentRaw            =>
                     '<Setting Name="Empty###Array" Required="0" Valid="1">
         <Description>Test.</Description>
         <Navigation>Dev</Navigation>

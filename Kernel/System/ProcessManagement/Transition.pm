@@ -12,7 +12,7 @@ package Kernel::System::ProcessManagement::Transition;
 use strict;
 use warnings;
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
@@ -340,7 +340,7 @@ sub TransitionCheck {
 
             $Self->DebugLog(
                 MessageType => 'Custom',
-                Message =>
+                Message     =>
                     "Transition:'$Transitions->{$TransitionEntityID}->{Name}' No Condition Linking"
                     . " as Condition->Type or Condition->ConditionLinking was found, using 'and' as"
                     . " default!",
@@ -390,7 +390,7 @@ sub TransitionCheck {
             if ( !$ActualCondition->{Type} ) {
                 $Self->DebugLog(
                     MessageType => 'Custom',
-                    Message =>
+                    Message     =>
                         "Transition:'$Transitions->{$TransitionEntityID}->{Name}' Condition:'$ConditionName'"
                         . " No Condition Type found, using 'and' as default",
                 );
@@ -434,7 +434,7 @@ sub TransitionCheck {
                 if ( !$ActualCondition->{Fields}->{$FieldName}->{Type} ) {
                     $Self->DebugLog(
                         MessageType => 'Custom',
-                        Message =>
+                        Message     =>
                             "Transition:'$Transitions->{$TransitionEntityID}->{Name}'"
                             . " Condition:'$ConditionName' Field:'$FieldName'"
                             . " No Field Type found, using 'String' as default",
@@ -611,7 +611,7 @@ sub TransitionCheck {
                     if ( ref $ActualCondition->{Fields}->{$FieldName}->{Match} ne 'HASH' ) {
                         $LogObject->Log(
                             Priority => 'error',
-                            Message =>
+                            Message  =>
                                 "$TransitionEntityID->Condition->$ConditionName->Fields->$FieldName: Match must"
                                 . " be a hash!",
                         );

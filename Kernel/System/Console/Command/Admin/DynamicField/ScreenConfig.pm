@@ -10,7 +10,7 @@ package Kernel::System::Console::Command::Admin::DynamicField::ScreenConfig;
 use strict;
 use warnings;
 
-use parent qw(Kernel::System::Console::BaseCommand);
+use parent                        qw(Kernel::System::Console::BaseCommand);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
@@ -57,7 +57,7 @@ sub Configure {
     );
 
     $Self->AddOption(
-        Name => 'set-mode',
+        Name        => 'set-mode',
         Description =>
             'Sets the mode for the given dynamic field(s) and screen(s). Valid modes are: 0 (disabled), 1 (enabled) and 2 (enabled and required).',
         Required   => 0,
@@ -66,7 +66,7 @@ sub Configure {
     );
 
     $Self->AddOption(
-        Name => 'remove-from-screens',
+        Name        => 'remove-from-screens',
         Description =>
             'Removes the given dynamic field(s) from the given screen(s).',
         Required => 0,

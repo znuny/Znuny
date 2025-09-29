@@ -14,7 +14,7 @@ use warnings;
 
 use Kernel::System::EmailParser;
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -773,7 +773,7 @@ sub Run {
                     DynamicFieldConfig   => $DynamicFieldConfig,
                     PossibleValuesFilter => $PossibleValuesFilter,
                     ParamObject          => $ParamObject,
-                    Mandatory =>
+                    Mandatory            =>
                         $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
                 );
 
@@ -800,7 +800,7 @@ sub Run {
                 my $DynamicFieldHTML = $DynamicFieldBackendObject->EditFieldRender(
                     DynamicFieldConfig   => $DynamicFieldConfig,
                     PossibleValuesFilter => $PossibleValuesFilter,
-                    ServerError          => $ValidationResult->{ServerError} || '',
+                    ServerError          => $ValidationResult->{ServerError}  || '',
                     ErrorMessage         => $ValidationResult->{ErrorMessage} || '',
                     Mandatory            => $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
                     LayoutObject         => $LayoutObject,
@@ -837,7 +837,7 @@ sub Run {
                 my $DynamicFieldHTML = $DynamicFieldBackendObject->EditFieldRender(
                     DynamicFieldConfig   => $DynamicFieldConfig,
                     PossibleValuesFilter => $PossibleValuesFilter,
-                    ServerError          => $ValidationResult->{ServerError} || '',
+                    ServerError          => $ValidationResult->{ServerError}  || '',
                     ErrorMessage         => $ValidationResult->{ErrorMessage} || '',
                     Mandatory            => ( $Class eq 'Validate_Required' ) ? 1 : 0,
                     Class                => $Class,
@@ -1932,13 +1932,13 @@ sub _Mask {
     if (
         ( $ConfigObject->Get('Ticket::Type') && $Config->{TicketType} )
         ||
-        ( $ConfigObject->Get('Ticket::Service')     && $Config->{Service} )     ||
+        ( $ConfigObject->Get('Ticket::Service') && $Config->{Service} )         ||
         ( $ConfigObject->Get('Ticket::Responsible') && $Config->{Responsible} ) ||
-        $Config->{Title}    ||
-        $Config->{Queue}    ||
-        $Config->{Owner}    ||
-        $Config->{State}    ||
-        $Config->{Priority} ||
+        $Config->{Title}                                                        ||
+        $Config->{Queue}                                                        ||
+        $Config->{Owner}                                                        ||
+        $Config->{State}                                                        ||
+        $Config->{Priority}                                                     ||
         scalar @{ $Param{TicketTypeDynamicFields} } > 0
         )
     {

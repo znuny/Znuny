@@ -323,9 +323,9 @@ sub HandleResponse {
             }
 
             $Success = $TicketObject->HistoryAdd(
-                Name        => $Param{Data}->{$Key}->{Name}        || $Param{Data}->{$Key}->{HistoryComment} || ' ',
-                HistoryType => $Param{Data}->{$Key}->{HistoryType} || 'AddNote',
-                TicketID    => $Self->{RequestData}->{Ticket}->{TicketID},
+                Name         => $Param{Data}->{$Key}->{Name} || $Param{Data}->{$Key}->{HistoryComment} || ' ',
+                HistoryType  => $Param{Data}->{$Key}->{HistoryType} || 'AddNote',
+                TicketID     => $Self->{RequestData}->{Ticket}->{TicketID},
                 CreateUserID => 1,
             );
         }

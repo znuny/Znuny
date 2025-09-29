@@ -28,7 +28,7 @@ sub Configure {
 
     $Self->Description('Run all generic agent jobs from a configuration file.');
     $Self->AddOption(
-        Name => 'configuration-module',
+        Name        => 'configuration-module',
         Description =>
             "Specify the name of the generic agent configuration module (e.g. 'Kernel::System::GenericAgent')",
         Required   => 1,

@@ -61,7 +61,7 @@ sub Run {
         }
     }
     my %GetParam         = %{ $Param{GetParam} };
-    my $Comment          = $Param{Comment} || '';
+    my $Comment          = $Param{Comment}          || '';
     my $AutoResponseType = $Param{AutoResponseType} || '';
 
     # get queue id and name
@@ -289,7 +289,7 @@ sub Run {
                 ObjectLogType => 'Message',
                 Priority      => 'Debug',
                 Key           => 'Kernel::System::PostMaster::NewTicket',
-                Value =>
+                Value         =>
                     "Ticket service won't be set to '$GetParam{'X-OTRS-Service'}' (does not exist or is invalid or is a child of invalid service).",
             );
 
@@ -308,7 +308,7 @@ sub Run {
         State        => $State,
         TypeID       => $TypeID,
         Service      => $GetParam{'X-OTRS-Service'} || '',
-        SLA          => $GetParam{'X-OTRS-SLA'} || '',
+        SLA          => $GetParam{'X-OTRS-SLA'}     || '',
         CustomerID   => $GetParam{'X-OTRS-CustomerNo'},
         CustomerUser => $GetParam{'X-OTRS-CustomerUser'},
         OwnerID      => $OwnerID,
@@ -395,7 +395,7 @@ Message
             ObjectLogType => 'Message',
             Priority      => 'Debug',
             Key           => 'Kernel::System::PostMaster::NewTicket',
-            Value =>
+            Value         =>
                 "Pending time update via 'X-OTRS-State-PendingTime'! State-PendingTime: $GetParam{'X-OTRS-State-PendingTime'}.",
         );
     }

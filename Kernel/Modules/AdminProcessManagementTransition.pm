@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -533,8 +533,8 @@ sub _ShowEdit {
         Name           => "ConditionFieldType[_INDEX_][_FIELDINDEX_]",
         Sort           => 'IndividualKey',
         SortIndividual => [
-            'Module',   'Regexp',   'String',      'Equal',
-            'NotEqual', 'Contains', 'NotContains', 'GreaterThan',
+            'Module',             'Regexp',   'String',      'Equal',
+            'NotEqual',           'Contains', 'NotContains', 'GreaterThan',
             'GreaterThanOrEqual', 'LessThan', 'LessThanOrEqual'
         ],
         PossibleNone => 1,
@@ -595,8 +595,8 @@ sub _ShowEdit {
                     Name           => "ConditionFieldType[$Condition][$Field]",
                     Sort           => 'IndividualKey',
                     SortIndividual => [
-                        'Module',   'Regexp',   'String',      'Equal',
-                        'NotEqual', 'Contains', 'NotContains', 'GreaterThan',
+                        'Module',             'Regexp',   'String',      'Equal',
+                        'NotEqual',           'Contains', 'NotContains', 'GreaterThan',
                         'GreaterThanOrEqual', 'LessThan', 'LessThanOrEqual'
                     ],
                     Translation  => 1,
@@ -665,8 +665,8 @@ sub _ShowEdit {
             Name           => 'ConditionFieldType[_INDEX_][_FIELDINDEX_]',
             Sort           => 'IndividualKey',
             SortIndividual => [
-                'Module',   'Regexp',   'String',      'Equal',
-                'NotEqual', 'Contains', 'NotContains', 'GreaterThan',
+                'Module',             'Regexp',   'String',      'Equal',
+                'NotEqual',           'Contains', 'NotContains', 'GreaterThan',
                 'GreaterThanOrEqual', 'LessThan', 'LessThanOrEqual'
             ],
             Class       => 'Modernize',

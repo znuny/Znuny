@@ -336,8 +336,8 @@ $Self->True(
 );
 
 my @ExpectedData = (
-    'CustomerUser', 'CustomerCompany', 'QueueData', 'TypeData', 'PriorityData', 'ServiceData',
-    'SLAData', 'OwnerData', 'ResponsibleData', 'CreateByData', 'Article'
+    'CustomerUser', 'CustomerCompany', 'QueueData',       'TypeData',     'PriorityData', 'ServiceData',
+    'SLAData',      'OwnerData',       'ResponsibleData', 'CreateByData', 'Article'
 );
 
 for my $Key ( sort @ExpectedData ) {

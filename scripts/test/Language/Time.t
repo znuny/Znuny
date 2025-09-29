@@ -70,7 +70,7 @@ my @Tests = (
             Minute => '<input value="12"/>',
             Second => '<input value="13"/>',
         },
-        ResultGet => 'Fr Jan 11:12:13 - 10.01.2014',
+        ResultGet    => 'Fr Jan 11:12:13 - 10.01.2014',
         ResultReturn =>
             '  <input value="11"/>:<input value="12"/>:<input value="13"/> - <input value="10"/>.<input value="1"/>.<input value="2014"/>',
     },

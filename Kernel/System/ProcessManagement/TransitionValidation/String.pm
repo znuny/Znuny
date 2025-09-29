@@ -124,7 +124,7 @@ sub Validate {
     {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "$Param{TransitionEntityID}->Condition->$Param{ConditionName}->Fields->$Param{FieldName}: Match must"
                 . " be a string if type is set to String!",
         );
