@@ -9653,6 +9653,7 @@ Obrigado pela ajuda!
         'Status',
         'Stream',
         'Su',
+        'Successful',
         'Sun',
         'Sunday',
         'Support Bundle',

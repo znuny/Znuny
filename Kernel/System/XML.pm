@@ -820,7 +820,7 @@ sub XMLParse {
             );
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "XML::Parser had errors, falling back to XML::Parser::Lite. Offending XML was: $Param{String}",
             );
         }

@@ -14,7 +14,7 @@ use warnings;
 use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Mail::Address;
 
 our $ObjectManagerDisabled = 1;
@@ -531,7 +531,7 @@ sub Form {
             DynamicFieldConfig   => $DynamicFieldConfig,
             PossibleValuesFilter => $PossibleValuesFilter,
             Value                => $Value,
-            Mandatory =>
+            Mandatory            =>
                 $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
             LayoutObject    => $LayoutObject,
             ParamObject     => $ParamObject,
@@ -894,7 +894,7 @@ sub SendEmail {
             DynamicFieldConfig   => $DynamicFieldConfig,
             PossibleValuesFilter => $PossibleValuesFilter,
             ParamObject          => $ParamObject,
-            Mandatory =>
+            Mandatory            =>
                 $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
         );
 
@@ -918,13 +918,13 @@ sub SendEmail {
             $DynamicFieldBackendObject->EditFieldRender(
             DynamicFieldConfig   => $DynamicFieldConfig,
             PossibleValuesFilter => $PossibleValuesFilter,
-            Mandatory =>
+            Mandatory            =>
                 $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
-            ServerError  => $ValidationResult->{ServerError}  || '',
-            ErrorMessage => $ValidationResult->{ErrorMessage} || '',
-            LayoutObject => $LayoutObject,
-            ParamObject  => $ParamObject,
-            AJAXUpdate   => 1,
+            ServerError     => $ValidationResult->{ServerError}  || '',
+            ErrorMessage    => $ValidationResult->{ErrorMessage} || '',
+            LayoutObject    => $LayoutObject,
+            ParamObject     => $ParamObject,
+            AJAXUpdate      => 1,
             UpdatableFields => $Self->_GetFieldsToUpdate(),
             );
     }
@@ -1836,7 +1836,7 @@ sub _Mask {
         YearPeriodFuture     => 5,
         Format               => 'DateInputFormatLong',
         DiffTime             => $ConfigObject->Get('Ticket::Frontend::PendingDiffTime') || 0,
-        Class                => $Param{Errors}->{DateInvalid} || ' ',
+        Class                => $Param{Errors}->{DateInvalid}                           || ' ',
         Validate             => 1,
         ValidateDateInFuture => 1,
     );

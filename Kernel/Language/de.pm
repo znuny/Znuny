@@ -9649,6 +9649,7 @@ Ihr Helpdesk-Team
         'Status',
         'Stream',
         'Su',
+        'Successful',
         'Sun',
         'Sunday',
         'Support Bundle',

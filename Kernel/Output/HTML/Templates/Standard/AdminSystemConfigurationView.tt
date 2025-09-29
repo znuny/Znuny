@@ -56,7 +56,7 @@
             [% END %]
 
             [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-                        <p> aaaaa [% Data.View | html %] bbbbbb </p>
+                        <p>[% Data.View | html %]</p>
             [% INCLUDE "SystemConfiguration/SettingsList.tt" %]
 
     </div>

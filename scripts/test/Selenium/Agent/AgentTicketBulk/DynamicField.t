@@ -72,7 +72,7 @@ push @TicketIDs, $HelperObject->TicketCreate(
 );
 
 my $DateTime = $TimeObject->CurrentTimestamp();
-my ($Date) = split /\ /, $DateTime;
+my ($Date)   = split /\ /, $DateTime;
 $Date .= ' 00:00:00';
 
 my %DynamicFieldValues = (

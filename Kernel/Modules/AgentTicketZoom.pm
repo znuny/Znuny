@@ -18,7 +18,7 @@ our $ObjectManagerDisabled = 1;
 use POSIX qw/ceil/;
 use Kernel::System::EmailParser;
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -513,8 +513,8 @@ sub Run {
     if ( $Self->{Subaction} eq 'ArticleFilterSet' ) {
 
         # get params
-        my $TicketID     = $ParamObject->GetParam( Param => 'TicketID' );
-        my $SaveDefaults = $ParamObject->GetParam( Param => 'SaveDefaults' );
+        my $TicketID                      = $ParamObject->GetParam( Param => 'TicketID' );
+        my $SaveDefaults                  = $ParamObject->GetParam( Param => 'SaveDefaults' );
         my @CommunicationChannelFilterIDs = $ParamObject->GetArray( Param => 'CommunicationChannelFilter' );
         my $CustomerVisibility            = $ParamObject->GetParam( Param => 'CustomerVisibilityFilter' );
         my @ArticleSenderTypeFilterIDs    = $ParamObject->GetArray( Param => 'ArticleSenderTypeFilter' );
@@ -586,8 +586,8 @@ sub Run {
     if ( $Self->{Subaction} eq 'EvenTypeFilterSet' ) {
 
         # get params
-        my $TicketID     = $ParamObject->GetParam( Param => 'TicketID' );
-        my $SaveDefaults = $ParamObject->GetParam( Param => 'SaveDefaults' );
+        my $TicketID           = $ParamObject->GetParam( Param => 'TicketID' );
+        my $SaveDefaults       = $ParamObject->GetParam( Param => 'SaveDefaults' );
         my @EventTypeFilterIDs = $ParamObject->GetArray( Param => 'EventTypeFilter' );
 
         # build session string
@@ -1014,7 +1014,7 @@ sub MaskAgentZoom {
             if ( !$Config->{Location} ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         "The configuration for $Config->{Module} must contain a Location, because it is marked as Async.",
                 );
                 next WIDGET;
@@ -1209,28 +1209,33 @@ sub MaskAgentZoom {
 
                 # check the configured priority for this item. The lowest ClusterPriority
                 # within the same cluster wins.
-                my $Priority = $MenuClusters{ $Menus{$Menu}->{ClusterName} }->{Priority} || 0;
+                my $Priority = $MenuClusters{ $Menus{$Menu}->{ClusterName} }->{Prio} || 0;
                 $Menus{$Menu}->{ClusterPriority} ||= 0;
                 if ( !$Priority || $Priority !~ /^\d{3}$/ || $Priority > $Menus{$Menu}->{ClusterPriority} ) {
                     $Priority = $Menus{$Menu}->{ClusterPriority};
                 }
-                $MenuClusters{ $Menus{$Menu}->{ClusterName} }->{Priority} = $Priority;
+                $MenuClusters{ $Menus{$Menu}->{ClusterName} }->{Prio} = $Priority;
                 $MenuClusters{ $Menus{$Menu}->{ClusterName} }->{Items}->{$Menu} = $Item;
             }
         }
 
         for my $Cluster ( sort keys %MenuClusters ) {
-            $ZoomMenuItems{ $MenuClusters{$Cluster}->{Priority} . $Cluster } = {
+            $ZoomMenuItems{ $MenuClusters{$Cluster}->{Prio} . $Cluster } = {
                 Name  => $Cluster,
                 Type  => 'Cluster',
                 Link  => '#',
                 Class => 'ClusterLink',
                 Items => $MenuClusters{$Cluster}->{Items},
+                Prio  => $MenuClusters{$Cluster}->{Prio},
             };
         }
 
-        # display all items
-        for my $Item ( sort keys %ZoomMenuItems ) {
+        # display all items, the lowest Prio will be displayed first
+        for my $Item (
+            sort { ( $ZoomMenuItems{$a}->{Prio} // 999 ) <=> ( $ZoomMenuItems{$b}->{Prio} // 999 ) }
+            keys %ZoomMenuItems
+            )
+        {
             if ( $ZoomMenuItems{$Item}->{ExternalLink} && $ZoomMenuItems{$Item}->{ExternalLink} == 1 ) {
                 $LayoutObject->Block(
                     Name => 'TicketMenuExternalLink',
@@ -1253,7 +1258,13 @@ sub MaskAgentZoom {
                     },
                 );
 
-                for my $SubItem ( sort keys %{ $ZoomMenuItems{$Item}->{Items} } ) {
+                for my $SubItem (
+                    sort {
+                        ( $ZoomMenuItems{$Item}->{Items}->{$a}->{Priority} // 999 )
+                            <=> ( $ZoomMenuItems{$Item}->{Items}->{$b}->{Priority} // 999 )
+                    } keys %{ $ZoomMenuItems{$Item}->{Items} }
+                    )
+                {
                     $LayoutObject->Block(
                         Name => 'TicketMenuSubContainerItem',
                         Data => $ZoomMenuItems{$Item}->{Items}->{$SubItem},

@@ -30,7 +30,7 @@ sub Configure {
     $Self->Description('Update dependencies in Kernel/cpan-lib.');
 
     $Self->AddOption(
-        Name => 'mode',
+        Name        => 'mode',
         Description =>
             "Update all dependencies (development), one dependency (single), only critical ones (stable), or just check for outdated modules (check).",
         Required   => 1,

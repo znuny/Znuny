@@ -156,7 +156,7 @@ $Selenium->RunTest(
             SenderType           => 'agent',
             IsVisibleForCustomer => 0,
             Subject              => $Subject,
-            Body =>
+            Body                 =>
                 "'maybe $MinCharString in an abbreviation' this is string with more than 30 characters $MaxCharString",
             ContentType    => 'text/plain; charset=ISO-8859-15',
             HistoryType    => 'OwnerUpdate',

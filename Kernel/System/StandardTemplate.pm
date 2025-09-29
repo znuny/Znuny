@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::System::Cache',
@@ -613,7 +613,7 @@ sub StandardTemplateImport {
             if ($QueueErrorMessage) {
                 $LogObject->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         $QueueErrorMessage . '.',
                 );
                 push @StandardTemplateErrors, $StandardTemplate->{Name};
@@ -666,7 +666,7 @@ sub StandardTemplateImport {
             if ($AttachmentErrorMessage) {
                 $LogObject->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         $AttachmentErrorMessage . '.',
                 );
                 push @StandardTemplateErrors, $StandardTemplate->{Name};
@@ -755,10 +755,10 @@ sub StandardTemplateImport {
 
     return {
         Success          => 1,
-        Added            => join( ', ', @AddedStandardTemplates ) || '',
-        Updated          => join( ', ', @UpdatedStandardTemplates ) || '',
+        Added            => join( ', ', @AddedStandardTemplates )      || '',
+        Updated          => join( ', ', @UpdatedStandardTemplates )    || '',
         NotUpdated       => join( ', ', @NotUpdatedStandardTemplates ) || '',
-        Errors           => join( ', ', @StandardTemplateErrors ) || '',
+        Errors           => join( ', ', @StandardTemplateErrors )      || '',
         AdditionalErrors => \@StandardTemplateAdditionalErrors,
     };
 }
@@ -1187,7 +1187,7 @@ sub StandardTemplateAttachmentLinkByTemplate {
         # which is worse case to handle
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error occurred while linking attachment with ID $AttachmentID to standard template with ID $Param{ID}.",
         ) if !$Success;
     }

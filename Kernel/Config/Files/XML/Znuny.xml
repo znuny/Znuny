@@ -305,6 +305,7 @@
                 <Item Key="PopupType"></Item>
                 <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
                 <Item Key="ClusterPriority">998</Item>
+                <Item Key="Prio">999</Item>
             </Hash>
         </Value>
     </Setting>
@@ -323,6 +324,7 @@
                 <Item Key="PopupType"></Item>
                 <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
                 <Item Key="ClusterPriority">999</Item>
+                <Item Key="Prio">999</Item>
             </Hash>
         </Value>
     </Setting>
@@ -3779,6 +3781,7 @@
                 <Item Key="Link">Action=AgentTicketMarkSeenUnseen;Subaction=Unseen;TicketID=[% Data.TicketID | html %]</Item>
                 <Item Key="Target"></Item>
                 <Item Key="PopupType"></Item>
+                <Item Key="Prio">001</Item>
             </Hash>
         </Value>
     </Setting>
@@ -3794,6 +3797,7 @@
                 <Item Key="Link">Action=AgentTicketMarkSeenUnseen;Subaction=Seen;TicketID=[% Data.TicketID | html %]</Item>
                 <Item Key="Target"></Item>
                 <Item Key="PopupType"></Item>
+                <Item Key="Prio">001</Item>
             </Hash>
         </Value>
     </Setting>

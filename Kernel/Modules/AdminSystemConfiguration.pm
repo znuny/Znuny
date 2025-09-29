@@ -64,7 +64,7 @@ sub Run {
 
         my $Category               = $ParamObject->GetParam( Param => 'Category' )               || '';
         my $UserModificationActive = $ParamObject->GetParam( Param => 'UserModificationActive' ) || '0';
-        my $IsValid = $ParamObject->GetParam( Param => 'IsValid' ) // undef;
+        my $IsValid                = $ParamObject->GetParam( Param => 'IsValid' ) // undef;
 
         my %Tree = $Kernel::OM->Get('Kernel::System::SysConfig')->ConfigurationNavigationTree(
             Category               => $Category,
@@ -209,8 +209,8 @@ sub Run {
         $Output .= $LayoutObject->Output(
             TemplateFile => 'AdminSystemConfigurationSpecialGroup',
             Data         => {
-                GroupName => $LayoutObject->{LanguageObject}->Translate('Invalid Settings'),
-                GroupLink => 'AdminSystemConfiguration;Subaction=Invalid',
+                GroupName         => $LayoutObject->{LanguageObject}->Translate('Invalid Settings'),
+                GroupLink         => 'AdminSystemConfiguration;Subaction=Invalid',
                 GroupEmptyMessage =>
                     $LayoutObject->{LanguageObject}->Translate("There are no invalid settings active at this time."),
                 Results     => scalar @SettingList,
@@ -340,8 +340,8 @@ sub Run {
         $Output .= $LayoutObject->Output(
             TemplateFile => 'AdminSystemConfigurationSpecialGroup',
             Data         => {
-                GroupName => $LayoutObject->{LanguageObject}->Translate('My favourite settings'),
-                GroupLink => 'AdminSystemConfiguration;Subaction=Favourites',
+                GroupName         => $LayoutObject->{LanguageObject}->Translate('My favourite settings'),
+                GroupLink         => 'AdminSystemConfiguration;Subaction=Favourites',
                 GroupEmptyMessage =>
                     $LayoutObject->{LanguageObject}->Translate("You currently don't have any favourite settings."),
                 Results     => scalar @SettingList,
@@ -440,8 +440,10 @@ sub Run {
 
         if ( scalar @SettingListInvalid ) {
             my $SettingsInvalid = join ', ', @SettingListInvalid;
-            $Output .= $LayoutObject->Notify( Info => $LayoutObject->{LanguageObject}
-                    ->Translate( "The following settings could not be found: %s", $SettingsInvalid ) );
+            $Output .= $LayoutObject->Notify(
+                Info => $LayoutObject->{LanguageObject}
+                    ->Translate( "The following settings could not be found: %s", $SettingsInvalid )
+            );
         }
 
         $Output .= $LayoutObject->Output(
@@ -523,7 +525,7 @@ sub Run {
         my $ConfigurationDumpYAML = $Kernel::OM->Get('Kernel::System::SysConfig')->ConfigurationDump(
             SkipDefaultSettings  => 1,    # Default settings are not needed.
             SkipModifiedSettings => 0,    # Modified settings should always be present.
-            SkipUserSettings => $ParamObject->GetParam( Param => 'SkipUserSettings' ) ? 0 : 1,
+            SkipUserSettings     => $ParamObject->GetParam( Param => 'SkipUserSettings' ) ? 0 : 1,
         );
 
         # Send the result to the browser.

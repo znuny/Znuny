@@ -50,7 +50,7 @@ sub Configure {
         HasValue    => 0,
     );
     $Self->AddOption(
-        Name => 'timeout',
+        Name        => 'timeout',
         Description =>
             "Timeout in seconds to kill the child process, that does the mail fetching (default: 600).",
         Required   => 0,

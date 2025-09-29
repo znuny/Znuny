@@ -125,7 +125,7 @@ Core.Installer = (function (TargetNS) {
     function CheckMailConfigCallback(json) {
         if (parseInt(json.Successful, 10) === 1) {
             Core.UI.Dialog.ShowAlert(
-                Core.Language.Translate('An Error Occurred'),
+                Core.Language.Translate('Successful'),
                 Core.Language.Translate('Mail check successful.')
             );
             $('fieldset.errormsg').hide();

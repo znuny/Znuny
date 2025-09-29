@@ -84,7 +84,7 @@ my @Tests = (
 
 for my $Test (@Tests) {
 
-    my $Request = << "EOF";
+    my $Request = <<"EOF";
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tic="http://www.otrs.org/TicketConnector/">
    <soapenv:Header/>
    <soapenv:Body>

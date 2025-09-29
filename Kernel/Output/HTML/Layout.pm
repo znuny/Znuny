@@ -16,7 +16,7 @@ use URI::Escape qw();
 use Digest::MD5 qw(md5_hex);
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -105,7 +105,7 @@ sub new {
     #   is none yet.
     if ( !$Self->{UserLanguage} ) {
         my @BrowserLanguages = split /\s*,\s*/, $Self->{Lang} || $ENV{HTTP_ACCEPT_LANGUAGE} || '';
-        my %Data             = %{ $ConfigObject->Get('DefaultUsedLanguages') };
+        my %Data = %{ $ConfigObject->Get('DefaultUsedLanguages') };
         LANGUAGE:
         for my $BrowserLang (@BrowserLanguages) {
             for my $Language ( reverse sort keys %Data ) {
@@ -146,10 +146,10 @@ sub new {
 
     # set charset if there is no charset given
     $Self->{UserCharset} = 'utf-8';
-    $Self->{Charset}     = $Self->{UserCharset};                            # just for compat.
-    $Self->{SessionID}   = $Param{SessionID} || '';
+    $Self->{Charset}     = $Self->{UserCharset};    # just for compat.
+    $Self->{SessionID}   = $Param{SessionID}   || '';
     $Self->{SessionName} = $Param{SessionName} || 'SessionID';
-    $Self->{CGIHandle}   = $ENV{SCRIPT_NAME} || 'No-$ENV{"SCRIPT_NAME"}';
+    $Self->{CGIHandle}   = $ENV{SCRIPT_NAME}   || 'No-$ENV{"SCRIPT_NAME"}';
 
     # baselink
     $Self->{Baselink} = $Self->{CGIHandle} . '?';
@@ -409,7 +409,7 @@ EOF
     if ( !-e $Self->{TemplateDir} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "No existing template directory found ('$Self->{TemplateDir}')!.
                 Default theme used instead.",
         );
@@ -1886,7 +1886,7 @@ sub Print {
 
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         "Please add a template list to output filter $FilterConfig->{Module} "
                         . "to improve performance. Use ALL if OutputFilter should modify all "
                         . "templates of the system (deprecated).",
@@ -2008,7 +2008,7 @@ sub Ascii2Html {
 
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         "Please add a template list to output filter $FilterConfig->{Module} "
                         . "to improve performance. Use ALL if OutputFilter should modify all "
                         . "templates of the system (deprecated).",
@@ -2172,7 +2172,7 @@ sub LinkQuote {
 
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         "Please add a template list to output filter $FilterConfig->{Module} "
                         . "to improve performance. Use ALL if OutputFilter should modify all "
                         . "templates of the system (deprecated).",
@@ -2871,7 +2871,7 @@ sub PageNavBar {
     my $Pages      = int( ( $Param{AllHits} / $Param{PageShown} ) + 0.99999 );
     my $Page       = int( ( $Param{StartHit} / $Param{PageShown} ) + 0.99999 );
     my $WindowSize = $Param{WindowSize} || 5;
-    my $IDPrefix   = $Param{IDPrefix} || 'Generic';
+    my $IDPrefix   = $Param{IDPrefix}   || 'Generic';
 
     # build Results (1-5 or 16-30)
     if ( $Param{AllHits} >= ( $Param{StartHit} + $Param{PageShown} ) ) {
@@ -2893,8 +2893,8 @@ sub PageNavBar {
     my $WindowStart = sprintf( "%.0f", ( $Param{StartHit} / $Param{PageShown} ) );
     $WindowStart = int( ( $WindowStart / $WindowSize ) ) + 1;
     $WindowStart = ( $WindowStart * $WindowSize ) - ($WindowSize);
-    my $Action = $Param{Action} || '';
-    my $Link   = $Param{Link}   || '';
+    my $Action   = $Param{Action} || '';
+    my $Link     = $Param{Link}   || '';
     my $Baselink = "$Self->{Baselink}$Action;$Link";
     my $i        = 0;
     my %PaginationData;
@@ -3501,7 +3501,7 @@ sub TransformDateSelection {
                 Year     => $Param{ $Prefix . 'Year' },
                 Month    => $Param{ $Prefix . 'Month' },
                 Day      => $Param{ $Prefix . 'Day' },
-                Hour     => $Param{ $Prefix . 'Hour' } || 0,
+                Hour     => $Param{ $Prefix . 'Hour' }   || 0,
                 Minute   => $Param{ $Prefix . 'Minute' } || 0,
                 Second   => $Param{ $Prefix . 'Second' } || 0,
                 TimeZone => $Self->{UserTimeZone},
@@ -3588,14 +3588,14 @@ sub BuildDateSelection {
 
     my $DateInputStyle = $ConfigObject->Get('TimeInputFormat');
     my $MinuteStep     = $ConfigObject->Get('TimeInputMinutesStep');
-    my $Prefix         = $Param{Prefix} || '';
+    my $Prefix         = $Param{Prefix}   || '';
     my $DiffTime       = $Param{DiffTime} || 0;
     my $Format         = defined( $Param{Format} ) ? $Param{Format} : 'DateInputFormatLong';
-    my $Area           = $Param{Area} || 'Agent';
+    my $Area           = $Param{Area}                   || 'Agent';
     my $Optional       = $Param{ $Prefix . 'Optional' } || 0;
     my $Required       = $Param{ $Prefix . 'Required' } || 0;
-    my $Used           = $Param{ $Prefix . 'Used' } || 0;
-    my $Class          = $Param{ $Prefix . 'Class' } || '';
+    my $Used           = $Param{ $Prefix . 'Used' }     || 0;
+    my $Class          = $Param{ $Prefix . 'Class' }    || '';
 
     # Defines, if the date selection should be validated on client side with JS
     my $Validate = $Param{Validate} || 0;
@@ -3648,7 +3648,7 @@ sub BuildDateSelection {
                 Year   => $Param{ $Prefix . 'Year' },
                 Month  => $Param{ $Prefix . 'Month' },
                 Day    => $Param{ $Prefix . 'Day' },
-                Hour   => $Param{ $Prefix . 'Hour' } || 0,
+                Hour   => $Param{ $Prefix . 'Hour' }   || 0,
                 Minute => $Param{ $Prefix . 'Minute' } || 0,
                 Second => $Param{ $Prefix . 'Second' } || 0,
             },
@@ -4847,7 +4847,7 @@ sub CustomerNavigationBar {
             if ( $ItemSub->{Link} ) {
                 if (
                     $ItemSub->{Link} =~ /Action=$Self->{Action}/
-                    && $ItemSub->{Link} =~ /$Self->{Subaction}/    # Subaction can be empty
+                    && $ItemSub->{Link} =~ /$Self->{Subaction}/       # Subaction can be empty
                     )
                 {
                     $NavBarModule{$Item}->{Class} .= ' Selected';
@@ -6423,8 +6423,8 @@ sub SetRichTextParameters {
             '-',
             'insertImage',         'horizontalLine', 'blockQuote',
             '|',                   'findAndReplace', 'fontColor',
-            'fontBackgroundColor', 'removeFormat',   '|', 'showBlocks', 'sourceEditing', 'specialCharacters',
-            '|',                   'heading',        'fontFamily', 'fontSize', '|', 'fullscreen',
+            'fontBackgroundColor', 'removeFormat',   '|',          'showBlocks', 'sourceEditing', 'specialCharacters',
+            '|',                   'heading',        'fontFamily', 'fontSize',   '|',             'fullscreen',
         );
 
         @ToolbarWithoutImage = (
@@ -6433,10 +6433,10 @@ sub SetRichTextParameters {
             'indent', '|',            'alignment:left', 'alignment:right', 'alignment:center', 'alignment:justify',
             '|',      'link',         'undo',           'redo',            'selectAll',
             '-',
-            'horizontalLine',      'blockQuote',
+            'horizontalLine', 'blockQuote',
             '|',                   'findAndReplace', 'fontColor',
-            'fontBackgroundColor', 'removeFormat', '|', 'showBlocks', 'sourceEditing', 'specialCharacters',
-            '|',                   'heading', 'fontFamily', 'fontSize', '|', 'fullscreen',
+            'fontBackgroundColor', 'removeFormat',   '|',          'showBlocks', 'sourceEditing', 'specialCharacters',
+            '|',                   'heading',        'fontFamily', 'fontSize',   '|',             'fullscreen',
         );
     }
     else {
@@ -6450,9 +6450,9 @@ sub SetRichTextParameters {
             'selectAll',
             '-',
             'blockQuote',    '|',
-            'heading',       'fontFamily', 'fontSize', '|',
+            'heading',       'fontFamily',          'fontSize',     '|',
             'fontColor',     'fontBackgroundColor', 'removeFormat', '|',
-            'sourceEditing', 'specialCharacters', '|', 'fullscreen',
+            'sourceEditing', 'specialCharacters',   '|',            'fullscreen',
         );
         @ToolbarWithoutImage = (
             'bold',            'italic',           'underline',         'strikethrough',
@@ -6460,13 +6460,13 @@ sub SetRichTextParameters {
             'outdent',         'indent',           '|',                 'alignment:left',
             'alignment:right', 'alignment:center', 'alignment:justify', '|',
             'link',            '|',                'horizontalLine',
-            '|',               'undo',             'redo',              '|',
+            '|',               'undo',             'redo', '|',
             'selectAll',
             '-',
             'blockQuote',    '|',
-            'heading',       'fontFamily', 'fontSize', '|',
+            'heading',       'fontFamily',          'fontSize',     '|',
             'fontColor',     'fontBackgroundColor', 'removeFormat', '|',
-            'sourceEditing', 'specialCharacters', '|', 'fullscreen',
+            'sourceEditing', 'specialCharacters',   '|',            'fullscreen',
         );
     }
 
@@ -6585,8 +6585,8 @@ sub CustomerSetRichTextParameters {
             '-',
             'insertImage',         'horizontalLine', 'blockQuote',
             '|',                   'findAndReplace', 'fontColor',
-            'fontBackgroundColor', 'removeFormat',   '|', 'showBlocks', 'sourceEditing', 'specialCharacters',
-            '|',                   'heading',        'fontFamily', 'fontSize', '|', 'fullscreen',
+            'fontBackgroundColor', 'removeFormat',   '|',          'showBlocks', 'sourceEditing', 'specialCharacters',
+            '|',                   'heading',        'fontFamily', 'fontSize',   '|',             'fullscreen',
         );
 
         @ToolbarWithoutImage = (
@@ -6595,10 +6595,10 @@ sub CustomerSetRichTextParameters {
             'indent', '|',            'alignment:left', 'alignment:right', 'alignment:center', 'alignment:justify',
             '|',      'link',         'undo',           'redo',            'selectAll',
             '-',
-            'horizontalLine',      'blockQuote',
+            'horizontalLine', 'blockQuote',
             '|',                   'findAndReplace', 'fontColor',
-            'fontBackgroundColor', 'removeFormat', '|', 'showBlocks', 'sourceEditing', 'specialCharacters',
-            '|',                   'heading', 'fontFamily', 'fontSize', '|', 'fullscreen',
+            'fontBackgroundColor', 'removeFormat',   '|',          'showBlocks', 'sourceEditing', 'specialCharacters',
+            '|',                   'heading',        'fontFamily', 'fontSize',   '|',             'fullscreen',
         );
     }
     else {
@@ -6612,9 +6612,9 @@ sub CustomerSetRichTextParameters {
             'selectAll',
             '-',
             'blockQuote',    '|',
-            'heading',       'fontFamily', 'fontSize', '|',
+            'heading',       'fontFamily',          'fontSize',     '|',
             'fontColor',     'fontBackgroundColor', 'removeFormat', '|',
-            'sourceEditing', 'specialCharacters', '|', 'fullscreen',
+            'sourceEditing', 'specialCharacters',   '|',            'fullscreen',
         );
         @ToolbarWithoutImage = (
             'bold',            'italic',           'underline',         'strikethrough',
@@ -6622,13 +6622,13 @@ sub CustomerSetRichTextParameters {
             'outdent',         'indent',           '|',                 'alignment:left',
             'alignment:right', 'alignment:center', 'alignment:justify', '|',
             'link',            '|',                'horizontalLine',
-            '|',               'undo',             'redo',              '|',
+            '|',               'undo',             'redo', '|',
             'selectAll',
             '-',
             'blockQuote',    '|',
-            'heading',       'fontFamily', 'fontSize', '|',
+            'heading',       'fontFamily',          'fontSize',     '|',
             'fontColor',     'fontBackgroundColor', 'removeFormat', '|',
-            'sourceEditing', 'specialCharacters', '|', 'fullscreen',
+            'sourceEditing', 'specialCharacters',   '|',            'fullscreen',
         );
     }
 

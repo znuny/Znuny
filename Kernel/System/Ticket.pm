@@ -23,7 +23,7 @@ use parent qw(
     Kernel::System::Ticket::TicketACL
 );
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
@@ -589,10 +589,10 @@ sub TicketCreate {
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, 0, 0, 0, ?, ?, 0, ?,
                 current_timestamp, ?, current_timestamp, ?)',
         Bind => [
-            \$Param{TN}, \$Param{Title}, \$Param{TypeID}, \$Param{QueueID},
+            \$Param{TN},         \$Param{Title},   \$Param{TypeID}, \$Param{QueueID},
             \$Param{LockID},     \$Param{OwnerID}, \$Param{ResponsibleID},
             \$Param{PriorityID}, \$Param{StateID}, \$Param{ServiceID},
-            \$Param{SLAID}, \$ArchiveFlag, \$Param{UserID}, \$Param{UserID},
+            \$Param{SLAID},      \$ArchiveFlag,    \$Param{UserID}, \$Param{UserID},
         ],
     );
 
@@ -650,7 +650,7 @@ sub TicketCreate {
     if ( $Param{CustomerNo} || $Param{CustomerID} || $Param{CustomerUser} ) {
         $Self->TicketCustomerSet(
             TicketID => $TicketID,
-            No       => $Param{CustomerNo} || $Param{CustomerID} || '',
+            No       => $Param{CustomerNo}   || $Param{CustomerID} || '',
             User     => $Param{CustomerUser} || '',
             UserID   => $Param{UserID},
         );
@@ -2524,7 +2524,7 @@ sub TicketServiceList {
 
     # Return all Services, filtering by KeepChildren config.
     my %AllServices = $ServiceObject->ServiceList(
-        UserID => 1,
+        UserID       => 1,
         KeepChildren =>
             $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Service::KeepChildren'),
     );
@@ -2649,7 +2649,7 @@ sub TicketServiceSet {
     $Self->HistoryAdd(
         TicketID    => $Param{TicketID},
         HistoryType => 'ServiceUpdate',
-        Name =>
+        Name        =>
             "\%\%$TicketNew{Service}\%\%$Param{ServiceID}\%\%$Ticket{Service}\%\%$Ticket{ServiceID}",
         CreateUserID => $Param{UserID},
     );
@@ -7495,7 +7495,7 @@ sub TicketArticleStorageSwitch {
         if (%Index) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Attachments of TicketID:$Param{TicketID}/ArticleID:$Article->{ArticleID} already in $Param{Destination}!",
             );
         }
@@ -7565,7 +7565,7 @@ sub TicketArticleStorageSwitch {
             else {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         "Corrupt file: $Attachment{Filename} (TicketID:$Param{TicketID}/ArticleID:$Article->{ArticleID})!",
                 );
 
@@ -7586,7 +7586,7 @@ sub TicketArticleStorageSwitch {
         if (%MD5Sums) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Not all files are moved! (TicketID:$Param{TicketID}/ArticleID:$Article->{ArticleID})!",
             );
 
@@ -7617,7 +7617,7 @@ sub TicketArticleStorageSwitch {
             if ( $PlainMD5Sum ne $PlainMD5SumVerify ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         "Corrupt plain file: ArticleID: $Article->{ArticleID} ($PlainMD5Sum/$PlainMD5SumVerify)",
                 );
 

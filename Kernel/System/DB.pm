@@ -198,7 +198,7 @@ sub Connect {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Caller   => 1,
             Priority => 'debug',
-            Message =>
+            Message  =>
                 "DB.pm->Connect: DSN: $Self->{DSN}, User: $Self->{USER}, Pw: $Self->{PW}, DB Type: $Self->{'DB::Type'};",
         );
     }
@@ -1713,7 +1713,7 @@ sub QueryCondition {
                 if ( $SQL =~ m/ OR $/ ) {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => 'notice',
-                        Message =>
+                        Message  =>
                             "Invalid condition '$Param{Value}', simultaneous usage both AND and OR conditions!",
                     );
                     return "1=0";
@@ -1728,7 +1728,7 @@ sub QueryCondition {
                 if ( $SQL =~ m/ AND $/ ) {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => 'notice',
-                        Message =>
+                        Message  =>
                             "Invalid condition '$Param{Value}', simultaneous usage both AND and OR conditions!",
                     );
                     return "1=0";

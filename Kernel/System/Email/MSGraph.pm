@@ -122,7 +122,7 @@ sub Send {
             ObjectLogType => 'Connection',
             Priority      => 'Error',
             Key           => ref $Self,
-            Value =>
+            Value         =>
                 "OAuth2 token for config with name '$SendmailModuleConfig{OAuth2TokenConfigName}' could not be retrieved.",
         );
 
@@ -186,7 +186,7 @@ sub Send {
 
     my $Base64EncodedMIMEMessage = MIME::Base64::encode_base64($MIMEMessage);
 
-    my $To = join ', ', @{ $Param{ToArray} };
+    my $To        = join ', ', @{ $Param{ToArray} };
     my $EmailSent = $MSGraphObject->ExecuteOperation(
         CommunicationLogObject => $Param{CommunicationLogObject},
         Host                   => $SendmailModuleConfig{Host},

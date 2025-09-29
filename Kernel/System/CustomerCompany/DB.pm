@@ -884,7 +884,7 @@ sub CustomerCompanyAdd {
     # log notice
     $Kernel::OM->Get('Kernel::System::Log')->Log(
         Priority => 'info',
-        Message =>
+        Message  =>
             "CustomerCompany: '$Param{CustomerCompanyName}/$Param{CustomerID}' created successfully ($Param{UserID})!",
     );
 
@@ -957,7 +957,7 @@ sub CustomerCompanyUpdate {
     # log notice
     $Kernel::OM->Get('Kernel::System::Log')->Log(
         Priority => 'info',
-        Message =>
+        Message  =>
             "CustomerCompany: '$Param{CustomerCompanyName}/$Param{CustomerID}' updated successfully ($Param{UserID})!",
     );
 

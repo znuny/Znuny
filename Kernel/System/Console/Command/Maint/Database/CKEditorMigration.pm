@@ -95,9 +95,9 @@ sub Run {
         elsif ( $Result->{Success} ) {
             push @{ $Summary{Success} }, {
                 Entity      => $Entity,
-                Migrated    => $Result->{Migrated} || [],
+                Migrated    => $Result->{Migrated}    || [],
                 NotMigrated => $Result->{NotMigrated} || [],
-                Empty       => $Result->{Empty} || [],
+                Empty       => $Result->{Empty}       || [],
             };
 
             if ( IsArrayRefWithData( $Result->{NotMigrated} ) ) {

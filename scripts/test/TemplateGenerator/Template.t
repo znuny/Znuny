@@ -173,13 +173,13 @@ my @Tests = (
         ExpectedResult => 'Thank you for your email. ' . $ConfigObject->Get('ScriptAlias'),
     },
     {
-        Name => 'Supported tags - <OTRS_TICKET_*> without TicketID',
+        Name         => 'Supported tags - <OTRS_TICKET_*> without TicketID',
         TemplateText =>
             'Options of the ticket data (e. g. <OTRS_TICKET_TicketNumber>, <OTRS_TICKET_TicketID>, <OTRS_TICKET_Queue>)',
         ExpectedResult => 'Options of the ticket data (e. g. -, -, -)',
     },
     {
-        Name => 'Supported tags - <OTRS_TICKET_*>  with TicketID',
+        Name         => 'Supported tags - <OTRS_TICKET_*>  with TicketID',
         TemplateText =>
             'Options of the ticket data (e. g. <OTRS_TICKET_TicketNumber>, <OTRS_TICKET_TicketID>, <OTRS_TICKET_Queue>, <OTRS_TICKET_State>)',
         ExpectedResult => "Options of the ticket data (e. g. $TicketNumber, $TicketID, Raw, open)",
@@ -322,7 +322,7 @@ my @Tests = (
         }
     },
     {
-        Name => 'Test supported tag - <OTRS_EMAIL_DATE[*]> with time zones',
+        Name         => 'Test supported tag - <OTRS_EMAIL_DATE[*]> with time zones',
         TemplateText =>
             'Belgrade: <OTRS_EMAIL_DATE[Europe/Belgrade]>; Denver: <OTRS_EMAIL_DATE[America/Denver]>; Tokyo: <OTRS_EMAIL_DATE[Asia/Tokyo]>',
         ExpectedResult =>
@@ -331,7 +331,7 @@ my @Tests = (
         TicketID => $TicketID,
     },
     {
-        Name => 'Test supported tag - <OTRS_EMAIL_DATE> without time zone',
+        Name         => 'Test supported tag - <OTRS_EMAIL_DATE> without time zone',
         TemplateText =>
             'No TimeZone specified (UTC): <OTRS_EMAIL_DATE>',
         ExpectedResult => 'No TimeZone specified (UTC): Friday, January 10, 2020 at 16:00:00 (UTC)',

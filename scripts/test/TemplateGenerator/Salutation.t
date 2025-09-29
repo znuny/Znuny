@@ -105,7 +105,7 @@ my @Tests = (
         ExpectedResult => 'Test: - - - -',
     },
     {
-        Name => 'Test supported tags - <OTRS_TICKET_*>  with TicketID',
+        Name       => 'Test supported tags - <OTRS_TICKET_*>  with TicketID',
         Salutation =>
             'Options of the ticket data (e. g. <OTRS_TICKET_TicketNumber>, <OTRS_TICKET_TicketID>, <OTRS_TICKET_Queue>, <OTRS_TICKET_State>)',
     },
@@ -127,7 +127,7 @@ for my $Test (@Tests) {
     my $SalutationID = $SalutationObject->SalutationAdd(
         Name => $HelperObject->GetRandomID() . '-Salutation',
         Text => $Test->{Salutation},
-        ,
+
         ContentType => 'text/plain; charset=utf-8',
         Comment     => 'some comment',
         ValidID     => 1,

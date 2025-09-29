@@ -181,7 +181,7 @@ sub ObjectDataGet {
     if ( !$ObjectID ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Unable to determine object id for object name $UserID and type $Param{DynamicFieldConfig}->{ObjectType}!"
         );
         return;

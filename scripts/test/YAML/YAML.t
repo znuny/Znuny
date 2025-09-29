@@ -70,9 +70,9 @@ my @Tests = (
         SuccessDecode => 1,
     },
     {
-        Name          => 'Very long string',      # see https://bugzilla.redhat.com/show_bug.cgi?id=192400
+        Name          => 'Very long string',    # see https://bugzilla.redhat.com/show_bug.cgi?id=192400
         Data          => ' äø<>"\'' x 40_000,
-        SkipEngine    => 'YAML',                  # This test does not run with plain YAML, see the bug above
+        SkipEngine    => 'YAML',                # This test does not run with plain YAML, see the bug above
         SuccessDecode => 1,
     },
     {

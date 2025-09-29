@@ -14,7 +14,7 @@ use warnings;
 use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -834,8 +834,8 @@ sub Run {
                     Data => {
                         %Param,
                         OrderBy              => $OrderBy,
-                        ColumnName           => $Column || '',
-                        CSS                  => $CSS || '',
+                        ColumnName           => $Column         || '',
+                        CSS                  => $CSS            || '',
                         ColumnNameTranslated => $TranslatedWord || $Column,
                         Title                => $Title,
                     },

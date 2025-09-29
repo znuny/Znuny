@@ -14,7 +14,7 @@ use utf8;
 
 use File::Basename;
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
@@ -326,12 +326,12 @@ sub _EditTokenConfig {
     $Output .= $LayoutObject->Output(
         TemplateFile => 'AdminOAuth2TokenManagement/Edit',
         Data         => {
-            ID           => $TokenConfigID,
-            TemplateName => $TokenConfig{Config}->{TemplateName},
-            AuthFlow     => $TokenConfig{Config}->{AuthFlow},
-            Name         => $TokenConfig{Name},
-            ClientID     => $TokenConfig{Config}->{ClientID},
-            ClientSecret => $TokenConfig{Config}->{ClientSecret},
+            ID                          => $TokenConfigID,
+            TemplateName                => $TokenConfig{Config}->{TemplateName},
+            AuthFlow                    => $TokenConfig{Config}->{AuthFlow},
+            Name                        => $TokenConfig{Name},
+            ClientID                    => $TokenConfig{Config}->{ClientID},
+            ClientSecret                => $TokenConfig{Config}->{ClientSecret},
             AuthorizationCodeRequestURL =>
                 $TokenConfig{Config}->{Requests}->{AuthorizationCode}->{Request}->{URL},
             TokenByAuthorizationCodeRequestURL =>
@@ -403,9 +403,9 @@ sub _AddTokenConfigByTemplateFile {
             AuthFlow => $TokenConfigTemplate->{Config}->{AuthFlow},
 
             # Leave name initially empty for admin to fill out.
-            Name         => '',
-            ClientID     => $TokenConfigTemplate->{Config}->{ClientID},
-            ClientSecret => $TokenConfigTemplate->{Config}->{ClientSecret},
+            Name                        => '',
+            ClientID                    => $TokenConfigTemplate->{Config}->{ClientID},
+            ClientSecret                => $TokenConfigTemplate->{Config}->{ClientSecret},
             AuthorizationCodeRequestURL =>
                 $TokenConfigTemplate->{Config}->{Requests}->{AuthorizationCode}->{Request}->{URL},
             TokenByAuthorizationCodeRequestURL =>
@@ -416,7 +416,7 @@ sub _AddTokenConfigByTemplateFile {
                 $TokenConfigTemplate->{Config}->{Requests}->{TokenByClientCredentials}->{Request}->{URL},
             Scope =>
                 $TokenConfigTemplate->{Config}->{Scope},
-            NotifyOnExpiredToken => $TokenConfigTemplate->{Config}->{Notifications}->{NotifyOnExpiredToken},
+            NotifyOnExpiredToken        => $TokenConfigTemplate->{Config}->{Notifications}->{NotifyOnExpiredToken},
             NotifyOnExpiredRefreshToken =>
                 $TokenConfigTemplate->{Config}->{Notifications}->{NotifyOnExpiredRefreshToken},
             ValidIDSelection => $ValidIDSelection,
@@ -497,7 +497,7 @@ sub _SaveTokenConfig {
         if (
             %TokenConfig
             && (
-                !$GetParam{ID}    # new token config to be stored
+                !$GetParam{ID}      # new token config to be stored
                 || $TokenConfig{ $OAuth2TokenConfigObject->{Identifier} }
                 != $GetParam{ID}    # token config update
             )

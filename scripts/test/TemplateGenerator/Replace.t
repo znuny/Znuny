@@ -584,7 +584,7 @@ mailto-Link <a href="mailto:skywalker@otrs.org?body=From%3A%20test%40home.com">E
         },
         RichText => 1,
         Template => 'Test &lt;OTRS_AGENT_BODY[7]&gt; - &lt;OTRS_CUSTOMER_BODY[7]&gt;',
-        Result =>
+        Result   =>
             'Test <div  type="cite" style="border:none;border-left:solid blue 1.5pt;padding:0cm 0cm 0cm 4.0pt"><p>Line1</p>
 <p>Line2</p>
 <p>Line3</p>

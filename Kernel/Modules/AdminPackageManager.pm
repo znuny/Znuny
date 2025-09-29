@@ -14,7 +14,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 use parent('Kernel::System::AsynchronousExecutor');
 
@@ -80,8 +80,8 @@ sub Run {
     # view diff file
     # ------------------------------------------------------------ #
     if ( $Self->{Subaction} eq 'ViewDiff' ) {
-        my $Name    = $ParamObject->GetParam( Param => 'Name' )    || '';
-        my $Version = $ParamObject->GetParam( Param => 'Version' ) || '';
+        my $Name     = $ParamObject->GetParam( Param => 'Name' )    || '';
+        my $Version  = $ParamObject->GetParam( Param => 'Version' ) || '';
         my $Location = $ParamObject->GetParam( Param => 'Location' );
 
         # get package
@@ -177,8 +177,8 @@ sub Run {
     # view package
     # ------------------------------------------------------------ #
     if ( $Self->{Subaction} eq 'View' ) {
-        my $Name    = $ParamObject->GetParam( Param => 'Name' )    || '';
-        my $Version = $ParamObject->GetParam( Param => 'Version' ) || '';
+        my $Name     = $ParamObject->GetParam( Param => 'Name' )    || '';
+        my $Version  = $ParamObject->GetParam( Param => 'Version' ) || '';
         my $Location = $ParamObject->GetParam( Param => 'Location' );
         my %Frontend;
 
@@ -878,8 +878,8 @@ sub Run {
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
-        my $Name    = $ParamObject->GetParam( Param => 'Name' )    || '';
-        my $Version = $ParamObject->GetParam( Param => 'Version' ) || '';
+        my $Name              = $ParamObject->GetParam( Param => 'Name' )    || '';
+        my $Version           = $ParamObject->GetParam( Param => 'Version' ) || '';
         my $IntroReinstallPre = $ParamObject->GetParam( Param => 'IntroReinstallPre' )
             || '';
 
@@ -974,8 +974,8 @@ sub Run {
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
-        my $Name    = $ParamObject->GetParam( Param => 'Name' )    || '';
-        my $Version = $ParamObject->GetParam( Param => 'Version' ) || '';
+        my $Name               = $ParamObject->GetParam( Param => 'Name' )    || '';
+        my $Version            = $ParamObject->GetParam( Param => 'Version' ) || '';
         my $IntroReinstallPost = $ParamObject->GetParam( Param => 'IntroReinstallPost' )
             || '';
 
@@ -1052,8 +1052,8 @@ sub Run {
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
-        my $Name    = $ParamObject->GetParam( Param => 'Name' )    || '';
-        my $Version = $ParamObject->GetParam( Param => 'Version' ) || '';
+        my $Name              = $ParamObject->GetParam( Param => 'Name' )    || '';
+        my $Version           = $ParamObject->GetParam( Param => 'Version' ) || '';
         my $IntroUninstallPre = $ParamObject->GetParam( Param => 'IntroUninstallPre' )
             || '';
 
@@ -1147,8 +1147,8 @@ sub Run {
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
-        my $Name    = $ParamObject->GetParam( Param => 'Name' )    || '';
-        my $Version = $ParamObject->GetParam( Param => 'Version' ) || '';
+        my $Name               = $ParamObject->GetParam( Param => 'Name' )    || '';
+        my $Version            = $ParamObject->GetParam( Param => 'Version' ) || '';
         my $IntroUninstallPost = $ParamObject->GetParam( Param => 'IntroUninstallPost' )
             || '';
 
@@ -1446,7 +1446,7 @@ sub Run {
         my $JSON = $LayoutObject->JSONEncode(
             Data => {
                 Success        => 1,
-                UpgradeStatus  => $SystemData{Status} || '',
+                UpgradeStatus  => $SystemData{Status}  || '',
                 UpgradeSuccess => $SystemData{Success} || '',
                 PackageList    => \@PackageList,
             },

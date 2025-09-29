@@ -598,7 +598,7 @@ sub TicketAcceleratorRebuild {
                     VALUES (?, ?, ?, ?, ?, ?, ?)',
             Bind => [
                 \$Data{TicketID}, \$Data{QueueID}, \$Data{Queue}, \$Data{GroupID},
-                \$Data{Lock}, \$Data{State}, \$Data{CreateTime},
+                \$Data{Lock},     \$Data{State},   \$Data{CreateTime},
             ],
         );
     }

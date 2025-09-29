@@ -436,7 +436,7 @@ my @SignatureQueueChangeTests = (
         },
         ExpectedData => {
             SignatureQueueLinkBySignature => undef,
-            SignatureQueuesList =>
+            SignatureQueuesList           =>
                 $AfterImportTests[0]->{ExpectedData},
 
         },

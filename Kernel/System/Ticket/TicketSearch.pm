@@ -1466,7 +1466,7 @@ sub TicketSearch {
                     if ( !$ValidateSuccess ) {
                         $Kernel::OM->Get('Kernel::System::Log')->Log(
                             Priority => 'error',
-                            Message =>
+                            Message  =>
                                 "Search not executed due to invalid value '"
                                 . $Text
                                 . "' on field '"
@@ -1640,7 +1640,7 @@ sub TicketSearch {
             if ( !$SystemTime ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         "Search not executed due to invalid time '"
                         . $Param{ $Key . 'OlderDate' } . "'!",
                 );
@@ -1681,7 +1681,7 @@ sub TicketSearch {
             if ( !$SystemTime ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         "Search not executed due to invalid time '"
                         . $Param{ $Key . 'NewerDate' } . "'!",
                 );
@@ -1779,7 +1779,7 @@ sub TicketSearch {
             if ( !$Time ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         "Search not executed due to invalid time '"
                         . $Param{ $Key . 'OlderDate' } . "'!",
                 );
@@ -1819,7 +1819,7 @@ sub TicketSearch {
             if ( !$Time ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         "Search not executed due to invalid time '"
                         . $Param{ $Key . 'NewerDate' } . "'!",
                 );
@@ -1887,7 +1887,7 @@ sub TicketSearch {
         if ( !$Time ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Search not executed due to invalid time '"
                     . $Param{TicketChangeTimeOlderDate} . "'!",
             );
@@ -1927,7 +1927,7 @@ sub TicketSearch {
         if ( !$Time ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Search not executed due to invalid time '"
                     . $Param{TicketChangeTimeNewerDate} . "'!",
             );
@@ -1997,7 +1997,7 @@ sub TicketSearch {
         if ( !$Time ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Search not executed due to invalid time '"
                     . $Param{TicketLastChangeTimeOlderDate} . "'!",
             );
@@ -2032,7 +2032,7 @@ sub TicketSearch {
         if ( !$Time ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Search not executed due to invalid time '"
                     . $Param{TicketLastChangeTimeNewerDate} . "'!",
             );
@@ -2102,7 +2102,7 @@ sub TicketSearch {
         if ( !$Time ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Search not executed due to invalid time '"
                     . $Param{TicketCloseTimeOlderDate} . "'!",
             );
@@ -2159,7 +2159,7 @@ sub TicketSearch {
         if ( !$Time ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Search not executed due to invalid time '"
                     . $Param{TicketCloseTimeNewerDate} . "'!",
             );
@@ -2245,7 +2245,7 @@ sub TicketSearch {
         if ( !$Time ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Search not executed due to invalid time '"
                     . $Param{TicketLastCloseTimeOlderDate} . "'!",
             );
@@ -2320,7 +2320,7 @@ sub TicketSearch {
         if ( !$Time ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Search not executed due to invalid time '"
                     . $Param{TicketLastCloseTimeNewerDate} . "'!",
             );
@@ -2440,7 +2440,7 @@ sub TicketSearch {
         if ( !$TimeStamp ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Search not executed due to invalid time '"
                     . $Param{TicketPendingTimeOlderDate} . "'!",
             );
@@ -2475,7 +2475,7 @@ sub TicketSearch {
         if ( !$TimeStamp ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Search not executed due to invalid time '"
                     . $Param{TicketPendingTimeNewerDate} . "'!",
             );

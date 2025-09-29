@@ -13,7 +13,7 @@ package Kernel::System::Loader;
 use strict;
 use warnings;
 
-use CSS::Minifier qw();           # default minifier, will only be used if CSS::Minifier:XS is not available.
+use CSS::Minifier        qw();    # default minifier, will only be used if CSS::Minifier:XS is not available.
 use JavaScript::Minifier qw();    # default minifier, will only be used if JavaScript::Minifier:XS is not available.
 
 our @ObjectDependencies = (

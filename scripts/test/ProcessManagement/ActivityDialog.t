@@ -325,7 +325,7 @@ my @Tests = (
         ActivityDialogs => {
             'AD1' . $RandomID => {
                 Interface => ['AgentInterface'],
-                Name =>
+                Name      =>
                     'äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ-カスタ-用迎使用-Язык',
                 DescriptionShort =>
                     'AD1 äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ-カスタ-用迎使用-Язык',
@@ -337,26 +337,26 @@ my @Tests = (
                 ChangeBy   => '3',
                 Fields     => {
                     DynamicField_Make => {
-                        Display => 2,
+                        Display         => 2,
                         DescriptionLong =>
                             'Make äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ-カスタ-用迎使用-Язык',
                         DescriptionShort => 'Make Short',
                     },
                     DynamicField_VWModel => {
-                        Display         => 2,
-                        DescriptionLong => 'VWModel Long',
+                        Display          => 2,
+                        DescriptionLong  => 'VWModel Long',
                         DescriptionShort =>
                             'VWModel äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ-カスタ-用迎使用-Язык',
                     },
                     DynamicField_PeugeotModel => {
-                        Display => 0,
+                        Display         => 0,
                         DescriptionLong =>
                             'PeugeotModel äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ-カスタ-用迎使用-Язык',
                         DescriptionShort => 'PeugeotModel Short',
                     },
                     StateID => {
-                        Display         => 1,
-                        DescriptionLong => 'StateID Long',
+                        Display          => 1,
+                        DescriptionLong  => 'StateID Long',
                         DescriptionShort =>
                             'StateID äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ-カスタ-用迎使用-Язык',
                     },

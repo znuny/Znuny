@@ -159,7 +159,7 @@ sub _Overview {
             Color => $ArticleColor->{Color},
             Class => 'Validate_Color ',
 
-            format => 'hexa',
+            format   => 'hexa',
             onChange =>
                 "Core.AJAX.FunctionCall('$LayoutObject->{Baselink}Action=AdminArticleColor;Subaction=AJAXUpdate', { Name: '$ArticleColor->{Name}', Color: this.valueElement.value }, function() {});",
         );

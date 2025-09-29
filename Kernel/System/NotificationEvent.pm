@@ -12,7 +12,7 @@ package Kernel::System::NotificationEvent;
 use strict;
 use warnings;
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
@@ -354,7 +354,7 @@ sub NotificationAdd {
                 (name, valid_id, comments, create_time, create_by, change_time, change_by)
             VALUES (?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
-            \$Param{Name}, \$Param{ValidID}, \$Param{Comment},
+            \$Param{Name},   \$Param{ValidID}, \$Param{Comment},
             \$Param{UserID}, \$Param{UserID},
         ],
     );
@@ -1012,10 +1012,10 @@ sub NotificationImport {
     return {
         Success => 1,
 
-        Added      => join( ', ', @AddedNotifications )      || '',
-        Updated    => join( ', ', @UpdatedNotifications )    || '',
-        NotUpdated => join( ', ', @NotUpdatedNotifications ) || '',
-        Errors     => join( ', ', @NotificationErrors )      || '',
+        Added            => join( ', ', @AddedNotifications )      || '',
+        Updated          => join( ', ', @UpdatedNotifications )    || '',
+        NotUpdated       => join( ', ', @NotUpdatedNotifications ) || '',
+        Errors           => join( ', ', @NotificationErrors )      || '',
         AdditionalErrors => \@NotificationAdditionalErrors,
 
         # For compatibility with existing code

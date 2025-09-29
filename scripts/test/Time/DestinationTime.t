@@ -80,10 +80,10 @@ my @Tests = (
         VacationDays    => \%VacationDays,
     },
     {
-        Name           => 'Europe/Berlin ( Daylight Saving Time UTC+1 => UTC+2 )',
-        TimeStampStart => '2015-02-17 12:00:00',
-        OTRSTimeZone   => 'Europe/Berlin',
-        Time           => 60 * 60 * 24 * 90 + 60 * 60,
+        Name            => 'Europe/Berlin ( Daylight Saving Time UTC+1 => UTC+2 )',
+        TimeStampStart  => '2015-02-17 12:00:00',
+        OTRSTimeZone    => 'Europe/Berlin',
+        Time            => 60 * 60 * 24 * 90 + 60 * 60,
         TimeDate        => '90 days and 1h',                     # 90 days and 1h, contains 05-01 vacation day
         DestinationTime => '2015-05-19 14:00:00',
         WorkingHours    => $WorkingHours{MonToSun}->{'0To23'},
@@ -120,9 +120,9 @@ my @Tests = (
         VacationDays    => \%VacationDays,
     },
     {
-        Name           => 'America/Sao_Paulo - end DST from 00 to 23 - with min and sec ( UTC-2 => UTC-3 )',
-        TimeStampStart => '2015-02-21 22:10:05',
-        OTRSTimeZone   => 'America/Sao_Paulo',
+        Name            => 'America/Sao_Paulo - end DST from 00 to 23 - with min and sec ( UTC-2 => UTC-3 )',
+        TimeStampStart  => '2015-02-21 22:10:05',
+        OTRSTimeZone    => 'America/Sao_Paulo',
         Time            => 60 * 60 * 24 * 4 + 60 * 60 * 5 + 60 * 20 + 15,                     # 4 days 05:20:15
         TimeDate        => '4 days 05:20:15',
         DestinationTime => '2015-02-26 02:30:20',

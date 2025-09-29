@@ -42,8 +42,8 @@ sub Run {
 
     if ( $TicketCount > 60_000 && $Module =~ /RuntimeDB/ ) {
         $Self->AddResultWarning(
-            Label => Translatable('Ticket Index Module'),
-            Value => $Module,
+            Label   => Translatable('Ticket Index Module'),
+            Value   => $Module,
             Message =>
                 Translatable(
                 'You have more than 60,000 tickets and should use the StaticDB backend. See admin manual (Performance Tuning) for more information.'

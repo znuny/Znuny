@@ -167,8 +167,8 @@ sub DynamicFieldAdd {
             ' config, valid_id, create_time, create_by, change_time, change_by)' .
             ' VALUES (?, ?, ?, ?, ?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
-            \$InternalField, \$Param{Name}, \$Param{Label}, \$Param{FieldOrder}, \$Param{FieldType},
-            \$Param{ObjectType}, \$Config, \$Param{ValidID}, \$Param{UserID}, \$Param{UserID},
+            \$InternalField,     \$Param{Name}, \$Param{Label},   \$Param{FieldOrder}, \$Param{FieldType},
+            \$Param{ObjectType}, \$Config,      \$Param{ValidID}, \$Param{UserID},     \$Param{UserID},
         ],
     );
 
@@ -454,8 +454,8 @@ sub DynamicFieldUpdate {
                 . 'object_type = ?, config = ?, valid_id = ?, change_time = current_timestamp, '
                 . ' change_by = ? WHERE id = ?',
             Bind => [
-                \$Param{InternalField}, \$Param{Name}, \$Param{Label}, \$Param{FieldOrder}, \$Param{FieldType},
-                \$Param{ObjectType}, \$Config, \$Param{ValidID}, \$Param{UserID}, \$Param{ID},
+                \$Param{InternalField}, \$Param{Name}, \$Param{Label},   \$Param{FieldOrder}, \$Param{FieldType},
+                \$Param{ObjectType},    \$Config,      \$Param{ValidID}, \$Param{UserID},     \$Param{ID},
             ],
         );
     }

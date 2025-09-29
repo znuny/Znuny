@@ -59,7 +59,7 @@ sub Init {
 
     if ( !IsHashRefWithData($Webservice) ) {
         return {
-            Success => 0,
+            Success      => 0,
             ErrorMessage =>
                 'Could not determine Web service configuration'
                 . ' in Kernel::GenericInterface::Operation::Ticket::Common::new()',

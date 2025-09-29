@@ -12,7 +12,7 @@ package Kernel::System::ACL::DB::ACL;
 use strict;
 use warnings;
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
@@ -169,8 +169,8 @@ sub ACLAdd {
                 config_change, valid_id, create_time, create_by, change_time, change_by )
             VALUES (?, ?, ?, ?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
-            \$Param{Name}, \$Param{Comment}, \$Param{Description}, \$Param{StopAfterMatch},
-            \$ConfigMatch, \$ConfigChange, \$Param{ValidID},
+            \$Param{Name},   \$Param{Comment}, \$Param{Description}, \$Param{StopAfterMatch},
+            \$ConfigMatch,   \$ConfigChange,   \$Param{ValidID},
             \$Param{UserID}, \$Param{UserID},
         ],
     );
@@ -549,9 +549,9 @@ sub ACLUpdate {
                 config_match = ?, config_change = ?, change_time = current_timestamp,  change_by = ?
             WHERE id = ?',
         Bind => [
-            \$Param{Name}, \$Param{Comment}, \$Param{Description}, \$Param{StopAfterMatch},
-            \$Param{ValidID}, \$ConfigMatch, \$ConfigChange,
-            \$Param{UserID}, \$Param{ID},
+            \$Param{Name},    \$Param{Comment}, \$Param{Description}, \$Param{StopAfterMatch},
+            \$Param{ValidID}, \$ConfigMatch,    \$ConfigChange,
+            \$Param{UserID},  \$Param{ID},
         ],
     );
 
@@ -1046,11 +1046,11 @@ sub ACLImport {
                 %{ $ExistingACLs[0] },
                 Name           => $ACL->{Name},
                 Comment        => $ACL->{Comment},
-                Description    => $ACL->{Description} || '',
+                Description    => $ACL->{Description}    || '',
                 StopAfterMatch => $ACL->{StopAfterMatch} || 0,
-                ConfigMatch    => $ACL->{ConfigMatch} || undef,
-                ConfigChange   => $ACL->{ConfigChange} || undef,
-                ValidID        => $ACL->{ValidID} || 1,
+                ConfigMatch    => $ACL->{ConfigMatch}    || undef,
+                ConfigChange   => $ACL->{ConfigChange}   || undef,
+                ValidID        => $ACL->{ValidID}        || 1,
                 UserID         => $Param{UserID},
             );
 
@@ -1068,8 +1068,8 @@ sub ACLImport {
             my $Success = $Self->ACLAdd(
                 Name           => $ACL->{Name},
                 Comment        => $ACL->{Comment},
-                Description    => $ACL->{Description} || '',
-                ConfigMatch    => $ACL->{ConfigMatch} || undef,
+                Description    => $ACL->{Description}  || '',
+                ConfigMatch    => $ACL->{ConfigMatch}  || undef,
                 ConfigChange   => $ACL->{ConfigChange} || undef,
                 StopAfterMatch => $ACL->{StopAfterMatch},
                 ValidID        => $ACL->{ValidID} || 1,
@@ -1087,9 +1087,9 @@ sub ACLImport {
 
     return {
         Success     => 1,
-        AddedACLs   => join( ', ', @AddedACLs ) || '',
+        AddedACLs   => join( ', ', @AddedACLs )   || '',
         UpdatedACLs => join( ', ', @UpdatedACLs ) || '',
-        ACLErrors   => join( ', ', @ACLErrors ) || '',
+        ACLErrors   => join( ', ', @ACLErrors )   || '',
     };
 }
 

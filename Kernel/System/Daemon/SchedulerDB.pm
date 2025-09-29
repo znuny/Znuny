@@ -2275,9 +2275,9 @@ sub RecurrentTaskSummary {
         push @List, {
             Name                  => $Row[1],
             Type                  => $Row[2],
-            LastExecutionTime     => $Row[3] // '',
-            NextExecutionTime     => $NextExecutionTime // '',
-            LastWorkerStatus      => $LastWorkerStatus // 'N/A',
+            LastExecutionTime     => $Row[3]                // '',
+            NextExecutionTime     => $NextExecutionTime     // '',
+            LastWorkerStatus      => $LastWorkerStatus      // 'N/A',
             LastWorkerRunningTime => $LastWorkerRunningTime // 'N/A',
         };
     }

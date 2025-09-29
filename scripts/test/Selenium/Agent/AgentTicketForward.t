@@ -186,7 +186,7 @@ $Selenium->RunTest(
             SenderType           => 'customer',
             IsVisibleForCustomer => 1,
             Subject              => 'some short description',
-            Body =>
+            Body                 =>
                 '<!DOCTYPE html><html><body>'
                 . $RandomID . '<br /><img src="' . $ImgSource . '"/>'
                 . '<applet code="foo.class"></applet>'

@@ -181,7 +181,7 @@ for my $Item ( 0 .. 1 ) {
         Priority      => '3 normal',
         StateID       => 1,
         TypeID        => 1,
-        Service       => ( $Item == 0 ) ? $Services[0]->{Name} : undef,
+        Service       => ( $Item == 0 ) ? $Services[0]->{Name}   : undef,
         CustomerUser  => ( $Item == 0 ) ? $TestCustomerUserLogin : undef,
         OwnerID       => 1,
         ResponsibleID => 1,

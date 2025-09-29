@@ -289,7 +289,7 @@ sub _GenerateSupportBundle {
     my $JSONString = $Kernel::OM->Get('Kernel::System::JSON')->Encode(
         Data => {
             Success  => $Result->{Success},
-            Message  => $Result->{Message} || '',
+            Message  => $Result->{Message}          || '',
             Filesize => $Result->{Data}->{Filesize} || '',
             Filename => $Result->{Data}->{Filename} || '',
             RandomID => $RandomID,

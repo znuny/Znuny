@@ -14,7 +14,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -1543,8 +1543,8 @@ sub _OutputActivityDialog {
                 FieldName           => $DynamicFieldName,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket       || {},
+                Error               => \%Error        || {},
                 ErrorMessage        => \%ErrorMessage || {},
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
@@ -1585,7 +1585,7 @@ sub _OutputActivityDialog {
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
                 Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Error               => \%Error  || {},
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -1621,7 +1621,7 @@ sub _OutputActivityDialog {
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
                 Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Error               => \%Error  || {},
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -1657,7 +1657,7 @@ sub _OutputActivityDialog {
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
                 Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Error               => \%Error  || {},
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -1693,7 +1693,7 @@ sub _OutputActivityDialog {
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
                 Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Error               => \%Error  || {},
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -1729,7 +1729,7 @@ sub _OutputActivityDialog {
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
                 Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Error               => \%Error  || {},
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -1764,7 +1764,7 @@ sub _OutputActivityDialog {
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
                 Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Error               => \%Error  || {},
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
             );
@@ -1801,7 +1801,7 @@ sub _OutputActivityDialog {
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
                 Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Error               => \%Error  || {},
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 InformAgents        => $ActivityDialog->{Fields}->{Article}->{Config}->{InformAgents},
@@ -1840,7 +1840,7 @@ sub _OutputActivityDialog {
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
                 Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Error               => \%Error  || {},
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -2230,7 +2230,7 @@ sub _RenderArticle {
         MandatoryClass   => '',
         ValidateRequired => '',
         Subject          => $Param{GetParam}->{Subject} || $Param{ActivityDialogField}->{Config}->{Subject},
-        Body             => $Param{GetParam}->{Body} || $Param{ActivityDialogField}->{Config}->{Body},
+        Body             => $Param{GetParam}->{Body}    || $Param{ActivityDialogField}->{Config}->{Body},
         LabelSubject     => $Param{ActivityDialogField}->{Config}->{LabelSubject}
             || $LayoutObject->{LanguageObject}->Translate("Subject"),
         LabelBody => $Param{ActivityDialogField}->{Config}->{LabelBody}
@@ -2445,7 +2445,7 @@ sub _RenderCustomer {
     if ( IsHashRefWithData( \%CustomerUserData ) ) {
         $Data{CustomerUserID}       = "\"$CustomerUserData{UserFullname}" . "\" <$CustomerUserData{UserEmail}>";
         $Data{CustomerID}           = $CustomerUserData{UserCustomerID} || '';
-        $Data{SelectedCustomerUser} = $CustomerUserData{UserID} || '';
+        $Data{SelectedCustomerUser} = $CustomerUserData{UserID}         || '';
     }
 
     # set fields that will get an AJAX loader icon when this field changes

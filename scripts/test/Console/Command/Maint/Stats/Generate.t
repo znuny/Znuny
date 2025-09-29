@@ -65,9 +65,9 @@ my @Tests = (
         Name          => "Format CSV",
         CommandModule => 'Kernel::System::Console::Command::Maint::Stats::Generate',
         Parameter     => [
-            '--number', '10001', '--language', 'en',
+            '--number',           '10001',          '--language',        'en',
             '--target-directory', $TargetDirectory, '--target-filename', 'FormatCSV',
-            '--format', 'CSV'
+            '--format',           'CSV'
         ],
         TargetDirectory => $TargetDirectory,
         TargetFilename  => 'FormatCSV',
@@ -81,9 +81,9 @@ my @Tests = (
         Name          => "Format Excel",
         CommandModule => 'Kernel::System::Console::Command::Maint::Stats::Generate',
         Parameter     => [
-            '--number', '10001', '--language', 'en',
+            '--number',           '10001',          '--language',        'en',
             '--target-directory', $TargetDirectory, '--target-filename', 'FormatExcel',
-            '--format', 'Excel'
+            '--format',           'Excel'
         ],
         TargetDirectory => $TargetDirectory,
         TargetFilename  => 'FormatExcel',
@@ -97,9 +97,9 @@ my @Tests = (
         Name          => "Format Print|PDF",
         CommandModule => 'Kernel::System::Console::Command::Maint::Stats::Generate',
         Parameter     => [
-            '--number', '10001', '--language', 'en',
+            '--number',           '10001',          '--language',        'en',
             '--target-directory', $TargetDirectory, '--target-filename', 'FormatPDF',
-            '--format', 'PDF'
+            '--format',           'PDF'
         ],
         TargetDirectory => $TargetDirectory,
         TargetFilename  => 'FormatPDF',

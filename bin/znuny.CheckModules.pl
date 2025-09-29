@@ -425,7 +425,7 @@ my @NeededModules = (
     {
         Module   => 'JavaScript::Minifier::XS',
         Required => 0,
-        Comment =>
+        Comment  =>
             'Alternative to JavaScript::Minifier in XS, which is slightly faster than JavaScript::Minifier (pure Perl).',
         InstTypes => {
             aptget => 'libjavascript-minifier-xs-perl',
@@ -437,7 +437,7 @@ my @NeededModules = (
     {
         Module   => 'Jq',
         Required => 0,
-        Comment =>
+        Comment  =>
             'Support for extended condition checking via Jq for the generic interface.',
         InstTypes => {
             aptget => undef,
@@ -460,7 +460,7 @@ my @NeededModules = (
     {
         Module   => 'List::Util::XS',
         Required => 1,
-        Comment =>
+        Comment  =>
             "Do a 'force install Scalar::Util' via cpan shell to fix this problem. Please make sure to have an c compiler and make installed before.",
         InstTypes => {
             aptget => 'libscalar-list-utils-perl',
