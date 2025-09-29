@@ -243,6 +243,14 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         border: 0;
         float: left;
         border-radius: var(--border-radius-xl);
+        background: var(--primary-color);
+    }
+
+    .pill.Info,
+    .pill.Error,
+    .pill.Success,
+    .pill.Warning {
+        color: var(--main-font-color) !important;
     }
 
     /* **************************************** Buttons **************************************** */
@@ -262,7 +270,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         text-align: center;
         font-size: var(--font-size-sm);
     }
-    
+
 
     .btn-main.Hidden {
         display: none;
@@ -508,7 +516,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         color: var(--alert-error-icon-color);
     }
 
-    .MessageBox.Confirmation, 
+    .MessageBox.Confirmation,
     .Success {
         background: var(--alert-success-bg-color);
         border: 1px solid var(--alert-success-border-color);
@@ -562,19 +570,6 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 
     .AgentTicketActionCommon fieldset .Field.component-attachment {
         margin-top: var(--margin-sm);
-    }
-
-    .outer-upload-file {
-        display: flex;
-    }
-
-    .outer-upload-file .DnDUpload {
-
-    }
-
-    .outer-upload-file .DnDUpload .ReadyForUpload {
-        display: flex;
-        align-content: center;
     }
 
     .AttachmentListContainer {
@@ -1523,6 +1518,50 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 
     .Flag span.Warning {
         background-color: #ffdd50;
+    }
+
+    /* **************************************** Filters *********************************** */
+
+    .TableFilterContainer {
+        position: relative;
+        display: flex;
+        align-items: center;
+        flex: 1;
+    }
+
+    .TableFilterContainer .FilterRemove {
+        position: absolute;
+        right: 15px;
+        font-size: 12px;
+        display: none;
+        color: var(--gray-dark-semi);
+        transition: color ease 0.3s;
+    }
+
+    .TableFilterContainer .FilterRemove:focus,
+    .TableFilterContainer .FilterRemove:hover,
+    .TableFilterContainer .FilterRemove:active {
+        color: var(--black);
+    }
+
+    span.TableFilterContainer>input,
+    span.TableFilterContainer>input.FilterBox,
+    input#SysConfigSearch {
+        padding: 6px var(--padding-sm);
+        padding-left: var(--padding-xxl);
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    span.TableFilterContainer>i,
+    span.TableFilterContainer>button {
+        position: absolute;
+        bottom: 25%;
+        left: 10px;
+        font-size: var(--font-size-md);
+        color: var(--gray-dark-semi);
+        background: unset;
+        border: 0;
     }
 
 }

@@ -155,9 +155,9 @@ c',
 
 $Self->Is(
     $Text,
-    'a<br/>
-b<br/>
-c',
+    '<p>a</p>
+<p>b</p>
+<p>c</p>',
     'ConvertText()',
 );
 

@@ -1,0 +1,115 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+/**
+ * @section     Modify article settings
+ */
+
+/**
+ * FILEPATH: var/httpd/htdocs/common/css/Core.RichTextEditor.InternalArticleStyles.css
+ *
+ * Contains styles for RTE content. Resets most of the styles base styles
+ * so that framework CSS files does not make unwanted modifications.
+ * Edit this file to change styles of content for Agent and Customer.
+ * Additionally styles will be appended in article body, so new visuals should also
+ * be visible for any email clients when article is sent.
+ */
+
+/* revert all ck-editor styles with low priority to overwrite default Znuny css styles */
+/* IE/Opera mini is not supported but in such case visual differences will be minor */
+.ck-content * {
+    all: revert;
+}
+
+/*  Use body.ck.ck-content as pre/parent-selector to overwrite article content.
+    Use div.ck.ck-content as pre/parent-selector to overwrite rte component content styles.
+    Use .ck.ck-content as pre/parent-selector to overwrite both.
+
+    It is needed to adjust different content type as ckeditor does html conversion while 
+    filling it's textarea field.
+
+    Example 1
+        CKEditor content in the component: 
+            '<div class="ck-horizontal-line ck-widget" contenteditable="false"><hr> {some more html here} </div>'
+        is converted into textarea content:
+            '<hr>'
+
+        That leads to differences in visuals in the component and ticket article zoom view that can be 
+        adjusted here by using pre-selectors as described above.
+*/
+
+.ck.ck-content {
+    line-height: 1;
+    color: black;
+    background: white;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+}
+
+.ck.ck-content table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.ck.ck-content caption, .ck.ck-content th, .ck.ck-content td {
+    text-align: left;
+    font-weight: normal;
+}
+
+.ck.ck-content blockquote:before, .ck.ck-content blockquote:after, .ck.ck-content q:before, .ck.ck-content q:after {
+    content: "";
+}
+
+.ck.ck-content blockquote, .ck.ck-content q {
+    quotes: "" "";
+}
+
+.ck.ck-content a {
+    text-decoration: none;
+}
+
+.ck.ck-content strong {
+    font-weight: bold;
+}
+
+.ck.ck-content select {
+    margin-top: -1px;
+    margin-top: 2px;
+}
+
+.ck.ck-editor__editable_inline ol,.ck.ck-editor__editable_inline ul,.ck.ck-editor__editable_inline dl
+{
+    /* IE7: reset rtl list margin. (#7334) */
+    *margin-right: 0px;
+    /* Preserved spaces for list items with text direction different than the list. (#6249,#8049)*/
+    padding: 0 40px;
+}
+
+.ck.ck-editor .ck.ck-editor__editable_inline {
+    padding: 2px 10px 2px 10px  !important;
+}
+
+body.ck.ck-content hr{
+    margin:30px 0;
+    height:4px;
+    background:hsl(0, 0%, 87%);
+    border:0;
+}
+
+.ck.ck-content html, .ck.ck-content body, .ck.ck-content div, .ck.ck-content span, .ck.ck-content applet, .ck.ck-content object, .ck.ck-content iframe,
+.ck.ck-content h1, .ck.ck-content h2, .ck.ck-content h3, .ck.ck-content h4, .ck.ck-content h5, .ck.ck-content h6, .ck.ck-content p, .ck.ck-content blockquote, .ck.ck-content pre,
+.ck.ck-content a, .ck.ck-content abbr, .ck.ck-content acronym, .ck.ck-content address, .ck.ck-content big, .ck.ck-content cite, .ck.ck-content code,
+.ck.ck-content del, .ck.ck-content dfn, .ck.ck-content em, .ck.ck-content font, .ck.ck-content img, .ck.ck-content ins, .ck.ck-content kbd, .ck.ck-content q, .ck.ck-content s, .ck.ck-content samp,
+.ck.ck-content small, .ck.ck-content strike, .ck.ck-content strong, .ck.ck-content sub, .ck.ck-content sup, .ck.ck-content tt, .ck.ck-content var,
+.ck.ck-content dl, .ck.ck-content dt, .ck.ck-content dd, .ck.ck-content ol, .ck.ck-content ul, .ck.ck-content li,
+.ck.ck-content fieldset, .ck.ck-content form, .ck.ck-content label, .ck.ck-content legend,
+.ck.ck-content table, .ck.ck-content caption, .ck.ck-content tbody, .ck.ck-content tfoot, .ck.ck-content thead, .ck.ck-content tr, .ck.ck-content th, .ck.ck-content td, .ck.ck-content hr,
+.ck.ck-content input, .ck.ck-content textarea {
+    box-sizing: border-box;
+}

@@ -834,6 +834,19 @@ ArticleDataTables:
 - article_data_otrs_chat
 ', 1, 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
+--  insert into table communication_channel
+-- ----------------------------------------------------------
+INSERT INTO communication_channel (name, module, package_name, channel_data, valid_id, create_by, create_time, change_by, change_time)
+    VALUES
+    ('Web', 'Kernel::System::CommunicationChannel::Web', 'Framework', '---
+ArticleDataArticleIDField: article_id
+ArticleDataTables:
+- article_data_mime
+- article_data_mime_plain
+- article_data_mime_attachment
+- article_data_mime_send_error
+', 1, 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
 --  insert into table article
 -- ----------------------------------------------------------
 INSERT INTO article (ticket_id, communication_channel_id, article_sender_type_id, is_visible_for_customer, create_by, create_time, change_by, change_time)
@@ -1869,21 +1882,49 @@ the service of ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivide
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (14, 'text/html', 'en', 'Reminder: <OTRS_APPOINTMENT_TITLE>', 'Hi &lt;OTRS_NOTIFICATION_RECIPIENT_UserFirstname&gt;,<br />
-<br />
-appointment &quot;&lt;OTRS_APPOINTMENT_TITLE&gt;&quot; has reached its notification time.<br />
-<br />
-Description: &lt;OTRS_APPOINTMENT_DESCRIPTION&gt;<br />
-Location: &lt;OTRS_APPOINTMENT_LOCATION&gt;<br />
-Calendar: <span style="color: &lt;OTRS_CALENDAR_COLOR&gt;;">■</span> &lt;OTRS_CALENDAR_CALENDARNAME&gt;<br />
-Start date: &lt;OTRS_APPOINTMENT_STARTTIME&gt;<br />
-End date: &lt;OTRS_APPOINTMENT_ENDTIME&gt;<br />
-All-day: &lt;OTRS_APPOINTMENT_ALLDAY&gt;<br />
-Repeat: &lt;OTRS_APPOINTMENT_RECURRING&gt;<br />
-<br />
-<a href="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;" title="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;">&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;</a><br />
-<br />
--- &lt;OTRS_CONFIG_NotificationSenderName&gt;');
+    (14, 'text/html', 'en', 'Reminder: <OTRS_APPOINTMENT_TITLE>', '<p>Hi &lt;OTRS_NOTIFICATION_RECIPIENT_UserFirstname&gt;,</p>
+<p></p>
+<p>appointment &quot;&lt;OTRS_APPOINTMENT_TITLE&gt;&quot; has reached its notification time.</p>
+<p></p>
+<p>Description: &lt;OTRS_APPOINTMENT_DESCRIPTION&gt;</p>
+<p>Location: &lt;OTRS_APPOINTMENT_LOCATION&gt;</p>
+<p>Calendar: <span style="color: &lt;OTRS_CALENDAR_COLOR&gt;;">■</span> &lt;OTRS_CALENDAR_CALENDARNAME&gt;</p>
+<p>Start date: &lt;OTRS_APPOINTMENT_STARTTIME&gt;</p>
+<p>End date: &lt;OTRS_APPOINTMENT_ENDTIME&gt;</p>
+<p>All-day: &lt;OTRS_APPOINTMENT_ALLDAY&gt;</p>
+<p>Repeat: &lt;OTRS_APPOINTMENT_RECURRING&gt;</p>
+<p></p>
+<p><a href="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;" title="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;">&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;</a></p>
+<p></p>
+<p>-- &lt;OTRS_CONFIG_NotificationSenderName&gt;</p>');
+-- ----------------------------------------------------------
+--  insert into table notification_event_message
+-- ----------------------------------------------------------
+INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
+    VALUES
+    (15, 'text/plain', 'en', 'Email Delivery Failure', 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+
+Please note, that the delivery of an email article of [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] has failed. Please check the email address of your recipient for mistakes and try again. You can manually resend the article from the ticket if required.
+
+Error Message:
+<OTRS_AGENT_TransmissionStatusMessage>
+
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_TICKET_LAST_ARTICLE_ID>
+
+-- <OTRS_CONFIG_NotificationSenderName>');
+-- ----------------------------------------------------------
+--  insert into table notification_event_message
+-- ----------------------------------------------------------
+INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
+    VALUES
+    (16, 'text/plain', 'en', 'Mention in ticket: <OTRS_TICKET_Title>', 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+
+you have been mentioned in ticket <OTRS_TICKET_NUMBER>.
+<OTRS_AGENT_BODY[5]>
+
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+
+-- <OTRS_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
@@ -2062,21 +2103,49 @@ der Service des Tickets [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivi
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (14, 'text/html', 'de', 'Erinnerung: <OTRS_APPOINTMENT_TITLE>', 'Hallo &lt;OTRS_NOTIFICATION_RECIPIENT_UserFirstname&gt;,<br />
-<br />
-Termin &quot;&lt;OTRS_APPOINTMENT_TITLE&gt;&quot; hat seine Benachrichtigungszeit erreicht.<br />
-<br />
-Beschreibung: &lt;OTRS_APPOINTMENT_DESCRIPTION&gt;<br />
-Standort: &lt;OTRS_APPOINTMENT_LOCATION&gt;<br />
-Kalender: <span style="color: &lt;OTRS_CALENDAR_COLOR&gt;;">■</span> &lt;OTRS_CALENDAR_CALENDARNAME&gt;<br />
-Startzeitpunkt: &lt;OTRS_APPOINTMENT_STARTTIME&gt;<br />
-Endzeitpunkt: &lt;OTRS_APPOINTMENT_ENDTIME&gt;<br />
-Ganztägig: &lt;OTRS_APPOINTMENT_ALLDAY&gt;<br />
-Wiederholung: &lt;OTRS_APPOINTMENT_RECURRING&gt;<br />
-<br />
-<a href="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;" title="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;">&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;</a><br />
-<br />
--- &lt;OTRS_CONFIG_NotificationSenderName&gt;');
+    (14, 'text/html', 'de', 'Erinnerung: <OTRS_APPOINTMENT_TITLE>', '<p>Hallo &lt;OTRS_NOTIFICATION_RECIPIENT_UserFirstname&gt;,</p>
+<p></p>
+<p>Termin &quot;&lt;OTRS_APPOINTMENT_TITLE&gt;&quot; hat seine Benachrichtigungszeit erreicht.</p>
+<p></p>
+<p>Beschreibung: &lt;OTRS_APPOINTMENT_DESCRIPTION&gt;</p>
+<p>Standort: &lt;OTRS_APPOINTMENT_LOCATION&gt;</p>
+<p>Kalender: <span style="color: &lt;OTRS_CALENDAR_COLOR&gt;;">■</span> &lt;OTRS_CALENDAR_CALENDARNAME&gt;</p>
+<p>Startzeitpunkt: &lt;OTRS_APPOINTMENT_STARTTIME&gt;</p>
+<p>Endzeitpunkt: &lt;OTRS_APPOINTMENT_ENDTIME&gt;</p>
+<p>Ganztägig: &lt;OTRS_APPOINTMENT_ALLDAY&gt;</p>
+<p>Wiederholung: &lt;OTRS_APPOINTMENT_RECURRING&gt;</p>
+<p></p>
+<p><a href="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;" title="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;">&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;</a></p>
+<p></p>
+<p>-- &lt;OTRS_CONFIG_NotificationSenderName&gt;<p>');
+-- ----------------------------------------------------------
+--  insert into table notification_event_message
+-- ----------------------------------------------------------
+INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
+    VALUES
+    (15, 'text/plain', 'de', 'Fehler beim Versand einer E-Mail', 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+
+bitte beachten Sie, dass der Versand eines E-Mail-Artikels für [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] fehlgeschlagen ist. Bitte überprüfen Sie die E-Mail-Adresse des Empfängers auf Fehler und versuchen Sie es erneut. Sie können den Artikel bei Bedarf manuell aus dem Ticket erneut senden.
+
+Fehlermeldung:
+<OTRS_AGENT_TransmissionStatusMessage>
+
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_TICKET_LAST_ARTICLE_ID>
+
+-- <OTRS_CONFIG_NotificationSenderName>');
+-- ----------------------------------------------------------
+--  insert into table notification_event_message
+-- ----------------------------------------------------------
+INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
+    VALUES
+    (16, 'text/plain', 'de', 'Erwähnung in Ticket: <OTRS_TICKET_Title>', 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+
+Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>.
+<OTRS_AGENT_BODY[5]>
+
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+
+-- <OTRS_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
@@ -2774,21 +2843,36 @@ A(z) [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_Ti
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (14, 'text/html', 'hu', 'Emlékeztető: <OTRS_APPOINTMENT_TITLE>', 'Kedves &lt;OTRS_NOTIFICATION_RECIPIENT_UserFirstname&gt;!<br />
-<br />
-A következő esemény elérte az értesítési idejét: &lt;OTRS_APPOINTMENT_TITLE&gt;<br />
-<br />
-Leírás: &lt;OTRS_APPOINTMENT_DESCRIPTION&gt;<br />
-Hely: &lt;OTRS_APPOINTMENT_LOCATION&gt;<br />
-Naptár: <span style="color: &lt;OTRS_CALENDAR_COLOR&gt;;">■</span> &lt;OTRS_CALENDAR_CALENDARNAME&gt;<br />
-Kezdési dátum: &lt;OTRS_APPOINTMENT_STARTTIME&gt;<br />
-Befejezési dátum: &lt;OTRS_APPOINTMENT_ENDTIME&gt;<br />
-Egész napos: &lt;OTRS_APPOINTMENT_ALLDAY&gt;<br />
-Ismétlődés: &lt;OTRS_APPOINTMENT_RECURRING&gt;<br />
-<br />
-<a href="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;" title="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;">&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;</a><br />
-<br />
--- &lt;OTRS_CONFIG_NotificationSenderName&gt;');
+    (14, 'text/html', 'hu', 'Emlékeztető: <OTRS_APPOINTMENT_TITLE>', '<p>Kedves &lt;OTRS_NOTIFICATION_RECIPIENT_UserFirstname&gt;!</p>
+<p></p>
+<p>A következő esemény elérte az értesítési idejét: &lt;OTRS_APPOINTMENT_TITLE&gt;</p>
+<p></p>
+<p>Leírás: &lt;OTRS_APPOINTMENT_DESCRIPTION&gt;</p>
+<p>Hely: &lt;OTRS_APPOINTMENT_LOCATION&gt;</p>
+<p>Naptár: <span style="color: &lt;OTRS_CALENDAR_COLOR&gt;;">■</span> &lt;OTRS_CALENDAR_CALENDARNAME&gt;</p>
+<p>Kezdési dátum: &lt;OTRS_APPOINTMENT_STARTTIME&gt;</p>
+<p>Befejezési dátum: &lt;OTRS_APPOINTMENT_ENDTIME&gt;</p>
+<p>Egész napos: &lt;OTRS_APPOINTMENT_ALLDAY&gt;</p>
+<p>Ismétlődés: &lt;OTRS_APPOINTMENT_RECURRING&gt;</p>
+<p></p>
+<p><a href="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;" title="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;">&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;</a></p>
+<p></p>
+<p>-- &lt;OTRS_CONFIG_NotificationSenderName&gt;</p>');
+-- ----------------------------------------------------------
+--  insert into table notification_event_message
+-- ----------------------------------------------------------
+INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
+    VALUES
+    (15, 'text/plain', 'hu', 'E-mail kézbesítési hiba', 'Kedves <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>!
+
+Felhívjuk a figyelmét, hogy a(z) [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] jegy e-mail bejegyzésének kézbesítése nem sikerült. Ellenőrizze, hogy nincs-e a címzett e-mail címében hiba, és próbálja meg újra. Kézileg is újraküldheti a bejegyzést a jegyből, ha szükséges.
+
+Hibaüzenet:
+<OTRS_AGENT_TransmissionStatusMessage>
+
+<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_TICKET_LAST_ARTICLE_ID>
+
+-- <OTRS_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
@@ -2967,21 +3051,21 @@ INSERT INTO notification_event_message (notification_id, content_type, language,
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (14, 'text/html', 'sr_Cyrl', 'Подсетник: <OTRS_APPOINTMENT_TITLE>', 'Здраво &lt;OTRS_NOTIFICATION_RECIPIENT_UserFirstname&gt;,<br />
-<br />
-време је за обавештење у вези термина &quot;&lt;OTRS_APPOINTMENT_TITLE&gt;&quot;.<br />
-<br />
-Опис: &lt;OTRS_APPOINTMENT_DESCRIPTION&gt;<br />
-Локација: &lt;OTRS_APPOINTMENT_LOCATION&gt;<br />
-Календар: <span style="color: &lt;OTRS_CALENDAR_COLOR&gt;;">■</span> &lt;OTRS_CALENDAR_CALENDARNAME&gt;<br />
-Датум почетка: &lt;OTRS_APPOINTMENT_STARTTIME&gt;<br />
-Датум краја: &lt;OTRS_APPOINTMENT_ENDTIME&gt;<br />
-Целодневно: &lt;OTRS_APPOINTMENT_ALLDAY&gt;<br />
-Понављање: &lt;OTRS_APPOINTMENT_RECURRING&gt;<br />
-<br />
-<a href="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;" title="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;">&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;</a><br />
-<br />
--- &lt;OTRS_CONFIG_NotificationSenderName&gt;');
+    (14, 'text/html', 'sr_Cyrl', 'Подсетник: <OTRS_APPOINTMENT_TITLE>', '<p>Здраво &lt;OTRS_NOTIFICATION_RECIPIENT_UserFirstname&gt;,</p>
+<p></p>
+<p>време је за обавештење у вези термина &quot;&lt;OTRS_APPOINTMENT_TITLE&gt;&quot;.</p>
+<p></p>
+<p>Опис: &lt;OTRS_APPOINTMENT_DESCRIPTION&gt;</p>
+<p>Локација: &lt;OTRS_APPOINTMENT_LOCATION&gt;</p>
+<p>Календар: <span style="color: &lt;OTRS_CALENDAR_COLOR&gt;;">■</span> &lt;OTRS_CALENDAR_CALENDARNAME&gt;</p>
+<p>Датум почетка: &lt;OTRS_APPOINTMENT_STARTTIME&gt;</p>
+<p>Датум краја: &lt;OTRS_APPOINTMENT_ENDTIME&gt;</p>
+<p>Целодневно: &lt;OTRS_APPOINTMENT_ALLDAY&gt;</p>
+<p>Понављање: &lt;OTRS_APPOINTMENT_RECURRING&gt;</p>
+<p></p>
+<p><a href="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;" title="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;">&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;</a></p>
+<p></p>
+<p>-- &lt;OTRS_CONFIG_NotificationSenderName&gt;</p>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
@@ -3160,77 +3244,21 @@ servis tiketa [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (14, 'text/html', 'sr_Latn', 'Podsetnik: <OTRS_APPOINTMENT_TITLE>', 'Zdravo &lt;OTRS_NOTIFICATION_RECIPIENT_UserFirstname&gt;,<br />
-<br />
-vreme je za obaveštenje u vezi termina &quot;&lt;OTRS_APPOINTMENT_TITLE&gt;&quot;.<br />
-<br />
-Opis: &lt;OTRS_APPOINTMENT_DESCRIPTION&gt;<br />
-Lokacije: &lt;OTRS_APPOINTMENT_LOCATION&gt;<br />
-Kalendar: <span style="color: &lt;OTRS_CALENDAR_COLOR&gt;;">■</span> &lt;OTRS_CALENDAR_CALENDARNAME&gt;<br />
-Datum početka: &lt;OTRS_APPOINTMENT_STARTTIME&gt;<br />
-Datum kraja: &lt;OTRS_APPOINTMENT_ENDTIME&gt;<br />
-Celodnevno: &lt;OTRS_APPOINTMENT_ALLDAY&gt;<br />
-Ponavljanje: &lt;OTRS_APPOINTMENT_RECURRING&gt;<br />
-<br />
-<a href="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;" title="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;">&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;</a><br />
-<br />
--- &lt;OTRS_CONFIG_NotificationSenderName&gt;');
--- ----------------------------------------------------------
---  insert into table notification_event_message
--- ----------------------------------------------------------
-INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
-    VALUES
-    (15, 'text/plain', 'en', 'Email Delivery Failure', 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
-
-Please note, that the delivery of an email article of [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] has failed. Please check the email address of your recipient for mistakes and try again. You can manually resend the article from the ticket if required.
-
-Error Message:
-<OTRS_AGENT_TransmissionStatusMessage>
-
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_TICKET_LAST_ARTICLE_ID>
-
--- <OTRS_CONFIG_NotificationSenderName>');
--- ----------------------------------------------------------
---  insert into table notification_event_message
--- ----------------------------------------------------------
-INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
-    VALUES
-    (15, 'text/plain', 'hu', 'E-mail kézbesítési hiba', 'Kedves <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>!
-
-Felhívjuk a figyelmét, hogy a(z) [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] jegy e-mail bejegyzésének kézbesítése nem sikerült. Ellenőrizze, hogy nincs-e a címzett e-mail címében hiba, és próbálja meg újra. Kézileg is újraküldheti a bejegyzést a jegyből, ha szükséges.
-
-Hibaüzenet:
-<OTRS_AGENT_TransmissionStatusMessage>
-
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_TICKET_LAST_ARTICLE_ID>
-
--- <OTRS_CONFIG_NotificationSenderName>');
--- ----------------------------------------------------------
---  insert into table notification_event_message
--- ----------------------------------------------------------
-INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
-    VALUES
-    (16, 'text/plain', 'en', 'Mention in ticket: <OTRS_TICKET_Title>', 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
-
-you have been mentioned in ticket <OTRS_TICKET_NUMBER>.
-<OTRS_AGENT_BODY[5]>
-
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
-
--- <OTRS_CONFIG_NotificationSenderName>');
--- ----------------------------------------------------------
---  insert into table notification_event_message
--- ----------------------------------------------------------
-INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
-    VALUES
-    (16, 'text/plain', 'de', 'Erwähnung in Ticket: <OTRS_TICKET_Title>', 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
-
-Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>.
-<OTRS_AGENT_BODY[5]>
-
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
-
--- <OTRS_CONFIG_NotificationSenderName>');
+    (14, 'text/html', 'sr_Latn', 'Podsetnik: <OTRS_APPOINTMENT_TITLE>', '<p>Zdravo &lt;OTRS_NOTIFICATION_RECIPIENT_UserFirstname&gt;,</p>
+<p></p>
+<p>vreme je za obaveštenje u vezi termina &quot;&lt;OTRS_APPOINTMENT_TITLE&gt;&quot;.</p>
+<p></p>
+<p>Opis: &lt;OTRS_APPOINTMENT_DESCRIPTION&gt;</p>
+<p>Lokacije: &lt;OTRS_APPOINTMENT_LOCATION&gt;</p>
+<p>Kalendar: <span style="color: &lt;OTRS_CALENDAR_COLOR&gt;;">■</span> &lt;OTRS_CALENDAR_CALENDARNAME&gt;</p>
+<p>Datum početka: &lt;OTRS_APPOINTMENT_STARTTIME&gt;</p>
+<p>Datum kraja: &lt;OTRS_APPOINTMENT_ENDTIME&gt;</p>
+<p>Celodnevno: &lt;OTRS_APPOINTMENT_ALLDAY&gt;</p>
+<p>Ponavljanje: &lt;OTRS_APPOINTMENT_RECURRING&gt;</p>
+<p></p>
+<p><a href="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;" title="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;">&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;</a></p>
+<p></p>
+<p>-- &lt;OTRS_CONFIG_NotificationSenderName&gt;</p>');
 -- ----------------------------------------------------------
 --  insert into table dynamic_field
 -- ----------------------------------------------------------

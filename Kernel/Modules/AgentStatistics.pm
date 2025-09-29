@@ -737,8 +737,8 @@ sub ViewScreen {
         UserID => $Self->{UserID},
     );
     if ( !IsHashRefWithData( $StatsList->{$StatID} ) ) {
-        return $LayoutObject->ErrorScreen(
-            Message => Translatable('Could not load stat.'),
+        return $LayoutObject->NoPermission(
+            Message => Translatable("This stat does not exist, or you don't have permissions to access it."),
         );
     }
 

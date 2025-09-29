@@ -262,6 +262,7 @@ $Self->IsDeeply(
         ChangeBy               => 1,
         ChangeTime             => $Article{ChangeTime},
         Charset                => 'ISO-8859-15',
+        CommunicationChannel   => 'Internal',
         CommunicationChannelID => 3,
         ContentCharset         => 'ISO-8859-15',
         ContentType            => 'text/plain; charset=ISO-8859-15',

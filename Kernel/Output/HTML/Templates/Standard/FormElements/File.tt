@@ -1,0 +1,28 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+[% RenderBlockStart("File") %]
+    <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %][% IF Data.Key %] [% Translate(Data.Key) | html %][% END %]:</label>
+    <div class="Field component-attachment">
+        [% INCLUDE "FormElements/AttachmentList.tt" %]
+    </div>
+
+    [% IF Data.Description %]
+    <p class="FieldExplanation">
+        [% Translate(Data.Description) | html %]
+    </p>
+    [% END %]
+[% RenderBlockEnd("File") %]
+
+[% RenderBlockStart("Upload") %]
+    <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %] [% Translate(Data.Key) | html %]:</label>
+    <div class="Field">
+        <input type="file" id="[% Data.ID | html %]" name="[% Data.Name | html %]" class="[% Data.Class | html %]" [% Data.Attribute | html %]/>
+        <a href="">[% Data.Filename | html %]</a>
+    </div>
+[% RenderBlockEnd("Upload") %]

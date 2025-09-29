@@ -258,7 +258,7 @@
                         </div>
 
                         <div class="field-wrapper Row_IMAPFolder Hidden">
-                            <label for="IMAPFolder">[% Translate("IMAP Folder") | html %]</label>
+                            <label for="IMAPFolder">[% Translate("Folder") | html %]</label>
                             <div class="Field">
                                 <input type="text" class="W50pc" name="IMAPFolder" id="IMAPFolder" value="INBOX" maxlength="250"/>
                                 <p class="FieldExplanation">[% Translate("Only modify this if you need to fetch mail from a different folder than INBOX.") | html %]</p>
@@ -409,7 +409,7 @@
                         </div>
 
                         <div class="field-wrapper Row_IMAPFolder Hidden">
-                            <label for="IMAPFolder">[% Translate("IMAP Folder") | html %]</label>
+                            <label for="IMAPFolder">[% Translate("Folder") | html %]</label>
                             <div class="Field">
                                 <input type="text" class="W50pc" name="IMAPFolder" id="IMAPFolder" value="[% Data.IMAPFolder | html %]" maxlength="250"/>
                                 <p class="FieldExplanation">[% Translate("Only modify this if you need to fetch mail from a different folder than INBOX.") | html %]</p>

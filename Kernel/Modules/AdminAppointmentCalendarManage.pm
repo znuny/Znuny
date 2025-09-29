@@ -793,11 +793,29 @@ sub _Mask {
 sub _GroupSelectionGet {
     my ( $Self, %Param ) = @_;
 
-    # get list of groups where user has RW permissions
-    my %GroupList = $Kernel::OM->Get('Kernel::System::Group')->PermissionUserGet(
-        UserID => $Self->{UserID},
-        Type   => 'rw',
+    my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
+
+    my $HasAdminPermission = $GroupObject->PermissionCheck(
+        UserID    => $Self->{UserID},
+        GroupName => 'admin',
+        Type      => 'rw',
     );
+
+    my %GroupList;
+    if ($HasAdminPermission) {
+
+        # Get list of all groups
+        %GroupList = $GroupObject->GroupList(
+            Valid => 1,
+        );
+    }
+    else {
+        # Get list of groups where user has RW permissions
+        %GroupList = $GroupObject->PermissionUserGet(
+            UserID => $Self->{UserID},
+            Type   => 'rw',
+        );
+    }
 
     my $GroupSelection = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->BuildSelection(
         Data        => \%GroupList,

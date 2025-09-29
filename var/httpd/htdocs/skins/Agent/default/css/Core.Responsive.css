@@ -652,7 +652,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         margin-right: 0;
     }
 
-    .RichTextField > .cke {
+    .RichTextField > .ck.ck-editor {
         width: auto !important;
         max-width: 100% !important;
     }
@@ -661,13 +661,15 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         font-size: 15px;
     } */
 
-    .CallForAction,
-    .cke_dialog_footer_buttons a.cke_dialog_ui_button {
+    .CallForAction
+    /* TODO check (SN): Deleted, it appear there are no longer dialogs in RichText Editor 5
+     .cke_dialog_footer_buttons a.cke_dialog_ui_button*/ {
         margin: 0;
     }
 
     .CallForAction span,
-    .cke_dialog_footer_buttons td a.cke_dialog_ui_button span {
+    /* TODO check (SN): Deleted, it appear there are no longer dialogs in RichText Editor 5 */
+    /*.cke_dialog_footer_buttons td a.cke_dialog_ui_button span*/ {
         height: auto;
     }
 

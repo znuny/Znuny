@@ -1111,12 +1111,12 @@ my @Tests = (
         Success          => 1,
         Article          => 1,
         HTMLContentCheck => 1,
-        HTMLText         => 'A text with<br/>
-<br/>
-line breaks<br/>
-and a few more line<br/>
-<br/>
-breaks.',
+        HTMLText         => '<p>A text with</p>
+<p></p>
+<p>line breaks</p>
+<p>and a few more line</p>
+<p></p>
+<p>breaks.</p>',
     },
 );
 

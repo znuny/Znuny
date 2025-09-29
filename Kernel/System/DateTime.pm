@@ -1541,6 +1541,7 @@ Checks if the given time zone is valid.
     my $Valid = Kernel::System::DateTime->IsTimeZoneValid( TimeZone => 'Europe/Berlin' );
 
 Returns:
+
     $Valid = 1;    # if given time zone is valid, 0 otherwise.
 
 =cut
@@ -1822,12 +1823,9 @@ sub _StringToHash {
         #   If it isn't an offset consider it a timezone
         if ( $OffsetOrTZ !~ m/(\+|\-)\d{2}:?\d{2}/i ) {
 
-            # Make sure the time zone is valid. Otherwise, assume UTC.
-            if ( !$Self->IsTimeZoneValid( TimeZone => $OffsetOrTZ ) ) {
-                $OffsetOrTZ = 'UTC';
-            }
-
-            $OffsetOrTZ = $Self->GetRealTimeZone( TimeZone => $OffsetOrTZ );
+            # Make sure the time zone is valid. If it is an alias, replace it
+            # with the real name, otherwise assume UTC.
+            $OffsetOrTZ = $Self->GetRealTimeZone( TimeZone => $OffsetOrTZ ) // 'UTC';
 
             return {
                 %{$DateTimeHash},

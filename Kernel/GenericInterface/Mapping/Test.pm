@@ -83,15 +83,15 @@ possible config options for value mapping are
 if no config option is provided or one that does not match the options above, the original data will be returned
 
     my $Result = $MappingObject->Map(
-        Data => {              # data payload before mapping
+        Data => {               # data payload before mapping
             ...
         },
     );
 
     $Result = {
-        Success         => 1,  # 0 or 1
-        ErrorMessage    => '', # in case of error
-        Data            => {   # data payload of after mapping
+        Success         => 1,   # 0 or 1
+        ErrorMessage    => '',  # in case of error
+        Data            => {    # data payload of after mapping
             ...
         },
     };
@@ -167,14 +167,14 @@ sub Map {
 
 change all characters in values to upper case
 
-    my $ReturnData => $MappingObject->_ToUpper(
-        Data => { # data payload before mapping
+    my $ReturnData = $MappingObject->_ToUpper(
+        Data => {                   # data payload before mapping
             'abc' => 'Def,
             'ghi' => 'jkl',
         },
     );
 
-    $ReturnData = { # data payload after mapping
+    $ReturnData = {                 # data payload after mapping
         'abc' => 'DEF',
         'ghi' => 'JKL',
     };
@@ -196,14 +196,14 @@ sub _ToUpper {
 
 change all characters in values to lower case
 
-    my $ReturnData => $MappingObject->_ToLower(
-        Data => { # data payload before mapping
+    my $ReturnData = $MappingObject->_ToLower(
+        Data => {                   # data payload before mapping
             'abc' => 'Def,
             'ghi' => 'JKL',
         },
     );
 
-    $ReturnData = { # data payload after mapping
+    $ReturnData = {                 # data payload after mapping
         'abc' => 'def',
         'ghi' => 'jkl',
     };
@@ -225,14 +225,14 @@ sub _ToLower {
 
 set all values to empty string
 
-    my $ReturnData => $MappingObject->_Empty(
-        Data => { # data payload before mapping
+    my $ReturnData = $MappingObject->_Empty(
+        Data => {                   # data payload before mapping
             'abc' => 'Def,
             'ghi' => 'JKL',
         },
     );
 
-    $ReturnData = { # data payload after mapping
+    $ReturnData = {                 # data payload after mapping
         'abc' => '',
         'ghi' => '',
     };

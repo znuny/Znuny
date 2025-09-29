@@ -134,7 +134,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     --table-td-even-bg: #F9F9F9;
     --tr-disabled-bg: #efefef;
     --tr-disabled-text: #B6B6B6;
-    
+
     /* Flag Element */
     --color-flag-default: #cdcdcd;
 
@@ -154,7 +154,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
         /* Success */
         --alert-success-bg-solid-color: #3DD598;
-        --alert-success-bg-color: #3DD59810;
+        --alert-success-bg-color: #3dd59874;
         --alert-success-icon-color: #3DD598;
         --alert-success-border-color: #3DD5981a;
 

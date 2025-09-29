@@ -290,7 +290,7 @@ sub GetMinifiedFile {
     my $FileContents = $MainObject->FileRead(
         Location => $Location,
 
-        # It would be more correct to use UTF8 mode, but then the JavaScript::Minifier
+        # It would be more correct to use UTF8 mode, but then the ``JavaScript::Minifier``
         #   will cause timeouts due to extreme slowness on some UT servers. Disable for now.
         #   Unicode in the files still works correctly.
         #Mode     => 'utf8',
@@ -372,7 +372,7 @@ returns a minified version of the given JavaScript Code.
 Warning: this function may cause a die() if there are errors in the file,
 protect against that with eval().
 
-This function internally uses the CPAN module JavaScript::Minifier.
+This function internally uses the CPAN module ``JavaScript::Minifier``.
 As of version 1.05 of that module, there is an issue with regular expressions:
 
 This will cause a die:
@@ -565,11 +565,11 @@ sub IsJavaScriptMinifierXSAvailable {
 
 =head2 IsCSSMinifierXSAvailable()
 
-Tries to load CSS::Minifier::XS if available which provides faster creation of minified CSS.
+Tries to load ``JavaScript::Minifier::XS`` if available which provides faster creation of minified JavaScript.
 
     my $IsCSSMinifierXSAvailable = $LoaderObject->IsCSSMinifierXSAvailable();
 
-Returns true value if CSS::Minifier::XS is available and loaded.
+Returns true value if ``CSS::Minifier::XS`` is available and loaded.
 
 =cut
 

@@ -174,6 +174,7 @@ sub Run {
                 Action               => $Action,
                 ActionFrontendModule => $ActionFrontendModule,
                 Subaction            => 'Change',
+                TemplateError        => $GetParam->{Error}->{Template} ? 1 : 0,
             );
         }
 
@@ -257,6 +258,13 @@ sub _ShowEdit {
 
     my $Output = $LayoutObject->Header();
     $Output .= $LayoutObject->NavigationBar();
+
+    if ( $Param{TemplateError} ) {
+        $Output .= $LayoutObject->Notify(
+            Priority => 'Error',
+            Info     => Translatable('The entered data is not a valid XSLT style sheet.'),
+        );
+    }
 
     my $MappingConfig = $Param{WebserviceData};
     my %Error;

@@ -1600,6 +1600,18 @@ sub Run {
         );
     }
 
+    my %SysConfigCategories = $Kernel::OM->Get('Kernel::System::SysConfig')->ConfigurationCategoriesGet();
+
+    my %SysConfigCategory;
+    CATEGORY:
+    for my $CategoryName ( sort keys %SysConfigCategories ) {
+        next CATEGORY if !$SysConfigCategories{$CategoryName}->{PackageName};
+
+        my $PackageName = $SysConfigCategories{$CategoryName}->{PackageName};
+        my $Link        = $LayoutObject->{Baselink} . 'Action=AdminSystemConfiguration;Category=' . $PackageName;
+        $SysConfigCategory{$PackageName} = $Link;
+    }
+
     for my $Package (@RepositoryList) {
         my %Data = $Self->_MessageGet( Info => $Package->{Description} );
 
@@ -1608,10 +1620,11 @@ sub Run {
             Data => {
                 %{$Package},
                 %Data,
-                Name    => $Package->{Name}->{Content},
-                Version => $Package->{Version}->{Content},
-                Vendor  => $Package->{Vendor}->{Content},
-                URL     => $Package->{URL}->{Content},
+                Name          => $Package->{Name}->{Content},
+                Version       => $Package->{Version}->{Content},
+                Vendor        => $Package->{Vendor}->{Content},
+                URL           => $Package->{URL}->{Content},
+                SysConfigLink => $SysConfigCategory{ $Package->{Name}->{Content} },
             },
         );
 

@@ -1,0 +1,41 @@
+/* istanbul ignore else -- @preserve */
+
+/* istanbul ignore else: This is always true because otherwise it would not register a reducer callback. -- @preserve */
+
+/* istanbul ignore file -- @preserve */
+
+/* istanbul ignore if -- @preserve */
+
+/* istanbul ignore if: paranoid check -- @preserve */
+
+/* istanbul ignore next -- @preserve */
+
+/* istanbul ignore next: paranoid check -- @preserve */
+
+/* istanbul ignore next: static function definition -- @preserve */
+
+/**
+ * @copyright Copyright (c) 2024, Znuny GmbH.
+ *
+ * @license GNU GPL version 3
+ *
+ * This software comes with ABSOLUTELY NO WARRANTY. For details, see
+ * the enclosed file COPYING for license information (GPL). If you
+ * did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+ */
+
+/**
+ * @copyright Copyright (c) 2024, Znuny GmbH.
+ * @copyright Copyright (c) 2003-2024, CKSource Holding sp. z o.o.
+ *
+ * @license GNU GPL version 3
+ *
+ * This software comes with ABSOLUTELY NO WARRANTY. For details, see
+ * the enclosed file COPYING for license information (GPL). If you
+ * did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+ */
+
+/**
+ * @license Copyright (c) 2003-2025, CKSource Holding sp. z o.o. All rights reserved.
+ * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
+ */

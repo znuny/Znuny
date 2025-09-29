@@ -705,7 +705,7 @@ sub Login {
             Expires  => '+1y',
             Path     => $ConfigObject->Get('ScriptAlias'),
             Secure   => $CookieSecureAttribute,
-            HttpOnly => 1,
+            HTTPOnly => 1,
         );
     }
 
@@ -1433,11 +1433,8 @@ sub Header {
 
         if ( $Param{ShowToolbarItems} && ref $ToolBarModule eq 'HASH' ) {
 
-            $Self->Block(
-                Name => 'ToolBar',
-                Data => \%Param,
-            );
             $Self->ToolbarModules(
+                %Param,
                 ToolBarModule => $ToolBarModule,
             );
         }
@@ -1553,17 +1550,6 @@ sub ToolbarModules {
     my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-    my %ToolBarModuleBlocks = map { $Param{ToolBarModule}->{$_}->{Block} || 'ToolBarPersonalViews' => 1 }
-        grep { defined $Param{ToolBarModule}->{$_} } keys %{ $Param{ToolBarModule} };
-
-    # renders ToolBarContainer if a ToolBarModule is active
-    for my $Block ( sort keys %ToolBarModuleBlocks ) {
-        $Self->Block(
-            Name => $Block . 'Container',
-            Data => \%Param,
-        );
-    }
-
     my %Modules;
     my %Jobs = %{ $Param{ToolBarModule} };
 
@@ -1630,6 +1616,32 @@ sub ToolbarModules {
         }
 
         %Modules = ( $Object->Run( %Param, Config => $Jobs{$Job} ), %Modules );
+    }
+
+    my %ToolBarModuleBlocks;
+
+    # count the number of blocks for which modules are to be rendered.
+    for my $ModuleID ( sort keys %Modules ) {
+        my $Block = $Modules{$ModuleID}->{Block} || 'ToolBarPersonalViews';
+        $Block = 'ToolBarPersonalViews' if $Block eq 'ToolBarItem';
+
+        $ToolBarModuleBlocks{$Block}++;
+    }
+
+    # renders ToolBar block if ToolBarModules exist
+    if (%ToolBarModuleBlocks) {
+        $Self->Block(
+            Name => 'ToolBar',
+            Data => \%Param,
+        );
+    }
+
+    # renders ToolBarContainer if a ToolBarModule is active
+    for my $Block ( sort keys %ToolBarModuleBlocks ) {
+        $Self->Block(
+            Name => $Block . 'Container',
+            Data => \%Param,
+        );
     }
 
     # show tool bar items
@@ -1772,11 +1784,27 @@ sub Footer {
         Result    => 'ID',
     );
 
+    # Turn UserLanguage (e.g. en_GB into CKE language, e.g. 'en-gb')
+    ( my $CKEUserLanguage = lc $Self->{UserLanguage} ) =~ s{_}{-}g;
+
+    # Check if translation file should be loaded
+    my $IncludeRichTextTranslation = 0;
+    my $RichTextSet                = $ConfigObject->Get('Frontend::RichText');
+    my $RichTextPath               = $ConfigObject->Get('Frontend::RichText::Path');
+    my $WebPath                    = $ConfigObject->Get('Frontend::WebPath');
+    my $RichTextShortPath          = $RichTextPath;
+
+    $RichTextShortPath =~ s/$WebPath//;
+    my $LanguageFileWebPath
+        = $ConfigObject->Get('Home') . "/var/httpd/htdocs/${RichTextShortPath}/translations/${CKEUserLanguage}.js";
+
+    $IncludeRichTextTranslation = 1 if $RichTextSet && -e $LanguageFileWebPath;
+
     # add JS data
     my %JSConfig = (
         Baselink                       => $Self->{Baselink},
         CGIHandle                      => $Self->{CGIHandle},
-        WebPath                        => $ConfigObject->Get('Frontend::WebPath'),
+        WebPath                        => $WebPath,
         Action                         => $Self->{Action},
         Subaction                      => $Self->{Subaction},
         SessionIDCookie                => $Self->{SessionIDCookie},
@@ -1786,8 +1814,10 @@ sub Footer {
         ChallengeToken                 => $Self->{UserChallengeToken},
         CustomerPanelSessionName       => $ConfigObject->Get('CustomerPanelSessionName'),
         UserLanguage                   => $Self->{UserLanguage},
+        CKEUserLanguage                => $CKEUserLanguage,
+        IncludeRichTextTranslation     => $IncludeRichTextTranslation,
         WebMaxFileUpload               => $ConfigObject->Get('WebMaxFileUpload'),
-        RichTextSet                    => $ConfigObject->Get('Frontend::RichText'),
+        RichTextSet                    => $RichTextSet,
         CheckEmailAddresses            => $ConfigObject->Get('CheckEmailAddresses'),
         MenuDragDropEnabled            => $ConfigObject->Get('Frontend::MenuDragDropEnabled'),
         OpenMainMenuOnHover            => $ConfigObject->Get('OpenMainMenuOnHover'),
@@ -1821,7 +1851,10 @@ sub Footer {
     # create & return output
     return $Self->Output(
         TemplateFile => "Footer$Type",
-        Data         => \%Param
+        Data         => {
+            %Param,
+            JSConfig => \%JSConfig,
+        },
     );
 }
 
@@ -2780,7 +2813,7 @@ sub Attachment {
     }
 
     if ( $Param{Charset} ) {
-        $Output .= "Content-Type: $Param{ContentType}; charset=$Param{Charset};\n\n";
+        $Output .= "Content-Type: $Param{ContentType}; charset=$Param{Charset}\n\n";
     }
     else {
         $Output .= "Content-Type: $Param{ContentType}\n\n";
@@ -3889,7 +3922,8 @@ sub BuildDateSelection {
         VacationDays: ' . $VacationDaysJSON . ',
         DateInFuture: ' .    ( $ValidateDateInFuture    ? 'true' : 'false' ) . ',
         DateNotInFuture: ' . ( $ValidateDateNotInFuture ? 'true' : 'false' ) . ',
-        WeekDayStart: ' . $WeekDayStart . '
+        WeekDayStart: ' . $WeekDayStart . ',
+        Disabled: ' . ( $Param{Disabled} ? 'true' : 'false' ) . '
     });';
 
     $Self->AddJSOnDocumentComplete( Code => $DatepickerJS );
@@ -4017,7 +4051,7 @@ sub CustomerLogin {
             Expires  => '+1y',
             Path     => $ConfigObject->Get('ScriptAlias'),
             Secure   => $CookieSecureAttribute,
-            HttpOnly => 1,
+            HTTPOnly => 1,
         );
     }
 
@@ -4460,24 +4494,43 @@ sub CustomerFooter {
             = $Self->{LanguageObject}->Translate( $AutocompleteConfig->{$ConfigElement}{ButtonText} );
     }
 
+    # Turn UserLanguage (e.g. en_GB into CKE language, e.g. 'en-gb')
+    ( my $CKEUserLanguage = lc $Self->{UserLanguage} ) =~ s{_}{-}g;
+
+    # Check if translation file should be loaded
+    my $IncludeRichTextTranslation = 0;
+    my $RichTextSet                = $ConfigObject->Get('Frontend::RichText');
+    my $RichTextPath               = $ConfigObject->Get('Frontend::RichText::Path');
+    my $WebPath                    = $ConfigObject->Get('Frontend::WebPath');
+    my $RichTextShortPath          = $RichTextPath;
+
+    $RichTextShortPath =~ s/$WebPath//;
+    my $LanguageFileWebPath
+        = $ConfigObject->Get('Home') . "/var/httpd/htdocs/${RichTextShortPath}/translations/${CKEUserLanguage}.js";
+
+    $IncludeRichTextTranslation = 1 if $RichTextSet && -e $LanguageFileWebPath;
+
     # add JS data
     my %JSConfig = (
-        Baselink                 => $Self->{Baselink},
-        CGIHandle                => $Self->{CGIHandle},
-        WebPath                  => $ConfigObject->Get('Frontend::WebPath'),
-        Action                   => $Self->{Action},
-        Subaction                => $Self->{Subaction},
-        SessionIDCookie          => $Self->{SessionIDCookie},
-        SessionName              => $Self->{SessionName},
-        SessionID                => $Self->{SessionID},
-        SessionUseCookie         => $ConfigObject->Get('SessionUseCookie'),
-        ChallengeToken           => $Self->{UserChallengeToken},
-        CustomerPanelSessionName => $ConfigObject->Get('CustomerPanelSessionName'),
-        UserLanguage             => $Self->{UserLanguage},
-        CheckEmailAddresses      => $ConfigObject->Get('CheckEmailAddresses'),
-        InputFieldsActivated     => $ConfigObject->Get('ModernizeCustomerFormFields'),
-        Autocomplete             => $AutocompleteConfig,
-        WebMaxFileUpload         => $ConfigObject->Get('WebMaxFileUpload'),
+        Baselink                   => $Self->{Baselink},
+        CGIHandle                  => $Self->{CGIHandle},
+        WebPath                    => $ConfigObject->Get('Frontend::WebPath'),
+        Action                     => $Self->{Action},
+        Subaction                  => $Self->{Subaction},
+        SessionIDCookie            => $Self->{SessionIDCookie},
+        SessionName                => $Self->{SessionName},
+        SessionID                  => $Self->{SessionID},
+        SessionUseCookie           => $ConfigObject->Get('SessionUseCookie'),
+        ChallengeToken             => $Self->{UserChallengeToken},
+        CustomerPanelSessionName   => $ConfigObject->Get('CustomerPanelSessionName'),
+        UserLanguage               => $Self->{UserLanguage},
+        CKEUserLanguage            => $CKEUserLanguage,
+        IncludeRichTextTranslation => $IncludeRichTextTranslation,
+        RichTextSet                => $RichTextSet,
+        CheckEmailAddresses        => $ConfigObject->Get('CheckEmailAddresses'),
+        InputFieldsActivated       => $ConfigObject->Get('ModernizeCustomerFormFields'),
+        Autocomplete               => $AutocompleteConfig,
+        WebMaxFileUpload           => $ConfigObject->Get('WebMaxFileUpload'),
     );
 
     for my $Config ( sort keys %JSConfig ) {
@@ -4507,7 +4560,10 @@ sub CustomerFooter {
     # create & return output
     return $Self->Output(
         TemplateFile => "CustomerFooter$Type",
-        Data         => \%Param,
+        Data         => {
+            %Param,
+            JSConfig => \%JSConfig,
+        },
     );
 }
 
@@ -5039,15 +5095,28 @@ sub RichTextDocumentComplete {
         }
     }
 
+    my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
+
     # replace image link with content id for uploaded images
     my $StringRef = $Self->_RichTextReplaceLinkOfInlineContent(
         String => \$Param{String},
     );
 
     # verify html document
-    $Param{String} = $Kernel::OM->Get('Kernel::System::HTMLUtils')->DocumentComplete(
-        String  => ${$StringRef},
-        Charset => $Self->{UserCharset},
+    my $UserType = $Self->{SessionSource} || $Self->{Action} || '';
+    if ( $UserType =~ m{\A(Agent|Customer|Public)} ) {
+        $UserType = $1;
+    }
+    else {
+
+        # Fall back to "Customer" because agent interface will always have a session source.
+        $UserType = 'Customer';
+    }
+
+    $Param{String} = $HTMLUtilsObject->DocumentComplete(
+        String   => ${$StringRef},
+        Charset  => $Self->{UserCharset},
+        UserType => $UserType,
     );
 
     # do correct direction
@@ -5144,6 +5213,8 @@ sub RichTextDocumentServe {
         }
     }
 
+    my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
+
     # Get charset from passed content type parameter.
     my $Charset;
     if ( $Param{Data}->{ContentType} =~ m/.+?charset\s*=\s*("|'|)(.+)/ig ) {
@@ -5177,6 +5248,23 @@ sub RichTextDocumentServe {
     # add html links
     $Param{Data}->{Content} = $Self->HTMLLinkQuote(
         String => $Param{Data}->{Content},
+    );
+
+    # verify html document
+    my $UserType = $Self->{SessionSource} || $Self->{Action} || '';
+    if ( $UserType =~ m{\A(Agent|Customer|Public)} ) {
+        $UserType = $1;
+    }
+    else {
+
+        # Fall back to "Customer" because agent interface will always have a session source.
+        $UserType = 'Customer';
+    }
+
+    $Param{Data}->{Content} = $HTMLUtilsObject->DocumentComplete(
+        String   => $Param{Data}->{Content},
+        Charset  => $Self->{UserCharset},
+        UserType => $UserType,
     );
 
     # cleanup some html tags to be cross browser compat.
@@ -6186,10 +6274,10 @@ Do this _just_ if the line, that should be wrapped, contains space characters at
 If you need more info to understand what it does, take a look at the UnitTest WrapPlainText.t to see
 use cases there.
 
-my $WrappedPlainText = $LayoutObject->WrapPlainText(
-    PlainText     => "Some Plain text that is longer than the amount stored in MaxCharacters",
-    MaxCharacters => 80,
-);
+    my $WrappedPlainText = $LayoutObject->WrapPlainText(
+        PlainText     => "Some Plain text that is longer than the amount stored in MaxCharacters",
+        MaxCharacters => 80,
+    );
 
 =cut
 
@@ -6237,9 +6325,9 @@ sub WrapPlainText {
 
 set properties for rich text editor and send them to JS via AddJSData()
 
-$LayoutObject->SetRichTextParameters(
-    Data => \%Param,
-);
+    $LayoutObject->SetRichTextParameters(
+        Data => \%Param,
+    );
 
 =cut
 
@@ -6260,6 +6348,7 @@ sub SetRichTextParameters {
     # get needed objects
     my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
     my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
+    my $JSONObject     = $Kernel::OM->Get('Kernel::System::JSON');
 
     my %RichTextSettings = %{ $ConfigObject->Get("Frontend::RichText::Settings") || {} };
 
@@ -6270,123 +6359,132 @@ sub SetRichTextParameters {
         }
     }
 
-    my $SkinHome = $ConfigObject->Get('Home') . '/var/httpd/htdocs/skins';
-    my $WebPath  = $ConfigObject->Get('Frontend::WebPath') . 'skins';
-
-    my $UserType = $Self->{SessionSource} || '';
-    if ($UserType) {
-        $UserType =~ s/Interface//;
+    for my $ContentType (qw(ContentAllowed ContentDisallowed)) {
+        if ( $RichTextSettings{$ContentType} ) {
+            $RichTextSettings{$ContentType} = $JSONObject->Decode(
+                Data => $RichTextSettings{$ContentType},
+            );
+        }
     }
 
-    my $ContentsCssFS
-        = $SkinHome . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentsCss.css';
-    my $ContentsCss
-        = $WebPath . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentsCss.css';
+    my $Home        = $ConfigObject->Get('Home');
+    my $SkinHome    = $Home . '/var/httpd/htdocs/skins';
+    my $WebPath     = $ConfigObject->Get('Frontend::WebPath');
+    my $SkinWebPath = $ConfigObject->Get('Frontend::WebPath') . 'skins';
+
+    my $UserType = 'Agent';
+
+    $Self->{SkinSelected} ||= $ConfigObject->Get("Loader::Agent::DefaultSelectedSkin") || 'default';
+
+    my $ContentCssSkinFS
+        = $SkinHome . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentCss.css';
+    my $ContentCssSkin
+        = $SkinWebPath . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentCss.css';
 
     # If Core.RichTextEditor.ContentsCss.css for current skin exists, use it
-    if ( -e $ContentsCssFS ) {
-        $RichTextSettings{'ContentsCss'} = $ContentsCss;
+    if ( -e $ContentCssSkinFS ) {
+        $RichTextSettings{'ContentCssSkin'} = $ContentCssSkin;
+    }
+
+    my $ContentCssInternalFS = $Home . '/var/httpd/htdocs/common/css/Core.RichTextEditor.InternalArticleStyles.css';
+    my $ContentCssInternal   = $WebPath . 'common/css/Core.RichTextEditor.InternalArticleStyles.css';
+
+    # If Core.RichTextEditor.InternalArticleStyles.css exists, use it
+    if ( -e $ContentCssInternalFS ) {
+        $RichTextSettings{'ContentCssInternal'} = $ContentCssInternal;
     }
 
     # get needed variables
     my $RichTextType        = $Param{Data}->{RichTextType}                || '';
     my $PictureUploadAction = $Param{Data}->{RichTextPictureUploadAction} || '';
     my $TextDir             = $Self->{TextDirection}                      || '';
-    my $EditingAreaCSS      = 'body.cke_editable { ' . $ConfigObject->Get("Frontend::RichText::DefaultCSS") . ' }';
+
+    $RichTextSettings{'ContentCssDefault'} = $ConfigObject->Get("Frontend::RichText::CSS::Content::Default");
 
     # decide if we need to use the enhanced mode (with tables)
     my @Toolbar;
     my @ToolbarWithoutImage;
 
-    if ( $RichTextType eq 'CodeMirror' ) {
-        @Toolbar = @ToolbarWithoutImage = [
-            [ 'autoFormat', 'CommentSelectedRange', 'UncommentSelectedRange', 'AutoComplete' ],
-            [ 'Find',       'Replace',              '-',                      'SelectAll' ],
-            ['Maximize'],
-        ];
-    }
-    elsif ( $ConfigObject->Get("Frontend::RichText::EnhancedMode") == '1' ) {
-        @Toolbar = [
-            [
-                'Bold',   'Italic',       'Underline',    'Strike',        'Subscript',    'Superscript',
-                '-',      'NumberedList', 'BulletedList', 'Table',         '-',            'Outdent',
-                'Indent', '-',            'JustifyLeft',  'JustifyCenter', 'JustifyRight', 'JustifyBlock',
-                '-',      'Link',         'Unlink',       'Undo',          'Redo',         'SelectAll'
-            ],
-            '/',
-            [
-                'Image',   'HorizontalRule', 'PasteText', 'PasteFromWord', 'SplitQuote', 'RemoveQuote',
-                '-',       '-',              'Find',      'Replace',       'TextColor',
-                'BGColor', 'RemoveFormat',   '-',         'ShowBlocks',    'Source',     'SpecialChar',
-                '-',       'Maximize'
-            ],
-            [ 'Format', 'Font', 'FontSize' ]
-        ];
-        @ToolbarWithoutImage = [
-            [
-                'Bold',   'Italic',       'Underline',    'Strike',        'Subscript',    'Superscript',
-                '-',      'NumberedList', 'BulletedList', 'Table',         '-',            'Outdent',
-                'Indent', '-',            'JustifyLeft',  'JustifyCenter', 'JustifyRight', 'JustifyBlock',
-                '-',      'Link',         'Unlink',       'Undo',          'Redo',         'SelectAll'
-            ],
-            '/',
-            [
-                'HorizontalRule', 'PasteText', 'PasteFromWord', 'SplitQuote', 'RemoveQuote', '-',
-                '-',              'Find',      'Replace',       'TextColor',  'BGColor',
-                'RemoveFormat',   '-',         'ShowBlocks',    'Source',     'SpecialChar', '-',
-                'Maximize'
-            ],
-            [ 'Format', 'Font', 'FontSize' ]
-        ];
+    # TODO (SN): CodeMirror development
+    #     if ( $RichTextType eq 'CodeMirror' ) {
+    #         @Toolbar = @ToolbarWithoutImage = [
+    #             [ 'autoFormat', 'CommentSelectedRange', 'UncommentSelectedRange', 'AutoComplete' ],
+    #             [ 'Find',       'Replace',              '-',                      'SelectAll' ],
+    #             ['Maximize'],
+    #         ];
+    #     }
+    #     els
+    if ( $ConfigObject->Get("Frontend::RichText::EnhancedMode") == '1' ) {
+        @Toolbar = (
+            'bold',   'italic',       'underline',      'strikethrough',   'subscript',        'superscript',
+            '|',      'numberedList', 'bulletedList',   'insertTable',     '|',                'outdent',
+            'indent', '|',            'alignment:left', 'alignment:right', 'alignment:center', 'alignment:justify',
+            '|',      'link',         'undo',           'redo',            'selectAll',
+            '-',
+            'insertImage',         'horizontalLine', 'blockQuote',
+            '|',                   'findAndReplace', 'fontColor',
+            'fontBackgroundColor', 'removeFormat',   '|', 'showBlocks', 'sourceEditing', 'specialCharacters',
+            '|',                   'heading',        'fontFamily', 'fontSize', '|', 'fullscreen',
+        );
+
+        @ToolbarWithoutImage = (
+            'bold',   'italic',       'underline',      'strikethrough',   'subscript',        'superscript',
+            '|',      'numberedList', 'bulletedList',   'insertTable',     '|',                'outdent',
+            'indent', '|',            'alignment:left', 'alignment:right', 'alignment:center', 'alignment:justify',
+            '|',      'link',         'undo',           'redo',            'selectAll',
+            '-',
+            'horizontalLine',      'blockQuote',
+            '|',                   'findAndReplace', 'fontColor',
+            'fontBackgroundColor', 'removeFormat', '|', 'showBlocks', 'sourceEditing', 'specialCharacters',
+            '|',                   'heading', 'fontFamily', 'fontSize', '|', 'fullscreen',
+        );
     }
     else {
-        @Toolbar = [
-            [
-                'Bold',          'Italic',       'Underline',      'Strike', '-',    'NumberedList',
-                'BulletedList',  '-',            'Outdent',        'Indent', '-',    'JustifyLeft',
-                'JustifyCenter', 'JustifyRight', 'JustifyBlock',   '-',      'Link', 'Unlink',
-                '-',             'Image',        'HorizontalRule', '-',      'Undo', 'Redo',
-                '-',             'Find'
-            ],
-            '/',
-            [
-                'Format',       'Font', 'FontSize', '-',           'TextColor',  'BGColor',
-                'RemoveFormat', '-',    'Source',   'SpecialChar', 'SplitQuote', 'RemoveQuote',
-                '-',            'Maximize'
-            ]
-        ];
-        @ToolbarWithoutImage = [
-            [
-                'Bold',          'Italic',       'Underline',    'Strike',
-                '-',             'NumberedList', 'BulletedList', '-',
-                'Outdent',       'Indent',       '-',            'JustifyLeft',
-                'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-',
-                'Link',          'Unlink',       '-',            'HorizontalRule',
-                '-',             'Undo',         'Redo',         '-',
-                'Find'
-            ],
-            '/',
-            [
-                'Format',       'Font', 'FontSize', '-',           'TextColor',  'BGColor',
-                'RemoveFormat', '-',    'Source',   'SpecialChar', 'SplitQuote', 'RemoveQuote',
-                '-',            'Maximize'
-            ]
-        ];
+        @Toolbar = (
+            'bold',            'italic',           'underline',         'strikethrough',
+            '|',               'numberedList',     'bulletedList',      '|',
+            'outdent',         'indent',           '|',                 'alignment:left',
+            'alignment:right', 'alignment:center', 'alignment:justify', '|',
+            'link',            '|',                'insertImage',       'horizontalLine',
+            '|',               'undo',             'redo',              '|',
+            'selectAll',
+            '-',
+            'blockQuote',    '|',
+            'heading',       'fontFamily', 'fontSize', '|',
+            'fontColor',     'fontBackgroundColor', 'removeFormat', '|',
+            'sourceEditing', 'specialCharacters', '|', 'fullscreen',
+        );
+        @ToolbarWithoutImage = (
+            'bold',            'italic',           'underline',         'strikethrough',
+            '|',               'numberedList',     'bulletedList',      '|',
+            'outdent',         'indent',           '|',                 'alignment:left',
+            'alignment:right', 'alignment:center', 'alignment:justify', '|',
+            'link',            '|',                'horizontalLine',
+            '|',               'undo',             'redo',              '|',
+            'selectAll',
+            '-',
+            'blockQuote',    '|',
+            'heading',       'fontFamily', 'fontSize', '|',
+            'fontColor',     'fontBackgroundColor', 'removeFormat', '|',
+            'sourceEditing', 'specialCharacters', '|', 'fullscreen',
+        );
     }
 
     # set data with AddJSData()
     $Self->AddJSData(
         Key   => 'RichText',
         Value => {
-            TicketID       => $Param{Data}->{TicketID} || '',
-            TextDir        => $TextDir,
-            EditingAreaCSS => $EditingAreaCSS,
-            Lang           => {
-                SplitQuote  => $LanguageObject->Translate('Split Quote'),
-                RemoveQuote => $LanguageObject->Translate('Remove Quote'),
-            },
-            Toolbar             => $Toolbar[0],
-            ToolbarWithoutImage => $ToolbarWithoutImage[0],
+            TicketID => $Param{Data}->{TicketID} || '',
+            TextDir  => $TextDir,
+
+          #           TODO check if splitquote and remove quote alternatives of CKEditor4 to CKEditor5 are needed at all
+          #           otherwise this code can be deleted
+          #             Lang           => {
+          #                 SplitQuote  => $LanguageObject->Translate('Split Quote'),
+          #                 RemoveQuote => $LanguageObject->Translate('Remove Quote'),
+          #             },
+            Toolbar             => \@Toolbar,
+            ToolbarWithoutImage => \@ToolbarWithoutImage,
             PictureUploadAction => $PictureUploadAction,
             Type                => $RichTextType,
             %RichTextSettings,
@@ -6400,9 +6498,9 @@ sub SetRichTextParameters {
 
 set properties for customer rich text editor and send them to JS via AddJSData()
 
-$LayoutObject->CustomerSetRichTextParameters(
-    Data => \%Param,
-);
+    $LayoutObject->CustomerSetRichTextParameters(
+        Data => \%Param,
+    );
 
 =cut
 
@@ -6423,6 +6521,7 @@ sub CustomerSetRichTextParameters {
     # get needed objects
     my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
     my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
+    my $JSONObject     = $Kernel::OM->Get('Kernel::System::JSON');
 
     my %RichTextSettings = %{ $ConfigObject->Get("Frontend::RichText::Settings") || {} };
 
@@ -6433,114 +6532,119 @@ sub CustomerSetRichTextParameters {
         }
     }
 
-    my $SkinHome = $ConfigObject->Get('Home') . '/var/httpd/htdocs/skins';
-    my $WebPath  = $ConfigObject->Get('Frontend::WebPath') . 'skins';
-
-    my $UserType = $Self->{SessionSource} || '';
-    if ($UserType) {
-        $UserType =~ s/Interface//;
+    for my $ContentType (qw(ContentAllowed ContentDisallowed)) {
+        if ( $RichTextSettings{$ContentType} ) {
+            $RichTextSettings{$ContentType} = $JSONObject->Decode(
+                Data => $RichTextSettings{$ContentType},
+            );
+        }
     }
 
-    $Self->{SkinSelected} = $ConfigObject->Get("Loader::Customer::SelectedSkin") || 'default';
+    my $Home        = $ConfigObject->Get('Home');
+    my $SkinHome    = $Home . '/var/httpd/htdocs/skins';
+    my $WebPath     = $ConfigObject->Get('Frontend::WebPath');
+    my $SkinWebPath = $ConfigObject->Get('Frontend::WebPath') . 'skins';
 
-    my $ContentsCssFS
-        = $SkinHome . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentsCss.css';
-    my $ContentsCss
-        = $WebPath . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentsCss.css';
+    my $UserType = 'Customer';
+
+    $Self->{SkinSelected} ||= $ConfigObject->Get("Loader::Customer::SelectedSkin") || 'default';
+
+    my $ContentCssSkinFS
+        = $SkinHome . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentCss.css';
+    my $ContentCssSkin
+        = $SkinWebPath . '/' . $UserType . '/' . $Self->{SkinSelected} . '/css/Core.RichTextEditor.ContentCss.css';
 
     # If Core.RichTextEditor.ContentsCss.css for current skin exists, use it
-    if ( -e $ContentsCssFS ) {
-        $RichTextSettings{'ContentsCss'} = $ContentsCss;
+    if ( -e $ContentCssSkinFS ) {
+        $RichTextSettings{'ContentCssSkin'} = $ContentCssSkin;
+    }
+
+    my $ContentCssInternalFS = $Home . '/var/httpd/htdocs/common/css/Core.RichTextEditor.InternalArticleStyles.css';
+    my $ContentCssInternal   = $WebPath . 'common/css/Core.RichTextEditor.InternalArticleStyles.css';
+
+    # If Core.RichTextEditor.InternalArticleStyles.css exists, use it
+    if ( -e $ContentCssInternalFS ) {
+        $RichTextSettings{'ContentCssInternal'} = $ContentCssInternal;
     }
 
     my $TextDir             = $Self->{TextDirection}                      || '';
     my $PictureUploadAction = $Param{Data}->{RichTextPictureUploadAction} || '';
-    my $EditingAreaCSS      = 'body { ' . $ConfigObject->Get("Frontend::RichText::DefaultCSS") . ' }';
+
+    $RichTextSettings{'ContentCssDefault'} = $ConfigObject->Get("Frontend::RichText::CSS::Content::Default");
 
     # decide if we need to use the enhanced mode (with tables)
     my @Toolbar;
     my @ToolbarWithoutImage;
 
     if ( $ConfigObject->Get("Frontend::RichText::EnhancedMode::Customer") == '1' ) {
-        @Toolbar = [
-            [
-                'Bold',   'Italic',       'Underline',    'Strike',        'Subscript',    'Superscript',
-                '-',      'NumberedList', 'BulletedList', 'Table',         '-',            'Outdent',
-                'Indent', '-',            'JustifyLeft',  'JustifyCenter', 'JustifyRight', 'JustifyBlock',
-                '-',      'Link',         'Unlink',       'Undo',          'Redo',         'SelectAll'
-            ],
-            '/',
-            [
-                'Image',   'HorizontalRule', 'PasteText', 'PasteFromWord', 'SplitQuote', 'RemoveQuote',
-                '-',       '-',              'Find',      'Replace',       'TextColor',
-                'BGColor', 'RemoveFormat',   '-',         'ShowBlocks',    'Source',     'SpecialChar',
-                '-',       'Maximize'
-            ],
-            [ 'Format', 'Font', 'FontSize' ]
-        ];
-        @ToolbarWithoutImage = [
-            [
-                'Bold',   'Italic',       'Underline',    'Strike',        'Subscript',    'Superscript',
-                '-',      'NumberedList', 'BulletedList', 'Table',         '-',            'Outdent',
-                'Indent', '-',            'JustifyLeft',  'JustifyCenter', 'JustifyRight', 'JustifyBlock',
-                '-',      'Link',         'Unlink',       'Undo',          'Redo',         'SelectAll'
-            ],
-            '/',
-            [
-                'HorizontalRule', 'PasteText', 'PasteFromWord', 'SplitQuote', 'RemoveQuote', '-',
-                '-',              'Find',      'Replace',       'TextColor',  'BGColor',
-                'RemoveFormat',   '-',         'ShowBlocks',    'Source',     'SpecialChar', '-',
-                'Maximize'
-            ],
-            [ 'Format', 'Font', 'FontSize' ]
-        ];
+        @Toolbar = (
+            'bold',   'italic',       'underline',      'strikethrough',   'subscript',        'superscript',
+            '|',      'numberedList', 'bulletedList',   'insertTable',     '|',                'outdent',
+            'indent', '|',            'alignment:left', 'alignment:right', 'alignment:center', 'alignment:justify',
+            '|',      'link',         'undo',           'redo',            'selectAll',
+            '-',
+            'insertImage',         'horizontalLine', 'blockQuote',
+            '|',                   'findAndReplace', 'fontColor',
+            'fontBackgroundColor', 'removeFormat',   '|', 'showBlocks', 'sourceEditing', 'specialCharacters',
+            '|',                   'heading',        'fontFamily', 'fontSize', '|', 'fullscreen',
+        );
+
+        @ToolbarWithoutImage = (
+            'bold',   'italic',       'underline',      'strikethrough',   'subscript',        'superscript',
+            '|',      'numberedList', 'bulletedList',   'insertTable',     '|',                'outdent',
+            'indent', '|',            'alignment:left', 'alignment:right', 'alignment:center', 'alignment:justify',
+            '|',      'link',         'undo',           'redo',            'selectAll',
+            '-',
+            'horizontalLine',      'blockQuote',
+            '|',                   'findAndReplace', 'fontColor',
+            'fontBackgroundColor', 'removeFormat', '|', 'showBlocks', 'sourceEditing', 'specialCharacters',
+            '|',                   'heading', 'fontFamily', 'fontSize', '|', 'fullscreen',
+        );
     }
     else {
-        @Toolbar = [
-            [
-                'Bold',          'Italic',       'Underline',      'Strike', '-',    'NumberedList',
-                'BulletedList',  '-',            'Outdent',        'Indent', '-',    'JustifyLeft',
-                'JustifyCenter', 'JustifyRight', 'JustifyBlock',   '-',      'Link', 'Unlink',
-                '-',             'Image',        'HorizontalRule', '-',      'Undo', 'Redo',
-                '-',             'Find'
-            ],
-            '/',
-            [
-                'Format',       'Font', 'FontSize', '-',           'TextColor',  'BGColor',
-                'RemoveFormat', '-',    'Source',   'SpecialChar', 'SplitQuote', 'RemoveQuote',
-                '-',            'Maximize'
-            ]
-        ];
-        @ToolbarWithoutImage = [
-            [
-                'Bold',          'Italic',       'Underline',    'Strike',
-                '-',             'NumberedList', 'BulletedList', '-',
-                'Outdent',       'Indent',       '-',            'JustifyLeft',
-                'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-',
-                'Link',          'Unlink',       '-',            'HorizontalRule',
-                '-',             'Undo',         'Redo',         '-',
-                'Find'
-            ],
-            '/',
-            [
-                'Format',       'Font', 'FontSize', '-',           'TextColor',  'BGColor',
-                'RemoveFormat', '-',    'Source',   'SpecialChar', 'SplitQuote', 'RemoveQuote',
-                '-',            'Maximize'
-            ]
-        ];
+        @Toolbar = (
+            'bold',            'italic',           'underline',         'strikethrough',
+            '|',               'numberedList',     'bulletedList',      '|',
+            'outdent',         'indent',           '|',                 'alignment:left',
+            'alignment:right', 'alignment:center', 'alignment:justify', '|',
+            'link',            '|',                'insertImage',       'horizontalLine',
+            '|',               'undo',             'redo',              '|',
+            'selectAll',
+            '-',
+            'blockQuote',    '|',
+            'heading',       'fontFamily', 'fontSize', '|',
+            'fontColor',     'fontBackgroundColor', 'removeFormat', '|',
+            'sourceEditing', 'specialCharacters', '|', 'fullscreen',
+        );
+        @ToolbarWithoutImage = (
+            'bold',            'italic',           'underline',         'strikethrough',
+            '|',               'numberedList',     'bulletedList',      '|',
+            'outdent',         'indent',           '|',                 'alignment:left',
+            'alignment:right', 'alignment:center', 'alignment:justify', '|',
+            'link',            '|',                'horizontalLine',
+            '|',               'undo',             'redo',              '|',
+            'selectAll',
+            '-',
+            'blockQuote',    '|',
+            'heading',       'fontFamily', 'fontSize', '|',
+            'fontColor',     'fontBackgroundColor', 'removeFormat', '|',
+            'sourceEditing', 'specialCharacters', '|', 'fullscreen',
+        );
     }
 
     # set data with AddJSData()
     $Self->AddJSData(
         Key   => 'RichText',
         Value => {
-            TextDir        => $TextDir,
-            EditingAreaCSS => $EditingAreaCSS,
-            Lang           => {
-                SplitQuote => $LanguageObject->Translate('Split Quote'),
-            },
-            Toolbar             => $Toolbar[0],
-            ToolbarWithoutImage => $ToolbarWithoutImage[0],
+            TextDir => $TextDir,
+
+          #           TODO check if splitquote and remove quote alternatives of CKEditor4 to CKEditor5 are needed at all
+          #           otherwise this code can be deleted
+          #             Lang           => {
+          #                 SplitQuote => $LanguageObject->Translate('Split Quote'),
+          #             },
+            Toolbar             => \@Toolbar,
+            ToolbarWithoutImage => \@ToolbarWithoutImage,
             PictureUploadAction => $PictureUploadAction,
             %RichTextSettings,
         },

@@ -688,9 +688,9 @@ sub ShowTicketStatus {
     }
 
     # customer info (customer name)
-    if ( $Article{CustomerUserID} ) {
+    if ( $Ticket{CustomerUserID} ) {
         $Param{CustomerName} = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerName(
-            UserLogin => $Article{CustomerUserID},
+            UserLogin => $Ticket{CustomerUserID},
         );
         $Param{CustomerName} = '(' . $Param{CustomerName} . ')' if ( $Param{CustomerName} );
     }

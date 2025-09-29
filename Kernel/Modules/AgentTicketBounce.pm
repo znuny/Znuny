@@ -253,10 +253,10 @@ sub Run {
 
         # build InformationFormat
         if ( $LayoutObject->{BrowserRichText} ) {
-            $Param{InformationFormat} = "$Param{Salutation}<br/>
-<br/>
-$Param{BounceText}<br/>
-<br/>
+            $Param{InformationFormat} = "$Param{Salutation}
+<p></p>
+$Param{BounceText}
+<p></p>
 $Param{Signature}";
         }
         else {

@@ -4664,14 +4664,14 @@
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketCompose</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketCompose###RichTextHeight" Required="0" Valid="1">
         <Description Translatable="1">Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketCompose</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">320</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">320px</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::ResponseFormat" Required="1" Valid="1">
@@ -5420,11 +5420,12 @@
                 <Item Key="Name" Translatable="1">Back</Item>
                 <Item Key="Description" Translatable="1">Go back</Item>
                 <Item Key="Action"></Item>
-                <Item Key="Link">[% Env("LastScreenOverview") %];TicketID=[% Data.TicketID | html %]</Item>
+                <Item Key="Link">[% Env("LastScreenOverview") %]</Item>
                 <Item Key="Target"></Item>
                 <Item Key="PopupType"></Item>
                 <Item Key="ClusterName" Translatable="1"></Item>
                 <Item Key="ClusterPriority"></Item>
+                <Item Key="Prio">000</Item>
             </Hash>
         </Value>
     </Setting>
@@ -5440,6 +5441,7 @@
                 <Item Key="Target"></Item>
                 <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
                 <Item Key="ClusterPriority">800</Item>
+                <Item Key="Prio">100</Item>
             </Hash>
         </Value>
     </Setting>
@@ -5457,6 +5459,7 @@
                 <Item Key="PopupType">TicketHistory</Item>
                 <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
                 <Item Key="ClusterPriority">800</Item>
+                <Item Key="Prio">200</Item>
             </Hash>
         </Value>
     </Setting>
@@ -5475,6 +5478,7 @@
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="ClusterName" Translatable="1"></Item>
                 <Item Key="ClusterPriority"></Item>
+                <Item Key="Prio">210</Item>
             </Hash>
         </Value>
     </Setting>
@@ -5492,6 +5496,7 @@
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="ClusterName" Translatable="1"></Item>
                 <Item Key="ClusterPriority"></Item>
+                <Item Key="Prio">300</Item>
             </Hash>
         </Value>
     </Setting>
@@ -5509,6 +5514,7 @@
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
                 <Item Key="ClusterPriority">800</Item>
+                <Item Key="Prio">310</Item>
             </Hash>
         </Value>
     </Setting>
@@ -5526,6 +5532,7 @@
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
                 <Item Key="ClusterPriority">800</Item>
+                <Item Key="Prio">320</Item>
             </Hash>
         </Value>
     </Setting>
@@ -5543,6 +5550,7 @@
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="ClusterName" Translatable="1">People</Item>
                 <Item Key="ClusterPriority">430</Item>
+                <Item Key="Prio">400</Item>
             </Hash>
         </Value>
     </Setting>
@@ -5560,6 +5568,7 @@
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="ClusterName" Translatable="1">People</Item>
                 <Item Key="ClusterPriority">430</Item>
+                <Item Key="Prio">410</Item>
             </Hash>
         </Value>
     </Setting>
@@ -5577,6 +5586,7 @@
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="ClusterName" Translatable="1">People</Item>
                 <Item Key="ClusterPriority">430</Item>
+                <Item Key="Prio">420</Item>
             </Hash>
         </Value>
     </Setting>
@@ -5594,6 +5604,7 @@
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="ClusterName" Translatable="1">Communication</Item>
                 <Item Key="ClusterPriority">435</Item>
+                <Item Key="Prio">420</Item>
             </Hash>
         </Value>
     </Setting>
@@ -5611,6 +5622,7 @@
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="ClusterName" Translatable="1">Communication</Item>
                 <Item Key="ClusterPriority">435</Item>
+                <Item Key="Prio">425</Item>
             </Hash>
         </Value>
     </Setting>
@@ -5628,6 +5640,7 @@
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="ClusterName" Translatable="1">Communication</Item>
                 <Item Key="ClusterPriority">435</Item>
+                <Item Key="Prio">426</Item>
             </Hash>
         </Value>
     </Setting>
@@ -5645,6 +5658,7 @@
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="ClusterName" Translatable="1">Communication</Item>
                 <Item Key="ClusterPriority">435</Item>
+                <Item Key="Prio">427</Item>
             </Hash>
         </Value>
     </Setting>
@@ -5662,6 +5676,7 @@
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
                 <Item Key="ClusterPriority">800</Item>
+                <Item Key="Prio">430</Item>
             </Hash>
         </Value>
     </Setting>
@@ -5679,6 +5694,7 @@
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="ClusterName" Translatable="1"></Item>
                 <Item Key="ClusterPriority"></Item>
+                <Item Key="Prio">440</Item>
             </Hash>
         </Value>
     </Setting>
@@ -5694,6 +5710,7 @@
                 <Item Key="Target"></Item>
                 <Item Key="ClusterName" Translatable="1"></Item>
                 <Item Key="ClusterPriority"></Item>
+                <Item Key="Prio">448</Item>
             </Hash>
         </Value>
     </Setting>
@@ -5711,6 +5728,7 @@
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="ClusterName" Translatable="1"></Item>
                 <Item Key="ClusterPriority"></Item>
+                <Item Key="Prio">450</Item>
             </Hash>
         </Value>
     </Setting>
@@ -5728,6 +5746,7 @@
                 <Item Key="PopupType"></Item>
                 <Item Key="ClusterName" Translatable="1"></Item>
                 <Item Key="ClusterPriority"></Item>
+                <Item Key="Prio">460</Item>
             </Hash>
         </Value>
     </Setting>
@@ -5745,6 +5764,7 @@
                 <Item Key="PopupType"></Item>
                 <Item Key="ClusterName" Translatable="1"></Item>
                 <Item Key="ClusterPriority"></Item>
+                <Item Key="Prio">470</Item>
             </Hash>
         </Value>
     </Setting>
@@ -5763,6 +5783,7 @@
                 <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
                 <Item Key="ClusterPriority"></Item>
                 <Item Key="ExternalLink">1</Item>
+                <Item Key="Prio">500</Item>
             </Hash>
         </Value>
     </Setting>
@@ -6136,6 +6157,17 @@
                         <Item Key="Type" SelectedID="1"></Item>
                     </Hash>
                 </Item>
+                <Item Key="DefaultPageShown">
+                    <Hash>
+                        <Item Key="5">  5</Item>
+                        <Item Key="10"> 10</Item>
+                        <Item Key="15"> 15</Item>
+                        <Item Key="20"> 20</Item>
+                        <Item Key="25"> 25</Item>
+                        <Item Key="50"> 50</Item>
+                        <Item Key="100">100</Item>
+                    </Hash>
+                </Item>
                 <Item Key="Mandatory">0</Item>
             </Hash>
         </Value>
@@ -6187,6 +6219,17 @@
                         <Item Key="SLA" SelectedID="1"></Item>
                         <Item Key="Title" SelectedID="2"></Item>
                         <Item Key="Type" SelectedID="1"></Item>
+                    </Hash>
+                </Item>
+                <Item Key="DefaultPageShown">
+                    <Hash>
+                        <Item Key="5">  5</Item>
+                        <Item Key="10"> 10</Item>
+                        <Item Key="15"> 15</Item>
+                        <Item Key="20"> 20</Item>
+                        <Item Key="25"> 25</Item>
+                        <Item Key="50"> 50</Item>
+                        <Item Key="100">100</Item>
                     </Hash>
                 </Item>
                 <Item Key="Mandatory">0</Item>
@@ -6242,6 +6285,17 @@
                         <Item Key="Type" SelectedID="1"></Item>
                     </Hash>
                 </Item>
+                <Item Key="DefaultPageShown">
+                    <Hash>
+                        <Item Key="5">  5</Item>
+                        <Item Key="10"> 10</Item>
+                        <Item Key="15"> 15</Item>
+                        <Item Key="20"> 20</Item>
+                        <Item Key="25"> 25</Item>
+                        <Item Key="50"> 50</Item>
+                        <Item Key="100">100</Item>
+                    </Hash>
+                </Item>
                 <Item Key="Mandatory">0</Item>
             </Hash>
         </Value>
@@ -6293,6 +6347,17 @@
                         <Item Key="SLA" SelectedID="1"></Item>
                         <Item Key="Title" SelectedID="2"></Item>
                         <Item Key="Type" SelectedID="1"></Item>
+                    </Hash>
+                </Item>
+                <Item Key="DefaultPageShown">
+                    <Hash>
+                        <Item Key="5">  5</Item>
+                        <Item Key="10"> 10</Item>
+                        <Item Key="15"> 15</Item>
+                        <Item Key="20"> 20</Item>
+                        <Item Key="25"> 25</Item>
+                        <Item Key="50"> 50</Item>
+                        <Item Key="100">100</Item>
                     </Hash>
                 </Item>
                 <Item Key="Mandatory">0</Item>
@@ -6525,6 +6590,17 @@
                         <Item Key="Type" SelectedID="1"></Item>
                     </Hash>
                 </Item>
+                <Item Key="DefaultPageShown">
+                    <Hash>
+                        <Item Key="5">  5</Item>
+                        <Item Key="10"> 10</Item>
+                        <Item Key="15"> 15</Item>
+                        <Item Key="20"> 20</Item>
+                        <Item Key="25"> 25</Item>
+                        <Item Key="50"> 50</Item>
+                        <Item Key="100">100</Item>
+                    </Hash>
+                </Item>
             </Hash>
         </Value>
     </Setting>
@@ -6575,6 +6651,17 @@
                         <Item Key="SLA" SelectedID="1"></Item>
                         <Item Key="Title" SelectedID="2"></Item>
                         <Item Key="Type" SelectedID="1"></Item>
+                    </Hash>
+                </Item>
+                <Item Key="DefaultPageShown">
+                    <Hash>
+                        <Item Key="5">  5</Item>
+                        <Item Key="10"> 10</Item>
+                        <Item Key="15"> 15</Item>
+                        <Item Key="20"> 20</Item>
+                        <Item Key="25"> 25</Item>
+                        <Item Key="50"> 50</Item>
+                        <Item Key="100">100</Item>
                     </Hash>
                 </Item>
             </Hash>
@@ -6629,6 +6716,17 @@
                         <Item Key="Type" SelectedID="1"></Item>
                     </Hash>
                 </Item>
+                <Item Key="DefaultPageShown">
+                    <Hash>
+                        <Item Key="5">  5</Item>
+                        <Item Key="10"> 10</Item>
+                        <Item Key="15"> 15</Item>
+                        <Item Key="20"> 20</Item>
+                        <Item Key="25"> 25</Item>
+                        <Item Key="50"> 50</Item>
+                        <Item Key="100">100</Item>
+                    </Hash>
+                </Item>
             </Hash>
         </Value>
     </Setting>
@@ -6679,6 +6777,17 @@
                         <Item Key="SLA" SelectedID="1"></Item>
                         <Item Key="Title" SelectedID="2"></Item>
                         <Item Key="Type" SelectedID="1"></Item>
+                    </Hash>
+                </Item>
+                <Item Key="DefaultPageShown">
+                    <Hash>
+                        <Item Key="5">  5</Item>
+                        <Item Key="10"> 10</Item>
+                        <Item Key="15"> 15</Item>
+                        <Item Key="20"> 20</Item>
+                        <Item Key="25"> 25</Item>
+                        <Item Key="50"> 50</Item>
+                        <Item Key="100">100</Item>
                     </Hash>
                 </Item>
             </Hash>
@@ -6768,6 +6877,17 @@
                         <Item Key="Type" SelectedID="1"></Item>
                     </Hash>
                 </Item>
+                <Item Key="DefaultPageShown">
+                    <Hash>
+                        <Item Key="5">  5</Item>
+                        <Item Key="10"> 10</Item>
+                        <Item Key="15"> 15</Item>
+                        <Item Key="20"> 20</Item>
+                        <Item Key="25"> 25</Item>
+                        <Item Key="50"> 50</Item>
+                        <Item Key="100">100</Item>
+                    </Hash>
+                </Item>
             </Hash>
         </Value>
     </Setting>
@@ -6818,6 +6938,17 @@
                         <Item Key="SLA" SelectedID="1"></Item>
                         <Item Key="Title" SelectedID="2"></Item>
                         <Item Key="Type" SelectedID="1"></Item>
+                    </Hash>
+                </Item>
+                <Item Key="DefaultPageShown">
+                    <Hash>
+                        <Item Key="5">  5</Item>
+                        <Item Key="10"> 10</Item>
+                        <Item Key="15"> 15</Item>
+                        <Item Key="20"> 20</Item>
+                        <Item Key="25"> 25</Item>
+                        <Item Key="50"> 50</Item>
+                        <Item Key="100">100</Item>
                     </Hash>
                 </Item>
             </Hash>
@@ -6872,6 +7003,17 @@
                         <Item Key="Type" SelectedID="1"></Item>
                     </Hash>
                 </Item>
+                <Item Key="DefaultPageShown">
+                    <Hash>
+                        <Item Key="5">  5</Item>
+                        <Item Key="10"> 10</Item>
+                        <Item Key="15"> 15</Item>
+                        <Item Key="20"> 20</Item>
+                        <Item Key="25"> 25</Item>
+                        <Item Key="50"> 50</Item>
+                        <Item Key="100">100</Item>
+                    </Hash>
+                </Item>
             </Hash>
         </Value>
     </Setting>
@@ -6922,6 +7064,17 @@
                         <Item Key="SLA" SelectedID="1"></Item>
                         <Item Key="Title" SelectedID="2"></Item>
                         <Item Key="Type" SelectedID="1"></Item>
+                    </Hash>
+                </Item>
+                <Item Key="DefaultPageShown">
+                    <Hash>
+                        <Item Key="5">  5</Item>
+                        <Item Key="10"> 10</Item>
+                        <Item Key="15"> 15</Item>
+                        <Item Key="20"> 20</Item>
+                        <Item Key="25"> 25</Item>
+                        <Item Key="50"> 50</Item>
+                        <Item Key="100">100</Item>
                     </Hash>
                 </Item>
             </Hash>
@@ -8795,14 +8948,14 @@
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketMove</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketMove###RichTextHeight" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketMove</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">100</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100px</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::Module###AgentTicketHistory" Required="0" Valid="1">
@@ -9276,7 +9429,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Access Control Lists (ACL)</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -9351,7 +9504,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Queues</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -9422,7 +9575,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Templates</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -9492,7 +9645,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Templates ↔ Queues</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -9562,7 +9715,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Auto Responses</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -9632,7 +9785,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Queues ↔ Auto Responses</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -9702,7 +9855,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Attachments</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -9772,7 +9925,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Templates ↔ Attachments</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -9842,7 +9995,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Salutations</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -9912,7 +10065,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Signatures</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -9982,7 +10135,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Email Addresses</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -10052,7 +10205,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Ticket Notifications</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -10127,7 +10280,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Services</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -10197,7 +10350,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Service Level Agreements</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -10267,7 +10420,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Types</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -10338,7 +10491,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">States</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -10409,7 +10562,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Priorities</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -10480,7 +10633,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">GenericAgent</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -10689,14 +10842,14 @@
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Admin::View::NotificationEvent</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100%</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::Admin::AdminNotificationEvent###RichTextHeight" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Admin::View::NotificationEvent</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">320</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">320px</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Event::NotificationEvent::IgnoredAttributes###001-Framework" Required="0" Valid="1">
@@ -11215,9 +11368,11 @@
                 <Item>AgentTicketHistory</Item>
                 <Item>AgentTicketLink</Item>
                 <Item>AgentTicketLock</Item>
+                <Item>AgentTicketMarkSeenUnseen</Item>
                 <Item>AgentTicketMerge</Item>
                 <Item>AgentTicketMove</Item>
                 <Item>AgentTicketNote</Item>
+                <Item>AgentTicketNoteToLinkedTicket</Item>
                 <Item>AgentTicketOwner</Item>
                 <Item>AgentTicketPending</Item>
                 <Item>AgentTicketPhone</Item>
@@ -11607,6 +11762,8 @@ Thanks for your help!
                 <Item Key="Module">Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition</Item>
                 <Item Key="Name">Some Description</Item>
                 <Item Key="FromAddressRegExp">\s*@example.com</Item>
+                <Item Key="ToAddressRegExp">\s*@example.com</Item>
+                <Item Key="CcAddressRegExp">\s*@example.com</Item>
                 <Item Key="NumberRegExp">\s*Incident-(\d.*)\s*</Item>
                 <Item Key="SearchInSubject">1</Item>
                 <Item Key="SearchInBody">1</Item>
@@ -11625,6 +11782,8 @@ Thanks for your help!
                 <Item Key="Module">Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition</Item>
                 <Item Key="Name">Some Description</Item>
                 <Item Key="FromAddressRegExp">\s*@example.com</Item>
+                <Item Key="ToAddressRegExp">\s*@example.com</Item>
+                <Item Key="CcAddressRegExp">\s*@example.com</Item>
                 <Item Key="NumberRegExp">\s*Incident-(\d.*)\s*</Item>
                 <Item Key="SearchInSubject">1</Item>
                 <Item Key="SearchInBody">1</Item>
@@ -11643,6 +11802,8 @@ Thanks for your help!
                 <Item Key="Module">Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition</Item>
                 <Item Key="Name">Some Description</Item>
                 <Item Key="FromAddressRegExp">\s*@example.com</Item>
+                <Item Key="ToAddressRegExp">\s*@example.com</Item>
+                <Item Key="CcAddressRegExp">\s*@example.com</Item>
                 <Item Key="NumberRegExp">\s*Incident-(\d.*)\s*</Item>
                 <Item Key="SearchInSubject">1</Item>
                 <Item Key="SearchInBody">1</Item>
@@ -11661,6 +11822,8 @@ Thanks for your help!
                 <Item Key="Module">Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition</Item>
                 <Item Key="Name">Some Description</Item>
                 <Item Key="FromAddressRegExp">\s*@example.com</Item>
+                <Item Key="ToAddressRegExp">\s*@example.com</Item>
+                <Item Key="CcAddressRegExp">\s*@example.com</Item>
                 <Item Key="NumberRegExp">\s*Incident-(\d.*)\s*</Item>
                 <Item Key="SearchInSubject">1</Item>
                 <Item Key="SearchInBody">1</Item>
@@ -11922,7 +12085,7 @@ Thanks for your help!
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Dynamic Fields GUI</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -12025,7 +12188,7 @@ Thanks for your help!
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Dynamic Fields Text Backend GUI</Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
@@ -12062,7 +12225,7 @@ Thanks for your help!
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Dynamic Fields Checkbox Backend GUI</Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
@@ -12099,7 +12262,7 @@ Thanks for your help!
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Dynamic Fields Drop-down Backend GUI</Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
@@ -12141,7 +12304,7 @@ Thanks for your help!
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Dynamic Fields Date Time Backend GUI</Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
@@ -12183,7 +12346,7 @@ Thanks for your help!
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Dynamic Fields Multiselect Backend GUI</Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
@@ -12905,210 +13068,210 @@ Thanks for your help!
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketNote</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketNote###RichTextHeight" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketNote</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">100</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100px</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketOwner###RichTextWidth" Required="0" Valid="1">
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketOwner</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketOwner###RichTextHeight" Required="0" Valid="1">
         <Description Translatable="1">Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketOwner</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">100</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100px</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPending###RichTextWidth" Required="0" Valid="1">
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketPending</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPending###RichTextHeight" Required="0" Valid="1">
         <Description Translatable="1">Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketPending</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">100</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100px</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketEmail###RichTextWidth" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketEmailNew</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketEmail###RichTextHeight" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketEmailNew</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">320</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">320px</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPhone###RichTextWidth" Required="0" Valid="1">
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketPhoneNew</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPhone###RichTextHeight" Required="0" Valid="1">
         <Description Translatable="1">Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketPhoneNew</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">320</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">320px</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPhoneInbound###RichTextWidth" Required="0" Valid="1">
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketPhoneInbound</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPhoneInbound###RichTextHeight" Required="0" Valid="1">
         <Description Translatable="1">Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketPhoneInbound</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">200</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">200px</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPhoneOutbound###RichTextWidth" Required="0" Valid="1">
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketPhoneOutbound</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPhoneOutbound###RichTextHeight" Required="0" Valid="1">
         <Description Translatable="1">Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketPhoneOutbound</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">200</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">200px</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketClose###RichTextWidth" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketClose</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketClose###RichTextHeight" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketClose</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">100</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100px</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketFreeText###RichTextWidth" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketFreeText</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketFreeText###RichTextHeight" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketFreeText</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">100</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100px</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPriority###RichTextWidth" Required="0" Valid="1">
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketPriority</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPriority###RichTextHeight" Required="0" Valid="1">
         <Description Translatable="1">Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketPriority</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">100</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100px</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketResponsible###RichTextWidth" Required="0" Valid="1">
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketResponsible</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketResponsible###RichTextHeight" Required="0" Valid="1">
         <Description Translatable="1">Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketResponsible</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">100</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100px</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketForward###RichTextWidth" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketForward</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketForward###RichTextHeight" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketForward</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">100</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100px</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketEmailOutbound###RichTextWidth" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketEmailOutbound</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketEmailOutbound###RichTextHeight" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketEmailOutbound</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">300</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">300px</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketMerge###RichTextWidth" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketMerge</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketEmailResend###RichTextWidth" Required="0" Valid="1">
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketEmailResend</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100%</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketEmailResend###RichTextHeight" Required="0" Valid="1">
         <Description Translatable="1">Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketEmailResend</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">300</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">300px</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketMerge###RichTextHeight" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Defines the height for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketMerge</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">100</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100px</Item>
         </Value>
     </Setting>
     <Setting Name="StandardTemplate::Types" Required="0" Valid="1">
@@ -13682,9 +13845,7 @@ Thanks for your help!
             <Hash>
                 <DefaultItem>
                     <Hash>
-                        <Item Key="Module"></Item>
-                        <Item Key="Prio"></Item>
-                        <Item Key="Valid"></Item>
+                        <Item Key=""></Item>
                     </Hash>
                 </DefaultItem>
                 <Item Key="AgentTicketCompose">
@@ -13767,9 +13928,7 @@ Thanks for your help!
             <Hash>
                 <DefaultItem>
                     <Hash>
-                        <Item Key="Module"></Item>
-                        <Item Key="Prio"></Item>
-                        <Item Key="Valid"></Item>
+                        <Item Key=""></Item>
                     </Hash>
                 </DefaultItem>
                 <Item Key="AgentTicketCompose">
@@ -13852,9 +14011,7 @@ Thanks for your help!
             <Hash>
                 <DefaultItem>
                     <Hash>
-                        <Item Key="Module"></Item>
-                        <Item Key="Prio"></Item>
-                        <Item Key="Valid"></Item>
+                        <Item Key=""></Item>
                     </Hash>
                 </DefaultItem>
                 <Item Key="AgentTicketCompose">
@@ -13951,9 +14108,7 @@ Thanks for your help!
             <Hash>
                 <DefaultItem>
                     <Hash>
-                        <Item Key="Module"></Item>
-                        <Item Key="Prio"></Item>
-                        <Item Key="Valid"></Item>
+                        <Item Key=""></Item>
                     </Hash>
                 </DefaultItem>
                 <Item Key="ReinstallPackageLink">

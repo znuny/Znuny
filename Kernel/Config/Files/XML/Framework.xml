@@ -420,14 +420,36 @@
         <Description Translatable="1">Defines the URL rich text editor path.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Frontend::WebPath&gt;js/thirdparty/ckeditor-4.25.1-znuny-min/</Item>
+            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Frontend::WebPath&gt;js/thirdparty/ckeditor5-classic-46.0.0/</Item>
         </Value>
     </Setting>
-    <Setting Name="Frontend::RichText::DefaultCSS" Required="1" Valid="1">
-        <Description Translatable="1">Defines the default CSS used in rich text editors.</Description>
+    <Setting Name="Frontend::RichText::CSS::Content::Path###InternalArticleStyles" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Path to RichText content CSS file that will be used to apply internal style to articles. The style will be appended into articles body when using agent interface. Customer internal article styles should match the same or very simillar rules.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">font-family:Geneva,Helvetica,Arial,sans-serif; font-size: 12px;</Item>
+            <Array>
+                <DefaultItem ValueType="String">*path_to_file*/*filename*.css</DefaultItem>
+                <Item ValueType="String" ValueRegex="">common/css/ckeditor5-46.0.0-content.css</Item>
+                <Item ValueType="String" ValueRegex="">common/css/Core.RichTextEditor.InternalArticleStyles.css</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::CSS::Content::Path::Customer###InternalArticleStyles" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Path to RichText content CSS file that will be used to apply internal style to articles. The styles will be appended into articles body when using customer interface. Agent internal article styles should match the same or very simillar rules.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="String">*path_to_file*/*filename*.css</DefaultItem>
+                <Item ValueType="String" ValueRegex="">common/css/ckeditor5-46.0.0-content.css</Item>
+                <Item ValueType="String" ValueRegex="">common/css/Core.RichTextEditor.InternalArticleStyles.css</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::CSS::Content::Default" Required="1" Valid="1">
+        <Description Translatable="1">Defines the additional default CSS used in rich text editors content. The style will be appended into articles body.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">font-family:Geneva,Helvetica,Arial,sans-serif; font-size: 12px; line-height: 1.5;</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::RichText::EnhancedMode" Required="1" Valid="1">
@@ -448,49 +470,172 @@
         <Description Translatable="1">Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100%</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::RichText::Settings###Height" Required="1" Valid="1">
         <Description Translatable="1">Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">320</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">320px</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Settings###MinHeight" Required="1" Valid="1">
+        <Description Translatable="1">Defines the minimum height for the rich text editor component. Enter number (pixels) or percent value (relative).</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">320px</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::RichText::Settings###FontSizes" Required="1" Valid="1">
         <Description Translatable="1">Defines the selectable font sizes in the rich text editor.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String">8px;10px;12px;14px;16px;18px;20px;22px;24px;26px;28px;30px;</Item>
+            <Array>
+                <Item>8px</Item>
+                <Item>10px</Item>
+                <Item>12px</Item>
+                <Item>14px</Item>
+                <Item>16px</Item>
+                <Item>18px</Item>
+                <Item>20px</Item>
+                <Item>22px</Item>
+                <Item>24px</Item>
+                <Item>26px</Item>
+                <Item>28px</Item>
+                <Item>30px</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Settings###FormatTags" Required="1" Valid="1">
+        <Description Translatable="1">Defines the selectable format tags in the rich text editor. Each option is an JSON equivalent of heading options used in CKEditor5, more info: https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#configuring-heading-levels.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Array>
+                <Item>"model": "paragraph", "title": "Paragraph", "class": "ck-heading_paragraph"</Item>
+                <Item>"model": "heading1", "view": "h1", "title": "Heading 1", "class": "ck-heading_heading1"</Item>
+                <Item>"model": "heading2", "view": "h2", "title": "Heading 2", "class": "ck-heading_heading2"</Item>
+                <Item>"model": "heading3", "view": "h3", "title": "Heading 3", "class": "ck-heading_heading3"</Item>
+                <Item>"model": "heading4", "view": "h4", "title": "Heading 4", "class": "ck-heading_heading4"</Item>
+                <Item>"model": "heading5", "view": "h5", "title": "Heading 5", "class": "ck-heading_heading5"</Item>
+                <Item>"model": "heading6", "view": "h6", "title": "Heading 6", "class": "ck-heading_heading6"</Item>
+                <Item>"model": "pre", "view": "pre", "title": "Preformatted", "class": "ck-heading_preformatted"</Item>
+            </Array>
+
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Settings###BuildPlugins" Required="1" Valid="1">
+        <Description Translatable="1">Defines enabled plugins that are available from the CKEditor build.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Array>
+                <Item>Alignment</Item>
+                <Item>Autocomplete</Item>
+                <Item>Autoformat</Item>
+                <Item>AutoImage</Item>
+                <Item>BlockQuote</Item>
+                <Item>Bold</Item>
+                <Item>Base64UploadAdapter</Item>
+                <Item>Italic</Item>
+                <Item>Underline</Item>
+                <Item>Strikethrough</Item>
+                <Item>Code</Item>
+                <Item>Subscript</Item>
+                <Item>Superscript</Item>
+                <Item>CloudServices</Item>
+                <Item>CodeBlock</Item>
+                <Item>Essentials</Item>
+                <Item>FindAndReplace</Item>
+                <Item>FontBackgroundColor</Item>
+                <Item>FontColor</Item>
+                <Item>FontFamily</Item>
+                <Item>FontSize</Item>
+                <Item>Fullscreen</Item>
+                <Item>GeneralHtmlSupport</Item>
+                <Item>Heading</Item>
+                <Item>HorizontalLine</Item>
+                <Item>HtmlEmbed</Item>
+                <Item>Image</Item>
+                <Item>ImageBlock</Item>
+                <Item>ImageCaption</Item>
+                <Item>ImageResize</Item>
+                <Item>ImageStyle</Item>
+                <Item>ImageToolbar</Item>
+                <Item>ImageInline</Item>
+                <Item>ImageInsert</Item>
+                <Item>Indent</Item>
+                <Item>IndentBlock</Item>
+                <Item>Link</Item>
+                <Item>List</Item>
+                <Item>ListProperties</Item>
+                <Item>MediaEmbed</Item>
+                <Item>PageBreak</Item>
+                <Item>PasteFromOffice</Item>
+                <Item>PictureEditing</Item>
+                <Item>RemoveFormat</Item>
+                <Item>SelectAll</Item>
+                <Item>ShowBlocks</Item>
+                <Item>SimpleUploadAdapter</Item>
+                <Item>SourceEditing</Item>
+                <Item>SpecialCharacters</Item>
+                <Item>SpecialCharactersMathematical</Item>
+                <Item>Style</Item>
+                <Item>Table</Item>
+                <Item>TableCaption</Item>
+                <Item>TableCellProperties</Item>
+                <Item>TableColumnResize</Item>
+                <Item>TableProperties</Item>
+                <Item>TableToolbar</Item>
+                <Item>TextPartLanguage</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Settings###ExtraPlugins" Required="0" Valid="1">
+        <Description Translatable="1">Defines additional plugins in the rich text editor.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Array>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Settings###ExcludedPlugins" Required="0" Valid="1">
+        <Description Translatable="1">Defines plugins that will be excluded from usage in the rich text editor.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Array>
+            </Array>
         </Value>
     </Setting>
     <Setting Name="Frontend::RichText::Settings###FontNames" Required="1" Valid="1">
         <Description Translatable="1">Defines the selectable fonts in the rich text editor.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String">Arial/Arial, Helvetica, sans-serif;Calibri/Calibri, sans-serif;Comic Sans MS/Comic Sans MS, cursive;Courier New/Courier New, Courier, monospace;Georgia/Georgia, serif;Lucida Sans Unicode/Lucida Sans Unicode, Lucida Grande, sans-serif;Tahoma/Tahoma, Geneva, sans-serif;Times New Roman/Times New Roman, Times, serif;Trebuchet MS/Trebuchet MS, Helvetica, sans-serif;Verdana/Verdana, Geneva, sans-serif</Item>
+            <Array>
+                <Item>Arial/Arial, Helvetica, sans-serif</Item>
+                <Item>Calibri/Calibri, sans-serif</Item>
+                <Item>Comic Sans MS/Comic Sans MS, cursive</Item>
+                <Item>Courier New/Courier New, Courier, monospace</Item>
+                <Item>Georgia/Georgia, serif</Item>
+                <Item>Lucida Sans Unicode/Lucida Sans Unicode, Lucida Grande, sans-serif</Item>
+                <Item>Tahoma/Tahoma, Geneva, sans-serif</Item>
+                <Item>Times New Roman/Times New Roman, Times, serif</Item>
+                <Item>Trebuchet MS/Trebuchet MS, Helvetica, sans-serif</Item>
+                <Item>Verdana/Verdana, Geneva, sans-serif</Item>
+            </Array>
         </Value>
     </Setting>
-    <Setting Name="Frontend::RichText::Settings###FormatTags" Required="1" Valid="1">
-        <Description Translatable="1">Defines the selectable format tags in the rich text editor.</Description>
+    <Setting Name="Frontend::RichText::Settings###ContentAllowed" Required="0" Valid="1">
+        <Description Translatable="1">Defines content that is allowed for use in the rich text editor.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String">p;h1;h2;h3;h4;h5;h6;pre</Item>
+            <Item ValueType="String" ValueRegex="^\[.*\]$">[{"name":"div","attributes":{"type":true},"styles":true},{"name":"img","attributes":true},{"name":"col","attributes":{"width":true}},{"name":"style","attributes":true,"styles":true},{"name":".*","attributes":{"id":true},"classes":true}]</Item>
         </Value>
     </Setting>
-    <Setting Name="Frontend::RichText::Settings###ExtraPlugins" Required="0" Valid="1">
-        <Description Translatable="1">Defines additional plugins for use in the rich text editor.</Description>
+    <Setting Name="Frontend::RichText::Settings###ContentDisallowed" Required="0" Valid="1">
+        <Description Translatable="1">Defines content that is disallowed for use in the rich text editor.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String">splitquote,contextmenu_linkopen</Item>
-        </Value>
-    </Setting>
-    <Setting Name="Frontend::RichText::Settings###ExtraAllowedContent" Required="0" Valid="1">
-        <Description Translatable="1">Defines extra content that is allowed for use in the rich text editor.</Description>
-        <Navigation>Frontend::Base</Navigation>
-        <Value>
-            <Item ValueType="String">div[type]{*}; img[*]; col[width]; style[*]{*}; *[id](*)</Item>
+            <Item ValueType="String" ValueRegex="^\[.*\]$">[]</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::PopupProfiles###001-Framework" Required="1" Valid="1">
@@ -766,6 +911,13 @@
             <Item ValueType="String" ValueRegex="^[0-9]{1,6}$">25</Item>
         </Value>
     </Setting>
+    <Setting Name="SendmailModule::Timeout" Required="0" Valid="0" ConfigLevel="200">
+        <Description Translatable="1">Maximum time, in seconds, to wait for a response from server. Only applies to modules that support timeouts.</Description>
+        <Navigation>Core::Email</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+$">30</Item>
+        </Value>
+    </Setting>
     <Setting Name="SendmailModule::AuthUser" Required="0" Valid="0" ConfigLevel="200">
         <Description Translatable="1">If any of the "SMTP" mechanisms was selected as SendmailModule, and authentication to the mail server is needed, an username must be specified.</Description>
         <Navigation>Core::Email</Navigation>
@@ -812,7 +964,12 @@
         <Description Translatable="1">Forces encoding of outgoing emails (7bit|8bit|quoted-printable|base64).</Description>
         <Navigation>Core::Email</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">base64</Item>
+            <Item ValueType="Select" SelectedID="base64">
+                <Item ValueType="Option" Value="base64" Translatable="0">base64</Item>
+                <Item ValueType="Option" Value="7bit" Translatable="0">7bit</Item>
+                <Item ValueType="Option" Value="8bit" Translatable="0">8bit</Item>
+                <Item ValueType="Option" Value="quoted-printable" Translatable="0">quoted-printable</Item>
+            </Item>
         </Value>
     </Setting>
     <Setting Name="Sendmail::DefaultHeaders" Required="0" Valid="0">
@@ -4191,7 +4348,7 @@ via the Preferences button after logging in.
             </Item>
         </Value>
     </Setting>
-    <Setting Name="Frontend::Module###AjaxAttachment" Required="0" Valid="1">
+    <Setting Name="Frontend::Module###AJAXAttachment" Required="0" Valid="1">
         <Description Translatable="1">Frontend module registration for the agent interface.</Description>
         <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
         <Value>
@@ -4205,7 +4362,7 @@ via the Preferences button after logging in.
                         <Array>
                         </Array>
                     </Item>
-                    <Item Key="Description">AjaxAttachment</Item>
+                    <Item Key="Description">AJAXAttachment</Item>
                     <Item Key="Title"></Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
@@ -6515,7 +6672,7 @@ via the Preferences button after logging in.
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Communication Log GUI</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -6786,7 +6943,7 @@ via the Preferences button after logging in.
                 <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
                 <Item Key="Name" Translatable="1">Package Manager</Item>
                 <Item Key="Block">Administration</Item>
-                <Item Key="Description" Translatable="1">Update and extend your system with software packages.</Item>
+                <Item Key="Description" Translatable="1">Manage add-ons.</Item>
                 <Item Key="IconBig">fa-plug</Item>
                 <Item Key="IconSmall"></Item>
             </Hash>
@@ -6883,7 +7040,7 @@ via the Preferences button after logging in.
             </Item>
         </Value>
     </Setting>
-    <Setting Name="CustomerFrontend::Module###AjaxAttachment" Required="0" Valid="1">
+    <Setting Name="CustomerFrontend::Module###AJAXAttachment" Required="0" Valid="1">
         <Description Translatable="1">Frontend module registration for the customer interface.</Description>
         <Navigation>Frontend::Customer::ModuleRegistration</Navigation>
         <Value>
@@ -6897,7 +7054,7 @@ via the Preferences button after logging in.
                         <Array>
                         </Array>
                     </Item>
-                    <Item Key="Description">AjaxAttachment</Item>
+                    <Item Key="Description">AJAXAttachment</Item>
                     <Item Key="Title"></Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
@@ -7782,7 +7939,7 @@ via the Preferences button after logging in.
                 <Item>thirdparty/jquery-browser-detection/jquery-browser-detection.js</Item>
                 <Item>thirdparty/jquery-ui-1.13.3/jquery-ui.js</Item>
                 <Item>thirdparty/jquery-ui-touch-punch-0.2.3/jquery.ui.touch-punch.js</Item>
-                <Item>thirdparty/jquery-validate-1.16.0/jquery.validate.js</Item>
+                <Item>thirdparty/jquery-validation-1.21.0/jquery.validate.js</Item>
                 <Item>thirdparty/jquery-pubsub/pubsub.js</Item>
                 <Item>thirdparty/jquery-jstree-3.3.8/jquery.jstree.js</Item>
                 <Item>thirdparty/nunjucks-3.2.3/nunjucks.min.js</Item>
@@ -7838,15 +7995,6 @@ via the Preferences button after logging in.
             </Array>
         </Value>
     </Setting>
-    <Setting Name="Loader::Agent::CommonJS###100-CKEditor" Required="1" Valid="1">
-        <Description Translatable="1">List of JS files to always be loaded for the agent interface.</Description>
-        <Navigation>Frontend::Base::Loader</Navigation>
-        <Value>
-            <Array>
-                <Item>thirdparty/ckeditor-4.25.1-znuny-min/ckeditor.js</Item>
-            </Array>
-        </Value>
-    </Setting>
     <Setting Name="Loader::Agent::CommonJS###001-Admin" Required="1" Valid="1">
         <Description Translatable="1">List of JS files to always be loaded for the admin interface.</Description>
         <Navigation>Frontend::Base::Loader</Navigation>
@@ -7899,7 +8047,7 @@ via the Preferences button after logging in.
             <Array>
                 <Item>thirdparty/jquery-3.7.0/jquery.js</Item>
                 <Item>thirdparty/jquery-browser-detection/jquery-browser-detection.js</Item>
-                <Item>thirdparty/jquery-validate-1.16.0/jquery.validate.js</Item>
+                <Item>thirdparty/jquery-validation-1.21.0/jquery.validate.js</Item>
                 <Item>thirdparty/jquery-ui-1.13.3/jquery-ui.js</Item>
                 <Item>thirdparty/jquery-pubsub/pubsub.js</Item>
                 <Item>thirdparty/jquery-jstree-3.3.8/jquery.jstree.js</Item>
@@ -7940,15 +8088,6 @@ via the Preferences button after logging in.
         <Value>
             <Array>
                 <Item>thirdparty/jquery-migrate-3.0.0/jquery-migrate.js</Item>
-            </Array>
-        </Value>
-    </Setting>
-    <Setting Name="Loader::Customer::CommonJS###100-CKEditor" Required="1" Valid="1">
-        <Description Translatable="1">List of JS files to always be loaded for the customer interface.</Description>
-        <Navigation>Frontend::Base::Loader</Navigation>
-        <Value>
-            <Array>
-                <Item>thirdparty/ckeditor-4.25.1-znuny-min/ckeditor.js</Item>
             </Array>
         </Value>
     </Setting>
@@ -8574,6 +8713,18 @@ via the Preferences button after logging in.
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="CommunicationChannel###Web" Required="0" Valid="1">
+        <Description Translatable="1">Defines web communication channel.</Description>
+        <Navigation>Core::CommunicationChannel</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name" Translatable="1">Web</Item>
+                <Item Key="Icon">fa-window-maximize</Item>
+                <Item Key="Description" Translatable="1">Web communication channel.</Item>
+                <Item Key="Module">Kernel::System::CommunicationChannel::Web</Item>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="AgentPreferencesGroups" Required="1" Valid="1">
         <Description Translatable="1">Defines groups for preferences items.</Description>
         <Navigation>Frontend::Agent::View::Preferences</Navigation>
@@ -8627,11 +8778,7 @@ via the Preferences button after logging in.
             <Hash>
                 <DefaultItem>
                     <Hash>
-                        <Item Key="SearchLimit">10000</Item>
-                        <Item Key="PageShown">50</Item>
-                        <Item Key="CustomerTicketTextField">UserMailString</Item>
-                        <Item Key="SortBy::Default">UserLogin</Item>
-                        <Item Key="Order::Default">Up</Item>
+                        <Item Key=""></Item>
                     </Hash>
                 </DefaultItem>
                 <Item Key="Email">

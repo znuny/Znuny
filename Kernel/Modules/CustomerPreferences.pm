@@ -11,6 +11,7 @@ package Kernel::Modules::CustomerPreferences;
 
 use strict;
 use warnings;
+use utf8;
 
 our $ObjectManagerDisabled = 1;
 
@@ -29,9 +30,80 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $UserObject   = $Kernel::OM->Get('Kernel::System::CustomerUser');
+
+    # ------------------------------------------------------------ #
+    # update preferences via AJAX
+    # ------------------------------------------------------------ #
+    if ( $Self->{Subaction} eq 'UpdateAJAX' ) {
+
+        # challenge token check for write action
+        $LayoutObject->ChallengeTokenCheck( Type => 'Customer' );
+
+        my $Key   = $ParamObject->GetParam( Param => 'Key' );
+        my $Value = $ParamObject->GetParam( Param => 'Value' );
+
+        #
+        # Check config CustomerPreferences::AJAXUpdate::AllowedKeys
+        #
+        my $KeyAllowed;
+        my $AllowedKeys = $ConfigObject->Get('CustomerPreferences::AJAXUpdate::AllowedKeys') // {};
+
+        CONTEXT:
+        for my $Context ( sort keys %{$AllowedKeys} ) {
+            ALLOWEDKEYREGEX:
+            for my $AllowedKeyRegex ( @{ $AllowedKeys->{$Context} // [] } ) {
+                next ALLOWEDKEYREGEX if $Key !~ m{$AllowedKeyRegex};
+
+                $KeyAllowed = 1;
+                last CONTEXT;
+            }
+        }
+
+        # Default to success to prevent reporting an error to the client if the key is not allowed
+        # in the first place.
+        my $Success = 1;
+
+        if ($KeyAllowed) {
+
+            # update preferences
+            $Success = $UserObject->SetPreferences(
+                UserID => $Self->{UserID},
+                Key    => $Key,
+                Value  => $Value,
+            );
+
+            # update session
+            if ($Success) {
+                $Kernel::OM->Get('Kernel::System::AuthSession')->UpdateSessionID(
+                    SessionID => $Self->{SessionID},
+                    Key       => $Key,
+                    Value     => $Value,
+                );
+            }
+        }
+        else {
+            $LogObject->Log(
+                Priority => 'debug',
+                Message =>
+                    "User preference key $Key is not configured in CustomerPreferences::AJAXUpdate::AllowedKeys to be allowed to be set via UpdateAJAX.",
+            );
+        }
+
+        my $JSON = $LayoutObject->JSONEncode(
+            Data => $Success,
+        );
+        return $LayoutObject->Attachment(
+            ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
+            Content     => $JSON,
+            Type        => 'inline',
+            NoCache     => 1,
+        );
+    }
 
     # ------------------------------------------------------------ #
     # update preferences

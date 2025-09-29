@@ -138,6 +138,7 @@ perform TicketCreate Operation. This will return the created ticket number.
                 ForceNotificationToUserID       => [1, 2, 3]                   # optional
                 ExcludeNotificationToUserID     => [1, 2, 3]                   # optional
                 ExcludeMuteNotificationToUserID => [1, 2, 3]                   # optional
+                AppendSignatureToBody           => 1,                          # optional, defaults to 1
                 Attachment => [
                     {
                         Content     => 'content'                                 # base64 encoded
@@ -192,6 +193,7 @@ perform TicketCreate Operation. This will return the created ticket number.
                     ForceNotificationToUserID       => [1, 2, 3]                   # optional
                     ExcludeNotificationToUserID     => [1, 2, 3]                   # optional
                     ExcludeMuteNotificationToUserID => [1, 2, 3]                   # optional
+                    AppendSignatureToBody           => 1,                          # optional, defaults to 1
                     Attachment => [
                         {
                             Content     => 'content',                                # base64 encoded
@@ -1615,30 +1617,47 @@ sub _TicketCreate {
             # Template generator implicitly takes Frontend::RichText into account.
             # Temporarily enable/disable RichText setting according to content type of article,
             # so that body and signature both are plain text or HTML.
+            # Default is adding the signature (previous standard behavior).
             #
-            my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+            if ( $Article->{AppendSignatureToBody} // 1 ) {
+                my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-            my $OriginalRichTextSetting = $ConfigObject->Get('Frontend::RichText');
+                my $OriginalRichTextSetting = $ConfigObject->Get('Frontend::RichText');
 
-            $ConfigObject->{'Frontend::RichText'} = 0 if $ArticleIsPlainText;
-            $ConfigObject->{'Frontend::RichText'} = 1 if $ArticleIsHTML;
+                $ConfigObject->{'Frontend::RichText'} = 0 if $ArticleIsPlainText;
+                $ConfigObject->{'Frontend::RichText'} = 1 if $ArticleIsHTML;
 
-            my $Signature = $Kernel::OM->Get('Kernel::System::TemplateGenerator')->Signature(
-                TicketID => $TicketID,
-                UserID   => $Param{UserID},
-                Data     => $Article,
-            );
+                # To make sure to have correct richtext setting in template generator
+                $Kernel::OM->ObjectsDiscard(
+                    Objects => [
+                        'Kernel::System::TemplateGenerator',
+                    ],
+                );
 
-            # Restore original RichText setting.
-            $ConfigObject->{'Frontend::RichText'} = $OriginalRichTextSetting;
+                my $Signature = $Kernel::OM->Get('Kernel::System::TemplateGenerator')->Signature(
+                    TicketID => $TicketID,
+                    UserID   => $Param{UserID},
+                    Data     => $Article,
+                );
 
-            if ($Signature) {
-                $Article->{Body} = $Article->{Body} . $Signature;
+                # Restore original RichText setting.
+                $ConfigObject->{'Frontend::RichText'} = $OriginalRichTextSetting;
 
-                if ($ArticleIsHTML) {
-                    $PlainBody = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii(
-                        String => $Article->{Body},
-                    );
+                # To make sure to have correct richtext setting in template generator
+                $Kernel::OM->ObjectsDiscard(
+                    Objects => [
+                        'Kernel::System::TemplateGenerator',
+                    ],
+                );
+
+                if ($Signature) {
+                    $Article->{Body} = $Article->{Body} . $Signature;
+
+                    if ($ArticleIsHTML) {
+                        $PlainBody = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii(
+                            String => $Article->{Body},
+                        );
+                    }
                 }
             }
         }

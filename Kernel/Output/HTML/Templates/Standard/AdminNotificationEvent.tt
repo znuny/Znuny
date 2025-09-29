@@ -26,9 +26,6 @@
                     <li>
                         <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Add" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-plus-square"></i>[% Translate("Add Notification") | html %]</span></a>
                     </li>
-                    <li>
-                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=NotificationExport" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-download"></i>[% Translate("Export Notifications") | html %]</span></a>
-                    </li>
 [% RenderBlockEnd("ActionAdd") %]
                 </ul>
             </div>
@@ -44,14 +41,14 @@
             </div>
         </div>
 [% RenderBlockEnd("Filter") %]
-[% RenderBlockStart("ActionImport") %]
+[% RenderBlockStart("ActionImportExport") %]
         <div class="WidgetSimple">
             <div class="Header">
-                <h2>[% Translate("Configuration Import") | html %]</h2>
+                <h2>[% Translate("Import and export of configurations") | html %]</h2>
             </div>
             <div class="Content">
                 <p class="FieldExplanation">
-                    [% Translate("Here you can upload a configuration file to import Ticket Notifications to your system. The file needs to be in .yml format as exported by the Ticket Notification module.") | html %]
+                    [% Translate("Upload a file in YAML format (as provided by the export) to import ticket notifications.") | html %]
                 </p>
                 <ul class="ActionList SpacingTop">
                     <li>
@@ -69,15 +66,18 @@
                                 </div>
                             </fieldset>
 
-                            <button class="CallForAction btn-main btn-primary-ghost" type="submit" value="[% Translate("Upload Notification configuration") | html %]">
-                                <span><i class="fa fa-upload"></i>[% Translate("Import Notification configuration") | html %]</span>
+                            <button class="CallForAction btn-main btn-primary-ghost" type="submit" value="[% Translate("Import configurations") | html %]">
+                                <span><i class="fa fa-upload"></i>[% Translate("Import configurations") | html %]</span>
                             </button>
                         </form>
+                    </li>
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=NotificationExport" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-download"></i>[% Translate("Export configurations") | html %]</span></a>
                     </li>
                 </ul>
             </div>
         </div>
-[% RenderBlockEnd("ActionImport") %]
+[% RenderBlockEnd("ActionImportExport") %]
     </div>
 
     <div class="ContentColumn">

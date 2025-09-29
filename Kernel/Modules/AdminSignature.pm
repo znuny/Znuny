@@ -13,6 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::Language qw(Translatable);
+use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
 
@@ -32,6 +33,7 @@ sub Run {
     my $ParamObject     = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $LayoutObject    = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $SignatureObject = $Kernel::OM->Get('Kernel::System::Signature');
+    my $YAMLObject      = $Kernel::OM->Get('Kernel::System::YAML');
 
     my $Notification = $ParamObject->GetParam( Param => 'Notification' ) || '';
 
@@ -228,6 +230,192 @@ sub Run {
         return $Output;
     }
 
+    # ------------------------------------------------------------ #
+    # Delete
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'Delete' ) {
+
+        # challenge token check for write action
+        $LayoutObject->ChallengeTokenCheck();
+
+        my %GetParam;
+        for my $Parameter (qw(ID)) {
+            $GetParam{$Parameter} = $ParamObject->GetParam( Param => $Parameter ) || '';
+        }
+
+        my $Delete = $SignatureObject->SignatureDelete(
+            ID     => $GetParam{ID},
+            UserID => $Self->{UserID},
+        );
+
+        return $LayoutObject->ErrorScreen() if !$Delete;
+        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+    }
+
+    # ------------------------------------------------------------ #
+    # SignatureExport
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'SignatureExport' ) {
+
+        my $SignatureID = $ParamObject->GetParam( Param => 'ID' ) || '';
+        my $SignatureData;
+        my $SignatureName;
+        if ($SignatureID) {
+            $SignatureData = $SignatureObject->SignatureExport(
+                ID => $SignatureID,
+            );
+
+            return $LayoutObject->ErrorScreen(
+                Message =>
+                    $LayoutObject->{LanguageObject}->Translate( 'Error exporting signature with ID %s!', $SignatureID ),
+            ) if !IsArrayRefWithData($SignatureData);
+
+            $SignatureName = $SignatureData->[0]->{Name};
+        }
+        else {
+            $SignatureData = $SignatureObject->SignatureExport(
+                ExportAll => 1,
+            );
+        }
+
+        my $Filename = $SignatureObject->SignatureExportFilenameGet(
+            Name   => $SignatureName,
+            Format => 'YAML',
+        );
+
+        # convert signature data hash to string
+        my $SignatureDataYAML = $YAMLObject->Dump( Data => $SignatureData );
+
+        # send the result to the browser
+        return $LayoutObject->Attachment(
+            ContentType => 'text/html; charset=' . $LayoutObject->{Charset},
+            Content     => $SignatureDataYAML,
+            Type        => 'attachment',
+            Filename    => $Filename,
+            NoCache     => 1,
+        );
+    }
+
+    # ------------------------------------------------------------ #
+    # SignatureCopy
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'SignatureCopy' ) {
+
+        my $SignatureID = $ParamObject->GetParam( Param => 'ID' ) || '';
+
+        # challenge token check for write action
+        $LayoutObject->ChallengeTokenCheck();
+
+        my $NewResponseID = $SignatureObject->SignatureCopy(
+            ID     => $SignatureID,
+            UserID => $Self->{UserID},
+        );
+
+        return $LayoutObject->ErrorScreen(
+            Message => Translatable("Error creating the signature."),
+        ) if !$NewResponseID;
+
+        # return to overview
+        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+    }
+
+    # ------------------------------------------------------------ #
+    # SignatureImport
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'SignatureImport' ) {
+
+        # challenge token check for write action
+        $LayoutObject->ChallengeTokenCheck();
+
+        my $FormID      = $ParamObject->GetParam( Param => 'FormID' ) || '';
+        my %UploadStuff = $ParamObject->GetUploadAll(
+            Param  => 'FileUpload',
+            Source => 'string',
+        );
+
+        my $OverwriteExistingSignatures = $ParamObject->GetParam( Param => 'OverwriteExistingSignatures' ) || '';
+
+        my $SignatureImport = $SignatureObject->SignatureImport(
+            Content                     => $UploadStuff{Content},
+            OverwriteExistingSignatures => $OverwriteExistingSignatures,
+            UserID                      => $Self->{UserID},
+            ValidID                     => 0,
+        );
+
+        if ( !$SignatureImport->{Success} ) {
+            my $Message = $SignatureImport->{Message}
+                || Translatable(
+                'Signatures could not be imported due to an unknown error. Please check logs for more information.'
+                );
+            return $LayoutObject->ErrorScreen(
+                Message => $Message,
+            );
+        }
+
+        if ( $SignatureImport->{Added} ) {
+            push @{ $Param{NotifyData} }, {
+                Info => $LayoutObject->{LanguageObject}->Translate(
+                    'The following signatures have been added successfully: %s.',
+                    $SignatureImport->{Added}
+                ),
+            };
+        }
+        if ( $SignatureImport->{Updated} ) {
+            push @{ $Param{NotifyData} }, {
+                Info => $LayoutObject->{LanguageObject}->Translate(
+                    'The following signatures have been updated successfully: %s.',
+                    $SignatureImport->{Updated}
+                ),
+            };
+        }
+        if ( $SignatureImport->{NotUpdated} ) {
+            push @{ $Param{NotifyData} }, {
+                Info => $LayoutObject->{LanguageObject}->Translate(
+                    'The following signatures were not updated: %s.',
+                    $SignatureImport->{NotUpdated}
+                ),
+            };
+        }
+        if ( $SignatureImport->{Errors} ) {
+            push @{ $Param{NotifyData} }, {
+                Priority => 'Error',
+                Info     => $LayoutObject->{LanguageObject}->Translate(
+                    'Errors adding/updating the following signatures: %s. Please check logs for more information.',
+                    $SignatureImport->{Errors}
+                ),
+            };
+        }
+        if ( IsArrayRefWithData( $SignatureImport->{AdditionalErrors} ) ) {
+            for my $Error ( @{ $SignatureImport->{AdditionalErrors} } ) {
+                push @{ $Param{NotifyData} }, {
+                    Priority => 'Error',
+                    Info     => $LayoutObject->{LanguageObject}->Translate($Error),
+                };
+            }
+        }
+
+        $Self->_Overview();
+        my $Output = $LayoutObject->Header();
+        $Output .= $LayoutObject->NavigationBar();
+
+        # show Signatures if any
+        if ( $Param{NotifyData} ) {
+            for my $Signature ( @{ $Param{NotifyData} } ) {
+                $Output .= $LayoutObject->Notify(
+                    %{$Signature},
+                );
+            }
+        }
+
+        $Output .= $LayoutObject->Output(
+            TemplateFile => 'AdminSignature',
+            Data         => \%Param,
+        );
+        $Output .= $LayoutObject->Footer();
+
+        return $Output;
+    }
+
     # ------------------------------------------------------------
     # overview
     # ------------------------------------------------------------
@@ -337,6 +525,10 @@ sub _Overview {
 
     $LayoutObject->Block(
         Name => 'ActionAdd',
+    );
+
+    $LayoutObject->Block(
+        Name => 'ActionImportExport',
     );
 
     $LayoutObject->Block(

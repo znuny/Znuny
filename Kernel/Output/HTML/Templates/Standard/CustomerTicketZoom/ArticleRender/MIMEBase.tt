@@ -143,7 +143,10 @@ function CheckIFrameHeight(IFrameID) {
 [% END %]
             [% Data.BodyNote %]
             <div class="ArticleBody">
-                [% Data.Body %]...
+                [% Data.Body %][% IF Data.Body != Data.UnshortenedBody %]...[% END %]
+            </div>
+            <div class="UnshortenedArticleBody Hidden">
+                [% Data.UnshortenedBody %]
             </div>
         </div>
     </div>

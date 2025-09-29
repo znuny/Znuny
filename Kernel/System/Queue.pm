@@ -238,6 +238,7 @@ get standard responses of a queue
     my %Templates = $QueueObject->QueueStandardTemplateMemberList( QueueID => 123 );
 
 Returns:
+
     %Templates = (
         1 => 'Some Name',
         2 => 'Some Name',
@@ -249,6 +250,7 @@ Returns:
     );
 
 Returns:
+
     %Responses = (
         Answer => {
             1 => 'Some Name',
@@ -260,6 +262,7 @@ Returns:
     my %Queues = $QueueObject->QueueStandardTemplateMemberList( StandardTemplateID => 123 );
 
 Returns:
+
     %Queues = (
         1 => 'Some Name',
         2 => 'Some Name',

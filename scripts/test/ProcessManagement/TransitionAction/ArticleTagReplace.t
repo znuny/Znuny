@@ -38,7 +38,7 @@ my %AttachmentMapping = (
             'ContentType'        => 'text/html; charset="utf-8"',
             'Disposition'        => 'inline',
             'Filename'           => 'file-2',
-            'FilesizeRaw'        => '173'
+            'FilesizeRaw'        => '187'
         },
         2 => {
             'ContentAlternative' => '',
@@ -54,7 +54,7 @@ Inline :)
 
 Signatur A
 der letzte Artikel:
- UnitTest body test
+UnitTest body test
 ',
     },
     HTML => {
@@ -65,14 +65,13 @@ der letzte Artikel:
             'ContentType'        => 'text/html; charset="utf-8"',
             'Disposition'        => 'inline',
             'Filename'           => 'file-2',
-            'FilesizeRaw'        => '178'
+            'FilesizeRaw'        => '174'
         },
         Body => "Der erste Artikel:
-
 Mit freundlichem HACK
 
 der letzte Artikel:
- UnitTest body test
+UnitTest body test
 ",
     },
     Plain => {
@@ -83,15 +82,14 @@ der letzte Artikel:
             'ContentType'        => 'text/html; charset="utf-8"',
             'Disposition'        => 'inline',
             'Filename'           => 'file-2',
-            'FilesizeRaw'        => '203'
+            'FilesizeRaw'        => '210'
         },
         Body => 'Der erste Artikel:
 Mit freundlichem HACK
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 der letzte Artikel:
- UnitTest body test
+UnitTest body test
 ',
     },
     HTML_ISO => {
@@ -102,7 +100,7 @@ der letzte Artikel:
             'ContentType'        => 'text/html; charset="utf-8"',
             'Disposition'        => 'inline',
             'Filename'           => 'file-2',
-            'FilesizeRaw'        => '411'
+            'FilesizeRaw'        => '443'
         },
         2 => {
             'ContentAlternative' => '',
@@ -127,7 +125,7 @@ Asd
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 der letzte Artikel:
- UnitTest body test
+UnitTest body test
 ',
     },
 );
@@ -170,7 +168,7 @@ for my $Mail (qw(Inline HTML Plain HTML_ISO)) {
         # Article:
         IsVisibleForCustomer => 0,
         Body =>
-            '<u>Der erste Artikel</u>:<br><OTRS_FIRST_ARTICLE_BODY><br><u>der letzte Artikel:</u><br> <OTRS_LAST_ARTICLE_BODY>',
+            '<p><u>Der erste Artikel</u>:</p><OTRS_FIRST_ARTICLE_BODY><p><u>der letzte Artikel:</u></p><OTRS_LAST_ARTICLE_BODY>',
         ContentType    => 'text/html; charset=ISO-8859-15',
         Subject        => '<OTRS_FIRST_ARTICLE_SUBJECT>',
         From           => '<OTRS_CUSTOMER_UserEmail>',
@@ -273,10 +271,6 @@ for my $Mail (qw(Inline HTML Plain HTML_ISO)) {
                 "Matching attachment ID $AtmID for article '$Article{ArticleID}' of ticket '$NewTicketID' in $Mail mail",
             );
         }
-
-        # due to Sublime we need to remove trailing space
-        # since the little feller wouldn't let me disable it
-        $Article{Body} =~ s{[ ]+\n}{\n}g;
 
         $Self->Is(
             $Article{Body},

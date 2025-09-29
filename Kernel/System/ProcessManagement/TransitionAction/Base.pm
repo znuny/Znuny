@@ -317,10 +317,10 @@ sub _OverrideTicketID {
 
 Replaces ticket attributes.
 
-<OTRS_FIRST_ARTICLE_...>
-<OTRS_LAST_ARTICLE_...>
-<OTRS_TICKET_DynamicField_Name1_Value> or <OTRS_Ticket_DynamicField_Name1_Value>.
-<OTRS_Ticket_*> is deprecated and should be removed in further versions of OTRS.
+C<OTRS_FIRST_ARTICLE_...>
+C<OTRS_LAST_ARTICLE_...>
+C<OTRS_TICKET_DynamicField_Name1_Value> or C<OTRS_Ticket_DynamicField_Name1_Value>.
+C<OTRS_Ticket_*> is deprecated and should be removed in further versions of OTRS.
 
     my $Success = $TransitionActionBaseObject->_ReplaceTicketAttributes(
         UserID => 1,

@@ -65,6 +65,7 @@ Check if provided EffectiveValue matches structure defined in XMLContentParsed.
     );
 
 Result:
+
     %Result = (
         EffectiveValue => '/etc/hosts',   # Note for File ValueTypes EffectiveValue is not changed.
         Success => 1,
