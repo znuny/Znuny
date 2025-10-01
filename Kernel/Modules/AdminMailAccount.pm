@@ -11,6 +11,7 @@ package Kernel::Modules::AdminMailAccount;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::Language qw(Translatable);
 
@@ -30,6 +31,7 @@ sub Run {
     my ( $Self, %Param ) = @_;
 
     my $LayoutObject      = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $LogObject         = $Kernel::OM->Get('Kernel::System::Log');
     my $ParamObject       = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $MailAccountObject = $Kernel::OM->Get('Kernel::System::MailAccount');
 
@@ -72,7 +74,6 @@ sub Run {
 
         my %Data = $MailAccountObject->MailAccountGet(%GetParam);
         if ( !%Data ) {
-
             $PIDObject->PIDDelete( Name => 'MailAccountFetch' );
             return $LayoutObject->ErrorScreen();
         }
@@ -85,10 +86,7 @@ sub Run {
 
         $PIDObject->PIDDelete( Name => 'MailAccountFetch' );
 
-        if ( !$Ok ) {
-            return $LayoutObject->ErrorScreen();
-        }
-        return $LayoutObject->Redirect( OP => 'Action=AdminMailAccount;Ok=1' );
+        return $LayoutObject->Redirect( OP => 'Action=AdminMailAccount;' . ( $Ok ? 'Ok=1' : 'Error=1' ) );
     }
 
     # ------------------------------------------------------------ #
@@ -339,15 +337,33 @@ sub Run {
         $Self->_Overview();
 
         my $Ok     = $ParamObject->GetParam( Param => 'Ok' );
+        my $Error  = $ParamObject->GetParam( Param => 'Error' );
         my $Locked = $ParamObject->GetParam( Param => 'Locked' );
 
         my $Output = $LayoutObject->Header();
         $Output .= $LayoutObject->NavigationBar();
 
-        if ($Ok) {
+        if ($Error) {
+            my $Log = $Kernel::OM->Get('Kernel::System::Log')->GetLog();
+            my ($ErrorMessage)
+                = $Log =~ m{ ^ (?: [^;]* ; ){2} error; (?: [^;]* ; ){3} (.*) $ }xm;    # Extract first error from CSV
+            $ErrorMessage = " (\"$ErrorMessage\")" if $ErrorMessage;
+
+            my $TranslatedMessage = $LayoutObject->{LanguageObject}->Translate(
+                'Error fetching mail%s, please check the Communication Log!',
+                $ErrorMessage
+            );
+
+            $Output .= $LayoutObject->Notify(
+                Priority => 'Error',
+                Info     => $TranslatedMessage,
+                Link     => $LayoutObject->{Baselink} . 'Action=AdminCommunicationLog;Filter=Failed;Expand=1'
+            );
+        }
+        elsif ($Ok) {
             $Output .= $LayoutObject->Notify( Info => Translatable('Finished') );
         }
-        if ($Locked) {
+        elsif ($Locked) {
             $Output .= $LayoutObject->Notify(
                 Info => Translatable('Email account fetch already fetched by another process. Please try again later!'),
             );

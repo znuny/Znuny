@@ -25779,3 +25779,7 @@ msgstr ""
 msgid "Defines the default ticket order in the ticket mention view of the agent interface. Up: oldest on top. Down: latest on top."
 msgstr ""
 
+#. Perl Module: Kernel/Modules/AdminMailAccount.pm
+msgid "Error fetching mail%s, please check the Communication Log!"
+msgstr ""
+

@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D %T';
-    $Self->{Completeness}        = 0.888906752411576;
+    $Self->{Completeness}        = 0.888763864330493;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -3902,6 +3902,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminMailAccount.pm
         'Mail account added!' => '메일 계정이 추가되었습니다!',
+        'Error fetching mail%s, please check the Communication Log!' => '',
         'Email account fetch already fetched by another process. Please try again later!' =>
             '이메일 계정 가져오기가 이미 다른 프로세스에서 가져왔습니다. 나중에 다시 시도 해주십시오!',
         'Dispatching by email To: field.' => '이메일로 발송 : 수신자 : 필드.',

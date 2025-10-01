@@ -1023,23 +1023,24 @@ sub ErrorScreen {
 
 sub Error {
     my ( $Self, %Param ) = @_;
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
 
     # get backend error messages
     for my $Needed (qw(Message Traceback)) {
         my $Backend = 'Backend' . $Needed;
-        $Param{$Backend} = $Kernel::OM->Get('Kernel::System::Log')->GetLogEntry(
+        $Param{$Backend} = $LogObject->GetLogEntry(
             Type => 'Error',
             What => $Needed
         ) || '';
     }
     if ( !$Param{BackendMessage} && !$Param{BackendTraceback} ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => $Param{Message} || '?',
         );
         for my $Needed (qw(Message Traceback)) {
             my $Backend = 'Backend' . $Needed;
-            $Param{$Backend} = $Kernel::OM->Get('Kernel::System::Log')->GetLogEntry(
+            $Param{$Backend} = $LogObject->GetLogEntry(
                 Type => 'Error',
                 What => $Needed
             ) || '';

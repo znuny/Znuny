@@ -7,6 +7,7 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
+## no critic (RequireExplicitPackage)
 use strict;
 use warnings;
 use utf8;
@@ -40,7 +41,7 @@ my %FakeClientEnv = (
 # This inline package is the base for the IMAP/POP3 fake clients
 #   and as you can see it uses the %FakeClientEnv.
 #   This package uses autoload to handle undefined methods, and when
-#   that happen, it'll check if the FakeClientEnv has an attribute with the same
+#   that happens, it'll check if the FakeClientEnv has an attribute with the same
 #   name and returns it, otherwise always returns True to ensure that the code
 #   that will use this object continues as everything is ok.
 package FakeClient {    ## no critic

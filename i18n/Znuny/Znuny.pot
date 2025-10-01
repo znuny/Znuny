@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-07-18 11:19+0000\n"
+"POT-Creation-Date: 2025-09-29 12:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -11292,6 +11292,10 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminMailAccount.pm
 msgid "Mail account added!"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminMailAccount.pm
+msgid "Error fetching mail%s, please check the Communication Log!"
 msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminMailAccount.pm

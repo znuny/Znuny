@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.70128617363344;
+    $Self->{Completeness}        = 0.701173444783797;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3909,6 +3909,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # Perl Module: Kernel/Modules/AdminMailAccount.pm
         'Mail account added!' => 'メールアカウントを追加しました。',
+        'Error fetching mail%s, please check the Communication Log!' => '',
         'Email account fetch already fetched by another process. Please try again later!' =>
             '',
         'Dispatching by email To: field.' => 'メールの宛先で振り分け',

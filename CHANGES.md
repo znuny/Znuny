@@ -1,3 +1,6 @@
+# 6.5.19 2025-??-??
+ - 2025-10-01 Fixed: Improved error logging when fetching emails.
+
 # 6.5.18 2025-09-24
  - 2025-09-22 Fixed: Fix for installer email setting checks lead to issues with sending emails.
 
