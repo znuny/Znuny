@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -263,17 +263,17 @@ sub AgentCustomerViewTable {
 sub AgentQueueListOption {
     my ( $Self, %Param ) = @_;
 
-    my $Size           = $Param{Size}                      ? "size='$Param{Size}'"  : '';
-    my $MaxLevel       = defined( $Param{MaxLevel} )       ? $Param{MaxLevel}       : 10;
-    my $SelectedID     = defined( $Param{SelectedID} )     ? $Param{SelectedID}     : '';
-    my $Selected       = defined( $Param{Selected} )       ? $Param{Selected}       : '';
-    my $CurrentQueueID = defined( $Param{CurrentQueueID} ) ? $Param{CurrentQueueID} : '';
-    my $Class          = defined( $Param{Class} )          ? $Param{Class}          : '';
+    my $Size               = $Param{Size}                      ? "size='$Param{Size}'"  : '';
+    my $MaxLevel           = defined( $Param{MaxLevel} )       ? $Param{MaxLevel}       : 10;
+    my $SelectedID         = defined( $Param{SelectedID} )     ? $Param{SelectedID}     : '';
+    my $Selected           = defined( $Param{Selected} )       ? $Param{Selected}       : '';
+    my $CurrentQueueID     = defined( $Param{CurrentQueueID} ) ? $Param{CurrentQueueID} : '';
+    my $Class              = defined( $Param{Class} )          ? $Param{Class}          : '';
     my $SelectedIDRefArray = $Param{SelectedIDRefArray} || '';
-    my $Multiple           = $Param{Multiple} ? 'multiple = "multiple"' : '';
-    my $TreeView           = $Param{TreeView} ? $Param{TreeView} : 0;
-    my $OptionTitle        = defined( $Param{OptionTitle} ) ? $Param{OptionTitle} : 0;
-    my $OnChangeSubmit     = defined( $Param{OnChangeSubmit} ) ? $Param{OnChangeSubmit} : '';
+    my $Multiple           = $Param{Multiple}                  ? 'multiple = "multiple"' : '';
+    my $TreeView           = $Param{TreeView}                  ? $Param{TreeView}        : 0;
+    my $OptionTitle        = defined( $Param{OptionTitle} )    ? $Param{OptionTitle}     : 0;
+    my $OnChangeSubmit     = defined( $Param{OnChangeSubmit} ) ? $Param{OnChangeSubmit}  : '';
 
     if ($OnChangeSubmit) {
         $OnChangeSubmit = " onchange=\"submit();\"";
@@ -911,7 +911,7 @@ sub TicketListShow {
         Limit     => $Limit,
         StartHit  => $StartHit,
         PageShown => $PageShown,
-        AllHits   => $Param{Total} || 0,
+        AllHits   => $Param{Total}  || 0,
         Output    => $Param{Output} || '',
     );
     if ( !$Param{Output} ) {

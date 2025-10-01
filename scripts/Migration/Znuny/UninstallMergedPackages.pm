@@ -46,13 +46,22 @@ sub Run {
         Type => 'XMLParse',
     );
 
-    # Note: Znuny and Znuny4OTRS in case one of the packages later will be built with the Znuny prefix
     my @PackageNames = (
-        'Znuny-NoteToLinkedTicket',
-        'Znuny4OTRS-NoteToLinkedTicket',
-        'Znuny4OTRS-UserMaxArticlesPerPage',
-        'Znuny-DynamicFieldWebserviceTicketIDPayload',
-        'Znuny-RichTextEditorLinkFix',
+        'Znuny-AdminValidFilter',
+        'Znuny4OTRS-AdminValidFilter',
+        'Znuny-ArticleColors',
+        'Znuny4OTRS-ArticleColors',
+        'Znuny-CustomPriorityColor',
+        'Znuny4OTRS-CustomPriorityColor',
+        'Znuny-OAuth2ClientCredentialsFlow',
+        'Znuny-DynamicFieldAdminAutoConfig',
+        'Znuny4OTRS-DynamicFieldAdminAutoConfig',
+        'Znuny-MarkTicketSeenUnseen',
+        'Znuny4OTRS-MarkTicketSeenUnseen',
+        'Znuny-Translations',
+        'Znuny4OTRS-Translations',
+        'Znuny-MSGraphMail',
+        'Znuny-BugfixIssue1206',
     );
 
     PACKAGENAME:

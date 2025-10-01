@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -594,24 +594,15 @@ sub Run {
                 qw(ServiceID OwnerID Owner ResponsibleID Responsible PriorityID Priority QueueID Queue Subject
                 Body IsVisibleForCustomer TypeID StateID State MergeToSelection MergeTo LinkTogether
                 EmailSubject EmailBody EmailTimeUnits
-                LinkTogetherParent Unlock MergeToChecked MergeToOldestChecked)
+                LinkTogetherParent Unlock MergeToChecked MergeToOldestChecked MarkTicketsAs)
                 )
             {
                 $GetParam{$Key} = $ParamObject->GetParam( Param => $Key ) || '';
             }
 
-            for my $Key (qw(TimeUnits)) {
+            for my $Key (qw(TimeUnits Watch)) {
                 $GetParam{$Key} = $ParamObject->GetParam( Param => $Key );
             }
-
-            # get time stamp based on user time zone
-            %Time = $LayoutObject->TransformDateSelection(
-                Year   => $ParamObject->GetParam( Param => 'Year' ),
-                Month  => $ParamObject->GetParam( Param => 'Month' ),
-                Day    => $ParamObject->GetParam( Param => 'Day' ),
-                Hour   => $ParamObject->GetParam( Param => 'Hour' ),
-                Minute => $ParamObject->GetParam( Param => 'Minute' ),
-            );
 
             if ( $GetParam{'MergeToSelection'} eq 'OptionMergeTo' ) {
                 $GetParam{'MergeToChecked'} = 'checked';
@@ -672,6 +663,15 @@ sub Run {
                 }
 
                 if ( $StateData{TypeName} =~ /^pending/i ) {
+
+                    # get time stamp based on user time zone
+                    %Time = $LayoutObject->TransformDateSelection(
+                        Year   => $ParamObject->GetParam( Param => 'Year' ),
+                        Month  => $ParamObject->GetParam( Param => 'Month' ),
+                        Day    => $ParamObject->GetParam( Param => 'Day' ),
+                        Hour   => $ParamObject->GetParam( Param => 'Hour' ),
+                        Minute => $ParamObject->GetParam( Param => 'Minute' ),
+                    );
 
                     # create datetime object
                     my $PendingDateTimeObject = $Kernel::OM->Create(
@@ -1318,6 +1318,74 @@ sub Run {
                         );
                     }
                 }
+
+                # watch or unwatch tickets
+                if ( defined $GetParam{'Watch'} ) {
+                    if ( $GetParam{'Watch'} eq '1' ) {
+                        $Result = $TicketObject->TicketWatchSubscribe(
+                            TicketID    => $TicketID,
+                            WatchUserID => $Self->{UserID},
+                            UserID      => $Self->{UserID},
+                        );
+
+                        if ( !$Result ) {
+                            push @NonUpdatedTickets, $Ticket{TicketNumber};
+                        }
+                    }
+                    elsif ( $GetParam{'Watch'} eq '0' ) {
+                        $Result = $TicketObject->TicketWatchUnsubscribe(
+                            TicketID    => $TicketID,
+                            WatchUserID => $Self->{UserID},
+                            UserID      => $Self->{UserID},
+                        );
+
+                        if ( !$Result ) {
+                            push @NonUpdatedTickets, $Ticket{TicketNumber};
+                        }
+                    }
+                }
+
+                if ( $GetParam{'MarkTicketsAs'} eq 'Seen' || $GetParam{'MarkTicketsAs'} eq 'Unseen' ) {
+
+                    my $TicketActionFunction;
+                    my $ArticleActionFunction;
+
+                    if ( $GetParam{'MarkTicketsAs'} eq 'Seen' ) {
+                        $TicketActionFunction  = 'TicketFlagSet';
+                        $ArticleActionFunction = 'ArticleFlagSet';
+
+                    }
+                    elsif ( $GetParam{'MarkTicketsAs'} eq 'Unseen' ) {
+                        $TicketActionFunction  = 'TicketFlagDelete';
+                        $ArticleActionFunction = 'ArticleFlagDelete';
+                    }
+
+                    my @ArticleIDs = $ArticleObject->ArticleIndex(
+                        TicketID => $TicketID,
+                    );
+
+                    ARTICLEID:
+                    for my $ArticleID ( sort @ArticleIDs ) {
+
+                        # article flag
+                        my $Success = $ArticleObject->$ArticleActionFunction(
+                            TicketID  => $TicketID,
+                            ArticleID => $ArticleID,
+                            Key       => 'Seen',
+                            Value     => 1,                 # irrelevant in case of delete
+                            UserID    => $Self->{UserID},
+                        );
+                    }
+
+                    # ticket flag
+                    $TicketObject->$TicketActionFunction(
+                        TicketID => $TicketID,
+                        Key      => 'Seen',
+                        Value    => 1,                 # irrelevant in case of delete
+                        UserID   => $Self->{UserID},
+                    );
+                }
+
                 $ActionFlag = 1;
             }
             $Counter++;
@@ -1626,7 +1694,7 @@ sub _Mask {
                 %Param,
                 Format               => 'DateInputFormatLong',
                 DiffTime             => $ConfigObject->Get('Ticket::Frontend::PendingDiffTime') || 0,
-                Class                => $Param{Errors}->{DateInvalid} || '',
+                Class                => $Param{Errors}->{DateInvalid}                           || '',
                 Validate             => 1,
                 ValidateDateInFuture => 1,
             );
@@ -1800,6 +1868,59 @@ sub _Mask {
         Class      => 'Modernize',
     );
 
+# Ticket::WatcherGroup - Enables or disables the ticket watcher feature, to keep track of tickets without being the owner nor the responsible.
+    my @WatcherGroups = @{ $ConfigObject->Get('Ticket::WatcherGroup') // [] };
+    my $BulkWatch     = 0;
+
+    # General permission via config switch to use ticket watcher.
+    if ( $ConfigObject->Get('Ticket::Watcher') ) {
+        $BulkWatch = 1;
+    }
+
+    # Ticket watcher via group.
+    elsif (@WatcherGroups) {
+        my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
+        GROUP:
+        for my $Group (@WatcherGroups) {
+            my $HasPermission = $GroupObject->PermissionCheck(
+                UserID    => $Self->{UserID},
+                GroupName => $Group,
+                Type      => 'rw',
+            );
+            next GROUP if !$HasPermission;
+
+            $BulkWatch = 1;
+            last GROUP;
+        }
+    }
+
+    if ($BulkWatch) {
+        $Param{WatchYesNoOption} = $LayoutObject->BuildSelection(
+            Data         => $ConfigObject->Get('YesNoOptions'),
+            Name         => 'Watch',
+            PossibleNone => 1,
+            SelectedID   => $Param{Watch} // '',
+            Class        => 'Modernize',
+        );
+
+        $LayoutObject->Block(
+            Name => 'Watch',
+            Data => \%Param,
+        );
+    }
+
+    $Param{MarkTicketsAsOption} = $LayoutObject->BuildSelection(
+        Data => {
+            Seen   => 'Mark as seen',
+            Unseen => 'Mark as unseen',
+        },
+        Name         => 'MarkTicketsAs',
+        SelectedID   => $Param{MarkTicketsAs} // 0,
+        PossibleNone => 1,
+        Translation  => 1,
+        Class        => 'Modernize',
+    );
+
     # add rich text editor for note & email
     if ( $LayoutObject->{BrowserRichText} ) {
 
@@ -1885,7 +2006,7 @@ sub _Mask {
         $DynamicFieldConfigs{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = {
             Name              => $DynamicFieldConfig->{Name},
             RequireActivation => $RequireActivation || 'false',
-            IsChecked         => $IsChecked || 'false',
+            IsChecked         => $IsChecked         || 'false',
         };
 
         push @DynamicFieldNames, 'DynamicField_' . $DynamicFieldConfig->{Name};

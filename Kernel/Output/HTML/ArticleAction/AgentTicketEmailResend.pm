@@ -12,7 +12,7 @@ package Kernel::Output::HTML::ArticleAction::AgentTicketEmailResend;
 use strict;
 use warnings;
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(IsHashRefWithData);
 
 our @ObjectDependencies = (
@@ -123,7 +123,7 @@ sub GetConfig {
         Description => Translatable('Resend this article'),
         Name        => Translatable('Resend'),
         Class       => 'AsPopup PopupType_TicketAction',
-        Link =>
+        Link        =>
             "Action=AgentTicketEmailResend;TicketID=$Param{Ticket}->{TicketID};ArticleID=$Param{Article}->{ArticleID}",
     );
 

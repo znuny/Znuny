@@ -12,7 +12,7 @@ package Kernel::System::Console::Command::Maint::Config::Rebuild;
 use strict;
 use warnings;
 
-use parent qw(Kernel::System::Console::BaseCommand);
+use parent      qw(Kernel::System::Console::BaseCommand);
 use Time::HiRes qw(sleep);
 
 our @ObjectDependencies = (

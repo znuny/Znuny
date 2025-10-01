@@ -152,8 +152,8 @@ sub EditLabelRender {
     my $Optional = $Param{ $Prefix . 'Optional' } || 0;
 
     if ($Optional) {
-        my $Used  = $Param{ $Prefix . 'Used' }  || 0;
-        my $Class = $Param{ $Prefix . 'Class' } || '';
+        my $Used    = $Param{ $Prefix . 'Used' }  || 0;
+        my $Class   = $Param{ $Prefix . 'Class' } || '';
         my $Checked = '';
         if ($Used) {
             $Checked = " checked='checked'";

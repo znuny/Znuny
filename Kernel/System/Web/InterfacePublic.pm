@@ -205,7 +205,7 @@ sub Run {
     if ( !$ModuleReg ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Module Kernel::Modules::$Param{Action} not registered in Kernel/Config.pm!",
         );
         $LayoutObject->CustomerFatalError(

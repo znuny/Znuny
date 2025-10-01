@@ -135,8 +135,8 @@ for my $Test ( @{$DefaultTest} ) {
 
     my @InsertColumnsSorted = sort { $a cmp $b } keys %{ $Test->{Insert} };
     my @InsertValuesSorted  = map  { $Test->{Insert}->{$_} } @InsertColumnsSorted;
-    my $InsertColumns = join q{, }, @InsertColumnsSorted;
-    my $InsertValues  = join q{, }, @InsertValuesSorted;
+    my $InsertColumns       = join q{, }, @InsertColumnsSorted;
+    my $InsertValues        = join q{, }, @InsertValuesSorted;
 
     my $SQLInsert = "INSERT INTO test_e (id, $InsertColumns) VALUES ($ID, $InsertValues)";
 

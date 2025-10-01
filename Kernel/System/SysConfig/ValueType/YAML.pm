@@ -69,6 +69,7 @@ Check if provided EffectiveValue matches structure defined in XMLContentParsed.
     );
 
 Result:
+
     %Result = (
         EffectiveValue => 'YAML content',
         Success => 1,

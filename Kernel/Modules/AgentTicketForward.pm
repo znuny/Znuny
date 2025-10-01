@@ -11,9 +11,10 @@ package Kernel::Modules::AgentTicketForward;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Mail::Address;
 
 our $ObjectManagerDisabled = 1;
@@ -405,11 +406,11 @@ sub Form {
     if ( $LayoutObject->{BrowserRichText} ) {
 
         # prepare body, subject, ReplyTo ...
-        $Data{Body} = '<br/>' . $Data{Body};
+        $Data{Body} = "<p></p>\n" . $Data{Body};
         if ( $Data{CreateTime} ) {
             $Data{CreateTime} = $LayoutObject->{LanguageObject}->FormatTimeString( $Data{CreateTime} );
-            $Data{Body}       = $LayoutObject->{LanguageObject}->Translate('Date') .
-                ": $Data{CreateTime}<br/>" . $Data{Body};
+            $Data{Body}       = '<p>' . $LayoutObject->{LanguageObject}->Translate('Date') .
+                ": $Data{CreateTime}</p>" . $Data{Body};
         }
         for my $Key (qw(Subject ReplyTo Reply-To Cc To From Sender)) {
             if ( $Data{$Key} ) {
@@ -418,7 +419,7 @@ sub Form {
                 my $Value = $LayoutObject->Ascii2RichText(
                     String => $Data{$Key},
                 );
-                $Data{Body} = "$KeyText: $Value<br/>" . $Data{Body};
+                $Data{Body} = "<p>$KeyText: $Value</p>" . $Data{Body};
             }
         }
 
@@ -436,7 +437,7 @@ sub Form {
             );
         }
         else {
-            $Data{Body} = "<br/>" . $Data{Body};
+            $Data{Body} = "<p></p>" . $Data{Body};
         }
         my $From = $LayoutObject->Ascii2RichText(
             String => $Data{From} || $Data{Sender},
@@ -445,12 +446,12 @@ sub Form {
         my $ForwardedMessageFrom = $LayoutObject->{LanguageObject}->Translate('Forwarded message from');
         my $EndForwardedMessage  = $LayoutObject->{LanguageObject}->Translate('End forwarded message');
 
-        $Data{Body} = "<br/>---- $ForwardedMessageFrom $From ---<br/><br/>" . $Data{Body};
-        $Data{Body} .= "<br/>---- $EndForwardedMessage ---<br/>";
+        $Data{Body} = "<p>---- $ForwardedMessageFrom $From ---</p><p></p>" . $Data{Body};
+        $Data{Body} .= "\n<p>---- $EndForwardedMessage ---</p>";
         $Data{Body} = $Data{Signature} . $Data{Body};
 
         if ( $GetParam{ForwardTemplateID} ) {
-            $Data{Body} = $Data{StdTemplate} . '<br/>' . $Data{Body};
+            $Data{Body} = $Data{StdTemplate} . '<p></p>' . $Data{Body};
         }
 
         $Data{ContentType} = 'text/html';
@@ -655,7 +656,7 @@ sub Form {
             DynamicFieldConfig   => $DynamicFieldConfig,
             PossibleValuesFilter => $PossibleValuesFilter,
             Value                => $Value,
-            Mandatory =>
+            Mandatory            =>
                 $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
             LayoutObject    => $LayoutObject,
             ParamObject     => $ParamObject,
@@ -1012,7 +1013,7 @@ sub SendEmail {
             DynamicFieldConfig   => $DynamicFieldConfig,
             PossibleValuesFilter => $PossibleValuesFilter,
             ParamObject          => $ParamObject,
-            Mandatory =>
+            Mandatory            =>
                 $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
         );
 
@@ -1034,13 +1035,13 @@ sub SendEmail {
         $DynamicFieldHTML{ $DynamicFieldConfig->{Name} } = $DynamicFieldBackendObject->EditFieldRender(
             DynamicFieldConfig   => $DynamicFieldConfig,
             PossibleValuesFilter => $PossibleValuesFilter,
-            Mandatory =>
+            Mandatory            =>
                 $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
-            ServerError  => $ValidationResult->{ServerError}  || '',
-            ErrorMessage => $ValidationResult->{ErrorMessage} || '',
-            LayoutObject => $LayoutObject,
-            ParamObject  => $ParamObject,
-            AJAXUpdate   => 1,
+            ServerError     => $ValidationResult->{ServerError}  || '',
+            ErrorMessage    => $ValidationResult->{ErrorMessage} || '',
+            LayoutObject    => $LayoutObject,
+            ParamObject     => $ParamObject,
+            AJAXUpdate      => 1,
             UpdatableFields => $Self->_GetFieldsToUpdate(),
         );
     }
@@ -1703,7 +1704,7 @@ sub _Mask {
         YearPeriodFuture     => 5,
         Format               => 'DateInputFormatLong',
         DiffTime             => $ConfigObject->Get('Ticket::Frontend::PendingDiffTime') || 0,
-        Class                => $Param{Errors}->{DateInvalid} || ' ',
+        Class                => $Param{Errors}->{DateInvalid}                           || ' ',
         Validate             => 1,
         ValidateDateInFuture => 1,
         Calendar             => $Calendar,
@@ -1945,9 +1946,11 @@ sub _Mask {
         Value => $DynamicFieldNames,
     );
 
+    my $FormDraftObject = $Kernel::OM->Get('Kernel::System::FormDraft');
+
     my $LoadedFormDraft;
     if ( $Self->{LoadedFormDraftID} ) {
-        $LoadedFormDraft = $Kernel::OM->Get('Kernel::System::FormDraft')->FormDraftGet(
+        $LoadedFormDraft = $FormDraftObject->FormDraftGet(
             FormDraftID => $Self->{LoadedFormDraftID},
             GetContent  => 0,
             UserID      => $Self->{UserID},
@@ -1993,15 +1996,24 @@ sub _Mask {
         );
     }
 
+    # Check if the user has already any form draft for this action
+    my $FormDraftList = $FormDraftObject->FormDraftListGet(
+        ObjectType => 'Ticket',
+        ObjectID   => $Self->{TicketID},
+        Action     => $Self->{Action},
+        UserID     => $Self->{UserID},
+    ) // [];
+
     # create & return output
     return $LayoutObject->Output(
         TemplateFile => 'AgentTicketForward',
         Data         => {
             %Param,
-            FormDraft      => $Config->{FormDraft},
-            FormDraftID    => $Self->{LoadedFormDraftID},
-            FormDraftTitle => $LoadedFormDraft ? $LoadedFormDraft->{Title} : '',
-            FormDraftMeta  => $LoadedFormDraft,
+            FormDraft          => $Config->{FormDraft},
+            FormDraftID        => $Self->{LoadedFormDraftID},
+            FormDraftTitle     => $LoadedFormDraft ? $LoadedFormDraft->{Title} : '',
+            FormDraftMeta      => $LoadedFormDraft,
+            FormDraftForAction => scalar @{$FormDraftList},
         },
     );
 }

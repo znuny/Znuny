@@ -337,7 +337,7 @@ sub Run {
             # show need user data error message
             $LayoutObject->Print(
                 Output => \$LayoutObject->Login(
-                    Title => 'Error',
+                    Title   => 'Error',
                     Message =>
                         Translatable(
                         'Authentication succeeded, but no user data record is found in the database. Please contact the administrator.'
@@ -846,7 +846,7 @@ sub Run {
             # show login
             $LayoutObject->Print(
                 Output => \$LayoutObject->Login(
-                    Title => 'Login',
+                    Title   => 'Login',
                     Message =>
                         $LayoutObject->{LanguageObject}->Translate( $SessionObject->SessionIDErrorMessage() ),
                     MessageType => 'Error',
@@ -894,7 +894,7 @@ sub Run {
 
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Module Kernel::Modules::$Param{Action} not registered in Kernel/Config.pm!",
             );
             $Kernel::OM->Get('Kernel::Output::HTML::Layout')->FatalError(

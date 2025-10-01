@@ -19,7 +19,7 @@ use Data::Dumper;
 use File::stat;
 use Unicode::Normalize;
 use List::Util qw();
-use Fcntl qw(:flock);
+use Fcntl      qw(:flock);
 use Encode;
 use Math::Random::Secure qw();
 
@@ -848,7 +848,7 @@ sub Dump {
     }
 
     # fallback if Storable can not be loaded
-    return Data::Dumper::Dumper($Data);                      ## no critic
+    return Data::Dumper::Dumper($Data);    ## no critic
 
 }
 

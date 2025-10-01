@@ -84,6 +84,7 @@ Check if provided EffectiveValue matches structure defined in XMLContentParsed.
     );
 
 Result:
+
     %Result = (
         EffectiveValue => {         # Note for WorkingHours ValueTypes EffectiveValue is not changed.
             'Fri' => [

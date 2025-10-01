@@ -363,7 +363,7 @@ sub GetCharset {
         if ( $Self->{Debug} > 0 ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'debug',
-                Message =>
+                Message  =>
                     "Got no charset from email body because of ContentType ($Data{ContentType})!",
             );
         }
@@ -565,7 +565,7 @@ sub GetMessageBody {
             if ( $Self->{Debug} > 0 ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'debug',
-                    Message =>
+                    Message  =>
                         'No attachments returned from GetAttachments(), just an empty attachment!?',
                 );
             }
@@ -584,7 +584,9 @@ sub GetMessageBody {
 
 Returns an array of the email attachments.
 
-    my @Attachments = $ParserObject->GetAttachments();
+    my @Attachments = $ParserObject->GetAttachments(
+        UserType => 'Agent' # optional, but recommended
+    );
     for my $Attachment (@Attachments) {
         print $Attachment->{Filename};
         print $Attachment->{Charset};
@@ -610,7 +612,10 @@ sub GetAttachments {
     return @{ $Self->{Attachments} } if $Self->{Attachments};
 
     # parse email
-    $Self->PartsAttachments( Part => $Self->{ParserParts} );
+    $Self->PartsAttachments(
+        Part     => $Self->{ParserParts},
+        UserType => $Param{UserType}
+    );
 
     # return if no attachments are found
     return if !$Self->{Attachments};
@@ -702,7 +707,7 @@ sub PartsAttachments {
     else {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'notice',
-            Message =>
+            Message  =>
                 "Was not able to parse corrupt MIME email! Skipped attachment ($PartCounter)",
         );
         return;
@@ -864,8 +869,9 @@ sub PartsAttachments {
                         String => $PartData{Content},
                     );
                     $PartData{Content} = $HTMLUtilsObject->DocumentComplete(
-                        String  => $HTMLContent,
-                        Charset => 'utf-8',
+                        String   => $HTMLContent,
+                        Charset  => 'utf-8',
+                        UserType => $Param{UserType},
                     );
                 }
                 else {
@@ -1018,7 +1024,7 @@ sub CheckMessageBody {
         if ( $Self->{Debug} > 0 ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'debug',
-                Message =>
+                Message  =>
                     'It\'s an html only email, added ascii dump, attached html email as attachment.',
             );
         }

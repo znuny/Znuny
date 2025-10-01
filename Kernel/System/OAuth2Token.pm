@@ -416,7 +416,7 @@ sub GenerateAuthorizationCodeRequestURL {
     if ( !IsHashRefWithData($AuthorizationCodeRequestConfig) ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Token config with ID $Param{TokenConfigID} does not contain config for authorization code request.",
         );
         return;
@@ -549,7 +549,7 @@ sub GetAuthorizationCodeParameters {
     if ( !%ResponseData ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error retrieving response data for authorization code request for token config ID $TokenConfigID.",
         );
         return;
@@ -558,7 +558,7 @@ sub GetAuthorizationCodeParameters {
     if ( !defined $ResponseData{AuthorizationCode} ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Response data for authorization code request for token config ID $TokenConfigID does not contain authorization code.",
         );
         return;
@@ -650,7 +650,7 @@ sub RequestTokenByAuthorizationCode {
     my $TokenUpdated = $Self->DataUpdate(
         $Self->{Identifier} => $Token{ $Self->{Identifier} },
         AuthorizationCode   => $Param{AuthorizationCode},
-        Error               => undef,
+        ErrorMessage        => undef,
         ErrorDescription    => undef,
         ErrorCode           => undef,
         ChangeBy            => $Param{UserID},
@@ -666,7 +666,7 @@ sub RequestTokenByAuthorizationCode {
     if ( !$TokenUpdated ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error updating token for token config with ID $Param{TokenConfigID} and request type '$RequestType'.",
         );
         return;
@@ -688,7 +688,7 @@ sub RequestTokenByAuthorizationCode {
     if ( !$TokenUpdated ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error updating token for token config with ID $Param{TokenConfigID} and request type '$RequestType'.",
         );
         return;
@@ -712,7 +712,7 @@ sub RequestTokenByAuthorizationCode {
     {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error getting response for token request by authorization code for token config with ID $Param{TokenConfigID}.",
         );
         return;
@@ -727,7 +727,7 @@ sub RequestTokenByAuthorizationCode {
     if ( !%ResponseData ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error assembling response data for token config with ID $Param{TokenConfigID} and request type '$RequestType'.",
         );
         return;
@@ -742,7 +742,7 @@ sub RequestTokenByAuthorizationCode {
     if ( !$TokenUpdated ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error updating token with response data for token config with ID $Param{TokenConfigID} and request type '$RequestType'.",
         );
         return;
@@ -756,7 +756,7 @@ sub RequestTokenByAuthorizationCode {
     if ( $Response{Status} ne '200 OK' ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Response for request for token config with ID $Param{TokenConfigID} and request type '$RequestType' was not '200 OK'. $TokenErrorMessage",
         );
         return;
@@ -769,7 +769,7 @@ sub RequestTokenByAuthorizationCode {
     if ( !%Token ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error fetching token for token config with ID $Param{TokenConfigID} after updating it with response data of request of type '$RequestType'. $TokenErrorMessage",
         );
         return;
@@ -843,7 +843,7 @@ sub RequestTokenByRefreshToken {
     if ( !IsHashRefWithData( $TokenConfig{Config}->{Requests}->{$RequestType} ) ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Refresh token request is not configured in token config with ID $Param{TokenConfigID}.",
         );
         return;
@@ -868,7 +868,7 @@ sub RequestTokenByRefreshToken {
     if ($RefreshTokenHasExpired) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Refresh token of token record for token config with ID $Param{TokenConfigID} has expired (or is not present). A new token must be obtained by RequestTokenByAuthorizationCode().",
         );
         return;
@@ -884,7 +884,7 @@ sub RequestTokenByRefreshToken {
     my $TokenUpdated = $Self->DataUpdate(
         $Self->{Identifier} => $Token{ $Self->{Identifier} },
         AuthorizationCode   => undef,
-        Error               => undef,
+        ErrorMessage        => undef,
         ErrorDescription    => undef,
         ErrorCode           => undef,
         ChangeBy            => $Param{UserID},
@@ -893,7 +893,7 @@ sub RequestTokenByRefreshToken {
     if ( !$TokenUpdated ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error updating token for token config with ID $Param{TokenConfigID} and request type '$RequestType'.",
         );
         return;
@@ -918,7 +918,7 @@ sub RequestTokenByRefreshToken {
     {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error getting response for request for token config with ID $Param{TokenConfigID} and request type '$RequestType'.",
         );
         return;
@@ -933,7 +933,7 @@ sub RequestTokenByRefreshToken {
     if ( !%ResponseData ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error assembling response data for token config with ID $Param{TokenConfigID} and request of type '$RequestType'.",
         );
         return;
@@ -948,7 +948,7 @@ sub RequestTokenByRefreshToken {
     if ( !$TokenUpdated ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error updating token with response data for token config with ID $Param{TokenConfigID} and request type '$RequestType'.",
         );
         return;
@@ -962,7 +962,7 @@ sub RequestTokenByRefreshToken {
     if ( $Response{Status} ne '200 OK' ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Response for request for token config with ID $Param{TokenConfigID} and request type '$RequestType' was not '200 OK'. $TokenErrorMessage",
         );
         return;
@@ -975,7 +975,190 @@ sub RequestTokenByRefreshToken {
     if ( !%Token ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
+                "Error fetching token for token config with ID $Param{TokenConfigID} after updating it with response data of request of type '$RequestType'. $TokenErrorMessage",
+        );
+        return;
+    }
+
+    return %Token;
+}
+
+=head2 RequestTokenByClientCredentials()
+
+    Requests a token by client credentials. The refresh token is stored in the token record.
+
+    my %Token = $OAuth2TokenObject->RequestTokenByClientCredentials(
+        TokenConfigID => 7,
+        UserID        => 2,
+    );
+
+    Returns a full OAuth2Token record, as DataGet() would.
+
+    my %Token = (
+        ID                         => 132,
+        TokenConfigID              => 7,
+        AuthorizationCode          => '...', # not relevant for auth flow ClientCredentials
+        Token                      => '...',
+        TokenExpirationDate        => 3500,
+        RefreshToken               => '...', # not relevant for auth flow ClientCredentials
+        RefreshTokenExpirationDate => 3500, # not relevant for auth flow ClientCredentials
+        Error                      => '',
+        ErrorDescription           => '',
+        ErrorCode                  => 0,
+        CreateTime                 => '2020-08-24 10:00:00',
+        CreateBy                   => 2,
+        ChangeTime                 => '2020-08-24 10:00:00',
+        ChangeBy                   => 2,
+    );
+
+=cut
+
+sub RequestTokenByClientCredentials {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject               = $Kernel::OM->Get('Kernel::System::Log');
+    my $OAuth2TokenConfigObject = $Kernel::OM->Get('Kernel::System::OAuth2TokenConfig');
+
+    NEEDED:
+    for my $Needed (qw( TokenConfigID UserID )) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    my $RequestType = 'TokenByClientCredentials';
+
+    my %TokenConfig = $OAuth2TokenConfigObject->DataGet(
+        $OAuth2TokenConfigObject->{Identifier} => $Param{TokenConfigID},
+        UserID                                 => $Param{UserID},
+    );
+    if ( !%TokenConfig ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Token config with ID $Param{TokenConfigID} not found.",
+        );
+        return;
+    }
+
+    my %Token = $Self->_GetOrCreateIfNotExists(
+        TokenConfigID => $Param{TokenConfigID},
+        UserID        => $Param{UserID},
+    );
+    if ( !%Token ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Error fetching token for token config with ID $Param{TokenConfigID}.",
+        );
+        return;
+    }
+
+    my %RequestData = $Self->_AssembleRequestData(
+        TokenConfigID => $Param{TokenConfigID},
+        RequestType   => $RequestType,
+        UserID        => $Param{UserID},
+    );
+
+    # Update/reset token record to reflect the current action of retrieving a token by refresh token.
+    my $TokenUpdated = $Self->DataUpdate(
+        $Self->{Identifier} => $Token{ $Self->{Identifier} },
+        AuthorizationCode   => undef,
+        ErrorMessage        => undef,
+        ErrorDescription    => undef,
+        ErrorCode           => undef,
+        ChangeBy            => $Param{UserID},
+        UserID              => $Param{UserID},
+    );
+    if ( !$TokenUpdated ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  =>
+                "Error updating token for token config with ID $Param{TokenConfigID} and request type '$RequestType'.",
+        );
+        return;
+    }
+
+    my $WebUserAgentObject = Kernel::System::WebUserAgent->new();
+    my %Response           = $WebUserAgentObject->Request(
+        URL                          => $TokenConfig{Config}->{Requests}->{$RequestType}->{Request}->{URL},
+        Type                         => 'POST',
+        Data                         => \%RequestData,
+        ReturnResponseContentOnError => 1,
+
+        # SkipSSLVerification        => 1, # (optional)
+        # NoLog                      => 1, # (optional)
+    );
+
+    if (
+        !%Response
+        || !defined $Response{Status}
+        || !defined $Response{Content}
+        )
+    {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  =>
+                "Error getting response for request for token config with ID $Param{TokenConfigID} and request type '$RequestType'.",
+        );
+        return;
+    }
+
+    my %ResponseData = $Self->_AssembleResponseDataFromJSONString(
+        JSONString    => ${ $Response{Content} },
+        TokenConfigID => $Param{TokenConfigID},
+        RequestType   => $RequestType,
+        UserID        => $Param{UserID},
+    );
+    if ( !%ResponseData ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  =>
+                "Error assembling response data for token config with ID $Param{TokenConfigID} and request of type '$RequestType'.",
+        );
+        return;
+    }
+
+    $TokenUpdated = $Self->DataUpdate(
+        $Self->{Identifier} => $Token{ $Self->{Identifier} },
+        %ResponseData,
+        ChangeBy => $Param{UserID},
+        UserID   => $Param{UserID},
+    );
+    if ( !$TokenUpdated ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  =>
+                "Error updating token with response data for token config with ID $Param{TokenConfigID} and request type '$RequestType'.",
+        );
+        return;
+    }
+
+    my $TokenErrorMessage = $Self->GetTokenErrorMessage(
+        TokenConfigID => $Param{TokenConfigID},
+        UserID        => $Param{UserID},
+    ) // '';
+
+    if ( $Response{Status} ne '200 OK' ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  =>
+                "Response for request for token config with ID $Param{TokenConfigID} and request type '$RequestType' was not '200 OK'. $TokenErrorMessage",
+        );
+        return;
+    }
+
+    %Token = $Self->DataGet(
+        TokenConfigID => $Param{TokenConfigID},
+        UserID        => $Param{UserID},
+    );
+    if ( !%Token ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  =>
                 "Error fetching token for token config with ID $Param{TokenConfigID} after updating it with response data of request of type '$RequestType'. $TokenErrorMessage",
         );
         return;
@@ -1133,7 +1316,7 @@ sub HasRefreshTokenExpired {
 =head2 GetToken()
 
     Returns a valid token (not a token record), if possible.
-    Automatically retrieves a new token by refresh token if token has expired.
+    Automatically retrieves a new token by refresh token if token has expired and refresh token is available.
 
     my $Token = $OAuth2TokenObject->GetToken(
         TokenConfigID => 7,
@@ -1161,28 +1344,52 @@ sub GetToken {
         return;
     }
 
-    my $HasTokenExpired = $Self->HasTokenExpired(
+    my %TokenConfig = $OAuth2TokenConfigObject->DataGet(
+        $OAuth2TokenConfigObject->{Identifier} => $Param{TokenConfigID},
+        UserID                                 => $Param{UserID},
+    );
+    if ( !%TokenConfig ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Token config with ID $Param{TokenConfigID} not found.",
+        );
+        return;
+    }
+
+    my $TokenHasExpired = $Self->HasTokenExpired(
         TokenConfigID => $Param{TokenConfigID},
         UserID        => $Param{UserID},
     );
-    if ($HasTokenExpired) {
-        my $HasRefreshTokenExpired = $Self->HasRefreshTokenExpired(
-            TokenConfigID => $Param{TokenConfigID},
-            UserID        => $Param{UserID},
-        );
-        if ($HasRefreshTokenExpired) {
-            $LogObject->Log(
-                Priority => 'error',
-                Message =>
-                    "Refresh token for token config with ID $Param{TokenConfigID} has expired or is not present. Token must be retrieved manually via authorization code.",
+    if ($TokenHasExpired) {
+        my $AuthFlow = $TokenConfig{Config}->{AuthFlow} // 'AuthorizationCode';
+
+        my %Token;
+        if ( $AuthFlow eq 'AuthorizationCode' ) {
+            my $HasRefreshTokenExpired = $Self->HasRefreshTokenExpired(
+                TokenConfigID => $Param{TokenConfigID},
+                UserID        => $Param{UserID},
             );
-            return;
+            if ($HasRefreshTokenExpired) {
+                $LogObject->Log(
+                    Priority => 'error',
+                    Message  =>
+                        "Refresh token for token config with ID $Param{TokenConfigID} has expired or is not present. Token must be retrieved manually via authorization code.",
+                );
+                return;
+            }
+
+            %Token = $Self->RequestTokenByRefreshToken(
+                TokenConfigID => $Param{TokenConfigID},
+                UserID        => $Param{UserID},
+            );
+        }
+        elsif ( $AuthFlow eq 'ClientCredentials' ) {
+            %Token = $Self->RequestTokenByClientCredentials(
+                TokenConfigID => $Param{TokenConfigID},
+                UserID        => $Param{UserID},
+            );
         }
 
-        my %Token = $Self->RequestTokenByRefreshToken(
-            TokenConfigID => $Param{TokenConfigID},
-            UserID        => $Param{UserID},
-        );
         if ( !%Token ) {
             $LogObject->Log(
                 Priority => 'error',
@@ -1503,7 +1710,7 @@ sub _AssembleRequestData {
     if ( !IsHashRefWithData($RequestConfig) ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Token config with ID $Param{TokenConfigID} does not contain request config for request type '$Param{RequestType}'.",
         );
         return;
@@ -1606,7 +1813,7 @@ sub _AssembleResponseDataFromWebRequest {
     if ( !IsHashRefWithData($ResponseConfig) ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Token config with ID $Param{TokenConfigID} does not contain response config for request type '$Param{RequestType}'.",
         );
         return;
@@ -1702,7 +1909,7 @@ sub _AssembleResponseDataFromJSONString {
     if ( !IsHashRefWithData($ResponseConfig) ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Token config with ID $Param{TokenConfigID} does not contain response config for request type '$Param{RequestType}'.",
         );
         return;
@@ -1717,7 +1924,7 @@ sub _AssembleResponseDataFromJSONString {
     if ( !IsHashRefWithData($JSONData) ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Received JSON data is not a hash for token config with ID $Param{TokenConfigID} and response of request of type '$Param{RequestType}'.",
         );
         return;
@@ -1780,6 +1987,7 @@ sub _GetRequestTypes {
         AuthorizationCode        => 1,
         TokenByAuthorizationCode => 1,
         TokenByRefreshToken      => 1,
+        TokenByClientCredentials => 1,
     );
 
     return %RequestTypes;

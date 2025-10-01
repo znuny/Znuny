@@ -15,8 +15,10 @@ use strict;
 use warnings;
 
 use DBI;
-use Net::Domain qw(hostfqdn);
+use Net::Domain      qw(hostfqdn);
 use Kernel::Language qw(Translatable);
+
+use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
 
@@ -235,7 +237,6 @@ sub Run {
             Data       => \%Databases,
             Name       => 'DBType',
             Class      => 'Modernize',
-            Size       => scalar keys %Databases,
             SelectedID => 'mysql',
         );
 
@@ -505,8 +506,9 @@ sub Run {
                 $DB{Host} =~ s{:\d*\z}{}xms;
 
                 @Statements = (
-                    "CREATE DATABASE `$DB{DBName}` charset utf8",
-                    "GRANT ALL PRIVILEGES ON `$DB{DBName}`.* TO `$DB{OTRSDBUser}`\@`$DB{Host}` IDENTIFIED BY '$DB{OTRSDBPassword}' WITH GRANT OPTION",
+                    "CREATE DATABASE `$DB{DBName}` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci",
+                    "CREATE USER `$DB{OTRSDBUser}`\@`$DB{Host}` IDENTIFIED BY '$DB{OTRSDBPassword}'",
+                    "GRANT ALL PRIVILEGES ON `$DB{DBName}`.* TO `$DB{OTRSDBUser}`\@`$DB{Host}` WITH GRANT OPTION",
                     "FLUSH PRIVILEGES",
                 );
             }
@@ -1197,11 +1199,36 @@ sub ConnectToDB {
 sub CheckDBRequirements {
     my ( $Self, %Param ) = @_;
 
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
     my %Result = $Self->ConnectToDB(
         %Param,
     );
 
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    if ( $Result{Successful} == 1 && IsHashRefWithData( $Result{DB} ) ) {
+        $Kernel::OM->ObjectsDiscard( Objects => ['Kernel::System::DB'] );
+
+        $Kernel::OM->ObjectParamAdd(
+            'Kernel::System::DB' => {
+                DatabaseDSN  => $Result{DB}->{DSN},
+                DatabaseUser => $Result{DB}->{DBUser},
+                DatabasePw   => $Result{DB}->{DBPassword},
+                Type         => $Result{DB}->{DBType},
+            },
+        );
+        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+
+        # Check if the correct database version is installed.
+        my %VersionInfo = $DBObject->CheckRequiredDatabaseVersion();
+
+        if ( $VersionInfo{RequirementsPassed} != 1 ) {
+            $Result{Successful} = 0;
+            $Result{Message}    = $LayoutObject->{LanguageObject}->Translate(
+                "Error: You have the wrong database version installed (%s). You need at least version %s! ",
+                $VersionInfo{VersionString} // 'unknown', $VersionInfo{MinimumVersion} // 'unknown'
+            );
+        }
+    }
 
     # If mysql, check some more values.
     if ( $Param{DBType} eq 'mysql' && $Result{Successful} == 1 ) {
@@ -1252,25 +1279,33 @@ sub CheckDBRequirements {
                     'https://dev.mysql.com/doc/refman/5.6/en/innodb-parameters.html',
                 );
             }
+
+            # Check innodb_file_per_table is activated.
+            my $FilePerTable = $Result{DBH}->selectall_arrayref("SHOW variables LIKE 'innodb_file_per_table'");
+
+            if ( $FilePerTable->[0]->[1] !~ /ON/i ) {
+                $Result{Successful} = 0;
+                $Result{Message}    = $LayoutObject->{LanguageObject}->Translate(
+                    "Error: Please set the value for innodb_file_per_table on your database to ON."
+                );
+            }
+
+            # Check innodb_default_row_format is set to dynamic.
+            my $RowFormat = $Result{DBH}->selectall_arrayref("SHOW variables LIKE 'innodb_default_row_format'");
+
+            if ( $RowFormat->[0]->[1] !~ /dynamic/i ) {
+                $Result{Successful} = 0;
+                $Result{Message}    = $LayoutObject->{LanguageObject}->Translate(
+                    "Error: Please set the value for innodb_default_row_format on your database to dynamic."
+                );
+            }
         }
-
-        # Check character_set_database value.
-        my $Charset = $Result{DBH}->selectall_arrayref("SHOW variables LIKE 'character_set_database'");
-
-        if ( $Charset->[0]->[1] =~ /utf8mb4/i ) {
+        else {
             $Result{Successful} = 0;
             $Result{Message}    = $LayoutObject->{LanguageObject}->Translate(
-                "Wrong database collation (%s is %s, but it needs to be utf8).",
-                'character_set_database',
-                $Charset->[0]->[1],
-            );
-        }
-        elsif ( $Charset->[0]->[1] !~ /utf8/i ) {
-            $Result{Successful} = 0;
-            $Result{Message}    = $LayoutObject->{LanguageObject}->Translate(
-                "Wrong database collation (%s is %s, but it needs to be utf8).",
-                'character_set_database',
-                $Charset->[0]->[1],
+                "Wrong default storage engine (%s is %s, but it needs to be InnoDB).",
+                'default_storage_engine',
+                $DefaultStorageEngine,
             );
         }
     }

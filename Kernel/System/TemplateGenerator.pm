@@ -12,6 +12,7 @@ package Kernel::System::TemplateGenerator;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::Language;
 
@@ -118,7 +119,8 @@ sub Salutation {
     if ( $Self->{RichText} && $Salutation{ContentType} =~ /text\/plain/i ) {
         $Salutation{ContentType} = 'text/html';
         $Salutation{Text}        = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToHTML(
-            String => $Salutation{Text},
+            String                 => $Salutation{Text},
+            DoNotReplaceHardBreaks => 1,
         );
     }
 
@@ -145,6 +147,7 @@ sub Salutation {
         TicketData => \%Ticket,
         Data       => $Param{Data},
         UserID     => $Param{UserID},
+        Recipient  => $Param{Recipient},
     );
 
     # add urls
@@ -227,7 +230,8 @@ sub Signature {
     if ( $Self->{RichText} && $Signature{ContentType} =~ /text\/plain/i ) {
         $Signature{ContentType} = 'text/html';
         $Signature{Text}        = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToHTML(
-            String => $Signature{Text},
+            String                 => $Signature{Text},
+            DoNotReplaceHardBreaks => 1,
         );
     }
 
@@ -384,9 +388,15 @@ sub Template {
         }
     }
 
-    my %Template = $Kernel::OM->Get('Kernel::System::StandardTemplate')->StandardTemplateGet(
+    my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');
+
+    my %Template = $StandardTemplateObject->StandardTemplateGet(
         ID => $Param{TemplateID},
     );
+
+    # Convert comma separated TemplateType to array for better searching.
+    my @TemplateTypes = split( /\s*,\s*/, $Template{TemplateType} );
+    $Template{TemplateType} = \@TemplateTypes;
 
     # do text/plain to text/html convert
     if (
@@ -397,7 +407,8 @@ sub Template {
     {
         $Template{ContentType} = 'text/html';
         $Template{Template}    = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToHTML(
-            String => $Template{Template},
+            String                 => $Template{Template},
+            DoNotReplaceHardBreaks => 1,
         );
     }
 
@@ -433,8 +444,9 @@ sub Template {
     }
 
     # If template type is 'Create' and there is customer user information, treat it as a ticket param in order to
-    # correctly replace customer user tags. See bug#14455.
-    if ( $Template{TemplateType} eq 'Create' && $Param{CustomerUserID} ) {
+    # correctly replace customer user tags.
+    my $IsCreateTemplate = grep { $_ eq 'Create' } @{ $Template{TemplateType} };
+    if ( $IsCreateTemplate && $Param{CustomerUserID} ) {
         $Ticket{CustomerUserID} = $Param{CustomerUserID};
     }
 
@@ -449,19 +461,20 @@ sub Template {
         Forward => 1,
         Note    => 1,
     );
+    my $IsSupportedType = grep { $SupportedTypes{$_} } @{ $Template{TemplateType} };
 
     my $TemplateText = $Template{Template} || '';
-    my $TemplateType = $Template{TemplateType};
+    my @TemplateType = @{ $Template{TemplateType} };
 
     # Remove unsupported tags only for some template types.
-    if ( !$SupportedTypes{ $Template{TemplateType} } ) {
+    if ( !$IsSupportedType ) {
         $TemplateText = $Self->_RemoveUnSupportedTag(
             Text                 => $Template{Template} || '',
             ListOfUnSupportedTag => \@ListOfUnSupportedTag,
         );
 
         # Reset template type for unsupported tag.
-        $TemplateType = '';
+        @TemplateType = ();
     }
 
     # replace place holder stuff
@@ -472,15 +485,15 @@ sub Template {
         Data       => $Param{Data} || {},
         UserID     => $Param{UserID},
         Language   => $Language,
-        Template   => $TemplateType,
+        Template   => \@TemplateType,
     );
 
     if ( $Self->{RichText} ) {
+        $TemplateText =~ s/&amp;nbsp;/&nbsp;/g;
         $TemplateText =~ s/&lt;/</g;
         $TemplateText =~ s/&gt;/>/g;
         $TemplateText =~ s/&quot;/"/g;
         $TemplateText =~ s/&apos;/'/g;
-        $TemplateText =~ s/&nbsp;/ /g;
     }
 
     return $TemplateText;
@@ -533,7 +546,8 @@ sub GenericAgentArticle {
     {
         $Template{ContentType} = 'text/html';
         $Template{Body}        = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToHTML(
-            String => $Template{Body},
+            String                 => $Template{Body},
+            DoNotReplaceHardBreaks => 1,
         );
     }
 
@@ -631,7 +645,7 @@ sub Attributes {
     $Param{Data}->{Subject} = $TicketObject->TicketSubjectBuild(
         TicketNumber => $Ticket{TicketNumber},
         Subject      => $Param{Data}->{Subject} || '',
-        Action       => $Param{Action} || '',
+        Action       => $Param{Action}          || '',
     );
 
     # get sender address
@@ -647,28 +661,12 @@ sub Attributes {
 
 generate response
 
-AutoResponse
-    TicketID
-        Owner
-        Responsible
-        CUSTOMER_DATA
-    ArticleID
-        CUSTOMER_SUBJECT
-        CUSTOMER_EMAIL
-    UserID
-
-    To
-    Cc
-    Bcc
-    Subject
-    Body
-    ContentType
-
     my %AutoResponse = $TemplateGeneratorObject->AutoResponse(
         TicketID         => 123,
         OrigHeader       => {},
         AutoResponseType => 'auto reply',
         UserID           => 123,
+        UserType         => 'Agent', # optional
     );
 
 =cut
@@ -770,7 +768,8 @@ sub AutoResponse {
     if ( $Self->{RichText} && $AutoResponse{ContentType} =~ /text\/plain/i ) {
         $AutoResponse{ContentType} = 'text/html';
         $AutoResponse{Text}        = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToHTML(
-            String => $AutoResponse{Text},
+            String                 => $AutoResponse{Text},
+            DoNotReplaceHardBreaks => 1,
         );
     }
 
@@ -851,8 +850,9 @@ sub AutoResponse {
         );
 
         $AutoResponse{Text} = $Kernel::OM->Get('Kernel::System::HTMLUtils')->DocumentComplete(
-            Charset => 'utf-8',
-            String  => $AutoResponse{Text},
+            Charset  => 'utf-8',
+            String   => $AutoResponse{Text},
+            UserType => $Param{UserType} || 'Agent',
         );
     }
 
@@ -1088,7 +1088,8 @@ sub NotificationEvent {
     if ( $Self->{RichText} && $Notification{ContentType} =~ /text\/plain/i ) {
         $Notification{ContentType} = 'text/html';
         $Notification{Body}        = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToHTML(
-            String => $Notification{Body},
+            String                 => $Notification{Body},
+            DoNotReplaceHardBreaks => 1,
         );
     }
 
@@ -1174,6 +1175,8 @@ sub _Replace {
             return;
         }
     }
+
+    my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
 
     # check for mailto links
     # since the subject and body of those mailto links are
@@ -1437,8 +1440,9 @@ sub _Replace {
             ATTRIBUTE:
             for my $Attribute ( sort keys %Recipient ) {
                 next ATTRIBUTE if !$Recipient{$Attribute};
-                $Recipient{$Attribute} = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToHTML(
-                    String => $Recipient{$Attribute},
+                $Recipient{$Attribute} = $HTMLUtilsObject->ToHTML(
+                    String                 => $Recipient{$Attribute},
+                    DoNotReplaceHardBreaks => 1,
                 );
             }
         }
@@ -1468,8 +1472,9 @@ sub _Replace {
             ATTRIBUTE:
             for my $Attribute ( sort keys %Owner ) {
                 next ATTRIBUTE if !$Owner{$Attribute};
-                $Owner{$Attribute} = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToHTML(
-                    String => $Owner{$Attribute},
+                $Owner{$Attribute} = $HTMLUtilsObject->ToHTML(
+                    String                 => $Owner{$Attribute},
+                    DoNotReplaceHardBreaks => 1,
                 );
             }
         }
@@ -1499,8 +1504,9 @@ sub _Replace {
             ATTRIBUTE:
             for my $Attribute ( sort keys %Responsible ) {
                 next ATTRIBUTE if !$Responsible{$Attribute};
-                $Responsible{$Attribute} = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToHTML(
-                    String => $Responsible{$Attribute},
+                $Responsible{$Attribute} = $HTMLUtilsObject->ToHTML(
+                    String                 => $Responsible{$Attribute},
+                    DoNotReplaceHardBreaks => 1,
                 );
             }
         }
@@ -1525,8 +1531,9 @@ sub _Replace {
         ATTRIBUTE:
         for my $Attribute ( sort keys %CurrentUser ) {
             next ATTRIBUTE if !$CurrentUser{$Attribute};
-            $CurrentUser{$Attribute} = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToHTML(
-                String => $CurrentUser{$Attribute},
+            $CurrentUser{$Attribute} = $HTMLUtilsObject->ToHTML(
+                String                 => $CurrentUser{$Attribute},
+                DoNotReplaceHardBreaks => 1,
             );
         }
     }
@@ -1549,8 +1556,9 @@ sub _Replace {
         ATTRIBUTE:
         for my $Attribute ( sort keys %Ticket ) {
             next ATTRIBUTE if !$Ticket{$Attribute};
-            $Ticket{$Attribute} = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToHTML(
-                String => $Ticket{$Attribute},
+            $Ticket{$Attribute} = $HTMLUtilsObject->ToHTML(
+                String                 => $Ticket{$Attribute},
+                DoNotReplaceHardBreaks => 1,
             );
         }
     }
@@ -1714,7 +1722,12 @@ sub _Replace {
     # - if ArticleID is sent, data is from selected article.
     # - if ArticleID is not sent, data is from last customer/agent/any article.
     if ( $Param{Template} && $Ticket{TicketID} ) {
-        if ( $Param{Template} eq 'Note' ) {
+
+        my $IsNoteTemplate    = grep { $_ eq 'Note' } @{ $Param{Template} };
+        my $IsAnswerTemplate  = grep { $_ eq 'Answer' } @{ $Param{Template} };
+        my $IsForwardTemplate = grep { $_ eq 'Forward' } @{ $Param{Template} };
+
+        if ($IsNoteTemplate) {
 
             # Get last article from agent.
             my @AgentArticles = $ArticleObject->ArticleList(
@@ -1748,7 +1761,7 @@ sub _Replace {
                 $Param{Data}->{Body}    = $CustomerArticle{Body};
             }
         }
-        elsif ( $Param{Template} eq 'Answer' || $Param{Template} eq 'Forward' ) {
+        elsif ( $IsAnswerTemplate || $IsForwardTemplate ) {
 
             # If $Param{Data} has agent article data, we will set subject and body in $Param{DataAgent}
             # to values from $Param{Data} in order to right replacing of OTRS_AGENT_SUBJECT/BODY tags.
@@ -1776,8 +1789,9 @@ sub _Replace {
             for my $Attribute ( sort keys %Data ) {
                 next ATTRIBUTE if !$Data{$Attribute};
 
-                $Data{$Attribute} = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToHTML(
-                    String => $Data{$Attribute},
+                $Data{$Attribute} = $HTMLUtilsObject->ToHTML(
+                    String                 => $Data{$Attribute},
+                    DoNotReplaceHardBreaks => 1,
                 );
             }
         }
@@ -1837,9 +1851,16 @@ sub _Replace {
                         $NewOldBody =~ s/(<br\/>)\s{0,20}$//gs;
                     }
 
+                    # replace hard breaks with paragraphs before there will
+                    # be added any "HTML" content like blockquote that would
+                    # make it complex to replace hard breaks afterwards
+                    $NewOldBody = $HTMLUtilsObject->ToHTMLReplaceWithParagraphs(
+                        String => $NewOldBody,
+                    );
+
                     # add quote
                     $NewOldBody = "<blockquote type=\"cite\">$NewOldBody</blockquote>";
-                    $NewOldBody = $Kernel::OM->Get('Kernel::System::HTMLUtils')->DocumentCleanup(
+                    $NewOldBody = $HTMLUtilsObject->DocumentCleanup(
                         String => $NewOldBody,
                     );
                 }
@@ -1968,8 +1989,9 @@ sub _Replace {
             ATTRIBUTE:
             for my $Attribute ( sort keys %CustomerUser ) {
                 next ATTRIBUTE if !$CustomerUser{$Attribute};
-                $CustomerUser{$Attribute} = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToHTML(
-                    String => $CustomerUser{$Attribute},
+                $CustomerUser{$Attribute} = $HTMLUtilsObject->ToHTML(
+                    String                 => $CustomerUser{$Attribute},
+                    DoNotReplaceHardBreaks => 1,
                 );
             }
         }
@@ -1984,6 +2006,10 @@ sub _Replace {
     # cleanup all not needed <OTRS_AGENT_ tags
     $Tag = $Start . 'OTRS_AGENT_';
     $Param{Text} =~ s/$Tag.+?$End/-/gi;
+
+    $Param{Text} = $HTMLUtilsObject->ToHTMLReplaceWithParagraphs(
+        String => $Param{Text},
+    ) if ( $Param{RichText} );
 
     return $Param{Text};
 }

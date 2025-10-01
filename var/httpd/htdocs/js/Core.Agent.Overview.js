@@ -223,7 +223,7 @@ Core.Agent.Overview = (function (TargetNS) {
                             ) {
 
                             if (!$TriggerObj.parent().find('.SelectedValue').length) {
-                                Core.AJAX.FormUpdate($('#Nothing'), 'AJAXFilterUpdate', FilterName, [ FilterName ], function() {
+                                Core.AJAX.FormUpdate($('#ColumnFilterAttributes'), 'AJAXFilterUpdate', FilterName, [ FilterName ], function() {
                                     var AutoCompleteValue = $TriggerObj
                                             .next('.ColumnSettingsContainer')
                                             .find('select')

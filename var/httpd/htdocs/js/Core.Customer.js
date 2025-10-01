@@ -103,6 +103,34 @@ Core.Customer = (function (TargetNS) {
     };
 
     /**
+     * @name PreferencesUpdate
+     * @memberof Core.Customer
+     * @function
+     * @returns {Boolean} returns true.
+     * @param {jQueryObject} Key - The name of the setting.
+     * @param {jQueryObject} Value - The value of the setting.
+     * @param {Function} SuccessCallback - Callback function to be executed on AJAX success (optional).
+     * @description
+     *      This function sets session and preferences setting at runtime.
+     */
+    TargetNS.PreferencesUpdate = function (Key, Value, SuccessCallback) {
+        var URL = Core.Config.Get('Baselink'),
+            Data = {
+                Action: 'CustomerPreferences',
+                Subaction: 'UpdateAJAX',
+                Key: Key,
+                Value: Value
+            };
+
+        if (!$.isFunction(SuccessCallback)) {
+            SuccessCallback = $.noop;
+        }
+
+        Core.AJAX.FunctionCall(URL, Data, SuccessCallback);
+        return true;
+    };
+
+    /**
      * @name ClickableRow
      * @memberof Core.Customer
      * @function

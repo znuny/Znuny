@@ -90,7 +90,7 @@ sub Run {
             %Param,
             Name        => Translatable('Unwatch'),
             Description => Translatable('Remove from list of watched tickets'),
-            Link =>
+            Link        =>
                 'Action=AgentTicketWatcher;Subaction=Unsubscribe;TicketID=[% Data.TicketID | uri %];[% Env("ChallengeTokenParam") | html %]',
         };
     }
@@ -102,7 +102,7 @@ sub Run {
         %Param,
         Name        => Translatable('Watch'),
         Description => Translatable('Add to list of watched tickets'),
-        Link =>
+        Link        =>
             'Action=AgentTicketWatcher;Subaction=Subscribe;TicketID=[% Data.TicketID | uri %];[% Env("ChallengeTokenParam") | html %]',
     };
 }

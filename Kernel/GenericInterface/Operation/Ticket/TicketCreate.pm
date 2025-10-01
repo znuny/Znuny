@@ -138,6 +138,7 @@ perform TicketCreate Operation. This will return the created ticket number.
                 ForceNotificationToUserID       => [1, 2, 3]                   # optional
                 ExcludeNotificationToUserID     => [1, 2, 3]                   # optional
                 ExcludeMuteNotificationToUserID => [1, 2, 3]                   # optional
+                AppendSignatureToBody           => 1,                          # optional, defaults to 1
                 Attachment => [
                     {
                         Content     => 'content'                                 # base64 encoded
@@ -192,6 +193,7 @@ perform TicketCreate Operation. This will return the created ticket number.
                     ForceNotificationToUserID       => [1, 2, 3]                   # optional
                     ExcludeNotificationToUserID     => [1, 2, 3]                   # optional
                     ExcludeMuteNotificationToUserID => [1, 2, 3]                   # optional
+                    AppendSignatureToBody           => 1,                          # optional, defaults to 1
                     Attachment => [
                         {
                             Content     => 'content',                                # base64 encoded
@@ -512,39 +514,21 @@ sub Run {
     }
 
     # isolate Article parameter
-    my @Article;
+    my @Articles;
     if ( IsHashRefWithData( $Param{Data}->{Article} ) ) {
-        push @Article, $Param{Data}->{Article};
+        push @Articles, $Param{Data}->{Article};
     }
-    if ( IsArrayRefWithData( $Param{Data}->{Article} ) ) {
-        @Article = @{ $Param{Data}->{Article} };
+    else {
+        @Articles = @{ $Param{Data}->{Article} };
     }
 
-    for my $Article (@Article) {
+    for my $Article (@Articles) {
         $Article->{UserType} = $UserType;
 
         # remove leading and trailing spaces
-        for my $Attribute ( sort keys %{$Article} ) {
-            if ( ref $Attribute ne 'HASH' && ref $Attribute ne 'ARRAY' ) {
-
-                #remove leading spaces
-                $Article->{$Attribute} =~ s{\A\s+}{};
-
-                #remove trailing spaces
-                $Article->{$Attribute} =~ s{\s+\z}{};
-            }
-        }
+        s/ (?: \A\s+ | \s+\z ) //gx for values %$Article;
         if ( IsHashRefWithData( $Article->{OrigHeader} ) ) {
-            for my $Attribute ( sort keys %{ $Article->{OrigHeader} } ) {
-                if ( ref $Attribute ne 'HASH' && ref $Attribute ne 'ARRAY' ) {
-
-                    #remove leading spaces
-                    $Article->{OrigHeader}->{$Attribute} =~ s{\A\s+}{};
-
-                    #remove trailing spaces
-                    $Article->{OrigHeader}->{$Attribute} =~ s{\s+\z}{};
-                }
-            }
+            s/ (?: \A\s+ | \s+\z ) //gx for values %{ $Article->{OrigHeader} };
         }
 
         # Check attributes that can be set by sysconfig.
@@ -592,34 +576,25 @@ sub Run {
         $DynamicField = $Param{Data}->{DynamicField};
 
         # homogenate input to array
-        if ( ref $DynamicField eq 'HASH' ) {
-            push @DynamicFieldList, $DynamicField;
+        if ( ref $DynamicField eq 'ARRAY' ) {
+            @DynamicFieldList = @{$DynamicField};
         }
         else {
-            @DynamicFieldList = @{$DynamicField};
+            push @DynamicFieldList, $DynamicField;
         }
 
         # check DynamicField internal structure
         for my $DynamicFieldItem (@DynamicFieldList) {
             if ( !IsHashRefWithData($DynamicFieldItem) ) {
                 return {
-                    ErrorCode => 'TicketCreate.InvalidParameter',
+                    ErrorCode    => 'TicketCreate.InvalidParameter',
                     ErrorMessage =>
                         "TicketCreate: Ticket->DynamicField parameter is invalid!",
                 };
             }
 
             # remove leading and trailing spaces
-            for my $Attribute ( sort keys %{$DynamicFieldItem} ) {
-                if ( ref $Attribute ne 'HASH' && ref $Attribute ne 'ARRAY' ) {
-
-                    #remove leading spaces
-                    $DynamicFieldItem->{$Attribute} =~ s{\A\s+}{};
-
-                    #remove trailing spaces
-                    $DynamicFieldItem->{$Attribute} =~ s{\s+\z}{};
-                }
-            }
+            s/ (?: \A\s+ | \s+\z ) //gx for values %{$DynamicFieldItem};
 
             # check DynamicField attribute values
             my $DynamicFieldCheck = $Self->_CheckDynamicField( DynamicField => $DynamicFieldItem );
@@ -650,23 +625,14 @@ sub Run {
         for my $AttachmentItem (@AttachmentList) {
             if ( !IsHashRefWithData($AttachmentItem) ) {
                 return {
-                    ErrorCode => 'TicketCreate.InvalidParameter',
+                    ErrorCode    => 'TicketCreate.InvalidParameter',
                     ErrorMessage =>
                         "TicketCreate: Ticket->Attachment parameter is invalid!",
                 };
             }
 
             # remove leading and trailing spaces
-            for my $Attribute ( sort keys %{$AttachmentItem} ) {
-                if ( ref $Attribute ne 'HASH' && ref $Attribute ne 'ARRAY' ) {
-
-                    #remove leading spaces
-                    $AttachmentItem->{$Attribute} =~ s{\A\s+}{};
-
-                    #remove trailing spaces
-                    $AttachmentItem->{$Attribute} =~ s{\s+\z}{};
-                }
-            }
+            s/ (?: \A\s+ | \s+\z ) //gx for values %{$AttachmentItem};
 
             # check Attachment attribute values
             my $AttachmentCheck = $Self->_CheckAttachment( Attachment => $AttachmentItem );
@@ -679,7 +645,7 @@ sub Run {
 
     return $Self->_TicketCreate(
         Ticket           => $Ticket,
-        Article          => \@Article,
+        Article          => \@Articles,
         DynamicFieldList => \@DynamicFieldList,
         AttachmentList   => \@AttachmentList,
         UserID           => $UserID,
@@ -726,7 +692,7 @@ sub _CheckTicket {
 
     if ( !$Self->ValidateCustomer( %{$Ticket} ) ) {
         return {
-            ErrorCode => 'TicketCreate.InvalidParameter',
+            ErrorCode    => 'TicketCreate.InvalidParameter',
             ErrorMessage =>
                 "TicketCreate: Ticket->CustomerUser parameter is invalid!",
         };
@@ -775,7 +741,7 @@ sub _CheckTicket {
     if ( $Ticket->{TypeID} || $Ticket->{Type} ) {
         if ( !$Self->ValidateType( %{$Ticket} ) ) {
             return {
-                ErrorCode => 'TicketCreate.InvalidParameter',
+                ErrorCode    => 'TicketCreate.InvalidParameter',
                 ErrorMessage =>
                     "TicketCreate: Ticket->TypeID or Ticket->Type parameter is invalid!",
             };
@@ -787,7 +753,7 @@ sub _CheckTicket {
 
         if ( !$Self->ValidateService( %{$Ticket} ) ) {
             return {
-                ErrorCode => 'TicketCreate.InvalidParameter',
+                ErrorCode    => 'TicketCreate.InvalidParameter',
                 ErrorMessage =>
                     "TicketCreate: Ticket->ServiceID or Ticket->Service parameter is invalid!",
             };
@@ -798,7 +764,7 @@ sub _CheckTicket {
     if ( $Ticket->{SLAID} || $Ticket->{SLA} ) {
         if ( !$Self->ValidateSLA( %{$Ticket} ) ) {
             return {
-                ErrorCode => 'TicketCreate.InvalidParameter',
+                ErrorCode    => 'TicketCreate.InvalidParameter',
                 ErrorMessage =>
                     "TicketCreate: Ticket->SLAID or Ticket->SLA parameter is invalid!",
             };
@@ -839,7 +805,7 @@ sub _CheckTicket {
     if ( $Ticket->{OwnerID} || $Ticket->{Owner} ) {
         if ( !$Self->ValidateOwner( %{$Ticket} ) ) {
             return {
-                ErrorCode => 'TicketCreate.InvalidParameter',
+                ErrorCode    => 'TicketCreate.InvalidParameter',
                 ErrorMessage =>
                     "TicketCreate: Ticket->OwnerID or Ticket->Owner parameter is invalid!",
             };
@@ -968,7 +934,7 @@ sub _CheckArticle {
         )
     {
         return {
-            ErrorCode => 'TicketCreate.InvalidParameter',
+            ErrorCode    => 'TicketCreate.InvalidParameter',
             ErrorMessage =>
                 "TicketCreate: Article->To parameter must be a valid email address when Article->ArticleSend is set!",
         };
@@ -1419,18 +1385,18 @@ sub _TicketCreate {
     my $TicketID = $TicketObject->TicketCreate(
         Title        => $Ticket->{Title},
         QueueID      => $Ticket->{QueueID} || '',
-        Queue        => $Ticket->{Queue} || '',
+        Queue        => $Ticket->{Queue}   || '',
         Lock         => 'unlock',
-        TypeID       => $Ticket->{TypeID} || '',
-        Type         => $Ticket->{Type} || '',
-        ServiceID    => $Ticket->{ServiceID} || '',
-        Service      => $Ticket->{Service} || '',
-        SLAID        => $Ticket->{SLAID} || '',
-        SLA          => $Ticket->{SLA} || '',
-        StateID      => $Ticket->{StateID} || '',
-        State        => $Ticket->{State} || '',
+        TypeID       => $Ticket->{TypeID}     || '',
+        Type         => $Ticket->{Type}       || '',
+        ServiceID    => $Ticket->{ServiceID}  || '',
+        Service      => $Ticket->{Service}    || '',
+        SLAID        => $Ticket->{SLAID}      || '',
+        SLA          => $Ticket->{SLA}        || '',
+        StateID      => $Ticket->{StateID}    || '',
+        State        => $Ticket->{State}      || '',
         PriorityID   => $Ticket->{PriorityID} || '',
-        Priority     => $Ticket->{Priority} || '',
+        Priority     => $Ticket->{Priority}   || '',
         OwnerID      => 1,
         CustomerNo   => $CustomerID,
         CustomerUser => $CustomerUser || '',
@@ -1449,7 +1415,7 @@ sub _TicketCreate {
         $TicketObject->TicketLockSet(
             TicketID => $TicketID,
             LockID   => $Ticket->{LockID} || '',
-            Lock     => $Ticket->{Lock} || '',
+            Lock     => $Ticket->{Lock}   || '',
             UserID   => $Param{UserID},
         );
     }
@@ -1641,7 +1607,7 @@ sub _TicketCreate {
 
             if ( !$Subject ) {
                 return {
-                    Success => 0,
+                    Success      => 0,
                     ErrorMessage =>
                         'The subject for the e-mail could not be generated. Please contact the system administrator'
                 };
@@ -1651,30 +1617,47 @@ sub _TicketCreate {
             # Template generator implicitly takes Frontend::RichText into account.
             # Temporarily enable/disable RichText setting according to content type of article,
             # so that body and signature both are plain text or HTML.
+            # Default is adding the signature (previous standard behavior).
             #
-            my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+            if ( $Article->{AppendSignatureToBody} // 1 ) {
+                my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-            my $OriginalRichTextSetting = $ConfigObject->Get('Frontend::RichText');
+                my $OriginalRichTextSetting = $ConfigObject->Get('Frontend::RichText');
 
-            $ConfigObject->{'Frontend::RichText'} = 0 if $ArticleIsPlainText;
-            $ConfigObject->{'Frontend::RichText'} = 1 if $ArticleIsHTML;
+                $ConfigObject->{'Frontend::RichText'} = 0 if $ArticleIsPlainText;
+                $ConfigObject->{'Frontend::RichText'} = 1 if $ArticleIsHTML;
 
-            my $Signature = $Kernel::OM->Get('Kernel::System::TemplateGenerator')->Signature(
-                TicketID => $TicketID,
-                UserID   => $Param{UserID},
-                Data     => $Article,
-            );
+                # To make sure to have correct richtext setting in template generator
+                $Kernel::OM->ObjectsDiscard(
+                    Objects => [
+                        'Kernel::System::TemplateGenerator',
+                    ],
+                );
 
-            # Restore original RichText setting.
-            $ConfigObject->{'Frontend::RichText'} = $OriginalRichTextSetting;
+                my $Signature = $Kernel::OM->Get('Kernel::System::TemplateGenerator')->Signature(
+                    TicketID => $TicketID,
+                    UserID   => $Param{UserID},
+                    Data     => $Article,
+                );
 
-            if ($Signature) {
-                $Article->{Body} = $Article->{Body} . $Signature;
+                # Restore original RichText setting.
+                $ConfigObject->{'Frontend::RichText'} = $OriginalRichTextSetting;
 
-                if ($ArticleIsHTML) {
-                    $PlainBody = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii(
-                        String => $Article->{Body},
-                    );
+                # To make sure to have correct richtext setting in template generator
+                $Kernel::OM->ObjectsDiscard(
+                    Objects => [
+                        'Kernel::System::TemplateGenerator',
+                    ],
+                );
+
+                if ($Signature) {
+                    $Article->{Body} = $Article->{Body} . $Signature;
+
+                    if ($ArticleIsHTML) {
+                        $PlainBody = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToAscii(
+                            String => $Article->{Body},
+                        );
+                    }
                 }
             }
         }
@@ -1722,7 +1705,7 @@ sub _TicketCreate {
             NoAgentNotify        => $Article->{NoAgentNotify} || 0,
             TicketID             => $TicketID,
             SenderTypeID         => $Article->{SenderTypeID} || '',
-            SenderType           => $Article->{SenderType} || '',
+            SenderType           => $Article->{SenderType}   || '',
             IsVisibleForCustomer => $Article->{IsVisibleForCustomer},
             From                 => $From,
             To                   => $To,
@@ -1730,8 +1713,8 @@ sub _TicketCreate {
             Bcc                  => $Bcc,
             Subject              => $Subject,
             Body                 => $Article->{Body},
-            MimeType             => $MimeType || '',
-            Charset              => $Charset || '',
+            MimeType             => $MimeType               || '',
+            Charset              => $Charset                || '',
             ContentType          => $Article->{ContentType} || '',
             UserID               => $Param{UserID},
             HistoryType          => $Article->{HistoryType},

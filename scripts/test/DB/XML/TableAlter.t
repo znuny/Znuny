@@ -290,8 +290,8 @@ for my $Test ( @{$DefaultTest2Insert} ) {
 
     my @InsertColumnsSorted = sort { $a cmp $b } keys %{ $Test->{Insert} };
     my @InsertValuesSorted  = map  { $Test->{Insert}->{$_} } @InsertColumnsSorted;
-    my $InsertColumns = join q{, }, @InsertColumnsSorted;
-    my $InsertValues  = join q{, }, @InsertValuesSorted;
+    my $InsertColumns       = join q{, }, @InsertColumnsSorted;
+    my $InsertValues        = join q{, }, @InsertValuesSorted;
 
     my $SQLInsert = "INSERT INTO test_f (id, $InsertColumns) VALUES ($ID, $InsertValues)";
 
@@ -468,8 +468,8 @@ for my $Test ( @{$DefaultTest2Alter1} ) {
 
     my @InsertColumnsSorted = sort { $a cmp $b } keys %{ $Test->{Insert} };
     my @InsertValuesSorted  = map  { $Test->{Insert}->{$_} } @InsertColumnsSorted;
-    my $InsertColumns = join q{, }, @InsertColumnsSorted;
-    my $InsertValues  = join q{, }, @InsertValuesSorted;
+    my $InsertColumns       = join q{, }, @InsertColumnsSorted;
+    my $InsertValues        = join q{, }, @InsertValuesSorted;
 
     my $SQLInsert = "INSERT INTO test_f (id, $InsertColumns) VALUES ($ID, $InsertValues)";
 
@@ -628,8 +628,8 @@ for my $Test ( @{$DefaultTest2Alter2} ) {
 
     my @InsertColumnsSorted = sort { $a cmp $b } keys %{ $Test->{Insert} };
     my @InsertValuesSorted  = map  { $Test->{Insert}->{$_} } @InsertColumnsSorted;
-    my $InsertColumns = join q{, }, @InsertColumnsSorted;
-    my $InsertValues  = join q{, }, @InsertValuesSorted;
+    my $InsertColumns       = join q{, }, @InsertColumnsSorted;
+    my $InsertValues        = join q{, }, @InsertValuesSorted;
 
     my $SQLInsert = "INSERT INTO test_f (id, $InsertColumns) VALUES ($ID, $InsertValues)";
 
@@ -715,7 +715,7 @@ my @Tests = (
 
     {
         Name => 'Change id from Integer to BigInt',
-        XML  => << 'END',
+        XML  => <<'END',
 <TableAlter Name="test_f">
     <ColumnChange NameOld="id" NameNew="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="BIGINT"/>
 </TableAlter>
@@ -726,7 +726,7 @@ END
     },
     {
         Name => 'Change id to id 2',
-        XML  => << 'END',
+        XML  => <<'END',
 <TableAlter Name="test_f">
     <ColumnChange NameOld="id" NameNew="id2" Required="true" PrimaryKey="true" AutoIncrement="true" Type="BIGINT"/>
 </TableAlter>
@@ -737,7 +737,7 @@ END
     },
     {
         Name => 'Add name_b as AutoIncrement',
-        XML  => << 'END',
+        XML  => <<'END',
 <TableAlter Name="test_f">
     <ColumnAdd Name="name_b" Required="true" AutoIncrement="true" Type="BIGINT"/>
 </TableAlter>
@@ -748,7 +748,7 @@ END
     },
     {
         Name => 'Add id as AutoIncrement',
-        XML  => << 'END',
+        XML  => <<'END',
 <TableAlter Name="test_f">
     <ColumnAdd Name="id" Required="true" AutoIncrement="true" Type="BIGINT"/>
 </TableAlter>
@@ -784,8 +784,8 @@ for my $Test (@Tests) {
     if ( $Test->{Insert} ) {
         my @InsertColumnsSorted = sort { $a cmp $b } keys %{ $Test->{Insert} };
         my @InsertValuesSorted  = map  { $Test->{Insert}->{$_} } @InsertColumnsSorted;
-        my $InsertColumns = join q{, }, @InsertColumnsSorted;
-        my $InsertValues  = join q{, }, @InsertValuesSorted;
+        my $InsertColumns       = join q{, }, @InsertColumnsSorted;
+        my $InsertValues        = join q{, }, @InsertValuesSorted;
 
         my $SQLInsert = "INSERT INTO test_f ($InsertColumns) VALUES ($InsertValues)";
 

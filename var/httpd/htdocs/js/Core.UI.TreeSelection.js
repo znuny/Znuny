@@ -224,7 +224,7 @@ Core.UI.TreeSelection = (function (TargetNS) {
     TargetNS.ShowTreeSelection = function($TriggerObj) {
 
         var $TreeObj = $('<div class="JSTreeField"><ul></ul></div>'),
-            $SelectObj = $TriggerObj.prevAll('select'),
+            $SelectObj = $TriggerObj.parent().nextAll('select'),
             SelectSize = $SelectObj.attr('size'),
             Multiple = ($SelectObj.attr('multiple') !== '' && $SelectObj.attr('multiple') !== undefined) ? true : false,
             ElementCount = $SelectObj.find('option').length,
@@ -568,10 +568,10 @@ Core.UI.TreeSelection = (function (TargetNS) {
                 KeyB = b.Key.toLowerCase();
 
             if (KeyA < KeyB) {
-               return -1;
+                return -1;
             }
             if (KeyA > KeyB) {
-               return 1;
+                return 1;
             }
             return 0;
         });

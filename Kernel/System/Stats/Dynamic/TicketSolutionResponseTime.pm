@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -1235,22 +1235,22 @@ sub _KindsOfReporting {
     my $Self = shift;
 
     my %KindsOfReporting = (
-        SolutionAverageAllOver => Translatable('Solution Average'),
-        SolutionMinTimeAllOver => Translatable('Solution Min Time'),
-        SolutionMaxTimeAllOver => Translatable('Solution Max Time'),
-        NumberOfTicketsAllOver => Translatable('Number of Tickets'),
-        SolutionAverage        => Translatable('Solution Average (affected by escalation configuration)'),
-        SolutionMinTime        => Translatable('Solution Min Time (affected by escalation configuration)'),
-        SolutionMaxTime        => Translatable('Solution Max Time (affected by escalation configuration)'),
+        SolutionAverageAllOver     => Translatable('Solution Average'),
+        SolutionMinTimeAllOver     => Translatable('Solution Min Time'),
+        SolutionMaxTimeAllOver     => Translatable('Solution Max Time'),
+        NumberOfTicketsAllOver     => Translatable('Number of Tickets'),
+        SolutionAverage            => Translatable('Solution Average (affected by escalation configuration)'),
+        SolutionMinTime            => Translatable('Solution Min Time (affected by escalation configuration)'),
+        SolutionMaxTime            => Translatable('Solution Max Time (affected by escalation configuration)'),
         SolutionWorkingTimeAverage =>
             Translatable('Solution Working Time Average (affected by escalation configuration)'),
         SolutionMinWorkingTime =>
             Translatable('Solution Min Working Time (affected by escalation configuration)'),
         SolutionMaxWorkingTime =>
             Translatable('Solution Max Working Time (affected by escalation configuration)'),
-        ResponseAverage => Translatable('First Response Average (affected by escalation configuration)'),
-        ResponseMinTime => Translatable('First Response Min Time (affected by escalation configuration)'),
-        ResponseMaxTime => Translatable('First Response Max Time (affected by escalation configuration)'),
+        ResponseAverage            => Translatable('First Response Average (affected by escalation configuration)'),
+        ResponseMinTime            => Translatable('First Response Min Time (affected by escalation configuration)'),
+        ResponseMaxTime            => Translatable('First Response Max Time (affected by escalation configuration)'),
         ResponseWorkingTimeAverage =>
             Translatable('First Response Working Time Average (affected by escalation configuration)'),
         ResponseMinWorkingTime =>

@@ -17,7 +17,7 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
 );
 
-use parent qw(Kernel::System::DynamicField::Webservice::Base);
+use parent                        qw(Kernel::System::DynamicField::Webservice::Base);
 use Kernel::System::VariableCheck qw(:all);
 
 =head1 NAME

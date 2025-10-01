@@ -238,6 +238,7 @@ get standard responses of a queue
     my %Templates = $QueueObject->QueueStandardTemplateMemberList( QueueID => 123 );
 
 Returns:
+
     %Templates = (
         1 => 'Some Name',
         2 => 'Some Name',
@@ -249,6 +250,7 @@ Returns:
     );
 
 Returns:
+
     %Responses = (
         Answer => {
             1 => 'Some Name',
@@ -260,6 +262,7 @@ Returns:
     my %Queues = $QueueObject->QueueStandardTemplateMemberList( StandardTemplateID => 123 );
 
 Returns:
+
     %Queues = (
         1 => 'Some Name',
         2 => 'Some Name',
@@ -279,7 +282,6 @@ sub QueueStandardTemplateMemberList {
         return;
     }
 
-    # get needed objects
     my $ValidObject = $Kernel::OM->Get('Kernel::System::Valid');
     my $DBObject    = $Kernel::OM->Get('Kernel::System::DB');
 
@@ -311,13 +313,28 @@ sub QueueStandardTemplateMemberList {
 
         # fetch the result
         my %StandardTemplates;
+        my %TemplateTypes;
         while ( my @Row = $DBObject->FetchrowArray() ) {
-
-            if ( $Param{TemplateTypes} ) {
-                $StandardTemplates{ $Row[2] }->{ $Row[0] } = $Row[1];
+            my @DBTypes = split( /\s*,\s*/, $Row[2] );
+            if ( scalar @DBTypes > 1 ) {
+                for my $Type (@DBTypes) {
+                    $TemplateTypes{$Type}->{ $Row[0] } = $Row[1];
+                }
             }
             else {
-                $StandardTemplates{ $Row[0] } = $Row[1];
+                $TemplateTypes{ $Row[2] }->{ $Row[0] } = $Row[1];
+            }
+        }
+
+        if ($TemplateTypes) {
+            %StandardTemplates = %TemplateTypes;
+        }
+        else {
+            for my $TemplateType ( sort keys %TemplateTypes ) {
+                %StandardTemplates = (
+                    %StandardTemplates,
+                    %{ $TemplateTypes{$TemplateType} }
+                );
             }
         }
 
@@ -835,8 +852,8 @@ sub QueueAdd {
             . ' (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '
             . ' ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
-            \$Param{Name},     \$Param{GroupID},        \$Param{UnlockTimeout}, \$Param{SystemAddressID},
-            \$Param{Calendar}, \$Param{DefaultSignKey}, \$Param{SalutationID},  \$Param{SignatureID},
+            \$Param{Name},              \$Param{GroupID},             \$Param{UnlockTimeout}, \$Param{SystemAddressID},
+            \$Param{Calendar},          \$Param{DefaultSignKey},      \$Param{SalutationID},  \$Param{SignatureID},
             \$Param{FirstResponseTime}, \$Param{FirstResponseNotify}, \$Param{UpdateTime},
             \$Param{UpdateNotify},      \$Param{SolutionTime},        \$Param{SolutionNotify},
             \$Param{FollowUpID},        \$Param{FollowUpLock},        \$Param{ValidID},
@@ -862,39 +879,26 @@ sub QueueAdd {
         Type => $Self->{CacheType},
     );
 
-    my $StandardTemplate2QueueByCreating = $ConfigObject->Get('StandardTemplate2QueueByCreating');
-
     # add default responses (if needed), add response by name
-    if (
-        $StandardTemplate2QueueByCreating
-        && ref $StandardTemplate2QueueByCreating eq 'ARRAY'
-        && @{$StandardTemplate2QueueByCreating}
-        )
-    {
+    my $StandardTemplateObject           = $Kernel::OM->Get('Kernel::System::StandardTemplate');
+    my $StandardTemplate2QueueByCreating = $ConfigObject->Get('StandardTemplate2QueueByCreating') // [];
 
-        # get standard template object
-        my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');
+    ST:
+    for my $ST ( @{$StandardTemplate2QueueByCreating} ) {
 
-        ST:
-        for my $ST ( @{$StandardTemplate2QueueByCreating} ) {
+        my $StandardTemplateID = $StandardTemplateObject->StandardTemplateLookup(
+            StandardTemplate => $ST,
+        );
 
-            my $StandardTemplateID = $StandardTemplateObject->StandardTemplateLookup(
-                StandardTemplate => $ST,
-            );
+        next ST if !$StandardTemplateID;
 
-            next ST if !$StandardTemplateID;
-
-            $Self->QueueStandardTemplateMemberAdd(
-                QueueID            => $QueueID,
-                StandardTemplateID => $StandardTemplateID,
-                Active             => 1,
-                UserID             => $Param{UserID},
-            );
-        }
+        $Self->QueueStandardTemplateMemberAdd(
+            QueueID            => $QueueID,
+            StandardTemplateID => $StandardTemplateID,
+            Active             => 1,
+            UserID             => $Param{UserID},
+        );
     }
-
-    # get standard template id
-    my $StandardTemplateID2QueueByCreating = $ConfigObject->Get(' StandardTemplate2QueueByCreating');
 
     # get queue data with updated name for QueueCreate event
     my %Queue = $Self->QueueGet( Name => $Param{Name} );
@@ -907,21 +911,6 @@ sub QueueAdd {
         },
         UserID => $Param{UserID},
     );
-
-    return $QueueID if !$StandardTemplateID2QueueByCreating;
-    return $QueueID if ref $StandardTemplateID2QueueByCreating ne 'ARRAY';
-    return $QueueID if !@{$StandardTemplateID2QueueByCreating};
-
-    # add template by id
-    for my $StandardTemplateID ( @{$StandardTemplateID2QueueByCreating} ) {
-
-        $Self->QueueStandardTemplateMemberAdd(
-            QueueID            => $QueueID,
-            StandardTemplateID => $StandardTemplateID,
-            Active             => 1,
-            UserID             => $Param{UserID},
-        );
-    }
 
     return $QueueID;
 }
@@ -1187,7 +1176,7 @@ sub QueueUpdate {
                 valid_id = ?, change_time = current_timestamp, change_by = ?
             WHERE id = ?',
         Bind => [
-            \$Param{Name}, \$Param{Comment}, \$Param{GroupID}, \$Param{UnlockTimeout},
+            \$Param{Name},              \$Param{Comment},             \$Param{GroupID}, \$Param{UnlockTimeout},
             \$Param{FirstResponseTime}, \$Param{FirstResponseNotify}, \$Param{UpdateTime},
             \$Param{UpdateNotify},      \$Param{SolutionTime},        \$Param{SolutionNotify},
             \$Param{FollowUpID},        \$Param{FollowUpLock},        \$Param{SystemAddressID},
@@ -1195,6 +1184,11 @@ sub QueueUpdate {
             \$Param{SignatureID},       \$Param{ValidID},             \$Param{UserID},
             \$Param{QueueID},
         ],
+    );
+
+    # reset cache
+    $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        Type => $Self->{CacheType},
     );
 
     # get queue data with updated name for QueueUpdate event
@@ -1208,11 +1202,6 @@ sub QueueUpdate {
             OldQueue => \%OldQueue,
         },
         UserID => $Param{UserID},
-    );
-
-    # reset cache
-    $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
-        Type => $Self->{CacheType},
     );
 
     # updated all sub queue names

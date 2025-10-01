@@ -3428,8 +3428,8 @@ my @Tests        = (
                 },
             },
             Article => {
-                Subject => 'Article subject äöüßÄÖÜ€ис',
-                Body    => 'Article body ɟ ɠ ɡ ɢ ɣ ɤ ɥ ɦ ɧ ʀ ʁ ʂ ʃ ʄ ʅ ʆ ʇ ʈ ʉ ʊ ʋ ʌ ʍ ʎ',
+                Subject                         => 'Article subject äöüßÄÖÜ€ис',
+                Body                            => 'Article body ɟ ɠ ɡ ɢ ɣ ɤ ɥ ɦ ɧ ʀ ʁ ʂ ʃ ʄ ʅ ʆ ʇ ʈ ʉ ʊ ʋ ʌ ʍ ʎ',
                 AutoResponseType                => 'auto reply',
                 SenderType                      => 'agent',
                 IsVisibleForCustomer            => 1,
@@ -3479,8 +3479,8 @@ my @Tests        = (
                 },
             },
             Article => {
-                Subject => 'Article subject äöüßÄÖÜ€ис',
-                Body    => 'Article body ɟ ɠ ɡ ɢ ɣ ɤ ɥ ɦ ɧ ʀ ʁ ʂ ʃ ʄ ʅ ʆ ʇ ʈ ʉ ʊ ʋ ʌ ʍ ʎ',
+                Subject                         => 'Article subject äöüßÄÖÜ€ис',
+                Body                            => 'Article body ɟ ɠ ɡ ɢ ɣ ɤ ɥ ɦ ɧ ʀ ʁ ʂ ʃ ʄ ʅ ʆ ʇ ʈ ʉ ʊ ʋ ʌ ʍ ʎ',
                 AutoResponseType                => 'auto reply',
                 SenderType                      => 'agent',
                 IsVisibleForCustomer            => 1,
@@ -3530,8 +3530,8 @@ my @Tests        = (
                 },
             },
             Article => {
-                Subject => 'Article subject äöüßÄÖÜ€ис',
-                Body    => 'Article body ɟ ɠ ɡ ɢ ɣ ɤ ɥ ɦ ɧ ʀ ʁ ʂ ʃ ʄ ʅ ʆ ʇ ʈ ʉ ʊ ʋ ʌ ʍ ʎ',
+                Subject                         => 'Article subject äöüßÄÖÜ€ис',
+                Body                            => 'Article body ɟ ɠ ɡ ɢ ɣ ɤ ɥ ɦ ɧ ʀ ʁ ʂ ʃ ʄ ʅ ʆ ʇ ʈ ʉ ʊ ʋ ʌ ʍ ʎ',
                 AutoResponseType                => 'auto reply',
                 SenderType                      => 'agent',
                 IsVisibleForCustomer            => 1,
@@ -4468,7 +4468,7 @@ my @Tests        = (
                 ForceNotificationToUserID       => [$UserID],
                 ExcludeNotificationToUserID     => [$UserID],
                 ExcludeMuteNotificationToUserID => [$UserID],
-                To =>
+                To                              =>
                     "$TestCustomerUserLogin $TestCustomerUserLogin <${TestCustomerUserLogin}\@localunittest.com>, "
                     . '"another \" recipient" <to_recipient_a@localunittest.com>, '
                     . '<to_recipient_b@localunittest.com>',
@@ -4528,7 +4528,7 @@ my @Tests        = (
                     ForceNotificationToUserID       => [$UserID],
                     ExcludeNotificationToUserID     => [$UserID],
                     ExcludeMuteNotificationToUserID => [$UserID],
-                    To =>
+                    To                              =>
                         "$TestCustomerUserLogin $TestCustomerUserLogin <${TestCustomerUserLogin}\@localunittest.com>, "
                         . '"another \" recipient" <to_recipient_a@localunittest.com>, '
                         . '<to_recipient_b@localunittest.com>',
@@ -4558,7 +4558,7 @@ my @Tests        = (
                     ForceNotificationToUserID       => [$UserID],
                     ExcludeNotificationToUserID     => [$UserID],
                     ExcludeMuteNotificationToUserID => [$UserID],
-                    To =>
+                    To                              =>
                         "$TestCustomerUserLogin $TestCustomerUserLogin <${TestCustomerUserLogin}\@localunittest.com>, "
                         . '"another \" recipient" <to_recipient_a@localunittest.com>, '
                         . '<to_recipient_b@localunittest.com>',

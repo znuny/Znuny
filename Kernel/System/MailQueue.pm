@@ -15,7 +15,7 @@ use warnings;
 use MIME::Base64;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 use parent qw(Kernel::System::EventHandler);
 
@@ -852,8 +852,8 @@ sub _SendSuccess {
 
 Handles Send errors.
 Situations where the mail queue item is deleted:
-    - SMTP 5?? errors codes, considered permanent errors.
-    - reached maximum attempts
+- SMTP 5?? errors codes, considered permanent errors.
+- reached maximum attempts
 
     $Object->_SendError(
         Item       => '...',

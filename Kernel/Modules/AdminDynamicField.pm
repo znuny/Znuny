@@ -16,7 +16,7 @@ use utf8;
 our $ObjectManagerDisabled = 1;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::CheckItem;
 
 sub new {
@@ -322,6 +322,11 @@ sub _DynamicFieldsListShow {
     if (%PageNav) {
         $LayoutObject->Block(
             Name => 'OverviewNavBarPageNavBar',
+            Data => \%PageNav,
+        );
+
+        $LayoutObject->Block(
+            Name => 'OverviewNavBarPageNavBarBottom',
             Data => \%PageNav,
         );
 

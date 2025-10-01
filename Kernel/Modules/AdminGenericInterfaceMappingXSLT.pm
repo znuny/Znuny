@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -42,7 +42,7 @@ sub Run {
 
     my $CommunicationType = IsStringWithData($Operation) ? 'Provider'  : 'Requester';
     my $ActionType        = IsStringWithData($Operation) ? 'Operation' : 'Invoker';
-    my $Action = $Operation || $Invoker;
+    my $Action            = $Operation || $Invoker;
 
     # Set mapping direction for display.
     my $MappingDirection = $Direction eq 'MappingOutbound'
@@ -174,6 +174,7 @@ sub Run {
                 Action               => $Action,
                 ActionFrontendModule => $ActionFrontendModule,
                 Subaction            => 'Change',
+                TemplateError        => $GetParam->{Error}->{Template} ? 1 : 0,
             );
         }
 
@@ -258,6 +259,13 @@ sub _ShowEdit {
     my $Output = $LayoutObject->Header();
     $Output .= $LayoutObject->NavigationBar();
 
+    if ( $Param{TemplateError} ) {
+        $Output .= $LayoutObject->Notify(
+            Priority => 'Error',
+            Info     => Translatable('The entered data is not a valid XSLT style sheet.'),
+        );
+    }
+
     my $MappingConfig = $Param{WebserviceData};
     my %Error;
     if ( defined $Param{WebserviceData}->{Error} ) {
@@ -312,7 +320,7 @@ sub _ShowEdit {
                     Value => Translatable('Incoming response data before mapping (RequesterResponseInput)'),
                 },
                 {
-                    Key => 'RequesterErrorHandlingOutput',
+                    Key   => 'RequesterErrorHandlingOutput',
                     Value =>
                         Translatable('Outgoing error handler data after error handling (RequesterErrorHandlingOutput)'),
                 },
@@ -333,7 +341,7 @@ sub _ShowEdit {
                     Value => Translatable('Outgoing response data before mapping (ProviderResponseInput)'),
                 },
                 {
-                    Key => 'ProviderErrorHandlingOutput',
+                    Key   => 'ProviderErrorHandlingOutput',
                     Value =>
                         Translatable('Outgoing error handler data after error handling (ProviderErrorHandlingOutput)'),
                 },

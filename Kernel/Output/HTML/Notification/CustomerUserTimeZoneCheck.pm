@@ -59,7 +59,7 @@ sub Run {
     return $LayoutObject->Notify(
         Priority => 'Notice',
         Link     => $LayoutObject->{Baselink} . 'Action=CustomerPreferences',
-        Info =>
+        Info     =>
             Translatable('Please select a time zone in your preferences and confirm it by clicking the save button.'),
     );
 }

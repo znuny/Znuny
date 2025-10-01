@@ -12,9 +12,9 @@ package Kernel::System::YAML;
 use strict;
 use warnings;
 
-use Encode qw();
+use Encode    qw();
 use YAML::Any qw();
-use YAML qw();
+use YAML      qw();
 
 our @ObjectDependencies = (
     'Kernel::System::Log',

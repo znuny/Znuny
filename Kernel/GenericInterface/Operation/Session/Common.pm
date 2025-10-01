@@ -30,7 +30,8 @@ performs user authentication and return a new SessionID value
             # or
             CustomerUserLogin => 'Customer1',       # optional, provide UserLogin or CustomerUserLogin
 
-            Password          => 'some password',   # plain text password
+            Password       => 'some password',      # plain text password
+            TwoFactorToken => '23071988',           # optional, two factor token
         }
     );
 
@@ -48,7 +49,8 @@ sub CreateSessionID {
     my $UserType;
 
     # get params
-    my $PostPw = $Param{Data}->{Password} || '';
+    my $PostPw             = $Param{Data}->{Password}       || '';
+    my $PostTwoFactorToken = $Param{Data}->{TwoFactorToken} || '';
 
     if ( defined $Param{Data}->{UserLogin} && $Param{Data}->{UserLogin} ) {
 
@@ -57,8 +59,9 @@ sub CreateSessionID {
 
         # check submitted data
         $User = $Kernel::OM->Get('Kernel::System::Auth')->Auth(
-            User => $PostUser,
-            Pw   => $PostPw,
+            User           => $PostUser,
+            Pw             => $PostPw,
+            TwoFactorToken => $PostTwoFactorToken,
         );
         %UserData = $Kernel::OM->Get('Kernel::System::User')->GetUserData(
             User  => $User,
@@ -73,8 +76,9 @@ sub CreateSessionID {
 
         # check submitted data
         $User = $Kernel::OM->Get('Kernel::System::CustomerAuth')->Auth(
-            User => $PostUser,
-            Pw   => $PostPw,
+            User           => $PostUser,
+            Pw             => $PostPw,
+            TwoFactorToken => $PostTwoFactorToken,
         );
         %UserData = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerUserDataGet(
             User  => $PostUser,

@@ -261,7 +261,7 @@ sub Fetch {
         my $Error = $@;
         %Connect = (
             Successful => 0,
-            Message =>
+            Message    =>
                 "Something went wrong while trying to connect to '$Self->{MailAccountModuleName} => $Param{Login}/$Param{Host}': ${ Error }",
         );
     };
@@ -411,7 +411,7 @@ sub Fetch {
                     ObjectLogType => 'Connection',
                     Priority      => 'Error',
                     Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
-                    Value =>
+                    Value         =>
                         "Cannot fetch message '$Messageno/$NOM' with size '$MessageSize' ($MessageSizeKB KB)."
                         . "Maximum allowed message size is '$MaxEmailSize KB'!",
                 );
@@ -498,7 +498,7 @@ sub Fetch {
                             ObjectLogType => 'Message',
                             Priority      => 'Error',
                             Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
-                            Value =>
+                            Value         =>
                                 "Could not process message. Raw mail saved ($File, report it on https://github.com/znuny/Znuny/issues)!",
                         );
 

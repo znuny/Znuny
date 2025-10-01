@@ -114,6 +114,7 @@ sub DisplayValueRender {
     if ( $Param{Value} ) {
         $Process = $Kernel::OM->Get('Kernel::System::ProcessManagement::Process')->ProcessGet(
             ProcessEntityID => $Param{Value},
+            Preferences     => 0,
         );
     }
 

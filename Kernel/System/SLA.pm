@@ -191,10 +191,8 @@ sub SLAGet {
     # check if result is already cached
     my $CacheKey = 'Cache::SLAGet::' . $Param{SLAID};
     my $Cached   = $Kernel::OM->Get('Kernel::System::Cache')->Get(
-        Type           => $Self->{CacheType},
-        Key            => $CacheKey,
-        CacheInMemory  => 1,
-        CacheInBackend => 0,
+        Type => $Self->{CacheType},
+        Key  => $CacheKey,
     );
 
     if ( ref $Cached eq 'HASH' ) {
@@ -295,9 +293,7 @@ sub SLAGet {
         Key  => $CacheKey,
 
         # make a local copy of the sla data to avoid it being altered in-memory later
-        Value          => {%SLAData},
-        CacheInMemory  => 1,
-        CacheInBackend => 0,
+        Value => {%SLAData},
     );
 
     return %SLAData;
@@ -339,10 +335,8 @@ sub SLALookup {
         # check cache
         my $CacheKey = 'Cache::SLALookup::ID::' . $Param{SLAID};
         my $Cached   = $Kernel::OM->Get('Kernel::System::Cache')->Get(
-            Type           => $Self->{CacheType},
-            Key            => $CacheKey,
-            CacheInMemory  => 1,
-            CacheInBackend => 0,
+            Type => $Self->{CacheType},
+            Key  => $CacheKey,
         );
         if ( defined $Cached ) {
             return $Cached;
@@ -363,12 +357,10 @@ sub SLALookup {
 
         # cache
         $Kernel::OM->Get('Kernel::System::Cache')->Set(
-            Type           => $Self->{CacheType},
-            TTL            => $Self->{CacheTTL},
-            Key            => $CacheKey,
-            Value          => $Name,
-            CacheInMemory  => 1,
-            CacheInBackend => 0,
+            Type  => $Self->{CacheType},
+            TTL   => $Self->{CacheTTL},
+            Key   => $CacheKey,
+            Value => $Name,
         );
 
         return $Name;
@@ -378,10 +370,8 @@ sub SLALookup {
         # check cache
         my $CacheKey = 'Cache::SLALookup::Name::' . $Param{Name};
         my $Cached   = $Kernel::OM->Get('Kernel::System::Cache')->Get(
-            Type           => $Self->{CacheType},
-            Key            => $CacheKey,
-            CacheInMemory  => 1,
-            CacheInBackend => 0,
+            Type => $Self->{CacheType},
+            Key  => $CacheKey,
         );
         if ( defined $Cached ) {
             return $Cached;
@@ -402,12 +392,10 @@ sub SLALookup {
 
         # cache
         $Kernel::OM->Get('Kernel::System::Cache')->Set(
-            Type           => $Self->{CacheType},
-            TTL            => $Self->{CacheTTL},
-            Key            => $CacheKey,
-            Value          => $SLAID,
-            CacheInMemory  => 1,
-            CacheInBackend => 0,
+            Type  => $Self->{CacheType},
+            TTL   => $Self->{CacheTTL},
+            Key   => $CacheKey,
+            Value => $SLAID,
         );
 
         return $SLAID;
@@ -530,10 +518,10 @@ sub SLAAdd {
                 . 'type_id, min_time_bet_incidents) VALUES '
                 . '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?, ?, ?)',
             Bind => [
-                \$Param{Name},                \$Param{Calendar},       \$Param{FirstResponseTime},
-                \$Param{FirstResponseNotify}, \$Param{UpdateTime},     \$Param{UpdateNotify},
-                \$Param{SolutionTime},        \$Param{SolutionNotify}, \$Param{ValidID}, \$Param{Comment},
-                \$Param{UserID}, \$Param{UserID}, \$Param{TypeID}, \$Param{MinTimeBetweenIncidents},
+                \$Param{Name},                \$Param{Calendar},   \$Param{FirstResponseTime},
+                \$Param{FirstResponseNotify}, \$Param{UpdateTime}, \$Param{UpdateNotify},
+                \$Param{SolutionTime}, \$Param{SolutionNotify},    \$Param{ValidID}, \$Param{Comment},
+                \$Param{UserID},       \$Param{UserID},            \$Param{TypeID},  \$Param{MinTimeBetweenIncidents},
             ],
         );
     }
@@ -548,7 +536,7 @@ sub SLAAdd {
                 \$Param{Name},                \$Param{Calendar},       \$Param{FirstResponseTime},
                 \$Param{FirstResponseNotify}, \$Param{UpdateTime},     \$Param{UpdateNotify},
                 \$Param{SolutionTime},        \$Param{SolutionNotify}, \$Param{ValidID}, \$Param{Comment},
-                \$Param{UserID}, \$Param{UserID},
+                \$Param{UserID},              \$Param{UserID},
             ],
         );
     }
@@ -727,10 +715,10 @@ sub SLAUpdate {
                 . 'type_id = ?, min_time_bet_incidents = ? '
                 . 'WHERE id = ?',
             Bind => [
-                \$Param{Name},                \$Param{Calendar},       \$Param{FirstResponseTime},
-                \$Param{FirstResponseNotify}, \$Param{UpdateTime},     \$Param{UpdateNotify},
-                \$Param{SolutionTime},        \$Param{SolutionNotify}, \$Param{ValidID}, \$Param{Comment},
-                \$Param{UserID},              \$Param{TypeID},         \$Param{MinTimeBetweenIncidents}, \$Param{SLAID},
+                \$Param{Name},                \$Param{Calendar},   \$Param{FirstResponseTime},
+                \$Param{FirstResponseNotify}, \$Param{UpdateTime}, \$Param{UpdateNotify},
+                \$Param{SolutionTime}, \$Param{SolutionNotify},    \$Param{ValidID},                 \$Param{Comment},
+                \$Param{UserID},       \$Param{TypeID},            \$Param{MinTimeBetweenIncidents}, \$Param{SLAID},
             ],
         );
     }
@@ -745,7 +733,7 @@ sub SLAUpdate {
                 \$Param{Name},                \$Param{Calendar},       \$Param{FirstResponseTime},
                 \$Param{FirstResponseNotify}, \$Param{UpdateTime},     \$Param{UpdateNotify},
                 \$Param{SolutionTime},        \$Param{SolutionNotify}, \$Param{ValidID}, \$Param{Comment},
-                \$Param{UserID}, \$Param{SLAID},
+                \$Param{UserID},              \$Param{SLAID},
             ],
         );
     }

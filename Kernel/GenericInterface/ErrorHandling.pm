@@ -145,7 +145,7 @@ sub HandleError {
         if ( !IsHashRefWithData( $ErrorHandlingModules->{$ErrorHandlingConfigKey} ) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Error handling module name not found for entry '$ErrorHandlingConfigKey' in WebserviceID $Param{WebserviceID} ($Param{CommunicationType})!",
             );
 
@@ -159,7 +159,7 @@ sub HandleError {
         if ( !IsHashRefWithData($ModuleRegistration) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Error handling module config registration not found for entry '$ErrorHandlingConfigKey' in WebserviceID $Param{WebserviceID} ($Param{CommunicationType})!",
             );
 
@@ -170,7 +170,7 @@ sub HandleError {
         if ( !$ModuleRegistration->{Name} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Module registration for error handling entry '$ErrorHandlingConfigKey' is invalid in WebserviceID $Param{WebserviceID} ($Param{CommunicationType})!",
             );
 
@@ -183,7 +183,7 @@ sub HandleError {
         if ( !$MainObject->Require($ErrorHandlingModule) ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Can't load error handling module '$ErrorHandlingModule' in WebserviceID $Param{WebserviceID} ($Param{CommunicationType})!",
             );
 
@@ -246,7 +246,7 @@ sub HandleError {
         if ( !$ErrorHandlingObject ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Couldn't create an object of error handling module '$ModuleConfig->{Type}' in WebserviceID $Param{WebserviceID} ($Param{CommunicationType})!",
             );
 
@@ -256,7 +256,7 @@ sub HandleError {
         if ( ref $ErrorHandlingObject ne $ErrorHandlingModule ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Error handling object for module '$ModuleConfig->{Type}' was not created successfully in WebserviceID $Param{WebserviceID} ($Param{CommunicationType})!",
             );
 

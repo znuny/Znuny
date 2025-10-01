@@ -94,7 +94,7 @@ my @ArticleIndexTests = (
             MIMEBase_From       => 'spam@example.com',
         },
         Needed => 1,
-        Joins =>
+        Joins  =>
             " LEFT JOIN article_search_index MIMEBase_From ON art.id = MIMEBase_From.article_id AND MIMEBase_From.article_key = 'MIMEBase_From' ",
         Conditions => " AND ( MIMEBase_From.article_value LIKE '\%spam\@example.com\%') ",
     },
@@ -106,7 +106,7 @@ my @ArticleIndexTests = (
             MIMEBase_To         => 'spam@example.com',
         },
         Needed => 1,
-        Joins =>
+        Joins  =>
             " LEFT JOIN article_search_index MIMEBase_To ON art.id = MIMEBase_To.article_id AND MIMEBase_To.article_key = 'MIMEBase_To' ",
         Conditions => " AND ( MIMEBase_To.article_value LIKE '\%spam\@example.com\%') ",
     },
@@ -118,7 +118,7 @@ my @ArticleIndexTests = (
             MIMEBase_Cc         => 'spam@example.com',
         },
         Needed => 1,
-        Joins =>
+        Joins  =>
             " LEFT JOIN article_search_index MIMEBase_Cc ON art.id = MIMEBase_Cc.article_id AND MIMEBase_Cc.article_key = 'MIMEBase_Cc' ",
         Conditions => " AND ( MIMEBase_Cc.article_value LIKE '\%spam\@example.com\%') ",
     },
@@ -130,7 +130,7 @@ my @ArticleIndexTests = (
             MIMEBase_Bcc        => 'spam@example.com',
         },
         Needed => 1,
-        Joins =>
+        Joins  =>
             " LEFT JOIN article_search_index MIMEBase_Bcc ON art.id = MIMEBase_Bcc.article_id AND MIMEBase_Bcc.article_key = 'MIMEBase_Bcc' ",
         Conditions => " AND ( MIMEBase_Bcc.article_value LIKE '\%spam\@example.com\%') ",
     },
@@ -142,7 +142,7 @@ my @ArticleIndexTests = (
             MIMEBase_Subject    => 'VIRUS 32',
         },
         Needed => 1,
-        Joins =>
+        Joins  =>
             " LEFT JOIN article_search_index MIMEBase_Subject ON art.id = MIMEBase_Subject.article_id AND MIMEBase_Subject.article_key = 'MIMEBase_Subject' ",
         Conditions => " AND ( MIMEBase_Subject.article_value LIKE '\%virus 32\%') ",
     },
@@ -154,7 +154,7 @@ my @ArticleIndexTests = (
             MIMEBase_Body       => 'VIRUS 32',
         },
         Needed => 1,
-        Joins =>
+        Joins  =>
             " LEFT JOIN article_search_index MIMEBase_Body ON art.id = MIMEBase_Body.article_id AND MIMEBase_Body.article_key = 'MIMEBase_Body' ",
         Conditions => " AND ( MIMEBase_Body.article_value LIKE '\%virus 32\%') ",
     },
@@ -166,7 +166,7 @@ my @ArticleIndexTests = (
             MIMEBase_Body       => '%Some Message Text%',
         },
         Needed => 1,
-        Joins =>
+        Joins  =>
             " LEFT JOIN article_search_index MIMEBase_Body ON art.id = MIMEBase_Body.article_id AND MIMEBase_Body.article_key = 'MIMEBase_Body' ",
         Conditions => " AND ( MIMEBase_Body.article_value LIKE '\%some message text\%') ",
     },

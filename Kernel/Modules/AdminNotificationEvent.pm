@@ -11,11 +11,12 @@ package Kernel::Modules::AdminNotificationEvent;
 
 use strict;
 use warnings;
+use utf8;
 
 our $ObjectManagerDisabled = 1;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -52,6 +53,7 @@ sub Run {
     my $NotificationEventObject = $Kernel::OM->Get('Kernel::System::NotificationEvent');
     my $BackendObject           = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
     my $MainObject              = $Kernel::OM->Get('Kernel::System::Main');
+    my $YAMLObject              = $Kernel::OM->Get('Kernel::System::YAML');
     my $Notification            = $ParamObject->GetParam( Param => 'Notification' );
 
     # get the search article fields to retrieve values for
@@ -567,7 +569,7 @@ sub Run {
     # ------------------------------------------------------------ #
     # delete
     # ------------------------------------------------------------ #
-    if ( $Self->{Subaction} eq 'Delete' ) {
+    elsif ( $Self->{Subaction} eq 'Delete' ) {
 
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
@@ -595,45 +597,34 @@ sub Run {
 
         my $NotificationID = $ParamObject->GetParam( Param => 'ID' ) || '';
         my $NotificationData;
-        my %NotificationSingleData;
-        my $Filename = 'Export_Notification.yml';
-
+        my $NotificationName;
         if ($NotificationID) {
-
-            %NotificationSingleData = $NotificationEventObject->NotificationGet(
-                ID     => $NotificationID,
-                UserID => $Self->{UserID},
+            $NotificationData = $NotificationEventObject->NotificationExport(
+                ID => $NotificationID,
             );
 
-            if ( !IsHashRefWithData( \%NotificationSingleData ) ) {
-                return $LayoutObject->ErrorScreen(
-                    Message => $LayoutObject->{LanguageObject}
-                        ->Translate( 'There was an error getting data for Notification with ID:%s!', $NotificationID ),
-                );
-            }
+            return $LayoutObject->ErrorScreen(
+                Message => $LayoutObject->{LanguageObject}
+                    ->Translate( 'There was an error getting data for Notification with ID:%s!', $NotificationID ),
+            ) if !IsArrayRefWithData($NotificationData);
 
-            my $NotificationName = $NotificationSingleData{Name};
-            $NotificationName =~ s{[^a-zA-Z0-9-_]}{_}xmsg;    # cleanup name for saving
-
-            $Filename         = 'Export_Notification_' . $NotificationName . '.yml';
-            $NotificationData = [ \%NotificationSingleData ];
+            $NotificationName = $NotificationData->[0]->{Name};
         }
         else {
-
-            my %Notificationdetails = $NotificationEventObject->NotificationList(
-                UserID  => $Self->{UserID},
-                Details => 1,
+            $NotificationData = $NotificationEventObject->NotificationExport(
+                ExportAll => 1,
+                Type      => 'Ticket',
             );
-
-            my @Data;
-            for my $ItemID ( sort keys %Notificationdetails ) {
-                push @Data, $Notificationdetails{$ItemID};
-            }
-            $NotificationData = \@Data;
         }
 
+        my $Filename = $NotificationEventObject->NotificationExportFilenameGet(
+            Name   => $NotificationName,
+            Type   => 'Ticket',
+            Format => 'YAML',
+        );
+
         # convert the Notification data hash to string
-        my $NotificationDataYAML = $Kernel::OM->Get('Kernel::System::YAML')->Dump( Data => $NotificationData );
+        my $NotificationDataYAML = $YAMLObject->Dump( Data => $NotificationData );
 
         # send the result to the browser
         return $LayoutObject->Attachment(
@@ -655,24 +646,8 @@ sub Run {
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
-        # get Notification data
-        my %NotificationData = $NotificationEventObject->NotificationGet(
+        my $NewNotificationID = $NotificationEventObject->NotificationCopy(
             ID     => $NotificationID,
-            UserID => $Self->{UserID},
-        );
-        if ( !IsHashRefWithData( \%NotificationData ) ) {
-            return $LayoutObject->ErrorScreen(
-                Message => $LayoutObject->{LanguageObject}->Translate( 'Unknown Notification %s!', $NotificationID ),
-            );
-        }
-
-        # create new Notification name
-        my $NotificationName = $LayoutObject->{LanguageObject}->Translate( '%s (copy)', $NotificationData{Name} );
-
-        # otherwise save configuration and return to overview screen
-        my $NewNotificationID = $NotificationEventObject->NotificationAdd(
-            %NotificationData,
-            Name   => $NotificationName,
             UserID => $Self->{UserID},
         );
 
@@ -690,7 +665,7 @@ sub Run {
     # ------------------------------------------------------------ #
     # NotificationImport
     # ------------------------------------------------------------ #
-    if ( $Self->{Subaction} eq 'NotificationImport' ) {
+    elsif ( $Self->{Subaction} eq 'NotificationImport' ) {
 
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
@@ -705,6 +680,7 @@ sub Run {
 
         my $NotificationImport = $NotificationEventObject->NotificationImport(
             Content                        => $UploadStuff{Content},
+            Type                           => 'Ticket',
             OverwriteExistingNotifications => $OverwriteExistingNotifications,
             UserID                         => $Self->{UserID},
         );
@@ -712,37 +688,53 @@ sub Run {
         if ( !$NotificationImport->{Success} ) {
             my $Message = $NotificationImport->{Message}
                 || Translatable(
-                'Notifications could not be Imported due to a unknown error, please check Znuny logs for more information'
+                'Notifications could not be imported due to an unknown error, please check logs for more information.'
                 );
             return $LayoutObject->ErrorScreen(
                 Message => $Message,
             );
         }
 
-        if ( $NotificationImport->{AddedNotifications} ) {
+        if ( $NotificationImport->{Added} ) {
             push @{ $Param{NotifyData} }, {
                 Info => $LayoutObject->{LanguageObject}->Translate(
-                    'The following Notifications have been added successfully: %s',
-                    $NotificationImport->{AddedNotifications}
+                    'The following notifications have been added successfully: %s.',
+                    $NotificationImport->{Added}
                 ),
             };
         }
-        if ( $NotificationImport->{UpdatedNotifications} ) {
+        if ( $NotificationImport->{Updated} ) {
             push @{ $Param{NotifyData} }, {
                 Info => $LayoutObject->{LanguageObject}->Translate(
-                    'The following Notifications have been updated successfully: %s',
-                    $NotificationImport->{UpdatedNotifications}
+                    'The following notifications have been updated successfully: %s.',
+                    $NotificationImport->{Updated}
                 ),
             };
         }
-        if ( $NotificationImport->{NotificationErrors} ) {
+        if ( $NotificationImport->{NotUpdated} ) {
+            push @{ $Param{NotifyData} }, {
+                Info => $LayoutObject->{LanguageObject}->Translate(
+                    'The following notifications were not updated: %s.',
+                    $NotificationImport->{NotUpdated}
+                ),
+            };
+        }
+        if ( $NotificationImport->{Errors} ) {
             push @{ $Param{NotifyData} }, {
                 Priority => 'Error',
                 Info     => $LayoutObject->{LanguageObject}->Translate(
-                    'There where errors adding/updating the following Notifications: %s. Please check the log file for more information.',
-                    $NotificationImport->{NotificationErrors}
+                    'Errors adding/updating the following notifications: %s. Please check logs for more information.',
+                    $NotificationImport->{Errors}
                 ),
             };
+        }
+        if ( IsArrayRefWithData( $NotificationImport->{AdditionalErrors} ) ) {
+            for my $Error ( @{ $NotificationImport->{AdditionalErrors} } ) {
+                push @{ $Param{NotifyData} }, {
+                    Priority => 'Error',
+                    Info     => $LayoutObject->{LanguageObject}->Translate($Error),
+                };
+            }
         }
 
         $Self->_Overview();
@@ -767,9 +759,67 @@ sub Run {
         return $Output;
     }
 
-    # ------------------------------------------------------------
+    # ------------------------------------------------------------ #
+    # Add dynamic fields to ticket filter on notifications by AJAX
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'AddDynamicField' ) {
+        my $DynamicFieldID = $ParamObject->GetParam( Param => 'DynamicFieldID' );
+        my $SelectedValue  = $ParamObject->GetParam( Param => 'SelectedValue' );
+
+        my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+        my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
+
+        my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
+            ID => $DynamicFieldID,
+        );
+
+        # get notification data
+        my %NotificationData;
+        my $NotificationID = $ParamObject->GetParam( Param => 'ID' ) || '';
+        if ($NotificationID) {
+            %NotificationData = $NotificationEventObject->NotificationGet(
+                ID => $NotificationID,
+            );
+        }
+        $NotificationData{Profile}   = $NotificationID;
+        $NotificationData{Subaction} = $Self->{Subaction};
+
+        my $DynamicFieldHTML = $DynamicFieldBackendObject->SearchFieldRender(
+            DynamicFieldConfig => $DynamicFieldConfig,
+            LayoutObject       => $LayoutObject,
+            DefaultValue       => $DynamicFieldConfig->{Config}->{DefaultValue},
+            Profile            => \%NotificationData || {},
+        );
+
+        my $HTMLLabel       = $DynamicFieldHTML->{Label};
+        my $TranslatedLabel = $LayoutObject->{LanguageObject}->Translate( $DynamicFieldConfig->{Label} );
+        my $CombinedLabel   = (
+            $TranslatedLabel eq $DynamicFieldConfig->{Name}
+            ? $TranslatedLabel
+            : $TranslatedLabel . ' (' . $DynamicFieldConfig->{Name} . ')'
+        );
+
+        $HTMLLabel =~ s{(.+)\Q$TranslatedLabel\E(.+)}{$1 $CombinedLabel $2}smx;
+
+        $DynamicFieldHTML->{Label} = $HTMLLabel;
+        $DynamicFieldHTML->{ID}    = $SelectedValue;
+
+        my $Output = $LayoutObject->JSONEncode(
+            Data => $DynamicFieldHTML,
+        );
+
+        # Send JSON response.
+        return $LayoutObject->Attachment(
+            ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
+            Content     => $Output,
+            Type        => 'inline',
+            NoCache     => 1,
+        );
+    }
+
+    # ------------------------------------------------------------ #
     # overview
-    # ------------------------------------------------------------
+    # ------------------------------------------------------------ #
     else {
         $Self->_Overview();
         my $Output = $LayoutObject->Header();
@@ -1031,53 +1081,105 @@ sub _Edit {
         );
     }
 
-    # create dynamic field HTML for set with historical data options
-    my $PrintDynamicFieldsSearchHeader = 1;
+    my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
-    # cycle trough the activated Dynamic Fields for this screen
-    my $DynamicField = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
+    my @AddDynamicFields;
+    my %DynamicFieldsJS;
+
+    my $DynamicField = $DynamicFieldObject->DynamicFieldListGet(
         Valid      => 1,
         ObjectType => ['Ticket'],
     );
-
-    my $BackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
     DYNAMICFIELD:
     for my $DynamicFieldConfig ( @{$DynamicField} ) {
         next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
 
         # skip all dynamic fields that are not designed to be notification triggers
-        my $IsNotificationEventCondition = $BackendObject->HasBehavior(
+        my $IsNotificationEventCondition = $DynamicFieldBackendObject->HasBehavior(
             DynamicFieldConfig => $DynamicFieldConfig,
             Behavior           => 'IsNotificationEventCondition',
         );
 
         next DYNAMICFIELD if !$IsNotificationEventCondition;
 
-        # get field HTML
-        my $DynamicFieldHTML = $BackendObject->SearchFieldRender(
+        # get search field preferences
+        my $SearchFieldPreferences = $DynamicFieldBackendObject->SearchFieldPreferences(
             DynamicFieldConfig => $DynamicFieldConfig,
-            Profile            => $Param{DynamicFieldValues} || {},
-            LayoutObject       => $LayoutObject,
-            UseLabelHints      => 0,
         );
 
-        next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldHTML);
+        next DYNAMICFIELD if !IsArrayRefWithData($SearchFieldPreferences);
 
-        if ($PrintDynamicFieldsSearchHeader) {
-            $LayoutObject->Block( Name => 'DynamicField' );
-            $PrintDynamicFieldsSearchHeader = 0;
+        my $Key = 'Search_DynamicField_' . $DynamicFieldConfig->{Name};
+
+        # Translate dynamic field label.
+        my $TranslatedLabel = $LayoutObject->{LanguageObject}->Translate( $DynamicFieldConfig->{Label} );
+        my $CombinedLabel   = (
+            $TranslatedLabel eq $DynamicFieldConfig->{Name}
+            ? $TranslatedLabel
+            : $TranslatedLabel . ' (' . $DynamicFieldConfig->{Name} . ')'
+        );
+
+        # Save all dynamic fields for JS.
+        $DynamicFieldsJS{$Key} = {
+            ID   => $DynamicFieldConfig->{ID},
+            Text => $CombinedLabel,
+        };
+
+        # Decide if dynamic field go to add fields dropdown or selected fields area.
+        if ( defined $Param{Data}{$Key} ) {
+
+            # Get field HTML.
+            my $DynamicFieldHTML = $DynamicFieldBackendObject->SearchFieldRender(
+                DynamicFieldConfig => $DynamicFieldConfig,
+                LayoutObject       => $LayoutObject,
+                Profile            => $Param{Data},
+            );
+
+            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldHTML);
+
+            my $HTMLLabel = $DynamicFieldHTML->{Label};
+            $HTMLLabel =~ s{(.+)\Q$TranslatedLabel\E(.+)}{$1 $CombinedLabel $2}smx;
+
+            $LayoutObject->Block(
+                Name => 'SelectedDynamicFields',
+                Data => {
+                    Label => $HTMLLabel,
+                    Field => $DynamicFieldHTML->{Field},
+                    ID    => $Key,
+                },
+            );
         }
-
-        # output dynamic field
-        $LayoutObject->Block(
-            Name => 'DynamicFieldElement',
-            Data => {
-                Label => $DynamicFieldHTML->{Label},
-                Field => $DynamicFieldHTML->{Field},
-            },
-        );
+        else {
+            push @AddDynamicFields, {
+                Key   => $Key,
+                Value => $CombinedLabel,
+            };
+        }
     }
+
+    @AddDynamicFields = sort { $a->{Value} cmp $b->{Value} } @AddDynamicFields;
+
+    my $DynamicFieldsStrg = $LayoutObject->BuildSelection(
+        PossibleNone => 1,
+        Data         => \@AddDynamicFields,
+        Name         => 'AddDynamicFields',
+        Multiple     => 0,
+        Class        => 'Modernize',
+    );
+
+    $LayoutObject->Block(
+        Name => 'AddDynamicFields',
+        Data => {
+            DynamicFieldsStrg => $DynamicFieldsStrg,
+        },
+    );
+
+    $LayoutObject->AddJSData(
+        Key   => 'DynamicFieldsJS',
+        Value => \%DynamicFieldsJS,
+    );
 
     # add rich text editor
     if ( $Param{RichText} ) {
@@ -1187,12 +1289,12 @@ sub _Edit {
             Name => 'NotificationLanguage',
             Data => {
                 %Param,
-                Subject => $Param{Message}->{$LanguageID}->{Subject} || '',
-                Body    => $Param{Message}->{$LanguageID}->{Body}    || '',
+                Subject            => $Param{Message}->{$LanguageID}->{Subject} || '',
+                Body               => $Param{Message}->{$LanguageID}->{Body}    || '',
                 LanguageID         => $LanguageID,
                 Language           => $Languages{$LanguageID},
                 SubjectServerError => $Param{ $LanguageID . '_SubjectServerError' } || '',
-                BodyServerError    => $Param{ $LanguageID . '_BodyServerError' } || '',
+                BodyServerError    => $Param{ $LanguageID . '_BodyServerError' }    || '',
             },
         );
 
@@ -1454,7 +1556,7 @@ sub _Overview {
 
     $LayoutObject->Block( Name => 'ActionList' );
     $LayoutObject->Block( Name => 'ActionAdd' );
-    $LayoutObject->Block( Name => 'ActionImport' );
+    $LayoutObject->Block( Name => 'ActionImportExport' );
     $LayoutObject->Block( Name => 'Filter' );
 
     $LayoutObject->Block(

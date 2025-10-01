@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -142,7 +142,7 @@ sub Run {
 
         # get array params
         for my $Key (
-            qw(CustomerID StateIDs StateTypeIDs PriorityIDs OwnerIDs ResponsibleIDs ServiceIDs
+            qw(CustomerIDRaw StateIDs StateTypeIDs PriorityIDs OwnerIDs ResponsibleIDs ServiceIDs
             TypeIDs
             )
             )
@@ -343,12 +343,12 @@ sub Run {
                     my $DateTimeObject = $Kernel::OM->Create(
                         'Kernel::System::DateTime',
                         ObjectParams => {
-                            Year   => $GetParam{ $TimeType . 'TimeStartYear' },
-                            Month  => $GetParam{ $TimeType . 'TimeStartMonth' },
-                            Day    => $GetParam{ $TimeType . 'TimeStartDay' },
-                            Hour   => 0,                                           # midnight
-                            Minute => 0,
-                            Second => 0,
+                            Year     => $GetParam{ $TimeType . 'TimeStartYear' },
+                            Month    => $GetParam{ $TimeType . 'TimeStartMonth' },
+                            Day      => $GetParam{ $TimeType . 'TimeStartDay' },
+                            Hour     => 0,                                           # midnight
+                            Minute   => 0,
+                            Second   => 0,
                             TimeZone => $Self->{UserTimeZone} || Kernel::System::DateTime->UserDefaultTimeZoneGet(),
                         },
                     );
@@ -366,12 +366,12 @@ sub Run {
                     my $DateTimeObject = $Kernel::OM->Create(
                         'Kernel::System::DateTime',
                         ObjectParams => {
-                            Year   => $GetParam{ $TimeType . 'TimeStopYear' },
-                            Month  => $GetParam{ $TimeType . 'TimeStopMonth' },
-                            Day    => $GetParam{ $TimeType . 'TimeStopDay' },
-                            Hour   => 23,                                         # just before midnight
-                            Minute => 59,
-                            Second => 59,
+                            Year     => $GetParam{ $TimeType . 'TimeStopYear' },
+                            Month    => $GetParam{ $TimeType . 'TimeStopMonth' },
+                            Day      => $GetParam{ $TimeType . 'TimeStopDay' },
+                            Hour     => 23,                                         # just before midnight
+                            Minute   => 59,
+                            Second   => 59,
                             TimeZone => $Self->{UserTimeZone} || Kernel::System::DateTime->UserDefaultTimeZoneGet(),
                         },
                     );
@@ -769,7 +769,7 @@ sub Run {
                 );
 
                 return $LayoutObject->Attachment(
-                    Filename => $FileName . '.xlsx',
+                    Filename    => $FileName . '.xlsx',
                     ContentType =>
                         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                     Content => $Excel,
@@ -882,7 +882,7 @@ sub Run {
                 push @PDFRow,  $Created;
                 push @PDFRow,  $Data{From};
                 push @PDFRow,  $Data{Subject};
-                push @PDFRow,  $Data{State};
+                push @PDFRow,  $LayoutObject->{LanguageObject}->Translate( $Data{State} );
                 push @PDFRow,  $Data{Queue};
                 push @PDFRow,  $Customer;
                 push @PDFData, \@PDFRow;
@@ -1345,16 +1345,16 @@ sub Run {
 
         KEY:
         for my $Key (
-            qw(TicketNumber From To Cc Subject Body CustomerID TimeSearchType StateType
+            qw(TicketNumber From To Cc Subject Body CustomerIDRaw TimeSearchType StateType
             StateIDs StateTypeIDs PriorityIDs OwnerIDs ResponsibleIDs
             )
             )
         {
             next KEY if !$GetParam{$Key};
-            my $Attribute = $IDMap{$Key}->{Name}   || $Key;
-            my $Object    = $IDMap{$Key}->{Object} || '';
-            my $Method    = $IDMap{$Key}->{Method};
-            my $MethodKey = $IDMap{$Key}->{Key};
+            my $Attribute   = $IDMap{$Key}->{Name}   || $Key;
+            my $Object      = $IDMap{$Key}->{Object} || '';
+            my $Method      = $IDMap{$Key}->{Method};
+            my $MethodKey   = $IDMap{$Key}->{Key};
             my $Translation = $IDMap{$Key}->{Translation};
             my $Value;
 
@@ -1448,7 +1448,7 @@ sub Run {
                 Name => 'SearchTerms',
                 Data => {
                     Attribute => $DynamicFieldConfig->{Label},
-                    Value =>
+                    Value     =>
                         $DynamicFieldSearchDisplay{ 'DynamicField_' . $DynamicFieldConfig->{Name} },
                 },
             );
@@ -1624,7 +1624,7 @@ sub Run {
                     DynamicFieldConfig   => $DynamicFieldConfig,
                     Profile              => \%GetParam,
                     PossibleValuesFilter => $PossibleValuesFilter,
-                    DefaultValue =>
+                    DefaultValue         =>
                         $Config->{Defaults}->{DynamicField}
                         ->{ $DynamicFieldConfig->{Name} },
                     LayoutObject => $LayoutObject,
@@ -1699,10 +1699,10 @@ sub MaskForm {
 
     $Param{CustomerIDStrg} = $LayoutObject->BuildSelection(
         Data       => \%Customers,
-        Name       => 'CustomerID',
+        Name       => 'CustomerIDRaw',
         Multiple   => 1,
         Size       => 5,
-        SelectedID => $Param{CustomerID},
+        SelectedID => $Param{CustomerIDRaw},
         Class      => 'Modernize',
     );
 

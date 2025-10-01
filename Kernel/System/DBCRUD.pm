@@ -606,7 +606,7 @@ sub DataGet {
         if ( $Column->{DisableWhere} ) {
             $LogObject->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Do not use $ColumnParam for where conditions ('DisabledWhere' is set)! It should get excluded. Typical reason could be to prevent longblob columns in where conditions in case of an oracle system.",
             );
             return;
@@ -791,7 +791,7 @@ sub DataListGet {
         if ( $Column->{DisableWhere} ) {
             $LogObject->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Do not use $ColumnParam for where conditions ('DisabledWhere' is set)! It should get excluded. Typical reason could be to prevent longblob columns in where conditions in case of an oracle system.",
             );
             return;
@@ -988,7 +988,7 @@ sub DataSearch {
         if ( $Column->{DisableWhere} ) {
             $LogObject->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Do not use $ColumnParam for where conditions ('DisabledWhere' is set)! It should get excluded. Typical reason could be to prevent longblob columns in where conditions in case of an oracle system.",
             );
             return;
@@ -1184,7 +1184,7 @@ sub DataDelete {
         if ( $Column->{DisableWhere} ) {
             $LogObject->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Do not use $ColumnParam for where conditions ('DisabledWhere' is set)! It should get excluded. Typical reason could be to prevent longblob columns in where conditions in case of an oracle system.",
             );
             return;
@@ -1541,9 +1541,10 @@ sub DataCopy {
 
     delete $Data{ $Self->{Identifier} };
     delete $Data{CreateTime};
-    delete $Data{CreateBy};
     delete $Data{ChangeTime};
-    delete $Data{ChangeBy};
+
+    $Data{CreateBy} = $Param{UserID};
+    $Data{ChangeBy} = $Param{UserID};
 
     my $ObjectID = $Self->DataAdd(
         %Data,
@@ -1774,7 +1775,7 @@ sub CreateMissingUUIDDatabaseTableColumns {
         if ( !$UUIDColumnCreated ) {
             $LogObject->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Column $Self->{UUIDDatabaseTableColumnName} could not be created in database table $Self->{DatabaseTable}.",
             );
             return;
@@ -1874,7 +1875,7 @@ sub MigrateUUIDDatabaseTableColumns {
 
             $LogObject->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Error: Unable to execute SQL: $SQL",
             );
 

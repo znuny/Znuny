@@ -14,7 +14,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -49,7 +49,7 @@ sub Run {
             FirstResponseTime FirstResponseNotify UpdateTime      UpdateNotify
             SolutionTime      SolutionNotify
             Comment           ValidID
-            )
+        )
     );
 
     # get possible sign keys
@@ -745,7 +745,7 @@ sub _Edit {
         SelectedID   => $Param{SystemAddressID},
         PossibleNone => 1,                         # to avoid automatic assignments if the current SA is invalid
         Max          => 200,
-        Class => 'Modernize Validate_Required ' . ( $Param{Errors}->{'SystemAddressIDInvalid'} || '' ),
+        Class        => 'Modernize Validate_Required ' . ( $Param{Errors}->{'SystemAddressIDInvalid'} || '' ),
     );
 
     my %DefaultSignKeyList = ();
@@ -937,7 +937,7 @@ sub _Edit {
     if ($IsDirtyConfig) {
         $LayoutObject->Block(
             Name => 'QueueInSysConfigDirty',
-            ,
+
         );
     }
 

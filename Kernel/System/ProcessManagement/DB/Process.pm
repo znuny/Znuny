@@ -12,6 +12,8 @@ package Kernel::System::ProcessManagement::DB::Process;
 use strict;
 use warnings;
 
+use MIME::Base64;
+
 use Kernel::System::ProcessManagement::DB::Entity;
 use Kernel::System::ProcessManagement::DB::Activity;
 use Kernel::System::ProcessManagement::DB::ActivityDialog;
@@ -30,6 +32,7 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::User',
+    'Kernel::System::VirtualFS',
     'Kernel::System::YAML',
 );
 
@@ -73,6 +76,21 @@ sub new {
     if ( $Kernel::OM->Get('Kernel::System::DB')->GetDatabaseFunction('CaseSensitive') ) {
         $Self->{Lower} = 'LOWER';
     }
+
+    # preferences table data
+    $Self->{PreferencesTable}                = 'pm_process_preferences';
+    $Self->{PreferencesTableProcessEntityID} = 'process_entity_id';
+    $Self->{PreferencesTableKey}             = 'preferences_key';
+    $Self->{PreferencesTableValue}           = 'preferences_value';
+
+    # create cache prefix
+    $Self->{CachePrefix} = 'ProcessPreferences'
+        . $Self->{PreferencesTable}
+        . $Self->{PreferencesTableKey}
+        . $Self->{PreferencesTableValue}
+        . $Self->{PreferencesTableProcessEntityID};
+
+    $Self->{CacheType} = 'Process';
 
     return $Self;
 }
@@ -176,7 +194,7 @@ sub ProcessAdd {
             VALUES (?, ?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
             \$Param{EntityID}, \$Param{Name}, \$Param{StateEntityID}, \$Layout, \$Config,
-            \$Param{UserID}, \$Param{UserID},
+            \$Param{UserID},   \$Param{UserID},
         ],
     );
 
@@ -234,6 +252,10 @@ sub ProcessDelete {
     );
     return if !IsHashRefWithData($Process);
 
+    $Self->ProcessPreferencesDelete(
+        ProcessEntityID => $Process->{EntityID},
+    );
+
     # delete process
     return if !$Kernel::OM->Get('Kernel::System::DB')->Do(
         SQL  => 'DELETE FROM pm_process WHERE id = ?',
@@ -255,6 +277,7 @@ get Process attributes
     my $Process = $ProcessObject->ProcessGet(
         ID              => 123,          # ID or EntityID is needed
         EntityID        => 'P1',
+        Export          => 1,            # (optional) default 1 (0|1), if set to 1, the content of a file stored as preferences will be exported as Base64
         ActivityNames   => 1,            # default 0, 1 || 0, if 0 returns an Activities array
                                          #     with the activity entity IDs, if 1 returns an
                                          #     Activities hash with the activity entity IDs as
@@ -334,6 +357,8 @@ sub ProcessGet {
         );
         return;
     }
+
+    $Param{Preferences} = $Param{Preferences} || 1;
 
     my $ActivityNames = 0;
     if ( defined $Param{ActivityNames} && $Param{ActivityNames} == 1 ) {
@@ -550,6 +575,37 @@ sub ProcessGet {
         UserID   => 1,
     );
 
+    # get process preferences
+    if ( $Param{Preferences} ) {
+
+        my %PreferenceConfig = %{ $Kernel::OM->Get('Kernel::Config')->Get('ProcessPreferences') // {} };
+
+        # Create a new hash with the desired structure
+        my %NewPreferenceConfig;
+
+        # Iterate over the original hash
+        for my $Setting ( sort keys %PreferenceConfig ) {
+            my $PrefKey = $PreferenceConfig{$Setting}->{PrefKey};
+            $NewPreferenceConfig{$PrefKey} = {
+                'SettingName' => "ProcessPreferences###$Setting",
+                %{ $PreferenceConfig{$Setting} }
+            };
+        }
+
+        my %Preferences = $Self->ProcessPreferencesGet(
+            ProcessEntityID => $Data{EntityID},
+            Export          => $Param{Export},
+        );
+
+        # merge data
+        if (%Preferences) {
+            %Data = ( %Data, %Preferences );
+            for my $PreferenceKey ( sort keys %Preferences ) {
+                $Data{Config}->{Preferences}->{$PreferenceKey} = $NewPreferenceConfig{$PreferenceKey};
+            }
+        }
+    }
+
     # set cache
     $CacheObject->Set(
         Type  => 'ProcessManagement_Process',
@@ -690,7 +746,7 @@ sub ProcessUpdate {
             WHERE id = ?',
         Bind => [
             \$Param{EntityID}, \$Param{Name}, \$Param{StateEntityID}, \$Layout, \$Config,
-            \$Param{UserID}, \$Param{ID},
+            \$Param{UserID},   \$Param{ID},
         ],
     );
 
@@ -999,106 +1055,105 @@ Returns:
 
     $ProcessDump = '
         $Self->{'Process'} = {
-          'P1' => {
-            'Name' => 'Process 1',
-            'CreateTime' => '2012-07-21 08:11:33',
-            'ChangeTime' => '2012-07-21 08:11:33',
-            'Path' => {
-              'A1' => {
-                'T1' => {
-                  'Action' => [
-                    'TA1',
-                  ],
-              }
+            'P1' => {
+                'Name' => 'Process 1',
+                'CreateTime' => '2012-07-21 08:11:33',
+                'ChangeTime' => '2012-07-21 08:11:33',
+                'Path' => {
+                    'A1' => {
+                        'T1' => {
+                        'Action' => [
+                            'TA1',
+                        ],
+                    }
+                },
+                'StartActivity'       => 'A1',
+                'StartActivityDialog' => 'AD1',
+                'State'               => 'S1'
             },
-            'StartActivity' => 'A1',
-            'StartActivityDialog' => 'AD1',
-            'State' => 'S1'
-          },
-          # ...
+            # ...
         };
 
         $Self->{'Process::State'} = {
-          'S1' => 'Active',
-          'S2' => 'Inactive',
-          'S3' => 'FadeAway'
+            'S1' => 'Active',
+            'S2' => 'Inactive',
+            'S3' => 'FadeAway'
         };
 
         $Self->{'Process::Activity'} = {
-          'A1' => {
-            'Name' => 'Activity 1',
-            'CreateTime' => '2012-07-21 08:11:33',
-            'ChangeTime' => '2012-07-21 08:11:33',
-            'ActivityDialog' => {
-              '1' => 'AD1',
-              }
+            'A1' => {
+                'Name'           => 'Activity 1',
+                'CreateTime'     => '2012-07-21 08:11:33',
+                'ChangeTime'     => '2012-07-21 08:11:33',
+                'ActivityDialog' => {
+                    '1' => 'AD1',
+                }
             },
-          },
-          # ...
+            # ...
         };
 
         $Self->{'Process::ActivityDialog'} = {
-          'AD1' => {
-            'Name' => 'Activity Dialog 1',
-            'CreateTime' => '2012-07-21 08:11:33',
-            'ChangeTime' => '2012-07-21 08:11:33',
-            'DescriptionLong' => 'Longer description',
-            'DescriptionShort' => 'Short description',
-            'FieldOrder' => [
-              'StateID',
-              'DynamicField_Marke',
-            ],
-            'Fields' => {
-              'StateID' => {
-                'DefaultValue' => '1',
-                'DescriptionLong' => 'Longer description',
+            'AD1' => {
+                'Name'             => 'Activity Dialog 1',
+                'CreateTime'       => '2012-07-21 08:11:33',
+                'ChangeTime'       => '2012-07-21 08:11:33',
+                'DescriptionLong'  => 'Longer description',
                 'DescriptionShort' => 'Short description',
-                'Display' => '0'
-              },
-              'DynamicField_Marke' => {
-                'DescriptionLong' => 'Longer description',
-                'DescriptionShort' => 'Short description',
-                'Display' => '2'
-              },
-            },
+                'FieldOrder'       => [
+                    'StateID',
+                    'DynamicField_Marke',
+                ],
+                'Fields' => {
+                    'StateID' => {
+                        'DefaultValue'     => '1',
+                        'DescriptionLong'  => 'Longer description',
+                        'DescriptionShort' => 'Short description',
+                        'Display'          => '0'
+                    },
+                    'DynamicField_Marke' => {
+                        'DescriptionLong'  => 'Longer description',
+                        'DescriptionShort' => 'Short description',
+                        'Display'          => '2'
+                    },
+                },
             #...
         };
 
         $Self->{'Process::Transition'} = {
-          'T1' => {
-            'Name' => 'Transition 1',
-            'ChangeTime' => '2012-07-21 08:11:33',
-            'CreateTime' => '2012-07-21 08:11:33',
-            'Condition' => {
-              'Type' => 'and',
-              'Cond1' => {
-                'Fields' => {
-                  'DynamicField_Marke' => {
-                    'Match' => 'Teststring',
-                    'Type' => 'String',
-                  },
+            'T1' => {
+                'Name'       => 'Transition 1',
+                'ChangeTime' => '2012-07-21 08:11:33',
+                'CreateTime' => '2012-07-21 08:11:33',
+                'Condition'  => {
+                    'Type'  => 'and',
+                    'Cond1' => {
+                        'Fields' => {
+                            'DynamicField_Marke' => {
+                                'Match' => 'Teststring',
+                                'Type' => 'String',
+                            },
+                        },
+                        'Type' => 'and',
+                    },
                 },
-                'Type' => 'and',
-              },
             },
-          },
-          # ...
+            # ...
         };
 
         $Self->{'Process::Action'} = {
-          'TA1' => {
-            'Name' => 'Queue Move',
-            'CreateTime' => '2012-07-21 08:11:33',
-            'ChangeTime' => '2012-07-21 08:11:33',
-            'Module' => 'Kernel::System::Process::Transition::Action::QueueMove',
-            'Config' => {
-              'NewOwner' => 'root@localhost',
-              'TargetQueue' => 'Raw',
+            'TA1' => {
+                'Name'       => 'Queue Move',
+                'CreateTime' => '2012-07-21 08:11:33',
+                'ChangeTime' => '2012-07-21 08:11:33',
+                'Module'     => 'Kernel::System::Process::Transition::Action::QueueMove',
+                'Config'     => {
+                    'NewOwner'    => 'root@localhost',
+                    'TargetQueue' => 'Raw',
+                },
             },
-          },
-          # ...
+            # ...
         };
-     ';
+    ';
 
     my $ProcessDump = $ProcessObject->ProcessDump(
         ResultType  => 'HASH'                       # 'SCALAR' || 'HASH' || 'FILE'
@@ -1110,104 +1165,105 @@ Returns:
 
     $ProcessDump = {
         Process => {
-          'P1' => {
-            'Name' => 'Process 1',
-            'CreateTime' => '2012-07-21 08:11:33',
-            'ChangeTime' => '2012-07-21 08:11:33',
-            'Path' => {
-              'A1' => {
-                'T1' => {
-                  'Action' => [
-                    'TA1',
-                  ],
-              }
+            'P1' => {
+                'Name'       => 'Process 1',
+                'CreateTime' => '2012-07-21 08:11:33',
+                'ChangeTime' => '2012-07-21 08:11:33',
+                'Path'       => {
+                    'A1' => {
+                        'T1' => {
+                            'Action' => [
+                                'TA1',
+                            ],
+                        }
+                    },
+                    'StartActivity'       => 'A1',
+                    'StartActivityDialog' => 'AD1',
+                    'State'               => 'S1'
+                },
             },
-            'StartActivity' => 'A1',
-            'StartActivityDialog' => 'AD1',
-            'State' => 'S1'
-          },
-          # ...
+            # ...
         };
 
         State => {
-          'S1' => 'Active',
-          'S2' => 'Inactive',
-          'S3' => 'FadeAway'
+            'S1' => 'Active',
+            'S2' => 'Inactive',
+            'S3' => 'FadeAway'
         };
 
         Activity => {
-          'A1' => {
-            'Name' => 'Activity 1',
-            'CreateTime' => '2012-07-21 08:11:33',
-            'ChangeTime' => '2012-07-21 08:11:33',
-            'ActivityDialog' => {
-              '1' => 'AD1',
-              }
+            'A1' => {
+                'Name'           => 'Activity 1',
+                'CreateTime'     => '2012-07-21 08:11:33',
+                'ChangeTime'     => '2012-07-21 08:11:33',
+                'ActivityDialog' => {
+                    '1' => 'AD1',
+                }
             },
-          },
-          # ...
+            # ...
         };
 
         ActivityDialog => {
-          'AD1' => {
-            'Name' => 'Activity Dialog 1',
-            'CreateTime' => '2012-07-21 08:11:33',
-            'ChangeTime' => '2012-07-21 08:11:33',
-            'DescriptionLong' => 'Longer description',
-            'DescriptionShort' => 'Short description',
-            'FieldOrder' => [
-              'StateID',
-              'DynamicField_Marke',
-            ],
-            'Fields' => {
-              'StateID' => {
-                'DefaultValue' => '1',
-                'DescriptionLong' => 'Longer description',
+            'AD1' => {
+                'Name'             => 'Activity Dialog 1',
+                'CreateTime'       => '2012-07-21 08:11:33',
+                'ChangeTime'       => '2012-07-21 08:11:33',
+                'DescriptionLong'  => 'Longer description',
                 'DescriptionShort' => 'Short description',
-                'Display' => '0'
-              },
-              'DynamicField_Marke' => {
-                'DescriptionLong' => 'Longer description',
-                'DescriptionShort' => 'Short description',
-                'Display' => '2'
-              },
+                'FieldOrder'       => [
+                    'StateID',
+                    'DynamicField_Marke',
+                ],
+                'Fields' => {
+                    'StateID' => {
+                        'DefaultValue'     => '1',
+                        'DescriptionLong'  => 'Longer description',
+                        'DescriptionShort' => 'Short description',
+                        'Display'          => '0'
+                    },
+                    'DynamicField_Marke' => {
+                        'DescriptionLong'  => 'Longer description',
+                        'DescriptionShort' => 'Short description',
+                        'Display'          => '2'
+                    },
+                },
             },
             #...
         };
 
         Transition => {
-          'T1' => {
-            'Name' => 'Transition 1',
-            'ChangeTime' => '2012-07-21 08:11:33',
-            'CreateTime' => '2012-07-21 08:11:33',
-            'Condition' => {
-              'Type' => 'and',
-              'Cond1' => {
-                'Fields' => {
-                  'DynamicField_Marke' => {
-                    'Match' => 'Teststring',
-                    'Type' => 'String',
-                  },
+            'T1' => {
+                'Name'       => 'Transition 1',
+                'ChangeTime' => '2012-07-21 08:11:33',
+                'CreateTime' => '2012-07-21 08:11:33',
+                'Condition'  => {
+                    'Type'  => 'and',
+                    'Cond1' => {
+                        'Fields' => {
+                            'DynamicField_Marke' => {
+                                'Match' => 'Teststring',
+                                'Type'  => 'String',
+                            },
+                        },
+                        'Type' => 'and',
+                    },
                 },
-                'Type' => 'and',
-              },
             },
-          },
-          # ...
+            # ...
         };
 
         TransitionAction => {
-          'TA1' => {
-            'Name' => 'Queue Move',
-            'CreateTime' => '2012-07-21 08:11:33',
-            'ChangeTime' => '2012-07-21 08:11:33',
-            'Module' => 'Kernel::System::Process::Transition::Action::QueueMove',
-            'Config' => {
-              'NewOwner' => 'root@localhost',
-              'TargetQueue' => 'Raw',
+            'TA1' => {
+                'Name'       => 'Queue Move',
+                'CreateTime' => '2012-07-21 08:11:33',
+                'ChangeTime' => '2012-07-21 08:11:33',
+                'Module'     => 'Kernel::System::Process::Transition::Action::QueueMove',
+                'Config'     => {
+                    'NewOwner'    => 'root@localhost',
+                    'TargetQueue' => 'Raw',
+                },
             },
-          },
-          # ...
+            # ...
         };
     }
 
@@ -1218,6 +1274,7 @@ Returns:
     );
 
 Returns:
+
     $ProcessDump = '/opt/znuny/var/myfile.txt';      # or undef if can't write the file
 
 =cut
@@ -1268,9 +1325,9 @@ sub ProcessDump {
             ChangeTime          => $ProcessData->{ChangeTime},
             StateEntityID       => $ProcessData->{StateEntityID},
             State               => $ProcessData->{State},
-            StartActivity       => $ProcessData->{Config}->{StartActivity} || '',
+            StartActivity       => $ProcessData->{Config}->{StartActivity}       || '',
             StartActivityDialog => $ProcessData->{Config}->{StartActivityDialog} || '',
-            Path                => $ProcessData->{Config}->{Path} || {},
+            Path                => $ProcessData->{Config}->{Path}                || {},
         };
     }
 
@@ -1307,13 +1364,13 @@ sub ProcessDump {
             Name             => $ActivityDialogData->{Name},
             CreateTime       => $ActivityDialogData->{CreateTime},
             ChangeTime       => $ActivityDialogData->{ChangeTime},
-            Interface        => $ActivityDialogData->{Config}->{Interface} || '',
+            Interface        => $ActivityDialogData->{Config}->{Interface}        || '',
             DescriptionShort => $ActivityDialogData->{Config}->{DescriptionShort} || '',
-            DescriptionLong  => $ActivityDialogData->{Config}->{DescriptionLong} || '',
-            Fields           => $ActivityDialogData->{Config}->{Fields} || {},
-            FieldOrder       => $ActivityDialogData->{Config}->{FieldOrder} || [],
-            Permission       => $ActivityDialogData->{Config}->{Permission} || '',
-            RequiredLock     => $ActivityDialogData->{Config}->{RequiredLock} || '',
+            DescriptionLong  => $ActivityDialogData->{Config}->{DescriptionLong}  || '',
+            Fields           => $ActivityDialogData->{Config}->{Fields}           || {},
+            FieldOrder       => $ActivityDialogData->{Config}->{FieldOrder}       || [],
+            Permission       => $ActivityDialogData->{Config}->{Permission}       || '',
+            RequiredLock     => $ActivityDialogData->{Config}->{RequiredLock}     || '',
             SubmitAdviceText => $ActivityDialogData->{Config}->{SubmitAdviceText} || '',
             SubmitButtonText => $ActivityDialogData->{Config}->{SubmitButtonText} || '',
         };
@@ -1333,7 +1390,7 @@ sub ProcessDump {
             Name             => $TransitionData->{Name},
             CreateTime       => $TransitionData->{CreateTime},
             ChangeTime       => $TransitionData->{ChangeTime},
-            Condition        => $TransitionData->{Config}->{Condition} || {},
+            Condition        => $TransitionData->{Config}->{Condition}        || {},
             ConditionLinking => $TransitionData->{Config}->{ConditionLinking} || '',
         };
     }
@@ -1462,6 +1519,160 @@ EOF
     }
 }
 
+=head2 ProcessExport()
+
+export single process
+
+    my $ExportProcess = $ProcessObject->ProcessExport(
+        ID                       => $ProcessID, # required
+        UserID                   => 1,          # required
+    );
+
+Returns:
+
+    $ExportProcess = {
+        'Process' => {
+            'Name' => 'Application for leave',
+            'ChangeTime' => '2024-07-10 10:52:23',
+            'EntityID' => 'Process-9690ae9ae455d8614d570149b8ab1199',
+            'Config' => {
+                'StartActivityDialog' => 'ActivityDialog-99866d267c0dc899e88db99d14a11f23',
+                'Description' => 'Application for leave',
+                'Path' => {
+                ...
+            },
+            ...
+        },
+        'Transitions' => {
+            'Transition-cfef609c67c32c11e48c560536ba6b51' => {
+                'CreateTime' => '2024-06-20 09:21:34',
+                'ChangeTime' => '2024-06-20 09:21:34',
+                'Name' => 'RequestSubmitted',
+                ...
+            },
+            ...
+        },
+        'Activities' => {
+            'Activity-0e102c168616125a4582ed57039e8adc' => {
+                'CreateTime' => '2024-06-20 09:21:34',
+                'ChangeTime' => '2024-06-20 09:21:34',
+                'Name' => 'File Request',
+                ...
+            },
+            ...
+        },
+        'TransitionActions' => {
+            'TransitionAction-5fad14be3c31ae919bef7d19ee8f4a37' => {
+                'CreateTime' => '2024-06-20 09:21:34',
+                'ChangeTime' => '2024-06-20 09:21:34',
+                'Name' => 'Set state = pending reminder (+7d)',
+                ...
+            },
+            ...
+        },
+        'ActivityDialogs' => {
+            'ActivityDialog-99866d267c0dc899e88db99d14a11f23' => {
+                'CreateTime' => '2024-06-20 09:21:34',
+                'ChangeTime' => '2024-07-24 13:59:16',
+                'Name' => 'Recording the Application for leave',
+                ...
+            },
+            ...
+        },
+    };
+
+=cut
+
+sub ProcessExport {
+
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    # get process data
+    my $Process = $Self->ProcessGet(
+        ID     => $Param{ID},
+        UserID => $Param{UserID},
+        Export => 1,
+    );
+
+    return if !$Process;
+
+    my %ProcessData = (
+        Process => $Process,
+    );
+
+    # get all used activities
+    for my $ActivityEntityID ( @{ $Process->{Activities} } ) {
+
+        my $Activity = $Self->{ActivityObject}->ActivityGet(
+            EntityID => $ActivityEntityID,
+            UserID   => $Param{UserID},
+        );
+        $ProcessData{Activities}->{$ActivityEntityID} = $Activity;
+
+        # get all used activity dialogs
+        for my $ActivityDialogEntityID ( @{ $Activity->{ActivityDialogs} } ) {
+
+            my $ActivityDialog = $Self->{ActivityDialogObject}->ActivityDialogGet(
+                EntityID => $ActivityDialogEntityID,
+                UserID   => $Param{UserID},
+            );
+            $ProcessData{ActivityDialogs}->{$ActivityDialogEntityID} = $ActivityDialog;
+        }
+    }
+
+    # get all used transitions
+    for my $TransitionEntityID ( @{ $Process->{Transitions} } ) {
+
+        my $Transition = $Self->{TransitionObject}->TransitionGet(
+            EntityID => $TransitionEntityID,
+            UserID   => $Param{UserID},
+        );
+        $ProcessData{Transitions}->{$TransitionEntityID} = $Transition;
+    }
+
+    # get all used transition actions
+    for my $TransitionActionEntityID ( @{ $Process->{TransitionActions} } ) {
+
+        my $TransitionAction = $Self->{TransitionActionObject}->TransitionActionGet(
+            EntityID => $TransitionActionEntityID,
+            UserID   => $Param{UserID},
+        );
+        $ProcessData{TransitionActions}->{$TransitionActionEntityID} = $TransitionAction;
+    }
+
+    return \%ProcessData;
+}
+
+=head2 ProcessExportFilenameGet()
+
+get export file name based on process entity name
+
+    my $Filename = $ProcessObject->ProcessExportFilenameGet(
+        Name   => 'Process_1',
+        Format => 'YAML',
+    );
+
+=cut
+
+sub ProcessExportFilenameGet {
+    my ( $Self, %Param ) = @_;
+
+    my $Extension = '';
+    if ( $Param{Format} =~ /yml|yaml/i ) {
+        $Extension = '.yaml';
+    }
+    return "Export_Process$Extension" if !$Param{Name};
+
+    my $DisplayName = 'Export_Process_' . $Param{Name};
+    $DisplayName =~ s{[^a-zA-Z0-9-_]}{_}xmsg;
+    $DisplayName =~ s{_{2,}}{_}g;
+    $DisplayName =~ s{_$}{};
+
+    return "$DisplayName$Extension";
+}
+
 =head2 ProcessImport()
 
 import a process YAML file/content
@@ -1485,6 +1696,8 @@ Returns:
 sub ProcessImport {
     my ( $Self, %Param ) = @_;
 
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
     for my $Needed (qw(Content UserID)) {
 
         # check needed stuff
@@ -1497,7 +1710,9 @@ sub ProcessImport {
         }
     }
 
-    my $ProcessData = $Kernel::OM->Get('Kernel::System::YAML')->Load( Data => $Param{Content} );
+    my $ProcessData       = $Kernel::OM->Get('Kernel::System::YAML')->Load( Data => $Param{Content} );
+    my $ImportProcessData = $ProcessData;
+
     if ( ref $ProcessData ne 'HASH' ) {
         return (
             Message =>
@@ -1785,6 +2000,9 @@ sub ProcessImport {
         }
     }
 
+    # Get Process Preferences keys (Process->Config->Preferences)
+    my $PreferencesConfig = $ConfigObject->Get('ProcessPreferences');
+
     # update all entities with real data
     # update process
     for my $ProcessEntityID ( sort keys %{ $EntityMapping{Process} } ) {
@@ -1797,6 +2015,72 @@ sub ProcessImport {
             ID     => $Process->{ID},
             UserID => $Param{UserID},
         );
+
+        # Add ProcessPreferences if they are defined in the config and exist in export.
+        if (
+            IsHashRefWithData($PreferencesConfig)
+            && IsHashRefWithData( $ImportProcessData->{Process}->{Config}->{Preferences} )
+            )
+        {
+            PREFERENCEKEY:
+            for my $PreferenceKey ( sort keys %{ $ImportProcessData->{Process}->{Config}->{Preferences} } ) {
+                my %PreferenceConfig = %{ $ImportProcessData->{Process}->{Config}->{Preferences}->{$PreferenceKey} };
+
+                next PREFERENCEKEY if !$ImportProcessData->{Process}->{$PreferenceKey};
+
+                if ( $Param{OverwriteExistingEntities} ) {
+
+                    # Delete preference
+                    $Self->ProcessPreferencesDelete(
+                        ProcessEntityID => $ImportProcessData->{Process}->{EntityID},
+                        Key             => $PreferenceKey,
+                    );
+                }
+
+                my @PreferenceValues;
+
+                # Check if the preference is a single value or an array
+                if ( IsStringWithData( $ImportProcessData->{Process}->{$PreferenceKey} ) ) {
+                    @PreferenceValues = $ImportProcessData->{Process}->{$PreferenceKey};
+                }
+                elsif ( IsArrayRefWithData( $ImportProcessData->{Process}->{$PreferenceKey} ) ) {
+                    @PreferenceValues = @{ $ImportProcessData->{Process}->{$PreferenceKey} };
+                }
+
+                for my $Value (@PreferenceValues) {
+                    if ( $PreferenceConfig{Block} eq 'File' ) {
+                        my %File;
+
+                        # Decode the file content
+                        $File{Content}     = decode_base64( $Value->{Content} );
+                        $File{Preferences} = $Value->{Preferences};
+
+                        # To store the file in the VirtualFS, we need to create a unique filename
+                        # $Filename = StorageID::ProcessEntityID::PrefKey::Filename;
+                        my $Filename = 'VirtualFS::'
+                            . $ProcessData->{Process}->{EntityID} . '::'
+                            . $PreferenceKey . '::'
+                            . $File{Preferences}->{Filename};
+
+                        $Kernel::OM->Get('Kernel::System::VirtualFS')->Write(
+                            Content     => \$File{Content},
+                            Filename    => $Filename,
+                            Mode        => 'binary',
+                            Preferences => $File{Preferences},
+                        );
+
+                        $Value = $Filename;
+                    }
+
+                    $Self->ProcessPreferencesSet(
+                        ProcessEntityID => $ProcessData->{Process}->{EntityID},
+                        Key             => $PreferenceKey,
+                        Value           => $Value,
+                    );
+                }
+            }
+        }
+
         if ( !$Success ) {
             return $Self->_ProcessImportRollBack(
                 AddedEntityIDs => \%AddedEntityIDs,
@@ -1842,6 +2126,260 @@ sub ProcessImport {
         ),
         Success => 1,
     );
+}
+
+=head2 ProcessPreferencesSet()
+
+Sets process preferences.
+
+    $ProcessObject->ProcessPreferencesSet(
+        ProcessEntityID => 123,
+        Key             => 'UserComment',
+        Value           => 'some comment',
+    );
+
+=cut
+
+sub ProcessPreferencesSet {
+    my ( $Self, %Param ) = @_;
+
+    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
+    my $DBObject    = $Kernel::OM->Get('Kernel::System::DB');
+    my $LogObject   = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(ProcessEntityID Key Value)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Need $Needed!",
+        );
+        return;
+    }
+
+    my $ProcessList = $Self->ProcessList(
+        UseEntities => 1,
+        UserID      => 1,
+    );
+
+    if ( !$ProcessList->{ $Param{ProcessEntityID} } ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "ProcessEntityID $Param{ProcessEntityID} not exists!",
+        );
+        return;
+    }
+
+    # insert new data
+    return if !$DBObject->Do(
+        SQL => "INSERT INTO $Self->{PreferencesTable} ($Self->{PreferencesTableProcessEntityID}, "
+            . " $Self->{PreferencesTableKey}, $Self->{PreferencesTableValue}) "
+            . " VALUES (?, ?, ?)",
+        Bind => [ \$Param{ProcessEntityID}, \$Param{Key}, \$Param{Value} ],
+    );
+
+    # delete cache
+    $CacheObject->Delete(
+        Type => $Self->{CacheType},
+        Key  => $Self->{CachePrefix} . $Param{ProcessEntityID},
+    );
+
+    return 1;
+}
+
+=head2 ProcessPreferencesGet()
+
+Gets process preferences.
+
+    my %Preferences = $ProcessObject->ProcessPreferencesGet(
+        ProcessEntityID => 123,
+        Export          => 1,       # (optional) default 1 (0|1), if set to 1, the content of a file stored as preferences will be exported as Base64
+    );
+
+Return:
+
+    my %Preferences = (
+        'UserComment' => 'some comment',
+    );
+
+=cut
+
+sub ProcessPreferencesGet {
+    my ( $Self, %Param ) = @_;
+
+    my $CacheObject     = $Kernel::OM->Get('Kernel::System::Cache');
+    my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+    my $DBObject        = $Kernel::OM->Get('Kernel::System::DB');
+    my $LogObject       = $Kernel::OM->Get('Kernel::System::Log');
+    my $VirtualFSObject = $Kernel::OM->Get('Kernel::System::VirtualFS');
+
+    NEEDED:
+    for my $Needed (qw(ProcessEntityID)) {
+        next NEEDED if $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Need $Needed!",
+        );
+        return;
+    }
+
+    # check if process preferences are available
+    my $PreferencesConfig = $ConfigObject->Get('ProcessPreferences');
+    return if !$PreferencesConfig;
+
+    # return cache
+    my $Cache = $CacheObject->Get(
+        Type => $Self->{CacheType},
+        Key  => $Self->{CachePrefix} . $Param{ProcessEntityID},
+    );
+    return %{$Cache} if $Cache;
+
+    # get preferences
+    return if !$DBObject->Prepare(
+        SQL => "SELECT $Self->{PreferencesTableKey}, $Self->{PreferencesTableValue} "
+            . " FROM $Self->{PreferencesTable} WHERE $Self->{PreferencesTableProcessEntityID} = ?",
+        Bind => [ \$Param{ProcessEntityID} ],
+    );
+
+    my %Data;
+    while ( my @Row = $DBObject->FetchrowArray() ) {
+
+        if ( !$Data{ $Row[0] } ) {
+            $Data{ $Row[0] } = $Row[1];
+        }
+        else {
+
+            # create an array if we have more than one value for a preference
+            if ( !IsArrayRefWithData( $Data{ $Row[0] } ) ) {
+                my $Value = $Data{ $Row[0] };
+                delete $Data{ $Row[0] };
+                push @{ $Data{ $Row[0] } }, $Value;
+            }
+
+            push @{ $Data{ $Row[0] } }, $Row[1];
+        }
+    }
+
+    return %Data if !%Data;
+
+    if ( IsHashRefWithData($PreferencesConfig) ) {
+        PREFERENCE:
+        for my $Preference ( sort keys %{$PreferencesConfig} ) {
+
+            next PREFERENCE if $PreferencesConfig->{$Preference}->{Block} ne 'File';
+
+            my $PrefKey = $PreferencesConfig->{$Preference}->{PrefKey};
+
+            if ( !IsArrayRefWithData( $Data{$PrefKey} ) ) {
+                my $Value = $Data{$PrefKey};
+                next PREFERENCE if !$Value;
+                next PREFERENCE if !IsStringWithData($Value);
+
+                $Data{$PrefKey} = [$Value];
+            }
+
+            my %Files;
+            FILE:
+            for my $Filename ( @{ $Data{$PrefKey} } ) {
+
+                my %File = $VirtualFSObject->Read(
+                    Filename => $Filename,
+                    Mode     => 'binary',
+                );
+                next FILE if !IsHashRefWithData( $File{Preferences} );
+
+                # If set to 1, the content of a file stored as preferences will be exported as Base64
+                if ( $Param{Export} ) {
+                    $File{Content} = encode_base64( ${ $File{Content} } );
+                }
+
+                push @{ $Files{$PrefKey} }, \%File;
+            }
+
+            $Data{$PrefKey} = $Files{$PrefKey};
+        }
+    }
+
+    # set cache
+    $CacheObject->Set(
+        Type  => $Self->{CacheType},
+        TTL   => $Self->{CacheTTL},
+        Key   => $Self->{CachePrefix} . $Param{ProcessEntityID},
+        Value => \%Data,
+    );
+
+    return %Data;
+}
+
+=head2 ProcessPreferencesDelete()
+
+Deletes process preferences.
+
+    $ProcessObject->ProcessPreferencesDelete(
+        ProcessEntityID => 123,
+        Key             => 'UserComment',   # optional
+    );
+
+=cut
+
+sub ProcessPreferencesDelete {
+    my ( $Self, %Param ) = @_;
+
+    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
+    my $DBObject    = $Kernel::OM->Get('Kernel::System::DB');
+    my $LogObject   = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(ProcessEntityID)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Need $Needed!",
+        );
+        return;
+    }
+
+    my $ProcessList = $Self->ProcessList(
+        UseEntities => 1,
+        UserID      => 1,
+    );
+
+    if ( !$ProcessList->{ $Param{ProcessEntityID} } ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "ProcessEntityID $Param{ProcessEntityID} not exists!",
+        );
+        return;
+    }
+
+    if ( $Param{Key} ) {
+
+        # delete old data
+        return if !$DBObject->Do(
+            SQL => "DELETE FROM $Self->{PreferencesTable} WHERE "
+                . "$Self->{PreferencesTableProcessEntityID} = ? AND $Self->{PreferencesTableKey} = ?",
+            Bind => [ \$Param{ProcessEntityID}, \$Param{Key} ],
+        );
+    }
+    else {
+        # delete old data
+        return if !$DBObject->Do(
+            SQL => "DELETE FROM $Self->{PreferencesTable} WHERE "
+                . "$Self->{PreferencesTableProcessEntityID} = ?",
+            Bind => [ \$Param{ProcessEntityID} ],
+        );
+    }
+
+    # delete cache
+    $CacheObject->Delete(
+        Type => $Self->{CacheType},
+        Key  => $Self->{CachePrefix} . $Param{ProcessEntityID},
+    );
+
+    return 1;
 }
 
 sub _ProcessItemOutput {

@@ -92,8 +92,10 @@ Runs TransitionAction ArticleSend.
             Queue   => 'Misc',                                                     # optional, use system address of queue as "From" parameter
             QueueID => 123,                                                        # optional, use system address of queue id as "From" parameter
 
-            Attachments   => 'Attachment 1, Attachment 2, Attachment 3',           # Add attachment of the admin interface for the ArticleSend
-            AttachmentIDs => '15,34,42',                                           # Add attachment ids of the admin interface for the ArticleSend
+            # Attachment optional:
+            Attachments      => 'StdAttachmentName1,StdAttachmentName2',           # optional, comma separated StandardAttachment Names
+            AttachmentIDs    => '1,2,3',                                           # optional, comma separated StandardAttachment ID
+            AttachmentsReuse => 1                                                  # optional, 1|0 - Reuse of attachments stored in the dynamic field configured in Process::DynamicFieldProcessManagementAttachment.
 
             Template   => 'Template 1',                                            # Use template to replace in Body by Tag <OTRS_TA_TEMPLATE>
             TemplateID => 1,                                                       # Use template id to replace in Body by Tag <OTRS_TA_TEMPLATE>
@@ -127,6 +129,7 @@ sub Run {
     my $StdAttachmentObject     = $Kernel::OM->Get('Kernel::System::StdAttachment');
     my $TemplateGeneratorObject = $Kernel::OM->Get('Kernel::System::TemplateGenerator');
     my $TicketObject            = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $LogObject               = $Kernel::OM->Get('Kernel::System::Log');
 
     # define a common message to output in case of any error
     my $CommonMessage = "Process: $Param{ProcessEntityID} Activity: $Param{ActivityEntityID}"
@@ -183,6 +186,19 @@ sub Run {
                 ID => $ID,
             );
             next ATTACHMENT if !%Data;
+
+            if ( $Data{ValidID} != 1 ) {
+                $LogObject->Log(
+                    Priority => 'error',
+                    Message  => $CommonMessage
+                        . 'Attachment (ID: '
+                        . $ID
+                        . ', Name: '
+                        . $Data{Name}
+                        . ') is invalid. Skip Attachment!',
+                );
+                next ATTACHMENT;
+            }
 
             push @{ $Param{Config}->{Attachment} }, {
                 Content     => $Data{Content},
@@ -384,7 +400,7 @@ sub FromGet {
         else {
             $LogObject->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Configured 'From' address '$Param{Config}->{From}' for transition action is not a system address. Replaced by default queue system address.",
             );
 

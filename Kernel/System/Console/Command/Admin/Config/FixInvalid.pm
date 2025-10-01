@@ -12,7 +12,7 @@ package Kernel::System::Console::Command::Admin::Config::FixInvalid;
 use strict;
 use warnings;
 
-use parent qw(Kernel::System::Console::BaseCommand);
+use parent                        qw(Kernel::System::Console::BaseCommand);
 use Kernel::System::VariableCheck qw( :all );
 
 our @ObjectDependencies = (
@@ -34,7 +34,7 @@ sub Configure {
     );
 
     $Self->AddOption(
-        Name => 'values-from-path',
+        Name        => 'values-from-path',
         Description =>
             "Read values for invalid settings from a YAML file instead of user input (takes precedence in non-interactive mode).",
         Required   => 0,

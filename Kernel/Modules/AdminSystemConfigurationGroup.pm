@@ -14,7 +14,7 @@ use warnings;
 
 our $ObjectManagerDisabled = 1;
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 sub new {
@@ -432,7 +432,7 @@ sub Run {
 
         my $ParamObject    = $Kernel::OM->Get('Kernel::System::Web::Request');
         my $RootNavigation = $ParamObject->GetParam( Param => 'RootNavigation' ) || '';
-        my $Category       = $ParamObject->GetParam( Param => 'Category' ) || '';
+        my $Category       = $ParamObject->GetParam( Param => 'Category' )       || '';
         $Category = $Category eq 'All' ? '' : $Category;
 
         # Get all settings by navigation group
@@ -486,11 +486,16 @@ sub Run {
             }
         }
 
+        my @Path = $SysConfigObject->SettingNavigationToPath(
+            Navigation => $RootNavigation,
+        );
+
         my $Output = $LayoutObject->Output(
             TemplateFile => 'SystemConfiguration/SettingsList',
             Data         => {
                 SettingList => \@SettingList,
-                ConfigLevel => $ConfigLevel
+                ConfigLevel => $ConfigLevel,
+                Path        => \@Path,
             },
         );
 
@@ -562,7 +567,7 @@ sub Run {
 
         my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
         my $SettingName = $ParamObject->GetParam( Param => 'SettingName' ) || '';
-        my $Key         = $ParamObject->GetParam( Param => 'Key' ) || '';
+        my $Key         = $ParamObject->GetParam( Param => 'Key' )         || '';
 
         my $IDSuffix  = $ParamObject->GetParam( Param => 'IDSuffix' )  || '';
         my $Structure = $ParamObject->GetParam( Param => 'Structure' ) || '';

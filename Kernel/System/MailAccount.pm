@@ -12,6 +12,8 @@ package Kernel::System::MailAccount;
 use strict;
 use warnings;
 
+use utf8;
+
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::DB',
@@ -123,9 +125,9 @@ sub MailAccountAdd {
         return;
     }
 
-    # only set IMAP folder on IMAP type accounts
+    # only set folder on IMAP and MSGraph accounts
     # fallback to 'INBOX' if none given
-    if ( $Param{Type} =~ m{ IMAP .* }xmsi ) {
+    if ( $Param{Type} =~ m{\A(?:IMAP|MSGraph)}i ) {
         if ( !defined $Param{IMAPFolder} || !$Param{IMAPFolder} ) {
             $Param{IMAPFolder} = 'INBOX';
         }
@@ -144,10 +146,10 @@ sub MailAccountAdd {
             . ' imap_folder, trusted, authentication_type, oauth2_token_config_id, create_time, create_by, change_time, change_by)'
             . ' VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
-            \$Param{Login},   \$Param{Password}, \$Param{Host},    \$Param{Type},
-            \$Param{ValidID}, \$Param{Comment},  \$Param{QueueID}, \$Param{IMAPFolder},
+            \$Param{Login},   \$Param{Password},           \$Param{Host},    \$Param{Type},
+            \$Param{ValidID}, \$Param{Comment},            \$Param{QueueID}, \$Param{IMAPFolder},
             \$Param{Trusted}, \$Param{AuthenticationType}, \$Param{OAuth2TokenConfigID},
-            \$Param{UserID}, \$Param{UserID},
+            \$Param{UserID},  \$Param{UserID},
         ],
     );
 
@@ -249,9 +251,9 @@ sub MailAccountGetAll {
             $Data{DispatchingBy} = 'Queue';
         }
 
-        # only return IMAP folder on IMAP type accounts
+        # only return folder on IMAP and MSGraph accounts
         # fallback to 'INBOX' if none given
-        if ( $Data{Type} =~ m{ IMAP .* }xmsi ) {
+        if ( $Data{Type} =~ m{\A(?:IMAP|MSGraph)}i ) {
             if ( defined $Data{IMAPFolder} && !$Data{IMAPFolder} ) {
                 $Data{IMAPFolder} = 'INBOX';
             }
@@ -317,7 +319,7 @@ sub MailAccountGet {
 
     # check cache
     my $CacheKey = join '::', 'MailAccountGet', 'ID', $Param{ID};
-    my $Cache = $Kernel::OM->Get('Kernel::System::Cache')->Get(
+    my $Cache    = $Kernel::OM->Get('Kernel::System::Cache')->Get(
         Type => $Self->{CacheType},
         Key  => $CacheKey,
     );
@@ -361,9 +363,9 @@ sub MailAccountGet {
         $Data{DispatchingBy} = 'Queue';
     }
 
-    # only return IMAP folder on IMAP type accounts
+    # only return folder on IMAP and MSGraph accounts
     # fallback to 'INBOX' if none given
-    if ( $Data{Type} =~ m{ IMAP .* }xmsi ) {
+    if ( $Data{Type} =~ m{\A(?:IMAP|MSGraph)}i ) {
         if ( defined $Data{IMAPFolder} && !$Data{IMAPFolder} ) {
             $Data{IMAPFolder} = 'INBOX';
         }
@@ -444,9 +446,9 @@ sub MailAccountUpdate {
         return;
     }
 
-    # only set IMAP folder on IMAP type accounts
+    # only set folder on IMAP and MSGraph accounts
     # fallback to 'INBOX' if none given
-    if ( $Param{Type} =~ m{ IMAP .* }xmsi ) {
+    if ( $Param{Type} =~ m{\A(?:IMAP|MSGraph)}i ) {
         if ( !defined $Param{IMAPFolder} || !$Param{IMAPFolder} ) {
             $Param{IMAPFolder} = 'INBOX';
         }
@@ -462,10 +464,10 @@ sub MailAccountUpdate {
             . ' valid_id = ?, change_time = current_timestamp, '
             . ' change_by = ?, queue_id = ? WHERE id = ?',
         Bind => [
-            \$Param{Login}, \$Param{Password}, \$Param{Host}, \$Param{Type},
-            \$Param{Comment}, \$Param{IMAPFolder}, \$Param{Trusted},
+            \$Param{Login},              \$Param{Password},   \$Param{Host}, \$Param{Type},
+            \$Param{Comment},            \$Param{IMAPFolder}, \$Param{Trusted},
             \$Param{AuthenticationType}, \$Param{OAuth2TokenConfigID},
-            \$Param{ValidID}, \$Param{UserID}, \$Param{QueueID}, \$Param{ID},
+            \$Param{ValidID},            \$Param{UserID}, \$Param{QueueID}, \$Param{ID},
         ],
     );
 
@@ -528,7 +530,7 @@ sub MailAccountList {
 
     # check cache
     my $CacheKey = join '::', 'MailAccountList', ( $Param{Valid} ? 'Valid::1' : '' );
-    my $Cache = $Kernel::OM->Get('Kernel::System::Cache')->Get(
+    my $Cache    = $Kernel::OM->Get('Kernel::System::Cache')->Get(
         Type => $Self->{CacheType},
         Key  => $CacheKey,
     );
@@ -616,6 +618,7 @@ fetch emails by using backend
         Trusted       => 0,
         DispatchingBy => 'Queue',   # Queue|From
         QueueID       => 12,
+        CMD           => 1, # optional: Print additional output of MailAccount module to STDOUT
         UserID        => 123,
     );
 

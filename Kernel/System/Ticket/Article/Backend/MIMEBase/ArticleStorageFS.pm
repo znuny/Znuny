@@ -12,9 +12,9 @@ package Kernel::System::Ticket::Article::Backend::MIMEBase::ArticleStorageFS;
 use strict;
 use warnings;
 
-use File::Path qw();
-use MIME::Base64 qw();
-use Time::HiRes qw();
+use File::Path         qw();
+use MIME::Base64       qw();
+use Time::HiRes        qw();
 use Unicode::Normalize qw();
 
 use parent qw(Kernel::System::Ticket::Article::Backend::MIMEBase::Base);
@@ -323,7 +323,8 @@ sub ArticleWriteAttachment {
     my $NewFileName = $Param{Filename};
     my %UsedFile;
     my %Index = $Self->ArticleAttachmentIndex(
-        ArticleID => $Param{ArticleID},
+        ArticleID     => $Param{ArticleID},
+        OnlyMyBackend => 1,
     );
 
     # Normalize filenames to find file names which are identical but in a different unicode form.

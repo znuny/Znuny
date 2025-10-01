@@ -74,7 +74,7 @@ sub Run {
         if ( $Self->{Debug} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'debug',
-                Message =>
+                Message  =>
                     "Send not escalation for Ticket $Ticket{TicketNumber}/$Ticket{TicketID} because currently no working hours!",
             );
         }
@@ -114,7 +114,7 @@ sub Run {
         # search in reverse order, as @HistoryLines sorted ascendingly by CreateTime
         if ($DecayTimeInSeconds) {
             my $PrevEventLine = first { $_->{HistoryType} eq $TicketAttr2Event{$Attr} }
-            reverse @HistoryLines;
+                reverse @HistoryLines;
             if ( $PrevEventLine && $PrevEventLine->{CreateTime} ) {
 
                 my $PrevEventTime = $Kernel::OM->Create(

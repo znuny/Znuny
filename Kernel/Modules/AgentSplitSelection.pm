@@ -16,7 +16,7 @@ use Mail::Address;
 
 our $ObjectManagerDisabled = 1;
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 sub new {

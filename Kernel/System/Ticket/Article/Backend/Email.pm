@@ -108,7 +108,7 @@ sub ArticleGetByMessageID {
     if ( $Count > 1 ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'notice',
-            Message =>
+            Message  =>
                 "The MessageID '$Param{MessageID}' is in your database more than one time! That should not happen, since 'a message_id' should be unique!",
         );
         return;
@@ -289,6 +289,30 @@ sub ArticleSend {
         MessageID => $MessageID,
     );
     return if !$ArticleID;
+
+    # Set X-Priority email header based on configured ticket priority mapping
+    if ( $Param{SenderType} eq 'agent' || $Param{SenderType} eq 'system' ) {
+        my $PriorityEmailMapping = $ConfigObject->Get('PriorityEmailMapping') || {};
+        my $HeaderPriority;
+
+        my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+        my %Ticket       = $TicketObject->TicketGet(
+            TicketID => $Param{TicketID},
+            UserID   => 1,
+        );
+
+        if (
+            $PriorityEmailMapping->{ $Param{SenderType} }
+            && $PriorityEmailMapping->{ $Param{SenderType} }->{ $Ticket{Priority} }
+            )
+        {
+            $HeaderPriority = $PriorityEmailMapping->{ $Param{SenderType} }->{ $Ticket{Priority} };
+        }
+
+        if ( $HeaderPriority && $HeaderPriority =~ m{^\d$} ) {
+            $Param{CustomHeaders}->{'X-Priority'} = $HeaderPriority;
+        }
+    }
 
     # Send the mail
     my $Result = $Kernel::OM->Get('Kernel::System::Email')->Send(

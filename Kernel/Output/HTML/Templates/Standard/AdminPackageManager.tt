@@ -499,6 +499,7 @@
                                 <th>[% Translate("Version") | html %]</th>
                                 <th>[% Translate("Vendor") | html %]</th>
                                 <th class="W40pc">[% Translate("Description") | html %]</th>
+                                <th>[% Translate("Configure") | html %]</th>
                                 <th>[% Translate("Status") | html %]</th>
                                 <th>[% Translate("Action") | html %]</th>
                             </tr>
@@ -524,6 +525,11 @@
                                 <td>[% Data.Version | html %]</td>
                                 <td><a href="[% Data.URL %]" target="_blank">[% Data.Vendor | html %]</a></td>
                                 <td title="[% Data.Description | html %]">[% Data.Description | truncate(55) | html %]</td>
+                                <td>
+                                    [% IF Data.SysConfigLink %]
+                                    <a href="[% Data.SysConfigLink %]" target="_blank">[% Translate('Settings') | html %]</a>
+                                    [% END %]
+                                </td>
                                 <td>[% Translate(Data.Status) | html %]</td>
                                 <td>
 [% RenderBlockStart("ShowLocalPackageInstall") %]

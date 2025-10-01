@@ -7,6 +7,7 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
+## no critic(RequireExplicitPackage)
 use strict;
 use warnings;
 use utf8;
@@ -54,6 +55,15 @@ for my $Key ( sort keys %UserData ) {
     next KEY if $Key =~ m/UserEmail$/smx;
     next KEY if $Key =~ m/UserMobile$/smx;
 
+    # Skip UserLastPwChangeTime
+    next KEY if $Key eq 'UserLastPwChangeTime';
+
+    # Skip UserLoginFailed
+    next KEY if $Key eq 'UserLoginFailed';
+
+    # Skip UserToolBarSearchBackend which is set by default
+    next KEY if $Key eq 'UserToolBarSearchBackend';
+
     # Skip out-of-office status (will always be set dynamically in Kernel::System::User
     # and cannot be set/changed by SetPreferences()).
     next KEY if $Key eq 'LoggedStatusMessage';
@@ -63,6 +73,9 @@ for my $Key ( sort keys %UserData ) {
 
     # Skip dropdown-values of User Activity LinkTarget
     next KEY if $Key =~ m{\AUserActivityLinkTarget};
+
+    # Skip dropdown-values of UserMarkTicketSeenRedirectURL and UserMarkTicketUnseenRedirectURL
+    next KEY if $Key =~ m{\AUserMarkTicket};
 
     $Self->False(
         $UserObject->SetPreferences(

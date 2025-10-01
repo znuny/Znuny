@@ -137,11 +137,11 @@ my @Tests = (
                 DefaultValue => 'TestTextArea',
             },
         },
-        Value      => 'TestTextArea',
-        UserID     => 1,
-        Success    => 1,
-        ShouldGet  => 1,
-        FirstValue => 'TestTextArea_FirstValue',
+        Value        => 'TestTextArea',
+        UserID       => 1,
+        Success      => 1,
+        ShouldGet    => 1,
+        FirstValue   => 'TestTextArea_FirstValue',
         ExpectedData =>
             "%%FieldName%%TestTextArea$RandomID%%Value%%TestTextArea%%OldValue%%TestTextArea_FirstValue",
         ExpectedDataWitoutOld =>
@@ -160,10 +160,10 @@ my @Tests = (
         },
         Value =>
             'TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TestTextArea7TestTextArea8TestTextArea9TestTextArea10TestTextArea11TestTextArea',
-        UserID     => 1,
-        Success    => 1,
-        ShouldGet  => 1,
-        FirstValue => 'TestTextArea_FirstValue',
+        UserID       => 1,
+        Success      => 1,
+        ShouldGet    => 1,
+        FirstValue   => 'TestTextArea_FirstValue',
         ExpectedData =>
             "%%FieldName%%TestTextArea$RandomID%%Value%%TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TestTextArea7TestTextArea8TestTextArea9Te[...]%%OldValue%%TestTextArea_FirstValue",
         ExpectedDataWitoutOld =>
@@ -184,10 +184,10 @@ my @Tests = (
 
         Value =>
             'TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TestTextArea7TestTextArea8TestTextArea9TestTextArea10TestTextArea11TestTextArea12TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TestTextArea7TestTextArea8TestTextArea9TestTextArea10TestTextArea11TestTextArea12',
-        UserID     => 1,
-        Success    => 1,
-        ShouldGet  => 1,
-        FirstValue => 'TestTextArea_FirstValue',
+        UserID       => 1,
+        Success      => 1,
+        ShouldGet    => 1,
+        FirstValue   => 'TestTextArea_FirstValue',
         ExpectedData =>
             "%%FieldName%%TestTextArea$RandomID%%Value%%TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TestTextArea7TestTextArea8TestTextArea9Te[...]%%OldValue%%TestTextArea_FirstValue",
         ExpectedDataWitoutOld =>
@@ -196,7 +196,7 @@ my @Tests = (
     {
         Name               => 'short Value for long field name',
         DynamicFieldConfig => {
-            ID => $FieldID2,
+            ID   => $FieldID2,
             Name =>
                 "TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TestTextArea7TestTextArea8TestTextArea9TestTextArea10TestTextArea11TestTextArea$RandomID",
             ObjectType => 'Ticket',
@@ -206,11 +206,11 @@ my @Tests = (
             },
         },
 
-        Value      => 'TestTextArea',
-        UserID     => 1,
-        Success    => 1,
-        ShouldGet  => 1,
-        FirstValue => 'TestTextArea_FirstValue',
+        Value        => 'TestTextArea',
+        UserID       => 1,
+        Success      => 1,
+        ShouldGet    => 1,
+        FirstValue   => 'TestTextArea_FirstValue',
         ExpectedData =>
             "%%FieldName%%TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TestTextArea7TestTextArea8TestTextArea9TestTextA[...]%%Value%%TestTextArea%%OldValue%%TestTextArea_FirstValue",
         ExpectedDataWitoutOld =>
@@ -219,7 +219,7 @@ my @Tests = (
     {
         Name               => 'long Value for long field name',
         DynamicFieldConfig => {
-            ID => $FieldID2,
+            ID   => $FieldID2,
             Name =>
                 "TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TestTextArea7TestTextArea8TestTextArea9TestTextArea10TestTextArea11TestTextArea$RandomID",
             ObjectType => 'Ticket',
@@ -231,10 +231,10 @@ my @Tests = (
 
         Value =>
             'TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TestTextArea7TestTextArea8TestTextArea9TestTextArea10TestTextArea11TestTextArea12',
-        UserID     => 1,
-        Success    => 1,
-        ShouldGet  => 1,
-        FirstValue => 'TestTextArea_FirstValue',
+        UserID       => 1,
+        Success      => 1,
+        ShouldGet    => 1,
+        FirstValue   => 'TestTextArea_FirstValue',
         ExpectedData =>
             "%%FieldName%%TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5T[...]%%Value%%TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5T[...]%%OldValue%%TestTextArea_FirstValue",
         ExpectedDataWitoutOld =>
@@ -243,7 +243,7 @@ my @Tests = (
     {
         Name               => 'extra-long Value for long field name',
         DynamicFieldConfig => {
-            ID => $FieldID2,
+            ID   => $FieldID2,
             Name =>
                 "TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TestTextArea7TestTextArea8TestTextArea9TestTextArea10TestTextArea11TestTextArea$RandomID",
             ObjectType => 'Ticket',
@@ -255,10 +255,10 @@ my @Tests = (
 
         Value =>
             'TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TestTextArea7TestTextArea8TestTextArea9TestTextArea10TestTextArea11TestTextArea12TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TestTextArea7TestTextArea8TestTextArea9TestTextArea10TestTextArea11TestTextArea12',
-        UserID     => 1,
-        Success    => 1,
-        ShouldGet  => 1,
-        FirstValue => 'TestTextArea_FirstValue',
+        UserID       => 1,
+        Success      => 1,
+        ShouldGet    => 1,
+        FirstValue   => 'TestTextArea_FirstValue',
         ExpectedData =>
             "%%FieldName%%TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5T[...]%%Value%%TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5T[...]%%OldValue%%TestTextArea_FirstValue",
         ExpectedDataWitoutOld =>
@@ -267,7 +267,31 @@ my @Tests = (
     {
         Name               => 'extra-long Value for long field name  and short FirstValue',
         DynamicFieldConfig => {
-            ID => $FieldID2,
+            ID   => $FieldID2,
+            Name =>
+                "TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TestTextArea7TestTextArea8TestTextArea9TestTextArea10TestTextArea11TestTextArea$RandomID",
+            ObjectType => 'Ticket',
+            FieldType  => 'TextArea',
+            Config     => {
+                DefaultValue => 'TestTextArea',
+            },
+        },
+
+        Value =>
+            'TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TestTextArea7TestTextArea8TestTextArea9TestTextArea10TestTextArea11TestTextArea12TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TestTextArea7TestTextArea8TestTextArea9TestTextArea10TestTextArea11TestTextArea12',
+        UserID       => 1,
+        Success      => 1,
+        ShouldGet    => 1,
+        FirstValue   => 'TestTextArea_FirstValue_Short',
+        ExpectedData =>
+            "%%FieldName%%TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextAre[...]%%Value%%TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextAre[...]%%OldValue%%TestTextArea_FirstValue_Short",
+        ExpectedDataWitoutOld =>
+            "%%FieldName%%TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TestTextArea7TestTextArea8TestTextArea9TestTextArea10T[...]%%Value%%TestTextArea_FirstValue_Short%%OldValue%%",
+    },
+    {
+        Name               => 'extra-long Value for long field name and long FirstValue',
+        DynamicFieldConfig => {
+            ID   => $FieldID2,
             Name =>
                 "TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TestTextArea7TestTextArea8TestTextArea9TestTextArea10TestTextArea11TestTextArea$RandomID",
             ObjectType => 'Ticket',
@@ -282,30 +306,6 @@ my @Tests = (
         UserID     => 1,
         Success    => 1,
         ShouldGet  => 1,
-        FirstValue => 'TestTextArea_FirstValue_Short',
-        ExpectedData =>
-            "%%FieldName%%TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextAre[...]%%Value%%TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextAre[...]%%OldValue%%TestTextArea_FirstValue_Short",
-        ExpectedDataWitoutOld =>
-            "%%FieldName%%TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TestTextArea7TestTextArea8TestTextArea9TestTextArea10T[...]%%Value%%TestTextArea_FirstValue_Short%%OldValue%%",
-    },
-    {
-        Name               => 'extra-long Value for long field name and long FirstValue',
-        DynamicFieldConfig => {
-            ID => $FieldID2,
-            Name =>
-                "TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TestTextArea7TestTextArea8TestTextArea9TestTextArea10TestTextArea11TestTextArea$RandomID",
-            ObjectType => 'Ticket',
-            FieldType  => 'TextArea',
-            Config     => {
-                DefaultValue => 'TestTextArea',
-            },
-        },
-
-        Value =>
-            'TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TestTextArea7TestTextArea8TestTextArea9TestTextArea10TestTextArea11TestTextArea12TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TestTextArea7TestTextArea8TestTextArea9TestTextArea10TestTextArea11TestTextArea12',
-        UserID    => 1,
-        Success   => 1,
-        ShouldGet => 1,
         FirstValue =>
             'TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6_FirstValue_Long',
         ExpectedData =>
@@ -317,7 +317,7 @@ my @Tests = (
     {
         Name               => 'empty Value and long FirstValue',
         DynamicFieldConfig => {
-            ID => $FieldID2,
+            ID   => $FieldID2,
             Name =>
                 "TestTextArea$RandomID",
             ObjectType => 'Ticket',
@@ -327,10 +327,10 @@ my @Tests = (
             },
         },
 
-        Value     => '',
-        UserID    => 1,
-        Success   => 1,
-        ShouldGet => 1,
+        Value      => '',
+        UserID     => 1,
+        Success    => 1,
+        ShouldGet  => 1,
         FirstValue =>
             'TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TextArea7TextArea8TextArea9TextArea10TextArea11TextArea12TextArea13TextArea14TextArea15_FirstValue_Long',
         ExpectedData =>
@@ -352,10 +352,10 @@ my @Tests = (
 
         Value =>
             'TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TestTextArea7TestTextArea8TestTextArea9TestTextArea10TestTextArea11TestTextArea12TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TestTextArea7TestTextArea8TestTextArea9TestTextArea10TestTextArea11TestTextArea12',
-        UserID     => 1,
-        Success    => 1,
-        ShouldGet  => 1,
-        FirstValue => '',
+        UserID       => 1,
+        Success      => 1,
+        ShouldGet    => 1,
+        FirstValue   => '',
         ExpectedData =>
             "%%FieldName%%TestTextArea1TestTextArea2TestTextArea3TestTextAre[...]%%Value%%TestTextArea1TestTextArea2TestTextArea3TestTextArea4TestTextArea5TestTextArea6TestTextArea7TestTextArea8Te[...]%%OldValue%%",
         ExpectedDataWitoutOld =>

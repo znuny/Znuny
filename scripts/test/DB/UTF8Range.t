@@ -42,12 +42,12 @@ my @Tests = (
     },
     {
         Name => "UTF8 3 byte",
-        Data => 'ऄ',           # DEVANAGARI LETTER SHORT A (e0 a4 84)
+        Data => 'ऄ',             # DEVANAGARI LETTER SHORT A (e0 a4 84)
     },
     {
         Name                => "UTF8 4 byte",
-        Data                => '💩',          # PILE OF POO (f0 9f 92 a9)
-        ExpectedDataOnMysql => '�',
+        Data                => '💩',             # PILE OF POO (f0 9f 92 a9)
+        ExpectedDataOnMysql => '💩',
     },
 );
 

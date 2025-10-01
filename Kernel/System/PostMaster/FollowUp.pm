@@ -17,10 +17,14 @@ our @ObjectDependencies = (
     'Kernel::System::DateTime',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
-    'Kernel::System::Log',
+    'Kernel::System::Priority',
+    'Kernel::System::Queue',
+    'Kernel::System::SLA',
     'Kernel::System::Service',
+    'Kernel::System::State',
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
+    'Kernel::System::Type',
     'Kernel::System::User',
 );
 
@@ -178,6 +182,13 @@ sub Run {
     {
         $State = $ConfigObject->Get('PostmasterFollowUpStateClosed');
     }
+
+    if ( $GetParam{'X-OTRS-FollowUp-StateID'} ) {
+        $GetParam{'X-OTRS-FollowUp-State'} = $Kernel::OM->Get('Kernel::System::State')->StateLookup(
+            StateID => $GetParam{'X-OTRS-FollowUp-StateID'},
+        );
+    }
+
     if ( $GetParam{'X-OTRS-FollowUp-State'} ) {
         $State = $GetParam{'X-OTRS-FollowUp-State'};
     }
@@ -247,13 +258,18 @@ sub Run {
                 ObjectLogType => 'Message',
                 Priority      => 'Debug',
                 Key           => 'Kernel::System::PostMaster::FollowUp',
-                Value =>
+                Value         =>
                     "Pending time update via 'X-OTRS-FollowUp-State-PendingTime'! State-PendingTime: $GetParam{'X-OTRS-FollowUp-State-PendingTime'}.",
             );
         }
     }
 
     # set priority
+    if ( $GetParam{'X-OTRS-FollowUp-PriorityID'} ) {
+        $GetParam{'X-OTRS-FollowUp-Priority'} = $Kernel::OM->Get('Kernel::System::Priority')->PriorityLookup(
+            PriorityID => $GetParam{'X-OTRS-FollowUp-PriorityID'},
+        );
+    }
     if ( $GetParam{'X-OTRS-FollowUp-Priority'} ) {
 
         $TicketObject->TicketPrioritySet(
@@ -266,12 +282,18 @@ sub Run {
             ObjectLogType => 'Message',
             Priority      => 'Debug',
             Key           => 'Kernel::System::PostMaster::FollowUp',
-            Value =>
+            Value         =>
                 "Priority update via 'X-OTRS-FollowUp-Priority'! Priority: $GetParam{'X-OTRS-FollowUp-Priority'}.",
         );
     }
 
     # set queue
+    if ( $GetParam{'X-OTRS-FollowUp-QueueID'} ) {
+        $GetParam{'X-OTRS-FollowUp-Queue'} = $Kernel::OM->Get('Kernel::System::Queue')->QueueLookup(
+            QueueID => $GetParam{'X-OTRS-FollowUp-QueueID'},
+        );
+    }
+
     if ( $GetParam{'X-OTRS-FollowUp-Queue'} ) {
 
         $TicketObject->TicketQueueSet(
@@ -284,7 +306,7 @@ sub Run {
             ObjectLogType => 'Message',
             Priority      => 'Debug',
             Key           => 'Kernel::System::PostMaster::FollowUp',
-            Value =>
+            Value         =>
                 "Queue update via 'X-OTRS-FollowUp-Queue'! Queue: $GetParam{'X-OTRS-FollowUp-Queue'}.",
         );
     }
@@ -302,12 +324,17 @@ sub Run {
             ObjectLogType => 'Message',
             Priority      => 'Debug',
             Key           => 'Kernel::System::PostMaster::FollowUp',
-            Value =>
+            Value         =>
                 "Lock update via 'X-OTRS-FollowUp-Lock'! Lock: $GetParam{'X-OTRS-FollowUp-Lock'}.",
         );
     }
 
     # set ticket type
+    if ( $GetParam{'X-OTRS-FollowUp-TypeID'} ) {
+        $GetParam{'X-OTRS-FollowUp-Type'}
+            = $Kernel::OM->Get('Kernel::System::Type')->TypeLookup( TypeID => $GetParam{'X-OTRS-FollowUp-TypeID'} );
+    }
+
     if ( $GetParam{'X-OTRS-FollowUp-Type'} ) {
 
         $TicketObject->TicketTypeSet(
@@ -320,12 +347,18 @@ sub Run {
             ObjectLogType => 'Message',
             Priority      => 'Debug',
             Key           => 'Kernel::System::PostMaster::FollowUp',
-            Value =>
+            Value         =>
                 "Type update via 'X-OTRS-FollowUp-Type'! Type: $GetParam{'X-OTRS-FollowUp-Type'}.",
         );
     }
 
     # Ticket service handling.
+
+    if ( $GetParam{'X-OTRS-FollowUp-ServiceID'} ) {
+        $GetParam{'X-OTRS-FollowUp-Service'} = $Kernel::OM->Get('Kernel::System::Service')->ServiceLookup(
+            ServiceID => $GetParam{'X-OTRS-FollowUp-ServiceID'},
+        );
+    }
 
     if ( $GetParam{'X-OTRS-FollowUp-Service'} ) {
 
@@ -344,7 +377,7 @@ sub Run {
                 ObjectLogType => 'Message',
                 Priority      => 'Debug',
                 Key           => 'Kernel::System::PostMaster::FollowUp',
-                Value =>
+                Value         =>
                     "Ticket service won't be updated to '$GetParam{'X-OTRS-FollowUp-Service'}' (does not exist or is invalid or is a child of invalid service).",
             );
 
@@ -364,13 +397,19 @@ sub Run {
                 ObjectLogType => 'Message',
                 Priority      => 'Debug',
                 Key           => 'Kernel::System::PostMaster::FollowUp',
-                Value =>
+                Value         =>
                     "Ticket service updated via 'X-OTRS-FollowUp-Service' to '$GetParam{'X-OTRS-FollowUp-Service'}'.",
             );
         }
     }
 
     # set ticket sla
+    if ( $GetParam{'X-OTRS-FollowUp-SLAID'} ) {
+        $GetParam{'X-OTRS-FollowUp-SLA'} = $Kernel::OM->Get('Kernel::System::SLA')->SLALookup(
+            SLAID => $GetParam{'X-OTRS-FollowUp-SLAID'},
+        );
+    }
+
     if ( $GetParam{'X-OTRS-FollowUp-SLA'} ) {
 
         $TicketObject->TicketSLASet(
@@ -383,7 +422,7 @@ sub Run {
             ObjectLogType => 'Message',
             Priority      => 'Debug',
             Key           => 'Kernel::System::PostMaster::FollowUp',
-            Value =>
+            Value         =>
                 "SLA update via 'X-OTRS-FollowUp-SLA'! SLA: $GetParam{'X-OTRS-FollowUp-SLA'}.",
         );
     }
@@ -424,7 +463,7 @@ sub Run {
                 ObjectLogType => 'Message',
                 Priority      => 'Debug',
                 Key           => 'Kernel::System::PostMaster::FollowUp',
-                Value =>
+                Value         =>
                     "DynamicField update via '$Key'! Value: $GetParam{$Key}.",
             );
         }
@@ -465,7 +504,7 @@ sub Run {
                     ObjectLogType => 'Message',
                     Priority      => 'Debug',
                     Key           => 'Kernel::System::PostMaster::FollowUp',
-                    Value =>
+                    Value         =>
                         "DynamicField (TicketKey$Count) update via '$Key'! Value: $GetParam{$Key}.",
                 );
             }
@@ -507,7 +546,7 @@ sub Run {
                     ObjectLogType => 'Message',
                     Priority      => 'Debug',
                     Key           => 'Kernel::System::PostMaster::FollowUp',
-                    Value =>
+                    Value         =>
                         "DynamicField (TicketTime$Count) update via '$Key'! Value: $GetParam{$Key}.",
                 );
             }
@@ -582,6 +621,11 @@ sub Run {
     my %CommunicationLogSkipAttributes = (
         Body       => 1,
         Attachment => 1,
+
+        # Avoid possible errors on trying to store binary data in db.
+        # This can happen if there were (partial) errors in decryption, leading
+        # to the decrypted body still containing a binary key/cert.
+        'X-OTRS-BodyDecrypted' => 1,
     );
 
     ATTRIBUTE:
@@ -607,7 +651,7 @@ sub Run {
     );
 
     # write attachments to the storage
-    for my $Attachment ( $Self->{ParserObject}->GetAttachments() ) {
+    for my $Attachment ( $Self->{ParserObject}->GetAttachments( UserType => 'Agent' ) ) {
         $ArticleBackendObject->ArticleWriteAttachment(
             Filename           => $Attachment->{Filename},
             Content            => $Attachment->{Content},
@@ -692,7 +736,7 @@ sub Run {
                     ObjectLogType => 'Message',
                     Priority      => 'Debug',
                     Key           => 'Kernel::System::PostMaster::FollowUp',
-                    Value =>
+                    Value         =>
                         "Article DynamicField (ArticleKey) update via '$Key'! Value: $GetParam{$Key}.",
                 );
             }

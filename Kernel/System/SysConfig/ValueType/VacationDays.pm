@@ -83,6 +83,7 @@ Check if provided EffectiveValue matches structure defined in XMLContentParsed.
     );
 
 Result:
+
     %Result = (
         EffectiveValue => {                     # Note for VacationDays ValueTypes EffectiveValue is not changed.
             '1' => {
@@ -417,7 +418,7 @@ sub SettingRender {
             . "        <span class='InvisibleText'>$AddNewEntry</span>\n"
             . "    </button>\n";
     }
-    $HTML .= "</div>\n";            # Array
+    $HTML .= "</div>\n";    # Array
 
     return $HTML;
 }

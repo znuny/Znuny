@@ -138,6 +138,30 @@
                 </div>
             </div>
 
+[% RenderBlockStart("Cluster") %]
+            <div class="WidgetSimple Collapsed ScreenXL">
+                <div class="Header">
+                    <div class="WidgetAction Toggle">
+                        <a href="#" title="[% Translate("Show or hide the content") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+                    </div>
+                    <h2>
+                        [% Translate(Data.ClusterName) | html %]
+                        <span class="badge">[% Translate('Process Preferences') | html %]</span>
+                    </h2>
+                </div>
+                <div class="Content">
+                    <fieldset class="TableLike">
+                        [% InsertTemplate("FormElements/Input.tt") %]
+                        [% InsertTemplate("FormElements/TextArea.tt") %]
+                        [% InsertTemplate("FormElements/Option.tt") %]
+                        [% InsertTemplate("FormElements/File.tt") %]
+                        [% InsertTemplate("FormElements/Password.tt") %]
+                        [% InsertTemplate("FormElements/RichText.tt") %]
+                    </fieldset>
+                </div>
+            </div>
+[% RenderBlockEnd("Cluster") %]
+
             <div class="WidgetSimple ScreenXL EditDiagram">
                 <div class="Header Expanded">
                     <div class="WidgetAction Toggle">
@@ -205,6 +229,9 @@
     <div id="DeleteTransitionConfirmationDialog">
         <p>[% Translate("Do you really want to delete this Transition?") | html %]</p>
         <p class="SpacingTop"><strong><span class="EntityName"></span></strong></p>
+    </div>
+    <div id="TransitionMissingActivityDialog">
+        <p>[% Translate("You can not edit a transition before it's connected to two activities.") | html %]</p>
     </div>
     <div id="DeleteTransitionActionConfirmationDialog">
         <p>[% Translate("Do you really want to delete this Transition Action?") | html %]</p>

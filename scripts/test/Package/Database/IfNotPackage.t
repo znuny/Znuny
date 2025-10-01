@@ -128,7 +128,7 @@ $OTRSVersion .= '.x';
 my $RandomID = $HelperObject->GetRandomID();
 
 my %Packages = (
-    'Package1' => << "EOF",
+    'Package1' => <<"EOF",
 <?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.1">
     <Name>Package1$RandomID</Name>
@@ -152,7 +152,7 @@ my %Packages = (
 </otrs_package>
 EOF
 
-    'Package2' => << "EOF",
+    'Package2' => <<"EOF",
 <?xml version="1.0" encoding="utf-8" ?>
 <otrs_package version="1.1">
     <Name>Package2$RandomID</Name>

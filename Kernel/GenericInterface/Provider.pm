@@ -115,7 +115,7 @@ sub Run {
     if ( !IsHashRefWithData($Webservice) ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Could not load web service configuration for query string '$RequestURI'",
         );
         return;    # bail out without Transport, Apache will generate 500 Error
@@ -213,7 +213,7 @@ sub Run {
             DebuggerObject => $DebuggerObject,
             Operation      => $Operation,
             OperationType  => $ProviderConfig->{Operation}->{$Operation}->{Type},
-            MappingConfig =>
+            MappingConfig  =>
                 $ProviderConfig->{Operation}->{$Operation}->{MappingInbound},
         );
 
@@ -340,7 +340,7 @@ sub Run {
             DebuggerObject => $DebuggerObject,
             Operation      => $Operation,
             OperationType  => $ProviderConfig->{Operation}->{$Operation}->{Type},
-            MappingConfig =>
+            MappingConfig  =>
                 $ProviderConfig->{Operation}->{$Operation}->{MappingOutbound},
         );
 

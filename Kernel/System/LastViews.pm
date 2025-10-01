@@ -64,6 +64,7 @@ sub new {
         'AgentTicketHistory',
         'AgentTicketLockedView',
         'AgentTicketLock',
+        'AgentTicketMarkSeenUnseen',
         'AgentTicketMerge',
         'AgentTicketMove',
         'AgentTicketOwner',
@@ -867,11 +868,11 @@ sub Delete {
 
 Checks if request is valid.
 Request is valid if
-    - RequestedURL has an Action
-    - LastScreenView is not equal to RequestedURL
-    - Action is not one of 'ActionIgnore'
-    - Subaction is not one of 'SubactionIgnore'
 
+ - RequestedURL has an Action
+ - LastScreenView is not equal to RequestedURL
+ - Action is not one of 'ActionIgnore'
+ - Subaction is not one of 'SubactionIgnore'
 
     my $IsValidRequest = $LastViewsObject->IsValidRequest(
         %Request

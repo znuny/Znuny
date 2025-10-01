@@ -1,0 +1,60 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+<div id="TicketProcessShop" class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+    <h1 class="InvisibleText">[% Translate("Process Ticket Category") | html %]</h1>
+    <div class="SidebarColumn ActionsSideBarComp">
+        <div class="Header">
+            <h2 class="CategoryHeadline CategoryFilter">[% Translate("Categories") | html %]</h2>
+        </div>
+        <div class="Content">
+            [% IF Data.Favourites && Data.Favourites.size %]
+                <a href="#" class="CategoryFilter Level-1 Favourites" data-category="IsFavourite"><i class="fa fa-star"></i> [% Translate('Favourites') | html %] <i class="fa fa-star"></i></a>
+            [% END %]
+[% RenderBlockStart("Category") %]
+            <a href="#" class='CategoryFilter [% Data.SubCategoriesClass | html %]' data-category="[% Translate(Data.Name) | html %]">
+                [% Data.Placeholder | html %] [% Translate(Data.Name) | html %] ([% Translate(Data.Count) | html %])
+            </a>
+[% RenderBlockEnd("Category") %]
+        </div>
+    </div>
+
+    <div class="ContentColumn ContentWrapper ContentGrid">
+        <input type="text" id="Filter" autocomplete="off" class="W95pc" name="Filter" value="" title="[% Translate("Filter") | html %]" placeholder="[% Translate("Just start typing to filter...") | html %]" />
+
+        <div id='Process' class="Content">
+            <ul class="ItemListGrid Filterable WidgetSimple">
+[% RenderBlockStart("Process") %]
+                <li class="Card [% IF Data.IsFavourite %]IsFavourite[% END %]">
+                    <a href="[% Data.Link | html %]" class="Preview [% Data.LinkCSS | html %]" data-id="[% Data.ID | html %]" data-processid="[% Data.ProcessID | html %]" target="[% Data.LinkTarget | html %]" >
+                        <span class="ProcessID InvisibleText">[% Data.ProcessID | html %]</span>
+                        <span class="Icon">[% IF Data.Icon.Content %]<img height="[% Data.Icon.Height | html %]" width="[% Data.Icon.Width | html %]" alt="[% Data.Icon.Filename | html %]" title="[% Data.Icon.Filename | html %]" src="data:[% Data.Icon.ContentType | html %];base64,[% Data.Icon.Content | html %]">[% END %]</span>
+                        <span class="Title">[% Translate(Data.Name) | html %]</span>
+                        <span class="Information">
+                            <span class="Category InvisibleText">[% Translate(Data.Category) | html %]</span>
+                            [% IF Data.IsFavourite %]
+                            <span class="IsFavourite InvisibleText">IsFavourite</span>
+                            [% END %]
+                        </span>
+                        <span class="Favourite [% IF Data.IsFavourite %]RemoveFavourite[% ELSE %]AddFavourite[% END %]" data-id="[% Data.ID | html %]" data-processid="[% Data.ProcessID | html %]" title="[% Translate("Set as favorite") | html %]">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        </span>
+                        <div class="Overlay">
+                            <div class="Content Description">
+                                [% Translate(Data.Description) | html %]
+                            </div>
+                        </div>
+                    </a>
+                </li>
+[% RenderBlockEnd("Process") %]
+            </ul>
+        </div>
+        <div class="FilterMessageWidget Hidden">[% Translate("No process found.") | html %]</div>
+    </div>
+</div>

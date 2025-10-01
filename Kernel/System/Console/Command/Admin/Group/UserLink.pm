@@ -38,7 +38,7 @@ sub Configure {
         ValueRegex  => qr/.*/smx,
     );
     $Self->AddOption(
-        Name => 'permission',
+        Name        => 'permission',
         Description =>
             'Permissions (ro|move_into|create|owner|priority|rw) the given user should have for the group he is going to be linked to.',
         Required   => 1,

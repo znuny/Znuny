@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -368,6 +368,20 @@ sub Preferences {
     my @ColumnsAvailableNotEnabled;
 
     # check for default settings
+
+    $Self->{PageShownData} = {
+        5  => ' 5',
+        10 => '10',
+        15 => '15',
+        20 => '20',
+        25 => '25',
+        50 => '50',
+    };
+
+    if ( $Self->{Config}->{DefaultPageShown} && IsHashRefWithData( $Self->{Config}->{DefaultPageShown} ) ) {
+        $Self->{PageShownData} = $Self->{Config}->{DefaultPageShown};
+    }
+
     if (
         $Self->{Config}->{DefaultColumns}
         && IsHashRefWithData( $Self->{Config}->{DefaultColumns} )
@@ -433,17 +447,10 @@ sub Preferences {
 
     my @Params = (
         {
-            Desc  => Translatable('Shown Tickets'),
-            Name  => $Self->{PrefKeyShown},
-            Block => 'Option',
-            Data  => {
-                5  => ' 5',
-                10 => '10',
-                15 => '15',
-                20 => '20',
-                25 => '25',
-                50 => '50',
-            },
+            Desc        => Translatable('Shown Tickets'),
+            Name        => $Self->{PrefKeyShown},
+            Block       => 'Option',
+            Data        => $Self->{PageShownData},
             SelectedID  => $Self->{PageShown},
             Translation => 0,
         },
@@ -604,7 +611,7 @@ sub Run {
         );
     }
 
-    my $CacheKey = join '-', $Self->{Name}, $Self->{Action}, $Self->{PageShown}, $Self->{StartHit}, $Self->{UserID};
+    my $CacheKey     = join '-', $Self->{Name}, $Self->{Action}, $Self->{PageShown}, $Self->{StartHit}, $Self->{UserID};
     my $CacheColumns = join(
         ',',
         map { $_ . '=>' . $Self->{GetColumnFilterSelect}->{$_} } sort keys %{ $Self->{GetColumnFilterSelect} }
@@ -1215,26 +1222,10 @@ sub Run {
         if ( $HeaderColumn !~ m{\A DynamicField_}xms ) {
 
             $CSS = '';
-            my $Title = $LayoutObject->{LanguageObject}->Translate($HeaderColumn);
-
-            # Set title description.
-            if ( $Self->{SortBy} && $Self->{SortBy} eq $HeaderColumn ) {
-                my $TitleDesc = '';
-                if ( $TicketSearch{OrderBy} eq 'Down' ) {
-                    $CSS .= ' SortDescendingLarge';
-                    $TitleDesc = Translatable('sorted descending');
-                }
-                else {
-                    $CSS .= ' SortAscendingLarge';
-                    $TitleDesc = Translatable('sorted ascending');
-                }
-
-                $TitleDesc = $LayoutObject->{LanguageObject}->Translate($TitleDesc);
-                $Title .= ', ' . $TitleDesc;
-            }
 
             # translate the column name to write it in the current language
             my $TranslatedWord;
+
             if ( $HeaderColumn eq 'EscalationTime' ) {
                 $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Service Time');
             }
@@ -1264,6 +1255,25 @@ sub Run {
             }
             else {
                 $TranslatedWord = $LayoutObject->{LanguageObject}->Translate($HeaderColumn);
+            }
+
+            # Use the translated word also as title.
+            my $Title = $TranslatedWord;
+
+            # Set title description.
+            if ( $Self->{SortBy} && $Self->{SortBy} eq $HeaderColumn ) {
+                my $TitleDesc = '';
+                if ( $TicketSearch{OrderBy} eq 'Down' ) {
+                    $CSS .= ' SortDescendingLarge';
+                    $TitleDesc = Translatable('sorted descending');
+                }
+                else {
+                    $CSS .= ' SortAscendingLarge';
+                    $TitleDesc = Translatable('sorted ascending');
+                }
+
+                $TitleDesc = $LayoutObject->{LanguageObject}->Translate($TitleDesc);
+                $Title .= ', ' . $TitleDesc;
             }
 
             # add surrounding container
@@ -1941,7 +1951,7 @@ sub Run {
                     $BlockType = 'Translatable';
                     $DataValue = $Ticket{$Column};
                 }
-                elsif ( $Column eq 'Created' || $Column eq 'Changed' ) {
+                elsif ( $Column eq 'Created' || $Column eq 'Changed' || $Column eq 'LastMention' ) {
                     $BlockType = 'Time';
                     $DataValue = $Ticket{$Column};
                 }
@@ -2171,6 +2181,7 @@ sub _InitialColumnFilter {
         Class       => $Class . ' Modernize',
         Translation => $TranslationOption,
         SelectedID  => '',
+        TreeView    => 1,
     );
 
     return $ColumnFilterHTML;
@@ -2280,7 +2291,7 @@ sub _ColumnFilterJSON {
     my $Data = [
         {
             Key   => 'DeleteFilter',
-            Value => uc $Label,
+            Value => '-',
         },
         {
             Key      => '-',

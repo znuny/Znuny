@@ -152,7 +152,7 @@ $Selenium->RunTest(
         my $Success = $UserObject->SetPreferences(
             UserID => $SecondTestUserID,
             Key    => 'AdminNavigationBarFavourites',
-            Value =>
+            Value  =>
                 '["AdminUser","AdminSystemAddress","AdminAppointmentCalendarManage",
                 "AdminCustomerUser","AdminPriority","AdminProcessManagement","AdminRole","AdminSystemConfiguration",
                 "AdminLog","AdminAppointmentNotificationEvent","AdminTemplate","AdminEmail"]',

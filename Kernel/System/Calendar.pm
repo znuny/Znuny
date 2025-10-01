@@ -17,7 +17,7 @@ use MIME::Base64 ();
 
 use Kernel::System::EventHandler;
 use Kernel::System::VariableCheck qw(:all);
-use vars qw(@ISA);
+use vars                          qw(@ISA);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -104,6 +104,7 @@ creates a new calendar for given user.
     );
 
 returns Calendar hash if successful:
+
     %Calendar = (
         CalendarID   => 2,
         GroupID      => 3,
@@ -116,6 +117,7 @@ returns Calendar hash if successful:
     );
 
 Events:
+
     CalendarCreate
 
 =cut
@@ -186,8 +188,8 @@ sub CalendarCreate {
     return if !$Kernel::OM->Get('Kernel::System::DB')->Do(
         SQL  => $SQL,
         Bind => [
-            \$Param{GroupID}, \$Param{CalendarName}, \$SaltString, \$Param{Color},
-            \$TicketAppointments, \$Param{UserID}, \$Param{UserID}, \$ValidID
+            \$Param{GroupID},     \$Param{CalendarName}, \$SaltString,    \$Param{Color},
+            \$TicketAppointments, \$Param{UserID},       \$Param{UserID}, \$ValidID
         ],
     );
 
@@ -424,7 +426,7 @@ sub CalendarList {
 
     # Make different cache type for list (so we can clear cache by this value)
     my $CacheType     = 'CalendarList';
-    my $CacheKeyUser  = $Param{UserID} || 'all-user-ids';
+    my $CacheKeyUser  = $Param{UserID}  || 'all-user-ids';
     my $CacheKeyValid = $Param{ValidID} || 'all-valid-ids';
 
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
@@ -2062,11 +2064,11 @@ Get list of ticket appointments based on a rule.
 
 Returns list of ticket appointments, where key will be either TicketID (default) or AppointmentID:
 
-%Appointments = (
-    1 => 1,
-    2 => 2,
-    # ...
-);
+    %Appointments = (
+        1 => 1,
+        2 => 2,
+        # ...
+    );
 
 =cut
 

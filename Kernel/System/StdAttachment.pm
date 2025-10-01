@@ -237,7 +237,7 @@ sub StdAttachmentUpdate {
         SQL => 'UPDATE standard_attachment SET name = ?, comments = ?, valid_id = ?, '
             . 'change_time = current_timestamp, change_by = ? WHERE id = ?',
         Bind => [
-            \$Param{Name}, \$Param{Comment},
+            \$Param{Name},    \$Param{Comment},
             \$Param{ValidID}, \$Param{UserID}, \$Param{ID},
         ],
     );
@@ -360,10 +360,8 @@ sub StdAttachmentLookup {
     }
 
     my $Cached = $Kernel::OM->Get('Kernel::System::Cache')->Get(
-        Type           => $Self->{CacheType},
-        Key            => $CacheKey,
-        CacheInMemory  => 1,
-        CacheInBackend => 0,
+        Type => $Self->{CacheType},
+        Key  => $CacheKey,
     );
 
     return $Cached if $Cached;
@@ -404,12 +402,10 @@ sub StdAttachmentLookup {
 
     # cache result
     $Kernel::OM->Get('Kernel::System::Cache')->Set(
-        Type           => $Self->{CacheType},
-        TTL            => $Self->{CacheTTL},
-        Key            => $CacheKey,
-        Value          => $DBValue,
-        CacheInMemory  => 1,
-        CacheInBackend => 0,
+        Type  => $Self->{CacheType},
+        TTL   => $Self->{CacheTTL},
+        Key   => $CacheKey,
+        Value => $DBValue,
     );
 
     return $DBValue;
@@ -546,6 +542,7 @@ returns a list of Standard Attachment / Standard Template members
     );
 
 Returns:
+
     %List = (
         1 => 'Some Name',
         2 => 'Some Name',
