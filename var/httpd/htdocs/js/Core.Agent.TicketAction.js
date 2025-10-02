@@ -285,7 +285,7 @@ Core.Agent.TicketAction = (function (TargetNS) {
     TargetNS.ConfirmTemplateOverwrite = function (FieldName, $TemplateSelect, Callback) {
         var Content = '',
             LastValue = $TemplateSelect.data('LastValue') || '',
-            RTEditor = Core.UI.RichTextEditor.GetInstance('FieldName');
+            RTEditor = Core.UI.RichTextEditor.GetInstance(FieldName);
 
         // Fallback for non-richtext content
         Content = $('#' + FieldName).val();
