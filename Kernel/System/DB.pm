@@ -20,11 +20,13 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::Cache',
+    'Kernel::System::DateTime',
     'Kernel::System::Encode',
     'Kernel::System::Log',
     'Kernel::System::Main',
-    'Kernel::System::DateTime',
     'Kernel::System::Storable',
+    'Kernel::System::XML',
 );
 
 our $UseSlaveDB = 0;
@@ -196,7 +198,7 @@ sub Connect {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Caller   => 1,
             Priority => 'debug',
-            Message =>
+            Message  =>
                 "DB.pm->Connect: DSN: $Self->{DSN}, User: $Self->{USER}, Pw: $Self->{PW}, DB Type: $Self->{'DB::Type'};",
         );
     }
@@ -290,6 +292,78 @@ sub Version {
     }
 
     return $Version;
+}
+
+=head2 CheckRequiredDatabaseVersion()
+
+Check if the required database version is installed or not.
+
+    my %VersionInfo = $DBObject->CheckRequiredDatabaseVersion();
+
+Returns:
+
+    my %VersionInfo = (
+        'DatabaseType'       => 'MariaDB',
+        'VersionString'      => 'MariaDB 10.6.12',
+        'InstalledVersion'   => '10.6.12',
+        'MinimumVersion'     => '5.0.0',
+        'RequirementsPassed' => 1,
+    );
+
+=cut
+
+sub CheckRequiredDatabaseVersion {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    # Use dotted-decimal version formats, since version->parse() might not work as you expect it to.
+    #
+    #   $Version   version->parse($Version)
+    #   ---------   -----------------------
+    #   1.23        v1.230.0
+    #   "1.23"      v1.230.0
+    #   v1.23       v1.23.0
+    #   "v1.23"     v1.23.0
+    #   "1.2.3"     v1.2.3
+    #   "v1.2.3"    v1.2.3
+    my %MinimumDatabaseVersion = (
+        MySQL      => '8.0.0',
+        MariaDB    => '10.3.0',
+        PostgreSQL => '12.0.0',
+        Oracle     => '19.0.0',
+    );
+
+    my $VersionString = $Self->Version();
+
+    my $DatabaseType;
+    my $DatabaseVersion;
+    if ( $VersionString =~ m{ \A (MySQL|MariaDB|Oracle|PostgreSQL) \s+ ([0-9.]+) \z }xms ) {
+        $DatabaseType    = $1;
+        $DatabaseVersion = $2;
+    }
+
+    if ( !$DatabaseType || !$DatabaseVersion ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => 'Not able to detect database version!',
+        );
+        return;
+    }
+
+    my %Result = (
+        VersionString      => $VersionString,
+        DatabaseType       => $DatabaseType,
+        InstalledVersion   => $DatabaseVersion,
+        MinimumVersion     => $MinimumDatabaseVersion{$DatabaseType},
+        RequirementsPassed => 1,
+    );
+
+    if ( version->parse($DatabaseVersion) < version->parse( $MinimumDatabaseVersion{$DatabaseType} ) ) {
+        $Result{RequirementsPassed} = 0;
+    }
+
+    return %Result;
 }
 
 =head2 Quote()
@@ -852,6 +926,76 @@ sub ListTables {
     return @Tables;
 }
 
+=head2 GetSystemTables
+
+Retrieves tables of Znuny and optionally its installed packages and ignores any other tables that
+might have been added manually to the database.
+
+    my @SystemTables = $DBObject->GetSystemTables(
+        IncludePackageTables => 1, # Also include tables of installed packages
+    );
+
+Returns array with system table names.
+
+=cut
+
+sub GetSystemTables {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+    my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
+    my $XMLObject     = $Kernel::OM->Get('Kernel::System::XML');
+
+    #
+    # Assemble Znuny tables.
+    #
+    my $SQLDirectory   = $ConfigObject->Get('Home') . '/scripts/database';
+    my $SchemaFilePath = $SQLDirectory . '/' . 'schema.xml';
+
+    my $SchemaXML = $Kernel::OM->Get('Kernel::System::Main')->FileRead(
+        Location => $SchemaFilePath,
+    );
+    my @SchemaXML = $XMLObject->XMLParse(
+        String => $SchemaXML,
+    );
+
+    my @TableTags = grep {
+        defined $_->{Tag}
+            && $_->{Tag} eq 'Table'
+            && $_->{TagType} eq 'Start'
+    } @SchemaXML;
+    my @SystemTables = sort map { $_->{Name} } @TableTags;
+
+    return @SystemTables if !$Param{IncludePackageTables};
+
+    #
+    # Assemble tables of installed packages.
+    #
+    my @Packages = $Kernel::OM->Get('Kernel::System::Package')->RepositoryList();
+    PACKAGE:
+    for my $Package (@Packages) {
+        my $DatabaseInstall = $Package->{DatabaseInstall};
+        next PACKAGE if !IsHashRefWithData($DatabaseInstall);
+
+        for my $Type ( sort keys %{$DatabaseInstall} ) {
+            my @PackageTableTags = grep {
+                defined $_->{Tag}
+                    && $_->{Tag} eq 'TableCreate'
+                    && $_->{TagType} eq 'Start'
+            } @{ $DatabaseInstall->{$Type} };
+            my @PackageTables = sort map { $_->{Name} } @PackageTableTags;
+
+            push @SystemTables, @PackageTables;
+        }
+    }
+
+    # Ensure that every table is unique.
+    my %SystemTables = map { $_ => 1 } @SystemTables;
+    @SystemTables = sort keys %SystemTables;
+
+    return @SystemTables;
+}
+
 =head2 GetColumnNames()
 
 to retrieve the column names of a database statement
@@ -876,6 +1020,72 @@ sub GetColumnNames {
     }
 
     return @Result;
+}
+
+=head2 GetColumnMaxLengths()
+
+This method is used to retrieve the maximum length of a column in the database.
+
+    my %ColumnMaxLength = $DBObject->GetColumnMaxLengths(
+        Table => "customer_user",
+    );
+
+=cut
+
+sub GetColumnMaxLengths {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject   = $Kernel::OM->Get('Kernel::System::Log');
+    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
+
+    NEEDED:
+    for my $Needed (qw(Table)) {
+
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    my $Cache = $CacheObject->Get(
+        Type => 'DB',                                  # only [a-zA-Z0-9_] chars usable
+        Key  => 'ColumnMaxLength::' . $Param{Table},
+    );
+    return %{$Cache} if $Cache;
+
+    my $SQL = "SELECT column_name, character_maximum_length FROM information_schema.columns WHERE table_name = ?";
+
+    # This is a workaround for Oracle, because the information_schema.columns table is not available.
+    if ( $Self->{'DB::Type'} eq 'oracle' ) {
+        $Param{Table} = uc $Param{Table};
+        $SQL = "SELECT column_name, data_length FROM user_tab_columns WHERE table_name = ?";
+    }
+
+    $Self->Prepare(
+        SQL  => $SQL,
+        Bind => [ \$Param{Table} ],
+    );
+
+    my %ColumnMaxLength;
+    while ( my @Row = $Self->FetchrowArray() ) {
+        if ( $Self->{'DB::Type'} eq 'oracle' ) {
+            $Row[0] = lc $Row[0];
+            $Row[1] = lc $Row[1];
+        }
+        $ColumnMaxLength{ $Row[0] } = $Row[1];
+    }
+
+    $CacheObject->Set(
+        Type  => 'DB',
+        Key   => 'ColumnMaxLength::' . $Param{Table},
+        Value => \%ColumnMaxLength,
+        TTL   => 60 * 60 * 24 * 1,
+    );
+
+    return %ColumnMaxLength;
 }
 
 =head2 SelectAll()
@@ -1503,7 +1713,7 @@ sub QueryCondition {
                 if ( $SQL =~ m/ OR $/ ) {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => 'notice',
-                        Message =>
+                        Message  =>
                             "Invalid condition '$Param{Value}', simultaneous usage both AND and OR conditions!",
                     );
                     return "1=0";
@@ -1518,7 +1728,7 @@ sub QueryCondition {
                 if ( $SQL =~ m/ AND $/ ) {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => 'notice',
-                        Message =>
+                        Message  =>
                             "Invalid condition '$Param{Value}', simultaneous usage both AND and OR conditions!",
                     );
                     return "1=0";

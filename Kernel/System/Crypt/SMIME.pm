@@ -478,6 +478,9 @@ verify a message with signature and returns a hash (Successful, Message, Signers
         Message => $Message,
         CACert  => $PathtoCACert,                   # the certificates autority that endorse a self
                                                     # signed certificate
+        RetryWithNoVerify => 0,                     # optional; if config option SMIME::NoVerify is set,
+                                                    # verification will be tried with '-noverify' option
+                                                    # after initial failure
     );
 
 returns:
@@ -498,6 +501,8 @@ returns:
 
 sub Verify {
     my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     my %Return;
     my $Message     = '';
@@ -531,11 +536,15 @@ sub Verify {
         $CertificateOption = "-CAfile $Param{CACert}";
     }
 
-    my $Options = "smime -verify -in $SignedFile -out $VerifiedFile -signer $SignerFile "
+    my $NoVerifyOption = '';
+    if ( $Param{RetryWithNoVerify} ) {
+        $NoVerifyOption = '-noverify';
+    }
+
+    my $Options = "smime -verify $NoVerifyOption -in $SignedFile -out $VerifiedFile -signer $SignerFile "
         . "-CApath $Self->{CertPath} $CertificateOption $SignedFile";
 
     my @LogLines = qx{$Self->{Cmd} $Options 2>&1};
-
     for my $LogLine (@LogLines) {
         $MessageLong .= $LogLine;
         if ( $LogLine =~ /^\d.*:(.+?):.+?:.+?:$/ || $LogLine =~ /^\d.*:(.+?)$/ ) {
@@ -583,7 +592,7 @@ sub Verify {
         %Return = (
             SignatureFound => 1,
             Successful     => 0,
-            Message =>
+            Message        =>
                 'OpenSSL: self signed certificate, to use it send the \'Certificate\' parameter : '
                 . $Message,
             MessageLong =>
@@ -594,12 +603,12 @@ sub Verify {
         );
     }
 
-    # digest failure means that the content of the email does not match witht he signature
+    # digest failure means that the content of the email does not match with the signature
     elsif ( $Message =~ m{digest failure}i ) {
         %Return = (
             SignatureFound => 1,
             Successful     => 0,
-            Message =>
+            Message        =>
                 'OpenSSL: The signature does not match the message content : ' . $Message,
             MessageLong =>
                 'OpenSSL: The signature does not match the message content : ' . $MessageLong,
@@ -608,12 +617,22 @@ sub Verify {
         );
     }
     else {
-        %Return = (
-            SignatureFound => 0,
-            Successful     => 0,
-            Message        => 'OpenSSL: ' . $Message,
-            MessageLong    => 'OpenSSL: ' . $MessageLong,
-        );
+        # Retry if config option SMIME::NoVerify is set and this is not already the retry.
+        my $NoVerify = $ConfigObject->Get('SMIME::NoVerify');
+        if ( $NoVerify && !$Param{RetryWithNoVerify} ) {
+            %Return = $Self->Verify(
+                %Param,
+                RetryWithNoVerify => 1,
+            );
+        }
+        else {
+            %Return = (
+                SignatureFound => 0,
+                Successful     => 0,
+                Message        => 'OpenSSL: ' . $Message,
+                MessageLong    => 'OpenSSL: ' . $MessageLong,
+            );
+        }
     }
     return %Return;
 }
@@ -632,7 +651,10 @@ sub KeysList {
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     return if !$DBObject->Prepare(
-        SQL => "SELECT * FROM smime_keys",
+        SQL => '
+            SELECT id, key_hash, key_type, file_name, email_address, expiration_date, fingerprint, subject, create_time
+            FROM   smime_keys
+        ',
     );
 
     my @KeysList;
@@ -1035,7 +1057,7 @@ sub ConvertCertFormat {
             Convert => "pkcs7 -in $TmpCertificate -print_certs -out $CertFile",
         },
         PFX => {
-            Read => "pkcs12 -in $TmpCertificate -noout -nomacver -passin pass:'$PassPhrase'",
+            Read    => "pkcs12 -in $TmpCertificate -noout -nomacver -passin pass:'$PassPhrase'",
             Convert =>
                 "pkcs12 -in $TmpCertificate -out $CertFile -nomacver -clcerts -nokeys -passin pass:'$PassPhrase'",
         },
@@ -1793,8 +1815,8 @@ sub PrivateAdd {
                     VALUES
                     (?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 Bind => [
-                    \$CertificateAttributes{Hash}, \$Attributes{Type},
-                    \$Certificates[0]->{Filename}, \$CertificateAttributes{Email},
+                    \$CertificateAttributes{Hash},         \$Attributes{Type},
+                    \$Certificates[0]->{Filename},         \$CertificateAttributes{Email},
                     \$CertificateAttributes{ShortEndDate}, \$CertificateAttributes{Fingerprint},
                     \$CertificateAttributes{Subject},      \$DateTimeObject->ToString(),
                     \$UserID,
@@ -1941,7 +1963,7 @@ sub PrivateRemove {
     if ( !$SecretDelete ) {
         %Return = (
             Successful => 0,
-            Message =>
+            Message    =>
                 "Delete private aborted, not possible to delete Secret: $Self->{PrivatePath}/$Param{Filename}.P, $!!",
         );
         return %Return;
@@ -2679,8 +2701,8 @@ sub ReIndexCertificate {
                 VALUES
                 (?, ?, ?, ?, ?, ?, ?, ?, ?)",
             Bind => [
-                \$Attributes{Hash}, \$Attributes{Type},
-                \$Filename, \$Attributes{Email},
+                \$Attributes{Hash},         \$Attributes{Type},
+                \$Filename,                 \$Attributes{Email},
                 \$Attributes{ShortEndDate}, \$Attributes{Fingerprint},
                 \$Attributes{Subject},      \$DateTimeObject->ToString(),
                 \1,
@@ -2817,8 +2839,8 @@ sub ReIndexPrivate {
                 VALUES
                 (?, ?, ?, ?, ?, ?, ?, ?, ?)",
             Bind => [
-                \$CertificateAttributes{Hash}, \$PrivateAttributes{Type},
-                \$Filename, \$CertificateAttributes{Email},
+                \$CertificateAttributes{Hash},         \$PrivateAttributes{Type},
+                \$Filename,                            \$CertificateAttributes{Email},
                 \$CertificateAttributes{ShortEndDate}, \$CertificateAttributes{Fingerprint},
                 \$CertificateAttributes{Subject},      \$DateTimeObject->ToString(),
                 \1,
@@ -2884,7 +2906,7 @@ sub _FetchAttributesFromCert {
         Subject     => 'subject=[ ]*(?:\/)?(.+?)',
         StartDate   => 'notBefore=(.*)',
         EndDate     => 'notAfter=(.*)',
-        Email       => '([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4})',
+        Email       => '([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z0-9-]{2,63})',
         Modulus     => 'Modulus=(.*)',
     );
 

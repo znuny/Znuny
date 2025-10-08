@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -393,7 +393,7 @@ sub Run {
 
         my $UploadCacheObject = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
 
-        if ( !$GetParam{Body} || $GetParam{Body} eq '<br />' ) {
+        if ( !$GetParam{Body} || $GetParam{Body} eq '<p>&nbsp;</p>' ) {
             $Error{RichTextInvalid}    = 'ServerError';
             $GetParam{FollowUpVisible} = 'Visible';
         }
@@ -451,7 +451,7 @@ sub Run {
                 DynamicFieldConfig   => $DynamicFieldConfig,
                 PossibleValuesFilter => $PossibleValuesFilter,
                 ParamObject          => $ParamObject,
-                Mandatory =>
+                Mandatory            =>
                     $Config->{FollowUpDynamicField}->{ $DynamicFieldConfig->{Name} }
                     == 2,
             );
@@ -481,13 +481,13 @@ sub Run {
             $DynamicFieldHTML{ $DynamicFieldConfig->{Name} } = $BackendObject->EditFieldRender(
                 DynamicFieldConfig   => $DynamicFieldConfig,
                 PossibleValuesFilter => $PossibleValuesFilter,
-                Mandatory =>
+                Mandatory            =>
                     $Config->{FollowUpDynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
-                ServerError  => $ValidationResult->{ServerError}  || '',
-                ErrorMessage => $ValidationResult->{ErrorMessage} || '',
-                LayoutObject => $LayoutObject,
-                ParamObject  => $ParamObject,
-                AJAXUpdate   => 1,
+                ServerError     => $ValidationResult->{ServerError}  || '',
+                ErrorMessage    => $ValidationResult->{ErrorMessage} || '',
+                LayoutObject    => $LayoutObject,
+                ParamObject     => $ParamObject,
+                AJAXUpdate      => 1,
                 UpdatableFields => $Self->_GetFieldsToUpdate(),
             );
         }
@@ -589,7 +589,7 @@ sub Run {
             );
         }
 
-        my $ArticleID = $Kernel::OM->Get('Kernel::System::Ticket::Article::Backend::Internal')->ArticleCreate(
+        my $ArticleID = $Kernel::OM->Get('Kernel::System::Ticket::Article::Backend::Web')->ArticleCreate(
             TicketID             => $Self->{TicketID},
             IsVisibleForCustomer => 1,
             SenderType           => $Config->{SenderType},
@@ -766,7 +766,7 @@ sub Run {
         $DynamicFieldHTML{ $DynamicFieldConfig->{Name} } = $BackendObject->EditFieldRender(
             DynamicFieldConfig   => $DynamicFieldConfig,
             PossibleValuesFilter => $PossibleValuesFilter,
-            Mandatory =>
+            Mandatory            =>
                 $Config->{FollowUpDynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
             LayoutObject    => $LayoutObject,
             ParamObject     => $ParamObject,
@@ -1262,6 +1262,7 @@ sub _Mask {
                 Name => 'TicketDynamicFieldLink',
                 Data => {
                     Value                       => $ValueStrg->{Value},
+                    ValueKey                    => $Param{"DynamicField_$DynamicFieldConfig->{Name}"},
                     Title                       => $ValueStrg->{Title},
                     Link                        => $DynamicFieldConfig->{Config}->{Link},
                     LinkPreview                 => $DynamicFieldConfig->{Config}->{LinkPreview},

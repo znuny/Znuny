@@ -32,7 +32,7 @@ sub Configure {
         HasValue    => 0,
     );
     $Self->AddOption(
-        Name => 'send-timeout',
+        Name        => 'send-timeout',
         Description =>
             "Timeout in seconds to kill the process that sends emails (default: 600).",
         Required   => 0,
@@ -62,7 +62,7 @@ sub Configure {
         ValueRegex  => qr/^.+$/smx,
     );
     $Self->AddOption(
-        Name => 'filter',
+        Name        => 'filter',
         Description =>
             'Filter actions on messages (can be used with --list and --delete). Example: --filter="ID::1" (Possible filters: ID|ArticleID|CommunicationID|Sender|Recipient|Attempts)',
         Required   => 0,
@@ -71,7 +71,7 @@ sub Configure {
         ValueRegex => qr/^.+$/smx,
     );
     $Self->AddOption(
-        Name => 'force',
+        Name        => 'force',
         Description =>
             'Force the send of the messages even if send time hasn\'t been reached (can be used with --send). Example: --send --force',
         Required => 0,
@@ -79,7 +79,7 @@ sub Configure {
         HasValue => 0,
     );
     $Self->AddOption(
-        Name => 'verbose',
+        Name        => 'verbose',
         Description =>
             'Display debug information (can be used with --send). Example: --send --verbose',
         Required => 0,
@@ -185,9 +185,29 @@ sub Run {
 sub Send {
     my ( $Self, %Param ) = @_;
 
+    my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
     my $MailQueueObject = $Kernel::OM->Get('Kernel::System::MailQueue');
 
-    my $List = $MailQueueObject->List();
+    my $RateLimit          = $ConfigObject->Get('SendmailModule::RateLimit') // 30;
+    my $RateLimitPerSender = $ConfigObject->Get('SendmailModule::RateLimitPerSenderAddress');
+    my $List;
+
+    if ($RateLimitPerSender) {
+        my $UnfilteredList = $MailQueueObject->List();
+        my %SenderAddressCounter;
+
+        ITEM:
+        for my $Item ( @{$UnfilteredList} ) {
+            my $Sender = $Item->{Recipient} // 'Default';
+            $SenderAddressCounter{$Sender}++;
+            next ITEM if $SenderAddressCounter{$Sender} > $RateLimit;
+
+            push @{$List}, $Item;
+        }
+    }
+    else {
+        $List = $MailQueueObject->List( Limit => $RateLimit );
+    }
 
     if ( !IsArrayRefWithData($List) ) {
         $Self->Print("\n<yellow>No messages available for sending.</yellow>\n");
@@ -201,8 +221,7 @@ sub Send {
     my $Verbose      = $Self->GetOption('verbose');
     my $SendTimeout  = $Self->GetOption('send-timeout') // 600;
 
-    MAILQUEUE:
-    for my $Item (@$List) {
+    for my $Item ( @{$List} ) {
         my $Result;
 
         eval {

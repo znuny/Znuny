@@ -17,11 +17,17 @@ use Kernel::System::VariableCheck qw(:all);
 use parent qw(Kernel::System::AsynchronousExecutor);
 use parent qw(Kernel::System::EventHandler);
 
+use MIME::Base64;
+
 our $ObjectManagerDisabled = 1;
 
 =head1 NAME
 
-Kernel::GenericInterface::Invoker::Ticket::Generic
+Kernel::GenericInterface::Invoker::Ticket::Generic - Generic Interface Invoker for ticket-related requester calls
+
+=head1 DESCRIPTION
+
+Invoker that prepares requests and processes responses for ticket-related Generic Interface requester calls.
 
 =head1 PUBLIC INTERFACE
 
@@ -56,15 +62,23 @@ prepare the invocation of the configured remote web service.
 
     my $Result = $InvokerObject->PrepareRequest(
         Data => {                               # data payload
-            ...
+            TicketID                 => 1,      # optional
+            ArticleID                => 7,      # optional
+            GetAllArticleAttachments => 1,      # optional, 0 as default. 0|1,
         },
+
+        InvokerName => 'Generic',
+        Webservice  => { ... },                 # optional
     );
+
+Returns:
 
     $Result = {
         Success         => 1,                   # 0 or 1
-        ErrorMessage    => '',                  # in case of error
-        Data            => {                    # data payload after Invoker
-            ...
+        ErrorMessage    => '...',               # in case of error
+        Data => {
+            Ticket => { ... },
+            Event  => { ... },
         },
     };
 
@@ -81,12 +95,27 @@ sub PrepareRequest {
     my $GetAllArticleAttachments = $Param{Data}->{GetAllArticleAttachments}
         || $Param{Webservice}->{Config}->{Requester}->{Invoker}->{$InvokerName}->{GetAllArticleAttachments};
 
-    my %Ticket = $TicketObject->TicketDeepGet(
-        TicketID                 => $Param{Data}->{TicketID},
-        ArticleID                => $Param{Data}->{ArticleID},
-        GetAllArticleAttachments => $GetAllArticleAttachments,
-        UserID                   => 1,
-    );
+    my %Ticket;
+    if ( $Param{Data}->{TicketID} ) {
+        %Ticket = $TicketObject->TicketDeepGet(
+            TicketID                 => $Param{Data}->{TicketID},
+            ArticleID                => $Param{Data}->{ArticleID},    # optional, hence not checked
+            GetAllArticleAttachments => $GetAllArticleAttachments,
+            UserID                   => 1,
+        );
+
+        # Provide UntilTime as date/time parts
+        if ( $Ticket{UntilTime} ) {
+            my $UntilTimeDateTimeObject = $Kernel::OM->Create(
+                'Kernel::System::DateTime',
+            );
+            $UntilTimeDateTimeObject->Add(
+                Seconds => int( $Ticket{UntilTime} ),
+            );
+
+            $Ticket{UntilTimeDateTimeParts} = $UntilTimeDateTimeObject->Get();
+        }
+    }
 
     # Remove configured fields.
     my $OmittedFields = $ConfigObject->Get(
@@ -102,6 +131,12 @@ sub PrepareRequest {
 
         $UtilObject->DataStructureRemoveElements(
             Data     => \%Ticket,
+            HashKeys => \@HashKeys,
+        );
+
+        # Also remove elements from given payload.
+        $UtilObject->DataStructureRemoveElements(
+            Data     => $Param{Data},
             HashKeys => \@HashKeys,
         );
     }
@@ -120,6 +155,12 @@ sub PrepareRequest {
 
         $UtilObject->Base64DeepEncode(
             Data     => \%Ticket,
+            HashKeys => \@HashKeys,
+        );
+
+        # Also encode elements of given payload.
+        $UtilObject->Base64DeepEncode(
+            Data     => $Param{Data},
             HashKeys => \@HashKeys,
         );
     }
@@ -149,6 +190,8 @@ handle response data of the configured remote web service.
         },
     );
 
+Returns:
+
     $Result = {
         Success         => 1,                   # 0 or 1
         ErrorMessage    => '',                  # in case of error
@@ -168,19 +211,6 @@ sub HandleResponse {
     my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
     my $ArticleObject      = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
-    # if there was an error in the response, forward it
-    if ( !$Param{ResponseSuccess} ) {
-        if ( !IsStringWithData( $Param{ResponseErrorMessage} ) ) {
-            return $Self->{DebuggerObject}->Error(
-                Summary => 'Got response error, but no response error message!',
-            );
-        }
-        return {
-            Success      => 0,
-            ErrorMessage => $Param{ResponseErrorMessage},
-        };
-    }
-
     # Pass through response if no hash
     if ( !IsHashRefWithData( $Param{Data} ) ) {
         return {
@@ -189,6 +219,7 @@ sub HandleResponse {
         };
     }
 
+    # Set data and execute functions even in error case.
     RESULT:
     for my $Key ( sort keys %{ $Param{Data} } ) {
 
@@ -292,9 +323,9 @@ sub HandleResponse {
             }
 
             $Success = $TicketObject->HistoryAdd(
-                Name        => $Param{Data}->{$Key}->{Name}        || $Param{Data}->{$Key}->{HistoryComment} || ' ',
-                HistoryType => $Param{Data}->{$Key}->{HistoryType} || 'AddNote',
-                TicketID    => $Self->{RequestData}->{Ticket}->{TicketID},
+                Name         => $Param{Data}->{$Key}->{Name} || $Param{Data}->{$Key}->{HistoryComment} || ' ',
+                HistoryType  => $Param{Data}->{$Key}->{HistoryType} || 'AddNote',
+                TicketID     => $Self->{RequestData}->{Ticket}->{TicketID},
                 CreateUserID => 1,
             );
         }
@@ -308,6 +339,27 @@ sub HandleResponse {
                         "Missing parameter '$Needed' on action '$Key'. Failed to execute!",
                 );
             }
+
+            #
+            # Base-64-decode article attachments.
+            #
+            my $Attachments = $Param{Data}->{$Key}->{Attachment};
+            if ( IsHashRefWithData($Attachments) ) {
+                $Attachments = [$Attachments];
+            }
+            if ( !IsArrayRefWithData($Attachments) ) {
+                $Attachments = [];
+            }
+
+            ATTACHMENT:
+            for my $Attachment ( @{$Attachments} ) {
+                next ATTACHMENT if !IsHashRefWithData($Attachment);
+                next ATTACHMENT if !IsStringWithData( $Attachment->{Content} );
+
+                $Attachment->{Content} = MIME::Base64::decode_base64( $Attachment->{Content} );
+            }
+
+            $Param{Data}->{$Key}->{Attachment} = $Attachments;
 
             $Success = $ArticleObject->ArticleCreate(
                 TicketID             => $Self->{RequestData}->{Ticket}->{TicketID},
@@ -398,10 +450,44 @@ sub HandleResponse {
         );
     }
 
+    # if there was an error in the response, forward it
+    if ( !$Param{ResponseSuccess} ) {
+        if ( !IsStringWithData( $Param{ResponseErrorMessage} ) ) {
+            return $Self->{DebuggerObject}->Error(
+                Summary => 'Got response error, but no response error message!',
+            );
+        }
+        return {
+            Success      => 0,
+            ErrorMessage => $Param{ResponseErrorMessage},
+        };
+    }
+
     return {
         Success => 1,
         Data    => $Param{Data},
     };
 }
 
+=head2 HandleError()
+
+Calls HandleResponse() with ResponseSuccess = 0 and the provided Data.
+
+=cut
+
+sub HandleError {
+    my ( $Self, %Param ) = @_;
+
+    # Execute HandleResponse with error data because it might contain further tags
+    # to set data or execute functions (see HandleResponse above) in error case.
+    return $Self->HandleResponse(
+        ResponseSuccess => 0,
+        Data            => $Param{Data},
+    );
+}
+
 1;
+
+=head1 SEE ALSO
+
+L<Kernel::GenericInterface::Invoker>

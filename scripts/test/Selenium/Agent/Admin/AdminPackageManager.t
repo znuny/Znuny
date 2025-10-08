@@ -59,7 +59,7 @@ my $NavigateToAdminPackageManager = sub {
     my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
     $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminPackageManager");
     $Selenium->WaitFor(
-        Time => 120,
+        Time       => 120,
         JavaScript =>
             'return typeof($) == "function" && $("#FileUpload").length;'
     );
@@ -72,7 +72,7 @@ my $ClickAction = sub {
     $Selenium->execute_script('window.Core.App.PageLoadComplete = false;');
     $Selenium->find_element($Selector)->click();
     $Selenium->WaitFor(
-        Time => 120,
+        Time       => 120,
         JavaScript =>
             'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete'
     );

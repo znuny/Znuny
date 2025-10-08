@@ -20,6 +20,7 @@ our @ObjectDependencies = (
     'Kernel::Output::HTML::Article::MIMEBase',
     'Kernel::Output::HTML::Layout',
     'Kernel::System::CommunicationChannel',
+    'Kernel::System::HTMLUtils',
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::Ticket::Article',
@@ -61,6 +62,7 @@ sub ArticleRender {
     my $LayoutObject         = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $MainObject           = $Kernel::OM->Get('Kernel::System::Main');
     my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForArticle(%Param);
+    my $HTMLUtilsObject      = $Kernel::OM->Get('Kernel::System::HTMLUtils');
 
     my %Article = $ArticleBackendObject->ArticleGet(
         %Param,
@@ -141,6 +143,12 @@ sub ArticleRender {
         ResultType => 'plain',
     );
 
+    # The unshortened plaintext article content is needed for the plaintext view of the full body.
+    my $UnshortenedArticleContent = $LayoutObject->ArticlePreview(
+        %Param,
+        ResultType => 'plain',
+    );
+
     if ( !$ShowHTML ) {
 
         # html quoting
@@ -151,7 +159,44 @@ sub ArticleRender {
             HTMLResultMode => 1,
             LinkFeature    => 1,
         );
+
+        $UnshortenedArticleContent = $LayoutObject->Ascii2Html(
+            NewLine => $ConfigObject->Get('DefaultViewNewLine'),
+            Text    => $UnshortenedArticleContent,
+
+            #             VMax           => $ConfigObject->Get('DefaultViewLines') || 5000,
+            HTMLResultMode => 1,
+            LinkFeature    => 1,
+        );
     }
+
+    my %SafeArticleContent = $HTMLUtilsObject->Safety(
+        String       => $ArticleContent,
+        NoApplet     => 1,
+        NoObject     => 1,
+        NoEmbed      => 1,
+        NoSVG        => 1,
+        NoImg        => 0,
+        NoIntSrcLoad => 0,
+        NoExtSrcLoad => 1,
+        NoJavaScript => 1,
+    );
+
+    my $SafeArticleContent = $SafeArticleContent{String} // '';
+
+    my %SafeUnshortenedArticleContent = $HTMLUtilsObject->Safety(
+        String       => $UnshortenedArticleContent,
+        NoApplet     => 1,
+        NoObject     => 1,
+        NoEmbed      => 1,
+        NoSVG        => 1,
+        NoImg        => 0,
+        NoIntSrcLoad => 0,
+        NoExtSrcLoad => 1,
+        NoJavaScript => 1,
+    );
+
+    my $SafeUnshortenedArticleContent = $SafeUnshortenedArticleContent{String} // '';
 
     my %CommunicationChannel = $Kernel::OM->Get('Kernel::System::CommunicationChannel')->ChannelGet(
         ChannelID => $Article{CommunicationChannelID},
@@ -189,7 +234,8 @@ sub ArticleRender {
             Class                => $Param{Class},
             Attachments          => \@ArticleAttachments,
             MenuItems            => $Param{ArticleActions},
-            Body                 => $ArticleContent,
+            Body                 => $SafeArticleContent,
+            UnshortenedBody      => $SafeUnshortenedArticleContent,
             HTML                 => $ShowHTML,
             CommunicationChannel => $CommunicationChannel{DisplayName},
             ChannelIcon          => $CommunicationChannel{DisplayIcon},

@@ -62,7 +62,7 @@ sub Run {
 
         my @Parts = split /;;/, $Row;
 
-        next ROW if !$Parts[3];
+        next ROW if !$Parts[5];
 
         my $ErrorClass = ( $Parts[1] =~ /error/ ) ? 'Error' : '';
 
@@ -90,7 +90,9 @@ sub Run {
                 Time       => $Parts[0],
                 Priority   => $Parts[1],
                 Facility   => $Parts[2],
-                Message    => $Parts[3],
+                Source     => $Parts[3],
+                Line       => $Parts[4],
+                Message    => $Parts[5],
             },
         );
     }

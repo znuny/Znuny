@@ -12,12 +12,11 @@ package Kernel::System::SysConfig;
 use strict;
 use warnings;
 
-use File::Copy;
 use Time::HiRes();
 use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::Config;
 
 use parent qw(Kernel::System::AsynchronousExecutor);
@@ -2509,7 +2508,7 @@ sub ConfigurationXML2DB {
         if ( !defined $SettingsByInit{$InitValue} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Invalid otrs_config Init value ($InitValue)! Allowed values: Framework, Application, Config, Changes.",
             );
             next FILE;
@@ -2623,12 +2622,12 @@ sub ConfigurationXML2DB {
                     DefaultID      => $DefaultSetting->{DefaultID},
                     Name           => $Settings{$SettingName}->{XMLContentParsed}->{Name},
                     Description    => $Settings{$SettingName}->{XMLContentParsed}->{Description}->[0]->{Content} || '',
-                    Navigation     => $Settings{$SettingName}->{XMLContentParsed}->{Navigation}->[0]->{Content} || '',
-                    IsInvisible    => $Settings{$SettingName}->{XMLContentParsed}->{Invisible} || 0,
-                    IsReadonly     => $Settings{$SettingName}->{XMLContentParsed}->{ReadOnly} || 0,
-                    IsRequired     => $Settings{$SettingName}->{XMLContentParsed}->{Required} || 0,
-                    IsValid        => $Settings{$SettingName}->{XMLContentParsed}->{Valid} || 0,
-                    HasConfigLevel => $Settings{$SettingName}->{XMLContentParsed}->{ConfigLevel} || 100,
+                    Navigation     => $Settings{$SettingName}->{XMLContentParsed}->{Navigation}->[0]->{Content}  || '',
+                    IsInvisible    => $Settings{$SettingName}->{XMLContentParsed}->{Invisible}                   || 0,
+                    IsReadonly     => $Settings{$SettingName}->{XMLContentParsed}->{ReadOnly}                    || 0,
+                    IsRequired     => $Settings{$SettingName}->{XMLContentParsed}->{Required}                    || 0,
+                    IsValid        => $Settings{$SettingName}->{XMLContentParsed}->{Valid}                       || 0,
+                    HasConfigLevel => $Settings{$SettingName}->{XMLContentParsed}->{ConfigLevel}                 || 100,
                     UserModificationPossible => $Settings{$SettingName}->{XMLContentParsed}->{UserModificationPossible}
                         || 0,
                     UserModificationActive => $Settings{$SettingName}->{XMLContentParsed}->{UserModificationActive}
@@ -2644,7 +2643,7 @@ sub ConfigurationXML2DB {
                 if ( !$Success ) {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => 'error',
-                        Message =>
+                        Message  =>
                             "DefaultSettingUpdate failed for Config Item: $SettingName!",
                     );
                 }
@@ -2692,12 +2691,12 @@ sub ConfigurationXML2DB {
                 $DefaultSettingsAdd{ $Settings{$SettingName}->{XMLContentParsed}->{Name} } = {
                     Name           => $Settings{$SettingName}->{XMLContentParsed}->{Name},
                     Description    => $Settings{$SettingName}->{XMLContentParsed}->{Description}->[0]->{Content} || '',
-                    Navigation     => $Settings{$SettingName}->{XMLContentParsed}->{Navigation}->[0]->{Content} || '',
-                    IsInvisible    => $Settings{$SettingName}->{XMLContentParsed}->{Invisible} || 0,
-                    IsReadonly     => $Settings{$SettingName}->{XMLContentParsed}->{ReadOnly} || 0,
-                    IsRequired     => $Settings{$SettingName}->{XMLContentParsed}->{Required} || 0,
-                    IsValid        => $Settings{$SettingName}->{XMLContentParsed}->{Valid} || 0,
-                    HasConfigLevel => $Settings{$SettingName}->{XMLContentParsed}->{ConfigLevel} || 100,
+                    Navigation     => $Settings{$SettingName}->{XMLContentParsed}->{Navigation}->[0]->{Content}  || '',
+                    IsInvisible    => $Settings{$SettingName}->{XMLContentParsed}->{Invisible}                   || 0,
+                    IsReadonly     => $Settings{$SettingName}->{XMLContentParsed}->{ReadOnly}                    || 0,
+                    IsRequired     => $Settings{$SettingName}->{XMLContentParsed}->{Required}                    || 0,
+                    IsValid        => $Settings{$SettingName}->{XMLContentParsed}->{Valid}                       || 0,
+                    HasConfigLevel => $Settings{$SettingName}->{XMLContentParsed}->{ConfigLevel}                 || 100,
                     UserModificationPossible => $Settings{$SettingName}->{XMLContentParsed}->{UserModificationPossible}
                         || 0,
                     UserModificationActive => $Settings{$SettingName}->{XMLContentParsed}->{UserModificationActive}
@@ -4454,6 +4453,7 @@ sub ConfigurationCategoriesGet {
         my $DisplayName = $ConfigObject->Get("SystemConfiguration::Category::Name::$PackageName") || $PackageName;
 
         $Result{$PackageName} = {
+            PackageName => $PackageName,
             DisplayName => $DisplayName,
             Files       => \@XMLFiles,
         };
@@ -5964,7 +5964,7 @@ sub _HandleSettingsToDeploy {
         if ( !$ModifiedDelete ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Could not delete the modified setting for $Setting->{Name} on reset action! Rolling back.",
             );
             $Error = 1;
@@ -6309,7 +6309,14 @@ sub CreateZZZAAutoBackup {
     my $BackupDir              = "$Home/Kernel/Config/Backups/";
     my $ZZZAAutoFilePath       = "$Home/Kernel/Config/Files/ZZZAAuto.pm";
     my $ZZZAAutoBackupFilePath = "$Home/Kernel/Config/Backups/ZZZAAuto.pm";
+    my $FileClass              = "Kernel::Config::Files::ZZZAAuto";
+    my $BackupFileClass        = "Kernel::Config::Backups::ZZZAAuto";
 
+    if ( -f $ZZZAAutoBackupFilePath ) {
+        $MainObject->FileDelete(
+            Location => $ZZZAAutoBackupFilePath
+        );
+    }
     return if !-f $ZZZAAutoFilePath;
 
     # create backups directory if not existing
@@ -6317,7 +6324,22 @@ sub CreateZZZAAutoBackup {
         return if !mkdir $BackupDir;
     }
 
-    return if !copy( $ZZZAAutoFilePath, $ZZZAAutoBackupFilePath );
+    my $ContentSCALARRef = $MainObject->FileRead(
+        Location => $ZZZAAutoFilePath,
+        Mode     => 'utf8',
+        Type     => 'Local',
+        Result   => 'SCALAR',
+    );
+
+    my $ZZZAAutoData = ${$ContentSCALARRef};
+
+    # Search and replace package from Files to Backups
+    $ZZZAAutoData =~ s{package $FileClass}{package $BackupFileClass}g;
+
+    return if !$MainObject->FileWrite(
+        Location => $ZZZAAutoBackupFilePath,
+        Content  => \$ZZZAAutoData,
+    );
 
     return 1;
 }

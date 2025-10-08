@@ -12,7 +12,7 @@ package Kernel::Output::HTML::ArticleAction::AgentTicketForward;
 use strict;
 use warnings;
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(IsHashRefWithData);
 
 our @ObjectDependencies = (
@@ -162,7 +162,7 @@ sub GetConfig {
             Description => Translatable('Forward article via mail'),
             Name        => Translatable('Forward'),
             Class       => 'AsPopup PopupType_TicketAction',
-            Link =>
+            Link        =>
                 "Action=AgentTicketForward;TicketID=$Param{Ticket}->{TicketID};ArticleID=$Param{Article}->{ArticleID}"
         };
     }

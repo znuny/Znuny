@@ -15,7 +15,7 @@ use warnings;
 our $ObjectManagerDisabled = 1;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -30,7 +30,8 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     $Self->{Subaction} = $ParamObject->GetParam( Param => 'Subaction' ) || '';
 
@@ -50,12 +51,11 @@ sub Run {
         $Param{NotifyData} = [
             {
                 Info => $SynchronizeMessage,
+                Link => $LayoutObject->{Baselink} . 'Action=AdminACL;Subaction=ACLDeploy'
             },
         ];
         $SynchronizedMessageVisible = 1;
     }
-
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     # ------------------------------------------------------------ #
     # ACLImport
@@ -280,7 +280,7 @@ sub Run {
         $ACLData->{Description}    = $GetParam->{Description};
         $ACLData->{StopAfterMatch} = $GetParam->{StopAfterMatch} || 0;
         $ACLData->{ValidID}        = $GetParam->{ValidID};
-        $ACLData->{ConfigMatch}    = $GetParam->{ConfigMatch} || '';
+        $ACLData->{ConfigMatch}    = $GetParam->{ConfigMatch}  || '';
         $ACLData->{ConfigChange}   = $GetParam->{ConfigChange} || '';
 
         # check required parameters
@@ -317,7 +317,7 @@ sub Run {
             Description    => $ACLData->{Description},
             StopAfterMatch => $ACLData->{StopAfterMatch} || 0,
             ValidID        => $ACLData->{ValidID},
-            ConfigMatch    => $ACLData->{ConfigMatch} || '',
+            ConfigMatch    => $ACLData->{ConfigMatch}  || '',
             ConfigChange   => $ACLData->{ConfigChange} || '',
             UserID         => $Self->{UserID},
         );
@@ -536,8 +536,8 @@ sub Run {
             Name           => $ACLName,
             Comment        => $ACLData->{Comment},
             Description    => $ACLData->{Description},
-            ConfigMatch    => $ACLData->{ConfigMatch} || '',
-            ConfigChange   => $ACLData->{ConfigChange} || '',
+            ConfigMatch    => $ACLData->{ConfigMatch}    || '',
+            ConfigChange   => $ACLData->{ConfigChange}   || '',
             StopAfterMatch => $ACLData->{StopAfterMatch} || 0,
             ValidID        => $ACLData->{ValidID},
             UserID         => $Self->{UserID},
@@ -577,7 +577,7 @@ sub _ShowOverview {
         # show error notify, don't work with user id 1
         $Output .= $LayoutObject->Notify(
             Priority => 'Error',
-            Info =>
+            Info     =>
                 Translatable('Please note that ACL restrictions will be ignored for the Superuser account (UserID 1).'),
         );
     }
@@ -757,16 +757,28 @@ sub _ShowEdit {
         AutoComplete   => 'off',
     );
 
-    # get list of all possible dynamic fields
-    my $DynamicFieldList = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldList(
-        ObjectType => 'Ticket',
-        ResultType => 'HASH',
-    );
-    my %DynamicFieldNames = reverse %{$DynamicFieldList};
     my %DynamicFields;
-    for my $DynamicFieldName ( sort keys %DynamicFieldNames ) {
-        $DynamicFields{ 'DynamicField_' . $DynamicFieldName } = $DynamicFieldName;
+    my $DynamicFieldList = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
+        Valid      => 1,
+        ObjectType => ['Ticket'],
+    );
+
+    DYNAMICFIELDCONFIG:
+    for my $DynamicFieldConfig ( @{$DynamicFieldList} ) {
+        next DYNAMICFIELDCONFIG if !IsHashRefWithData($DynamicFieldConfig);
+
+        my $TranslatedLabel = $LayoutObject->{LanguageObject}->Translate( $DynamicFieldConfig->{Label} );
+        my $CombinedLabel   = (
+            $TranslatedLabel eq $DynamicFieldConfig->{Name}
+            ? $TranslatedLabel
+            : $TranslatedLabel . ' (' . $DynamicFieldConfig->{Name} . ')'
+        );
+
+        $DynamicFields{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = $CombinedLabel;
     }
+
+    %DynamicFields = map { $_ => $DynamicFields{$_} } sort keys %DynamicFields;
+
     $Param{ACLKeysLevel3DynamicFields} = $LayoutObject->BuildSelection(
         Data         => \%DynamicFields,
         Name         => 'NewDataKeyDropdown',
@@ -778,7 +790,7 @@ sub _ShowEdit {
 
     # get list of all possible actions
     my @PossibleActionsList;
-    my $ACLKeysLevel3Actions = $ConfigObject->Get('ACLKeysLevel3::Actions') || [];
+    my $ACLKeysLevel3Actions = $ConfigObject->Get('ACLKeysLevel3::Actions') || {};
 
     for my $Key ( sort keys %{$ACLKeysLevel3Actions} ) {
         push @PossibleActionsList, @{ $ACLKeysLevel3Actions->{$Key} };

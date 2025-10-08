@@ -34,7 +34,7 @@ $HelperObject->ConfigSettingChange(
 
 my @Tests = (
     {
-        Name => '',
+        Name => 'Content img',
         Data => {
             Content     => '<img src="cid:1234567890ABCDEF">',
             ContentType => 'text/html; charset="iso-8859-1"',
@@ -51,7 +51,7 @@ my @Tests = (
         },
     },
     {
-        Name => '',
+        Name => 'Content img with inline style',
         Data => {
             Content     => "<img border=\"0\" src=\"cid:1234567890ABCDEF\">",
             ContentType => 'text/html; charset="iso-8859-1"',
@@ -69,7 +69,7 @@ my @Tests = (
         },
     },
     {
-        Name => '',
+        Name => 'Content img with inline style and line breaks',
         Data => {
             Content     => "<img border=\"0\" \nsrc=\"cid:1234567890ABCDEF\">",
             ContentType => 'text/html; charset="iso-8859-1"',
@@ -87,7 +87,7 @@ my @Tests = (
         },
     },
     {
-        Name => '',
+        Name => 'Content img',
         Data => {
             Content     => '<img src=cid:1234567890ABCDEF>',
             ContentType => 'text/html; charset="iso-8859-1"',
@@ -105,7 +105,7 @@ my @Tests = (
         },
     },
     {
-        Name => '',
+        Name => 'Content img with break',
         Data => {
             Content     => '<img src=cid:1234567890ABCDEF />',
             ContentType => 'text/html; charset="iso-8859-1"',
@@ -123,7 +123,7 @@ my @Tests = (
         },
     },
     {
-        Name => '',
+        Name => 'Content img with single quotes',
         Data => {
             Content     => '<img src=\'cid:1234567890ABCDEF\' />',
             ContentType => 'text/html; charset="iso-8859-1"',
@@ -141,7 +141,7 @@ my @Tests = (
         },
     },
     {
-        Name => '',
+        Name => 'Content img with single quotes and break',
         Data => {
             Content     => '<img src=\'Untitled%20Attachment\' />',
             ContentType => 'text/html; charset="iso-8859-1"',
@@ -378,11 +378,18 @@ for my $Test (@Tests) {
     my %HTML = $LayoutObject->RichTextDocumentServe(
         %{$Test},
     );
-    $Self->Is(
-        $HTML{Content},
-        $Test->{Result}->{Content},
+
+    # Quote the expected text to avoid problems with special characters.
+    $Test->{Result}->{Content} = quotemeta( $Test->{Result}->{Content} );
+
+    # Check if the result contains the expected HTML structure between <body> tags.
+    my $Contains = $HTML{Content} =~ m{$Test->{Result}->{Content}};
+
+    $Self->True(
+        $Contains,
         "$Test->{Name} - Content"
     );
+
     $Self->Is(
         $HTML{ContentType},
         $Test->{Result}->{ContentType},

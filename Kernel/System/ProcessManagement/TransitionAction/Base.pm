@@ -317,10 +317,10 @@ sub _OverrideTicketID {
 
 Replaces ticket attributes.
 
-<OTRS_FIRST_ARTICLE_...>
-<OTRS_LAST_ARTICLE_...>
-<OTRS_TICKET_DynamicField_Name1_Value> or <OTRS_Ticket_DynamicField_Name1_Value>.
-<OTRS_Ticket_*> is deprecated and should be removed in further versions of OTRS.
+C<OTRS_FIRST_ARTICLE_...>
+C<OTRS_LAST_ARTICLE_...>
+C<OTRS_TICKET_DynamicField_Name1_Value> or C<OTRS_Ticket_DynamicField_Name1_Value>.
+C<OTRS_Ticket_*> is deprecated and should be removed in further versions of OTRS.
 
     my $Success = $TransitionActionBaseObject->_ReplaceTicketAttributes(
         UserID => 1,
@@ -646,7 +646,7 @@ sub _ReplaceAdditionalAttributes {
 
     my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
     my $DefaultLanguage = $ConfigObject->Get('DefaultLanguage') || 'en';
-    my $Language        = $User{UserLanguage} || $DefaultLanguage;
+    my $Language        = $User{UserLanguage}                   || $DefaultLanguage;
 
     # get and store richtext information
     my $RichText = $ConfigObject->Get('Frontend::RichText');

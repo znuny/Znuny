@@ -165,6 +165,7 @@ Create an article. Override this method in your class.
     );
 
 Events:
+
     ArticleCreate
 
 =cut
@@ -186,6 +187,7 @@ Update an article. Override this method in your class.
     );
 
 Events:
+
     ArticleUpdate
 
 =cut
@@ -364,8 +366,8 @@ sub _MetaArticleCreate {
             (ticket_id, article_sender_type_id, is_visible_for_customer, communication_channel_id, insert_fingerprint, create_time, create_by, change_time, change_by)
             VALUES (?, ?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
-            \$Param{TicketID}, \$Param{SenderTypeID}, \( $Param{IsVisibleForCustomer} ? 1 : 0 ), \$Channel{ChannelID},
-            \$InsertFingerprint, \$Param{UserID}, \$Param{UserID},
+            \$Param{TicketID},   \$Param{SenderTypeID}, \( $Param{IsVisibleForCustomer} ? 1 : 0 ), \$Channel{ChannelID},
+            \$InsertFingerprint, \$Param{UserID},       \$Param{UserID},
         ],
     );
 
@@ -423,6 +425,7 @@ Note: Keys C<SenderType>, C<SenderTypeID> and C<IsVisibleForCustomer> are implem
     );
 
 Events:
+
     MetaArticleUpdate
 
 =cut
@@ -630,6 +633,7 @@ Returns article content with dynamic fields.
     );
 
 Returns:
+
     %Data = (
         TicketID  => 1,
         ArticleID => 1,

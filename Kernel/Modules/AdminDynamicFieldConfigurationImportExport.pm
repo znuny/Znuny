@@ -129,7 +129,7 @@ sub Run {
                 if ( !IsHashRefWithData( $FieldTypeConfig->{$FieldType} ) ) {
                     $LogObject->Log(
                         'Priority' => 'error',
-                        'Message' =>
+                        'Message'  =>
                             "Could not import configuration of dynamic field '$ImportData->{DynamicFields}->{$DynamicFieldName}->{Name}': Dynamic field backend for field type '$ImportData->{DynamicFields}->{$DynamicFieldName}->{FieldType}' does not exist!",
                     );
                     next DYNAMICFIELDNAME;

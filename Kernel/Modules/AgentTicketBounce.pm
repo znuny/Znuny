@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Mail::Address;
 
 our $ObjectManagerDisabled = 1;
@@ -253,10 +253,10 @@ sub Run {
 
         # build InformationFormat
         if ( $LayoutObject->{BrowserRichText} ) {
-            $Param{InformationFormat} = "$Param{Salutation}<br/>
-<br/>
-$Param{BounceText}<br/>
-<br/>
+            $Param{InformationFormat} = "$Param{Salutation}
+<p></p>
+$Param{BounceText}
+<p></p>
 $Param{Signature}";
         }
         else {

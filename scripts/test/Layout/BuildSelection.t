@@ -7,6 +7,7 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
+## no critic(RequireExplicitPackage)
 use strict;
 use warnings;
 use utf8;
@@ -69,7 +70,7 @@ $Self->False(
 
 # translate a tree entry
 my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
-$LanguageObject->{Translation}->{'TestOneABC'} = 'TestOneXYZ';
+$LanguageObject->{Translation}->{'TestOneABC'} = 'ZYXTestOneXYZ';
 
 # test for translation of tree elements
 $HTMLCode = $LayoutObject->BuildSelection(
@@ -84,13 +85,8 @@ $HTMLCode = $LayoutObject->BuildSelection(
     TreeView    => 1,
 );
 
-my $TranslationTest = 0;
-if ( $HTMLCode =~ m{ TestOneXYZ }xms ) {
-    $TranslationTest = 1;
-}
-
 $Self->True(
-    $TranslationTest,
+    scalar $HTMLCode =~ m{ ZYXTestOneXYZ }xms,
     'Test translation of tree elements in BuildSelection().',
 );
 
@@ -295,7 +291,7 @@ my @Tests = (
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    '7', "\xA0\xA0\xA0\xA0Value2",
+                    '7',        "\xA0\xA0\xA0\xA0Value2",
                     $JSONFalse, $JSONFalse,
                     $JSONFalse,
                 ],
@@ -400,7 +396,7 @@ my @Tests = (
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    '7', 'Object1::AttributeB::Value2',
+                    '7',        'Object1::AttributeB::Value2',
                     $JSONFalse, $JSONFalse,
                     $JSONFalse,
                 ],
@@ -437,17 +433,17 @@ my @Tests = (
   <option value="a &amp; b">a &amp; b</option>
   <option value="c &amp; d" selected="selected">c &amp; d</option>
 </select>',
-        Success     => 1,
-        ExecuteJSON => 1,
+        Success      => 1,
+        ExecuteJSON  => 1,
         JSONResponse =>
             {
             'Select1' => [
                 [
-                    'a & b', 'a & b',
+                    'a & b',    'a & b',
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    'c & d', 'c & d',
+                    'c & d',   'c & d',
                     $JSONTrue, $JSONTrue, $JSONFalse,
                 ],
             ],
@@ -720,7 +716,7 @@ my @Tests = (
         JSONResponse => {
             'Select1' => [
                 [
-                    'Object1', 'Object1',
+                    'Object1',  'Object1',
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
@@ -748,7 +744,7 @@ my @Tests = (
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    'Object2', 'Object2',
+                    'Object2',  'Object2',
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
@@ -833,7 +829,7 @@ my @Tests = (
         JSONResponse => {
             'Select1' => [
                 [
-                    'Object1', 'Object1',
+                    'Object1',  'Object1',
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
@@ -943,7 +939,7 @@ my @Tests = (
         JSONResponse => {
             'Select1' => [
                 [
-                    'Object1', 'Object1',
+                    'Object1',  'Object1',
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
@@ -971,7 +967,7 @@ my @Tests = (
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    'Object2', 'Object2',
+                    'Object2',  'Object2',
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
@@ -1059,7 +1055,7 @@ my @Tests = (
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    '7', 'Objec[...]',
+                    '7',        'Objec[...]',
                     $JSONFalse, $JSONFalse,
                     $JSONFalse,
                 ],
@@ -1112,7 +1108,7 @@ my @Tests = (
         JSONResponse => {
             'Select1' => [
                 [
-                    'Object1', 'Object1',
+                    'Object1',  'Object1',
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
@@ -1137,7 +1133,7 @@ my @Tests = (
                 ],
                 [
                     'Object1::AttributeB::Value2', 'Objec[...]',
-                    $JSONFalse, $JSONFalse,
+                    $JSONFalse,                    $JSONFalse,
                     $JSONFalse,
                 ],
             ],
@@ -1241,7 +1237,7 @@ my @Tests = (
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    '7', 'Objec[...]',
+                    '7',        'Objec[...]',
                     $JSONFalse, $JSONFalse,
                     $JSONFalse,
                 ],
@@ -1318,7 +1314,7 @@ my @Tests = (
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    '7', "\xA0\xA0\xA0\xA0Value2",
+                    '7',        "\xA0\xA0\xA0\xA0Value2",
                     $JSONFalse, $JSONFalse,
                     $JSONFalse,
                 ],
@@ -1397,7 +1393,7 @@ my @Tests = (
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    '7', "\xA0\xA0\xA0\xA0Value2<test3>",
+                    '7',        "\xA0\xA0\xA0\xA0Value2<test3>",
                     $JSONFalse, $JSONFalse,
                     $JSONFalse,
                 ],
@@ -1490,7 +1486,7 @@ my @Tests = (
             'Select1' => [
                 [
                     'DeleteFilter', 'DELETE',
-                    $JSONFalse, $JSONFalse, $JSONFalse,
+                    $JSONFalse,     $JSONFalse, $JSONFalse,
                 ],
                 [
                     '-', '-',
@@ -1521,7 +1517,7 @@ my @Tests = (
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    '7', 'Objec[...]',
+                    '7',        'Objec[...]',
                     $JSONFalse, $JSONFalse,
                     $JSONFalse,
                 ],
@@ -1614,7 +1610,7 @@ my @Tests = (
             'Select1' => [
                 [
                     'DeleteFilter', 'DELETE',
-                    $JSONFalse, $JSONFalse, $JSONFalse,
+                    $JSONFalse,     $JSONFalse, $JSONFalse,
                 ],
                 [
                     '-', '-',
@@ -1645,7 +1641,7 @@ my @Tests = (
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    '7', 'Objec[...]',
+                    '7',        'Objec[...]',
                     $JSONFalse, $JSONFalse,
                     $JSONFalse,
                 ],
@@ -1705,10 +1701,10 @@ my @Tests = (
         Response =>
             '<select id="Select1ID" name="Select1" data-tree="true">
   <option value="1">Object1</option>
-  <option value="Object1::AttributeA_Disabled" disabled="disabled">' . "\xA0\xA0" . 'AttributeA</option>
+  <option value="Object1::AttributeA" disabled="disabled">' . "\xA0\xA0" . 'AttributeA</option>
   <option value="3" selected="selected">' . "\xA0\xA0\xA0\xA0" . 'Value1</option>
   <option value="4">' . "\xA0\xA0\xA0\xA0" . 'Value2</option>
-  <option value="Object1::AttributeB_Disabled" disabled="disabled">' . "\xA0\xA0" . 'AttributeB</option>
+  <option value="Object1::AttributeB" disabled="disabled">' . "\xA0\xA0" . 'AttributeB</option>
   <option value="6">' . "\xA0\xA0\xA0\xA0" . 'Value1</option>
   <option value="7" disabled="disabled">' . "\xA0\xA0\xA0\xA0" . 'Value2</option>
 </select> <a href="#" title="Baumauswahl anzeigen" class="ShowTreeSelection"><span>Baumauswahl anzeigen</span><i class="fa fa-sitemap"></i></a>',
@@ -1721,7 +1717,7 @@ my @Tests = (
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    'Object1::AttributeA_Disabled', "\xA0\xA0AttributeA",
+                    'Object1::AttributeA', "\xA0\xA0AttributeA",
                     $JSONFalse, $JSONFalse, $JSONTrue,
                 ],
                 [
@@ -1733,7 +1729,7 @@ my @Tests = (
                     $JSONFalse, $JSONFalse, $JSONFalse,
                 ],
                 [
-                    'Object1::AttributeB_Disabled', "\xA0\xA0AttributeB",
+                    'Object1::AttributeB', "\xA0\xA0AttributeB",
                     $JSONFalse, $JSONFalse, $JSONTrue,
                 ],
                 [
@@ -1798,6 +1794,26 @@ my @Tests = (
                 ],
             ],
         },
+    },
+    {
+        Name       => 'Translation and ordering of elements in BuildSelection()',
+        Definition => {
+            Data => {
+                0 => 'TestZeroABC',
+                1 => 'TestOneABC',
+                2 => 'TestTwoABC',
+            },
+            SelectedID  => 1,
+            Name        => 'test',
+            Translation => 1,
+            Sort        => 'AlphanumericValue',
+        },
+        Response => '<select id="test" name="test">
+  <option value="2">TestTwoABC</option>
+  <option value="0">TestZeroABC</option>
+  <option value="1" selected="selected">ZYXTestOneXYZ</option>
+</select>',
+        Success => 1,
     },
 );
 

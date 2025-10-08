@@ -11,11 +11,12 @@ package Kernel::Modules::AgentPreferences;
 
 use strict;
 use warnings;
+use utf8;
 
 our $ObjectManagerDisabled = 1;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -30,14 +31,18 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
-    my $EditUserID   = $ParamObject->GetParam( Param => 'EditUserID' );
 
+    my $EditUserID = $ParamObject->GetParam( Param => 'EditUserID' );
     $Self->{CurrentUserID} = $Self->{UserID};
+
     if (
         $EditUserID
+        && $EditUserID != $Self->{UserID}
         && $Self->_CheckEditPreferencesPermission()
         )
     {
@@ -56,21 +61,53 @@ sub Run {
         my $Key   = $ParamObject->GetParam( Param => 'Key' );
         my $Value = $ParamObject->GetParam( Param => 'Value' );
 
-        # update preferences
-        my $Success = $UserObject->SetPreferences(
-            UserID => $Self->{CurrentUserID},
-            Key    => $Key,
-            Value  => $Value,
-        );
+        #
+        # Check config AgentPreferences::AJAXUpdate::AllowedKeys
+        #
+        my $KeyAllowed;
+        my $AllowedKeys = $ConfigObject->Get('AgentPreferences::AJAXUpdate::AllowedKeys') // {};
 
-        # update session
-        if ($Success) {
-            $Kernel::OM->Get('Kernel::System::AuthSession')->UpdateSessionID(
-                SessionID => $Self->{SessionID},
-                Key       => $Key,
-                Value     => $Value,
+        CONTEXT:
+        for my $Context ( sort keys %{$AllowedKeys} ) {
+            ALLOWEDKEYREGEX:
+            for my $AllowedKeyRegex ( @{ $AllowedKeys->{$Context} // [] } ) {
+                next ALLOWEDKEYREGEX if $Key !~ m{$AllowedKeyRegex};
+
+                $KeyAllowed = 1;
+                last CONTEXT;
+            }
+        }
+
+        # Default to success to prevent reporting an error to the client if the key is not allowed
+        # in the first place.
+        my $Success = 1;
+
+        if ($KeyAllowed) {
+
+            # update preferences
+            $Success = $UserObject->SetPreferences(
+                UserID => $Self->{CurrentUserID},
+                Key    => $Key,
+                Value  => $Value,
+            );
+
+            # update session
+            if ( $Success && !defined $EditUserID ) {
+                $Kernel::OM->Get('Kernel::System::AuthSession')->UpdateSessionID(
+                    SessionID => $Self->{SessionID},
+                    Key       => $Key,
+                    Value     => $Value,
+                );
+            }
+        }
+        else {
+            $LogObject->Log(
+                Priority => 'debug',
+                Message  =>
+                    "User preference key $Key is not configured in AgentPreferences::AJAXUpdate::AllowedKeys to be allowed to be set via UpdateAJAX.",
             );
         }
+
         my $JSON = $LayoutObject->JSONEncode(
             Data => $Success,
         );
@@ -140,17 +177,30 @@ sub Run {
                 }
             }
 
+            # Check if a reload of the page is needed.
+            if ( $Preferences{$Group}->{NeedsReload} ) {
+                $ConfigNeedsReload = 1;
+            }
+
+            # Enable config reload for all generic modules
+            if ( $Module eq 'Kernel::Output::HTML::Preferences::Generic' ) {
+                $ConfigNeedsReload = 1;
+            }
+
+            # When editing another agent, we don't want to reload the page and don't want to update session data.
+            if ( defined $Self->{EditingAnotherAgent} ) {
+                $ConfigNeedsReload = 0;
+            }
+
             if (
                 $Object->Run(
-                    GetParam => \%GetParam,
-                    UserData => \%UserData
+                    GetParam          => \%GetParam,
+                    UserData          => \%UserData,
+                    UpdateSessionData => $ConfigNeedsReload,
                 )
                 )
             {
                 $Message .= $Object->Message();
-                if ( $Preferences{$Group}->{NeedsReload} ) {
-                    $ConfigNeedsReload = 1;
-                }
             }
             else {
                 $Priority .= 'Error';
@@ -182,8 +232,9 @@ sub Run {
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
-        my $Message  = '';
-        my $Priority = '';
+        my $Message           = '';
+        my $Priority          = '';
+        my $ConfigNeedsReload = 0;
 
         # check group param
         my @Groups = $ParamObject->GetArray( Param => 'Group' );
@@ -229,10 +280,20 @@ sub Run {
                 }
             }
 
+            if ( $Preferences{$Group}->{NeedsReload} ) {
+                $ConfigNeedsReload = 1;
+            }
+
+            # Enable config reload for all generic modules
+            if ( $Module eq 'Kernel::Output::HTML::Preferences::Generic' ) {
+                $ConfigNeedsReload = 1;
+            }
+
             if (
                 $Object->Run(
-                    GetParam => \%GetParam,
-                    UserData => \%UserData
+                    GetParam          => \%GetParam,
+                    UserData          => \%UserData,
+                    UpdateSessionData => $ConfigNeedsReload,
                 )
                 )
             {
@@ -326,7 +387,7 @@ sub Run {
 
         my $Category               = $ParamObject->GetParam( Param => 'Category' )               || '';
         my $UserModificationActive = $ParamObject->GetParam( Param => 'UserModificationActive' ) || '0';
-        my $IsValid = $ParamObject->GetParam( Param => 'IsValid' ) // undef;
+        my $IsValid                = $ParamObject->GetParam( Param => 'IsValid' ) // undef;
 
         my %Tree = $Kernel::OM->Get('Kernel::System::SysConfig')->ConfigurationNavigationTree(
             Action                 => 'AgentPreferences',
@@ -628,7 +689,7 @@ sub _GetCategoriesStrg {
 
     # get selected category
     my %UserPreferences = $Kernel::OM->Get('Kernel::System::User')->GetPreferences(
-        UserID => $Self->{UserID},
+        UserID => $Self->{CurrentUserID},
     );
 
     my $Category = $UserPreferences{UserSystemConfigurationCategory};
@@ -655,15 +716,17 @@ sub _CheckEditPreferencesPermission {
 
     my ( $Self, %Param ) = @_;
 
+    my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
     # check if the current user has the permissions to edit another users preferences
-    my $GroupObject                      = $Kernel::OM->Get('Kernel::System::Group');
     my $EditAnotherUsersPreferencesGroup = $GroupObject->GroupLookup(
-        Group => $Kernel::OM->Get('Kernel::Config')->Get('EditAnotherUsersPreferencesGroup'),
+        Group => $ConfigObject->Get('EditAnotherUsersPreferencesGroup'),
     );
 
     # get user groups, where the user has the rw privilege
     my %Groups = $GroupObject->PermissionUserGet(
-        UserID => $Self->{UserID},
+        UserID => $Self->{CurrentUserID},
         Type   => 'rw',
     );
 

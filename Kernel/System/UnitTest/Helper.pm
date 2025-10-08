@@ -2150,10 +2150,10 @@ sub FillTestEnvironment {
     my %AttributeTestStructure = (
         'A::Level - 1::A'  => 0,
         'A::Level - 1::B'  => 0,
-        'A::Level - 2::Ä' => 0,
-        'A::Level - 2::Ö' => 0,
-        'B::Level - !::Ü' => 0,
-        'B::Level - !::ß' => 0,
+        'A::Level - 2::Ä'  => 0,
+        'A::Level - 2::Ö'  => 0,
+        'B::Level - !::Ü'  => 0,
+        'B::Level - !::ß'  => 0,
         'B::Level - ?::Y'  => 0,
         'B::Level - ?::Z'  => 0,
         'C::Level - &::%'  => 0,
@@ -2341,13 +2341,14 @@ Creates a Ticket with dummy data and tests the creation. All Ticket attributes a
         UserID       => 1,
     );
 
-    To overwrite:
+To overwrite:
 
     my $TicketID = $HelperObject->TicketCreate(
         CustomerUser => 'another_customer@example.com',
     );
 
-    Result:
+Result:
+
     $TicketID = 1337;
 
 =cut
@@ -2419,14 +2420,15 @@ Creates an Article with dummy data and tests the creation. All Article attribute
         NoAgentNotify  => 1,
     );
 
-    To overwrite:
+To overwrite:
 
     my $ArticleID = $HelperObject->ArticleCreate(
         TicketID   => 1337,
         SenderType => 'customer',
     );
 
-    Result:
+Result:
+
     $ArticleID = 1337;
 
 =cut

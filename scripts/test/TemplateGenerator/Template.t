@@ -58,7 +58,8 @@ $HelperObject->ConfigSettingChange(
     Value => 'UTC',
 );
 
-my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
+my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
 # Create test ticket.
 my $TicketNumber = $TicketObject->TicketCreateNumber();
@@ -79,7 +80,7 @@ $Self->True(
     "TicketID $TicketID is created",
 );
 
-my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+my $ArticleBackendObject = $ArticleObject->BackendForChannel(
     ChannelName => 'Phone',
 );
 
@@ -152,16 +153,17 @@ for my $Config (@Configs) {
 }
 
 # Get ticket and article data for tests.
-my %TicketData = $Kernel::OM->Get('Kernel::System::Ticket')->TicketGet(
+my %TicketData = $TicketObject->TicketGet(
     TicketID      => $TicketID,
     DynamicFields => 1,
 );
 
 # Define for which template types certain tags are supported.
 my %Supported = (
-    Answer  => 1,
-    Forward => 1,
-    Note    => 1,
+    Answer           => 1,
+    Forward          => 1,
+    Note             => 1,
+    'Answer,Forward' => 1,
 );
 
 my @Tests = (
@@ -171,13 +173,13 @@ my @Tests = (
         ExpectedResult => 'Thank you for your email. ' . $ConfigObject->Get('ScriptAlias'),
     },
     {
-        Name => 'Supported tags - <OTRS_TICKET_*> without TicketID',
+        Name         => 'Supported tags - <OTRS_TICKET_*> without TicketID',
         TemplateText =>
             'Options of the ticket data (e. g. <OTRS_TICKET_TicketNumber>, <OTRS_TICKET_TicketID>, <OTRS_TICKET_Queue>)',
         ExpectedResult => 'Options of the ticket data (e. g. -, -, -)',
     },
     {
-        Name => 'Supported tags - <OTRS_TICKET_*>  with TicketID',
+        Name         => 'Supported tags - <OTRS_TICKET_*>  with TicketID',
         TemplateText =>
             'Options of the ticket data (e. g. <OTRS_TICKET_TicketNumber>, <OTRS_TICKET_TicketID>, <OTRS_TICKET_Queue>, <OTRS_TICKET_State>)',
         ExpectedResult => "Options of the ticket data (e. g. $TicketNumber, $TicketID, Raw, open)",
@@ -320,7 +322,7 @@ my @Tests = (
         }
     },
     {
-        Name => 'Test supported tag - <OTRS_EMAIL_DATE[*]> with time zones',
+        Name         => 'Test supported tag - <OTRS_EMAIL_DATE[*]> with time zones',
         TemplateText =>
             'Belgrade: <OTRS_EMAIL_DATE[Europe/Belgrade]>; Denver: <OTRS_EMAIL_DATE[America/Denver]>; Tokyo: <OTRS_EMAIL_DATE[Asia/Tokyo]>',
         ExpectedResult =>
@@ -329,7 +331,7 @@ my @Tests = (
         TicketID => $TicketID,
     },
     {
-        Name => 'Test supported tag - <OTRS_EMAIL_DATE> without time zone',
+        Name         => 'Test supported tag - <OTRS_EMAIL_DATE> without time zone',
         TemplateText =>
             'No TimeZone specified (UTC): <OTRS_EMAIL_DATE>',
         ExpectedResult => 'No TimeZone specified (UTC): Friday, January 10, 2020 at 16:00:00 (UTC)',
@@ -341,9 +343,13 @@ my @Tests = (
 my $StandardTemplateObject  = $Kernel::OM->Get('Kernel::System::StandardTemplate');
 my $TemplateGeneratorObject = $Kernel::OM->Get('Kernel::System::TemplateGenerator');
 
+my @Types = qw( Answer Forward Create Note Email PhoneCall );
+
+push @Types, ( 'Email,PhoneCall', 'Answer,Forward', );
+
 TEST:
 for my $Test (@Tests) {
-    for my $TemplateType (qw(Answer Forward Create Note Email PhoneCall)) {
+    for my $TemplateType (@Types) {
 
         # Create standard template.
         my $TemplateID = $StandardTemplateObject->StandardTemplateAdd(

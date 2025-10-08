@@ -125,7 +125,7 @@ sub RenderOutput {
         $Param{Plugin}->{Links} = [];
         for my $LinkID ( sort keys %{$LinkList} ) {
             push @{ $Param{Plugin}->{Links} }, $LinkList->{$LinkID};
-            push @LinkArray, $LinkList->{$LinkID}->{LinkID};
+            push @LinkArray,                   $LinkList->{$LinkID}->{LinkID};
         }
 
         $Param{Plugin}->{LinkList} = $LayoutObject->JSONEncode(

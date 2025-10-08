@@ -231,8 +231,9 @@ sub Check {
     }
 
     return (
-        Success  => 1,
-        Sendmail => $Sendmail,
+        Success    => 1,
+        Successful => 1,
+        Sendmail   => $Sendmail,
     );
 }
 

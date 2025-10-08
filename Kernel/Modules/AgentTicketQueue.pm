@@ -14,7 +14,7 @@ use warnings;
 use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -125,7 +125,7 @@ sub Run {
         next COLUMNNAME if $FilterValue eq 'DeleteFilter';
 
         if ( $ColumnName eq 'CustomerID' ) {
-            push @{ $ColumnFilter{$ColumnName} }, $FilterValue;
+            push @{ $ColumnFilter{$ColumnName} },           $FilterValue;
             push @{ $ColumnFilter{ $ColumnName . 'Raw' } }, $FilterValue;
             $GetColumnFilter{$ColumnName} = $FilterValue;
         }
@@ -679,13 +679,12 @@ sub _MaskQueueView {
         }
         $QueueStrg .= '" class="';
 
-        # Primary control is Visual Alarms and, if disabled, will turn off all highlights.
-        # Secondary control highlights individual queues depending on age.
+        if ( $Queue{QueueID} == $QueueIDOfMaxAge && $Self->{Blink} ) {
+            $QueueStrg .= 'Oldest ';
+        }
+
         if ( $Config->{VisualAlarms} ) {
-            if ( $Queue{QueueID} == $QueueIDOfMaxAge && $Self->{Blink} ) {
-                $QueueStrg .= 'Oldest';
-            }
-            elsif ( $Queue{MaxAge} >= $Self->{HighlightAge2} ) {
+            if ( $Queue{MaxAge} >= $Self->{HighlightAge2} ) {
                 $QueueStrg .= 'OlderLevel2';
             }
             elsif ( $Queue{MaxAge} >= $Self->{HighlightAge1} ) {

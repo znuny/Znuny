@@ -148,7 +148,7 @@ $Self->True(
 # get test data
 my @Tests = (
     {
-        Name => 'Email without Reply-To tag',
+        Name  => 'Email without Reply-To tag',
         Email =>
             "From: TestFrom\@home.com\nTo: TestTo\@home.com\nSubject: Email without Reply-To tag\nTest Body Email.\n",
         ResultAutoResponse => {
@@ -161,7 +161,7 @@ my @Tests = (
         },
     },
     {
-        Name => 'Email with Reply-To tag',
+        Name  => 'Email with Reply-To tag',
         Email =>
             "From: TestFrom\@home.com\nTo: TestTo\@home.com\nReply-To: TestReplyTo\@home.com\nSubject: Email with Reply-To tag\nTest Body Email.\n",
         ResultAutoResponse => {
@@ -174,7 +174,7 @@ my @Tests = (
         },
     },
     {
-        Name => 'Email with CustomerID',
+        Name  => 'Email with CustomerID',
         Email =>
             "From: $CustomerUser\@home.com\nTo: TestTo\@home.com\nSubject: Email with valid CustomerID\nTest Body Email.\n",
         ResultAutoResponse => {
@@ -187,7 +187,7 @@ my @Tests = (
         },
     },
     {
-        Name => 'Email with CustomerID and Reply-To tag',
+        Name  => 'Email with CustomerID and Reply-To tag',
         Email =>
             "From: $CustomerUser\@home.com\nTo: TestTo\@home.com\nReply-To: TestReplyTo\@home.com\nSubject: Email with valid CustomerID\nTest Body Email.\n",
         ResultAutoResponse => {
@@ -200,7 +200,7 @@ my @Tests = (
         },
     },
     {
-        Name => 'Email with Customer as Recipient',
+        Name  => 'Email with Customer as Recipient',
         Email =>
             "From: TestRecipient\@home.com\nTo: $CustomerUser\@home.com\nSubject: Email with Recipient\nTest Body Email.\n",
         ResultAutoResponse => {

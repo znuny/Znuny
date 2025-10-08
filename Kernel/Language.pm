@@ -540,8 +540,8 @@ sub Time {
         }
         else {
             $Time  = sprintf( "%02d:%02d:%02d", $Hour, $Minute, $Second );
-            $Day   = sprintf( "%02d",           $Day );
-            $Month = sprintf( "%02d",           $Month );
+            $Day   = sprintf( "%02d", $Day );
+            $Month = sprintf( "%02d", $Month );
         }
 
         # if we have an dynamic field Date or DateTime, we want to add additional div's
@@ -550,11 +550,11 @@ sub Time {
             my ( $Date, $Time ) = split / - /, $ReturnString;
             $ReturnString = '';
             if ($Date) {
-                $ReturnString .= '<div>' . $Date . '</div>';
+                $ReturnString .= '<div class="DynamicFieldDate">' . $Date . '</div>';
             }
 
             if ($Time) {
-                $ReturnString .= '<div>' . $Time . '</div>';
+                $ReturnString .= '<div class="DynamicFieldTime">' . $Time . '</div>';
             }
         }
 

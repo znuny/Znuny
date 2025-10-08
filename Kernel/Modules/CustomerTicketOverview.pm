@@ -16,7 +16,7 @@ use warnings;
 our $ObjectManagerDisabled = 1;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -481,11 +481,11 @@ sub Run {
                 {
                     if ( $OrderByCurrent && ( $OrderByCurrent eq 'Up' ) ) {
                         $OrderBy = 'Down';
-                        $CSS .= ' SortDescending';
+                        $CSS .= ' SortAscending';
                     }
                     else {
                         $OrderBy = 'Up';
-                        $CSS .= ' SortAscending';
+                        $CSS .= ' SortDescending';
                     }
                 }
 
@@ -688,9 +688,9 @@ sub ShowTicketStatus {
     }
 
     # customer info (customer name)
-    if ( $Article{CustomerUserID} ) {
+    if ( $Ticket{CustomerUserID} ) {
         $Param{CustomerName} = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerName(
-            UserLogin => $Article{CustomerUserID},
+            UserLogin => $Ticket{CustomerUserID},
         );
         $Param{CustomerName} = '(' . $Param{CustomerName} . ')' if ( $Param{CustomerName} );
     }
@@ -787,6 +787,7 @@ sub ShowTicketStatus {
                 Name => 'RecordDynamicFieldLink',
                 Data => {
                     Value                       => $ValueStrg->{Value},
+                    ValueKey                    => $Value,
                     Title                       => $ValueStrg->{Title},
                     Link                        => $ValueStrg->{Link},
                     $DynamicFieldConfig->{Name} => $ValueStrg->{Title},

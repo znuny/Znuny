@@ -201,7 +201,7 @@ sub ValueValidate {
         if ( $DateRestriction eq 'DisableFutureDates' && $ValueSystemTimeObject > $SystemTimeFutureObject ) {
             $LogObject->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "The value for the Date field ($Param{DynamicFieldConfig}->{Name}) is in the future! The date needs to be in the past!",
             );
             return;
@@ -209,7 +209,7 @@ sub ValueValidate {
         elsif ( $DateRestriction eq 'DisablePastDates' && $ValueSystemTimeObject < $SystemTimePastObject ) {
             $LogObject->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "The value for the Date field ($Param{DynamicFieldConfig}->{Name}) is in the past! The date needs to be in the future!",
             );
             return;
@@ -356,38 +356,30 @@ sub EditFieldRender {
         OverrideTimeZone => 1,
     );
 
-    if ( $Param{Mandatory} ) {
-        my $DivID = $FieldName . 'UsedError';
+    # Tooltip for client side validation
+    my $ClientErrorTooltipDivID = $FieldName . 'UsedError';
+    my $FieldRequiredMessage    = $Param{LayoutObject}->{LanguageObject}->Translate("This field is required.");
+    $HTMLString .= <<"EOF";
 
-        my $FieldRequiredMessage = $Param{LayoutObject}->{LanguageObject}->Translate("This field is required.");
-
-        # for client side validation
-        $HTMLString .= <<"EOF";
-
-<div id="$DivID" class="TooltipErrorMessage">
+<div id="$ClientErrorTooltipDivID" class="TooltipErrorMessage">
     <p>
         $FieldRequiredMessage
     </p>
 </div>
 EOF
-    }
 
-    if ( $Param{ServerError} ) {
+    # Tooltip for server side validation
+    my $ErrorMessage = $Param{ErrorMessage} || 'This field is required.';
+    $ErrorMessage = $Param{LayoutObject}->{LanguageObject}->Translate($ErrorMessage);
+    my $ServerErrorTooltipDivID = $FieldName . 'UsedServerError';
+    $HTMLString .= <<"EOF";
 
-        my $ErrorMessage = $Param{ErrorMessage} || 'This field is required.';
-        $ErrorMessage = $Param{LayoutObject}->{LanguageObject}->Translate($ErrorMessage);
-        my $DivID = $FieldName . 'UsedServerError';
-
-        # for server side validation
-        $HTMLString .= <<"EOF";
-
-<div id="$DivID" class="TooltipErrorMessage">
+<div id="$ServerErrorTooltipDivID" class="TooltipErrorMessage">
     <p>
         $ErrorMessage
     </p>
 </div>
 EOF
-    }
 
     # call EditLabelRender on the common Driver
     my $LabelString = $Self->EditLabelRender(
@@ -472,10 +464,10 @@ sub EditFieldValueGet {
             $DynamicFieldValues{ $Prefix . $Type } = sprintf "%02d",
                 $DynamicFieldValues{ $Prefix . $Type };
         }
-        my $Year  = $DynamicFieldValues{ $Prefix . 'Year' }  || '0000';
-        my $Month = $DynamicFieldValues{ $Prefix . 'Month' } || '00';
-        my $Day   = $DynamicFieldValues{ $Prefix . 'Day' }   || '00';
-        my $Hour  = '00';
+        my $Year   = $DynamicFieldValues{ $Prefix . 'Year' }  || '0000';
+        my $Month  = $DynamicFieldValues{ $Prefix . 'Month' } || '00';
+        my $Day    = $DynamicFieldValues{ $Prefix . 'Day' }   || '00';
+        my $Hour   = '00';
         my $Minute = '00';
         my $Second = '00';
 

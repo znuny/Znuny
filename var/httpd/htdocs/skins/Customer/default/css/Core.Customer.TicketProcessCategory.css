@@ -1,0 +1,188 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+/**
+ * @package     Skin "Default"
+ * @section     process ticket category
+ */
+
+@media screen, projection, tv, handheld {
+
+    .Information {
+        font-size: .75em;
+        margin-top: auto;
+        padding-top: 10px;
+    }
+
+    .WidgetSimple {
+        background: none;
+        box-shadow: none;
+        transition: none;
+        border: none;
+    }
+
+    .SidebarColumn {
+        margin-right: 20px;
+        white-space: nowrap;
+        width: 250px;
+        appearance: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, .15);
+        padding: var(--padding-lg);
+        background: var(--white);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-sm);
+    }
+
+    .SidebarColumn a,
+    .CategoryHeadline {
+        margin-bottom: 8px;
+    }
+
+    .CategoryHeadline {
+        margin: 6px 0 15px;
+        cursor: default;
+        font-size: 1.5em;
+        color: var(--primary-color);
+    }
+
+    .SidebarColumn a {
+        color: #9a948d;
+        display: block;
+    }
+
+    .SidebarColumn a:hover {
+        color: var(--primary-color);
+    }
+
+    .Preview {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        color: #000;
+        text-align: left;
+        transition: .5s;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, .15);
+        padding: var(--padding-lg);
+        background: var(--white);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-sm);
+    }
+
+    .FilterMessageWidget {
+        grid-column: 1 / -1;
+        border-radius: var(--border-radius-sm);
+        border: 2px solid #d9d9d9;
+        font-style: italic;
+        color: #9a948d;
+        padding: 22px 20px 18px;
+        margin-top: var(--margin-lg);
+    }
+
+    .Title {
+        white-space: break-spaces;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 1.2em;
+        margin: 0 0 10px;
+        line-height: 1.26;
+    }
+
+
+    .Preview .Icon:not(:empty) {
+        margin-bottom: var(--margin-md);
+    }
+
+    .Icon img{
+        border-radius: var(--border-radius-lg);
+    }
+
+    .SidebarColumn:hover,
+    .Search:hover,
+    .Preview:hover {
+        border-color: #9a948d;
+        transition: .5s;
+    }
+
+
+    li.Card {
+        position: relative; /* Ensure the Overlay is positioned relative to the list item */
+    }
+
+    .Overlay {
+        position: absolute;
+        display: flex;
+        top: 25px;
+        left: 25px;
+        right: 25px;
+        bottom: 25px;
+        background: var(--white);
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+
+        flex-direction: column;
+        color: #000;
+        text-align: left;
+        transition: .5s;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, .15);
+        padding: var(--padding-lg);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-sm);
+    }
+
+    li.Card:hover .Overlay {
+        opacity: 1; /* Show Overlay on hover */
+    }
+
+    .Overlay .Content {
+        text-align: center;
+        font-size: .9em;
+        padding: 0px;
+    }
+
+    .ItemListGrid > li > a:hover > .Favourite,
+    .ItemListGrid > li > a > .Favourite.Clicked{
+        right: 8px;
+        top: 8px;
+    }
+
+    .ItemListGrid > li > a > .Favourite .fa-check {
+        right: 0px;
+        top: 0px;
+        padding: 3px;
+    }
+
+    /* CategoryFilter */
+    a.CategoryFilter.Active {
+        color: black;
+    }
+
+    .CategoryFilter:hover {
+        color: var(--primary-color);
+    }
+
+    .CategoryFilter {
+        padding-left: 10px; /* Default padding for Level 2 */
+    }
+
+    .CategoryFilter.Level-3 {
+        padding-left: 20px;
+    }
+
+    .CategoryFilter.Level-4 {
+        padding-left: 30px;
+    }
+
+    .CategoryFilter.Level-5 {
+        padding-left: 40px;
+    }
+
+    .CategoryFilter.Level-6 {
+        padding-left: 50px;
+    }
+}

@@ -284,14 +284,15 @@ Core.Agent.TicketAction = (function (TargetNS) {
      */
     TargetNS.ConfirmTemplateOverwrite = function (FieldName, $TemplateSelect, Callback) {
         var Content = '',
-            LastValue = $TemplateSelect.data('LastValue') || '';
+            LastValue = $TemplateSelect.data('LastValue') || '',
+            RTEditor = Core.UI.RichTextEditor.GetInstance(FieldName);
 
         // Fallback for non-richtext content
         Content = $('#' + FieldName).val();
 
         // get RTE content
-        if (typeof CKEDITOR !== 'undefined' && CKEDITOR.instances[FieldName]) {
-            Content = CKEDITOR.instances[FieldName].getData();
+        if (RTEditor !== undefined) {
+            Content = RTEditor.getData();
         }
 
         // if content already exists let user confirm to really overwrite that content with a template
@@ -323,10 +324,27 @@ Core.Agent.TicketAction = (function (TargetNS) {
 
         $('.TimeUnitDropdown.' + Selector).each(function() {
             Count += Number($(this).val() || 0);
-            $(this).removeClass('Validate_Required');
+
+            if ($(this).hasClass('Validate_Required')) {
+
+                // Remember if ValidateRequired was set (see below check for Count).
+                $(this).attr('data-needs-class-validate-required', '1');
+
+                $(this).removeClass('Validate_Required');
+            }
         });
 
         $TimeUnits.val(Count);
+
+        // Re-add Validate_Required class for required fields if time units have been
+        // removed again.
+        if (!Count) {
+            $('.TimeUnitDropdown.' + Selector).each(function() {
+                if ($(this).attr('data-needs-class-validate-required')) {
+                    $(this).addClass('Validate_Required');
+                }
+            });
+        }
     };
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');

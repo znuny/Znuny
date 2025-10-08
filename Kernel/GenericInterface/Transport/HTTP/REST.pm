@@ -229,6 +229,7 @@ sub ProviderProcessRequest {
         HTTP_X_OTRS_HEADER_SESSIONID         => 'SessionID',
         HTTP_X_OTRS_HEADER_PASSWORD          => 'Password',
         HTTP_X_OTRS_HEADER_IMPERSONATEASUSER => 'ImpersonateAsUser',
+        HTTP_X_OTRS_HEADER_TWOFACTORTOKEN    => 'TwoFactorToken',
     );
 
     HEADER:
@@ -1212,7 +1213,7 @@ sub RequesterPerformRequest {
             $SizeExceeded = 1;
             $Self->{DebuggerObject}->Debug(
                 Summary => "JSON data received from remote system was too large for logging",
-                Data =>
+                Data    =>
                     'See SysConfig option GenericInterface::Operation::ResponseLoggingMaxSize to change the maximum.',
             );
         }

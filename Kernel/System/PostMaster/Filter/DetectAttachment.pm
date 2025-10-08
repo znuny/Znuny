@@ -48,7 +48,7 @@ sub Run {
     }
 
     # Get attachments.
-    my @Attachments = $Self->{ParserObject}->GetAttachments();
+    my @Attachments = $Self->{ParserObject}->GetAttachments( UserType => 'Agent' );
 
     my $AttachmentCount = 0;
     for my $Attachment (@Attachments) {
@@ -60,8 +60,8 @@ sub Run {
             && length $Attachment->{ContentID}
             )
         {
-            my ($ImageID) = ( $Attachment->{ContentID} =~ m{^<(.*)>$}ixms );
-            if ( grep { $_->{Content} =~ m{<img.*src=.*['|"]cid:\Q$ImageID\E['|"].*>}xms } @Attachments ) {
+            my ($ImageID) = ( $Attachment->{ContentID} =~ m{^<(.*?)>$}ms );
+            if ( grep { $_->{Content} =~ m{<img.*?src=['|"]cid:\Q$ImageID\E['|"]}ims } @Attachments ) {
                 $AttachmentInline = 1;
             }
         }

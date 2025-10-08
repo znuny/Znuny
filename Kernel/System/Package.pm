@@ -22,7 +22,7 @@ use Kernel::System::SysConfig;
 use Kernel::System::WebUserAgent;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 use parent qw(Kernel::System::EventHandler);
 
@@ -390,7 +390,7 @@ sub RepositoryAdd {
             . Translatable('not installed') . '\', '
             . ' current_timestamp, 1, current_timestamp, 1)',
         Bind => [
-            \$Structure{Name}->{Content}, \$Structure{Version}->{Content},
+            \$Structure{Name}->{Content},   \$Structure{Version}->{Content},
             \$Structure{Vendor}->{Content}, \$FileName, \$Content,
         ],
     );
@@ -863,7 +863,7 @@ sub PackageUpgrade {
         if ( $Structure{Version}->{Content} eq $InstalledVersion ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Can't upgrade, package '$Structure{Name}->{Content}-$InstalledVersion' already installed!",
             );
 
@@ -872,7 +872,7 @@ sub PackageUpgrade {
         else {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Can't upgrade, installed package '$InstalledVersion' is newer as '$Structure{Version}->{Content}'!",
             );
 
@@ -1672,7 +1672,7 @@ sub RepositoryPackageListGet {
     if ( @Packages && !$PackageForRequestedFramework ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'notice',
-            Message =>
+            Message  =>
                 Translatable(
                 'No packages for your framework version found in this repository, it only contains packages for other framework versions.'
                 ),
@@ -1751,6 +1751,19 @@ sub RepositoryPackageListGet {
     }
 
     @Packages = @NewPackages;
+
+    # Sort packages by name and then by version (ascending).
+    @Packages = sort {
+        ( my $ComparableVersionA = $a->{Version} ) =~ s{(\A(\d+)\.(\d+)\.(\d+)\z)}{
+            sprintf( '%03u%03u%03u', $2, $3, $4 );
+        }e;
+        ( my $ComparableVersionB = $b->{Version} ) =~ s{(\A(\d+)\.(\d+)\.(\d+)\z)}{
+            sprintf( '%03u%03u%03u', $2, $3, $4 );
+        }e;
+
+        $a->{Name} cmp $b->{Name}
+            || $ComparableVersionA <=> $ComparableVersionB
+    } @Packages;
 
     # set cache
     if ( $Param{Cache} ) {
@@ -2974,7 +2987,11 @@ sub PackageUpgradeAll {
     );
 
     # Modify @PackageInstalledList if ITSM packages are installed from Bundle (see bug#13778).
-    if ( grep { $_->{Name} eq 'ITSM' } @PackageInstalledList && grep { $_->{Name} eq 'ITSM' } @PackageOnlineList ) {
+    if (
+        @PackageInstalledList && grep { $_->{Name} eq 'ITSM' }
+        @PackageInstalledList && grep { $_->{Name} eq 'ITSM' } @PackageOnlineList
+        )
+    {
         my @TmpPackages = (
             'GeneralCatalog',
             'ITSMCore',
@@ -3245,6 +3262,7 @@ system data.
     my %Result = $PackageObject->PackageUpgradeAllIsRunning();
 
 Returns:
+
     %Result = (
         IsRunning      => 1,             # or 0 if it is not running
         UpgradeStatus  => 'Running',     # (optional) 'Running' or 'Finished' or 'TimedOut',
@@ -3299,7 +3317,7 @@ sub PackageUpgradeAllIsRunning {
 
     return (
         IsRunning      => $IsRunning // 0,
-        UpgradeStatus  => $SystemData{Status} || '',
+        UpgradeStatus  => $SystemData{Status}  || '',
         UpgradeSuccess => $SystemData{Success} || '',
     );
 }
@@ -3835,7 +3853,7 @@ sub _CheckPackageDepends {
                 if ( $Param{Name} eq $Module->{Content} && !$Param{Force} ) {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => 'error',
-                        Message =>
+                        Message  =>
                             "Sorry, can't uninstall package $Param{Name}, "
                             . "because package $Local->{Name}->{Content} depends on it!",
                     );

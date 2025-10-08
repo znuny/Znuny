@@ -1328,7 +1328,7 @@ my $UserID5        = $Kernel::OM->Get('Kernel::System::User')->UserLookup(
 for my $Round ( 1 .. 2 ) {
     for my $UserID ( $UserID1, $UserID2, $UserID3, $UserID4, $UserID5 ) {
 
-        my $EffectiveValueStrg = << 'EOF';
+        my $EffectiveValueStrg = <<'EOF';
 sub Load {
     my ($File, $Self) = @_;
     $Self->{Key} = 1;

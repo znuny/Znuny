@@ -274,7 +274,7 @@ sub Run {
     # all needed variables
     my @TicketIDs;
     if ( IsStringWithData( $Param{Data}->{TicketID} ) ) {
-        @TicketIDs = split( /,/, $Param{Data}->{TicketID} );
+        @TicketIDs = split( /\s*,\s*/, $Param{Data}->{TicketID} );
     }
     elsif ( IsArrayRefWithData( $Param{Data}->{TicketID} ) ) {
         @TicketIDs = @{ $Param{Data}->{TicketID} };
@@ -283,6 +283,15 @@ sub Run {
         return $Self->ReturnError(
             ErrorCode    => 'TicketGet.WrongStructure',
             ErrorMessage => "TicketGet: Structure for TicketID is not correct!",
+        );
+    }
+
+    # Check for IDs being integers.
+    my $NumberOfIntegers = grep { $_ =~ m{\A[1-9]\d*\z} } @TicketIDs;
+    if ( $NumberOfIntegers != @TicketIDs ) {
+        return $Self->ReturnError(
+            ErrorCode    => 'TicketGet.WrongStructure',
+            ErrorMessage => "TicketGet: Invalid ticket ID parameter(s) found!",
         );
     }
 
@@ -312,12 +321,12 @@ sub Run {
         );
     }
 
-    my $DynamicFields = $Param{Data}->{DynamicFields} || 0;
-    my $Extended      = $Param{Data}->{Extended}      || 0;
-    my $AllArticles   = $Param{Data}->{AllArticles}   || 0;
-    my $ArticleOrder  = $Param{Data}->{ArticleOrder}  || 'ASC';
-    my $ArticleLimit  = $Param{Data}->{ArticleLimit}  || 0;
-    my $Attachments   = $Param{Data}->{Attachments}   || 0;
+    my $DynamicFields         = $Param{Data}->{DynamicFields} || 0;
+    my $Extended              = $Param{Data}->{Extended}      || 0;
+    my $AllArticles           = $Param{Data}->{AllArticles}   || 0;
+    my $ArticleOrder          = $Param{Data}->{ArticleOrder}  || 'ASC';
+    my $ArticleLimit          = $Param{Data}->{ArticleLimit}  || 0;
+    my $Attachments           = $Param{Data}->{Attachments}   || 0;
     my $GetAttachmentContents = $Param{Data}->{GetAttachmentContents} // 1;
 
     my $ReturnData = {

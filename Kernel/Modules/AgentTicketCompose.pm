@@ -11,9 +11,10 @@ package Kernel::Modules::AgentTicketCompose;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Mail::Address;
 
 our $ObjectManagerDisabled = 1;
@@ -843,7 +844,7 @@ sub Run {
                     DynamicFieldConfig   => $DynamicFieldConfig,
                     PossibleValuesFilter => $PossibleValuesFilter,
                     ParamObject          => $ParamObject,
-                    Mandatory =>
+                    Mandatory            =>
                         $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
                 );
 
@@ -868,13 +869,13 @@ sub Run {
                 $DynamicFieldBackendObject->EditFieldRender(
                 DynamicFieldConfig   => $DynamicFieldConfig,
                 PossibleValuesFilter => $PossibleValuesFilter,
-                Mandatory =>
+                Mandatory            =>
                     $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
-                ServerError  => $ValidationResult->{ServerError}  || '',
-                ErrorMessage => $ValidationResult->{ErrorMessage} || '',
-                LayoutObject => $LayoutObject,
-                ParamObject  => $ParamObject,
-                AJAXUpdate   => 1,
+                ServerError     => $ValidationResult->{ServerError}  || '',
+                ErrorMessage    => $ValidationResult->{ErrorMessage} || '',
+                LayoutObject    => $LayoutObject,
+                ParamObject     => $ParamObject,
+                AJAXUpdate      => 1,
                 UpdatableFields => $Self->_GetFieldsToUpdate(),
                 );
         }
@@ -1531,17 +1532,17 @@ sub Run {
 
                 }
                 else {
-                    $Data{Body} = "<br/>" . $Data{Body};
+                    $Data{Body} = "<p></p>\n" . $Data{Body};
 
                     if ( $Data{CreateTime} ) {
-                        $Data{Body} = $LayoutObject->{LanguageObject}->Translate('Date') .
-                            ": $Data{CreateTime}<br/>" . $Data{Body};
+                        $Data{Body} = '<p>' . $LayoutObject->{LanguageObject}->Translate('Date') .
+                            ": $Data{CreateTime}</p>" . $Data{Body};
                     }
 
                     for my $Key (qw(Subject ReplyTo Reply-To Cc To From)) {
                         if ( $Data{$Key} ) {
-                            $Data{Body} = $LayoutObject->{LanguageObject}->Translate($Key) .
-                                ": $Data{$Key}<br/>" . $Data{Body};
+                            $Data{Body} = '<p>' . $LayoutObject->{LanguageObject}->Translate($Key) .
+                                ": $Data{$Key}</p>" . $Data{Body};
                         }
                     }
 
@@ -1552,8 +1553,8 @@ sub Run {
                     my $MessageFrom = $LayoutObject->{LanguageObject}->Translate('Message from');
                     my $EndMessage  = $LayoutObject->{LanguageObject}->Translate('End message');
 
-                    $Data{Body} = "<br/>---- $MessageFrom $From ---<br/><br/>" . $Data{Body};
-                    $Data{Body} .= "<br/>---- $EndMessage ---<br/>";
+                    $Data{Body} = "<p>---- $MessageFrom $From ---</p><p></p>" . $Data{Body};
+                    $Data{Body} .= "\n<p>---- $EndMessage ---</p>";
                 }
             }
         }
@@ -1868,7 +1869,7 @@ sub Run {
                 DynamicFieldConfig   => $DynamicFieldConfig,
                 PossibleValuesFilter => $PossibleValuesFilter,
                 Value                => $Value,
-                Mandatory =>
+                Mandatory            =>
                     $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
                 LayoutObject    => $LayoutObject,
                 ParamObject     => $ParamObject,
@@ -1971,9 +1972,9 @@ sub _Mask {
         OnlyDynamicFields => 1
     );
 
-    # get needed objects
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $LayoutObject    = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+    my $FormDraftObject = $Kernel::OM->Get('Kernel::System::FormDraft');
 
     # get config for frontend module
     my $Config = $ConfigObject->Get("Ticket::Frontend::$Self->{Action}");
@@ -2028,7 +2029,7 @@ sub _Mask {
         YearPeriodPast       => 0,
         YearPeriodFuture     => 5,
         DiffTime             => $ConfigObject->Get('Ticket::Frontend::PendingDiffTime') || 0,
-        Class                => $Param{Errors}->{DateInvalid} || ' ',
+        Class                => $Param{Errors}->{DateInvalid}                           || ' ',
         Validate             => 1,
         ValidateDateInFuture => 1,
         Calendar             => $Calendar,
@@ -2336,7 +2337,7 @@ sub _Mask {
 
     my $LoadedFormDraft;
     if ( $Self->{LoadedFormDraftID} ) {
-        $LoadedFormDraft = $Kernel::OM->Get('Kernel::System::FormDraft')->FormDraftGet(
+        $LoadedFormDraft = $FormDraftObject->FormDraftGet(
             FormDraftID => $Self->{LoadedFormDraftID},
             GetContent  => 0,
             UserID      => $Self->{UserID},
@@ -2382,15 +2383,24 @@ sub _Mask {
         );
     }
 
+    # Check if the user has already any form draft for this action
+    my $FormDraftList = $FormDraftObject->FormDraftListGet(
+        ObjectType => 'Ticket',
+        ObjectID   => $Self->{TicketID},
+        Action     => $Self->{Action},
+        UserID     => $Self->{UserID},
+    ) // [];
+
     # create & return output
     return $LayoutObject->Output(
         TemplateFile => 'AgentTicketCompose',
         Data         => {
-            FormID         => $Self->{FormID},
-            FormDraft      => $Config->{FormDraft},
-            FormDraftID    => $Self->{LoadedFormDraftID},
-            FormDraftTitle => $LoadedFormDraft ? $LoadedFormDraft->{Title} : '',
-            FormDraftMeta  => $LoadedFormDraft,
+            FormID             => $Self->{FormID},
+            FormDraft          => $Config->{FormDraft},
+            FormDraftID        => $Self->{LoadedFormDraftID},
+            FormDraftTitle     => $LoadedFormDraft ? $LoadedFormDraft->{Title} : '',
+            FormDraftMeta      => $LoadedFormDraft,
+            FormDraftForAction => scalar @{$FormDraftList},
             %Param,
         },
     );

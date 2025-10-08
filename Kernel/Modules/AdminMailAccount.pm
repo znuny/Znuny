@@ -38,7 +38,7 @@ sub Run {
         qw(
             ID Login Password Host Type TypeAdd Comment ValidID QueueID IMAPFolder Trusted DispatchingBy
             AuthenticationType OAuth2TokenConfigID
-            )
+        )
     );
     for my $Parameter (@Params) {
         $GetParam{$Parameter} = $ParamObject->GetParam( Param => $Parameter );
@@ -617,10 +617,10 @@ sub _BuildOAuth2TokenConfigSelection {
     } @ValidOAuth2TokenConfigs;
 
     my $SelectionHTML = $LayoutObject->BuildSelection(
-        Data       => \%ValidOAuth2TokenConfigs,
-        Name       => 'OAuth2TokenConfigID',
-        SelectedID => $Param{SelectedOAuth2TokenConfigID} // '',
-        Class      => 'Modernize ' . ( $Param{Errors}->{'OAuth2TokenConfigIDInvalid'} || '' ),
+        Data         => \%ValidOAuth2TokenConfigs,
+        Name         => 'OAuth2TokenConfigID',
+        SelectedID   => $Param{SelectedOAuth2TokenConfigID} // '',
+        Class        => 'Modernize ' . ( $Param{Errors}->{'OAuth2TokenConfigIDInvalid'} || '' ),
         PossibleNone => 1,    # to be able to set it to empty if a configured token config has gone invalid.
     );
 

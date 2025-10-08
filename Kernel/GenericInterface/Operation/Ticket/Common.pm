@@ -59,7 +59,7 @@ sub Init {
 
     if ( !IsHashRefWithData($Webservice) ) {
         return {
-            Success => 0,
+            Success      => 0,
             ErrorMessage =>
                 'Could not determine Web service configuration'
                 . ' in Kernel::GenericInterface::Operation::Ticket::Common::new()',
@@ -806,7 +806,7 @@ sub ValidateArticleCommunicationChannel {
     return if !%CommunicationChannel;
 
     # TicketCreate and TicketUpdate operations should only work with MIME based communication channels
-    return if $CommunicationChannel{ChannelName} !~ m{\AEmail|Internal|Phone\z}msxi;
+    return if $CommunicationChannel{ChannelName} !~ m{\AEmail|Internal|Phone|Web\z}msxi;
 
     return 1;
 }
@@ -1178,7 +1178,7 @@ sub SetDynamicFieldValue {
     if ( !$ObjectID ) {
         return {
             Success      => 0,
-            ErrorMessage => "SetDynamicFieldValue() Could not set $ObjectID!",
+            ErrorMessage => "SetDynamicFieldValue() Could not set ObjectID!",
         };
     }
 
@@ -1310,9 +1310,10 @@ sub CheckCreatePermissions {
 Tests if the user have access permissions over a ticket.
 
     my $Result = $CommonObject->CheckAccessPermissions(
-        TicketID   => 123,
-        UserID     => 123,                      # or 'CustomerLogin'
-        UserType   => 'Agent',                  # or 'Customer'
+        TicketID       => 123,
+        UserID         => 123,                      # or 'CustomerLogin'
+        UserType       => 'Agent',                  # or 'Customer'
+        PermissionType => 'rw',                     # defaults to 'ro'
     );
 
 Returns:
@@ -1335,8 +1336,9 @@ sub CheckAccessPermissions {
         $TicketPermissionFunction = 'TicketCustomerPermission';
     }
 
-    my $Access = $Kernel::OM->Get('Kernel::System::Ticket')->$TicketPermissionFunction(
-        Type     => 'ro',
+    my $PermissionType = $Param{PermissionType} // 'ro';
+    my $Access         = $Kernel::OM->Get('Kernel::System::Ticket')->$TicketPermissionFunction(
+        Type     => $PermissionType,
         TicketID => $Param{TicketID},
         UserID   => $Param{UserID},
     );

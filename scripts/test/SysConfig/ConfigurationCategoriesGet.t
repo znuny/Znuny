@@ -87,7 +87,7 @@ my @Tests = (
             OTRS => {
                 DisplayName => 'Znuny',
                 Files       => [
-                    'Calendar.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml',
+                    'Calendar.xml',          'Daemon.xml', 'Framework.xml', 'GenericInterface.xml',
                     'ProcessManagement.xml', 'Ticket.xml', 'Znuny.xml'
                 ],
             },
@@ -108,11 +108,12 @@ my @Tests = (
             OTRS => {
                 DisplayName => 'Znuny',
                 Files       => [
-                    'Calendar.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml',
+                    'Calendar.xml',          'Daemon.xml', 'Framework.xml', 'GenericInterface.xml',
                     'ProcessManagement.xml', 'Ticket.xml', 'Znuny.xml'
                 ],
             },
             TestPackage1 => {
+                PackageName => 'TestPackage1',
                 DisplayName => 'TestPackage1',
                 Files       => ['TestPackage1.xml'],
             },
@@ -133,15 +134,17 @@ my @Tests = (
             OTRS => {
                 DisplayName => 'Znuny',
                 Files       => [
-                    'Calendar.xml', 'Daemon.xml', 'Framework.xml', 'GenericInterface.xml',
+                    'Calendar.xml',          'Daemon.xml', 'Framework.xml', 'GenericInterface.xml',
                     'ProcessManagement.xml', 'Ticket.xml', 'Znuny.xml'
                 ],
             },
             TestPackage1 => {
+                PackageName => 'TestPackage1',
                 DisplayName => 'TestPackage1',
                 Files       => ['TestPackage1.xml'],
             },
             TestPackage2 => {
+                PackageName => 'TestPackage2',
                 DisplayName => 'TestPackage2',
                 Files       => [ 'TestPackage2-1.xml', 'TestPackage2-2.xml' ],
             },

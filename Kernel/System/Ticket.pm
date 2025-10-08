@@ -23,7 +23,7 @@ use parent qw(
     Kernel::System::Ticket::TicketACL
 );
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
@@ -589,10 +589,10 @@ sub TicketCreate {
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 0, 0, 0, 0, ?, ?, 0, ?,
                 current_timestamp, ?, current_timestamp, ?)',
         Bind => [
-            \$Param{TN}, \$Param{Title}, \$Param{TypeID}, \$Param{QueueID},
+            \$Param{TN},         \$Param{Title},   \$Param{TypeID}, \$Param{QueueID},
             \$Param{LockID},     \$Param{OwnerID}, \$Param{ResponsibleID},
             \$Param{PriorityID}, \$Param{StateID}, \$Param{ServiceID},
-            \$Param{SLAID}, \$ArchiveFlag, \$Param{UserID}, \$Param{UserID},
+            \$Param{SLAID},      \$ArchiveFlag,    \$Param{UserID}, \$Param{UserID},
         ],
     );
 
@@ -650,7 +650,7 @@ sub TicketCreate {
     if ( $Param{CustomerNo} || $Param{CustomerID} || $Param{CustomerUser} ) {
         $Self->TicketCustomerSet(
             TicketID => $TicketID,
-            No       => $Param{CustomerNo} || $Param{CustomerID} || '',
+            No       => $Param{CustomerNo}   || $Param{CustomerID} || '',
             User     => $Param{CustomerUser} || '',
             UserID   => $Param{UserID},
         );
@@ -1227,14 +1227,12 @@ sub TicketGet {
         Key  => $CacheKey,
     );
 
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+
     if ( ref $Cached eq 'HASH' ) {
         %Ticket = %{$Cached};
     }
     else {
-
-        # get database object
-        my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
-
         return if !$DBObject->Prepare(
             SQL => '
                 SELECT st.id, st.queue_id, st.ticket_state_id, st.ticket_lock_id, st.ticket_priority_id,
@@ -1316,19 +1314,35 @@ sub TicketGet {
         my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
         # get all dynamic fields for the object type Ticket
-        my $DynamicFieldList = $DynamicFieldObject->DynamicFieldListGet(
-            ObjectType => 'Ticket'
+        my $TicketDynamicFieldList = $DynamicFieldObject->DynamicFieldListGet(
+            ObjectType => 'Ticket',
         );
 
-        DYNAMICFIELD:
-        for my $DynamicFieldConfig ( @{$DynamicFieldList} ) {
+        my %TicketDynamicFieldConfigByID = map { $_->{ID} => $_ } @{$TicketDynamicFieldList};
 
-            # validate each dynamic field
-            next DYNAMICFIELD if !$DynamicFieldConfig;
-            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
-            next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
+        # Limit fetching dynamic field values to those that are really set for the ticket.
+        return if !$DBObject->Prepare(
+            SQL => '
+                SELECT DISTINCT (field_id)
+                FROM   dynamic_field_value
+                WHERE  object_id = ?
+            ',
+            Bind => [
+                \$Param{TicketID},
+            ],
+        );
 
-            # get the current value for each dynamic field
+        my @DynamicFieldIDs;
+        while ( my @Row = $DBObject->FetchrowArray() ) {
+            my $DynamicFieldID = $Row[0];
+            push @DynamicFieldIDs, $DynamicFieldID;
+        }
+
+        DYNAMICFIELDID:
+        for my $DynamicFieldID (@DynamicFieldIDs) {
+            my $DynamicFieldConfig = $TicketDynamicFieldConfigByID{$DynamicFieldID};
+            next DYNAMICFIELDID if !IsHashRefWithData($DynamicFieldConfig);
+
             my $Value = $DynamicFieldBackendObject->ValueGet(
                 DynamicFieldConfig => $DynamicFieldConfig,
                 ObjectID           => $Ticket{TicketID},
@@ -2510,7 +2524,7 @@ sub TicketServiceList {
 
     # Return all Services, filtering by KeepChildren config.
     my %AllServices = $ServiceObject->ServiceList(
-        UserID => 1,
+        UserID       => 1,
         KeepChildren =>
             $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Service::KeepChildren'),
     );
@@ -2635,7 +2649,7 @@ sub TicketServiceSet {
     $Self->HistoryAdd(
         TicketID    => $Param{TicketID},
         HistoryType => 'ServiceUpdate',
-        Name =>
+        Name        =>
             "\%\%$TicketNew{Service}\%\%$Param{ServiceID}\%\%$Ticket{Service}\%\%$Ticket{ServiceID}",
         CreateUserID => $Param{UserID},
     );
@@ -6849,6 +6863,41 @@ sub TicketWatchSubscribe {
     # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
+    #
+    # Check number of watched tickets of user and remove oldest redundant watch list entries.
+    #
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $WatcherLimit = $ConfigObject->Get('Ticket::WatcherLimit');
+    if ($WatcherLimit) {
+        return if !$DBObject->Prepare(
+            SQL => '
+                SELECT   ticket_id
+                FROM     ticket_watcher
+                WHERE    user_id = ?
+                ORDER BY create_time ASC
+            ',
+            Bind => [
+                \$Param{WatchUserID},
+            ],
+        );
+
+        my @WatchedTicketIDs;
+        while ( my @Row = $DBObject->FetchrowArray() ) {
+            push @WatchedTicketIDs, $Row[0];
+        }
+
+        # >= because the one newly subscribed to here must also be counted
+        while ( @WatchedTicketIDs >= $WatcherLimit ) {
+            my $WatchedTicketIDToDelete = shift @WatchedTicketIDs;
+
+            return if !$Self->TicketWatchUnsubscribe(
+                TicketID    => $WatchedTicketIDToDelete,
+                WatchUserID => $Param{WatchUserID},
+                UserID      => $Param{UserID},
+            );
+        }
+    }
+
     # db access
     return if !$DBObject->Do(
         SQL => '
@@ -7036,21 +7085,42 @@ sub TicketFlagSet {
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     # set flag
-    return if !$DBObject->Do(
+    my $FlagExists;
+    return if !$DBObject->Prepare(
         SQL => '
-            DELETE FROM ticket_flag
-            WHERE ticket_id = ?
-                AND ticket_key = ?
-                AND create_by = ?',
+            SELECT ticket_id
+            FROM   ticket_flag
+            WHERE  ticket_id = ?
+                   AND ticket_key = ?
+                   AND create_by = ?
+        ',
         Bind => [ \$Param{TicketID}, \$Param{Key}, \$Param{UserID} ],
     );
-    return if !$DBObject->Do(
-        SQL => '
-            INSERT INTO ticket_flag
-            (ticket_id, ticket_key, ticket_value, create_time, create_by)
-            VALUES (?, ?, ?, current_timestamp, ?)',
-        Bind => [ \$Param{TicketID}, \$Param{Key}, \$Param{Value}, \$Param{UserID} ],
-    );
+    while ( my @Row = $DBObject->FetchrowArray() ) {
+        $FlagExists = 1;
+    }
+
+    if ($FlagExists) {
+        return if !$DBObject->Do(
+            SQL => '
+                UPDATE ticket_flag
+                SET    ticket_value = ?
+                WHERE  ticket_id = ?
+                       AND ticket_key = ?
+                       AND create_by = ?
+            ',
+            Bind => [ \$Param{Value}, \$Param{TicketID}, \$Param{Key}, \$Param{UserID} ],
+        );
+    }
+    else {
+        return if !$DBObject->Do(
+            SQL => '
+                INSERT INTO ticket_flag
+                (ticket_id, ticket_key, ticket_value, create_time, create_by)
+                VALUES (?, ?, ?, current_timestamp, ?)',
+            Bind => [ \$Param{TicketID}, \$Param{Key}, \$Param{Value}, \$Param{UserID} ],
+        );
+    }
 
     # delete cache
     $Kernel::OM->Get('Kernel::System::Cache')->Delete(
@@ -7425,7 +7495,7 @@ sub TicketArticleStorageSwitch {
         if (%Index) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Attachments of TicketID:$Param{TicketID}/ArticleID:$Article->{ArticleID} already in $Param{Destination}!",
             );
         }
@@ -7495,7 +7565,7 @@ sub TicketArticleStorageSwitch {
             else {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         "Corrupt file: $Attachment{Filename} (TicketID:$Param{TicketID}/ArticleID:$Article->{ArticleID})!",
                 );
 
@@ -7516,7 +7586,7 @@ sub TicketArticleStorageSwitch {
         if (%MD5Sums) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Not all files are moved! (TicketID:$Param{TicketID}/ArticleID:$Article->{ArticleID})!",
             );
 
@@ -7547,7 +7617,7 @@ sub TicketArticleStorageSwitch {
             if ( $PlainMD5Sum ne $PlainMD5SumVerify ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         "Corrupt plain file: ArticleID: $Article->{ArticleID} ($PlainMD5Sum/$PlainMD5SumVerify)",
                 );
 

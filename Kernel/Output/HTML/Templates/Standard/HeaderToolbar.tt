@@ -83,7 +83,6 @@
     </div>
 [% RenderBlockEnd("ToolBarLastViews") %]
 
-    <!-- Search Tools Start -->
     <div class="component-wrapper component-search align-right-auto">
         <div class="search-bar-container">
             <label>[% Translate('Search tools') | html %]</label>
@@ -93,9 +92,9 @@
                 <input type="hidden" name="Subaction" value="Search"/>
                 <input type="hidden" name="SearchTemplate" value="[% Translate("Search") | html %]"/>
                 <input type="hidden" name="CheckTicketNumberAndRedirect" value="1"/>
-                [% IF Data.SearchInArchive %]
+[% RenderBlockStart("SearchInArchive") %]
                     <input type="hidden" name="SearchInArchive" value="[% Data.SearchInArchive | html %]"/>
-                [% END %]
+[% RenderBlockEnd("SearchInArchive") %]
                 [% FOREACH Parameter IN Data.AdditionalSearchParameters %]
                     <input type="hidden" name="[% Parameter.key | html %]" value="[% Parameter.value | html %]">
                 [% END %]
@@ -124,5 +123,4 @@
             </form>
         </div>
     </div>
-    <!-- Search Tools End -->
 </div>

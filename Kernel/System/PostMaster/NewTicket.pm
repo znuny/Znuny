@@ -21,6 +21,7 @@ our @ObjectDependencies = (
     'Kernel::System::LinkObject',
     'Kernel::System::Priority',
     'Kernel::System::Queue',
+    'Kernel::System::SLA',
     'Kernel::System::Service',
     'Kernel::System::State',
     'Kernel::System::Ticket',
@@ -61,7 +62,7 @@ sub Run {
         }
     }
     my %GetParam         = %{ $Param{GetParam} };
-    my $Comment          = $Param{Comment} || '';
+    my $Comment          = $Param{Comment}          || '';
     my $AutoResponseType = $Param{AutoResponseType} || '';
 
     # get queue id and name
@@ -75,6 +76,13 @@ sub Run {
 
     # get state
     my $State = $ConfigObject->Get('PostmasterDefaultState') || 'new';
+
+    if ( $GetParam{'X-OTRS-StateID'} ) {
+        $GetParam{'X-OTRS-State'} = $Kernel::OM->Get('Kernel::System::State')->StateLookup(
+            StateID => $GetParam{'X-OTRS-StateID'},
+        );
+    }
+
     if ( $GetParam{'X-OTRS-State'} ) {
 
         my $StateID = $Kernel::OM->Get('Kernel::System::State')->StateLookup(
@@ -97,6 +105,12 @@ sub Run {
     # get priority
     my $Priority = $ConfigObject->Get('PostmasterDefaultPriority') || '3 normal';
 
+    if ( $GetParam{'X-OTRS-PriorityID'} ) {
+        $GetParam{'X-OTRS-Priority'} = $Kernel::OM->Get('Kernel::System::Priority')->PriorityLookup(
+            PriorityID => $GetParam{'X-OTRS-PriorityID'},
+        );
+    }
+
     if ( $GetParam{'X-OTRS-Priority'} ) {
 
         my $PriorityID = $Kernel::OM->Get('Kernel::System::Priority')->PriorityLookup(
@@ -117,6 +131,11 @@ sub Run {
     }
 
     my $TypeID;
+
+    if ( $GetParam{'X-OTRS-TypeID'} ) {
+        $GetParam{'X-OTRS-Type'}
+            = $Kernel::OM->Get('Kernel::System::Type')->TypeLookup( TypeID => $GetParam{'X-OTRS-TypeID'} );
+    }
 
     if ( $GetParam{'X-OTRS-Type'} ) {
 
@@ -272,6 +291,12 @@ sub Run {
 
     # Ticket service handling.
 
+    if ( $GetParam{'X-OTRS-ServiceID'} ) {
+        $GetParam{'X-OTRS-Service'} = $Kernel::OM->Get('Kernel::System::Service')->ServiceLookup(
+            ServiceID => $GetParam{'X-OTRS-ServiceID'},
+        );
+    }
+
     if ( $GetParam{'X-OTRS-Service'} ) {
 
         # Get all valid services.
@@ -289,12 +314,18 @@ sub Run {
                 ObjectLogType => 'Message',
                 Priority      => 'Debug',
                 Key           => 'Kernel::System::PostMaster::NewTicket',
-                Value =>
+                Value         =>
                     "Ticket service won't be set to '$GetParam{'X-OTRS-Service'}' (does not exist or is invalid or is a child of invalid service).",
             );
 
             $GetParam{'X-OTRS-Service'} = '';
         }
+    }
+
+    if ( $GetParam{'X-OTRS-SLAID'} ) {
+        $GetParam{'X-OTRS-SLA'} = $Kernel::OM->Get('Kernel::System::SLA')->SLALookup(
+            SLAID => $GetParam{'X-OTRS-SLAID'},
+        );
     }
 
     # create new ticket
@@ -308,7 +339,7 @@ sub Run {
         State        => $State,
         TypeID       => $TypeID,
         Service      => $GetParam{'X-OTRS-Service'} || '',
-        SLA          => $GetParam{'X-OTRS-SLA'} || '',
+        SLA          => $GetParam{'X-OTRS-SLA'}     || '',
         CustomerID   => $GetParam{'X-OTRS-CustomerNo'},
         CustomerUser => $GetParam{'X-OTRS-CustomerUser'},
         OwnerID      => $OwnerID,
@@ -395,7 +426,7 @@ Message
             ObjectLogType => 'Message',
             Priority      => 'Debug',
             Key           => 'Kernel::System::PostMaster::NewTicket',
-            Value =>
+            Value         =>
                 "Pending time update via 'X-OTRS-State-PendingTime'! State-PendingTime: $GetParam{'X-OTRS-State-PendingTime'}.",
         );
     }
@@ -426,12 +457,24 @@ Message
                 ID => $DynamicFieldID,
             );
 
-            $DynamicFieldBackendObject->ValueSet(
-                DynamicFieldConfig => $DynamicFieldGet,
-                ObjectID           => $TicketID,
-                Value              => $GetParam{$Key},
-                UserID             => $Param{InmailUserID},
-            );
+            # If the dynamic field is a multiselect, we need to split the value into an array
+            if ( $DynamicFieldGet->{FieldType} =~ /Multiselect$/ ) {
+                my @Values = split( /[,;]\s*/, $GetParam{$Key} );
+                $DynamicFieldBackendObject->ValueSet(
+                    DynamicFieldConfig => $DynamicFieldGet,
+                    ObjectID           => $TicketID,
+                    Value              => \@Values,
+                    UserID             => $Param{InmailUserID},
+                );
+            }
+            else {
+                $DynamicFieldBackendObject->ValueSet(
+                    DynamicFieldConfig => $DynamicFieldGet,
+                    ObjectID           => $TicketID,
+                    Value              => $GetParam{$Key},
+                    UserID             => $Param{InmailUserID},
+                );
+            }
 
             $Self->{CommunicationLogObject}->ObjectLog(
                 ObjectLogType => 'Message',
@@ -630,6 +673,11 @@ Message
     my %CommunicationLogSkipAttributes = (
         Body       => 1,
         Attachment => 1,
+
+        # Avoid possible errors on trying to store binary data in db.
+        # This can happen if there were (partial) errors in decryption, leading
+        # to the decrypted body still containing a binary key/cert.
+        'X-OTRS-BodyDecrypted' => 1,
     );
 
     ATTRIBUTE:
@@ -734,7 +782,7 @@ Message
     );
 
     # write attachments to the storage
-    for my $Attachment ( $Self->{ParserObject}->GetAttachments() ) {
+    for my $Attachment ( $Self->{ParserObject}->GetAttachments( UserType => 'Agent' ) ) {
         $ArticleBackendObject->ArticleWriteAttachment(
             Filename           => $Attachment->{Filename},
             Content            => $Attachment->{Content},

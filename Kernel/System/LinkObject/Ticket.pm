@@ -171,7 +171,8 @@ sub ObjectPermission {
 
 return a hash of object descriptions
 
-Return
+Returns:
+
     %Description = (
         Normal => "Ticket# 1234455",
         Long   => "Ticket# 1234455: The Ticket Title",
@@ -216,7 +217,7 @@ sub ObjectDescriptionGet {
 
     return if !%Ticket;
 
-    my $ParamHook = $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Hook') || 'Ticket#';
+    my $ParamHook = $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Hook')      || 'Ticket#';
     $ParamHook .= $Kernel::OM->Get('Kernel::Config')->Get('Ticket::HookDivider') || '';
 
     # create description
@@ -232,6 +233,12 @@ sub ObjectDescriptionGet {
 
 return a hash list of the search results
 
+    my $SearchList = $LinkObject->ObjectSearch(
+        SubObject    => 'Bla',     # (optional)
+        SearchParams => $HashRef,  # (optional)
+        UserID       => 1,
+    );
+
 Returns:
 
     $SearchList = {
@@ -243,12 +250,6 @@ Returns:
             },
         },
     };
-
-    $SearchList = $LinkObject->ObjectSearch(
-        SubObject    => 'Bla',     # (optional)
-        SearchParams => $HashRef,  # (optional)
-        UserID       => 1,
-    );
 
 =cut
 

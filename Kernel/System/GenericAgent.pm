@@ -19,6 +19,7 @@ use Kernel::System::VariableCheck qw(:all);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Cache',
+    'Kernel::System::Daemon::SchedulerDB',
     'Kernel::System::DateTime',
     'Kernel::System::DB',
     'Kernel::System::DynamicField',
@@ -855,6 +856,10 @@ sub JobDelete {
         Type => 'GenericAgent',
     );
 
+    # Remove job record from scheduler DB to avoid job immediate execution if redefined
+    # with different schedule.
+    $Kernel::OM->Get('Kernel::System::Daemon::SchedulerDB')->GenericAgentTaskCleanup();
+
     return 1;
 }
 
@@ -1147,7 +1152,7 @@ sub _JobRunTicket {
         }
         $TicketObject->TicketCustomerSet(
             TicketID => $Param{TicketID},
-            No       => $Param{Config}->{New}->{CustomerID} || $Ticket{CustomerID} || '',
+            No       => $Param{Config}->{New}->{CustomerID}        || $Ticket{CustomerID}     || '',
             User     => $Param{Config}->{New}->{CustomerUserLogin} || $Ticket{CustomerUserID} || '',
             UserID   => $Param{UserID},
         );

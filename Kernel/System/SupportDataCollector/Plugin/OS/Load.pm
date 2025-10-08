@@ -59,8 +59,8 @@ sub Run {
 
         if (@Loads) {
             $Self->AddResultInformation(
-                Label => Translatable('System Load'),
-                Value => $Loads[2],
+                Label   => Translatable('System Load'),
+                Value   => $Loads[2],
                 Message =>
                     Translatable(
                     'The system load should be at maximum the number of CPUs the system has (e.g. a load of 8 or less on a system with 8 CPUs is OK).'

@@ -37,7 +37,7 @@ sub Run {
     my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
     # Ignore all inline parts as these are actually part of the email body.
-    my @Attachments = $Self->{ParserObject}->GetAttachments();
+    my @Attachments = $Self->{ParserObject}->GetAttachments( UserType => 'Agent' );
     @Attachments = grep { defined $_->{ContentDisposition} && $_->{ContentDisposition} ne 'inline' } @Attachments;
 
     $Self->{CommunicationLogObject}->ObjectLog(
@@ -61,7 +61,7 @@ sub Run {
                 ObjectLogType => 'Message',
                 Priority      => 'Debug',
                 Key           => 'Kernel::System::PostMaster::FollowUpCheck::Attachments',
-                Value =>
+                Value         =>
                     "Found valid TicketNumber '$Tn' (TicketID '$TicketID') in email attachment '$Attachment->{Filename}'.",
             );
 

@@ -95,7 +95,7 @@ Core.UI.InputFields = (function (Namespace) {
                     Assert.deepEqual($SelectObj.val(), Selection, 'Check if selection matches');
 
                     $InputListContainerObj.find('.InputField_ClearAll').click();
-                    Assert.deepEqual($SelectObj.val(), [ "" ], 'Check if selection has been cleared');
+                    Assert.deepEqual($SelectObj.val(), [], 'Check if selection has been cleared');
 
                     $InputListContainerObj.find('.InputField_SelectAll').click();
                     Assert.deepEqual($SelectObj.val().length, SelectableOptionNumber, 'Check if everything has been selected');

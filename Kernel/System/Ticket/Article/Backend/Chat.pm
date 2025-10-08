@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 use parent 'Kernel::System::Ticket::Article::Backend::Base';
 
@@ -74,6 +74,7 @@ Create a chat article.
     );
 
 Events:
+
     ArticleCreate
 
 =cut
@@ -209,7 +210,7 @@ sub ArticleCreate {
             );
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'notice',
-                Message =>
+                Message  =>
                     "Ticket [$OldTicketData{TicketNumber}] unlocked, current owner is out of office!",
             );
         }
@@ -430,6 +431,7 @@ Note: Keys C<ChatMessageList>, C<SenderType>, C<SenderTypeID> and C<IsVisibleFor
     );
 
 Events:
+
     ArticleUpdate
 
 =cut
@@ -479,7 +481,7 @@ sub ArticleUpdate {
         if ( !$Success ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "System was unable to remove data from article_data_otrs_chat table (ArticleID = $Param{ArticleID})!",
             );
             return;
@@ -509,7 +511,7 @@ sub ArticleUpdate {
             if ( !$Success ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         "System was unable to store data in article_data_otrs_chat table (ArticleID = $Param{ArticleID})!",
                 );
                 return;
@@ -647,26 +649,26 @@ Get article attachment index as hash.
 
 Returns:
 
-my %ArticleSearchData = {
-    'ChatterName'    => {
-        String     => 'John Doe Jane Doe Joe Doe',
-        Key        => 'ChatterName',
-        Type       => 'Text',
-        Filterable => 0,
-    },
-    'ChatterType'    => {
-        String     => 'User User1 User2 User3',
-        Key        => 'ChatterType',
-        Type       => 'Text',
-        Filterable => 0,
-    },
-    'MessageText'    => {
-        String     => 'Chat message Second chat message Third chat message',
-        Key        => 'Body',
-        Type       => 'Text',
-        Filterable => 1,
-    }
-};
+    my %ArticleSearchData = {
+        'ChatterName'    => {
+            String     => 'John Doe Jane Doe Joe Doe',
+            Key        => 'ChatterName',
+            Type       => 'Text',
+            Filterable => 0,
+        },
+        'ChatterType'    => {
+            String     => 'User User1 User2 User3',
+            Key        => 'ChatterType',
+            Type       => 'Text',
+            Filterable => 0,
+        },
+        'MessageText'    => {
+            String     => 'Chat message Second chat message Third chat message',
+            Key        => 'Body',
+            Type       => 'Text',
+            Filterable => 1,
+        }
+    };
 
 =cut
 
@@ -713,7 +715,7 @@ sub ArticleSearchableContentGet {
         $ArticleSearchData{$FieldKey} = {
             String     => $IndexString,
             Key        => $BackendSearchableFields{$FieldKey}->{Key},
-            Type       => $BackendSearchableFields{$FieldKey}->{Type} // 'Text',
+            Type       => $BackendSearchableFields{$FieldKey}->{Type}       // 'Text',
             Filterable => $BackendSearchableFields{$FieldKey}->{Filterable} // 0,
         };
     }

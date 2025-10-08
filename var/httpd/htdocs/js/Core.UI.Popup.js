@@ -500,7 +500,7 @@ Core.UI.Popup = (function (TargetNS) {
                  *  to save the Type parameter.
                  */
 
-                 /* if Unlined is passed and eq 1 add, diferent name of the popup
+                /* if Unlined is passed and eq 1 add, diferent name of the popup
                  * it will ensure that popup is nor linked with the parent window
                  */
                 if (Unlinked && Unlinked === 1) {
@@ -514,10 +514,11 @@ Core.UI.Popup = (function (TargetNS) {
                     PopupFeatures = PopupProfiles[PopupProfile].WindowURLParams;
 
                     // Convert strings to numbers to avoid surprises like concatenation instead of sum.
-                    PopupProfiles[PopupProfile].Width = Number(PopupProfiles[PopupProfile].Width);
-                    PopupProfiles[PopupProfile].Height = Number(PopupProfiles[PopupProfile].Height);
-                    PopupProfiles[PopupProfile].Top = Number(PopupProfiles[PopupProfile].Top);
-                    PopupProfiles[PopupProfile].Left = Number(PopupProfiles[PopupProfile].Left);
+                    // Note: Don't do this for width/height because these can pe given as percentages.
+                    // PopupProfiles[PopupProfile].Width  = Number(PopupProfiles[PopupProfile].Width);
+                    // PopupProfiles[PopupProfile].Height = Number(PopupProfiles[PopupProfile].Height);
+                    PopupProfiles[PopupProfile].Top    = Number(PopupProfiles[PopupProfile].Top);
+                    PopupProfiles[PopupProfile].Left   = Number(PopupProfiles[PopupProfile].Left);
 
                     // get pixel or percent of width and height
                     // convert to a valid pixel value for window.open
@@ -602,7 +603,7 @@ Core.UI.Popup = (function (TargetNS) {
                 HasOpenPopups = true;
                 break;
             }
-         }
+        }
 
         return HasOpenPopups;
     };
@@ -791,7 +792,7 @@ Core.UI.Popup = (function (TargetNS) {
                             Left:   window.screenX,
                             Top:    window.screenY,
                         };
-                       TargetNS.UpdatePopupProfile(Param);
+                        TargetNS.UpdatePopupProfile(Param);
                     },1000);
                 });
             }

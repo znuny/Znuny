@@ -413,7 +413,7 @@ my @Tests = (
     {
         Name => 'Multiple valid with OTRS-tags in RecipientEmail - Text type DynamicField',
         Data => {
-            Events => [ 'TicketDynamicFieldUpdate_DFT1' . $RandomID . 'Update' ],
+            Events         => [ 'TicketDynamicFieldUpdate_DFT1' . $RandomID . 'Update' ],
             RecipientEmail =>
                 ["zz1test\@otrsexample.com, <OTRS_TICKET_DynamicField_$FieldName[0]>, zz2test\@otrsexample.com;"],
         },
@@ -435,7 +435,7 @@ my @Tests = (
     {
         Name => 'Multiple valid with OTRS-tags in RecipientEmail - Dropdown type DynamicField',
         Data => {
-            Events => [ 'TicketDynamicFieldUpdate_DFT1' . $RandomID . 'Update' ],
+            Events         => [ 'TicketDynamicFieldUpdate_DFT1' . $RandomID . 'Update' ],
             RecipientEmail =>
                 ["zz1test\@otrsexample.com, <OTRS_TICKET_DynamicField_$FieldName[1]>, zz2test\@otrsexample.com;"],
         },
@@ -457,7 +457,7 @@ my @Tests = (
     {
         Name => 'Valid with OTRS-tag in RecipientEmail - Multiselect type DynamicField',
         Data => {
-            Events => [ 'TicketDynamicFieldUpdate_DFT1' . $RandomID . 'Update' ],
+            Events         => [ 'TicketDynamicFieldUpdate_DFT1' . $RandomID . 'Update' ],
             RecipientEmail =>
                 ["<OTRS_TICKET_DynamicField_$FieldName[2]>"],
         },

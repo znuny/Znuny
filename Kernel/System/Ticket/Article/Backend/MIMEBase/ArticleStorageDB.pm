@@ -201,7 +201,8 @@ sub ArticleWriteAttachment {
     my $NewFileName = $Param{Filename};
     my %UsedFile;
     my %Index = $Self->ArticleAttachmentIndex(
-        ArticleID => $Param{ArticleID},
+        ArticleID     => $Param{ArticleID},
+        OnlyMyBackend => 1,
     );
 
     for my $IndexFile ( sort keys %Index ) {
@@ -255,9 +256,9 @@ sub ArticleWriteAttachment {
                 change_time, change_by)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
-            \$Param{ArticleID}, \$Param{Filename}, \$Param{ContentType}, \$Param{Filesize},
-            \$Param{Content}, \$Param{ContentID}, \$Param{ContentAlternative},
-            \$Disposition, \$Param{UserID}, \$Param{UserID},
+            \$Param{ArticleID}, \$Param{Filename},  \$Param{ContentType}, \$Param{Filesize},
+            \$Param{Content},   \$Param{ContentID}, \$Param{ContentAlternative},
+            \$Disposition,      \$Param{UserID},    \$Param{UserID},
         ],
     );
     return 1;

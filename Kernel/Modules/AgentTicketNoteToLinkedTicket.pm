@@ -15,7 +15,7 @@ use utf8;
 
 use Kernel::System::EmailParser;
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -186,9 +186,11 @@ sub Run {
         DynamicFields => 1,
     );
 
+    my $FormDraftObject = $Kernel::OM->Get('Kernel::System::FormDraft');
+
     my $LoadedFormDraft;
     if ( $Self->{LoadedFormDraftID} ) {
-        $LoadedFormDraft = $Kernel::OM->Get('Kernel::System::FormDraft')->FormDraftGet(
+        $LoadedFormDraft = $FormDraftObject->FormDraftGet(
             FormDraftID => $Self->{LoadedFormDraftID},
             GetContent  => 0,
             UserID      => $Self->{UserID},
@@ -234,15 +236,24 @@ sub Run {
         );
     }
 
+    # Check if the user has already any form draft for this action
+    my $FormDraftList = $FormDraftObject->FormDraftListGet(
+        ObjectType => 'Ticket',
+        ObjectID   => $Self->{TicketID},
+        Action     => $Self->{Action},
+        UserID     => $Self->{UserID},
+    ) // [];
+
     $LayoutObject->Block(
         Name => 'Properties',
         Data => {
-            FormDraft      => $Config->{FormDraft},
-            FormDraftID    => $Self->{LoadedFormDraftID},
-            FormDraftTitle => $LoadedFormDraft ? $LoadedFormDraft->{Title} : '',
-            FormDraftMeta  => $LoadedFormDraft,
-            FormID         => $Self->{FormID},
-            ReplyToArticle => $Self->{ReplyToArticle},
+            FormDraft          => $Config->{FormDraft},
+            FormDraftID        => $Self->{LoadedFormDraftID},
+            FormDraftTitle     => $LoadedFormDraft ? $LoadedFormDraft->{Title} : '',
+            FormDraftMeta      => $LoadedFormDraft,
+            FormDraftForAction => scalar @{$FormDraftList},
+            FormID             => $Self->{FormID},
+            ReplyToArticle     => $Self->{ReplyToArticle},
             %Ticket,
             %Param,
         },
@@ -774,7 +785,7 @@ sub Run {
                     DynamicFieldConfig   => $DynamicFieldConfig,
                     PossibleValuesFilter => $PossibleValuesFilter,
                     ParamObject          => $ParamObject,
-                    Mandatory =>
+                    Mandatory            =>
                         $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
                 );
 
@@ -801,7 +812,7 @@ sub Run {
                 my $DynamicFieldHTML = $DynamicFieldBackendObject->EditFieldRender(
                     DynamicFieldConfig   => $DynamicFieldConfig,
                     PossibleValuesFilter => $PossibleValuesFilter,
-                    ServerError          => $ValidationResult->{ServerError} || '',
+                    ServerError          => $ValidationResult->{ServerError}  || '',
                     ErrorMessage         => $ValidationResult->{ErrorMessage} || '',
                     Mandatory            => $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
                     LayoutObject         => $LayoutObject,
@@ -838,7 +849,7 @@ sub Run {
                 my $DynamicFieldHTML = $DynamicFieldBackendObject->EditFieldRender(
                     DynamicFieldConfig   => $DynamicFieldConfig,
                     PossibleValuesFilter => $PossibleValuesFilter,
-                    ServerError          => $ValidationResult->{ServerError} || '',
+                    ServerError          => $ValidationResult->{ServerError}  || '',
                     ErrorMessage         => $ValidationResult->{ErrorMessage} || '',
                     Mandatory            => ( $Class eq 'Validate_Required' ) ? 1 : 0,
                     Class                => $Class,
@@ -1458,7 +1469,7 @@ sub Run {
                     );
 
                     if ( $LayoutObject->{BrowserRichText} ) {
-                        $TemplateText = $TemplateText . '<br><br>' . $Body;
+                        $TemplateText = $TemplateText . '<p></p><p></p>' . $Body;
                     }
                     else {
                         $TemplateText = $TemplateText . "\n\n" . $Body;
@@ -1919,13 +1930,13 @@ sub _Mask {
     if (
         ( $ConfigObject->Get('Ticket::Type') && $Config->{TicketType} )
         ||
-        ( $ConfigObject->Get('Ticket::Service')     && $Config->{Service} )     ||
+        ( $ConfigObject->Get('Ticket::Service') && $Config->{Service} )         ||
         ( $ConfigObject->Get('Ticket::Responsible') && $Config->{Responsible} ) ||
-        $Config->{Title}    ||
-        $Config->{Queue}    ||
-        $Config->{Owner}    ||
-        $Config->{State}    ||
-        $Config->{Priority} ||
+        $Config->{Title}                                                        ||
+        $Config->{Queue}                                                        ||
+        $Config->{Owner}                                                        ||
+        $Config->{State}                                                        ||
+        $Config->{Priority}                                                     ||
         scalar @{ $Param{TicketTypeDynamicFields} } > 0
         )
     {
@@ -3073,17 +3084,17 @@ sub _GetQuotedReplyBody {
 
             }
             else {
-                $Param{Body} = "<br/>" . $Param{Body};
+                $Param{Body} = "<p></p>\n" . $Param{Body};
 
                 if ( $Param{CreateTime} ) {
-                    $Param{Body} = $LayoutObject->{LanguageObject}->Translate('Date') .
-                        ": $Param{CreateTime}<br/>" . $Param{Body};
+                    $Param{Body} = '<p>' . $LayoutObject->{LanguageObject}->Translate('Date') .
+                        ": $Param{CreateTime}</p>" . $Param{Body};
                 }
 
                 for my $Key (qw(Subject ReplyTo Reply-To Cc To From)) {
                     if ( $Param{$Key} ) {
-                        $Param{Body} = $LayoutObject->{LanguageObject}->Translate($Key) .
-                            ": $Param{$Key}<br/>" . $Param{Body};
+                        $Param{Body} = '<p>' . $LayoutObject->{LanguageObject}->Translate($Key) .
+                            ": $Param{$Key}</p>" . $Param{Body};
                     }
                 }
 
@@ -3094,8 +3105,8 @@ sub _GetQuotedReplyBody {
                 my $MessageFrom = $LayoutObject->{LanguageObject}->Translate('Message from');
                 my $EndMessage  = $LayoutObject->{LanguageObject}->Translate('End message');
 
-                $Param{Body} = "<br/>---- $MessageFrom $From ---<br/><br/>" . $Param{Body};
-                $Param{Body} .= "<br/>---- $EndMessage ---<br/>";
+                $Param{Body} = "<p>---- $MessageFrom $From ---</p><p></p>" . $Param{Body};
+                $Param{Body} .= "\n<p>---- $EndMessage ---</p>";
             }
         }
     }
