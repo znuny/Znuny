@@ -267,8 +267,7 @@ Core.AJAX = (function (TargetNS) {
             }
 
             // add the text to the RichText editor
-            if (CKEditorObj && CKEditorObj.instances.RichText) {
-                CKEditorObj.instances.RichText.focus();
+            if (CKEditorObj && CKEditorObj.instances[$Element.attr('id')]) {
                 window.setTimeout(function () {
 
                     // In some circumstances, this command throws an error (although inserting the HTML works)
@@ -276,7 +275,7 @@ Core.AJAX = (function (TargetNS) {
                     try {
 
                         // set new text
-                        CKEditorObj.instances.RichText.setData(Value);
+                        CKEditorObj.instances[$Element.attr('id')].setData(Value);
                     }
                     catch (Error) {
                         $.noop();
