@@ -21,6 +21,7 @@ Kernel/Config/Files/User/*
 Kernel/Config/GenericAgent.pm
 Kernel/Config.pm
 Kernel/Language/*.old
+Kernel/Language/*zzzTranslationAuto.pm
 bin/cgi-bin/.htaccess
 scripts/apache2-perl-startup2.pl
 var/virtualfs
