@@ -40,48 +40,6 @@ Core.Agent.TicketZoom = (function (TargetNS) {
         InitialArticleID;
 
     /**
-     * @private
-     * @name NormaliseArticleHash
-     * @memberof Core.Agent.TicketZoom
-     * @function
-     * @param {String} Hash - Raw location hash value (can include leading '#').
-     * @returns {String} Normalised article ID without the 'Article' prefix.
-     * @description
-     *      Normalise the hash fragment so both '#123' and '#Article123' resolve to the same article.
-     */
-    function NormaliseArticleHash(Hash) {
-        var Normalised;
-
-        if (typeof Hash !== 'string') {
-            return '';
-        }
-
-        Normalised = Hash.replace(/^#/, '');
-
-        if (/^Article\d+$/i.test(Normalised)) {
-            Normalised = Normalised.replace(/^Article/i, '');
-        }
-
-        if (/^\d+$/.test(Normalised)) {
-            return Normalised;
-        }
-
-        return '';
-    }
-
-    /**
-     * @private
-     * @name BuildArticleHash
-     * @memberof Core.Agent.TicketZoom
-     * @function
-     * @param {String} ArticleID - Article identifier.
-     * @returns {String} Location hash including the 'Article' prefix.
-     */
-    function BuildArticleHash(ArticleID) {
-        return '#Article' + ArticleID;
-    }
-
-    /**
      * @name MarkTicketAsSeen
      * @memberof Core.Agent.TicketZoom
      * @function
@@ -251,7 +209,7 @@ Core.Agent.TicketZoom = (function (TargetNS) {
                 TargetNS.ActiveURLHash = ArticleID;
             }
             else {
-                location.hash = BuildArticleHash(ArticleID);
+                location.hash = '#' + ArticleID;
                 TargetNS.ActiveURLHash = ArticleID;
             }
 
@@ -368,7 +326,7 @@ Core.Agent.TicketZoom = (function (TargetNS) {
      *      'back' in the browser, for example.
      */
     TargetNS.CheckURLHash = function () {
-        var URLHash = NormaliseArticleHash(location.hash),
+        var URLHash = location.hash.replace(/#/, ''),
             $ArticleElement;
 
         // if URLHash is empty, that means we are watching the initial article,
@@ -777,12 +735,12 @@ Core.Agent.TicketZoom = (function (TargetNS) {
 
         // load another article, if in "show one article" mode and article id is provided by location hash
         if (!ZoomExpand) {
-            URLHash = NormaliseArticleHash(location.hash);
+            URLHash = location.hash.replace(/#/, '');
 
             // if URL hash is empty, set it initially to the active article for working browser history
             if (URLHash === '') {
                 InitialArticleID = $('#ArticleTable tr.Active input.ArticleID').val();
-                //location.hash = BuildArticleHash($('#ArticleTable tr.Active input.ArticleID').val());
+                //location.hash = '#' + $('#ArticleTable tr.Active input.ArticleID').val();
             }
             else {
                 // if article ID is found in article list (= article id is valid)
@@ -826,7 +784,7 @@ Core.Agent.TicketZoom = (function (TargetNS) {
 
             // Mode: show all articles - jump to the selected article
             else {
-                location.href = BuildArticleHash($(this).find('input.ArticleID').val());
+                location.href = '#Article' + $(this).find('input.ArticleID').val();
             }
 
             return false;
