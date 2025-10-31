@@ -25791,3 +25791,8 @@ msgstr ""
 msgid "Error fetching mail%s, please check the Communication Log!"
 msgstr ""
 
+
+#. XML Definition: Kernel/Config/Files/XML/Daemon.xml
+msgid "Remove closed tickets from agents' ticket watch lists."
+msgstr ""
+

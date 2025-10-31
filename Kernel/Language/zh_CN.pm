@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.917537373412635;
+    $Self->{Completeness}        = 0.917389906782385;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -5736,6 +5736,7 @@ sub Data {
         'Removes old generic interface debug log entries created before the specified amount of days.' =>
             '删除在指定天数之前创建的旧的通用接口调试日志条目。',
         'Delete expired ticket draft entries.' => '删除过期的工单草稿条目。',
+        'Remove closed tickets from agents\' ticket watch lists.' => '',
 
         # XML Definition: Kernel/Config/Files/XML/Framework.xml
         'Disables the web installer (http://yourhost.example.com/otrs/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>

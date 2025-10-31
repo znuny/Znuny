@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-09-29 12:01+0000\n"
+"POT-Creation-Date: 2025-10-22 13:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15772,6 +15772,10 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Daemon.xml
 msgid "Delete expired ticket draft entries."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Daemon.xml
+msgid "Remove closed tickets from agents' ticket watch lists."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml

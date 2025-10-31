@@ -1,4 +1,5 @@
 # 6.5.19 2025-??-??
+ - 2025-10-22 Added console command Maint::Ticket::Unwatch.
  - 2025-10-21 Fixed: Issue with "Title" field on customer login screen where it wasn't set for new customer user at all.
  - 2025-10-21 Fixed: Console commands are not loaded/listed if they are located in the /Custom directory.
  - 2025-10-01 Fixed: Improved error logging when fetching emails.
