@@ -25494,7 +25494,7 @@ msgstr "SLA-Sichtbarkeit und Standardeinstellungen konfigurieren"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
 msgid "Configure Service Visibility and Defaults"
-msgstr "Serivce-Sichtbarkeit und Standardeinstellungen konfigurieren"
+msgstr "Service-Sichtbarkeit und Standardeinstellungen konfigurieren"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
 msgid "Configure State Visibility and Defaults"

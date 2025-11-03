@@ -2069,7 +2069,7 @@ sub Data {
         'Service Management' => 'Service-Verwaltung',
         'Add Service' => 'Service hinzufügen',
         'Edit Service' => 'Service bearbeiten',
-        'Configure Service Visibility and Defaults' => 'Serivce-Sichtbarkeit und Standardeinstellungen konfigurieren',
+        'Configure Service Visibility and Defaults' => 'Service-Sichtbarkeit und Standardeinstellungen konfigurieren',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             'Die maximale Länge für einen Service-Name (inklusive Unter-Services) beträgt 200 Zeichen.',
         'Sub-service of' => 'Unterservice von',
