@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.9175506268081;
+    $Self->{Completeness}        = 0.917403181745139;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7292,6 +7292,8 @@ sub Data {
             'Egy nagyított jegynek a jegyegyesítés képernyőjének használatához szükséges jogosultságok az ügyintézői felületen.',
         'Defines if a ticket lock is required in the ticket merge screen of a zoomed ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
             'Meghatározza, hogy jegyzárolás szükséges a nagyított jegynek a jegyegyesítés képernyőjén az ügyintézői felületen (ha a jegy még nincs zárolva, a jegy zárolva lesz, és az aktuális ügyintéző automatikusan beállításra kerül annak tulajdonosaként).',
+        'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
+            '',
         'Required permissions to change the customer of a ticket in the agent interface.' =>
             'Egy jegy ügyfelének módosításához szükséges jogosultságok az ügyintézői felületen.',
         'Defines if a ticket lock is required to change the customer of a ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>

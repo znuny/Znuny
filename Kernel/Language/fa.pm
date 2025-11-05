@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.634361941497911;
+    $Self->{Completeness}        = 0.634260003213884;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -7292,6 +7292,8 @@ sub Data {
             'دسترسی مورد نیاز برای استفاده از صفحه نمایش ادغام درخواست یک درخواست زوم شده  در صفحه ی کارشناس.',
         'Defines if a ticket lock is required in the ticket merge screen of a zoomed ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
             'تعریف می کند اگر یک قفل بلیط در صفحه نمایش ادغام بلیط یک بلیط بزرگنمایی در رابط عامل را از مورد نیاز است (اگر بلیط هنوز قفل نشده است، بلیط قفل می شود و عامل فعلی خواهد شد به طور خودکار به عنوان صاحب آن تنظیم).',
+        'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
+            '',
         'Required permissions to change the customer of a ticket in the agent interface.' =>
             'دسترسی مورد نیاز برای تغییر درخواست دهنده ی یک درخواست در صفحه ی کارشناس.',
         'Defines if a ticket lock is required to change the customer of a ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>

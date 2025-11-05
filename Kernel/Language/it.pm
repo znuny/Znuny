@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.619414979106397;
+    $Self->{Completeness}        = 0.619315442712518;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -7299,6 +7299,8 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
             '',
         'Defines if a ticket lock is required in the ticket merge screen of a zoomed ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
             'Definisce se una presa in carico è necessaria nella schermata di unione di un ticket sotto zoom dell\'interfaccia degli agenti (se il ticket non è ancora preso in carico, il ticket viene preso in carico automaticamente e l’agente viene automaticamente impostato come proprietario).',
+        'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
+            '',
         'Required permissions to change the customer of a ticket in the agent interface.' =>
             '',
         'Defines if a ticket lock is required to change the customer of a ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>

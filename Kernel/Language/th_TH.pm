@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.537769206043073;
+    $Self->{Completeness}        = 0.537682789651294;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -7291,6 +7291,8 @@ sub Data {
             '',
         'Defines if a ticket lock is required in the ticket merge screen of a zoomed ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
             'กำหนดค่าถ้าหากจำเป็นต้องใช้ตั๋วล็อคในหน้าจอตั๋วผสมผสานของตั๋วซูมในอินเตอร์เฟซของเอเย่นต์ (ทำการล็อคตั๋วถ้าหากตั๋วยังไม่ได้ล็อคและเซตให้เอเย่นต์ปัจจุบันเป็นเจ้าของอัตโนมัติ)',
+        'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
+            '',
         'Required permissions to change the customer of a ticket in the agent interface.' =>
             '',
         'Defines if a ticket lock is required to change the customer of a ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>

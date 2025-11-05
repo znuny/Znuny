@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.996624879459981;
+    $Self->{Completeness}        = 0.996625421822272;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7286,6 +7286,8 @@ sub Data {
             'Benötigte Rechte um den "Zusammenfassen"-Dialog eines Tickets im Agenten-Interface aufzurufen.',
         'Defines if a ticket lock is required in the ticket merge screen of a zoomed ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
             'Bestimmt, ob dieser Screen im Agenten-Interface das Sperren des Tickets voraussetzt. Das Ticket wird (falls nötig) gesperrt und der aktuelle Agent wird als Besitzer gesetzt.',
+        'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
+            'Definiert den Standardsuchfilter für den Dialog zur Zusammenfassung von Tickets. Dieser Filter wird bei der Suche nach Tickets angewendet, die zusammengefasst werden sollen. Der Filter „StateType“ beschränkt die Suche auf Tickets mit bestimmtem Status (neu, offen, geschlossen, ausstehende Erinnerung, ausstehende automatische Bearbeitung). Weitere Filter können dynamisch hinzugefügt werden.',
         'Required permissions to change the customer of a ticket in the agent interface.' =>
             'Benötigte Rechte um den Kunden eines Tickets im Agenten-Interface zu ändern.',
         'Defines if a ticket lock is required to change the customer of a ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>

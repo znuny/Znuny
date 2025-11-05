@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.44133719061395;
+    $Self->{Completeness}        = 0.441266270287643;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -7292,6 +7292,8 @@ Mfano:
             'Inahitaji ruhusa kutumia skrini ya kuunganisha ya tiketi ya tiketi iliyokuzwa katika kiolesura cha wakala.',
         'Defines if a ticket lock is required in the ticket merge screen of a zoomed ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
             'Inafafanua kama kufuli la tiketi inahitajika katika mandhari ya kuunganisha tiketi ya kiolesura cha wakala (kama tiketi haijafungwa bado, tiketi itafungwa na wakala wa sasa ataweka otomatiki kuwa mmiliki wake).',
+        'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
+            '',
         'Required permissions to change the customer of a ticket in the agent interface.' =>
             'Inahitaji ruhusa kubadilisha mteja wa tiketi katika kiolesura cha wakala.',
         'Defines if a ticket lock is required to change the customer of a ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>

@@ -37,7 +37,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.853423336547734;
+    $Self->{Completeness}        = 0.853286196368311;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7298,6 +7298,8 @@ sub Data {
             'Права, требуемые для сляния заявок в интерфейсе агента.',
         'Defines if a ticket lock is required in the ticket merge screen of a zoomed ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
             'Определяет необходимость блокировки просматриваемой заявки при слиянии заявок в интерфейсе агента (если заявка еще не заблокирована, она блокируется и текущий агент автоматически становится ее владельцем).',
+        'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
+            '',
         'Required permissions to change the customer of a ticket in the agent interface.' =>
             'Права, требуемые для изменения клиента заявки в интерфейсе агента.',
         'Defines if a ticket lock is required to change the customer of a ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>

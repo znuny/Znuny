@@ -488,6 +488,11 @@ sub Run {
             );
         }
 
+        $LayoutObject->AddJSData(
+            Key   => 'InitialTicketSearchFilter',
+            Value => $Config->{SearchFilter} || {},
+        );
+
         $Output .= $LayoutObject->Output(
             TemplateFile => 'AgentTicketMerge',
             Data         => { %Param, %Ticket, %Article, }

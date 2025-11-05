@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.685631629701061;
+    $Self->{Completeness}        = 0.685521452675558;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7291,6 +7291,8 @@ sub Data {
             'Wymagane uprawnienia do użycia okna połaczenia przybliżonych zgłoszeń w panelu agenta.',
         'Defines if a ticket lock is required in the ticket merge screen of a zoomed ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
             'Określa, czy wymagana jest blokada zgłoszenia na ekranie łączenia przybliżonego zgłoszenia w interfejsie agenta (jeśli zgłoszenie nie jest jeszcze zablokowane, zostaje nałożona blokada, a bieżący agent staje się automatycznie właścicielem).',
+        'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
+            '',
         'Required permissions to change the customer of a ticket in the agent interface.' =>
             'Wymagane uprawnienia do zmiany klienta w zgłoszeniu w panelu agenta.',
         'Defines if a ticket lock is required to change the customer of a ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>

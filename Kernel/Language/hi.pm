@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.253455480552877;
+    $Self->{Completeness}        = 0.253414751727463;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7289,6 +7289,8 @@ sub Data {
             'प्रतिनिधि अंतरफलक में जूम टिकट के टिकट विलय स्क्रीन का उपयोग करने के लिए आवश्यक अनुमतियां।',
         'Defines if a ticket lock is required in the ticket merge screen of a zoomed ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
             'यदि प्रतिनिधि अंतरफलक के पास जूम टिकट की विलय स्क्रीन में  एक टिकट लॉक की आवश्यकता है तो परिभाषित करता है(यदि अभी तक टिकट बंद नहीं है,टिकट बंद हो जाए है और वर्तमान प्रतिनिधि उसके मालिक के रूप में अपने आप स्थापित हो जाएगा)।',
+        'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
+            '',
         'Required permissions to change the customer of a ticket in the agent interface.' =>
             'प्रतिनिधि अंतरफलक में एक टिकट के ग्राहकों को बदलने के लिए आवश्यक अनुमतियां।',
         'Defines if a ticket lock is required to change the customer of a ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>

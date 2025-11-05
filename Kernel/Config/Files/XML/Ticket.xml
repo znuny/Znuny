@@ -4816,6 +4816,28 @@
             <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketMerge###SearchFilter" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.</Description>
+        <Navigation>Frontend::Agent::View::TicketMerge</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem>
+                    <Array>
+                        <Item></Item>
+                    </Array>
+                </DefaultItem>
+                <Item Key="StateType">
+                    <Array>
+                        <Item>new</Item>
+                        <Item>open</Item>
+                        <Item>closed</Item>
+                        <Item>pending reminder</Item>
+                        <Item>pending auto</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketCustomer###Permission" Required="1" Valid="1">
         <Description Translatable="1">Required permissions to change the customer of a ticket in the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketCustomer</Navigation>

@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.620057859209257;
+    $Self->{Completeness}        = 0.619958219508276;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -7288,6 +7288,8 @@ bin/otrs.Daemon.pl status\').',
             'izin yang diperlukan untuk menggunakan layar gabungan tiket dari tiket yang diperbesar di antarmuka agen.',
         'Defines if a ticket lock is required in the ticket merge screen of a zoomed ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
             'Mendefinisikan jika kunci tiket diperlukan di layar merge tiket dari tiket yang diperbesar di antarmuka agen (jika tiket tidak terkunci lagi, tiket akan terkunci dan agen saat ini akan diatur secara otomatis sebagai pemiliknya).',
+        'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
+            '',
         'Required permissions to change the customer of a ticket in the agent interface.' =>
             'izin yang diperlukan untuk mengubah pelanggan tiket di antarmuka agen.',
         'Defines if a ticket lock is required to change the customer of a ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
