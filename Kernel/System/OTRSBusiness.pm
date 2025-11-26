@@ -666,8 +666,8 @@ sub HandleBusinessPermissionCloudServiceResult {
     #   to determine if the results can still be used later, if a connection to
     #   cloud.otrs.com cannot be made temporarily.
     my %StoreData = (
-        BusinessPermission            => $OperationResult->{Data}->{BusinessPermission}            // 0,
-        ExpiryDate                    => $OperationResult->{Data}->{ExpiryDate}                    // '',
+        BusinessPermission            => $OperationResult->{Data}->{BusinessPermission} // 0,
+        ExpiryDate                    => $OperationResult->{Data}->{ExpiryDate}         // '',
         LastUpdateTime                => $Kernel::OM->Create('Kernel::System::DateTime')->ToString(),
         AgentSessionLimit             => $OperationResult->{Data}->{AgentSessionLimit}             // 0,
         AgentSessionLimitPriorWarning => $OperationResult->{Data}->{AgentSessionLimitPriorWarning} // 0,

@@ -14,7 +14,7 @@ use warnings;
 use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Mail::Address;
 
 our $ObjectManagerDisabled = 1;
@@ -487,6 +487,11 @@ sub Run {
                 Data => \%Param,
             );
         }
+
+        $LayoutObject->AddJSData(
+            Key   => 'InitialTicketSearchFilter',
+            Value => $Config->{SearchFilter} || {},
+        );
 
         $Output .= $LayoutObject->Output(
             TemplateFile => 'AgentTicketMerge',

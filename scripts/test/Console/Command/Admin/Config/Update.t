@@ -32,7 +32,7 @@ my %DefaultSettingAddTemplate = (
     XMLFilename    => 'UnitTest.xml',
 );
 
-my $SettingsXML = << 'EOF',
+my $SettingsXML = <<'EOF',
 <?xml version="1.0" encoding="utf-8" ?>
 <otrs_config version="2.0" init="Framework">
     <Setting Name="Test0" Required="1" Valid="1">
@@ -54,7 +54,7 @@ EOF
 
     # Get SysConfig XML object.
     my $SysConfigXMLObject = $Kernel::OM->Get('Kernel::System::SysConfig::XML');
-my $SysConfigObject        = $Kernel::OM->Get('Kernel::System::SysConfig');
+my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
 
 my @DefaultSettingAddParams = $SysConfigXMLObject->SettingListParse(
     XMLInput    => $SettingsXML,

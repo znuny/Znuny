@@ -1242,7 +1242,7 @@ sub _CreateMimeEntity {
                 Type        => $Upload->{ContentType},
                 Id          => $ContentID,
                 Disposition => $Upload->{Disposition} || 'inline',
-                Encoding    => $Upload->{Encoding} || '-SUGGEST',
+                Encoding    => $Upload->{Encoding}    || '-SUGGEST',
             );
         }
 

@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -78,7 +78,7 @@ sub Run {
 
     $Self->{FirstActivityDialog} = $ParamObject->GetParam( Param => 'FirstActivityDialog' );
     $Self->{LinkTicketID}        = $ParamObject->GetParam( Param => 'LinkTicketID' ) || '';
-    $Self->{ArticleID}           = $ParamObject->GetParam( Param => 'ArticleID' ) || '';
+    $Self->{ArticleID}           = $ParamObject->GetParam( Param => 'ArticleID' )    || '';
 
     # get the ticket information on link actions
     if ( $Self->{LinkTicketID} ) {
@@ -2517,7 +2517,7 @@ sub _RenderPendingTime {
     }
 
     $Data{Content} = $LayoutObject->BuildDateSelection(
-        Prefix => 'PendingTime',
+        Prefix              => 'PendingTime',
         PendingTimeRequired =>
             (
             $Param{ActivityDialogField}->{Display} && $Param{ActivityDialogField}->{Display} == 2
@@ -2931,7 +2931,7 @@ sub _RenderArticle {
         MandatoryClass   => '',
         ValidateRequired => '',
         Subject          => $Param{GetParam}->{Subject} || $Param{ActivityDialogField}->{Config}->{Subject},
-        Body             => $Param{GetParam}->{Body} || $Param{ActivityDialogField}->{Config}->{Body},
+        Body             => $Param{GetParam}->{Body}    || $Param{ActivityDialogField}->{Config}->{Body},
         LabelSubject     => $Param{ActivityDialogField}->{Config}->{LabelSubject}
             || $LayoutObject->{LanguageObject}->Translate("Subject"),
         LabelBody => $Param{ActivityDialogField}->{Config}->{LabelBody}
@@ -3253,7 +3253,7 @@ sub _RenderCustomer {
     if ( IsHashRefWithData( \%CustomerUserData ) ) {
         $Data{CustomerUserID}       = "\"$CustomerUserData{UserFullname}" . "\" <$CustomerUserData{UserEmail}>";
         $Data{CustomerID}           = $CustomerUserData{UserCustomerID} || '';
-        $Data{SelectedCustomerUser} = $CustomerUserData{UserID} || '';
+        $Data{SelectedCustomerUser} = $CustomerUserData{UserID}         || '';
     }
 
     # When there is no Customer in the DB, it could be unknown Customer, set it from the ticket.

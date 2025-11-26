@@ -15,7 +15,7 @@ use warnings;
 use parent qw(Kernel::System::SupportDataCollector::PluginBase);
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::System::CommunicationLog::DB',

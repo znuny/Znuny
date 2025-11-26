@@ -280,7 +280,7 @@ EOF
         }
 
         # add js to call FormUpdate()
-        $Param{LayoutObject}->AddJSOnDocumentComplete( Code => <<"EOF");
+        $Param{LayoutObject}->AddJSOnDocumentComplete( Code => <<"EOF" );
 \$('$FieldSelector').bind('change', function (Event) {
     Core.AJAX.FormUpdate(\$(this).parents('form'), 'AJAXUpdate', '$FieldName', [ $FieldsToUpdate ]);
 });
@@ -868,7 +868,7 @@ sub BuildSelectionDataGet {
                     push @Values, {
                         Key      => $Key,
                         Value    => $ConfigPossibleValues->{$Key} || '-',
-                        Selected => defined $Param{Value} || !$Param{Value} ? 1 : 0,
+                        Selected => defined $Param{Value}         || !$Param{Value} ? 1 : 0,
                     };
                 }
 

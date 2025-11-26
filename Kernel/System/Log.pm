@@ -97,7 +97,7 @@ sub new {
     return $Self if !eval "require IPC::SysV";    ## no critic
 
     # Setup IPC for shared access to the last log entries.
-    $Self->{IPCKey} = '444423' . $SystemID;       # This name is used to identify the shared memory segment.
+    $Self->{IPCKey}  = '444423' . $SystemID;      # This name is used to identify the shared memory segment.
     $Self->{IPCSize} = $ConfigObject->Get('LogSystemCacheSize') || 32 * 1024;
 
     # Create/access shared memory segment.

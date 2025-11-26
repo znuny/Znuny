@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.210610932475884;
+    $Self->{Completeness}        = 0.210509400610638;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3906,6 +3906,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminMailAccount.pm
         'Mail account added!' => 'E-račun dodan!',
+        'Error fetching mail%s, please check the Communication Log!' => '',
         'Email account fetch already fetched by another process. Please try again later!' =>
             '',
         'Dispatching by email To: field.' => 'Razporejanje po elektronski pošti na: polje.',
@@ -5732,6 +5733,7 @@ sub Data {
         'Removes old generic interface debug log entries created before the specified amount of days.' =>
             '',
         'Delete expired ticket draft entries.' => '',
+        'Remove closed tickets from agents\' ticket watch lists.' => '',
 
         # XML Definition: Kernel/Config/Files/XML/Framework.xml
         'Disables the web installer (http://yourhost.example.com/otrs/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
@@ -7287,6 +7289,8 @@ sub Data {
         'Required permissions to use the ticket merge screen of a zoomed ticket in the agent interface.' =>
             'Potrebna dovolenja za uporabo okna za združevanje pri povečanem prikazu zahtevka v vmesniku zaposlenega.',
         'Defines if a ticket lock is required in the ticket merge screen of a zoomed ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
+            '',
+        'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
             '',
         'Required permissions to change the customer of a ticket in the agent interface.' =>
             'potrebujete dovolenja za spremembo uporabnika zahtevka v vmesniku zaposlenega.',

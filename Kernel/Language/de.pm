@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.996623794212219;
+    $Self->{Completeness}        = 0.996625421822272;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2069,7 +2069,7 @@ sub Data {
         'Service Management' => 'Service-Verwaltung',
         'Add Service' => 'Service hinzufügen',
         'Edit Service' => 'Service bearbeiten',
-        'Configure Service Visibility and Defaults' => 'Serivce-Sichtbarkeit und Standardeinstellungen konfigurieren',
+        'Configure Service Visibility and Defaults' => 'Service-Sichtbarkeit und Standardeinstellungen konfigurieren',
         'Service name maximum length is 200 characters (with Sub-service).' =>
             'Die maximale Länge für einen Service-Name (inklusive Unter-Services) beträgt 200 Zeichen.',
         'Sub-service of' => 'Unterservice von',
@@ -3902,6 +3902,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminMailAccount.pm
         'Mail account added!' => 'E-Mail-Konto hinzugefügt!',
+        'Error fetching mail%s, please check the Communication Log!' => 'Fehler beim Abruf von Mails%s. Bitte Kommunikationsprotokoll prüfen.',
         'Email account fetch already fetched by another process. Please try again later!' =>
             'Der E-Mail-Kontoabruf wurde bereits von einem anderen Prozess aufgerufen. Bitte versuchen Sie es später erneut!',
         'Dispatching by email To: field.' => 'Verteilung nach To: Feld.',
@@ -5728,6 +5729,7 @@ sub Data {
         'Removes old generic interface debug log entries created before the specified amount of days.' =>
             'Entfernt alte Generic Interface Debug Log-Einträge, die vor der angegebenen Anzahl von Tagen erstellt wurden.',
         'Delete expired ticket draft entries.' => 'Veraltete Ticket-Entwürfe löschen.',
+        'Remove closed tickets from agents\' ticket watch lists.' => 'Geschlossene Tickets von den Beobachtungslisten der Agenten entfernen.',
 
         # XML Definition: Kernel/Config/Files/XML/Framework.xml
         'Disables the web installer (http://yourhost.example.com/otrs/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
@@ -7284,6 +7286,8 @@ sub Data {
             'Benötigte Rechte um den "Zusammenfassen"-Dialog eines Tickets im Agenten-Interface aufzurufen.',
         'Defines if a ticket lock is required in the ticket merge screen of a zoomed ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
             'Bestimmt, ob dieser Screen im Agenten-Interface das Sperren des Tickets voraussetzt. Das Ticket wird (falls nötig) gesperrt und der aktuelle Agent wird als Besitzer gesetzt.',
+        'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
+            'Definiert den Standardsuchfilter für den Dialog zur Zusammenfassung von Tickets. Dieser Filter wird bei der Suche nach Tickets angewendet, die zusammengefasst werden sollen. Der Filter „StateType“ beschränkt die Suche auf Tickets mit bestimmtem Status (neu, offen, geschlossen, ausstehende Erinnerung, ausstehende automatische Bearbeitung). Weitere Filter können dynamisch hinzugefügt werden.',
         'Required permissions to change the customer of a ticket in the agent interface.' =>
             'Benötigte Rechte um den Kunden eines Tickets im Agenten-Interface zu ändern.',
         'Defines if a ticket lock is required to change the customer of a ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>

@@ -641,7 +641,7 @@ sub Verify {
         push @Warnings, {
             Result => 'Error',
             Key    => 'Sign Warning',
-            Value =>
+            Value  =>
                 'Just a part of the message is signed, for info please see \'Plain Format\' view of article.',
         };
     }

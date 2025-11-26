@@ -16,7 +16,7 @@ package Kernel::System::ObjectManager;
 use strict;
 use warnings;
 
-use Carp ();
+use Carp         ();
 use Scalar::Util qw(weaken);
 
 # use the "standard" modules directly, so that persistent environments

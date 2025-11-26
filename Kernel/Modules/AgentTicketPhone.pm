@@ -16,7 +16,7 @@ use warnings;
 use Mail::Address;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -882,7 +882,7 @@ sub Run {
             CustomerData => \%CustomerData,
             Attachments  => \@Attachments,
             LinkTicketID => $GetParam{LinkTicketID} || '',
-            FromChatID   => $GetParam{FromChatID} || '',
+            FromChatID   => $GetParam{FromChatID}   || '',
             %SplitTicketParam,
             DynamicFieldHTML => \%DynamicFieldHTML,
             MultipleCustomer => \@MultipleCustomer,
@@ -1049,7 +1049,7 @@ sub Run {
                     DynamicFieldConfig   => $DynamicFieldConfig,
                     PossibleValuesFilter => $PossibleValuesFilter,
                     ParamObject          => $ParamObject,
-                    Mandatory =>
+                    Mandatory            =>
                         $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
                 );
 
@@ -1072,7 +1072,7 @@ sub Run {
             $DynamicFieldHTML{ $DynamicFieldConfig->{Name} } = $DynamicFieldBackendObject->EditFieldRender(
                 DynamicFieldConfig   => $DynamicFieldConfig,
                 PossibleValuesFilter => $PossibleValuesFilter,
-                ServerError          => $ValidationResult->{ServerError} || '',
+                ServerError          => $ValidationResult->{ServerError}  || '',
                 ErrorMessage         => $ValidationResult->{ErrorMessage} || '',
                 LayoutObject         => $LayoutObject,
                 ParamObject          => $ParamObject,
@@ -1344,20 +1344,20 @@ sub Run {
                     %GetParam,
                     %ACLCompatGetParam,
                     CustomerUserID => $CustomerUser || $SelectedCustomerUser || '',
-                    QueueID        => $NewQueueID   || 1,
+                    QueueID => $NewQueueID || 1,
                 ),
                 NextState  => $NextState,
                 Priorities => $Self->_GetPriorities(
                     %GetParam,
                     %ACLCompatGetParam,
                     CustomerUserID => $CustomerUser || $SelectedCustomerUser || '',
-                    QueueID        => $NewQueueID   || 1,
+                    QueueID => $NewQueueID || 1,
                 ),
                 Types => $Self->_GetTypes(
                     %GetParam,
                     %ACLCompatGetParam,
                     CustomerUserID => $CustomerUser || $SelectedCustomerUser || '',
-                    QueueID        => $NewQueueID   || 1,
+                    QueueID => $NewQueueID || 1,
                 ),
                 Services          => $Services,
                 SLAs              => $SLAs,
@@ -1877,7 +1877,7 @@ sub Run {
         my $Dest           = $ParamObject->GetParam( Param => 'Dest' ) || '';
         my $CustomerUser   = $ParamObject->GetParam( Param => 'SelectedCustomerUser' );
         my $ElementChanged = $ParamObject->GetParam( Param => 'ElementChanged' ) || '';
-        my $QueueID = '';
+        my $QueueID        = '';
         if ( $Dest =~ /^(\d{1,100})\|\|.+?$/ ) {
             $QueueID = $1;
         }

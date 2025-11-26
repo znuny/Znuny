@@ -28,9 +28,9 @@ use lib dirname($RealBin);
 use lib dirname($RealBin) . '/Kernel/cpan-lib';
 use lib dirname($RealBin) . '/Custom';
 
-use File::Path qw();
+use File::Path  qw();
 use Time::HiRes qw(sleep);
-use Fcntl qw(:flock);
+use Fcntl       qw(:flock);
 
 use Kernel::System::ObjectManager;
 
@@ -176,10 +176,10 @@ sub PrintUsage {
     $UsageText .= sprintf " %-22s - %s", '[--force]',
         'Reduce the time the main daemon waits other daemons to stop.' . "\n";
     $UsageText .= "\nActions:\n";
-    $UsageText .= sprintf " %-22s - %s", 'start', 'Start the daemon process.' . "\n";
-    $UsageText .= sprintf " %-22s - %s", 'stop', 'Stop the daemon process.' . "\n";
+    $UsageText .= sprintf " %-22s - %s", 'start',  'Start the daemon process.' . "\n";
+    $UsageText .= sprintf " %-22s - %s", 'stop',   'Stop the daemon process.' . "\n";
     $UsageText .= sprintf " %-22s - %s", 'status', 'Show daemon process current state.' . "\n";
-    $UsageText .= sprintf " %-22s - %s", 'help', 'Display help for this command.' . "\n";
+    $UsageText .= sprintf " %-22s - %s", 'help',   'Display help for this command.' . "\n";
     $UsageText .= "\nHelp:\n";
     $UsageText
         .= "In debug mode if a daemon module is specified the debug mode will be activated only for that daemon.\n";

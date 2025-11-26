@@ -57,17 +57,19 @@ Core.Agent.TicketMerge = (function (TargetNS) {
      */
     function GetTicketSearchFilter() {
         var $TicketSearchFilterObj = $('#TicketSearchFilter'),
-            TicketSearchFilter = new Object(),
-            FilterName = $TicketSearchFilterObj.is(':checked') ? $TicketSearchFilterObj.data('ticket-search-filter') : null,
+            TicketSearchFilter = Core.Config.Get('InitialTicketSearchFilter') || new Object(),
+            FilterName = $TicketSearchFilterObj.data('ticket-search-filter'),
             FilterValue = $TicketSearchFilterObj.is(':checked') ? $TicketSearchFilterObj.val() : null;
 
-        if (FilterName && FilterValue) {
+        // if FilterName and FilterValue are set, add them to the TicketSearchFilter
+        if (FilterName && FilterValue && FilterName !== '' && FilterValue !== '') {
             TicketSearchFilter[FilterName] = FilterValue;
-            Core.Config.Set('TicketSearchFilter', TicketSearchFilter);
-            return;
+        }
+        else if (FilterName){
+            delete TicketSearchFilter[FilterName];
         }
 
-        Core.Config.Set('TicketSearchFilter', null);
+        Core.Config.Set('TicketSearchFilter', TicketSearchFilter);
     }
 
     /**
@@ -80,6 +82,8 @@ Core.Agent.TicketMerge = (function (TargetNS) {
     TargetNS.Init = function () {
         var $TicketNumberObj = $('#MainTicketNumber'),
             $TicketSearchFilterObj = $('#TicketSearchFilter');
+
+        GetTicketSearchFilter();
 
         $TicketSearchFilterObj.off('change.TicketMerge').on('change.TicketMerge', GetTicketSearchFilter)
             .trigger('change.TicketMerge');

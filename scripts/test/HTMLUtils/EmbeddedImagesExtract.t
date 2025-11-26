@@ -56,7 +56,7 @@ my @Tests = (
         Body   => "123 $InlineImage 456 $InlineImage 789",
         Result => {
             Success => 1,
-            Body =>
+            Body    =>
                 qr|^123 <img alt="text" src="cid:.*?" /> 456 <img alt="text" src="cid:.*?" /> 789$|,
             Attachments => [
                 {
@@ -73,7 +73,7 @@ my @Tests = (
         Body   => "123 $InlineImage 456 <img src=\"http://some.url/image.gif\" /> 789",
         Result => {
             Success => 1,
-            Body =>
+            Body    =>
                 qr|^123 <img alt="text" src="cid:.*?" /> 456 <img src=\"http://some.url/image.gif\" /> 789$|,
             Attachments => [
                 {
@@ -88,7 +88,7 @@ my @Tests = (
             'Snipping Tool: <img alt="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQIAAADJCAIAAABHdavEAAAgAElEQVR4nOx9d1gUWfZ27e63O0rnUJ2ISs5BRTFhzjo65uyYc4bOIFEUM9nsmHPOihkxkaGBJphQQM="> 456',
         Result => {
             Success => 1,
-            Body =>
+            Body    =>
                 qr|^Snipping Tool: <img alt="" src="cid:.*?"> 456$|,
             Attachments => [
                 {

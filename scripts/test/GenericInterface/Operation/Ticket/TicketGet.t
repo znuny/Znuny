@@ -1169,7 +1169,7 @@ my @Tests = (
         ExpectedReturnLocalData => {
             Data => {
                 Error => {
-                    ErrorCode => 'TicketGet.WrongStructure',
+                    ErrorCode    => 'TicketGet.WrongStructure',
                     ErrorMessage =>
                         'TicketGet: Invalid ticket ID parameter(s) found!'
                 }
@@ -1179,7 +1179,7 @@ my @Tests = (
         ExpectedReturnRemoteData => {
             Data => {
                 Error => {
-                    ErrorCode => 'TicketGet.WrongStructure',
+                    ErrorCode    => 'TicketGet.WrongStructure',
                     ErrorMessage =>
                         'TicketGet: Invalid ticket ID parameter(s) found!'
                 }
@@ -1648,7 +1648,7 @@ my @Tests = (
         ExpectedReturnLocalData => {
             Data => {
                 Error => {
-                    ErrorCode => 'TicketGet.AccessDenied',
+                    ErrorCode    => 'TicketGet.AccessDenied',
                     ErrorMessage =>
                         'TicketGet: User does not have access to the ticket!'
                 }
@@ -1658,7 +1658,7 @@ my @Tests = (
         ExpectedReturnRemoteData => {
             Data => {
                 Error => {
-                    ErrorCode => 'TicketGet.AccessDenied',
+                    ErrorCode    => 'TicketGet.AccessDenied',
                     ErrorMessage =>
                         'TicketGet: User does not have access to the ticket!'
                 }
@@ -1718,7 +1718,7 @@ my @Tests = (
         ExpectedReturnLocalData => {
             Data => {
                 Error => {
-                    ErrorCode => 'TicketGet.AccessDenied',
+                    ErrorCode    => 'TicketGet.AccessDenied',
                     ErrorMessage =>
                         'TicketGet: User does not have access to the ticket!'
                 }
@@ -1728,7 +1728,7 @@ my @Tests = (
         ExpectedReturnRemoteData => {
             Data => {
                 Error => {
-                    ErrorCode => 'TicketGet.AccessDenied',
+                    ErrorCode    => 'TicketGet.AccessDenied',
                     ErrorMessage =>
                         'TicketGet: User does not have access to the ticket!'
                 }

@@ -293,11 +293,11 @@ my @Tests = (
                 ReplyTo              => 'Some Customer B <customer-b@example.com>',
                 MessageID            => '<asdasdasd.123@example.com>',
                 InReplyTo            => '<asdasdasd.12@example.com>',
-                References =>
+                References           =>
                     '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
                 NoAgentNotify                   => 0,
                 AutoResponseType                => 'auto reply',
-                ForceNotificationToUserID       => [ 1, 43, 56, ],
+                ForceNotificationToUserID       => [ 1,  43, 56, ],
                 ExcludeNotificationToUserID     => [ 43, 56, ],
                 ExcludeMuteNotificationToUserID => [ 43, 56, ],
             },
@@ -323,11 +323,11 @@ my @Tests = (
                 ReplyTo              => 'Some Customer B <customer-b@example.com>',
                 MessageID            => '<asdasdasd.123@example.com>',
                 InReplyTo            => '<asdasdasd.12@example.com>',
-                References =>
+                References           =>
                     '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
                 NoAgentNotify                   => 0,
                 AutoResponseType                => 'auto reply',
-                ForceNotificationToUserID       => [ 1, 43, 56, ],
+                ForceNotificationToUserID       => [ 1,  43, 56, ],
                 ExcludeNotificationToUserID     => [ 43, 56, ],
                 ExcludeMuteNotificationToUserID => [ 43, 56, ],
             },
@@ -393,10 +393,10 @@ my @Tests = (
                 ReplyTo              => 'Some Customer B <customer-b@example.com>',
                 MessageID            => '<asdasdasd.123@example.com>',
                 InReplyTo            => '<asdasdasd.12@example.com>',
-                References =>
+                References           =>
                     '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
                 NoAgentNotify                   => 0,
-                ForceNotificationToUserID       => [ 1, 43, 56, ],
+                ForceNotificationToUserID       => [ 1,  43, 56, ],
                 ExcludeNotificationToUserID     => [ 43, 56, ],
                 ExcludeMuteNotificationToUserID => [ 43, 56, ],
             },
@@ -412,7 +412,7 @@ my @Tests = (
                 IsVisibleForCustomer => 0,
                 SenderType           => 'agent',
                 ContentType          => 'text/plain; charset=ISO-8859-15',
-                Subject =>
+                Subject              =>
                     'äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ-カスタ-用迎使用-Язык',
                 Body =>
                     'äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ-カスタ-用迎使用-Язык',
@@ -424,10 +424,10 @@ my @Tests = (
                 ReplyTo        => 'Some Customer B <customer-b@example.com>',
                 MessageID      => '<asdasdasd.123@example.com>',
                 InReplyTo      => '<asdasdasd.12@example.com>',
-                References =>
+                References     =>
                     '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
                 NoAgentNotify                   => 0,
-                ForceNotificationToUserID       => [ 1, 43, 56, ],
+                ForceNotificationToUserID       => [ 1,  43, 56, ],
                 ExcludeNotificationToUserID     => [ 43, 56, ],
                 ExcludeMuteNotificationToUserID => [ 43, 56, ],
             },
@@ -443,7 +443,7 @@ my @Tests = (
                 IsVisibleForCustomer => 0,
                 SenderType           => 'agent',
                 ContentType          => 'text/plain; charset=ISO-8859-15',
-                Subject =>
+                Subject              =>
                     '<OTRS_TICKET_Title>',
                 Body =>
                     'äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ-カスタ-用迎使用-Язык',
@@ -455,10 +455,10 @@ my @Tests = (
                 ReplyTo        => 'Some Customer B <customer-b@example.com>',
                 MessageID      => '<asdasdasd.123@example.com>',
                 InReplyTo      => '<asdasdasd.12@example.com>',
-                References =>
+                References     =>
                     '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
                 NoAgentNotify                   => 0,
-                ForceNotificationToUserID       => [ 1, 43, 56, ],
+                ForceNotificationToUserID       => [ 1,  43, 56, ],
                 ExcludeNotificationToUserID     => [ 43, 56, ],
                 ExcludeMuteNotificationToUserID => [ 43, 56, ],
             },
@@ -474,7 +474,7 @@ my @Tests = (
                 IsVisibleForCustomer => 0,
                 SenderType           => 'agent',
                 ContentType          => 'text/plain; charset=ISO-8859-15',
-                Subject =>
+                Subject              =>
                     '<OTRS_TICKET_NotExisting> - tag not found',
                 Body =>
                     'äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ-カスタ-用迎使用-Язык',
@@ -486,10 +486,10 @@ my @Tests = (
                 ReplyTo        => 'Some Customer B <customer-b@example.com>',
                 MessageID      => '<asdasdasd.123@example.com>',
                 InReplyTo      => '<asdasdasd.12@example.com>',
-                References =>
+                References     =>
                     '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
                 NoAgentNotify                   => 0,
-                ForceNotificationToUserID       => [ 1, 43, 56, ],
+                ForceNotificationToUserID       => [ 1,  43, 56, ],
                 ExcludeNotificationToUserID     => [ 43, 56, ],
                 ExcludeMuteNotificationToUserID => [ 43, 56, ],
             },
@@ -505,7 +505,7 @@ my @Tests = (
                 IsVisibleForCustomer => 0,
                 SenderType           => 'agent',
                 ContentType          => 'text/plain; charset=ISO-8859-15',
-                Subject =>
+                Subject              =>
                     '<OTRS_TICKET_NotExisting> - tag not found',
                 Body =>
                     'äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ-カスタ-用迎使用-Язык',
@@ -517,10 +517,10 @@ my @Tests = (
                 ReplyTo        => 'Some Customer B <customer-b@example.com>',
                 MessageID      => '<asdasdasd.123@example.com>',
                 InReplyTo      => '<asdasdasd.12@example.com>',
-                References =>
+                References     =>
                     '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
                 NoAgentNotify                   => 0,
-                ForceNotificationToUserID       => [ 1, 43, 56, ],
+                ForceNotificationToUserID       => [ 1,  43, 56, ],
                 ExcludeNotificationToUserID     => [ 43, 56, ],
                 ExcludeMuteNotificationToUserID => [ 43, 56, ],
             },
@@ -536,7 +536,7 @@ my @Tests = (
                 IsVisibleForCustomer => 0,
                 SenderType           => 'agent',
                 ContentType          => 'text/plain; charset=ISO-8859-15',
-                Subject =>
+                Subject              =>
                     '<OTRS_TICKET_DynamicField_' . $TextFieldName1 . '_Value>',
                 Body =>
                     'äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ-カスタ-用迎使用-Язык',
@@ -548,10 +548,10 @@ my @Tests = (
                 ReplyTo        => 'Some Customer B <customer-b@example.com>',
                 MessageID      => '<asdasdasd.123@example.com>',
                 InReplyTo      => '<asdasdasd.12@example.com>',
-                References =>
+                References     =>
                     '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
                 NoAgentNotify                   => 0,
-                ForceNotificationToUserID       => [ 1, 43, 56, ],
+                ForceNotificationToUserID       => [ 1,  43, 56, ],
                 ExcludeNotificationToUserID     => [ 43, 56, ],
                 ExcludeMuteNotificationToUserID => [ 43, 56, ],
             },
@@ -567,7 +567,7 @@ my @Tests = (
                 IsVisibleForCustomer => 0,
                 SenderType           => 'agent',
                 ContentType          => 'text/plain; charset=ISO-8859-15',
-                Subject =>
+                Subject              =>
                     '<OTRS_TICKET_DynamicField_' . $DropDownFieldName . '>',
                 Body =>
                     'äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ-カスタ-用迎使用-Язык',
@@ -579,10 +579,10 @@ my @Tests = (
                 ReplyTo        => 'Some Customer B <customer-b@example.com>',
                 MessageID      => '<asdasdasd.123@example.com>',
                 InReplyTo      => '<asdasdasd.12@example.com>',
-                References =>
+                References     =>
                     '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
                 NoAgentNotify                   => 0,
-                ForceNotificationToUserID       => [ 1, 43, 56, ],
+                ForceNotificationToUserID       => [ 1,  43, 56, ],
                 ExcludeNotificationToUserID     => [ 43, 56, ],
                 ExcludeMuteNotificationToUserID => [ 43, 56, ],
             },
@@ -598,7 +598,7 @@ my @Tests = (
                 IsVisibleForCustomer => 0,
                 SenderType           => 'agent',
                 ContentType          => 'text/plain; charset=ISO-8859-15',
-                Subject =>
+                Subject              =>
                     '<OTRS_TICKET_DynamicField_' . $MultiSelectFieldName . '_Value>',
                 Body =>
                     'äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ-カスタ-用迎使用-Язык',
@@ -610,10 +610,10 @@ my @Tests = (
                 ReplyTo        => 'Some Customer B <customer-b@example.com>',
                 MessageID      => '<asdasdasd.123@example.com>',
                 InReplyTo      => '<asdasdasd.12@example.com>',
-                References =>
+                References     =>
                     '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
                 NoAgentNotify                   => 0,
-                ForceNotificationToUserID       => [ 1, 43, 56, ],
+                ForceNotificationToUserID       => [ 1,  43, 56, ],
                 ExcludeNotificationToUserID     => [ 43, 56, ],
                 ExcludeMuteNotificationToUserID => [ 43, 56, ],
             },
@@ -631,14 +631,14 @@ my @Tests = (
                 IsVisibleForCustomer => 0,
                 CommunicationChannel => 'Internal',
                 Subject              => 'Test Internal',
-                Body           => 'äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ-カスタ-用迎使用-Язык',
-                HistoryType    => 'OwnerUpdate',
-                HistoryComment => 'Some free text!',
-                From           => 'Some Agent <email@example.com>',
-                To             => 'Some Customer A <customer-a@example.com>',
-                Charset        => 'ISO-8859-15',
-                MimeType       => 'text/plain',
-                UnlockOnAway   => 1,
+                Body                 => 'äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ-カスタ-用迎使用-Язык',
+                HistoryType          => 'OwnerUpdate',
+                HistoryComment       => 'Some free text!',
+                From                 => 'Some Agent <email@example.com>',
+                To                   => 'Some Customer A <customer-a@example.com>',
+                Charset              => 'ISO-8859-15',
+                MimeType             => 'text/plain',
+                UnlockOnAway         => 1,
             },
         },
         Success => 1,
@@ -653,14 +653,14 @@ my @Tests = (
                 IsVisibleForCustomer => 0,
                 CommunicationChannel => 'Phone',
                 Subject              => 'Test Phone',
-                Body           => 'äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ-カスタ-用迎使用-Язык',
-                HistoryType    => 'OwnerUpdate',
-                HistoryComment => 'Some free text!',
-                From           => 'Some Agent <email@example.com>',
-                To             => 'Some Customer A <customer-a@example.com>',
-                Charset        => 'ISO-8859-15',
-                MimeType       => 'text/plain',
-                UnlockOnAway   => 1,
+                Body                 => 'äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ-カスタ-用迎使用-Язык',
+                HistoryType          => 'OwnerUpdate',
+                HistoryComment       => 'Some free text!',
+                From                 => 'Some Agent <email@example.com>',
+                To                   => 'Some Customer A <customer-a@example.com>',
+                Charset              => 'ISO-8859-15',
+                MimeType             => 'text/plain',
+                UnlockOnAway         => 1,
             },
         },
         Success => 1,
@@ -675,14 +675,14 @@ my @Tests = (
                 IsVisibleForCustomer => 0,
                 CommunicationChannel => 'Email',
                 Subject              => 'Test Email',
-                Body           => 'äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ-カスタ-用迎使用-Язык',
-                HistoryType    => 'OwnerUpdate',
-                HistoryComment => 'Some free text!',
-                From           => 'Some Agent <email@example.com>',
-                To             => 'Some Customer A <customer-a@example.com>',
-                Charset        => 'ISO-8859-15',
-                MimeType       => 'text/plain',
-                UnlockOnAway   => 1,
+                Body                 => 'äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ-カスタ-用迎使用-Язык',
+                HistoryType          => 'OwnerUpdate',
+                HistoryComment       => 'Some free text!',
+                From                 => 'Some Agent <email@example.com>',
+                To                   => 'Some Customer A <customer-a@example.com>',
+                Charset              => 'ISO-8859-15',
+                MimeType             => 'text/plain',
+                UnlockOnAway         => 1,
 
                 Cc         => 'Some Customer B <customer-b@example.com>',
                 Bcc        => 'Some Customer C <customer-c@example.com>',
@@ -704,14 +704,14 @@ my @Tests = (
                 IsVisibleForCustomer => 0,
                 CommunicationChannel => 'Test123',
                 Subject              => 'Test Test123',
-                Body           => 'äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ-カスタ-用迎使用-Язык',
-                HistoryType    => 'OwnerUpdate',
-                HistoryComment => 'Some free text!',
-                From           => 'Some Agent <email@example.com>',
-                To             => 'Some Customer A <customer-a@example.com>',
-                Charset        => 'ISO-8859-15',
-                MimeType       => 'text/plain',
-                UnlockOnAway   => 1,
+                Body                 => 'äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ-カスタ-用迎使用-Язык',
+                HistoryType          => 'OwnerUpdate',
+                HistoryComment       => 'Some free text!',
+                From                 => 'Some Agent <email@example.com>',
+                To                   => 'Some Customer A <customer-a@example.com>',
+                Charset              => 'ISO-8859-15',
+                MimeType             => 'text/plain',
+                UnlockOnAway         => 1,
             },
         },
         Success => 0,

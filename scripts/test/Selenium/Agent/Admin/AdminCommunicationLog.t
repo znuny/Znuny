@@ -105,7 +105,7 @@ $Selenium->RunTest(
                 ObjectLogType => 'Connection',
                 Priority      => 'Debug',
                 Key           => 'Kernel::System::MailAccount::' . $MailAccounts{$MailAccountID}->{Type},
-                Value =>
+                Value         =>
                     "Open connection to '$MailAccounts{$MailAccountID}->{Host}' ($MailAccounts{$MailAccountID}->{Login}).",
             );
 
@@ -113,7 +113,7 @@ $Selenium->RunTest(
                 ObjectLogType => 'Connection',
                 Priority      => 'Notice',
                 Key           => 'Kernel::System::MailAccount::' . $MailAccounts{$MailAccountID}->{Type},
-                Value =>
+                Value         =>
                     "1 messages available for fetching ($MailAccounts{$MailAccountID}->{Login}/$MailAccounts{$MailAccountID}->{Host}).",
             );
 
@@ -142,7 +142,7 @@ $Selenium->RunTest(
                     ObjectLogType => 'Message',
                     Priority      => 'Error',
                     Key           => 'Kernel::System::MailAccount::' . $MailAccounts{$MailAccountID}->{Type},
-                    Value =>
+                    Value         =>
                         "Could not process message. Raw mail saved (report it on http://bugs.otrs.org/)!",
                 );
 
@@ -177,7 +177,7 @@ $Selenium->RunTest(
                 ObjectLogType => 'Connection',
                 Priority      => 'Debug',
                 Key           => 'Kernel::System::MailAccount::' . $MailAccounts{$MailAccountID}->{Type},
-                Value =>
+                Value         =>
                     "Executed deletion of marked messages from server ($MailAccounts{$MailAccountID}->{Login}/$MailAccounts{$MailAccountID}->{Host}).",
             );
 
@@ -290,7 +290,7 @@ $Selenium->RunTest(
                 ObjectLogType => 'Connection',
                 Priority      => 'Debug',
                 Key           => 'Kernel::System::MailAccount::' . $MailAccounts{$MailAccountID}->{Type},
-                Value =>
+                Value         =>
                     "Open connection to '$MailAccounts{$MailAccountID}->{Host}' ($MailAccounts{$MailAccountID}->{Login}).",
             );
 
@@ -298,7 +298,7 @@ $Selenium->RunTest(
                 ObjectLogType => 'Connection',
                 Priority      => 'Error',
                 Key           => 'Kernel::System::MailAccount::' . $MailAccounts{$MailAccountID}->{Type},
-                Value =>
+                Value         =>
                     "Something went wrong while trying to connect to 'IMAP => $MailAccounts{$MailAccountID}->{Login}/$MailAccounts{$MailAccountID}->{Host}'.",
             );
 
@@ -366,7 +366,7 @@ $Selenium->RunTest(
                 ObjectLogType => 'Connection',
                 Priority      => 'Debug',
                 Key           => 'Kernel::System::MailAccount::' . $MailAccounts{$MailAccountID}->{Type},
-                Value =>
+                Value         =>
                     "Open connection to '$MailAccounts{$MailAccountID}->{Host}' ($MailAccounts{$MailAccountID}->{Login}).",
             );
 
@@ -374,7 +374,7 @@ $Selenium->RunTest(
                 ObjectLogType => 'Connection',
                 Priority      => 'Error',
                 Key           => 'Kernel::System::MailAccount::' . $MailAccounts{$MailAccountID}->{Type},
-                Value =>
+                Value         =>
                     "Something went wrong while trying to connect to 'IMAP => $MailAccounts{$MailAccountID}->{Login}/$MailAccounts{$MailAccountID}->{Host}'.",
             );
 

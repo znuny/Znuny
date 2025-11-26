@@ -284,7 +284,7 @@ my @Tests = (
             Config => {
                 Name        => 'Test13',
                 Description => 'Description for Dynamic Field.',
-                Link =>
+                Link        =>
                     'https://www.znuny.org/[% Data.Link %]/[% Data.LinkPreview %]/[% Data.Title %]/[% Data.Value %]',
             },
             Label      => 'something for label',

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-07-18 11:19+0000\n"
+"POT-Creation-Date: 2025-11-04 13:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -11295,6 +11295,10 @@ msgid "Mail account added!"
 msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminMailAccount.pm
+msgid "Error fetching mail%s, please check the Communication Log!"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminMailAccount.pm
 msgid "Email account fetch already fetched by another process. Please try again later!"
 msgstr ""
 
@@ -15770,6 +15774,10 @@ msgstr ""
 msgid "Delete expired ticket draft entries."
 msgstr ""
 
+#. XML Definition: Kernel/Config/Files/XML/Daemon.xml
+msgid "Remove closed tickets from agents' ticket watch lists."
+msgstr ""
+
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Disables the web installer (http://yourhost.example.com/otrs/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box."
 msgstr ""
@@ -19128,6 +19136,10 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines if a ticket lock is required in the ticket merge screen of a zoomed ticket in the agent interface (if the ticket isn't locked yet, the ticket gets locked and the current agent will be set automatically as its owner)."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml

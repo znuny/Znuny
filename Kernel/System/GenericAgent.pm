@@ -1152,7 +1152,7 @@ sub _JobRunTicket {
         }
         $TicketObject->TicketCustomerSet(
             TicketID => $Param{TicketID},
-            No       => $Param{Config}->{New}->{CustomerID} || $Ticket{CustomerID} || '',
+            No       => $Param{Config}->{New}->{CustomerID}        || $Ticket{CustomerID}     || '',
             User     => $Param{Config}->{New}->{CustomerUserLogin} || $Ticket{CustomerUserID} || '',
             UserID   => $Param{UserID},
         );

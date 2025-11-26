@@ -61,7 +61,7 @@ sub Run {
                 ObjectLogType => 'Message',
                 Priority      => 'Debug',
                 Key           => 'Kernel::System::PostMaster::FollowUpCheck::Attachments',
-                Value =>
+                Value         =>
                     "Found valid TicketNumber '$Tn' (TicketID '$TicketID') in email attachment '$Attachment->{Filename}'.",
             );
 

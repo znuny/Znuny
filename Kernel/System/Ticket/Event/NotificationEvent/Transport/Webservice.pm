@@ -15,7 +15,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 use parent qw(Kernel::System::Ticket::Event::NotificationEvent::Transport::Base);
 
@@ -121,7 +121,7 @@ sub SendNotification {
     }
 
     my $RecipientInformation         = $ConfigObject->Get('WebserviceNotifications::RecipientInformation');
-    my $AgentRecipientInformation    = $RecipientInformation->{Agent} // [];
+    my $AgentRecipientInformation    = $RecipientInformation->{Agent}    // [];
     my $CustomerRecipientInformation = $RecipientInformation->{Customer} // [];
     my $AdditionalRecipientKeyName   = $RecipientInformation->{AdditionalRecipientKeyName} || 'Recipient';
 
@@ -161,7 +161,7 @@ sub SendNotification {
     else {
         $LogObject->Log(
             Priority => 'info',
-            Message =>
+            Message  =>
                 "Skipped web service notification '$Notification{Name}' because of wrong recipient type '$Param{Recipient}->{Type}'.",
         );
         return;
@@ -210,7 +210,7 @@ sub SendNotification {
     if ( !IsHashRefWithData($Result) || !$Result->{Success} ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Failed to send web service notification '$Notification{Name}' to '$NotificationTo' ($Recipient{Type}).",
         );
         return;

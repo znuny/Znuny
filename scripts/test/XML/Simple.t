@@ -487,7 +487,7 @@ my @Tests = (
         ExpectedResult => {
             'Description' => {
                 'Translatable' => '1',
-                'Valueß'      => "Test ščćžç∂ßâ¢."
+                'Valueß'       => "Test ščćžç∂ßâ¢."
             },
             'Name'       => 'Frontend::Module###Dummy',
             'Navigation' => 'Frontend::Agent::ModuleRegistration',
@@ -499,7 +499,7 @@ my @Tests = (
                         {
                             'Key'          => 'Description',
                             'Translatable' => '1',
-                            'Valueß'      => 'Overview of all open Tickets.'
+                            'Valueß'       => 'Overview of all open Tickets.'
                         },
                         {
                             'Array' => {
@@ -509,10 +509,10 @@ my @Tests = (
                                             {
                                                 'Key'          => 'Description',
                                                 'Translatable' => '1',
-                                                'Valueß'      => 'Overview of all open Tickets.'
+                                                'Valueß'       => 'Overview of all open Tickets.'
                                             },
                                             {
-                                                'Key'     => 'NavBar',
+                                                'Key'    => 'NavBar',
                                                 'Valueß' => 'Ticket'
                                             }
                                         ]

@@ -1415,8 +1415,8 @@ my @Tests = (
         RequestData    => {
             TicketLastChangeTimeNewerDate => $StartTime->ToString(),
             TicketCreateTimeNewerDate     => $StartTime->ToString(),
-            SortBy  => 'Ticket',    # force order, because the Age (default) can be the same
-            OrderBy => 'Down',
+            SortBy                        => 'Ticket',    # force order, because the Age (default) can be the same
+            OrderBy                       => 'Down',
         },
         ExpectedReturnLocalData => {
             Data => {
@@ -1461,9 +1461,9 @@ my @Tests = (
         RequestData    => {
             TicketLastChangeTimeNewerDate => $StartTime->ToString(),
             TicketCreateTimeNewerDate     => $StartTime->ToString(),
-            SortBy  => 'Ticket',    # force order, because the Age (default) can be the same
-            OrderBy => 'Down',
-            Limit   => 1,
+            SortBy                        => 'Ticket',    # force order, because the Age (default) can be the same
+            OrderBy                       => 'Down',
+            Limit                         => 1,
         },
         ExpectedReturnLocalData => {
             Data => {

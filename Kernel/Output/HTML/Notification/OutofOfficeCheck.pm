@@ -44,7 +44,7 @@ sub Run {
         return $LayoutObject->Notify(
             Priority => 'Notice',
             Link     => $LayoutObject->{Baselink} . 'Action=AgentPreferences',
-            Data =>
+            Data     =>
                 $LayoutObject->{LanguageObject}
                 ->Translate("You have Out of Office enabled, would you like to disable it?"),
         );

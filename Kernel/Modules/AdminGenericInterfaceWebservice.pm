@@ -14,7 +14,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -824,9 +824,9 @@ sub _ShowOverview {
             my $Data = {
                 ID                 => $WebserviceID,
                 Name               => $Webservice->{Name},
-                Description        => $Webservice->{Config}->{Description} || '-',
-                RemoteSystem       => $Webservice->{Config}->{RemoteSystem} || '-',
-                ProviderTransport  => $Webservice->{Config}->{Provider}->{Transport}->{Type} || '-',
+                Description        => $Webservice->{Config}->{Description}                    || '-',
+                RemoteSystem       => $Webservice->{Config}->{RemoteSystem}                   || '-',
+                ProviderTransport  => $Webservice->{Config}->{Provider}->{Transport}->{Type}  || '-',
                 RequesterTransport => $Webservice->{Config}->{Requester}->{Transport}->{Type} || '-',
                 Valid              => $ValidStrg,
             };
@@ -1224,7 +1224,7 @@ sub _ShowEdit {
                     Name            => $ActionName,
                     Description     => $ActionDetails->{Description} || '-',
                     Controller      => $ActionDetails->{Type},
-                    MappingInbound  => $ActionDetails->{MappingInbound}->{Type} || '-',
+                    MappingInbound  => $ActionDetails->{MappingInbound}->{Type}  || '-',
                     MappingOutbound => $ActionDetails->{MappingOutbound}->{Type} || '-',
                     Module          => $GIControllers{ $ActionDetails->{Type} },
                     ActionType      => $CommTypeConfig{$CommunicationType}->{ActionType},
@@ -1358,7 +1358,7 @@ sub _ShowEdit {
                     Name => 'ErrorHandlingRow',
                     Data => {
                         ErrorHandling => $ErrorHandlingModule,
-                        Description =>
+                        Description   =>
                             $CommTypeConfig{$CommunicationType}->{ErrorHandling}->{$ErrorHandlingModule}->{Description},
                         ErrorHandlingType =>
                             $CommTypeConfig{$CommunicationType}->{ErrorHandling}->{$ErrorHandlingModule}->{Type},

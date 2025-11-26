@@ -16,7 +16,7 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::System::Log',
-    'Kernel::System::Calendar::Appointment',,
+    'Kernel::System::Calendar::Appointment',
 );
 
 =head1 NAME

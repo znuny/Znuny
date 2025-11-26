@@ -11,7 +11,7 @@ package scripts::Migration::Znuny::MigrateSysConfigSettings;    ## no critic
 
 use strict;
 use warnings;
-use IO::Interactive qw(is_interactive);
+use IO::Interactive               qw(is_interactive);
 use Kernel::System::VariableCheck qw(:all);
 
 use parent qw(scripts::Migration::Base);

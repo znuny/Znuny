@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Mail::Address;
 
 our $ObjectManagerDisabled = 1;
@@ -843,7 +843,7 @@ sub Run {
                     DynamicFieldConfig   => $DynamicFieldConfig,
                     PossibleValuesFilter => $PossibleValuesFilter,
                     ParamObject          => $ParamObject,
-                    Mandatory =>
+                    Mandatory            =>
                         $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
                 );
 
@@ -868,13 +868,13 @@ sub Run {
                 $DynamicFieldBackendObject->EditFieldRender(
                 DynamicFieldConfig   => $DynamicFieldConfig,
                 PossibleValuesFilter => $PossibleValuesFilter,
-                Mandatory =>
+                Mandatory            =>
                     $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
-                ServerError  => $ValidationResult->{ServerError}  || '',
-                ErrorMessage => $ValidationResult->{ErrorMessage} || '',
-                LayoutObject => $LayoutObject,
-                ParamObject  => $ParamObject,
-                AJAXUpdate   => 1,
+                ServerError     => $ValidationResult->{ServerError}  || '',
+                ErrorMessage    => $ValidationResult->{ErrorMessage} || '',
+                LayoutObject    => $LayoutObject,
+                ParamObject     => $ParamObject,
+                AJAXUpdate      => 1,
                 UpdatableFields => $Self->_GetFieldsToUpdate(),
                 );
         }
@@ -1868,7 +1868,7 @@ sub Run {
                 DynamicFieldConfig   => $DynamicFieldConfig,
                 PossibleValuesFilter => $PossibleValuesFilter,
                 Value                => $Value,
-                Mandatory =>
+                Mandatory            =>
                     $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
                 LayoutObject    => $LayoutObject,
                 ParamObject     => $ParamObject,
@@ -2028,7 +2028,7 @@ sub _Mask {
         YearPeriodPast       => 0,
         YearPeriodFuture     => 5,
         DiffTime             => $ConfigObject->Get('Ticket::Frontend::PendingDiffTime') || 0,
-        Class                => $Param{Errors}->{DateInvalid} || ' ',
+        Class                => $Param{Errors}->{DateInvalid}                           || ' ',
         Validate             => 1,
         ValidateDateInFuture => 1,
         Calendar             => $Calendar,

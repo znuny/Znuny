@@ -209,7 +209,7 @@ sub Run {
             ObjectLogType => 'Message',
             Priority      => 'Info',
             Key           => 'Kernel::System::PostMaster',
-            Value =>
+            Value         =>
                 "Ignored Email (From: $GetParam->{'From'}, Message-ID: $GetParam->{'Message-ID'}) "
                 . "because the X-OTRS-Ignore is set (X-OTRS-Ignore: $GetParam->{'X-OTRS-Ignore'}).",
         );
@@ -547,7 +547,7 @@ sub CheckFollowUp {
                         ObjectLogType => 'Message',
                         Priority      => 'Debug',
                         Key           => 'Kernel::System::PostMaster',
-                        Value =>
+                        Value         =>
                             "Found follow up ticket with TicketNumber '$Ticket{TicketNumber}' and TicketID '$TicketID'.",
                     );
 

@@ -60,6 +60,9 @@ for my $Key ( sort keys %UserData ) {
     # Skip UserLoginFailed
     next KEY if $Key eq 'UserLoginFailed';
 
+    # Skip UserToolBarSearchBackend which is set by default
+    next KEY if $Key eq 'UserToolBarSearchBackend';
+
     # Skip out-of-office status (will always be set dynamically in Kernel::System::User
     # and cannot be set/changed by SetPreferences()).
     next KEY if $Key eq 'LoggedStatusMessage';

@@ -7,10 +7,8 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-=cut
-    This test logs into agent and customer interface, and then calls up all registered
-    frontend modules to check for any internal server errors.
-=cut
+# This test logs into agent and customer interface, and then calls up all registered
+# frontend modules to check for any internal server errors.
 
 use strict;
 use warnings;

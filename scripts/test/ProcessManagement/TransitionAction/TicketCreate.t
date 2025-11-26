@@ -331,10 +331,10 @@ my @Tests = (
                 ReplyTo              => 'Some Customer B <customer-b@example.com>',
                 MessageID            => '<asdasdasd.123@example.com>',
                 InReplyTo            => '<asdasdasd.12@example.com>',
-                References =>
+                References           =>
                     '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
                 NoAgentNotify                   => 0,
-                ForceNotificationToUserID       => [ 1, 43, 56, ],
+                ForceNotificationToUserID       => [ 1,  43, 56, ],
                 ExcludeNotificationToUserID     => [ 43, 56, ],
                 ExcludeMuteNotificationToUserID => [ 43, 56, ],
 
@@ -377,10 +377,10 @@ my @Tests = (
                 ReplyTo              => 'Some Customer B <customer-b@example.com>',
                 MessageID            => '<asdasdasd.123@example.com>',
                 InReplyTo            => '<asdasdasd.12@example.com>',
-                References =>
+                References           =>
                     '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
                 NoAgentNotify                   => 0,
-                ForceNotificationToUserID       => [ 1, 43, 56, ],
+                ForceNotificationToUserID       => [ 1,  43, 56, ],
                 ExcludeNotificationToUserID     => [ 43, 56, ],
                 ExcludeMuteNotificationToUserID => [ 43, 56, ],
 
@@ -463,10 +463,10 @@ my @Tests = (
                 ReplyTo              => 'Some Customer B <customer-b@example.com>',
                 MessageID            => '<asdasdasd.123@example.com>',
                 InReplyTo            => '<asdasdasd.12@example.com>',
-                References =>
+                References           =>
                     '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
                 NoAgentNotify                   => 0,
-                ForceNotificationToUserID       => [ 1, 43, 56, ],
+                ForceNotificationToUserID       => [ 1,  43, 56, ],
                 ExcludeNotificationToUserID     => [ 43, 56, ],
                 ExcludeMuteNotificationToUserID => [ 43, 56, ],
 
@@ -510,10 +510,10 @@ my @Tests = (
                 ReplyTo              => 'Some Customer B <customer-b@example.com>',
                 MessageID            => '<asdasdasd.123@example.com>',
                 InReplyTo            => '<asdasdasd.12@example.com>',
-                References =>
+                References           =>
                     '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
                 NoAgentNotify                   => 0,
-                ForceNotificationToUserID       => [ 1, 43, 56, ],
+                ForceNotificationToUserID       => [ 1,  43, 56, ],
                 ExcludeNotificationToUserID     => [ 43, 56, ],
                 ExcludeMuteNotificationToUserID => [ 43, 56, ],
 
@@ -557,10 +557,10 @@ my @Tests = (
                 ReplyTo              => 'Some Customer B <customer-b@example.com>',
                 MessageID            => '<asdasdasd.123@example.com>',
                 InReplyTo            => '<asdasdasd.12@example.com>',
-                References =>
+                References           =>
                     '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
                 NoAgentNotify                   => 0,
-                ForceNotificationToUserID       => [ 1, 43, 56, ],
+                ForceNotificationToUserID       => [ 1,  43, 56, ],
                 ExcludeNotificationToUserID     => [ 43, 56, ],
                 ExcludeMuteNotificationToUserID => [ 43, 56, ],
 
@@ -595,7 +595,7 @@ my @Tests = (
                 IsVisibleForCustomer => 0,
                 ContentType          => 'text/plain; charset=ISO-8859-15',
                 Subject              => 'some short description',
-                Body =>
+                Body                 =>
                     'äöüßÄÖÜ€исáéíúóúÁÉÍÓÚñÑ-カスタ-用迎使用-Язык',
                 HistoryType    => 'OwnerUpdate',
                 HistoryComment => 'Some free text!',
@@ -605,10 +605,10 @@ my @Tests = (
                 ReplyTo        => 'Some Customer B <customer-b@example.com>',
                 MessageID      => '<asdasdasd.123@example.com>',
                 InReplyTo      => '<asdasdasd.12@example.com>',
-                References =>
+                References     =>
                     '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
                 NoAgentNotify                   => 0,
-                ForceNotificationToUserID       => [ 1, 43, 56, ],
+                ForceNotificationToUserID       => [ 1,  43, 56, ],
                 ExcludeNotificationToUserID     => [ 43, 56, ],
                 ExcludeMuteNotificationToUserID => [ 43, 56, ],
 
@@ -647,10 +647,10 @@ my @Tests = (
                 ReplyTo              => 'Some Customer B <customer-b@example.com>',
                 MessageID            => '<asdasdasd.123@example.com>',
                 InReplyTo            => '<asdasdasd.12@example.com>',
-                References =>
+                References           =>
                     '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
                 NoAgentNotify                   => 0,
-                ForceNotificationToUserID       => [ 1, 43, 56, ],
+                ForceNotificationToUserID       => [ 1,  43, 56, ],
                 ExcludeNotificationToUserID     => [ 43, 56, ],
                 ExcludeMuteNotificationToUserID => [ 43, 56, ],
 
@@ -690,10 +690,10 @@ my @Tests = (
                 ReplyTo              => 'Some Customer B <customer-b@example.com>',
                 MessageID            => '<asdasdasd.123@example.com>',
                 InReplyTo            => '<asdasdasd.12@example.com>',
-                References =>
+                References           =>
                     '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
                 NoAgentNotify                   => 0,
-                ForceNotificationToUserID       => [ 1, 43, 56, ],
+                ForceNotificationToUserID       => [ 1,  43, 56, ],
                 ExcludeNotificationToUserID     => [ 43, 56, ],
                 ExcludeMuteNotificationToUserID => [ 43, 56, ],
 
@@ -732,10 +732,10 @@ my @Tests = (
                 ReplyTo              => 'Some Customer B <customer-b@example.com>',
                 MessageID            => '<asdasdasd.123@example.com>',
                 InReplyTo            => '<asdasdasd.12@example.com>',
-                References =>
+                References           =>
                     '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
                 NoAgentNotify                   => 0,
-                ForceNotificationToUserID       => [ 1, 43, 56, ],
+                ForceNotificationToUserID       => [ 1,  43, 56, ],
                 ExcludeNotificationToUserID     => [ 43, 56, ],
                 ExcludeMuteNotificationToUserID => [ 43, 56, ],
 
@@ -862,10 +862,10 @@ my @Tests = (
                 ReplyTo              => 'Some Customer B <customer-b@example.com>',
                 MessageID            => '<asdasdasd.123@example.com>',
                 InReplyTo            => '<asdasdasd.12@example.com>',
-                References =>
+                References           =>
                     '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
                 NoAgentNotify                   => 0,
-                ForceNotificationToUserID       => [ 1, 43, 56, ],
+                ForceNotificationToUserID       => [ 1,  43, 56, ],
                 ExcludeNotificationToUserID     => [ 43, 56, ],
                 ExcludeMuteNotificationToUserID => [ 43, 56, ],
 
@@ -907,7 +907,7 @@ my @Tests = (
                 ReplyTo              => 'Some Customer B <customer-b@example.com>',
                 MessageID            => '<asdasdasd.123@example.com>',
                 InReplyTo            => '<asdasdasd.12@example.com>',
-                References =>
+                References           =>
                     '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
                 NoAgentNotify                   => 0,
                 ForceNotificationToUserID       => '1, 43, 56',

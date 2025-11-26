@@ -200,7 +200,7 @@ my @Tests = (
             Base      => $Base,
             Name      => 'last-search-array' . $RandomID,
             Key       => 'Array',
-            Value     => [ 'ValueOne', 'ValueTwo', 'ValueThree', 'ValueFour' ],                      # SCALAR|ARRAYREF
+            Value     => [ 'ValueOne', 'ValueTwo', 'ValueThree', 'ValueFour' ],    # SCALAR|ARRAYREF
             UserLogin => $Login,
         },
     },
@@ -345,7 +345,7 @@ my %CustomerSearches      = (
         Search => {
             PriorityIDs => [ 2, 4 ],
             StateIDs    => [ 1, 3, 5 ],
-            Body => 'asdf',
+            Body        => 'asdf',
         }
     },
     Second => {

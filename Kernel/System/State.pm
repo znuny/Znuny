@@ -88,7 +88,7 @@ sub StateAdd {
             . ' create_time, create_by, change_time, change_by)'
             . ' VALUES (?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
-            \$Param{Name}, \$Param{ValidID}, \$Param{TypeID}, \$Param{Comment},
+            \$Param{Name},   \$Param{ValidID}, \$Param{TypeID}, \$Param{Comment},
             \$Param{UserID}, \$Param{UserID},
         ],
     );
@@ -266,7 +266,7 @@ sub StateUpdate {
             . ' valid_id = ?, change_time = current_timestamp, change_by = ? '
             . ' WHERE id = ?',
         Bind => [
-            \$Param{Name}, \$Param{Comment}, \$Param{TypeID}, \$Param{ValidID},
+            \$Param{Name},   \$Param{Comment}, \$Param{TypeID}, \$Param{ValidID},
             \$Param{UserID}, \$Param{ID},
         ],
     );

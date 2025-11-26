@@ -369,7 +369,7 @@ sub Request {
     if ( !$Response{Content} || ref $Response{Content} ne 'SCALAR' ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'notice',
-            Message =>
+            Message  =>
                 "PublicCloudService - No content received from public cloud service. Please try again later.'",
         );
         return;

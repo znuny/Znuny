@@ -12,7 +12,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -48,7 +48,7 @@ sub Run {
         NEEDED:
         for my $Needed (qw(TicketID MentionedUserID)) {
             $Params{$Needed} = $ParamObject->GetParam( Param => $Needed ) if !$Params{$Needed};
-            next NEEDED if defined $Params{$Needed};
+            next NEEDED                                                   if defined $Params{$Needed};
 
             $LogObject->Log(
                 Priority => 'error',

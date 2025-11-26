@@ -32,7 +32,7 @@ sub Configure {
         ValueRegex  => qr/^\d{1,4}[.]\d{1,4}[.]\d{1,4}$/smx,
     );
     $Self->AddOption(
-        Name => 'module-directory',
+        Name        => 'module-directory',
         Description =>
             "Specify the directory containing the module sources (otherwise the OTRS home directory will be used).",
         Required   => 0,

@@ -87,7 +87,7 @@ sub SalutationAdd {
             . ' create_time, create_by, change_time, change_by) VALUES '
             . ' (?, ?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
-            \$Param{Name}, \$Param{Text}, \$Param{ContentType}, \$Param{Comment},
+            \$Param{Name},    \$Param{Text},   \$Param{ContentType}, \$Param{Comment},
             \$Param{ValidID}, \$Param{UserID}, \$Param{UserID},
         ],
     );
@@ -226,7 +226,7 @@ sub SalutationUpdate {
         SQL => 'UPDATE salutation SET name = ?, text = ?, content_type = ?, comments = ?, '
             . 'valid_id = ?, change_time = current_timestamp, change_by = ? WHERE id = ?',
         Bind => [
-            \$Param{Name}, \$Param{Text}, \$Param{ContentType}, \$Param{Comment},
+            \$Param{Name},    \$Param{Text},   \$Param{ContentType}, \$Param{Comment},
             \$Param{ValidID}, \$Param{UserID}, \$Param{ID},
         ],
     );

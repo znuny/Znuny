@@ -398,7 +398,7 @@ $Self->IsDeeply(
     {
         $TicketData[0]{TicketID} => $TicketData[0]{TicketNumber},
         $TicketData[1]{TicketID} => $TicketData[1]{TicketNumber},
-        ,
+
     },
     'Search for two fields, match two tickets',
 );

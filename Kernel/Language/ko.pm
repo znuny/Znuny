@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D %T';
-    $Self->{Completeness}        = 0.888906752411576;
+    $Self->{Completeness}        = 0.888478225936044;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -3902,6 +3902,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminMailAccount.pm
         'Mail account added!' => '메일 계정이 추가되었습니다!',
+        'Error fetching mail%s, please check the Communication Log!' => '',
         'Email account fetch already fetched by another process. Please try again later!' =>
             '이메일 계정 가져오기가 이미 다른 프로세스에서 가져왔습니다. 나중에 다시 시도 해주십시오!',
         'Dispatching by email To: field.' => '이메일로 발송 : 수신자 : 필드.',
@@ -5728,6 +5729,7 @@ sub Data {
         'Removes old generic interface debug log entries created before the specified amount of days.' =>
             '',
         'Delete expired ticket draft entries.' => '만료된 티켓 초안 항목을 삭제하십시오.',
+        'Remove closed tickets from agents\' ticket watch lists.' => '',
 
         # XML Definition: Kernel/Config/Files/XML/Framework.xml
         'Disables the web installer (http://yourhost.example.com/otrs/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
@@ -7284,6 +7286,8 @@ sub Data {
             '에이전트 인터페이스에서 확대 / 축소된 티켓의 티켓 병합 화면을 사용하는데 필요한 권한입니다.',
         'Defines if a ticket lock is required in the ticket merge screen of a zoomed ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
             '에이전트 인터페이스의 확대 / 축소 된 티켓의 티켓 병합 화면에 티켓 잠금이 필요한지 여부를 정의합니다 (티켓이 잠겨 있지 않은 경우 티켓이 잠기고 현재 에이전트가 소유자로 자동 설정 됨).',
+        'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
+            '',
         'Required permissions to change the customer of a ticket in the agent interface.' =>
             '에이전트 인터페이스에서 티켓의 고객을 변경하는데 필요한 권한입니다.',
         'Defines if a ticket lock is required to change the customer of a ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>

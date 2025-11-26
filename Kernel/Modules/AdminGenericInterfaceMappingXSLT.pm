@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -42,7 +42,7 @@ sub Run {
 
     my $CommunicationType = IsStringWithData($Operation) ? 'Provider'  : 'Requester';
     my $ActionType        = IsStringWithData($Operation) ? 'Operation' : 'Invoker';
-    my $Action = $Operation || $Invoker;
+    my $Action            = $Operation || $Invoker;
 
     # Set mapping direction for display.
     my $MappingDirection = $Direction eq 'MappingOutbound'
@@ -312,7 +312,7 @@ sub _ShowEdit {
                     Value => Translatable('Incoming response data before mapping (RequesterResponseInput)'),
                 },
                 {
-                    Key => 'RequesterErrorHandlingOutput',
+                    Key   => 'RequesterErrorHandlingOutput',
                     Value =>
                         Translatable('Outgoing error handler data after error handling (RequesterErrorHandlingOutput)'),
                 },
@@ -333,7 +333,7 @@ sub _ShowEdit {
                     Value => Translatable('Outgoing response data before mapping (ProviderResponseInput)'),
                 },
                 {
-                    Key => 'ProviderErrorHandlingOutput',
+                    Key   => 'ProviderErrorHandlingOutput',
                     Value =>
                         Translatable('Outgoing error handler data after error handling (ProviderErrorHandlingOutput)'),
                 },

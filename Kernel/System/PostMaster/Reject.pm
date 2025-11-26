@@ -255,7 +255,7 @@ sub Run {
                     ObjectLogType => 'Message',
                     Priority      => 'Debug',
                     Key           => 'Kernel::System::PostMaster::Reject',
-                    Value =>
+                    Value         =>
                         "TicketKey$Count: Article DynamicField (ArticleKey) update via '$Key'! Value: $GetParam{$Key}.",
                 );
             }

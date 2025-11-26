@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.914147909967846;
+    $Self->{Completeness}        = 0.913707215169532;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3908,6 +3908,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminMailAccount.pm
         'Mail account added!' => 'Dodat imejl nalog!',
+        'Error fetching mail%s, please check the Communication Log!' => '',
         'Email account fetch already fetched by another process. Please try again later!' =>
             'Trenutno drugi proces preuzima poštu imejl naloga. Molimo pokušajte kasnije.',
         'Dispatching by email To: field.' => 'Otpremanje putem imejla Za: polje.',
@@ -5734,6 +5735,7 @@ sub Data {
         'Removes old generic interface debug log entries created before the specified amount of days.' =>
             'Uklanja stare logove otklanjanja grešaka generičkog interfejsa koji su kreirani pre definisanog broja dana.',
         'Delete expired ticket draft entries.' => 'Briše zastarele nacrte tiketa.',
+        'Remove closed tickets from agents\' ticket watch lists.' => '',
 
         # XML Definition: Kernel/Config/Files/XML/Framework.xml
         'Disables the web installer (http://yourhost.example.com/otrs/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
@@ -7290,6 +7292,8 @@ sub Data {
             'Neophodne dozvole za upotrebu ekrana spajanja tiketa u detaljnom pregledu tiketa u interfejsu operatera.',
         'Defines if a ticket lock is required in the ticket merge screen of a zoomed ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
             'Određuje da li je potrebno zaključati tiket u ekranu spajanja tiketa u detaljnom pregledu tiketa u interfejsu operatera (ako tiket još uvek nije zaključan, tiket će biti zaključan i trenutni operater će biti automatski postavljen kao vlasnik).',
+        'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
+            '',
         'Required permissions to change the customer of a ticket in the agent interface.' =>
             'Neophodne dozvole za promenu klijenta tiketa u interfejsu operatera.',
         'Defines if a ticket lock is required to change the customer of a ticket in the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>

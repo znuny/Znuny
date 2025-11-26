@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -444,7 +444,7 @@ sub Run {
             %GetParam,
             %Appointment,
             Prefix                   => 'Start',
-            StartHour                => $Appointment{StartHour} // $GetParam{StartHour},
+            StartHour                => $Appointment{StartHour}   // $GetParam{StartHour},
             StartMinute              => $Appointment{StartMinute} // $GetParam{StartMinute},
             Format                   => 'DateInputFormatLong',
             ValidateDateBeforePrefix => 'End',
@@ -459,7 +459,7 @@ sub Run {
             %GetParam,
             %Appointment,
             Prefix                  => 'End',
-            EndHour                 => $Appointment{EndHour} // $GetParam{EndHour},
+            EndHour                 => $Appointment{EndHour}   // $GetParam{EndHour},
             EndMinute               => $Appointment{EndMinute} // $GetParam{EndMinute},
             Format                  => 'DateInputFormatLong',
             ValidateDateAfterPrefix => 'Start',

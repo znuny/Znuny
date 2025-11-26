@@ -95,8 +95,8 @@ sub SystemAddressAdd {
             . ' create_time, create_by, change_time, change_by)'
             . ' VALUES (?, ?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
-            \$Param{Name}, \$Param{Realname}, \$Param{ValidID}, \$Param{Comment},
-            \$Param{QueueID}, \$Param{UserID}, \$Param{UserID},
+            \$Param{Name},    \$Param{Realname}, \$Param{ValidID}, \$Param{Comment},
+            \$Param{QueueID}, \$Param{UserID},   \$Param{UserID},
         ],
     );
 
@@ -247,7 +247,7 @@ sub SystemAddressUpdate {
     {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "This system address '$Param{Name}' cannot be set to invalid, because it is used in one or more queue(s) or auto response(s).",
         );
         return;
@@ -258,8 +258,8 @@ sub SystemAddressUpdate {
         SQL => 'UPDATE system_address SET value0 = ?, value1 = ?, comments = ?, valid_id = ?, '
             . ' change_time = current_timestamp, change_by = ?, queue_id = ? WHERE id = ?',
         Bind => [
-            \$Param{Name}, \$Param{Realname}, \$Param{Comment}, \$Param{ValidID},
-            \$Param{UserID}, \$Param{QueueID}, \$Param{ID},
+            \$Param{Name},   \$Param{Realname}, \$Param{Comment}, \$Param{ValidID},
+            \$Param{UserID}, \$Param{QueueID},  \$Param{ID},
         ],
     );
 

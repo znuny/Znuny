@@ -364,7 +364,7 @@ sub PageNew {
     # output the logo image at header left
     $Self->Image(
         File   => $LogoFile,
-        Width  => $LogoSize->{Width} || 475,
+        Width  => $LogoSize->{Width}  || 475,
         Height => $LogoSize->{Height} || 100,
     );
 
@@ -839,19 +839,19 @@ sub Table {
                             for ( $Block{ReturnColumnStart} .. $Block{ReturnColumnStop} ) {
                                 my $Column = $_;
                                 $Self->_TableCellOutput(
-                                    Text          => $Param{CellData}->[$Row]->[$Column]->{Content},
-                                    Type          => $Param{CellData}->[$Row]->[$Column]->{Type},
-                                    Width         => $Param{ColumnData}->[$Column]->{OutputWidth},
-                                    Height        => $Param{RowData}->[$Row]->{OutputHeight},
-                                    Font          => $Param{CellData}->[$Row]->[$Column]->{Font},
-                                    FontSize      => $Param{CellData}->[$Row]->[$Column]->{FontSize},
-                                    FontColor     => $Param{CellData}->[$Row]->[$Column]->{FontColor},
-                                    Align         => $Param{CellData}->[$Row]->[$Column]->{Align},
-                                    Lead          => $Param{CellData}->[$Row]->[$Column]->{Lead},
-                                    PaddingTop    => $Param{PaddingTop},
-                                    PaddingRight  => $Param{PaddingRight},
-                                    PaddingBottom => $Param{PaddingBottom},
-                                    PaddingLeft   => $Param{PaddingLeft},
+                                    Text            => $Param{CellData}->[$Row]->[$Column]->{Content},
+                                    Type            => $Param{CellData}->[$Row]->[$Column]->{Type},
+                                    Width           => $Param{ColumnData}->[$Column]->{OutputWidth},
+                                    Height          => $Param{RowData}->[$Row]->{OutputHeight},
+                                    Font            => $Param{CellData}->[$Row]->[$Column]->{Font},
+                                    FontSize        => $Param{CellData}->[$Row]->[$Column]->{FontSize},
+                                    FontColor       => $Param{CellData}->[$Row]->[$Column]->{FontColor},
+                                    Align           => $Param{CellData}->[$Row]->[$Column]->{Align},
+                                    Lead            => $Param{CellData}->[$Row]->[$Column]->{Lead},
+                                    PaddingTop      => $Param{PaddingTop},
+                                    PaddingRight    => $Param{PaddingRight},
+                                    PaddingBottom   => $Param{PaddingBottom},
+                                    PaddingLeft     => $Param{PaddingLeft},
                                     BackgroundColor =>
                                         $Param{CellData}->[$Row]->[$Column]->{BackgroundColor},
                                     Border      => $Param{Border},
@@ -904,20 +904,20 @@ sub Table {
                                         $Type = 'ReturnLeftOverHard';
                                     }
                                     my %Return = $Self->_TableCellOutput(
-                                        Text     => $Param{CellData}->[$Row]->[$Column]->{Content},
-                                        Type     => $Type,
-                                        Width    => $Param{ColumnData}->[$Column]->{OutputWidth},
-                                        Height   => $NewOutputHeight,
-                                        Font     => $Param{CellData}->[$Row]->[$Column]->{Font},
-                                        FontSize => $Param{CellData}->[$Row]->[$Column]->{FontSize},
+                                        Text      => $Param{CellData}->[$Row]->[$Column]->{Content},
+                                        Type      => $Type,
+                                        Width     => $Param{ColumnData}->[$Column]->{OutputWidth},
+                                        Height    => $NewOutputHeight,
+                                        Font      => $Param{CellData}->[$Row]->[$Column]->{Font},
+                                        FontSize  => $Param{CellData}->[$Row]->[$Column]->{FontSize},
                                         FontColor =>
                                             $Param{CellData}->[$Row]->[$Column]->{FontColor},
-                                        Align         => $Param{CellData}->[$Row]->[$Column]->{Align},
-                                        Lead          => $Param{CellData}->[$Row]->[$Column]->{Lead},
-                                        PaddingTop    => $Param{PaddingTop},
-                                        PaddingRight  => $Param{PaddingRight},
-                                        PaddingBottom => $Param{PaddingBottom},
-                                        PaddingLeft   => $Param{PaddingLeft},
+                                        Align           => $Param{CellData}->[$Row]->[$Column]->{Align},
+                                        Lead            => $Param{CellData}->[$Row]->[$Column]->{Lead},
+                                        PaddingTop      => $Param{PaddingTop},
+                                        PaddingRight    => $Param{PaddingRight},
+                                        PaddingBottom   => $Param{PaddingBottom},
+                                        PaddingLeft     => $Param{PaddingLeft},
                                         BackgroundColor =>
                                             $Param{CellData}->[$Row]->[$Column]->{BackgroundColor},
                                         Border      => $Param{Border},
@@ -990,7 +990,7 @@ sub Table {
                     if ( $RowCounter > 100 ) {
                         $Kernel::OM->Get('Kernel::System::Log')->Log(
                             Priority => 'error',
-                            Message =>
+                            Message  =>
                                 "Too much row loops on page! Infinite Loop protection. Table Output aborted."
                         );
                         $RowLoop = 0;
@@ -1020,7 +1020,7 @@ sub Table {
     else {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Need array references of CellData, ColumnData and RowData! Table Output aborted."
         );
         $Param{State} = 1;
@@ -1345,7 +1345,7 @@ sub Image {
 
         # output the image
         $Image->image(
-            $ImageFile, $Position{X}, $Position{Y} - $Param{Height},
+            $ImageFile,    $Position{X}, $Position{Y} - $Param{Height},
             $Param{Width}, $Param{Height},
         );
 

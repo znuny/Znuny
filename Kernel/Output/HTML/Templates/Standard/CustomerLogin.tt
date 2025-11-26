@@ -116,23 +116,51 @@
                     <input type="hidden" name="Action" value="CustomerCreateAccount"/>
                     <input type="hidden" name="Lang" value="[% Env("UserLanguage") | html %]"/>
                     <div>
-                        <label for="Title">[% Translate("Title or salutation") | html %]</label>
-                        <input title="[% Translate("How we should address you") | html %]" type="text" name="Title"  id="Title" class="W50pc" value="[% Data.UserTitle | html %]"/>
+                        [% IF Data.UserTitleMandatory %]
+                        <label class="Mandatory" for="UserTitle">
+                            <span class="Marker">*</span>
+                            [% Translate("Title or salutation") | html %]
+                        </label>
+                        <input title="[% Translate("How we should address you") | html %]" type="text" name="UserTitle"  id="UserTitle" class="W50pc Validate_Required" value="[% Data.UserTitle | html %]"/>
+                        <div id="UserTitleError" class="TooltipErrorMessage">
+                            <p>[% Translate("This field is required.") | html %]</p>
+                        </div>
+                        [% ELSE %]
+                        <label for="UserTitle">
+                            [% Translate("Title or salutation") | html %]
+                        </label>
+                        <input title="[% Translate("How we should address you") | html %]" type="text" name="UserTitle"  id="UserTitle" class="W50pc" value="[% Data.UserTitle | html %]"/>
+                        [% END %]
                     </div>
                     <div class="NewLine">
-                        <label class="Mandatory" for="FirstName"><span class="Marker">*</span> [% Translate("Firstname") | html %]</label>
-                        <input title="[% Translate("Your First Name") | html %]" name="Firstname" type="text" id="FirstName" maxlength="100" value="[% Data.UserFirstname | html %]" class="W50pc Validate_Required"/>
-                        <div id="FirstNameError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                        <label class="Mandatory" for="UserFirstname">
+                            <span class="Marker">*</span>
+                            [% Translate("Firstname") | html %]
+                        </label>
+                        <input title="[% Translate("Your First Name") | html %]" name="UserFirstname" type="text" id="UserFirstname" maxlength="100" value="[% Data.UserFirstname | html %]" class="W50pc Validate_Required"/>
+                        <div id="UserFirstnameError" class="TooltipErrorMessage">
+                            <p>[% Translate("This field is required.") | html %]</p>
+                        </div>
                     </div>
                     <div class="NewLine">
-                        <label class="Mandatory" for="LastName"><span class="Marker">*</span> [% Translate("Lastname") | html %]</label>
-                        <input title="[% Translate("Your Last Name") | html %]" name="Lastname" type="text" id="LastName" maxlength="100" value="[% Data.UserLastname | html %]" class="W50pc Validate_Required"/>
-                        <div id="LastNameError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                        <label class="Mandatory" for="UserLastname">
+                            <span class="Marker">*</span>
+                            [% Translate("Lastname") | html %]
+                        </label>
+                        <input title="[% Translate("Your Last Name") | html %]" name="UserLastname" type="text" id="UserLastname" maxlength="100" value="[% Data.UserLastname | html %]" class="W50pc Validate_Required"/>
+                        <div id="UserLastnameError" class="TooltipErrorMessage">
+                            <p>[% Translate("This field is required.") | html %]</p>
+                        </div>
                     </div>
                     <div class="NewLine">
-                        <label class="Mandatory" for="Email"><span class="Marker">*</span> [% Translate("Email") | html %]</label>
-                        <input title="[% Translate("Your email address (this will become your username)") | html %]" name="Email" type="[% Env("EmailFieldType") | html %]" id="Email" maxlength="150" value="[% Data.UserEmail | html %]" class="W100pc Validate_Required Validate_Email"/>
-                        <div id="EmailError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                        <label class="Mandatory" for="UserEmail">
+                            <span class="Marker">*</span>
+                            [% Translate("Email") | html %]
+                        </label>
+                        <input title="[% Translate('Your email address (this will become your username)') | html %]" name="UserEmail" type="[% Env('EmailFieldType') | html %]" id="UserEmail" maxlength="150" value="[% Data.UserEmail | html %]" class="W100pc Validate_Required Validate_Email"/>
+                            <div id="UserEmailError" class="TooltipErrorMessage">
+                            <p>[% Translate("This field is required.") | html %]</p>
+                        </div>
                     </div>
                     <div class="NewLine">
                         <button id="CreateAccount" type="submit" value="[% Translate("Create") | html %]" disabled="disabled">[% Translate("Create") | html %]</button>

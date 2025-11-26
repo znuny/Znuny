@@ -19,7 +19,7 @@ my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
 # DocumentComplete tests
 my @Tests = (
     {
-        Input => 'Some Text',
+        Input  => 'Some Text',
         Result =>
             '<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/></head><body style="font-family:Geneva,Helvetica,Arial,sans-serif; font-size: 12px;">Some Text</body></html>',
         Name => 'DocumentComplete - simple'

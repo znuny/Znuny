@@ -15,7 +15,7 @@ use strict;
 use warnings;
 use utf8;
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(IsHashRefWithData);
 
 our $ObjectManagerDisabled = 1;
@@ -145,7 +145,7 @@ sub Run {
 
     # Check if agent has permission to start chats with agents.
     my $EnableChat               = 1;
-    my $ChatStartingAgentsGroup  = $ConfigObject->Get('ChatEngine::PermissionGroup::ChatStartingAgents') || 'users';
+    my $ChatStartingAgentsGroup  = $ConfigObject->Get('ChatEngine::PermissionGroup::ChatStartingAgents')  || 'users';
     my $ChatReceivingAgentsGroup = $ConfigObject->Get('ChatEngine::PermissionGroup::ChatReceivingAgents') || 'users';
     my $ChatStartingAgentsGroupPermission = $Kernel::OM->Get('Kernel::System::Group')->PermissionCheck(
         UserID    => $Self->{UserID},

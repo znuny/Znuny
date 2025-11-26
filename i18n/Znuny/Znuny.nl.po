@@ -25788,3 +25788,15 @@ msgstr ""
 msgid "Defines the default ticket order in the ticket mention view of the agent interface. Up: oldest on top. Down: latest on top."
 msgstr ""
 
+#. Perl Module: Kernel/Modules/AdminMailAccount.pm
+msgid "Error fetching mail%s, please check the Communication Log!"
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Daemon.xml
+msgid "Remove closed tickets from agents' ticket watch lists."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically."
+msgstr ""
+
