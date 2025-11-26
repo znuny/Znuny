@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2025 Informatyka Bogusławski sp. z o.o. sp.k., https://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -24,6 +25,16 @@ sub new {
     # allocate new hash for object
     my $Self = {%Param};
     bless( $Self, $Type );
+
+    $Self->{AdminMailAccountPermission} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Permission(
+        Action => 'AdminMailAccount',
+        Type   => 'rw',
+    );
+
+    $Self->{AdminSystemConfigurationPermission} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Permission(
+        Action => 'AdminSystemConfiguration',
+        Type   => 'rw',
+    );
 
     return $Self;
 }
@@ -110,6 +121,9 @@ sub Run {
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
     my $Notification = $ParamObject->GetParam( Param => 'Notification' ) || '';
+
+    $Param{AdminMailAccountPermission}         = $Self->{AdminMailAccountPermission};
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     # ------------------------------------------------------------ #
     # change
@@ -577,6 +591,9 @@ sub _Edit {
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
+    $Param{AdminMailAccountPermission}         = $Self->{AdminMailAccountPermission};
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
+
     $LayoutObject->Block(
         Name => 'Overview',
         Data => \%Param,
@@ -948,6 +965,9 @@ sub _Overview {
     my ( $Self, %Param ) = @_;
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    $Param{AdminMailAccountPermission}         = $Self->{AdminMailAccountPermission};
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     $LayoutObject->Block(
         Name => 'Overview',

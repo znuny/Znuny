@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2025 Informatyka Bogusławski sp. z o.o. sp.k., https://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -24,6 +25,16 @@ sub new {
 
     my $Self = {%Param};
     bless( $Self, $Type );
+
+    $Self->{AdminACLPermission} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Permission(
+        Action => 'AdminACL',
+        Type   => 'rw',
+    );
+
+    $Self->{AdminSystemConfigurationPermission} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Permission(
+        Action => 'AdminSystemConfiguration',
+        Type   => 'rw',
+    );
 
     return $Self;
 }
@@ -68,6 +79,9 @@ sub Run {
     my $ProcessObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
     my $StateObject   = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process::State');
     my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+
+    $Param{AdminACLPermission}                 = $Self->{AdminACLPermission};
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     # ------------------------------------------------------------ #
     # ProcessImport
@@ -1599,6 +1613,9 @@ sub _ShowOverview {
     my ( $Self, %Param ) = @_;
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    $Param{AdminACLPermission}                 = $Self->{AdminACLPermission};
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     my $Output = $LayoutObject->Header();
     $Output .= $LayoutObject->NavigationBar();

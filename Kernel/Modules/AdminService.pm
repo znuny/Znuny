@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2025 Informatyka Bogusławski sp. z o.o. sp.k., https://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -25,6 +26,11 @@ sub new {
 
     $Self->{IsITSMInstalled} = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
 
+    $Self->{AdminSystemConfigurationPermission} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Permission(
+        Action => 'AdminSystemConfiguration',
+        Type   => 'rw',
+    );
+
     return $Self;
 }
 
@@ -35,7 +41,8 @@ sub Run {
     my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
     my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
 
-    $Param{IsITSMInstalled} = $Self->{IsITSMInstalled};
+    $Param{IsITSMInstalled}                    = $Self->{IsITSMInstalled};
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     if ( $Self->{IsITSMInstalled} ) {
         my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
@@ -335,7 +342,8 @@ sub _MaskNew {
     my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
     my %ServiceData;
 
-    $Param{IsITSMInstalled} = $Self->{IsITSMInstalled};
+    $Param{IsITSMInstalled}                    = $Self->{IsITSMInstalled};
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     # get params
     $ServiceData{ServiceID} = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => "ServiceID" );

@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2025 Informatyka Bogusławski sp. z o.o. sp.k., https://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -23,6 +24,11 @@ sub new {
 
     $Self->{IsITSMInstalled} = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
 
+    $Self->{AdminSystemConfigurationPermission} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Permission(
+        Action => 'AdminSystemConfiguration',
+        Type   => 'rw',
+    );
+
     return $Self;
 }
 
@@ -35,7 +41,8 @@ sub Run {
     my $SLAObject    = $Kernel::OM->Get('Kernel::System::SLA');
     my %Error        = ();
 
-    $Param{IsITSMInstalled} = $Self->{IsITSMInstalled};
+    $Param{IsITSMInstalled}                    = $Self->{IsITSMInstalled};
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     # ------------------------------------------------------------ #
     # sla edit
@@ -338,7 +345,8 @@ sub _MaskNew {
 
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
-    $Param{IsITSMInstalled} = $Self->{IsITSMInstalled};
+    $Param{IsITSMInstalled}                    = $Self->{IsITSMInstalled};
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     # get params
     my %SLAData;

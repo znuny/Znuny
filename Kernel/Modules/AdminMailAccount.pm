@@ -1,6 +1,7 @@
 # --
 # Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2025 Informatyka Bogusławski sp. z o.o. sp.k., https://www.ib.pl/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -23,6 +24,11 @@ sub new {
     my $Self = {%Param};
     bless( $Self, $Type );
 
+    $Self->{AdminSystemConfigurationPermission} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Permission(
+        Action => 'AdminSystemConfiguration',
+        Type   => 'rw',
+    );
+
     return $Self;
 }
 
@@ -32,6 +38,8 @@ sub Run {
     my $LayoutObject      = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ParamObject       = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $MailAccountObject = $Kernel::OM->Get('Kernel::System::MailAccount');
+
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     my %GetParam = ();
     my @Params   = (
@@ -368,6 +376,8 @@ sub _Overview {
     my $LayoutObject      = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $MailAccountObject = $Kernel::OM->Get('Kernel::System::MailAccount');
 
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
+
     my %Backend = $MailAccountObject->MailAccountBackendList();
 
     $LayoutObject->Block(
@@ -424,6 +434,8 @@ sub _MaskUpdateMailAccount {
     my ( $Self, %Param ) = @_;
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     # get valid list
     my %ValidList        = $Kernel::OM->Get('Kernel::System::Valid')->ValidList();
@@ -503,6 +515,8 @@ sub _MaskAddMailAccount {
     my ( $Self, %Param ) = @_;
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     # get valid list
     my %ValidList        = $Kernel::OM->Get('Kernel::System::Valid')->ValidList();
