@@ -1,6 +1,3 @@
-# 6.5.19 ????-??-??
- - 2025-11-26 Fixed: Don't display links to AdminSystemConfiguration, AdminACL nor AdminMailAccount if not accessible.
-
 # 6.5.18 2025-09-24
  - 2025-09-22 Fixed: Fix for installer email setting checks lead to issues with sending emails.
 
