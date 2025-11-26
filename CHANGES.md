@@ -1,6 +1,3 @@
-# 6.5.19 ????-??-??
- - 2025-11-26 Fixed: Don't generate errors when searching for customer user with spaces only.
-
 # 6.5.18 2025-09-24
  - 2025-09-22 Fixed: Fix for installer email setting checks lead to issues with sending emails.
 
