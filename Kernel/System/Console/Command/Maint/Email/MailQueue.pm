@@ -12,11 +12,14 @@ package Kernel::System::Console::Command::Maint::Email::MailQueue;
 use strict;
 use warnings;
 
+use utf8;
+
 use parent qw(Kernel::System::Console::BaseCommand);
 
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
+    'Kernel::Config',
     'Kernel::System::MailQueue',
     'Kernel::System::PID',
 );
@@ -188,17 +191,17 @@ sub Send {
     my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
     my $MailQueueObject = $Kernel::OM->Get('Kernel::System::MailQueue');
 
-    my $RateLimit          = $ConfigObject->Get('SendmailModule::RateLimit') // 30;
+    my $RateLimit          = $ConfigObject->Get('SendmailModule::RateLimit');
     my $RateLimitPerSender = $ConfigObject->Get('SendmailModule::RateLimitPerSenderAddress');
     my $List;
 
-    if ($RateLimitPerSender) {
+    if ( $RateLimitPerSender && $RateLimit ) {
         my $UnfilteredList = $MailQueueObject->List();
         my %SenderAddressCounter;
 
         ITEM:
         for my $Item ( @{$UnfilteredList} ) {
-            my $Sender = $Item->{Recipient} // 'Default';
+            my $Sender = $Item->{Sender} // 'Default';
             $SenderAddressCounter{$Sender}++;
             next ITEM if $SenderAddressCounter{$Sender} > $RateLimit;
 
