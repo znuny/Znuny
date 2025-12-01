@@ -78,9 +78,11 @@ sub Run {
         UserID   => $Self->{UserID},
     );
 
-    # error screen, don't show ticket
+    # redirect to ticket overview if user as no permissions for the ticket
     if ( !$Access ) {
-        return $LayoutObject->CustomerNoPermission( WithHeader => 'yes' );
+        return $LayoutObject->Redirect(
+            OP => 'Action=CustomerTicketOverview;Subaction=MyTickets;Errors=MissingTicketOrNoPermission',
+        );
     }
 
     # get ticket data

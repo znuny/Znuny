@@ -6,6 +6,7 @@
  - 2025-10-21 Fixed: Issue with "Title" field on customer login screen where it wasn't set for new customer user at all.
  - 2025-10-21 Fixed: Console commands are not loaded/listed if they are located in the /Custom directory.
  - 2025-10-01 Fixed: Improved error logging when fetching emails.
+ - 2025-09-25 Fixed: Customer ticket details screen now redirects to overview of tickets if a ticket is accessed without permissions.
 
 # 6.5.18 2025-09-24
  - 2025-09-22 Fixed: Fix for installer email setting checks lead to issues with sending emails.

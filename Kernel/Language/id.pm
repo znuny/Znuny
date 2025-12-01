@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.619958219508276;
+    $Self->{Completeness}        = 0.619858611825193;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -4582,6 +4582,7 @@ bin/otrs.Daemon.pl status\').',
         'Need CustomerID!' => 'Perlu CustomerID!',
         'My Tickets' => 'Tiket saya',
         'Company Tickets' => 'Tiket perusahaan',
+        'You have no permission or the ticket does not exist.' => '',
         'Untitled!' => 'Tanpa judul!',
 
         # Perl Module: Kernel/Modules/CustomerTicketSearch.pm

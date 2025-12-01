@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D %T';
-    $Self->{Completeness}        = 0.888478225936044;
+    $Self->{Completeness}        = 0.888335475578406;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -4580,6 +4580,7 @@ sub Data {
         'Need CustomerID!' => '고객 ID가 필요합니다!',
         'My Tickets' => '내 티켓',
         'Company Tickets' => '회사 티켓',
+        'You have no permission or the ticket does not exist.' => '',
         'Untitled!' => '제목없는!',
 
         # Perl Module: Kernel/Modules/CustomerTicketSearch.pm

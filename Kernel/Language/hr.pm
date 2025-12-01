@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.215973003374578;
+    $Self->{Completeness}        = 0.215938303341902;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4584,6 +4584,7 @@ sub Data {
         'Need CustomerID!' => '',
         'My Tickets' => 'Moje kartice',
         'Company Tickets' => 'Kartice tvrtke',
+        'You have no permission or the ticket does not exist.' => '',
         'Untitled!' => '',
 
         # Perl Module: Kernel/Modules/CustomerTicketSearch.pm

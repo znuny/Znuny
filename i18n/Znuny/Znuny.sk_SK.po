@@ -25770,3 +25770,7 @@ msgstr ""
 msgid "Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically."
 msgstr ""
 
+#. Perl Module: Kernel/Modules/CustomerTicketOverview.pm
+msgid "You have no permission or the ticket does not exist."
+msgstr ""
+

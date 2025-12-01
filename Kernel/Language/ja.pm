@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.700948095773743;
+    $Self->{Completeness}        = 0.700835475578406;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4587,6 +4587,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Need CustomerID!' => '顧客IDの入力が必要です！',
         'My Tickets' => '担当チケット',
         'Company Tickets' => '企業チケット',
+        'You have no permission or the ticket does not exist.' => '',
         'Untitled!' => '無題！',
 
         # Perl Module: Kernel/Modules/CustomerTicketSearch.pm

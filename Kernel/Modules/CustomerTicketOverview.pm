@@ -606,6 +606,30 @@ sub Run {
 
     # build NavigationBar
     $Output .= $LayoutObject->CustomerNavigationBar();
+
+    # show notifications
+    my @NotifyData = @{ $Param{NotifyData} // [] };
+    my @Errors     = $ParamObject->GetArray( Param => 'Errors' );
+
+    for my $Error (@Errors) {
+        if ( $Error eq 'MissingTicketOrNoPermission' ) {
+            push @NotifyData, {
+                Priority => 'Error',
+                Info     => $LayoutObject->{LanguageObject}->Translate(
+                    'You have no permission or the ticket does not exist.',
+                ),
+            };
+        }
+    }
+
+    for my $Notification (@NotifyData) {
+        if ( IsHashRefWithData($Notification) ) {
+            $Output .= $LayoutObject->Notify(
+                %{$Notification},
+            );
+        }
+    }
+
     $Output .= $LayoutObject->Output(
         TemplateFile => 'CustomerTicketOverview',
         Data         => \%Param,
