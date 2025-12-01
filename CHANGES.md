@@ -1,5 +1,6 @@
 # 6.5.19 2025-??-??
  - 2025-11-25 Fixed: Unexpected rate limit is being applied when config option SendmailModule::RateLimit is disabled.
+ - 2025-11-12 Fixed: Removed not needed HTML quoting of data in template generator back-end.
  - 2025-11-04 Added configurable filter for ticket search to ticket merge dialog (AgentTicketMerge).
  - 2025-10-29 Fixed: Parameter error in Kernel::System::Web::UploadCache does not try to dereference undef.
  - 2025-10-22 Added console command Maint::Ticket::Unwatch.

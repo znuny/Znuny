@@ -1771,19 +1771,6 @@ sub _Replace {
     for my $DataType (qw(OTRS_CUSTOMER_ OTRS_AGENT_)) {
         my %Data = %{ $ArticleData{$DataType} };
 
-        # HTML quoting of content
-        if ( $Param{RichText} ) {
-
-            ATTRIBUTE:
-            for my $Attribute ( sort keys %Data ) {
-                next ATTRIBUTE if !$Data{$Attribute};
-
-                $Data{$Attribute} = $Kernel::OM->Get('Kernel::System::HTMLUtils')->ToHTML(
-                    String => $Data{$Attribute},
-                );
-            }
-        }
-
         if (%Data) {
 
             # replace <OTRS_CUSTOMER_*> and <OTRS_AGENT_*> tags
