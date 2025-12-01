@@ -1,4 +1,5 @@
 # 6.5.19 2025-??-??
+ - 2025-11-28 Changed ticket zoom information widget to count only open tickets with the same customer after enabling config option Ticket::Frontend::ZoomCustomerTickets.
  - 2025-11-25 Fixed: Unexpected rate limit is being applied when config option SendmailModule::RateLimit is disabled.
  - 2025-11-12 Fixed: Removed not needed HTML quoting of data in template generator back-end.
  - 2025-11-05 Fixed: No styles when printing process in the admin interface.
