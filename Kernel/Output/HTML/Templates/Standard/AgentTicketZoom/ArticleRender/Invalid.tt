@@ -8,7 +8,8 @@
 # --
 
 <div>
-    <a name="Article[% Data.ArticleID | html %]"></a>
+    <a id="Article[% Data.ArticleID | html %]" name="Article[% Data.ArticleID | html %]"></a>
+    <span id="[% Data.ArticleID | html %]" aria-hidden="true"></span>
     <div class="WidgetSimple Expanded [% Data.SenderType | html %] [% IF Data.SenderType == 'customer' %]Incoming[% ELSE %]Outgoing[% END %] [% IF Data.IsVisibleForCustomer %]VisibleForCustomer[% ELSE %]NotVisibleForCustomer[% END %]">
         <div class="Header">
             <h2>
