@@ -9045,7 +9045,7 @@ Ihr Helpdesk-Team
         'Manage system files.' => 'Systemdateien verwalten',
         'Manage tasks triggered by event or time based execution.' => 'Verwaltung von event- oder zeitbasierten Aufgaben.',
         'Manage ticket article color.' => 'Artikel Farbe verwalten.',
-        'Manage translation.' => 'Übersatzungen verwalten.',
+        'Manage translation.' => 'Übersetzung verwalten.',
         'Management of ticket attribute relations.' => 'Verwaltung von abhängigen Ticketattributen.',
         'Mark as Spam!' => 'Als Spam makieren!',
         'Mark as seen' => 'Als gelesen markieren',
