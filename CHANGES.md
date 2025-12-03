@@ -5,6 +5,7 @@
  - 2025-11-12 Fixed: Removed not needed HTML quoting of data in template generator back-end.
  - 2025-11-05 Fixed: No styles when printing process in the admin interface.
  - 2025-11-04 Added configurable filter for ticket search to ticket merge dialog (AgentTicketMerge).
+ - 2025-10-29 Fixed: Ticket age was displayed in seconds (instead of human readable) in agent ticket zoom (when ticket information widget was configured as asynchronous) and ticket list (view mode L).
  - 2025-10-29 Fixed: Parameter error in Kernel::System::Web::UploadCache does not try to dereference undef.
  - 2025-10-22 Added console command Maint::Ticket::Unwatch.
  - 2025-10-21 Fixed: Issue with "Title" field on customer login screen where it wasn't set for new customer user at all.

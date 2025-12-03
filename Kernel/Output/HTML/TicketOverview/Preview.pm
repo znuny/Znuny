@@ -615,10 +615,6 @@ sub _Show {
     my $AdditionalClasses = $Param{Config}->{TicketActionsPerTicket} ? 'ShowInlineActions' : '';
 
     $Param{IsITSMIncidentProblemManagementInstalled} = $Self->{IsITSMIncidentProblemManagementInstalled};
-    my %AdditionalObjectData;
-    if ( $Self->{IsITSMIncidentProblemManagementInstalled} ) {
-        %AdditionalObjectData = %Ticket;
-    }
     $LayoutObject->Block(
         Name => 'DocumentContent',
         Data => {
@@ -627,7 +623,6 @@ sub _Show {
             Class             => 'ArticleCount' . $ArticleCount,
             AdditionalClasses => $AdditionalClasses,
             Created           => $Ticket{Created},                 # use value from ticket, not article
-            %AdditionalObjectData,
         },
     );
 
