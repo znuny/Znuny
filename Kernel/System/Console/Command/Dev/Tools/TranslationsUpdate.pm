@@ -55,7 +55,7 @@ sub Configure {
         HasValue => 0,
     );
     $Self->AddOption(
-        Name        => 'regnerate',
+        Name        => 'regenerate',
         Description => "All translation files are regenerated so that all unused translations are removed.",
         Required    => 0,
         HasValue    => 0,
@@ -483,7 +483,7 @@ sub WritePOFile {
     my %POLookup;
     my @POEntries;
 
-    if ( $Self->GetOption('regnerate') ) {
+    if ( $Self->GetOption('regenerate') ) {
 
         # Add the first entry again with comments and po header lines
         push @POEntries, $POEntries->[0] if defined $POEntries->[0];
@@ -510,7 +510,7 @@ sub WritePOFile {
         $Translation =~ s/\\/\\\\/g;
         $EncodeObject->EncodeOutput( \$Translation );
 
-        if ( $Self->GetOption('regnerate') ) {
+        if ( $Self->GetOption('regenerate') ) {
 
             # Create new one.
             push @POEntries, Locale::PO->new(

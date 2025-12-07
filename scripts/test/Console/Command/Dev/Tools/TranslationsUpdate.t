@@ -40,8 +40,8 @@ my @Tests = (
         STDERR    => undef,
     },
     {
-        Name      => "Run for language de with generate-po and regnerate. ",
-        Parameter => [ '--language=de', '--generate-po', '--regnerate' ],
+        Name      => "Run for language de with generate-po and regenerate. ",
+        Parameter => [ '--language=de', '--generate-po', '--regenerate' ],
         ExitCode  => 0,
         STDOUT    => 'Starting...',
         STDERR    => undef,
