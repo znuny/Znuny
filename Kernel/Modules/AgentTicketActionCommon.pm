@@ -11,6 +11,7 @@ package Kernel::Modules::AgentTicketActionCommon;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::EmailParser;
 use Kernel::System::VariableCheck qw(:all);
@@ -102,11 +103,12 @@ sub Run {
     my ( $Self, %Param ) = @_;
 
     # get needed objects
-    my $LayoutObject    = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $TicketObject    = $Kernel::OM->Get('Kernel::System::Ticket');
-    my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
-    my $ParamObject     = $Kernel::OM->Get('Kernel::System::Web::Request');
-    my $FormDraftObject = $Kernel::OM->Get('Kernel::System::FormDraft');
+    my $LayoutObject       = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+    my $ParamObject        = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $FormDraftObject    = $Kernel::OM->Get('Kernel::System::FormDraft');
+    my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
 
     # check needed stuff
     if ( !$Self->{TicketID} ) {
@@ -341,6 +343,19 @@ sub Run {
         )
     {
         $GetParam{$Key} = $ParamObject->GetParam( Param => $Key );
+    }
+
+    if ( $Config->{CustomerUser} ) {
+        for my $Key (qw(CustomerID SelectedCustomerUser CustomerUserID)) {
+            $GetParam{$Key} = $ParamObject->GetParam( Param => $Key ) || '';
+        }
+    }
+    else {
+
+        # do not set CustomerUserID as it is not needed
+        # when CustomerUser is disabled in module config
+        $GetParam{CustomerID}           = $Ticket{CustomerID}     || '';
+        $GetParam{SelectedCustomerUser} = $Ticket{CustomerUserID} || '';
     }
 
     # ACL compatibility translation
@@ -822,6 +837,14 @@ sub Run {
             $Error{Expand} = 1;
         }
 
+        if ( $Config->{CustomerUser} && $Config->{CustomerUserMandatory} ) {
+
+            # check if either display name of customer user or customer user login value was found
+            if ( !$GetParam{CustomerUserID} || !$GetParam{SelectedCustomerUser} ) {
+                $Error{'CustomerUserIDInvalid'} = 'ServerError';
+            }
+        }
+
         # create html strings for all dynamic fields
         my @TicketTypeDynamicFields;
         my @ArticleTypeDynamicFields;
@@ -997,6 +1020,26 @@ sub Run {
             return $Output;
         }
 
+        # CustomerUserID in form is actually display name
+        # but login value needs to be saved instead
+        $GetParam{CustomerUserID} = $GetParam{SelectedCustomerUser};
+
+        if (
+            $Config->{CustomerUser}
+            && (
+                ( $Ticket{CustomerUserID} || '' ) ne $GetParam{CustomerUserID}
+                || ( $Ticket{CustomerID} || '' ) ne $GetParam{CustomerID}
+            )
+            )
+        {
+            $TicketObject->TicketCustomerSet(
+                TicketID => $Self->{TicketID},
+                No       => $GetParam{CustomerID},
+                User     => $GetParam{CustomerUserID},
+                UserID   => $Self->{UserID},
+            );
+        }
+
         # set new title
         if ( $Config->{Title} ) {
             if ( defined $GetParam{Title} ) {
@@ -1026,11 +1069,10 @@ sub Run {
                 $TicketObject->TicketServiceSet(
                     %GetParam,
                     %ACLCompatGetParam,
-                    Action         => $Self->{Action},
-                    ServiceID      => $GetParam{ServiceID},
-                    TicketID       => $Self->{TicketID},
-                    CustomerUserID => $Ticket{CustomerUserID},
-                    UserID         => $Self->{UserID},
+                    Action    => $Self->{Action},
+                    ServiceID => $GetParam{ServiceID},
+                    TicketID  => $Self->{TicketID},
+                    UserID    => $Self->{UserID},
                 );
             }
             if ( defined $GetParam{SLAID} ) {
@@ -1405,8 +1447,9 @@ sub Run {
     }
     elsif ( $Self->{Subaction} eq 'AJAXUpdate' ) {
         my %Ticket         = $TicketObject->TicketGet( TicketID => $Self->{TicketID} );
-        my $CustomerUser   = $Ticket{CustomerUserID};
         my $ElementChanged = $ParamObject->GetParam( Param => 'ElementChanged' ) || '';
+
+        $GetParam{CustomerUserID} = $GetParam{SelectedCustomerUser};
 
         my $ServiceID;
 
@@ -1452,15 +1495,13 @@ sub Run {
         );
         my $Services = $Self->_GetServices(
             %GetParam,
-            CustomerUserID => $CustomerUser,
-            QueueID        => $QueueID,
-            StateID        => $StateID,
+            QueueID => $QueueID,
+            StateID => $StateID,
         );
         my $Types = $Self->_GetTypes(
             %GetParam,
-            CustomerUserID => $CustomerUser,
-            QueueID        => $QueueID,
-            StateID        => $StateID,
+            QueueID => $QueueID,
+            StateID => $StateID,
         );
         my $NewQueues = $Self->_GetQueues(
             %GetParam,
@@ -1472,16 +1513,14 @@ sub Run {
         }
         my $SLAs = $Self->_GetSLAs(
             %GetParam,
-            CustomerUserID => $CustomerUser,
-            QueueID        => $QueueID,
-            StateID        => $StateID,
-            ServiceID      => $ServiceID,
+            QueueID   => $QueueID,
+            StateID   => $StateID,
+            ServiceID => $ServiceID,
         );
         my $NextStates = $Self->_GetNextStates(
             %GetParam,
-            CustomerUserID => $CustomerUser || '',
-            QueueID        => $QueueID,
-            StateID        => $StateID,
+            QueueID => $QueueID,
+            StateID => $StateID,
         );
 
         # update Dynamic Fields Possible Values via AJAX
@@ -1739,6 +1778,16 @@ sub Run {
     }
     else {
 
+        # overwrite params variable of customer user fields to use ticket values
+        $GetParam{CustomerID}           = $Ticket{CustomerID};
+        $GetParam{SelectedCustomerUser} = $Ticket{CustomerUserID};
+
+        my %CustomerUser = $CustomerUserObject->CustomerUserDataGet(
+            User => $GetParam{SelectedCustomerUser},
+        );
+
+        $GetParam{CustomerUserID} = $CustomerUser{UserMailString} // '';
+
         my $Body = '';
 
         # if ReplyToArticle is given, get this article to generate
@@ -1948,6 +1997,7 @@ sub Run {
             ArticleTypeDynamicFields => \@ArticleTypeDynamicFields,
             %GetParam,
             %Ticket,
+            CustomerUserID => $GetParam{CustomerUserID},
         );
         $Output .= $LayoutObject->Footer(
             Type => 'Small',
@@ -1980,6 +2030,15 @@ sub _Mask {
     # get layout object
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
+    my $CustomerUserMailString = delete $Param{CustomerUserID};
+    $Param{CustomerUserID}  = $Param{SelectedCustomerUser} || '';
+    $Ticket{CustomerUserID} = $Param{SelectedCustomerUser} || '';
+
+    $LayoutObject->AddJSData(
+        Key   => 'CustomerMailString',
+        Value => $CustomerUserMailString,
+    );
+
     # Define the dynamic fields to show based on the object type.
     my $ObjectType = ['Ticket'];
 
@@ -2006,6 +2065,7 @@ sub _Mask {
         $Config->{Owner}                                                        ||
         $Config->{State}                                                        ||
         $Config->{Priority}                                                     ||
+        $Config->{CustomerUser}                                                 ||
         scalar @{ $Param{TicketTypeDynamicFields} } > 0
         )
     {
@@ -2053,13 +2113,29 @@ sub _Mask {
         );
     }
 
+    if ( $Config->{CustomerUser} ) {
+        $Param{CustomerUserMandatory} = $Config->{CustomerUserMandatory};
+
+        $LayoutObject->Block(
+            Name => 'CustomerUser',
+            Data => {
+                %Param,
+                CustomerUserID => $CustomerUserMailString,
+            }
+        );
+
+        $LayoutObject->Block(
+            Name => 'CustomerID',
+            Data => {%Param},
+        );
+    }
+
     # services
     if ( $ConfigObject->Get('Ticket::Service') && $Config->{Service} ) {
         my $Services = $Self->_GetServices(
             %Param,
-            Action         => $Self->{Action},
-            CustomerUserID => $Ticket{CustomerUserID},
-            UserID         => $Self->{UserID},
+            Action => $Self->{Action},
+            UserID => $Self->{UserID},
         );
 
         # reset previous ServiceID to reset SLA-List if no service is selected

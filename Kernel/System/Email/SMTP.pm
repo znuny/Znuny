@@ -44,6 +44,53 @@ sub new {
     return $Self;
 }
 
+sub GetAvailableConfigOptions {
+    my ( $Self, %Param ) = @_;
+
+    my %ConfigOptions = (
+        Host => {
+            Required     => 1,
+            DefaultValue => undef,
+        },
+        Port => {
+            Required     => 0,
+            DefaultValue => undef,
+        },
+        Timeout => {
+            Required     => 0,
+            DefaultValue => undef,
+        },
+        SkipSSLVerification => {
+            Required     => 0,
+            DefaultValue => undef,
+        },
+        AuthenticationType => {
+            Required       => 0,
+            DefaultValue   => undef,
+            PossibleValues => {
+                password => {
+                    AuthUser => {
+                        Required => 0,
+                    },
+                    AuthPassword => {
+                        Required => 0,
+                    },
+                },
+                oauth2_token => {
+                    AuthUser => {
+                        Required => 1,
+                    },
+                    OAuth2TokenConfigID => {
+                        Required => 1,
+                    },
+                },
+            },
+        },
+    );
+
+    return \%ConfigOptions;
+}
+
 sub Check {
     my ( $Self, %Param ) = @_;
 
@@ -73,6 +120,7 @@ sub Check {
         || die "No SendmailModule::Host found in Kernel/Config.pm";
     $Self->{SMTPPort}              = $ConfigObject->Get('SendmailModule::Port');
     $Self->{Timeout}               = $ConfigObject->Get('SendmailModule::Timeout');
+    $Self->{SkipSSLVerification}   = $ConfigObject->Get('SendmailModule::SkipSSLVerification');
     $Self->{User}                  = $ConfigObject->Get('SendmailModule::AuthUser');
     $Self->{Password}              = $ConfigObject->Get('SendmailModule::AuthPassword');
     $Self->{AuthenticationType}    = $ConfigObject->Get('SendmailModule::AuthenticationType') // 'password';

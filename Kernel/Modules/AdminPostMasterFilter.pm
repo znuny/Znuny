@@ -12,6 +12,9 @@ package Kernel::Modules::AdminPostMasterFilter;
 use strict;
 use warnings;
 
+use Kernel::Language              qw(Translatable);
+use Kernel::System::VariableCheck qw(:all);
+
 our $ObjectManagerDisabled = 1;
 
 sub new {
@@ -32,18 +35,10 @@ sub Run {
     my $Name           = $ParamObject->GetParam( Param => 'Name' );
     my $OldName        = $ParamObject->GetParam( Param => 'OldName' );
     my $StopAfterMatch = $ParamObject->GetParam( Param => 'StopAfterMatch' ) || 0;
-    my %GetParam       = ();
 
-    for my $Number ( 1 .. $ConfigObject->Get('PostmasterHeaderFieldCount') ) {
-        $GetParam{"MatchHeader$Number"} = $ParamObject->GetParam( Param => "MatchHeader$Number" );
-        $GetParam{"MatchValue$Number"}  = $ParamObject->GetParam( Param => "MatchValue$Number" );
-        $GetParam{"MatchNot$Number"}    = $ParamObject->GetParam( Param => "MatchNot$Number" );
-        $GetParam{"SetHeader$Number"}   = $ParamObject->GetParam( Param => "SetHeader$Number" );
-        $GetParam{"SetValue$Number"}    = $ParamObject->GetParam( Param => "SetValue$Number" );
-    }
-
-    my $LayoutObject     = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $PostMasterFilter = $Kernel::OM->Get('Kernel::System::PostMaster::Filter');
+    my $LayoutObject           = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $PostMasterFilterObject = $Kernel::OM->Get('Kernel::System::PostMaster::Filter');
+    my $YAMLObject             = $Kernel::OM->Get('Kernel::System::YAML');
 
     # ------------------------------------------------------------ #
     # delete
@@ -53,7 +48,7 @@ sub Run {
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
-        my $Delete = $PostMasterFilter->FilterDelete(
+        my $Delete = $PostMasterFilterObject->FilterDelete(
             Name => $Name,
         );
 
@@ -80,7 +75,7 @@ sub Run {
     # update
     # ------------------------------------------------------------ #
     elsif ( $Self->{Subaction} eq 'Update' ) {
-        my %Data = $PostMasterFilter->FilterGet( Name => $Name );
+        my %Data = $PostMasterFilterObject->FilterGet( Name => $Name );
         if ( !%Data ) {
             return $LayoutObject->ErrorScreen(
                 Message => $LayoutObject->{LanguageObject}->Translate( 'No such filter: %s', $Name ),
@@ -104,7 +99,15 @@ sub Run {
         my @Set;
         my @Not;
 
+        my %GetParam;
+
         for my $Number ( 1 .. $ConfigObject->Get('PostmasterHeaderFieldCount') ) {
+            $GetParam{"MatchHeader$Number"} = $ParamObject->GetParam( Param => "MatchHeader$Number" );
+            $GetParam{"MatchValue$Number"}  = $ParamObject->GetParam( Param => "MatchValue$Number" );
+            $GetParam{"MatchNot$Number"}    = $ParamObject->GetParam( Param => "MatchNot$Number" );
+            $GetParam{"SetHeader$Number"}   = $ParamObject->GetParam( Param => "SetHeader$Number" );
+            $GetParam{"SetValue$Number"}    = $ParamObject->GetParam( Param => "SetValue$Number" );
+
             if ( $GetParam{"MatchHeader$Number"} && length $GetParam{"MatchValue$Number"} ) {
                 push @Match, {
                     Key   => $GetParam{"MatchHeader$Number"},
@@ -123,49 +126,24 @@ sub Run {
                 };
             }
         }
-        my %Errors = ();
-        if (@Match) {
-            my $InvalidCount = 0;
-            for my $MatchItem (@Match) {
-                $InvalidCount++;
-                my $MatchValue = $MatchItem->{Value};
-                if ( !eval { my $Regex = qr/$MatchValue/; 1; } ) {
-                    $Errors{"MatchHeader${InvalidCount}Invalid"} = 'ServerError';
-                    $Errors{"MatchValue${InvalidCount}Invalid"}  = 'ServerError';
-                }
-            }
-        }
-        else {
-            $Errors{"MatchHeader1Invalid"} = 'ServerError';
-            $Errors{"MatchValue1Invalid"}  = 'ServerError';
-        }
 
-        if (@Set) {
-            my $InvalidCount = 0;
-            for my $SetItem (@Set) {
-                $InvalidCount++;
-                if ( !defined $SetItem->{Value} ) {
-                    $Errors{"SetHeader${InvalidCount}Invalid"} = 'ServerError';
-                    $Errors{"SetValue${InvalidCount}Invalid"}  = 'ServerError';
-                }
-            }
-        }
-        else {
-            $Errors{"SetHeader1Invalid"} = 'ServerError';
-            $Errors{"SetValue1Invalid"}  = 'ServerError';
-        }
+        # perform validation
+        my %FilterInsertErrors = $PostMasterFilterObject->FilterInsertErrorsCheck(
+            Match          => \@Match,
+            Set            => \@Set,
+            Name           => $Name,
+            StopAfterMatch => $StopAfterMatch,
+        );
 
-        # Name validation
-        if ( $Name eq '' ) {
-            $Errors{"NameInvalid"} = 'ServerError';
-        }
+        my %Errors = map { $_ => 'ServerError' } keys %FilterInsertErrors;
 
-        # If it's not edit action, verify there is no filters with same name.
-        if ( $Name ne $OldName ) {
-            my %Data = $PostMasterFilter->FilterGet( Name => $Name );
-            if (%Data) {
-                $Errors{"NameInvalid"} = 'ServerError';
-            }
+        # check if new name already exists if it's different than initial
+        if ( !$Errors{NameInvalid} && $Name ne $OldName ) {
+            my $AlreadyExists = $PostMasterFilterObject->NameExistsCheck(
+                Name => $Name,
+            );
+
+            $Errors{NameInvalid} = 'ServerError' if $AlreadyExists;
         }
 
         if (%Errors) {
@@ -182,8 +160,8 @@ sub Run {
                 },
             );
         }
-        $PostMasterFilter->FilterDelete( Name => $OldName );
-        $PostMasterFilter->FilterAdd(
+        $PostMasterFilterObject->FilterDelete( Name => $OldName );
+        $PostMasterFilterObject->FilterAdd(
             Name           => $Name,
             Match          => \@Match,
             Set            => \@Set,
@@ -210,41 +188,166 @@ sub Run {
     }
 
     # ------------------------------------------------------------ #
-    # overview
+    # Export
     # ------------------------------------------------------------ #
-    else {
-        my %List = $PostMasterFilter->FilterList();
+    elsif ( $Self->{Subaction} eq 'FilterExport' ) {
 
-        $LayoutObject->Block(
-            Name => 'Overview',
-            Data => { %Param, },
-        );
-        $LayoutObject->Block( Name => 'ActionList' );
-        $LayoutObject->Block( Name => 'ActionAdd' );
-        $LayoutObject->Block( Name => 'Filter' );
+        my $FilterName = $ParamObject->GetParam( Param => 'Name' ) || '';
+        my $FilterData;
+        if ($FilterName) {
+            $FilterData = $PostMasterFilterObject->FilterExport(
+                Name => $FilterName,
+            );
 
-        $LayoutObject->Block(
-            Name => 'OverviewResult',
-            Data => { %Param, },
-        );
-
-        if (%List) {
-            for my $Key ( sort keys %List ) {
-                $LayoutObject->Block(
-                    Name => 'OverviewResultRow',
-                    Data => {
-                        Name => $Key,
-                    },
-                );
-            }
+            return $LayoutObject->ErrorScreen(
+                Message => $LayoutObject->{LanguageObject}
+                    ->Translate( 'Error exporting postmaster filter with Name %s!', $FilterName ),
+            ) if !IsArrayRefWithData($FilterData);
         }
         else {
-            $LayoutObject->Block(
-                Name => 'NoDataFoundMsg',
-                Data => {},
+            $FilterData = $PostMasterFilterObject->FilterExport(
+                ExportAll => 1,
             );
         }
 
+        my $Filename = $PostMasterFilterObject->FilterExportFilenameGet(
+            Name   => $FilterName,
+            Format => 'YAML',
+        );
+
+        my $FilterDataYAML = $YAMLObject->Dump( Data => $FilterData );
+
+        return $LayoutObject->Attachment(
+            ContentType => 'text/html; charset=' . $LayoutObject->{Charset},
+            Content     => $FilterDataYAML,
+            Type        => 'attachment',
+            Filename    => $Filename,
+            NoCache     => 1,
+        );
+    }
+
+    # ------------------------------------------------------------ #
+    # Copy
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'FilterCopy' ) {
+
+        my $FilterName = $ParamObject->GetParam( Param => 'Name' ) || '';
+
+        $LayoutObject->ChallengeTokenCheck();
+
+        my $NewFilterName = $PostMasterFilterObject->FilterCopy(
+            Name   => $FilterName,
+            UserID => $Self->{UserID},
+        );
+
+        return $LayoutObject->ErrorScreen(
+            Message => Translatable("Error creating the postmaster filter."),
+        ) if !$NewFilterName;
+
+        # return to overview
+        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+    }
+
+    # ------------------------------------------------------------ #
+    # Import
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'FilterImport' ) {
+
+        $LayoutObject->ChallengeTokenCheck();
+
+        my $FormID      = $ParamObject->GetParam( Param => 'FormID' ) || '';
+        my %UploadStuff = $ParamObject->GetUploadAll(
+            Param  => 'FileUpload',
+            Source => 'string',
+        );
+
+        my $OverwriteExistingFilters = $ParamObject->GetParam( Param => 'OverwriteExistingFilters' ) || '';
+
+        my $FilterImport = $PostMasterFilterObject->FilterImport(
+            Content                  => $UploadStuff{Content},
+            OverwriteExistingFilters => $OverwriteExistingFilters,
+            UserID                   => $Self->{UserID},
+        );
+
+        if ( !$FilterImport->{Success} ) {
+            my $Message = $FilterImport->{Message}
+                || Translatable(
+                'Filters could not be imported due to an unknown error. Please check logs for more information.'
+                );
+            return $LayoutObject->ErrorScreen(
+                Message => $Message,
+            );
+        }
+
+        if ( $FilterImport->{Added} ) {
+            push @{ $Param{NotifyData} }, {
+                Info => $LayoutObject->{LanguageObject}->Translate(
+                    'The following postmaster filters have been added successfully: %s.',
+                    $FilterImport->{Added}
+                ),
+            };
+        }
+        if ( $FilterImport->{Updated} ) {
+            push @{ $Param{NotifyData} }, {
+                Info => $LayoutObject->{LanguageObject}->Translate(
+                    'The following postmaster filters have been updated successfully: %s.',
+                    $FilterImport->{Updated}
+                ),
+            };
+        }
+        if ( $FilterImport->{NotUpdated} ) {
+            push @{ $Param{NotifyData} }, {
+                Info => $LayoutObject->{LanguageObject}->Translate(
+                    'The following postmaster filters were not updated: %s.',
+                    $FilterImport->{NotUpdated}
+                ),
+            };
+        }
+        if ( $FilterImport->{Errors} ) {
+            push @{ $Param{NotifyData} }, {
+                Priority => 'Error',
+                Info     => $LayoutObject->{LanguageObject}->Translate(
+                    'Errors adding/updating the following postmaster filters: %s. Please check logs for more information.',
+                    $FilterImport->{Errors}
+                ),
+            };
+        }
+        if ( IsArrayRefWithData( $FilterImport->{AdditionalErrors} ) ) {
+            for my $Error ( @{ $FilterImport->{AdditionalErrors} } ) {
+                push @{ $Param{NotifyData} }, {
+                    Priority => 'Error',
+                    Info     => $LayoutObject->{LanguageObject}->Translate($Error),
+                };
+            }
+        }
+
+        $Self->_Overview();
+        my $Output = $LayoutObject->Header();
+        $Output .= $LayoutObject->NavigationBar();
+
+        # show filters status
+        if ( $Param{NotifyData} ) {
+            for my $Filter ( @{ $Param{NotifyData} } ) {
+                $Output .= $LayoutObject->Notify(
+                    %{$Filter},
+                );
+            }
+        }
+
+        $Output .= $LayoutObject->Output(
+            TemplateFile => 'AdminPostMasterFilter',
+            Data         => \%Param,
+        );
+        $Output .= $LayoutObject->Footer();
+
+        return $Output;
+    }
+
+    # ------------------------------------------------------------ #
+    # overview
+    # ------------------------------------------------------------ #
+    else {
+        $Self->_Overview();
         my $Output = $LayoutObject->Header();
         $Output .= $LayoutObject->NavigationBar();
         $Output .= $LayoutObject->Output(
@@ -258,6 +361,9 @@ sub Run {
 
 sub _MaskUpdate {
     my ( $Self, %Param ) = @_;
+
+    my $PostMasterFilterObject = $Kernel::OM->Get('Kernel::System::PostMaster::Filter');
+    my $ConfigObject           = $Kernel::OM->Get('Kernel::Config');
 
     my %Data    = %{ $Param{Data} };
     my $Counter = 0;
@@ -297,39 +403,13 @@ sub _MaskUpdate {
     $LayoutObject->Block( Name => 'ActionList' );
     $LayoutObject->Block( Name => 'ActionOverview' );
 
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
-    # all headers
-    my @Headers = @{ $ConfigObject->Get('PostmasterX-Header') };
-
-    # add Dynamic Field headers
-    my $DynamicFields = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldList(
-        Valid      => 1,
-        ObjectType => [ 'Ticket', 'Article' ],
-        ResultType => 'HASH',
-    );
-    for my $DynamicField ( values %$DynamicFields ) {
-        push @Headers, 'X-OTRS-DynamicField-' . $DynamicField;
-        push @Headers, 'X-OTRS-FollowUp-DynamicField-' . $DynamicField;
-    }
-
-    my %Header = map { $_ => $_ } @Headers;
-    $Header{''}   = '-';
-    $Header{Body} = 'Body';
-
-    # otrs header
-    my %SetHeader = ();
-    for my $HeaderKey ( sort keys %Header ) {
-        if ( $HeaderKey =~ /^x-otrs/i ) {
-            $SetHeader{$HeaderKey} = $HeaderKey;
-        }
-    }
-    $SetHeader{''} = '-';
+    my %Headers = $PostMasterFilterObject->FilterHeadersGet();
 
     # build strings
     for my $Number ( 1 .. $ConfigObject->Get('PostmasterHeaderFieldCount') ) {
         $Data{"MatchHeader$Number"} = $LayoutObject->BuildSelection(
-            Data        => \%Header,
+            Data => { %{ $Headers{Match} }, ( '' => '-' ) },
+
             Name        => "MatchHeader$Number",
             SelectedID  => $Data{"MatchHeader$Number"},
             Class       => 'Modernize ' . ( $Data{ 'MatchHeader' . $Number . 'Invalid' } || '' ),
@@ -337,7 +417,7 @@ sub _MaskUpdate {
             HTMLQuote   => 1,
         );
         $Data{"SetHeader$Number"} = $LayoutObject->BuildSelection(
-            Data        => \%SetHeader,
+            Data        => { %{ $Headers{Set} }, ( '' => '-' ) },
             Name        => "SetHeader$Number",
             SelectedID  => $Data{"SetHeader$Number"},
             Class       => 'Modernize ' . ( $Data{ 'SetHeader' . $Number . 'Invalid' } || '' ),
@@ -377,6 +457,48 @@ sub _MaskUpdate {
     );
     $Output .= $LayoutObject->Footer();
     return $Output;
+}
+
+sub _Overview {
+    my ( $Self, %Param ) = @_;
+
+    my $LayoutObject           = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $PostMasterFilterObject = $Kernel::OM->Get('Kernel::System::PostMaster::Filter');
+
+    $LayoutObject->Block(
+        Name => 'Overview',
+        Data => { %Param, },
+    );
+    $LayoutObject->Block( Name => 'ActionList' );
+    $LayoutObject->Block( Name => 'ActionAdd' );
+    $LayoutObject->Block( Name => 'ActionImportExport' );
+    $LayoutObject->Block( Name => 'Filter' );
+
+    $LayoutObject->Block(
+        Name => 'OverviewResult',
+        Data => { %Param, },
+    );
+
+    my %List = $PostMasterFilterObject->FilterList();
+
+    if (%List) {
+        for my $Key ( sort keys %List ) {
+            $LayoutObject->Block(
+                Name => 'OverviewResultRow',
+                Data => {
+                    Name => $Key,
+                },
+            );
+        }
+    }
+    else {
+        $LayoutObject->Block(
+            Name => 'NoDataFoundMsg',
+            Data => {},
+        );
+    }
+
+    return 1;
 }
 
 1;

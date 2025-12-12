@@ -428,6 +428,31 @@ CREATE TABLE signature (
     CONSTRAINT signature_name UNIQUE (name)
 );
 -- ----------------------------------------------------------
+--  create table sendmail_config
+-- ----------------------------------------------------------
+CREATE TABLE sendmail_config (
+    id serial NOT NULL,
+    sendmail_module VARCHAR (255) NOT NULL,
+    cmd VARCHAR (2000) NULL,
+    host VARCHAR (255) NULL,
+    port SMALLINT NULL,
+    timeout SMALLINT NULL,
+    skip_ssl_verification SMALLINT DEFAULT 0 NULL,
+    is_fallback_config SMALLINT DEFAULT 0 NULL,
+    authentication_type VARCHAR (100) NULL,
+    auth_user VARCHAR (255) NULL,
+    auth_password VARCHAR (255) NULL,
+    oauth2_token_config_id INTEGER NULL,
+    email_addresses VARCHAR (2000) NULL,
+    comments VARCHAR (255) NULL,
+    valid_id SMALLINT NOT NULL,
+    create_time timestamp(0) NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time timestamp(0) NOT NULL,
+    change_by INTEGER NOT NULL,
+    PRIMARY KEY(id)
+);
+-- ----------------------------------------------------------
 --  create table system_address
 -- ----------------------------------------------------------
 CREATE TABLE system_address (

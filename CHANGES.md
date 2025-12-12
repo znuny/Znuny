@@ -1,12 +1,28 @@
 # 7.3.1 2025-??-??
+ - 2025-12-09 Migration refactoring: Added new Component 'FollowUp'. Migration order: CheckPreviousRequirement, Run and FollowUp. Improved Steps for CheckPreviousRequirement. Removed empty CheckPreviousRequirement and Run functions.
+ - 2025-12-09 Integrated package Znuny-AgentTicketActionCommonCustomer.
+ - 2025-12-09 Fixed: Article overview text difficult to read in Dark Skin due to double filter inversion.
+ - 2025-12-08 Console command 'Admin::Package::RepositoryList' now indicates which of the displayed packages are installed.
+ - 2025-12-01 Integrated package Znuny-MultiSendmail.
+ - 2025-11-28 Added new GUI-Redesign. Thanks to Tim Binder stbt.de.
+ - 2025-11-26 Fixed: MariaDB/MySQL throwing error regarding foreign keys when converting character set of tables to UTF8MB4.
+ - 2025-11-25 AdminSystemConfiguration: Added "Quick Deploy" in SysConfig to apply pending changes faster.
  - 2025-11-21 Fixed: Wrong description text in personal preference. Thanks for reporting to @BuilderNSV. [#712](https://github.com/znuny/Znuny/issues/712).
  - 2025-11-21 Fixed: Resource module displays deactivated Agents.
+ - 2025-11-19 Fixed: Checkbox to optionally create an article in AgentTicketActionCommon views does not collapse article widget after enabling it.
  - 2025-11-17 Fixed: Added rule to fix Firefox browser that does not wrap overflow text by default while displaying article content in AgentTicketZoom.
+ - 2025-11-13 Changed ticket zoom information widget to count only open tickets with the same customer after enabling config option Ticket::Frontend::ZoomCustomerTickets.
+ - 2025-11-13 Fixed: Unexpected rate limit is being applied when config option SendmailModule::RateLimit is disabled.
+ - 2025-11-12 Sped up UUID creation for DBCRUD modules.
  - 2025-11-07 Added configurable filter for ticket search to ticket merge dialog (AgentTicketMerge).
  - 2025-11-06 Fixed: CustomerShortcutIconCustom config not working. Thanks to Daylton Rodrigues (@dayltonr) for reporting. [#737](https://github.com/znuny/Znuny/issues/737).
  - 2025-11-06 Fixed: Images in articles are inverted in Dark Skin. Thanks for reporting to @Vocta1310 [#724](https://github.com/znuny/Znuny/issues/724).
+ - 2025-11-05 Fixed: No styles when printing process in the admin interface.
+ - 2025-11-05 Fixed: Customer ticket details screen now redirects to overview of tickets if a ticket is accessed without permissions.
  - 2025-11-05 Integrated package Znuny-CopyTicketNumber.
+ - 2025-10-31 Fixed: The link to a specific article in a ticket does not work if users have different settings for “Show all articles”. Article links now handle both display modes: 'Show one article' and 'Show all articles'.
  - 2025-10-31 Fixed: ProcessPrint. When printing the process, it produces empty results.
+ - 2025-10-29 Fixed: Ticket age was displayed in seconds (instead of human readable) in agent ticket zoom (when ticket information widget was configured as asynchronous) and ticket list (view mode L).
  - 2025-10-29 Fixed: Issue with popup redirections after submitting process category form.
  - 2025-10-29 Fixed: Parameter error in Kernel::System::Web::UploadCache does not try to dereference undef.
  - 2025-10-28 Fixed: Breadcrumb now loads immediately when switching System Configuration groups via Ajax.
@@ -69,6 +85,7 @@
  - 2025-07-04 Upgraded CKEditor to version 5.0.
  - 2025-07-03 Fixed: Admin interface of generic agent loses some of the submitted form data if any errors occur.
  - 2025-07-02 Added support for setting customer user preferences via AJAX request.
+ - 2025-07-02 Added import/export/copy function for postmaster filters and generic agents.
  - 2025-07-02 Fixed: CustomerProcessTicket is not fully styled.
  - 2025-06-30 Added support for process preferences.
  - 2025-06-24 Fixed: Wrong otrs.Daemon.pl exit code after valid termination. Thanks to Paweł Bogusławski (@pboguslawski). [#401](https://github.com/znuny/Znuny/pull/401)

@@ -40,6 +40,43 @@
             </div>
         </div>
 [% RenderBlockEnd("Filter") %]
+[% RenderBlockStart("ActionImportExport") %]
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Import and export of configurations") | html %]</h2>
+            </div>
+            <div class="Content">
+                <p class="FieldExplanation">
+                    [% Translate("Upload a file in YAML format (as provided by the export) to import generic agent jobs.") | html %]
+                </p>
+                <ul class="ActionList SpacingTop">
+                    <li>
+                        <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits">
+                            <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                            <input type="hidden" name="Subaction" value="JobImport"/>
+                            <input type="hidden" name="FormID" value="[% Data.FormID | html %]"/>
+                            <input name="FileUpload" id="FileUpload" type="file" size="18" class="Fixed W100pc Validate_Required [% Data.FileUploadInvalid | html %]"/>
+                            <div id="FileUploadError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                            <div id="FileUploadServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                            <fieldset class="Separated">
+                                <div class="checkbox-container">
+                                    <input type="checkbox" id="OverwriteExistingJobs" name="OverwriteExistingJobs" value="1" />
+                                    <label for="OverwriteExistingJobs">[% Translate("Overwrite existing generic agents?") | html %]</label>
+                                </div>
+                            </fieldset>
+
+                            <button class="CallForAction btn-main btn-primary-ghost" type="submit" value="[% Translate("Import configurations") | html %]">
+                                <span><i class="fa fa-upload"></i>[% Translate("Import configurations") | html %]</span>
+                            </button>
+                        </form>
+                    </li>
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=JobExport" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-download"></i>[% Translate("Export configurations") | html %]</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+[% RenderBlockEnd("ActionImportExport") %]
         <div class='WidgetSimple'>
             <div class='Header'>
                 <h2>[% Translate('Related Actions') | html %]</h2>
@@ -99,6 +136,8 @@
                             <th>[% Translate("Name") | html %]</th>
                             <th>[% Translate("Last run") | html %]</th>
                             <th>[% Translate("Validity") | html %]</th>
+                            <th class="Center W10pc">[% Translate("Export") | html %]</th>
+                            <th class="Center W10pc">[% Translate("Copy") | html %]</th>
                             <th class="Center">[% Translate("Delete") | html %]</th>
                             <th class="Center">[% Translate("Run") | html %]</th>
                         </tr>
@@ -120,6 +159,8 @@
                             </td>
                             <td>[% Data.ScheduleLastRun | Localize("TimeLong") %]</td>
                             <td>[% Translate(Data.ShownValid) | html %]</td>
+                            <td class="Center"><a class="table-icon-hover-md" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=JobExport;Name=[% Data.Name | uri %];[% Env("ChallengeTokenParam") | html %]"><i class="fa fa-download"></i><span class="InvisibleText">[% Translate("Export") | html %]</span></a></td>
+                            <td class="Center"><a class="table-icon-hover-md" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=JobCopy;Name=[% Data.Name | uri %];[% Env("ChallengeTokenParam") | html %]"><i class="fa fa-copy"></i><span class="InvisibleText">[% Translate("Copy") | html %]</span></a></td>
                             <td class="Center">
                                 <a class="TrashCan DeleteTask table-icon-hover-md" href="#" data-name="[% Data.Name | html %]" title="[% Translate("Delete this task") | html %]">
                                     <i class="fa fa-trash-o"></i>

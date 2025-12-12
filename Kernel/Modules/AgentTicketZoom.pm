@@ -383,6 +383,12 @@ sub Run {
                     NoCache     => 1,
                 );
             }
+
+            $Ticket{Age} = $LayoutObject->CustomerAge(
+                Age   => $Ticket{Age},
+                Space => ' '
+            );
+
             my $WidgetOutput = $Module->Run(
                 Ticket    => \%Ticket,
                 AclAction => \%AclAction,

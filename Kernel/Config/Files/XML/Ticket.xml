@@ -2639,6 +2639,27 @@
             <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketFreeText###CustomerUser" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketFreeText</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketFreeText###CustomerUserMandatory" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field as mandatory.</Description>
+        <Navigation>Frontend::Agent::View::TicketFreeText</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketFreeText::CustomerIDReadOnly" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Controls if CustomerID is read-only in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketFreeText</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketFreeText###Owner" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Sets the ticket owner in the ticket free text screen of the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketFreeText</Navigation>
@@ -3247,6 +3268,27 @@
             <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketClose###CustomerUser" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketClose</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketClose###CustomerUserMandatory" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field as mandatory.</Description>
+        <Navigation>Frontend::Agent::View::TicketClose</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketClose::CustomerIDReadOnly" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Controls if CustomerID is read-only in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketClose</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketClose###Owner" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Sets the ticket owner in the close ticket screen of the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketClose</Navigation>
@@ -3450,6 +3492,27 @@
         <Navigation>Frontend::Agent::View::TicketNote</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNote###CustomerUser" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketNote</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNote###CustomerUserMandatory" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field as mandatory.</Description>
+        <Navigation>Frontend::Agent::View::TicketNote</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNote::CustomerIDReadOnly" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Controls if CustomerID is read-only in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketNote</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketNote###Owner" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
@@ -3660,6 +3723,27 @@
             <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketOwner###CustomerUser" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketOwner</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketOwner###CustomerUserMandatory" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field as mandatory.</Description>
+        <Navigation>Frontend::Agent::View::TicketOwner</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketOwner::CustomerIDReadOnly" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Controls if CustomerID is read-only in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketOwner</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketOwner###Owner" Required="0" Valid="1">
         <Description Translatable="1">Sets the ticket owner in the ticket owner screen of a zoomed ticket in the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketOwner</Navigation>
@@ -3865,6 +3949,27 @@
         <Navigation>Frontend::Agent::View::TicketPending</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPending###CustomerUser" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketPending</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPending###CustomerUserMandatory" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field as mandatory.</Description>
+        <Navigation>Frontend::Agent::View::TicketPending</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPending::CustomerIDReadOnly" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Controls if CustomerID is read-only in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketPending</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPending###Owner" Required="0" Valid="1">
@@ -4073,6 +4178,27 @@
             <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPriority###CustomerUser" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketPriority</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPriority###CustomerUserMandatory" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field as mandatory.</Description>
+        <Navigation>Frontend::Agent::View::TicketPriority</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPriority::CustomerIDReadOnly" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Controls if CustomerID is read-only in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketPriority</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPriority###Owner" Required="0" Valid="1">
         <Description Translatable="1">Sets the ticket owner in the ticket priority screen of a zoomed ticket in the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketPriority</Navigation>
@@ -4278,6 +4404,27 @@
         <Navigation>Frontend::Agent::View::TicketResponsible</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketResponsible###CustomerUser" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketResponsible</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketResponsible###CustomerUserMandatory" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field as mandatory.</Description>
+        <Navigation>Frontend::Agent::View::TicketResponsible</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketResponsible::CustomerIDReadOnly" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Controls if CustomerID is read-only in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketResponsible</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketResponsible###Owner" Required="0" Valid="1">
@@ -12751,7 +12898,7 @@ Thanks for your help!
             </Hash>
         </Value>
     </Setting>
-   <Setting Name="Ticket::Frontend::AgentTicketZoom###Widgets###0300-LinkTable" Required="0" Valid="1">
+    <Setting Name="Ticket::Frontend::AgentTicketZoom###Widgets###0300-LinkTable" Required="0" Valid="1">
         <Description Translatable="1">AgentTicketZoom widget that displays a table of objects linked to the ticket.</Description>
         <Navigation>Frontend::Agent::View::TicketZoom</Navigation>
         <Value>

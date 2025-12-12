@@ -16,6 +16,7 @@ use vars (qw($Self));
 # get needed objects
 my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
 my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+my $YAMLObject         = $Kernel::OM->Get('Kernel::System::YAML');
 
 # get helper object
 $Kernel::OM->ObjectParamAdd(
@@ -101,13 +102,22 @@ for my $FieldName ( sort keys %NeededDynamicfields ) {
 my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
 my $GenericAgentObject = $Kernel::OM->Get('Kernel::System::GenericAgent');
 
-my %Jobs;
+# delete existing jobs
+my %List = $GenericAgentObject->JobList();
+if (%List) {
+    for my $Job ( sort keys %List ) {
+        my $Deleted = $GenericAgentObject->JobDelete(
+            Name   => $Job,
+            UserID => 1,
+        );
+        $Self->True(
+            $Deleted,
+            'JobDelete() - Delete existing job with name:' . $Job,
+        );
+    }
+}
 
-# get the the existing JobList
-%Jobs = $GenericAgentObject->JobList();
-my $JobCounter1 = keys %Jobs;
-
-# Create a Ticket to test JobRun and JobRunTicket
+# create a Ticket to test JobRun and JobRunTicket
 my $TicketID = $TicketObject->TicketCreate(
     Title        => 'Test ticket for Untittest of the Generic Agent',
     Queue        => 'Raw',
@@ -171,12 +181,6 @@ my %NewJob = (
         TicketCreateTimePoint        => 1,
         TicketCreateTimePointStart   => 'Last',
         TicketCreateTimePointFormat  => 'year',
-        TicketCreateTimeStartMonth   => 8,
-        TicketCreateTimeStopMonth    => 9,
-        TicketCreateTimeStartDay     => 7,
-        TicketCreateTimeStopYear     => 2006,
-        TicketCreateTimeStartYear    => 2006,
-        TicketCreateTimeStopDay      => 6,
         NewTitle                     => 'some new title',
         NewStateID                   => 2,
         NewPriorityID                => 3,
@@ -211,6 +215,8 @@ my %NewJob = (
     },
 );
 
+my $JobCounter1 = 0;
+
 my $JobAdd = $GenericAgentObject->JobAdd(
     %NewJob,
     UserID => 1,
@@ -220,19 +226,21 @@ $Self->True(
     'JobAdd()',
 );
 
-# Get the new JobList
-%Jobs = $GenericAgentObject->JobList();
+$JobCounter1 += 1 if $JobAdd;
+
+# get the new JobList
+my %Jobs        = $GenericAgentObject->JobList();
 my $JobCounter2 = keys %Jobs;
 
-# Check if the new job exists
+# check if the new job exists
 $Self->True(
     $Jobs{$Name},
     'JobAdd() check if the added job exists',
 );
 
-# Check if a job is lost or too much added
+# check if a job is lost or too much added
 $Self->Is(
-    $JobCounter1 + 1,
+    $JobCounter1,
     $JobCounter2,
     "JobAdd() check if a job is lost or too much added",
 );
@@ -296,8 +304,8 @@ $Self->True(
     "JobGet() - TicketCreateTimeNewerMinutes",
 );
 
-# Try to add the same JobName double
-my $Return = $GenericAgentObject->JobAdd(
+# try to add the same JobName double
+my $InvalidJobAddResult = $GenericAgentObject->JobAdd(
     Name => $Name,
     Data => {
         ScheduleLastRun => '',
@@ -306,9 +314,211 @@ my $Return = $GenericAgentObject->JobAdd(
 );
 
 $Self->True(
-    !$Return || '',
+    !$InvalidJobAddResult || '',
     'JobAdd() check return value - double check',
 );
+
+# add second job
+my $ValidAddResult = $GenericAgentObject->JobAdd(
+    %NewJob,
+    Name   => $Name . '-2',
+    UserID => 1,
+);
+
+$Self->True(
+    $ValidAddResult,
+    'JobAdd() - Add second job with different name: ' . $Name . '-2',
+);
+
+$JobCounter1 += 1 if $ValidAddResult;
+
+# export both jobs
+my $ExportDataMultiple = $GenericAgentObject->JobExport(
+    ExportAll => 1,
+);
+
+my $ExpectedExportDataMultiple = [
+    {
+        Name                         => $NewJob{Name},
+        TicketCreateTimeOlderMinutes => 0,               # fill default value
+        TicketCreateTimeNewerMinutes => 525600,          # fill default value
+        %{ $NewJob{Data} },
+    },
+    {
+        Name                         => $NewJob{Name} . '-2',
+        TicketCreateTimeOlderMinutes => 0,                      # fill default value
+        TicketCreateTimeNewerMinutes => 525600,                 # fill default value
+        %{ $NewJob{Data} },
+    }
+];
+
+$Self->IsDeeply(
+    $ExportDataMultiple,
+    $ExpectedExportDataMultiple,
+    "JobExport - Export job (Name: $NewJob{Name})",
+);
+
+# export single job
+my $ExportDataSingle = $GenericAgentObject->JobExport(
+    Name => $Name,
+);
+
+my $ExpectedExportDataSingle = [
+    {
+        Name                         => $NewJob{Name},
+        TicketCreateTimeOlderMinutes => 0,               # fill default value
+        TicketCreateTimeNewerMinutes => 525600,          # fill default value
+        %{ $NewJob{Data} },
+    },
+];
+
+$Self->IsDeeply(
+    $ExportDataSingle,
+    $ExpectedExportDataSingle,
+    "JobExport - Export job (Name: $NewJob{Name})",
+);
+
+# dump both jobs
+my $ValidJobsContentDataYAML = $YAMLObject->Dump( Data => $ExportDataMultiple );
+
+# import previously exported jobs with the same name
+my $JobImport = $GenericAgentObject->JobImport(
+    Content               => $ValidJobsContentDataYAML,
+    OverwriteExistingJobs => 0,
+    UserID                => 1,
+);
+
+my $JobsNameStrg = "$ExportDataMultiple->[0]->{Name}, $ExportDataMultiple->[1]->{Name}";
+
+$Self->IsDeeply(
+    $JobImport,
+    {
+        'Updated'          => '',
+        'AdditionalErrors' => [],
+        'Errors'           => '',
+        'Added'            => '',
+        'Success'          => 1,
+        'NotUpdated'       => $JobsNameStrg,
+    },
+    "JobImport - Import jobs when other job with the same name ($JobsNameStrg) already exists, OverwriteExistingJobs set to 0",
+);
+
+# import previously exported jobs with the same name, while trying to overwrite them
+$JobImport = $GenericAgentObject->JobImport(
+    Content               => $ValidJobsContentDataYAML,
+    OverwriteExistingJobs => 1,
+    UserID                => 1
+);
+
+$Self->IsDeeply(
+    $JobImport,
+    {
+        'Added'            => '',
+        'AdditionalErrors' => [],
+        'Errors'           => '',
+        'NotUpdated'       => '',
+        'Success'          => 1,
+        'Updated'          => $JobsNameStrg,
+    },
+    "JobImport - Import jobs when other jobs with the same name ($JobsNameStrg) already exists, OverwriteExistingJobs set to 1",
+);
+
+# delete all jobs
+for my $Job ( @{$ExportDataMultiple} ) {
+    my $Deleted = $GenericAgentObject->JobDelete(
+        Name   => $Job->{Name},
+        UserID => 1,
+    );
+    $Self->True(
+        $Deleted,
+        'JobDelete() - Delete existing job with name: ' . $Job->{Name},
+    );
+}
+
+# import job configurations with some errors
+my $InvalidExportData = $ExportDataMultiple;
+
+$InvalidExportData->[0]->{NewNoteFrom} = 'TenLetters';
+
+# check if error for too long length string will occur
+for ( 1 .. 20 ) {
+    $InvalidExportData->[0]->{NewNoteFrom} .= 'TenLetters';
+}
+
+# check missing name error
+delete $InvalidExportData->[1]->{Name};
+
+my $InValidJobsContentDataYAML = $YAMLObject->Dump( Data => $InvalidExportData );
+
+# import previously exported jobs with the same name and invalid content
+$JobImport = $GenericAgentObject->JobImport(
+    Content               => $InValidJobsContentDataYAML,
+    OverwriteExistingJobs => 1,
+    UserID                => 1
+);
+
+my $ErrorsImportResponse = {
+    'Errors'           => $ExportDataMultiple->[0]->{Name},
+    'AdditionalErrors' => ['One or more jobs "Name" parameter is missing!'],
+    'Success'          => 1,
+    'Updated'          => '',
+    'NotUpdated'       => '',
+    'Added'            => ''
+};
+
+$Self->IsDeeply(
+    $JobImport,
+    $ErrorsImportResponse,
+    "JobImport - Import invalid configuration of jobs",
+);
+
+# now import valid configuration of jobs
+# import previously exported jobs
+$JobImport = $GenericAgentObject->JobImport(
+    Content               => $ValidJobsContentDataYAML,
+    OverwriteExistingJobs => 0,
+    UserID                => 1,
+);
+
+my $AddedImportResponse = {
+    'Added'            => $JobsNameStrg,
+    'NotUpdated'       => '',
+    'Updated'          => '',
+    'Errors'           => '',
+    'Success'          => 1,
+    'AdditionalErrors' => []
+};
+$Self->IsDeeply(
+    $JobImport,
+    $AddedImportResponse,
+    "JobImport - Import valid configuration of jobs",
+);
+
+# copy job that does not exists
+my $NewJobName = $GenericAgentObject->JobCopy(
+    Name   => 'generic_agent_job-' . $HelperObject->GetRandomID(),
+    UserID => 1,
+);
+
+$Self->False(
+    $NewJobName,
+    'JobCopy() - Copy job that does not exists',
+);
+
+# copy job that does exists
+$NewJobName = $GenericAgentObject->JobCopy(
+    Name   => $NewJob{Name},
+    UserID => 1,
+);
+
+$Self->True(
+    $NewJobName,
+    'JobCopy() - Copy job that does exists',
+);
+
+# at this point there should be 2 jobs imported succesfully
+# and one copied, job counter should be set to value of 3
+$JobCounter1 += 1;
 
 %GetParam = $GenericAgentObject->JobGet( Name => $Name );
 
@@ -490,6 +700,8 @@ $Self->True(
     'JobDelete()',
 );
 
+$JobCounter1 -= 1 if $JobDelete;
+
 # add
 $GetParam{MIMEBase_From} = 'Some From';
 $GetParam{MIMEBase_Body} = 'Some Body';
@@ -503,6 +715,8 @@ $Self->True(
     $JobAdd || '',
     'JobAdd()',
 );
+
+$JobCounter1 += 1 if $JobAdd;
 
 # check job attributes
 %GetParam = $GenericAgentObject->JobGet( Name => $Name );
@@ -569,6 +783,8 @@ $Self->True(
     $JobDelete || '',
     'JobDelete()',
 );
+
+$JobCounter1 -= 1 if $JobDelete;
 
 # Get the new JobList
 %Jobs = $GenericAgentObject->JobList();

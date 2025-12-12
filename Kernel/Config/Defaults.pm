@@ -967,6 +967,25 @@ sub LoadDefaults {
         'Core.Components.css',
         'Core.FlexboxModel.css',
         'Core.Typography.css',
+        'thirdparty/bootstrap-grid-5.1/bootstrap-grid.css',
+        'layouts/Layout.ContentSidebar.css',
+        'layouts/Layout.PopUp.css',
+        'layouts/Layout.PopUpSidebar.css',
+        'modules/Module.Alert.css',
+        'modules/Module.Card.css',
+        'modules/Module.CustomerContainer.css',
+        'modules/Module.CustomerInformation.css',
+        'modules/Module.CustomerSelector.css',
+        'modules/Module.DynamicField.css',
+        'modules/Module.Form.css',
+        'modules/Module.FormSubmitArea.css',
+        'modules/Module.MessageInformation.css',
+        'modules/Module.Messages.css',
+        'modules/Module.PageHeadline.css',
+        'modules/Module.Sidebar.css',
+        'modules/Module.SidebarWidget.css',
+        'modules/Module.Signature.css',
+        'modules/Module.TicketHeader.css'
     ];
 
     # Customer Common CSS
@@ -1084,6 +1103,15 @@ sub LoadDefaults {
         'Core.Agent.Header.js',
         'Core.UI.Notification.js',
         'Core.Agent.Responsive.js',
+        'modules/application.js',
+        'modules/Module.Sidebar.js',
+        'modules/Module.Card.js',
+        'modules/Module.CustomerSelector.js',
+        'modules/Module.Form.js',
+        'modules/Module.Messages.js',
+        'modules/Module.Alert.js',
+        'modules/Module.SidebarWidget.js',
+        'Znuny.App.js'
     ];
 
     # --------------------------------------------------- #

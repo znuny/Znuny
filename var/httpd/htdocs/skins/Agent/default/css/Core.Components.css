@@ -282,20 +282,8 @@ handheld {
         border: 0;
         float: left;
         border-radius: var(--border-radius-xl);
-        background: var(--primary-color);
     }
 
-    .pill.Info,
-    .pill.Error,
-    .pill.Success,
-    .pill.Warning {
-        color: var(--main-font-color) !important;
-    }
-
-    .pill.contrast {
-        border: var(--border-width) solid var(--main-font-color);
-        color: var(--main-font-color) !important;
-    }
 
     /* **************************************** Scrollbar **************************************** */
     ::-webkit-scrollbar,
@@ -395,6 +383,10 @@ handheld {
         padding: 0;
     }
 
+    .ui-datepicker td:first-child,  .ui-datepicker th:first-child {
+        padding: 0;
+    }
+
     .ui-datepicker.ui-widget-content td a.ui-state-default {
         font-size: var(--font-size-sm);
     }
@@ -466,22 +458,6 @@ handheld {
         display: flex;
         justify-content: space-between;
         word-wrap: break-word;
-    }
-
-    /* .mentions-widget ul li:hover {
-        background: var(--main-font-color);
-        transition: var(--main-transition);
-    } */
-
-    .mentions-widget ul li .email-wrapper {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        gap: var(--gap-xs);
-    }
-
-    .mentions-widget ul li .email-wrapper span:nth-child(2) {
-        color: var(--gray-dark-semi);
     }
 
     /* **************************************** Buttons **************************************** */
@@ -695,6 +671,7 @@ handheld {
         position: relative;
         border-radius: var(--border-radius-xxs);
         gap: var(--gap-md);
+        margin-bottom: var(--margin-xl);
     }
 
     .MessageBrowser i,
@@ -733,6 +710,8 @@ handheld {
         font-size: 11px;
         text-align: center;
     }
+
+
 
     /* Error MessageBox*/
     .MessageBox.Error {
@@ -2063,7 +2042,13 @@ handheld {
         font-weight: var(--normal);
     }
 
-
-
+    /* Shared admin deployment notification layout. */
+    .DeploymentContainer {
+        display: flex;
+        white-space: nowrap;
+        gap: var(--gap-sm);
+        position: relative;
+        align-items: center;
+    }
 
 }

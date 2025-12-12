@@ -1,0 +1,113 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+.modSidebar {
+  height: 100%;
+}
+.modSidebar > .inner {
+  position: relative;
+  height: 100%;
+  width: 40px;
+  border-left: var(--border-width) var(--border-solid) var(--border-color);
+  transition: width 0.3s ease-in-out;
+  z-index: 99;
+}
+.modSidebar > .inner.sidebarActive {
+  width: 310px;
+}
+@media (max-width: 1199px) {
+  .modSidebar > .inner.sidebarActive {
+    width: 40px;
+  }
+}
+@media (min-width: 1200px) {
+  .modSidebar > .inner.sidebarActive {
+    width: 310px;
+  }
+}
+@media (min-width: 1400px) {
+  .modSidebar > .inner.sidebarActive {
+    width: 420px;
+  }
+}
+.modSidebar > .inner.sidebarActive .sidebar {
+  display: contents;
+}
+@media (max-width: 1199px) {
+  .modSidebar > .inner.sidebarActive .sidebar {
+    left: -270px;
+    z-index: 2;
+    box-shadow: 1px 1px 10px #ccc;
+  }
+}
+.modSidebar > .inner.sidebarActive .sidebarTrigger {
+  display: none;
+}
+.modSidebar > .inner .sidebar {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  background-color: white;
+  width: 310px;
+  display: none;
+}
+@media (min-width: 1400px) {
+  .modSidebar > .inner .sidebar {
+    width: 420px;
+  }
+}
+.modSidebar > .inner .sidebarTrigger {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  background-color: white;
+  width: 40px;
+}
+.modSidebar > .inner .sidebarTrigger::before {
+  content: "";
+  background-image: url(../../img/icons/arrow-left.svg);
+  width: 8px;
+  height: 14px;
+  position: absolute;
+  right: 17px;
+  top: 11px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.modSidebar > .inner .sidebarTrigger:hover {
+  cursor: pointer;
+  background-color: rgba(234, 234, 238, 0.8);
+}
+.modSidebar > .inner .sidebarTitle {
+  background-color: var(--background-quarternary-color);
+  border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+  padding: 10px 15px;
+  position: relative;
+}
+.modSidebar > .inner .sidebarTitle::before {
+  content: "";
+  background-image: url(../../img/icons/arrow-left.svg);
+  width: 8px;
+  height: 14px;
+  position: absolute;
+  right: 20px;
+  top: 12px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: rotate(180deg);
+}
+.modSidebar > .inner .sidebarTitle h2 {
+  font-size: 12px;
+}
+.modSidebar > .inner .sidebarTitle:hover {
+  cursor: pointer;
+  background-color: rgba(234, 234, 238, 0.8);
+}
+
+/*# sourceMappingURL=Module.Sidebar.css.map */

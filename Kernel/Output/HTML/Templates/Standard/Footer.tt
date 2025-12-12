@@ -7,6 +7,9 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
+[% INCLUDE "Modules/Messages.tt" %]
+
+
 <div id="Footer" class="ARIARoleContentinfo">
 
 [% IF !Config("Secure::DisableBanner") %]

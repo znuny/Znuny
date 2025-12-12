@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.870152855993564;
+    $Self->{Completeness}        = 0.862438089151622;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -711,6 +711,9 @@ sub Data {
         'Add Job' => 'Dodaj posao',
         'Filter for Jobs' => 'Filter za poslove',
         'Filter for jobs' => 'Filter za poslove',
+        'Upload a file in YAML format (as provided by the export) to import generic agent jobs.' =>
+            '',
+        'Overwrite existing generic agents?' => '',
         'Generic Agent Job Management' => 'Upravljanje poslovima generičkog operatera',
         'Edit Job' => 'Uredi posao',
         'Run Job' => 'Pokreni posao',
@@ -1620,6 +1623,9 @@ sub Data {
         'Add PostMaster Filter' => 'Dodaj PostMaster filter',
         'Filter for PostMaster Filters' => 'Filter za PostMaster filtere',
         'Filter for PostMaster filters' => 'Filter za PostMaster filtere',
+        'Upload a file in YAML format (as provided by the export) to import postmaster filters.' =>
+            '',
+        'Overwrite existing postmaster filters?' => '',
         'To dispatch or filter incoming emails based on email headers. Matching using Regular Expressions is also possible.' =>
             'Radi otpreme ili filtriranja dolaznih imejlova na osnovu zaglavlja. Poklapanje pomoću regularnih izraza je takođe moguće.',
         'If you want to match only the email address, use EMAILADDRESS:info@example.com in From, To or Cc.' =>
@@ -2015,6 +2021,28 @@ sub Data {
         'Run Query' => 'Pokreni upit',
         '%s Results' => '%s Rezultati',
         'Query is executed.' => 'Upit je izvršen.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+        'Add Outbound Email Profile' => '',
+        'Filter for outbound email profiles' => '',
+        'Manage Outbound Email Profiles' => '',
+        'Update Outbound Email Profile' => '',
+        'Email addresses' => '',
+        'Fallback' => '',
+        'Email addresses have to be configured!' => '',
+        'yes' => 'da',
+        'no' => 'ne',
+        'Delete outbound email profile' => '',
+        'Command' => '',
+        'Port' => 'Port',
+        'Enter a number between 1 and 65535.' => '',
+        'Port to use for given host (if non-standard port).' => '',
+        'Enter a number between 1 and 999.' => '',
+        'Timeout (in seconds) for connection to host.' => '',
+        'Skip SSL verification' => '',
+        'Select to make this the fallback/default config for any email address not configured in other outbound email profiles. Only one outbound email profile can be the fallback.' =>
+            '',
+        'Edit current fallback outbound email profile (host %s).' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
         'Add Service' => 'Dodaj uslugu',
@@ -2628,6 +2656,7 @@ sub Data {
         'Change Responsible of %s%s%s' => 'Promeni odgovornog za %s%s%s',
         'The ticket has been locked' => 'Tiket je zaključan.',
         'Ticket Settings' => 'Podešavanje tiketa',
+        'Customer user' => 'Klijent korisnik',
         'Service invalid.' => 'Nevažeća usluga.',
         'SLA invalid.' => 'Nevažeći SLA.',
         'Team Data' => '',
@@ -2680,45 +2709,44 @@ sub Data {
         'Execute Bulk Action' => 'Izvrši masovnu akciju',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
-        'Compose Answer for %s%s%s' => 'Napiši odgovor za %s%s%s',
         'Date Invalid!' => 'Neispravan datum!',
-        'Select one or more recipients from the customer user address book.' =>
-            'Odaberite jednog ili više primaoca iz adresara klijent korisnika.',
-        'Customer user address book' => 'Adresar klijent korisnika',
-        'This address is registered as system address and cannot be used: %s' =>
-            'Ova adresa je registrovana kao sistemska i ne može biti korišćena: %s',
-        'Please include at least one recipient' => 'Molimo da uključite bar jednog primaoca',
-        'Remove Ticket Customer' => 'Ukloni klijent sa tiketa **',
         'Please remove this entry and enter a new one with the correct value.' =>
             'Molimo da uklonite ovaj unos i unesete nov sa ispravnom vrednošću.',
         'This address already exists on the address list.' => 'Ova adresa već postoji u listi.',
-        'Remove Cc' => 'Ukloni Cc',
+        'Search for customer' => '',
+        'Open address book' => '',
+        'Address book' => '',
+        'Customer suggestions' => '',
+        'Please include at least one recipient' => 'Molimo da uključite bar jednog primaoca',
+        'This address is registered as system address and cannot be used: %s' =>
+            'Ova adresa je registrovana kao sistemska i ne može biti korišćena: %s',
         'Bcc' => 'Bcc',
-        'Remove Bcc' => 'Ukloni Bcc',
+        'Undo & close' => 'Odustani & zatvori',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
         'Change Customer of %s%s%s' => 'Promeni klijenta za %s%s%s',
         'Customer Information' => 'Informacije o klijentu',
-        'Customer user' => 'Klijent korisnik',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
         'Create New Email Ticket' => 'Otvori novi imejl tiket',
-        'Example Template' => 'Primer šablona',
         'To customer user' => 'Za klijenta korisnika',
         'Please include at least one customer user for the ticket.' => 'Molimo vas uključite barem jednog klijenta korisnika za tiket.',
-        'Select this customer as the main customer.' => 'Označi ovog klijenta kao glavnog klijenta.',
-        'Remove Ticket Customer User' => 'Ukloni tiket klijenta korisnika **',
         'From queue' => 'iz reda',
         'Get all' => 'Uzmi sve',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
-        'Outbound Email for %s%s%s' => 'Odlazni imejl za %s%s%s',
+        'Undo & Close' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => 'Pošalji ponovo imejl za %s %s %s',
         'All fields marked with an asterisk (*) are mandatory.' => 'Sva polja označena zvezdicom (*) su obavezna.',
         'Cancel & close' => 'Poništi & zatvori',
-        'Undo & close' => 'Odustani & zatvori',
+        'Select one or more recipients from the customer user address book.' =>
+            'Odaberite jednog ili više primaoca iz adresara klijent korisnika.',
+        'Customer user address book' => 'Adresar klijent korisnika',
+        'Remove Ticket Customer' => 'Ukloni klijent sa tiketa **',
+        'Remove Cc' => 'Ukloni Cc',
+        'Remove Bcc' => 'Ukloni Bcc',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s/%s)!' => 'Tiket %s: vreme odziva je isteklo (%s/%s)!',
@@ -2727,9 +2755,6 @@ sub Data {
         'Ticket %s: update time will be over in %s/%s!' => 'Tiket %s: vreme ažuriranja ističe za %s/%s!',
         'Ticket %s: solution time is over (%s/%s)!' => 'Tiket %s: vreme rešavanja je isteklo (%s/%s)!',
         'Ticket %s: solution time will be over in %s/%s!' => 'Tiket %s: vreme rešavanja ističe za %s/%s!',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketForward.tt
-        'Forward %s%s%s' => 'Prosledi %s%s%s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => 'Istorijat od %s%s%s',
@@ -2797,9 +2822,6 @@ sub Data {
         'Please include at least one customer for the ticket.' => 'Molimo da uključite bar jednog klijenta za tiket.',
         'To queue' => 'U red',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhoneCommon.tt
-        'Phone Call for %s%s%s' => 'Poziv za %s%s%s',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPlain.tt
         'View Email Plain Text for %s%s%s' => 'Prikaz imejla kao običan tekst za %s%s%s',
         'Plain' => 'Neformatirano',
@@ -2853,12 +2875,12 @@ sub Data {
         'Save filter settings as default' => 'Sačuvaj podešavanja filtera kao podrazumevana',
         'Event Type' => 'Tip događaja',
         'Save as default' => 'Sačuvaj kao podrazumevano',
-        'Drafts' => 'Nacrti',
-        'by' => 'od',
         'Change Queue' => 'Promeni Red',
         'There are no dialogs available at this point in the process.' =>
             'U ovom trenutku nema slobodnih dijaloga u procesu.',
         'This item has no articles yet.' => 'Ova stavka još uvek nema člkanke.',
+        'Drafts' => 'Nacrti',
+        'by' => 'od',
         'Article Overview - %s Article(s)' => 'Pregled članaka - %s članak(a)',
         'Page %s' => 'Strana %s',
         'Add Filter' => 'Dodaj Filter',
@@ -3156,7 +3178,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBoracle.tt
         'SID' => 'SID',
-        'Port' => 'Port',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerFinish.tt
         'To be able to use Znuny you have to enter the following line in your command line (Terminal/Shell) as root.' =>
@@ -3498,6 +3519,11 @@ sub Data {
         'Do you really want to reset this setting to it\'s default value?' =>
             'Da li stvarno želite da poništite ovo podešavanje na njegovu podrazumevanu vrednost?',
 
+        # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DirtyCheck.html.tmpl
+        'You have undeployed settings:' => '',
+        'Standard Deploy' => '',
+        'Quick Deploy' => '',
+
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/HelpDialog.html.tmpl
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.' =>
             'Možete odabrati kategoriju za ograničavanje navigacionih stavki ispod. Čim odaberete kategoriju, navigacija će biti osvežena.',
@@ -3725,6 +3751,17 @@ sub Data {
         'Select at least one recipient.' => 'Izaberite bar jednog primaoca.',
 
         # Perl Module: Kernel/Modules/AdminGenericAgent.pm
+        'Error exporting generic agent job with Name %s!' => '',
+        'Error creating the generic agent job.' => '',
+        'Jobs could not be imported due to an unknown error. Please check logs for more information.' =>
+            '',
+        'The following generic agent jobs have been added successfully: %s.' =>
+            '',
+        'The following generic agent jobs have been updated successfully: %s.' =>
+            '',
+        'The following generic agent jobs were not updated: %s.' => '',
+        'Errors adding/updating the following generic agent jobs: %s. Please check logs for more information.' =>
+            '',
         'minute(s)' => 'minut(i)',
         'hour(s)' => 'sat(i)',
         'Time unit' => 'Jedinica vremena',
@@ -3735,7 +3772,6 @@ sub Data {
         'archive tickets' => 'arhiviraj tikete',
         'restore tickets from archive' => 'vrati tikete iz arhive',
         'Need Profile!' => 'Neophodan Profile!',
-        'Got no values to check.' => 'Nema vrednosti za proveru.',
         'Please remove the following words because they cannot be used for the ticket selection:' =>
             'Molimo da uklonite sledeće reči jer se ne mogu koristiti za izbor tiketa:',
 
@@ -3957,6 +3993,17 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
         'No such filter: %s' => 'Nema takvog filtera: %s',
+        'Error exporting postmaster filter with Name %s!' => '',
+        'Error creating the postmaster filter.' => '',
+        'Filters could not be imported due to an unknown error. Please check logs for more information.' =>
+            '',
+        'The following postmaster filters have been added successfully: %s.' =>
+            '',
+        'The following postmaster filters have been updated successfully: %s.' =>
+            '',
+        'The following postmaster filters were not updated: %s.' => '',
+        'Errors adding/updating the following postmaster filters: %s. Please check logs for more information.' =>
+            '',
 
         # Perl Module: Kernel/Modules/AdminPriority.pm
         'Priority added!' => 'Dodat prioritet!',
@@ -4107,6 +4154,11 @@ sub Data {
         'Errors adding/updating the following salutations: %s. Please check logs for more information.' =>
             '',
 
+        # Perl Module: Kernel/Modules/AdminSendmailConfig.pm
+        'Outbound email profile updated!' => '',
+        'Configuration option \'SendmailModule\' has to be set to \'Kernel::System::Email::MultiSendmail\' to be able to use the outbound email profiles managed here.' =>
+            '',
+
         # Perl Module: Kernel/Modules/AdminSignature.pm
         'Signature updated!' => 'Ažuriran potpis!',
         'Signature added!' => 'Dodat potpis!',
@@ -4141,6 +4193,7 @@ sub Data {
         'Category Search' => 'Pretraga kategorija',
 
         # Perl Module: Kernel/Modules/AdminSystemConfigurationDeployment.pm
+        'Quick Deploy by' => '',
         'Some imported settings are not present in the current state of the configuration or it was not possible to update them. Please check the Znuny log for more information.' =>
             'Neka uvezena podešavanja nisu prisutna u trenutnoj konfiguraciji ili nije bilo moguće ažurirati ih. Molimo proverite Znuny log za više informacija.',
 
@@ -4531,12 +4584,14 @@ sub Data {
         'Need CustomerID!' => 'Neophodan CustomerID!',
         'My Tickets' => 'Moji tiketi',
         'Company Tickets' => 'Tiketi firmi',
+        'You have no permission or the ticket does not exist.' => '',
         'Untitled!' => 'Nema naslov!',
 
         # Perl Module: Kernel/Modules/CustomerTicketSearch.pm
         'Customer Realname' => 'Pravo ime klijenta',
         'Created within the last' => 'Kreirano u poslednjih',
         'Created more than ... ago' => 'Kreirano pre više od ...',
+        'Got no values to check.' => 'Nema vrednosti za proveru.',
         'Please remove the following words because they cannot be used for the search:' =>
             'Molimo da uklonite sledeće reči  jer se ne mogu koristiti za pretragu:',
 
@@ -4813,10 +4868,6 @@ sub Data {
         'You have %s invalid setting(s) deployed. Click here to show invalid settings.' =>
             'Imate %s raspoređeno(a) nevažeće(a) podešavanje(a). Kliknite ovde za prikaz nevažećih podešavanja.',
 
-        # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationIsDirtyCheck.pm
-        'You have undeployed settings, would you like to deploy them?' =>
-            'Imate neraspoređenih podešavanja, da li želite da ih rasporedite?',
-
         # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationOutOfSyncCheck.pm
         'The configuration is being updated, please be patient...' => 'Konfiguracija se osvežava, molimo sačekajte...',
         'There is an error updating the system configuration!' => 'Greška prilikom osvežavanja sistemske konfiguracije!',
@@ -5017,6 +5068,10 @@ sub Data {
         'The field content is too long!' => 'Sadržaj polja je predugačak!',
         'Maximum size is %s characters.' => 'Maksimalna veličina je %s karaktera.',
 
+        # Perl Module: Kernel/System/GenericAgent.pm
+        'Couldn\'t read Job configuration YAML file. Please make sure the file is valid.' =>
+            '',
+
         # Perl Module: Kernel/System/MailQueue.pm
         'Error while validating Message data.' => '',
         'Error while validating Sender email address.' => '',
@@ -5040,6 +5095,10 @@ sub Data {
         'File is not installed!' => 'Datoteka nije instalirana!',
         'File is different!' => 'Datoteka je različita!',
         'Can\'t read file!' => 'Nemoguće čitanje datoteke!',
+
+        # Perl Module: Kernel/System/PostMaster/Filter.pm
+        'Couldn\'t read Filter configuration YAML file. Please make sure the file is valid.' =>
+            '',
 
         # Perl Module: Kernel/System/ProcessManagement/DB/Process.pm
         'The process "%s" and all of its data has been imported successfully.' =>
@@ -5872,8 +5931,6 @@ sub Data {
             'Definiše modul koji prikazuje sve trenutno prijavljene operatere u interfejsu operatera.',
         'Defines the module that shows all the currently logged in customers in the agent interface.' =>
             'Definiše modul koji prikazuje sve trenutno prijavljene klijente u interfejsu operatera.',
-        'Defines the module to display a notification in the agent interface, if there are modified sysconfig settings that are not deployed yet.' =>
-            'Definiše modul za prikaz obaveštenja u interfejsu operatera, ako postoje promenjena ali neraspoređena podešavanja u sistemskoj konfiguraciji.',
         'Defines the module to display a notification in the agent interface, if there are invalid sysconfig settings deployed.' =>
             'Definiše modul za prikaz obaveštenja u interfejsu operatera, ako su raspoređena nevažeća podešavanja u sistemskoj konfiguraciji.',
         'Defines the module to display a notification in the agent interface, if the agent is logged in while having out-of-office active.' =>
@@ -6749,6 +6806,8 @@ sub Data {
         'Sets the queue in the ticket free text screen of a zoomed ticket in the agent interface.' =>
             'Postavlja red na prozoru slobodnog teksta tiketa na detaljnom prikazu tiketa u interfejsu operatera.',
         'Sets if queue must be selected by the agent.' => 'Definiše da li operater mora da odabere red.',
+        'Sets the customer user field in the agent interface.' => '',
+        'Sets the customer user field as mandatory.' => '',
         'Sets the ticket owner in the ticket free text screen of the agent interface.' =>
             'Postavlja vlasnika tiketa u prozoru slobodnog teksta tiketa u interfejsu operatera.',
         'Sets if ticket owner must be selected by the agent.' => 'Podešava ako vlasnik tiketa mora biti izabran od strane operatera.',
@@ -8090,6 +8149,8 @@ sub Data {
         'Define a process icon.' => '',
         'Defines which ContentTypes are permitted for the attachment preview.' =>
             '',
+        'Names of system config options with email addresses to also be selectable for an outbound email profile (besides system addresses).' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'nevažeći-privremeno',
@@ -8364,6 +8425,9 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SMIME.js
         'Do you really want to delete this certificate?' => 'Da li stvarno želite da obrišete ovaj sertifikat?',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SendmailConfig.js
+        'Do you really want to delete this outbound email profile?' => '',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SupportDataCollector.js
         'Generating...' => 'Generisanje...',
         'It was not possible to generate the Support Bundle.' => 'Nije moguće generisati Paket podrške.',
@@ -8474,8 +8538,6 @@ sub Data {
             'Izvinite ali ne možete isključiti sve metode za obaveštenja označena kao obavezna.',
         'Sorry, but you can\'t disable all methods for this notification.' =>
             'Izvinite ali ne možete isključiti sve metode za ovo obaveštenje.',
-        'Please note that at least one of the settings you have changed requires a page reload. Click here to reload the current screen.' =>
-            'Napominjemo da najmanje jedno podešavanje koje ste izmenili zahteva ponovno učitavanje stranice. Kliknite ovde za ponovno učitavanje ekrana.',
         'An unknown error occurred. Please contact the administrator.' =>
             'Dogodila se nepoznata greška. Molimo kontaktirajte administratora.',
 
@@ -8606,8 +8668,6 @@ sub Data {
             'Dogodila se nepoznata greška prilikom brisanja priloga. Molimo pokušajte ponovo. Ako se greška ponovo, molimo kontaktirajte vašeg administratora.',
 
         # JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
-        'yes' => 'da',
-        'no' => 'ne',
         'This is %s' => 'Ovo je %s',
         'Complex %s with %s arguments' => 'Kompleksan %s sa %s argumenata',
 
@@ -9047,6 +9107,7 @@ Vaša tehnička podrška
         'Manage System Configuration Deployments.' => 'Upravljanje rasporedima sistemske konfiguracije.',
         'Manage different calendars.' => 'Upravljanje različitim kalendarima.',
         'Manage existing sessions.' => 'Upravljanje postojećim sesijama.',
+        'Manage outbound email profiles.' => '',
         'Manage support data.' => 'Upravljanje podacima podrške.',
         'Manage system files.' => '',
         'Manage tasks triggered by event or time based execution.' => 'Upravlja zadacima pokrenutim od događaja ili na osnovu vremenskog izvršavanja.',
@@ -9102,6 +9163,7 @@ Vaša tehnička podrška
         'Out Of Office' => 'Van kancelarije',
         'Out Of Office Time' => 'Vreme van kancelarije',
         'Out of Office users.' => 'Korisnici van kancelarije.',
+        'Outbound Email Profiles' => '',
         'Overview Escalated Tickets.' => 'Pregled eskaliranih tiketa.',
         'Overview Refresh Time' => 'Pregled vremena osvežavanja',
         'Overview of all Tickets per assigned Queue.' => 'Pregled svih tiketa po dodeljenim redovima.',
@@ -9451,7 +9513,6 @@ Vaša tehnička podrška
         'Clone web service',
         'Close preview',
         'Close this dialog',
-        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9474,6 +9535,7 @@ Vaša tehnička podrška
         'Delete field',
         'Delete invoker',
         'Delete operation',
+        'Delete outbound email profile',
         'Delete this %s',
         'Delete this Attachment',
         'Delete this Event Trigger',
@@ -9510,6 +9572,7 @@ Vaša tehnička podrška
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
+        'Do you really want to delete this outbound email profile?',
         'Do you really want to delete this scheduled system maintenance?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
@@ -9611,7 +9674,6 @@ Vaša tehnička podrška
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
-        'Please note that at least one of the settings you have changed requires a page reload. Click here to reload the current screen.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
         'Please remove the following words from your search as they cannot be searched for:',
@@ -9624,6 +9686,7 @@ Vaša tehnička podrška
         'Previous',
         'Process state',
         'Queues',
+        'Quick Deploy',
         'Reload page',
         'Reload page (%ss)',
         'Remove',
@@ -9680,6 +9743,7 @@ Vaša tehnička podrška
         'Sorry, you can only upload one file here.',
         'Split',
         'Stacked',
+        'Standard Deploy',
         'Start date',
         'Status',
         'Stream',
@@ -9760,7 +9824,7 @@ Vaša tehnička podrška
         'Yes',
         'You can either have the affected settings updated automatically to reflect the changes you just made or do it on your own by pressing \'update manually\'.',
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.',
-        'You have undeployed settings, would you like to deploy them?',
+        'You have undeployed settings:',
         'activate to apply a descending sort',
         'activate to apply an ascending sort',
         'activate to remove the sort',
@@ -9770,6 +9834,7 @@ Vaša tehnička podrška
         'more',
         'no',
         'none',
+        'or',
         'sorting is disabled',
         'week',
         'yes',

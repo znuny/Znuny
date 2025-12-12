@@ -9,8 +9,7 @@ package Kernel::System::DynamicField::Driver::WebserviceDropdown;
 
 use strict;
 use warnings;
-
-use Data::UUID;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::System::DB;
@@ -23,6 +22,7 @@ our @ObjectDependencies = (
     'Kernel::System::DynamicField::Webservice',
     'Kernel::System::DynamicFieldValue',
     'Kernel::System::JSON',
+    'Kernel::System::Util',
 );
 
 sub ValueSet {
@@ -62,6 +62,7 @@ sub EditFieldRender {
     my ( $Self, %Param ) = @_;
 
     my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
+    my $UtilObject = $Kernel::OM->Get('Kernel::System::Util');
 
     # take config from field config
     my $FieldConfig = $Param{DynamicFieldConfig}->{Config};
@@ -195,8 +196,7 @@ EOF
     my $DynamicFieldFieldType = $Param{DynamicFieldConfig}->{FieldType};
     my $DynamicFieldSearch    = $FieldName . '_Search';
 
-    my $UUIDObject     = Data::UUID->new();
-    my $InputFieldUUID = lc $UUIDObject->create_str();
+    my $InputFieldUUID = $UtilObject->CreateUUIDString();
 
     $HTMLString
         =~ s{(<select )}{$1 data-dynamic-field-name="$DynamicFieldName" data-dynamic-field-type="$DynamicFieldFieldType" data-selected-value-field-name="$FieldName" data-autocomplete-field-name="$DynamicFieldSearch" data-autocomplete-min-length="$AutocompleteMinLength" data-query-delay="$QueryDelay" data-default-search-term="$DefaultSearchTerm" data-ticket-id="$TicketID" data-input-field-uuid="$InputFieldUUID" };

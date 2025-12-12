@@ -135,6 +135,7 @@ The following persons contributed to Znuny:
 * Thomas Raith <thomas.raith@otrs.com>
 * Thomas Wouters <thomas@sijn.org>
 * Thorsten Eckel <te@znuny.com>
+* Tim Binder <tim.binder@stbt.de>
 * Tim Püttmanns <tim.puettmanns@maxence.de>
 * Timo Gurr <timo.gurr@gmail.com>
 * Torsten Thau <Torsten.Thau@cape-it.de>

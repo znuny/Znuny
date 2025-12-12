@@ -32,6 +32,23 @@ sub new {
     return $Self;
 }
 
+sub GetAvailableConfigOptions {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    my $DefaultCMD = $ConfigObject->Get('SendmailModule::CMD');
+
+    my %ConfigOptions = (
+        CMD => {
+            Required     => 1,
+            DefaultValue => $DefaultCMD,
+        },
+    );
+
+    return \%ConfigOptions;
+}
+
 sub Send {
     my ( $Self, %Param ) = @_;
 

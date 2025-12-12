@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D-%M-%Y';
     $Self->{DateInputFormat}     = '%D-%M-%Y';
     $Self->{DateInputFormatLong} = '%D-%M-%Y - %T';
-    $Self->{Completeness}        = 0.483668543845535;
+    $Self->{Completeness}        = 0.479789103690685;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -711,6 +711,9 @@ sub Data {
         'Add Job' => 'Taak toevoegen',
         'Filter for Jobs' => '',
         'Filter for jobs' => '',
+        'Upload a file in YAML format (as provided by the export) to import generic agent jobs.' =>
+            '',
+        'Overwrite existing generic agents?' => '',
         'Generic Agent Job Management' => 'Generieke Agent Taakbeheer',
         'Edit Job' => 'Bewerk taak',
         'Run Job' => 'Voer taak uit',
@@ -1620,6 +1623,9 @@ sub Data {
         'Add PostMaster Filter' => 'Nieuw e-mail filter',
         'Filter for PostMaster Filters' => '',
         'Filter for PostMaster filters' => '',
+        'Upload a file in YAML format (as provided by the export) to import postmaster filters.' =>
+            '',
+        'Overwrite existing postmaster filters?' => '',
         'To dispatch or filter incoming emails based on email headers. Matching using Regular Expressions is also possible.' =>
             'Om inkomende e-mails te routeren op basis van e-mail headers. Matching op tekst of met behulp van regular expressions.',
         'If you want to match only the email address, use EMAILADDRESS:info@example.com in From, To or Cc.' =>
@@ -2015,6 +2021,28 @@ sub Data {
         'Run Query' => 'Uitvoeren',
         '%s Results' => '',
         'Query is executed.' => 'Query is uitgevoerd.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+        'Add Outbound Email Profile' => '',
+        'Filter for outbound email profiles' => '',
+        'Manage Outbound Email Profiles' => '',
+        'Update Outbound Email Profile' => '',
+        'Email addresses' => '',
+        'Fallback' => '',
+        'Email addresses have to be configured!' => '',
+        'yes' => 'ja',
+        'no' => 'nee',
+        'Delete outbound email profile' => '',
+        'Command' => '',
+        'Port' => 'Poort',
+        'Enter a number between 1 and 65535.' => '',
+        'Port to use for given host (if non-standard port).' => '',
+        'Enter a number between 1 and 999.' => '',
+        'Timeout (in seconds) for connection to host.' => '',
+        'Skip SSL verification' => '',
+        'Select to make this the fallback/default config for any email address not configured in other outbound email profiles. Only one outbound email profile can be the fallback.' =>
+            '',
+        'Edit current fallback outbound email profile (host %s).' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
         'Add Service' => 'Nieuwe service',
@@ -2628,6 +2656,7 @@ sub Data {
         'Change Responsible of %s%s%s' => 'Wijzig de verantwoordelijke van %s%s%s',
         'The ticket has been locked' => 'Het ticket is vergrendeld',
         'Ticket Settings' => 'Ticket instellingen',
+        'Customer user' => 'Klant',
         'Service invalid.' => 'Service is ongeldig.',
         'SLA invalid.' => 'SLA ongeldig',
         'Team Data' => '',
@@ -2680,45 +2709,44 @@ sub Data {
         'Execute Bulk Action' => 'Bulkactie uitvoeren',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
-        'Compose Answer for %s%s%s' => '',
         'Date Invalid!' => 'Datum ongeldig.',
-        'Select one or more recipients from the customer user address book.' =>
-            '',
-        'Customer user address book' => 'Klantgebruiker adresboek',
-        'This address is registered as system address and cannot be used: %s' =>
-            'Dit adres is geregistreerd als een systee adres en kan niet worden gebruikt.',
-        'Please include at least one recipient' => 'Voeg tenminste één ontvanger toe',
-        'Remove Ticket Customer' => 'Verwijder ',
         'Please remove this entry and enter a new one with the correct value.' =>
             'Verwijder deze en geef een nieuwe met een correcte waarde.',
         'This address already exists on the address list.' => 'Dit adres is al toegevoegd.',
-        'Remove Cc' => 'Verwijder CC',
+        'Search for customer' => '',
+        'Open address book' => '',
+        'Address book' => '',
+        'Customer suggestions' => '',
+        'Please include at least one recipient' => 'Voeg tenminste één ontvanger toe',
+        'This address is registered as system address and cannot be used: %s' =>
+            'Dit adres is geregistreerd als een systee adres en kan niet worden gebruikt.',
         'Bcc' => 'Bcc',
-        'Remove Bcc' => 'Verwijder BCC',
+        'Undo & close' => 'Ongedaan maken & sluiten',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
         'Change Customer of %s%s%s' => 'Wijzig klant van %s%s%s',
         'Customer Information' => 'Klantinformatie',
-        'Customer user' => 'Klant',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
         'Create New Email Ticket' => 'Maak nieuw e-mail ticket',
-        'Example Template' => 'Voorbeeld Template',
         'To customer user' => 'Aan klant',
         'Please include at least one customer user for the ticket.' => 'Selecteer tenminste een klant voor dit ticket.',
-        'Select this customer as the main customer.' => 'Selecteer deze klant als hoofd-klant',
-        'Remove Ticket Customer User' => 'Verwijder klant van ticket',
         'From queue' => 'In wachtrij',
         'Get all' => 'Gebruik alle',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
-        'Outbound Email for %s%s%s' => '',
+        'Undo & Close' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => '',
         'All fields marked with an asterisk (*) are mandatory.' => 'Alle velden met een asterisk (*) zijn verplicht.',
         'Cancel & close' => 'Annuleren & sluiten',
-        'Undo & close' => 'Ongedaan maken & sluiten',
+        'Select one or more recipients from the customer user address book.' =>
+            '',
+        'Customer user address book' => 'Klantgebruiker adresboek',
+        'Remove Ticket Customer' => 'Verwijder ',
+        'Remove Cc' => 'Verwijder CC',
+        'Remove Bcc' => 'Verwijder BCC',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s/%s)!' => 'Ticket %s: eerste antwoord tijd is voorbij (%s/%s)!',
@@ -2727,9 +2755,6 @@ sub Data {
         'Ticket %s: update time will be over in %s/%s!' => 'Ticket $s: vervolg tijd zal voorbij zijn binnen %s.',
         'Ticket %s: solution time is over (%s/%s)!' => 'Ticket %s: oplossing tijd is voorbij (%s/%s)!',
         'Ticket %s: solution time will be over in %s/%s!' => 'Ticket %s: oplossing tijd zal voorbij zijn binnen %s/%s!',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketForward.tt
-        'Forward %s%s%s' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => '',
@@ -2797,9 +2822,6 @@ sub Data {
         'Please include at least one customer for the ticket.' => 'Voeg ten minste één klant toe voor dit ticket.',
         'To queue' => 'In wachtrij',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhoneCommon.tt
-        'Phone Call for %s%s%s' => '',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPlain.tt
         'View Email Plain Text for %s%s%s' => '',
         'Plain' => 'Zonder opmaak',
@@ -2853,12 +2875,12 @@ sub Data {
         'Save filter settings as default' => 'Sla filter op als standaard',
         'Event Type' => 'Gebeurtenis type',
         'Save as default' => 'Opslaan als standaard',
-        'Drafts' => 'Concepten',
-        'by' => 'door',
         'Change Queue' => 'Wijzig wachtrij',
         'There are no dialogs available at this point in the process.' =>
             'Op dit moment zijn er geen dialogen beschikbaar.',
         'This item has no articles yet.' => 'Dit item heeft nog geen interacties.',
+        'Drafts' => 'Concepten',
+        'by' => 'door',
         'Article Overview - %s Article(s)' => '',
         'Page %s' => '',
         'Add Filter' => 'Nieuw filter',
@@ -3156,7 +3178,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBoracle.tt
         'SID' => 'SID',
-        'Port' => 'Poort',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerFinish.tt
         'To be able to use Znuny you have to enter the following line in your command line (Terminal/Shell) as root.' =>
@@ -3498,6 +3519,11 @@ sub Data {
         'Do you really want to reset this setting to it\'s default value?' =>
             '',
 
+        # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DirtyCheck.html.tmpl
+        'You have undeployed settings:' => '',
+        'Standard Deploy' => '',
+        'Quick Deploy' => '',
+
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/HelpDialog.html.tmpl
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.' =>
             '',
@@ -3725,6 +3751,17 @@ sub Data {
         'Select at least one recipient.' => 'Selecteer minimaal één ontvanger.',
 
         # Perl Module: Kernel/Modules/AdminGenericAgent.pm
+        'Error exporting generic agent job with Name %s!' => '',
+        'Error creating the generic agent job.' => '',
+        'Jobs could not be imported due to an unknown error. Please check logs for more information.' =>
+            '',
+        'The following generic agent jobs have been added successfully: %s.' =>
+            '',
+        'The following generic agent jobs have been updated successfully: %s.' =>
+            '',
+        'The following generic agent jobs were not updated: %s.' => '',
+        'Errors adding/updating the following generic agent jobs: %s. Please check logs for more information.' =>
+            '',
         'minute(s)' => 'minu(u)t(en)',
         'hour(s)' => 'u(u)r(en)',
         'Time unit' => 'Tijd',
@@ -3735,7 +3772,6 @@ sub Data {
         'archive tickets' => 'archiveer tickets',
         'restore tickets from archive' => 'tickets van archief herstellen',
         'Need Profile!' => 'Profiel vereist!',
-        'Got no values to check.' => 'Had geen waarden om te controleren',
         'Please remove the following words because they cannot be used for the ticket selection:' =>
             'Verwijder de volgende woorden omdat ze niet kunnen worden gebruikt voor het selecteren van een ticket:',
 
@@ -3957,6 +3993,17 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
         'No such filter: %s' => 'Filter %s bestaat niet',
+        'Error exporting postmaster filter with Name %s!' => '',
+        'Error creating the postmaster filter.' => '',
+        'Filters could not be imported due to an unknown error. Please check logs for more information.' =>
+            '',
+        'The following postmaster filters have been added successfully: %s.' =>
+            '',
+        'The following postmaster filters have been updated successfully: %s.' =>
+            '',
+        'The following postmaster filters were not updated: %s.' => '',
+        'Errors adding/updating the following postmaster filters: %s. Please check logs for more information.' =>
+            '',
 
         # Perl Module: Kernel/Modules/AdminPriority.pm
         'Priority added!' => 'Prioriteit toegevoegd.',
@@ -4107,6 +4154,11 @@ sub Data {
         'Errors adding/updating the following salutations: %s. Please check logs for more information.' =>
             '',
 
+        # Perl Module: Kernel/Modules/AdminSendmailConfig.pm
+        'Outbound email profile updated!' => '',
+        'Configuration option \'SendmailModule\' has to be set to \'Kernel::System::Email::MultiSendmail\' to be able to use the outbound email profiles managed here.' =>
+            '',
+
         # Perl Module: Kernel/Modules/AdminSignature.pm
         'Signature updated!' => 'Handtekening bijgewerkt.',
         'Signature added!' => 'Handtekening toegevoegd.',
@@ -4141,6 +4193,7 @@ sub Data {
         'Category Search' => 'Categorie zoeken',
 
         # Perl Module: Kernel/Modules/AdminSystemConfigurationDeployment.pm
+        'Quick Deploy by' => '',
         'Some imported settings are not present in the current state of the configuration or it was not possible to update them. Please check the Znuny log for more information.' =>
             'Sommige geïmporteerde instellingen zijn niet aanwezig in de huidige  configuratie of het was niet mogelijk om deze bij te werken. Raadpleeg het Znuny-logboek voor meer informatie.',
 
@@ -4531,12 +4584,14 @@ sub Data {
         'Need CustomerID!' => '',
         'My Tickets' => 'Mijn tickets',
         'Company Tickets' => 'Tickets van groep',
+        'You have no permission or the ticket does not exist.' => '',
         'Untitled!' => '',
 
         # Perl Module: Kernel/Modules/CustomerTicketSearch.pm
         'Customer Realname' => 'Werkelijke naam van klant',
         'Created within the last' => 'Aangemaakt in de laatste',
         'Created more than ... ago' => 'Aangemaakt langer dan ... geleden',
+        'Got no values to check.' => 'Had geen waarden om te controleren',
         'Please remove the following words because they cannot be used for the search:' =>
             'Verwijder de volgende woorden van je zoekactie omdat daar niet op gezocht kan worden:',
 
@@ -4813,10 +4868,6 @@ sub Data {
         'You have %s invalid setting(s) deployed. Click here to show invalid settings.' =>
             '',
 
-        # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationIsDirtyCheck.pm
-        'You have undeployed settings, would you like to deploy them?' =>
-            '',
-
         # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationOutOfSyncCheck.pm
         'The configuration is being updated, please be patient...' => '',
         'There is an error updating the system configuration!' => '',
@@ -5017,6 +5068,10 @@ sub Data {
         'The field content is too long!' => 'De inhoud van het veld is te lang!',
         'Maximum size is %s characters.' => 'De maximumlengte bedraagt %s karakters.',
 
+        # Perl Module: Kernel/System/GenericAgent.pm
+        'Couldn\'t read Job configuration YAML file. Please make sure the file is valid.' =>
+            '',
+
         # Perl Module: Kernel/System/MailQueue.pm
         'Error while validating Message data.' => '',
         'Error while validating Sender email address.' => '',
@@ -5040,6 +5095,10 @@ sub Data {
         'File is not installed!' => '',
         'File is different!' => '',
         'Can\'t read file!' => '',
+
+        # Perl Module: Kernel/System/PostMaster/Filter.pm
+        'Couldn\'t read Filter configuration YAML file. Please make sure the file is valid.' =>
+            '',
 
         # Perl Module: Kernel/System/ProcessManagement/DB/Process.pm
         'The process "%s" and all of its data has been imported successfully.' =>
@@ -5871,8 +5930,6 @@ sub Data {
         'Defines the module that shows all the currently logged in agents in the agent interface.' =>
             '',
         'Defines the module that shows all the currently logged in customers in the agent interface.' =>
-            '',
-        'Defines the module to display a notification in the agent interface, if there are modified sysconfig settings that are not deployed yet.' =>
             '',
         'Defines the module to display a notification in the agent interface, if there are invalid sysconfig settings deployed.' =>
             '',
@@ -6749,6 +6806,8 @@ sub Data {
         'Sets the queue in the ticket free text screen of a zoomed ticket in the agent interface.' =>
             '',
         'Sets if queue must be selected by the agent.' => '',
+        'Sets the customer user field in the agent interface.' => '',
+        'Sets the customer user field as mandatory.' => '',
         'Sets the ticket owner in the ticket free text screen of the agent interface.' =>
             '',
         'Sets if ticket owner must be selected by the agent.' => '',
@@ -8090,6 +8149,8 @@ sub Data {
         'Define a process icon.' => '',
         'Defines which ContentTypes are permitted for the attachment preview.' =>
             '',
+        'Names of system config options with email addresses to also be selectable for an outbound email profile (besides system addresses).' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'tijdelijk ongeldig',
@@ -8364,6 +8425,9 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SMIME.js
         'Do you really want to delete this certificate?' => '',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SendmailConfig.js
+        'Do you really want to delete this outbound email profile?' => '',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SupportDataCollector.js
         'Generating...' => 'Genereren...',
         'It was not possible to generate the Support Bundle.' => 'Het was niet mogelijk om de Support Bundel te genereren',
@@ -8474,8 +8538,6 @@ sub Data {
             'Helaas, maar je kun niet alle methoden voor notificatie markeren als verplicht.',
         'Sorry, but you can\'t disable all methods for this notification.' =>
             'Helaas is het niet mogelijk om alle methodes voor deze notificatie uit te zetten.',
-        'Please note that at least one of the settings you have changed requires a page reload. Click here to reload the current screen.' =>
-            '',
         'An unknown error occurred. Please contact the administrator.' =>
             '',
 
@@ -8606,8 +8668,6 @@ sub Data {
             '',
 
         # JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
-        'yes' => 'ja',
-        'no' => 'nee',
         'This is %s' => '',
         'Complex %s with %s arguments' => '',
 
@@ -9047,6 +9107,7 @@ Het Helpdesk Team
         'Manage System Configuration Deployments.' => '',
         'Manage different calendars.' => '',
         'Manage existing sessions.' => 'Beheer sessies van klanten en gebruikers.',
+        'Manage outbound email profiles.' => '',
         'Manage support data.' => 'Beheer support gegevens.',
         'Manage system files.' => '',
         'Manage tasks triggered by event or time based execution.' => 'Beheer van taken op basis van events of tijdschema\'s',
@@ -9102,6 +9163,7 @@ Het Helpdesk Team
         'Out Of Office' => 'Afwezig',
         'Out Of Office Time' => 'Afwezigheid',
         'Out of Office users.' => '',
+        'Outbound Email Profiles' => '',
         'Overview Escalated Tickets.' => 'Overzicht geëscaleerde tickets.',
         'Overview Refresh Time' => 'Verversingsinterval overzichten',
         'Overview of all Tickets per assigned Queue.' => '',
@@ -9451,7 +9513,6 @@ Het Helpdesk Team
         'Clone web service',
         'Close preview',
         'Close this dialog',
-        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9474,6 +9535,7 @@ Het Helpdesk Team
         'Delete field',
         'Delete invoker',
         'Delete operation',
+        'Delete outbound email profile',
         'Delete this %s',
         'Delete this Attachment',
         'Delete this Event Trigger',
@@ -9510,6 +9572,7 @@ Het Helpdesk Team
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
+        'Do you really want to delete this outbound email profile?',
         'Do you really want to delete this scheduled system maintenance?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
@@ -9611,7 +9674,6 @@ Het Helpdesk Team
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
-        'Please note that at least one of the settings you have changed requires a page reload. Click here to reload the current screen.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
         'Please remove the following words from your search as they cannot be searched for:',
@@ -9624,6 +9686,7 @@ Het Helpdesk Team
         'Previous',
         'Process state',
         'Queues',
+        'Quick Deploy',
         'Reload page',
         'Reload page (%ss)',
         'Remove',
@@ -9680,6 +9743,7 @@ Het Helpdesk Team
         'Sorry, you can only upload one file here.',
         'Split',
         'Stacked',
+        'Standard Deploy',
         'Start date',
         'Status',
         'Stream',
@@ -9760,7 +9824,7 @@ Het Helpdesk Team
         'Yes',
         'You can either have the affected settings updated automatically to reflect the changes you just made or do it on your own by pressing \'update manually\'.',
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.',
-        'You have undeployed settings, would you like to deploy them?',
+        'You have undeployed settings:',
         'activate to apply a descending sort',
         'activate to apply an ascending sort',
         'activate to remove the sort',
@@ -9770,6 +9834,7 @@ Het Helpdesk Team
         'more',
         'no',
         'none',
+        'or',
         'sorting is disabled',
         'week',
         'yes',

@@ -32,6 +32,12 @@ Uninstalls code that was merged from packages into Znuny.
 sub Run {
     my ( $Self, %Param ) = @_;
 
+    my @PackageNames = (
+        'Znuny-MultiSendmail',
+        'Znuny-CopyTicketNumber',
+        'Znuny-AgentTicketActionCommonCustomer',
+    );
+
     my $CacheObject   = $Kernel::OM->Get('Kernel::System::Cache');
     my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
 
@@ -44,10 +50,6 @@ sub Run {
     );
     $CacheObject->CleanUp(
         Type => 'XMLParse',
-    );
-
-    my @PackageNames = (
-        'Znuny-CopyTicketNumber',
     );
 
     PACKAGENAME:

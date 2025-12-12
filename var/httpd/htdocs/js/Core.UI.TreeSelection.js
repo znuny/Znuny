@@ -266,7 +266,10 @@ Core.UI.TreeSelection = (function (TargetNS) {
 
         // Check if there are elements to select from
         if (ElementCount === 1 && $SelectObj.find('option').text() === '-') {
-            alert(Core.Language.Translate('There are currently no elements available to select from.'));
+            Core.UI.Dialog.ShowAlert(
+                Core.Language.Translate('An error occurred'),
+                Core.Language.Translate('There are currently no elements available to select from.')
+            );
             return false;
         }
 

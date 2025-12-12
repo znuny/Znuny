@@ -1,0 +1,22 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+.modCustomerInformation > .inner .WidgetSimple {
+  border: 0;
+  border-radius: unset;
+}
+.modCustomerInformation > .inner .WidgetSimple .Content {
+  border-radius: unset;
+  overflow: unset;
+  padding: 0 !important;
+}
+.modCustomerInformation > .inner .WidgetSimple .Content fieldset:not(.Hidden) {
+  padding: 0;
+  display: unset;
+}
+
+/*# sourceMappingURL=Module.CustomerInformation.css.map */

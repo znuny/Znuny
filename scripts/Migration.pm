@@ -70,7 +70,7 @@ sub Run {
     }
 
     my $SuccessfulMigration = 1;
-    my @Components          = ( 'CheckPreviousRequirement', 'Run' );
+    my @Components          = ( 'CheckPreviousRequirement', 'Run', 'FollowUp' );
 
     COMPONENT:
     for my $Component (@Components) {
@@ -115,17 +115,41 @@ sub _ExecuteComponent {
     # Get migration tasks.
     my @Tasks = $Self->_TasksGet();
 
-    # Get the number of total steps.
-    my $Steps               = scalar @Tasks;
+    # Get the number of total steps by counting only tasks with Run function.
+    my $Steps = 0;
+    TASK:
+    for my $Task (@Tasks) {
+        next TASK if !$Task;
+        next TASK if !$Task->{Module};
+
+        my $ModuleName = "$Task->{Module}";
+
+        # ObjectParamAdd
+        $Kernel::OM->ObjectParamAdd(
+            "$Task->{Module}" => {
+                Opts => $Self->{Opts},
+            },
+        );
+
+        $Self->{TaskObjects}->{$ModuleName} //= $Kernel::OM->Create($ModuleName);
+
+        if ( $Self->{TaskObjects}->{$ModuleName} && $Self->{TaskObjects}->{$ModuleName}->can($Component) ) {
+            $Steps++;
+        }
+    }
+
     my $CurrentStep         = 1;
     my $SuccessfulMigration = 1;
 
     # Show initial message for current component
-    if ( $Component eq 'Run' ) {
-        print "\n Executing tasks ... \n\n";
+    if ( $Steps && $Component eq 'CheckPreviousRequirement' ) {
+        print "\n Checking requirements... \n\n";
     }
-    else {
-        print "\n Checking requirements ... \n\n";
+    elsif ( $Steps && $Component eq 'Run' ) {
+        print "\n Executing tasks... \n\n";
+    }
+    elsif ( $Steps && $Component eq 'FollowUp' ) {
+        print "\n Executing follow-up tasks... \n\n";
     }
 
     TASK:
@@ -145,14 +169,6 @@ sub _ExecuteComponent {
             $TaskStartTime = Time::HiRes::time();
         }
 
-        # Run module.
-        $Kernel::OM->ObjectParamAdd(
-            "$Task->{Module}" => {
-                Opts => $Self->{Opts},
-            },
-        );
-
-        $Self->{TaskObjects}->{$ModuleName} //= $Kernel::OM->Create($ModuleName);
         if ( !$Self->{TaskObjects}->{$ModuleName} ) {
             print "\n    Error: Could not create object for: $ModuleName.\n\n";
             $SuccessfulMigration = 0;
@@ -162,14 +178,8 @@ sub _ExecuteComponent {
         my $Success = 1;
 
         # Execute Run-Component
-        if ( $Component eq 'Run' ) {
+        if ( $Self->{TaskObjects}->{$ModuleName}->can($Component) ) {
             print "    Step $CurrentStep of $Steps: $Task->{Message} ...\n";
-            $Success = $Self->{TaskObjects}->{$ModuleName}->$Component(%Param);
-        }
-
-        # Execute previous check, printing a different message
-        elsif ( $Self->{TaskObjects}->{$ModuleName}->can($Component) ) {
-            print "    Requirement check for: $Task->{Message} ...\n";
             $Success = $Self->{TaskObjects}->{$ModuleName}->$Component(%Param);
         }
 
@@ -189,7 +199,10 @@ sub _ExecuteComponent {
             last TASK;
         }
 
-        $CurrentStep++;
+        # Only increment step counter if the component was actually executed
+        if ( $Self->{TaskObjects}->{$ModuleName}->can($Component) ) {
+            $CurrentStep++;
+        }
     }
 
     return $SuccessfulMigration;
@@ -253,6 +266,11 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Znuny::UninstallMergedPackages',
         },
         {
+            Message => 'Remove mention flag from archived tickets.',
+            Module  => 'scripts::Migration::Znuny::RemoveMentionFlagFromArchivedTickets',
+        },
+
+        {
             Message => 'Initialize default cron jobs',
             Module  => 'scripts::Migration::Base::InitializeDefaultCronjobs',
         },
@@ -276,6 +294,7 @@ sub _TasksGet {
             Message => 'Check invalid settings',
             Module  => 'scripts::Migration::Base::InvalidSettingsCheck',
         },
+
     );
 
     return @Tasks;

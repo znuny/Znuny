@@ -6,7 +6,7 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-<div class="wide-33 col-desktop-50 col-tablet-50 time-units-component">
+<div class="time-units-component">
 [% RenderBlockStart("TimeUnitsLabel") %]
     <label for="TimeUnits">[% Translate("Time units") | html %] [% Translate(Config("Ticket::Frontend::TimeUnits")) | html %]</label>
 [% RenderBlockEnd("TimeUnitsLabel") %]

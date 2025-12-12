@@ -1,0 +1,116 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+@import './../utilities/Utility.MediaQueries';
+$sidebarTitleBackgroundColor: #EAEAEE;
+.modSidebar {
+  height: 100%;
+  > .inner {
+    position: relative;
+    height: 100%;
+    width: 40px;
+    border-left: var(--border-width) var(--border-solid) var(--border-color);
+    transition: width 0.3s ease-in-out;
+    z-index: 99;
+    &.sidebarActive {
+      width: 310px;
+      @include respond-below(lg) {
+        width: 40px;
+      }
+
+      @include respond-above(lg) {
+        width: 310px;
+      }
+
+      @include respond-above(xl) {
+        width: 420px;
+      }
+
+      .sidebar {
+        display: contents;
+        @include respond-below(lg) {
+          left: -270px;
+          z-index: 2;
+          box-shadow: 1px 1px 10px #ccc
+        }
+      }
+      .sidebarTrigger {
+        display: none;
+      }
+    }
+
+    .sidebar {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      height: 100%;
+      background-color: white;
+      width: 310px;
+      display: none;
+
+      @include respond-above(xl) {
+        width: 420px;
+      }
+    }
+
+    .sidebarTrigger {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      height: 100%;
+      background-color: white;
+      width: 40px;
+      &::before {
+        content: "";
+        background-image: url(../../img/icons/arrow-left.svg);
+        width: 8px;
+        height: 14px;
+        position: absolute;
+        right: 17px;
+        top: 11px;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      &:hover {
+        cursor: pointer;
+        background-color: rgba($sidebarTitleBackgroundColor, 0.8);
+      }
+    }
+
+    .sidebarTitle {
+      background-color: var(--background-quarternary-color);
+      border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+      padding: 10px 15px;
+      position: relative;
+      &::before {
+        content: "";
+        background-image: url(../../img/icons/arrow-left.svg);
+        width: 8px;
+        height: 14px;
+        position: absolute;
+        right: 20px;
+        top: 12px;
+        background-repeat: no-repeat;
+        background-size: cover;
+        transform: rotate(180deg);
+      }
+      h2 {
+        font-size: 12px;
+      }
+      &:hover {
+        cursor: pointer;
+        background-color: rgba($sidebarTitleBackgroundColor, 0.8);
+      }
+    }
+
+
+    .sidebarContent {
+      //padding: 10px 15px;
+    }
+  }
+}

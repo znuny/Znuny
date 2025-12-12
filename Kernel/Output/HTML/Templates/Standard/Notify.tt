@@ -7,26 +7,21 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 <!-- start Notify -->
-<div class="MessageBox [% Data.BoxClass %]">
-    <span>
-        <i class="[% Data.IconClass %]"></i>
-    </span>
-    <p>
-[% RenderBlockStart("LinkStart") %]
-        <a href="[% Data.LinkStart %]" class="[% Data.LinkClass | html %]">
-[% RenderBlockEnd("LinkStart") %]
-[% RenderBlockStart("Text") %]
-            [% Translate(Data.Info) | html %]
-[% RenderBlockEnd("Text") %]
-[% RenderBlockStart("Data") %]
-            [% Data.Data %]
-[% RenderBlockEnd("Data") %]
-[% RenderBlockStart("LinkStop") %]
-        </a>
-[% RenderBlockEnd("LinkStop") %]
-    </p>
-    <a class="Close icon-hover" title="[% Translate("Close this message") | html %]" href="#">
-        <i class="fa fa-times"></i>
-    </a>
-</div>
+
+[% INCLUDE "Modules/Alert.tt"
+    Data = {
+        message = (Data.Data || Translate(Data.Info)),
+        type = Data.BoxClass.match('Notice') ? 'notice' : Data.BoxClass.match('Error') ? 'error' : Data.BoxClass.match('Success') ? 'success' : 'notice',
+        hideAfter = Data.BoxClass.match('Success') ? 5 : 0,
+        actionSeparator = Data.ActionSeparator,
+        ID = Data.ID,
+        actions = Data.Actions || "[
+            {
+                \"url\": \"" _ Data.Link _ "\",
+                \"text\": \"" _ Translate("Continue") _ "\",
+                \"type\": \"notify\"
+            }
+        ]"
+    }
+%]
 <!-- end Notify -->

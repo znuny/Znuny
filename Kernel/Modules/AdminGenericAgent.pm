@@ -56,6 +56,7 @@ sub Run {
     # get needed objects
     my $CheckItemObject    = $Kernel::OM->Get('Kernel::System::CheckItem');
     my $GenericAgentObject = $Kernel::OM->Get('Kernel::System::GenericAgent');
+    my $YAMLObject         = $Kernel::OM->Get('Kernel::System::YAML');
 
     # ---------------------------------------------------------- #
     # run a generic agent job -> "run now"
@@ -81,7 +82,7 @@ sub Run {
         return $LayoutObject->ErrorScreen();
     }
 
-    if ( $Self->{Subaction} eq 'Run' ) {
+    elsif ( $Self->{Subaction} eq 'Run' ) {
 
         return $Self->_MaskRun();
     }
@@ -90,12 +91,12 @@ sub Run {
     # save generic agent job and show a view of all affected tickets
     # --------------------------------------------------------------- #
     # show result site
-    if ( $Self->{Subaction} eq 'UpdateAction' ) {
+    elsif ( $Self->{Subaction} eq 'UpdateAction' ) {
 
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
-        my ( %GetParam, %Errors );
+        my %GetParam;
 
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
@@ -246,31 +247,20 @@ sub Run {
             }
         }
 
-        # check needed data
-        if ( !$Self->{Profile} ) {
-            $Errors{ProfileInvalid} = 'ServerError';
-        }
-
-        # Check length of fields from Add Note section.
-        if ( length $GetParam{NewNoteFrom} > 200 ) {
-            $Errors{NewNoteFromServerError} = 'ServerError';
-        }
-        if ( length $GetParam{NewNoteSubject} > 200 ) {
-            $Errors{NewNoteSubjectServerError} = 'ServerError';
-        }
-        if ( length $GetParam{NewNoteBody} > 200 ) {
-            $Errors{NewNoteBodyServerError} = 'ServerError';
-        }
-
-        # Check if ticket selection contains stop words
-        my %StopWordsServerErrors = $Self->_StopWordsServerErrorsGet(
+        my %Errors = $GenericAgentObject->JobInsertErrorsCheck(
+            Name             => $Self->{Profile},
+            NewNoteFrom      => $GetParam{NewNoteFrom},
+            NewNoteSubject   => $GetParam{NewNoteSubject},
+            NewNoteBody      => $GetParam{NewNoteBody},
             MIMEBase_From    => $GetParam{MIMEBase_From},
             MIMEBase_To      => $GetParam{MIMEBase_To},
             MIMEBase_Cc      => $GetParam{MIMEBase_Cc},
             MIMEBase_Subject => $GetParam{MIMEBase_Subject},
             MIMEBase_Body    => $GetParam{MIMEBase_Body},
         );
-        %Errors = ( %Errors, %StopWordsServerErrors );
+
+        # transform error structure to be recognized by the template file
+        %Errors = $Self->_ServerErrorsGet(%Errors);
 
         # if no errors occurred
         if ( !%Errors ) {
@@ -345,7 +335,7 @@ sub Run {
     # ---------------------------------------------------------- #
     # edit generic agent job
     # ---------------------------------------------------------- #
-    if ( $Self->{Subaction} eq 'Update' ) {
+    elsif ( $Self->{Subaction} eq 'Update' ) {
         my $JobDataReference;
         $JobDataReference = $Self->_MaskUpdate(%Param);
 
@@ -366,7 +356,7 @@ sub Run {
     # ---------------------------------------------------------- #
     # Update dynamic fields for generic agent job by AJAX
     # ---------------------------------------------------------- #
-    if ( $Self->{Subaction} eq 'AddDynamicField' ) {
+    elsif ( $Self->{Subaction} eq 'AddDynamicField' ) {
         my $DynamicFieldID = $ParamObject->GetParam( Param => 'DynamicFieldID' );
         my $Type           = $ParamObject->GetParam( Param => 'Type' ) || '';
         my $SelectedValue  = $ParamObject->GetParam( Param => 'SelectedValue' );
@@ -492,7 +482,7 @@ sub Run {
     # ---------------------------------------------------------- #
     # delete an generic agent job
     # ---------------------------------------------------------- #
-    if ( $Self->{Subaction} eq 'Delete' && $Self->{Profile} ) {
+    elsif ( $Self->{Subaction} eq 'Delete' && $Self->{Profile} ) {
         my $Success;
 
         # challenge token check for write action
@@ -513,62 +503,183 @@ sub Run {
         );
     }
 
-    # ---------------------------------------------------------- #
-    # overview of all generic agent jobs
-    # ---------------------------------------------------------- #
-    $LayoutObject->Block(
-        Name => 'ActionList',
-    );
-    $LayoutObject->Block(
-        Name => 'ActionAdd',
-    );
-    $LayoutObject->Block(
-        Name => 'Filter',
-    );
-    $LayoutObject->Block(
-        Name => 'Overview',
-    );
+    # ------------------------------------------------------------ #
+    # Export
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'JobExport' ) {
 
-    my %Jobs = $GenericAgentObject->JobList();
+        my $JobName = $ParamObject->GetParam( Param => 'Name' ) || '';
+        my $JobData;
+        if ($JobName) {
+            $JobData = $GenericAgentObject->JobExport(
+                Name => $JobName,
+            );
 
-    # if there are any data, it is shown
-    if (%Jobs) {
-        my $Counter = 1;
-        for my $JobKey ( sort keys %Jobs ) {
-            my %JobData = $GenericAgentObject->JobGet( Name => $JobKey );
-
-            # css setting and text for valid or invalid jobs
-            $JobData{ShownValid} = $JobData{Valid} ? 'valid' : 'invalid';
-
-            # separate each search result line by using several css
-            $LayoutObject->Block(
-                Name => 'Row',
-                Data => {%JobData},
+            return $LayoutObject->ErrorScreen(
+                Message => $LayoutObject->{LanguageObject}
+                    ->Translate( 'Error exporting generic agent job with Name %s!', $JobName ),
+            ) if !IsArrayRefWithData($JobData);
+        }
+        else {
+            $JobData = $GenericAgentObject->JobExport(
+                ExportAll => 1,
             );
         }
-    }
 
-    # otherwise a no data found message is displayed
-    else {
-        $LayoutObject->Block(
-            Name => 'NoDataFoundMsg',
-            Data => {},
+        my $Filename = $GenericAgentObject->JobExportFilenameGet(
+            Name   => $JobName,
+            Format => 'YAML',
+        );
+
+        my $JobDataYAML = $YAMLObject->Dump( Data => $JobData );
+
+        return $LayoutObject->Attachment(
+            ContentType => 'text/html; charset=' . $LayoutObject->{Charset},
+            Content     => $JobDataYAML,
+            Type        => 'attachment',
+            Filename    => $Filename,
+            NoCache     => 1,
         );
     }
 
-    # generate search mask
-    my $Output = $LayoutObject->Header();
-    $Output .= $LayoutObject->NavigationBar();
-    $Output .= $LayoutObject->Output(
-        TemplateFile => 'AdminGenericAgent',
-        Data         => \%Param,
-    );
-    $Output .= $LayoutObject->Footer();
-    return $Output;
+    # ------------------------------------------------------------ #
+    # Copy
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'JobCopy' ) {
+
+        my $JobName = $ParamObject->GetParam( Param => 'Name' ) || '';
+
+        $LayoutObject->ChallengeTokenCheck();
+
+        my $NewJobName = $GenericAgentObject->JobCopy(
+            Name   => $JobName,
+            UserID => $Self->{UserID},
+        );
+
+        return $LayoutObject->ErrorScreen(
+            Message => Translatable("Error creating the generic agent job."),
+        ) if !$NewJobName;
+
+        # return to overview
+        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+    }
+
+    # ------------------------------------------------------------ #
+    # Import
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'JobImport' ) {
+
+        $LayoutObject->ChallengeTokenCheck();
+
+        my $FormID      = $ParamObject->GetParam( Param => 'FormID' ) || '';
+        my %UploadStuff = $ParamObject->GetUploadAll(
+            Param  => 'FileUpload',
+            Source => 'string',
+        );
+
+        my $OverwriteExistingJobs = $ParamObject->GetParam( Param => 'OverwriteExistingJobs' ) || '';
+
+        my $JobImport = $GenericAgentObject->JobImport(
+            Content               => $UploadStuff{Content},
+            OverwriteExistingJobs => $OverwriteExistingJobs,
+            UserID                => $Self->{UserID},
+        );
+
+        if ( !$JobImport->{Success} ) {
+            my $Message = $JobImport->{Message}
+                || Translatable(
+                'Jobs could not be imported due to an unknown error. Please check logs for more information.'
+
+                );
+            return $LayoutObject->ErrorScreen(
+                Message => $Message,
+            );
+        }
+
+        if ( $JobImport->{Added} ) {
+            push @{ $Param{NotifyData} }, {
+                Info => $LayoutObject->{LanguageObject}->Translate(
+                    'The following generic agent jobs have been added successfully: %s.',
+                    $JobImport->{Added}
+                ),
+            };
+        }
+        if ( $JobImport->{Updated} ) {
+            push @{ $Param{NotifyData} }, {
+                Info => $LayoutObject->{LanguageObject}->Translate(
+                    'The following generic agent jobs have been updated successfully: %s.',
+                    $JobImport->{Updated}
+                ),
+            };
+        }
+        if ( $JobImport->{NotUpdated} ) {
+            push @{ $Param{NotifyData} }, {
+                Info => $LayoutObject->{LanguageObject}->Translate(
+                    'The following generic agent jobs were not updated: %s.',
+                    $JobImport->{NotUpdated}
+                ),
+            };
+        }
+        if ( $JobImport->{Errors} ) {
+            push @{ $Param{NotifyData} }, {
+                Priority => 'Error',
+                Info     => $LayoutObject->{LanguageObject}->Translate(
+                    'Errors adding/updating the following generic agent jobs: %s. Please check logs for more information.',
+                    $JobImport->{Errors}
+                ),
+            };
+        }
+        if ( IsArrayRefWithData( $JobImport->{AdditionalErrors} ) ) {
+            for my $Error ( @{ $JobImport->{AdditionalErrors} } ) {
+                push @{ $Param{NotifyData} }, {
+                    Priority => 'Error',
+                    Info     => $LayoutObject->{LanguageObject}->Translate($Error),
+                };
+            }
+        }
+
+        $Self->_Overview();
+        my $Output = $LayoutObject->Header();
+        $Output .= $LayoutObject->NavigationBar();
+
+        # show jobs status
+        if ( $Param{NotifyData} ) {
+            for my $Job ( @{ $Param{NotifyData} } ) {
+                $Output .= $LayoutObject->Notify(
+                    %{$Job},
+                );
+            }
+        }
+
+        $Output .= $LayoutObject->Output(
+            TemplateFile => 'AdminGenericAgent',
+            Data         => \%Param,
+        );
+        $Output .= $LayoutObject->Footer();
+
+        return $Output;
+    }
+
+    # ---------------------------------------------------------- #
+    # overview of all generic agent jobs
+    # ---------------------------------------------------------- #
+    else {
+        $Self->_Overview();
+        my $Output = $LayoutObject->Header();
+        $Output .= $LayoutObject->NavigationBar();
+        $Output .= $LayoutObject->Output(
+            TemplateFile => 'AdminGenericAgent',
+            Data         => \%Param,
+        );
+        $Output .= $LayoutObject->Footer();
+        return $Output;
+    }
 }
 
 sub _MaskUpdate {
     my ( $Self, %Param ) = @_;
+
+    my $GenericAgentObject = $Kernel::OM->Get('Kernel::System::GenericAgent');
 
     my %JobData;
 
@@ -580,7 +691,7 @@ sub _MaskUpdate {
 
         # by default use job parameters from db
         # used to display job data on edit/add screen
-        %JobData = $Kernel::OM->Get('Kernel::System::GenericAgent')->JobGet(
+        %JobData = $GenericAgentObject->JobGet(
             Name => $Self->{Profile},
         );
     }
@@ -911,13 +1022,19 @@ sub _MaskUpdate {
     # Show server errors if ticket selection contains stop words
     my %StopWordsServerErrors;
     if ( !$Param{StopWordsAlreadyChecked} ) {
-        %StopWordsServerErrors = $Self->_StopWordsServerErrorsGet(
-            MIMEBase_From    => $JobData{MIMEBase_From},
-            MIMEBase_To      => $JobData{MIMEBase_To},
-            MIMEBase_Cc      => $JobData{MIMEBase_Cc},
-            MIMEBase_Subject => $JobData{MIMEBase_Subject},
-            MIMEBase_Body    => $JobData{MIMEBase_Body},
+        %StopWordsServerErrors = $GenericAgentObject->StopWordsErrorsGet(
+            Fields => {
+                MIMEBase_From    => $JobData{MIMEBase_From},
+                MIMEBase_To      => $JobData{MIMEBase_To},
+                MIMEBase_Cc      => $JobData{MIMEBase_Cc},
+                MIMEBase_Subject => $JobData{MIMEBase_Subject},
+                MIMEBase_Body    => $JobData{MIMEBase_Body},
+            },
+            ConfigCheck => 1,
         );
+
+        # transform error structure to be recognized by the template file
+        %StopWordsServerErrors = $Self->_ServerErrorsGet(%StopWordsServerErrors);
     }
 
     # REMARK: we changed the wording "Send no notifications" to
@@ -1701,54 +1818,80 @@ sub _MaskRun {
     return $Output;
 }
 
-sub _StopWordsServerErrorsGet {
+sub _Overview {
     my ( $Self, %Param ) = @_;
 
-    if ( !%Param ) {
-        $Kernel::OM->Get('Kernel::Output::HTML::Layout')->FatalError(
-            Message => Translatable('Got no values to check.'),
-        );
-    }
+    my $LayoutObject       = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $GenericAgentObject = $Kernel::OM->Get('Kernel::System::GenericAgent');
 
-    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    $LayoutObject->Block( Name => 'ActionList' );
+    $LayoutObject->Block( Name => 'ActionAdd' );
+    $LayoutObject->Block( Name => 'ActionImportExport' );
+    $LayoutObject->Block( Name => 'Filter' );
+    $LayoutObject->Block( Name => 'Overview' );
 
-    my %StopWordsServerErrors;
-    if ( !$ArticleObject->SearchStringStopWordsUsageWarningActive() ) {
-        return %StopWordsServerErrors;
-    }
+    my %Jobs = $GenericAgentObject->JobList();
 
-    my %SearchStrings;
+    # show data if any was found
+    if (%Jobs) {
+        my $Counter = 1;
+        for my $JobKey ( sort keys %Jobs ) {
+            my %JobData = $GenericAgentObject->JobGet( Name => $JobKey );
 
-    FIELD:
-    for my $Field ( sort keys %Param ) {
-        next FIELD if !defined $Param{$Field};
-        next FIELD if !length $Param{$Field};
+            $JobData{ShownValid} = $JobData{Valid} ? 'valid' : 'invalid';
 
-        $SearchStrings{$Field} = $Param{$Field};
-    }
-
-    if (%SearchStrings) {
-
-        my $StopWords = $ArticleObject->SearchStringStopWordsFind(
-            SearchStrings => \%SearchStrings,
-        );
-
-        FIELD:
-        for my $Field ( sort keys %{$StopWords} ) {
-            next FIELD if !defined $StopWords->{$Field};
-            next FIELD if ref $StopWords->{$Field} ne 'ARRAY';
-            next FIELD if !@{ $StopWords->{$Field} };
-
-            $StopWordsServerErrors{ $Field . 'Invalid' } = 'ServerError';
-            $StopWordsServerErrors{ $Field . 'InvalidTooltip' }
-                = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{LanguageObject}
-                ->Translate('Please remove the following words because they cannot be used for the ticket selection:')
-                . ' '
-                . join( ',', sort @{ $StopWords->{$Field} } );
+            $LayoutObject->Block(
+                Name => 'Row',
+                Data => {%JobData},
+            );
         }
     }
 
-    return %StopWordsServerErrors;
+    # otherwise display no data
+    else {
+        $LayoutObject->Block(
+            Name => 'NoDataFoundMsg',
+            Data => {},
+        );
+    }
+
+    return 1;
+}
+
+sub _ServerErrorsGet {
+    my ( $Self, %Param ) = @_;
+
+    return if !%Param;
+
+    my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
+
+    my %Errors = %Param;
+
+    for my $ErrorKey ( sort keys %Errors ) {
+
+        # determine if any stop words errors occured
+        if ( $ErrorKey =~ m{ (\A .+ Invalid)StopWords $ }x ) {
+            my $Fields = delete $Errors{$ErrorKey};
+
+            # build tooltip parameter from stop words
+            if ( IsArrayRefWithData $Fields ) {
+                my $NewErrorKey = $1 . 'Tooltip';
+
+                $Errors{$NewErrorKey} = $LanguageObject->Translate(
+                    'Please remove the following words because they cannot be used for the ticket selection:'
+                    )
+                    . ' '
+                    . join( ',', sort @{$Fields} );
+            }
+        }
+
+        # set this value to trigger display of validation
+        else {
+            $Errors{$ErrorKey} = 'ServerError';
+        }
+    }
+
+    return %Errors;
 }
 
 1;

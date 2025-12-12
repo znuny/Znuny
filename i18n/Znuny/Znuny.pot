@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-11-14 13:40+0000\n"
+"POT-Creation-Date: 2025-12-08 13:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2052,6 +2052,14 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
 msgid "Filter for jobs"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
+msgid "Upload a file in YAML format (as provided by the export) to import generic agent jobs."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
+msgid "Overwrite existing generic agents?"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
@@ -4875,6 +4883,14 @@ msgid "Filter for PostMaster filters"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPostMasterFilter.tt
+msgid "Upload a file in YAML format (as provided by the export) to import postmaster filters."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPostMasterFilter.tt
+msgid "Overwrite existing postmaster filters?"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPostMasterFilter.tt
 msgid "To dispatch or filter incoming emails based on email headers. Matching using Regular Expressions is also possible."
 msgstr ""
 
@@ -6052,6 +6068,82 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSelectBox.tt
 msgid "Query is executed."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Add Outbound Email Profile"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Filter for outbound email profiles"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Manage Outbound Email Profiles"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Update Outbound Email Profile"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Email addresses"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Fallback"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Email addresses have to be configured!"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "yes"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "no"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Delete outbound email profile"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Command"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Port"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Enter a number between 1 and 65535."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Port to use for given host (if non-standard port)."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Enter a number between 1 and 999."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Timeout (in seconds) for connection to host."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Skip SSL verification"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Select to make this the fallback/default config for any email address not configured in other outbound email profiles. Only one outbound email profile can be the fallback."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Edit current fallback outbound email profile (host %s)."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
@@ -7771,6 +7863,10 @@ msgid "Ticket Settings"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
+msgid "Customer user"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Service invalid."
 msgstr ""
 
@@ -7947,31 +8043,7 @@ msgid "Execute Bulk Action"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
-msgid "Compose Answer for %s%s%s"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid "Date Invalid!"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
-msgid "Select one or more recipients from the customer user address book."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
-msgid "Customer user address book"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
-msgid "This address is registered as system address and cannot be used: %s"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
-msgid "Please include at least one recipient"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
-msgid "Remove Ticket Customer"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
@@ -7983,7 +8055,27 @@ msgid "This address already exists on the address list."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
-msgid "Remove Cc"
+msgid "Search for customer"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
+msgid "Open address book"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
+msgid "Address book"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
+msgid "Customer suggestions"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
+msgid "Please include at least one recipient"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
+msgid "This address is registered as system address and cannot be used: %s"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
@@ -7991,7 +8083,7 @@ msgid "Bcc"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
-msgid "Remove Bcc"
+msgid "Undo & close"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
@@ -8002,16 +8094,8 @@ msgstr ""
 msgid "Customer Information"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
-msgid "Customer user"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid "Create New Email Ticket"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
-msgid "Example Template"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
@@ -8023,14 +8107,6 @@ msgid "Please include at least one customer user for the ticket."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
-msgid "Select this customer as the main customer."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
-msgid "Remove Ticket Customer User"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid "From queue"
 msgstr ""
 
@@ -8039,7 +8115,7 @@ msgid "Get all"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
-msgid "Outbound Email for %s%s%s"
+msgid "Undo & Close"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
@@ -8055,7 +8131,23 @@ msgid "Cancel & close"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Undo & close"
+msgid "Select one or more recipients from the customer user address book."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
+msgid "Customer user address book"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
+msgid "Remove Ticket Customer"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
+msgid "Remove Cc"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
+msgid "Remove Bcc"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
@@ -8080,10 +8172,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
 msgid "Ticket %s: solution time will be over in %s/%s!"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketForward.tt
-msgid "Forward %s%s%s"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
@@ -8274,10 +8362,6 @@ msgstr ""
 msgid "To queue"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhoneCommon.tt
-msgid "Phone Call for %s%s%s"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPlain.tt
 msgid "View Email Plain Text for %s%s%s"
 msgstr ""
@@ -8447,14 +8531,6 @@ msgid "Save as default"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
-msgid "Drafts"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
-msgid "by"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "Change Queue"
 msgstr ""
 
@@ -8464,6 +8540,14 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "This item has no articles yet."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+msgid "Drafts"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+msgid "by"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
@@ -9280,10 +9364,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBoracle.tt
 msgid "SID"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBoracle.tt
-msgid "Port"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerFinish.tt
@@ -10106,6 +10186,18 @@ msgstr ""
 msgid "Do you really want to reset this setting to it's default value?"
 msgstr ""
 
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DirtyCheck.html.tmpl
+msgid "You have undeployed settings:"
+msgstr ""
+
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DirtyCheck.html.tmpl
+msgid "Standard Deploy"
+msgstr ""
+
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DirtyCheck.html.tmpl
+msgid "Quick Deploy"
+msgstr ""
+
 #. JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/HelpDialog.html.tmpl
 msgid "You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built."
 msgstr ""
@@ -10759,6 +10851,34 @@ msgid "Select at least one recipient."
 msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminGenericAgent.pm
+msgid "Error exporting generic agent job with Name %s!"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminGenericAgent.pm
+msgid "Error creating the generic agent job."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminGenericAgent.pm
+msgid "Jobs could not be imported due to an unknown error. Please check logs for more information."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminGenericAgent.pm
+msgid "The following generic agent jobs have been added successfully: %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminGenericAgent.pm
+msgid "The following generic agent jobs have been updated successfully: %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminGenericAgent.pm
+msgid "The following generic agent jobs were not updated: %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminGenericAgent.pm
+msgid "Errors adding/updating the following generic agent jobs: %s. Please check logs for more information."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminGenericAgent.pm
 msgid "minute(s)"
 msgstr ""
 
@@ -10796,10 +10916,6 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminGenericAgent.pm
 msgid "Need Profile!"
-msgstr ""
-
-#. Perl Module: Kernel/Modules/AdminGenericAgent.pm
-msgid "Got no values to check."
 msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminGenericAgent.pm
@@ -11470,6 +11586,34 @@ msgstr ""
 msgid "No such filter: %s"
 msgstr ""
 
+#. Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
+msgid "Error exporting postmaster filter with Name %s!"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
+msgid "Error creating the postmaster filter."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
+msgid "Filters could not be imported due to an unknown error. Please check logs for more information."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
+msgid "The following postmaster filters have been added successfully: %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
+msgid "The following postmaster filters have been updated successfully: %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
+msgid "The following postmaster filters were not updated: %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
+msgid "Errors adding/updating the following postmaster filters: %s. Please check logs for more information."
+msgstr ""
+
 #. Perl Module: Kernel/Modules/AdminPriority.pm
 msgid "Priority added!"
 msgstr ""
@@ -11870,6 +12014,14 @@ msgstr ""
 msgid "Errors adding/updating the following salutations: %s. Please check logs for more information."
 msgstr ""
 
+#. Perl Module: Kernel/Modules/AdminSendmailConfig.pm
+msgid "Outbound email profile updated!"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminSendmailConfig.pm
+msgid "Configuration option 'SendmailModule' has to be set to 'Kernel::System::Email::MultiSendmail' to be able to use the outbound email profiles managed here."
+msgstr ""
+
 #. Perl Module: Kernel/Modules/AdminSignature.pm
 msgid "Signature updated!"
 msgstr ""
@@ -11944,6 +12096,10 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminSystemConfiguration.pm
 msgid "Category Search"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminSystemConfigurationDeployment.pm
+msgid "Quick Deploy by"
 msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminSystemConfigurationDeployment.pm
@@ -12967,6 +13123,10 @@ msgid "Company Tickets"
 msgstr ""
 
 #. Perl Module: Kernel/Modules/CustomerTicketOverview.pm
+msgid "You have no permission or the ticket does not exist."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/CustomerTicketOverview.pm
 msgid "Untitled!"
 msgstr ""
 
@@ -12980,6 +13140,10 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/CustomerTicketSearch.pm
 msgid "Created more than ... ago"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/CustomerTicketSearch.pm
+msgid "Got no values to check."
 msgstr ""
 
 #. Perl Module: Kernel/Modules/CustomerTicketSearch.pm
@@ -13622,10 +13786,6 @@ msgstr ""
 msgid "You have %s invalid setting(s) deployed. Click here to show invalid settings."
 msgstr ""
 
-#. Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationIsDirtyCheck.pm
-msgid "You have undeployed settings, would you like to deploy them?"
-msgstr ""
-
 #. Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationOutOfSyncCheck.pm
 msgid "The configuration is being updated, please be patient..."
 msgstr ""
@@ -14050,6 +14210,10 @@ msgstr ""
 msgid "Maximum size is %s characters."
 msgstr ""
 
+#. Perl Module: Kernel/System/GenericAgent.pm
+msgid "Couldn't read Job configuration YAML file. Please make sure the file is valid."
+msgstr ""
+
 #. Perl Module: Kernel/System/MailQueue.pm
 msgid "Error while validating Message data."
 msgstr ""
@@ -14100,6 +14264,10 @@ msgstr ""
 
 #. Perl Module: Kernel/System/Package.pm
 msgid "Can't read file!"
+msgstr ""
+
+#. Perl Module: Kernel/System/PostMaster/Filter.pm
+msgid "Couldn't read Filter configuration YAML file. Please make sure the file is valid."
 msgstr ""
 
 #. Perl Module: Kernel/System/ProcessManagement/DB/Process.pm
@@ -15968,10 +16136,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the module that shows all the currently logged in customers in the agent interface."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the module to display a notification in the agent interface, if there are modified sysconfig settings that are not deployed yet."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -17928,6 +18092,14 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Sets if queue must be selected by the agent."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Sets the customer user field in the agent interface."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Sets the customer user field as mandatory."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
@@ -20818,6 +20990,10 @@ msgstr ""
 msgid "Defines which ContentTypes are permitted for the attachment preview."
 msgstr ""
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Names of system config options with email addresses to also be selectable for an outbound email profile (besides system addresses)."
+msgstr ""
+
 #. XML Definition: scripts/database/initial_insert.xml
 msgid "invalid-temporarily"
 msgstr ""
@@ -21542,6 +21718,10 @@ msgstr ""
 msgid "Do you really want to delete this certificate?"
 msgstr ""
 
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SendmailConfig.js
+msgid "Do you really want to delete this outbound email profile?"
+msgstr ""
+
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SupportDataCollector.js
 msgid "Generating..."
 msgstr ""
@@ -21796,10 +21976,6 @@ msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Preferences.js
 msgid "Sorry, but you can't disable all methods for this notification."
-msgstr ""
-
-#. JS File: var/httpd/htdocs/js/Core.Agent.Preferences.js
-msgid "Please note that at least one of the settings you have changed requires a page reload. Click here to reload the current screen."
 msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Preferences.js
@@ -22072,14 +22248,6 @@ msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator."
-msgstr ""
-
-#. JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
-msgid "yes"
-msgstr ""
-
-#. JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
-msgid "no"
 msgstr ""
 
 #. JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
@@ -23618,6 +23786,10 @@ msgid "Manage existing sessions."
 msgstr ""
 
 #. SysConfig
+msgid "Manage outbound email profiles."
+msgstr ""
+
+#. SysConfig
 msgid "Manage support data."
 msgstr ""
 
@@ -23831,6 +24003,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Out of Office users."
+msgstr ""
+
+#. SysConfig
+msgid "Outbound Email Profiles"
 msgstr ""
 
 #. SysConfig

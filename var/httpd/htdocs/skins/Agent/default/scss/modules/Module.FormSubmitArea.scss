@@ -1,0 +1,62 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+@import './../utilities/Utility.MediaQueries';
+
+.modFormSubmitArea {
+  > .inner {
+    margin-bottom: 50px;
+
+    .formSubmitArea {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      @include respond-below(lg) {
+        grid-template-columns: 1fr;
+      }
+
+      .formSubmitAreaCancel {
+        @include respond-below(lg) {
+          a.btn-main, button.btn-main, button.btn-cancel-ghost {
+            width: 100%;
+            margin-bottom: 10px;
+            float: left;
+            max-width: 100%;
+          }
+        }
+      }
+
+      .formSubmitAreaSubmit {
+        display: flex;
+        float: right;
+        justify-content: right;
+
+        button {
+          margin-left: 10px;
+        }
+
+        @include respond-below(lg) {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          a.btn-main, button.btn-main, button.btn-cancel-ghost {
+            width: 100%;
+            margin-bottom: 10px;
+            float: left;
+            max-width: 100%;
+            flex-shrink: 0;
+            flex-grow: 1;
+            margin-left: 0px;
+          }
+        }
+
+      }
+    }
+  }
+}

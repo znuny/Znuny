@@ -112,6 +112,10 @@ EOF
             'default skin should be selected'
         );
 
+        # Close the message box.
+        $Selenium->find_element( '.messageClose', 'css' )->click();
+        $Selenium->find_element( '.messageClose', 'css' )->click();
+
         # Try to expand the user profile sub menu by clicking the avatar.
         $Selenium->find_element( '.UserAvatar > a', 'css' )->click();
         $Selenium->WaitFor(

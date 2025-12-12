@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.666291230893001;
+    $Self->{Completeness}        = 0.660488895989775;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -709,6 +709,9 @@ sub Data {
         'Add Job' => '',
         'Filter for Jobs' => '',
         'Filter for jobs' => '',
+        'Upload a file in YAML format (as provided by the export) to import generic agent jobs.' =>
+            '',
+        'Overwrite existing generic agents?' => '',
         'Generic Agent Job Management' => '',
         'Edit Job' => '',
         'Run Job' => '',
@@ -1620,6 +1623,9 @@ sub Data {
         'Add PostMaster Filter' => 'ポストマスター・フィルターを追加',
         'Filter for PostMaster Filters' => '',
         'Filter for PostMaster filters' => '',
+        'Upload a file in YAML format (as provided by the export) to import postmaster filters.' =>
+            '',
+        'Overwrite existing postmaster filters?' => '',
         'To dispatch or filter incoming emails based on email headers. Matching using Regular Expressions is also possible.' =>
             '振り分けやメールヘッダを元に受信メールをフィルタします。正規表現を使用できます。',
         'If you want to match only the email address, use EMAILADDRESS:info@example.com in From, To or Cc.' =>
@@ -2015,6 +2021,28 @@ sub Data {
         'Run Query' => 'クエリー実行',
         '%s Results' => '%s結果',
         'Query is executed.' => 'クエリは実行されました。',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+        'Add Outbound Email Profile' => '',
+        'Filter for outbound email profiles' => '',
+        'Manage Outbound Email Profiles' => '',
+        'Update Outbound Email Profile' => '',
+        'Email addresses' => '',
+        'Fallback' => '',
+        'Email addresses have to be configured!' => '',
+        'yes' => 'はい',
+        'no' => 'いいえ',
+        'Delete outbound email profile' => '',
+        'Command' => '',
+        'Port' => 'Port',
+        'Enter a number between 1 and 65535.' => '',
+        'Port to use for given host (if non-standard port).' => '',
+        'Enter a number between 1 and 999.' => '',
+        'Timeout (in seconds) for connection to host.' => '',
+        'Skip SSL verification' => '',
+        'Select to make this the fallback/default config for any email address not configured in other outbound email profiles. Only one outbound email profile can be the fallback.' =>
+            '',
+        'Edit current fallback outbound email profile (host %s).' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
         'Add Service' => 'サービスの追加',
@@ -2628,6 +2656,7 @@ sub Data {
         'Change Responsible of %s%s%s' => '%s%s%sの責任者を変更',
         'The ticket has been locked' => 'チケットはロック済です',
         'Ticket Settings' => 'チケット設定',
+        'Customer user' => '顧客ユーザー',
         'Service invalid.' => '無効なサービスです',
         'SLA invalid.' => 'SLAが無効です。',
         'Team Data' => '',
@@ -2680,45 +2709,44 @@ sub Data {
         'Execute Bulk Action' => '一括処理を実行',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
-        'Compose Answer for %s%s%s' => '%s%s%sの返信を作成',
         'Date Invalid!' => '日時が無効です。',
-        'Select one or more recipients from the customer user address book.' =>
-            '顧客ユーザーのアドレス帳から1人以上の受信者を選択します。',
-        'Customer user address book' => '顧客ユーザーのアドレス帳',
-        'This address is registered as system address and cannot be used: %s' =>
-            '',
-        'Please include at least one recipient' => '受信者を少なくとも1人は含めるようにして下さい。',
-        'Remove Ticket Customer' => 'チケットの顧客を削除',
         'Please remove this entry and enter a new one with the correct value.' =>
             'このエントリーを削除し、正しい値で新しいエントリーを追加してください。',
         'This address already exists on the address list.' => 'この住所はすでにアドレスリストに存在します。',
-        'Remove Cc' => 'Ccを削除',
+        'Search for customer' => '',
+        'Open address book' => '',
+        'Address book' => '',
+        'Customer suggestions' => '',
+        'Please include at least one recipient' => '受信者を少なくとも1人は含めるようにして下さい。',
+        'This address is registered as system address and cannot be used: %s' =>
+            '',
         'Bcc' => 'Bcc',
-        'Remove Bcc' => 'Bccを削除',
+        'Undo & close' => '元に戻して閉じる',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
         'Change Customer of %s%s%s' => '%s%s%sの顧客を変更',
         'Customer Information' => '顧客情報',
-        'Customer user' => '顧客ユーザー',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
         'Create New Email Ticket' => '新規メールチケットの作成',
-        'Example Template' => 'テンプレート例',
         'To customer user' => '宛先顧客ユーザー',
         'Please include at least one customer user for the ticket.' => '',
-        'Select this customer as the main customer.' => '',
-        'Remove Ticket Customer User' => 'チケットの顧客ユーザーを削除',
         'From queue' => 'キューから',
         'Get all' => '全てを取得',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
-        'Outbound Email for %s%s%s' => '%s%s%sの送信メール',
+        'Undo & Close' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => '%s%s%sのメールを再送信',
         'All fields marked with an asterisk (*) are mandatory.' => 'アスタリスク（*）が付いている全ての領域は必須入力です。',
         'Cancel & close' => '中止して閉じる',
-        'Undo & close' => '元に戻して閉じる',
+        'Select one or more recipients from the customer user address book.' =>
+            '顧客ユーザーのアドレス帳から1人以上の受信者を選択します。',
+        'Customer user address book' => '顧客ユーザーのアドレス帳',
+        'Remove Ticket Customer' => 'チケットの顧客を削除',
+        'Remove Cc' => 'Ccを削除',
+        'Remove Bcc' => 'Bccを削除',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s/%s)!' => '',
@@ -2727,9 +2755,6 @@ sub Data {
         'Ticket %s: update time will be over in %s/%s!' => '',
         'Ticket %s: solution time is over (%s/%s)!' => '',
         'Ticket %s: solution time will be over in %s/%s!' => '',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketForward.tt
-        'Forward %s%s%s' => '%s%s%sを転送',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => '%s%s%sの履歴',
@@ -2797,9 +2822,6 @@ sub Data {
         'Please include at least one customer for the ticket.' => 'チケットには少なくとも1名のお客様を含めるようにして下さい。',
         'To queue' => 'キュー',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhoneCommon.tt
-        'Phone Call for %s%s%s' => '%s%s%sの受話',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPlain.tt
         'View Email Plain Text for %s%s%s' => '%s%s%sの電子メールを表示',
         'Plain' => '書式なし',
@@ -2853,12 +2875,12 @@ sub Data {
         'Save filter settings as default' => 'デフォルトのフィルター設定を保存',
         'Event Type' => 'イベントタイプ',
         'Save as default' => 'ドラフトとして保存',
-        'Drafts' => '下書き',
-        'by' => 'by',
         'Change Queue' => 'キューを変更',
         'There are no dialogs available at this point in the process.' =>
             'このプロセスは完了しました。',
         'This item has no articles yet.' => 'このチケットにはまだ記事がありません。',
+        'Drafts' => '下書き',
+        'by' => 'by',
         'Article Overview - %s Article(s)' => '記事一覧 - %s件',
         'Page %s' => '%sページ',
         'Add Filter' => 'フィルターを追加',
@@ -3156,7 +3178,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBoracle.tt
         'SID' => 'SID',
-        'Port' => 'Port',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerFinish.tt
         'To be able to use Znuny you have to enter the following line in your command line (Terminal/Shell) as root.' =>
@@ -3498,6 +3519,11 @@ sub Data {
         'Do you really want to reset this setting to it\'s default value?' =>
             '',
 
+        # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DirtyCheck.html.tmpl
+        'You have undeployed settings:' => '',
+        'Standard Deploy' => '',
+        'Quick Deploy' => '',
+
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/HelpDialog.html.tmpl
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.' =>
             '',
@@ -3726,6 +3752,17 @@ sub Data {
         'Select at least one recipient.' => '',
 
         # Perl Module: Kernel/Modules/AdminGenericAgent.pm
+        'Error exporting generic agent job with Name %s!' => '',
+        'Error creating the generic agent job.' => '',
+        'Jobs could not be imported due to an unknown error. Please check logs for more information.' =>
+            '',
+        'The following generic agent jobs have been added successfully: %s.' =>
+            '',
+        'The following generic agent jobs have been updated successfully: %s.' =>
+            '',
+        'The following generic agent jobs were not updated: %s.' => '',
+        'Errors adding/updating the following generic agent jobs: %s. Please check logs for more information.' =>
+            '',
         'minute(s)' => '分',
         'hour(s)' => '時間',
         'Time unit' => '時間の単位',
@@ -3736,7 +3773,6 @@ sub Data {
         'archive tickets' => 'アーカイブ・チケット',
         'restore tickets from archive' => 'アーカイブからチケットを復元する',
         'Need Profile!' => 'プロファイルの入力が必要です！',
-        'Got no values to check.' => '',
         'Please remove the following words because they cannot be used for the ticket selection:' =>
             '',
 
@@ -3958,6 +3994,17 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
         'No such filter: %s' => 'そのようなフィルターはありません: %s',
+        'Error exporting postmaster filter with Name %s!' => '',
+        'Error creating the postmaster filter.' => '',
+        'Filters could not be imported due to an unknown error. Please check logs for more information.' =>
+            '',
+        'The following postmaster filters have been added successfully: %s.' =>
+            '',
+        'The following postmaster filters have been updated successfully: %s.' =>
+            '',
+        'The following postmaster filters were not updated: %s.' => '',
+        'Errors adding/updating the following postmaster filters: %s. Please check logs for more information.' =>
+            '',
 
         # Perl Module: Kernel/Modules/AdminPriority.pm
         'Priority added!' => '優先度を追加しました。',
@@ -4108,6 +4155,11 @@ sub Data {
         'Errors adding/updating the following salutations: %s. Please check logs for more information.' =>
             '',
 
+        # Perl Module: Kernel/Modules/AdminSendmailConfig.pm
+        'Outbound email profile updated!' => '',
+        'Configuration option \'SendmailModule\' has to be set to \'Kernel::System::Email::MultiSendmail\' to be able to use the outbound email profiles managed here.' =>
+            '',
+
         # Perl Module: Kernel/Modules/AdminSignature.pm
         'Signature updated!' => '署名を更新しました。',
         'Signature added!' => '署名を追加しました。',
@@ -4142,6 +4194,7 @@ sub Data {
         'Category Search' => 'カテゴリ検索',
 
         # Perl Module: Kernel/Modules/AdminSystemConfigurationDeployment.pm
+        'Quick Deploy by' => '',
         'Some imported settings are not present in the current state of the configuration or it was not possible to update them. Please check the Znuny log for more information.' =>
             '',
 
@@ -4532,12 +4585,14 @@ sub Data {
         'Need CustomerID!' => '顧客IDの入力が必要です！',
         'My Tickets' => '担当チケット',
         'Company Tickets' => '企業チケット',
+        'You have no permission or the ticket does not exist.' => '',
         'Untitled!' => '無題！',
 
         # Perl Module: Kernel/Modules/CustomerTicketSearch.pm
         'Customer Realname' => '顧客ユーザの氏名',
         'Created within the last' => '以内に作成された',
         'Created more than ... ago' => '以前に作成された',
+        'Got no values to check.' => '',
         'Please remove the following words because they cannot be used for the search:' =>
             '',
 
@@ -4814,10 +4869,6 @@ sub Data {
         'You have %s invalid setting(s) deployed. Click here to show invalid settings.' =>
             '',
 
-        # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationIsDirtyCheck.pm
-        'You have undeployed settings, would you like to deploy them?' =>
-            'デプロイされていない設定があります。デプロイしますか？',
-
         # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationOutOfSyncCheck.pm
         'The configuration is being updated, please be patient...' => '設定は更新されておりますので、ご安心ください。',
         'There is an error updating the system configuration!' => 'システム設定の更新時にエラーが発生しました。',
@@ -5018,6 +5069,10 @@ sub Data {
         'The field content is too long!' => 'その領域の内容が長すぎます。',
         'Maximum size is %s characters.' => '最大サイズは%s文字です。',
 
+        # Perl Module: Kernel/System/GenericAgent.pm
+        'Couldn\'t read Job configuration YAML file. Please make sure the file is valid.' =>
+            '',
+
         # Perl Module: Kernel/System/MailQueue.pm
         'Error while validating Message data.' => '',
         'Error while validating Sender email address.' => '',
@@ -5041,6 +5096,10 @@ sub Data {
         'File is not installed!' => 'ファイルがインストールされていません！',
         'File is different!' => '',
         'Can\'t read file!' => 'ファイルを読み込めません！',
+
+        # Perl Module: Kernel/System/PostMaster/Filter.pm
+        'Couldn\'t read Filter configuration YAML file. Please make sure the file is valid.' =>
+            '',
 
         # Perl Module: Kernel/System/ProcessManagement/DB/Process.pm
         'The process "%s" and all of its data has been imported successfully.' =>
@@ -5872,8 +5931,6 @@ sub Data {
         'Defines the module that shows all the currently logged in agents in the agent interface.' =>
             '担当者インタフェースにおいて、現在ログインしている全ユーザを表示させるモジュールを定義します。',
         'Defines the module that shows all the currently logged in customers in the agent interface.' =>
-            '',
-        'Defines the module to display a notification in the agent interface, if there are modified sysconfig settings that are not deployed yet.' =>
             '',
         'Defines the module to display a notification in the agent interface, if there are invalid sysconfig settings deployed.' =>
             '',
@@ -6750,6 +6807,8 @@ sub Data {
         'Sets the queue in the ticket free text screen of a zoomed ticket in the agent interface.' =>
             '担当者インタフェースのズームされたチケットのチケット自由テキスト画面で、キューを設定します。',
         'Sets if queue must be selected by the agent.' => '担当者がキューを選択する必要があるかどうかを設定します。',
+        'Sets the customer user field in the agent interface.' => '',
+        'Sets the customer user field as mandatory.' => '',
         'Sets the ticket owner in the ticket free text screen of the agent interface.' =>
             '担当者インタフェースのチケット・フリー・テキスト・スクリーンで、チケット所有者を設定します。',
         'Sets if ticket owner must be selected by the agent.' => 'チケットの所有者が担当者によって必ず選択される必要があるかどうかを設定します。',
@@ -8100,6 +8159,8 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         'Define a process icon.' => '',
         'Defines which ContentTypes are permitted for the attachment preview.' =>
             '',
+        'Names of system config options with email addresses to also be selectable for an outbound email profile (besides system addresses).' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '無効-暫定',
@@ -8374,6 +8435,9 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SMIME.js
         'Do you really want to delete this certificate?' => '',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SendmailConfig.js
+        'Do you really want to delete this outbound email profile?' => '',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SupportDataCollector.js
         'Generating...' => '作成中...',
         'It was not possible to generate the Support Bundle.' => 'サポートバンドルが生成できませんでした。',
@@ -8484,8 +8548,6 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             '申し訳ありません。必須とマークされている通知は無効化することはできません。',
         'Sorry, but you can\'t disable all methods for this notification.' =>
             '申し訳ありません。この通知を無効化することはできません。',
-        'Please note that at least one of the settings you have changed requires a page reload. Click here to reload the current screen.' =>
-            '',
         'An unknown error occurred. Please contact the administrator.' =>
             'エラーが発生しました。管理者に連絡してください。',
 
@@ -8616,8 +8678,6 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             '',
 
         # JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
-        'yes' => 'はい',
-        'no' => 'いいえ',
         'This is %s' => '',
         'Complex %s with %s arguments' => '',
 
@@ -9055,6 +9115,7 @@ Thanks for your help!
         'Manage System Configuration Deployments.' => 'システム設定のデプロイを管理する。',
         'Manage different calendars.' => '様々なカレンダーを管理します。',
         'Manage existing sessions.' => '既存セッション管理',
+        'Manage outbound email profiles.' => '',
         'Manage support data.' => 'サポート情報の管理',
         'Manage system files.' => '',
         'Manage tasks triggered by event or time based execution.' => 'イベントトリガーまたは時間ベースで実行されるタスクの管理',
@@ -9111,6 +9172,7 @@ Thanks for your help!
         'Out Of Office' => '外出中',
         'Out Of Office Time' => '外出中',
         'Out of Office users.' => '',
+        'Outbound Email Profiles' => '',
         'Overview Escalated Tickets.' => 'エスカレーション済チケット一覧',
         'Overview Refresh Time' => '一覧自動更新間隔',
         'Overview of all Tickets per assigned Queue.' => '割り当てられたキューごとのすべてのチケット一覧。',
@@ -9460,7 +9522,6 @@ Thanks for your help!
         'Clone web service',
         'Close preview',
         'Close this dialog',
-        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9483,6 +9544,7 @@ Thanks for your help!
         'Delete field',
         'Delete invoker',
         'Delete operation',
+        'Delete outbound email profile',
         'Delete this %s',
         'Delete this Attachment',
         'Delete this Event Trigger',
@@ -9519,6 +9581,7 @@ Thanks for your help!
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
+        'Do you really want to delete this outbound email profile?',
         'Do you really want to delete this scheduled system maintenance?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
@@ -9620,7 +9683,6 @@ Thanks for your help!
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
-        'Please note that at least one of the settings you have changed requires a page reload. Click here to reload the current screen.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
         'Please remove the following words from your search as they cannot be searched for:',
@@ -9633,6 +9695,7 @@ Thanks for your help!
         'Previous',
         'Process state',
         'Queues',
+        'Quick Deploy',
         'Reload page',
         'Reload page (%ss)',
         'Remove',
@@ -9689,6 +9752,7 @@ Thanks for your help!
         'Sorry, you can only upload one file here.',
         'Split',
         'Stacked',
+        'Standard Deploy',
         'Start date',
         'Status',
         'Stream',
@@ -9769,7 +9833,7 @@ Thanks for your help!
         'Yes',
         'You can either have the affected settings updated automatically to reflect the changes you just made or do it on your own by pressing \'update manually\'.',
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.',
-        'You have undeployed settings, would you like to deploy them?',
+        'You have undeployed settings:',
         'activate to apply a descending sort',
         'activate to apply an ascending sort',
         'activate to remove the sort',
@@ -9779,6 +9843,7 @@ Thanks for your help!
         'more',
         'no',
         'none',
+        'or',
         'sorting is disabled',
         'week',
         'yes',

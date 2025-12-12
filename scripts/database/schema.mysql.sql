@@ -277,6 +277,31 @@ CREATE TABLE signature (
     UNIQUE INDEX signature_name (name)
 );
 # ----------------------------------------------------------
+#  create table sendmail_config
+# ----------------------------------------------------------
+CREATE TABLE sendmail_config (
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    sendmail_module VARCHAR (255) NOT NULL,
+    cmd TEXT NULL,
+    host VARCHAR (255) NULL,
+    port SMALLINT NULL,
+    timeout SMALLINT NULL,
+    skip_ssl_verification SMALLINT NULL DEFAULT 0,
+    is_fallback_config SMALLINT NULL DEFAULT 0,
+    authentication_type VARCHAR (100) NULL,
+    auth_user VARCHAR (255) NULL,
+    auth_password VARCHAR (255) NULL,
+    oauth2_token_config_id INTEGER NULL,
+    email_addresses TEXT NULL,
+    comments VARCHAR (255) NULL,
+    valid_id SMALLINT NOT NULL,
+    create_time DATETIME NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time DATETIME NOT NULL,
+    change_by INTEGER NOT NULL,
+    PRIMARY KEY(id)
+);
+# ----------------------------------------------------------
 #  create table system_address
 # ----------------------------------------------------------
 CREATE TABLE system_address (

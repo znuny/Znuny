@@ -366,7 +366,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     */
     body.Popup,
     body.RealPopup {
-        background: var(--white);
+        background: var(--background-primary-color);
     }
 
     .Popup .WidgetSimple .Content,
@@ -385,18 +385,19 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
         body.Popup,
         body.RealPopup {
-            background: transparent;
+            /*background: transparent;*/
+            background: var(--background-primary-color);
         }
 
         .Popup {
             width: 100%;
-            height: 100vh;
+            /*height: 100vh;*/
             background: transparent;
             box-sizing: border-box;
         }
 
         .Popup #AppWrapper {
-            background: var(--white);
+            /*background: var(--white);*/
             padding: 0;
             width: 100%;
             min-height: unset;
@@ -1019,6 +1020,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         justify-content: flex-start;
         align-items: center;
         gap: var(--gap-sm);
+        padding: var(--padding-lg) 0;
     }
 
     .ActionsSideBar.LayoutFixedSidebar .ContentWrapper {

@@ -36,13 +36,10 @@ sub Run {
     my $Verbose = $Param{CommandlineOptions}->{Verbose} || 0;
 
     my @Tasks = (
-
-        # TODO: Add your Task here.
-        # {
-        #     Message => 'Message.',
-        #     Module  => 'Module',
-        # },
-
+        {
+            Message => 'Create database table sendmail_config.',
+            Module  => 'SendmailConfig',
+        },
     );
 
     return 1   if !@Tasks;

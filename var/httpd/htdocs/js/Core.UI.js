@@ -8,8 +8,11 @@
 // --
 
 "use strict";
+/* global App */
 
-var Core = Core || {};
+var Core = Core || {},
+    Znuny = Znuny || {};
+    Znuny.App = Znuny.App || {};
 
 /**
  * @namespace Core.UI
@@ -401,6 +404,81 @@ Core.UI = (function (TargetNS) {
             }
         });
 
+        return true;
+    };
+
+    /**
+     * @name ShowNotificationTemplate
+     * @memberof Core.UI
+     * @function
+     * @param {Object} Data
+        * @param {String} Template  String that contains the template identifier used by Core.Template.Render to generate the notification HTML.
+        * @param {String} Type Error|Notice (default)
+        * @param {String} Link the (internal) URL to which the notification text should point
+        * @param {Function} Callback function which should be executed once the notification was hidden
+        * @param {String} ID The id for the newly created notification (default: no ID)
+        * @param {String} Icon Class of a fontawesome icon which will be added before the text (optional)
+     * @returns {Boolean} true or false depending on if the notification could be shown or not
+     * @description
+     *      Displays a notification on top of the page.
+     */
+    TargetNS.ShowNotificationTemplate = function (Data) {
+
+        var $NotificationObj,
+            ModuleID,
+            ParamCheckSuccess = Znuny.App.ParamCheck(Data, ['ID', 'Template', 'Icon']);
+
+        if (!Data.Template) {
+            return false;
+        }
+
+        if (!Data.Type) {
+            Data.Type = 'Notice';
+        }
+
+
+        if (!ParamCheckSuccess){
+            return false;
+        }
+
+        if (Data.ID && $('#' + Data.ID).length) {
+            return false;
+        }
+
+        // render the notification
+        $NotificationObj = $(
+            Core.Template.Render(Data.Template, {
+                Class: Data.Type,
+                Link: Data.Link,
+                ID: Data.ID,
+                Icon: Data.Icon,
+            })
+        );
+
+        // hide it initially
+        $NotificationObj.hide();
+
+        // if there are other notifications, append the new on the bottom
+        if ($('.MessageBox:visible').length) {
+            $NotificationObj.insertAfter('.MessageBox:visible:last');
+        }
+        // otherwise insert it on top
+        else {
+            $NotificationObj.insertAfter('#ToolBar');
+        }
+
+        // wire up modular alert handling
+        if (typeof App !== 'undefined' && typeof App.registerModule === 'function' && typeof App.start === 'function') {
+            ModuleID = App.registerModule($NotificationObj, 'Alert');
+            App.start(ModuleID);
+        }
+
+        // show it finally with animation and execute possible callbacks
+        $NotificationObj.slideDown(function() {
+            if ($.isFunction(Data.Callback)) {
+                Data.Callback();
+            }
+        });
         return true;
     };
 

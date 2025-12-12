@@ -7,18 +7,14 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="MessageBox {{ Class }}"{% if ID %} id="{{ ID }}"{% endif %}>
-    {% if Icon %}
-    <span>
-        <i class="fa {{ Icon }}"></i>
-    </span>
-    {% endif %}
-    <p>
-        <a href="{{ URL|safe }}">
-            {{ Text }}
-        </a>
-    </p>
-    <a class="Close icon-hover" title="{{ "Close this message" | Translate }}" href="#">
-        <i class="fa fa-times"></i>
-    </a>
+<div class="mod modAlert">
+    <div class="inner">
+        <script type="application/json" class="alertData">
+            {
+                "message": " <a href="{{ URL|safe }}">{{ Text }}</a>",
+                "type": "notice",
+                "hideAfter": 10
+            }
+        </script>
+    </div>
 </div>

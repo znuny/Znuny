@@ -784,6 +784,8 @@ div.AJAXWaiting {
     width: 80%;
 }
 
+}/* end @media */
+
 /**
  * @subsubsection     Popup Print
  */
@@ -959,4 +961,3 @@ ul#ProcessElements > li a > i {
 }
 
 }/* end @media */
-}

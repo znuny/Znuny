@@ -3562,6 +3562,16 @@
                         <Item Key="ModuleHandler">ProcessManagement</Item>
                     </Hash>
                 </Item>
+                <Item Key="PostMasterFilter">
+                    <Hash>
+                        <Item Key="ModuleHandler">PostMasterFilter</Item>
+                    </Hash>
+                </Item>
+                <Item Key="GenericAgent">
+                    <Hash>
+                        <Item Key="ModuleHandler">GenericAgent</Item>
+                    </Hash>
+                </Item>
             </Hash>
         </Value>
     </Setting>
@@ -3613,6 +3623,22 @@
                 <Item Key="ProcessManagement">
                     <Hash>
                         <Item Key="ModuleHandler">ProcessManagement</Item>
+                    </Hash>
+                </Item>
+                <Item Key="PostMasterFilter">
+                    <Hash>
+                        <Item Key="ImportModule">Kernel::System::PostMaster::Filter</Item>
+                        <Item Key="ImportFunctionName">FilterImport</Item>
+                        <Item Key="ImportOverwriteParameter">OverwriteExistingFilters</Item>
+                        <Item Key="ModuleHandler">PostMasterFilter</Item>
+                    </Hash>
+                </Item>
+                <Item Key="GenericAgent">
+                    <Hash>
+                        <Item Key="ImportModule">Kernel::System::GenericAgent</Item>
+                        <Item Key="ImportFunctionName">JobImport</Item>
+                        <Item Key="ImportOverwriteParameter">OverwriteExistingJobs</Item>
+                        <Item Key="ModuleHandler">GenericAgent</Item>
                     </Hash>
                 </Item>
             </Hash>
@@ -4453,6 +4479,79 @@
         </Value>
     </Setting>
 
+    <!--
+        Znuny-MultiSendmail
+    -->
+    <Setting Name="Frontend::Module###AdminSendmailConfig" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Admin</Item>
+                    <Item Key="Title" Translatable="1">Outbound Email Profiles</Item>
+                    <Item Key="NavBarName">Admin</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AdminSendmailConfig###001-Framework" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.SendmailConfig.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::NavigationModule###AdminSendmailConfig" Required="0" Valid="1">
+        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Group">
+                    <Array>
+                        <Item>admin</Item>
+                    </Array>
+                </Item>
+                <Item Key="GroupRo">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
+                <Item Key="Name" Translatable="1">Outbound Email Profiles</Item>
+                <Item Key="Block">Communication</Item>
+                <Item Key="Description" Translatable="1">Manage outbound email profiles.</Item>
+                <Item Key="IconBig">fa-envelope-o</Item>
+                <Item Key="IconSmall"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="SendmailConfig::EmailAddress::ConfigOptions" Required="0" Valid="1">
+        <Description Translatable="1">Names of system config options with email addresses to also be selectable for an outbound email profile (besides system addresses).</Description>
+        <Navigation>Core::Email</Navigation>
+        <Value>
+            <Array>
+                <Item>AdminEmail</Item>
+                <Item>NotificationSenderEmail</Item>
+                <Item>PostMaster::PreFilterModule::NewTicketReject::Sender</Item>
+            </Array>
+        </Value>
+    </Setting>
+
     <!-- CopyTicketNumber -->
     <Setting Name="Loader::Module::AgentTicketZoom###001-CopyTicketNumber" Required="0" Valid="1">
         <Description Translatable="1">Loader module registration for the agent interface.</Description>
@@ -4472,5 +4571,4 @@
             </Hash>
         </Value>
     </Setting>
-
 </otrs_config>

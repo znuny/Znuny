@@ -920,4 +920,79 @@ ul#Service .Header*/
     color: var(--white);
 }
 
+/**
+ * @subsubsection     Deployment
+ */
+
+.Dialog .Overlay {
+    display: none;
+    background: #fff;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.Dialog .Overlay.Preparing {
+    display: block;
+}
+
+.Dialog .Overlay span {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    height: 15px;
+}
+
+.Dialog .Overlay em {
+    font-style: normal;
+    line-height: 140%;
+    max-width: 80%;
+    display: block;
+    margin: 0px auto;
+}
+
+.Dialog .Overlay span i {
+    position: absolute;
+    margin-left: -6px;
+    left: 50%;
+    display: none;
+}
+
+.Dialog .Overlay.Preparing span i.Active {
+    display: block;
+}
+
+.Dialog .Overlay span i.Success {
+    color: green;
+}
+
+.Dialog .Overlay span i.Error {
+    color: red;
+}
+
+#DialogDeployment,
+#DialogQuickDeploy {
+    min-height: 80px;
+}
+
+#DialogDeployment > p,
+#DialogQuickDeploy > p {
+    margin-bottom: 10px;
+}
+
+#DialogDeployment + .ContentFooter .ButtonsRegular,
+#DialogDeployment + .ContentFooter .ButtonsFinish,
+#DialogDeployment + .ContentFooter .ButtonsTryAgain,
+#DialogQuickDeploy + .ContentFooter .ButtonsRegular,
+#DialogQuickDeploy + .ContentFooter .ButtonsFinish,
+#DialogQuickDeploy + .ContentFooter .ButtonsTryAgain {
+    display: none;
+    gap: var(--padding-lg);
+}
+
+
 } /* end @media */

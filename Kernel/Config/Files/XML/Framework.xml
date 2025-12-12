@@ -1113,16 +1113,6 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::NotifyModule###5000-SystemConfigurationIsDirty-Check" Required="1" Valid="1">
-        <Description Translatable="1">Defines the module to display a notification in the agent interface, if there are modified sysconfig settings that are not deployed yet.</Description>
-        <Navigation>Frontend::Agent::FrontendNotification</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::Output::HTML::Notification::SystemConfigurationIsDirtyCheck</Item>
-                <Item Key="Group">admin</Item>
-            </Hash>
-        </Value>
-    </Setting>
     <Setting Name="Frontend::NotifyModule###5200-SystemConfigurationInvalid-Check" Required="1" Valid="1">
         <Description Translatable="1">Defines the module to display a notification in the agent interface, if there are invalid sysconfig settings deployed.</Description>
         <Navigation>Frontend::Agent::FrontendNotification</Navigation>
@@ -7918,6 +7908,25 @@ via the Preferences button after logging in.
                 <Item>Core.Components.css</Item>
                 <Item>Core.FlexboxModel.css</Item>
                 <Item>Core.Typography.css</Item>
+                <Item>thirdparty/bootstrap-grid-5.1/bootstrap-grid.css</Item>
+                <Item>layouts/Layout.ContentSidebar.css</Item>
+                <Item>layouts/Layout.PopUp.css</Item>
+                <Item>layouts/Layout.PopUpSidebar.css</Item>
+                <Item>modules/Module.Alert.css</Item>
+                <Item>modules/Module.Card.css</Item>
+                <Item>modules/Module.CustomerContainer.css</Item>
+                <Item>modules/Module.CustomerInformation.css</Item>
+                <Item>modules/Module.CustomerSelector.css</Item>
+                <Item>modules/Module.DynamicField.css</Item>
+                <Item>modules/Module.Form.css</Item>
+                <Item>modules/Module.FormSubmitArea.css</Item>
+                <Item>modules/Module.MessageInformation.css</Item>
+                <Item>modules/Module.Messages.css</Item>
+                <Item>modules/Module.PageHeadline.css</Item>
+                <Item>modules/Module.Sidebar.css</Item>
+                <Item>modules/Module.SidebarWidget.css</Item>
+                <Item>modules/Module.Signature.css</Item>
+                <Item>modules/Module.TicketHeader.css</Item>
             </Array>
         </Value>
     </Setting>
@@ -7983,6 +7992,15 @@ via the Preferences button after logging in.
                 <Item>Core.Agent.Header.js</Item>
                 <Item>Core.UI.Notification.js</Item>
                 <Item>Core.Agent.Responsive.js</Item>
+                <Item>modules/application.js</Item>
+                <Item>modules/Module.Sidebar.js</Item>
+                <Item>modules/Module.Card.js</Item>
+                <Item>modules/Module.CustomerSelector.js</Item>
+                <Item>modules/Module.Form.js</Item>
+                <Item>modules/Module.Messages.js</Item>
+                <Item>modules/Module.Alert.js</Item>
+                <Item>modules/Module.SidebarWidget.js</Item>
+                <Item>Znuny.App.js</Item>
             </Array>
         </Value>
     </Setting>

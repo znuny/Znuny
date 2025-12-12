@@ -12,6 +12,8 @@ package Kernel::System::MailQueue;
 use strict;
 use warnings;
 
+use utf8;
+
 use MIME::Base64;
 
 use Kernel::System::VariableCheck qw(:all);
@@ -272,6 +274,7 @@ Get a list of the queue elements.
         Sender    => '...', # optional
         Recipient => '...', # optional
         Attempts  => '...', # optional
+        Limit     => '...', # optional
     );
 
 This returns something like:

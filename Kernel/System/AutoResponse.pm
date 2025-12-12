@@ -505,7 +505,9 @@ sub AutoResponseImport {
         return {
             Success => 0,
             Message =>
-                Translatable("Couldn't read auto response configuration file. Please make sure the file is valid."),
+                Translatable(
+                "Couldn't read auto response configuration file. Please make sure the file is valid."
+                ),
         };
     }
 

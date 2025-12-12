@@ -306,7 +306,8 @@ sub Run {
                     'Ticket "%s" created!',
                     $Ticket{TicketNumber},
                 ),
-                Link => $LayoutObject->{Baselink}
+                Priority => 'Success',
+                Link     => $LayoutObject->{Baselink}
                     . 'Action=AgentTicketZoom;TicketID='
                     . $Ticket{TicketID},
             );

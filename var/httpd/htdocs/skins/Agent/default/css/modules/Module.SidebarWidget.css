@@ -1,0 +1,60 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+.modSidebarWidget > .inner .sidebarWidgetTitle {
+  background-color: #FAFAFB;
+  float: left;
+  width: 100%;
+  display: inline-block;
+  position: relative;
+}
+.modSidebarWidget > .inner .sidebarWidgetTitle h3 {
+  padding: 15px 15px;
+  font-size: 14px;
+  font-weight: 600;
+  border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+  border-top: var(--border-width) var(--border-solid) var(--border-color);
+  margin-top: -1px;
+  margin-bottom: 0;
+}
+.modSidebarWidget > .inner .sidebarWidgetTitle::before {
+  background-image: url(../../img/icons/arrow-top.svg);
+  background-size: 12px 12px;
+  background-repeat: no-repeat;
+  background-position: center right;
+  content: "";
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  right: 19px;
+  top: 16px;
+  transform: rotate(180deg);
+}
+.modSidebarWidget > .inner .sidebarWidgetTitle:hover {
+  cursor: pointer;
+  background-color: rgba(250, 250, 251, 0.6);
+}
+.modSidebarWidget > .inner .sidebarWidgetContent {
+  padding: 15px 15px;
+  float: left;
+  width: 100%;
+  display: inline-block;
+  transition: all 0.25s ease-out;
+}
+.modSidebarWidget > .inner.sidebarWidgetClosed .sidebarWidgetContent {
+  max-height: 0;
+  overflow: hidden;
+  padding-bottom: 0;
+  padding-top: 0;
+  border-bottom: none;
+  will-change: max-height;
+}
+.modSidebarWidget > .inner.sidebarWidgetClosed .sidebarWidgetTitle::before {
+  transform: rotate(0deg);
+}
+
+/*# sourceMappingURL=Module.SidebarWidget.css.map */

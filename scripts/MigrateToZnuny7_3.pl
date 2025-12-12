@@ -33,7 +33,7 @@ use Getopt::Long;
 
 local $Kernel::OM = Kernel::System::ObjectManager->new(
     'Kernel::System::Log' => {
-        LogPrefix => 'MigrateToZnuny7_2.pl',
+        LogPrefix => 'MigrateToZnuny7_3.pl',
     },
 );
 

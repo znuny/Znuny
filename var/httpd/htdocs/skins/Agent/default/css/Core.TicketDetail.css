@@ -96,6 +96,7 @@ div.Headline .Flag {
     display: flex;
     gap: 4px;
     overflow: hidden;
+    background-color: var(--background-tertiary-color);
 }
 
 #ArticleItems .WidgetSimple .Header h2 {
@@ -131,12 +132,14 @@ div.Headline .Flag {
     display: flex;
     flex-direction: column;
     flex: 1;
+    order: 1;
 }
 
 #ArticleItems .WidgetSimple .Content .ArticleMailContent .Avatar {
     display: flex;
     width: 100%;
     max-width: 80px;
+    order: 2;
 }
 
 #ArticleItems .WidgetSimple .Content .ArticleMailContent .Avatar img {
@@ -208,6 +211,7 @@ div.Headline .Flag {
     display: flex;
     flex-direction: column;
     gap: var(--gap-md);
+    margin-bottom: 15px;
 }
 
 .ticketDetails:empty {
@@ -218,12 +222,15 @@ div.Headline .Flag {
     display: flex;
     flex-flow: row;
     position: relative;
-    padding: var(--padding-lg);
+    padding: 15px;
+    padding-bottom: 10px;
+    padding-top: 10px;
     box-sizing: border-box;
     background: var(--main-bg-color);
     border-top-left-radius: var(--border-radius-md);
     border-top-right-radius: var(--border-radius-md);
     border: var(--border-width) var(--border-solid) var(--border-color);
+    background-color: var(--background-tertiary-color);
 }
 
 
@@ -241,9 +248,9 @@ div.Headline .Flag {
 }
 
 #ArticleItems .Outgoing .ItemActions {
-    border-top-color: var(--mail-outgoing-color);
-    border-left-color: var(--mail-outgoing-color);
-    border-right-color: var(--mail-outgoing-color);
+    border-top-color: var(--border-color);
+    border-left-color: var(--border-color);
+    border-right-color: var(--border-color);
 }
 
 #ArticleItems .ArticleMailHeader label,
@@ -596,22 +603,48 @@ tbody td.Sender {
     border-right: 0px;
 }
 
-.UseArticleColors tr.agent.Active > td,
-.UseArticleColors tr.system.Active > td,
-.UseArticleColors tr.customer.Active > td {
-    border-top: 1px solid #000;
-    border-bottom: 1px solid #000;
+
+.UseArticleColors tr:nth-child(even) td {
+    transition: background ease 0.3s;
+    background-color: var(--table-td-even-bg);
+    border-color: #ccc;
+    border-bottom: 1px solid #eee;
 }
 
-.UseArticleColors tr.agent.Incoming.VisibleForCustomer:hover > td,
-.UseArticleColors tr.customer.Incoming.VisibleForCustomer:hover > td,
-.UseArticleColors tr.NotVisibleForCustomer:hover > td,
-.UseArticleColors tr.agent.Outgoing.VisibleForCustomer:hover > td,
-.UseArticleColors tr.system.Outgoing.VisibleForCustomer:hover > td,
-.UseArticleColors tr.system.Incoming.VisibleForCustomer:hover > td,
-.UseArticleColors tr.customer.Outgoing.VisibleForCustomer:hover > td {
-    background-color: var(--primary-color) !important;
-    border-color: var(--primary-color);
+.UseArticleColors tr.Active > td,
+.UseArticleColors tr.Active:hover > td {
+    background-color: var(--mail-outgoing-color) !important;
+    border-color: var(--mail-outgoing-color) !important;
+}
+
+.UseArticleColors tr:hover > td {
+    background-color: var(--primary-color-rgb) !important;
+    border-color: var(--primary-color-rgb);
+    border-right-color: var(--primary-color-rgb) !important;
+}
+
+.UseArticleColors tr.NotVisibleForCustomer > td {
+    background: #FFCCCC !important;
+    border-bottom-color: #e7abab;
+    border-color: #e7abab;
+}
+
+.UseArticleColors tr.NotVisibleForCustomer.Active > td,
+.UseArticleColors tr.NotVisibleForCustomer:hover > td {
+    background-color: #e7abab !important;
+    border-color: #e7abab;
+}
+
+.UseArticleColors tr.system > td {
+    background: #fff7be !important;
+    border-bottom-color: #ffef80;
+    border-color: #ffef80;
+}
+
+.UseArticleColors tr.system.Active > td,
+.UseArticleColors tr.system:hover > td {
+    background-color: #ffef80 !important;
+    border-color: #ffef80;
 }
 
 .ArticleMailContent iframe,
@@ -620,7 +653,7 @@ tbody td.Sender {
 .ArticleMailContent .ArticleMeta {
     border: var(--border-width) var(--border-solid) var(--border-color);
     border-radius: var(--border-radius-sm);
-    padding: var(--padding-lg);
+    padding: 15px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-top: 0;

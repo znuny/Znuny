@@ -14,6 +14,7 @@ use warnings;
 
 use Time::HiRes qw(usleep);
 
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
@@ -32,6 +33,8 @@ our @ObjectDependencies = (
     'Kernel::System::Ticket::Article',
     'Kernel::System::TemplateGenerator',
     'Kernel::System::CustomerUser',
+    'Kernel::Language',
+    'Kernel::System::YAML',
 );
 
 =head1 NAME
@@ -861,6 +864,520 @@ sub JobDelete {
     $Kernel::OM->Get('Kernel::System::Daemon::SchedulerDB')->GenericAgentTaskCleanup();
 
     return 1;
+}
+
+=head2 JobExport()
+
+export a job
+
+    my $ExportData = $GenericAgentObject->JobExport(
+        # required either Name or ExportAll
+        Name       => 'job1', # required
+                              # or
+        ExportAll  => 0,      # required, possible: 0, 1
+    );
+
+returns Job hashes in an array with data:
+
+    my $ExportData =
+    [
+        {
+            'Name' => 'job1',
+            'NewNoteBody' => '123123',
+            'ChangeTimeSearchType' => '',
+            'NewCustomerID' => '123213',
+            'NewTypeID' => '2',
+            'TicketCreateTimePoint' => '16',
+            'NewParamKey6' => '',
+            'LastCloseTimeSearchType' => '',
+            'NewQueueID' => '13',
+            'TicketLastChangeTimeOlderDate' => '2026-07-02 23:59:59',
+            ...
+        },
+        {
+            'Name' => 'job2',
+            ...
+        }
+    ];
+
+=cut
+
+sub JobExport {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    my $JobData;
+
+    if ( $Param{ExportAll} ) {
+        my %JobList = $Self->JobList();
+
+        my @Data;
+        for my $ItemName ( sort keys %JobList ) {
+            my %JobSingleData = $Self->JobExportDataGet(
+                Name => $ItemName,
+            );
+
+            push @Data, \%JobSingleData if %JobSingleData;
+        }
+        $JobData = \@Data;
+    }
+    elsif ( $Param{Name} ) {
+
+        my $Name = $Param{Name};
+
+        return if !$Name;
+
+        my %JobSingleData = $Self->JobExportDataGet(
+            Name => $Name,
+        );
+
+        return if !%JobSingleData;
+
+        $JobData = [ \%JobSingleData ];
+    }
+    else {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => 'Need either "ExportAll" or "Name" parameter!',
+        );
+        return;
+    }
+
+    return $JobData;
+}
+
+=head2 JobImport()
+
+import a job YAML file/content
+
+    my $JobImport = $GenericAgentObject->JobImport(
+        Content               => $YAMLContent, # mandatory, YAML format
+        OverwriteExistingJobs => 0,            # optional, possible: 0, 1
+        UserID                => 1,            # mandatory
+    );
+
+Returns:
+
+    $JobImport = {
+        Success          => 1,                                  # 1 if success or undef if operation could not
+                                                                # be performed
+        Message          => 'The Message to show.',             # error message
+        Added            => 'Job1, Job2',                       # string list of Jobs correctly added
+        Updated          => 'Job3, Job4',                       # string list of Jobs correctly updated
+        NotUpdated       => 'Job5, Job6',                       # string of Jobs not updated due to existing entity
+                                                                # with the same name
+        Errors           => 'Job5',                             # string list of Jobs that could not be added or updated
+        AdditionalErrors => ['Some error occured!', 'Error2!'], # list of additional error not necessarily related to specified Job
+    };
+
+=cut
+
+sub JobImport {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject  = $Kernel::OM->Get('Kernel::System::Log');
+    my $YAMLObject = $Kernel::OM->Get('Kernel::System::YAML');
+
+    for my $Needed (qw(Content UserID)) {
+
+        if ( !$Param{$Needed} ) {
+            $LogObject->Log(
+                Priority => 'error',
+                Message  => "Need $Needed!",
+            );
+            return {
+                Success => 0,
+                Message => "$Needed is missing, can not continue.",
+            };
+        }
+    }
+
+    my $JobData = $YAMLObject->Load(
+        Data => $Param{Content},
+    );
+
+    if ( ref $JobData ne 'ARRAY' ) {
+        return {
+            Success => 0,
+            Message =>
+                Translatable("Couldn't read Job configuration YAML file. Please make sure the file is valid."),
+        };
+    }
+
+    my @UpdatedJobs;
+    my @NotUpdatedJobs;
+    my @AddedJobs;
+    my @JobErrors;
+
+    my %CurrentJobs        = $Self->JobList();
+    my %ReverseCurrentJobs = reverse %CurrentJobs;
+    my %AdditionalErrors;
+
+    JOB:
+    for my $Job ( @{$JobData} ) {
+
+        next JOB if !$Job;
+        next JOB if ref $Job ne 'HASH';
+
+        if ( !$Job->{Name} ) {
+            my $StandardMessage = "One or more jobs \"Name\" parameter is missing!";
+            $AdditionalErrors{DataMissing} = $StandardMessage
+                if !$AdditionalErrors{DataMissing};
+
+            $LogObject->Log(
+                Priority => 'error',
+                Message  => $StandardMessage,
+            );
+
+            next JOB;
+        }
+
+        my $JobExists = $ReverseCurrentJobs{ $Job->{Name} };
+        my %Errors    = $Self->JobInsertErrorsCheck(
+            %{$Job},
+        );
+
+        my $AddSuccess;
+        if ( $Param{OverwriteExistingJobs} && $JobExists ) {
+            if ( !%Errors ) {
+                my $DeleteSuccess = $Self->JobDelete(
+                    Name   => $Job->{Name},
+                    UserID => $Param{UserID},
+                );
+                $AddSuccess = $Self->JobAdd(
+                    Name   => $Job->{Name},
+                    Data   => $Job,
+                    UserID => $Param{UserID},
+                ) if $DeleteSuccess;
+            }
+
+            if ($AddSuccess) {
+                push @UpdatedJobs, $Job->{Name};
+            }
+            else {
+                push @JobErrors, $Job->{Name};
+            }
+        }
+        else {
+            if ($JobExists) {
+                push @NotUpdatedJobs, $Job->{Name};
+                next JOB;
+            }
+
+            if ( !%Errors ) {
+                my $DeleteSuccess = $Self->JobDelete(
+                    Name   => $Job->{Name},
+                    UserID => $Param{UserID},
+                );
+                $AddSuccess = $Self->JobAdd(
+                    Name   => $Job->{Name},
+                    Data   => $Job,
+                    UserID => $Param{UserID},
+                ) if $DeleteSuccess;
+            }
+
+            if ($AddSuccess) {
+                push @AddedJobs, $Job->{Name};
+            }
+            else {
+                push @JobErrors, $Job->{Name};
+            }
+        }
+
+        # log errors
+        if (%Errors) {
+            my $ErrorKeyStrg = '';
+            my $LimitReached;
+
+            # create string from error keys to better
+            # understand where exactly problem occured
+            KEY:
+            for my $Key ( sort keys %Errors ) {
+                my $ErrorValue = $Errors{$Key};
+
+                # make sure array error values are merged into string
+                if ( ref $ErrorValue eq 'ARRAY' ) {
+                    $ErrorValue = join ',', @{$ErrorValue};
+                }
+
+                $ErrorKeyStrg .= $Key . ':' . $ErrorValue . ',';
+
+                # do not allow more than 300 symbols while logging error keys
+                if ( length $ErrorKeyStrg > 300 ) {
+                    $LimitReached = 1;
+                    last KEY;
+                }
+            }
+
+            chop $ErrorKeyStrg;
+            if ($LimitReached) {
+                $ErrorKeyStrg .= ' and more..';
+            }
+
+            my $ErrorMessage = "Invalid configuration for Job with name: $Job->{Name}. ($ErrorKeyStrg)";
+
+            $LogObject->Log(
+                Priority => 'error',
+                Message  => $ErrorMessage,
+            );
+        }
+    }
+
+    my @JobAdditionalErrors;
+
+    for my $ErrorKey ( sort keys %AdditionalErrors ) {
+        my $ErrorMessage = $AdditionalErrors{$ErrorKey};
+
+        push @JobAdditionalErrors, $ErrorMessage;
+    }
+
+    return {
+        Success => 1,
+
+        Added            => join( ', ', @AddedJobs )      || '',
+        Updated          => join( ', ', @UpdatedJobs )    || '',
+        NotUpdated       => join( ', ', @NotUpdatedJobs ) || '',
+        Errors           => join( ', ', @JobErrors )      || '',
+        AdditionalErrors => \@JobAdditionalErrors,
+    };
+}
+
+=head2 JobCopy()
+
+copy a job
+
+    my $NewJobName = $GenericAgentObject->JobCopy(
+        Name    => 'job1', # mandatory
+    );
+
+=cut
+
+sub JobCopy {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject      = $Kernel::OM->Get('Kernel::System::Log');
+    my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
+
+    NEEDED:
+    for my $Needed (qw(Name)) {
+
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    my %JobData = $Self->JobGet(
+        Name   => $Param{Name},
+        UserID => $Param{UserID},
+    );
+    return if !IsHashRefWithData( \%JobData );
+
+    # create new job name
+    my $JobName = $LanguageObject->Translate( '%s (copy)', $JobData{Name} );
+
+    my $Success = $Self->JobAdd(
+        Data   => \%JobData,
+        Name   => $JobName,
+        UserID => $Param{UserID},
+    );
+
+    return $Success ? $JobName : $Success;
+}
+
+=head2 JobExportDataGet()
+
+get data to export job
+
+    my %JobData = $GenericAgentObject->JobExportDataGet(
+        Name => 'job1', # mandatory
+    );
+
+Returns:
+
+    my %JobData = (
+        'Name' => 'job1',
+        'NewNoteBody' => '123123',
+        'ChangeTimeSearchType' => '',
+        'NewCustomerID' => '123213',
+        'NewTypeID' => '2',
+        'TicketCreateTimePoint' => '16',
+        'NewParamKey6' => '',
+        'LastCloseTimeSearchType' => '',
+        'NewQueueID' => '13',
+        'TicketLastChangeTimeOlderDate' => '2026-07-02 23:59:59',
+        ...
+    )
+
+=cut
+
+sub JobExportDataGet {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(Name)) {
+
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed!",
+        );
+        return;
+    }
+
+    my %Job = $Self->JobGet(
+        Name => $Param{Name},
+    );
+
+    return %Job;
+}
+
+=head2 JobExportFilenameGet()
+
+get export file name based on job name
+
+    my $Filename = $GenericAgentObject->JobExportFilenameGet(
+        Name => 'Job_1',
+        Format => 'YAML',
+    );
+
+=cut
+
+sub JobExportFilenameGet {
+    my ( $Self, %Param ) = @_;
+
+    my $Extension = '';
+    if ( $Param{Format} =~ /yml|yaml/i ) {
+        $Extension = '.yaml';
+    }
+    return "Export_GenericAgent$Extension" if !$Param{Name};
+
+    my $DisplayName = 'Export_GenericAgent_' . $Param{Name};
+    $DisplayName =~ s{[^a-zA-Z0-9-_]}{_}xmsg;
+    $DisplayName =~ s{_{2,}}{_}g;
+    $DisplayName =~ s{_$}{};
+
+    return "$DisplayName$Extension";
+}
+
+=head2 StopWordsErrorsGet()
+
+check if passed fields contain invalid stop word
+
+    my %Errors = $GenericAgentObject->StopWordsErrorsGet(
+        Fields => {
+            SomeField => 'over',
+            MIMEBase_From => 'the',
+        },
+        CheckConfig => 1, # optional
+                          # possible: 0, 1
+                          # default: 1
+    );
+
+=cut
+
+sub StopWordsErrorsGet {
+    my ( $Self, %Param ) = @_;
+
+    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+
+    my $CheckConfig = defined $Param{CheckConfig} ? $Param{CheckConfig} : 1;
+
+    if ($CheckConfig) {
+        return if !$ArticleObject->SearchStringStopWordsUsageWarningActive();
+    }
+
+    my %StopWordsErrors;
+    my %SearchStrings;
+
+    my %Fields = %{ $Param{Fields} || {} };
+
+    FIELD:
+    for my $Field ( sort keys %Fields ) {
+        next FIELD if !defined $Fields{$Field};
+        next FIELD if !length $Fields{$Field};
+
+        $SearchStrings{$Field} = $Fields{$Field};
+    }
+
+    if (%SearchStrings) {
+
+        my $StopWords = $ArticleObject->SearchStringStopWordsFind(
+            SearchStrings => \%SearchStrings,
+        );
+
+        FIELD:
+        for my $Field ( sort keys %{$StopWords} ) {
+            next FIELD if !defined $StopWords->{$Field};
+            next FIELD if ref $StopWords->{$Field} ne 'ARRAY';
+            next FIELD if !@{ $StopWords->{$Field} };
+
+            $StopWordsErrors{ $Field . 'Invalid' }          = 'StopWordInvalid';
+            $StopWordsErrors{ $Field . 'InvalidStopWords' } = $StopWords->{$Field};
+        }
+    }
+
+    return %StopWordsErrors;
+}
+
+=head2 JobInsertErrorsCheck()
+
+Perform checks for insert job action.
+Recommended to use before every add/update function or
+as additional layer of validation.
+
+    my %Errors = $GenericAgentObject->JobInsertErrorsCheck(
+        Name             => 'job1',
+        NewNoteFrom      => $GetParam{NewNoteFrom},
+        NewNoteSubject   => $GetParam{NewNoteSubject},
+        NewNoteBody      => $GetParam{NewNoteBody},
+        MIMEBase_From    => $GetParam{MIMEBase_From},
+        MIMEBase_To      => $GetParam{MIMEBase_To},
+        MIMEBase_Cc      => $GetParam{MIMEBase_Cc},
+        MIMEBase_Subject => $GetParam{MIMEBase_Subject},
+        MIMEBase_Body    => $GetParam{MIMEBase_Body},
+    );
+
+=cut
+
+sub JobInsertErrorsCheck {
+    my ( $Self, %Param ) = @_;
+
+    my %Errors;
+    if ( !$Param{Name} ) {
+        $Errors{ProfileInvalid} = 'Missing';
+    }
+
+    if ( length $Param{NewNoteFrom} > 200 ) {
+        $Errors{NewNoteFromServerError} = 'LengthTooLong';
+    }
+    if ( length $Param{NewNoteSubject} > 200 ) {
+        $Errors{NewNoteSubjectServerError} = 'LengthTooLong';
+    }
+    if ( length $Param{NewNoteBody} > 200 ) {
+        $Errors{NewNoteBodyServerError} = 'LengthTooLong';
+    }
+
+    # Check if ticket selection contains stop words
+    my %StopWordsErrors = $Self->StopWordsErrorsGet(
+        Fields => {
+            MIMEBase_From    => $Param{MIMEBase_From},
+            MIMEBase_To      => $Param{MIMEBase_To},
+            MIMEBase_Cc      => $Param{MIMEBase_Cc},
+            MIMEBase_Subject => $Param{MIMEBase_Subject},
+            MIMEBase_Body    => $Param{MIMEBase_Body},
+        },
+        CheckConfig => $Param{CheckConfig},
+    );
+
+    return ( %Errors, %StopWordsErrors );
 }
 
 =head2 JobEventList()

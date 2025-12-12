@@ -2231,14 +2231,29 @@ sub _Mask {
         $Param{To} = '';
     }
 
-    $LayoutObject->Block(
-        Name => $Param{TicketBackType},
-        Data => {
+    if ( $Param{TicketBackType} eq 'TicketBackUndo' ) {
+        $LayoutObject->Block(
+            Name => 'PropertiesLock',
+            Data => {
+                %Param,
+            },
+        );
 
-            #            FormID => $Self->{FormID},
-            %Param,
-        },
-    );
+        $LayoutObject->Block(
+            Name => 'PropertiesLockNotify',
+            Data => {
+                %Param,
+            },
+        );
+    }
+    else {
+        $LayoutObject->Block(
+            Name => 'TicketBack',
+            Data => {
+                %Param,
+            },
+        );
+    }
 
     # get the dynamic fields for this screen
     my $DynamicField = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(

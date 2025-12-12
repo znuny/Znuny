@@ -63,6 +63,21 @@ Core.App.Ready(function () {
 });
 //]]></script>
 
+# start modular frontend application
+<script type="text/javascript">//<![CDATA[
+    var App = {};
+    jQuery(document).ready(function () {
+        if (typeof Env !== 'undefined' && Env.Application) {
+            App = new Env.Application(
+                {
+                    loadModules: false
+                });
+            App.run();
+        }
+    });
+//]]></script>
+
+
 <div id="AjaxErrorDialog">
     <div id="AjaxErrorDialogInner">
         <div class="NoConnection" style="display:none;">

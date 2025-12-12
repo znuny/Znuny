@@ -165,6 +165,13 @@ sub Run {
                         TicketID => $Self->{TicketID}
                     },
                 );
+                $LayoutObject->Block(
+                    Name => 'PropertiesLockNotify',
+                    Data => {
+                        %Param,
+                        TicketID => $Self->{TicketID}
+                    },
+                );
             }
         }
         else {

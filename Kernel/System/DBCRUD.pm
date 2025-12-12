@@ -15,8 +15,6 @@ use strict;
 use warnings;
 use utf8;
 
-use Data::UUID;
-
 use Kernel::System::VariableCheck qw(:all);
 
 use Kernel::System::DB;
@@ -31,6 +29,7 @@ our @ObjectDependencies = (
     'Kernel::System::Encode',
     'Kernel::System::JSON',
     'Kernel::System::Log',
+    'Kernel::System::Util',
     'Kernel::System::XML',
     'Kernel::System::YAML',
     'Kernel::System::DBCRUD::Format',
@@ -156,6 +155,7 @@ sub DataAdd {
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
     my $JSONObject  = $Kernel::OM->Get('Kernel::System::JSON');
     my $LogObject   = $Kernel::OM->Get('Kernel::System::Log');
+    my $UtilObject  = $Kernel::OM->Get('Kernel::System::Util');
 
     if ( !$Self->{FunctionDataAdd} ) {
         $LogObject->Log(
@@ -220,9 +220,7 @@ sub DataAdd {
     }
 
     # Generate a UUID to retrieve the ID of the created database record.
-    my $UUIDObject = Data::UUID->new();
-    my $UUID       = $UUIDObject->create();
-    $UUID = lc $UUIDObject->to_string($UUID);
+    my $UUID = $UtilObject->CreateUUIDString();
 
     push @InsertColumns, $Self->{UUIDDatabaseTableColumnName};
     push @InsertValues,  '?';

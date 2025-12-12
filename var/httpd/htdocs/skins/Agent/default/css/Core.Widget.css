@@ -439,7 +439,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     .WidgetSimpleSecondary li a,
     .WidgetSimpleSecondary li span{
-        text-transform: uppercase;
+        /*text-transform: uppercase;*/
         /*padding: 0 6px;*/
         color: var(--black);
     }
@@ -2505,6 +2505,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     /* widget name container */
     /*.SidebarColumn .WidgetSimple:first-child form */
+    .list li,
     .active-widgets-list li {
         display: flex;
         flex-flow: row;
@@ -2945,6 +2946,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     .Dashboard.mainStructure.LayoutFixedSidebar .DashboardWidgetExpand {
         display: flex;
+        margin-top: 5px;
     }
 
     .DashboardWidgetExpand {

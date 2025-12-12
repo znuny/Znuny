@@ -1,0 +1,31 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+.layoutContentSidebar {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  gap: 20px;
+  padding-left: 15px;
+  transition: flex-basis 500ms ease-in-out;
+  min-height: calc(100vh - 205px);
+  max-width: 100%;
+}
+@media (max-width: 575px) {
+  .layoutContentSidebar {
+    grid-template-columns: calc(100% - 60px) 40px;
+    padding-left: 0;
+  }
+}
+.layoutContentSidebar .sectionSidebar {
+  background-color: var(--background-quinary-color);
+}
+
+/*# sourceMappingURL=Layout.ContentSidebar.css.map */

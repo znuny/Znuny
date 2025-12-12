@@ -9,6 +9,7 @@
 
 [% RenderBlockStart("Properties") %]
 [% TicketFrontendConfig = Config("Ticket::Frontend::" _ Env("Action") ) %]
+[% CustomerIDReadOnlyConfig = Config("Ticket::Frontend::" _ Env("Action") _ "::CustomerIDReadOnly" ) %]
 
 <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" name="compose" id="Compose" class="Validate PreventMultipleSubmits AgentTicketActionCommon">
     <input type="hidden" name="Action" value="[% Env("Action") %]"/>
@@ -53,9 +54,9 @@
 
 [% RenderBlockStart("TicketBack") %]
             <div>
-               <a class="CancelClosePopup btn-cancel-ghost btn-main btn-width-md" href="#">
+                <a class="CancelClosePopup btn-cancel-ghost btn-main btn-width-md" href="#">
                 [% Translate("Cancel") | html %]
-               </a>
+                </a>
             </div>
 [% RenderBlockEnd("TicketBack") %]
 [% RenderBlockStart("PropertiesLock") %]
@@ -79,6 +80,38 @@
                 </div>
                 <div class="Content">
                     <fieldset class="TableLike FixedLabel card-item-wrapper">
+                        [% IF TicketFrontendConfig.CustomerUser %]
+                        <div class="card-item col-wide-33 col-desktop-50 col-tablet-50">
+                            <h2 class="card-title">[% Translate("Customer") | html %]</h2>
+[% RenderBlockStart("CustomerUser") %]
+                            <input type="hidden" name="SelectedCustomerUser" id="SelectedCustomerUser" value="[% Data.SelectedCustomerUser | html %]" />
+                            <div>
+                                [% IF Data.CustomerUserMandatory %]
+                                    <label for="CustomerAutoComplete" class="Mandatory">
+                                        <span class="Marker">*</span>
+                                        [% Translate("Customer user") | html %]:
+                                    </label>
+                                [% ELSE %]
+                                    <label for="CustomerAutoComplete">
+                                        [% Translate("Customer user") | html %]:
+                                    </label>
+                                [% END %]
+                                <div class="Field">
+                                    <input id="CustomerAutoComplete" type="text" name="CustomerUserID" value="[% Data.CustomerUserID | html %]" class="W75pc[% IF Data.CustomerUserMandatory %] Validate_Required[% END %] [% Data.CustomerUserIDInvalid | html %]" autocomplete="off" />
+                                    [% IF Data.CustomerUserMandatory %]
+                                        <div id="CustomerAutoCompleteError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                        <div id="CustomerAutoCompleteServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                    [% END %]
+                                </div>
+                            </div>
+[% RenderBlockEnd("CustomerUser") %]
+[% RenderBlockStart("CustomerID") %]
+                            <div>
+                                [% INCLUDE "CustomerCompany/TicketCustomerIDSelection.tt" Required = 0 Readonly = CustomerIDReadOnlyConfig %]
+                            </div>
+[% RenderBlockEnd("CustomerID") %]
+                        </div>
+                        [% END %]
                         [% IF Config('Ticket::Service') && TicketFrontendConfig.Service %]
                         <div class="card-item col-wide-33 col-desktop-50 col-tablet-50">
                             <h2 class="card-title">[% Translate("Service") | html %]</h2>

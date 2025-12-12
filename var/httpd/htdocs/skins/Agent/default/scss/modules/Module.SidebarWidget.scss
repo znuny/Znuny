@@ -1,0 +1,67 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+@import './../utilities/Utility.Clear';
+
+$sidebarWidgetTitleBackgroundColor: #FAFAFB;
+.modSidebarWidget {
+  >.inner {
+    .sidebarWidgetTitle {
+      background-color: $sidebarWidgetTitleBackgroundColor;
+      @include clear();
+      position: relative;
+      h3 {
+        padding: 15px 15px;
+        //padding-bottom: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+        border-top: var(--border-width) var(--border-solid) var(--border-color);
+        margin-top: -1px;
+        margin-bottom: 0;
+      }
+      &::before {
+        background-image: url(../../img/icons/arrow-top.svg);
+        background-size: 12px 12px;
+        background-repeat: no-repeat;
+        background-position: center  right ;
+        content: "";
+        width: 12px;
+        height: 12px;
+        position: absolute;
+        right: 19px;
+        top: 16px;
+        transform: rotate(180deg);
+
+      }
+      &:hover {
+        cursor: pointer;
+        background-color: rgba($sidebarWidgetTitleBackgroundColor, 0.6);
+      }
+    }
+    .sidebarWidgetContent {
+      padding: 15px 15px;
+      @include clear();
+      transition: all 0.25s ease-out;
+    }
+
+    &.sidebarWidgetClosed {
+      .sidebarWidgetContent {
+        max-height: 0;
+        overflow: hidden;
+        padding-bottom: 0;
+        padding-top: 0;
+        border-bottom: none;
+        will-change: max-height;
+      }
+      .sidebarWidgetTitle::before {
+        transform: rotate(0deg);
+      }
+    }
+  }
+}

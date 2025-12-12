@@ -1,0 +1,34 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+<div class="mod modAlert"{% if ID %} id="{{ ID }}"{% endif %}>
+    <div class="inner">
+        <script type="application/json" class="alertData">
+            {
+                "message": "{{ "You have undeployed settings:" | Translate }}",
+                "type": "{{ Class | lower }}",
+                "actionSeparator": "{{ "or" | Translate }}",
+                "actions": [
+                    {
+                        "url": "{{ Link }}",
+                        "text": "{{ "Standard Deploy" | Translate }}",
+                        "type": "primary",
+                        "classes": "CallForAction btn-main btn-primary"
+                    },
+                    {
+                        "url": "#",
+                        "id": "QuickDeploy",
+                        "text": "{{ "Quick Deploy" | Translate }}",
+                        "type": "ghost",
+                        "classes": "CallForAction btn-main btn-primary-ghost"
+                    }
+                ]
+            }
+        </script>
+    </div>
+</div>

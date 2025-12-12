@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.873531777956557;
+    $Self->{Completeness}        = 0.865793257708899;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -712,6 +712,9 @@ sub Data {
         'Add Job' => '添加任务',
         'Filter for Jobs' => '任务筛选',
         'Filter for jobs' => '任务筛选',
+        'Upload a file in YAML format (as provided by the export) to import generic agent jobs.' =>
+            '',
+        'Overwrite existing generic agents?' => '',
         'Generic Agent Job Management' => '自动任务管理',
         'Edit Job' => '编辑任务',
         'Run Job' => '运行任务',
@@ -1621,6 +1624,9 @@ sub Data {
         'Add PostMaster Filter' => '添加邮箱管理员过滤器',
         'Filter for PostMaster Filters' => '邮箱管理员过滤规则筛选',
         'Filter for PostMaster filters' => '邮箱管理员过滤规则筛选',
+        'Upload a file in YAML format (as provided by the export) to import postmaster filters.' =>
+            '',
+        'Overwrite existing postmaster filters?' => '',
         'To dispatch or filter incoming emails based on email headers. Matching using Regular Expressions is also possible.' =>
             '基于邮件标头标记的分派或过滤。可以使用正则表达式进行匹配。',
         'If you want to match only the email address, use EMAILADDRESS:info@example.com in From, To or Cc.' =>
@@ -2016,6 +2022,28 @@ sub Data {
         'Run Query' => '执行查询',
         '%s Results' => '%s 的结果',
         'Query is executed.' => '查询已执行。',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+        'Add Outbound Email Profile' => '',
+        'Filter for outbound email profiles' => '',
+        'Manage Outbound Email Profiles' => '',
+        'Update Outbound Email Profile' => '',
+        'Email addresses' => '',
+        'Fallback' => '',
+        'Email addresses have to be configured!' => '',
+        'yes' => '是',
+        'no' => '否',
+        'Delete outbound email profile' => '',
+        'Command' => '',
+        'Port' => '端口',
+        'Enter a number between 1 and 65535.' => '',
+        'Port to use for given host (if non-standard port).' => '',
+        'Enter a number between 1 and 999.' => '',
+        'Timeout (in seconds) for connection to host.' => '',
+        'Skip SSL verification' => '',
+        'Select to make this the fallback/default config for any email address not configured in other outbound email profiles. Only one outbound email profile can be the fallback.' =>
+            '',
+        'Edit current fallback outbound email profile (host %s).' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
         'Add Service' => '添加服务',
@@ -2629,6 +2657,7 @@ sub Data {
         'Change Responsible of %s%s%s' => '变更工单%s%s%s的负责人',
         'The ticket has been locked' => '工单已锁定',
         'Ticket Settings' => '工单设置',
+        'Customer user' => '客户用户',
         'Service invalid.' => '服务无效。',
         'SLA invalid.' => 'SLA无效。',
         'Team Data' => '',
@@ -2681,45 +2710,44 @@ sub Data {
         'Execute Bulk Action' => '执行批量操作',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
-        'Compose Answer for %s%s%s' => '撰写工单%s%s%s的回复邮件',
         'Date Invalid!' => '日期无效！',
-        'Select one or more recipients from the customer user address book.' =>
-            '从客户用户通讯录中选择一个或多个收件人。',
-        'Customer user address book' => '客户用户通讯录',
-        'This address is registered as system address and cannot be used: %s' =>
-            '这个邮件地址：%s已被注册为系统邮件地址，不能使用。',
-        'Please include at least one recipient' => '请包括至少一个收件人',
-        'Remove Ticket Customer' => '移除工单客户',
         'Please remove this entry and enter a new one with the correct value.' =>
             '请删除这个条目并重新输入一个正确的值。',
         'This address already exists on the address list.' => '地址列表已有这个地址。',
-        'Remove Cc' => '移除Cc',
+        'Search for customer' => '',
+        'Open address book' => '',
+        'Address book' => '',
+        'Customer suggestions' => '',
+        'Please include at least one recipient' => '请包括至少一个收件人',
+        'This address is registered as system address and cannot be used: %s' =>
+            '这个邮件地址：%s已被注册为系统邮件地址，不能使用。',
         'Bcc' => '暗送',
-        'Remove Bcc' => '移除Bcc',
+        'Undo & close' => '撤销并关闭',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
         'Change Customer of %s%s%s' => '变更工单%s%s%s的客户',
         'Customer Information' => '客户信息',
-        'Customer user' => '客户用户',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
         'Create New Email Ticket' => '创建邮件工单',
-        'Example Template' => '模板样例',
         'To customer user' => '选择客户用户',
         'Please include at least one customer user for the ticket.' => '请包括至少一个客户用户。',
-        'Select this customer as the main customer.' => '选择这个客户用户作为主要联系人。',
-        'Remove Ticket Customer User' => '移除客户用户',
         'From queue' => '从队列',
         'Get all' => '获取全部',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
-        'Outbound Email for %s%s%s' => '%s%s%s的外发邮件',
+        'Undo & Close' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => '重新发送电子邮件给%s%s%s',
         'All fields marked with an asterisk (*) are mandatory.' => '所有带“*”的字段都是强制要求输入的字段.',
         'Cancel & close' => '取消并关闭',
-        'Undo & close' => '撤销并关闭',
+        'Select one or more recipients from the customer user address book.' =>
+            '从客户用户通讯录中选择一个或多个收件人。',
+        'Customer user address book' => '客户用户通讯录',
+        'Remove Ticket Customer' => '移除工单客户',
+        'Remove Cc' => '移除Cc',
+        'Remove Bcc' => '移除Bcc',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s/%s)!' => '工单%s：首次响应时间已超时(%s/%s)！',
@@ -2728,9 +2756,6 @@ sub Data {
         'Ticket %s: update time will be over in %s/%s!' => '工单%s: 更新时间将在%s/%s内超时！',
         'Ticket %s: solution time is over (%s/%s)!' => '工单%s: 解决时间已超时(%s/%s)！',
         'Ticket %s: solution time will be over in %s/%s!' => '工单%s：解决时间将在%s/%s内超时！',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketForward.tt
-        'Forward %s%s%s' => '转发%s%s%s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => '%s%s%s历史',
@@ -2798,9 +2823,6 @@ sub Data {
         'Please include at least one customer for the ticket.' => '请包括至少一个客户用户。',
         'To queue' => '队列',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhoneCommon.tt
-        'Phone Call for %s%s%s' => '%s%s%s的电话',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPlain.tt
         'View Email Plain Text for %s%s%s' => '查看%s%s%s的邮件纯文本',
         'Plain' => '纯文本',
@@ -2854,12 +2876,12 @@ sub Data {
         'Save filter settings as default' => '将过滤器设置保存为默认过滤器',
         'Event Type' => '事件类型',
         'Save as default' => '保存为默认',
-        'Drafts' => '草稿',
-        'by' => '由',
         'Change Queue' => '改变队列',
         'There are no dialogs available at this point in the process.' =>
             '目前流程中没有可用的活动对话框。',
         'This item has no articles yet.' => '此条目还没有信件。',
+        'Drafts' => '草稿',
+        'by' => '由',
         'Article Overview - %s Article(s)' => '信件概览-%s个信件',
         'Page %s' => '第%s页',
         'Add Filter' => '添加过滤器',
@@ -3157,7 +3179,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBoracle.tt
         'SID' => '实例名',
-        'Port' => '端口',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerFinish.tt
         'To be able to use Znuny you have to enter the following line in your command line (Terminal/Shell) as root.' =>
@@ -3499,6 +3520,11 @@ sub Data {
         'Do you really want to reset this setting to it\'s default value?' =>
             '你确定要重置这个设置到它的默认值吗？',
 
+        # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DirtyCheck.html.tmpl
+        'You have undeployed settings:' => '',
+        'Standard Deploy' => '',
+        'Quick Deploy' => '',
+
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/HelpDialog.html.tmpl
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.' =>
             '可以使用类别选择来将导航树限制在选择的类别中。一旦选择了某个类别，导航树将被重新构建。',
@@ -3726,6 +3752,17 @@ sub Data {
         'Select at least one recipient.' => '选择至少一个收件人。',
 
         # Perl Module: Kernel/Modules/AdminGenericAgent.pm
+        'Error exporting generic agent job with Name %s!' => '',
+        'Error creating the generic agent job.' => '',
+        'Jobs could not be imported due to an unknown error. Please check logs for more information.' =>
+            '',
+        'The following generic agent jobs have been added successfully: %s.' =>
+            '',
+        'The following generic agent jobs have been updated successfully: %s.' =>
+            '',
+        'The following generic agent jobs were not updated: %s.' => '',
+        'Errors adding/updating the following generic agent jobs: %s. Please check logs for more information.' =>
+            '',
         'minute(s)' => '分钟',
         'hour(s)' => '小时',
         'Time unit' => '时间单位',
@@ -3736,7 +3773,6 @@ sub Data {
         'archive tickets' => '归档工单',
         'restore tickets from archive' => '从归档中恢复工单',
         'Need Profile!' => '需要配置文件！',
-        'Got no values to check.' => '没有检查到值。',
         'Please remove the following words because they cannot be used for the ticket selection:' =>
             '请移除以下不能用于工单选择的词语：',
 
@@ -3958,6 +3994,17 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
         'No such filter: %s' => '没有这个过滤器：%s',
+        'Error exporting postmaster filter with Name %s!' => '',
+        'Error creating the postmaster filter.' => '',
+        'Filters could not be imported due to an unknown error. Please check logs for more information.' =>
+            '',
+        'The following postmaster filters have been added successfully: %s.' =>
+            '',
+        'The following postmaster filters have been updated successfully: %s.' =>
+            '',
+        'The following postmaster filters were not updated: %s.' => '',
+        'Errors adding/updating the following postmaster filters: %s. Please check logs for more information.' =>
+            '',
 
         # Perl Module: Kernel/Modules/AdminPriority.pm
         'Priority added!' => '优先级已添加!',
@@ -4108,6 +4155,11 @@ sub Data {
         'Errors adding/updating the following salutations: %s. Please check logs for more information.' =>
             '',
 
+        # Perl Module: Kernel/Modules/AdminSendmailConfig.pm
+        'Outbound email profile updated!' => '',
+        'Configuration option \'SendmailModule\' has to be set to \'Kernel::System::Email::MultiSendmail\' to be able to use the outbound email profiles managed here.' =>
+            '',
+
         # Perl Module: Kernel/Modules/AdminSignature.pm
         'Signature updated!' => '签名已更新!',
         'Signature added!' => '签名已添加!',
@@ -4142,6 +4194,7 @@ sub Data {
         'Category Search' => '搜索类别',
 
         # Perl Module: Kernel/Modules/AdminSystemConfigurationDeployment.pm
+        'Quick Deploy by' => '',
         'Some imported settings are not present in the current state of the configuration or it was not possible to update them. Please check the Znuny log for more information.' =>
             '某些导入的设置不在配置的当前状态中，或者无法进行更新。 请查看Znuny日志了解更多信息。',
 
@@ -4532,12 +4585,14 @@ sub Data {
         'Need CustomerID!' => '需要客户ID！',
         'My Tickets' => '我的工单',
         'Company Tickets' => '单位工单',
+        'You have no permission or the ticket does not exist.' => '',
         'Untitled!' => '未命名！',
 
         # Perl Module: Kernel/Modules/CustomerTicketSearch.pm
         'Customer Realname' => '客户用户真实姓名',
         'Created within the last' => '在最近...之内创建的',
         'Created more than ... ago' => '在...之前创建的',
+        'Got no values to check.' => '没有检查到值。',
         'Please remove the following words because they cannot be used for the search:' =>
             '请移除以下不能用于搜索的词语：',
 
@@ -4814,10 +4869,6 @@ sub Data {
         'You have %s invalid setting(s) deployed. Click here to show invalid settings.' =>
             '您已经部署了%s个无效的设置，点击此处显示无效的设置。',
 
-        # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationIsDirtyCheck.pm
-        'You have undeployed settings, would you like to deploy them?' =>
-            '你有取消部署的设置，是否要部署它们？',
-
         # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationOutOfSyncCheck.pm
         'The configuration is being updated, please be patient...' => '配置正在更新，请耐心等待...',
         'There is an error updating the system configuration!' => '更新系统配置时出现错误！',
@@ -5018,6 +5069,10 @@ sub Data {
         'The field content is too long!' => '字段值太长了！',
         'Maximum size is %s characters.' => '最多%s个字符。',
 
+        # Perl Module: Kernel/System/GenericAgent.pm
+        'Couldn\'t read Job configuration YAML file. Please make sure the file is valid.' =>
+            '',
+
         # Perl Module: Kernel/System/MailQueue.pm
         'Error while validating Message data.' => '',
         'Error while validating Sender email address.' => '',
@@ -5041,6 +5096,10 @@ sub Data {
         'File is not installed!' => '文件没有安装！',
         'File is different!' => '文件被修改！',
         'Can\'t read file!' => '不能读取文件！',
+
+        # Perl Module: Kernel/System/PostMaster/Filter.pm
+        'Couldn\'t read Filter configuration YAML file. Please make sure the file is valid.' =>
+            '',
 
         # Perl Module: Kernel/System/ProcessManagement/DB/Process.pm
         'The process "%s" and all of its data has been imported successfully.' =>
@@ -5873,8 +5932,6 @@ sub Data {
             '定义服务人员界面显示当前登录的所有服务人员的模块。',
         'Defines the module that shows all the currently logged in customers in the agent interface.' =>
             '定义服务人员界面显示当前登录的所有客户人员的模块。',
-        'Defines the module to display a notification in the agent interface, if there are modified sysconfig settings that are not deployed yet.' =>
-            '如果修改过系统配置设置但还没有部署，定义在服务人员界面中显示一条通知的模块。',
         'Defines the module to display a notification in the agent interface, if there are invalid sysconfig settings deployed.' =>
             '如果部署了无效的系统配置设置，定义在服务人员界面中显示一条通知的模块。',
         'Defines the module to display a notification in the agent interface, if the agent is logged in while having out-of-office active.' =>
@@ -6750,6 +6807,8 @@ sub Data {
         'Sets the queue in the ticket free text screen of a zoomed ticket in the agent interface.' =>
             '设置服务人员界面工单自定义字段屏幕的队列。',
         'Sets if queue must be selected by the agent.' => '设置是否必须由服务人员选择队列。',
+        'Sets the customer user field in the agent interface.' => '',
+        'Sets the customer user field as mandatory.' => '',
         'Sets the ticket owner in the ticket free text screen of the agent interface.' =>
             '设置服务人员界面工单自定义字段屏幕的工单所有者。',
         'Sets if ticket owner must be selected by the agent.' => '设置是否必须由服务人员选择工单所有者。',
@@ -8091,6 +8150,8 @@ sub Data {
         'Define a process icon.' => '',
         'Defines which ContentTypes are permitted for the attachment preview.' =>
             '',
+        'Names of system config options with email addresses to also be selectable for an outbound email profile (besides system addresses).' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '暂时无效',
@@ -8365,6 +8426,9 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SMIME.js
         'Do you really want to delete this certificate?' => '你确定要删除这个证书吗？',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SendmailConfig.js
+        'Do you really want to delete this outbound email profile?' => '',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SupportDataCollector.js
         'Generating...' => '正在生成...',
         'It was not possible to generate the Support Bundle.' => '无法生成支持数据包。',
@@ -8475,8 +8539,6 @@ sub Data {
             '抱歉，你不能将标记为强制的通知的所有传输方法都禁用掉。',
         'Sorry, but you can\'t disable all methods for this notification.' =>
             '抱歉，你不能将本通知的所有传输方法都禁用掉。',
-        'Please note that at least one of the settings you have changed requires a page reload. Click here to reload the current screen.' =>
-            '请注意，你更改的设置至少有一个需要重新加载页面。 点击这里重新加载当前屏幕。',
         'An unknown error occurred. Please contact the administrator.' =>
             '出现未知错误，请联系管理员。',
 
@@ -8607,8 +8669,6 @@ sub Data {
             '删除附件时发生未知错误，请再试一次。 如果错误仍然存在，请与系统管理员联系。',
 
         # JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
-        'yes' => '是',
-        'no' => '否',
         'This is %s' => '这是%s',
         'Complex %s with %s arguments' => '复杂%s，带有%s参数',
 
@@ -9047,6 +9107,7 @@ Thanks for your help!
         'Manage System Configuration Deployments.' => '管理系统配置部署。',
         'Manage different calendars.' => '管理不同的日历。',
         'Manage existing sessions.' => '管理已登录会话。',
+        'Manage outbound email profiles.' => '',
         'Manage support data.' => '管理支持数据。',
         'Manage system files.' => '',
         'Manage tasks triggered by event or time based execution.' => '管理事件触发或基于时间执行的任务。',
@@ -9102,6 +9163,7 @@ Thanks for your help!
         'Out Of Office' => '不在办公室',
         'Out Of Office Time' => '不在办公室的时间',
         'Out of Office users.' => '不在办公室的用户。',
+        'Outbound Email Profiles' => '',
         'Overview Escalated Tickets.' => '已升级工单概览。',
         'Overview Refresh Time' => '概览刷新间隔',
         'Overview of all Tickets per assigned Queue.' => '每个分配队列的所有工单概览。',
@@ -9451,7 +9513,6 @@ Thanks for your help!
         'Clone web service',
         'Close preview',
         'Close this dialog',
-        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9474,6 +9535,7 @@ Thanks for your help!
         'Delete field',
         'Delete invoker',
         'Delete operation',
+        'Delete outbound email profile',
         'Delete this %s',
         'Delete this Attachment',
         'Delete this Event Trigger',
@@ -9510,6 +9572,7 @@ Thanks for your help!
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
+        'Do you really want to delete this outbound email profile?',
         'Do you really want to delete this scheduled system maintenance?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
@@ -9611,7 +9674,6 @@ Thanks for your help!
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
-        'Please note that at least one of the settings you have changed requires a page reload. Click here to reload the current screen.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
         'Please remove the following words from your search as they cannot be searched for:',
@@ -9624,6 +9686,7 @@ Thanks for your help!
         'Previous',
         'Process state',
         'Queues',
+        'Quick Deploy',
         'Reload page',
         'Reload page (%ss)',
         'Remove',
@@ -9680,6 +9743,7 @@ Thanks for your help!
         'Sorry, you can only upload one file here.',
         'Split',
         'Stacked',
+        'Standard Deploy',
         'Start date',
         'Status',
         'Stream',
@@ -9760,7 +9824,7 @@ Thanks for your help!
         'Yes',
         'You can either have the affected settings updated automatically to reflect the changes you just made or do it on your own by pressing \'update manually\'.',
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.',
-        'You have undeployed settings, would you like to deploy them?',
+        'You have undeployed settings:',
         'activate to apply a descending sort',
         'activate to apply an ascending sort',
         'activate to remove the sort',
@@ -9770,6 +9834,7 @@ Thanks for your help!
         'more',
         'no',
         'none',
+        'or',
         'sorting is disabled',
         'week',
         'yes',

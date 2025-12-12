@@ -28,12 +28,6 @@ Checks if MySQL database is using correct charset.
 
 =cut
 
-sub CheckPreviousRequirement {
-    my ( $Self, %Param ) = @_;
-
-    return 1;
-}
-
 sub Run {
     my ( $Self, %Param ) = @_;
 

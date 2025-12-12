@@ -1,0 +1,71 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+@import './../utilities/Utility.MediaQueries';
+
+.modMessages {
+  > .inner {
+    position: fixed;
+    top: 90px;
+    right: -15px;
+    width: 400px;
+    //margin-left: -40%;
+    z-index: 99;
+    @include respond-below(lg) {
+      //width: 95%;
+      //margin-left: -47.5%;
+      width: 300px;
+    }
+
+    .message {
+      position: relative;
+      transition: all 1s ease;
+      margin-bottom: 5px;
+      float: left;
+      display: inline-block;
+      min-width: 100%;
+      &.messageActive {
+        transform: translateX(-25px);
+      }
+
+      .messageClose {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        cursor: pointer;
+        background-color: white;
+        padding: 2px;
+        align-self: center;
+        text-align: center;
+        border-radius: 20px;
+        width: 22px;
+        height: 22px;
+        margin-top: -1px;
+        border: none;
+
+        &:hover {
+          cursor: pointer;
+          img {
+            filter: brightness(0) saturate(100%);
+          }
+        }
+
+        img {
+          width: 13px;
+          height: auto;
+          margin-left: 0;
+          margin-top: 2px;
+        }
+      }
+    }
+  }
+}
+
+.Popup .modMessages > .inner {
+  top: 15px;
+}

@@ -47,11 +47,12 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     */
 
     body {
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-family: var(--font-family-primary);
+        /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
         font-size: 12px;
         text-align: left;
         position: relative;
-        background: var(--main-bg-color);
+        background: var(--background-primary-color);
     }
 
     #AppWrapper {
@@ -64,7 +65,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     @media only screen and (max-width: 1024px) {
         /*#AppWrapper - using the AppWrapper was interfering with modals */
         div#ToolBar {
-            padding-top: 49px;
+            padding-top: 73px;
         }
 
         .RealPopup #AppWrapper {
@@ -99,7 +100,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         cursor: pointer;
         display: block;
         position: fixed;
-        top: 11px;
+        top: 22px;
         width: 25px;
         height: 30px;
         padding: var(--padding-xs) 0;
@@ -670,14 +671,20 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .MainBox {
         position: relative;
         padding: var(--main-page-padding);
-        background: var(--main-bg-color);
+        padding-top: 0;
+        /*background: var(--main-bg-color);*/
         display: flex;
-        gap: var(--gap-md);
+        gap: 10px;
         /*flex-wrap: wrap;*/
         flex-direction: column;
         flex: 1; /*to make sure the element fills the remaining height space available*/
         /* this min-heigh is causing a y-axis overflow
         min-height: calc(100vh - 138px);*/
+        margin-top: 15px;
+    }
+    /* hide element because it causes height */
+    #AttachmentWindow {
+        display: none;
     }
 
     @media only screen and (max-width: 1024px) {
@@ -711,6 +718,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         /*padding-bottom: var(--main-page-padding);*/
         letter-spacing: .1px;
         min-width: 100%;
+        line-height: 90%;
     }
 
     .MainBox > h1 + .FieldExplanation {

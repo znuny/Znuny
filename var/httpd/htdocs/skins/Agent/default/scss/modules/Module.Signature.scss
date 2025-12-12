@@ -1,0 +1,20 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+.modSignature {
+  >.inner {
+    .signatureField {
+      background-color: var(--background-tertiary-color);
+
+      iframe  {
+        border-radius: var(--border-radius-sm);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+      }
+    }
+  }
+}

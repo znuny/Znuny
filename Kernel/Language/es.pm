@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.579565567176187;
+    $Self->{Completeness}        = 0.574372903019652;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -712,6 +712,9 @@ sub Data {
         'Add Job' => 'Añadir trabajo',
         'Filter for Jobs' => 'Filtro por trabajos',
         'Filter for jobs' => 'Filtro por trabajos',
+        'Upload a file in YAML format (as provided by the export) to import generic agent jobs.' =>
+            '',
+        'Overwrite existing generic agents?' => '',
         'Generic Agent Job Management' => 'Gestión de trabajos del agente',
         'Edit Job' => 'Editar trabajo',
         'Run Job' => 'Ejecutar trabajo',
@@ -1621,6 +1624,9 @@ sub Data {
         'Add PostMaster Filter' => 'Añada Filtro PostMaster',
         'Filter for PostMaster Filters' => '',
         'Filter for PostMaster filters' => '',
+        'Upload a file in YAML format (as provided by the export) to import postmaster filters.' =>
+            '',
+        'Overwrite existing postmaster filters?' => '',
         'To dispatch or filter incoming emails based on email headers. Matching using Regular Expressions is also possible.' =>
             'Para enviar o filtrar los correos electrónicos entrantes basados ​​en encabezados de correo electrónico . La coincidencia usando Expresiones Regulares también es posible.',
         'If you want to match only the email address, use EMAILADDRESS:info@example.com in From, To or Cc.' =>
@@ -2016,6 +2022,28 @@ sub Data {
         'Run Query' => 'Ejecutar Consulta',
         '%s Results' => '%s Resultados',
         'Query is executed.' => 'Consulta se ejecuta.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+        'Add Outbound Email Profile' => '',
+        'Filter for outbound email profiles' => '',
+        'Manage Outbound Email Profiles' => '',
+        'Update Outbound Email Profile' => '',
+        'Email addresses' => '',
+        'Fallback' => '',
+        'Email addresses have to be configured!' => '',
+        'yes' => 'sí',
+        'no' => 'no',
+        'Delete outbound email profile' => '',
+        'Command' => '',
+        'Port' => 'Puerto',
+        'Enter a number between 1 and 65535.' => '',
+        'Port to use for given host (if non-standard port).' => '',
+        'Enter a number between 1 and 999.' => '',
+        'Timeout (in seconds) for connection to host.' => '',
+        'Skip SSL verification' => '',
+        'Select to make this the fallback/default config for any email address not configured in other outbound email profiles. Only one outbound email profile can be the fallback.' =>
+            '',
+        'Edit current fallback outbound email profile (host %s).' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
         'Add Service' => 'Añadir servicio',
@@ -2629,6 +2657,7 @@ sub Data {
         'Change Responsible of %s%s%s' => 'Cambiar Responsable de %s%s',
         'The ticket has been locked' => 'El ticket ha sido bloqueado',
         'Ticket Settings' => 'Ajustes de los tickets',
+        'Customer user' => 'Usuario del cliente',
         'Service invalid.' => 'Servicio no válido',
         'SLA invalid.' => '',
         'Team Data' => '',
@@ -2681,45 +2710,44 @@ sub Data {
         'Execute Bulk Action' => 'Ejecutar Acción en Bloque',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
-        'Compose Answer for %s%s%s' => 'Redactar una Respuesta para %s%s%s',
         'Date Invalid!' => '¡Fecha no válida!',
-        'Select one or more recipients from the customer user address book.' =>
-            '',
-        'Customer user address book' => '',
-        'This address is registered as system address and cannot be used: %s' =>
-            'Esta dirección está registrada como una dirección de sistema y no se puede utilizar: %s',
-        'Please include at least one recipient' => 'Incluya al menos un destinatario',
-        'Remove Ticket Customer' => 'Eliminar el cliente del ticket',
         'Please remove this entry and enter a new one with the correct value.' =>
             'Elimine esta entrada e introduzca una nueva con el valor correcto.',
         'This address already exists on the address list.' => 'Esta dirección ya estaba en la lista de direcciones.',
-        'Remove Cc' => 'Eliminar Cc',
+        'Search for customer' => '',
+        'Open address book' => '',
+        'Address book' => '',
+        'Customer suggestions' => '',
+        'Please include at least one recipient' => 'Incluya al menos un destinatario',
+        'This address is registered as system address and cannot be used: %s' =>
+            'Esta dirección está registrada como una dirección de sistema y no se puede utilizar: %s',
         'Bcc' => 'Copia oculta',
-        'Remove Bcc' => 'Eliminar "Copia oculta"',
+        'Undo & close' => 'Deshacer y cerrar',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
         'Change Customer of %s%s%s' => 'Cambiar Cliente de  %s%s%s',
         'Customer Information' => 'Información del cliente',
-        'Customer user' => 'Usuario del cliente',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
         'Create New Email Ticket' => 'Crear un nuevo ticket por correo electrónico',
-        'Example Template' => 'Ejemplo Plantilla',
         'To customer user' => 'Al usuario cliente',
         'Please include at least one customer user for the ticket.' => 'Por favor, incluya al menos un usuario cliente para el ticket.',
-        'Select this customer as the main customer.' => 'Seleccionar a este cliente como el cliente principal.',
-        'Remove Ticket Customer User' => 'Eliminar el usuario cliente del ticket',
         'From queue' => 'De la cola',
         'Get all' => 'Obtener todo',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
-        'Outbound Email for %s%s%s' => 'Email de Salida para %s%s%s',
+        'Undo & Close' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => '',
         'All fields marked with an asterisk (*) are mandatory.' => 'Todos los campos marcados con un asterisco (*) son obligatorios.',
         'Cancel & close' => 'Cancelar y cerrar',
-        'Undo & close' => 'Deshacer y cerrar',
+        'Select one or more recipients from the customer user address book.' =>
+            '',
+        'Customer user address book' => '',
+        'Remove Ticket Customer' => 'Eliminar el cliente del ticket',
+        'Remove Cc' => 'Eliminar Cc',
+        'Remove Bcc' => 'Eliminar "Copia oculta"',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s/%s)!' => 'Ticket %s: tiempo de primera respuesta ha sido excedido (%s%s)!',
@@ -2728,9 +2756,6 @@ sub Data {
         'Ticket %s: update time will be over in %s/%s!' => 'Ticket %s: tiempo de actualización será excedido en %s%s!',
         'Ticket %s: solution time is over (%s/%s)!' => 'Ticket %s: tiempo de resolución ha sido excedido (%s%s)!',
         'Ticket %s: solution time will be over in %s/%s!' => 'Ticket %s: tiempo de resolución será excedido en %s%s!',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketForward.tt
-        'Forward %s%s%s' => 'Reenviar %s%s%s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => 'Histórico de %s%s%s',
@@ -2798,9 +2823,6 @@ sub Data {
         'Please include at least one customer for the ticket.' => 'Incluya al menos un cliente para el ticket',
         'To queue' => 'En la cola',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhoneCommon.tt
-        'Phone Call for %s%s%s' => 'Llamada Telefónica para %s%s%s',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPlain.tt
         'View Email Plain Text for %s%s%s' => 'Ver Email en Texto Plano para %s%s%s',
         'Plain' => 'Texto plano',
@@ -2854,12 +2876,12 @@ sub Data {
         'Save filter settings as default' => 'Guardar los ajustes del filtro como predeterminados',
         'Event Type' => 'Tipo Evento',
         'Save as default' => 'Guardar como Por Defecto',
-        'Drafts' => 'Borradores',
-        'by' => 'por',
         'Change Queue' => 'Cambiar de cola',
         'There are no dialogs available at this point in the process.' =>
             'No hay diálogos disponibles en este punto del proceso.',
         'This item has no articles yet.' => 'Este elemento todavía no tiene ningún artículo.',
+        'Drafts' => 'Borradores',
+        'by' => 'por',
         'Article Overview - %s Article(s)' => '',
         'Page %s' => '',
         'Add Filter' => 'Añadir un filtro',
@@ -3157,7 +3179,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBoracle.tt
         'SID' => 'SID',
-        'Port' => 'Puerto',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerFinish.tt
         'To be able to use Znuny you have to enter the following line in your command line (Terminal/Shell) as root.' =>
@@ -3499,6 +3520,11 @@ sub Data {
         'Do you really want to reset this setting to it\'s default value?' =>
             '',
 
+        # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DirtyCheck.html.tmpl
+        'You have undeployed settings:' => '',
+        'Standard Deploy' => '',
+        'Quick Deploy' => '',
+
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/HelpDialog.html.tmpl
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.' =>
             '',
@@ -3726,6 +3752,17 @@ sub Data {
         'Select at least one recipient.' => 'Selecciona un recipiente por lo menos.',
 
         # Perl Module: Kernel/Modules/AdminGenericAgent.pm
+        'Error exporting generic agent job with Name %s!' => '',
+        'Error creating the generic agent job.' => '',
+        'Jobs could not be imported due to an unknown error. Please check logs for more information.' =>
+            '',
+        'The following generic agent jobs have been added successfully: %s.' =>
+            '',
+        'The following generic agent jobs have been updated successfully: %s.' =>
+            '',
+        'The following generic agent jobs were not updated: %s.' => '',
+        'Errors adding/updating the following generic agent jobs: %s. Please check logs for more information.' =>
+            '',
         'minute(s)' => 'minuto(s)',
         'hour(s)' => 'hora(s)',
         'Time unit' => 'Unidad de tiempo',
@@ -3736,7 +3773,6 @@ sub Data {
         'archive tickets' => 'archivar tickets',
         'restore tickets from archive' => 'restaurar tickets desde archivo',
         'Need Profile!' => 'Perfil Necesário!',
-        'Got no values to check.' => 'No recibió ningún valor para revisar.',
         'Please remove the following words because they cannot be used for the ticket selection:' =>
             'Por favor elimine las siguientes palabras porque ellas no pueden ser usadas para la selección de ticket:',
 
@@ -3958,6 +3994,17 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
         'No such filter: %s' => 'No existe el filtro: %s',
+        'Error exporting postmaster filter with Name %s!' => '',
+        'Error creating the postmaster filter.' => '',
+        'Filters could not be imported due to an unknown error. Please check logs for more information.' =>
+            '',
+        'The following postmaster filters have been added successfully: %s.' =>
+            '',
+        'The following postmaster filters have been updated successfully: %s.' =>
+            '',
+        'The following postmaster filters were not updated: %s.' => '',
+        'Errors adding/updating the following postmaster filters: %s. Please check logs for more information.' =>
+            '',
 
         # Perl Module: Kernel/Modules/AdminPriority.pm
         'Priority added!' => '¡Prioridad añadida!',
@@ -4108,6 +4155,11 @@ sub Data {
         'Errors adding/updating the following salutations: %s. Please check logs for more information.' =>
             '',
 
+        # Perl Module: Kernel/Modules/AdminSendmailConfig.pm
+        'Outbound email profile updated!' => '',
+        'Configuration option \'SendmailModule\' has to be set to \'Kernel::System::Email::MultiSendmail\' to be able to use the outbound email profiles managed here.' =>
+            '',
+
         # Perl Module: Kernel/Modules/AdminSignature.pm
         'Signature updated!' => '¡Firma actualizada!',
         'Signature added!' => '¡Firma añadida!',
@@ -4142,6 +4194,7 @@ sub Data {
         'Category Search' => '',
 
         # Perl Module: Kernel/Modules/AdminSystemConfigurationDeployment.pm
+        'Quick Deploy by' => '',
         'Some imported settings are not present in the current state of the configuration or it was not possible to update them. Please check the Znuny log for more information.' =>
             '',
 
@@ -4532,12 +4585,14 @@ sub Data {
         'Need CustomerID!' => '¡Se necesita la ID del cliente!',
         'My Tickets' => 'Mis Tickets',
         'Company Tickets' => 'Tickets de Empresa',
+        'You have no permission or the ticket does not exist.' => '',
         'Untitled!' => '¡Sin título!',
 
         # Perl Module: Kernel/Modules/CustomerTicketSearch.pm
         'Customer Realname' => 'Nombre real del Cliente',
         'Created within the last' => 'Creado en los últimos',
         'Created more than ... ago' => 'Creado hace más de ...',
+        'Got no values to check.' => 'No recibió ningún valor para revisar.',
         'Please remove the following words because they cannot be used for the search:' =>
             'Por favor quite las siguientes palabras porque no pueden ser utilizadas en la búsqueda:',
 
@@ -4814,10 +4869,6 @@ sub Data {
         'You have %s invalid setting(s) deployed. Click here to show invalid settings.' =>
             '',
 
-        # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationIsDirtyCheck.pm
-        'You have undeployed settings, would you like to deploy them?' =>
-            '',
-
         # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationOutOfSyncCheck.pm
         'The configuration is being updated, please be patient...' => '',
         'There is an error updating the system configuration!' => '',
@@ -5019,6 +5070,10 @@ sub Data {
         'The field content is too long!' => '¡El contenido del campo es demasiado largo!',
         'Maximum size is %s characters.' => 'La cantidad máxima de caracteres es %s.',
 
+        # Perl Module: Kernel/System/GenericAgent.pm
+        'Couldn\'t read Job configuration YAML file. Please make sure the file is valid.' =>
+            '',
+
         # Perl Module: Kernel/System/MailQueue.pm
         'Error while validating Message data.' => '',
         'Error while validating Sender email address.' => '',
@@ -5042,6 +5097,10 @@ sub Data {
         'File is not installed!' => '¡El archivo no esta instalado!',
         'File is different!' => '¡El archivo es diferente!',
         'Can\'t read file!' => '¡El archivo no se puede leer!',
+
+        # Perl Module: Kernel/System/PostMaster/Filter.pm
+        'Couldn\'t read Filter configuration YAML file. Please make sure the file is valid.' =>
+            '',
 
         # Perl Module: Kernel/System/ProcessManagement/DB/Process.pm
         'The process "%s" and all of its data has been imported successfully.' =>
@@ -5874,8 +5933,6 @@ sub Data {
             'Define el módulo que muestra todos los agentes actualmente conectados en la interfaz del agente.',
         'Defines the module that shows all the currently logged in customers in the agent interface.' =>
             'Define el módulo que muestra todos los clientes actualmente conectados en la interfaz del agente.',
-        'Defines the module to display a notification in the agent interface, if there are modified sysconfig settings that are not deployed yet.' =>
-            '',
         'Defines the module to display a notification in the agent interface, if there are invalid sysconfig settings deployed.' =>
             '',
         'Defines the module to display a notification in the agent interface, if the agent is logged in while having out-of-office active.' =>
@@ -6751,6 +6808,8 @@ sub Data {
         'Sets the queue in the ticket free text screen of a zoomed ticket in the agent interface.' =>
             '',
         'Sets if queue must be selected by the agent.' => '',
+        'Sets the customer user field in the agent interface.' => '',
+        'Sets the customer user field as mandatory.' => '',
         'Sets the ticket owner in the ticket free text screen of the agent interface.' =>
             '',
         'Sets if ticket owner must be selected by the agent.' => '',
@@ -8098,6 +8157,8 @@ El control del acceso adicional para demostrar o no demostrar éste enlace puede
         'Define a process icon.' => '',
         'Defines which ContentTypes are permitted for the attachment preview.' =>
             '',
+        'Names of system config options with email addresses to also be selectable for an outbound email profile (besides system addresses).' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'temporalmente-no-válido',
@@ -8372,6 +8433,9 @@ El control del acceso adicional para demostrar o no demostrar éste enlace puede
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SMIME.js
         'Do you really want to delete this certificate?' => '',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SendmailConfig.js
+        'Do you really want to delete this outbound email profile?' => '',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SupportDataCollector.js
         'Generating...' => 'Generando...',
         'It was not possible to generate the Support Bundle.' => 'No fue posible generar el Paquete de Apoyo.',
@@ -8482,8 +8546,6 @@ El control del acceso adicional para demostrar o no demostrar éste enlace puede
             'Disculpe, pero no puede deshabilitar todos los métodos para las notificación marcadas como obligatorias.',
         'Sorry, but you can\'t disable all methods for this notification.' =>
             'Disculpe, pero no puede deshabilitar todos los métodos para esta notificación.',
-        'Please note that at least one of the settings you have changed requires a page reload. Click here to reload the current screen.' =>
-            '',
         'An unknown error occurred. Please contact the administrator.' =>
             '',
 
@@ -8614,8 +8676,6 @@ El control del acceso adicional para demostrar o no demostrar éste enlace puede
             '',
 
         # JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
-        'yes' => 'sí',
-        'no' => 'no',
         'This is %s' => '',
         'Complex %s with %s arguments' => '',
 
@@ -9055,6 +9115,7 @@ Tu Equipo de Soporte
         'Manage System Configuration Deployments.' => '',
         'Manage different calendars.' => 'Gestionar diferentes calendarios.',
         'Manage existing sessions.' => 'Gestionar sesiones existentes.',
+        'Manage outbound email profiles.' => '',
         'Manage support data.' => 'Gestionar datos de soporte.',
         'Manage system files.' => '',
         'Manage tasks triggered by event or time based execution.' => 'Gestionar tareas activadas por eventos o ejecuciones temporales.',
@@ -9110,6 +9171,7 @@ Tu Equipo de Soporte
         'Out Of Office' => 'Fuera de la Oficina',
         'Out Of Office Time' => 'Tiempo de ausencia de la oficina',
         'Out of Office users.' => 'Usuarios Fuera de la Oficina.',
+        'Outbound Email Profiles' => '',
         'Overview Escalated Tickets.' => '',
         'Overview Refresh Time' => 'Tiempo de actualización de la vista general',
         'Overview of all Tickets per assigned Queue.' => 'Visión general de todos los Tickets por Cola asignada',
@@ -9459,7 +9521,6 @@ Tu Equipo de Soporte
         'Clone web service',
         'Close preview',
         'Close this dialog',
-        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9482,6 +9543,7 @@ Tu Equipo de Soporte
         'Delete field',
         'Delete invoker',
         'Delete operation',
+        'Delete outbound email profile',
         'Delete this %s',
         'Delete this Attachment',
         'Delete this Event Trigger',
@@ -9518,6 +9580,7 @@ Tu Equipo de Soporte
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
+        'Do you really want to delete this outbound email profile?',
         'Do you really want to delete this scheduled system maintenance?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
@@ -9619,7 +9682,6 @@ Tu Equipo de Soporte
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
-        'Please note that at least one of the settings you have changed requires a page reload. Click here to reload the current screen.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
         'Please remove the following words from your search as they cannot be searched for:',
@@ -9632,6 +9694,7 @@ Tu Equipo de Soporte
         'Previous',
         'Process state',
         'Queues',
+        'Quick Deploy',
         'Reload page',
         'Reload page (%ss)',
         'Remove',
@@ -9688,6 +9751,7 @@ Tu Equipo de Soporte
         'Sorry, you can only upload one file here.',
         'Split',
         'Stacked',
+        'Standard Deploy',
         'Start date',
         'Status',
         'Stream',
@@ -9768,7 +9832,7 @@ Tu Equipo de Soporte
         'Yes',
         'You can either have the affected settings updated automatically to reflect the changes you just made or do it on your own by pressing \'update manually\'.',
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.',
-        'You have undeployed settings, would you like to deploy them?',
+        'You have undeployed settings:',
         'activate to apply a descending sort',
         'activate to apply an ascending sort',
         'activate to remove the sort',
@@ -9778,6 +9842,7 @@ Tu Equipo de Soporte
         'more',
         'no',
         'none',
+        'or',
         'sorting is disabled',
         'week',
         'yes',

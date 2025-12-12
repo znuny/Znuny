@@ -1,0 +1,54 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+.modFormSubmitArea > .inner {
+  margin-bottom: 50px;
+}
+.modFormSubmitArea > .inner .formSubmitArea {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+@media (max-width: 1199px) {
+  .modFormSubmitArea > .inner .formSubmitArea {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 1199px) {
+  .modFormSubmitArea > .inner .formSubmitArea .formSubmitAreaCancel a.btn-main, .modFormSubmitArea > .inner .formSubmitArea .formSubmitAreaCancel button.btn-main, .modFormSubmitArea > .inner .formSubmitArea .formSubmitAreaCancel button.btn-cancel-ghost {
+    width: 100%;
+    margin-bottom: 10px;
+    float: left;
+    max-width: 100%;
+  }
+}
+.modFormSubmitArea > .inner .formSubmitArea .formSubmitAreaSubmit {
+  display: flex;
+  float: right;
+  justify-content: right;
+}
+.modFormSubmitArea > .inner .formSubmitArea .formSubmitAreaSubmit button {
+  margin-left: 10px;
+}
+@media (max-width: 1199px) {
+  .modFormSubmitArea > .inner .formSubmitArea .formSubmitAreaSubmit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .modFormSubmitArea > .inner .formSubmitArea .formSubmitAreaSubmit a.btn-main, .modFormSubmitArea > .inner .formSubmitArea .formSubmitAreaSubmit button.btn-main, .modFormSubmitArea > .inner .formSubmitArea .formSubmitAreaSubmit button.btn-cancel-ghost {
+    width: 100%;
+    margin-bottom: 10px;
+    float: left;
+    max-width: 100%;
+    flex-shrink: 0;
+    flex-grow: 1;
+    margin-left: 0px;
+  }
+}
+
+/*# sourceMappingURL=Module.FormSubmitArea.css.map */

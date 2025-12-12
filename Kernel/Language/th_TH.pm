@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.509734513274336;
+    $Self->{Completeness}        = 0.505671832561112;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -705,6 +705,9 @@ sub Data {
         'Add Job' => '',
         'Filter for Jobs' => '',
         'Filter for jobs' => '',
+        'Upload a file in YAML format (as provided by the export) to import generic agent jobs.' =>
+            '',
+        'Overwrite existing generic agents?' => '',
         'Generic Agent Job Management' => '',
         'Edit Job' => '',
         'Run Job' => '',
@@ -1614,6 +1617,9 @@ sub Data {
         'Add PostMaster Filter' => 'เพิ่มตัวกรอง PostMaster',
         'Filter for PostMaster Filters' => '',
         'Filter for PostMaster filters' => '',
+        'Upload a file in YAML format (as provided by the export) to import postmaster filters.' =>
+            '',
+        'Overwrite existing postmaster filters?' => '',
         'To dispatch or filter incoming emails based on email headers. Matching using Regular Expressions is also possible.' =>
             'เพื่อส่งหรือกรองอีเมลขาเข้าขึ้นอยู่กับหัวข้อของอีเมล นอกจากนี้ยังสามารถจับคู่โดยใช้นิพจน์ปกติ',
         'If you want to match only the email address, use EMAILADDRESS:info@example.com in From, To or Cc.' =>
@@ -2011,6 +2017,28 @@ sub Data {
         'Run Query' => 'รันคำสั่ง',
         '%s Results' => '',
         'Query is executed.' => 'คำสั่งถูกดำเนินการ',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+        'Add Outbound Email Profile' => '',
+        'Filter for outbound email profiles' => '',
+        'Manage Outbound Email Profiles' => '',
+        'Update Outbound Email Profile' => '',
+        'Email addresses' => '',
+        'Fallback' => '',
+        'Email addresses have to be configured!' => '',
+        'yes' => 'ใช่',
+        'no' => 'ไม่',
+        'Delete outbound email profile' => '',
+        'Command' => '',
+        'Port' => 'พอร์ต',
+        'Enter a number between 1 and 65535.' => '',
+        'Port to use for given host (if non-standard port).' => '',
+        'Enter a number between 1 and 999.' => '',
+        'Timeout (in seconds) for connection to host.' => '',
+        'Skip SSL verification' => '',
+        'Select to make this the fallback/default config for any email address not configured in other outbound email profiles. Only one outbound email profile can be the fallback.' =>
+            '',
+        'Edit current fallback outbound email profile (host %s).' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
         'Add Service' => 'เพิ่มการบริการ',
@@ -2625,6 +2653,7 @@ sub Data {
         'Change Responsible of %s%s%s' => '',
         'The ticket has been locked' => 'ตั๋วถูกล็อค',
         'Ticket Settings' => 'การตั้งค่าตั๋ว',
+        'Customer user' => 'ลูกค้าผู้ใช้',
         'Service invalid.' => 'การบริการที่ใช้ไม่ได้',
         'SLA invalid.' => '',
         'Team Data' => '',
@@ -2677,45 +2706,44 @@ sub Data {
         'Execute Bulk Action' => 'เริ่มดำเนินการเป็นกลุ่ม',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
-        'Compose Answer for %s%s%s' => '',
         'Date Invalid!' => 'วันที่ไม่ถูกต้อง!',
-        'Select one or more recipients from the customer user address book.' =>
-            '',
-        'Customer user address book' => '',
-        'This address is registered as system address and cannot be used: %s' =>
-            'ที่อยู่นี้ถูกลงทะเบียนเป็นที่อยู่ในระบบและไม่สามารถนำมาใช้: %s',
-        'Please include at least one recipient' => 'โปรดระบุผู้รับอย่างน้อยหนึ่งคน',
-        'Remove Ticket Customer' => 'ลบตั๋วลูกค้า',
         'Please remove this entry and enter a new one with the correct value.' =>
             'โปรดลบข้อมูลนี้และป้อนใหม่ด้วยค่าที่ถูกต้อง',
         'This address already exists on the address list.' => 'ที่อยู่นี้มีอยู่แล้วในรายการที่อยู่',
-        'Remove Cc' => 'ลบสำเนา',
+        'Search for customer' => '',
+        'Open address book' => '',
+        'Address book' => '',
+        'Customer suggestions' => '',
+        'Please include at least one recipient' => 'โปรดระบุผู้รับอย่างน้อยหนึ่งคน',
+        'This address is registered as system address and cannot be used: %s' =>
+            'ที่อยู่นี้ถูกลงทะเบียนเป็นที่อยู่ในระบบและไม่สามารถนำมาใช้: %s',
         'Bcc' => 'Bcc',
-        'Remove Bcc' => 'ลบสำเนาลับ',
+        'Undo & close' => 'เลิกทำและปิด',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
         'Change Customer of %s%s%s' => '',
         'Customer Information' => 'ข้อมูลลูกค้า',
-        'Customer user' => 'ลูกค้าผู้ใช้',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
         'Create New Email Ticket' => 'สร้างอีเมล์ตั๋วใหม่',
-        'Example Template' => 'ตัวอย่างแม่แบบ',
         'To customer user' => 'ถึงลูกค้าผู้ใช้',
         'Please include at least one customer user for the ticket.' => 'โปรดระบุอย่างน้อยหนึ่งลูกค้าผู้ใช้สำหรับตั๋ว',
-        'Select this customer as the main customer.' => 'เลือกลูกค้ารายนี้เป็นลูกค้าหลัก',
-        'Remove Ticket Customer User' => 'นำตั๋วลูกค้าผู้ใช้ออก',
         'From queue' => 'จากคิว',
         'Get all' => 'ได้รับทั้งหมด',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
-        'Outbound Email for %s%s%s' => '',
+        'Undo & Close' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => '',
         'All fields marked with an asterisk (*) are mandatory.' => 'ฟิลด์ที่มีเครื่องหมายดอกจันทั้งหมด (*) มีผลบังคับใช้',
         'Cancel & close' => 'ยกเลิกและปิด',
-        'Undo & close' => 'เลิกทำและปิด',
+        'Select one or more recipients from the customer user address book.' =>
+            '',
+        'Customer user address book' => '',
+        'Remove Ticket Customer' => 'ลบตั๋วลูกค้า',
+        'Remove Cc' => 'ลบสำเนา',
+        'Remove Bcc' => 'ลบสำเนาลับ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s/%s)!' => 'ตั๋ว %s: หมดเวลาสำหรับตอบสนองครั้งแรก (%s/%s)!',
@@ -2724,9 +2752,6 @@ sub Data {
         'Ticket %s: update time will be over in %s/%s!' => 'ตั๋ว %s: เวลาอัพเดตจะหมดภายใน %s/%s!',
         'Ticket %s: solution time is over (%s/%s)!' => 'ตั๋ว %s: หมดเวลาสำหรับการแก้ปัญหา (%s/%s)!',
         'Ticket %s: solution time will be over in %s/%s!' => 'ตั๋ว %s: เวลาการแก้ปัญหาจะจบลงภายใน %s/%s!',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketForward.tt
-        'Forward %s%s%s' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => '',
@@ -2794,9 +2819,6 @@ sub Data {
         'Please include at least one customer for the ticket.' => 'กรุณาระบุลูกค้าอย่างน้อยหนึ่งคนสำหรับตั๋ว',
         'To queue' => 'ไปยังคิว',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhoneCommon.tt
-        'Phone Call for %s%s%s' => '',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPlain.tt
         'View Email Plain Text for %s%s%s' => '',
         'Plain' => 'ว่าง',
@@ -2850,12 +2872,12 @@ sub Data {
         'Save filter settings as default' => 'บันทึกการตั้งค่าตัวกรองเป็นค่าเริ่มต้น',
         'Event Type' => 'ประเภทของกิจกรรม',
         'Save as default' => 'บันทึกเป็นค่าเริ่มต้น',
-        'Drafts' => '',
-        'by' => 'โดย',
         'Change Queue' => 'เปลี่ยนคิว',
         'There are no dialogs available at this point in the process.' =>
             'ไม่มีไดอะล็อกที่สามารถใช้ได้ในกระบวนการนี้',
         'This item has no articles yet.' => 'ไอเท็มนี้ยังไม่มีบทความ',
+        'Drafts' => '',
+        'by' => 'โดย',
         'Article Overview - %s Article(s)' => '',
         'Page %s' => '',
         'Add Filter' => 'เพิ่มตัวกรอง',
@@ -3153,7 +3175,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBoracle.tt
         'SID' => 'SID',
-        'Port' => 'พอร์ต',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerFinish.tt
         'To be able to use Znuny you have to enter the following line in your command line (Terminal/Shell) as root.' =>
@@ -3495,6 +3516,11 @@ sub Data {
         'Do you really want to reset this setting to it\'s default value?' =>
             '',
 
+        # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DirtyCheck.html.tmpl
+        'You have undeployed settings:' => '',
+        'Standard Deploy' => '',
+        'Quick Deploy' => '',
+
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/HelpDialog.html.tmpl
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.' =>
             '',
@@ -3722,6 +3748,17 @@ sub Data {
         'Select at least one recipient.' => 'เลือกผู้รับอย่างน้อยหนึ่งคน',
 
         # Perl Module: Kernel/Modules/AdminGenericAgent.pm
+        'Error exporting generic agent job with Name %s!' => '',
+        'Error creating the generic agent job.' => '',
+        'Jobs could not be imported due to an unknown error. Please check logs for more information.' =>
+            '',
+        'The following generic agent jobs have been added successfully: %s.' =>
+            '',
+        'The following generic agent jobs have been updated successfully: %s.' =>
+            '',
+        'The following generic agent jobs were not updated: %s.' => '',
+        'Errors adding/updating the following generic agent jobs: %s. Please check logs for more information.' =>
+            '',
         'minute(s)' => 'นาที(s)',
         'hour(s)' => 'ชั่วโมง(s)',
         'Time unit' => 'หน่วยเวลา',
@@ -3732,7 +3769,6 @@ sub Data {
         'archive tickets' => 'ตั๋วที่เก็บถาวร',
         'restore tickets from archive' => 'คืนค่าตั๋วจากคลัง',
         'Need Profile!' => 'ต้องมีโปรไฟล์!',
-        'Got no values to check.' => 'ไม่มีค่าสำหรับเช็ค',
         'Please remove the following words because they cannot be used for the ticket selection:' =>
             'โปรดลบคำต่อไปนี้เพราะมันไม่สามารถนำมาใช้สำหรับการเลือกตั๋ว:',
 
@@ -3954,6 +3990,17 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
         'No such filter: %s' => 'ไม่มีตัวกรองดังกล่าว:% s',
+        'Error exporting postmaster filter with Name %s!' => '',
+        'Error creating the postmaster filter.' => '',
+        'Filters could not be imported due to an unknown error. Please check logs for more information.' =>
+            '',
+        'The following postmaster filters have been added successfully: %s.' =>
+            '',
+        'The following postmaster filters have been updated successfully: %s.' =>
+            '',
+        'The following postmaster filters were not updated: %s.' => '',
+        'Errors adding/updating the following postmaster filters: %s. Please check logs for more information.' =>
+            '',
 
         # Perl Module: Kernel/Modules/AdminPriority.pm
         'Priority added!' => 'เพิ่มลำดับความสำคัญ!',
@@ -4104,6 +4151,11 @@ sub Data {
         'Errors adding/updating the following salutations: %s. Please check logs for more information.' =>
             '',
 
+        # Perl Module: Kernel/Modules/AdminSendmailConfig.pm
+        'Outbound email profile updated!' => '',
+        'Configuration option \'SendmailModule\' has to be set to \'Kernel::System::Email::MultiSendmail\' to be able to use the outbound email profiles managed here.' =>
+            '',
+
         # Perl Module: Kernel/Modules/AdminSignature.pm
         'Signature updated!' => 'อัพเดตลายเซ็นแล้ว!',
         'Signature added!' => 'เพิ่มลายเซ็นแล้ว!',
@@ -4138,6 +4190,7 @@ sub Data {
         'Category Search' => '',
 
         # Perl Module: Kernel/Modules/AdminSystemConfigurationDeployment.pm
+        'Quick Deploy by' => '',
         'Some imported settings are not present in the current state of the configuration or it was not possible to update them. Please check the Znuny log for more information.' =>
             '',
 
@@ -4528,12 +4581,14 @@ sub Data {
         'Need CustomerID!' => 'ต้องการ CustomerID!',
         'My Tickets' => 'ตั๋วของฉัน',
         'Company Tickets' => 'ตั๋วของบริษัท',
+        'You have no permission or the ticket does not exist.' => '',
         'Untitled!' => '',
 
         # Perl Module: Kernel/Modules/CustomerTicketSearch.pm
         'Customer Realname' => 'ชื่อจริงของลูกค้า',
         'Created within the last' => 'สร้างขึ้นภายในครั้งล่าสุด...',
         'Created more than ... ago' => 'สร้างขึ้นมากกว่า...ที่ผ่านมา',
+        'Got no values to check.' => 'ไม่มีค่าสำหรับเช็ค',
         'Please remove the following words because they cannot be used for the search:' =>
             'โปรดลบคำต่อไปนี้เพราะมันไม่สามารถนำมาใช้สำหรับการค้นหา:',
 
@@ -4810,10 +4865,6 @@ sub Data {
         'You have %s invalid setting(s) deployed. Click here to show invalid settings.' =>
             '',
 
-        # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationIsDirtyCheck.pm
-        'You have undeployed settings, would you like to deploy them?' =>
-            '',
-
         # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationOutOfSyncCheck.pm
         'The configuration is being updated, please be patient...' => '',
         'There is an error updating the system configuration!' => '',
@@ -5014,6 +5065,10 @@ sub Data {
         'The field content is too long!' => 'เนื้อหาในฟิลด์ยาวเกินไป',
         'Maximum size is %s characters.' => 'จำนวนที่มากที่สุดคือ %s ตัวอักษร',
 
+        # Perl Module: Kernel/System/GenericAgent.pm
+        'Couldn\'t read Job configuration YAML file. Please make sure the file is valid.' =>
+            '',
+
         # Perl Module: Kernel/System/MailQueue.pm
         'Error while validating Message data.' => '',
         'Error while validating Sender email address.' => '',
@@ -5037,6 +5092,10 @@ sub Data {
         'File is not installed!' => '',
         'File is different!' => '',
         'Can\'t read file!' => '',
+
+        # Perl Module: Kernel/System/PostMaster/Filter.pm
+        'Couldn\'t read Filter configuration YAML file. Please make sure the file is valid.' =>
+            '',
 
         # Perl Module: Kernel/System/ProcessManagement/DB/Process.pm
         'The process "%s" and all of its data has been imported successfully.' =>
@@ -5869,8 +5928,6 @@ sub Data {
         'Defines the module that shows all the currently logged in agents in the agent interface.' =>
             'กำหนดโมดูลที่แสดงเอเย่นต์ที่เข้าสู่ระบบในขณะนี้ทั้งหมดในอินเตอร์เฟซเอเย่นต์',
         'Defines the module that shows all the currently logged in customers in the agent interface.' =>
-            '',
-        'Defines the module to display a notification in the agent interface, if there are modified sysconfig settings that are not deployed yet.' =>
             '',
         'Defines the module to display a notification in the agent interface, if there are invalid sysconfig settings deployed.' =>
             '',
@@ -6747,6 +6804,8 @@ sub Data {
         'Sets the queue in the ticket free text screen of a zoomed ticket in the agent interface.' =>
             '',
         'Sets if queue must be selected by the agent.' => '',
+        'Sets the customer user field in the agent interface.' => '',
+        'Sets the customer user field as mandatory.' => '',
         'Sets the ticket owner in the ticket free text screen of the agent interface.' =>
             '',
         'Sets if ticket owner must be selected by the agent.' => '',
@@ -8090,6 +8149,8 @@ sub Data {
         'Define a process icon.' => '',
         'Defines which ContentTypes are permitted for the attachment preview.' =>
             '',
+        'Names of system config options with email addresses to also be selectable for an outbound email profile (besides system addresses).' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'ไม่ถูกต้องชั่วคราว',
@@ -8364,6 +8425,9 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SMIME.js
         'Do you really want to delete this certificate?' => '',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SendmailConfig.js
+        'Do you really want to delete this outbound email profile?' => '',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SupportDataCollector.js
         'Generating...' => 'ผลิต ...',
         'It was not possible to generate the Support Bundle.' => 'มันเป็นไปไม่ได้ที่จะสร้างกลุ่มสนับสนุน',
@@ -8474,8 +8538,6 @@ sub Data {
             'ขออภัยคุณไม่สามารถปิดการใช้งานวิธีการทั้งหมดสำหรับการแจ้งเตือนที่ระบุว่าเป็นที่บังคับใช้',
         'Sorry, but you can\'t disable all methods for this notification.' =>
             'ขออภัยคุณไม่สามารถปิดการใช้งานวิธีการทั้งหมดสำหรับการแจ้งเตือนนี้',
-        'Please note that at least one of the settings you have changed requires a page reload. Click here to reload the current screen.' =>
-            '',
         'An unknown error occurred. Please contact the administrator.' =>
             '',
 
@@ -8606,8 +8668,6 @@ sub Data {
             '',
 
         # JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
-        'yes' => 'ใช่',
-        'no' => 'ไม่',
         'This is %s' => '',
         'Complex %s with %s arguments' => '',
 
@@ -9047,6 +9107,7 @@ Thanks for your help!
         'Manage System Configuration Deployments.' => '',
         'Manage different calendars.' => '',
         'Manage existing sessions.' => '',
+        'Manage outbound email profiles.' => '',
         'Manage support data.' => '',
         'Manage system files.' => '',
         'Manage tasks triggered by event or time based execution.' => '',
@@ -9102,6 +9163,7 @@ Thanks for your help!
         'Out Of Office' => 'ออกจากสำนักงาน',
         'Out Of Office Time' => 'หมดเวลาทำงาน',
         'Out of Office users.' => '',
+        'Outbound Email Profiles' => '',
         'Overview Escalated Tickets.' => 'ภาพรวมตั๋วส่งต่อ',
         'Overview Refresh Time' => 'ภาพรวมเวลารีเฟรช',
         'Overview of all Tickets per assigned Queue.' => '',
@@ -9451,7 +9513,6 @@ Thanks for your help!
         'Clone web service',
         'Close preview',
         'Close this dialog',
-        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9474,6 +9535,7 @@ Thanks for your help!
         'Delete field',
         'Delete invoker',
         'Delete operation',
+        'Delete outbound email profile',
         'Delete this %s',
         'Delete this Attachment',
         'Delete this Event Trigger',
@@ -9510,6 +9572,7 @@ Thanks for your help!
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
+        'Do you really want to delete this outbound email profile?',
         'Do you really want to delete this scheduled system maintenance?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
@@ -9611,7 +9674,6 @@ Thanks for your help!
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
-        'Please note that at least one of the settings you have changed requires a page reload. Click here to reload the current screen.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
         'Please remove the following words from your search as they cannot be searched for:',
@@ -9624,6 +9686,7 @@ Thanks for your help!
         'Previous',
         'Process state',
         'Queues',
+        'Quick Deploy',
         'Reload page',
         'Reload page (%ss)',
         'Remove',
@@ -9680,6 +9743,7 @@ Thanks for your help!
         'Sorry, you can only upload one file here.',
         'Split',
         'Stacked',
+        'Standard Deploy',
         'Start date',
         'Status',
         'Stream',
@@ -9760,7 +9824,7 @@ Thanks for your help!
         'Yes',
         'You can either have the affected settings updated automatically to reflect the changes you just made or do it on your own by pressing \'update manually\'.',
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.',
-        'You have undeployed settings, would you like to deploy them?',
+        'You have undeployed settings:',
         'activate to apply a descending sort',
         'activate to apply an ascending sort',
         'activate to remove the sort',
@@ -9770,6 +9834,7 @@ Thanks for your help!
         'more',
         'no',
         'none',
+        'or',
         'sorting is disabled',
         'week',
         'yes',

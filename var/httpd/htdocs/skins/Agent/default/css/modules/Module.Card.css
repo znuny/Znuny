@@ -1,0 +1,93 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+.modCard > .inner {
+  float: left;
+  width: 100%;
+  display: inline-block;
+  border: var(--border-width) var(--border-solid) var(--border-color);
+  border-radius: var(--border-radius-sm);
+  display: flex;
+  flex-flow: column;
+  margin-bottom: var(--margin-sm);
+  height: auto;
+}
+.modCard > .inner .cardTitle {
+  font-size: var(--font-size-md);
+  letter-spacing: 0.1px;
+  line-height: 36px;
+  padding: 15px 20px;
+  border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+  background-color: var(--background-tertiary-color);
+  position: relative;
+  float: left;
+  width: 100%;
+  border-top-left-radius: var(--border-radius-sm);
+  border-top-right-radius: var(--border-radius-sm);
+}
+.modCard > .inner .cardTitle h1, .modCard > .inner .cardTitle h2, .modCard > .inner .cardTitle h3, .modCard > .inner .cardTitle h4, .modCard > .inner .cardTitle h5 {
+  font-weight: var(--semi-bold);
+}
+.modCard > .inner .cardTitle {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: 40px;
+}
+@media (max-width: 1199px) {
+  .modCard > .inner .cardTitle {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+.modCard > .inner .cardTitle .cardTitleTrigger {
+  width: 40px;
+  height: 40px;
+  background-image: url(../../img/icons/arrow-top.svg);
+  background-size: 12px 12px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  margin-top: -20px;
+}
+.modCard > .inner .cardTitle .cardTitleTrigger:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+.modCard > .inner .cardContent {
+  padding: var(--padding-lg);
+  background-color: var(--background-secondary-color);
+  position: relative;
+  float: left;
+  width: 100%;
+  display: inline-block;
+  max-height: unset;
+  transition: all 0.25s ease-out;
+  border-bottom-left-radius: var(--border-radius-sm);
+  border-bottom-right-radius: var(--border-radius-sm);
+}
+.modCard > .inner.cardClosed {
+  overflow: hidden;
+}
+.modCard > .inner.cardClosed .cardTitle {
+  border-bottom: none;
+}
+.modCard > .inner.cardClosed .cardTitle .cardTitleTrigger {
+  transform: rotate(180deg);
+}
+.modCard > .inner.cardClosed .cardContent {
+  max-height: 0px;
+  overflow: hidden;
+  padding-bottom: 0;
+  padding-top: 0;
+  border-bottom: none;
+  will-change: max-height;
+}
+
+/*# sourceMappingURL=Module.Card.css.map */

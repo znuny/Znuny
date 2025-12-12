@@ -76,6 +76,25 @@ my @ExpectedSettingClean = (
     'Core.Components.css',
     'Core.FlexboxModel.css',
     'Core.Typography.css',
+    'thirdparty/bootstrap-grid-5.1/bootstrap-grid.css',
+    'layouts/Layout.ContentSidebar.css',
+    'layouts/Layout.PopUp.css',
+    'layouts/Layout.PopUpSidebar.css',
+    'modules/Module.Alert.css',
+    'modules/Module.Card.css',
+    'modules/Module.CustomerContainer.css',
+    'modules/Module.CustomerInformation.css',
+    'modules/Module.CustomerSelector.css',
+    'modules/Module.DynamicField.css',
+    'modules/Module.Form.css',
+    'modules/Module.FormSubmitArea.css',
+    'modules/Module.MessageInformation.css',
+    'modules/Module.Messages.css',
+    'modules/Module.PageHeadline.css',
+    'modules/Module.Sidebar.css',
+    'modules/Module.SidebarWidget.css',
+    'modules/Module.Signature.css',
+    'modules/Module.TicketHeader.css'
 );
 
 $Self->IsDeeply(

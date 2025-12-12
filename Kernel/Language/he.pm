@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.217860016090105;
+    $Self->{Completeness}        = 0.216008947116153;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -712,6 +712,9 @@ sub Data {
         'Add Job' => '',
         'Filter for Jobs' => '',
         'Filter for jobs' => '',
+        'Upload a file in YAML format (as provided by the export) to import generic agent jobs.' =>
+            '',
+        'Overwrite existing generic agents?' => '',
         'Generic Agent Job Management' => '',
         'Edit Job' => '',
         'Run Job' => '',
@@ -1621,6 +1624,9 @@ sub Data {
         'Add PostMaster Filter' => 'הוסף מסנן PostMaster',
         'Filter for PostMaster Filters' => '',
         'Filter for PostMaster filters' => '',
+        'Upload a file in YAML format (as provided by the export) to import postmaster filters.' =>
+            '',
+        'Overwrite existing postmaster filters?' => '',
         'To dispatch or filter incoming emails based on email headers. Matching using Regular Expressions is also possible.' =>
             '',
         'If you want to match only the email address, use EMAILADDRESS:info@example.com in From, To or Cc.' =>
@@ -2016,6 +2022,28 @@ sub Data {
         'Run Query' => '',
         '%s Results' => '',
         'Query is executed.' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+        'Add Outbound Email Profile' => '',
+        'Filter for outbound email profiles' => '',
+        'Manage Outbound Email Profiles' => '',
+        'Update Outbound Email Profile' => '',
+        'Email addresses' => '',
+        'Fallback' => '',
+        'Email addresses have to be configured!' => '',
+        'yes' => 'כן',
+        'no' => 'לא',
+        'Delete outbound email profile' => '',
+        'Command' => '',
+        'Port' => 'Port',
+        'Enter a number between 1 and 65535.' => '',
+        'Port to use for given host (if non-standard port).' => '',
+        'Enter a number between 1 and 999.' => '',
+        'Timeout (in seconds) for connection to host.' => '',
+        'Skip SSL verification' => '',
+        'Select to make this the fallback/default config for any email address not configured in other outbound email profiles. Only one outbound email profile can be the fallback.' =>
+            '',
+        'Edit current fallback outbound email profile (host %s).' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
         'Add Service' => 'הוסף שירות',
@@ -2629,6 +2657,7 @@ sub Data {
         'Change Responsible of %s%s%s' => '',
         'The ticket has been locked' => '',
         'Ticket Settings' => 'הגדרות פניות',
+        'Customer user' => 'משתמש הלקוח',
         'Service invalid.' => 'שירות לא חוקי.',
         'SLA invalid.' => '',
         'Team Data' => '',
@@ -2681,45 +2710,44 @@ sub Data {
         'Execute Bulk Action' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
-        'Compose Answer for %s%s%s' => '',
         'Date Invalid!' => 'תאריך לא תקין!',
-        'Select one or more recipients from the customer user address book.' =>
-            '',
-        'Customer user address book' => '',
-        'This address is registered as system address and cannot be used: %s' =>
-            '',
-        'Please include at least one recipient' => 'נא לכלול לפחות נמען אחד',
-        'Remove Ticket Customer' => 'הסר לקוח של פניה',
         'Please remove this entry and enter a new one with the correct value.' =>
             '',
         'This address already exists on the address list.' => 'כתובת זו כבר קיימת ברשימת הכתובות',
-        'Remove Cc' => 'הסר Cc',
+        'Search for customer' => '',
+        'Open address book' => '',
+        'Address book' => '',
+        'Customer suggestions' => '',
+        'Please include at least one recipient' => 'נא לכלול לפחות נמען אחד',
+        'This address is registered as system address and cannot be used: %s' =>
+            '',
         'Bcc' => 'העתק נסתר',
-        'Remove Bcc' => 'הסר Bcc',
+        'Undo & close' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
         'Change Customer of %s%s%s' => '',
         'Customer Information' => 'מידע לקוח',
-        'Customer user' => 'משתמש הלקוח',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
         'Create New Email Ticket' => 'צור פניית דוא"ל חדשה',
-        'Example Template' => '',
         'To customer user' => 'למשתמש לקוח',
         'Please include at least one customer user for the ticket.' => 'נא לכלול לפחות משתמש לקוח אחד עבור הפניה',
-        'Select this customer as the main customer.' => 'בחר לקוח זה כלקוח העיקרי.',
-        'Remove Ticket Customer User' => 'הסר משתמש לקוח מהפניה',
         'From queue' => 'מהתור',
         'Get all' => 'קבל הכל',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
-        'Outbound Email for %s%s%s' => '',
+        'Undo & Close' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => '',
         'All fields marked with an asterisk (*) are mandatory.' => 'כל השדות המסומנים עם כוכבית (*) הם שדות חובה.',
         'Cancel & close' => '',
-        'Undo & close' => '',
+        'Select one or more recipients from the customer user address book.' =>
+            '',
+        'Customer user address book' => '',
+        'Remove Ticket Customer' => 'הסר לקוח של פניה',
+        'Remove Cc' => 'הסר Cc',
+        'Remove Bcc' => 'הסר Bcc',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s/%s)!' => '',
@@ -2728,9 +2756,6 @@ sub Data {
         'Ticket %s: update time will be over in %s/%s!' => '',
         'Ticket %s: solution time is over (%s/%s)!' => '',
         'Ticket %s: solution time will be over in %s/%s!' => '',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketForward.tt
-        'Forward %s%s%s' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => '',
@@ -2798,9 +2823,6 @@ sub Data {
         'Please include at least one customer for the ticket.' => 'נא לכלול לפחות לקוח אחד לפניה.',
         'To queue' => 'לתור',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhoneCommon.tt
-        'Phone Call for %s%s%s' => '',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPlain.tt
         'View Email Plain Text for %s%s%s' => '',
         'Plain' => 'לא מעוצב',
@@ -2854,12 +2876,12 @@ sub Data {
         'Save filter settings as default' => 'שמור הגדרות מסנן כברירת מחדל',
         'Event Type' => '',
         'Save as default' => '',
-        'Drafts' => '',
-        'by' => 'על ידי ',
         'Change Queue' => 'שנה תור',
         'There are no dialogs available at this point in the process.' =>
             'אין תיבות שיח זמינות בשלב זה של התהליך.',
         'This item has no articles yet.' => 'לפריט זה עדיין אין מאמרים',
+        'Drafts' => '',
+        'by' => 'על ידי ',
         'Article Overview - %s Article(s)' => '',
         'Page %s' => '',
         'Add Filter' => 'הוסף מסנן',
@@ -3157,7 +3179,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBoracle.tt
         'SID' => 'SID',
-        'Port' => 'Port',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerFinish.tt
         'To be able to use Znuny you have to enter the following line in your command line (Terminal/Shell) as root.' =>
@@ -3499,6 +3520,11 @@ sub Data {
         'Do you really want to reset this setting to it\'s default value?' =>
             '',
 
+        # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DirtyCheck.html.tmpl
+        'You have undeployed settings:' => '',
+        'Standard Deploy' => '',
+        'Quick Deploy' => '',
+
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/HelpDialog.html.tmpl
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.' =>
             '',
@@ -3726,6 +3752,17 @@ sub Data {
         'Select at least one recipient.' => '',
 
         # Perl Module: Kernel/Modules/AdminGenericAgent.pm
+        'Error exporting generic agent job with Name %s!' => '',
+        'Error creating the generic agent job.' => '',
+        'Jobs could not be imported due to an unknown error. Please check logs for more information.' =>
+            '',
+        'The following generic agent jobs have been added successfully: %s.' =>
+            '',
+        'The following generic agent jobs have been updated successfully: %s.' =>
+            '',
+        'The following generic agent jobs were not updated: %s.' => '',
+        'Errors adding/updating the following generic agent jobs: %s. Please check logs for more information.' =>
+            '',
         'minute(s)' => 'דקה/דקות',
         'hour(s)' => 'שעה/שעות',
         'Time unit' => 'יחידת זמן',
@@ -3736,7 +3773,6 @@ sub Data {
         'archive tickets' => '',
         'restore tickets from archive' => '',
         'Need Profile!' => 'נדרש פרופיל!',
-        'Got no values to check.' => '',
         'Please remove the following words because they cannot be used for the ticket selection:' =>
             '',
 
@@ -3958,6 +3994,17 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
         'No such filter: %s' => '',
+        'Error exporting postmaster filter with Name %s!' => '',
+        'Error creating the postmaster filter.' => '',
+        'Filters could not be imported due to an unknown error. Please check logs for more information.' =>
+            '',
+        'The following postmaster filters have been added successfully: %s.' =>
+            '',
+        'The following postmaster filters have been updated successfully: %s.' =>
+            '',
+        'The following postmaster filters were not updated: %s.' => '',
+        'Errors adding/updating the following postmaster filters: %s. Please check logs for more information.' =>
+            '',
 
         # Perl Module: Kernel/Modules/AdminPriority.pm
         'Priority added!' => 'העדיפות נוספה!',
@@ -4108,6 +4155,11 @@ sub Data {
         'Errors adding/updating the following salutations: %s. Please check logs for more information.' =>
             '',
 
+        # Perl Module: Kernel/Modules/AdminSendmailConfig.pm
+        'Outbound email profile updated!' => '',
+        'Configuration option \'SendmailModule\' has to be set to \'Kernel::System::Email::MultiSendmail\' to be able to use the outbound email profiles managed here.' =>
+            '',
+
         # Perl Module: Kernel/Modules/AdminSignature.pm
         'Signature updated!' => 'חתימה עודכנה!',
         'Signature added!' => 'חתימה נוספה!',
@@ -4142,6 +4194,7 @@ sub Data {
         'Category Search' => '',
 
         # Perl Module: Kernel/Modules/AdminSystemConfigurationDeployment.pm
+        'Quick Deploy by' => '',
         'Some imported settings are not present in the current state of the configuration or it was not possible to update them. Please check the Znuny log for more information.' =>
             '',
 
@@ -4532,12 +4585,14 @@ sub Data {
         'Need CustomerID!' => '',
         'My Tickets' => 'Meine Tickets',
         'Company Tickets' => 'פניות של החברה',
+        'You have no permission or the ticket does not exist.' => '',
         'Untitled!' => '',
 
         # Perl Module: Kernel/Modules/CustomerTicketSearch.pm
         'Customer Realname' => '',
         'Created within the last' => 'נוצר לפני',
         'Created more than ... ago' => 'התבצע לפני יותר מ... ',
+        'Got no values to check.' => '',
         'Please remove the following words because they cannot be used for the search:' =>
             '',
 
@@ -4814,10 +4869,6 @@ sub Data {
         'You have %s invalid setting(s) deployed. Click here to show invalid settings.' =>
             '',
 
-        # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationIsDirtyCheck.pm
-        'You have undeployed settings, would you like to deploy them?' =>
-            '',
-
         # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationOutOfSyncCheck.pm
         'The configuration is being updated, please be patient...' => '',
         'There is an error updating the system configuration!' => '',
@@ -5018,6 +5069,10 @@ sub Data {
         'The field content is too long!' => 'תוכן השדה ארוך מדי!',
         'Maximum size is %s characters.' => 'הגודל המירבי הוא %s תווים.',
 
+        # Perl Module: Kernel/System/GenericAgent.pm
+        'Couldn\'t read Job configuration YAML file. Please make sure the file is valid.' =>
+            '',
+
         # Perl Module: Kernel/System/MailQueue.pm
         'Error while validating Message data.' => '',
         'Error while validating Sender email address.' => '',
@@ -5041,6 +5096,10 @@ sub Data {
         'File is not installed!' => '',
         'File is different!' => '',
         'Can\'t read file!' => '',
+
+        # Perl Module: Kernel/System/PostMaster/Filter.pm
+        'Couldn\'t read Filter configuration YAML file. Please make sure the file is valid.' =>
+            '',
 
         # Perl Module: Kernel/System/ProcessManagement/DB/Process.pm
         'The process "%s" and all of its data has been imported successfully.' =>
@@ -5872,8 +5931,6 @@ sub Data {
         'Defines the module that shows all the currently logged in agents in the agent interface.' =>
             '',
         'Defines the module that shows all the currently logged in customers in the agent interface.' =>
-            '',
-        'Defines the module to display a notification in the agent interface, if there are modified sysconfig settings that are not deployed yet.' =>
             '',
         'Defines the module to display a notification in the agent interface, if there are invalid sysconfig settings deployed.' =>
             '',
@@ -6750,6 +6807,8 @@ sub Data {
         'Sets the queue in the ticket free text screen of a zoomed ticket in the agent interface.' =>
             '',
         'Sets if queue must be selected by the agent.' => '',
+        'Sets the customer user field in the agent interface.' => '',
+        'Sets the customer user field as mandatory.' => '',
         'Sets the ticket owner in the ticket free text screen of the agent interface.' =>
             '',
         'Sets if ticket owner must be selected by the agent.' => '',
@@ -8091,6 +8150,8 @@ sub Data {
         'Define a process icon.' => '',
         'Defines which ContentTypes are permitted for the attachment preview.' =>
             '',
+        'Names of system config options with email addresses to also be selectable for an outbound email profile (besides system addresses).' =>
+            '',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'לא תקף זמנית',
@@ -8365,6 +8426,9 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SMIME.js
         'Do you really want to delete this certificate?' => '',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SendmailConfig.js
+        'Do you really want to delete this outbound email profile?' => '',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SupportDataCollector.js
         'Generating...' => '',
         'It was not possible to generate the Support Bundle.' => '',
@@ -8474,8 +8538,6 @@ sub Data {
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.' =>
             '',
         'Sorry, but you can\'t disable all methods for this notification.' =>
-            '',
-        'Please note that at least one of the settings you have changed requires a page reload. Click here to reload the current screen.' =>
             '',
         'An unknown error occurred. Please contact the administrator.' =>
             '',
@@ -8607,8 +8669,6 @@ sub Data {
             '',
 
         # JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
-        'yes' => 'כן',
-        'no' => 'לא',
         'This is %s' => '',
         'Complex %s with %s arguments' => '',
 
@@ -9037,6 +9097,7 @@ Thanks for your help!
         'Manage System Configuration Deployments.' => '',
         'Manage different calendars.' => '',
         'Manage existing sessions.' => '',
+        'Manage outbound email profiles.' => '',
         'Manage support data.' => '',
         'Manage system files.' => '',
         'Manage tasks triggered by event or time based execution.' => '',
@@ -9092,6 +9153,7 @@ Thanks for your help!
         'Out Of Office' => '',
         'Out Of Office Time' => 'זמן מחוץ למשרד',
         'Out of Office users.' => '',
+        'Outbound Email Profiles' => '',
         'Overview Escalated Tickets.' => '',
         'Overview Refresh Time' => 'מבט-על של זמן רענון',
         'Overview of all Tickets per assigned Queue.' => '',
@@ -9441,7 +9503,6 @@ Thanks for your help!
         'Clone web service',
         'Close preview',
         'Close this dialog',
-        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9464,6 +9525,7 @@ Thanks for your help!
         'Delete field',
         'Delete invoker',
         'Delete operation',
+        'Delete outbound email profile',
         'Delete this %s',
         'Delete this Attachment',
         'Delete this Event Trigger',
@@ -9500,6 +9562,7 @@ Thanks for your help!
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
+        'Do you really want to delete this outbound email profile?',
         'Do you really want to delete this scheduled system maintenance?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
@@ -9601,7 +9664,6 @@ Thanks for your help!
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
-        'Please note that at least one of the settings you have changed requires a page reload. Click here to reload the current screen.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
         'Please remove the following words from your search as they cannot be searched for:',
@@ -9614,6 +9676,7 @@ Thanks for your help!
         'Previous',
         'Process state',
         'Queues',
+        'Quick Deploy',
         'Reload page',
         'Reload page (%ss)',
         'Remove',
@@ -9670,6 +9733,7 @@ Thanks for your help!
         'Sorry, you can only upload one file here.',
         'Split',
         'Stacked',
+        'Standard Deploy',
         'Start date',
         'Status',
         'Stream',
@@ -9750,7 +9814,7 @@ Thanks for your help!
         'Yes',
         'You can either have the affected settings updated automatically to reflect the changes you just made or do it on your own by pressing \'update manually\'.',
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.',
-        'You have undeployed settings, would you like to deploy them?',
+        'You have undeployed settings:',
         'activate to apply a descending sort',
         'activate to apply an ascending sort',
         'activate to remove the sort',
@@ -9760,6 +9824,7 @@ Thanks for your help!
         'more',
         'no',
         'none',
+        'or',
         'sorting is disabled',
         'week',
         'yes',

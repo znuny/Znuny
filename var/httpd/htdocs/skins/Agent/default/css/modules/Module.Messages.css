@@ -1,0 +1,63 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+.modMessages > .inner {
+  position: fixed;
+  top: 90px;
+  right: -15px;
+  width: 400px;
+  z-index: 99;
+}
+@media (max-width: 1199px) {
+  .modMessages > .inner {
+    width: 300px;
+  }
+}
+.modMessages > .inner .message {
+  position: relative;
+  transition: all 1s ease;
+  margin-bottom: 5px;
+  float: left;
+  display: inline-block;
+  min-width: 100%;
+}
+.modMessages > .inner .message.messageActive {
+  transform: translateX(-25px);
+}
+.modMessages > .inner .message .messageClose {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  background-color: white;
+  padding: 2px;
+  align-self: center;
+  text-align: center;
+  border-radius: 20px;
+  width: 22px;
+  height: 22px;
+  margin-top: -1px;
+  border: none;
+}
+.modMessages > .inner .message .messageClose:hover {
+  cursor: pointer;
+}
+.modMessages > .inner .message .messageClose:hover img {
+  filter: brightness(0) saturate(100%);
+}
+.modMessages > .inner .message .messageClose img {
+  width: 13px;
+  height: auto;
+  margin-left: 0;
+  margin-top: 2px;
+}
+
+.Popup .modMessages > .inner {
+  top: 15px;
+}
+
+/*# sourceMappingURL=Module.Messages.css.map */
