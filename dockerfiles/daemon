@@ -31,10 +31,13 @@ RUN cpanm --notest --force Jq Data::UUID
 
 # Inject project files for setup and clean up
 RUN mkdir ${ZNUNY_HOME}
-COPY . ${ZNUNY_HOME}/.
-RUN rm -r ${ZNUNY_HOME}/dockerfiles && \
-    rm -r ${ZNUNY_HOME}/entrypoints && \
-    rm ${ZNUNY_HOME}/docker-compose.yml
+COPY ./bin ${ZNUNY_HOME}/bin
+COPY ./Custom ${ZNUNY_HOME}/Custom
+COPY ./doc ${ZNUNY_HOME}/doc
+COPY ./Kernel ${ZNUNY_HOME}/Kernel
+COPY ./scripts ${ZNUNY_HOME}/scripts
+COPY ./var ${ZNUNY_HOME}/var
+COPY ./AUTHORS.md ./CHANGES.md ./CONTRIBUTING.md ./COPYING ./INSTALL.md ./COPYING-Third-Party ./RELEASE ./SECURITY.md ./UPDATING.md ${ZNUNY_HOME}/
 
 RUN ln -s ${ZNUNY_HOME} /opt/znuny
 
