@@ -3,8 +3,11 @@ networks:
     driver: bridge
 
 volumes:
-  znuny_db_data:
-  znuny_httpd_data:
+  MariaDBVol:
+  ZnunyPersistent:
+  ZnunyVar:
+  ZnunyArticle:
+  ZnunyHTDocs:
 
 services:
   znuny-daemon:
@@ -12,39 +15,52 @@ services:
       context: .
       dockerfile: ./dockerfiles/daemon
     container_name: znuny_daemon
-    volumes:
-      - znuny_httpd_data:/opt/znuny
     networks:
       - znuny-net
-
+    environment:
+      DB_HOST: ${DB_HOST:-znuny-db}
+      DB_NAME: ${DB_NAME:-znuny}
+      DB_USER: ${DB_USER:-znuny}
+      DB_USER_PASS: ${DB_USER_PASS:-some-pass}
+    restart: unless-stopped
+    depends_on:
+      - znuny-db
+    volumes:
+      - ZnunyVar:/opt/znuny/var/log
+      - ZnunyArticle:/opt/znuny/var/article
+      - ZnunyHTDocs:/opt/znuny/var/httpd/htdocs/custom
+      - ZnunyPersistent:/persistent
+      
   znuny-httpd:
     build:
       context: .
       dockerfile: ./dockerfiles/apache
     container_name: znuny_httpd
-    volumes:
-      - znuny_httpd_data:/opt/znuny
     ports:
       - "${external_port:-80}:80"
     depends_on:
       - znuny-daemon
     networks:
       - znuny-net
-    environment:
-      - external_port=80
+    restart: unless-stopped
+    volumes:
+      - ZnunyVar:/opt/znuny/var/log
+      - ZnunyArticle:/opt/znuny/var/article
+      - ZnunyHTDocs:/opt/znuny/var/httpd/htdocs/custom
+      - ZnunyPersistent:/persistent
 
-  mariadb:
+  znuny-db:
     image: mariadb:${MARIADB_VERSION:-11.4.7}
     container_name: znuny_db
     mem_limit: ${ZNUNY_DB_MEMLIMIT:-2048m}
     environment:
       MYSQL_ROOT_PASSWORD: ${ROOT_PASS:-root-pass}
-      MYSQL_DATABASE: ${DATA_BASE_NAME:-znuny}
+      MYSQL_DATABASE: ${DB_NAME:-znuny}
       MYSQL_USER: ${DB_USER:-znuny}
       MYSQL_PASSWORD: ${DB_USER_PASS:-some-pass}
     volumes:
-      - znuny_db_data:/var/lib/mysql
-    restart: ${RESTART:-unless-stopped}
+      - MariaDBVol:/var/lib/mysql
+    restart: unless-stopped
     ports:
       - "${DB_PORT:-3306}:3306"
     networks:

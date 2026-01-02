@@ -21,10 +21,11 @@ RUN apt-get update && \
       libcss-minifier-xs-perl libauthen-sasl-perl libauthen-ntlm-perl \
       libdbd-pg-perl libcrypt-jwt-perl libcrypt-openssl-x509-perl \
       libhash-merge-perl libical-parser-perl libspreadsheet-xlsx-perl \
-      nullmailer uuid-dev build-essential curl unzip dos2unix && \
+      nullmailer uuid-dev build-essential curl unzip dos2unix gosu && \
     echo "smtp.unibas.ch" > /etc/nullmailer/remotes && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
-# Perl modules
+
+# Setup Perl modules
 RUN cpanm --notest --force Jq Data::UUID
 
 
@@ -35,33 +36,37 @@ RUN rm -r ${ZNUNY_HOME}/dockerfiles && \
     rm -r ${ZNUNY_HOME}/entrypoints && \
     rm ${ZNUNY_HOME}/docker-compose.yml
 
-RUN ln -s ${ZNUNY_HOME} /opt/znuny && \
-    ln -s ${ZNUNY_HOME} /opt/otrs
+RUN ln -s ${ZNUNY_HOME} /opt/znuny
 
 WORKDIR ${ZNUNY_HOME}
-RUN mkdir var/tmp
+
+# Fixing DOS newlines to fit unix
+RUN find ${ZNUNY_HOME} -type f -exec dos2unix {} +
+
 
 # Create Znuny user and set permissions
 RUN useradd -d ${ZNUNY_HOME} -c "Znuny user" -g www-data -s /bin/bash -M -N ${ZNUNY_USER}
-RUN cp Kernel/Config.pm.dist Kernel/Config.pm
-RUN sed -i "s/\$Self->{DatabaseHost} = '127\.0\.0\.1';/\$Self->{DatabaseHost} = 'znuny_db';/" Kernel/Config.pm
-# This is to fix a newline in the shebang
-RUN sed -i 's/\r$//' bin/znuny.SetPermissions.pl
+RUN mkdir /persistent && cp /opt/znuny/Kernel/Config.pm.dist /persistent/Config.pm && chown -R www-data:www-data /persistent
+RUN ln -s /persistent/Config.pm Kernel/Config.pm
 RUN bin/znuny.SetPermissions.pl --znuny-user ${ZNUNY_USER}
 
 
 # Configure cron jobs
 RUN su - ${ZNUNY_USER} -c "cd ${ZNUNY_HOME}/var/cron && for f in *.dist; do cp \$f \$(basename \$f .dist); done"
-RUN sed -i 's/\r$//' bin/Cron.sh
-RUN sed -i 's/\r$//' /opt/znuny-dev/var/cron/*
+RUN mkdir var/tmp && chown ${ZNUNY_USER}:www-data var/tmp
 RUN chmod +x bin/Cron.sh
 RUN bin/Cron.sh start ${ZNUNY_USER}
 
-RUN find ${ZNUNY_HOME} -type f -exec dos2unix {} +
-
+# Setup Entrypoint
 COPY ./entrypoints/daemon.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Watchdog Setup
+COPY ./docker-specific/watchdog.sh /usr/local/bin/watchdog.sh
+RUN chmod +x /usr/local/bin/watchdog.sh
+RUN chown ${ZNUNY_USER}:www-data /usr/local/bin/watchdog.sh
+
+USER root
+
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-#CMD ["bash", "-c", "service nullmailer start && service cron start && tail -f /opt/otrs/var/log/Daemon/SchedulerTaskWorkerERR.log"]
-CMD ["bash", "-c", "tail -f /dev/null"]
-#CMD ["service nullmailer start && service cron start && tail -f /dev/null"]
+CMD ["/usr/local/bin/watchdog.sh"]
