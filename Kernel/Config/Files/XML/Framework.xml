@@ -1051,7 +1051,7 @@
         <Description Translatable="1">Defines an alternate URL, where the logout link refers to.</Description>
         <Navigation>Frontend::Agent</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">http://host.example.com/thanks-for-using-otrs.html</Item>
+            <Item ValueType="String" ValueRegex="">http://host.example.com/thanks-for-using-znuny.html</Item>
         </Value>
     </Setting>
     <Setting Name="PreApplicationModule###AgentInfo" Required="0" Valid="0" ConfigLevel="300">
@@ -1167,9 +1167,9 @@
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::Notification::Generic</Item>
                 <Item Key="Priority">Warning</Item>
-                <Item Key="Text">The OTRS Website</Item>
+                <Item Key="Text">The Znuny Website</Item>
                 <Item Key="File">&lt;OTRS_CONFIG_Home&gt;/var/notify.txt</Item>
-                <Item Key="Link">http://www.otrs.com</Item>
+                <Item Key="Link">https://www.znuny.org/</Item>
             </Hash>
         </Value>
     </Setting>
@@ -3234,21 +3234,21 @@
         <Description Translatable="1">Specifies the name that should be used by the application when sending notifications. The sender name is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com).</Description>
         <Navigation>Core::Email</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">OTRS Notifications</Item>
+            <Item ValueType="String" ValueRegex="">Znuny Notifications</Item>
         </Value>
     </Setting>
     <Setting Name="NotificationSenderEmail" Required="1" Valid="1">
         <Description Translatable="1">Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.</Description>
         <Navigation>Core::Email</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">otrs@&lt;OTRS_CONFIG_FQDN&gt;</Item>
+            <Item ValueType="String" ValueRegex="">znuny@&lt;OTRS_CONFIG_FQDN&gt;</Item>
         </Value>
     </Setting>
     <Setting Name="NotificationSubjectLostPasswordToken" Required="1" Valid="1">
         <Description Translatable="1">Defines the subject for notification mails sent to agents, with token about new requested password.</Description>
         <Navigation>Frontend::Agent</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">New OTRS password request</Item>
+            <Item ValueType="String" ValueRegex="">New Znuny password request</Item>
         </Value>
     </Setting>
     <Setting Name="NotificationBodyLostPasswordToken" Required="1" Valid="1">
@@ -3257,8 +3257,7 @@
         <Value>
             <Item ValueType="Textarea">Hi &lt;OTRS_USERFIRSTNAME&gt;,
 
-You or someone impersonating you has requested to change your OTRS
-password.
+You or someone impersonating you has requested to change your Znuny password.
 
 If you want to do this, click on the link below. You will receive another email containing the password.
 
@@ -3272,7 +3271,7 @@ If you did not request a new password, please ignore this email.
         <Description Translatable="1">Defines the subject for notification mails sent to agents, about new password.</Description>
         <Navigation>Frontend::Agent</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">New OTRS password</Item>
+            <Item ValueType="String" ValueRegex="">New Znuny password</Item>
         </Value>
     </Setting>
     <Setting Name="NotificationBodyLostPassword" Required="1" Valid="1">
@@ -3281,8 +3280,7 @@ If you did not request a new password, please ignore this email.
         <Value>
             <Item ValueType="Textarea">Hi &lt;OTRS_USERFIRSTNAME&gt;,
 
-
-Here's your new OTRS password.
+Here is your new Znuny password.
 
 New password: &lt;OTRS_NEWPW&gt;
 
@@ -3524,7 +3522,7 @@ You can log in via the following URL:
                 <Item Key="Module">Kernel::Output::HTML::Preferences::Theme</Item>
                 <Item Key="PreferenceGroup">Miscellaneous</Item>
                 <Item Key="Label" Translatable="1">Theme</Item>
-                <Item Key="Desc" Translatable="1">Select your preferred theme for OTRS.</Item>
+                <Item Key="Desc" Translatable="1">Select your preferred theme for Znuny.</Item>
                 <Item Key="Key" Translatable="1"></Item>
                 <Item Key="PrefKey">UserTheme</Item>
                 <Item Key="NeedsReload">1</Item>
@@ -3849,7 +3847,7 @@ You can log in via the following URL:
         <Description Translatable="1">Defines the subject for notification mails sent to customers, with token about new requested password.</Description>
         <Navigation>Frontend::Customer</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">New OTRS password request</Item>
+            <Item ValueType="String" ValueRegex="">New Znuny password request</Item>
         </Value>
     </Setting>
     <Setting Name="CustomerPanelBodyLostPasswordToken" Required="1" Valid="1">
@@ -3858,8 +3856,7 @@ You can log in via the following URL:
         <Value>
             <Item ValueType="Textarea">Hi &lt;OTRS_USERFIRSTNAME&gt;,
 
-You or someone impersonating you has requested to change your OTRS
-password.
+You or someone impersonating you has requested to change your Znuny password.
 
 If you want to do this, click on this link. You will receive another email containing the password.
 
@@ -3873,7 +3870,7 @@ If you did not request a new password, please ignore this email.
         <Description Translatable="1">Defines the subject for notification mails sent to customers, about new password.</Description>
         <Navigation>Frontend::Customer</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">New OTRS password</Item>
+            <Item ValueType="String" ValueRegex="">New Znuny password</Item>
         </Value>
     </Setting>
     <Setting Name="CustomerPanelBodyLostPassword" Required="1" Valid="1">
@@ -3882,6 +3879,7 @@ If you did not request a new password, please ignore this email.
         <Value>
             <Item ValueType="Textarea">Hi &lt;OTRS_USERFIRSTNAME&gt;,
 
+Here is your new Znuny password.
 
 New password: &lt;OTRS_NEWPW&gt;
 
@@ -3893,7 +3891,7 @@ New password: &lt;OTRS_NEWPW&gt;
         <Description Translatable="1">Defines the subject for notification mails sent to customers, about new account.</Description>
         <Navigation>Frontend::Customer</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">New OTRS Account!</Item>
+            <Item ValueType="String" ValueRegex="">New Znuny Account!</Item>
         </Value>
     </Setting>
     <Setting Name="CustomerPanelBodyNewAccount" Required="1" Valid="1">
@@ -3902,15 +3900,13 @@ New password: &lt;OTRS_NEWPW&gt;
         <Value>
             <Item ValueType="Textarea">Hi &lt;OTRS_USERFIRSTNAME&gt;,
 
-You or someone impersonating you has created a new OTRS account for
-you.
+You or someone impersonating you has created a new Znuny account for you.
 
 Full name: &lt;OTRS_USERFIRSTNAME&gt; &lt;OTRS_USERLASTNAME&gt;
 User name: &lt;OTRS_USERLOGIN&gt;
 Password : &lt;OTRS_USERPASSWORD&gt;
 
-You can log in via the following URL. We encourage you to change your password
-via the Preferences button after logging in.
+You can log in via the following URL. We encourage you to change your password via the Preferences button after logging in.
 
 &lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;customer.pl
             </Item>
@@ -4034,7 +4030,7 @@ via the Preferences button after logging in.
         <Description Translatable="1">If "LDAP" was selected for Customer::Authmodule, you can check if the user is allowed to authenticate because he is in a posixGroup, e.g. user needs to be in a group xyz to use Znuny. Specify the group, who may access the system.</Description>
         <Navigation>Core::Auth::Customer</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">cn=otrsallow,ou=posixGroups,dc=example,dc=com</Item>
+            <Item ValueType="String" ValueRegex="">cn=znunyallow,ou=posixGroups,dc=example,dc=com</Item>
         </Value>
     </Setting>
     <Setting Name="Customer::AuthModule::LDAP::AccessAttr" Required="0" Valid="0" ConfigLevel="200">
@@ -4249,7 +4245,7 @@ via the Preferences button after logging in.
                 <Item Key="Module">Kernel::Output::HTML::Preferences::Theme</Item>
                 <Item Key="PreferenceGroup">UserProfile</Item>
                 <Item Key="Label" Translatable="1">Theme</Item>
-                <Item Key="Desc" Translatable="1">Select your preferred theme for OTRS.</Item>
+                <Item Key="Desc" Translatable="1">Select your preferred theme for Znuny.</Item>
                 <Item Key="Key" Translatable="1">Select your frontend Theme.</Item>
                 <Item Key="PrefKey">UserTheme</Item>
                 <Item Key="Prio">1000</Item>
@@ -7589,13 +7585,13 @@ via the Preferences button after logging in.
                 <Item Key="Title" Translatable="1">A picture</Item>
                 <Item Key="Description" Translatable="1">Some picture description!</Item>
                 <Item Key="Block">ContentLarge</Item>
-                <Item Key="URL">https://www.otrs.com/wp-uploads//2013/10/OTRS_Logo-300x170.png</Item>
+                <Item Key="URL">https://doc.znuny.org/assets/images/logo_black.svg</Item>
                 <Item Key="Group"></Item>
                 <Item Key="Default">1</Item>
-                <Item Key="Link">https://otrs.org/</Item>
-                <Item Key="LinkTitle">https://otrs.org/</Item>
-                <Item Key="Width">198</Item>
-                <Item Key="Height">140</Item>
+                <Item Key="Link">https://www.znuny.org/</Item>
+                <Item Key="LinkTitle">Znuny Logo</Item>
+                <Item Key="Width">157</Item>
+                <Item Key="Height">39</Item>
                 <Item Key="Mandatory">0</Item>
             </Hash>
         </Value>
@@ -7623,11 +7619,11 @@ via the Preferences button after logging in.
                 <Item Key="Title" Translatable="1">A Website</Item>
                 <Item Key="Description" Translatable="1">Some description!</Item>
                 <Item Key="Block">ContentLarge</Item>
-                <Item Key="URL">https://otrs.com/</Item>
+                <Item Key="URL">https://www.znuny.org/</Item>
                 <Item Key="Group"></Item>
                 <Item Key="Default">1</Item>
-                <Item Key="Link">https://otrs.com/</Item>
-                <Item Key="LinkTitle">OTRS.com/</Item>
+                <Item Key="Link">https://www.znuny.org/</Item>
+                <Item Key="LinkTitle">Znuny Website</Item>
                 <Item Key="Width">1024</Item>
                 <Item Key="Height">800</Item>
                 <Item Key="Marginheight">5</Item>

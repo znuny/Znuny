@@ -7,7 +7,7 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-# Default configuration for OTRS. All changes to this file will be lost after an
+# Default configuration for Znuny. All changes to this file will be lost after an
 #   update, please use AdminSystemConfiguration to configure your system.
 
 ## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
@@ -19,7 +19,7 @@ use strict;
 use warnings;
 use utf8;
 
-# Perl 5.16.0 is the required minimum version to use OTRS.
+# Perl 5.16.0 is the required minimum version to use Znuny.
 use 5.016_000;
 
 # prepend '../Custom', '../Kernel/cpan-lib' and '../' to the module search path @INC
@@ -51,7 +51,7 @@ of L<Kernel::Config>, even though they are actually implemented here.
 
 =head2 LoadDefaults()
 
-loads the default values of settings that are required to run OTRS even
+Loads the default values of settings that are required to run Znuny even
 when it was not fully configured yet.
 
 =cut
@@ -406,11 +406,11 @@ sub LoadDefaults {
 
     # --------------------------------------------------- #
     # authentication settings                             #
-    # (enable what you need, auth against otrs db,        #
+    # (enable what you need, auth against Znuny database, #
     # against LDAP directory, against HTTP basic auth     #
     # or against Radius server)                           #
     # --------------------------------------------------- #
-    # This is the auth. module against the otrs db
+    # This is the auth. module against the Znuny database
     $Self->{AuthModule} = 'Kernel::System::Auth::DB';
 
     # defines AuthSyncBackend (AuthSyncModule) for AuthModule
@@ -433,8 +433,8 @@ sub LoadDefaults {
 #    $Self->{'AuthModule::LDAP::UID'} = 'uid';
 
     # Check if the user is allowed to auth in a posixGroup
-    # (e. g. user needs to be in a group xyz to use otrs)
-#    $Self->{'AuthModule::LDAP::GroupDN'} = 'cn=otrsallow,ou=posixGroups,dc=example,dc=com';
+    # (e. g. user needs to be in a group xyz to use Znuny)
+#    $Self->{'AuthModule::LDAP::GroupDN'} = 'cn=znunyallow,ou=posixGroups,dc=example,dc=com';
 #    $Self->{'AuthModule::LDAP::AccessAttr'} = 'memberUid';
     # for ldap posixGroups objectclass (just uid)
 #    $Self->{'AuthModule::LDAP::UserAttr'} = 'UID';
@@ -463,7 +463,7 @@ sub LoadDefaults {
     # is not in use.
 #    $Self->{'AuthModule::LDAP::UserLowerCase'} = 0;
 
-    # In case you need to use OTRS in iso-charset, you can define this
+    # In case you need to use Znuny in iso-charset, you can define this
     # by using this option (converts utf-8 data from LDAP to iso).
 #    $Self->{'AuthModule::LDAP::Charset'} = 'iso-8859-1';
 
@@ -491,8 +491,8 @@ sub LoadDefaults {
     # Note:
     # If you use this module, you should use as fallback the following
     # config settings if user isn't login through apache ($ENV{REMOTE_USER}).
-#    $Self->{LoginURL} = 'http://host.example.com/not-authorised-for-otrs.html';
-#    $Self->{LogoutURL} = 'http://host.example.com/thanks-for-using-otrs.html';
+#    $Self->{LoginURL} = 'http://host.example.com/not-authorised-for-znuny.html';
+#    $Self->{LogoutURL} = 'http://host.example.com/thanks-for-using-znuny.html';
 
     # This is example configuration to auth. agents against a radius server.
 #    $Self->{'AuthModule'} = 'Kernel::System::Auth::Radius';
@@ -532,7 +532,7 @@ sub LoadDefaults {
 #    $Self->{'AuthSyncModule::LDAP::Host'} = 'ldap.example.com';
 #    $Self->{'AuthSyncModule::LDAP::BaseDN'} = 'dc=example,dc=com';
 #    $Self->{'AuthSyncModule::LDAP::UID'} = 'uid';
-#    $Self->{'AuthSyncModule::LDAP::GroupDN'} = 'cn=otrsallow,ou=posixGroups,dc=example,dc=com';
+#    $Self->{'AuthSyncModule::LDAP::GroupDN'} = 'cn=znunyallow,ou=posixGroups,dc=example,dc=com';
 
     # The following is valid but would only be necessary if the
     # anonymous user do NOT have permission to read from the LDAP tree
@@ -557,7 +557,7 @@ sub LoadDefaults {
 #        UserEmail     => 'mail',
 #    };
 
-    # In case you need to use OTRS in iso-charset, you can define this
+    # In case you need to use Znuny in iso-charset, you can define this
     # by using this option (converts utf-8 data from LDAP to iso).
 #    $Self->{'AuthSyncModule::LDAP::Charset'} = 'iso-8859-1';
 
@@ -591,11 +591,11 @@ sub LoadDefaults {
 
     # AuthSyncModule::LDAP::UserSyncGroupsDefinition
     # (If "LDAP" was selected for AuthModule and you want to sync LDAP
-    # groups to otrs groups, define the following.)
+    # groups to Znuny groups, define the following.)
 #    $Self->{'AuthSyncModule::LDAP::UserSyncGroupsDefinition'} = {
 #        # ldap group
-#        'cn=agent,o=otrs' => {
-#            # otrs group
+#        'cn=agent,o=znuny' => {
+#            # Znuny group
 #            'admin' => {
 #                # permission
 #                rw => 1,
@@ -606,7 +606,7 @@ sub LoadDefaults {
 #                ro => 1,
 #            },
 #        },
-#        'cn=agent2,o=otrs' => {
+#        'cn=agent2,o=znuny' => {
 #            'users' => {
 #                rw => 1,
 #                ro => 1,
@@ -616,28 +616,28 @@ sub LoadDefaults {
 
     # AuthSyncModule::LDAP::UserSyncRolesDefinition
     # (If "LDAP" was selected for AuthModule and you want to sync LDAP
-    # groups to otrs roles, define the following.)
+    # groups to Znuny roles, define the following.)
 #    $Self->{'AuthSyncModule::LDAP::UserSyncRolesDefinition'} = {
 #        # ldap group
-#        'cn=agent,o=otrs' => {
-#            # otrs role
+#        'cn=agent,o=znuny' => {
+#            # Znuny role
 #            'role1' => 1,
 #            'role2' => 0,
 #        },
-#        'cn=agent2,o=otrs' => {
+#        'cn=agent2,o=znuny' => {
 #            'role3' => 1,
 #        }
 #    };
 
     # AuthSyncModule::LDAP::UserSyncAttributeGroupsDefinition
     # (If "LDAP" was selected for AuthModule and you want to sync LDAP
-    # attributes to otrs groups, define the following.)
+    # attributes to Znuny groups, define the following.)
 #    $Self->{'AuthSyncModule::LDAP::UserSyncAttributeGroupsDefinition'} = {
 #        # ldap attribute
 #        'LDAPAttribute' => {
 #            # ldap attribute value
 #            'LDAPAttributeValue1' => {
-#                # otrs group
+#                # Znuny group
 #                'admin' => {
 #                    # permission
 #                    rw => 1,
@@ -661,13 +661,13 @@ sub LoadDefaults {
 
     # AuthSyncModule::LDAP::UserSyncAttributeRolesDefinition
     # (If "LDAP" was selected for AuthModule and you want to sync LDAP
-    # attributes to otrs roles, define the following.)
+    # attributes to Znuny roles, define the following.)
 #    $Self->{'AuthSyncModule::LDAP::UserSyncAttributeRolesDefinition'} = {
 #        # ldap attribute
 #        'LDAPAttribute' => {
 #            # ldap attribute value
 #            'LDAPAttributeValue1' => {
-#                # otrs role
+#                # Znuny role
 #                'role1' => 1,
 #                'role2' => 1,
 #            },
@@ -774,7 +774,7 @@ sub LoadDefaults {
 #    $Self->{SessionModule} = 'Kernel::System::AuthSession::FS';
 
     # SessionName
-    # (Name of the session key. E. g. Session, SessionID, OTRS)
+    # (Name of the session key. E. g. Session, SessionID, Znuny)
     $Self->{SessionName} = 'OTRSAgentInterface';
 
     # SessionCheckRemoteIP
@@ -827,7 +827,7 @@ sub LoadDefaults {
     # Time Settings
     # --------------------------------------------------- #
     # TimeZone
-    # (set the OTRS time zone, default is UTC)
+    # (set the Znuny time zone, default is UTC)
 #    $Self->{'OTRSTimeZone'} = 'UTC';
 
     # Time*
@@ -1239,7 +1239,7 @@ sub LoadDefaults {
         'PreferenceGroup'  => 'Miscellaneous',
         'Key'     => '',
         'Label'   => 'Theme',
-        'Desc'    => 'Select your preferred theme for OTRS.',
+        'Desc'    => 'Select your preferred theme for Znuny.',
         'Module'  => 'Kernel::Output::HTML::Preferences::Theme',
         'PrefKey' => 'UserTheme',
         'Prio'    => '3000',
@@ -1254,15 +1254,14 @@ sub LoadDefaults {
     # --------------------------------------------------- #
 
     # notification sender
-    $Self->{NotificationSenderName}  = 'OTRS Notifications';
-    $Self->{NotificationSenderEmail} = 'otrs@<OTRS_CONFIG_FQDN>';
+    $Self->{NotificationSenderName}  = 'Znuny Notifications';
+    $Self->{NotificationSenderEmail} = 'znuny@<OTRS_CONFIG_FQDN>';
 
     # notification email for new password
-    $Self->{NotificationSubjectLostPassword} = 'New OTRS password';
+    $Self->{NotificationSubjectLostPassword} = 'New Znuny password';
     $Self->{NotificationBodyLostPassword}    = 'Hi <OTRS_USERFIRSTNAME>,
 
-
-Here\'s your new OTRS password.
+Here is your new Znuny password.
 
 New password: <OTRS_NEWPW>
 
@@ -1279,14 +1278,14 @@ You can log in via the following URL:
     # --------------------------------------------------- #
 
     # SessionName
-    # (Name of the session key. E. g. Session, SessionID, OTRS)
+    # (Name of the session key. E. g. Session, SessionID, Znuny)
     $Self->{CustomerPanelSessionName} = 'OTRSCustomerInterface';
 
     # CustomerPanelUserID
     # (The customer panel db-uid.) [default: 1]
     $Self->{CustomerPanelUserID} = 1;
 
-    # CustomerGroupSupport (0 = compat. to OTRS 1.1 or lower)
+    # CustomerGroupSupport (0 = compat. to Znuny 1.1 or lower)
     # (if this is 1, the you need to set the group <-> customer user
     # relations! http://host/znuny/index.pl?Action=AdminCustomerUserGroup
     # otherway, each user is ro/rw in each group!)
@@ -1345,9 +1344,10 @@ You can log in via the following URL:
     # --------------------------------------------------- #
     # notification email about new password               #
     # --------------------------------------------------- #
-    $Self->{CustomerPanelSubjectLostPassword} = 'New OTRS password';
+    $Self->{CustomerPanelSubjectLostPassword} = 'New Znuny password';
     $Self->{CustomerPanelBodyLostPassword}    = 'Hi <OTRS_USERFIRSTNAME>,
 
+Here is your new Znuny password.
 
 New password: <OTRS_NEWPW>
 
@@ -1357,11 +1357,10 @@ New password: <OTRS_NEWPW>
     # --------------------------------------------------- #
     # notification email about new account                #
     # --------------------------------------------------- #
-    $Self->{CustomerPanelSubjectNewAccount} = 'New OTRS Account!';
+    $Self->{CustomerPanelSubjectNewAccount} = 'New Znuny Account!';
     $Self->{CustomerPanelBodyNewAccount}    = 'Hi <OTRS_USERFIRSTNAME>,
 
-You or someone impersonating you has created a new OTRS account for
-you.
+You or someone impersonating you has created a new Znuny account for you.
 
 Full name: <OTRS_USERFIRSTNAME> <OTRS_USERLASTNAME>
 User name: <OTRS_USERLOGIN>
@@ -1375,11 +1374,11 @@ via the Preferences button after logging in.
 
     # --------------------------------------------------- #
     # customer authentication settings                    #
-    # (enable what you need, auth against otrs db,        #
+    # (enable what you need, auth against Znuny database, #
     # against a LDAP directory, against HTTP basic        #
     # authentication and against Radius server)           #
     # --------------------------------------------------- #
-    # This is the auth. module for the otrs db
+    # This is the auth. module for the Znuny database
     # you can also configure it using a remote database
     $Self->{'Customer::AuthModule'}                       = 'Kernel::System::CustomerAuth::DB';
     $Self->{'Customer::AuthModule::DB::Table'}            = 'customer_user';
@@ -1404,8 +1403,8 @@ via the Preferences button after logging in.
 #    $Self->{'Customer::AuthModule::LDAP::UID'} = 'uid';
 
     # Check if the user is allowed to auth in a posixGroup
-    # (e. g. user needs to be in a group xyz to use otrs)
-#    $Self->{'Customer::AuthModule::LDAP::GroupDN'} = 'cn=otrsallow,ou=posixGroups,dc=example,dc=com';
+    # (e. g. user needs to be in a group xyz to use Znuny)
+#    $Self->{'Customer::AuthModule::LDAP::GroupDN'} = 'cn=znunyallow,ou=posixGroups,dc=example,dc=com';
 #    $Self->{'Customer::AuthModule::LDAP::AccessAttr'} = 'memberUid';
     # for ldap posixGroups objectclass (just uid)
 #    $Self->{'Customer::AuthModule::LDAP::UserAttr'} = 'UID';
@@ -1451,8 +1450,8 @@ via the Preferences button after logging in.
 #    $Self->{'Customer::AuthModule::HTTPBasicAuth::ReplaceRegExp'} = '^(.+?)@.+?$';
     # If you use this module, you should use as fallback the following
     # config settings if user isn't login through apache ($ENV{REMOTE_USER})
-#    $Self->{CustomerPanelLoginURL} = 'http://host.example.com/not-authorised-for-otrs.html';
-#    $Self->{CustomerPanelLogoutURL} = 'http://host.example.com/thanks-for-using-otrs.html';
+#    $Self->{CustomerPanelLoginURL} = 'http://host.example.com/not-authorised-for-znuny.html';
+#    $Self->{CustomerPanelLogoutURL} = 'http://host.example.com/thanks-for-using-znuny.html';
 
     # This is example configuration to auth. agents against a radius server
 #    $Self->{'Customer::AuthModule'} = 'Kernel::System::Auth::Radius';
@@ -2034,7 +2033,7 @@ sub new {
     # load RELEASE file
     if ( -e !"$Self->{Home}/RELEASE" ) {
         print STDERR
-            "ERROR: $Self->{Home}/RELEASE does not exist! This file is needed by central system parts of OTRS, the system will not work without this file.\n";
+            "ERROR: $Self->{Home}/RELEASE does not exist! This file is needed by central system parts of Znuny, the system will not work without this file.\n";
         die;
     }
 
@@ -2058,7 +2057,7 @@ sub new {
     }
     else {
         print STDERR
-            "ERROR: Can't read $Self->{Home}/RELEASE: $! This file is needed by central system parts of OTRS, the system will not work without this file.\n";
+            "ERROR: Can't read $Self->{Home}/RELEASE: $! This file is needed by central system parts of Znuny, the system will not work without this file.\n";
         die;
     }
 
@@ -2221,7 +2220,7 @@ sub AutoloadPerlPackages {
 
 =head1 TERMS AND CONDITIONS
 
-This software is part of the OTRS project (L<https://otrs.org/>).
+This software is part of the Znuny project (L<https://www.znuny.org/>).
 
 This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (GPL). If you
