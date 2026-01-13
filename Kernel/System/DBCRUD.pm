@@ -127,6 +127,7 @@ sub new {
             Config => 'DBCRUD::EventModulePost',
         );
     }
+    $Self->{UUIDObject} = Data::UUID->new();
 
     return $Self;
 }
@@ -220,9 +221,8 @@ sub DataAdd {
     }
 
     # Generate a UUID to retrieve the ID of the created database record.
-    my $UUIDObject = Data::UUID->new();
-    my $UUID       = $UUIDObject->create();
-    $UUID = lc $UUIDObject->to_string($UUID);
+    my $UUID = $Self->{UUIDObject}->create();
+    $UUID = lc $Self->{UUIDObject}->to_string($UUID);
 
     push @InsertColumns, $Self->{UUIDDatabaseTableColumnName};
     push @InsertValues,  '?';
