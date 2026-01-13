@@ -5,6 +5,7 @@
  - 2025-11-24 Fixed: The link to a specific article in a ticket does not work if users have different settings for “Show all articles”. Article links now handle both display modes: 'Show one article' and 'Show all articles'.
  - 2025-11-13 Sped up UUID creation for DBCRUD modules.
  - 2025-11-12 Fixed: Removed not needed HTML quoting of data in template generator back-end.
+ - 2025-11-10 Fixed: Issue with cache being applied incorrectly to "My last changed tickets" widget.
  - 2025-11-05 Fixed: No styles when printing process in the admin interface.
  - 2025-11-04 Added configurable filter for ticket search to ticket merge dialog (AgentTicketMerge).
  - 2025-10-29 Fixed: Ticket age was displayed in seconds (instead of human readable) in agent ticket zoom (when ticket information widget was configured as asynchronous) and ticket list (view mode L).
