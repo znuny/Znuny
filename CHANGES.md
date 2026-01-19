@@ -1,4 +1,5 @@
 # 6.5.19 2025-??-??
+ - 2026-01-13 Fixed: Date check regex for config option ICSParser::StartDate actually matches YYYYMMDD.
  - 2025-12-12 Sector Nord AG: Added support for multiple RichText instances. Thanks to @LuBroering (Lukas Bröring Sector Nord AG) [PR#736](https://github.com/znuny/Znuny/pull/736).
  - 2025-11-28 Changed ticket zoom information widget to count only open tickets with the same customer after enabling config option Ticket::Frontend::ZoomCustomerTickets.
  - 2025-11-25 Fixed: Unexpected rate limit is being applied when config option SendmailModule::RateLimit is disabled.
