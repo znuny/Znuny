@@ -36,6 +36,23 @@ sub Run {
     my $Verbose = $Param{CommandlineOptions}->{Verbose} || 0;
 
     my @Tasks = (
+
+        {
+            Message => 'Alters database table article_color.',
+            Module  => 'ArticleColor',
+        },
+        {
+            Message => 'Alters database table calendar.',
+            Module  => 'CalendarColor',
+        },
+        {
+            Message => 'Alters color column in database table ticket_priority.',
+            Module  => 'PriorityColor',
+        },
+        {
+            Message => 'Alters color column in database table ticket_state.',
+            Module  => 'StateColor',
+        },
         {
             Message => 'Create database table sendmail_config.',
             Module  => 'SendmailConfig',

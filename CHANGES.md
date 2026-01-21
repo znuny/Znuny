@@ -1,6 +1,14 @@
 # 7.3.1 2025-??-??
+ - 2026-01-19 Fixed: Customer interface uses layout "PopupClose" function that loads agent interface header and footer which results in referencing features that are not supported - such as popup profiles. Added CustomerPopupClose function.
+ - 2026-01-19 Fixed: Missing translation for 'last-search' in ToolBar/TicketSearchProfile.
+ - 2026-01-13 Fixed: Date check regex for config option ICSParser::StartDate actually matches YYYYMMDD.
+ - 2025-12-19 Fixed: Dynamic field labels are capitalized via CSS in AgentTicketProcess.
+ - 2025-12-16 Fixed: In certain settings, only greyscale can be selected in the color picker. Updated thirdparty lib jscolor to 2.5.2. Alters database table calendar and article_color size of column color to 25.
+ - 2025-12-15 Sector Nord AG: Fixed: Wrong Subaction for TranslationDeployment in AdminTranslation. Thanks to @LuBroering (Lukas Bröring Sector Nord AG) [PR#741](https://github.com/znuny/Znuny/pull/741).
  - 2025-12-12 Fixed typo in '--regenerate' command option 'Dev/Tools/TranslationsUpdate'. Thanks to @urbalazs (Balázs Úr) [PR#751](https://github.com/znuny/Znuny/pull/751).
  - 2025-12-12 Sector Nord AG: ArticleRender - Added title to ArticleFields for MIMEBase. Thanks to @LuBroering (Lukas Bröring Sector Nord AG) [PR#577](https://github.com/znuny/Znuny/pull/577).
+ - 2025-12-11 Added support for SAML authentication.
+ - 2025-12-09 Fixed: Issue with cache being applied incorrectly to "My last changed tickets" widget.
  - 2025-12-09 Migration refactoring: Added new Component 'FollowUp'. Migration order: CheckPreviousRequirement, Run and FollowUp. Improved Steps for CheckPreviousRequirement. Removed empty CheckPreviousRequirement and Run functions.
  - 2025-12-09 Integrated package Znuny-AgentTicketActionCommonCustomer.
  - 2025-12-09 Fixed: Article overview text difficult to read in Dark Skin due to double filter inversion.
@@ -19,6 +27,7 @@
  - 2025-11-07 Added configurable filter for ticket search to ticket merge dialog (AgentTicketMerge).
  - 2025-11-06 Fixed: CustomerShortcutIconCustom config not working. Thanks to Daylton Rodrigues (@dayltonr) for reporting. [#737](https://github.com/znuny/Znuny/issues/737).
  - 2025-11-06 Fixed: Images in articles are inverted in Dark Skin. Thanks for reporting to @Vocta1310 [#724](https://github.com/znuny/Znuny/issues/724).
+ - 2025-11-05 Number of stored activities per user is now limited for performance reasons. User activities will now be loaded asynchronously.
  - 2025-11-05 Fixed: No styles when printing process in the admin interface.
  - 2025-11-05 Fixed: Customer ticket details screen now redirects to overview of tickets if a ticket is accessed without permissions.
  - 2025-11-05 Integrated package Znuny-CopyTicketNumber.
@@ -42,6 +51,7 @@
  - 2025-09-25 SectorNord AG: Fixed: Problem filtering by Owner in the ticket view. Thanks for reporting to @giovanna-bolsoni [#698](https://github.com/znuny/Znuny/issues/698). Thanks to @LuBroering (Lukas Bröring Sector Nord AG) [PR#703](https://github.com/znuny/Znuny/pull/703).
  - 2025-09-25 Added 'Prio' Param to AgentTicketZoom MenuModules for individual sorting. Thanks for reporting and fixing to @itweserems [#646](https://github.com/znuny/Znuny/issues/646) [PR#647](https://github.com/znuny/Znuny/pull/647).
  - 2025-09-15 Fixed: Only able to delete Signatures, Salutations and Auto Responses after accepting popup.
+ - 2025-06-30 Improved date formatting on language level.
 
 # 7.2.3 2025-09-24
  - 2025-09-22 Fixed: Fix for installer email setting checks lead to issues with sending emails.

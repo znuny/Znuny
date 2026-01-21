@@ -337,6 +337,13 @@ my $ExportDataMultiple = $GenericAgentObject->JobExport(
     ExportAll => 1,
 );
 
+# Oracle returns undef instead of '' for empty columns
+for my $ExportedJob ( @{$ExportDataMultiple} ) {
+    for my $Key ( sort keys %{$ExportedJob} ) {
+        $ExportedJob->{$Key} = '' if !defined $ExportedJob->{$Key};
+    }
+}
+
 my $ExpectedExportDataMultiple = [
     {
         Name                         => $NewJob{Name},
@@ -362,6 +369,13 @@ $Self->IsDeeply(
 my $ExportDataSingle = $GenericAgentObject->JobExport(
     Name => $Name,
 );
+
+# Oracle returns undef instead of '' for empty columns
+for my $ExportedJob ( @{$ExportDataSingle} ) {
+    for my $Key ( sort keys %{$ExportedJob} ) {
+        $ExportedJob->{$Key} = '' if !defined $ExportedJob->{$Key};
+    }
+}
 
 my $ExpectedExportDataSingle = [
     {

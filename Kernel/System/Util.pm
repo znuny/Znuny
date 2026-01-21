@@ -6,6 +6,7 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 ## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::UUID)
 
 package Kernel::System::Util;
 

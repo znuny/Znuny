@@ -23,14 +23,14 @@ sub Data {
 
     # $$START$$
     # possible charsets
-    $Self->{Charset} = [];
-    # date formats (%A=WeekDay;%B=LongMonth;%T=Time;%D=Day;%M=Month;%Y=Year;)
-    $Self->{DateFormat}          = '';
-    $Self->{DateFormatLong}      = '';
-    $Self->{DateFormatShort}     = '';
-    $Self->{DateInputFormat}     = '';
-    $Self->{DateInputFormatLong} = '';
-    $Self->{Completeness}        = 0.832241572136124;
+    $Self->{Charset} = ['utf-8', ];
+    # date formats (%a=Weekday;%b=Month;%T=Time;%d=Day;%m=Month;%Y=Year;)
+    $Self->{DateFormat}          = '%d/%m/%Y %T';
+    $Self->{DateFormatLong}      = '%a %d %b %T %Y';
+    $Self->{DateFormatShort}     = '%d/%m/%Y';
+    $Self->{DateInputFormat}     = '%d/%m/%Y';
+    $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
+    $Self->{Completeness}        = 0.83261459830698;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -84,7 +84,7 @@ sub Data {
         'Set up what you want to change if the criteria match. Keep in mind that \'Possible\' is a white list, \'PossibleNot\' a black list.' =>
             'Configure o que você quer alterar se o critério coincidir. Mantenha em mente que \'Possible\' é uma adição à lista e \'PossibleNot\', uma exclusão da lista.',
         'A list of all possible match and set criteria is found in the ACL Reference Guide %sdocumentation%s.' =>
-            '',
+            'Um lista de todos possíveis critérios de correspondência e definição pode ser encontrada no Guia de Referência de ACL',
         'Edit ACL %s' => 'Editar ACL %s',
         'Edit ACL' => 'Editar ACL',
         'Show or hide the content' => 'Mostrar ou esconder o conteúdo',
@@ -3543,9 +3543,9 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AJAXAttachment.pm
         'Got no FormID.' => 'Não contém ID de Formulário.',
-        '%s is missing. The file could not be downloaded properly.' => '',
+        '%s is missing. The file could not be downloaded properly.' => 'está faltando. O arquivo não pode ser baixado corretamente.',
         'Please contact the administrator.' => 'Por favor, entre em contato com o administrador.',
-        '%s is missing. The file could not be previewed properly.' => '',
+        '%s is missing. The file could not be previewed properly.' => 'está em falta. O ficheiro não pode ser pré-visualizado corretamente.',
         'Error: the file could not be deleted properly. Please contact your administrator (missing FileID).' =>
             'Erro: o arquivo não pôde ser excluído corretamente. Por favor entrar em contato com seu administrador (Falta ID de Campo)',
 
@@ -8042,6 +8042,8 @@ sub Data {
             '',
         'Defines the default ticket order in the ticket mention view of the agent interface. Up: oldest on top. Down: latest on top.' =>
             '',
+        'Maximum number of activities to keep per user. Older ones will be deleted.' =>
+            '',
         'Assignment between event and type.' => '',
         'Defines the link type for each activity.' => '',
         'List of colors in hexadecimal RGB which will be available for selection. Make sure the colors are dark enough so white text can be overlayed on them.' =>
@@ -8270,6 +8272,7 @@ sub Data {
 
         # JS File: var/httpd/htdocs/js/Core.Activity.js
         'An error occurred' => '',
+        'Could not load activities.' => '',
         'The activity could not be created. %s is needed.' => '',
         'The activity could not be created.' => '',
         'The activity could not be updated.' => '',
@@ -8727,7 +8730,7 @@ Obrigado pela ajuda!
         'A Website' => 'Um website',
         'A picture' => 'Uma figura',
         'AJAX functions for notification event transport web service.' =>
-            '',
+            'Função AJAX para web service de transporte de eventos de notificação',
         'AJAX interface for the web service dynamic field backends.' => '',
         'AccountedTime' => 'Tempo contabilizado',
         'Activation of dynamic fields for screens.' => '',
@@ -9517,6 +9520,7 @@ Obrigado pela ajuda!
         'Copy Ticket Number',
         'Copy Ticket Number + Title',
         'Copy ticket information',
+        'Could not load activities.',
         'Could not open popup window. Please disable any popup blockers for this application.',
         'Current selection',
         'Currently not possible',

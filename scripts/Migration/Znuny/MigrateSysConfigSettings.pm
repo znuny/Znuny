@@ -46,12 +46,12 @@ sub _GetMigrateSysConfigSettings {
     my ( $Self, %Param ) = @_;
 
     my %MigrateSysConfigSettings = (
-
-        # TODO: Add your Migration here.
-        # 'Frontend::Module###AjaxAttachment' => {
-        #     UpdateName => 'Frontend::Module###AJAXAttachment'
-        # },
-
+        "Loader::Agent::CommonJS###000-Framework" => {
+            UpdateEffectiveValue => {
+                'thirdparty/jscolor-2.4.6/jscolor.js' =>
+                    'thirdparty/jscolor-2.5.2/jscolor.js',
+            },
+        },
     );
 
     return %MigrateSysConfigSettings;

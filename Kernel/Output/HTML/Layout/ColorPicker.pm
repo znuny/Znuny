@@ -84,14 +84,19 @@ sub ColorPicker {
     }
 
     $Param{Label} //= 'Color';
-    $Param{Value} //= $Param{Color} // '#FF8A25';
+    $Param{Value} //= $Param{Color} // '#FF8A25FF';
+
+    # If value starts with #, and only 6 characters, add FF to the end
+    if ( $Param{Value} =~ /^#([0-9A-F]{6})$/ ) {
+        $Param{Value} = '#' . $1 . 'FF';
+    }
 
     my @TemplateAttributes = ( 'Type', 'Name', 'ID', 'Class', 'Label', 'Color' );
     my %ColorPickerConfig  = (
         backgroundColor => 'rgb(245, 245, 245)',
         borderColor     => 'rgb(201, 201, 201)',
         borderRadius    => '8',
-        mode            => 'HV',
+        mode            => 'HVS',
         value           => '#ff9b00',
     );
 

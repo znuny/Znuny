@@ -138,55 +138,55 @@ INSERT INTO ticket_state_type (id, name, comments, create_by, create_time, chang
 # ----------------------------------------------------------
 INSERT INTO ticket_state (id, name, comments, type_id, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    (1, 'new', 'New ticket created by customer.', 1, 1, '#50B5FF', 1, current_timestamp, 1, current_timestamp);
+    (1, 'new', 'New ticket created by customer.', 1, 1, '#50B5FFFF', 1, current_timestamp, 1, current_timestamp);
 # ----------------------------------------------------------
 #  insert into table ticket_state
 # ----------------------------------------------------------
 INSERT INTO ticket_state (id, name, comments, type_id, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    (2, 'closed successful', 'Ticket is closed successful.', 3, 1, '#3DD598', 1, current_timestamp, 1, current_timestamp);
+    (2, 'closed successful', 'Ticket is closed successful.', 3, 1, '#3DD598FF', 1, current_timestamp, 1, current_timestamp);
 # ----------------------------------------------------------
 #  insert into table ticket_state
 # ----------------------------------------------------------
 INSERT INTO ticket_state (id, name, comments, type_id, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    (3, 'closed unsuccessful', 'Ticket is closed unsuccessful.', 3, 1, '#FC5A5A', 1, current_timestamp, 1, current_timestamp);
+    (3, 'closed unsuccessful', 'Ticket is closed unsuccessful.', 3, 1, '#FC5A5AFF', 1, current_timestamp, 1, current_timestamp);
 # ----------------------------------------------------------
 #  insert into table ticket_state
 # ----------------------------------------------------------
 INSERT INTO ticket_state (id, name, comments, type_id, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    (4, 'open', 'Open tickets.', 2, 1, '#FFC542', 1, current_timestamp, 1, current_timestamp);
+    (4, 'open', 'Open tickets.', 2, 1, '#FFC542FF', 1, current_timestamp, 1, current_timestamp);
 # ----------------------------------------------------------
 #  insert into table ticket_state
 # ----------------------------------------------------------
 INSERT INTO ticket_state (id, name, comments, type_id, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    (5, 'removed', 'Customer removed ticket.', 6, 1, '#8D8D9B', 1, current_timestamp, 1, current_timestamp);
+    (5, 'removed', 'Customer removed ticket.', 6, 1, '#8D8D9BFF', 1, current_timestamp, 1, current_timestamp);
 # ----------------------------------------------------------
 #  insert into table ticket_state
 # ----------------------------------------------------------
 INSERT INTO ticket_state (id, name, comments, type_id, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    (6, 'pending reminder', 'Ticket is pending for agent reminder.', 4, 1, '#FF8A25', 1, current_timestamp, 1, current_timestamp);
+    (6, 'pending reminder', 'Ticket is pending for agent reminder.', 4, 1, '#FF8A25FF', 1, current_timestamp, 1, current_timestamp);
 # ----------------------------------------------------------
 #  insert into table ticket_state
 # ----------------------------------------------------------
 INSERT INTO ticket_state (id, name, comments, type_id, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    (7, 'pending auto close+', 'Ticket is pending for automatic close.', 5, 1, '#FF8A25', 1, current_timestamp, 1, current_timestamp);
+    (7, 'pending auto close+', 'Ticket is pending for automatic close.', 5, 1, '#FF8A25FF', 1, current_timestamp, 1, current_timestamp);
 # ----------------------------------------------------------
 #  insert into table ticket_state
 # ----------------------------------------------------------
 INSERT INTO ticket_state (id, name, comments, type_id, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    (8, 'pending auto close-', 'Ticket is pending for automatic close.', 5, 1, '#FF8A25', 1, current_timestamp, 1, current_timestamp);
+    (8, 'pending auto close-', 'Ticket is pending for automatic close.', 5, 1, '#FF8A25FF', 1, current_timestamp, 1, current_timestamp);
 # ----------------------------------------------------------
 #  insert into table ticket_state
 # ----------------------------------------------------------
 INSERT INTO ticket_state (id, name, comments, type_id, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    (9, 'merged', 'State for merged tickets.', 7, 1, '#FF8A25', 1, current_timestamp, 1, current_timestamp);
+    (9, 'merged', 'State for merged tickets.', 7, 1, '#FF8A25FF', 1, current_timestamp, 1, current_timestamp);
 # ----------------------------------------------------------
 #  insert into table salutation
 # ----------------------------------------------------------
@@ -403,31 +403,31 @@ INSERT INTO ticket_type (id, name, valid_id, create_by, create_time, change_by, 
 # ----------------------------------------------------------
 INSERT INTO ticket_priority (id, name, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    (1, '1 very low', 1, '#03c4f0', 1, current_timestamp, 1, current_timestamp);
+    (1, '1 very low', 1, '#03c4f0ff', 1, current_timestamp, 1, current_timestamp);
 # ----------------------------------------------------------
 #  insert into table ticket_priority
 # ----------------------------------------------------------
 INSERT INTO ticket_priority (id, name, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    (2, '2 low', 1, '#83bfc8', 1, current_timestamp, 1, current_timestamp);
+    (2, '2 low', 1, '#83bfc8ff', 1, current_timestamp, 1, current_timestamp);
 # ----------------------------------------------------------
 #  insert into table ticket_priority
 # ----------------------------------------------------------
 INSERT INTO ticket_priority (id, name, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    (3, '3 normal', 1, '#cdcdcd', 1, current_timestamp, 1, current_timestamp);
+    (3, '3 normal', 1, '#cdcdcdff', 1, current_timestamp, 1, current_timestamp);
 # ----------------------------------------------------------
 #  insert into table ticket_priority
 # ----------------------------------------------------------
 INSERT INTO ticket_priority (id, name, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    (4, '4 high', 1, '#ffaaaa', 1, current_timestamp, 1, current_timestamp);
+    (4, '4 high', 1, '#ffaaaaff', 1, current_timestamp, 1, current_timestamp);
 # ----------------------------------------------------------
 #  insert into table ticket_priority
 # ----------------------------------------------------------
 INSERT INTO ticket_priority (id, name, valid_id, color, create_by, create_time, change_by, change_time)
     VALUES
-    (5, '5 very high', 1, '#ff505e', 1, current_timestamp, 1, current_timestamp);
+    (5, '5 very high', 1, '#ff505eff', 1, current_timestamp, 1, current_timestamp);
 # ----------------------------------------------------------
 #  insert into table ticket_lock_type
 # ----------------------------------------------------------

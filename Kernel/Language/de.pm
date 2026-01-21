@@ -21,12 +21,12 @@ sub Data {
     # $$START$$
     # possible charsets
     $Self->{Charset} = ['utf-8', ];
-    # date formats (%A=WeekDay;%B=LongMonth;%T=Time;%D=Day;%M=Month;%Y=Year;)
-    $Self->{DateFormat}          = '%D.%M.%Y %T';
-    $Self->{DateFormatLong}      = '%T - %D.%M.%Y';
-    $Self->{DateFormatShort}     = '%D.%M.%Y';
-    $Self->{DateInputFormat}     = '%D.%M.%Y';
-    $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
+    # date formats (%a=Weekday;%b=Month;%T=Time;%d=Day;%m=Month;%Y=Year;)
+    $Self->{DateFormat}          = '%d.%m.%Y %T';
+    $Self->{DateFormatLong}      = '%T - %d.%m.%Y';
+    $Self->{DateFormatShort}     = '%d.%m.%Y';
+    $Self->{DateInputFormat}     = '%d.%m.%Y';
+    $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
     $Self->{Completeness}        = 1;
 
     # csv separator
@@ -8039,6 +8039,8 @@ sub Data {
             'Definiert das Standard-Ticket-Attribut für die Ticket-Sortierung in der Ansicht "Erwähnte Tickets" des Agenten-Interface.',
         'Defines the default ticket order in the ticket mention view of the agent interface. Up: oldest on top. Down: latest on top.' =>
             'Definiert die Standard-Ticket-Reihenfolge in der Ansicht "Erwähnte Tickets" des Agenten-Interface. Auf: Älteste oben. Ab: Neuste oben.',
+        'Maximum number of activities to keep per user. Older ones will be deleted.' =>
+            'Maximale Anzahl der Aktivitäten, die pro Benutzer gespeichert werden. Ältere werden gelöscht.',
         'Assignment between event and type.' => 'Zuweisung zwischen Ereignis und Typ.',
         'Defines the link type for each activity.' => 'Legt den Verknüpfungstyp für jede Aktivität fest.',
         'List of colors in hexadecimal RGB which will be available for selection. Make sure the colors are dark enough so white text can be overlayed on them.' =>
@@ -8267,6 +8269,7 @@ sub Data {
 
         # JS File: var/httpd/htdocs/js/Core.Activity.js
         'An error occurred' => 'Ein Fehler ist aufgetreten',
+        'Could not load activities.' => 'Aktivitäten konnten nicht geladen werden.',
         'The activity could not be created. %s is needed.' => 'Die Aktivität konnte nicht erstellt werden. %s wird benötigt.',
         'The activity could not be created.' => 'Die Aktivität konnte nicht erstellt werden.',
         'The activity could not be updated.' => 'Die Aktivität konnte nicht aktualisiert werden.',
@@ -9513,6 +9516,7 @@ Ihr Helpdesk-Team
         'Copy Ticket Number',
         'Copy Ticket Number + Title',
         'Copy ticket information',
+        'Could not load activities.',
         'Could not open popup window. Please disable any popup blockers for this application.',
         'Current selection',
         'Currently not possible',

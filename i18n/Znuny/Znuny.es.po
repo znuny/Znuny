@@ -25243,3 +25243,11 @@ msgstr ""
 msgid "Sets the customer user field as mandatory."
 msgstr ""
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of activities to keep per user. Older ones will be deleted."
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Activity.js
+msgid "Could not load activities."
+msgstr ""
+

@@ -99,11 +99,11 @@ sub Add {
     my %ValidatedParams = $Self->_EvaluateParams(%Param);
 
     my $SQL = '
-        INSERT INTO `sendmail_config` (
-            `sendmail_module`, `cmd`, `host`, `port`, `timeout`, `skip_ssl_verification`,
-            `is_fallback_config`, `authentication_type`, `auth_user`, `auth_password`,
-            `oauth2_token_config_id`, `email_addresses`, `comments`, `valid_id`,
-            `create_time`, `create_by`, `change_time`, `change_by`
+        INSERT INTO sendmail_config (
+            sendmail_module, cmd, host, port, timeout, skip_ssl_verification,
+            is_fallback_config, authentication_type, auth_user, auth_password,
+            oauth2_token_config_id, email_addresses, comments, valid_id,
+            create_time, create_by, change_time, change_by
         )
         VALUES (
             ?, ?, ?, ?, ?, ?,
@@ -159,11 +159,11 @@ sub Add {
 
     $SQL = '
         SELECT id
-        FROM   `sendmail_config`
-        WHERE  `sendmail_module` = ?
-               AND `valid_id` = ?
-               AND `create_by` = ?
-               AND `change_by` = ?
+        FROM   sendmail_config
+        WHERE  sendmail_module = ?
+               AND valid_id = ?
+               AND create_by = ?
+               AND change_by = ?
     ';
     @Bind = (
         \$ValidatedParams{SendmailModule},
@@ -176,12 +176,12 @@ sub Add {
         my $Column = $ColumnByParam{$Param};
 
         if ( defined $ValidatedParams{$Param} ) {
-            $SQL .= " AND `$Column` = ?";
+            $SQL .= " AND $Column = ?";
 
             push @Bind, \$ValidatedParams{$Param};
         }
         else {
-            $SQL .= " AND `$Column` IS NULL";
+            $SQL .= " AND $Column IS NULL";
         }
     }
 
@@ -201,7 +201,7 @@ sub Add {
     # If this is the new fallback config, remove fallback flag for all existing sendmail configs.
     if ( $Param{IsFallbackConfig} ) {
         return if !$DBObject->Prepare(
-            SQL  => 'UPDATE `sendmail_config` SET `is_fallback_config` = 0 WHERE `id` != ?',
+            SQL  => 'UPDATE sendmail_config SET is_fallback_config = 0 WHERE id != ?',
             Bind => [
                 \$ID,
             ],
@@ -265,23 +265,23 @@ sub Update {
 
     my $SQL = '
         UPDATE sendmail_config
-        SET    `sendmail_module` = ?,
-               `cmd` = ?,
-               `host` = ?,
-               `port` = ?,
-               `timeout` = ?,
-               `skip_ssl_verification` = ?,
-               `is_fallback_config` = ?,
-               `authentication_type` = ?,
-               `auth_user` = ?,
-               `auth_password` = ?,
-               `oauth2_token_config_id` = ?,
-               `email_addresses` = ?,
-               `comments` = ?,
-               `valid_id` = ?,
-               `change_time` = current_timestamp,
-               `change_by` = ?
-        WHERE  `id` = ?
+        SET    sendmail_module = ?,
+               cmd = ?,
+               host = ?,
+               port = ?,
+               timeout = ?,
+               skip_ssl_verification = ?,
+               is_fallback_config = ?,
+               authentication_type = ?,
+               auth_user = ?,
+               auth_password = ?,
+               oauth2_token_config_id = ?,
+               email_addresses = ?,
+               comments = ?,
+               valid_id = ?,
+               change_time = current_timestamp,
+               change_by = ?
+        WHERE  id = ?
     ';
 
     my @Bind = (
@@ -311,7 +311,7 @@ sub Update {
     # If this is the new fallback config, remove fallback flag for all existing sendmail configs.
     if ( $Param{IsFallbackConfig} ) {
         return if !$DBObject->Prepare(
-            SQL  => 'UPDATE `sendmail_config` SET `is_fallback_config` = 0 WHERE `id` != ?',
+            SQL  => 'UPDATE sendmail_config SET is_fallback_config = 0 WHERE id != ?',
             Bind => [
                 \$Param{ID},
             ],
@@ -355,7 +355,7 @@ sub Delete {
     }
 
     my $SQL = '
-        DELETE FROM `sendmail_config`
+        DELETE FROM sendmail_config
         WHERE       id = ?
     ';
 
@@ -437,10 +437,10 @@ sub Get {
     return $Cache if defined $Cache;
 
     my $SQL = '
-        SELECT  `id`, `sendmail_module`, `cmd`, `host`, `port`, `timeout`, `skip_ssl_verification`,
-                `is_fallback_config`, `authentication_type`, `auth_user`, `auth_password`,
-                `oauth2_token_config_id`, `email_addresses`, `comments`, `valid_id`,
-                `create_time`, `change_time`
+        SELECT  id, sendmail_module, cmd, host, port, timeout, skip_ssl_verification,
+                is_fallback_config, authentication_type, auth_user, auth_password,
+                oauth2_token_config_id, email_addresses, comments, valid_id,
+                create_time, change_time
         FROM    sendmail_config
         WHERE   id = ?
     ';
@@ -564,10 +564,10 @@ sub GetAll {
     return $Cache if defined $Cache;
 
     my $SQL = '
-        SELECT    `id`, `sendmail_module`, `cmd`, `host`, `port`, `timeout`, `skip_ssl_verification`,
-                  `is_fallback_config`, `authentication_type`, `auth_user`, `auth_password`,
-                  `oauth2_token_config_id`, `email_addresses`, `comments`, `valid_id`,
-                  `create_time`, `change_time`
+        SELECT    id, sendmail_module, cmd, host, port, timeout, skip_ssl_verification,
+                  is_fallback_config, authentication_type, auth_user, auth_password,
+                  oauth2_token_config_id, email_addresses, comments, valid_id,
+                  create_time, change_time
         FROM      sendmail_config
         ORDER BY  id ASC
     ';

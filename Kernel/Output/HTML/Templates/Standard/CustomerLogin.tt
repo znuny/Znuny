@@ -78,6 +78,15 @@
                     <div>
                         <button type="submit" value="[% Translate("Log In") | html %]" class="btn-main btn-primary" disabled="disabled">[% Translate("Log In") | html %]</button>
                     </div>
+[% RenderBlockStart("SAMLLoginLink") %]
+                    <!-- SAML login -->
+                    <div>
+# Don't use filter 'url' on RequestURL because the given URL already contains some URI escaped parts.
+                        <a href="[% Data.RequestURL %]" class="btn-cancel-ghost btn-main">
+                                [% Translate(Data.ButtonText) | html %]
+                        </a>
+                    </div>
+[% RenderBlockEnd("SAMLLoginLink") %]
                 </fieldset>
             </form>
         </div>

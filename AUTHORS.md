@@ -1,16 +1,12 @@
 The following persons contributed to Znuny:
 
 * 1soproni <csaba@sopron.hu>
-* akmet <akmet@users.noreply.github.com>
+* AM Mike <monitoring@amlogisticsolutions.de>
 * Alex Kantchev <ak@otrs.com>
 * Alex Mazur <alex.mazur@otrs.com>
 * Alexandre D. Rogoski <alexandre@exatati.com.br>
-* AM Mike <monitoring@amlogisticsolutions.de>
 * André Brás <andre.bras@otrs.com>
-* anonymous <unknown@anonymous>
-* arlecchino <kolbma@users.noreply.github.com>
 * Arthur Ritscher <arthur.ritscher@sectornord.de>
-* b1-luettje <53084931+b1-luettje@users.noreply.github.com>
 * Balázs Úr <balazs@urbalazs.hu>
 * Belnet <info@belnet.be>
 * Bernhard Schmalhofer <Bernhard.Schmalhofer@gmx.de>
@@ -42,15 +38,14 @@ The following persons contributed to Znuny:
 * Florian Edlhuber <florian.edlhuber@otrs.com>
 * Florian Liebe <florian.liebe@otrs.com>
 * Flávio Marta <7440579+CallMeFlanby@users.noreply.github.com>
-* forwwward <hello@forwwward.studio>
 * Friedrich Delgado <friedel@nomaden.org>
 * Gerald Young <gerald.young@noynim.com>
 * Henning Oschwald <henning.oschwald@otrs.com>
 * Henrik Vetter <hv@znuny.com>
 * Hog Duske <hog.duske@dusketech.de>
 * IB Development Team <dev@ib.pl>
-* Igor Djuric <igor.djuric@otrs.com>
 * IT.WESER-EMS <info@it-weser-ems.de>
+* Igor Djuric <igor.djuric@otrs.com>
 * Ivo Oliveira <128880860+Bashizz@users.noreply.github.com>
 * Jan Steinweg <jan.steinweg@otrs.com>
 * JannisKleinrensing <71767611+JannisKleinrensing@users.noreply.github.com>
@@ -59,8 +54,6 @@ The following persons contributed to Znuny:
 * Jens Pfeifer <jp@znuny.com>
 * Johannes Hörburger <johannes.hoerburger@otrs.com>
 * Johannes Nickel <jn@znuny.com>
-* jsinagowitz <91074418+jsinagowitz@users.noreply.github.com>
-* juanmclavero <juanm.clavero@ibsalut.es>
 * Kai Herlemann <kh@znuny.com>
 * Kamil Furtek <kfurtek@dev.opgksoftware.com>
 * Keith Moore <tenareth@gmail.com>
@@ -84,14 +77,12 @@ The following persons contributed to Znuny:
 * Martin Gruner <martin.gruner@otrs.com>
 * Mathias Bräunling <mathias.braeunling@otrs.com>
 * Matthias Bethke <mb@znuny.com>
-* meisterheister <35762852+meisterheister@users.noreply.github.com>
 * Michael Tänzer <neo@nhng.de>
 * Michiel Beijen <michiel.beijen@otrs.com>
 * Milan Rakic <mrakic@s7designcreative.com>
 * Moritz Lenz <mlenz@noris.net>
 * Never <never.min@gmail.com>
 * NeverMin <never.min@gmail.com>
-* nhugayme <ynhu19521@gmail.com>
 * Niels Dimmers <niels@nielsdimmers.nl>
 * Niklas Schmitt <ns@znuny.com>
 * Nils Fiedler <nils.fiedler@otrs.com>
@@ -119,10 +110,8 @@ The following persons contributed to Znuny:
 * Roy Kaldung <rk@znuny.com>
 * Rui Patinha <rui.patinha@otrs.com>
 * Rúben Sardinha <ruben.sardinha@outlook.com>
-* s7design <otrs@s7designcreative.com>
 * Samuel Diniz Casimiro <nedmaj@yahoo.com>
 * Sanjin Vik <svik@s7designcreative.com>
-* sergot <filip@sergot.pl>
 * Shawn Beasley <shawn.beasley@znuny.com>
 * Sidpatchy <35241490+Sidpatchy@users.noreply.github.com>
 * Stefan Bedorf <stefan.bedorf@otrs.com>
@@ -134,16 +123,26 @@ The following persons contributed to Znuny:
 * Thomas Raith <thomas.raith@otrs.com>
 * Thomas Wouters <thomas@sijn.org>
 * Thorsten Eckel <te@znuny.com>
-* Tim Binder <tim.binder@stbt.de>
 * Tim Püttmanns <tim.puettmanns@maxence.de>
 * Timo Gurr <timo.gurr@gmail.com>
 * Torsten Thau <Torsten.Thau@cape-it.de>
 * Udo Bretz <udo.bretz@otrs.com>
 * Uwe Dieckmann <uwe.dieckmann@otrs.com>
-* vlascoder <vlascoder@gmail.com>
 * Walter Souto <walter.souto@saude.go.gov.br>
 * Wojciech Kuchta <klapi85@gmail.com>
 * Yuri Myasoedov <ymyasoedov@yandex.ru>
 * Zigfield Trotter <zt@znuny.com>
 * Znuny Weblate <do-not-reply@znuny.com>
 * Zoran Ilibasic <zilibasic@s7designcreative.com>
+* akmet <akmet@users.noreply.github.com>
+* anonymous <unknown@anonymous>
+* arlecchino <kolbma@users.noreply.github.com>
+* b1-luettje <53084931+b1-luettje@users.noreply.github.com>
+* forwwward <hello@forwwward.studio>
+* jsinagowitz <91074418+jsinagowitz@users.noreply.github.com>
+* juanmclavero <juanm.clavero@ibsalut.es>
+* meisterheister <35762852+meisterheister@users.noreply.github.com>
+* nhugayme <ynhu19521@gmail.com>
+* s7design <otrs@s7designcreative.com>
+* sergot <filip@sergot.pl>
+* vlascoder <vlascoder@gmail.com>

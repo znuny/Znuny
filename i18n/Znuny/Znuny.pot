@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-12-08 13:25+0000\n"
+"POT-Creation-Date: 2025-12-12 13:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20755,6 +20755,10 @@ msgid "Defines the default ticket order in the ticket mention view of the agent 
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of activities to keep per user. Older ones will be deleted."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Assignment between event and type."
 msgstr ""
 
@@ -21384,6 +21388,10 @@ msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Activity.js
 msgid "An error occurred"
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Activity.js
+msgid "Could not load activities."
 msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Activity.js

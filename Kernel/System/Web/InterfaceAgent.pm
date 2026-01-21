@@ -242,6 +242,19 @@ sub Run {
             Raw   => 1
         ) || '';
 
+        #
+        # SAML
+        #
+        my $IsSAMLLogin  = $ParamObject->GetParam( Param => 'IsSAMLLogin' );
+        my $Count        = $ParamObject->GetParam( Param => 'Count' ) // '';
+        my $SAMLResponse = $ParamObject->GetParam( Param => 'SAMLResponse' );
+
+        # The request ID stored in the cookie. Will be evaluated when the response is checked.
+        my $ExpectedSAMLRequestID;
+        if ( $IsSAMLLogin && $SAMLResponse ) {
+            $ExpectedSAMLRequestID = $ParamObject->GetCookie( Key => "UserSAMLRequestID$Count" );
+        }
+
         # create AuthObject
         my $AuthObject = $Kernel::OM->Get('Kernel::System::Auth');
 
@@ -250,6 +263,12 @@ sub Run {
             User           => $PostUser,
             Pw             => $PostPw,
             TwoFactorToken => $PostTwoFactorToken,
+
+            # The following are SAML specific
+            IsSAMLLogin           => $IsSAMLLogin,
+            Count                 => $Count,
+            SAMLResponse          => $SAMLResponse,
+            ExpectedSAMLRequestID => $ExpectedSAMLRequestID,
         );
 
         # login is invalid

@@ -1032,7 +1032,7 @@
 <Table Name="article_color">
     <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="SMALLINT"/>
     <Column Name="name" Required="true" Size="200" Type="VARCHAR"/>
-    <Column Name="color" Required="true" Size="10" Type="VARCHAR" />
+    <Column Name="color" Required="true" Size="25" Type="VARCHAR" />
     <Column Name="create_time" Required="true" Type="DATE"/>
     <Column Name="create_by" Required="true" Type="INTEGER"/>
     <Column Name="change_time" Required="true" Type="DATE"/>
@@ -2627,7 +2627,7 @@
     <Column Name="group_id" Required="true" Type="INTEGER" />
     <Column Name="name" Required="true" Size="200" Type="VARCHAR" />
     <Column Name="salt_string" Required="true" Size="64" Type="VARCHAR" />
-    <Column Name="color" Required="true" Size="7" Type="VARCHAR" />
+    <Column Name="color" Required="true" Size="25" Type="VARCHAR" />
     <Column Name="ticket_appointments" Required="false" Type="LONGBLOB" />
     <Column Name="valid_id" Required="true" Type="SMALLINT" />
     <Column Name="create_time" Required="true" Type="DATE" />

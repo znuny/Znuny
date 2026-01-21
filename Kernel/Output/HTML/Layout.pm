@@ -686,19 +686,20 @@ sub Login {
     $Param{IsLoginPage} = 1;
 
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
 
-    my $Output = '';
+    my $CookieSecureAttribute = 0;
+    if ( $ConfigObject->Get('HttpType') eq 'https' ) {
+
+        # Restrict Cookie to HTTPS if it is used.
+        $CookieSecureAttribute = 1;
+    }
+
     if ( $ConfigObject->Get('SessionUseCookie') ) {
 
         # always set a cookie, so that at the time the user submits
         # the password, we know already if the browser supports cookies.
         # ( the session cookie isn't available at that time ).
-        my $CookieSecureAttribute = 0;
-        if ( $ConfigObject->Get('HttpType') eq 'https' ) {
-
-            # Restrict Cookie to HTTPS if it is used.
-            $CookieSecureAttribute = 1;
-        }
         $Self->{SetCookies}->{OTRSBrowserHasCookie} = $Kernel::OM->Get('Kernel::System::Web::Request')->SetCookie(
             Key      => 'OTRSBrowserHasCookie',
             Value    => 1,
@@ -708,6 +709,8 @@ sub Login {
             HTTPOnly => 1,
         );
     }
+
+    my $Output = '';
 
     # add cookies if exists
     if ( $Self->{SetCookies} && $ConfigObject->Get('SessionUseCookie') ) {
@@ -878,6 +881,45 @@ sub Login {
             }
 
             last COUNT;
+        }
+
+        # Show SAML login links
+        COUNT:
+        for my $Count ( '', 1 .. 10 ) {
+
+            my $GenericModule = $ConfigObject->Get("AuthModule$Count");
+
+            next COUNT if !$GenericModule;
+            next COUNT if $GenericModule ne 'Kernel::System::Auth::SAML';
+
+            if ( !$MainObject->Require($GenericModule) ) {
+                $MainObject->Die("Can't load backend module $GenericModule! $@");
+            }
+
+            my $AuthBackendModule = $GenericModule->new( Count => $Count );
+            my $RequestURL        = $AuthBackendModule->{Request}->CreateURL();
+            my $RequestID         = $AuthBackendModule->{Request}->GetID();
+
+            # Set current request ID for backend in separate cookie
+            my $RequestIDCookie = $Kernel::OM->Get('Kernel::System::Web::Request')->SetCookie(
+                Key      => "UserSAMLRequestID$Count",
+                Value    => $RequestID,
+                Expires  => '+10m',
+                Path     => $ConfigObject->Get('ScriptAlias'),
+                Secure   => $CookieSecureAttribute,
+                HTTPOnly => 1,
+            );
+
+            # Note: This only works here because at this point, no body has been added to $Output.
+            $Output .= "Set-Cookie: $RequestIDCookie\n";
+
+            $Self->Block(
+                Name => 'SAMLLoginLink',
+                Data => {
+                    RequestURL => $RequestURL,
+                    ButtonText => $AuthBackendModule->{Request}->{Config}->{RequestLoginButtonText},
+                },
+            );
         }
 
         # get lost password
@@ -1471,35 +1513,21 @@ sub Header {
         }
 
         my $ActivityObject = $Kernel::OM->Get('Kernel::System::Activity');
-        my @Activities     = $ActivityObject->ListGet(
+        my $ActivityStats  = $ActivityObject->StatsGet(
             UserID => $Self->{UserID},
         );
-
-        my $Count       = scalar @Activities;
-        my $NewActivity = grep { $_->{State} eq 'new' } @Activities;
-
         my $ActivityBellClass = '';
-        if ($NewActivity) {
+        if ( $ActivityStats->{HasNew} ) {
             $ActivityBellClass = 'activity-new';
         }
 
         $Self->Block(
             Name => 'Activity',
             Data => {
-                Count             => $Count,
+                Count             => $ActivityStats->{Count},
                 ActivityBellClass => $ActivityBellClass,
             },
         );
-
-        for my $Activity (@Activities) {
-            $Self->Block(
-                Name => 'ActivityList',
-                Data => {
-                    %{$Activity},
-                    LinkTarget => $Self->{UserActivityLinkTarget} || '_self',
-                },
-            );
-        }
 
         $Self->AddJSData(
             Key   => 'UserActivityLinkTarget',
@@ -3894,10 +3922,8 @@ sub BuildDateSelection {
     delete $Param{ $Prefix . 'Second' };
 
     # date format
-    $Output .= $Self->{LanguageObject}->Time(
-        Action => 'Return',
+    $Output .= $Self->{LanguageObject}->FormatNonNumericTime(
         Format => 'DateInputFormat',
-        Mode   => 'NotNumeric',
         %Param,
     );
 
@@ -4034,18 +4060,20 @@ sub CustomerLogin {
     $Param{'XLoginHeader'} = 1;
 
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
+
+    my $CookieSecureAttribute = 0;
+    if ( $ConfigObject->Get('HttpType') eq 'https' ) {
+
+        # Restrict Cookie to HTTPS if it is used.
+        $CookieSecureAttribute = 1;
+    }
 
     if ( $ConfigObject->Get('SessionUseCookie') ) {
 
         # always set a cookie, so that at the time the user submits
         # the password, we know already if the browser supports cookies.
         # ( the session cookie isn't available at that time ).
-        my $CookieSecureAttribute = 0;
-        if ( $ConfigObject->Get('HttpType') eq 'https' ) {
-
-            # Restrict Cookie to HTTPS if it is used.
-            $CookieSecureAttribute = 1;
-        }
         $Self->{SetCookies}->{OTRSBrowserHasCookie} = $Kernel::OM->Get('Kernel::System::Web::Request')->SetCookie(
             Key      => 'OTRSBrowserHasCookie',
             Value    => 1,
@@ -4178,6 +4206,45 @@ sub CustomerLogin {
                 Data => \%Param,
             );
             last COUNT;
+        }
+
+        # Show SAML login links
+        COUNT:
+        for my $Count ( '', 1 .. 10 ) {
+
+            my $GenericModule = $ConfigObject->Get("Customer::AuthModule$Count");
+
+            next COUNT if !$GenericModule;
+            next COUNT if $GenericModule ne 'Kernel::System::CustomerAuth::SAML';
+
+            if ( !$MainObject->Require($GenericModule) ) {
+                $MainObject->Die("Can't load backend module $GenericModule! $@");
+            }
+
+            my $AuthBackendModule = $GenericModule->new( Count => $Count );
+            my $RequestURL        = $AuthBackendModule->{Request}->CreateURL();
+            my $RequestID         = $AuthBackendModule->{Request}->GetID();
+
+            # Set current request ID for backend in separate cookie
+            my $RequestIDCookie = $Kernel::OM->Get('Kernel::System::Web::Request')->SetCookie(
+                Key      => "CustomerUserSAMLRequestID$Count",
+                Value    => $RequestID,
+                Expires  => '+10m',
+                Path     => $ConfigObject->Get('ScriptAlias'),
+                Secure   => $CookieSecureAttribute,
+                HTTPOnly => 1,
+            );
+
+            # Note: This only works here because at this point, no body has been added to $Output.
+            $Output .= "Set-Cookie: $RequestIDCookie\n";
+
+            $Self->Block(
+                Name => 'SAMLLoginLink',
+                Data => {
+                    RequestURL => $RequestURL,
+                    ButtonText => $AuthBackendModule->{Request}->{Config}->{RequestLoginButtonText},
+                },
+            );
         }
 
         # get lost password output

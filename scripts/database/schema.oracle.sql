@@ -2455,7 +2455,7 @@ END;
 CREATE TABLE article_color (
     id NUMBER (5, 0) NOT NULL,
     name VARCHAR2 (200) NOT NULL,
-    color VARCHAR2 (10) NOT NULL,
+    color VARCHAR2 (25) NOT NULL,
     create_time DATE NOT NULL,
     create_by NUMBER (12, 0) NOT NULL,
     change_time DATE NOT NULL,
@@ -6599,7 +6599,7 @@ CREATE TABLE calendar (
     group_id NUMBER (12, 0) NOT NULL,
     name VARCHAR2 (200) NOT NULL,
     salt_string VARCHAR2 (64) NOT NULL,
-    color VARCHAR2 (7) NOT NULL,
+    color VARCHAR2 (25) NOT NULL,
     ticket_appointments CLOB NULL,
     valid_id NUMBER (5, 0) NOT NULL,
     create_time DATE NOT NULL,

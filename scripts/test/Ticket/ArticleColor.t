@@ -50,210 +50,210 @@ $Self->IsDeeply(
     \@ArticleColorList,
     [
         {
-            'Color'                => '#FFCCCC',
+            'Color'                => '#FFCCCCFF',
             'CommunicationChannel' => 'Chat',
             'IsVisibleForCustomer' => 'NotVisibleForCustomer',
             'Name'                 => 'agent::Chat::NotVisibleForCustomer',
             'SenderType'           => 'agent'
         },
         {
-            'Color'                => '#D1E8D1',
+            'Color'                => '#D1E8D1FF',
             'CommunicationChannel' => 'Chat',
             'IsVisibleForCustomer' => 'VisibleForCustomer',
             'Name'                 => 'agent::Chat::VisibleForCustomer',
             'SenderType'           => 'agent'
         },
         {
-            'Color'                => '#FFCCCC',
+            'Color'                => '#FFCCCCFF',
             'CommunicationChannel' => 'Email',
             'IsVisibleForCustomer' => 'NotVisibleForCustomer',
             'Name'                 => 'agent::Email::NotVisibleForCustomer',
             'SenderType'           => 'agent'
         },
         {
-            'Color'                => '#D1E8D1',
+            'Color'                => '#D1E8D1FF',
             'CommunicationChannel' => 'Email',
             'IsVisibleForCustomer' => 'VisibleForCustomer',
             'Name'                 => 'agent::Email::VisibleForCustomer',
             'SenderType'           => 'agent'
         },
         {
-            'Color'                => '#FFCCCC',
+            'Color'                => '#FFCCCCFF',
             'CommunicationChannel' => 'Internal',
             'IsVisibleForCustomer' => 'NotVisibleForCustomer',
             'Name'                 => 'agent::Internal::NotVisibleForCustomer',
             'SenderType'           => 'agent'
         },
         {
-            'Color'                => '#CCCCCC',
+            'Color'                => '#CCCCCCFF',
             'CommunicationChannel' => 'Internal',
             'IsVisibleForCustomer' => 'VisibleForCustomer',
             'Name'                 => 'agent::Internal::VisibleForCustomer',
             'SenderType'           => 'agent'
         },
         {
-            'Color'                => '#FFCCCC',
+            'Color'                => '#FFCCCCFF',
             'CommunicationChannel' => 'Phone',
             'IsVisibleForCustomer' => 'NotVisibleForCustomer',
             'Name'                 => 'agent::Phone::NotVisibleForCustomer',
             'SenderType'           => 'agent'
         },
         {
-            'Color'                => '#D1E8D1',
+            'Color'                => '#D1E8D1FF',
             'CommunicationChannel' => 'Phone',
             'IsVisibleForCustomer' => 'VisibleForCustomer',
             'Name'                 => 'agent::Phone::VisibleForCustomer',
             'SenderType'           => 'agent'
         },
         {
-            'Color'                => '#FFCCCC',
+            'Color'                => '#FFCCCCFF',
             'CommunicationChannel' => 'Web',
             'IsVisibleForCustomer' => 'NotVisibleForCustomer',
             'Name'                 => 'agent::Web::NotVisibleForCustomer',
             'SenderType'           => 'agent'
         },
         {
-            'Color'                => '#D1E8D1',
+            'Color'                => '#D1E8D1FF',
             'CommunicationChannel' => 'Web',
             'IsVisibleForCustomer' => 'VisibleForCustomer',
             'Name'                 => 'agent::Web::VisibleForCustomer',
             'SenderType'           => 'agent'
         },
         {
-            'Color'                => '#FFCCCC',
+            'Color'                => '#FFCCCCFF',
             'CommunicationChannel' => 'Chat',
             'IsVisibleForCustomer' => 'NotVisibleForCustomer',
             'Name'                 => 'system::Chat::NotVisibleForCustomer',
             'SenderType'           => 'system'
         },
         {
-            'Color'                => '#FFF7BE',
+            'Color'                => '#FFF7BEFF',
             'CommunicationChannel' => 'Chat',
             'IsVisibleForCustomer' => 'VisibleForCustomer',
             'Name'                 => 'system::Chat::VisibleForCustomer',
             'SenderType'           => 'system'
         },
         {
-            'Color'                => '#FFCCCC',
+            'Color'                => '#FFCCCCFF',
             'CommunicationChannel' => 'Email',
             'IsVisibleForCustomer' => 'NotVisibleForCustomer',
             'Name'                 => 'system::Email::NotVisibleForCustomer',
             'SenderType'           => 'system'
         },
         {
-            'Color'                => '#FFF7BE',
+            'Color'                => '#FFF7BEFF',
             'CommunicationChannel' => 'Email',
             'IsVisibleForCustomer' => 'VisibleForCustomer',
             'Name'                 => 'system::Email::VisibleForCustomer',
             'SenderType'           => 'system'
         },
         {
-            'Color'                => '#FFCCCC',
+            'Color'                => '#FFCCCCFF',
             'CommunicationChannel' => 'Internal',
             'IsVisibleForCustomer' => 'NotVisibleForCustomer',
             'Name'                 => 'system::Internal::NotVisibleForCustomer',
             'SenderType'           => 'system'
         },
         {
-            'Color'                => '#FFF7BE',
+            'Color'                => '#FFF7BEFF',
             'CommunicationChannel' => 'Internal',
             'IsVisibleForCustomer' => 'VisibleForCustomer',
             'Name'                 => 'system::Internal::VisibleForCustomer',
             'SenderType'           => 'system'
         },
         {
-            'Color'                => '#FFCCCC',
+            'Color'                => '#FFCCCCFF',
             'CommunicationChannel' => 'Phone',
             'IsVisibleForCustomer' => 'NotVisibleForCustomer',
             'Name'                 => 'system::Phone::NotVisibleForCustomer',
             'SenderType'           => 'system'
         },
         {
-            'Color'                => '#FFF7BE',
+            'Color'                => '#FFF7BEFF',
             'CommunicationChannel' => 'Phone',
             'IsVisibleForCustomer' => 'VisibleForCustomer',
             'Name'                 => 'system::Phone::VisibleForCustomer',
             'SenderType'           => 'system'
         },
         {
-            'Color'                => '#FFCCCC',
+            'Color'                => '#FFCCCCFF',
             'CommunicationChannel' => 'Web',
             'IsVisibleForCustomer' => 'NotVisibleForCustomer',
             'Name'                 => 'system::Web::NotVisibleForCustomer',
             'SenderType'           => 'system'
         },
         {
-            'Color'                => '#FFF7BE',
+            'Color'                => '#FFF7BEFF',
             'CommunicationChannel' => 'Web',
             'IsVisibleForCustomer' => 'VisibleForCustomer',
             'Name'                 => 'system::Web::VisibleForCustomer',
             'SenderType'           => 'system'
         },
         {
-            'Color'                => '#FFCCCC',
+            'Color'                => '#FFCCCCFF',
             'CommunicationChannel' => 'Chat',
             'IsVisibleForCustomer' => 'NotVisibleForCustomer',
             'Name'                 => 'customer::Chat::NotVisibleForCustomer',
             'SenderType'           => 'customer'
         },
         {
-            'Color'                => '#D4DEFC',
+            'Color'                => '#D4DEFCFF',
             'CommunicationChannel' => 'Chat',
             'IsVisibleForCustomer' => 'VisibleForCustomer',
             'Name'                 => 'customer::Chat::VisibleForCustomer',
             'SenderType'           => 'customer'
         },
         {
-            'Color'                => '#FFCCCC',
+            'Color'                => '#FFCCCCFF',
             'CommunicationChannel' => 'Email',
             'IsVisibleForCustomer' => 'NotVisibleForCustomer',
             'Name'                 => 'customer::Email::NotVisibleForCustomer',
             'SenderType'           => 'customer'
         },
         {
-            'Color'                => '#D4DEFC',
+            'Color'                => '#D4DEFCFF',
             'CommunicationChannel' => 'Email',
             'IsVisibleForCustomer' => 'VisibleForCustomer',
             'Name'                 => 'customer::Email::VisibleForCustomer',
             'SenderType'           => 'customer'
         },
         {
-            'Color'                => '#FFCCCC',
+            'Color'                => '#FFCCCCFF',
             'CommunicationChannel' => 'Internal',
             'IsVisibleForCustomer' => 'NotVisibleForCustomer',
             'Name'                 => 'customer::Internal::NotVisibleForCustomer',
             'SenderType'           => 'customer'
         },
         {
-            'Color'                => '#D4DEFC',
+            'Color'                => '#D4DEFCFF',
             'CommunicationChannel' => 'Internal',
             'IsVisibleForCustomer' => 'VisibleForCustomer',
             'Name'                 => 'customer::Internal::VisibleForCustomer',
             'SenderType'           => 'customer'
         },
         {
-            'Color'                => '#FFCCCC',
+            'Color'                => '#FFCCCCFF',
             'CommunicationChannel' => 'Phone',
             'IsVisibleForCustomer' => 'NotVisibleForCustomer',
             'Name'                 => 'customer::Phone::NotVisibleForCustomer',
             'SenderType'           => 'customer'
         },
         {
-            'Color'                => '#D4DEFC',
+            'Color'                => '#D4DEFCFF',
             'CommunicationChannel' => 'Phone',
             'IsVisibleForCustomer' => 'VisibleForCustomer',
             'Name'                 => 'customer::Phone::VisibleForCustomer',
             'SenderType'           => 'customer'
         },
         {
-            'Color'                => '#FFCCCC',
+            'Color'                => '#FFCCCCFF',
             'CommunicationChannel' => 'Web',
             'IsVisibleForCustomer' => 'NotVisibleForCustomer',
             'Name'                 => 'customer::Web::NotVisibleForCustomer',
             'SenderType'           => 'customer'
         },
         {
-            'Color'                => '#D4DEFC',
+            'Color'                => '#D4DEFCFF',
             'CommunicationChannel' => 'Web',
             'IsVisibleForCustomer' => 'VisibleForCustomer',
             'Name'                 => 'customer::Web::VisibleForCustomer',

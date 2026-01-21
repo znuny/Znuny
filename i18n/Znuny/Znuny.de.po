@@ -25249,3 +25249,11 @@ msgstr "Setzt das Kundenbenutzerfeld in der Agentenoberfläche."
 msgid "Sets the customer user field as mandatory."
 msgstr "Legt das Kundenbenutzerfeld als Pflichtfeld fest."
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of activities to keep per user. Older ones will be deleted."
+msgstr "Maximale Anzahl der Aktivitäten, die pro Benutzer gespeichert werden. Ältere werden gelöscht."
+
+#. JS File: var/httpd/htdocs/js/Core.Activity.js
+msgid "Could not load activities."
+msgstr "Aktivitäten konnten nicht geladen werden."
+

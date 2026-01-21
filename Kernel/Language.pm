@@ -10,6 +10,8 @@
 
 package Kernel::Language;
 
+use v5.14;
+use utf8;
 use strict;
 use warnings;
 use Pod::Strip;
@@ -317,16 +319,14 @@ Invalid strings will also be returned with an error logged.
 sub FormatTimeString {
     my ( $Self, $String, $Config, $Short ) = @_;
 
-    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
-
     return '' if !$String;
-
     $Config ||= 'DateFormat';
-    $Short  ||= 0;
 
     # Valid timestamp
-    if ( $String =~ /(\d{4})-(\d{2})-(\d{2})\s(\d{2}):(\d{2}):(\d{2})/ ) {
-        my $ReturnString = $Self->{$Config} || "$Config needs to be translated!";
+    if ( $String =~ /(\d{4})-(\d{2})-(\d{2})[\sT](\d{2}):(\d{2}):(\d{2})/a ) {
+        my $Format = $Self->{$Config};
+        return "$Config needs to be translated!" if !defined $Format;
+        $Format =~ s/(?<!%)%T/%H:%M/             if $Short;
 
         my $DateTimeObject = $Kernel::OM->Create(
             'Kernel::System::DateTime',
@@ -336,61 +336,23 @@ sub FormatTimeString {
         );
 
         if ( !$DateTimeObject ) {
-            $LogObject->Log(
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
                 Message  => "Invalid date/time string $String.",
             );
-
             return $String;
         }
 
-        # Convert to time zone, but only if we actually display the time!
-        # Otherwise the date might be off by one day because of the TimeZone diff.
-        if ( $Self->{TimeZone} && $Config ne 'DateFormatShort' ) {
-            $DateTimeObject->ToTimeZone( TimeZone => $Self->{TimeZone} );
+        if ( $Self->{TimeZone} && $Self->{TimeZone} ne Kernel::System::DateTime->OTRSTimeZoneGet() ) {
+            $DateTimeObject->ToTimeZone( TimeZone => $Self->{TimeZone} ) if $Self->{TimeZone};
+            $Format .= " ($Self->{TimeZone})"                            if $Config ne 'DateFormatShort';
         }
-
-        my $DateTimeValues = $DateTimeObject->Get();
-
-        my $Year      = $DateTimeValues->{Year};
-        my $Month     = sprintf "%02d", $DateTimeValues->{Month};
-        my $MonthAbbr = $DateTimeValues->{MonthAbbr};
-        my $Day       = sprintf "%02d", $DateTimeValues->{Day};
-        my $DayAbbr   = $DateTimeValues->{DayAbbr};
-        my $Hour      = sprintf "%02d", $DateTimeValues->{Hour};
-        my $Minute    = sprintf "%02d", $DateTimeValues->{Minute};
-        my $Second    = sprintf "%02d", $DateTimeValues->{Second};
-
-        if ($Short) {
-            $ReturnString =~ s/\%T/$Hour:$Minute/g;
-        }
-        else {
-            $ReturnString =~ s/\%T/$Hour:$Minute:$Second/g;
-        }
-        $ReturnString =~ s/\%D/$Day/g;
-        $ReturnString =~ s/\%M/$Month/g;
-        $ReturnString =~ s/\%Y/$Year/g;
-
-        $ReturnString =~ s{(\%A)}{$Self->Translate($DayAbbr);}egx;
-        $ReturnString
-            =~ s{(\%B)}{$Self->Translate($MonthAbbr);}egx;
-
-        # output time zone only if it differs from OTRS' time zone
-        if (
-            $Config ne 'DateFormatShort'
-            && $Self->{TimeZone}
-            && $Self->{TimeZone} ne Kernel::System::DateTime->OTRSTimeZoneGet()
-            )
-        {
-            return $ReturnString . " ($Self->{TimeZone})";
-        }
-
-        return $ReturnString;
+        return $DateTimeObject->Format( Format => $Format );
     }
 
     # Invalid string passed? (don't log for ISO dates)
-    if ( $String !~ /^(\d{2}:\d{2}:\d{2})$/ ) {
-        $LogObject->Log(
+    if ( $String !~ /^(\d{2}:\d{2}:\d{2})$/a ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'notice',
             Message  => "No FormatTimeString() translation found for '$String' string!",
         );
@@ -434,6 +396,9 @@ sub GetPossibleCharsets {
 
 =head2 Time()
 
+DEPRECATED. Don't use this function any more, it's unnecessarily complicated and
+error-prone. Use L</FormatCurrentTime()> or L<FormatNonNumericTime()> instead.
+
 Returns a time string in language format (based on translation file).
 
     $Time = $LanguageObject->Time(
@@ -457,7 +422,7 @@ Returns a time string in language format (based on translation file).
         Second => 05,
     );
 
-These tags are supported: %A=WeekDay;%B=LongMonth;%T=Time;%D=Day;%M=Month;%Y=Year;
+These tags are supported: %a=WeekDay;%b=Month;%T=Time;%d=Day;%m=Month;%Y=Year;
 
 Note that %A only works correctly with Action GET, it might be dropped otherwise.
 
@@ -524,7 +489,7 @@ sub Time {
         $Second = $Param{Second} || 0;
 
         my @MonthAbbrs = qw/Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec/;
-        $MonthAbbr = defined $Month && $Month =~ m/^\d+$/ ? $MonthAbbrs[ $Month - 1 ] : '';
+        $MonthAbbr = defined $Month && $Month =~ m/^\d+$/a ? $MonthAbbrs[ $Month - 1 ] : '';
     }
 
     # do replace
@@ -561,15 +526,116 @@ sub Time {
         if ($Time) {
             $ReturnString =~ s/\%T/$Time/g;
         }
-        $ReturnString =~ s/\%D/$Day/g;
-        $ReturnString =~ s/\%M/$Month/g;
+        $ReturnString =~ s/\%d/$Day/g;
+        $ReturnString =~ s/\%m/$Month/g;
         $ReturnString =~ s/\%Y/$Year/g;
-        $ReturnString =~ s{(\%A)}{defined $DayAbbr ? $Self->Translate($DayAbbr) : '';}egx;
-        $ReturnString =~ s{(\%B)}{defined $MonthAbbr ? $Self->Translate($MonthAbbr) : '';}egx;
+        $ReturnString =~ s{(\%a)}{defined $DayAbbr ? $Self->Translate($DayAbbr) : '';}egx;
+        $ReturnString =~ s{(\%b)}{defined $MonthAbbr ? $Self->Translate($MonthAbbr) : '';}egx;
 
         return $ReturnString;
     }
 
+    return $ReturnString;
+}
+
+=head2 FormatCurrentTime()
+
+Returns the current time as a string in language-specific format (based on
+translation file).
+
+    $Time = $LanguageObject->FormatCurrentTime(
+        Format => 'DateFormat',
+    );
+
+=cut
+
+sub FormatCurrentTime {
+    my ( $Self, %Param ) = @_;
+
+    # check needed stuff
+    for my $Needed (qw(Format)) {
+        if ( !$Param{$Needed} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Need $Needed!",
+            );
+            return;
+        }
+    }
+    my $Format = $Self->{ $Param{Format} };
+    return "DateTime format '$Format' needs to be translated!" if !defined $Format;
+
+    my $DateTimeObject = $Kernel::OM->Create(
+        'Kernel::System::DateTime',
+        ObjectParams => {
+            TimeZone => $Self->{TimeZone},
+        },
+    );
+    return 'Error creating Kernel::System::DateTime object' if !$DateTimeObject;
+
+    return $DateTimeObject->Format( Format => $Format );
+}
+
+=head2 FormatNonNumericTime()
+
+Returns a string formatted according to a language-specific time format. Unlike
+L</Time()> this supports only a small subset of formats but can insert arbitrary
+strings from arguments in their place.
+
+These tags are supported: %T=Time;%d=Day;%m=Month;%Y=Year;
+
+Note that different from L</Time()>, C<%T> does noit include a seconds field because
+the only caller of this function doesn't need it.
+
+    $TimeLong = $LanguageObject->FormatNonNumericTime(
+        Format => 'DateInputFormatLong',
+        Year   => '<input value="2014"/>',
+        Month  => '<input value="1"/>',
+        Day    => '<input value="10"/>',
+        Hour   => '<input value="11"/>',
+        Minute => '<input value="12"/>',
+        Second => '<input value="13"/>',
+    );
+
+=cut
+
+sub FormatNonNumericTime {
+    my ( $Self, %Param ) = @_;
+
+    # check needed stuff
+    for my $Needed (qw(Format)) {
+        if ( !$Param{$Needed} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Need $Needed!",
+            );
+            return;
+        }
+    }
+    my $ReturnString = $Self->{ $Param{Format} } || 'Need to be translated!';
+    my %Formats      = (
+        Y => $Param{Year}   // 0,
+        m => $Param{Month}  // 0,
+        d => $Param{Day}    // 0,
+        H => $Param{Hour}   // 0,
+        M => $Param{Minute} // 0,
+        T => join( ':', $Param{Hour} // 0, $Param{Minute} // 0 ),
+    );
+
+    # if we have a dynamic field Date or DateTime, we want to add additional DIVs
+    # to use the CSS flex magic in the frontend
+    if ( $Param{DynamicFieldConfig} && $Param{DynamicFieldConfig}->{FieldType} =~ /(Date|DateTime)/ ) {
+        my ( $Date, $Time ) = split / - /, $ReturnString;
+        $ReturnString = '';
+        if ($Date) {
+            $ReturnString .= '<div class="DynamicFieldDate">' . $Date . '</div>';
+        }
+
+        if ($Time) {
+            $ReturnString .= '<div class="DynamicFieldTime">' . $Time . '</div>';
+        }
+    }
+    $ReturnString =~ s{ (?<!%)% ( [YmdHMT] ) }{ $Formats{$1} // "<FORMAT-BUG:$1>" }egx;
     return $ReturnString;
 }
 

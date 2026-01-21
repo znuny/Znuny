@@ -42,6 +42,18 @@ Core.Activity = (function (TargetNS) {
             });
         });
 
+        // Load activities via AJAX
+        $('#UserActivity .ActivityIcon').off("click.activity-load").on("click.activity-load", function () {
+            var $Element = $('#UserActivity'),
+                Loaded = $Element.attr('data-loaded'),
+                $Container = $('#UserActivity .ActivityList');
+
+            if (Loaded) return;
+
+            TargetNS.LoadActivities($Container);
+            $Element.attr('data-loaded', 1);
+        });
+
         // mark as seen all
         $('#ActivityMarkAsSeenAll').off("click.activity-mark-as-all").on("click.activity-mark-as-all", function () {
             TargetNS.MarkAsSeenAll();
@@ -65,6 +77,35 @@ Core.Activity = (function (TargetNS) {
         });
 
         TargetNS.BindActivityLink();
+    };
+
+    /**
+     * @name LoadActivities
+     * @memberof Core.Activity
+     * @function
+     * @description
+     *      Loads a number of activities via AJAX
+     * @param {Object} $Container JQuery collection for the container elemnt to load the resulting list into.
+     */
+    TargetNS.LoadActivities = function ($Container) {
+        var URL = Core.Config.Get('Baselink'),
+            Data = {
+                Action: 'Activity',
+                Subaction: 'Load',
+            };
+
+        Core.AJAX.FunctionCall(URL, Data, function (Response) {
+            if (!Response || !Response.Success || !Response.HTML) {
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An error occurred'),
+                    Core.Language.Translate('Could not load activities.')
+                );
+                return;
+            }
+
+            $Container.html(Response.HTML);
+        });
+        return;
     };
 
     /**

@@ -415,12 +415,9 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         align-items: center;
         width: auto;
         text-align: left;
-        /*padding: var(--padding-sm) 0;*/
         font-size: var(--label-font-size);
         letter-spacing: .2px;
         font-weight: var(--medium);
-        /*font-family: Inter;*/
-        text-transform: capitalize;
     }
 
     #ActivityDialogContent .Row_DynamicField_PreProcVacationStart > div > div:not(.TooltipErrorMessage),

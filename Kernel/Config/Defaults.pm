@@ -502,6 +502,65 @@ sub LoadDefaults {
     # Die if backend can't work, e. g. can't connect to server.
 #    $Self->{'AuthModule::Radius::Die'} = 1;
 
+    #
+    # Auth via SAML 2.0
+    #
+    # $Self->{'AuthModule1'} = 'Kernel::System::Auth::SAML';
+
+    # $Self->{'AuthModule::SAML::RequestMetaDataURL1'} = 'https://some.url/auth/realms/master/protocol/saml/descriptor';
+    # or XML as string
+    # $Self->{'AuthModule::SAML::Request::MetaDataXML1'} = '<?xml version="1.0" encoding="UTF-8" ?>
+# <md:EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
+#                      xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+#                      xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+#                      xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+#                      entityID="https://some.url/auth/realms/master">
+#     <md:IDPSSODescriptor WantAuthnRequestsSigned="true"
+#                          protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+#         <md:KeyDescriptor use="signing">
+#             <ds:KeyInfo>
+#                 <ds:KeyName>8FWM0j6Eg-sBQ25fxpQQ1ZDiDSpPRnOG9fa4iUzx_Z8</ds:KeyName>
+#                 <ds:X509Data>
+#                     ...
+#                 </ds:X509Data>
+#             </ds:KeyInfo>
+#         </md:KeyDescriptor>
+#         <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+#                                 Location="https://some.url/auth/realms/master/protocol/saml" />
+#         <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+#                                 Location="https://some.url/auth/realms/master/protocol/saml" />
+#         <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</md:NameIDFormat>
+#         <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</md:NameIDFormat>
+#         <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>
+#         <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat>
+#         <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+#                                 Location="https://some.url/auth/realms/master/protocol/saml" />
+#         <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+#                                 Location="https://some.url/auth/realms/master/protocol/saml" />
+#         <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP"
+#                                 Location="https://some.url/auth/realms/master/protocol/saml" />
+#     </md:IDPSSODescriptor>
+# </md:EntityDescriptor>';
+
+    # SSL options (optional, only if MetaDataURL is used)
+    # $Self->{'AuthModule::SAML::RequestMetaDataURLSSLOptions1'} = {
+    #     SSL_ca_file     => '/your/directory/cacert.pem',
+    #     SSL_ca_path     => '/etc/ssl/certs',
+    #     verify_hostname => 1,
+    # };
+
+    # # Optional, for signing the request
+    # $Self->{'AuthModule::SAML::RequestSignKey1'} = '/some/path/some.key';
+
+    # Button text can be translated per system with module AdminTranslation
+    # $Self->{'AuthModule::SAML::RequestLoginButtonText1'}      = 'Log in via SAML';
+    # $Self->{'AuthModule::SAML::RequestAssertionConsumerURL1'} = ( $Self->{HttpType} // '' ) . '://' . $Self->{FQDN} . '/' . $Self->{ScriptAlias} . 'index.pl?Action=Login';
+
+    # $Self->{'AuthModule::SAML::Issuer1'} = "https://some.url/znuny/";
+
+    # # Optional, CACert of the identity provider (IdP)
+    # $Self->{'AuthModule::SAML::IdPCACert1'} = '/some/path/cert.pem';
+
     # --------------------------------------------------- #
     # 2 factor authentication settings                    #
     # check a otp (one-time password)                     #
@@ -677,6 +736,87 @@ sub LoadDefaults {
 #                'role3' => 1,
 #            },
 #        },
+#    };
+
+    #
+    # Auth sync via SAML 2.0
+    #
+
+    # $Self->{'AuthSyncModule1'} = 'Kernel::System::Auth::Sync::SAML';
+
+    # references the attributes of the SAML response
+    # $Self->{'AuthSyncModule::SAML::UserSyncMap1'} = {
+    #     UserFirstname => 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname',
+    #     UserLastname  => 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname',
+    #     UserEmail     => 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress',
+    # };
+
+#    $Self->{'AuthSyncModule::SAML::UserSyncInitialGroups1'} = [
+#        'users',
+#    ];
+
+    # $Self->{'AuthSyncModule::SAML::UserSyncGroupsDefinition::Attribute1'} = 'MemberOf';
+    # $Self->{'AuthSyncModule::SAML::UserSyncGroupsDefinition1'} = {
+    #     Support => {
+    #         ZnunyGroup1 => {
+    #             rw => 1,
+    #         },
+    #         ZnunyGroup2 => {
+    #             ro   => 1,
+    #             note => 1,
+    #         },
+    #     },
+    # };
+
+#    $Self->{'AuthSyncModule::SAML::UserSyncAttributeGroupsDefinition1'} = {
+#        SAMLAttribute => {
+#
+#            # SAML attribute value
+#            SAMLAttributeValue1 => {
+#                # Znuny group
+#                admin => {
+#                    rw => 1,
+#                    ro => 1,
+#                },
+#                faq => {
+#                    rw => 0,
+#                    ro => 1,
+#                },
+#            },
+#        },
+#        SAMLAttribute2 => {
+#            SAMLAttributeValue2 => {
+#                users => {
+#                    rw => 1,
+#                    ro => 1,
+#                },
+#            },
+#         }
+#    };
+
+    # $Self->{'AuthSyncModule::SAML::UserSyncRolesDefinition::Attribute1'} = 'Role';
+    # $Self->{'AuthSyncModule::SAML::UserSyncRolesDefinition1'} = {
+    #     Operations => {
+    #         ZnunyRole1 => 1,
+    #         ZnunyRole2 => 0,
+    #     },
+    # };
+
+#    $Self->{'AuthSyncModule::SAML::UserSyncAttributeRolesDefinition1'} = {
+#        SAMLAttribute => {
+#
+#            # SAML attribute value
+#            SAMLAttributeValue1 => {
+#                # Znuny role
+#                Role1 => 1,
+#                Role2 => 0,
+#            },
+#        },
+#        SAMLAttribute2 => {
+#            SAMLAttributeValue2 => {
+#                Role3 => 1,
+#            },
+#         }
 #    };
 
     # UserTable
@@ -1063,7 +1203,7 @@ sub LoadDefaults {
         'thirdparty/jquery-pubsub/pubsub.js',
         'thirdparty/jquery-jstree-3.3.8/jquery.jstree.js',
         'thirdparty/nunjucks-3.2.3/nunjucks.min.js',
-        'thirdparty/jscolor-2.4.6/jscolor.js',
+        'thirdparty/jscolor-2.5.2/jscolor.js',
         'Core.Init.js',
         'Core.JavaScriptEnhancements.js',
         'Core.Debug.js',
@@ -1458,6 +1598,65 @@ via the Preferences button after logging in.
 #    $Self->{'Customer::AuthModule'} = 'Kernel::System::Auth::Radius';
 #    $Self->{'Customer::AuthModule::Radius::Host'} = 'radiushost';
 #    $Self->{'Customer::AuthModule::Radius::Password'} = 'radiussecret';
+
+    #
+    # Customer user auth via SAML 2.0
+    #
+    # $Self->{'Customer::AuthModule1'} = 'Kernel::System::CustomerAuth::SAML';
+
+    # $Self->{'Customer::AuthModule::SAML::RequestMetaDataURL1'} = 'https://some.url/auth/realms/master/protocol/saml/descriptor';
+    # or XML as string
+    # $Self->{'Customer::AuthModule::SAML::Request::MetaDataXML1'} = '<?xml version="1.0" encoding="UTF-8" ?>
+# <md:EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
+#                      xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
+#                      xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+#                      xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+#                      entityID="https://some.url/auth/realms/master">
+#     <md:IDPSSODescriptor WantAuthnRequestsSigned="true"
+#                          protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+#         <md:KeyDescriptor use="signing">
+#             <ds:KeyInfo>
+#                 <ds:KeyName>8FWM0j6Eg-sBQ25fxpQQ1ZDiDSpPRnOG9fa4iUzx_Z8</ds:KeyName>
+#                 <ds:X509Data>
+#                     ...
+#                 </ds:X509Data>
+#             </ds:KeyInfo>
+#         </md:KeyDescriptor>
+#         <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+#                                 Location="https://some.url/auth/realms/master/protocol/saml" />
+#         <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+#                                 Location="https://some.url/auth/realms/master/protocol/saml" />
+#         <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</md:NameIDFormat>
+#         <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</md:NameIDFormat>
+#         <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>
+#         <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat>
+#         <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+#                                 Location="https://some.url/auth/realms/master/protocol/saml" />
+#         <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+#                                 Location="https://some.url/auth/realms/master/protocol/saml" />
+#         <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP"
+#                                 Location="https://some.url/auth/realms/master/protocol/saml" />
+#     </md:IDPSSODescriptor>
+# </md:EntityDescriptor>';
+
+    # SSL options (optional, only if MetaDataURL is used)
+    # $Self->{'Customer::AuthModule::SAML::RequestMetaDataURLSSLOptions1'} = {
+    #     SSL_ca_file     => '/your/directory/cacert.pem',
+    #     SSL_ca_path     => '/etc/ssl/certs',
+    #     verify_hostname => 1,
+    # };
+
+    # # Optional, for signing the request
+    # $Self->{'Customer::AuthModule::SAML::RequestSignKey1'} = '/some/path/some.key';
+
+    # Button text can be translated per system with module AdminTranslation
+    # $Self->{'Customer::AuthModule::SAML::RequestLoginButtonText1'}      = 'Log in via SAML';
+    # $Self->{'Customer::AuthModule::SAML::RequestAssertionConsumerURL1'} = ( $Self->{HttpType} // '' ) . '://' . $Self->{FQDN} . '/' . $Self->{ScriptAlias} . 'customer.pl?Action=Login';
+
+    # $Self->{'Customer::AuthModule::SAML::Issuer1'} = "https://some.url/znuny/";
+
+    # # Optional, CACert of the identity provider (IdP)
+    # $Self->{'Customer::AuthModule::SAML::IdPCACert1'} = '/some/path/cert.pem';
 
     # --------------------------------------------------- #
     # 2 factor customer authentication settings           #

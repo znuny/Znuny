@@ -26,13 +26,13 @@ sub Data {
     # $$START$$
     # possible charsets
     $Self->{Charset} = ['utf-8', ];
-    # date formats (%A=WeekDay;%B=LongMonth;%T=Time;%D=Day;%M=Month;%Y=Year;)
-    $Self->{DateFormat}          = '%D.%M.%Y %T';
-    $Self->{DateFormatLong}      = '%T - %D.%M.%Y';
-    $Self->{DateFormatShort}     = '%D.%M.%Y';
-    $Self->{DateInputFormat}     = '%D.%M.%Y';
-    $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.862438089151622;
+    # date formats (%a=Weekday;%b=Month;%T=Time;%d=Day;%m=Month;%Y=Year;)
+    $Self->{DateFormat}          = '%d.%m.%Y %T';
+    $Self->{DateFormatLong}      = '%T - %d.%m.%Y';
+    $Self->{DateFormatShort}     = '%d.%m.%Y';
+    $Self->{DateInputFormat}     = '%d.%m.%Y';
+    $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
+    $Self->{Completeness}        = 0.862162593834851;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8044,6 +8044,8 @@ sub Data {
             '',
         'Defines the default ticket order in the ticket mention view of the agent interface. Up: oldest on top. Down: latest on top.' =>
             '',
+        'Maximum number of activities to keep per user. Older ones will be deleted.' =>
+            '',
         'Assignment between event and type.' => '',
         'Defines the link type for each activity.' => '',
         'List of colors in hexadecimal RGB which will be available for selection. Make sure the colors are dark enough so white text can be overlayed on them.' =>
@@ -8272,6 +8274,7 @@ sub Data {
 
         # JS File: var/httpd/htdocs/js/Core.Activity.js
         'An error occurred' => '',
+        'Could not load activities.' => '',
         'The activity could not be created. %s is needed.' => '',
         'The activity could not be created.' => '',
         'The activity could not be updated.' => '',
@@ -9519,6 +9522,7 @@ Vaša tehnička podrška
         'Copy Ticket Number',
         'Copy Ticket Number + Title',
         'Copy ticket information',
+        'Could not load activities.',
         'Could not open popup window. Please disable any popup blockers for this application.',
         'Current selection',
         'Currently not possible',

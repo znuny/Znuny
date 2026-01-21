@@ -187,6 +187,15 @@ X-OTRS-Login: [% Env("Baselink") %]
                                     <button type="submit" id="LoginButton" class="btn-main btn-primary" value="[% Translate("Login") | html %]" disabled="disabled"><span>[% Translate("Login") | html %]</span></button>
                                 </div>
 
+[% RenderBlockStart("SAMLLoginLink") %]
+                                <!-- SAML login -->
+                                <div class="Field">
+# Don't use filter 'url' on RequestURL because the given URL already contains some URI escaped parts.
+                                    <a href="[% Data.RequestURL %]" class="btn-cancel-ghost btn-main">
+                                        <span>[% Translate(Data.ButtonText) | html %]</span>
+                                    </a>
+                                </div>
+[% RenderBlockEnd("SAMLLoginLink") %]
                             </fieldset>
                         </form>
                     </div>

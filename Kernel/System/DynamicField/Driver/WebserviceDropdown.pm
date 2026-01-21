@@ -384,8 +384,7 @@ sub SearchFieldRender {
     my $DynamicFieldFieldType = $Param{DynamicFieldConfig}->{FieldType};
     my $DynamicFieldSearch    = $FieldName . '_Search';
 
-    my $UUIDObject     = Data::UUID->new();
-    my $InputFieldUUID = lc $UUIDObject->create_str();
+    my $InputFieldUUID = lc $Kernel::OM->Get('Kernel::System::Util')->CreateUUIDString();
 
     $HTMLString
         =~ s{(<select )}{$1 data-dynamic-field-name="$DynamicFieldName" data-dynamic-field-type="$DynamicFieldFieldType" data-selected-value-field-name="$FieldName" data-autocomplete-field-name="$DynamicFieldSearch" data-autocomplete-min-length="$AutocompleteMinLength" data-query-delay="$QueryDelay" data-default-search-term="$DefaultSearchTerm" data-ticket-id="$TicketID" data-input-field-uuid="$InputFieldUUID" };

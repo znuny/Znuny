@@ -1822,14 +1822,14 @@ Return a separated IN condition for more then C<MaxParamCountForInCondition> val
 
 Return the SQL String with ?-values and a array with values references in bind mode:
 
-    $BindModeResult = (
+    %BindModeResult = (
         'SQL'    => 'ticket_id IN (?, ?, ?, ?, ?, ?)',
         'Values' => [1, 2, 3, 4, 5, 6],
     );
 
     or
 
-    $BindModeResult = (
+    %BindModeResult = (
         'SQL'    => '( ticket_id IN (?, ?, ?, ?, ?, ?) OR ticket_id IN ( ?, ... ) )',
         'Values' => [1, 2, 3, 4, 5, 6, ... ],
     );

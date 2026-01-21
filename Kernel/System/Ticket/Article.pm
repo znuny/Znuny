@@ -895,19 +895,19 @@ sub ArticleColorInit {
     my @DefaultColorMapping = (
         {
             # Default Colors
-            'agent'    => '#D1E8D1',
-            'customer' => '#F9F9F9',
-            'system'   => '#FFF7BE',
+            'agent'    => '#D1E8D1FF',
+            'customer' => '#F9F9F9FF',
+            'system'   => '#FFF7BEFF',
         },
         {
-            'agent.*VisibleForCustomer'    => '#D1E8D1',
-            'customer.*VisibleForCustomer' => '#D4DEFC',
+            'agent.*VisibleForCustomer'    => '#D1E8D1FF',
+            'customer.*VisibleForCustomer' => '#D4DEFCFF',
         },
         {
-            '.*NotVisibleForCustomer' => '#FFCCCC',
+            '.*NotVisibleForCustomer' => '#FFCCCCFF',
         },
         {
-            'agent\:\:Internal\:\:VisibleForCustomer' => '#CCCCCC',
+            'agent\:\:Internal\:\:VisibleForCustomer' => '#CCCCCCFF',
         },
     );
 
@@ -920,7 +920,7 @@ sub ArticleColorInit {
                     . $CommunicationChannel->{ChannelName} . "::"
                     . $Self->{IsVisibleForCustomer}->{$Visibility};
 
-                my $Color = '#D1E8D1';
+                my $Color = '#D1E8D1FF';
                 for my $ColorMapping (@DefaultColorMapping) {
                     for my $Key ( sort keys %{$ColorMapping} ) {
                         if ( $Name =~ m{$Key} ) {

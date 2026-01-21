@@ -23,13 +23,13 @@ sub Data {
     # $$START$$
     # possible charsets
     $Self->{Charset} = ['utf-8', ];
-    # date formats (%A=WeekDay;%B=LongMonth;%T=Time;%D=Day;%M=Month;%Y=Year;)
-    $Self->{DateFormat}          = '%M/%D/%Y %T';
-    $Self->{DateFormatLong}      = '%T - %M/%D/%Y';
-    $Self->{DateFormatShort}     = '%M/%D/%Y';
-    $Self->{DateInputFormat}     = '%M/%D/%Y';
-    $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.42243169835437;
+    # date formats (%a=Weekday;%b=Month;%T=Time;%d=Day;%m=Month;%Y=Year;)
+    $Self->{DateFormat}          = '%m/%d/%Y %T';
+    $Self->{DateFormatLong}      = '%T - %m/%d/%Y';
+    $Self->{DateFormatShort}     = '%m/%d/%Y';
+    $Self->{DateInputFormat}     = '%m/%d/%Y';
+    $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
+    $Self->{Completeness}        = 0.422296757706437;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -8044,6 +8044,8 @@ Mfano:
             '',
         'Defines the default ticket order in the ticket mention view of the agent interface. Up: oldest on top. Down: latest on top.' =>
             '',
+        'Maximum number of activities to keep per user. Older ones will be deleted.' =>
+            '',
         'Assignment between event and type.' => '',
         'Defines the link type for each activity.' => '',
         'List of colors in hexadecimal RGB which will be available for selection. Make sure the colors are dark enough so white text can be overlayed on them.' =>
@@ -8272,6 +8274,7 @@ Mfano:
 
         # JS File: var/httpd/htdocs/js/Core.Activity.js
         'An error occurred' => '',
+        'Could not load activities.' => '',
         'The activity could not be created. %s is needed.' => '',
         'The activity could not be created.' => '',
         'The activity could not be updated.' => '',
@@ -9508,6 +9511,7 @@ Thanks for your help!
         'Copy Ticket Number',
         'Copy Ticket Number + Title',
         'Copy ticket information',
+        'Could not load activities.',
         'Could not open popup window. Please disable any popup blockers for this application.',
         'Current selection',
         'Currently not possible',

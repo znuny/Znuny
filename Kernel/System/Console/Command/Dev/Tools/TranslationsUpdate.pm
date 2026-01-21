@@ -755,7 +755,7 @@ EOF
                     $Completeness = $StringsTranslated / $StringsTotal;
                 }
                 $NewOut .= <<"EOF";
-    # date formats (\%A=WeekDay;\%B=LongMonth;\%T=Time;\%D=Day;\%M=Month;\%Y=Year;)
+    # date formats (\%a=Weekday;\%b=Month;\%T=Time;\%d=Day;\%m=Month;\%Y=Year;)
     \$Self->{DateFormat}          = '$LanguageCoreObject->{DateFormat}';
     \$Self->{DateFormatLong}      = '$LanguageCoreObject->{DateFormatLong}';
     \$Self->{DateFormatShort}     = '$LanguageCoreObject->{DateFormatShort}';

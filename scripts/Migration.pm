@@ -226,38 +226,41 @@ sub _TasksGet {
             Message => 'Check if database has been backed up',
             Module  => 'scripts::Migration::Base::DatabaseBackupCheck',
         },
-        {
-            Message => 'Check required database version',
-            Module  => 'scripts::Migration::Base::DatabaseVersionCheck',
-        },
-        {
-            Message => 'Check database default storage engine',
-            Module  => 'scripts::Migration::Base::DatabaseDefaultStorageEngineCheck',
-        },
+
+        # {
+        #     Message => 'Check required database version',
+        #     Module  => 'scripts::Migration::Base::DatabaseVersionCheck',
+        # },
+        # {
+        #     Message => 'Check database default storage engine',
+        #     Module  => 'scripts::Migration::Base::DatabaseDefaultStorageEngineCheck',
+        # },
         {
             Message => 'Upgrade database structure',
             Module  => 'scripts::Migration::Znuny::UpgradeDatabaseStructure',
         },
-        {
-            Message => 'Migrate database to utf8mb4',
-            Module  => 'scripts::Migration::Znuny::MigrateUTF8MB4',
-        },
-        {
-            Message => 'Check database charset',
-            Module  => 'scripts::Migration::Base::DatabaseCharsetCheck',
-        },
+
+        # {
+        #     Message => 'Migrate database to utf8mb4',
+        #     Module  => 'scripts::Migration::Znuny::MigrateUTF8MB4',
+        # },
+        # {
+        #     Message => 'Check database charset',
+        #     Module  => 'scripts::Migration::Base::DatabaseCharsetCheck',
+        # },
         {
             Message => 'Rebuild configuration',
             Module  => 'scripts::Migration::Base::RebuildConfig',
         },
-        {
-            Message => 'Migrate DBCRUD UUID columns',
-            Module  => 'scripts::Migration::Znuny::MigrateDBCRUDUUIDColumns',
-        },
-        {
-            Message => 'Migrate SysConfig settings',
-            Module  => 'scripts::Migration::Znuny::MigrateSysConfigSettings',
-        },
+
+        # {
+        #     Message => 'Migrate DBCRUD UUID columns',
+        #     Module  => 'scripts::Migration::Znuny::MigrateDBCRUDUUIDColumns',
+        # },
+        # {
+        #     Message => 'Migrate SysConfig settings',
+        #     Module  => 'scripts::Migration::Znuny::MigrateSysConfigSettings',
+        # },
 
         # NOTE: UninstallMergedPackages has to be called only after
         # SysConfig settings of the merged packages have been migrated.

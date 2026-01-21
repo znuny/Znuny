@@ -26,13 +26,13 @@ sub Data {
     # $$START$$
     # possible charsets
     $Self->{Charset} = ['utf-8', ];
-    # date formats (%A=WeekDay;%B=LongMonth;%T=Time;%D=Day;%M=Month;%Y=Year;)
-    $Self->{DateFormat}          = '%Y-%M-%D %T';
-    $Self->{DateFormatLong}      = '%Y. %B %D. %A %T';
-    $Self->{DateFormatShort}     = '%Y-%M-%D';
-    $Self->{DateInputFormat}     = '%Y-%M-%D';
-    $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.991372423709858;
+    # date formats (%a=Weekday;%b=Month;%T=Time;%d=Day;%m=Month;%Y=Year;)
+    $Self->{DateFormat}          = '%Y-%m-%d %T';
+    $Self->{DateFormatLong}      = '%Y. %b %d. %a %T';
+    $Self->{DateFormatShort}     = '%Y-%m-%d';
+    $Self->{DateInputFormat}     = '%Y-%m-%d';
+    $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
+    $Self->{Completeness}        = 0.991055741894266;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5878,7 +5878,7 @@ sub Data {
         'Adds a suffix with the actual year and month to the Znuny log file. A logfile for every month will be created.' =>
             'Az aktuális évet és hónapot tartalmazó előtagot ad a Znuny naplófájlhoz. Minden hónapban új naplófájl lesz létrehozva.',
         'Set the minimum log level. If you select \'error\', just errors are logged. With \'debug\' you get all logging messages. The order of log levels is: \'debug\', \'info\', \'notice\' and \'error\'.' =>
-            'A legkisebb naplózási szint beállítása. Ha a „hibát” választja, akkor csak a hibák lesznek naplózva. A „hibakeresés” lehetőséggel minden naplózási üzenetet megkap. A naplózási szintek sorrendje: „hibakeresés”, „információ”, „figyelmeztetés” és „hiba”.',
+            'A legkisebb naplózási szint beállítása. Ha a „hibát” választja, akkor csak a hibák lesznek naplózva. A „hibakeresés” lehetőséggel minden naplózási üzenetet megkap. A naplózási szintek sorrendje: „hibakeresés”, „információ”, „értesítés” és „hiba”.',
         'Defines the module to send emails. "DoNotSendEmail" doesn\'t send emails at all. Any of the "SMTP" mechanisms use a specified (external) mailserver. "Sendmail" directly uses the sendmail binary of your operating system. "Test" doesn\'t send emails, but writes them to $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ for testing purposes.' =>
             'Meghatározza azt a modult, amely e-maileket küld. A „DoNotSendEmail” egyáltalán nem küld e-maileket. Az „SMTP” mechanizmusok bármelyike egy megadott (külső) levelező-kiszolgálót használ. A „Sendmail” közvetlenül az operációs rendszere sendmail binárisát használja. A „Test” nem küld e-maileket, hanem az $OTRS_HOME/var/tmp/CacheFileStorable/EmailTest/ mappába írja azokat tesztelési céllal.',
         'If any of the "SMTP" mechanisms was selected as SendmailModule, the mailhost that sends out the mails must be specified.' =>
@@ -8044,6 +8044,8 @@ sub Data {
             'Meghatározza az alapértelmezett jegyattribútumot a jegyrendezéshez az ügyintézői felület jegyemlítés nézetében.',
         'Defines the default ticket order in the ticket mention view of the agent interface. Up: oldest on top. Down: latest on top.' =>
             'Meghatározza az alapértelmezett jegysorrendet az ügyintézői felület jegyemlítés nézetében. Fel: legrégebbi felülre. Le: legutolsó felülre.',
+        'Maximum number of activities to keep per user. Older ones will be deleted.' =>
+            '',
         'Assignment between event and type.' => 'Esemény és típus közötti hozzárendelés.',
         'Defines the link type for each activity.' => 'Meghatározza a hivatkozás típusát minden egyes tevékenységhez.',
         'List of colors in hexadecimal RGB which will be available for selection. Make sure the colors are dark enough so white text can be overlayed on them.' =>
@@ -8272,6 +8274,7 @@ sub Data {
 
         # JS File: var/httpd/htdocs/js/Core.Activity.js
         'An error occurred' => 'Hiba történt',
+        'Could not load activities.' => '',
         'The activity could not be created. %s is needed.' => 'A tevékenységet nem sikerült létrehozni. %s szükséges.',
         'The activity could not be created.' => 'A tevékenységet nem sikerült létrehozni.',
         'The activity could not be updated.' => 'A tevékenységet nem sikerült frissíteni.',
@@ -9519,6 +9522,7 @@ Az Ön ügyfélszolgálati csapata
         'Copy Ticket Number',
         'Copy Ticket Number + Title',
         'Copy ticket information',
+        'Could not load activities.',
         'Could not open popup window. Please disable any popup blockers for this application.',
         'Current selection',
         'Currently not possible',

@@ -655,7 +655,7 @@ CREATE TABLE translation (
 CREATE TABLE article_color (
     id SMALLINT NOT NULL AUTO_INCREMENT,
     name VARCHAR (200) NOT NULL,
-    color VARCHAR (10) NOT NULL,
+    color VARCHAR (25) NOT NULL,
     create_time DATETIME NOT NULL,
     create_by INTEGER NOT NULL,
     change_time DATETIME NOT NULL,
@@ -1796,7 +1796,7 @@ CREATE TABLE calendar (
     group_id INTEGER NOT NULL,
     name VARCHAR (200) NOT NULL,
     salt_string VARCHAR (64) NOT NULL,
-    color VARCHAR (7) NOT NULL,
+    color VARCHAR (25) NOT NULL,
     ticket_appointments LONGBLOB NULL,
     valid_id SMALLINT NOT NULL,
     create_time DATETIME NOT NULL,
