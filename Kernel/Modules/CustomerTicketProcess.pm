@@ -4184,7 +4184,7 @@ sub _StoreActivityDialog {
     if ($UpdateTicketID) {
 
         # load new URL in parent window and close popup
-        return $LayoutObject->PopupClose(
+        return $LayoutObject->CustomerPopupClose(
             URL => "Action=CustomerTicketZoom;TicketID=$UpdateTicketID",
         );
     }
