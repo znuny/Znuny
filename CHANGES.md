@@ -1,4 +1,5 @@
 # 6.5.19 2025-??-??
+ - 2026-01-23 Improved handling of read-only fields for the backend of CustomerUser::DB and CustomerCompany::DB.
  - 2025-01-23 Increased length of the password column for users, customer_user, and mail_account.
  - 2026-01-23 Fixed: TemplateGenerator is broken when using RichText.
  - 2026-01-22 Fixed: Customer interface uses layout "PopupClose" function that loads agent interface header and footer which results in referencing features that are not supported - such as popup profiles. Added CustomerPopupClose function.
