@@ -63,6 +63,10 @@ sub Run {
             Message => 'Increase size of columns of database table search_profile',
             Module  => 'SearchProfile',
         },
+        {
+            Message => 'Alters password column sizes in users, customer_user and mail_account.',
+            Module  => 'PasswordColumnLength',
+        },
     );
 
     return 1   if !@Tasks;
