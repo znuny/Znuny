@@ -37,6 +37,7 @@ our @ObjectDependencies = (
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
     'Kernel::System::User',
+    'Kernel::System::Util',
 );
 
 =head1 NAME
@@ -1767,9 +1768,25 @@ sub _Replace {
         'OTRS_AGENT_'    => $Param{DataAgent} || {},
     );
 
+    my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
+    my $UtilObject      = $Kernel::OM->Get('Kernel::System::Util');
+
     # use a list to get customer first
     for my $DataType (qw(OTRS_CUSTOMER_ OTRS_AGENT_)) {
         my %Data = %{ $ArticleData{$DataType} };
+
+        # HTML quoting of content
+        if ( $Param{RichText} && !$UtilObject->IsFrontendContext() ) {
+
+            ATTRIBUTE:
+            for my $Attribute ( sort keys %Data ) {
+                next ATTRIBUTE if !IsStringWithData( $Data{$Attribute} );
+
+                $Data{$Attribute} = $HTMLUtilsObject->ToHTML(
+                    String => $Data{$Attribute},
+                );
+            }
+        }
 
         if (%Data) {
 
