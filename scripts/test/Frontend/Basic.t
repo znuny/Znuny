@@ -63,7 +63,18 @@ $UserAgent->cookie_jar( {} );    # keep cookies
 my $Response = $UserAgent->get(
     $AgentBaseURL . "Action=Login;User=$TestUserLogin;Password=$TestUserLogin;"
 );
-if ( !$Response->is_success() ) {
+
+my ( $AgentSessionValid, $CustomerSessionValid );
+
+$UserAgent->cookie_jar()->scan(
+    sub {
+        if ( $_[1] eq $ConfigObject->Get('SessionName') && $_[2] ) {
+            $AgentSessionValid = 1;
+        }
+    }
+);
+
+if ( !$AgentSessionValid ) {
     $Self->True(
         0,
         "Could not login to agent interface, aborting! URL: "
@@ -86,8 +97,6 @@ if ( !$Response->is_success() ) {
     );
     return 1;
 }
-
-my ( $AgentSessionValid, $CustomerSessionValid );
 
 # Get session info from cookie
 $UserAgent->cookie_jar()->scan(
