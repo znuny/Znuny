@@ -207,23 +207,25 @@ sub Run {
         $Param{$Key} = $ParamObject->GetParam( Param => $Key ) || $CommonObjectParam{$Key};
     }
 
-    my $ActionParam = $ParamObject->GetParam( Param => 'Action' );
-
-    # when no action parameter exists but there is passed
-    # valid session and requested url, redirect to the link
-    if ( !$ActionParam && $Param{SessionID} && $Param{RequestedURL} ) {
-        print $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Redirect(
-            OP => $Param{RequestedURL},
-        );
-
-        return;
-    }
-
     # security check Action Param (replace non word chars)
     $Param{Action} =~ s/\W//g;
 
     my $SessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
     my $UserObject    = $Kernel::OM->Get('Kernel::System::User');
+
+    # when no action parameter exists but there is passed
+    # valid session and requested url, redirect to the link
+    if ( !$Param{Action} && $Param{SessionID} && $Param{RequestedURL} ) {
+
+        # validate session before redirect
+        if ( $SessionObject->CheckSessionID( SessionID => $Param{SessionID} ) ) {
+            print $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Redirect(
+                OP => $Param{RequestedURL},
+            );
+
+            return;
+        }
+    }
 
     # check request type
     if ( $Param{Action} eq 'PreLogin' ) {
