@@ -1,4 +1,6 @@
+
 # 6.5.19 2025-??-??
+ - 2026-02-10 Fixed: Sender address for process tickets is not assigned properly in CustomerInterface.
  - 2026-01-26 Fixed: Znuny re-directs after login to default view even if there is specified ExternalURL parameter with the Action encoded in the link.
  - 2026-01-23 Improved handling of read-only fields for the backend of CustomerUser::DB and CustomerCompany::DB.
  - 2025-01-23 Increased length of the password column for users, customer_user, and mail_account.

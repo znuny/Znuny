@@ -1,10 +1,10 @@
 <div align="center">
-  <a href="https://www.znuny.org">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://www.znuny.com/assets/znuny-logo.svg">
-      <img alt="Znuny" src="https://www.znuny.com/assets/znuny-logo-black.svg" width="300">
-    </picture>
-  </a>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://www.znuny.com/assets/znuny-logo.svg">
+    <a href="https://www.znuny.org"><img alt="Znuny" src="https://www.znuny.com/assets/znuny-logo-black.svg" width="300"></a>
+  </picture>
+
+  ![Build status](https://badge.proxy.znuny.com/Znuny/private-dk-rel-6_5-dev-issue-1362)
 </div>
 
 <p align="center">

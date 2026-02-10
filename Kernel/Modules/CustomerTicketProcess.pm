@@ -3961,7 +3961,11 @@ sub _StoreActivityDialog {
                     $HistoryType = 'FollowUp';
                 }
 
-                my $From = "$Self->{UserFullname} <$Self->{UserEmail}>";
+                my $FullName = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerName(
+                    UserLogin => $Self->{UserLogin},
+                );
+                my $From = "\"$FullName\" <$Self->{UserEmail}>";
+
                 $ArticleID = $ArticleBackendObject->ArticleCreate(
                     TicketID             => $TicketID,
                     SenderType           => 'customer',
