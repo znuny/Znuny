@@ -1,5 +1,6 @@
 
 # 6.5.19 2025-??-??
+ - 2025-02-10 Fixed: Console command Admin::Group::UserLink and Admin::Group::RoleLink with inconsistent available permissions.
  - 2026-02-10 Fixed: Sender address for process tickets is not assigned properly in CustomerInterface.
  - 2026-01-26 Fixed: Znuny re-directs after login to default view even if there is specified ExternalURL parameter with the Action encoded in the link.
  - 2026-01-23 Improved handling of read-only fields for the backend of CustomerUser::DB and CustomerCompany::DB.
