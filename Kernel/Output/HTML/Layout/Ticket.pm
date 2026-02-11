@@ -1196,7 +1196,7 @@ sub TimeUnits {
                 Name         => $Param{Name} . $Label,
                 SelectedID   => $Config->{$Item}->{DataSelected},
                 PossibleNone => 1,
-                Sort         => 'NumericValue',
+                Sort         => 'NumericKey',
                 Translation  => 0,
                 OnChange     => 'Core.Agent.TicketAction.SetTimeUnits(\'' . $Param{ID} . '\');',
             );
