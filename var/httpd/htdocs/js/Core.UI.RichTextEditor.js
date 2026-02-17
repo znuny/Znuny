@@ -82,9 +82,12 @@ Core.UI.RichTextEditor = (function (TargetNS) {
                 // Always take the current values because they could have been changed by
                 // the user in the form.
                 var AdditionalParams = {
-                    TicketID: $('input[name="TicketID"]').val(), // optional, if present
-                    Action: $('input[name="Action"]').val(), // optional, if present
-                    QueueID: Znuny.Form.Input.Get('QueueID') // optional, if present
+
+                    // These are all optional and might not be present
+                    TicketID: $('input[name="TicketID"]').val(),
+                    Action:   $('input[name="Action"]').val(),
+                    QueueID:  Znuny.Form.Input.Get('QueueID'),
+                    FormID:   $('input[name="FormID"]').val()
                 };
                 var SearchString,
                     RegExEscapedTrigger = EscapeRegExpCharacters(Trigger);

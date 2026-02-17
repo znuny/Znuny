@@ -60,6 +60,7 @@ sub Run {
                 Trigger          => $Trigger,
                 SearchString     => $SearchString,
                 UserID           => $Self->{UserID},
+                Baselink         => $LayoutObject->{Baselink},
                 AdditionalParams => \%AdditionalParams,
             );
         }
