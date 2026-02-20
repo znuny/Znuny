@@ -7,7 +7,7 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-## no critic (Modules::RequireExplicitPackage)
+## no critic (RequireExplicitPackage)
 use strict;
 use warnings;
 use utf8;
@@ -252,6 +252,43 @@ Perl modules provide a range of features to help you avoid reinventing the wheel
         ArticleID => $ArticleID,
         UserID    => 1,
     );
+
+    # Issue #1329: leftover UTF-16 surrogates in mail text break indexing
+    do {
+        my $Warnings = 0;
+        local $SIG{__WARN__} = sub {
+            print STDERR "WARNING: " . shift;
+            $Warnings++;
+        };
+
+        $ArticleID = $ArticleBackendObject->ArticleCreate(
+            TicketID             => $TicketID,
+            SenderType           => 'customer',
+            IsVisibleForCustomer => 0,
+            From                 => 'Some Customer <customer@example.com>',
+            To                   => 'Some Agent <email@example.com>',
+            Subject              => "Subject with \x{D83D}\x{DE09} surrogates",
+            Body                 => "There are surrogates \x{D83D}\x{DE09} in the body, too 🥴",
+            ContentType          => 'text/plain; charset=UTF-8',
+            HistoryType          => 'OwnerUpdate',
+            HistoryComment       => 'Some free text!',
+            UserID               => 1,
+            NoAgentNotify        => 1,
+        );
+        $Self->True(
+            $ArticleID,
+            'ArticleCreate()'
+        );
+        $ArticleObject->ArticleSearchIndexBuild(
+            TicketID  => $TicketID,
+            ArticleID => $ArticleID,
+            UserID    => 1,
+        );
+        $Self->False(
+            $Warnings,
+            'No warnings recorded during ArticleCreate()/ArticleSearchIndexBuild()',
+        );
+    };
 
     # search
     %TicketIDs = $TicketObject->TicketSearch(
