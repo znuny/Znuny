@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D %T';
-    $Self->{Completeness}        = 0.888335475578406;
+    $Self->{Completeness}        = 0.888192771084337;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -7452,6 +7452,8 @@ sub Data {
             '보낸 사람(응답 및 전자 메일 티켓에서 보낸 전자 메일) 필드가 어떻게 표시되는지 정의합니다.',
         'Defines the separator between the agents real name and the given queue email address.' =>
             '에이전트 실명과 주어진 대기열 전자메일 주소 사이의 구분 기호를 정의합니다.',
+        'Defines which article attributes TicketGeneric dashboard widgets are allowed to request when building additional columns.' =>
+            '',
         'Parameters for the dashboard backend of the ticket pending reminder overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '에이전트 인터페이스의 티켓 보류 알림 요약의 대시 보드 백엔드에 대한 매개 변수입니다. "제한"은 기본적으로 표시되는 항목 수입니다. "그룹"은 플러그인 (예 : 그룹 : 관리자, 그룹 1, 그룹 2)에 대한 액세스를 제한하는 데 사용됩니다. "기본값"은 플러그인이 기본적으로 활성화되어 있는지 여부 또는 사용자가 수동으로 활성화해야하는지 여부를 결정합니다. "CacheTTLLocal"은 플러그인의 캐시 시간입니다. "필수"는 플러그인이 항상 표시되는지 여부를 결정하며 에이전트가 플러그인을 제거 할 수 없습니다. 참고 : Ticket 속성과 Dynamic Fields (DynamicField_NameX) 만 DefaultColumn에 허용됩니다.',
         'Parameters for the dashboard backend of the ticket escalation overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>

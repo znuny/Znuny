@@ -25872,3 +25872,7 @@ msgstr "Definiert den Standardsuchfilter für den Dialog zur Zusammenfassung von
 msgid "You have no permission or the ticket does not exist."
 msgstr "Sie haben keine Berechtigungen oder das Ticket existiert nicht."
 
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Defines which article attributes TicketGeneric dashboard widgets are allowed to request when building additional columns."
+msgstr "Legt fest, welche Artikelattribute TicketGeneric-Dashboard-Widgets beim Aufbau zusätzlicher Spalten anfordern dürfen."
+

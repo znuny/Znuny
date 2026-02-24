@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2025-12-01 10:00+0000\n"
+"POT-Creation-Date: 2026-01-22 08:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19484,6 +19484,10 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the separator between the agents real name and the given queue email address."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Defines which article attributes TicketGeneric dashboard widgets are allowed to request when building additional columns."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml

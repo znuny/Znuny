@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.619858611825193;
+    $Self->{Completeness}        = 0.619759036144578;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -7454,6 +7454,8 @@ bin/otrs.Daemon.pl status\').',
             'Mendefinisikan bagaimana  \'lapangan/field\' dari email (dikirim dari jawaban dan tiket email) akan terlihat seperti yang ditetapkan',
         'Defines the separator between the agents real name and the given queue email address.' =>
             'Mendefinisikan pemisah antara agen nama asli dan alamat email antrian diberikan.',
+        'Defines which article attributes TicketGeneric dashboard widgets are allowed to request when building additional columns.' =>
+            '',
         'Parameters for the dashboard backend of the ticket pending reminder overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Parameters for the dashboard backend of the ticket escalation overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>

@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.917095115681234;
+    $Self->{Completeness}        = 0.916947791164659;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -7459,6 +7459,8 @@ sub Data {
             '定义邮件（来自于答复和邮件工单）发件人字段的显示样式。',
         'Defines the separator between the agents real name and the given queue email address.' =>
             '定义服务人员真实姓名和给定队列邮件地址之间的分隔符。',
+        'Defines which article attributes TicketGeneric dashboard widgets are allowed to request when building additional columns.' =>
+            '',
         'Parameters for the dashboard backend of the ticket pending reminder overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '服务人员界面工单挂起提醒概览的仪表板后端的参数。"Limit（限制）" 是默认的显示条目数，“GROUP”（组）用于到本插件的访问权限限制（如 Group:admin;group1;group2）。“Default（默认）”代表这个插件是默认启用还是需要用户手动启用。“CacheTTL”表明本插件的缓存过期时间（单位：分钟）。“Mandatory（强制）”确定插件是否始终显示且不能被服务人员移除。 注意：只有工单属性和动态字段（DynamicField_NameX）才允许使用DefaultColumns（默认字段）。',
         'Parameters for the dashboard backend of the ticket escalation overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>

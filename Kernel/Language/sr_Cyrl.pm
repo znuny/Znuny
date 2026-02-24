@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.913560411311054;
+    $Self->{Completeness}        = 0.913413654618474;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7452,6 +7452,8 @@ sub Data {
             'Дефинише како поље Од у имејл порукама (послато из одговора и имејл тикета) треба да изгледа.',
         'Defines the separator between the agents real name and the given queue email address.' =>
             'Одређује сепаратор између правог имена оператера и емаил адресе додељене реду.',
+        'Defines which article attributes TicketGeneric dashboard widgets are allowed to request when building additional columns.' =>
+            '',
         'Parameters for the dashboard backend of the ticket pending reminder overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             'Параметри за додатак листе тикета на чекању контролне табле у интерфејсу оператера. "Limit" дефинише подразумевани број приказаних ставки. "Group" се користи да ограничи приступ додатку (нпр. Group: admin;group1;group2;). "Default" одређује да ли је додатак подразумевано активиран или да је неопходно да га корисник мануелно активира. "CacheTTLLocal" је време у минутима за кеширање додатка. "Mandatory" одређује да ли је додатак увек приказан и не може бити искључен од стране оператера. Напомена: за DefaultColumns су дозвољени само атрибути тикета и динамичка поља (DynamicField_NameX).',
         'Parameters for the dashboard backend of the ticket escalation overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>

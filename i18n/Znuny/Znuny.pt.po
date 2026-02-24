@@ -25805,3 +25805,7 @@ msgstr ""
 msgid "You have no permission or the ticket does not exist."
 msgstr ""
 
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Defines which article attributes TicketGeneric dashboard widgets are allowed to request when building additional columns."
+msgstr ""
+

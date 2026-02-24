@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.917255784061697;
+    $Self->{Completeness}        = 0.91710843373494;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7458,6 +7458,8 @@ sub Data {
             'Meghatározza, hogy az e-mailek (válaszokból és e-mail jegyekből küldve) Feladó mezője hogyan nézzen ki.',
         'Defines the separator between the agents real name and the given queue email address.' =>
             'Egy elválasztót határoz meg az ügyintézők valódi neve és a megadott várólista e-mail címek között.',
+        'Defines which article attributes TicketGeneric dashboard widgets are allowed to request when building additional columns.' =>
+            '',
         'Parameters for the dashboard backend of the ticket pending reminder overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             'Paraméterek az ügyintézői felület jegy emlékeztető függőben áttekintésének vezérlőpult háttérprogramjához. A „Limit” az alapértelmezetten megjelenített bejegyzések száma. A „Group” használható a hozzáférés korlátozásához a bővítményre (például Group: admin;csoport1;csoport2;). A „Default” azt határozza meg, hogy a bővítmény alapértelmezetten engedélyezve van, vagy hogy a felhasználónak kézzel kell engedélyeznie azt. A „CacheTTLLocal” a bővítmény gyorsítótár ideje percben. A „Mandatory” határozza meg, hogy a bővítmény mindig megjelenjen, és az ügyintézők ne tudják eltávolítani. Megjegyzés: csak jegyattribútumok és dinamikus mezők (DynamicField_NévX) engedélyezettek DefaultColumns értékeinél.',
         'Parameters for the dashboard backend of the ticket escalation overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
