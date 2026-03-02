@@ -1,5 +1,6 @@
 
 # 6.5.19 2025-??-??
+ - 2026-03-02 Changed: Reply function in agent ticket compose dialog now is not available anymore if the article is internal and was created by an agent or if the article was created by the system.
  - 2026-02-24 Added Sender column support for dashboard ticket widgets.
  - 2026-02-20 Fixed: problems with leftover UTF-16 surrogates in incoming UTF-8 text.
  - 2026-02-17 Added parameter FormID to AJAX requests of autocompletion modules (needed for inserting FAQ entries with inline images into RTE via autocompletion).
