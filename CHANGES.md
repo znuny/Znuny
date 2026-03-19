@@ -1,4 +1,5 @@
 # 6.5.19 2025-??-??
+ - 2026-03-19 Fixed: CustomerUser article iframe #n>1 not resizing when all articles shown.
  - 2026-03-18 Fixed: Misleading popup message when opening more than one ticket from overviews by using a shortcut to open it in a new tab/window.
  - 2026-03-02 Changed: Reply function in agent ticket compose dialog now is not available anymore if the article is internal and was created by an agent or if the article was created by the system.
  - 2026-02-24 Added Sender column support for dashboard ticket widgets.
