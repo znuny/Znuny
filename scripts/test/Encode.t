@@ -7,6 +7,7 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
+## no critic(RequireExplicitPackage)
 use strict;
 use warnings;
 use utf8;
@@ -96,6 +97,86 @@ my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
             $Result eq $Test->{Result},
             $Test->{Name},
         );
+    }
+}
+
+# EncodeInput tests
+{
+    use utf8;
+    use Try::Tiny;
+
+    my @Tests = (
+        {
+            Name   => 'Promotes UTF-8 bytes',
+            Input  => do { no utf8;  "f\x{c3}\x{bc}nftgr\x{c3}\x{b6}\x{c3}\x{9f}te" },
+            Result => do { use utf8; "fünftgrößte" },
+            UTF8   => 1,
+        },
+        {
+            Name  => 'Promotes UTF-8 bytes for non-latin charsets',
+            Input => do {
+                no utf8;
+                "\x{e0}\x{ba}\x{aa}\x{e0}\x{ba}\x{b0}\x{e0}\x{ba}\x{9a}\x{e0}\x{ba}\x{b2}\x{e0}\x{ba}\x{8d}\x{e0}\x{ba}\x{94}\x{e0}\x{ba}\x{b5}";
+            },
+            Result => do { use utf8; "ສະບາຍດີ" },
+            UTF8   => 1,
+        },
+        {
+            Name   => 'Breaks with 8-bit charsets',
+            Input  => do { no utf8; "f\x{fc}nftgr\x{f6}\x{df}te" },
+            Result => qr{ ^ Exception:\ Malformed\ UTF-8 }x,
+        },
+        {
+            Name   => 'Safe mode behaves the same with proper UTF-8 bytes',
+            Input  => do { no utf8;  "f\x{c3}\x{bc}nftgr\x{c3}\x{b6}\x{c3}\x{9f}te" },
+            Result => do { use utf8; "fünftgrößte" },
+            UTF8   => 1,
+            Safe   => 1,
+        },
+        {
+            Name   => 'Safe mode replaces malformed UTF-8',
+            Input  => do { no utf8; "f\x{fc}nftgr\x{f6}\x{df}te" },
+            Result => 'f\x{fc}nftgr\x{f6}\x{df}te',
+            Safe   => 1,
+        },
+        {
+            Name   => 'Safe mode with Latin-1 fallback decodes correctly',
+            Input  => do { no utf8;  "f\x{fc}nftgr\x{f6}\x{df}te" },
+            Result => do { use utf8; "fünftgrößte" },
+            Safe   => 'iso-8859-1',
+            UTF8   => 1,
+        },
+        {
+            Name   => 'Safe mode with custom callback works',
+            Input  => do { no utf8;  "f\x{fc}nftgr\x{f6}\x{df}te" },
+            Result => do { use utf8; 'f\374nftgr\366\337te' },
+            Safe   => sub { sprintf( '\\%o', shift ) },
+        },
+    );
+    for my $Test (@Tests) {
+        my $Result = $Test->{Input};
+        $Result = try {
+            use warnings FATAL => 'utf8';
+            $EncodeObject->EncodeInput( \$Result, $Test->{Safe} );
+            $Result =~ /\w+/;
+            $Result;
+        }
+        catch {
+            "Exception: $_";
+        };
+        if ( ref $Test->{Result} eq 'Regexp' ) {
+            $Self->True( scalar( $Result =~ $Test->{Result} ), $Test->{Name} );
+        }
+        else {
+            $Self->Is( $Result, $Test->{Result}, $Test->{Name} );
+        }
+        if ( exists $Test->{UTF8} ) {
+            my $IsUTF8 = Encode::is_utf8($Result);
+            $Self->True(
+                $IsUTF8 eq $Test->{UTF8},
+                $Test->{Name} . ": is_utf8 matches",
+            );
+        }
     }
 }
 
