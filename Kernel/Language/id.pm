@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.619659492451012;
+    $Self->{Completeness}        = 0.619476136911458;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2983,9 +2983,8 @@ bin/otrs.Daemon.pl status\').',
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Error',
         'An Error Occurred' => 'Terjadi kesalahan',
-        'Error Details' => 'Rincian eror',
-        'Traceback' => 'Melacak kembali',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3083,9 +3082,6 @@ bin/otrs.Daemon.pl status\').',
         'Event Information' => 'Informasi acara',
         'Ticket fields' => 'Dasar tiket',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-        'Expand' => 'Perluas',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
         'Click to delete this attachment.' => '',
 
@@ -3150,7 +3146,6 @@ bin/otrs.Daemon.pl status\').',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Selesai',
-        'Error' => 'Error',
         'Database setup successful!' => 'Berhasil menyediakan database!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

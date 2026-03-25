@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.700610343719884;
+    $Self->{Completeness}        = 0.700466013176924;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2987,9 +2987,8 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'From assigned Customer IDs' => '割り当てられた顧客IDから',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'エラー',
         'An Error Occurred' => 'エラーが発生しました。',
-        'Error Details' => 'エラーの詳細',
-        'Traceback' => 'トレースバック',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3087,9 +3086,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Event Information' => 'イベント情報',
         'Ticket fields' => 'チケット・フィールド',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-        'Expand' => '展開',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
         'Click to delete this attachment.' => '',
 
@@ -3154,7 +3150,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => '完了',
-        'Error' => 'エラー',
         'Database setup successful!' => 'データベース　設定成功',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

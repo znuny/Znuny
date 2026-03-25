@@ -1047,31 +1047,9 @@ sub Error {
         }
     }
 
-    if ( !$Param{Message} ) {
-        $Param{Message} = $Param{BackendMessage};
-
-        # Don't check for business package if the database was not yet configured (in the installer).
-        if (
-            $Kernel::OM->Get('Kernel::Config')->Get('SecureMode')
-            && $Kernel::OM->Get('Kernel::Config')->Get('DatabaseDSN')
-            && !$Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled()
-            )
-        {
-            $Param{ShowOTRSBusinessHint}++;
-        }
-    }
-
-    if ( $Param{BackendTraceback} ) {
-        $Self->Block(
-            Name => 'ShowBackendTraceback',
-            Data => \%Param,
-        );
-    }
-
     # create & return output
     return $Self->Output(
         TemplateFile => 'Error',
-        Data         => \%Param
     );
 }
 
@@ -4844,14 +4822,9 @@ sub CustomerError {
         }
     }
 
-    if ( !$Param{Message} ) {
-        $Param{Message} = $Param{BackendMessage};
-    }
-
     # create & return output
     return $Self->Output(
         TemplateFile => 'CustomerError',
-        Data         => \%Param
     );
 }
 

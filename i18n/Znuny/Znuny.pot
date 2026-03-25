@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2026-03-23 20:59+0000\n"
+"POT-Creation-Date: 2026-03-25 12:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -8755,15 +8755,11 @@ msgid "From assigned Customer IDs"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+msgid "Error"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "An Error Occurred"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
-msgid "Error Details"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
-msgid "Traceback"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -9034,10 +9030,6 @@ msgstr ""
 msgid "Ticket fields"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-msgid "Expand"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
 msgid "Click to delete this attachment."
 msgstr ""
@@ -9232,10 +9224,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
 msgid "Done"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
-msgid "Error"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt

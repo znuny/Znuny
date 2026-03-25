@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.916961130742049;
+    $Self->{Completeness}        = 0.916921099148321;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2987,9 +2987,8 @@ sub Data {
         'From assigned Customer IDs' => 'A hozzárendelt ügyfél-azonosítókból',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Hiba',
         'An Error Occurred' => 'Hiba történt',
-        'Error Details' => 'Hiba részletei',
-        'Traceback' => 'Visszakövetés',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3087,9 +3086,6 @@ sub Data {
         'Event Information' => 'Esemény információk',
         'Ticket fields' => 'Jegymezők',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-        'Expand' => 'Kinyitás',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
         'Click to delete this attachment.' => 'Kattintson a melléklet törléséhez.',
 
@@ -3154,7 +3150,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Kész',
-        'Error' => 'Hiba',
         'Database setup successful!' => 'Az adatbázis beállítása sikeres!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

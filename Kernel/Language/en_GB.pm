@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.617732091230324;
+    $Self->{Completeness}        = 0.617547806524185;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2984,9 +2984,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Error',
         'An Error Occurred' => 'An Error Occurred',
-        'Error Details' => 'Error Details',
-        'Traceback' => 'Traceback',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3084,9 +3083,6 @@ sub Data {
         'Event Information' => 'Event Information',
         'Ticket fields' => 'Ticket fields',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-        'Expand' => 'Expand',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
         'Click to delete this attachment.' => '',
 
@@ -3151,7 +3147,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Done',
-        'Error' => 'Error',
         'Database setup successful!' => 'Database setup successful!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

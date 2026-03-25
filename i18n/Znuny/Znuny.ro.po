@@ -8880,7 +8880,7 @@ msgstr ""
 msgid "Done"
 msgstr "Terminat"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Error"
 msgstr "Eroare"
 

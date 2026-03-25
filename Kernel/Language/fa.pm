@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.633954384837777;
+    $Self->{Completeness}        = 0.633777920617066;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2987,9 +2987,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'خطا',
         'An Error Occurred' => 'خطا',
-        'Error Details' => 'جزئیات خطا',
-        'Traceback' => 'بازبینی',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3087,9 +3086,6 @@ sub Data {
         'Event Information' => 'اطلاعات رویداد',
         'Ticket fields' => 'زمینه های درخواست',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-        'Expand' => 'گسترش',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
         'Click to delete this attachment.' => '',
 
@@ -3154,7 +3150,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'انجام شد',
-        'Error' => 'خطا',
         'Database setup successful!' => 'راه اندازی پایگاه داده موفق!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

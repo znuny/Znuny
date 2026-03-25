@@ -8892,7 +8892,7 @@ msgstr "Přeskočit tento krok"
 msgid "Done"
 msgstr "Hotovo"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Error"
 msgstr "Chyba"
 

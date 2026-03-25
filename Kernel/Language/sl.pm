@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.210407966591712;
+    $Self->{Completeness}        = 0.21002731801382;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2985,9 +2985,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Napaka',
         'An Error Occurred' => '',
-        'Error Details' => 'Podrobnosti o napaki',
-        'Traceback' => 'Slijeđevina',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3085,9 +3084,6 @@ sub Data {
         'Event Information' => '',
         'Ticket fields' => '',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-        'Expand' => 'Razširi',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
         'Click to delete this attachment.' => '',
 
@@ -3152,7 +3148,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Končano',
-        'Error' => 'Napaka',
         'Database setup successful!' => 'Baza podatkov uspešno nameščena',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

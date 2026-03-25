@@ -24,7 +24,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.550915515579827;
+    $Self->{Completeness}        = 0.550699019765386;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2980,9 +2980,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Kesilapan',
         'An Error Occurred' => 'Kesalahan Telah Berlaku',
-        'Error Details' => 'Butiran kesilapan',
-        'Traceback' => 'Menjejaki kembali',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3080,9 +3079,6 @@ sub Data {
         'Event Information' => 'Informasi Acara',
         'Ticket fields' => 'Medan tiket',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-        'Expand' => 'Kembang',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
         'Click to delete this attachment.' => '',
 
@@ -3147,7 +3143,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Selesai',
-        'Error' => 'Kesilapan',
         'Database setup successful!' => 'Penubuhan pangkalan data berjaya!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

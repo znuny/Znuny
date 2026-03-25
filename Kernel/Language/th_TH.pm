@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.537423707035014;
+    $Self->{Completeness}        = 0.537200707054475;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2984,9 +2984,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'ข้อผิดพลาด',
         'An Error Occurred' => '',
-        'Error Details' => 'รายละเอียด ข้อผิดพลาด',
-        'Traceback' => 'ตรวจสอบย้อนกลับ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3084,9 +3083,6 @@ sub Data {
         'Event Information' => 'ข้อมูลกิจกรรม',
         'Ticket fields' => 'ช่องข้อมูลตั๋ว',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-        'Expand' => 'การขยาย',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
         'Click to delete this attachment.' => '',
 
@@ -3151,7 +3147,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'ดำเนินการเสร็จแล้ว',
-        'Error' => 'ข้อผิดพลาด',
         'Database setup successful!' => 'การติดตั้งฐานข้อมูลประสบความสำเร็จ!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

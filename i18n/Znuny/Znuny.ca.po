@@ -8876,7 +8876,7 @@ msgstr "Saltar aquest pas"
 msgid "Done"
 msgstr "Fet"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Error"
 msgstr "Error"
 

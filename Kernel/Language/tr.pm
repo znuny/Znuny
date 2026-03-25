@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.180533247671057;
+    $Self->{Completeness}        = 0.180138197011088;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2981,9 +2981,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Hata',
         'An Error Occurred' => '',
-        'Error Details' => 'Hata detayı',
-        'Traceback' => 'Geri iz',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3081,9 +3080,6 @@ sub Data {
         'Event Information' => '',
         'Ticket fields' => '',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-        'Expand' => 'Genişlet',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
         'Click to delete this attachment.' => '',
 
@@ -3148,7 +3144,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Tamam',
-        'Error' => 'Hata',
         'Database setup successful!' => 'Veritabanı kurulumu başarılı!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

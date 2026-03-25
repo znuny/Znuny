@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.455187921619017;
+    $Self->{Completeness}        = 0.454925277197493;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2982,9 +2982,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Помилка',
         'An Error Occurred' => 'Виникла Помилка',
-        'Error Details' => 'Деталі помилки',
-        'Traceback' => 'Відстеження',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3082,9 +3081,6 @@ sub Data {
         'Event Information' => 'Інформація про подію',
         'Ticket fields' => 'Поля квитка',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-        'Expand' => 'Розгорнути',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
         'Click to delete this attachment.' => '',
 
@@ -3149,7 +3145,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Готово',
-        'Error' => 'Помилка',
         'Database setup successful!' => 'Базу даних успішно налаштовано!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

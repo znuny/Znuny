@@ -36,6 +36,7 @@
  - 2025-10-01 Fixed: Improved error logging when fetching emails.
  - 2025-09-25 Fixed: Customer ticket details screen now redirects to overview of tickets if a ticket is accessed without permissions.
  - 2025-09-23 Fixed: Improved content security policy HTTP header.
+ - 2025-09-16 Fixed: For security reasons, detailed error messages are now not shown anymore in the GUI.
 
 # 6.5.18 2025-09-24
  - 2025-09-22 Fixed: Fix for installer email setting checks lead to issues with sending emails.

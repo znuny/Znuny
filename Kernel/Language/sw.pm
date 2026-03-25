@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.441053646000642;
+    $Self->{Completeness}        = 0.440784187690824;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2984,9 +2984,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Kasoro',
         'An Error Occurred' => '',
-        'Error Details' => 'Makosa kwa undani',
-        'Traceback' => 'Tafuta Nyuma',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3084,9 +3083,6 @@ sub Data {
         'Event Information' => 'Taarifa kuhusu tukio',
         'Ticket fields' => 'Uga wa tiketi',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-        'Expand' => 'Panua',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
         'Click to delete this attachment.' => '',
 
@@ -3151,7 +3147,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Maliza',
-        'Error' => 'Kasoro',
         'Database setup successful!' => 'Usanidi wa hifadhi data umefanikiwa!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.913266945069065;
+    $Self->{Completeness}        = 0.913225132572714;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2987,9 +2987,8 @@ sub Data {
         'From assigned Customer IDs' => 'Iz liste dodeljenih ID klijenta',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Greška',
         'An Error Occurred' => 'Dogodila se greška',
-        'Error Details' => 'Detalji greške',
-        'Traceback' => 'Isprati unazad',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3087,9 +3086,6 @@ sub Data {
         'Event Information' => 'Informacije o događaju',
         'Ticket fields' => 'Polja tiketa',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-        'Expand' => 'Proširi',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
         'Click to delete this attachment.' => 'Kliknite ovde da obrišete prilog.',
 
@@ -3154,7 +3150,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Urađeno',
-        'Error' => 'Greška',
         'Database setup successful!' => 'Uspešno instaliranje baze',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

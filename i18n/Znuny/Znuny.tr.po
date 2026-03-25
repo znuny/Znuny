@@ -8878,7 +8878,7 @@ msgstr ""
 msgid "Done"
 msgstr "Tamam"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Error"
 msgstr "Hata"
 

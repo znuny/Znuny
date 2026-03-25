@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D %T';
-    $Self->{Completeness}        = 0.888050112431738;
+    $Self->{Completeness}        = 0.887996143339225;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2981,9 +2981,8 @@ sub Data {
         'From assigned Customer IDs' => '할당 된 고객 ID로부터',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => '오류',
         'An Error Occurred' => '에러 발생됨',
-        'Error Details' => '오류 정보',
-        'Traceback' => '역 추적',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3081,9 +3080,6 @@ sub Data {
         'Event Information' => '이벤트 정보',
         'Ticket fields' => '타켓 필드',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-        'Expand' => '넓히다',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
         'Click to delete this attachment.' => '첨부파일을 삭제하려면 클릭하십시오.',
 
@@ -3148,7 +3144,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => '끝난',
-        'Error' => '오류',
         'Database setup successful!' => '데이터베이스 설정이 설공적으로 완료되었습니다!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

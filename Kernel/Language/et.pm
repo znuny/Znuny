@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.163829103758432;
+    $Self->{Completeness}        = 0.163426000321388;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2981,9 +2981,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Viga',
         'An Error Occurred' => '',
-        'Error Details' => 'Vea üksikasjad',
-        'Traceback' => 'Traceback',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3081,9 +3080,6 @@ sub Data {
         'Event Information' => 'Sündmuse teave',
         'Ticket fields' => 'pileti väljad',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-        'Expand' => 'Laienda',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
         'Click to delete this attachment.' => '',
 
@@ -3148,7 +3144,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Tehtud',
-        'Error' => 'Viga',
         'Database setup successful!' => 'Andmebaasi paigaldus õnnestus!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt

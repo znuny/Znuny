@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.246707356247992;
+    $Self->{Completeness}        = 0.246344206974128;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2988,9 +2988,8 @@ sub Data {
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Chyba',
         'An Error Occurred' => 'Pozor chyba',
-        'Error Details' => 'Detail chyby',
-        'Traceback' => 'Jít zpět',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3088,9 +3087,6 @@ sub Data {
         'Event Information' => '',
         'Ticket fields' => '',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-        'Expand' => 'Rozbalit',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
         'Click to delete this attachment.' => '',
 
@@ -3155,7 +3151,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Hotovo',
-        'Error' => 'Chyba',
         'Database setup successful!' => 'Databáze úspěšně nastavena!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
