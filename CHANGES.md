@@ -20,6 +20,7 @@
  - 2026-01-13 Fixed: Date check regex for config option ICSParser::StartDate actually matches YYYYMMDD.
  - 2025-12-12 Sector Nord AG: Added support for multiple RichText instances. Thanks to @LuBroering (Lukas Bröring Sector Nord AG) [PR#736](https://github.com/znuny/Znuny/pull/736).
  - 2025-11-28 Changed ticket zoom information widget to count only open tickets with the same customer after enabling config option Ticket::Frontend::ZoomCustomerTickets.
+ - 2025-11-25 CVE-2025-52204: Fixed XSS issue with session ID in URL parameter. Thanks to Miguel P. for reporting this issue.
  - 2025-11-25 Fixed: Unexpected rate limit is being applied when config option SendmailModule::RateLimit is disabled.
  - 2025-11-24 Fixed: The link to a specific article in a ticket does not work if users have different settings for “Show all articles”. Article links now handle both display modes: 'Show one article' and 'Show all articles'.
  - 2025-11-13 Sped up UUID creation for DBCRUD modules.
