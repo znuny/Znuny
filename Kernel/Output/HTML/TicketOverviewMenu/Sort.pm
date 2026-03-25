@@ -131,29 +131,16 @@ sub Run {
     $RedirectParams{SortBy}  = 'Selection[0]';
     $RedirectParams{OrderBy} = 'Selection[1]';
 
-    my $RedirectParamsString = '';
-    my $ParamLength          = scalar keys %RedirectParams;
-    my $ParamCounter         = 0;
-    for my $ParamKey ( sort keys %RedirectParams ) {
-        $ParamCounter++;
-        $RedirectParamsString .= "$ParamKey: $RedirectParams{$ParamKey}";
-
-        # prevent comma after last element for correct functionality in IE
-        if ( $ParamCounter < $ParamLength ) {
-            $RedirectParamsString .= ",\n";
-        }
-        else {
-            $RedirectParamsString .= "\n";
-        }
-    }
+    my $JSONObject               = $Kernel::OM->Get('Kernel::System::JSON');
+    my $RedirectParamsJSONString = $JSONObject->Encode(
+        Data => \%RedirectParams,
+    );
 
     $LayoutObject->AddJSOnDocumentComplete( Code => <<"JS" );
 \$("#SortBy").change(function(){
     var Selection = \$(this).val().split('|');
     if ( Selection.length === 2 ) {
-        Core.App.InternalRedirect({
-            ${RedirectParamsString}
-        });
+        Core.App.InternalRedirect($RedirectParamsJSONString);
     }
 });
 JS

@@ -38,6 +38,7 @@
  - 2025-09-23 Fixed: Improved content security policy HTTP header.
  - 2025-09-16 Fixed: For security reasons, detailed error messages are now not shown anymore in the GUI.
  - 2025-09-15 Fixed: Source view for richtext editor has been deactivated in customer frontend due to possibility to inject arbitrary code.
+ - 2025-09-15 CVE-2025-59490: Fixed: XSS issue with unfiltered URL parameters given to backend.
 
 # 6.5.18 2025-09-24
  - 2025-09-22 Fixed: Fix for installer email setting checks lead to issues with sending emails.

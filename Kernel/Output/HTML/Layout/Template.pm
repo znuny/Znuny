@@ -302,6 +302,10 @@ sub Output {
                 Data     => \%Data,
                 SortKeys => 1,
             );
+
+            # remove script tags to avoid code injection (CVE-2025-59490).
+            $JSONString =~ s{<\/?script(?:\s.*?)?>}{}gmsi;
+
             $Output
                 .= "\n<script type=\"text/javascript\">//<![CDATA[\n\"use strict\";\nCore.Config.AddConfig($JSONString);\n//]]></script>";
         }

@@ -3786,17 +3786,24 @@ sub BuildDateSelection {
     );
 
     # Add Datepicker JS to output.
+    my $PrefixJSONString = $Self->JSONEncode(
+        Data => $Prefix,
+    );
+    my $WeekDayStartJSONString = $Self->JSONEncode(
+        Data => $WeekDayStart,
+    );
+
     my $DatepickerJS = '
     Core.UI.Datepicker.Init({
-        Day: $("#" + Core.App.EscapeSelector("' . $Prefix . '") + "Day"),
-        Month: $("#" + Core.App.EscapeSelector("' . $Prefix . '") + "Month"),
-        Year: $("#" + Core.App.EscapeSelector("' . $Prefix . '") + "Year"),
-        Hour: $("#" + Core.App.EscapeSelector("' . $Prefix . '") + "Hour"),
-        Minute: $("#" + Core.App.EscapeSelector("' . $Prefix . '") + "Minute"),
+        Day: $("#" + Core.App.EscapeSelector(' . $PrefixJSONString . ') + "Day"),
+        Month: $("#" + Core.App.EscapeSelector(' . $PrefixJSONString . ') + "Month"),
+        Year: $("#" + Core.App.EscapeSelector(' . $PrefixJSONString . ') + "Year"),
+        Hour: $("#" + Core.App.EscapeSelector(' . $PrefixJSONString . ') + "Hour"),
+        Minute: $("#" + Core.App.EscapeSelector(' . $PrefixJSONString . ') + "Minute"),
         VacationDays: ' . $VacationDaysJSON . ',
         DateInFuture: ' .    ( $ValidateDateInFuture    ? 'true' : 'false' ) . ',
         DateNotInFuture: ' . ( $ValidateDateNotInFuture ? 'true' : 'false' ) . ',
-        WeekDayStart: ' . $WeekDayStart . '
+        WeekDayStart: ' . $WeekDayStartJSONString . '
     });';
 
     $Self->AddJSOnDocumentComplete( Code => $DatepickerJS );
