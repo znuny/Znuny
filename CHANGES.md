@@ -1,3 +1,6 @@
+# 6.5.20 2026-??-??
+ - 2026-02-24 Fixed: iFrame elements reuse the same ID in CustomerTicketZoom.
+
 # 6.5.19 2026-03-25
  - 2026-03-23 CVE-2025-59393: Support bundle generator: Improved password masking in configuration dumps using ValueType metadata.
  - 2026-03-20 Fixed: Replaced EncodeInput() method in KS:Encode with safe version.
