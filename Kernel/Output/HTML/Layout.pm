@@ -6364,8 +6364,8 @@ sub CustomerSetRichTextParameters {
             '/',
             [
                 'Image',   'HorizontalRule', 'PasteText', 'PasteFromWord', 'SplitQuote', 'RemoveQuote',
-                '-',       '-',            'Find', 'Replace',    'TextColor',
-                'BGColor', 'RemoveFormat', '-',    'ShowBlocks', 'Source', 'SpecialChar',
+                '-',       '-',              'Find',      'Replace',       'TextColor',
+                'BGColor', 'RemoveFormat',   '-',         'ShowBlocks',    'SpecialChar',
                 '-',       'Maximize'
             ],
             [ 'Format', 'Font', 'FontSize' ]
@@ -6379,9 +6379,9 @@ sub CustomerSetRichTextParameters {
             ],
             '/',
             [
-                'HorizontalRule', 'PasteText', 'PasteFromWord', 'SplitQuote', 'RemoveQuote', '-',
-                '-',            'Find', 'Replace',    'TextColor', 'BGColor',
-                'RemoveFormat', '-',    'ShowBlocks', 'Source',    'SpecialChar', '-',
+                'HorizontalRule', 'PasteText', 'PasteFromWord', 'SplitQuote',  'RemoveQuote', '-',
+                '-',              'Find',      'Replace',       'TextColor',   'BGColor',
+                'RemoveFormat',   '-',         'ShowBlocks',    'SpecialChar', '-',
                 'Maximize'
             ],
             [ 'Format', 'Font', 'FontSize' ]
@@ -6398,8 +6398,8 @@ sub CustomerSetRichTextParameters {
             ],
             '/',
             [
-                'Format',       'Font', 'FontSize', '-',           'TextColor',  'BGColor',
-                'RemoveFormat', '-',    'Source',   'SpecialChar', 'SplitQuote', 'RemoveQuote',
+                'Format',       'Font', 'FontSize',    '-',          'TextColor', 'BGColor',
+                'RemoveFormat', '-',    'SpecialChar', 'SplitQuote', 'RemoveQuote',
                 '-',            'Maximize'
             ]
         ];
@@ -6415,8 +6415,8 @@ sub CustomerSetRichTextParameters {
             ],
             '/',
             [
-                'Format',       'Font', 'FontSize', '-',           'TextColor',  'BGColor',
-                'RemoveFormat', '-',    'Source',   'SpecialChar', 'SplitQuote', 'RemoveQuote',
+                'Format',       'Font', 'FontSize',    '-',          'TextColor', 'BGColor',
+                'RemoveFormat', '-',    'SpecialChar', 'SplitQuote', 'RemoveQuote',
                 '-',            'Maximize'
             ]
         ];
