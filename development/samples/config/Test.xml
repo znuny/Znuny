@@ -364,8 +364,8 @@
         <Value>
             <Array>
                 <DefaultItem ValueType="Password">Secret</DefaultItem>
-                <Item>Secret1</Item>
-                <Item>Secret2</Item>
+                <Item ValueType="Password">Secret1</Item>
+                <Item ValueType="Password">Secret2</Item>
             </Array>
         </Value>
     </Setting>

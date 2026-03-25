@@ -1,4 +1,5 @@
 # 6.5.19 2026-03-25
+ - 2026-03-23 CVE-2025-59393: Support bundle generator: Improved password masking in configuration dumps using ValueType metadata.
  - 2026-03-20 Fixed: Replaced EncodeInput() method in KS:Encode with safe version.
  - 2026-03-19 Fixed: CustomerUser article iframe #n>1 not resizing when all articles shown.
  - 2026-03-18 Fixed: Misleading popup message when opening more than one ticket from overviews by using a shortcut to open it in a new tab/window.

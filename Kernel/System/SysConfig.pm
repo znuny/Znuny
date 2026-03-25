@@ -4105,6 +4105,23 @@ sub ConfigurationDump {
                     $Result->{'Modified'}->{ $Setting->{Name} } = $Setting->{EffectiveValue};
                     next SETTING;
                 }
+
+                # Load DefaultSetting to get XMLContentParsed (not included in ModifiedSettingVersionGet)
+                if ( $Setting->{DefaultID} ) {
+                    my %DefaultSetting = $SysConfigDBObject->DefaultSettingGet(
+                        DefaultID => $Setting->{DefaultID},
+                    );
+
+                    if ( %DefaultSetting && $DefaultSetting{XMLContentParsed} ) {
+
+                        # Extract ValueType information for password masking
+                        my $ValueTypeInfo = $Self->_ExtractValueType(
+                            XMLContentParsed => $DefaultSetting{XMLContentParsed},
+                        );
+                        $Setting->{ValueTypeInfo} = $ValueTypeInfo if $ValueTypeInfo;
+                    }
+                }
+
                 $Result->{'Modified'}->{ $Setting->{Name} } = $Setting;
             }
         }
@@ -6440,6 +6457,152 @@ sub DeleteZZZAAutoBackup {
     return if !$Success;
 
     return 1;
+}
+
+=head2 _ExtractValueType()
+
+Extracts the ValueType from XMLContentParsed structure.
+Returns a structure that describes which values should be masked.
+
+    my $ValueTypeInfo = $SysConfigObject->_ExtractValueType(
+        XMLContentParsed => $XMLContentParsed,
+    );
+
+Returns:
+
+For simple items (Setting: `ExamplePassword`):
+
+    $ValueTypeInfo = {
+        Type     => 'String',
+        ItemType => 'Password',
+    };
+
+For arrays with DefaultItem (Setting: `TestArrayPassword`):
+
+    $ValueTypeInfo = {
+        Type     => 'Array',
+        ItemType => 'Password',
+    };
+
+For hashes with key-specific types (Setting: `TestHashPassword2`):
+
+    $ValueTypeInfo = {
+        Type    => 'Hash',
+        Default => 'Password',  # optional, from DefaultItem
+        Keys    => {
+            'Password' => 'Password',
+            'APIKey'   => 'Password',
+            'String'   => 'String',
+        },
+    };
+
+=cut
+
+sub _ExtractValueType {
+    my ( $Self, %Param ) = @_;
+
+    return if !$Param{XMLContentParsed};
+    return if !IsHashRefWithData( $Param{XMLContentParsed} );
+
+    my $XMLContentParsed = $Param{XMLContentParsed};
+
+    # Check if Value structure exists
+    return if !IsArrayRefWithData( $XMLContentParsed->{Value} );
+
+    my $Value = $XMLContentParsed->{Value}->[0];
+    return if !IsHashRefWithData($Value);
+
+    # Simple Item (no Hash/Array)
+    if ( IsArrayRefWithData( $Value->{Item} ) ) {
+        my $Item = $Value->{Item}->[0];
+        if ( IsHashRefWithData($Item) && $Item->{ValueType} ) {
+            return {
+                Type     => 'String',
+                ItemType => $Item->{ValueType},
+            };
+        }
+    }
+
+    # Array structure
+    if ( IsArrayRefWithData( $Value->{Array} ) ) {
+        ARRAYITEM:
+        for my $ArrayItem ( @{ $Value->{Array} } ) {
+            next ARRAYITEM if !IsHashRefWithData($ArrayItem);
+
+            # Check DefaultItem for ValueType
+            if ( IsArrayRefWithData( $ArrayItem->{DefaultItem} ) ) {
+                my $DefaultItem = $ArrayItem->{DefaultItem}->[0];
+                if ( IsHashRefWithData($DefaultItem) && $DefaultItem->{ValueType} ) {
+                    return {
+                        Type     => 'Array',
+                        ItemType => $DefaultItem->{ValueType},
+                    };
+                }
+            }
+
+            # Check if any Item has ValueType
+            if ( IsArrayRefWithData( $ArrayItem->{Item} ) ) {
+                ITEM:
+                for my $Item ( @{ $ArrayItem->{Item} } ) {
+                    next ITEM if !IsHashRefWithData($Item);
+                    next ITEM if !$Item->{Key};
+
+                    if ( $Item->{ValueType} ) {
+                        return {
+                            Type     => 'Array',
+                            ItemType => $Item->{ValueType},
+                        };
+                    }
+                }
+            }
+        }
+    }
+
+    # Hash structure - build key-specific mapping
+    if ( IsArrayRefWithData( $Value->{Hash} ) ) {
+        my %Result = (
+            Type => 'Hash',
+            Keys => {},
+        );
+
+        HASHITEM:
+        for my $HashItem ( @{ $Value->{Hash} } ) {
+            next HASHITEM if !IsHashRefWithData($HashItem);
+
+            # Check DefaultItem for default ValueType
+            if ( IsArrayRefWithData( $HashItem->{DefaultItem} ) ) {
+                my $DefaultItem = $HashItem->{DefaultItem}->[0];
+                if ( IsHashRefWithData($DefaultItem) && $DefaultItem->{ValueType} ) {
+                    $Result{Default} = $DefaultItem->{ValueType};
+                }
+            }
+
+            # Check all Items and map Key => ValueType
+            if ( IsArrayRefWithData( $HashItem->{Item} ) ) {
+                ITEM:
+                for my $Item ( @{ $HashItem->{Item} } ) {
+                    next ITEM if !IsHashRefWithData($Item);
+                    next ITEM if !$Item->{Key};
+
+                    if ( $Item->{ValueType} ) {
+                        $Result{Keys}->{ $Item->{Key} } = $Item->{ValueType};
+                    }
+                    elsif ( $Result{Default} ) {
+
+                        # If no explicit ValueType but we have a Default, use it
+                        $Result{Keys}->{ $Item->{Key} } = $Result{Default};
+                    }
+                }
+            }
+        }
+
+        # Return hash structure if we found any ValueTypes
+        if ( $Result{Default} || %{ $Result{Keys} } ) {
+            return \%Result;
+        }
+    }
+
+    return;
 }
 
 1;

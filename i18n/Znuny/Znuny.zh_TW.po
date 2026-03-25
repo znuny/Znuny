@@ -25787,3 +25787,7 @@ msgstr ""
 msgid "Defines which article attributes TicketGeneric dashboard widgets are allowed to request when building additional columns."
 msgstr ""
 
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "When support data is collected via SupportDataCollector, certain SysConfig values marked with ValueType=\"Password\" are automatically masked. This prevents passwords from appearing in plain text in the support data. This setting defines the settings that contain complex configuration hashes that should not be masked when generating the support data."
+msgstr ""
+
