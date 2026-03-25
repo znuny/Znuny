@@ -1,6 +1,5 @@
 # --
-# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
-# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# Copyright (C) 2026 B1 Systems GmbH, https://b1-systems.de
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -13,10 +12,10 @@ package Kernel::System::Log::Journal;
 use strict;
 use warnings;
 use IO::Socket::UNIX;
-use feature 'signatures';
 
-our @ObjectDependencies = (
-    'Kernel::Config',
+my %KeyTranslate = (
+    "Line"   => "CODE_LINE",
+    "Module" => "CODE_FUNC",
 );
 
 sub new {
@@ -26,17 +25,15 @@ sub new {
     my $Self = {};
     bless( $Self, $Type );
 
-    # get config object
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
     # get logfile location
-    $Self->{LogSockPath} = $ConfigObject->Get('LogModule::JournalLogPath') || '/run/systemd/journal/socket';
+    $Self->{LogSockPath} = '/run/systemd/journal/socket';
 
     return $Self;
 }
 
-sub Serialize ($k, $v) {
-    return uc($k) . "\n" . pack("Q<", length($v)) . $v . "\n";
+sub Serialize {
+    my ( $k, $v ) = @_;
+    return uc($k) . "\n" . pack( "Q<", length($v) ) . $v . "\n";
 }
 
 sub Log {
@@ -45,17 +42,19 @@ sub Log {
     my $LogSocket = IO::Socket::UNIX->new(
         Type => SOCK_DGRAM(),
         Peer => $Self->{LogSockPath},
-    ) or {
-        print STDERR "\n";
-        print STDERR " Can't connect to $Self->{LogSockPath}: $!\n";
-        print STDERR "\n";
+      )
+      or {
+          print STDERR "\n Can not connect to "
+        . $Self->{LogSockPath}
+        . ": $!\n\n";
         return;
-    }
+      };
 
-    my $LogMessage = ""
-    keys(%Param)
-    while(my($key, $value) = each(%Param)) {
-        $LogMessage = $LogMessage . Serialize($key, $value)
+    my $LogMessage = "";
+    keys(%Param);
+    while ( my ( $key, $value ) = each(%Param) ) {
+        $key = $KeyTranslate{$key} || $key;
+        $LogMessage .= Serialize( $key, $value );
     }
 
     print $LogSocket $LogMessage;
