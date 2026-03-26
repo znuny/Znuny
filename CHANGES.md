@@ -1,4 +1,5 @@
 # 6.5.20 2026-??-??
+ - 2026-03-25 Fixed: AgentTicketOwnerView missing in dynamic field screen selection.
  - 2026-02-24 Fixed: iFrame elements reuse the same ID in CustomerTicketZoom.
 
 # 6.5.19 2026-03-25

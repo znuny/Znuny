@@ -1150,6 +1150,7 @@
                         <Item Key="Ticket::Frontend::AgentTicketResponsibleView###DefaultColumns">AgentTicketResponsibleView</Item>
                         <Item Key="Ticket::Frontend::AgentTicketWatchView###DefaultColumns">AgentTicketWatchView</Item>
                         <Item Key="Ticket::Frontend::AgentTicketLockedView###DefaultColumns">AgentTicketLockedView</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketOwnerView###DefaultColumns">AgentTicketOwnerView</Item>
                         <Item Key="Ticket::Frontend::AgentTicketEscalationView###DefaultColumns">AgentTicketEscalationView</Item>
                         <Item Key="Ticket::Frontend::AgentTicketSearch###DefaultColumns">AgentTicketSearch (Overview Screen)</Item>
                         <Item Key="Ticket::Frontend::AgentTicketService###DefaultColumns">AgentTicketService</Item>
@@ -2017,7 +2018,7 @@
             </Item>
         </Value>
     </Setting>
-   <Setting Name="Ticket::Frontend::AgentTicketOwnerView###DefaultColumns" Required="0" Valid="1">
+    <Setting Name="Ticket::Frontend::AgentTicketOwnerView###DefaultColumns" Required="0" Valid="1">
         <Description Translatable="1">Columns that can be filtered in the owner view of the agent interface. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed.</Description>
         <Navigation>Frontend::Agent::View::TicketOwnerView</Navigation>
         <Value>
