@@ -1,5 +1,11 @@
+# 6.5.20 2026-??-??
+ - 2026-03-25 Fixed: AgentTicketOwnerView missing in dynamic field screen selection.
+ - 2026-02-24 Fixed: iFrame elements reuse the same ID in CustomerTicketZoom.
+
 # 6.5.19 2026-03-25
+ - 2026-03-23 CVE-2025-59393: Support bundle generator: Improved password masking in configuration dumps using ValueType metadata.
  - 2026-03-20 Fixed: Replaced EncodeInput() method in KS:Encode with safe version.
+ - 2026-03-19 Fixed: Kernel::System::HTMLUtils::Safety can be bypassed by using leading zeroes in entities.
  - 2026-03-19 Fixed: CustomerUser article iframe #n>1 not resizing when all articles shown.
  - 2026-03-18 Fixed: Misleading popup message when opening more than one ticket from overviews by using a shortcut to open it in a new tab/window.
  - 2026-03-02 Changed: Reply function in agent ticket compose dialog now is not available anymore if the article is internal and was created by an agent or if the article was created by the system.
@@ -18,6 +24,7 @@
  - 2026-01-13 Fixed: Date check regex for config option ICSParser::StartDate actually matches YYYYMMDD.
  - 2025-12-12 Sector Nord AG: Added support for multiple RichText instances. Thanks to @LuBroering (Lukas Bröring Sector Nord AG) [PR#736](https://github.com/znuny/Znuny/pull/736).
  - 2025-11-28 Changed ticket zoom information widget to count only open tickets with the same customer after enabling config option Ticket::Frontend::ZoomCustomerTickets.
+ - 2025-11-25 CVE-2025-52204: Fixed XSS issue with session ID in URL parameter. Thanks to Miguel P. for reporting this issue.
  - 2025-11-25 Fixed: Unexpected rate limit is being applied when config option SendmailModule::RateLimit is disabled.
  - 2025-11-24 Fixed: The link to a specific article in a ticket does not work if users have different settings for “Show all articles”. Article links now handle both display modes: 'Show one article' and 'Show all articles'.
  - 2025-11-13 Sped up UUID creation for DBCRUD modules.
@@ -32,6 +39,10 @@
  - 2025-10-21 Fixed: Console commands are not loaded/listed if they are located in the /Custom directory.
  - 2025-10-01 Fixed: Improved error logging when fetching emails.
  - 2025-09-25 Fixed: Customer ticket details screen now redirects to overview of tickets if a ticket is accessed without permissions.
+ - 2025-09-23 Fixed: Improved content security policy HTTP header.
+ - 2025-09-16 Fixed: For security reasons, detailed error messages are now not shown anymore in the GUI.
+ - 2025-09-15 Fixed: Source view for richtext editor has been deactivated in customer frontend due to possibility to inject arbitrary code.
+ - 2025-09-15 CVE-2025-59490: Fixed: XSS issue with unfiltered URL parameters given to backend.
 
 # 6.5.18 2025-09-24
  - 2025-09-22 Fixed: Fix for installer email setting checks lead to issues with sending emails.

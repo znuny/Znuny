@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.916947791164659;
+    $Self->{Completeness}        = 0.916760404949381;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2988,9 +2988,8 @@ sub Data {
         'From assigned Customer IDs' => '从已分配的客户ID',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Error（错误）',
         'An Error Occurred' => '发生了一个错误',
-        'Error Details' => '详细错误信息',
-        'Traceback' => '追溯',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3088,9 +3087,6 @@ sub Data {
         'Event Information' => '事件信息',
         'Ticket fields' => '工单字段',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-        'Expand' => '展开',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
         'Click to delete this attachment.' => '点击以删除这个附件。',
 
@@ -3155,7 +3151,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => '完成',
-        'Error' => 'Error（错误）',
         'Database setup successful!' => '数据库设置成功！',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -5761,6 +5756,8 @@ sub Data {
             '使用公共模块 \'PublicSupportDataCollector\' （如用于OTRS守护进程的模块）定义用于搜集支持数据的HTTP主机名。',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the OTRS Daemon).' =>
             '使用公共模块“PublicSupportDataCollector”（例如用于OTRS守护进程的模块）来定义支持数据收集的超时（以秒为单位，最小为20秒）。',
+        'When support data is collected via SupportDataCollector, certain SysConfig values marked with ValueType="Password" are automatically masked. This prevents passwords from appearing in plain text in the support data. This setting defines the settings that contain complex configuration hashes that should not be masked when generating the support data.' =>
+            '',
         'Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server\'s settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, OTRS_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             '定义本系统的WEB服务器使用的协议类型。如果要用HTTPS协议代替明文的HTTP协议，就在这里指定。 因为这个设置并不影响WEB服务器的设置或行为，所以不会改变访问本系统的方式。 如果设置错误，也不会阻止您登录系统。这个设置只是作为一个变量OTRS_CONFIG_HttpType使用，可以在系统使用的所有消息的表单中找到，用来创建在系统内到工单的链接。',
         'Whether to force redirect all requests from http to https protocol. Please check that your web server is configured correctly for https protocol before enable this option.' =>

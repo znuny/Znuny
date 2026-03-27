@@ -1047,31 +1047,9 @@ sub Error {
         }
     }
 
-    if ( !$Param{Message} ) {
-        $Param{Message} = $Param{BackendMessage};
-
-        # Don't check for business package if the database was not yet configured (in the installer).
-        if (
-            $Kernel::OM->Get('Kernel::Config')->Get('SecureMode')
-            && $Kernel::OM->Get('Kernel::Config')->Get('DatabaseDSN')
-            && !$Kernel::OM->Get('Kernel::System::OTRSBusiness')->OTRSBusinessIsInstalled()
-            )
-        {
-            $Param{ShowOTRSBusinessHint}++;
-        }
-    }
-
-    if ( $Param{BackendTraceback} ) {
-        $Self->Block(
-            Name => 'ShowBackendTraceback',
-            Data => \%Param,
-        );
-    }
-
     # create & return output
     return $Self->Output(
         TemplateFile => 'Error',
-        Data         => \%Param
     );
 }
 
@@ -2694,7 +2672,7 @@ sub Attachment {
         # frame-src:  block all frames
         # style-src:  allow inline styles for nice email display
         $Output
-            .= "Content-Security-Policy: default-src *; img-src * data:; script-src 'none'; object-src 'self'; frame-src 'none'; style-src 'unsafe-inline';\n";
+            .= "Content-Security-Policy: default-src 'none'; img-src * data:; script-src 'none'; object-src 'self'; frame-src 'none'; style-src 'unsafe-inline'\n";
 
         # Use Referrer-Policy header to suppress referrer information in modern browsers
         #   (to prevent referrer-leak attacks).
@@ -3808,17 +3786,24 @@ sub BuildDateSelection {
     );
 
     # Add Datepicker JS to output.
+    my $PrefixJSONString = $Self->JSONEncode(
+        Data => $Prefix,
+    );
+    my $WeekDayStartJSONString = $Self->JSONEncode(
+        Data => $WeekDayStart,
+    );
+
     my $DatepickerJS = '
     Core.UI.Datepicker.Init({
-        Day: $("#" + Core.App.EscapeSelector("' . $Prefix . '") + "Day"),
-        Month: $("#" + Core.App.EscapeSelector("' . $Prefix . '") + "Month"),
-        Year: $("#" + Core.App.EscapeSelector("' . $Prefix . '") + "Year"),
-        Hour: $("#" + Core.App.EscapeSelector("' . $Prefix . '") + "Hour"),
-        Minute: $("#" + Core.App.EscapeSelector("' . $Prefix . '") + "Minute"),
+        Day: $("#" + Core.App.EscapeSelector(' . $PrefixJSONString . ') + "Day"),
+        Month: $("#" + Core.App.EscapeSelector(' . $PrefixJSONString . ') + "Month"),
+        Year: $("#" + Core.App.EscapeSelector(' . $PrefixJSONString . ') + "Year"),
+        Hour: $("#" + Core.App.EscapeSelector(' . $PrefixJSONString . ') + "Hour"),
+        Minute: $("#" + Core.App.EscapeSelector(' . $PrefixJSONString . ') + "Minute"),
         VacationDays: ' . $VacationDaysJSON . ',
         DateInFuture: ' .    ( $ValidateDateInFuture    ? 'true' : 'false' ) . ',
         DateNotInFuture: ' . ( $ValidateDateNotInFuture ? 'true' : 'false' ) . ',
-        WeekDayStart: ' . $WeekDayStart . '
+        WeekDayStart: ' . $WeekDayStartJSONString . '
     });';
 
     $Self->AddJSOnDocumentComplete( Code => $DatepickerJS );
@@ -4844,14 +4829,9 @@ sub CustomerError {
         }
     }
 
-    if ( !$Param{Message} ) {
-        $Param{Message} = $Param{BackendMessage};
-    }
-
     # create & return output
     return $Self->Output(
         TemplateFile => 'CustomerError',
-        Data         => \%Param
     );
 }
 
@@ -6391,8 +6371,8 @@ sub CustomerSetRichTextParameters {
             '/',
             [
                 'Image',   'HorizontalRule', 'PasteText', 'PasteFromWord', 'SplitQuote', 'RemoveQuote',
-                '-',       '-',            'Find', 'Replace',    'TextColor',
-                'BGColor', 'RemoveFormat', '-',    'ShowBlocks', 'Source', 'SpecialChar',
+                '-',       '-',              'Find',      'Replace',       'TextColor',
+                'BGColor', 'RemoveFormat',   '-',         'ShowBlocks',    'SpecialChar',
                 '-',       'Maximize'
             ],
             [ 'Format', 'Font', 'FontSize' ]
@@ -6406,9 +6386,9 @@ sub CustomerSetRichTextParameters {
             ],
             '/',
             [
-                'HorizontalRule', 'PasteText', 'PasteFromWord', 'SplitQuote', 'RemoveQuote', '-',
-                '-',            'Find', 'Replace',    'TextColor', 'BGColor',
-                'RemoveFormat', '-',    'ShowBlocks', 'Source',    'SpecialChar', '-',
+                'HorizontalRule', 'PasteText', 'PasteFromWord', 'SplitQuote',  'RemoveQuote', '-',
+                '-',              'Find',      'Replace',       'TextColor',   'BGColor',
+                'RemoveFormat',   '-',         'ShowBlocks',    'SpecialChar', '-',
                 'Maximize'
             ],
             [ 'Format', 'Font', 'FontSize' ]
@@ -6425,8 +6405,8 @@ sub CustomerSetRichTextParameters {
             ],
             '/',
             [
-                'Format',       'Font', 'FontSize', '-',           'TextColor',  'BGColor',
-                'RemoveFormat', '-',    'Source',   'SpecialChar', 'SplitQuote', 'RemoveQuote',
+                'Format',       'Font', 'FontSize',    '-',          'TextColor', 'BGColor',
+                'RemoveFormat', '-',    'SpecialChar', 'SplitQuote', 'RemoveQuote',
                 '-',            'Maximize'
             ]
         ];
@@ -6442,8 +6422,8 @@ sub CustomerSetRichTextParameters {
             ],
             '/',
             [
-                'Format',       'Font', 'FontSize', '-',           'TextColor',  'BGColor',
-                'RemoveFormat', '-',    'Source',   'SpecialChar', 'SplitQuote', 'RemoveQuote',
+                'Format',       'Font', 'FontSize',    '-',          'TextColor', 'BGColor',
+                'RemoveFormat', '-',    'SpecialChar', 'SplitQuote', 'RemoveQuote',
                 '-',            'Maximize'
             ]
         ];

@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.881285140562249;
+    $Self->{Completeness}        = 0.88108629278483;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2986,9 +2986,8 @@ sub Data {
         'From assigned Customer IDs' => 'De IDs de Cliente designados.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Erro',
         'An Error Occurred' => 'Ocorreu um erro.',
-        'Error Details' => 'Detalhes do Erro',
-        'Traceback' => 'Rastreamento',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3086,9 +3085,6 @@ sub Data {
         'Event Information' => 'Informação do Evento',
         'Ticket fields' => 'Campos de chamado',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-        'Expand' => 'Expandir',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
         'Click to delete this attachment.' => 'Clique para remover este anexo.',
 
@@ -3153,7 +3149,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Feito',
-        'Error' => 'Erro',
         'Database setup successful!' => 'Sucesso na configuração do banco de dados!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -5758,6 +5753,8 @@ sub Data {
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the OTRS Daemon).' =>
             '',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the OTRS Daemon).' =>
+            '',
+        'When support data is collected via SupportDataCollector, certain SysConfig values marked with ValueType="Password" are automatically masked. This prevents passwords from appearing in plain text in the support data. This setting defines the settings that contain complex configuration hashes that should not be masked when generating the support data.' =>
             '',
         'Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server\'s settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, OTRS_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'Define o tipo de protocolo utilizado pelo servidor web para servir a aplicação. Se o protocolo https for utilizado no lugar do http básico, isto deve ser especificado aqui. Como isto não tem efeito nas definições ou no comportamento do servidor web, isto não irá alterar o método que a aplicação será acessada e, se estiver errado, isto não irá prevenir a realização de login na aplicação. Esta definição só é utilizada como a variável OTRS_CONFIG_HttpType que pode ser encontrada em todas as formas de messageria utlizada pela aplicação para construir links para tickets dentro do seu sistema.',

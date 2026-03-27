@@ -1223,9 +1223,14 @@ sub TimeUnits {
         # as filled out fields, preventing a submit until one of the values
         # will be re-selected manually.
         if ($DefaultTimeUnits) {
+            my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
+            my $IDJSONString = $JSONObject->Encode(
+                Data => $Param{ID},
+            );
+
             $Self->AddJSOnDocumentCompleteIfNotExists(
-                Key  => 'LayoutTicketSetTimeUnits' . $Param{ID},
-                Code => 'Core.Agent.TicketAction.SetTimeUnits(\'' . $Param{ID} . '\');',
+                Key  => 'LayoutTicketSetTimeUnits' . $IDJSONString,
+                Code => "Core.Agent.TicketAction.SetTimeUnits($IDJSONString);",
             );
         }
     }

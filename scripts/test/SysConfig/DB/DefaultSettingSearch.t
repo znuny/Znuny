@@ -79,7 +79,7 @@ my @Tests = (
             Search     => "ValueType=",
             SearchType => 'Metadata',
         },
-        ExpectedResultsInclude => [],
+        ExpectedResultsInclude => [qw(SupportDataCollector::SkipMaskPasswordSettings)],
         Success                => 1,
     },
     {

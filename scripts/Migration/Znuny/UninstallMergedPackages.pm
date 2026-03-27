@@ -55,6 +55,8 @@ sub Run {
         'Znuny-RichTextEditorLinkFix',
         'Znuny-BugfixFileUploadPathTraversal',
         'Znuny-SMTPRateLimit',
+        'Znuny4OTRS-HideErrors',
+        'Znuny-HideErrors',
     );
 
     PACKAGENAME:

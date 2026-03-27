@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.619759036144578;
+    $Self->{Completeness}        = 0.619476136911458;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2983,9 +2983,8 @@ bin/otrs.Daemon.pl status\').',
         'From assigned Customer IDs' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => 'Error',
         'An Error Occurred' => 'Terjadi kesalahan',
-        'Error Details' => 'Rincian eror',
-        'Traceback' => 'Melacak kembali',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3083,9 +3082,6 @@ bin/otrs.Daemon.pl status\').',
         'Event Information' => 'Informasi acara',
         'Ticket fields' => 'Dasar tiket',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-        'Expand' => 'Perluas',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
         'Click to delete this attachment.' => '',
 
@@ -3150,7 +3146,6 @@ bin/otrs.Daemon.pl status\').',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => 'Selesai',
-        'Error' => 'Error',
         'Database setup successful!' => 'Berhasil menyediakan database!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -5755,6 +5750,8 @@ bin/otrs.Daemon.pl status\').',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the OTRS Daemon).' =>
             '',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the OTRS Daemon).' =>
+            '',
+        'When support data is collected via SupportDataCollector, certain SysConfig values marked with ValueType="Password" are automatically masked. This prevents passwords from appearing in plain text in the support data. This setting defines the settings that contain complex configuration hashes that should not be masked when generating the support data.' =>
             '',
         'Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server\'s settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, OTRS_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'Mendefinisikan jenis protokol, yang digunakan oleh web server, untuk melayani aplikasi. Jika protokol https akan digunakan bukan http biasa, itu harus ditentukan di sini. Karena ini tidak berpengaruh pada pengaturan atau perilaku web server, itu tidak akan mengubah metode akses ke aplikasi dan, jika salah, tidak akan mencegah Anda dari masuk ke aplikasi. Pengaturan ini hanya digunakan sebagai variabel, OTRS CONFIG Http Jenis yang ditemukan dalam semua bentuk pesan yang digunakan oleh aplikasi, untuk membangun link ke tiket dalam sistem Anda.',

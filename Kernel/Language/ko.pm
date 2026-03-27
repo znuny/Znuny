@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D %T';
-    $Self->{Completeness}        = 0.888192771084337;
+    $Self->{Completeness}        = 0.887996143339225;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2981,9 +2981,8 @@ sub Data {
         'From assigned Customer IDs' => '할당 된 고객 ID로부터',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+        'Error' => '오류',
         'An Error Occurred' => '에러 발생됨',
-        'Error Details' => '오류 정보',
-        'Traceback' => '역 추적',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3081,9 +3080,6 @@ sub Data {
         'Event Information' => '이벤트 정보',
         'Ticket fields' => '타켓 필드',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-        'Expand' => '넓히다',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
         'Click to delete this attachment.' => '첨부파일을 삭제하려면 클릭하십시오.',
 
@@ -3148,7 +3144,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
         'Done' => '끝난',
-        'Error' => '오류',
         'Database setup successful!' => '데이터베이스 설정이 설공적으로 완료되었습니다!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBStart.tt
@@ -5754,6 +5749,8 @@ sub Data {
             '\'PublicSupportDataCollector\'공용 모듈 (예 : OTRS 데몬에서 사용)을 사용하여 지원 데이터 수집을위한 HTTP 호스트 이름을 정의합니다.',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the OTRS Daemon).' =>
             '공개 모듈 \'PublicSupportDataCollector\'(예 : OTRS 데몬에서 사용)를 사용하여 지원 데이터 수집에 대한 시간 초과 (최소, 20 초)를 정의합니다.',
+        'When support data is collected via SupportDataCollector, certain SysConfig values marked with ValueType="Password" are automatically masked. This prevents passwords from appearing in plain text in the support data. This setting defines the settings that contain complex configuration hashes that should not be masked when generating the support data.' =>
+            '',
         'Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server\'s settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, OTRS_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             '응용 프로그램을 제공하기 위해 웹 서버에서 사용하는 프로토콜 유형을 정의합니다. https 프로토콜이 일반 http 대신 사용되는 경우 여기에 지정해야합니다. 이것은 웹 서버의 설정이나 동작에 영향을 미치지 않으므로 응용 프로그램에 대한 액세스 방법을 변경하지 않으며, 틀린 경우 응용 프로그램에 로그인하지 못하게하지 않습니다. 이 설정은 응용 프로그램에서 사용하는 모든 형식의 메시징에서 찾을 수있는 OTRS_CONFIG_HttpType 변수로만 사용되어 시스템 내의 티켓에 대한 링크를 만듭니다.',
         'Whether to force redirect all requests from http to https protocol. Please check that your web server is configured correctly for https protocol before enable this option.' =>

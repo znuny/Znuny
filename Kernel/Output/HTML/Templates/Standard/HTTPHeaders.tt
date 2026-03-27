@@ -18,7 +18,7 @@ X-UA-Compatible: IE=edge,chrome=1
 X-Frame-Options: SAMEORIGIN
 [% END -%]
 [% IF !Config("DisableContentSecurityPolicy") -%]
-Content-Security-Policy: default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob:; img-src * 'unsafe-inline' 'unsafe-eval' data: blob:
+Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: *; frame-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; worker-src 'self' blob:
 [% END -%]
 X-Content-Type-Options: nosniff
 Referrer-Policy: no-referrer
