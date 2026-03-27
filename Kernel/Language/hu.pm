@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.916921099148321;
+    $Self->{Completeness}        = 0.999517917403182;
 
     # csv separator
     $Self->{Separator}         = ';';
