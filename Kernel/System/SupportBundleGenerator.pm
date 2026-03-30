@@ -703,7 +703,6 @@ sub _GetCustomFileList {
     return @Files;
 }
 
-
 sub _MaskPasswords {
     my ( $Self, %Param ) = @_;
 
