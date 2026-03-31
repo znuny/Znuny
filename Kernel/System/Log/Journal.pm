@@ -1,14 +1,16 @@
 # --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 # Copyright (C) 2026 B1 Systems GmbH, https://b1-systems.de
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
-# the enclosed file COPYING for license information (GPL). If you
-# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 ## nofilter(TidyAll::Plugin::Znuny::CodeStyle::STDERRCheck)
 
 package Kernel::System::Log::Journal;
 
+use utf8;
 use strict;
 use warnings;
 use IO::Socket::UNIX;
@@ -42,19 +44,13 @@ sub Log {
     my $LogSocket = IO::Socket::UNIX->new(
         Type => SOCK_DGRAM(),
         Peer => $Self->{LogSockPath},
-      )
-      or {
-          print STDERR "\n Can not connect to "
-        . $Self->{LogSockPath}
-        . ": $!\n\n";
-        return;
-      };
+    );
 
     my $LogMessage = "";
     keys(%Param);
-    while ( my ( $key, $value ) = each(%Param) ) {
-        $key = $KeyTranslate{$key} || $key;
-        $LogMessage .= Serialize( $key, $value );
+    while ( my ( $Key, $Value ) = each(%Param) ) {
+        $Key = $KeyTranslate{$Key} || $Key;
+        $LogMessage .= Serialize( $Key, $Value );
     }
 
     print $LogSocket $LogMessage;
