@@ -1,4 +1,5 @@
 # 6.5.20 2026-??-??
+ - 2026-04-02 Changed: Log level of "missing user" message in HTTP basic auth.
  - 2026-03-25 Fixed: AgentTicketOwnerView missing in dynamic field screen selection.
  - 2026-02-24 Fixed: iFrame elements reuse the same ID in CustomerTicketZoom.
 
