@@ -1,6 +1,5 @@
 # --
 # Copyright (C) 2021 Znuny GmbH, https://znuny.org/
-# Copyright (C) 2026 B1 Systems GmbH, https://b1-systems.de
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
