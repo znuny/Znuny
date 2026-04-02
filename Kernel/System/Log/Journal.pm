@@ -14,6 +14,11 @@ use strict;
 use warnings;
 use IO::Socket::UNIX;
 
+our @ObjectDependencies = (
+    'Kernel::Config',
+);
+
+# see man:systemd.journal-fields(7) for default fields
 my %KeyTranslate = (
     "Line"   => "CODE_LINE",
     "Module" => "CODE_FUNC",
@@ -27,7 +32,8 @@ sub new {
     bless( $Self, $Type );
 
     # get logfile location
-    $Self->{LogSockPath} = '/run/systemd/journal/socket';
+    $Self->{LogSockPath}
+        = $Kernel::OM->Get('Kernel::Config')->Get('LogModule::Journal::SocketPath') || '/run/systemd/journal/socket';
 
     return $Self;
 }
