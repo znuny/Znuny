@@ -45,6 +45,8 @@ sub Load {
     # The database DSN for MySQL ==> more: "perldoc DBD::mysql"
     $Self->{DatabaseDSN} = "DBI:mysql:database=$Self->{Database};host=$Self->{DatabaseHost};";
 
+    # The database DSN for MariaDB ==> more: "perldoc DBD::MariaDB"
+#    $Self->{DatabaseDSN} = "DBI:MariaDB:database=$Self->{Database};host=$Self->{DatabaseHost};";
     # The database DSN for PostgreSQL ==> more: "perldoc DBD::Pg"
     # if you want to use a local socket connection
 #    $Self->{DatabaseDSN} = "DBI:Pg:dbname=$Self->{Database};";
