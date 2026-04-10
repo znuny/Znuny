@@ -11,6 +11,7 @@ package Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition;
 
 use strict;
 use warnings;
+use utf8;
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -224,9 +225,16 @@ sub Run {
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
         # build subject
-        my $TicketHook        = $ConfigObject->Get('Ticket::Hook');
-        my $TicketHookDivider = $ConfigObject->Get('Ticket::HookDivider');
-        $Param{GetParam}->{Subject} .= " [$TicketHook$TicketHookDivider$TicketNumber]";
+        my $TicketHook          = $ConfigObject->Get('Ticket::Hook');
+        my $TicketHookDivider   = $ConfigObject->Get('Ticket::HookDivider');
+        my $TicketSubjectFormat = $ConfigObject->Get('Ticket::SubjectFormat') || 'Left';
+
+        if ( lc $TicketSubjectFormat eq 'right' ) {
+            $Param{GetParam}->{Subject} .= " [$TicketHook$TicketHookDivider$TicketNumber]";
+        }
+        else {
+            $Param{GetParam}->{Subject} = "[$TicketHook$TicketHookDivider$TicketNumber] " . $Param{GetParam}->{Subject};
+        }
 
         # Set ticket number for later usage in ETNR follow-up module (see bug#14944).
         $Param{GetParam}->{'X-OTRS-FollowUp-RecognizedTicketNumber'} = $TicketNumber;
