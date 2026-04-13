@@ -615,20 +615,10 @@ sub _GetCustomFileList {
     # get config object
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-    # article directory
-    my $ArticleDir = $ConfigObject->Get('Ticket::Article::Backend::MIMEBase::ArticleDataDir');
-
-    # cleanup file name
-    $ArticleDir =~ s/\/\//\//g;
-
-    # temp directory
-    my $TempDir = $ConfigObject->Get('TempDir');
-
-    # cleanup file name
-    $TempDir =~ s/\/\//\//g;
-
-    # assemble additional paths to be ignored
+    # assemble additional paths to be ignored (resolved via abs_path to handle symlinks correctly)
     my %AdditionalIgnoredAbsPaths = map { $Self->_GetAbsPath($_) => 1 } (
+        $ConfigObject->Get('Ticket::Article::Backend::MIMEBase::ArticleDataDir'),
+        $ConfigObject->Get('TempDir'),
         $ConfigObject->Get('SMIME::PrivatePath'),
         $ConfigObject->Get('SMIME::CertPath'),
     );
@@ -646,12 +636,6 @@ sub _GetCustomFileList {
 
         # check if directory
         if ( -d $File ) {
-
-            # do not include article in file system
-            next FILE if $File =~ /\Q$ArticleDir\E/i;
-
-            # do not include tmp in file system
-            next FILE if $File =~ /\Q$TempDir\E/i;
 
             # do not include js-cache
             next FILE if $File =~ /js-cache/;
