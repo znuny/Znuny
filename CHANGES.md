@@ -1,4 +1,5 @@
 # 6.5.20 2026-??-??
+ - 2026-04-13 Changed: Ticket list views for "escalation", "locked", "mention", "owner", "responsible", "status" and "watch" now each have a config option TicketSearchWithAdminUser to decide if the tickets will be searched with admin user or the logged in user.
  - 2026-04-10 Fixed: Sorting in ticket overview modes "Medium" and "Preview" throws an error. Thanks for reporting to @przemekrzyzanski-cmyk. [#779](https://github.com/znuny/Znuny/issues/779)
  - 2026-04-10 PostMaster/Filter/ExternalTicketNumberRecognition: Added support of the SysConfig setting “Ticket::SubjectFormat”.
  - 2026-04-02 Changed: Log level of "missing user" message in HTTP basic auth.

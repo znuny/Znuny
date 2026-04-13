@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!-- nofilter(TidyAll::Plugin::Znuny::Config::ACLKeysLevel3Actions) -->
 <otrs_config version="2.0" init="Application">
     <!--
         General settings
@@ -3290,6 +3291,58 @@
         </Value>
     </Setting>
 
+    <!--
+        Ticket list views: Flag to decide if ticket search will be executed for the logged in user or with user ID 1.
+    -->
+    <Setting Name="Ticket::Frontend::AgentTicketResponsibleView###TicketSearchWithAdminUser" Required="1" Valid="1">
+        <Description Translatable="1">Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view.</Description>
+        <Navigation>Frontend::Agent::View::TicketResponsible</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketOwnerView###TicketSearchWithAdminUser" Required="1" Valid="1">
+        <Description Translatable="1">Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view.</Description>
+        <Navigation>Frontend::Agent::View::TicketOwner</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketWatchView###TicketSearchWithAdminUser" Required="1" Valid="1">
+        <Description Translatable="1">Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view.</Description>
+        <Navigation>Frontend::Agent::View::TicketWatch</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketLockedView###TicketSearchWithAdminUser" Required="1" Valid="1">
+        <Description Translatable="1">Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view.</Description>
+        <Navigation>Frontend::Agent::View::TicketLocked</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketStatusView###TicketSearchWithAdminUser" Required="1" Valid="1">
+        <Description Translatable="1">Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view.</Description>
+        <Navigation>Frontend::Agent::View::TicketStatus</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketMentionView###TicketSearchWithAdminUser" Required="1" Valid="1">
+        <Description Translatable="1">Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view.</Description>
+        <Navigation>Frontend::Agent::View::TicketMention</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketEscalationView###TicketSearchWithAdminUser" Required="1" Valid="1">
+        <Description Translatable="1">Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view.</Description>
+        <Navigation>Frontend::Agent::View::TicketEscalation</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
     <!-- AgentPreferences -->
     <Setting Name="AgentPreferences::AJAXUpdate::AllowedKeys###Framework" Required="0" Valid="1">
         <Description Translatable="1">List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions.</Description>
