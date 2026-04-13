@@ -1,4 +1,5 @@
 # 6.5.20 2026-??-??
+ - 2026-04-10 Fixed: Sorting in ticket overview modes "Medium" and "Preview" throws an error. Thanks for reporting to @przemekrzyzanski-cmyk. [#779](https://github.com/znuny/Znuny/issues/779)
  - 2026-04-10 PostMaster/Filter/ExternalTicketNumberRecognition: Added support of the SysConfig setting “Ticket::SubjectFormat”.
  - 2026-04-02 Changed: Log level of "missing user" message in HTTP basic auth.
  - 2026-03-25 Fixed: AgentTicketOwnerView missing in dynamic field screen selection.
