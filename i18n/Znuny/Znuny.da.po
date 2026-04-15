@@ -25788,3 +25788,7 @@ msgstr ""
 msgid "When support data is collected via SupportDataCollector, certain SysConfig values marked with ValueType=\"Password\" are automatically masked. This prevents passwords from appearing in plain text in the support data. This setting defines the settings that contain complex configuration hashes that should not be masked when generating the support data."
 msgstr ""
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view."
+msgstr ""
+

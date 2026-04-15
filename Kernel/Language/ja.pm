@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.700466013176924;
+    $Self->{Completeness}        = 0.700353470437018;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8096,6 +8096,8 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             '',
         'Loader module registration for the public interface.' => '',
         'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
+            '',
+        'Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view.' =>
             '',
         'List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions.' =>
             '',

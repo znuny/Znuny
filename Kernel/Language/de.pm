@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.996625421822272;
+    $Self->{Completeness}        = 0.99646529562982;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8080,6 +8080,8 @@ sub Data {
             'Zeigt den Ticket-Titel in der "Notiz übergeben"-Aktion im Agenten-Interface an.',
         'Loader module registration for the public interface.' => 'Lade-Modulregistrierung für das öffentliche Interface.',
         'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
+            '',
+        'Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view.' =>
             '',
         'List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions.' =>
             'Liste von Benutzereinstellungen (Keys), für die ein Update per UpdateAJAX-Subaction über das Frontendmodul AgentPreferences erlaubt ist. Eingabe als reguläre Ausdrücke.',

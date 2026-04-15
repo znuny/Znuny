@@ -114,7 +114,7 @@ sub Run {
     $RedirectParams{Action} = $Self->{Action};
     for my $PossibleParam (qw(Filter)) {
         if ( $Param{$PossibleParam} ) {
-            $RedirectParams{$PossibleParam} = $Param{ $PossibleParam };
+            $RedirectParams{$PossibleParam} = $Param{$PossibleParam};
         }
     }
 

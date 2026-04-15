@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.440784187690824;
+    $Self->{Completeness}        = 0.440713367609255;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -8086,6 +8086,8 @@ Mfano:
             '',
         'Loader module registration for the public interface.' => '',
         'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
+            '',
+        'Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view.' =>
             '',
         'List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions.' =>
             '',

@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.356098344849751;
+    $Self->{Completeness}        = 0.356041131105398;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -8083,6 +8083,8 @@ Opdater venligst dit framework først!',
             '',
         'Loader module registration for the public interface.' => '',
         'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
+            '',
+        'Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view.' =>
             '',
         'List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions.' =>
             '',
