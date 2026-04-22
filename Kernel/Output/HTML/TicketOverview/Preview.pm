@@ -624,11 +624,6 @@ sub _Show {
     }
 
     $Param{IsITSMIncidentProblemManagementInstalled} = $Self->{IsITSMIncidentProblemManagementInstalled};
-    my %AdditionalObjectData;
-    if ( $Self->{IsITSMIncidentProblemManagementInstalled} ) {
-        %AdditionalObjectData = %Ticket;
-    }
-
     $LayoutObject->Block(
         Name => 'DocumentContent',
         Data => {
@@ -638,7 +633,6 @@ sub _Show {
             PillClass         => $PillClass,
             AdditionalClasses => $AdditionalClasses,
             Created           => $Ticket{Created},                 # use value from ticket, not article
-            %AdditionalObjectData,
         },
     );
 

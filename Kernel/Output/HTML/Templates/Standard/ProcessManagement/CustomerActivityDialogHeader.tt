@@ -21,6 +21,7 @@
             <input type="hidden" name="AJAXDialog" id="AJAXDialog" value="[% Data.AJAXDialog | html %]"/>
             <input type="hidden" name="IsMainWindow" id="IsMainWindow" value="[% IF !Data.TicketID %]1[% END %]"/>
             <input type="hidden" name="FormID" value="[% Data.FormID | html %]"/>
+            <input type="hidden" name="LinkTarget" value="[% Data.LinkTarget | html %]"/>
             <div class="LayoutPopup ARIARoleMain no-margin">
 [% RenderBlockStart("Header") %]
                 <div class="PopupHeader">

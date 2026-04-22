@@ -11,6 +11,7 @@ package Kernel::System::PostMaster::Filter::DetectAttachment;
 
 use strict;
 use warnings;
+use utf8;
 
 our @ObjectDependencies = (
     'Kernel::System::Log',
@@ -52,6 +53,10 @@ sub Run {
 
     my $AttachmentCount = 0;
     for my $Attachment (@Attachments) {
+
+        # We'll clean up any leftover surrogates later before creating articles.
+        # They shouldn't be there to begin with but won't break anything either.
+        no warnings 'surrogate';    ## no critic
 
         # Do not flag inline images as attachments, see bug#14949 for more information.
         my $AttachmentInline = 0;

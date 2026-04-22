@@ -535,7 +535,9 @@ sub StandardTemplateImport {
         return {
             Success => 0,
             Message =>
-                Translatable("Couldn't read standard template configuration file. Please make sure the file is valid."),
+                Translatable(
+                "Couldn't read standard template configuration file. Please make sure the file is valid."
+                ),
         };
     }
 

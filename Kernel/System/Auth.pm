@@ -160,6 +160,9 @@ sub Auth {
         # return on no config setting
         next COUNT if !$Self->{"AuthBackend$Count"};
 
+        # SAML: Only the requested auth backend is checked
+        next COUNT if $Param{IsSAMLLogin} && $Param{Count} ne $Count;
+
         # check auth backend
         $User = $Self->{"AuthBackend$Count"}->Auth(%Param);
 

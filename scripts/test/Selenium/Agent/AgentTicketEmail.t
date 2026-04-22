@@ -274,7 +274,7 @@ $Selenium->RunTest(
         $Selenium->execute_script("\$('li.ui-menu-item:contains($TestData[0]->{UserLogin})').click()");
         $Selenium->WaitFor(
             JavaScript =>
-                'return typeof($) === "function" && $("#CustomerSelected_1").length && !$(".AJAXLoader:visible").length'
+                'return typeof($) === "function" && $("#CustomerKey_1").length && !$(".AJAXLoader:visible").length'
         );
 
         $SignatureText = "Customer First Name: $TestData[0]->{UserFirstName}";

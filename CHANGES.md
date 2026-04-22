@@ -1,7 +1,116 @@
-# 7.3.1 2025-??-??
+# 7.3.2 2026-??-??
+ - 2026-04-21 Fixed: Process management: Field help tooltip not fully visible for long descriptions.
+ - 2026-04-21 Changed: Renamed system configuration definition for Daemon::Log::RotationType to Znuny.
+ - 2026-04-15 Fixed: Field order in "ticket data" card.
+ - 2026-04-13 Changed: Ticket list views for "escalation", "locked", "mention", "owner", "responsible", "status" and "watch" now each have a config option TicketSearchWithAdminUser to decide if the tickets will be searched with admin user or the logged in user.
+ - 2026-04-10 Fixed: Sorting in ticket overview modes "Medium" and "Preview" throws an error. Thanks for reporting to @przemekrzyzanski-cmyk. [#779](https://github.com/znuny/Znuny/issues/779)
+ - 2026-04-13 Fixed: Link text does not fit button size in dialog AdminGenericInterfaceTransportHTTPREST.
+ - 2026-04-10 PostMaster/Filter/ExternalTicketNumberRecognition: Added support of the SysConfig setting “Ticket::SubjectFormat”.
+ - 2026-04-08 Fixed: Dashboard queue column filter offers inaccessible queues. Thanks to @BuilderNSV for reporting the issue. [#603](https://github.com/znuny/Znuny/issues/603)
+ - 2026-04-02 Fixed: StandardTemplates are not usable in AgentTicketEmailOutbound, AgentTicketPhoneOutbound and AgentTicketPhoneInbound (TicketPhoneCommon). Thanks for reporting to @AVONON-DST (Dennis) [#776](https://github.com/znuny/Znuny/issues/776).
+ - 2026-04-02 Changed: Log level of "missing user" message in HTTP basic auth.
+ - 2026-04-02 Added: A link to CUIC to edit customer user `AgentCustomerUserInformationCenter::MainMenu###010-EditCustomerUser`.
+ - 2026-04-02 Fixed: Visibility of dynamic fields in some views.
+ - 2026-04-01 Fixed: Broken File list for non-installed packages. Thanks for reporting to @urbalazs (Balázs Úr) [#771](https://github.com/znuny/Znuny/issues/771).
+ - 2026-03-31 Fixed: Template selection in agent ticket details view (AgentTicketZoom) does not open when clicking "Reply" or "Reply All".
+ - 2026-03-31 Changed: AgentTicketMerge: Card "Inform Sender" will initially be shown collapsed and disabled. Will be enabled automatically when user expands the card.
+ - 2026-03-31 Fixed: Missing email security options in dialog for new email ticket (AgentTicketEmail).
+ - 2026-03-25 Fixed: AgentTicketOwnerView missing in dynamic field screen selection.
+ - 2026-03-24 Fixed: iFrame elements reuse the same ID in CustomerTicketZoom.
+
+# 7.3.1 2026-03-25
+ - 2026-03-20 Fixed: Misaligned column filter dropdowns in TableSmall views.
+ - 2026-03-20 Fixed: Replaced EncodeInput() method in KS:Encode with safe version.
+ - 2026-03-20 Fixed: Activities are not marked as seen after clicking an activity entry.
+ - 2026-03-19 Fixed: Kernel::System::HTMLUtils::Safety can be bypassed by using leading zeroes in entities.
+ - 2026-03-19 Fixed: Form submit not being triggered when pressing Enter after entering the new draft's title.
+ - 2026-03-18 Fixed: Misleading popup message when opening more than one ticket from overviews by using a shortcut to open it in a new tab/window.
+ - 2026-03-18 Fixed: Issue with invisible ticket pagination count when there is only one page.
+ - 2026-03-17 Changed mentions feature to work only if symbol before trigger symbol does not exist or is a space character - mostly to prevent displaying selection options while typing e-mail address. Thanks for reporting to @Dherlou. [#738](https://github.com/znuny/Znuny/issues/738).
+ - 2026-03-09 Added Znuny XSLT helper and update mappings to use it.
+ - 2026-03-06 Fixed: Text in the dropdown menu of the dashboard is overlaid by other text in mobile mode.
+ - 2026-03-05 Integrated package Znuny-AdditionalTicketAttributeSelection.
+ - 2026-02-26 Changed: Reply function in agent ticket compose dialog now is not available anymore if the article is internal and was created by an agent or if the article was created by the system.
+ - 2026-02-26 Fixed: Missing locale sensitivity in VacationDay config type.
+ - 2026-02-24 Added Sender column support for dashboard ticket widgets.
+ - 2026-02-20 Fixed: problems with leftover UTF-16 surrogates in incoming UTF-8 text.
+ - 2026-02-18 Improved commandline parameter parsing in Admin::Article::StorageSwitch console command.
+ - 2026-02-17 Added parameter FormID to AJAX requests of autocompletion modules (needed for inserting FAQ entries with inline images into RTE via autocompletion).
+ - 2026-02-11 Fixed: Issue with sorting dropdown elements when setting Ticket::Frontend::AccountTimeType is set to Dropdown.
+ - 2026-02-10 Fixed: Console command Admin::Group::UserLink and Admin::Group::RoleLink with inconsistent available permissions. Thanks for reporting to @BuilderNSV. [#756](https://github.com/znuny/Znuny/issues/756).
+ - 2026-02-10 Fixed: Sender address for process tickets is not assigned properly in CustomerInterface.
+ - 2026-02-09 Fixed: The attachment dialog displays a preview for non-presentable items. Removed application/octet-stream.
+ - 2026-02-06 Added AgentSession module to store UserClosedMessages in current UserSession (AuthSession). This allows previously defined keys to be set in the session.
+ - 2026-02-02 Fixed: Restored breadcrumb rendering on the AdminTicketAttributeRelations Edit and Add views.
+ - 2026-02-02 Fixed: SLA cache now clears after service assignments change so data stays current. Thanks to @dkmonaghan for reporting [#643](https://github.com/znuny/Znuny/issues/643).
+ - 2026-01-26 Fixed issues after GUI redesign: Added widget functions to AgentTicketActionCommon. Fixed unlock notification after GUI redesign. Added UndoClosePopup class. Change to "Unlock and close popup" button.
+ - 2026-01-23 Fixed: Znuny re-directs after login to default view even if there is specified ExternalURL parameter with the Action encoded in the link.
+ - 2026-01-23 Added preview and download function to AttachmentList.
+ - 2026-01-23 Improved handling of read-only fields for the backend of CustomerUser::DB and CustomerCompany::DB.
+ - 2026-01-23 System configuration: Added `NotificationEmailDefaultTemplate` option. Thanks to Paweł Bogusławski (@pboguslawski) [PR#382](https://github.com/znuny/Znuny/pull/382).
+ - 2026-01-23 Increased length of the password column for users, customer_user, and mail_account.
+ - 2026-01-22 Fixed: Process ticket submission validates Responsible field client-side.
+ - 2026-01-22 Fixed: URL parameters were not used to pre-fill new email and phone ticket forms.
+ - 2026-01-21 Fixed: The tags <OTRS_TICKET> and <OTRS_MERGE_TO_TICKET> can only be used once in the text of the configuration Ticket::Frontend::AutomaticMergeText. The 'global' flag is missing. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#753](https://github.com/znuny/Znuny/pull/753)
+ - 2026-01-19 Fixed: Customer interface uses layout "PopupClose" function that loads agent interface header and footer which results in referencing features that are not supported - such as popup profiles. Added CustomerPopupClose function.
+ - 2026-01-19 Fixed: Missing translation for 'last-search' in ToolBar/TicketSearchProfile.
+ - 2026-01-13 Fixed: Date check regex for config option ICSParser::StartDate actually matches YYYYMMDD.
+ - 2025-12-19 Fixed: Dynamic field labels are capitalized via CSS in AgentTicketProcess.
+ - 2025-12-16 Fixed: In certain settings, only greyscale can be selected in the color picker. Updated thirdparty lib jscolor to 2.5.2. Alters database table calendar and article_color size of column color to 25.
+ - 2025-12-15 Sector Nord AG: Fixed: Wrong Subaction for TranslationDeployment in AdminTranslation. Thanks to @LuBroering (Lukas Bröring Sector Nord AG) [PR#741](https://github.com/znuny/Znuny/pull/741).
+ - 2025-12-12 Fixed typo in '--regenerate' command option 'Dev/Tools/TranslationsUpdate'. Thanks to @urbalazs (Balázs Úr) [PR#751](https://github.com/znuny/Znuny/pull/751).
+ - 2025-12-12 Sector Nord AG: ArticleRender - Added title to ArticleFields for MIMEBase. Thanks to @LuBroering (Lukas Bröring Sector Nord AG) [PR#577](https://github.com/znuny/Znuny/pull/577).
+ - 2025-12-11 Added support for SAML authentication.
+ - 2025-12-10 CVE-2025-59393: Support bundle generator: Improved password masking in configuration dumps using ValueType metadata.
+ - 2025-12-09 Fixed: Issue with cache being applied incorrectly to "My last changed tickets" widget.
+ - 2025-12-09 Migration refactoring: Added new Component 'FollowUp'. Migration order: CheckPreviousRequirement, Run and FollowUp. Improved Steps for CheckPreviousRequirement. Removed empty CheckPreviousRequirement and Run functions.
+ - 2025-12-09 Integrated package Znuny-AgentTicketActionCommonCustomer.
+ - 2025-12-09 Fixed: Article overview text difficult to read in Dark Skin due to double filter inversion.
+ - 2025-12-08 Console command 'Admin::Package::RepositoryList' now indicates which of the displayed packages are installed.
+ - 2025-12-01 Integrated package Znuny-MultiSendmail.
+ - 2025-11-28 Added new GUI-Redesign. Thanks to Tim Binder stbt.de.
+ - 2025-11-26 Fixed: MariaDB/MySQL throwing error regarding foreign keys when converting character set of tables to UTF8MB4.
+ - 2025-11-25 CVE-2025-52204: Fixed XSS issue with session ID in URL parameter. Thanks to Miguel P. for reporting this issue.
+ - 2025-11-25 AdminSystemConfiguration: Added "Quick Deploy" in SysConfig to apply pending changes faster.
+ - 2025-11-21 Fixed: Wrong description text in personal preference. Thanks for reporting to @BuilderNSV. [#712](https://github.com/znuny/Znuny/issues/712).
+ - 2025-11-21 Fixed: Resource module displays deactivated Agents.
+ - 2025-11-19 Fixed: Checkbox to optionally create an article in AgentTicketActionCommon views does not collapse article widget after enabling it.
+ - 2025-11-17 Fixed: Added rule to fix Firefox browser that does not wrap overflow text by default while displaying article content in AgentTicketZoom.
+ - 2025-11-13 Changed ticket zoom information widget to count only open tickets with the same customer after enabling config option Ticket::Frontend::ZoomCustomerTickets.
+ - 2025-11-13 Fixed: Unexpected rate limit is being applied when config option SendmailModule::RateLimit is disabled.
+ - 2025-11-12 Sped up UUID creation for DBCRUD modules.
+ - 2025-11-07 Added configurable filter for ticket search to ticket merge dialog (AgentTicketMerge).
+ - 2025-11-06 Fixed: CustomerShortcutIconCustom config not working. Thanks to Daylton Rodrigues (@dayltonr) for reporting. [#737](https://github.com/znuny/Znuny/issues/737).
+ - 2025-11-06 Fixed: Images in articles are inverted in Dark Skin. Thanks for reporting to @Vocta1310 [#724](https://github.com/znuny/Znuny/issues/724).
+ - 2025-11-05 Number of stored activities per user is now limited for performance reasons. User activities will now be loaded asynchronously.
+ - 2025-11-05 Fixed: No styles when printing process in the admin interface.
+ - 2025-11-05 Fixed: Customer ticket details screen now redirects to overview of tickets if a ticket is accessed without permissions.
+ - 2025-11-05 Integrated package Znuny-CopyTicketNumber.
+ - 2025-10-31 Fixed: The link to a specific article in a ticket does not work if users have different settings for “Show all articles”. Article links now handle both display modes: 'Show one article' and 'Show all articles'.
+ - 2025-10-31 Fixed: ProcessPrint. When printing the process, it produces empty results.
+ - 2025-10-29 Fixed: Ticket age was displayed in seconds (instead of human readable) in agent ticket zoom (when ticket information widget was configured as asynchronous) and ticket list (view mode L).
+ - 2025-10-29 Fixed: Issue with popup redirections after submitting process category form.
+ - 2025-10-29 Fixed: Parameter error in Kernel::System::Web::UploadCache does not try to dereference undef.
+ - 2025-10-28 Fixed: Breadcrumb now loads immediately when switching System Configuration groups via Ajax.
+ - 2025-10-21 Fixed: Issue with "Title" field on customer login screen where it wasn't set for new customer user at all.
+ - 2025-10-21 Added wildcard `*` support to system configuration setting search.
+ - 2025-10-21 Fixed: Console commands are not loaded/listed if they are located in the /Custom directory.
+ - 2025-10-20 Fixed: Removed unnecessary synchronization of hidden text area with RTE instance due to performance issues. Thanks for reporting to @PrimeYeti. [#721](https://github.com/znuny/Znuny/issues/721).
+ - 2025-10-14 Added new ToolBarModule 161-Ticket::AgentTicketProcessCategory.
+ - 2025-10-02 PostMaster: Assign multiselect dynamic fields. Thanks to Christian Ullrich (@chrullrich). [PR#699](https://github.com/znuny/Znuny/pull/699)
+ - 2025-10-02 Sector Nord AG: Fixed: Web Channel Actions. Thanks to @ArthurRitscher (Arthur Ritscher Sector Nord AG) [PR#717](https://github.com/znuny/Znuny/pull/717). Thanks for reporting to @MadsDane [#729](https://github.com/znuny/Znuny/issues/729).
+ - 2025-10-01 Fixed: Improved error logging when fetching emails.
+ - 2025-10-01 Fixed: RichTextEditor uses wrong Instance in Core.Agent.TicketAction.js.
+ - 2025-09-29 CVE-2025-59490: Fixed: XSS issue with unfiltered URL parameters given to backend.
+ - 2025-09-29 Fixed: Source view for richtext editor has been deactivated in customer frontend due to possibility to inject arbitrary code.
+ - 2025-09-25 Fixed: For security reasons, detailed error messages are now not shown anymore in the GUI.
+ - 2025-09-25 Fixed: Queue selection in customer ticket dialog now cannot be set empty anymore.
  - 2025-09-25 Sector Nord AG: Fixed misplaced attachment tooltip. Thanks to @LuBroering (Lukas Bröring Sector Nord AG) [PR#692](https://github.com/znuny/Znuny/pull/692).
  - 2025-09-25 SectorNord AG: Fixed: Problem filtering by Owner in the ticket view. Thanks for reporting to @giovanna-bolsoni [#698](https://github.com/znuny/Znuny/issues/698). Thanks to @LuBroering (Lukas Bröring Sector Nord AG) [PR#703](https://github.com/znuny/Znuny/pull/703).
  - 2025-09-25 Added 'Prio' Param to AgentTicketZoom MenuModules for individual sorting. Thanks for reporting and fixing to @itweserems [#646](https://github.com/znuny/Znuny/issues/646) [PR#647](https://github.com/znuny/Znuny/pull/647).
+ - 2025-09-23 Fixed: Improved content security policy HTTP header.
+ - 2025-09-15 Fixed: Only able to delete Signatures, Salutations and Auto Responses after accepting popup.
+ - 2025-06-30 Improved date formatting on language level.
 
 # 7.2.3 2025-09-24
  - 2025-09-22 Fixed: Fix for installer email setting checks lead to issues with sending emails.
@@ -47,6 +156,7 @@
  - 2025-07-04 Upgraded CKEditor to version 5.0.
  - 2025-07-03 Fixed: Admin interface of generic agent loses some of the submitted form data if any errors occur.
  - 2025-07-02 Added support for setting customer user preferences via AJAX request.
+ - 2025-07-02 Added import/export/copy function for postmaster filters and generic agents.
  - 2025-07-02 Fixed: CustomerProcessTicket is not fully styled.
  - 2025-06-30 Added support for process preferences.
  - 2025-06-24 Fixed: Wrong otrs.Daemon.pl exit code after valid termination. Thanks to Paweł Bogusławski (@pboguslawski). [#401](https://github.com/znuny/Znuny/pull/401)
@@ -483,6 +593,48 @@
  - 2022-08-22 Core.UI.InputFields.js - Changed the behaviour of the Core.UI.InputFields.js. Now no fields are automatically enlarged or reduced.
  - 2022-08-08 Admin - Added counter of AdminSettingPages per widget and additional focus by filter.
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
+
+# 6.5.19 2026-03-25
+ - 2026-03-23 CVE-2025-59393: Support bundle generator: Improved password masking in configuration dumps using ValueType metadata.
+ - 2026-03-20 Fixed: Replaced EncodeInput() method in KS:Encode with safe version.
+ - 2026-03-19 Fixed: Kernel::System::HTMLUtils::Safety can be bypassed by using leading zeroes in entities.
+ - 2026-03-19 Fixed: CustomerUser article iframe #n>1 not resizing when all articles shown.
+ - 2026-03-18 Fixed: Misleading popup message when opening more than one ticket from overviews by using a shortcut to open it in a new tab/window.
+ - 2026-03-02 Changed: Reply function in agent ticket compose dialog now is not available anymore if the article is internal and was created by an agent or if the article was created by the system.
+ - 2026-02-24 Added Sender column support for dashboard ticket widgets.
+ - 2026-02-20 Fixed: problems with leftover UTF-16 surrogates in incoming UTF-8 text.
+ - 2026-02-17 Added parameter FormID to AJAX requests of autocompletion modules (needed for inserting FAQ entries with inline images into RTE via autocompletion).
+ - 2026-02-11 Fixed: Issue with sorting dropdown elements when setting Ticket::Frontend::AccountTimeType is set to Dropdown.
+ - 2026-02-10 Fixed: Console command Admin::Group::UserLink and Admin::Group::RoleLink with inconsistent available permissions.
+ - 2026-02-10 Fixed: Sender address for process tickets is not assigned properly in CustomerInterface.
+ - 2026-01-26 Fixed: Znuny re-directs after login to default view even if there is specified ExternalURL parameter with the Action encoded in the link.
+ - 2026-01-23 Improved handling of read-only fields for the backend of CustomerUser::DB and CustomerCompany::DB.
+ - 2026-01-23 Increased length of the password column for users, customer_user, and mail_account.
+ - 2026-01-23 Fixed: TemplateGenerator is broken when using RichText.
+ - 2026-01-22 Fixed: Customer interface uses layout "PopupClose" function that loads agent interface header and footer which results in referencing features that are not supported - such as popup profiles. Added CustomerPopupClose function.
+ - 2026-01-21 Fixed: The tags <OTRS_TICKET> and <OTRS_MERGE_TO_TICKET> can only be used once in the text of the configuration Ticket::Frontend::AutomaticMergeText. The 'global' flag is missing. Thanks to Tim Püttmanns (@tipue-dev), maxence. [PR#753](https://github.com/znuny/Znuny/pull/753)
+ - 2026-01-13 Fixed: Date check regex for config option ICSParser::StartDate actually matches YYYYMMDD.
+ - 2025-12-12 Sector Nord AG: Added support for multiple RichText instances. Thanks to @LuBroering (Lukas Bröring Sector Nord AG) [PR#736](https://github.com/znuny/Znuny/pull/736).
+ - 2025-11-28 Changed ticket zoom information widget to count only open tickets with the same customer after enabling config option Ticket::Frontend::ZoomCustomerTickets.
+ - 2025-11-25 CVE-2025-52204: Fixed XSS issue with session ID in URL parameter. Thanks to Miguel P. for reporting this issue.
+ - 2025-11-25 Fixed: Unexpected rate limit is being applied when config option SendmailModule::RateLimit is disabled.
+ - 2025-11-24 Fixed: The link to a specific article in a ticket does not work if users have different settings for “Show all articles”. Article links now handle both display modes: 'Show one article' and 'Show all articles'.
+ - 2025-11-13 Sped up UUID creation for DBCRUD modules.
+ - 2025-11-12 Fixed: Removed not needed HTML quoting of data in template generator back-end.
+ - 2025-11-10 Fixed: Issue with cache being applied incorrectly to "My last changed tickets" widget.
+ - 2025-11-05 Fixed: No styles when printing process in the admin interface.
+ - 2025-11-04 Added configurable filter for ticket search to ticket merge dialog (AgentTicketMerge).
+ - 2025-10-29 Fixed: Ticket age was displayed in seconds (instead of human readable) in agent ticket zoom (when ticket information widget was configured as asynchronous) and ticket list (view mode L).
+ - 2025-10-29 Fixed: Parameter error in Kernel::System::Web::UploadCache does not try to dereference undef.
+ - 2025-10-22 Added console command Maint::Ticket::Unwatch.
+ - 2025-10-21 Fixed: Issue with "Title" field on customer login screen where it wasn't set for new customer user at all.
+ - 2025-10-21 Fixed: Console commands are not loaded/listed if they are located in the /Custom directory.
+ - 2025-10-01 Fixed: Improved error logging when fetching emails.
+ - 2025-09-25 Fixed: Customer ticket details screen now redirects to overview of tickets if a ticket is accessed without permissions.
+ - 2025-09-23 Fixed: Improved content security policy HTTP header.
+ - 2025-09-16 Fixed: For security reasons, detailed error messages are now not shown anymore in the GUI.
+ - 2025-09-15 Fixed: Source view for richtext editor has been deactivated in customer frontend due to possibility to inject arbitrary code.
+ - 2025-09-15 CVE-2025-59490: Fixed: XSS issue with unfiltered URL parameters given to backend.
 
 # 6.5.18 2025-09-24
  - 2025-09-22 Fixed: Fix for installer email setting checks lead to issues with sending emails.

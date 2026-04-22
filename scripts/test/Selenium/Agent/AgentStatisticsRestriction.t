@@ -148,7 +148,7 @@ $Selenium->RunTest(
             );
 
             # Verify unknown CustomerID that is not from DB is included in selection when config
-            #   'IncludeUnknownTicketCustomers' is enabled. See bug#14869 (https://bugs.otrs.org/show_bug.cgi?id=14869).
+            # 'IncludeUnknownTicketCustomers' is enabled.
             $Self->Is(
                 $Selenium->execute_script(
                     "return \$('#RestrictionsCustomerID option[Value=$UnknownCustomerID]').length;"

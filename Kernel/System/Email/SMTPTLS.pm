@@ -35,7 +35,7 @@ sub _GetStartTLSOptions {
     my ( $Self, %Param ) = @_;
 
     my %StartTLSOptions = (
-        SSL_verify_mode => 0,
+        SSL_verify_mode => $Self->{SkipSSLVerification} ? 0 : 1,
     );
 
     return %StartTLSOptions;

@@ -32,6 +32,16 @@ Uninstalls code that was merged from packages into Znuny.
 sub Run {
     my ( $Self, %Param ) = @_;
 
+    my @PackageNames = (
+        'Znuny-MultiSendmail',
+        'Znuny-CopyTicketNumber',
+        'Znuny-AgentTicketActionCommonCustomer',
+        'Znuny4OTRS-AdditionalTicketAttributeSelection',
+        'Znuny-AdditionalTicketAttributeSelection',
+        'Znuny-Bugfix1463',
+        'Znuny-Bugfix-7_3_1',
+    );
+
     my $CacheObject   = $Kernel::OM->Get('Kernel::System::Cache');
     my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
 
@@ -44,24 +54,6 @@ sub Run {
     );
     $CacheObject->CleanUp(
         Type => 'XMLParse',
-    );
-
-    my @PackageNames = (
-        'Znuny-AdminValidFilter',
-        'Znuny4OTRS-AdminValidFilter',
-        'Znuny-ArticleColors',
-        'Znuny4OTRS-ArticleColors',
-        'Znuny-CustomPriorityColor',
-        'Znuny4OTRS-CustomPriorityColor',
-        'Znuny-OAuth2ClientCredentialsFlow',
-        'Znuny-DynamicFieldAdminAutoConfig',
-        'Znuny4OTRS-DynamicFieldAdminAutoConfig',
-        'Znuny-MarkTicketSeenUnseen',
-        'Znuny4OTRS-MarkTicketSeenUnseen',
-        'Znuny-Translations',
-        'Znuny4OTRS-Translations',
-        'Znuny-MSGraphMail',
-        'Znuny-BugfixIssue1206',
     );
 
     PACKAGENAME:

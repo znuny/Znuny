@@ -173,6 +173,8 @@ sub Run {
         $SortByS = 'Age';
     }
 
+    my $UserIDForSearch = $Config->{TicketSearchWithAdminUser} ? 1 : $Self->{UserID};
+
     my %Filters = (
         All => {
             Name   => Translatable('All'),
@@ -180,7 +182,7 @@ sub Run {
             Search => {
                 OrderBy    => $OrderBy,
                 SortBy     => $SortByS,
-                UserID     => 1,
+                UserID     => $UserIDForSearch,
                 Permission => 'ro',
             },
         },
@@ -194,7 +196,7 @@ sub Run {
                 TicketFlagUserID => $Self->{UserID},
                 OrderBy          => $OrderBy,
                 SortBy           => $SortByS,
-                UserID           => 1,
+                UserID           => $UserIDForSearch,
                 Permission       => 'ro',
             },
         },
@@ -248,7 +250,6 @@ sub Run {
             Limit    => $Limit,
             Result   => 'ARRAY',
             TicketID => \@MentionedTicketIDs,
-            UserID   => 1,                     # Needed if user doesn't have permissions for ticket but is mentioned in.
         );
 
         @ViewableTickets = $TicketObject->TicketSearch(
@@ -257,7 +258,6 @@ sub Run {
             Result   => 'ARRAY',
             Limit    => 1_000,
             TicketID => \@MentionedTicketIDs,
-            UserID   => 1,                     # Needed if user doesn't have permissions for ticket but is mentioned in.
         );
     }
 

@@ -217,7 +217,7 @@ for my $Test (@Tests) {
     );
 }
 
-# Check replacing time attribute tags (see bug#13865 - https://bugs.otrs.org/show_bug.cgi?id=13865).
+# Check replacing time attribute tags.
 # Create datetime dynamic field.
 my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
 my $DynamicFieldName   = "DateTimeDF$RandomID";

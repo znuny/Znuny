@@ -216,12 +216,21 @@ $Selenium->RunTest(
                 "return typeof(\$) === 'function' && \$(\"#ColumnFilterQueue0120-TicketNew option[value='$QueueID']\").length"
         );
 
-        $Selenium->find_element( '.InputField_Search',     'css' )->send_keys($QueueName);
-        $Selenium->find_element( "li[data-id='$QueueID']", 'css' )->click();
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$(".Loading").length' );
+        $Selenium->find_element( '.InputField_Search', 'css' )->send_keys($QueueName);
+        $Selenium->WaitFor(
+            JavaScript =>
+                "return typeof(\$) === 'function' && \$(\"li[data-id='$QueueID']\").length > 0"
+        );
 
-     # Verify ticket with different priority is present on screen with filter, it's still on the first page.
-     # See bug#11422 ( http://bugs.otrs.org/show_bug.cgi?id=11422 ), there is no change in order when activating filter.
+        # Click on queue item.
+        # Need to click 3 times to ensure the item is selected.
+        $Selenium->execute_script("\$(\"li[data-id='$QueueID'] > a\").trigger('click');");
+        $Selenium->execute_script("\$(\"li[data-id='$QueueID'] > a\").trigger('click');");
+        $Selenium->execute_script("\$(\"li[data-id='$QueueID'] > a\").trigger('click');");
+
+        sleep 1;
+
+        # Verify ticket with different priority is present on screen with filter, it's still on the first page.
         $Self->True(
             $Selenium->find_element("//a[contains(\@title, \'Queue, filter active' )]"),
             "Filter for queue column is active",

@@ -136,7 +136,7 @@
                         </fieldset>
 
                         <fieldset class="section-block">
-                            <h2>[% Translate("Dynamic Info") | html %]</h2>
+                            <h2>[% Translate("Dynamic Fields") | html %]</h2>
                             <div class="active-inner-cols">
 [% RenderBlockStart("DynamicField") %]
                                 <div class="field-wrapper col-wide-50 col-desktop-50 col-tablet-50">

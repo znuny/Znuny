@@ -345,8 +345,6 @@ $Selenium->RunTest(
             }
         }
 
-        # Test bug #14473 (https://bugs.otrs.org/show_bug.cgi?id=14473).
-        # Config 'Ticket::Frontend::Overview::PreviewArticleSenderTypes' does not work.
         $Selenium->VerifiedGet(
             "${ScriptAlias}index.pl?Action=AgentTicketQueue;QueueID=$Queues[0]->{QueueID};View=Preview;Filter=Unlocked"
         );

@@ -246,7 +246,7 @@ $Selenium->RunTest(
         # Check that there is a notification about no packages.
         my $Notification = 'No packages found in selected repository. Please check log for more info!';
         $Self->True(
-            $Selenium->execute_script("return \$('.MessageBox.Warning p:contains($Notification)').length"),
+            $Selenium->execute_script("return \$('.messageWarning .alertContent:contains($Notification)').length"),
             "$Notification - notification is found."
         );
     }

@@ -84,7 +84,7 @@ my @Tests = (
                 Write => 'Customers',
             },
             {
-                # Remove first item (see https://bugs.otrs.org/show_bug.cgi?id=14137).
+                # Remove first item.
                 Click => '.Setting > .Array > .ArrayItem:nth-of-type(1) > .RemoveButton',
             },
             {
@@ -980,7 +980,7 @@ $Selenium->RunTest(
 
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminSystemConfigurationGroup;RootNavigation=Sample;");
 
-        # Check LinkOption field value (see bug#14575 - https://bugs.otrs.org/show_bug.cgi?id=14575).
+        # Check LinkOption field value.
         $Self->Is(
             $Selenium->find_element( "input[id*=LinkOption]", "css" )->get_value(),
             'onclick="OpenDialog(\'AgentTest\')"',

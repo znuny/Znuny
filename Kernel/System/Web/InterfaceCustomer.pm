@@ -241,6 +241,19 @@ sub Run {
             Raw   => 1
         ) || '';
 
+        #
+        # SAML
+        #
+        my $IsSAMLLogin  = $ParamObject->GetParam( Param => 'IsSAMLLogin' );
+        my $Count        = $ParamObject->GetParam( Param => 'Count' ) // '';
+        my $SAMLResponse = $ParamObject->GetParam( Param => 'SAMLResponse' );
+
+        # The request ID stored in the cookie. Will be evaluated when the response is checked.
+        my $ExpectedSAMLRequestID;
+        if ( $IsSAMLLogin && $SAMLResponse ) {
+            $ExpectedSAMLRequestID = $ParamObject->GetCookie( Key => "CustomerUserSAMLRequestID$Count" );
+        }
+
         # create AuthObject
         my $AuthObject = $Kernel::OM->Get('Kernel::System::CustomerAuth');
 
@@ -249,6 +262,12 @@ sub Run {
             User           => $PostUser,
             Pw             => $PostPw,
             TwoFactorToken => $PostTwoFactorToken,
+
+            # The following are SAML specific
+            IsSAMLLogin           => $IsSAMLLogin,
+            Count                 => $Count,
+            SAMLResponse          => $SAMLResponse,
+            ExpectedSAMLRequestID => $ExpectedSAMLRequestID,
         );
 
         my $Expires = '+' . $ConfigObject->Get('SessionMaxTime') . 's';
@@ -769,11 +788,16 @@ sub Run {
             return;
         }
 
+        my $UserTitleMandatory;
+
         # get params
         my %GetParams;
         for my $Entry ( @{ $ConfigObject->Get('CustomerUser')->{Map} } ) {
-            $GetParams{ $Entry->[0] } = $ParamObject->GetParam( Param => $Entry->[1] )
+            $GetParams{ $Entry->[0] } = $ParamObject->GetParam( Param => $Entry->[0] )
                 || '';
+            if ( !defined $UserTitleMandatory && $Entry->[0] && $Entry->[0] eq 'UserTitle' ) {
+                $UserTitleMandatory = $Entry->[4];
+            }
         }
         $GetParams{ValidID} = 1;
 
@@ -803,10 +827,11 @@ sub Run {
                     Title   => 'Login',
                     Message =>
                         Translatable('This e-mail address already exists. Please log in or reset your password.'),
-                    UserTitle     => $GetParams{UserTitle},
-                    UserFirstname => $GetParams{UserFirstname},
-                    UserLastname  => $GetParams{UserLastname},
-                    UserEmail     => $GetParams{UserEmail},
+                    UserTitle          => $GetParams{UserTitle},
+                    UserFirstname      => $GetParams{UserFirstname},
+                    UserLastname       => $GetParams{UserLastname},
+                    UserEmail          => $GetParams{UserEmail},
+                    UserTitleMandatory => $UserTitleMandatory,
                 ),
             );
             return;
@@ -866,10 +891,11 @@ sub Run {
                     Title   => 'Login',
                     Message =>
                         Translatable('This email address is not allowed to register. Please contact support staff.'),
-                    UserTitle     => $GetParams{UserTitle},
-                    UserFirstname => $GetParams{UserFirstname},
-                    UserLastname  => $GetParams{UserLastname},
-                    UserEmail     => $GetParams{UserEmail},
+                    UserTitle          => $GetParams{UserTitle},
+                    UserFirstname      => $GetParams{UserFirstname},
+                    UserLastname       => $GetParams{UserLastname},
+                    UserEmail          => $GetParams{UserEmail},
+                    UserTitleMandatory => $UserTitleMandatory,
                 ),
             );
 
@@ -897,12 +923,13 @@ sub Run {
 
             $LayoutObject->Print(
                 Output => \$LayoutObject->CustomerLogin(
-                    Title         => 'Login',
-                    Message       => Translatable('Customer user can\'t be added!'),
-                    UserTitle     => $GetParams{UserTitle},
-                    UserFirstname => $GetParams{UserFirstname},
-                    UserLastname  => $GetParams{UserLastname},
-                    UserEmail     => $GetParams{UserEmail},
+                    Title              => 'Login',
+                    Message            => Translatable('Customer user can\'t be added!'),
+                    UserTitle          => $GetParams{UserTitle},
+                    UserFirstname      => $GetParams{UserFirstname},
+                    UserLastname       => $GetParams{UserLastname},
+                    UserEmail          => $GetParams{UserEmail},
+                    UserTitleMandatory => $UserTitleMandatory,
                 ),
             );
             return;
@@ -960,10 +987,11 @@ sub Run {
         # login screen
         $LayoutObject->Print(
             Output => \$LayoutObject->CustomerLogin(
-                Title       => 'Login',
-                Message     => $AccountCreatedMessage,
-                User        => $GetParams{UserLogin},
-                MessageType => 'Success',
+                Title              => 'Login',
+                Message            => $AccountCreatedMessage,
+                User               => $GetParams{UserLogin},
+                MessageType        => 'Success',
+                UserTitleMandatory => $UserTitleMandatory,
             ),
         );
         return 1;
@@ -997,10 +1025,20 @@ sub Run {
             return;
         }
 
+        my $UserTitleMandatory;
+        ENTRY:
+        for my $Entry ( @{ $ConfigObject->Get('CustomerUser')->{Map} } ) {
+            if ( $Entry->[0] && $Entry->[0] eq 'UserTitle' ) {
+                $UserTitleMandatory = $Entry->[4];
+                last ENTRY;
+            }
+        }
+
         # login screen
         $LayoutObject->Print(
             Output => \$LayoutObject->CustomerLogin(
-                Title => 'Login',
+                Title              => 'Login',
+                UserTitleMandatory => $UserTitleMandatory,
                 %Param,
             ),
         );

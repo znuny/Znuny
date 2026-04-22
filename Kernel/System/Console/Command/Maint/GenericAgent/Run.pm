@@ -50,13 +50,13 @@ sub Configure {
     );
     $Self->AddOption(
         Name        => 'debug',
-        Description => "Print debug info to the OTRS log.",
+        Description => "Print debug info to the Znuny log.",
         Required    => 0,
         HasValue    => 0,
     );
 
     $Self->AdditionalHelp(
-        "This script only runs file based generic agent jobs, database based jobs are handled by the OTRS Daemon."
+        "This script only runs file based generic agent jobs, database based jobs are handled by the Znuny Daemon."
     );
     return;
 }

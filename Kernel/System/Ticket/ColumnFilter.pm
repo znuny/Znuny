@@ -18,6 +18,7 @@ our @ObjectDependencies = (
     'Kernel::System::DB',
     'Kernel::System::Log',
     'Kernel::System::Main',
+    'Kernel::System::Queue',
     'Kernel::System::User',
 );
 
@@ -143,7 +144,7 @@ sub QueueFilterValuesGet {
         # get queue list
         return $Self->_GeneralDataGet(
             ModuleName   => 'Kernel::System::Queue',
-            FunctionName => 'QueueList',
+            FunctionName => 'GetAllQueues',
             UserID       => $Param{UserID},
         );
     }

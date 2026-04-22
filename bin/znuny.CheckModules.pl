@@ -581,6 +581,17 @@ my @NeededModules = (
         },
     },
     {
+        Module    => 'Net::SAML2',
+        Required  => 0,
+        Comment   => 'Needed if SAML authentication is configured.',
+        InstTypes => {
+            aptget => 'libnet-saml2-perl',
+            emerge => 'dev-perl/Net-SAML2',
+            zypper => 'perl-Net-SAML2',
+            ports  => 'security/p5-Net-SAML2',
+        },
+    },
+    {
         Module              => 'Net::SMTP',
         Required            => 0,
         Comment             => 'Simple Mail Transfer Protocol Client.',

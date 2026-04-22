@@ -278,17 +278,22 @@
                         <div id="SubjectServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                     </div>
                     <div class="Clear"></div>
-[% RenderBlockStart("Option") %]
-                    <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]:</label>
-                    <div class="Field">
-                        [% Data.Value %]
-                        <div id="[% Data.Name | html %]ServerError" class="TooltipErrorMessage"><p>[% Data.Invalid | html %]</p></div>
-                        [% IF Data.FieldExplanation.length %]
-                            <p class="FieldExplanation">[% Translate(Data.FieldExplanation) | html %]</p>
-                        [% END %]
+
+                    <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
+                    [% RenderBlockStart("Option") %]
+                        <div class="col-12 gy-3">
+                            <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]:</label>
+                            <div class="Field">
+                                [% Data.Value %]
+                                <div id="[% Data.Name | html %]ServerError" class="TooltipErrorMessage"><p>[% Data.Invalid | html %]</p></div>
+                                [% IF Data.FieldExplanation.length %]
+                                    <p class="FieldExplanation">[% Translate(Data.FieldExplanation) | html %]</p>
+                                [% END %]
+                            </div>
+                        </div>
+                    [% RenderBlockEnd("Option") %]
                     </div>
-                    <div class="Clear"></div>
-[% RenderBlockEnd("Option") %]
+
 [% RenderBlockStart("TicketOptions") %]
                     <label>[% Translate("Options") | html %]:</label>
                     <div class="Field">
@@ -314,23 +319,43 @@
                     <div class="Field component-attachment">
                         [% INCLUDE "FormElements/AttachmentList.tt" %]
                     </div>
-                    <div class="Clear"></div>
+
+                    <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-2 gy-3">
 [% RenderBlockStart("IsVisibleForCustomer") %]
-                    <label for="IsVisibleForCustomer">[% Translate("Visible for customer") | html %]</label>
-                    <div class="Field">
-                        <input type="checkbox" id="IsVisibleForCustomer" name="IsVisibleForCustomer" value="1" [% IF Data.IsVisibleForCustomer %]checked="checked"[% END %]/>
-                    </div>
-                    <div class="Clear"></div>
+                        <label for="IsVisibleForCustomer">[% Translate("Visible for customer") | html %]</label>
+                        <div class="Field">
+                            <input type="checkbox" id="IsVisibleForCustomer" name="IsVisibleForCustomer" value="1" [% IF Data.IsVisibleForCustomer %]checked="checked"[% END %]/>
+                        </div>
 [% RenderBlockEnd("IsVisibleForCustomer") %]
 [% RenderBlockStart("TimeUnits") %]
-                    [% Data.TimeUnitsBlock %]
+                        <div class="col">
+                            [% Data.TimeUnitsBlock %]
+                        </div>
 [% RenderBlockEnd("TimeUnits") %]
+                    </div>
 
                 </fieldset>
             </div>
         </div>
         <div class="Footer">
-            <button class="CallForAction Primary" id="submitRichText" accesskey="g" title="[% Translate("Send mail") | html %] (g)" type="submit" value="[% Translate("Send mail") | html %]" ><span><i class="fa fa-envelope-o"></i> [% Translate("Send mail") | html %]</span></button>
+            <div class="row">
+                <div class="col-12">
+                    <div class="col-12">
+                        <div class="mod modFormSubmitArea">
+                            <div class="inner">
+                                <div class="formSubmitArea">
+                                    <div class="formSubmitAreaCancel">
+                                    </div>
+                                    <div class="formSubmitAreaSubmit">
+                                        [% INCLUDE "FormElements/DraftButtons.tt" %]
+                                        <button class="CallForAction Primary btn-main btn-width-xxl btn-primary" id="submitRichText" accesskey="g" title="[% Translate("Send mail") | html %] (g)" type="submit" value="[% Translate("Send mail") | html %]" ><span><i class="fa fa-envelope-o"></i> [% Translate("Send mail") | html %]</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </form>

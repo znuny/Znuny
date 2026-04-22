@@ -164,7 +164,6 @@ $Selenium->RunTest(
         }
 
         # Enable SearchInArchive config and switch between all three available configurations.
-        # See bug#13790 (https://bugs.otrs.org/show_bug.cgi?id=13790).
         my %Tests = (
             All => 'AllTickets',
             y   => 'ArchivedTickets',

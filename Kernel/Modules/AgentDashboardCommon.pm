@@ -420,6 +420,7 @@ sub Run {
             my $FilterValue = $ParamObject->GetParam( Param => 'ColumnFilter' . $ColumnName . $Name )
                 || '';
             next COLUMNNAME if $FilterValue eq '';
+            next COLUMNNAME if lc $FilterValue eq 'null';
 
             if ( $ColumnName eq 'CustomerID' ) {
                 push @{ $ColumnFilter{$ColumnName} },           $FilterValue;
@@ -454,6 +455,7 @@ sub Run {
 
             next DYNAMICFIELD if !defined $FilterValue;
             next DYNAMICFIELD if $FilterValue eq '';
+            next DYNAMICFIELD if lc $FilterValue eq 'null';
 
             $ColumnFilter{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = {
                 Equals => $FilterValue,

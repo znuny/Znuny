@@ -7,6 +7,7 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
+## no critic (RequireExplicitPackage)
 use strict;
 use warnings;
 use utf8;
@@ -17,7 +18,7 @@ my @Tests = (
     {
         Name           => 'Default format',
         DateFormatName => 'DateFormatLong',
-        DateFormat     => '%T - %D.%M.%Y',
+        DateFormat     => '%T - %d.%m.%Y',
         Short          => 0,
         Time           => '2014-01-10 11:12:13',
         Result         => '11:12:13 - 10.01.2014',
@@ -25,7 +26,7 @@ my @Tests = (
     {
         Name           => 'Default format, short',
         DateFormatName => 'DateFormatLong',
-        DateFormat     => '%T - %D.%M.%Y',
+        DateFormat     => '%T - %d.%m.%Y',
         Short          => 1,
         Time           => '2014-01-10 11:12:13',
         Result         => '11:12 - 10.01.2014',
@@ -33,7 +34,7 @@ my @Tests = (
     {
         Name           => 'Default format, only date passed',
         DateFormatName => 'DateFormatLong',
-        DateFormat     => '%T - %D.%M.%Y',
+        DateFormat     => '%T - %d.%m.%Y',
         Short          => 0,
         Time           => '2014-01-10',
         Result         => '2014-01-10',
@@ -41,7 +42,7 @@ my @Tests = (
     {
         Name           => 'Default format, only time passed',
         DateFormatName => 'DateFormatLong',
-        DateFormat     => '%T - %D.%M.%Y',
+        DateFormat     => '%T - %d.%m.%Y',
         Short          => 0,
         Time           => '22:12:06',
         Result         => '22:12:06',
@@ -49,7 +50,7 @@ my @Tests = (
     {
         Name           => 'Default format, malformed date/time',
         DateFormatName => 'DateFormatLong',
-        DateFormat     => '%T - %D.%M.%Y',
+        DateFormat     => '%T - %d.%m.%Y',
         Short          => 0,
         Time           => 'INVALID',
         Result         => 'INVALID',
@@ -58,36 +59,36 @@ my @Tests = (
         Name           => 'Time zone on day border',
         UserTimeZone   => 'Europe/Berlin',
         DateFormatName => 'DateFormatLong',
-        DateFormat     => '%T - %D.%M.%Y',
+        DateFormat     => '%T - %d.%m.%Y',
         Short          => 0,
         Time           => '2014-01-09 23:34:05',
         Result         => '00:34:05 - 10.01.2014 (Europe/Berlin)',
     },
     {
-        Name           => 'Time zone on day border for DateFormatShort (TimeZone not applied)',
+        Name           => 'Time zone on day border for DateFormatShort (TimeZone is applied)',
         UserTimeZone   => 'Europe/Berlin',
         DateFormatName => 'DateFormatShort',
-        DateFormat     => '%T - %D.%M.%Y',
+        DateFormat     => '%T - %d.%m.%Y',
         Short          => 0,
         Time           => '2014-01-10 00:00:00',
-        Result         => '00:00:00 - 10.01.2014',
+        Result         => '01:00:00 - 10.01.2014',
     },
     {
         Name           => 'All tags test',
         DateFormatName => 'DateFormatLong',
-        DateFormat     => '%A %B %T - %D.%M.%Y',
+        DateFormat     => '%a %b %T - %d.%m.%Y',
         Short          => 0,
         Time           => '2014-01-10 11:12:13',
-        Result         => 'Fr Jan 11:12:13 - 10.01.2014',
+        Result         => 'Fri Jan 11:12:13 - 10.01.2014',
     },
     {
         Name           => 'All tags test, with timezone',
         UserTimeZone   => 'Europe/Berlin',
         DateFormatName => 'DateFormatLong',
-        DateFormat     => '%A %B %T - %D.%M.%Y',
+        DateFormat     => '%a %b %T - %d.%m.%Y',
         Short          => 0,
         Time           => '2014-01-10 11:12:13',
-        Result         => 'Fr Jan 12:12:13 - 10.01.2014 (Europe/Berlin)',
+        Result         => 'Fri Jan 12:12:13 - 10.01.2014 (Europe/Berlin)',
     },
 );
 

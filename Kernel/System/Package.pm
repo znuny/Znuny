@@ -190,7 +190,7 @@ sub RepositoryList {
         }
 
         # Correct any 'dos-style' line endings that might have been introduced by saving an
-        #   opm file from a mail client on Windows (see http://bugs.otrs.org/show_bug.cgi?id=9838).
+        # opm file from a mail client on Windows.
         $Content =~ s{\r\n}{\n}xmsg;
         $Package{MD5sum} = $MainObject->MD5sum( String => \$Content );
 

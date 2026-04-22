@@ -31,7 +31,7 @@ sub Run {
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
-    if ( $Self->{Subaction} eq 'UpdateComplextTablePreferences' ) {
+    if ( $Self->{Subaction} eq 'UpdateComplexTablePreferences' ) {
 
         # save user preferences (shown columns)
 

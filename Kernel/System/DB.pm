@@ -1187,7 +1187,6 @@ sub SQLProcessor {
 
         # make a deep copy in order to prevent modyfing the input data
         # see also Bug#12764 - Database function SQLProcessor() modifies given parameter data
-        # https://bugs.otrs.org/show_bug.cgi?id=12764
         my @Database = @{
             $Kernel::OM->Get('Kernel::System::Storable')->Clone(
                 Data => $Param{Database},
@@ -1822,14 +1821,14 @@ Return a separated IN condition for more then C<MaxParamCountForInCondition> val
 
 Return the SQL String with ?-values and a array with values references in bind mode:
 
-    $BindModeResult = (
+    %BindModeResult = (
         'SQL'    => 'ticket_id IN (?, ?, ?, ?, ?, ?)',
         'Values' => [1, 2, 3, 4, 5, 6],
     );
 
     or
 
-    $BindModeResult = (
+    %BindModeResult = (
         'SQL'    => '( ticket_id IN (?, ?, ?, ?, ?, ?) OR ticket_id IN ( ?, ... ) )',
         'Values' => [1, 2, 3, 4, 5, 6, ... ],
     );

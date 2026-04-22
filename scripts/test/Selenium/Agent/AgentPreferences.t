@@ -200,7 +200,7 @@ $Selenium->RunTest(
 
             $Selenium->WaitFor(
                 JavaScript =>
-                    "return \$('div.MessageBox.Notice:contains(\"" . $NotificationTranslation . "\")').length"
+                    "return \$('div.messageNotice:contains(\"" . $NotificationTranslation . "\")').length"
             );
 
             # reload the screen
@@ -475,7 +475,7 @@ $Selenium->RunTest(
 
         $Self->True(
             $Selenium->find_element(
-                "//div[contains(\@class, 'MessageBox Notice' )]//a[contains(\@href, 'Action=AgentPreferences;Subaction=Group;Group=Miscellaneous' )]"
+                "//div[contains(\@class, 'messageNotice' )]//a[contains(\@href, 'Action=AgentPreferences;Subaction=Group;Group=Miscellaneous' )]"
             ),
             "Notification contains user miscellaneous group link"
         );
@@ -491,12 +491,12 @@ $Selenium->RunTest(
 
         $Selenium->WaitFor(
             JavaScript =>
-                "return \$('div.MessageBox.Notice:contains(\"" . $NotificationTranslation . "\")').length"
+                "return \$('div.messageNotice:contains(\"" . $NotificationTranslation . "\")').length"
         );
 
         $Self->True(
             $Selenium->find_element(
-                "//div[contains(\@class, 'MessageBox Notice' )]//a[contains(\@href, 'Action=AgentPreferences;Subaction=Group;Group=UserProfile' )]"
+                "//div[contains(\@class, 'messageNotice' )]//a[contains(\@href, 'Action=AgentPreferences;Subaction=Group;Group=UserProfile' )]"
             ),
             "Notification contains user profile group link"
         );

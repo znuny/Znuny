@@ -45,41 +45,38 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 :root {
 
     /* black */
-    --color-black:                    #000;
+    --color-black: #000;
 
     /* red */
-    --color-red:                      #b8384e;
+    --color-red: #b8384e;
 
     /* orange */
-    --color-orange:                   #FF9050;
+    --color-orange: #FF9050;
 
     /* yellow */
-    --color-yellow:                   #FFDD50;
+    --color-yellow: #FFDD50;
 
     /* green */
-    --color-green:                    #049E35;
+    --color-green: #049E35;
 
     /* white */
-    --color-white:                    #FFF;
+    --color-white: #FFF;
 
     /* grey */
-    --color-grey1:                    #111;
-    --color-grey2:                    #222;
-    --color-grey3:                    #333;
-    --color-grey4:                    #444;
-    --color-grey5:                    #555;
-    --color-grey6:                    #666;
-    --color-grey7:                    #777;
-    --color-grey8:                    #888;
-    --color-grey9:                    #999;
-    --color-grey10:                   #AAA;
-    --color-grey11:                   #BBB;
-    --color-grey12:                   #CCC;
-    --color-grey13:                   #DDD;
-    --color-grey14:                   #EEE;
-
-
-
+    --color-grey1: #111;
+    --color-grey2: #222;
+    --color-grey3: #333;
+    --color-grey4: #444;
+    --color-grey5: #555;
+    --color-grey6: #666;
+    --color-grey7: #777;
+    --color-grey8: #888;
+    --color-grey9: #999;
+    --color-grey10: #AAA;
+    --color-grey11: #BBB;
+    --color-grey12: #CCC;
+    --color-grey13: #DDD;
+    --color-grey14: #EEE;
 
 
     /* Main Colors */
@@ -87,7 +84,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     --primary-color-darker: #ef8000;
     --primary-color-rgb: rgba(255, 139, 37, 0.2);
     --primary-color-calendar: #ffe8d3;
-    --secondary-color: #251c17;
+    --secondary-color: #171725;
 
     --white: #ffffff;
     --gray-light-white: #fbfafa;
@@ -99,9 +96,23 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     --gray-medium: #beb8b5;
     --gray-medium-darker: #B5B5B580;
     --gray-dark-semi: #9D9792;
-    --gray-dark: #746d69;
+    --gray-dark: #646473;
     --gray-darker: #68615e;
-    --black: #251c17;
+    --black: #171725;
+
+    /* Backgrounds */
+    --background-primary-color: #F3F3F6;
+    --background-secondary-color: var(--white);
+    --background-tertiary-color: #FAFAFB;
+    --background-quarternary-color: #EAEAEE;
+    --background-quinary-color: var(--white);
+
+
+    /* Borders */
+    --border-color-primary: #D6D6E0;
+
+    /* Font */
+    --font-family-primary: 'Inter', sans-serif;
 
 
     --color-scroll-bar: var(--gray-dark);
@@ -141,38 +152,38 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     /* Alert Component */
     --alert-close-icon-color: var(--gray-dark);
 
-        /* Info */
-        --alert-info-bg-color: #50b6ff1e;
-        --alert-info-icon-color: #50B5FF;
-        --alert-info-border-color: #50b6ff1a;
+    /* Info */
+    --alert-info-bg-color: #50b6ff1e;
+    --alert-info-icon-color: #50B5FF;
+    --alert-info-border-color: #50b6ff1a;
 
-        /* Error */
-        --alert-error-bg-solid-color: #FC5A5A;
-        --alert-error-bg-color: #fc5a5a36;
-        --alert-error-icon-color: #FC5A5A;
-        --alert-error-border-color:#FC5A5A1a;
+    /* Error */
+    --alert-error-bg-solid-color: #FC5A5A;
+    --alert-error-bg-color: #fc5a5a36;
+    --alert-error-icon-color: #FC5A5A;
+    --alert-error-border-color: #FC5A5A1a;
 
-        /* Success */
-        --alert-success-bg-solid-color: #3DD598;
-        --alert-success-bg-color: #3dd59874;
-        --alert-success-icon-color: #3DD598;
-        --alert-success-border-color: #3DD5981a;
+    /* Success */
+    --alert-success-bg-solid-color: #3DD598;
+    --alert-success-bg-color: #3DD59810;
+    --alert-success-icon-color: #3DD598;
+    --alert-success-border-color: #3DD5981a;
 
-        /* Warning */
-        --alert-warning-bg-color: #F2BD0E10;
-        --alert-warning-icon-color: #F2BD0E;
-        --alert-warning-border-color: #F2BD0E1a;
+    /* Warning */
+    --alert-warning-bg-color: #F2BD0E10;
+    --alert-warning-icon-color: #F2BD0E;
+    --alert-warning-border-color: #F2BD0E1a;
 
-        /* Notice */
-        --alert-notice-bg-color: #cccccc37;
-        --alert-notice-icon-color: #a6a6a6;
-        --alert-notice-border-color: #cccccc1a;
+    /* Notice */
+    --alert-notice-bg-color: #cccccc37;
+    --alert-notice-icon-color: #a6a6a6;
+    --alert-notice-border-color: #cccccc1a;
 
     --color-icon-favorite: #F2BD0E;
 
 
     /* Forms */
-    --border-color: #eae7e2;
+    --border-color: #D6D6E0;
     --border-input-color: #c4c1bb;
 
 

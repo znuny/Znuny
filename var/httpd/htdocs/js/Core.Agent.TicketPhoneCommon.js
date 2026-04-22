@@ -9,7 +9,8 @@
 
 "use strict";
 
-var Core = Core || {};
+var Core = Core || {},
+    Znuny = Znuny || {};
 Core.Agent = Core.Agent || {};
 
 /**
@@ -32,11 +33,38 @@ Core.Agent.TicketPhoneCommon = (function (TargetNS) {
 
         var UpdateFields = Core.Config.Get('DynamicFieldNames');
 
+        Znuny.Form.Input.FieldIDMapping('AgentTicketPhoneOutbound',
+            {
+                Body:       'RichText',
+                StateID:    'NextStateID',
+                ServiceID:  'ServiceID',
+                SLAID:      'SLAID',
+                TypeID:     'TypeID',
+                PriorityID: 'NewPriorityID'
+            }
+        );
+
+        UpdateFields.push('TypeID');
+        UpdateFields.push('ServiceID');
+        UpdateFields.push('SLAID');
+
+        $('#TypeID').on('change', function () {
+            Core.AJAX.FormUpdate($(this).parents('form'), 'AJAXUpdate', 'TypeID', UpdateFields);
+        });
+
+        $('#ServiceID').on('change', function () {
+            Core.AJAX.FormUpdate($(this).parents('form'), 'AJAXUpdate', 'ServiceID', UpdateFields);
+        });
+
+        $('#SLAID').on('change', function () {
+            Core.AJAX.FormUpdate($(this).parents('form'), 'AJAXUpdate', 'SLAID', UpdateFields);
+        });
+
         // Bind event to StandardTemplate field.
         $('#StandardTemplateID').on('change', function () {
-            var $TemplateSelect = $(this);
-            Core.Agent.TicketAction.ConfirmTemplateOverwrite('RichText', $TemplateSelect, function () {
-                Core.AJAX.FormUpdate($TemplateSelect.closest('form'), 'AJAXUpdate', 'StandardTemplateID', ['RichTextField']);
+            var $Form = $(this).closest('form');
+            Core.Agent.TicketAction.ConfirmTemplateOverwrite('RichText', $(this), function () {
+                Core.AJAX.FormUpdate($Form, 'AJAXUpdate', 'StandardTemplateID', ['RichTextField']);
             });
             return false;
         });

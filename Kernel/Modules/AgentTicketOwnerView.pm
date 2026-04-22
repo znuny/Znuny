@@ -171,6 +171,8 @@ sub Run {
         $SortByS = 'Age';
     }
 
+    my $UserIDForSearch = $Config->{TicketSearchWithAdminUser} ? 1 : $Self->{UserID};
+
     my %Filters = (
         All => {
             Name   => Translatable('All'),
@@ -180,7 +182,7 @@ sub Run {
                 OwnerIDs   => [ $Self->{UserID} ],
                 OrderBy    => $OrderBy,
                 SortBy     => $SortByS,
-                UserID     => $Self->{UserID},
+                UserID     => $UserIDForSearch,
                 Permission => 'ro',
             },
         },
@@ -196,7 +198,7 @@ sub Run {
                 TicketFlagUserID => $Self->{UserID},
                 OrderBy          => $OrderBy,
                 SortBy           => $SortByS,
-                UserID           => $Self->{UserID},
+                UserID           => $UserIDForSearch,
                 Permission       => 'ro',
             },
         },
@@ -208,7 +210,7 @@ sub Run {
                 OwnerIDs   => [ $Self->{UserID} ],
                 OrderBy    => $OrderBy,
                 SortBy     => $SortByS,
-                UserID     => $Self->{UserID},
+                UserID     => $UserIDForSearch,
                 Permission => 'ro',
             },
         },
@@ -221,7 +223,7 @@ sub Run {
                 OwnerIDs                      => [ $Self->{UserID} ],
                 OrderBy                       => $OrderBy,
                 SortBy                        => $SortByS,
-                UserID                        => $Self->{UserID},
+                UserID                        => $UserIDForSearch,
                 Permission                    => 'ro',
             },
         },

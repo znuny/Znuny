@@ -23,15 +23,9 @@ our @ObjectDependencies = (
 
 =head1 SYNOPSIS
 
-Check if ckeditor related entities was backed up.
+Check if CKEditor related entities was backed up.
 
 =cut
-
-sub Run {
-    my ( $Self, %Param ) = @_;
-
-    return 1;
-}
 
 =head2 CheckPreviousRequirement()
 
@@ -54,7 +48,7 @@ sub CheckPreviousRequirement {
     }
 
     if ( $Param{CommandlineOptions}->{Verbose} ) {
-        print "\n        Warning: preparing ckeditor migration data is automatic, meaning this step\n"
+        print "\n        Warning: preparing CKEditor migration data is automatic, meaning this step\n"
             . "        will create a new table with prepopulated data for migration.\n"
             . "        The step before is to backup/export all relevant entities that will be migrated.\n"
             . "        Those includes: auto responses, standard templates,\n"

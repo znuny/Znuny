@@ -13,6 +13,7 @@ use parent 'Kernel::Output::HTML::Base';
 
 use strict;
 use warnings;
+use utf8;
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -42,8 +43,9 @@ sub Run {
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
     my %NotificationDetails = (
-        Priority => 'Error',
-        Data     => $LayoutObject->{LanguageObject}->Translate("Znuny Daemon is not running."),
+        Priority             => 'Error',
+        Data                 => $LayoutObject->{LanguageObject}->Translate("Znuny Daemon is not running."),
+        KeepClosedForSession => 1,
     );
 
     # check if user needs to be notified

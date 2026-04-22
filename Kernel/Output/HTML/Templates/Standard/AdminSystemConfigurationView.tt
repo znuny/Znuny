@@ -30,34 +30,33 @@
 
     <div class="ContentColumn">
         <h1 class="InvisibleText">[% Translate("System configuration") | html %]</h1>
-            [% BreadcrumbPath = [
-                    {
-                        Name => Translate('System Configuration'),
-                        Link => 'AdminSystemConfiguration',
-                    },
-                ]
-            %]
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('System Configuration'),
+                    Link => 'AdminSystemConfiguration',
+                },
+            ]
+        %]
 
-            <!-- Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt -->
-            [% IF Data.Type and Data.Type == 'CustomList' %]
-                [% BreadcrumbPath.push({ Name => Translate('View a custom List of Settings') }) %]
-            [% ELSIF Data.View %]
-                [% View = Data.View | uri %]
-                [% BreadcrumbPath.push({ Name => Translate('View single Setting: %s', Data.View), Link => 'AdminSystemConfiguration;Subaction=View;Setting=' _ View }) %]
-            [% END %]
+        <!-- Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationView.tt -->
+        [% IF Data.Type and Data.Type == 'CustomList' %]
+            [% BreadcrumbPath.push({ Name => Translate('View a custom List of Settings') }) %]
+        [% ELSIF Data.View %]
+            [% View = Data.View | uri %]
+            [% BreadcrumbPath.push({ Name => Translate('View single Setting: %s', Data.View), Link => 'AdminSystemConfiguration;Subaction=View;Setting=' _ View }) %]
+        [% END %]
 
-            <!-- Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationGroup.tt -->
-            [% FOREACH Item IN Data.Path %]
-                [% BreadcrumbPath.push({ Name => Item.Name, Link => 'AdminSystemConfigurationGroup;RootNavigation=' _ Item.Value }) %]
-            [% END %]
+        <!-- Kernel/Output/HTML/Templates/Standard/AdminSystemConfigurationGroup.tt -->
+        [% FOREACH Item IN Data.Path %]
+            [% BreadcrumbPath.push({ Name => Item.Name, Link => 'AdminSystemConfigurationGroup;RootNavigation=' _ Item.Value }) %]
+        [% END %]
 
-            [% FOREACH Item IN Data.Parameters %]
-                [% BreadcrumbPath.push({ Name => Item.Name, Link => 'AdminSystemConfiguration;Subaction=' _ Item.Value }) %]
-            [% END %]
+        [% FOREACH Item IN Data.Parameters %]
+            [% BreadcrumbPath.push({ Name => Item.Name, Link => 'AdminSystemConfiguration;Subaction=' _ Item.Value }) %]
+        [% END %]
 
-            [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
-                        <p>[% Data.View | html %]</p>
-            [% INCLUDE "SystemConfiguration/SettingsList.tt" %]
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+        [% INCLUDE "SystemConfiguration/SettingsList.tt" %]
 
     </div>
 </div>

@@ -165,6 +165,8 @@ sub Run {
     # Notify if there are tickets which are not updated.
     $Output .= $LayoutObject->NotifyNonUpdatedTickets() // '';
 
+    my $UserIDForSearch = $Config->{TicketSearchWithAdminUser} ? 1 : $Self->{UserID};
+
     # define filter
     my %Filters = (
         Open => {
@@ -174,7 +176,7 @@ sub Run {
                 StateType  => 'Open',
                 OrderBy    => $OrderBy,
                 SortBy     => $SortBy,
-                UserID     => $Self->{UserID},
+                UserID     => $UserIDForSearch,
                 Permission => 'ro',
             },
         },
@@ -185,7 +187,7 @@ sub Run {
                 StateType  => 'Closed',
                 OrderBy    => $OrderBy,
                 SortBy     => $SortBy,
-                UserID     => $Self->{UserID},
+                UserID     => $UserIDForSearch,
                 Permission => 'ro',
             },
         },

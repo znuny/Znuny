@@ -31,6 +31,57 @@ Core.Agent.Admin.Signature = (function (TargetNS) {
     */
     TargetNS.Init = function () {
         Core.UI.Table.InitTableFilter($('#FilterSignatures'), $('#Signatures'));
+
+        // delete signature
+        TargetNS.InitSignatureDelete();
+    };
+
+    /**
+     * @name SignatureDelete
+     * @memberof Core.Agent.Admin.Signature
+     * @function
+     * @description
+     *      This function deletes an signature on button click.
+     */
+    TargetNS.InitSignatureDelete = function () {
+        $('.SignatureDelete').on('click', function () {
+            var SignatureDelete = $(this);
+
+            Core.UI.Dialog.ShowContentDialog(
+                $('#DeleteSignatureDialogContainer'),
+                Core.Language.Translate('Delete this %s', 'signature'),
+                '240px',
+                'Center',
+                true,
+                [
+                    {
+                        Class: 'Primary',
+                        Label: Core.Language.Translate("Confirm"),
+                        Function: function() {
+                            $('.Dialog .InnerContent .Center').text(Core.Language.Translate("Deleting the %s and its data. This may take a while...", "signature"));
+                            $('.Dialog .Content .ContentFooter').remove();
+
+                            Core.AJAX.FunctionCall(
+                                Core.Config.Get('Baselink'),
+                                SignatureDelete.data('query-string'),
+                                function() {
+                                    Core.App.InternalRedirect({
+                                        Action: 'AdminSignature'
+                                    });
+                                }
+                            );
+                        }
+                    },
+                    {
+                        Label: Core.Language.Translate("Cancel"),
+                        Function: function () {
+                            Core.UI.Dialog.CloseDialog($('#DeleteSignatureDialog'));
+                        }
+                    }
+                ]
+            );
+            return false;
+        });
     };
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');

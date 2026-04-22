@@ -383,6 +383,12 @@ sub Run {
                     NoCache     => 1,
                 );
             }
+
+            $Ticket{Age} = $LayoutObject->CustomerAge(
+                Age   => $Ticket{Age},
+                Space => ' '
+            );
+
             my $WidgetOutput = $Module->Run(
                 Ticket    => \%Ticket,
                 AclAction => \%AclAction,
@@ -1260,8 +1266,8 @@ sub MaskAgentZoom {
 
                 for my $SubItem (
                     sort {
-                        ( $ZoomMenuItems{$Item}->{Items}->{$a}->{Priority} // 999 )
-                            <=> ( $ZoomMenuItems{$Item}->{Items}->{$b}->{Priority} // 999 )
+                        ( $ZoomMenuItems{$Item}->{Items}->{$a}->{Prio} // 999 )
+                            <=> ( $ZoomMenuItems{$Item}->{Items}->{$b}->{Prio} // 999 )
                     } keys %{ $ZoomMenuItems{$Item}->{Items} }
                     )
                 {
@@ -1891,6 +1897,27 @@ sub MaskAgentZoom {
             Name => 'ArticleFilterDialog',
             Data => {%Param},
         );
+
+        # build article filter links in the header
+        my $HighlightStyle = 'menu';
+        if ( $Self->{ArticleFilter} ) {
+            $HighlightStyle = 'PriorityID-5';
+        }
+
+        $LayoutObject->Block(
+            Name => 'ArticleFilterDialogLink',
+            Data => {
+                %Param,
+                HighlightStyle => $HighlightStyle,
+            },
+        );
+
+        if ( IsHashRefWithData( $Self->{ArticleFilter} ) ) {
+            $LayoutObject->Block(
+                Name => 'ArticleFilterResetLink',
+                Data => {%Param},
+            );
+        }
     }
 
     # check if ticket need to be marked as seen
@@ -2017,33 +2044,6 @@ sub _ArticleTree {
         Key   => 'ZoomExpand',
         Value => $Self->{ZoomExpand},
     );
-
-    # article filter is activated in sysconfig
-    if ( $Self->{ArticleFilterActive} ) {
-
-        # define highlight style for links if filter is active
-        my $HighlightStyle = 'menu';
-        if ( $Self->{ArticleFilter} ) {
-            $HighlightStyle = 'PriorityID-5';
-        }
-
-        # build article filter links
-        $LayoutObject->Block(
-            Name => 'ArticleFilterDialogLink',
-            Data => {
-                %Param,
-                HighlightStyle => $HighlightStyle,
-            },
-        );
-
-        # build article filter reset link only if filter is set
-        if ( IsHashRefWithData( $Self->{ArticleFilter} ) ) {
-            $LayoutObject->Block(
-                Name => 'ArticleFilterResetLink',
-                Data => {%Param},
-            );
-        }
-    }
 
     # get needed objects
     my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');

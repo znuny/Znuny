@@ -316,7 +316,6 @@ Znuny.Form.Input = (function (TargetNS) {
                 Prefix = FieldID;
                 Prefix = Prefix.replace(/^ToCustomer$/, 'Customer');
                 Prefix = Prefix.replace(/^FromCustomer$/, 'Customer');
-
                 if (KeyOrValue == 'Key') {
                     LookupClass = 'CustomerKey';
                 }
@@ -351,6 +350,36 @@ Znuny.Form.Input = (function (TargetNS) {
                 }
                 else {
                     return $('#CustomerAutoComplete').val();
+                }
+            }
+            // CustomerSelector fields (ToCustomer, FromCustomer, CcCustomer, BccCustomer)
+            else if (
+                (FieldID === 'ToCustomer' || FieldID === 'FromCustomer' || FieldID === 'CcCustomer' || FieldID === 'BccCustomer')
+            ) {
+                var $customerSelector = $('#'+ FieldID).closest('.modCustomerSelector');
+                if ($customerSelector.length > 0) {
+                    // Get the selected customer field name from the CustomerSelector data attribute
+                    var selectedFieldName = $customerSelector.find('.inner').attr('data-selected-customer-field-name');
+
+                    if (KeyOrValue == 'Key') {
+                        if (selectedFieldName && $('#' + selectedFieldName).length > 0) {
+                            return $('#' + selectedFieldName).val() || '';
+                        }
+                        // Fallback: try to get from active customer element
+                        var activeCustomer = $customerSelector.find('.customerSelectorFieldInputSelectedCustomerActive');
+                        if (activeCustomer.length > 0) {
+                            return activeCustomer.attr('data-value') || '';
+                        }
+                        return '';
+                    }
+                    else {
+                        // Get the text value from the active customer in CustomerSelector
+                        var activeCustomer = $customerSelector.find('.customerSelectorFieldInputSelectedCustomerActive');
+                        if (activeCustomer.length > 0) {
+                            return activeCustomer.find('.customerName').text() || $('#'+ FieldID).val() || '';
+                        }
+                        return $('#'+ FieldID).val() || '';
+                    }
                 }
             }
             // DynamicField CustomerUserID
@@ -722,6 +751,20 @@ Znuny.Form.Input = (function (TargetNS) {
 
                 // start search
                 $('#'+ FieldID).autocomplete('search', Content);
+            }
+
+            // else if class customerSelectorFieldInputElement is present
+            else if (
+                Type == 'text'
+                && $('#'+ FieldID).hasClass('customerSelectorFieldInputElement')
+            ) {
+
+                $('#'+ FieldID).val(Content);
+                if (TriggerChange) {
+                    $('#'+ FieldID).trigger('change');
+                }
+
+                Core.App.Publish('Znuny.Form.Input.Change.'+ Attribute);
             }
             // DynamicField Autocomplete
             else if (
@@ -1119,7 +1162,13 @@ Znuny.Form.Input = (function (TargetNS) {
             return false;
         }
 
-        $('#'+ FieldID).parent().parent('div.Row').hide();
+        if ($('#'+ FieldID).parent().parents('div.Row').length > 0) {
+            $('#'+ FieldID).parent().parents('div.Row').hide().addClass('Hidden');
+        }
+        if ($('#'+ FieldID).parent().parents('div.col').length > 0) {
+            $('#'+ FieldID).parent().parents('div.col').hide().addClass('Hidden');
+        }
+
         $('#'+ FieldID).parent().hide();
         $("label[for='" + FieldID + "']").hide();
 
@@ -1134,7 +1183,13 @@ Znuny.Form.Input = (function (TargetNS) {
             return false;
         }
 
-        $('#'+ FieldID).parent().parent('div.Row').show();
+        if ($('#'+ FieldID).parent().parents('div.Row').length > 0) {
+            $('#'+ FieldID).parent().parents('div.Row').show().removeClass('Hidden');
+        }
+        if ($('#'+ FieldID).parent().parents('div.col').length > 0) {
+            $('#'+ FieldID).parent().parents('div.col').show().removeClass('Hidden');
+        }
+
         $('#'+ FieldID).parent().show();
         $("label[for='" + FieldID + "']").show();
 

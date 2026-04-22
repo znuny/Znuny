@@ -294,6 +294,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     position: relative;
     z-index: 1;
     width: 100%;
+    margin-bottom: 30px;
 }
 
 #CustomerTickets > div,

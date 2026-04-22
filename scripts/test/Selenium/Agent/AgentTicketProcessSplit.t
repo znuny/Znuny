@@ -168,8 +168,10 @@ $Selenium->RunTest(
         # Disable CustomerID read only.
         $HelperObject->ConfigSettingChange(
             Valid => 1,
-            Key   => 'Ticket::Frontend::AgentTicketProcess::CustomerIDReadOnly',
-            Value => 0
+            Key   => 'Ticket::Frontend::AgentTicketProcess',
+            Value => {
+                CustomerIDReadOnly => 0,
+            },
         );
 
         $Selenium->VerifiedRefresh();
@@ -197,8 +199,10 @@ $Selenium->RunTest(
 
         $HelperObject->ConfigSettingChange(
             Valid => 1,
-            Key   => 'Ticket::Frontend::AgentTicketProcess::CustomerIDReadOnly',
-            Value => 1
+            Key   => 'Ticket::Frontend::AgentTicketProcess',
+            Value => {
+                CustomerIDReadOnly => 1,
+            },
         );
 
         $Selenium->VerifiedRefresh();

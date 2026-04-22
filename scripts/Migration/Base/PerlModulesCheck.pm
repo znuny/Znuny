@@ -26,12 +26,6 @@ Checks required Perl modules before update.
 
 =cut
 
-sub Run {
-    my ( $Self, %Param ) = @_;
-
-    return 1;
-}
-
 =head2 CheckPreviousRequirement()
 
 check for initial conditions for running this migration step.

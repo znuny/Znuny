@@ -626,7 +626,7 @@
             </Item>
         </Value>
     </Setting>
-    <Setting Name="Ticket::Frontend::AgentTicketProcess::CustomerIDReadOnly" Required="1" Valid="1">
+    <Setting Name="Ticket::Frontend::AgentTicketProcess###CustomerIDReadOnly" Required="1" Valid="1">
         <Description Translatable="1">Controls if CustomerID is read-only in the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketProcess</Navigation>
         <Value>

@@ -352,17 +352,17 @@ returns AutoResponse hashes in an array with data:
     my $ExportData = [
         {
             'ContentType' => 'text/plain',
-            'ChangeTime' => '2024-07-16 13:17:20',
-            'Address' => 'some-mail@outlook.com',
-            'ValidID' => 1,
-            'Type' => 'auto reject',
-            'Queues' => {},
-            'TypeID' => 2,
-            'Subject' => 'Your email has been rejected! (RE: <OTRS_CUSTOMER_SUBJECT[24]>)',
-            'AddressID' => 1,
-            'Name' => 'default reject (after follow-up and rejected of a closed ticket)',
-            'CreateBy' => 1,
-            'Response' => 'Your previous ticket is closed.
+            'ChangeTime'  => '2024-07-16 13:17:20',
+            'Address'     => 'some-mail@outlook.com',
+            'ValidID'     => 1,
+            'Type'        => 'auto reject',
+            'Queues'      => {},
+            'TypeID'      => 2,
+            'Subject'     => 'Your email has been rejected! (RE: <OTRS_CUSTOMER_SUBJECT[24]>)',
+            'AddressID'   => 1,
+            'Name'        => 'default reject (after follow-up and rejected of a closed ticket)',
+            'CreateBy'    => 1,
+            'Response'    => 'Your previous ticket is closed.
 
 -- Your follow-up has been rejected. --
 
@@ -370,24 +370,24 @@ Please create a new ticket.
 
 Your Znuny Team
 ',
-            'Comment' => '',
-            'ChangeBy' => 1,
-            'ID' => 587,
+            'Comment'    => '',
+            'ChangeBy'   => 1,
+            'ID'         => 587,
             'CreateTime' => '2024-07-16 13:15:50'
         },
         {
             'ContentType' => 'text/html',
-            'ChangeTime' => '2024-07-16 13:16:27',
-            'Address' => 'some-mail@outlook.com',
-            'ValidID' => 1,
-            'Type' => 'auto follow up',
-            'Queues' => {},
-            'TypeID' => 3,
-            'Subject' => 'RE: <OTRS_CUSTOMER_SUBJECT[24]>',
-            'AddressID' => 1,
-            'Name' => 'default follow-up (after a ticket follow-up has been added) (copy)',
-            'CreateBy' => 1,
-            'Response' => 'Thanks for your follow-up email<br />
+            'ChangeTime'  => '2024-07-16 13:16:27',
+            'Address'     => 'some-mail@outlook.com',
+            'ValidID'     => 1,
+            'Type'        => 'auto follow up',
+            'Queues'      => {},
+            'TypeID'      => 3,
+            'Subject'     => 'RE: <OTRS_CUSTOMER_SUBJECT[24]>',
+            'AddressID'   => 1,
+            'Name'        => 'default follow-up (after a ticket follow-up has been added) (copy)',
+            'CreateBy'    => 1,
+            'Response'    => 'Thanks for your follow-up email<br />
 <br />
 You wrote:<br />
 &lt;OTRS_CUSTOMER_EMAIL[6]&gt;<br />
@@ -397,9 +397,9 @@ Your email will be answered by a human ASAP.<br />
 Have fun with Znuny!<br />
 <br />
 Your Znuny Team',
-            'Comment' => '',
-            'ChangeBy' => 1,
-            'ID' => 590,
+            'Comment'    => '',
+            'ChangeBy'   => 1,
+            'ID'         => 590,
             'CreateTime' => '2024-07-16 13:16:27'
         }
     ];
@@ -462,15 +462,15 @@ import an auto response via YAML content
 Returns:
 
     $Result = {
-        Success          => 1,                                  # 1 if success or undef if operation could not
-                                                                # be performed
-        Message          => 'The Message to show.',             # error message
-        Added            => 'AutoResponse1, AutoResponse2',     # string of AutoResponses correctly added
-        Updated          => 'AutoResponse3, AutoResponse4',     # string of AutoResponses correctly updated
-        NotUpdated       => 'AutoResponse5, AutoResponse6',     # string of AutoResponses not updated due to existing entity
-                                                                # with the same name
-        Errors           => 'AutoResponse5',                    # string of AutoResponses that could not be added or updated
-        AdditionalErrors => ['Some error occured!', 'Error2!'], # list of additional error not necessarily related to specified AutoResponse
+        Success          => 1                   ,                                    # 1 if success or undef if operation could not
+                                                                                     # be performed
+        Message          => 'The Message to show.'                                   # error message
+        Added            => 'AutoResponse1, AutoResponse2'                           # string of AutoResponses correctly added
+        Updated          => 'AutoResponse3, AutoResponse4'                           # string of AutoResponses correctly updated
+        NotUpdated       => 'AutoResponse5, AutoResponse6'                           # string of AutoResponses not updated due to existing entity
+                                                                                     # with the same name
+        Errors           => 'AutoResponse5'                                          # string of AutoResponses that could not be added or updated
+        AdditionalErrors => ['Some error occured!', 'Error2!']                       # list of additional error not necessarily related to specified AutoResponse
     };
 
 =cut
@@ -505,7 +505,9 @@ sub AutoResponseImport {
         return {
             Success => 0,
             Message =>
-                Translatable("Couldn't read auto response configuration file. Please make sure the file is valid."),
+                Translatable(
+                "Couldn't read auto response configuration file. Please make sure the file is valid."
+                ),
         };
     }
 

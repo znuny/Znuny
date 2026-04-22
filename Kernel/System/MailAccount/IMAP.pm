@@ -11,6 +11,7 @@ package Kernel::System::MailAccount::IMAP;
 
 use strict;
 use warnings;
+use utf8;
 use Kernel::System::VariableCheck qw(:all);
 
 use parent qw(Kernel::System::MailAccount::Base);
@@ -151,25 +152,24 @@ sub Fetch {
     );
 
     # fetch again if still messages on the account
-    my $CommunicationLogStatus = 'Successful';
+    my $Success;
     COUNT:
     for my $Count ( 1 .. 200 ) {
+        $Success = 1;
         my $Fetch = $Self->_Fetch(
             %Param,
             CommunicationLogObject => $CommunicationLogObject,
         );
-        if ( !$Fetch ) {
-            $CommunicationLogStatus = 'Failed';
-        }
+        $Success = 0 if !$Fetch;
 
         last COUNT if !$Self->{Reconnect};
     }
 
     $CommunicationLogObject->CommunicationStop(
-        Status => $CommunicationLogStatus,
+        Status => $Success ? 'Successful' : 'Failed',
     );
 
-    return 1;
+    return $Success;
 }
 
 sub _Fetch {
@@ -188,7 +188,7 @@ sub _Fetch {
         $CommunicationLogObject->ObjectLog(
             ObjectLogType => 'Connection',
             Priority      => 'Error',
-            Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
+            Key           => __PACKAGE__,
             Value         => "$Needed not defined!",
         );
 
@@ -205,7 +205,7 @@ sub _Fetch {
             $CommunicationLogObject->ObjectLog(
                 ObjectLogType => 'Connection',
                 Priority      => 'Error',
-                Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
+                Key           => __PACKAGE__,
                 Value         => "Need $Needed!",
             );
 
@@ -242,7 +242,7 @@ sub _Fetch {
     $CommunicationLogObject->ObjectLog(
         ObjectLogType => 'Connection',
         Priority      => 'Debug',
-        Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
+        Key           => __PACKAGE__,
         Value         => "Open connection to '$Param{Host}' ($Param{Login}).",
     );
 
@@ -270,7 +270,7 @@ sub _Fetch {
         $CommunicationLogObject->ObjectLog(
             ObjectLogType => 'Connection',
             Priority      => 'Error',
-            Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
+            Key           => __PACKAGE__,
             Value         => $Connect{Message},
         );
 
@@ -289,34 +289,35 @@ sub _Fetch {
         my @Params    = @_;
 
         my $IMAPObject = $Connect{IMAPObject};
-        my $ScalarResult;
-        my @ArrayResult = ();
-        my $Wantarray   = wantarray;
+        my ( $Result, $Error );
 
         eval {
-            if ($Wantarray) {
-                @ArrayResult = $IMAPObject->$Operation( @Params, );
-            }
-            else {
-                $ScalarResult = $IMAPObject->$Operation( @Params, );
-            }
-
-            return 1;
+            $Result = $IMAPObject->$Operation(@Params);
+            return 1 if $Result;                  # If we have a result, it probably worked.
+            $Error = $IMAPObject->LastError();    # Otherwise, check LastError
+            return !defined $Error;               # If LastError returned something, we're sure it's a failure
         } || do {
-            my $Error = $@;
+            $Error //= $IMAPObject->LastError();    # May not be set yet if an exception was thrown
+            my $Message = sprintf(
+                "Error while executing '%s->%s(%s)': %s",
+                $Self->{MailAccountModuleName},
+                $Operation,
+                join( ',', @Params ),
+                $Error,
+            );
+            $CommunicationLogObject->ObjectLog(
+                ObjectLogType => 'Connection',
+                Priority      => 'Error',
+                Key           => __PACKAGE__,
+                Value         => $Message,
+            );
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => sprintf(
-                    "Error while executing '" . $Self->{MailAccountModuleName} . "->%s(%s)': %s",
-                    $Operation,
-                    join( ',', @Params ),
-                    $Error,
-                ),
+                Message  => $Message,
             );
         };
 
-        return @ArrayResult if $Wantarray;
-        return $ScalarResult;
+        return $Result;
     };
 
     my $ConnectionWithErrors = 0;
@@ -328,9 +329,9 @@ sub _Fetch {
     my $Messages;
 
     eval {
-        $IMAPOperation->( 'select', $IMAPFolder, ) || die "Could not select: $@\n";
+        $IMAPOperation->( 'select', $IMAPFolder, ) || return;
 
-        $Messages = $IMAPOperation->( 'messages', ) || die "Could not retrieve messages : $@\n";
+        $Messages = $IMAPOperation->( 'messages', ) || return;
 
         if ( IsArrayRefWithData($Messages) ) {
             $NumberOfMessages = scalar @{$Messages};
@@ -343,15 +344,6 @@ sub _Fetch {
         return 1;
 
     } || do {
-        my $Error = $@;
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => sprintf(
-                "Error while retrieving the messages '$Self->{MailAccountModuleName}': %s",
-                $Error,
-            ),
-        );
-
         $ConnectionWithErrors = 1;
     };
 
@@ -383,7 +375,7 @@ sub _Fetch {
                 $CommunicationLogObject->ObjectLog(
                     ObjectLogType => 'Connection',
                     Priority      => 'Error',
-                    Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
+                    Key           => __PACKAGE__,
                     Value         => $ErrorMessage,
                 );
 
@@ -405,7 +397,7 @@ sub _Fetch {
                 $CommunicationLogObject->ObjectLog(
                     ObjectLogType => 'Connection',
                     Priority      => 'Error',
-                    Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
+                    Key           => __PACKAGE__,
                     Value         => $ErrorMessage,
                 );
 
@@ -429,7 +421,7 @@ sub _Fetch {
                     $CommunicationLogObject->ObjectLog(
                         ObjectLogType => 'Connection',
                         Priority      => 'Error',
-                        Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
+                        Key           => __PACKAGE__,
                         Value         => $ErrorMessage,
                     );
 
@@ -439,7 +431,7 @@ sub _Fetch {
                     $CommunicationLogObject->ObjectLog(
                         ObjectLogType => 'Connection',
                         Priority      => 'Debug',
-                        Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
+                        Key           => __PACKAGE__,
                         Value         => "Message '$Messageno' successfully received from server.",
                     );
 
@@ -478,7 +470,7 @@ sub _Fetch {
                         $CommunicationLogObject->ObjectLog(
                             ObjectLogType => 'Connection',
                             Priority      => 'Error',
-                            Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
+                            Key           => __PACKAGE__,
                             Value         => $ErrorMessage,
                         );
 
@@ -513,7 +505,7 @@ sub _Fetch {
         $CommunicationLogObject->ObjectLog(
             ObjectLogType => 'Connection',
             Priority      => 'Info',
-            Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
+            Key           => __PACKAGE__,
             Value         => "$AuthType: Fetched $FetchCounter email(s) from $Param{Login}/$Param{Host}.",
         );
     }

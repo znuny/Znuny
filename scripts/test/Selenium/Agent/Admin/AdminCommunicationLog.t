@@ -142,7 +142,7 @@ $Selenium->RunTest(
                     Priority      => 'Error',
                     Key           => 'Kernel::System::MailAccount::' . $MailAccounts{$MailAccountID}->{Type},
                     Value         =>
-                        "Could not process message. Raw mail saved (report it on http://bugs.otrs.org/)!",
+                        "Could not process message. Raw mail saved!",
                 );
 
                 $MessageStatus = 'Failed';
@@ -477,7 +477,6 @@ $Selenium->RunTest(
         );
 
         # Try to navigate to invalid Communication ID,
-        #   see bug#13523 (https://bugs.otrs.org/show_bug.cgi?id=13523).
         my $RandomNumber = $HelperObject->GetRandomNumber();
         $Selenium->VerifiedGet(
             "${ScriptAlias}index.pl?Action=AdminCommunicationLog;Subaction=Zoom;CommunicationID=$RandomNumber"

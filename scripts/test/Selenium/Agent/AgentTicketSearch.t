@@ -747,7 +747,6 @@ $Selenium->RunTest(
         );
 
         # Change test user language and verify searchable Article Fields are translated.
-        # See bug#13913 (https://bugs.otrs.org/show_bug.cgi?id=13913).
 
         # Go to agent preferences screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentPreferences;Subaction=Group;Group=UserProfile");

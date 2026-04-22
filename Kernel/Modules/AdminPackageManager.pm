@@ -270,7 +270,7 @@ sub Run {
         }
         my @DatabaseBuffer;
 
-        # correct any 'dos-style' line endings - http://bugs.otrs.org/show_bug.cgi?id=9838
+        # correct any 'dos-style' line endings
         ${$Package} =~ s{\r\n}{\n}xmsg;
 
         # create MD5 sum and add it into existing package structure
@@ -712,6 +712,17 @@ sub Run {
                                     %{$Hash},
                                 },
                             );
+
+                            $LayoutObject->Block(
+                                Name => "PackageItemFilelistFileNote",
+                                Data => {
+                                    Name    => $Structure{Name}->{Content},
+                                    Version => $Structure{Version}->{Content},
+                                    File    => $File,
+                                    %{$Hash},
+                                },
+                            );
+
                         }
                     }
                     else {

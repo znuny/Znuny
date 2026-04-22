@@ -11,6 +11,7 @@ package Kernel::System::Ticket::Article::Backend::MIMEBase;
 
 use strict;
 use warnings;
+use utf8;
 
 use parent 'Kernel::System::Ticket::Article::Backend::Base';
 
@@ -248,7 +249,15 @@ sub ArticleCreate {
     }
 
     # process html article
+    elsif ( $Param{MimeType} =~ /text\/plain/i ) {
+
+        # Delete illegal surrogates in Body
+        $Param{Body} =~ s/\p{Surrogate}//g;
+    }
     elsif ( $Param{MimeType} =~ /text\/html/i ) {
+
+        # Delete illegal surrogates in Body
+        $Param{Body} =~ s/\p{Surrogate}//g;
 
         # add html article as attachment
         my $Attach = {
@@ -300,15 +309,18 @@ sub ArticleCreate {
         $Param{OrigHeader}->{Body} = $Param{Body};
     }
 
-    # fix some bad stuff from some browsers (Opera)!
     else {
+        # Delete illegal surrogates in Body
+        $Param{Body} =~ s/\p{Surrogate}//g;
+
+        # Fix some bad stuff from some browsers (Opera)!
         $Param{Body} =~ s/(\n\r|\r\r\n|\r\n)/\n/g;
     }
 
     # strip not wanted stuff
     for my $Attribute (qw(From To Cc Bcc Subject MessageID InReplyTo References ReplyTo)) {
         if ( defined $Param{$Attribute} ) {
-            $Param{$Attribute} =~ s/\n|\r//g;
+            $Param{$Attribute} =~ s/[\p{Surrogate}\n\r]//g;
         }
         else {
             $Param{$Attribute} = '';
@@ -332,7 +344,6 @@ sub ArticleCreate {
     }
 
     # Generate unique fingerprint for searching created article in database to prevent race conditions
-    #   (see https://bugs.otrs.org/show_bug.cgi?id=12438).
     my $RandomString = $MainObject->GenerateRandomString(
         Length => 32,
     );
@@ -360,7 +371,6 @@ sub ArticleCreate {
     my $UserObject = $Kernel::OM->Get('Kernel::System::User');
 
     # Check if there are additional To's from InvolvedAgent and InformAgent.
-    #   See bug#13422 (https://bugs.otrs.org/show_bug.cgi?id=13422).
     if ( $Param{ForceNotificationToUserID} && ref $Param{ForceNotificationToUserID} eq 'ARRAY' ) {
         my $NewTo = '';
         USER:

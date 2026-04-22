@@ -1629,10 +1629,13 @@ sub CustomerUserUpdate {
     }
     push @Bind, \$Param{ID};
 
-    return if !$Self->{DBObject}->Do(
-        SQL  => $SQL,
-        Bind => \@Bind
-    );
+    # only execute the SQL query if any fields are affected
+    if (%SeenKey) {
+        return if !$Self->{DBObject}->Do(
+            SQL  => $SQL,
+            Bind => \@Bind
+        );
+    }
 
     # check if we need to update Customer Preferences
     if ( $Param{UserLogin} ne $UserData{UserLogin} ) {

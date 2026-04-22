@@ -220,7 +220,6 @@ $Self->Is(
 );
 
 # Run HistoricalValueGet on all dynamic fields again, to check updated values are correct and cache is cleaned on ValueSet.
-# See bug#14895 (https://bugs.otrs.org/show_bug.cgi?id=14895) for more details.
 for my $DynamicFieldID (@AddedDynamicFieldIDs) {
     my $HistoricalValues = $DynamicFieldValueObject->HistoricalValueGet(
         FieldID => $DynamicFieldID,

@@ -24,7 +24,9 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     --main-page-padding: 25px;
 
     /* Sections */
-    --main-bg-color: var(--gray-light-white);
+    --main-bg-color: #FOFOF4;
+
+
     --input-field-bg-color: var(--white);
     --side-bar-width-desktop: 280px;
 
@@ -53,7 +55,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 
     /* Spacing */
     --size-6: 6px;
-    --size-8 : 8px;
+    --size-8: 8px;
     --size-10: 10px;
     --size-15: 15px;
     --size-20: 20px;
@@ -122,115 +124,114 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 
     /* COMPONENTS */
 
-        /* Main Menu */
-        --menu-font: var(--black);
-        --menu-bg: var(--white);
+    /* Main Menu */
+    --menu-font: var(--black);
+    --menu-bg: var(--white);
 
-        /* SidebarColumn Header*/
-        --sidebarcolumn-header-bg: var(--gray-regular-light);
+    /* SidebarColumn Header*/
+    --sidebarcolumn-header-bg: var(--gray-regular-light);
 
-        /* Widget Simple */
-        --widget-simple-bg: var(--white);
-        --widget-simple-title-size: 14px;
-        --widget-standard-padding: var(--padding-md);
-        --widget-margin: 20px;
+    /* Widget Simple */
+    --widget-simple-bg: var(--white);
+    --widget-simple-title-size: 14px;
+    --widget-standard-padding: var(--padding-md);
+    --widget-margin: 20px;
 
-        /* ToolBar UserAvatar */
-        --submenu-preferences: var(--gray-dark);
-        --submenu-log: var(--warning-color);
+    /* ToolBar UserAvatar */
+    --submenu-preferences: var(--gray-dark);
+    --submenu-log: var(--warning-color);
 
-        /* Tables */
-        --table-bg: var(--white);
-        --table-th-font-color: var(--black);
-        --table-td-hover-opacity: 0.5;
-        --table-tr-border-bottom: var(--gray-light-semi);
-        --table-tr-py-18: 18px;
-        --table-tr-px-18: 10px;
-        --table-tr-line-hight: 40px;
+    /* Tables */
+    --table-bg: var(--white);
+    --table-th-font-color: var(--black);
+    --table-td-hover-opacity: 0.5;
+    --table-tr-border-bottom: var(--gray-light-semi);
+    --table-tr-py-18: 18px;
+    --table-tr-px-18: 10px;
+    --table-tr-line-hight: 40px;
 
-        /* Bread Crumb */
-        --bread-crumb: var(--gray-dark-semi);
-        --bread-crumb-active: var(--black);
-        --bread-crumb-font-size: var(--font-size-sm);
+    /* Bread Crumb */
+    --bread-crumb: var(--gray-dark-semi);
+    --bread-crumb-active: var(--black);
+    --bread-crumb-font-size: var(--font-size-sm);
 
-        /* Inputs */
+    /* Inputs */
 
-            /* Selection */
-            --pill-color-selected: var(--gray-light-ultra);
-            --main-field-size: 620px;
+    /* Selection */
+    --pill-color-selected: var(--gray-light-ultra);
+    --main-field-size: 620px;
 
-            /* Input Fields */
-            --text-message-color: var(--black);
-            --text-message-min-height: 141px;
-            --text-area-min-height: 72px;
-            --reply-input-height: var(--btn-height-sm);
-            --max-input-field-height: 30px;
-            --disabled-input-color: var(--disabled-input);
+    /* Input Fields */
+    --text-message-color: var(--black);
+    --text-message-min-height: 141px;
+    --text-area-min-height: 72px;
+    --reply-input-height: var(--btn-height-sm);
+    --max-input-field-height: 30px;
+    --disabled-input-color: var(--disabled-input);
 
-        /* InlineActions Dropdown Menu */
-        --inlactions-height: 35px;
-        --inlactions-font-size: var(--font-size-sm);
-        --inlactions-text-color: var(--white);
-        --inlactions-bg-color: var(--black);
+    /* InlineActions Dropdown Menu */
+    --inlactions-height: 35px;
+    --inlactions-font-size: var(--font-size-sm);
+    --inlactions-text-color: var(--white);
+    --inlactions-bg-color: var(--black);
 
-        /* Modal Window */
-        --modal-col-max-height: 326px;
-        --modal-col-text-color: var(--gray-darker);
-        --modal-input-width: 75px;
-        --modal-header-bg: var(--gray-regular-light);
+    /* Modal Window */
+    --modal-col-max-height: 326px;
+    --modal-col-text-color: var(--gray-darker);
+    --modal-input-width: 75px;
+    --modal-header-bg: var(--gray-regular-light);
 
-        /* Buttons */
+    /* Buttons */
 
-            /* Primary */
-            --btn-width-l: 134px;
-            --btn-max-width-xxl: 215px;
-            --btn-max-width-xl: 180px;
-            --btn-max-width-lg: 160px;
-            --btn-max-width-md: 140px;
-            --btn-max-width-sm: 100px;
-            --btn-max-width-xs: 80px;
+    /* Primary */
+    --btn-width-l: 134px;
+    --btn-max-width-xxl: 215px;
+    --btn-max-width-xl: 180px;
+    --btn-max-width-lg: 160px;
+    --btn-max-width-md: 140px;
+    --btn-max-width-sm: 100px;
+    --btn-max-width-xs: 80px;
 
-            --btn-min-height: 38px;
-            --btn-height-lg: 48px;
-            --btn-height-md: var(--btn-min-height);
-            --btn-height-sm: 28px;
+    --btn-min-height: 38px;
+    --btn-height-lg: 48px;
+    --btn-height-md: var(--btn-min-height);
+    --btn-height-sm: 28px;
 
-            --btn-primary-text: var(--white);
-            --btn-primary-text-hover: var(--btn-primary-text);
+    --btn-primary-text: var(--white);
+    --btn-primary-text-hover: var(--btn-primary-text);
 
-            --btn-text-color: var(--white);
-            --btn-text-color-ghost: var(--gray-darker);
+    --btn-text-color: var(--white);
+    --btn-text-color-ghost: var(--gray-darker);
 
-            /* Btn Icon */
-            --btn-icon-sm: 34px;
+    /* Btn Icon */
+    --btn-icon-sm: 34px;
 
-            /* Ghost */
-            --btn-ghost-text: var(--black);
-            --btn-ghost-text-hover: var(--btn-primary-text);
-            --btn-ghost-background: transparent;
-            --btn-ghost-background-hover: var(--primary-color);
+    /* Ghost */
+    --btn-ghost-text: var(--black);
+    --btn-ghost-text-hover: var(--btn-primary-text);
+    --btn-ghost-background: transparent;
+    --btn-ghost-background-hover: var(--primary-color);
 
-            /* Cancel Ghost */
-            --btn-cancel-ghost-text: var(--gray-dark);
-            --btn-cancel-ghost-bg: var(--white);
-            --btn-cancel-ghost-bg-hover: var(--border-color);
+    /* Cancel Ghost */
+    --btn-cancel-ghost-text: var(--gray-dark);
+    --btn-cancel-ghost-bg: var(--white);
+    --btn-cancel-ghost-bg-hover: var(--border-color);
 
-            --btn-width-sm: 90px;
-            --btn-min-height-sm: 28px;
+    --btn-width-sm: 90px;
+    --btn-min-height-sm: 28px;
 
-            /* Drop-down */
-            --btn-dropdown-padding: var(--padding-md);
-            --btn-dropdown-bg-color: var(--primary-color);
-            --btn-dropdown-min-height: var(--btn-min-height);
-            --btn-dropdown-min-width: var(--btn-width-l);
-            --btn-dropdown-font-size: var(--font-size-sm);
-            --btn-dropdown-font-weight: var(--bold);
-            --btn-dropdown-color: var(--main-font-color);
-            --btn-dropdown-border-width: var(--border-width-md);
-            --btn-dropdown-border-radius: var(--border-radius-md);
+    /* Drop-down */
+    --btn-dropdown-padding: var(--padding-md);
+    --btn-dropdown-bg-color: var(--primary-color);
+    --btn-dropdown-min-height: var(--btn-min-height);
+    --btn-dropdown-min-width: var(--btn-width-l);
+    --btn-dropdown-font-size: var(--font-size-sm);
+    --btn-dropdown-font-weight: var(--bold);
+    --btn-dropdown-color: var(--main-font-color);
+    --btn-dropdown-border-width: var(--border-width-md);
+    --btn-dropdown-border-radius: var(--border-radius-md);
 
-            --btn-filter-dropdown-hover-color: var(--gray-light);
-
+    --btn-filter-dropdown-hover-color: var(--gray-light);
 
 
 }

@@ -624,6 +624,7 @@ fieldset .ShowTreeSelection {
 .JSTreeField {
     background-color: #FFFFFF;
     border: 1px solid #ccc;
+    border-radius: var(--border-radius-sm);
     height: 72%;
     margin: 10px 12px;
     -moz-box-shadow: inset 0px 0px 6px #ccc;

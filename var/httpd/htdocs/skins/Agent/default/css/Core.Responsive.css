@@ -1574,6 +1574,15 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         padding-bottom: 10px !important;
     }
 
+    .Dashboard .ContentColumn .WidgetSimple > .Header {
+        display: flex;
+        flex-direction: column;
+    }
+    .Dashboard .ContentColumn .WidgetSimple > .Header > .HeaderFilter {
+        position: initial;
+        margin-top: 10px;
+    }
+
 }
 
 

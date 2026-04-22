@@ -33,7 +33,7 @@ sub new {
     );
 
     $Self->{PrefKeyShown} = 'UserDashboardPref' . $Self->{Name} . '-Shown';
-    $Self->{PageShown}    = $Preferences{ $Self->{PrefKeyShown} };
+    $Self->{PageShown}    = $Preferences{ $Self->{PrefKeyShown} } || $Self->{Config}->{Limit} || 10;
 
     return $Self;
 }
@@ -70,7 +70,8 @@ sub Config {
         %{ $Self->{Config} },
         CacheKey => 'MyLastChangedTickets-'
             . $Self->{UserID} . '-'
-            . $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{UserLanguage},
+            . $Kernel::OM->Get('Kernel::Output::HTML::Layout')->{UserLanguage} . '-'
+            . $Self->{PageShown},
     );
 }
 
@@ -78,15 +79,10 @@ sub Run {
     my ( $Self, %Param ) = @_;
 
     my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
-    my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
     my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
-    my %Preferences = $UserObject->GetPreferences(
-        UserID => $Self->{UserID},
-    );
-
-    my $UserLimit = $Preferences{ $Self->{PrefKeyShown} };
+    my $UserLimit = $Self->{PageShown};
     my $Limit     = $UserLimit || $Self->{Config}->{Limit} || 10;
 
     my $SQL = 'SELECT   id

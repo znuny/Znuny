@@ -506,6 +506,12 @@ sub _LogFilesSet {
 
     # get log rotation type and backup old logs if logs should be rotated by Znuny
     my $RotationType = lc $ConfigObject->Get('Daemon::Log::RotationType') || 'znuny';
+
+    # if rotation type is OTRS, set to Znuny
+    if ( $RotationType eq 'otrs' ) {
+        $RotationType = 'znuny';
+    }
+
     if ( $RotationType eq 'znuny' ) {
         use File::Copy qw(move);
         if ( -e "$FileStdOut.log" ) {
@@ -563,6 +569,12 @@ sub _LogFilesCleanup {
 
     # skip cleanup if Znuny log rotation is not enabled
     my $RotationType = lc $Kernel::OM->Get('Kernel::Config')->Get('Daemon::Log::RotationType') || 'znuny';
+
+    # if rotation type is OTRS, set to Znuny
+    if ( $RotationType eq 'otrs' ) {
+        $RotationType = 'znuny';
+    }
+
     return 1 if $RotationType ne 'znuny';
 
     my @LogFiles = glob "$LogDir/*.log";

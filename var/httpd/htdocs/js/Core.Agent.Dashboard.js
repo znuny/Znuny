@@ -1084,7 +1084,6 @@ Core.Agent.Dashboard = (function (TargetNS) {
         }
 
         // Reinitialize events for Customer Users table on update.
-        // See bug#14737 for more details (https://bugs.otrs.org/show_bug.cgi?id=14737).
         if (!$.isEmptyObject(Core.Agent.SwitchToCustomerAction)) {
             Core.Agent.SwitchToCustomerAction.Init();
         }
@@ -1412,24 +1411,6 @@ Core.Agent.Dashboard = (function (TargetNS) {
                     .fadeIn('fast', function() {
 
                         $TriggerObj.addClass('Active');
-
-                        // only show and use the delete filter icon in case of autocomplete fields
-                        // because in regular dropdowns we have a different way to delete the filter
-                        if ($TriggerObj.closest('th').hasClass('FilterActive') && $ColumnSettingsContainer.find('select.ColumnFilter').hasClass('Hidden')) {
-                            $ColumnSettingsContainer
-                                .find('.DeleteFilter')
-                                .removeClass('Hidden')
-                                .off()
-                                .on('click', function() {
-                                    $(this)
-                                        .closest('.ColumnSettingsContainer')
-                                        .find('select')
-                                        .val('DeleteFilter')
-                                        .trigger('change');
-
-                                    return false;
-                                });
-                        }
 
                         if ($TriggerObj.closest('th').hasClass('CustomerID') || $TriggerObj.closest('th').hasClass('CustomerUserID') || $TriggerObj.closest('th').hasClass('Responsible') || $TriggerObj.closest('th').hasClass('Owner')) {
 

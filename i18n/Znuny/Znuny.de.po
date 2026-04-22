@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2023-03-23 09:27+0000\n"
-"PO-Revision-Date: 2025-04-30 10:50+0000\n"
-"Last-Translator: Hog Duske <hog.duske@dusketech.de>\n"
+"PO-Revision-Date: 2026-04-01 21:51+0000\n"
+"Last-Translator: Weblate Admin <operations@znuny.com>\n"
 "Language-Team: German <https://translations.znuny.org/projects/znuny/znuny/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11\n"
+"X-Generator: Weblate 5.16.2\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "Actions"
@@ -5942,7 +5942,7 @@ msgstr "Service hinzufügen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
 msgid "Configure Service Visibility and Defaults"
-msgstr "Serivce-Sichtbarkeit und Standardeinstellungen konfigurieren"
+msgstr "Service-Sichtbarkeit und Standardeinstellungen konfigurieren"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
 msgid "Service Management"
@@ -7584,7 +7584,7 @@ msgstr "Verantwortlichen von %s%s%s ändern"
 msgid "The ticket has been locked"
 msgstr "Das Ticket wurde gesperrt"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
+#. SysConfig
 msgid "Ticket Settings"
 msgstr "Ticket-Einstellungen"
 
@@ -7604,7 +7604,7 @@ msgstr "Teamdaten"
 msgid "Queue invalid."
 msgstr "Queue ungültig."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
 msgid "New Owner"
 msgstr "Neuer Besitzer"
 
@@ -7632,7 +7632,7 @@ msgstr "Verantwortlicher ungültig."
 msgid "Ticket Data"
 msgstr "Ticketdaten"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
 msgid "Next state"
 msgstr "Nächster Status"
 
@@ -7704,7 +7704,7 @@ msgstr "Sie benötigen eine E-Mail-Adresse."
 msgid "Need a valid email address or don't use a local email address."
 msgstr "Benötige eine gültige E-Mail-Adresse, verwenden Sie keine lokale Adresse."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
+#. Perl Module: Kernel/Modules/AgentTicketProcess.pm
 msgid "Next ticket state"
 msgstr "Nächster Status des Tickets"
 
@@ -7760,7 +7760,7 @@ msgstr "Antwort für %s%s%s verfassen"
 msgid "Date Invalid!"
 msgstr "Ungültiges Datum!"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
 msgid "Customer user address book"
 msgstr "Kundenbenutzer-Adressbuch"
 
@@ -7772,7 +7772,7 @@ msgstr "Diese Adresse ist als Systemadresse registriert und kann daher nicht ver
 msgid "Please include at least one recipient"
 msgstr "Bitte geben sie mindestens einen Empfänger an"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
 msgid "Remove Ticket Customer"
 msgstr "Ticket-Kunden entfernen"
 
@@ -7784,7 +7784,7 @@ msgstr "Bitte entfernen Sie diesen Eintrag und geben Sie einen mit einem gültig
 msgid "This address already exists on the address list."
 msgstr "Dieser Eintrag existiert bereits in der Adressliste."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
 msgid "Remove Cc"
 msgstr "Cc entfernen"
 
@@ -7792,11 +7792,11 @@ msgstr "Cc entfernen"
 msgid "Bcc"
 msgstr "Bcc"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
 msgid "Remove Bcc"
 msgstr "Bcc entfernen"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid "Send mail"
 msgstr "E-Mail senden"
 
@@ -7808,7 +7808,7 @@ msgstr "Kunde von %s%s%s ändern"
 msgid "Customer Information"
 msgstr "Kundeninformation"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Customer user"
 msgstr "Kundenbenutzer"
 
@@ -7844,7 +7844,7 @@ msgstr "Alles holen"
 msgid "Outbound Email for %s%s%s"
 msgstr "Ausgehende E-Mail für %s%s%s"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
 msgid "Select one or more recipients from the customer user address book."
 msgstr "Wählen Sie einen oder mehrere Empfänger aus dem Kundenbenutzer-Adressbuch."
 
@@ -7860,32 +7860,32 @@ msgstr "Alle mit * gekennzeichneten Felder sind Pflichtfelder."
 msgid "Cancel & close"
 msgstr "Abbrechen und Schließen"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Undo & close"
 msgstr "Rückgängig machen und Beenden"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
-msgid "Ticket %s: first response time is over (%s/%s)!"
+msgid "Ticket %s: first response time is over (%s %s)!"
 msgstr "Ticket %s: erste Reaktionszeit ist abgelaufen (%s/%s)!"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
-msgid "Ticket %s: first response time will be over in %s/%s!"
+msgid "Ticket %s: first response time will be over in %s %s!"
 msgstr "Ticket %s: erste Reaktionszeit wird ablaufen in %s/%s!"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
-msgid "Ticket %s: update time is over (%s/%s)!"
+msgid "Ticket %s: update time is over (%s %s)!"
 msgstr "Ticket %s: Aktualisierungszeit ist abgelaufen (%s/%s)!"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
-msgid "Ticket %s: update time will be over in %s/%s!"
+msgid "Ticket %s: update time will be over in %s %s!"
 msgstr "Ticket %s: Aktualisierungszeit wird ablaufen in %s/%s!"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
-msgid "Ticket %s: solution time is over (%s/%s)!"
+msgid "Ticket %s: solution time is over (%s %s)!"
 msgstr "Ticket %s: Lösungszeit ist abgelaufen (%s/%s)!"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
-msgid "Ticket %s: solution time will be over in %s/%s!"
+msgid "Ticket %s: solution time will be over in %s %s!"
 msgstr "Ticket %s: Lösungszeit wird ablaufen in %s/%s!"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketForward.tt
@@ -7912,7 +7912,7 @@ msgstr "Alle einblenden/ausblenden"
 msgid "CreateTime"
 msgstr "Erstellzeit"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Article"
 msgstr "Artikel"
 
@@ -7956,7 +7956,7 @@ msgstr "%s%s%s verschieben"
 msgid "New Queue"
 msgstr "Neue Queue"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhoneCommon.tt
 msgid "Communication"
 msgstr "Kommunikation"
 
@@ -8012,15 +8012,15 @@ msgstr "Auswirkung"
 msgid "CustomerID"
 msgstr "Kundennummer"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon/TicketInformation.tt
 msgid "Update Time"
 msgstr "Aktualisierungszeit"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon/TicketInformation.tt
 msgid "Solution Time"
 msgstr "Lösungszeit"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewMedium.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon/TicketInformation.tt
 msgid "First Response Time"
 msgstr "Reaktionszeit"
 
@@ -8392,23 +8392,23 @@ msgstr "Verknüpfte Objekte"
 msgid "Mentions"
 msgstr "Erwähnungen"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon/TicketInformation.tt
 msgid "Archive"
 msgstr "Archiv"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon/TicketInformation.tt
 msgid "This ticket is archived."
 msgstr "Dieses Ticket ist archiviert."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon/TicketInformation.tt
 msgid "is invalid"
 msgstr "ist ungültig"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon/TicketInformation.tt
 msgid "Pending till"
 msgstr "Warten bis"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon/TicketInformation.tt
 msgid "Locked"
 msgstr "Sperre"
 
@@ -8416,7 +8416,7 @@ msgstr "Sperre"
 msgid "%s Ticket(s)"
 msgstr "%s Ticket(s)"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon/TicketInformation.tt
 msgid "Accounted time"
 msgstr "Erfasste Zeit"
 
@@ -9056,7 +9056,7 @@ msgstr "Passworte stimmen nicht überein"
 msgid "SID"
 msgstr "SID"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBoracle.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
 msgid "Port"
 msgstr "Port"
 
@@ -10524,7 +10524,7 @@ msgstr "Tickets aus dem Archiv wiederherstellen"
 msgid "Need Profile!"
 msgstr "Benötige Profile!"
 
-#. Perl Module: Kernel/Modules/AdminGenericAgent.pm
+#. Perl Module: Kernel/Modules/CustomerTicketSearch.pm
 msgid "Got no values to check."
 msgstr "Keine Werte zum Prüfen empfangen."
 
@@ -13244,7 +13244,7 @@ msgstr "Sie haben die Abwesenheitszeit eingeschaltet, möchten Sie diese deaktiv
 msgid "You have %s invalid setting(s) deployed. Click here to show invalid settings."
 msgstr "Es wurden %s ungültige Einstellung(en) in Betrieb genommen. Klicken Sie hier, um die Einstellungen anzuzeigen."
 
-#. Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationIsDirtyCheck.pm
+#. JS File: var/httpd/htdocs/js/Core.SystemConfiguration.js
 msgid "You have undeployed settings, would you like to deploy them?"
 msgstr "Es sind Einstellungen vorhanden, die bislang nicht in Betrieb genommen wurden. Möchten Sie jetzt eine Inbetriebnahme starten?"
 
@@ -13460,7 +13460,7 @@ msgstr "Zur Liste der beobachteten Tickets hinzufügen"
 msgid "Order by"
 msgstr "Sortieren nach"
 
-#. Perl Module: Kernel/Output/HTML/TicketZoom/TicketInformation.pm
+#. Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
 msgid "Ticket Information"
 msgstr "Ticket-Informationen"
 
@@ -14286,7 +14286,7 @@ msgstr "Umgebungsvariablen"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/InternalWebRequest.pm
 msgid "Support Data Collection"
-msgstr "Supportdate-Sammlung"
+msgstr "Supportdaten-Sammlung"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Webserver/InternalWebRequest.pm
 msgid "Support data could not be collected from the web server."
@@ -14965,8 +14965,8 @@ msgid "List of JS files to always be loaded for the agent interface."
 msgstr "Liste der JavaScript-Dateien, die immer im Agenten-Interface geladen werden sollen."
 
 #. XML Definition: Kernel/Config/Files/XML/Daemon.xml
-msgid "Type of daemon log rotation to use: Choose 'OTRS' to let Znuny system to handle the file rotation, or choose 'External' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration."
-msgstr "Art der Logrotation, die vom Daemon genutzt werden soll. Wählen Sie \"OTRS\", um das System die Rotation verwalten zu lassen oder \"extern\", um eine Drittapplikation dafür zu nutzen (z. B. logrotate). Hinweis: externe Mechanismen erfordern weiterhin eine eigene Konfiguration."
+msgid "Type of daemon log rotation to use: Choose 'Znuny' to let Znuny system to handle the file rotation, or choose 'External' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration."
+msgstr "Art der Logrotation, die vom Daemon genutzt werden soll. Wählen Sie \"Znuny\", um das System die Rotation verwalten zu lassen oder \"extern\", um eine Drittapplikation dafür zu nutzen (z. B. logrotate). Hinweis: externe Mechanismen erfordern weiterhin eine eigene Konfiguration."
 
 #. XML Definition: Kernel/Config/Files/XML/Daemon.xml
 msgid "If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if &lt;$OTRSHome&gt;/var/run/ can not be used."
@@ -21428,11 +21428,11 @@ msgstr "Upload-Information"
 msgid "An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator."
 msgstr "Beim Löschen des Anhangs ist ein unbekannter Fehler aufgetreten. Bitte versuchen Sie es erneut. Wenn der Fehler weiterhin auftritt, kontaktieren Sie bitte Ihren Systemadministrator."
 
-#. JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
 msgid "yes"
 msgstr "ja"
 
-#. JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
 msgid "no"
 msgstr "nein"
 
@@ -24399,7 +24399,7 @@ msgstr "Für dieses dynamische Feld gibt es keine Konfiguration."
 
 #. SysConfig
 msgid "Dynamic fields administration"
-msgstr "Verwaltung dynamischer Felder"
+msgstr "dynamische Felder Administration"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
 msgid "Translation"
@@ -24475,7 +24475,7 @@ msgstr "Übersetzungen erstellen und verwalten."
 
 #. SysConfig
 msgid "Manage translation."
-msgstr "Übersatzungen verwalten."
+msgstr "Übersetzung verwalten."
 
 #. SysConfig
 msgid "YAML"
@@ -24503,7 +24503,7 @@ msgstr "Artikel Farbe verwalten."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
 msgid "Upload a file in YAML format (as provided by the export) to import appointment notifications."
-msgstr ""
+msgstr "Datei im YAML-Format hochladen (wie durch den Export bereitgestellt), um Terminbenachrichtigungen zu importieren."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
 msgid "Here you can upload a configuration file to import auto responses to your system. The file needs to be in the .yml format as generated by the auto response export."
@@ -24515,7 +24515,7 @@ msgstr "Bestehende automatische Antworten überschreiben?"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
 msgid "Upload a file in YAML format (as provided by the export) to import ticket notifications."
-msgstr ""
+msgstr "Datei im YAML-Format hochladen (wie durch den Export bereitgestellt), um Ticketbenachrichtigungen zu importieren"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Import configuration"
@@ -24523,7 +24523,7 @@ msgstr "Konfiguration importieren"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSalutation.tt
 msgid "Upload a file in YAML format (as provided by the export) to import salutations."
-msgstr ""
+msgstr "Datei im YAML-Format hochladen (wie durch den Export bereitgestellt), um Anreden zu importieren."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSalutation.tt
 msgid "Overwrite existing salutations?"
@@ -24531,7 +24531,7 @@ msgstr "Bestehende Anreden überschreiben?"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSignature.tt
 msgid "Upload a file in YAML format (as provided by the export) to import signatures."
-msgstr ""
+msgstr "Datei im YAML-Format hochladen (wie durch den Export bereitgestellt), um Signaturen zu importieren."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSignature.tt
 msgid "Overwrite existing signatures?"
@@ -24539,7 +24539,7 @@ msgstr "Bestehende Signaturen überschreiben?"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
 msgid "Upload a file in YAML format (as provided by the export) to import standard templates."
-msgstr ""
+msgstr "Datei im YAML-Format hochladen (wie durch den Export bereitgestellt), um Standardvorlagen zu importieren."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTemplate.tt
 msgid "Overwrite existing standard templates?"
@@ -24547,23 +24547,23 @@ msgstr "Bestehende Standardvorlagen überschreiben?"
 
 #. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
 msgid "Notifications could not be imported due to an unknown error, please check logs for more information."
-msgstr ""
+msgstr "Benachrichtigungen konnten aufgrund eines unbekannten Fehlers nicht importiert werden. Bitte Logs für weitere Informationen prüfen."
 
 #. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
 msgid "The following notifications have been added successfully: %s."
-msgstr ""
+msgstr "Die folgenden Benachrichtigungen wurden erfolgreich hinzugefügt: %s."
 
 #. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
 msgid "The following notifications have been updated successfully: %s."
-msgstr ""
+msgstr "Die folgenden Benachrichtigungen wurden erfolgreich aktualisiert: %s."
 
 #. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
 msgid "The following notifications were not updated: %s."
-msgstr ""
+msgstr "Die folgenden Benachrichtigungen wurden nicht aktualisiert: %s."
 
 #. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
 msgid "There where errors adding/updating the following notifications: %s. Please check the log file for more information."
-msgstr ""
+msgstr "Beim Hinzufügen/Aktualisieren der folgenden Benachrichtigungen sind Fehler aufgetreten: %s. Bitte Logs für weitere Informationen prüfen."
 
 #. Perl Module: Kernel/Modules/AdminAutoResponse.pm
 msgid "Error exporting auto response with ID %s!"
@@ -24579,15 +24579,15 @@ msgstr "Automatische Antworten konnten aufgrund eines unbekannten Fehlers nicht 
 
 #. Perl Module: Kernel/Modules/AdminAutoResponse.pm
 msgid "The following auto responses have been added successfully: %s."
-msgstr ""
+msgstr "Die folgenden automatischen Antworten wurden erfolgreich hinzugefügt: %s."
 
 #. Perl Module: Kernel/Modules/AdminAutoResponse.pm
 msgid "The following auto responses have been updated successfully: %s."
-msgstr ""
+msgstr "Die folgenden automatischen Antworten wurden erfolgreich aktualisiert: %s."
 
 #. Perl Module: Kernel/Modules/AdminAutoResponse.pm
 msgid "The following auto responses were not updated: %s."
-msgstr ""
+msgstr "Die folgenden automatischen Antworten wurden nicht aktualisiert: %s."
 
 #. Perl Module: Kernel/Modules/AdminAutoResponse.pm
 msgid "Errors adding/updating the following auto responses: %s. Please check logs for more information."
@@ -24595,7 +24595,7 @@ msgstr "Fehler beim Hinzufügen/Aktualisieren der folgenden automatischen Antwor
 
 #. Perl Module: Kernel/Modules/AdminNotificationEvent.pm
 msgid "Errors adding/updating the following notifications: %s. Please check logs for more information."
-msgstr ""
+msgstr "Fehler beim Hinzufügen/Aktualisieren der folgenden Benachrichtigungen: %s. Bitte Logs für weitere Informationen prüfen."
 
 #. Perl Module: Kernel/Modules/AdminSalutation.pm
 msgid "Error exporting salutation with ID %s!"
@@ -24611,15 +24611,15 @@ msgstr "Anreden konnten aufgrund eines unbekannten Fehlers nicht importiert werd
 
 #. Perl Module: Kernel/Modules/AdminSalutation.pm
 msgid "The following salutations have been added successfully: %s."
-msgstr ""
+msgstr "Die folgenden Anreden wurden erfolgreich hinzugefügt: %s."
 
 #. Perl Module: Kernel/Modules/AdminSalutation.pm
 msgid "The following salutations have been updated successfully: %s."
-msgstr ""
+msgstr "Die folgenden Anreden wurden erfolgreich aktualisiert: %s."
 
 #. Perl Module: Kernel/Modules/AdminSalutation.pm
 msgid "The following salutations were not updated: %s."
-msgstr ""
+msgstr "Die folgenden Anreden wurden nicht aktualisiert: %s."
 
 #. Perl Module: Kernel/Modules/AdminSalutation.pm
 msgid "Errors adding/updating the following salutations: %s. Please check logs for more information."
@@ -24639,15 +24639,15 @@ msgstr "Signaturen konnten aufgrund eines unbekannten Fehlers nicht importiert w
 
 #. Perl Module: Kernel/Modules/AdminSignature.pm
 msgid "The following signatures have been added successfully: %s."
-msgstr ""
+msgstr "Die folgenden Signaturen wurden erfolgreich hinzugefügt: %s."
 
 #. Perl Module: Kernel/Modules/AdminSignature.pm
 msgid "The following signatures have been updated successfully: %s."
-msgstr ""
+msgstr "Die folgenden Signaturen wurden erfolgreich aktualisiert: %s."
 
 #. Perl Module: Kernel/Modules/AdminSignature.pm
 msgid "The following signatures were not updated: %s."
-msgstr ""
+msgstr "Die folgenden Signaturen wurden nicht aktualisiert: %s."
 
 #. Perl Module: Kernel/Modules/AdminSignature.pm
 msgid "Errors adding/updating the following signatures: %s. Please check logs for more information."
@@ -24667,15 +24667,15 @@ msgstr "Standardvorlagen konnten aufgrund eines unbekannten Fehlers nicht import
 
 #. Perl Module: Kernel/Modules/AdminTemplate.pm
 msgid "The following standard templates have been added successfully: %s."
-msgstr ""
+msgstr "Die folgenden Standardvorlagen wurden erfolgreich hinzugefügt: %s."
 
 #. Perl Module: Kernel/Modules/AdminTemplate.pm
 msgid "The following standard templates have been updated successfully: %s."
-msgstr ""
+msgstr "Die folgenden Standardvorlagen wurden erfolgreich aktualisiert: %s."
 
 #. Perl Module: Kernel/Modules/AdminTemplate.pm
 msgid "The following standard templates were not updated: %s."
-msgstr ""
+msgstr "Die folgenden Standardvorlagen wurden nicht aktualisiert: %s."
 
 #. Perl Module: Kernel/Modules/AdminTemplate.pm
 msgid "Errors adding/updating the following standard templates: %s. Please check logs for more information."
@@ -24683,19 +24683,19 @@ msgstr "Fehler beim Hinzufügen/Aktualisieren der folgenden Standardvorlagen: %s
 
 #. Perl Module: Kernel/System/AutoResponse.pm
 msgid "Couldn't read auto response configuration file. Please make sure the file is valid."
-msgstr ""
+msgstr "Die Auto-Response-Konfigurationsdatei konnte nicht gelesen werden. Bitte prüfen Sie, dass es sich um eine gültige Datei handelt."
 
 #. Perl Module: Kernel/System/Salutation.pm
 msgid "Couldn't read salutation configuration file. Please make sure the file is valid."
-msgstr ""
+msgstr "Die Konfigurationsdatei für Anreden konnte nicht gelesen werden. Bitte prüfen Sie, dass es sich um eine gültige Datei handelt."
 
 #. Perl Module: Kernel/System/Signature.pm
 msgid "Couldn't read signature configuration file. Please make sure the file is valid."
-msgstr ""
+msgstr "Die Konfigurationsdatei für Signaturen konnte nicht gelesen werden. Bitte prüfen Sie, dass es sich um eine gültige Datei handelt."
 
 #. Perl Module: Kernel/System/StandardTemplate.pm
 msgid "Couldn't read standard template configuration file. Please make sure the file is valid."
-msgstr ""
+msgstr "Die Konfigurationsdatei für Standardvorlagen konnte nicht gelesen werden. Bitte prüfen Sie, dass es sich um eine gültige Datei handelt."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Defines which objects are supported for object export using command \"Admin::Object::Export\"."
@@ -24763,47 +24763,47 @@ msgstr "Liste von Benutzereinstellungen (Keys), für die ein Update per UpdateAJ
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Path to RichText content CSS file that will be used to apply internal style to articles. The style will be appended into articles body when using agent interface. Customer internal article styles should match the same or very simillar rules."
-msgstr ""
+msgstr "Pfad zum CSS-Datei, die für die Anwendung interner Stile auf Artikel verwendet wird. Der Stil wird am Ende der Artikel-Body beim Nutzen der Agenten-Oberfläche angehängt. Interner Stil für Artikel in der Kunden-Oberfläche sollte die selben oder sehr ähnliche Regeln haben."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Path to RichText content CSS file that will be used to apply internal style to articles. The styles will be appended into articles body when using customer interface. Agent internal article styles should match the same or very simillar rules."
-msgstr ""
+msgstr "Pfad zum CSS-Datei, die für die Anwendung interner Stile auf Artikel verwendet wird. Der Stil wird am Ende der Artikel-Body beim Nutzen der Kunden-Oberfläche angehängt. Interner Stil für Artikel in der Agenten-Oberfläche sollte die selben oder sehr ähnliche Regeln haben."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the additional default CSS used in rich text editors content. The style will be appended into articles body."
-msgstr ""
+msgstr "Definiert den zusätzlichen Standard-CSS, der in den RichText-Editoren für den Inhalt verwendet wird. Der Stil wird am Ende der Artikel-Body angehängt."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the minimum height for the rich text editor component. Enter number (pixels) or percent value (relative)."
-msgstr ""
+msgstr "Definiert die minimale Höhe der RichText-Editor-Komponente. Geben Sie eine Zahl (für die Höhe in Pixeln) oder einen prozentualen Wert (für eine relative Höhe) an."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the selectable format tags in the rich text editor. Each option is an JSON equivalent of heading options used in CKEditor5, more info: https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#configuring-heading-levels."
-msgstr ""
+msgstr "Definiert die auswählbaren Format-Tags im Rich-Text-Editor. Jede Option ist ein JSON-äquivalent der Headings-Optionen, die in CKEditor5 verwendet werden, mehr Informationen: https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#configuring-heading-levels."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines enabled plugins that are available from the CKEditor build."
-msgstr ""
+msgstr "Definiert die aktivierten Plugins, die aus dem CKEditor-Build verfügbar sind."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines additional plugins in the rich text editor."
-msgstr ""
+msgstr "Definiert zusätzliche Plugins im Rich-Text-Editor."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines plugins that will be excluded from usage in the rich text editor."
-msgstr ""
+msgstr "Definiert die Plugins, die aus der Verwendung im Rich-Text-Editor ausgeschlossen werden."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines content that is allowed for use in the rich text editor."
-msgstr ""
+msgstr "Definiert den Inhalt, der für die Verwendung im Rich-Text-Editor erlaubt ist."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines content that is disallowed for use in the rich text editor."
-msgstr ""
+msgstr "Definiert den Inhalt, der für die Verwendung im Rich-Text-Editor nicht erlaubt ist."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "General settings for autocompletion in rich text editor. By default \"ItemTemplate\" uses \"li\" html tag to show the option that is matching (list format). The value of the key is used to define html inside it."
-msgstr ""
+msgstr "Allgemeine Einstellungen für Autocompletion im Rich-Text-Editor. Standardmäßig verwendet \"ItemTemplate\" den \"li\" HTML-Tag, um die Option anzuzeigen, die passt (Listenformat). Der Wert des Schlüssels wird verwendet, um HTML innerhalb des Tags zu definieren."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketProcessCategory.tt
 msgid "Process Ticket Category"
@@ -24847,11 +24847,11 @@ msgstr "Legt fest, welche ContentTypes für die Anlagenvorschau zulässig sind."
 
 #. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator."
-msgstr ""
+msgstr "Bei der Vorschau des Anhangs ist ein unbekannter Fehler aufgetreten. Bitte versuchen Sie es erneut. Wenn der Fehler weiterhin auftritt, kontaktieren Sie bitte Ihren Systemadministrator."
 
 #. SysConfig
 msgid "AsPopup"
-msgstr ""
+msgstr "Als Popup"
 
 #. SysConfig
 msgid "Create new process ticket via category."
@@ -24903,11 +24903,11 @@ msgstr "Wendet das mit 'SendmailModule::RateLimit' festgelegte Limit je Absender
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Defines the default ticket attribute for ticket sorting in the mention ticket view of the agent interface."
-msgstr ""
+msgstr "Definiert das Standard-Ticket-Attribut für die Ticket-Sortierung in der Ansicht \"Erwähnte Tickets\" des Agenten-Interface."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Defines the default ticket order in the ticket mention view of the agent interface. Up: oldest on top. Down: latest on top."
-msgstr ""
+msgstr "Definiert die Standard-Ticket-Reihenfolge in der Ansicht \"Erwähnte Tickets\" des Agenten-Interface. Auf: Älteste oben. Ab: Neuste oben."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingXSLT.tt
 msgid "Move line up"
@@ -24971,5 +24971,385 @@ msgstr "Prozess-Ticket-Kategorie."
 
 #. SysConfig
 msgid "Process ticket category"
+msgstr "Prozess-Ticket-Kategorie"
+
+#. XML Definition: Kernel/Config/Files/XML/Daemon.xml
+msgid "Remove closed tickets from agents' ticket watch lists."
+msgstr "Geschlossene Tickets von den Beobachtungslisten der Agenten entfernen."
+
+#. Perl Module: Kernel/Modules/AdminMailAccount.pm
+msgid "Error fetching mail%s, please check the Communication Log!"
+msgstr "Fehler beim Abruf von Mails%s. Bitte Kommunikationsprotokoll prüfen."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Defines available article actions for Web articles."
+msgstr "Legt verfügbare Artikel-Aktionen für Web-Artikel fest."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
+msgid "Do you really want to delete this %s?"
+msgstr "Möchten Sie dieses %s wirklich löschen?"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
+msgid "auto response"
+msgstr "automatische Antwort"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSalutation.tt
+msgid "salutation"
+msgstr "Anrede"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSignature.tt
+msgid "signature"
+msgstr "Signatur"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.AutoResponse.js
+msgid "Delete this %s"
+msgstr "Dieses %s löschen"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.AutoResponse.js
+msgid "Deleting the %s and its data. This may take a while..."
+msgstr "Lösche %s und die zugehörigen Daten. Dies kann eine Weile dauern..."
+
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/TicketZoom/CopyTicketNumber/Icon.html.tmpl
+msgid "Copy ticket information"
+msgstr "Ticket-Informationen kopieren"
+
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/TicketZoom/CopyTicketNumber/Menu.html.tmpl
+msgid "Copy Ticket Number"
+msgstr "Ticketnummer kopieren"
+
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/TicketZoom/CopyTicketNumber/Menu.html.tmpl
+msgid "Copy Ticket Number + Title"
+msgstr "Ticketnummer + Titel kopieren"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
+msgid "Copied to clipboard!"
+msgstr "In Zwischenablage kopiert!"
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically."
+msgstr "Definiert den Standard-Suchfilter für den Ticket-Zusammenführungsbildschirm. Dieser Filter wird angewendet, wenn nach Tickets gesucht wird, die zusammengeführt werden sollen. Der StateType-Filter beschränkt die Suche auf Tickets mit bestimmten Status (neu, offen, geschlossen, Wartung, Wartung automatisch). Zusätzliche Filter können dynamisch hinzugefügt werden."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
+msgid "Set up your personal preferences. Save each setting by clicking \"Save setting\" button."
+msgstr "Legen Sie Ihre persönlichen Einstellungen fest. Speichern Sie jede Einstellung, indem Sie auf die Schaltfläche „Einstellung speichern“ klicken."
+
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DirtyCheck.html.tmpl
+msgid "You have undeployed settings:"
+msgstr "Es sind Einstellungen vorhanden, die bislang nicht in Betrieb genommen wurden:"
+
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DirtyCheck.html.tmpl
+msgid "Standard Deploy"
+msgstr "Standard-Inbetriebnahme"
+
+#. JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DirtyCheck.html.tmpl
+msgid "Quick Deploy"
+msgstr "Schnell-Inbetriebnahme"
+
+#. Perl Module: Kernel/Modules/AdminSystemConfigurationDeployment.pm
+msgid "Quick Deploy by"
+msgstr "Schnell-Inbetriebnahme durch"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
+msgid "Search for customer"
+msgstr "Kunde suchen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
+msgid "Open address book"
+msgstr "Adressbuch öffnen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
+msgid "Address book"
+msgstr "Adressbuch"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
+msgid "Customer suggestions"
+msgstr "Kundenvorschläge"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
+msgid "Undo & Close"
+msgstr "Rückgängig machen und Schließen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Add Outbound Email Profile"
+msgstr "Profil für ausgehende E-Mails hinzufügen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Filter for outbound email profiles"
+msgstr "Filter für Profile für ausgehende E-Mails"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Manage Outbound Email Profiles"
+msgstr "Verwaltung von Profilen für ausgehende E-Mails"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Update Outbound Email Profile"
+msgstr "Profil für ausgehende E-Mails bearbeiten"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Email addresses"
+msgstr "E-Mail-Adressen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Fallback"
+msgstr "Fallback"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Email addresses have to be configured!"
+msgstr "E-Mail-Adressen müssen konfiguriert werden!"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Delete outbound email profile"
+msgstr "Profil für ausgehende E-Mails löschen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Command"
+msgstr "Kommando"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Enter a number between 1 and 65535."
+msgstr "Eine Nummer zwischen 1 und 65535 eingeben."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Port to use for given host (if non-standard port)."
+msgstr "Port für Host (falls Nicht-Standard-Port)."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Enter a number between 1 and 999."
+msgstr "Nummer zwischen 1 und 999 eingeben."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Timeout (in seconds) for connection to host."
+msgstr "Timeout (in Sekunden) für Verbindung zum Host."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Skip SSL verification"
+msgstr "SSL-Verifikation überspringen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Select to make this the fallback/default config for any email address not configured in other outbound email profiles. Only one outbound email profile can be the fallback."
+msgstr "Wählen Sie diese Option, um diese Einstellung als Fallback/Standardeinstellung für alle E-Mail-Adressen zu verwenden, die in anderen Profilen für ausgehende E-Mails nicht konfiguriert sind. Es kann nur ein Profil für ausgehende E-Mails als Fallback verwendet werden."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+msgid "Edit current fallback outbound email profile (host %s)."
+msgstr "Aktuelles Fallback-Profil für ausgehende E-Mails (Host %s) bearbeiten."
+
+#. Perl Module: Kernel/Modules/AdminSendmailConfig.pm
+msgid "Outbound email profile updated!"
+msgstr "Profil für ausgehende E-Mails aktualisiert!"
+
+#. Perl Module: Kernel/Modules/AdminSendmailConfig.pm
+msgid "Configuration option 'SendmailModule' has to be set to 'Kernel::System::Email::MultiSendmail' to be able to use the outbound email profiles managed here."
+msgstr "Konfigurationsoption 'SendmailModule' muss auf 'Kernel::System::Email::MultiSendmail' gesetzt werden, damit die hier konfigurierten Profile für ausgehende E-Mails verwendet werden können."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Names of system config options with email addresses to also be selectable for an outbound email profile (besides system addresses)."
+msgstr "Namen von Systemkonfigurationsoptionen mit E-Mail-Adressen, die ebenfalls in einem Profil für ausgehende E-Mails auswählbar sein sollen (neben Systemadressen)."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SendmailConfig.js
+msgid "Do you really want to delete this outbound email profile?"
+msgstr "Soll dieses Profil für ausgehende E-Mails wirklich gelöscht werden?"
+
+#. SysConfig
+msgid "Manage outbound email profiles."
+msgstr "Profile für ausgehende E-Mails verwalten."
+
+#. SysConfig
+msgid "Outbound Email Profiles"
+msgstr "Profile für ausgehende E-Mails"
+
+#. Perl Module: Kernel/Modules/CustomerTicketOverview.pm
+msgid "You have no permission or the ticket does not exist."
+msgstr "Sie haben keine Berechtigungen oder das Ticket existiert nicht."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
+msgid "Upload a file in YAML format (as provided by the export) to import generic agent jobs."
+msgstr "Datei im YAML-Format hochladen (wie durch den Export bereitgestellt), um Generic-Agent-Jobs zu importieren."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericAgent.tt
+msgid "Overwrite existing generic agents?"
+msgstr "Bestehende Generic-Agents überschreiben?"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPostMasterFilter.tt
+msgid "Upload a file in YAML format (as provided by the export) to import postmaster filters."
+msgstr "Datei im YAML-Format hochladen (wie durch den Export bereitgestellt), um Postmaster-Filter zu importieren."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPostMasterFilter.tt
+msgid "Overwrite existing postmaster filters?"
+msgstr "Bestehende Postmaster-Filter überschreiben?"
+
+#. Perl Module: Kernel/Modules/AdminGenericAgent.pm
+msgid "Error exporting generic agent job with Name %s!"
+msgstr "Fehler beim Exportieren des Generic-Agent-Jobs %s!"
+
+#. Perl Module: Kernel/Modules/AdminGenericAgent.pm
+msgid "Error creating the generic agent job."
+msgstr "Fehler beim Erstellen des Generic-Agent-Jobs."
+
+#. Perl Module: Kernel/Modules/AdminGenericAgent.pm
+msgid "Jobs could not be imported due to an unknown error. Please check logs for more information."
+msgstr "Jobs konnten aufgrund eines unbekannten Fehlers nicht importiert werden. Bitte Logs für weitere Informationen prüfen."
+
+#. Perl Module: Kernel/Modules/AdminGenericAgent.pm
+msgid "The following generic agent jobs have been added successfully: %s."
+msgstr "Die folgenden Generic-Agent-Jobs wurden erfolgreich hinzugefügt: %s."
+
+#. Perl Module: Kernel/Modules/AdminGenericAgent.pm
+msgid "The following generic agent jobs have been updated successfully: %s."
+msgstr "Die folgenden Generic-Agent-Jobs wurden erfolgreich aktualisiert: %s."
+
+#. Perl Module: Kernel/Modules/AdminGenericAgent.pm
+msgid "The following generic agent jobs were not updated: %s."
+msgstr "Die folgenden Generic-Agent-Jobs wurden nicht aktualisiert: %s."
+
+#. Perl Module: Kernel/Modules/AdminGenericAgent.pm
+msgid "Errors adding/updating the following generic agent jobs: %s. Please check logs for more information."
+msgstr "Fehler beim Erstellen/Aktualisieren der folgenden Generic-Agent-Jobs: %s. Bitte Logs für weitere Informationen prüfen."
+
+#. Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
+msgid "Error exporting postmaster filter with Name %s!"
+msgstr "Fehler beim Exportieren des Postmaster-Filters %s!"
+
+#. Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
+msgid "Error creating the postmaster filter."
+msgstr "Fehler beim Erstellen des Postmaster-Filters."
+
+#. Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
+msgid "Filters could not be imported due to an unknown error. Please check logs for more information."
+msgstr "Filter konnten aufgrund eines unbekannten Fehlers nicht importiert werden. Bitte Logs für weitere Informationen prüfen."
+
+#. Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
+msgid "The following postmaster filters have been added successfully: %s."
+msgstr "Die folgenden Postmaster-Filter wurden erfolgreich hinzugefügt: %s."
+
+#. Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
+msgid "The following postmaster filters have been updated successfully: %s."
+msgstr "Die folgenden Postmaster-Filter wurden erfolgreich aktualisiert: %s."
+
+#. Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
+msgid "The following postmaster filters were not updated: %s."
+msgstr "Die folgenden Postmaster-Filter wurden nicht aktualisiert: %s."
+
+#. Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
+msgid "Errors adding/updating the following postmaster filters: %s. Please check logs for more information."
+msgstr "Fehler beim Erstellen/Aktualisieren der folgenden Postmaster-Filter: %s. Bitte Logs für weitere Informationen prüfen."
+
+#. Perl Module: Kernel/System/GenericAgent.pm
+msgid "Couldn't read Job configuration YAML file. Please make sure the file is valid."
+msgstr "Die Job-Konfigurationsdatei konnte nicht gelesen werden. Bitte prüfen Sie, dass es sich um eine gültige Datei handelt."
+
+#. Perl Module: Kernel/System/PostMaster/Filter.pm
+msgid "Couldn't read Filter configuration YAML file. Please make sure the file is valid."
+msgstr "Die Filter-Konfigurationsdatei konnte nicht gelesen werden. Bitte prüfen Sie, dass es sich um eine gültige Datei handelt."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Sets the customer user field in the agent interface."
+msgstr "Setzt das Kundenbenutzerfeld in der Agentenoberfläche."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Sets the customer user field as mandatory."
+msgstr "Legt das Kundenbenutzerfeld als Pflichtfeld fest."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of activities to keep per user. Older ones will be deleted."
+msgstr "Maximale Anzahl der Aktivitäten, die pro Benutzer gespeichert werden. Ältere werden gelöscht."
+
+#. JS File: var/httpd/htdocs/js/Core.Activity.js
+msgid "Could not load activities."
+msgstr "Aktivitäten konnten nicht geladen werden."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Default template for notification e-mails (see Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email directory for available templates)."
+msgstr "Standardvorlage für Benachrichtigungs-E-Mails (verfügbare Vorlagen finden Sie im Verzeichnis Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email)."
+
+#. Perl Module: Kernel/Modules/AJAXAttachment.pm
+msgid "%s is missing. The file could not be deleted properly."
+msgstr "%s fehlt. Die Datei konnte nicht ordnungsgemäß gelöscht werden."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
+msgid "Unlock and close popup"
+msgstr "Sperre aufheben und schließen"
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Displayed in the sidebar as additional information."
+msgstr "Wird in der Seitenleiste als zusätzliche Information angezeigt."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "TicketActionCommon widget that displays the current action description."
+msgstr "TicketActionCommon-Widget, das die aktuelle Aktion beschreibt."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "TicketActionCommon widget that displays ticket information."
+msgstr "TicketActionCommon-Widget, das Ticketinformationen anzeigt."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "TicketActionCommon widget that displays customer information."
+msgstr "TicketActionCommon-Widget, das Kundeninformationen anzeigt."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Sets the state of a ticket in screen of the agent interface."
+msgstr "Setzt den Status eines Tickets im Bildschirm des Agenten-Interfaces."
+
+#. SysConfig
+msgid "Current action description."
+msgstr "Beschreibung der aktuellen Aktion."
+
+#. SysConfig
+msgid "Ticket information"
+msgstr "Ticketinformation"
+
+#. Perl Module: Kernel/Modules/AgentSession.pm
+msgid "Invalid subaction!"
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "List of session keys that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession."
+msgstr ""
+
+#. SysConfig
+msgid "Agent Session."
+msgstr "Agent Sitzung."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions."
+msgstr "Liste der Sitzungen (Schlüssel), die durch die Unteraktion UpdateAJAX des Frontend-Moduls AgentSession aktualisiert werden dürfen. Dabei handelt es sich um reguläre Ausdrücke."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Defines which article attributes TicketGeneric dashboard widgets are allowed to request when building additional columns."
+msgstr "Legt fest, welche Artikelattribute TicketGeneric-Dashboard-Widgets beim Erstellen zusätzlicher Spalten anfordern dürfen."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Shows the ticket type selection (Ticket::Type needs to be activated)."
+msgstr "Zeigt die Auswahl des Ticket-Typs an (Ticket::Type muss aktiviert sein)."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Shows the service selection (Ticket::Service needs to be activated)."
+msgstr "Zeigt die Serviceauswahl an (Ticket::Service muss aktiviert sein)."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Enforces that the agent must select a service."
+msgstr "Erzwingt, dass der Agent einen Dienst auswählen muss."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Enforces that the agent must select an SLA."
+msgstr "Erzwingt, dass der Agent ein SLA auswählen muss."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Shows the ticket priority selection."
+msgstr "Zeigt die Auswahl der Ticketpriorität an."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+msgid "Toggle sidebar"
+msgstr "Sidebar ein-/ausblenden"
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "When support data is collected via SupportDataCollector, certain SysConfig values marked with ValueType=\"Password\" are automatically masked. This prevents passwords from appearing in plain text in the support data. This setting defines the settings that contain complex configuration hashes that should not be masked when generating the support data."
+msgstr "Wenn Support-Daten über den SupportDataCollector gesammelt werden, werden bestimmte SysConfig-Werte, die mit ValueType=\"Password\" gekennzeichnet sind, automatisch maskiert. Dadurch wird verhindert, dass Passwörter im Klartext in den Support-Daten erscheinen. Diese Einstellung definiert die Einstellungen, die komplexe Konfigurations-Hashes enthalten, die bei der Generierung der Support-Daten nicht maskiert werden sollten."
+
+#. SysConfig
+msgid "Edit customer user"
+msgstr "Kundenbenutzer bearbeiten"
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view."
 msgstr ""
 

@@ -77,6 +77,12 @@ handheld {
         transition: var(--main-transition);
     }
 
+    .icon-hover.Hidden,
+    .icon-hover-md.Hidden,
+    .icon-hover-sm.Hidden {
+        display: none;
+    }
+
     .Field .icon-hover,
     .Field .icon-hover-md,
     .Field .icon-hover-sm {
@@ -184,8 +190,6 @@ handheld {
         flex-flow: column;
         gap: var(--gap-xs);
         background: var(--main-bg-color);
-        /* needed so its ::after element does not cause horizontal overflow in parent containers */
-        overflow: hidden;
     }
 
     .card-item-wrapper .card-item {
@@ -282,20 +286,8 @@ handheld {
         border: 0;
         float: left;
         border-radius: var(--border-radius-xl);
-        background: var(--primary-color);
     }
 
-    .pill.Info,
-    .pill.Error,
-    .pill.Success,
-    .pill.Warning {
-        color: var(--main-font-color) !important;
-    }
-
-    .pill.contrast {
-        border: var(--border-width) solid var(--main-font-color);
-        color: var(--main-font-color) !important;
-    }
 
     /* **************************************** Scrollbar **************************************** */
     ::-webkit-scrollbar,
@@ -395,6 +387,10 @@ handheld {
         padding: 0;
     }
 
+    .ui-datepicker td:first-child,  .ui-datepicker th:first-child {
+        padding: 0;
+    }
+
     .ui-datepicker.ui-widget-content td a.ui-state-default {
         font-size: var(--font-size-sm);
     }
@@ -466,22 +462,6 @@ handheld {
         display: flex;
         justify-content: space-between;
         word-wrap: break-word;
-    }
-
-    /* .mentions-widget ul li:hover {
-        background: var(--main-font-color);
-        transition: var(--main-transition);
-    } */
-
-    .mentions-widget ul li .email-wrapper {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        gap: var(--gap-xs);
-    }
-
-    .mentions-widget ul li .email-wrapper span:nth-child(2) {
-        color: var(--gray-dark-semi);
     }
 
     /* **************************************** Buttons **************************************** */
@@ -695,6 +675,7 @@ handheld {
         position: relative;
         border-radius: var(--border-radius-xxs);
         gap: var(--gap-md);
+        margin-bottom: var(--margin-xl);
     }
 
     .MessageBrowser i,
@@ -734,6 +715,8 @@ handheld {
         text-align: center;
     }
 
+
+
     /* Error MessageBox*/
     .MessageBox.Error {
         background: #f8d7da;
@@ -767,6 +750,22 @@ handheld {
     .LayoutPopup .card .card-item .Field.component-attachment,
     .AgentTicketActionCommon fieldset .Field.component-attachment {
         margin-top: var(--margin-sm);
+    }
+
+    /* Hide Dynamic Fields card only when .cardContent contains .Row but none are visible.
+    :has() is supported by current browsers (Chrome 105+, Firefox 121+, Safari 15.4+).
+    If there is no .Row at all, do not hide (other markup may still be shown).
+    */
+    .cardDynamicField:has(.cardContent .Row):not(:has(.cardContent .Row:not(.Hidden):not([style*="display: none"]))) {
+        display: none;
+    }
+
+    /* Hide Article Dynamic Fields card only when .cardContent contains .Row but none are visible.
+    :has() is supported by current browsers (Chrome 105+, Firefox 121+, Safari 15.4+).
+    If there is no .Row at all, do not hide (other markup may still be shown).
+    */
+    .cardArticleDynamicField:has(.cardContent .Row):not(:has(.cardContent .Row:not(.Hidden):not([style*="display: none"]))) {
+        display: none;
     }
 
     .AttachmentListContainer {
@@ -1191,15 +1190,9 @@ handheld {
         justify-content: flex-end;
         position: absolute;
         gap: var(--padding-md);
-        top: -30px;
+        top: 0px;
         right: 0;
     }
-
-    /* .main-search-component .search-ticket .create-tpl-btn {
-        position: absolute;
-        top: var(--padding-md);
-        right: 0;
-    } */
 
     .main-search-component .search-ticket .create-tpm-btn button {
         min-width: var(--btn-max-width-sm);
@@ -1795,20 +1788,22 @@ handheld {
         border-top: 0;
     }
 
-    .Pagination:empty {
-        padding: 0;
-        display: none;
-    }
-
     .SidebarColumn .Pagination {
         background: transparent;
         border-top: 0;
     }
 
     .Pagination:empty,
-    .Pagination:is(:empty),
+    .Pagination:is(:empty) {
+        padding: 0;
+        display: none;
+    }
+
     .Pagination:has(.page-links:empty) {
         padding: 0;
+    }
+
+    .Pagination .page-links:empty {
         display: none;
     }
 
@@ -2063,7 +2058,13 @@ handheld {
         font-weight: var(--normal);
     }
 
-
-
+    /* Shared admin deployment notification layout. */
+    .DeploymentContainer {
+        display: flex;
+        white-space: nowrap;
+        gap: var(--gap-sm);
+        position: relative;
+        align-items: center;
+    }
 
 }

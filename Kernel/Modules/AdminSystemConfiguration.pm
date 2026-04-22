@@ -11,6 +11,7 @@ package Kernel::Modules::AdminSystemConfiguration;
 
 use strict;
 use warnings;
+use utf8;
 
 our $ObjectManagerDisabled = 1;
 
@@ -98,11 +99,16 @@ sub Run {
         if ($Search) {
             my @SettingList = $Kernel::OM->Get('Kernel::System::SysConfig')->ConfigurationList();
 
+            # Split on asterisks, quote each part, join with .*
+            # We need this way to make sure that SearchPattern will be valid
+            my @Parts         = split /\*/, $Search;
+            my $SearchPattern = join '.*', map {"\Q$_\E"} @Parts;
+
             SETTING:
             for my $Setting ( sort @SettingList ) {
 
                 # Skip setting if search term doesn't match.
-                next SETTING if $Setting->{Name} !~ m{\Q$Search\E}msi;
+                next SETTING if $Setting->{Name} !~ m{$SearchPattern}msi;
 
                 push @Data, $Setting->{Name};
                 last SETTING if scalar @Data >= $MaxResults;

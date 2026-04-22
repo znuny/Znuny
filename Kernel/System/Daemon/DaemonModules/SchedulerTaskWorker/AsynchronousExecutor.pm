@@ -142,7 +142,7 @@ sub Run {
     };
 
     # Check if there are errors.
-    # Do not log debug messages as Daemon errors. See bug#14722 (https://bugs.otrs.org/show_bug.cgi?id=14722).
+    # Do not log debug messages as Daemon errors.
     if ( $ErrorMessage && $ErrorMessage !~ /Debug: /g ) {
 
         $Self->_HandleError(

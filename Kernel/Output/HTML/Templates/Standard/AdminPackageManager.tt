@@ -178,7 +178,7 @@
                             <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
                         </li>
                         <li>
-                            <a href="https://doc.znuny.org/doc/manual/admin/6.0/en/html/updating.html" target="_blank" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-external-link"></i>[% Translate("Go to updating instructions") | html %]</span></a>
+                            <a href="https://doc.znuny.org/updating/znuny" target="_blank" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-external-link"></i>[% Translate("Go to updating instructions") | html %]</span></a>
                         </li>
                         <li>
                             <a href="https://www.znuny.org/" target="_blank" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-external-link"></i>[% Translate("Go to znuny.org") | html %]</span></a>

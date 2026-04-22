@@ -52,7 +52,7 @@ sub Param {
     }
 
     # return on no pw reset backends
-    return if $Module =~ /(LDAP|HTTPBasicAuth|Radius)/i;
+    return if $Module =~ /(LDAP|HTTPBasicAuth|Radius|SAML)/i;
 
     my @Params;
     push(

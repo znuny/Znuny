@@ -129,7 +129,10 @@ $Selenium->RunTest(
 
         # Select test customer.
         $Selenium->find_element( "#FromCustomer", 'css' )->send_keys($UserFirstname);
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("li.ui-menu-item:visible").length' );
+        $Selenium->WaitFor(
+            JavaScript =>
+                'return typeof($) === "function" && $("li.ui-menu-item:visible").length'
+        );
         $Selenium->execute_script("\$('li.ui-menu-item:contains($UserFirstname)').click()");
         $Selenium->InputFieldValueSet(
             Element => '#Dest',

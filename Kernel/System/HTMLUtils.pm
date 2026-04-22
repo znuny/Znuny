@@ -53,6 +53,19 @@ sub new {
     my $Self = {};
     bless( $Self, $Type );
 
+    # Helper function to construct regexes
+    my $String2HTMLRE = sub {
+
+        # Split text into characters and turn it into a series of alternations where each
+        # matches either the character or its possible numerical enity encodings. Return
+        # the RE joined back together as a string.
+        return join( '', map { sprintf( '(?:%s|&\#0*%d;?|&\#x0*%x;?)', $_, ord, ord ) } split //, shift );
+    };
+
+    # TODO: it would be even faster to do this at compile time and have it as readonly class data
+    $Self->{JavaScriptPrefixRegex} = $String2HTMLRE->('javascript');
+    $Self->{ExpressionPrefixRegex} = $String2HTMLRE->('expression');
+
     # get debug level from parent
     $Self->{Debug} = $Param{Debug} || 0;
 
@@ -1299,34 +1312,6 @@ sub Safety {
     my $TagStart = '(?:<|[+]ADw-)';
     my $TagEnd   = '(?:>|[+]AD4-)';
 
-    # This can also be entity-encoded to hide it from the parser.
-    #   Browsers seem to tolerate an omitted ";".
-    my $JavaScriptPrefixRegex = '
-        (?: j | &\#106[;]? | &\#x6a[;]? )
-        (?: a | &\#97[;]?  | &\#x61[;]? )
-        (?: v | &\#118[;]? | &\#x76[;]? )
-        (?: a | &\#97[;]?  | &\#x61[;]? )
-        (?: s | &\#115[;]? | &\#x73[;]? )
-        (?: c | &\#99[;]?  | &\#x63[;]? )
-        (?: r | &\#114[;]? | &\#x72[;]? )
-        (?: i | &\#105[;]? | &\#x69[;]? )
-        (?: p | &\#112[;]? | &\#x70[;]? )
-        (?: t | &\#116[;]? | &\#x74[;]? )
-    ';
-
-    my $ExpressionPrefixRegex = '
-        (?: e | &\#101[;]? | &\#x65[;]? )
-        (?: x | &\#120[;]? | &\#x78[;]? )
-        (?: p | &\#112[;]? | &\#x70[;]? )
-        (?: r | &\#114[;]? | &\#x72[;]? )
-        (?: e | &\#101[;]? | &\#x65[;]? )
-        (?: s | &\#115[;]? | &\#x73[;]? )
-        (?: s | &\#115[;]? | &\#x73[;]? )
-        (?: i | &\#105[;]? | &\#x69[;]? )
-        (?: o | &\#111[;]? | &\#x6f[;]? )
-        (?: n | &\#110[;]? | &\#x6e[;]? )
-    ';
-
     # Replace as many times as it is needed to avoid nesting tag attacks.
     do {
         $Replaced = undef;
@@ -1344,7 +1329,7 @@ sub Safety {
 
             # remove style/javascript parts
             $Replaced += ${$String} =~ s{
-                $TagStart style[^>]+? $JavaScriptPrefixRegex (.+?|) $TagEnd (.*?) $TagStart /style \s* $TagEnd
+                $TagStart style[^>]+? $Self->{JavaScriptPrefixRegex} (.+?|) $TagEnd (.*?) $TagStart /style \s* $TagEnd
             }
             {}sgxim;
 
@@ -1429,7 +1414,7 @@ sub Safety {
                 $Replaced += $Tag =~ s{
                     ((?:\s|;|/)(?:background|url|src|href)\s*=\s*)
                     ('|"|)                                  # delimiter, can be empty
-                    (?:\s* $JavaScriptPrefixRegex .*?)      # javascript, followed by anything but the delimiter
+                    (?:\s* $Self->{JavaScriptPrefixRegex} .*?)      # javascript, followed by anything but the delimiter
                     \2                                      # delimiter again
                     (\s|$TagEnd)
                 }
@@ -1439,13 +1424,13 @@ sub Safety {
 
                 # remove link javascript tags
                 $Replaced += $Tag =~ s{
-                    ($TagStart link .+? $JavaScriptPrefixRegex (.+?|) $TagEnd)
+                    ($TagStart link .+? $Self->{JavaScriptPrefixRegex} (.+?|) $TagEnd)
                 }
                 {}sgxim;
 
                 # remove MS CSS expressions (JavaScript embedded in CSS)
                 $Replaced += $Tag =~ s{
-                    \sstyle=("|')[^\1]*? $ExpressionPrefixRegex [(].*?\1($TagEnd|\s)
+                    \sstyle=("|')[^\1]*? $Self->{ExpressionPrefixRegex} [(].*?\1($TagEnd|\s)
                 }
                 {
                     $2;

@@ -271,7 +271,7 @@ END;
 CREATE TABLE users (
     id NUMBER (12, 0) NOT NULL,
     login VARCHAR2 (200) NOT NULL,
-    pw VARCHAR2 (128) NOT NULL,
+    pw VARCHAR2 (255) NOT NULL,
     title VARCHAR2 (50) NULL,
     first_name VARCHAR2 (100) NOT NULL,
     last_name VARCHAR2 (100) NOT NULL,
@@ -1042,6 +1042,68 @@ FOR EACH ROW
 BEGIN
     IF :new.id IS NULL THEN
         SELECT SE_signature.nextval
+        INTO :new.id
+        FROM DUAL;
+    END IF;
+END;
+/
+--
+;
+-- ----------------------------------------------------------
+--  create table sendmail_config
+-- ----------------------------------------------------------
+CREATE TABLE sendmail_config (
+    id NUMBER (12, 0) NOT NULL,
+    sendmail_module VARCHAR2 (255) NOT NULL,
+    cmd VARCHAR2 (2000) NULL,
+    host VARCHAR2 (255) NULL,
+    port NUMBER (5, 0) NULL,
+    timeout NUMBER (5, 0) NULL,
+    skip_ssl_verification NUMBER (5, 0) DEFAULT 0 NULL,
+    is_fallback_config NUMBER (5, 0) DEFAULT 0 NULL,
+    authentication_type VARCHAR2 (100) NULL,
+    auth_user VARCHAR2 (255) NULL,
+    auth_password VARCHAR2 (255) NULL,
+    oauth2_token_config_id NUMBER (12, 0) NULL,
+    email_addresses VARCHAR2 (2000) NULL,
+    comments VARCHAR2 (255) NULL,
+    valid_id NUMBER (5, 0) NOT NULL,
+    create_time DATE NOT NULL,
+    create_by NUMBER (12, 0) NOT NULL,
+    change_time DATE NOT NULL,
+    change_by NUMBER (12, 0) NOT NULL
+);
+ALTER TABLE sendmail_config ADD CONSTRAINT PK_sendmail_config PRIMARY KEY (id);
+BEGIN
+    EXECUTE IMMEDIATE 'DROP SEQUENCE SE_sendmail_config';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE SEQUENCE SE_sendmail_config
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+CACHE 20
+ORDER
+;
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TRIGGER SE_sendmail_config_t';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE OR REPLACE TRIGGER SE_sendmail_config_t
+BEFORE INSERT ON sendmail_config
+FOR EACH ROW
+BEGIN
+    IF :new.id IS NULL THEN
+        SELECT SE_sendmail_config.nextval
         INTO :new.id
         FROM DUAL;
     END IF;
@@ -2393,7 +2455,7 @@ END;
 CREATE TABLE article_color (
     id NUMBER (5, 0) NOT NULL,
     name VARCHAR2 (200) NOT NULL,
-    color VARCHAR2 (10) NOT NULL,
+    color VARCHAR2 (25) NOT NULL,
     create_time DATE NOT NULL,
     create_by NUMBER (12, 0) NOT NULL,
     change_time DATE NOT NULL,
@@ -3923,7 +3985,7 @@ CREATE TABLE customer_user (
     login VARCHAR2 (200) NOT NULL,
     email VARCHAR2 (150) NOT NULL,
     customer_id VARCHAR2 (150) NOT NULL,
-    pw VARCHAR2 (128) NULL,
+    pw VARCHAR2 (255) NULL,
     title VARCHAR2 (50) NULL,
     first_name VARCHAR2 (100) NOT NULL,
     last_name VARCHAR2 (100) NOT NULL,
@@ -4127,7 +4189,7 @@ END;
 CREATE TABLE mail_account (
     id NUMBER (12, 0) NOT NULL,
     login VARCHAR2 (200) NOT NULL,
-    pw VARCHAR2 (200) NOT NULL,
+    pw VARCHAR2 (255) NOT NULL,
     host VARCHAR2 (200) NOT NULL,
     account_type VARCHAR2 (20) NOT NULL,
     queue_id NUMBER (12, 0) NOT NULL,
@@ -6537,7 +6599,7 @@ CREATE TABLE calendar (
     group_id NUMBER (12, 0) NOT NULL,
     name VARCHAR2 (200) NOT NULL,
     salt_string VARCHAR2 (64) NOT NULL,
-    color VARCHAR2 (7) NOT NULL,
+    color VARCHAR2 (25) NOT NULL,
     ticket_appointments CLOB NULL,
     valid_id NUMBER (5, 0) NOT NULL,
     create_time DATE NOT NULL,

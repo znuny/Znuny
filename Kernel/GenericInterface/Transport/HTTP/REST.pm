@@ -250,7 +250,6 @@ sub ProviderProcessRequest {
 
     # No length provided, return the information we have.
     # Also return for 'GET' method because it does not allow sending an entity-body in requests.
-    # For more information, see https://bugs.otrs.org/show_bug.cgi?id=14203.
     if ( !$Length || $RequestMethod eq 'GET' ) {
         return {
             Success   => 1,

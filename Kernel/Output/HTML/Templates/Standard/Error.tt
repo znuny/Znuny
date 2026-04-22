@@ -10,32 +10,11 @@
     <div class="W50pc CenterBox SpacingTopLarge SpacingBottomLarge ErrorScreen">
         <div class="WidgetSimple">
             <div class="Header">
-                <h2>[% Translate("An Error Occurred") | html %]</h2>
+                <h2>[% Translate("Error") | html %]</h2>
             </div>
             <div class="Content">
-                <p>[% Translate(Data.Message) | truncate(200) | html %]</p>
-                <p class="SpacingTop">
-                    [% Translate(Data.Comment) | html %]
-                </p>
-                <div id="Traceback" class="SpacingTop Notice Hidden">
-                    <h4>[% Translate("Error Details") | html %]:</h4>
-                </div>
+                <p>[% Translate("An Error Occurred") | html %]</p>
             </div>
         </div>
-[% RenderBlockStart("ShowBackendTraceback") %]
-        <div class="WidgetSimple Collapsed SpacingTop">
-            <div class="Header ErrorMessage">
-                <div class="WidgetAction Toggle">
-                    <a href="#" title="[% Translate("Expand") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
-                </div>
-                <h2>[% Translate("Error Details") | html %]</h2>
-            </div>
-            <div class="Content">
-                <code>
-                    <pre>Backend [% Data.BackendTraceback | html %]</pre>
-                </code>
-            </div>
-        </div>
-[% RenderBlockEnd("ShowBackendTraceback") %]
     </div>
 </div>

@@ -6,13 +6,17 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 ## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
+## nofilter(TidyAll::Plugin::Znuny::Perl::UUID)
 
 package Kernel::System::Util;
 
 use strict;
 use warnings;
 
+use utf8;
+
 use MIME::Base64;
+use Data::UUID;
 
 use Kernel::System::VariableCheck qw(:all);
 
@@ -307,6 +311,25 @@ sub GetInstalledDBCRUDObjects {
     }
 
     return \@DBCRUDObjects;
+}
+
+=head2 CreateUUIDString()
+
+Returns a new UUID in text form, or undef if there was an error. Any arguments
+are passed through to Data::UUID::create_str(). Unlike Data::UUID, hex digits
+are lowercased to conform to RFC4122.
+
+=cut
+
+sub CreateUUIDString {
+    my ( $Self, @Param ) = @_;
+
+    # Create a Data::UUID object on demand and cache it for performance reasons.
+    # Init of Data::UUID takes a long time.
+    $Self->{DataUUID} //= Data::UUID->new();
+    return if !$Self->{DataUUID};
+
+    return lc $Self->{DataUUID}->create_str(@Param);
 }
 
 1;

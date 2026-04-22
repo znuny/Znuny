@@ -12,6 +12,7 @@ package Kernel::Modules::CustomerTicketProcess;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language              qw(Translatable);
@@ -1188,6 +1189,7 @@ sub _GetParam {
     $GetParam{ResponsibleAll} = $ParamObject->GetParam( Param => 'ResponsibleAll' );
     $GetParam{OwnerAll}       = $ParamObject->GetParam( Param => 'OwnerAll' );
     $GetParam{ElementChanged} = $ParamObject->GetParam( Param => 'ElementChanged' );
+    $GetParam{LinkTarget}     = $ParamObject->GetParam( Param => 'LinkTarget' );
 
     return \%GetParam;
 }
@@ -1473,6 +1475,11 @@ sub _OutputActivityDialog {
         }
     }
 
+    my $Process = $ProcessObject->ProcessGet(
+        ProcessEntityID => $Param{ProcessEntityID},
+        Preferences     => 0,
+    );
+
     $Output .= $LayoutObject->Output(
         TemplateFile => 'ProcessManagement/CustomerActivityDialogHeader',
         Data         => {
@@ -1491,6 +1498,7 @@ sub _OutputActivityDialog {
                 },
             IsMainWindow => $Self->{IsMainWindow},
             MainBoxClass => $MainBoxClass || '',
+            LinkTarget   => $Process->{LinkTarget},
         },
     );
 
@@ -3387,7 +3395,8 @@ sub _RenderType {
 sub _StoreActivityDialog {
     my ( $Self, %Param ) = @_;
 
-    my $TicketID = $Param{GetParam}->{TicketID};
+    my $TicketID   = $Param{GetParam}->{TicketID};
+    my $LinkTarget = $Param{GetParam}->{LinkTarget} || '';
     my $ProcessStartpoint;
     my %Ticket;
     my $ProcessEntityID;
@@ -3945,7 +3954,11 @@ sub _StoreActivityDialog {
                     $HistoryType = 'FollowUp';
                 }
 
-                my $From = "$Self->{UserFullname} <$Self->{UserEmail}>";
+                my $FullName = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerName(
+                    UserLogin => $Self->{UserLogin},
+                );
+                my $From = "\"$FullName\" <$Self->{UserEmail}>";
+
                 $ArticleID = $ArticleBackendObject->ArticleCreate(
                     TicketID             => $TicketID,
                     SenderType           => 'customer',
@@ -4168,13 +4181,18 @@ sub _StoreActivityDialog {
     if ($UpdateTicketID) {
 
         # load new URL in parent window and close popup
-        return $LayoutObject->PopupClose(
+        return $LayoutObject->CustomerPopupClose(
             URL => "Action=CustomerTicketZoom;TicketID=$UpdateTicketID",
         );
     }
 
+    my $URL = "Action=CustomerTicketZoom;TicketID=$TicketID";
+
+    return $LayoutObject->CustomerPopupClose(
+        URL => $URL,
+    ) if ( $LinkTarget eq 'AsPopup' );
     return $LayoutObject->Redirect(
-        OP => "Action=CustomerTicketZoom;TicketID=$TicketID",
+        OP => $URL,
     );
 }
 

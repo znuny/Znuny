@@ -25,6 +25,24 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
 );
 
+=head1 NAME
+
+Kernel::System::MSGraph - Microsoft Graph API request helper
+
+=head1 DESCRIPTION
+
+Builds HTTP requests against Microsoft Graph (OAuth 2 bearer token, optional JSON decode, pagination C<NextLink>).
+
+=head1 PUBLIC INTERFACE
+
+=head2 new()
+
+Create an MSGraph backend object. Do not use it directly; use ObjectManager instead:
+
+    my $MSGraphObject = $Kernel::OM->Get('Kernel::System::MSGraph');
+
+=cut
+
 sub new {
     my ( $Type, %Param ) = @_;
 

@@ -746,6 +746,52 @@ Core.Agent = (function (TargetNS) {
     };
 
     /**
+     * @name UpdateSessionID
+     * @memberof Core.Agent
+     * @function
+     * @returns {Boolean} returns true.
+     * @param {String} Key - The name of the session key.
+     * @param {String} Value - The value of the session key.
+     * @param {Function} SuccessCallback - Callback function to be executed on AJAX success (optional).
+     * @param {Function} ErrorCallback - Callback function to be executed on AJAX error (optional).
+     * @description
+     *      This function updates a session value via AJAX without updating user preferences.
+     */
+    TargetNS.UpdateSessionID = function (Key, Value, SuccessCallback, ErrorCallback) {
+        var URL = Core.Config.Get('Baselink'),
+            Data = {
+                Action: 'AgentSession',
+                Subaction: 'UpdateAJAX',
+                Key: Key,
+                Value: Value
+            };
+
+        if (!$.isFunction(SuccessCallback)) {
+            SuccessCallback = $.noop;
+        }
+
+        if (!$.isFunction(ErrorCallback)) {
+            ErrorCallback = $.noop;
+        }
+
+        Core.AJAX.FunctionCall(
+            URL,
+            Data,
+            function(Response) {
+                if (Response && Response.Success) {
+                    SuccessCallback(Response);
+                }
+                else {
+                    ErrorCallback(Response);
+                }
+            },
+            'json'
+        );
+
+        return true;
+    };
+
+    /**
      * @name CheckSessionExpiredAndReload
      * @memberof Core.Agent
      * @function

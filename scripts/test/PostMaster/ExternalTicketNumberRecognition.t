@@ -16,8 +16,9 @@ use vars (qw($Self));
 use Kernel::System::PostMaster;
 
 # get needed objects
-my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
+my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
 # get helper object
 $Kernel::OM->ObjectParamAdd(
@@ -178,7 +179,8 @@ Some Content in Body',
         Check => {
             "DynamicField_$FieldName" => $ExternalTicketID,
         },
-        JobConfig => {
+        CheckSubjectPattern => qr/^\[.+\] An incident subject Incident-\d+$/,
+        JobConfig           => {
             DynamicFieldName     => $FieldName,
             FromAddressRegExp    => '\\s*@example.com',
             Module               => 'Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition',
@@ -588,6 +590,169 @@ for my $Test (@Tests) {
             $Ticket{$Key},
             $Test->{Check}->{$Key},
             "$Test->{Name}: Filter Run() - $Key",
+        );
+    }
+
+    # verify subject for follow-up tests when CheckSubject or CheckSubjectPattern is defined
+    if ( $Test->{NewTicket} == 2 && ( $Test->{CheckSubject} || $Test->{CheckSubjectPattern} ) ) {
+        my @Articles = $ArticleObject->ArticleList(
+            TicketID => $Return[1],
+            OnlyLast => 1,
+        );
+        $Self->True(
+            scalar @Articles,
+            "$Test->{Name}: ArticleList - last article exists",
+        );
+        if (@Articles) {
+            my %Article = $ArticleObject->BackendForArticle( %{ $Articles[0] } )->ArticleGet( %{ $Articles[0] } );
+            if ( $Test->{CheckSubject} ) {
+                $Self->Is(
+                    $Article{Subject},
+                    $Test->{CheckSubject},
+                    "$Test->{Name}: Filter Run() - Subject",
+                );
+            }
+            if ( $Test->{CheckSubjectPattern} ) {
+                $Self->True(
+                    $Article{Subject} =~ $Test->{CheckSubjectPattern},
+                    "$Test->{Name}: Filter Run() - Subject matches pattern",
+                );
+            }
+        }
+    }
+}
+
+# TicketSubjectFormat tests - verify subject is built correctly with sysconfig
+for my $TicketSubjectFormat (qw(Left Right)) {
+
+    my $SubjectFormatExternalID = $HelperObject->GetRandomNumber();
+
+    $Kernel::OM->ObjectsDiscard( Objects => ['Kernel::System::Config'] );
+    $ConfigObject->Set(
+        Key   => 'Ticket::SubjectFormat',
+        Value => $TicketSubjectFormat,
+    );
+
+    # create ticket with external number for follow-up recognition
+    my $SubjectFormatTicketID = $TicketObject->TicketCreate(
+        Title    => 'SubjectFormat Test',
+        Queue    => 'Raw',
+        Lock     => 'unlock',
+        Priority => '3 normal',
+        State    => 'open',
+        OwnerID  => 1,
+        UserID   => 1,
+    );
+    $Self->True(
+        $SubjectFormatTicketID,
+        "TicketSubjectFormat $TicketSubjectFormat - TicketCreate",
+    );
+
+    $HelperObject->DynamicFieldSet(
+        Field    => $FieldName,
+        ObjectID => $SubjectFormatTicketID,
+        Value    => $SubjectFormatExternalID,
+    );
+
+    my $TicketNumber = $TicketObject->TicketNumberLookup(
+        TicketID => $SubjectFormatTicketID,
+        UserID   => 1,
+    );
+    $Self->True(
+        $TicketNumber,
+        "TicketSubjectFormat $TicketSubjectFormat - TicketNumberLookup",
+    );
+
+    my $TicketHook        = $ConfigObject->Get('Ticket::Hook')        || 'Ticket#';
+    my $TicketHookDivider = $ConfigObject->Get('Ticket::HookDivider') || '';
+    my $OriginalSubject   = 'SubjectFormat test ' . $SubjectFormatExternalID;
+    my $ExpectedSubject;
+    if ( lc $TicketSubjectFormat eq 'right' ) {
+        $ExpectedSubject = $OriginalSubject . " [$TicketHook$TicketHookDivider$TicketNumber]";
+    }
+    else {
+        $ExpectedSubject = "[$TicketHook$TicketHookDivider$TicketNumber] " . $OriginalSubject;
+    }
+
+    $ConfigObject->Set(
+        Key   => 'PostMaster::PreFilterModule',
+        Value => {
+            '00-ExternalTicketNumberRecognition-SubjectFormat' => {
+                DynamicFieldName     => $FieldName,
+                FromAddressRegExp    => '\\s*@example.com',
+                Module               => 'Kernel::System::PostMaster::Filter::ExternalTicketNumberRecognition',
+                Name                 => 'SubjectFormat Test',
+                NumberRegExp         => 'SubjectFormat test (\\d.*)',
+                SearchInBody         => '0',
+                SearchInSubject      => '1',
+                SenderType           => 'system',
+                IsVisibleForCustomer => 1,
+                TicketStateTypes     => 'new;open',
+            },
+        },
+    );
+
+    my $SubjectFormatEmail = 'From: Sender <sender@example.com>
+To: Some Name <recipient@example.com>
+Subject: ' . $OriginalSubject . '
+
+Body content for TicketSubjectFormat test';
+
+    my @SubjectFormatReturn;
+    {
+        my $CommunicationLogObject = $Kernel::OM->Create(
+            'Kernel::System::CommunicationLog',
+            ObjectParams => {
+                Transport => 'Email',
+                Direction => 'Incoming',
+            },
+        );
+        $CommunicationLogObject->ObjectLogStart( ObjectLogType => 'Message' );
+
+        my $PostMasterObject = Kernel::System::PostMaster->new(
+            CommunicationLogObject => $CommunicationLogObject,
+            Email                  => \$SubjectFormatEmail,
+            Debug                  => 2,
+        );
+
+        @SubjectFormatReturn = $PostMasterObject->Run();
+
+        $CommunicationLogObject->ObjectLogStop(
+            ObjectLogType => 'Message',
+            Status        => 'Successful',
+        );
+        $CommunicationLogObject->CommunicationStop(
+            Status => 'Successful',
+        );
+    }
+
+    $Self->Is(
+        $SubjectFormatReturn[0] || 0,
+        2,
+        "TicketSubjectFormat $TicketSubjectFormat - Follow-up created",
+    );
+    $Self->Is(
+        $SubjectFormatReturn[1] || 0,
+        $SubjectFormatTicketID,
+        "TicketSubjectFormat $TicketSubjectFormat - Correct ticket",
+    );
+
+    my @SubjectFormatArticles = $ArticleObject->ArticleList(
+        TicketID => $SubjectFormatTicketID,
+        OnlyLast => 1,
+    );
+    $Self->True(
+        scalar @SubjectFormatArticles,
+        "TicketSubjectFormat $TicketSubjectFormat - Last article exists",
+    );
+    if (@SubjectFormatArticles) {
+        my %SubjectFormatArticle = $ArticleObject->BackendForArticle( %{ $SubjectFormatArticles[0] } )->ArticleGet(
+            %{ $SubjectFormatArticles[0] }
+        );
+        $Self->Is(
+            $SubjectFormatArticle{Subject},
+            $ExpectedSubject,
+            "TicketSubjectFormat $TicketSubjectFormat - Subject matches Ticket::SubjectFormat",
         );
     }
 }

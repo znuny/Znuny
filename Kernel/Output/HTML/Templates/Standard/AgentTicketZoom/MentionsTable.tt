@@ -5,28 +5,31 @@
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
-<div class="WidgetSimple mentions-widget">
-    <div class="Header">
-        <div class="WidgetAction Mentions Toggle">
-            <a href="#" title="[% Translate("Show or hide the content") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+
+<div class="mod modSidebarWidget">
+    <div class="inner">
+        <div class="sidebarWidgetTitle">
+            <h3>[% Translate("Mentions") | html %]</h3>
         </div>
-        <h2>[% Translate("Mentions") | html %]</h2>
-    </div>
-    <div class="Content">
-        <ul>
-[% RenderBlockStart("User") %]
-            <li>
-                <span class="email-wrapper">
-                    <span>[% Data.UserFullname | html %]</span>
-                    <span>([% Data.UserEmail | html %])</span>
-                </span>
-                [% IF Data.Removable %]
-                    <a href="#" data-user-id=[% Data.UserID | html %] class="MentionRow icon-hover-sm">
-                        <i class="fa fa-times"></i>
-                    </a>
-                [% END %]
-            </li>
-[% RenderBlockEnd("User") %]
-        </ul>
+        <div class="sidebarWidgetContent">
+            <div class="mod modMentions">
+                <div class="inner">
+                    <ul class="list">
+                        [% RenderBlockStart("User") %]
+                        <li>
+                            [% IF Data.Removable %]
+                            <span>
+                                <a href="#" data-user-id=[% Data.UserID | html %] class="MentionRow Icon RemoveButton icon-hover">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </span>
+                            [% END %]
+                            <span>[% Data.UserFullname | html %]</span>
+                        </li>
+                        [% RenderBlockEnd("User") %]
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

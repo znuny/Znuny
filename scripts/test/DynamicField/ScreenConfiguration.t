@@ -244,6 +244,7 @@ $Self->IsDeeply(
         'Ticket::Frontend::AgentTicketMove###DynamicField'                   => 'AgentTicketMove',
         'Ticket::Frontend::AgentTicketNote###DynamicField'                   => 'AgentTicketNote',
         'Ticket::Frontend::AgentTicketOwner###DynamicField'                  => 'AgentTicketOwner',
+        'Ticket::Frontend::AgentTicketOwnerView###DefaultColumns'            => 'AgentTicketOwnerView',
         'Ticket::Frontend::AgentTicketPending###DynamicField'                => 'AgentTicketPending',
         'Ticket::Frontend::AgentTicketPhone###DynamicField'                  => 'AgentTicketPhone',
         'Ticket::Frontend::AgentTicketPhoneInbound###DynamicField'           => 'AgentTicketPhoneInbound',

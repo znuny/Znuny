@@ -20,13 +20,13 @@ sub Data {
     # $$START$$
     # possible charsets
     $Self->{Charset} = ['utf-8', ];
-    # date formats (%A=WeekDay;%B=LongMonth;%T=Time;%D=Day;%M=Month;%Y=Year;)
-    $Self->{DateFormat}          = '%D/%M/%Y %T';
-    $Self->{DateFormatLong}      = '%T - %D/%M/%Y';
-    $Self->{DateFormatShort}     = '%D/%M/%Y';
-    $Self->{DateInputFormat}     = '%D/%M/%Y';
-    $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.59184002580229;
+    # date formats (%a=Weekday;%b=Month;%T=Time;%d=Day;%m=Month;%Y=Year;)
+    $Self->{DateFormat}          = '%d/%m/%Y %T';
+    $Self->{DateFormatLong}      = '%T - %d/%m/%Y';
+    $Self->{DateFormatShort}     = '%d/%m/%Y';
+    $Self->{DateInputFormat}     = '%d/%m/%Y';
+    $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
+    $Self->{Completeness}        = 0.58258785942492;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -278,6 +278,8 @@ sub Data {
         'Queues ↔ Auto Responses' => '',
         'Auto Response Management' => 'Manajemen Respon otomatis',
         'Edit Auto Response' => 'Ubah respon otomatis',
+        'Do you really want to delete this %s?' => '',
+        'auto response' => '',
         'Response' => 'Respon',
         'Auto response from' => 'Respon otomatis dari',
 
@@ -703,6 +705,9 @@ sub Data {
         'Add Job' => '',
         'Filter for Jobs' => '',
         'Filter for jobs' => '',
+        'Upload a file in YAML format (as provided by the export) to import generic agent jobs.' =>
+            '',
+        'Overwrite existing generic agents?' => '',
         'Generic Agent Job Management' => '',
         'Edit Job' => '',
         'Run Job' => '',
@@ -1612,6 +1617,9 @@ sub Data {
         'Add PostMaster Filter' => 'Tambah penyaring PostMaster',
         'Filter for PostMaster Filters' => '',
         'Filter for PostMaster filters' => '',
+        'Upload a file in YAML format (as provided by the export) to import postmaster filters.' =>
+            '',
+        'Overwrite existing postmaster filters?' => '',
         'To dispatch or filter incoming emails based on email headers. Matching using Regular Expressions is also possible.' =>
             'Untuk mengirimkan atau menyaring email yang masuk berdasarkan header email. Kemungkinan dapat menyesuaikan dengan menggunakan Regular Expressions ',
         'If you want to match only the email address, use EMAILADDRESS:info@example.com in From, To or Cc.' =>
@@ -1981,6 +1989,7 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Overwrite existing salutations?' => '',
         'Salutation Management' => 'Manajemen penghargaan',
         'Edit Salutation' => 'Ubah Salutasi',
+        'salutation' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSecureMode.tt
         'Secure Mode Needs to be Enabled!' => '',
@@ -2007,6 +2016,28 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Run Query' => 'Jalankan Query',
         '%s Results' => '',
         'Query is executed.' => 'Query dijalankan',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
+        'Add Outbound Email Profile' => '',
+        'Filter for outbound email profiles' => '',
+        'Manage Outbound Email Profiles' => '',
+        'Update Outbound Email Profile' => '',
+        'Email addresses' => '',
+        'Fallback' => '',
+        'Email addresses have to be configured!' => '',
+        'yes' => 'ya',
+        'no' => 'tidak',
+        'Delete outbound email profile' => '',
+        'Command' => '',
+        'Port' => 'Port',
+        'Enter a number between 1 and 65535.' => '',
+        'Port to use for given host (if non-standard port).' => '',
+        'Enter a number between 1 and 999.' => '',
+        'Timeout (in seconds) for connection to host.' => '',
+        'Skip SSL verification' => '',
+        'Select to make this the fallback/default config for any email address not configured in other outbound email profiles. Only one outbound email profile can be the fallback.' =>
+            '',
+        'Edit current fallback outbound email profile (host %s).' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminService.tt
         'Add Service' => 'Tambahkan Layanan',
@@ -2043,6 +2074,7 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Overwrite existing signatures?' => '',
         'Signature Management' => 'Tandatangan manajemen',
         'Edit Signature' => 'Ubah tandatangan',
+        'signature' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminState.tt
         'Add State' => 'Tambahkan Pilihan',
@@ -2524,7 +2556,7 @@ bin/znuny.Daemon.pl status\').',
         'Please note: you\'re currently editing the preferences of %s.' =>
             '',
         'Go back to editing this agent' => '',
-        'Set up your personal preferences. Save each setting by clicking the checkmark on the right.' =>
+        'Set up your personal preferences. Save each setting by clicking "Save setting" button.' =>
             '',
         'You can use the navigation tree below to only show settings from certain groups.' =>
             '',
@@ -2611,55 +2643,53 @@ bin/znuny.Daemon.pl status\').',
             'Statistik ini mengandung kesalahan konfigurasi dan dapat saat ini tidak digunakan.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-        'Change Free Text of %s%s%s' => 'Ubah teks bebas dari %s%s%s',
-        'Change Owner of %s%s%s' => 'Ubah pemilik dari %s%s%s',
-        'Close %s%s%s' => 'Tutup %s%s%s',
-        'Add Note to %s%s%s' => 'Tambah catatan untuk %s%s%s',
-        'Set Pending Time for %s%s%s' => 'Set Waktu Tertunda untuk %s%s%s',
-        'Change Priority of %s%s%s' => 'Tukar prioritas dari %s%s%s',
-        'Change Responsible of %s%s%s' => 'Ubah tanggung jawab dari %s%s%s',
         'The ticket has been locked' => 'Tiket telah dikunci',
-        'Ticket Settings' => 'Pengaturan email',
+        'Unlock and close popup' => '',
+        'Customer user' => 'Pengguna pelanggan',
         'Service invalid.' => 'Layanan tidak sah',
-        'SLA invalid.' => '',
         'Team Data' => '',
         'Queue invalid.' => '',
-        'New Owner' => 'Pemilik baru',
         'Please set a new owner!' => 'Silahkan set sebagain owner baru!',
         'Owner invalid.' => '',
-        'New Responsible' => 'Tanggung jawab baru',
         'Please set a new responsible!' => '',
         'Responsible invalid.' => '',
         'Ticket Data' => '',
-        'Next state' => 'Pilihan berikutnya',
         'State invalid.' => '',
         'For all pending* states.' => 'Untuk semua yang tertunda',
-        'Dynamic Info' => '',
-        'Add Article' => 'Tambahkan artikel',
+        'Communications' => '',
         'Inform' => '',
         'Inform agents' => 'Beritahu agen',
         'Inform involved agents' => 'Beritahu agen yang terlibat',
         'Here you can select additional agents which should receive a notification regarding the new article.' =>
             'Di sini anda dapat memilih agen tambahan yang harus menerima pemberitahuan tentang artikel baru.',
         'Text will also be received by' => 'Teks akan diterima oleh',
-        'Communications' => '',
         'Create an Article' => 'Membuat sebuah artikel',
         'Setting a template will overwrite any text or attachment.' => 'Pengaturan template akan menimpa teks atau lampiran.',
+        'Article' => 'Artikel',
+        'Undo & close' => 'Undur & tutup',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon/TicketInformation.tt
+        'Archive' => 'Arsip',
+        'This ticket is archived.' => 'Tiket ini diarsipkan',
+        'is invalid' => '',
+        'Pending till' => 'Ditunda hingga',
+        'Locked' => 'Dikunci',
+        'First Response Time' => 'Waktu respon yang pertama',
+        'Update Time' => 'Memperbaru waktu',
+        'Solution Time' => 'Solusi waktu',
+        'Accounted time' => 'Waktu dicatat',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
-        'Bounce %s%s%s' => 'Bounce %s%s%s',
-        'cancel' => '',
         'Bounce to' => 'Melompat',
         'You need a email address.' => 'Anda perlu alamat email',
         'Need a valid email address or don\'t use a local email address.' =>
             'Membutuhkan alamat email yang valid atau tidak menggunakan alamat email lokal.',
-        'Next ticket state' => 'Pilihan tiket berikutnya',
         'Inform sender' => 'Beritahun penghantar',
-        'Send mail' => 'Hantarkan surat',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
         'Ticket Bulk Action' => 'Aksi Tiket Massal ',
         'Send Email' => 'Hantarkan email',
+        'Next state' => 'Pilihan berikutnya',
         'Merge' => 'Gabung',
         'Merge to' => 'Menggabungkan',
         'Invalid ticket identifier!' => 'Identifier tiket tidak valid!',
@@ -2672,56 +2702,49 @@ bin/znuny.Daemon.pl status\').',
         'Execute Bulk Action' => 'Menghasilkan Dukungan Bundle',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
-        'Compose Answer for %s%s%s' => 'Susunan jawaban untuk %s%s%s',
         'Date Invalid!' => 'Tanggal tidak sah!',
-        'Select one or more recipients from the customer user address book.' =>
-            '',
-        'Customer user address book' => '',
-        'This address is registered as system address and cannot be used: %s' =>
-            'Alamat ini terdaftar sebagai alamat sistem dan tidak bisa digunakan: %s',
-        'Please include at least one recipient' => 'Harap sertakan minimal satu penerima',
-        'Remove Ticket Customer' => 'Hapus tiket pelanggan',
         'Please remove this entry and enter a new one with the correct value.' =>
             'Tolong hapus entri ini dan masukan yang baru dengan value yang benar',
         'This address already exists on the address list.' => 'Alamat ini sudah ada yang menggunakan',
-        'Remove Cc' => 'Hapus Cc',
+        'Search for customer' => '',
+        'Open address book' => '',
+        'Address book' => '',
+        'Customer suggestions' => '',
+        'Please include at least one recipient' => 'Harap sertakan minimal satu penerima',
+        'This address is registered as system address and cannot be used: %s' =>
+            'Alamat ini terdaftar sebagai alamat sistem dan tidak bisa digunakan: %s',
         'Bcc' => 'Bcc',
-        'Remove Bcc' => 'Hapus Bccc',
+        'Send mail' => 'Hantarkan surat',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
         'Change Customer of %s%s%s' => 'Ubah pelanggan dari %s%s%s',
         'Customer Information' => 'Informasi Pelanggan',
-        'Customer user' => 'Pengguna pelanggan',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
         'Create New Email Ticket' => 'Mencipta tiket email baru',
-        'Example Template' => 'Contoh template',
         'To customer user' => 'Untuk pengguna pelanggan',
         'Please include at least one customer user for the ticket.' => 'Tolong sertakan minimal satu pengguna pelanggan untuk tiket',
-        'Select this customer as the main customer.' => 'Pilih pelanggan ini sebagai pelanggan utama',
-        'Remove Ticket Customer User' => 'Hapus pengguna pelanggan tiket',
         'From queue' => 'Dari queue',
         'Get all' => 'Dapatkan semua',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
-        'Outbound Email for %s%s%s' => 'Email keluar untuk %s%s%s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => '',
         'All fields marked with an asterisk (*) are mandatory.' => 'Semua bidang yang ditandai dengan tanda bintang (*) wajib diisi.',
         'Cancel & close' => 'Batalkan dan tutup',
-        'Undo & close' => 'Undur & tutup',
+        'Select one or more recipients from the customer user address book.' =>
+            '',
+        'Customer user address book' => '',
+        'Remove Ticket Customer' => 'Hapus tiket pelanggan',
+        'Remove Cc' => 'Hapus Cc',
+        'Remove Bcc' => 'Hapus Bccc',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
-        'Ticket %s: first response time is over (%s/%s)!' => 'Tiket %s: respon pertama berakhir (%s%s)!',
-        'Ticket %s: first response time will be over in %s/%s!' => 'Tiket %s: Waktu respon pertama akan berakhir di %s%s!',
-        'Ticket %s: update time is over (%s/%s)!' => 'Tiket %s: waktu update lebih (%s/%s)!',
-        'Ticket %s: update time will be over in %s/%s!' => 'Tiket %S: Waktu pembaruan akan berakhir di %s%s!',
-        'Ticket %s: solution time is over (%s/%s)!' => 'Tiket %s: Waktu solusi akan berakhir (%s%s)!',
-        'Ticket %s: solution time will be over in %s/%s!' => 'Tiket %s: Waktu solusi akan berakhir di %s%s!',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketForward.tt
-        'Forward %s%s%s' => 'Mengirimkan %s%s%s',
+        'Ticket %s: first response time is over (%s %s)!' => 'Tiket %s: respon pertama berakhir (%s%s)!',
+        'Ticket %s: first response time will be over in %s %s!' => 'Tiket %s: Waktu respon pertama akan berakhir di %s%s!',
+        'Ticket %s: update time is over (%s %s)!' => 'Tiket %s: waktu update lebih (%s/%s)!',
+        'Ticket %s: update time will be over in %s %s!' => 'Tiket %S: Waktu pembaruan akan berakhir di %s%s!',
+        'Ticket %s: solution time is over (%s %s)!' => 'Tiket %s: Waktu solusi akan berakhir (%s%s)!',
+        'Ticket %s: solution time will be over in %s %s!' => 'Tiket %s: Waktu solusi akan berakhir di %s%s!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => 'Sejarah dari %s%s%s',
@@ -2729,10 +2752,8 @@ bin/znuny.Daemon.pl status\').',
         'Filter for history items' => '',
         'Expand/Collapse all' => '',
         'CreateTime' => 'WaktuPembuatan',
-        'Article' => 'Artikel',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMerge.tt
-        'Merge %s%s%s' => 'Memisahkan %s%s%s',
         'Merge Settings' => 'Atur penggabungan',
         'Try typing part of the ticket number or title in order to search by it.' =>
             '',
@@ -2743,13 +2764,11 @@ bin/znuny.Daemon.pl status\').',
         'Need a valid email address.' => 'Diperlukan alamat email yang sah',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
-        'Move %s%s%s' => 'Pindah %s%s%s',
         'New Queue' => 'Queue baru',
-        'Communication' => 'Komunikasi',
+        'New Owner' => 'Pemilik baru',
         'Move' => 'Pindah',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
-        'Add note to linked %s%s%s' => '',
         'Notes' => '',
         'Note to linked Ticket' => '',
         'LinkList invalid.' => '',
@@ -2763,9 +2782,6 @@ bin/znuny.Daemon.pl status\').',
         'Sender' => 'Pengirim',
         'Customer User Name' => '',
         'Impact' => 'Dampak',
-        'Update Time' => 'Memperbaru waktu',
-        'Solution Time' => 'Solusi waktu',
-        'First Response Time' => 'Waktu respon yang pertama',
         'Move ticket to a different queue' => 'Pindahkan tiket ke queue yang berbeda',
         'Change queue' => 'Ubah queue',
 
@@ -2790,7 +2806,7 @@ bin/znuny.Daemon.pl status\').',
         'To queue' => 'Untuk queue',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhoneCommon.tt
-        'Phone Call for %s%s%s' => 'Panggilan telepon untuk %s%s%s',
+        'Communication' => 'Komunikasi',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPlain.tt
         'View Email Plain Text for %s%s%s' => 'Menampilkan plain teks email untuk %s%s%s',
@@ -2845,17 +2861,18 @@ bin/znuny.Daemon.pl status\').',
         'Save filter settings as default' => 'Simpan aturan filter sebagai default',
         'Event Type' => 'Jenis event',
         'Save as default' => 'Simpan sebagai default',
-        'Drafts' => '',
-        'by' => 'Oleh',
         'Change Queue' => 'Ubah queue',
-        'There are no dialogs available at this point in the process.' =>
-            'Tidak ada dialog yang terseedia di dalam proses ',
-        'This item has no articles yet.' => 'Item ini belum mempunyai artikel',
-        'Article Overview - %s Article(s)' => '',
-        'Page %s' => '',
         'Add Filter' => 'Tambahkan filter',
         'Set' => 'Aturan',
         'Reset Filter' => 'Mengulang filter',
+        'There are no dialogs available at this point in the process.' =>
+            'Tidak ada dialog yang terseedia di dalam proses ',
+        'This item has no articles yet.' => 'Item ini belum mempunyai artikel',
+        'Toggle sidebar' => '',
+        'Drafts' => '',
+        'by' => 'Oleh',
+        'Article Overview - %s Article(s)' => '',
+        'Page %s' => '',
         'No.' => 'Tidak.',
         'Unread articles' => 'Artikel tidak terbaca',
         'Via' => '',
@@ -2895,14 +2912,6 @@ bin/znuny.Daemon.pl status\').',
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/MentionsTable.tt
         'Mentions' => '',
 
-        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
-        'Archive' => 'Arsip',
-        'This ticket is archived.' => 'Tiket ini diarsipkan',
-        'is invalid' => '',
-        'Pending till' => 'Ditunda hingga',
-        'Locked' => 'Dikunci',
-        'Accounted time' => 'Waktu dicatat',
-
         # TT Template: Kernel/Output/HTML/Templates/Standard/ArticleContent/Invalid.tt
         'Preview of this article is not possible because %s channel is missing in the system.' =>
             '',
@@ -2938,7 +2947,6 @@ bin/znuny.Daemon.pl status\').',
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'Error',
         'An Error Occurred' => 'Terjadi kesalahan',
-        'Traceback' => 'Melacak kembali',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3038,10 +3046,6 @@ bin/znuny.Daemon.pl status\').',
         # TT Template: Kernel/Output/HTML/Templates/Standard/DashboardEventsTicketCalendar.tt
         'Event Information' => 'Informasi acara',
         'Ticket fields' => 'Dasar tiket',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-        'Error Details' => 'Rincian eror',
-        'Expand' => 'Perluas',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
         'Preview' => '',
@@ -3148,7 +3152,6 @@ bin/znuny.Daemon.pl status\').',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBoracle.tt
         'SID' => 'SID',
-        'Port' => 'Port',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerFinish.tt
         'To be able to use Znuny you have to enter the following line in your command line (Terminal/Shell) as root.' =>
@@ -3445,6 +3448,13 @@ bin/znuny.Daemon.pl status\').',
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/TicketZoom/ArticleViewSettingsDialog.html.tmpl
         'Article display' => '',
 
+        # JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/TicketZoom/CopyTicketNumber/Icon.html.tmpl
+        'Copy ticket information' => '',
+
+        # JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/TicketZoom/CopyTicketNumber/Menu.html.tmpl
+        'Copy Ticket Number' => '',
+        'Copy Ticket Number + Title' => '',
+
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/Agent/TicketZoom/FormDraftDeleteDialog.html.tmpl
         'Do you really want to delete "%s"?' => '',
         'Confirm' => 'Pastikan',
@@ -3483,6 +3493,11 @@ bin/znuny.Daemon.pl status\').',
         'Do you really want to reset this setting to it\'s default value?' =>
             '',
 
+        # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/DirtyCheck.html.tmpl
+        'You have undeployed settings:' => '',
+        'Standard Deploy' => '',
+        'Quick Deploy' => '',
+
         # JS Template: Kernel/Output/JavaScript/Templates/Standard/SysConfig/HelpDialog.html.tmpl
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.' =>
             '',
@@ -3503,12 +3518,10 @@ bin/znuny.Daemon.pl status\').',
         'Manage add-ons.' => '',
 
         # Perl Module: Kernel/Modules/AJAXAttachment.pm
-        'Got no FormID.' => '',
         '%s is missing. The file could not be downloaded properly.' => '',
         'Please contact the administrator.' => 'Silahkan hubungi administrator.',
         '%s is missing. The file could not be previewed properly.' => '',
-        'Error: the file could not be deleted properly. Please contact your administrator (missing FileID).' =>
-            '',
+        '%s is missing. The file could not be deleted properly.' => '',
 
         # Perl Module: Kernel/Modules/AdminACL.pm
         'ACL information from database is not in sync with the system configuration, please deploy all ACLs.' =>
@@ -3710,6 +3723,17 @@ bin/znuny.Daemon.pl status\').',
         'Select at least one recipient.' => 'Pilih minimal satu penerima',
 
         # Perl Module: Kernel/Modules/AdminGenericAgent.pm
+        'Error exporting generic agent job with Name %s!' => '',
+        'Error creating the generic agent job.' => '',
+        'Jobs could not be imported due to an unknown error. Please check logs for more information.' =>
+            '',
+        'The following generic agent jobs have been added successfully: %s.' =>
+            '',
+        'The following generic agent jobs have been updated successfully: %s.' =>
+            '',
+        'The following generic agent jobs were not updated: %s.' => '',
+        'Errors adding/updating the following generic agent jobs: %s. Please check logs for more information.' =>
+            '',
         'minute(s)' => 'menit',
         'hour(s)' => 'jam',
         'Time unit' => 'Unit waktu',
@@ -3720,7 +3744,6 @@ bin/znuny.Daemon.pl status\').',
         'archive tickets' => 'tiket arsip',
         'restore tickets from archive' => 'mengembalikan tiket dari arsip',
         'Need Profile!' => 'Butuh Profil!',
-        'Got no values to check.' => 'Tidak ada value untuk di cek',
         'Please remove the following words because they cannot be used for the ticket selection:' =>
             'Harap hapus kata-kata berikut karena mereka tidak dapat digunakan untuk seleksi tiket:',
 
@@ -3877,6 +3900,7 @@ bin/znuny.Daemon.pl status\').',
 
         # Perl Module: Kernel/Modules/AdminMailAccount.pm
         'Mail account added!' => 'Akun surat telah di tambahkan!',
+        'Error fetching mail%s, please check the Communication Log!' => '',
         'Email account fetch already fetched by another process. Please try again later!' =>
             '',
         'Dispatching by email To: field.' => 'Pengiriman melalui email Kepada: bidang.',
@@ -3941,6 +3965,17 @@ bin/znuny.Daemon.pl status\').',
 
         # Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
         'No such filter: %s' => 'Tidak ada filter seperti: %s',
+        'Error exporting postmaster filter with Name %s!' => '',
+        'Error creating the postmaster filter.' => '',
+        'Filters could not be imported due to an unknown error. Please check logs for more information.' =>
+            '',
+        'The following postmaster filters have been added successfully: %s.' =>
+            '',
+        'The following postmaster filters have been updated successfully: %s.' =>
+            '',
+        'The following postmaster filters were not updated: %s.' => '',
+        'Errors adding/updating the following postmaster filters: %s. Please check logs for more information.' =>
+            '',
 
         # Perl Module: Kernel/Modules/AdminPriority.pm
         'Priority added!' => 'Prioritas ditambahkan!',
@@ -4091,6 +4126,11 @@ bin/znuny.Daemon.pl status\').',
         'Errors adding/updating the following salutations: %s. Please check logs for more information.' =>
             '',
 
+        # Perl Module: Kernel/Modules/AdminSendmailConfig.pm
+        'Outbound email profile updated!' => '',
+        'Configuration option \'SendmailModule\' has to be set to \'Kernel::System::Email::MultiSendmail\' to be able to use the outbound email profiles managed here.' =>
+            '',
+
         # Perl Module: Kernel/Modules/AdminSignature.pm
         'Signature updated!' => 'Tanda tangan diperbarui!',
         'Signature added!' => 'Tanda tangan ditambahkan!',
@@ -4125,6 +4165,7 @@ bin/znuny.Daemon.pl status\').',
         'Category Search' => '',
 
         # Perl Module: Kernel/Modules/AdminSystemConfigurationDeployment.pm
+        'Quick Deploy by' => '',
         'Some imported settings are not present in the current state of the configuration or it was not possible to update them. Please check the Znuny log for more information.' =>
             '',
 
@@ -4410,6 +4451,7 @@ bin/znuny.Daemon.pl status\').',
             'PendingTime bisa digunakan apabila State atau StateID dikonfigurasi untuk ActivityDialogyang sama. ActivityDialog: %s!',
         'Pending Date' => 'Tanggal yang tertunda',
         'for pending* states' => 'Tertunda untuk states',
+        'Next ticket state' => 'Pilihan tiket berikutnya',
         'ActivityDialogEntityID missing!' => 'ActivityDialogEntityID telah hilang!',
         'Couldn\'t get Config for ActivityDialogEntityID "%s"!' => 'Tidak bisa mendapatkan konfigurasi untuk ActivityDialogEntityID "%s"!',
         'Couldn\'t use CustomerID as an invisible field.' => '',
@@ -4515,12 +4557,14 @@ bin/znuny.Daemon.pl status\').',
         'Need CustomerID!' => 'Perlu CustomerID!',
         'My Tickets' => 'Tiket saya',
         'Company Tickets' => 'Tiket perusahaan',
+        'You have no permission or the ticket does not exist.' => '',
         'Untitled!' => 'Tanpa judul!',
 
         # Perl Module: Kernel/Modules/CustomerTicketSearch.pm
         'Customer Realname' => 'Namaasli pelanggan',
         'Created within the last' => 'Dibuat dalam terakhir',
         'Created more than ... ago' => 'Dibuat lebih dari .... yang lalu',
+        'Got no values to check.' => 'Tidak ada value untuk di cek',
         'Please remove the following words because they cannot be used for the search:' =>
             'Tolong hapuskan kalimat berikut karena tidak dapat dicari',
 
@@ -4797,10 +4841,6 @@ bin/znuny.Daemon.pl status\').',
         'You have %s invalid setting(s) deployed. Click here to show invalid settings.' =>
             '',
 
-        # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationIsDirtyCheck.pm
-        'You have undeployed settings, would you like to deploy them?' =>
-            '',
-
         # Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationOutOfSyncCheck.pm
         'The configuration is being updated, please be patient...' => '',
         'There is an error updating the system configuration!' => '',
@@ -4887,6 +4927,9 @@ bin/znuny.Daemon.pl status\').',
         'Unable to load %s!' => '',
         'Content' => 'Konten',
 
+        # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
+        'Ticket Information' => 'Informasi tiket',
+
         # Perl Module: Kernel/Output/HTML/TicketMenu/Lock.pm
         'Unlock to give it back to the queue' => 'Buka kuncu untuk mengembalikannya pada antrian',
         'Lock it to work on it' => 'Kunci untuk dikerjakan',
@@ -4898,9 +4941,6 @@ bin/znuny.Daemon.pl status\').',
 
         # Perl Module: Kernel/Output/HTML/TicketOverviewMenu/Sort.pm
         'Order by' => 'Dipesan oleh',
-
-        # Perl Module: Kernel/Output/HTML/TicketZoom/TicketInformation.pm
-        'Ticket Information' => 'Informasi tiket',
 
         # Perl Module: Kernel/Output/HTML/ToolBar/TicketLocked.pm
         'Locked Tickets New' => 'Tiket terkunci baru',
@@ -5001,6 +5041,10 @@ bin/znuny.Daemon.pl status\').',
         'The field content is too long!' => 'Konten dari bidang ini terlalu panjang!',
         'Maximum size is %s characters.' => 'Ukuran maksimum adalah %s karakter',
 
+        # Perl Module: Kernel/System/GenericAgent.pm
+        'Couldn\'t read Job configuration YAML file. Please make sure the file is valid.' =>
+            '',
+
         # Perl Module: Kernel/System/MailQueue.pm
         'Error while validating Message data.' => '',
         'Error while validating Sender email address.' => '',
@@ -5024,6 +5068,10 @@ bin/znuny.Daemon.pl status\').',
         'File is not installed!' => '',
         'File is different!' => '',
         'Can\'t read file!' => '',
+
+        # Perl Module: Kernel/System/PostMaster/Filter.pm
+        'Couldn\'t read Filter configuration YAML file. Please make sure the file is valid.' =>
+            '',
 
         # Perl Module: Kernel/System/ProcessManagement/DB/Process.pm
         'The process "%s" and all of its data has been imported successfully.' =>
@@ -5589,7 +5637,7 @@ bin/znuny.Daemon.pl status\').',
             'Daftar file CSS untuk selalu dimuat ke antarmuka agen.',
         'List of JS files to always be loaded for the agent interface.' =>
             'Daftar file JS untuk selalu dimuat untuk antarmuka agen.',
-        'Type of daemon log rotation to use: Choose \'OTRS\' to let Znuny system to handle the file rotation, or choose \'External\' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration.' =>
+        'Type of daemon log rotation to use: Choose \'Znuny\' to let Znuny system to handle the file rotation, or choose \'External\' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration.' =>
             '',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if &lt;$OTRSHome&gt;/var/run/ can not be used.' =>
             '',
@@ -5648,6 +5696,7 @@ bin/znuny.Daemon.pl status\').',
         'Removes old generic interface debug log entries created before the specified amount of days.' =>
             '',
         'Delete expired ticket draft entries.' => '',
+        'Remove closed tickets from agents\' ticket watch lists.' => '',
 
         # XML Definition: Kernel/Config/Files/XML/Framework.xml
         'Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
@@ -5672,6 +5721,8 @@ bin/znuny.Daemon.pl status\').',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
             '',
         'Defines the timeout (in seconds, minimum is 20 seconds) for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
+            '',
+        'When support data is collected via SupportDataCollector, certain SysConfig values marked with ValueType="Password" are automatically masked. This prevents passwords from appearing in plain text in the support data. This setting defines the settings that contain complex configuration hashes that should not be masked when generating the support data.' =>
             '',
         'Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server\'s settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, OTRS_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
             'Mendefinisikan jenis protokol, yang digunakan oleh web server, untuk melayani aplikasi. Jika protokol https akan digunakan bukan http biasa, itu harus ditentukan di sini. Karena ini tidak berpengaruh pada pengaturan atau perilaku web server, itu tidak akan mengubah metode akses ke aplikasi dan, jika salah, tidak akan mencegah Anda dari masuk ke aplikasi. Pengaturan ini hanya digunakan sebagai variabel, Znuny CONFIG Http Jenis yang ditemukan dalam semua bentuk pesan yang digunakan oleh aplikasi, untuk membangun link ke tiket dalam sistem Anda.',
@@ -5854,8 +5905,6 @@ bin/znuny.Daemon.pl status\').',
         'Defines the module that shows all the currently logged in agents in the agent interface.' =>
             'Mendefinisikan modul yang menunjukkan semua yang sedang login agen di antarmuka agen.',
         'Defines the module that shows all the currently logged in customers in the agent interface.' =>
-            '',
-        'Defines the module to display a notification in the agent interface, if there are modified sysconfig settings that are not deployed yet.' =>
             '',
         'Defines the module to display a notification in the agent interface, if there are invalid sysconfig settings deployed.' =>
             '',
@@ -6250,6 +6299,8 @@ bin/znuny.Daemon.pl status\').',
         'Defines a filter for html output to add links behind a defined string. The element Image allows two input kinds. At once the name of an image (e.g. faq.png). In this case the Znuny image path will be used. The second possiblity is to insert the link to the image.' =>
             'Mendefinisikan sebuah filter untuk output html untuk menambahkan link dimana bisa mendefinisikan string. Elemen Gambar memungkinkan dua jenis masukan. Sekaligus nama dari suatu gambar (misal faq.png). Dalam hal ini path gambar Znuny akan digunakan. Kemungkinan kedua adalah untuk memasukkan link ke gambar.',
         'If enabled, the Znuny version tag will be removed from the Webinterface, the HTTP headers and the X-Headers of outgoing mails. NOTE: If you change this option, please make sure to delete the cache.' =>
+            '',
+        'Default template for notification e-mails (see Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email directory for available templates).' =>
             '',
         'If enabled, Znuny will deliver all CSS files in minified form.' =>
             '',
@@ -6719,6 +6770,7 @@ bin/znuny.Daemon.pl status\').',
             'Mendefinisikan atribut tiket default untuk tiket menyortir dalam tampilan antarmuka agen.',
         'Defines the default ticket order in the watch view of the agent interface. Up: oldest on top. Down: latest on top.' =>
             'Mendefinisikan urutan tiket default dalam menonton tampilan antarmuka agen. Atas: tertua di atas. Bawah: terbaru di atas.',
+        'Displayed in the sidebar as additional information.' => '',
         'Required permissions to use the ticket free text screen in the agent interface.' =>
             'izin yang diperlukan untuk menggunakan layar teks bebas tiket di antarmuka agen.',
         'Defines if a ticket lock is required in the ticket free text screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
@@ -6732,6 +6784,8 @@ bin/znuny.Daemon.pl status\').',
         'Sets the queue in the ticket free text screen of a zoomed ticket in the agent interface.' =>
             'Set antrian di layar teks tiket gratis dari tiket yang diperbesar di antarmuka agen.',
         'Sets if queue must be selected by the agent.' => '',
+        'Sets the customer user field in the agent interface.' => '',
+        'Sets the customer user field as mandatory.' => '',
         'Sets the ticket owner in the ticket free text screen of the agent interface.' =>
             'Menetapkan pemilik tiket di tiket layar teks bebas dari antarmuka agen.',
         'Sets if ticket owner must be selected by the agent.' => 'Set pemilik tiket harus dipilih oleh agen.',
@@ -6771,6 +6825,11 @@ bin/znuny.Daemon.pl status\').',
             'Mendefinisikan nama domain berkualifikasi lengkap dari sistem. Pengaturan ini digunakan sebagai variabel, OTRS_CONFIG_FQDN yang ditemukan dalam semua bentuk pesan yang digunakan oleh aplikasi, untuk membangun link ke tiket dalam sistem Anda.',
         'Defines the history comment for the ticket free text screen action, which gets used for ticket history.' =>
             'Mendefinisikan komentar sejarah untuk tiket gratis tindakan layar teks, yang akan digunakan untuk sejarah tiket.',
+        'TicketActionCommon widget that displays the current action description.' =>
+            '',
+        'TicketActionCommon widget that displays ticket information.' => '',
+        'TicketActionCommon widget that displays customer information.' =>
+            '',
         'Required permissions to use the ticket phone outbound screen in the agent interface.' =>
             'izin yang diperlukan untuk menggunakan layar keluar ponsel tiket di antarmuka agen.',
         'Defines if a ticket lock is required in the ticket phone outbound screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
@@ -6781,6 +6840,8 @@ bin/znuny.Daemon.pl status\').',
             'Mendefinisikan subjek default untuk tiket ponsel di layar keluar ponsel tiket dari antarmuka agen.',
         'Defines the default note body text for phone tickets in the ticket phone outbound screen of the agent interface.' =>
             'Mendefinisikan teks tubuh catatan default untuk tiket ponsel di layar keluar ponsel tiket dari antarmuka agen.',
+        'Sets the state of a ticket in screen of the agent interface.' =>
+            '',
         'Defines the default ticket next state after adding a phone note in the ticket phone outbound screen of the agent interface.' =>
             'Mendefinisikan tiket standar negara berikutnya setelah menambahkan catatan telepon di layar keluar ponsel tiket dari antarmuka agen.',
         'Next possible ticket states after adding a phone note in the ticket phone outbound screen of the agent interface.' =>
@@ -7205,6 +7266,13 @@ bin/znuny.Daemon.pl status\').',
             '',
         'Allows to save current work as draft in the ticket forward screen of the agent interface.' =>
             '',
+        'Shows the ticket type selection (Ticket::Type needs to be activated).' =>
+            '',
+        'Shows the service selection (Ticket::Service needs to be activated).' =>
+            '',
+        'Enforces that the agent must select a service.' => '',
+        'Enforces that the agent must select an SLA.' => '',
+        'Shows the ticket priority selection.' => '',
         'Required permissions to use the email outbound screen in the agent interface.' =>
             'izin yang diperlukan untuk menggunakan layar keluar email di antarmuka agen.',
         'Defines if a ticket lock is required in the email outbound screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
@@ -7390,6 +7458,8 @@ bin/znuny.Daemon.pl status\').',
             'Mendefinisikan bagaimana  \'lapangan/field\' dari email (dikirim dari jawaban dan tiket email) akan terlihat seperti yang ditetapkan',
         'Defines the separator between the agents real name and the given queue email address.' =>
             'Mendefinisikan pemisah antara agen nama asli dan alamat email antrian diberikan.',
+        'Defines which article attributes TicketGeneric dashboard widgets are allowed to request when building additional columns.' =>
+            '',
         'Parameters for the dashboard backend of the ticket pending reminder overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Parameters for the dashboard backend of the ticket escalation overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
@@ -7741,6 +7811,8 @@ bin/znuny.Daemon.pl status\').',
             '',
         'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
             'Mengkonfigurasi TicketDynamicField pengaturan default. "Nama" mendefinisikan bidang yang dinamis yang harus digunakan, "Value" adalah data yang akan ditetapkan, dan "Event" mendefinisikan acara pemicu. Silakan periksa pengembang user (https://doc.znuny.org/manual/developer/), bab "Ticket acara Modul".',
+        'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
+            '',
         'Defines the list of types for templates.' => 'Mendefinisikan jenis urutan template',
         'List of default Standard Templates which are assigned automatically to new Queues upon creation.' =>
             'Daftar default Standar Template yang ditugaskan secara otomatis ke Antrian baru pada penciptaan.',
@@ -7777,6 +7849,7 @@ bin/znuny.Daemon.pl status\').',
         'Sets the default link type of split tickets in the agent interface.' =>
             '',
         'Defines available article actions for Internal articles.' => '',
+        'Defines available article actions for Web articles.' => '',
         'Defines available article actions for Phone articles.' => '',
         'Defines available article actions for Email articles.' => '',
         'Defines available article actions for invalid articles.' => '',
@@ -7966,6 +8039,8 @@ bin/znuny.Daemon.pl status\').',
             '',
         'Defines the default ticket order in the ticket mention view of the agent interface. Up: oldest on top. Down: latest on top.' =>
             '',
+        'Maximum number of activities to keep per user. Older ones will be deleted.' =>
+            '',
         'Assignment between event and type.' => '',
         'Defines the link type for each activity.' => '',
         'List of colors in hexadecimal RGB which will be available for selection. Make sure the colors are dark enough so white text can be overlayed on them.' =>
@@ -8052,6 +8127,8 @@ bin/znuny.Daemon.pl status\').',
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
+        'Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view.' =>
+            '',
         'List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions.' =>
             '',
         'List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module CustomerPreferences. These are regular expressions.' =>
@@ -8070,6 +8147,10 @@ bin/znuny.Daemon.pl status\').',
         'Define a process link target.' => '',
         'Define a process icon.' => '',
         'Defines which ContentTypes are permitted for the attachment preview.' =>
+            '',
+        'Names of system config options with email addresses to also be selectable for an outbound email profile (besides system addresses).' =>
+            '',
+        'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             '',
 
         # XML Definition: scripts/database/initial_insert.xml
@@ -8192,6 +8273,7 @@ bin/znuny.Daemon.pl status\').',
 
         # JS File: var/httpd/htdocs/js/Core.Activity.js
         'An error occurred' => '',
+        'Could not load activities.' => '',
         'The activity could not be created. %s is needed.' => '',
         'The activity could not be created.' => '',
         'The activity could not be updated.' => '',
@@ -8215,6 +8297,10 @@ bin/znuny.Daemon.pl status\').',
         'There was an error deleting the attachment. Please check the logs for more information.' =>
             '',
         'Attachment was deleted successfully.' => '',
+
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.AutoResponse.js
+        'Delete this %s' => '',
+        'Deleting the %s and its data. This may take a while...' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.DBCRUD.js
         'Deleting the object and its data. This may take a while...' => '',
@@ -8341,6 +8427,9 @@ bin/znuny.Daemon.pl status\').',
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SMIME.js
         'Do you really want to delete this certificate?' => '',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SendmailConfig.js
+        'Do you really want to delete this outbound email profile?' => '',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.SupportDataCollector.js
         'Generating...' => 'Menghasilkan',
         'It was not possible to generate the Support Bundle.' => 'Itu tidak mungkin untuk menghasil pendukung berkas',
@@ -8412,6 +8501,9 @@ bin/znuny.Daemon.pl status\').',
         'Are you sure you want to delete this appointment? This operation cannot be undone.' =>
             '',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
+        'Copied to clipboard!' => '',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
         'First select a customer user, then select a customer ID to assign to this ticket.' =>
             '',
@@ -8448,8 +8540,6 @@ bin/znuny.Daemon.pl status\').',
             'Maaf, tapi anda tidak bisa menonaktifkan semua metode untuk pemberitahuan yang ditandai sebagai wajib.',
         'Sorry, but you can\'t disable all methods for this notification.' =>
             'Maaf, tapi Anda tidak bisa menonaktifkan semua metode untuk pemberitahuan ini.',
-        'Please note that at least one of the settings you have changed requires a page reload. Click here to reload the current screen.' =>
-            '',
         'An unknown error occurred. Please contact the administrator.' =>
             '',
 
@@ -8580,8 +8670,6 @@ bin/znuny.Daemon.pl status\').',
             '',
 
         # JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
-        'yes' => 'ya',
-        'no' => 'tidak',
         'This is %s' => '',
         'Complex %s with %s arguments' => '',
 
@@ -8677,6 +8765,7 @@ Helpdesk Team Anda
         'Agent Name' => 'Nama agen',
         'Agent Name + FromSeparator + System Address Display Name' => 'Agen Nama + Dari Separator + Sistem Alamat Nama Tampilan',
         'Agent Preferences.' => 'Preferensi agen.',
+        'Agent Session.' => '',
         'Agent Statistics.' => '',
         'Agent User Search' => '',
         'Agent User Search.' => '',
@@ -8818,6 +8907,7 @@ Helpdesk Team Anda
             '',
         'Creates a unit test file for this ticket.' => '',
         'Croatian' => 'Kroasia',
+        'Current action description.' => '',
         'Customer Administration' => 'Administrasi pelanggan',
         'Customer Companies' => 'Perusahaan Pelanggan',
         'Customer IDs' => '',
@@ -8878,6 +8968,7 @@ Helpdesk Team Anda
         'Edit Customer Users.' => 'Mengatur pengguna pelanggan',
         'Edit appointment' => '',
         'Edit customer company' => 'Mengatur perusahaan pelanggan',
+        'Edit customer user' => '',
         'Email Outbound' => 'Email keluar',
         'Email Resend' => '',
         'Email communication channel.' => '',
@@ -9021,6 +9112,7 @@ Helpdesk Team Anda
         'Manage System Configuration Deployments.' => '',
         'Manage different calendars.' => '',
         'Manage existing sessions.' => 'Mengelola sesi yang ada.',
+        'Manage outbound email profiles.' => '',
         'Manage support data.' => 'Mengelola data dukungan.',
         'Manage system files.' => '',
         'Manage tasks triggered by event or time based execution.' => 'Mengelola tugas dipicu oleh peristiwa atau waktu eksekusi berdasarkan.',
@@ -9067,7 +9159,6 @@ Helpdesk Team Anda
         'Number of displayed tickets' => 'Jumlah tiket yang ditampilkan',
         'OAuth2' => '',
         'OAuth2 token' => '',
-        'OTRS' => 'OTRS',
         'Open an external link!' => '',
         'Open tickets (customer user)' => 'Tiket terbuka (pelanggan pengguna)',
         'Open tickets (customer)' => 'Buka tiket (pelanggan)',
@@ -9076,6 +9167,7 @@ Helpdesk Team Anda
         'Out Of Office' => 'Diluar kantor',
         'Out Of Office Time' => 'Waktu diluar kantor',
         'Out of Office users.' => '',
+        'Outbound Email Profiles' => '',
         'Overview Escalated Tickets.' => 'Ikhtisar Tiket meningkat.',
         'Overview Refresh Time' => 'Ikhtisar Segarkan Waktu',
         'Overview of all Tickets per assigned Queue.' => '',
@@ -9274,11 +9366,13 @@ Helpdesk Team Anda
         'Ticket Priority.' => 'Prioritas tiket',
         'Ticket Queue Overview' => 'Antrian tiket keseluruhan',
         'Ticket Responsible.' => 'Penanggung jawab tiket',
+        'Ticket Settings' => 'Pengaturan email',
         'Ticket Watcher' => 'Watcher tiket',
         'Ticket Zoom' => '',
         'Ticket Zoom.' => 'Tiket Zoom.',
         'Ticket bulk module.' => 'Tiket massal modulus.',
         'Ticket creation' => '',
+        'Ticket information' => '',
         'Ticket limit per page for Ticket Overview "Medium".' => '',
         'Ticket limit per page for Ticket Overview "Preview".' => '',
         'Ticket limit per page for Ticket Overview "Small".' => '',
@@ -9421,13 +9515,19 @@ Helpdesk Team Anda
         'Clear debug log',
         'Clear search',
         'Click to delete this attachment.',
+        'Click to download this file.',
+        'Click to preview this file.',
         'Click to select a file for upload.',
         'Clone web service',
         'Close preview',
         'Close this dialog',
-        'Close this message',
         'Complex %s with %s arguments',
         'Confirm',
+        'Copied to clipboard!',
+        'Copy Ticket Number',
+        'Copy Ticket Number + Title',
+        'Copy ticket information',
+        'Could not load activities.',
         'Could not open popup window. Please disable any popup blockers for this application.',
         'Current selection',
         'Currently not possible',
@@ -9444,6 +9544,8 @@ Helpdesk Team Anda
         'Delete field',
         'Delete invoker',
         'Delete operation',
+        'Delete outbound email profile',
+        'Delete this %s',
         'Delete this Attachment',
         'Delete this Event Trigger',
         'Delete this Invoker',
@@ -9456,6 +9558,7 @@ Helpdesk Team Anda
         'Delete this task',
         'Delete web service',
         'Deleting attachment...',
+        'Deleting the %s and its data. This may take a while...',
         'Deleting the field and its data. This may take a while...',
         'Deleting the mail account and its data. This may take a while...',
         'Deleting the object and its data. This may take a while...',
@@ -9478,6 +9581,7 @@ Helpdesk Team Anda
         'Do you really want to delete this link?',
         'Do you really want to delete this notification language?',
         'Do you really want to delete this notification?',
+        'Do you really want to delete this outbound email profile?',
         'Do you really want to delete this scheduled system maintenance?',
         'Do you really want to delete this token and its configuration?',
         'Do you really want to reset this setting to it\'s default value?',
@@ -9579,7 +9683,6 @@ Helpdesk Team Anda
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
-        'Please note that at least one of the settings you have changed requires a page reload. Click here to reload the current screen.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
         'Please remove the following words from your search as they cannot be searched for:',
@@ -9592,6 +9695,7 @@ Helpdesk Team Anda
         'Previous',
         'Process state',
         'Queues',
+        'Quick Deploy',
         'Reload page',
         'Reload page (%ss)',
         'Remove',
@@ -9648,6 +9752,7 @@ Helpdesk Team Anda
         'Sorry, you can only upload one file here.',
         'Split',
         'Stacked',
+        'Standard Deploy',
         'Start date',
         'Status',
         'Stream',
@@ -9728,7 +9833,7 @@ Helpdesk Team Anda
         'Yes',
         'You can either have the affected settings updated automatically to reflect the changes you just made or do it on your own by pressing \'update manually\'.',
         'You can use the category selection to limit the navigation tree below to entries from the selected category. As soon as you select the category, the tree will be re-built.',
-        'You have undeployed settings, would you like to deploy them?',
+        'You have undeployed settings:',
         'activate to apply a descending sort',
         'activate to apply an ascending sort',
         'activate to remove the sort',
@@ -9738,6 +9843,7 @@ Helpdesk Team Anda
         'more',
         'no',
         'none',
+        'or',
         'sorting is disabled',
         'week',
         'yes',

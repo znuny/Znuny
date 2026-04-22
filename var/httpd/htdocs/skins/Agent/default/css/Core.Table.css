@@ -138,8 +138,8 @@ table thead a {
 .DataTable thead th,
 .DataTable thead th.DashboardHeader,
 .TableSmall thead th,
-.TableSmall thead a,
-.TableSmall thead span {
+.TableSmall thead th > a,
+.TableSmall thead th > span {
     position: relative;
     padding: 12px var(--padding-lg);
     font-size: var(--font-size-sm);
@@ -177,16 +177,16 @@ thead tr:not(:only-child):first-child th:last-child {
 }
 
 .TableSmall thead th,
-.TableSmall thead a,
-.TableSmall thead span {
+.TableSmall thead th > a,
+.TableSmall thead th > span {
     padding: 12px var(--padding-sm);
 }
 
 .TicketZoom .DataTable thead th,
 .TicketZoom .DataTable thead th.DashboardHeader,
 .TicketZoom .TableSmall thead th,
-.TicketZoom .TableSmall thead a,
-.TicketZoom .TableSmall thead span {
+.TicketZoom .TableSmall thead th > a,
+.TicketZoom .TableSmall thead th > span {
     /*padding: var(--padding-sm) var(--padding-lg);*/
     padding: var(--padding-sm);
 }
@@ -676,6 +676,7 @@ thead .headerSortDown a {
 
 .TicketList {
     overflow: auto;
+    border-radius: var(--border-radius-sm);
 }
 
 .TicketList table {
@@ -865,8 +866,8 @@ thead .tablesorter-headerAsc > div.tablesorter-header-inner > a:before {
     align-items: center;
 }
 
-.DataTable thead th.DashboardHeader a,
-.TableSmall thead th.OverviewHeader a,
+.DataTable thead th.DashboardHeader > a,
+.TableSmall thead th.OverviewHeader > a,
 .DataTable thead th.DashboardHeader span.Gray,
 th.OverviewHeader .OverviewControl {
     height: auto;
@@ -982,6 +983,57 @@ th.OverviewHeader .OverviewControl {
     background: transparent;
 }
 
+/* ── Column filter: Modernize widget alignment & styling ── */
+
+/* Give the full input row a white background and a clear border */
+.ColumnSettingsBox div.InputField_Container {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    width: auto;
+    max-width: 100%;
+}
+
+.ColumnSettingsBox div.InputField_InputContainer {
+    background: var(--white);
+    border: var(--border-width) var(--border-solid) var(--border-input-color);
+    border-radius: var(--border-radius-sm);
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+/* Selected-value pill ("-") — constrain to natural height so it fits the container */
+.ColumnSettingsBox div.InputField_Selection {
+    height: 75%;
+    top: 4px;
+    transform: none;
+    padding: 0 var(--padding-xs);
+}
+
+/* ShowTreeSelection icon — vertically center inside the flex row */
+.ColumnSettingsBox a.ShowTreeSelection {
+    margin-top: 0;
+    margin-left: 0;
+    padding: 0;
+    flex-shrink: 0;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--border-radius-sm);
+    color: var(--gray-dark);
+    background: transparent;
+    transition: var(--main-transition);
+}
+
+.ColumnSettingsBox a.ShowTreeSelection:hover,
+.ColumnSettingsBox a.ShowTreeSelection:focus {
+    color: var(--primary-color);
+}
+
 /* Merged with style above"
 .MainBox.Dashboard .DataTable thead th.DashboardHeader .ColumnSettingsBox,
 .MainBox.Dashboard .TableSmall thead th.OverviewHeader .ColumnSettingsBox {
@@ -996,7 +1048,7 @@ th.OverviewHeader .OverviewControl {
 
 /*.DataTable thead th.DashboardHeader .ColumnSettingsBox span.SelectedValue,
 .TableSmall thead th.OverviewHeader .ColumnSettingsBox span.SelectedValue*/
-.ColumnSettingsBox span.SelectedValue {
+.ColumnSettingsBox span.SelectedValue:not(.Hidden) {
     display: block;
     text-transform: none;
     margin-bottom: 8px;
@@ -1030,20 +1082,6 @@ th.OverviewHeader .OverviewControl {
     top: 0;
     width: 10px;
     padding: 0px 0px 0px 5px;
-}
-
-/*.DataTable thead th.DashboardHeader .ColumnSettingsBox a.DeleteFilter,
-.TableSmall thead th.OverviewHeader .ColumnSettingsBox a.DeleteFilter*/
-.ColumnSettingsBox a.DeleteFilter {
-    display: inline-block;
-    font-size: 13px;
-    line-height: 1;
-}
-
-/*.DataTable thead th.DashboardHeader .ColumnSettingsBox a.DeleteFilter.Hidden,
-.TableSmall thead th.OverviewHeader .ColumnSettingsBox a.DeleteFilter.Hidden*/
-.ColumnSettingsBox a.DeleteFilter.Hidden {
-    display: none;
 }
 
 /*.DataTable thead th.DashboardHeader .ColumnSettingsBox span.SelectedValue a:hover,

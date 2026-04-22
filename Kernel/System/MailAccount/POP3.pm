@@ -291,34 +291,33 @@ sub Fetch {
         my @Params    = @_;
 
         my $POPObject = $Connect{PopObject};
-        my $ScalarResult;
-        my @ArrayResult = ();
-        my $Wantarray   = wantarray;
+        my $Result;
 
         eval {
-            if ($Wantarray) {
-                @ArrayResult = $POPObject->$Operation( @Params, );
-            }
-            else {
-                $ScalarResult = $POPObject->$Operation( @Params, );
-            }
-
-            return 1;
+            $Result = $POPObject->$Operation( @Params, );
+            return $Result;
         } || do {
-            my $Error = $@;
+            my $Error   = $@;
+            my $Message = sprintf(
+                "Error while executing '%s->%s(%s)': %s",
+                $Self->{MailAccountModuleName},
+                $Operation,
+                join( ',', @Params ),
+                $Error,
+            );
+            $CommunicationLogObject->ObjectLog(
+                ObjectLogType => 'Connection',
+                Priority      => 'Error',
+                Key           => __PACKAGE__,
+                Value         => $Message,
+            );
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => sprintf(
-                    "Error while executing 'POP->%s(%s)': %s",
-                    $Operation,
-                    join( ',', @Params ),
-                    $Error,
-                ),
+                Message  => $Message,
             );
         };
 
-        return @ArrayResult if $Wantarray;
-        return $ScalarResult;
+        return $Result;
     };
 
     my $NOM      = $Connect{NOM};

@@ -1,0 +1,22 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+.modMessageInformation > .inner .messageInformation {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  line-height: 20px;
+  font-size: 14px;
+}
+.modMessageInformation > .inner .messageInformation .messageInformationLabel {
+  margin-right: 10px;
+}
+.modMessageInformation > .inner .messageInformation .messageInformationContent {
+  color: var(--gray-dark-semi);
+}
+
+/*# sourceMappingURL=Module.MessageInformation.css.map */

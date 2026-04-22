@@ -153,13 +153,11 @@ sub _Overview {
     for my $ArticleColor (@ArticleColorList) {
 
         $Param{ColorPicker} = $LayoutObject->ColorPicker(
-            Type  => 'Input',
-            Name  => $ArticleColor->{Name},
-            ID    => $ArticleColor->{Name},
-            Color => $ArticleColor->{Color},
-            Class => 'Validate_Color ',
-
-            format   => 'hexa',
+            Type     => 'Input',
+            Name     => $ArticleColor->{Name},
+            ID       => $ArticleColor->{Name},
+            Color    => $ArticleColor->{Color},
+            Class    => 'Validate_Color ',
             onChange =>
                 "Core.AJAX.FunctionCall('$LayoutObject->{Baselink}Action=AdminArticleColor;Subaction=AJAXUpdate', { Name: '$ArticleColor->{Name}', Color: this.valueElement.value }, function() {});",
         );

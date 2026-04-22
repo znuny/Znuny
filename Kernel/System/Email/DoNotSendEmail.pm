@@ -32,6 +32,14 @@ sub new {
     return $Self;
 }
 
+sub GetAvailableConfigOptions {
+    my ( $Self, %Param ) = @_;
+
+    my %ConfigOptions;
+
+    return \%ConfigOptions;
+}
+
 sub Send {
     my ( $Self, %Param ) = @_;
 

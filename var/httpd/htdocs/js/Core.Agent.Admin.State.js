@@ -51,7 +51,7 @@ Core.Agent.Admin.State = (function (TargetNS) {
             /*eslint-enable camelcase */
         });
         Core.Form.Validate.AddMethod("Validate_Color", function (Value) {
-            return (/^#(?:[0-9a-fA-F]{3}){1,2}$/.test(Value));
+            return (/^#(?:[0-9a-fA-F]{4}){1,2}$/.test(Value));
         }, "");
     };
 

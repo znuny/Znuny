@@ -11,6 +11,7 @@ package Kernel::Modules::AgentTicketBounce;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language              qw(Translatable);
@@ -119,6 +120,13 @@ sub Run {
                 # Show lock state.
                 $LayoutObject->Block(
                     Name => 'PropertiesLock',
+                    Data => {
+                        %Param,
+                        TicketID => $Self->{TicketID},
+                    },
+                );
+                $LayoutObject->Block(
+                    Name => 'PropertiesLockNotify',
                     Data => {
                         %Param,
                         TicketID => $Self->{TicketID},

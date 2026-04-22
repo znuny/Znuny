@@ -90,9 +90,10 @@
             [% IF Filetype %]
             <th class="Filetype">[% Translate("Type") | html %]</th>
             [% END %]
-            [% IF Preview %]
-            <th class="Preview">[% Translate("Preview") | html %]</th>
-            [% END %]
+# Temp. disabled preview because of security context
+#            [% IF Preview %]
+#            <th class="Preview">[% Translate("Preview") | html %]</th>
+#            [% END %]
             [% IF Download %]
             <th class="Download">[% Translate("Download") | html %]</th>
             [% END %]
@@ -111,27 +112,28 @@
                         [% IF Filesize %]
                         <td class="Filesize" data-file-size="[% File.Filesize | html %]">[% File.Filesize | Localize('Filesize') | html %]</td>
                         [% END %]
-                        <td class="Preview OptionIcon">
-                            [% IF Preview || File.Preview %]
-                            <a href="#" class="AttachmentPreview icon-hover-sm" aria-label="[% Translate("Click to preview this file.") | html %]" tabindex="0" data-file-id="[% File.FileID | html %]" data-object-id="[% File.ObjectID | html %]" data-field-id="[% File.FieldID | html %]" data-preview-action="[% File.PreviewAction | html %]">
-                                <i class="fa fa-search"></i>
-                            </a>
-                            [% END %]
-                        </td>
-                        [% IF Download %]
+# Temp. disabled preview because of security context
+#                        <td class="Preview OptionIcon">
+#                            [% IF Preview || File.Preview %]
+#                            <a href="#" class="AttachmentPreview icon-hover-sm" aria-label="[% Translate("Click to preview this file.") | html %]" tabindex="0" data-file-id="[% File.FileID | html %]" data-object-id="[% File.ObjectID | html %]" data-field-id="[% File.FieldID | html %]" data-preview-action="[% File.PreviewAction | html %]">
+#                                <i class="fa fa-search"></i>
+#                            </a>
+#                            [% END %]
+#                        </td>
                         <td class="Download OptionIcon">
+                            [% IF Download %]
                             <a href="[% Env('Baselink') %]Action=AJAXAttachment;Subaction=Download;FileID=[% File.FileID | html %];FormID=[% Data.FormID | html %];[% Env('ChallengeTokenParam') | html %]" class="AttachmentDownload icon-hover-sm" aria-label="[% Translate("Click to download this file.") | html %]" tabindex="1" data-file-id="[% File.FileID | html %]" data-object-id="[% File.ObjectID | html %]" data-field-id="[% File.FieldID | html %]" data-download-action="[% File.DownloadAction | html %]">
                                 <i class="fa fa-download"></i>
                             </a>
+                            [% END %]
                         </td>
-                        [% END %]
-                        [% IF Delete %]
                         <td class="Delete OptionIcon">
+                            [% IF Delete %]
                             <a href="#" class="AttachmentDelete icon-hover-sm" aria-label="[% Translate("Click to delete this attachment.") | html %]" tabindex="2" data-file-id="[% File.FileID | html %]" data-object-id="[% File.ObjectID | html %]" data-field-id="[% File.FieldID | html %]" data-delete-action="[% File.DeleteAction | html %]">
                                 <i class="fa fa-times"></i>
                             </a>
+                            [% END %]
                         </td>
-                        [% END %]
                     </tr>
                 [% END %]
             [% END %]

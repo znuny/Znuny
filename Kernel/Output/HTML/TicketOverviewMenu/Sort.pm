@@ -111,10 +111,10 @@ sub Run {
 
     # build redirect param hash for Core.App.InternalRedirect
     my %RedirectParams;
-    $RedirectParams{Action} = "\'$Self->{Action}\'";
+    $RedirectParams{Action} = $Self->{Action};
     for my $PossibleParam (qw(Filter)) {
         if ( $Param{$PossibleParam} ) {
-            $RedirectParams{$PossibleParam} = "\'$Param{ $PossibleParam }\'";
+            $RedirectParams{$PossibleParam} = $Param{$PossibleParam};
         }
     }
 
@@ -123,7 +123,7 @@ sub Run {
         for my $CurrentLinkFilter ( sort @SplittedLinkFilters ) {
             my @KeyValue = split( /=/, $CurrentLinkFilter );
             if ( defined $KeyValue[1] ) {
-                $RedirectParams{ $KeyValue[0] } = "\'$KeyValue[1]\'";
+                $RedirectParams{ $KeyValue[0] } = $KeyValue[1];
             }
         }
     }
@@ -131,29 +131,21 @@ sub Run {
     $RedirectParams{SortBy}  = 'Selection[0]';
     $RedirectParams{OrderBy} = 'Selection[1]';
 
-    my $RedirectParamsString = '';
-    my $ParamLength          = scalar keys %RedirectParams;
-    my $ParamCounter         = 0;
-    for my $ParamKey ( sort keys %RedirectParams ) {
-        $ParamCounter++;
-        $RedirectParamsString .= "$ParamKey: $RedirectParams{$ParamKey}";
+    my $JSONObject               = $Kernel::OM->Get('Kernel::System::JSON');
+    my $RedirectParamsJSONString = $JSONObject->Encode(
+        Data => \%RedirectParams,
+    );
 
-        # prevent comma after last element for correct functionality in IE
-        if ( $ParamCounter < $ParamLength ) {
-            $RedirectParamsString .= ",\n";
-        }
-        else {
-            $RedirectParamsString .= "\n";
-        }
-    }
+    # Values of SortBy and OrderBy must be barewords, not strings, because they are evaluated
+    # in JS. So, remove the quotes around them added by JSON encoding above.
+    # "Selection[0]" becomes Selection[0].
+    $RedirectParamsJSONString =~ s{"(Selection\[(?:0|1)\])"}{$1}g;
 
     $LayoutObject->AddJSOnDocumentComplete( Code => <<"JS" );
 \$("#SortBy").change(function(){
     var Selection = \$(this).val().split('|');
     if ( Selection.length === 2 ) {
-        Core.App.InternalRedirect({
-            ${RedirectParamsString}
-        });
+        Core.App.InternalRedirect($RedirectParamsJSONString);
     }
 });
 JS

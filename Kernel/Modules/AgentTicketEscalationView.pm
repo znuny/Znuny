@@ -194,6 +194,8 @@ sub Run {
         || $Config->{'Order::Default'}
         || 'Up';
 
+    my $UserIDForSearch = $Config->{TicketSearchWithAdminUser} ? 1 : $Self->{UserID};
+
     my %Filters = (
         Today => {
             Name   => Translatable('Today'),
@@ -202,7 +204,7 @@ sub Run {
                 TicketEscalationTimeOlderDate => $TodayDateTimeObject->ToString(),
                 OrderBy                       => $OrderBy,
                 SortBy                        => $SortBy,
-                UserID                        => $Self->{UserID},
+                UserID                        => $UserIDForSearch,
                 Permission                    => $Config->{'TicketPermission'},
             },
         },
@@ -213,7 +215,7 @@ sub Run {
                 TicketEscalationTimeOlderDate => $TomorrowDateTimeObject->ToString(),
                 OrderBy                       => $OrderBy,
                 SortBy                        => $SortBy,
-                UserID                        => $Self->{UserID},
+                UserID                        => $UserIDForSearch,
                 Permission                    => $Config->{'TicketPermission'},
             },
         },
@@ -224,7 +226,7 @@ sub Run {
                 TicketEscalationTimeOlderDate => $NextWeekDateTimeObject->ToString(),
                 OrderBy                       => $OrderBy,
                 SortBy                        => $SortBy,
-                UserID                        => $Self->{UserID},
+                UserID                        => $UserIDForSearch,
                 Permission                    => $Config->{'TicketPermission'},
             },
         },
