@@ -18,9 +18,9 @@
 # along with this program. If not, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-echo "auto_build.sh - build OTRS release files"
+echo "auto_build.sh - build Znuny release files"
 echo "Copyright (C) 2001-2021 OTRS AG, https://otrs.com/";
-echo "Copyright (C) 2012-2021 Znuny GmbH, https://znuny.com/";
+echo "Copyright (C) 2021 Znuny GmbH, https://znuny.org/";
 
 PATH_TO_CVS_SRC=$1
 PRODUCT="Znuny"
@@ -37,7 +37,6 @@ PACKAGE_TMP_SPEC="${CI_PROJECT_DIR}/../$PACKAGE.spec"
 RPM_BUILD="rpmbuild"
 
 
-
 if ! test $PATH_TO_CVS_SRC || ! test $VERSION || ! test $RELEASE; then
     # --
     # build src needed
@@ -45,7 +44,7 @@ if ! test $PATH_TO_CVS_SRC || ! test $VERSION || ! test $RELEASE; then
     echo ""
     echo "Usage: auto_build.sh <PATH_TO_CVS_SRC> <VERSION> <BUILD>"
     echo ""
-    echo "  Try: auto_build.sh /home/ernie/src/otrs 3.1.0.beta1 01"
+    echo "  Try: auto_build.sh /home/znuny 6.5.19 01"
     echo ""
     exit 1;
 else
@@ -53,7 +52,7 @@ else
     # check dir
     # --
     if ! test -e $PATH_TO_CVS_SRC/RELEASE; then
-        echo "Error: $PATH_TO_CVS_SRC is not OTRS CVS directory!"
+        echo "Error: $PATH_TO_CVS_SRC is not Znuny directory!"
         exit 1;
     fi
 fi
@@ -120,6 +119,29 @@ rm -rf development
 find -name ".#*" | xargs rm -rf
 find -name ".keep" | xargs rm -f
 
+# --
+# prepare RPM and tarball signing
+# --
+
+
+echo "$GPG_PRIVATE_KEY" | base64 -d | gpg --batch --import
+FINGERPRINT=$(gpg --list-keys --fingerprint --with-colons $KEYID \
+  | grep '^fpr' | head -1 | cut -d: -f10)
+echo "${FINGERPRINT}:6:" | gpg --import-ownertrust
+KEYGRIP=$(gpg --with-keygrip --list-secret-keys "$GPG_KEY_ID" | grep Keygrip | head -1 | awk '{print $3}')
+
+cat > ~/.rpmmacros << EOF
+%_signature     gpg
+%_gpg_name      ${GPG_UID}
+%__gpg          /usr/bin/gpg
+%__gpg_sign_cmd %{__gpg} gpg --batch --yes --pinentry-mode loopback \
+                --passphrase $GPG_PASSPHRASE \
+                --no-verbose --no-secmem-warning \
+                -u "%{_gpg_name}" -sbo %{__signature_filename} \
+                %{__plaintext_filename}
+EOF
+
+
 # mk ARCHIVE
 bin/otrs.CheckSum.pl -a create
 # Create needed directories
@@ -134,7 +156,14 @@ function CreateArchive() {
     test -f "$SOURCE_LOCATION" && rm -f "$SOURCE_LOCATION"
     echo "Building $SOURCE_LOCATION..."
     $COMMANDLINE $SOURCE_LOCATION $ARCHIVE_DIR/ > /dev/null || exit 1;
+    echo "Signing $file ..."
+    echo "$GPG_PASSPHRASE" | gpg --batch --yes \
+        --pinentry-mode loopback --passphrase-fd 0 \
+        --armor --detach-sign "$SOURCE_LOCATION"
+    gpg --verify "${SOURCE_LOCATION}.asc" "${SOURCE_LOCATION}.asc"
+    echo "✓ $SOURCE_LOCATION"
     cp $SOURCE_LOCATION $PACKAGE_DEST_DIR/
+    cp "${SOURCE_LOCATION}.asc" $PACKAGE_DEST_DIR/
 }
 
 CreateArchive "tar.gz"  "tar -czf"
@@ -146,6 +175,8 @@ CreateArchive "zip"     "zip -r"
 # --
 DESCRIPTION=$PATH_TO_CVS_SRC/scripts/auto_build/description.txt
 FILES=$PATH_TO_CVS_SRC/scripts/auto_build/files.txt
+
+dnf install -y rpm-sign
 
 function CreateRPM() {
     DistroName=$1
@@ -161,8 +192,10 @@ function CreateRPM() {
     rm $specfile || exit 1;
 
     mkdir -p $PACKAGE_DEST_DIR/RPMS/$TargetPath
+    rpmsign --addsign $SYSTEM_RPM_DIR/*/$PACKAGE*$VERSION*$RELEASE*.rpm
     mv $SYSTEM_RPM_DIR/*/$PACKAGE*$VERSION*$RELEASE*.rpm $PACKAGE_DEST_DIR/RPMS/$TargetPath
     mkdir -p $PACKAGE_DEST_DIR/SRPMS/$TargetPath
+    rpmsign --addsign $SYSTEM_SRPM_DIR/$PACKAGE*$VERSION*$RELEASE*.src.rpm
     mv $SYSTEM_SRPM_DIR/$PACKAGE*$VERSION*$RELEASE*.src.rpm $PACKAGE_DEST_DIR/SRPMS/$TargetPath
 }
 
@@ -177,15 +210,17 @@ echo "You will find your tar.gz, RPMs and SRPMs in $PACKAGE_DEST_DIR";
 cd "$PACKAGE_DEST_DIR"
 find . -name "*$PACKAGE*" | xargs ls -lo
 echo "-----------------------------------------------------------------";
-if which md5sum >> /dev/null; then
-    echo "MD5 message digest (128-bit) checksums and download URLs in markdown table format";
-    echo "| Typ / URL| MD5 Summe |
+if which sha256sum >> /dev/null; then
+    echo "SHA256 message digest (256-bit) checksums and download URLs in markdown table format";
+    echo "| Typ / URL| SHA256 Sum |
 | ---- | ------- |"
-    for p in $(find . -name "*$PACKAGE*")
+    for p in $(find . -name "*$PACKAGE*" -not -name "*$PACKAGE*.asc")
     do
-        md5_complete="$(md5sum "$p"| sed -e "s/\.\//https:\/\/download.znuny.org\/releases\//" )"
-        md5=$(echo "$md5_complete" | awk {'print $1'})
-        url=$(echo "$md5_complete" | awk {'print $NF'})
+        sha256sum "$p" > "${p}.sha256"
+        sed -i 's|  .*/|  |' "${p}.sha256"
+        sha256_complete="$(sha256sum "$p"| sed -e "s/\.\//https:\/\/download.znuny.org\/releases\//" )"
+        sha256=$(echo "$sha256_complete" | awk {'print $1'})
+        url=$(echo "$sha256_complete" | awk {'print $NF'})
         label="Unknown"
         echo "$url" | grep -q ".gz" && label="Source .tar.gz"
         echo "$url" | grep -q ".bz2" && label="Source .bz2"
@@ -201,17 +236,23 @@ if which md5sum >> /dev/null; then
         echo "$url" | grep -q "/SRPMS/fedora/25/" && label="SRPM Fedora 25 "
         echo "$url" | grep -q "/SRPMS/fedora/26/" && label="SRPM Fedora 26 "
 
-        echo "| [$label]($url) | $md5 |"
+        echo "| [$label]($url) | $sha256 |"
     done
 else
-    echo "No md5sum found in \$PATH!"
+    echo "No sha256sum found in \$PATH!"
 fi
 prerelease=$(echo "$VERSION" | egrep -e '[a-zA-Z]')
-if [ -z "$prerelease" ]; then 
+if [ -z "$prerelease" ]; then
     ln -s $PACKAGE-$VERSION.tar.gz $PACKAGE-$MAJOR_VERSION.$MINOR_VERSION.tar.gz
+    ln -s $PACKAGE-$VERSION.tar.gz.asc $PACKAGE-$MAJOR_VERSION.$MINOR_VERSION.tar.gz.asc
+    ln -s $PACKAGE-$VERSION.tar.gz.sha256 $PACKAGE-$MAJOR_VERSION.$MINOR_VERSION.tar.gz.sha256
     ln -s $PACKAGE-$VERSION.tar.gz $PACKAGE-latest-$MAJOR_VERSION.$MINOR_VERSION.tar.gz
+    ln -s $PACKAGE-$VERSION.tar.gz.asc $PACKAGE-latest-$MAJOR_VERSION.$MINOR_VERSION.tar.gz.asc
+    ln -s $PACKAGE-$VERSION.tar.gz.sha256 $PACKAGE-latest-$MAJOR_VERSION.$MINOR_VERSION.tar.gz.sha256
     if [ $LATEST_VERSION  = "true" ]; then
         ln -s $PACKAGE-$VERSION.tar.gz $PACKAGE-latest.tar.gz
+        ln -s $PACKAGE-$VERSION.tar.gz.asc $PACKAGE-latest.tar.gz.asc
+        ln -s $PACKAGE-$VERSION.tar.gz.sha256 $PACKAGE-latest.tar.gz.sha256
     fi
 fi
 echo "--------------------------------------------------------------------------";
