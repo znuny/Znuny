@@ -160,7 +160,7 @@ function CreateArchive() {
     echo "$GPG_PASSPHRASE" | gpg --batch --yes \
         --pinentry-mode loopback --passphrase-fd 0 \
         --armor --detach-sign "$SOURCE_LOCATION"
-    gpg --verify "${SOURCE_LOCATION}.asc" "${SOURCE_LOCATION}.asc"
+    gpg --verify "${SOURCE_LOCATION}.asc" "${SOURCE_LOCATION}"
     echo "✓ $SOURCE_LOCATION"
     cp $SOURCE_LOCATION $PACKAGE_DEST_DIR/
     cp "${SOURCE_LOCATION}.asc" $PACKAGE_DEST_DIR/
