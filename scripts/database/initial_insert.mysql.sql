@@ -24,7 +24,7 @@ INSERT INTO valid (id, name, create_by, create_time, change_by, change_time)
 # ----------------------------------------------------------
 INSERT INTO users (id, first_name, last_name, login, pw, valid_id, create_by, create_time, change_by, change_time)
     VALUES
-    (1, 'Admin', 'OTRS', 'root@localhost', 'roK20XGbWEsSM', 1, 1, current_timestamp, 1, current_timestamp);
+    (1, 'Admin', 'Znuny', 'root@localhost', 'roK20XGbWEsSM', 1, 1, current_timestamp, 1, current_timestamp);
 # ----------------------------------------------------------
 #  insert into table permission_groups
 # ----------------------------------------------------------

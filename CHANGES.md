@@ -1,3 +1,6 @@
+# 6.5.21 2026-??-??
+ - 2026-05-04 Changed Name of User with ID 1.
+
 # 6.5.20 2026-04-29
  - 2026-04-22 Added: EmailSecurity section from Article to GenericInterface. Thanks to @DonMarlowne. [PR#612](https://github.com/znuny/Znuny/pull/612)
  - 2026-04-13 Changed: Ticket list views for "escalation", "locked", "mention", "owner", "responsible", "status" and "watch" now each have a config option TicketSearchWithAdminUser to decide if the tickets will be searched with admin user or the logged in user.

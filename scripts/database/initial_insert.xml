@@ -30,7 +30,7 @@
     <Insert Table="users">
         <Data Key="id" Type="AutoIncrement">1</Data>
         <Data Key="first_name" Type="Quote">Admin</Data>
-        <Data Key="last_name" Type="Quote">OTRS</Data>
+        <Data Key="last_name" Type="Quote">Znuny</Data>
         <Data Key="login" Type="Quote">root@localhost</Data>
         <Data Key="pw" Type="Quote">roK20XGbWEsSM</Data>
         <Data Key="valid_id">1</Data>
