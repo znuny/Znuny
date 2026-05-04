@@ -107,11 +107,12 @@ sub DecodeResponse {
         xml => MIME::Base64::decode_base64($Param{Response}),
     );
 
-    if($nodes->size > 0){
+    if ( $nodes->size > 0 ) {
         $Self->{Assertion} = $Response->to_assertion (
             key_file => $Self->{Config}->{ResponseEncryptKey},
         );
-    }else{
+    }
+    else {
         $Self->{Assertion} = $Response->to_assertion ();
     }
 
