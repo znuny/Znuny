@@ -18,6 +18,7 @@ our $ObjectManagerDisabled = 1;
 use Kernel::System::VariableCheck qw(:all);
 
 use Net::SAML2;
+use Net::SAML2::Object::Response;
 use MIME::Base64;
 use XML::LibXML;
 use XML::LibXML::XPathContext;
