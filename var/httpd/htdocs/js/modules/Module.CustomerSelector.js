@@ -193,7 +193,10 @@
 
             // get data-recipient-field
             configGetKey = jQuery('.inner', this.ctx).attr('data-core-config-get-key');
-            customerData = Core.Config.Get(configGetKey);
+            
+            if (configGetKey !== undefined && configGetKey !== null && configGetKey !== '') {
+                customerData = Core.Config.Get(configGetKey);
+            }
 
             if (Array.isArray(customerData) && customerData.length > 0) {
                 extractedCustomers = customerData.map(function (customer) {
