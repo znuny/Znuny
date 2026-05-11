@@ -95,10 +95,10 @@ my $App = CGI::Emulate::PSGI->handler(
 my $StaticPath = sub {
 
     # Everything in otrs-web/js or otrs-web/skins is a static file.
-    return 0 if $_ !~ m{-web/js/|-web/skins/};
+    return 0 if $_ !~ m{-web/js/|-web/skins/|-web/common/};
 
     # Return only the relative path.
-    $_ =~ s{^.*?-web/(js/.*|skins/.*)}{$1}smx;
+    $_ =~ s{^.*?-web/(js/.*|skins/.*|common/.*)}{$1}smx;
     return $_;
 };
 
