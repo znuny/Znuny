@@ -1,4 +1,5 @@
 # 6.5.21 2026-??-??
+ - 2026-05-26 Fixed: Package manager does not use the user ID for package operations.
  - 2026-05-04 Changed Name of User with ID 1.
 
 # 6.5.20 2026-04-29

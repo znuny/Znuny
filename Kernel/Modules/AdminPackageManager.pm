@@ -1001,7 +1001,12 @@ sub Run {
         );
 
         # intro screen
-        if ( !$PackageObject->PackageReinstall( String => $Package ) ) {
+        my $PackageReinstall = $PackageObject->PackageReinstall(
+            String => $Package,
+            UserID => $Self->{UserID},
+        );
+
+        if ( !$PackageReinstall ) {
             return $LayoutObject->ErrorScreen();
         }
         my %Data;
@@ -1174,7 +1179,11 @@ sub Run {
         );
 
         # unsinstall the package
-        if ( !$PackageObject->PackageUninstall( String => $Package ) ) {
+        my $PackageUninstall = $PackageObject->PackageUninstall(
+            String => $Package,
+            UserID => $Self->{UserID},
+        );
+        if ( !$PackageUninstall ) {
             return $LayoutObject->ErrorScreen();
         }
 
@@ -2033,6 +2042,7 @@ sub _InstallHandling {
     elsif (
         $PackageObject->PackageInstall(
             String => $Param{Package},
+            UserID => $Self->{UserID},
         )
         )
     {
@@ -2206,7 +2216,13 @@ sub _UpgradeHandling {
     }
 
     # upgrade
-    elsif ( $PackageObject->PackageUpgrade( String => $Param{Package} ) ) {
+    elsif (
+        $PackageObject->PackageUpgrade(
+            String => $Param{Package},
+            UserID => $Self->{UserID},
+        )
+        )
+    {
 
         # intro screen
         my %Data;

@@ -315,7 +315,8 @@ sub RepositoryGet {
 add a package to local repository
 
     $PackageObject->RepositoryAdd(
-        String    => $FileString,
+        String => $FileString,
+        UserID => 123,
     );
 
 =cut
@@ -330,6 +331,8 @@ sub RepositoryAdd {
         );
         return;
     }
+
+    my $UserID = defined $Param{UserID} ? $Param{UserID} : 1;
 
     # get package attributes
     my %Structure = $Self->PackageParse(%Param);
@@ -388,10 +391,11 @@ sub RepositoryAdd {
             . ' create_time, create_by, change_time, change_by)'
             . ' VALUES  (?, ?, ?, ?, \'text/xml\', ?, \''
             . Translatable('not installed') . '\', '
-            . ' current_timestamp, 1, current_timestamp, 1)',
+            . ' current_timestamp, ?, current_timestamp, ?)',
         Bind => [
             \$Structure{Name}->{Content},   \$Structure{Version}->{Content},
             \$Structure{Vendor}->{Content}, \$FileName, \$Content,
+            \$UserID,                       \$UserID,
         ],
     );
 
@@ -452,8 +456,9 @@ sub RepositoryRemove {
 install a package
 
     $PackageObject->PackageInstall(
-        String    => $FileString,
-        Force     => 1,             # optional 1 or 0, for to install package even if validation fails
+        String => $FileString,
+        Force  => 1,             # optional 1 or 0, for to install package even if validation fails
+        UserID => 123,           # optional
     );
 
 =cut
@@ -468,6 +473,8 @@ sub PackageInstall {
         );
         return;
     }
+
+    $Param{UserID} = defined $Param{UserID} ? $Param{UserID} : 1;
 
     # Cleanup the repository cache before the package installation to have the current state
     #   during the installation.
@@ -575,6 +582,7 @@ sub PackageInstall {
     # add package
     return if !$Self->RepositoryAdd(
         String => $Param{String},
+        UserID => $Param{UserID},
     );
 
     # update package status
@@ -593,6 +601,7 @@ sub PackageInstall {
         Comments => "Package Install $Structure{Name}->{Content} $Structure{Version}->{Content}",
         Package  => $Structure{Name}->{Content},
         Action   => 'PackageInstall',
+        UserID   => $Param{UserID},
     );
 
     # install database (post)
@@ -634,7 +643,7 @@ sub PackageInstall {
             Vendor  => $Structure{Vendor}->{Content},
             Version => $Structure{Version}->{Content},
         },
-        UserID => 1,
+        UserID => $Param{UserID},
     );
 
     return 1;
@@ -644,7 +653,11 @@ sub PackageInstall {
 
 reinstall files of a package
 
-    $PackageObject->PackageReinstall( String => $FileString );
+    $PackageObject->PackageReinstall(
+        String => $FileString,
+        Force  => 1,             # optional 1 or 0, for to install package even if validation fails
+        UserID => 123,           # optional
+    );
 
 =cut
 
@@ -658,6 +671,8 @@ sub PackageReinstall {
         );
         return;
     }
+
+    $Param{UserID} = defined $Param{UserID} ? $Param{UserID} : 1;
 
     # Cleanup the repository cache before the package reinstallation to have the current state
     #   during the reinstallation.
@@ -717,6 +732,7 @@ sub PackageReinstall {
         Comments => "Package Reinstall $Structure{Name}->{Content} $Structure{Version}->{Content}",
         Package  => $Structure{Name}->{Content},
         Action   => 'PackageReinstall',
+        UserID   => $Param{UserID},
     );
 
     # reinstall code (post)
@@ -761,6 +777,7 @@ upgrade a package
     $PackageObject->PackageUpgrade(
         String => $FileString,
         Force  => 1,             # optional 1 or 0, for to install package even if validation fails
+        UserID => 123,           # optional
     );
 
 =cut
@@ -775,6 +792,8 @@ sub PackageUpgrade {
         );
         return;
     }
+
+    $Param{UserID} = defined $Param{UserID} ? $Param{UserID} : 1;
 
     # Cleanup the repository cache before the package upgrade to have the current state
     #   during the upgrade.
@@ -891,7 +910,10 @@ sub PackageUpgrade {
     return if !$Self->RepositoryRemove( Name => $Structure{Name}->{Content} );
 
     # add new package
-    return if !$Self->RepositoryAdd( String => $Param{String} );
+    return if !$Self->RepositoryAdd(
+        String => $Param{String},
+        UserID => $Param{UserID},
+    );
 
     # update package status
     return if !$Kernel::OM->Get('Kernel::System::DB')->Do(
@@ -1040,6 +1062,7 @@ sub PackageUpgrade {
         Comments => "Package Upgrade $Structure{Name}->{Content} $Structure{Version}->{Content}",
         Package  => $Structure{Name}->{Content},
         Action   => 'PackageUpgrade',
+        UserID   => $Param{UserID},
     );
 
     # upgrade database (post)
@@ -1177,7 +1200,7 @@ sub PackageUpgrade {
             Vendor  => $Structure{Vendor}->{Content},
             Version => $Structure{Version}->{Content},
         },
-        UserID => 1,
+        UserID => $Param{UserID},
     );
 
     return 1;
@@ -1187,7 +1210,11 @@ sub PackageUpgrade {
 
 uninstall a package
 
-    $PackageObject->PackageUninstall( String => $FileString );
+    $PackageObject->PackageUninstall(
+        String => $FileString,
+        Force  => 1,             # optional 1 or 0, for to install package even if validation fails
+        UserID => 123,           # optional
+    );
 
 =cut
 
@@ -1201,6 +1228,8 @@ sub PackageUninstall {
         );
         return;
     }
+
+    $Param{UserID} = defined $Param{UserID} ? $Param{UserID} : 1;
 
     # Cleanup the repository cache before the package uninstallation to have the current state
     #   during the uninstallation.
@@ -1249,6 +1278,7 @@ sub PackageUninstall {
         Comments => "Package Uninstall $Structure{Name}->{Content} $Structure{Version}->{Content}",
         Package  => $Structure{Name}->{Content},
         Action   => 'PackageUninstall',
+        UserID   => $Param{UserID},
     );
 
     # uninstall database (post)
@@ -4614,6 +4644,8 @@ sub _ConfigurationDeploy {
         }
     }
 
+    my $UserID = defined $Param{UserID} ? $Param{UserID} : 1;
+
     #
     # Normally, on package modifications, a configuration settings cleanup needs to happen,
     #   to prevent old configuration settings from breaking the system.
@@ -4646,7 +4678,7 @@ sub _ConfigurationDeploy {
 
     if (
         !$SysConfigObject->ConfigurationXML2DB(
-            UserID  => 1,
+            UserID  => $UserID,
             Force   => 1,
             CleanUp => $CleanUp,
         )
@@ -4662,7 +4694,7 @@ sub _ConfigurationDeploy {
     my $Success = $SysConfigObject->ConfigurationDeploy(
         Comments => $Param{Comments},
         NotDirty => 1,
-        UserID   => 1,
+        UserID   => $UserID,
         Force    => 1,
     );
     if ( !$Success ) {
