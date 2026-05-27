@@ -36,7 +36,10 @@ sub Run {
     my $Verbose = $Param{CommandlineOptions}->{Verbose} || 0;
 
     my @Tasks = (
-
+        {
+            Message => 'Create missing primary keys for database tables.',
+            Module  => 'CreatePrimaryKeys',
+        },
         {
             Message => 'Alters database table article_color.',
             Module  => 'ArticleColor',

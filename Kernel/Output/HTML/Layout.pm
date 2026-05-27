@@ -1861,7 +1861,7 @@ sub Footer {
 
     $RichTextShortPath =~ s/$WebPath//;
     my $LanguageFileWebPath
-        = $ConfigObject->Get('Home') . "/var/httpd/htdocs/${RichTextShortPath}/translations/${CKEUserLanguage}.js";
+        = $ConfigObject->Get('Home') . "/var/httpd/htdocs/${RichTextShortPath}/translations/${CKEUserLanguage}.umd.js";
 
     $IncludeRichTextTranslation = 1 if $RichTextSet && -e $LanguageFileWebPath;
 
@@ -4649,7 +4649,7 @@ sub CustomerFooter {
 
     $RichTextShortPath =~ s/$WebPath//;
     my $LanguageFileWebPath
-        = $ConfigObject->Get('Home') . "/var/httpd/htdocs/${RichTextShortPath}/translations/${CKEUserLanguage}.js";
+        = $ConfigObject->Get('Home') . "/var/httpd/htdocs/${RichTextShortPath}/translations/${CKEUserLanguage}.umd.js";
 
     $IncludeRichTextTranslation = 1 if $RichTextSet && -e $LanguageFileWebPath;
 

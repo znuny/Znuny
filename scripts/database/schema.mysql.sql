@@ -1533,9 +1533,11 @@ CREATE TABLE pm_process (
 #  create table pm_process_preferences
 # ----------------------------------------------------------
 CREATE TABLE pm_process_preferences (
+    id BIGINT NOT NULL AUTO_INCREMENT,
     process_entity_id VARCHAR (50) NOT NULL,
     preferences_key VARCHAR (150) NOT NULL,
     preferences_value TEXT NULL,
+    PRIMARY KEY(id),
     INDEX pm_process_preferences_process_entity_id (process_entity_id)
 );
 # ----------------------------------------------------------

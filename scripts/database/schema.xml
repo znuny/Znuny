@@ -2261,6 +2261,7 @@
 </Table>
 
 <Table Name="pm_process_preferences">
+    <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="BIGINT"/>
     <Column Name="process_entity_id" Required="true" Type="VARCHAR" Size="50"/>
     <Column Name="preferences_key" Required="true" Size="150" Type="VARCHAR"/>
     <Column Name="preferences_value" Required="false" Size="3000" Type="VARCHAR"/>

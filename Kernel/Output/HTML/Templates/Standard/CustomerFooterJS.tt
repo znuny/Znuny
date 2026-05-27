@@ -11,7 +11,7 @@
 [% IF Data.JSConfig.RichTextSet %]
     <script src="[% Config("Frontend::RichText::Path") _ "ckeditor-znuny.js" | html %]"></script>
 [% IF Data.JSConfig.IncludeRichTextTranslation %]
-    <script src="[% Config("Frontend::RichText::Path") _ "translations/" | html %][% Data.JSConfig.CKEUserLanguage | html %].js"></script>
+    <script src="[% Config("Frontend::RichText::Path") _ "translations/" | html %][% Data.JSConfig.CKEUserLanguage | html %].umd.js"></script>
 [% END %]
 [% END %]
 

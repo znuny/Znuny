@@ -25,7 +25,6 @@ our @ObjectDependencies = (
     'Kernel::System::Encode',
     'Kernel::System::Log',
     'Kernel::System::Main',
-    'Kernel::System::Package',
     'Kernel::System::Storable',
     'Kernel::System::XML',
 );

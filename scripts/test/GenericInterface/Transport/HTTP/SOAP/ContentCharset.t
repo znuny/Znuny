@@ -7,7 +7,7 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-## no critic (Modules::RequireExplicitPackage)
+## no critic (RequireExplicitPackage)
 use strict;
 use warnings;
 use utf8;
@@ -17,6 +17,7 @@ use vars (qw($Self));
 use Kernel::GenericInterface::Debugger;
 use Kernel::GenericInterface::Transport::HTTP::SOAP;
 
+my $EncodeObject   = $Kernel::OM->Get('Kernel::System::Encode');
 my $DebuggerObject = Kernel::GenericInterface::Debugger->new(
     DebuggerConfig => {
         DebugThreshold => 'error',
@@ -63,12 +64,12 @@ my @Tests = (
     },
     {
         Name        => 'ISO-8859-1 Complex Content Type',
-        Value       => 'c™',
+        Value       => 'c©',
         ContentType => 'application/soap+xml;charset=iso-8859-1;action="urn:MyService/MyAction"',
     },
     {
         Name        => 'ISO-8859-1 Single Content Type',
-        Value       => 'c™',
+        Value       => 'c©',
         ContentType => 'text/xml;charset=iso-8859-1;',
     },
     {
@@ -96,6 +97,19 @@ for my $Test (@Tests) {
 </soapenv:Envelope>
 EOF
 
+    my ($TestCharset) = $Test->{ContentType} =~ /charset=([^;]+)/;
+    $Self->True( $TestCharset, 'ContentType has charset defined' );
+
+    # Encode test text to a byte string
+    $EncodeObject->EncodeOutput( \$Request );
+    if ( lc($TestCharset) ne 'utf-8' ) {
+        $Request = $EncodeObject->Convert(
+            Text => $Request,
+            From => 'utf-8',
+            To   => $TestCharset,
+        );
+    }
+
     # Fake STDIN and fill it with the request.
     open my $StandardInput, '<', \"$Request";    ## no critic
     local *STDIN = $StandardInput;
@@ -108,7 +122,7 @@ EOF
 
     # Convert original value to UTF-8 (if needed).
     if ( $Test->{ContentType} =~ m{UTF-8}mxsi ) {
-        $Kernel::OM->Get('Kernel::System::Encode')->EncodeInput( \$Test->{Value} );
+        $EncodeObject->EncodeInput( \$Test->{Value} );
     }
 
     $Self->Is(

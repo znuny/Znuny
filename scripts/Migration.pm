@@ -272,6 +272,10 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Znuny::MigrateDBCRUDUUIDColumns',
         },
         {
+            Message => 'Deploy custom translations',
+            Module  => 'scripts::Migration::Znuny::DeployCustomTranslations',
+        },
+        {
             Message => 'Migrate SysConfig settings',
             Module  => 'scripts::Migration::Znuny::MigrateSysConfigSettings',
         },

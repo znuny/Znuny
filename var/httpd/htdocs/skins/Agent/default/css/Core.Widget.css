@@ -2207,7 +2207,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     .WidgetSimple > .Content {
         transition: var(--main-transition);
-        padding: 0;
+        padding: var(--padding-md);
         min-height: 0;
         border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
         overflow: auto;

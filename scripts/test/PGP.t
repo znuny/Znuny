@@ -6,6 +6,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## no critic (RequireExplicitPackage)
 
 use strict;
 use warnings;
@@ -16,6 +17,7 @@ use vars (qw($Self));
 # get needed objects
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
+my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
 
 # get helper object
 $Kernel::OM->ObjectParamAdd(
@@ -117,7 +119,8 @@ my %Check = (
 );
 
 my $TestText = 'hello1234567890äöüÄÖÜ€';
-my $Home     = $ConfigObject->Get('Home');
+$EncodeObject->EncodeOutput( \$TestText );
+my $Home = $ConfigObject->Get('Home');
 
 # delete existing keys to have a cleaned test environment
 COUNT:

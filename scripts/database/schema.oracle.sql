@@ -5762,10 +5762,49 @@ END;
 --  create table pm_process_preferences
 -- ----------------------------------------------------------
 CREATE TABLE pm_process_preferences (
+    id NUMBER (20, 0) NOT NULL,
     process_entity_id VARCHAR2 (50) NOT NULL,
     preferences_key VARCHAR2 (150) NOT NULL,
     preferences_value VARCHAR2 (3000) NULL
 );
+ALTER TABLE pm_process_preferences ADD CONSTRAINT PK_pm_process_preferences PRIMARY KEY (id);
+BEGIN
+    EXECUTE IMMEDIATE 'DROP SEQUENCE SE_pm_process_preferences';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE SEQUENCE SE_pm_process_preferences
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+CACHE 20
+ORDER
+;
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TRIGGER SE_pm_process_preferences_t';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE OR REPLACE TRIGGER SE_pm_process_preferences_t
+BEFORE INSERT ON pm_process_preferences
+FOR EACH ROW
+BEGIN
+    IF :new.id IS NULL THEN
+        SELECT SE_pm_process_preferences.nextval
+        INTO :new.id
+        FROM DUAL;
+    END IF;
+END;
+/
+--
+;
 BEGIN
     EXECUTE IMMEDIATE 'CREATE INDEX pm_process_preferences_proce85 ON pm_process_preferences (process_entity_id)';
 EXCEPTION

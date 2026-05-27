@@ -1,4 +1,8 @@
 # 7.3.3 2026-??-??
+ - 2026-05-20 Changed: Updated CKEditor 5 to version 48.0.0.
+ - 2026-05-19 Fixed: Deployment of custom translations during migration.
+ - 2026-05-19 Fixed: Default RTE label "Rich Text Editor" is shown in some dialogs additionally to the intended field label.
+ - 2026-05-08 Added: Missing primary key for database table pm_process_preferences.
  - 2026-05-06 Fixed: Use of char O instead of digit 0 in hexcolor. Thanks to @LuBroering (Lukas Bröring Sector Nord AG) for reporting the issue. [#790](https://github.com/znuny/Znuny/issues/790)
  - 2026-05-05 Fixed: Missing whitespace between HTML attributes results in invalid markup. Thanks to @LuBroering (Lukas Bröring Sector Nord AG) for reporting the issue. [#792](https://github.com/znuny/Znuny/issues/792)
  - 2026-05-04 Changed Name of User with ID 1.

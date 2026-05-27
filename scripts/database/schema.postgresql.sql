@@ -2604,9 +2604,11 @@ CREATE TABLE pm_process (
 --  create table pm_process_preferences
 -- ----------------------------------------------------------
 CREATE TABLE pm_process_preferences (
+    id bigserial NOT NULL,
     process_entity_id VARCHAR (50) NOT NULL,
     preferences_key VARCHAR (150) NOT NULL,
-    preferences_value VARCHAR (3000) NULL
+    preferences_value VARCHAR (3000) NULL,
+    PRIMARY KEY(id)
 );
 DO $$
 BEGIN
