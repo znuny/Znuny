@@ -1,4 +1,4 @@
-# 6.5.21 2026-??-??
+# 6.5.21 2026-05-27
  - 2026-05-26 Fixed: Package manager does not use the user ID for package operations.
  - 2026-05-20 CVE-2025-26843: Fixed: Infinite loop on replacing tags in template generator.
  - 2026-05-04 Changed Name of User with ID 1.
