@@ -11,11 +11,13 @@ package Kernel::System::User::Preferences::DB;
 
 use strict;
 use warnings;
+use utf8;
 
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Cache',
     'Kernel::System::DB',
+    'Kernel::System::Util',
     'Kernel::System::Log',
 );
 
@@ -53,6 +55,7 @@ sub new {
 
 sub SetPreferences {
     my ( $Self, %Param ) = @_;
+    my $UtilObject = $Kernel::OM->Get('Kernel::System::Util');
 
     # check needed stuff
     for my $Needed (qw(UserID Key)) {
@@ -65,8 +68,7 @@ sub SetPreferences {
         }
     }
 
-    my $Value = $Param{Value} // '';
-
+    my $Value    = $UtilObject->XSSSanitizeValue( $Param{Value} );
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     # delete old data

@@ -3,6 +3,7 @@
  - 2026-05-04 Changed Name of User with ID 1.
  - 2026-05-01 CVE-2025-59490: Follow-up fix for scrambled script tags.
  - 2026-04-21 Security: Fixed: XSS via JavaScript in URL parameters in communication log admin view.
+ - 2026-03-25 Security: Fixed: XSS in user preferences DB.
 
 # 6.5.20 2026-04-29
  - 2026-04-22 Added: EmailSecurity section from Article to GenericInterface. Thanks to @DonMarlowne. [PR#612](https://github.com/znuny/Znuny/pull/612)
