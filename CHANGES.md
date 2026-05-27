@@ -1,6 +1,7 @@
 # 6.5.21 2026-??-??
  - 2026-05-26 Fixed: Package manager does not use the user ID for package operations.
  - 2026-05-04 Changed Name of User with ID 1.
+ - 2026-04-21 Security: Fixed: XSS via JavaScript in URL parameters in communication log admin view.
 
 # 6.5.20 2026-04-29
  - 2026-04-22 Added: EmailSecurity section from Article to GenericInterface. Thanks to @DonMarlowne. [PR#612](https://github.com/znuny/Znuny/pull/612)
