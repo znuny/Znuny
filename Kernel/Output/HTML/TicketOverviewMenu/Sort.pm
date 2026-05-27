@@ -11,12 +11,14 @@ package Kernel::Output::HTML::TicketOverviewMenu::Sort;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::Output::HTML::Layout',
+    'Kernel::System::JSON',
     'Kernel::System::Log',
 );
 
