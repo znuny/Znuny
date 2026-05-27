@@ -6,6 +6,7 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
+## no critic(RequireExplicitPackage)
 use strict;
 use warnings;
 use utf8;
@@ -20,6 +21,28 @@ $Kernel::OM->ObjectParamAdd(
     },
 );
 
+my @DynamicFields = (
+    {
+        Name       => 'Text',
+        Label      => "Text",
+        ObjectType => 'Ticket',
+        FieldType  => 'Text',
+        Config     => {
+            DefaultValue => "Junk",
+        },
+    },
+    {
+        Name       => 'Queue',
+        Label      => "Queue",
+        ObjectType => 'Ticket',
+        FieldType  => 'Text',
+        Config     => {
+            DefaultValue => "Junk",
+        },
+    },
+);
+
+$Kernel::OM->Get('Kernel::System::ZnunyHelper')->_DynamicFieldsCreate(@DynamicFields);
 my $TransitionValidationBaseObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::TransitionValidation::Base');
 
 my @Tests = (

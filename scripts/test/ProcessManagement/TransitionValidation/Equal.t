@@ -104,6 +104,15 @@ my @DynamicFields = (
             }
         },
     },
+    {
+        Name       => 'Queue',
+        Label      => "Queue",
+        ObjectType => 'Ticket',
+        FieldType  => 'Text',
+        Config     => {
+            DefaultValue => "Junk",
+        },
+    },
 );
 
 my $Result = $ZnunyHelperObject->_DynamicFieldsCreate(@DynamicFields);

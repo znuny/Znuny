@@ -1,5 +1,6 @@
 # 6.5.21 2026-??-??
  - 2026-05-26 Fixed: Package manager does not use the user ID for package operations.
+ - 2026-05-20 CVE-2025-26843: Fixed: Infinite loop on replacing tags in template generator.
  - 2026-05-04 Changed Name of User with ID 1.
  - 2026-05-01 CVE-2025-59490: Follow-up fix for scrambled script tags.
  - 2026-04-21 Security: Fixed: XSS via JavaScript in URL parameters in communication log admin view.
