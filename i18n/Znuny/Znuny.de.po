@@ -25357,3 +25357,7 @@ msgstr ""
 msgid "Queue View"
 msgstr "Ansicht nach Queue"
 
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Controls if the ticket mention entries are removed when a ticket is archived."
+msgstr "Steuert, ob die Erwahnungs-Eintrage eines Tickets entfernt werden, wenn ein Ticket archiviert wird."
+

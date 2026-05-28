@@ -8,6 +8,7 @@
 # --
 
 package Kernel::System::TemplateGenerator;
+## nofilter(TidyAll::Plugin::Znuny::CodeStyle::STDERRCheck)
 ## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
 
 use strict;
@@ -15,6 +16,7 @@ use warnings;
 use utf8;
 
 use Kernel::Language;
+use Mail::Address;
 
 use Kernel::System::VariableCheck qw(:all);
 
@@ -1170,33 +1172,22 @@ replace the placeholders in the text
 
 =cut
 
-sub _Replace {
-    my ( $Self, %Param ) = @_;
-
-    # check needed stuff
-    for my $Needed (qw(Text RichText Data UserID)) {
-        if ( !defined $Param{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Need $Needed!"
-            );
-            return;
-        }
-    }
-
-    my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
+sub _FixMailto {
+    my ( $Self, $Param ) = @_;
 
     # check for mailto links
     # since the subject and body of those mailto links are
     # uri escaped we have to uri unescape them, replace
     # possible placeholders and then re-uri escape them
-    $Param{Text} =~ s{
+    my $Text = $Param->{Text};
+    $Text =~ s{
         (href="mailto:[^\?]+\?)([^"]+")
     }
     {
         my $MailToHref        = $1;
         my $MailToHrefContent = $2;
 
+        # Nested s///egx!
         $MailToHrefContent =~ s{
             ((?:subject|body)=)(.+?)("|&)
         }
@@ -1205,818 +1196,896 @@ sub _Replace {
             my $SubjectOrBodyContent = $2;
             my $SubjectOrBodySuffix  = $3;
 
-            my $SubjectOrBodyContentUnescaped = URI::Escape::uri_unescape $SubjectOrBodyContent;
+            my $SubjectOrBodyContentUnescaped = URI::Escape::uri_unescape( $SubjectOrBodyContent );
 
-            my $SubjectOrBodyContentReplaced = $Self->_Replace(
-                %Param,
-                Text     => $SubjectOrBodyContentUnescaped,
-                RichText => 0,
-            );
+            # TODO: now we only recurse if any placeholders are found at all,
+            # but it would be better to completely eliminate recursion
+            if($SubjectOrBodyContentUnescaped =~ / (?: < | %3C ) OTRS_ /xi ) {
+                $SubjectOrBodyContentUnescaped = $Self->_Replace(
+                    %$Param,
+                    Text     => $SubjectOrBodyContentUnescaped,
+                    RichText => 0,
+                );
+            }
 
-            my $SubjectOrBodyContentEscaped = URI::Escape::uri_escape_utf8 $SubjectOrBodyContentReplaced;
+            my $SubjectOrBodyContentEscaped = URI::Escape::uri_escape_utf8( $SubjectOrBodyContentUnescaped );
 
             $SubjectOrBodyPrefix . $SubjectOrBodyContentEscaped . $SubjectOrBodySuffix;
         }egx;
 
+        $MailToHref =~ s/\n//g;
+        $MailToHrefContent =~ s/\n//g;
         $MailToHref . $MailToHrefContent;
     }egx;
 
-    my $Start = '<';
-    my $End   = '>';
-    if ( $Param{RichText} ) {
-        $Start = '&lt;';
-        $End   = '&gt;';
-        $Param{Text} =~ s/(\n|\r)//g;
-    }
+    $Text =~ s/\n//g if $Param->{RichText};
+    return $Text;
+}
 
-    my %Ticket;
-    if ( $Param{TicketData} ) {
-        %Ticket = %{ $Param{TicketData} };
-    }
-
+sub _FindRecipientTimeZone {
+    my ( $Self, $AddTimezoneInfo, $Ticket, $Recipient ) = @_;
     my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
 
-    # Determine recipient's timezone if needed.
-    my $RecipientTimeZone;
-    if ( $Param{AddTimezoneInfo} ) {
-        $RecipientTimeZone = $Kernel::OM->Create('Kernel::System::DateTime')->OTRSTimeZoneGet();
+    my $RecipientTimeZone = $Kernel::OM->Create('Kernel::System::DateTime')->OTRSTimeZoneGet();
 
-        my %CustomerUser;
-        if ( %Ticket && $Ticket{CustomerUserID} ) {
-            %CustomerUser = $CustomerUserObject->CustomerUserDataGet( User => $Ticket{CustomerUserID} );
-        }
+    my %CustomerUser;
+    if ( %$Ticket && $Ticket->{CustomerUserID} ) {
+        %CustomerUser = $CustomerUserObject->CustomerUserDataGet( User => $Ticket->{CustomerUserID} );
+    }
 
-        my %UserPreferences;
+    my %UserPreferences;
 
-        if ( $Param{AddTimezoneInfo}->{NotificationEvent} && $Param{Recipient}->{Type} eq 'Agent' ) {
+    if ( $AddTimezoneInfo->{NotificationEvent} ) {
+        if ( $Recipient->{Type} eq 'Agent' ) {
             %UserPreferences = $Kernel::OM->Get('Kernel::System::User')->GetPreferences(
-                UserID => $Param{Recipient}->{UserID},
+                UserID => $Recipient->{UserID},
             );
         }
-        elsif (
-            $Param{AddTimezoneInfo}->{NotificationEvent}
-            && $Param{Recipient}->{Type} eq 'Customer'
-            && $Param{Recipient}->{UserID}
-            )
-        {
+        elsif ( $Recipient->{Type} eq 'Customer' && $Recipient->{UserID} ) {
             %UserPreferences = $CustomerUserObject->GetPreferences(
-                UserID => $Param{Recipient}->{UserID},
-            );
-        }
-        elsif (
-            $Param{AddTimezoneInfo}->{AutoResponse}
-            && $Ticket{CustomerUserID}
-            && %CustomerUser
-            )
-        {
-            %UserPreferences = $CustomerUserObject->GetPreferences(
-                UserID => $Ticket{CustomerUserID},
-            );
-        }
-
-        if ( $UserPreferences{UserTimeZone} ) {
-            $RecipientTimeZone = $UserPreferences{UserTimeZone};
-        }
-    }
-
-    # Replace Unix time format tags.
-    # If language is defined, they will be converted into a correct format in below IF statement.
-    for my $UnixFormatTime (
-        qw(RealTillTimeNotUsed EscalationResponseTime EscalationUpdateTime EscalationSolutionTime)
-        )
-    {
-        if ( $Ticket{$UnixFormatTime} ) {
-            $Ticket{$UnixFormatTime} = $Kernel::OM->Create(
-                'Kernel::System::DateTime',
-                ObjectParams => {
-                    Epoch => $Ticket{$UnixFormatTime},
-                },
-            )->ToString();
-        }
-    }
-
-    # translate ticket values if needed
-    if ( $Param{Language} ) {
-
-        my $LanguageObject = Kernel::Language->new(
-            UserLanguage => $Param{Language},
-        );
-
-        # Translate the different values.
-        for my $Field (qw(Type State StateType Lock Priority)) {
-            $Ticket{$Field} = $LanguageObject->Translate( $Ticket{$Field} );
-        }
-
-        # Transform the date values from the ticket data (but not the dynamic field values).
-        ATTRIBUTE:
-        for my $Attribute ( sort keys %Ticket ) {
-            next ATTRIBUTE if $Attribute =~ m{ \A DynamicField_ }xms;
-            next ATTRIBUTE if !$Ticket{$Attribute};
-
-            if ( $Ticket{$Attribute} =~ m{\A(\d\d\d\d)-(\d\d)-(\d\d)\s(\d\d):(\d\d):(\d\d)\z}xi ) {
-
-                # Change time to recipient's timezone if needed
-                # and later append timezone information.
-                if ($RecipientTimeZone) {
-                    my $DateTimeObject = $Kernel::OM->Create(
-                        'Kernel::System::DateTime',
-                        ObjectParams => {
-                            String => $Ticket{$Attribute},
-                        },
-                    );
-                    $DateTimeObject->ToTimeZone( TimeZone => $RecipientTimeZone );
-                    $Ticket{$Attribute} = $DateTimeObject->ToString();
-                }
-
-                $Ticket{$Attribute} = $LanguageObject->FormatTimeString(
-                    $Ticket{$Attribute},
-                    'DateFormat',
-                    'NoSeconds',
-                );
-
-                # Append timezone information if needed.
-                if ($RecipientTimeZone) {
-                    $Ticket{$Attribute} .= " ($RecipientTimeZone)";
-                }
-            }
-        }
-
-        my $LocalLayoutObject = Kernel::Output::HTML::Layout->new(
-            Lang => $Param{Language},
-        );
-
-        # Convert tags in seconds to more readable appropriate format if language is defined.
-        for my $TimeInSeconds (
-            qw(UntilTime EscalationTimeWorkingTime EscalationTime FirstResponseTimeWorkingTime FirstResponseTime UpdateTimeWorkingTime
-            UpdateTime SolutionTimeWorkingTime SolutionTime)
-            )
-        {
-            if ( $Ticket{$TimeInSeconds} ) {
-                $Ticket{$TimeInSeconds} = $LocalLayoutObject->CustomerAge(
-                    Age   => $Ticket{$TimeInSeconds},
-                    Space => ' '
-                );
-            }
-        }
-    }
-
-    my %Queue;
-    if ( $Param{QueueID} ) {
-        %Queue = $Kernel::OM->Get('Kernel::System::Queue')->QueueGet(
-            ID => $Param{QueueID},
-        );
-    }
-
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
-    # Replace config options.
-    my $Tag = $Start . 'OTRS_CONFIG_';
-    $Param{Text} =~ s{$Tag(.+?)$End}{
-        my $Key   = $1;
-        my $Value = $ConfigObject->Get($Key) // '';
-
-        # Mask sensitive config options.
-        my $Replace = $Self->_MaskSensitiveValue(
-            Key      => $Key,
-            Value    => $Value,
-            IsConfig => 1,
-        );
-
-        $Replace;
-    }egx;
-
-    # cleanup
-    $Param{Text} =~ s/$Tag.+?$End/-/gi;
-
-    my %Recipient = %{ $Param{Recipient} || {} };
-
-    # get user object
-    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
-
-    if ( !%Recipient && $Param{RecipientID} ) {
-
-        %Recipient = $UserObject->GetUserData(
-            UserID        => $Param{RecipientID},
-            NoOutOfOffice => 1,
-        );
-    }
-
-    my $HashGlobalReplace = sub {
-        my ( $Tag, %H ) = @_;
-
-        # Generate one single matching string for all keys to save performance.
-        my $Keys = join '|', map {quotemeta} grep { defined $H{$_} } keys %H;
-
-        # Set all keys as lowercase to be able to match case insensitive,
-        #   e. g. <OTRS_CUSTOMER_From> and <OTRS_CUSTOMER_FROM>.
-        #   Also mask any values containing sensitive data.
-        %H = map {
-            lc $_ => $Self->_MaskSensitiveValue(
-                Key   => $_,
-                Value => $H{$_},
-            )
-        } sort keys %H;
-
-        # If tag is 'OTRS_CUSTOMER_' add the body alias 'email/note' to be replaced.
-        if ( $Tag =~ m/OTRS_(CUSTOMER|AGENT)_/ ) {
-            KEY:
-            for my $Key (qw( email note )) {
-                my $Value = $H{$Key};
-                next KEY if defined($Value);
-
-                $H{$Key} = $H{'body'};
-                $Keys .= '|' . ucfirst $Key;
-            }
-        }
-
-        $Param{Text} =~ s/(?:$Tag)($Keys)$End/$H{ lc $1 }/ieg;
-    };
-
-    # get recipient data and replace it with <OTRS_...
-    $Tag = $Start . 'OTRS_';
-
-    # include more readable tag <OTRS_NOTIFICATION_RECIPIENT
-    my $RecipientTag = $Start . 'OTRS_NOTIFICATION_RECIPIENT_';
-
-    if (%Recipient) {
-
-        # HTML quoting of content
-        if ( $Param{RichText} ) {
-            ATTRIBUTE:
-            for my $Attribute ( sort keys %Recipient ) {
-                next ATTRIBUTE if !$Recipient{$Attribute};
-                $Recipient{$Attribute} = $HTMLUtilsObject->ToHTML(
-                    String                 => $Recipient{$Attribute},
-                    DoNotReplaceHardBreaks => 1,
-                );
-            }
-        }
-
-        $HashGlobalReplace->( "$Tag|$RecipientTag", %Recipient );
-    }
-
-    # cleanup
-    $Param{Text} =~ s/$RecipientTag.+?$End/-/gi;
-
-    # get owner data and replace it with <OTRS_OWNER_...
-    $Tag = $Start . 'OTRS_OWNER_';
-
-    # include more readable version <OTRS_TICKET_OWNER
-    my $OwnerTag = $Start . 'OTRS_TICKET_OWNER_';
-
-    if ( $Ticket{OwnerID} ) {
-
-        my %Owner = $UserObject->GetUserData(
-            UserID        => $Ticket{OwnerID},
-            NoOutOfOffice => 1,
-        );
-
-        # html quoting of content
-        if ( $Param{RichText} ) {
-
-            ATTRIBUTE:
-            for my $Attribute ( sort keys %Owner ) {
-                next ATTRIBUTE if !$Owner{$Attribute};
-                $Owner{$Attribute} = $HTMLUtilsObject->ToHTML(
-                    String                 => $Owner{$Attribute},
-                    DoNotReplaceHardBreaks => 1,
-                );
-            }
-        }
-
-        $HashGlobalReplace->( "$Tag|$OwnerTag", %Owner );
-    }
-
-    # cleanup
-    $Param{Text} =~ s/$Tag.+?$End/-/gi;
-    $Param{Text} =~ s/$OwnerTag.+?$End/-/gi;
-
-    # get owner data and replace it with <OTRS_RESPONSIBLE_...
-    $Tag = $Start . 'OTRS_RESPONSIBLE_';
-
-    # include more readable version <OTRS_TICKET_RESPONSIBLE
-    my $ResponsibleTag = $Start . 'OTRS_TICKET_RESPONSIBLE_';
-
-    if ( $Ticket{ResponsibleID} ) {
-        my %Responsible = $UserObject->GetUserData(
-            UserID        => $Ticket{ResponsibleID},
-            NoOutOfOffice => 1,
-        );
-
-        # HTML quoting of content
-        if ( $Param{RichText} ) {
-
-            ATTRIBUTE:
-            for my $Attribute ( sort keys %Responsible ) {
-                next ATTRIBUTE if !$Responsible{$Attribute};
-                $Responsible{$Attribute} = $HTMLUtilsObject->ToHTML(
-                    String                 => $Responsible{$Attribute},
-                    DoNotReplaceHardBreaks => 1,
-                );
-            }
-        }
-
-        $HashGlobalReplace->( "$Tag|$ResponsibleTag", %Responsible );
-    }
-
-    # cleanup
-    $Param{Text} =~ s/$Tag.+?$End/-/gi;
-    $Param{Text} =~ s/$ResponsibleTag.+?$End/-/gi;
-
-    $Tag = $Start . 'OTRS_Agent_';
-    my $Tag2        = $Start . 'OTRS_CURRENT_';
-    my %CurrentUser = $UserObject->GetUserData(
-        UserID        => $Param{UserID},
-        NoOutOfOffice => 1,
-    );
-
-    # HTML quoting of content
-    if ( $Param{RichText} ) {
-
-        ATTRIBUTE:
-        for my $Attribute ( sort keys %CurrentUser ) {
-            next ATTRIBUTE if !$CurrentUser{$Attribute};
-            $CurrentUser{$Attribute} = $HTMLUtilsObject->ToHTML(
-                String                 => $CurrentUser{$Attribute},
-                DoNotReplaceHardBreaks => 1,
+                UserID => $Recipient->{UserID},
             );
         }
     }
+    elsif ( $AddTimezoneInfo->{AutoResponse} && $Ticket->{CustomerUserID} && %CustomerUser ) {
+        %UserPreferences = $CustomerUserObject->GetPreferences(
+            UserID => $Ticket->{CustomerUserID},
+        );
+    }
+    return $UserPreferences{UserTimeZone} // $RecipientTimeZone;
+}
 
-    $HashGlobalReplace->( "$Tag|$Tag2", %CurrentUser );
+{
+    my $DynamicFields;
 
-    # replace other needed stuff
-    $Param{Text} =~ s/$Start OTRS_FIRST_NAME $End/$CurrentUser{UserFirstname}/gxms;
-    $Param{Text} =~ s/$Start OTRS_LAST_NAME $End/$CurrentUser{UserLastname}/gxms;
+    # Return the field configuration all DynamicFields for tickets, as a hash keyed by the
+    # lowercased field name. This is cached for the lifetime of this module.
+    sub _GetTicketDynamicFields {
+        my ($Self) = @_;
 
-    # cleanup
-    $Param{Text} =~ s/$Tag2.+?$End/-/gi;
-
-    # ticket data
-    $Tag = $Start . 'OTRS_TICKET_';
-
-    # html quoting of content
-    if ( $Param{RichText} ) {
-
-        ATTRIBUTE:
-        for my $Attribute ( sort keys %Ticket ) {
-            next ATTRIBUTE if !$Ticket{$Attribute};
-            $Ticket{$Attribute} = $HTMLUtilsObject->ToHTML(
-                String                 => $Ticket{$Attribute},
-                DoNotReplaceHardBreaks => 1,
-            );
+        if ( !$DynamicFields ) {
+            my $DynamicFieldList = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
+                Valid      => 1,
+                ObjectType => ['Ticket'],
+            ) || [];
+            $DynamicFields = {
+                map { lc $_->{Name} => $_ } grep { IsHashRefWithData($_) } @$DynamicFieldList
+            };
         }
+        return $DynamicFields;
+    }
+}
+
+# Dropdown, Checkbox and MultipleSelect DynamicFields, can store values (keys) that are
+# different from the the values to display
+# <OTRS_TICKET_DynamicField_NameX> returns the stored key
+# <OTRS_TICKET_DynamicField_NameX_Value> returns the display value
+sub _ReplaceDynamicField {
+    my ( $Self, $LanguageObject, $Ticket, $RecipientTimeZone, $Name ) = @_;
+
+#say STDERR "_ReplaceDynamicField(", join( ', ', map { $_ // '<undef>' } $LanguageObject, $Ticket, $RecipientTimeZone, $Name ), ")";
+    my $Result = '-';
+    my $ValueRequested;
+    if ( $Name =~ /(.*)_value$/i ) {
+        $Name           = $1;
+        $ValueRequested = 1;
     }
 
-    # Dropdown, Checkbox and MultipleSelect DynamicFields, can store values (keys) that are
-    # different from the the values to display
-    # <OTRS_TICKET_DynamicField_NameX> returns the stored key
-    # <OTRS_TICKET_DynamicField_NameX_Value> returns the display value
+    # Get the config via the lowercase key; $DynamicFieldConfig->{Name} has the
+    # real one
+    my $DynamicFieldConfig = $Self->_GetTicketDynamicFields()->{$Name};
 
-    my %DynamicFields;
+    #say STDERR "DynamicFieldConfig: ", ( $DynamicFieldConfig // '<undef>' );
+    return '-' if !defined $DynamicFieldConfig;    # should not normally happen but seems to happen in some test cases
 
-    # For systems with many Dynamic fields we do not want to load them all unless needed
-    # Find what Dynamic Field Values are requested
-    while ( $Param{Text} =~ m/$Tag DynamicField_(\S+?)(_Value)? $End/gixms ) {
-        $DynamicFields{$1} = 1;
+    my $FullName    = "DynamicField_$DynamicFieldConfig->{Name}";
+    my $TicketValue = $Ticket->{$FullName};
+
+    # TODO: empty string or '-'?
+    return '-' if !defined $TicketValue;           # Return if nothing set in current ticket
+
+    # We'll need this condition a couple of times
+    my $IsDateTimeWithZone = $RecipientTimeZone && $DynamicFieldConfig->{FieldType} eq 'DateTime';
+
+    # Translate DateTime fields to recipient's time zone
+    if ($IsDateTimeWithZone) {
+        my $DateTimeObject = $Kernel::OM->Create(
+            'Kernel::System::DateTime',
+            ObjectParams => {
+                String => $TicketValue,
+            },
+        );
+        $DateTimeObject->ToTimeZone( TimeZone => $RecipientTimeZone );
+        $TicketValue = $DateTimeObject->ToString();
     }
 
-    # to store all the required DynamicField display values
-    my %DynamicFieldDisplayValues;
-
-    # get dynamic field objects
-    my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
-    # get the dynamic fields for ticket object
-    my $DynamicFieldList = $DynamicFieldObject->DynamicFieldListGet(
-        Valid      => 1,
-        ObjectType => ['Ticket'],
-    ) || [];
-
-    # cycle through the activated Dynamic Fields for this screen
-    DYNAMICFIELD:
-    for my $DynamicFieldConfig ( @{$DynamicFieldList} ) {
-
-        next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
-
-        # we only load the ones requested
-        next DYNAMICFIELD if !$DynamicFields{ $DynamicFieldConfig->{Name} };
-
-        my $LanguageObject;
-
-        # translate values if needed
-        if ( $Param{Language} ) {
-            $LanguageObject = Kernel::Language->new(
-                UserLanguage => $Param{Language},
-            );
-        }
-
-        my $DateTimeObject;
-
-        # Change DateTime DF value for ticket if needed.
-        if (
-            defined $Ticket{ 'DynamicField_' . $DynamicFieldConfig->{Name} }
-            && $DynamicFieldConfig->{FieldType} eq 'DateTime'
-            && $RecipientTimeZone
-            )
-        {
-            $DateTimeObject = $Kernel::OM->Create(
-                'Kernel::System::DateTime',
-                ObjectParams => {
-                    String => $Ticket{ 'DynamicField_' . $DynamicFieldConfig->{Name} },
-                },
-            );
-            $DateTimeObject->ToTimeZone( TimeZone => $RecipientTimeZone );
-            $Ticket{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = $DateTimeObject->ToString();
-        }
-
-        # get the display value for each dynamic field
+    if ($ValueRequested) {
         my $DisplayValue = $DynamicFieldBackendObject->ValueLookup(
             DynamicFieldConfig => $DynamicFieldConfig,
-            Key                => $Ticket{ 'DynamicField_' . $DynamicFieldConfig->{Name} },
+            Key                => $TicketValue,
             LanguageObject     => $LanguageObject,
         );
 
-        # get the readable value (value) for each dynamic field
-        my $DisplayValueStrg = $DynamicFieldBackendObject->ReadableValueRender(
+        my $DisplayValueString = $DynamicFieldBackendObject->ReadableValueRender(
             DynamicFieldConfig => $DynamicFieldConfig,
             Value              => $DisplayValue,
         );
 
-        # fill the DynamicFielsDisplayValues
-        if ($DisplayValueStrg) {
-            $DynamicFieldDisplayValues{ 'DynamicField_' . $DynamicFieldConfig->{Name} . '_Value' }
-                = $DisplayValueStrg->{Value};
+        if ($DisplayValueString) {
+            $Result = $DisplayValueString->{Value};
 
             # Add timezone info if needed.
-            if (
-                defined $Ticket{ 'DynamicField_' . $DynamicFieldConfig->{Name} }
-                && length $Ticket{ 'DynamicField_' . $DynamicFieldConfig->{Name} }
-                && $DynamicFieldConfig->{FieldType} eq 'DateTime'
-                && $RecipientTimeZone
-                )
-            {
-                $DynamicFieldDisplayValues{ 'DynamicField_' . $DynamicFieldConfig->{Name} . '_Value' }
-                    .= " ($RecipientTimeZone)";
+            if ( $IsDateTimeWithZone && length($TicketValue) ) {
+                $Result .= " ($RecipientTimeZone)";
             }
         }
-
-        # get the readable value (key) for each dynamic field
-        my $ValueStrg = $DynamicFieldBackendObject->ReadableValueRender(
-            DynamicFieldConfig => $DynamicFieldConfig,
-            Value              => $Ticket{ 'DynamicField_' . $DynamicFieldConfig->{Name} },
-        );
-
-        # replace ticket content with the value from ReadableValueRender (if any)
-        if ( IsHashRefWithData($ValueStrg) ) {
-            $Ticket{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = $ValueStrg->{Value};
-
-            # Add timezone info if needed.
-            if (
-                defined $Ticket{ 'DynamicField_' . $DynamicFieldConfig->{Name} }
-                && length $Ticket{ 'DynamicField_' . $DynamicFieldConfig->{Name} }
-                && $DynamicFieldConfig->{FieldType} eq 'DateTime'
-                && $RecipientTimeZone
-                )
-            {
-                $Ticket{ 'DynamicField_' . $DynamicFieldConfig->{Name} } .= " ($RecipientTimeZone)";
-            }
-        }
+        return $Result;
     }
 
-    # replace it
-    $HashGlobalReplace->( $Tag, %Ticket, %DynamicFieldDisplayValues );
-
-    # OTRS_TICKET_LAST_ARTICLE_ID
-    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
-    if ( $Ticket{TicketID} ) {
-        my @LastTicketArticle = $ArticleObject->ArticleList(
-            TicketID => $Ticket{TicketID},
-            OnlyLast => 1,
-        );
-        my $LastTicketArticleID = @LastTicketArticle ? $LastTicketArticle[0]->{ArticleID} : '';
-        $Param{Text} =~ s{$Start OTRS_TICKET_LAST_ARTICLE_ID $End}{$LastTicketArticleID}gixms;
-    }
-
-    # COMPAT
-    $Param{Text} =~ s/$Start OTRS_TICKET_ID $End/$Ticket{TicketID}/gixms;
-    $Param{Text} =~ s/$Start OTRS_TICKET_NUMBER $End/$Ticket{TicketNumber}/gixms;
-    if ( $Ticket{TicketID} ) {
-        $Param{Text} =~ s/$Start OTRS_QUEUE $End/$Ticket{Queue}/gixms;
-    }
-    if ( $Param{QueueID} ) {
-        $Param{Text} =~ s/$Start OTRS_TICKET_QUEUE $End/$Queue{Name}/gixms;
-    }
-
-    # cleanup
-    $Param{Text} =~ s/$Tag.+?$End/-/gi;
-
-    # Follow-up for bug#10825.
-    # Set data for replacing of specific tags in Templates:
-    # - OTRS_AGENT_SUBJECT, OTRS_AGENT_BODY - subject/body of the CURRENT/LATEST agent article
-    # - OTRS_CUSTOMER_SUBJECT, OTRS_CUSTOMER_BODY - subject/body of the CURRENT/LATEST customer article
-    # - OTRS_AGENT_SUBJECT[n]    - first n characters of the subject of the CURRENT/LATEST agent article
-    # - OTRS_AGENT_BODY[n]       - first n lines of the body of the CURRENT/LATEST agent article
-    # - OTRS_CUSTOMER_SUBJECT[n] - first n characters of the subject of the CURRENT/LATEST customer article
-    # - OTRS_CUSTOMER_BODY[n]    - first n lines of the body of the CURRENT/LATEST customer article
-    #
-    # For Note template we need the last article.
-    # For Answer, $Param{Data} has selected or last article data, depends whether ArticleID is sent or not.
-    # For Forward, $Param{Data} has the following article data:
-    # - if ArticleID is sent, data is from selected article.
-    # - if ArticleID is not sent, data is from last customer/agent/any article.
-    if ( $Param{Template} && $Ticket{TicketID} ) {
-
-        my $IsNoteTemplate    = grep { $_ eq 'Note' } @{ $Param{Template} };
-        my $IsAnswerTemplate  = grep { $_ eq 'Answer' } @{ $Param{Template} };
-        my $IsForwardTemplate = grep { $_ eq 'Forward' } @{ $Param{Template} };
-
-        if ($IsNoteTemplate) {
-
-            # Get last article from agent.
-            my @AgentArticles = $ArticleObject->ArticleList(
-                TicketID   => $Param{TicketData}->{TicketID},
-                SenderType => 'agent',
-                OnlyLast   => 1,
-            );
-            if ( @AgentArticles && IsHashRefWithData( $AgentArticles[0] ) ) {
-                my %AgentArticle = $ArticleObject->BackendForArticle( %{ $AgentArticles[0] } )->ArticleGet(
-                    %{ $AgentArticles[0] },
-                    DynamicFields => 0,
-                );
-
-                $Param{DataAgent}->{Subject} = $AgentArticle{Subject};
-                $Param{DataAgent}->{Body}    = $AgentArticle{Body};
-            }
-
-            # Get last article from customer.
-            my @CustomerArticles = $ArticleObject->ArticleList(
-                TicketID   => $Param{TicketData}->{TicketID},
-                SenderType => 'customer',
-                OnlyLast   => 1,
-            );
-            if ( @CustomerArticles && IsHashRefWithData( $CustomerArticles[0] ) ) {
-
-                my %CustomerArticle = $ArticleObject->BackendForArticle( %{ $CustomerArticles[0] } )->ArticleGet(
-                    %{ $CustomerArticles[0] },
-                    DynamicFields => 0,
-                );
-                $Param{Data}->{Subject} = $CustomerArticle{Subject};
-                $Param{Data}->{Body}    = $CustomerArticle{Body};
-            }
-        }
-        elsif ( $IsAnswerTemplate || $IsForwardTemplate ) {
-
-            # If $Param{Data} has agent article data, we will set subject and body in $Param{DataAgent}
-            # to values from $Param{Data} in order to right replacing of OTRS_AGENT_SUBJECT/BODY tags.
-            if ( $Param{Data}->{SenderType} && $Param{Data}->{SenderType} eq 'agent' ) {
-                $Param{DataAgent}->{Subject} = $Param{Data}->{Subject};
-                $Param{DataAgent}->{Body}    = $Param{Data}->{Body};
-            }
-        }
-    }
-
-    # get customer and agent params and replace it with <OTRS_CUSTOMER_... or <OTRS_AGENT_...
-    my %ArticleData = (
-        'OTRS_CUSTOMER_' => $Param{Data}      || {},
-        'OTRS_AGENT_'    => $Param{DataAgent} || {},
+    my $ValueString = $DynamicFieldBackendObject->ReadableValueRender(
+        DynamicFieldConfig => $DynamicFieldConfig,
+        Value              => $TicketValue,
     );
 
-    # use a list to get customer first
-    for my $DataType (qw(OTRS_CUSTOMER_ OTRS_AGENT_)) {
-        my %Data = %{ $ArticleData{$DataType} };
+    # replace ticket content with the value from ReadableValueRender (if any)
+    if ( IsHashRefWithData($ValueString) ) {
+        $Result = $ValueString->{Value};
 
-        # HTML quoting of content
-        if ( $Param{RichText} ) {
+        # Add timezone info if needed.
+        if ( $IsDateTimeWithZone && length($TicketValue) ) {
+            $Result .= " ($RecipientTimeZone)";
+        }
+    }
 
-            ATTRIBUTE:
-            for my $Attribute ( sort keys %Data ) {
-                next ATTRIBUTE if !$Data{$Attribute};
+    return $Result;
+}
 
-                $Data{$Attribute} = $HTMLUtilsObject->ToHTML(
-                    String                 => $Data{$Attribute},
-                    DoNotReplaceHardBreaks => 1,
+# This builds a big hash as a declarative tag replacement spec.
+# Top level keys are tag prefixes that must be matched after the opening
+# angle bracket. Values are hashes with four possible keys, all of them
+# optional:
+# Hash: a hash whose keys are simply appended to the prefix and values
+#       substituted for the tag.
+# Special: a hash whose keys are appended to the prefix. If the
+#          combination of prefix+key is found, the subref value is called
+#          and must return the value to be substituted. If Brackets is
+#          also set, the value found in brackets is passed as an argument
+#          to the sub.
+# Brackets: a boolean value indicating whether to match tags of the format
+#           <OTRS_FOO_BAR[thing]> with "thing" being passed to a Special
+#           sub.
+# Dynamic: this will add a match-everything part after the prefix, so as to
+#          be able to match tags with arbitrary names. The value must be a
+#          subref that will be passed the matched part after the prefix and
+#          must return the substitution value.
+#
+# If subs take care of HTML encoding themselves as in the case of body
+# snippets, they may return a second value that is taken as a boolean; if
+# truthy, no HTML encoding/filtering is done before interpolating the value
+# into the template.
+sub _DefaultReplacements {
+    my ( $Self, %Params ) = @_;
+
+    # Better make sure these all exist.
+    my (
+        $Param,        $Ticket,    $Queue,     $Owner,   $Responsible, $CurrentUser,
+        $CustomerUser, $Recipient, $Callbacks, $Objects, $RecipientTimeZone
+        ) = @Params{
+        qw( Param Ticket Queue Owner Responsible CurrentUser CustomerUser Recipient Callbacks Objects RecipientTimeZone)
+        };
+
+    # These ticket keys get special treatment like translation or time zone
+    # math, so they are explicitly listed in the Special part and need to be
+    # excluded from the Hash part below
+    my @SpecialTicketKeys = qw(RealTillTimeNotUsed EscalationResponseTime EscalationUpdateTime EscalationSolutionTime
+        UntilTime EscalationTimeWorkingTime EscalationTime FirstResponseTimeWorkingTime FirstResponseTime UpdateTimeWorkingTime
+        UpdateTime SolutionTimeWorkingTime SolutionTime Type State StateType Lock Priority);
+    my %SpecialTicketKeyLookup;
+    @SpecialTicketKeyLookup{@SpecialTicketKeys} = (1) x @SpecialTicketKeys;
+
+    # Takes a hash reference, returns a new one with all keys lowercased
+    my $KeysToLower = sub {
+        my ($Hash) = @_;
+        return {
+            map { lc $_ => $Hash->{$_} } keys %$Hash
+        };
+    };
+
+    my $ReplaceUnixTime = sub {
+        my ( $TicketKey, $RecipientTimeZone ) = @_;
+
+        # Return a correct (and language-specific, if defined) format for fields
+        # in Unix timestamp format
+        return sub {
+
+            #say STDERR "ReplaceUnixTime $TicketKey";
+            return '-' if !defined $Ticket->{$TicketKey};
+
+            #say STDERR "=> $Ticket->{$TicketKey}";
+            my $DateTime = $Kernel::OM->Create(
+                'Kernel::System::DateTime',
+                ObjectParams => {
+                    Epoch => $Ticket->{$TicketKey},
+                },
+            );
+            $DateTime->ToTimeZone( TimeZone => $RecipientTimeZone ) if $RecipientTimeZone;
+            return $Callbacks->{LocalizeTime}->( $DateTime->ToString() );
+        };
+    };
+
+    my $TimeToRecipient = sub {
+        my ( $TicketKey, $RecipientTimeZone ) = @_;
+
+        # Shift a time value to the recipient's time zone and localize it if
+        # necessary
+        return sub {
+
+            #say STDERR "TimeToRecipient $TicketKey";
+            return '-'                   if !defined $Ticket->{$TicketKey};
+            return $Ticket->{$TicketKey} if !$RecipientTimeZone;
+
+            #say STDERR "=> $Ticket->{$TicketKey}";
+            my $DateTime = $Kernel::OM->Create(
+                'Kernel::System::DateTime',
+                ObjectParams => {
+                    String => $Ticket->{$TicketKey},
+                },
+            );
+            $DateTime->ToTimeZone( TimeZone => $RecipientTimeZone );
+            return $Callbacks->{LocalizeTime}->( $DateTime->ToString() );
+        };
+    };
+
+    my $ReadableTimeInSeconds = sub {
+        my ($TicketKey) = @_;
+
+        # Take a value in seconds and convert it to human readable form
+        return sub {
+
+            #say STDERR "ReadableTimeInSeconds $TicketKey";
+            return '-' if !defined $Ticket->{$TicketKey};
+
+            #say STDERR "=> $Ticket->{$TicketKey}";
+            return $Callbacks->{ReadableTimeInSeconds}->( $Ticket->{$TicketKey} );
+        }
+    };
+
+    my $Translated = sub {
+        my ($TicketKey) = @_;
+
+        # Simply translate a value, usually an enum
+        return sub {
+
+            #say STDERR "Translated $TicketKey";
+            return '-' if !defined $Ticket->{$TicketKey};
+
+            #say STDERR "=> $Ticket->{$TicketKey}";
+            return $Callbacks->{Translated}->( $Ticket->{$TicketKey} );
+        }
+    };
+
+    my %Replacements = (
+        OTRS_AGENT => {
+            Hash    => { %$CurrentUser, %{ $Param->{DataAgent} // {} } },
+            Special => {
+                subject => sub {
+                    my ($Chars) = @_;
+                    $Callbacks->{GetSubjectSnippet}->( 'DataAgent', $Chars );
+                },
+                map {
+                    $_ => sub {
+                        my ($Lines) = @_;
+                        $Callbacks->{GetBodySnippet}->( 'DataAgent', $Lines );
+                    }
+                } qw( email note body ),
+            },
+            Brackets => 1,
+        },
+
+        OTRS_CUSTOMER => {
+            Special => {
+                subject => sub {
+                    my ($Chars) = @_;
+                    return $Callbacks->{GetSubjectSnippet}->( 'Data', $Chars );
+                },
+                realname => sub {
+                    if ( $Ticket->{CustomerUserID} ) {
+                        my $Name = $Objects->{CustomerUser}->CustomerName(
+                            UserLogin => $Ticket->{CustomerUserID}
+                        );
+                        return $Name if $Name;
+                    }
+
+                    return $Recipient->{Realname} if defined $Recipient->{Realname};
+
+                    my $From = $Param->{Data}{ReplyTo} || $Param->{Data}{To};
+                    return '-' if !$From;
+                    my @Addresses = Mail::Address->parse($From);
+                    return '-' if !@Addresses;
+                    return $Addresses[0]->name() // $Addresses[0]->address();
+                },
+                map {
+                    $_ => sub {
+                        my ($Lines) = @_;
+                        return $Callbacks->{GetBodySnippet}->( 'Data', $Lines );
+                    }
+                } qw( email note body ),
+            },
+            Hash     => { %$CustomerUser, %{ $Param->{Data} } },
+            Brackets => 1,    # will unintentionally allow REALNAME[foo] with brackets being ignored
+        },
+
+        OTRS_EMAIL => {
+            Special => {
+                date => sub {
+                    my ($Timezone) = @_;
+                    my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
+                    if ( defined $Timezone && $DateTimeObject->IsTimeZoneValid( TimeZone => $Timezone ) ) {
+                        $DateTimeObject->ToTimeZone( TimeZone => $Timezone );
+                    }
+                    else {
+                        $Timezone = $DateTimeObject->OTRSTimeZoneGet();
+                    }
+                    return $DateTimeObject->Format( Format => "%A, %B %e, %Y at %T ($Timezone)" );
+                },
+            },
+            Brackets => 1,
+        },
+
+        OTRS_FIRST => {
+            Hash => {
+                name => $CurrentUser->{UserFirstname},
+            },
+        },
+
+        OTRS_LAST => {
+            Hash => {
+                name => $CurrentUser->{UserLastname},
+            },
+        },
+
+        OTRS_NOTIFICATION_RECIPIENT => {
+            Hash    => $Recipient,
+            Special => {
+
+                # This is needed to match OTRS_QUEUE. It will also allow
+                # OTRS_NOTIFICATION_RECIPIENT_QUEUE which hopefully nobody will
+                # use but it should do no harm.
+                queue => sub {
+                    return $Ticket->{Queue} // '-';
+                },
+                comment => sub {
+                    my ($Lines) = @_;
+
+                    # Default to huge number of lines because for some reason we always want quote signs
+                    # This curiously specific number is the maximum quantifier
+                    # in a curly-brace regexp expression.
+                    $Callbacks->{GetBodySnippet}->( 'Data', $Lines // 32766 );
+                },
+            },
+            Brackets => 1,
+        },
+
+        OTRS_OWNER => {
+            Hash => $Owner,
+        },
+
+        OTRS_RESPONSIBLE => {
+            Hash => $Responsible,
+        },
+
+        OTRS_TA => {
+
+            # This is a dummy "dynamicfield" function to just leave OTRS_TA_* tags
+            # (needed for process management) alone instead of catching them as
+            # unknown <OTRS_*> tags
+            Dynamic => sub {
+                my ($Name) = @_;
+                return "<OTRS_TA_$Name>";
+            },
+        },
+
+        OTRS_TICKET => {
+            Special => {
+                last_article_id => sub {
+                    return '' if !$Ticket->{TicketID};
+                    my @LastTicketArticle = $Objects->{Article}->ArticleList(
+                        TicketID => $Ticket->{TicketID},
+                        OnlyLast => 1,
+                    );
+                    return ( @LastTicketArticle ? $LastTicketArticle[0]->{ArticleID} : '' );
+                },
+                (
+                    # If you change this field list, make sure to include it in %SpecialTicketKeys above!
+                    map { lc $_ => $ReplaceUnixTime->( $_, $RecipientTimeZone ) }
+                        qw(RealTillTimeNotUsed EscalationResponseTime EscalationUpdateTime EscalationSolutionTime)
+                ),
+                (
+                    # If you change this field list, make sure to include it in %SpecialTicketKeys above!
+                    map { lc $_ => $ReadableTimeInSeconds->($_) }
+                        qw(UntilTime EscalationTimeWorkingTime EscalationTime FirstResponseTimeWorkingTime
+                        FirstResponseTime UpdateTimeWorkingTime UpdateTime SolutionTimeWorkingTime SolutionTime)
+                ),
+                (
+                    map { lc $_ => $Translated->($_) } qw(Type State StateType Lock Priority)
+                ),
+                (
+
+                    # Change time to recipient's timezone if needed
+                    # and later append timezone information.
+                    # For more information,
+                    # see bug#13865 (https://bugs.otrs.org/show_bug.cgi?id=13865)
+                    # and bug#14270 (https://bugs.otrs.org/show_bug.cgi?id=14270).
+                    map { lc $_ => $TimeToRecipient->( $_, $RecipientTimeZone ) }
+                    grep {
+                        $Ticket->{$_} &&
+                            !m{ \A DynamicField_ }x &&
+                            $Ticket->{$_} =~ m{ \A (\d{4})-(\d\d)-(\d\d)\s(\d\d):(\d\d):(\d\d) \z }x
+                    } keys %$Ticket
+                ),
+            },
+            Hash => {
+                id     => $Ticket->{TicketID},
+                number => $Ticket->{TicketNumber},
+                map { $_ => $Ticket->{$_} } (
+
+                    # Exclude all DynamicFields and all in %SpecialTicketKeyLookup
+                    ( grep { !( $SpecialTicketKeyLookup{$_} || !/^DynamicField_/ ) } keys %$Ticket ),
+
+                    # Standard keys should always be there even if no
+                    # TicketID/TicketData
+                    qw( Age ArchiveFlag ChangeBy Changed CreateBy Created
+                        CustomerID CustomerUserID GroupID Lock
+                        LockID Owner OwnerID Priority PriorityID Queue QueueID
+                        Responsible ResponsibleID SLAID ServiceID State StateID
+                        StateType TicketID TicketNumber Title Type TypeID
+                        UnlockTimeout
+                    ),
+                ),
+            },
+        },
+
+        OTRS_TICKET_DYNAMICFIELD => {
+            Dynamic => sub {
+                my ($Name) = @_;
+                $Self->_ReplaceDynamicField( $Objects->{Language}, $Ticket, $RecipientTimeZone, $Name );
+            },
+            Brackets => 1,
+        }
+    );
+
+    # A bit of postprocessing
+    for my $ReplaceSpec ( values %Replacements ) {
+
+        # All the hash keys must be lowercase
+        $ReplaceSpec->{Hash} = $KeysToLower->( $ReplaceSpec->{Hash} );
+
+        # Add a dummy Dynamic section if not present to catch invalid tags
+        $ReplaceSpec->{Dynamic} //= sub {'-'};
+    }
+
+    # Set up some aliases for tag readability
+    # TODO optimize this during RE generation to avoid duplicate Hash key lists?
+    $Replacements{OTRS_CURRENT}            = $Replacements{OTRS_AGENT};
+    $Replacements{OTRS_CUSTOMER_DATA}      = $Replacements{OTRS_CUSTOMER};
+    $Replacements{OTRS_TICKET_OWNER}       = $Replacements{OTRS_OWNER};
+    $Replacements{OTRS_TICKET_RESPONSIBLE} = $Replacements{OTRS_RESPONSIBLE};
+    $Replacements{OTRS}                    = $Replacements{OTRS_NOTIFICATION_RECIPIENT};
+
+    return \%Replacements;
+}
+
+# This returns the extensive structure that specifies all tag replacements.
+# Which is just the result of _DefaultReplacements() here. The extra level of
+# function calls is just there to give extensions a place to hook into when
+# adding/modifying tags. Overwrite this function and return whatever you want.
+sub _Replacements {
+    my ( $Self, %Params ) = @_;
+    return $Self->_DefaultReplacements(%Params);
+}
+
+# Do the whole tag replacement dance
+{
+    my ( $LocalLayoutObject, $LanguageObject );
+    my $PreviousLanguage = '';
+
+    sub _Replace {
+        my ( $Self, %Param ) = @_;
+        my $ArticleObject      = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+        my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+        my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+        my $HTMLUtilsObject    = $Kernel::OM->Get('Kernel::System::HTMLUtils');
+        my $TicketObject       = $Kernel::OM->Get('Kernel::System::Ticket');
+        my $UserObject         = $Kernel::OM->Get('Kernel::System::User');
+
+        my ( $Start, $End, $Tag );
+        my $RecipientTimeZone;
+        my ( %Ticket, %Queue, %Owner, %Responsible, %CurrentUser, %CustomerUser );
+
+        for my $Needed (qw(Text RichText Data UserID)) {
+            if ( !defined $Param{$Needed} ) {
+                $Kernel::OM->Get('Kernel::System::Log')->Log(
+                    Priority => 'error',
+                    Message  => "Need $Needed!"
                 );
+                return;
             }
         }
 
-        if (%Data) {
+        if ( $Param{Language} && $Param{Language} ne $PreviousLanguage ) {
 
-            # replace <OTRS_CUSTOMER_*> and <OTRS_AGENT_*> tags
-            $Tag = $Start . $DataType;
-            $HashGlobalReplace->( $Tag, %Data );
+            # We can reuse the expensive-to-build objects as long as Language
+            # hasn't changed
+            $LanguageObject = Kernel::Language->new(
+                UserLanguage => $Param{Language},
+            );
+            $LocalLayoutObject = Kernel::Output::HTML::Layout->new( LanguageObject => $LanguageObject );
+            $PreviousLanguage  = $Param{Language};
+        }
 
-            # prepare body (insert old email) <OTRS_CUSTOMER_EMAIL[n]>, <OTRS_CUSTOMER_NOTE[n]>
-            #   <OTRS_CUSTOMER_BODY[n]>, <OTRS_AGENT_EMAIL[n]>..., <OTRS_COMMENT>
+        # This is the template text we'll be working on
+        my $Text = $Self->_FixMailto( \%Param );
 
-            # Changed this to a 'while' to allow the same key/tag multiple times and different number of lines.
-            while (
-                $Param{Text} =~ /$Start(?:$DataType(EMAIL|NOTE|BODY)\[(.+?)\])$End/
-                ||
-                $Param{Text} =~ /$Start(?:OTRS_COMMENT(\[(.+?)\])?)$End/
-                )
-            {
+        #say STDERR "_Replace($Text)";
+        #say STDERR "PARAM:", YAML::XS::Dump( \%Param );
 
-                my $Line       = $2 || 2500;
-                my $NewOldBody = '';
-                my @Body       = split( /\n/, $Data{Body} );
+        # Tags look different depending on what kind of text we're working with
+        if ( $Param{RichText} ) {
+            ( $Start, $End ) = ( '&lt;', '&gt;' );
+            $Param{Text} =~ s/[\n\r]//g;
+        }
+        else {
+            ( $Start, $End ) = ( '<', '>' );
+        }
 
-                for my $Counter ( 0 .. $Line - 1 ) {
+        # Fill a bunch of data structures if their corresponding params are set
+        if ( $Param{TicketData} ) {
+            %Ticket = %{ $Param{TicketData} };
+        }
+        if ( $Param{QueueID} ) {
+            %Queue = $Kernel::OM->Get('Kernel::System::Queue')->QueueGet(
+                ID => $Param{QueueID},
+            );
+        }
+        if ( $Ticket{OwnerID} ) {
+            %Owner = $UserObject->GetUserData(
+                UserID        => $Ticket{OwnerID},
+                NoOutOfOffice => 1,
+            );
+        }
+        if ( $Ticket{ResponsibleID} ) {
+            %Responsible = $UserObject->GetUserData(
+                UserID        => $Ticket{ResponsibleID},
+                NoOutOfOffice => 1,
+            );
+        }
+        %CurrentUser = $UserObject->GetUserData(
+            UserID        => $Param{UserID},
+            NoOutOfOffice => 1,
+        );
+        if ( $Ticket{CustomerUserID} || $Param{Data}->{CustomerUserID} ) {
+            my $CustomerUserID = $Param{Data}->{CustomerUserID} || $Ticket{CustomerUserID};
 
-                    # 2002-06-14 patch of Pablo Ruiz Garcia
-                    # http://lists.otrs.org/pipermail/dev/2002-June/000012.html
-                    if ( $#Body >= $Counter ) {
+            %CustomerUser = $CustomerUserObject->CustomerUserDataGet(
+                User => $CustomerUserID,
+            );
+        }
 
-                        # add no quote char, do it later by using DocumentCleanup()
-                        if ( $Param{RichText} ) {
-                            $NewOldBody .= $Body[$Counter];
-                        }
+        # Determine recipient's timezone if needed.
+        if ( $Param{AddTimezoneInfo} ) {
+            $RecipientTimeZone = $Self->_FindRecipientTimeZone( $Param{AddTimezoneInfo}, \%Ticket, $Param{Recipient} );
+        }
 
-                        # add "> " as quote char
-                        else {
-                            $NewOldBody .= "> $Body[$Counter]";
-                        }
+        # Replace config options.
+        # TODO: integrate in main RE?
+        $Tag = $Start . 'OTRS_CONFIG_';
+        $Text =~ s{$Tag(.+?)$End}{
+            my $Key   = $1;
+            my $Value = $ConfigObject->Get($Key) // '';
 
-                        # add new line
-                        if ( $Counter < ( $Line - 1 ) ) {
-                            $NewOldBody .= "\n";
-                        }
-                    }
-                    $Counter++;
+            # Mask sensitive config options and return the function's return value
+            $Self->_MaskSensitiveValue( $Key, $Value, 1 );
+        }egx;
+
+        my %Recipient = %{ $Param{Recipient} || {} };
+        if ( !%Recipient && $Param{RecipientID} ) {
+            %Recipient = $UserObject->GetUserData(
+                UserID        => $Param{RecipientID},
+                NoOutOfOffice => 1,
+            );
+        }
+
+        # Some callbacks needed for replacement generation
+        my %Callbacks = (
+
+            # Get a message body from %^Param as specified by $Where. If $Lines is
+            # specified, take as many lines and quote them
+            GetBodySnippet => sub {
+                my ( $Where, $Lines ) = @_;
+                my $SafeLines = $Lines || 2500;
+                my $RichText  = !!$Param{RichText};
+                return '-' if !defined $Param{$Where} || !defined $Param{$Where}{Body};
+
+   #say STDERR "GetBodySnippet($Where, ", ( $Lines // '<undef>' ), ": SafeLines=$SafeLines Body='$Param{$Where}{Body}'";
+                my ($Snippet) = $Param{$Where}{Body} =~ / ( (?: .*\n? ){0,$SafeLines} ) /x;
+
+                #say STDERR "Snippet [Perl $^V]: '$Snippet'";
+                return ( '', $RichText ) if !defined $Snippet;
+                chomp $Snippet;
+
+                # no quoting unless lines requested!
+                if ( !defined $Lines ) {
+                    $Snippet =~ s{ (.+) ( \n+ | \z ) }{<p>$1</p>$2}xg if $RichText;
+
+                    #say STDERR "Returning quoted snippet: '$Snippet'";
+                    return ( $Snippet, $RichText );
                 }
 
-                chomp $NewOldBody;
+                if ( $Param{RichText} ) {
 
-                # HTML quoting of content
-                if ( $Param{RichText} && $NewOldBody ) {
-
-                    # remove trailing new lines
-                    for my $Lines ( 1 .. 10 ) {
-                        $NewOldBody =~ s/(<br\/>)\s{0,20}$//gs;
-                    }
+                    # Remove HTML line breaks
+                    $Snippet =~ s/(<br\/>)\s{0,20}$//gs;
 
                     # replace hard breaks with paragraphs before there will
                     # be added any "HTML" content like blockquote that would
                     # make it complex to replace hard breaks afterwards
-                    $NewOldBody = $HTMLUtilsObject->ToHTMLReplaceWithParagraphs(
-                        String => $NewOldBody,
+                    $Snippet = $HTMLUtilsObject->ToHTMLReplaceWithParagraphs(
+                        String => $Snippet,
                     );
 
-                    # add quote
-                    $NewOldBody = "<blockquote type=\"cite\">$NewOldBody</blockquote>";
-                    $NewOldBody = $HTMLUtilsObject->DocumentCleanup(
-                        String => $NewOldBody,
+                    # Add quote
+                    $Snippet = $HTMLUtilsObject->DocumentCleanup(
+                        String => "<blockquote type=\"cite\">$Snippet</blockquote>"
                     );
                 }
+                else {
+                    # Just add ASCII quote marks at start of line
+                    $Snippet =~ s/^/> /mg if !$Param{RichText};
+                }
 
-                # replace tag
-                $Param{Text}
-                    =~ s/$Start(?:(?:$DataType(EMAIL|NOTE|BODY)\[(.+?)\]|(?:OTRS_COMMENT(\[(.+?)\])?)))$End/$NewOldBody/;
-            }
+                #say STDERR "Returning quoted snippet: '$Snippet'";
+                return ( $Snippet, $RichText );
+            },
 
-            # replace <OTRS_CUSTOMER_SUBJECT[]>  and  <OTRS_AGENT_SUBJECT[]> tags
-            $Tag = "$Start$DataType" . 'SUBJECT';
-            if ( $Param{Text} =~ /$Tag\[(.+?)\]$End/g ) {
+            # Get a subject line, optionally cut down to $Chars characters
+            GetSubjectSnippet => sub {
+                my ( $Where, $Chars ) = @_;
+                return '-' if !$Param{$Where} || !defined $Param{$Where}{Subject};
 
-                my $SubjectChar = $1;
-                my $Subject     = $Kernel::OM->Get('Kernel::System::Ticket')->TicketSubjectClean(
+                my $Subject = $TicketObject->TicketSubjectClean(
                     TicketNumber => $Ticket{TicketNumber},
-                    Subject      => $Data{Subject},
+                    Subject      => $Param{$Where}{Subject},
                 );
 
-                $Subject =~ s/^(.{$SubjectChar}).*$/$1 [...]/;
-                $Param{Text} =~ s/$Tag\[.+?\]$End/$Subject/g;
-            }
+                $Subject =~ s/^(.{$Chars}).*$/$1 [...]/ if defined $Chars;
+                return $Subject;
+            },
 
-            if ( $DataType eq 'OTRS_CUSTOMER_' ) {
+            LocalizeTime => sub {
+                my ($TimeString) = @_;
 
-                # Get <OTRS_EMAIL_DATE[]> from body and replace with received date.
-                # This tag will be able to use with supported OTRS time zones
-                #   ( e.g. <OTRS_EMAIL_DATE[Europe/Berlin]>, <OTRS_EMAIL_DATE[Asia/Tokyo]>,
-                #   <OTRS_EMAIL_DATE[America/Denver]> , ...).
-                # If you use tag without time in simple format as <OTRS_EMAIL_DATE>,
-                #  time will be transformed into OTRS SystemTimeZone.
-                $Tag = $Start . 'OTRS_EMAIL_DATE';
+                return $TimeString if !$LanguageObject;
 
-                my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
-                my $SystemTimeZone = $DateTimeObject->OTRSTimeZoneGet();
-                while ( $Param{Text} =~ /$Tag\[(.+?)\]$End/g ) {
-                    my $TimeZone      = $1;
-                    my $TimeZoneValid = $DateTimeObject->IsTimeZoneValid( TimeZone => $TimeZone );
-                    if ($TimeZoneValid) {
-                        $DateTimeObject->ToTimeZone( TimeZone => $TimeZone );
-                    }
-                    else {
-                        $TimeZone = $SystemTimeZone;
-                    }
+                my $Localized = $LanguageObject->FormatTimeString(
+                    $TimeString,
+                    'DateFormat',
+                    'NoSeconds',
+                );
 
-                    my $EmailDate = $DateTimeObject->Format( Format => '%A, %B %e, %Y at %T ' );
-                    $EmailDate .= "($TimeZone)";
-                    $Param{Text} =~ s/$Tag\[$1\]$End/$EmailDate/g;
-                }
+                return $Localized if !$RecipientTimeZone;
 
-                if ( $Param{Text} =~ /$Tag$End/g ) {
-                    my $TimeZone = $SystemTimeZone;
-                    $DateTimeObject->ToTimeZone( TimeZone => $TimeZone );
+                # Append timezone information
+                return "$Localized ($RecipientTimeZone)";
+            },
 
-                    my $EmailDate = $DateTimeObject->Format( Format => '%A, %B %e, %Y at %T ' );
-                    $EmailDate .= "($TimeZone)";
-                    $Param{Text} =~ s/$Tag$End/$EmailDate/g;
-                }
-            }
-        }
+            # Turn a value in seconds into something more readable
+            ReadableTimeInSeconds => sub {
+                my ($Seconds) = @_;
+                return $Seconds if !$LocalLayoutObject;
+                return $LocalLayoutObject->CustomerAge(
+                    Age   => $Seconds,
+                    Space => ' '
+                );
+            },
 
-        if ( $DataType eq 'OTRS_CUSTOMER_' ) {
-
-            # get and prepare realname
-            $Tag = $Start . 'OTRS_CUSTOMER_REALNAME';
-            if ( $Param{Text} =~ /$Tag$End/i ) {
-
-                my $From;
-
-                if ( $Ticket{CustomerUserID} ) {
-
-                    $From = $CustomerUserObject->CustomerName(
-                        UserLogin => $Ticket{CustomerUserID}
-                    );
-                }
-
-                # try to get the real name directly from the data
-                $From //= $Recipient{Realname};
-
-                # get real name based on reply-to
-                if ( !$From && $Data{ReplyTo} ) {
-
-                    $From = $Data{ReplyTo};
-
-                    # remove email addresses
-                    $From =~ s/&lt;.*&gt;|<.*>|\(.*\)|\"|&quot;|;|,//g;
-
-                    # remove leading/trailing spaces
-                    $From =~ s/^\s+//g;
-                    $From =~ s/\s+$//g;
-                }
-
-                # generate real name based on sender line
-                if ( !$From ) {
-                    $From = $Data{To} || '';
-
-                    # remove email addresses
-                    $From =~ s/&lt;.*&gt;|<.*>|\(.*\)|\"|&quot;|;|,//g;
-
-                    # remove leading/trailing spaces
-                    $From =~ s/^\s+//g;
-                    $From =~ s/\s+$//g;
-                }
-
-                # replace <OTRS_CUSTOMER_REALNAME> with from
-                $Param{Text} =~ s/$Tag$End/$From/g;
-            }
-        }
-    }
-
-    # get customer data and replace it with <OTRS_CUSTOMER_DATA_...
-    $Tag  = $Start . 'OTRS_CUSTOMER_';
-    $Tag2 = $Start . 'OTRS_CUSTOMER_DATA_';
-
-    if ( $Ticket{CustomerUserID} || $Param{Data}->{CustomerUserID} ) {
-
-        my $CustomerUserID = $Param{Data}->{CustomerUserID} || $Ticket{CustomerUserID};
-
-        my %CustomerUser = $CustomerUserObject->CustomerUserDataGet(
-            User => $CustomerUserID,
+            Translated => sub {
+                my ($Value) = @_;
+                return $Value if !$LanguageObject;
+                return $LanguageObject->Translate($Value);
+            },
         );
 
-        # HTML quoting of content
-        if ( $Param{RichText} ) {
+        # Pass basically the entire environment
+        my $Replacements = $Self->_Replacements(
+            Param        => \%Param,
+            Ticket       => \%Ticket,
+            Queue        => \%Queue,
+            Owner        => \%Owner,
+            Responsible  => \%Responsible,
+            CurrentUser  => \%CurrentUser,
+            CustomerUser => \%CustomerUser,
+            Callbacks    => \%Callbacks,
+            Recipient    => \%Recipient,
+            Objects      => {
+                Article      => $ArticleObject,
+                Config       => $ConfigObject,
+                CustomerUser => $CustomerUserObject,
+                Language     => $LanguageObject,
+            },
+            RecipientTimeZone => $RecipientTimeZone,
+        );
 
-            ATTRIBUTE:
-            for my $Attribute ( sort keys %CustomerUser ) {
-                next ATTRIBUTE if !$CustomerUser{$Attribute};
-                $CustomerUser{$Attribute} = $HTMLUtilsObject->ToHTML(
-                    String                 => $CustomerUser{$Attribute},
-                    DoNotReplaceHardBreaks => 1,
+        # Make a sub-regexp out of all hash keys and the prefix if
+        # $Replacements{$_}{Hash} and/or $Replacements{$_}{Special} has keys;
+        # if $Brackets is true, also add one for a "[n]" expression at the end.
+        my $HashKeyAlternation = sub {
+            my ($Prefix) = @_;
+            my ( @HashKeys, @SpecialKeys, @Dynamic );
+            my $Spec = $Replacements->{$_};
+
+            # Keys where the value just has to be looked up
+            @HashKeys = keys %{ $Spec->{Hash} } if $Spec->{Hash};
+
+            # Keys that need special treatment via a coderef
+            @SpecialKeys = keys %{ $Spec->{Special} } if $Spec->{Special};
+
+            # Catchall for unknown name in e.g.
+            # OTRS_TICKET_DynamicField_$NAME and OTRS_TICKET_DynamicField_${NAME}_Value
+            @Dynamic = '.+?' if $Spec->{Dynamic};
+
+            # This will produce garbage if @HashKeys, @SpecialKeys and @Dynamic are
+            # all empty. With the auto-Dynamic above, this should never happen.
+
+            return sprintf(
+                '(?<cat> %s ) _ (?<elem> %s ) %s',
+                $Prefix,
+                join( '|', sort { length($b) <=> length($a) } ( @HashKeys, @SpecialKeys ), @Dynamic ),
+
+                # TODO: use Brackets only for Special/Dynamic?
+                $Spec->{Brackets} ? '(?: \[ (?<bracket> [^]]+ ) \] )?' : ''
+            );
+        };
+
+        # This constructs one big-ass regexp from the %Replacements spec
+        my $ReplacerRE = sprintf(
+            "%s(?:\n%s\n)%s",
+            $Start,
+            join(
+                "|\n",
+                map { $HashKeyAlternation->($_) } sort { length($b) <=> length($a) } keys %$Replacements
+            ),
+            $End
+        );
+
+        #say STDERR "RE: $ReplacerRE";
+
+        # Follow-up for bug#10825.
+        # Set data for replacing of specific tags in Templates:
+        # - OTRS_AGENT_SUBJECT, OTRS_AGENT_BODY - subject/body of the CURRENT/LATEST agent article
+        # - OTRS_CUSTOMER_SUBJECT, OTRS_CUSTOMER_BODY - subject/body of the CURRENT/LATEST customer article
+        # - OTRS_AGENT_SUBJECT[n]    - first n characters of the subject of the CURRENT/LATEST agent article
+        # - OTRS_AGENT_BODY[n]       - first n lines of the body of the CURRENT/LATEST agent article
+        # - OTRS_CUSTOMER_SUBJECT[n] - first n characters of the subject of the CURRENT/LATEST customer article
+        # - OTRS_CUSTOMER_BODY[n]    - first n lines of the body of the CURRENT/LATEST customer article
+        #
+        # For Note template we need the last article.
+        # For Answer, $Param{Data} has selected or last article data, depends whether ArticleID is sent or not.
+        # For Forward, $Param{Data} has the following article data:
+        # - if ArticleID is sent, data is from selected article.
+        # - if ArticleID is not sent, data is from last customer/agent/any article.
+        if ( $Param{Template} && $Ticket{TicketID} ) {
+            if ( grep { $_ eq 'Note' } @{ $Param{Template} } ) {
+
+                # Get last article from agent.
+                my @AgentArticles = $ArticleObject->ArticleList(
+                    TicketID   => $Param{TicketData}->{TicketID},
+                    SenderType => 'agent',
+                    OnlyLast   => 1,
                 );
+                if ( @AgentArticles && IsHashRefWithData( $AgentArticles[0] ) ) {
+                    my %AgentArticle = $ArticleObject->BackendForArticle( %{ $AgentArticles[0] } )->ArticleGet(
+                        %{ $AgentArticles[0] },
+                        DynamicFields => 0,
+                    );
+
+                    $Param{DataAgent}->{Subject} = $AgentArticle{Subject};
+                    $Param{DataAgent}->{Body}    = $AgentArticle{Body};
+                }
+
+                # Get last article from customer.
+                my @CustomerArticles = $ArticleObject->ArticleList(
+                    TicketID   => $Param{TicketData}->{TicketID},
+                    SenderType => 'customer',
+                    OnlyLast   => 1,
+                );
+                if ( @CustomerArticles && IsHashRefWithData( $CustomerArticles[0] ) ) {
+
+                    my %CustomerArticle = $ArticleObject->BackendForArticle( %{ $CustomerArticles[0] } )->ArticleGet(
+                        %{ $CustomerArticles[0] },
+                        DynamicFields => 0,
+                    );
+                    $Param{Data}->{Subject} = $CustomerArticle{Subject};
+                    $Param{Data}->{Body}    = $CustomerArticle{Body};
+                }
+            }
+            elsif ( grep { $_ eq 'Answer' || $_ eq 'Forward' } @{ $Param{Template} } ) {
+
+                # If $Param{Data} has agent article data, we will set subject and body in $Param{DataAgent}
+                # to values from $Param{Data} in order to right replacing of OTRS_AGENT_SUBJECT/BODY tags.
+                if ( $Param{Data}->{SenderType} && $Param{Data}->{SenderType} eq 'agent' ) {
+                    $Param{DataAgent}->{Subject} = $Param{Data}->{Subject};
+                    $Param{DataAgent}->{Body}    = $Param{Data}->{Body};
+                }
             }
         }
 
-        # replace it
-        $HashGlobalReplace->( "$Tag|$Tag2", %CustomerUser );
+        # Apply the replacer regexp. This does all the heavy lifting.
+        my $OrigText = $Text;    # Just for error reporting
+        $Text =~ s{
+        $ReplacerRE
+    }{
+        # TODO stick this in another closure
+        my ( $Prefix, $Elem, $Bracket ) = ( uc($+{cat}), lc($+{elem}), $+{bracket} );
+        my $Spec = $Replacements->{$Prefix};
+        my ($Value, $SkipHTMLFilter);
+        #say STDERR "REPLACING: $Prefix $Elem";
+        if( $Spec->{Special}{$Elem} ) {
+            #say STDERR "FOUND Special";
+            # This needs special treatment. Check whether a value exists and
+            # if so, pass it along to the callback.
+            ($Value, $SkipHTMLFilter) = $Spec->{Special}{$Elem}->( $Bracket );
+            $Value = $Self->_MaskSensitiveValue( $Elem, $Value );
+        }
+        elsif( $Spec->{Hash} && $Spec->{Hash}{$Elem} ) {
+            #say STDERR "FOUND Hash";
+            # Just substitute the value found in hash or '-'
+            $Value = $Spec->{Hash}{$Elem} // '-';
+            $Value = $Self->_MaskSensitiveValue( $Elem, $Value );
+        }
+        elsif( $Spec->{Dynamic} ) {
+            #say STDERR "FOUND Dynamic";
+            # Arbitrary name matched for a dynamic field
+            ($Value, $SkipHTMLFilter) = $Spec->{Dynamic}->($Elem, $Bracket);
+        }
+        else {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "BUG: unmatched key: '$Prefix' / '$Elem' in '$OrigText'",
+            );
+            $Value = '-';
+        }
+        if( $Param{RichText} && !$SkipHTMLFilter ) {
+            $Value = $HTMLUtilsObject->ToHTMLReplaceWithParagraphs(
+                String => $Value,
+            );
+        }
+        $Value;
+    }egix;
+
+        return $Text;
     }
-
-    # cleanup all not needed <OTRS_CUSTOMER_DATA_ tags
-    $Param{Text} =~ s/(?:$Tag|$Tag2).+?$End/-/gi;
-
-    # cleanup all not needed <OTRS_AGENT_ tags
-    $Tag = $Start . 'OTRS_AGENT_';
-    $Param{Text} =~ s/$Tag.+?$End/-/gi;
-
-    $Param{Text} = $HTMLUtilsObject->ToHTMLReplaceWithParagraphs(
-        String => $Param{Text},
-    ) if ( $Param{RichText} );
-
-    return $Param{Text};
 }
 
 =head2 _RemoveUnSupportedTag()
@@ -2058,46 +2127,35 @@ sub _RemoveUnSupportedTag {
     $Param{Text} =~ s/$NotSupportedTag/-/gi;
 
     return $Param{Text};
-
 }
 
 =head2 _MaskSensitiveValue()
 
 Mask sensitive value, i.e. a password, a security token, etc.
 
-    my $MaskedValue = $Self->_MaskSensitiveValue(
-        Key      => 'DatabasePassword', # (required) Name of the field/key.
-        Value    => 'secretvalue',      # (optional) Value to potentially mask.
-        IsConfig => 1,                  # (optional) Whether the value is a config option, default: 0.
-    );
+    my $MaskedValue = $Self->_MaskSensitiveValue( 'DatabasePassword', 'secretvalue', 1 );
 
-Returns masked value, in case the key is matched:
+Returns masked value in case the key is matched:
 
    $MaskedValue = 'xxx';
 
 =cut
 
-sub _MaskSensitiveValue {
-    my ( $Self, %Param ) = @_;
+{
+    my $SecretRE
+        = qr{ config|secret|passw|userpw|auth|token }xi;    # Match general key names, i.e. from the user preferences.
+    my $PasswordRE = qr{ (?:password|pw) \d* $ }xi;         # Match forbidden config keys.
 
-    return '' if !$Param{Key} || !defined $Param{Value};
+    sub _MaskSensitiveValue {
+        my ( $Self, $Key, $Value, $IsConfig ) = @_;
 
-    # Skip masking sensitive values for Dynamic Fields.
-    return $Param{Value} if $Param{Key} =~ qr{ dynamicfield }xi;
+        return '' if !$Key || !defined $Value;
 
-    # Match general key names, i.e. from the user preferences.
-    my $Match = qr{ config|secret|passw|userpw|auth|token }xi;
-
-    # Match forbidden config keys.
-    if ( $Param{IsConfig} ) {
-        $Match = qr{ (?:password|pw) \d* $ }smxi;
+        my $Match = $IsConfig ? $PasswordRE : $SecretRE;
+        return 'xxx' if $Key =~ $Match;
+        return $Value;
     }
-
-    return $Param{Value} if $Param{Key} !~ $Match;
-
-    return 'xxx';
 }
-
 1;
 
 =head1 TERMS AND CONDITIONS

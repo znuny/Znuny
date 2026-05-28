@@ -4365,6 +4365,7 @@ sub TicketArchiveFlagSet {
     if ($ArchiveFlag) {
 
         if ( $ConfigObject->Get('Ticket::ArchiveSystem::RemoveSeenFlags') ) {
+
             $Self->TicketFlagDelete(
                 TicketID => $Param{TicketID},
                 Key      => 'Seen',
@@ -4394,6 +4395,27 @@ sub TicketArchiveFlagSet {
                 AllUsers => 1,
                 UserID   => $Param{UserID},
             );
+        }
+
+        if ( $ConfigObject->Get('Ticket::ArchiveSystem::RemoveMentionFlags') ) {
+
+            $Self->TicketFlagDelete(
+                TicketID => $Param{TicketID},
+                Key      => 'MentionSeen',
+                AllUsers => 1,
+            );
+
+            my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+
+            my @Articles = $ArticleObject->ArticleList( TicketID => $Param{TicketID} );
+            for my $Article (@Articles) {
+                $ArticleObject->ArticleFlagDelete(
+                    TicketID  => $Param{TicketID},
+                    ArticleID => $Article->{ArticleID},
+                    Key       => 'MentionSeen',
+                    AllUsers  => 1,
+                );
+            }
         }
     }
 

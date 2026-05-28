@@ -109,7 +109,7 @@
             jQuery('.customerSelectorFieldInputSelectedCustomer', this.ctx).remove();
 
             // Render customers from the extracted data
-            if (customers.length > 0) {
+            if (Array.isArray(customers) && customers.length > 0) {
                 customers.forEach(function (customer) {
                     that.addCustomer(customer.value, customer.name, {
                         isSelected: customer.selected,
@@ -193,22 +193,24 @@
 
             // get data-recipient-field
             configGetKey = jQuery('.inner', this.ctx).attr('data-core-config-get-key');
-            customerData = Core.Config.Get(configGetKey);
+            if (typeof configGetKey === 'string' && configGetKey.length) {
+                customerData = Core.Config.Get(configGetKey);
 
-            if (Array.isArray(customerData) && customerData.length > 0) {
-                extractedCustomers = customerData.map(function (customer) {
-                    var hasErrors = Boolean(customer.disabled);
+                if (Array.isArray(customerData) && customerData.length > 0) {
+                    extractedCustomers = customerData.map(function (customer) {
+                        var hasErrors = Boolean(customer.disabled);
 
-                    return {
-                        value: customer.CustomerKey,
-                        name: customer.CustomerTicketText,
-                        selected: customer.selected || false,
-                        disabled: customer.disabled || false,
-                        errors: hasErrors ? customer.errors : {}
-                    };
-                });
+                        return {
+                            value: customer.CustomerKey,
+                            name: customer.CustomerTicketText,
+                            selected: customer.selected || false,
+                            disabled: customer.disabled || false,
+                            errors: hasErrors ? customer.errors : {}
+                        };
+                    });
 
-                return extractedCustomers;
+                    return extractedCustomers;
+                }
             }
 
             return customers;

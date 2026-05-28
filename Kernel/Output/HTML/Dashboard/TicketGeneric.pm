@@ -39,6 +39,11 @@ sub new {
         $Self->{$Item} = $ParamObject->GetParam( Param => $Item ) || $Param{$Item};
     }
 
+    # Validate OrderBy - only Up and Down are valid values.
+    if ( defined $Self->{OrderBy} && $Self->{OrderBy} !~ m{\A(?:Up|Down)\z} ) {
+        $Self->{OrderBy} = undef;
+    }
+
     # Get add filters param.
     $Self->{AddFilters} = $ParamObject->GetParam( Param => 'AddFilters' ) || $Param{AddFilters} || 0;
     $Self->{TabAction}  = $ParamObject->GetParam( Param => 'TabAction' )  || $Param{TabAction}  || 0;
@@ -321,6 +326,11 @@ sub new {
         delete $Self->{GetColumnFilter}->{CustomerUserID};
         delete $Self->{GetColumnFilterSelect}->{CustomerUserID};
         delete $Self->{ValidFilterableColumns}->{CustomerUserID};
+    }
+
+    # Validate SortBy against known sortable columns; undef falls through to default 'Age'.
+    if ( defined $Self->{SortBy} && !$Self->{ValidSortableColumns}->{ $Self->{SortBy} } ) {
+        $Self->{SortBy} = undef;
     }
 
     $Self->{UseTicketService} = $ConfigObject->Get('Ticket::Service') || 0;

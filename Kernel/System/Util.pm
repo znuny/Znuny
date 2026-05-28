@@ -12,7 +12,6 @@ package Kernel::System::Util;
 
 use strict;
 use warnings;
-
 use utf8;
 
 use MIME::Base64;
@@ -23,6 +22,7 @@ use Kernel::System::VariableCheck qw(:all);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::Output::HTML::Layout',
+    'Kernel::System::JSON',
     'Kernel::System::Main',
 );
 
@@ -311,6 +311,101 @@ sub GetInstalledDBCRUDObjects {
     }
 
     return \@DBCRUDObjects;
+}
+
+=head2 XSSSanitizeValue()
+
+Takes a value which may be a reference to an array or hash, or a string that
+may be JSON, and tries to remove any contents suspicious of Cross Site
+Scripting.
+
+If the string looks like plain text, a bunch of regexen (see _SanitizeScalar)
+is applied to it; otherwise if the string starts with "[" or "{", we try to
+JSON-decode it and apply the sanitization recursively before reencoding it.
+
+    my $Value = $UtilObject->XSSSanitizeValue( $SuspiciousValue );
+
+=cut
+
+sub XSSSanitizeValue {
+    my ( $Self, $Value ) = @_;
+    my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
+
+    return if !defined $Value;
+
+    # If we have a has- or arrayref, sanitize it recursively.
+    if ( ( ref($Value) eq 'HASH' ) || ( ref($Value) eq 'ARRAY' ) ) {
+        return $Self->_SanitizeStructure($Value);
+    }
+
+    # If the value looks like JSON, decode, sanitize and reencode it.
+    if ( $Value =~ qr{ ^ \s* [\[\{] }x ) {
+        my $Structure = $JSONObject->Decode(
+            Data => $Value,
+        );
+        if ( defined $Structure ) {
+            my $SanitizedStructure = $Self->_SanitizeStructure($Structure);
+            return $JSONObject->Encode(
+                Data     => $SanitizedStructure,
+                SortKeys => 1,
+            );
+        }
+    }
+
+    # Just sanitize a simple string
+    return $Self->_SanitizeScalar($Value);
+}
+
+sub _SanitizeStructure {
+    my ( $Self, $Structure ) = @_;
+    my $Type = ref $Structure;
+
+    if ( $Type eq 'HASH' ) {
+        my %Sanitized;
+        for my $Key ( sort keys %$Structure ) {
+            my $SanitizedKey = $Self->_SanitizeScalar($Key);
+            if ( ref $Structure->{$Key} ) {
+                $Sanitized{$SanitizedKey} = $Self->_SanitizeStructure( $Structure->{$Key} );
+            }
+            else {
+                $Sanitized{$SanitizedKey} = $Self->_SanitizeScalar( $Structure->{$Key} );
+            }
+        }
+        return \%Sanitized;
+    }
+
+    if ( $Type eq 'ARRAY' ) {
+        my @Sanitized;
+        for my $Value (@$Structure) {
+            if ( ref $Value ) {
+                push @Sanitized, $Self->_SanitizeStructure($Value);
+            }
+            else {
+                push @Sanitized, $Self->_SanitizeScalar($Value);
+            }
+        }
+        return \@Sanitized;
+    }
+
+    return $Self->_SanitizeScalar($Structure);
+}
+
+sub _SanitizeScalar {
+    my ( $Self, $Value ) = @_;
+
+    return        if !defined $Value;
+    return $Value if index( $Value, '<' ) == -1;
+
+    $Value =~ s{
+        (?:
+            <script[^>]*> .*? </script> |
+            \s*on\w+\s*=\s*[^\s>]+      |
+            javascript:                 |
+            (?: eval|document\.(?: cookie | write | domain ))
+        )
+    }{}xmsgi;
+
+    return $Value;
 }
 
 =head2 CreateUUIDString()

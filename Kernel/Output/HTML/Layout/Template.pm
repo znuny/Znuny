@@ -303,8 +303,11 @@ sub Output {
                 SortKeys => 1,
             );
 
-            # remove script tags to avoid code injection (CVE-2025-59490).
-            $JSONString =~ s{<\/?script(?:\s.*?)?>}{}gmsi;
+            # CVE-2025-59490: Escape < and > as JSON unicode escapes for safe HTML embedding.
+            # Using unicode escapes instead of tag removal prevents bypass techniques that
+            # reconstruct tags from nested fragments after single-pass removal.
+            $JSONString =~ s/</\\u003c/g;
+            $JSONString =~ s/>/\\u003e/g;
 
             $Output
                 .= "\n<script type=\"text/javascript\">//<![CDATA[\n\"use strict\";\nCore.Config.AddConfig($JSONString);\n//]]></script>";

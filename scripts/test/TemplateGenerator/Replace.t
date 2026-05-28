@@ -533,7 +533,7 @@ mailto-Link <a href="mailto:skywalker@otrs.org?body=From%3A%20test%40home.com">E
     },
     {
         Name =>
-            'OTRS AGENT + CUSTOMER BODY',   # this is an special case, it sets the Body as it is since is the Data param
+            'OTRS AGENT + CUSTOMER BODY',    # this is a special case, it sets the Body as it is since is the Data param
         Data => {
             Body => "Line1\nLine2\nLine3",
         },

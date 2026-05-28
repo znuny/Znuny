@@ -1,4 +1,6 @@
-# 7.3.3 2026-??-??
+# 7.3.3 2026-05-27
+ - 2026-05-26 Fixed: Package manager does not use the user ID for package operations.
+ - 2026-05-20 CVE-2025-26843: Fixed: Infinite loop on replacing tags in template generator.
  - 2026-05-20 Changed: Updated CKEditor 5 to version 48.0.0.
  - 2026-05-19 Fixed: Deployment of custom translations during migration.
  - 2026-05-19 Fixed: Default RTE label "Rich Text Editor" is shown in some dialogs additionally to the intended field label.
@@ -6,9 +8,13 @@
  - 2026-05-06 Fixed: Use of char O instead of digit 0 in hexcolor. Thanks to @LuBroering (Lukas Bröring Sector Nord AG) for reporting the issue. [#790](https://github.com/znuny/Znuny/issues/790)
  - 2026-05-05 Fixed: Missing whitespace between HTML attributes results in invalid markup. Thanks to @LuBroering (Lukas Bröring Sector Nord AG) for reporting the issue. [#792](https://github.com/znuny/Znuny/issues/792)
  - 2026-05-04 Changed Name of User with ID 1.
+ - 2026-05-01 CVE-2025-59490: Follow-up fix for scrambled script tags.
  - 2026-04-30 Fixed: Security option for sending mails cannot be removed manually in compose dialog when queue has a default signing key configured. Thanks for reporting to @LSI-BassdScho. [#766](https://github.com/znuny/Znuny/issues/766).
  - 2026-04-30 Added: Extend Calendar::GetTextColor for RGBA hex and fix #RGB blue parsing. Thanks to @LuBroering (Lukas Bröring Sector Nord AG) for reporting the issue. [#786](https://github.com/znuny/Znuny/issues/786)
  - 2026-04-30 Removed IIS 6. Znuny does not officially support IIS 6.0.
+ - 2026-04-30 Fixed: Archiving tickets removes flags for mentions and "seen".
+ - 2026-04-21 Security: Fixed: XSS via JavaScript in URL parameters in communication log admin view.
+ - 2026-03-25 Security: Fixed: XSS in user preferences DB.
 
 # 7.3.2 2026-04-29
  - 2026-04-22 Added: EmailSecurity section from Article to GenericInterface. Thanks to @DonMarlowne. [PR#612](https://github.com/znuny/Znuny/pull/612)
@@ -606,6 +612,14 @@
  - 2022-08-22 Core.UI.InputFields.js - Changed the behaviour of the Core.UI.InputFields.js. Now no fields are automatically enlarged or reduced.
  - 2022-08-08 Admin - Added counter of AdminSettingPages per widget and additional focus by filter.
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
+
+# 6.5.21 2026-05-27
+ - 2026-05-26 Fixed: Package manager does not use the user ID for package operations.
+ - 2026-05-20 CVE-2025-26843: Fixed: Infinite loop on replacing tags in template generator.
+ - 2026-05-04 Changed Name of User with ID 1.
+ - 2026-05-01 CVE-2025-59490: Follow-up fix for scrambled script tags.
+ - 2026-04-21 Security: Fixed: XSS via JavaScript in URL parameters in communication log admin view.
+ - 2026-03-25 Security: Fixed: XSS in user preferences DB.
 
 # 6.5.20 2026-04-29
  - 2026-04-22 Added: EmailSecurity section from Article to GenericInterface. Thanks to @DonMarlowne. [PR#612](https://github.com/znuny/Znuny/pull/612)

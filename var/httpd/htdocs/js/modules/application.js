@@ -223,9 +223,8 @@ Env.Config = {
                                     return method.apply(this, arguments);
                                 } catch (ex) {
                                     if (window.console && window.console.error) {
-                                        console.error('Error in ' + moduleName + '.' + property + '()'); // eslint-disable-line no-unused-vars
-                                        console.error(ex.message); // eslint-disable-line no-unused-vars
-                                        console.error(ex.fileName + ' in line ' + ex.lineNumber); // eslint-disable-line no-unused-vars
+                                        console.error('Error in ' + moduleName + '.' + property + '()');
+                                        console.error(ex instanceof Error ? ex : String(ex));
                                     }
 
                                     if (that.config.supressErrors == false) {

@@ -39,11 +39,6 @@ Returns 1 on success:
 sub FollowUp {
     my ( $Self, %Param ) = @_;
 
-    # This check will occur only if we are in interactive mode.
-    if ( $Param{CommandlineOptions}->{NonInteractive} || !is_interactive() ) {
-        return 1;
-    }
-
     if ( $Param{CommandlineOptions}->{Verbose} ) {
         print "\n        Warning: It is possible that already archived tickets still have the MentionSeen flag set.\n";
     }

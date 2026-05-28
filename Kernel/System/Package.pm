@@ -316,6 +316,7 @@ add a package to local repository
 
     $PackageObject->RepositoryAdd(
         String => $FileString,
+        UserID => 123,
     );
 
 =cut
@@ -330,6 +331,8 @@ sub RepositoryAdd {
         );
         return;
     }
+
+    my $UserID = defined $Param{UserID} ? $Param{UserID} : 1;
 
     # get package attributes
     my %Structure = $Self->PackageParse(%Param);
@@ -388,10 +391,11 @@ sub RepositoryAdd {
             . ' create_time, create_by, change_time, change_by)'
             . ' VALUES  (?, ?, ?, ?, \'text/xml\', ?, \''
             . Translatable('not installed') . '\', '
-            . ' current_timestamp, 1, current_timestamp, 1)',
+            . ' current_timestamp, ?, current_timestamp, ?)',
         Bind => [
             \$Structure{Name}->{Content},   \$Structure{Version}->{Content},
             \$Structure{Vendor}->{Content}, \$FileName, \$Content,
+            \$UserID,                       \$UserID,
         ],
     );
 
@@ -454,6 +458,7 @@ install a package
     $PackageObject->PackageInstall(
         String => $FileString,
         Force  => 1,             # optional 1 or 0, for to install package even if validation fails
+        UserID => 123,           # optional
     );
 
 =cut
@@ -575,6 +580,7 @@ sub PackageInstall {
     # add package
     return if !$Self->RepositoryAdd(
         String => $Param{String},
+        UserID => $Param{UserID},
     );
 
     # update package status
@@ -593,6 +599,7 @@ sub PackageInstall {
         Comments => "Package Install $Structure{Name}->{Content} $Structure{Version}->{Content}",
         Package  => $Structure{Name}->{Content},
         Action   => 'PackageInstall',
+        UserID   => $Param{UserID},
     );
 
     # install database (post)
@@ -634,7 +641,7 @@ sub PackageInstall {
             Vendor  => $Structure{Vendor}->{Content},
             Version => $Structure{Version}->{Content},
         },
-        UserID => 1,
+        UserID => $Param{UserID},
     );
 
     return 1;
@@ -717,6 +724,7 @@ sub PackageReinstall {
         Comments => "Package Reinstall $Structure{Name}->{Content} $Structure{Version}->{Content}",
         Package  => $Structure{Name}->{Content},
         Action   => 'PackageReinstall',
+        UserID   => $Param{UserID},
     );
 
     # reinstall code (post)
@@ -761,6 +769,7 @@ upgrade a package
     $PackageObject->PackageUpgrade(
         String => $FileString,
         Force  => 1,             # optional 1 or 0, for to install package even if validation fails
+        UserID => 123,           # optional
     );
 
 =cut
@@ -891,7 +900,10 @@ sub PackageUpgrade {
     return if !$Self->RepositoryRemove( Name => $Structure{Name}->{Content} );
 
     # add new package
-    return if !$Self->RepositoryAdd( String => $Param{String} );
+    return if !$Self->RepositoryAdd(
+        String => $Param{String},
+        UserID => $Param{UserID},
+    );
 
     # update package status
     return if !$Kernel::OM->Get('Kernel::System::DB')->Do(
@@ -1040,6 +1052,7 @@ sub PackageUpgrade {
         Comments => "Package Upgrade $Structure{Name}->{Content} $Structure{Version}->{Content}",
         Package  => $Structure{Name}->{Content},
         Action   => 'PackageUpgrade',
+        UserID   => $Param{UserID},
     );
 
     # upgrade database (post)
@@ -1177,7 +1190,7 @@ sub PackageUpgrade {
             Vendor  => $Structure{Vendor}->{Content},
             Version => $Structure{Version}->{Content},
         },
-        UserID => 1,
+        UserID => $Param{UserID},
     );
 
     return 1;
@@ -1249,6 +1262,7 @@ sub PackageUninstall {
         Comments => "Package Uninstall $Structure{Name}->{Content} $Structure{Version}->{Content}",
         Package  => $Structure{Name}->{Content},
         Action   => 'PackageUninstall',
+        UserID   => $Param{UserID},
     );
 
     # uninstall database (post)
@@ -4615,6 +4629,8 @@ sub _CheckDBInstalledOrMerged {
 sub _ConfigurationDeploy {
     my ( $Self, %Param ) = @_;
 
+    my $UserID = defined $Param{UserID} ? $Param{UserID} : 1;
+
     for my $Needed (qw(Package Action)) {
         if ( !$Param{$Needed} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -4657,7 +4673,7 @@ sub _ConfigurationDeploy {
 
     if (
         !$SysConfigObject->ConfigurationXML2DB(
-            UserID  => 1,
+            UserID  => $UserID,
             Force   => 1,
             CleanUp => $CleanUp,
         )
@@ -4673,7 +4689,7 @@ sub _ConfigurationDeploy {
     my $Success = $SysConfigObject->ConfigurationDeploy(
         Comments => $Param{Comments},
         NotDirty => 1,
-        UserID   => 1,
+        UserID   => $UserID,
         Force    => 1,
     );
     if ( !$Success ) {

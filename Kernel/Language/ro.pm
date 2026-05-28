@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.277751157961987;
+    $Self->{Completeness}        = 0.277706802938358;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -6516,6 +6516,8 @@ sub Data {
         'Controls if the ticket and article seen flags are removed when a ticket is archived.' =>
             '',
         'Removes the ticket watcher information when a ticket is archived.' =>
+            '',
+        'Controls if the ticket mention entries are removed when a ticket is archived.' =>
             '',
         'Activates the ticket archive system search in the customer interface.' =>
             '',
