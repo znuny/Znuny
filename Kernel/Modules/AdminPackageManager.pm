@@ -1535,19 +1535,37 @@ sub Run {
     );
     if ($Source) {
 
+        # Load once with same-version packages included so the controller can
+        # distinguish a real empty/error repository from a repository where all
+        # visible packages are already installed.
         my @List = $PackageObject->RepositoryPackageListGet(
-            Source => $Source,
-            Lang   => $LayoutObject->{UserLanguage},
+            Source             => $Source,
+            Lang               => $LayoutObject->{UserLanguage},
+            IncludeSameVersion => 1,
         );
-        if ( !@List ) {
+
+        my $RepositoryHasVisiblePackages = scalar @List;
+
+        @List = grep {
+            !( $_->{Installed} && !$_->{Upgrade} )
+        } @List;
+
+        if ( !@List && !$RepositoryHasVisiblePackages ) {
             $OutputNotify .= $LayoutObject->Notify(
                 Priority => 'Warning',
                 Info     => Translatable('No packages found in selected repository. Please check log for more info!'),
                 Link     => $LayoutObject->{Baselink} . 'Action=AdminLog',
             );
+        }
+
+        if ( !@List ) {
             $LayoutObject->Block(
                 Name => 'NoDataFoundMsg',
-                Data => {},
+                Data => {
+                    Message => $RepositoryHasVisiblePackages
+                        ? Translatable('All packages in this repository are already installed in the current version.')
+                        : '',
+                },
             );
         }
 

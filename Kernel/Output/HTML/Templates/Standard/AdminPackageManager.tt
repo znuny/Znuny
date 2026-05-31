@@ -451,7 +451,11 @@
 [% RenderBlockStart("NoDataFoundMsg") %]
                             <tr>
                                 <td colspan="6">
+[% IF Data.Message %]
+                                    [% Translate(Data.Message) | html %]
+[% ELSE %]
                                     [% Translate("No data found.") | html %]
+[% END %]
                                 </td>
                             </tr>
 [% RenderBlockEnd("NoDataFoundMsg") %]
