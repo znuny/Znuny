@@ -155,7 +155,7 @@ $Selenium->RunTest(
         # Check is there notification 'Notification added!' after notification is added.
         my $Notification = $LanguageObject->Translate('Notification added!');
         $Self->True(
-            $Selenium->execute_script("return \$('.MessageBox.Notice p:contains($Notification)').length"),
+            $Selenium->execute_script("return \$('.messageNotice .alertContent:contains($Notification)').length"),
             "$Notification - notification is found."
         ) || die;
 
@@ -217,7 +217,7 @@ $Selenium->RunTest(
         # Check is there notification 'Notification updated!' after notification is added
         $Notification = $LanguageObject->Translate('Notification updated!');
         $Self->True(
-            $Selenium->execute_script("return \$('.MessageBox.Notice p:contains($Notification)').length"),
+            $Selenium->execute_script("return \$('.messageNotice .alertContent:contains($Notification)').length"),
             "$Notification - notification is found."
         );
 
@@ -340,17 +340,14 @@ JAVASCRIPT
             . "/scripts/test/sample/NotificationEvent/Export_Notification_Appointment_reminder_notification.yml";
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
 
-        my $TranslatedUploadNotification = $LanguageObject->Translate('Upload Notification configuration');
+        my $TranslatedUploadNotification = $LanguageObject->Translate('Import configurations');
         $Selenium->find_element("//button[\@value=\'$TranslatedUploadNotification\']")->VerifiedClick();
 
-        my $TranslatedMessage =
-            $LanguageObject->Translate(
-            'There where errors adding/updating the following Notifications: %s. Please check the log file for more information.',
-            $NotifEventRandomID
-            );
+        my $TranslatedMessage
+            = $LanguageObject->Translate( 'The following notifications were not updated: %s.', $NotifEventRandomID );
         $TranslatedMessage = substr( $TranslatedMessage, 0, 30 );
         $Selenium->find_element(
-            "//p[contains(text(),'$TranslatedMessage')]"
+            "//div[contains(\@class, 'alertContent') and contains(., '$TranslatedMessage')]"
         );
 
         # Import existing template with overwrite.
@@ -360,12 +357,11 @@ JAVASCRIPT
         $Selenium->find_element( "#OverwriteExistingNotifications", 'css' )->click();
         $Selenium->find_element("//button[\@value=\'$TranslatedUploadNotification\']")->VerifiedClick();
 
-        $TranslatedMessage = $LanguageObject->Translate(
-            'The following Notifications have been updated successfully: %s',
-            $NotifEventRandomID
-        );
-        $TranslatedMessage = substr( $TranslatedMessage, 0, 30 );
-        $Selenium->find_element("//p[contains(text(),'$TranslatedMessage')]");
+        $TranslatedMessage = "Die folgenden Benachrichtigungen wurden erfolgreich aktualisiert" .
+
+            $Selenium->find_element(
+            "//div[contains(\@class, 'alertContent') and contains(., '$TranslatedMessage')]"
+            );
     }
 );
 

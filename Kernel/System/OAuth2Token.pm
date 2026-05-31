@@ -416,7 +416,7 @@ sub GenerateAuthorizationCodeRequestURL {
     if ( !IsHashRefWithData($AuthorizationCodeRequestConfig) ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Token config with ID $Param{TokenConfigID} does not contain config for authorization code request.",
         );
         return;
@@ -549,7 +549,7 @@ sub GetAuthorizationCodeParameters {
     if ( !%ResponseData ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error retrieving response data for authorization code request for token config ID $TokenConfigID.",
         );
         return;
@@ -558,7 +558,7 @@ sub GetAuthorizationCodeParameters {
     if ( !defined $ResponseData{AuthorizationCode} ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Response data for authorization code request for token config ID $TokenConfigID does not contain authorization code.",
         );
         return;
@@ -666,7 +666,7 @@ sub RequestTokenByAuthorizationCode {
     if ( !$TokenUpdated ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error updating token for token config with ID $Param{TokenConfigID} and request type '$RequestType'.",
         );
         return;
@@ -688,7 +688,7 @@ sub RequestTokenByAuthorizationCode {
     if ( !$TokenUpdated ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error updating token for token config with ID $Param{TokenConfigID} and request type '$RequestType'.",
         );
         return;
@@ -712,7 +712,7 @@ sub RequestTokenByAuthorizationCode {
     {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error getting response for token request by authorization code for token config with ID $Param{TokenConfigID}.",
         );
         return;
@@ -727,7 +727,7 @@ sub RequestTokenByAuthorizationCode {
     if ( !%ResponseData ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error assembling response data for token config with ID $Param{TokenConfigID} and request type '$RequestType'.",
         );
         return;
@@ -742,7 +742,7 @@ sub RequestTokenByAuthorizationCode {
     if ( !$TokenUpdated ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error updating token with response data for token config with ID $Param{TokenConfigID} and request type '$RequestType'.",
         );
         return;
@@ -756,7 +756,7 @@ sub RequestTokenByAuthorizationCode {
     if ( $Response{Status} ne '200 OK' ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Response for request for token config with ID $Param{TokenConfigID} and request type '$RequestType' was not '200 OK'. $TokenErrorMessage",
         );
         return;
@@ -769,7 +769,7 @@ sub RequestTokenByAuthorizationCode {
     if ( !%Token ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error fetching token for token config with ID $Param{TokenConfigID} after updating it with response data of request of type '$RequestType'. $TokenErrorMessage",
         );
         return;
@@ -843,7 +843,7 @@ sub RequestTokenByRefreshToken {
     if ( !IsHashRefWithData( $TokenConfig{Config}->{Requests}->{$RequestType} ) ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Refresh token request is not configured in token config with ID $Param{TokenConfigID}.",
         );
         return;
@@ -868,7 +868,7 @@ sub RequestTokenByRefreshToken {
     if ($RefreshTokenHasExpired) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Refresh token of token record for token config with ID $Param{TokenConfigID} has expired (or is not present). A new token must be obtained by RequestTokenByAuthorizationCode().",
         );
         return;
@@ -893,7 +893,7 @@ sub RequestTokenByRefreshToken {
     if ( !$TokenUpdated ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error updating token for token config with ID $Param{TokenConfigID} and request type '$RequestType'.",
         );
         return;
@@ -918,7 +918,7 @@ sub RequestTokenByRefreshToken {
     {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error getting response for request for token config with ID $Param{TokenConfigID} and request type '$RequestType'.",
         );
         return;
@@ -933,7 +933,7 @@ sub RequestTokenByRefreshToken {
     if ( !%ResponseData ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error assembling response data for token config with ID $Param{TokenConfigID} and request of type '$RequestType'.",
         );
         return;
@@ -948,7 +948,7 @@ sub RequestTokenByRefreshToken {
     if ( !$TokenUpdated ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error updating token with response data for token config with ID $Param{TokenConfigID} and request type '$RequestType'.",
         );
         return;
@@ -962,7 +962,7 @@ sub RequestTokenByRefreshToken {
     if ( $Response{Status} ne '200 OK' ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Response for request for token config with ID $Param{TokenConfigID} and request type '$RequestType' was not '200 OK'. $TokenErrorMessage",
         );
         return;
@@ -975,7 +975,7 @@ sub RequestTokenByRefreshToken {
     if ( !%Token ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error fetching token for token config with ID $Param{TokenConfigID} after updating it with response data of request of type '$RequestType'. $TokenErrorMessage",
         );
         return;
@@ -1076,7 +1076,7 @@ sub RequestTokenByClientCredentials {
     if ( !$TokenUpdated ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error updating token for token config with ID $Param{TokenConfigID} and request type '$RequestType'.",
         );
         return;
@@ -1101,7 +1101,7 @@ sub RequestTokenByClientCredentials {
     {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error getting response for request for token config with ID $Param{TokenConfigID} and request type '$RequestType'.",
         );
         return;
@@ -1116,7 +1116,7 @@ sub RequestTokenByClientCredentials {
     if ( !%ResponseData ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error assembling response data for token config with ID $Param{TokenConfigID} and request of type '$RequestType'.",
         );
         return;
@@ -1131,7 +1131,7 @@ sub RequestTokenByClientCredentials {
     if ( !$TokenUpdated ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error updating token with response data for token config with ID $Param{TokenConfigID} and request type '$RequestType'.",
         );
         return;
@@ -1145,7 +1145,7 @@ sub RequestTokenByClientCredentials {
     if ( $Response{Status} ne '200 OK' ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Response for request for token config with ID $Param{TokenConfigID} and request type '$RequestType' was not '200 OK'. $TokenErrorMessage",
         );
         return;
@@ -1158,7 +1158,7 @@ sub RequestTokenByClientCredentials {
     if ( !%Token ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error fetching token for token config with ID $Param{TokenConfigID} after updating it with response data of request of type '$RequestType'. $TokenErrorMessage",
         );
         return;
@@ -1372,7 +1372,7 @@ sub GetToken {
             if ($HasRefreshTokenExpired) {
                 $LogObject->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         "Refresh token for token config with ID $Param{TokenConfigID} has expired or is not present. Token must be retrieved manually via authorization code.",
                 );
                 return;
@@ -1710,7 +1710,7 @@ sub _AssembleRequestData {
     if ( !IsHashRefWithData($RequestConfig) ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Token config with ID $Param{TokenConfigID} does not contain request config for request type '$Param{RequestType}'.",
         );
         return;
@@ -1813,7 +1813,7 @@ sub _AssembleResponseDataFromWebRequest {
     if ( !IsHashRefWithData($ResponseConfig) ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Token config with ID $Param{TokenConfigID} does not contain response config for request type '$Param{RequestType}'.",
         );
         return;
@@ -1909,7 +1909,7 @@ sub _AssembleResponseDataFromJSONString {
     if ( !IsHashRefWithData($ResponseConfig) ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Token config with ID $Param{TokenConfigID} does not contain response config for request type '$Param{RequestType}'.",
         );
         return;
@@ -1924,7 +1924,7 @@ sub _AssembleResponseDataFromJSONString {
     if ( !IsHashRefWithData($JSONData) ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Received JSON data is not a hash for token config with ID $Param{TokenConfigID} and response of request of type '$Param{RequestType}'.",
         );
         return;

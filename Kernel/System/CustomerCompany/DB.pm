@@ -884,7 +884,7 @@ sub CustomerCompanyAdd {
     # log notice
     $Kernel::OM->Get('Kernel::System::Log')->Log(
         Priority => 'info',
-        Message =>
+        Message  =>
             "CustomerCompany: '$Param{CustomerCompanyName}/$Param{CustomerID}' created successfully ($Param{UserID})!",
     );
 
@@ -929,6 +929,7 @@ sub CustomerCompanyUpdate {
     for my $Entry ( @{ $Self->{CustomerCompanyMap}->{Map} } ) {
         next FIELD if $Entry->[0] =~ /^UserPassword$/i;
         next FIELD if $Entry->[5] eq 'dynamic_field';     # skip dynamic fields
+        next FIELD if $Entry->[7] eq '1';                 # skip read-only fields
         push @Fields, $Entry->[2] . ' = ?';
         push @Values, \$Param{ $Entry->[0] };
     }
@@ -936,6 +937,9 @@ sub CustomerCompanyUpdate {
         push @Fields, ( 'change_time = current_timestamp', 'change_by = ?' );
         push @Values, \$Param{UserID};
     }
+
+    # return if no fields need to be updated
+    return 1 if !@Fields;
 
     # create SQL statement
     my $SQL = "UPDATE $Self->{CustomerCompanyTable} SET ";
@@ -957,7 +961,7 @@ sub CustomerCompanyUpdate {
     # log notice
     $Kernel::OM->Get('Kernel::System::Log')->Log(
         Priority => 'info',
-        Message =>
+        Message  =>
             "CustomerCompany: '$Param{CustomerCompanyName}/$Param{CustomerID}' updated successfully ($Param{UserID})!",
     );
 

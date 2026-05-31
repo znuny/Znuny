@@ -85,7 +85,7 @@ sub GetConfig {
         Description => Translatable('Mark article as unseen'),
         Name        => Translatable('Mark as unseen'),
         Class       => 'AgentTicketMarkSeenUnseenArticle',
-        Link =>
+        Link        =>
             "Action=AgentTicketMarkSeenUnseen;Subaction=Unseen;TicketID=$Param{Ticket}->{TicketID};ArticleID=$Param{Article}->{ArticleID}",
     );
 

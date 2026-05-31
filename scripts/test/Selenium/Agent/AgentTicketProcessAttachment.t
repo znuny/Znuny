@@ -54,7 +54,7 @@ $Selenium->RunTest(
             $ACLObject->ACLUpdate(
                 ID   => $Item,
                 Name => $ACLList->{$Item},
-                ,
+
                 ValidID => 2,
                 UserID  => 1,
             );

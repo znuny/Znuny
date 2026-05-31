@@ -288,6 +288,10 @@ sub Map {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _ConfigCheck()
 
 does checks to make sure the config is sane
@@ -462,8 +466,6 @@ sub _ConfigCheck {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

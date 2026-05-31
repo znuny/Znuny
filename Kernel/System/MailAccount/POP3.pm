@@ -261,7 +261,7 @@ sub Fetch {
         my $Error = $@;
         %Connect = (
             Successful => 0,
-            Message =>
+            Message    =>
                 "Something went wrong while trying to connect to '$Self->{MailAccountModuleName} => $Param{Login}/$Param{Host}': ${ Error }",
         );
     };
@@ -291,34 +291,33 @@ sub Fetch {
         my @Params    = @_;
 
         my $POPObject = $Connect{PopObject};
-        my $ScalarResult;
-        my @ArrayResult = ();
-        my $Wantarray   = wantarray;
+        my $Result;
 
         eval {
-            if ($Wantarray) {
-                @ArrayResult = $POPObject->$Operation( @Params, );
-            }
-            else {
-                $ScalarResult = $POPObject->$Operation( @Params, );
-            }
-
-            return 1;
+            $Result = $POPObject->$Operation( @Params, );
+            return $Result;
         } || do {
-            my $Error = $@;
+            my $Error   = $@;
+            my $Message = sprintf(
+                "Error while executing '%s->%s(%s)': %s",
+                $Self->{MailAccountModuleName},
+                $Operation,
+                join( ',', @Params ),
+                $Error,
+            );
+            $CommunicationLogObject->ObjectLog(
+                ObjectLogType => 'Connection',
+                Priority      => 'Error',
+                Key           => __PACKAGE__,
+                Value         => $Message,
+            );
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => sprintf(
-                    "Error while executing 'POP->%s(%s)': %s",
-                    $Operation,
-                    join( ',', @Params ),
-                    $Error,
-                ),
+                Message  => $Message,
             );
         };
 
-        return @ArrayResult if $Wantarray;
-        return $ScalarResult;
+        return $Result;
     };
 
     my $NOM      = $Connect{NOM};
@@ -411,7 +410,7 @@ sub Fetch {
                     ObjectLogType => 'Connection',
                     Priority      => 'Error',
                     Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
-                    Value =>
+                    Value         =>
                         "Cannot fetch message '$Messageno/$NOM' with size '$MessageSize' ($MessageSizeKB KB)."
                         . "Maximum allowed message size is '$MaxEmailSize KB'!",
                 );
@@ -498,7 +497,7 @@ sub Fetch {
                             ObjectLogType => 'Message',
                             Priority      => 'Error',
                             Key           => 'Kernel::System::MailAccount::' . $Self->{MailAccountModuleName},
-                            Value =>
+                            Value         =>
                                 "Could not process message. Raw mail saved ($File, report it on https://github.com/znuny/Znuny/issues)!",
                         );
 

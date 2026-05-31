@@ -12,11 +12,14 @@ package Kernel::System::Console::Command::Maint::Email::MailQueue;
 use strict;
 use warnings;
 
+use utf8;
+
 use parent qw(Kernel::System::Console::BaseCommand);
 
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
+    'Kernel::Config',
     'Kernel::System::MailQueue',
     'Kernel::System::PID',
 );
@@ -32,7 +35,7 @@ sub Configure {
         HasValue    => 0,
     );
     $Self->AddOption(
-        Name => 'send-timeout',
+        Name        => 'send-timeout',
         Description =>
             "Timeout in seconds to kill the process that sends emails (default: 600).",
         Required   => 0,
@@ -62,7 +65,7 @@ sub Configure {
         ValueRegex  => qr/^.+$/smx,
     );
     $Self->AddOption(
-        Name => 'filter',
+        Name        => 'filter',
         Description =>
             'Filter actions on messages (can be used with --list and --delete). Example: --filter="ID::1" (Possible filters: ID|ArticleID|CommunicationID|Sender|Recipient|Attempts)',
         Required   => 0,
@@ -71,7 +74,7 @@ sub Configure {
         ValueRegex => qr/^.+$/smx,
     );
     $Self->AddOption(
-        Name => 'force',
+        Name        => 'force',
         Description =>
             'Force the send of the messages even if send time hasn\'t been reached (can be used with --send). Example: --send --force',
         Required => 0,
@@ -79,7 +82,7 @@ sub Configure {
         HasValue => 0,
     );
     $Self->AddOption(
-        Name => 'verbose',
+        Name        => 'verbose',
         Description =>
             'Display debug information (can be used with --send). Example: --send --verbose',
         Required => 0,
@@ -188,17 +191,17 @@ sub Send {
     my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
     my $MailQueueObject = $Kernel::OM->Get('Kernel::System::MailQueue');
 
-    my $RateLimit          = $ConfigObject->Get('SendmailModule::RateLimit') // 30;
+    my $RateLimit          = $ConfigObject->Get('SendmailModule::RateLimit');
     my $RateLimitPerSender = $ConfigObject->Get('SendmailModule::RateLimitPerSenderAddress');
     my $List;
 
-    if ($RateLimitPerSender) {
+    if ( $RateLimitPerSender && $RateLimit ) {
         my $UnfilteredList = $MailQueueObject->List();
         my %SenderAddressCounter;
 
         ITEM:
         for my $Item ( @{$UnfilteredList} ) {
-            my $Sender = $Item->{Recipient} // 'Default';
+            my $Sender = $Item->{Sender} // 'Default';
             $SenderAddressCounter{$Sender}++;
             next ITEM if $SenderAddressCounter{$Sender} > $RateLimit;
 

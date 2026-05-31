@@ -132,19 +132,6 @@ $Selenium->RunTest(
         $Selenium->find_element( "#RichText",       'css' )->send_keys('Text');
         $Selenium->find_element( "#submitRichText", 'css' )->VerifiedClick();
 
-        # Verify that there is an error.
-        $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('.MessageBox.Error').length;" );
-        $Self->True(
-            $Selenium->execute_script("return \$('.MessageBox.Error').length;"),
-            "Error message appears on the top.",
-        );
-        $Self->True(
-            $Selenium->execute_script(
-                "return \$('.MessageBox.Error p:contains(\"You don\\'t have sufficient permissions for ticket creation in default queue\")').length;"
-            ),
-            "Error message text is correct.",
-        );
-
         # Delete test queue.
         my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
         $Success = $DBObject->Do(

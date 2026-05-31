@@ -73,9 +73,15 @@ $Selenium->RunTest(
         # add a character to close autocomplete and check if input field entry is still there,
         # remove added character to autocomplete appers again and select matched entry.
         $Selenium->find_element( "#FromCustomer", 'css' )->send_keys("1-$RandomID");
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("li.ui-menu-item:visible").length' );
+        $Selenium->WaitFor(
+            JavaScript =>
+                'return typeof($) === "function" && $("li.ui-menu-item:visible").length'
+        );
         $Selenium->find_element( "#FromCustomer", 'css' )->send_keys("A");
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$("li.ui-menu-item:visible").length' );
+        $Selenium->WaitFor(
+            JavaScript =>
+                'return typeof($) === "function" && !$("li.ui-menu-item:visible").length'
+        );
 
         $Self->Is(
             $Selenium->find_element( "#FromCustomer", 'css' )->get_value(),
@@ -85,7 +91,10 @@ $Selenium->RunTest(
 
         # Use Backspace key to remove the last character 'A'.
         $Selenium->find_element( "#FromCustomer", 'css' )->send_keys("\N{U+E003}");
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("li.ui-menu-item:visible").length' );
+        $Selenium->WaitFor(
+            JavaScript =>
+                'return typeof($) === "function" && $("li.ui-menu-item:visible").length'
+        );
 
         # Use Down key to fill input field from autocomplete and then click Enter key.
         $Selenium->find_element( "#FromCustomer", 'css' )->send_keys("\N{U+E015}");
@@ -98,9 +107,15 @@ $Selenium->RunTest(
         # Type to match only the second customer user,
         # add a character to close autocomplete and check if input field entry is still there.
         $Selenium->find_element( "#FromCustomer", 'css' )->send_keys("2-$RandomID");
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("li.ui-menu-item:visible").length' );
+        $Selenium->WaitFor(
+            JavaScript =>
+                'return typeof($) === "function" && $("li.ui-menu-item:visible").length'
+        );
         $Selenium->find_element( "#FromCustomer", 'css' )->send_keys("A");
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$("li.ui-menu-item:visible").length' );
+        $Selenium->WaitFor(
+            JavaScript =>
+                'return typeof($) === "function" && !$("li.ui-menu-item:visible").length'
+        );
 
         $Self->Is(
             $Selenium->find_element( "#FromCustomer", 'css' )->get_value(),

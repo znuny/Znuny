@@ -86,7 +86,7 @@ sub new {
             Description => 'Suppress informative output, only retain error messages.',
         },
         {
-            Name => 'allow-root',
+            Name        => 'allow-root',
             Description =>
                 'Allow root user to execute the command. This might damage your system; use at your own risk.',
             Invisible => 1,    # hide from usage screen
@@ -539,7 +539,7 @@ sub GetUsageHelp {
         if ( !$Option->{Required} ) {
             $OptionShort = "[$OptionShort]";
         }
-        $UsageText   .= " $OptionShort";
+        $UsageText .= " $OptionShort";
         $OptionsText .= sprintf " <green>%-30s</green> - %s", $OptionShort, $Option->{Description} . "\n";
     }
 
@@ -558,7 +558,7 @@ sub GetUsageHelp {
         if ( !$Argument->{Required} ) {
             $ArgumentShort = "[$ArgumentShort]";
         }
-        $UsageText     .= " $ArgumentShort";
+        $UsageText .= " $ArgumentShort";
         $ArgumentsText .= sprintf " <green>%-30s</green> - %s", $ArgumentShort,
             $Argument->{Description} . "\n";
     }
@@ -859,6 +859,10 @@ sub TableOutput {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _ParseGlobalOptions()
 
 parses any global options possibly provided by the user.
@@ -1050,8 +1054,6 @@ sub _ReplaceColorTags {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

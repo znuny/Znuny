@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -764,7 +764,7 @@ sub _ShowScreen {
                     Invoker      => $Param{Invoker},
                     Event        => $Event->{Event},
                     Type         => $EventType // '-',
-                    Asynchronous => $Event->{Asynchronous} ? Translatable('Yes') : Translatable('No'),
+                    Asynchronous => $Event->{Asynchronous}                   ? Translatable('Yes') : Translatable('No'),
                     Condition    => IsHashRefWithData( $Event->{Condition} ) ? Translatable('Yes') : Translatable('No'),
                 },
             );

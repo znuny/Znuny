@@ -214,6 +214,9 @@ sub new {
     # Remember the start system time for the selenium test run.
     $Self->{TestStartSystemTime} = time;    ## no critic
 
+    # Initialize screenshot counter for unique filenames
+    $Self->{ScreenshotCounter} = 0;
+
     return $Self;
 }
 
@@ -834,6 +837,135 @@ sub WaitForjQueryEventBound {
     );
 
     return 1;
+}
+
+=head2 CloseNotification()
+
+Closes Module.Alerts that might block interactions in Selenium tests.
+This method closes alert messages by clicking their close buttons.
+
+If no Text parameter is provided, all messages will be closed.
+If a Text parameter is provided, only messages containing that text will be closed.
+
+    # Close all messages
+    $SeleniumObject->CloseNotification();
+
+    # Close only messages containing specific text
+    $SeleniumObject->CloseNotification(
+        Text => 'Please select a time zone',
+    );
+
+=cut
+
+sub CloseNotification {
+    my ( $Self, %Param ) = @_;
+
+    local $Self->{SuppressCommandRecording} = 1;
+
+    # Wait a bit for alerts to be rendered
+    Time::HiRes::sleep(0.5);
+
+    if ( $Param{Text} ) {
+
+        # Close only messages containing the specified text
+
+        # Escape the text for use in JavaScript
+        my $EscapedText = $Param{Text};
+        $EscapedText =~ s/\\/\\\\/g;    # Escape backslashes first
+        $EscapedText =~ s/'/\\'/g;
+        $EscapedText =~ s/"/\\"/g;
+        $EscapedText =~ s/\n/\\n/g;
+        $EscapedText =~ s/\r/\\r/g;
+
+        # Close messages by clicking their close buttons (only those containing the text)
+        my $MessagesClosed = $Self->execute_script(
+            "var filterText = '$EscapedText';"
+                . 'var closed = 0;'
+                . 'jQuery(".messageClose").each(function() {'
+                . '    var $close = jQuery(this);'
+                . '    var $message = $close.closest(".message");'
+                . '    if ($close.is(":visible") && $message.text().indexOf(filterText) !== -1) {'
+                . '        $close.click();'
+                . '        closed++;'
+                . '    }'
+                . '});'
+                . 'return closed;'
+        );
+
+        # Also close alerts via the modAlert close buttons (X icon)
+        my $ModAlertsClosed = $Self->execute_script(
+            "var filterText = '$EscapedText';"
+                . 'var closed = 0;'
+                . 'jQuery(".modAlert .close, .modAlert .messageClose").each(function() {'
+                . '    var $close = jQuery(this);'
+                . '    var $alert = $close.closest(".modAlert, .message");'
+                . '    if ($close.is(":visible") && $alert.text().indexOf(filterText) !== -1) {'
+                . '        $close.click();'
+                . '        closed++;'
+                . '    }'
+                . '});'
+                . 'return closed;'
+        );
+
+        # Wait for filtered alerts to fade out
+        if ( $MessagesClosed > 0 || $ModAlertsClosed > 0 ) {
+            $Self->WaitFor(
+                JavaScript =>
+                    "return jQuery('.message:visible, .modAlert:visible').filter(function() { return jQuery(this).text().indexOf('$EscapedText') !== -1; }).length === 0",
+                Time    => 5,
+                SkipDie => 1,
+            );
+        }
+
+        # As a fallback, directly remove any remaining visible alerts with matching text
+        $Self->execute_script(
+            "jQuery('.message:visible, .modAlert:visible').filter(function() { return jQuery(this).text().indexOf('$EscapedText') !== -1; }).remove();"
+        );
+    }
+    else {
+        # Close all messages by clicking their close buttons
+        my $MessagesClosed = $Self->execute_script(
+            'var closed = 0;'
+                . 'jQuery(".messageClose").each(function() {'
+                . '    var $close = jQuery(this);'
+                . '    if ($close.is(":visible")) {'
+                . '        $close.click();'
+                . '        closed++;'
+                . '    }'
+                . '});'
+                . 'return closed;'
+        );
+
+        # Also close alerts via the modAlert close buttons (X icon)
+        my $ModAlertsClosed = $Self->execute_script(
+            'var closed = 0;'
+                . 'jQuery(".modAlert .close, .modAlert .messageClose").each(function() {'
+                . '    var $close = jQuery(this);'
+                . '    if ($close.is(":visible")) {'
+                . '        $close.click();'
+                . '        closed++;'
+                . '    }'
+                . '});'
+                . 'return closed;'
+        );
+
+        # Wait for alerts to fade out
+        if ( $MessagesClosed > 0 || $ModAlertsClosed > 0 ) {
+            $Self->WaitFor(
+                JavaScript => 'return jQuery(".message:visible, .modAlert:visible").length === 0',
+                Time       => 5,
+                SkipDie    => 1,
+            );
+        }
+
+        # As a fallback, directly remove any remaining visible alerts
+        # This ensures they don't block interactions even if close buttons didn't work
+        $Self->execute_script(
+            'jQuery(".message:visible, .modAlert:visible").remove();'
+        );
+    }
+
+    return;
 }
 
 =head2 InputFieldValueSet()
@@ -2029,8 +2161,9 @@ sub CaptureScreenshot {
 
 Returns:
 
-    #                         TIME      - Path to Test       - Line   - Function   - BEFORE or AFTER function
-    my $ScreenshotFileName = '1497085163-Znuny_Selenium_Input-Line=359-InputFieldID-BEFORE.png';
+    #                         TIME      - COUNTER - Path to Test       - Line   - Function   - BEFORE or AFTER function
+    my $ScreenshotFileName = '1497085163-0001-Znuny_Selenium_Input-Line=359-InputFieldID-BEFORE.png';
+    my $ScreenshotFileName = '1497085163-0002-Znuny_Selenium_Input-Line=359-InputFieldID-AFTER.png';
 
 
 =cut
@@ -2063,10 +2196,17 @@ sub GetScreenshotFileName {
     else {
 
         # build filename to be most reasonable and easy to follow like e.g.:
-        # 1497085163-Znuny_Selenium_Input-Line=359-InputFieldID-BEFORE.png
+        # 1497085163-0001-Znuny_Selenium_Input-Line=359-InputFieldID-BEFORE.png
 
         my $SystemTime = $DateTimeObject->ToEpoch();
-        $ScreenshotFileName = "$SystemTime-$TestFile";
+
+        # Increment screenshot counter for unique filenames
+        $Self->{ScreenshotCounter}++;
+
+        # Format counter with leading zeros (4 digits)
+        my $Counter = sprintf( "%04d", $Self->{ScreenshotCounter} );
+
+        $ScreenshotFileName = "$SystemTime-$Counter-$TestFile";
 
         if ( $Param{Line} ) {
             $ScreenshotFileName .= "-Line=$Param{Line}";

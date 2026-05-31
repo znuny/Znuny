@@ -59,7 +59,7 @@ sub Init {
 
     if ( !IsHashRefWithData($Webservice) ) {
         return {
-            Success => 0,
+            Success      => 0,
             ErrorMessage =>
                 'Could not determine Web service configuration'
                 . ' in Kernel::GenericInterface::Operation::Ticket::Common::new()',
@@ -1348,6 +1348,10 @@ sub CheckAccessPermissions {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _ValidateUser()
 
 Checks if the given user or user ID is valid.
@@ -1404,8 +1408,6 @@ sub _ValidateUser {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

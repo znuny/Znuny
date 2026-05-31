@@ -478,7 +478,7 @@ sub FormIDCleanUp {
         else {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Won't delete upload cache directory $Subdir: timestamp in directory name not found! Please fix it manually.",
             );
             next SUBDIR;

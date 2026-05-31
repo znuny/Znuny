@@ -14,7 +14,7 @@ use warnings;
 use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -125,7 +125,7 @@ sub Run {
         next COLUMNNAME if $FilterValue eq 'DeleteFilter';
 
         if ( $ColumnName eq 'CustomerID' ) {
-            push @{ $ColumnFilter{$ColumnName} }, $FilterValue;
+            push @{ $ColumnFilter{$ColumnName} },           $FilterValue;
             push @{ $ColumnFilter{ $ColumnName . 'Raw' } }, $FilterValue;
             $GetColumnFilter{$ColumnName} = $FilterValue;
         }
@@ -505,7 +505,7 @@ sub Run {
         View   => $View,
 
         Bulk       => 1,
-        TitleName  => Translatable('QueueView'),
+        TitleName  => Translatable('Queue View'),
         TitleValue => $NavBar{BreadcrumbQueue} . $SubQueueIndicatorTitle,
 
         Env        => $Self,

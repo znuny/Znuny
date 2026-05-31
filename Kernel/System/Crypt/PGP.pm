@@ -641,7 +641,7 @@ sub Verify {
         push @Warnings, {
             Result => 'Error',
             Key    => 'Sign Warning',
-            Value =>
+            Value  =>
                 'Just a part of the message is signed, for info please see \'Plain Format\' view of article.',
         };
     }
@@ -953,6 +953,14 @@ sub KeyAdd {
 }
 
 =begin Internal:
+
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
+=head2 _Init()
+
+initialize the PGP object
 
 =cut
 
@@ -1351,8 +1359,6 @@ sub _QuoteShellArgument {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::Language qw(Translatable);
-use parent qw(Kernel::Output::HTML::Dashboard::Base);
+use parent           qw(Kernel::Output::HTML::Dashboard::Base);
 
 our $ObjectManagerDisabled = 1;
 

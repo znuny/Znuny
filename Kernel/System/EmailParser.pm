@@ -363,7 +363,7 @@ sub GetCharset {
         if ( $Self->{Debug} > 0 ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'debug',
-                Message =>
+                Message  =>
                     "Got no charset from email body because of ContentType ($Data{ContentType})!",
             );
         }
@@ -565,7 +565,7 @@ sub GetMessageBody {
             if ( $Self->{Debug} > 0 ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'debug',
-                    Message =>
+                    Message  =>
                         'No attachments returned from GetAttachments(), just an empty attachment!?',
                 );
             }
@@ -707,7 +707,7 @@ sub PartsAttachments {
     else {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'notice',
-            Message =>
+            Message  =>
                 "Was not able to parse corrupt MIME email! Skipped attachment ($PartCounter)",
         );
         return;
@@ -1024,7 +1024,7 @@ sub CheckMessageBody {
         if ( $Self->{Debug} > 0 ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'debug',
-                Message =>
+                Message  =>
                     'It\'s an html only email, added ascii dump, attached html email as attachment.',
             );
         }
@@ -1034,6 +1034,10 @@ sub CheckMessageBody {
 }
 
 =begin Internal:
+
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
 
 =head2 _DecodeString()
 
@@ -1116,8 +1120,6 @@ sub _MailAddressParse {
 
     return @Chunks;
 }
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

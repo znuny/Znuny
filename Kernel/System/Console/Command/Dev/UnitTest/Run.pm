@@ -24,7 +24,7 @@ sub Configure {
 
     $Self->Description('Execute unit tests.');
     $Self->AddOption(
-        Name => 'test',
+        Name        => 'test',
         Description =>
             "Run individual test files, e.g. 'Ticket' or 'Ticket/ArchiveFlags' (can be specified several times).",
         Required   => 0,
@@ -92,7 +92,7 @@ sub Configure {
         ValueRegex  => qr/.*/smx,
     );
     $Self->AddOption(
-        Name => 'submit-result-as-exit-code',
+        Name        => 'submit-result-as-exit-code',
         Description =>
             "Specify if command return code should not indicate if tests were ok/not ok, but if submission was successful instead.",
         Required => 0,
@@ -113,7 +113,7 @@ sub Configure {
         ValueRegex  => qr/.*/smx,
     );
     $Self->AddOption(
-        Name => 'attachment-path',
+        Name        => 'attachment-path',
         Description =>
             "Send an additional file to the server, for example to submit the complete command output that has been redirected to a file. You can use wildcards like '/opt/znuny/var/log/*.log' here, but make sure to protect them via '' quotes from shell expansion.",
         Required   => 0,
@@ -122,7 +122,7 @@ sub Configure {
         Multiple   => 1
     );
     $Self->AddOption(
-        Name => 'post-test-script',
+        Name        => 'post-test-script',
         Description =>
             'Script(s) to execute after a test has been run. You can specify %File%, %TestOk% and %TestNotOk% as dynamic arguments.',
         Required   => 0,
@@ -131,7 +131,7 @@ sub Configure {
         Multiple   => 1
     );
     $Self->AddOption(
-        Name => 'pre-submit-script',
+        Name        => 'pre-submit-script',
         Description =>
             'Script(s) to execute after all tests have been executed and the results are about to be sent to the server.',
         Required   => 0,

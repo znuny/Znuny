@@ -26,6 +26,24 @@
     <div class="ContentColumn">
         <h1 class="InvisibleText">[% Translate("System configuration") | html %]</h1>
 
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('System Configuration'),
+                    Link => 'AdminSystemConfiguration',
+                },
+            ]
+        %]
+
+        [% FOREACH Item IN Data.Path %]
+            [% BreadcrumbPath.push({ Name => Item.Name, Link => 'AdminSystemConfigurationGroup;RootNavigation=' _ Item.Value }) %]
+        [% END %]
+
+        [% FOREACH Item IN Data.Parameters %]
+            [% BreadcrumbPath.push({ Name => Item.Name, Link => 'AdminSystemConfiguration;Subaction=' _ Item.Value }) %]
+        [% END %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
         <div class="WidgetSimple">
             <div class="Content">
                 [% IF Data.SettingCount %]

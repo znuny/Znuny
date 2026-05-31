@@ -181,13 +181,13 @@ EOF
         # Wait until notification is loaded.
         $Selenium->WaitFor(
             JavaScript =>
-                "return typeof(\$) === 'function' && \$('.MessageBox.Notice:contains(\"The following tickets are not updated: $Tickets[0]->{TicketNumber}.\")').length;"
+                "return typeof(\$) === 'function' && \$('.messageNotice .alertContent:contains(\"The following tickets are not updated: $Tickets[0]->{TicketNumber}.\")').length;"
         );
 
         # Check notification about non-updated ticket.
         $Self->True(
             $Selenium->execute_script(
-                "return \$('.MessageBox.Notice:contains(\"The following tickets are not updated: $Tickets[0]->{TicketNumber}.\")').length;"
+                "return \$('.messageNotice .alertContent:contains(\"The following tickets are not updated: $Tickets[0]->{TicketNumber}.\")').length;"
             ),
             "Non-updated tickets notification is found",
         );

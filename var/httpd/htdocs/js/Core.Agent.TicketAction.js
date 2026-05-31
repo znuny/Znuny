@@ -203,7 +203,6 @@ Core.Agent.TicketAction = (function (TargetNS) {
         });
 
         // Prevent form submit, if To, CC or Bcc are not correctly saved yet
-        // see http://bugs.otrs.org/show_bug.cgi?id=10022 for details
         $('#submitRichText').on('click', function (Event) {
             var ToCustomer = $('#ToCustomer').val() || '',
                 CcCustomer = $('#CcCustomer').val() || '',
@@ -223,6 +222,7 @@ Core.Agent.TicketAction = (function (TargetNS) {
 
         // Subscribe to ToggleWidget event to handle special behaviour in ticket action screens
         Core.App.Subscribe('Event.UI.ToggleWidget', function ($WidgetElement) {
+
             if ($WidgetElement.attr('id') !== 'WidgetArticle') {
                 return;
             }
@@ -231,6 +231,10 @@ Core.Agent.TicketAction = (function (TargetNS) {
             if ($WidgetElement.hasClass('Expanded')) {
                 $('#CreateArticle').prop('checked', true);
             }
+            else {
+                $('#CreateArticle').prop('checked', false);
+            }
+
         });
     };
 
@@ -285,7 +289,7 @@ Core.Agent.TicketAction = (function (TargetNS) {
     TargetNS.ConfirmTemplateOverwrite = function (FieldName, $TemplateSelect, Callback) {
         var Content = '',
             LastValue = $TemplateSelect.data('LastValue') || '',
-            RTEditor = Core.UI.RichTextEditor.GetInstance('FieldName');
+            RTEditor = Core.UI.RichTextEditor.GetInstance(FieldName);
 
         // Fallback for non-richtext content
         Content = $('#' + FieldName).val();
@@ -308,7 +312,7 @@ Core.Agent.TicketAction = (function (TargetNS) {
             Callback();
             $TemplateSelect.data('LastValue', $TemplateSelect.val());
         }
-    }
+    };
 
     /**
      * @name SetTimeUnits

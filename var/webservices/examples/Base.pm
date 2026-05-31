@@ -12,6 +12,7 @@ package var::webservices::examples::Base;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 

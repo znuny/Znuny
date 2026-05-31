@@ -985,6 +985,19 @@ sub Bounce {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
+=head2 _EncodeMIMEWords()
+
+encode MIME words
+
+    my $EncodedWords = $Self->_EncodeMIMEWords(
+        Field => 'Subject',
+        Line  => 'Hello, World!',
+    );
+
 =cut
 
 sub _EncodeMIMEWords {
@@ -1057,19 +1070,15 @@ sub _CreateMimeEntity {
         );
     }
 
-#
 # Encode phrase and address parts of email addresses separately to be able to
 # set phrase in quotes. This is needed for MSGraph because otherwise it throws an error
 # if the phrase contains "special characters", e.g. for address 'Ööüä Äöü <jp@znuny.com>':
-#
 # 400 Bad Request, {
 #   "error": {
 #       "code":    "ErrorInvalidRecipients",
 #       "message": "At least one recipient is not valid., Recipient '\u00d6\u00f6\u00fc\u00e4 ' is not resolved. All recipients must be resolved before a message can be submitted."
 #   }
-#
 # With adress changed to '"Ööüä Äöü" <jp@znuny.com>' it works.
-#
     ATTRIBUTE:
     for my $Attribute (qw(From To Cc)) {
         next ATTRIBUTE if !IsStringWithData( $Header{$Attribute} );
@@ -1204,7 +1213,6 @@ sub _CreateMimeEntity {
     my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
 
     # build MIME::Entity, Data should be bytes, not utf-8
-    # see http://bugs.otrs.org/show_bug.cgi?id=9832
     $EncodeObject->EncodeOutput( \$Param{Body} );
     my $Entity = MIME::Entity->build( %Header, Data => $Param{Body} );
 
@@ -1316,7 +1324,7 @@ sub _CreateMimeEntity {
                 Type        => $Upload->{ContentType},
                 Id          => $ContentID,
                 Disposition => $Upload->{Disposition} || 'inline',
-                Encoding    => $Encoding || '-SUGGEST',
+                Encoding    => $Encoding              || '-SUGGEST',
             );
         }
 
@@ -1376,8 +1384,6 @@ sub _CreateMimeEntity {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

@@ -29,14 +29,14 @@
         <div id="AgentTicketCustomerIDSelection" class="InnerContent WidgetSettingsForm">
             <fieldset class="TableLike">
                 <label>[% Translate("From all Customer IDs") | html %]:</label>
-                <div class="Field">
-                    <input type="text" name="SelectionCustomerIDAll" id="SelectionCustomerIDAll" class="W90pc" data-customer-search-type="CustomerID" />
+                <div>
+                    <input type="text" name="SelectionCustomerIDAll" id="SelectionCustomerIDAll" class="W100pc" data-customer-search-type="CustomerID" />
                 </div>
                 <div class="Clear"></div>
             </fieldset>
             <fieldset class="TableLike">
                 <label>[% Translate("From assigned Customer IDs") | html %]:</label>
-                <div class="Field">
+                <div>
                     <select name="SelectionCustomerIDAssigned" id="SelectionCustomerIDAssigned" class="Modernize"></select>
                 </div>
                 <div class="Clear"></div>

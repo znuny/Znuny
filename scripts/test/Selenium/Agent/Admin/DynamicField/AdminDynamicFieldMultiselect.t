@@ -33,7 +33,7 @@ $Selenium->RunTest(
             Valid => 1,
             Key   => 'PreferencesGroups###DynamicFieldsOverviewPageShown',
             Value => {
-                %{ $DynamicFieldsOverviewPageShownSysConfig{EffectiveValue} },,
+                %{ $DynamicFieldsOverviewPageShownSysConfig{EffectiveValue} },
                 DataSelected => 999,
             },
         );

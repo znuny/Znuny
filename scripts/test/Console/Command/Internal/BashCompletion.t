@@ -26,13 +26,17 @@ my @Tests = (
         Arguments => [ 'bin/znuny.Console.pl', '', 'Admin::Article::SwitchStorage' ],
         Result    => "--target
 --source
---tickets-closed-before-date
---tickets-closed-before-days
---tickets-created-before-date
---tickets-created-before-days
 --tolerant
 --micro-sleep
---force-pid",
+--force-pid
+--tickets-created-before-date
+--tickets-created-min-days
+--tickets-created-after-date
+--tickets-created-max-days
+--tickets-closed-before-date
+--tickets-closed-min-days
+--tickets-closed-after-date
+--tickets-closed-max-days",
     },
     {
         Name      => 'Argument list limitted',

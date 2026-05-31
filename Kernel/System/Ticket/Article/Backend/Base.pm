@@ -366,8 +366,8 @@ sub _MetaArticleCreate {
             (ticket_id, article_sender_type_id, is_visible_for_customer, communication_channel_id, insert_fingerprint, create_time, create_by, change_time, change_by)
             VALUES (?, ?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
-            \$Param{TicketID}, \$Param{SenderTypeID}, \( $Param{IsVisibleForCustomer} ? 1 : 0 ), \$Channel{ChannelID},
-            \$InsertFingerprint, \$Param{UserID}, \$Param{UserID},
+            \$Param{TicketID},   \$Param{SenderTypeID}, \( $Param{IsVisibleForCustomer} ? 1 : 0 ), \$Channel{ChannelID},
+            \$InsertFingerprint, \$Param{UserID},       \$Param{UserID},
         ],
     );
 

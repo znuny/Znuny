@@ -96,6 +96,7 @@ div.Headline .Flag {
     display: flex;
     gap: 4px;
     overflow: hidden;
+    background-color: var(--background-tertiary-color);
 }
 
 #ArticleItems .WidgetSimple .Header h2 {
@@ -131,12 +132,14 @@ div.Headline .Flag {
     display: flex;
     flex-direction: column;
     flex: 1;
+    order: 1;
 }
 
 #ArticleItems .WidgetSimple .Content .ArticleMailContent .Avatar {
     display: flex;
     width: 100%;
     max-width: 80px;
+    order: 2;
 }
 
 #ArticleItems .WidgetSimple .Content .ArticleMailContent .Avatar img {
@@ -208,6 +211,7 @@ div.Headline .Flag {
     display: flex;
     flex-direction: column;
     gap: var(--gap-md);
+    margin-bottom: 15px;
 }
 
 .ticketDetails:empty {
@@ -218,15 +222,22 @@ div.Headline .Flag {
     display: flex;
     flex-flow: row;
     position: relative;
-    padding: var(--padding-lg);
+    padding: 15px;
+    padding-bottom: 10px;
+    padding-top: 10px;
     box-sizing: border-box;
     background: var(--main-bg-color);
     border-top-left-radius: var(--border-radius-md);
     border-top-right-radius: var(--border-radius-md);
     border: var(--border-width) var(--border-solid) var(--border-color);
+    background-color: var(--background-tertiary-color);
 }
 
-
+/* Article Reply/Forward labels must receive clicks; Core.WidgetMenu.css sets
+   #ticketDetails .Actions > li > form > label { pointer-events: none } for the ticket header. */
+#ArticleItems .ItemActions .Actions > li > form > label {
+    pointer-events: auto;
+}
 
 @media only screen and (min-width: 0px) and (max-width: 1024px) {
 
@@ -241,9 +252,9 @@ div.Headline .Flag {
 }
 
 #ArticleItems .Outgoing .ItemActions {
-    border-top-color: var(--mail-outgoing-color);
-    border-left-color: var(--mail-outgoing-color);
-    border-right-color: var(--mail-outgoing-color);
+    border-top-color: var(--border-color);
+    border-left-color: var(--border-color);
+    border-right-color: var(--border-color);
 }
 
 #ArticleItems .ArticleMailHeader label,
@@ -276,10 +287,13 @@ div.Headline .Flag {
 #ArticleItems .ArticleHTML,
 #ArticleItems .ArticleBody {
     -webkit-overflow-scrolling: touch;
-   margin-left: 0;
-   margin-right: 0;
-   position: relative;
-   word-break: break-all;
+    margin-left: 0;
+    margin-right: 0;
+    position: relative;
+    word-break: break-all;
+
+    /* fix for Firefox that does not wrap overflow text by default */
+    overflow-wrap: anywhere;
 }
 
 #ArticleItems .Incoming .ArticleMailContentHTMLWrapper,
@@ -593,22 +607,48 @@ tbody td.Sender {
     border-right: 0px;
 }
 
-.UseArticleColors tr.agent.Active > td,
-.UseArticleColors tr.system.Active > td,
-.UseArticleColors tr.customer.Active > td {
-    border-top: 1px solid #000;
-    border-bottom: 1px solid #000;
+
+.UseArticleColors tr:nth-child(even) td {
+    transition: background ease 0.3s;
+    background-color: var(--table-td-even-bg);
+    border-color: #ccc;
+    border-bottom: 1px solid #eee;
 }
 
-.UseArticleColors tr.agent.Incoming.VisibleForCustomer:hover > td,
-.UseArticleColors tr.customer.Incoming.VisibleForCustomer:hover > td,
-.UseArticleColors tr.NotVisibleForCustomer:hover > td,
-.UseArticleColors tr.agent.Outgoing.VisibleForCustomer:hover > td,
-.UseArticleColors tr.system.Outgoing.VisibleForCustomer:hover > td,
-.UseArticleColors tr.system.Incoming.VisibleForCustomer:hover > td,
-.UseArticleColors tr.customer.Outgoing.VisibleForCustomer:hover > td {
-    background-color: var(--primary-color) !important;
-    border-color: var(--primary-color);
+.UseArticleColors tr.Active > td,
+.UseArticleColors tr.Active:hover > td {
+    background-color: var(--mail-outgoing-color);
+    border-color: var(--mail-outgoing-color);
+}
+
+.UseArticleColors tr:hover > td {
+    background-color: var(--primary-color-rgb);
+    border-color: var(--primary-color-rgb);
+    border-right-color: var(--primary-color-rgb);
+}
+
+.UseArticleColors tr.NotVisibleForCustomer > td {
+    background: #FFCCCC;
+    border-bottom-color: #e7abab;
+    border-color: #e7abab;
+}
+
+.UseArticleColors tr.NotVisibleForCustomer.Active > td,
+.UseArticleColors tr.NotVisibleForCustomer:hover > td {
+    background-color: #e7abab;
+    border-color: #e7abab;
+}
+
+.UseArticleColors tr.system > td {
+    background: #fff7be;
+    border-bottom-color: #ffef80;
+    border-color: #ffef80;
+}
+
+.UseArticleColors tr.system.Active > td,
+.UseArticleColors tr.system:hover > td {
+    background-color: #ffef80;
+    border-color: #ffef80;
 }
 
 .ArticleMailContent iframe,
@@ -617,7 +657,7 @@ tbody td.Sender {
 .ArticleMailContent .ArticleMeta {
     border: var(--border-width) var(--border-solid) var(--border-color);
     border-radius: var(--border-radius-sm);
-    padding: var(--padding-lg);
+    padding: 15px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
     border-top: 0;
@@ -678,23 +718,23 @@ tbody td.Sender {
 */
 .UseArticleColors .agent-phone > td,
 .UseArticleColors .agent-phone .Header {
-    background: #d1e8d1 !important;
+    background: #d1e8d1;
 }
 .UseArticleColors .agent-email-external > td,
 .UseArticleColors .agent-email-external .Header {
-    background: #D3E5B5 !important;
+    background: #D3E5B5;
 }
 .UseArticleColors .agent-email-internal > td,
 .UseArticleColors .agent-email-internal .Header {
-    background: #ffd1d1 !important;
+    background: #ffd1d1;
 }
 .UseArticleColors .agent-note-external > td,
 .UseArticleColors .agent-note-external .Header {
-    background: #d1d1d1 !important;
+    background: #d1d1d1;
 }
 .UseArticleColors .agent-note-internal > td,
 .UseArticleColors .agent-note-internal .Header {
-    background: #FFCCCC !important;
+    background: #FFCCCC;
 }
 
 /*
@@ -714,7 +754,7 @@ tbody td.Sender {
 .UseArticleColors .system-email-notification-int .Header,
 .UseArticleColors .system-email-notification-ext > td,
 .UseArticleColors .system-email-notification-ext .Header {
-    background: #ffffd1 !important;
+    background: #ffffd1;
 }
 
 /*
@@ -729,7 +769,7 @@ tbody td.Sender {
 .UseArticleColors .customer-note-external .Header,
 .UseArticleColors .customer-phone > td,
 .UseArticleColors .customer-phone .Header {
-    background: #D4DEFC !important;
+    background: #D4DEFC;
 }
 
 .UseArticleColors .agent-phone:hover > td,
@@ -746,7 +786,7 @@ tbody td.Sender {
 .UseArticleColors .customer-email-external:hover > td,
 .UseArticleColors .customer-note-external:hover > td,
 .UseArticleColors .customer-phone:hover > td {
-    background: #FCB24B !important;
+    background: #FCB24B;
 }
 
 .ItemRow i.Unsupported,
@@ -774,8 +814,8 @@ tbody td.Sender {
     color: var(--black);
     font-weight: var(--normal);
     padding-left: var(--padding-sm);
-    margin-top: var(--margin-sm);
-    margin-bottom: 0;
+    margin-top: var(--margin-md);
+    margin-bottom: var(--margin-md);
 }
 
 .ProcessInformation > fieldset.flex-column {
@@ -840,7 +880,8 @@ tbody td.Sender {
     font-size: var(--font-size-lg);
 }
 
-.WidgetSimple .ProcessInformation p {
+.WidgetSimple .ProcessInformation p,
+#DynamicFieldsWidget .ProcessInformation p {
     padding: 0;
     overflow: hidden;
     text-overflow: ellipsis;

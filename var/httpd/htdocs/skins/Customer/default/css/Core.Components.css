@@ -289,9 +289,14 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         height: var(--btn-icon-sm);
         min-height: unset;
         min-width: unset;
-      }
+    }
 
     /* btn width */
+    .btn-width-max {
+        max-width: max-content;
+        min-width: max-content;
+    }
+
     .btn-width-xxl {
         max-width: var(--btn-max-width-xxl);
         min-width: var(--btn-max-width-xxl);
@@ -1274,20 +1279,22 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         border-top: 0;
     }
 
-    .Pagination:empty {
-        padding: 0;
-        display: none;
-    }
-
     .SidebarColumn .Pagination {
         background: transparent;
         border-top: 0;
     }
 
     .Pagination:empty,
-    .Pagination:is(:empty),
+    .Pagination:is(:empty) {
+        padding: 0;
+        display: none;
+    }
+
     .Pagination:has(.page-links:empty) {
         padding: 0;
+    }
+
+    .Pagination .page-links:empty {
         display: none;
     }
 

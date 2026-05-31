@@ -215,10 +215,6 @@ sub RequesterPerformRequest {
     };
 }
 
-=begin Internal:
-
-=cut
-
 =head1 NAME
 
 Kernel::GenericInterface::Transport::HTTP::Test::CustomHTTPProtocol
@@ -242,7 +238,7 @@ sub new {
     return $Class->SUPER::new(@_);
 }
 
-sub request {                                                                   ## no critic
+sub request {    ## no critic
     my $Self = shift;
 
     my ( $Request, $Proxy, $Arg, $Size, $Timeout ) = @_;
@@ -260,8 +256,6 @@ sub request {                                                                   
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

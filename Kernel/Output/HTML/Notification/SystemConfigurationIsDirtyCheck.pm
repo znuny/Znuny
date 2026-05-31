@@ -17,6 +17,7 @@ use warnings;
 our @ObjectDependencies = (
     'Kernel::Output::HTML::Layout',
     'Kernel::System::Group',
+    'Kernel::System::JSON',
     'Kernel::System::SysConfig',
 );
 
@@ -25,6 +26,7 @@ sub Run {
 
     if ( $Param{Type} eq 'Admin' ) {
         my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+        my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
 
         my $Group = $Param{Config}->{Group} || 'admin';
 
@@ -42,12 +44,39 @@ sub Run {
 
         if ($Result) {
 
+            my $Data = $LayoutObject->{LanguageObject}->Translate('You have undeployed settings:');
+
+            my $LinkURL = $LayoutObject->{Baselink}
+                . 'Action=AdminSystemConfigurationDeployment;Subaction=Deployment';
+
+            if ( !$LayoutObject->{SessionIDCookie} ) {
+                $LinkURL .= ';' . $LayoutObject->{SessionName} . '=' . $LayoutObject->{SessionID};
+            }
+
+            my $Actions = $JSONObject->Encode(
+                Data => [
+                    {
+                        url     => $LinkURL,
+                        text    => $LayoutObject->{LanguageObject}->Translate('Standard Deploy'),
+                        type    => 'primary',
+                        classes => 'CallForAction btn-main btn-primary',
+                    },
+                    {
+                        url     => '#',
+                        id      => 'QuickDeploy',
+                        text    => $LayoutObject->{LanguageObject}->Translate('Quick Deploy'),
+                        type    => 'ghost',
+                        classes => 'CallForAction btn-main btn-primary-ghost',
+                    },
+                ],
+            );
+
             return $LayoutObject->Notify(
-                Priority => 'Notice',
-                Link => $LayoutObject->{Baselink} . 'Action=AdminSystemConfigurationDeployment;Subaction=Deployment',
-                Data => $LayoutObject->{LanguageObject}->Translate(
-                    "You have undeployed settings, would you like to deploy them?"
-                ),
+                Priority        => 'Notice',
+                Data            => $Data,
+                Actions         => $Actions,
+                ActionSeparator => $LayoutObject->{LanguageObject}->Translate('or'),
+                ID              => 'QuickDeployNotification',
             );
         }
     }

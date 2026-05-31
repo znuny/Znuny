@@ -29,6 +29,7 @@ our @ObjectDependencies = (
     'Kernel::System::Encode',
     'Kernel::System::Log',
     'Kernel::System::Main',
+    'Kernel::System::Time',
     'Kernel::System::Valid',
 );
 
@@ -308,7 +309,7 @@ sub CustomerSearch {
         if ( !$Self->{CustomerUserMap}->{CustomerUserSearchFields} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Need CustomerUserSearchFields in CustomerUser config, unable to search for '$Param{Search}'!",
             );
             return;
@@ -1629,10 +1630,13 @@ sub CustomerUserUpdate {
     }
     push @Bind, \$Param{ID};
 
-    return if !$Self->{DBObject}->Do(
-        SQL  => $SQL,
-        Bind => \@Bind
-    );
+    # only execute the SQL query if any fields are affected
+    if (%SeenKey) {
+        return if !$Self->{DBObject}->Do(
+            SQL  => $SQL,
+            Bind => \@Bind
+        );
+    }
 
     # check if we need to update Customer Preferences
     if ( $Param{UserLogin} ne $UserData{UserLogin} ) {
@@ -1754,7 +1758,7 @@ sub SetPassword {
         if ( !$MainObject->Require('Crypt::Eksblowfish::Bcrypt') ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "CustomerUser: '$Login' tried to store password with bcrypt but 'Crypt::Eksblowfish::Bcrypt' is not installed!",
             );
             return;

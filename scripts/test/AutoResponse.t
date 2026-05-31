@@ -655,7 +655,7 @@ EOF
                 # in this case link should be overwritten by the copy
                 (
                     Queues => {
-                        $QueueID => $Queue{Name},    # this is the queue that original auto response is linked to
+                        $QueueID           => $Queue{Name}, # this is the queue that original auto response is linked to
                         $AdditionalQueueID =>
                             $AdditionalQueue{Name}    # additionally test some new queue id that was recently created
                     }

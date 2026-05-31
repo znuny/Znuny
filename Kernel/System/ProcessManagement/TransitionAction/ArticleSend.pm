@@ -400,7 +400,7 @@ sub FromGet {
         else {
             $LogObject->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Configured 'From' address '$Param{Config}->{From}' for transition action is not a system address. Replaced by default queue system address.",
             );
 

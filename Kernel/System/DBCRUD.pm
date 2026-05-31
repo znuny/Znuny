@@ -15,8 +15,6 @@ use strict;
 use warnings;
 use utf8;
 
-use Data::UUID;
-
 use Kernel::System::VariableCheck qw(:all);
 
 use Kernel::System::DB;
@@ -31,6 +29,7 @@ our @ObjectDependencies = (
     'Kernel::System::Encode',
     'Kernel::System::JSON',
     'Kernel::System::Log',
+    'Kernel::System::Util',
     'Kernel::System::XML',
     'Kernel::System::YAML',
     'Kernel::System::DBCRUD::Format',
@@ -156,6 +155,7 @@ sub DataAdd {
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
     my $JSONObject  = $Kernel::OM->Get('Kernel::System::JSON');
     my $LogObject   = $Kernel::OM->Get('Kernel::System::Log');
+    my $UtilObject  = $Kernel::OM->Get('Kernel::System::Util');
 
     if ( !$Self->{FunctionDataAdd} ) {
         $LogObject->Log(
@@ -220,9 +220,7 @@ sub DataAdd {
     }
 
     # Generate a UUID to retrieve the ID of the created database record.
-    my $UUIDObject = Data::UUID->new();
-    my $UUID       = $UUIDObject->create();
-    $UUID = lc $UUIDObject->to_string($UUID);
+    my $UUID = $UtilObject->CreateUUIDString();
 
     push @InsertColumns, $Self->{UUIDDatabaseTableColumnName};
     push @InsertValues,  '?';
@@ -606,7 +604,7 @@ sub DataGet {
         if ( $Column->{DisableWhere} ) {
             $LogObject->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Do not use $ColumnParam for where conditions ('DisabledWhere' is set)! It should get excluded. Typical reason could be to prevent longblob columns in where conditions in case of an oracle system.",
             );
             return;
@@ -791,7 +789,7 @@ sub DataListGet {
         if ( $Column->{DisableWhere} ) {
             $LogObject->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Do not use $ColumnParam for where conditions ('DisabledWhere' is set)! It should get excluded. Typical reason could be to prevent longblob columns in where conditions in case of an oracle system.",
             );
             return;
@@ -988,7 +986,7 @@ sub DataSearch {
         if ( $Column->{DisableWhere} ) {
             $LogObject->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Do not use $ColumnParam for where conditions ('DisabledWhere' is set)! It should get excluded. Typical reason could be to prevent longblob columns in where conditions in case of an oracle system.",
             );
             return;
@@ -1184,7 +1182,7 @@ sub DataDelete {
         if ( $Column->{DisableWhere} ) {
             $LogObject->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Do not use $ColumnParam for where conditions ('DisabledWhere' is set)! It should get excluded. Typical reason could be to prevent longblob columns in where conditions in case of an oracle system.",
             );
             return;
@@ -1775,7 +1773,7 @@ sub CreateMissingUUIDDatabaseTableColumns {
         if ( !$UUIDColumnCreated ) {
             $LogObject->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Column $Self->{UUIDDatabaseTableColumnName} could not be created in database table $Self->{DatabaseTable}.",
             );
             return;
@@ -1875,7 +1873,7 @@ sub MigrateUUIDDatabaseTableColumns {
 
             $LogObject->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Error: Unable to execute SQL: $SQL",
             );
 

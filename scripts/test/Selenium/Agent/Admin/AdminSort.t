@@ -13,7 +13,6 @@ use utf8;
 
 use vars (qw($Self));
 
-# get selenium object
 my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 $Selenium->RunTest(
@@ -45,12 +44,16 @@ $Selenium->RunTest(
         my $NavigationModule = $ConfigObject->Get('Frontend::NavigationModule');
         my @NavigationCheck  = (
             'Csomagkezelő',
+            'Fordítás',
             'Munkamenet-kezelés',
             'Naptárak',
             'Rendszerbeállítások',
+            'Rendszerfájl támogatás',
             'Rendszerkarbantartás',
             'Rendszernapló',
             'SQL doboz',
+            'Támogatási adatgyűjtő',
+            'Teljesítmény napló',
         );
 
         $Selenium->execute_script(
@@ -152,7 +155,7 @@ $Selenium->RunTest(
         my $Success = $UserObject->SetPreferences(
             UserID => $SecondTestUserID,
             Key    => 'AdminNavigationBarFavourites',
-            Value =>
+            Value  =>
                 '["AdminUser","AdminSystemAddress","AdminAppointmentCalendarManage",
                 "AdminCustomerUser","AdminPriority","AdminProcessManagement","AdminRole","AdminSystemConfiguration",
                 "AdminLog","AdminAppointmentNotificationEvent","AdminTemplate","AdminEmail"]',

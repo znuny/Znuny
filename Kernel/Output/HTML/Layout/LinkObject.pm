@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::LinkObject;
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
@@ -169,7 +169,7 @@ sub LinkObjectTableCreateComplex {
         for my $Item ( @{ $Block->{ItemList} } ) {
             if ( !grep { $_->{Key} } @{$Item} ) {
                 $Item->[0] = {
-                    Type => 'Text',
+                    Type    => 'Text',
                     Content =>
                         'ERROR: Key attribute not found in any column of the item list.',
                 };
@@ -1074,6 +1074,10 @@ sub ComplexTablePreferencesSet {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _LinkObjectContentStringCreate()
 
 return a output string
@@ -1302,10 +1306,6 @@ sub _LoadLinkObjectLayoutBackend {
 
     return $BackendObject;
 }
-
-=end Internal:
-
-=cut
 
 1;
 

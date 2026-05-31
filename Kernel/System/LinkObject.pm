@@ -256,7 +256,7 @@ sub PossibleLinkList {
             # log the error
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "The $Argument '$Value' is invalid in SysConfig (LinkObject::PossibleLink)!",
             );
 
@@ -383,7 +383,7 @@ sub LinkAdd {
     if ( !$PossibleTypesList{ $Param{Type} } ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Not possible to create a '$Param{Type}' link between $Param{SourceObject} and $Param{TargetObject}!",
         );
         return;
@@ -546,7 +546,7 @@ sub LinkAdd {
         Bind => [
             \$Param{SourceObjectID}, \$Param{SourceKey},
             \$Param{TargetObjectID}, \$Param{TargetKey},
-            \$TypeID, \$StateID, \$Param{UserID},
+            \$TypeID,                \$StateID, \$Param{UserID},
         ],
     );
 
@@ -1866,7 +1866,7 @@ sub TypeGet {
 
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "The $Argument '$Type{$Argument}' is invalid in SysConfig (LinkObject::Type)!",
         );
         return;
@@ -2003,7 +2003,7 @@ sub TypeGroupList {
             # log the error
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "The Argument '$Type' is invalid in SysConfig (LinkObject::TypeGroup)!",
             );
 
@@ -2033,7 +2033,7 @@ sub TypeGroupList {
             # log the error
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "The LinkType '$Type' is invalid in SysConfig (LinkObject::TypeGroup)!",
             );
 

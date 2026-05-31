@@ -116,7 +116,8 @@ Core.Form.ErrorTooltips = (function (TargetNS) {
      */
     TargetNS.ShowTooltip = function($Element, TooltipContent, TooltipPosition) {
         var $TooltipContainer = $('#' + TooltipContainerID),
-            TopOffset;
+            TopOffset,
+            IsFileUploadElement = $Element.attr('id') === 'FileUpload';
 
         if (TooltipPosition == null) {
             TooltipPosition = TonguePosition;
@@ -127,12 +128,20 @@ Core.Form.ErrorTooltips = (function (TargetNS) {
             $TooltipContainer = $('#' + TooltipContainerID);
         }
 
+        if (IsFileUploadElement) {
+            TooltipOffsetTop = 55;
+            TooltipOffsetLeft = 40;
+        }
+
         /*
          * Now determine if the tongue needs to be right or left, depending on the
          * position of the target element on the screen.
          */
         if ($Element.offset() && ($(document).width() - $Element.offset().left) < 250) {
             TongueClass = 'TongueRight';
+        }
+        else {
+            TongueClass = 'TongueLeft';
         }
 
         /*
@@ -159,8 +168,8 @@ Core.Form.ErrorTooltips = (function (TargetNS) {
         }
 
         $TooltipContainer
-            .css('left', Offset.left + TooltipOffsetLeft)
-            .css('top', TopOffset);
+          .css("left", Offset.left + TooltipOffsetLeft)
+          .css("top", TopOffset);
     };
 
     /**

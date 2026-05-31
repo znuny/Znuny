@@ -10,6 +10,7 @@
 ## no critic (Modules::RequireExplicitPackage)
 use strict;
 use warnings;
+use utf8;
 
 # prevent used once warning
 use Kernel::System::ObjectManager;

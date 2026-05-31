@@ -13,7 +13,7 @@ package Kernel::Modules::AgentDashboardCommon;
 use strict;
 use warnings;
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
@@ -420,9 +420,10 @@ sub Run {
             my $FilterValue = $ParamObject->GetParam( Param => 'ColumnFilter' . $ColumnName . $Name )
                 || '';
             next COLUMNNAME if $FilterValue eq '';
+            next COLUMNNAME if lc $FilterValue eq 'null';
 
             if ( $ColumnName eq 'CustomerID' ) {
-                push @{ $ColumnFilter{$ColumnName} }, $FilterValue;
+                push @{ $ColumnFilter{$ColumnName} },           $FilterValue;
                 push @{ $ColumnFilter{ $ColumnName . 'Raw' } }, $FilterValue;
             }
             elsif ( $ColumnName eq 'CustomerUserID' ) {
@@ -454,6 +455,7 @@ sub Run {
 
             next DYNAMICFIELD if !defined $FilterValue;
             next DYNAMICFIELD if $FilterValue eq '';
+            next DYNAMICFIELD if lc $FilterValue eq 'null';
 
             $ColumnFilter{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = {
                 Equals => $FilterValue,
@@ -745,7 +747,7 @@ sub Run {
                 NameClass      => $NameClass,
                 Header         => ${ $Element{Header} },
                 Content        => ${ $Element{Content} },
-                CustomerID     => $Self->{CustomerID} || '',
+                CustomerID     => $Self->{CustomerID}     || '',
                 CustomerUserID => $Self->{CustomerUserID} || '',
             },
         );
@@ -783,7 +785,7 @@ sub Run {
                 Data => {
                     %{ $Element{Config} },
                     Name           => $Name,
-                    CustomerID     => $Self->{CustomerID} || '',
+                    CustomerID     => $Self->{CustomerID}     || '',
                     CustomerUserID => $Self->{CustomerUserID} || '',
                 },
             );
@@ -1019,7 +1021,7 @@ sub _Element {
         Config                => $Configs->{$Name},
         PageShown             => $Configs->{$Name}->{PageShown},
         Name                  => $Name,
-        CustomerID            => $Self->{CustomerID} || '',
+        CustomerID            => $Self->{CustomerID}     || '',
         CustomerUserID        => $Self->{CustomerUserID} || '',
         SortBy                => $SortBy,
         OrderBy               => $OrderBy,
@@ -1046,7 +1048,7 @@ sub _Element {
             FilterColumn   => $Param{FilterColumn},
             Config         => $Configs->{$Name},
             Name           => $Name,
-            CustomerID     => $Self->{CustomerID} || '',
+            CustomerID     => $Self->{CustomerID}     || '',
             CustomerUserID => $Self->{CustomerUserID} || '',
         );
         return $FilterContent;
@@ -1105,7 +1107,7 @@ sub _Element {
         $CacheUsed = 0;
         $Content   = $Object->Run(
             AJAX           => $Param{AJAX},
-            CustomerID     => $Self->{CustomerID} || '',
+            CustomerID     => $Self->{CustomerID}     || '',
             CustomerUserID => $Self->{CustomerUserID} || '',
         );
     }
@@ -1129,7 +1131,7 @@ sub _Element {
     if ($HeaderMethod) {
         $Header = $Object->Header(
             AJAX           => $Param{AJAX},
-            CustomerID     => $Self->{CustomerID} || '',
+            CustomerID     => $Self->{CustomerID}     || '',
             CustomerUserID => $Self->{CustomerUserID} || '',
         );
     }

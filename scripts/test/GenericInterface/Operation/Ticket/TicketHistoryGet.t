@@ -295,7 +295,7 @@ my @Tests = (
         ExpectedReturnLocalData => {
             Data => {
                 Error => {
-                    ErrorCode => 'TicketHistoryGet.AccessDenied',
+                    ErrorCode    => 'TicketHistoryGet.AccessDenied',
                     ErrorMessage =>
                         'TicketHistoryGet: User does not have access to the ticket NotTicketID!'
                 }
@@ -305,7 +305,7 @@ my @Tests = (
         ExpectedReturnRemoteData => {
             Data => {
                 Error => {
-                    ErrorCode => 'TicketHistoryGet.AccessDenied',
+                    ErrorCode    => 'TicketHistoryGet.AccessDenied',
                     ErrorMessage =>
                         'TicketHistoryGet: User does not have access to the ticket NotTicketID!'
                 }

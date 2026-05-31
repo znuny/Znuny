@@ -100,7 +100,7 @@
 <Table Name="users">
     <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
     <Column Name="login" Required="true" Size="200" Type="VARCHAR"/>
-    <Column Name="pw" Required="true" Size="128" Type="VARCHAR"/>
+    <Column Name="pw" Required="true" Size="255" Type="VARCHAR"/>
     <Column Name="title" Required="false" Size="50" Type="VARCHAR"/>
     <Column Name="first_name" Required="true" Size="100" Type="VARCHAR"/>
     <Column Name="last_name" Required="true" Size="100" Type="VARCHAR"/>
@@ -401,6 +401,37 @@
     </ForeignKey>
 </Table>
 
+<Table Name="sendmail_config">
+    <Column Name="id" Required="true" Type="INTEGER" AutoIncrement="true" PrimaryKey="true"/>
+    <Column Name="sendmail_module" Required="true" Type="VARCHAR" Size="255"/>
+    <Column Name="cmd" Required="false" Type="VARCHAR" Size="2000"/>
+    <Column Name="host" Required="false" Type="VARCHAR" Size="255"/>
+    <Column Name="port" Required="false" Type="SMALLINT"/>
+    <Column Name="timeout" Required="false" Type="SMALLINT"/>
+    <Column Name="skip_ssl_verification" Required="false" Default="0" Type="SMALLINT"/>
+    <Column Name="is_fallback_config" Required="false" Default="0" Type="SMALLINT"/>
+    <Column Name="authentication_type" Required="false" Size="100" Type="VARCHAR"/>
+    <Column Name="auth_user" Required="false" Type="VARCHAR" Size="255"/>
+    <Column Name="auth_password" Required="false" Type="VARCHAR" Size="255"/>
+    <Column Name="oauth2_token_config_id" Required="false" Type="INTEGER"/>
+    <Column Name="email_addresses" Required="false" Type="VARCHAR" Size="2000" />
+    <Column Name="comments" Required="false" Type="VARCHAR" Size="255"/>
+    <Column Name="valid_id" Required="true" Type="SMALLINT"/>
+    <Column Name="create_time" Required="true" Type="DATE"/>
+    <Column Name="create_by" Required="true" Type="INTEGER"/>
+    <Column Name="change_time" Required="true" Type="DATE"/>
+    <Column Name="change_by" Required="true" Type="INTEGER"/>
+    <ForeignKey ForeignTable="oauth2_token_config">
+        <Reference Local="oauth2_token_config_id" Foreign="id"/>
+    </ForeignKey>
+    <ForeignKey ForeignTable="valid">
+        <Reference Local="valid_id" Foreign="id"/>
+    </ForeignKey>
+    <ForeignKey ForeignTable="users">
+        <Reference Local="create_by" Foreign="id"/>
+        <Reference Local="change_by" Foreign="id"/>
+    </ForeignKey>
+</Table>
 
 <!-- system_address - all email addresses of the system -->
 <Table Name="system_address">
@@ -1001,7 +1032,7 @@
 <Table Name="article_color">
     <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="SMALLINT"/>
     <Column Name="name" Required="true" Size="200" Type="VARCHAR"/>
-    <Column Name="color" Required="true" Size="10" Type="VARCHAR" />
+    <Column Name="color" Required="true" Size="25" Type="VARCHAR" />
     <Column Name="create_time" Required="true" Type="DATE"/>
     <Column Name="create_by" Required="true" Type="INTEGER"/>
     <Column Name="change_time" Required="true" Type="DATE"/>
@@ -1606,7 +1637,7 @@
     <Column Name="login" Required="true" Size="200" Type="VARCHAR"/>
     <Column Name="email" Required="true" Size="150" Type="VARCHAR"/>
     <Column Name="customer_id" Required="true" Size="150" Type="VARCHAR"/>
-    <Column Name="pw" Required="false" Size="128" Type="VARCHAR"/>
+    <Column Name="pw" Required="false" Size="255" Type="VARCHAR"/>
     <Column Name="title" Required="false" Size="50" Type="VARCHAR"/>
     <Column Name="first_name" Required="true" Size="100" Type="VARCHAR"/>
     <Column Name="last_name" Required="true" Size="100" Type="VARCHAR"/>
@@ -1691,7 +1722,7 @@
 <Table Name="mail_account">
     <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>
     <Column Name="login" Required="true" Size="200" Type="VARCHAR"/>
-    <Column Name="pw" Required="true" Size="200" Type="VARCHAR"/>
+    <Column Name="pw" Required="true" Size="255" Type="VARCHAR"/>
     <Column Name="host" Required="true" Size="200" Type="VARCHAR"/>
     <Column Name="account_type" Required="true" Size="20" Type="VARCHAR"/>
     <Column Name="queue_id" Required="true" Type="INTEGER"/>
@@ -2230,6 +2261,7 @@
 </Table>
 
 <Table Name="pm_process_preferences">
+    <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="BIGINT"/>
     <Column Name="process_entity_id" Required="true" Type="VARCHAR" Size="50"/>
     <Column Name="preferences_key" Required="true" Size="150" Type="VARCHAR"/>
     <Column Name="preferences_value" Required="false" Size="3000" Type="VARCHAR"/>
@@ -2596,7 +2628,7 @@
     <Column Name="group_id" Required="true" Type="INTEGER" />
     <Column Name="name" Required="true" Size="200" Type="VARCHAR" />
     <Column Name="salt_string" Required="true" Size="64" Type="VARCHAR" />
-    <Column Name="color" Required="true" Size="7" Type="VARCHAR" />
+    <Column Name="color" Required="true" Size="25" Type="VARCHAR" />
     <Column Name="ticket_appointments" Required="false" Type="LONGBLOB" />
     <Column Name="valid_id" Required="true" Type="SMALLINT" />
     <Column Name="create_time" Required="true" Type="DATE" />

@@ -143,11 +143,11 @@ $Selenium->RunTest(
         $Selenium->execute_script("\$('#Submit').trigger('click')");
         $Selenium->WaitFor(
             JavaScript =>
-                "return typeof(\$) === 'function' && \$('.MessageBox > p:contains(\"Start date shouldn\\'t be defined after Stop date!\")').length"
+                "return typeof(\$) === 'function' && \$('.messageError .alertContent:contains(\"Start date shouldn\\'t be defined after Stop date!\")').length"
         );
         $Self->True(
             $Selenium->execute_script(
-                "return \$('.MessageBox > p:contains(\"Start date shouldn\\'t be defined after Stop date!\")').length"
+                "return \$('.messageError .alertContent:contains(\"Start date shouldn\\'t be defined after Stop date!\")').length"
             ),
             "Error message correctly displayed"
         ) || die "Did not get notification message";
@@ -175,7 +175,6 @@ $Selenium->RunTest(
         $Selenium->execute_script("\$('#StopDateMinute').val('$DTEnd->{Minute}')");
 
         # Try to create System Maintenance with Login and Notify message longer then 250 characters.
-        #   See bug#13366 (https://bugs.otrs.org/show_bug.cgi?id=13366).
         #   Verify there is no Error class initially.
         $Self->False(
             $Selenium->execute_script("return \$('#LoginMessage').hasClass('Error')"),
@@ -218,7 +217,7 @@ $Selenium->RunTest(
         # check if notification exists after adding
         my $Notification = 'System Maintenance was added successfully!';
         $Self->True(
-            $Selenium->execute_script("return \$('.MessageBox.Notice p:contains($Notification)').length"),
+            $Selenium->execute_script("return \$('.messageNotice .alertContent:contains($Notification)').length"),
             "$Notification - notification is found."
         );
 
@@ -244,7 +243,7 @@ $Selenium->RunTest(
             = "A system maintenance period will start at: $StartTimeString and is expected to stop at: $EndTimeString";
         $Self->False(
             $Selenium->execute_script(
-                "return \$('.MessageBox.Notice p:contains(\"$UpcomingSysMaintenanceNotif\")').length"
+                "return \$('.messageNotice .alertContent:contains(\"$UpcomingSysMaintenanceNotif\")').length"
             ),
             "$UpcomingSysMaintenanceNotif - notification is not found."
         );
@@ -261,7 +260,7 @@ $Selenium->RunTest(
         # Check for upcoming System Maintenance notification after config update.
         $Self->True(
             $Selenium->execute_script(
-                "return \$('.MessageBox.Notice p:contains(\"$UpcomingSysMaintenanceNotif\")').length"
+                "return \$('.messageNotice .alertContent:contains(\"$UpcomingSysMaintenanceNotif\")').length"
             ),
             "$UpcomingSysMaintenanceNotif - notification is found."
         );
@@ -312,7 +311,6 @@ $Selenium->RunTest(
         $CheckBredcrumb->( BreadcrumbText => 'Edit System Maintenance' );
 
         # Try to edit System Maintenance with Login and Notify message longer then 250 characters.
-        #   See bug#13366 (https://bugs.otrs.org/show_bug.cgi?id=13366).
         #   Verify there is no Error class initially.
         $Self->False(
             $Selenium->execute_script("return \$('#LoginMessage').hasClass('Error')"),
@@ -361,7 +359,7 @@ $Selenium->RunTest(
         # check if notification exists after updating
         $Notification = 'System Maintenance was updated successfully!';
         $Self->True(
-            $Selenium->execute_script("return \$('.MessageBox.Notice p:contains($Notification)').length"),
+            $Selenium->execute_script("return \$('.messageNotice .alertContent:contains($Notification)').length"),
             "$Notification - notification is found."
         );
 

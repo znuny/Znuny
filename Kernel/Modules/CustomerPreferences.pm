@@ -89,7 +89,7 @@ sub Run {
         else {
             $LogObject->Log(
                 Priority => 'debug',
-                Message =>
+                Message  =>
                     "User preference key $Key is not configured in CustomerPreferences::AJAXUpdate::AllowedKeys to be allowed to be set via UpdateAJAX.",
             );
         }

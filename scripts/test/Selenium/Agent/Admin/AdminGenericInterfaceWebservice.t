@@ -123,7 +123,9 @@ $Selenium->RunTest(
 
             # Verify that web service is created.
             $Self->True(
-                $Selenium->execute_script("return \$('.MessageBox p:contains(Web service \"$Name\" created)').length"),
+                $Selenium->execute_script(
+                    "return \$('.messageNotice .alertContent:contains(Web service \"$Name\" created)').length"
+                ),
                 "$Name is created",
             );
 

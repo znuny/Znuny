@@ -784,6 +784,8 @@ div.AJAXWaiting {
     width: 80%;
 }
 
+}/* end @media */
+
 /**
  * @subsubsection     Popup Print
  */
@@ -813,7 +815,7 @@ div.AJAXWaiting {
 }
 
 .PrintContainer #Path li {
-    width: 500px;
+    width: 100%;
     display: block;
     margin: 0px auto 15px auto;
 }
@@ -959,4 +961,3 @@ ul#ProcessElements > li a > i {
 }
 
 }/* end @media */
-}

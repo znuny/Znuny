@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::System::DB',
@@ -89,7 +89,7 @@ sub SignatureAdd {
             . ' create_time, create_by, change_time, change_by)'
             . ' VALUES (?, ?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
-            \$Param{Name}, \$Param{Text}, \$Param{ContentType}, \$Param{Comment},
+            \$Param{Name},    \$Param{Text},   \$Param{ContentType}, \$Param{Comment},
             \$Param{ValidID}, \$Param{UserID}, \$Param{UserID},
         ],
     );
@@ -201,7 +201,7 @@ sub SignatureUpdate {
         SQL => 'UPDATE signature SET name = ?, text = ?, content_type = ?, comments = ?, '
             . ' valid_id = ?, change_time = current_timestamp, change_by = ? WHERE id = ?',
         Bind => [
-            \$Param{Name}, \$Param{Text}, \$Param{ContentType}, \$Param{Comment},
+            \$Param{Name},    \$Param{Text},   \$Param{ContentType}, \$Param{Comment},
             \$Param{ValidID}, \$Param{UserID}, \$Param{ID},
         ],
     );
@@ -339,15 +339,15 @@ Super Support - Waterford Business Park
 5201 Blue Lagoon Drive - 8th Floor & 9th Floor - Miami, 33126 USA
 Email: hot@example.com - Web: http://www.example.com/
 --',
-            'CreateTime' => '2024-02-06 14:49:56',
-            'Queues' => {},
+            'CreateTime'  => '2024-02-06 14:49:56',
+            'Queues'      => {},
             'Comment'     => 'Standard Signature.',
             'ValidID'     => 1,
             'ChangeTime'  => '2024-02-06 14:49:56',
             'ContentType' => 'text/plain; charset=utf-8'
         },
         {
-            'ID' => 2,
+            'ID'   => 2,
             'Name' => 'system standard signature (pl)',
             'Text' => '
 Your Ticket-Team
@@ -359,8 +359,8 @@ Super Support - Waterford Business Park
 5201 Blue Lagoon Drive - 8th Floor & 9th Floor - Miami, 33126 USA
 Email: hot@example.com - Web: http://www.example.com/
 --',
-            'CreateTime' => '2024-07-22 11:58:32',
-            'Queues'     => {},
+            'CreateTime'  => '2024-07-22 11:58:32',
+            'Queues'      => {},
             'Comment'     => 'Standard Signature.',
             'ValidID'     => 1,
             'ChangeTime'  => '2024-07-22 11:58:32',
@@ -545,7 +545,7 @@ sub SignatureImport {
             if ($QueueErrorMessage) {
                 $LogObject->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         $QueueErrorMessage . '.',
                 );
                 push @SignatureErrors, $Signature->{Name};
@@ -617,10 +617,10 @@ sub SignatureImport {
 
     return {
         Success          => 1,
-        Added            => join( ', ', @AddedSignatures ) || '',
-        Updated          => join( ', ', @UpdatedSignatures ) || '',
+        Added            => join( ', ', @AddedSignatures )      || '',
+        Updated          => join( ', ', @UpdatedSignatures )    || '',
         NotUpdated       => join( ', ', @NotUpdatedSignatures ) || '',
-        Errors           => join( ', ', @SignatureErrors ) || '',
+        Errors           => join( ', ', @SignatureErrors )      || '',
         AdditionalErrors => \@SignatureAdditionalErrors,
     };
 }
@@ -684,14 +684,14 @@ Returns:
 
     my %SignatureData = (
         'ContentType' => 'text/plain; charset=utf-8',
-        'ValidID' => 1,
-        'Comment' => 'Standard Signature.',
-        'CreateTime' => '2024-07-22 11:58:32',
-        'Queues' => {
-            '6' => 'Queuetest1192009180100007',
+        'ValidID'     => 1,
+        'Comment'     => 'Standard Signature.',
+        'CreateTime'  => '2024-07-22 11:58:32',
+        'Queues'      => {
+            '6'  => 'Queuetest1192009180100007',
             '21' => 'Queuetest1450009665400005',
         },
-        'ID' => 2,
+        'ID'   => 2,
         'Text' => '
 Your Ticket-
 
@@ -702,7 +702,7 @@ Super Support - Waterford Business Park
 5201 Blue Lagoon Drive - 8th Floor & 9th Floor - Miami, 33126 USA
 Email: hot@example.com - Web: http://www.example.com/
 --',
-        'Name' => 'system standard signature (pl)',
+        'Name'       => 'system standard signature (pl)',
         'ChangeTime' => '2024-07-22 12:13:18'
     )
 

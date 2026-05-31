@@ -13,7 +13,7 @@ package Kernel::System::Loader;
 use strict;
 use warnings;
 
-use CSS::Minifier qw();           # default minifier, will only be used if CSS::Minifier:XS is not available.
+use CSS::Minifier        qw();    # default minifier, will only be used if CSS::Minifier:XS is not available.
 use JavaScript::Minifier qw();    # default minifier, will only be used if JavaScript::Minifier:XS is not available.
 
 our @ObjectDependencies = (
@@ -189,6 +189,12 @@ sub MinifyFiles {
                         Message  => "Error during file minification: $@",
                     );
                 }
+
+                # If Loader::Enabled::CSS is enabled and the css files will be minified,
+                # we need to replace '../../' with '../' with a relative path.
+                # This is necessary because the css files are in the css-cache directory,
+                # but the img files are in the img directory.
+                $Content =~ s{../../}{../}g;
 
                 $Content .= "\n";
             }

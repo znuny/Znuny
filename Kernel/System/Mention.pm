@@ -14,7 +14,7 @@ use utf8;
 
 use HTML::TreeBuilder::XPath;
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 use parent qw(Kernel::System::EventHandler);
@@ -239,7 +239,7 @@ sub RemoveMention {
     if ( !$UserCanRemoveMention ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "User with ID $Param{UserID} is not allowed to remove mention of user with ID $Param{MentionedUserID} from ticket with ID $Param{TicketID}.",
         );
 

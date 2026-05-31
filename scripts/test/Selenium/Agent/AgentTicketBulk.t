@@ -345,7 +345,6 @@ $Selenium->RunTest(
         }
 
         # Select both tickets and click on "bulk".
-        # Test case for the bug #11805 - http://bugs.otrs.org/show_bug.cgi?id=11805.
         $Selenium->find_element("//input[\@value='$Tickets[0]->{TicketID}']")->click();
         $Selenium->find_element("//input[\@value='$Tickets[1]->{TicketID}']")->click();
         $Selenium->find_element("//input[\@value='$Tickets[2]->{TicketID}']")->click();
@@ -428,12 +427,8 @@ $Selenium->RunTest(
             "On update - Ticket queue is not translated",
         );
 
-        $Selenium->WaitForjQueryEventBound(
-            CSSSelector => ".UndoClosePopup",
-        );
-
         # Click on 'Undo & close' link.
-        $Selenium->execute_script("\$('.UndoClosePopup').click();");
+        $Selenium->find_element('.UndoClosePopup')->click();
 
         # Return to status view.
         $Selenium->WaitFor( WindowCount => 1 );

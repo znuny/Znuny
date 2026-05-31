@@ -9,9 +9,11 @@ The following persons contributed to Znuny:
 * André Brás <andre.bras@otrs.com>
 * anonymous <unknown@anonymous>
 * arlecchino <kolbma@users.noreply.github.com>
+* Arthur Ritscher <arthur.ritscher@sectornord.de>
 * b1-luettje <53084931+b1-luettje@users.noreply.github.com>
 * Balazs Ur <balazs.ur@otrs.com>
 * Balázs Úr <balazs.ur@otrs.com>
+* Balázs Úr <balazs@urbalazs.hu>
 * Belnet <info@belnet.be>
 * Bernhard Schmalhofer <Bernhard.Schmalhofer@gmx.de>
 * Bodo Bauer <bodo.bauer@otrs.com>
@@ -19,6 +21,7 @@ The following persons contributed to Znuny:
 * Carlos Garcia <carlos.garcia@otrs.com>
 * Carlos Rodriguez <carlos.rodriguez@otrs.com>
 * Christian Schöpplein <christian.schoepplein@otrs.com>
+* Christian Ullrich <chris@chrullrich.net>
 * Christopher T. Kuhn <christopher.kuhn@otrs.com>
 * Daniel Lisiecki <lisiecki.daniel@gmail.com>
 * Daniel Sprenger <123074686+sprengerdaniel@users.noreply.github.com>
@@ -49,7 +52,7 @@ The following persons contributed to Znuny:
 * Hog Duske <hog.duske@dusketech.de>
 * IB Development Team <dev@ib.pl>
 * Igor Djuric <igor.djuric@otrs.com>
-* itweserems <153607410+itweserems@users.noreply.github.com>
+* IT.WESER-EMS <info@it-weser-ems.de>
 * Ivo Oliveira <128880860+Bashizz@users.noreply.github.com>
 * Jan Steinweg <jan.steinweg@otrs.com>
 * JannisKleinrensing <71767611+JannisKleinrensing@users.noreply.github.com>

@@ -198,7 +198,7 @@ sub Connect {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Caller   => 1,
             Priority => 'debug',
-            Message =>
+            Message  =>
                 "DB.pm->Connect: DSN: $Self->{DSN}, User: $Self->{USER}, Pw: $Self->{PW}, DB Type: $Self->{'DB::Type'};",
         );
     }
@@ -1187,7 +1187,6 @@ sub SQLProcessor {
 
         # make a deep copy in order to prevent modyfing the input data
         # see also Bug#12764 - Database function SQLProcessor() modifies given parameter data
-        # https://bugs.otrs.org/show_bug.cgi?id=12764
         my @Database = @{
             $Kernel::OM->Get('Kernel::System::Storable')->Clone(
                 Data => $Param{Database},
@@ -1713,7 +1712,7 @@ sub QueryCondition {
                 if ( $SQL =~ m/ OR $/ ) {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => 'notice',
-                        Message =>
+                        Message  =>
                             "Invalid condition '$Param{Value}', simultaneous usage both AND and OR conditions!",
                     );
                     return "1=0";
@@ -1728,7 +1727,7 @@ sub QueryCondition {
                 if ( $SQL =~ m/ AND $/ ) {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => 'notice',
-                        Message =>
+                        Message  =>
                             "Invalid condition '$Param{Value}', simultaneous usage both AND and OR conditions!",
                     );
                     return "1=0";
@@ -1822,14 +1821,14 @@ Return a separated IN condition for more then C<MaxParamCountForInCondition> val
 
 Return the SQL String with ?-values and a array with values references in bind mode:
 
-    $BindModeResult = (
+    %BindModeResult = (
         'SQL'    => 'ticket_id IN (?, ?, ?, ?, ?, ?)',
         'Values' => [1, 2, 3, 4, 5, 6],
     );
 
     or
 
-    $BindModeResult = (
+    %BindModeResult = (
         'SQL'    => '( ticket_id IN (?, ?, ?, ?, ?, ?) OR ticket_id IN ( ?, ... ) )',
         'Values' => [1, 2, 3, 4, 5, 6, ... ],
     );
@@ -2028,6 +2027,20 @@ sub Ping {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
+=head2 _Decrypt()
+
+decrypt a password
+
+    my $Password = $DBObject->_Decrypt(
+        Pw => $Password,
+    );
+
+Returns the decrypted password.
+
 =cut
 
 sub _Decrypt {
@@ -2123,8 +2136,6 @@ sub DESTROY {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

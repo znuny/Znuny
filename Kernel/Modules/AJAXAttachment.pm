@@ -11,6 +11,8 @@ package Kernel::Modules::AJAXAttachment;
 
 use strict;
 use warnings;
+use utf8;
+
 use MIME::Base64;
 
 use Kernel::Language qw(Translatable);
@@ -30,28 +32,19 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    # get params
-    my %GetParam;
-
-    # get param object
     my $ParamObject       = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $UploadCacheObject = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
     my $LayoutObject      = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $JSONObject        = $Kernel::OM->Get('Kernel::System::JSON');
+    my $ConfigObject      = $Kernel::OM->Get('Kernel::Config');
 
-    # get form id
-    $Self->{FormID} = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'FormID' );
-
-    if ( !$Self->{FormID} ) {
-        return $LayoutObject->FatalError(
-            Message => Translatable('Got no FormID.'),
-        );
+    my %GetParam;
+    NEEDED:
+    for my $Needed (qw(FormID FileID)) {
+        $GetParam{$Needed} = $ParamObject->GetParam( Param => $Needed ) || '';
     }
 
-    $GetParam{FileID} = $ParamObject->GetParam( Param => 'FileID' ) || '';
-    $GetParam{FormID} = $ParamObject->GetParam( Param => 'FormID' ) || '';
-
-    # challenge token check for write action
+    # Challenge token check for write action
     $LayoutObject->ChallengeTokenCheck();
 
     if ( $Self->{Subaction} eq 'Upload' ) {
@@ -61,17 +54,19 @@ sub Run {
         );
 
         $UploadCacheObject->FormIDAddFile(
-            FormID      => $Self->{FormID},
+            FormID      => $GetParam{FormID},
             Disposition => 'attachment',
             %UploadStuff,
         );
 
-        # get all attachments meta data
+        # Get all attachments meta data
         my @Attachments = $UploadCacheObject->FormIDGetAllFilesMeta(
-            FormID => $Self->{FormID},
+            FormID => $GetParam{FormID},
         );
 
         my @AttachmentData;
+
+        my $PreviewContentTypes = $ConfigObject->Get('Attachment')->{PreviewContentTypes} || {};
 
         ATTACHMENT:
         for my $Attachment (@Attachments) {
@@ -83,6 +78,12 @@ sub Run {
             $Attachment->{HumanReadableDataSize} = $LayoutObject->HumanReadableDataSize(
                 Size => $Attachment->{Filesize},
             );
+
+            # Add preview flag if content type is in the preview content types list.
+            # This is used to determine if the attachment can be previewed in the UI.
+            if ( $Attachment->{ContentType} && $PreviewContentTypes->{ $Attachment->{ContentType} } ) {
+                $Attachment->{Preview} = 1;
+            }
 
             push @AttachmentData, $Attachment;
         }
@@ -111,7 +112,7 @@ sub Run {
         }
 
         my @Attachments = $UploadCacheObject->FormIDGetAllFilesData(
-            FormID => $Self->{FormID},
+            FormID => $GetParam{FormID},
         );
 
         ATTACHMENT:
@@ -144,7 +145,7 @@ sub Run {
         }
 
         my @Attachments = $UploadCacheObject->FormIDGetAllFilesData(
-            FormID => $Self->{FormID},
+            FormID => $GetParam{FormID},
         );
 
         ATTACHMENT:
@@ -177,43 +178,47 @@ sub Run {
     }
     elsif ( $Self->{Subaction} eq 'Delete' ) {
 
-        my $Return;
-        my $AttachmentFileID = $ParamObject->GetParam( Param => 'FileID' ) || '';
+        NEEDED:
+        for my $Needed (qw(FileID FormID)) {
+            next NEEDED if defined $GetParam{$Needed};
 
-        if ( !$AttachmentFileID ) {
-            $Return->{Message} = $LayoutObject->{LanguageObject}->Translate(
-                'Error: the file could not be deleted properly. Please contact your administrator (missing FileID).'
+            return $LayoutObject->ErrorScreen(
+                Message => $LayoutObject->{LanguageObject}
+                    ->Translate( '%s is missing. The file could not be deleted properly.', $Needed ),
+                Comment => Translatable('Please contact the administrator.'),
             );
         }
-        else {
 
-            my $DeleteAttachment = $UploadCacheObject->FormIDRemoveFile(
-                FormID => $Self->{FormID},
-                FileID => $AttachmentFileID,
+        my $DeleteAttachment = $UploadCacheObject->FormIDRemoveFile(
+            FormID => $GetParam{FormID},
+            FileID => $GetParam{FileID},
+        );
+
+        my $Return = {
+            Message => 'Error',
+            Data    => [],
+        };
+        if ($DeleteAttachment) {
+
+            my @Attachments = $UploadCacheObject->FormIDGetAllFilesMeta(
+                FormID => $GetParam{FormID},
             );
 
-            if ($DeleteAttachment) {
+            my @AttachmentData;
 
-                my @Attachments = $UploadCacheObject->FormIDGetAllFilesMeta(
-                    FormID => $Self->{FormID},
-                );
+            ATTACHMENT:
+            for my $Attachment (@Attachments) {
 
-                my @AttachmentData;
+                # Hide inline attachments from the display. Please see bug#13498 for more information.
+                next ATTACHMENT if $Attachment->{Disposition} eq 'inline';
 
-                ATTACHMENT:
-                for my $Attachment (@Attachments) {
-
-                    # Hide inline attachments from the display. Please see bug#13498 for more information.
-                    next ATTACHMENT if $Attachment->{Disposition} eq 'inline';
-
-                    push @AttachmentData, $Attachment;
-                }
-
-                $Return = {
-                    Message => 'Success',
-                    Data    => \@AttachmentData,
-                };
+                push @AttachmentData, $Attachment;
             }
+
+            $Return = {
+                Message => 'Success',
+                Data    => \@AttachmentData,
+            };
         }
 
         return $LayoutObject->Attachment(

@@ -167,9 +167,11 @@
                             <td class="Center"><a class="table-icon-hover-md" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=AutoResponseExport;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]"><i class="fa fa-download"></i><span class="InvisibleText">[% Translate("Export") | html %]</span></a></td>
                             <td class="Center"><a class="table-icon-hover-md" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=AutoResponseCopy;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]"><i class="fa fa-copy"></i><span class="InvisibleText">[% Translate("Copy") | html %]</span></a></td>
                             <td class="Center">
-                                <a class="TrashCan AutoResponseDelete table-icon-hover-md" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Delete;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Delete") | html %]">
+[% RenderBlockStart("DeleteLink") %]
+                                <a class="TrashCan AutoResponseDelete table-icon-hover-md" href="#" data-query-string="Action=[% Env("Action") %];Subaction=Delete;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Delete") | html %]">
                                     <i class="fa fa-trash-o"></i>
                                 </a>
+[% RenderBlockEnd("DeleteLink") %]
                             </td>
                         </tr>
 [% RenderBlockEnd("OverviewResultRow") %]
@@ -178,6 +180,12 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+        <div class="Hidden" id="DeleteAutoResponseDialogContainer">
+            <div id="DeleteAutoResponseDialog" class="InnerContent GenericInterfaceDialog">
+                <p class="Center Spacing">[% Translate("Do you really want to delete this %s?", Translate('auto response')) | html %]</p>
+                <div class="SpacingTop"></div>
             </div>
         </div>
 [% RenderBlockEnd("OverviewResult") %]

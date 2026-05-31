@@ -232,7 +232,6 @@ Core.Agent.Admin.SystemConfiguration = (function (TargetNS) {
             return false;
         });
     };
-
     /**
      * @public
      * @name InitDialogReset
@@ -749,6 +748,7 @@ Core.Agent.Admin.SystemConfiguration = (function (TargetNS) {
     TargetNS.Init = function () {
 
         TargetNS.InitDialogDeployment();
+        Core.Agent.Admin.InitDialogQuickDeploy();
         Core.SystemConfiguration.InitConfigurationTree('AdminSystemConfigurationGroup');
         TargetNS.InitClipboard();
         TargetNS.InitFavourites();

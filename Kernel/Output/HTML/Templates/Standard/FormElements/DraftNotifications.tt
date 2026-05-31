@@ -6,34 +6,41 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+<!-- start DraftNotifications -->
 
 [% IF Data.FormDraftTitle %]
-<div class="MessageBox Info">
-    <p>
+    [% SET DraftMessage = "" %]
     [% IF Data.FormDraftMeta.ChangeTime == Data.FormDraftMeta.CreateTime %]
-        [% Translate("You have loaded the draft \"%s\".", Data.FormDraftTitle) | html %]
+        [% SET DraftMessage = Translate("You have loaded the draft \"%s\".", Data.FormDraftTitle) %]
     [% ELSE %]
         [% IF Data.FormDraftMeta.ChangeBy == Env('UserID') %]
-            [% Translate("You have loaded the draft \"%s\". You last changed it %s.", Data.FormDraftTitle, Localize(Data.FormDraftMeta.ChangeTime, 'TimeShort') ) | html %]
+            [% SET DraftMessage = Translate("You have loaded the draft \"%s\". You last changed it %s.", Data.FormDraftTitle, Localize(Data.FormDraftMeta.ChangeTime, 'TimeShort')) %]
         [% ELSE %]
-            [% Translate("You have loaded the draft \"%s\". It was last changed %s by %s.", Data.FormDraftTitle, Localize(Data.FormDraftMeta.ChangeTime, 'TimeShort'), Data.FormDraftMeta.ChangeByName ) | html %]
+            [% SET DraftMessage = Translate("You have loaded the draft \"%s\". It was last changed %s by %s.", Data.FormDraftTitle, Localize(Data.FormDraftMeta.ChangeTime, 'TimeShort'), Data.FormDraftMeta.ChangeByName) %]
         [% END %]
     [% END %]
-    </p>
-</div>
-[% ELSE %]
-    [% IF Data.FormDraftForAction %]
-    <div class="MessageBox Warning">
-        <p>
-            [% Translate("Please note that you have already one or more saved drafts for this action.") | html %]
-        </p>
-    </div>
-    [% END %]
+
+    [% INCLUDE "Modules/Alert.tt"
+        Data = {
+            message = DraftMessage,
+            type = "notice"
+        }
+    %]
+[% ELSIF Data.FormDraftForAction %]
+    [% INCLUDE "Modules/Alert.tt"
+        Data = {
+            message = Translate("Please note that you have already one or more saved drafts for this action."),
+            type = "warning"
+        }
+    %]
 [% END %]
+
 [% IF Data.FormDraftOutdated %]
-<div class="MessageBox Warning">
-    <p>
-        [% Translate("Please note that this draft is outdated because the ticket was modified since this draft was created.") | html %]
-    </p>
-</div>
+    [% INCLUDE "Modules/Alert.tt"
+        Data = {
+            message = Translate("Please note that this draft is outdated because the ticket was modified since this draft was created."),
+            type = "warning"
+        }
+    %]
 [% END %]
+<!-- end DraftNotifications -->

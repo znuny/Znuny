@@ -14,7 +14,7 @@ use strict;
 use warnings;
 use utf8;
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
@@ -59,15 +59,22 @@ sub Run {
     if ( IsArrayRefWithData($Mentions) ) {
         my @MentionedTicketIDs = map { $_->{TicketID} } @{$Mentions};
 
+        my $TicketFrontendConfig = $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Frontend::AgentTicketMentionView')
+            // {};
+        my $UserIDForSearch = $TicketFrontendConfig->{TicketSearchWithAdminUser} ? 1 : $Self->{UserID};
+
         # get mention count of unseen mentions
         $NewMentionsCount = $TicketObject->TicketSearch(
             Result           => 'COUNT',
             TicketID         => \@MentionedTicketIDs,
-            UserID           => 1,
+            UserID           => $UserIDForSearch,
             TicketFlagUserID => $Self->{UserID},
             TicketFlag       => {
                 MentionSeen => 0,
-            }
+            },
+            NotTicketFlag => {
+                Seen => 1,
+            },
         );
 
         # get mention count of all mentions

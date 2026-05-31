@@ -15,7 +15,7 @@ use warnings;
 use Kernel::System::DateTime;
 use Kernel::System::Email;
 use Kernel::System::VariableCheck qw(IsArrayRefWithData IsHashRefWithData);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -241,6 +241,19 @@ sub Run {
             Raw   => 1
         ) || '';
 
+        #
+        # SAML
+        #
+        my $IsSAMLLogin  = $ParamObject->GetParam( Param => 'IsSAMLLogin' );
+        my $Count        = $ParamObject->GetParam( Param => 'Count' ) // '';
+        my $SAMLResponse = $ParamObject->GetParam( Param => 'SAMLResponse' );
+
+        # The request ID stored in the cookie. Will be evaluated when the response is checked.
+        my $ExpectedSAMLRequestID;
+        if ( $IsSAMLLogin && $SAMLResponse ) {
+            $ExpectedSAMLRequestID = $ParamObject->GetCookie( Key => "CustomerUserSAMLRequestID$Count" );
+        }
+
         # create AuthObject
         my $AuthObject = $Kernel::OM->Get('Kernel::System::CustomerAuth');
 
@@ -249,6 +262,12 @@ sub Run {
             User           => $PostUser,
             Pw             => $PostPw,
             TwoFactorToken => $PostTwoFactorToken,
+
+            # The following are SAML specific
+            IsSAMLLogin           => $IsSAMLLogin,
+            Count                 => $Count,
+            SAMLResponse          => $SAMLResponse,
+            ExpectedSAMLRequestID => $ExpectedSAMLRequestID,
         );
 
         my $Expires = '+' . $ConfigObject->Get('SessionMaxTime') . 's';
@@ -769,11 +788,16 @@ sub Run {
             return;
         }
 
+        my $UserTitleMandatory;
+
         # get params
         my %GetParams;
         for my $Entry ( @{ $ConfigObject->Get('CustomerUser')->{Map} } ) {
-            $GetParams{ $Entry->[0] } = $ParamObject->GetParam( Param => $Entry->[1] )
+            $GetParams{ $Entry->[0] } = $ParamObject->GetParam( Param => $Entry->[0] )
                 || '';
+            if ( !defined $UserTitleMandatory && $Entry->[0] && $Entry->[0] eq 'UserTitle' ) {
+                $UserTitleMandatory = $Entry->[4];
+            }
         }
         $GetParams{ValidID} = 1;
 
@@ -800,13 +824,14 @@ sub Run {
 
             $LayoutObject->Print(
                 Output => \$LayoutObject->CustomerLogin(
-                    Title => 'Login',
+                    Title   => 'Login',
                     Message =>
                         Translatable('This e-mail address already exists. Please log in or reset your password.'),
-                    UserTitle     => $GetParams{UserTitle},
-                    UserFirstname => $GetParams{UserFirstname},
-                    UserLastname  => $GetParams{UserLastname},
-                    UserEmail     => $GetParams{UserEmail},
+                    UserTitle          => $GetParams{UserTitle},
+                    UserFirstname      => $GetParams{UserFirstname},
+                    UserLastname       => $GetParams{UserLastname},
+                    UserEmail          => $GetParams{UserEmail},
+                    UserTitleMandatory => $UserTitleMandatory,
                 ),
             );
             return;
@@ -826,7 +851,7 @@ sub Run {
             if ($@) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         $LayoutObject->{LanguageObject}->Translate(
                         'The customer panel mail address whitelist contains the invalid regular expression $WhitelistEntry, please check and correct it.'
                         ),
@@ -842,7 +867,7 @@ sub Run {
             if ($@) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         $LayoutObject->{LanguageObject}->Translate(
                         'The customer panel mail address blacklist contains the invalid regular expression $BlacklistEntry, please check and correct it.'
                         ),
@@ -863,13 +888,14 @@ sub Run {
 
             $LayoutObject->Print(
                 Output => \$LayoutObject->CustomerLogin(
-                    Title => 'Login',
+                    Title   => 'Login',
                     Message =>
                         Translatable('This email address is not allowed to register. Please contact support staff.'),
-                    UserTitle     => $GetParams{UserTitle},
-                    UserFirstname => $GetParams{UserFirstname},
-                    UserLastname  => $GetParams{UserLastname},
-                    UserEmail     => $GetParams{UserEmail},
+                    UserTitle          => $GetParams{UserTitle},
+                    UserFirstname      => $GetParams{UserFirstname},
+                    UserLastname       => $GetParams{UserLastname},
+                    UserEmail          => $GetParams{UserEmail},
+                    UserTitleMandatory => $UserTitleMandatory,
                 ),
             );
 
@@ -897,12 +923,13 @@ sub Run {
 
             $LayoutObject->Print(
                 Output => \$LayoutObject->CustomerLogin(
-                    Title         => 'Login',
-                    Message       => Translatable('Customer user can\'t be added!'),
-                    UserTitle     => $GetParams{UserTitle},
-                    UserFirstname => $GetParams{UserFirstname},
-                    UserLastname  => $GetParams{UserLastname},
-                    UserEmail     => $GetParams{UserEmail},
+                    Title              => 'Login',
+                    Message            => Translatable('Customer user can\'t be added!'),
+                    UserTitle          => $GetParams{UserTitle},
+                    UserFirstname      => $GetParams{UserFirstname},
+                    UserLastname       => $GetParams{UserLastname},
+                    UserEmail          => $GetParams{UserEmail},
+                    UserTitleMandatory => $UserTitleMandatory,
                 ),
             );
             return;
@@ -913,7 +940,7 @@ sub Run {
         my $Body        = $ConfigObject->Get('CustomerPanelBodyNewAccount')
             || 'No Config Option found!';
         my $Subject = $ConfigObject->Get('CustomerPanelSubjectNewAccount')
-            || 'New OTRS Account!';
+            || 'New Znuny Account!';
         for my $Key ( sort keys %GetParams ) {
             $Body =~ s/<OTRS_$Key>/$GetParams{$Key}/gi;
         }
@@ -960,10 +987,11 @@ sub Run {
         # login screen
         $LayoutObject->Print(
             Output => \$LayoutObject->CustomerLogin(
-                Title       => 'Login',
-                Message     => $AccountCreatedMessage,
-                User        => $GetParams{UserLogin},
-                MessageType => 'Success',
+                Title              => 'Login',
+                Message            => $AccountCreatedMessage,
+                User               => $GetParams{UserLogin},
+                MessageType        => 'Success',
+                UserTitleMandatory => $UserTitleMandatory,
             ),
         );
         return 1;
@@ -997,10 +1025,20 @@ sub Run {
             return;
         }
 
+        my $UserTitleMandatory;
+        ENTRY:
+        for my $Entry ( @{ $ConfigObject->Get('CustomerUser')->{Map} } ) {
+            if ( $Entry->[0] && $Entry->[0] eq 'UserTitle' ) {
+                $UserTitleMandatory = $Entry->[4];
+                last ENTRY;
+            }
+        }
+
         # login screen
         $LayoutObject->Print(
             Output => \$LayoutObject->CustomerLogin(
-                Title => 'Login',
+                Title              => 'Login',
+                UserTitleMandatory => $UserTitleMandatory,
                 %Param,
             ),
         );
@@ -1060,7 +1098,7 @@ sub Run {
             # show login
             $LayoutObject->Print(
                 Output => \$LayoutObject->CustomerLogin(
-                    Title => 'Login',
+                    Title   => 'Login',
                     Message =>
                         $LayoutObject->{LanguageObject}->Translate( $SessionObject->SessionIDErrorMessage() ),
                     %Param,
@@ -1108,7 +1146,7 @@ sub Run {
             my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Module Kernel::Modules::$Param{Action} not registered in Kernel/Config.pm!",
             );
             $LayoutObject->CustomerFatalError(
@@ -1365,6 +1403,10 @@ sub Run {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _CheckModulePermission()
 
 module permission check
@@ -1458,10 +1500,6 @@ sub _UserTimeZoneGet {
 
     return $UserTimeZone;
 }
-
-=end Internal:
-
-=cut
 
 sub DESTROY {
     my $Self = shift;

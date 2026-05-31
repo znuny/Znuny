@@ -159,7 +159,6 @@ sub Run {
     # This must be done before creating the layout object,
     # because otherwise the action parameter is not passed and then
     # the loader can not load module specific JavaScript and CSS
-    # For details see bug: http://bugs.otrs.org/show_bug.cgi?id=6471
     my %CommonObjectParam = %{ $ConfigObject->Get('PublicFrontend::CommonParam') };
     for my $Key ( sort keys %CommonObjectParam ) {
         $Param{$Key} = $ParamObject->GetParam( Param => $Key ) || $CommonObjectParam{$Key};
@@ -205,7 +204,7 @@ sub Run {
     if ( !$ModuleReg ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Module Kernel::Modules::$Param{Action} not registered in Kernel/Config.pm!",
         );
         $LayoutObject->CustomerFatalError(

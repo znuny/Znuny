@@ -70,8 +70,8 @@ sub Auth {
     # return on no user
     if ( !$User ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'notice',
-            Message =>
+            Priority => 'debug',
+            Message  =>
                 "User: No \$ENV{REMOTE_USER} or \$ENV{HTTP_REMOTE_USER} !(REMOTE_ADDR: $RemoteAddr).",
         );
         return;

@@ -14,7 +14,7 @@ use warnings;
 use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Mail::Address;
 
 our $ObjectManagerDisabled = 1;
@@ -197,13 +197,14 @@ sub Run {
         To Cc Bcc Subject Body InReplyTo References ResponseID ReplyArticleID StateID ArticleID
         IsVisibleForCustomerPresent IsVisibleForCustomer TimeUnits Year Month Day Hour Minute FormID ReplyAll
         FormDraftID Title
+        ServiceID SLAID TypeID NewPriorityID
         )
         )
     {
         $GetParam{$Needed} = $ParamObject->GetParam( Param => $Needed );
     }
 
-    # Make sure sender is correct one. See bug#14872 ( https://bugs.otrs.org/show_bug.cgi?id=14872 ).
+    # Make sure sender is correct one.
     $GetParam{From} = $Kernel::OM->Get('Kernel::System::TemplateGenerator')->Sender(
         QueueID => $Ticket{QueueID},
         UserID  => $Self->{UserID},
@@ -701,6 +702,50 @@ sub Run {
             $Error{BodyInvalid} = ' ServerError';
         }
 
+        # check type
+        if (
+            ( $ConfigObject->Get('Ticket::Type') )
+            &&
+            ( $Config->{TicketType} ) &&
+            ( !$GetParam{TypeID} )
+            )
+        {
+            $Error{'TypeIDInvalid'} = ' ServerError';
+        }
+
+        # check service
+        if (
+            $ConfigObject->Get('Ticket::Service')
+            && $Config->{Service}
+            && $GetParam{SLAID}
+            && !$GetParam{ServiceID}
+            )
+        {
+            $Error{'ServiceInvalid'} = ' ServerError';
+        }
+
+        # check mandatory service
+        if (
+            $ConfigObject->Get('Ticket::Service')
+            && $Config->{Service}
+            && $Config->{ServiceMandatory}
+            && !$GetParam{ServiceID}
+            )
+        {
+            $Error{'ServiceInvalid'} = ' ServerError';
+        }
+
+        # check mandatory SLA
+        if (
+            $ConfigObject->Get('Ticket::Service')
+            && $Config->{Service}
+            && $Config->{SLAMandatory}
+            && !$GetParam{SLAID}
+            )
+        {
+            $Error{'SLAInvalid'} = ' ServerError';
+        }
+
         # check time units
         if (
             $ConfigObject->Get('Ticket::Frontend::AccountTime')
@@ -844,7 +889,7 @@ sub Run {
                     DynamicFieldConfig   => $DynamicFieldConfig,
                     PossibleValuesFilter => $PossibleValuesFilter,
                     ParamObject          => $ParamObject,
-                    Mandatory =>
+                    Mandatory            =>
                         $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
                 );
 
@@ -869,13 +914,13 @@ sub Run {
                 $DynamicFieldBackendObject->EditFieldRender(
                 DynamicFieldConfig   => $DynamicFieldConfig,
                 PossibleValuesFilter => $PossibleValuesFilter,
-                Mandatory =>
+                Mandatory            =>
                     $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
-                ServerError  => $ValidationResult->{ServerError}  || '',
-                ErrorMessage => $ValidationResult->{ErrorMessage} || '',
-                LayoutObject => $LayoutObject,
-                ParamObject  => $ParamObject,
-                AJAXUpdate   => 1,
+                ServerError     => $ValidationResult->{ServerError}  || '',
+                ErrorMessage    => $ValidationResult->{ErrorMessage} || '',
+                LayoutObject    => $LayoutObject,
+                ParamObject     => $ParamObject,
+                AJAXUpdate      => 1,
                 UpdatableFields => $Self->_GetFieldsToUpdate(),
                 );
         }
@@ -1082,6 +1127,45 @@ sub Run {
             UserID    => $Self->{UserID},
         );
 
+        # set new type
+        if ( $ConfigObject->Get('Ticket::Type') && $Config->{TicketType} ) {
+            if ( $GetParam{TypeID} ) {
+                $TicketObject->TicketTypeSet(
+                    TypeID   => $GetParam{TypeID},
+                    TicketID => $Self->{TicketID},
+                    UserID   => $Self->{UserID},
+                );
+            }
+        }
+
+        # set new service
+        if ( $ConfigObject->Get('Ticket::Service') && $Config->{Service} ) {
+            if ( defined $GetParam{ServiceID} ) {
+                $TicketObject->TicketServiceSet(
+                    ServiceID      => $GetParam{ServiceID},
+                    TicketID       => $Self->{TicketID},
+                    CustomerUserID => $Ticket{CustomerUserID},
+                    UserID         => $Self->{UserID},
+                );
+            }
+            if ( defined $GetParam{SLAID} ) {
+                $TicketObject->TicketSLASet(
+                    SLAID    => $GetParam{SLAID},
+                    TicketID => $Self->{TicketID},
+                    UserID   => $Self->{UserID},
+                );
+            }
+        }
+
+        # set new priority
+        if ( $Config->{Priority} && $GetParam{NewPriorityID} ) {
+            $TicketObject->TicketPrioritySet(
+                TicketID   => $Self->{TicketID},
+                PriorityID => $GetParam{NewPriorityID},
+                UserID     => $Self->{UserID},
+            );
+        }
+
         # should I set an unlock?
         if ( $StateData{TypeName} =~ /^close/i ) {
             $TicketObject->TicketLockSet(
@@ -1225,6 +1309,53 @@ sub Run {
             %GetParam,
         );
 
+        my $TreeView = 0;
+        if ( $ConfigObject->Get('Ticket::Frontend::ListType') eq 'tree' ) {
+            $TreeView = 1;
+        }
+
+        my $Types = $Self->_GetTypes(
+            %GetParam,
+            CustomerUserID => $Ticket{CustomerUserID},
+            QueueID        => $GetParam{NewQueueID}  || $Ticket{QueueID},
+            StateID        => $GetParam{NextStateID} || $Ticket{StateID},
+        );
+
+        my $ServiceID;
+
+        # get service value from param if field is visible in the screen
+        if ( $ConfigObject->Get('Ticket::Service') && $Config->{Service} ) {
+            $ServiceID = $GetParam{ServiceID} || '';
+        }
+
+        # otherwise use ticket service value since it can't be changed
+        elsif ( $ConfigObject->Get('Ticket::Service') ) {
+            $ServiceID = $Ticket{ServiceID} || '';
+        }
+
+        my $Services = $Self->_GetServices(
+            %GetParam,
+            CustomerUserID => $Ticket{CustomerUserID},
+            QueueID        => $Ticket{QueueID},
+            StateID        => $GetParam{NextStateID} || $Ticket{StateID},
+        );
+
+        # reset previous ServiceID to reset SLA-List if no service is selected
+        if ( !defined $ServiceID || !$Services->{$ServiceID} ) {
+            $ServiceID = '';
+        }
+        my $SLAs = $Self->_GetSLAs(
+            %GetParam,
+            CustomerUserID => $Ticket{CustomerUserID},
+            QueueID        => $GetParam{NewQueueID}  || $Ticket{QueueID},
+            StateID        => $GetParam{NextStateID} || $Ticket{StateID},
+            ServiceID      => $ServiceID,
+        );
+
+        my $Priorities = $Self->_GetPriorities(
+            %GetParam,
+        );
+
         # update Dynamic Fields Possible Values via AJAX
         my @DynamicFieldAJAX;
 
@@ -1295,6 +1426,39 @@ sub Run {
                     PossibleNone => 1,
                     Max          => 100,
                 },
+                {
+                    Name         => 'TypeID',
+                    Data         => $Types,
+                    SelectedID   => $GetParam{TypeID},
+                    PossibleNone => 1,
+                    Translation  => 0,
+                    Max          => 100,
+                },
+                {
+                    Name         => 'NewPriorityID',
+                    Data         => $Priorities,
+                    SelectedID   => $GetParam{NewPriorityID},
+                    PossibleNone => 0,
+                    Translation  => 1,
+                    Max          => 100,
+                },
+                {
+                    Name         => 'ServiceID',
+                    Data         => $Services,
+                    SelectedID   => $GetParam{ServiceID},
+                    PossibleNone => 1,
+                    Translation  => 0,
+                    TreeView     => $TreeView,
+                    Max          => 100,
+                },
+                {
+                    Name         => 'SLAID',
+                    Data         => $SLAs,
+                    SelectedID   => $GetParam{SLAID},
+                    PossibleNone => 1,
+                    Translation  => 0,
+                    Max          => 100,
+                },
                 @DynamicFieldAJAX,
 
             ],
@@ -1337,11 +1501,6 @@ sub Run {
         );
     }
     else {
-        my $Output = $LayoutObject->Header(
-            Value     => $Ticket{TicketNumber},
-            Type      => 'Small',
-            BodyClass => 'Popup',
-        );
 
         # get std attachment object
         my $StdAttachmentObject = $Kernel::OM->Get('Kernel::System::StdAttachment');
@@ -1405,7 +1564,7 @@ sub Run {
             last ARTICLEMETADATA;
         }
 
-        # Merge ticket data with article data, see bug#13995 (https://bugs.otrs.org/show_bug.cgi?id=13995).
+        # Merge ticket data with article data.
         %Data = ( %Ticket, %Data );
 
         # If article is not a MIMEBase article, get customer recipients from the backend.
@@ -1631,6 +1790,12 @@ sub Run {
             $Data{Cc}  = '';
             $Data{Bcc} = '';
         }
+
+        my $Output = $LayoutObject->Header(
+            Value     => $Ticket{TicketNumber},
+            Type      => 'Small',
+            BodyClass => 'Popup',
+        );
 
         # use customer database email
         # do not add customer email to cc, if article is visible for customer
@@ -1869,7 +2034,7 @@ sub Run {
                 DynamicFieldConfig   => $DynamicFieldConfig,
                 PossibleValuesFilter => $PossibleValuesFilter,
                 Value                => $Value,
-                Mandatory =>
+                Mandatory            =>
                     $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
                 LayoutObject    => $LayoutObject,
                 ParamObject     => $ParamObject,
@@ -2007,6 +2172,167 @@ sub _Mask {
         },
     );
 
+    # get ticket object
+    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+
+    # types
+    if ( $ConfigObject->Get('Ticket::Type') && $Config->{TicketType} ) {
+
+        my %Type = $TicketObject->TicketTypeList(
+            %Param,
+            Action => $Self->{Action},
+            UserID => $Self->{UserID},
+        );
+
+        $Param{TypeStrg} = $LayoutObject->BuildSelection(
+            Class        => 'Validate_Required Modernize ' . ( $Param{Errors}->{TypeIDInvalid} || ' ' ),
+            Data         => \%Type,
+            Name         => 'TypeID',
+            SelectedID   => $Param{TypeID},
+            PossibleNone => 1,
+            Sort         => 'AlphanumericValue',
+            Translation  => 0,
+        );
+        $LayoutObject->Block(
+            Name => 'Type',
+            Data => {%Param},
+        );
+    }
+
+    # services
+    if ( $ConfigObject->Get('Ticket::Service') && $Config->{Service} ) {
+        my %Ticket = $TicketObject->TicketGet(
+            TicketID      => $Param{TicketID},
+            DynamicFields => 0,
+            UserID        => $Self->{UserID},
+        );
+
+        my $TreeView = 0;
+        if ( $ConfigObject->Get('Ticket::Frontend::ListType') eq 'tree' ) {
+            $TreeView = 1;
+        }
+
+        my $Services = $Self->_GetServices(
+            %Param,
+            Action         => $Self->{Action},
+            CustomerUserID => $Ticket{CustomerUserID},
+            UserID         => $Self->{UserID},
+        );
+
+        # reset previous ServiceID to reset SLA-List if no service is selected
+        if ( !$Param{ServiceID} || !$Services->{ $Param{ServiceID} } ) {
+            $Param{ServiceID} = '';
+        }
+
+        $LayoutObject->Block(
+            Name => 'ServiceCard',
+        );
+
+        if ( $Config->{ServiceMandatory} ) {
+
+            $Param{ServiceStrg} = $LayoutObject->BuildSelection(
+                Data         => $Services,
+                Name         => 'ServiceID',
+                SelectedID   => $Param{ServiceID},
+                Class        => 'Validate_Required Modernize ' . ( $Param{ServiceInvalid} || ' ' ),
+                PossibleNone => 1,
+                TreeView     => $TreeView,
+                Sort         => 'TreeView',
+                Translation  => 0,
+                Max          => 200,
+            );
+
+            $LayoutObject->Block(
+                Name => 'ServiceMandatory',
+                Data => {%Param},
+            );
+        }
+        else {
+
+            $Param{ServiceStrg} = $LayoutObject->BuildSelection(
+                Data         => $Services,
+                Name         => 'ServiceID',
+                SelectedID   => $Param{ServiceID},
+                Class        => 'Modernize ' . ( $Param{ServiceInvalid} || ' ' ),
+                PossibleNone => 1,
+                TreeView     => $TreeView,
+                Sort         => 'TreeView',
+                Translation  => 0,
+                Max          => 200,
+            );
+
+            $LayoutObject->Block(
+                Name => 'Service',
+                Data => {%Param},
+            );
+        }
+
+        my %SLA = $TicketObject->TicketSLAList(
+            %Param,
+            Action => $Self->{Action},
+            UserID => $Self->{UserID},
+        );
+
+        if ( $Config->{SLAMandatory} ) {
+
+            $Param{SLAStrg} = $LayoutObject->BuildSelection(
+                Data         => \%SLA,
+                Name         => 'SLAID',
+                SelectedID   => $Param{SLAID},
+                Class        => 'Validate_Required Modernize ' . ( $Param{SLAInvalid} || ' ' ),
+                PossibleNone => 1,
+                Sort         => 'AlphanumericValue',
+                Translation  => 0,
+                Max          => 200,
+            );
+
+            $LayoutObject->Block(
+                Name => 'SLAMandatory',
+                Data => {%Param},
+            );
+        }
+        else {
+
+            $Param{SLAStrg} = $LayoutObject->BuildSelection(
+                Data         => \%SLA,
+                Name         => 'SLAID',
+                SelectedID   => $Param{SLAID},
+                Class        => 'Modernize',
+                PossibleNone => 1,
+                Sort         => 'AlphanumericValue',
+                Translation  => 0,
+                Max          => 200,
+            );
+
+            $LayoutObject->Block(
+                Name => 'SLA',
+                Data => {%Param},
+            );
+        }
+    }
+
+    # get priority
+    if ( $Config->{Priority} ) {
+        my %PriorityList = $TicketObject->TicketPriorityList(
+            UserID   => $Self->{UserID},
+            TicketID => $Self->{TicketID},
+            Action   => $Self->{Action},
+        );
+
+        my $SelectedPriorityID = $Param{NewPriorityID} // $Param{PriorityID};
+        $Param{PriorityStrg} = $LayoutObject->BuildSelection(
+            Name        => 'NewPriorityID',
+            Data        => \%PriorityList,
+            SelectedID  => $SelectedPriorityID,
+            Class       => 'Modernize',
+            Translation => 1,
+        );
+        $LayoutObject->Block(
+            Name => 'Priority',
+            Data => {%Param},
+        );
+    }
+
     # prepare errors!
     if ( $Param{Errors} ) {
         for my $Error ( sort keys %{ $Param{Errors} } ) {
@@ -2029,7 +2355,7 @@ sub _Mask {
         YearPeriodPast       => 0,
         YearPeriodFuture     => 5,
         DiffTime             => $ConfigObject->Get('Ticket::Frontend::PendingDiffTime') || 0,
-        Class                => $Param{Errors}->{DateInvalid} || ' ',
+        Class                => $Param{Errors}->{DateInvalid}                           || ' ',
         Validate             => 1,
         ValidateDateInFuture => 1,
         Calendar             => $Calendar,
@@ -2231,14 +2557,29 @@ sub _Mask {
         $Param{To} = '';
     }
 
-    $LayoutObject->Block(
-        Name => $Param{TicketBackType},
-        Data => {
+    if ( $Param{TicketBackType} eq 'TicketBackUndo' ) {
+        $LayoutObject->Block(
+            Name => 'PropertiesLock',
+            Data => {
+                %Param,
+            },
+        );
 
-            #            FormID => $Self->{FormID},
-            %Param,
-        },
-    );
+        $LayoutObject->Block(
+            Name => 'PropertiesLockNotify',
+            Data => {
+                %Param,
+            },
+        );
+    }
+    else {
+        $LayoutObject->Block(
+            Name => 'TicketBack',
+            Data => {
+                %Param,
+            },
+        );
+    }
 
     # get the dynamic fields for this screen
     my $DynamicField = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldListGet(
@@ -2314,6 +2655,8 @@ sub _Mask {
         );
     }
 
+    my $PreviewContentTypes = $ConfigObject->Get('Attachment')->{PreviewContentTypes} || {};
+
     # show attachments
     ATTACHMENT:
     for my $Attachment ( @{ $Param{Attachments} } ) {
@@ -2325,6 +2668,12 @@ sub _Mask {
             )
         {
             next ATTACHMENT;
+        }
+
+        # Add preview flag if content type is in the preview content types list.
+        # This is used to determine if the attachment can be previewed in the UI.
+        if ( $Attachment->{ContentType} && $PreviewContentTypes->{ $Attachment->{ContentType} } ) {
+            $Attachment->{Preview} = 1;
         }
 
         push @{ $Param{AttachmentList} }, $Attachment;
@@ -2440,6 +2789,91 @@ sub _GetFieldsToUpdate {
     }
 
     return \@UpdatableFields;
+}
+
+sub _GetTypes {
+    my ( $Self, %Param ) = @_;
+
+    # get type
+    my %Type;
+    if ( $Param{QueueID} || $Param{TicketID} ) {
+        %Type = $Kernel::OM->Get('Kernel::System::Ticket')->TicketTypeList(
+            %Param,
+            Action => $Self->{Action},
+            UserID => $Self->{UserID},
+        );
+    }
+    return \%Type;
+}
+
+sub _GetServices {
+    my ( $Self, %Param ) = @_;
+
+    # get service
+    my %Service;
+
+    # get options for default services for unknown customers
+    my $DefaultServiceUnknownCustomer
+        = $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Service::Default::UnknownCustomer');
+
+    # check if no CustomerUserID is selected
+    # if $DefaultServiceUnknownCustomer = 0 leave CustomerUserID empty, it will not get any services
+    # if $DefaultServiceUnknownCustomer = 1 set CustomerUserID to get default services
+    if ( !$Param{CustomerUserID} && $DefaultServiceUnknownCustomer ) {
+        $Param{CustomerUserID} = '<DEFAULT>';
+    }
+
+    # get service list
+    if ( $Param{CustomerUserID} ) {
+        %Service = $Kernel::OM->Get('Kernel::System::Ticket')->TicketServiceList(
+            %Param,
+            Action => $Self->{Action},
+            UserID => $Self->{UserID},
+        );
+    }
+    return \%Service;
+}
+
+sub _GetSLAs {
+    my ( $Self, %Param ) = @_;
+
+    # if non set customers can get default services then they should also be able to get the SLAs
+    #  for those services (this works during ticket creation).
+    # if no CustomerUserID is set, TicketSLAList will complain during AJAX updates as UserID is not
+    #  passed. See bug 11147.
+
+    # get options for default services for unknown customers
+    my $DefaultServiceUnknownCustomer
+        = $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Service::Default::UnknownCustomer');
+
+    # check if no CustomerUserID is selected
+    # if $DefaultServiceUnknownCustomer = 0 leave CustomerUserID empty, it will not get any services
+    # if $DefaultServiceUnknownCustomer = 1 set CustomerUserID to get default services
+    if ( !$Param{CustomerUserID} && $DefaultServiceUnknownCustomer ) {
+        $Param{CustomerUserID} = '<DEFAULT>';
+    }
+
+    my %SLA;
+    if ( $Param{ServiceID} ) {
+        %SLA = $Kernel::OM->Get('Kernel::System::Ticket')->TicketSLAList(
+            %Param,
+            Action => $Self->{Action},
+        );
+    }
+    return \%SLA;
+}
+
+sub _GetPriorities {
+    my ( $Self, %Param ) = @_;
+
+    my %Priorities = $Kernel::OM->Get('Kernel::System::Ticket')->TicketPriorityList(
+        %Param,
+        Action   => $Self->{Action},
+        UserID   => $Self->{UserID},
+        TicketID => $Self->{TicketID},
+    );
+
+    return \%Priorities;
 }
 
 1;

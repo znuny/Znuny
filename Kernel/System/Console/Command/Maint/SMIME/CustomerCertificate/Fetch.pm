@@ -26,7 +26,7 @@ sub Configure {
 
     $Self->Description('Fetch S/MIME certificates from customer backends.');
     $Self->AddOption(
-        Name => 'add-all',
+        Name        => 'add-all',
         Description =>
             "Add all found certificates from the customer backend into the system within the predefined search limit in customer backed (This operation might take some time).",
         Required   => 0,

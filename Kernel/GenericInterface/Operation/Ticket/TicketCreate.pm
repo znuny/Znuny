@@ -155,6 +155,13 @@ perform TicketCreate Operation. This will return the created ticket number.
                 },
 
                 # Signing and encryption, only used when ArticleSend is set to 1
+                EmailSecurity => {
+                    Backend     => 'PGP',                       # PGP or SMIME
+                    Method      => 'Detached',                  # Optional Detached or Inline (defaults to Detached)
+                    SignKey     => '81877F5E',                  # Optional
+                    EncryptKeys => [ '81877F5E', '3b630c80' ],  # Optional
+                },
+                # or:
                 Sign => {
                     Type    => 'PGP',
                     SubType => 'Inline|Detached',
@@ -587,7 +594,7 @@ sub Run {
         for my $DynamicFieldItem (@DynamicFieldList) {
             if ( !IsHashRefWithData($DynamicFieldItem) ) {
                 return {
-                    ErrorCode => 'TicketCreate.InvalidParameter',
+                    ErrorCode    => 'TicketCreate.InvalidParameter',
                     ErrorMessage =>
                         "TicketCreate: Ticket->DynamicField parameter is invalid!",
                 };
@@ -625,7 +632,7 @@ sub Run {
         for my $AttachmentItem (@AttachmentList) {
             if ( !IsHashRefWithData($AttachmentItem) ) {
                 return {
-                    ErrorCode => 'TicketCreate.InvalidParameter',
+                    ErrorCode    => 'TicketCreate.InvalidParameter',
                     ErrorMessage =>
                         "TicketCreate: Ticket->Attachment parameter is invalid!",
                 };
@@ -653,6 +660,10 @@ sub Run {
 }
 
 =begin Internal:
+
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
 
 =head2 _CheckTicket()
 
@@ -692,7 +703,7 @@ sub _CheckTicket {
 
     if ( !$Self->ValidateCustomer( %{$Ticket} ) ) {
         return {
-            ErrorCode => 'TicketCreate.InvalidParameter',
+            ErrorCode    => 'TicketCreate.InvalidParameter',
             ErrorMessage =>
                 "TicketCreate: Ticket->CustomerUser parameter is invalid!",
         };
@@ -741,7 +752,7 @@ sub _CheckTicket {
     if ( $Ticket->{TypeID} || $Ticket->{Type} ) {
         if ( !$Self->ValidateType( %{$Ticket} ) ) {
             return {
-                ErrorCode => 'TicketCreate.InvalidParameter',
+                ErrorCode    => 'TicketCreate.InvalidParameter',
                 ErrorMessage =>
                     "TicketCreate: Ticket->TypeID or Ticket->Type parameter is invalid!",
             };
@@ -753,7 +764,7 @@ sub _CheckTicket {
 
         if ( !$Self->ValidateService( %{$Ticket} ) ) {
             return {
-                ErrorCode => 'TicketCreate.InvalidParameter',
+                ErrorCode    => 'TicketCreate.InvalidParameter',
                 ErrorMessage =>
                     "TicketCreate: Ticket->ServiceID or Ticket->Service parameter is invalid!",
             };
@@ -764,7 +775,7 @@ sub _CheckTicket {
     if ( $Ticket->{SLAID} || $Ticket->{SLA} ) {
         if ( !$Self->ValidateSLA( %{$Ticket} ) ) {
             return {
-                ErrorCode => 'TicketCreate.InvalidParameter',
+                ErrorCode    => 'TicketCreate.InvalidParameter',
                 ErrorMessage =>
                     "TicketCreate: Ticket->SLAID or Ticket->SLA parameter is invalid!",
             };
@@ -805,7 +816,7 @@ sub _CheckTicket {
     if ( $Ticket->{OwnerID} || $Ticket->{Owner} ) {
         if ( !$Self->ValidateOwner( %{$Ticket} ) ) {
             return {
-                ErrorCode => 'TicketCreate.InvalidParameter',
+                ErrorCode    => 'TicketCreate.InvalidParameter',
                 ErrorMessage =>
                     "TicketCreate: Ticket->OwnerID or Ticket->Owner parameter is invalid!",
             };
@@ -934,7 +945,7 @@ sub _CheckArticle {
         )
     {
         return {
-            ErrorCode => 'TicketCreate.InvalidParameter',
+            ErrorCode    => 'TicketCreate.InvalidParameter',
             ErrorMessage =>
                 "TicketCreate: Article->To parameter must be a valid email address when Article->ArticleSend is set!",
         };
@@ -1385,18 +1396,18 @@ sub _TicketCreate {
     my $TicketID = $TicketObject->TicketCreate(
         Title        => $Ticket->{Title},
         QueueID      => $Ticket->{QueueID} || '',
-        Queue        => $Ticket->{Queue} || '',
+        Queue        => $Ticket->{Queue}   || '',
         Lock         => 'unlock',
-        TypeID       => $Ticket->{TypeID} || '',
-        Type         => $Ticket->{Type} || '',
-        ServiceID    => $Ticket->{ServiceID} || '',
-        Service      => $Ticket->{Service} || '',
-        SLAID        => $Ticket->{SLAID} || '',
-        SLA          => $Ticket->{SLA} || '',
-        StateID      => $Ticket->{StateID} || '',
-        State        => $Ticket->{State} || '',
+        TypeID       => $Ticket->{TypeID}     || '',
+        Type         => $Ticket->{Type}       || '',
+        ServiceID    => $Ticket->{ServiceID}  || '',
+        Service      => $Ticket->{Service}    || '',
+        SLAID        => $Ticket->{SLAID}      || '',
+        SLA          => $Ticket->{SLA}        || '',
+        StateID      => $Ticket->{StateID}    || '',
+        State        => $Ticket->{State}      || '',
         PriorityID   => $Ticket->{PriorityID} || '',
-        Priority     => $Ticket->{Priority} || '',
+        Priority     => $Ticket->{Priority}   || '',
         OwnerID      => 1,
         CustomerNo   => $CustomerID,
         CustomerUser => $CustomerUser || '',
@@ -1415,7 +1426,7 @@ sub _TicketCreate {
         $TicketObject->TicketLockSet(
             TicketID => $TicketID,
             LockID   => $Ticket->{LockID} || '',
-            Lock     => $Ticket->{Lock} || '',
+            Lock     => $Ticket->{Lock}   || '',
             UserID   => $Param{UserID},
         );
     }
@@ -1607,7 +1618,7 @@ sub _TicketCreate {
 
             if ( !$Subject ) {
                 return {
-                    Success => 0,
+                    Success      => 0,
                     ErrorMessage =>
                         'The subject for the e-mail could not be generated. Please contact the system administrator'
                 };
@@ -1705,7 +1716,7 @@ sub _TicketCreate {
             NoAgentNotify        => $Article->{NoAgentNotify} || 0,
             TicketID             => $TicketID,
             SenderTypeID         => $Article->{SenderTypeID} || '',
-            SenderType           => $Article->{SenderType} || '',
+            SenderType           => $Article->{SenderType}   || '',
             IsVisibleForCustomer => $Article->{IsVisibleForCustomer},
             From                 => $From,
             To                   => $To,
@@ -1713,8 +1724,8 @@ sub _TicketCreate {
             Bcc                  => $Bcc,
             Subject              => $Subject,
             Body                 => $Article->{Body},
-            MimeType             => $MimeType || '',
-            Charset              => $Charset || '',
+            MimeType             => $MimeType               || '',
+            Charset              => $Charset                || '',
             ContentType          => $Article->{ContentType} || '',
             UserID               => $Param{UserID},
             HistoryType          => $Article->{HistoryType},
@@ -1749,7 +1760,7 @@ sub _TicketCreate {
             }
 
             # signing and encryption
-            for my $Key (qw( Sign Crypt )) {
+            for my $Key (qw( Sign Crypt EmailSecurity )) {
                 if ( IsHashRefWithData( $Article->{$Key} ) ) {
                     $ArticleParams{$Key} = $Article->{$Key};
                 }
@@ -2017,8 +2028,6 @@ sub _TicketCreate {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

@@ -1089,7 +1089,7 @@ sub RequesterPerformRequest {
     # Check if we have response data for the specified operation in the soap result.
     if ( !exists $Body->{$OperationResponse} ) {
         return {
-            Success => 0,
+            Success      => 0,
             ErrorMessage =>
                 "No response data found for specified operation '$OperationName'"
                 . " in soap response",
@@ -1113,6 +1113,10 @@ sub DESTROY {
 }
 
 =begin Internal:
+
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
 
 =head2 _Error()
 
@@ -1660,14 +1664,14 @@ sub _SOAPOutputTypesGet {
             my @SortArrayElementKeys = sort keys %{$SortArrayElement};
             if ( scalar @SortArrayElementKeys != 1 ) {
                 return {
-                    Success => 0,
+                    Success      => 0,
                     ErrorMessage =>
                         'Sort array element hash reference must contain exactly one key/value pair',
                 };
             }
             if ( !IsStringWithData( $SortArrayElementKeys[0] ) ) {
                 return {
-                    Success => 0,
+                    Success      => 0,
                     ErrorMessage =>
                         'Key of sort array element hash reference must be a non zero-length string',
                 };
@@ -1684,8 +1688,6 @@ sub _SOAPOutputTypesGet {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

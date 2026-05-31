@@ -363,7 +363,7 @@ sub Sync {
                         if ( !$SystemGroupsByName{$Group} ) {
                             $Kernel::OM->Get('Kernel::System::Log')->Log(
                                 Priority => 'notice',
-                                Message =>
+                                Message  =>
                                     "Invalid group '$Group' in "
                                     . "'AuthSyncModule::LDAP::UserSyncInitialGroups"
                                     . "$Self->{Count}'!",
@@ -504,7 +504,7 @@ sub Sync {
                 if ( !$SystemGroupsByName{$SyncGroup} ) {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => 'notice',
-                        Message =>
+                        Message  =>
                             "Invalid group '$SyncGroup' in "
                             . "'AuthSyncModule::LDAP::UserSyncGroupsDefinition"
                             . "$Self->{Count}'!",
@@ -582,7 +582,7 @@ sub Sync {
                             if ( !$SystemGroupsByName{$SyncGroup} ) {
                                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                                     Priority => 'notice',
-                                    Message =>
+                                    Message  =>
                                         "Invalid group '$SyncGroup' in "
                                         . "'AuthSyncModule::LDAP::UserSyncAttributeGroupsDefinition"
                                         . "$Self->{Count}'!",
@@ -727,7 +727,7 @@ sub Sync {
                 if ( !$SystemRolesByName{$SyncRole} ) {
                     $Kernel::OM->Get('Kernel::System::Log')->Log(
                         Priority => 'notice',
-                        Message =>
+                        Message  =>
                             "Invalid role '$SyncRole' in "
                             . "'AuthSyncModule::LDAP::UserSyncRolesDefinition"
                             . "$Self->{Count}'!",
@@ -793,7 +793,7 @@ sub Sync {
                             if ( !$SystemRolesByName{$SyncRole} ) {
                                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                                     Priority => 'notice',
-                                    Message =>
+                                    Message  =>
                                         "Invalid role '$SyncRole' in "
                                         . "'AuthSyncModule::LDAP::UserSyncAttributeRolesDefinition"
                                         . "$Self->{Count}'!",

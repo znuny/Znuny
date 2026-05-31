@@ -10,7 +10,10 @@ package Kernel::System::Activity;
 
 use strict;
 use warnings;
+
 use utf8;
+
+use List::Util qw(any);
 
 use parent qw(Kernel::System::DBCRUD);
 
@@ -64,11 +67,13 @@ sub Add {
     my ( $Self, %Param ) = @_;
 
     my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
+    my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+    my $LogObject       = $Kernel::OM->Get('Kernel::System::Log');
 
     my $Title = $HTMLUtilsObject->ToAscii( String => $Param{Title} );
     my $Text  = $HTMLUtilsObject->ToAscii( String => $Param{Text} );
 
-    my $ActivitID = $Self->DataAdd(
+    my $ActivityID = $Self->DataAdd(
         Type     => $Param{Type},
         Title    => $Title,
         Text     => $Text,
@@ -78,7 +83,57 @@ sub Add {
         UserID   => $Param{UserID},
     );
 
-    return $ActivitID;
+    # Trim to maximum number of entries
+    my $SQL = "
+        SELECT COUNT(*)
+        FROM   $Self->{DatabaseTable}
+        WHERE  $Self->{Columns}->{CreateBy}->{Column} = ?
+";
+    return $ActivityID if !$Self->{DBObject}->Prepare(
+        SQL  => $SQL,
+        Bind => [ \$Param{CreateBy}, ],
+    );
+
+    my $RecordCount;
+    while ( my @Data = $Self->{DBObject}->FetchrowArray() ) {
+        $RecordCount = $Data[0];
+    }
+
+    my $ActivityConfig    = $ConfigObject->Get('Activity')       // {};
+    my $MaxKeepActivities = $ActivityConfig->{MaxKeepActivities} // 50;
+    my $RemoveActivities  = $RecordCount - $MaxKeepActivities;
+    return $ActivityID if $RemoveActivities <= 0;
+
+    # "DELETE … LIMIT ?" would be nice but doesn't work properly with all drivers
+    $SQL = "
+        SELECT   $Self->{Columns}->{ID}->{Column}
+        FROM     $Self->{DatabaseTable}
+        WHERE    $Self->{Columns}->{CreateBy}->{Column} = ?
+        ORDER BY $Self->{Columns}->{CreateTime}->{Column} ASC
+";
+    my $RemoveIDs = $Self->{DBObject}->SelectAll(
+        SQL   => $SQL,
+        Bind  => [ \$Param{CreateBy} ],
+        Limit => $RemoveActivities,
+    );
+    if (@$RemoveIDs) {
+        @$RemoveIDs = map {@$_} @$RemoveIDs;
+        my %Where = $Self->{DBObject}->QueryInCondition(
+            Key      => $Self->{Columns}->{ID}->{Column},
+            Values   => $RemoveIDs,
+            BindMode => 1,
+        );
+        $SQL = "
+        DELETE FROM $Self->{DatabaseTable}
+        WHERE $Where{SQL}
+        ";
+        $Self->{DBObject}->Do(
+            SQL  => $SQL,
+            Bind => $Where{Values},
+        );
+    }
+
+    return $ActivityID;
 }
 
 =head2 GetLink()
@@ -110,8 +165,8 @@ sub GetLink {
         )
     {
         $LogObject->Log(
-            Priority => "Either give parameter 'TicketID' or 'AppointmentID'.",
-            Message  => "",
+            Priority => 'error',
+            Message  => "Either give parameter 'TicketID' or 'AppointmentID'.",
         );
 
         return;
@@ -138,7 +193,7 @@ sub GetLink {
 
 Get data attributes with mapped icons.
 
-    my $Success = $ActivityObject->Get();
+    my %Activity = $ActivityObject->Get();
         ID         => 1,
         Type       => '...', # optional
         Title      => '...', # optional
@@ -152,7 +207,18 @@ Get data attributes with mapped icons.
 
 Returns:
 
-    my $Success = 1;
+    my %Activity = (
+        ID         => '...',
+        UserID     => 1,
+        Type       => '...',
+        Title      => '...',
+        Text       => '...',
+        State      => '...',
+        Link       => '...',
+        CreateTime => '...',
+        CreateBy   => '...',
+        Icon       => '...',   # if defined for Type
+    );
 
 =cut
 
@@ -174,6 +240,44 @@ sub Get {
     return %Data;
 }
 
+=head2 StatsGet()
+
+Returns a hashref with statistics about the activities, currently the total
+number of activities and a boolean indicationg whether there are any new ones.
+
+    $Stats = $ActivityObject->StatsGet(
+        ID         => '...', # optional
+        Type       => '...', # optional
+        Title      => '...', # optional
+        Text       => '...', # optional
+        State      => '...', # optional
+        Link       => '...', # optional
+        CreateTime => '...', # optional
+        CreateBy   => '...', # optional
+        UserID     => 123,
+    );
+
+Returns:
+
+    $Stats = {
+        Count  => 123,
+        HasNew => 1,
+    };
+
+=cut
+
+sub StatsGet {
+    my ( $Self, %Param ) = @_;
+
+    my @Activities = $Self->DataListGet(%Param);
+    my $Count      = scalar @Activities;
+    my $HasNew     = any { $_->{State} eq 'new' } @Activities;
+    return {
+        Count  => $Count,
+        HasNew => $HasNew,
+    };
+}
+
 =head2 ListGet()
 
 Get list data with attributes with mapped icons.
@@ -192,7 +296,23 @@ Get list data with attributes with mapped icons.
 
 Returns:
 
-    my @Activities = 1;
+    my @Activities = (
+        {
+            ID         => '...',
+            UserID     => 1,
+            Type       => '...',
+            Title      => '...',
+            Text       => '...',
+            State      => '...',
+            Link       => '...',
+            CreateTime => '...',
+            CreateBy   => '...',
+            Icon       => '...',   # if defined for Type
+        },
+        {
+            ...
+        }
+    );
 
 =cut
 

@@ -369,7 +369,9 @@ sub GenericAgentSchedule2CronTab {
 
 =begin Internal:
 
-=cut
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
 
 =head2 _Init()
 
@@ -378,7 +380,7 @@ creates a Schedule::Cron::Events object.
     my $CronObject = $CronEventObject->_Init(
         Schedule      => '*/2 * * * *',   # recurrence parameters based in Cron notation
         StartDateTime => $DateTimeObject,
-    }
+    );
 
 =cut
 
@@ -439,8 +441,6 @@ sub _Init {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

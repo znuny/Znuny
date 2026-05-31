@@ -17,7 +17,7 @@ use parent 'Kernel::Output::HTML::Article::Base';
 
 use Mail::Address;
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (

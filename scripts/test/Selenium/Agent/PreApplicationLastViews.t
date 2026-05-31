@@ -28,7 +28,7 @@ my $SeleniumTest = sub {
 
         my %PreferencesCheck = (
             UserLastViewsPosition => $Position,
-            UserLastViewsTypes =>
+            UserLastViewsTypes    =>
                 '["Admin","Agent","FAQ","Calendar","Customer","CustomerUser","Statistics","Appointment","TicketCreate","TicketOverview","Ticket"]',
         );
 

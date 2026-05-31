@@ -12,7 +12,7 @@ package Kernel::System::NotificationEvent;
 use strict;
 use warnings;
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
@@ -354,7 +354,7 @@ sub NotificationAdd {
                 (name, valid_id, comments, create_time, create_by, change_time, change_by)
             VALUES (?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
-            \$Param{Name}, \$Param{ValidID}, \$Param{Comment},
+            \$Param{Name},   \$Param{ValidID}, \$Param{Comment},
             \$Param{UserID}, \$Param{UserID},
         ],
     );
@@ -793,7 +793,7 @@ you have been mentioned in ticket <OTRS_TICKET_NUMBER>.
                 },
                 'de' => {
                     'ContentType' => 'text/plain',
-                    'Body' => "Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+                    'Body'        => "Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
 
 Sie wurden erw\x{e4}hnt in Ticket <OTRS_TICKET_NUMBER>.
 <OTRS_AGENT_BODY[5]>
@@ -1012,10 +1012,10 @@ sub NotificationImport {
     return {
         Success => 1,
 
-        Added      => join( ', ', @AddedNotifications )      || '',
-        Updated    => join( ', ', @UpdatedNotifications )    || '',
-        NotUpdated => join( ', ', @NotUpdatedNotifications ) || '',
-        Errors     => join( ', ', @NotificationErrors )      || '',
+        Added            => join( ', ', @AddedNotifications )      || '',
+        Updated          => join( ', ', @UpdatedNotifications )    || '',
+        NotUpdated       => join( ', ', @NotUpdatedNotifications ) || '',
+        Errors           => join( ', ', @NotificationErrors )      || '',
         AdditionalErrors => \@NotificationAdditionalErrors,
 
         # For compatibility with existing code
@@ -1164,7 +1164,7 @@ Returns:
         'Message' => {
             'en' => {
                 'ContentType' => 'text/plain',
-                'Body' => 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+                'Body'        => 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
 
 you have been mentioned in ticket <OTRS_TICKET_NUMBER>.
 <OTRS_AGENT_BODY[5]>
@@ -1176,7 +1176,7 @@ you have been mentioned in ticket <OTRS_TICKET_NUMBER>.
             },
             'de' => {
                 'ContentType' => 'text/plain',
-                'Body' => "Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+                'Body'        => "Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
 
 Sie wurden erw\x{e4}hnt in Ticket <OTRS_TICKET_NUMBER>.
 <OTRS_AGENT_BODY[5]>

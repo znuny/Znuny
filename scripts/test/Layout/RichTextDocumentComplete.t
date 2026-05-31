@@ -22,19 +22,19 @@ my @Tests = (
         Result => '123',
     },
     {
-        Name => 'Image with ContentID, no session',
+        Name   => 'Image with ContentID, no session',
         String =>
             '123 <img src="index.pl?Action=SomeAction;FileID=0;ContentID=inline105816.238987884.1382708457.5104380.88084622@localhost" /> 234',
         Result => '123 <img src="cid:inline105816.238987884.1382708457.5104380.88084622@localhost" /> 234',
     },
     {
-        Name => 'Image with ContentID, with session',
+        Name   => 'Image with ContentID, with session',
         String =>
             '123 <img src="index.pl?Action=SomeAction;FileID=0;ContentID=inline105816.238987884.1382708457.5104380.88084622@localhost;SessionID=123" /> 234',
         Result => '123 <img src="cid:inline105816.238987884.1382708457.5104380.88084622@localhost" /> 234',
     },
     {
-        Name => 'Image with ContentID, with session',
+        Name   => 'Image with ContentID, with session',
         String =>
             '123 <img src="index.pl?Action=SomeAction;FileID=0;ContentID=inline105816.238987884.1382708457.5104380.88084622@localhost&SessionID=123" /> 234',
         Result => '123 <img src="cid:inline105816.238987884.1382708457.5104380.88084622@localhost" /> 234',

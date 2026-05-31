@@ -33,6 +33,41 @@ sub new {
     return $Self;
 }
 
+sub GetAvailableConfigOptions {
+    my ( $Self, %Param ) = @_;
+
+    my %ConfigOptions = (
+        Host => {
+            Required     => 1,
+            DefaultValue => undef,
+        },
+        Timeout => {
+            Required     => 0,
+            DefaultValue => undef,
+        },
+        SkipSSLVerification => {
+            Required     => 0,
+            DefaultValue => undef,
+        },
+        AuthenticationType => {
+            Required       => 1,
+            DefaultValue   => 'oauth2_token',
+            PossibleValues => {
+                oauth2_token => {
+                    AuthUser => {
+                        Required => 1,
+                    },
+                    OAuth2TokenConfigID => {
+                        Required => 1,
+                    },
+                },
+            },
+        },
+    );
+
+    return \%ConfigOptions;
+}
+
 sub Send {
     my ( $Self, %Param ) = @_;
 
@@ -122,7 +157,7 @@ sub Send {
             ObjectLogType => 'Connection',
             Priority      => 'Error',
             Key           => ref $Self,
-            Value =>
+            Value         =>
                 "OAuth2 token for config with name '$SendmailModuleConfig{OAuth2TokenConfigName}' could not be retrieved.",
         );
 
@@ -186,7 +221,7 @@ sub Send {
 
     my $Base64EncodedMIMEMessage = MIME::Base64::encode_base64($MIMEMessage);
 
-    my $To = join ', ', @{ $Param{ToArray} };
+    my $To        = join ', ', @{ $Param{ToArray} };
     my $EmailSent = $MSGraphObject->ExecuteOperation(
         CommunicationLogObject => $Param{CommunicationLogObject},
         Host                   => $SendmailModuleConfig{Host},
@@ -201,7 +236,9 @@ sub Send {
         RequestHeaders => {
             'Content-Type' => 'text/plain',
         },
-        RequestData => $Base64EncodedMIMEMessage,
+        RequestData         => $Base64EncodedMIMEMessage,
+        Timeout             => $SendmailModuleConfig{Timeout},
+        SkipSSLVerification => $SendmailModuleConfig{SkipSSLVerification},
     );
 
     if ($EmailSent) {

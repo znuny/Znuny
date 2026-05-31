@@ -14,7 +14,7 @@ use warnings;
 use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -98,7 +98,7 @@ sub Run {
         next COLUMNNAME if $FilterValue eq 'DeleteFilter';
 
         if ( $ColumnName eq 'CustomerID' ) {
-            push @{ $ColumnFilter{$ColumnName} }, $FilterValue;
+            push @{ $ColumnFilter{$ColumnName} },           $FilterValue;
             push @{ $ColumnFilter{ $ColumnName . 'Raw' } }, $FilterValue;
             $GetColumnFilter{$ColumnName} = $FilterValue;
         }
@@ -170,6 +170,8 @@ sub Run {
         $SortByS = 'Age';
     }
 
+    my $UserIDForSearch = $Config->{TicketSearchWithAdminUser} ? 1 : $Self->{UserID};
+
     # define filter
     my %Filters = (
         All => {
@@ -180,7 +182,7 @@ sub Run {
                 ResponsibleIDs => [ $Self->{UserID} ],
                 OrderBy        => $OrderBy,
                 SortBy         => $SortByS,
-                UserID         => $Self->{UserID},
+                UserID         => $UserIDForSearch,
                 Permission     => 'ro',
             },
         },
@@ -196,7 +198,7 @@ sub Run {
                 TicketFlagUserID => $Self->{UserID},
                 OrderBy          => $OrderBy,
                 SortBy           => $SortByS,
-                UserID           => $Self->{UserID},
+                UserID           => $UserIDForSearch,
                 Permission       => 'ro',
             },
         },
@@ -208,7 +210,7 @@ sub Run {
                 ResponsibleIDs => [ $Self->{UserID} ],
                 OrderBy        => $OrderBy,
                 SortBy         => $SortByS,
-                UserID         => $Self->{UserID},
+                UserID         => $UserIDForSearch,
                 Permission     => 'ro',
             },
         },
@@ -221,7 +223,7 @@ sub Run {
                 ResponsibleIDs                => [ $Self->{UserID} ],
                 OrderBy                       => $OrderBy,
                 SortBy                        => $SortByS,
-                UserID                        => $Self->{UserID},
+                UserID                        => $UserIDForSearch,
                 Permission                    => 'ro',
             },
         },

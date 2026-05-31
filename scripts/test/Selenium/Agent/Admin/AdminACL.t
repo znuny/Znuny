@@ -359,7 +359,6 @@ JAVASCRIPT
         );
 
         # Add all possible prefix values to check for inputed values see bug#12854
-        # ( https://bugs.otrs.org/show_bug.cgi?id=12854 ).
         my $Count = 1;
         for my $Prefix ( '[Not]', '[RegExp]', '[regexp]', '[NotRegExp]', '[Notregexp]' ) {
             $Selenium->find_element( "#Prefixes option[Value='$Prefix']", 'css' )->click();
@@ -408,6 +407,11 @@ JAVASCRIPT
 
         # Click 'Save and Finish'.
         $Selenium->find_element( "#Submit", 'css' )->VerifiedClick();
+
+        $Selenium->CloseNotification(
+            Text =>
+                'Die ACL-Konfiguration ist laut Datenbank nicht synchron mit der Systemkonfiguration, bitte ACLs in Betrieb nehmen.',
+        );
 
         # Checks for AdminValidFilter
         $Self->True(
@@ -485,7 +489,7 @@ JAVASCRIPT
                 "return typeof(\$) === 'function' && \$('a[href*=\"Action=AdminACL;Subaction=ACLCopy;ID=$ACLID\"]').length;"
         );
 
-        # Create another copy of the same ACL, see bug#13204 (https://bugs.otrs.org/show_bug.cgi?id=13204).
+        # Create another copy of the same ACL
         $Selenium->find_element("//a[contains(\@href, 'Action=AdminACL;Subaction=ACLCopy;ID=$ACLID;' )]")
             ->VerifiedClick();
 

@@ -98,14 +98,62 @@ Core.UI.RichTextEditor = (function (TargetNS) {
 
     /**
      * @private
+     * @name SymbolBeforeTriggerSymbolGet
+     * @memberof Core.UI.RichTextEditor
+     * @function
+     * @returns {String|Null|Undefined}
+     * Single string text symbol that exists before trigger symbol.
+     * Null value on errors.
+     * Undefined value if there is no symbol found before trigger symbol.
+     * @param {String} SearchString - Text of a string to search for related data.
+     * @param {String} Trigger - Trigger used to determine autocomplete/mentions tag in SearchString parameter.
+     * @param {String} EditorID - ID of editor to check.
+     * @description
+     *      Get single string text symbol that exists before trigger symbol in specified ckeditor.
+     *      Works only on currect selection as a context.
+     */
+    function SymbolBeforeTriggerSymbolGet(SearchString, Trigger, EditorID) {
+        var CKEditor = Core.UI.RichTextEditor.GetInstance(EditorID),
+            Selection,
+            CursorPosition,
+            PositionBeforeTrigger,
+            PositionAtTrigger,
+            SingleLetterRangeBeforeTrigger,
+            Iterator,
+            Item,
+            SymbolBeforeTrigger;
+
+        if(!CKEditor) return null;
+        Selection = CKEditor.model.document.selection;
+        CursorPosition = Selection.getFirstPosition();
+        if(!CursorPosition) return null;
+        PositionBeforeTrigger = CursorPosition.getShiftedBy(-(Trigger.length + SearchString.length+1));
+        PositionAtTrigger = CursorPosition.getShiftedBy(-(Trigger.length + SearchString.length));
+        SingleLetterRangeBeforeTrigger = CKEditor.model.createRange(PositionBeforeTrigger, PositionAtTrigger);
+        Iterator = SingleLetterRangeBeforeTrigger.getItems();
+        Item = Iterator.next().value;
+
+        // determine symbol before first trigger symbol
+        if (Item !== undefined && (Item.is('$text') || Item.is('$textProxy'))) {
+            SymbolBeforeTrigger = Item.data;
+        }
+
+        return SymbolBeforeTrigger;
+    }
+
+
+
+    /**
+     * @private
      * @name InitMentionsConfig
      * @memberof Core.UI.RichTextEditor
      * @function
      * @param {Object} MentionsConfig - The mentions configuration.
+     * @param {String} EditorID - ID of RTEditor.
      * @description
      *      Builds valid mentions config for editor.
      */
-    function InitMentionsConfig(MentionsConfig) {
+    function InitMentionsConfig(MentionsConfig, EditorID) {
         // CodeMirror does not load any other plugins, so the autocomplete plugin is not available then
         // TODO: (SN) CodeMirror so far does not exists.
         // if (Core.Config.Get('RichText.Type') == 'CodeMirror') {
@@ -130,9 +178,15 @@ Core.UI.RichTextEditor = (function (TargetNS) {
             var Config = this,
                 Trigger = Config.matchingMarker,
                 DefaultAttributesConfig,
-                AttributesConfig;
+                AttributesConfig,
+                FormattedResponse = [],
+                SymbolBeforeTrigger = SymbolBeforeTriggerSymbolGet(SearchString, Trigger, EditorID),
+                IgnoreCallback = SymbolBeforeTrigger !== undefined && SymbolBeforeTrigger !== ' ';
 
-            var FormattedResponse = [];
+            // do not display any selection data if trigger contain some text
+            // before it as it would work when typing e-mail address
+            // see bug: https://github.com/znuny/Znuny/issues/738
+            if(IgnoreCallback) return [];
 
             Core.AJAX.FunctionCallSynchronous(
                 Core.Config.Get('Baselink'),
@@ -326,9 +380,12 @@ Core.UI.RichTextEditor = (function (TargetNS) {
             // Always take the current values because those could
             // have been changed by the user in the form.
             AdditionalParams = {
-                TicketID: $('input[name="TicketID"]').val(), // optional, if present
-                Action: $('input[name="Action"]').val(),     // optional, if present
-                QueueID: Znuny.Form.Input.Get('QueueID')     // optional, if present
+
+                // These are all optional and might not be present
+                TicketID: $('input[name="TicketID"]').val(),
+                Action:   $('input[name="Action"]').val(),
+                QueueID:  Znuny.Form.Input.Get('QueueID'),
+                FormID:   $('input[name="FormID"]').val()
             };
 
             if (SearchString.length < AutocompletionSettings.MinSearchLength) {
@@ -504,7 +561,7 @@ Core.UI.RichTextEditor = (function (TargetNS) {
         MentionsConfig  = Core.Config.Get('Mentions::RichTextEditor');
 
         InitAutocompletionConfig(); // No need to pass config here as it is taken from the backend via AJAX call
-        InitMentionsConfig(MentionsConfig);
+        InitMentionsConfig(MentionsConfig, EditorID);
 
         // Build URL for image upload
         if (CheckFormID($EditorArea).length) {
@@ -790,9 +847,6 @@ Core.UI.RichTextEditor = (function (TargetNS) {
                     Change,
                     ImageElement,
                     Index;
-                if (editor.getData() != "") {
-                    $("#" + editor.ElementId).val(editor.getData());
-                }
 
                 // Listen to any image insert upload, then apply it's alignment
                 // to "alignBlockLeft" as it's not possible via config of image
@@ -1051,6 +1105,26 @@ Core.UI.RichTextEditor = (function (TargetNS) {
      */
     TargetNS.GetInstance = function (FieldID) {
         return CKEditorInstances[FieldID];
+    }
+
+    /**
+     * @name SynchronizeHiddenField
+     * @memberof Core.UI.RichTextEditor
+     * @function
+     * @returns {Boolean} Success result of synchronization.
+     * @param {String} FieldID - The field identifier of the element that is a rich text editor.
+     * @description
+     *      This function synchronizes data between hidden textarea field and RTE instance it is initialized/built on.
+     */
+    TargetNS.SynchronizeHiddenField = function (FieldID) {
+        var CKEInstance = TargetNS.GetInstance(FieldID);
+
+        if (CKEInstance !== undefined) {
+            CKEInstance.updateSourceElement();
+            return true;
+        }
+
+        return false;
     }
 
     /**

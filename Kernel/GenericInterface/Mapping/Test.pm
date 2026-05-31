@@ -11,6 +11,7 @@ package Kernel::GenericInterface::Mapping::Test;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(IsHashRefWithData IsStringWithData);
 
@@ -163,6 +164,10 @@ sub Map {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _ToUpper()
 
 change all characters in values to upper case
@@ -251,8 +256,6 @@ sub _Empty {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

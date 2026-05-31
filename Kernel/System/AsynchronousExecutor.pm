@@ -120,7 +120,7 @@ sub AsyncCall {
     my $TaskID = $Kernel::OM->Get('Kernel::System::Scheduler')->TaskAdd(
         Type                     => 'AsynchronousExecutor',
         Name                     => $TaskName,
-        Attempts                 => $Param{Attempts} || 1,
+        Attempts                 => $Param{Attempts}                 || 1,
         MaximumParallelInstances => $Param{MaximumParallelInstances} || 0,
         Data                     => {
             Object   => $ObjectName,

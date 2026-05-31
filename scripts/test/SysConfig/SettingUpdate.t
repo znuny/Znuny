@@ -29,7 +29,7 @@ $ConfigObject->Set(
     Value => 0,
 );
 
-my $SetingsXML = << 'EOF',
+my $SetingsXML = <<'EOF',
 <?xml version="1.0" encoding="utf-8" ?>
 <otrs_config version="2.0" init="Framework">
     <Setting Name="Test0" Required="1" Valid="1">

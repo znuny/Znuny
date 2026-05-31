@@ -11,6 +11,8 @@ package Kernel::System::Autocompletion;
 use strict;
 use warnings;
 
+use utf8;
+
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
@@ -19,7 +21,7 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
 );
 
-=head2 new()
+=head1 new()
 
 Don't use the constructor directly, use the ObjectManager instead:
 
@@ -36,7 +38,7 @@ sub new {
     return $Self;
 }
 
-=head2 GetData()
+=head1 GetData()
 
     Returns data for autocompletion of given trigger.
 
@@ -97,15 +99,13 @@ sub GetData {
     return if !$AutocompletionModuleObject;
 
     my $AutocompletionData = $AutocompletionModuleObject->GetData(
-        SearchString     => $Param{SearchString},
-        UserID           => $Param{UserID},
-        AdditionalParams => $Param{AdditionalParams},    # optional
+        %Param,
     ) // [];
 
     return $AutocompletionData;
 }
 
-=head2 GetAutocompletionSettings()
+=head1 GetAutocompletionSettings()
 
     Returns a hash with autocompletion settings by trigger.
 
@@ -146,7 +146,7 @@ sub GetAutocompletionSettings {
         if ( !IsStringWithData( $ModuleSettings->{Trigger} ) ) {
             $LogObject->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Trigger is missing in configuration of autocompletion module in SysConfig option 'Frontend::RichText::Autocompletion::Modules###$Module'.",
             );
 
@@ -157,7 +157,7 @@ sub GetAutocompletionSettings {
         if ( exists( $AutocompletionSettings->{Triggers}->{ $ModuleSettings->{Trigger} } ) ) {
             $LogObject->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Trigger '$ModuleSettings->{Trigger}' is used for more than one autocompletion module in SysConfig option 'Frontend::RichText::Autocompletion::Modules'.",
             );
 

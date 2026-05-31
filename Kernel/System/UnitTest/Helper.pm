@@ -947,6 +947,10 @@ sub _DisableDefaultSysConfigSettings {
     my @DisableSysConfigs = (
         'Ticket::EventModulePost###999-NotifyOnEmptyProcessTickets',
         'Ticket::EventModulePost###Mentions',
+        'Frontend::NotifyModule###2000-UID-Check',
+        'Frontend::NotifyModule###8000-Daemon-Check',
+        'Frontend::NotifyModule###7000-AgentTimeZone-Check',
+        'CustomerFrontend::NotifyModule###7-CustomerUserTimeZone-Check'
     );
 
     $Self->DisableSysConfigs(
@@ -2150,10 +2154,10 @@ sub FillTestEnvironment {
     my %AttributeTestStructure = (
         'A::Level - 1::A'  => 0,
         'A::Level - 1::B'  => 0,
-        'A::Level - 2::Ä' => 0,
-        'A::Level - 2::Ö' => 0,
-        'B::Level - !::Ü' => 0,
-        'B::Level - !::ß' => 0,
+        'A::Level - 2::Ä'  => 0,
+        'A::Level - 2::Ö'  => 0,
+        'B::Level - !::Ü'  => 0,
+        'B::Level - !::ß'  => 0,
         'B::Level - ?::Y'  => 0,
         'B::Level - ?::Z'  => 0,
         'C::Level - &::%'  => 0,

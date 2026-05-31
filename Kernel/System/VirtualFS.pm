@@ -344,8 +344,8 @@ for file name and for preferences
 Returns:
 
     my @List = (
-      '/Object/some/file.txt',
-      '/Object/my.pdf',
+        '/Object/some/file.txt',
+        '/Object/my.pdf',
     );
 
 =cut
@@ -458,6 +458,12 @@ sub Find {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
+=head2 _FileLookup()
+
 returns internal meta information, unique file id, where and with what arguments the
 file is stored
 
@@ -488,10 +494,6 @@ sub _FileLookup {
 
     return ( $FileID, $BackendKey, $Backend );
 }
-
-=end Internal:
-
-=cut
 
 1;
 

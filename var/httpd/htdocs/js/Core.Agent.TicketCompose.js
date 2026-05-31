@@ -9,7 +9,8 @@
 
 "use strict";
 
-var Core = Core || {};
+var Core = Core || {},
+    Znuny = Znuny || {};
 Core.Agent = Core.Agent || {};
 
 /**
@@ -31,43 +32,61 @@ Core.Agent.TicketCompose = (function (TargetNS) {
     TargetNS.Init = function () {
 
         var ArticleComposeOptions = Core.Config.Get('ArticleComposeOptions'),
-            EmailAddressesTo = Core.Config.Get('EmailAddressesTo'),
-            EmailAddressesCc = Core.Config.Get('EmailAddressesCc');
+            UpdateFields = Core.Config.Get('DynamicFieldNames') || [];
 
-        // remove customer user
-        $('.CustomerTicketRemove').on('click', function () {
-            Core.Agent.CustomerSearch.RemoveCustomerTicket($(this));
-            return false;
+        // Move FieldExplanation elements next to their labels, store text as tooltip
+        // used for Tooltips on labels (email security elements)
+        $('.Field p.FieldExplanation').each(function() {
+            var $Label = $(this).closest('.col-12').find('> label');
+            if ($Label.length) {
+                $(this).attr('data-tooltip', $(this).text().trim());
+                $(this).detach().insertAfter($Label);
+            }
+        });
+
+        Znuny.Form.Input.FieldIDMapping('AgentTicketCompose',
+            {
+                Body:           'RichText',
+                Customer:       'ToCustomer',
+                CustomerUserID: 'ToCustomer',
+                ServiceID:      'ServiceID',
+                SLAID:          'SLAID',
+                TypeID:         'TypeID',
+                PriorityID:     'NewPriorityID'
+            }
+        );
+
+
+        UpdateFields.push('TypeID');
+        UpdateFields.push('ServiceID');
+        UpdateFields.push('SLAID');
+
+        $('#TypeID').on('change', function () {
+            Core.AJAX.FormUpdate($(this).parents('form'), 'AJAXUpdate', 'TypeID', UpdateFields);
+        });
+
+        $('#ServiceID').on('change', function () {
+            Core.AJAX.FormUpdate($(this).parents('form'), 'AJAXUpdate', 'ServiceID', UpdateFields);
+        });
+
+        $('#SLAID').on('change', function () {
+            Core.AJAX.FormUpdate($(this).parents('form'), 'AJAXUpdate', 'SLAID', UpdateFields);
         });
 
         // change next ticket state
         $('#StateID').on('change', function () {
-            Core.AJAX.FormUpdate($('#ComposeTicket'), 'AJAXUpdate', 'StateID', Core.Config.Get('DynamicFieldNames'));
+            Core.AJAX.FormUpdate($(this).parents('form'), 'AJAXUpdate', 'StateID', UpdateFields);
         });
 
         // check subject
         CheckSubject();
         $('#Subject').on('change', CheckSubject);
 
-        // add 'To' customer users
-        if (typeof EmailAddressesTo !== 'undefined') {
-            EmailAddressesTo.forEach(function(ToCustomer) {
-                Core.Agent.CustomerSearch.AddTicketCustomer('ToCustomer', ToCustomer.CustomerTicketText, ToCustomer.CustomerKey);
-            });
-        }
-
-        // add 'Cc' customer users
-        if (typeof EmailAddressesCc !== 'undefined') {
-            EmailAddressesCc.forEach(function(CcCustomer) {
-                Core.Agent.CustomerSearch.AddTicketCustomer('CcCustomer', CcCustomer.CustomerTicketText, CcCustomer.CustomerKey);
-            });
-        }
-
         // change article compose options
         if (typeof ArticleComposeOptions !== 'undefined') {
             $.each(ArticleComposeOptions, function (Key, Value) {
                 $('#'+Value.Name).on('change', function () {
-                    Core.AJAX.FormUpdate($('#ComposeTicket'), 'AJAXUpdate', Value.Name, Value.Fields);
+                    Core.AJAX.FormUpdate($('#Compose'), 'AJAXUpdate', Value.Name, Value.Fields);
                 });
             });
         }

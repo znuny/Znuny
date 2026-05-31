@@ -62,7 +62,7 @@ sub Run {
         }
     }
     my %GetParam         = %{ $Param{GetParam} };
-    my $Comment          = $Param{Comment} || '';
+    my $Comment          = $Param{Comment}          || '';
     my $AutoResponseType = $Param{AutoResponseType} || '';
 
     # get queue id and name
@@ -314,7 +314,7 @@ sub Run {
                 ObjectLogType => 'Message',
                 Priority      => 'Debug',
                 Key           => 'Kernel::System::PostMaster::NewTicket',
-                Value =>
+                Value         =>
                     "Ticket service won't be set to '$GetParam{'X-OTRS-Service'}' (does not exist or is invalid or is a child of invalid service).",
             );
 
@@ -339,7 +339,7 @@ sub Run {
         State        => $State,
         TypeID       => $TypeID,
         Service      => $GetParam{'X-OTRS-Service'} || '',
-        SLA          => $GetParam{'X-OTRS-SLA'} || '',
+        SLA          => $GetParam{'X-OTRS-SLA'}     || '',
         CustomerID   => $GetParam{'X-OTRS-CustomerNo'},
         CustomerUser => $GetParam{'X-OTRS-CustomerUser'},
         OwnerID      => $OwnerID,
@@ -426,7 +426,7 @@ Message
             ObjectLogType => 'Message',
             Priority      => 'Debug',
             Key           => 'Kernel::System::PostMaster::NewTicket',
-            Value =>
+            Value         =>
                 "Pending time update via 'X-OTRS-State-PendingTime'! State-PendingTime: $GetParam{'X-OTRS-State-PendingTime'}.",
         );
     }
@@ -457,12 +457,24 @@ Message
                 ID => $DynamicFieldID,
             );
 
-            $DynamicFieldBackendObject->ValueSet(
-                DynamicFieldConfig => $DynamicFieldGet,
-                ObjectID           => $TicketID,
-                Value              => $GetParam{$Key},
-                UserID             => $Param{InmailUserID},
-            );
+            # If the dynamic field is a multiselect, we need to split the value into an array
+            if ( $DynamicFieldGet->{FieldType} =~ /Multiselect$/ ) {
+                my @Values = split( /[,;]\s*/, $GetParam{$Key} );
+                $DynamicFieldBackendObject->ValueSet(
+                    DynamicFieldConfig => $DynamicFieldGet,
+                    ObjectID           => $TicketID,
+                    Value              => \@Values,
+                    UserID             => $Param{InmailUserID},
+                );
+            }
+            else {
+                $DynamicFieldBackendObject->ValueSet(
+                    DynamicFieldConfig => $DynamicFieldGet,
+                    ObjectID           => $TicketID,
+                    Value              => $GetParam{$Key},
+                    UserID             => $Param{InmailUserID},
+                );
+            }
 
             $Self->{CommunicationLogObject}->ObjectLog(
                 ObjectLogType => 'Message',

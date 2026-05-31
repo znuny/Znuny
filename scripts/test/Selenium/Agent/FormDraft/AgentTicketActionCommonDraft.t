@@ -272,7 +272,7 @@ $Selenium->RunTest(
             # Wait until page has loaded, if necessary.
             $Selenium->WaitFor(
                 JavaScript =>
-                    'return typeof($) === "function" && $(".WidgetSimple").length;'
+                    'return typeof($) === "function" && $("#AppWrapper").length;'
             );
 
             # Input fields.
@@ -592,7 +592,7 @@ $Selenium->RunTest(
             );
         }
 
-        # Test for Save the draft without JSON error in window, bug#13556 https://bugs.otrs.org/show_bug.cgi?id=13556.
+        # Test for Save the draft without JSON error in window
         # Navigate to AgentTicketNote screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketNote;TicketID=$TicketID");
 

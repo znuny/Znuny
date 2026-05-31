@@ -53,21 +53,21 @@ $Selenium->RunTest(
         # remember to escape the strings correctly for Perl AND Javascript!
         my @TestCasesBasic = (
             {
-                'Name' => '1: Basic text with formatting tags which should be changed to be semantically correct',
+                'Name'  => '1: Basic text with formatting tags which should be changed to be semantically correct',
                 'Input' =>
                     'This is a test text with <b>some</b> <i>formatting</i> and <a href=\"http://www.test.de\">a link</a>. Also, there is a list: <ul><li>Listitem 1</li><li>Listitem 2</li></ul>.',
                 'Expected' =>
                     '<p>This is a test text with <strong>some</strong> <i>formatting</i> and <a href="http://www.test.de">a link</a>. Also, there is a list:</p><ul><li>Listitem 1</li><li>Listitem 2</li></ul><p>.</p>'
             },
             {
-                'Name' => '2: Remove invalid/forbidden tags',
+                'Name'  => '2: Remove invalid/forbidden tags',
                 'Input' =>
                     "This text contains a script tag: <script>alert(\'bla\');</script> and a table, though the enhanced mode is not enabled: <table><tr><td>One cell</td></tr></table>.",
                 'Expected' =>
                     "<p>This text contains a script tag: alert(\'bla\'); and a table, though the enhanced mode is not enabled:</p><figure class=\"table\"><table><tbody><tr><td>One cell</td></tr></tbody></table></figure><p>.</p>",
             },
             {
-                'Name' => '3: Remove invalid/forbidden attributes',
+                'Name'  => '3: Remove invalid/forbidden attributes',
                 'Input' =>
                     'Here is an allowed element with a forbidden attribute: <strong data-uri=\"foo\">Strong text</strong>.',
                 'Expected' =>

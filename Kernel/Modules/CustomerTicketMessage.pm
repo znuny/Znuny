@@ -15,7 +15,7 @@ use warnings;
 our $ObjectManagerDisabled = 1;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -203,7 +203,7 @@ sub Run {
                 $BackendObject->EditFieldRender(
                 DynamicFieldConfig   => $DynamicFieldConfig,
                 PossibleValuesFilter => $PossibleValuesFilter,
-                Mandatory =>
+                Mandatory            =>
                     $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
                 LayoutObject    => $LayoutObject,
                 ParamObject     => $ParamObject,
@@ -338,7 +338,7 @@ sub Run {
                     DynamicFieldConfig   => $DynamicFieldConfig,
                     PossibleValuesFilter => $PossibleValuesFilter,
                     ParamObject          => $ParamObject,
-                    Mandatory =>
+                    Mandatory            =>
                         $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
                 );
 
@@ -367,13 +367,13 @@ sub Run {
                 $BackendObject->EditFieldRender(
                 DynamicFieldConfig   => $DynamicFieldConfig,
                 PossibleValuesFilter => $PossibleValuesFilter,
-                Mandatory =>
+                Mandatory            =>
                     $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
-                ServerError  => $ValidationResult->{ServerError}  || '',
-                ErrorMessage => $ValidationResult->{ErrorMessage} || '',
-                LayoutObject => $LayoutObject,
-                ParamObject  => $ParamObject,
-                AJAXUpdate   => 1,
+                ServerError     => $ValidationResult->{ServerError}  || '',
+                ErrorMessage    => $ValidationResult->{ErrorMessage} || '',
+                LayoutObject    => $LayoutObject,
+                ParamObject     => $ParamObject,
+                AJAXUpdate      => 1,
                 UpdatableFields => $Self->_GetFieldsToUpdate(),
                 );
         }
@@ -772,6 +772,13 @@ sub Run {
             );
         }
 
+        # this is a workaround to have initial empty queue
+        # value or initial queue value without a close button
+        # depending if queue was configured or passed in the parameter
+        # without this first possible queue would always be selected
+        # '||-' means empty value of a queue
+        my $DestPossibleNone = $Dest && $Dest ne '||-' ? 0 : 1;
+
         my $JSON = $LayoutObject->BuildSelectionJSON(
             [
                 {
@@ -779,7 +786,7 @@ sub Run {
                     Data         => $NewTos,
                     SelectedID   => $Dest,
                     Translation  => 0,
-                    PossibleNone => 1,
+                    PossibleNone => $DestPossibleNone,
                     TreeView     => $TreeView,
                     Max          => 100,
                 },
@@ -966,8 +973,11 @@ sub _MaskNew {
 
     if ( $Config->{Queue} ) {
 
+        my $SelectedDest     = $Param{ToSelected} || $Param{QueueID};
+        my $DestPossibleNone = 1;
+
         # check own selection
-        my %NewTos = ( '', '-' );
+        my %NewTos;
         my $Module = $ConfigObject->Get('CustomerPanel::NewTicketQueueSelectionModule')
             || 'Kernel::Output::HTML::CustomerNewTicket::QueueSelectionGeneric';
         if ( $Kernel::OM->Get('Kernel::System::Main')->Require($Module) ) {
@@ -989,8 +999,19 @@ sub _MaskNew {
                     Env       => $Self,
                     ACLParams => \%Param
                 ),
-                ( '', => '-' )
             );
+
+            # this is a workaround to have initial empty queue
+            # value or initial queue value without a close button
+            # depending if queue was configured or passed in the parameter
+            # without this first possible queue would always be selected
+            # '||-' means empty value of a queue
+            if ( $SelectedDest && $SelectedDest ne '||-' ) {
+                $DestPossibleNone = 0;
+            }
+            else {
+                $NewTos{''} = '-';
+            }
         }
         else {
             return $LayoutObject->FatalError();
@@ -1004,13 +1025,14 @@ sub _MaskNew {
             }
         }
         $Param{ToStrg} = $LayoutObject->AgentQueueListOption(
-            Data       => \%NewTos,
-            Multiple   => 0,
-            Size       => 0,
-            Name       => 'Dest',
-            Class      => "Validate_Required Modernize " . $Param{Errors}->{QueueInvalid},
-            SelectedID => $Param{ToSelected} || $Param{QueueID},
-            TreeView   => $TreeView,
+            Data         => \%NewTos,
+            Multiple     => 0,
+            Size         => 0,
+            PossibleNone => $DestPossibleNone,
+            Name         => 'Dest',
+            Class        => "Validate_Required Modernize " . $Param{Errors}->{QueueInvalid},
+            SelectedID   => $SelectedDest,
+            TreeView     => $TreeView,
         );
         $Param{RenderTeamData} = 1;
         $LayoutObject->Block(
@@ -1216,6 +1238,8 @@ sub _MaskNew {
         );
     }
 
+    my $PreviewContentTypes = $ConfigObject->Get('Attachment')->{PreviewContentTypes} || {};
+
     # show attachments
     ATTACHMENT:
     for my $Attachment ( @{ $Param{Attachments} } ) {
@@ -1227,6 +1251,12 @@ sub _MaskNew {
             )
         {
             next ATTACHMENT;
+        }
+
+        # Add preview flag if content type is in the preview content types list.
+        # This is used to determine if the attachment can be previewed in the UI.
+        if ( $Attachment->{ContentType} && $PreviewContentTypes->{ $Attachment->{ContentType} } ) {
+            $Attachment->{Preview} = 1;
         }
 
         push @{ $Param{AttachmentList} }, $Attachment;

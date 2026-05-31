@@ -14,6 +14,7 @@ package Kernel::System::XML;
 
 use strict;
 use warnings;
+use utf8;
 
 use Digest::MD5;
 
@@ -759,7 +760,6 @@ sub XMLParse {
     if ($Checksum) {
 
         # set CacheInMemory to 0 to prevent modification of the cache from outside
-        # See bug#[12761](https://bugs.otrs.org/show_bug.cgi?id=12761) for further details
         my $Cache = $CacheObject->Get(
             Type          => 'XMLParse',
             Key           => $Checksum,
@@ -820,7 +820,7 @@ sub XMLParse {
             );
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "XML::Parser had errors, falling back to XML::Parser::Lite. Offending XML was: $Param{String}",
             );
         }
@@ -852,7 +852,6 @@ sub XMLParse {
     if ($Checksum) {
 
         # set CacheInMemory to 0 to prevent modification of the cache from outside
-        # See bug#[12761](https://bugs.otrs.org/show_bug.cgi?id=12761) for further details
         $CacheObject->Set(
             Type          => 'XMLParse',
             Key           => $Checksum,
@@ -867,7 +866,11 @@ sub XMLParse {
 
 =begin Internal:
 
-=head2  _XMLHashAddAutoIncrement()
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
+=head2 _XMLHashAddAutoIncrement()
 
 Generate a new integer key.
 All keys for that type must be integers.
@@ -1582,8 +1585,6 @@ sub _ES {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

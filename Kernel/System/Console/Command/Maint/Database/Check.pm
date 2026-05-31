@@ -23,7 +23,7 @@ our @ObjectDependencies = (
 sub Configure {
     my ( $Self, %Param ) = @_;
 
-    $Self->Description('Check OTRS database connectivity.');
+    $Self->Description('Check Znuny database connectivity.');
     $Self->AddOption(
         Name        => 'repair',
         Description => 'Repairs invalid database schema (like deleting invalid default values for datetime fields).',

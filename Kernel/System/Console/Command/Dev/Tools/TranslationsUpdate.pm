@@ -48,21 +48,21 @@ sub Configure {
         ValueRegex  => qr/.+/,
     );
     $Self->AddOption(
-        Name => 'generate-po',
+        Name        => 'generate-po',
         Description =>
             "Generate PO (translation content) files. This is only needed if a module is not yet available in Weblate to force initial creation of the gettext files.",
         Required => 0,
         HasValue => 0,
     );
     $Self->AddOption(
-        Name        => 'regnerate',
+        Name        => 'regenerate',
         Description => "All translation files are regenerated so that all unused translations are removed.",
         Required    => 0,
         HasValue    => 0,
     );
 
     $Self->AddOption(
-        Name => 'keep-old',
+        Name        => 'keep-old',
         Description =>
             "Keep old language files (e.g. Kernel/Language/de_GeneralCatalog.pm). This is only needed if you want to diff these files.",
         Required => 0,
@@ -344,7 +344,7 @@ sub HandleLanguage {
         },
     );
     if ( $TranslitLanguagesMap{$Language} ) {
-        $TranslitObject = new Lingua::Translit( $TranslitLanguagesMap{$Language}->{TranslitTable} );    ## no critic
+        $TranslitObject             = new Lingua::Translit( $TranslitLanguagesMap{$Language}->{TranslitTable} );    ## no critic
         $TranslitLanguageCoreObject = Kernel::Language->new(
             UserLanguage    => $TranslitLanguagesMap{$Language}->{SourceLanguage},
             TranslationFile => 1,
@@ -483,7 +483,7 @@ sub WritePOFile {
     my %POLookup;
     my @POEntries;
 
-    if ( $Self->GetOption('regnerate') ) {
+    if ( $Self->GetOption('regenerate') ) {
 
         # Add the first entry again with comments and po header lines
         push @POEntries, $POEntries->[0] if defined $POEntries->[0];
@@ -510,7 +510,7 @@ sub WritePOFile {
         $Translation =~ s/\\/\\\\/g;
         $EncodeObject->EncodeOutput( \$Translation );
 
-        if ( $Self->GetOption('regnerate') ) {
+        if ( $Self->GetOption('regenerate') ) {
 
             # Create new one.
             push @POEntries, Locale::PO->new(
@@ -562,7 +562,7 @@ sub WritePOTFile {
     );
 
     push @POTEntries, Locale::PO->new(
-        -msgid => '',
+        -msgid  => '',
         -msgstr =>
             "Project-Id-Version: $Package\n" .
             "POT-Creation-Date: $CreationDate\n" .
@@ -592,7 +592,7 @@ sub WritePOTFile {
     if ( -e $Param{TargetPOTFile} ) {
         my %PreviousPOTEntries = $Self->LoadPOFile( TargetPOFile => $Param{TargetPOTFile} );
         my @PreviousPOTEntries = sort grep { length $_ } keys %PreviousPOTEntries;
-        my @NewPOTEntries      = sort map { $_->{Source} } @{ $Param{TranslationStrings} };
+        my @NewPOTEntries      = sort map  { $_->{Source} } @{ $Param{TranslationStrings} };
         my $DataIsDifferent    = DataIsDifferent(
             Data1 => \@PreviousPOTEntries,
             Data2 => \@NewPOTEntries
@@ -755,7 +755,7 @@ EOF
                     $Completeness = $StringsTranslated / $StringsTotal;
                 }
                 $NewOut .= <<"EOF";
-    # date formats (\%A=WeekDay;\%B=LongMonth;\%T=Time;\%D=Day;\%M=Month;\%Y=Year;)
+    # date formats (\%a=Weekday;\%b=Month;\%T=Time;\%d=Day;\%m=Month;\%Y=Year;)
     \$Self->{DateFormat}          = '$LanguageCoreObject->{DateFormat}';
     \$Self->{DateFormatLong}      = '$LanguageCoreObject->{DateFormatLong}';
     \$Self->{DateFormatShort}     = '$LanguageCoreObject->{DateFormatShort}';

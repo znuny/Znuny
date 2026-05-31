@@ -12,7 +12,7 @@ package Kernel::Modules::AdminSignature;
 use strict;
 use warnings;
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
@@ -249,7 +249,12 @@ sub Run {
         );
 
         return $LayoutObject->ErrorScreen() if !$Delete;
-        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+        return $LayoutObject->Attachment(
+            ContentType => 'text/html',
+            Content     => $Delete,
+            Type        => 'inline',
+            NoCache     => 1,
+        );
     }
 
     # ------------------------------------------------------------ #
@@ -560,6 +565,20 @@ sub _Overview {
                     %Data,
                 },
             );
+
+            my %SignatureQueues = $SignatureObject->SignatureQueuesList(
+                ID => $ListKey,
+            );
+
+            if ( !%SignatureQueues ) {
+                $LayoutObject->Block(
+                    Name => 'DeleteLink',
+                    Data => {
+                        ID => $ListKey,
+                    },
+                );
+            }
+
         }
     }
 

@@ -29,9 +29,9 @@ sub Configure {
 
     $Self->Description('Generate a test skeleton.');
     $Self->AddOption(
-        Name => 'module-directory',
+        Name        => 'module-directory',
         Description =>
-            "Specify the directory containing the module where the new test should be created (otherwise the OTRS home directory will be used).",
+            "Specify the directory containing the module where the new test should be created (otherwise the Znuny home directory will be used).",
         Required   => 0,
         HasValue   => 1,
         ValueRegex => qr/.*/smx,

@@ -44,6 +44,53 @@ sub new {
     return $Self;
 }
 
+sub GetAvailableConfigOptions {
+    my ( $Self, %Param ) = @_;
+
+    my %ConfigOptions = (
+        Host => {
+            Required     => 1,
+            DefaultValue => undef,
+        },
+        Port => {
+            Required     => 0,
+            DefaultValue => undef,
+        },
+        Timeout => {
+            Required     => 0,
+            DefaultValue => undef,
+        },
+        SkipSSLVerification => {
+            Required     => 0,
+            DefaultValue => undef,
+        },
+        AuthenticationType => {
+            Required       => 0,
+            DefaultValue   => undef,
+            PossibleValues => {
+                password => {
+                    AuthUser => {
+                        Required => 0,
+                    },
+                    AuthPassword => {
+                        Required => 0,
+                    },
+                },
+                oauth2_token => {
+                    AuthUser => {
+                        Required => 1,
+                    },
+                    OAuth2TokenConfigID => {
+                        Required => 1,
+                    },
+                },
+            },
+        },
+    );
+
+    return \%ConfigOptions;
+}
+
 sub Check {
     my ( $Self, %Param ) = @_;
 
@@ -73,6 +120,7 @@ sub Check {
         || die "No SendmailModule::Host found in Kernel/Config.pm";
     $Self->{SMTPPort}              = $ConfigObject->Get('SendmailModule::Port');
     $Self->{Timeout}               = $ConfigObject->Get('SendmailModule::Timeout');
+    $Self->{SkipSSLVerification}   = $ConfigObject->Get('SendmailModule::SkipSSLVerification');
     $Self->{User}                  = $ConfigObject->Get('SendmailModule::AuthUser');
     $Self->{Password}              = $ConfigObject->Get('SendmailModule::AuthPassword');
     $Self->{AuthenticationType}    = $ConfigObject->Get('SendmailModule::AuthenticationType') // 'password';
@@ -220,7 +268,7 @@ sub Check {
             ObjectLogType => 'Connection',
             Priority      => 'Debug',
             Key           => 'Kernel::System::Email::' . $Self->{EmailModuleName},
-            Value =>
+            Value         =>
                 "Using SMTP authentication with user '$Self->{User}' and OAuth2 token config '$Self->{OAuth2TokenConfigName}'.",
         ) if $Param{CommunicationLogObject};
 
@@ -474,7 +522,7 @@ sub _Connect {
 
     my $SMTPDefaultPort = $Self->_GetSMTPDefaultPort();
     my $SMTPPort        = $Param{SMTPPort} || $SMTPDefaultPort;
-    my $Timeout         = $Param{Timeout} || 30;
+    my $Timeout         = $Param{Timeout}  || 30;
 
     # set up connection connection
     my $SMTP = Net::SMTP->new(

@@ -83,7 +83,7 @@ sub Run {
         $Self->AddResultOk(
             Identifier => 'NLS_DATE_FORMAT_SELECT',
             Label      => Translatable('NLS_DATE_FORMAT Setting SQL Check'),
-            Value => $ENV{NLS_DATE_FORMAT},    # use environment variable to avoid different values
+            Value      => $ENV{NLS_DATE_FORMAT},    # use environment variable to avoid different values
         );
     }
     else {

@@ -1266,6 +1266,7 @@ Core.UI.InputFields = (function (TargetNS) {
                     .attr('type', 'text')
                     .attr('role', 'search')
                     .attr('autocomplete', 'off')
+                    .attr('placeholder', $SelectObj.attr('placeholder'))
                     .after('<i class="fa fa-caret-down"></i>');
 
                 // If original field has class small, add it to the input field, too
@@ -1296,6 +1297,7 @@ Core.UI.InputFields = (function (TargetNS) {
                     $LabelObj = $('label[for="' + Core.App.EscapeSelector($SelectObj.attr('id')) + '"]');
                     if ($LabelObj.length > 0) {
                         $SearchObj.attr('aria-label', $LabelObj.text());
+                        $LabelObj.attr('for', SearchID);
                     }
                 }
 
@@ -1655,7 +1657,6 @@ Core.UI.InputFields = (function (TargetNS) {
                             Focused = this;
 
                             // In modernize field selection disable 'backspace' key functionality.
-                            // See bug#14011 (https://bugs.otrs.org/show_bug.cgi?id=14011).
                             $('.jstree .jstree-anchor').on('keydown', function (e) {
                                 if (e.which === 8 && !$(e.target).is('input')) {
                                     return false;

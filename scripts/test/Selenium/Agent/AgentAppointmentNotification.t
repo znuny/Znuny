@@ -418,8 +418,8 @@ $Selenium->RunTest(
                 Data => {
                     Description                           => 'Custom relative -2 minutes before start',
                     NotificationTemplate                  => 'Custom',
-                    NotificationCustomRelativeInput       => 1,
-                    NotificationCustomDateTimeInput       => 0,
+                    NotificationCustomRelativeInput       =>  1,
+                    NotificationCustomDateTimeInput       =>  0,
                     NotificationCustomRelativeUnitCount   => -2,
                     NotificationCustomRelativeUnit        => 'minutes',
                     NotificationCustomRelativePointOfTime => 'beforestart',

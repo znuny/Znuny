@@ -15,7 +15,7 @@ use warnings;
 our $ObjectManagerDisabled = 1;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -950,12 +950,12 @@ sub _Edit {
             Name => 'NotificationLanguage',
             Data => {
                 %Param,
-                Subject => $Param{Message}->{$LanguageID}->{Subject} || '',
-                Body    => $Param{Message}->{$LanguageID}->{Body}    || '',
+                Subject            => $Param{Message}->{$LanguageID}->{Subject} || '',
+                Body               => $Param{Message}->{$LanguageID}->{Body}    || '',
                 LanguageID         => $LanguageID,
                 Language           => $Languages{$LanguageID},
                 SubjectServerError => $Param{ $LanguageID . '_SubjectServerError' } || '',
-                BodyServerError    => $Param{ $LanguageID . '_BodyServerError' } || '',
+                BodyServerError    => $Param{ $LanguageID . '_BodyServerError' }    || '',
             },
         );
 

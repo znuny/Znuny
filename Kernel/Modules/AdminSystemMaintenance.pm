@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -133,7 +133,6 @@ sub Run {
         }
 
         # Trigger server error if 'Login message' or 'Notify message' is longer then 250 characters.
-        #   See bug#13366 (https://bugs.otrs.org/show_bug.cgi?id=13366)
         if ( $SystemMaintenanceData->{LoginMessage} && length $SystemMaintenanceData->{LoginMessage} > 250 ) {
 
             $Error{LoginMessageServerError} = 'ServerError';
@@ -336,7 +335,6 @@ sub Run {
         }
 
         # Trigger server error if 'Login message' or 'Notify message' is longer then 250 characters.
-        #   See bug#13366 (https://bugs.otrs.org/show_bug.cgi?id=13366)
         if ( $SystemMaintenanceData->{LoginMessage} && length $SystemMaintenanceData->{LoginMessage} > 250 ) {
 
             $Error{LoginMessageServerError} = 'ServerError';

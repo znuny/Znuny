@@ -1,0 +1,21 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+.layoutPopUp {
+  display: grid;
+  grid-template-columns: 1fr;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding: 20px 10px;
+  gap: 0;
+  max-width: 100%;
+}
+
+/*# sourceMappingURL=Layout.PopUp.css.map */

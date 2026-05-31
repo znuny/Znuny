@@ -14,7 +14,7 @@ use utf8;
 
 use parent qw (Kernel::System::Command::ExportImport::Base);
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (

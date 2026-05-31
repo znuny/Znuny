@@ -26,7 +26,7 @@ sub _GetSSLOptions {
 
     my %SSLOptions = (
         SSL             => 1,
-        SSL_verify_mode => 0,
+        SSL_verify_mode => $Self->{SkipSSLVerification} ? 0 : 1,
     );
 
     return %SSLOptions;

@@ -12,7 +12,7 @@ package Kernel::Modules::AdminSalutation;
 use strict;
 use warnings;
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
@@ -244,7 +244,13 @@ sub Run {
         );
 
         return $LayoutObject->ErrorScreen() if !$Delete;
-        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+
+        return $LayoutObject->Attachment(
+            ContentType => 'text/html',
+            Content     => $Delete,
+            Type        => 'inline',
+            NoCache     => 1,
+        );
     }
 
     # ------------------------------------------------------------ #
@@ -544,6 +550,20 @@ sub _Overview {
                     %Data,
                 },
             );
+
+            my %SalutationQueues = $SalutationObject->SalutationQueuesList(
+                ID => $ListKey,
+            );
+
+            if ( !%SalutationQueues ) {
+                $LayoutObject->Block(
+                    Name => 'DeleteLink',
+                    Data => {
+                        ID => $ListKey,
+                    },
+                );
+            }
+
         }
     }
 

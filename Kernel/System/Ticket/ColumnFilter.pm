@@ -11,6 +11,7 @@ package Kernel::System::Ticket::ColumnFilter;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(IsArrayRefWithData IsHashRefWithData IsStringWithData);
 
@@ -143,7 +144,7 @@ sub QueueFilterValuesGet {
         # get queue list
         return $Self->_GeneralDataGet(
             ModuleName   => 'Kernel::System::Queue',
-            FunctionName => 'QueueList',
+            FunctionName => 'GetAllQueues',
             UserID       => $Param{UserID},
         );
     }
@@ -664,17 +665,18 @@ get a list of ticket owners within the given ticket is list
 sub OwnerFilterValuesGet {
     my ( $Self, %Param ) = @_;
 
+    # get user object
+    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+
     # check needed stuff
     if ( !$Param{TicketIDs} ) {
 
-        return if !$Param{UserID};
-
         # get user list
-        return $Self->_GeneralDataGet(
-            ModuleName   => 'Kernel::System::User',
-            FunctionName => 'UserList',
-            UserID       => $Param{UserID},
+        my %UserList = $UserObject->UserList(
+            Type  => 'Long',
+            Valid => 1,
         );
+        return \%UserList;
     }
 
     if ( !IsArrayRefWithData( $Param{TicketIDs} ) ) {
@@ -715,9 +717,6 @@ sub OwnerFilterValuesGet {
         }
     }
 
-    # get user object
-    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
-
     my %Data;
     if ( scalar @UserList > 0 ) {
         for my $UserID (@UserList) {
@@ -752,17 +751,18 @@ get a list of agents responsible for the tickets within the given ticket list
 sub ResponsibleFilterValuesGet {
     my ( $Self, %Param ) = @_;
 
+    # get user object
+    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+
     # check needed stuff
     if ( !$Param{TicketIDs} ) {
 
-        return if !$Param{UserID};
-
         # get user list
-        return $Self->_GeneralDataGet(
-            ModuleName   => 'Kernel::System::User',
-            FunctionName => 'UserList',
-            UserID       => $Param{UserID},
+        my %UserList = $UserObject->UserList(
+            Type  => 'Long',
+            Valid => 1,
         );
+        return \%UserList;
     }
 
     if ( !IsArrayRefWithData( $Param{TicketIDs} ) ) {
@@ -802,9 +802,6 @@ sub ResponsibleFilterValuesGet {
             push @UserList, $Row[0];
         }
     }
-
-    # get user object
-    my $UserObject = $Kernel::OM->Get('Kernel::System::User');
 
     my %Data;
     if ( scalar @UserList > 0 ) {
@@ -920,6 +917,10 @@ sub DynamicFieldFilterValuesGet {
 }
 
 =begin Internal:
+
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
 
 =head2 _GeneralDataGet()
 
@@ -1049,8 +1050,6 @@ sub _TicketIDStringGet {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

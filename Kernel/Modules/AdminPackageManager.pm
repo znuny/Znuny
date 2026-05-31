@@ -14,7 +14,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 use parent('Kernel::System::AsynchronousExecutor');
 
@@ -80,8 +80,8 @@ sub Run {
     # view diff file
     # ------------------------------------------------------------ #
     if ( $Self->{Subaction} eq 'ViewDiff' ) {
-        my $Name    = $ParamObject->GetParam( Param => 'Name' )    || '';
-        my $Version = $ParamObject->GetParam( Param => 'Version' ) || '';
+        my $Name     = $ParamObject->GetParam( Param => 'Name' )    || '';
+        my $Version  = $ParamObject->GetParam( Param => 'Version' ) || '';
         my $Location = $ParamObject->GetParam( Param => 'Location' );
 
         # get package
@@ -177,8 +177,8 @@ sub Run {
     # view package
     # ------------------------------------------------------------ #
     if ( $Self->{Subaction} eq 'View' ) {
-        my $Name    = $ParamObject->GetParam( Param => 'Name' )    || '';
-        my $Version = $ParamObject->GetParam( Param => 'Version' ) || '';
+        my $Name     = $ParamObject->GetParam( Param => 'Name' )    || '';
+        my $Version  = $ParamObject->GetParam( Param => 'Version' ) || '';
         my $Location = $ParamObject->GetParam( Param => 'Location' );
         my %Frontend;
 
@@ -270,7 +270,7 @@ sub Run {
         }
         my @DatabaseBuffer;
 
-        # correct any 'dos-style' line endings - http://bugs.otrs.org/show_bug.cgi?id=9838
+        # correct any 'dos-style' line endings
         ${$Package} =~ s{\r\n}{\n}xmsg;
 
         # create MD5 sum and add it into existing package structure
@@ -712,6 +712,17 @@ sub Run {
                                     %{$Hash},
                                 },
                             );
+
+                            $LayoutObject->Block(
+                                Name => "PackageItemFilelistFileNote",
+                                Data => {
+                                    Name    => $Structure{Name}->{Content},
+                                    Version => $Structure{Version}->{Content},
+                                    File    => $File,
+                                    %{$Hash},
+                                },
+                            );
+
                         }
 
                         $LayoutObject->Block(
@@ -888,8 +899,8 @@ sub Run {
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
-        my $Name    = $ParamObject->GetParam( Param => 'Name' )    || '';
-        my $Version = $ParamObject->GetParam( Param => 'Version' ) || '';
+        my $Name              = $ParamObject->GetParam( Param => 'Name' )    || '';
+        my $Version           = $ParamObject->GetParam( Param => 'Version' ) || '';
         my $IntroReinstallPre = $ParamObject->GetParam( Param => 'IntroReinstallPre' )
             || '';
 
@@ -984,8 +995,8 @@ sub Run {
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
-        my $Name    = $ParamObject->GetParam( Param => 'Name' )    || '';
-        my $Version = $ParamObject->GetParam( Param => 'Version' ) || '';
+        my $Name               = $ParamObject->GetParam( Param => 'Name' )    || '';
+        my $Version            = $ParamObject->GetParam( Param => 'Version' ) || '';
         my $IntroReinstallPost = $ParamObject->GetParam( Param => 'IntroReinstallPost' )
             || '';
 
@@ -1006,7 +1017,12 @@ sub Run {
         );
 
         # intro screen
-        if ( !$PackageObject->PackageReinstall( String => $Package ) ) {
+        my $PackageReinstall = $PackageObject->PackageReinstall(
+            String => $Package,
+            UserID => $Self->{UserID},
+        );
+
+        if ( !$PackageReinstall ) {
             return $LayoutObject->ErrorScreen();
         }
         my %Data;
@@ -1062,8 +1078,8 @@ sub Run {
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
-        my $Name    = $ParamObject->GetParam( Param => 'Name' )    || '';
-        my $Version = $ParamObject->GetParam( Param => 'Version' ) || '';
+        my $Name              = $ParamObject->GetParam( Param => 'Name' )    || '';
+        my $Version           = $ParamObject->GetParam( Param => 'Version' ) || '';
         my $IntroUninstallPre = $ParamObject->GetParam( Param => 'IntroUninstallPre' )
             || '';
 
@@ -1157,8 +1173,8 @@ sub Run {
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
-        my $Name    = $ParamObject->GetParam( Param => 'Name' )    || '';
-        my $Version = $ParamObject->GetParam( Param => 'Version' ) || '';
+        my $Name               = $ParamObject->GetParam( Param => 'Name' )    || '';
+        my $Version            = $ParamObject->GetParam( Param => 'Version' ) || '';
         my $IntroUninstallPost = $ParamObject->GetParam( Param => 'IntroUninstallPost' )
             || '';
 
@@ -1179,7 +1195,11 @@ sub Run {
         );
 
         # unsinstall the package
-        if ( !$PackageObject->PackageUninstall( String => $Package ) ) {
+        my $PackageUninstall = $PackageObject->PackageUninstall(
+            String => $Package,
+            UserID => $Self->{UserID},
+        );
+        if ( !$PackageUninstall ) {
             return $LayoutObject->ErrorScreen();
         }
 
@@ -1456,7 +1476,7 @@ sub Run {
         my $JSON = $LayoutObject->JSONEncode(
             Data => {
                 Success        => 1,
-                UpgradeStatus  => $SystemData{Status} || '',
+                UpgradeStatus  => $SystemData{Status}  || '',
                 UpgradeSuccess => $SystemData{Success} || '',
                 PackageList    => \@PackageList,
             },
@@ -2051,6 +2071,7 @@ sub _InstallHandling {
     elsif (
         $PackageObject->PackageInstall(
             String => $Param{Package},
+            UserID => $Self->{UserID},
         )
         )
     {
@@ -2224,7 +2245,13 @@ sub _UpgradeHandling {
     }
 
     # upgrade
-    elsif ( $PackageObject->PackageUpgrade( String => $Param{Package} ) ) {
+    elsif (
+        $PackageObject->PackageUpgrade(
+            String => $Param{Package},
+            UserID => $Self->{UserID},
+        )
+        )
+    {
 
         # intro screen
         my %Data;

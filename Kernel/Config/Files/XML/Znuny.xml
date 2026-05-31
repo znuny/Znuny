@@ -305,6 +305,7 @@
                 <Item Key="PopupType"></Item>
                 <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
                 <Item Key="ClusterPriority">998</Item>
+                <Item Key="Prio">999</Item>
             </Hash>
         </Value>
     </Setting>
@@ -323,6 +324,7 @@
                 <Item Key="PopupType"></Item>
                 <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
                 <Item Key="ClusterPriority">999</Item>
+                <Item Key="Prio">999</Item>
             </Hash>
         </Value>
     </Setting>
@@ -1143,6 +1145,7 @@
                         <Item Key="Ticket::Frontend::AgentTicketResponsibleView###DefaultColumns">AgentTicketResponsibleView</Item>
                         <Item Key="Ticket::Frontend::AgentTicketWatchView###DefaultColumns">AgentTicketWatchView</Item>
                         <Item Key="Ticket::Frontend::AgentTicketLockedView###DefaultColumns">AgentTicketLockedView</Item>
+                        <Item Key="Ticket::Frontend::AgentTicketOwnerView###DefaultColumns">AgentTicketOwnerView</Item>
                         <Item Key="Ticket::Frontend::AgentTicketEscalationView###DefaultColumns">AgentTicketEscalationView</Item>
                         <Item Key="Ticket::Frontend::AgentTicketSearch###DefaultColumns">AgentTicketSearch (Overview Screen)</Item>
                         <Item Key="Ticket::Frontend::AgentTicketService###DefaultColumns">AgentTicketService</Item>
@@ -2010,7 +2013,7 @@
             </Item>
         </Value>
     </Setting>
-   <Setting Name="Ticket::Frontend::AgentTicketOwnerView###DefaultColumns" Required="0" Valid="1">
+    <Setting Name="Ticket::Frontend::AgentTicketOwnerView###DefaultColumns" Required="0" Valid="1">
         <Description Translatable="1">Columns that can be filtered in the owner view of the agent interface. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed.</Description>
         <Navigation>Frontend::Agent::View::TicketOwnerView</Navigation>
         <Value>
@@ -2776,6 +2779,13 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="Activity###MaxKeepActivities" Required="0" Valid="1">
+        <Description Translatable="1">Maximum number of activities to keep per user. Older ones will be deleted.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^[1-9][0-9]*$">50</Item>
+        </Value>
+    </Setting>
     <Setting Name="Activity###EventTypeMapping" Required="1" Valid="1">
         <Description Translatable="1">Assignment between event and type.</Description>
         <Navigation>Core</Navigation>
@@ -3177,7 +3187,7 @@
         <Description Translatable="1">Start date (YYYYMMDD) of the range to use when parsing ICS files. The used CPAN module iCal::Parser needs this to be able to parse ICS files with events in a year before the current one. The end date of the range is automatically set to 10 years in the future from the time of parsing/execution.</Description>
         <Navigation>Core</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="\A20\d{2}\d{2}\d{2}\z">20100101</Item>
+            <Item ValueType="String" ValueRegex="^20[0-9]{6}$">20100101</Item>
         </Value>
     </Setting>
 
@@ -3350,7 +3360,7 @@
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketNoteToLinkedTicket###IsVisibleForCustomerDefault" Required="0" Valid="1">
         <Description Translatable="1">Defines if the note in the NoteToLinkedTicket screen of the agent interface is visible for the customer by default.</Description>
-        <Navigation>Frontend::Agent::View::TicketNote</Navigation>
+        <Navigation>Frontend::Agent::View::TicketNoteToLinkedTicket</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
         </Value>
@@ -3560,6 +3570,16 @@
                         <Item Key="ModuleHandler">ProcessManagement</Item>
                     </Hash>
                 </Item>
+                <Item Key="PostMasterFilter">
+                    <Hash>
+                        <Item Key="ModuleHandler">PostMasterFilter</Item>
+                    </Hash>
+                </Item>
+                <Item Key="GenericAgent">
+                    <Hash>
+                        <Item Key="ModuleHandler">GenericAgent</Item>
+                    </Hash>
+                </Item>
             </Hash>
         </Value>
     </Setting>
@@ -3611,6 +3631,22 @@
                 <Item Key="ProcessManagement">
                     <Hash>
                         <Item Key="ModuleHandler">ProcessManagement</Item>
+                    </Hash>
+                </Item>
+                <Item Key="PostMasterFilter">
+                    <Hash>
+                        <Item Key="ImportModule">Kernel::System::PostMaster::Filter</Item>
+                        <Item Key="ImportFunctionName">FilterImport</Item>
+                        <Item Key="ImportOverwriteParameter">OverwriteExistingFilters</Item>
+                        <Item Key="ModuleHandler">PostMasterFilter</Item>
+                    </Hash>
+                </Item>
+                <Item Key="GenericAgent">
+                    <Hash>
+                        <Item Key="ImportModule">Kernel::System::GenericAgent</Item>
+                        <Item Key="ImportFunctionName">JobImport</Item>
+                        <Item Key="ImportOverwriteParameter">OverwriteExistingJobs</Item>
+                        <Item Key="ModuleHandler">GenericAgent</Item>
                     </Hash>
                 </Item>
             </Hash>
@@ -3779,10 +3815,11 @@
                 <Item Key="Link">Action=AgentTicketMarkSeenUnseen;Subaction=Unseen;TicketID=[% Data.TicketID | html %]</Item>
                 <Item Key="Target"></Item>
                 <Item Key="PopupType"></Item>
+                <Item Key="Prio">001</Item>
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Ticket::Frontend::MenuModule###001-MarkTicketSeen" Required="0" Valid="1">
+    <Setting Name="Ticket::Frontend::MenuModule###002-MarkTicketSeen" Required="0" Valid="1">
         <Description Translatable="1">Registers a link in the ticket menu to mark a ticket as seen.</Description>
         <Navigation>Frontend::Agent::View::TicketZoom::MenuModule</Navigation>
         <Value>
@@ -3794,6 +3831,7 @@
                 <Item Key="Link">Action=AgentTicketMarkSeenUnseen;Subaction=Seen;TicketID=[% Data.TicketID | html %]</Item>
                 <Item Key="Target"></Item>
                 <Item Key="PopupType"></Item>
+                <Item Key="Prio">002</Item>
             </Hash>
         </Value>
     </Setting>
@@ -3978,6 +4016,59 @@
                     </Array>
                 </Item>
             </Hash>
+        </Value>
+    </Setting>
+
+    <!--
+        Ticket list views: Flag to decide if ticket search will be executed for the logged in user or with user ID 1.
+    -->
+    <Setting Name="Ticket::Frontend::AgentTicketResponsibleView###TicketSearchWithAdminUser" Required="1" Valid="1">
+        <Description Translatable="1">Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view.</Description>
+        <Navigation>Frontend::Agent::View::TicketResponsible</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketOwnerView###TicketSearchWithAdminUser" Required="1" Valid="1">
+        <Description Translatable="1">Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view.</Description>
+        <Navigation>Frontend::Agent::View::TicketOwner</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketWatchView###TicketSearchWithAdminUser" Required="1" Valid="1">
+        <Description Translatable="1">Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view.</Description>
+        <Navigation>Frontend::Agent::View::TicketWatch</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketLockedView###TicketSearchWithAdminUser" Required="1" Valid="1">
+        <Description Translatable="1">Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view.</Description>
+        <Navigation>Frontend::Agent::View::TicketLocked</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketStatusView###TicketSearchWithAdminUser" Required="1" Valid="1">
+        <Description Translatable="1">Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view.</Description>
+        <Navigation>Frontend::Agent::View::TicketStatus</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketMentionView###TicketSearchWithAdminUser" Required="1" Valid="1">
+        <Description Translatable="1">Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view.</Description>
+        <Navigation>Frontend::Agent::View::TicketMention</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketEscalationView###TicketSearchWithAdminUser" Required="1" Valid="1">
+        <Description Translatable="1">Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view.</Description>
+        <Navigation>Frontend::Agent::View::TicketEscalation</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
 
@@ -4410,25 +4501,168 @@
         </Value>
     </Setting>
 
+    <Setting Name="Frontend::ToolBarModule###161-Ticket::AgentTicketProcessCategory" UserPreferencesGroup="Advanced" UserModificationActive="1" UserModificationPossible="1" Required="0" Valid="1">
+        <Description Translatable="1">Toolbar Item for a shortcut. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".</Description>
+        <Navigation>Frontend::Agent::ToolBar</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::ToolBar::TicketProcessCategory</Item>
+                <Item Key="Block">ToolBarOverviews</Item>
+                <Item Key="Name" Translatable="1">Process ticket category</Item>
+                <Item Key="Link">Action=AgentTicketProcessCategory</Item>
+                <Item Key="Action">AgentTicketProcessCategory</Item>
+                <Item Key="AccessKey">c</Item>
+                <Item Key="CssClass">ProcessTicketCategory</Item>
+                <Item Key="Icon">fa fa-th</Item>
+                <Item Key="Priority">1020031</Item>
+            </Hash>
+        </Value>
+    </Setting>
+
     <!-- Attachment Settings -->
     <Setting Name="Attachment###PreviewContentTypes" Required="1" Valid="1">
         <Description Translatable="1">Defines which ContentTypes are permitted for the attachment preview.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
             <Hash>
-                <Item Key="application/pdf">pdf</Item>
                 <Item Key="application/json">json</Item>
-                <Item Key="text/markdown">markdown</Item>
+                <Item Key="application/pdf">pdf</Item>
+                <Item Key="image/gif">gif</Item>
+                <Item Key="image/jpeg">jpeg</Item>
+                <Item Key="image/png">png</Item>
+                <Item Key="image/svg+xml">svg</Item>
+                <Item Key="text/css">css</Item>
                 <Item Key="text/html">html</Item>
-                <Item Key="text/xml">xml</Item>
+                <Item Key="text/markdown">markdown</Item>
                 <Item Key="text/plain">plain</Item>
                 <Item Key="text/x-sh">sh</Item>
-                <Item Key="image/svg+xml">svg</Item>
-                <Item Key="image/png">png</Item>
-                <Item Key="image/jpeg">jpeg</Item>
-                <Item Key="image/gif">gif</Item>
+                <Item Key="text/xml">xml</Item>
             </Hash>
         </Value>
     </Setting>
 
+    <!--
+        Znuny-MultiSendmail
+    -->
+    <Setting Name="Frontend::Module###AdminSendmailConfig" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Admin</Item>
+                    <Item Key="Title" Translatable="1">Outbound Email Profiles</Item>
+                    <Item Key="NavBarName">Admin</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AdminSendmailConfig###001-Framework" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.SendmailConfig.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::NavigationModule###AdminSendmailConfig" Required="0" Valid="1">
+        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Group">
+                    <Array>
+                        <Item>admin</Item>
+                    </Array>
+                </Item>
+                <Item Key="GroupRo">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
+                <Item Key="Name" Translatable="1">Outbound Email Profiles</Item>
+                <Item Key="Block">Communication</Item>
+                <Item Key="Description" Translatable="1">Manage outbound email profiles.</Item>
+                <Item Key="IconBig">fa-envelope-o</Item>
+                <Item Key="IconSmall"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="SendmailConfig::EmailAddress::ConfigOptions" Required="0" Valid="1">
+        <Description Translatable="1">Names of system config options with email addresses to also be selectable for an outbound email profile (besides system addresses).</Description>
+        <Navigation>Core::Email</Navigation>
+        <Value>
+            <Array>
+                <Item>AdminEmail</Item>
+                <Item>NotificationSenderEmail</Item>
+                <Item>PostMaster::PreFilterModule::NewTicketReject::Sender</Item>
+            </Array>
+        </Value>
+    </Setting>
+
+    <!-- CopyTicketNumber -->
+    <Setting Name="Loader::Module::AgentTicketZoom###001-CopyTicketNumber" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.Agent.CopyTicketNumber.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.CopyTicketNumber.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <!-- AgentSession -->
+    <Setting Name="Frontend::Module###AgentSession" Required="1" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1">Agent Session.</Item>
+                    <Item Key="Title"></Item>
+                    <Item Key="NavBarName">Session</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="AgentSession::AJAXUpdate::AllowedKeys###Framework" Required="1" Valid="1">
+        <Description Translatable="1">List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.</Description>
+        <Navigation>Core::AgentSession</Navigation>
+        <Value>
+            <Array>
+                <Item>\AUserClosedNotifications\z</Item>
+            </Array>
+        </Value>
+    </Setting>
 </otrs_config>

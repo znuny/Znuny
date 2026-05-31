@@ -5,6 +5,7 @@
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
+## no critic (RequireExplicitPackage)
 
 use strict;
 use warnings;
@@ -28,6 +29,10 @@ my $Hostname    = $ConfigObject->Get('FQDN');
 my $ScriptAlias = $ConfigObject->Get('ScriptAlias') // '';
 my $BaseURL     = "$HttpType://$Hostname/$ScriptAlias" . "index.pl";
 
+my $ActivityConfig = $ConfigObject->Get('Activity') // {};
+$ActivityConfig->{MaxKeepActivities} = 10;
+$ConfigObject->Set( 'Activity', $ActivityConfig );
+
 my @Tests = (
     {
         Name => 'TicketID',
@@ -43,10 +48,74 @@ my @Tests = (
         },
         Expected => $BaseURL . "?Action=AgentAppointmentCalendarOverview;AppointmentID=" . 456,
     },
+    {
+        Create => 10,
+        Name   => 'TicketID',
+        Data   => {
+            Type     => 'activitytype',
+            Title    => 'a title',
+            Text     => 'nothing special',
+            State    => 'new',
+            Link     => 'http://foo.invalid/',
+            CreateBy => 1,
+            UserID   => 1,
+        },
+        Expected => 10,
+    },
+    {
+        Create => 1,
+        Name   => 'TicketID',
+        Data   => {
+            Type     => 'activitytype',
+            Title    => 'a title',
+            Text     => 'nothing special',
+            State    => 'new',
+            Link     => 'http://foo.invalid/',
+            CreateBy => 1,
+            UserID   => 1,
+        },
+        Expected => 10,
+    },
+    {
+        Create => 10,
+        Name   => 'TicketID',
+        Data   => {
+            Type     => 'activitytype',
+            Title    => 'a title',
+            Text     => 'nothing special',
+            State    => 'new',
+            Link     => 'http://foo.invalid/',
+            CreateBy => 1,
+            UserID   => 1,
+        },
+        Expected => 10,
+    },
 );
 
+TEST:
 for my $Test (@Tests) {
 
+    if ( $Test->{Create} ) {
+        for my $ActivityNumber ( 1 .. $Test->{Create} ) {
+            my $Success = $ActivityObject->Add(
+                %{ $Test->{Data} }
+            );
+            $Self->True(
+                $Success,
+                "Created activity $ActivityNumber",
+            );
+        }
+
+        my @Activities = $ActivityObject->ListGet(
+            UserID => $Test->{Data}->{UserID},
+        );
+        $Self->Is(
+            scalar @Activities,
+            $Test->{Expected},
+            "Found $Test->{Expected} activities",
+        );
+        next TEST;
+    }
     my $String = $ActivityObject->GetLink(
         %{ $Test->{Data} }
     );

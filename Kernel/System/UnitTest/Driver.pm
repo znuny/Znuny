@@ -522,6 +522,18 @@ sub AttachSeleniumScreenshot {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
+=head2 _SaveResults()
+
+save the results to a file
+
+    my $Success = $UnitTestObject->_SaveResults();
+
+Returns 1 if the results were saved successfully, or undef otherwise.
+
 =cut
 
 sub _SaveResults {
@@ -620,8 +632,6 @@ sub _Color {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

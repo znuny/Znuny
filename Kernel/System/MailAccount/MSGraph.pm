@@ -379,7 +379,7 @@ sub _FetchMessages {
             ObjectLogType => 'Connection',
             Priority      => 'Debug',
             Key           => ref $Self,
-            Value =>
+            Value         =>
                 "$Self->{MailAccountModuleName}: Fetched $MessageCounter messages from $Param{Login}/$Param{Host}.",
         );
     }

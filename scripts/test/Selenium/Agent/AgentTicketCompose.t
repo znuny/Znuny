@@ -415,15 +415,15 @@ $Selenium->RunTest(
         my $Message = 'Article subject will be empty if the subject contains only the ticket hook!';
 
         $Self->True(
-            $Selenium->execute_script("return \$('.MessageBox.Notice:contains(\"$Message\")').length == 0;"),
+            $Selenium->execute_script("return \$('.messageNotice .alertContent:contains(\"$Message\")').length == 0;"),
             "No Notification about empty subject is shown",
         );
 
         $Selenium->execute_script("\$('#Subject').val( \$('#Subject').val().replace(/].*/, ']') ).trigger('change');");
 
-        $Selenium->WaitFor( JavaScript => "return \$('.MessageBox.Notice:contains(\"$Message\")').length;" );
+        $Selenium->WaitFor( JavaScript => "return \$('.messageNotice .alertContent:contains(\"$Message\")').length;" );
         $Self->True(
-            $Selenium->execute_script("return \$('.MessageBox.Notice:contains(\"$Message\")').length;"),
+            $Selenium->execute_script("return \$('.messageNotice .alertContent:contains(\"$Message\")').length;"),
             "Notification about empty subject is found",
         );
 
@@ -500,7 +500,6 @@ $Selenium->RunTest(
             "Default customer visibility is honored",
         );
 
-        # Test bug #11810 - http://bugs.otrs.org/show_bug.cgi?id=11810.
         # Translate ticket data tags (e.g. <OTRS_TICKET_State> ) in standard template.
         $Kernel::OM->ObjectParamAdd(
             'Kernel::Language' => {
@@ -661,7 +660,6 @@ $Selenium->RunTest(
         );
 
         # Check if Ticket number is shown correctly in text field.
-        # See bug#133995 https://bugs.otrs.org/show_bug.cgi?id=13995
         my $TicketNumber = $TicketObject->TicketNumberLookup(
             TicketID => $TicketID,
         );

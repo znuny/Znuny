@@ -223,7 +223,7 @@ Core.Agent.Overview = (function (TargetNS) {
                             ) {
 
                             if (!$TriggerObj.parent().find('.SelectedValue').length) {
-                                Core.AJAX.FormUpdate($('#Nothing'), 'AJAXFilterUpdate', FilterName, [ FilterName ], function() {
+                                Core.AJAX.FormUpdate($('#ColumnFilterAttributes'), 'AJAXFilterUpdate', FilterName, [ FilterName ], function() {
                                     var AutoCompleteValue = $TriggerObj
                                             .next('.ColumnSettingsContainer')
                                             .find('select')
@@ -239,22 +239,7 @@ Core.Agent.Overview = (function (TargetNS) {
                                         $TriggerObj
                                             .next('.ColumnSettingsContainer')
                                             .find('select')
-                                            .after('<span class="SelectedValue Hidden">' + AutoCompleteText + ' (' + AutoCompleteValue + ')</span>')
-                                            .parent()
-                                            .find('input[type=text]')
-                                            .after('<a href="#" class="DeleteFilter"><i class="fa fa-trash-o"></i></a>')
-                                            .parent()
-                                            .find('a.DeleteFilter')
-                                            .off()
-                                            .on('click', function() {
-                                                $(this)
-                                                    .closest('.ColumnSettingsContainer')
-                                                    .find('select')
-                                                    .val('DeleteFilter')
-                                                    .trigger('change');
-
-                                                return false;
-                                            });
+                                            .after('<span class="SelectedValue Hidden">' + AutoCompleteText + ' (' + AutoCompleteValue + ')</span>');
                                     }
                                 });
                             }
@@ -280,7 +265,7 @@ Core.Agent.Overview = (function (TargetNS) {
             // only act if the link was not clicked directly
             if (Event.target !== $MasterActionLink.get(0)) {
                 if (Event.ctrlKey || Event.metaKey) {
-                    Core.UI.Popup.OpenPopup($MasterActionLink.attr('href'));
+                    Core.UI.Popup.OpenPopup($MasterActionLink.attr('href'), undefined, undefined, 1);
                 }
                 else {
                     window.location = $MasterActionLink.attr('href');
@@ -361,7 +346,7 @@ Core.Agent.Overview = (function (TargetNS) {
             // only act if the link was not clicked directly
             if (Event.target !== $MasterActionLink.get(0)) {
                 if (Event.ctrlKey || Event.metaKey) {
-                    Core.UI.Popup.OpenPopup($MasterActionLink.attr('href'));
+                    Core.UI.Popup.OpenPopup($MasterActionLink.attr('href'), undefined, undefined, 1);
                 }
                 else {
                     window.location = $MasterActionLink.attr('href');
@@ -505,7 +490,7 @@ Core.Agent.Overview = (function (TargetNS) {
             // only act if the link was not clicked directly
             if (Event.target !== $MasterActionLink.get(0)) {
                 if (Event.ctrlKey || Event.metaKey) {
-                    Core.UI.Popup.OpenPopup($MasterActionLink.attr('href'));
+                    Core.UI.Popup.OpenPopup($MasterActionLink.attr('href'), undefined, undefined, 1);
                 }
                 else {
                     window.location = $MasterActionLink.attr('href');

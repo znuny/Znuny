@@ -20,9 +20,9 @@ $Kernel::OM->ObjectParamAdd(
     },
 );
 
-my $ZnunyHelperObject = $Kernel::OM->Get('Kernel::System::ZnunyHelper');
-my $HelperObject      = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
-my $PMFilterObject    = $Kernel::OM->Get('Kernel::System::PostMaster::Filter');
+my $ZnunyHelperObject      = $Kernel::OM->Get('Kernel::System::ZnunyHelper');
+my $HelperObject           = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $PostMasterFilterObject = $Kernel::OM->Get('Kernel::System::PostMaster::Filter');
 
 my $RandomNumber = $HelperObject->GetRandomNumber();
 
@@ -54,7 +54,7 @@ $Self->True(
     '_PostMasterFilterCreate',
 );
 
-my %Data = $PMFilterObject->FilterGet(
+my %Data = $PostMasterFilterObject->FilterGet(
     Name => 'PostmasterFilter' . $RandomNumber,
 );
 
@@ -117,7 +117,7 @@ $Self->True(
     '_PostMasterFilterConfigImport',
 );
 
-%Data = $PMFilterObject->FilterGet(
+%Data = $PostMasterFilterObject->FilterGet(
     Name => $Name
 );
 
@@ -171,7 +171,7 @@ $Self->True(
     '_PostMasterFilterConfigImport',
 );
 
-%Data = $PMFilterObject->FilterGet(
+%Data = $PostMasterFilterObject->FilterGet(
     Name => $Name
 );
 

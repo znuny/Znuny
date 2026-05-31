@@ -1,0 +1,238 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+@import './../mixins/Mixin.Label';
+
+// Colors
+$customerSelectorWhite: white;
+$customerSelectorOrange: #FF8A25;
+$customerSelectorDarkText: #171725;
+$customerSelectorLightGray: #ccc;
+$customerSelectorWarningColor: var(--warning-color);
+
+// Sizes
+$customerSelectorPadding: 5px;
+$customerSelectorPaddingL: 10px;
+$customerSelectorPaddingXl: 30px;
+$customerSelectorMinWidth: 160px;
+$customerSelectorMaxHeight: 180px;
+$customerSelectorFullSize: 100%;
+$customerSelectorOpacityHover: 0.8;
+
+.modCustomerSelector {
+  > .inner {
+    font-size: var( --main-font-size);
+    .customerSelector {
+      .customerSelectorFieldLabelRequired {
+        @include label-required();
+      }
+
+      .customerSelectorField {
+        position: relative;
+
+        .customerSelectorFieldInput {
+          position: relative;
+          display: flex;
+          border: var(--border-width) var(--border-solid) var(--border-color);
+          border-radius: var(--border-radius-sm);
+          flex-wrap: wrap;
+          align-items: center;
+          height: auto !important;
+          padding: 1px $customerSelectorPaddingXl 1px 3px;
+
+          &:focus-within {
+            border-color: var(--gray-dark);
+          }
+
+          .customerSelectorFieldInputSelectedCustomer {
+            display: flex;
+            align-items: center;
+            padding: $customerSelectorPadding;
+            margin: 1px $customerSelectorPadding 1px 0;
+            word-break: break-all;
+            background: var(--disabled-input-color);
+            border-radius: 20px;
+            border: 1px solid var(--disabled-input-color);
+            position: relative;
+            .customerSelectorFieldInputSelectedCustomerErrors {
+              display: none;
+              position: absolute;
+              top: 100%;
+              border: 1px solid $customerSelectorWarningColor;
+              background-color: white;
+              padding: 5px;
+              left: 0px;
+              width: 100%;
+              z-index: 10;
+              margin-top: 3px;
+              border-radius: 5px;
+              word-wrap: normal;
+              word-break: break-word;
+              min-width: 250px;
+              p {
+                margin-bottom: 0;
+                padding-bottom: 0;
+              }
+            }
+
+            .customerSelectorFieldInputSelectedCustomerSelect {
+              width: 16px;
+              height: 16px;
+              border-radius: 8px;
+              border: 1px solid var(--gray-dark);
+              background-color: $customerSelectorWhite;
+              margin-right: $customerSelectorPaddingL;
+              &:hover {
+                cursor: pointer;
+                background-color: var(--success-color);
+              }
+            }
+
+            &.customerSelectorFieldInputSelectedCustomerActive {
+              border-color: $customerSelectorOrange;
+              background-color: rgba($customerSelectorOrange, 0.2);
+              color: $customerSelectorDarkText;
+              .customerSelectorFieldInputSelectedCustomerSelect {
+                background-color: var(--success-color);
+              }
+            }
+
+            &.customerSelectorFieldInputSelectedCustomerDisabled {
+              background-color: rgba(red, 0.1);
+              color: red;
+              border-color: red;
+              .customerSelectorFieldInputSelectedCustomerSelect {
+                background-color: rgba(red, 0.1);
+              }
+              &:hover {
+                .customerSelectorFieldInputSelectedCustomerErrors {
+                  display: block;
+                }
+              }
+            }
+
+
+            .customerSelectorFieldInputSelectedCustomerRemove {
+              padding: 2px;
+              margin-left: $customerSelectorPaddingL;
+              align-self: center;
+              text-align: center;
+              border-radius: 20px;
+              width: 18px;
+              height: 18px;
+              background-color: $customerSelectorWhite;
+              margin-top: -1px;
+              border: none;
+              &:hover {
+                cursor: pointer;
+                background-color: $customerSelectorWarningColor;
+                img {
+                  filter: brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(0%) hue-rotate(265deg) brightness(103%) contrast(100%);
+                }
+              }
+              &:focus {
+                background-color: $customerSelectorWarningColor;
+                img {
+                  filter: brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(0%) hue-rotate(265deg) brightness(103%) contrast(100%);
+                }
+
+              }
+              img {
+                width: 11px;
+                height: auto;
+                margin-left: 0;
+                margin-top: 1px;
+
+              }
+            }
+          }
+        }
+
+        .customerSelectorFieldInputAddressBook {
+          position: absolute;
+          right: $customerSelectorPadding;
+          padding: $customerSelectorPadding;
+          height: $customerSelectorFullSize;
+          background-color: transparent;
+          border: none;
+          width: 30px;
+          &:hover {
+            opacity: $customerSelectorOpacityHover;
+            cursor: pointer;
+          }
+          &:focus {
+            opacity: 0.6;
+            cursor: pointer;
+          }
+          img {
+            margin-top: 3px;
+            position: absolute;
+            right: 5px;
+            top: 5px;
+          }
+        }
+
+        .customerSelectorFieldInputElement {
+          all: revert;
+          line-height: var(--input-line-height);
+          font-size: var(--font-size-sm);
+          border: none;
+          flex: 1 auto;
+          min-width: $customerSelectorMinWidth;
+          margin: $customerSelectorPadding 0;
+          outline: none;
+          padding: 0 0 0 $customerSelectorPadding;
+
+          &:focus {
+            outline: none;
+          }
+
+        }
+        .customerSelectorFieldSuggest {
+          display: none;
+          padding: $customerSelectorPadding 2px;
+          width: $customerSelectorFullSize;
+          background-color: $customerSelectorWhite;
+          border-left: var(--border-width) var(--border-solid) var(--gray-dark);
+          border-right: var(--border-width) var(--border-solid) var(--gray-dark);
+          border-bottom: var(--border-width) var(--border-solid) var(--gray-dark);
+          max-height: $customerSelectorMaxHeight;
+          overflow-y: scroll;
+          box-shadow: 1px 1px $customerSelectorPaddingL $customerSelectorLightGray;
+          //-ms-overflow-style: none;  /* Internet Explorer 10+ */
+          //scrollbar-width: none;  /* Firefox, Safari 18.2+, Chromium 121+ */
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+          position: absolute;
+          top: $customerSelectorFullSize;
+          left: 0;
+          z-index: 100;
+
+          li {
+            padding: 8px 4px;
+
+            &:hover, &.customerSelectorFieldSuggestItemHighlighted {
+              background-color: var(--disabled-input-color);
+              cursor: pointer;
+              border-radius: 2px;
+            }
+          }
+
+          &.customerSelectorFieldSuggestActive {
+            display: block;
+          }
+        }
+      }
+    }
+
+    .customerSelectorErrorMessages {
+      color: var(--warning-color);
+    }
+
+  }
+}

@@ -30,7 +30,7 @@ sub Configure {
         HasValue    => 0,
     );
     $Self->AddArgument(
-        Name => 'location',
+        Name        => 'location',
         Description =>
             "Specify a file path, a remote repository (https://download.znuny.org/releases/packages/:Package-1.0.0.opm) or just any online repository (online:Package).",
         Required   => 1,
@@ -101,6 +101,7 @@ sub Run {
     my $Success = $Kernel::OM->Get('Kernel::System::Package')->PackageUninstall(
         String => $FileString,
         Force  => $Self->GetOption('force'),
+        UserID => 1,
     );
 
     if ( !$Success ) {
