@@ -713,6 +713,16 @@ sub Run {
                                 },
                             );
                         }
+
+                        $LayoutObject->Block(
+                            Name => "PackageItemFilelistFileNote",
+                            Data => {
+                                Name    => $Structure{Name}->{Content},
+                                Version => $Structure{Version}->{Content},
+                                File    => $File,
+                                %{$Hash},
+                            },
+                        );
                     }
                     else {
                         $LayoutObject->Block(
