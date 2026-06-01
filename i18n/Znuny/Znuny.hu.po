@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
-"PO-Revision-Date: 2026-03-22 18:29+0000\n"
+"PO-Revision-Date: 2026-05-04 22:40+0000\n"
 "Last-Translator: Balázs Úr <balazs@urbalazs.hu>\n"
 "Language-Team: Hungarian <https://translations.znuny.org/projects/znuny-lts/znuny/hu/>\n"
 "Language: hu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.16.2\n"
+"X-Generator: Weblate 5.17\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "ACL Management"
@@ -25780,17 +25780,17 @@ msgstr "Meghatározza az alapértelmezett keresési szűrőt a jegyegyesítés k
 
 #. Perl Module: Kernel/Modules/CustomerTicketOverview.pm
 msgid "You have no permission or the ticket does not exist."
-msgstr ""
+msgstr "Nincs jogosultsága, vagy a jegy nem létezik."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines which article attributes TicketGeneric dashboard widgets are allowed to request when building additional columns."
-msgstr ""
+msgstr "Meghatározza, hogy a jegy általános vezérlőpult felületi elemei milyen bejegyzésattribútumokat kérhetnek a további oszlopok összeállításakor."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "When support data is collected via SupportDataCollector, certain SysConfig values marked with ValueType=\"Password\" are automatically masked. This prevents passwords from appearing in plain text in the support data. This setting defines the settings that contain complex configuration hashes that should not be masked when generating the support data."
-msgstr ""
+msgstr "Ha támogatási adatok kerülnek begyűjtésre a támogatási adatgyűjtőn keresztül, akkor a ValueType=\"Password\" jelöléssel ellátott bizonyos rendszerbeállítási értékek automatikusan el lesznek takarva. Ez megakadályozza, hogy a jelszavak egyszerű szövegként jelenjenek meg a támogatási adatokban. Ez a beállítás határozza meg azokat a beállításokat, amelyek olyan összetett beállítási kivonatokat tartalmaznak, amelyeket nem szabad eltakarni a támogatási adatok előállításakor."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view."
-msgstr ""
+msgstr "Az adminisztrátori felhasználóval (1-es azonosító) engedélyezi a jegykeresést a bejelentkezett felhasználó helyett. Csak ezt a nézetet érinti."
 
