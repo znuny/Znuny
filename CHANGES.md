@@ -1,3 +1,6 @@
+# 6.5.22 2026-??-??
+ - 2026-06-01 Fixed: Attachments can no longer be assigned to Snippet templates in AdminTemplateAttachment.
+
 # 6.5.21 2026-05-27
  - 2026-05-26 Fixed: Package manager does not use the user ID for package operations.
  - 2026-05-20 CVE-2025-26843: Fixed: Infinite loop on replacing tags in template generator.

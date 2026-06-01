@@ -25884,3 +25884,7 @@ msgstr "Wenn Supportdaten über den SupportDataCollector erfasst werden, werden 
 msgid "Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view."
 msgstr ""
 
+#. Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+msgid "The selected template type does not support attachments."
+msgstr "Der ausgewählte Vorlagentyp unterstützt keine Anhänge"
+

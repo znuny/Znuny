@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.700353470437018;
+    $Self->{Completeness}        = 0.700240963855422;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4180,6 +4180,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Template updated!' => 'テンプレートを更新しました！',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+        'The selected template type does not support attachments.' => '',
         'Change Attachment Relations for Template' => 'テンプレートに対する添付ファイルの関連性を変更',
         'Change Template Relations for Attachment' => '添付ファイルに対するテンプレートの関連性を変更',
 

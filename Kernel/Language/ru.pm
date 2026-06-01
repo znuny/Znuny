@@ -37,7 +37,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.852667095115681;
+    $Self->{Completeness}        = 0.852530120481928;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4185,6 +4185,7 @@ sub Data {
         'Template updated!' => 'Шаблон обновлен!',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+        'The selected template type does not support attachments.' => '',
         'Change Attachment Relations for Template' => 'Изменить связь Вложения с Шаблоном',
         'Change Template Relations for Attachment' => 'Изменить связь Шаблона с Вложением',
 

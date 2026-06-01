@@ -25794,3 +25794,7 @@ msgstr "Ha támogatási adatok kerülnek begyűjtésre a támogatási adatgyűjt
 msgid "Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view."
 msgstr "Az adminisztrátori felhasználóval (1-es azonosító) engedélyezi a jegykeresést a bejelentkezett felhasználó helyett. Csak ezt a nézetet érinti."
 
+#. Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+msgid "The selected template type does not support attachments."
+msgstr ""
+
