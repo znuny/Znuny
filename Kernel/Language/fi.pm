@@ -2986,6 +2986,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'Virhe',
         'An Error Occurred' => '',
+        'Back to the previous page' => 'Takaisin edelliselle sivulle',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3236,7 +3237,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => 'Ei riittäviä oikeuksia',
-        'Back to the previous page' => 'Takaisin edelliselle sivulle',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',

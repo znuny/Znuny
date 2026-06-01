@@ -2989,6 +2989,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'خطا',
         'An Error Occurred' => 'خطا',
+        'Back to the previous page' => 'بازگشت به صفحه قبل',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3239,7 +3240,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => 'حقوق دسترسی ناکافی',
-        'Back to the previous page' => 'بازگشت به صفحه قبل',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',

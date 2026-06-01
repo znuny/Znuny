@@ -2983,6 +2983,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => '오류',
         'An Error Occurred' => '에러 발생됨',
+        'Back to the previous page' => '이전 페이지로 돌아가기',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3233,7 +3234,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => '불충분한 권리',
-        'Back to the previous page' => '이전 페이지로 돌아가기',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '경보',

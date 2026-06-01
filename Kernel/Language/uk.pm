@@ -2984,6 +2984,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'Помилка',
         'An Error Occurred' => 'Виникла Помилка',
+        'Back to the previous page' => 'Повернутися до попередньої сторінки',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3234,7 +3235,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => 'Недостатньо прав.',
-        'Back to the previous page' => 'Повернутися до попередньої сторінки',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',

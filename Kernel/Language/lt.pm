@@ -2983,6 +2983,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'Klaida',
         'An Error Occurred' => '',
+        'Back to the previous page' => 'Atgal prie buvusio puslapio',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3233,7 +3234,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => 'Nepakankamos teisės',
-        'Back to the previous page' => 'Atgal prie buvusio puslapio',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',

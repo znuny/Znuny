@@ -2995,6 +2995,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'Ошибка',
         'An Error Occurred' => 'Произошла ошибка',
+        'Back to the previous page' => 'Обратно на предыдущую страницу',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3245,7 +3246,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => 'Недостаточно прав',
-        'Back to the previous page' => 'Обратно на предыдущую страницу',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => 'Предупреждение',

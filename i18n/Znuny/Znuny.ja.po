@@ -9118,7 +9118,7 @@ msgstr ""
 msgid "Insufficient Rights"
 msgstr "権限がありません"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "前のページに戻る。"
 

@@ -1,4 +1,5 @@
 # 6.5.22 2026-??-??
+ - 2026-06-01 Added: Agent and customer error pages now show configurable link for next action.
  - 2026-06-01 Fixed: Attachments can no longer be assigned to Snippet templates in AdminTemplateAttachment.
 
 # 6.5.21 2026-05-27

@@ -9139,7 +9139,7 @@ msgstr "Это сообщение дня. Вы можете отредактир
 msgid "Insufficient Rights"
 msgstr "Недостаточно прав"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "Обратно на предыдущую страницу"
 

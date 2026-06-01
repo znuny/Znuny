@@ -9102,7 +9102,7 @@ msgstr ""
 msgid "Insufficient Rights"
 msgstr "अपर्याप्त अधिकार"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "पिछले पृष्ठ पर वापस जाएँ"
 

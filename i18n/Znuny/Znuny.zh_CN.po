@@ -9114,7 +9114,7 @@ msgstr "这是今日消息，你可以在文件%s中编辑它的内容。"
 msgid "Insufficient Rights"
 msgstr "没有足够的权限"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "返回前一页"
 

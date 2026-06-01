@@ -2985,6 +2985,7 @@ bin/otrs.Daemon.pl status\').',
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'Error',
         'An Error Occurred' => 'Terjadi kesalahan',
+        'Back to the previous page' => 'Kembali ke halaman sebelumnya',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3235,7 +3236,6 @@ bin/otrs.Daemon.pl status\').',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => 'Hak cukup',
-        'Back to the previous page' => 'Kembali ke halaman sebelumnya',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',

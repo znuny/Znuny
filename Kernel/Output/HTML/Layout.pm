@@ -1047,6 +1047,8 @@ sub Error {
         }
     }
 
+    $Self->_PossibleNextActionsRender( Interface => 'Agent' );
+
     # create & return output
     return $Self->Output(
         TemplateFile => 'Error',
@@ -2431,27 +2433,7 @@ sub NoPermission {
         );
     }
 
-    # get config option for possible next actions
-    my $PossibleNextActions = $Kernel::OM->Get('Kernel::Config')->Get('PossibleNextActions');
-
-    POSSIBLE:
-    if ( IsHashRefWithData($PossibleNextActions) ) {
-        $Self->Block(
-            Name => 'PossibleNextActionContainer',
-        );
-        for my $Key ( sort keys %{$PossibleNextActions} ) {
-            next POSSIBLE if !$Key;
-            next POSSIBLE if !$PossibleNextActions->{$Key};
-
-            $Self->Block(
-                Name => 'PossibleNextActionRow',
-                Data => {
-                    Link        => $Key,
-                    Description => $PossibleNextActions->{$Key},
-                },
-            );
-        }
-    }
+    $Self->_PossibleNextActionsRender( Interface => 'Agent' );
 
     # create output
     my $Output;
@@ -4829,6 +4811,8 @@ sub CustomerError {
         }
     }
 
+    $Self->_PossibleNextActionsRender( Interface => 'Customer' );
+
     # create & return output
     return $Self->Output(
         TemplateFile => 'CustomerError',
@@ -4873,6 +4857,8 @@ sub CustomerNoPermission {
 
     my $WithHeader = $Param{WithHeader} || 'yes';
     $Param{Message} ||= Translatable('No Permission!');
+
+    $Self->_PossibleNextActionsRender( Interface => 'Customer' );
 
     # create output
     my $Output;
@@ -6618,6 +6604,62 @@ sub _BuildLastViewsOutput {
     );
 
     return $LastViewHTML;
+}
+
+=head2 _PossibleNextActionsRender()
+
+render possible next actions HTML
+
+    my $Success = $LayoutObject->_PossibleNextActionsRender(
+        Interface => 'Agent', # required
+                              # possible: Agent, Customer
+    );
+
+=cut
+
+sub _PossibleNextActionsRender {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+
+    if ( ( $Param{Interface} // '' ) !~ m{\A(?:Agent|Customer)\z} ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter 'Interface' must be 'Agent' or 'Customer'.",
+        );
+        return;
+    }
+
+    my $PossibleNextActions;
+    if ( $Param{Interface} eq 'Agent' ) {
+        $PossibleNextActions = $ConfigObject->Get('PossibleNextActions');
+    }
+    else {
+        $PossibleNextActions = $ConfigObject->Get('Customer::PossibleNextActions');
+    }
+
+    return 1 if !IsHashRefWithData($PossibleNextActions);
+
+    $Self->Block(
+        Name => 'PossibleNextActionContainer',
+    );
+
+    KEY:
+    for my $Key ( sort keys %{$PossibleNextActions} ) {
+        next KEY if !$Key;
+        next KEY if !$PossibleNextActions->{$Key};
+
+        $Self->Block(
+            Name => 'PossibleNextActionRow',
+            Data => {
+                Link        => $Key,
+                Description => $PossibleNextActions->{$Key},
+            },
+        );
+    }
+
+    return 1;
 }
 
 1;

@@ -9109,7 +9109,7 @@ msgstr "Ini adalah pesan hari. Anda dapat mengedit ini di %s"
 msgid "Insufficient Rights"
 msgstr "Hak cukup"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "Kembali ke halaman sebelumnya"
 

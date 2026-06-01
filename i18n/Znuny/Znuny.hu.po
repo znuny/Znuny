@@ -9104,7 +9104,7 @@ msgstr "Ez a nap üzenete. Ezt a %s fájlban szerkesztheti."
 msgid "Insufficient Rights"
 msgstr "Nincs elegendő joga"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "Vissza az előző oldalra"
 

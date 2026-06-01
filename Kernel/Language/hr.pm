@@ -2987,6 +2987,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'Pogreška',
         'An Error Occurred' => '',
+        'Back to the previous page' => 'Vratite se na prethodnu stranicu',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3237,7 +3238,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => 'Nedovoljna ovlaštenja',
-        'Back to the previous page' => 'Vratite se na prethodnu stranicu',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',

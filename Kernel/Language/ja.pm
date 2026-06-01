@@ -2989,6 +2989,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'エラー',
         'An Error Occurred' => 'エラーが発生しました。',
+        'Back to the previous page' => '前のページに戻る。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3239,7 +3240,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => '権限がありません',
-        'Back to the previous page' => '前のページに戻る。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => 'アラート',

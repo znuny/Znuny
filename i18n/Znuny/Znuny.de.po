@@ -9131,7 +9131,7 @@ msgstr "Das ist die Nachricht des Tages. Sie können diese in %s bearbeiten."
 msgid "Insufficient Rights"
 msgstr "Nicht ausreichende Rechte"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "Zurück zur vorhergehenden Seite"
 

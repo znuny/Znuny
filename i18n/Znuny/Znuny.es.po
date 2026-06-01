@@ -9132,7 +9132,7 @@ msgstr "Este es el mensaje del día. Puede editarlo en %s."
 msgid "Insufficient Rights"
 msgstr "Derechos insuficientes"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "Volver a la página anterior"
 

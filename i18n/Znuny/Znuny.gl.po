@@ -9103,7 +9103,7 @@ msgstr ""
 msgid "Insufficient Rights"
 msgstr "Dereitos insuficientes"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "Retornar á páxina anterior"
 

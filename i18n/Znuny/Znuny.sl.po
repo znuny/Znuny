@@ -9106,7 +9106,7 @@ msgstr ""
 msgid "Insufficient Rights"
 msgstr "Nezadostne pravice"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "Nazaj na prejšnjo stran"
 

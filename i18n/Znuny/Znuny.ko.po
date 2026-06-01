@@ -9104,7 +9104,7 @@ msgstr "오늘의 메시지입니다. 이것을 %s에서 편집 할 수 있습�
 msgid "Insufficient Rights"
 msgstr "불충분한 권리"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "이전 페이지로 돌아가기"
 

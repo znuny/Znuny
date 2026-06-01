@@ -9110,7 +9110,7 @@ msgstr ""
 msgid "Insufficient Rights"
 msgstr "沒有足夠的權限"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "返回前一頁"
 

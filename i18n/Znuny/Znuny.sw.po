@@ -9107,7 +9107,7 @@ msgstr ""
 msgid "Insufficient Rights"
 msgstr "Haki zisizotosha"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "Nyuma kwenye ukurasa uliopita"
 

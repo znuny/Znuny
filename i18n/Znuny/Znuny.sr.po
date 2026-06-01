@@ -9108,7 +9108,7 @@ msgstr "Ово је дневна порука. Можете је уредити 
 msgid "Insufficient Rights"
 msgstr "Недовољна овлаштења"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "Вратите се на претходну страну"
 

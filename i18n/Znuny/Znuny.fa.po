@@ -9109,7 +9109,7 @@ msgstr "این پیام از روز است. شما می توانید این را
 msgid "Insufficient Rights"
 msgstr "حقوق دسترسی ناکافی"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "بازگشت به صفحه قبل"
 

@@ -2989,6 +2989,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'Hiba',
         'An Error Occurred' => 'Hiba történt',
+        'Back to the previous page' => 'Vissza az előző oldalra',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => 'A gépházban: %s',
@@ -3239,7 +3240,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => 'Nincs elegendő joga',
-        'Back to the previous page' => 'Vissza az előző oldalra',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => 'Riasztás',

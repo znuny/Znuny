@@ -9105,7 +9105,7 @@ msgstr "ข้อความนี้เป็นข้อความของ
 msgid "Insufficient Rights"
 msgstr "สิทธิ์ไม่เพียงพอ"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "กลับไปที่หน้าก่อนหน้านี้"
 

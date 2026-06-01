@@ -9112,7 +9112,7 @@ msgstr "Це повідомлення дня. Ви можете змінити �
 msgid "Insufficient Rights"
 msgstr "Недостатньо прав."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "Повернутися до попередньої сторінки"
 

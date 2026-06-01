@@ -2989,6 +2989,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'שגיאה',
         'An Error Occurred' => '',
+        'Back to the previous page' => 'חזרה לעמוד הקודם',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3239,7 +3240,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => 'הרשאות לא מספיקות',
-        'Back to the previous page' => 'חזרה לעמוד הקודם',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',
