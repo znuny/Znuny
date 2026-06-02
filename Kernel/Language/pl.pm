@@ -2410,7 +2410,6 @@ sub Data {
         'Note: Customer is invalid!' => 'Uwaga: Nieprawidłowy klient!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => '',
         'Search for recipients and add the results as \'%s\'.' => '',
         'Search template' => 'Szablon wyszukiwania',
         'Create Template' => 'Utwórz szablon',
@@ -4278,6 +4277,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => '',
+        'Customer User Address Book' => '',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => '',
@@ -9536,6 +9536,7 @@ Twój Zespół Helpdesk.
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

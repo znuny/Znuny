@@ -2406,7 +2406,6 @@ sub Data {
         'Note: Customer is invalid!' => 'Напомена: клијент је неважећи!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => 'Адресар клијент корисника',
         'Search for recipients and add the results as \'%s\'.' => 'Претражите за примаоце и додајте резултате као \'%s\'.',
         'Search template' => 'Шаблон претраге',
         'Create Template' => 'Направи шаблон',
@@ -4274,6 +4273,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => 'Није дат RecipientField!',
+        'Customer User Address Book' => 'Адресар клијент корисника',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => 'Нема такве конфигурације за %s',
@@ -9533,6 +9533,7 @@ Thanks for your help!
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

@@ -34,11 +34,8 @@ Core.Agent.CopyTicketNumber = (function (TargetNS) {
      */
     TargetNS.AddCopyIcon = function () {
         var $Headline = $('h1.ticketHeaderTitleHeadline'),
-            HeadlineText,
-            TicketMatch,
             TicketNumber,
             TicketTitle,
-            TitleMatch,
             $CopyIcon,
             $HoverMenu,
             CopyIconHTML,
@@ -53,41 +50,34 @@ Core.Agent.CopyTicketNumber = (function (TargetNS) {
             return;
         }
 
-        HeadlineText = $Headline.text();
-        TicketMatch  = HeadlineText.match(/Ticket#(\d+)/);
+        TicketNumber = $Headline.data('ticket-number');
+        TicketTitle  = $Headline.data('ticket-title') || '';
 
-        if (TicketMatch) {
-            TicketNumber = TicketMatch[1];
-            TicketTitle = '';
-
-            // Extract title after the "—" character
-            TitleMatch = HeadlineText.match(/—\s*(.+)/);
-            if (TitleMatch) {
-                TicketTitle = TitleMatch[1].trim();
-            }
-
-            // Create copy icon with hover menu
-            CopyIconHTML  = Core.Template.Render('Agent/TicketZoom/CopyTicketNumber/Icon', {});
-            HoverMenuHTML = Core.Template.Render('Agent/TicketZoom/CopyTicketNumber/Menu', {
-                'TicketNumber': TicketNumber,
-                'TicketTitle':  TicketTitle,
-            });
-
-            // Convert HTML strings to jQuery objects
-            $CopyIcon  = $(CopyIconHTML);
-            $HoverMenu = $(HoverMenuHTML);
-
-            // Add the hover menu to the copy icon
-            if (!$CopyIcon.length || !$HoverMenu.length) {
-                console.error('Failed to render copy icon or hover menu template.');
-                return;
-            }
-
-            $CopyIcon.append($HoverMenu);
-
-            // Insert the copy icon inside the h1 element to preserve the grid layout
-            $Headline.prepend($CopyIcon);
+        if (!TicketNumber) {
+            return;
         }
+
+        // Create copy icon with hover menu
+        CopyIconHTML  = Core.Template.Render('Agent/TicketZoom/CopyTicketNumber/Icon', {});
+        HoverMenuHTML = Core.Template.Render('Agent/TicketZoom/CopyTicketNumber/Menu', {
+            'TicketNumber': TicketNumber,
+            'TicketTitle':  TicketTitle,
+        });
+
+        // Convert HTML strings to jQuery objects
+        $CopyIcon  = $(CopyIconHTML);
+        $HoverMenu = $(HoverMenuHTML);
+
+        // Add the hover menu to the copy icon
+        if (!$CopyIcon.length || !$HoverMenu.length) {
+            console.error('Failed to render copy icon or hover menu template.');
+            return;
+        }
+
+        $CopyIcon.append($HoverMenu);
+
+        // Insert the copy icon inside the h1 element to preserve the grid layout
+        $Headline.prepend($CopyIcon);
     };
 
     /**

@@ -2412,7 +2412,6 @@ sub Data {
         'Note: Customer is invalid!' => '注意：客户是无效的！',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => '客户用户通讯录',
         'Search for recipients and add the results as \'%s\'.' => '搜索收件人并将结果添加为“%s”。',
         'Search template' => '搜索模板',
         'Create Template' => '创建模板',
@@ -4280,6 +4279,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => '没有指定收件人字段！',
+        'Customer User Address Book' => '客户用户通讯录',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => '没有%s 的配置',
@@ -9538,6 +9538,7 @@ Thanks for your help!
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

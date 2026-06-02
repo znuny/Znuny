@@ -1127,12 +1127,13 @@ handheld {
     }
 
     .main-search-component .search-ticket fieldset.TableLike:not(.Hidden) {
-        position: relative;
         display: flex;
         flex: 1;
         flex-direction: column;
         margin: 0;
-        padding: 40px 0 0;
+        padding: 0;
+        gap: var(--gap-sm);
+        min-width: unset;
     }
 
     .main-search-component .search-ticket fieldset.TableLike>legend {
@@ -1173,6 +1174,27 @@ handheld {
 
     /* SECTION TOP */
 
+    .main-search-component .search-ticket .top-section fieldset.TableLike .search-template-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        gap: var(--gap-md);
+    }
+
+    .main-search-component .search-ticket .top-section fieldset.TableLike .search-template-header > label {
+        width: auto;
+    }
+
+    .main-search-component .search-ticket .top-section fieldset.TableLike .search-template-header .Field.create-tpm-btn {
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: var(--padding-md);
+        padding-bottom: 0;
+        width: auto;
+    }
+
     .main-search-component .search-ticket .top-section .Field {
         display: flex;
         flex-direction: row;
@@ -1188,7 +1210,6 @@ handheld {
     .main-search-component .search-ticket .top-section fieldset.TableLike .Field.create-tpm-btn {
         flex-direction: row;
         justify-content: flex-end;
-        position: absolute;
         gap: var(--padding-md);
         top: 0px;
         right: 0;
@@ -1217,13 +1238,6 @@ handheld {
         right: 0;
     }
 
-    .main-search-component .search-ticket fieldset.TableLike .search-tmp-opt-wrapper {
-        display: flex;
-        justify-content: flex-start;
-        gap: var(--gap-xs);
-        align-items: center;
-    }
-
     .main-search-component .search-ticket fieldset.TableLike .Field .InputField_Container {
         position: relative;
         display: flex;
@@ -1233,6 +1247,12 @@ handheld {
         flex: 1;
     }
 
+    .SaveProfileContainer {
+        display: flex;
+        justify-content: flex-start;
+        gap: var(--gap-xs);
+        align-items: center;
+    }
 
     /* SECTION BOTTOM */
 

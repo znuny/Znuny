@@ -2406,7 +2406,6 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Note: Customer is invalid!' => 'Perlu diketahui: Pelanggan tidak sah!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => '',
         'Search for recipients and add the results as \'%s\'.' => '',
         'Search template' => 'Pencarian template',
         'Create Template' => 'Membuat template',
@@ -4275,6 +4274,7 @@ bin/znuny.Daemon.pl status\').',
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => '',
+        'Customer User Address Book' => '',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => 'Tidak ada jenis konfigurasi untuk %s',
@@ -9535,6 +9535,7 @@ Helpdesk Team Anda
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

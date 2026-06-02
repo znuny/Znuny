@@ -84,52 +84,23 @@ sub Add {
     );
 
     # Trim to maximum number of entries
-    my $SQL = "
-        SELECT COUNT(*)
-        FROM   $Self->{DatabaseTable}
-        WHERE  $Self->{Columns}->{CreateBy}->{Column} = ?
-";
-    return $ActivityID if !$Self->{DBObject}->Prepare(
-        SQL  => $SQL,
-        Bind => [ \$Param{CreateBy}, ],
+    my @ExistingActivities = $Self->DataListGet(
+        CreateBy => $Param{CreateBy},
+        SortBy   => [ $Self->{Identifier}, ],
+        OrderBy  => [ 'ASC', ],
+        UserID   => $Param{UserID},
     );
 
-    my $RecordCount;
-    while ( my @Data = $Self->{DBObject}->FetchrowArray() ) {
-        $RecordCount = $Data[0];
-    }
+    my $ActivityConfig             = $ConfigObject->Get('Activity')       // {};
+    my $MaxKeepActivities          = $ActivityConfig->{MaxKeepActivities} // 50;
+    my $NumberOfActivitiesToDelete = ( scalar @ExistingActivities ) - $MaxKeepActivities;
+    return $ActivityID if $NumberOfActivitiesToDelete <= 0;
 
-    my $ActivityConfig    = $ConfigObject->Get('Activity')       // {};
-    my $MaxKeepActivities = $ActivityConfig->{MaxKeepActivities} // 50;
-    my $RemoveActivities  = $RecordCount - $MaxKeepActivities;
-    return $ActivityID if $RemoveActivities <= 0;
-
-    # "DELETE … LIMIT ?" would be nice but doesn't work properly with all drivers
-    $SQL = "
-        SELECT   $Self->{Columns}->{ID}->{Column}
-        FROM     $Self->{DatabaseTable}
-        WHERE    $Self->{Columns}->{CreateBy}->{Column} = ?
-        ORDER BY $Self->{Columns}->{CreateTime}->{Column} ASC
-";
-    my $RemoveIDs = $Self->{DBObject}->SelectAll(
-        SQL   => $SQL,
-        Bind  => [ \$Param{CreateBy} ],
-        Limit => $RemoveActivities,
-    );
-    if (@$RemoveIDs) {
-        @$RemoveIDs = map {@$_} @$RemoveIDs;
-        my %Where = $Self->{DBObject}->QueryInCondition(
-            Key      => $Self->{Columns}->{ID}->{Column},
-            Values   => $RemoveIDs,
-            BindMode => 1,
-        );
-        $SQL = "
-        DELETE FROM $Self->{DatabaseTable}
-        WHERE $Where{SQL}
-        ";
-        $Self->{DBObject}->Do(
-            SQL  => $SQL,
-            Bind => $Where{Values},
+    my @ActivitiesToDelete = splice @ExistingActivities, 0, $NumberOfActivitiesToDelete;
+    for my $ActivityToDelete (@ActivitiesToDelete) {
+        return if !$Self->DataDelete(
+            $Self->{Identifier} => $ActivityToDelete->{ $Self->{Identifier} },
+            UserID              => $Param{UserID},
         );
     }
 

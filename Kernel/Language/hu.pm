@@ -2411,7 +2411,6 @@ sub Data {
         'Note: Customer is invalid!' => 'Megjegyzés: Az ügyfél érvénytelen!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => 'Ügyfél-felhasználó címjegyzék',
         'Search for recipients and add the results as \'%s\'.' => 'Címzettek keresése és az eredmények hozzáadása mint „%s”.',
         'Search template' => 'Keresési sablon',
         'Create Template' => 'Sablon létrehozása',
@@ -4279,6 +4278,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => 'Nincs címzett mező megadva!',
+        'Customer User Address Book' => 'Ügyfél-felhasználó címjegyzék',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => 'Nincs ilyen beállítás ehhez: %s',
@@ -9538,6 +9538,7 @@ Az Ön ügyfélszolgálati csapata
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

@@ -2411,7 +2411,6 @@ sub Data {
         'Note: Customer is invalid!' => '注意: 顧客が無効です。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => '顧客ユーザーのアドレス帳',
         'Search for recipients and add the results as \'%s\'.' => '受信者を検索し、結果を \'%s\'として追加します。',
         'Search template' => '検索テンプレート',
         'Create Template' => 'テンプレート作成',
@@ -4280,6 +4279,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => '',
+        'Customer User Address Book' => '顧客ユーザーのアドレス帳',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => '設定項目 %s は存在しません',
@@ -9547,6 +9547,7 @@ Thanks for your help!
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

@@ -6926,7 +6926,7 @@ msgstr "Klient-užívateľ"
 msgid "Note: Customer is invalid!"
 msgstr "Upozornenie: Zákazník je chybný"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
+#. Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
 msgid "Customer User Address Book"
 msgstr ""
 
