@@ -370,7 +370,7 @@ sub LoadDefaults {
 #    $Self->{'LogModule::SysLog::Charset'} = 'utf-8';
 
     # param for LogModule Kernel::System::Log::File (required!)
-    $Self->{'LogModule::LogFile'} = '/tmp/znuny.log';
+    $Self->{'LogModule::LogFile'} = '<OTRS_CONFIG_Home>/var/log/znuny.log';
 
     # param if the date (yyyy-mm) should be added as suffix to
     # logfile [0|1]

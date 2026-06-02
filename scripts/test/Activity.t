@@ -127,4 +127,63 @@ for my $Test (@Tests) {
     );
 }
 
+#
+# Specifically test limit of kept activities and that the oldest ones will be deleted first and for different users.
+#
+$ActivityConfig->{MaxKeepActivities} = 5;
+$ConfigObject->Set( 'Activity', $ActivityConfig );
+
+my $NumberOfActivitiesAboveLimit = 2;
+
+my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate();
+
+my @UserIDs = ( 1, $TestUserID );
+for my $UserID (@UserIDs) {
+
+    # "+ $NumberOfActivitiesAboveLimit" over MaxKeepActivities to test that the oldest entries will be deleted.
+    for my $ActivityNumber ( 1 .. $ActivityConfig->{MaxKeepActivities} + $NumberOfActivitiesAboveLimit ) {
+        my $Success = $ActivityObject->Add(
+            Type     => 'activitytype',
+            Title    => "Limit test entry $UserID $ActivityNumber",
+            Text     => 'nothing special',
+            State    => 'new',
+            Link     => 'http://foo.invalid/',
+            CreateBy => $UserID,
+            UserID   => 1,
+        );
+
+        $Self->True(
+            $Success,
+            "Created activity $ActivityNumber",
+        );
+    }
+}
+
+# Separate loop to be sure that activities for both users have been processed.
+for my $UserID (@UserIDs) {
+    my @ExistingActivities = $ActivityObject->DataListGet(
+        CreateBy => $UserID,
+        SortBy   => [ $ActivityObject->{Identifier}, ],
+        OrderBy  => [ 'ASC', ],
+        UserID   => 1,
+    );
+
+    my @ExistingActivityTitles = map { $_->{Title} } @ExistingActivities;
+    my @ExpectedActivityTitles;
+
+    # The oldest ones above the limit should have been deleted at this point.
+    for my $ExpectedActivityNumber (
+        1 + $NumberOfActivitiesAboveLimit .. $ActivityConfig->{MaxKeepActivities} + $NumberOfActivitiesAboveLimit
+        )
+    {
+        push @ExpectedActivityTitles, "Limit test entry $UserID $ExpectedActivityNumber";
+    }
+
+    $Self->IsDeeply(
+        \@ExistingActivityTitles,
+        \@ExpectedActivityTitles,
+        'Expected activities have been found.',
+    );
+}
+
 1;

@@ -79,7 +79,7 @@
                                     <div class="ticketHeaderTitleStatus">
                                         <span class="ticketHeaderTitleStatusFlag PriorityID-[% Data.PriorityID | html %]" title="[% Translate(Data.Priority) | html %]"></span>
                                     </div>
-                                    <h1 class="ticketHeaderTitleHeadline">
+                                    <h1 class="ticketHeaderTitleHeadline" data-ticket-number="[% Data.TicketNumber | html %]" data-ticket-title="[% Data.Title | html %]">
                                         [% Data.Hook %][% Config('Ticket::HookDivider') %][% Data.TicketNumber %] &mdash; [% Data.Title | html %]
                                     </h1>
                                 </div>

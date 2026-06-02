@@ -2411,7 +2411,6 @@ sub Data {
         'Note: Customer is invalid!' => 'Let op: klant is ongeldig!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => 'Klantgebruiker adresboek',
         'Search for recipients and add the results as \'%s\'.' => '',
         'Search template' => 'Sjabloon',
         'Create Template' => 'Maak sjabloon',
@@ -4279,6 +4278,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => '',
+        'Customer User Address Book' => 'Klantgebruiker adresboek',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => 'Geen configuratie gevonden voor %s',
@@ -9538,6 +9538,7 @@ Het Helpdesk Team
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

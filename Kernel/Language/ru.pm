@@ -2417,7 +2417,6 @@ sub Data {
         'Note: Customer is invalid!' => 'Замечание: неверный клиент!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => 'Адресная книга клиентов',
         'Search for recipients and add the results as \'%s\'.' => 'Найти получателей и добавить результаты как \'%s\'.',
         'Search template' => 'Шаблон поиска',
         'Create Template' => 'Создать шаблон',
@@ -4285,6 +4284,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => 'Не указан Получатель!',
+        'Customer User Address Book' => 'Адресная книга клиентов',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => 'Не существует конфигурации для %s',
@@ -9544,6 +9544,7 @@ Thanks for your help!
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

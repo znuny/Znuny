@@ -2405,7 +2405,6 @@ sub Data {
         'Note: Customer is invalid!' => '고객이 바르지 않습니다.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => '고객 사용자 주소록',
         'Search for recipients and add the results as \'%s\'.' => '수신자를 검색하고 결과를 \'%s\'로 추가하세요.',
         'Search template' => '템플릿 검색',
         'Create Template' => '템플릿 생성',
@@ -4273,6 +4272,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => 'RecipientField가 제공되지 않습니다!',
+        'Customer User Address Book' => '고객 사용자 주소록',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => '%s에 해당하는 설정이 없습니다.',
@@ -9532,6 +9532,7 @@ Thanks for your help!
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

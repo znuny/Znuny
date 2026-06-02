@@ -6926,7 +6926,7 @@ msgstr "Cliente"
 msgid "Note: Customer is invalid!"
 msgstr "Nota: ¡El cliente es inválido!"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
+#. Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
 msgid "Customer User Address Book"
 msgstr "Libreta de Direcciones del Usuario del Cliente"
 

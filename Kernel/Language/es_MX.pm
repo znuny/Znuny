@@ -2406,7 +2406,6 @@ sub Data {
         'Note: Customer is invalid!' => 'Nota: ¡El cliente es inválido!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => 'Libreta de Direcciones del Usuario del Cliente',
         'Search for recipients and add the results as \'%s\'.' => '',
         'Search template' => 'Buscar-Modelo',
         'Create Template' => 'Crear Plantilla',
@@ -4274,6 +4273,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => '',
+        'Customer User Address Book' => 'Libreta de Direcciones del Usuario del Cliente',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => 'No existe tal configuración para %s',
@@ -9533,6 +9533,7 @@ Tu Equipo de Soporte
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

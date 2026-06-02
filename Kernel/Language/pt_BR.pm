@@ -2409,7 +2409,6 @@ sub Data {
         'Note: Customer is invalid!' => 'Nota: Cliente inválido!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => 'Caderno de Endereços do Usuário Cliente',
         'Search for recipients and add the results as \'%s\'.' => 'Pesquisar por destinatários e adicione os resultados como \'%s\'.',
         'Search template' => 'Modelo de Busca',
         'Create Template' => 'Criar Modelo',
@@ -4277,6 +4276,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => 'Nenhum Campo de Destinatário fornecido!',
+        'Customer User Address Book' => 'Caderno de Endereços do Usuário Cliente',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => 'Nenhuma configuração para %s',
@@ -9536,6 +9536,7 @@ Obrigado pela ajuda!
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

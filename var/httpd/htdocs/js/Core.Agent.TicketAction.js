@@ -57,7 +57,7 @@ Core.Agent.TicketAction = (function (TargetNS) {
         CustomerUserAddressBookIFrameURL += SerializeData(Core.App.GetSessionInformation());
 
         CustomerUserAddressBookIFrame = '<iframe class="TextOption CustomerUserAddressBook" src="' + CustomerUserAddressBookIFrameURL + '"></iframe>';
-        Core.UI.Dialog.ShowContentDialog(CustomerUserAddressBookIFrame, '', '10px', 'Center', true);
+        Core.UI.Dialog.ShowContentDialog(CustomerUserAddressBookIFrame, Core.Language.Translate('Customer user address book'), '10px', 'Center', true);
     }
 
     /**
