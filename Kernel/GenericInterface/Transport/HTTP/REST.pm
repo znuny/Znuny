@@ -250,7 +250,6 @@ sub ProviderProcessRequest {
 
     # No length provided, return the information we have.
     # Also return for 'GET' method because it does not allow sending an entity-body in requests.
-    # For more information, see https://bugs.otrs.org/show_bug.cgi?id=14203.
     if ( !$Length || $RequestMethod eq 'GET' ) {
         return {
             Success   => 1,
@@ -1270,6 +1269,10 @@ sub RequesterPerformRequest {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _Output()
 
 Generate http response for provider and send it back to remote system.
@@ -1547,8 +1550,6 @@ sub _FlattenDataStructure {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

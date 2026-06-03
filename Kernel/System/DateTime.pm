@@ -1675,6 +1675,10 @@ sub SystemTimeZoneGet {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _ToCPANDateTimeParamNames()
 
 Maps date/time parameter names expected by the functions of this package to the ones expected by CPAN/Perl DateTime
@@ -2231,8 +2235,6 @@ sub _OpNotEquals {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

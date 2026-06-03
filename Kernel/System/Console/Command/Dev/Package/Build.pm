@@ -34,7 +34,7 @@ sub Configure {
     $Self->AddOption(
         Name        => 'module-directory',
         Description =>
-            "Specify the directory containing the module sources (otherwise the OTRS home directory will be used).",
+            "Specify the directory containing the module sources (otherwise the Znuny home directory will be used).",
         Required   => 0,
         HasValue   => 1,
         ValueRegex => qr/.*/smx,
@@ -112,7 +112,7 @@ sub Run {
         $Structure{Version}->{Content} = $Self->GetOption('version');
     }
 
-    # build from given package directory, if any (otherwise default to OTRS home)
+    # build from given package directory, if any (otherwise default to Znuny home)
     if ( $Self->GetOption('module-directory') ) {
         $Structure{Home} = $Self->GetOption('module-directory');
     }

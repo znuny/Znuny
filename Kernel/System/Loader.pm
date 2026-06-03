@@ -190,6 +190,12 @@ sub MinifyFiles {
                     );
                 }
 
+                # If Loader::Enabled::CSS is enabled and the css files will be minified,
+                # we need to replace '../../' with '../' with a relative path.
+                # This is necessary because the css files are in the css-cache directory,
+                # but the img files are in the img directory.
+                $Content =~ s{../../}{../}g;
+
                 $Content .= "\n";
             }
             elsif ( $Param{Type} eq 'JavaScript' ) {

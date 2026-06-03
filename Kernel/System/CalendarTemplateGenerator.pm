@@ -196,6 +196,14 @@ sub NotificationEvent {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
+=head2 _Replace()
+
+replace the placeholders in the text
+
 =cut
 
 sub _Replace {
@@ -674,8 +682,6 @@ sub _Replace {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

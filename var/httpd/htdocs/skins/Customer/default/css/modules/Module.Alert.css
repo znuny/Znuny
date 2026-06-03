@@ -1,0 +1,101 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+.modAlert > .inner {
+  float: left;
+  width: 100%;
+  display: inline-block;
+}
+.modAlert > .inner .alert {
+  padding: 15px;
+  padding-bottom: 0;
+  padding-right: 45px;
+  width: 100%;
+  background-color: rgba(215, 230, 245, 0.95);
+  display: inline-block;
+  float: left;
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: 1.3;
+  border: 1px solid #B3D4F2;
+}
+.modAlert > .inner .alert.alertTypeSuccess {
+  border-color: #A5D6A7;
+  background-color: rgba(165, 214, 167, 0.9);
+}
+.modAlert > .inner .alert.alertTypeWarning {
+  border-color: #F5D7A5;
+  background-color: rgba(245, 215, 165, 0.9);
+}
+.modAlert > .inner .alert.alertTypeError {
+  border-color: #F5A5A5;
+  background-color: rgba(245, 165, 165, 0.9);
+}
+.modAlert > .inner .alert.alertActive {
+  margin-left: 0;
+}
+.modAlert > .inner .alert .alertContent {
+  width: 100%;
+  margin-bottom: 15px;
+  text-align: left;
+  display: inline-block;
+  float: left;
+}
+.modAlert > .inner .alert .alertActions {
+  margin-bottom: 15px;
+  margin-top: 7.5px;
+}
+.modAlert > .inner .alert .alertActions .alertButton {
+  font-size: 12px;
+  line-height: 110%;
+  font-weight: 600;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: var(--border-radius-sm);
+  background-color: transparent;
+  color: var(--gray-dark);
+  border-color: var(--border-color);
+}
+.modAlert > .inner .alert .alertActions .alertButton:hover {
+  background-color: var(--border-color);
+  border-color: var(--border-color);
+  color: black;
+}
+.modAlert > .inner .alert .alertActions .alertButton {
+  margin-right: 3.75px;
+  background-color: white;
+}
+.modAlert > .inner .alert .alertActions.alertActionsInline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 15px;
+}
+.modAlert > .inner .alert .alertActions.alertActionsInline .alertButton {
+  flex: 1 1 40%;
+  max-width: 46%;
+  text-align: center;
+  margin-right: 0;
+  white-space: normal;
+  word-break: break-word;
+  min-width: 120px;
+  padding: 8px 10px;
+}
+.modAlert > .inner .alert .alertActions.alertActionsInline .alertActionSeparator {
+  color: var(--gray-dark);
+  font-weight: 600;
+  padding: 0 4px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/*# sourceMappingURL=Module.Alert.css.map */

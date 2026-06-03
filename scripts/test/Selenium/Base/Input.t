@@ -54,7 +54,7 @@ my $SeleniumTest = sub {
     );
 
     $Self->Is(
-        $GetCustomerUserID->[0],
+        $GetCustomerUserID,
         $CustomerUser->{UserID},
         "Get CustomerUserID is '$CustomerUser->{UserID}'",
     );

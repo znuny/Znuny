@@ -161,17 +161,25 @@
                             <td class="Center"><a class="table-icon-hover-md" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=SignatureExport;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]"><i class="fa fa-download"></i><span class="InvisibleText">[% Translate("Export") | html %]</span></a></td>
                             <td class="Center"><a class="table-icon-hover-md" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=SignatureCopy;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]"><i class="fa fa-copy"></i><span class="InvisibleText">[% Translate("Copy") | html %]</span></a></td>
                             <td class="Center">
-                                <a class="TrashCan SignatureDelete table-icon-hover-md" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Delete;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Delete") | html %]">
+[% RenderBlockStart("DeleteLink") %]
+                                <a class="TrashCan SignatureDelete table-icon-hover-md" href="#" data-query-string="Action=[% Env("Action") %];Subaction=Delete;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Delete") | html %]">
                                     <i class="fa fa-trash-o"></i>
                                 </a>
+[% RenderBlockEnd("DeleteLink") %]
                             </td>
                         </tr>
 [% RenderBlockEnd("OverviewResultRow") %]
                         <tr class="FilterMessage Hidden">
-                            <td colspan="5">[% Translate("No matches found.") | html %]</td>
+                            <td colspan="6">[% Translate("No matches found.") | html %]</td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+        <div class="Hidden" id="DeleteSignatureDialogContainer">
+            <div id="DeleteSignatureDialog" class="InnerContent GenericInterfaceDialog">
+                <p class="Center Spacing">[% Translate("Do you really want to delete this %s?", Translate('signature')) | html %]</p>
+                <div class="SpacingTop"></div>
             </div>
         </div>
 [% RenderBlockEnd("OverviewResult") %]

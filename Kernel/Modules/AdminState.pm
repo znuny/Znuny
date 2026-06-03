@@ -84,7 +84,7 @@ sub Run {
         my %StateData = $StateObject->StateGet( ID => $GetParam{ID} );
 
         # Check if Color is a valid hexadeciomal color code
-        if ( $GetParam{Color} !~ /^\#(?:[0-9a-fA-F]{3}){1,2}$/ ) {
+        if ( $GetParam{Color} !~ /^\#(?:[0-9a-fA-F]{4}){1,2}$/ ) {
             $Errors{ColorInvalidServerError} = 'ServerError';
         }
 
@@ -380,9 +380,9 @@ sub _Edit {
     );
 
     # Several error messages can be used for Valid option.
-    $Param{Errors}->{ValidOptionServerError} //= 'Required';
+    $Param{Errors}->{RequiredNameServerError} //= 'Required';
     $LayoutObject->Block(
-        Name => $Param{Errors}->{ValidOptionServerError} . 'ValidOptionServerError',
+        Name => $Param{Errors}->{RequiredNameServerError} . 'RequiredNameServerError',
     );
 
     # Show ServerError if color code is invalid.

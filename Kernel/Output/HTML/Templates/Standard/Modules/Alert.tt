@@ -1,0 +1,24 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+## nofilter(TidyAll::Plugin::Znuny::TT::ScriptUsage)
+
+<div class="mod modAlert"[% IF Data.id %] id="[% Data.id | html %]"[% END %]>
+    <div class="inner">
+        <script type="application/json" class="alertData">
+            {
+                "id": "[% Data.id | html %]",
+                "type": "[% Data.type || "notice" | html %]",
+                "message": [% (Data.message || '') | JSON %],
+                "hideAfter": [% Data.hideAfter || 0 %],
+                "actionSeparator": "[% Data.actionSeparator || Translate("or") | html %]",
+                "keepClosedForSession": [% Data.keepClosedForSession || 0 %],
+                "actions": [% Data.actions || "[]" %]
+            }
+        </script>
+    </div>
+</div>

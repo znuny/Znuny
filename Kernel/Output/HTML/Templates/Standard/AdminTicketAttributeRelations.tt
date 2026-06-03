@@ -27,7 +27,6 @@
             </div>
         </div>
     </div>
-[% RenderBlockStart("Overview") %]
     <div class="ContentColumn">
 
         [% BreadcrumbPath = [
@@ -47,6 +46,8 @@
         [% END %]
 
         [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+[% RenderBlockStart("Overview") %]
 
         <div class="WidgetSimple">
             <div class="Header">
@@ -102,7 +103,7 @@
     </div>
 [% RenderBlockEnd("Overview") %]
 [% RenderBlockStart("Edit") %]
-    <div class="ContentColumn">
+
         <div class="WidgetSimple">
             <div class="Header">
                 <h2>

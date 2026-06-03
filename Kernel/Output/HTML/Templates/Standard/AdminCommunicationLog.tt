@@ -214,7 +214,7 @@
                     <ul class="Tabs">
 [% RenderBlockStart("CommunicationNavBarFilterItem") %]
                         <li [% IF Data.Selected %] class="Active" [% END %]>
-                            <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter | uri %];SortBy=[% Data.SortBy %];OrderBy=[% Data.OrderBy %];StartHit=1;Expand=1;StartTime=[% Data.StartTime | uri %]">[% Translate(Data.Name) | html %] ([% Data.Count %])</a>
+                            <a name="OverviewControl" href="[% Env("Baselink") %]Action=[% Env("Action") %];Filter=[% Data.Filter | uri %];SortBy=[% Data.SortBy | uri %];OrderBy=[% Data.OrderBy | uri %];StartHit=1;Expand=1;StartTime=[% Data.StartTime | uri %]">[% Translate(Data.Name) | html %] ([% Data.Count %])</a>
                         </li>
 [% RenderBlockEnd("CommunicationNavBarFilterItem") %]
                     </ul>

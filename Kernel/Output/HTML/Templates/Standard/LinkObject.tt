@@ -141,7 +141,7 @@
                             <fieldset class="TableLike FixedLabelSmall DontPrint">
 [% RenderBlockStart("ContentLargePreferencesItemAllocationList") %]
                                     <input type="hidden" name="OriginalAction" value="[% Data.OriginalAction | html %]"/>
-                                    <input type="hidden" name="Subaction" value="UpdateComplextTablePreferences"/>
+                                    <input type="hidden" name="Subaction" value="UpdateComplexTablePreferences"/>
                                     [% Data.SourceObjectData %]
                                     <input type="hidden" name="SourceObject" value="[% Data.SourceObject | html %]"/>
                                     <input type="hidden" name="DestinationObject" value="[% Data.DestinationObject | html %]"/>

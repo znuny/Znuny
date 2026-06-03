@@ -7,6 +7,41 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
+[% BreadcrumbPathDefined = 0 %]
+
+[% UNLESS BreadcrumbPath.defined %]
+    [% BreadcrumbPathDefined = 1 %]
+    [% BreadcrumbPath = [
+            {
+                Name => Translate('System Configuration'),
+                Link => 'AdminSystemConfiguration',
+            },
+        ]
+    %]
+
+    [% IF Data.Type and Data.Type == 'CustomList' %]
+        [% BreadcrumbPath.push({ Name => Translate('View a custom List of Settings') }) %]
+    [% ELSIF Data.View %]
+        [% View = Data.View | uri %]
+        [% BreadcrumbPath.push({ Name => Translate('View single Setting: %s', Data.View), Link => 'AdminSystemConfiguration;Subaction=View;Setting=' _ View }) %]
+    [% END %]
+
+    [% IF Data.Path && Data.Path.size %]
+        [% FOREACH Item IN Data.Path %]
+            [% BreadcrumbPath.push({ Name => Item.Name, Link => 'AdminSystemConfigurationGroup;RootNavigation=' _ Item.Value }) %]
+        [% END %]
+    [% END %]
+
+    [% IF Data.Parameters && Data.Parameters.size %]
+        [% FOREACH Item IN Data.Parameters %]
+            [% BreadcrumbPath.push({ Name => Item.Name, Link => 'AdminSystemConfiguration;Subaction=' _ Item.Value }) %]
+        [% END %]
+    [% END %]
+[% END %]
+
+[% IF BreadcrumbPathDefined %]
+    [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+[% END %]
 
 [% IF Data.SettingList.size %]
 <ul class="SettingsList">

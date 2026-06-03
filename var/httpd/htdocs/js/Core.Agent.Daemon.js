@@ -30,7 +30,7 @@ Core.Agent.Daemon = (function (TargetNS) {
      */
     TargetNS.Init = function () {
         // set action to daemon notify band link
-        $('.DaemonInfo').on('click', function() {
+        $(document).on('click', '.DaemonInfo', function() {
             Core.Agent.Daemon.OpenDaemonStartDialog();
             return false;
         });

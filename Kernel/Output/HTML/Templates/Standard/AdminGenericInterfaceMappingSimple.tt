@@ -104,7 +104,7 @@
                                 <div id="DefaultValueTypeServerError" class="TooltipErrorMessage">
                                     <p>[% Translate("This field is required.") | html %]</p>
                                 </div>
-                                <input id="DefaultValueMapTo"name="DefaultValueMapTo"  class="W25pc DefaultValueType [% Data.DefaultValueMapToHidden | html %] [% Data.DefaultValueMapToError | html %]" type="text" maxlength="100" value="[% Data.DefaultValueMapTo | html %]"/>
+                                <input id="DefaultValueMapTo" name="DefaultValueMapTo"  class="W25pc DefaultValueType [% Data.DefaultValueMapToHidden | html %] [% Data.DefaultValueMapToError | html %]" type="text" maxlength="100" value="[% Data.DefaultValueMapTo | html %]"/>
                                 <div id="DefaultValueMapToError" class="TooltipErrorMessage">
                                     <p>[% Translate("This field is required.") | html %]</p>
                                 </div>

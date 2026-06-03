@@ -260,7 +260,10 @@ $Selenium->RunTest(
         }
 
         $Selenium->find_element( "#FromCustomer", 'css' )->send_keys($TestCustomer);
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("li.ui-menu-item:visible").length;' );
+        $Selenium->WaitFor(
+            JavaScript =>
+                'return typeof($) === "function" && $("li.ui-menu-item:visible").length;'
+        );
         $Selenium->execute_script("\$('li.ui-menu-item:contains($TestCustomer)').click();");
 
         if ($IsITSMIncidentProblemManagementInstalled) {
@@ -368,7 +371,10 @@ $Selenium->RunTest(
 
         # Add customer again.
         $Selenium->find_element( "#FromCustomer", 'css' )->send_keys($TestCustomer);
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("li.ui-menu-item:visible").length;' );
+        $Selenium->WaitFor(
+            JavaScript =>
+                'return typeof($) === "function" && $("li.ui-menu-item:visible").length;'
+        );
         $Selenium->execute_script("\$('li.ui-menu-item:contains($TestCustomer)').click();");
 
         # Make sure that Customer email is not a link.
@@ -511,7 +517,7 @@ $Selenium->RunTest(
         );
 
         # Select SubQueue on loading screen.
-        # Bug#12819 ( https://bugs.otrs.org/show_bug.cgi?id=12819 ) - queue contains spaces in the name.
+        # queue contains spaces in the name.
         # Navigate to AgentTicketPhone screen again to check selecting a queue after loading screen.
         $QueueValue    = "Junk::SubQueue $RandomID  $RandomID";
         $QueueValueSet = $QueueID2 . "||" . $QueueValue;
@@ -537,8 +543,8 @@ $Selenium->RunTest(
 
         if ($IsITSMIncidentProblemManagementInstalled) {
 
-   # Verify Service Incident State is not available when config 'Ticket::Frontend::AgentTicketPhone###ShowIncidentState'
-   #   is disabled. See bug#14150 (https://bugs.otrs.org/show_bug.cgi?id=14150)
+            # Verify Service Incident State is not available when config
+            # 'Ticket::Frontend::AgentTicketPhone###ShowIncidentState' is disabled.
             $HelperObject->ConfigSettingChange(
                 Key   => 'Ticket::Frontend::AgentTicketPhone###ShowIncidentState',
                 Value => 0,
@@ -547,7 +553,8 @@ $Selenium->RunTest(
 
             $Selenium->find_element( "#FromCustomer", 'css' )->send_keys($TestCustomer);
             $Selenium->WaitFor(
-                JavaScript => 'return typeof($) === "function" && $("li.ui-menu-item:visible").length'
+                JavaScript =>
+                    'return typeof($) === "function" && $("li.ui-menu-item:visible").length'
             );
             $Selenium->execute_script("\$('li.ui-menu-item:contains($TestCustomer)').click()");
 

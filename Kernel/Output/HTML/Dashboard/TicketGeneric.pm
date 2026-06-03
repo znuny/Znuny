@@ -39,6 +39,11 @@ sub new {
         $Self->{$Item} = $ParamObject->GetParam( Param => $Item ) || $Param{$Item};
     }
 
+    # Validate OrderBy - only Up and Down are valid values.
+    if ( defined $Self->{OrderBy} && $Self->{OrderBy} !~ m{\A(?:Up|Down)\z} ) {
+        $Self->{OrderBy} = undef;
+    }
+
     # Get add filters param.
     $Self->{AddFilters} = $ParamObject->GetParam( Param => 'AddFilters' ) || $Param{AddFilters} || 0;
     $Self->{TabAction}  = $ParamObject->GetParam( Param => 'TabAction' )  || $Param{TabAction}  || 0;
@@ -188,6 +193,7 @@ sub new {
             $Self->{ColumnFilter}->{$Field} = $PreferencesColumnFiltersRealKeys->{$Field};
         }
     }
+    $Self->_SanitizeTreeViewColumnFilters();
 
     # get current filter
     my $Name                     = $ParamObject->GetParam( Param => 'Name' ) || '';
@@ -320,6 +326,11 @@ sub new {
         delete $Self->{GetColumnFilter}->{CustomerUserID};
         delete $Self->{GetColumnFilterSelect}->{CustomerUserID};
         delete $Self->{ValidFilterableColumns}->{CustomerUserID};
+    }
+
+    # Validate SortBy against known sortable columns; undef falls through to default 'Age'.
+    if ( defined $Self->{SortBy} && !$Self->{ValidSortableColumns}->{ $Self->{SortBy} } ) {
+        $Self->{SortBy} = undef;
     }
 
     $Self->{UseTicketService} = $ConfigObject->Get('Ticket::Service') || 0;
@@ -597,11 +608,17 @@ sub FilterContent {
 sub Run {
     my ( $Self, %Param ) = @_;
 
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
     my %SearchParams        = $Self->_SearchParamsGet(%Param);
-    my @Columns             = @{ $SearchParams{Columns} };
+    my @Columns             = @{ $SearchParams{Columns} // [] };
     my %TicketSearch        = %{ $SearchParams{TicketSearch} };
     my %TicketSearchSummary = %{ $SearchParams{TicketSearchSummary} };
     my %Filter              = %{ $SearchParams{Filter} };
+
+    my @ArticleAttributes = @{ $ConfigObject->Get('DashboardBackend::TicketGeneric::ArticleAttributes') || [] };
+    my %ArticleAttributes = map { $_ => 1 } @ArticleAttributes;
+    my @ArticleColumns    = keys %ArticleAttributes;
 
     # Add the additional filter to the ticket search param.
     if ( $Self->{AdditionalFilter} ) {
@@ -687,7 +704,10 @@ sub Run {
     my $CacheUsed = 1;
 
     # get ticket object
-    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $ArticleObject = @ArticleColumns
+        ? $Kernel::OM->Get('Kernel::System::Ticket::Article')
+        : undef;
 
     if ( !$TicketIDs ) {
 
@@ -751,7 +771,6 @@ sub Run {
             }
 
             # Filter is used and is not in user prefered values, show no results.
-            # See bug#12808 ( https://bugs.otrs.org/show_bug.cgi?id=12808 ).
             if (
                 $Filter
                 && IsArrayRefWithData( $TicketSearchSummary{ $Self->{Filter} }->{$Filter} )
@@ -868,7 +887,6 @@ sub Run {
                 }
 
                 # Filter is used and is not in user prefered values, show no results.
-                # See bug#12808 ( https://bugs.otrs.org/show_bug.cgi?id=12808 ).
                 if (
                     $Filter
                     && IsArrayRefWithData( $TicketSearchSummary{$Type}->{$Filter} )
@@ -951,8 +969,6 @@ sub Run {
             Filter => $Filter{ $Self->{Filter} },
         },
     );
-
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     # show only AssignedToCustomerUser if we have the filter
     if ( $TicketSearchSummary{AssignedToCustomerUser} ) {
@@ -1751,6 +1767,53 @@ sub Run {
             Silent        => 1
         );
 
+        if (@ArticleColumns) {
+            my @Articles = $ArticleObject->ArticleList(
+                TicketID   => $TicketID,
+                SenderType => 'customer',
+                OnlyLast   => 1,
+            );
+
+            if ( !@Articles ) {
+                @Articles = $ArticleObject->ArticleList(
+                    TicketID   => $TicketID,
+                    SenderType => 'agent',
+                    OnlyLast   => 1,
+                );
+            }
+
+            if ( !@Articles ) {
+                @Articles = $ArticleObject->ArticleList(
+                    TicketID => $TicketID,
+                    OnlyLast => 1,
+                );
+            }
+
+            next TICKETID if scalar(@Articles) == 0;
+
+            my $Article = $Articles[0];
+            my %Article = $ArticleObject->BackendForArticle( %{$Article} )->ArticleGet(
+                %{$Article},
+                DynamicFields => 0,
+            );
+
+            if ( $Article{ArticleID} ) {
+                my %ArticleFields = $LayoutObject->ArticleFields(
+                    TicketID  => $TicketID,
+                    ArticleID => $Article{ArticleID},
+                );
+
+                COLUMN:
+                for my $ArticleColumn (@ArticleColumns) {
+                    next COLUMN if !IsHashRefWithData( $ArticleFields{$ArticleColumn} );
+                    next COLUMN if !defined $ArticleFields{$ArticleColumn}->{Value};
+
+                    $Ticket{$ArticleColumn} = $ArticleFields{$ArticleColumn}->{Realname}
+                        // $ArticleFields{$ArticleColumn}->{Value};
+                }
+            }
+        }
+
         %Ticket = ( %Ticket, %{ $CustomColumns->{$TicketID} } ) if $CustomColumns->{$TicketID};
 
         next TICKETID if !%Ticket;
@@ -2342,6 +2405,75 @@ sub _ColumnFilterJSON {
     );
 
     return $JSON;
+}
+
+sub _SanitizeTreeViewColumnFilters {
+    my ($Self) = @_;
+
+    # Queue, Service and SLA use TreeView rendering and may submit "null" for parent node
+    # selections, which must be removed before passing values to the ticket search.
+    my %TreeColumns = (
+        Queue   => 'QueueIDs',
+        Service => 'ServiceIDs',
+        SLA     => 'SLAIDs',
+    );
+
+    my $IsNullValue = sub {
+        my ($Value) = @_;
+        return if !defined $Value;
+        return $Value =~ /\A null \z/i;
+    };
+
+    COLUMN:
+    for my $Column ( sort keys %TreeColumns ) {
+
+        if (
+            IsHashRefWithData( $Self->{GetColumnFilterSelect} )
+            && defined $Self->{GetColumnFilterSelect}->{$Column}
+            && $IsNullValue->( $Self->{GetColumnFilterSelect}->{$Column} )
+            )
+        {
+            delete $Self->{GetColumnFilterSelect}->{$Column};
+        }
+
+        if ( IsHashRefWithData( $Self->{GetColumnFilter} ) ) {
+            my $GetKey = $Column . ( $Self->{Name} // '' );
+            if (
+                defined $Self->{GetColumnFilter}->{$GetKey}
+                && $IsNullValue->( $Self->{GetColumnFilter}->{$GetKey} )
+                )
+            {
+                delete $Self->{GetColumnFilter}->{$GetKey};
+            }
+        }
+
+        next COLUMN if !IsHashRefWithData( $Self->{ColumnFilter} );
+        my $FilterKey  = $TreeColumns{$Column};
+        my $ColumnData = $Self->{ColumnFilter}->{$FilterKey};
+        next COLUMN if !$ColumnData;
+
+        if ( IsArrayRefWithData($ColumnData) ) {
+            my @ValidValues = grep { !$IsNullValue->($_) } @{$ColumnData};
+            if (@ValidValues) {
+                $Self->{ColumnFilter}->{$FilterKey} = \@ValidValues;
+            }
+            else {
+                delete $Self->{ColumnFilter}->{$FilterKey};
+            }
+        }
+        elsif ( IsHashRefWithData($ColumnData) ) {
+            for my $Operator ( sort keys %{$ColumnData} ) {
+                if ( $IsNullValue->( $ColumnData->{$Operator} ) ) {
+                    delete $ColumnData->{$Operator};
+                }
+            }
+            if ( !keys %{$ColumnData} ) {
+                delete $Self->{ColumnFilter}->{$FilterKey};
+            }
+        }
+    }
+
+    return 1;
 }
 
 sub _SearchParamsGet {

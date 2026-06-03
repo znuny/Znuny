@@ -541,7 +541,6 @@ Core.UI.Popup = (function (TargetNS) {
                     PopupFeatures += ',left=' + PopupProfiles[PopupProfile].Left;
                     PopupFeatures += ',width=' + PopupProfiles[PopupProfile].Width;
 
-                    // Bug#11205 (http://bugs.otrs.org/show_bug.cgi?id=11205)
                     // On small screens (still wide enough to open a popup)
                     // it can happen, that the popup window is higher than the screen height
                     // In this case, reduce the popup height to fit into the screen
@@ -764,10 +763,11 @@ Core.UI.Popup = (function (TargetNS) {
         // if this window is a popup itself, register another function
         if (CurrentIsPopupWindow()) {
             Core.UI.Popup.InitRegisterPopupAtParentWindow();
-            $('.CancelClosePopup').on('click', function () {
+            // Use event delegation to handle dynamically created elements
+            $(document).on('click', '.CancelClosePopup', function () {
                 TargetNS.ClosePopup();
             });
-            $('.UndoClosePopup').on('click', function () {
+            $(document).on('click', '.UndoClosePopup', function () {
                 var RedirectURL = $(this).attr('href'),
                     ParentWindow = GetWindowParentObject();
                 ParentWindow.Core.UI.Popup.FirePopupEvent('URL', { URL: RedirectURL });

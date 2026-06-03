@@ -107,7 +107,6 @@
                     <div class="ColumnSettingsContainer">
                         <div class="ColumnSettingsBox">
                             [% Data.ColumnFilterStrg %]
-                            <a href="#" class="DeleteFilter Hidden"><i class="fa fa-trash-o"></i></a>
                         </div>
                     </div>
 [% RenderBlockEnd("ContentLargeTicketGenericHeaderColumnFilterLink") %]
@@ -123,7 +122,6 @@
                     <div class="ColumnSettingsContainer">
                         <div class="ColumnSettingsBox">
                             [% Data.ColumnFilterStrg %]
-                            <a href="#" class="DeleteFilter Hidden"><i class="fa fa-trash-o"></i></a>
                         </div>
                     </div>
 [% RenderBlockEnd("ContentLargeTicketGenericHeaderColumnFilter") %]

@@ -533,10 +533,17 @@ sub Run {
                 );
 
                 # get user data
+                USERID:
                 for my $UserID ( sort keys %TeamUserList ) {
                     my %User = $UserObject->GetUserData(
                         UserID => $UserID,
                     );
+
+                    if ( $User{ValidID} && $User{ValidID} ne '1' ) {
+                        delete $TeamUserList{$UserID};
+                        next USERID;
+                    }
+
                     $TeamUserList{$UserID} = $User{UserFullname};
                 }
 
@@ -1802,10 +1809,17 @@ sub Run {
                 );
 
                 # get user data
+                USERID:
                 for my $UserID ( sort keys %TeamUserList ) {
                     my %User = $UserObject->GetUserData(
                         UserID => $UserID,
                     );
+
+                    if ( $User{ValidID} && $User{ValidID} ne '1' ) {
+                        delete $TeamUserList{$UserID};
+                        next USERID;
+                    }
+
                     $TeamUserList{$UserID} = $User{UserFullname};
                 }
 

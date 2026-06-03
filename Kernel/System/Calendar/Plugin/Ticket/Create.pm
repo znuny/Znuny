@@ -26,6 +26,7 @@ our @ObjectDependencies = (
     'Kernel::System::Calendar::Appointment',
     'Kernel::System::Calendar::Plugin',
     'Kernel::System::CustomerUser',
+    'Kernel::System::DateTime',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::Group',

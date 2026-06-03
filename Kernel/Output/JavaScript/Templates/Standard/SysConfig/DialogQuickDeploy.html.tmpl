@@ -1,0 +1,26 @@
+# --
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (GPL). If you
+# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# --
+
+<div>
+    <div id="DialogQuickDeploy" class="InnerContent">
+        <div class="Overlay Deploying">
+            <span>
+                <i class="Active fa fa-spinner fa-spin"></i>
+                <i class="Success fa fa-check"></i>
+                <i class="Error fa fa-times"></i>
+            </span>
+            <em>{{ "Deploying, please wait..." | Translate }}</em>
+        </div>
+    </div>
+    <div class="ContentFooter SaveButtons Hidden">
+        <div class="ButtonsFinish">
+            <button type="button" id="Cancel" class="CloseDialog btn-cancel-ghost btn-main btn-width-md" value="{{ 'Close this dialog' | Translate }}"><span>{{ "Close this dialog" | Translate }}</span></button>
+        </div>
+    </div>
+</div>

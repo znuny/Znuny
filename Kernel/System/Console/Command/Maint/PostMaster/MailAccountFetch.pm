@@ -45,7 +45,7 @@ sub Configure {
     );
     $Self->AddOption(
         Name        => 'debug',
-        Description => "Print debug info to the OTRS log.",
+        Description => "Print debug info to the Znuny log.",
         Required    => 0,
         HasValue    => 0,
     );
@@ -83,7 +83,7 @@ sub PreRun {
     if ($Debug) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'debug',
-            Message  => "OTRS email handle ($Name) started.",
+            Message  => "Znuny email handle ($Name) started.",
         );
     }
 
@@ -245,7 +245,7 @@ sub PostRun {
     if ($Debug) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'debug',
-            Message  => "OTRS email handle ($Name) stopped.",
+            Message  => "Znuny email handle ($Name) stopped.",
         );
     }
 

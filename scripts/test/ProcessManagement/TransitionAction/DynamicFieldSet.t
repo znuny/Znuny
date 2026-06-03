@@ -42,9 +42,7 @@ my $DFForeignField    = 'UnitTestForeignField' . $RandomID;
 # set user details
 my ( $TestUserLogin, $TestUserID ) = $HelperObject->TestUserCreate();
 
-#
 # Create the dynamic fields for testing
-#
 
 my @NewDynamicFieldConfig = (
     {
@@ -160,9 +158,7 @@ $Self->True(
 # get ticket object
 my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
-#
 # Create a test ticket
-#
 my $TicketID = $TicketObject->TicketCreate(
     Title         => 'test',
     QueueID       => 1,
@@ -485,7 +481,6 @@ for my $Test (@Tests) {
     }
 }
 
-# Test bug#14646 (https://bugs.otrs.org/show_bug.cgi?id=14646).
 # DynamicField value set with <OTRS_CUSTOMER_DATA_*> tag.
 %Ticket = $TicketObject->TicketGet(
     TicketID      => $TicketID,

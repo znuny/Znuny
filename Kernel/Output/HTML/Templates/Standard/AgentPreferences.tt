@@ -30,7 +30,7 @@
                 </ul>
                 [% ELSE %]
                 <p class="FieldExplanation">
-                    [% Translate("Set up your personal preferences. Save each setting by clicking the checkmark on the right.") | html %]
+                    [% Translate('Set up your personal preferences. Save each setting by clicking "Save setting" button.') | html %]
                 </p>
                     [% IF Data.Navigation %]
                     <p class="FieldExplanation">

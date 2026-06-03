@@ -215,10 +215,6 @@ sub RequesterPerformRequest {
     };
 }
 
-=begin Internal:
-
-=cut
-
 =head1 NAME
 
 Kernel::GenericInterface::Transport::HTTP::Test::CustomHTTPProtocol
@@ -260,8 +256,6 @@ sub request {    ## no critic
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

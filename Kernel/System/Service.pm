@@ -19,12 +19,13 @@ our @ObjectDependencies = (
     'Kernel::System::Cache',
     'Kernel::System::CheckItem',
     'Kernel::System::DB',
-    'Kernel::System::Log',
-    'Kernel::System::Main',
-    'Kernel::System::Valid',
     'Kernel::System::DynamicField',
     'Kernel::System::GeneralCatalog',
     'Kernel::System::LinkObject',
+    'Kernel::System::Log',
+    'Kernel::System::Main',
+    'Kernel::System::Util',
+    'Kernel::System::Valid',
 );
 
 =head1 NAME

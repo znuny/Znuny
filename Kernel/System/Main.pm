@@ -1076,6 +1076,20 @@ sub GenerateRandomString {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
+=head2 _Dump()
+
+dump a variable
+
+    my $Dump = $MainObject->_Dump(
+        $Data,
+    );
+
+Returns the dumped variable.
+
 =cut
 
 sub _Dump {
@@ -1160,8 +1174,6 @@ sub _Dump {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

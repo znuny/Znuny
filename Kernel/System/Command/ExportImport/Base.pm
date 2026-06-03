@@ -80,7 +80,7 @@ sub ExportConfigure {
     return (
         'target-directory' => {
             Description =>
-                "Path of the export directory. Use it to export data to the file, otherwise data will be printed.",
+                "Path of the export directory. Use it to export data to a file, otherwise data will be printed.",
             Required   => 0,
             HasValue   => 1,
             ValueRegex => qr/.*/smx,
@@ -470,7 +470,13 @@ sub ImportHandle {
     );
 
     if ( !$ImportData->{Success} ) {
-        $Self->{CommandObject}->PrintError('Error occurred while importing data!');
+        my $ErrorMessage = $ImportData->{Message}
+            ?
+            $ImportData->{Message}
+            : 'Couldn\'t import data!';
+
+        $Self->{CommandObject}->PrintError($ErrorMessage);
+
         return $Self->{CommandObject}->ExitCodeError();
     }
 

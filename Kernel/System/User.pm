@@ -1529,6 +1529,10 @@ sub TokenCheck {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _UserFullname()
 
 Builds the user fullname based on firstname, lastname and login. The order
@@ -1607,10 +1611,6 @@ sub _UserFullname {
     }
     return $UserFullname;
 }
-
-=end Internal:
-
-=cut
 
 =head2 UserLoginExistsCheck()
 

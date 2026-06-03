@@ -670,8 +670,7 @@ else {
 }
 
 # test bug#[12761]
-# (https://bugs.otrs.org/show_bug.cgi?id=12761) - Cache values can be modified from the outside in function XMLParse().
-#
+# Cache values can be modified from the outside in function XMLParse.
 $XML = '<Test Name="test123" />';
 my @XMLARRAY = $XMLObject->XMLParse( String => $XML );
 

@@ -303,7 +303,7 @@
                         <div class="field-wrapper">
                             <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]</label>
                             <div class="Field">
-                                <input id="[% Data.Name | html %]"type="text" name="[% Data.Name | html %]" class="W50pc" value="[% Data.SelectedID | html %]"/>
+                                <input id="[% Data.Name | html %]" type="text" name="[% Data.Name | html %]" class="W50pc" value="[% Data.SelectedID | html %]"/>
                                 <div class="FieldExplanation"> [% Translate(Data.Key) | html %] </div>
                             </div>
                         </div>

@@ -211,6 +211,9 @@ sub Run {
             Message => Translatable('Feature not enabled!'),
         );
     }
+
+    my $UserIDForSearch = $Config->{TicketSearchWithAdminUser} ? 1 : $Self->{UserID};
+
     my %Filters = (
         All => {
             Name   => Translatable('All'),
@@ -219,7 +222,7 @@ sub Run {
                 OrderBy      => $OrderBy,
                 SortBy       => $SortByS,
                 WatchUserIDs => [ $Self->{UserID} ],
-                UserID       => 1,
+                UserID       => $UserIDForSearch,
                 Permission   => 'ro',
             },
         },
@@ -234,7 +237,7 @@ sub Run {
                 TicketFlagUserID => $Self->{UserID},
                 OrderBy          => $OrderBy,
                 SortBy           => $SortByS,
-                UserID           => 1,
+                UserID           => $UserIDForSearch,
                 Permission       => 'ro',
             },
         },
@@ -246,7 +249,7 @@ sub Run {
                 WatchUserIDs => [ $Self->{UserID} ],
                 OrderBy      => $OrderBy,
                 SortBy       => $SortByS,
-                UserID       => 1,
+                UserID       => $UserIDForSearch,
                 Permission   => 'ro',
             },
         },
@@ -259,7 +262,7 @@ sub Run {
                 WatchUserIDs                  => [ $Self->{UserID} ],
                 OrderBy                       => $OrderBy,
                 SortBy                        => $SortByS,
-                UserID                        => 1,
+                UserID                        => $UserIDForSearch,
                 Permission                    => 'ro',
             },
         },

@@ -146,6 +146,7 @@ sub Run {
                 Result     => 'COUNT',
                 Permission => 'ro',
                 UserID     => $Self->{UserID},
+                StateType  => 'Open',
             );
             $LayoutObject->Block(
                 Name => 'CustomerIDTickets',

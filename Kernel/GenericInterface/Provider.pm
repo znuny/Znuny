@@ -413,6 +413,10 @@ sub Run {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _GenerateErrorResponse()
 
 returns an error message to the client.
@@ -584,8 +588,6 @@ sub _HandleError {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

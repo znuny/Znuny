@@ -366,13 +366,12 @@ $Selenium->RunTest(
         );
 
         # Navigate to agent ticket process directly via URL with pre-selected process and activity dialog
-        # see bug#12850 ( https://bugs.otrs.org/show_bug.cgi?id=12850 ).
         $Selenium->VerifiedGet(
             "${ScriptAlias}index.pl?Action=AgentTicketProcess;ID=$ListReverse{$ProcessName};ActivityDialogEntityID=$Process->{Activities}->[0]"
         );
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$(".AJAXLoader:visible").length;' );
 
-        # Check pre-selected process is loaded correctly, see bug#12850 ( https://bugs.otrs.org/show_bug.cgi?id=12850 ).
+        # Check pre-selected process is loaded correctly
         $Self->True(
             $Selenium->find_element( "#Subject", 'css' ),
             "Pre-selected process with activity dialog via URL is successful"
@@ -391,7 +390,6 @@ $Selenium->RunTest(
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("#Subject").length;' );
 
         # Check on DynamicField change - ACL restriction on Type field.
-        # See bug#11512 (https://bugs.otrs.org/show_bug.cgi?id=11512).
         $Self->True(
             $Selenium->execute_script("return \$('#TypeID option:contains(\"$Types[0]->{Name}\")').length;"),
             "All Types are visible before ACL"

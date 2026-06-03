@@ -185,6 +185,13 @@ sub GetParamAJAX {
 
     my $EmailSecurityOptions = $Param{EmailSecurityOptions} || '';
 
+    # User explicitly cleared the selection (no security) - honor it, do not re-apply queue default.
+    if ( exists $Param{EmailSecurityOptions} && $Param{EmailSecurityOptions} eq '' ) {
+        return (
+            EmailSecurityOptions => '',
+        );
+    }
+
     # Get default signing key from queue data.
     my %Queue = $Kernel::OM->Get('Kernel::System::Queue')->QueueGet( ID => $Param{QueueID} );
 

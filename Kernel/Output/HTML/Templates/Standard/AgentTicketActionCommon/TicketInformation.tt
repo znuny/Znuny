@@ -1,0 +1,225 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+<div class="mod modSidebarWidget">
+    <div class="inner">
+        <div class="sidebarWidgetTitle">
+            <h3 title="[% Translate(Data.WidgetConfig.Description) | html %]">
+                [% Translate(Data.WidgetConfig.Title) | html %]
+            </h3>
+        </div>
+        <div class="sidebarWidgetContent">
+            <div class="mod modTicketInformation">
+                <div class="inner">
+                    <div class="information-widget">
+                        <div class="Content">
+                            <fieldset class="TableLike FixedLabelSmall Narrow">
+
+[% RenderBlockStart("ArchiveFlag") %]
+                                <span>
+                                        <label>[% Translate("Archive") | html %]:</label>
+                                        <p class="Value">[% Translate("This ticket is archived.") | html %]</p>
+                                    </span>
+[% RenderBlockEnd("ArchiveFlag") %]
+
+[% RenderBlockStart("Type") %]
+                                <span>
+                                        <label>[% Translate("Type") | html %]: [% IF Data.ValidID != 1 %]<em class="Error">[% Translate("is invalid") | html %]!</em> [% END %]</label>
+                                        <p class="Value FixedValueSmall" title="[% Data.Type | html %]">[% Data.Type | html %]
+                                        </p>
+                                    </span>
+[% RenderBlockEnd("Type") %]
+
+                                <span>
+                                    <label>[% Translate("Age") | html %]:</label>
+                                    <p class="Value" title="[% Data.Age %]">[% Data.Age %]</p>
+                                </span>
+
+                                <span>
+                                    <label>[% Translate("Created") | html %]:</label>
+                                    <p class="Value" title="[% Data.Created | Localize("TimeShort") %]">[% Data.Created | Localize("TimeShort") %]</p>
+                                </span>
+
+[% RenderBlockStart("CreatedBy") %]
+                                <span>
+                                        <label>[% Translate("Created by") | html %]:</label>
+                                        <p class="Value" title="[% Data.CreatedByUser %]">[% Data.CreatedByUser %]</p>
+                                    </span>
+[% RenderBlockEnd("CreatedBy") %]
+                                <span class="state">
+                                    <label>[% Translate("State") | html %]: [% IF Data.StateValidID != 1 %] <em class="Error">[% Translate("is invalid") | html %]!</em> [% END %]</label>
+                                    <span class="Value [% Data.PillClass | html %]" title="[% Translate(Data.State) | html %]">
+                                        [% Translate(Data.State) | html %]
+                                    </span>
+                                </span>
+
+[% RenderBlockStart("PendingUntil") %]
+                                <span>
+                                        <label>[% Translate("Pending till") | html %]:</label>
+                                        <p class="Value [% Data.PendingUntilClass | html %]">
+                                            [% Data.PendingUntil %]
+                                            <br/>
+                                            [% Data.UntilTimeHuman | Localize("TimeShort") %]
+                                        </p>
+                                    </span>
+[% RenderBlockEnd("PendingUntil") %]
+
+                                <span>
+                                    <label>[% Translate("Locked") | html %]:</label>
+                                    <p class="Value" title="[% Translate(Data.Lock) | html %]">[% Translate(Data.Lock) | html %]</p>
+                                </span>
+
+                                <span>
+                                    <label>[% Translate("Priority") | html %]: [% IF Data.PriorityValidID != 1 %]<em class="Error">[% Translate("is invalid") | html %]!</em> [% END %]</label>
+                                    <p class="Value" title="[% Translate(Data.Priority) | html %]">[% Translate(Data.Priority) | html %]</p>
+                                </span>
+
+                                <span>
+                                    <label>[% Translate("Queue") | html %]:[% IF Data.QueueValidID != 1 %] <em class="Error">[% Translate("is invalid") | html %]!</em> [% END %]</label>
+                                    <p class="Value" title="[% Data.Queue | html %]">[% Data.Queue | html | replace('::', '<wbr>::<wbr>') %]</p>
+                                </span>
+
+[% RenderBlockStart("Service") %]
+                                <span>
+                                        <label>[% Translate("Service") | html %]: [% IF Data.ValidID != 1 %]<em class="Error">[% Translate("is invalid") | html %]!</em> [% END %]</label>
+                                        <p class="Value" title="[% Data.Service | html %]">[% Data.Service | html %]</p>
+                                    </span>
+[% RenderBlockEnd("Service") %]
+
+[% RenderBlockStart("SLA") %]
+                                <span>
+                                        <label>[% Translate("Service Level Agreement") | html %]: [% IF Data.ValidID != 1 %]<em class="Error">[% Translate("is invalid") | html %]!</em> [% END %]</label>
+                                        <p class="Value" title="[% Data.SLA | html %]">[% Data.SLA | html %]</p>
+                                    </span>
+[% RenderBlockEnd("SLA") %]
+                            </fieldset>
+
+                            <fieldset class="TableLike FixedLabelSmall Narrow">
+[% RenderBlockStart("FirstResponseTime") %]
+                                <span>
+                                        <label>[% Translate("First Response Time") | html %]:</label>
+                                        <div class="Value">
+                                            <p title="[% Translate("Service Time") | html %]: [% Data.FirstResponseTimeWorkingTime | html %]" class="[% Data.FirstResponseTimeClass | html %]">
+                                                [% Data.FirstResponseTimeHuman | html %]
+                                                <br/>
+                                                [% Data.FirstResponseTimeDestinationDate | Localize("TimeShort") %]
+                                            </p>
+                                        </div>
+                                    </span>
+[% RenderBlockEnd("FirstResponseTime") %]
+
+[% RenderBlockStart("UpdateTime") %]
+                                <span>
+                                        <label>[% Translate("Update Time") | html %]:</label>
+                                        <div class="Value">
+                                            <p title="[% Translate("Service Time") | html %]: [% Data.UpdateTimeWorkingTime | html %]" class="[% Data.UpdateTimeClass | html %]">
+                                                [% Data.UpdateTimeHuman | html %]
+                                                <br/>
+                                                [% Data.UpdateTimeDestinationDate | Localize("TimeShort") %]
+                                            </p>
+                                        </div>
+                                    </span>
+[% RenderBlockEnd("UpdateTime") %]
+
+[% RenderBlockStart("SolutionTime") %]
+                                <span>
+                                        <label>[% Translate("Solution Time") | html %]:</label>
+                                        <div class="Value">
+                                            <p title="[% Translate("Service Time") | html %]: [% Data.SolutionTimeWorkingTime | html %]" class="[% Data.SolutionTimeClass | html %]">
+                                                [% Data.SolutionTimeHuman | html %]
+                                                <br/>
+                                                [% Data.SolutionTimeDestinationDate | Localize("TimeShort") %]
+                                            </p>
+                                        </div>
+                                    </span>
+[% RenderBlockEnd("SolutionTime") %]
+                            </fieldset>
+
+                            <fieldset class="TableLike FixedLabelSmall Narrow">
+                                <span>
+                                    <label>[% Translate("Customer ID") | html %]:</label>
+                                    <p class="Value">
+[% RenderBlockStart("CustomerIDRW") %]
+                                            <a href="[% Config(" CustomerDBLink") | Interpolate %]" class="[% Config("CustomerDBLinkClass") | html %]" [% Config("CustomerDBLinkTarget") %]>[% Data.CustomerID | html %]</a>
+[% RenderBlockEnd("CustomerIDRW") %]
+[% RenderBlockStart("CustomerIDRO") %]
+                                            [% Data.CustomerID | html %]
+[% RenderBlockEnd("CustomerIDRO") %]
+
+[% RenderBlockStart("CustomerIDTickets") %]
+                                        &nbsp;-&nbsp;
+                                            <a href="[% Env(" Baselink") %]Action=AgentTicketSearch;Subaction=Search;CustomerID=[% Data.CustomerID | uri %];StateType=Open" title="[% Translate('Open tickets') | html %]">
+                                                [% Translate('Open tickets') | html %]: [% Data.CustomerIDTickets %]
+                                            </a>
+[% RenderBlockEnd("CustomerIDTickets") %]
+                                    </p>
+                                </span>
+
+[% RenderBlockStart("TotalAccountedTime") %]
+                                    <span>
+                                        <label>[% Translate("Accounted time") | html %]:</label>
+                                        <p class="Value">[% Data.TicketTimeUnits %]</p>
+                                    </span>
+[% RenderBlockEnd("TotalAccountedTime") %]
+
+[% RenderBlockStart("Owner") %]
+                                    <span>
+                                        <label>[% Translate("Owner") | html %]: [% IF Data.ValidID != 1 %]<em class="Error">[% Translate("is invalid") | html %]!</em> [% END %]</label>
+                                        <p class="Value" title="[% Data.UserFullname | html %] ([% Data.UserLogin | html %])">
+                                            [% Data.UserFullname | html %]
+                                        </p>
+                                    </span>
+[% RenderBlockEnd("Owner") %]
+
+[% RenderBlockStart("Responsible") %]
+                                    <span>
+                                        <label>[% Translate("Responsible") | html %]: [% IF Data.ValidID != 1 %]<em class="Error">[% Translate("is invalid") | html %]!</em> [% END %]</label>
+                                        <p class="Value" title="[% Data.UserFullname | html %] ([% Data.UserLogin | html %])">
+                                            [% Data.UserFullname | html %]
+                                        </p>
+                                    </span>
+[% RenderBlockEnd("Responsible") %]
+                            </fieldset>
+
+[% RenderBlockStart("ProcessData") %]
+                            <fieldset class="TableLike FixedLabelSmall Narrow">
+
+                                <span>
+                                    <label>[% Translate("Process") | html %]:</label>
+                                    <p class="Value" title="[% Translate(Data.Process) | html %]">[% Translate(Data.Process) | html %]</p>
+                                </span>
+
+                                <span>
+                                    <label>[% Translate("Activity") | html %]:</label>
+                                    <p class="Value" title="[% Translate(Data.Activity) | html %]">[% Translate(Data.Activity) | html %]</p>
+                                </span>
+                            </fieldset>
+[% RenderBlockEnd("ProcessData") %]
+                            <fieldset class="TableLike FixedLabelSmall Narrow">
+[% RenderBlockStart("TicketDynamicField") %]
+                                <span>
+                                        <label>[% Translate(Data.Label) | html %]:</label>
+                                        <p class="Value">
+[% RenderBlockStart("TicketDynamicFieldLink") %]
+                                            <span title="[% Data.Title %]"><a href="[% Data.Link | Interpolate %]" [% IF Data.LinkPreview %] data-trigger="floater" data-floater-url="[% Data.LinkPreview | Interpolate %]" [% END %] target="_blank" class="DynamicFieldLink">[% Data.Value %]</a></span>
+[% RenderBlockEnd("TicketDynamicFieldLink") %]
+
+[% RenderBlockStart("TicketDynamicFieldPlain") %]
+                                            <span title="[% Data.Title %]">[% Data.Value %]</span>
+[% RenderBlockEnd("TicketDynamicFieldPlain") %]
+                                        </p>
+                                    </span>
+[% RenderBlockEnd("TicketDynamicField") %]
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

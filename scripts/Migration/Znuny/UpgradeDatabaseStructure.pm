@@ -37,24 +37,32 @@ sub Run {
 
     my @Tasks = (
         {
-            Message => 'Increase size of columns of database table search_profile.',
-            Module  => 'SearchProfile',
+            Message => 'Create missing primary keys for database tables.',
+            Module  => 'CreatePrimaryKeys',
         },
         {
-            Message => 'Create new communication channel Web.',
-            Module  => 'CreateCommunicationChannelWeb',
-        },
-        {
-            Message => 'Create database table translation.',
-            Module  => 'Translation',
-        },
-        {
-            Message => 'Create database table article_color.',
+            Message => 'Alters database table article_color.',
             Module  => 'ArticleColor',
         },
         {
-            Message => 'Create table for user process preferences support.',
-            Module  => 'ProcessPreferences',
+            Message => 'Alters database table calendar.',
+            Module  => 'CalendarColor',
+        },
+        {
+            Message => 'Alters color column in database table ticket_priority.',
+            Module  => 'PriorityColor',
+        },
+        {
+            Message => 'Alters color column in database table ticket_state.',
+            Module  => 'StateColor',
+        },
+        {
+            Message => 'Create database table sendmail_config.',
+            Module  => 'SendmailConfig',
+        },
+        {
+            Message => 'Alters password column sizes in users, customer_user and mail_account.',
+            Module  => 'PasswordColumnLength',
         },
     );
 

@@ -29,8 +29,7 @@ $HelperObject->ConfigSettingChange(
 
 # this test is to check that when AgentTicketPhone is loaded already with
 # customer data on it (like when doing Split), the dropdown of Service is
-# prefilled with the correct data. This is because of bug
-# http://bugs.otrs.org/show_bug.cgi?id=7060
+# prefilled with the correct data.
 
 $Selenium->RunTest(
     sub {

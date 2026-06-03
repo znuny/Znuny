@@ -290,7 +290,7 @@ sub Run {
 
         # get process data
         my $ProcessData = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process')->ProcessExport(
-            ID     => $Param{ID},
+            ID     => $ProcessID,
             UserID => $Self->{UserID},
         );
 

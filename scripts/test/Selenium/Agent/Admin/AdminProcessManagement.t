@@ -79,6 +79,11 @@ $Selenium->RunTest(
 
         $Selenium->find_element( "#Submit", 'css' )->VerifiedClick();
 
+        $Selenium->CloseNotification(
+            Text =>
+                'Process Management information from database is not in sync with the system configuration, please synchronize all processes.',
+        );
+
         # Checks for AdminValidFilter
         $Self->True(
             $Selenium->find_element( "#ValidFilter", 'css' )->is_displayed(),

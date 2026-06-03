@@ -300,6 +300,13 @@ sub Run {
                         TicketID => $Self->{TicketID},
                     },
                 );
+                $LayoutObject->Block(
+                    Name => 'PropertiesLockNotify',
+                    Data => {
+                        %Param,
+                        TicketID => $Self->{TicketID},
+                    },
+                );
             }
         }
         else {
@@ -2393,7 +2400,7 @@ sub _Mask {
     # Widget Article
     if ( $Config->{Note} ) {
 
-        $Param{WidgetStatus} = 'Collapsed';
+        $Param{CardStatus} = 'Collapsed';
 
         if (
             $Config->{NoteMandatory}
@@ -2402,7 +2409,7 @@ sub _Mask {
             || $Param{CreateArticle}
             )
         {
-            $Param{WidgetStatus} = 'Expanded';
+            $Param{CardStatus} = 'Expanded';
         }
 
         if (
@@ -2426,6 +2433,8 @@ sub _Mask {
             $Param{IsVisibleForCustomer} = $Config->{IsVisibleForCustomerDefault};
         }
 
+        my $PreviewContentTypes = $ConfigObject->Get('Attachment')->{PreviewContentTypes} || {};
+
         # show attachments
         ATTACHMENT:
         for my $Attachment ( @{ $Param{Attachments} } ) {
@@ -2437,6 +2446,12 @@ sub _Mask {
                 )
             {
                 next ATTACHMENT;
+            }
+
+            # Add preview flag if content type is in the preview content types list.
+            # This is used to determine if the attachment can be previewed in the UI.
+            if ( $Attachment->{ContentType} && $PreviewContentTypes->{ $Attachment->{ContentType} } ) {
+                $Attachment->{Preview} = 1;
             }
 
             push @{ $Param{AttachmentList} }, $Attachment;

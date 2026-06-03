@@ -614,6 +614,9 @@ sub LoaderCreateCustomerCSSCalls {
         }
     }
 
+    # save selected skin
+    $Self->{SkinSelected} = $SkinSelected;
+
     my $SkinHome = $ConfigObject->Get('Home') . '/var/httpd/htdocs/skins';
     my $DoMinify = $ConfigObject->Get('Loader::Enabled::CSS');
 

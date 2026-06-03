@@ -17,8 +17,6 @@ use Kernel::System::EmailParser;
 
 # This is a test for an email from the Win7 snipping tool. This email is an invalid
 # mime message and therefore cannot be parsed by MIME::Tools correctly.
-#
-# See also: http://bugs.otrs.org/show_bug.cgi?id=8092
 
 my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
 

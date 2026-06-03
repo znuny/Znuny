@@ -629,8 +629,6 @@ sub WebserviceConfigReplace {
 
 1;
 
-=end Internal:
-
 =head1 TERMS AND CONDITIONS
 
 This software is part of the OTRS project (L<https://otrs.org/>).

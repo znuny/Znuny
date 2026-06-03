@@ -435,7 +435,8 @@ sub Run {
                     'Ticket "%s" created!',
                     $Ticket{TicketNumber},
                 ),
-                Link => $LayoutObject->{Baselink}
+                Priority => 'Success',
+                Link     => $LayoutObject->{Baselink}
                     . 'Action=AgentTicketZoom;TicketID='
                     . $Ticket{TicketID},
             );
@@ -1354,6 +1355,18 @@ sub Run {
                     User => $FromExternalCustomer{Customer},
                 );
                 $FromExternalCustomer{Email} = $ExternalCustomerUserData{UserMailString};
+            }
+
+            if ( $GetParam{To} && !@MultipleCustomer ) {
+                push @MultipleCustomer, {
+                    Count            => 1,
+                    CustomerElement  => $GetParam{To},
+                    CustomerSelected => 'checked="checked"',
+                    CustomerKey      => $CustomerUser,
+                    CustomerError    => '',
+                    CustomerErrorMsg => 'CustomerGenericServerErrorMsg',
+                    CustomerDisabled => '',
+                };
             }
             $Error{ExpandCustomerName} = 1;
         }
@@ -3371,6 +3384,8 @@ sub _MaskEmailNew {
         $ShownOptionsBlock = 1;
     }
 
+    my $PreviewContentTypes = $ConfigObject->Get('Attachment')->{PreviewContentTypes} || {};
+
     # show attachments
     ATTACHMENT:
     for my $Attachment ( @{ $Param{Attachments} } ) {
@@ -3382,6 +3397,12 @@ sub _MaskEmailNew {
             )
         {
             next ATTACHMENT;
+        }
+
+        # Add preview flag if content type is in the preview content types list.
+        # This is used to determine if the attachment can be previewed in the UI.
+        if ( $Attachment->{ContentType} && $PreviewContentTypes->{ $Attachment->{ContentType} } ) {
+            $Attachment->{Preview} = 1;
         }
 
         push @{ $Param{AttachmentList} }, $Attachment;

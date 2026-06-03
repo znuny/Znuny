@@ -47,11 +47,11 @@ sub CheckAccess {
         }
     }
 
-    if ( $Param{ChannelName} eq 'Email' && $Param{Article}->{SenderType} eq 'system' ) {
+    # skip internal agent articles
+    return if $Param{ChannelName} eq 'Internal' && $Param{Article}->{SenderType} eq 'agent';
 
-        # skip email notifications
-        return;
-    }
+    # skip sender type 'system'
+    return if $Param{Article}->{SenderType} eq 'system';
 
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 

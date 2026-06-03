@@ -232,7 +232,6 @@ $Selenium->RunTest(
         );
 
         # Select new customer and verify customer field value is not cleared after focus lost.
-        # See bug#13880 (https://bugs.otrs.org/show_bug.cgi?id=13880).
         $Selenium->find_element( "#CustomerAutoComplete", 'css' )->clear();
         $Selenium->find_element( "#CustomerAutoComplete", 'css' )->send_keys( $TestCustomers[0] );
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("li.ui-menu-item:visible").length' );
@@ -256,8 +255,10 @@ $Selenium->RunTest(
 
         $HelperObject->ConfigSettingChange(
             Valid => 1,
-            Key   => 'Ticket::Frontend::AgentTicketCustomer::CustomerIDReadOnly',
-            Value => 0
+            Key   => 'Ticket::Frontend::AgentTicketCustomer',
+            Value => {
+                CustomerIDReadOnly => 0,
+            },
         );
 
         # Wait for update.
@@ -308,8 +309,10 @@ $Selenium->RunTest(
         # Return CustomerID read only to default.
         $HelperObject->ConfigSettingChange(
             Valid => 1,
-            Key   => 'Ticket::Frontend::AgentTicketCustomer::CustomerIDReadOnly',
-            Value => 1
+            Key   => 'Ticket::Frontend::AgentTicketCustomer',
+            Value => {
+                CustomerIDReadOnly => 1,
+            },
         );
 
         $Selenium->find_element( "#Submit", 'css' )->click();

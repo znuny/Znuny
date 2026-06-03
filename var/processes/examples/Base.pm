@@ -12,6 +12,7 @@ package var::processes::examples::Base;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 

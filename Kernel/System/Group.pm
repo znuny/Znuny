@@ -2392,7 +2392,9 @@ sub GroupUserRoleMemberAdd {
 
 =begin Internal:
 
-=cut
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
 
 =head2 _DBGroupUserGet()
 
@@ -2891,8 +2893,6 @@ sub _PermissionTypeList {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

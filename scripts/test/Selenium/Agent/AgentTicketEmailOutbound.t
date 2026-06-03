@@ -165,7 +165,7 @@ $Selenium->RunTest(
         my $Message = 'Article subject will be empty if the subject contains only the ticket hook!';
 
         $Self->True(
-            $Selenium->execute_script("return \$('.MessageBox.Warning:contains(\"$Message\")').length;"),
+            $Selenium->execute_script("return \$('.messageWarning:contains(\"$Message\")').length;"),
             "Notification about empty subject is found",
         );
 
@@ -225,15 +225,19 @@ $Selenium->RunTest(
             'Ticket email outbound completed'
         );
 
-        # Check email sending multiplication (see bug#14694 - https://bugs.otrs.org/show_bug.cgi?id=14694).
+        # Check email sending multiplication
         # Navigate to AgentTicketEmailOutbound screen of created test ticket.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketEmailOutbound;TicketID=$TicketID");
 
         my $Subject      = "TestSubject-$RandomID";
         my $EmailAddress = "$RandomID\@example.com";
 
-        $Selenium->find_element( "#Subject",        'css' )->send_keys($Subject);
-        $Selenium->find_element( "#ToCustomer",     'css' )->send_keys($EmailAddress);
+        $Selenium->find_element( "#Subject",    'css' )->send_keys($Subject);
+        $Selenium->find_element( "#ToCustomer", 'css' )->send_keys($EmailAddress);
+
+        $Selenium->execute_script(
+            "\$('#submitRichText')[0].scrollIntoView(true);",
+        );
         $Selenium->find_element( "#submitRichText", 'css' )->VerifiedClick();
 
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("#ArticleTable").length;' );
@@ -287,8 +291,7 @@ $Selenium->RunTest(
         );
 
         # make sure the cache is correct
-        for my $Cache (qw(Ticket CustomerUser))
-        {
+        for my $Cache (qw(Ticket CustomerUser)) {
             $CacheObject->CleanUp(
                 Type => $Cache,
             );

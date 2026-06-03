@@ -395,10 +395,10 @@ ul.ContextFunctions li:last-child:hover > a {
     color: var(--black);
     display: flex;
     align-items: center;
-    border-bottom: var(--border-width) var(--border-solid) var(--border);
+    /*border-bottom: var(--border-width) var(--border-solid) var(--border-color);*/
     transition: var(--main-transition);
     /*letter-spacing: 1px;*/
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     /*padding: 0 6px;*/
     color: var(--gray-darker);
     font-size: var(--font-size-sm);
@@ -820,7 +820,7 @@ ul.ContextFunctions li:last-child:hover > a {
 }
 
 .BottomRow {
-    background: (--white);
+    background: var(--white);
     border: var(--border-width) var(--border-solid) var(--border-color);
     padding: var(--padding-sm) var(--padding-lg);
     border-bottom-left-radius: var(--border-radius-sm);

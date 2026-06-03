@@ -7,13 +7,24 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<tr class="Hidden Uploading">
+<tr class="Uploading">
     <td class="Filename">{{ Filename }}</td>
     <td class="Filetype">{{ Filetype }}</td>
     <td class="Filesize">
         <span class="Progress"></span>
     </td>
-    <td class="Center">
-        <a href="#" class="AttachmentDelete Hidden icon-hover-sm" tabindex="0" aria-label="{{ 'Click to delete this attachment.' | Translate }}"><i class="fa fa-times"></i></a>
+# Temp. disabled preview because of security context
+#    <td class="Preview OptionIcon">
+#        <a href="#" class="Hidden AttachmentPreview icon-hover-sm" aria-label="{{ 'Click to preview this file.' | Translate }}" tabindex="0" data-file-id="{{ FileID }}" data-object-id="{{ ObjectID }}" data-field-id="{{ File.FieldID }}">
+#            <i class="fa fa-search"></i>
+#        </a>
+#    </td>
+    <td class="Download OptionIcon ">
+        <a href="#" class="Hidden AttachmentDownload icon-hover-sm" aria-label="{{ 'Click to download this file.' | Translate }}" tabindex="0" data-file-id="{{ FileID }}" data-object-id="{{ ObjectID }}" data-field-id="{{ File.FieldID }}">
+            <i class="fa fa-download"></i>
+        </a>
+    </td>
+    <td class="Delete OptionIcon">
+        <a href="#" class="Hidden AttachmentDelete icon-hover-sm" tabindex="0" aria-label="{{ 'Click to delete this attachment.' | Translate }}"><i class="fa fa-times"></i></a>
     </td>
 </tr>

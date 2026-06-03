@@ -226,18 +226,21 @@ sub Run {
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
-        my %GetParam;
-        for my $Parameter (qw(ID)) {
-            $GetParam{$Parameter} = $ParamObject->GetParam( Param => $Parameter ) || '';
-        }
+        my $ID = $ParamObject->GetParam( Param => 'ID' );
 
         my $Delete = $AutoResponseObject->AutoResponseDelete(
-            ID     => $GetParam{ID},
+            ID     => $ID,
             UserID => $Self->{UserID},
         );
 
         return $LayoutObject->ErrorScreen() if !$Delete;
-        return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+
+        return $LayoutObject->Attachment(
+            ContentType => 'text/html',
+            Content     => $Delete,
+            Type        => 'inline',
+            NoCache     => 1,
+        );
     }
 
     # ------------------------------------------------------------ #
@@ -544,6 +547,19 @@ sub _Overview {
                     Attachments => int rand 5,
                 },
             );
+
+            my %AutoResponseQueues = $AutoResponseObject->AutoResponseQueuesList(
+                ID => $ID,
+            );
+
+            if ( !%AutoResponseQueues ) {
+                $LayoutObject->Block(
+                    Name => 'DeleteLink',
+                    Data => {
+                        ID => $ID,
+                    },
+                );
+            }
         }
     }
 

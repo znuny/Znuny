@@ -11,6 +11,7 @@ package Kernel::System::YAML;
 
 use strict;
 use warnings;
+use utf8;
 
 use Encode    qw();
 use YAML::Any qw();
@@ -158,6 +159,10 @@ sub Load {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _AddUTF8Flag()
 
 adds the UTF8 flag to all elements in a complex data structure.
@@ -202,8 +207,6 @@ sub _AddUTF8Flag {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

@@ -1,0 +1,87 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+.modForm {
+  > .inner {
+
+    // override existing styles
+    // reset global form styles
+    form {
+      overflow: revert;
+      display: unset;
+      flex-flow: unset;
+      gap: unset;
+    }
+  }
+}
+
+/* FieldExplanation: moved by JS next to label, shown as icon with tooltip */
+.layoutPopUp,
+.layoutContentSidebar {
+  .col-12:has(> p.FieldExplanation) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    > label {
+      margin-bottom: 0;
+    }
+
+    > .Field {
+      flex: 0 0 100%;
+    }
+  }
+
+  .col-12 > p.FieldExplanation {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    font-size: 0;
+    color: transparent;
+    cursor: help;
+    position: relative;
+    margin: 0 0 0 6px;
+
+    &::before {
+      font-family: "FontAwesome";
+      content: "\f05a";
+      font-size: 14px;
+      color: var(--gray, #aaa);
+      display: block;
+      width: 16px;
+      line-height: 16px;
+      text-align: center;
+    }
+
+    &::after {
+      content: attr(data-tooltip);
+      display: none;
+      position: absolute;
+      z-index: 9999;
+      top: 22px;
+      left: -10px;
+      width: 280px;
+      background: rgba(40, 40, 40, 0.95);
+      color: #fff;
+      font-size: var(--font-size-sm);
+      font-family: inherit;
+      line-height: 1.5;
+      padding: 8px 12px;
+      border-radius: var(--border-radius-sm);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+      white-space: normal;
+    }
+
+    &:hover::after {
+      display: block;
+    }
+  }
+}

@@ -21,11 +21,11 @@ our @ObjectDependencies = (
 sub Configure {
     my ( $Self, %Param ) = @_;
 
-    $Self->Description('An interactive REPL shell for the OTRS API.');
+    $Self->Description('An interactive REPL shell for the Znuny API.');
 
     $Self->AddOption(
         Name        => 'eval',
-        Description => 'Perl code that should be evaluated in the OTRS context.',
+        Description => 'Perl code that should be evaluated in Znuny context.',
         Required    => 0,
         HasValue    => 1,
         ValueRegex  => qr/.*/smx,

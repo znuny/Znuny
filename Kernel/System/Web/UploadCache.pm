@@ -143,7 +143,7 @@ returns an array with a hash ref of all files for a Form ID
 sub FormIDGetAllFilesData {
     my ( $Self, %Param ) = @_;
 
-    return @{ $Self->{Backend}->FormIDGetAllFilesData(%Param) };
+    return @{ $Self->{Backend}->FormIDGetAllFilesData(%Param) // [] };
 }
 
 =head2 FormIDGetAllFilesMeta()
@@ -163,7 +163,7 @@ Note: returns no content, only meta data.
 sub FormIDGetAllFilesMeta {
     my ( $Self, %Param ) = @_;
 
-    return @{ $Self->{Backend}->FormIDGetAllFilesMeta(%Param) };
+    return @{ $Self->{Backend}->FormIDGetAllFilesMeta(%Param) // [] };
 }
 
 =head2 FormIDCleanUp()

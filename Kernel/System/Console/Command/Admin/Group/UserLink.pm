@@ -11,16 +11,23 @@ package Kernel::System::Console::Command::Admin::Group::UserLink;
 
 use strict;
 use warnings;
+use utf8;
 
 use parent qw(Kernel::System::Console::BaseCommand);
 
 our @ObjectDependencies = (
+    'Kernel::Config',
     'Kernel::System::Group',
     'Kernel::System::User',
 );
 
 sub Configure {
     my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $Permissions  = $ConfigObject->Get('System::Permission');
+
+    my $PermissionsString = join '|', @{$Permissions};
 
     $Self->Description('Connect a user to a group.');
     $Self->AddOption(
@@ -40,10 +47,10 @@ sub Configure {
     $Self->AddOption(
         Name        => 'permission',
         Description =>
-            'Permissions (ro|move_into|create|owner|priority|rw) the given user should have for the group he is going to be linked to.',
+            "Permissions ($PermissionsString) the given user should have for the group he is going to be linked to.",
         Required   => 1,
         HasValue   => 1,
-        ValueRegex => qr/(ro|move_into|create|owner|priority|rw)/smx,
+        ValueRegex => qr/($PermissionsString)/smx,
     );
 
     return;
@@ -75,8 +82,11 @@ sub Run {
 
     $Self->Print("<yellow>Trying to link user $Self->{UserName} to group $Self->{GroupName}...</yellow>\n");
 
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $Permissions  = $ConfigObject->Get('System::Permission');
+
     my %Permissions;
-    for my $Permission (qw(ro move_into create owner priority rw)) {
+    for my $Permission ( @{$Permissions} ) {
         $Permissions{$Permission} = ( $Self->GetOption('permission') eq $Permission ) ? 1 : 0;
     }
 

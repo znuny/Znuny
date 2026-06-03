@@ -1074,6 +1074,10 @@ sub ComplexTablePreferencesSet {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _LinkObjectContentStringCreate()
 
 return a output string
@@ -1302,10 +1306,6 @@ sub _LoadLinkObjectLayoutBackend {
 
     return $BackendObject;
 }
-
-=end Internal:
-
-=cut
 
 1;
 

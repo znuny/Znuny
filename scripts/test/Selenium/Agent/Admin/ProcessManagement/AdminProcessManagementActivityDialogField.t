@@ -317,11 +317,10 @@ $Selenium->RunTest(
             "Process $Process->{Name} is deleted",
         );
 
-        # Navigate to AdminProcessManagement screen.
-        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminProcessManagement");
+        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminProcessManagement;Subaction=ProcessSync");
 
-        # Synchronize Process after deleting test Process.
-        $Selenium->find_element("//a[contains(\@href, \'Subaction=ProcessSync' )]")->VerifiedClick();
+        # We have to allow a 1 second delay for Apache2::Reload to pick up the changed Process cache.
+        sleep 1;
 
         # Cleanup DynamicField.
         for my $DynamicFieldID (@DynamicFieldIDs) {

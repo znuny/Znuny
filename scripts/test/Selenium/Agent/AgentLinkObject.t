@@ -423,7 +423,6 @@ $Selenium->RunTest(
             );
 
             # Verify there is button to delete link, even though TicketNumber is not in the first column.
-            # See bug#13703 (https://bugs.otrs.org/show_bug.cgi?id=13703).
             $Self->True(
                 $Selenium->execute_script("return \$('.InstantLinkDelete').length;"),
                 "Delete link button is present."
@@ -673,7 +672,6 @@ $Selenium->RunTest(
         );
 
         # Verify column settings button is available for both Ticket and Appointment link object widget.
-        # See bug#13702 (https://bugs.otrs.org/show_bug.cgi?id=13702);
         for my $LinkObject (qw(Appointment Ticket)) {
             $Selenium->WaitFor(
                 JavaScript =>

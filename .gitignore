@@ -49,6 +49,9 @@ var/cron/*
 .viminfo
 .bash*
 
+# CSS Map files
+*.css.map
+
 # Packages
 .mysql_history
 doc/en/
@@ -1077,4 +1080,5 @@ var/packagesetup/Survey.pm
 .idea
 ./.idea
 /.idea
+
 

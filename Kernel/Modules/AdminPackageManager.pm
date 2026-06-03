@@ -270,7 +270,7 @@ sub Run {
         }
         my @DatabaseBuffer;
 
-        # correct any 'dos-style' line endings - http://bugs.otrs.org/show_bug.cgi?id=9838
+        # correct any 'dos-style' line endings
         ${$Package} =~ s{\r\n}{\n}xmsg;
 
         # create MD5 sum and add it into existing package structure
@@ -712,6 +712,17 @@ sub Run {
                                     %{$Hash},
                                 },
                             );
+
+                            $LayoutObject->Block(
+                                Name => "PackageItemFilelistFileNote",
+                                Data => {
+                                    Name    => $Structure{Name}->{Content},
+                                    Version => $Structure{Version}->{Content},
+                                    File    => $File,
+                                    %{$Hash},
+                                },
+                            );
+
                         }
                     }
                     else {
@@ -996,7 +1007,12 @@ sub Run {
         );
 
         # intro screen
-        if ( !$PackageObject->PackageReinstall( String => $Package ) ) {
+        my $PackageReinstall = $PackageObject->PackageReinstall(
+            String => $Package,
+            UserID => $Self->{UserID},
+        );
+
+        if ( !$PackageReinstall ) {
             return $LayoutObject->ErrorScreen();
         }
         my %Data;
@@ -1169,7 +1185,11 @@ sub Run {
         );
 
         # unsinstall the package
-        if ( !$PackageObject->PackageUninstall( String => $Package ) ) {
+        my $PackageUninstall = $PackageObject->PackageUninstall(
+            String => $Package,
+            UserID => $Self->{UserID},
+        );
+        if ( !$PackageUninstall ) {
             return $LayoutObject->ErrorScreen();
         }
 
@@ -2041,6 +2061,7 @@ sub _InstallHandling {
     elsif (
         $PackageObject->PackageInstall(
             String => $Param{Package},
+            UserID => $Self->{UserID},
         )
         )
     {
@@ -2214,7 +2235,13 @@ sub _UpgradeHandling {
     }
 
     # upgrade
-    elsif ( $PackageObject->PackageUpgrade( String => $Param{Package} ) ) {
+    elsif (
+        $PackageObject->PackageUpgrade(
+            String => $Param{Package},
+            UserID => $Self->{UserID},
+        )
+        )
+    {
 
         # intro screen
         my %Data;

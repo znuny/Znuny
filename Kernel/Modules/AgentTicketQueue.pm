@@ -505,7 +505,7 @@ sub Run {
         View   => $View,
 
         Bulk       => 1,
-        TitleName  => Translatable('QueueView'),
+        TitleName  => Translatable('Queue View'),
         TitleValue => $NavBar{BreadcrumbQueue} . $SubQueueIndicatorTitle,
 
         Env        => $Self,

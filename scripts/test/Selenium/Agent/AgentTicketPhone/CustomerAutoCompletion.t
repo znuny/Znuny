@@ -18,7 +18,6 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 
 # This test checks if the customer auto completion works correctly.
 # Special case: it must also work when called up directly via GET-Parameter.
-# http://bugs.otrs.org/show_bug.cgi?id=7158
 
 $Selenium->RunTest(
     sub {
@@ -173,8 +172,10 @@ $Selenium->RunTest(
         );
 
         $HelperObject->ConfigSettingChange(
-            Key   => 'Ticket::Frontend::AgentTicketPhone::CustomerIDReadOnly',
-            Value => 0,
+            Key   => 'Ticket::Frontend::AgentTicketPhone',
+            Value => {
+                CustomerIDReadOnly => 0,
+            },
         );
 
         # Check if the additional CustomerID select button is not disabled.

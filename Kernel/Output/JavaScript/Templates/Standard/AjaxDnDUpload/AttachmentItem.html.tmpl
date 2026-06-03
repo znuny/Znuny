@@ -11,7 +11,20 @@
     <td class="Filename">{{ Filename }}</td>
     <td class="Filetype">{{ Filetype }}</td>
     <td class="Filesize">{{ Filesize }}</td>
-    <td class="Center">
-        <a href="#" data-file-id="{{ FileID }}" class="AttachmentDelete icon-hover-sm"><i class="fa fa-times"></i></a>
+# Temp. disabled preview because of security context
+#    <td class="Preview OptionIcon">
+#        {% if Preview %}
+#        <a href="#" class="AttachmentPreview icon-hover-sm" aria-label="{{ 'Click to preview this file.' | Translate }}" tabindex="0" data-file-id="{{ FileID }}" data-object-id="{{ ObjectID }}" data-field-id="{{ File.FieldID }}">
+#            <i class="fa fa-search"></i>
+#        </a>
+#        {% endif %}
+#    </td>
+    <td class="Download OptionIcon">
+        <a href="{{ DownloadURL }}" class="AttachmentDownload icon-hover-sm" aria-label="{{ 'Click to download this file.' | Translate }}" tabindex="0" data-file-id="{{ FileID }}" data-object-id="{{ ObjectID }}" data-field-id="{{ File.FieldID }}" data-download-action="{{ File.DownloadAction }}">
+            <i class="fa fa-download"></i>
+        </a>
+    </td>
+    <td class="Delete OptionIcon">
+        <a href="#" class="AttachmentDelete icon-hover-sm" data-file-id="{{ FileID }}" tabindex="0" aria-label="{{ 'Click to delete this attachment.' | Translate }}"><i class="fa fa-times"></i></a>
     </td>
 </tr>

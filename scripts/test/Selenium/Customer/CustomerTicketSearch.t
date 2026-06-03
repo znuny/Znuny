@@ -228,7 +228,6 @@ $Selenium->RunTest(
         );
 
         # Check if DynamicField value is available in CustomerTicketSearch result screen.
-        # See https://bugs.otrs.org/show_bug.cgi?id=13818.
         $Self->True(
             index( $Selenium->get_page_source(), "$ValueText" ) > -1,
             "DynamicField value is found - $DynamicFieldName:$ValueText",

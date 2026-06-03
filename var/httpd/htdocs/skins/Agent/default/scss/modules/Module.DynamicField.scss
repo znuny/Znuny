@@ -1,0 +1,67 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+.modDynamicField {
+  >.inner {
+      //margin-bottom: 20px;
+    .dynamicFieldLabel {
+      margin-bottom: 5px;
+
+      input[type=checkbox] {
+        padding-left: 0px;
+        margin-left: 0;
+        margin-top: 1px;
+      }
+    }
+    .dynamicFieldForm {
+      $dateTimeInputMarin: 3px;
+
+      // date
+      .DynamicFieldDate {
+        //display: grid;
+        //grid-template-columns: 1fr 1fr 1fr 1fr ;
+
+        .Validate_DateDay {
+          margin-right: $dateTimeInputMarin;
+        }
+
+        .Validate_DateMonth {
+          margin-right: $dateTimeInputMarin;
+          margin-left: $dateTimeInputMarin;
+        }
+
+        .Validate_DateYear {
+          margin-right: $dateTimeInputMarin;
+          margin-left: $dateTimeInputMarin;
+        }
+
+        .DatepickerIcon {
+          display: inline;
+          margin-left: 10px;
+        }
+      }
+      .DynamicFieldTime {
+        margin-top: 5px;
+        .Validate_DateHour {
+          margin-right: 5px;
+        }
+        .Validate_DateMinute {
+          margin-right: $dateTimeInputMarin;
+          margin-left: 5px;
+        }
+      }
+
+      // checkbox
+      input[type=checkbox] {
+        padding-left: 0px;
+        margin-left: 0;
+        margin-top: 1px;
+      }
+    }
+  }
+}

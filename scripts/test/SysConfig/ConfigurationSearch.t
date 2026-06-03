@@ -122,6 +122,17 @@ my @Tests = (
         ExpectedResult => [],
         Success        => 1,
     },
+    {
+        Name   => 'Wildcard Search',
+        Params => {
+            Search => 'Frontend::*::EnhancedMode',
+        },
+        ExpectedResult => [
+            'Frontend::RichText::EnhancedMode',
+            'Frontend::RichText::EnhancedMode::Customer',
+        ],
+        Success => 1,
+    },
 );
 
 TEST:

@@ -1035,6 +1035,10 @@ sub CheckMessageBody {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _DecodeString()
 
 Decode all encoded substrings.
@@ -1116,8 +1120,6 @@ sub _MailAddressParse {
 
     return @Chunks;
 }
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

@@ -1724,6 +1724,10 @@ sub DimGet {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _TableCalculate()
 
 calculate params of table.
@@ -3721,8 +3725,6 @@ sub DESTROY {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

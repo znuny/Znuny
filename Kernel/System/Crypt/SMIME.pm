@@ -2577,6 +2577,14 @@ sub CheckCertPath {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
+=head2 _Init()
+
+initialize the SMIME object
+
 =cut
 
 sub _Init {
@@ -3853,10 +3861,6 @@ sub _NonIndexedAttributesLookup {
 }
 
 1;
-
-=end Internal:
-
-=cut
 
 =head1 TERMS AND CONDITIONS
 

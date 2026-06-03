@@ -37,6 +37,16 @@ Core.Agent.TicketEmail = (function (TargetNS) {
             Fields = ['TypeID', 'Dest', 'NewUserID', 'NewResponsibleID', 'NextStateID', 'PriorityID', 'ServiceID', 'SLAID'],
             ModifiedFields;
 
+        // Move FieldExplanation elements next to their labels, store text as tooltip
+        // used for Tooltips on labels (email security elements)
+        $('.Field p.FieldExplanation').each(function() {
+            var $Label = $(this).closest('.col-12').find('> label');
+            if ($Label.length) {
+                $(this).attr('data-tooltip', $(this).text().trim());
+                $(this).detach().insertAfter($Label);
+            }
+        });
+
         // Bind events to specific fields
         $.each(Fields, function(Index, Value) {
             ModifiedFields = Core.Data.CopyObject(Fields).concat(DynamicFieldNames);

@@ -212,15 +212,8 @@ $Selenium->RunTest(
         # Wait until page has loaded, if necessary.
         $Selenium->WaitFor(
             JavaScript =>
-                'return typeof($) === "function" && $(".WidgetSimple").length;'
+                'return typeof($) === "function" && $("#AppWrapper").length;'
         );
-
-        # Open collapsed widgets, if necessary.
-        $Selenium->execute_script(
-            "\$('.WidgetSimple.Collapsed .WidgetAction > a').trigger('click');"
-        );
-
-        $Selenium->WaitFor( JavaScript => 'return $(".WidgetSimple.Expanded").length;' );
 
         # Check page.
         for my $ID (

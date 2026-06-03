@@ -880,7 +880,6 @@ $Self->Is(
 );
 
 # Change CustomerUserListFields config and search for customer again.
-#   See bug#13394 (https://bugs.otrs.org/show_bug.cgi?id=13394).
 my $CustomerUser = $ConfigObject->Get('CustomerUser');
 $CustomerUser->{CustomerUserListFields} = [ 'login', 'first_name', 'last_name', 'customer_id', 'email' ];
 $ConfigObject->Set(

@@ -101,6 +101,7 @@ sub Run {
     my $Success = $Kernel::OM->Get('Kernel::System::Package')->PackageUninstall(
         String => $FileString,
         Force  => $Self->GetOption('force'),
+        UserID => 1,
     );
 
     if ( !$Success ) {

@@ -213,6 +213,20 @@ sub Run {
     my $SessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
     my $UserObject    = $Kernel::OM->Get('Kernel::System::User');
 
+    # when no action parameter exists but there is passed
+    # valid session and requested url, redirect to the link
+    if ( !$Param{Action} && $Param{SessionID} && $Param{RequestedURL} ) {
+
+        # validate session before redirect
+        if ( $SessionObject->CheckSessionID( SessionID => $Param{SessionID} ) ) {
+            print $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Redirect(
+                OP => $Param{RequestedURL},
+            );
+
+            return;
+        }
+    }
+
     # check request type
     if ( $Param{Action} eq 'PreLogin' ) {
         my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
@@ -242,6 +256,19 @@ sub Run {
             Raw   => 1
         ) || '';
 
+        #
+        # SAML
+        #
+        my $IsSAMLLogin  = $ParamObject->GetParam( Param => 'IsSAMLLogin' );
+        my $Count        = $ParamObject->GetParam( Param => 'Count' ) // '';
+        my $SAMLResponse = $ParamObject->GetParam( Param => 'SAMLResponse' );
+
+        # The request ID stored in the cookie. Will be evaluated when the response is checked.
+        my $ExpectedSAMLRequestID;
+        if ( $IsSAMLLogin && $SAMLResponse ) {
+            $ExpectedSAMLRequestID = $ParamObject->GetCookie( Key => "UserSAMLRequestID$Count" );
+        }
+
         # create AuthObject
         my $AuthObject = $Kernel::OM->Get('Kernel::System::Auth');
 
@@ -250,6 +277,12 @@ sub Run {
             User           => $PostUser,
             Pw             => $PostPw,
             TwoFactorToken => $PostTwoFactorToken,
+
+            # The following are SAML specific
+            IsSAMLLogin           => $IsSAMLLogin,
+            Count                 => $Count,
+            SAMLResponse          => $SAMLResponse,
+            ExpectedSAMLRequestID => $ExpectedSAMLRequestID,
         );
 
         # login is invalid
@@ -1152,6 +1185,10 @@ sub Run {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _UserTimeZoneGet()
 
 Get time zone for the current user. This function will validate passed time zone parameter and return default user time
@@ -1183,10 +1220,6 @@ sub _UserTimeZoneGet {
 
     return $UserTimeZone;
 }
-
-=end Internal:
-
-=cut
 
 sub DESTROY {
     my $Self = shift;

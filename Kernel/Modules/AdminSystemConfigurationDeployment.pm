@@ -58,12 +58,17 @@ sub Run {
         # Challenge token check for write action.
         $LayoutObject->ChallengeTokenCheck();
 
+        my $DeploymentMode   = $ParamObject->GetParam( Param => 'DeploymentMode' )   || '';
         my $Comments         = $ParamObject->GetParam( Param => 'Comments' )         || '';
         my $AdvancedMode     = $ParamObject->GetParam( Param => 'AdvancedMode' )     || 0;
         my $SelectedSettings = $ParamObject->GetParam( Param => 'SelectedSettings' ) || '';
 
         if ($SelectedSettings) {
             $SelectedSettings = $Kernel::OM->Get('Kernel::System::JSON')->Decode( Data => $SelectedSettings );
+        }
+
+        if ( $DeploymentMode eq 'QuickDeploy' ) {
+            $Comments = $LayoutObject->{LanguageObject}->Translate("Quick Deploy by") . ": " . $Self->{UserFullname};
         }
 
         my %ReturnData;

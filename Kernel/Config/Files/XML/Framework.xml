@@ -89,6 +89,16 @@
             <Item ValueType="String" ValueRegex="^[2-9][0-9]{1,}|[1-9][0-9]{2,}$">20</Item>
         </Value>
     </Setting>
+    <Setting Name="SupportDataCollector::SkipMaskPasswordSettings" Required="1" Valid="1">
+        <Description Translatable="1">When support data is collected via SupportDataCollector, certain SysConfig values marked with ValueType="Password" are automatically masked. This prevents passwords from appearing in plain text in the support data. This setting defines the settings that contain complex configuration hashes that should not be masked when generating the support data.</Description>
+        <Navigation>Core::SupportDataCollector</Navigation>
+        <Value>
+            <Array>
+                <Item ValueType="String">PreferencesGroups###Password</Item>
+                <Item ValueType="String">CustomerPreferencesGroups###Password</Item>
+            </Array>
+        </Value>
+    </Setting>
     <Setting Name="HttpType" Required="1" Valid="1" ConfigLevel="200">
         <Description Translatable="1">Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server's settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, OTRS_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system.</Description>
         <Navigation>Frontend::Base</Navigation>
@@ -420,7 +430,7 @@
         <Description Translatable="1">Defines the URL rich text editor path.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Frontend::WebPath&gt;js/thirdparty/ckeditor5-classic-46.0.0/</Item>
+            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Frontend::WebPath&gt;js/thirdparty/ckeditor5-classic-48.0.0/</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::RichText::CSS::Content::Path###InternalArticleStyles" Required="1" Valid="1" ConfigLevel="200">
@@ -429,7 +439,7 @@
         <Value>
             <Array>
                 <DefaultItem ValueType="String">*path_to_file*/*filename*.css</DefaultItem>
-                <Item ValueType="String" ValueRegex="">common/css/ckeditor5-46.0.0-content.css</Item>
+                <Item ValueType="String" ValueRegex="">common/css/ckeditor5-48.0.0-content.css</Item>
                 <Item ValueType="String" ValueRegex="">common/css/Core.RichTextEditor.InternalArticleStyles.css</Item>
             </Array>
         </Value>
@@ -440,7 +450,7 @@
         <Value>
             <Array>
                 <DefaultItem ValueType="String">*path_to_file*/*filename*.css</DefaultItem>
-                <Item ValueType="String" ValueRegex="">common/css/ckeditor5-46.0.0-content.css</Item>
+                <Item ValueType="String" ValueRegex="">common/css/ckeditor5-48.0.0-content.css</Item>
                 <Item ValueType="String" ValueRegex="">common/css/Core.RichTextEditor.InternalArticleStyles.css</Item>
             </Array>
         </Value>
@@ -868,7 +878,7 @@
         <Description Translatable="1">If "file" was selected for LogModule, a logfile must be specified. If the file doesn't exist, it will be created by the system.</Description>
         <Navigation>Core::Log</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">/tmp/znuny.log</Item>
+            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Home&gt;/var/log/znuny.log</Item>
         </Value>
     </Setting>
     <Setting Name="LogModule::LogFile::Date" Required="1" Valid="1">
@@ -1110,16 +1120,6 @@
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::Notification::CustomerOnline</Item>
                 <Item Key="ShowEmail">1</Item>
-            </Hash>
-        </Value>
-    </Setting>
-    <Setting Name="Frontend::NotifyModule###5000-SystemConfigurationIsDirty-Check" Required="1" Valid="1">
-        <Description Translatable="1">Defines the module to display a notification in the agent interface, if there are modified sysconfig settings that are not deployed yet.</Description>
-        <Navigation>Frontend::Agent::FrontendNotification</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::Output::HTML::Notification::SystemConfigurationIsDirtyCheck</Item>
-                <Item Key="Group">admin</Item>
             </Hash>
         </Value>
     </Setting>
@@ -3156,8 +3156,9 @@
         <Navigation>Core::Crypt::PGP</Navigation>
         <Value>
             <Hash>
-                <Item Key="D2DF79FA">SomePassword</Item>
-                <Item Key="488A0B8F">SomePassword</Item>
+                <DefaultItem ValueType="Password">Secret</DefaultItem>
+                <Item ValueType="Password" Key="D2DF79FA">SomePassword</Item>
+                <Item ValueType="Password" Key="488A0B8F">SomePassword</Item>
             </Hash>
         </Value>
     </Setting>
@@ -3244,14 +3245,14 @@
         <Description Translatable="1">Specifies the name that should be used by the application when sending notifications. The sender name is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com).</Description>
         <Navigation>Core::Email</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">OTRS Notifications</Item>
+            <Item ValueType="String" ValueRegex="">Znuny Notifications</Item>
         </Value>
     </Setting>
     <Setting Name="NotificationSenderEmail" Required="1" Valid="1">
         <Description Translatable="1">Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.</Description>
         <Navigation>Core::Email</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">otrs@&lt;OTRS_CONFIG_FQDN&gt;</Item>
+            <Item ValueType="String" ValueRegex="">znuny@&lt;OTRS_CONFIG_FQDN&gt;</Item>
         </Value>
     </Setting>
     <Setting Name="NotificationSubjectLostPasswordToken" Required="1" Valid="1">
@@ -3859,7 +3860,7 @@ You can log in via the following URL:
         <Description Translatable="1">Defines the subject for notification mails sent to customers, with token about new requested password.</Description>
         <Navigation>Frontend::Customer</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">New OTRS password request</Item>
+            <Item ValueType="String" ValueRegex="">New Znuny password request</Item>
         </Value>
     </Setting>
     <Setting Name="CustomerPanelBodyLostPasswordToken" Required="1" Valid="1">
@@ -3868,7 +3869,7 @@ You can log in via the following URL:
         <Value>
             <Item ValueType="Textarea">Hi &lt;OTRS_USERFIRSTNAME&gt;,
 
-You or someone impersonating you has requested to change your OTRS
+You or someone impersonating you has requested to change your Znuny
 password.
 
 If you want to do this, click on this link. You will receive another email containing the password.
@@ -3883,7 +3884,7 @@ If you did not request a new password, please ignore this email.
         <Description Translatable="1">Defines the subject for notification mails sent to customers, about new password.</Description>
         <Navigation>Frontend::Customer</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">New OTRS password</Item>
+            <Item ValueType="String" ValueRegex="">New Znuny password</Item>
         </Value>
     </Setting>
     <Setting Name="CustomerPanelBodyLostPassword" Required="1" Valid="1">
@@ -3903,7 +3904,7 @@ New password: &lt;OTRS_NEWPW&gt;
         <Description Translatable="1">Defines the subject for notification mails sent to customers, about new account.</Description>
         <Navigation>Frontend::Customer</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">New OTRS Account!</Item>
+            <Item ValueType="String" ValueRegex="">New Znuny Account!</Item>
         </Value>
     </Setting>
     <Setting Name="CustomerPanelBodyNewAccount" Required="1" Valid="1">
@@ -3912,7 +3913,7 @@ New password: &lt;OTRS_NEWPW&gt;
         <Value>
             <Item ValueType="Textarea">Hi &lt;OTRS_USERFIRSTNAME&gt;,
 
-You or someone impersonating you has created a new OTRS account for
+You or someone impersonating you has created a new Znuny account for
 you.
 
 Full name: &lt;OTRS_USERFIRSTNAME&gt; &lt;OTRS_USERLASTNAME&gt;
@@ -4742,6 +4743,16 @@ via the Preferences button after logging in.
         <Value>
             <Hash>
                 <Item Key="^AgentCustomerUserInformationCenter">Core.Agent.CustomerUserInformationCenterSearch.OpenSearchDialog()</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="AgentCustomerUserInformationCenter::MainMenu###010-EditCustomerUser" Required="0" Valid="0">
+        <Description Translatable="1">Main menu registration.</Description>
+        <Navigation>Frontend::Agent::View::CustomerUserInformationCenter</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name" Translatable="1">Edit customer user</Item>
+                <Item Key="Link">[% Env("Baselink") %]Action=AdminCustomerUser;Subaction=Change;ID=[% Data.CustomerUserID | uri %];Nav=0</Item>
             </Hash>
         </Value>
     </Setting>
@@ -7872,6 +7883,13 @@ via the Preferences button after logging in.
             <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
+    <Setting Name="NotificationEmailDefaultTemplate" Required="0" Valid="1">
+        <Description Translatable="1">Default template for notification e-mails (see Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email directory for available templates).</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">Default</Item>
+        </Value>
+    </Setting>
     <Setting Name="Loader::Enabled::CSS" Required="1" Valid="1">
         <Description Translatable="1">If enabled, Znuny will deliver all CSS files in minified form.</Description>
         <Navigation>Frontend::Base::Loader</Navigation>
@@ -7918,6 +7936,25 @@ via the Preferences button after logging in.
                 <Item>Core.Components.css</Item>
                 <Item>Core.FlexboxModel.css</Item>
                 <Item>Core.Typography.css</Item>
+                <Item>thirdparty/bootstrap-grid-5.1/bootstrap-grid.css</Item>
+                <Item>layouts/Layout.ContentSidebar.css</Item>
+                <Item>layouts/Layout.PopUp.css</Item>
+                <Item>layouts/Layout.PopUpSidebar.css</Item>
+                <Item>modules/Module.Alert.css</Item>
+                <Item>modules/Module.Card.css</Item>
+                <Item>modules/Module.CustomerContainer.css</Item>
+                <Item>modules/Module.CustomerInformation.css</Item>
+                <Item>modules/Module.CustomerSelector.css</Item>
+                <Item>modules/Module.DynamicField.css</Item>
+                <Item>modules/Module.Form.css</Item>
+                <Item>modules/Module.FormSubmitArea.css</Item>
+                <Item>modules/Module.MessageInformation.css</Item>
+                <Item>modules/Module.Notification.css</Item>
+                <Item>modules/Module.PageHeadline.css</Item>
+                <Item>modules/Module.Sidebar.css</Item>
+                <Item>modules/Module.SidebarWidget.css</Item>
+                <Item>modules/Module.Signature.css</Item>
+                <Item>modules/Module.TicketHeader.css</Item>
             </Array>
         </Value>
     </Setting>
@@ -7943,7 +7980,7 @@ via the Preferences button after logging in.
                 <Item>thirdparty/jquery-pubsub/pubsub.js</Item>
                 <Item>thirdparty/jquery-jstree-3.3.8/jquery.jstree.js</Item>
                 <Item>thirdparty/nunjucks-3.2.3/nunjucks.min.js</Item>
-                <Item>thirdparty/jscolor-2.4.6/jscolor.js</Item>
+                <Item>thirdparty/jscolor-2.5.2/jscolor.js</Item>
                 <Item>Core.Init.js</Item>
                 <Item>Core.JavaScriptEnhancements.js</Item>
                 <Item>Core.Debug.js</Item>
@@ -7983,6 +8020,15 @@ via the Preferences button after logging in.
                 <Item>Core.Agent.Header.js</Item>
                 <Item>Core.UI.Notification.js</Item>
                 <Item>Core.Agent.Responsive.js</Item>
+                <Item>modules/application.js</Item>
+                <Item>modules/Module.Sidebar.js</Item>
+                <Item>modules/Module.Card.js</Item>
+                <Item>modules/Module.CustomerSelector.js</Item>
+                <Item>modules/Module.Form.js</Item>
+                <Item>modules/Module.Notification.js</Item>
+                <Item>modules/Module.Alert.js</Item>
+                <Item>modules/Module.SidebarWidget.js</Item>
+                <Item>Znuny.App.js</Item>
             </Array>
         </Value>
     </Setting>
@@ -8028,6 +8074,8 @@ via the Preferences button after logging in.
                 <Item>Core.Footer.css</Item>
                 <Item>Core.PageLayout.css</Item>
                 <Item>Core.Components.css</Item>
+                <Item>modules/Module.Alert.css</Item>
+                <Item>modules/Module.Notification.css</Item>
             </Array>
         </Value>
     </Setting>
@@ -8079,6 +8127,9 @@ via the Preferences button after logging in.
                 <Item>Core.Form.Validate.js</Item>
                 <Item>Core.Customer.js</Item>
                 <Item>Core.Customer.Responsive.js</Item>
+                <Item>modules/application.js</Item>
+                <Item>modules/Module.Notification.js</Item>
+                <Item>modules/Module.Alert.js</Item>
             </Array>
         </Value>
     </Setting>
@@ -8401,6 +8452,15 @@ via the Preferences button after logging in.
         <Value>
             <Hash>
                 <Item Key="[% Env('CGIHandle') %]?Action=AgentDashboard" Translatable="1">Go to dashboard!</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Customer::PossibleNextActions" Required="0" Valid="1">
+        <Description Translatable="1">Defines the list of possible next actions on an error screen, a full path is required, then is possible to add external links if needed.</Description>
+        <Navigation>Frontend::Customer</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="[% Env('CGIHandle') %]?Action=CustomerTicketOverview" Translatable="1">Go to overview</Item>
             </Hash>
         </Value>
     </Setting>

@@ -1716,7 +1716,7 @@ sub ProcessImport {
     if ( ref $ProcessData ne 'HASH' ) {
         return (
             Message =>
-                "Couldn't read process configuration file. Please make sure you file is valid.",
+                "Couldn't read process configuration YAML file. Please make sure the file is valid.",
         );
     }
 

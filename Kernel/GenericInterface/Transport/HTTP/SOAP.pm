@@ -1114,6 +1114,10 @@ sub DESTROY {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _Error()
 
 Take error parameters from request processing.
@@ -1684,8 +1688,6 @@ sub _SOAPOutputTypesGet {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

@@ -274,6 +274,7 @@ sub AgentQueueListOption {
     my $TreeView           = $Param{TreeView}                  ? $Param{TreeView}        : 0;
     my $OptionTitle        = defined( $Param{OptionTitle} )    ? $Param{OptionTitle}     : 0;
     my $OnChangeSubmit     = defined( $Param{OnChangeSubmit} ) ? $Param{OnChangeSubmit}  : '';
+    my $Placeholder        = defined( $Param{Placeholder} )    ? $Param{Placeholder}     : '';
 
     if ($OnChangeSubmit) {
         $OnChangeSubmit = " onchange=\"submit();\"";
@@ -319,7 +320,6 @@ sub AgentQueueListOption {
 
         # transform data from Hash in Array because of ordering in frontend by Queue name
         # it was a problem with name like '(some_queue)'
-        # see bug#10621 http://bugs.otrs.org/show_bug.cgi?id=10621
         my %QueueDataHash  = %{ $Param{Data} || {} };
         my @QueueDataArray = map {
             {
@@ -348,6 +348,7 @@ sub AgentQueueListOption {
             SelectedID    => $Param{SelectedID} || $Param{SelectedIDRefArray} || '',
             SelectedValue => $Param{Selected},
             Translation   => 0,
+            Placeholder   => $Placeholder,
         );
         return $Param{MoveQueuesStrg};
     }
@@ -360,6 +361,9 @@ sub AgentQueueListOption {
         . '" class="'
         . $Class
         . '" data-tree="true"'
+        . ' placeholder="'
+        . $Placeholder
+        . '"'
         . " $Size $Multiple $OnChangeSubmit>\n";
     my %UsedData;
     my %Data;
@@ -1090,7 +1094,7 @@ sub TimeUnits {
                 Name         => $Param{Name} . $Label,
                 SelectedID   => $Config->{$Item}->{DataSelected},
                 PossibleNone => 1,
-                Sort         => 'NumericValue',
+                Sort         => 'NumericKey',
                 Translation  => 0,
                 OnChange     => 'Core.Agent.TicketAction.SetTimeUnits(\'' . $Param{ID} . '\');',
             );
@@ -1117,9 +1121,14 @@ sub TimeUnits {
         # as filled out fields, preventing a submit until one of the values
         # will be re-selected manually.
         if ($DefaultTimeUnits) {
+            my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
+            my $IDJSONString = $JSONObject->Encode(
+                Data => $Param{ID},
+            );
+
             $Self->AddJSOnDocumentCompleteIfNotExists(
-                Key  => 'LayoutTicketSetTimeUnits' . $Param{ID},
-                Code => 'Core.Agent.TicketAction.SetTimeUnits(\'' . $Param{ID} . '\');',
+                Key  => 'LayoutTicketSetTimeUnits' . $IDJSONString,
+                Code => "Core.Agent.TicketAction.SetTimeUnits($IDJSONString);",
             );
         }
     }

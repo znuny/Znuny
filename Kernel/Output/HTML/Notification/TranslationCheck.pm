@@ -58,7 +58,7 @@ sub Run {
 
     return $LayoutObject->Notify(
         Info => $Message,
-        Link => $LayoutObject->{Baselink} . 'Action=AdminTranslation;Subaction=DeploymentAction;ID=1',
+        Link => $LayoutObject->{Baselink} . 'Action=AdminTranslation;Subaction=Deployment;ID=1',
     );
 }
 

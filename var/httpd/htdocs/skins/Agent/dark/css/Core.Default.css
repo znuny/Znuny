@@ -13,8 +13,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 @media screen,projection,tv,handheld {
 
-    body,
-    #ArticleTable td {
+    body {
         filter: invert(90%) hue-rotate(180deg);
     }
 

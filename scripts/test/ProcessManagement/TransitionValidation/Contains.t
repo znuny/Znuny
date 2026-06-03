@@ -6,6 +6,7 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
+## no critic (RequireExplicitPackage)
 use strict;
 use warnings;
 use utf8;
@@ -102,6 +103,15 @@ my @DynamicFields = (
                 2 => 2,
                 3 => 3,
             }
+        },
+    },
+    {
+        Name       => 'Queue',
+        Label      => "Queue",
+        ObjectType => 'Ticket',
+        FieldType  => 'Text',
+        Config     => {
+            DefaultValue => "",
         },
     },
 );

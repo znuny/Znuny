@@ -22,7 +22,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         justify-content: space-between;
         align-items: center;
         height: auto;
-        padding: var(--padding-sm) var(--padding-lg) !important;
+        padding: 23px var(--padding-lg) !important;
         background:  var(--menu-bg);
         color: var(--menu-font);
         position: relative;
@@ -443,7 +443,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         top: 100%;
         height: auto;
         width: 100%;
-        z-index: 100;
+        z-index: 1000;
         background: white;
         padding: var(--padding-md) var(--padding-sm);
         border-radius: var(--border-radius-xs);
@@ -1237,7 +1237,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         width: 100%;
         height: 3px;
         position: absolute;
-        bottom: -12px;
+        bottom: -23px;
         left: 0px;
         background: var(--primary-color);
         transform: scale(0, 1);
@@ -1550,7 +1550,8 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         flex-direction: column;
         margin: 0;
         transition: var(--main-transition);
-        padding-bottom: var(--padding-sm);
+        position: relative;
+        /*padding-bottom: var(--padding-md);*/
     }
 
     .toolbar-row-wrapper .toolbar-row {
@@ -1731,6 +1732,9 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         border: var(--border-width) var(--border-solid) var(--border-color);
         margin-top: -1px;
         cursor: pointer;
+        position: absolute;
+        bottom: -14px;
+        z-index: 2;
     }
 
 } /* end @media */

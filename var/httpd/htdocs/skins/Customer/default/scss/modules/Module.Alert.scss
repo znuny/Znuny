@@ -1,0 +1,97 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+@import './../mixins/Mixin.Buttons';
+@import './../utilities/Utility.Clear';
+$alertSpace: 15px;
+.modAlert {
+  > .inner {
+    @include clear();
+    .alert {
+      padding: $alertSpace;
+      padding-bottom: 0;
+      padding-right: 45px;
+      width: 100%;
+      background-color: rgba(#D7E6F5, 0.95);
+      display: inline-block;
+      float: left;
+      border-radius: 5px;
+      font-size: 14px;
+      line-height: 1.3;
+      border: 1px solid #B3D4F2;
+
+      &.alertTypeSuccess {
+        border-color: #A5D6A7;
+        background-color: rgba(#A5D6A7, 0.9);
+      }
+
+      &.alertTypeWarning {
+        border-color: #F5D7A5;
+        background-color: rgba(#F5D7A5, 0.9);
+      }
+
+      &.alertTypeError {
+        border-color: #F5A5A5;
+        background-color: rgba(#F5A5A5, 0.9);
+      }
+
+      &.alertActive {
+        margin-left: 0;
+      }
+
+      .alertContent {
+        width: 100%;
+        margin-bottom: $alertSpace;
+        text-align: left;
+        display: inline-block;
+        float: left;
+      }
+
+      .alertActions {
+        margin-bottom: $alertSpace;
+        margin-top: calc($alertSpace / 2);
+
+        .alertButton {
+          @include button;
+          @include buttonSecondary;
+          margin-right:  calc($alertSpace / 4);
+          background-color: white;
+        }
+
+        &.alertActionsInline {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: calc($alertSpace / 3);
+          flex-wrap: wrap;
+          width: 100%;
+          margin-top: $alertSpace;
+
+          .alertButton {
+            flex: 1 1 40%;
+            max-width: 46%;
+            text-align: center;
+            margin-right: 0;
+            white-space: normal;
+            word-break: break-word;
+            min-width: 120px;
+            padding: 8px 10px;
+          }
+
+          .alertActionSeparator {
+            color: var(--gray-dark);
+            font-weight: 600;
+            padding: 0 4px;
+            white-space: nowrap;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}

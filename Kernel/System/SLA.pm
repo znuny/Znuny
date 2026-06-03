@@ -19,6 +19,7 @@ our @ObjectDependencies = (
     'Kernel::System::DB',
     'Kernel::System::GeneralCatalog',
     'Kernel::System::Log',
+    'Kernel::System::Util',
     'Kernel::System::Valid',
 );
 
@@ -691,20 +692,6 @@ sub SLAUpdate {
         return;
     }
 
-    # reset cache
-    $Kernel::OM->Get('Kernel::System::Cache')->Delete(
-        Type => $Self->{CacheType},
-        Key  => 'Cache::SLAGet::' . $Param{SLAID},
-    );
-    $Kernel::OM->Get('Kernel::System::Cache')->Delete(
-        Type => $Self->{CacheType},
-        Key  => 'Cache::SLALookup::Name::' . $Param{Name},
-    );
-    $Kernel::OM->Get('Kernel::System::Cache')->Delete(
-        Type => $Self->{CacheType},
-        Key  => 'Cache::SLALookup::ID::' . $Param{SLAID},
-    );
-
     # update service
     if ( $Self->{IsITSMInstalled} ) {
         return if !$DBObject->Do(
@@ -753,6 +740,20 @@ sub SLAUpdate {
             Bind => [ \$ServiceID, \$Param{SLAID} ],
         );
     }
+
+    # reset cache
+    $Kernel::OM->Get('Kernel::System::Cache')->Delete(
+        Type => $Self->{CacheType},
+        Key  => 'Cache::SLAGet::' . $Param{SLAID},
+    );
+    $Kernel::OM->Get('Kernel::System::Cache')->Delete(
+        Type => $Self->{CacheType},
+        Key  => 'Cache::SLALookup::Name::' . $Param{Name},
+    );
+    $Kernel::OM->Get('Kernel::System::Cache')->Delete(
+        Type => $Self->{CacheType},
+        Key  => 'Cache::SLALookup::ID::' . $Param{SLAID},
+    );
 
     return 1;
 }

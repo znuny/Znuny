@@ -306,7 +306,8 @@ sub Run {
                     'Ticket "%s" created!',
                     $Ticket{TicketNumber},
                 ),
-                Link => $LayoutObject->{Baselink}
+                Priority => 'Success',
+                Link     => $LayoutObject->{Baselink}
                     . 'Action=AgentTicketZoom;TicketID='
                     . $Ticket{TicketID},
             );
@@ -1127,6 +1128,18 @@ sub Run {
                     User => $FromExternalCustomer{Customer},
                 );
                 $FromExternalCustomer{Email} = $ExternalCustomerUserData{UserMailString};
+            }
+
+            if ( $GetParam{From} && !@MultipleCustomer ) {
+                push @MultipleCustomer, {
+                    Count            => 1,
+                    CustomerElement  => $GetParam{From},
+                    CustomerSelected => 'checked="checked"',
+                    CustomerKey      => $CustomerUser,
+                    CustomerError    => '',
+                    CustomerErrorMsg => 'CustomerGenericServerErrorMsg',
+                    CustomerDisabled => '',
+                };
             }
             $Error{ExpandCustomerName} = 1;
         }

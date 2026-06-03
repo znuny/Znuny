@@ -11,6 +11,7 @@ package Kernel::System::Calendar;
 
 use strict;
 use warnings;
+use utf8;
 
 use Digest::MD5;
 use MIME::Base64 ();
@@ -1876,23 +1877,29 @@ sub GetAccessToken {
 
 Returns best text color for supplied background, based on luminosity difference algorithm.
 
+Accepts hexadecimal RGB (#RGB, #RRGGBB) or RGBA as used by the color picker (jscolor HVS mode), #RRGGBBAA.
+The alpha channel is not used for luminosity; only RGB is considered.
+
     my $BestTextColor = $CalendarObject->GetTextColor(
-        Background => '#FFF',    # (required) must be in valid hexadecimal RGB notation
+        Background => '#FFF',        # or #FFFFFF, #FFFFFFFF (ColorPicker / HVS)
     );
 
 Returns:
 
-    $BestTextColor = '#000';
+    $BestTextColor = '#FF8A25FF';
 
 =cut
 
 sub GetTextColor {
     my ( $Self, %Param ) = @_;
 
+    my $LogObject   = $Kernel::OM->Get('Kernel::System::Log');
+    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
+
     # check needed stuff
     for my $Needed (qw(Background)) {
         if ( !$Param{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => "Need $Needed!",
             );
@@ -1900,17 +1907,18 @@ sub GetTextColor {
         }
     }
 
-    # check color
-    if ( !( $Param{Background} =~ /#[A-F0-9]{3,6}/i ) ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+    # check color (#RGB, #RRGGBB, #RRGGBBAA from ColorPicker / jscolor HVS)
+    if ( $Param{Background} !~ m{\A#(?:[A-F0-9]{3}|[A-F0-9]{6}|[A-F0-9]{8})\z}i ) {
+        $LogObject->Log(
             Priority => 'error',
-            Message  => 'Background must be in hexadecimal RGB notation, eg. #FFFFFF.',
+            Message  =>
+                'Background must be in hexadecimal notation: #RGB, #RRGGBB or #RRGGBBAA (eg. #FFFFFF or #FFFFFFFF).',
         );
         return;
     }
 
     # check if value is cached
-    my $Data = $Kernel::OM->Get('Kernel::System::Cache')->Get(
+    my $Data = $CacheObject->Get(
         Type => $Self->{CacheType} . 'GetTextColor',
         Key  => $Param{Background},
     );
@@ -1920,8 +1928,15 @@ sub GetTextColor {
     my @BackgroundColor;
     my $RGBHex = substr( $Param{Background}, 1 );
 
+    # eight character hexadecimal string RGBA (eg. #FFFFFFFF from ColorPicker)
+    if ( length $RGBHex == 8 ) {
+        $BackgroundColor[0] = hex substr( $RGBHex, 0, 2 );
+        $BackgroundColor[1] = hex substr( $RGBHex, 2, 2 );
+        $BackgroundColor[2] = hex substr( $RGBHex, 4, 2 );
+    }
+
     # six character hexadecimal string (eg. #FFFFFF)
-    if ( length $RGBHex == 6 ) {
+    elsif ( length $RGBHex == 6 ) {
         $BackgroundColor[0] = hex substr( $RGBHex, 0, 2 );
         $BackgroundColor[1] = hex substr( $RGBHex, 2, 2 );
         $BackgroundColor[2] = hex substr( $RGBHex, 4, 2 );
@@ -1931,14 +1946,15 @@ sub GetTextColor {
     elsif ( length $RGBHex == 3 ) {
         $BackgroundColor[0] = hex( substr( $RGBHex, 0, 1 ) . substr( $RGBHex, 0, 1 ) );
         $BackgroundColor[1] = hex( substr( $RGBHex, 1, 1 ) . substr( $RGBHex, 1, 1 ) );
-        $BackgroundColor[2] = hex( substr( $RGBHex, 2, 1 ) . substr( $RGBHex, 1, 1 ) );
+        $BackgroundColor[2] = hex( substr( $RGBHex, 2, 1 ) . substr( $RGBHex, 2, 1 ) );
     }
 
     # invalid hexadecimal string
     else {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
-            Message  => 'Background must be in valid 3 or 6 character hexadecimal RGB notation, eg. #FFF or #FFFFFF.',
+            Message  =>
+                'Background must be in valid 3, 6 or 8 character hexadecimal RGB/RGBA notation, eg. #FFF, #FFFFFF or #FFFFFFFF.',
         );
         return;
     }
@@ -1989,7 +2005,7 @@ sub GetTextColor {
     );
 
     # cache
-    $Kernel::OM->Get('Kernel::System::Cache')->Set(
+    $CacheObject->Set(
         Type  => $Self->{CacheType} . 'GetTextColor',
         Key   => $Param{Background},
         Value => $TextColor,
@@ -2000,6 +2016,10 @@ sub GetTextColor {
 }
 
 =begin Internal:
+
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
 
 =head2 _TicketAppointmentGet()
 
@@ -2231,8 +2251,6 @@ sub _TicketAppointmentUpdate {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

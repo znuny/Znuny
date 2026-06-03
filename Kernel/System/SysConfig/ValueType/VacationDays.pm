@@ -350,6 +350,8 @@ sub SettingRender {
 
     my $Index = 1;
 
+    my $DateTime = $Kernel::OM->Create('Kernel::System::DateTime')->Get();
+
     for my $Month ( sort { $a <=> $b } keys %{ $Param{EffectiveValue} } ) {
 
         for my $Day ( sort { $a <=> $b } keys %{ $Param{EffectiveValue}->{$Month} } ) {
@@ -358,28 +360,17 @@ sub SettingRender {
             $HTML .= "<div class='ArrayItem'>\n";
             $HTML .= "<div class='SettingContent'>\n";
 
-            # month
-            $HTML .= $LayoutObject->BuildSelection(
-                Data          => \@Months,
-                Name          => $Param{Name},
-                ID            => $Param{Name} . $IDSuffix . $Index . "Month",
-                Class         => $Param{Class},
-                Disabled      => $Param{RW} ? 0 : 1,
-                SelectedValue => sprintf( "%02d", $Month ),
-                Title         => $LanguageObject->Translate("Month"),
-            );
+            my $Prefix = $Param{Name} . $IDSuffix . $Index;
 
-            $HTML .= "<span>/</span>";
-
-            # day
-            $HTML .= $LayoutObject->BuildSelection(
-                Data          => \@Days,
-                Name          => $Param{Name},
-                ID            => $Param{Name} . $IDSuffix . $Index . "Day",
-                Class         => $Param{Class},
-                Disabled      => $Param{RW} ? 0 : 1,
-                SelectedValue => sprintf( "%02d", $Day ),
-                Title         => $LanguageObject->Translate("Day"),
+            $HTML .= $LayoutObject->BuildDateSelection(
+                Prefix            => $Prefix,
+                $Prefix . "Month" => $Month,
+                $Prefix . "Day"   => $Day,
+                $Prefix . "Class" => $Param{Class},
+                Format            => 'DateInputFormat',
+                Validate          => 1,
+                Disabled          => $Param{RW} ? 0 : 1,
+                ShowYear          => 0,
             );
 
             # description
@@ -392,12 +383,12 @@ sub SettingRender {
                 . "title=\"" . $LanguageObject->Translate("Description") . "\" ";
 
             if ( !$Param{RW} ) {
-                $HTML .= "disabled='disabled' ";
+                $HTML .= "disabled='disabled' ";    # TODO quotes
             }
 
             $HTML .= " />\n";
 
-            $HTML .= "</div>\n";    # SettingContent
+            $HTML .= "</div>\n";                    # SettingContent
 
             if ( $Param{RW} ) {
                 $HTML .= "<button class='RemoveButton' type='button' "
@@ -406,7 +397,7 @@ sub SettingRender {
                     . "    <span class='InvisibleText'>$RemoveThisEntry</span>\n"
                     . "</button>\n";
             }
-            $HTML .= "</div>\n";    # ArrayItem
+            $HTML .= "</div>\n";                    # ArrayItem
             $Index++;
         }
     }

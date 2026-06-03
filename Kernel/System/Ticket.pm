@@ -43,6 +43,7 @@ our @ObjectDependencies = (
     'Kernel::System::Lock',
     'Kernel::System::Log',
     'Kernel::System::Main',
+    'Kernel::System::Mention',
     'Kernel::System::Priority',
     'Kernel::System::Queue',
     'Kernel::System::SLA',
@@ -4364,6 +4365,7 @@ sub TicketArchiveFlagSet {
     if ($ArchiveFlag) {
 
         if ( $ConfigObject->Get('Ticket::ArchiveSystem::RemoveSeenFlags') ) {
+
             $Self->TicketFlagDelete(
                 TicketID => $Param{TicketID},
                 Key      => 'Seen',
@@ -4393,6 +4395,27 @@ sub TicketArchiveFlagSet {
                 AllUsers => 1,
                 UserID   => $Param{UserID},
             );
+        }
+
+        if ( $ConfigObject->Get('Ticket::ArchiveSystem::RemoveMentionFlags') ) {
+
+            $Self->TicketFlagDelete(
+                TicketID => $Param{TicketID},
+                Key      => 'MentionSeen',
+                AllUsers => 1,
+            );
+
+            my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+
+            my @Articles = $ArticleObject->ArticleList( TicketID => $Param{TicketID} );
+            for my $Article (@Articles) {
+                $ArticleObject->ArticleFlagDelete(
+                    TicketID  => $Param{TicketID},
+                    ArticleID => $Article->{ArticleID},
+                    Key       => 'MentionSeen',
+                    AllUsers  => 1,
+                );
+            }
         }
     }
 
@@ -6387,8 +6410,8 @@ sub TicketMerge {
 
     my $Body = $ConfigObject->Get('Ticket::Frontend::AutomaticMergeText');
     $Body = $LanguageObject->Translate($Body);
-    $Body =~ s{<OTRS_TICKET>}{$MergeTicket{TicketNumber}}xms;
-    $Body =~ s{<OTRS_MERGE_TO_TICKET>}{$MainTicket{TicketNumber}}xms;
+    $Body =~ s{<OTRS_TICKET>}{$MergeTicket{TicketNumber}}gxms;
+    $Body =~ s{<OTRS_MERGE_TO_TICKET>}{$MainTicket{TicketNumber}}gxms;
 
     my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
@@ -6650,7 +6673,6 @@ sub TicketMergeLinkedObjects {
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     # Delete all duplicate links relations between merged tickets.
-    # See bug#12994 (https://bugs.otrs.org/show_bug.cgi?id=12994).
     $DBObject->Prepare(
         SQL => '
             SELECT target_key
@@ -6799,12 +6821,9 @@ sub TicketWatchGet {
     }
 
     if ( $Param{Notify} ) {
+        my $UserObject = $Kernel::OM->Get('Kernel::System::User');
 
         for my $UserID ( sort keys %Data ) {
-
-            # get user object
-            my $UserObject = $Kernel::OM->Get('Kernel::System::User');
-
             my %UserData = $UserObject->GetUserData(
                 UserID => $UserID,
                 Valid  => 1,
@@ -6816,15 +6835,8 @@ sub TicketWatchGet {
         }
     }
 
-    # check result
     if ( $Param{Result} && $Param{Result} eq 'ARRAY' ) {
-
-        my @UserIDs;
-
-        for my $UserID ( sort keys %Data ) {
-            push @UserIDs, $UserID;
-        }
-
+        my @UserIDs = sort keys %Data;
         return @UserIDs;
     }
 

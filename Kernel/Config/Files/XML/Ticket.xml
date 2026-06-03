@@ -162,6 +162,13 @@
             <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::ArchiveSystem::RemoveMentionFlags" Required="1" Valid="1">
+        <Description Translatable="1">Controls if the ticket mention entries are removed when a ticket is archived.</Description>
+        <Navigation>Core::Ticket</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::CustomerArchiveSystem" Required="1" Valid="1">
         <Description Translatable="1">Activates the ticket archive system search in the customer interface.</Description>
         <Navigation>Core::Ticket</Navigation>
@@ -2583,6 +2590,13 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketFreeText###Description" Required="1" Valid="1">
+        <Description Translatable="1">Displayed in the sidebar as additional information.</Description>
+        <Navigation>Frontend::Agent::View::TicketFreeText</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">[% Translate('Change Free Text of %s%s%s', Config('Ticket::Hook'), Config('Ticket::HookDivider'), Data.TicketNumber) | html %]</Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketFreeText###Permission" Required="1" Valid="1">
         <Description Translatable="1">Required permissions to use the ticket free text screen in the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketFreeText</Navigation>
@@ -2637,6 +2651,27 @@
         <Navigation>Frontend::Agent::View::TicketFreeText</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketFreeText###CustomerUser" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketFreeText</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketFreeText###CustomerUserMandatory" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field as mandatory.</Description>
+        <Navigation>Frontend::Agent::View::TicketFreeText</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketFreeText###CustomerIDReadOnly" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Controls if CustomerID is read-only in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketFreeText</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketFreeText###Owner" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
@@ -2791,6 +2826,48 @@
             <Item ValueType="String" ValueRegex="">%%FreeText</Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketFreeText###Widgets###Description" Required="0" Valid="0">
+        <Description Translatable="1">TicketActionCommon widget that displays the current action description.</Description>
+        <Navigation>Frontend::Agent::View::TicketFreeText</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketActionCommon::Description</Item>
+                <Item Key="Title" Translatable="1">Description</Item>
+                <Item Key="Description" Translatable="1">Current action description.</Item>
+                <Item Key="Prio">1000</Item>
+                <Item Key="Location">Sidebar</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketFreeText###Widgets###TicketInformation" Required="0" Valid="0">
+        <Description Translatable="1">TicketActionCommon widget that displays ticket information.</Description>
+        <Navigation>Frontend::Agent::View::TicketFreeText</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketActionCommon::TicketInformation</Item>
+                <Item Key="Title" Translatable="1">Ticket Information</Item>
+                <Item Key="Description" Translatable="1">Ticket information</Item>
+                <Item Key="Prio">1001</Item>
+                <Item Key="Location">Sidebar</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketFreeText###Widgets###CustomerInformation" Required="0" Valid="0">
+        <Description Translatable="1">TicketActionCommon widget that displays customer information.</Description>
+        <Navigation>Frontend::Agent::View::TicketFreeText</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketActionCommon::CustomerInformation</Item>
+                <Item Key="Title" Translatable="1">Customer Information</Item>
+                <Item Key="Description" Translatable="1">Customer Information</Item>
+                <Item Key="Prio">1002</Item>
+                <Item Key="Location">Sidebar</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPhoneOutbound###Permission" Required="1" Valid="1">
         <Description Translatable="1">Required permissions to use the ticket phone outbound screen in the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketPhoneOutbound</Navigation>
@@ -2826,7 +2903,14 @@
             <Item ValueType="Textarea"></Item>
         </Value>
     </Setting>
-    <Setting Name="Ticket::Frontend::AgentTicketPhoneOutbound###State" Required="0" Valid="1">
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneOutbound###State" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
+        <Description Translatable="1">Sets the state of a ticket in screen of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketPhoneOutbound</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneOutbound###StateDefault" Required="0" Valid="1">
         <Description Translatable="1">Defines the default ticket next state after adding a phone note in the ticket phone outbound screen of the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketPhoneOutbound</Navigation>
         <Value>
@@ -2901,7 +2985,14 @@
             <Item ValueType="Textarea"></Item>
         </Value>
     </Setting>
-    <Setting Name="Ticket::Frontend::AgentTicketPhoneInbound###State" Required="0" Valid="1">
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneInbound###State" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
+        <Description Translatable="1">Sets the state of a ticket in screen of the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketPhoneInbound</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneInbound###StateDefault" Required="0" Valid="1">
         <Description Translatable="1">Defines the default ticket next state after adding a phone note in the ticket phone inbound screen of the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketPhoneInbound</Navigation>
         <Value>
@@ -3017,7 +3108,7 @@
             <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
-    <Setting Name="Ticket::Frontend::AgentTicketPhone::CustomerIDReadOnly" Required="1" Valid="1">
+    <Setting Name="Ticket::Frontend::AgentTicketPhone###CustomerIDReadOnly" Required="1" Valid="1">
         <Description Translatable="1">Controls if CustomerID is read-only in the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketPhoneNew</Navigation>
         <Value>
@@ -3123,7 +3214,7 @@
             <Item ValueType="String" ValueRegex="" Translatable="1">agent</Item>
         </Value>
     </Setting>
-    <Setting Name="Ticket::Frontend::AgentTicketEmail::CustomerIDReadOnly" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+    <Setting Name="Ticket::Frontend::AgentTicketEmail###CustomerIDReadOnly" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
         <Description Translatable="1">Controls if CustomerID is read-only in the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketEmailNew</Navigation>
         <Value>
@@ -3245,6 +3336,27 @@
         <Navigation>Frontend::Agent::View::TicketClose</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketClose###CustomerUser" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketClose</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketClose###CustomerUserMandatory" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field as mandatory.</Description>
+        <Navigation>Frontend::Agent::View::TicketClose</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketClose###CustomerIDReadOnly" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Controls if CustomerID is read-only in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketClose</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketClose###Owner" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
@@ -3396,6 +3508,55 @@
             <Item ValueType="String" ValueRegex="">%%Close</Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketClose###Widgets###Description" Required="0" Valid="0">
+        <Description Translatable="1">TicketActionCommon widget that displays the current action description.</Description>
+        <Navigation>Frontend::Agent::View::TicketClose</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketActionCommon::Description</Item>
+                <Item Key="Title" Translatable="1">Description</Item>
+                <Item Key="Description" Translatable="1">Current action description.</Item>
+                <Item Key="Prio">1000</Item>
+                <Item Key="Location">Sidebar</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketClose###Widgets###TicketInformation" Required="0" Valid="0">
+        <Description Translatable="1">TicketActionCommon widget that displays ticket information.</Description>
+        <Navigation>Frontend::Agent::View::TicketClose</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketActionCommon::TicketInformation</Item>
+                <Item Key="Title" Translatable="1">Ticket Information</Item>
+                <Item Key="Description" Translatable="1">Ticket information</Item>
+                <Item Key="Prio">1001</Item>
+                <Item Key="Location">Sidebar</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketClose###Widgets###CustomerInformation" Required="0" Valid="0">
+        <Description Translatable="1">TicketActionCommon widget that displays customer information.</Description>
+        <Navigation>Frontend::Agent::View::TicketClose</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketActionCommon::CustomerInformation</Item>
+                <Item Key="Title" Translatable="1">Customer Information</Item>
+                <Item Key="Description" Translatable="1">Customer Information</Item>
+                <Item Key="Prio">1002</Item>
+                <Item Key="Location">Sidebar</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNote###Description" Required="1" Valid="1">
+        <Description Translatable="1">Displayed in the sidebar as additional information.</Description>
+        <Navigation>Frontend::Agent::View::TicketNote</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">[% Translate('Add Note to %s%s%s', Config('Ticket::Hook'), Config('Ticket::HookDivider'), Data.TicketNumber) | html %]</Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketNote###Permission" Required="1" Valid="1">
         <Description Translatable="1">Required permissions to use the ticket note screen in the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketNote</Navigation>
@@ -3450,6 +3611,27 @@
         <Navigation>Frontend::Agent::View::TicketNote</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNote###CustomerUser" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketNote</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNote###CustomerUserMandatory" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field as mandatory.</Description>
+        <Navigation>Frontend::Agent::View::TicketNote</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNote###CustomerIDReadOnly" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Controls if CustomerID is read-only in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketNote</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketNote###Owner" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
@@ -3604,6 +3786,55 @@
             <Item ValueType="String" ValueRegex="">%%Note</Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNote###Widgets###Description" Required="0" Valid="0">
+        <Description Translatable="1">TicketActionCommon widget that displays the current action description.</Description>
+        <Navigation>Frontend::Agent::View::TicketNote</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketActionCommon::Description</Item>
+                <Item Key="Title" Translatable="1">Description</Item>
+                <Item Key="Description" Translatable="1">Current action description.</Item>
+                <Item Key="Prio">1000</Item>
+                <Item Key="Location">Sidebar</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNote###Widgets###TicketInformation" Required="0" Valid="0">
+        <Description Translatable="1">TicketActionCommon widget that displays ticket information.</Description>
+        <Navigation>Frontend::Agent::View::TicketNote</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketActionCommon::TicketInformation</Item>
+                <Item Key="Title" Translatable="1">Ticket Information</Item>
+                <Item Key="Description" Translatable="1">Ticket information</Item>
+                <Item Key="Prio">1001</Item>
+                <Item Key="Location">Sidebar</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketNote###Widgets###CustomerInformation" Required="0" Valid="0">
+        <Description Translatable="1">TicketActionCommon widget that displays customer information.</Description>
+        <Navigation>Frontend::Agent::View::TicketNote</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketActionCommon::CustomerInformation</Item>
+                <Item Key="Title" Translatable="1">Customer Information</Item>
+                <Item Key="Description" Translatable="1">Customer Information</Item>
+                <Item Key="Prio">1002</Item>
+                <Item Key="Location">Sidebar</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketOwner###Description" Required="1" Valid="1">
+        <Description Translatable="1">Displayed in the sidebar as additional information.</Description>
+        <Navigation>Frontend::Agent::View::TicketOwner</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">[% Translate('Change Owner of %s%s%s', Config('Ticket::Hook'), Config('Ticket::HookDivider'), Data.TicketNumber) | html %]</Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketOwner###Permission" Required="1" Valid="1">
         <Description Translatable="1">Required permissions to use the ticket owner screen of a zoomed ticket in the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketOwner</Navigation>
@@ -3658,6 +3889,27 @@
         <Navigation>Frontend::Agent::View::TicketOwner</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketOwner###CustomerUser" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketOwner</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketOwner###CustomerUserMandatory" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field as mandatory.</Description>
+        <Navigation>Frontend::Agent::View::TicketOwner</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketOwner###CustomerIDReadOnly" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Controls if CustomerID is read-only in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketOwner</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketOwner###Owner" Required="0" Valid="1">
@@ -3811,6 +4063,55 @@
             <Item ValueType="String" ValueRegex="">%%Owner</Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketOwner###Widgets###Description" Required="0" Valid="0">
+        <Description Translatable="1">TicketActionCommon widget that displays the current action description.</Description>
+        <Navigation>Frontend::Agent::View::TicketOwner</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketActionCommon::Description</Item>
+                <Item Key="Title" Translatable="1">Description</Item>
+                <Item Key="Description" Translatable="1">Current action description.</Item>
+                <Item Key="Prio">1000</Item>
+                <Item Key="Location">Sidebar</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketOwner###Widgets###TicketInformation" Required="0" Valid="0">
+        <Description Translatable="1">TicketActionCommon widget that displays ticket information.</Description>
+        <Navigation>Frontend::Agent::View::TicketOwner</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketActionCommon::TicketInformation</Item>
+                <Item Key="Title" Translatable="1">Ticket Information</Item>
+                <Item Key="Description" Translatable="1">Ticket information</Item>
+                <Item Key="Prio">1001</Item>
+                <Item Key="Location">Sidebar</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketOwner###Widgets###CustomerInformation" Required="0" Valid="0">
+        <Description Translatable="1">TicketActionCommon widget that displays customer information.</Description>
+        <Navigation>Frontend::Agent::View::TicketOwner</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketActionCommon::CustomerInformation</Item>
+                <Item Key="Title" Translatable="1">Customer Information</Item>
+                <Item Key="Description" Translatable="1">Customer Information</Item>
+                <Item Key="Prio">1002</Item>
+                <Item Key="Location">Sidebar</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPending###Description" Required="1" Valid="1">
+        <Description Translatable="1">Displayed in the sidebar as additional information.</Description>
+        <Navigation>Frontend::Agent::View::TicketPending</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">[% Translate('Set Pending Time for %s%s%s', Config('Ticket::Hook'), Config('Ticket::HookDivider'), Data.TicketNumber) | html %]</Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPending###Permission" Required="1" Valid="1">
         <Description Translatable="1">Required permissions to use the ticket pending screen of a zoomed ticket in the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketPending</Navigation>
@@ -3865,6 +4166,27 @@
         <Navigation>Frontend::Agent::View::TicketPending</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPending###CustomerUser" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketPending</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPending###CustomerUserMandatory" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field as mandatory.</Description>
+        <Navigation>Frontend::Agent::View::TicketPending</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPending###CustomerIDReadOnly" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Controls if CustomerID is read-only in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketPending</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPending###Owner" Required="0" Valid="1">
@@ -4017,6 +4339,55 @@
             <Item ValueType="String" ValueRegex="">%%Pending</Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPending###Widgets###Description" Required="0" Valid="0">
+        <Description Translatable="1">TicketActionCommon widget that displays the current action description.</Description>
+        <Navigation>Frontend::Agent::View::TicketPending</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketActionCommon::Description</Item>
+                <Item Key="Title" Translatable="1">Description</Item>
+                <Item Key="Description" Translatable="1">Current action description.</Item>
+                <Item Key="Prio">1000</Item>
+                <Item Key="Location">Sidebar</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPending###Widgets###TicketInformation" Required="0" Valid="0">
+        <Description Translatable="1">TicketActionCommon widget that displays ticket information.</Description>
+        <Navigation>Frontend::Agent::View::TicketPending</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketActionCommon::TicketInformation</Item>
+                <Item Key="Title" Translatable="1">Ticket Information</Item>
+                <Item Key="Description" Translatable="1">Ticket information</Item>
+                <Item Key="Prio">1001</Item>
+                <Item Key="Location">Sidebar</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPending###Widgets###CustomerInformation" Required="0" Valid="0">
+        <Description Translatable="1">TicketActionCommon widget that displays customer information.</Description>
+        <Navigation>Frontend::Agent::View::TicketPending</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketActionCommon::CustomerInformation</Item>
+                <Item Key="Title" Translatable="1">Customer Information</Item>
+                <Item Key="Description" Translatable="1">Customer Information</Item>
+                <Item Key="Prio">1002</Item>
+                <Item Key="Location">Sidebar</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPriority###Description" Required="1" Valid="1">
+        <Description Translatable="1">Displayed in the sidebar as additional information.</Description>
+        <Navigation>Frontend::Agent::View::TicketPriority</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">[% Translate('Change Priority of %s%s%s', Config('Ticket::Hook'), Config('Ticket::HookDivider'), Data.TicketNumber) | html %]</Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPriority###Permission" Required="1" Valid="1">
         <Description Translatable="1">Required permissions to use the ticket priority screen of a zoomed ticket in the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketPriority</Navigation>
@@ -4071,6 +4442,27 @@
         <Navigation>Frontend::Agent::View::TicketPriority</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPriority###CustomerUser" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketPriority</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPriority###CustomerUserMandatory" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field as mandatory.</Description>
+        <Navigation>Frontend::Agent::View::TicketPriority</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPriority###CustomerIDReadOnly" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Controls if CustomerID is read-only in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketPriority</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPriority###Owner" Required="0" Valid="1">
@@ -4224,6 +4616,55 @@
             <Item ValueType="String" ValueRegex="">%%Priority</Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPriority###Widgets###Description" Required="0" Valid="0">
+        <Description Translatable="1">TicketActionCommon widget that displays the current action description.</Description>
+        <Navigation>Frontend::Agent::View::TicketPriority</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketActionCommon::Description</Item>
+                <Item Key="Title" Translatable="1">Description</Item>
+                <Item Key="Description" Translatable="1">Current action description.</Item>
+                <Item Key="Prio">1000</Item>
+                <Item Key="Location">Sidebar</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPriority###Widgets###TicketInformation" Required="0" Valid="0">
+        <Description Translatable="1">TicketActionCommon widget that displays ticket information.</Description>
+        <Navigation>Frontend::Agent::View::TicketPriority</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketActionCommon::TicketInformation</Item>
+                <Item Key="Title" Translatable="1">Ticket Information</Item>
+                <Item Key="Description" Translatable="1">Ticket information</Item>
+                <Item Key="Prio">1001</Item>
+                <Item Key="Location">Sidebar</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPriority###Widgets###CustomerInformation" Required="0" Valid="0">
+        <Description Translatable="1">TicketActionCommon widget that displays customer information.</Description>
+        <Navigation>Frontend::Agent::View::TicketPriority</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketActionCommon::CustomerInformation</Item>
+                <Item Key="Title" Translatable="1">Customer Information</Item>
+                <Item Key="Description" Translatable="1">Customer Information</Item>
+                <Item Key="Prio">1002</Item>
+                <Item Key="Location">Sidebar</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketResponsible###Description" Required="1" Valid="1">
+        <Description Translatable="1">Displayed in the sidebar as additional information.</Description>
+        <Navigation>Frontend::Agent::View::TicketResponsible</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">[% Translate('Change Responsible of %s%s%s', Config('Ticket::Hook'), Config('Ticket::HookDivider'), Data.TicketNumber) | html %]</Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketResponsible###Permission" Required="1" Valid="1">
         <Description Translatable="1">Required permissions to use the ticket responsible screen in the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketResponsible</Navigation>
@@ -4278,6 +4719,27 @@
         <Navigation>Frontend::Agent::View::TicketResponsible</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketResponsible###CustomerUser" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketResponsible</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketResponsible###CustomerUserMandatory" Required="1" Valid="1">
+        <Description Translatable="1">Sets the customer user field as mandatory.</Description>
+        <Navigation>Frontend::Agent::View::TicketResponsible</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketResponsible###CustomerIDReadOnly" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+        <Description Translatable="1">Controls if CustomerID is read-only in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketResponsible</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketResponsible###Owner" Required="0" Valid="1">
@@ -4429,6 +4891,48 @@
         <Navigation>Frontend::Agent::View::TicketResponsible</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">%%Responsible</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketResponsible###Widgets###Description" Required="0" Valid="0">
+        <Description Translatable="1">TicketActionCommon widget that displays the current action description.</Description>
+        <Navigation>Frontend::Agent::View::TicketResponsible</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketActionCommon::Description</Item>
+                <Item Key="Title" Translatable="1">Description</Item>
+                <Item Key="Description" Translatable="1">Current action description.</Item>
+                <Item Key="Prio">1000</Item>
+                <Item Key="Location">Sidebar</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketResponsible###Widgets###TicketInformation" Required="0" Valid="0">
+        <Description Translatable="1">TicketActionCommon widget that displays ticket information.</Description>
+        <Navigation>Frontend::Agent::View::TicketResponsible</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketActionCommon::TicketInformation</Item>
+                <Item Key="Title" Translatable="1">Ticket Information</Item>
+                <Item Key="Description" Translatable="1">Ticket information</Item>
+                <Item Key="Prio">1001</Item>
+                <Item Key="Location">Sidebar</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketResponsible###Widgets###CustomerInformation" Required="0" Valid="0">
+        <Description Translatable="1">TicketActionCommon widget that displays customer information.</Description>
+        <Navigation>Frontend::Agent::View::TicketResponsible</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketActionCommon::CustomerInformation</Item>
+                <Item Key="Title" Translatable="1">Customer Information</Item>
+                <Item Key="Description" Translatable="1">Customer Information</Item>
+                <Item Key="Prio">1002</Item>
+                <Item Key="Location">Sidebar</Item>
+                <Item Key="Active">1</Item>
+            </Hash>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketBulk###RequiredLock" Required="0" Valid="1">
@@ -4762,6 +5266,41 @@
             <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketForward###TicketType" Required="0" Valid="1">
+        <Description Translatable="1">Shows the ticket type selection (Ticket::Type needs to be activated).</Description>
+        <Navigation>Frontend::Agent::View::TicketForward</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketForward###Service" Required="0" Valid="1">
+        <Description Translatable="1">Shows the service selection (Ticket::Service needs to be activated).</Description>
+        <Navigation>Frontend::Agent::View::TicketForward</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketForward###ServiceMandatory" Required="0" Valid="1">
+        <Description Translatable="1">Enforces that the agent must select a service.</Description>
+        <Navigation>Frontend::Agent::View::TicketForward</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketForward###SLAMandatory" Required="0" Valid="1">
+        <Description Translatable="1">Enforces that the agent must select an SLA.</Description>
+        <Navigation>Frontend::Agent::View::TicketForward</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketForward###Priority" Required="0" Valid="1">
+        <Description Translatable="1">Shows the ticket priority selection.</Description>
+        <Navigation>Frontend::Agent::View::TicketForward</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketEmailOutbound###Permission" Required="1" Valid="1">
         <Description Translatable="1">Required permissions to use the email outbound screen in the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketEmailOutbound</Navigation>
@@ -4858,7 +5397,7 @@
             <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
-    <Setting Name="Ticket::Frontend::AgentTicketCustomer::CustomerIDReadOnly" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
+    <Setting Name="Ticket::Frontend::AgentTicketCustomer###CustomerIDReadOnly" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="1" Valid="1">
         <Description Translatable="1">Controls if CustomerID is read-only in the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketCustomer</Navigation>
         <Value>
@@ -6108,6 +6647,22 @@
             <Item ValueType="String">via</Item>
         </Value>
     </Setting>
+    <Setting Name="DashboardBackend::TicketGeneric::ArticleAttributes" Required="0" Valid="1">
+        <Description Translatable="1">Defines which article attributes TicketGeneric dashboard widgets are allowed to request when building additional columns.</Description>
+        <Navigation>Frontend::Agent::View::Dashboard</Navigation>
+        <Value>
+            <Array>
+                <Item>SenderType</Item>
+                <Item>IsVisibleForCustomer</Item>
+                <Item>From</Item>
+                <Item>To</Item>
+                <Item>Cc</Item>
+                <Item>Bcc</Item>
+                <Item>Sender</Item>
+                <Item>Subject</Item>
+            </Array>
+        </Value>
+    </Setting>
     <Setting Name="DashboardBackend###0100-TicketPendingReminder" Required="0" Valid="1">
         <Description Translatable="1">Parameters for the dashboard backend of the ticket pending reminder overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.</Description>
         <Navigation>Frontend::Agent::View::Dashboard</Navigation>
@@ -6153,6 +6708,7 @@
                         <Item Key="Service" SelectedID="1"></Item>
                         <Item Key="State" SelectedID="1"></Item>
                         <Item Key="SLA" SelectedID="1"></Item>
+                        <Item Key="Sender" SelectedID="1"></Item>
                         <Item Key="Title" SelectedID="2"></Item>
                         <Item Key="Type" SelectedID="1"></Item>
                     </Hash>
@@ -6217,6 +6773,7 @@
                         <Item Key="Service" SelectedID="1"></Item>
                         <Item Key="State" SelectedID="1"></Item>
                         <Item Key="SLA" SelectedID="1"></Item>
+                        <Item Key="Sender" SelectedID="1"></Item>
                         <Item Key="Title" SelectedID="2"></Item>
                         <Item Key="Type" SelectedID="1"></Item>
                     </Hash>
@@ -6281,6 +6838,7 @@
                         <Item Key="Service" SelectedID="1"></Item>
                         <Item Key="State" SelectedID="1"></Item>
                         <Item Key="SLA" SelectedID="1"></Item>
+                        <Item Key="Sender" SelectedID="1"></Item>
                         <Item Key="Title" SelectedID="2"></Item>
                         <Item Key="Type" SelectedID="1"></Item>
                     </Hash>
@@ -6345,6 +6903,7 @@
                         <Item Key="Service" SelectedID="1"></Item>
                         <Item Key="State" SelectedID="1"></Item>
                         <Item Key="SLA" SelectedID="1"></Item>
+                        <Item Key="Sender" SelectedID="1"></Item>
                         <Item Key="Title" SelectedID="2"></Item>
                         <Item Key="Type" SelectedID="1"></Item>
                     </Hash>
@@ -6586,6 +7145,7 @@
                         <Item Key="Service" SelectedID="1"></Item>
                         <Item Key="State" SelectedID="1"></Item>
                         <Item Key="SLA" SelectedID="1"></Item>
+                        <Item Key="Sender" SelectedID="1"></Item>
                         <Item Key="Title" SelectedID="2"></Item>
                         <Item Key="Type" SelectedID="1"></Item>
                     </Hash>
@@ -6649,6 +7209,7 @@
                         <Item Key="Service" SelectedID="1"></Item>
                         <Item Key="State" SelectedID="1"></Item>
                         <Item Key="SLA" SelectedID="1"></Item>
+                        <Item Key="Sender" SelectedID="1"></Item>
                         <Item Key="Title" SelectedID="2"></Item>
                         <Item Key="Type" SelectedID="1"></Item>
                     </Hash>
@@ -6712,6 +7273,7 @@
                         <Item Key="Service" SelectedID="1"></Item>
                         <Item Key="State" SelectedID="1"></Item>
                         <Item Key="SLA" SelectedID="1"></Item>
+                        <Item Key="Sender" SelectedID="1"></Item>
                         <Item Key="Title" SelectedID="2"></Item>
                         <Item Key="Type" SelectedID="1"></Item>
                     </Hash>
@@ -6775,6 +7337,7 @@
                         <Item Key="Service" SelectedID="1"></Item>
                         <Item Key="State" SelectedID="1"></Item>
                         <Item Key="SLA" SelectedID="1"></Item>
+                        <Item Key="Sender" SelectedID="1"></Item>
                         <Item Key="Title" SelectedID="2"></Item>
                         <Item Key="Type" SelectedID="1"></Item>
                     </Hash>
@@ -6873,6 +7436,7 @@
                         <Item Key="Service" SelectedID="1"></Item>
                         <Item Key="State" SelectedID="1"></Item>
                         <Item Key="SLA" SelectedID="1"></Item>
+                        <Item Key="Sender" SelectedID="1"></Item>
                         <Item Key="Title" SelectedID="2"></Item>
                         <Item Key="Type" SelectedID="1"></Item>
                     </Hash>
@@ -6936,6 +7500,7 @@
                         <Item Key="Service" SelectedID="1"></Item>
                         <Item Key="State" SelectedID="1"></Item>
                         <Item Key="SLA" SelectedID="1"></Item>
+                        <Item Key="Sender" SelectedID="1"></Item>
                         <Item Key="Title" SelectedID="2"></Item>
                         <Item Key="Type" SelectedID="1"></Item>
                     </Hash>
@@ -6999,6 +7564,7 @@
                         <Item Key="Service" SelectedID="1"></Item>
                         <Item Key="State" SelectedID="1"></Item>
                         <Item Key="SLA" SelectedID="1"></Item>
+                        <Item Key="Sender" SelectedID="1"></Item>
                         <Item Key="Title" SelectedID="2"></Item>
                         <Item Key="Type" SelectedID="1"></Item>
                     </Hash>
@@ -7062,6 +7628,7 @@
                         <Item Key="Service" SelectedID="1"></Item>
                         <Item Key="State" SelectedID="1"></Item>
                         <Item Key="SLA" SelectedID="1"></Item>
+                        <Item Key="Sender" SelectedID="1"></Item>
                         <Item Key="Title" SelectedID="2"></Item>
                         <Item Key="Type" SelectedID="1"></Item>
                     </Hash>
@@ -12499,6 +13066,41 @@ Thanks for your help!
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketCompose###TicketType" Required="0" Valid="1">
+        <Description Translatable="1">Shows the ticket type selection (Ticket::Type needs to be activated).</Description>
+        <Navigation>Frontend::Agent::View::TicketCompose</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketCompose###Service" Required="0" Valid="1">
+        <Description Translatable="1">Shows the service selection (Ticket::Service needs to be activated).</Description>
+        <Navigation>Frontend::Agent::View::TicketCompose</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketCompose###ServiceMandatory" Required="0" Valid="1">
+        <Description Translatable="1">Enforces that the agent must select a service.</Description>
+        <Navigation>Frontend::Agent::View::TicketCompose</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketCompose###SLAMandatory" Required="0" Valid="1">
+        <Description Translatable="1">Enforces that the agent must select an SLA.</Description>
+        <Navigation>Frontend::Agent::View::TicketCompose</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketCompose###Priority" Required="0" Valid="1">
+        <Description Translatable="1">Shows the ticket priority selection.</Description>
+        <Navigation>Frontend::Agent::View::TicketCompose</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketEmail###DynamicField" Required="0" Valid="1">
         <Description Translatable="1">Dynamic fields shown in the ticket email screen of the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketEmailNew</Navigation>
@@ -12751,7 +13353,7 @@ Thanks for your help!
             </Hash>
         </Value>
     </Setting>
-   <Setting Name="Ticket::Frontend::AgentTicketZoom###Widgets###0300-LinkTable" Required="0" Valid="1">
+    <Setting Name="Ticket::Frontend::AgentTicketZoom###Widgets###0300-LinkTable" Required="0" Valid="1">
         <Description Translatable="1">AgentTicketZoom widget that displays a table of objects linked to the ticket.</Description>
         <Navigation>Frontend::Agent::View::TicketZoom</Navigation>
         <Value>
@@ -13148,6 +13750,41 @@ Thanks for your help!
             <Item ValueType="String" ValueRegex="^\d+(%|px)?$">200px</Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneInbound###TicketType" Required="0" Valid="1">
+        <Description Translatable="1">Shows the ticket type selection (Ticket::Type needs to be activated).</Description>
+        <Navigation>Frontend::Agent::View::TicketPhoneInbound</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneInbound###Service" Required="0" Valid="1">
+        <Description Translatable="1">Shows the service selection (Ticket::Service needs to be activated).</Description>
+        <Navigation>Frontend::Agent::View::TicketPhoneInbound</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneInbound###ServiceMandatory" Required="0" Valid="1">
+        <Description Translatable="1">Enforces that the agent must select a service.</Description>
+        <Navigation>Frontend::Agent::View::TicketPhoneInbound</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneInbound###SLAMandatory" Required="0" Valid="1">
+        <Description Translatable="1">Enforces that the agent must select an SLA.</Description>
+        <Navigation>Frontend::Agent::View::TicketPhoneInbound</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneInbound###Priority" Required="0" Valid="1">
+        <Description Translatable="1">Shows the ticket priority selection.</Description>
+        <Navigation>Frontend::Agent::View::TicketPhoneInbound</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketPhoneOutbound###RichTextWidth" Required="0" Valid="1">
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketPhoneOutbound</Navigation>
@@ -13160,6 +13797,48 @@ Thanks for your help!
         <Navigation>Frontend::Agent::View::TicketPhoneOutbound</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="^\d+(%|px)?$">200px</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneOutbound###TicketType" Required="0" Valid="1">
+        <Description Translatable="1">Shows the ticket type selection (Ticket::Type needs to be activated).</Description>
+        <Navigation>Frontend::Agent::View::TicketPhoneOutbound</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneOutbound###Service" Required="0" Valid="1">
+        <Description Translatable="1">Shows the service selection (Ticket::Service needs to be activated).</Description>
+        <Navigation>Frontend::Agent::View::TicketPhoneOutbound</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneOutbound###ServiceMandatory" Required="0" Valid="1">
+        <Description Translatable="1">Enforces that the agent must select a service.</Description>
+        <Navigation>Frontend::Agent::View::TicketPhoneOutbound</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneOutbound###SLAMandatory" Required="0" Valid="1">
+        <Description Translatable="1">Enforces that the agent must select an SLA.</Description>
+        <Navigation>Frontend::Agent::View::TicketPhoneOutbound</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketPhoneOutbound###Priority" Required="0" Valid="1">
+        <Description Translatable="1">Shows the ticket priority selection.</Description>
+        <Navigation>Frontend::Agent::View::TicketPhoneOutbound</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketClose###Description" Required="1" Valid="1">
+        <Description Translatable="1">Displayed in the sidebar as additional information.</Description>
+        <Navigation>Frontend::Agent::View::TicketClose</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">[% Translate('Close %s%s%s', Config('Ticket::Hook'), Config('Ticket::HookDivider'), Data.TicketNumber) | html %]</Item>
         </Value>
     </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketClose###RichTextWidth" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
@@ -13246,6 +13925,41 @@ Thanks for your help!
             <Item ValueType="String" ValueRegex="^\d+(%|px)?$">300px</Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketEmailOutbound###TicketType" Required="0" Valid="1">
+        <Description Translatable="1">Shows the ticket type selection (Ticket::Type needs to be activated).</Description>
+        <Navigation>Frontend::Agent::View::TicketEmailOutbound</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketEmailOutbound###Service" Required="0" Valid="1">
+        <Description Translatable="1">Shows the service selection (Ticket::Service needs to be activated).</Description>
+        <Navigation>Frontend::Agent::View::TicketEmailOutbound</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketEmailOutbound###ServiceMandatory" Required="0" Valid="1">
+        <Description Translatable="1">Enforces that the agent must select a service.</Description>
+        <Navigation>Frontend::Agent::View::TicketEmailOutbound</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketEmailOutbound###SLAMandatory" Required="0" Valid="1">
+        <Description Translatable="1">Enforces that the agent must select an SLA.</Description>
+        <Navigation>Frontend::Agent::View::TicketEmailOutbound</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketEmailOutbound###Priority" Required="0" Valid="1">
+        <Description Translatable="1">Shows the ticket priority selection.</Description>
+        <Navigation>Frontend::Agent::View::TicketEmailOutbound</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketMerge###RichTextWidth" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Defines the width for the rich text editor component for this screen. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Agent::View::TicketMerge</Navigation>
@@ -13272,6 +13986,28 @@ Thanks for your help!
         <Navigation>Frontend::Agent::View::TicketMerge</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100px</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::AgentTicketMerge###SearchFilter" Required="0" Valid="1">
+        <Description Translatable="1">Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.</Description>
+        <Navigation>Frontend::Agent::View::TicketMerge</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem>
+                    <Array>
+                        <Item></Item>
+                    </Array>
+                </DefaultItem>
+                <Item Key="StateType">
+                    <Array>
+                        <Item>new</Item>
+                        <Item>open</Item>
+                        <Item>closed</Item>
+                        <Item>pending reminder</Item>
+                        <Item>pending auto</Item>
+                    </Array>
+                </Item>
+            </Hash>
         </Value>
     </Setting>
     <Setting Name="StandardTemplate::Types" Required="0" Valid="1">
@@ -13840,6 +14576,89 @@ Thanks for your help!
     </Setting>
     <Setting Name="Ticket::Frontend::Article::Actions###Internal" Required="1" Valid="1">
         <Description Translatable="1">Defines available article actions for Internal articles.</Description>
+        <Navigation>Frontend::Agent::View::TicketZoom::ArticleAction</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem>
+                    <Hash>
+                        <Item Key=""></Item>
+                    </Hash>
+                </DefaultItem>
+                <Item Key="AgentTicketCompose">
+                    <Hash>
+                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketCompose</Item>
+                        <Item Key="Prio">100</Item>
+                        <Item Key="Valid">1</Item>
+                    </Hash>
+                </Item>
+                <Item Key="AgentTicketForward">
+                    <Hash>
+                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketForward</Item>
+                        <Item Key="Prio">200</Item>
+                        <Item Key="Valid">1</Item>
+                    </Hash>
+                </Item>
+                <Item Key="AgentTicketBounce">
+                    <Hash>
+                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketBounce</Item>
+                        <Item Key="Prio">300</Item>
+                        <Item Key="Valid">1</Item>
+                    </Hash>
+                </Item>
+                <Item Key="AgentTicketPhone">
+                    <Hash>
+                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketPhone</Item>
+                        <Item Key="Prio">400</Item>
+                        <Item Key="Valid">1</Item>
+                    </Hash>
+                </Item>
+                <Item Key="AgentTicketPrint">
+                    <Hash>
+                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketPrint</Item>
+                        <Item Key="Prio">500</Item>
+                        <Item Key="Valid">1</Item>
+                    </Hash>
+                </Item>
+                <Item Key="AgentTicketPlain">
+                    <Hash>
+                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketPlain</Item>
+                        <Item Key="Prio">600</Item>
+                        <Item Key="Valid">1</Item>
+                    </Hash>
+                </Item>
+                <Item Key="MarkAsImportant">
+                    <Hash>
+                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::MarkAsImportant</Item>
+                        <Item Key="Prio">700</Item>
+                        <Item Key="Valid">1</Item>
+                    </Hash>
+                </Item>
+                <Item Key="AgentTicketNote">
+                    <Hash>
+                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketNote</Item>
+                        <Item Key="Prio">800</Item>
+                        <Item Key="Valid">1</Item>
+                    </Hash>
+                </Item>
+                <Item Key="AgentTicketNoteToLinkedTicket">
+                    <Hash>
+                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketNoteToLinkedTicket</Item>
+                        <Item Key="Prio">50</Item>
+                        <Item Key="Valid">1</Item>
+                    </Hash>
+                </Item>
+                <Item Key="MarkArticleSeenUnseen">
+                    <Hash>
+                        <Item Key="Module">Kernel::Output::HTML::ArticleAction::MarkArticleSeenUnseen</Item>
+                        <Item Key="Prio">50</Item>
+                        <Item Key="Valid">1</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::Article::Actions###Web" Required="1" Valid="1">
+        <Description Translatable="1">Defines available article actions for Web articles.</Description>
         <Navigation>Frontend::Agent::View::TicketZoom::ArticleAction</Navigation>
         <Value>
             <Hash>

@@ -11,6 +11,7 @@ package Kernel::System::Ticket::ColumnFilter;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(IsArrayRefWithData IsHashRefWithData IsStringWithData);
 
@@ -143,7 +144,7 @@ sub QueueFilterValuesGet {
         # get queue list
         return $Self->_GeneralDataGet(
             ModuleName   => 'Kernel::System::Queue',
-            FunctionName => 'QueueList',
+            FunctionName => 'GetAllQueues',
             UserID       => $Param{UserID},
         );
     }
@@ -917,6 +918,10 @@ sub DynamicFieldFilterValuesGet {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _GeneralDataGet()
 
 get data list
@@ -1045,8 +1050,6 @@ sub _TicketIDStringGet {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

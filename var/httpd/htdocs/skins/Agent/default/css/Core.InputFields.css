@@ -1110,14 +1110,6 @@ input[type="radio"][disabled].RadioRound::before {
 
 /******************************/
 /*        Dynamic Field       */
-div.Row {
-    padding: 0;
-    display: flex;
-    flex-flow: column;
-    align-items: flex-start;
-    width: 100%;
-    gap: var(--padding-sm);
-}
 
 div.Row label,
 div.Row .Field {

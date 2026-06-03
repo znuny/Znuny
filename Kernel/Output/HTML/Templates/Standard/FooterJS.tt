@@ -11,7 +11,7 @@
 [% IF Data.JSConfig.RichTextSet %]
     <script src="[% Config("Frontend::RichText::Path") _ "ckeditor-znuny.js" | html %]"></script>
 [% IF Data.JSConfig.IncludeRichTextTranslation %]
-    <script src="[% Config("Frontend::RichText::Path") _ "translations/" | html %][% Data.JSConfig.CKEUserLanguage | html %].js"></script>
+    <script src="[% Config("Frontend::RichText::Path") _ "translations/" | html %][% Data.JSConfig.CKEUserLanguage | html %].umd.js"></script>
 [% END %]
 [% END %]
 
@@ -62,6 +62,21 @@ Core.App.Ready(function () {
     Core.App.UnblockEvents();
 });
 //]]></script>
+
+# start modular frontend application
+<script type="text/javascript">//<![CDATA[
+    var App = {};
+    jQuery(document).ready(function () {
+        if (typeof Env !== 'undefined' && Env.Application) {
+            App = new Env.Application(
+                {
+                    loadModules: false
+                });
+            App.run();
+        }
+    });
+//]]></script>
+
 
 <div id="AjaxErrorDialog">
     <div id="AjaxErrorDialogInner">

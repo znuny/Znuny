@@ -665,6 +665,30 @@ for my $Test (@Tests) {
         Success => 1,
         Result  => '#FFFFFF',
     },
+    {
+        Name   => 'GetTextColor - RGBA white (ColorPicker / HVS)',
+        Config => {
+            Background => '#FFFFFFFF',
+        },
+        Success => 1,
+        Result  => '#000',
+    },
+    {
+        Name   => 'GetTextColor - RGBA black with alpha',
+        Config => {
+            Background => '#000000FF',
+        },
+        Success => 1,
+        Result  => '#FFFFFF',
+    },
+    {
+        Name   => 'GetTextColor - RGBA light gray',
+        Config => {
+            Background => '#808080FF',
+        },
+        Success => 1,
+        Result  => '#000',
+    },
 );
 
 for my $Test (@Tests) {

@@ -2136,6 +2136,10 @@ sub StatsCleanUp {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _GenerateStaticStats()
 
     take the stat configuration and get the stat table
@@ -4459,8 +4463,6 @@ sub _TimeStamp2DateTime {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 
