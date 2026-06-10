@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%m/%d';
     $Self->{DateInputFormat}     = '%Y/%m/%d';
     $Self->{DateInputFormatLong} = '%Y/%m/%d - %T';
-    $Self->{Completeness}        = 0.657457681251996;
+    $Self->{Completeness}        = 0.657352706370749;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2411,11 +2411,10 @@ sub Data {
         'Note: Customer is invalid!' => '注意: 顧客が無効です。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => '顧客ユーザーのアドレス帳',
         'Search for recipients and add the results as \'%s\'.' => '受信者を検索し、結果を \'%s\'として追加します。',
         'Search template' => '検索テンプレート',
-        'Create Template' => 'テンプレート作成',
         'Create New' => '新規作成',
+        'Create Template' => 'テンプレート作成',
         'Save changes in template' => '変更したテンプレートを保存',
         'Filters in use' => '使用中のフィルター',
         'Additional filters' => '追加のフィルター',
@@ -2951,6 +2950,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'エラー',
         'An Error Occurred' => 'エラーが発生しました。',
+        'Back to the previous page' => '前のページに戻る。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3216,7 +3216,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => '権限がありません',
-        'Back to the previous page' => '前のページに戻る。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => 'アラート',
@@ -4218,6 +4217,7 @@ sub Data {
             '',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+        'The selected template type does not support attachments.' => '',
         'Change Attachment Relations for Template' => 'テンプレートに対する添付ファイルの関連性を変更',
         'Change Template Relations for Attachment' => '添付ファイルに対するテンプレートの関連性を変更',
 
@@ -4280,6 +4280,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => '',
+        'Customer User Address Book' => '顧客ユーザーのアドレス帳',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => '設定項目 %s は存在しません',
@@ -9547,6 +9548,7 @@ Thanks for your help!
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

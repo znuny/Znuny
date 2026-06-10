@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.266847652507186;
+    $Self->{Completeness}        = 0.266805045505349;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2405,11 +2405,10 @@ sub Data {
         'Note: Customer is invalid!' => 'Забелешка: Клиентот е невалиден!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => '',
         'Search for recipients and add the results as \'%s\'.' => '',
         'Search template' => 'Барај шаблон',
-        'Create Template' => 'Креирај Шаблон',
         'Create New' => 'Креирај нов',
+        'Create Template' => 'Креирај Шаблон',
         'Save changes in template' => 'Зачувај промени во шаблонот',
         'Filters in use' => 'Филтри што се користат',
         'Additional filters' => 'Додатни филтери',
@@ -2945,6 +2944,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'Грешка',
         'An Error Occurred' => '',
+        'Back to the previous page' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3210,7 +3210,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => '',
-        'Back to the previous page' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',
@@ -4211,6 +4210,7 @@ sub Data {
             '',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+        'The selected template type does not support attachments.' => '',
         'Change Attachment Relations for Template' => 'Измени Релации на Прилози за Шаблон',
         'Change Template Relations for Attachment' => 'Измени Релации на Шаблонот за Прикачување',
 
@@ -4273,6 +4273,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => '',
+        'Customer User Address Book' => '',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => '',
@@ -9521,6 +9522,7 @@ Thanks for your help!
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

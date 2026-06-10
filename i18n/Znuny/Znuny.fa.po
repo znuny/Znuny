@@ -6926,7 +6926,7 @@ msgstr "مشترک"
 msgid "Note: Customer is invalid!"
 msgstr "یادداشت: مشترک نامعتبر است!"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
+#. Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
 msgid "Customer User Address Book"
 msgstr ""
 
@@ -9194,7 +9194,7 @@ msgstr "این پیام از روز است. شما می توانید این را
 msgid "Insufficient Rights"
 msgstr "حقوق دسترسی ناکافی"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "بازگشت به صفحه قبل"
 
@@ -25346,5 +25346,9 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Controls if the ticket mention entries are removed when a ticket is archived."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+msgid "The selected template type does not support attachments."
 msgstr ""
 

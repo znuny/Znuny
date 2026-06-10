@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.999840306611306;
+    $Self->{Completeness}        = 0.999840332109213;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2406,11 +2406,10 @@ sub Data {
         'Note: Customer is invalid!' => 'Hinweis: Kunde ist ungültig!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => 'Kundenbenutzer-Adressbuch',
         'Search for recipients and add the results as \'%s\'.' => 'Suchen Sie nach Empfängern und fügen Sie die Ergebnisse als \'%s\' hinzu.',
         'Search template' => 'Suchvorlage',
-        'Create Template' => 'Vorlage anlegen',
         'Create New' => 'Neue anlegen',
+        'Create Template' => 'Vorlage anlegen',
         'Save changes in template' => 'Änderungen in der Vorlage speichern',
         'Filters in use' => 'Verwendete Filter',
         'Additional filters' => 'Zusätzliche Filter',
@@ -2946,6 +2945,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'Fehler',
         'An Error Occurred' => 'Ein Fehler ist aufgetreten',
+        'Back to the previous page' => 'Zurück zur vorhergehenden Seite',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => 'Powered by %s',
@@ -3211,7 +3211,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => 'Nicht ausreichende Rechte',
-        'Back to the previous page' => 'Zurück zur vorhergehenden Seite',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => 'Warnung',
@@ -4212,6 +4211,7 @@ sub Data {
             'Fehler beim Hinzufügen/Aktualisieren der folgenden Standardvorlagen: %s. Bitte Logs für weitere Informationen prüfen.',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+        'The selected template type does not support attachments.' => 'Der ausgewählte Vorlagentyp unterstützt keine Anhänge',
         'Change Attachment Relations for Template' => 'Anhangs-Zuordnungen für Vorlage verändern',
         'Change Template Relations for Attachment' => 'Vorlagen-Zuordnungen für Anhang verändern',
 
@@ -4274,6 +4274,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => 'RecipientField fehlt!',
+        'Customer User Address Book' => 'Kundenbenutzer-Adressbuch',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => 'Keine solche Konfiguration für %s',
@@ -9532,6 +9533,7 @@ Ihr Helpdesk-Team
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

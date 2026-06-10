@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.999361226445225;
+    $Self->{Completeness}        = 0.999680664218426;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2411,11 +2411,10 @@ sub Data {
         'Note: Customer is invalid!' => 'Megjegyzés: Az ügyfél érvénytelen!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => 'Ügyfél-felhasználó címjegyzék',
         'Search for recipients and add the results as \'%s\'.' => 'Címzettek keresése és az eredmények hozzáadása mint „%s”.',
         'Search template' => 'Keresési sablon',
-        'Create Template' => 'Sablon létrehozása',
         'Create New' => 'Új létrehozása',
+        'Create Template' => 'Sablon létrehozása',
         'Save changes in template' => 'Módosítások mentése sablonba',
         'Filters in use' => 'Használatban lévő szűrők',
         'Additional filters' => 'További szűrők',
@@ -2951,6 +2950,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'Hiba',
         'An Error Occurred' => 'Hiba történt',
+        'Back to the previous page' => 'Vissza az előző oldalra',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => 'A gépházban: %s',
@@ -3216,7 +3216,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => 'Nincs elegendő joga',
-        'Back to the previous page' => 'Vissza az előző oldalra',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => 'Riasztás',
@@ -4217,6 +4216,7 @@ sub Data {
             'Hibák történtek a következő szabványos sablonok hozzáadásakor vagy frissítésekor: %s. További információkért nézze meg a naplókat.',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+        'The selected template type does not support attachments.' => '',
         'Change Attachment Relations for Template' => 'Mellékletkapcsolatok megváltoztatása egy sablonnál',
         'Change Template Relations for Attachment' => 'Sablonkapcsolatok megváltoztatása egy mellékletnél',
 
@@ -4279,6 +4279,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => 'Nincs címzett mező megadva!',
+        'Customer User Address Book' => 'Ügyfél-felhasználó címjegyzék',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => 'Nincs ilyen beállítás ehhez: %s',
@@ -4490,7 +4491,7 @@ sub Data {
         'Available tickets' => 'Elérhető jegyek',
         'including subqueues' => 'alvárólisták felvétele',
         'excluding subqueues' => 'alvárólisták kizárása',
-        'Queue View' => '',
+        'Queue View' => 'Várólista nézet',
 
         # Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
         'My Responsible Tickets' => 'Saját felelős jegyek',
@@ -5642,7 +5643,7 @@ sub Data {
         'List of JS files to always be loaded for the agent interface.' =>
             'JavaScript-fájlok listája, amelyek mindig betöltődnek az ügyintézői felületnél.',
         'Type of daemon log rotation to use: Choose \'Znuny\' to let Znuny system to handle the file rotation, or choose \'External\' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration.' =>
-            'A használandó démon naplóforgatásának típusa: válassza az „Znuny” lehetőséget, ha a Znuny rendszerre szeretné bízni a fájlforgatás kezelését, vagy válassza a „Külső” lehetőséget egy harmadik féltől származó forgatási mechanizmus (azaz logrotate) használatához. Megjegyzés: a külső forgatási mechanizmus a saját és független beállítását igényli.',
+            'A használandó démon naplóforgatásának típusa: válassza a „Znuny” lehetőséget, ha a Znuny rendszerre szeretné bízni a fájlforgatás kezelését, vagy válassza a „Külső” lehetőséget egy harmadik féltől származó forgatási mechanizmus (azaz logrotate) használatához. Megjegyzés: a külső forgatási mechanizmus a saját és független beállítását igényli.',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if &lt;$OTRSHome&gt;/var/run/ can not be used.' =>
             'Ha engedélyezve van, akkor a démon ezt a könyvtárat fogja használni a PID-fájljai létrehozásához. Megjegyzés: állítsa le a démont, mielőtt bármit megváltoztatna, és csak akkor használja ezt a beállítást, ha az &lt;$OTRSHome&gt;/var/run/ nem használható.',
         'Defines the number of days to keep the daemon log files.' => 'Meghatározza a napok számát a démon naplófájljainak megtartásához.',
@@ -8133,7 +8134,7 @@ sub Data {
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             'Ha a felhasználónkénti megfigyelt jegyek korlátja elérésre kerül, a legrégebbi bejegyzések el lesznek távolítva a megfigyelési listából. Tiltsa le ezt a beállítást vagy állítsa 0 értékre a korlát letiltásához (alapértelmezett).',
         'Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view.' =>
-            '',
+            'Az adminisztrátori felhasználóval (1-es azonosító) engedélyezi a jegykeresést a bejelentkezett felhasználó helyett. Csak ezt a nézetet érinti.',
         'List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions.' =>
             'Azon felhasználói beállítások (kulcsok) listája, amelyeknél engedélyezett, hogy az ügyintéző beállításai előtétprogram-modul UpdateAJAX alművelete frissítse azokat. Ezek reguláris kifejezések.',
         'List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module CustomerPreferences. These are regular expressions.' =>
@@ -8973,7 +8974,7 @@ Az Ön ügyfélszolgálati csapata
         'Edit Customer Users.' => 'Ügyfél-felhasználók szerkesztése.',
         'Edit appointment' => 'Időpont szerkesztése',
         'Edit customer company' => 'Ügyfél-vállalat szerkesztése',
-        'Edit customer user' => '',
+        'Edit customer user' => 'Ügyfél-felhasználó szerkesztése',
         'Email Outbound' => 'Kimenő e-mail',
         'Email Resend' => 'E-mail újraküldés',
         'Email communication channel.' => 'E-mail kommunikációs csatorna.',
@@ -9538,6 +9539,7 @@ Az Ön ügyfélszolgálati csapata
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

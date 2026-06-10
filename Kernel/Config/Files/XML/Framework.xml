@@ -878,7 +878,7 @@
         <Description Translatable="1">If "file" was selected for LogModule, a logfile must be specified. If the file doesn't exist, it will be created by the system.</Description>
         <Navigation>Core::Log</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">/tmp/znuny.log</Item>
+            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Home&gt;/var/log/znuny.log</Item>
         </Value>
     </Setting>
     <Setting Name="LogModule::LogFile::Date" Required="1" Valid="1">
@@ -8452,6 +8452,15 @@ via the Preferences button after logging in.
         <Value>
             <Hash>
                 <Item Key="[% Env('CGIHandle') %]?Action=AgentDashboard" Translatable="1">Go to dashboard!</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Customer::PossibleNextActions" Required="0" Valid="1">
+        <Description Translatable="1">Defines the list of possible next actions on an error screen, a full path is required, then is possible to add external links if needed.</Description>
+        <Navigation>Frontend::Customer</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="[% Env('CGIHandle') %]?Action=CustomerTicketOverview" Translatable="1">Go to overview</Item>
             </Hash>
         </Value>
     </Setting>

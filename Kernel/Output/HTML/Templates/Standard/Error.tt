@@ -14,6 +14,17 @@
             </div>
             <div class="Content">
                 <p>[% Translate("An Error Occurred") | html %]</p>
+                <p>
+                    <a href="#" class="ReturnToPreviousPage">[% Translate("Back to the previous page") | html %]</a>
+                </p>
+[% RenderBlockStart("PossibleNextActionContainer") %]
+                <p>
+[% RenderBlockStart("PossibleNextActionRow") %]
+                    <a href="[% Data.Link | Interpolate %]" title="[% Translate(Data.Description) | html %]">[% Translate(Data.Description) | html %]</a>
+                    <br />
+[% RenderBlockEnd("PossibleNextActionRow") %]
+                </p>
+[% RenderBlockEnd("PossibleNextActionContainer") %]
             </div>
         </div>
     </div>

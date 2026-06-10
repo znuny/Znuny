@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%m/%d/%Y';
     $Self->{DateInputFormat}     = '%m/%d/%Y';
     $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
-    $Self->{Completeness}        = 0.417917598211434;
+    $Self->{Completeness}        = 0.417850870190005;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2406,11 +2406,10 @@ sub Data {
         'Note: Customer is invalid!' => 'Примітка: Клієнт не є чинним!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => '',
         'Search for recipients and add the results as \'%s\'.' => '',
         'Search template' => 'Шаблон пошуку',
-        'Create Template' => 'Створити шаблон',
         'Create New' => 'Створити новий',
+        'Create Template' => 'Створити шаблон',
         'Save changes in template' => 'Зберегти зміни в шаблоні',
         'Filters in use' => 'Фільтри що використовуються',
         'Additional filters' => 'Додаткові фільтри',
@@ -2946,6 +2945,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'Помилка',
         'An Error Occurred' => 'Виникла Помилка',
+        'Back to the previous page' => 'Повернутися до попередньої сторінки',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3211,7 +3211,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => 'Недостатньо прав.',
-        'Back to the previous page' => 'Повернутися до попередньої сторінки',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',
@@ -4212,6 +4211,7 @@ sub Data {
             '',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+        'The selected template type does not support attachments.' => '',
         'Change Attachment Relations for Template' => 'Змінити залежності прикріплення для шаблону',
         'Change Template Relations for Attachment' => 'Змінити залежності шаблону для прикріплення',
 
@@ -4274,6 +4274,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => '',
+        'Customer User Address Book' => '',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => 'Немає налаштувань для %s',
@@ -9522,6 +9523,7 @@ Thanks for your help!
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

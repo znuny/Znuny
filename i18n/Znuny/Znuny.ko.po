@@ -6926,7 +6926,7 @@ msgstr "고객 사용자"
 msgid "Note: Customer is invalid!"
 msgstr "고객이 바르지 않습니다."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
+#. Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
 msgid "Customer User Address Book"
 msgstr "고객 사용자 주소록"
 
@@ -9198,7 +9198,7 @@ msgstr "오늘의 메시지입니다. 이것을 %s에서 편집 할 수 있습�
 msgid "Insufficient Rights"
 msgstr "불충분한 권리"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "이전 페이지로 돌아가기"
 
@@ -25346,5 +25346,9 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Controls if the ticket mention entries are removed when a ticket is archived."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+msgid "The selected template type does not support attachments."
 msgstr ""
 

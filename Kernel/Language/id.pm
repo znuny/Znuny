@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.582401788565953;
+    $Self->{Completeness}        = 0.582308797700782;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2406,11 +2406,10 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Note: Customer is invalid!' => 'Perlu diketahui: Pelanggan tidak sah!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => '',
         'Search for recipients and add the results as \'%s\'.' => '',
         'Search template' => 'Pencarian template',
-        'Create Template' => 'Membuat template',
         'Create New' => 'Membuat baru',
+        'Create Template' => 'Membuat template',
         'Save changes in template' => 'Simpan pengubahan di dalam template',
         'Filters in use' => 'Filter digunakan',
         'Additional filters' => 'Filter tambahan',
@@ -2947,6 +2946,7 @@ bin/znuny.Daemon.pl status\').',
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'Error',
         'An Error Occurred' => 'Terjadi kesalahan',
+        'Back to the previous page' => 'Kembali ke halaman sebelumnya',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3212,7 +3212,6 @@ bin/znuny.Daemon.pl status\').',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => 'Hak cukup',
-        'Back to the previous page' => 'Kembali ke halaman sebelumnya',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',
@@ -4213,6 +4212,7 @@ bin/znuny.Daemon.pl status\').',
             '',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+        'The selected template type does not support attachments.' => '',
         'Change Attachment Relations for Template' => 'Ubah lampiran hubungan untuk template',
         'Change Template Relations for Attachment' => 'Ubah template relations untuk lampiran',
 
@@ -4275,6 +4275,7 @@ bin/znuny.Daemon.pl status\').',
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => '',
+        'Customer User Address Book' => '',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => 'Tidak ada jenis konfigurasi untuk %s',
@@ -9535,6 +9536,7 @@ Helpdesk Team Anda
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

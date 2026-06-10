@@ -6926,7 +6926,7 @@ msgstr "用戶"
 msgid "Note: Customer is invalid!"
 msgstr "注意：用戶是無效的！"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
+#. Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
 msgid "Customer User Address Book"
 msgstr ""
 
@@ -9187,7 +9187,7 @@ msgstr ""
 msgid "Insufficient Rights"
 msgstr "沒有足夠的權限"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "返回前一頁"
 
@@ -25337,5 +25337,9 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Controls if the ticket mention entries are removed when a ticket is archived."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+msgid "The selected template type does not support attachments."
 msgstr ""
 

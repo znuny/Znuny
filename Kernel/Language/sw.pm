@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%m/%d/%Y';
     $Self->{DateInputFormat}     = '%m/%d/%Y';
     $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
-    $Self->{Completeness}        = 0.421430852762696;
+    $Self->{Completeness}        = 0.421363563787322;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2408,11 +2408,10 @@ sub Data {
         'Note: Customer is invalid!' => 'Kidokezo: Mteja ni batili!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => '',
         'Search for recipients and add the results as \'%s\'.' => '',
         'Search template' => 'Tafuta kielezo',
-        'Create Template' => 'Tengeneza kielezo',
         'Create New' => 'Tenngeneza mpya',
+        'Create Template' => 'Tengeneza kielezo',
         'Save changes in template' => 'Hifadhi mabadiliko kwenye kielezo',
         'Filters in use' => 'Chuja katika kutumia',
         'Additional filters' => 'Vichuja vilivyoongezwa',
@@ -2948,6 +2947,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'Kasoro',
         'An Error Occurred' => '',
+        'Back to the previous page' => 'Nyuma kwenye ukurasa uliopita',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3213,7 +3213,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => 'Haki zisizotosha',
-        'Back to the previous page' => 'Nyuma kwenye ukurasa uliopita',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',
@@ -4214,6 +4213,7 @@ sub Data {
             '',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+        'The selected template type does not support attachments.' => '',
         'Change Attachment Relations for Template' => 'Badili mahusiano ya kiambatanisho kwa kielezo',
         'Change Template Relations for Attachment' => 'Badili mahusiano ya kielezo kwa kielezo',
 
@@ -4276,6 +4276,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => '',
+        'Customer User Address Book' => '',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => '',
@@ -9527,6 +9528,7 @@ Thanks for your help!
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

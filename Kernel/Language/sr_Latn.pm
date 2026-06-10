@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.858990737783456;
+    $Self->{Completeness}        = 0.858853584544148;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2411,11 +2411,10 @@ sub Data {
         'Note: Customer is invalid!' => 'Napomena: klijent je nevažeći!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => 'Adresar klijent korisnika',
         'Search for recipients and add the results as \'%s\'.' => 'Pretražite za primaoce i dodajte rezultate kao \'%s\'.',
         'Search template' => 'Šablon pretrage',
-        'Create Template' => 'Napravi šablon',
         'Create New' => 'Napravi nov',
+        'Create Template' => 'Napravi šablon',
         'Save changes in template' => 'Sačuvaj promene u šablonu',
         'Filters in use' => 'Filteri u upotrebi',
         'Additional filters' => 'Dodatni filteri',
@@ -2951,6 +2950,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'Greška',
         'An Error Occurred' => 'Dogodila se greška',
+        'Back to the previous page' => 'Vratite se na prethodnu stranu',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3216,7 +3216,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => 'Nedovoljna ovlaštenja',
-        'Back to the previous page' => 'Vratite se na prethodnu stranu',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => 'Upozorenje',
@@ -4217,6 +4216,7 @@ sub Data {
             '',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+        'The selected template type does not support attachments.' => '',
         'Change Attachment Relations for Template' => 'Promeni relacije sa prilozima za šablon',
         'Change Template Relations for Attachment' => 'Promeni relacije sa šablonima za prilog',
 
@@ -4279,6 +4279,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => 'Nije dat RecipientField!',
+        'Customer User Address Book' => 'Adresar klijent korisnika',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => 'Nema takve konfiguracije za %s',
@@ -9538,6 +9539,7 @@ Vaša tehnička podrška
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

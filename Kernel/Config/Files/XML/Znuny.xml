@@ -1104,6 +1104,14 @@
     </Setting>
 
     <!-- Dynamic field screens -->
+    <!--
+        ConfigKeysOfScreensByObjectType maps dynamic field object types (Ticket, Article, …) to SysConfig
+        keys that control dynamic fields and default columns per frontend screen. Required for
+        AdminDynamicFieldScreenConfiguration and DynamicField::ScreenConfiguration (import/export,
+        bulk activation per object type). Package registrations (e.g. ###FAQ) are merged at runtime.
+        If empty or missing for an object type: that type has no configurable screens in the admin
+        UI, screen lists stay empty, and bulk screen/column configuration cannot be applied.
+    -->
     <Setting Name="DynamicFields::ScreenConfiguration::ConfigKeysOfScreensByObjectType###Framework" Required="1" Valid="1">
         <Description Translatable="1">Config keys and their action to activate dynamic fields in different screens, grouped by object type.</Description>
         <Navigation>Frontend::Base::DynamicFieldScreens</Navigation>
@@ -1204,6 +1212,16 @@
             </Hash>
         </Value>
     </Setting>
+
+    <!--
+        ConfigKeysOfScreensWithoutMandatoryDynamicFieldSupport lists screens where SysConfig value 2
+        does not mean "mandatory/required" (e.g. zoom, print, overviews). Used by
+        ValidateDynamicFieldActivation in AdminDynamicFieldScreenConfiguration: on these screens,
+        assigning value 2 via the admin tool is corrected to 1 to avoid invalid mandatory flags.
+        If empty: no screen is treated as non-mandatory in that validation; required (2) could be
+        written to screens that only support disabled/enabled (0/1), which those screens would not
+        enforce correctly.
+    -->
     <Setting Name="DynamicFields::ScreenConfiguration::ConfigKeysOfScreensWithoutMandatoryDynamicFieldSupport###Framework" Required="1" Valid="1">
         <Description Translatable="1">Dynamic field screen config keys and their action for all screens that don't allow dynamic fields to be mandatory.</Description>
         <Navigation>Frontend::Base::DynamicFieldScreens</Navigation>

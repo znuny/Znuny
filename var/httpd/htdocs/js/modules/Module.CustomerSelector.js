@@ -388,7 +388,8 @@
 
             // Create the iframe HTML and show the dialog
             iframeHtml = '<iframe class="TextOption CustomerUserAddressBook" src="' + addressBookUrl + '"></iframe>';
-            Core.UI.Dialog.ShowContentDialog(iframeHtml, '', '10px', 'Center', true);
+
+            Core.UI.Dialog.ShowContentDialog(iframeHtml, Core.Language.Translate('Customer user address book'), '10px', 'Center', true);
         },
 
         /**

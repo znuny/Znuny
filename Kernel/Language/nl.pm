@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d-%m-%Y';
     $Self->{DateInputFormat}     = '%d-%m-%Y';
     $Self->{DateInputFormatLong} = '%d-%m-%Y - %T';
-    $Self->{Completeness}        = 0.477483232194187;
+    $Self->{Completeness}        = 0.477406993453616;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2411,11 +2411,10 @@ sub Data {
         'Note: Customer is invalid!' => 'Let op: klant is ongeldig!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => 'Klantgebruiker adresboek',
         'Search for recipients and add the results as \'%s\'.' => '',
         'Search template' => 'Sjabloon',
-        'Create Template' => 'Maak sjabloon',
         'Create New' => 'Nieuw',
+        'Create Template' => 'Maak sjabloon',
         'Save changes in template' => 'Sla wijzigingen op in sjabloon',
         'Filters in use' => 'Filters in gebruik',
         'Additional filters' => 'Extra filters',
@@ -2951,6 +2950,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'Fout',
         'An Error Occurred' => '',
+        'Back to the previous page' => 'Terug naar de vorige pagina',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3216,7 +3216,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => 'Onvoldoende permissies',
-        'Back to the previous page' => 'Terug naar de vorige pagina',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',
@@ -4217,6 +4216,7 @@ sub Data {
             '',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+        'The selected template type does not support attachments.' => '',
         'Change Attachment Relations for Template' => 'Verander gekoppelde bijlagen voor sjabloon',
         'Change Template Relations for Attachment' => 'Verander gekoppelde sjablonen voor bijlage',
 
@@ -4279,6 +4279,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => '',
+        'Customer User Address Book' => 'Klantgebruiker adresboek',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => 'Geen configuratie gevonden voor %s',
@@ -9538,6 +9539,7 @@ Het Helpdesk Team
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

@@ -6926,7 +6926,7 @@ msgstr "Користувач клієнта"
 msgid "Note: Customer is invalid!"
 msgstr "Примітка: Клієнт не є чинним!"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
+#. Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
 msgid "Customer User Address Book"
 msgstr ""
 
@@ -9194,7 +9194,7 @@ msgstr "Це повідомлення дня. Ви можете змінити �
 msgid "Insufficient Rights"
 msgstr "Недостатньо прав."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "Повернутися до попередньої сторінки"
 
@@ -25335,5 +25335,9 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Controls if the ticket mention entries are removed when a ticket is archived."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+msgid "The selected template type does not support attachments."
 msgstr ""
 

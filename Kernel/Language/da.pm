@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.335515809645481;
+    $Self->{Completeness}        = 0.335462238543829;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2408,11 +2408,10 @@ sub Data {
         'Note: Customer is invalid!' => 'Bemærk: Kunden er ugyldig',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => '',
         'Search for recipients and add the results as \'%s\'.' => '',
         'Search template' => 'Søgeskabelon',
-        'Create Template' => 'Opret skabelon',
         'Create New' => 'Opret ny',
+        'Create Template' => 'Opret skabelon',
         'Save changes in template' => 'Gem ændringer i skabelon',
         'Filters in use' => 'Aktive filtre',
         'Additional filters' => 'Yderligere filtre',
@@ -2948,6 +2947,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'Fejl',
         'An Error Occurred' => '',
+        'Back to the previous page' => 'Tilbage til forrige side',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3213,7 +3213,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => 'Utilstrækkelige rettigheder',
-        'Back to the previous page' => 'Tilbage til forrige side',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',
@@ -4214,6 +4213,7 @@ sub Data {
             '',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+        'The selected template type does not support attachments.' => '',
         'Change Attachment Relations for Template' => 'Ændr den vedhæftede fils relation til skabeloner',
         'Change Template Relations for Attachment' => 'Ændr Skabelonens relation til vedhæftede filer',
 
@@ -4276,6 +4276,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => 'Modtagerfeltet er ikke angivet',
+        'Customer User Address Book' => '',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => '',
@@ -9524,6 +9525,7 @@ Thanks for your help!
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

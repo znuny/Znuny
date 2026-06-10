@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.504471414883424;
+    $Self->{Completeness}        = 0.504390866996647;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2408,11 +2408,10 @@ sub Data {
         'Note: Customer is invalid!' => 'หมายเหตุ: ลูกค้านี้ไม่ถูกต้อง!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => '',
         'Search for recipients and add the results as \'%s\'.' => '',
         'Search template' => 'รูปแบบการค้นหา',
-        'Create Template' => 'สร้างแม่แบบ',
         'Create New' => 'สร้างใหม่',
+        'Create Template' => 'สร้างแม่แบบ',
         'Save changes in template' => 'บันทึกการเปลี่ยนแปลงในแม่แบบ',
         'Filters in use' => 'ตัวกรองที่ใช้งาน',
         'Additional filters' => 'ตัวกรองเพิ่มเติม',
@@ -2948,6 +2947,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'ข้อผิดพลาด',
         'An Error Occurred' => '',
+        'Back to the previous page' => 'กลับไปที่หน้าก่อนหน้านี้',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3213,7 +3213,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => 'สิทธิ์ไม่เพียงพอ',
-        'Back to the previous page' => 'กลับไปที่หน้าก่อนหน้านี้',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',
@@ -4214,6 +4213,7 @@ sub Data {
             '',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+        'The selected template type does not support attachments.' => '',
         'Change Attachment Relations for Template' => 'เปลี่ยนความสัมพันธ์ของสิ่งที่แนบมาสำหรับแม่แบบ',
         'Change Template Relations for Attachment' => 'เปลี่ยนความสัมพันธ์ของแม่แบบสำหรับสิ่งที่แนบมา',
 
@@ -4276,6 +4276,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => '',
+        'Customer User Address Book' => '',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => 'ไม่มีการตั้งค่าดังกล่าวสำหรับ %s',
@@ -9538,6 +9539,7 @@ Thanks for your help!
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

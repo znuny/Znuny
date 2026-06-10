@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.248802299584797;
+    $Self->{Completeness}        = 0.248762573846399;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2408,11 +2408,10 @@ sub Data {
         'Note: Customer is invalid!' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => '',
         'Search for recipients and add the results as \'%s\'.' => '',
         'Search template' => 'टेम्पलेट खोजें',
-        'Create Template' => 'टेम्पलेट बनाएँ',
         'Create New' => 'नया बनाएँ',
+        'Create Template' => 'टेम्पलेट बनाएँ',
         'Save changes in template' => 'टेम्पलेट में बदलाव सुरक्षित करें',
         'Filters in use' => '',
         'Additional filters' => '',
@@ -2948,6 +2947,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'त्रुटि',
         'An Error Occurred' => '',
+        'Back to the previous page' => 'पिछले पृष्ठ पर वापस जाएँ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3213,7 +3213,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => 'अपर्याप्त अधिकार',
-        'Back to the previous page' => 'पिछले पृष्ठ पर वापस जाएँ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',
@@ -4214,6 +4213,7 @@ sub Data {
             '',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+        'The selected template type does not support attachments.' => '',
         'Change Attachment Relations for Template' => '',
         'Change Template Relations for Attachment' => '',
 
@@ -4276,6 +4276,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => '',
+        'Customer User Address Book' => '',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => '',
@@ -9524,6 +9525,7 @@ Thanks for your help!
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

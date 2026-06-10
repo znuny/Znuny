@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.704726924305334;
+    $Self->{Completeness}        = 0.704614402043749;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2406,11 +2406,10 @@ sub Data {
         'Note: Customer is invalid!' => 'Nota: ¡El cliente es inválido!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => 'Libreta de Direcciones del Usuario del Cliente',
         'Search for recipients and add the results as \'%s\'.' => '',
         'Search template' => 'Buscar-Modelo',
-        'Create Template' => 'Crear Plantilla',
         'Create New' => 'Crear Nuevo(a)',
+        'Create Template' => 'Crear Plantilla',
         'Save changes in template' => 'Guardar los cambios en la plantilla',
         'Filters in use' => 'Filtros en uso',
         'Additional filters' => 'Filtros Adicionales',
@@ -2946,6 +2945,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'Error',
         'An Error Occurred' => 'Ha ocurrido un error',
+        'Back to the previous page' => 'Volver a la página anterior',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3211,7 +3211,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => 'Permisos insuficientes',
-        'Back to the previous page' => 'Volver a la página anterior',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => 'Alerta',
@@ -4212,6 +4211,7 @@ sub Data {
             '',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+        'The selected template type does not support attachments.' => '',
         'Change Attachment Relations for Template' => 'Cambiar relaciones de archivos adjuntos para la plantilla',
         'Change Template Relations for Attachment' => 'Cambiar las relaciones de plantilla para el archivo adjunto',
 
@@ -4274,6 +4274,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => '',
+        'Customer User Address Book' => 'Libreta de Direcciones del Usuario del Cliente',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => 'No existe tal configuración para %s',
@@ -9533,6 +9534,7 @@ Tu Equipo de Soporte
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

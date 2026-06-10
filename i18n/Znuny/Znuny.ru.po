@@ -6928,7 +6928,7 @@ msgstr "Учетная запись клиента"
 msgid "Note: Customer is invalid!"
 msgstr "Замечание: неверный клиент!"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
+#. Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
 msgid "Customer User Address Book"
 msgstr "Адресная книга клиентов"
 
@@ -9200,7 +9200,7 @@ msgstr "Это сообщение дня. Вы можете отредактир
 msgid "Insufficient Rights"
 msgstr "Недостаточно прав"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "Обратно на предыдущую страницу"
 
@@ -25352,5 +25352,9 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Controls if the ticket mention entries are removed when a ticket is archived."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+msgid "The selected template type does not support attachments."
 msgstr ""
 

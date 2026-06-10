@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.297668476525072;
+    $Self->{Completeness}        = 0.297620948427271;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2408,11 +2408,10 @@ sub Data {
         'Note: Customer is invalid!' => '注意：用戶是無效的！',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => '',
         'Search for recipients and add the results as \'%s\'.' => '',
         'Search template' => '搜索模板',
-        'Create Template' => '創建模板',
         'Create New' => '創建',
+        'Create Template' => '創建模板',
         'Save changes in template' => '保存變更為模板',
         'Filters in use' => '',
         'Additional filters' => '',
@@ -2949,6 +2948,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => '錯誤',
         'An Error Occurred' => '',
+        'Back to the previous page' => '返回前一頁',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3214,7 +3214,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => '沒有足夠的權限',
-        'Back to the previous page' => '返回前一頁',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',
@@ -4215,6 +4214,7 @@ sub Data {
             '',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+        'The selected template type does not support attachments.' => '',
         'Change Attachment Relations for Template' => '為模板指定附件',
         'Change Template Relations for Attachment' => '為附件指定模板',
 
@@ -4277,6 +4277,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => '',
+        'Customer User Address Book' => '',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => '',
@@ -9525,6 +9526,7 @@ Thanks for your help!
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

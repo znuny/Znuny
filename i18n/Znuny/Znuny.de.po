@@ -6928,7 +6928,7 @@ msgstr "Kundenbenutzer"
 msgid "Note: Customer is invalid!"
 msgstr "Hinweis: Kunde ist ungültig!"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
+#. Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
 msgid "Customer User Address Book"
 msgstr "Kundenbenutzer-Adressbuch"
 
@@ -9208,7 +9208,7 @@ msgstr "Das ist die Nachricht des Tages. Sie können diese in %s bearbeiten."
 msgid "Insufficient Rights"
 msgstr "Nicht ausreichende Rechte"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "Zurück zur vorhergehenden Seite"
 
@@ -25360,4 +25360,8 @@ msgstr "Ansicht nach Queue"
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Controls if the ticket mention entries are removed when a ticket is archived."
 msgstr "Steuert, ob die Erwahnungs-Eintrage eines Tickets entfernt werden, wenn ein Ticket archiviert wird."
+
+#. Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+msgid "The selected template type does not support attachments."
+msgstr "Der ausgewählte Vorlagentyp unterstützt keine Anhänge"
 

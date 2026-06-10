@@ -707,6 +707,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     .CustomerUserAdressBookSearch {
         background: var(--white);
+        padding: 20px 20px 0;
     }
 
     .CustomerUserAdressBookSearch .card {

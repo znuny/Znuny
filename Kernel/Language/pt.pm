@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d %T';
-    $Self->{Completeness}        = 0.297349089747684;
+    $Self->{Completeness}        = 0.297301612645697;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2408,11 +2408,10 @@ sub Data {
         'Note: Customer is invalid!' => 'Nota: Cliente está inválido!',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => '',
         'Search for recipients and add the results as \'%s\'.' => '',
         'Search template' => 'Modelo de pesquisa',
-        'Create Template' => 'Criar template',
         'Create New' => 'Criar novo',
+        'Create Template' => 'Criar template',
         'Save changes in template' => 'Guardar alterações ao template',
         'Filters in use' => 'Filtros em uso',
         'Additional filters' => 'Filtros adicionais',
@@ -2948,6 +2947,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'Erro',
         'An Error Occurred' => '',
+        'Back to the previous page' => 'Voltar à página anterior',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3213,7 +3213,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => 'Permissões insuficientes',
-        'Back to the previous page' => 'Voltar à página anterior',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '',
@@ -4214,6 +4213,7 @@ sub Data {
             '',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+        'The selected template type does not support attachments.' => '',
         'Change Attachment Relations for Template' => '',
         'Change Template Relations for Attachment' => '',
 
@@ -4276,6 +4276,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => '',
+        'Customer User Address Book' => '',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => '',
@@ -9537,6 +9538,7 @@ Devemos voltar a estar online dentro de momentos.',
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

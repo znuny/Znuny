@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.862344298946024;
+    $Self->{Completeness}        = 0.862206610250679;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2412,11 +2412,10 @@ sub Data {
         'Note: Customer is invalid!' => '注意：客户是无效的！',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-        'Customer User Address Book' => '客户用户通讯录',
         'Search for recipients and add the results as \'%s\'.' => '搜索收件人并将结果添加为“%s”。',
         'Search template' => '搜索模板',
-        'Create Template' => '创建模板',
         'Create New' => '创建搜索模板',
+        'Create Template' => '创建模板',
         'Save changes in template' => '保存变更到模板',
         'Filters in use' => '正在使用的过滤器',
         'Additional filters' => '其他可用的过滤器',
@@ -2952,6 +2951,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'Error（错误）',
         'An Error Occurred' => '发生了一个错误',
+        'Back to the previous page' => '返回前一页',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => '',
@@ -3217,7 +3217,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => '没有足够的权限',
-        'Back to the previous page' => '返回前一页',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => '警告',
@@ -4218,6 +4217,7 @@ sub Data {
             '',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+        'The selected template type does not support attachments.' => '',
         'Change Attachment Relations for Template' => '为模板指定附件',
         'Change Template Relations for Attachment' => '为附件指定模板',
 
@@ -4280,6 +4280,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
         'No RecipientField is given!' => '没有指定收件人字段！',
+        'Customer User Address Book' => '客户用户通讯录',
 
         # Perl Module: Kernel/Modules/AgentDashboardCommon.pm
         'No such config for %s' => '没有%s 的配置',
@@ -9538,6 +9539,7 @@ Thanks for your help!
         'Current selection',
         'Currently not possible',
         'Customer interface does not support articles not visible for customers.',
+        'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',

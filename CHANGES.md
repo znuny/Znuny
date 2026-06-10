@@ -1,3 +1,10 @@
+# 7.3.4 2026-??-??
+ - 2026-06-01 Fixed: Notification about changed system configuration in dialog AdminSystemConfiguration.
+ - 2026-06-01 Fixed: Attachments can no longer be assigned to Snippet templates in AdminTemplateAttachment.
+ - 2026-06-01 Fixed: Copy ticket number icon missing when Ticket::Hook is customized. Thanks to @mamojdick for reporting the issue. [#805](https://github.com/znuny/Znuny/issues/805)
+ - 2026-05-28 Added: Agent and customer error pages now show configurable link for next action.
+ - 2026-05-08 Fixed: Configured limit for activities is not applied correctly.
+
 # 7.3.3 2026-05-27
  - 2026-05-26 Fixed: Package manager does not use the user ID for package operations.
  - 2026-05-20 CVE-2025-26843: Fixed: Infinite loop on replacing tags in template generator.

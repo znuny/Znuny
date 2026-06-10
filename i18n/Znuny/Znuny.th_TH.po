@@ -6929,7 +6929,7 @@ msgstr "ลูกค้าผู้ใช้"
 msgid "Note: Customer is invalid!"
 msgstr "หมายเหตุ: ลูกค้านี้ไม่ถูกต้อง!"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
+#. Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
 msgid "Customer User Address Book"
 msgstr ""
 
@@ -9197,7 +9197,7 @@ msgstr "ข้อความนี้เป็นข้อความของ
 msgid "Insufficient Rights"
 msgstr "สิทธิ์ไม่เพียงพอ"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "กลับไปที่หน้าก่อนหน้านี้"
 
@@ -25352,5 +25352,9 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Controls if the ticket mention entries are removed when a ticket is archived."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+msgid "The selected template type does not support attachments."
 msgstr ""
 

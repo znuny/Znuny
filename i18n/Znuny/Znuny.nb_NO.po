@@ -6940,7 +6940,7 @@ msgstr "Kunde-bruker"
 msgid "Note: Customer is invalid!"
 msgstr "Merk: Kunden er ugyldig!"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
+#. Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
 msgid "Customer User Address Book"
 msgstr ""
 
@@ -9200,7 +9200,7 @@ msgstr ""
 msgid "Insufficient Rights"
 msgstr "Utilstrekkelige rettigheter"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "Tilbake til forrige side"
 
@@ -25349,5 +25349,9 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Controls if the ticket mention entries are removed when a ticket is archived."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+msgid "The selected template type does not support attachments."
 msgstr ""
 
