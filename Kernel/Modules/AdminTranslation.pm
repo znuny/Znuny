@@ -82,6 +82,13 @@ sub Run {
     my %NotifiyParam = (
         Priority => $Param{NotificationPriority} || 'Info',
         Info     => Translatable( $Param{Notification} ),
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    my $NotificationTranslated = $LayoutObject->{LanguageObject}->Translate( $Param{Notification} );
+
+    my %NotifiyParam = (
+        Priority => $Param{NotificationPriority} || 'Info',
+        Info     => $NotificationTranslated,
     );
 
     if ( !IsStringWithData( $Self->{Subaction} ) ) {
