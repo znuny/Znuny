@@ -365,28 +365,28 @@
     </Setting>
     <Setting Name="AgentShortcutIcon" Required="0" Valid="1">
         <Description Translatable="1">The shortcut icon for the agent interface.</Description>
-        <Navigation>Frontend::Customer</Navigation>
+        <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">skins/Agent/default/img/icons/product.ico</Item>
         </Value>
     </Setting>
     <Setting Name="AgentShortcutIconCustom###default" Required="0" Valid="1">
         <Description Translatable="1">The shortcut icon for the agent interface fot the skin "default".</Description>
-        <Navigation>Frontend::Customer</Navigation>
+        <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">skins/Agent/default/img/icons/product.ico</Item>
         </Value>
     </Setting>
     <Setting Name="AgentAppleTouchIcon" Required="0" Valid="1">
         <Description Translatable="1">The Apple touch icon for the agent interface.</Description>
-        <Navigation>Frontend::Customer</Navigation>
+        <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">skins/Agent/default/img/icons/apple-touch-icon.png</Item>
         </Value>
     </Setting>
     <Setting Name="AgentAppleTouchIconCustom###default" Required="0" Valid="1">
         <Description Translatable="1">The Apple touch icon for the agent interface for the skin "default".</Description>
-        <Navigation>Frontend::Customer</Navigation>
+        <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">skins/Agent/default/img/icons/apple-touch-icon.png</Item>
         </Value>

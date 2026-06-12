@@ -4,6 +4,7 @@
  - 2026-06-01 Fixed: Copy ticket number icon missing when Ticket::Hook is customized. Thanks to @mamojdick for reporting the issue. [#805](https://github.com/znuny/Znuny/issues/805)
  - 2026-05-28 Added: Agent and customer error pages now show configurable link for next action.
  - 2026-05-08 Fixed: Configured limit for activities is not applied correctly.
+ - 2026-05-08 Changed: Updated bundled CPAN module Devel::StackTrace to 2.05.
 
 # 7.3.3 2026-05-27
  - 2026-05-26 Fixed: Package manager does not use the user ID for package operations.
