@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.839214433977327;
+    $Self->{Completeness}        = 0.837988826815642;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2279,7 +2279,8 @@ sub Data {
             'Если значение окрашено красным, оно отсутствует в списке возможных значений в конфигурации динамического поля.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
-        'Translation' => '',
+        'Import Translation' => '',
+        'Export Translation' => '',
         'Translation Management' => '',
         'Add Translation' => '',
         'Edit Translation' => '',
@@ -2738,14 +2739,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => 'Отправить личное сообщение для %s%s%s',
-        'All fields marked with an asterisk (*) are mandatory.' => 'Все поля отмеченные (*) являются обязательными',
-        'Cancel & close' => 'Отменить и закрыть',
-        'Select one or more recipients from the customer user address book.' =>
-            'Выберите одного или более получателей из адресной книги клиентов.',
-        'Customer user address book' => 'Адресная книга клиентов',
-        'Remove Ticket Customer' => 'Удалить клиента-инициатора заявки',
-        'Remove Cc' => 'Удалить из копии',
-        'Remove Bcc' => 'Удалить из скрытой копии',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s %s)!' => 'Заявка %s: время первого ответа истекло (%s/%s)!',
@@ -4225,6 +4218,15 @@ sub Data {
         'The selected template type does not support attachments.' => '',
         'Change Attachment Relations for Template' => 'Изменить связи Вложений с Шаблоном',
         'Change Template Relations for Attachment' => 'Изменить связи Шаблонов с Вложением',
+
+        # Perl Module: Kernel/Modules/AdminTranslation.pm
+        'Import / Export' => '',
+        'Here you can upload a configuration file to import translations to your system. The file needs to be in .yml | .csv | .xlsx format.' =>
+            '',
+        'Could not find translation for ID %s.' => '',
+        'Translation stored.' => '',
+        'Storing translation failed.' => '',
+        'Translations synchronized.' => '',
 
         # Perl Module: Kernel/Modules/AdminType.pm
         'Need Type!' => 'Требуется Type!',
@@ -8570,6 +8572,7 @@ sub Data {
             'Этот параметр имеет подчиненные элементы и не может быть удален в настоящее время.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
+        'Customer user address book' => 'Адресная книга клиентов',
         'Select a customer ID to assign to this ticket' => 'Выберите компанию для назначения этой заявке',
         'Do you really want to continue?' => 'Действительно продолжить?',
 
@@ -9400,6 +9403,7 @@ Thanks for your help!
         'To accept login information, such as an EULA or license.' => 'Принять регистрационную информацию, такую как EULA или лицензию.',
         'To download attachments.' => 'Для загрузки вложение.',
         'To view HTML attachments.' => 'Для просмотра HTML вложений.',
+        'Translation' => '',
         'Tree view' => 'Иерархический вид',
         'Turkish' => 'Турецкий',
         'Tweak the system as you wish.' => 'Оптимизируйте систему по своему усмотрению.',

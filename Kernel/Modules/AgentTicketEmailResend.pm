@@ -113,25 +113,37 @@ sub Run {
                 UserID   => $Self->{UserID}
             );
 
-            # Set new owner if ticket owner is different then logged user.
-            if ( $Lock && ( $Ticket{OwnerID} != $Self->{UserID} ) ) {
+            if ($Lock) {
 
-                # Remember previous owner, which will be used to restore ticket owner on undo action.
-                $Ticket{PreviousOwner} = $Ticket{OwnerID};
+                # Set new owner if ticket owner is different then logged user.
+                if ( $Ticket{OwnerID} != $Self->{UserID} ) {
 
-                my $Success = $TicketObject->TicketOwnerSet(
-                    TicketID  => $Self->{TicketID},
-                    UserID    => $Self->{UserID},
-                    NewUserID => $Self->{UserID},
-                );
+                    # Remember previous owner, which will be used to restore ticket owner on undo action.
+                    $Param{PreviousOwner} = $Ticket{OwnerID};
+
+                    $TicketObject->TicketOwnerSet(
+                        TicketID  => $Self->{TicketID},
+                        UserID    => $Self->{UserID},
+                        NewUserID => $Self->{UserID},
+                    );
+                }
 
                 # Show lock state.
-                if ( !$Success ) {
-                    return $LayoutObject->FatalError();
-                }
+                $LayoutObject->Block(
+                    Name => 'PropertiesLock',
+                    Data => {
+                        %Param,
+                        TicketID => $Self->{TicketID},
+                    },
+                );
+                $LayoutObject->Block(
+                    Name => 'PropertiesLockNotify',
+                    Data => {
+                        %Param,
+                        TicketID => $Self->{TicketID},
+                    },
+                );
             }
-
-            $TicketBackType .= 'Undo';
         }
         else {
             my $AccessOk = $TicketObject->OwnerCheck(
@@ -151,9 +163,28 @@ sub Run {
                 $Output .= $LayoutObject->Footer(
                     Type => 'Small',
                 );
+
                 return $Output;
             }
+            else {
+                $LayoutObject->Block(
+                    Name => 'TicketBack',
+                    Data => {
+                        %Param,
+                        TicketID => $Self->{TicketID},
+                    },
+                );
+            }
         }
+    }
+    else {
+        $LayoutObject->Block(
+            Name => 'TicketBack',
+            Data => {
+                %Param,
+                TicketID => $Self->{TicketID},
+            },
+        );
     }
 
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
@@ -552,7 +583,6 @@ sub Run {
                 MultipleCustomerBcc => \@MultipleCustomerBcc,
                 Attachments         => \@Attachments,
                 GetParam            => \%GetParam,
-                TicketBackType      => $TicketBackType,
                 %Ticket,
                 %GetParam,
             );
@@ -898,7 +928,6 @@ sub Run {
             GetParam            => \%GetParam,
             %Ticket,
             %Data,
-            TicketBackType => $TicketBackType,
         );
         $Output .= $LayoutObject->Footer(
             Type => 'Small',
@@ -1164,13 +1193,6 @@ sub _Mask {
 
         $Param{To} = '';
     }
-
-    $LayoutObject->Block(
-        Name => $Param{TicketBackType},
-        Data => {
-            %Param,
-        },
-    );
 
     # Show time accounting box.
     if ( $ConfigObject->Get('Ticket::Frontend::AccountTime') ) {

@@ -35,7 +35,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.57735909308638;
+    $Self->{Completeness}        = 0.576217079010375;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2276,7 +2276,8 @@ sub Data {
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
-        'Translation' => '',
+        'Import Translation' => '',
+        'Export Translation' => '',
         'Translation Management' => '',
         'Add Translation' => '',
         'Edit Translation' => '',
@@ -2735,14 +2736,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => 'Reinvia email per %s%s%s',
-        'All fields marked with an asterisk (*) are mandatory.' => 'Tutti i campi marcati con un asterisco (*) sono obbligatori.',
-        'Cancel & close' => 'Annulla e chiudi',
-        'Select one or more recipients from the customer user address book.' =>
-            'Seleziona uno o più destinatari dalla rubrica dell\'utenza cliente.',
-        'Customer user address book' => 'Rubrica utenze clienti',
-        'Remove Ticket Customer' => 'Rimuovi ticket del cliente',
-        'Remove Cc' => 'Rimuovi Cc',
-        'Remove Bcc' => 'Rimuovi Ccn',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s %s)!' => 'Ticket %s: il tempo di prima risposta è scaduto (%s/%s)!',
@@ -4222,6 +4215,15 @@ sub Data {
         'The selected template type does not support attachments.' => '',
         'Change Attachment Relations for Template' => '',
         'Change Template Relations for Attachment' => '',
+
+        # Perl Module: Kernel/Modules/AdminTranslation.pm
+        'Import / Export' => '',
+        'Here you can upload a configuration file to import translations to your system. The file needs to be in .yml | .csv | .xlsx format.' =>
+            '',
+        'Could not find translation for ID %s.' => '',
+        'Translation stored.' => '',
+        'Storing translation failed.' => '',
+        'Translations synchronized.' => '',
 
         # Perl Module: Kernel/Modules/AdminType.pm
         'Need Type!' => '',
@@ -8571,6 +8573,7 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
             '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
+        'Customer user address book' => 'Rubrica utenze clienti',
         'Select a customer ID to assign to this ticket' => '',
         'Do you really want to continue?' => 'Vuoi davvero continuare?',
 
@@ -9401,6 +9404,7 @@ Il tuo helpdesk.
         'To accept login information, such as an EULA or license.' => 'Per accettare le informazioni di accesso, come un EULA o una licenza.',
         'To download attachments.' => 'Per scaricare gli allegati.',
         'To view HTML attachments.' => 'Per visualizzare gli allegati HTML.',
+        'Translation' => '',
         'Tree view' => 'Vista ad albero',
         'Turkish' => 'Turco',
         'Tweak the system as you wish.' => 'Modifica il sistema a tuo piacimento.',

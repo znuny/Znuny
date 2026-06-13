@@ -1186,6 +1186,9 @@ Core.Agent.Dashboard = (function (TargetNS) {
         var LinkPage, ColumnFilterName, Filter, AdditionalFilter, ColumnFilterID, CustomerID, CustomerUserID;
 
         $('#ColumnFilter' + Core.App.EscapeSelector(ColumnFilterSort.HeaderColumnName) + Core.App.EscapeSelector(ColumnFilterSort.Name)).off('change').on('change', function(){
+            if ($(this).val() === null) {
+                return false;
+            }
 
             LinkPage         = '';
             Filter           = $('#Filter' + Core.App.EscapeSelector(ColumnFilterSort.Name)).val() || 'All';
@@ -1330,6 +1333,10 @@ Core.Agent.Dashboard = (function (TargetNS) {
     function GenericHeaderColumnFilter (ColumnFilter) {
         $('#ColumnFilter' + Core.App.EscapeSelector(ColumnFilter.HeaderColumnName) + Core.App.EscapeSelector(ColumnFilter.Name)).off('change').on('change', function(){
             var LinkPage, ColumnFilterName, Filter, AdditionalFilter, ColumnFilterID, CustomerID, CustomerUserID;
+
+            if ($(this).val() === null) {
+                return false;
+            }
 
             LinkPage         = '';
             Filter           = $('#Filter' + Core.App.EscapeSelector(ColumnFilter.Name)).val() || 'All';

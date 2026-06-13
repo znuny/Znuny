@@ -50,7 +50,7 @@
             </div>
             <div class="Content">
                 <p class='FieldExplanation'>
-                    [% Translate(Data.Explanation, Translate('Translation'),Translate('Translation')) | html %]
+                    [% Translate(Data.Explanation) | html %]
                 </p>
                 <ul class='ActionList'>
                     <li>
@@ -78,7 +78,7 @@
                             </fieldset>
                             <button class='CallForAction Fullsize Center' id='TranslationImport' type='submit'>
                                 <span><i class='fa fa-upload'></i>
-                                    Translation [% Translate('Import') | html %]
+                                    [% Translate('Import Translation') | html %]
                                 </span>
                             </button>
                         </form>
@@ -86,7 +86,7 @@
                     <li>
                         <a href='[% Env("Baselink") %]Action=[% Data.Action | html %];Subaction=Export' id='TranslationExport' class='CallForAction Fullsize Center'>
                             <span><i class='fa fa-download'></i>
-                                Translation [% Translate('Export') | html %]
+                                [% Translate('Export Translation') | html %]
                             </span>
                         </a>
                     </li>

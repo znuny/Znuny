@@ -7760,7 +7760,7 @@ msgstr "Antwort für %s%s%s verfassen"
 msgid "Date Invalid!"
 msgstr "Ungültiges Datum!"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
+#. JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
 msgid "Customer user address book"
 msgstr "Kundenbenutzer-Adressbuch"
 
@@ -24401,7 +24401,7 @@ msgstr "Für dieses dynamische Feld gibt es keine Konfiguration."
 msgid "Dynamic fields administration"
 msgstr "dynamische Felder Administration"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+#. SysConfig
 msgid "Translation"
 msgstr "Übersetzung"
 
@@ -25351,7 +25351,7 @@ msgstr "Kundenbenutzer bearbeiten"
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view."
-msgstr ""
+msgstr "Ermöglicht die Ticket-Suche mit dem Administrator-Benutzer (ID 1) statt dem eingeloggten Benutzer. Wirkt sich nur auf diese Ansicht aus."
 
 #. Perl Module: Kernel/Modules/AgentTicketQueue.pm
 msgid "Queue View"
@@ -25364,4 +25364,36 @@ msgstr "Steuert, ob die Erwahnungs-Eintrage eines Tickets entfernt werden, wenn 
 #. Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
 msgid "The selected template type does not support attachments."
 msgstr "Der ausgewählte Vorlagentyp unterstützt keine Anhänge"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+msgid "Import Translation"
+msgstr "Übersetzung importieren"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+msgid "Export Translation"
+msgstr "Übersetzung exportieren"
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Import / Export"
+msgstr "Importieren / Exportieren"
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Here you can upload a configuration file to import translations to your system. The file needs to be in .yml | .csv | .xlsx format."
+msgstr "Hier können Sie eine Konfigurationsdatei hochladen, um Übersetzungen in Ihr System zu importieren. Die Datei muss im Format .yml | .csv | .xlsx vorliegen."
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Could not find translation for ID %s."
+msgstr "Übersetzung für ID %s nicht gefunden."
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Translation stored."
+msgstr "Übersetzung gespeichert."
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Storing translation failed."
+msgstr "Speichern der Übersetzung fehlgeschlagen."
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Translations synchronized."
+msgstr "Übersetzungen synchronisiert."
 

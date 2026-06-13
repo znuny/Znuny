@@ -156,6 +156,9 @@ Core.Agent.Overview = (function (TargetNS) {
 
         // change event for column filter
         $('.ColumnFilter').on('change', function () {
+            if ($(this).val() === null) {
+                return false;
+            }
 
             // define variables
             URL = Core.Config.Get("Baselink") + 'Action=' + Core.Config.Get("Action") + ';' + Core.Config.Get('LinkPage');

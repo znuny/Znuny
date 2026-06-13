@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.999680664218426;
+    $Self->{Completeness}        = 0.998403830806065;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2273,7 +2273,8 @@ sub Data {
             'Ha egy érték pirosra van színezve, akkor az hiányzik a dinamikus mező beállításának lehetséges értékei listájából.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
-        'Translation' => 'Fordítás',
+        'Import Translation' => '',
+        'Export Translation' => '',
         'Translation Management' => 'Fordításkezelés',
         'Add Translation' => 'Fordítás hozzáadása',
         'Edit Translation' => 'Fordítás szerkesztése',
@@ -2732,14 +2733,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => 'E-mail újraküldése ennél: %s%s%s',
-        'All fields marked with an asterisk (*) are mandatory.' => 'A csillaggal (*) megjelölt összes mező kötelező.',
-        'Cancel & close' => 'Megszakítás és bezárás',
-        'Select one or more recipients from the customer user address book.' =>
-            'Egy vagy több címzett kiválasztása az ügyfél-felhasználó címjegyzékből.',
-        'Customer user address book' => 'Ügyfél-felhasználó címjegyzék',
-        'Remove Ticket Customer' => 'Jegy ügyfél eltávolítása',
-        'Remove Cc' => 'Másolat eltávolítása',
-        'Remove Bcc' => 'Rejtett másolat eltávolítása',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s %s)!' => '%s jegy: az első válaszidő lejárt (%s %s)!',
@@ -4219,6 +4212,15 @@ sub Data {
         'The selected template type does not support attachments.' => '',
         'Change Attachment Relations for Template' => 'Mellékletkapcsolatok megváltoztatása egy sablonnál',
         'Change Template Relations for Attachment' => 'Sablonkapcsolatok megváltoztatása egy mellékletnél',
+
+        # Perl Module: Kernel/Modules/AdminTranslation.pm
+        'Import / Export' => '',
+        'Here you can upload a configuration file to import translations to your system. The file needs to be in .yml | .csv | .xlsx format.' =>
+            '',
+        'Could not find translation for ID %s.' => '',
+        'Translation stored.' => '',
+        'Storing translation failed.' => '',
+        'Translations synchronized.' => '',
 
         # Perl Module: Kernel/Modules/AdminType.pm
         'Need Type!' => 'Típus szükséges!',
@@ -8564,6 +8566,7 @@ sub Data {
             'Ennek az elemnek gyermekelemei vannak, és jelenleg nem lehet eltávolítani.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
+        'Customer user address book' => 'Ügyfél-felhasználó címjegyzék',
         'Select a customer ID to assign to this ticket' => 'Ügyfél-azonosító kiválasztása, hogy hozzárendelje ehhez a jegyhez',
         'Do you really want to continue?' => 'Valóban folytatni akarja?',
 
@@ -9394,6 +9397,7 @@ Az Ön ügyfélszolgálati csapata
         'To accept login information, such as an EULA or license.' => 'Bejelentkezési információk elfogadásához, mint például EULA vagy licenc.',
         'To download attachments.' => 'Mellékletek letöltéséhez.',
         'To view HTML attachments.' => 'HTML mellékletek megtekintéséhez.',
+        'Translation' => 'Fordítás',
         'Tree view' => 'Fa nézet',
         'Turkish' => 'Török',
         'Tweak the system as you wish.' => 'A rendszer finomhangolása, ahogy szeretné.',

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2026-05-27 06:14+0000\n"
+"POT-Creation-Date: 2026-06-12 20:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6767,7 +6767,11 @@ msgid "If a value is colored red, it is missing from the possible values list of
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
-msgid "Translation"
+msgid "Import Translation"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+msgid "Export Translation"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
@@ -7207,10 +7211,6 @@ msgid "Note: Customer is invalid!"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-msgid "Customer User Address Book"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
 msgid "Search for recipients and add the results as '%s'."
 msgstr ""
 
@@ -7219,11 +7219,11 @@ msgid "Search template"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-msgid "Create Template"
+msgid "Create New"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
-msgid "Create New"
+msgid "Create Template"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
@@ -8098,34 +8098,6 @@ msgstr ""
 msgid "Resend Email for %s%s%s"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "All fields marked with an asterisk (*) are mandatory."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Cancel & close"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Select one or more recipients from the customer user address book."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Customer user address book"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Remove Ticket Customer"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Remove Cc"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Remove Bcc"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
 msgid "Ticket %s: first response time is over (%s %s)!"
 msgstr ""
@@ -8704,6 +8676,10 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "An Error Occurred"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
+msgid "Back to the previous page"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
@@ -9432,10 +9408,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
 msgid "Insufficient Rights"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
-msgid "Back to the previous page"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
@@ -12150,6 +12122,30 @@ msgstr ""
 msgid "Change Template Relations for Attachment"
 msgstr ""
 
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Import / Export"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Here you can upload a configuration file to import translations to your system. The file needs to be in .yml | .csv | .xlsx format."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Could not find translation for ID %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Translation stored."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Storing translation failed."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Translations synchronized."
+msgstr ""
+
 #. Perl Module: Kernel/Modules/AdminType.pm
 msgid "Need Type!"
 msgstr ""
@@ -12316,6 +12312,10 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
 msgid "No RecipientField is given!"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AgentCustomerUserAddressBook.pm
+msgid "Customer User Address Book"
 msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentDashboardCommon.pm
@@ -21995,6 +21995,10 @@ msgid "This element has children elements and can currently not be removed."
 msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
+msgid "Customer user address book"
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
 msgid "Select a customer ID to assign to this ticket"
 msgstr ""
 
@@ -24839,6 +24843,10 @@ msgstr ""
 
 #. SysConfig
 msgid "To view HTML attachments."
+msgstr ""
+
+#. SysConfig
+msgid "Translation"
 msgstr ""
 
 #. SysConfig
