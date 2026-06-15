@@ -684,6 +684,7 @@ sub _GetUsersOfGroups {
 
     my $GroupObject = $Kernel::OM->Get('Kernel::System::Group');
     my $LogObject   = $Kernel::OM->Get('Kernel::System::Log');
+    my $UserObject  = $Kernel::OM->Get('Kernel::System::User');
 
     NEEDED:
     for my $Needed (qw(Groups)) {
@@ -712,6 +713,16 @@ sub _GetUsersOfGroups {
             Type    => 'ro',
         );
         next GROUP if !%GroupUsers;
+
+        # make sure original user logins will
+        # be used as otherwise it won't work
+        # for users out of office
+        for my $UserID ( sort keys %GroupUsers ) {
+            my $UserLogin = $UserObject->UserLookup(
+                UserID => $UserID,
+            );
+            $GroupUsers{$UserID} = $UserLogin;
+        }
 
         %Users = ( %Users, %GroupUsers );
     }

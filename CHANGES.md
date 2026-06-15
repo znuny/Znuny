@@ -1,4 +1,5 @@
 # 6.5.22 2026-??-??
+ - 2026-06-12 Fixed: Issue with mentioning out of office users via group mention.
  - 2026-06-01 Added: Agent and customer error pages now show configurable link for next action.
  - 2026-06-01 Fixed: Attachments can no longer be assigned to Snippet templates in AdminTemplateAttachment.
 
