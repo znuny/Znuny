@@ -1769,15 +1769,15 @@ sub Run {
                 );
             }
 
-            next TICKETID if scalar(@Articles) == 0;
+            if (@Articles) {
+                my $Article = $Articles[0];
+                my %Article = $ArticleObject->BackendForArticle( %{$Article} )->ArticleGet(
+                    %{$Article},
+                    DynamicFields => 0,
+                );
 
-            my $Article = $Articles[0];
-            my %Article = $ArticleObject->BackendForArticle( %{$Article} )->ArticleGet(
-                %{$Article},
-                DynamicFields => 0,
-            );
+                next TICKETID if !$Article{ArticleID};
 
-            if ( $Article{ArticleID} ) {
                 my %ArticleFields = $LayoutObject->ArticleFields(
                     TicketID  => $TicketID,
                     ArticleID => $Article{ArticleID},
