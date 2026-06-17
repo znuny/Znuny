@@ -53,23 +53,21 @@ sub Run {
                 $LinkURL .= ';' . $LayoutObject->{SessionName} . '=' . $LayoutObject->{SessionID};
             }
 
-            my $Actions = $JSONObject->Encode(
-                Data => [
-                    {
-                        url     => $LinkURL,
-                        text    => $LayoutObject->{LanguageObject}->Translate('Standard Deploy'),
-                        type    => 'primary',
-                        classes => 'CallForAction btn-main btn-primary',
-                    },
-                    {
-                        url     => '#',
-                        id      => 'QuickDeploy',
-                        text    => $LayoutObject->{LanguageObject}->Translate('Quick Deploy'),
-                        type    => 'ghost',
-                        classes => 'CallForAction btn-main btn-primary-ghost',
-                    },
-                ],
-            );
+            my $Actions = [
+                {
+                    url     => $LinkURL,
+                    text    => $LayoutObject->{LanguageObject}->Translate('Standard Deploy'),
+                    type    => 'primary',
+                    classes => 'CallForAction btn-main btn-primary',
+                },
+                {
+                    url     => '#',
+                    id      => 'QuickDeploy',
+                    text    => $LayoutObject->{LanguageObject}->Translate('Quick Deploy'),
+                    type    => 'ghost',
+                    classes => 'CallForAction btn-main btn-primary-ghost',
+                },
+            ];
 
             return $LayoutObject->Notify(
                 Priority        => 'Notice',

@@ -131,7 +131,7 @@ sub IsFrontendContext {
 
 =head2 Base64DeepEncode()
 
-    Base-64 encodes elements of given data for given keys.
+    Base64 encodes elements of given data for given keys.
     If data is an array, all of its child elements will be checked for given keys whose elements
     will be encoded recursively.
 
@@ -144,7 +144,7 @@ sub IsFrontendContext {
             # ...
         },
         HashKeys => [
-            # All 'Body' elements of array $Hash->{Articles} will be base-64 encoded.
+            # All 'Body' elements of array $Hash->{Articles} will be Base64 encoded.
             # Also can mean: $Hash->{Articles}->{Body}, if 'Articles' is a hash.
             # Will encode nothing if last key ('Body') cannot be reached or is not a scalar/string.
             'Articles->Body',

@@ -11,6 +11,7 @@ package Kernel::System::Console::Command::Admin::Package::Uninstall;
 
 use strict;
 use warnings;
+use utf8;
 
 use parent qw(Kernel::System::Console::BaseCommand Kernel::System::Console::Command::Admin::Package::List);
 
@@ -23,6 +24,12 @@ sub Configure {
     my ( $Self, %Param ) = @_;
 
     $Self->Description('Uninstall a package.');
+    $Self->AddOption(
+        Name        => 'keep-data',
+        Description => 'Keep the package\'s database entries when uninstalling.',
+        Required    => 0,
+        HasValue    => 0,
+    );
     $Self->AddOption(
         Name        => 'force',
         Description => 'Force package uninstallation even if validation fails.',
@@ -99,9 +106,10 @@ sub Run {
 
     # Uninstall
     my $Success = $Kernel::OM->Get('Kernel::System::Package')->PackageUninstall(
-        String => $FileString,
-        Force  => $Self->GetOption('force'),
-        UserID => 1,
+        String   => $FileString,
+        Force    => $Self->GetOption('force'),
+        KeepData => $Self->GetOption('keep-data') ? 1 : 0,
+        UserID   => 1,
     );
 
     if ( !$Success ) {

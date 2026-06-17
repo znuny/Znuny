@@ -7785,7 +7785,7 @@ msgstr "Niepoprawna data!"
 msgid "Select one or more recipients from the customer user address book."
 msgstr "Wybierz jednego lub więcej odbiorców z książki adresowej użytkowników klientów"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
+#. JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
 msgid "Customer user address book"
 msgstr ""
 
@@ -9225,7 +9225,7 @@ msgstr ""
 msgid "Insufficient Rights"
 msgstr "Niewystarczające uprawnienia"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "Powrót do poprzedniej strony"
 
@@ -24410,7 +24410,7 @@ msgstr ""
 msgid "Dynamic fields administration"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+#. SysConfig
 msgid "Translation"
 msgstr ""
 
@@ -25372,5 +25372,97 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Controls if the ticket mention entries are removed when a ticket is archived."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+msgid "The selected template type does not support attachments."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+msgid "Import Translation"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+msgid "Export Translation"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Import / Export"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Here you can upload a configuration file to import translations to your system. The file needs to be in .yml | .csv | .xlsx format."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Could not find translation for ID %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Translation stored."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Storing translation failed."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Translations synchronized."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Fields to be omitted from payload"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Field"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Remove field"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Add field to be omitted from payload"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Restore omitted fields"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Fields which will be removed from the payload of the request, e.g. 'SomeField1'. Nested fields can be referenced by connecting them with '->', e.g. 'SomeField1->SomeField2->SomeField3'."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Fields to be Base64 encoded in payload"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Add field to be Base64 encoded in payload"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Restore Base64 encoded fields"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Fields which will be Base64 encoded in payload of the request, e.g. 'SomeField1'. Nested fields can be referenced by connecting them with '->', e.g. 'SomeField1->SomeField2->SomeField3'."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Global mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Content of different fields can be given by separating those fields by ';'."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Global mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Different fields can be omitted by separating them by ';'."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Uninstall package and data"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Uninstall package only"
 msgstr ""
 

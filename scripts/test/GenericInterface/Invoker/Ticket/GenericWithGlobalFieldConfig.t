@@ -25,7 +25,6 @@ $Kernel::OM->ObjectParamAdd(
 my $ConfigObject             = $Kernel::OM->Get('Kernel::Config');
 my $HelperObject             = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $ZnunyHelperObject        = $Kernel::OM->Get('Kernel::System::ZnunyHelper');
-my $WebserviceObject         = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice');
 my $UnitTestWebserviceObject = $Kernel::OM->Get('Kernel::System::UnitTest::Webservice');
 my $CustomerCompanyObject    = $Kernel::OM->Get('Kernel::System::CustomerCompany');
 my $TicketObject             = $Kernel::OM->Get('Kernel::System::Ticket');
@@ -33,14 +32,26 @@ my $ArticleObject            = $Kernel::OM->Get('Kernel::System::Ticket::Article
 
 my $Home = $ConfigObject->Get('Home');
 
+# Enable base-64-encoding for certain fields
+$ConfigObject->Set(
+    Key   => 'GenericInterface::Invoker::Ticket::Generic::PrepareRequest::Base64EncodedFields',
+    Value => {
+        Generic => 'Articles->Body;CustomerCompany->CustomerCompanyCity;Owner',
+    },
+);
+
+# Enable removal of certain fields
+$ConfigObject->Set(
+    Key   => 'GenericInterface::Invoker::Ticket::Generic::PrepareRequest::OmittedFields',
+    Value => {
+        Generic => 'Articles->IsVisibleForCustomer;CustomerCompany->CustomerCompanyStreet;Queue;ArticleID',
+    },
+);
+
 $ZnunyHelperObject->_WebserviceCreate(
     Webservices => {
         Generic => $Home . '/scripts/test/sample/Webservice/ZnunyGeneric.yml',
     },
-);
-
-my $Webservice = $WebserviceObject->WebserviceGet(
-    Name => 'Generic',
 );
 
 my @DynamicFields = (
@@ -110,9 +121,7 @@ my $ResultPrepareRequest = $UnitTestWebserviceObject->InvokerFunctionCall(
     Invoker    => 'Generic',
     Function   => 'PrepareRequest',
     Data       => {
-        Webservice  => $Webservice,
-        InvokerName => 'Generic',
-        Data        => {
+        Data => {
             Event    => 'TicketCreate',
             TicketID => $TicketID,
         },
@@ -253,8 +262,8 @@ $Self->IsDeeply(
         ChangeBy               => 1,
         ChangeTime             => $Article{ChangeTime},
         Charset                => 'ISO-8859-15',
-        CommunicationChannel   => 'Internal',
         CommunicationChannelID => 3,
+        CommunicationChannel   => 'Internal',
         ContentCharset         => 'ISO-8859-15',
         ContentType            => 'text/plain; charset=ISO-8859-15',
         CreateBy               => 1,
@@ -268,7 +277,7 @@ $Self->IsDeeply(
         References             => '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
         ReplyTo                => 'Some Customer B <customer-b@example.com>',
         SenderType             => 'agent',
-        SenderTypeID           => '1',
+        SenderTypeID           => 1,
         Subject                => 'some short description',
         TicketID               => $TicketID,
         To                     => 'Some Customer A <customer-a@example.com>'
@@ -304,13 +313,10 @@ $Result = $UnitTestWebserviceObject->InvokerFunctionCall(
     Invoker    => 'Generic',
     Function   => 'PrepareRequest',
     Data       => {
-        Webservice  => $Webservice,
-        InvokerName => 'Generic',
-        Data        => {
-            Event          => 'ArticleCreate',
-            TicketID       => $TicketID,
-            ArticleID      => $ArticleID3,
-            KeyToBeOmitted => 'some value',
+        Data => {
+            Event     => 'ArticleCreate',
+            TicketID  => $TicketID,
+            ArticleID => $ArticleID3,
         },
     },
 );
@@ -362,74 +368,69 @@ $Self->Is(
     'CustomerUser->UserPassword got removed',
 );
 
-##
-## Check Base64 encoding of values of configured fields.
-##
-#my @ArticleBodiesBase64 = (
-#    encode_base64('Body of article 1.'),
-#    encode_base64('Body of article 2.'),
-#    encode_base64('Body of article 3.'),
-#);
+#
+# Check base-64-encoding of values of configured fields.
+#
+my @ArticleBodiesBase64 = (
+    encode_base64('Body of article 1.'),
+    encode_base64('Body of article 2.'),
+    encode_base64('Body of article 3.'),
+);
 
-#my $CustomerCompanyCityBase64 = encode_base64('Miami');
-#my $OwnerBase64               = encode_base64('root@localhost');
+my $CustomerCompanyCityBase64 = encode_base64('Miami');
+my $OwnerBase64               = encode_base64('root@localhost');
 
-#my $ArticleIndex = 0;
-#for my $Article ( @{ $Result->{Data}->{Ticket}->{Articles} } ) {
-#    $Self->Is(
-#        $Article->{Body},
-#        $ArticleBodiesBase64[$ArticleIndex],
-#        "Body of article $ArticleIndex must be Base64-encoded.",
-#    );
+my $ArticleIndex = 0;
+for my $Article ( @{ $Result->{Data}->{Ticket}->{Articles} } ) {
+    $Self->Is(
+        $Article->{Body},
+        $ArticleBodiesBase64[$ArticleIndex],
+        "Body of article $ArticleIndex must be base-64 encoded.",
+    );
 
-#    $ArticleIndex++;
-#}
+    $ArticleIndex++;
+}
 
-#$Self->Is(
-#    $Result->{Data}->{Ticket}->{CustomerCompany}->{CustomerCompanyCity},
-#    $CustomerCompanyCityBase64,
-#    'City of customer company must be Base64-encoded.',
-#);
+$Self->Is(
+    $Result->{Data}->{Ticket}->{CustomerCompany}->{CustomerCompanyCity},
+    $CustomerCompanyCityBase64,
+    'City of customer company must be base-64 encoded.',
+);
 
-#$Self->Is(
-#    $Result->{Data}->{Ticket}->{Owner},
-#    $OwnerBase64,
-#    'Owner must be Base64-encoded.',
-#);
+$Self->Is(
+    $Result->{Data}->{Ticket}->{Owner},
+    $OwnerBase64,
+    'Owner must be base-64 encoded.',
+);
 
-##
-## Check absence of omitted fields.
-##
+#
+# Check absence of omitted fields.
+#
 
-## Generic => 'Articles->IsVisibleForCustomer;CustomerCompany->CustomerCompanyStreet;Queue;ArticleID',
-#$ArticleIndex = 0;
-#for my $Article ( @{ $Result->{Data}->{Ticket}->{Articles} } ) {
-#    $Self->False(
-#        exists $Article->{IsVisibleForCustomer},
-#        "Articles must not contain field 'IsVisibleForCustomer'.",
-#    );
+#        Generic => 'Articles->IsVisibleForCustomer;CustomerCompany->CustomerCompanyStreet;Queue;ArticleID',
+$ArticleIndex = 0;
+for my $Article ( @{ $Result->{Data}->{Ticket}->{Articles} } ) {
+    $Self->False(
+        exists $Article->{IsVisibleForCustomer},
+        "Articles must not contain field 'IsVisibleForCustomer'.",
+    );
 
-#    $ArticleIndex++;
-#}
+    $ArticleIndex++;
+}
 
-#$Self->False(
-#    exists $Result->{Data}->{Event}->{ArticleID},
-#    "Event hash must not contain key ArticleID.",
-#);
+$Self->False(
+    exists $Result->{Data}->{Event}->{ArticleID},
+    "Event hash must not contain key ArticleID.",
+);
 
-#$Self->False(
-#    exists $Result->{Data}->{Ticket}->{CustomerCompany}->{CustomerCompanyStreet},
-#    "Customer company must not contain field 'CustomerCompanyStreet'.",
-#);
+$Self->False(
+    exists $Result->{Data}->{Ticket}->{CustomerCompany}->{CustomerCompanyStreet},
+    "Customer company must not contain field 'CustomerCompanyStreet'.",
+);
 
-#$Self->False(
-#    exists $Result->{Data}->{Ticket}->{Queue},
-#    "Ticket must not contain field 'Queue'.",
-#);
-
-#$Self->False(
-#    exists $Result->{Data}->{Event}->{KeyToBeOmitted},
-#    "Payload must not contain 'Event->KeyToBeOmitted'.",
-#);
+$Self->False(
+    exists $Result->{Data}->{Ticket}->{Queue},
+    "Ticket must not contain field 'Queue'.",
+);
 
 1;

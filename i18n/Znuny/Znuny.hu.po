@@ -4,8 +4,7 @@ msgstr ""
 "POT-Creation-Date: 2023-03-23 09:27+0000\n"
 "PO-Revision-Date: 2026-05-04 21:08+0000\n"
 "Last-Translator: Balázs Úr <balazs@urbalazs.hu>\n"
-"Language-Team: Hungarian <https://translations.znuny.org/projects/znuny/"
-"znuny/hu/>\n"
+"Language-Team: Hungarian <https://translations.znuny.org/projects/znuny/znuny/hu/>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -7757,7 +7756,7 @@ msgstr "Válasz írása erre: %s%s%s"
 msgid "Date Invalid!"
 msgstr "Érvénytelen dátum!"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
+#. JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
 msgid "Customer user address book"
 msgstr "Ügyfél-felhasználó címjegyzék"
 
@@ -9201,7 +9200,7 @@ msgstr "Ez a nap üzenete. Ezt a %s fájlban szerkesztheti."
 msgid "Insufficient Rights"
 msgstr "Nincs elegendő joga"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "Vissza az előző oldalra"
 
@@ -14959,12 +14958,7 @@ msgstr "JavaScript-fájlok listája, amelyek mindig betöltődnek az ügyintéz�
 
 #. XML Definition: Kernel/Config/Files/XML/Daemon.xml
 msgid "Type of daemon log rotation to use: Choose 'Znuny' to let Znuny system to handle the file rotation, or choose 'External' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration."
-msgstr ""
-"A használandó démon naplóforgatásának típusa: válassza a „Znuny” "
-"lehetőséget, ha a Znuny rendszerre szeretné bízni a fájlforgatás kezelését, "
-"vagy válassza a „Külső” lehetőséget egy harmadik féltől származó forgatási "
-"mechanizmus (azaz logrotate) használatához. Megjegyzés: a külső forgatási "
-"mechanizmus a saját és független beállítását igényli."
+msgstr "A használandó démon naplóforgatásának típusa: válassza a „Znuny” lehetőséget, ha a Znuny rendszerre szeretné bízni a fájlforgatás kezelését, vagy válassza a „Külső” lehetőséget egy harmadik féltől származó forgatási mechanizmus (azaz logrotate) használatához. Megjegyzés: a külső forgatási mechanizmus a saját és független beállítását igényli."
 
 #. XML Definition: Kernel/Config/Files/XML/Daemon.xml
 msgid "If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if &lt;$OTRSHome&gt;/var/run/ can not be used."
@@ -24392,7 +24386,7 @@ msgstr "Nem érhető el beállítás ehhez a dinamikus mezőhöz."
 msgid "Dynamic fields administration"
 msgstr "Dinamikus mezők adminisztrációja"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+#. SysConfig
 msgid "Translation"
 msgstr "Fordítás"
 
@@ -25346,9 +25340,7 @@ msgstr "Ügyfél-felhasználó szerkesztése"
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view."
-msgstr ""
-"Az adminisztrátori felhasználóval (1-es azonosító) engedélyezi a "
-"jegykeresést a bejelentkezett felhasználó helyett. Csak ezt a nézetet érinti."
+msgstr "Az adminisztrátori felhasználóval (1-es azonosító) engedélyezi a jegykeresést a bejelentkezett felhasználó helyett. Csak ezt a nézetet érinti."
 
 #. Perl Module: Kernel/Modules/AgentTicketQueue.pm
 msgid "Queue View"
@@ -25358,4 +25350,95 @@ msgstr "Várólista nézet"
 msgid "Controls if the ticket mention entries are removed when a ticket is archived."
 msgstr ""
 
+#. Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+msgid "The selected template type does not support attachments."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+msgid "Import Translation"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+msgid "Export Translation"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Import / Export"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Here you can upload a configuration file to import translations to your system. The file needs to be in .yml | .csv | .xlsx format."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Could not find translation for ID %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Translation stored."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Storing translation failed."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Translations synchronized."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Fields to be omitted from payload"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Field"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Remove field"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Add field to be omitted from payload"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Restore omitted fields"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Fields which will be removed from the payload of the request, e.g. 'SomeField1'. Nested fields can be referenced by connecting them with '->', e.g. 'SomeField1->SomeField2->SomeField3'."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Fields to be Base64 encoded in payload"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Add field to be Base64 encoded in payload"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Restore Base64 encoded fields"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Fields which will be Base64 encoded in payload of the request, e.g. 'SomeField1'. Nested fields can be referenced by connecting them with '->', e.g. 'SomeField1->SomeField2->SomeField3'."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Global mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Content of different fields can be given by separating those fields by ';'."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Global mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Different fields can be omitted by separating them by ';'."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Uninstall package and data"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Uninstall package only"
+msgstr ""
 

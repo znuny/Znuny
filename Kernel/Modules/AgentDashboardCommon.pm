@@ -417,25 +417,46 @@ sub Run {
             qw(Owner Responsible State Queue Priority Type Lock Service SLA CustomerID CustomerUserID)
             )
         {
-            my $FilterValue = $ParamObject->GetParam( Param => 'ColumnFilter' . $ColumnName . $Name )
-                || '';
-            next COLUMNNAME if $FilterValue eq '';
-            next COLUMNNAME if lc $FilterValue eq 'null';
+            my @FilterValues = $ParamObject->GetArray( Param => 'ColumnFilter' . $ColumnName . $Name );
+            next COLUMNNAME if !@FilterValues;
+            my $ClearFilter = grep { defined $_ && $_ eq 'DeleteFilter' } @FilterValues;
 
-            if ( $ColumnName eq 'CustomerID' ) {
-                push @{ $ColumnFilter{$ColumnName} },           $FilterValue;
-                push @{ $ColumnFilter{ $ColumnName . 'Raw' } }, $FilterValue;
-            }
-            elsif ( $ColumnName eq 'CustomerUserID' ) {
-                push @{ $ColumnFilter{CustomerUserLogin} },    $FilterValue;
-                push @{ $ColumnFilter{CustomerUserLoginRaw} }, $FilterValue;
+            if (@FilterValues) {
+                my @ExpandedValues;
+                for my $Value (@FilterValues) {
+                    push @ExpandedValues, $Value;
+                }
+                my %Seen;
+                @FilterValues
+                    = grep { defined $_ && $_ ne '' && lc $_ ne 'null' && $_ ne 'DeleteFilter' && !$Seen{$_}++ }
+                    @ExpandedValues;
             }
             else {
-                push @{ $ColumnFilter{ $ColumnName . 'IDs' } }, $FilterValue;
+                @FilterValues = ();
+            }
+            if ($ClearFilter) {
+
+                $GetColumnFilter{ $ColumnName . $Name } = ['DeleteFilter'];
+                $GetColumnFilterSelect{$ColumnName} = ['DeleteFilter'];
+                next COLUMNNAME;
             }
 
-            $GetColumnFilter{ $ColumnName . $Name } = $FilterValue;
-            $GetColumnFilterSelect{$ColumnName} = $FilterValue;
+            next COLUMNNAME if !@FilterValues;
+
+            if ( $ColumnName eq 'CustomerID' ) {
+                push @{ $ColumnFilter{$ColumnName} },           @FilterValues;
+                push @{ $ColumnFilter{ $ColumnName . 'Raw' } }, @FilterValues;
+            }
+            elsif ( $ColumnName eq 'CustomerUserID' ) {
+                push @{ $ColumnFilter{CustomerUserLogin} },    @FilterValues;
+                push @{ $ColumnFilter{CustomerUserLoginRaw} }, @FilterValues;
+            }
+            else {
+                push @{ $ColumnFilter{ $ColumnName . 'IDs' } }, @FilterValues;
+            }
+
+            $GetColumnFilter{ $ColumnName . $Name } = \@FilterValues;
+            $GetColumnFilterSelect{$ColumnName} = \@FilterValues;
         }
 
         # get all dynamic fields
@@ -449,19 +470,38 @@ sub Run {
             next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
             next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
 
-            my $FilterValue = $ParamObject->GetParam(
+            my @FilterValues = $ParamObject->GetArray(
                 Param => 'ColumnFilterDynamicField_' . $DynamicFieldConfig->{Name} . $Name
             );
 
-            next DYNAMICFIELD if !defined $FilterValue;
-            next DYNAMICFIELD if $FilterValue eq '';
-            next DYNAMICFIELD if lc $FilterValue eq 'null';
+            next DYNAMICFIELD if !@FilterValues;
+            my $ClearFilter = grep { defined $_ && $_ eq 'DeleteFilter' } @FilterValues;
+
+            if (@FilterValues) {
+                my @ExpandedValues;
+                for my $Value (@FilterValues) {
+                    push @ExpandedValues, $Value;
+                }
+                my %Seen;
+                @FilterValues = grep { defined $_ && $_ ne '' && $_ ne 'DeleteFilter' && !$Seen{$_}++ } @ExpandedValues;
+            }
+            else {
+                @FilterValues = ();
+            }
+
+            if ($ClearFilter) {
+                $GetColumnFilter{ 'DynamicField_' . $DynamicFieldConfig->{Name} . $Name } = ['DeleteFilter'];
+                $GetColumnFilterSelect{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = ['DeleteFilter'];
+                next DYNAMICFIELD;
+            }
+
+            next DYNAMICFIELD if !@FilterValues;
 
             $ColumnFilter{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = {
-                Equals => $FilterValue,
+                Equals => \@FilterValues,
             };
-            $GetColumnFilter{ 'DynamicField_' . $DynamicFieldConfig->{Name} . $Name } = $FilterValue;
-            $GetColumnFilterSelect{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = $FilterValue;
+            $GetColumnFilter{ 'DynamicField_' . $DynamicFieldConfig->{Name} . $Name } = \@FilterValues;
+            $GetColumnFilterSelect{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = \@FilterValues;
         }
 
         my $SortBy  = $ParamObject->GetParam( Param => 'SortBy' );

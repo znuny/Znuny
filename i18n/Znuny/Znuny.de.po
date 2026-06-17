@@ -7760,7 +7760,7 @@ msgstr "Antwort für %s%s%s verfassen"
 msgid "Date Invalid!"
 msgstr "Ungültiges Datum!"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
+#. JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
 msgid "Customer user address book"
 msgstr "Kundenbenutzer-Adressbuch"
 
@@ -9208,7 +9208,7 @@ msgstr "Das ist die Nachricht des Tages. Sie können diese in %s bearbeiten."
 msgid "Insufficient Rights"
 msgstr "Nicht ausreichende Rechte"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "Zurück zur vorhergehenden Seite"
 
@@ -24401,7 +24401,7 @@ msgstr "Für dieses dynamische Feld gibt es keine Konfiguration."
 msgid "Dynamic fields administration"
 msgstr "dynamische Felder Administration"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+#. SysConfig
 msgid "Translation"
 msgstr "Übersetzung"
 
@@ -25351,7 +25351,7 @@ msgstr "Kundenbenutzer bearbeiten"
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view."
-msgstr ""
+msgstr "Ermöglicht die Ticket-Suche mit dem Administrator-Benutzer (ID 1) statt dem eingeloggten Benutzer. Wirkt sich nur auf diese Ansicht aus."
 
 #. Perl Module: Kernel/Modules/AgentTicketQueue.pm
 msgid "Queue View"
@@ -25360,4 +25360,96 @@ msgstr "Ansicht nach Queue"
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Controls if the ticket mention entries are removed when a ticket is archived."
 msgstr "Steuert, ob die Erwahnungs-Eintrage eines Tickets entfernt werden, wenn ein Ticket archiviert wird."
+
+#. Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+msgid "The selected template type does not support attachments."
+msgstr "Der ausgewählte Vorlagentyp unterstützt keine Anhänge"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+msgid "Import Translation"
+msgstr "Übersetzung importieren"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+msgid "Export Translation"
+msgstr "Übersetzung exportieren"
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Import / Export"
+msgstr "Importieren / Exportieren"
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Here you can upload a configuration file to import translations to your system. The file needs to be in .yml | .csv | .xlsx format."
+msgstr "Hier können Sie eine Konfigurationsdatei hochladen, um Übersetzungen in Ihr System zu importieren. Die Datei muss im Format .yml | .csv | .xlsx vorliegen."
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Could not find translation for ID %s."
+msgstr "Übersetzung für ID %s nicht gefunden."
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Translation stored."
+msgstr "Übersetzung gespeichert."
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Storing translation failed."
+msgstr "Speichern der Übersetzung fehlgeschlagen."
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Translations synchronized."
+msgstr "Übersetzungen synchronisiert."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Fields to be omitted from payload"
+msgstr "Felder, die in der Payload ausgelassen werden"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Field"
+msgstr "Feld"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Remove field"
+msgstr "Feld entfernen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Add field to be omitted from payload"
+msgstr "Feld hinzufügen, das in der Payload ausgelassen werden soll"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Restore omitted fields"
+msgstr "Ausgelassene Felder wiederherstellen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Fields which will be removed from the payload of the request, e.g. 'SomeField1'. Nested fields can be referenced by connecting them with '->', e.g. 'SomeField1->SomeField2->SomeField3'."
+msgstr "Felder, die aus der Payload des Requests entfernt werden, z. B. 'SomeField1'. Verschachtelte Felder können referenziert werden, indem sie mit '->' verknüpft werden, z. B. 'SomeField1->SomeField2->SomeField3'."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Fields to be Base64 encoded in payload"
+msgstr "Felder, die in der Payload Base64-kodiert werden"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Add field to be Base64 encoded in payload"
+msgstr "Feld hinzufügen, das in der Payload Base64-kodiert werden soll"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Restore Base64 encoded fields"
+msgstr "Base64-kodierte Felder wiederherstellen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Fields which will be Base64 encoded in payload of the request, e.g. 'SomeField1'. Nested fields can be referenced by connecting them with '->', e.g. 'SomeField1->SomeField2->SomeField3'."
+msgstr "Felder, die in der Payload des Requests Base64-kodiert werden sollen, z. B. 'SomeField1'. Verschachtelte Felder können referenziert werden, indem sie mit '->' verknüpft werden, z. B. 'SomeField1->SomeField2->SomeField3'."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Global mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Content of different fields can be given by separating those fields by ';'."
+msgstr "Globales Mapping von Ticket::Generic-Invoker-Name (Schlüssel) zu einer Liste von Feldern (Inhalt), die base-64-kodiert werden sollen. Bitte beacheten, dass dies auch je Invoker konfiguriert werden kann. Felder müssen in der folgenden Form angegeben werden: Feld1->Feld2;Feld3->Feld4->Feld5;Feld6. Eine verschachtelte Datenstruktur kann also durch Verbindung der Felder mit '->' angegeben werden. Inhalte aus verschiedenen Feldern je Invoker können kodiert werden, indem die Felder mit ';' voneinander getrennt werden. Bitte beachten Sie die Dokumentation des Pakets für weitere Informationen."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Global mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Different fields can be omitted by separating them by ';'."
+msgstr "Globales Mapping von Ticket::Generic-Invoker-Name (Schlüssel) zu einer Liste von Feldern (Inhalt), die aus dem Request entfernt werden. Bitte beacheten, dass dies auch je Invoker konfiguriert werden kann. Felder müssen in der folgenden Form angegeben werden: Feld1->Feld2;Feld3->Feld4->Feld5;Feld6. Eine verschachtelte Datenstruktur kann also durch Verbindung der Felder mit '->' angegeben werden. Verschiedene Felder je Invoker können entfernt werden, indem sie mit ';' voneinander getrennt werden. Bitte beachten Sie die Dokumentation des Pakets für weitere Informationen."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Uninstall package and data"
+msgstr "Paket und Daten deinstallieren"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Uninstall package only"
+msgstr "Nur Paket deinstallieren"
 

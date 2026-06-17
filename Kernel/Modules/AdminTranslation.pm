@@ -79,9 +79,13 @@ sub Run {
         %GetParams,
     );
 
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    my $NotificationTranslated = $LayoutObject->{LanguageObject}->Translate( $Param{Notification} );
+
     my %NotifiyParam = (
         Priority => $Param{NotificationPriority} || 'Info',
-        Info     => Translatable( $Param{Notification} ),
+        Info     => $NotificationTranslated,
     );
 
     if ( !IsStringWithData( $Self->{Subaction} ) ) {
@@ -192,7 +196,7 @@ sub _OverviewActionList {
             {
                 LinkHref  => $LayoutObject->{Baselink} . 'Action=' . $LayoutObject->{Action} . ';Subaction=Add',
                 LinkClass => 'CallForAction Fullsize Center',
-                LinkText  => "Add Translation",
+                LinkText  => Translatable('Add Translation'),
                 IconClass => 'fa fa-plus-square',
             },
             {
@@ -201,7 +205,7 @@ sub _OverviewActionList {
                     . $LayoutObject->{Action}
                     . ';Subaction=Deployment;ID=1',
                 LinkClass => 'CallForAction Fullsize Center',
-                LinkText  => "Deployment",
+                LinkText  => Translatable('Deployment'),
                 IconClass => 'fa fa-rocket',
             }
         ],
@@ -219,13 +223,13 @@ sub _OverviewActionList {
         {
             FilterInput   => 'Language',
             FilterElement => 'Translations',
-            Label         => 'Language',
+            Label         => Translatable('Language'),
             ColumnNumber  => 0,
         },
         {
             FilterInput   => 'Source',
             FilterElement => 'Translations',
-            Label         => 'Source',
+            Label         => Translatable('Source'),
             ColumnNumber  => 1,
         },
     );
@@ -258,9 +262,11 @@ sub _OverviewActionList {
         Name => 'ImportExport',
         Data => {
             %Param,
-            Label       => 'Import / Export',
+            Label       => Translatable('Import / Export'),
             Explanation =>
-                'Here you can upload a configuration file to import %s to your system. The file needs to be in .yml | .csv | .xlsx format.',
+                Translatable(
+                'Here you can upload a configuration file to import translations to your system. The file needs to be in .yml | .csv | .xlsx format.'
+                ),
             Action => $Param{Action} || $LayoutObject->{Action},
         }
     );
@@ -385,7 +391,8 @@ sub _Form {
         );
         if ( !%BackendData ) {
             return $LayoutObject->ErrorScreen(
-                Message => "Could not find Translation for ID '$Param{ID}'!",
+                Message =>
+                    $LayoutObject->{LanguageObject}->Translate( "Could not find translation for ID %s.", $Param{ID} ),
             );
         }
 
@@ -447,7 +454,7 @@ sub _FormActionList {
             {
                 LinkHref  => $LayoutObject->{Baselink} . 'Action=' . $LayoutObject->{Action},
                 LinkClass => 'CallForAction Fullsize Center',
-                LinkText  => 'Go to overview',
+                LinkText  => Translatable('Go to overview'),
                 IconClass => 'fa fa-caret-left',
             }
         ],
@@ -634,11 +641,11 @@ sub _GenericAction {
 
         my %NotifiyParam;
         if ($Stored) {
-            $NotifiyParam{Info} = "Translation stored!";
+            $NotifiyParam{Info} = Translatable('Translation stored.');
             $Param{ID}          = $GetParam{ID} || $Stored;
         }
         else {
-            $NotifiyParam{Error} = 'Storing Translation failed!';
+            $NotifiyParam{Error} = Translatable('Storing translation failed.');
         }
 
         if ( defined $GetParam{'ContinueAfterSave'} && $GetParam{'ContinueAfterSave'} eq '1' ) {
@@ -856,7 +863,7 @@ sub _Deployment {
         Key  => 'Deleted',
     );
 
-    my $Notification = 'Translations synchronized!';
+    my $Notification = Translatable('Translations synchronized.');
     return $LayoutObject->Redirect(
         OP => "Action=AdminTranslation;Notification=" . $Notification,
     );

@@ -275,6 +275,9 @@
             html += '<div class="alert alertType' + this.capitalizeFirstLetter(type) + '">';
             html += '<div class="alertContent">' + message + '</div>';
 
+            if (data.actions && !Array.isArray(data.actions)) {
+                throw new Error('Invalid "data" parameter: "actions" sub-property needs to be passed as an array!');
+            }
             // Handle multiple actions
             if (data.actions && data.actions.length) {
                 inlineMultipleActions = data.actions.length > 1;

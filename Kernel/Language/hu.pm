@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.999361226445225;
+    $Self->{Completeness}        = 0.996176517444639;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -980,6 +980,18 @@ sub Data {
             'A szinkron eseményaktiválók közvetlenül lehetnek feldolgozva a webkérések közben.',
         'Add all attachments' => 'Összes melléklet hozzáadása',
         'Add all attachments to invoker payload.' => 'Összes melléklet hozzáadása a meghívó hasznos adatához.',
+        'Fields to be omitted from payload' => '',
+        'Field' => '',
+        'Remove field' => '',
+        'Add field to be omitted from payload' => '',
+        'Restore omitted fields' => '',
+        'Fields which will be removed from the payload of the request, e.g. \'SomeField1\'. Nested fields can be referenced by connecting them with \'->\', e.g. \'SomeField1->SomeField2->SomeField3\'.' =>
+            '',
+        'Fields to be Base64 encoded in payload' => '',
+        'Add field to be Base64 encoded in payload' => '',
+        'Restore Base64 encoded fields' => '',
+        'Fields which will be Base64 encoded in payload of the request, e.g. \'SomeField1\'. Nested fields can be referenced by connecting them with \'->\', e.g. \'SomeField1->SomeField2->SomeField3\'.' =>
+            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerEvent.tt
         'GenericInterface Invoker Event Settings for Web Service %s' => 'Általános felület meghívóesemény beállításai a webszolgáltatásnál: %s',
@@ -1528,6 +1540,9 @@ sub Data {
         'Uninstall Package' => 'Csomag eltávolítása',
         'Uninstall package' => 'Csomag eltávolítása',
         'Do you really want to uninstall this package?' => 'Valóban el szeretné távolítani ezt a csomagot?',
+        'Uninstall package and data' => '',
+        'Uninstall package only' => '',
+        'Uninstall' => 'Eltávolítás',
         'Reinstall package' => 'Csomag újratelepítése',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Valóban újra szeretné telepíteni ezt a csomagot? Minden kézi változtatás el fog veszni.',
@@ -1574,7 +1589,6 @@ sub Data {
         'Action' => 'Művelet',
         'Module documentation' => 'Modul-dokumentáció',
         'Local Repository' => 'Helyi tároló',
-        'Uninstall' => 'Eltávolítás',
         'Package not correctly deployed! Please reinstall the package.' =>
             'A csomag nincs megfelelően üzembe állítva! Telepítse újra a csomagot.',
         'Reinstall' => 'Újratelepítés',
@@ -2273,7 +2287,8 @@ sub Data {
             'Ha egy érték pirosra van színezve, akkor az hiányzik a dinamikus mező beállításának lehetséges értékei listájából.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
-        'Translation' => 'Fordítás',
+        'Import Translation' => '',
+        'Export Translation' => '',
         'Translation Management' => 'Fordításkezelés',
         'Add Translation' => 'Fordítás hozzáadása',
         'Edit Translation' => 'Fordítás szerkesztése',
@@ -2413,8 +2428,8 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentCustomerUserAddressBook.tt
         'Search for recipients and add the results as \'%s\'.' => 'Címzettek keresése és az eredmények hozzáadása mint „%s”.',
         'Search template' => 'Keresési sablon',
-        'Create Template' => 'Sablon létrehozása',
         'Create New' => 'Új létrehozása',
+        'Create Template' => 'Sablon létrehozása',
         'Save changes in template' => 'Módosítások mentése sablonba',
         'Filters in use' => 'Használatban lévő szűrők',
         'Additional filters' => 'További szűrők',
@@ -2732,14 +2747,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => 'E-mail újraküldése ennél: %s%s%s',
-        'All fields marked with an asterisk (*) are mandatory.' => 'A csillaggal (*) megjelölt összes mező kötelező.',
-        'Cancel & close' => 'Megszakítás és bezárás',
-        'Select one or more recipients from the customer user address book.' =>
-            'Egy vagy több címzett kiválasztása az ügyfél-felhasználó címjegyzékből.',
-        'Customer user address book' => 'Ügyfél-felhasználó címjegyzék',
-        'Remove Ticket Customer' => 'Jegy ügyfél eltávolítása',
-        'Remove Cc' => 'Másolat eltávolítása',
-        'Remove Bcc' => 'Rejtett másolat eltávolítása',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s %s)!' => '%s jegy: az első válaszidő lejárt (%s %s)!',
@@ -2950,6 +2957,7 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
         'Error' => 'Hiba',
         'An Error Occurred' => 'Hiba történt',
+        'Back to the previous page' => 'Vissza az előző oldalra',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
         'Powered by %s' => 'A gépházban: %s',
@@ -3215,7 +3223,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
         'Insufficient Rights' => 'Nincs elegendő joga',
-        'Back to the previous page' => 'Vissza az előző oldalra',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email/Alert.tt
         'Alert' => 'Riasztás',
@@ -4216,8 +4223,18 @@ sub Data {
             'Hibák történtek a következő szabványos sablonok hozzáadásakor vagy frissítésekor: %s. További információkért nézze meg a naplókat.',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+        'The selected template type does not support attachments.' => '',
         'Change Attachment Relations for Template' => 'Mellékletkapcsolatok megváltoztatása egy sablonnál',
         'Change Template Relations for Attachment' => 'Sablonkapcsolatok megváltoztatása egy mellékletnél',
+
+        # Perl Module: Kernel/Modules/AdminTranslation.pm
+        'Import / Export' => '',
+        'Here you can upload a configuration file to import translations to your system. The file needs to be in .yml | .csv | .xlsx format.' =>
+            '',
+        'Could not find translation for ID %s.' => '',
+        'Translation stored.' => '',
+        'Storing translation failed.' => '',
+        'Translations synchronized.' => '',
 
         # Perl Module: Kernel/Modules/AdminType.pm
         'Need Type!' => 'Típus szükséges!',
@@ -4490,7 +4507,7 @@ sub Data {
         'Available tickets' => 'Elérhető jegyek',
         'including subqueues' => 'alvárólisták felvétele',
         'excluding subqueues' => 'alvárólisták kizárása',
-        'Queue View' => '',
+        'Queue View' => 'Várólista nézet',
 
         # Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
         'My Responsible Tickets' => 'Saját felelős jegyek',
@@ -5642,7 +5659,7 @@ sub Data {
         'List of JS files to always be loaded for the agent interface.' =>
             'JavaScript-fájlok listája, amelyek mindig betöltődnek az ügyintézői felületnél.',
         'Type of daemon log rotation to use: Choose \'Znuny\' to let Znuny system to handle the file rotation, or choose \'External\' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration.' =>
-            'A használandó démon naplóforgatásának típusa: válassza az „Znuny” lehetőséget, ha a Znuny rendszerre szeretné bízni a fájlforgatás kezelését, vagy válassza a „Külső” lehetőséget egy harmadik féltől származó forgatási mechanizmus (azaz logrotate) használatához. Megjegyzés: a külső forgatási mechanizmus a saját és független beállítását igényli.',
+            'A használandó démon naplóforgatásának típusa: válassza a „Znuny” lehetőséget, ha a Znuny rendszerre szeretné bízni a fájlforgatás kezelését, vagy válassza a „Külső” lehetőséget egy harmadik féltől származó forgatási mechanizmus (azaz logrotate) használatához. Megjegyzés: a külső forgatási mechanizmus a saját és független beállítását igényli.',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if &lt;$OTRSHome&gt;/var/run/ can not be used.' =>
             'Ha engedélyezve van, akkor a démon ezt a könyvtárat fogja használni a PID-fájljai létrehozásához. Megjegyzés: állítsa le a démont, mielőtt bármit megváltoztatna, és csak akkor használja ezt a beállítást, ha az &lt;$OTRSHome&gt;/var/run/ nem használható.',
         'Defines the number of days to keep the daemon log files.' => 'Meghatározza a napok számát a démon naplófájljainak megtartásához.',
@@ -7873,10 +7890,10 @@ sub Data {
             'Azok a képernyők, amelyeknél lehetőség van alapértelmezett oszlopok engedélyezésére vagy letiltására.',
         'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
             'Engedélyezi a korábbi értékek kiválasztását az alapválasztás (legördülő és többválasztós) alapú dinamikus mező típusokban. Tiltsa le ezt, ha túl sok különböző tárolt érték miatt teljesítményproblémák lépnek fel.',
-        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
-            'A Ticket::Generic meghívó nevének (kulcs) leképezése a mezők (tartalom) listájára, amelyek értékei Base64 kódolásúak lesznek. A mezőket a következő formában kell megadni: Mező1->Mező2;Mező3->Mező4->Mező5;Mező6. Így egy beágyazott adatstruktúra a mezők „->” jelöléssel történő összekapcsolásával adható meg. A különböző mezők tartalmát a mezők „;” karakterrel való elválasztásával lehet megadni.',
-        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
-            'A Ticket::Generic meghívó nevének (kulcs) leképezése a mezők (tartalom) listájára, amelyek eltávolításra kerülnek a kérésből. A mezőket a következő formában kell megadni: Mező1->Mező2;Mező3->Mező4->Mező5;Mező6. Így egy beágyazott adatstruktúra a mezők „->” jelöléssel történő összekapcsolásával adható meg. A különböző mezőket „;” karakterrel elválasztva lehet kihagyni.',
+        'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
+            '',
+        'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
+            '',
         'Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic.' =>
             'Párhuzamosan futtatott példányok legnagyobb száma az OTRS_AsynchronousInvokerExecution használatakor a Ticket::Generic meghívóban.',
         'Enables support for huge XML data in load_xml calls of CPAN library XML::LibXML. This should only be enabled if absolutely needed. Disabling this option (default) protects against denial of service through entity expansion attacks. Before enabling this option ensure that alternative measures to protect the application against this type of attack have been taken.' =>
@@ -8133,7 +8150,7 @@ sub Data {
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             'Ha a felhasználónkénti megfigyelt jegyek korlátja elérésre kerül, a legrégebbi bejegyzések el lesznek távolítva a megfigyelési listából. Tiltsa le ezt a beállítást vagy állítsa 0 értékre a korlát letiltásához (alapértelmezett).',
         'Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view.' =>
-            '',
+            'Az adminisztrátori felhasználóval (1-es azonosító) engedélyezi a jegykeresést a bejelentkezett felhasználó helyett. Csak ezt a nézetet érinti.',
         'List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions.' =>
             'Azon felhasználói beállítások (kulcsok) listája, amelyeknél engedélyezett, hogy az ügyintéző beállításai előtétprogram-modul UpdateAJAX alművelete frissítse azokat. Ezek reguláris kifejezések.',
         'List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module CustomerPreferences. These are regular expressions.' =>
@@ -8563,6 +8580,7 @@ sub Data {
             'Ennek az elemnek gyermekelemei vannak, és jelenleg nem lehet eltávolítani.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
+        'Customer user address book' => 'Ügyfél-felhasználó címjegyzék',
         'Select a customer ID to assign to this ticket' => 'Ügyfél-azonosító kiválasztása, hogy hozzárendelje ehhez a jegyhez',
         'Do you really want to continue?' => 'Valóban folytatni akarja?',
 
@@ -8973,7 +8991,7 @@ Az Ön ügyfélszolgálati csapata
         'Edit Customer Users.' => 'Ügyfél-felhasználók szerkesztése.',
         'Edit appointment' => 'Időpont szerkesztése',
         'Edit customer company' => 'Ügyfél-vállalat szerkesztése',
-        'Edit customer user' => '',
+        'Edit customer user' => 'Ügyfél-felhasználó szerkesztése',
         'Email Outbound' => 'Kimenő e-mail',
         'Email Resend' => 'E-mail újraküldés',
         'Email communication channel.' => 'E-mail kommunikációs csatorna.',
@@ -9393,6 +9411,7 @@ Az Ön ügyfélszolgálati csapata
         'To accept login information, such as an EULA or license.' => 'Bejelentkezési információk elfogadásához, mint például EULA vagy licenc.',
         'To download attachments.' => 'Mellékletek letöltéséhez.',
         'To view HTML attachments.' => 'HTML mellékletek megtekintéséhez.',
+        'Translation' => 'Fordítás',
         'Tree view' => 'Fa nézet',
         'Turkish' => 'Török',
         'Tweak the system as you wish.' => 'A rendszer finomhangolása, ahogy szeretné.',

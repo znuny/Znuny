@@ -365,28 +365,28 @@
     </Setting>
     <Setting Name="AgentShortcutIcon" Required="0" Valid="1">
         <Description Translatable="1">The shortcut icon for the agent interface.</Description>
-        <Navigation>Frontend::Customer</Navigation>
+        <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">skins/Agent/default/img/icons/product.ico</Item>
         </Value>
     </Setting>
     <Setting Name="AgentShortcutIconCustom###default" Required="0" Valid="1">
         <Description Translatable="1">The shortcut icon for the agent interface fot the skin "default".</Description>
-        <Navigation>Frontend::Customer</Navigation>
+        <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">skins/Agent/default/img/icons/product.ico</Item>
         </Value>
     </Setting>
     <Setting Name="AgentAppleTouchIcon" Required="0" Valid="1">
         <Description Translatable="1">The Apple touch icon for the agent interface.</Description>
-        <Navigation>Frontend::Customer</Navigation>
+        <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">skins/Agent/default/img/icons/apple-touch-icon.png</Item>
         </Value>
     </Setting>
     <Setting Name="AgentAppleTouchIconCustom###default" Required="0" Valid="1">
         <Description Translatable="1">The Apple touch icon for the agent interface for the skin "default".</Description>
-        <Navigation>Frontend::Customer</Navigation>
+        <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">skins/Agent/default/img/icons/apple-touch-icon.png</Item>
         </Value>
@@ -4400,6 +4400,7 @@ via the Preferences button after logging in.
                     <Array>
                         <Item>Core.Agent.Dashboard.css</Item>
                         <Item>Core.AllocationList.css</Item>
+                        <Item>Core.Agent.ColumnFilterMultiSelect.css</Item>
                         <Item>thirdparty/fullcalendar-3.10.2/fullcalendar.min.css</Item>
                         <Item>thirdparty/nvd3-1.7.1/nv.d3.css</Item>
                     </Array>
@@ -8452,6 +8453,15 @@ via the Preferences button after logging in.
         <Value>
             <Hash>
                 <Item Key="[% Env('CGIHandle') %]?Action=AgentDashboard" Translatable="1">Go to dashboard!</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Customer::PossibleNextActions" Required="0" Valid="1">
+        <Description Translatable="1">Defines the list of possible next actions on an error screen, a full path is required, then is possible to add external links if needed.</Description>
+        <Navigation>Frontend::Customer</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="[% Env('CGIHandle') %]?Action=CustomerTicketOverview" Translatable="1">Go to overview</Item>
             </Hash>
         </Value>
     </Setting>

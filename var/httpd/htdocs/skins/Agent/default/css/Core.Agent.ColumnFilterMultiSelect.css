@@ -1,0 +1,30 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+@media screen,projection,tv,handheld {
+    .ColumnSettingsBox {
+        min-width: 430px;
+    }
+
+    .ColumnSettingsBox input.InputField_Search {
+        min-width: 0;
+        width: 100%;
+        flex: 1 1 auto;
+        padding-right: 44px;
+    }
+
+    .ColumnSettingsBox div.InputField_InputContainer {
+        flex-wrap: nowrap;
+        width: fit-content;
+        min-width: 360px;
+    }
+
+    .ColumnSettingsBox .InputField_SelectionFilter {
+        display: none;
+    }
+}

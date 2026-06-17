@@ -1,6 +1,20 @@
 # 7.3.4 2026-??-??
+ - 2026-06-16 Fixed: Process tickets without articles are not displayed in dashboard widget Running Process Tickets.
+ - 2026-06-16 Fixed: System configuration hash key duplication for keys containing ###. Thanks to @FloFaber (Flo Faber) for reporting the issue. [#789](https://github.com/znuny/Znuny/issues/789).
+ - 2026-06-16 Fixed: Missing translation in date picker week header. Thanks to @urbalazs (Balázs Úr) for reporting the issue.
+ - 2026-06-13 Added: Multiselect column filters for agent ticket overview screens and dashboard ticket widgets.
+ - 2026-06-12 Fixed: Issue with mentioning out of office users via group mention.
+ - 2026-06-12 Fixed: Column filter dropdowns in ticket overviews showed entries for ticket attributes marked as invalid.
+ - 2026-06-12 Fixed: Missing translation in AdminTranslation screen. Thanks to @urbalazs (Balázs Úr) [PR#800](https://github.com/znuny/Znuny/pull/800).
+ - 2026-06-03 Added: Extended generic interface invoker configuration by configurable fields (per invoker) that will be omitted and/or encoded as Base64.
+ - 2026-06-01 Fixed: Notification about changed system configuration in dialog AdminSystemConfiguration.
+ - 2026-06-01 Fixed: Attachments can no longer be assigned to Snippet templates in AdminTemplateAttachment.
  - 2026-06-01 Fixed: Copy ticket number icon missing when Ticket::Hook is customized. Thanks to @mamojdick for reporting the issue. [#805](https://github.com/znuny/Znuny/issues/805)
+ - 2026-05-30 Added: Confirmation if database entries of packages are to be deleted on uninstallation.
+ - 2026-05-28 Added: Agent and customer error pages now show configurable link for next action.
  - 2026-05-08 Fixed: Configured limit for activities is not applied correctly.
+ - 2026-05-08 Changed: Updated bundled CPAN module Devel::StackTrace to 2.05.
+ - 2026-04-07 Fixed: Context menu for editing tables in RTE not visible in fullscreen mode.
 
 # 7.3.3 2026-05-27
  - 2026-05-26 Fixed: Package manager does not use the user ID for package operations.

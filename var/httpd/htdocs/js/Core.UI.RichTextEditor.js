@@ -522,6 +522,7 @@ Core.UI.RichTextEditor = (function (TargetNS) {
             ToolbarConfig,
             ToolbarItems,
             ExcludedPlugins = Core.Config.Get('RichText.ExcludedPlugins', []),
+            ExtraPlugins = Core.Config.Get('RichText.ExtraPlugins', []),
             ContentAllowed,
             HeadingOptions = [],
             HeadingOptionConfig,
@@ -537,7 +538,8 @@ Core.UI.RichTextEditor = (function (TargetNS) {
             RTEContentCssSkin,
             RTEContentCssInternal,
             RTEContentCSSToApply = [],
-            RTEEditorAreaContent;
+            RTEEditorAreaContent,
+            BalloonFlipFixPluginAlreadyAdded;
 
         if (typeof ZnunyEditor === 'undefined') {
             return false;
@@ -682,14 +684,143 @@ Core.UI.RichTextEditor = (function (TargetNS) {
                     shouldNotGroupWhenFull: false,
                 },
                 onEnterCallback: function(container){
-                    $(container).prev('.ck-body-wrapper').
+                    $(container).siblings('.ck-body-wrapper').
                         addClass('ck-znuny-fullscreen');
                 },
                 onLeaveCallback: function(container){
-                    $(container).prev('.ck-body-wrapper').
+                    $(container).siblings('.ck-body-wrapper').
                         removeClass('ck-znuny-fullscreen');
                 },
             };
+        }
+
+        BalloonFlipFixPluginAlreadyAdded = ExtraPlugins.some(function(p) {
+            return p.pluginName === 'BalloonFlipFix';
+        });
+
+        // Fix balloon flip behavior.
+        // Issue: baloon toolbars are visible when
+        // scrolling page on top of the main toolbar.
+        // Solution: override original balloonView CKEditor functions
+        // to keep track of the main toolbar <=> balloon toolbar locations
+        // and flip or hide balloon toolbar if they cover each other.
+        // This may be fixed in later CKEditor versions.
+        function BalloonFlipFix(editor) {
+            this.editor = editor;
+        }
+
+        if (!BalloonFlipFixPluginAlreadyAdded) {
+            BalloonFlipFix.pluginName = 'BalloonFlipFix';
+
+            BalloonFlipFix.prototype.init = function() {
+                var Editor = this.editor;
+
+                Editor.on('ready', function() {
+                    var ContextualBalloon,
+                        BalloonView,
+                        BalloonPanelView,
+                        DefaultPositions,
+                        OriginalAttachTo;
+
+                    try {
+                        ContextualBalloon = Editor.plugins.get('ContextualBalloon');
+                    }
+                    catch (e) {
+                        return;
+                    }
+
+                    if (!ContextualBalloon || !ContextualBalloon.view) {
+                        return;
+                    }
+
+                    BalloonView      = ContextualBalloon.view;
+                    BalloonPanelView = Object.getPrototypeOf(BalloonView).constructor;
+                    DefaultPositions = BalloonPanelView.defaultPositions;
+                    OriginalAttachTo = BalloonView.attachTo.bind(BalloonView);
+
+                    BalloonView.attachTo = function(Options) {
+                        var Result,
+                            BalloonEl,
+                            ToolbarEl,
+                            BalloonRect,
+                            ToolbarRect,
+                            OverlapTolerance,
+                            OverlapAmount,
+                            HorizontalOverlap,
+                            IsHidden,
+                            Overlaps,
+                            SouthOptions,
+                            SouthResult,
+                            StillHidden,
+                            StillOverlaps;
+
+                        Result    = OriginalAttachTo(Options);
+                        BalloonEl = BalloonView.element;
+
+                        if (!BalloonEl) {
+                            return Result;
+                        }
+
+                        ToolbarEl = Editor.ui.view.toolbar && Editor.ui.view.toolbar.element;
+
+                        if (!ToolbarEl) {
+                            return Result;
+                        }
+
+                        BalloonRect      = BalloonEl.getBoundingClientRect();
+                        ToolbarRect      = ToolbarEl.getBoundingClientRect();
+                        OverlapTolerance = 30; // allow small overlapping with toolbar
+                        OverlapAmount    = 0;
+                        IsHidden         = BalloonView.left < -9000;
+
+                        if (!IsHidden) {
+                            HorizontalOverlap = BalloonRect.left < ToolbarRect.right
+                                && BalloonRect.right > ToolbarRect.left;
+
+                            if (HorizontalOverlap && BalloonRect.top < ToolbarRect.bottom) {
+                                OverlapAmount = ToolbarRect.bottom - BalloonRect.top;
+                            }
+                        }
+
+                        Overlaps = OverlapAmount > OverlapTolerance;
+
+                        if (!IsHidden && !Overlaps) {
+                            return Result;
+                        }
+
+                        // flip south positions
+                        SouthOptions = Object.assign({}, Options, {
+                            positions: [
+                                DefaultPositions.southArrowNorthWest,
+                                DefaultPositions.southArrowNorth,
+                                DefaultPositions.southArrowNorthMiddleWest,
+                                DefaultPositions.southArrowNorthMiddleEast,
+                                DefaultPositions.southArrowNorthEast
+                            ]
+                        });
+
+                        SouthResult = OriginalAttachTo(SouthOptions);
+
+                        // check if south also does not overlap with toolbar
+                        BalloonRect   = BalloonEl.getBoundingClientRect();
+                        StillHidden   = BalloonView.left < -9000;
+                        StillOverlaps = !StillHidden
+                            && BalloonRect.top < ToolbarRect.bottom
+                            && BalloonRect.bottom > ToolbarRect.top
+                            && BalloonRect.left < ToolbarRect.right
+                            && BalloonRect.right > ToolbarRect.left;
+
+                        if (StillHidden || StillOverlaps) {
+                            BalloonView.hide();
+                        }
+
+                        return SouthResult;
+                    };
+                });
+            };
+
+            BalloonFlipFix.prototype.destroy = function() {};
+            ExtraPlugins.push(BalloonFlipFix);
         }
 
         RTEEditorAreaContent = $EditorArea.val();
@@ -704,7 +835,7 @@ Core.UI.RichTextEditor = (function (TargetNS) {
             $EditorArea[0],
             $.extend({
                 plugins: Plugins,
-                extraPlugins: Core.Config.Get('RichText.ExtraPlugins', []),
+                extraPlugins: ExtraPlugins,
                 removePlugins: ExcludedPlugins,
                 autocomplete: AutocompleteConfig,
                 heading: {
