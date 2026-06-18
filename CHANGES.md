@@ -4,6 +4,7 @@
  - 2026-06-12 Fixed: Issue with mentioning out of office users via group mention.
  - 2026-06-01 Added: Agent and customer error pages now show configurable link for next action.
  - 2026-06-01 Fixed: Attachments can no longer be assigned to Snippet templates in AdminTemplateAttachment.
+ - 2026-05-27 Fixed: Web service notification recipient payloads could include sensitive password fields.
 
 # 6.5.21 2026-05-27
  - 2026-05-26 Fixed: Package manager does not use the user ID for package operations.
