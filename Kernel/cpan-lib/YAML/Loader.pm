@@ -43,6 +43,7 @@ sub _parse {
     $self->_parse_throwaway_comments();
     $self->document(0);
     $self->documents([]);
+    $self->zero_indent([]);
     # Add an "assumed" header if there is no header and the stream is
     # not empty (after initial throwaways).
     if (not $self->eos) {
@@ -61,17 +62,25 @@ sub _parse {
         $self->offset->[0] = -1;
 
         if ($self->lines->[0] =~ /^---\s*(.*)$/) {
-            my @words = split /\s+/, $1;
+            my @words = split /\s/, $1;
             %directives = ();
-            while (@words && $words[0] =~ /^#(\w+):(\S.*)$/) {
-                my ($key, $value) = ($1, $2);
-                shift(@words);
-                if (defined $directives{$key}) {
-                    $self->warn('YAML_PARSE_WARN_MULTIPLE_DIRECTIVES',
-                      $key, $self->document);
-                    next;
+            while (@words) {
+                if ($words[0] =~ /^#(\w+):(\S.*)$/) {
+                    my ($key, $value) = ($1, $2);
+                    shift(@words);
+                    if (defined $directives{$key}) {
+                        $self->warn('YAML_PARSE_WARN_MULTIPLE_DIRECTIVES',
+                          $key, $self->document);
+                        next;
+                    }
+                    $directives{$key} = $value;
                 }
-                $directives{$key} = $value;
+                elsif ($words[0] eq '') {
+                    shift @words;
+                }
+                else {
+                    last;
+                }
             }
             $self->preface(join ' ', @words);
         }
@@ -110,8 +119,8 @@ sub _parse_node {
     my $self = shift;
     my $preface = $self->preface;
     $self->preface('');
-    my ($node, $type, $indicator, $escape, $chomp) = ('') x 5;
-    my ($anchor, $alias, $explicit, $implicit, $class) = ('') x 5;
+    my ($node, $type, $indicator, $chomp, $parsed_inline) = ('') x 5;
+    my ($anchor, $alias, $explicit, $implicit) = ('') x 4;
     ($anchor, $alias, $explicit, $implicit, $preface) =
       $self->_parse_qualifiers($preface);
     if ($anchor) {
@@ -119,13 +128,21 @@ sub _parse_node {
     }
     $self->inline('');
     while (length $preface) {
-        my $line = $self->line - 1;
-        if ($preface =~ s/^($FOLD_CHAR|$LIT_CHAR_RX)(-|\+)?\d*\s*//) {
+        if ($preface =~ s/^($FOLD_CHAR|$LIT_CHAR_RX)//) {
             $indicator = $1;
-            $chomp = $2 if defined($2);
+            if ($preface =~ s/^([+-])[0-9]*//) {
+                $chomp = $1;
+            }
+            elsif ($preface =~ s/^[0-9]+([+-]?)//) {
+                $chomp = $1;
+            }
+            if ($preface =~ s/^(?:\s+#.*$|\s*)$//) {
+            }
+            else {
+                $self->die('YAML_PARSE_ERR_TEXT_AFTER_INDICATOR');
+            }
         }
         else {
-            $self->die('YAML_PARSE_ERR_TEXT_AFTER_INDICATOR') if $indicator;
             $self->inline($preface);
             $preface = '';
         }
@@ -143,6 +160,7 @@ sub _parse_node {
     }
     elsif (length $self->inline) {
         $node = $self->_parse_inline(1, $implicit, $explicit);
+        $parsed_inline = 1;
         if (length $self->inline) {
             $self->die('YAML_PARSE_ERR_SINGLE_LINE');
         }
@@ -184,17 +202,7 @@ sub _parse_node {
     $#{$self->offset} = $self->level;
 
     if ($explicit) {
-        if ($class) {
-            if (not ref $node) {
-                my $copy = $node;
-                undef $node;
-                $node = \$copy;
-            }
-            CORE::bless $node, $class;
-        }
-        else {
-            $node = $self->_parse_explicit($node, $explicit);
-        }
+        $node = $self->_parse_explicit($node, $explicit) if !$parsed_inline;
     }
     if ($anchor) {
         if (ref($self->anchor2node->{$anchor}) eq 'YAML-anchor2node') {
@@ -217,7 +225,6 @@ sub _parse_qualifiers {
     my ($anchor, $alias, $explicit, $implicit, $token) = ('') x 5;
     $self->inline('');
     while ($preface =~ /^[&*!]/) {
-        my $line = $self->line - 1;
         if ($preface =~ s/^\!(\S+)\s*//) {
             $self->die('YAML_PARSE_ERR_MANY_EXPLICIT') if $explicit;
             $explicit = $1;
@@ -229,7 +236,7 @@ sub _parse_qualifiers {
         elsif ($preface =~ s/^\&([^ ,:]*)\s*//) {
             $token = $1;
             $self->die('YAML_PARSE_ERR_BAD_ANCHOR')
-              unless $token =~ /^[a-zA-Z0-9]+$/;
+              unless $token =~ /^[a-zA-Z0-9_.\/-]+$/;
             $self->die('YAML_PARSE_ERR_MANY_ANCHOR') if $anchor;
             $self->die('YAML_PARSE_ERR_ANCHOR_ALIAS') if $alias;
             $anchor = $token;
@@ -237,7 +244,7 @@ sub _parse_qualifiers {
         elsif ($preface =~ s/^\*([^ ,:]*)\s*//) {
             $token = $1;
             $self->die('YAML_PARSE_ERR_BAD_ALIAS')
-              unless $token =~ /^[a-zA-Z0-9]+$/;
+              unless $token =~ /^[a-zA-Z0-9_.\/-]+$/;
             $self->die('YAML_PARSE_ERR_MANY_ALIAS') if $alias;
             $self->die('YAML_PARSE_ERR_ANCHOR_ALIAS') if $anchor;
             $alias = $token;
@@ -269,7 +276,7 @@ sub _parse_explicit {
             $node = \$value;
         }
 
-        if ( length($class) ) {
+        if ( length($class) and $YAML::LoadBlessed ) {
             CORE::bless($node, $class);
         }
 
@@ -295,13 +302,16 @@ sub _parse_explicit {
             require YAML::Node;
             return $class->yaml_load(YAML::Node->new($node, $explicit));
         }
-        else {
+        elsif ($YAML::LoadBlessed) {
             if (ref $node) {
                 return CORE::bless $node, $class;
             }
             else {
                 return CORE::bless \$node, $class;
             }
+        }
+        else {
+            return $node;
         }
     }
     elsif (ref $node) {
@@ -331,11 +341,11 @@ sub _parse_mapping {
             $key = "$key";
         }
         # If "default" key (equals sign)
-        elsif ($self->{content} =~ s/^\=\s*//) {
+        elsif ($self->{content} =~ s/^\=\s*(?=:)//) {
             $key = VALUE;
         }
         # If "comment" key (slash slash)
-        elsif ($self->{content} =~ s/^\=\s*//) {
+        elsif ($self->{content} =~ s/^\=\s*(?=:)//) {
             $key = COMMENT;
         }
         # Regular scalar key:
@@ -347,13 +357,19 @@ sub _parse_mapping {
             $self->inline('');
         }
 
-        unless ($self->{content} =~ s/^:\s*//) {
+        unless ($self->{content} =~ s/^:(?:\s+#.*$|\s*)//) {
             $self->die('YAML_LOAD_ERR_BAD_MAP_ELEMENT');
         }
         $self->preface($self->content);
-        my $line = $self->line;
+        my $level = $self->level;
+
+        # we can get a zero indented sequence, possibly
+        my $zero_indent = $self->zero_indent;
+        $zero_indent->[ $level ] = 0;
         $self->_parse_next_line(COLLECTION);
         my $value = $self->_parse_node();
+        $#$zero_indent = $level;
+
         if (exists $mapping->{$key}) {
             $self->warn('YAML_LOAD_WARN_DUPLICATE_KEY', $key);
         }
@@ -375,6 +391,9 @@ sub _parse_seq {
             $self->preface(defined($1) ? $1 : '');
         }
         else {
+            if ($self->zero_indent->[ $self->level ]) {
+                last;
+            }
             $self->die('YAML_LOAD_ERR_BAD_SEQ_ELEMENT');
         }
 
@@ -383,9 +402,21 @@ sub _parse_seq {
         # that a key is a quoted string, which itself may contain escaped
         # quotes.
         my $preface = $self->preface;
-        if ( $preface =~ /^ (\s*) ( \w .*?               \: (?:\ |$).*) $/x  or
+        if ($preface =~ m/^ (\s*) ( - (?: \ .* | $ ) ) /x) {
+            $self->indent($self->offset->[$self->level] + 2 + length($1));
+            $self->content($2);
+            $self->level($self->level + 1);
+            $self->offset->[$self->level] = $self->indent;
+            $self->preface('');
+            push @$seq, $self->_parse_seq('');
+            $self->{level}--;
+            $#{$self->offset} = $self->level;
+        }
+        elsif (
              $preface =~ /^ (\s*) ((') (?:''|[^'])*? ' \s* \: (?:\ |$).*) $/x or
-             $preface =~ /^ (\s*) ((") (?:\\\\|[^"])*? " \s* \: (?:\ |$).*) $/x
+             $preface =~ /^ (\s*) ((") (?:\\\\|[^"])*? " \s* \: (?:\ |$).*) $/x or
+             $preface =~ /^ (\s*) (\?.*$)/x or
+             $preface =~ /^ (\s*) ([^'"\s:#&!\[\]\{\},*|>].*\:(\ .*|$))/x
            ) {
             $self->indent($self->offset->[$self->level] + 2 + length($1));
             $self->content($2);
@@ -485,7 +516,7 @@ sub _parse_inline_mapping {
 
     $self->die('YAML_PARSE_ERR_INLINE_MAP')
       unless $self->{inline} =~ s/^\{\s*//;
-    while (not $self->{inline} =~ s/^\s*\}\s*//) {
+    while (not $self->{inline} =~ s/^\s*\}(\s+#.*$|\s*)//) {
         my $key = $self->_parse_inline();
         $self->die('YAML_PARSE_ERR_INLINE_MAP')
           unless $self->{inline} =~ s/^\: \s*//;
@@ -512,7 +543,7 @@ sub _parse_inline_seq {
 
     $self->die('YAML_PARSE_ERR_INLINE_SEQUENCE')
       unless $self->{inline} =~ s/^\[\s*//;
-    while (not $self->{inline} =~ s/^\s*\]\s*//) {
+    while (not $self->{inline} =~ s/^\s*\](\s+#.*$|\s*)//) {
         my $value = $self->_parse_inline();
         push @$node, $value;
         next if $self->inline =~ /^\s*\]/;
@@ -525,33 +556,43 @@ sub _parse_inline_seq {
 # Parse the inline double quoted string.
 sub _parse_inline_double_quoted {
     my $self = shift;
-    my $node;
-    # https://rt.cpan.org/Public/Bug/Display.html?id=90593
-    if ($self->inline =~ /^"((?:(?:\\"|[^"]){0,32766}){0,32766})"\s*(.*)$/) {
-        $node = $1;
-        $self->inline($2);
-        $node =~ s/\\"/"/g;
+    my $inline = $self->inline;
+    if ($inline =~ s/^"//) {
+        my $node = '';
+
+        while ($inline =~ s/^(\\.|[^"\\]+)//) {
+            my $capture = $1;
+            $capture =~ s/^\\"/"/;
+            $node .= $capture;
+            last unless length $inline;
+        }
+        if ($inline =~ s/^"(?:\s+#.*|\s*)//) {
+            $self->inline($inline);
+            return $node;
+        }
     }
-    else {
-        $self->die('YAML_PARSE_ERR_BAD_DOUBLE');
-    }
-    return $node;
+    $self->die('YAML_PARSE_ERR_BAD_DOUBLE');
 }
 
 
 # Parse the inline single quoted string.
 sub _parse_inline_single_quoted {
     my $self = shift;
-    my $node;
-    if ($self->inline =~ /^'((?:(?:''|[^']){0,32766}){0,32766})'\s*(.*)$/) {
-        $node = $1;
-        $self->inline($2);
-        $node =~ s/''/'/g;
+    my $inline = $self->inline;
+    if ($inline =~ s/^'//) {
+        my $node = '';
+        while ($inline =~ s/^(''|[^']+)//) {
+            my $capture = $1;
+            $capture =~ s/^''/'/;
+            $node .= $capture;
+            last unless length $inline;
+        }
+        if ($inline =~ s/^'(?:\s+#.*|\s*)//) {
+            $self->inline($inline);
+            return $node;
+        }
     }
-    else {
-        $self->die('YAML_PARSE_ERR_BAD_SINGLE');
-    }
-    return $node;
+    $self->die('YAML_PARSE_ERR_BAD_SINGLE');
 }
 
 # Parse the inline unquoted string and do implicit typing.
@@ -571,6 +612,9 @@ sub _parse_inline_simple {
 sub _parse_implicit {
     my $self = shift;
     my ($value) = @_;
+    # remove trailing comments and whitespace
+    $value =~ s/^#.*$//;
+    $value =~ s/\s+#.*$//;
     $value =~ s/\s*$//;
     return $value if $value eq '';
     return undef if $value =~ /^~$/;
@@ -650,14 +694,16 @@ sub _parse_next_line {
     $self->{line}++;
 
     # Determine the offset for a new leaf node
+    # TODO
     if ($self->preface =~
-        qr/(?:^|\s)(?:$FOLD_CHAR|$LIT_CHAR_RX)(?:-|\+)?(\d*)\s*$/
+        qr/(?:^|\s)(?:$FOLD_CHAR|$LIT_CHAR_RX)(?:[+-]([0-9]*)|([0-9]*)[+-]?)(?:\s+#.*|\s*)$/
        ) {
+        my $explicit_indent = defined $1 ? $1 : defined $2 ? $2 : '';
         $self->die('YAML_PARSE_ERR_ZERO_INDENT')
-          if length($1) and $1 == 0;
+          if length($explicit_indent) and $explicit_indent == 0;
         $type = LEAF;
-        if (length($1)) {
-            $self->offset->[$level + 1] = $offset + $1;
+        if (length($explicit_indent)) {
+            $self->offset->[$level + 1] = $offset + $explicit_indent;
         }
         else {
             # First get rid of any comments.
@@ -682,9 +728,21 @@ sub _parse_next_line {
     elsif ($type == COLLECTION and
            $self->preface =~ /^(\s*(\!\S*|\&\S+))*\s*$/) {
         $self->_parse_throwaway_comments();
+        my $zero_indent = $self->zero_indent;
         if ($self->eos) {
             $self->offset->[$level+1] = $offset + 1;
             return;
+        }
+        elsif (
+            defined $zero_indent->[ $level ]
+            and not $zero_indent->[ $level ]
+            and $self->lines->[0] =~ /^( {$offset,})-(?: |$)/
+        ) {
+            my $new_offset = length($1);
+            $self->offset->[$level+1] = $new_offset;
+            if ($new_offset == $offset) {
+                $zero_indent->[ $level+1 ] = 1;
+            }
         }
         else {
             $self->lines->[0] =~ /^( *)\S/ or
@@ -700,12 +758,22 @@ sub _parse_next_line {
     }
 
     if ($type == LEAF) {
-        while (@{$self->lines} and
+        if (@{$self->lines} and
                $self->lines->[0] =~ m{^( *)(\#)} and
                length($1) < $offset
               ) {
-            shift @{$self->lines};
-            $self->{line}++;
+            if ( length($1) < $offset) {
+                shift @{$self->lines};
+                $self->{line}++;
+                # every comment after that is also thrown away regardless
+                # of identation
+                while (@{$self->lines} and
+                       $self->lines->[0] =~ m{^( *)(\#)}
+                      ) {
+                    shift @{$self->lines};
+                    $self->{line}++;
+                }
+            }
         }
         $self->eos($self->{done} = not @{$self->lines});
     }
