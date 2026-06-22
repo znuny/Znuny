@@ -325,11 +325,6 @@ sub new {
         delete $Self->{ValidFilterableColumns}->{CustomerUserID};
     }
 
-    # Validate SortBy against known sortable columns; undef falls through to default 'Age'.
-    if ( defined $Self->{SortBy} && !$Self->{ValidSortableColumns}->{ $Self->{SortBy} } ) {
-        $Self->{SortBy} = undef;
-    }
-
     $Self->{UseTicketService} = $ConfigObject->Get('Ticket::Service') || 0;
 
     if ( $Self->{Config}->{IsProcessWidget} ) {
@@ -606,9 +601,14 @@ sub Run {
     my %TicketSearchSummary = %{ $SearchParams{TicketSearchSummary} };
     my %Filter              = %{ $SearchParams{Filter} // {} };
 
+    # Validate SortBy against known sortable columns; undef falls through to default 'Age'.
+    if ( defined $Self->{SortBy} && !$Self->{ValidSortableColumns}->{ $Self->{SortBy} } ) {
+        $Self->{SortBy} = undef;
+    }
+
     my @ArticleAttributes = @{ $ConfigObject->Get('DashboardBackend::TicketGeneric::ArticleAttributes') || [] };
-    my %ArticleAttributes = map { $_ => 1 } @ArticleAttributes;
-    my @ArticleColumns    = keys %ArticleAttributes;
+    my %ArticleAttributes = map  { $_ => 1 } @ArticleAttributes;
+    my @ArticleColumns    = grep { $ArticleAttributes{$_} } @Columns;
 
     # Add the additional filter to the ticket search param.
     if ( $Self->{AdditionalFilter} ) {
