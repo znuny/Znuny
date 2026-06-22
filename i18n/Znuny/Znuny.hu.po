@@ -25798,3 +25798,7 @@ msgstr "Az adminisztrátori felhasználóval (1-es azonosító) engedélyezi a j
 msgid "The selected template type does not support attachments."
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
+msgid "View the admin manual"
+msgstr ""
+

@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.684819277108434;
+    $Self->{Completeness}        = 0.684658634538153;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1396,7 +1396,7 @@ sub Data {
         'You can add favorites by moving your cursor over items on the right side and clicking the star icon.' =>
             'Możesz dodać wybraną pozycję do ulubionych poprzez umieszczenie kursora nad nią i kliknięcie ikony gwiazdki.',
         'Links' => 'Linki',
-        'View the admin manual on Github' => 'Zobacz Instrukcję administratora na Github',
+        'View the admin manual' => '',
         'No Matches' => 'Brak Dopasowań',
         'Sorry, your search didn\'t match any items.' => 'Niestety twoje kryteria wyszukiwania nie pasują do żadnych elementów.',
         'Set as favorite' => 'Ustaw jako ulubiony',
