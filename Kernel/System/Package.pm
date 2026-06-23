@@ -1240,7 +1240,7 @@ sub PackageUninstall {
     }
 
     # uninstall database (pre)
-    if ( $Structure{DatabaseUninstall} && $Structure{DatabaseUninstall}->{pre} ) {
+    if ( !$Param{KeepData} && $Structure{DatabaseUninstall} && $Structure{DatabaseUninstall}->{pre} ) {
         $Self->_Database( Database => $Structure{DatabaseUninstall}->{pre} );
     }
 
@@ -1266,7 +1266,7 @@ sub PackageUninstall {
     );
 
     # uninstall database (post)
-    if ( $Structure{DatabaseUninstall} && $Structure{DatabaseUninstall}->{post} ) {
+    if ( !$Param{KeepData} && $Structure{DatabaseUninstall} && $Structure{DatabaseUninstall}->{post} ) {
         $Self->_Database( Database => $Structure{DatabaseUninstall}->{post} );
     }
 

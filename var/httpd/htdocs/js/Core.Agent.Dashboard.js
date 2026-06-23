@@ -1183,7 +1183,7 @@ Core.Agent.Dashboard = (function (TargetNS) {
      *      Initializes the filterable and sortable column event.
      */
     function GenericHeaderColumnFilterSort (ColumnFilterSort) {
-        var LinkPage, ColumnFilterName, Filter, AdditionalFilter, ColumnFilterID, CustomerID, CustomerUserID;
+        var LinkPage, ColumnFilterName, Filter, AdditionalFilter, ColumnFilterID, CustomerID, CustomerUserID, SelectedValues, SeenValues;
 
         $('#ColumnFilter' + Core.App.EscapeSelector(ColumnFilterSort.HeaderColumnName) + Core.App.EscapeSelector(ColumnFilterSort.Name)).off('change').on('change', function(){
             if ($(this).val() === null) {
@@ -1198,7 +1198,27 @@ Core.Agent.Dashboard = (function (TargetNS) {
 
             // set ColumnFilter value for current ColumnFilter
             ColumnFilterName = $(this).attr('name');
-            LinkPage = LinkPage + ColumnFilterName + '=' + encodeURIComponent($(this).val()) + ';';
+
+            if ($(this).prop('multiple')) {
+                SelectedValues = [];
+                SeenValues = {};
+                $(this).find('option:selected').each(function () {
+                    var Value = $(this).val();
+                    if (!Value || SeenValues[Value]) {
+                        return;
+                    }
+                    SeenValues[Value] = true;
+                    SelectedValues.push(Value);
+                });
+                $.each(SelectedValues, function (Index, Value) {
+                    if (Value) {
+                        LinkPage = LinkPage + ColumnFilterName + '=' + encodeURIComponent(Value) + ';';
+                    }
+                });
+            }
+            else {
+                LinkPage = LinkPage + ColumnFilterName + '=' + encodeURIComponent($(this).val()) + ';';
+            }
 
             // remember the current ColumnFilter ID
             ColumnFilterID = $(this).attr('ID');
@@ -1332,7 +1352,7 @@ Core.Agent.Dashboard = (function (TargetNS) {
      */
     function GenericHeaderColumnFilter (ColumnFilter) {
         $('#ColumnFilter' + Core.App.EscapeSelector(ColumnFilter.HeaderColumnName) + Core.App.EscapeSelector(ColumnFilter.Name)).off('change').on('change', function(){
-            var LinkPage, ColumnFilterName, Filter, AdditionalFilter, ColumnFilterID, CustomerID, CustomerUserID;
+            var LinkPage, ColumnFilterName, Filter, AdditionalFilter, ColumnFilterID, CustomerID, CustomerUserID, SelectedValues, SeenValues;
 
             if ($(this).val() === null) {
                 return false;
@@ -1346,7 +1366,27 @@ Core.Agent.Dashboard = (function (TargetNS) {
 
             // set ColumnFilter value for current ColumnFilter
             ColumnFilterName = $(this).attr('name');
-            LinkPage = LinkPage + ColumnFilterName + '=' + $(this).val() + ';';
+
+            if ($(this).prop('multiple')) {
+                SelectedValues = [];
+                SeenValues = {};
+                $(this).find('option:selected').each(function () {
+                    var Value = $(this).val();
+                    if (!Value || SeenValues[Value]) {
+                        return;
+                    }
+                    SeenValues[Value] = true;
+                    SelectedValues.push(Value);
+                });
+                $.each(SelectedValues, function (Index, Value) {
+                    if (Value) {
+                        LinkPage = LinkPage + ColumnFilterName + '=' + encodeURIComponent(Value) + ';';
+                    }
+                });
+            }
+            else {
+                LinkPage = LinkPage + ColumnFilterName + '=' + $(this).val() + ';';
+            }
 
             // remember the current ColumnFilter ID
             ColumnFilterID = $(this).attr('ID');

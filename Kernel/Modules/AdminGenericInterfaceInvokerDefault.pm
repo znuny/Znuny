@@ -219,14 +219,29 @@ sub _AddAction {
         GetAllArticleAttachments => $GetParam->{GetAllArticleAttachments},
     };
 
+    # Omitted fields of payload
+    my $PayloadOmittedFields = $Self->_GetPayloadOmittedFieldsFromForm();
+    @{ $InvokerConfig->{PayloadOmittedFields} } = map { $_->{Field} } @{ $PayloadOmittedFields->{Fields} };
+
+    # Base64 encoded fields of payload
+    my $PayloadBase64EncodedFields = $Self->_GetPayloadBase64EncodedFieldsFromForm();
+    @{ $InvokerConfig->{PayloadBase64EncodedFields} } = map { $_->{Field} } @{ $PayloadBase64EncodedFields->{Fields} };
+
     # Validation errors.
-    if (%Errors) {
+    if (
+        %Errors
+        || $PayloadOmittedFields->{HasError}
+        || $PayloadBase64EncodedFields->{HasError}
+        )
+    {
         return $Self->_ShowScreen(
             %Param,
             %{$GetParam},
             %Errors,
-            Mode          => 'Add',
-            InvokerConfig => $InvokerConfig,
+            Mode                       => 'Add',
+            InvokerConfig              => $InvokerConfig,
+            PayloadOmittedFields       => $PayloadOmittedFields,
+            PayloadBase64EncodedFields => $PayloadBase64EncodedFields,
         );
     }
 
@@ -301,14 +316,24 @@ sub _Change {
         );
     }
 
+    my $PayloadOmittedFields = $Self->_GetPayloadOmittedFieldsFromInvokerConfig(
+        InvokerConfig => $InvokerConfig,
+    );
+
+    my $PayloadBase64EncodedFields = $Self->_GetPayloadBase64EncodedFieldsFromInvokerConfig(
+        InvokerConfig => $InvokerConfig,
+    );
+
     return $Self->_ShowScreen(
         %Param,
         %{$GetParam},
-        Mode            => 'Change',
-        Invoker         => $GetParam->{Invoker},
-        InvokerConfig   => $InvokerConfig,
-        MappingInbound  => $InvokerConfig->{MappingInbound}->{Type},
-        MappingOutbound => $InvokerConfig->{MappingOutbound}->{Type},
+        Mode                       => 'Change',
+        Invoker                    => $GetParam->{Invoker},
+        InvokerConfig              => $InvokerConfig,
+        MappingInbound             => $InvokerConfig->{MappingInbound}->{Type},
+        MappingOutbound            => $InvokerConfig->{MappingOutbound}->{Type},
+        PayloadOmittedFields       => $PayloadOmittedFields,
+        PayloadBase64EncodedFields => $PayloadBase64EncodedFields,
     );
 }
 
@@ -392,15 +417,30 @@ sub _ChangeAction {
     $InvokerConfig->{Description}              = $GetParam->{Description};
     $InvokerConfig->{GetAllArticleAttachments} = $GetParam->{GetAllArticleAttachments};
 
-    if (%Errors) {
+    # Omitted fields of payload
+    my $PayloadOmittedFields = $Self->_GetPayloadOmittedFieldsFromForm();
+    @{ $InvokerConfig->{PayloadOmittedFields} } = map { $_->{Field} } @{ $PayloadOmittedFields->{Fields} };
+
+    # Base64 encoded fields of payload
+    my $PayloadBase64EncodedFields = $Self->_GetPayloadBase64EncodedFieldsFromForm();
+    @{ $InvokerConfig->{PayloadBase64EncodedFields} } = map { $_->{Field} } @{ $PayloadBase64EncodedFields->{Fields} };
+
+    if (
+        %Errors
+        || $PayloadOmittedFields->{HasError}
+        || $PayloadBase64EncodedFields->{HasError}
+        )
+    {
         return $Self->_ShowScreen(
             %Param,
             %{$GetParam},
             %Errors,
-            Mode          => 'Change',
-            Invoker       => $GetParam->{OldInvoker},
-            InvokerConfig => $InvokerConfig,
-            NewInvoker    => $GetParam->{Invoker},
+            Mode                       => 'Change',
+            Invoker                    => $GetParam->{OldInvoker},
+            InvokerConfig              => $InvokerConfig,
+            NewInvoker                 => $GetParam->{Invoker},
+            PayloadOmittedFields       => $PayloadOmittedFields,
+            PayloadBase64EncodedFields => $PayloadBase64EncodedFields,
         );
     }
 
@@ -723,6 +763,78 @@ sub _ShowScreen {
         );
     }
 
+    # Omitted fields of payload
+    $LayoutObject->Block(
+        Name => 'PayloadOmittedFields',
+        Data => {},
+    );
+
+    $LayoutObject->Block(
+        Name => 'PayloadOmittedFieldsTemplate',
+        Data => {},
+    );
+
+    my $PayloadOmittedFieldsValueCounter = 0;
+    my $PayloadOmittedFields             = $Param{PayloadOmittedFields} // {};
+    if ( IsArrayRefWithData( $PayloadOmittedFields->{Fields} ) ) {
+        for my $Field ( @{ $PayloadOmittedFields->{Fields} } ) {
+            $PayloadOmittedFieldsValueCounter++;
+
+            $LayoutObject->Block(
+                Name => 'PayloadOmittedFieldsRow',
+                Data => {
+                    PayloadOmittedFieldsValueCounter => $PayloadOmittedFieldsValueCounter,
+                    PayloadOmittedField              => $Field->{Field},
+                    PayloadOmittedFieldError         => IsStringWithData( $Field->{ErrorMessage} ) ? 'ServerError' : '',
+                    PayloadOmittedFieldErrorMessage  => $Field->{ErrorMessage},
+                },
+            );
+        }
+    }
+
+    $LayoutObject->Block(
+        Name => 'PayloadOmittedFieldsValueCounter',
+        Data => {
+            PayloadOmittedFieldsValueCounter => $PayloadOmittedFieldsValueCounter,
+        },
+    );
+
+    # Base64 encoded fields of payload
+    $LayoutObject->Block(
+        Name => 'PayloadBase64EncodedFields',
+        Data => {},
+    );
+
+    $LayoutObject->Block(
+        Name => 'PayloadBase64EncodedFieldsTemplate',
+        Data => {},
+    );
+
+    my $PayloadBase64EncodedFieldsValueCounter = 0;
+    my $PayloadBase64EncodedFields             = $Param{PayloadBase64EncodedFields} // {};
+    if ( IsArrayRefWithData( $PayloadBase64EncodedFields->{Fields} ) ) {
+        for my $Field ( @{ $PayloadBase64EncodedFields->{Fields} } ) {
+            $PayloadBase64EncodedFieldsValueCounter++;
+
+            $LayoutObject->Block(
+                Name => 'PayloadBase64EncodedFieldsRow',
+                Data => {
+                    PayloadBase64EncodedFieldsValueCounter => $PayloadBase64EncodedFieldsValueCounter,
+                    PayloadBase64EncodedField              => $Field->{Field},
+                    PayloadBase64EncodedFieldError => IsStringWithData( $Field->{ErrorMessage} ) ? 'ServerError' : '',
+                    PayloadBase64EncodedFieldErrorMessage => $Field->{ErrorMessage},
+                },
+            );
+        }
+    }
+
+    $LayoutObject->Block(
+        Name => 'PayloadBase64EncodedFieldsValueCounter',
+        Data => {
+            PayloadBase64EncodedFieldsValueCounter => $PayloadBase64EncodedFieldsValueCounter,
+        },
+    );
+
     if ( $Param{Mode} eq 'Change' ) {
 
         # Show all invoker event triggers.
@@ -821,7 +933,7 @@ sub _ShowScreen {
     }
 
     if ( $TemplateData{InvokerType} eq 'Ticket::Generic' ) {
-        $TemplateData{GetAllArticleAttachmentsStrg} = $LayoutObject->BuildSelection(
+        my $GetAllArticleAttachmentsStrg = $LayoutObject->BuildSelection(
             Data => {
                 0 => 'no',
                 1 => 'yes',
@@ -832,6 +944,13 @@ sub _ShowScreen {
             PossibleNone => 0,
             Class        => 'Modernize',
             Translation  => 1,
+        );
+
+        $LayoutObject->Block(
+            Name => 'GetAllArticleAttachments',
+            Data => {
+                GetAllArticleAttachmentsStrg => $GetAllArticleAttachmentsStrg,
+            },
         );
     }
 
@@ -940,6 +1059,123 @@ sub _JSONResponse {
         Type        => 'inline',
         NoCache     => 1,
     );
+}
+
+sub _GetPayloadOmittedFieldsFromForm {
+    my ( $Self, %Param ) = @_;
+
+    my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
+
+    my @ParamNames                    = $ParamObject->GetParamNames();
+    my @PayloadOmittedFieldParamNames = grep { $_ =~ m{\APayloadOmittedField_\d+\z} } @ParamNames;
+
+    my %PayloadOmittedFields = (
+        Fields   => [],
+        HasError => 0,
+    );
+
+    PAYLOADOMITTEDFIELDPARAMNAME:
+    for my $PayloadOmittedFieldParamName ( sort @PayloadOmittedFieldParamNames ) {
+        my $PayloadOmittedField = $ParamObject->GetParam(
+            Param => $PayloadOmittedFieldParamName,
+        );
+
+        my $ErrorMessage;
+        if (
+            defined $PayloadOmittedField
+            && !IsStringWithData($PayloadOmittedField)
+            )
+        {
+            $ErrorMessage = Translatable('This field is required.');
+            $PayloadOmittedFields{HasError} = 1;
+        }
+
+        push @{ $PayloadOmittedFields{Fields} }, {
+            Field        => $PayloadOmittedField,
+            ErrorMessage => $ErrorMessage,
+        };
+    }
+
+    return \%PayloadOmittedFields;
+}
+
+sub _GetPayloadOmittedFieldsFromInvokerConfig {
+    my ( $Self, %Param ) = @_;
+
+    my %PayloadOmittedFields = (
+        Fields   => [],
+        HasError => 0,
+    );
+
+    my $InvokerConfig = $Param{InvokerConfig};
+    return \%PayloadOmittedFields if !IsArrayRefWithData( $InvokerConfig->{PayloadOmittedFields} );
+
+    for my $PayloadOmittedField ( @{ $InvokerConfig->{PayloadOmittedFields} } ) {
+        push @{ $PayloadOmittedFields{Fields} }, {
+            Field        => $PayloadOmittedField,
+            ErrorMessage => undef,
+        };
+    }
+
+    return \%PayloadOmittedFields;
+}
+
+sub _GetPayloadBase64EncodedFieldsFromForm {
+    my ( $Self, %Param ) = @_;
+
+    my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
+
+    my @ParamNames                          = $ParamObject->GetParamNames();
+    my @PayloadBase64EncodedFieldParamNames = grep { $_ =~ m{\APayloadBase64EncodedField_\d+\z} } @ParamNames;
+
+    my %PayloadBase64EncodedFields = (
+        Fields   => [],
+        HasError => 0,
+    );
+
+    for my $PayloadBase64EncodedFieldParamName ( sort @PayloadBase64EncodedFieldParamNames ) {
+        my $PayloadBase64EncodedField = $ParamObject->GetParam(
+            Param => $PayloadBase64EncodedFieldParamName,
+        );
+
+        my $ErrorMessage;
+        if (
+            defined $PayloadBase64EncodedField
+            && !IsStringWithData($PayloadBase64EncodedField)
+            )
+        {
+            $ErrorMessage = Translatable('This field is required.');
+            $PayloadBase64EncodedFields{HasError} = 1;
+        }
+
+        push @{ $PayloadBase64EncodedFields{Fields} }, {
+            Field        => $PayloadBase64EncodedField,
+            ErrorMessage => $ErrorMessage,
+        };
+    }
+
+    return \%PayloadBase64EncodedFields;
+}
+
+sub _GetPayloadBase64EncodedFieldsFromInvokerConfig {
+    my ( $Self, %Param ) = @_;
+
+    my %PayloadBase64EncodedFields = (
+        Fields   => [],
+        HasError => 0,
+    );
+
+    my $InvokerConfig = $Param{InvokerConfig};
+    return \%PayloadBase64EncodedFields if !IsArrayRefWithData( $InvokerConfig->{PayloadBase64EncodedFields} );
+
+    for my $PayloadBase64EncodedField ( @{ $InvokerConfig->{PayloadBase64EncodedFields} } ) {
+        push @{ $PayloadBase64EncodedFields{Fields} }, {
+            Field        => $PayloadBase64EncodedField,
+            ErrorMessage => undef,
+        };
+    }
+
+    return \%PayloadBase64EncodedFields;
 }
 
 1;

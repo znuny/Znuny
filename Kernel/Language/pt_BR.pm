@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.828092577813248;
+    $Self->{Completeness}        = 0.826509479050502;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -978,6 +978,18 @@ sub Data {
             'Gatilhos (dispadores) de eventos síncronos precisam ser processados diretamente durante a requisição web.',
         'Add all attachments' => 'Adicionar todos os anexos',
         'Add all attachments to invoker payload.' => '',
+        'Fields to be omitted from payload' => '',
+        'Field' => '',
+        'Remove field' => '',
+        'Add field to be omitted from payload' => '',
+        'Restore omitted fields' => '',
+        'Fields which will be removed from the payload of the request, e.g. \'SomeField1\'. Nested fields can be referenced by connecting them with \'->\', e.g. \'SomeField1->SomeField2->SomeField3\'.' =>
+            '',
+        'Fields to be Base64 encoded in payload' => '',
+        'Add field to be Base64 encoded in payload' => '',
+        'Restore Base64 encoded fields' => '',
+        'Fields which will be Base64 encoded in payload of the request, e.g. \'SomeField1\'. Nested fields can be referenced by connecting them with \'->\', e.g. \'SomeField1->SomeField2->SomeField3\'.' =>
+            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerEvent.tt
         'GenericInterface Invoker Event Settings for Web Service %s' => '%sConfigurações de evento Invoker Interface Generica e para Web Service',
@@ -1526,6 +1538,9 @@ sub Data {
         'Uninstall Package' => 'Desinstalar Pacote',
         'Uninstall package' => 'Desinstalar Pacote',
         'Do you really want to uninstall this package?' => 'Você quer realmente desinstalar este pacote?',
+        'Uninstall package and data' => '',
+        'Uninstall package only' => '',
+        'Uninstall' => 'Desinstalar',
         'Reinstall package' => 'Reinstalar Pacote',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Você realmente quer reinstalar este pacote? Quaisquer alterações manuais serão perdidas.',
@@ -1572,7 +1587,6 @@ sub Data {
         'Action' => 'Ação',
         'Module documentation' => 'Documentação do Módulo',
         'Local Repository' => 'Repositório Local',
-        'Uninstall' => 'Desinstalar',
         'Package not correctly deployed! Please reinstall the package.' =>
             'Pacote não instalado corretamente! Por favor, reinstale o pacote.',
         'Reinstall' => 'Reinstalar',
@@ -7874,9 +7888,9 @@ sub Data {
             '',
         'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
             '',
-        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
+        'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             '',
-        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
+        'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
             '',
         'Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic.' =>
             '',

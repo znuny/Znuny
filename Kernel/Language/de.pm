@@ -975,6 +975,18 @@ sub Data {
             'Synchrone Ereignisauslöser werden direkt während der laufenden Web-Anfrage verarbeitet.',
         'Add all attachments' => 'Alle Anhänge hinzufügen',
         'Add all attachments to invoker payload.' => 'Alle Anhänge zur Nutzlast des Invokers hinzufügen.',
+        'Fields to be omitted from payload' => 'Felder, die in der Payload ausgelassen werden',
+        'Field' => 'Feld',
+        'Remove field' => 'Feld entfernen',
+        'Add field to be omitted from payload' => 'Feld hinzufügen, das in der Payload ausgelassen werden soll',
+        'Restore omitted fields' => 'Ausgelassene Felder wiederherstellen',
+        'Fields which will be removed from the payload of the request, e.g. \'SomeField1\'. Nested fields can be referenced by connecting them with \'->\', e.g. \'SomeField1->SomeField2->SomeField3\'.' =>
+            'Felder, die aus der Payload des Requests entfernt werden, z. B. \'SomeField1\'. Verschachtelte Felder können referenziert werden, indem sie mit \'->\' verknüpft werden, z. B. \'SomeField1->SomeField2->SomeField3\'.',
+        'Fields to be Base64 encoded in payload' => 'Felder, die in der Payload Base64-kodiert werden',
+        'Add field to be Base64 encoded in payload' => 'Feld hinzufügen, das in der Payload Base64-kodiert werden soll',
+        'Restore Base64 encoded fields' => 'Base64-kodierte Felder wiederherstellen',
+        'Fields which will be Base64 encoded in payload of the request, e.g. \'SomeField1\'. Nested fields can be referenced by connecting them with \'->\', e.g. \'SomeField1->SomeField2->SomeField3\'.' =>
+            'Felder, die in der Payload des Requests Base64-kodiert werden sollen, z. B. \'SomeField1\'. Verschachtelte Felder können referenziert werden, indem sie mit \'->\' verknüpft werden, z. B. \'SomeField1->SomeField2->SomeField3\'.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerEvent.tt
         'GenericInterface Invoker Event Settings for Web Service %s' => 'GenericInterface Invoker Ereignis-Einstellungen für Webservice %s',
@@ -1523,6 +1535,9 @@ sub Data {
         'Uninstall Package' => 'Paket deinstallieren',
         'Uninstall package' => 'Paket deinstallieren',
         'Do you really want to uninstall this package?' => 'Soll das Paket wirklich deinstalliert werden?',
+        'Uninstall package and data' => 'Paket und Daten deinstallieren',
+        'Uninstall package only' => 'Nur Paket deinstallieren',
+        'Uninstall' => 'Deinstallieren',
         'Reinstall package' => 'Paket erneut installieren',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Möchten Sie dieses Paket wirklich erneut installieren? Alle manuellen Änderungen gehen verloren.',
@@ -1569,7 +1584,6 @@ sub Data {
         'Action' => 'Aktion',
         'Module documentation' => 'Moduldokumentation',
         'Local Repository' => 'Lokales Verzeichnis',
-        'Uninstall' => 'Deinstallieren',
         'Package not correctly deployed! Please reinstall the package.' =>
             'Paket nicht korrekt installiert. Bitte erneut installieren.',
         'Reinstall' => 'Erneut installieren',
@@ -7871,10 +7885,10 @@ sub Data {
             'Dialoge, für die es möglich ist, Standardspalten zu aktivieren oder zu deaktivieren.',
         'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
             'Aktiviert historische Werte für die Auswahl in dynamischen Feldtypen, die auf BaseSelect basieren (Dropdown und Multiselect). Deaktivieren Sie dies, wenn es zu Leistungsproblemen aufgrund zu vieler unterschiedlicher gespeicherter Werte kommt.',
-        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
-            'Mapping von Ticket::Generic-Invoker-Name (Schlüssel) zu einer Liste von Feldern (Inhalt), die base-64-kodiert werden sollen. Felder müssen in der folgenden Form angegeben werden: Feld1->Feld2;Feld3->Feld4->Feld5;Feld6. Eine verschachtelte Datenstruktur kann also durch Verbindung der Felder mit \'->\' angegeben werden. Inhalte aus verschiedenen Feldern je Invoker können kodiert werden, indem die Felder mit \';\' voneinander getrennt werden. Bitte beachten Sie die Dokumentation des Pakets für weitere Informationen.',
-        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
-            'Mapping von Ticket::Generic-Invoker-Name (Schlüssel) zu einer Liste von Feldern (Inhalt), die aus dem Request entfernt werden. Felder müssen in der folgenden Form angegeben werden: Feld1->Feld2;Feld3->Feld4->Feld5;Feld6. Eine verschachtelte Datenstruktur kann also durch Verbindung der Felder mit \'->\' angegeben werden. Verschiedene Felder je Invoker können entfernt werden, indem sie mit \';\' voneinander getrennt werden. Bitte beachten Sie die Dokumentation des Pakets für weitere Informationen.',
+        'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
+            'Globales Mapping von Ticket::Generic-Invoker-Name (Schlüssel) zu einer Liste von Feldern (Inhalt), die base-64-kodiert werden sollen. Bitte beacheten, dass dies auch je Invoker konfiguriert werden kann. Felder müssen in der folgenden Form angegeben werden: Feld1->Feld2;Feld3->Feld4->Feld5;Feld6. Eine verschachtelte Datenstruktur kann also durch Verbindung der Felder mit \'->\' angegeben werden. Inhalte aus verschiedenen Feldern je Invoker können kodiert werden, indem die Felder mit \';\' voneinander getrennt werden. Bitte beachten Sie die Dokumentation des Pakets für weitere Informationen.',
+        'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
+            'Globales Mapping von Ticket::Generic-Invoker-Name (Schlüssel) zu einer Liste von Feldern (Inhalt), die aus dem Request entfernt werden. Bitte beacheten, dass dies auch je Invoker konfiguriert werden kann. Felder müssen in der folgenden Form angegeben werden: Feld1->Feld2;Feld3->Feld4->Feld5;Feld6. Eine verschachtelte Datenstruktur kann also durch Verbindung der Felder mit \'->\' angegeben werden. Verschiedene Felder je Invoker können entfernt werden, indem sie mit \';\' voneinander getrennt werden. Bitte beachten Sie die Dokumentation des Pakets für weitere Informationen.',
         'Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic.' =>
             'Maximale Anzahl paralleler Instanzen bei Nutzung von OTRS_AsynchronousInvokerExecution im Invoker Ticket::Generic.',
         'Enables support for huge XML data in load_xml calls of CPAN library XML::LibXML. This should only be enabled if absolutely needed. Disabling this option (default) protects against denial of service through entity expansion attacks. Before enabling this option ensure that alternative measures to protect the application against this type of attack have been taken.' =>

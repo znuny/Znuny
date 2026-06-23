@@ -53,7 +53,7 @@ sub new {
 
     # set filter settings
     for my $Item (qw(ColumnFilter GetColumnFilter GetColumnFilterSelect)) {
-        $Self->{$Item} = $Param{$Item};
+        $Self->{$Item} = $Param{$Item} || {};
     }
 
     # save column filters
@@ -64,6 +64,10 @@ sub new {
     my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+
+    $Self->{ColumnFilterMultiselectActions} = {
+        AgentDashboard => 1,
+    };
 
     if ($RemoveFilters) {
         $UserObject->SetPreferences(
@@ -101,11 +105,18 @@ sub new {
 
             PREFVALUES:
             for my $Column ( sort keys %{ $Self->{GetColumnFilterSelect} } ) {
-                if ( $Self->{GetColumnFilterSelect}->{$Column} eq 'DeleteFilter' ) {
+                my $Value = $Self->{GetColumnFilterSelect}->{$Column};
+                if ( ref $Value eq 'ARRAY' ) {
+                    if ( grep { $_ eq 'DeleteFilter' } @{$Value} ) {
+                        delete $ColumnPrefValues->{$Column};
+                        next PREFVALUES;
+                    }
+                }
+                elsif ( $Value eq 'DeleteFilter' ) {
                     delete $ColumnPrefValues->{$Column};
                     next PREFVALUES;
                 }
-                $ColumnPrefValues->{$Column} = $Self->{GetColumnFilterSelect}->{$Column};
+                $ColumnPrefValues->{$Column} = $Value;
             }
 
             $UserObject->SetPreferences(
@@ -616,9 +627,11 @@ sub Run {
     my %TicketSearchSummary = %{ $SearchParams{TicketSearchSummary} };
     my %Filter              = %{ $SearchParams{Filter} };
 
-    my @ArticleAttributes = @{ $ConfigObject->Get('DashboardBackend::TicketGeneric::ArticleAttributes') || [] };
-    my %ArticleAttributes = map { $_ => 1 } @ArticleAttributes;
-    my @ArticleColumns    = keys %ArticleAttributes;
+    my @ArticleAttributes        = @{ $ConfigObject->Get('DashboardBackend::TicketGeneric::ArticleAttributes') || [] };
+    my %ArticleAttributes        = map { $_ => 1 } @ArticleAttributes;
+    my @ConfiguredArticleColumns = keys %ArticleAttributes;
+    my %VisibleColumns           = map  { $_ => 1 } @Columns;
+    my @ArticleColumns           = grep { $VisibleColumns{$_} } @ConfiguredArticleColumns;
 
     # Add the additional filter to the ticket search param.
     if ( $Self->{AdditionalFilter} ) {
@@ -631,7 +644,20 @@ sub Run {
     my $CacheKey     = join '-', $Self->{Name}, $Self->{Action}, $Self->{PageShown}, $Self->{StartHit}, $Self->{UserID};
     my $CacheColumns = join(
         ',',
-        map { $_ . '=>' . $Self->{GetColumnFilterSelect}->{$_} } sort keys %{ $Self->{GetColumnFilterSelect} }
+        map {
+            my $Column = $_;
+            my $Value  = $Self->{GetColumnFilterSelect}->{$Column};
+
+            my $SerializedValue;
+            if ( ref $Value eq 'ARRAY' ) {
+                $SerializedValue = join '|', sort grep { defined $_ && $_ ne '' } @{$Value};
+            }
+            else {
+                $SerializedValue = defined $Value ? $Value : '';
+            }
+
+            $Column . '=>' . $SerializedValue;
+        } sort keys %{ $Self->{GetColumnFilterSelect} || {} }
     );
     $CacheKey .= '-' . $CacheColumns if $CacheColumns;
 
@@ -1789,15 +1815,15 @@ sub Run {
                 );
             }
 
-            next TICKETID if scalar(@Articles) == 0;
+            if (@Articles) {
+                my $Article = $Articles[0];
+                my %Article = $ArticleObject->BackendForArticle( %{$Article} )->ArticleGet(
+                    %{$Article},
+                    DynamicFields => 0,
+                );
 
-            my $Article = $Articles[0];
-            my %Article = $ArticleObject->BackendForArticle( %{$Article} )->ArticleGet(
-                %{$Article},
-                DynamicFields => 0,
-            );
+                next TICKETID if !$Article{ArticleID};
 
-            if ( $Article{ArticleID} ) {
                 my %ArticleFields = $LayoutObject->ArticleFields(
                     TicketID  => $TicketID,
                     ArticleID => $Article{ArticleID},
@@ -2237,13 +2263,29 @@ sub _InitialColumnFilter {
         $Class .= ' ' . $Param{Css};
     }
 
+    my $MultiSelect = $Self->{ColumnFilterMultiselectActions}->{ $Self->{Action} };
+    my $SelectedID  = $Param{SelectedValue};
+    if ($MultiSelect) {
+        if ( ref $SelectedID eq 'ARRAY' ) {
+
+            # Keep array ref for BuildSelection Multiple.
+        }
+        else {
+            $SelectedID = defined $SelectedID && $SelectedID ne '' ? [$SelectedID] : [];
+        }
+    }
+    else {
+        $SelectedID = ref $SelectedID eq 'ARRAY' ? ( $SelectedID->[0] // '' ) : ( $SelectedID // '' );
+    }
+
     # build select HTML
     my $ColumnFilterHTML = $LayoutObject->BuildSelection(
         Name        => 'ColumnFilter' . $Param{ColumnName} . $Self->{Name},
         Data        => $Data,
         Class       => $Class . ' Modernize',
         Translation => $TranslationOption,
-        SelectedID  => '',
+        SelectedID  => $SelectedID,
+        Multiple    => $MultiSelect ? 1 : 0,
         TreeView    => 1,
     );
 
@@ -2419,6 +2461,21 @@ sub _ColumnFilterJSON {
         $TranslationOption = 1;
     }
 
+    my $MultiSelect = $Self->{ColumnFilterMultiselectActions}->{ $Self->{Action} };
+    my $SelectedID  = $Param{SelectedValue};
+    if ($MultiSelect) {
+        if ( ref $SelectedID eq 'ARRAY' ) {
+
+            # Keep array ref for BuildSelectionJSON Multiple.
+        }
+        else {
+            $SelectedID = defined $SelectedID && $SelectedID ne '' ? [$SelectedID] : [];
+        }
+    }
+    else {
+        $SelectedID = ref $SelectedID eq 'ARRAY' ? ( $SelectedID->[0] // '' ) : ( $SelectedID // '' );
+    }
+
     # build select HTML
     my $JSON = $LayoutObject->BuildSelectionJSON(
         [
@@ -2428,7 +2485,8 @@ sub _ColumnFilterJSON {
                 Class        => 'ColumnFilter',
                 Sort         => 'AlphanumericKey',
                 TreeView     => 1,
-                SelectedID   => $Param{SelectedValue},
+                Multiple     => $MultiSelect ? 1 : 0,
+                SelectedID   => $SelectedID,
                 Translation  => $TranslationOption,
                 AutoComplete => 'off',
             },

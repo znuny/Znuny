@@ -1731,7 +1731,7 @@ sub TicketDeepGet {
 
 =head2 _GetBase64EncodedArticleAttachments()
 
-Returns all attachments of the the article with the given ID (base-64 encoded).
+Returns all attachments of the the article with the given ID (Base64-encoded).
 
     my $Attachments = $TicketObject->_GetBase64EncodedArticleAttachments(
         TicketID  => 123,
@@ -1742,7 +1742,7 @@ Returns:
 
     my $Attachments = [
         {
-            Content            => '...', # base-64 encoded
+            Content            => '...', # Base64-encoded
             ContentAlternative => '',
             ContentID          => '',
             ContentType        => 'application/pdf',

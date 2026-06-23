@@ -47,9 +47,9 @@ to be rendered under dialog so it's invisible
     z-index: 6300;
 }
 
-/* make toolbar for image plugin visible in fullscreen mode */
+/* make toolbars visible in fullscreen mode */
 .ck-znuny-fullscreen .ck.ck-balloon-panel.ck-balloon-panel_visible.ck-toolbar-container{
-    z-index: calc(var(--ck-z-panel) + 50);
+    z-index: var(--ck-z-panel);
 }
 
 /* fix for round border corners of sticky panel that would

@@ -1141,8 +1141,9 @@ sub Run {
                 Name => 'Uninstall',
                 Data => {
                     %Param,
-                    Name    => $Structure{Name}->{Content},
-                    Version => $Structure{Version}->{Content},
+                    Name        => $Structure{Name}->{Content},
+                    DBUninstall => $Structure{DatabaseUninstall} ? 1 : 0,
+                    Version     => $Structure{Version}->{Content},
                 },
             );
             my $Output = $LayoutObject->Header();
@@ -1163,8 +1164,9 @@ sub Run {
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
-        my $Name               = $ParamObject->GetParam( Param => 'Name' )    || '';
-        my $Version            = $ParamObject->GetParam( Param => 'Version' ) || '';
+        my $Name               = $ParamObject->GetParam( Param => 'Name' )     || '';
+        my $Version            = $ParamObject->GetParam( Param => 'Version' )  || '';
+        my $KeepData           = $ParamObject->GetParam( Param => 'KeepData' ) || 1;
         my $IntroUninstallPost = $ParamObject->GetParam( Param => 'IntroUninstallPost' )
             || '';
 
@@ -1186,8 +1188,9 @@ sub Run {
 
         # unsinstall the package
         my $PackageUninstall = $PackageObject->PackageUninstall(
-            String => $Package,
-            UserID => $Self->{UserID},
+            String   => $Package,
+            KeepData => $KeepData ? 1 : 0,
+            UserID   => $Self->{UserID},
         );
         if ( !$PackageUninstall ) {
             return $LayoutObject->ErrorScreen();

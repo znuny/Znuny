@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.998403830806065;
+    $Self->{Completeness}        = 0.996176517444639;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -980,6 +980,18 @@ sub Data {
             'A szinkron eseményaktiválók közvetlenül lehetnek feldolgozva a webkérések közben.',
         'Add all attachments' => 'Összes melléklet hozzáadása',
         'Add all attachments to invoker payload.' => 'Összes melléklet hozzáadása a meghívó hasznos adatához.',
+        'Fields to be omitted from payload' => '',
+        'Field' => '',
+        'Remove field' => '',
+        'Add field to be omitted from payload' => '',
+        'Restore omitted fields' => '',
+        'Fields which will be removed from the payload of the request, e.g. \'SomeField1\'. Nested fields can be referenced by connecting them with \'->\', e.g. \'SomeField1->SomeField2->SomeField3\'.' =>
+            '',
+        'Fields to be Base64 encoded in payload' => '',
+        'Add field to be Base64 encoded in payload' => '',
+        'Restore Base64 encoded fields' => '',
+        'Fields which will be Base64 encoded in payload of the request, e.g. \'SomeField1\'. Nested fields can be referenced by connecting them with \'->\', e.g. \'SomeField1->SomeField2->SomeField3\'.' =>
+            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerEvent.tt
         'GenericInterface Invoker Event Settings for Web Service %s' => 'Általános felület meghívóesemény beállításai a webszolgáltatásnál: %s',
@@ -1528,6 +1540,9 @@ sub Data {
         'Uninstall Package' => 'Csomag eltávolítása',
         'Uninstall package' => 'Csomag eltávolítása',
         'Do you really want to uninstall this package?' => 'Valóban el szeretné távolítani ezt a csomagot?',
+        'Uninstall package and data' => '',
+        'Uninstall package only' => '',
+        'Uninstall' => 'Eltávolítás',
         'Reinstall package' => 'Csomag újratelepítése',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Valóban újra szeretné telepíteni ezt a csomagot? Minden kézi változtatás el fog veszni.',
@@ -1574,7 +1589,6 @@ sub Data {
         'Action' => 'Művelet',
         'Module documentation' => 'Modul-dokumentáció',
         'Local Repository' => 'Helyi tároló',
-        'Uninstall' => 'Eltávolítás',
         'Package not correctly deployed! Please reinstall the package.' =>
             'A csomag nincs megfelelően üzembe állítva! Telepítse újra a csomagot.',
         'Reinstall' => 'Újratelepítés',
@@ -7876,10 +7890,10 @@ sub Data {
             'Azok a képernyők, amelyeknél lehetőség van alapértelmezett oszlopok engedélyezésére vagy letiltására.',
         'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
             'Engedélyezi a korábbi értékek kiválasztását az alapválasztás (legördülő és többválasztós) alapú dinamikus mező típusokban. Tiltsa le ezt, ha túl sok különböző tárolt érték miatt teljesítményproblémák lépnek fel.',
-        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
-            'A Ticket::Generic meghívó nevének (kulcs) leképezése a mezők (tartalom) listájára, amelyek értékei Base64 kódolásúak lesznek. A mezőket a következő formában kell megadni: Mező1->Mező2;Mező3->Mező4->Mező5;Mező6. Így egy beágyazott adatstruktúra a mezők „->” jelöléssel történő összekapcsolásával adható meg. A különböző mezők tartalmát a mezők „;” karakterrel való elválasztásával lehet megadni.',
-        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
-            'A Ticket::Generic meghívó nevének (kulcs) leképezése a mezők (tartalom) listájára, amelyek eltávolításra kerülnek a kérésből. A mezőket a következő formában kell megadni: Mező1->Mező2;Mező3->Mező4->Mező5;Mező6. Így egy beágyazott adatstruktúra a mezők „->” jelöléssel történő összekapcsolásával adható meg. A különböző mezőket „;” karakterrel elválasztva lehet kihagyni.',
+        'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
+            '',
+        'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
+            '',
         'Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic.' =>
             'Párhuzamosan futtatott példányok legnagyobb száma az OTRS_AsynchronousInvokerExecution használatakor a Ticket::Generic meghívóban.',
         'Enables support for huge XML data in load_xml calls of CPAN library XML::LibXML. This should only be enabled if absolutely needed. Disabling this option (default) protects against denial of service through entity expansion attacks. Before enabling this option ensure that alternative measures to protect the application against this type of attack have been taken.' =>

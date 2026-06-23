@@ -188,6 +188,20 @@ sub new {
         delete $Self->{AvailableFilterableColumns}->{Service};
     }
 
+    # build lookup for column filter multiselect actions
+    $Self->{ColumnFilterMultiselectActions} = {
+        map { $_ => 1 } qw(
+            AgentTicketQueue
+            AgentTicketStatusView
+            AgentTicketOwnerView
+            AgentTicketResponsibleView
+            AgentTicketWatchView
+            AgentTicketMentionView
+            AgentTicketEscalationView
+            AgentTicketLockedView
+        )
+    };
+
     # get dynamic field backend object
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
@@ -1913,6 +1927,21 @@ sub _InitialColumnFilter {
         $TranslationOption = 1;
     }
 
+    my $MultiSelect = $Self->{ColumnFilterMultiselectActions}->{ $Self->{Action} };
+    my $SelectedID  = $Param{SelectedValue};
+    if ($MultiSelect) {
+        if ( ref $SelectedID eq 'ARRAY' ) {
+
+            # Keep array ref for BuildSelection Multiple.
+        }
+        else {
+            $SelectedID = defined $SelectedID && $SelectedID ne '' ? [$SelectedID] : [];
+        }
+    }
+    else {
+        $SelectedID = ref $SelectedID eq 'ARRAY' ? ( $SelectedID->[0] // '' ) : ( $SelectedID // '' );
+    }
+
     my $Class = 'ColumnFilter';
     if ( $Param{Css} ) {
         $Class .= ' ' . $Param{Css};
@@ -1924,7 +1953,8 @@ sub _InitialColumnFilter {
         Data        => $Data,
         Class       => $Class . ' Modernize',
         Translation => $TranslationOption,
-        SelectedID  => '',
+        SelectedID  => $SelectedID,
+        Multiple    => $MultiSelect ? 1 : 0,
         TreeView    => 1,
     );
     return $ColumnFilterHTML;
@@ -1977,10 +2007,18 @@ sub FilterContent {
     if ( $SelectedColumn && $Self->{StoredFilters}->{$SelectedColumn} ) {
 
         if ( IsArrayRefWithData( $Self->{StoredFilters}->{$SelectedColumn} ) ) {
-            $SelectedValue = $Self->{StoredFilters}->{$SelectedColumn}->[0];
+            $SelectedValue = $Self->{ColumnFilterMultiselectActions}->{ $Self->{Action} }
+                ? $Self->{StoredFilters}->{$SelectedColumn}
+                : $Self->{StoredFilters}->{$SelectedColumn}->[0];
         }
         elsif ( IsHashRefWithData( $Self->{StoredFilters}->{$SelectedColumn} ) ) {
-            $SelectedValue = $Self->{StoredFilters}->{$SelectedColumn}->{Equals};
+            my $Equals = $Self->{StoredFilters}->{$SelectedColumn}->{Equals};
+            if ( !$Self->{ColumnFilterMultiselectActions}->{ $Self->{Action} } && ref $Equals eq 'ARRAY' ) {
+                $SelectedValue = $Equals->[0];
+            }
+            else {
+                $SelectedValue = $Equals;
+            }
         }
     }
 
@@ -2100,6 +2138,12 @@ sub _ColumnFilterJSON {
         $TranslationOption = 1;
     }
 
+    my $MultiSelect = $Self->{ColumnFilterMultiselectActions}->{ $Self->{Action} };
+    my $SelectedID  = $Param{SelectedValue};
+    if ( $MultiSelect && ref $SelectedID ne 'ARRAY' ) {
+        $SelectedID = defined $SelectedID && $SelectedID ne '' ? [$SelectedID] : [];
+    }
+
     # build select HTML
     my $JSON = $LayoutObject->BuildSelectionJSON(
         [
@@ -2109,7 +2153,8 @@ sub _ColumnFilterJSON {
                 Class        => 'ColumnFilter',
                 Sort         => 'AlphanumericKey',
                 TreeView     => 1,
-                SelectedID   => $Param{SelectedValue},
+                Multiple     => $MultiSelect ? 1 : 0,
+                SelectedID   => $SelectedID,
                 Translation  => $TranslationOption,
                 AutoComplete => 'off',
             },

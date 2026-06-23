@@ -172,6 +172,7 @@ Core.UI.Datepicker = (function (TargetNS) {
             showOn: 'focus',
             prevText: Core.Language.Translate('Previous'),
             nextText: Core.Language.Translate('Next'),
+            weekHeader: Core.Language.Translate('Week'),
             firstDay: Element.WeekDayStart,
             showMonthAfterYear: 0,
             showWeek: (Core.Config.Get('DatepickerShowWeek') == 1 ? true : false),

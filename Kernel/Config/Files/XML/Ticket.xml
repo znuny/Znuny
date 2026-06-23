@@ -8347,6 +8347,7 @@
                     <Array>
                         <Item>Core.AgentTicketQueue.css</Item>
                         <Item>Core.AllocationList.css</Item>
+                        <Item>Core.Agent.ColumnFilterMultiSelect.css</Item>
                     </Array>
                 </Item>
                 <Item Key="JavaScript">
@@ -8807,6 +8808,7 @@
                     <Array>
                         <Item>Core.AgentTicketQueue.css</Item>
                         <Item>Core.AllocationList.css</Item>
+                        <Item>Core.Agent.ColumnFilterMultiSelect.css</Item>
                     </Array>
                 </Item>
                 <Item Key="JavaScript">
@@ -8861,6 +8863,7 @@
                 <Item Key="CSS">
                     <Array>
                         <Item>Core.AllocationList.css</Item>
+                        <Item>Core.Agent.ColumnFilterMultiSelect.css</Item>
                     </Array>
                 </Item>
                 <Item Key="JavaScript">
@@ -8916,6 +8919,7 @@
                     <Array>
                         <Item>Core.AgentTicketQueue.css</Item>
                         <Item>Core.AllocationList.css</Item>
+                        <Item>Core.Agent.ColumnFilterMultiSelect.css</Item>
                     </Array>
                 </Item>
                 <Item Key="JavaScript">
@@ -9013,6 +9017,7 @@
                 <Item Key="CSS">
                     <Array>
                         <Item>Core.AllocationList.css</Item>
+                        <Item>Core.Agent.ColumnFilterMultiSelect.css</Item>
                     </Array>
                 </Item>
                 <Item Key="JavaScript">
@@ -9088,6 +9093,7 @@
                 <Item Key="CSS">
                     <Array>
                         <Item>Core.AllocationList.css</Item>
+                        <Item>Core.Agent.ColumnFilterMultiSelect.css</Item>
                     </Array>
                 </Item>
                 <Item Key="JavaScript">

@@ -133,8 +133,7 @@ Core.Agent.Overview = (function (TargetNS) {
      */
     TargetNS.InitViewSmall = function () {
 
-        var URL, ColumnFilter, NewColumnFilterStrg, MyRegEx, SessionInformation,
-            $MasterActionLink;
+        var $MasterActionLink;
 
         // initializes a click event for table with checkboxes
         Core.UI.InitCheckboxSelection($('table td.Checkbox'));
@@ -156,6 +155,8 @@ Core.Agent.Overview = (function (TargetNS) {
 
         // change event for column filter
         $('.ColumnFilter').on('change', function () {
+            var URL, SessionInformation, ColumnFilter, NewColumnFilterStrg, MyRegEx, SelectedValues, SeenValues;
+
             if ($(this).val() === null) {
                 return false;
             }
@@ -166,23 +167,44 @@ Core.Agent.Overview = (function (TargetNS) {
             $.each(SessionInformation, function (Key, Value) {
                 URL += encodeURIComponent(Key) + '=' + encodeURIComponent(Value) + ';';
             });
+
             ColumnFilter = $(this)[0].name;
-            NewColumnFilterStrg = $(this)[0].name + '=' + encodeURIComponent($(this).val()) + ';';
+            MyRegEx = new RegExp(ColumnFilter + "=[^;]*;", "g");
+            NewColumnFilterStrg = '';
 
-            MyRegEx = new  RegExp(ColumnFilter+"=[^;]*;");
+            if ($(this).prop('multiple')) {
+                SelectedValues = [];
+                SeenValues = {};
 
-            // check for already set parameter and replace
-            if (URL.match(MyRegEx)) {
-                URL = URL.replace(MyRegEx, NewColumnFilterStrg);
+                $(this).find('option:selected').each(function () {
+                    var Value = $(this).val();
+
+                    if (!Value || SeenValues[Value]) {
+                        return;
+                    }
+
+                    SeenValues[Value] = true;
+                    SelectedValues.push(Value);
+                });
+
+                $.each(SelectedValues, function (Index, Value) {
+                    NewColumnFilterStrg += ColumnFilter + '=' + encodeURIComponent(Value) + ';';
+                });
             }
-
-            // otherwise add the new column filter
             else {
-                URL = URL + NewColumnFilterStrg;
+                NewColumnFilterStrg = ColumnFilter + '=' + encodeURIComponent($(this).val()) + ';';
             }
+
+            // remove already set parameter values for the current filter
+            if (URL.match(MyRegEx)) {
+                URL = URL.replace(MyRegEx, '');
+            }
+
+            // add the current filter value(s)
+            URL += NewColumnFilterStrg;
 
             // redirect
-            window.location.href =  URL;
+            window.location.href = URL;
         });
 
         // click event on table header trigger

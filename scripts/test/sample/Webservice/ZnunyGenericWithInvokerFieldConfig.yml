@@ -1,0 +1,36 @@
+---
+Debugger:
+  DebugThreshold: debug
+  TestMode: '0'
+Description: ''
+FrameworkVersion: 7.2.x git
+Provider:
+  Transport:
+    Type: ''
+RemoteSystem: ''
+Requester:
+  Invoker:
+    Generic:
+      Description: ''
+      Events:
+      - Asynchronous: '0'
+        Event: TicketCreate
+      - Asynchronous: '0'
+        Event: ArticleCreate
+      MappingInbound:
+        Type: Simple
+      MappingOutbound:
+        Type: Simple
+      PayloadBase64EncodedFields:
+      - Ticket->Articles->Body
+      - Ticket->CustomerCompany->CustomerCompanyCity
+      - Ticket->Owner
+      PayloadOmittedFields:
+      - Ticket->Articles->IsVisibleForCustomer
+      - Ticket->CustomerCompany->CustomerCompanyStreet
+      - Ticket->Queue
+      - Event->KeyToBeOmitted
+      - Event->ArticleID
+      Type: Ticket::Generic
+  Transport:
+    Type: HTTP::REST

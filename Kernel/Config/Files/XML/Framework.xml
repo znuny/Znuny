@@ -4400,6 +4400,7 @@ via the Preferences button after logging in.
                     <Array>
                         <Item>Core.Agent.Dashboard.css</Item>
                         <Item>Core.AllocationList.css</Item>
+                        <Item>Core.Agent.ColumnFilterMultiSelect.css</Item>
                         <Item>thirdparty/fullcalendar-3.10.2/fullcalendar.min.css</Item>
                         <Item>thirdparty/nvd3-1.7.1/nv.d3.css</Item>
                     </Array>
