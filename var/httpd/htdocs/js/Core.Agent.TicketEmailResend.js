@@ -55,7 +55,7 @@ Core.Agent.TicketEmailResend = (function (TargetNS) {
         }
 
         // Add 'BCc' customer users.
-        if (typeof EmailAddressesCc !== 'undefined') {
+        if (typeof EmailAddressesBcc !== 'undefined') {
             EmailAddressesBcc.forEach(function(BccCustomer) {
                 Core.Agent.CustomerSearch.AddTicketCustomer('BccCustomer', BccCustomer.CustomerTicketText, BccCustomer.CustomerKey);
             });

@@ -29,7 +29,7 @@
 [% RenderBlockStart("TicketBackUndo") %]
             <p>
                 [% Translate("The ticket has been locked") | html %].
-                <a class="UndoClosePopup" href="[% Env("Baselink") %]Action=AgentTicketLock;Subaction=Unlock;TicketID=[% Data.TicketID %]SetPreviousOwner;[% Env("ChallengeTokenParam") | html %]">
+                <a class="UndoClosePopup" href="[% Env("Baselink") %]Action=AgentTicketLock;Subaction=Unlock;TicketID=[% Data.TicketID | html %]SetPreviousOwner;[% Env("ChallengeTokenParam") | html %]">
                     [% Translate("Undo & close") | html %]
                 </a>
             </p>
@@ -86,8 +86,8 @@
                             <div class="SpacingTopSmall ">
                                 <input name="CustomerKey_[% Data.Count | html %]" id="CustomerKey_[% Data.Count | html %]" class="CustomerKey" type="hidden" value="[% Data.CustomerKey | html %]"/>
                                 <input name="CustomerQueue_[% Data.Count | html %]" id="CustomerQueue_[% Data.Count | html %]" class="CustomerQueue" type="hidden" value="[% Data.CustomerQueue | html %]"/>
-                                <input class="CustomerTicketText [% Data.CustomerError | html %]" name="CustomerTicketText_[% Data.Count %]" id="CustomerTicketText_[% Data.Count %]" type="text" value="[% Data.CustomerElement | html %]" readonly="readonly" />
-                                <a href="#" id="RemoveCustomerTicket_[% Data.Count %]" class="RemoveButton CustomerTicketRemove">
+                                <input class="CustomerTicketText [% Data.CustomerError | html %]" name="CustomerTicketText_[% Data.Count | html %]" id="CustomerTicketText_[% Data.Count | html %]" type="text" value="[% Data.CustomerElement | html %]" readonly="readonly" />
+                                <a href="#" id="RemoveCustomerTicket_[% Data.Count | html %]" class="RemoveButton CustomerTicketRemove">
                                     <i class="fa fa-minus-square-o"></i>
                                     <span class="InvisibleText">[% Translate("Remove Ticket Customer") | html %]</span>
                                 </a>
@@ -161,8 +161,8 @@
                             <div>
                                 <input name="CcCustomerKey_[% Data.Count | html %]" id="CcCustomerKey_[% Data.Count | html %]" class="CustomerKey" type="hidden" value="[% Data.CustomerKey | html %]"/>
                                 <input name="CcCustomerQueue_[% Data.Count | html %]" id="CcCustomerQueue_[% Data.Count | html %]" class="CustomerQueue" type="hidden" value="[% Data.CustomerQueue | html %]"/>
-                                <input class="CustomerTicketText [% Data.CustomerError | html %]" name="CcCustomerTicketText_[% Data.Count %]" id="CcCustomerTicketText_[% Data.Count %]" type="text" value="[% Data.CustomerElement | html %]" readonly="readonly" />
-                                <a href="#" id="CcRemoveCustomerTicket_[% Data.Count %]" class="RemoveButton CustomerTicketRemove">
+                                <input class="CustomerTicketText [% Data.CustomerError | html %]" name="CcCustomerTicketText_[% Data.Count | html %]" id="CcCustomerTicketText_[% Data.Count | html %]" type="text" value="[% Data.CustomerElement | html %]" readonly="readonly" />
+                                <a href="#" id="CcRemoveCustomerTicket_[% Data.Count | html %]" class="RemoveButton CustomerTicketRemove">
                                     <i class="fa fa-minus-square-o"></i>
                                     <span class="InvisibleText">[% Translate("Remove Cc") | html %]</span>
                                 </a>
@@ -171,7 +171,7 @@
                                 <p class="Explanation Error">[% Translate("Please remove this entry and enter a new one with the correct value.") | html %]</p>
 [% RenderBlockEnd("CcCustomerErrorExplantion") %]
 
-                                <div id="CcCustomerTicketText_[% Data.Count %]ServerError" class="TooltipErrorMessage">
+                                <div id="CcCustomerTicketText_[% Data.Count | html %]ServerError" class="TooltipErrorMessage">
 [% RenderBlockStart("CcCustomerGenericServerErrorMsg") %]
                                     <p>[% Translate("This field is required.") | html %]</p>
 [% RenderBlockEnd("CcCustomerGenericServerErrorMsg") %]
@@ -237,8 +237,8 @@
                             <div class="SpacingTopSmall ">
                                 <input name="BccCustomerKey_[% Data.Count | html %]" id="BccCustomerKey_[% Data.Count | html %]" class="CustomerKey" type="hidden" value="[% Data.CustomerKey | html %]"/>
                                 <input name="BccCustomerQueue_[% Data.Count | html %]" id="BccCustomerQueue_[% Data.Count | html %]" class="CustomerQueue" type="hidden" value="[% Data.CustomerQueue | html %]"/>
-                                <input class="CustomerTicketText [% Data.CustomerError | html %]" name="BccCustomerTicketText_[% Data.Count %]" id="BccCustomerTicketText_[% Data.Count %]" type="text" value="[% Data.CustomerElement | html %]" readonly="readonly" />
-                                <a href="#" id="BccRemoveCustomerTicket_[% Data.Count %]" class="RemoveButton CustomerTicketRemove">
+                                <input class="CustomerTicketText [% Data.CustomerError | html %]" name="BccCustomerTicketText_[% Data.Count | html %]" id="BccCustomerTicketText_[% Data.Count | html %]" type="text" value="[% Data.CustomerElement | html %]" readonly="readonly" />
+                                <a href="#" id="BccRemoveCustomerTicket_[% Data.Count | html %]" class="RemoveButton CustomerTicketRemove">
                                     <i class="fa fa-minus-square-o"></i>
                                     <span class="InvisibleText">[% Translate("Remove Bcc") | html %]</span>
                                 </a>
@@ -247,7 +247,7 @@
                                 <p class="Explanation Error">[% Translate("Please remove this entry and enter a new one with the correct value.") | html %]</p>
 [% RenderBlockEnd("BccCustomerErrorExplantion") %]
 
-                                <div id="BccCustomerTicketText_[% Data.Count %]ServerError" class="TooltipErrorMessage">
+                                <div id="BccCustomerTicketText_[% Data.Count | html %]ServerError" class="TooltipErrorMessage">
 [% RenderBlockStart("BccCustomerGenericServerErrorMsg") %]
                                     <p>[% Translate("This field is required.") | html %]</p>
 [% RenderBlockEnd("BccCustomerGenericServerErrorMsg") %]
@@ -279,7 +279,7 @@
 
                     <label class="Mandatory" for="Subject"><span class="Marker">*</span>[% Translate("Subject") | html %]:</label>
                     <div class="Field">
-                        <input type="text" name="Subject" id="Subject" value="[% Data.Subject | html %]" class="Validate_Required [% Data.SubjectInvalid %] W75pc"/>
+                        <input type="text" name="Subject" id="Subject" value="[% Data.Subject | html %]" class="Validate_Required [% Data.SubjectInvalid | html %] W75pc"/>
                         <div id="SubjectError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                         <div id="SubjectServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                     </div>
@@ -288,6 +288,7 @@
 [% RenderBlockStart("Option") %]
                     <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]:</label>
                     <div class="Field">
+# No html filter for Data.Value because it contains HTML generated by the backend.
                         [% Data.Value %]
                         <div id="[% Data.Name | html %]ServerError" class="TooltipErrorMessage"><p>[% Data.Invalid | html %]</p></div>
                         [% IF Data.FieldExplanation.length %]
@@ -312,7 +313,7 @@
 
                     <label class="Mandatory" for="RichText"><span class="Marker">*</span>[% Translate("Text") | html %]:</label>
                     <div class="RichTextField">
-                        <textarea id="RichText" name="Body" rows="15" cols="[% Config("Ticket::Frontend::TextAreaEmail") %]" class="RichText Validate_Required [% Data.BodyInvalid | html %]">[% Data.Body %]</textarea>
+                        <textarea id="RichText" name="Body" rows="15" cols="[% Config("Ticket::Frontend::TextAreaEmail") | html %]" class="RichText Validate_Required [% Data.BodyInvalid | html %]">[% Data.Body | html %]</textarea>
                         <div id="RichTextError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                         <div id="RichTextServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                     </div>
