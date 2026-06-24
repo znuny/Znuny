@@ -91,12 +91,14 @@ sub Run {
         }
 
         $Self->Print("<green>Done</green> (changed <yellow>$Count</yellow> tickets).\n");
+
+        # Check for archived articles with seen flags
         $Self->Print("<yellow>Checking for archived articles with seen flags...</yellow>\n");
 
         # Find all articles of archived tickets which have ticket seen flags set
         return if !$DBObject->Prepare(
             SQL => "
-                SELECT DISTINCT(article.id)
+                SELECT DISTINCT(article.id), article.ticket_id
                 FROM article
                     INNER JOIN ticket ON ticket.id = article.ticket_id
                     INNER JOIN article_flag ON article.id = article_flag.article_id
@@ -107,20 +109,25 @@ sub Run {
 
         my @ArticleIDs;
         while ( my @Row = $DBObject->FetchrowArray() ) {
-            push @ArticleIDs, $Row[0];
+            push @ArticleIDs,
+                {
+                ArticleID => $Row[0],
+                TicketID  => $Row[1],
+                };
         }
 
         my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
         $Count = 0;
-        for my $ArticleID (@ArticleIDs) {
+        for my $Article (@ArticleIDs) {
             $ArticleObject->ArticleFlagDelete(
-                ArticleID => $ArticleID,
+                TicketID  => $Article->{TicketID},
+                ArticleID => $Article->{ArticleID},
                 Key       => 'Seen',
                 AllUsers  => 1,
             );
             $Count++;
-            $Self->Print("    Removing seen flags of article $ArticleID\n");
+            $Self->Print("    Removing seen flags of article $Article->{ArticleID}\n");
             Time::HiRes::usleep($MicroSleep) if $MicroSleep;
         }
 
