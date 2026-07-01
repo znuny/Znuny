@@ -17,7 +17,6 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         position: relative;
         padding: var(--main-page-padding);
         background: var(--main-bg-color);
-        background-color: green;
     }
 
     .ContentWrapper {
