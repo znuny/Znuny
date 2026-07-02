@@ -44,8 +44,8 @@ my %Map = (
     # db => ldap
     email       => 'mail',
     customer_id => 'mail',
-    first_name  => 'sn',
-    last_name   => 'givenname',
+    first_name  => 'givenname',
+    last_name   => 'sn',
     pw          => 'test',
 
     #    comments => 'description',
