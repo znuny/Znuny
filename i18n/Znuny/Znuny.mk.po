@@ -25799,3 +25799,7 @@ msgstr ""
 msgid "View the admin manual"
 msgstr ""
 
+#. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
+msgid "Resend is not possible for this article!"
+msgstr "Повторното испраќање не е можно за овој член!"
+

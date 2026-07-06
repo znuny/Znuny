@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.215421686746988;
+    $Self->{Completeness}        = 0.215547703180212;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4340,6 +4340,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
         'No ArticleID is given!' => '',
+        'Resend is not possible for this article!' => 'Ponovno slanje nije moguće za ovaj članak!',
 
         # Perl Module: Kernel/Modules/AgentTicketEscalationView.pm
         'Next week' => '',

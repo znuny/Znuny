@@ -1,6 +1,7 @@
 # 6.5.23 2026-??-??
  - 2026-06-25 Fixed: Errors executing ticket search in AgentTicketService if user has no queues or services assigned. Thanks to Paweł Bogusławski for reporting the issue. [#803](https://github.com/znuny/Znuny/issues/803)
  - 2026-06-24 Fixed: Command Maint::Ticket::ArchiveCleanup not deleting article flags correctly. Thanks to @parkingups69-netizen for reporting the issue. [#780](https://github.com/znuny/Znuny/issues/780)
+ - 2026-06-19 Fixed: Dialog to resend an email (AgentTicketEmailResend) is now only usable for articles in channel Email with previous transmission failure.
 
 # 6.5.22 2026-06-24
  - 2026-06-22 Fixed: Sorting by dynamic field columns in dashboard ticket widgets could fall back to age and process tickets without articles could be hidden. Thanks to @sergiykhan for reporting the issue. [#811](https://github.com/znuny/Znuny/issues/811)

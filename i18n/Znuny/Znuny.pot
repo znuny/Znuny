@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2026-06-16 19:56+0000\n"
+"POT-Creation-Date: 2026-07-06 10:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12488,6 +12488,10 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "No ArticleID is given!"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
+msgid "Resend is not possible for this article!"
 msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentTicketEscalationView.pm

@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.700080321285141;
+    $Self->{Completeness}        = 0.700128493414713;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4343,6 +4343,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
         'No ArticleID is given!' => 'ArticleIDは指定されていません！',
+        'Resend is not possible for this article!' => 'この記事は再送信できません！',
 
         # Perl Module: Kernel/Modules/AgentTicketEscalationView.pm
         'Next week' => '翌週',

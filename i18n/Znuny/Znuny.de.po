@@ -25892,3 +25892,7 @@ msgstr "Der ausgewählte Vorlagentyp unterstützt keine Anhänge"
 msgid "View the admin manual"
 msgstr "Admin-Handbuch anzeigen"
 
+#. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
+msgid "Resend is not possible for this article!"
+msgstr "Erneutes Senden für diesen Artikel nicht möglich!"
+
