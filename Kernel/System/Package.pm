@@ -3599,9 +3599,11 @@ sub _Database {
 sub _Code {
     my ( $Self, %Param ) = @_;
 
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
     for my $Needed (qw(Code Type Structure)) {
         if ( !defined $Param{$Needed} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => "$Needed not defined!",
             );
@@ -3611,7 +3613,7 @@ sub _Code {
 
     # check format
     if ( ref $Param{Code} ne 'ARRAY' ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => 'Need array ref in Code param!',
         );
@@ -3646,7 +3648,7 @@ sub _Code {
         print STDERR "Code: $Code->{Content}\n";
 
         if ( !eval $Code->{Content} . "\n1;" ) {    ## no critic
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => "Code: $@",
             );
