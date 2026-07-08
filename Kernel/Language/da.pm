@@ -1414,7 +1414,7 @@ sub Data {
         'You can add favorites by moving your cursor over items on the right side and clicking the star icon.' =>
             '',
         'Links' => 'Links',
-        'View the admin manual on Github' => '',
+        'View the admin manual' => '',
         'No Matches' => 'Intet fundet',
         'Sorry, your search didn\'t match any items.' => 'Beklager, men din søgning matcher ikke noget.',
         'Set as favorite' => 'Vælg som favorit',

@@ -708,6 +708,16 @@ Core.Agent.Admin.SystemConfiguration = (function (TargetNS) {
 
         var $Input = $('#SearchBoxAutoComplete input[type=text]');
 
+        $('#SearchBoxAutoComplete .fa-search').off('click.SystemConfigurationSearch').on('click.SystemConfigurationSearch', function (Event) {
+            Event.preventDefault();
+
+            if ($Input.val()) {
+                $('#SearchBoxAutoComplete')[0].submit();
+            }
+
+            return false;
+        });
+
         Core.UI.Autocomplete.Init($Input, function (Request, Response) {
             var URL = Core.Config.Get('Baselink'), Data = {
                 Action: 'AdminSystemConfiguration',

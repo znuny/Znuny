@@ -112,6 +112,21 @@ Core.Agent.Header = (function (TargetNS) {
             $("#ToolBarSearchTerm").next('#AJAXLoaderToolBarSearchTerm').remove();
         });
 
+        $("form[name='ToolBarSearch'] .fa-search").off('click.ToolBarSearch').on('click.ToolBarSearch', function (Event) {
+            var CurrentBackend = $('input[type=radio][name=ToolBarSearchBackend]:checked').val();
+
+            Event.preventDefault();
+
+            if (CurrentBackend == 'ToolBarSearchBackendFulltext') {
+                Core.Agent.Search.ExecuteToolbarFulltextSearch(false);
+            }
+            else {
+                $("form[name='ToolBarSearch']").trigger('submit');
+            }
+
+            return false;
+        });
+
         $('input[type=radio][name=ToolBarSearchBackend]').change(function() {
             $('#ToolBarSearchTerm').focus();
             Backend = this.value;

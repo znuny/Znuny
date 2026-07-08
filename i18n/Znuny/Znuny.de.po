@@ -25453,3 +25453,7 @@ msgstr "Paket und Daten deinstallieren"
 msgid "Uninstall package only"
 msgstr "Nur Paket deinstallieren"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
+msgid "View the admin manual"
+msgstr "Admin-Handbuch anzeigen"
+

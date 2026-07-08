@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2026-06-16 07:44+0000\n"
+"POT-Creation-Date: 2026-06-16 19:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4235,7 +4235,7 @@ msgid "Links"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
-msgid "View the admin manual on Github"
+msgid "View the admin manual"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt

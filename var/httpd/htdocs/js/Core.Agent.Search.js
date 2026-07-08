@@ -642,6 +642,59 @@ Core.Agent.Search = (function (TargetNS) {
 
     /**
      * @function
+        * @param {Boolean} AllowTicketNumberRedirect
+     * @description Executes toolbar fulltext search.
+     */
+    TargetNS.ExecuteToolbarFulltextSearch = function (AllowTicketNumberRedirect) {
+        var $ToolbarSearchForm,
+            $RedirectInput,
+            OriginalRedirectValue,
+            SearchString;
+
+        $ToolbarSearchForm = $('form[name="ToolBarSearch"]');
+        $RedirectInput = $ToolbarSearchForm.find('input[name="CheckTicketNumberAndRedirect"]');
+
+        SearchString = $('#ToolBarSearchTerm').val();
+
+        if (AllowTicketNumberRedirect === false && $RedirectInput.length) {
+            OriginalRedirectValue = $RedirectInput.val();
+            $RedirectInput.val('0');
+        }
+
+        if (!SearchString.length || !Core.Config.Get('CheckSearchStringsForStopWords')) {
+            $ToolbarSearchForm.submit();
+
+            if (AllowTicketNumberRedirect === false && $RedirectInput.length) {
+                window.setTimeout(function () {
+                    $RedirectInput.val(OriginalRedirectValue);
+                }, 0);
+            }
+
+            return;
+        }
+
+        AJAXStopWordCheck(
+            { Fulltext: SearchString },
+            function (FoundStopWords) {
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate('Please remove the following words from your search as they cannot be searched for:') + "\n" + FoundStopWords
+                );
+            },
+            function () {
+                $ToolbarSearchForm.submit();
+
+                if (AllowTicketNumberRedirect === false && $RedirectInput.length) {
+                    window.setTimeout(function () {
+                        $RedirectInput.val(OriginalRedirectValue);
+                    }, 0);
+                }
+            }
+        );
+    };
+
+    /**
+     * @function
      * @return nothing
      * @description Inits toolbar fulltext search.
      */
@@ -650,24 +703,8 @@ Core.Agent.Search = (function (TargetNS) {
 
         // register return key
         $('#ToolBarSearchTerm').off('keypress.FilterInput').on('keypress.FilterInput', function (Event) {
-            var SearchString;
-
             if ((Event.charCode || Event.keyCode) === 13) {
-                SearchString = $('#ToolBarSearchTerm').val();
-
-                if (!SearchString.length || !Core.Config.Get('CheckSearchStringsForStopWords')) {
-                    return true;
-                }
-
-                AJAXStopWordCheck(
-                    { Fulltext: SearchString },
-                    function (FoundStopWords) {
-                        alert(Core.Language.Translate('Please remove the following words from your search as they cannot be searched for:') + "\n" + FoundStopWords);
-                    },
-                    function () {
-                        $('form[name="ToolBarSearch"]').submit();
-                    }
-                );
+                TargetNS.ExecuteToolbarFulltextSearch(true);
 
                 return false;
             }

@@ -125,14 +125,12 @@ sub SendNotification {
     my $CustomerRecipientInformation = $RecipientInformation->{Customer} // [];
     my $AdditionalRecipientKeyName   = $RecipientInformation->{AdditionalRecipientKeyName} || 'Recipient';
 
-    # Remove certain keys/values from recipient.
-    # Note: UserPassword is a configurable customer user field. Only the default field name 'UserPassword'
-    # is supported right now.
-    for my $Key (qw(UserPw UserPassword)) {
-        delete $Param{Recipient}->{$Key};
-    }
-
     my %Recipient = %{ $Param{Recipient} };
+
+    # Remove sensitive values from recipient recursively.
+    $Self->_SanitizeRecipientData(
+        Data => \%Recipient,
+    );
 
     my $FromEmail        = $ConfigObject->Get('NotificationSenderEmail');
     my $NotificationFrom = $ConfigObject->Get('NotificationSenderName') . ' <' . $FromEmail . '>';
@@ -140,12 +138,16 @@ sub SendNotification {
     my $RequestData      = {};
 
     if ( $Recipient{Type} eq 'Agent' ) {
+        ENABLEDPARAMAGENT:
         for my $EnabledParam ( @{$AgentRecipientInformation} ) {
+            next ENABLEDPARAMAGENT if $EnabledParam =~ m{(?:Password|Pw)\z}i;
             $RequestData->{$EnabledParam} = ${Recipient}{$EnabledParam} // '';
         }
     }
     elsif ( $Recipient{Type} eq 'Customer' ) {
+        ENABLEDPARAMCUSTOMER:
         for my $EnabledParam ( @{$CustomerRecipientInformation} ) {
+            next ENABLEDPARAMCUSTOMER if $EnabledParam =~ m{(?:Password|Pw)\z}i;
             $RequestData->{$EnabledParam} = $Recipient{$EnabledParam} // '';
         }
 
@@ -155,14 +157,14 @@ sub SendNotification {
             )
         {
             $RequestData->{$AdditionalRecipientKeyName} = $Recipient{$AdditionalRecipientKeyName};
-            $Param{Recipient}->{Type} = 'Additional';
+            $Recipient{Type} = 'Additional';
         }
     }
     else {
         $LogObject->Log(
             Priority => 'info',
             Message  =>
-                "Skipped web service notification '$Notification{Name}' because of wrong recipient type '$Param{Recipient}->{Type}'.",
+                "Skipped web service notification '$Notification{Name}' because of wrong recipient type '$Recipient{Type}'.",
         );
         return;
     }
@@ -198,7 +200,7 @@ sub SendNotification {
     $RequestData->{TicketNumber} = $TicketObject->TicketNumberLookup(
         TicketID => $Param{TicketID},
     );
-    $RequestData->{Recipient} = $Param{Recipient};
+    $RequestData->{Recipient} = \%Recipient;
 
     my $Result = $RequesterObject->Run(
         WebserviceID => $TransportParams->{TransportWebserviceID},
@@ -297,6 +299,40 @@ sub GetTransportRecipients {
     }
 
     return @Recipients;
+}
+
+sub _SanitizeRecipientData {
+    my ( $Self, %Param ) = @_;
+
+    return if !defined $Param{Data};
+
+    if ( IsHashRefWithData( $Param{Data} ) ) {
+
+        KEY:
+        for my $Key ( sort keys %{ $Param{Data} } ) {
+
+            if ( $Key =~ m{(?:Password|Pw)\z}i ) {
+                delete $Param{Data}->{$Key};
+                next KEY;
+            }
+
+            $Self->_SanitizeRecipientData(
+                Data => $Param{Data}->{$Key},
+            );
+        }
+
+        return;
+    }
+
+    return if !IsArrayRefWithData( $Param{Data} );
+
+    for my $Item ( @{ $Param{Data} } ) {
+        $Self->_SanitizeRecipientData(
+            Data => $Item,
+        );
+    }
+
+    return;
 }
 
 sub TransportSettingsDisplayGet {
