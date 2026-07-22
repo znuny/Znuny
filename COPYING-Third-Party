@@ -38,7 +38,12 @@ o Name:    CPAN CGI::Emulate::PSGI
 o Name:    CPAN Crypt::PasswdMD5
   Web:     n/a
   License: GNU v2 - http://www.gnu.org/licenses/gpl.html
-  Note:    # Copyright Luis E. Mu�oz <luismunoz@cpan.org>
+  Note:    # Copyright Luis Muñoz <luismunoz@cpan.org>
+
+o Name:    CPAN Crypt::URandom
+  Web:     n/a
+  License: GNU v2 - http://www.gnu.org/licenses/gpl.html
+  Note:    # Copyright David Dick <ddick@cpan.org>
 
 o Name:    CPAN HTTP::Date
   Web;     n/a
