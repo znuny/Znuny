@@ -17191,8 +17191,8 @@ msgid "Configure your own log text for PGP."
 msgstr "Настроить свой собственный текст журнала для PGP."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Configures a default TicketDynamicField setting. \"Name\" defines the dynamic field which should be used, \"Value\" is the data that will be set, and \"Event\" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter \"Ticket Event Module\"."
-msgstr "Задает настройки TicketDynamicField по умолчанию. \"Name/Имя\" задает поле, которое будет использоваться, \"Value/Значение\" - данные которые будут заданы и \"Event/Событие\" определяет событие триггера. Подробнее, смотрите в руководстве разработчика (https://doc.otrs.com/doc/), раздел \"Ticket Event Module\"."
+msgid "Configures a default TicketDynamicField setting. \"Name\" defines the dynamic field which should be used, \"Value\" is the data that will be set, and \"Event\" defines the trigger event."
+msgstr "Задает настройки TicketDynamicField по умолчанию. \"Name/Имя\" задает поле, которое будет использоваться, \"Value/Значение\" - данные которые будут заданы и \"Event/Событие\" определяет событие триггера."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Controls how to display the ticket history entries as readable values."
@@ -18115,8 +18115,8 @@ msgid "Defines the default filter fields in the customer user address book searc
 msgstr "Задает поля фильтра по умолчанию при поиске в адресной книге клиентов (Клиент или Компания). Для полей компании клиента необходимо добавить префикс 'CustomerCompany_'."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.otrs.com/doc/."
-msgstr "Задает имя темы (HTML theme - имя папки для альтернативных модулей), которая будет использоваться в интерфейсах агентов и клиентов. По желанию, вы можете добавить свою собственную тему. Подробности в руководстве администратора https://doc.otrs.com/doc/."
+msgid "Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html."
+msgstr "Задает имя темы (HTML theme - имя папки для альтернативных модулей), которая будет использоваться в интерфейсах агентов и клиентов. По желанию, вы можете добавить свою собственную тему. Подробности в руководстве администратора https://doc.znuny.org/developer/general_information/themes.html."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the default front-end language. All the possible values are determined by the available language files on the system (see the next setting)."

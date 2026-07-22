@@ -17156,8 +17156,8 @@ msgid "Configure your own log text for PGP."
 msgstr "PGP에 대한 자체 로그 텍스트를 구성하십시오."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Configures a default TicketDynamicField setting. \"Name\" defines the dynamic field which should be used, \"Value\" is the data that will be set, and \"Event\" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter \"Ticket Event Module\"."
-msgstr "기본 TicketDynamicField 설정을 구성합니다. \"Name\"은 사용할 동적 필드를 정의하고, \"Value\"는 설정할 데이터이고 \"Event\"는 트리거 이벤트를 정의합니다. 개발자 설명서 (https://doc.otrs.com/doc/), \"Ticket Event Module\"장을 확인하십시오."
+msgid "Configures a default TicketDynamicField setting. \"Name\" defines the dynamic field which should be used, \"Value\" is the data that will be set, and \"Event\" defines the trigger event."
+msgstr "기본 TicketDynamicField 설정을 구성합니다. \"Name\"은 사용할 동적 필드를 정의하고, \"Value\"는 설정할 데이터이고 \"Event\"는 트리거 이벤트를 정의합니다."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Controls how to display the ticket history entries as readable values."
@@ -18080,8 +18080,8 @@ msgid "Defines the default filter fields in the customer user address book searc
 msgstr "고객 사용자 주소록 검색 (CustomerUser 또는 CustomerCompany)의 기본 필터 필드를 정의합니다. CustomerCompany 필드의 경우 접두사 'CustomerCompany_'를 추가해야합니다."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.otrs.com/doc/."
-msgstr "에이전트 및 고객이 사용할 기본 프런트 엔드 (HTML) 테마를 정의합니다. 원한다면 자신 만의 테마를 추가 할 수 있습니다. https://doc.otrs.com/doc/ 에있는 관리자 설명서를 참조하십시오."
+msgid "Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html."
+msgstr "에이전트 및 고객이 사용할 기본 프런트 엔드 (HTML) 테마를 정의합니다. 원한다면 자신 만의 테마를 추가 할 수 있습니다. https://doc.znuny.org/developer/general_information/themes.html 에있는 관리자 설명서를 참조하십시오."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the default front-end language. All the possible values are determined by the available language files on the system (see the next setting)."

@@ -17161,8 +17161,8 @@ msgid "Configure your own log text for PGP."
 msgstr "Mengkonfigurasi teks log Anda sendiri untuk PGP."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Configures a default TicketDynamicField setting. \"Name\" defines the dynamic field which should be used, \"Value\" is the data that will be set, and \"Event\" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter \"Ticket Event Module\"."
-msgstr "Mengkonfigurasi TicketDynamicField pengaturan default. \"Nama\" mendefinisikan bidang yang dinamis yang harus digunakan, \"Value\" adalah data yang akan ditetapkan, dan \"Event\" mendefinisikan acara pemicu. Silakan periksa pengembang user (https://doc.otrs.com/doc/), bab \"Ticket acara Modul\"."
+msgid "Configures a default TicketDynamicField setting. \"Name\" defines the dynamic field which should be used, \"Value\" is the data that will be set, and \"Event\" defines the trigger event."
+msgstr "Mengkonfigurasi TicketDynamicField pengaturan default. \"Nama\" mendefinisikan bidang yang dinamis yang harus digunakan, \"Value\" adalah data yang akan ditetapkan, dan \"Event\" mendefinisikan acara pemicu."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Controls how to display the ticket history entries as readable values."
@@ -18085,8 +18085,8 @@ msgid "Defines the default filter fields in the customer user address book searc
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.otrs.com/doc/."
-msgstr "Mendefinisikan default front-end (HTML) tema yang akan digunakan oleh agen dan pelanggan. Jika Anda suka, Anda dapat menambahkan tema Anda sendiri. Silahkan lihat manual administrator yang terletak di https://doc.otrs.com/doc/."
+msgid "Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html."
+msgstr "Mendefinisikan default front-end (HTML) tema yang akan digunakan oleh agen dan pelanggan. Jika Anda suka, Anda dapat menambahkan tema Anda sendiri. Silahkan lihat manual administrator yang terletak di https://doc.znuny.org/developer/general_information/themes.html."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the default front-end language. All the possible values are determined by the available language files on the system (see the next setting)."
