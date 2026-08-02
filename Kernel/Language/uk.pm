@@ -22,11 +22,11 @@ sub Data {
     # possible charsets
     $Self->{Charset} = ['utf-8', ];
     # date formats (%a=Weekday;%b=Month;%T=Time;%d=Day;%m=Month;%Y=Year;)
-    $Self->{DateFormat}          = '%m/%d/%Y %T';
-    $Self->{DateFormatLong}      = '%T - %m/%d/%Y';
-    $Self->{DateFormatShort}     = '%m/%d/%Y';
-    $Self->{DateInputFormat}     = '%m/%d/%Y';
-    $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
+    $Self->{DateFormat}          = '%d.%m.%Y %T';
+    $Self->{DateFormatLong}      = '%T, %a %d %b, %Y р.';
+    $Self->{DateFormatShort}     = '%d.%m.%Y';
+    $Self->{DateInputFormat}     = '%d.%m.%Y';
+    $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
     $Self->{Completeness}        = 0.417779898218829;
 
     # csv separator
