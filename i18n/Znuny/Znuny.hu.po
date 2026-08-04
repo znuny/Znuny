@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2020-07-01 07:05+0000\n"
-"PO-Revision-Date: 2026-05-04 22:40+0000\n"
+"PO-Revision-Date: 2026-08-04 16:14+0000\n"
 "Last-Translator: Balázs Úr <balazs@urbalazs.hu>\n"
 "Language-Team: Hungarian <https://translations.znuny.org/projects/znuny-lts/"
 "znuny/hu/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.17\n"
+"X-Generator: Weblate 2026.7.1\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "ACL Management"
@@ -55,7 +55,10 @@ msgstr "Beállítás importálás"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "Here you can upload a configuration file to import ACLs to your system. The file needs to be in .yml format as exported by the ACL editor module."
-msgstr "Itt tölthet fel egy beállítófájlt az ACL-ek importálásához a rendszerre. A fájlnak .yml formátumban kell lennie, ahogy az ACL szerkesztőmodul exportálta."
+msgstr ""
+"Itt tölthet fel egy beállítófájlt, hogy ACL-eket importáljon a rendszerbe. A "
+"fájlnak .yml formátumban kell lennie, ahogy az ACL szerkesztőmodulja "
+"exportálta."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "This field is required."
@@ -235,7 +238,10 @@ msgstr "Naptár importálása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentCalendarManage.tt
 msgid "Here you can upload a configuration file to import a calendar to your system. The file needs to be in .yml format as exported by calendar management module."
-msgstr "Itt tölthet fel egy beállítófájlt egy naptár importálásához a rendszerre. A fájlnak .yml formátumban kell lennie, ahogy a naptárkezelő modul exportálta."
+msgstr ""
+"Itt tölthet fel egy beállítófájlt, hogy naptárat importáljon a rendszerbe. A "
+"fájlnak .yml formátumban kell lennie, ahogy a naptár kezelőmodulja "
+"exportálta."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentCalendarManage.tt
 msgid "Overwrite existing entities"
@@ -4639,7 +4645,10 @@ msgstr "Minden folyamat üzembe állítása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Here you can upload a configuration file to import a process to your system. The file needs to be in .yml format as exported by process management module."
-msgstr "Itt tölthet fel egy beállítófájlt egy folyamat importálásához a rendszerre. A fájlnak .yml formátumban kell lennie, ahogy a folyamatkezelő modul exportálta."
+msgstr ""
+"Itt tölthet fel egy beállítófájlt, hogy folyamatot importáljon a rendszerbe. "
+"A fájlnak .yml formátumban kell lennie, ahogy a folyamat kezelőmodulja "
+"exportálta."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Upload process configuration"
@@ -17157,7 +17166,11 @@ msgstr "Saját naplószöveg beállítása a PGP-hez."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Configures a default TicketDynamicField setting. \"Name\" defines the dynamic field which should be used, \"Value\" is the data that will be set, and \"Event\" defines the trigger event."
-msgstr "Beállítja az alapértelmezett jegy dinamikus mező beállítást. A „Name” a használandó dinamikus mezőt, a „Value” a beállítandó adatokat, illetve az „Event” az aktiváló eseményt határozza meg."
+msgstr ""
+"Beállítja az alapértelmezett jegy dinamikus mező beállítást. A „Name” "
+"határozza meg azt a dinamikus mezőt, amelyet használni kell, a „Value” az az "
+"adat, amely be lesz állítva, és az „Event” határozza meg az aktiváló "
+"eseményt."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Controls how to display the ticket history entries as readable values."
@@ -23685,7 +23698,7 @@ msgstr "Képernyők"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldScreenConfiguration.tt
 msgid "Default columns"
-msgstr ""
+msgstr "Alapértelmezett oszlopok"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldScreenConfiguration.tt
 msgid "You can assign elements by dragging and dropping them to the lists of available, disabled, assigned and required elements."
@@ -23798,6 +23811,8 @@ msgstr "Az értékek között megjelenítendő elválasztó, ha több kulcs van 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
 msgid "Maximum number of results for web service queries, e.g. for autcomplete selection list."
 msgstr ""
+"Az eredmények legnagyobb száma a webszolgáltatás lekérdezéseinél, például az "
+"automatikusan kiegészített választási listánál."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldWebservice/Config.tt
 msgid "Autocomplete min. input length"
@@ -24145,7 +24160,7 @@ msgstr "Hatókör"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
 msgid "Scope EntityID"
-msgstr ""
+msgstr "Hatókör entitásazonosítója"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
 msgid "This field is required for activities with a scope."
@@ -24153,7 +24168,7 @@ msgstr "Ez a mező kötelező a hatókörrel rendelkező tevékenységeknél."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
 msgid "Show global %s"
-msgstr ""
+msgstr "Globális %s megjelenítése"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
 msgid "This field is required for activitiy dialogs with a scope."
@@ -24365,7 +24380,7 @@ msgstr "Adminisztrátori beállítási párbeszédablak a webszolgáltatás leg�
 
 #. SysConfig
 msgid "AdminOAuth2TokenManagement"
-msgstr ""
+msgstr "Adminisztrátori OAuth2-token kezelés"
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Agent interface notification module to see the number of tickets an agent is owner for. Additional access control to show or not show this link can be done by using Key \"Group\" and Content like \"rw:group1;move_into:group2\"."
@@ -24589,11 +24604,12 @@ msgstr "Figyelmen kívül hagyandó alműveletek listája."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Loader module registration for AdminOAuth2TokenManagement."
-msgstr ""
+msgstr "Betöltőmodul regisztráció az adminisztrátori OAuth2-token kezeléshez."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Loader module registration for AgentAppointmentEdit."
 msgstr ""
+"Betöltőmodul regisztráció az ügyintézői felületen lévő időpontszerkesztéshez."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Loader module registration for the admin interface."
@@ -25249,7 +25265,7 @@ msgstr "Belső"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
 msgid "Filter for Appointments"
-msgstr ""
+msgstr "Szűrő az időpontokhoz"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
 msgid "URL for authorization code"
@@ -25353,23 +25369,23 @@ msgstr "Kapcsolódó műveletek"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
 msgid "Relatd Actions"
-msgstr ""
+msgstr "Kapcsolódó műveletek"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
 msgid "Queues ↔ AUto Responses"
-msgstr ""
+msgstr "Várólisták ↔ Automatikus válaszok"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Customers Users"
-msgstr ""
+msgstr "Ügyfél-felhasználók"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
 msgid "Agents  ↔ Groups"
-msgstr ""
+msgstr "Ügyintézők ↔ Csoportok"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
 msgid "Customer ↔ Groups"
-msgstr ""
+msgstr "Ügyfelek ↔ Csoportok"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPriority.tt
 msgid "Configure Priority Visibility and Defaults"
@@ -25377,7 +25393,7 @@ msgstr "Prioritásláthatóság és alapértékek beállítása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
 msgid "Add a Dynamic Field"
-msgstr ""
+msgstr "Dinamikus mező hozzáadása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Manage Process Widget Groups"
@@ -25385,11 +25401,11 @@ msgstr "Folyamat felületi elem csoportok kezelése"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Add a Generic Agent Job"
-msgstr ""
+msgstr "Általános ügyintéző feladat hozzáadása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Add an ACL"
-msgstr ""
+msgstr "ACL hozzáadása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
 msgid "Configure Working Hours"
@@ -25417,11 +25433,11 @@ msgstr "Állapottípus-láthatóság és alapértékek beállítása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Action Control Lists"
-msgstr ""
+msgstr "Művelet-vezérlési listák"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Generic Agents"
-msgstr ""
+msgstr "Általános ügyintézők"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminType.tt
 msgid "Configure Type Visibility and Defaults"
@@ -25465,15 +25481,15 @@ msgstr "Globális beállítások az összes felugró profilhoz."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the global users popup profile."
-msgstr ""
+msgstr "Meghatározza a globális felhasználók felugró profilját."
 
 #. SysConfig
 msgid "Change your default popup profile settings."
-msgstr ""
+msgstr "Az alapértelmezett felugró profil beállításainak megváltoztatása."
 
 #. SysConfig
 msgid "Popup Profile"
-msgstr ""
+msgstr "Felugró profil"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSLA.tt
 msgid "Minimum Time Between Incidents"
@@ -25806,12 +25822,12 @@ msgstr "Az adminisztrátori felhasználóval (1-es azonosító) engedélyezi a j
 
 #. Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
 msgid "The selected template type does not support attachments."
-msgstr ""
+msgstr "A kiválasztott sablontípus nem támogat mellékleteket."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
 msgid "View the admin manual"
-msgstr ""
+msgstr "Adminisztrátori kézikönyv megtekintése"
 
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "Resend is not possible for this article!"
-msgstr "A bejegyzés újraküldése nem lehetséges!"
+msgstr "Az újraküldés nem lehetséges ennél a bejegyzésnél!"
