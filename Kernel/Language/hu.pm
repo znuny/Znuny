@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D - %T';
-    $Self->{Completeness}        = 0.999678766463219;
+    $Self->{Completeness}        = 1;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -50,7 +50,7 @@ sub Data {
         'Just start typing to filter...' => 'Csak kezdjen el gépelni a szűréshez…',
         'Configuration Import' => 'Beállítás importálás',
         'Here you can upload a configuration file to import ACLs to your system. The file needs to be in .yml format as exported by the ACL editor module.' =>
-            'Itt tölthet fel egy beállítófájlt az ACL-ek importálásához a rendszerre. A fájlnak .yml formátumban kell lennie, ahogy az ACL szerkesztőmodul exportálta.',
+            'Itt tölthet fel egy beállítófájlt, hogy ACL-eket importáljon a rendszerbe. A fájlnak .yml formátumban kell lennie, ahogy az ACL szerkesztőmodulja exportálta.',
         'This field is required.' => 'Ez a mező kötelező.',
         'Overwrite existing ACLs?' => 'Felülírja a meglévő ACL-eket?',
         'Upload ACL configuration' => 'ACL beállítás feltöltése',
@@ -110,7 +110,7 @@ sub Data {
         'Import Appointments' => 'Időpontok importálása',
         'Calendar Import' => 'Naptár importálása',
         'Here you can upload a configuration file to import a calendar to your system. The file needs to be in .yml format as exported by calendar management module.' =>
-            'Itt tölthet fel egy beállítófájlt egy naptár importálásához a rendszerre. A fájlnak .yml formátumban kell lennie, ahogy a naptárkezelő modul exportálta.',
+            'Itt tölthet fel egy beállítófájlt, hogy naptárat importáljon a rendszerbe. A fájlnak .yml formátumban kell lennie, ahogy a naptár kezelőmodulja exportálta.',
         'Overwrite existing entities' => 'Meglévő bejegyzések felülírása',
         'Upload calendar configuration' => 'Naptárbeállítás feltöltése',
         'Import Calendar' => 'Naptár importálása',
@@ -1397,7 +1397,7 @@ sub Data {
         'You can add favorites by moving your cursor over items on the right side and clicking the star icon.' =>
             'Hozzáadhat kedvenceket, ha a kurzort a jobb oldalon lévő elemek fölé viszi, és a csillag ikonra kattint.',
         'Links' => 'Hivatkozások',
-        'View the admin manual' => '',
+        'View the admin manual' => 'Adminisztrátori kézikönyv megtekintése',
         'No Matches' => 'Nincs találat',
         'Sorry, your search didn\'t match any items.' => 'Sajnáljuk, a keresése nem illeszkedik egyetlen elemre sem.',
         'Set as favorite' => 'Beállítás kedvencként',
@@ -1723,7 +1723,7 @@ sub Data {
         'Create New Process' => 'Új folyamat létrehozása',
         'Deploy All Processes' => 'Minden folyamat üzembe állítása',
         'Here you can upload a configuration file to import a process to your system. The file needs to be in .yml format as exported by process management module.' =>
-            'Itt tölthet fel egy beállítófájlt egy folyamat importálásához a rendszerre. A fájlnak .yml formátumban kell lennie, ahogy a folyamatkezelő modul exportálta.',
+            'Itt tölthet fel egy beállítófájlt, hogy folyamatot importáljon a rendszerbe. A fájlnak .yml formátumban kell lennie, ahogy a folyamat kezelőmodulja exportálta.',
         'Upload process configuration' => 'Folyamat-beállítás feltöltése',
         'Import process configuration' => 'Folyamat-beállítás importálása',
         'Ready2Adopt Processes' => 'Használatra kész folyamatok',
@@ -4179,7 +4179,7 @@ sub Data {
         'Template updated!' => 'Sablon frissítve!',
 
         # Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
-        'The selected template type does not support attachments.' => '',
+        'The selected template type does not support attachments.' => 'A kiválasztott sablontípus nem támogat mellékleteket.',
         'Change Attachment Relations for Template' => 'Mellékletkapcsolatok megváltoztatása egy sablonnál',
         'Change Template Relations for Attachment' => 'Sablonkapcsolatok megváltoztatása egy mellékletnél',
 
@@ -4342,7 +4342,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
         'No ArticleID is given!' => 'Nincs bejegyzés-azonosító megadva!',
-        'Resend is not possible for this article!' => 'A bejegyzés újraküldése nem lehetséges!',
+        'Resend is not possible for this article!' => 'Az újraküldés nem lehetséges ennél a bejegyzésnél!',
 
         # Perl Module: Kernel/Modules/AgentTicketEscalationView.pm
         'Next week' => 'Következő hét',
@@ -7807,7 +7807,7 @@ sub Data {
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             'Eseménymodul regisztráció. A jobb teljesítményért meghatározhat egy aktiváló eseményt (például Event =&gt; TicketCreate). Ez csak akkor lehetséges, ha minden jegy dinamikus mező ugyanazt az eseményt igényli.',
         'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event.' =>
-            'Beállítja az alapértelmezett jegy dinamikus mező beállítást. A „Name” a használandó dinamikus mezőt, a „Value” a beállítandó adatokat, illetve az „Event” az aktiváló eseményt határozza meg.',
+            'Beállítja az alapértelmezett jegy dinamikus mező beállítást. A „Name” határozza meg azt a dinamikus mezőt, amelyet használni kell, a „Value” az az adat, amely be lesz állítva, és az „Event” határozza meg az aktiváló eseményt.',
         'Defines the list of types for templates.' => 'Meghatározza a típusok listáját a sablonokhoz.',
         'List of default Standard Templates which are assigned automatically to new Queues upon creation.' =>
             'Az alapértelmezett szabványos sablonok listája, amelyek automatikusan hozzá vannak rendelve az új várólistákhoz a létrehozáskor.',
