@@ -12,6 +12,8 @@ package Kernel::System::Web::InterfaceAgent;
 use strict;
 use warnings;
 
+use Digest::SHA qw(sha256_hex);
+
 use Kernel::Language qw(Translatable);
 use Kernel::System::DateTime;
 
@@ -618,24 +620,24 @@ sub Run {
         }
 
         # get params
-        my $User  = $ParamObject->GetParam( Param => 'User' )  || '';
-        my $Token = $ParamObject->GetParam( Param => 'Token' ) || '';
+        my $User         = $ParamObject->GetParam( Param => 'User' )         || '';
+        my $Token        = $ParamObject->GetParam( Param => 'Token' )        || '';
+        my $NewPW        = $ParamObject->GetParam( Param => 'NewPW' )        || '';
+        my $NewPWConfirm = $ParamObject->GetParam( Param => 'NewPWConfirm' ) || '';
 
-        # get user login by token
+        # get user login by token (token is stored hashed — search by hash)
         if ( !$User && $Token ) {
 
             # Prevent extracting password reset token character-by-character via wildcard injection
             # The wild card characters "%" and "_" could be used to match arbitrary character.
             if ( $Token !~ m{\A (?: [a-zA-Z] | \d )+ \z}xms ) {
-
-                # Security: pretend that password reset instructions were actually sent to
-                #   make sure that users cannot find out valid usernames by
-                #   just trying and checking the result message.
                 $LayoutObject->Print(
                     Output => \$LayoutObject->Login(
-                        Title       => 'Login',
-                        Message     => Translatable('Sent password reset instructions. Please check your email.'),
-                        MessageType => 'Success',
+                        Title   => 'Login',
+                        Message => Translatable(
+                            'Your password reset link is invalid or has expired. Please request a new one.'
+                        ),
+                        MessageType => 'Error',
                         %Param,
                     ),
                 );
@@ -644,7 +646,7 @@ sub Run {
 
             my %UserList = $UserObject->SearchPreferences(
                 Key   => 'UserToken',
-                Value => $Token,
+                Value => sha256_hex($Token),
             );
             USERS:
             for my $UserID ( sort keys %UserList ) {
@@ -670,25 +672,36 @@ sub Run {
         my $UserIsValid = grep { $UserData{ValidID} && $UserData{ValidID} == $_ } @ValidIDs;
         if ( !$UserData{UserID} || !$UserIsValid ) {
 
-            # Security: pretend that password reset instructions were actually sent to
-            #   make sure that users cannot find out valid usernames by
-            #   just trying and checking the result message.
+            my $Message = $Token
+                ? Translatable('Your password reset link is invalid or has expired. Please request a new one.')
+                : Translatable('Sent password reset instructions. Please check your email.');
+            my $MessageType = $Token ? 'Error' : 'Success';
             $LayoutObject->Print(
                 Output => \$LayoutObject->Login(
                     Title       => 'Login',
-                    Message     => Translatable('Sent password reset instructions. Please check your email.'),
-                    MessageType => 'Success',
+                    Message     => $Message,
+                    MessageType => $MessageType,
                     %Param,
                 ),
             );
             return;
         }
 
-        # create email object
-        my $EmailObject = $Kernel::OM->Get('Kernel::System::Email');
-
-        # send password reset token
+        # Phase 1: no token yet — generate one and send the reset link email
         if ( !$Token ) {
+            if ( $Self->_PasswordResetRateLimitReached( Username => $User, UserType => 'Agent' ) ) {
+                $LayoutObject->Print(
+                    Output => \$LayoutObject->Login(
+                        Title       => 'Login',
+                        Message     => Translatable('Sent password reset instructions. Please check your email.'),
+                        MessageType => 'Success',
+                        %Param,
+                    ),
+                );
+                return;
+            }
+
+            my $EmailObject = $Kernel::OM->Get('Kernel::System::Email');
 
             # generate token
             $UserData{Token} = $UserObject->TokenGenerate(
@@ -708,7 +721,7 @@ sub Run {
                 Subject  => $Subject,
                 Charset  => $LayoutObject->{UserCharset},
                 MimeType => 'text/plain',
-                Body     => $Body
+                Body     => $Body,
             );
             if ( !$Sent->{Success} ) {
                 $LayoutObject->FatalError(
@@ -716,6 +729,14 @@ sub Run {
                 );
                 return;
             }
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'notice',
+                Message  => 'AuditLog PasswordResetRequested'
+                    . " User=$UserData{UserLogin}"
+                    . ' UserType=Agent'
+                    . ' IP=' . $Self->_AuditRemoteAddr()
+                    . ' Timestamp=' . $Kernel::OM->Create('Kernel::System::DateTime')->ToString(),
+            );
             $LayoutObject->Print(
                 Output => \$LayoutObject->Login(
                     Title       => 'Login',
@@ -727,69 +748,168 @@ sub Run {
             return 1;
         }
 
-        # reset password
-        # check if token is valid
-        my $TokenValid = $UserObject->TokenCheck(
-            Token  => $Token,
-            UserID => $UserData{UserID},
-        );
-        if ( !$TokenValid ) {
+        # Phase 2: token present, no new password submitted — validate token and show the set-password form
+        elsif ( !$NewPW ) {
+            my $TokenValid = $UserObject->TokenCheck(
+                Token  => $Token,
+                UserID => $UserData{UserID},
+                Peek   => 1,
+            );
+            if ( !$TokenValid ) {
+                $LayoutObject->Print(
+                    Output => \$LayoutObject->Login(
+                        Title   => 'Login',
+                        Message => Translatable(
+                            'Your password reset link is invalid or has expired. Please request a new one.'
+                        ),
+                        MessageType => 'Error',
+                        %Param,
+                    ),
+                );
+                return;
+            }
+
             $LayoutObject->Print(
                 Output => \$LayoutObject->Login(
-                    Title       => 'Login',
-                    Message     => Translatable('Invalid Token!'),
-                    MessageType => 'Error',
+                    Title         => 'Login',
+                    PasswordReset => 1,
+                    Token         => $Token,
                     %Param,
                 ),
             );
-            return;
+            return 1;
         }
 
-        # get new password
-        $UserData{NewPW} = $UserObject->GenerateRandomPassword();
+        # Phase 3: token + new password submitted — validate, consume token, set password
+        else {
 
-        # update new password
-        $UserObject->SetPassword(
-            UserLogin => $User,
-            PW        => $UserData{NewPW}
-        );
-
-        # send notify email
-        my $Body = $ConfigObject->Get('NotificationBodyLostPassword')
-            || 'New Password is: <OTRS_NEWPW>';
-        my $Subject = $ConfigObject->Get('NotificationSubjectLostPassword')
-            || 'New Password!';
-        for my $Key ( sort keys %UserData ) {
-            $Body =~ s/<OTRS_$Key>/$UserData{$Key}/gi;
-        }
-        my $Sent = $EmailObject->Send(
-            To       => $UserData{UserEmail},
-            Subject  => $Subject,
-            Charset  => $LayoutObject->{UserCharset},
-            MimeType => 'text/plain',
-            Body     => $Body
-        );
-
-        if ( !$Sent->{Success} ) {
-            $LayoutObject->FatalError(
-                Comment => Translatable('Please contact the administrator.'),
+            # peek-validate token first so validation errors can re-show the form with the same token
+            my $TokenValid = $UserObject->TokenCheck(
+                Token  => $Token,
+                UserID => $UserData{UserID},
+                Peek   => 1,
             );
-            return;
+            if ( !$TokenValid ) {
+                $LayoutObject->Print(
+                    Output => \$LayoutObject->Login(
+                        Title   => 'Login',
+                        Message => Translatable(
+                            'Your password reset link is invalid or has expired. Please request a new one.'
+                        ),
+                        MessageType => 'Error',
+                        %Param,
+                    ),
+                );
+                return;
+            }
+
+            # verify passwords match
+            if ( $NewPW ne $NewPWConfirm ) {
+                $LayoutObject->Print(
+                    Output => \$LayoutObject->Login(
+                        Title         => 'Login',
+                        Message       => Translatable('Passwords do not match!'),
+                        MessageType   => 'Error',
+                        PasswordReset => 1,
+                        Token         => $Token,
+                        %Param,
+                    ),
+                );
+                return;
+            }
+
+            # apply password policy (same config path as Kernel::Output::HTML::Preferences::Password)
+            my $PasswordConfig = $ConfigObject->Get('PreferencesGroups')->{Password} // {};
+            my @PolicyErrors;
+            if ( $PasswordConfig->{PasswordRegExp} && $NewPW !~ /$PasswordConfig->{PasswordRegExp}/ ) {
+                push @PolicyErrors, Translatable('Password does not match the requirements!');
+            }
+            if ( $PasswordConfig->{PasswordMinSize} && length($NewPW) < $PasswordConfig->{PasswordMinSize} ) {
+                push @PolicyErrors,
+                    $LayoutObject->{LanguageObject}->Translate(
+                    'Password must be at least %s characters long!',
+                    $PasswordConfig->{PasswordMinSize}
+                    );
+            }
+            if (
+                $PasswordConfig->{PasswordMin2Lower2UpperCharacters}
+                && ( $NewPW !~ /[A-Z].*[A-Z]/ || $NewPW !~ /[a-z].*[a-z]/ )
+                )
+            {
+                push @PolicyErrors,
+                    Translatable(
+                    'Password must contain at least 2 lowercase and 2 uppercase letter characters!'
+                    );
+            }
+            if ( $PasswordConfig->{PasswordNeedDigit} && $NewPW !~ /\d/ ) {
+                push @PolicyErrors, Translatable('Password must contain at least 1 digit!');
+            }
+            if ( $PasswordConfig->{PasswordMin2Characters} && $NewPW !~ /[A-z][A-z]/ ) {
+                push @PolicyErrors, Translatable('Password must contain at least 2 letter characters!');
+            }
+
+            if (@PolicyErrors) {
+                $LayoutObject->Print(
+                    Output => \$LayoutObject->Login(
+                        Title         => 'Login',
+                        Message       => $PolicyErrors[0],
+                        MessageType   => 'Error',
+                        PasswordReset => 1,
+                        Token         => $Token,
+                        %Param,
+                    ),
+                );
+                return;
+            }
+
+            # all validations passed — consume the token now
+            $UserObject->TokenCheck(
+                Token  => $Token,
+                UserID => $UserData{UserID},
+            );
+
+            # set new password
+            $UserObject->SetPassword(
+                UserLogin => $User,
+                PW        => $NewPW,
+            );
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'notice',
+                Message  => 'AuditLog PasswordChanged'
+                    . " User=$User"
+                    . ' UserType=Agent'
+                    . ' IP=' . $Self->_AuditRemoteAddr()
+                    . ' Timestamp=' . $Kernel::OM->Create('Kernel::System::DateTime')->ToString(),
+            );
+
+            # send confirmation email
+            my $EmailObject = $Kernel::OM->Get('Kernel::System::Email');
+            my $Body        = $ConfigObject->Get('NotificationBodyLostPassword')
+                || 'Your password has been successfully reset.';
+            my $Subject = $ConfigObject->Get('NotificationSubjectLostPassword')
+                || 'Password Reset Successful';
+            for my $Key ( sort keys %UserData ) {
+                $Body =~ s/<OTRS_$Key>/$UserData{$Key}/gi;
+            }
+            $EmailObject->Send(
+                To       => $UserData{UserEmail},
+                Subject  => $Subject,
+                Charset  => $LayoutObject->{UserCharset},
+                MimeType => 'text/plain',
+                Body     => $Body,
+            );
+
+            $LayoutObject->Print(
+                Output => \$LayoutObject->Login(
+                    Title       => 'Login',
+                    Message     => Translatable('Password changed. Please log in with your new password.'),
+                    User        => $User,
+                    MessageType => 'Success',
+                    %Param,
+                ),
+            );
+            return 1;
         }
-        my $Message = $LayoutObject->{LanguageObject}->Translate(
-            'Sent new password to %s. Please check your email.',
-            $UserData{UserEmail},
-        );
-        $LayoutObject->Print(
-            Output => \$LayoutObject->Login(
-                Title       => 'Login',
-                Message     => $Message,
-                User        => $User,
-                MessageType => 'Success',
-                %Param,
-            ),
-        );
-        return 1;
     }
 
     # show login site
@@ -1219,6 +1339,77 @@ sub _UserTimeZoneGet {
     $UserTimeZone ||= Kernel::System::DateTime->UserDefaultTimeZoneGet();
 
     return $UserTimeZone;
+}
+
+sub _AuditRemoteAddr {
+    if ( $ENV{HTTP_X_FORWARDED_FOR} ) {
+        return ( split /,\s*/, $ENV{HTTP_X_FORWARDED_FOR} )[0];
+    }
+    return $ENV{REMOTE_ADDR} || 'unknown';
+}
+
+sub _PasswordResetRateLimitReached {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+    my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
+
+    my $MaxAttempts = $ConfigObject->Get('PasswordResetRateLimitMaxAttempts') // 5;
+    return 0 if !$MaxAttempts;
+
+    my $Window = $ConfigObject->Get('PasswordResetRateLimitWindow') // 600;
+
+    my $IP      = $Self->_AuditRemoteAddr();
+    my $Now     = time();
+    my $Blocked = 0;
+
+    KEY:
+    for my $Key ( "IP::$IP", "User::$Param{Username}" ) {
+        my $Entry = $CacheObject->Get(
+            Type => 'PasswordReset',
+            Key  => $Key,
+        ) // {
+            count   => 0,
+            expires => $Now + $Window,
+        };
+
+        if ( $Now >= $Entry->{expires} ) {
+            $Entry = {
+                count   => 0,
+                expires => $Now + $Window,
+            };
+        }
+
+        $Entry->{count}++;
+
+        $CacheObject->Set(
+            Type  => 'PasswordReset',
+            Key   => $Key,
+            Value => $Entry,
+            TTL   => $Entry->{expires} - $Now,
+        );
+
+        next KEY if $Entry->{count} <= $MaxAttempts;
+
+        $Blocked = 1;
+        if ( $Entry->{count} == $MaxAttempts + 1 ) {
+            my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
+            my $DateTimeString = $DateTimeObject->ToString();
+
+            $LogObject->Log(
+                Priority => 'notice',
+                Message  => 'AuditLog PasswordResetRateLimitReached'
+                    . " User=$Param{Username}"
+                    . " UserType=$Param{UserType}"
+                    . " LimitedBy=$Key"
+                    . " IP=$IP"
+                    . " Timestamp=$DateTimeString",
+            );
+        }
+    }
+
+    return $Blocked;
 }
 
 sub DESTROY {

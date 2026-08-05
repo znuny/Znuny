@@ -54,22 +54,23 @@ sub _GetMigrateSysConfigSettings {
         },
         "Frontend::ToolBarModule###210-Ticket::TicketSearchProfile" => {
             AddEffectiveValue => {
-                Block => 'ToolBarSearchProfile',
+                Name => 'SearchTemplate',
             },
         },
         "Frontend::ToolBarModule###220-Ticket::TicketSearchFulltext" => {
             AddEffectiveValue => {
-                Block => 'ToolBarSearchFulltext',
+                Block => 'ToolBarSearch',
             },
         },
         "Frontend::ToolBarModule###230-CICSearchCustomerID" => {
             AddEffectiveValue => {
-                Block => 'ToolBarCICSearchCustomerID',
+                Block => 'ToolBarSearch',
             },
         },
         "Frontend::ToolBarModule###240-CICSearchCustomerUser" => {
             AddEffectiveValue => {
-                Block => 'ToolBarCICSearchCustomerUser',
+                Block => 'ToolBarSearch',
+                Name  => 'CustomerUser',
             },
         },
         "Ticket::Frontend::AgentTicketProcess::CustomerIDReadOnly" => {

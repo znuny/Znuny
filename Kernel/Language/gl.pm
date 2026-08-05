@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.44627175475012;
+    $Self->{Completeness}        = 0.445769720101781;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -975,6 +975,18 @@ sub Data {
             'Desecadeantes de eventos sincrónicos serán procesados directamente durante a petición web.',
         'Add all attachments' => '',
         'Add all attachments to invoker payload.' => '',
+        'Fields to be omitted from payload' => '',
+        'Field' => '',
+        'Remove field' => '',
+        'Add field to be omitted from payload' => '',
+        'Restore omitted fields' => '',
+        'Fields which will be removed from the payload of the request, e.g. \'SomeField1\'. Nested fields can be referenced by connecting them with \'->\', e.g. \'SomeField1->SomeField2->SomeField3\'.' =>
+            '',
+        'Fields to be Base64 encoded in payload' => '',
+        'Add field to be Base64 encoded in payload' => '',
+        'Restore Base64 encoded fields' => '',
+        'Fields which will be Base64 encoded in payload of the request, e.g. \'SomeField1\'. Nested fields can be referenced by connecting them with \'->\', e.g. \'SomeField1->SomeField2->SomeField3\'.' =>
+            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerEvent.tt
         'GenericInterface Invoker Event Settings for Web Service %s' => '',
@@ -1400,7 +1412,7 @@ sub Data {
         'You can add favorites by moving your cursor over items on the right side and clicking the star icon.' =>
             '',
         'Links' => '',
-        'View the admin manual on Github' => '',
+        'View the admin manual' => '',
         'No Matches' => '',
         'Sorry, your search didn\'t match any items.' => '',
         'Set as favorite' => '',
@@ -1523,6 +1535,9 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'Desinstalar o paquete',
         'Do you really want to uninstall this package?' => 'Confirma que desexa desinstalar este paquete?',
+        'Uninstall package and data' => '',
+        'Uninstall package only' => '',
+        'Uninstall' => 'Desinstale',
         'Reinstall package' => 'Reinstalar o paquete',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Confirma que desexa reinstalar este paquete? Os cambios manuais hanse perder.',
@@ -1569,7 +1584,6 @@ sub Data {
         'Action' => 'Acción',
         'Module documentation' => 'Documentación do módulo',
         'Local Repository' => 'Repositorio local',
-        'Uninstall' => 'Desinstale',
         'Package not correctly deployed! Please reinstall the package.' =>
             'O paquete non foi correctamente despregado! Por favor, volva a instalar o paquete.',
         'Reinstall' => 'Reinstalar',
@@ -2268,7 +2282,8 @@ sub Data {
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
-        'Translation' => '',
+        'Import Translation' => '',
+        'Export Translation' => '',
         'Translation Management' => '',
         'Add Translation' => '',
         'Edit Translation' => '',
@@ -2727,14 +2742,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => '',
-        'All fields marked with an asterisk (*) are mandatory.' => 'Todos os campos marcados cun asterisco (*) son obrigatorios.',
-        'Cancel & close' => 'Cancelar e pechar',
-        'Select one or more recipients from the customer user address book.' =>
-            '',
-        'Customer user address book' => '',
-        'Remove Ticket Customer' => 'Elimine Ticket Cliente',
-        'Remove Cc' => 'Elimine Cc',
-        'Remove Bcc' => 'Elimine Bcc',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s %s)!' => 'Ticket %s: primeiro tempo de resposta está por enriba (%s/%s)!',
@@ -2976,14 +2983,18 @@ sub Data {
         'User name' => 'Nome do usuario',
         'Your user name' => 'O seu nome de usuario',
         'Your password' => 'O seu contrasinal',
-        'Forgot password?' => 'Esqueceu o contrasinal?',
+        'Lost your password?' => 'Perdeu o seu contrasinal?',
         '2 Factor Token' => '2 Factor Token',
         'Your 2 Factor Token' => 'Teus 2 Factor Token',
         'Log In' => 'Acceso',
         'Request New Password' => 'Solicitar un contrasinal novo',
         'Your User Name' => 'O Seu Nome de Usuario',
-        'A new password will be sent to your email address.' => 'Un novo contrasinal será enviado ao seu enderezo de correo electrónico.',
+        'A link to set a new password will be sent to your email address.' =>
+            'Enviarase un enlace para establecer un novo contrasinal ao seu enderezo de correo electrónico.',
         'Back to login' => 'Retornar á pantalla de acceso',
+        'Set New Password' => 'Establecer un novo contrasinal',
+        'New password' => 'Novo contrasinal',
+        'Confirm password' => 'Confirmar o contrasinal',
         'Create Account' => 'Crear unha conta',
         'Please fill out this form to receive login credentials.' => 'Por favor encha este formulario para recibir credenciais de login.',
         'How we should address you' => 'Como nos deberíamos dirixir a vostede',
@@ -3189,9 +3200,6 @@ sub Data {
         'Object#' => 'Obxecto nº',
         'Add links' => 'Engadir ligazóns',
         'Delete links' => 'Elimine enlaces',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
-        'Lost your password?' => 'Perdeu o seu contrasinal?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -4215,6 +4223,15 @@ sub Data {
         'Change Attachment Relations for Template' => 'Cambie Relacións Anexos para Modelo',
         'Change Template Relations for Attachment' => 'Cambie as Relacións do Modelo para Anexos',
 
+        # Perl Module: Kernel/Modules/AdminTranslation.pm
+        'Import / Export' => '',
+        'Here you can upload a configuration file to import translations to your system. The file needs to be in .yml | .csv | .xlsx format.' =>
+            '',
+        'Could not find translation for ID %s.' => '',
+        'Translation stored.' => '',
+        'Storing translation failed.' => '',
+        'Translations synchronized.' => '',
+
         # Perl Module: Kernel/Modules/AdminType.pm
         'Need Type!' => '',
         'Type added!' => 'Engadiuse un tipo!',
@@ -4373,6 +4390,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
         'No ArticleID is given!' => '',
+        'Resend is not possible for this article!' => 'Non é posible reenviar este artigo!',
 
         # Perl Module: Kernel/Modules/AgentTicketEscalationView.pm
         'Next week' => 'A próxima semana',
@@ -4870,7 +4888,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Preferences/Password.pm
         'Current password' => 'Contrasinal actual',
-        'New password' => 'Novo contrasinal',
         'Verify password' => 'Verificar contrasinal',
         'The current password is not correct. Please try again!' => 'O contrasinal actual non é correcto. Por favor, probe de novo!',
         'Please supply your new password!' => 'Por favor proporcione o seu novo contrasinal!',
@@ -5551,9 +5568,17 @@ sub Data {
         'Can`t remove SessionID.' => '',
         'Logout successful.' => '',
         'Feature not active!' => 'Esta funcionalidade non está activa!',
+        'Your password reset link is invalid or has expired. Please request a new one.' =>
+            'A súa ligazón para restablecer o contrasinal non é válida ou caducou. Solicite unha nova.',
         'Sent password reset instructions. Please check your email.' => 'Enviadas as instruccións para resetea-la contrasinal. Por favor comprobe o seu email.',
-        'Invalid Token!' => 'Ficha incorrecta!',
-        'Sent new password to %s. Please check your email.' => 'Enviada a nova contrasinal a %s. Por favor comprobe o seu email.',
+        'Passwords do not match!' => 'Os contrasinais non coinciden!',
+        'Password does not match the requirements!' => 'O contrasinal non cumpre os requisitos!',
+        'Password must be at least %s characters long!' => 'O contrasinal debe ter polo menos %s caracteres!',
+        'Password must contain at least 2 lowercase and 2 uppercase letter characters!' =>
+            'O contrasinal debe conter polo menos 2 letras minúsculas e 2 maiúsculas!',
+        'Password must contain at least 1 digit!' => 'O contrasinal debe conter polo menos 1 díxito!',
+        'Password must contain at least 2 letter characters!' => 'O contrasinal debe conter polo menos 2 letras!',
+        'Password changed. Please log in with your new password.' => 'Contrasinal modificado. Inicie sesión co seu novo contrasinal.',
         'Error: invalid session.' => '',
         'No Permission to use this frontend module!' => '',
 
@@ -5740,7 +5765,7 @@ sub Data {
             '',
         'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
             '',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.' =>
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html.' =>
             '',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             'É posible configurar temas diferentes, para por exemplo distinguir entre axentes e clientes, para ser utilizados nunha base de por dominio dentro da aplicación. Utilizando unha expresión regular (regex), vostede pode configurar un Chave/Contido par para igualar un dominio. O valor en "Chave" debería coincidir co dominio, e o valor en "Contido" debería ser unha tema válido no seu sistema. Por favor vexa as entradas de exemplo para a forma correcta do regex.',
@@ -6066,14 +6091,20 @@ sub Data {
             '',
         'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
             '',
+        'Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).' =>
+            'Define o período de validez en segundos dos tokens de restablecemento de contrasinal. Despois deste tempo o token caduca e é necesaria unha nova solicitude. Por defecto: 3600 (1 hora).',
+        'Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.' =>
+            'Número máximo de solicitudes de restablecemento de contrasinal permitidas por enderezo IP ou nome de usuario dentro da fiestra de rate limiting. Estabeleza 0 para desactivar o rate limiting. Por defecto: 5.',
+        'Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes).' =>
+            'Fiestra temporal en segundos para o rate limiting do restablecemento de contrasinal. Os intentos dentro desta fiestra contánse fronte ao máximo. Por defecto: 600 (10 minutos).',
         'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
             'Define o tema para correos de notificación enviados a axentes, con sinal sobre novo contrasinal pedido.',
         'Defines the body text for notification mails sent to agents, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to agents, about new password.' =>
-            'Define o tema para correos de notificación enviados a axentes, sobre novo contrasinal.',
-        'Defines the body text for notification mails sent to agents, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Define o asunto dos correos de notificación enviados aos agents confirmando o restablecemento do contrasinal.',
+        'Defines the body text for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Define o corpo dos correos de notificación enviados aos agents confirmando o restablecemento do contrasinal.',
         'Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that "rw" is always the last registered permission.' =>
             'Permisos normais dispoñíbeis para os axentes desde dentro do aplicativo. Se se precisaren máis precisos, é posíbel engadilos aquí. Os permisos teñen que ser definidos para seren efectivos. Outros permisos bos tamén se fornecen incorporados: nota, pechar, pendente, cliente, texto libre, mover, redactar, responsábel, encamiñar e rebotar. Asegúrese de que «rw» é sempre o último permiso rexistrado.',
         'Defines the standard permissions available for customers within the application. If more permissions are needed, you can enter them here. Permissions must be hard coded to be effective. Please ensure, when adding any of the afore mentioned permissions, that the "rw" permission remains the last entry.' =>
@@ -6149,10 +6180,10 @@ sub Data {
             'Define o tema para correos de notificación enviados a clientes, con sinal sobre novo contrasinal pedido.',
         'Defines the body text for notification mails sent to customers, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to customers, about new password.' =>
-            'Define o tema para correos de notificación enviados a clientes, sobre novo contrasinal.',
-        'Defines the body text for notification mails sent to customers, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Define o asunto dos correos de notificación enviados aos clientes confirmando o restablecemento do contrasinal.',
+        'Defines the body text for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Define o corpo dos correos de notificación enviados aos clientes confirmando o restablecemento do contrasinal.',
         'Defines the subject for notification mails sent to customers, about new account.' =>
             'Define o tema para correos de notificación enviados a clientes, sobre nova conta.',
         'Defines the body text for notification mails sent to customers, about new account.' =>
@@ -7810,7 +7841,7 @@ sub Data {
             '',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             '',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event.' =>
             '',
         'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
             '',
@@ -7869,9 +7900,9 @@ sub Data {
             '',
         'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
             '',
-        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
+        'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             '',
-        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
+        'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
             '',
         'Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic.' =>
             '',
@@ -8559,6 +8590,7 @@ sub Data {
             '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
+        'Customer user address book' => '',
         'Select a customer ID to assign to this ticket' => '',
         'Do you really want to continue?' => 'Desexa realmente continuar?',
 
@@ -9378,6 +9410,7 @@ Thanks for your help!
         'To accept login information, such as an EULA or license.' => '',
         'To download attachments.' => '',
         'To view HTML attachments.' => '',
+        'Translation' => '',
         'Tree view' => 'Vista en árbore',
         'Turkish' => '',
         'Tweak the system as you wish.' => '',

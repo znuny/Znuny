@@ -11,7 +11,7 @@ package Kernel::System::Console::Command::Dev::Code::CPANUpdate;
 
 use strict;
 use warnings;
-
+use utf8;
 use File::Path();
 
 use parent qw(Kernel::System::Console::BaseCommand);
@@ -32,7 +32,7 @@ sub Configure {
     $Self->AddOption(
         Name        => 'mode',
         Description =>
-            "Update all dependencies (development), one dependency (single), only critical ones (stable), or just check for outdated modules (check).",
+            "Update one dependency (single), only critical ones (stable), or just check for outdated modules (check).",
         Required   => 1,
         HasValue   => 1,
         Multiple   => 0,
@@ -83,7 +83,6 @@ sub Run {
             my $Space          = ' ' x ( 36 - length $Module );
             my $Installed      = $PerlInfo{Modules}->{$Module};
             my $SpaceInstalled = ' ' x ( 14 - length $Installed );
-
             $Self->Print( $Module . $Space . $Installed . $SpaceInstalled );
 
             my $ProxySetting                  = $Self->_GetProxySetting();
@@ -97,10 +96,12 @@ sub Run {
             chomp $Available;
 
             $Available ||= '0';
-            my $Color = $Available > $Installed ? 'yellow' : 'green';
+            my $Color = 'yellow';
+            $Color = $Available > $Installed ? 'yellow' : 'green' if $Installed ne 'undef';
 
             $Self->Print("<$Color>$Available</$Color>\n");
         }
+        return;
     }
     elsif ( $Mode eq 'single' ) {
         my $ModulesToUpdate = $Self->GetOption('module');
@@ -117,38 +118,10 @@ sub Run {
             );
         }
     }
-    elsif ( $Mode eq 'development' ) {
-        my $CPAN2Dir = "$Home/Kernel/cpan-lib2";
-
-        # Delete Kernel/cpan-lib.
-        if ( -d $CPAN2Dir ) {
-            File::Path::remove_tree($CPAN2Dir) || die "Could not clean-up $CPAN2Dir: $!.";
-        }
-        File::Path::make_path($CPAN2Dir) || die "Could not create $CPAN2Dir: $!.";
-
-        # Install modules.
-        for my $ModuleConfig ( $Self->LoadModuleConfig() ) {
-            $Self->InstallModule(
-                ModuleConfig => $ModuleConfig,
-                TargetPath   => $CPAN2Dir,
-            );
-        }
-
-        # Copy our own extension for Devel::REPL from previous cpan-lib folder.
-        File::Path::make_path("$CPAN2Dir/Devel/REPL/Plugin");
-        system("cp -r $CPANDir/Devel/REPL/Plugin/OTRS.pm $CPAN2Dir/Devel/REPL/Plugin/OTRS.pm");
-
-        # Replace cpan-lib folder.
-        File::Path::remove_tree($CPANDir) || die "Could not remove $CPANDir: $!.";
-        rename $CPAN2Dir, $CPANDir || die "Could not replace $CPANDir: $!.";
-    }
 
     # Clean-up unwanted files.
     File::Path::remove_tree("$CPANDir/Test/Selenium");
-    system("find $CPANDir -name *.pod -exec rm -f {} +");
-    system("find $CPANDir -name *.pl -exec rm -f {} +");
-    system("find $CPANDir -name *.so -exec rm -f {} +");
-    system("find $CPANDir -name *.exists -exec rm -f {} +");
+    system("find $CPANDir \\( -name '*.pod' -or -name '*.pl' -or -name '*.so' -or -name '*.exists' \\) -delete");
 
     # Fix unwanted 755 permissions.
     system("find $CPANDir -type f -exec chmod 640 {} +");

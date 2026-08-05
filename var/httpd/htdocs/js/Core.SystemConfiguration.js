@@ -338,7 +338,11 @@ Core.SystemConfiguration = (function (TargetNS) {
             var FullName = $(this).attr('id'),
                 Value,
                 $Container,
-                ValueType;
+                ValueType,
+                SuffixMatch,
+                Suffix,
+                BasePart,
+                LastHashIndex;
 
             if($(this).hasClass("hasDatepicker")) {
                 return;
@@ -419,11 +423,22 @@ Core.SystemConfiguration = (function (TargetNS) {
             }
 
             if($(this).parent().parent().hasClass("HashItem")) {
-                // update key name
+                // Rebuild FullName (element id) so ValueSet() maps the value to the correct hash key.
+                // Field ids use "_Hash###" as the structural delimiter before the key; the key itself may
+                // also contain "###" (e.g. Ticket::Frontend::OverviewSmall###DynamicField). Do not use
+                // lastIndexOf("###") here — that would split inside the key and duplicate it on every save.
+
                 Key = $(this).parent().parent().find(".Key").val();
 
-                FullName = FullName.substr(0, FullName.lastIndexOf("###"));
-                FullName += "###" + Key;
+                // Strip structural suffix (_Array0, _Hash, date parts, etc.), same rules as CheckIDs().
+                SuffixMatch = FullName.match(/(_Array\d*|_Hash|Day$|Month$|Year$|Hour$|Minute$|$)$/);
+                Suffix = SuffixMatch ? SuffixMatch[0] : '';
+                BasePart = FullName.substring(0, FullName.length - Suffix.length);
+                LastHashIndex = BasePart.lastIndexOf('_Hash###');
+
+                if (LastHashIndex >= 0) {
+                    FullName = BasePart.substring(0, LastHashIndex + '_Hash###'.length) + Key + Suffix;
+                }
             }
 
             Data[SettingName] = ValueSet(Data[SettingName], FullName, Value);

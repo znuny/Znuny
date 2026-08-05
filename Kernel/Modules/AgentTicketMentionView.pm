@@ -86,37 +86,47 @@ sub Run {
         )
     {
         # get column filter from web request
-        my $FilterValue = $ParamObject->GetParam( Param => 'ColumnFilter' . $ColumnName )
-            || '';
+        my @FilterValues = $ParamObject->GetArray( Param => 'ColumnFilter' . $ColumnName );
 
         # if filter is not present in the web request, try with the user preferences
-        if ( !IsStringWithData($FilterValue) ) {
+        if ( !@FilterValues ) {
             if ( $ColumnName eq 'CustomerID' ) {
-                $FilterValue = $StoredFilters->{$ColumnName}->[0] // '';
+                @FilterValues = @{ $StoredFilters->{$ColumnName} || [] };
             }
             elsif ( $ColumnName eq 'CustomerUserID' ) {
-                $FilterValue = $StoredFilters->{CustomerUserLogin}->[0] // '';
+                @FilterValues = @{ $StoredFilters->{CustomerUserLogin} || [] };
             }
             else {
-                $FilterValue = $StoredFilters->{ $ColumnName . 'IDs' }->[0] // '';
+                @FilterValues = @{ $StoredFilters->{ $ColumnName . 'IDs' } || [] };
             }
         }
-        next COLUMNNAME if !IsStringWithData($FilterValue);
-        next COLUMNNAME if $FilterValue eq 'DeleteFilter';
 
-        if ( $ColumnName eq 'CustomerID' ) {
-            push @{ $ColumnFilter{$ColumnName} },           $FilterValue;
-            push @{ $ColumnFilter{ $ColumnName . 'Raw' } }, $FilterValue;
-            $GetColumnFilter{$ColumnName} = $FilterValue;
-        }
-        elsif ( $ColumnName eq 'CustomerUserID' ) {
-            push @{ $ColumnFilter{CustomerUserLogin} },    $FilterValue;
-            push @{ $ColumnFilter{CustomerUserLoginRaw} }, $FilterValue;
-            $GetColumnFilter{$ColumnName} = $FilterValue;
+        if (@FilterValues) {
+            my @ExpandedValues;
+            for my $Value (@FilterValues) {
+                push @ExpandedValues, $Value;
+            }
+            my %Seen;
+            @FilterValues = grep { defined $_ && $_ ne '' && $_ ne 'DeleteFilter' && !$Seen{$_}++ } @ExpandedValues;
         }
         else {
-            push @{ $ColumnFilter{ $ColumnName . 'IDs' } }, $FilterValue;
-            $GetColumnFilter{$ColumnName} = $FilterValue;
+            @FilterValues = ();
+        }
+        next COLUMNNAME if !@FilterValues;
+
+        if ( $ColumnName eq 'CustomerID' ) {
+            push @{ $ColumnFilter{$ColumnName} },           @FilterValues;
+            push @{ $ColumnFilter{ $ColumnName . 'Raw' } }, @FilterValues;
+            $GetColumnFilter{$ColumnName} = \@FilterValues;
+        }
+        elsif ( $ColumnName eq 'CustomerUserID' ) {
+            push @{ $ColumnFilter{CustomerUserLogin} },    @FilterValues;
+            push @{ $ColumnFilter{CustomerUserLoginRaw} }, @FilterValues;
+            $GetColumnFilter{$ColumnName} = \@FilterValues;
+        }
+        else {
+            push @{ $ColumnFilter{ $ColumnName . 'IDs' } }, @FilterValues;
+            $GetColumnFilter{$ColumnName} = \@FilterValues;
         }
     }
 
@@ -126,28 +136,39 @@ sub Run {
         ObjectType => ['Ticket'],
     );
 
-    DYNAMICFIELDCONFIG:
+    DYNAMICFIELD:
     for my $DynamicFieldConfig ( @{ $Self->{DynamicField} } ) {
-        next DYNAMICFIELDCONFIG if !IsHashRefWithData($DynamicFieldConfig);
-        next DYNAMICFIELDCONFIG if !$DynamicFieldConfig->{Name};
+        next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+        next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
 
         # get filter from web request
-        my $FilterValue = $ParamObject->GetParam(
+        my @FilterValues = $ParamObject->GetArray(
             Param => 'ColumnFilterDynamicField_' . $DynamicFieldConfig->{Name}
         );
 
         # if no filter from web request, try from user preferences
-        if ( !IsStringWithData($FilterValue) ) {
-            $FilterValue = $StoredFilters->{ 'DynamicField_' . $DynamicFieldConfig->{Name} }->{Equals};
+        if ( !@FilterValues ) {
+            my $StoredValue = $StoredFilters->{ 'DynamicField_' . $DynamicFieldConfig->{Name} }->{Equals};
+            @FilterValues = ref $StoredValue eq 'ARRAY' ? @{$StoredValue} : ($StoredValue);
         }
 
-        next DYNAMICFIELDCONFIG if !IsStringWithData($FilterValue);
-        next DYNAMICFIELDCONFIG if $FilterValue eq 'DeleteFilter';
+        if (@FilterValues) {
+            my @ExpandedValues;
+            for my $Value (@FilterValues) {
+                push @ExpandedValues, $Value;
+            }
+            my %Seen;
+            @FilterValues = grep { defined $_ && $_ ne '' && $_ ne 'DeleteFilter' && !$Seen{$_}++ } @ExpandedValues;
+        }
+        else {
+            @FilterValues = ();
+        }
+        next DYNAMICFIELD if !@FilterValues;
 
         $ColumnFilter{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = {
-            Equals => $FilterValue,
+            Equals => \@FilterValues,
         };
-        $GetColumnFilter{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = $FilterValue;
+        $GetColumnFilter{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = \@FilterValues;
     }
 
     # starting with page ...
@@ -325,14 +346,21 @@ sub Run {
     }
 
     my $ColumnFilterLink = '';
-
     COLUMNNAME:
     for my $ColumnName ( sort keys %GetColumnFilter ) {
         next COLUMNNAME if !$ColumnName;
-        next COLUMNNAME if !$GetColumnFilter{$ColumnName};
-        $ColumnFilterLink
-            .= ';' . $LayoutObject->Ascii2Html( Text => 'ColumnFilter' . $ColumnName )
-            . '=' . $LayoutObject->LinkEncode( $GetColumnFilter{$ColumnName} );
+        next COLUMNNAME if !defined $GetColumnFilter{$ColumnName};
+
+        my $Value  = $GetColumnFilter{$ColumnName};
+        my @Values = ref $Value eq 'ARRAY' ? @{$Value} : ( defined $Value ? $Value : () );
+        @Values = grep { defined $_ && $_ ne '' } @Values;
+        next COLUMNNAME if !@Values;
+
+        for my $Value (@Values) {
+            $ColumnFilterLink
+                .= ';' . $LayoutObject->Ascii2Html( Text => 'ColumnFilter' . $ColumnName )
+                . '=' . $LayoutObject->LinkEncode($Value);
+        }
     }
 
     # show tickets

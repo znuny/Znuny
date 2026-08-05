@@ -652,10 +652,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     /* Calendar Datepicker */
 
-    .CalendarWidget .ui-widget.ui-widget-content {
-        max-width: 300px;
-        width: 100%;
-    }
 
     .CalendarWidget .hasDatepicker .ui-datepicker .ui-state-default {
         font-size: var(--font-size-sm);

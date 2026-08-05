@@ -1701,7 +1701,7 @@ sub _TicketCreate {
             $MimeType = $Article->{MimeType};
         }
 
-        # Base-64-decode attachments.
+        # Base64 decode attachments.
         if ( IsHashRefWithData( $Article->{Attachment} ) ) {
             $Article->{Attachment} = [ $Article->{Attachment} ];
         }

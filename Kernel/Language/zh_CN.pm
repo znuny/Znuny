@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.862206610250679;
+    $Self->{Completeness}        = 0.85941475826972;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -981,6 +981,18 @@ sub Data {
             '同步的事件触发器则是在web请求期间直接处理的。',
         'Add all attachments' => '',
         'Add all attachments to invoker payload.' => '',
+        'Fields to be omitted from payload' => '',
+        'Field' => '',
+        'Remove field' => '',
+        'Add field to be omitted from payload' => '',
+        'Restore omitted fields' => '',
+        'Fields which will be removed from the payload of the request, e.g. \'SomeField1\'. Nested fields can be referenced by connecting them with \'->\', e.g. \'SomeField1->SomeField2->SomeField3\'.' =>
+            '',
+        'Fields to be Base64 encoded in payload' => '',
+        'Add field to be Base64 encoded in payload' => '',
+        'Restore Base64 encoded fields' => '',
+        'Fields which will be Base64 encoded in payload of the request, e.g. \'SomeField1\'. Nested fields can be referenced by connecting them with \'->\', e.g. \'SomeField1->SomeField2->SomeField3\'.' =>
+            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerEvent.tt
         'GenericInterface Invoker Event Settings for Web Service %s' => 'Web服务%s的通用接口调用程序事件设置',
@@ -1406,7 +1418,7 @@ sub Data {
         'You can add favorites by moving your cursor over items on the right side and clicking the star icon.' =>
             '你可以移动鼠标到条目的右上角并点击星形图标来将条目添加到收藏夹。',
         'Links' => '链接',
-        'View the admin manual on Github' => '查看Github上的管理手册',
+        'View the admin manual' => '',
         'No Matches' => '无匹配',
         'Sorry, your search didn\'t match any items.' => '对不起，你的搜索不匹配任何条目。',
         'Set as favorite' => '添加到收藏夹',
@@ -1529,6 +1541,9 @@ sub Data {
         'Uninstall Package' => '卸载软件包',
         'Uninstall package' => '卸载软件包',
         'Do you really want to uninstall this package?' => '是否确认卸载该软件包?',
+        'Uninstall package and data' => '',
+        'Uninstall package only' => '',
+        'Uninstall' => '卸载',
         'Reinstall package' => '重新安装软件包',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             '您真的想要重新安装该软包吗? 所有该模块的手工设置将丢失.',
@@ -1575,7 +1590,6 @@ sub Data {
         'Action' => '操作',
         'Module documentation' => '模块文档',
         'Local Repository' => '本地软件仓库',
-        'Uninstall' => '卸载',
         'Package not correctly deployed! Please reinstall the package.' =>
             '软件包未正确安装！请重新安装软件包。',
         'Reinstall' => '重新安装',
@@ -2274,7 +2288,8 @@ sub Data {
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
-        'Translation' => '',
+        'Import Translation' => '',
+        'Export Translation' => '',
         'Translation Management' => '',
         'Add Translation' => '',
         'Edit Translation' => '',
@@ -2733,14 +2748,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => '重新发送电子邮件给%s%s%s',
-        'All fields marked with an asterisk (*) are mandatory.' => '所有带“*”的字段都是强制要求输入的字段.',
-        'Cancel & close' => '取消并关闭',
-        'Select one or more recipients from the customer user address book.' =>
-            '从客户用户通讯录中选择一个或多个收件人。',
-        'Customer user address book' => '客户用户通讯录',
-        'Remove Ticket Customer' => '移除工单客户',
-        'Remove Cc' => '移除Cc',
-        'Remove Bcc' => '移除Bcc',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s %s)!' => '工单%s：首次响应时间已超时(%s/%s)！',
@@ -2982,14 +2989,18 @@ sub Data {
         'User name' => '用户名',
         'Your user name' => '你的用户名',
         'Your password' => '你的密码',
-        'Forgot password?' => '密码忘记?',
+        'Lost your password?' => '忘记密码?',
         '2 Factor Token' => '双因素令牌',
         'Your 2 Factor Token' => '你的双因素令牌',
         'Log In' => '登录',
         'Request New Password' => '请求新密码',
         'Your User Name' => '你的用户名',
-        'A new password will be sent to your email address.' => '新密码将会发送到您的邮箱中。',
+        'A link to set a new password will be sent to your email address.' =>
+            '设置新密码的链接将会发送到您的邮箱中。',
         'Back to login' => '重新登录',
+        'Set New Password' => '设置新密码',
+        'New password' => '新密码',
+        'Confirm password' => '确认密码',
         'Create Account' => '创建帐户',
         'Please fill out this form to receive login credentials.' => '请填写这个表单以便接收登录凭证。',
         'How we should address you' => '称谓',
@@ -3195,9 +3206,6 @@ sub Data {
         'Object#' => '对象号',
         'Add links' => '添加链接',
         'Delete links' => '删除链接',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
-        'Lost your password?' => '忘记密码?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '缩放预览内容',
@@ -4221,6 +4229,15 @@ sub Data {
         'Change Attachment Relations for Template' => '为模板指定附件',
         'Change Template Relations for Attachment' => '为附件指定模板',
 
+        # Perl Module: Kernel/Modules/AdminTranslation.pm
+        'Import / Export' => '',
+        'Here you can upload a configuration file to import translations to your system. The file needs to be in .yml | .csv | .xlsx format.' =>
+            '',
+        'Could not find translation for ID %s.' => '',
+        'Translation stored.' => '',
+        'Storing translation failed.' => '',
+        'Translations synchronized.' => '',
+
         # Perl Module: Kernel/Modules/AdminType.pm
         'Need Type!' => '需要类型！',
         'Type added!' => '类型已添加！',
@@ -4379,6 +4396,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
         'No ArticleID is given!' => '没有指定信件ID！',
+        'Resend is not possible for this article!' => '无法重发此信件！',
 
         # Perl Module: Kernel/Modules/AgentTicketEscalationView.pm
         'Next week' => '下周',
@@ -4876,7 +4894,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Preferences/Password.pm
         'Current password' => '当前密码',
-        'New password' => '新密码',
         'Verify password' => '重复新密码',
         'The current password is not correct. Please try again!' => '当前密码不正确，请重新输入！',
         'Please supply your new password!' => '请提供你的新密码!',
@@ -5557,9 +5574,17 @@ sub Data {
         'Can`t remove SessionID.' => '不能移除会话ID。',
         'Logout successful.' => '成功注销。',
         'Feature not active!' => '功能尚未激活!',
+        'Your password reset link is invalid or has expired. Please request a new one.' =>
+            '您的密码重置链接无效或已过期。请重新申请。',
         'Sent password reset instructions. Please check your email.' => '密码重置说明已发送，请检查邮件。',
-        'Invalid Token!' => '令牌无效！',
-        'Sent new password to %s. Please check your email.' => '新密码已发送到%s，请检查邮件。',
+        'Passwords do not match!' => '密码不匹配！',
+        'Password does not match the requirements!' => '密码不符合要求！',
+        'Password must be at least %s characters long!' => '密码长度至少为 %s 个字符！',
+        'Password must contain at least 2 lowercase and 2 uppercase letter characters!' =>
+            '密码必须至少包含 2 个小写字母和 2 个大写字母！',
+        'Password must contain at least 1 digit!' => '密码必须至少包含 1 个数字！',
+        'Password must contain at least 2 letter characters!' => '密码必须至少包含 2 个字母！',
+        'Password changed. Please log in with your new password.' => '密码已更改。请使用新密码登录。',
         'Error: invalid session.' => '错误：无效会话。',
         'No Permission to use this frontend module!' => '没有权限使用这个前端界面模块！',
 
@@ -5746,8 +5771,8 @@ sub Data {
             '定义本系统可用的所有语言。在这里只指定语言的英文名称。',
         'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
             '定义本系统可用的所有语言。在这里只指定语言的本地化名称。',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.' =>
-            '定义服务人员和客户使用的默认前端主题（HTML）。如果您喜欢，您可以添加您自己的主题。请参考管理员手册https://doc.znuny.org/manual/developer/ 。',
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html.' =>
+            '定义服务人员和客户使用的默认前端主题（HTML）。如果您喜欢，您可以添加您自己的主题。请参考管理员手册https://doc.znuny.org/developer/general_information/themes.html 。',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             '配置不同主题是可能的，例如：区分系统中基于域名的不同服务人员和客户。您可以使用一个正则表达式配置一个键/内容组合来匹配一个域名。“键”应该匹配域名，“值”是一个系统中有效的皮肤。请参照样例条目修改正则表达式的合适格式。',
         'The headline shown in the customer interface.' => '客户界面显示的标题。',
@@ -6072,14 +6097,20 @@ sub Data {
             '指定系统发送通知的姓名，这个发件人姓名用于创建通知管理员完整的显示名称（如"Znuny通知"znuny@your.example.com）。',
         'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
             '指定系统发送通知的邮件地址。这个邮件地址用来创建通知管理员的完整显示名称（如"Znuny通知"znuny@your.example.com），您可以使用配置的变量OTRS_CONFIG_FQDN，或者选择另外的邮件地址。',
+        'Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).' =>
+            '定义密码重置令牌的有效期（秒）。超过此时间后令牌失效，需要重新请求。默认值：3600（1 小时）。',
+        'Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.' =>
+            '在 rate limiting 窗口内每个 IP 地址或用户名允许的最大密码重置请求数。设置为 0 可禁用 rate limiting。默认值：5。',
+        'Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes).' =>
+            '密码重置 rate limiting 的时间窗口（秒）。此窗口内的尝试次数计入最大值。默认值：600（10 分钟）。',
         'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
             '定义发送给服务人员关于请求的新密码的链接的通知邮件的主题。',
         'Defines the body text for notification mails sent to agents, with token about new requested password.' =>
             '定义发送给服务人员关于请求的新密码的链接的通知邮件的正文。',
-        'Defines the subject for notification mails sent to agents, about new password.' =>
-            '定义发送给服务人员关于新密码的通知邮件的主题。',
-        'Defines the body text for notification mails sent to agents, about new password.' =>
-            '定义发送给服务人员关于新密码的通知邮件的正文。',
+        'Defines the subject for notification mails sent to agents, confirming that the password has been reset.' =>
+            '定义发送给客服、确认密码已重置的通知邮件主题。',
+        'Defines the body text for notification mails sent to agents, confirming that the password has been reset.' =>
+            '定义发送给客服、确认密码已重置的通知邮件正文。',
         'Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that "rw" is always the last registered permission.' =>
             '系统中服务人员可用的标准权限，如果需要更多的权限，可以在这里输入。权限必须已定义好且有效，一些好的权限已经内置：备注、关闭、挂起、客户、自定义字段、转移、编写、负责人、转发和退回。请确保“rw（读写）始终是注册权限的最后一条。',
         'Defines the standard permissions available for customers within the application. If more permissions are needed, you can enter them here. Permissions must be hard coded to be effective. Please ensure, when adding any of the afore mentioned permissions, that the "rw" permission remains the last entry.' =>
@@ -6155,10 +6186,10 @@ sub Data {
             '定义发送给客户关于请求的新密码的链接的通知邮件的主题。',
         'Defines the body text for notification mails sent to customers, with token about new requested password.' =>
             '定义发送给客户关于请求的新密码的链接的通知邮件的正文。',
-        'Defines the subject for notification mails sent to customers, about new password.' =>
-            '定义发送给客户关于新密码的通知邮件的主题。',
-        'Defines the body text for notification mails sent to customers, about new password.' =>
-            '定义发送给客户关于新密码的通知邮件的正文。',
+        'Defines the subject for notification mails sent to customers, confirming that the password has been reset.' =>
+            '定义发送给客户、确认密码已重置的通知邮件主题。',
+        'Defines the body text for notification mails sent to customers, confirming that the password has been reset.' =>
+            '定义发送给客户、确认密码已重置的通知邮件正文。',
         'Defines the subject for notification mails sent to customers, about new account.' =>
             '定义发送给客户关于新帐户的通知邮件的主题。',
         'Defines the body text for notification mails sent to customers, about new account.' =>
@@ -7816,8 +7847,8 @@ sub Data {
             '在客户界面的工单搜索概览屏幕中显示的动态字段。',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             '',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
-            '配置默认的TicketDynamicField（工单动态字段）设置，“Name（名称）”定义要使用的动态字段，“Value（值）”是要设置的数值，“Event（事件）”定义触发的事件。请检查开发手册 (https://doc.znuny.org/manual/developer/) 的“Ticket Event Module（工单事件模块）”章节。',
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event.' =>
+            '配置默认的TicketDynamicField（工单动态字段）设置，“Name（名称）”定义要使用的动态字段，“Value（值）”是要设置的数值，“Event（事件）”定义触发的事件。',
         'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
             '',
         'Defines the list of types for templates.' => '定义模板类型的列表。',
@@ -7875,9 +7906,9 @@ sub Data {
             '',
         'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
             '',
-        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
+        'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             '',
-        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
+        'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
             '',
         'Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic.' =>
             '',
@@ -8565,6 +8596,7 @@ sub Data {
             '这个元素有子元素，目前不能被删除。',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
+        'Customer user address book' => '客户用户通讯录',
         'Select a customer ID to assign to this ticket' => '选择要分配给这个工单的客户ID',
         'Do you really want to continue?' => '您真的要继续吗？',
 
@@ -9394,6 +9426,7 @@ Thanks for your help!
         'To accept login information, such as an EULA or license.' => '接受登录信息，如EULA（最终用户许可协议）或许可。',
         'To download attachments.' => '下载附件。',
         'To view HTML attachments.' => '查看HTML附件。',
+        'Translation' => '',
         'Tree view' => '树形视图',
         'Turkish' => '土耳其语',
         'Tweak the system as you wish.' => '根据需要调整系统。',

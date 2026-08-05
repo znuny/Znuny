@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.504390866996647;
+    $Self->{Completeness}        = 0.503657760814249;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -974,6 +974,18 @@ sub Data {
             'ตัวกระต้นกิจกรรมที่ตรงกันจะถูกประมวลผลโดยตรงในระหว่างการร้องขอเว็บ',
         'Add all attachments' => '',
         'Add all attachments to invoker payload.' => '',
+        'Fields to be omitted from payload' => '',
+        'Field' => '',
+        'Remove field' => '',
+        'Add field to be omitted from payload' => '',
+        'Restore omitted fields' => '',
+        'Fields which will be removed from the payload of the request, e.g. \'SomeField1\'. Nested fields can be referenced by connecting them with \'->\', e.g. \'SomeField1->SomeField2->SomeField3\'.' =>
+            '',
+        'Fields to be Base64 encoded in payload' => '',
+        'Add field to be Base64 encoded in payload' => '',
+        'Restore Base64 encoded fields' => '',
+        'Fields which will be Base64 encoded in payload of the request, e.g. \'SomeField1\'. Nested fields can be referenced by connecting them with \'->\', e.g. \'SomeField1->SomeField2->SomeField3\'.' =>
+            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerEvent.tt
         'GenericInterface Invoker Event Settings for Web Service %s' => '',
@@ -1399,7 +1411,7 @@ sub Data {
         'You can add favorites by moving your cursor over items on the right side and clicking the star icon.' =>
             '',
         'Links' => '',
-        'View the admin manual on Github' => '',
+        'View the admin manual' => '',
         'No Matches' => '',
         'Sorry, your search didn\'t match any items.' => '',
         'Set as favorite' => '',
@@ -1522,6 +1534,9 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'ยกเลิกการติดตั้งแพคเกจ',
         'Do you really want to uninstall this package?' => 'คุณต้องการยกเลิกการติดตั้งแพคเกจนี้หรือไม่?',
+        'Uninstall package and data' => '',
+        'Uninstall package only' => '',
+        'Uninstall' => 'ยกเลิกการติดตั้ง',
         'Reinstall package' => 'ติดตั้งแพคเกจอีกครั้ง',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'คุณต้องการติดตั้งแพคเกจนี้อีกครั้งหรือไม่? การเปลี่ยนแปลงด้วยตนเองจะหายไป',
@@ -1568,7 +1583,6 @@ sub Data {
         'Action' => 'การดำเนินการ',
         'Module documentation' => 'เอกสารของโมดูล',
         'Local Repository' => 'พื้นที่เก็บข้อมูลท้องถิ่น',
-        'Uninstall' => 'ยกเลิกการติดตั้ง',
         'Package not correctly deployed! Please reinstall the package.' =>
             'ไม่สามารถใช้งานแพคเกจได้อย่างถูกต้อง! กรุณาติดตั้งแพคเกจ',
         'Reinstall' => 'ติดตั้งใหม่',
@@ -2270,7 +2284,8 @@ sub Data {
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
-        'Translation' => '',
+        'Import Translation' => '',
+        'Export Translation' => '',
         'Translation Management' => '',
         'Add Translation' => '',
         'Edit Translation' => '',
@@ -2729,14 +2744,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => '',
-        'All fields marked with an asterisk (*) are mandatory.' => 'ฟิลด์ที่มีเครื่องหมายดอกจันทั้งหมด (*) มีผลบังคับใช้',
-        'Cancel & close' => 'ยกเลิกและปิด',
-        'Select one or more recipients from the customer user address book.' =>
-            '',
-        'Customer user address book' => '',
-        'Remove Ticket Customer' => 'ลบตั๋วลูกค้า',
-        'Remove Cc' => 'ลบสำเนา',
-        'Remove Bcc' => 'ลบสำเนาลับ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s %s)!' => 'ตั๋ว %s: หมดเวลาสำหรับตอบสนองครั้งแรก (%s/%s)!',
@@ -2978,14 +2985,18 @@ sub Data {
         'User name' => 'ชื่อผู้ใช้',
         'Your user name' => 'ชื่อผู้ใช้ของคุณ',
         'Your password' => 'รหัสผ่านของคุณ',
-        'Forgot password?' => 'ลืมรหัสผ่าน?',
+        'Lost your password?' => 'ลืมรหัสผ่านของคุณ?',
         '2 Factor Token' => '2 ปัจจัยโทเคน',
         'Your 2 Factor Token' => '2 ปัจจัยโทเคนของคุณ',
         'Log In' => 'เข้าสู่ระบบ',
         'Request New Password' => 'การร้องขอรหัสผ่านใหม่',
         'Your User Name' => 'ชื่อผู้ใช้ของคุณ',
-        'A new password will be sent to your email address.' => 'รหัสผ่านใหม่จะถูกส่งไปยังที่อยู่อีเมลของคุณ',
+        'A link to set a new password will be sent to your email address.' =>
+            'ลิงก์สำหรับตั้งรหัสผ่านใหม่จะถูกส่งไปยังที่อยู่อีเมลของคุณ',
         'Back to login' => 'กลับไปเข้าสู่ระบบ',
+        'Set New Password' => 'ตั้งรหัสผ่านใหม่',
+        'New password' => 'รหัสผ่านใหม่',
+        'Confirm password' => 'ยืนยันรหัสผ่าน',
         'Create Account' => 'สร้างบัญชี',
         'Please fill out this form to receive login credentials.' => 'กรุณากรอกแบบฟอร์มนี้เพื่อจะได้รับสิทธิเข้าสู่ระบบ',
         'How we should address you' => 'เราควรทำอย่างไรเพื่อตามหาคุณ',
@@ -3191,9 +3202,6 @@ sub Data {
         'Object#' => 'ออบเจค#',
         'Add links' => 'เพิ่มลิงค์',
         'Delete links' => 'ลบการเชื่อมโยง',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
-        'Lost your password?' => 'ลืมรหัสผ่านของคุณ?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => 'ตัวอย่างสเกลเนื้อหา',
@@ -4217,6 +4225,15 @@ sub Data {
         'Change Attachment Relations for Template' => 'เปลี่ยนความสัมพันธ์ของสิ่งที่แนบมาสำหรับแม่แบบ',
         'Change Template Relations for Attachment' => 'เปลี่ยนความสัมพันธ์ของแม่แบบสำหรับสิ่งที่แนบมา',
 
+        # Perl Module: Kernel/Modules/AdminTranslation.pm
+        'Import / Export' => '',
+        'Here you can upload a configuration file to import translations to your system. The file needs to be in .yml | .csv | .xlsx format.' =>
+            '',
+        'Could not find translation for ID %s.' => '',
+        'Translation stored.' => '',
+        'Storing translation failed.' => '',
+        'Translations synchronized.' => '',
+
         # Perl Module: Kernel/Modules/AdminType.pm
         'Need Type!' => 'ต้องการประเภท!',
         'Type added!' => 'เพิ่มประเภทแล้ว!',
@@ -4375,6 +4392,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
         'No ArticleID is given!' => '',
+        'Resend is not possible for this article!' => 'ไม่สามารถส่งบทความนี้อีกครั้งได้!',
 
         # Perl Module: Kernel/Modules/AgentTicketEscalationView.pm
         'Next week' => 'อาทิตย์ถัดไป',
@@ -4872,7 +4890,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Preferences/Password.pm
         'Current password' => 'รหัสผ่านปัจจุบัน',
-        'New password' => 'รหัสผ่านใหม่',
         'Verify password' => 'ยืนยันรหัสผ่าน',
         'The current password is not correct. Please try again!' => 'รหัสผ่านปัจจุบันไม่ถูกต้อง กรุณาลองอีกครั้ง!',
         'Please supply your new password!' => 'กรุณาใส่รหัสผ่านใหม่ของคุณ!',
@@ -5553,9 +5570,17 @@ sub Data {
         'Can`t remove SessionID.' => '',
         'Logout successful.' => 'ออกจากระบบประสบความสำเร็จ',
         'Feature not active!' => 'ฟีเจอร์ใช้งานไม่ได้!',
+        'Your password reset link is invalid or has expired. Please request a new one.' =>
+            'ลิงก์รีเซ็ตรหัสผ่านของคุณไม่ถูกต้องหรือหมดอายุแล้ว โปรดขอลิงก์ใหม่',
         'Sent password reset instructions. Please check your email.' => 'ได้ส่งคำแนะนำสำหรับการรีเซ็ตรหัสผ่านแล้ว กรุณาตรวจสอบอีเมลของคุณ',
-        'Invalid Token!' => 'Token ไม่ถูกต้อง!',
-        'Sent new password to %s. Please check your email.' => 'รหัสผ่านใหม่ถูกส่งไปยัง% s กรุณาตรวจสอบอีเมลของคุณ',
+        'Passwords do not match!' => 'รหัสผ่านไม่ตรงกัน!',
+        'Password does not match the requirements!' => 'รหัสผ่านไม่ตรงตามข้อกำหนด!',
+        'Password must be at least %s characters long!' => 'รหัสผ่านต้องมีความยาวอย่างน้อย %s ตัวอักษร!',
+        'Password must contain at least 2 lowercase and 2 uppercase letter characters!' =>
+            'รหัสผ่านต้องมีตัวพิมพ์เล็กอย่างน้อย 2 ตัวและตัวพิมพ์ใหญ่อย่างน้อย 2 ตัว!',
+        'Password must contain at least 1 digit!' => 'รหัสผ่านต้องมีตัวเลขอย่างน้อย 1 ตัว!',
+        'Password must contain at least 2 letter characters!' => 'รหัสผ่านต้องมีตัวอักษรอย่างน้อย 2 ตัว!',
+        'Password changed. Please log in with your new password.' => 'เปลี่ยนรหัสผ่านแล้ว โปรดเข้าสู่ระบบด้วยรหัสผ่านใหม่ของคุณ',
         'Error: invalid session.' => '',
         'No Permission to use this frontend module!' => 'ไม่มีการอนุญาตให้ใช้โมดูลส่วนหน้านี้!',
 
@@ -5742,8 +5767,8 @@ sub Data {
             'กำหนดทุกภาษาที่มีอยู่ไปยังโปรแกรมประยุกต์ และระบุชื่อภาษานั่นๆที่นี่เป็นภาษาอังกฤษเท่านั้น',
         'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
             'กำหนดทุกภาษาที่มีอยู่ไปยังโปรแกรมประยุกต์ และระบุชื่อภาษานั่นๆที่นี้',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.' =>
-            'กำหนดธีม front-end เริ่มต้น (HTML)ที่จะใช้โดยตัวแทนและลูกค้า ถ้าคุณชอบคุณสามารถเพิ่มธีมของคุณเอง โปรดดูคู่มือการดูแลระบบที่ตั้งอยู่ที่ https://doc.znuny.org/manual/developer/',
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html.' =>
+            'กำหนดธีม front-end เริ่มต้น (HTML)ที่จะใช้โดยตัวแทนและลูกค้า ถ้าคุณชอบคุณสามารถเพิ่มธีมของคุณเอง โปรดดูคู่มือการดูแลระบบที่ตั้งอยู่ที่ https://doc.znuny.org/developer/general_information/themes.html',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             '',
         'The headline shown in the customer interface.' => '',
@@ -6069,14 +6094,20 @@ sub Data {
             '',
         'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
             '',
+        'Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).' =>
+            'กำหนดระยะเวลาที่ใช้ได้เป็นวินาทีสำหรับโทเค็นรีเซ็ตรหัสผ่าน หลังจากนั้นโทเค็นจะหมดอายุและต้องมีการร้องขอใหม่ ค่าเริ่มต้น: 3600 (1 ชั่วโมง)',
+        'Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.' =>
+            'จำนวนคำขอรีเซ็ตรหัสผ่านสูงสุดต่อที่อยู่ IP หรือชื่อผู้ใช้ภายในหน้าต่าง rate limiting ตั้งเป็น 0 เพื่อปิดใช้งาน rate limiting ค่าเริ่มต้น: 5',
+        'Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes).' =>
+            'หน้าต่างเวลาเป็นวินาทีสำหรับ rate limiting การรีเซ็ตรหัสผ่าน ความพยายามภายในหน้าต่างนี้จะนับเทียบกับค่าสูงสุด ค่าเริ่มต้น: 600 (10 นาที)',
         'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
             'กำหนดหัวข้อสำหรับอีเมล์การแจ้งเตือนที่ส่งถึงเอเย่นต์พร้อมกับสัญลักษณ์เกี่ยวกับรหัสผ่านใหม่ที่ถูกร้องขอ',
         'Defines the body text for notification mails sent to agents, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to agents, about new password.' =>
-            'กำหนดหัวข้อสำหรับอีเมล์การแจ้งเตือนที่ส่งถึงเอเย่นต์เกี่ยวกับรหัสผ่านใหม่',
-        'Defines the body text for notification mails sent to agents, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to agents, confirming that the password has been reset.' =>
+            'กำหนดหัวเรื่องของอีเมลแจ้งเตือนที่ส่งถึงเอเจนต์เพื่อยืนยันการรีเซ็ตรหัสผ่าน',
+        'Defines the body text for notification mails sent to agents, confirming that the password has been reset.' =>
+            'กำหนดเนื้อหาของอีเมลแจ้งเตือนที่ส่งถึงเอเจนต์เพื่อยืนยันการรีเซ็ตรหัสผ่าน',
         'Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that "rw" is always the last registered permission.' =>
             '',
         'Defines the standard permissions available for customers within the application. If more permissions are needed, you can enter them here. Permissions must be hard coded to be effective. Please ensure, when adding any of the afore mentioned permissions, that the "rw" permission remains the last entry.' =>
@@ -6152,10 +6183,10 @@ sub Data {
             'กำหนดหัวข้อสำหรับอีเมล์การแจ้งเตือนที่ส่งถึงลูกค้าพร้อมกับสัญลักษณ์เกี่ยวกับรหัสผ่านใหม่ที่ถูกร้องขอ',
         'Defines the body text for notification mails sent to customers, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to customers, about new password.' =>
-            'กำหนดหัวข้อสำหรับอีเมล์การแจ้งเตือนที่ส่งถึงลูกค้าเกี่ยวกับรหัสผ่านใหม่',
-        'Defines the body text for notification mails sent to customers, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to customers, confirming that the password has been reset.' =>
+            'กำหนดหัวเรื่องของอีเมลแจ้งเตือนที่ส่งถึงลูกค้าเพื่อยืนยันการรีเซ็ตรหัสผ่าน',
+        'Defines the body text for notification mails sent to customers, confirming that the password has been reset.' =>
+            'กำหนดเนื้อหาของอีเมลแจ้งเตือนที่ส่งถึงลูกค้าเพื่อยืนยันการรีเซ็ตรหัสผ่าน',
         'Defines the subject for notification mails sent to customers, about new account.' =>
             'กำหนดหัวข้อสำหรับอีเมล์การแจ้งเตือนที่ส่งถึงลูกค้าเกี่ยวกับบัญชีใหม่',
         'Defines the body text for notification mails sent to customers, about new account.' =>
@@ -7815,8 +7846,8 @@ sub Data {
             '',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             '',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
-            'กำหนดค่าค่าเริ่มต้นของการตั้งค่า TicketDynamicField "ชื่อ" จะกำหนดฟิลด์แบบไดนามิกที่จะนำมาใช้ "ค่า" เป็นข้อมูลที่จะถูกตั้งค่าและ "กิจกรรม" จะกำหนดตัวกระตุ้นกิจกรรม กรุณาตรวจสอบคู่มือการพัฒนา (https://doc.znuny.org/manual/developer/) บท "Ticket Event Module".',
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event.' =>
+            'กำหนดค่าค่าเริ่มต้นของการตั้งค่า TicketDynamicField "ชื่อ" จะกำหนดฟิลด์แบบไดนามิกที่จะนำมาใช้ "ค่า" เป็นข้อมูลที่จะถูกตั้งค่าและ "กิจกรรม" จะกำหนดตัวกระตุ้นกิจกรรม กรุณาตรวจสอบคู่มือการพัฒนา',
         'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
             '',
         'Defines the list of types for templates.' => 'กำหนดรายการประเภทสำหรับแม่แบบ',
@@ -7874,9 +7905,9 @@ sub Data {
             '',
         'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
             '',
-        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
+        'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             '',
-        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
+        'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
             '',
         'Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic.' =>
             '',
@@ -8564,6 +8595,7 @@ sub Data {
             '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
+        'Customer user address book' => '',
         'Select a customer ID to assign to this ticket' => '',
         'Do you really want to continue?' => 'คุณต้องการที่จะดำเนินการต่อหรือไม่?',
 
@@ -9394,6 +9426,7 @@ Thanks for your help!
         'To accept login information, such as an EULA or license.' => '',
         'To download attachments.' => '',
         'To view HTML attachments.' => '',
+        'Translation' => '',
         'Tree view' => '',
         'Turkish' => '',
         'Tweak the system as you wish.' => '',

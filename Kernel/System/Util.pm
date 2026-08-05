@@ -16,6 +16,7 @@ use utf8;
 
 use MIME::Base64;
 use Data::UUID;
+use File::stat;
 
 use Kernel::System::VariableCheck qw(:all);
 
@@ -129,9 +130,33 @@ sub IsFrontendContext {
     return 1;
 }
 
+=head2 ApplicationUserGet()
+
+Determines the local application user.
+
+    my $ApplicationUser = $UtilObject->ApplicationUserGet();
+
+=cut
+
+sub ApplicationUserGet {
+    my ( $Self, %Param ) = @_;
+
+    my $DefaultApplicationUser = 'znuny';
+
+    my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
+    return $DefaultApplicationUser if !$Home;
+
+    my $HomeStat = File::stat::stat($Home);
+    return $DefaultApplicationUser if !$HomeStat;
+
+    my $HomeOwner = getpwuid( $HomeStat->uid() );
+
+    return $HomeOwner || $DefaultApplicationUser;
+}
+
 =head2 Base64DeepEncode()
 
-    Base-64 encodes elements of given data for given keys.
+    Base64 encodes elements of given data for given keys.
     If data is an array, all of its child elements will be checked for given keys whose elements
     will be encoded recursively.
 
@@ -144,7 +169,7 @@ sub IsFrontendContext {
             # ...
         },
         HashKeys => [
-            # All 'Body' elements of array $Hash->{Articles} will be base-64 encoded.
+            # All 'Body' elements of array $Hash->{Articles} will be Base64 encoded.
             # Also can mean: $Hash->{Articles}->{Body}, if 'Articles' is a hash.
             # Will encode nothing if last key ('Body') cannot be reached or is not a scalar/string.
             'Articles->Body',

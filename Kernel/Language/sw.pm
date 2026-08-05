@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%m/%d/%Y';
     $Self->{DateInputFormat}     = '%m/%d/%Y';
     $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
-    $Self->{Completeness}        = 0.421363563787322;
+    $Self->{Completeness}        = 0.421119592875318;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -977,6 +977,18 @@ sub Data {
             'Vichochezi vya tukio solandanifu vitashughulikiwa moja kwa moja wakati wa maombi ya tovuti.',
         'Add all attachments' => '',
         'Add all attachments to invoker payload.' => '',
+        'Fields to be omitted from payload' => '',
+        'Field' => '',
+        'Remove field' => '',
+        'Add field to be omitted from payload' => '',
+        'Restore omitted fields' => '',
+        'Fields which will be removed from the payload of the request, e.g. \'SomeField1\'. Nested fields can be referenced by connecting them with \'->\', e.g. \'SomeField1->SomeField2->SomeField3\'.' =>
+            '',
+        'Fields to be Base64 encoded in payload' => '',
+        'Add field to be Base64 encoded in payload' => '',
+        'Restore Base64 encoded fields' => '',
+        'Fields which will be Base64 encoded in payload of the request, e.g. \'SomeField1\'. Nested fields can be referenced by connecting them with \'->\', e.g. \'SomeField1->SomeField2->SomeField3\'.' =>
+            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerEvent.tt
         'GenericInterface Invoker Event Settings for Web Service %s' => '',
@@ -1402,7 +1414,7 @@ sub Data {
         'You can add favorites by moving your cursor over items on the right side and clicking the star icon.' =>
             '',
         'Links' => '',
-        'View the admin manual on Github' => '',
+        'View the admin manual' => '',
         'No Matches' => '',
         'Sorry, your search didn\'t match any items.' => '',
         'Set as favorite' => '',
@@ -1525,6 +1537,9 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => 'Futa kifurushi',
         'Do you really want to uninstall this package?' => 'Je unataka kufuta kifurushi hiki?',
+        'Uninstall package and data' => '',
+        'Uninstall package only' => '',
+        'Uninstall' => 'Sakinusha',
         'Reinstall package' => 'Sakinisha kifurushi',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Je unahitaji kusakinisha kifurushi hiki? Mabaidliko yoyote ya mkono yatapotea.',
@@ -1571,7 +1586,6 @@ sub Data {
         'Action' => 'Kitendo',
         'Module documentation' => 'Moduli za nyaraka',
         'Local Repository' => 'Hifadhi ya ndani',
-        'Uninstall' => 'Sakinusha',
         'Package not correctly deployed! Please reinstall the package.' =>
             'KIfurushi hakijatumiwa kwa usahihi. Tafadhali Sakini kifurushi tena.',
         'Reinstall' => 'Sakinisha',
@@ -2270,7 +2284,8 @@ sub Data {
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
-        'Translation' => '',
+        'Import Translation' => '',
+        'Export Translation' => '',
         'Translation Management' => '',
         'Add Translation' => '',
         'Edit Translation' => '',
@@ -2729,14 +2744,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => '',
-        'All fields marked with an asterisk (*) are mandatory.' => 'Uga zote zilizowekwa alama ya kinyota (*) ni za lazima.',
-        'Cancel & close' => '',
-        'Select one or more recipients from the customer user address book.' =>
-            '',
-        'Customer user address book' => '',
-        'Remove Ticket Customer' => 'Mtoe mteja wa tiketi',
-        'Remove Cc' => 'Toa Cc.',
-        'Remove Bcc' => 'Toa Bcc',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s %s)!' => '',
@@ -2978,14 +2985,18 @@ sub Data {
         'User name' => 'Jina la mtumiaji',
         'Your user name' => 'Jina lako lamtumiaji',
         'Your password' => 'Neno lako la siri',
-        'Forgot password?' => 'Umesahau neno la siri?',
+        'Lost your password?' => 'Umepoteza neno lako la siri?',
         '2 Factor Token' => '',
         'Your 2 Factor Token' => '',
         'Log In' => 'Ingia',
         'Request New Password' => 'Ombi la neno jipya la siri',
         'Your User Name' => 'Jina lako la mtumiaji',
-        'A new password will be sent to your email address.' => 'Neno jipya la siri litatumwa kwenye anwani yako ya barua pepe',
+        'A link to set a new password will be sent to your email address.' =>
+            'Kiungo cha kuweka neno jipya la siri kitatumwa kwenye anwani yako ya barua pepe.',
         'Back to login' => 'Rudi kwenye kuingia',
+        'Set New Password' => 'Weka neno jipya la siri',
+        'New password' => 'Neno jipya la siri',
+        'Confirm password' => 'Thibitisha neno la siri',
         'Create Account' => 'Tengeneza akaunti',
         'Please fill out this form to receive login credentials.' => 'Tafadhali jaza fomu hii kupokea hati za utambulisho za kuingia.',
         'How we should address you' => 'Jinsi tutakavyokutambulisha',
@@ -3191,9 +3202,6 @@ sub Data {
         'Object#' => 'Kipengee#',
         'Add links' => 'Ongeza viungo',
         'Delete links' => 'Futa viungo',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
-        'Lost your password?' => 'Umepoteza neno lako la siri?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -4217,6 +4225,15 @@ sub Data {
         'Change Attachment Relations for Template' => 'Badili mahusiano ya kiambatanisho kwa kielezo',
         'Change Template Relations for Attachment' => 'Badili mahusiano ya kielezo kwa kielezo',
 
+        # Perl Module: Kernel/Modules/AdminTranslation.pm
+        'Import / Export' => '',
+        'Here you can upload a configuration file to import translations to your system. The file needs to be in .yml | .csv | .xlsx format.' =>
+            '',
+        'Could not find translation for ID %s.' => '',
+        'Translation stored.' => '',
+        'Storing translation failed.' => '',
+        'Translations synchronized.' => '',
+
         # Perl Module: Kernel/Modules/AdminType.pm
         'Need Type!' => '',
         'Type added!' => 'Aina imeongezwa!',
@@ -4375,6 +4392,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
         'No ArticleID is given!' => '',
+        'Resend is not possible for this article!' => 'Kutuma tena haiwezekani kwa makala haya!',
 
         # Perl Module: Kernel/Modules/AgentTicketEscalationView.pm
         'Next week' => 'Wiki ijayo',
@@ -4872,7 +4890,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Preferences/Password.pm
         'Current password' => 'Neno la siri la sasa',
-        'New password' => 'Neno jipya la siri',
         'Verify password' => 'Hakiki neno la siri',
         'The current password is not correct. Please try again!' => 'Neno la siri la sasa haliko sahihi. Tafadhali jaribu tena!',
         'Please supply your new password!' => '',
@@ -5553,9 +5570,17 @@ sub Data {
         'Can`t remove SessionID.' => '',
         'Logout successful.' => '',
         'Feature not active!' => 'Kipengele hakipo amilifu.',
+        'Your password reset link is invalid or has expired. Please request a new one.' =>
+            'Kiungo chako cha kuweka upya neno la siri si halali au kimeisha muda. Tafadhali omba kipya.',
         'Sent password reset instructions. Please check your email.' => 'Maelezo ya kuweka upya neno la siri yametumwa. Tafadhali angalia barua pepe yako.',
-        'Invalid Token!' => 'Tuzo batili!',
-        'Sent new password to %s. Please check your email.' => 'Neno jipya la siri limetumwa kwa %s. Tafadhali angalia barua pepe yako.',
+        'Passwords do not match!' => 'Maneno ya siri hayafanani!',
+        'Password does not match the requirements!' => 'Neno la siri halikidhi mahitaji!',
+        'Password must be at least %s characters long!' => 'Neno la siri lazima liwe na angalau herufi %s!',
+        'Password must contain at least 2 lowercase and 2 uppercase letter characters!' =>
+            'Neno la siri lazima liwe na angalau herufi 2 ndogo na 2 kubwa!',
+        'Password must contain at least 1 digit!' => 'Neno la siri lazima liwe na angalau tarakimu 1!',
+        'Password must contain at least 2 letter characters!' => 'Neno la siri lazima liwe na angalau herufi 2!',
+        'Password changed. Please log in with your new password.' => 'Neno la siri limebadilishwa. Tafadhali ingia kwa neno jipya la siri.',
         'Error: invalid session.' => '',
         'No Permission to use this frontend module!' => '',
 
@@ -5742,7 +5767,7 @@ sub Data {
             '',
         'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
             '',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.' =>
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html.' =>
             '',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             'Inawezekana kusanidi dhima tofauti, kwa mfano kutofautisha kati wakala na wateja, wataokaotumika katika kila huduma kwenye kikoa katika programu tumizi. Kwa kutumia imizo la kawaida (regex), unaweza kusanidi jozi ya yaliyomo/kibonye kulandanisha kikoa. Thamani katika "Kibonye" ilandane na kikoa, na thamani kwenye "Yaliyomo" iwe dhima batili katika mfumo wako. Tafadhali ona maingizo ya mfano kwa  ajili fomu sahihi ya  imizo la kawaida.',
@@ -6068,14 +6093,20 @@ sub Data {
             '',
         'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
             '',
+        'Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).' =>
+            'Inafafanua kipindi cha uhalali kwa sekunde kwa tokeni za kuweka upya neno la siri. Baada ya hapo tokeni inaisha na ombi jipya linahitajika. Chaguo-msingi: 3600 (saa 1).',
+        'Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.' =>
+            'Idadi ya juu ya maombi ya kuweka upya neno la siri kwa anwani ya IP au jina la mtumiaji ndani ya dirisha la rate limiting. Weka 0 kuzima rate limiting. Chaguo-msingi: 5.',
+        'Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes).' =>
+            'Dirisha la muda kwa sekunde kwa rate limiting ya kuweka upya neno la siri. Majaribio ndani ya dirisha hili huhesabiwa dhidi ya kiwango cha juu. Chaguo-msingi: 600 (dakika 10).',
         'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
             'Inafafanua somo kwa ajili ya barua pepe za taarifa zilizotumwa kwa mawakala, na alama ya neno jipya la siri lililoombwa.',
         'Defines the body text for notification mails sent to agents, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to agents, about new password.' =>
-            'Inafafanua somo kwa barua pepe za taarifa zilizotumwa kwa mawakala, kuhusu neno jipya la siri. ',
-        'Defines the body text for notification mails sent to agents, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Inafafanua mada ya barua pepe za arifa zinazotumwa kwa mawakala zinazothibitisha kuweka upya neno la siri.',
+        'Defines the body text for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Inafafanua maandishi ya barua pepe za arifa zinazotumwa kwa mawakala zinazothibitisha kuweka upya neno la siri.',
         'Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that "rw" is always the last registered permission.' =>
             'Ruhusa zinazopatikana za kiwango kwa mawakala ndani ya programu tumizi. Kama ruhusa zaidi zinahitajika, zinaweza kuingizwa hapa. Ruhusa lazima zifafanuliwe kuwa za ufanis. Baadhi ya ruhusa nzuri zimejengwa ndani: Kidokezo,Kungoja, Mteja, matini huru, kusogeza, Kutunga, uhusika, kutuma mbele na udundaji. Hakikisha kwamba "rw" sikuzote ni ruhusa ya mwisho kusajiliwa.',
         'Defines the standard permissions available for customers within the application. If more permissions are needed, you can enter them here. Permissions must be hard coded to be effective. Please ensure, when adding any of the afore mentioned permissions, that the "rw" permission remains the last entry.' =>
@@ -6151,10 +6182,10 @@ sub Data {
             'Inafafanua somo kwa ajili ya barua pepe za taarifa zilizotumwa kwa wateja, na alama ya neno jipya la siri lililoombwa.',
         'Defines the body text for notification mails sent to customers, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to customers, about new password.' =>
-            'Inafafanua somo kwa ajili ya barua pepe za taarifa zilizotumwa kwa wateja, kuhusu neno jipya la siri.',
-        'Defines the body text for notification mails sent to customers, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Inafafanua mada ya barua pepe za arifa zinazotumwa kwa wateja zinazothibitisha kuweka upya neno la siri.',
+        'Defines the body text for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Inafafanua maandishi ya barua pepe za arifa zinazotumwa kwa wateja zinazothibitisha kuweka upya neno la siri.',
         'Defines the subject for notification mails sent to customers, about new account.' =>
             'Inafafanua somo kwa ajili ya barua pepe za taarifa zilizotumwa kwa wateja, kuhusu akaunti mpya.',
         'Defines the body text for notification mails sent to customers, about new account.' =>
@@ -7815,7 +7846,7 @@ Mfano:
             '',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             '',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event.' =>
             '',
         'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
             '',
@@ -7874,9 +7905,9 @@ Mfano:
             '',
         'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
             '',
-        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
+        'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             '',
-        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
+        'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
             '',
         'Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic.' =>
             '',
@@ -8564,6 +8595,7 @@ Mfano:
             '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
+        'Customer user address book' => '',
         'Select a customer ID to assign to this ticket' => '',
         'Do you really want to continue?' => '',
 
@@ -9383,6 +9415,7 @@ Thanks for your help!
         'To accept login information, such as an EULA or license.' => '',
         'To download attachments.' => '',
         'To view HTML attachments.' => '',
+        'Translation' => '',
         'Tree view' => '',
         'Turkish' => '',
         'Tweak the system as you wish.' => '',

@@ -91,15 +91,27 @@ sub PrepareRequest {
     my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
     my $UtilObject   = $Kernel::OM->Get('Kernel::System::Util');
 
-    my $InvokerName              = $Param{InvokerName} // 'Generic';
-    my $GetAllArticleAttachments = $Param{Data}->{GetAllArticleAttachments}
-        || $Param{Webservice}->{Config}->{Requester}->{Invoker}->{$InvokerName}->{GetAllArticleAttachments};
+    $Param{Data} //= {};
+
+    my $InvokerName = $Param{InvokerName} // 'Generic';
+
+    my $InvokerConfig = {};
+    if (
+        IsStringWithData($InvokerName)
+        && IsHashRefWithData($InvokerName)
+        )
+    {
+        $InvokerConfig = $Param{Webservice}->{Config}->{Requester}->{Invoker}->{$InvokerName} // {};
+    }
 
     my %Ticket;
     if ( $Param{Data}->{TicketID} ) {
+        my $GetAllArticleAttachments = $Param{Data}->{GetAllArticleAttachments}
+            // $InvokerConfig->{GetAllArticleAttachments};
+
         %Ticket = $TicketObject->TicketDeepGet(
             TicketID                 => $Param{Data}->{TicketID},
-            ArticleID                => $Param{Data}->{ArticleID},    # optional, hence not checked
+            ArticleID                => $Param{Data}->{ArticleID},    # optional
             GetAllArticleAttachments => $GetAllArticleAttachments,
             UserID                   => 1,
         );
@@ -117,7 +129,7 @@ sub PrepareRequest {
         }
     }
 
-    # Remove configured fields.
+    # Remove globally configured fields.
     my $OmittedFields = $ConfigObject->Get(
         'GenericInterface::Invoker::Ticket::Generic::PrepareRequest::OmittedFields'
     ) // {};
@@ -141,7 +153,7 @@ sub PrepareRequest {
         );
     }
 
-    # Base-64 encode configured field values.
+    # Base-64 encode globally configured field values.
     my $Base64EncodedFields = $ConfigObject->Get(
         'GenericInterface::Invoker::Ticket::Generic::PrepareRequest::Base64EncodedFields'
     ) // {};

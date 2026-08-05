@@ -27,7 +27,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         color: var(--menu-font);
         position: relative;
         border-bottom: var(--border-width) var(--border-solid) var(--border-color);
-        z-index: 100;
+        z-index: 4000;
     }
 
     @media only screen and (max-width: 1024px) {

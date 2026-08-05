@@ -5,7 +5,7 @@ use 5.006;
 use strict;
 use warnings;
 
-our $VERSION = '2.02';
+our $VERSION = '2.05';
 
 use Devel::StackTrace::Frame;
 use File::Spec;
@@ -13,6 +13,7 @@ use Scalar::Util qw( blessed );
 
 use overload
     '""'     => \&as_string,
+    bool     => sub {1},
     fallback => 1;
 
 sub new {
@@ -53,12 +54,42 @@ sub _record_caller_data {
             @DB::args = ();
             caller( $x++ );
         }
-        ) {
+    ) {
 
         my @args;
 
-        ## no critic (Variables::ProhibitPackageVars)
-        @args = $self->{no_args} ? () : @DB::args;
+        ## no critic (Variables::ProhibitPackageVars, BuiltinFunctions::ProhibitComplexMappings)
+        unless ( $self->{no_args} ) {
+
+            # This is the same workaroud as was applied to Carp.pm a little
+            # while back
+            # (https://rt.perl.org/Public/Bug/Display.html?id=131046):
+            #
+            #   Guard our serialization of the stack from stack refcounting
+            #   bugs NOTE this is NOT a complete solution, we cannot 100%
+            #   guard against these bugs. However in many cases Perl *is*
+            #   capable of detecting them and throws an error when it
+            #   does. Unfortunately serializing the arguments on the stack is
+            #   a perfect way of finding these bugs, even when they would not
+            #   affect normal program flow that did not poke around inside the
+            #   stack. Inside of Carp.pm it makes little sense reporting these
+            #   bugs, as Carp's job is to report the callers errors, not the
+            #   ones it might happen to tickle while doing so.  See:
+            #   https://rt.perl.org/Public/Bug/Display.html?id=131046 and:
+            #   https://rt.perl.org/Public/Bug/Display.html?id=52610 for more
+            #   details and discussion. - Yves
+            @args = map {
+                my $arg;
+                local $@ = $@;
+                eval {
+                    $arg = $_;
+                    1;
+                } or do {
+                    $arg = '** argument not available anymore **';
+                };
+                $arg;
+            } @DB::args;
+        }
         ## use critic
 
         my $raw = {
@@ -246,18 +277,28 @@ sub frame_count {
     return scalar( $self->frames );
 }
 
+sub message { $_[0]->{message} }
+
 sub as_string {
     my $self = shift;
     my $p    = shift;
 
-    my $st    = q{};
-    my $first = 1;
-    foreach my $f ( $self->frames ) {
-        $st .= $f->as_string( $first, $p ) . "\n";
-        $first = 0;
+    my @frames = $self->frames;
+    if (@frames) {
+        my $st    = q{};
+        my $first = 1;
+        for my $f (@frames) {
+            $st .= $f->as_string( $first, $p ) . "\n";
+            $first = 0;
+        }
+
+        return $st;
     }
 
-    return $st;
+    my $msg = $self->message;
+    return $msg if defined $msg;
+
+    return 'Trace begun';
 }
 
 {
@@ -284,7 +325,7 @@ Devel::StackTrace - An object representing a stack trace
 
 =head1 VERSION
 
-version 2.02
+version 2.05
 
 =head1 SYNOPSIS
 
@@ -307,8 +348,8 @@ version 2.02
 =head1 DESCRIPTION
 
 The C<Devel::StackTrace> module contains two classes, C<Devel::StackTrace> and
-L<Devel::StackTrace::Frame>. These objects encapsulate the information that
-can retrieved via Perl's C<caller> function, as well as providing a simple
+L<Devel::StackTrace::Frame>. These objects encapsulate the information that can
+retrieved via Perl's C<caller> function, as well as providing a simple
 interface to this data.
 
 The C<Devel::StackTrace> object contains a set of C<Devel::StackTrace::Frame>
@@ -372,13 +413,12 @@ stacktrace is created, and before refs are stringified (if
 C<unsafe_ref_capture> is not set), rather than being filtered lazily when
 L<Devel::StackTrace::Frame> objects are first needed.
 
-This is useful if you want to filter based on the frame's arguments and want
-to be able to examine object properties, for example.
+This is useful if you want to filter based on the frame's arguments and want to
+be able to examine object properties, for example.
 
 =item * ignore_package => $package_name OR \@package_names
 
-Any frames where the package is one of these packages will not be on the
-stack.
+Any frames where the package is one of these packages will not be on the stack.
 
 =item * ignore_class => $package_name OR \@package_names
 
@@ -393,8 +433,8 @@ you create a subclass of Devel::StackTrace it will not be ignored.
 
 This will cause this number of stack frames to be excluded from top of the
 stack trace. This prevents the frames from being captured at all, and applies
-before the C<frame_filter>, C<ignore_package>, or C<ignore_class> options,
-even with C<filter_frames_early>.
+before the C<frame_filter>, C<ignore_package>, or C<ignore_class> options, even
+with C<filter_frames_early>.
 
 =item * unsafe_ref_capture => $boolean
 
@@ -419,9 +459,8 @@ arguments in stack trace frames at all.
 
 By default, Devel::StackTrace will call C<overload::AddrRef> to get the
 underlying string representation of an object, instead of respecting the
-object's stringification overloading. If you would prefer to see the
-overloaded representation of objects in stack traces, then set this parameter
-to true.
+object's stringification overloading. If you would prefer to see the overloaded
+representation of objects in stack traces, then set this parameter to true.
 
 =item * max_arg_length => $integer
 
@@ -445,11 +484,11 @@ tab character, just like C<Carp::confess>.
 
 =head2 $trace->next_frame
 
-Returns the next L<Devel::StackTrace::Frame> object on the stack, going
-down. If this method hasn't been called before it returns the first frame. It
-returns C<undef> when it reaches the bottom of the stack and then resets its
-pointer so the next call to C<< $trace->next_frame >> or C<<
-$trace->prev_frame >> will work properly.
+Returns the next L<Devel::StackTrace::Frame> object on the stack, going down.
+If this method hasn't been called before it returns the first frame. It returns
+C<undef> when it reaches the bottom of the stack and then resets its pointer so
+the next call to C<< $trace->next_frame >> or C<< $trace->prev_frame >> will
+work properly.
 
 =head2 $trace->prev_frame
 
@@ -481,9 +520,9 @@ complex than can be handled by the C<< $trace->filter_frames >> method:
 
 =head2 $trace->frame($index)
 
-Given an index, this method returns the relevant frame, or undef if there is
-no frame at that index. The index is exactly like a Perl array. The first
-frame is 0 and negative indexes are allowed.
+Given an index, this method returns the relevant frame, or undef if there is no
+frame at that index. The index is exactly like a Perl array. The first frame is
+0 and negative indexes are allowed.
 
 =head2 $trace->frame_count
 
@@ -498,11 +537,21 @@ The optional C<\%p> parameter only has one option. The C<max_arg_length>
 parameter truncates each subroutine argument's string representation if it is
 longer than this number of characters.
 
+If all the frames in a trace are skipped then this just returns the C<message>
+passed to the constructor or the string C<"Trace begun">.
+
+=head2 $trace->message
+
+Returns the message passed to the constructor. If this wasn't passed then this
+method returns C<undef>.
+
 =head1 SUPPORT
 
-Bugs may be submitted through L<https://github.com/houseabsolute/Devel-StackTrace/issues>.
+Bugs may be submitted at L<https://github.com/houseabsolute/Devel-StackTrace/issues>.
 
-I am also usually active on IRC as 'autarch' on C<irc://irc.perl.org>.
+=head1 SOURCE
+
+The source code repository for Devel-StackTrace can be found at L<https://github.com/houseabsolute/Devel-StackTrace>.
 
 =head1 DONATIONS
 
@@ -519,7 +568,7 @@ software much more, unless I get so many donations that I can consider working
 on free software full time (let's all have a chuckle at that together).
 
 To donate, log into PayPal and send money to autarch@urth.org, or use the
-button at L<http://www.urth.org/~autarch/fs-donation.html>.
+button at L<https://houseabsolute.com/foss-donations/>.
 
 =head1 AUTHOR
 
@@ -527,7 +576,7 @@ Dave Rolsky <autarch@urth.org>
 
 =head1 CONTRIBUTORS
 
-=for stopwords Dagfinn Ilmari Mannsåker David Cantrell Graham Knop Ivan Bessarabov Mark Fowler Ricardo Signes
+=for stopwords Dagfinn Ilmari Mannsåker David Cantrell Graham Knop Ivan Bessarabov Mark Fowler Pali Ricardo Signes
 
 =over 4
 
@@ -553,16 +602,23 @@ Mark Fowler <mark@twoshortplanks.com>
 
 =item *
 
+Pali <pali@cpan.org>
+
+=item *
+
 Ricardo Signes <rjbs@cpan.org>
 
 =back
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2000 - 2016 by David Rolsky.
+This software is Copyright (c) 2000 - 2024 by David Rolsky.
 
 This is free software, licensed under:
 
   The Artistic License 2.0 (GPL Compatible)
+
+The full text of the license can be found in the
+F<LICENSE> file included with this distribution.
 
 =cut

@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.839214433977327;
+    $Self->{Completeness}        = 0.836673027989822;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -986,6 +986,18 @@ sub Data {
             'Синхронные триггеры событий будут обрабатываться непосредственно при веб-запросе.',
         'Add all attachments' => 'Добавьте все вложения',
         'Add all attachments to invoker payload.' => 'Добавьте все вложения как полезную информацию (payload) в инициатор вызова (invoker).',
+        'Fields to be omitted from payload' => '',
+        'Field' => '',
+        'Remove field' => '',
+        'Add field to be omitted from payload' => '',
+        'Restore omitted fields' => '',
+        'Fields which will be removed from the payload of the request, e.g. \'SomeField1\'. Nested fields can be referenced by connecting them with \'->\', e.g. \'SomeField1->SomeField2->SomeField3\'.' =>
+            '',
+        'Fields to be Base64 encoded in payload' => '',
+        'Add field to be Base64 encoded in payload' => '',
+        'Restore Base64 encoded fields' => '',
+        'Fields which will be Base64 encoded in payload of the request, e.g. \'SomeField1\'. Nested fields can be referenced by connecting them with \'->\', e.g. \'SomeField1->SomeField2->SomeField3\'.' =>
+            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerEvent.tt
         'GenericInterface Invoker Event Settings for Web Service %s' => '',
@@ -1411,7 +1423,7 @@ sub Data {
         'You can add favorites by moving your cursor over items on the right side and clicking the star icon.' =>
             'Можно добавить отдельные настройки в Избранные кликнув мышкой по "звездочке" справа в списке параметров.',
         'Links' => 'Ссылки',
-        'View the admin manual on Github' => 'Смотрите руководство администратора на Github',
+        'View the admin manual' => '',
         'No Matches' => 'Совпадений не найдено',
         'Sorry, your search didn\'t match any items.' => 'К сожалению, поиск не дал результатов.',
         'Set as favorite' => 'Назначить избранным',
@@ -1534,6 +1546,9 @@ sub Data {
         'Uninstall Package' => 'Деинсталлировать пакет',
         'Uninstall package' => 'Деинсталлировать пакет',
         'Do you really want to uninstall this package?' => 'Удалить этот пакет?',
+        'Uninstall package and data' => '',
+        'Uninstall package only' => '',
+        'Uninstall' => 'Деинсталлировать',
         'Reinstall package' => 'Переустановить пакет',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Вы действительно хотите переустановить этот пакет? Все ручные изменения будут потеряны.',
@@ -1580,7 +1595,6 @@ sub Data {
         'Action' => 'Действие',
         'Module documentation' => 'Документация модуля',
         'Local Repository' => 'Локальный репозиторий',
-        'Uninstall' => 'Деинсталлировать',
         'Package not correctly deployed! Please reinstall the package.' =>
             'Пакет установлен некорректно! Переустановите пакет.',
         'Reinstall' => 'Переустановить',
@@ -2279,7 +2293,8 @@ sub Data {
             'Если значение окрашено красным, оно отсутствует в списке возможных значений в конфигурации динамического поля.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
-        'Translation' => '',
+        'Import Translation' => '',
+        'Export Translation' => '',
         'Translation Management' => '',
         'Add Translation' => '',
         'Edit Translation' => '',
@@ -2738,14 +2753,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => 'Отправить личное сообщение для %s%s%s',
-        'All fields marked with an asterisk (*) are mandatory.' => 'Все поля отмеченные (*) являются обязательными',
-        'Cancel & close' => 'Отменить и закрыть',
-        'Select one or more recipients from the customer user address book.' =>
-            'Выберите одного или более получателей из адресной книги клиентов.',
-        'Customer user address book' => 'Адресная книга клиентов',
-        'Remove Ticket Customer' => 'Удалить клиента-инициатора заявки',
-        'Remove Cc' => 'Удалить из копии',
-        'Remove Bcc' => 'Удалить из скрытой копии',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s %s)!' => 'Заявка %s: время первого ответа истекло (%s/%s)!',
@@ -2987,14 +2994,18 @@ sub Data {
         'User name' => 'Имя пользователя',
         'Your user name' => 'Ваше имя пользователя',
         'Your password' => 'Ваш пароль',
-        'Forgot password?' => 'Забыли пароль?',
+        'Lost your password?' => 'Забыли свой пароль?',
         '2 Factor Token' => '2-факторный токен',
         'Your 2 Factor Token' => 'Ваш 2-факторный токен',
         'Log In' => 'Войти',
         'Request New Password' => 'Запросить новый пароль',
         'Your User Name' => 'Логин',
-        'A new password will be sent to your email address.' => 'Новый пароль будет отправлен на адрес Вашей электронной почты.',
+        'A link to set a new password will be sent to your email address.' =>
+            'Ссылка для установки нового пароля будет отправлена на адрес Вашей электронной почты.',
         'Back to login' => 'Вернуться к странице входа в систему',
+        'Set New Password' => 'Установить новый пароль',
+        'New password' => 'Новый пароль',
+        'Confirm password' => 'Подтвердите пароль',
         'Create Account' => 'Создать учетную запись',
         'Please fill out this form to receive login credentials.' => 'Пожалуйста, заполните эту форму, чтобы получить учетные данные для входа',
         'How we should address you' => 'Как мы должны к вам обращаться',
@@ -3200,9 +3211,6 @@ sub Data {
         'Object#' => 'Объект#',
         'Add links' => 'Добавить связи',
         'Delete links' => 'Удалить связи',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
-        'Lost your password?' => 'Забыли свой пароль?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => 'Масштабировать предпросмотр',
@@ -4226,6 +4234,15 @@ sub Data {
         'Change Attachment Relations for Template' => 'Изменить связи Вложений с Шаблоном',
         'Change Template Relations for Attachment' => 'Изменить связи Шаблонов с Вложением',
 
+        # Perl Module: Kernel/Modules/AdminTranslation.pm
+        'Import / Export' => '',
+        'Here you can upload a configuration file to import translations to your system. The file needs to be in .yml | .csv | .xlsx format.' =>
+            '',
+        'Could not find translation for ID %s.' => '',
+        'Translation stored.' => '',
+        'Storing translation failed.' => '',
+        'Translations synchronized.' => '',
+
         # Perl Module: Kernel/Modules/AdminType.pm
         'Need Type!' => 'Требуется Type!',
         'Type added!' => 'Тип добавлен!',
@@ -4384,6 +4401,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
         'No ArticleID is given!' => 'Не указан ArticleID!',
+        'Resend is not possible for this article!' => 'Повторная отправка этой заметки невозможна!',
 
         # Perl Module: Kernel/Modules/AgentTicketEscalationView.pm
         'Next week' => 'Следующая неделя',
@@ -4881,7 +4899,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Preferences/Password.pm
         'Current password' => 'Текущий пароль',
-        'New password' => 'Новый пароль',
         'Verify password' => 'Подтвердите пароль',
         'The current password is not correct. Please try again!' => 'Пароль не верен. Пожалуйста, попробуйте снова!',
         'Please supply your new password!' => 'Пожалуйста, укажите ваш новый пароль!',
@@ -5562,9 +5579,17 @@ sub Data {
         'Can`t remove SessionID.' => 'Невозможно удалить SessionID.',
         'Logout successful.' => 'Успешный выход.',
         'Feature not active!' => 'Функция не активирована!',
+        'Your password reset link is invalid or has expired. Please request a new one.' =>
+            'Ссылка для сброса пароля недействительна или истекла. Запросите новую.',
         'Sent password reset instructions. Please check your email.' => 'Отправлены инструкции по сбросу пароля. Проверьте свою почту.',
-        'Invalid Token!' => 'Неверный ключ (token)!',
-        'Sent new password to %s. Please check your email.' => 'Новый пароль выслан на %s. Проверьте свою почту.',
+        'Passwords do not match!' => 'Пароли не совпадают!',
+        'Password does not match the requirements!' => 'Пароль не соответствует требованиям!',
+        'Password must be at least %s characters long!' => 'Пароль должен содержать не менее %s символов!',
+        'Password must contain at least 2 lowercase and 2 uppercase letter characters!' =>
+            'Пароль должен содержать не менее 2 строчных и 2 заглавных букв!',
+        'Password must contain at least 1 digit!' => 'Пароль должен содержать не менее 1 цифры!',
+        'Password must contain at least 2 letter characters!' => 'Пароль должен содержать не менее 2 букв!',
+        'Password changed. Please log in with your new password.' => 'Пароль изменён. Войдите с новым паролем.',
         'Error: invalid session.' => 'Ошибка: недействительный сеанс.',
         'No Permission to use this frontend module!' => 'Нет прав на использование этого модуля!',
 
@@ -5751,8 +5776,8 @@ sub Data {
             'Задает все языки доступные в приложении. Указывайте здесь только английские названия языков.',
         'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
             'Задает все языки доступные в приложении. Указывайте здесь только native/родные? названия языков.',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.' =>
-            'Задает имя темы (HTML theme - имя папки для альтернативных модулей), которая будет использоваться в интерфейсах агентов и клиентов. По желанию, вы можете добавить свою собственную тему. Подробности в руководстве администратора https://doc.znuny.org/manual/developer/.',
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html.' =>
+            'Задает имя темы (HTML theme - имя папки для альтернативных модулей), которая будет использоваться в интерфейсах агентов и клиентов. По желанию, вы можете добавить свою собственную тему. Подробности в руководстве администратора https://doc.znuny.org/developer/general_information/themes.html.',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             'Можно задать разные схемы оформления, напрмер, чтобы отличать агентов и клиентов, на основе принадлежности к доменам. Используя регулярные выражения (regex), вы можете задать пары Ключ/Содержание, соответствующие доменам. Значение Ключа должно соответствовать домену, а значение Содержания - имя схемы (skin) в системе. Смотрите пример для правильного построения регулярного выражения.',
         'The headline shown in the customer interface.' => 'Заголовок, отображаемый в интерфейсе клиента.',
@@ -6077,14 +6102,20 @@ sub Data {
             'Задает имя, которое будет использоваться при отсылке уведомлений. Оно используется для построения полного отображаемого имени для мастера уведомлений (например, "Znuny Notifications" znuny@your.example.com). ',
         'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
             'Задает email address, который должен использоваться при отсылке уведомлений. Он используется построения полного отображаемого имени для мастера уведомлений (например, "Znuny Notifications" znuny@your.example.com). Вы можете использовать переменную OTRS_CONFIG_FQDN заданную в конфигурации или выбрать другой адрес.',
+        'Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).' =>
+            'Определяет срок действия токенов сброса пароля в секундах. По истечении этого времени токен становится недействительным и требуется новый запрос. По умолчанию: 3600 (1 час).',
+        'Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.' =>
+            'Максимальное число запросов сброса пароля на IP-адрес или имя пользователя в окне rate limiting. 0 отключает rate limiting. По умолчанию: 5.',
+        'Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes).' =>
+            'Временное окно в секундах для rate limiting сброса пароля. Попытки в этом окне учитываются относительно максимума. По умолчанию: 600 (10 минут).',
         'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
             'Задает тему почтового сообщения, отправляемого агентам, с ключом для создания нового запрошенного пароля.',
         'Defines the body text for notification mails sent to agents, with token about new requested password.' =>
             'Задает текст почтового сообщения, отправляемого агентам, с ключом для создания нового запрошенного пароля.',
-        'Defines the subject for notification mails sent to agents, about new password.' =>
-            'Задает тему почтового сообщения, отправляемого агенту о новом пароле.',
-        'Defines the body text for notification mails sent to agents, about new password.' =>
-            'Задает текст почтового сообщения, отправляемого агенту о новом пароле.',
+        'Defines the subject for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Определяет тему уведомительных писем агентам, подтверждающих сброс пароля.',
+        'Defines the body text for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Определяет текст уведомительных писем агентам, подтверждающих сброс пароля.',
         'Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that "rw" is always the last registered permission.' =>
             'Задает набор доступных прав агентов в системе. Если требуются дополнительные права, они могут быть заданы здесь. Права должны быть определены, чтобы использоваться в системе. Некоторые другие полезные права, также встроены в систему: note, close, pending, customer, freetext, move, compose, responsible, forward, и bounce. Последней строкой в таблице всегда дорлжна быть строка с "rw".',
         'Defines the standard permissions available for customers within the application. If more permissions are needed, you can enter them here. Permissions must be hard coded to be effective. Please ensure, when adding any of the afore mentioned permissions, that the "rw" permission remains the last entry.' =>
@@ -6160,10 +6191,10 @@ sub Data {
             'Задает тему почтового сообщения, отправляемого клиентам, с ключом для создания нового запрошенного пароля.',
         'Defines the body text for notification mails sent to customers, with token about new requested password.' =>
             'Задает текст почтового сообщения, отправляемого клиентам, с ключом для создания нового запрошенного пароля.',
-        'Defines the subject for notification mails sent to customers, about new password.' =>
-            'Задает тему почтового сообщения, отправляемого клиенту о новом пароле.',
-        'Defines the body text for notification mails sent to customers, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Определяет тему уведомительных писем клиентам, подтверждающих сброс пароля.',
+        'Defines the body text for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Определяет текст уведомительных писем клиентам, подтверждающих сброс пароля.',
         'Defines the subject for notification mails sent to customers, about new account.' =>
             'Задает тему почтового сообщения, отправляемого клиенту о новой учетной записи.',
         'Defines the body text for notification mails sent to customers, about new account.' =>
@@ -7821,8 +7852,8 @@ sub Data {
             '',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             '',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
-            'Задает настройки TicketDynamicField по умолчанию. "Name/Имя" задает поле, которое будет использоваться, "Value/Значение" - данные которые будут заданы и "Event/Событие" определяет событие триггера. Подробнее, смотрите в руководстве разработчика (https://doc.znuny.org/manual/developer/), раздел "Ticket Event Module".',
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event.' =>
+            'Задает настройки TicketDynamicField по умолчанию. "Name/Имя" задает поле, которое будет использоваться, "Value/Значение" - данные которые будут заданы и "Event/Событие" определяет событие триггера.',
         'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
             '',
         'Defines the list of types for templates.' => 'Задает список типов для шаблонов',
@@ -7880,9 +7911,9 @@ sub Data {
             '',
         'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
             '',
-        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
+        'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             '',
-        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
+        'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
             '',
         'Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic.' =>
             '',
@@ -8570,6 +8601,7 @@ sub Data {
             'Этот параметр имеет подчиненные элементы и не может быть удален в настоящее время.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
+        'Customer user address book' => 'Адресная книга клиентов',
         'Select a customer ID to assign to this ticket' => 'Выберите компанию для назначения этой заявке',
         'Do you really want to continue?' => 'Действительно продолжить?',
 
@@ -9400,6 +9432,7 @@ Thanks for your help!
         'To accept login information, such as an EULA or license.' => 'Принять регистрационную информацию, такую как EULA или лицензию.',
         'To download attachments.' => 'Для загрузки вложение.',
         'To view HTML attachments.' => 'Для просмотра HTML вложений.',
+        'Translation' => '',
         'Tree view' => 'Иерархический вид',
         'Turkish' => 'Турецкий',
         'Tweak the system as you wish.' => 'Оптимизируйте систему по своему усмотрению.',

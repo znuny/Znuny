@@ -7754,7 +7754,7 @@ msgstr "Mengarang Jawapan untuk %s%s%s"
 msgid "Date Invalid!"
 msgstr "Tarikh tidak sah!"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
+#. JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
 msgid "Customer user address book"
 msgstr ""
 
@@ -9154,7 +9154,7 @@ msgstr "Tambah pautan"
 msgid "Delete links"
 msgstr "Padam pautan"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Lost your password?"
 msgstr "Hilang kata kunci anda?"
 
@@ -13270,7 +13270,7 @@ msgstr "Sila nyatakan tarikh akhir iaitu selepas tarikh mula."
 msgid "Current password"
 msgstr "Kata laluan asal"
 
-#. Perl Module: Kernel/Output/HTML/Preferences/Password.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "New password"
 msgstr "Kata laluan baru"
 
@@ -15187,8 +15187,8 @@ msgid "Defines all the languages that are available to the application. Specify 
 msgstr "Mentakrifkan semua bahasa yang boleh didapati dengan permohonan itu. Nyatakan hanya nama-nama bahasa asal di sini."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/."
-msgstr "Mentakrifkan tema (HTML) bahagian depan default yang akan digunakan oleh ejen-ejen dan pelanggan. Jika anda suka, anda boleh menambah tema anda sendiri. Sila rujuk manual pentadbir yang terletak di https://doc.znuny.org/manual/developer/."
+msgid "Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html."
+msgstr "Mentakrifkan tema (HTML) bahagian depan default yang akan digunakan oleh ejen-ejen dan pelanggan. Jika anda suka, anda boleh menambah tema anda sendiri. Sila rujuk manual pentadbir yang terletak di https://doc.znuny.org/developer/general_information/themes.html."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in \"Key\" should match the domain, and the value in \"Content\" should be a valid theme on your system. Please see the example entries for the proper form of the regex."
@@ -19557,8 +19557,8 @@ msgid "Event module registration. For more performance you can define a trigger 
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Configures a default TicketDynamicField setting. \"Name\" defines the dynamic field which should be used, \"Value\" is the data that will be set, and \"Event\" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter \"Ticket Event Module\"."
-msgstr "Mengkonfigurasi tetapan TicketDynamicField default. \"Nama\" mentakrifkan bidang dinamik yang sepatutnya digunakan, \"Nilai\" adalah data yang akan diset, dan \"Event\" mentakrifkan peristiwa pencetus. Sila semak manual pemaju (https://doc.znuny.org/manual/developer/), bab \"Tiket Acara Modul\"."
+msgid "Configures a default TicketDynamicField setting. \"Name\" defines the dynamic field which should be used, \"Value\" is the data that will be set, and \"Event\" defines the trigger event."
+msgstr "Mengkonfigurasi tetapan TicketDynamicField default. \"Nama\" mentakrifkan bidang dinamik yang sepatutnya digunakan, \"Nilai\" adalah data yang akan diset, dan \"Event\" mentakrifkan peristiwa pencetus."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the list of types for templates."
@@ -24387,7 +24387,7 @@ msgstr ""
 msgid "Dynamic fields administration"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+#. SysConfig
 msgid "Translation"
 msgstr ""
 
@@ -25354,4 +25354,172 @@ msgstr ""
 #. Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
 msgid "The selected template type does not support attachments."
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+msgid "Import Translation"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
+msgid "Export Translation"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Import / Export"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Here you can upload a configuration file to import translations to your system. The file needs to be in .yml | .csv | .xlsx format."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Could not find translation for ID %s."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Translation stored."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Storing translation failed."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTranslation.pm
+msgid "Translations synchronized."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Fields to be omitted from payload"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Field"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Remove field"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Add field to be omitted from payload"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Restore omitted fields"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Fields which will be removed from the payload of the request, e.g. 'SomeField1'. Nested fields can be referenced by connecting them with '->', e.g. 'SomeField1->SomeField2->SomeField3'."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Fields to be Base64 encoded in payload"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Add field to be Base64 encoded in payload"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Restore Base64 encoded fields"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
+msgid "Fields which will be Base64 encoded in payload of the request, e.g. 'SomeField1'. Nested fields can be referenced by connecting them with '->', e.g. 'SomeField1->SomeField2->SomeField3'."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Global mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Content of different fields can be given by separating those fields by ';'."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Global mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Different fields can be omitted by separating them by ';'."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Uninstall package and data"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Uninstall package only"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
+msgid "View the admin manual"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
+msgid "Set New Password"
+msgstr "Tetapkan kata laluan baharu"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
+msgid "Confirm password"
+msgstr "Sahkan kata laluan"
+
+#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
+msgid "Your password reset link is invalid or has expired. Please request a new one."
+msgstr "Pautan set semula kata laluan anda tidak sah atau telah tamat tempoh. Sila minta yang baharu."
+
+#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
+msgid "Passwords do not match!"
+msgstr "Kata laluan tidak sepadan!"
+
+#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
+msgid "Password does not match the requirements!"
+msgstr "Kata laluan tidak memenuhi keperluan!"
+
+#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
+msgid "Password must be at least %s characters long!"
+msgstr "Kata laluan mesti sekurang-kurangnya %s aksara!"
+
+#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
+msgid "Password must contain at least 2 lowercase and 2 uppercase letter characters!"
+msgstr "Kata laluan mesti mengandungi sekurang-kurangnya 2 huruf kecil dan 2 huruf besar!"
+
+#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
+msgid "Password must contain at least 1 digit!"
+msgstr "Kata laluan mesti mengandungi sekurang-kurangnya 1 digit!"
+
+#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
+msgid "Password must contain at least 2 letter characters!"
+msgstr "Kata laluan mesti mengandungi sekurang-kurangnya 2 huruf!"
+
+#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
+msgid "Password changed. Please log in with your new password."
+msgstr "Kata laluan ditukar. Sila log masuk dengan kata laluan baharu anda."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour)."
+msgstr "Menentukan tempoh sah token set semula kata laluan dalam saat. Selepas itu token tamat tempoh dan permintaan baharu diperlukan. Lalai: 3600 (1 jam)."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5."
+msgstr "Bilangan maksimum permintaan set semula kata laluan dibenarkan setiap alamat IP atau nama pengguna dalam tetingkap rate limiting. Tetapkan 0 untuk melumpuhkan. Lalai: 5."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes)."
+msgstr "Tetingkap masa dalam saat untuk rate limiting set semula kata laluan. Percubaan dalam tetingkap ini dikira berbanding maksimum. Lalai: 600 (10 minit)."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the subject for notification mails sent to agents, confirming that the password has been reset."
+msgstr "Menentukan subjek e-mel pemberitahuan kepada ejen yang mengesahkan set semula kata laluan."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the body text for notification mails sent to agents, confirming that the password has been reset."
+msgstr "Menentukan teks e-mel pemberitahuan kepada ejen yang mengesahkan set semula kata laluan."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the subject for notification mails sent to customers, confirming that the password has been reset."
+msgstr "Menentukan subjek e-mel pemberitahuan kepada pelanggan yang mengesahkan set semula kata laluan."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the body text for notification mails sent to customers, confirming that the password has been reset."
+msgstr "Menentukan teks e-mel pemberitahuan kepada pelanggan yang mengesahkan set semula kata laluan."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
+msgid "A link to set a new password will be sent to your email address."
+msgstr "Pautan untuk menetapkan kata kunci baharu akan dihantar ke alamat emel anda."
+
+#. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
+msgid "Resend is not possible for this article!"
+msgstr "Penghantaran semula tidak boleh dilakukan untuk artikel ini!"
 

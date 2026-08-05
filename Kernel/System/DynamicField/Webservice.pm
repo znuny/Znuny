@@ -439,7 +439,7 @@ sub Search {
     my $InvokerType = $SearchType eq 'EQUALS' ? 'InvokerGet' : 'InvokerSearch';
     my $InvokerName = $BackendConfig->{$InvokerType};
 
-    # Remove configured fields.
+    # Remove globally configured fields.
     my $OmittedFields = $ConfigObject->Get(
         'GenericInterface::Invoker::Ticket::Generic::PrepareRequest::OmittedFields'
     ) // {};
@@ -456,7 +456,7 @@ sub Search {
         );
     }
 
-    # Base-64 encode configured field values.
+    # Base-64 encode globally configured field values.
     my $Base64EncodedFields = $ConfigObject->Get(
         'GenericInterface::Invoker::Ticket::Generic::PrepareRequest::Base64EncodedFields'
     ) // {};

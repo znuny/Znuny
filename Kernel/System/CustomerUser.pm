@@ -12,6 +12,8 @@ package Kernel::System::CustomerUser;
 use strict;
 use warnings;
 
+use Digest::SHA qw(sha256_hex);
+
 use Kernel::System::VariableCheck qw(:all);
 
 use parent qw(Kernel::System::EventHandler);
@@ -1254,13 +1256,21 @@ sub TokenGenerate {
     }
 
     my $Token = $Kernel::OM->Get('Kernel::System::Main')->GenerateRandomString(
-        Length => 14,
+        Length => 32,
     );
-
-    # save token in preferences
+    my $SHA256Token = sha256_hex($Token);
     $Self->SetPreferences(
         Key    => 'UserToken',
-        Value  => $Token,
+        Value  => $SHA256Token,
+        UserID => $Param{UserID},
+    );
+
+    my $PasswordResetTokenExpiry = $Kernel::OM->Get('Kernel::Config')->Get('PasswordResetTokenExpiry') || 3600;
+    $PasswordResetTokenExpiry += time();
+
+    $Self->SetPreferences(
+        Key    => 'UserTokenExpiry',
+        Value  => $PasswordResetTokenExpiry,
         UserID => $Param{UserID},
     );
 
@@ -1294,19 +1304,37 @@ sub TokenCheck {
     my %Preferences = $Self->GetPreferences(
         UserID => $Param{UserID},
     );
+    return if !$Preferences{UserToken};
 
     # check requested vs. stored token
-    return if !$Preferences{UserToken};
-    return if $Preferences{UserToken} ne $Param{Token};
+    return if $Preferences{UserToken} ne sha256_hex( $Param{Token} );
 
-    # reset password token
-    $Self->SetPreferences(
-        Key    => 'UserToken',
-        Value  => '',
-        UserID => $Param{UserID},
-    );
+    # check expiry
+    my $UserTokenExpiry = $Preferences{UserTokenExpiry} // 0;
+    my $TokenExpired    = time() > $UserTokenExpiry;
 
-    return 1;
+    # a) Remove expired token
+    # b) Remove/use valid token that is checked without option 'peek'
+    my $KeepValidToken = $Param{Peek} ? 1 : 0;
+
+    if (
+        $TokenExpired
+        || !$KeepValidToken
+        )
+    {
+        $Self->SetPreferences(
+            Key    => 'UserToken',
+            Value  => '',
+            UserID => $Param{UserID}
+        );
+        $Self->SetPreferences(
+            Key    => 'UserTokenExpiry',
+            Value  => '',
+            UserID => $Param{UserID}
+        );
+    }
+
+    return $TokenExpired ? 0 : 1;
 }
 
 =head2 CustomerUserCacheClear()

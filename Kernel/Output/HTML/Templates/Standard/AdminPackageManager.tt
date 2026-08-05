@@ -64,15 +64,20 @@
                             [% Translate("Do you really want to uninstall this package?") | html %]
                         </p>
                         <div class="Field">
-                            <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits">
+                            <form id="UninstallForm" action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits">
                                 <div class="field-wrapper form-button-actions">
                                     <div class="Field buttons-field">
                                         <input type="hidden" name="Action" value="[% Env("Action") %]"/>
                                         <input type="hidden" name="Subaction" value="UninstallAction"/>
                                         <input type="hidden" name="Name" value="[% Data.Name | html %]"/>
                                         <input type="hidden" name="Version" value="[% Data.Version | html %]"/>
-                                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-cancel-ghost btn-main btn-width-md">[% Translate("Cancel") | html %]</a>
-                                        <button class="btn-primary btn-main btn-width-md" type="submit" value="[% Translate("Uninstall package") | html %]"><span>[% Translate("Uninstall package") | html %]</span></button>
+                                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-cancel-ghost btn-main btn-width-md"> [% Translate("Cancel") | html %] </a>
+                                        [% IF Data.DBUninstall %]
+                                        <button class="btn-primary-ghost btn-main btn-width-lg" type="submit" name="KeepData" value="0"><span>[% Translate("Uninstall package and data") | html %]</span></button>
+                                        <button class="btn-primary btn-main btn-width-lg" type="submit" name="KeepData" value="1"><span>[% Translate("Uninstall package only") | html %]</span></button>
+                                        [% ELSE %]
+                                        <button class="btn-primary-ghost btn-main btn-width-lg" type="submit"><span>[% Translate("Uninstall") | html %]</span></button>
+                                        [% END %]
                                     </div>
                                 </div>
                             </form>
@@ -177,12 +182,14 @@
                         <li>
                             <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
                         </li>
+[% RenderBlockStart("DatabaseUninstall") %]
                         <li>
                             <a href="https://doc.znuny.org/updating/znuny" target="_blank" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-external-link"></i>[% Translate("Go to updating instructions") | html %]</span></a>
                         </li>
                         <li>
                             <a href="https://www.znuny.org/" target="_blank" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-external-link"></i>[% Translate("Go to znuny.org") | html %]</span></a>
                         </li>
+[% RenderBlockEnd("DatabaseUninstall") %]
                     </ul>
                 </div>
             </div>
@@ -541,7 +548,7 @@
                                     <br/>
 [% RenderBlockEnd("ShowLocalPackageUninstall") %]
 [% RenderBlockStart("ShowLocalPackageReinstall") %]
-                                    <a class="PackageAction table-actions-button" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Reinstall;Name=[% Data.Name | uri %];Version=[% Data.Version | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Package not correctly deployed! Please reinstall the package.") | html %]">[% Translate("Reinstall") | html %]</a>
+                                    <a class="PackageAction table-actions-button" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=e;Name=[% Data.Name | uri %];Version=[% Data.Version | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Package not correctly deployed! Please reinstall the package.") | html %]">[% Translate("Reinstall") | html %]</a>
                                     <br/>
 [% RenderBlockEnd("ShowLocalPackageReinstall") %]
                                 </td>

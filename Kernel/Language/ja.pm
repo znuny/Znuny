@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%m/%d';
     $Self->{DateInputFormat}     = '%Y/%m/%d';
     $Self->{DateInputFormatLong} = '%Y/%m/%d - %T';
-    $Self->{Completeness}        = 0.657352706370749;
+    $Self->{Completeness}        = 0.655693384223919;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -980,6 +980,18 @@ sub Data {
             '同期型イベントトリガーは直接Web画面上のリクエストから実行されます。',
         'Add all attachments' => '',
         'Add all attachments to invoker payload.' => '',
+        'Fields to be omitted from payload' => '',
+        'Field' => '',
+        'Remove field' => '',
+        'Add field to be omitted from payload' => '',
+        'Restore omitted fields' => '',
+        'Fields which will be removed from the payload of the request, e.g. \'SomeField1\'. Nested fields can be referenced by connecting them with \'->\', e.g. \'SomeField1->SomeField2->SomeField3\'.' =>
+            '',
+        'Fields to be Base64 encoded in payload' => '',
+        'Add field to be Base64 encoded in payload' => '',
+        'Restore Base64 encoded fields' => '',
+        'Fields which will be Base64 encoded in payload of the request, e.g. \'SomeField1\'. Nested fields can be referenced by connecting them with \'->\', e.g. \'SomeField1->SomeField2->SomeField3\'.' =>
+            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerEvent.tt
         'GenericInterface Invoker Event Settings for Web Service %s' => '',
@@ -1405,7 +1417,7 @@ sub Data {
         'You can add favorites by moving your cursor over items on the right side and clicking the star icon.' =>
             '右側のアイテムにカーソルを合わせてスターアイコンをクリックすると、お気に入りを追加できます。',
         'Links' => 'リンク',
-        'View the admin manual on Github' => 'Githubの管理マニュアルを表示',
+        'View the admin manual' => '',
         'No Matches' => 'マッチなし',
         'Sorry, your search didn\'t match any items.' => '申し訳ありませんが、あなたの検索はどのアイテムにも一致しませんでした。',
         'Set as favorite' => 'お気に入りに指定',
@@ -1528,6 +1540,9 @@ sub Data {
         'Uninstall Package' => 'パッケージをアンインストール',
         'Uninstall package' => 'パッケージをアンインストール',
         'Do you really want to uninstall this package?' => 'このパッケージを本当にアンインストールしますか？',
+        'Uninstall package and data' => '',
+        'Uninstall package only' => '',
+        'Uninstall' => 'アンインストール',
         'Reinstall package' => 'パッケージを再インストール',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'このパッケージを本当に再インストールしますか？ 全ての手動変更点は失われます。',
@@ -1574,7 +1589,6 @@ sub Data {
         'Action' => '操作',
         'Module documentation' => 'モジュールの書類',
         'Local Repository' => 'ローカルリポジトリ',
-        'Uninstall' => 'アンインストール',
         'Package not correctly deployed! Please reinstall the package.' =>
             'パッケージが正しくデプロイされません。再インストールしてください。',
         'Reinstall' => '再インストール',
@@ -2273,7 +2287,8 @@ sub Data {
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
-        'Translation' => '',
+        'Import Translation' => '',
+        'Export Translation' => '',
         'Translation Management' => '',
         'Add Translation' => '',
         'Edit Translation' => '',
@@ -2732,14 +2747,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => '%s%s%sのメールを再送信',
-        'All fields marked with an asterisk (*) are mandatory.' => 'アスタリスク（*）が付いている全ての領域は必須入力です。',
-        'Cancel & close' => '中止して閉じる',
-        'Select one or more recipients from the customer user address book.' =>
-            '顧客ユーザーのアドレス帳から1人以上の受信者を選択します。',
-        'Customer user address book' => '顧客ユーザーのアドレス帳',
-        'Remove Ticket Customer' => 'チケットの顧客を削除',
-        'Remove Cc' => 'Ccを削除',
-        'Remove Bcc' => 'Bccを削除',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s %s)!' => '',
@@ -2981,14 +2988,18 @@ sub Data {
         'User name' => 'ユーザー名',
         'Your user name' => 'ユーザー名',
         'Your password' => 'パスワード',
-        'Forgot password?' => 'パスワードを忘れましたか？',
+        'Lost your password?' => 'パスワードを忘れた方',
         '2 Factor Token' => '',
         'Your 2 Factor Token' => '',
         'Log In' => 'ログイン',
         'Request New Password' => '新規パスワードを申請',
         'Your User Name' => 'ユーザー名',
-        'A new password will be sent to your email address.' => '登録されたメールアドレスに新しいパスワードを送信します。',
+        'A link to set a new password will be sent to your email address.' =>
+            '新しいパスワードを設定するためのリンクを登録されたメールアドレスに送信します。',
         'Back to login' => 'ログイン画面に戻る',
+        'Set New Password' => '新しいパスワードを設定',
+        'New password' => '新しいパスワード',
+        'Confirm password' => 'パスワードの確認',
         'Create Account' => 'アカウント作成',
         'Please fill out this form to receive login credentials.' => '下記のフォームにログイン時に必要となる事項を入力してください。',
         'How we should address you' => '',
@@ -3194,9 +3205,6 @@ sub Data {
         'Object#' => '対象の番号',
         'Add links' => 'リンクを追加',
         'Delete links' => 'リンクを削除',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
-        'Lost your password?' => 'パスワードを忘れた方',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -4221,6 +4229,15 @@ sub Data {
         'Change Attachment Relations for Template' => 'テンプレートに対する添付ファイルの関連性を変更',
         'Change Template Relations for Attachment' => '添付ファイルに対するテンプレートの関連性を変更',
 
+        # Perl Module: Kernel/Modules/AdminTranslation.pm
+        'Import / Export' => '',
+        'Here you can upload a configuration file to import translations to your system. The file needs to be in .yml | .csv | .xlsx format.' =>
+            '',
+        'Could not find translation for ID %s.' => '',
+        'Translation stored.' => '',
+        'Storing translation failed.' => '',
+        'Translations synchronized.' => '',
+
         # Perl Module: Kernel/Modules/AdminType.pm
         'Need Type!' => 'タイプが必要です！',
         'Type added!' => 'タイプを追加しました。',
@@ -4379,6 +4396,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
         'No ArticleID is given!' => 'ArticleIDは指定されていません！',
+        'Resend is not possible for this article!' => 'この記事の再送信はできません！',
 
         # Perl Module: Kernel/Modules/AgentTicketEscalationView.pm
         'Next week' => '翌週',
@@ -4876,7 +4894,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Preferences/Password.pm
         'Current password' => '現在のパスワード',
-        'New password' => '新しいパスワード',
         'Verify password' => '新しいパスワード(確認用)',
         'The current password is not correct. Please try again!' => 'パスワードが正しくありません。再入力してください。',
         'Please supply your new password!' => '新しいパスワードを入力して下さい！',
@@ -5557,9 +5574,17 @@ sub Data {
         'Can`t remove SessionID.' => 'セッションIDを削除できません。',
         'Logout successful.' => 'ログアウトしました。',
         'Feature not active!' => '機能が有効になっていません。',
+        'Your password reset link is invalid or has expired. Please request a new one.' =>
+            'パスワードリセットリンクが無効または期限切れです。新しいリンクをリクエストしてください。',
         'Sent password reset instructions. Please check your email.' => 'パスワードを初期化する手順を送信しました。メールを確認してください。',
-        'Invalid Token!' => '無効なトークンです',
-        'Sent new password to %s. Please check your email.' => '新しいパスワードを %s に送信しました。メールを確認してください。',
+        'Passwords do not match!' => 'パスワードが一致しません!',
+        'Password does not match the requirements!' => 'パスワードが要件を満たしていません!',
+        'Password must be at least %s characters long!' => 'パスワードは少なくとも %s 文字である必要があります!',
+        'Password must contain at least 2 lowercase and 2 uppercase letter characters!' =>
+            'パスワードには少なくとも小文字2文字と大文字2文字が必要です!',
+        'Password must contain at least 1 digit!' => 'パスワードには少なくとも1桁の数字が必要です!',
+        'Password must contain at least 2 letter characters!' => 'パスワードには少なくとも2文字の英字が必要です!',
+        'Password changed. Please log in with your new password.' => 'パスワードが変更されました。新しいパスワードでログインしてください。',
         'Error: invalid session.' => 'エラー: セッションが無効な値です。',
         'No Permission to use this frontend module!' => 'このフロントエンドモジュールを使用する権限がありません',
 
@@ -5746,7 +5771,7 @@ sub Data {
             '',
         'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
             '',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.' =>
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html.' =>
             '',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             '異なるテーマを、担当者と顧客の間で異なるように、アプリケーション内でドメインごとの単位で使用されるように、設定することができます。regular expression (regex)を使用することにより、ドメインにマッチするようにKey/Contentを設定することが可能です。“Key”の値はドメインにマッチさせるべきであり、“Content”の値はご利用のシステムで有効なテーマとしてください。regrexの適切な形式のための入力例を確認してください。',
@@ -6072,14 +6097,20 @@ sub Data {
             '',
         'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
             '',
+        'Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).' =>
+            'パスワードリセットトークンの有効期間（秒）を定義します。この時間を過ぎるとトークンは失効し、新しいリクエストが必要です。デフォルト: 3600（1時間）。',
+        'Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.' =>
+            'rate limiting ウィンドウ内で IP アドレスまたはユーザー名ごとに許可されるパスワードリセット要求の最大数。0 で rate limiting を無効化。デフォルト: 5。',
+        'Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes).' =>
+            'パスワードリセットの rate limiting 用の時間ウィンドウ（秒）。このウィンドウ内の試行は最大値に対してカウントされます。デフォルト: 600（10分）。',
         'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
             '新規にリクエストされたパスワードに関するトークンと共に、担当者に送信される通知メールの件名を定義します。',
         'Defines the body text for notification mails sent to agents, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to agents, about new password.' =>
-            '新しいパスワードに関して、担当者に送信される通知メールの件名を定義します。',
-        'Defines the body text for notification mails sent to agents, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to agents, confirming that the password has been reset.' =>
+            'パスワードリセットを確認するエージェント向け通知メールの件名を定義します。',
+        'Defines the body text for notification mails sent to agents, confirming that the password has been reset.' =>
+            'パスワードリセットを確認するエージェント向け通知メールの本文を定義します。',
         'Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that "rw" is always the last registered permission.' =>
             'アプリケーション内で担当者にとって標準的に利用可能な許可です。もし、さらに多くの許可が必要であれば、ここで加えることができます。許可は、効果的になるように設定する必要があります。いくつか他の良い許可も、ビルト・インで提供されています：note, close, pending, customer, freetext, move, compose, responsible, forward, bounce。“rw”は、常に最後の登録許可であることを確認してください。',
         'Defines the standard permissions available for customers within the application. If more permissions are needed, you can enter them here. Permissions must be hard coded to be effective. Please ensure, when adding any of the afore mentioned permissions, that the "rw" permission remains the last entry.' =>
@@ -6155,10 +6186,10 @@ sub Data {
             '新しくリクエストされたパスワードに関するトークンと共に、顧客に送信される通知メールの件名を定義します。',
         'Defines the body text for notification mails sent to customers, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to customers, about new password.' =>
-            '新パスワードについて、顧客に送信される通知メールの件名を定義します。',
-        'Defines the body text for notification mails sent to customers, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to customers, confirming that the password has been reset.' =>
+            'パスワードリセットを確認する顧客向け通知メールの件名を定義します。',
+        'Defines the body text for notification mails sent to customers, confirming that the password has been reset.' =>
+            'パスワードリセットを確認する顧客向け通知メールの本文を定義します。',
         'Defines the subject for notification mails sent to customers, about new account.' =>
             '新アカウントについて、顧客に送信される通知メールの件名を定義します。',
         'Defines the body text for notification mails sent to customers, about new account.' =>
@@ -7825,7 +7856,7 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             '',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             '',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event.' =>
             '',
         'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
             '',
@@ -7884,9 +7915,9 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             '',
         'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
             '',
-        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
+        'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             '',
-        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
+        'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
             '',
         'Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic.' =>
             '',
@@ -8574,6 +8605,7 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             'この要素は子供が存在するため削除できません。',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
+        'Customer user address book' => '顧客ユーザーのアドレス帳',
         'Select a customer ID to assign to this ticket' => 'チケットに割り当てる顧客IDを選択してください',
         'Do you really want to continue?' => '本当にこの操作を継続してよろしいですか？',
 
@@ -9403,6 +9435,7 @@ Thanks for your help!
         'To accept login information, such as an EULA or license.' => '',
         'To download attachments.' => '添付ファイルをダウンロード',
         'To view HTML attachments.' => 'HTML添付ファイルを表示するには',
+        'Translation' => '',
         'Tree view' => 'ツリー表示',
         'Turkish' => 'トルコ語',
         'Tweak the system as you wish.' => 'あなたが望むようにシステムを微調整する。',

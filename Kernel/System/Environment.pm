@@ -249,6 +249,7 @@ sub PerlInfoGet {
             Class::Inspector
             Crypt::PasswdMD5
             Crypt::Random::Source
+            Crypt::URandom
             CSS::Minifier
             Email::Valid
             Encode::Locale

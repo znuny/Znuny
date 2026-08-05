@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.215391984671882;
+    $Self->{Completeness}        = 0.216284987277354;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -981,6 +981,18 @@ sub Data {
             '',
         'Add all attachments' => '',
         'Add all attachments to invoker payload.' => '',
+        'Fields to be omitted from payload' => '',
+        'Field' => '',
+        'Remove field' => '',
+        'Add field to be omitted from payload' => '',
+        'Restore omitted fields' => '',
+        'Fields which will be removed from the payload of the request, e.g. \'SomeField1\'. Nested fields can be referenced by connecting them with \'->\', e.g. \'SomeField1->SomeField2->SomeField3\'.' =>
+            '',
+        'Fields to be Base64 encoded in payload' => '',
+        'Add field to be Base64 encoded in payload' => '',
+        'Restore Base64 encoded fields' => '',
+        'Fields which will be Base64 encoded in payload of the request, e.g. \'SomeField1\'. Nested fields can be referenced by connecting them with \'->\', e.g. \'SomeField1->SomeField2->SomeField3\'.' =>
+            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerEvent.tt
         'GenericInterface Invoker Event Settings for Web Service %s' => '',
@@ -1406,7 +1418,7 @@ sub Data {
         'You can add favorites by moving your cursor over items on the right side and clicking the star icon.' =>
             '',
         'Links' => '',
-        'View the admin manual on Github' => '',
+        'View the admin manual' => '',
         'No Matches' => '',
         'Sorry, your search didn\'t match any items.' => '',
         'Set as favorite' => '',
@@ -1529,6 +1541,9 @@ sub Data {
         'Uninstall Package' => '',
         'Uninstall package' => '',
         'Do you really want to uninstall this package?' => '',
+        'Uninstall package and data' => '',
+        'Uninstall package only' => '',
+        'Uninstall' => 'הסר התקנה',
         'Reinstall package' => '',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             '',
@@ -1575,7 +1590,6 @@ sub Data {
         'Action' => 'פעולה',
         'Module documentation' => 'תיעוד מודולה',
         'Local Repository' => '',
-        'Uninstall' => 'הסר התקנה',
         'Package not correctly deployed! Please reinstall the package.' =>
             'החבילה לא מותקנת נכון. אנא התקינו מחדש.',
         'Reinstall' => 'התקן מחדש',
@@ -2274,7 +2288,8 @@ sub Data {
             '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
-        'Translation' => '',
+        'Import Translation' => '',
+        'Export Translation' => '',
         'Translation Management' => '',
         'Add Translation' => '',
         'Edit Translation' => '',
@@ -2733,14 +2748,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => '',
-        'All fields marked with an asterisk (*) are mandatory.' => 'כל השדות המסומנים עם כוכבית (*) הם שדות חובה.',
-        'Cancel & close' => '',
-        'Select one or more recipients from the customer user address book.' =>
-            '',
-        'Customer user address book' => '',
-        'Remove Ticket Customer' => 'הסר לקוח של פניה',
-        'Remove Cc' => 'הסר Cc',
-        'Remove Bcc' => 'הסר Bcc',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s %s)!' => '',
@@ -2982,14 +2989,18 @@ sub Data {
         'User name' => 'שם משתמש',
         'Your user name' => 'שם המשתמש שלך',
         'Your password' => 'הסיסמה שלך',
-        'Forgot password?' => 'שכחת סיסמה?',
+        'Lost your password?' => 'שכחתם סיסמה?',
         '2 Factor Token' => '',
         'Your 2 Factor Token' => '',
         'Log In' => 'התחבר',
         'Request New Password' => 'בקש סיסמה חדשה',
         'Your User Name' => 'שם המשתמש שלך',
-        'A new password will be sent to your email address.' => 'סיסמה חדשה תישלח לכתובת הדוא"ל שלך.',
+        'A link to set a new password will be sent to your email address.' =>
+            'קישור להגדרת סיסמה חדשה יישלח לכתובת הדוא\"ל שלך.',
         'Back to login' => 'חזרה להתחברות',
+        'Set New Password' => 'הגדרת סיסמה חדשה',
+        'New password' => 'סיסמה חדשה',
+        'Confirm password' => 'אימות סיסמה',
         'Create Account' => 'צור חשבון',
         'Please fill out this form to receive login credentials.' => 'אנא מלאו את הטופס על מנת לקבל פרטי התחברות.',
         'How we should address you' => 'כיצד עלינו לפנות אליכם?',
@@ -3195,9 +3206,6 @@ sub Data {
         'Object#' => 'אובייקט#',
         'Add links' => 'הוסף קישורים',
         'Delete links' => 'מחק קישורים',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
-        'Lost your password?' => 'שכחתם סיסמה?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -4221,6 +4229,15 @@ sub Data {
         'Change Attachment Relations for Template' => 'שנה יחסי קובץ מצורף לתבנית',
         'Change Template Relations for Attachment' => 'שנה יחסי תבנית לקובץ מצורף',
 
+        # Perl Module: Kernel/Modules/AdminTranslation.pm
+        'Import / Export' => '',
+        'Here you can upload a configuration file to import translations to your system. The file needs to be in .yml | .csv | .xlsx format.' =>
+            '',
+        'Could not find translation for ID %s.' => '',
+        'Translation stored.' => '',
+        'Storing translation failed.' => '',
+        'Translations synchronized.' => '',
+
         # Perl Module: Kernel/Modules/AdminType.pm
         'Need Type!' => '',
         'Type added!' => 'הסוג נוסף!',
@@ -4379,6 +4396,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
         'No ArticleID is given!' => '',
+        'Resend is not possible for this article!' => 'שליחה מחדש אינה אפשרית עבור מאמר זה!',
 
         # Perl Module: Kernel/Modules/AgentTicketEscalationView.pm
         'Next week' => 'בשבוע הבא',
@@ -4876,7 +4894,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Preferences/Password.pm
         'Current password' => 'סיסמה נוכחית',
-        'New password' => 'סיסמה חדשה',
         'Verify password' => 'אמת סיסמה',
         'The current password is not correct. Please try again!' => 'הסיסמה הנוכחית אינה נכונה. אנא נסה שנית!',
         'Please supply your new password!' => '',
@@ -5557,9 +5574,17 @@ sub Data {
         'Can`t remove SessionID.' => '',
         'Logout successful.' => '',
         'Feature not active!' => 'יכולת זו אינה מופעלת!',
+        'Your password reset link is invalid or has expired. Please request a new one.' =>
+            'קישור איפוס הסיסמה שלך אינו תקף או שפג תוקפו. נא לבקש קישור חדש.',
         'Sent password reset instructions. Please check your email.' => 'נשלחו הנחיות לאיפוס סיסמה. נא לבדוק את הדוא"ל שלך.',
-        'Invalid Token!' => 'קוד לא תקין!',
-        'Sent new password to %s. Please check your email.' => 'סיסמה חדשה נשלחה אל %s. נא לבדוק את הדוא"ל שלך.',
+        'Passwords do not match!' => 'הסיסמאות אינן תואמות!',
+        'Password does not match the requirements!' => 'הסיסמה אינה עומדת בדרישות!',
+        'Password must be at least %s characters long!' => 'הסיסמה חייבת להיות באורך של לפחות %s תווים!',
+        'Password must contain at least 2 lowercase and 2 uppercase letter characters!' =>
+            'הסיסמה חייבת להכיל לפחות 2 אותיות קטנות ו-2 אותיות גדולות!',
+        'Password must contain at least 1 digit!' => 'הסיסמה חייבת להכיל לפחות ספרה אחת!',
+        'Password must contain at least 2 letter characters!' => 'הסיסמה חייבת להכיל לפחות 2 אותיות!',
+        'Password changed. Please log in with your new password.' => 'הסיסמה שונתה. נא להתחבר עם הסיסמה החדשה שלך.',
         'Error: invalid session.' => '',
         'No Permission to use this frontend module!' => '',
 
@@ -5746,7 +5771,7 @@ sub Data {
             '',
         'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
             '',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.' =>
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html.' =>
             '',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             '',
@@ -6072,14 +6097,20 @@ sub Data {
             '',
         'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
             '',
+        'Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).' =>
+            'מגדיר את תקופת התוקף בשניות עבור אסימוני איפוס סיסמה. לאחר מכן האסימון פג ונדרשת בקשה חדשה. ברירת מחדל: 3600 (שעה אחת).',
+        'Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.' =>
+            'מספר מרבי של בקשות איפוס סיסמה המותרות לכל כתובת IP או שם משתמש בתוך חלון ה-rate limiting. הגדר 0 לביטול. ברירת מחדל: 5.',
+        'Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes).' =>
+            'חלון זמן בשניות עבור rate limiting של איפוס סיסמה. ניסיונות בחלון זה נספרים כנגד המקסימום. ברירת מחדל: 600 (10 דקות).',
         'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
             '',
         'Defines the body text for notification mails sent to agents, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to agents, about new password.' =>
-            '',
-        'Defines the body text for notification mails sent to agents, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to agents, confirming that the password has been reset.' =>
+            'מגדיר את נושא הודעות הדוא"ל לסוכנים המאשרות שהסיסמה אופסה.',
+        'Defines the body text for notification mails sent to agents, confirming that the password has been reset.' =>
+            'מגדיר את תוכן הודעות הדוא"ל לסוכנים המאשרות שהסיסמה אופסה.',
         'Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that "rw" is always the last registered permission.' =>
             '',
         'Defines the standard permissions available for customers within the application. If more permissions are needed, you can enter them here. Permissions must be hard coded to be effective. Please ensure, when adding any of the afore mentioned permissions, that the "rw" permission remains the last entry.' =>
@@ -6155,10 +6186,10 @@ sub Data {
             '',
         'Defines the body text for notification mails sent to customers, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to customers, about new password.' =>
-            '',
-        'Defines the body text for notification mails sent to customers, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to customers, confirming that the password has been reset.' =>
+            'מגדיר את נושא הודעות הדוא"ל ללקוחות המאשרות שהסיסמה אופסה.',
+        'Defines the body text for notification mails sent to customers, confirming that the password has been reset.' =>
+            'מגדיר את תוכן הודעות הדוא"ל ללקוחות המאשרות שהסיסמה אופסה.',
         'Defines the subject for notification mails sent to customers, about new account.' =>
             '',
         'Defines the body text for notification mails sent to customers, about new account.' =>
@@ -7816,7 +7847,7 @@ sub Data {
             '',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             '',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event.' =>
             '',
         'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
             '',
@@ -7875,9 +7906,9 @@ sub Data {
             '',
         'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
             '',
-        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
+        'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             '',
-        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
+        'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
             '',
         'Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic.' =>
             '',
@@ -8565,6 +8596,7 @@ sub Data {
             '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
+        'Customer user address book' => '',
         'Select a customer ID to assign to this ticket' => '',
         'Do you really want to continue?' => '',
 
@@ -9384,6 +9416,7 @@ Thanks for your help!
         'To accept login information, such as an EULA or license.' => '',
         'To download attachments.' => '',
         'To view HTML attachments.' => '',
+        'Translation' => '',
         'Tree view' => '',
         'Turkish' => '',
         'Tweak the system as you wish.' => '',

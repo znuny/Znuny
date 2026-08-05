@@ -1403,17 +1403,16 @@ sub LoadDefaults {
     $Self->{NotificationSenderEmail} = 'znuny@<OTRS_CONFIG_FQDN>';
 
     # notification email for new password
-    $Self->{NotificationSubjectLostPassword} = 'New OTRS password';
-    $Self->{NotificationBodyLostPassword}    = 'Hi <OTRS_USERFIRSTNAME>,
+    $Self->{NotificationSubjectLostPassword} = 'Your Znuny password has been reset';
+    $Self->{NotificationBodyLostPassword} = 'Hi <OTRS_USERFIRSTNAME>,
 
-
-Here\'s your new OTRS password.
-
-New password: <OTRS_NEWPW>
+Your Znuny password has been successfully reset.
 
 You can log in via the following URL:
 
 <OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl
+
+If you did not make this change, please contact your administrator immediately.
             ';
 
     # --------------------------------------------------- #
@@ -1490,13 +1489,16 @@ You can log in via the following URL:
     # --------------------------------------------------- #
     # notification email about new password               #
     # --------------------------------------------------- #
-    $Self->{CustomerPanelSubjectLostPassword} = 'New Znuny password';
-    $Self->{CustomerPanelBodyLostPassword}    = 'Hi <OTRS_USERFIRSTNAME>,
+    $Self->{CustomerPanelSubjectLostPassword} = 'Your Znuny password has been reset';
+    $Self->{CustomerPanelBodyLostPassword} = 'Hi <OTRS_USERFIRSTNAME>,
 
+Your Znuny password has been successfully reset.
 
-New password: <OTRS_NEWPW>
+You can log in via the following URL:
 
 <OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>customer.pl
+
+If you did not make this change, please contact your administrator immediately.
             ';
 
     # --------------------------------------------------- #

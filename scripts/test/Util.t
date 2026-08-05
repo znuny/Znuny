@@ -12,6 +12,7 @@ use utf8;
 
 use vars (qw($Self));
 
+use File::stat();
 use MIME::Base64;
 
 use Kernel::System::VariableCheck qw(:all);
@@ -27,6 +28,21 @@ my $UtilObject   = $Kernel::OM->Get('Kernel::System::Util');
 my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
 my $UserID = 1;
+
+#
+# ApplicationUserGet()
+#
+
+my $Home            = $Kernel::OM->Get('Kernel::Config')->Get('Home');
+my $HomeStat        = $Home     ? File::stat::stat($Home)    : undef;
+my $ApplicationUser = $HomeStat ? getpwuid( $HomeStat->uid ) : undef;    ## no critic
+$ApplicationUser ||= 'znuny';
+
+$Self->Is(
+    $UtilObject->ApplicationUserGet(),
+    $ApplicationUser,
+    'ApplicationUserGet() must return owner of Home or fallback application user.',
+);
 
 #
 # IsITSMInstalled()
@@ -132,7 +148,7 @@ $UtilObject->Base64DeepEncode(
 $Self->Is(
     $TicketDeepGet{ResponsibleData}->{UserFirstname} // '',
     $ResponsibleDataUserFirstnameBase64,
-    'Base64DeepEncode(): %TicketDeepGet must have expected base-64 encoded string in {ResponsibleData}->{UserFirstname}.',
+    'Base64DeepEncode(): %TicketDeepGet must have expected Base64-encoded string in {ResponsibleData}->{UserFirstname}.',
 );
 
 my $ArticleIndex = 0;
@@ -140,7 +156,7 @@ for my $ArticleBodyBase64 (@ArticleBodiesBase64) {
     $Self->Is(
         $TicketDeepGet{Articles}->[$ArticleIndex]->{Body} // '',
         $ArticleBodyBase64,
-        "Base64DeepEncode(): %TicketDeepGet must have expected base-64 encoded string in {Articles}->[$ArticleIndex]->{Body}.",
+        "Base64DeepEncode(): %TicketDeepGet must have expected Base64-encoded string in {Articles}->[$ArticleIndex]->{Body}.",
     );
 
     $ArticleIndex++;
@@ -149,11 +165,11 @@ for my $ArticleBodyBase64 (@ArticleBodiesBase64) {
 $Self->Is(
     $TicketDeepGet{Type} // '',
     $TypeBase64,
-    'Base64DeepEncode(): %TicketDeepGet must have expected base-64 encoded string in {Type}.',
+    'Base64DeepEncode(): %TicketDeepGet must have expected Base64-encoded string in {Type}.',
 );
 
-# Test that base-64 encoded fields are the only difference and that remaining unchanged data is
-# present. Test by reverting base-64 encoded values in %TicketDeepGet to unencoded values.
+# Test that Base64-encoded fields are the only difference and that remaining unchanged data is
+# present. Test by reverting Base64-encoded values in %TicketDeepGet to unencoded values.
 my %TicketDeepGetWithoutBase64EncodedData = $TicketObject->TicketDeepGet(
     TicketID  => $TicketID,
     ArticleID => $ArticleID,
@@ -175,7 +191,7 @@ $TicketDeepGet{Type} = $TicketDeepGetWithoutBase64EncodedData{Type};
 $Self->IsDeeply(
     \%TicketDeepGet,
     \%TicketDeepGetWithoutBase64EncodedData,
-    'Base-64 encoded fields must be the only changes in %TicketDeepGet.',
+    'Base64-encoded fields must be the only changes in %TicketDeepGet.',
 );
 
 #

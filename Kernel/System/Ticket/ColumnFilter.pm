@@ -20,6 +20,7 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
     'Kernel::System::Main',
     'Kernel::System::User',
+    'Kernel::System::Valid',
 );
 
 =head1 NAME
@@ -97,10 +98,13 @@ sub StateFilterValuesGet {
     # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
+    my $ValidIDs = join ', ', $Kernel::OM->Get('Kernel::System::Valid')->ValidIDsGet();
+
     return if !$DBObject->Prepare(
         SQL => "SELECT DISTINCT(t.ticket_state_id), ts.name"
             . " FROM ticket t, ticket_state ts"
             . " WHERE t.ticket_state_id = ts.id"
+            . " AND ts.valid_id IN ($ValidIDs)"
             . $TicketIDString
             . " ORDER BY t.ticket_state_id DESC",
     );
@@ -164,10 +168,13 @@ sub QueueFilterValuesGet {
     # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
+    my $ValidIDs = join ', ', $Kernel::OM->Get('Kernel::System::Valid')->ValidIDsGet();
+
     return if !$DBObject->Prepare(
         SQL => "SELECT DISTINCT(t.queue_id), q.name"
             . " FROM ticket t, queue q"
             . " WHERE t.queue_id = q.id"
+            . " AND q.valid_id IN ($ValidIDs)"
             . $TicketIDString
             . " ORDER BY t.queue_id DESC",
     );
@@ -229,10 +236,13 @@ sub PriorityFilterValuesGet {
     # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
+    my $ValidIDs = join ', ', $Kernel::OM->Get('Kernel::System::Valid')->ValidIDsGet();
+
     return if !$DBObject->Prepare(
         SQL => "SELECT DISTINCT(t.ticket_priority_id), tp.name"
             . " FROM ticket t, ticket_priority tp"
             . " WHERE t.ticket_priority_id = tp.id"
+            . " AND tp.valid_id IN ($ValidIDs)"
             . $TicketIDString
             . " ORDER BY t.ticket_priority_id DESC",
     );
@@ -293,11 +303,13 @@ sub TypeFilterValuesGet {
 
     # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+    my $ValidIDs = join ', ', $Kernel::OM->Get('Kernel::System::Valid')->ValidIDsGet();
 
     return if !$DBObject->Prepare(
         SQL => "SELECT DISTINCT(t.type_id), tt.name"
             . " FROM ticket t, ticket_type tt"
             . " WHERE t.type_id = tt.id"
+            . " AND tt.valid_id IN ($ValidIDs)"
             . $TicketIDString
             . " ORDER BY t.type_id DESC",
     );
@@ -360,10 +372,13 @@ sub LockFilterValuesGet {
     # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
+    my $ValidIDs = join ', ', $Kernel::OM->Get('Kernel::System::Valid')->ValidIDsGet();
+
     return if !$DBObject->Prepare(
         SQL => "SELECT DISTINCT(t.ticket_lock_id), tlt.name"
             . " FROM ticket t, ticket_lock_type tlt"
             . " WHERE ticket_lock_id = tlt.id"
+            . " AND tlt.valid_id IN ($ValidIDs)"
             . $TicketIDString
             . " ORDER BY t.ticket_lock_id DESC",
     );
@@ -425,10 +440,13 @@ sub ServiceFilterValuesGet {
     # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
+    my $ValidIDs = join ', ', $Kernel::OM->Get('Kernel::System::Valid')->ValidIDsGet();
+
     return if !$DBObject->Prepare(
         SQL => "SELECT DISTINCT(t.service_id), s.name"
             . " FROM ticket t, service s"
             . " WHERE t.service_id = s.id"
+            . " AND s.valid_id IN ($ValidIDs)"
             . $TicketIDString
             . " ORDER BY t.service_id DESC",
     );
@@ -490,10 +508,13 @@ sub SLAFilterValuesGet {
     # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
+    my $ValidIDs = join ', ', $Kernel::OM->Get('Kernel::System::Valid')->ValidIDsGet();
+
     return if !$DBObject->Prepare(
         SQL => "SELECT DISTINCT(t.sla_id), s.name"
             . " FROM ticket t, sla s"
             . " WHERE t.sla_id = s.id"
+            . " AND s.valid_id IN ($ValidIDs)"
             . $TicketIDString
             . " ORDER BY t.sla_id DESC",
     );
@@ -722,6 +743,7 @@ sub OwnerFilterValuesGet {
         for my $UserID (@UserList) {
             my %User = $UserObject->GetUserData(
                 UserID => $UserID,
+                Valid  => 1,
             );
             if (%User) {
                 $Data{$UserID} = $User{UserFullname};
@@ -808,6 +830,7 @@ sub ResponsibleFilterValuesGet {
         for my $UserID (@UserList) {
             my %User = $UserObject->GetUserData(
                 UserID => $UserID,
+                Valid  => 1,
             );
             if (%User) {
                 $Data{$UserID} = $User{UserFullname};

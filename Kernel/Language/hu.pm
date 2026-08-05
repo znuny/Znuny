@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.999680664218426;
+    $Self->{Completeness}        = 0.99602417302799;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -980,6 +980,18 @@ sub Data {
             'A szinkron eseményaktiválók közvetlenül lehetnek feldolgozva a webkérések közben.',
         'Add all attachments' => 'Összes melléklet hozzáadása',
         'Add all attachments to invoker payload.' => 'Összes melléklet hozzáadása a meghívó hasznos adatához.',
+        'Fields to be omitted from payload' => '',
+        'Field' => '',
+        'Remove field' => '',
+        'Add field to be omitted from payload' => '',
+        'Restore omitted fields' => '',
+        'Fields which will be removed from the payload of the request, e.g. \'SomeField1\'. Nested fields can be referenced by connecting them with \'->\', e.g. \'SomeField1->SomeField2->SomeField3\'.' =>
+            '',
+        'Fields to be Base64 encoded in payload' => '',
+        'Add field to be Base64 encoded in payload' => '',
+        'Restore Base64 encoded fields' => '',
+        'Fields which will be Base64 encoded in payload of the request, e.g. \'SomeField1\'. Nested fields can be referenced by connecting them with \'->\', e.g. \'SomeField1->SomeField2->SomeField3\'.' =>
+            '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerEvent.tt
         'GenericInterface Invoker Event Settings for Web Service %s' => 'Általános felület meghívóesemény beállításai a webszolgáltatásnál: %s',
@@ -1405,7 +1417,7 @@ sub Data {
         'You can add favorites by moving your cursor over items on the right side and clicking the star icon.' =>
             'Hozzáadhat kedvenceket, ha a kurzort a jobb oldalon lévő elemek fölé viszi, és a csillag ikonra kattint.',
         'Links' => 'Hivatkozások',
-        'View the admin manual on Github' => 'Az adminisztrátori kézikönyv megtekintése a GitHubon',
+        'View the admin manual' => '',
         'No Matches' => 'Nincs találat',
         'Sorry, your search didn\'t match any items.' => 'Sajnáljuk, a keresése nem illeszkedik egyetlen elemre sem.',
         'Set as favorite' => 'Beállítás kedvencként',
@@ -1528,6 +1540,9 @@ sub Data {
         'Uninstall Package' => 'Csomag eltávolítása',
         'Uninstall package' => 'Csomag eltávolítása',
         'Do you really want to uninstall this package?' => 'Valóban el szeretné távolítani ezt a csomagot?',
+        'Uninstall package and data' => '',
+        'Uninstall package only' => '',
+        'Uninstall' => 'Eltávolítás',
         'Reinstall package' => 'Csomag újratelepítése',
         'Do you really want to reinstall this package? Any manual changes will be lost.' =>
             'Valóban újra szeretné telepíteni ezt a csomagot? Minden kézi változtatás el fog veszni.',
@@ -1574,7 +1589,6 @@ sub Data {
         'Action' => 'Művelet',
         'Module documentation' => 'Modul-dokumentáció',
         'Local Repository' => 'Helyi tároló',
-        'Uninstall' => 'Eltávolítás',
         'Package not correctly deployed! Please reinstall the package.' =>
             'A csomag nincs megfelelően üzembe állítva! Telepítse újra a csomagot.',
         'Reinstall' => 'Újratelepítés',
@@ -2273,7 +2287,8 @@ sub Data {
             'Ha egy érték pirosra van színezve, akkor az hiányzik a dinamikus mező beállításának lehetséges értékei listájából.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
-        'Translation' => 'Fordítás',
+        'Import Translation' => '',
+        'Export Translation' => '',
         'Translation Management' => 'Fordításkezelés',
         'Add Translation' => 'Fordítás hozzáadása',
         'Edit Translation' => 'Fordítás szerkesztése',
@@ -2732,14 +2747,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
         'Resend Email for %s%s%s' => 'E-mail újraküldése ennél: %s%s%s',
-        'All fields marked with an asterisk (*) are mandatory.' => 'A csillaggal (*) megjelölt összes mező kötelező.',
-        'Cancel & close' => 'Megszakítás és bezárás',
-        'Select one or more recipients from the customer user address book.' =>
-            'Egy vagy több címzett kiválasztása az ügyfél-felhasználó címjegyzékből.',
-        'Customer user address book' => 'Ügyfél-felhasználó címjegyzék',
-        'Remove Ticket Customer' => 'Jegy ügyfél eltávolítása',
-        'Remove Cc' => 'Másolat eltávolítása',
-        'Remove Bcc' => 'Rejtett másolat eltávolítása',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEscalation.tt
         'Ticket %s: first response time is over (%s %s)!' => '%s jegy: az első válaszidő lejárt (%s %s)!',
@@ -2981,14 +2988,18 @@ sub Data {
         'User name' => 'Felhasználónév',
         'Your user name' => 'A felhasználóneve',
         'Your password' => 'A jelszava',
-        'Forgot password?' => 'Elfelejtette a jelszót?',
+        'Lost your password?' => 'Elfelejtette a jelszavát?',
         '2 Factor Token' => 'Kétlépcsős token',
         'Your 2 Factor Token' => 'Az Ön kétlépcsős tokenje',
         'Log In' => 'Bejelentkezés',
         'Request New Password' => 'Új jelszó kérése',
         'Your User Name' => 'A felhasználóneve',
-        'A new password will be sent to your email address.' => 'Az új jelszó el lesz küldve az e-mail-címére.',
+        'A link to set a new password will be sent to your email address.' =>
+            'Egy link az új jelszó beállításához el lesz küldve az e-mail-címére.',
         'Back to login' => 'Vissza a bejelentkezéshez',
+        'Set New Password' => 'Új jelszó beállítása',
+        'New password' => 'Új jelszó',
+        'Confirm password' => 'Jelszó megerősítése',
         'Create Account' => 'Fiók létrehozása',
         'Please fill out this form to receive login credentials.' => 'Töltse ki ezt az űrlapot a bejelentkezési adatok fogadásához.',
         'How we should address you' => 'Hogyan szólítsuk meg',
@@ -3194,9 +3205,6 @@ sub Data {
         'Object#' => 'Objektum#',
         'Add links' => 'Kapcsolatok hozzáadása',
         'Delete links' => 'Kapcsolatok törlése',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
-        'Lost your password?' => 'Elfelejtette a jelszavát?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => 'Előnézet tartalmának méretezése',
@@ -4220,6 +4228,15 @@ sub Data {
         'Change Attachment Relations for Template' => 'Mellékletkapcsolatok megváltoztatása egy sablonnál',
         'Change Template Relations for Attachment' => 'Sablonkapcsolatok megváltoztatása egy mellékletnél',
 
+        # Perl Module: Kernel/Modules/AdminTranslation.pm
+        'Import / Export' => '',
+        'Here you can upload a configuration file to import translations to your system. The file needs to be in .yml | .csv | .xlsx format.' =>
+            '',
+        'Could not find translation for ID %s.' => '',
+        'Translation stored.' => '',
+        'Storing translation failed.' => '',
+        'Translations synchronized.' => '',
+
         # Perl Module: Kernel/Modules/AdminType.pm
         'Need Type!' => 'Típus szükséges!',
         'Type added!' => 'Típus hozzáadva!',
@@ -4378,6 +4395,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
         'No ArticleID is given!' => 'Nincs bejegyzés-azonosító megadva!',
+        'Resend is not possible for this article!' => 'Ennek a bejegyzésnek az újraküldése nem lehetséges!',
 
         # Perl Module: Kernel/Modules/AgentTicketEscalationView.pm
         'Next week' => 'Következő hét',
@@ -4875,7 +4893,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Preferences/Password.pm
         'Current password' => 'Jelenlegi jelszó',
-        'New password' => 'Új jelszó',
         'Verify password' => 'Jelszó ellenőrzése',
         'The current password is not correct. Please try again!' => 'A jelenlegi jelszó nem helyes. Próbálja újra.',
         'Please supply your new password!' => 'Adja meg az új jelszavát!',
@@ -5556,9 +5573,17 @@ sub Data {
         'Can`t remove SessionID.' => 'Nem lehet eltávolítani a munkamenet-azonosítót.',
         'Logout successful.' => 'Sikeres kilépés.',
         'Feature not active!' => 'A funkció nem aktív!',
+        'Your password reset link is invalid or has expired. Please request a new one.' =>
+            'A jelszó-visszaállítási hivatkozás érvénytelen vagy lejárt. Kérjen újat.',
         'Sent password reset instructions. Please check your email.' => 'A jelszó visszaállítási utasítások elküldve. Nézze meg a leveleit.',
-        'Invalid Token!' => 'Érvénytelen token!',
-        'Sent new password to %s. Please check your email.' => 'Az új jelszó elküldve erre a címre: %s. Nézze meg a leveleit.',
+        'Passwords do not match!' => 'A jelszavak nem egyeznek!',
+        'Password does not match the requirements!' => 'A jelszó nem felel meg a követelményeknek!',
+        'Password must be at least %s characters long!' => 'A jelszónak legalább %s karakter hosszúnak kell lennie!',
+        'Password must contain at least 2 lowercase and 2 uppercase letter characters!' =>
+            'A jelszónak legalább 2 kisbetűt és 2 nagybetűt kell tartalmaznia!',
+        'Password must contain at least 1 digit!' => 'A jelszónak legalább 1 számjegyet kell tartalmaznia!',
+        'Password must contain at least 2 letter characters!' => 'A jelszónak legalább 2 betűt kell tartalmaznia!',
+        'Password changed. Please log in with your new password.' => 'A jelszó megváltozott. Jelentkezzen be az új jelszavával.',
         'Error: invalid session.' => 'Hiba: érvénytelen munkamenet.',
         'No Permission to use this frontend module!' => 'Nincs jogosultsága ezen előtétprogram-modul használatához!',
 
@@ -5745,8 +5770,8 @@ sub Data {
             'Meghatározza az összes olyan nyelvet, amelyek elérhetők az alkalmazásnak. A nyelveknek csak az angol neveit adja meg itt.',
         'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
             'Meghatározza az összes olyan nyelvet, amelyek elérhetők az alkalmazásnak. A nyelveknek csak az eredeti neveit adja meg itt.',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.' =>
-            'Meghatározza az ügyintézők és az ügyfelek által használt alapértelmezett előtétprogram (HTML) témáját. Ha szeretné, hozzáadhatja a saját témáját. Nézze meg a https://doc.znuny.org/manual/developer/ címen elérhető adminisztrátori kézikönyvet.',
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html.' =>
+            'Meghatározza az ügyintézők és az ügyfelek által használt alapértelmezett előtétprogram (HTML) témáját. Ha szeretné, hozzáadhatja a saját témáját. Nézze meg a https://doc.znuny.org/developer/general_information/themes.html címen elérhető adminisztrátori kézikönyvet.',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             'Lehetséges különféle témák beállítása, például különbséget lehet tenni az alkalmazáson belül ügyintézők és ügyfelek között tartományonkénti alapon használva. Egy reguláris kifejezés (regex) használatával beállíthat egy tartományra illeszkedő Kulcs/Tartalom párt. A „Kulcsban” lévő értéknek kell illeszkednie a tartományra, és a „Tartalomban” lévő értéknek a rendszeren lévő érvényes témának kell lennie. Nézze meg a példabejegyzéseket a reguláris kifejezés megfelelő formájáért.',
         'The headline shown in the customer interface.' => 'Az ügyfélfelületen megjelenített főcím.',
@@ -6071,14 +6096,20 @@ sub Data {
             'Azt a nevet adja meg, amelyet az alkalmazás az értesítések elküldésekor használjon. A küldő neve a teljes megjelenítési név összeállításához lesz használva az értesítési mesternél (azaz "Znuny értesítések" <znuny@your.example.com>).',
         'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
             'Azt az e-mail-címet adja meg, amelyet az alkalmazás az értesítések elküldésekor használjon. Az e-mail-cím a teljes megjelenítési név összeállításához lesz használva az értesítési mesternél (azaz "Znuny értesítések" <znuny@your.example.com>). Használhatja az OTRS_CONFIG_FQDN változót, ahogy a konfigurációban be van állítva, vagy válasszon egy másik e-mail-címet.',
+        'Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).' =>
+            'Meghatározza a jelszó-visszaállítási tokenek érvényességi idejét másodpercben. Ezután a token lejár és új kérés szükséges. Alapértelmezett: 3600 (1 óra).',
+        'Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.' =>
+            'A jelszó-visszaállítási kérések maximális száma IP-címenként vagy felhasználónévenként a rate limiting ablakban. 0 érték kikapcsolja. Alapértelmezett: 5.',
+        'Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes).' =>
+            'Időablak másodpercben a jelszó-visszaállítás rate limitingjéhez. Az ablakon belüli kísérletek a maximumhoz számítódnak. Alapértelmezett: 600 (10 perc).',
         'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
             'Meghatározza a kért új jelszóval kapcsolatosan a tokennel rendelkező ügyintézőknek küldött értesítési levelek tárgyát.',
         'Defines the body text for notification mails sent to agents, with token about new requested password.' =>
             'Meghatározza a kért új jelszóval kapcsolatosan a tokennel rendelkező ügyintézőknek küldött értesítési levelek törzsének szövegét.',
-        'Defines the subject for notification mails sent to agents, about new password.' =>
-            'Meghatározza az új jelszóval kapcsolatosan az ügyintézőknek küldött értesítési levelek tárgyát.',
-        'Defines the body text for notification mails sent to agents, about new password.' =>
-            'Meghatározza az új jelszóval kapcsolatosan az ügyintézőknek küldött értesítési levelek törzsének szövegét.',
+        'Defines the subject for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Meghatározza az ügynököknek küldött értesítő e-mailek tárgyát, amelyek megerősítik a jelszó visszaállítását.',
+        'Defines the body text for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Meghatározza az ügynököknek küldött értesítő e-mailek szövegét, amelyek megerősítik a jelszó visszaállítását.',
         'Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that "rw" is always the last registered permission.' =>
             'Szabványos elérhető jogosultságok az alkalmazáson belüli ügyintézőknél. Ha több jogosultság szükséges, akkor azok itt adhatók meg. A jogosultságokat meg kell határozni, hogy hatályban lévők legyenek. Néhány egyéb jó jogosultság beépítetten is biztosítva van: jegyzet, lezárás, függőben, ügyfél, szabad szöveg, áthelyezés, válasz írása, felelős, továbbítás és átirányítás. Győződjön meg arról, hogy az „rw” mindig az utolsó regisztrált jogosultság legyen.',
         'Defines the standard permissions available for customers within the application. If more permissions are needed, you can enter them here. Permissions must be hard coded to be effective. Please ensure, when adding any of the afore mentioned permissions, that the "rw" permission remains the last entry.' =>
@@ -6154,10 +6185,10 @@ sub Data {
             'Meghatározza a kért új jelszóval kapcsolatosan a tokennel rendelkező ügyfeleknek küldött értesítési levelek tárgyát.',
         'Defines the body text for notification mails sent to customers, with token about new requested password.' =>
             'Meghatározza a kért új jelszóval kapcsolatosan a tokennel rendelkező ügyfeleknek küldött értesítési levelek törzsének szövegét.',
-        'Defines the subject for notification mails sent to customers, about new password.' =>
-            'Meghatározza az új jelszóval kapcsolatosan az ügyfeleknek küldött értesítési levelek tárgyát.',
-        'Defines the body text for notification mails sent to customers, about new password.' =>
-            'Meghatározza az új jelszóval kapcsolatosan az ügyfeleknek küldött értesítési levelek törzsének szövegét.',
+        'Defines the subject for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Meghatározza az ügyfeleknek küldött értesítő e-mailek tárgyát, amelyek megerősítik a jelszó visszaállítását.',
+        'Defines the body text for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Meghatározza az ügyfeleknek küldött értesítő e-mailek szövegét, amelyek megerősítik a jelszó visszaállítását.',
         'Defines the subject for notification mails sent to customers, about new account.' =>
             'Meghatározza az új fiókkal kapcsolatosan az ügyfeleknek küldött értesítési levelek tárgyát.',
         'Defines the body text for notification mails sent to customers, about new account.' =>
@@ -7815,8 +7846,8 @@ sub Data {
             'Az ügyfélfelület jegykeresési áttekintő eredmények képernyőjén megjelenített dinamikus mezők.',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             'Eseménymodul regisztráció. A jobb teljesítményért meghatározhat egy aktiváló eseményt (például Event =&gt; TicketCreate). Ez csak akkor lehetséges, ha minden jegy dinamikus mező ugyanazt az eseményt igényli.',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
-            'Beállítja az alapértelmezett jegy dinamikus mező beállítást. A „Name” a használandó dinamikus mezőt, a „Value” a beállítandó adatokat, illetve az „Event” az aktiváló eseményt határozza meg. Nézze meg a fejlesztői kézikönyv (https://doc.znuny.org/manual/developer/) „Jegyesemény modul” fejezetét.',
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event.' =>
+            'Beállítja az alapértelmezett jegy dinamikus mező beállítást. A „Name” a használandó dinamikus mezőt, a „Value” a beállítandó adatokat, illetve az „Event” az aktiváló eseményt határozza meg.',
         'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
             'Meghatározza az alapértelmezett keresési szűrőt a jegyegyesítés képernyőhöz. Ez a szűrő az egyesítendő jegyek keresésekor kerül alkalmazásra. A „StateType” szűrő meghatározott állapotú (új, nyitott, lezárt, emlékeztető függőben, automatikusan függőben) jegyekre korlátozza a keresést. További szűrők dinamikusan adhatók hozzá.',
         'Defines the list of types for templates.' => 'Meghatározza a típusok listáját a sablonokhoz.',
@@ -7874,10 +7905,10 @@ sub Data {
             'Azok a képernyők, amelyeknél lehetőség van alapértelmezett oszlopok engedélyezésére vagy letiltására.',
         'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
             'Engedélyezi a korábbi értékek kiválasztását az alapválasztás (legördülő és többválasztós) alapú dinamikus mező típusokban. Tiltsa le ezt, ha túl sok különböző tárolt érték miatt teljesítményproblémák lépnek fel.',
-        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
-            'A Ticket::Generic meghívó nevének (kulcs) leképezése a mezők (tartalom) listájára, amelyek értékei Base64 kódolásúak lesznek. A mezőket a következő formában kell megadni: Mező1->Mező2;Mező3->Mező4->Mező5;Mező6. Így egy beágyazott adatstruktúra a mezők „->” jelöléssel történő összekapcsolásával adható meg. A különböző mezők tartalmát a mezők „;” karakterrel való elválasztásával lehet megadni.',
-        'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
-            'A Ticket::Generic meghívó nevének (kulcs) leképezése a mezők (tartalom) listájára, amelyek eltávolításra kerülnek a kérésből. A mezőket a következő formában kell megadni: Mező1->Mező2;Mező3->Mező4->Mező5;Mező6. Így egy beágyazott adatstruktúra a mezők „->” jelöléssel történő összekapcsolásával adható meg. A különböző mezőket „;” karakterrel elválasztva lehet kihagyni.',
+        'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
+            '',
+        'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
+            '',
         'Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic.' =>
             'Párhuzamosan futtatott példányok legnagyobb száma az OTRS_AsynchronousInvokerExecution használatakor a Ticket::Generic meghívóban.',
         'Enables support for huge XML data in load_xml calls of CPAN library XML::LibXML. This should only be enabled if absolutely needed. Disabling this option (default) protects against denial of service through entity expansion attacks. Before enabling this option ensure that alternative measures to protect the application against this type of attack have been taken.' =>
@@ -8564,6 +8595,7 @@ sub Data {
             'Ennek az elemnek gyermekelemei vannak, és jelenleg nem lehet eltávolítani.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.TicketAction.js
+        'Customer user address book' => 'Ügyfél-felhasználó címjegyzék',
         'Select a customer ID to assign to this ticket' => 'Ügyfél-azonosító kiválasztása, hogy hozzárendelje ehhez a jegyhez',
         'Do you really want to continue?' => 'Valóban folytatni akarja?',
 
@@ -9394,6 +9426,7 @@ Az Ön ügyfélszolgálati csapata
         'To accept login information, such as an EULA or license.' => 'Bejelentkezési információk elfogadásához, mint például EULA vagy licenc.',
         'To download attachments.' => 'Mellékletek letöltéséhez.',
         'To view HTML attachments.' => 'HTML mellékletek megtekintéséhez.',
+        'Translation' => 'Fordítás',
         'Tree view' => 'Fa nézet',
         'Turkish' => 'Török',
         'Tweak the system as you wish.' => 'A rendszer finomhangolása, ahogy szeretné.',
