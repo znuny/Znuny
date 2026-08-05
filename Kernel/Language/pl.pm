@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.632627051139079;
+    $Self->{Completeness}        = 0.633587786259542;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2987,14 +2987,18 @@ sub Data {
         'User name' => 'Nazwa użytkownika',
         'Your user name' => 'Twoja nazwa użytkownika',
         'Your password' => 'Twoje hasło',
-        'Forgot password?' => 'Zapomniane hasło?',
+        'Lost your password?' => 'Zapomniałeś hasła?',
         '2 Factor Token' => 'Token weryfikacji dwuetapowej',
         'Your 2 Factor Token' => 'Twój token weryfikacji dwuetapowej',
         'Log In' => 'Zaloguj się',
         'Request New Password' => 'Prośba o nowe hasło',
         'Your User Name' => 'Nazwa użytkownika',
-        'A new password will be sent to your email address.' => 'Nowe hasło będzie wysłane na twój adres e-mail',
+        'A link to set a new password will be sent to your email address.' =>
+            'Link do ustawienia nowego hasła zostanie wysłany na twój adres e-mail.',
         'Back to login' => 'Powrót do logowania',
+        'Set New Password' => 'Ustaw nowe hasło',
+        'New password' => 'Nowe hasło',
+        'Confirm password' => 'Potwierdź hasło',
         'Create Account' => 'Utwórz konto',
         'Please fill out this form to receive login credentials.' => 'Wypełnij ten formularz aby otrzymać dane logowania.',
         'How we should address you' => 'Jak powinniśmy cię tytułować',
@@ -3200,9 +3204,6 @@ sub Data {
         'Object#' => 'Obiekt#',
         'Add links' => 'Dodaj odnośniki',
         'Delete links' => 'Usuń odnośniki',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
-        'Lost your password?' => 'Zapomniałeś hasła?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => 'Skaluj podgląd',
@@ -4393,6 +4394,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
         'No ArticleID is given!' => '',
+        'Resend is not possible for this article!' => 'Ponowne wysłanie tego artykułu nie jest możliwe!',
 
         # Perl Module: Kernel/Modules/AgentTicketEscalationView.pm
         'Next week' => 'Następny tydzień',
@@ -4890,7 +4892,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Preferences/Password.pm
         'Current password' => 'Aktualne hasło',
-        'New password' => 'Nowe hasło',
         'Verify password' => 'Powtórz hasło',
         'The current password is not correct. Please try again!' => 'Aktualne hasło jest niepoprawne. Spróbuj jeszcze raz!',
         'Please supply your new password!' => '',
@@ -5571,9 +5572,17 @@ sub Data {
         'Can`t remove SessionID.' => '',
         'Logout successful.' => 'Wylogowanie zakończone pomyślnie.',
         'Feature not active!' => 'Funkcja nieaktywna!',
+        'Your password reset link is invalid or has expired. Please request a new one.' =>
+            'Twój link do resetowania hasła jest nieprawidłowy lub wygasł. Poproś o nowy.',
         'Sent password reset instructions. Please check your email.' => 'Instrukcje dotyczące resetowania hasła zostały wysłane. Prosimy o sprawdzenie swojej skrzynki pocztowej.',
-        'Invalid Token!' => 'Błędny token!',
-        'Sent new password to %s. Please check your email.' => 'Nowe hasło wysłane na adres %s. Prosimy o sprawdzenie swojej skrzynki pocztowej.',
+        'Passwords do not match!' => 'Hasła nie zgadzają się!',
+        'Password does not match the requirements!' => 'Hasło nie spełnia wymagań!',
+        'Password must be at least %s characters long!' => 'Hasło musi mieć co najmniej %s znaków!',
+        'Password must contain at least 2 lowercase and 2 uppercase letter characters!' =>
+            'Hasło musi zawierać co najmniej 2 małe i 2 wielkie litery!',
+        'Password must contain at least 1 digit!' => 'Hasło musi zawierać co najmniej 1 cyfrę!',
+        'Password must contain at least 2 letter characters!' => 'Hasło musi zawierać co najmniej 2 litery!',
+        'Password changed. Please log in with your new password.' => 'Hasło zostało zmienione. Zaloguj się nowym hasłem.',
         'Error: invalid session.' => 'Błąd: nie prawidłowa sesja.',
         'No Permission to use this frontend module!' => 'Brak uprawnień do użycia tego modułu!',
 
@@ -5760,7 +5769,7 @@ sub Data {
             '',
         'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
             '',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.' =>
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html.' =>
             '',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             '',
@@ -6086,14 +6095,20 @@ sub Data {
             '',
         'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
             '',
+        'Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).' =>
+            'Określa okres ważności w sekundach tokenów resetowania hasła. Po tym czasie token wygasa i wymagane jest nowe żądanie. Domyślnie: 3600 (1 godzina).',
+        'Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.' =>
+            'Maksymalna liczba żądań resetowania hasła na adres IP lub nazwę użytkownika w oknie rate limiting. Ustaw 0, aby wyłączyć rate limiting. Domyślnie: 5.',
+        'Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes).' =>
+            'Okno czasowe w sekundach dla rate limiting resetowania hasła. Próby w tym oknie są liczone względem maksimum. Domyślnie: 600 (10 minut).',
         'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
             'Definiuje temat dla powiadomień mailowych wysłanych do agentów z tokenem o nowo utworzonym haśle.',
         'Defines the body text for notification mails sent to agents, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to agents, about new password.' =>
-            'Definiuje temat dla powiadomień mailowych wysłanych do agentów o nowym haśle.',
-        'Defines the body text for notification mails sent to agents, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Określa temat wiadomości e-mail z powiadomieniem wysyłanych do agentów potwierdzających reset hasła.',
+        'Defines the body text for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Określa treść wiadomości e-mail z powiadomieniem wysyłanych do agentów potwierdzających reset hasła.',
         'Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that "rw" is always the last registered permission.' =>
             '',
         'Defines the standard permissions available for customers within the application. If more permissions are needed, you can enter them here. Permissions must be hard coded to be effective. Please ensure, when adding any of the afore mentioned permissions, that the "rw" permission remains the last entry.' =>
@@ -6169,10 +6184,10 @@ sub Data {
             'Definiuje temat dla powiadomień mailowych wysłanych do klientów z tokenem o nowo utworzonym haśle.',
         'Defines the body text for notification mails sent to customers, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to customers, about new password.' =>
-            'Definiuje temat dla powiadomień mailowych wysłanych do o nowym haśle.',
-        'Defines the body text for notification mails sent to customers, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Określa temat wiadomości e-mail z powiadomieniem wysyłanych do klientów potwierdzających reset hasła.',
+        'Defines the body text for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Określa treść wiadomości e-mail z powiadomieniem wysyłanych do klientów potwierdzających reset hasła.',
         'Defines the subject for notification mails sent to customers, about new account.' =>
             'Definiuje temat dla powiadomień mailowych wysłanych do klientów o nowym koncie.',
         'Defines the body text for notification mails sent to customers, about new account.' =>
@@ -7830,7 +7845,7 @@ sub Data {
             '',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             '',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event.' =>
             '',
         'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
             '',

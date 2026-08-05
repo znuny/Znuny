@@ -24,6 +24,7 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Cache',
     'Kernel::System::Log',
+    'Kernel::System::Util',
 );
 
 our $SuppressANSI = 0;
@@ -161,12 +162,17 @@ sub Execute {
 
     $Self->{ParsedGlobalOptions} = $Self->_ParseGlobalOptions( \@CommandlineArguments );
 
-    # Don't allow to run these scripts as root.
-    if ( !$Self->{ParsedGlobalOptions}->{'allow-root'} && $> == 0 ) {    # $EFFECTIVE_USER_ID
+    # Don't allow to run these scripts as another user than the application user.
+    my $ApplicationUser = $Kernel::OM->Get('Kernel::System::Util')->ApplicationUserGet();
+    my $CurrentUser     = getpwuid($>) || $>;                                               ## no critic
+    if ( !$Self->{ParsedGlobalOptions}->{'allow-root'} && $CurrentUser ne $ApplicationUser ) {
+
         $Self->PrintError(
-            "You cannot run znuny.Console.pl as root. Please run it as the 'znuny' user or with the help of su:"
+            "You cannot run znuny.Console.pl as user $CurrentUser. Please run it as user $ApplicationUser or with the help of su:"
         );
-        $Self->Print("  <yellow>su -c \"bin/znuny.Console.pl MyCommand\" -s /bin/bash otrs</yellow>\n");
+        $Self->Print(
+            qq{  <yellow>su -c "bin/znuny.Console.pl MyCommand" -s /bin/bash $ApplicationUser</yellow>\n}
+        );
         return $Self->ExitCodeError();
     }
 

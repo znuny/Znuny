@@ -9134,7 +9134,7 @@ msgstr "लिंक जोड़ें"
 msgid "Delete links"
 msgstr "लिंक हटाएँ"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Lost your password?"
 msgstr " आपने कूटशब्द खो दिया?"
 
@@ -13250,7 +13250,7 @@ msgstr ""
 msgid "Current password"
 msgstr "वर्तमान कूटशब्द"
 
-#. Perl Module: Kernel/Output/HTML/Preferences/Password.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "New password"
 msgstr "नया कूटशब्द"
 
@@ -15167,7 +15167,7 @@ msgid "Defines all the languages that are available to the application. Specify 
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/."
+msgid "Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -19535,7 +19535,7 @@ msgid "Event module registration. For more performance you can define a trigger 
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Configures a default TicketDynamicField setting. \"Name\" defines the dynamic field which should be used, \"Value\" is the data that will be set, and \"Event\" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter \"Ticket Event Module\"."
+msgid "Configures a default TicketDynamicField setting. \"Name\" defines the dynamic field which should be used, \"Value\" is the data that will be set, and \"Event\" defines the trigger event."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
@@ -25432,4 +25432,80 @@ msgstr ""
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
 msgid "View the admin manual"
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
+msgid "Set New Password"
+msgstr "नया कूटशब्द सेट करें"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
+msgid "Confirm password"
+msgstr "कूटशब्द की पुष्टि करें"
+
+#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
+msgid "Your password reset link is invalid or has expired. Please request a new one."
+msgstr "आपका कूटशब्द रीसेट लिंक अमान्य है या समाप्त हो गया है। कृपया एक नया अनुरोध करें।"
+
+#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
+msgid "Passwords do not match!"
+msgstr "कूटशब्द मेल नहीं खाते!"
+
+#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
+msgid "Password does not match the requirements!"
+msgstr "कूटशब्द आवश्यकताओं को पूरा नहीं करता!"
+
+#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
+msgid "Password must be at least %s characters long!"
+msgstr "कूटशब्द कम से कम %s अक्षरों का होना चाहिए!"
+
+#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
+msgid "Password must contain at least 2 lowercase and 2 uppercase letter characters!"
+msgstr "कूटशब्द में कम से कम 2 लोअरकेस और 2 अपरकेस अक्षर होने चाहिए!"
+
+#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
+msgid "Password must contain at least 1 digit!"
+msgstr "कूटशब्द में कम से कम 1 अंक होना चाहिए!"
+
+#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
+msgid "Password must contain at least 2 letter characters!"
+msgstr "कूटशब्द में कम से कम 2 अक्षर होने चाहिए!"
+
+#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
+msgid "Password changed. Please log in with your new password."
+msgstr "कूटशब्द बदल दिया गया। कृपया अपने नए कूटशब्द से लॉग इन करें।"
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour)."
+msgstr "कूटशब्द रीसेट टोकन के लिए वैधता अवधि (सेकंड में) परिभाषित करता है। इसके बाद टोकन समाप्त हो जाता है और नया अनुरोध आवश्यक है। डिफ़ॉल्ट: 3600 (1 घंटा)।"
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5."
+msgstr "प्रति IP पता या उपयोगकर्ता नाम rate limiting विंडो के भीतर अनुमत कूटशब्द रीसेट अनुरोधों की अधिकतम संख्या। 0 से rate limiting अक्षम करें। डिफ़ॉल्ट: 5।"
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes)."
+msgstr "कूटशब्द रीसेट rate limiting के लिए समय विंडो (सेकंड में)। इस विंडो के भीतर के प्रयास अधिकतम के विरुद्ध गिने जाते हैं। डिफ़ॉल्ट: 600 (10 मिनट)।"
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the subject for notification mails sent to agents, confirming that the password has been reset."
+msgstr "एजेंटों को भेजे गए सूचना ईमेल का विषय परिभाषित करता है जो कूटशब्द रीसेट की पुष्टि करते हैं।"
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the body text for notification mails sent to agents, confirming that the password has been reset."
+msgstr "एजेंटों को भेजे गए सूचना ईमेल का मुख्य पाठ परिभाषित करता है जो कूटशब्द रीसेट की पुष्टि करते हैं।"
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the subject for notification mails sent to customers, confirming that the password has been reset."
+msgstr "ग्राहकों को भेजे गए सूचना ईमेल का विषय परिभाषित करता है जो कूटशब्द रीसेट की पुष्टि करते हैं।"
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the body text for notification mails sent to customers, confirming that the password has been reset."
+msgstr "ग्राहकों को भेजे गए सूचना ईमेल का मुख्य पाठ परिभाषित करता है जो कूटशब्द रीसेट की पुष्टि करते हैं।"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
+msgid "A link to set a new password will be sent to your email address."
+msgstr "एक नया कूटशब्द सेट करने के लिए लिंक आपके ईमेल पते पर भेजा जाएगा।"
+
+#. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
+msgid "Resend is not possible for this article!"
+msgstr "इस लेख के लिए पुनः भेजना संभव नहीं है!"
 

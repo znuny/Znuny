@@ -383,6 +383,10 @@ handheld {
         font-weight: var(--normal);
     }
 
+    .ui-datepicker.ui-widget-content {
+        width: auto;
+    }
+
     .ui-datepicker td {
         padding: 0;
     }

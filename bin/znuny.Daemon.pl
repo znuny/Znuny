@@ -58,16 +58,18 @@ local $Kernel::OM = Kernel::System::ObjectManager->new(
     },
 );
 
-# Don't allow to run these scripts as root.
-if ( $> == 0 ) {    # $EFFECTIVE_USER_ID
+# get config object
+my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+my $ApplicationUser = $Kernel::OM->Get('Kernel::System::Util')->ApplicationUserGet();
+my $CurrentUser     = getpwuid($>) || $>;                                               ## no critic
+
+# Don't allow to run these scripts as another user than the application user.
+if ( $CurrentUser ne $ApplicationUser ) {
     print STDERR
-        "Error: You cannot run znuny.Daemon.pl as root. Please run it as the 'znuny' user or with the help of su:\n";
-    print STDERR "  su -c \"bin/znuny.Daemon.pl ...\" -s /bin/bash znuny\n";
+        "Error: You cannot run znuny.Daemon.pl as user $CurrentUser. Please run it as user $ApplicationUser or with the help of su:\n";
+    print STDERR "  su -c \"bin/znuny.Daemon.pl ...\" -s /bin/bash $ApplicationUser\n";
     exit 1;
 }
-
-# get config object
-my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
 # get the NodeID from the SysConfig settings, this is used on High Availability systems.
 my $NodeID = $ConfigObject->Get('NodeID') || 1;

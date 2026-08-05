@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.184960968615581;
+    $Self->{Completeness}        = 0.187022900763359;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2983,14 +2983,18 @@ sub Data {
         'User name' => 'Naudotojo vardas',
         'Your user name' => 'Jūsų naudotojo vardas',
         'Your password' => 'Jūsų slaptažodis',
-        'Forgot password?' => 'Pamiršote slaptažodį?',
+        'Lost your password?' => 'Pamiršote slaptažodį?',
         '2 Factor Token' => '',
         'Your 2 Factor Token' => '',
         'Log In' => 'Prisijungti',
         'Request New Password' => 'Prašyti naujo slaptažodžio',
         'Your User Name' => 'Jūsų Naudotojo Vardas',
-        'A new password will be sent to your email address.' => 'Naujas slaptažodis bus nusiųstas į Jūsų pašto dėžutę.',
+        'A link to set a new password will be sent to your email address.' =>
+            'Nuoroda naujam slaptažodžiui nustatyti bus nusiųsta į Jūsų el. pašto dėžutę.',
         'Back to login' => 'Grįžti prie prisijungimo',
+        'Set New Password' => 'Nustatyti naują slaptažodį',
+        'New password' => 'Naujas slaptažodis',
+        'Confirm password' => 'Patvirtinti slaptažodį',
         'Create Account' => 'Sukurti paskyrą',
         'Please fill out this form to receive login credentials.' => '',
         'How we should address you' => 'Kaip turėtume į Jus kreiptis',
@@ -3196,9 +3200,6 @@ sub Data {
         'Object#' => 'Objekto numeris',
         'Add links' => 'Pridėti nuorodas',
         'Delete links' => 'Ištrinti nuorodas',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
-        'Lost your password?' => 'Pamiršote slaptažodį?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -4389,6 +4390,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
         'No ArticleID is given!' => '',
+        'Resend is not possible for this article!' => 'Pakartotinis šio straipsnio siuntimas negalimas!',
 
         # Perl Module: Kernel/Modules/AgentTicketEscalationView.pm
         'Next week' => 'Sekančią savaitę',
@@ -4886,7 +4888,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Preferences/Password.pm
         'Current password' => '',
-        'New password' => 'Naujas slaptažodis',
         'Verify password' => 'Patikrinti slaptažodį',
         'The current password is not correct. Please try again!' => 'Dabartinis slaptažodis įvestas neteisingai. Bandykite iš naujo!',
         'Please supply your new password!' => '',
@@ -5567,9 +5568,17 @@ sub Data {
         'Can`t remove SessionID.' => '',
         'Logout successful.' => '',
         'Feature not active!' => 'Funkcija/ypatybė neaktyvuota!',
+        'Your password reset link is invalid or has expired. Please request a new one.' =>
+            'Jūsų slaptažodžio atkūrimo nuoroda netinkama arba pasibaigė. Prašykite naujos.',
         'Sent password reset instructions. Please check your email.' => 'Slaptažodžio atstatymo instrukcijos išsiųstos. Prašome pasitikrinti savo el. paštą.',
-        'Invalid Token!' => 'Negalimas triktis!',
-        'Sent new password to %s. Please check your email.' => 'Naujas slaptažodis išsiųstas į %s. Prašome pasitikrinti savo el. paštą.',
+        'Passwords do not match!' => 'Slaptažodžiai nesutampa!',
+        'Password does not match the requirements!' => 'Slaptažodis neatitinka reikalavimų!',
+        'Password must be at least %s characters long!' => 'Slaptažodis turi būti bent %s simbolių ilgio!',
+        'Password must contain at least 2 lowercase and 2 uppercase letter characters!' =>
+            'Slaptažodis turi turėti bent 2 mažąsias ir 2 didžiąsias raides!',
+        'Password must contain at least 1 digit!' => 'Slaptažodis turi turėti bent 1 skaitmenį!',
+        'Password must contain at least 2 letter characters!' => 'Slaptažodis turi turėti bent 2 raides!',
+        'Password changed. Please log in with your new password.' => 'Slaptažodis pakeistas. Prisijunkite su nauju slaptažodžiu.',
         'Error: invalid session.' => '',
         'No Permission to use this frontend module!' => '',
 
@@ -5756,7 +5765,7 @@ sub Data {
             '',
         'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
             '',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.' =>
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html.' =>
             '',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             '',
@@ -6082,14 +6091,20 @@ sub Data {
             '',
         'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
             '',
+        'Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).' =>
+            'Nustato slaptažodžio atkūrimo žetonų galiojimo laiką sekundėmis. Po to žetonas nebegalioja ir reikalinga nauja užklausa. Numatyta: 3600 (1 val.).',
+        'Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.' =>
+            'Didžiausias slaptažodžio atkūrimo užklausų skaičius IP adresui ar vartotojo vardui rate limiting lange. 0 išjungia rate limiting. Numatyta: 5.',
+        'Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes).' =>
+            'Laiko langas sekundėmis slaptažodžio atkūrimo rate limiting. Bandymai šiame lange skaičiuojami pagal maksimumą. Numatyta: 600 (10 min.).',
         'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
             '',
         'Defines the body text for notification mails sent to agents, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to agents, about new password.' =>
-            '',
-        'Defines the body text for notification mails sent to agents, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Nustato pranešimų el. laiškų temą agentams, patvirtinantiems slaptažodžio atkūrimą.',
+        'Defines the body text for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Nustato pranešimų el. laiškų tekstą agentams, patvirtinantiems slaptažodžio atkūrimą.',
         'Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that "rw" is always the last registered permission.' =>
             '',
         'Defines the standard permissions available for customers within the application. If more permissions are needed, you can enter them here. Permissions must be hard coded to be effective. Please ensure, when adding any of the afore mentioned permissions, that the "rw" permission remains the last entry.' =>
@@ -6165,10 +6180,10 @@ sub Data {
             '',
         'Defines the body text for notification mails sent to customers, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to customers, about new password.' =>
-            '',
-        'Defines the body text for notification mails sent to customers, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Nustato pranešimų el. laiškų temą klientams, patvirtinantiems slaptažodžio atkūrimą.',
+        'Defines the body text for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Nustato pranešimų el. laiškų tekstą klientams, patvirtinantiems slaptažodžio atkūrimą.',
         'Defines the subject for notification mails sent to customers, about new account.' =>
             '',
         'Defines the body text for notification mails sent to customers, about new account.' =>
@@ -7826,7 +7841,7 @@ sub Data {
             '',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             '',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event.' =>
             '',
         'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
             '',

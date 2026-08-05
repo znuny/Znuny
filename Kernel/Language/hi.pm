@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.248207742552175;
+    $Self->{Completeness}        = 0.24984096692112;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2985,14 +2985,18 @@ sub Data {
         'User name' => 'उपयोगकर्ता का नाम',
         'Your user name' => 'आपका उपयोगकर्ता नाम',
         'Your password' => 'आपका कूटशब्द',
-        'Forgot password?' => 'कूटशब्द भूल गए?',
+        'Lost your password?' => ' आपने कूटशब्द खो दिया?',
         '2 Factor Token' => '',
         'Your 2 Factor Token' => '',
         'Log In' => 'प्रवेश',
         'Request New Password' => 'नए कूटशब्द के लिए अनुरोध करे',
         'Your User Name' => 'आपका उपयोगकर्ता नाम',
-        'A new password will be sent to your email address.' => 'एक नया कूटशब्द आपके ईमेल पते पर भेजा जाएगा।',
+        'A link to set a new password will be sent to your email address.' =>
+            'एक नया कूटशब्द सेट करने के लिए लिंक आपके ईमेल पते पर भेजा जाएगा।',
         'Back to login' => 'प्रवेश करने के लिए वापस जाएँ',
+        'Set New Password' => 'नया कूटशब्द सेट करें',
+        'New password' => 'नया कूटशब्द',
+        'Confirm password' => 'कूटशब्द की पुष्टि करें',
         'Create Account' => 'खाता बनाएँ',
         'Please fill out this form to receive login credentials.' => '',
         'How we should address you' => 'हम आपको कैसे संबोधित करें',
@@ -3198,9 +3202,6 @@ sub Data {
         'Object#' => 'वस्तु#',
         'Add links' => 'लिंक जोड़ें',
         'Delete links' => 'लिंक हटाएँ',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
-        'Lost your password?' => ' आपने कूटशब्द खो दिया?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -4391,6 +4392,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
         'No ArticleID is given!' => '',
+        'Resend is not possible for this article!' => 'इस लेख के लिए पुनः भेजना संभव नहीं है!',
 
         # Perl Module: Kernel/Modules/AgentTicketEscalationView.pm
         'Next week' => '',
@@ -4888,7 +4890,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Preferences/Password.pm
         'Current password' => 'वर्तमान कूटशब्द',
-        'New password' => 'नया कूटशब्द',
         'Verify password' => 'कूटशब्द सत्यापित करें',
         'The current password is not correct. Please try again!' => 'वर्तमान कूटशब्द सही नहीं है। कृपया पुनः प्रयास करें।',
         'Please supply your new password!' => '',
@@ -5569,9 +5570,17 @@ sub Data {
         'Can`t remove SessionID.' => '',
         'Logout successful.' => '',
         'Feature not active!' => 'सुविधा सक्रिय नहीं है।',
+        'Your password reset link is invalid or has expired. Please request a new one.' =>
+            'आपका कूटशब्द रीसेट लिंक अमान्य है या समाप्त हो गया है। कृपया एक नया अनुरोध करें।',
         'Sent password reset instructions. Please check your email.' => 'कूटशब्द पुनर्स्थापित निर्देशों को भेज दियॆ। कृपया अपना ईमेल देखें।',
-        'Invalid Token!' => 'अवैध टोकन',
-        'Sent new password to %s. Please check your email.' => 'नये कूटशब्द की जानकारी %s को भेजी। कृपया अपना ईमेल देखें।',
+        'Passwords do not match!' => 'कूटशब्द मेल नहीं खाते!',
+        'Password does not match the requirements!' => 'कूटशब्द आवश्यकताओं को पूरा नहीं करता!',
+        'Password must be at least %s characters long!' => 'कूटशब्द कम से कम %s अक्षरों का होना चाहिए!',
+        'Password must contain at least 2 lowercase and 2 uppercase letter characters!' =>
+            'कूटशब्द में कम से कम 2 लोअरकेस और 2 अपरकेस अक्षर होने चाहिए!',
+        'Password must contain at least 1 digit!' => 'कूटशब्द में कम से कम 1 अंक होना चाहिए!',
+        'Password must contain at least 2 letter characters!' => 'कूटशब्द में कम से कम 2 अक्षर होने चाहिए!',
+        'Password changed. Please log in with your new password.' => 'कूटशब्द बदल दिया गया। कृपया अपने नए कूटशब्द से लॉग इन करें।',
         'Error: invalid session.' => '',
         'No Permission to use this frontend module!' => '',
 
@@ -5758,7 +5767,7 @@ sub Data {
             '',
         'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
             '',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.' =>
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html.' =>
             '',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             'विभिन्न थीम विन्यस्त करना संभव है,उदाहरण के लिए विभिन्न प्रतिनिधि और ग्राहकों के बीच भेद करने के लिए,अनुप्रयोग में प्रति एक डोमेन के आधार पर इस्तेमाल किया जा सकता हैं। एक नियमित अभिव्यक्ति(Regex) का उपयोग करना,आप एक कुंजी/सामग्री जोड़ी विन्यस्त करने एक डोमेन मिलान कर सकते हैं। डोमेन में "कुंजी" मान से मेल खाना चाहिए और "सामग्री" में मूल्य अपने प्रणाली पर एक वैध थीम होना चाहिए। regex के उचित रूप के लिए उदाहरण प्रविष्टियों को देखें।',
@@ -6084,14 +6093,20 @@ sub Data {
             '',
         'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
             '',
+        'Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).' =>
+            'कूटशब्द रीसेट टोकन के लिए वैधता अवधि (सेकंड में) परिभाषित करता है। इसके बाद टोकन समाप्त हो जाता है और नया अनुरोध आवश्यक है। डिफ़ॉल्ट: 3600 (1 घंटा)।',
+        'Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.' =>
+            'प्रति IP पता या उपयोगकर्ता नाम rate limiting विंडो के भीतर अनुमत कूटशब्द रीसेट अनुरोधों की अधिकतम संख्या। 0 से rate limiting अक्षम करें। डिफ़ॉल्ट: 5।',
+        'Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes).' =>
+            'कूटशब्द रीसेट rate limiting के लिए समय विंडो (सेकंड में)। इस विंडो के भीतर के प्रयास अधिकतम के विरुद्ध गिने जाते हैं। डिफ़ॉल्ट: 600 (10 मिनट)।',
         'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
             'नए शब्दकूट अनुरोध के बारे में प्रतीक के साथ प्रतिनिधियॊ को भेजे जाने वाले अधिसूचना मेल के लिए विषय को परिभाषित करता है।',
         'Defines the body text for notification mails sent to agents, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to agents, about new password.' =>
-            'नए कूटशब्द के बारे में प्रतिनिधियॊ को भेजे जाने वाले अधिसूचना मेल के लिए विषय को परिभाषित करता है।',
-        'Defines the body text for notification mails sent to agents, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to agents, confirming that the password has been reset.' =>
+            'एजेंटों को भेजे गए सूचना ईमेल का विषय परिभाषित करता है जो कूटशब्द रीसेट की पुष्टि करते हैं।',
+        'Defines the body text for notification mails sent to agents, confirming that the password has been reset.' =>
+            'एजेंटों को भेजे गए सूचना ईमेल का मुख्य पाठ परिभाषित करता है जो कूटशब्द रीसेट की पुष्टि करते हैं।',
         'Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that "rw" is always the last registered permission.' =>
             'मानक अनुप्रयोग के भीतर प्रतिनिधियों के लिए उपलब्ध अनुमतियाँ। यदि अधिक अनुमतियों की आवश्यकता है,उन्हें यहाँ दर्ज किया जा सकता। अनुमतियों के लिए प्रभावी होगा परिभाषित किया जाना चाहिए। कुछ अन्य अच्छी अन्तर्निहित अनुमतियाँ भी प्रदान की है: टिप्पणी,विचाराधीन,बंद,ग्राहक,मुक्त पाठ,स्थानांतरित,रचना,उत्तरदायी,अग्रेषण और फलांग। सुनिश्चित करें कि "rw" हमेशा अंतिम पंजीकृत अनुमति हैं।',
         'Defines the standard permissions available for customers within the application. If more permissions are needed, you can enter them here. Permissions must be hard coded to be effective. Please ensure, when adding any of the afore mentioned permissions, that the "rw" permission remains the last entry.' =>
@@ -6167,10 +6182,10 @@ sub Data {
             'नए शब्दकूट अनुरोध के बारे में प्रतीक के साथ ग्राहकों को भेजे जाने वाले अधिसूचना मेल के लिए विषय को परिभाषित करता है।',
         'Defines the body text for notification mails sent to customers, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to customers, about new password.' =>
-            'नए खाते के बारे में ग्राहकों को भेजे जाने वाले अधिसूचना मेल के लिए विषय को परिभाषित करता है।',
-        'Defines the body text for notification mails sent to customers, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to customers, confirming that the password has been reset.' =>
+            'ग्राहकों को भेजे गए सूचना ईमेल का विषय परिभाषित करता है जो कूटशब्द रीसेट की पुष्टि करते हैं।',
+        'Defines the body text for notification mails sent to customers, confirming that the password has been reset.' =>
+            'ग्राहकों को भेजे गए सूचना ईमेल का मुख्य पाठ परिभाषित करता है जो कूटशब्द रीसेट की पुष्टि करते हैं।',
         'Defines the subject for notification mails sent to customers, about new account.' =>
             'नए खाते के बारे में ग्राहकों को भेजे जाने वाले अधिसूचना मेल के लिए विषय को परिभाषित करता है।',
         'Defines the body text for notification mails sent to customers, about new account.' =>
@@ -7828,7 +7843,7 @@ sub Data {
             '',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             '',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event.' =>
             '',
         'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
             '',

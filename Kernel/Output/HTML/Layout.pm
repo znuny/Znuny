@@ -931,10 +931,22 @@ sub Login {
         }
     }
 
+    # show the set-new-password form when a valid token has been confirmed
+    if ( $Param{PasswordReset} ) {
+        $Self->Block(
+            Name => 'PasswordReset',
+            Data => { Token => $Param{Token} },
+        );
+    }
+
     # send data to JS
     $Self->AddJSData(
         Key   => 'LoginFailed',
         Value => $Param{LoginFailed},
+    );
+    $Self->AddJSData(
+        Key   => 'PasswordReset',
+        Value => $Param{PasswordReset} ? 1 : 0,
     );
 
     # create & return output
@@ -4340,10 +4352,22 @@ sub CustomerLogin {
         }
     }
 
+    # show the set-new-password form when a valid token has been confirmed
+    if ( $Param{PasswordReset} ) {
+        $Self->Block(
+            Name => 'PasswordReset',
+            Data => { Token => $Param{Token} },
+        );
+    }
+
     # send data to JS
     $Self->AddJSData(
         Key   => 'LoginFailed',
         Value => $Param{LoginFailed},
+    );
+    $Self->AddJSData(
+        Key   => 'PasswordReset',
+        Value => $Param{PasswordReset} ? 1 : 0,
     );
 
     # Display footer links.

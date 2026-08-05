@@ -65,7 +65,7 @@
                         <input title="[% Translate("Your password") | html %]" placeholder="[% Translate("Password") | html %]" type="password" name="Password" id="Password" autocomplete="[% Data.PasswordAutocomplete %]" />
 [% RenderBlockStart("LostPasswordLink") %]
                         <div class="Option">
-                            <a href="#Reset" id="ForgotPassword" data-container-link="Reset">[% Translate("Forgot password?") | html %]</a>
+                            <a href="#Reset" id="ForgotPassword" data-container-link="Reset">[% Translate("Lost your password?") | html %]</a>
                         </div>
 [% RenderBlockEnd("LostPasswordLink") %]
                     </div>
@@ -110,7 +110,7 @@
                     </div>
                 </fieldset>
                 <p class="Center Spacing">
-                    [% Translate("A new password will be sent to your email address.") | html %]
+                    [% Translate("A link to set a new password will be sent to your email address.") | html %]
                 </p>
                 <p class="Center">
                     <a href="#Login" id="BackToLogin" data-container-link="Login">&larr; [% Translate("Back to login") | html %]</a>
@@ -119,6 +119,44 @@
 
         </div>
 [% RenderBlockEnd("LostPassword") %]
+[% RenderBlockStart("PasswordReset") %]
+        <div id="PasswordReset">
+            <h2>[% Translate("Set New Password") | html %]</h2>
+            <form class="Validate" action="[% Env('CGIHandle') %]" method="post" enctype="application/x-www-form-urlencoded">
+                <input type="hidden" name="Action" value="CustomerLostPassword" />
+                <input type="hidden" name="Lang" value="[% Env('UserLanguage') | html %]" />
+                <input type="hidden" name="Token" value="[% Data.Token | html %]" />
+                <fieldset>
+                    <div class="Field">
+                        <label class="Mandatory" for="NewPW">
+                            <span class="Marker">*</span>
+                            [% Translate("New password") | html %]
+                        </label>
+                        <div class="field-wrapper">
+                            <input title="[% Translate('New password') | html %]" placeholder="[% Translate("New password") | html %]" type="password" id="NewPW" name="NewPW" maxlength="150" class="Validate_Required" autocomplete="new-password" />
+                            <div id="NewPWError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                        </div>
+                    </div>
+                    <div class="Field">
+                        <label class="Mandatory" for="NewPWConfirm">
+                            <span class="Marker">*</span>
+                            [% Translate("Confirm password") | html %]
+                        </label>
+                        <div class="field-wrapper">
+                            <input title="[% Translate('Confirm password') | html %]" placeholder="[% Translate("Confirm password") | html %]" type="password" id="NewPWConfirm" name="NewPWConfirm" maxlength="150" class="Validate_Required" autocomplete="new-password" />
+                            <div id="NewPWConfirmError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="Primary CallForAction Fullsize Center btn-main btn-primary"><span>[% Translate("Set New Password") | html %]</span></button>
+                    </div>
+                </fieldset>
+                <p class="Center Spacing">
+                    <a href="#Login" data-container-link="Login">&larr; [% Translate("Back to login") | html %]</a>
+                </p>
+            </form>
+        </div>
+[% RenderBlockEnd("PasswordReset") %]
 [% RenderBlockStart("CreateAccount") %]
         <div id="Signup" class="Hidden">
             <div class="header-content">

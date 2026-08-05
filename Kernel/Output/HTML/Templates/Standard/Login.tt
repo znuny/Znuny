@@ -232,6 +232,10 @@ X-OTRS-Login: [% Env("Baselink") %]
                                     <button type="submit" Class="Primary CallForAction Fullsize Center btn-main btn-primary" value="[% Translate("Request New Password") | html %]" disabled="disabled"><span>[% Translate("Request New Password") | html %]</span></button>
                                 </div>
 
+                                <p class="Center">
+                                    [% Translate("A link to set a new password will be sent to your email address.") | html %]
+                                </p>
+
                             </fieldset>
                         </form>
                     </div>
@@ -241,6 +245,48 @@ X-OTRS-Login: [% Env("Baselink") %]
                 </p>
             </div>
 [% RenderBlockEnd("LostPassword") %]
+[% RenderBlockStart("PasswordReset") %]
+            <div id="PasswordResetBox" class="LoginBox">
+                <div class="WidgetSimple">
+                    <div class="Content">
+                        <h2>[% Translate("Set New Password") | html %]</h2>
+                        <p class="Error Center Spacing"></p>
+                        <form action="[% Env("CGIHandle") %]" method="post" enctype="application/x-www-form-urlencoded" class="Validate PreventMultipleSubmits">
+                            <input type="hidden" name="Action" value="LostPassword"/>
+                            <input type="hidden" name="Lang" value="[% Env("UserLanguage") | html %]"/>
+                            <input type="hidden" name="Token" value="[% Data.Token | html %]"/>
+
+                            <fieldset>
+                                <div>
+                                    <label for="NewPW" class="Mandatory">
+                                        <span class="Marker">*</span>
+                                        [% Translate("New password") | html %]
+                                    </label>
+                                    <input placeholder="[% Translate("New password") | html %]" type="password" id="NewPW" name="NewPW" value="" class="W75pc Validate_Required" autocomplete="new-password"/>
+                                    <div id="NewPWError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                </div>
+
+                                <div>
+                                    <label for="NewPWConfirm" class="Mandatory">
+                                        <span class="Marker">*</span>
+                                        [% Translate("Confirm password") | html %]
+                                    </label>
+                                    <input placeholder="[% Translate("Confirm password") | html %]" type="password" id="NewPWConfirm" name="NewPWConfirm" value="" class="W75pc Validate_Required" autocomplete="new-password"/>
+                                    <div id="NewPWConfirmError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                </div>
+
+                                <div>
+                                    <button type="submit" class="Primary CallForAction Fullsize Center btn-main btn-primary"><span>[% Translate("Set New Password") | html %]</span></button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <p class="Center SpacingTop">
+                    <a href="[% Env("CGIHandle") %]">&larr; [% Translate("Back to login") | html %]</a>
+                </p>
+            </div>
+[% RenderBlockEnd("PasswordReset") %]
 
 # Message of the day data!
 [% Data.Motd %]

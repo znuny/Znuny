@@ -9,7 +9,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 @import './../utilities/Utility.MediaQueries';
 .layoutPopUpSidebar {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   position: relative;
   height: 100%;
   width: 100%;

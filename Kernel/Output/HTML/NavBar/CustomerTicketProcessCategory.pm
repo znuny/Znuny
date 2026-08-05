@@ -128,12 +128,12 @@ sub Run {
     my $Priority   = sprintf( '%07d', $FrontendNavigationConfig->{'001-ProcessManagement'}->[0]->{Prio} );
 
     return if !$Param{NavBarModule};
-    my %Return = %{ $Param{NavBarModule} };
+    my %Return = %{ $Param{NavBarModule}->{Sub} // {} };
 
-    # remove CustomerTicketProcessCategory from the TicketMenu
-    delete $Return{$NavBarName}->{$Priority};
+    # remove CustomerTicketProcessCategory from the sub-menu
+    delete $Return{$NavBarName}->{$Priority} if $NavBarName && IsHashRefWithData( $Return{$NavBarName} );
 
-    # remove CustomerTicketProcessCategory from the Menu if set outside of the TicketMenu, see bug #11393
+    # remove CustomerTicketProcessCategory from the main menu
     delete $Param{NavBarModule}->{$Priority};
 
     return ( Sub => \%Return );

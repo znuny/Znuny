@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%m/%d/%Y';
     $Self->{DateInputFormat}     = '%m/%d/%Y';
     $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
-    $Self->{Completeness}        = 0.419786522223992;
+    $Self->{Completeness}        = 0.421119592875318;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2985,14 +2985,18 @@ sub Data {
         'User name' => 'Jina la mtumiaji',
         'Your user name' => 'Jina lako lamtumiaji',
         'Your password' => 'Neno lako la siri',
-        'Forgot password?' => 'Umesahau neno la siri?',
+        'Lost your password?' => 'Umepoteza neno lako la siri?',
         '2 Factor Token' => '',
         'Your 2 Factor Token' => '',
         'Log In' => 'Ingia',
         'Request New Password' => 'Ombi la neno jipya la siri',
         'Your User Name' => 'Jina lako la mtumiaji',
-        'A new password will be sent to your email address.' => 'Neno jipya la siri litatumwa kwenye anwani yako ya barua pepe',
+        'A link to set a new password will be sent to your email address.' =>
+            'Kiungo cha kuweka neno jipya la siri kitatumwa kwenye anwani yako ya barua pepe.',
         'Back to login' => 'Rudi kwenye kuingia',
+        'Set New Password' => 'Weka neno jipya la siri',
+        'New password' => 'Neno jipya la siri',
+        'Confirm password' => 'Thibitisha neno la siri',
         'Create Account' => 'Tengeneza akaunti',
         'Please fill out this form to receive login credentials.' => 'Tafadhali jaza fomu hii kupokea hati za utambulisho za kuingia.',
         'How we should address you' => 'Jinsi tutakavyokutambulisha',
@@ -3198,9 +3202,6 @@ sub Data {
         'Object#' => 'Kipengee#',
         'Add links' => 'Ongeza viungo',
         'Delete links' => 'Futa viungo',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
-        'Lost your password?' => 'Umepoteza neno lako la siri?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -4391,6 +4392,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
         'No ArticleID is given!' => '',
+        'Resend is not possible for this article!' => 'Kutuma tena haiwezekani kwa makala haya!',
 
         # Perl Module: Kernel/Modules/AgentTicketEscalationView.pm
         'Next week' => 'Wiki ijayo',
@@ -4888,7 +4890,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Preferences/Password.pm
         'Current password' => 'Neno la siri la sasa',
-        'New password' => 'Neno jipya la siri',
         'Verify password' => 'Hakiki neno la siri',
         'The current password is not correct. Please try again!' => 'Neno la siri la sasa haliko sahihi. Tafadhali jaribu tena!',
         'Please supply your new password!' => '',
@@ -5569,9 +5570,17 @@ sub Data {
         'Can`t remove SessionID.' => '',
         'Logout successful.' => '',
         'Feature not active!' => 'Kipengele hakipo amilifu.',
+        'Your password reset link is invalid or has expired. Please request a new one.' =>
+            'Kiungo chako cha kuweka upya neno la siri si halali au kimeisha muda. Tafadhali omba kipya.',
         'Sent password reset instructions. Please check your email.' => 'Maelezo ya kuweka upya neno la siri yametumwa. Tafadhali angalia barua pepe yako.',
-        'Invalid Token!' => 'Tuzo batili!',
-        'Sent new password to %s. Please check your email.' => 'Neno jipya la siri limetumwa kwa %s. Tafadhali angalia barua pepe yako.',
+        'Passwords do not match!' => 'Maneno ya siri hayafanani!',
+        'Password does not match the requirements!' => 'Neno la siri halikidhi mahitaji!',
+        'Password must be at least %s characters long!' => 'Neno la siri lazima liwe na angalau herufi %s!',
+        'Password must contain at least 2 lowercase and 2 uppercase letter characters!' =>
+            'Neno la siri lazima liwe na angalau herufi 2 ndogo na 2 kubwa!',
+        'Password must contain at least 1 digit!' => 'Neno la siri lazima liwe na angalau tarakimu 1!',
+        'Password must contain at least 2 letter characters!' => 'Neno la siri lazima liwe na angalau herufi 2!',
+        'Password changed. Please log in with your new password.' => 'Neno la siri limebadilishwa. Tafadhali ingia kwa neno jipya la siri.',
         'Error: invalid session.' => '',
         'No Permission to use this frontend module!' => '',
 
@@ -5758,7 +5767,7 @@ sub Data {
             '',
         'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
             '',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.' =>
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html.' =>
             '',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             'Inawezekana kusanidi dhima tofauti, kwa mfano kutofautisha kati wakala na wateja, wataokaotumika katika kila huduma kwenye kikoa katika programu tumizi. Kwa kutumia imizo la kawaida (regex), unaweza kusanidi jozi ya yaliyomo/kibonye kulandanisha kikoa. Thamani katika "Kibonye" ilandane na kikoa, na thamani kwenye "Yaliyomo" iwe dhima batili katika mfumo wako. Tafadhali ona maingizo ya mfano kwa  ajili fomu sahihi ya  imizo la kawaida.',
@@ -6084,14 +6093,20 @@ sub Data {
             '',
         'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
             '',
+        'Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).' =>
+            'Inafafanua kipindi cha uhalali kwa sekunde kwa tokeni za kuweka upya neno la siri. Baada ya hapo tokeni inaisha na ombi jipya linahitajika. Chaguo-msingi: 3600 (saa 1).',
+        'Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.' =>
+            'Idadi ya juu ya maombi ya kuweka upya neno la siri kwa anwani ya IP au jina la mtumiaji ndani ya dirisha la rate limiting. Weka 0 kuzima rate limiting. Chaguo-msingi: 5.',
+        'Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes).' =>
+            'Dirisha la muda kwa sekunde kwa rate limiting ya kuweka upya neno la siri. Majaribio ndani ya dirisha hili huhesabiwa dhidi ya kiwango cha juu. Chaguo-msingi: 600 (dakika 10).',
         'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
             'Inafafanua somo kwa ajili ya barua pepe za taarifa zilizotumwa kwa mawakala, na alama ya neno jipya la siri lililoombwa.',
         'Defines the body text for notification mails sent to agents, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to agents, about new password.' =>
-            'Inafafanua somo kwa barua pepe za taarifa zilizotumwa kwa mawakala, kuhusu neno jipya la siri. ',
-        'Defines the body text for notification mails sent to agents, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Inafafanua mada ya barua pepe za arifa zinazotumwa kwa mawakala zinazothibitisha kuweka upya neno la siri.',
+        'Defines the body text for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Inafafanua maandishi ya barua pepe za arifa zinazotumwa kwa mawakala zinazothibitisha kuweka upya neno la siri.',
         'Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that "rw" is always the last registered permission.' =>
             'Ruhusa zinazopatikana za kiwango kwa mawakala ndani ya programu tumizi. Kama ruhusa zaidi zinahitajika, zinaweza kuingizwa hapa. Ruhusa lazima zifafanuliwe kuwa za ufanis. Baadhi ya ruhusa nzuri zimejengwa ndani: Kidokezo,Kungoja, Mteja, matini huru, kusogeza, Kutunga, uhusika, kutuma mbele na udundaji. Hakikisha kwamba "rw" sikuzote ni ruhusa ya mwisho kusajiliwa.',
         'Defines the standard permissions available for customers within the application. If more permissions are needed, you can enter them here. Permissions must be hard coded to be effective. Please ensure, when adding any of the afore mentioned permissions, that the "rw" permission remains the last entry.' =>
@@ -6167,10 +6182,10 @@ sub Data {
             'Inafafanua somo kwa ajili ya barua pepe za taarifa zilizotumwa kwa wateja, na alama ya neno jipya la siri lililoombwa.',
         'Defines the body text for notification mails sent to customers, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to customers, about new password.' =>
-            'Inafafanua somo kwa ajili ya barua pepe za taarifa zilizotumwa kwa wateja, kuhusu neno jipya la siri.',
-        'Defines the body text for notification mails sent to customers, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Inafafanua mada ya barua pepe za arifa zinazotumwa kwa wateja zinazothibitisha kuweka upya neno la siri.',
+        'Defines the body text for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Inafafanua maandishi ya barua pepe za arifa zinazotumwa kwa wateja zinazothibitisha kuweka upya neno la siri.',
         'Defines the subject for notification mails sent to customers, about new account.' =>
             'Inafafanua somo kwa ajili ya barua pepe za taarifa zilizotumwa kwa wateja, kuhusu akaunti mpya.',
         'Defines the body text for notification mails sent to customers, about new account.' =>
@@ -7831,7 +7846,7 @@ Mfano:
             '',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             '',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event.' =>
             '',
         'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
             '',

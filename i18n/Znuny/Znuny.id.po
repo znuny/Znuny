@@ -9156,7 +9156,7 @@ msgstr "Tambahkan penghubung"
 msgid "Delete links"
 msgstr "Hapus penghubung"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Lost your password?"
 msgstr "Kehilangan kata sandi anda?"
 
@@ -13272,7 +13272,7 @@ msgstr "Silakan tentukan tanggal akhir yaitu setelah tanggal mulai."
 msgid "Current password"
 msgstr "Kata sandi saat ini"
 
-#. Perl Module: Kernel/Output/HTML/Preferences/Password.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "New password"
 msgstr "Kata sandi baru"
 
@@ -15189,8 +15189,8 @@ msgid "Defines all the languages that are available to the application. Specify 
 msgstr "Mendefinisikan semua bahasa yang tersedia untuk aplikasi. Tentukan hanya nama asli bahasa di sini."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/."
-msgstr "Mendefinisikan default front-end (HTML) tema yang akan digunakan oleh agen dan pelanggan. Jika Anda suka, Anda dapat menambahkan tema Anda sendiri. Silahkan lihat manual administrator yang terletak di https://doc.znuny.org/manual/developer/."
+msgid "Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html."
+msgstr "Mendefinisikan default front-end (HTML) tema yang akan digunakan oleh agen dan pelanggan. Jika Anda suka, Anda dapat menambahkan tema Anda sendiri. Silahkan lihat manual administrator yang terletak di https://doc.znuny.org/developer/general_information/themes.html."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in \"Key\" should match the domain, and the value in \"Content\" should be a valid theme on your system. Please see the example entries for the proper form of the regex."
@@ -19558,8 +19558,8 @@ msgid "Event module registration. For more performance you can define a trigger 
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Configures a default TicketDynamicField setting. \"Name\" defines the dynamic field which should be used, \"Value\" is the data that will be set, and \"Event\" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter \"Ticket Event Module\"."
-msgstr "Mengkonfigurasi TicketDynamicField pengaturan default. \"Nama\" mendefinisikan bidang yang dinamis yang harus digunakan, \"Value\" adalah data yang akan ditetapkan, dan \"Event\" mendefinisikan acara pemicu. Silakan periksa pengembang user (https://doc.znuny.org/manual/developer/), bab \"Ticket acara Modul\"."
+msgid "Configures a default TicketDynamicField setting. \"Name\" defines the dynamic field which should be used, \"Value\" is the data that will be set, and \"Event\" defines the trigger event."
+msgstr "Mengkonfigurasi TicketDynamicField pengaturan default. \"Nama\" mendefinisikan bidang yang dinamis yang harus digunakan, \"Value\" adalah data yang akan ditetapkan, dan \"Event\" mendefinisikan acara pemicu."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the list of types for templates."
@@ -25446,4 +25446,80 @@ msgstr ""
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
 msgid "View the admin manual"
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
+msgid "Set New Password"
+msgstr "Atur kata sandi baru"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
+msgid "Confirm password"
+msgstr "Konfirmasi kata sandi"
+
+#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
+msgid "Your password reset link is invalid or has expired. Please request a new one."
+msgstr "Tautan reset kata sandi Anda tidak valid atau sudah kedaluwarsa. Silakan minta yang baru."
+
+#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
+msgid "Passwords do not match!"
+msgstr "Kata sandi tidak cocok!"
+
+#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
+msgid "Password does not match the requirements!"
+msgstr "Kata sandi tidak memenuhi persyaratan!"
+
+#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
+msgid "Password must be at least %s characters long!"
+msgstr "Kata sandi harus minimal %s karakter!"
+
+#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
+msgid "Password must contain at least 2 lowercase and 2 uppercase letter characters!"
+msgstr "Kata sandi harus mengandung minimal 2 huruf kecil dan 2 huruf besar!"
+
+#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
+msgid "Password must contain at least 1 digit!"
+msgstr "Kata sandi harus mengandung minimal 1 angka!"
+
+#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
+msgid "Password must contain at least 2 letter characters!"
+msgstr "Kata sandi harus mengandung minimal 2 huruf!"
+
+#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
+msgid "Password changed. Please log in with your new password."
+msgstr "Kata sandi diubah. Silakan masuk dengan kata sandi baru Anda."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour)."
+msgstr "Menentukan masa berlaku token reset kata sandi dalam detik. Setelah itu token kedaluwarsa dan diperlukan permintaan baru. Default: 3600 (1 jam)."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5."
+msgstr "Jumlah maksimum permintaan reset kata sandi per alamat IP atau nama pengguna dalam jendela rate limiting. Atur ke 0 untuk menonaktifkan. Default: 5."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes)."
+msgstr "Jendela waktu dalam detik untuk rate limiting reset kata sandi. Percobaan dalam jendela ini dihitung terhadap maksimum. Default: 600 (10 menit)."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the subject for notification mails sent to agents, confirming that the password has been reset."
+msgstr "Menentukan subjek email notifikasi yang dikirim ke agen yang mengonfirmasi reset kata sandi."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the body text for notification mails sent to agents, confirming that the password has been reset."
+msgstr "Menentukan teks email notifikasi yang dikirim ke agen yang mengonfirmasi reset kata sandi."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the subject for notification mails sent to customers, confirming that the password has been reset."
+msgstr "Menentukan subjek email notifikasi yang dikirim ke pelanggan yang mengonfirmasi reset kata sandi."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the body text for notification mails sent to customers, confirming that the password has been reset."
+msgstr "Menentukan teks email notifikasi yang dikirim ke pelanggan yang mengonfirmasi reset kata sandi."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
+msgid "A link to set a new password will be sent to your email address."
+msgstr "Tautan untuk menetapkan kata sandi baru akan dikirim ke email Anda."
+
+#. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
+msgid "Resend is not possible for this article!"
+msgstr "Pengiriman ulang tidak dimungkinkan untuk artikel ini!"
 

@@ -1166,7 +1166,7 @@ sub Run {
             my $BodyText = $LayoutObject->RichText2Ascii(
                 String => $GetParam{Body} || '',
             );
-            if ( $GetParam{NewOwnerID} ) {
+            if ( $GetParam{NewOwnerID} && $GetParam{NewOwnerID} ne $Ticket{OwnerID} ) {
                 $TicketObject->TicketLockSet(
                     TicketID => $Self->{TicketID},
                     Lock     => 'lock',

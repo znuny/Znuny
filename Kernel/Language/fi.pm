@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.18129679783336;
+    $Self->{Completeness}        = 0.183365139949109;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2984,14 +2984,18 @@ sub Data {
         'User name' => 'Käyttäjätunnus',
         'Your user name' => 'Käyttäjätunnuksesi',
         'Your password' => 'Salasanasi',
-        'Forgot password?' => 'Unohditko salasanasi?',
+        'Lost your password?' => 'Unohditko salasanan?',
         '2 Factor Token' => '',
         'Your 2 Factor Token' => '',
         'Log In' => 'Kirjaudu',
         'Request New Password' => 'Pyydä uusi salasana',
         'Your User Name' => 'Sinun käyttäjänimi',
-        'A new password will be sent to your email address.' => 'Uusi salasana lähetetään sinulle sähköpostilla.',
+        'A link to set a new password will be sent to your email address.' =>
+            'Linkki uuden salasanan asettamiseen lähetetään sinulle sähköpostilla.',
         'Back to login' => 'Takaisin kirjautumiseen',
+        'Set New Password' => 'Aseta uusi salasana',
+        'New password' => 'Uusi salasana',
+        'Confirm password' => 'Vahvista salasana',
         'Create Account' => 'Luo tunnus',
         'Please fill out this form to receive login credentials.' => 'Täytä kaavake saadaksesi käyttäjätunnukset.',
         'How we should address you' => 'Miten kutsumme sinua',
@@ -3197,9 +3201,6 @@ sub Data {
         'Object#' => 'Objekti#',
         'Add links' => 'Lisää linkkejä',
         'Delete links' => 'Poista linkkejä',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
-        'Lost your password?' => 'Unohditko salasanan?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -4390,6 +4391,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
         'No ArticleID is given!' => '',
+        'Resend is not possible for this article!' => 'Uudelleenlähetys ei ole mahdollista tälle artikkelille!',
 
         # Perl Module: Kernel/Modules/AgentTicketEscalationView.pm
         'Next week' => 'Seuraava viikko',
@@ -4887,7 +4889,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Preferences/Password.pm
         'Current password' => 'Nykyinen salasana',
-        'New password' => 'Uusi salasana',
         'Verify password' => 'Salasana uudestaan',
         'The current password is not correct. Please try again!' => 'Nykyinen salasana on väärin. Yritä uudelleen!',
         'Please supply your new password!' => '',
@@ -5568,9 +5569,17 @@ sub Data {
         'Can`t remove SessionID.' => '',
         'Logout successful.' => '',
         'Feature not active!' => 'Ominaisuus ei käytössä!',
+        'Your password reset link is invalid or has expired. Please request a new one.' =>
+            'Salasanan palautuslinkki on virheellinen tai vanhentunut. Pyydä uusi linkki.',
         'Sent password reset instructions. Please check your email.' => 'Lähetetty salasanan vaihtamisohjeet. Tarkasta sähköpostisi.',
-        'Invalid Token!' => 'Virheellinen valtuutusavain!',
-        'Sent new password to %s. Please check your email.' => 'Lähetetty uusi salasana osoitteeseen %s. Tarkasta sähköpostisi.',
+        'Passwords do not match!' => 'Salasanat eivät täsmää!',
+        'Password does not match the requirements!' => 'Salasana ei täytä vaatimuksia!',
+        'Password must be at least %s characters long!' => 'Salasanan on oltava vähintään %s merkkiä pitkä!',
+        'Password must contain at least 2 lowercase and 2 uppercase letter characters!' =>
+            'Salasanan on sisällettävä vähintään 2 pientä ja 2 isoa kirjainta!',
+        'Password must contain at least 1 digit!' => 'Salasanan on sisällettävä vähintään 1 numero!',
+        'Password must contain at least 2 letter characters!' => 'Salasanan on sisällettävä vähintään 2 kirjainta!',
+        'Password changed. Please log in with your new password.' => 'Salasana vaihdettu. Kirjaudu sisään uudella salasanallasi.',
         'Error: invalid session.' => '',
         'No Permission to use this frontend module!' => '',
 
@@ -5757,7 +5766,7 @@ sub Data {
             '',
         'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
             '',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.' =>
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html.' =>
             '',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             '',
@@ -6083,14 +6092,20 @@ sub Data {
             '',
         'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
             '',
+        'Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).' =>
+            'Määrittää salasanan palautustokenien voimassaoloajan sekunteina. Tämän jälkeen token vanhenee ja uusi pyyntö vaaditaan. Oletus: 3600 (1 tunti).',
+        'Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.' =>
+            'Salasanan palautuspyyntöjen enimmäismäärä IP-osoitetta tai käyttäjänimeä kohti rate limiting -ikkunassa. 0 poistaa rate limitingin käytöstä. Oletus: 5.',
+        'Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes).' =>
+            'Rate limiting -aikaikkuna sekunteina salasanan palautuksessa. Yritykset lasketaan tätä ikkunaa vasten. Oletus: 600 (10 minuuttia).',
         'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
             '',
         'Defines the body text for notification mails sent to agents, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to agents, about new password.' =>
-            '',
-        'Defines the body text for notification mails sent to agents, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Määrittää agenteille lähetettävien ilmoitussähköpostien aiheen, jotka vahvistavat salasanan palautuksen.',
+        'Defines the body text for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Määrittää agenteille lähetettävien ilmoitussähköpostien tekstin, jotka vahvistavat salasanan palautuksen.',
         'Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that "rw" is always the last registered permission.' =>
             '',
         'Defines the standard permissions available for customers within the application. If more permissions are needed, you can enter them here. Permissions must be hard coded to be effective. Please ensure, when adding any of the afore mentioned permissions, that the "rw" permission remains the last entry.' =>
@@ -6166,10 +6181,10 @@ sub Data {
             '',
         'Defines the body text for notification mails sent to customers, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to customers, about new password.' =>
-            '',
-        'Defines the body text for notification mails sent to customers, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Määrittää asiakkaille lähetettävien ilmoitussähköpostien aiheen, jotka vahvistavat salasanan palautuksen.',
+        'Defines the body text for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Määrittää asiakkaille lähetettävien ilmoitussähköpostien tekstin, jotka vahvistavat salasanan palautuksen.',
         'Defines the subject for notification mails sent to customers, about new account.' =>
             '',
         'Defines the body text for notification mails sent to customers, about new account.' =>
@@ -7827,7 +7842,7 @@ sub Data {
             '',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             '',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event.' =>
             '',
         'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
             '',

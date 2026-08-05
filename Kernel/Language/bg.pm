@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y - %T';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.189421698263502;
+    $Self->{Completeness}        = 0.191793893129771;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2983,14 +2983,18 @@ sub Data {
         'User name' => '',
         'Your user name' => '',
         'Your password' => '',
-        'Forgot password?' => '',
+        'Lost your password?' => 'Забравена парола',
         '2 Factor Token' => '',
         'Your 2 Factor Token' => '',
         'Log In' => 'Вход',
         'Request New Password' => '',
         'Your User Name' => '',
-        'A new password will be sent to your email address.' => '',
+        'A link to set a new password will be sent to your email address.' =>
+            'Връзка за задаване на нова парола ще бъде изпратена на вашия имейл адрес.',
         'Back to login' => '',
+        'Set New Password' => 'Задаване на нова парола',
+        'New password' => 'Нова парола',
+        'Confirm password' => 'Потвърждаване на парола',
         'Create Account' => 'Създаване на акаунт',
         'Please fill out this form to receive login credentials.' => '',
         'How we should address you' => '',
@@ -3196,9 +3200,6 @@ sub Data {
         'Object#' => '',
         'Add links' => '',
         'Delete links' => '',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
-        'Lost your password?' => 'Забравена парола',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -4389,6 +4390,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
         'No ArticleID is given!' => '',
+        'Resend is not possible for this article!' => 'Повторното изпращане не е възможно за тази статия!',
 
         # Perl Module: Kernel/Modules/AgentTicketEscalationView.pm
         'Next week' => 'Следващата седмица',
@@ -4886,7 +4888,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Preferences/Password.pm
         'Current password' => 'Текуща парола',
-        'New password' => 'Нова парола',
         'Verify password' => 'Проверка на парола',
         'The current password is not correct. Please try again!' => 'Текущата парола не е правилна. Моля, опитайте отново',
         'Please supply your new password!' => '',
@@ -5567,9 +5568,17 @@ sub Data {
         'Can`t remove SessionID.' => '',
         'Logout successful.' => '',
         'Feature not active!' => 'Функцията не е активна',
+        'Your password reset link is invalid or has expired. Please request a new one.' =>
+            'Вашата връзка за нулиране на парола е невалидна или е изтекла. Моля, поискайте нова.',
         'Sent password reset instructions. Please check your email.' => 'Изпратете инструкции за нулиране на паролата. Моля, проверете електронната си поща.',
-        'Invalid Token!' => 'Невализно взета стойност!',
-        'Sent new password to %s. Please check your email.' => 'Изпратете нова парола за %s. Моля, проверете електронната си поща.',
+        'Passwords do not match!' => 'Паролите не съвпадат!',
+        'Password does not match the requirements!' => 'Паролата не отговаря на изискванията!',
+        'Password must be at least %s characters long!' => 'Паролата трябва да е поне %s символа!',
+        'Password must contain at least 2 lowercase and 2 uppercase letter characters!' =>
+            'Паролата трябва да съдържа поне 2 малки и 2 главни букви!',
+        'Password must contain at least 1 digit!' => 'Паролата трябва да съдържа поне 1 цифра!',
+        'Password must contain at least 2 letter characters!' => 'Паролата трябва да съдържа поне 2 букви!',
+        'Password changed. Please log in with your new password.' => 'Паролата е променена. Моля, влезте с новата си парола.',
         'Error: invalid session.' => '',
         'No Permission to use this frontend module!' => '',
 
@@ -5756,7 +5765,7 @@ sub Data {
             '',
         'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
             '',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.' =>
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html.' =>
             '',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             '',
@@ -6082,14 +6091,20 @@ sub Data {
             '',
         'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
             '',
+        'Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).' =>
+            'Определя срока на валидност в секунди за токени за нулиране на парола. След изтичане на този срок токенът изтича и е необходима нова заявка. По подразбиране: 3600 (1 час).',
+        'Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.' =>
+            'Максимален брой заявки за нулиране на парола на IP адрес или потребителско име в рамките на прозореца за rate limiting. Задайте 0, за да деактивирате rate limiting. По подразбиране: 5.',
+        'Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes).' =>
+            'Времеви прозорец в секунди за rate limiting при нулиране на парола. Опитите в този прозорец се броят спрямо максимума. По подразбиране: 600 (10 минути).',
         'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
             '',
         'Defines the body text for notification mails sent to agents, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to agents, about new password.' =>
-            '',
-        'Defines the body text for notification mails sent to agents, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Определя темата на имейл известията, изпратени до агенти, потвърждаващи нулиране на парола.',
+        'Defines the body text for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Определя текста на имейл известията, изпратени до агенти, потвърждаващи нулиране на парола.',
         'Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that "rw" is always the last registered permission.' =>
             '',
         'Defines the standard permissions available for customers within the application. If more permissions are needed, you can enter them here. Permissions must be hard coded to be effective. Please ensure, when adding any of the afore mentioned permissions, that the "rw" permission remains the last entry.' =>
@@ -6165,10 +6180,10 @@ sub Data {
             '',
         'Defines the body text for notification mails sent to customers, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to customers, about new password.' =>
-            '',
-        'Defines the body text for notification mails sent to customers, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Определя темата на имейл известията, изпратени до клиенти, потвърждаващи нулиране на парола.',
+        'Defines the body text for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Определя текста на имейл известията, изпратени до клиенти, потвърждаващи нулиране на парола.',
         'Defines the subject for notification mails sent to customers, about new account.' =>
             '',
         'Defines the body text for notification mails sent to customers, about new account.' =>
@@ -7826,7 +7841,7 @@ sub Data {
             '',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             '',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event.' =>
             '',
         'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
             '',

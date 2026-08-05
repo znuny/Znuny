@@ -172,7 +172,7 @@
 [% RenderBlockStart("WidgetArticle") %]
                                     <div class="cardCommunication col-12">
                                         <div class="mod modCard">
-                                            <div class="inner [% Data.CardStatus | html %]">
+                                            <div id="WidgetArticle" class="inner [% Data.CardStatus | html %]">
                                                 <div class="cardTitle">
                                                     <h2>[% Translate("Communications") | html %]</h2>
                                                     <span class="cardTitleTrigger"></span>

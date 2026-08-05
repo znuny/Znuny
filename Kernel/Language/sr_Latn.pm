@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.855822845308268;
+    $Self->{Completeness}        = 0.856075063613232;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2988,14 +2988,18 @@ sub Data {
         'User name' => 'Korisničko ime',
         'Your user name' => 'Vaše korisničko ime',
         'Your password' => 'Vaša lozinka',
-        'Forgot password?' => 'Zaboravili ste lozinku?',
+        'Lost your password?' => 'Izgubili ste lozinku?',
         '2 Factor Token' => 'Dvofaktorski token',
         'Your 2 Factor Token' => 'Vaš dvofaktorski token',
         'Log In' => 'Prijavljivanje',
         'Request New Password' => 'Zahtev za novu lozinku',
         'Your User Name' => 'Vaše korisničko ime',
-        'A new password will be sent to your email address.' => 'Nova lozinka će biti poslata na vašu imejl adresu.',
+        'A link to set a new password will be sent to your email address.' =>
+            'Link za postavljanje nove lozinke biće poslat na vašu imejl adresu.',
         'Back to login' => 'Nazad na prijavljivanje',
+        'Set New Password' => 'Postavi novu lozinku',
+        'New password' => 'Nova lozinka',
+        'Confirm password' => 'Potvrdi lozinku',
         'Create Account' => 'Kreirajte nalog',
         'Please fill out this form to receive login credentials.' => 'Molimo da popunite ovaj obrazac da bi ste dobili podatke za prijavu.',
         'How we should address you' => 'Kako da vas oslovljavamo',
@@ -3201,9 +3205,6 @@ sub Data {
         'Object#' => 'Objekat#',
         'Add links' => 'Dodaj veze',
         'Delete links' => 'Obriši veze',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
-        'Lost your password?' => 'Izgubili ste lozinku?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => 'Skaliraj sadržaj za prikaz',
@@ -4394,6 +4395,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
         'No ArticleID is given!' => 'Nije dat ArticleID!',
+        'Resend is not possible for this article!' => 'Ponovno slanje ovog članka nije moguće!',
 
         # Perl Module: Kernel/Modules/AgentTicketEscalationView.pm
         'Next week' => 'Sledeće nedelje',
@@ -4891,7 +4893,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Preferences/Password.pm
         'Current password' => 'Sadašnja lozinka',
-        'New password' => 'Nova lozinka',
         'Verify password' => 'Potvrdi lozinku',
         'The current password is not correct. Please try again!' => 'Aktuelna lozinka je netačna. Molimo pokušajte ponovo!',
         'Please supply your new password!' => 'Molimo da obezbedite novu lozinku!',
@@ -5572,9 +5573,17 @@ sub Data {
         'Can`t remove SessionID.' => 'SessionID se ne može ukloniti.',
         'Logout successful.' => 'Uspešna odjava.',
         'Feature not active!' => 'Funkcija nije aktivna!',
+        'Your password reset link is invalid or has expired. Please request a new one.' =>
+            'Vaša veza za resetovanje lozinke je nevažeća ili je istekla. Zatražite novu.',
         'Sent password reset instructions. Please check your email.' => 'Uputstvo za reset lozinke je poslato. Molimo proverite vaše imejlove.',
-        'Invalid Token!' => 'Nevažeći Token!',
-        'Sent new password to %s. Please check your email.' => 'Poslata nova lozinka za %s. Molimo proverite vaše imejlove.',
+        'Passwords do not match!' => 'Lozinke se ne poklapaju!',
+        'Password does not match the requirements!' => 'Lozinka ne ispunjava zahteve!',
+        'Password must be at least %s characters long!' => 'Lozinka mora imati najmanje %s znakova!',
+        'Password must contain at least 2 lowercase and 2 uppercase letter characters!' =>
+            'Lozinka mora sadržati najmanje 2 mala i 2 velika slova!',
+        'Password must contain at least 1 digit!' => 'Lozinka mora sadržati najmanje 1 cifru!',
+        'Password must contain at least 2 letter characters!' => 'Lozinka mora sadržati najmanje 2 slova!',
+        'Password changed. Please log in with your new password.' => 'Lozinka je promenjena. Prijavite se novom lozinkom.',
         'Error: invalid session.' => 'Greška: nevažeća sesija.',
         'No Permission to use this frontend module!' => 'Nemate dozvolu za  upotrebu ovog korisničkog modula!',
 
@@ -5761,8 +5770,8 @@ sub Data {
             'Definiše sve jezike koji su dostupni aplikaciji. Ovde unesite imena jezika samo na engleskom.',
         'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
             'Definiše sve jezike koji su dostupni aplikaciji. Ovde unesite imena jezika samo na matičnom jeziku.',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.' =>
-            'Određuje podrazumevanu temu glavnog interfejsa (HTML) koja će biti korišćena od strane operatera ili klijenata. Ukoliko želite možete dodati vašu ličnu temu. Molimo vas da pogledate uputstvo za administratora, koje se nalazi na https://doc.znuny.org/manual/developer/.',
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html.' =>
+            'Određuje podrazumevanu temu glavnog interfejsa (HTML) koja će biti korišćena od strane operatera ili klijenata. Ukoliko želite možete dodati vašu ličnu temu. Molimo vas da pogledate uputstvo za administratora, koje se nalazi na https://doc.znuny.org/developer/general_information/themes.html.',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             'Moguće je podesiti različite teme za različite operatere i korisnike, koji se koriste na nivou domena u aplikaciji. Korišćenjem regularnog izraza (regex), možete podesiti par ključ/vrednost za prepoznavanje domena. Vrednost u Key bi trebalo da prepozna domen, a vrednost u Content bi trebalo da bude važeća tema u sistemu. Molimo konsultujte primere za ispravan oblik regularnog izraza.',
         'The headline shown in the customer interface.' => 'Naslov prikazan u klijentskom interfejsu.',
@@ -6087,14 +6096,20 @@ sub Data {
             'Definiše naziv koje će aplikacija koristiti prilikom slanja obaveštenja. Naziv se koristi u nazivu pošiljaoca obaveštenja (npr. "Znuny Notifications" znuny@your.example.com).',
         'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
             'Definiše imejl adresu koju će aplikacija koristiti prilikom slanja obaveštenja. Imejl adresa se koristi u nazivu pošiljaoca obaveštenja (npr. "Znuny Notifications" znuny@your.example.com). Možete koristiti promenljivu OTRS_CONFIG_FQDN iz vaše konfiguracije, ili odredite drugu imejl adresu.',
+        'Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).' =>
+            'Definiše period važenja u sekundama za tokene resetovanja lozinke. Posle toga token ističe i potreban je novi zahtev. Podrazumevano: 3600 (1 sat).',
+        'Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.' =>
+            'Maksimalan broj zahteva za resetovanje lozinke po IP adresi ili korisničkom imenu u prozoru rate limiting. Postavite 0 za onemogućavanje. Podrazumevano: 5.',
+        'Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes).' =>
+            'Vremenski prozor u sekundama za rate limiting resetovanja lozinke. Pokušaji u ovom prozoru se broje prema maksimumu. Podrazumevano: 600 (10 minuta).',
         'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
             'Definiše predmet za imejl poruke obaveštenja poslata operaterima, sa tokenom o novoj zahtevanoj lozinki.',
         'Defines the body text for notification mails sent to agents, with token about new requested password.' =>
             'Definiše sadržaj teksta obaveštenja za slanje operaterima sa tokenom za novu zahtevanu lozinku.',
-        'Defines the subject for notification mails sent to agents, about new password.' =>
-            'Definiše predmet za imejl poruke obaveštenja poslata operaterima, o novoj lozinki.',
-        'Defines the body text for notification mails sent to agents, about new password.' =>
-            'Definiše sadržaj teksta obaveštenja za slanje operaterima o novoj lozinki.',
+        'Defines the subject for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Definiše temu obaveštenja e-pošte agentima koja potvrđuju resetovanje lozinke.',
+        'Defines the body text for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Definiše tekst obaveštenja e-pošte agentima koja potvrđuju resetovanje lozinke.',
         'Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that "rw" is always the last registered permission.' =>
             'Standardne raspoložive dozvole za operatere unutar aplikacije. Ukoliko je potrebno više dozvola oni mogu uneti ovde. Dozvole moraju biti definisane da budu efektivne. Neke druge dozvole su takođe obezbeđene ugrađivanjem u: napomenu, zatvori, na čekanju, klijent, slobodan tekst, pomeri, otvori, odgovoran, prosledi i povrati. Obezbedite da "rw" uvek bude poslednja registrovana dozvola.',
         'Defines the standard permissions available for customers within the application. If more permissions are needed, you can enter them here. Permissions must be hard coded to be effective. Please ensure, when adding any of the afore mentioned permissions, that the "rw" permission remains the last entry.' =>
@@ -6170,10 +6185,10 @@ sub Data {
             'Određuje predmet za imejl poruke obaveštenja poslata klijentima, sa tokenom o novoj zahtevanoj lozinki.',
         'Defines the body text for notification mails sent to customers, with token about new requested password.' =>
             'Definiše sadržaj teksta obaveštenja za slanje klijentima sa tokenom za novu zahtevanu lozinku.',
-        'Defines the subject for notification mails sent to customers, about new password.' =>
-            'Određuje predmet za imejl poruke obaveštenja poslata klijentima, o novoj lozinki.',
-        'Defines the body text for notification mails sent to customers, about new password.' =>
-            'Određuje sadržaj teksta obaveštenja za slanje klijentima o novoj lozinki.',
+        'Defines the subject for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Definiše temu obaveštenja e-pošte klijentima koja potvrđuju resetovanje lozinke.',
+        'Defines the body text for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Definiše tekst obaveštenja e-pošte klijentima koja potvrđuju resetovanje lozinke.',
         'Defines the subject for notification mails sent to customers, about new account.' =>
             'Određuje predmet za imejl poruke obaveštenja poslata klijentima, o novom nalogu.',
         'Defines the body text for notification mails sent to customers, about new account.' =>
@@ -7831,8 +7846,8 @@ sub Data {
             'Dinamička polja prikazana u ekranu rezultata pretrage tiketa u interfejsu klijenta.',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             '',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
-            'Konfiguriše podrazumevanu vrednost TicketDynamicField podešavanja. "Name" definiše dinamičko polje koje bi se trebalo koristiti, "Value je vrednost koju treba podesiti i "Event" definiše modul događaja. Molimo proverite uputstvo za programere (https://doc.znuny.org/manual/developer/), poglavlje "Ticket Event Module".',
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event.' =>
+            'Konfiguriše podrazumevanu vrednost TicketDynamicField podešavanja. "Name" definiše dinamičko polje koje bi se trebalo koristiti, "Value je vrednost koju treba podesiti i "Event" definiše modul događaja.',
         'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
             '',
         'Defines the list of types for templates.' => 'Definiše listu tipova šablona.',

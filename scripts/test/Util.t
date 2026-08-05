@@ -12,6 +12,7 @@ use utf8;
 
 use vars (qw($Self));
 
+use File::stat();
 use MIME::Base64;
 
 use Kernel::System::VariableCheck qw(:all);
@@ -27,6 +28,21 @@ my $UtilObject   = $Kernel::OM->Get('Kernel::System::Util');
 my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
 my $UserID = 1;
+
+#
+# ApplicationUserGet()
+#
+
+my $Home            = $Kernel::OM->Get('Kernel::Config')->Get('Home');
+my $HomeStat        = $Home     ? File::stat::stat($Home)    : undef;
+my $ApplicationUser = $HomeStat ? getpwuid( $HomeStat->uid ) : undef;    ## no critic
+$ApplicationUser ||= 'znuny';
+
+$Self->Is(
+    $UtilObject->ApplicationUserGet(),
+    $ApplicationUser,
+    'ApplicationUserGet() must return owner of Home or fallback application user.',
+);
 
 #
 # IsITSMInstalled()

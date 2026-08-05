@@ -2983,14 +2983,18 @@ sub Data {
         'User name' => 'Benutzername',
         'Your user name' => 'Ihr Benutzername',
         'Your password' => 'Ihr Passwort',
-        'Forgot password?' => 'Passwort vergessen?',
+        'Lost your password?' => 'Haben Sie Ihr Passwort vergessen?',
         '2 Factor Token' => '2-Faktor-Token',
         'Your 2 Factor Token' => 'Ihr 2-Faktor-Token',
         'Log In' => 'Anmelden',
         'Request New Password' => 'Neues Passwort anfordern',
         'Your User Name' => 'Ihr Benutzername',
-        'A new password will be sent to your email address.' => 'Ein neues Passwort wird an Ihre E-Mail-Adresse gesendet.',
+        'A link to set a new password will be sent to your email address.' =>
+            'Ein Link zum Setzen eines neuen Passworts wird an Ihre E-Mail-Adresse gesendet.',
         'Back to login' => 'Zurück zur Anmeldung',
+        'Set New Password' => 'Neues Passwort festlegen',
+        'New password' => 'Neues Passwort',
+        'Confirm password' => 'Passwort bestätigen',
         'Create Account' => 'Konto erstellen',
         'Please fill out this form to receive login credentials.' => 'Bitte füllen Sie dieses Formular aus, um Ihre Anmeldedaten zu erhalten.',
         'How we should address you' => 'Wie sollen wir Sie ansprechen',
@@ -3196,9 +3200,6 @@ sub Data {
         'Object#' => 'Objektnummer',
         'Add links' => 'Verknüpfungen hinzufügen',
         'Delete links' => 'Verknüpfungen löschen',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
-        'Lost your password?' => 'Haben Sie Ihr Passwort vergessen?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => 'Vorschauinhalt skalieren',
@@ -4389,6 +4390,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
         'No ArticleID is given!' => 'Keine ArticleID vorhanden!',
+        'Resend is not possible for this article!' => 'Erneutes Senden für diesen Artikel nicht möglich!',
 
         # Perl Module: Kernel/Modules/AgentTicketEscalationView.pm
         'Next week' => 'Nächste Woche',
@@ -4886,7 +4888,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Preferences/Password.pm
         'Current password' => 'Aktuelles Passwort',
-        'New password' => 'Neues Passwort',
         'Verify password' => 'Passwort verifizieren',
         'The current password is not correct. Please try again!' => 'Das eingegebene Passwort ist nicht korrekt. Bitte versuchen Sie es erneut!',
         'Please supply your new password!' => 'Bitte bestätigen Sie ihr neues Passwort!',
@@ -5567,9 +5568,17 @@ sub Data {
         'Can`t remove SessionID.' => 'Kann SessionID nicht entfernen.',
         'Logout successful.' => 'Abmeldung erfolgreich.',
         'Feature not active!' => 'Funktion nicht aktiviert!',
-        'Sent password reset instructions. Please check your email.' => 'Anweisungen zum Zurücksetzen des Passworts wurden gesendet. Bitte prüfen Sie ihre E-Mail.',
-        'Invalid Token!' => 'Ungültiger Token!',
-        'Sent new password to %s. Please check your email.' => 'Neues Passwort an %s gesendet. Bitte prüfen Sie Ihre E-Mail.',
+        'Your password reset link is invalid or has expired. Please request a new one.' =>
+            'Ihr Link zum Zurücksetzen des Passworts ist ungültig oder abgelaufen. Bitte fordern Sie einen neuen an.',
+        'Sent password reset instructions. Please check your email.' => 'Anweisungen zum Zurücksetzen des Passworts wurden gesendet. Bitte prüfen Sie Ihre E-Mail.',
+        'Passwords do not match!' => 'Passwörter stimmen nicht überein!',
+        'Password does not match the requirements!' => 'Das Passwort entspricht nicht den Anforderungen!',
+        'Password must be at least %s characters long!' => 'Das Passwort muss mindestens %s Zeichen lang sein!',
+        'Password must contain at least 2 lowercase and 2 uppercase letter characters!' =>
+            'Das Passwort muss mindestens 2 Klein- und 2 Großbuchstaben enthalten!',
+        'Password must contain at least 1 digit!' => 'Das Passwort muss mindestens eine Ziffer enthalten!',
+        'Password must contain at least 2 letter characters!' => 'Das Passwort muss mindestens 2 Buchstaben enthalten!',
+        'Password changed. Please log in with your new password.' => 'Passwort geändert. Bitte melden Sie sich mit Ihrem neuen Passwort an.',
         'Error: invalid session.' => 'Fehler: Ungültige Sitzung.',
         'No Permission to use this frontend module!' => 'Sie haben keine Berechtigung, dieses Modul zu nutzen!',
 
@@ -5756,8 +5765,8 @@ sub Data {
             'Definiert alle Sprachen, die der Applikation zur Verfügung stehen. Geben Sie nur Englische Sprachnamen an.',
         'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
             'Definiert alle Sprachen, die der Applikation zur Verfügung stehen. Geben Sie nur die einheimischen Sprachnamen an.',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.' =>
-            'Definiert das Standard (HTML)-Theme für das Frontend, das von Agenten und Kunden genutzt wird. Wenn Sie möchten, können Sie Ihr eigenes Theme hinzufügen. Schauen Sie dazu bitte im Administration-Handbuch auf https://doc.znuny.org/manual/developer/.',
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html.' =>
+            'Definiert das Standard (HTML)-Theme für das Frontend, das von Agenten und Kunden genutzt wird. Wenn Sie möchten, können Sie Ihr eigenes Theme hinzufügen. Schauen Sie dazu bitte im Administration-Handbuch auf https://doc.znuny.org/developer/general_information/themes.html.',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             'Es ist möglich, verschiedene Themes zu konfigurieren, zum Beispiel um zwischen verschiedenen Agenten und Kunden auf Basis der jeweiligen Domain zu unterscheiden. Sie können durch Nutzung von regulären Ausdrücken mithilfe von Schlüssel-/Wert-Paaren auf Domains prüfen. Der Inhalt von "Schlüssel" sollte die Prüfung auf die Domain beinhalten, der Inhalt von "Wert" den Namen des zu selektierenden Themes für diese Domain. Bitte beachten Sie die Einträge mit Beispielen für korrekte reguläre Ausdrücke.',
         'The headline shown in the customer interface.' => 'Die in der Kundenoberfläche angezeigte Überschrift.',
@@ -6082,14 +6091,20 @@ sub Data {
             'Legt den Namen fest, der beim Versenden von Benachrichtigungen durch die Applikation verwendet werden soll. Der Absendername wird genutzt, um den vollständigen Anzeigenamen des Benachrichtigungs-Masters zu bilden (z. B. "Znuny Notifications znuny@your.example.com).',
         'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
             'Legt die E-Mail-Adresse fest, die zum Versenden von E-Mails durch die Applikation verwendet werden soll. Die Adresse wird genutzt, um den vollständigen Anzeigenamen des Benachrichtigungs-Masters zu bilden (z. B. "Znuny Notifications znuny@your.example.com). Sie können die OTRS_CONFIG_FQDN-Variable nutzen, die Sie in der Konfiguration festgelegt haben, oder eine andere E-Mail-Adresse wählen.',
+        'Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).' =>
+            'Legt die Gültigkeitsdauer in Sekunden für Passwort-Zurücksetzungs-Token fest. Nach Ablauf dieser Zeit verfällt das Token und eine neue Anfrage ist erforderlich. Standard: 3600 (1 Stunde).',
+        'Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.' =>
+            'Maximale Anzahl an Passwort-Zurücksetzungs-Anfragen pro IP-Adresse oder Benutzernamen innerhalb des Rate-Limit-Zeitfensters. Auf 0 setzen, um Rate Limiting zu deaktivieren. Standard: 5.',
+        'Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes).' =>
+            'Zeitfenster in Sekunden für das Rate Limiting bei Passwort-Zurücksetzungen. Versuche innerhalb dieses Zeitfensters werden gegen das Maximum gezählt. Standard: 600 (10 Minuten).',
         'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
             'Legt den Betreff der Benachrichtigungs-E-Mail fest, die bei einer Passwortanfrage an Agenten verschickt wird.',
         'Defines the body text for notification mails sent to agents, with token about new requested password.' =>
             'Legt den Fließtext der Benachrichtigungs-E-Mail fest, die bei einer Passwortanfrage an Agenten verschickt wird.',
-        'Defines the subject for notification mails sent to agents, about new password.' =>
-            'Definiert den Betreff für Benachrichtigungs-Emails, die wegen eines neuen Passworts an Agenten geschickt werden.',
-        'Defines the body text for notification mails sent to agents, about new password.' =>
-            'Definiert den Text im Hauptteil für Benachrichtigungs-Emails an Agenten betreffend dem neuen Passwort.',
+        'Defines the subject for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Legt den Betreff der Benachrichtigungs-E-Mails fest, die Agenten den erfolgreichen Passwortwechsel bestätigen.',
+        'Defines the body text for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Legt den Fließtext der Benachrichtigungs-E-Mails fest, die Agenten den erfolgreichen Passwortwechsel bestätigen.',
         'Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that "rw" is always the last registered permission.' =>
             'Innerhalb der Applikation verfügbare Standardberechtigungen für Agenten. Wenn mehr Berechtigungen benötigt werden, können diese hier hinterlegt werden. Berechtigungen müssen definiert werden, um Auswirkungen zu haben. Einige zusätzliche Berechtigungen sind bereits zur Nutzung vorbereitet: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Bitte stellen Sie beim Anlegen neuer Berechtigungen sicher, dass "rw" immer der letzte Eintrag bleibt.',
         'Defines the standard permissions available for customers within the application. If more permissions are needed, you can enter them here. Permissions must be hard coded to be effective. Please ensure, when adding any of the afore mentioned permissions, that the "rw" permission remains the last entry.' =>
@@ -6165,10 +6180,10 @@ sub Data {
             'Legt den Betreff der Benachrichtigungs-E-Mail fest, die bei einer Passwortanfrage an Kunden verschickt wird.',
         'Defines the body text for notification mails sent to customers, with token about new requested password.' =>
             'Definiert den Text für Benachrichtigungs-E-Mails mit dem Token für neu generierte Passwörter, die an Kunden geschickt wird.',
-        'Defines the subject for notification mails sent to customers, about new password.' =>
-            'Definiert den Betreff für Benachrichtigungs-Emails, die wegen eines neuen Passworts an Kunden geschickt wird.',
-        'Defines the body text for notification mails sent to customers, about new password.' =>
-            'Definiert den Text im Hauptteil für Benachrichtigungs-Emails an Kunden betreffend dem neuen Passwort.',
+        'Defines the subject for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Legt den Betreff der Benachrichtigungs-E-Mails fest, die Kunden den erfolgreichen Passwortwechsel bestätigen.',
+        'Defines the body text for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Legt den Fließtext der Benachrichtigungs-E-Mails fest, die Kunden den erfolgreichen Passwortwechsel bestätigen.',
         'Defines the subject for notification mails sent to customers, about new account.' =>
             'Definiert den Betreff für Benachrichtigungs-Emails, die wegen eines neuen Accounts an Kunden geschickt wird.',
         'Defines the body text for notification mails sent to customers, about new account.' =>
@@ -7826,8 +7841,8 @@ sub Data {
             'Angezeigte dynamische Felder in der Anzeige von Suchergebnissen der Ticketsuche im Kundenbereich.',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             'Ereignis-Modulregistrierung. Für mehr Performance können Sie ein Trigger-Ereignis definieren (z. B. Event => TicketCreate). Dies ist nur möglich, wenn alle dynamischen Ticketfelder das gleiche Ereignis benötigen.',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
-            'Konfiguriert eine Standardeinstellung für TicketDynamicField. "Name" definiert das Dynamische Feld, das verwendet werden soll, "Wert" sind die Daten, die gesetzt werden sollen, und "Ereignis" definiert das Auslöseereignis. Bitte beachten Sie das Entwicklerhandbuch (https://doc.znuny.org/manual/developer/), Kapitel "Ticket Event Module".',
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event.' =>
+            'Konfiguriert eine Standardeinstellung für TicketDynamicField. "Name" definiert das Dynamische Feld, das verwendet werden soll, "Wert" sind die Daten, die gesetzt werden sollen, und "Ereignis" definiert das Auslöseereignis.',
         'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
             'Definiert den Standard-Suchfilter für den Ticket-Zusammenführungsbildschirm. Dieser Filter wird angewendet, wenn nach Tickets gesucht wird, die zusammengeführt werden sollen. Der StateType-Filter beschränkt die Suche auf Tickets mit bestimmten Status (neu, offen, geschlossen, Wartung, Wartung automatisch). Zusätzliche Filter können dynamisch hinzugefügt werden.',
         'Defines the list of types for templates.' => 'Definiert die Typenliste für Templates.',

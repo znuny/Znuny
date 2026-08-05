@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.209972916998566;
+    $Self->{Completeness}        = 0.211991094147583;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2986,14 +2986,18 @@ sub Data {
         'User name' => 'Korisničko ime',
         'Your user name' => 'Vaše korisničko ime',
         'Your password' => 'Vaša lozinka',
-        'Forgot password?' => 'Zaboravili ste lozinku?',
+        'Lost your password?' => 'Izgubili ste lozinku?',
         '2 Factor Token' => '',
         'Your 2 Factor Token' => '',
         'Log In' => 'Prijavi se',
         'Request New Password' => 'Zahtjev za novu lozinku',
         'Your User Name' => 'Vaše korisničko ime',
-        'A new password will be sent to your email address.' => 'Nova lozinka će Vam biti poslana na Vašu adresu E-pošte.',
+        'A link to set a new password will be sent to your email address.' =>
+            'Poveznica za postavljanje nove lozinke bit će poslana na Vašu adresu e-pošte.',
         'Back to login' => 'Natrag na prijavu',
+        'Set New Password' => 'Postavi novu lozinku',
+        'New password' => 'Nova lozinka',
+        'Confirm password' => 'Potvrdi lozinku',
         'Create Account' => 'Napravite korisnički račun',
         'Please fill out this form to receive login credentials.' => '',
         'How we should address you' => 'Kako da Vas oslovljavamo',
@@ -3199,9 +3203,6 @@ sub Data {
         'Object#' => 'Objekt#',
         'Add links' => 'Dodaj veze',
         'Delete links' => 'Obriši veze',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
-        'Lost your password?' => 'Izgubili ste lozinku?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -4392,6 +4393,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
         'No ArticleID is given!' => '',
+        'Resend is not possible for this article!' => 'Ponovno slanje nije moguće za ovaj članak!',
 
         # Perl Module: Kernel/Modules/AgentTicketEscalationView.pm
         'Next week' => '',
@@ -4889,7 +4891,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Preferences/Password.pm
         'Current password' => 'Sadašnja lozinka',
-        'New password' => 'Nova lozinka',
         'Verify password' => 'Potvrdi lozinku',
         'The current password is not correct. Please try again!' => 'Unijeli ste pogrešnu lozinku. Molimo pokušajte ponovno!',
         'Please supply your new password!' => '',
@@ -5570,9 +5571,17 @@ sub Data {
         'Can`t remove SessionID.' => '',
         'Logout successful.' => '',
         'Feature not active!' => 'Funkcija nije aktivna!',
+        'Your password reset link is invalid or has expired. Please request a new one.' =>
+            'Vaša poveznica za resetiranje lozinke nije valjana ili je istekla. Zatražite novu.',
         'Sent password reset instructions. Please check your email.' => 'Upute za resetiranje lozinke su poslane. Molimo provjerite svoju E-poštu.',
-        'Invalid Token!' => 'Neispravan Token!',
-        'Sent new password to %s. Please check your email.' => 'Poslana je nova lozinka za %s. Provjerite svoju E-poštu.',
+        'Passwords do not match!' => 'Lozinke se ne podudaraju!',
+        'Password does not match the requirements!' => 'Lozinka ne zadovoljava zahtjeve!',
+        'Password must be at least %s characters long!' => 'Lozinka mora imati najmanje %s znakova!',
+        'Password must contain at least 2 lowercase and 2 uppercase letter characters!' =>
+            'Lozinka mora sadržavati najmanje 2 mala i 2 velika slova!',
+        'Password must contain at least 1 digit!' => 'Lozinka mora sadržavati najmanje 1 broj!',
+        'Password must contain at least 2 letter characters!' => 'Lozinka mora sadržavati najmanje 2 slova!',
+        'Password changed. Please log in with your new password.' => 'Lozinka je promijenjena. Prijavite se s novom lozinkom.',
         'Error: invalid session.' => '',
         'No Permission to use this frontend module!' => '',
 
@@ -5759,7 +5768,7 @@ sub Data {
             '',
         'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
             '',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.' =>
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html.' =>
             '',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             '',
@@ -6085,14 +6094,20 @@ sub Data {
             '',
         'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
             '',
+        'Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).' =>
+            'Definira razdoblje valjanosti u sekundama za tokene za resetiranje lozinke. Nakon toga token istječe i potreban je novi zahtjev. Zadano: 3600 (1 sat).',
+        'Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.' =>
+            'Maksimalan broj zahtjeva za resetiranje lozinke po IP adresi ili korisničkom imenu unutar prozora rate limitinga. Postavite 0 za onemogućavanje. Zadano: 5.',
+        'Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes).' =>
+            'Vremenski prozor u sekundama za rate limiting resetiranja lozinke. Pokušaji unutar ovog prozora broje se prema maksimumu. Zadano: 600 (10 minuta).',
         'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
             '',
         'Defines the body text for notification mails sent to agents, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to agents, about new password.' =>
-            '',
-        'Defines the body text for notification mails sent to agents, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Definira predmet obavijesti e-pošte poslanih agentima koji potvrđuju resetiranje lozinke.',
+        'Defines the body text for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Definira tekst obavijesti e-pošte poslanih agentima koji potvrđuju resetiranje lozinke.',
         'Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that "rw" is always the last registered permission.' =>
             '',
         'Defines the standard permissions available for customers within the application. If more permissions are needed, you can enter them here. Permissions must be hard coded to be effective. Please ensure, when adding any of the afore mentioned permissions, that the "rw" permission remains the last entry.' =>
@@ -6168,10 +6183,10 @@ sub Data {
             '',
         'Defines the body text for notification mails sent to customers, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to customers, about new password.' =>
-            '',
-        'Defines the body text for notification mails sent to customers, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Definira predmet obavijesti e-pošte poslanih kupcima koji potvrđuju resetiranje lozinke.',
+        'Defines the body text for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Definira tekst obavijesti e-pošte poslanih kupcima koji potvrđuju resetiranje lozinke.',
         'Defines the subject for notification mails sent to customers, about new account.' =>
             '',
         'Defines the body text for notification mails sent to customers, about new account.' =>
@@ -7829,7 +7844,7 @@ sub Data {
             '',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             '',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event.' =>
             '',
         'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
             '',

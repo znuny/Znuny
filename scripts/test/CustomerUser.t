@@ -662,37 +662,101 @@ my $Token = $CustomerUserObject->TokenGenerate(
 );
 $Self->True(
     $Token,
-    "TokenGenerate() - $Token",
+    "TokenGenerate() - returned plaintext token",
 );
 
+# token must be 32 alphanumeric characters
+$Self->True(
+    $Token =~ /\A[a-zA-Z0-9]{32}\z/,
+    "TokenGenerate() - token is 32 alphanumeric characters",
+);
+
+# stored value must be the SHA-256 hash (64 hex chars), not the plaintext token
+my %StoredCustPrefs = $CustomerUserObject->GetPreferences( UserID => $UserID );
+$Self->True(
+    $StoredCustPrefs{UserToken} && $StoredCustPrefs{UserToken} =~ /\A[0-9a-f]{64}\z/,
+    "TokenGenerate() - stored value is a SHA-256 hex hash",
+);
+$Self->True(
+    $StoredCustPrefs{UserToken} ne $Token,
+    "TokenGenerate() - stored value differs from plaintext token",
+);
+
+# expiry preference must be a future Unix timestamp
+$Self->True(
+    $StoredCustPrefs{UserTokenExpiry} && $StoredCustPrefs{UserTokenExpiry} > time(),
+    "TokenGenerate() - expiry timestamp is in the future",
+);
+
+# Peek mode: validate without consuming
 my $TokenValid = $CustomerUserObject->TokenCheck(
     Token  => $Token,
     UserID => $UserID,
+    Peek   => 1,
 );
-
 $Self->True(
     $TokenValid,
-    "TokenCheck() - $Token",
+    "TokenCheck(Peek) - valid token accepted",
 );
 
+# token should still be present after Peek
+%StoredCustPrefs = $CustomerUserObject->GetPreferences( UserID => $UserID );
+$Self->True(
+    $StoredCustPrefs{UserToken},
+    "TokenCheck(Peek) - token still stored after Peek",
+);
+
+# Normal check: validate and consume
 $TokenValid = $CustomerUserObject->TokenCheck(
     Token  => $Token,
     UserID => $UserID,
 );
-
 $Self->True(
-    !$TokenValid,
-    "TokenCheck() - $Token",
+    $TokenValid,
+    "TokenCheck() - valid token accepted",
 );
 
+# second check must fail (token consumed)
+$TokenValid = $CustomerUserObject->TokenCheck(
+    Token  => $Token,
+    UserID => $UserID,
+);
+$Self->True(
+    !$TokenValid,
+    "TokenCheck() - token rejected after consumption",
+);
+
+# wrong token must fail
 $TokenValid = $CustomerUserObject->TokenCheck(
     Token  => $Token . '123',
     UserID => $UserID,
 );
-
 $Self->True(
     !$TokenValid,
-    "TokenCheck() - $Token" . "123",
+    "TokenCheck() - wrong token rejected",
+);
+
+# expired token must fail
+my $ExpiredCustToken = $CustomerUserObject->TokenGenerate( UserID => $UserID );
+$CustomerUserObject->SetPreferences(
+    Key    => 'UserTokenExpiry',
+    Value  => time() - 1,
+    UserID => $UserID,
+);
+$TokenValid = $CustomerUserObject->TokenCheck(
+    Token  => $ExpiredCustToken,
+    UserID => $UserID,
+);
+$Self->True(
+    !$TokenValid,
+    "TokenCheck() - expired token rejected",
+);
+
+# expired token must also be consumed (cleared from DB)
+%StoredCustPrefs = $CustomerUserObject->GetPreferences( UserID => $UserID );
+$Self->True(
+    !$StoredCustPrefs{UserToken},
+    "TokenCheck() - expired token removed from storage",
 );
 
 # testing preferences

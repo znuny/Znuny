@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.276724549944241;
+    $Self->{Completeness}        = 0.278625954198473;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2982,14 +2982,18 @@ sub Data {
         'User name' => 'Nume utilizator',
         'Your user name' => 'Numele dvs. de utilizator',
         'Your password' => 'Parola dumneavoastră',
-        'Forgot password?' => 'Ați uitat parola?',
+        'Lost your password?' => '',
         '2 Factor Token' => '',
         'Your 2 Factor Token' => '',
         'Log In' => '',
         'Request New Password' => '',
         'Your User Name' => 'Numele Dvs. de Utilizator',
-        'A new password will be sent to your email address.' => 'O nouă parolă va fi trimisă pe adresa dvs. de email.',
+        'A link to set a new password will be sent to your email address.' =>
+            'Un link pentru a seta o nouă parolă va fi trimis pe adresa dvs. de email.',
         'Back to login' => '',
+        'Set New Password' => 'Setați parola nouă',
+        'New password' => 'Parola nouă',
+        'Confirm password' => 'Confirmați parola',
         'Create Account' => 'Creare cont',
         'Please fill out this form to receive login credentials.' => '',
         'How we should address you' => 'Modul de adresare dorit',
@@ -3195,9 +3199,6 @@ sub Data {
         'Object#' => '',
         'Add links' => '',
         'Delete links' => '',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
-        'Lost your password?' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -4388,6 +4389,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
         'No ArticleID is given!' => '',
+        'Resend is not possible for this article!' => 'Retrimiterea nu este posibilă pentru acest articol!',
 
         # Perl Module: Kernel/Modules/AgentTicketEscalationView.pm
         'Next week' => 'Săptămâna viitoare',
@@ -4885,7 +4887,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Preferences/Password.pm
         'Current password' => 'Parola actuală',
-        'New password' => 'Parola nouă',
         'Verify password' => 'Verificați parola',
         'The current password is not correct. Please try again!' => 'Parola este greșită. Vă rog încercați din nou!',
         'Please supply your new password!' => '',
@@ -5566,9 +5567,17 @@ sub Data {
         'Can`t remove SessionID.' => '',
         'Logout successful.' => '',
         'Feature not active!' => 'Această opține nu este activă!',
+        'Your password reset link is invalid or has expired. Please request a new one.' =>
+            'Linkul de resetare a parolei este invalid sau a expirat. Solicitați unul nou.',
         'Sent password reset instructions. Please check your email.' => 'Instrucțiunile pentru schimbarea parolei au fost trimise. Vă rog să vă verificați adresa de email.',
-        'Invalid Token!' => 'Token greșit!',
-        'Sent new password to %s. Please check your email.' => 'Noua parolă a fost trimisă către %s. Vă rog să verificatți cpsuța de email.',
+        'Passwords do not match!' => 'Parolele nu se potrivesc!',
+        'Password does not match the requirements!' => 'Parola nu îndeplinește cerințele!',
+        'Password must be at least %s characters long!' => 'Parola trebuie să aibă cel puțin %s caractere!',
+        'Password must contain at least 2 lowercase and 2 uppercase letter characters!' =>
+            'Parola trebuie să conțină cel puțin 2 litere mici și 2 mari!',
+        'Password must contain at least 1 digit!' => 'Parola trebuie să conțină cel puțin 1 cifră!',
+        'Password must contain at least 2 letter characters!' => 'Parola trebuie să conțină cel puțin 2 litere!',
+        'Password changed. Please log in with your new password.' => 'Parola a fost schimbată. Autentificați-vă cu noua parolă.',
         'Error: invalid session.' => '',
         'No Permission to use this frontend module!' => '',
 
@@ -5755,7 +5764,7 @@ sub Data {
             '',
         'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
             '',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.' =>
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html.' =>
             '',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             '',
@@ -6081,14 +6090,20 @@ sub Data {
             '',
         'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
             '',
+        'Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).' =>
+            'Definește perioada de valabilitate în secunde pentru token-urile de resetare a parolei. După aceasta token-ul expiră și este necesară o nouă solicitare. Implicit: 3600 (1 oră).',
+        'Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.' =>
+            'Numărul maxim de solicitări de resetare a parolei permise per adresă IP sau nume de utilizator în fereastra de rate limiting. Setați 0 pentru a dezactiva rate limiting. Implicit: 5.',
+        'Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes).' =>
+            'Fereastră de timp în secunde pentru rate limiting la resetarea parolei. Încercările din această fereastră se numără față de maximum. Implicit: 600 (10 minute).',
         'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
             '',
         'Defines the body text for notification mails sent to agents, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to agents, about new password.' =>
-            '',
-        'Defines the body text for notification mails sent to agents, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Definește subiectul e-mailurilor de notificare trimise agenților care confirmă resetarea parolei.',
+        'Defines the body text for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Definește textul e-mailurilor de notificare trimise agenților care confirmă resetarea parolei.',
         'Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that "rw" is always the last registered permission.' =>
             '',
         'Defines the standard permissions available for customers within the application. If more permissions are needed, you can enter them here. Permissions must be hard coded to be effective. Please ensure, when adding any of the afore mentioned permissions, that the "rw" permission remains the last entry.' =>
@@ -6164,10 +6179,10 @@ sub Data {
             '',
         'Defines the body text for notification mails sent to customers, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to customers, about new password.' =>
-            '',
-        'Defines the body text for notification mails sent to customers, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Definește subiectul e-mailurilor de notificare trimise clienților care confirmă resetarea parolei.',
+        'Defines the body text for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Definește textul e-mailurilor de notificare trimise clienților care confirmă resetarea parolei.',
         'Defines the subject for notification mails sent to customers, about new account.' =>
             '',
         'Defines the body text for notification mails sent to customers, about new account.' =>
@@ -7825,7 +7840,7 @@ sub Data {
             '',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             '',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event.' =>
             '',
         'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
             '',

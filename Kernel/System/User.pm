@@ -1467,14 +1467,23 @@ sub TokenGenerate {
         );
         return;
     }
-    my $Token = $Kernel::OM->Get('Kernel::System::Main')->GenerateRandomString(
-        Length => 15,
-    );
 
-    # save token in preferences
+    my $Token = $Kernel::OM->Get('Kernel::System::Main')->GenerateRandomString(
+        Length => 32,
+    );
+    my $SHA256Token = Digest::SHA::sha256_hex($Token);
     $Self->SetPreferences(
         Key    => 'UserToken',
-        Value  => $Token,
+        Value  => $SHA256Token,
+        UserID => $Param{UserID},
+    );
+
+    my $PasswordResetTokenExpiry = $Kernel::OM->Get('Kernel::Config')->Get('PasswordResetTokenExpiry') || 3600;
+    $PasswordResetTokenExpiry += time();
+
+    $Self->SetPreferences(
+        Key    => 'UserTokenExpiry',
+        Value  => $PasswordResetTokenExpiry,
         UserID => $Param{UserID},
     );
 
@@ -1508,23 +1517,37 @@ sub TokenCheck {
     my %Preferences = $Self->GetPreferences(
         UserID => $Param{UserID},
     );
+    return if !$Preferences{UserToken};
 
     # check requested vs. stored token
-    if ( $Preferences{UserToken} && $Preferences{UserToken} eq $Param{Token} ) {
+    return if $Preferences{UserToken} ne Digest::SHA::sha256_hex( $Param{Token} );
 
-        # reset password token
+    # check expiry
+    my $UserTokenExpiry = $Preferences{UserTokenExpiry} // 0;
+    my $TokenExpired    = time() > $UserTokenExpiry;
+
+    # a) Remove expired token
+    # b) Remove/use valid token that is checked without option 'peek'
+    my $KeepValidToken = $Param{Peek} ? 1 : 0;
+
+    if (
+        $TokenExpired
+        || !$KeepValidToken
+        )
+    {
         $Self->SetPreferences(
             Key    => 'UserToken',
             Value  => '',
-            UserID => $Param{UserID},
+            UserID => $Param{UserID}
         );
-
-        # return true if token is valid
-        return 1;
+        $Self->SetPreferences(
+            Key    => 'UserTokenExpiry',
+            Value  => '',
+            UserID => $Param{UserID}
+        );
     }
 
-    # return false if token is invalid
-    return;
+    return $TokenExpired ? 0 : 1;
 }
 
 =begin Internal:

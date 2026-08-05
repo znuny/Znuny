@@ -38,7 +38,8 @@ Core.Customer.Login = (function (TargetNS) {
             FormID,
             $ContainerLinks = $('[data-container-link]'),
             LoginFailed     = Core.Config.Get('LoginFailed'),
-            SignupError     = Core.Config.Get('SignupError');
+            SignupError     = Core.Config.Get('SignupError'),
+            PasswordReset   = Core.Config.Get('PasswordReset');
 
         // Browser is too old
         if (!Core.Customer.SupportedBrowser) {
@@ -83,6 +84,11 @@ Core.Customer.Login = (function (TargetNS) {
         // navigate to Signup when SignupError exists
         if (typeof SignupError !== 'undefined' && parseInt(SignupError, 10) === 1) {
             TargetNS.ActivateForm('Signup');
+        }
+
+        // show password-reset form when the server has validated a token
+        if (typeof PasswordReset !== 'undefined' && parseInt(PasswordReset, 10) === 1) {
+            TargetNS.ActivateForm('PasswordReset');
         }
     };
 

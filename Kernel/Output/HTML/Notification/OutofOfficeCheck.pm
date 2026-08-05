@@ -13,6 +13,7 @@ use parent 'Kernel::Output::HTML::Base';
 
 use strict;
 use warnings;
+use utf8;
 
 our @ObjectDependencies = (
     'Kernel::Output::HTML::Layout',
@@ -44,9 +45,10 @@ sub Run {
         return $LayoutObject->Notify(
             Priority => 'Notice',
             Link     => $LayoutObject->{Baselink} . 'Action=AgentPreferences',
-            Data     =>
-                $LayoutObject->{LanguageObject}
-                ->Translate("You have Out of Office enabled, would you like to disable it?"),
+            Data     => $LayoutObject->{LanguageObject}->Translate(
+                "You have Out of Office enabled, would you like to disable it?"
+            ),
+            KeepClosedForSession => 1,
         );
     }
 

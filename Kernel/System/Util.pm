@@ -16,6 +16,7 @@ use utf8;
 
 use MIME::Base64;
 use Data::UUID;
+use File::stat;
 
 use Kernel::System::VariableCheck qw(:all);
 
@@ -127,6 +128,30 @@ sub IsFrontendContext {
     return if !$LayoutObject->{Action};
 
     return 1;
+}
+
+=head2 ApplicationUserGet()
+
+Determines the local application user.
+
+    my $ApplicationUser = $UtilObject->ApplicationUserGet();
+
+=cut
+
+sub ApplicationUserGet {
+    my ( $Self, %Param ) = @_;
+
+    my $DefaultApplicationUser = 'znuny';
+
+    my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
+    return $DefaultApplicationUser if !$Home;
+
+    my $HomeStat = File::stat::stat($Home);
+    return $DefaultApplicationUser if !$HomeStat;
+
+    my $HomeOwner = getpwuid( $HomeStat->uid() );
+
+    return $HomeOwner || $DefaultApplicationUser;
 }
 
 =head2 Base64DeepEncode()

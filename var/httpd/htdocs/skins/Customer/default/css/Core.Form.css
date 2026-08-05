@@ -482,7 +482,7 @@ fieldset .field-wrapper {
 }
 
 
-fieldset .Field > div:not(.TooltipErrorMessage) {
+fieldset .Field > div:not(.TooltipErrorMessage, .ck.ck-editor) {
     display: flex;
     gap: var(--gap-sm);
     /*align-items: center;*/
@@ -946,6 +946,10 @@ div.TooltipErrorMessage {
     border: var(--border-width) var(--border-solid) var(--border-color) !important;
     width: 100%;
     max-width: 300px;
+}
+
+.ui-datepicker.ui-widget-content {
+    width: auto;
 }
 
 .ui-widget-header {

@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.569380277202485;
+    $Self->{Completeness}        = 0.570769720101781;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2989,14 +2989,18 @@ sub Data {
         'User name' => 'Nombre de usuario',
         'Your user name' => 'Su nombre de usuario',
         'Your password' => 'Su contraseña',
-        'Forgot password?' => '¿Olvidó su contraseña?',
+        'Lost your password?' => '¿Perdió su contraseña?',
         '2 Factor Token' => 'Código de autenticación en dos pasos',
         'Your 2 Factor Token' => 'Su código de autenticación en dos pasos',
         'Log In' => 'Iniciar sesión',
         'Request New Password' => 'Solicitar nueva contraseña',
         'Your User Name' => 'Su nombre de usuario',
-        'A new password will be sent to your email address.' => 'Se le enviará una nueva contraseña a su dirección de correo electrónico.',
+        'A link to set a new password will be sent to your email address.' =>
+            'Se le enviará un enlace para establecer una nueva contraseña a su dirección de correo electrónico.',
         'Back to login' => 'Volver al inicio de sesión',
+        'Set New Password' => 'Establecer nueva contraseña',
+        'New password' => 'Nueva contraseña',
+        'Confirm password' => 'Confirmar contraseña',
         'Create Account' => 'Crear una cuenta',
         'Please fill out this form to receive login credentials.' => 'Rellene este formulario para recibir las credenciales de inicio de sesión.',
         'How we should address you' => 'Cómo debemos dirigirnos a usted',
@@ -3202,9 +3206,6 @@ sub Data {
         'Object#' => 'Objeto nº',
         'Add links' => 'Añadir enlaces',
         'Delete links' => 'Borrar enlaces',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
-        'Lost your password?' => '¿Perdió su contraseña?',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => 'Escalar contenido en vista preliminar',
@@ -4395,6 +4396,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
         'No ArticleID is given!' => '',
+        'Resend is not possible for this article!' => '¡No es posible reenviar este artículo!',
 
         # Perl Module: Kernel/Modules/AgentTicketEscalationView.pm
         'Next week' => 'Próxima semana',
@@ -4892,7 +4894,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Preferences/Password.pm
         'Current password' => 'Contraseña actual',
-        'New password' => 'Nueva contraseña',
         'Verify password' => 'Verificar contraseña',
         'The current password is not correct. Please try again!' => 'La contraseña actual no es correcta. ¡Inténtelo de nuevo!',
         'Please supply your new password!' => '¡Por favor ingrese una nueva contraseña!',
@@ -5574,9 +5575,17 @@ sub Data {
         'Can`t remove SessionID.' => 'No se puede eliminar el SessionID',
         'Logout successful.' => 'Sesión cerrada con éxito.',
         'Feature not active!' => '¡Característica no activa!',
+        'Your password reset link is invalid or has expired. Please request a new one.' =>
+            'Su enlace de restablecimiento de contraseña no es válido o ha caducado. Solicite uno nuevo.',
         'Sent password reset instructions. Please check your email.' => 'Enviadas instrucción de restablecimiento de contraseña. Por favor, revise su correo electrónico',
-        'Invalid Token!' => '¡Ficha no válida!',
-        'Sent new password to %s. Please check your email.' => 'Enviada nueva contraseña a %s. Por favor, revise su correo electrónico.',
+        'Passwords do not match!' => '¡Las contraseñas no coinciden!',
+        'Password does not match the requirements!' => '¡La contraseña no cumple los requisitos!',
+        'Password must be at least %s characters long!' => '¡La contraseña debe tener al menos %s caracteres!',
+        'Password must contain at least 2 lowercase and 2 uppercase letter characters!' =>
+            '¡La contraseña debe contener al menos 2 letras minúsculas y 2 mayúsculas!',
+        'Password must contain at least 1 digit!' => '¡La contraseña debe contener al menos 1 dígito!',
+        'Password must contain at least 2 letter characters!' => '¡La contraseña debe contener al menos 2 letras!',
+        'Password changed. Please log in with your new password.' => 'Contraseña cambiada. Inicie sesión con su nueva contraseña.',
         'Error: invalid session.' => '',
         'No Permission to use this frontend module!' => 'No tiene Permiso a usar éste módulo de interfaz! ',
 
@@ -5763,7 +5772,7 @@ sub Data {
             'Define todos los idiomas disponibles para la aplicación. Especifique sólo los nombres en inglés de los idiomas aquí.',
         'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
             '',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.' =>
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html.' =>
             '',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             '',
@@ -6089,14 +6098,20 @@ sub Data {
             '',
         'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
             '',
+        'Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).' =>
+            'Define el periodo de validez en segundos de los tokens de restablecimiento de contraseña. Tras ese tiempo el token caduca y se requiere una nueva solicitud. Predeterminado: 3600 (1 hora).',
+        'Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.' =>
+            'Número máximo de solicitudes de restablecimiento de contraseña permitidas por dirección IP o nombre de usuario dentro de la ventana de rate limiting. Establezca 0 para desactivar el rate limiting. Predeterminado: 5.',
+        'Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes).' =>
+            'Ventana de tiempo en segundos para el rate limiting del restablecimiento de contraseña. Los intentos dentro de esta ventana se cuentan contra el máximo. Predeterminado: 600 (10 minutos).',
         'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
             '',
         'Defines the body text for notification mails sent to agents, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to agents, about new password.' =>
-            '',
-        'Defines the body text for notification mails sent to agents, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Define el asunto de los correos de notificación enviados a agentes confirmando el restablecimiento de la contraseña.',
+        'Defines the body text for notification mails sent to agents, confirming that the password has been reset.' =>
+            'Define el cuerpo de los correos de notificación enviados a agentes confirmando el restablecimiento de la contraseña.',
         'Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that "rw" is always the last registered permission.' =>
             '',
         'Defines the standard permissions available for customers within the application. If more permissions are needed, you can enter them here. Permissions must be hard coded to be effective. Please ensure, when adding any of the afore mentioned permissions, that the "rw" permission remains the last entry.' =>
@@ -6172,10 +6187,10 @@ sub Data {
             '',
         'Defines the body text for notification mails sent to customers, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to customers, about new password.' =>
-            '',
-        'Defines the body text for notification mails sent to customers, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Define el asunto de los correos de notificación enviados a clientes confirmando el restablecimiento de la contraseña.',
+        'Defines the body text for notification mails sent to customers, confirming that the password has been reset.' =>
+            'Define el cuerpo de los correos de notificación enviados a clientes confirmando el restablecimiento de la contraseña.',
         'Defines the subject for notification mails sent to customers, about new account.' =>
             '',
         'Defines the body text for notification mails sent to customers, about new account.' =>
@@ -7839,8 +7854,8 @@ El control del acceso adicional para demostrar o no demostrar éste enlace puede
             '',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             '',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
-            'Configura un ajuste por defecto de CampoDinamicoTicket. "Nombre" define el campo dinámico que debe ser usado, "Valor" es el dato que será establecido, y "Evento" define el disparador del evento. Por favor compruebe el manual del desarrollador (https://doc.znuny.org/manual/developer/), capítulo "Módulo Evento Ticket".',
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event.' =>
+            'Configura un ajuste por defecto de CampoDinamicoTicket. "Nombre" define el campo dinámico que debe ser usado, "Valor" es el dato que será establecido, y "Evento" define el disparador del evento.',
         'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
             '',
         'Defines the list of types for templates.' => 'Define la lista de tipos de plantillas.',

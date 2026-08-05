@@ -204,6 +204,20 @@ sub Run {
         );
     }
 
+    #
+    # Check if resend is possible/allowed (also see Kernel::Output::HTML::ArticleAction::AgentTicketEmailResend).
+    #
+    my $ResendPossible = $Self->_IsResendPossible(
+        TicketID  => $Self->{TicketID},
+        ArticleID => $GetParam{ArticleID},
+    );
+    if ( !$ResendPossible ) {
+        return $LayoutObject->ErrorScreen(
+            Message => Translatable('Resend is not possible for this article!'),
+            Comment => Translatable('Please contact the administrator.'),
+        );
+    }
+
     # Hash for lookup of duplicated entries.
     my %AddressesList;
 
@@ -1259,6 +1273,36 @@ sub _Mask {
             %Param,
         },
     );
+}
+
+sub _IsResendPossible {
+    my ( $Self, %Param ) = @_;
+
+    my $ArticleObject        = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Email' );
+
+    my %Article = $ArticleObject->ArticleGet(
+        TicketID  => $Param{TicketID},
+        ArticleID => $Param{ArticleID},
+    );
+    return if !%Article;
+
+    return if ( $Article{CommunicationChannel} // '' ) ne 'Email';
+
+    my $TransmissionStatus = $ArticleBackendObject->ArticleTransmissionStatus(
+        ArticleID => $Param{ArticleID},
+    );
+    return if !IsHashRefWithData($TransmissionStatus);
+
+    if (
+        $TransmissionStatus->{Status}
+        && $TransmissionStatus->{Status} ne 'Failed'
+        )
+    {
+        return;
+    }
+
+    return 1;
 }
 
 1;

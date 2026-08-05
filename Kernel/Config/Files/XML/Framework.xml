@@ -261,7 +261,7 @@
         </Value>
     </Setting>
     <Setting Name="DefaultTheme" Required="1" Valid="1" ConfigLevel="200">
-        <Description Translatable="1">Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.</Description>
+        <Description Translatable="1">Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">Standard</Item>
@@ -3255,11 +3255,32 @@
             <Item ValueType="String" ValueRegex="">znuny@&lt;OTRS_CONFIG_FQDN&gt;</Item>
         </Value>
     </Setting>
+    <Setting Name="PasswordResetTokenExpiry" Required="1" Valid="1">
+        <Description Translatable="1">Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^[1-9]\d{0,7}$">3600</Item>
+        </Value>
+    </Setting>
+    <Setting Name="PasswordResetRateLimitMaxAttempts" Required="1" Valid="1">
+        <Description Translatable="1">Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^[0-9]{1,4}$">5</Item>
+        </Value>
+    </Setting>
+    <Setting Name="PasswordResetRateLimitWindow" Required="1" Valid="1">
+        <Description Translatable="1">Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes).</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^[1-9]\d{0,7}$">600</Item>
+        </Value>
+    </Setting>
     <Setting Name="NotificationSubjectLostPasswordToken" Required="1" Valid="1">
         <Description Translatable="1">Defines the subject for notification mails sent to agents, with token about new requested password.</Description>
         <Navigation>Frontend::Agent</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">New OTRS password request</Item>
+            <Item ValueType="String" ValueRegex="">New Znuny password request</Item>
         </Value>
     </Setting>
     <Setting Name="NotificationBodyLostPasswordToken" Required="1" Valid="1">
@@ -3268,10 +3289,11 @@
         <Value>
             <Item ValueType="Textarea">Hi &lt;OTRS_USERFIRSTNAME&gt;,
 
-You or someone impersonating you has requested to change your OTRS
+You or someone impersonating you has requested to change your Znuny
 password.
 
-If you want to do this, click on the link below. You will receive another email containing the password.
+If you want to do this, click on the link below to set a new password.
+This link is valid for a limited time.
 
 &lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=LostPassword;Token=&lt;OTRS_TOKEN&gt;
 
@@ -3280,26 +3302,25 @@ If you did not request a new password, please ignore this email.
         </Value>
     </Setting>
     <Setting Name="NotificationSubjectLostPassword" Required="1" Valid="1">
-        <Description Translatable="1">Defines the subject for notification mails sent to agents, about new password.</Description>
+        <Description Translatable="1">Defines the subject for notification mails sent to agents, confirming that the password has been reset.</Description>
         <Navigation>Frontend::Agent</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">New OTRS password</Item>
+            <Item ValueType="String" ValueRegex="">Your Znuny password has been reset</Item>
         </Value>
     </Setting>
     <Setting Name="NotificationBodyLostPassword" Required="1" Valid="1">
-        <Description Translatable="1">Defines the body text for notification mails sent to agents, about new password.</Description>
+        <Description Translatable="1">Defines the body text for notification mails sent to agents, confirming that the password has been reset.</Description>
         <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Item ValueType="Textarea">Hi &lt;OTRS_USERFIRSTNAME&gt;,
 
-
-Here's your new OTRS password.
-
-New password: &lt;OTRS_NEWPW&gt;
+Your Znuny password has been successfully reset.
 
 You can log in via the following URL:
 
 &lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl
+
+If you did not make this change, please contact your administrator immediately.
             </Item>
         </Value>
     </Setting>
@@ -3872,7 +3893,8 @@ You can log in via the following URL:
 You or someone impersonating you has requested to change your Znuny
 password.
 
-If you want to do this, click on this link. You will receive another email containing the password.
+If you want to do this, click on the link below to set a new password.
+This link is valid for a limited time.
 
 &lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;customer.pl?Action=CustomerLostPassword;Token=&lt;OTRS_TOKEN&gt;
 
@@ -3881,22 +3903,25 @@ If you did not request a new password, please ignore this email.
         </Value>
     </Setting>
     <Setting Name="CustomerPanelSubjectLostPassword" Required="1" Valid="1">
-        <Description Translatable="1">Defines the subject for notification mails sent to customers, about new password.</Description>
+        <Description Translatable="1">Defines the subject for notification mails sent to customers, confirming that the password has been reset.</Description>
         <Navigation>Frontend::Customer</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">New Znuny password</Item>
+            <Item ValueType="String" ValueRegex="">Your Znuny password has been reset</Item>
         </Value>
     </Setting>
     <Setting Name="CustomerPanelBodyLostPassword" Required="1" Valid="1">
-        <Description Translatable="1">Defines the body text for notification mails sent to customers, about new password.</Description>
+        <Description Translatable="1">Defines the body text for notification mails sent to customers, confirming that the password has been reset.</Description>
         <Navigation>Frontend::Customer</Navigation>
         <Value>
             <Item ValueType="Textarea">Hi &lt;OTRS_USERFIRSTNAME&gt;,
 
+Your Znuny password has been successfully reset.
 
-New password: &lt;OTRS_NEWPW&gt;
+You can log in via the following URL:
 
 &lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;customer.pl
+
+If you did not make this change, please contact your administrator immediately.
             </Item>
         </Value>
     </Setting>

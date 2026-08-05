@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%m/%d';
     $Self->{DateInputFormat}     = '%Y/%m/%d';
     $Self->{DateInputFormatLong} = '%Y/%m/%d - %T';
-    $Self->{Completeness}        = 0.654771387605544;
+    $Self->{Completeness}        = 0.655693384223919;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2988,14 +2988,18 @@ sub Data {
         'User name' => 'ユーザー名',
         'Your user name' => 'ユーザー名',
         'Your password' => 'パスワード',
-        'Forgot password?' => 'パスワードを忘れましたか？',
+        'Lost your password?' => 'パスワードを忘れた方',
         '2 Factor Token' => '',
         'Your 2 Factor Token' => '',
         'Log In' => 'ログイン',
         'Request New Password' => '新規パスワードを申請',
         'Your User Name' => 'ユーザー名',
-        'A new password will be sent to your email address.' => '登録されたメールアドレスに新しいパスワードを送信します。',
+        'A link to set a new password will be sent to your email address.' =>
+            '新しいパスワードを設定するためのリンクを登録されたメールアドレスに送信します。',
         'Back to login' => 'ログイン画面に戻る',
+        'Set New Password' => '新しいパスワードを設定',
+        'New password' => '新しいパスワード',
+        'Confirm password' => 'パスワードの確認',
         'Create Account' => 'アカウント作成',
         'Please fill out this form to receive login credentials.' => '下記のフォームにログイン時に必要となる事項を入力してください。',
         'How we should address you' => '',
@@ -3201,9 +3205,6 @@ sub Data {
         'Object#' => '対象の番号',
         'Add links' => 'リンクを追加',
         'Delete links' => 'リンクを削除',
-
-        # TT Template: Kernel/Output/HTML/Templates/Standard/Login.tt
-        'Lost your password?' => 'パスワードを忘れた方',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/MetaFloater.tt
         'Scale preview content' => '',
@@ -4395,6 +4396,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
         'No ArticleID is given!' => 'ArticleIDは指定されていません！',
+        'Resend is not possible for this article!' => 'この記事の再送信はできません！',
 
         # Perl Module: Kernel/Modules/AgentTicketEscalationView.pm
         'Next week' => '翌週',
@@ -4892,7 +4894,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/Preferences/Password.pm
         'Current password' => '現在のパスワード',
-        'New password' => '新しいパスワード',
         'Verify password' => '新しいパスワード(確認用)',
         'The current password is not correct. Please try again!' => 'パスワードが正しくありません。再入力してください。',
         'Please supply your new password!' => '新しいパスワードを入力して下さい！',
@@ -5573,9 +5574,17 @@ sub Data {
         'Can`t remove SessionID.' => 'セッションIDを削除できません。',
         'Logout successful.' => 'ログアウトしました。',
         'Feature not active!' => '機能が有効になっていません。',
+        'Your password reset link is invalid or has expired. Please request a new one.' =>
+            'パスワードリセットリンクが無効または期限切れです。新しいリンクをリクエストしてください。',
         'Sent password reset instructions. Please check your email.' => 'パスワードを初期化する手順を送信しました。メールを確認してください。',
-        'Invalid Token!' => '無効なトークンです',
-        'Sent new password to %s. Please check your email.' => '新しいパスワードを %s に送信しました。メールを確認してください。',
+        'Passwords do not match!' => 'パスワードが一致しません!',
+        'Password does not match the requirements!' => 'パスワードが要件を満たしていません!',
+        'Password must be at least %s characters long!' => 'パスワードは少なくとも %s 文字である必要があります!',
+        'Password must contain at least 2 lowercase and 2 uppercase letter characters!' =>
+            'パスワードには少なくとも小文字2文字と大文字2文字が必要です!',
+        'Password must contain at least 1 digit!' => 'パスワードには少なくとも1桁の数字が必要です!',
+        'Password must contain at least 2 letter characters!' => 'パスワードには少なくとも2文字の英字が必要です!',
+        'Password changed. Please log in with your new password.' => 'パスワードが変更されました。新しいパスワードでログインしてください。',
         'Error: invalid session.' => 'エラー: セッションが無効な値です。',
         'No Permission to use this frontend module!' => 'このフロントエンドモジュールを使用する権限がありません',
 
@@ -5762,7 +5771,7 @@ sub Data {
             '',
         'Defines all the languages that are available to the application. Specify only native names of languages here.' =>
             '',
-        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.' =>
+        'Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html.' =>
             '',
         'It is possible to configure different themes, for example to distinguish between agents and customers, to be used on a per-domain basis within the application. Using a regular expression (regex), you can configure a Key/Content pair to match a domain. The value in "Key" should match the domain, and the value in "Content" should be a valid theme on your system. Please see the example entries for the proper form of the regex.' =>
             '異なるテーマを、担当者と顧客の間で異なるように、アプリケーション内でドメインごとの単位で使用されるように、設定することができます。regular expression (regex)を使用することにより、ドメインにマッチするようにKey/Contentを設定することが可能です。“Key”の値はドメインにマッチさせるべきであり、“Content”の値はご利用のシステムで有効なテーマとしてください。regrexの適切な形式のための入力例を確認してください。',
@@ -6088,14 +6097,20 @@ sub Data {
             '',
         'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
             '',
+        'Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).' =>
+            'パスワードリセットトークンの有効期間（秒）を定義します。この時間を過ぎるとトークンは失効し、新しいリクエストが必要です。デフォルト: 3600（1時間）。',
+        'Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.' =>
+            'rate limiting ウィンドウ内で IP アドレスまたはユーザー名ごとに許可されるパスワードリセット要求の最大数。0 で rate limiting を無効化。デフォルト: 5。',
+        'Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes).' =>
+            'パスワードリセットの rate limiting 用の時間ウィンドウ（秒）。このウィンドウ内の試行は最大値に対してカウントされます。デフォルト: 600（10分）。',
         'Defines the subject for notification mails sent to agents, with token about new requested password.' =>
             '新規にリクエストされたパスワードに関するトークンと共に、担当者に送信される通知メールの件名を定義します。',
         'Defines the body text for notification mails sent to agents, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to agents, about new password.' =>
-            '新しいパスワードに関して、担当者に送信される通知メールの件名を定義します。',
-        'Defines the body text for notification mails sent to agents, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to agents, confirming that the password has been reset.' =>
+            'パスワードリセットを確認するエージェント向け通知メールの件名を定義します。',
+        'Defines the body text for notification mails sent to agents, confirming that the password has been reset.' =>
+            'パスワードリセットを確認するエージェント向け通知メールの本文を定義します。',
         'Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that "rw" is always the last registered permission.' =>
             'アプリケーション内で担当者にとって標準的に利用可能な許可です。もし、さらに多くの許可が必要であれば、ここで加えることができます。許可は、効果的になるように設定する必要があります。いくつか他の良い許可も、ビルト・インで提供されています：note, close, pending, customer, freetext, move, compose, responsible, forward, bounce。“rw”は、常に最後の登録許可であることを確認してください。',
         'Defines the standard permissions available for customers within the application. If more permissions are needed, you can enter them here. Permissions must be hard coded to be effective. Please ensure, when adding any of the afore mentioned permissions, that the "rw" permission remains the last entry.' =>
@@ -6171,10 +6186,10 @@ sub Data {
             '新しくリクエストされたパスワードに関するトークンと共に、顧客に送信される通知メールの件名を定義します。',
         'Defines the body text for notification mails sent to customers, with token about new requested password.' =>
             '',
-        'Defines the subject for notification mails sent to customers, about new password.' =>
-            '新パスワードについて、顧客に送信される通知メールの件名を定義します。',
-        'Defines the body text for notification mails sent to customers, about new password.' =>
-            '',
+        'Defines the subject for notification mails sent to customers, confirming that the password has been reset.' =>
+            'パスワードリセットを確認する顧客向け通知メールの件名を定義します。',
+        'Defines the body text for notification mails sent to customers, confirming that the password has been reset.' =>
+            'パスワードリセットを確認する顧客向け通知メールの本文を定義します。',
         'Defines the subject for notification mails sent to customers, about new account.' =>
             '新アカウントについて、顧客に送信される通知メールの件名を定義します。',
         'Defines the body text for notification mails sent to customers, about new account.' =>
@@ -7841,7 +7856,7 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             '',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
             '',
-        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event. Please check the developer manual (https://doc.znuny.org/manual/developer/), chapter "Ticket Event Module".' =>
+        'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event.' =>
             '',
         'Defines the default search filter for the ticket merge screen. This filter is applied when searching for tickets to merge with. The StateType filter limits the search to tickets with specific states (new, open, closed, pending reminder, pending auto). Additional filters can be added dynamically.' =>
             '',

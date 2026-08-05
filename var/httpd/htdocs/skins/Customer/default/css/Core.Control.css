@@ -68,9 +68,9 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 }*/
 
-/*#Navigation > ul > li:hover ul:not(:empty),
-#Navigation > ul > li a:focus + ul:not(:empty),*/
-#Navigation > ul > li ul.Expanded:not(:empty:blank) {
+#Navigation > ul > li:hover ul:has(> *),
+#Navigation > ul > li a:focus + ul:has(> *),
+#Navigation > ul > li ul.Expanded:has(> *) {
     display: block;
     z-index: 1000;
 }

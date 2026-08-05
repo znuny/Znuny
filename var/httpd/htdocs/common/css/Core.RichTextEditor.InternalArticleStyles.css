@@ -52,6 +52,10 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     padding: 0;
 }
 
+.ck.ck-content > p, .ck.ck-content div[type="cite"] > p {
+    margin: 0 0 0.2em 0;
+}
+
 .ck.ck-content table {
     border-collapse: collapse;
     border-spacing: 0;
