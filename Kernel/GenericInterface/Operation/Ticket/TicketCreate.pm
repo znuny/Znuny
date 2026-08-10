@@ -1549,13 +1549,11 @@ sub _TicketCreate {
 
         # set Article To
         my $To;
-        my $Cc;
-        my $Bcc;
+        my $Cc  = $Article->{Cc};
+        my $Bcc = $Article->{Bcc};
 
         if ( $Article->{ArticleSend} ) {
-            $To  = $Article->{To};
-            $Cc  = $Article->{Cc};
-            $Bcc = $Article->{Bcc};
+            $To = $Article->{To};
         }
         elsif ( $Ticket->{Queue} ) {
             $To = $Ticket->{Queue};

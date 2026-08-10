@@ -1,3 +1,7 @@
+# 7.3.6 2026-??-??
+ - 2026-07-27 Fixed: Migration follow-up step for removing mention flags from archived tickets was shown even when Ticket::ArchiveSystem is disabled.
+ - 2026-07-24 Changed: Cc and Bcc will now also be set when article will only be created instead of sent in generic interface operation TicketCreate.
+
 # 7.3.5 2026-07-22
  - 2026-07-17 Fixed: Documentation links in config options. Thanks to @bjinthahouse for reporting the issue. [#763](https://github.com/znuny/Znuny/issues/763)
  - 2026-07-13 Fixed: Submenus not visible in customer interface.
