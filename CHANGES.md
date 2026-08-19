@@ -2,6 +2,7 @@
  - 2026-08-17 Changed: REST transport module now keeps query parameters that don't contain placeholders.
  - 2026-08-12 Fixed: AgentTicketEmailResend does not revert owner to previous if current user that cancelled resend was not actual ticket owner before initialing resend action.
  - 2026-07-24 Changed: Cc and Bcc will now also be set when article will only be created instead of sent in generic interface operation TicketCreate.
+ - 2026-07-01 CVE-2025-25977: Updated JavaScript library canvg to version 4.0.3.
 
 # 6.5.23 2026-07-22
  - 2026-07-17 Fixed: Documentation links in config options. Thanks to @bjinthahouse for reporting the issue. [#763](https://github.com/znuny/Znuny/issues/763)
