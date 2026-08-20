@@ -1,3 +1,6 @@
+# 6.5.25 2026-??-??
+ - 2026-08-20 Fixed: agent/customer re-direction after accepting initial information dialog (AgentInfo/CustomerAccept).
+
 # 6.5.24 2026-08-19
  - 2026-08-17 Changed: REST transport module now keeps query parameters that don't contain placeholders.
  - 2026-08-12 Fixed: AgentTicketEmailResend does not revert owner to previous if current user that cancelled resend was not actual ticket owner before initialing resend action.

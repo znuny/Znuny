@@ -11,6 +11,7 @@ package Kernel::Modules::AgentInfo;
 
 use strict;
 use warnings;
+use utf8;
 
 our $ObjectManagerDisabled = 1;
 
@@ -31,21 +32,24 @@ sub new {
 sub PreRun {
     my ( $Self, %Param ) = @_;
 
-    my $Output;
+    my $LayoutObject  = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $SessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
+
     if ( !$Self->{RequestedURL} ) {
         $Self->{RequestedURL} = 'Action=';
     }
 
-    # redirect if no primary group is selected
+    # redirect to "agent info" only if agent didn't
+    # accept it yet and tries to request different URL
     if ( !$Self->{ $Self->{InfoKey} } && $Self->{Action} ne 'AgentInfo' ) {
 
-        # remove requested url from session storage
-        $Kernel::OM->Get('Kernel::System::AuthSession')->UpdateSessionID(
+        # remember initial URL the user requested
+        $SessionObject->UpdateSessionID(
             SessionID => $Self->{SessionID},
             Key       => 'UserRequestedURL',
             Value     => $Self->{RequestedURL},
         );
-        return $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Redirect( OP => "Action=AgentInfo" );
+        return $LayoutObject->Redirect( OP => "Action=AgentInfo" );
     }
     else {
         return;
@@ -55,15 +59,16 @@ sub PreRun {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $Output;
     if ( !$Self->{RequestedURL} ) {
         $Self->{RequestedURL} = 'Action=';
     }
 
-    my $Accept        = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'Accept' ) || '';
-    my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+    my $ParamObject   = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $LayoutObject  = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $SessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
+    my $UserObject    = $Kernel::OM->Get('Kernel::System::User');
+
+    my $Accept = $ParamObject->GetParam( Param => 'Accept' ) || '';
 
     if ( $Self->{ $Self->{InfoKey} } ) {
 
@@ -87,7 +92,7 @@ sub Run {
         );
 
         # set preferences
-        $Kernel::OM->Get('Kernel::System::User')->SetPreferences(
+        $UserObject->SetPreferences(
             UserID => $Self->{UserID},
             Key    => $Self->{InfoKey},
             Value  => 1,
@@ -101,17 +106,16 @@ sub Run {
         );
 
         # redirect
-        return $LayoutObject->Redirect( OP => "$Self->{RequestedURL}" );
+        return $LayoutObject->Redirect( OP => "$Self->{UserRequestedURL}" );
     }
     else {
 
         # show info
-        $Output = $LayoutObject->Header();
-        $Output
-            .= $LayoutObject->Output(
+        my $Output = $LayoutObject->Header();
+        $Output .= $LayoutObject->Output(
             TemplateFile => $Self->{InfoFile},
             Data         => \%Param
-            );
+        );
         $Output .= $LayoutObject->Footer();
         return $Output;
     }
