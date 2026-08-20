@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.00286259541984733;
+    $Self->{Completeness}        = 0.002862140244872;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -365,6 +365,7 @@ sub Data {
         'Search' => '',
         'Wildcards like \'*\' are allowed.' => '',
         'Add Customer' => '',
+        'Add Customer User' => '',
         'Select' => '',
         'Customer Users' => '',
         'Customers ↔ Groups' => '',
@@ -410,7 +411,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => '',
-        'Add Customer User' => '',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             '',
         'Customer Users ↔ Customers' => '',
@@ -2882,7 +2882,6 @@ sub Data {
         'Drafts' => '',
         'by' => '',
         'Article Overview - %s Article(s)' => '',
-        'Page %s' => '',
         'No.' => '',
         'Unread articles' => '',
         'Via' => '',
@@ -8826,10 +8825,11 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => '',
         'Article Color' => '',
         'ArticleTree' => '',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => '',
         'Avatar' => '',
         'Based on global RichText setting' => '',
+        'Blank' => '',
         'Bounced to "%s".' => 'Bounced to "%s".',
         'Bulgarian' => '',
         'Bulk Action' => '',
@@ -9291,6 +9291,7 @@ Thanks for your help!
             '',
         'Select your preferred layout for the software.' => '',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => '',
         'Send notifications to users.' => '',

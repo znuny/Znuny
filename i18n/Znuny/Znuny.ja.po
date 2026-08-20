@@ -1142,7 +1142,7 @@ msgstr "このグループ／キューのチケットに読み書きを含めた
 msgid "Back to search results"
 msgstr "検索結果に戻る"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "顧客ユーザーを追加"
 
@@ -25531,4 +25531,16 @@ msgstr "新しいパスワードを設定するためのリンクを登録され
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "Resend is not possible for this article!"
 msgstr "この記事の再送信はできません！"
+
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
 

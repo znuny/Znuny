@@ -1142,7 +1142,7 @@ msgstr "이 그룹/대기열의 티켓에 대한 전체 읽기 및 쓰기 액세
 msgid "Back to search results"
 msgstr "검색 결과로 돌아가기"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "고객 사용자 추가"
 
@@ -25519,4 +25519,16 @@ msgstr "새 비밀번호를 설정할 수 있는 링크가 이메일 주소로 �
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "Resend is not possible for this article!"
 msgstr "이 기사는 다시 보낼 수 없습니다!"
+
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
 

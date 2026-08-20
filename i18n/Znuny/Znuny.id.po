@@ -1142,7 +1142,7 @@ msgstr "Akses penuh untuk membaca dan membuat pengubahan padatiket dalam grup/an
 msgid "Back to search results"
 msgstr "Kembali ke hasilpencarian"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "Tambah Pelanggan pengguna"
 
@@ -25522,4 +25522,16 @@ msgstr "Tautan untuk menetapkan kata sandi baru akan dikirim ke email Anda."
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "Resend is not possible for this article!"
 msgstr "Pengiriman ulang tidak dimungkinkan untuk artikel ini!"
+
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
 

@@ -1142,7 +1142,7 @@ msgstr "Pristup bez ograničenja za kartice u ovim grupama/redovima."
 msgid "Back to search results"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr ""
 
@@ -25508,4 +25508,16 @@ msgstr "Poveznica za postavljanje nove lozinke bit će poslana na Vašu adresu e
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "Resend is not possible for this article!"
 msgstr "Ponovno slanje nije moguće za ovaj članak!"
+
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
 

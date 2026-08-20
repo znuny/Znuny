@@ -1142,7 +1142,7 @@ msgstr "Пълен достъп за билетите в тази група/о�
 msgid "Back to search results"
 msgstr "Обратно към резултатите от търсенето"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "Добавяне на клиент"
 
@@ -25508,4 +25508,16 @@ msgstr "Връзка за задаване на нова парола ще бъ�
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "Resend is not possible for this article!"
 msgstr "Повторното изпращане не е възможно за тази статия!"
+
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
 

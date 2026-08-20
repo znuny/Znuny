@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.591762086513995;
+    $Self->{Completeness}        = 0.591667991731595;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -365,6 +365,7 @@ sub Data {
         'Search' => 'جستجو',
         'Wildcards like \'*\' are allowed.' => 'نویسه عام مانند "*" مجاز است.',
         'Add Customer' => 'افزودن مشترک',
+        'Add Customer User' => 'اضافه کردن کاربر مشترک',
         'Select' => 'انتخاب',
         'Customer Users' => 'مشترکین',
         'Customers ↔ Groups' => '',
@@ -410,7 +411,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'بازگشت به نتایج جستجو',
-        'Add Customer User' => 'اضافه کردن کاربر مشترک',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'کاربران و ضوابط مورد نیاز برای یک سابقه مشتری و برای ورود به سایت از طریق پنل مشتری می باشد.',
         'Customer Users ↔ Customers' => '',
@@ -2882,7 +2882,6 @@ sub Data {
         'Drafts' => '',
         'by' => 'توسط',
         'Article Overview - %s Article(s)' => '',
-        'Page %s' => '',
         'No.' => 'خیر',
         'Unread articles' => 'مطالب خوانده نشده',
         'Via' => '',
@@ -8837,10 +8836,11 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => 'عربی (عربستان سعودی)',
         'Article Color' => '',
         'ArticleTree' => 'ArticleTree',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'نام فایل پیوست',
         'Avatar' => '',
         'Based on global RichText setting' => 'بر اساس تنظیم RichText جهانی',
+        'Blank' => '',
         'Bounced to "%s".' => 'لینک ثابت به : "%s"',
         'Bulgarian' => 'بلغاری',
         'Bulk Action' => 'اعمال کلی',
@@ -9302,6 +9302,7 @@ Thanks for your help!
             '',
         'Select your preferred layout for the software.' => '',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => 'ارسال ایمیل های ارسالی جدید این درخواست از',
         'Send notifications to users.' => 'ارسال اعلان‌ها به کاربران',

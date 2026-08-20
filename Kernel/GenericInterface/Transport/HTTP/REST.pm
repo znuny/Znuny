@@ -949,13 +949,17 @@ sub RequesterPerformRequest {
             push @ParamsToDelete, $FlattenedParamName;
         }
 
-        # Append query params in the URI.
-        if ($ReplaceFlag) {
+        # Re-append even when no :placeholder was substituted, so
+        # static query strings (e.g. ?api-version=2025-01-01-preview)
+        # configured on the controller are preserved.
+        if ( length $QueryParamsStr ) {
             $Controller .= $QueryParamsStr;
 
             $Self->{DebuggerObject}->Debug(
-                Summary => "URI after interpolating Query params from outgoing data",
-                Data    => $Controller,
+                Summary => $ReplaceFlag
+                ? '"URI after interpolating query params from outgoing data'
+                : 'URI after appending static query params from controller config',
+                Data => $Controller,
             );
         }
     }

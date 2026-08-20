@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%m/%d';
     $Self->{DateInputFormat}     = '%Y/%m/%d';
     $Self->{DateInputFormatLong} = '%Y/%m/%d - %T';
-    $Self->{Completeness}        = 0.655693384223919;
+    $Self->{Completeness}        = 0.655430116075688;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -363,6 +363,7 @@ sub Data {
         'Search' => '検索',
         'Wildcards like \'*\' are allowed.' => 'ワイルドカード（*）が使用できます。',
         'Add Customer' => '顧客を追加',
+        'Add Customer User' => '顧客ユーザーを追加',
         'Select' => '選択',
         'Customer Users' => '顧客ユーザー',
         'Customers ↔ Groups' => '顧客 ↔ グループ',
@@ -408,7 +409,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => '検索結果に戻る',
-        'Add Customer User' => '顧客ユーザーを追加',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             '顧客ユーザーは顧客履歴の使用と顧客パネルからログインするために必要です。',
         'Customer Users ↔ Customers' => '顧客ユーザー ↔ 顧客',
@@ -2882,7 +2882,6 @@ sub Data {
         'Drafts' => '下書き',
         'by' => 'by',
         'Article Overview - %s Article(s)' => '記事一覧 - %s件',
-        'Page %s' => '%sページ',
         'No.' => '番号',
         'Unread articles' => '未読記事',
         'Via' => '経由',
@@ -8845,10 +8844,11 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => '',
         'Article Color' => '',
         'ArticleTree' => '',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => '添付ファイル名',
         'Avatar' => 'アバター',
         'Based on global RichText setting' => '',
+        'Blank' => '',
         'Bounced to "%s".' => 'Bounced to "%s".',
         'Bulgarian' => 'ブルガリア語',
         'Bulk Action' => '一括処理',
@@ -9311,6 +9311,7 @@ Thanks for your help!
             '自分のタイムゾーンを選択して下さい。全ての時間は、このタイムゾーンで表示されます。',
         'Select your preferred layout for the software.' => 'ソフトウェアに適したレイアウトを選択して下さい。',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => 'このチケットから新規メールを発信',
         'Send notifications to users.' => 'ユーザーに通知の送信',

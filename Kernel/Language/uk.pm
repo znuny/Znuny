@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%m/%d/%Y';
     $Self->{DateInputFormat}     = '%m/%d/%Y';
     $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
-    $Self->{Completeness}        = 0.417779898218829;
+    $Self->{Completeness}        = 0.41771346795993;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -360,6 +360,7 @@ sub Data {
         'Search' => 'Пошук',
         'Wildcards like \'*\' are allowed.' => 'Підстановочні символи як-то «*» є дозволеними.',
         'Add Customer' => 'Додати Клієнта',
+        'Add Customer User' => 'Додати користувача-клієнта',
         'Select' => 'Вибір',
         'Customer Users' => 'Клієнти',
         'Customers ↔ Groups' => '',
@@ -405,7 +406,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Повернутись до результатів пошуку',
-        'Add Customer User' => 'Додати користувача-клієнта',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Користувачі-клієнти необхідні для того, щоб мати історію клієнта, а також для входу через панель клієнта.',
         'Customer Users ↔ Customers' => '',
@@ -2877,7 +2877,6 @@ sub Data {
         'Drafts' => '',
         'by' => 'ні',
         'Article Overview - %s Article(s)' => '',
-        'Page %s' => '',
         'No.' => 'Номер',
         'Unread articles' => 'Непрочитані заявки',
         'Via' => '',
@@ -8821,10 +8820,11 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => '',
         'Article Color' => '',
         'ArticleTree' => '',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Назва Додатка',
         'Avatar' => '',
         'Based on global RichText setting' => '',
+        'Blank' => '',
         'Bounced to "%s".' => 'Повернуте «%s».',
         'Bulgarian' => '',
         'Bulk Action' => 'Масова дія',
@@ -9286,6 +9286,7 @@ Thanks for your help!
             '',
         'Select your preferred layout for the software.' => '',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => '',
         'Send notifications to users.' => 'Відправити повідомлення користувачам.',

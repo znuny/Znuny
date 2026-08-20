@@ -1406,6 +1406,7 @@ Core.UI.RichTextEditor = (function (TargetNS) {
             'SourceEditing',
             'SpecialCharacters',
             'SpecialCharactersMathematical',
+            'SplitQuote',
             'Style',
             'Table',
             'TableCaption',

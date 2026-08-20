@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.298187022900763;
+    $Self->{Completeness}        = 0.298139608840833;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -362,6 +362,7 @@ sub Data {
         'Search' => '搜索',
         'Wildcards like \'*\' are allowed.' => '允許使用通配置符，例如\'*\'。',
         'Add Customer' => '添加用戶單位',
+        'Add Customer User' => '添加用戶',
         'Select' => '選擇',
         'Customer Users' => '用戶',
         'Customers ↔ Groups' => '',
@@ -407,7 +408,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => '返回至搜索結果',
-        'Add Customer User' => '添加用戶',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             '用戶資料用於記錄工單歷史並允許用戶訪問服務台門戶網站。',
         'Customer Users ↔ Customers' => '',
@@ -2880,7 +2880,6 @@ sub Data {
         'Drafts' => '',
         'by' => '由',
         'Article Overview - %s Article(s)' => '',
-        'Page %s' => '',
         'No.' => '編號：',
         'Unread articles' => '未讀信件',
         'Via' => '',
@@ -8824,10 +8823,11 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => '',
         'Article Color' => '',
         'ArticleTree' => '',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => '',
         'Avatar' => '頭像',
         'Based on global RichText setting' => '',
+        'Blank' => '',
         'Bounced to "%s".' => 'Bounced to "%s".',
         'Bulgarian' => '',
         'Bulk Action' => '批量處理',
@@ -9289,6 +9289,7 @@ Thanks for your help!
             '系統中的時間會相對應您所選擇的時區。',
         'Select your preferred layout for the software.' => '選擇您的介面主題｡',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => '',
         'Send notifications to users.' => '給用戶和服務人員發送通知',

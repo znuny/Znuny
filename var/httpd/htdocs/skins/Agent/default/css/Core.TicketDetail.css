@@ -440,7 +440,7 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
 }
 
 /**
- * @subsection  ControlRow Icons
+ * @subsection  ControlRow Icons / Article pages in header
  */
 
 .ArticleFilter,
@@ -457,6 +457,17 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
     float: right;
 }
 
+#ArticleTree .cardTitle .ArticlePages {
+    position: absolute;
+    right: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    padding-right: 0;
+}
+
+#ArticleTree .cardTitle .ArticlePages a,
+.WidgetActions .ArticlePages a,
 .ControlRow .Icons a {
     display: flex;
     flex-flow: row;
@@ -469,6 +480,8 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
     height: 26px;
 }
 
+#ArticleTree .cardTitle .ArticlePages a:hover,
+.WidgetActions .ArticlePages a:hover,
 .ControlRow .Icons a:hover {
     background-color: var(--icon-hover-color-light);
     color: var(--gray-dark-semi);
@@ -481,6 +494,10 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
     display: block;
 }
 
+#ArticleTree .cardTitle .ArticlePages a.Active,
+#ArticleTree .cardTitle .ArticlePages a.Selected,
+.WidgetActions .ArticlePages a.Active,
+.WidgetActions .ArticlePages a.Selected,
 .ControlRow .Icons a.Active {
     color: var(--primary-color);
     font-weight: bold;

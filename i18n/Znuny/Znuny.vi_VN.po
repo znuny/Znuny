@@ -1144,7 +1144,7 @@ msgstr "Quyền đọc và ghi truy cập vào thẻ trong nhóm/hàng đợi n�
 msgid "Back to search results"
 msgstr "Trở lại kết quả tìm kiếm"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "Thêm khách hàng "
 
@@ -25522,4 +25522,16 @@ msgstr "Một liên kết để đặt mật khẩu mới sẽ được gửi đ
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "Resend is not possible for this article!"
 msgstr "Không thể gửi lại bài viết này!"
+
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
 

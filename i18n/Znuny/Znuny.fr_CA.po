@@ -1142,7 +1142,7 @@ msgstr "Accès complet en lecture et écriture aux demandes de cette file ou ce 
 msgid "Back to search results"
 msgstr "Retour aux résultats de la recherche"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "Ajouter un client"
 
@@ -25508,4 +25508,16 @@ msgstr "Un lien pour définir un nouveau mot de passe sera envoyé à votre adre
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "Resend is not possible for this article!"
 msgstr "Le renvoi de cet article n'est pas possible !"
+
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
 

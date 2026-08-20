@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.570769720101781;
+    $Self->{Completeness}        = 0.5706789632692;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -366,6 +366,7 @@ sub Data {
         'Search' => 'Buscar',
         'Wildcards like \'*\' are allowed.' => 'Se permiten caracteres comodín como \'*\'.',
         'Add Customer' => 'Añadir un cliente',
+        'Add Customer User' => 'Añadir Usuario Cliente',
         'Select' => 'Seleccionar',
         'Customer Users' => 'Clientes',
         'Customers ↔ Groups' => 'Clientes ↔ Grupos',
@@ -411,7 +412,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Volver a los resultados de la búsqueda',
-        'Add Customer User' => 'Añadir Usuario Cliente',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Los usuarios cliente necesitan tener un historial de cliente e iniciar sesión por medio del panel de cliente.',
         'Customer Users ↔ Customers' => '',
@@ -2883,7 +2883,6 @@ sub Data {
         'Drafts' => 'Borradores',
         'by' => 'por',
         'Article Overview - %s Article(s)' => '',
-        'Page %s' => '',
         'No.' => 'Nº',
         'Unread articles' => 'Artículos no leídos',
         'Via' => '',
@@ -8845,10 +8844,11 @@ Tu Equipo de Soporte
         'Arabic (Saudi Arabia)' => 'Árabe (Arabia Saudita)',
         'Article Color' => '',
         'ArticleTree' => 'Árbol de Artículos',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Nombre del archivo adjunto',
         'Avatar' => '',
         'Based on global RichText setting' => 'Basada en ajustes de RichText global',
+        'Blank' => '',
         'Bounced to "%s".' => 'Rebotado a «%s».',
         'Bulgarian' => 'Bulgaro',
         'Bulk Action' => 'Acción en Bloque',
@@ -9310,6 +9310,7 @@ Tu Equipo de Soporte
             '',
         'Select your preferred layout for the software.' => 'Seleccione su diseño preferido para el software.',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => '',
         'Send notifications to users.' => 'Enviar notificaciones a usuarios.',

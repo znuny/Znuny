@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.856075063613232;
+    $Self->{Completeness}        = 0.855779933216728;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -365,6 +365,7 @@ sub Data {
         'Search' => 'Traži',
         'Wildcards like \'*\' are allowed.' => 'Džokerski znaci kao \'*\' su dozvoljeni.',
         'Add Customer' => 'Dodaj klijenta',
+        'Add Customer User' => 'Dodaj klijenta korisnika',
         'Select' => 'Izaberi',
         'Customer Users' => 'Klijenti korisnici',
         'Customers ↔ Groups' => 'Klijenti ↔ grupe',
@@ -410,7 +411,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Vrati se na rezultate pretrage',
-        'Add Customer User' => 'Dodaj klijenta korisnika',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Klijent klijent treba da ima klijentski istorijat i da se prijavi preko klijentskog panela.',
         'Customer Users ↔ Customers' => 'Klijent korisnici ↔ klijenti',
@@ -2882,7 +2882,6 @@ sub Data {
         'Drafts' => 'Nacrti',
         'by' => 'od',
         'Article Overview - %s Article(s)' => 'Pregled članaka - %s članak(a)',
-        'Page %s' => 'Strana %s',
         'No.' => 'Br.',
         'Unread articles' => 'Nepročitani članci',
         'Via' => 'Preko',
@@ -8837,10 +8836,11 @@ Vaša tehnička podrška
         'Arabic (Saudi Arabia)' => 'Arapski (Saudijska arabija)',
         'Article Color' => '',
         'ArticleTree' => 'Članak u obliku drveta',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Naziv priloga',
         'Avatar' => 'Avatar sličica',
         'Based on global RichText setting' => 'Bazirano na globalnim RichText postavkama',
+        'Blank' => '',
         'Bounced to "%s".' => 'Odbijeno na "%s".',
         'Bulgarian' => 'Bugarski',
         'Bulk Action' => 'Masovna akcija',
@@ -9302,6 +9302,7 @@ Vaša tehnička podrška
             'Izaberite vašu ličnu vremensku zonu. Sva vremena će biti prikazana u njoj.',
         'Select your preferred layout for the software.' => 'Izaberite izgled aplikacije po vašoj želji.',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => 'Pošalji novi odlazni imejl iz ovog tiketa',
         'Send notifications to users.' => 'Pošalji obaveštenja korisnicima.',

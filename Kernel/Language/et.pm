@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.161577608142494;
+    $Self->{Completeness}        = 0.161551916043886;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -360,6 +360,7 @@ sub Data {
         'Search' => 'Otsi',
         'Wildcards like \'*\' are allowed.' => 'Metasümbolid nagu \'*\' on lubatud.',
         'Add Customer' => 'Kliendi lisamine',
+        'Add Customer User' => 'Lisa klientkasutaja',
         'Select' => 'Vali',
         'Customer Users' => 'Klientkasutajad',
         'Customers ↔ Groups' => '',
@@ -405,7 +406,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => '',
-        'Add Customer User' => 'Lisa klientkasutaja',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             '',
         'Customer Users ↔ Customers' => '',
@@ -2877,7 +2877,6 @@ sub Data {
         'Drafts' => '',
         'by' => 'teinud',
         'Article Overview - %s Article(s)' => '',
-        'Page %s' => '',
         'No.' => 'Nr.',
         'Unread articles' => '',
         'Via' => '',
@@ -8821,10 +8820,11 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => 'Araabia (Saudi Araabia)',
         'Article Color' => '',
         'ArticleTree' => '',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Manuse nimi',
         'Avatar' => '',
         'Based on global RichText setting' => '',
+        'Blank' => '',
         'Bounced to "%s".' => 'Põrgatatud "%s".',
         'Bulgarian' => 'Bulgaaria',
         'Bulk Action' => 'Hulgitegevus',
@@ -9286,6 +9286,7 @@ Thanks for your help!
             '',
         'Select your preferred layout for the software.' => '',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => '',
         'Send notifications to users.' => 'Kasutajatele teavituste saatmine.',

@@ -13,11 +13,10 @@ use strict;
 use warnings;
 use utf8;
 
-use IO::Interactive qw(is_interactive);
-
 use parent qw(scripts::Migration::Base);
 
 our @ObjectDependencies = (
+    'Kernel::Config',
 );
 
 =head1 SYNOPSIS
@@ -38,6 +37,12 @@ Returns 1 on success:
 
 sub FollowUp {
     my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    if ( !$ConfigObject->Get('Ticket::ArchiveSystem') ) {
+        return 1;
+    }
 
     if ( $Param{CommandlineOptions}->{Verbose} ) {
         print "\n        Warning: It is possible that already archived tickets still have the MentionSeen flag set.\n";

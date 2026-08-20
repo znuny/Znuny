@@ -589,6 +589,7 @@
                 <Item>SourceEditing</Item>
                 <Item>SpecialCharacters</Item>
                 <Item>SpecialCharactersMathematical</Item>
+                <Item>SplitQuote</Item>
                 <Item>Style</Item>
                 <Item>Table</Item>
                 <Item>TableCaption</Item>
@@ -4439,9 +4440,7 @@ via the Preferences button after logging in.
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSLineChart.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSMultiBarChart.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSStackedAreaChart.js</Item>
-                        <Item>thirdparty/canvg-1.5/rgbcolor.js</Item>
-                        <Item>thirdparty/canvg-1.5/StackBlur.js</Item>
-                        <Item>thirdparty/canvg-1.5/canvg.js</Item>
+                        <Item>thirdparty/canvg-4.0.3/canvg.min.js</Item>
                         <Item>thirdparty/StringView-8/stringview.js</Item>
                         <Item>Core.UI.AdvancedChart.js</Item>
                         <Item>Core.UI.AllocationList.js</Item>
@@ -7310,9 +7309,7 @@ via the Preferences button after logging in.
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSLineChart.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSMultiBarChart.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSStackedAreaChart.js</Item>
-                        <Item>thirdparty/canvg-1.5/rgbcolor.js</Item>
-                        <Item>thirdparty/canvg-1.5/StackBlur.js</Item>
-                        <Item>thirdparty/canvg-1.5/canvg.js</Item>
+                        <Item>thirdparty/canvg-4.0.3/canvg.min.js</Item>
                         <Item>thirdparty/StringView-8/stringview.js</Item>
                         <Item>Core.Agent.Statistics.js</Item>
                         <Item>Core.UI.AdvancedChart.js</Item>

@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.836673027989822;
+    $Self->{Completeness}        = 0.836380982668151;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -371,6 +371,7 @@ sub Data {
         'Search' => 'Поиск',
         'Wildcards like \'*\' are allowed.' => 'Разрешены шаблоны типа \'*\'.',
         'Add Customer' => 'Добавить компанию',
+        'Add Customer User' => 'Добавить учётную запись клиента',
         'Select' => 'Выбор',
         'Customer Users' => 'Клиенты',
         'Customers ↔ Groups' => 'Компании ↔ Группы',
@@ -416,7 +417,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Назад к результатам поиска',
-        'Add Customer User' => 'Добавить учётную запись клиента',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Необходимо для наличия данных о клиенте и подключения к системе через интерфейс клиента.',
         'Customer Users ↔ Customers' => 'Клиенты ↔ Компании',
@@ -2888,7 +2888,6 @@ sub Data {
         'Drafts' => 'Черновики',
         'by' => 'кем',
         'Article Overview - %s Article(s)' => 'Обзор заметок/сообщений - %s заметка(ок)',
-        'Page %s' => 'Страница %s',
         'No.' => '№',
         'Unread articles' => 'Непрочитанные сообщения',
         'Via' => 'Через',
@@ -8843,10 +8842,11 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => 'Арабский (Саудовская Аравия)',
         'Article Color' => '',
         'ArticleTree' => 'Дерево сообщений',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Имя вложения',
         'Avatar' => 'Аватар',
         'Based on global RichText setting' => 'Основано на глобальной настройке RichText',
+        'Blank' => '',
         'Bounced to "%s".' => 'Перенаправлено "%s".',
         'Bulgarian' => 'Болгарский',
         'Bulk Action' => 'Массовое действие',
@@ -9308,6 +9308,7 @@ Thanks for your help!
             'Выберите свой часовой пояс. Все даты и время будут отображаться относительно этого часового пояса.',
         'Select your preferred layout for the software.' => 'Выберите предпочитаемый вами стиль.',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => 'Отправить новое исходящее письмо от этой заявки',
         'Send notifications to users.' => 'Отправить уведомление пользователям.',

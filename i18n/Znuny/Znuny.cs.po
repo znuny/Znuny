@@ -1142,7 +1142,7 @@ msgstr "Plný přístup pro čtení a psaní do tiketů v této skupině/frontě
 msgid "Back to search results"
 msgstr "Zpět na výsledek vyhledávání"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "Přidat uživatele zákazníka"
 
@@ -25508,4 +25508,16 @@ msgstr "Odkaz pro nastavení nového hesla bude zaslán na váš e-mail."
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "Resend is not possible for this article!"
 msgstr "Opětovné odeslání tohoto článku není možné!"
+
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
 

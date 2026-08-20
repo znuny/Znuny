@@ -35,7 +35,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.576176844783715;
+    $Self->{Completeness}        = 0.575926220384799;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -368,6 +368,7 @@ sub Data {
         'Search' => 'Cerca',
         'Wildcards like \'*\' are allowed.' => 'Sono permessi i caratteri jolly come \'*\'.',
         'Add Customer' => 'Aggiungi cliente',
+        'Add Customer User' => 'Aggiungi utenza cliente',
         'Select' => 'Seleziona',
         'Customer Users' => 'Utenze clienti',
         'Customers ↔ Groups' => '',
@@ -413,7 +414,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Torna ai risultati della ricerca',
-        'Add Customer User' => 'Aggiungi utenza cliente',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Le utenze cliente sono necessarie per avere una cronologia del cliente e per effettuare l\'accesso dal pannello clienti.',
         'Customer Users ↔ Customers' => 'Utenze clienti ↔ Clienti',
@@ -2885,7 +2885,6 @@ sub Data {
         'Drafts' => 'Bozze',
         'by' => 'da',
         'Article Overview - %s Article(s)' => 'Panoramica dell\'articolo - %s Articolo(i)',
-        'Page %s' => 'Pagina %s',
         'No.' => 'Num.',
         'Unread articles' => 'Articoli non letti',
         'Via' => 'Attraverso',
@@ -8844,10 +8843,11 @@ Il tuo helpdesk.
         'Arabic (Saudi Arabia)' => 'Arabo (Arabia Saudita)',
         'Article Color' => '',
         'ArticleTree' => '',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Nome allegato',
         'Avatar' => '',
         'Based on global RichText setting' => '',
+        'Blank' => '',
         'Bounced to "%s".' => 'Rispedito a "%s".',
         'Bulgarian' => 'Bulgaro',
         'Bulk Action' => 'Operazioni multiple',
@@ -9309,6 +9309,7 @@ Il tuo helpdesk.
             '',
         'Select your preferred layout for the software.' => '',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => '',
         'Send notifications to users.' => 'Invia notifiche agli utenti.',

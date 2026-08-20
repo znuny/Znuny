@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2026-07-06 10:39+0000\n"
+"POT-Creation-Date: 2026-08-12 12:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1047,6 +1047,10 @@ msgid "Add Customer"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
+msgid "Add Customer User"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Select"
 msgstr ""
 
@@ -1192,10 +1196,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
 msgid "Back to search results"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
-msgid "Add Customer User"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
@@ -8540,10 +8540,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "Article Overview - %s Article(s)"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
-msgid "Page %s"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
@@ -22722,7 +22718,7 @@ msgid "ArticleTree"
 msgstr ""
 
 #. SysConfig
-msgid "AsPopup"
+msgid "As Popup"
 msgstr ""
 
 #. SysConfig
@@ -22735,6 +22731,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Based on global RichText setting"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
 msgstr ""
 
 #. SysConfig
@@ -24463,6 +24463,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Select your preferred theme for OTRS."
+msgstr ""
+
+#. SysConfig
+msgid "Self"
 msgstr ""
 
 #. SysConfig

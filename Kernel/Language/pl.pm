@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.633587786259542;
+    $Self->{Completeness}        = 0.633328033073621;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -363,6 +363,7 @@ sub Data {
         'Search' => 'Szukaj',
         'Wildcards like \'*\' are allowed.' => 'Wieloznaczniki (wildcards) takie jak \'*\' są dozwolone.',
         'Add Customer' => 'Dodaj Klienta',
+        'Add Customer User' => 'Dodaj użytkownika klienta',
         'Select' => 'Zaznacz',
         'Customer Users' => 'Użytkownicy klienta',
         'Customers ↔ Groups' => 'Klienci ↔ Grupy',
@@ -409,7 +410,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Wstecz do wyników wyszukiwania',
-        'Add Customer User' => 'Dodaj użytkownika klienta',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Aby posiadać historię klienta i umożliwić mu logowanie się do panelu klienta konieczne jest założenie konta użytkownika klienta.',
         'Customer Users ↔ Customers' => 'Użytkownicy Klientów ↔ Klienci',
@@ -2881,7 +2881,6 @@ sub Data {
         'Drafts' => 'Szkice',
         'by' => 'przez',
         'Article Overview - %s Article(s)' => 'Przegląd artykułów - %s Artykułów',
-        'Page %s' => 'Strona %s',
         'No.' => 'Lp.',
         'Unread articles' => 'Nieprzeczytane wiadomości',
         'Via' => 'Przez',
@@ -8835,10 +8834,11 @@ Twój Zespół Helpdesk.
         'Arabic (Saudi Arabia)' => 'Arabski (Arabia Saudyjska)',
         'Article Color' => '',
         'ArticleTree' => 'Drzewo z artykułami',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Nazwa załącznika',
         'Avatar' => 'Awatar',
         'Based on global RichText setting' => '',
+        'Blank' => '',
         'Bounced to "%s".' => 'Przekazano do "%s".',
         'Bulgarian' => 'Bułgarski',
         'Bulk Action' => 'Zbiorcze działanie',
@@ -9300,6 +9300,7 @@ Twój Zespół Helpdesk.
             '',
         'Select your preferred layout for the software.' => '',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => '',
         'Send notifications to users.' => 'Wyślij powiadomienie do użytkowników',

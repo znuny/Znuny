@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.85941475826972;
+    $Self->{Completeness}        = 0.859119096835745;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -366,6 +366,7 @@ sub Data {
         'Search' => '搜索',
         'Wildcards like \'*\' are allowed.' => '允许使用通配置符，例如\'*\'。',
         'Add Customer' => '添加客户',
+        'Add Customer User' => '添加客户用户',
         'Select' => '选择',
         'Customer Users' => '客户用户',
         'Customers ↔ Groups' => '客户 ↔ 组',
@@ -411,7 +412,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => '返回到搜索结果',
-        'Add Customer User' => '添加客户用户',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             '工单的客户历史信息需要有客户用户，客户界面登录也需要用客户用户。',
         'Customer Users ↔ Customers' => '客户用户 ↔ 客户',
@@ -2883,7 +2883,6 @@ sub Data {
         'Drafts' => '草稿',
         'by' => '由',
         'Article Overview - %s Article(s)' => '信件概览-%s个信件',
-        'Page %s' => '第%s页',
         'No.' => 'NO.',
         'Unread articles' => '未读信件',
         'Via' => '通过',
@@ -8837,10 +8836,11 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => '阿拉伯语（沙特阿拉伯）',
         'Article Color' => '',
         'ArticleTree' => '信件树',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => '附件名',
         'Avatar' => '头像',
         'Based on global RichText setting' => '基于全局富文本设置',
+        'Blank' => '',
         'Bounced to "%s".' => '退回给“%s”。',
         'Bulgarian' => '保加利亚语',
         'Bulk Action' => '批量操作',
@@ -9302,6 +9302,7 @@ Thanks for your help!
             '选择你的个人时区，所有时间将相对于这个时区显示。',
         'Select your preferred layout for the software.' => '选择你喜欢的软件布局。',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => '从这个工单发送新的外发邮件',
         'Send notifications to users.' => '给用户发送通知。',

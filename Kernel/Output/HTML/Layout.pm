@@ -6587,11 +6587,11 @@ sub SetRichTextParameters {
     if ( $ConfigObject->Get("Frontend::RichText::EnhancedMode") == '1' ) {
         @Toolbar = (
             'bold',   'italic',       'underline',      'strikethrough',   'subscript',        'superscript',
-            '|',      'numberedList', 'bulletedList',   'insertTable',     '|',                'outdent',
+            '|',      'numberedList', 'bulletedList',   'insertTable',     'blockQuote',       '|', 'outdent',
             'indent', '|',            'alignment:left', 'alignment:right', 'alignment:center', 'alignment:justify',
             '|',      'link',         'undo',           'redo',            'selectAll',
             '-',
-            'insertImage',         'horizontalLine', 'blockQuote',
+            'insertImage',         'horizontalLine', 'splitQuote', 'removeQuote',
             '|',                   'findAndReplace', 'fontColor',
             'fontBackgroundColor', 'removeFormat',   '|', 'showBlocks', 'specialCharacters',
             '|',                   'heading',        'fontFamily', 'fontSize', '|', 'fullscreen',
@@ -6599,11 +6599,11 @@ sub SetRichTextParameters {
 
         @ToolbarWithoutImage = (
             'bold',   'italic',       'underline',      'strikethrough',   'subscript',        'superscript',
-            '|',      'numberedList', 'bulletedList',   'insertTable',     '|',                'outdent',
+            '|',      'numberedList', 'bulletedList',   'insertTable',     'blockQuote',       '|', 'outdent',
             'indent', '|',            'alignment:left', 'alignment:right', 'alignment:center', 'alignment:justify',
             '|',      'link',         'undo',           'redo',            'selectAll',
             '-',
-            'horizontalLine', 'blockQuote',
+            'horizontalLine',      'splitQuote',     'removeQuote',
             '|',                   'findAndReplace', 'fontColor',
             'fontBackgroundColor', 'removeFormat',   '|', 'showBlocks', 'specialCharacters',
             '|',                   'heading',        'fontFamily', 'fontSize', '|', 'fullscreen',
@@ -6612,28 +6612,28 @@ sub SetRichTextParameters {
     else {
         @Toolbar = (
             'bold',            'italic',           'underline',         'strikethrough',
-            '|',               'numberedList',     'bulletedList',      '|',
+            '|',               'numberedList',     'bulletedList',      'blockQuote', '|',
             'outdent',         'indent',           '|',                 'alignment:left',
             'alignment:right', 'alignment:center', 'alignment:justify', '|',
             'link',            '|',                'insertImage',       'horizontalLine',
             '|',               'undo',             'redo',              '|',
             'selectAll',
             '-',
-            'blockQuote',        '|',
+            'splitQuote',        'removeQuote',         '|',
             'heading',           'fontFamily',          'fontSize',     '|',
             'fontColor',         'fontBackgroundColor', 'removeFormat', '|',
             'specialCharacters', '|',                   'fullscreen',
         );
         @ToolbarWithoutImage = (
             'bold',            'italic',           'underline',         'strikethrough',
-            '|',               'numberedList',     'bulletedList',      '|',
+            '|',               'numberedList',     'bulletedList',      'blockQuote', '|',
             'outdent',         'indent',           '|',                 'alignment:left',
             'alignment:right', 'alignment:center', 'alignment:justify', '|',
             'link',            '|',                'horizontalLine',
             '|',               'undo',             'redo', '|',
             'selectAll',
             '-',
-            'blockQuote',        '|',
+            'splitQuote',        'removeQuote',         '|',
             'heading',           'fontFamily',          'fontSize',     '|',
             'fontColor',         'fontBackgroundColor', 'removeFormat', '|',
             'specialCharacters', '|',                   'fullscreen',
@@ -6647,12 +6647,10 @@ sub SetRichTextParameters {
             TicketID => $Param{Data}->{TicketID} || '',
             TextDir  => $TextDir,
 
-          #           TODO check if splitquote and remove quote alternatives of CKEditor4 to CKEditor5 are needed at all
-          #           otherwise this code can be deleted
-          #             Lang           => {
-          #                 SplitQuote  => $LanguageObject->Translate('Split Quote'),
-          #                 RemoveQuote => $LanguageObject->Translate('Remove Quote'),
-          #             },
+            Lang => {
+                SplitQuote  => $LanguageObject->Translate('Split Quote'),
+                RemoveQuote => $LanguageObject->Translate('Remove Quote'),
+            },
             Toolbar             => \@Toolbar,
             ToolbarWithoutImage => \@ToolbarWithoutImage,
             PictureUploadAction => $PictureUploadAction,
@@ -6749,11 +6747,11 @@ sub CustomerSetRichTextParameters {
     if ( $ConfigObject->Get("Frontend::RichText::EnhancedMode::Customer") == '1' ) {
         @Toolbar = (
             'bold',   'italic',       'underline',      'strikethrough',   'subscript',        'superscript',
-            '|',      'numberedList', 'bulletedList',   'insertTable',     '|',                'outdent',
+            '|',      'numberedList', 'bulletedList',   'insertTable',     'blockQuote',       '|', 'outdent',
             'indent', '|',            'alignment:left', 'alignment:right', 'alignment:center', 'alignment:justify',
             '|',      'link',         'undo',           'redo',            'selectAll',
             '-',
-            'insertImage',         'horizontalLine', 'blockQuote',
+            'insertImage',         'horizontalLine', 'splitQuote', 'removeQuote',
             '|',                   'findAndReplace', 'fontColor',
             'fontBackgroundColor', 'removeFormat',   '|', 'showBlocks', 'specialCharacters',
             '|',                   'heading',        'fontFamily', 'fontSize', '|', 'fullscreen',
@@ -6761,11 +6759,11 @@ sub CustomerSetRichTextParameters {
 
         @ToolbarWithoutImage = (
             'bold',   'italic',       'underline',      'strikethrough',   'subscript',        'superscript',
-            '|',      'numberedList', 'bulletedList',   'insertTable',     '|',                'outdent',
+            '|',      'numberedList', 'bulletedList',   'insertTable',     'blockQuote',       '|', 'outdent',
             'indent', '|',            'alignment:left', 'alignment:right', 'alignment:center', 'alignment:justify',
             '|',      'link',         'undo',           'redo',            'selectAll',
             '-',
-            'horizontalLine', 'blockQuote',
+            'horizontalLine',      'splitQuote',     'removeQuote',
             '|',                   'findAndReplace', 'fontColor',
             'fontBackgroundColor', 'removeFormat',   '|', 'showBlocks', 'specialCharacters',
             '|',                   'heading',        'fontFamily', 'fontSize', '|', 'fullscreen',
@@ -6774,28 +6772,28 @@ sub CustomerSetRichTextParameters {
     else {
         @Toolbar = (
             'bold',            'italic',           'underline',         'strikethrough',
-            '|',               'numberedList',     'bulletedList',      '|',
+            '|',               'numberedList',     'bulletedList',      'blockQuote', '|',
             'outdent',         'indent',           '|',                 'alignment:left',
             'alignment:right', 'alignment:center', 'alignment:justify', '|',
             'link',            '|',                'insertImage',       'horizontalLine',
             '|',               'undo',             'redo',              '|',
             'selectAll',
             '-',
-            'blockQuote',        '|',
+            'splitQuote',        'removeQuote',         '|',
             'heading',           'fontFamily',          'fontSize',     '|',
             'fontColor',         'fontBackgroundColor', 'removeFormat', '|',
             'specialCharacters', '|',                   'fullscreen',
         );
         @ToolbarWithoutImage = (
             'bold',            'italic',           'underline',         'strikethrough',
-            '|',               'numberedList',     'bulletedList',      '|',
+            '|',               'numberedList',     'bulletedList',      'blockQuote', '|',
             'outdent',         'indent',           '|',                 'alignment:left',
             'alignment:right', 'alignment:center', 'alignment:justify', '|',
             'link',            '|',                'horizontalLine',
             '|',               'undo',             'redo', '|',
             'selectAll',
             '-',
-            'blockQuote',        '|',
+            'splitQuote',        'removeQuote',         '|',
             'heading',           'fontFamily',          'fontSize',     '|',
             'fontColor',         'fontBackgroundColor', 'removeFormat', '|',
             'specialCharacters', '|',                   'fullscreen',
@@ -6808,11 +6806,10 @@ sub CustomerSetRichTextParameters {
         Value => {
             TextDir => $TextDir,
 
-          #           TODO check if splitquote and remove quote alternatives of CKEditor4 to CKEditor5 are needed at all
-          #           otherwise this code can be deleted
-          #             Lang           => {
-          #                 SplitQuote => $LanguageObject->Translate('Split Quote'),
-          #             },
+            Lang => {
+                SplitQuote  => $LanguageObject->Translate('Split Quote'),
+                RemoveQuote => $LanguageObject->Translate('Remove Quote'),
+            },
             Toolbar             => \@Toolbar,
             ToolbarWithoutImage => \@ToolbarWithoutImage,
             PictureUploadAction => $PictureUploadAction,

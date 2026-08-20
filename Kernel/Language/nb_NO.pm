@@ -35,7 +35,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.36720737913486;
+    $Self->{Completeness}        = 0.367148990300525;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -368,6 +368,7 @@ sub Data {
         'Search' => 'Søk',
         'Wildcards like \'*\' are allowed.' => 'Jokertegn som \'*\ er tillatt',
         'Add Customer' => 'Legg til kunde',
+        'Add Customer User' => 'Legg til kunde-bruker',
         'Select' => 'Velg',
         'Customer Users' => 'Kunder',
         'Customers ↔ Groups' => '',
@@ -413,7 +414,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Tilbake til søkeresultatet',
-        'Add Customer User' => 'Legg til kunde-bruker',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Kundebrukere trengs for å kunne ha kundehistorikk og mulighet til å logge inn via brukerpanelet.',
         'Customer Users ↔ Customers' => '',
@@ -2885,7 +2885,6 @@ sub Data {
         'Drafts' => '',
         'by' => 'av',
         'Article Overview - %s Article(s)' => '',
-        'Page %s' => '',
         'No.' => 'Nr.',
         'Unread articles' => 'Uleste innlegg',
         'Via' => '',
@@ -8829,10 +8828,11 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => 'Arabisk (Saudi Arabia)',
         'Article Color' => '',
         'ArticleTree' => '',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Vedleggsnavn',
         'Avatar' => '',
         'Based on global RichText setting' => '',
+        'Blank' => '',
         'Bounced to "%s".' => 'Avslått til «%s».',
         'Bulgarian' => 'Bulgarsk',
         'Bulk Action' => 'Masseredigering',
@@ -9294,6 +9294,7 @@ Thanks for your help!
             '',
         'Select your preferred layout for the software.' => '',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => '',
         'Send notifications to users.' => 'Send varsling til brukerne',

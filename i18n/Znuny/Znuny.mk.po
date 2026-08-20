@@ -1142,7 +1142,7 @@ msgstr "Целосен пристап за читање и запишување 
 msgid "Back to search results"
 msgstr "Назад до резултатите од барањето"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "Додади Корисник"
 
@@ -25508,4 +25508,16 @@ msgstr "Врска за поставување нова лозинка ќе би
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "Resend is not possible for this article!"
 msgstr "Повторно испраќање на оваа статија не е можно!"
+
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
 

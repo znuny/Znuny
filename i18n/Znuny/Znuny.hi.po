@@ -1142,7 +1142,7 @@ msgstr "इस समूह/श्रेणी के टिकट को पढ
 msgid "Back to search results"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr ""
 
@@ -25508,4 +25508,16 @@ msgstr "एक नया कूटशब्द सेट करने के ल
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "Resend is not possible for this article!"
 msgstr "इस लेख के लिए पुनः भेजना संभव नहीं है!"
+
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
 
