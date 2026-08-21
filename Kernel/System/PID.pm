@@ -91,8 +91,11 @@ sub PIDCreate {
 
     if ( %ProcessID && !$Param{Force} ) {
 
-        my $TTL = $Param{TTL} || 3600;
-        if ( $ProcessID{Created} > ( time() - $TTL ) ) {
+        my $TTL         = $Param{TTL} || 3600;
+        my $TTLExceeded = $ProcessID{Created} <= ( time() - $TTL );
+        my $IsStale     = $Self->PIDIsStale( Name => $Param{Name} );
+
+        if ( !$TTLExceeded && !$IsStale ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'notice',
                 Message  => "Can't create PID $ProcessID{Name}, because it's already running "
@@ -101,10 +104,14 @@ sub PIDCreate {
             return;
         }
 
+        my $RemoveReason = $IsStale
+            ? 'the process is not running anymore'
+            : "the TTL ($TTL sec) was exceeded";
+
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'notice',
             Message  =>
-                "Removed PID ($ProcessID{Name}/$ProcessID{Host}/$ProcessID{PID}, because the TTL ($TTL sec) was exceeded!",
+                "Removed PID ($ProcessID{Name}/$ProcessID{Host}/$ProcessID{PID}), because $RemoveReason!",
         );
     }
 
@@ -176,6 +183,43 @@ sub PIDGet {
     }
 
     return %Data;
+}
+
+=head2 PIDIsStale()
+
+checks if a process id lock is orphaned, which means that the process which registered
+the lock on this host is not running anymore. Locks which have been registered by another
+host cannot be checked and are therefore never reported as stale.
+
+    my $IsStale = $PIDObject->PIDIsStale(
+        Name => 'PostMasterPOP3',
+    );
+
+Returns 1 if the lock exists but its process is gone, 0 otherwise.
+
+=cut
+
+sub PIDIsStale {
+    my ( $Self, %Param ) = @_;
+
+    if ( !$Param{Name} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => 'Need Name'
+        );
+        return;
+    }
+
+    my %ProcessID = $Self->PIDGet( Name => $Param{Name} );
+
+    return 0 if !$ProcessID{PID};
+    return 0 if $ProcessID{Host} ne $Self->{Host};
+    return 0 if $ProcessID{PID} == $$;
+
+    return 0 if kill 0, $ProcessID{PID};
+    return 0 if !$!{ESRCH};
+
+    return 1;
 }
 
 =head2 PIDDelete()

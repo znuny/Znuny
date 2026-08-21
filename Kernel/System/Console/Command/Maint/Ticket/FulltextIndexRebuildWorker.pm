@@ -69,23 +69,19 @@ sub PreRun {
 
     my $PIDObject = $Kernel::OM->Get('Kernel::System::PID');
 
-    my %PID = $PIDObject->PIDGet(
-        Name => 'ArticleSearchIndexRebuild',
-    );
-
-    if ( %PID && !$ForcePID ) {
-        die "Active indexing process already running! Skipping...\n";
-    }
-
     my $Success = $PIDObject->PIDCreate(
         Name  => 'ArticleSearchIndexRebuild',
-        Force => $Self->GetOption('force-pid'),
+        Force => $ForcePID,
     );
 
     if ( !$Success ) {
+        my %PID = $PIDObject->PIDGet(
+            Name => 'ArticleSearchIndexRebuild',
+        );
+
+        die "Active indexing process already running! Skipping...\n" if %PID;
         die "Unable to register indexing process! Skipping...\n";
     }
-
     return;
 }
 

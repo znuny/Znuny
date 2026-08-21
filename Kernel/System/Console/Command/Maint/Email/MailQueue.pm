@@ -122,24 +122,21 @@ sub PreRun {
         my $PIDObject = $Kernel::OM->Get('Kernel::System::PID');
         my $Force     = $Self->GetOption('force');
 
-        if ( !$Force ) {
-            my %PID = $PIDObject->PIDGet(
-                Name => 'MaintMailQueueSending',
-            );
-
-            if (%PID) {
-                die "Message sending already in progress! Skipping...\n";
-            }
-        }
-
         my $Success = $PIDObject->PIDCreate(
             Name  => 'MaintMailQueueSending',
             Force => $Force,
         );
 
         if ( !$Success ) {
+            my %PID = $PIDObject->PIDGet(
+                Name => 'MaintMailQueueSending',
+            );
+
+            die "Message sending already in progress! Skipping...\n" if %PID;
             die "Unable to register sending process! Skipping...\n";
         }
+
+        $Self->{SendingPIDCreated} = 1;
     }
 
     return;
@@ -391,17 +388,9 @@ sub _ValidateParams {
 sub PostRun {
     my ($Self) = @_;
 
-    my $PIDObject = $Kernel::OM->Get('Kernel::System::PID');
+    return 1 if !$Self->{SendingPIDCreated};
 
-    my %PID = $PIDObject->PIDGet(
-        Name => 'MaintMailQueueSending',
-    );
-
-    if (%PID) {
-        return $PIDObject->PIDDelete( Name => 'MaintMailQueueSending' );
-    }
-
-    return 1;
+    return $Kernel::OM->Get('Kernel::System::PID')->PIDDelete( Name => 'MaintMailQueueSending' );
 }
 
 1;
