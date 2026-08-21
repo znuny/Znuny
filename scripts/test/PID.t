@@ -157,6 +157,82 @@ $Self->False(
     'PIDGet() for forced delete (PID should be deleted now)',
 );
 
+my $NonExistentPID = 65534;
+
+NONEXISTENTPID:
+while ( $NonExistentPID > 1 ) {
+    kill 0, $NonExistentPID;
+    last NONEXISTENTPID if $!{ESRCH};
+    $NonExistentPID--;
+}
+
+my $IsStale = $PIDObject->PIDIsStale( Name => 'Test' );
+$Self->False(
+    $IsStale,
+    'PIDIsStale() without existing PID',
+);
+
+my $PIDCreate4 = $PIDObject->PIDCreate( Name => 'Test' );
+$Self->True(
+    $PIDCreate4,
+    'PIDCreate4() for orphaned PID handling',
+);
+
+$IsStale = $PIDObject->PIDIsStale( Name => 'Test' );
+$Self->False(
+    $IsStale,
+    'PIDIsStale() for PID of the current process',
+);
+
+$UpdateSuccess = $Kernel::OM->Get('Kernel::System::DB')->Do(
+    SQL => '
+        UPDATE process_id
+        SET process_id = ?
+        WHERE process_name = ?',
+    Bind => [ \$NonExistentPID, \'Test' ],
+);
+$Self->True(
+    $UpdateSuccess,
+    'Updated PID to a process which is not running',
+);
+
+$IsStale = $PIDObject->PIDIsStale( Name => 'Test' );
+$Self->True(
+    $IsStale,
+    'PIDIsStale() for PID of a process which is not running',
+);
+
+my $PIDCreate5 = $PIDObject->PIDCreate( Name => 'Test' );
+$Self->True(
+    $PIDCreate5,
+    'PIDCreate5() must replace the orphaned PID',
+);
+
+%UpdatedPIDGet = $PIDObject->PIDGet( Name => 'Test' );
+$Self->Is(
+    $UpdatedPIDGet{PID},
+    $$,
+    'PIDGet() after replacing the orphaned PID',
+);
+
+$UpdateSuccess = $Kernel::OM->Get('Kernel::System::DB')->Do(
+    SQL => '
+        UPDATE process_id
+        SET process_id = ?, process_host = ?
+        WHERE process_name = ?',
+    Bind => [ \$NonExistentPID, \$RandomID, \'Test' ],
+);
+$Self->True(
+    $UpdateSuccess,
+    'Updated PID and host for stale check of another host',
+);
+
+$IsStale = $PIDObject->PIDIsStale( Name => 'Test' );
+$Self->False(
+    $IsStale,
+    'PIDIsStale() for PID of another host',
+);
+
 # cleanup is done by RestoreDatabase
 
 1;
