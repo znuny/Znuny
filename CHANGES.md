@@ -1,5 +1,6 @@
 # 6.5.25 2026-??-??
  - 2026-08-20 Fixed: agent/customer re-direction after accepting initial information dialog (AgentInfo/CustomerAccept).
+ - 2026-08-12 Fixed: Some ticket attributes are not properly inserted into OTRS_TICKET_* placeholders.
 
 # 6.5.24 2026-08-19
  - 2026-08-17 Changed: REST transport module now keeps query parameters that don't contain placeholders.

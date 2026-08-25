@@ -38,7 +38,6 @@ our @ObjectDependencies = (
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
     'Kernel::System::User',
-    'Kernel::System::Util',
 );
 
 =head1 NAME
@@ -1276,7 +1275,6 @@ sub _FindRecipientTimeZone {
 sub _ReplaceDynamicField {
     my ( $Self, $LanguageObject, $Ticket, $RecipientTimeZone, $Name ) = @_;
 
-#say STDERR "_ReplaceDynamicField(", join( ', ', map { $_ // '<undef>' } $LanguageObject, $Ticket, $RecipientTimeZone, $Name ), ")";
     my $Result = '-';
     my $ValueRequested;
     if ( $Name =~ /(.*)_value$/i ) {
@@ -1288,7 +1286,6 @@ sub _ReplaceDynamicField {
     # real one
     my $DynamicFieldConfig = $Self->_GetTicketDynamicFields()->{$Name};
 
-    #say STDERR "DynamicFieldConfig: ", ( $DynamicFieldConfig // '<undef>' );
     return '-' if !defined $DynamicFieldConfig;    # should not normally happen but seems to happen in some test cases
 
     my $FullName    = "DynamicField_$DynamicFieldConfig->{Name}";
@@ -1413,10 +1410,8 @@ sub _DefaultReplacements {
         # in Unix timestamp format
         return sub {
 
-            #say STDERR "ReplaceUnixTime $TicketKey";
             return '-' if !defined $Ticket->{$TicketKey};
 
-            #say STDERR "=> $Ticket->{$TicketKey}";
             my $DateTime = $Kernel::OM->Create(
                 'Kernel::System::DateTime',
                 ObjectParams => {
@@ -1435,11 +1430,9 @@ sub _DefaultReplacements {
         # necessary
         return sub {
 
-            #say STDERR "TimeToRecipient $TicketKey";
             return '-'                   if !defined $Ticket->{$TicketKey};
             return $Ticket->{$TicketKey} if !$RecipientTimeZone;
 
-            #say STDERR "=> $Ticket->{$TicketKey}";
             my $DateTime = $Kernel::OM->Create(
                 'Kernel::System::DateTime',
                 ObjectParams => {
@@ -1456,11 +1449,7 @@ sub _DefaultReplacements {
 
         # Take a value in seconds and convert it to human readable form
         return sub {
-
-            #say STDERR "ReadableTimeInSeconds $TicketKey";
             return '-' if !defined $Ticket->{$TicketKey};
-
-            #say STDERR "=> $Ticket->{$TicketKey}";
             return $Callbacks->{ReadableTimeInSeconds}->( $Ticket->{$TicketKey} );
         }
     };
@@ -1470,11 +1459,7 @@ sub _DefaultReplacements {
 
         # Simply translate a value, usually an enum
         return sub {
-
-            #say STDERR "Translated $TicketKey";
             return '-' if !defined $Ticket->{$TicketKey};
-
-            #say STDERR "=> $Ticket->{$TicketKey}";
             return $Callbacks->{Translated}->( $Ticket->{$TicketKey} );
         }
     };
@@ -1622,6 +1607,7 @@ sub _DefaultReplacements {
                         FirstResponseTime UpdateTimeWorkingTime UpdateTime SolutionTimeWorkingTime SolutionTime)
                 ),
                 (
+                    # If you change this field list, make sure to include it in %SpecialTicketKeys above!
                     map { lc $_ => $Translated->($_) } qw(Type State StateType Lock Priority)
                 ),
                 (
@@ -1645,14 +1631,14 @@ sub _DefaultReplacements {
                 map { $_ => $Ticket->{$_} } (
 
                     # Exclude all DynamicFields and all in %SpecialTicketKeyLookup
-                    ( grep { !( $SpecialTicketKeyLookup{$_} || !/^DynamicField_/ ) } keys %$Ticket ),
+                    ( grep { !( $SpecialTicketKeyLookup{$_} || /^DynamicField_/ ) } keys %$Ticket ),
 
                     # Standard keys should always be there even if no
                     # TicketID/TicketData
                     qw( Age ArchiveFlag ChangeBy Changed CreateBy Created
                         CustomerID CustomerUserID GroupID Lock
                         LockID Owner OwnerID Priority PriorityID Queue QueueID
-                        Responsible ResponsibleID SLAID ServiceID State StateID
+                        Responsible ResponsibleID SLA SLAID Service ServiceID State StateID
                         StateType TicketID TicketNumber Title Type TypeID
                         UnlockTimeout
                     ),
@@ -1668,9 +1654,6 @@ sub _DefaultReplacements {
             Brackets => 1,
         }
     );
-
-    #use YAML::XS;
-    #say STDERR YAML::XS::Dump( \%Replacements );
 
     # A bit of postprocessing
     for my $ReplaceSpec ( values %Replacements ) {
@@ -1743,9 +1726,6 @@ sub _Replacements {
 
         # This is the template text we'll be working on
         my $Text = $Self->_FixMailto( \%Param );
-
-        #say STDERR "_Replace($Text)";
-        #say STDERR "PARAM:", YAML::XS::Dump( \%Param );
 
         # Tags look different depending on what kind of text we're working with
         if ( $Param{RichText} ) {
@@ -1824,18 +1804,13 @@ sub _Replacements {
                 my $RichText  = !!$Param{RichText};
                 return '-' if !defined $Param{$Where} || !defined $Param{$Where}{Body};
 
-   #say STDERR "GetBodySnippet($Where, ", ( $Lines // '<undef>' ), ": SafeLines=$SafeLines Body='$Param{$Where}{Body}'";
                 my ($Snippet) = $Param{$Where}{Body} =~ / ( (?: .*\n? ){0,$SafeLines} ) /x;
-
-                #say STDERR "Snippet [Perl $^V]: '$Snippet'";
                 return ( '', $RichText ) if !defined $Snippet;
                 chomp $Snippet;
 
                 # no quoting unless lines requested!
                 if ( !defined $Lines ) {
                     $Snippet =~ s{\n}{<br/>\n}g if $RichText;
-
-                    #say STDERR "Returning quoted snippet: '$Snippet'";
                     return ( $Snippet, $RichText );
                 }
 
@@ -1855,7 +1830,6 @@ sub _Replacements {
                     $Snippet =~ s/^/> /mg if !$Param{RichText};
                 }
 
-                #say STDERR "Returning quoted snippet: '$Snippet'";
                 return ( $Snippet, $RichText );
             },
 
@@ -1969,8 +1943,6 @@ sub _Replacements {
             $End
         );
 
-        #say STDERR "RE: $ReplacerRE";
-
         # Follow-up for bug#10825.
         # Set data for replacing of specific tags in Templates:
         # - OTRS_AGENT_SUBJECT, OTRS_AGENT_BODY - subject/body of the CURRENT/LATEST agent article
@@ -2036,25 +2008,22 @@ sub _Replacements {
         $Text =~ s{
         $ReplacerRE
     }{
+        # TODO stick this in another closure
         my ( $Prefix, $Elem, $Bracket ) = ( uc($+{cat}), lc($+{elem}), $+{bracket} );
         my $Spec = $Replacements->{$Prefix};
         my ($Value, $SkipHTMLFilter);
-        #say STDERR "REPLACING: $Prefix $Elem";
         if( $Spec->{Special}{$Elem} ) {
-            #say STDERR "FOUND Special";
             # This needs special treatment. Check whether a value exists and
             # if so, pass it along to the callback.
             ($Value, $SkipHTMLFilter) = $Spec->{Special}{$Elem}->( $Bracket );
             $Value = $Self->_MaskSensitiveValue( $Elem, $Value );
         }
         elsif( $Spec->{Hash} && $Spec->{Hash}{$Elem} ) {
-            #say STDERR "FOUND Hash";
             # Just substitute the value found in hash or '-'
             $Value = $Spec->{Hash}{$Elem} // '-';
             $Value = $Self->_MaskSensitiveValue( $Elem, $Value );
         }
         elsif( $Spec->{Dynamic} ) {
-            #say STDERR "FOUND Dynamic";
             # Arbitrary name matched for a dynamic field
             ($Value, $SkipHTMLFilter) = $Spec->{Dynamic}->($Elem, $Bracket);
         }
@@ -2065,7 +2034,6 @@ sub _Replacements {
             );
             $Value = '-';
         }
-        #say STDERR "VALUE=$Value";
         $Value = $HTMLUtilsObject->ToHTML( String => $Value ) if $Param{RichText} && !$SkipHTMLFilter;
         $Value;
     }egix;
@@ -2109,7 +2077,6 @@ sub _RemoveUnSupportedTag {
     }
 
     # Cleanup all not supported tags with and without number, e.g. OTRS_CUSTOMER_BODY and OTRS_CUSTOMER_BODY[n].
-    # See https://bugs.otrs.org/show_bug.cgi?id=14369 and https://bugs.otrs.org/show_bug.cgi?id=10825.
     my $NotSupportedTag = $Start . "(?:" . join( "|", @{ $Param{ListOfUnSupportedTag} } ) . ")(\\[.*?\\])?" . $End;
     $Param{Text} =~ s/$NotSupportedTag/-/gi;
 
