@@ -86,7 +86,6 @@ sub new {
     elsif (
         IsHashRefWithData( $Self->{GetColumnFilter} )
         && IsHashRefWithData( $Self->{GetColumnFilterSelect} )
-        && IsHashRefWithData( $Self->{ColumnFilter} )
         )
     {
 
@@ -132,9 +131,43 @@ sub new {
                     Data => $Preferences{ $Self->{PrefKeyColumnFiltersRealKeys} },
                 );
             }
-            REALKEYVALUES:
+
+            # Remove real-key prefs for columns cleared via DeleteFilter even if ColumnFilter is empty.
+            COLUMN:
+            for my $Column ( sort keys %{ $Self->{GetColumnFilterSelect} } ) {
+                my $Value    = $Self->{GetColumnFilterSelect}->{$Column};
+                my $IsDelete = 0;
+                if ( ref $Value eq 'ARRAY' ) {
+                    $IsDelete = ( grep { $_ eq 'DeleteFilter' } @{$Value} ) ? 1 : 0;
+                }
+                elsif ( defined $Value && $Value eq 'DeleteFilter' ) {
+                    $IsDelete = 1;
+                }
+                next COLUMN if !$IsDelete;
+
+                my @RealKeys;
+                if ( $Column eq 'CustomerID' ) {
+                    @RealKeys = ( 'CustomerID', 'CustomerIDRaw' );
+                }
+                elsif ( $Column eq 'CustomerUserID' ) {
+                    @RealKeys = ( 'CustomerUserLogin', 'CustomerUserLoginRaw' );
+                }
+                elsif ( $Column =~ m{\A DynamicField_}xms ) {
+                    @RealKeys = ($Column);
+                }
+                else {
+                    @RealKeys = ( $Column . 'IDs' );
+                }
+
+                for my $RealKey (@RealKeys) {
+                    delete $ColumnPrefRealKeysValues->{$RealKey};
+                    delete $Self->{ColumnFilter}->{$RealKey};
+                }
+            }
+
+            COLUMN:
             for my $Column ( sort keys %{ $Self->{ColumnFilter} } ) {
-                next REALKEYVALUES if !$Column;
+                next COLUMN if !$Column;
 
                 my $DeleteFilter = 0;
                 if ( IsArrayRefWithData( $Self->{ColumnFilter}->{$Column} ) ) {
@@ -156,7 +189,7 @@ sub new {
                 if ($DeleteFilter) {
                     delete $ColumnPrefRealKeysValues->{$Column};
                     delete $Self->{ColumnFilter}->{$Column};
-                    next REALKEYVALUES;
+                    next COLUMN;
                 }
                 $ColumnPrefRealKeysValues->{$Column} = $Self->{ColumnFilter}->{$Column};
             }

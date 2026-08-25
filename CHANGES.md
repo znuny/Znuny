@@ -3,6 +3,7 @@
  - 2026-08-20 Fixed: Multiselect dynamic field values rendered without proper spacing in customer interface. Thanks to @LuBroering (Lukas Bröring Sector Nord AG) [PR#836](https://github.com/znuny/Znuny/pull/836).
  - 2026-08-20 Fixed: agent/customer re-direction after accepting initial information dialog (AgentInfo/CustomerAccept).
  - 2026-08-11 Fixed: Some ticket attributes are not properly inserted into OTRS_TICKET_* placeholders.
+ - 2026-08-06 Fixed: Clearing multiselect column filters in agent ticket overview screens and dashboard ticket widgets did not remove the filter.
 
 # 7.3.6 2026-08-19
  - 2026-08-17 Fixed: Removed unnecessary whitespace in Baselink URLs in TicketInformation templates for AgentTicketActionCommon and AgentTicketZoom.

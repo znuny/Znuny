@@ -157,10 +157,6 @@ Core.Agent.Overview = (function (TargetNS) {
         $('.ColumnFilter').on('change', function () {
             var URL, SessionInformation, ColumnFilter, NewColumnFilterStrg, MyRegEx, SelectedValues, SeenValues;
 
-            if ($(this).val() === null) {
-                return false;
-            }
-
             // define variables
             URL = Core.Config.Get("Baselink") + 'Action=' + Core.Config.Get("Action") + ';' + Core.Config.Get('LinkPage');
             SessionInformation = Core.App.GetSessionInformation();
@@ -187,11 +183,20 @@ Core.Agent.Overview = (function (TargetNS) {
                     SelectedValues.push(Value);
                 });
 
-                $.each(SelectedValues, function (Index, Value) {
-                    NewColumnFilterStrg += ColumnFilter + '=' + encodeURIComponent(Value) + ';';
-                });
+                // Empty multiselect must clear the column filter (jQuery .val() is null when cleared).
+                if (!SelectedValues.length) {
+                    NewColumnFilterStrg = ColumnFilter + '=DeleteFilter;';
+                }
+                else {
+                    $.each(SelectedValues, function (Index, Value) {
+                        NewColumnFilterStrg += ColumnFilter + '=' + encodeURIComponent(Value) + ';';
+                    });
+                }
             }
             else {
+                if ($(this).val() === null) {
+                    return false;
+                }
                 NewColumnFilterStrg = ColumnFilter + '=' + encodeURIComponent($(this).val()) + ';';
             }
 
