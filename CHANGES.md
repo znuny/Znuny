@@ -2,6 +2,7 @@
  - 2026-08-20 Changed: Admin::Package::List now always reports package deployment status and warns about local modifications.
  - 2026-08-20 Fixed: Multiselect dynamic field values rendered without proper spacing in customer interface. Thanks to @LuBroering (Lukas Bröring Sector Nord AG) [PR#836](https://github.com/znuny/Znuny/pull/836).
  - 2026-08-20 Fixed: agent/customer re-direction after accepting initial information dialog (AgentInfo/CustomerAccept).
+ - 2026-08-11 Fixed: Some ticket attributes are not properly inserted into OTRS_TICKET_* placeholders.
 
 # 7.3.6 2026-08-19
  - 2026-08-17 Fixed: Removed unnecessary whitespace in Baselink URLs in TicketInformation templates for AgentTicketActionCommon and AgentTicketZoom.
