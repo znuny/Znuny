@@ -198,6 +198,17 @@ my @NeededModules = (
         },
     },
     {
+        Module    => 'Convert::Color',
+        Required  => 1,
+        Comment   => 'Required for color handling in HTML processing.',
+        InstTypes => {
+            aptget => undef,
+            emerge => undef,
+            zypper => undef,
+            ports  => undef,
+        },
+    },
+    {
         Module    => 'Crypt::Eksblowfish::Bcrypt',
         Required  => 0,
         Comment   => 'For strong password hashing.',
@@ -228,6 +239,17 @@ my @NeededModules = (
             emerge => 'dev-perl/Crypt-OpenSSL-X509',
             zypper => 'perl-Crypt-OpenSSL-X509',
             ports  => 'security/p5-Crypt-OpenSSL-X509',
+        },
+    },
+    {
+        Module    => 'JavaScript::QuickJS',
+        Required  => 1,
+        Comment   => 'Required for executing javascript on server side, for example to inline CSS in HTML emails.',
+        InstTypes => {
+            aptget => undef,
+            emerge => undef,
+            zypper => undef,
+            ports  => undef,
         },
     },
     {

@@ -391,6 +391,18 @@ o Name:    Authen::SASL::Perl::XOAUTH2
            # Artistic v1 - http://dev.perl.org/licenses/artistic.html
   Note:    # Copyright (c) 2018 Veltro. All rights reserved.
 
+o Name:    CPAN JavaScript::QuickJS
+  Web:     https://github.com/FGasper/p5-JavaScript-QuickJS
+  License: # This program is free software; you can redistribute it and/or
+           # modify it under the same terms as Perl itself.
+           # GNU v1 - http://dev.perl.org/licenses/gpl1.html
+           # Artistic v1 - http://dev.perl.org/licenses/artistic.html
+
+o Name:    QuickJS
+  Web:     https://bellard.org/quickjs
+  License: MIT License - http://www.opensource.org/licenses/mit-license.php
+  Note:    # Copyright Fabrice Bellard and Charlie Gordon
+
 #
 # JavaScript
 #
@@ -469,6 +481,14 @@ o Name:    clipboard.js
 
 o Name:    Spectrum
   Web:     http://bgrins.github.io/spectrum/
+  License: MIT License - http://www.opensource.org/licenses/mit-license.php
+
+o Name:    juice
+  Web:     https://github.com/Automattic/juice
+  License: MIT License - http://www.opensource.org/licenses/mit-license.php
+
+o Name:    cssesc
+  Web:     https://github.com/mathiasbynens/cssesc
   License: MIT License - http://www.opensource.org/licenses/mit-license.php
 
 #

@@ -1,0 +1,19 @@
+{
+  "name": "juice-quickjs-bundle-build",
+  "private": true,
+  "description": "Build files for the juice CSS inliner bundle executed by QuickJS in Znuny",
+  "scripts": {
+    "build": "esbuild entry.js --bundle --format=iife --platform=browser --inject:./shims.js --define:process.env.NODE_ENV='\"production\"' --legal-comments=linked --minify --outfile=../juice-quickjs-bundle.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "juice": "^12.1.1",
+    "esbuild": "^0.28.1"
+  },
+  "allowScripts": {
+    "esbuild@0.28.1": true,
+    "juice@12.1.1": true
+  }
+}

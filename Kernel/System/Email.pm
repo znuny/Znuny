@@ -143,6 +143,8 @@ To send an email without already created header:
 sub Send {
     my ( $Self, %Param ) = @_;
 
+    my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
+
     # determine backend name
     my $BackendName = '';
     if ( ref( $Self->{Backend} ) =~ m{::([^:]+)$}xms ) {
@@ -292,8 +294,18 @@ sub Send {
         $Param{From} = $ConfigObject->Get('AdminEmail') || 'otrs@localhost';
     }
 
-    # Replace all <br/> tags with <br /> tags (with a space) to show newlines in Lotus Notes.
     if ( $Param{MimeType} && lc $Param{MimeType} eq 'text/html' ) {
+
+        # Convert content to be more compatible with email clients
+        my $EmailClientCompleteSuccess = $HTMLUtilsObject->RichTextDocumentEmailClientComplete(
+            String => \$Param{Body},
+        );
+
+        return $SendError->(
+            ErrorMessage => 'HTML content mail client compatibility completion failed',
+        ) if ( !$EmailClientCompleteSuccess );
+
+        # Replace all <br/> tags with <br /> tags (with a space) to show newlines in Lotus Notes.
         $Param{Body} =~ s{\Q<br/>\E}{<br />}xmsgi;
     }
 

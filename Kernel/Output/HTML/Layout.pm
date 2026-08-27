@@ -5536,7 +5536,7 @@ sub RichTextDocumentServe {
 
 =head2 RichTextDocumentCleanup()
 
-please see L<Kernel::System::HTML::Layout::DocumentCleanup()>
+see L<Kernel::System::HTMLUtils::DocumentCleanup()>
 
 =cut
 
@@ -5559,6 +5559,38 @@ sub RichTextDocumentCleanup {
     );
 
     return $Param{String};
+}
+
+=head2 RichTextDocumentEmailClientComplete()
+
+see L<Kernel::System::HTMLUtils::RichTextDocumentEmailClientComplete()>
+
+=cut
+
+sub RichTextDocumentEmailClientComplete {
+    my ( $Self, %Param ) = @_;
+
+    my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
+
+    return $HTMLUtilsObject->RichTextDocumentEmailClientComplete(
+        %Param,
+    );
+}
+
+=head2 RichTextDocumentCSSInlinify()
+
+see L<Kernel::System::HTMLUtils::RichTextDocumentCSSInlinify()>
+
+=cut
+
+sub RichTextDocumentCSSInlinify {
+    my ( $Self, %Param ) = @_;
+
+    my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
+
+    return $HTMLUtilsObject->RichTextDocumentCSSInlinify(
+        %Param,
+    );
 }
 
 =begin Internal:
