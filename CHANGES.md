@@ -1,5 +1,4 @@
 # 7.3.7 2026-??-??
- - 2026-08-20 Fixed: CKEditor content is provided for e-mails with inline style (instead of internal) that should be supported for all e-mail clients.
  - 2026-08-20 Changed: Admin::Package::List now always reports package deployment status and warns about local modifications.
  - 2026-08-20 Fixed: Multiselect dynamic field values rendered without proper spacing in customer interface. Thanks to @LuBroering (Lukas Bröring Sector Nord AG) [PR#836](https://github.com/znuny/Znuny/pull/836).
  - 2026-08-20 Fixed: agent/customer re-direction after accepting initial information dialog (AgentInfo/CustomerAccept).

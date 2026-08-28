@@ -633,25 +633,14 @@ Core.UI.RichTextEditor = (function (TargetNS) {
             }
         ])
 
+        // allow html tag of article quoted replies
         ContentAllowed.push(
-            { // allow html tag of article quoted replies
+            {
                 name: 'div',
                 attributes: {
                     type: 'cite'
                 },
                 styles: true
-            },
-            { // allow all combinations of html tag "figure" used for image display & more
-                name: 'figure',
-                styles: true,
-                attributes: true,
-                classes: true,
-            },
-            { // allow all combinations of html tag "img" used for image display
-                name: 'img',
-                styles: true,
-                attributes: true,
-                classes: true,
             }
         );
 
@@ -834,110 +823,9 @@ Core.UI.RichTextEditor = (function (TargetNS) {
             ExtraPlugins.push(BalloonFlipFix);
         }
 
-        // add custom plugin that will disable Image
-        // plugin on inlinified images, for more info please look
-        // at Kernel::System::HTMLUtils::RichTextDocumentEmailClientComplete
-        function DisableImagePluginForInlinifiedImg(Editor) {
-            Editor.conversion.for('upcast').add(function(Dispatcher) {
-                Dispatcher.on('element:img', function(Event, Data, ConversionApi) {
-                    var ViewImg, Parent, Writer, HtmlImg, SrcAttr, AltAttr, StyleAttr, WidthAttr, HeightAttr;
-
-                    ViewImg = Data.viewItem;
-                    Parent = ViewImg.parent;
-
-                    // check for parent conditions that
-                    // clarifies if image has been inlinified
-                    if (Parent && Parent.parent &&
-                        Parent.is('element', 'div') &&
-                        Parent.hasAttribute('style') &&
-                        Parent.parent.is('element', 'div') &&
-                        Parent.parent.hasAttribute('style') &&
-                        /margin-top\s*:\s*0(px)?/i.test(Parent.parent.getAttribute('style'))) {
-
-                        // consume image tag so that Image plugin
-                        // won't work on it anymore
-                        ConversionApi.consumable.consume(ViewImg, {
-                            name: true,
-                            attributes: ['src', 'alt', 'width', 'height']
-                        });
-
-                        // convert img as normal htmlImg (not imageBlock)
-                        Writer = ConversionApi.writer;
-
-                        SrcAttr = ViewImg.getAttribute('src');
-                        AltAttr = ViewImg.getAttribute('alt');
-                        StyleAttr = ViewImg.getAttribute('style');
-                        WidthAttr = ViewImg.getAttribute('width');
-                        HeightAttr = ViewImg.getAttribute('height');
-
-                        HtmlImg = Writer.createElement('htmlImg', {
-                            src: SrcAttr || '',
-                            alt: AltAttr || '',
-                            style: StyleAttr || '',
-                            width: WidthAttr || '',
-                            height: HeightAttr || ''
-                        });
-
-                        ConversionApi.writer.insert(HtmlImg, Data.modelCursor);
-
-                        Event.stop();
-                    }
-                }, { priority: 'highest' });
-            });
-
-            // register schema for htmlImg
-            Editor.model.schema.register('htmlImg', {
-                allowWhere: '$text',
-                isInline: true,
-                isObject: true,
-                allowAttributes: ['src', 'alt', 'style', 'width', 'height']
-            });
-
-            // downcast support
-            Editor.conversion.for('downcast').elementToElement({
-                model: 'htmlImg',
-                view: function(ModelElement, ConversionApi) {
-                    var Writer, SrcAttr, AltAttr, StyleAttr, WidthAttr, HeightAttr, Attributes;
-
-                    Writer = ConversionApi.writer;
-                    SrcAttr = ModelElement.getAttribute('src');
-                    AltAttr = ModelElement.getAttribute('alt');
-                    StyleAttr = ModelElement.getAttribute('style');
-                    WidthAttr = ModelElement.getAttribute('width');
-                    HeightAttr = ModelElement.getAttribute('height');
-
-                    Attributes = {};
-
-                    if (SrcAttr) {
-                        Attributes.src = SrcAttr;
-                    }
-
-                    if (AltAttr) {
-                        Attributes.alt = AltAttr;
-                    }
-
-                    if (StyleAttr) {
-                        Attributes.style = StyleAttr;
-                    }
-
-                    if (WidthAttr) {
-                        Attributes.width = WidthAttr;
-                    }
-
-                    if (HeightAttr) {
-                        Attributes.height = HeightAttr;
-                    }
-
-                    return Writer.createEmptyElement('img', Attributes);
-                }
-            });
-        }
-
-        ExtraPlugins.push(DisableImagePluginForInlinifiedImg);
-
         RTEEditorAreaContent = $EditorArea.val();
-        RTEEditorAreaContent = RTEEditorAreaContent.replace(/<style type="text\/css" class="RTEContentCssInternal">[\s\S]*?<\/style>/g, '');
-        RTEEditorAreaContent = RTEEditorAreaContent.replace(/<style type="text\/css" class="RTEContentCssDefault">[\s\S]*?<\/style>/g, '');
+        RTEEditorAreaContent = RTEEditorAreaContent.replace(/<style class="RTEContentCssInternal">[\s\S]*?<\/style>/g, '');
+        RTEEditorAreaContent = RTEEditorAreaContent.replace(/<style class="RTEContentCssDefault">[\s\S]*?<\/style>/g, '');
         $EditorArea.val(RTEEditorAreaContent);
 
         $EditorArea.addClass('CKEInstanceIsLoading');

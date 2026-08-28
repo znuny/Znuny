@@ -15,8 +15,6 @@ use warnings;
 use utf8;
 
 use MIME::Base64;
-use JavaScript::QuickJS;
-use Convert::Color;
 
 use Kernel::System::VariableCheck qw(:all);
 
@@ -785,10 +783,8 @@ sub RTEContentCssInternalGet {
 
     return if !IsArrayRefWithData($InternalArticleStylesPaths);
 
-    my $Home = $ConfigObject->Get('Home');
-
-    my @FullInternalArticleStylesPaths = map {
-        $Home . '/var/httpd/htdocs/' . $_
+    @{$InternalArticleStylesPaths} = map {
+        $ConfigObject->Get('Home') . '/var/httpd/htdocs/' . $_
     } @{$InternalArticleStylesPaths};
 
     my $RTEContentPrefix = 'MinifiedRTEContentStyles';
@@ -797,7 +793,7 @@ sub RTEContentCssInternalGet {
 
     # minify files only once if not changed
     my $ActualMinifiedFilename = $LoaderObject->MinifyFiles(
-        List                 => \@FullInternalArticleStylesPaths,
+        List                 => $InternalArticleStylesPaths,
         Type                 => 'CSS',
         TargetDirectory      => $TargetDirectory,
         TargetFilenamePrefix => $RTEContentPrefix,
@@ -870,199 +866,6 @@ sub RTEContentCssInternalGet {
     return $MinifiedRTEContentCSS;
 }
 
-=head2 RichTextDocumentEmailClientComplete()
-
-modify ckeditor content to be more compatible with various email clients
-
-    $EmailCompatibleContent = $HTMLUtilsObject->RichTextDocumentEmailClientComplete(
-        String => \$Content, # required
-        Silent => 0,         # optional
-    );
-
-=cut
-
-sub RichTextDocumentEmailClientComplete {
-    my ( $Self, %Param ) = @_;
-
-    for my $Needed (qw(String)) {
-        if ( !ref $Param{$Needed} || ref $Param{$Needed} ne 'SCALAR' ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Need $Needed as scalar ref!"
-            );
-            return;
-        }
-    }
-
-    # inlinify content so that email clients will
-    # support at least most of the content styles
-    my $InlinifySuccess = $Self->RichTextDocumentCSSInlinify(
-        String => $Param{String},
-        Silent => $Param{Silent},
-    );
-
-    return if !$InlinifySuccess;
-
-    # Problem 1: Gmail does not support figure tag at all
-    # and will cut it from the content when answering
-    # leading to deletion of image (and potentially other) styles
-    # Workaround: change any "figure" to "div" tags
-
-    # margin-top style is used as an identifier, it sounds
-    # strange but email clients will usually trim any id/class/data
-    # and other attributes, but will keep styles, therefore this style
-    # will change nothing visually, but should be respected by email clients
-    # and it will be used later to determine if it's an image that
-    # should no longer work via "Image" plugin
-    ${ $Param{String} } =~ s{ <figure (\ .*?)? > }{<div style="margin-top:0px;"><div$1>}xg;
-    ${ $Param{String} } =~ s{ <\/figure> }{<\/div><\/div>}xg;
-
-    # Problem 2: Outlook does not support
-    # CSS rules colors specified in hsl format
-    # causing for example not applying table border style at all
-    # Solution: convert any hsl/hsla rules to hex
-    # that is more compatible with email clients
-    ${ $Param{String} } =~ s{hsl\((\d+)\s*,\s*(\d+)%\s*,\s*(\d+)%\)}{
-        eval {
-            my $Color = Convert::Color->new("hsl:$1,$2,0.$3");
-            "#" . $Color->as_rgb8->hex;
-        } || "hsl($1,$2%,$3%)";
-    }geix;
-
-    # ignore alpha layer in case of hsla
-    ${ $Param{String} } =~ s{hsla\((\d+)\s*,\s*(\d+)%\s*,\s*(\d+)%\s*,\s*[\d.]+\)}{
-        eval {
-            my $Color = Convert::Color->new("hsl:$1,$2,0.$3");
-            "#" . $Color->as_rgb8->hex;
-        } || "hsla($1,$2%,$3%,1)";
-    }geix;
-
-    # Problem 3: Outlook will remove "height: auto" style for images when
-    # replying and there is nothing that can be done to restore it,
-    # however image will still display correctly if height
-    # attribute won't be set at all (will probably fallback to auto)
-    # Solution: delete height attribute (not style) in "img" tag
-    ${ $Param{String} } =~ s{
-        <(img[^>]*?)
-        \ height="\d+?(?:px)?"
-        (.*?)>
-    }{<$1$2>}gx;
-
-    # Problem 4: Outlook will set width to 1024 if it is not set within "img" tag
-    # CKEditor set this parameter for it's parent element only
-    # Solution: copy "width" style from parent "div" to "img" child tag to be recognizable
-    ${ $Param{String} } =~ s{
-        (<div\ style="margin-top:0px;">\s*
-        <div[^>]+
-        (?<!(?:min|max)-)width:\s*(\d+)(?:px)?
-        [^>]+>\s*
-        <img[^>]+
-        width=")\d+
-        ("[^>]*>)}{$1$2$3}gx;
-
-    return 1;
-}
-
-=head2 RichTextDocumentCSSInlinify()
-
-Inlinify CSS content of ckeditor.
-Returns 2 if inlinification is not needed, otherwise returns success of inlinification.
-
-    $Success = $HTMLUtilsObject->RichTextDocumentCSSInlinify(
-        String => \$Content, # required
-        Silent => 0,         # optional
-    );
-
-=cut
-
-sub RichTextDocumentCSSInlinify {
-    my ( $Self, %Param ) = @_;
-
-    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
-
-    # check needed stuff
-    for my $Needed (qw(String)) {
-        if ( !ref $Param{$Needed} || ref $Param{$Needed} ne 'SCALAR' ) {
-            $LogObject->Log(
-                Priority => 'error',
-                Message  => "Need $Needed as scalar ref!"
-            );
-            return;
-        }
-    }
-
-    my $TrimmedContent = ${ $Param{String} };
-
-    $TrimmedContent =~ m{( <html> .*? <head> .*?)(<style.*<\/style>)(.*? <\/head>.* )}xs;
-    my $InitialHTMLPart = $1;
-    my $Styles          = $2;
-    my $EndHTMLPart     = $3;
-
-    if ($Styles) {
-
-        # Problem: inliner does not support CSS rules defined via variables
-        # Solution: convert variables defined in :root to raw values used in rules
-        my %Variables;
-        while ( $Styles =~ /:root\s*\{([^}]+)\}/gsx ) {
-            my $RootContent = $1;
-            while ( $RootContent =~ /(--[\w-]+)\s*:\s*([^;]+)/gx ) {
-                my ( $VarName, $VarValue ) = ( $1, $2 );
-                $VarValue =~ s/^\s+|\s+$//gx;
-                $Variables{$VarName} = $VarValue;
-            }
-        }
-
-        # delete any root variable declaration blocks
-        $Styles =~ s/:root\s*\{[^}]+\}//gsx;
-
-        my $MaxNestingDepth = 5;
-
-        # resolve variables referencing other variables (nested var usage)
-        NESTINGLEVEL:
-        for my $NestingLevel ( 1 .. $MaxNestingDepth ) {
-            my $Changed = 0;
-            for my $VarName ( sort keys %Variables ) {
-                my $Before = $Variables{$VarName};
-                $Variables{$VarName} =~ s{var\((--[\w-]+)\)}{
-                    exists $Variables{$1} ? $Variables{$1} : "var($1)"
-                }gex;
-                $Changed = 1 if $Variables{$VarName} ne $Before;
-            }
-            last NESTINGLEVEL if !$Changed;
-        }
-
-        # overwrite variables with raw values that
-        # will be supported by inliner
-        $Styles =~ s/var\((--[\w-]+)\)/
-            exists $Variables{$1} ? $Variables{$1} : "var($1)"
-        /gex;
-
-        # resolve simple calc expressions left after substitution
-        $Styles =~ s{calc\(\s*([\d.]+)(px|em|rem)\s*/\s*([\d.]+)\s*\)}{
-            sprintf('%.4g%s', $1 / $3, $2)
-        }gex;
-
-        $TrimmedContent = $InitialHTMLPart . $Styles . $EndHTMLPart;
-    }
-    else {
-        $LogObject->Log(
-            Priority => 'notice',
-            Message  =>
-                'Inlinification not applied: no internal <style> tag detected.',
-        );
-
-        return 2;
-    }
-
-    my $Success = $Self->DocumentCSSInlinify(
-        String => \$TrimmedContent,
-        Silent => $Param{Silent},
-    );
-
-    ${ $Param{String} } = $TrimmedContent if $Success;
-    return $Success;
-}
-
 =head2 DocumentComplete()
 
 check and e. g. add <html> and <body> tags to given html string
@@ -1104,10 +907,10 @@ sub DocumentComplete {
 
     if ( $Param{String} =~ m{<html>}i ) {
 
-        my $Styles = '<style type="text/css" class="RTEContentCssInternal">' . $RTEContentCssInternal . '</style>'
-            . '<style type="text/css" class="RTEContentCssDefault">' . $RTEContentCssDefault . '</style>';
+        my $Styles = '<style class="RTEContentCssInternal">' . $RTEContentCssInternal . '</style>'
+            . '<style class="RTEContentCssDefault">' . $RTEContentCssDefault . '</style>';
 
-        if ( $Param{String} !~ m{<style type="text\/css" class="(?:RTEContentCssInternal|RTEContentCssDefault)">} ) {
+        if ( $Param{String} !~ m{<style class="(?:RTEContentCssInternal|RTEContentCssDefault)">} ) {
             $Param{String} =~ s{( <html> .*? <head> )( .*? )( <\/head> )}{$1$2$Styles$3}xs;
         }
 
@@ -1122,8 +925,8 @@ sub DocumentComplete {
     # to render the content in standards mode, which is more safe than quirks mode.
     my $Body = '<!DOCTYPE html><html><head>';
     $Body .= '<meta http-equiv="Content-Type" content="text/html; charset=' . $Param{Charset} . '"/>';
-    $Body .= '<style type="text/css" class="RTEContentCssInternal">' . $RTEContentCssInternal . '</style>';
-    $Body .= '<style type="text/css" class="RTEContentCssDefault">' . $RTEContentCssDefault . '</style>';
+    $Body .= '<style class="RTEContentCssInternal">' . $RTEContentCssInternal . '</style>';
+    $Body .= '<style class="RTEContentCssDefault">' . $RTEContentCssDefault . '</style>';
     $Body .= '</head><body class="ck ck-content">' . $Param{String} . '</body></html>';
 
     return $Body;
@@ -1212,93 +1015,6 @@ sub DocumentCleanup {
     }
 
     return $Param{String};
-}
-
-=head2 DocumentCSSInlinify()
-
-inlinify CSS into html content
-
-    $Success = $LayoutObject->DocumentCSSInlinify(
-        String           => \$Content,             # required
-        Silent           => 0,                     # optional
-    );
-
-=cut
-
-sub DocumentCSSInlinify {
-    my ( $Self, %Param ) = @_;
-
-    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
-    my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
-    # check needed stuff
-    for my $Needed (qw(String)) {
-        if ( !ref $Param{$Needed} || ref $Param{$Needed} ne 'SCALAR' ) {
-            $LogObject->Log(
-                Priority => 'error',
-                Message  => "Need $Needed as scalar ref!"
-            );
-            return;
-        }
-    }
-
-    my $Home = $ConfigObject->Get('Home');
-
-    # load bundle
-    my $Bundle = $MainObject->FileRead(
-        Location => "$Home/var/httpd/htdocs/common/js/juice-quickjs-bundle/juice-quickjs-bundle.js",
-    );
-    if ( !$Bundle || !${$Bundle} ) {
-        $LogObject->Log(
-            Priority => 'error',
-            Message  => 'Inlinify engine initialization failed: bundle file not readable.',
-        ) if !$Param{Silent};
-        return;
-    }
-
-    # initialize js engine and load the bundled inliner
-    my $JS = eval {
-        my $Engine = JavaScript::QuickJS->new();
-        $Engine->eval( ${$Bundle} );
-        $Engine;
-    };
-    if ( !$JS || $@ ) {
-        $LogObject->Log(
-            Priority => 'error',
-            Message  => 'Inlinify engine initialization failed: ' . ( $@ || 'unknown error' ),
-        ) if !$Param{Silent};
-        return;
-    }
-    my $HTML = ${ $Param{String} };
-    my $CSS  = '';
-
-    # extract all style blocks, append their content to css
-    # and strip them from the html
-    $HTML =~ s{<style\b[^>]*>(.*?)</style\s*>}{ $CSS .= "$1\n"; '' }gisex;
-
-    # strip optional cdata/comment wrappers inside extracted css
-    $CSS =~ s{<!\[CDATA\[|\]\]>|<!--|-->}{}gx;
-
-    # inlinify content
-    my $InlinedHTML = eval {
-        $JS->set_globals(
-            HTML => $HTML,
-            CSS  => $CSS,
-        );
-        $JS->eval('inlineContent(HTML, CSS)');
-    };
-    if ( !defined $InlinedHTML || $@ ) {
-        $LogObject->Log(
-            Priority => 'error',
-            Message  => 'Inlinify failed: ' . ( $@ || 'inliner returned no content' ),
-        ) if !$Param{Silent};
-        return;
-    }
-
-    ${ $Param{String} } = $InlinedHTML;
-
-    return 1;
 }
 
 =head2 TruncateBodyQuote()
