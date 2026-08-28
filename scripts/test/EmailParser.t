@@ -682,7 +682,7 @@ $Self->Is(
 $MD5 = $MainObject->MD5sum( String => $EmailParserObject->GetMessageBody() ) || '';
 $Self->Is(
     $MD5,
-    '7e45ab84117a417158a1a7162bdfd387',
+    'fd924c11017677380752522ae9280cfe',
     "#14 md5 body check",
 );
 

@@ -77,6 +77,18 @@ I am lost. Martin says that...
         Name => 'ToAscii - simple'
     },
     {
+        Input  => '<p>a</p><p>&nbsp;</p><p>b</p>',
+        Result => "a\n\nb\n",
+        Name   =>
+            'ToAscii - CKEditor 5 represents an empty line as <p>&nbsp;</p>, must become an empty line, not a literal non breaking space',
+    },
+    {
+        Input  => "<html><body>A</body></html>\n\n<!DOCTYPE html><html><body>B</body></html>",
+        Result => "A\n\nB",
+        Name   =>
+            'ToAscii - EmailParser concatenates complete HTML documents for multipart/mixed emails, keep them visually separated',
+    },
+    {
         Input =>
             '<ul><li>a</li><li>b</li><li>c</li></ul><ol><li>one</li><li>two</li><li>three</li></ol>',
         Result => '
@@ -90,6 +102,19 @@ I am lost. Martin says that...
 
 ',
         Name => 'ToAscii - simple'
+    },
+    {
+        Input =>
+            '<ol><li data-list-item-id="e94a52ab905a6938044906b47267e137d">one</li><li data-list-item-id="e1e8780a4ab819e68bd4db3e0275bd5c7">two</li></ol><ul><li data-list-item-id="e58f356348597d9f2819aad0e4ec404e8">a</li><li data-list-item-id="e2fa11a028a81cef773db3c266d342d62">b</li></ul>',
+        Result => '
+ - one
+ - two
+
+ - a
+ - b
+
+',
+        Name => 'ToAscii - CKEditor 5 adds a data-list-item-id attribute to <li>, must still be converted',
     },
     {
         Input =>
@@ -174,6 +199,12 @@ Fifth Line',
         Name   => 'ToAscii - Test for bug#8352 - Wrong substitution regex in HTMLUtils.pm->ToAscii.'
     },
     {
+        Input  => '<table><tr><td>a</td><td>&nbsp;</td></tr></table>',
+        Result => "a \n",
+        Name   =>
+            'ToAscii - CKEditor 5 fills empty table cells with &nbsp;, must become an empty cell, not a literal non breaking space',
+    },
+    {
         Input  => 'a       b',
         Result => 'a b',
         Name   => 'ToAscii - Whitespace removal'
@@ -256,6 +287,19 @@ Fifth Line',
             'Ticket::Frontend::TextAreaNote' => 5,
         },
 
+    },
+    {
+        Input  => "<td>Test\ntable\ncell</td>",
+        Result => 'Test table cell ',
+        Name   =>
+            'ToAscii - stray new lines from HTML source formatting (e.g. CKEditor 5 output) must not leak into the result',
+    },
+    {
+        Input =>
+            "<table><tr><td>row1\ncol1</td><td>row1\ncol2</td></tr><tr><td>row2\ncol1</td><td>row2\ncol2</td></tr></table>",
+        Result => "row1 col1 row1 col2 \nrow2 col1 row2 col2 \n",
+        Name   =>
+            'ToAscii - stray new lines inside table cells from HTML source formatting must not leak into the result',
     },
 );
 

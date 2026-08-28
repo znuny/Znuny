@@ -137,7 +137,6 @@ Erik Thijs
 Hi,
  
 This mail is composed in html format.
-
  
 Cheers,
 Erik
@@ -156,7 +155,6 @@ Erik Thijs
 Hi,
  
 This mail is composed in html format.
-
  
 Cheers,
 Erik
@@ -166,7 +164,7 @@ Erik
                 'ContentType'     => 'text/plain; charset=utf-8',
                 'Disposition'     => 'inline',
                 'Filename'        => 'file-1',
-                'Filesize'        => 145,
+                'Filesize'        => 144,
                 'MimeType'        => 'text/plain'
             },
         ],
@@ -177,7 +175,6 @@ Erik
         Body     => 'Hi,
  
 This mail is composed in html format.
-
  
 Cheers,
 Erik

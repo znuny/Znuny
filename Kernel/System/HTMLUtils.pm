@@ -188,6 +188,22 @@ sub ToAscii {
     # fix some bad stuff from opera and others
     $Param{String} =~ s/(\n\r|\r\r\n|\r\n)/\n/gs;
 
+    # new lines from the HTML source formatting are not meaningful line breaks, replace them
+    # with a space so only the new lines inserted by the tag conversion rules below remain
+    $Param{String} =~ s{[\r\n]}{ }gs;
+
+    # EmailParser concatenates multiple complete HTML documents when combining multipart/mixed
+    # parts into one body, keep such documents visually separated by an empty line
+    $Param{String} =~ s{</html>\s*(?=<(?:!DOCTYPE|html))}{\n\n}gsi;
+
+    # CKEditor 5 represents an empty line as <p>&nbsp;</p>, convert this to an actual
+    # empty line instead of a literal non breaking space
+    $Param{String} =~ s{<p(?:\s[^>]*)?>(?:\s|&nbsp;)*</p>}{\n\n}gsi;
+
+    # CKEditor 5 fills empty table cells with &nbsp; to keep the table grid visible, convert
+    # this to an actual empty cell instead of a literal non breaking space
+    $Param{String} =~ s{<td(?:\s[^>]*)?>(?:\s|&nbsp;)*</td>}{<td></td>}gsi;
+
     # remove style tags
     $Param{String} =~ s{<style [^>]*? />}{}xgsi;
     $Param{String} =~ s{<style [^>]*? > .*? </style[^>]*>}{}xgsi;
@@ -228,17 +244,17 @@ sub ToAscii {
     }
 
     # strip most other other tags beside </ul>, </ol>, </td>, <li>
-    $Param{String} =~ s/(?!(?:<(?:(?:\/(?:ul|ol|td))|li)>))<.+?\>//gs;
+    $Param{String} =~ s/(?!(?:<(?:(?:\/(?:ul|ol|td))|li(?:\s[^>]*)?)>))<.+?\>//gs;
 
     # clean string
-    $Param{String} =~ s/^[ ]//gm;    # spaces are needed only between text, remove anything from the start
+    $Param{String} =~ s/^[ ]+//gm;    # spaces are needed only between text, remove anything from the start
 
     $Param{String} =~ s/^\s*\n\s*\n/\n/mg;
 
     $Param{String} =~ s/^[\r\n]//s;
 
     # convert li tags to \n -
-    $Param{String} =~ s/\<li\>/\n - /gsi;
+    $Param{String} =~ s/\<li(?:\s[^>]*)?\>/\n - /gsi;
 
     # convert </ul> and </ol> tags to \n\n
     $Param{String} =~ s/\<\/(ul|ol)\>/\n\n/gsi;
