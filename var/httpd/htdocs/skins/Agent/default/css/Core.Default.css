@@ -1374,7 +1374,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     .nvtooltip {
         font-size: 11px !important;
-        border: 0px !important;
+        border: 1px solid rgba(0,0,0,.2);
     }
 
     /*

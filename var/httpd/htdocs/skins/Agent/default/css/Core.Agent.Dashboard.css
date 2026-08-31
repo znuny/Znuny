@@ -208,4 +208,10 @@ div.EventDetails {
     display: inline-block;
 }*/
 
+/* WidgetSimple - Dashboard Ticket Stats */
+
+.DashboardTicketStats > .Content {
+    position: static;
+}
+
 } /* end @media */

@@ -67,6 +67,10 @@ Core.UI.Resizable = (function (TargetNS) {
         ScrollerHeight = Math.max(ScrollerHeight || 0, ScrollerMinHeight);
 
         if (isJQueryObject($Element) && $Element.length) {
+
+            // Take the rendered handle height, as it is defined by the skin.
+            HandleHeight = $Element.find('.Handle').outerHeight() || HandleHeight;
+
             CurrentTableHeight = $Element.find('table').outerHeight();
             // If the scroller is not needed (because only few elements shown in table)
             // than also do not initialize the scroller event and hide the scroller handle

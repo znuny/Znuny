@@ -789,6 +789,17 @@ Core.Agent.TicketZoom = (function (TargetNS) {
             }
         }
 
+        // In "show all articles" mode the backend does not mark any row as active,
+        // so highlight the article referenced by the URL hash.
+        else {
+            URLHash = NormalizeArticleFragmentIdentifier(location.hash);
+
+            if (URLHash !== '') {
+                $ArticleElement = $('#ArticleTable').find('input.ArticleID[value=' + URLHash + ']');
+                $ArticleElement.closest('table').find('tr').removeClass('Active').end().end().closest('tr').addClass('Active');
+            }
+        }
+
         // Start asynchronous loading of widgets
         InitWidgets(AsyncWidgetActions);
 
@@ -814,6 +825,9 @@ Core.Agent.TicketZoom = (function (TargetNS) {
 
             // Mode: show all articles - jump to the selected article
             else {
+                // Add active state to new row
+                $(this).closest('table').find('tr').removeClass('Active').end().end().addClass('Active');
+
                 location.href = BuildArticleFragmentIdentifier($(this).find('input.ArticleID').val());
             }
 

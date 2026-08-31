@@ -676,7 +676,8 @@ thead .headerSortDown a {
 
 .TicketList {
     overflow: auto;
-    border-radius: var(--border-radius-sm);
+    border-bottom-left-radius: var(--border-radius-sm);
+    border-bottom-right-radius: var(--border-radius-sm);
 }
 
 .TicketList table {
@@ -731,26 +732,51 @@ thead .headerSortDown a {
  */
 .Handle {
     width: 100%;
+    box-sizing: border-box;
+    background: var(--main-bg-color);
+    border-top: var(--border-width) var(--border-solid) var(--border-color);
+    border-bottom: var(--border-width) var(--border-solid) var(--border-color);
 }
 
 .Handle a {
     display: block;
+    position: relative;
     margin: auto;
-    height: 14px;
+    /* same height as a table header row: font size + vertical cell padding */
+    height: calc(var(--font-size-sm) + 2 * var(--padding-sm));
     width: 79px;
-    background: transparent url(../img/handle.png) no-repeat;
     text-indent: -9999px;
     cursor: ns-resize;
+}
+
+.Handle a:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 5px;
+    transform: translate(-50%, -50%);
+    border-top: var(--border-width) var(--border-solid) var(--table-text-color);
+    border-bottom: var(--border-width) var(--border-solid) var(--table-text-color);
+    opacity: 0.4;
+}
+
+.Handle a:hover:after {
+    opacity: 0.8;
 }
 
 .Handle.ui-resizable-s {
     cursor:auto;
     height:auto !important;
     left:auto;
+    /* jQuery UI pulls the handle out of the flow, where it would cover the last table row */
+    bottom: auto;
 }
 
 .Handle.ui-resizable-handle {
     display: block;
+    position: relative;
     font-size: inherit;
     z-index: 19;
 }

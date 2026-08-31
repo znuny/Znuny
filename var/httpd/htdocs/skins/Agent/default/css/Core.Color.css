@@ -146,6 +146,11 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     --tr-disabled-bg: #efefef;
     --tr-disabled-text: #B6B6B6;
 
+    /* Article table rows, overlays are drawn on top of the configured article color */
+    --article-row-hover-overlay: rgba(23, 23, 37, 0.07);
+    --article-row-active-overlay: rgba(23, 23, 37, 0.12);
+    --article-row-active-accent: var(--primary-color);
+
     /* Flag Element */
     --color-flag-default: #cdcdcd;
 

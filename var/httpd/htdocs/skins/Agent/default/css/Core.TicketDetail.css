@@ -152,6 +152,8 @@ div.Headline .Flag {
     border-bottom: none;
     margin: 0px;
     height: 100% !important;
+    display: flex;
+    flex-direction: column;
 }
 
 #ArticleTableBody .Scroller {
@@ -163,6 +165,13 @@ div.Headline .Flag {
     overflow-x: hidden;
     margin-bottom: 0 !important;
     border: none;
+    /* shrink instead of pushing the resize handle out of the clipped container */
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+#ArticleTableBody .Handle {
+    flex: 0 0 auto;
 }
 
 #ArticleTableBody .Scroller::-webkit-scrollbar-track {
@@ -181,6 +190,20 @@ div.Headline .Flag {
 
 #ArticleTableBody .Scroller .DataTable {
     border: 0px;
+}
+
+#ArticleTable {
+    overflow: visible;
+}
+
+#ArticleTable thead th {
+    position: sticky;
+    top: 0;
+    z-index: 11;
+}
+
+#ArticleTable tbody tr:hover {
+    z-index: 1;
 }
 
 .ArticleMailHeader {
@@ -624,6 +647,43 @@ tbody td.Sender {
     border-right: 0px;
 }
 
+/*
+ * Article colors are rendered per article type as "background: <color> !important"
+ * (Kernel/Output/CSS/ArticleColor.pm). Hover and selection therefore must not use
+ * background, they are drawn as an inset overlay on top of the article color.
+ */
+#ArticleTable tbody tr > td {
+    cursor: pointer;
+    transition: box-shadow ease 0.15s;
+}
+
+#ArticleTable tbody tr:hover > td {
+    box-shadow: inset 0 0 0 100vh var(--article-row-hover-overlay);
+}
+
+#ArticleTable tbody tr.Active > td {
+    box-shadow: inset 0 0 0 100vh var(--article-row-active-overlay);
+}
+
+#ArticleTable tbody tr.Active:hover > td {
+    box-shadow: inset 0 0 0 100vh var(--article-row-hover-overlay),
+                inset 0 0 0 100vh var(--article-row-active-overlay);
+}
+
+#ArticleTable tbody tr > td:first-child {
+    position: relative;
+}
+
+#ArticleTable tbody tr:hover > td:first-child::before,
+#ArticleTable tbody tr.Active > td:first-child::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 3px;
+    background: var(--article-row-active-accent);
+}
 
 .UseArticleColors tr:nth-child(even) td {
     transition: background ease 0.3s;
