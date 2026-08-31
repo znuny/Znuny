@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d-%m-%Y';
     $Self->{DateInputFormat}     = '%d-%m-%Y';
     $Self->{DateInputFormatLong} = '%d-%m-%Y - %T';
-    $Self->{Completeness}        = 0.477099236641221;
+    $Self->{Completeness}        = 0.477023374145333;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -365,6 +365,7 @@ sub Data {
         'Search' => 'Zoeken',
         'Wildcards like \'*\' are allowed.' => 'Wildcards zijn toegestaan.',
         'Add Customer' => 'Klant toevoegen',
+        'Add Customer User' => 'Nieuwe klant',
         'Select' => 'Selecteer',
         'Customer Users' => 'Klanten',
         'Customers ↔ Groups' => 'Bedrijven ↔ Groepen',
@@ -410,7 +411,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Terug naar zoekresultaat',
-        'Add Customer User' => 'Nieuwe klant',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Klanten zijn nodig om een historie te kunnen inzien en om in te loggen via het klantenscherm.',
         'Customer Users ↔ Customers' => 'Klanten ↔ Bedrijven',
@@ -2882,7 +2882,6 @@ sub Data {
         'Drafts' => 'Concepten',
         'by' => 'door',
         'Article Overview - %s Article(s)' => '',
-        'Page %s' => '',
         'No.' => 'Nr.',
         'Unread articles' => 'Ongelezen interacties',
         'Via' => 'Via',
@@ -8837,10 +8836,11 @@ Het Helpdesk Team
         'Arabic (Saudi Arabia)' => 'Arabisch (Saudi Arabië)',
         'Article Color' => '',
         'ArticleTree' => 'Interactie-boom',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Bijlage naam',
         'Avatar' => '',
         'Based on global RichText setting' => '',
+        'Blank' => '',
         'Bounced to "%s".' => 'Gebounced naar "%s".',
         'Bulgarian' => '',
         'Bulk Action' => 'Bulk actie',
@@ -9302,6 +9302,7 @@ Het Helpdesk Team
             '',
         'Select your preferred layout for the software.' => '',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => '',
         'Send notifications to users.' => 'Stuur berichten aan gebruikers.',

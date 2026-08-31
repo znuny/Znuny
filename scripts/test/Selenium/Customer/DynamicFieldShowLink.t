@@ -61,7 +61,7 @@ $Selenium->RunTest(
             ObjectType => 'Ticket',
             Config     => {
                 Link        => $DynamicFieldLink,
-                LinkPreview => 'https://www.otrs.com',
+                LinkPreview => 'https://www.znuny.com',
             },
             ValidID => 1,
             UserID  => 1,

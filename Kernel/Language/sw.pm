@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%m/%d/%Y';
     $Self->{DateInputFormat}     = '%m/%d/%Y';
     $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
-    $Self->{Completeness}        = 0.421119592875318;
+    $Self->{Completeness}        = 0.421052631578947;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -362,6 +362,7 @@ sub Data {
         'Search' => 'Tafuta',
         'Wildcards like \'*\' are allowed.' => 'Wildkadi kama \'*\' zinaruhusiwa.',
         'Add Customer' => 'Ongeza wateja',
+        'Add Customer User' => 'Ongeza mtumiaji wa mteja',
         'Select' => 'chagua',
         'Customer Users' => 'Wateja watumiaji',
         'Customers ↔ Groups' => '',
@@ -407,7 +408,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Rudi kwenye majibu ya utafutaji',
-        'Add Customer User' => 'Ongeza mtumiaji wa mteja',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Mtumiaji wa mteja anahitaji kuwa na historia ya mteja na kuingia kupitia paneli ya mteja.',
         'Customer Users ↔ Customers' => '',
@@ -2879,7 +2879,6 @@ sub Data {
         'Drafts' => '',
         'by' => 'Kwa',
         'Article Overview - %s Article(s)' => '',
-        'Page %s' => '',
         'No.' => 'Hapana.',
         'Unread articles' => 'Makala ambazo hazijasomwa',
         'Via' => '',
@@ -8826,10 +8825,11 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => '',
         'Article Color' => '',
         'ArticleTree' => 'Mti wa makala',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Jina la kiambatanishi',
         'Avatar' => '',
         'Based on global RichText setting' => '',
+        'Blank' => '',
         'Bounced to "%s".' => 'Ilidunda kwenda "%s".',
         'Bulgarian' => '',
         'Bulk Action' => 'Tendo la wingi',
@@ -9291,6 +9291,7 @@ Thanks for your help!
             '',
         'Select your preferred layout for the software.' => '',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => '',
         'Send notifications to users.' => 'tuma taarifa kwa watumiaji',

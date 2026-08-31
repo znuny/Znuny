@@ -1142,7 +1142,7 @@ msgstr "對於組/隊列中的工單具有 '讀和寫' 的權限"
 msgid "Back to search results"
 msgstr "返回至搜索結果"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "添加用戶"
 
@@ -25510,4 +25510,16 @@ msgstr "設定新密碼的連結將會發送到您的郵箱中。"
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "Resend is not possible for this article!"
 msgstr "無法重送此文章！"
+
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
 

@@ -1142,7 +1142,7 @@ msgstr "Komplet læse- og skriveadgang til sagerne i denne gruppe/kø."
 msgid "Back to search results"
 msgstr "Tilbage til søgeresultater"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "Tilføj Kundebruger"
 
@@ -25508,4 +25508,16 @@ msgstr "Et link til at angive et nyt password bliver sendt til din mail-adresse.
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "Resend is not possible for this article!"
 msgstr "Genafsendelse er ikke muligt for denne artikel!"
+
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
 

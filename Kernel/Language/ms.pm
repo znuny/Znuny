@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.51558524173028;
+    $Self->{Completeness}        = 0.515503259659723;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -359,6 +359,7 @@ sub Data {
         'Search' => 'Carian',
         'Wildcards like \'*\' are allowed.' => 'Kad bebas seperti \'*\' adalah dibenarkan.',
         'Add Customer' => 'Tambah pelanggan',
+        'Add Customer User' => 'Tambah Pengguna Pelanggan',
         'Select' => 'Pilih',
         'Customer Users' => 'Pengguna-pengguna Pelanggan',
         'Customers ↔ Groups' => '',
@@ -404,7 +405,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Kembali ke hasil carian',
-        'Add Customer User' => 'Tambah Pengguna Pelanggan',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Pengguna pelanggan diperlukan untuk mempunyai sejarah pelanggan dan untuk log masuk melalui panel pelanggan.',
         'Customer Users ↔ Customers' => '',
@@ -2876,7 +2876,6 @@ sub Data {
         'Drafts' => '',
         'by' => 'oleh',
         'Article Overview - %s Article(s)' => '',
-        'Page %s' => '',
         'No.' => 'Tidak',
         'Unread articles' => 'Artikel yang belum dibaca',
         'Via' => '',
@@ -8834,10 +8833,11 @@ Kumpulan MejaBantuan Anda
         'Arabic (Saudi Arabia)' => 'Arab (Arab Saudi)',
         'Article Color' => '',
         'ArticleTree' => 'PokokArtikel',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Nama Lampiran',
         'Avatar' => '',
         'Based on global RichText setting' => '',
+        'Blank' => '',
         'Bounced to "%s".' => 'bangkit satu "%s".',
         'Bulgarian' => 'Bulgaria',
         'Bulk Action' => 'Tindakan pukal',
@@ -9299,6 +9299,7 @@ Kumpulan MejaBantuan Anda
             '',
         'Select your preferred layout for the software.' => '',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => 'Hantar mel keluar baru daripada tiket ini.',
         'Send notifications to users.' => 'Hantar notifikasi kepada pelanggan.',

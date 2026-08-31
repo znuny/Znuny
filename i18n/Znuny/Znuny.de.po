@@ -1144,7 +1144,7 @@ msgstr "Voller Schreib- und Lesezugriff auf Tickets in der Queue/Gruppe."
 msgid "Back to search results"
 msgstr "Zurück zum Suchergebnis"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "Kundenbenutzer hinzufügen"
 
@@ -25532,4 +25532,16 @@ msgstr "Ein Link zum Setzen eines neuen Passworts wird an Ihre E-Mail-Adresse ge
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "Resend is not possible for this article!"
 msgstr "Erneutes Senden für diesen Artikel nicht möglich!"
+
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
 

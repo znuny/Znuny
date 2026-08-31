@@ -1100,13 +1100,13 @@ Get plain article/email from storage. This is a delegate method from active back
 Returns:
 
     $PlainMessage = '
-        From: OTRS Feedback <marketing@otrs.com>
-        To: Your OTRS System <otrs@localhost>
-        Subject: Welcome to OTRS!
+        From: Znuny Feedback <marketing@znuny.com>
+        To: Your Znuny System <znuny@localhost>
+        Subject: Welcome to Znuny!
         Content-Type: text/plain; charset=utf-8
         Content-Transfer-Encoding: 8bit
 
-        Welcome to OTRS!
+        Welcome to Znuny!
         # ...
     ';
 

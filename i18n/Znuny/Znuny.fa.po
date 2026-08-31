@@ -1142,7 +1142,7 @@ msgstr "دسترسی کامل به درخواست‌ها در این لیست / 
 msgid "Back to search results"
 msgstr "بازگشت به نتایج جستجو"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "اضافه کردن کاربر مشترک"
 
@@ -25519,4 +25519,16 @@ msgstr "پیوندی برای تنظیم رمز عبور جدید به آدرس 
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "Resend is not possible for this article!"
 msgstr "ارسال مجدد برای این مقاله ممکن نیست!"
+
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
 

@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.7029262086514;
+    $Self->{Completeness}        = 0.702814437907457;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -360,6 +360,7 @@ sub Data {
         'Search' => 'Buscar',
         'Wildcards like \'*\' are allowed.' => 'Están permitidos comodines como \'*\'.',
         'Add Customer' => 'Agregar Cliente',
+        'Add Customer User' => 'Agregar Usuario del Cliente',
         'Select' => 'Seleccionar',
         'Customer Users' => 'Usuarios de Cliente',
         'Customers ↔ Groups' => 'Clientes ↔ Grupos',
@@ -405,7 +406,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Regresar a los resultados de búsqueda',
-        'Add Customer User' => 'Agregar Usuario del Cliente',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Los usuarios del cliente necesitan tener un historial de cliente e iniciar sesión por medio del panel de cliente.',
         'Customer Users ↔ Customers' => 'Usuarios del Cliente ↔ Clientes',
@@ -2877,7 +2877,6 @@ sub Data {
         'Drafts' => 'Borradores',
         'by' => 'por',
         'Article Overview - %s Article(s)' => 'Resumen del Artículo - %s Artículo(s)',
-        'Page %s' => '',
         'No.' => 'Núm.',
         'Unread articles' => 'Artículos no leídos',
         'Via' => '',
@@ -8832,10 +8831,11 @@ Tu Equipo de Soporte
         'Arabic (Saudi Arabia)' => 'Árabe (Arabia Saudita)',
         'Article Color' => '',
         'ArticleTree' => 'ArticleTree',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Nombre del Archivo Adjunto',
         'Avatar' => 'Avatar',
         'Based on global RichText setting' => '',
+        'Blank' => '',
         'Bounced to "%s".' => 'Reenviado a "%s".',
         'Bulgarian' => 'Búlgaro',
         'Bulk Action' => 'Acción Múltiple',
@@ -9297,6 +9297,7 @@ Tu Equipo de Soporte
             'Seleccione su zona horaria personal. Todas las horas se mostrarán en relación con esta zona horaria.',
         'Select your preferred layout for the software.' => '',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => 'Enviar un nuevo correo saliente desde este ticket',
         'Send notifications to users.' => 'Enviar notificaciones a usuarios.',

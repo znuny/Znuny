@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.503657760814249;
+    $Self->{Completeness}        = 0.50357767530609;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -359,6 +359,7 @@ sub Data {
         'Search' => 'ค้นหา',
         'Wildcards like \'*\' are allowed.' => 'สัญลักษณ์เช่น \'*\' ได้รับอนุญาต',
         'Add Customer' => 'เพิ่มลูกค้า',
+        'Add Customer User' => 'เพิ่มลูกค้าผู้ใช้',
         'Select' => 'เลือก',
         'Customer Users' => 'ลูกค้าผู้ใช้',
         'Customers ↔ Groups' => '',
@@ -404,7 +405,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'กลับไปยังผลการค้นหา',
-        'Add Customer User' => 'เพิ่มลูกค้าผู้ใช้',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'ลูกค้าผู้ใช้จำเป็นต้องมีประวัติลูกค้าและเข้าสู่ระบบผ่านทางแผงของลูกค้า',
         'Customer Users ↔ Customers' => '',
@@ -2879,7 +2879,6 @@ sub Data {
         'Drafts' => '',
         'by' => 'โดย',
         'Article Overview - %s Article(s)' => '',
-        'Page %s' => '',
         'No.' => 'หมายเลข',
         'Unread articles' => 'บทความที่ยังไม่ได้อ่าน ',
         'Via' => '',
@@ -8837,10 +8836,11 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => 'ภาษาอาหรับ (ซาอุดีอาระเบีย)',
         'Article Color' => '',
         'ArticleTree' => 'ArticleTree',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'ชื่อเอกสารที่แนบมา',
         'Avatar' => '',
         'Based on global RichText setting' => 'ขึ้นอยู่กับการตั้งค่าทั่วไปของ RichText',
+        'Blank' => '',
         'Bounced to "%s".' => 'ตีกลับไปยัง "%s".',
         'Bulgarian' => 'ภาษาบุลกาเรีย',
         'Bulk Action' => 'ดำเนินการเป็นกลุ่ม',
@@ -9302,6 +9302,7 @@ Thanks for your help!
             '',
         'Select your preferred layout for the software.' => '',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => '',
         'Send notifications to users.' => '',

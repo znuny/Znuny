@@ -1142,7 +1142,7 @@ msgstr "Acces complet la citire și scriere pentru tichete în acest grup/coadă
 msgid "Back to search results"
 msgstr "Înapoi la rezultatele căutării"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "Adăugați un utilizator client"
 
@@ -25508,4 +25508,16 @@ msgstr "Un link pentru a seta o nouă parolă va fi trimis pe adresa dvs. de ema
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "Resend is not possible for this article!"
 msgstr "Retrimiterea nu este posibilă pentru acest articol!"
+
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
 

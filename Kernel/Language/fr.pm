@@ -35,7 +35,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.367684478371501;
+    $Self->{Completeness}        = 0.36762601367467;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -368,6 +368,7 @@ sub Data {
         'Search' => 'Rechercher',
         'Wildcards like \'*\' are allowed.' => 'Les caractères génériques tels que \'*\ sont autorisés',
         'Add Customer' => 'Ajouter un client',
+        'Add Customer User' => 'Ajouter un utilisateur client',
         'Select' => 'Sélectionner',
         'Customer Users' => 'Utilisateurs client',
         'Customers ↔ Groups' => 'Clients ↔ Groupes',
@@ -413,7 +414,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Retour aux résultats de la recherche',
-        'Add Customer User' => 'Ajouter un utilisateur client',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Les clients utilisateurs doivent avoir un historique client et se connecter via la page d\'identification client.',
         'Customer Users ↔ Customers' => 'Utilisateurs client ↔ Clients',
@@ -2885,7 +2885,6 @@ sub Data {
         'Drafts' => '',
         'by' => 'par',
         'Article Overview - %s Article(s)' => '',
-        'Page %s' => '',
         'No.' => 'N°.',
         'Unread articles' => 'Articles non lus',
         'Via' => 'Via',
@@ -8829,10 +8828,11 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => '',
         'Article Color' => '',
         'ArticleTree' => '',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Nom de la Pièce Jointe',
         'Avatar' => '',
         'Based on global RichText setting' => '',
+        'Blank' => '',
         'Bounced to "%s".' => 'Redirigé vers "%s".',
         'Bulgarian' => 'Bulgare',
         'Bulk Action' => 'Action groupée',
@@ -9294,6 +9294,7 @@ Thanks for your help!
             'Sélectionnez votre fuseau horaire personnel. L\'horaire du système Znuny sera relatif à cette heure.',
         'Select your preferred layout for the software.' => 'Sélectionnez votre skin préféré pour le système.',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => 'Envoyer un mail à partir de ce ticket',
         'Send notifications to users.' => 'Envoyer des notifications aux utilisateurs.',

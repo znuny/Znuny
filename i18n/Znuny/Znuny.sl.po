@@ -1142,7 +1142,7 @@ msgstr "Dostop brez omejitev za zahtevke v teh skupinah/vrstah."
 msgid "Back to search results"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr ""
 
@@ -25508,4 +25508,16 @@ msgstr "Povezava za nastavitev novega gesla bo poslana na vašo e-pošto."
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "Resend is not possible for this article!"
 msgstr "Ponovno pošiljanje tega članka ni mogoče!"
+
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
 

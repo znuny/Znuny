@@ -1142,7 +1142,7 @@ msgstr "Повні права на заявки в даній групі/чер�
 msgid "Back to search results"
 msgstr "Повернутись до результатів пошуку"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "Додати користувача-клієнта"
 
@@ -25508,4 +25508,16 @@ msgstr "Посилання для встановлення нового паро
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "Resend is not possible for this article!"
 msgstr "Повторне надсилання цієї нотатки неможливе!"
+
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
 

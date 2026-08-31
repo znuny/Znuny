@@ -1142,7 +1142,7 @@ msgstr "Ufikivu wote wa kusoma na kuandika kwenda kwenye tiketi katika kikundi h
 msgid "Back to search results"
 msgstr "Rudi kwenye majibu ya utafutaji"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "Ongeza mtumiaji wa mteja"
 
@@ -25512,4 +25512,16 @@ msgstr "Kiungo cha kuweka neno jipya la siri kitatumwa kwenye anwani yako ya bar
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "Resend is not possible for this article!"
 msgstr "Kutuma tena haiwezekani kwa makala haya!"
+
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
 

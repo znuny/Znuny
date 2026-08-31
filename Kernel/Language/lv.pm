@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.15251272264631;
+    $Self->{Completeness}        = 0.152488471935125;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -360,6 +360,7 @@ sub Data {
         'Search' => 'Meklēt',
         'Wildcards like \'*\' are allowed.' => 'Aizstājējzīmes kā \'*\' ir atļautas.',
         'Add Customer' => 'Pievienot klientu',
+        'Add Customer User' => 'Pievienot klientu',
         'Select' => 'Paņemt',
         'Customer Users' => 'Klienti',
         'Customers ↔ Groups' => '',
@@ -405,7 +406,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Atpakaļ pie meklēšanas rezultātiem',
-        'Add Customer User' => 'Pievienot klientu',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             '',
         'Customer Users ↔ Customers' => '',
@@ -2877,7 +2877,6 @@ sub Data {
         'Drafts' => '',
         'by' => 'no',
         'Article Overview - %s Article(s)' => '',
-        'Page %s' => '',
         'No.' => 'Nē',
         'Unread articles' => '',
         'Via' => '',
@@ -8821,10 +8820,11 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => '',
         'Article Color' => '',
         'ArticleTree' => '',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => '',
         'Avatar' => '',
         'Based on global RichText setting' => '',
+        'Blank' => '',
         'Bounced to "%s".' => 'Ziņojums pārcelts pie "%s".',
         'Bulgarian' => '',
         'Bulk Action' => '',
@@ -9286,6 +9286,7 @@ Thanks for your help!
             '',
         'Select your preferred layout for the software.' => '',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => '',
         'Send notifications to users.' => '',

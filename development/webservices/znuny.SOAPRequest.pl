@@ -40,7 +40,7 @@ use Data::Dumper;
 my $URL = 'http://localhost/znuny/nph-genericinterface.pl/Webservice/GenericTicketConnectorSOAP';
 
 # this name space should match the specified name space in the SOAP transport for the web service
-my $NameSpace = 'http://www.otrs.org/TicketConnector/';
+my $NameSpace = 'http://www.znuny.org/TicketConnector/';
 
 # this is operation to execute, it could be TicketCreate, TicketUpdate, TicketGet, TicketSearch
 # or SessionCreate. and they must to be defined in the web service.

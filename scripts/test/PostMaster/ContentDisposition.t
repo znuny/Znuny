@@ -37,7 +37,7 @@ my @Tests = (
             'ceeibejd.png' => {
                 Filename           => 'ceeibejd.png',
                 ContentType        => 'image/png; name="ceeibejd.png"',
-                ContentID          => '<part1.02040705.00020608@otrs.com>',
+                ContentID          => '<part1.02040705.00020608@znuny.com>',
                 ContentAlternative => '1',
                 Disposition        => 'inline',
             },
@@ -63,7 +63,7 @@ my @Tests = (
             'ceeibejd.png' => {
                 Filename           => 'ceeibejd.png',
                 ContentType        => 'image/png; name="ceeibejd.png"',
-                ContentID          => '<part1.02040705.00020608@otrs.com>',
+                ContentID          => '<part1.02040705.00020608@znuny.com>',
                 ContentAlternative => '1',
                 Disposition        => 'inline',
             },
@@ -89,7 +89,7 @@ my @Tests = (
             'ceeibejd.png' => {
                 Filename           => 'ceeibejd.png',
                 ContentType        => 'image/png; name="ceeibejd.png"',
-                ContentID          => '<part1.02040705.00020608@otrs.com>',
+                ContentID          => '<part1.02040705.00020608@znuny.com>',
                 ContentAlternative => '1',
                 Disposition        => 'inline',
             },
@@ -103,7 +103,7 @@ my @Tests = (
             'testing.pdf' => {
                 Filename           => 'testing.pdf',
                 ContentType        => 'application/pdf; name="testing.pdf"',
-                ContentID          => '<part1.02040705.0001234@otrs.com>',
+                ContentID          => '<part1.02040705.0001234@znuny.com>',
                 ContentAlternative => '',
                 Disposition        => 'attachment',
             },
@@ -115,7 +115,7 @@ my @Tests = (
             'ceeibejd.png' => {
                 Filename           => 'ceeibejd.png',
                 ContentType        => 'image/png; name="ceeibejd.png"',
-                ContentID          => '<part1.02040705.00020608@otrs.com>',
+                ContentID          => '<part1.02040705.00020608@znuny.com>',
                 ContentAlternative => '1',
                 Disposition        => 'attachment',
             },

@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.826972010178117;
+    $Self->{Completeness}        = 0.826681507393862;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -363,6 +363,7 @@ sub Data {
         'Search' => 'Procurar',
         'Wildcards like \'*\' are allowed.' => 'Coringas como \'*\' são permitidos.',
         'Add Customer' => 'Adicionar Cliente',
+        'Add Customer User' => 'Adicionar Usuário Cliente',
         'Select' => 'Selecionar',
         'Customer Users' => 'Usuários Clientes',
         'Customers ↔ Groups' => 'Clientes ↔ Grupos',
@@ -408,7 +409,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Voltar ao resultado da busca',
-        'Add Customer User' => 'Adicionar Usuário Cliente',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Usuário cliente é necessário para ter um histórico de cliente e para logar via interface de cliente.',
         'Customer Users ↔ Customers' => 'Usuário Cliente ↔ Clientes',
@@ -2880,7 +2880,6 @@ sub Data {
         'Drafts' => 'Rascunhos',
         'by' => 'por',
         'Article Overview - %s Article(s)' => 'Visão Geral de Artigos - %s Artigo(s)',
-        'Page %s' => 'Página %s',
         'No.' => 'Núm.',
         'Unread articles' => 'Artigos Não Lidos',
         'Via' => 'Via',
@@ -8835,10 +8834,11 @@ Obrigado pela ajuda!
         'Arabic (Saudi Arabia)' => 'Arábico (Arábia Saudita)',
         'Article Color' => '',
         'ArticleTree' => 'Árvore de Artigo',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Nome do Anexo',
         'Avatar' => 'Avatar',
         'Based on global RichText setting' => 'Baseado na configuração global RichText',
+        'Blank' => '',
         'Bounced to "%s".' => 'Devolvido a "%s".',
         'Bulgarian' => 'Búlgaro',
         'Bulk Action' => 'Ação em Massa',
@@ -9300,6 +9300,7 @@ Obrigado pela ajuda!
             'Selecione seu fuso horário pessoal. Todos os horários serão exibidos conforme este fuso horário.',
         'Select your preferred layout for the software.' => 'Selecione seu layout preferido para o software.',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => 'Enviar novo e-mail de saída deste chamado',
         'Send notifications to users.' => 'Enviar notificações para usuários.',

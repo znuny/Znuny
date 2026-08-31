@@ -1,15 +1,15 @@
-Return-Path: skywalker@otrs.org
+Return-Path: skywalker@znuny.org
 Received: from localhost (localhost [127.0.0.1])
 	by unittest-local.com (Postfix) with ESMTP id EBB3F3940B2E
-	for <darthvader@otrs.org>; Thu,  7 Dec 2017 10:42:11 +0000 (UTC)
-From: Skywalker Attachment <skywalker@otrs.org>
-To: darthvader@otrs.org
+	for <darthvader@znuny.org>; Thu,  7 Dec 2017 10:42:11 +0000 (UTC)
+From: Skywalker Attachment <skywalker@znuny.org>
+To: darthvader@znuny.org
 Content-Type: multipart/signed;
  boundary="Apple-Mail=_F55D4A9D-6FC8-491E-8664-88082AD397CD";
  protocol="application/pgp-signature"; micalg=pgp-sha512
 Mime-Version: 1.0 (Mac OS X Mail 10.3 \(3273\))
 Subject: signature test
-Message-Id: <D93B7323-3F61-4F5F-84F9-56D84D0B6D41@otrs.com>
+Message-Id: <D93B7323-3F61-4F5F-84F9-56D84D0B6D41@znuny.com>
 Date: Thu, 7 Dec 2017 11:42:10 +0100
 X-Mailer: Apple Mail (2.3273)
 

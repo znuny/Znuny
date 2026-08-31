@@ -18,6 +18,7 @@ use utf8;
 use Time::HiRes ();
 
 our @ObjectDependencies = (
+    'Kernel::Config',
     'Kernel::System::Main',
     'Kernel::System::SysConfig',
 );
@@ -211,6 +212,8 @@ sub _ExecuteComponent {
 sub _TasksGet {
     my ( $Self, %Param ) = @_;
 
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
     my @Tasks = (
 
         # Base
@@ -286,15 +289,19 @@ sub _TasksGet {
             Message => 'Uninstall merged packages',
             Module  => 'scripts::Migration::Znuny::UninstallMergedPackages',
         },
-        {
-            Message => 'Remove mention flag from archived tickets.',
+    );
+
+    # 7.3 specific tasks after SysConfig migration
+    if ( $ConfigObject->Get('Ticket::ArchiveSystem') ) {
+        push @Tasks, {
+            Message => 'Remove mention flag from archived tickets',
             Module  => 'scripts::Migration::Znuny::RemoveMentionFlagFromArchivedTickets',
-        },
+        };
+    }
 
-        # 7.3 specific tasks after SysConfig migration
-        # ...to be added here...
-
-        # Base tasks after SysConfig migration
+    # Base tasks after SysConfig migration
+    push @Tasks,
+        (
         {
             Message => 'Initialize default cron jobs',
             Module  => 'scripts::Migration::Base::InitializeDefaultCronjobs',
@@ -319,7 +326,7 @@ sub _TasksGet {
             Message => 'Check invalid settings',
             Module  => 'scripts::Migration::Base::InvalidSettingsCheck',
         },
-    );
+        );
 
     return @Tasks;
 }

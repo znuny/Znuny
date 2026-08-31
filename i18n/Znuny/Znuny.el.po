@@ -1142,7 +1142,7 @@ msgstr "Πλήρη δικαιώματα ανάγνωσης και εγγραφή
 msgid "Back to search results"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr ""
 
@@ -25512,4 +25512,16 @@ msgstr "Ένας σύνδεσμος για τον ορισμό νέου κωδι
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "Resend is not possible for this article!"
 msgstr "Η επαναποστολή δεν είναι δυνατή για αυτό το άρθρο!"
+
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
 

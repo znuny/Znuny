@@ -1981,7 +1981,7 @@ build an opm package
             Content => 'OTRS AG',
         },
         URL => {
-            Content => 'L<http://otrs.org/>',
+            Content => 'L<http://znuny.org/>',
         },
         License => {
             Content => 'GNU GENERAL PUBLIC LICENSE Version 3, November 2007',
@@ -4874,14 +4874,14 @@ Returns:
                         # ... ,
                     },
                 ],
-                URL    => 'http://otrs.org/',
+                URL    => 'http://znuny.org/',
                 Vendor => 'OTRS AG',
             },
             # ...
         ];
         PackageLookup  => {
             Test => {
-                   URL        => 'http://otrs.org/',
+                   URL        => 'http://znuny.org/',
                     Version   => '6.0.20',
                     File      => 'Test-6.0.20.opm',
             },

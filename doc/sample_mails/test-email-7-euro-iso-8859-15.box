@@ -13,8 +13,8 @@ Message-Id: <1035215772.663659.044054076.8.1@yourhost.example.com>
 Subject: Show me your =?ISO-8859-15?Q?=A4?=!
 From: Euro Tester <anakin@example.com>
 X-Mimetools: 5.411
-To: darthvader@otrs.org
-Cc: skywalker@otrs.org
+To: darthvader@znuny.org
+Cc: skywalker@znuny.org
 In-Reply-To: <3CFDCF81.5000409@example.com>
 Date: Mon, 21 Oct 2002 17:56:13 +0200 (CEST)
 X-OTRS-CustomerNo: example7
@@ -24,7 +24,7 @@ X-OTRS-DynamicField-Planet: earth
 
 Hi Darthvader,
 
-if you can see "¤ ü ä ö ß" this, you use ISO-8859-15!
+if you can see "ï¿½ ï¿½ ï¿½ ï¿½ ï¿½" this, you use ISO-8859-15!
 
 remember to create TicketFreeText1 and Planet DynamicFields for optimal results of this test
 Anakin

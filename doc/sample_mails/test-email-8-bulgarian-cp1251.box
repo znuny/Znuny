@@ -1,22 +1,22 @@
-From skywalker@otrs.org Wed Nov 27 07:22:47 2002
-Return-Path: <skywalker@otrs.org>
+From skywalker@znuny.org Wed Nov 27 07:22:47 2002
+Return-Path: <skywalker@znuny.org>
 Received: from heb-hdo-dc-03.vladimir.bg (mail2.vladimir.bg [11.11.11.11])
 	by nohl.edenhofer.de (Postfix on SuSE Linux 8.0 (i386)) with ESMTP id 81FF38B87
-	for <darthvader@otrs.org>; Wed, 27 Nov 2002 07:22:46 +0100 (CET)
+	for <darthvader@znuny.org>; Wed, 27 Nov 2002 07:22:46 +0100 (CET)
 Received: from heb-hdo-ws-070.vladimir.bg ([10.2.1.70]) by heb-hdo-dc-03.vladimir.bg with Microsoft SMTPSVC(5.0.2195.4453);
 	 Wed, 27 Nov 2002 08:22:45 +0200
 Date: Wed, 27 Nov 2002 08:22:44 +0200
-From: Vladimir Gerdjikov <skywalker@otrs.org>
+From: Vladimir Gerdjikov <skywalker@znuny.org>
 X-Mailer: The Bat! (v1.53d) Personal
 X-Priority: 3 (Normal)
 Message-ID: <6403179241.20021127082244@vladimir.bg>
-To: darthvader@otrs.org
+To: darthvader@znuny.org
 Subject: Bulgarian demo email!
 MIME-Version: 1.0
 Content-Type: text/plain; charset=Windows-1251
 Content-Transfer-Encoding: 8bit
 X-OriginalArrivalTime: 27 Nov 2002 06:22:45.0775 (UTC) FILETIME=[666129F0:01C295DD]
-X-OTRS-CustomerNo: skywalker@otrs.org
+X-OTRS-CustomerNo: skywalker@znuny.org
 
 Hi, Darthvader.
 
@@ -24,24 +24,24 @@ This is my test answer (from "Response Management"). Everything
 between *** is in Cyrillic (Windows-1251):
 ***
 test answer ... just ignore ...
-това е тестов отговор ... игнорирайте го ...
+пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ... пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ ...
 ***
 
 Here is my default reply (from "Auto Response Management")
 ***
-Това е автоматично генерирано съобщение от системата за обработка на
-проблеми на банка "Хеброс".
+пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
+пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅ".
 
-Благодарим Ви за еМаил-а. Създаден е нов билет, номера му се намира в
-subject-a на писмото.
+пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ-пїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ
+subject-a пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
-В предишното си писмо Вие написахте:
+пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ:
 <OTRS_CUSTOMER_EMAIL[6]>
 
-Вашето писмо ще бъде обработено от екипа по поддръжка в най-скоро време.
+пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
 
-Пожелаваме Ви приятна работа!
-Екип "Поддръжка" в банка "Хеброс"
+пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!
+пїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ" пїЅ пїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅ"
 ***
 
 Best regards,

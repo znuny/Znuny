@@ -409,8 +409,8 @@ $Selenium->RunTest(
 
         # Input fields.
         my %RequesterInputData = (
-            Endpoint             => 'http://local.otrs.com:8000/Selenium/' . $RandomID,
-            NameSpace            => 'http://www.otrs.com/GenericInterface/' . $RandomID,
+            Endpoint             => 'http://local.znuny.com:8000/Selenium/' . $RandomID,
+            NameSpace            => 'http://www.znuny.com/GenericInterface/' . $RandomID,
             RequestNameFreeText  => 'RequestName' . $RandomID,
             ResponseNameFreeText => 'ResponseName' . $RandomID,
             Encoding             => 'utf-8',

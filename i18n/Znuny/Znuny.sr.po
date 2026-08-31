@@ -1142,7 +1142,7 @@ msgstr "Приступ без ограничења за тикете у овим
 msgid "Back to search results"
 msgstr "Врати се на резултате претраге"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "Додај клијента корисника"
 
@@ -25519,4 +25519,16 @@ msgstr "Линк за постављање нове лозинке биће по
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "Resend is not possible for this article!"
 msgstr "Поновно слање овог чланка није могуће!"
+
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2023-03-23 09:27+0000\n"
-"PO-Revision-Date: 2026-05-04 21:08+0000\n"
+"PO-Revision-Date: 2026-08-04 09:19+0000\n"
 "Last-Translator: Balázs Úr <balazs@urbalazs.hu>\n"
 "Language-Team: Hungarian <https://translations.znuny.org/projects/znuny/znuny/hu/>\n"
 "Language: hu\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.17\n"
+"X-Generator: Weblate 2026.7.1\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "Actions"
@@ -42,7 +42,7 @@ msgstr "Beállítás importálás"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "Here you can upload a configuration file to import ACLs to your system. The file needs to be in .yml format as exported by the ACL editor module."
-msgstr "Itt tölthet fel egy beállítófájlt az ACL-ek importálásához a rendszerre. A fájlnak .yml formátumban kell lennie, ahogy az ACL szerkesztőmodul exportálta."
+msgstr "Itt tölthet fel egy beállítófájlt, hogy ACL-eket importáljon a rendszerbe. A fájlnak .yml formátumban kell lennie, ahogy az ACL szerkesztőmodulja exportálta."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "This field is required."
@@ -222,7 +222,7 @@ msgstr "Naptár importálása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentCalendarManage.tt
 msgid "Here you can upload a configuration file to import a calendar to your system. The file needs to be in .yml format as exported by calendar management module."
-msgstr "Itt tölthet fel egy beállítófájlt egy naptár importálásához a rendszerre. A fájlnak .yml formátumban kell lennie, ahogy a naptárkezelő modul exportálta."
+msgstr "Itt tölthet fel egy beállítófájlt, hogy naptárat importáljon a rendszerbe. A fájlnak .yml formátumban kell lennie, ahogy a naptár kezelőmodulja exportálta."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentCalendarManage.tt
 msgid "Overwrite existing entities"
@@ -1144,7 +1144,7 @@ msgstr "Teljes olvasási és írási hozzáférés az ebben a csoportban vagy v�
 msgid "Back to search results"
 msgstr "Vissza a keresési eredményekhez"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "Ügyfél-felhasználó hozzáadása"
 
@@ -4894,7 +4894,7 @@ msgstr "Minden folyamat üzembe állítása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Here you can upload a configuration file to import a process to your system. The file needs to be in .yml format as exported by process management module."
-msgstr "Itt tölthet fel egy beállítófájlt egy folyamat importálásához a rendszerre. A fájlnak .yml formátumban kell lennie, ahogy a folyamatkezelő modul exportálta."
+msgstr "Itt tölthet fel egy beállítófájlt, hogy folyamatot importáljon a rendszerbe. A fájlnak .yml formátumban kell lennie, ahogy a folyamat kezelőmodulja exportálta."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Upload process configuration"
@@ -14006,7 +14006,7 @@ msgstr "Kiszolgáló adatbázis karakterkészlete"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
 msgid "This character set is not yet supported. Please convert your database to the character set 'utf8'."
-msgstr ""
+msgstr "Ez a karakterkészlet még nem támogatott. Alakítsa át az adatbázisát „utf8” karakterkészletűre."
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
 msgid "The setting character_set_database needs to be 'utf8'."
@@ -15274,15 +15274,15 @@ msgstr "Meghatározza a Rich Text szerkesztőben kiválasztható betűkészletek
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the selectable format tags in the rich text editor."
-msgstr ""
+msgstr "Meghatározza a Rich Text szerkesztőben kiválasztható formátumcímkéket."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines additional plugins for use in the rich text editor."
-msgstr ""
+msgstr "Meghatározza a további bővítményeket a Rich Text szerkesztőben való használathoz."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines extra content that is allowed for use in the rich text editor."
-msgstr ""
+msgstr "Meghatározza azt a további tartalmat, amely használata megengedett a Rich Text szerkesztőben."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Global settings for all popup profiles."
@@ -19562,7 +19562,7 @@ msgstr "Eseménymodul regisztráció. A jobb teljesítményért meghatározhat e
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Configures a default TicketDynamicField setting. \"Name\" defines the dynamic field which should be used, \"Value\" is the data that will be set, and \"Event\" defines the trigger event."
-msgstr "Beállítja az alapértelmezett jegy dinamikus mező beállítást. A „Name” a használandó dinamikus mezőt, a „Value” a beállítandó adatokat, illetve az „Event” az aktiváló eseményt határozza meg."
+msgstr "Beállítja az alapértelmezett jegy dinamikus mező beállítást. A „Name” határozza meg azt a dinamikus mezőt, amelyet használni kell, a „Value” az az adat, amely be lesz állítva, és az „Event” határozza meg az aktiváló eseményt."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the list of types for templates."
@@ -20014,7 +20014,7 @@ msgstr "A megjelenített mellékletfájlnevek legnagyobb hossza a jegynagyítás
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "General settings for autocompletion in rich text editor."
-msgstr ""
+msgstr "Általános beállítások a Rich Text szerkesztőben lévő automatikus kiegészítéshez."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Rich text editor configuration for autocompletion module."
@@ -24168,11 +24168,11 @@ msgstr "Az Apple érintésikon az ügyintézői felülethez az „alapértelmeze
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
 msgid "Mark tickets as seen"
-msgstr ""
+msgstr "Jegyek megjelölése olvasottként"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
 msgid "Mark tickets as unseen"
-msgstr ""
+msgstr "Jegyek megjelölése olvasatlanként"
 
 #. Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
 msgid "Mark article as unseen"
@@ -24428,11 +24428,11 @@ msgstr "Az adatbázisban lévő fordítások nincsenek szinkronizálva. Szinkron
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Frontend module registration for the agent admin interface."
-msgstr ""
+msgstr "Előtétprogram-modul regisztráció az ügyintéző adminisztrátori felületéhez."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "This configuration defines the cache settings for the Znuny-DatabasBackend (default: 1 day)."
-msgstr ""
+msgstr "Ez a beállítás határozza meg a Znuny adatbázis-háttérprogramjának gyorsítótár-beállításait (alapértelmezett: 1 nap)."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Defines a module to display a notification if translation deployment is needed."
@@ -24492,7 +24492,7 @@ msgstr "Töltsön fel egy YAML formátumú fájlt (az exportálás által megado
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
 msgid "Here you can upload a configuration file to import auto responses to your system. The file needs to be in the .yml format as generated by the auto response export."
-msgstr "Itt tölthet fel egy beállítófájlt az automatikus válaszok importálásához a rendszerre. A fájlnak .yml formátumban kell lennie, ahogy az automatikus válasz exportáló előállította."
+msgstr "Itt tölthet fel egy beállítófájlt, hogy automatikus válaszokat importáljon a rendszerbe. A fájlnak .yml formátumban kell lennie, ahogy az automatikus válasz exportálója előállította."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
 msgid "Overwrite existing auto responses?"
@@ -24848,7 +24848,7 @@ msgstr "Hivatkozás célja"
 
 #. SysConfig
 msgid "Process Ticket Catalog"
-msgstr ""
+msgstr "Folyamatjegy-katalógus"
 
 #. SysConfig
 msgid "Process Ticket Category: Define a process category."
@@ -24864,7 +24864,7 @@ msgstr "Folyamatjegy kategóriája: folyamat hivatkozáscéljának meghatározá
 
 #. SysConfig
 msgid "Process Ticket Catalog."
-msgstr ""
+msgstr "Folyamatjegy-katalógus."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Limits the amount of emails which are sent within one batch. Disable this setting to have no limit."
@@ -25056,7 +25056,7 @@ msgstr "Ügyféljavaslatok"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
 msgid "Undo & Close"
-msgstr ""
+msgstr "Visszavonás és bezárás"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
 msgid "Add Outbound Email Profile"
@@ -25288,11 +25288,11 @@ msgstr "Jegyinformációk"
 
 #. Perl Module: Kernel/Modules/AgentSession.pm
 msgid "Invalid subaction!"
-msgstr ""
+msgstr "Érvénytelen alművelet!"
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "List of session keys that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession."
-msgstr ""
+msgstr "Azon munkamenetkulcsok listája, amelyeknél engedélyezett, hogy az ügyintéző-munkameneti előtétprogram-modul UpdateAJAX alművelete frissítse azokat."
 
 #. SysConfig
 msgid "Agent Session."
@@ -25348,103 +25348,103 @@ msgstr "Várólista nézet"
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Controls if the ticket mention entries are removed when a ticket is archived."
-msgstr ""
+msgstr "Azt szabályozza, hogy a jegy említésbejegyzései el legyenek-e távolítva a jegy archiválásakor."
 
 #. Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
 msgid "The selected template type does not support attachments."
-msgstr ""
+msgstr "A kiválasztott sablontípus nem támogat mellékleteket."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
 msgid "Import Translation"
-msgstr ""
+msgstr "Fordítás importálása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminTranslation.tt
 msgid "Export Translation"
-msgstr ""
+msgstr "Fordítás exportálása"
 
 #. Perl Module: Kernel/Modules/AdminTranslation.pm
 msgid "Import / Export"
-msgstr ""
+msgstr "Importálás és exportálás"
 
 #. Perl Module: Kernel/Modules/AdminTranslation.pm
 msgid "Here you can upload a configuration file to import translations to your system. The file needs to be in .yml | .csv | .xlsx format."
-msgstr ""
+msgstr "Itt tölthet fel egy beállítófájlt, hogy fordításokat importáljon a rendszerbe. A fájlnak .yml | .csv | .xlsx formátumban kell lennie."
 
 #. Perl Module: Kernel/Modules/AdminTranslation.pm
 msgid "Could not find translation for ID %s."
-msgstr ""
+msgstr "Nem sikerült fordítást találni a(z) %s azonosítóhoz."
 
 #. Perl Module: Kernel/Modules/AdminTranslation.pm
 msgid "Translation stored."
-msgstr ""
+msgstr "Fordítás eltárolva."
 
 #. Perl Module: Kernel/Modules/AdminTranslation.pm
 msgid "Storing translation failed."
-msgstr ""
+msgstr "A fordítás tárolása nem sikerült."
 
 #. Perl Module: Kernel/Modules/AdminTranslation.pm
 msgid "Translations synchronized."
-msgstr ""
+msgstr "Fordítások szinkronizálva."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
 msgid "Fields to be omitted from payload"
-msgstr ""
+msgstr "A hasznos adatokból kihagyandó mezők"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
 msgid "Field"
-msgstr ""
+msgstr "Mező"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
 msgid "Remove field"
-msgstr ""
+msgstr "Mező eltávolítása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
 msgid "Add field to be omitted from payload"
-msgstr ""
+msgstr "A hasznos adatokból kihagyandó mező hozzáadása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
 msgid "Restore omitted fields"
-msgstr ""
+msgstr "Kihagyott mezők helyreállítása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
 msgid "Fields which will be removed from the payload of the request, e.g. 'SomeField1'. Nested fields can be referenced by connecting them with '->', e.g. 'SomeField1->SomeField2->SomeField3'."
-msgstr ""
+msgstr "Azok a mezők, amelyek el lesznek távolítva a kérés hasznos adataiból, például „ValamilyenMező1”. A beágyazott mezőkre úgy lehet hivatkozni, hogy „->” jelöléssel kell összekapcsolni azokat, például „ValamilyenMező1->ValamilyenMező2->ValamilyenMező3”."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
 msgid "Fields to be Base64 encoded in payload"
-msgstr ""
+msgstr "A hasznos adatokban Base64 használatával kódolandó mezők"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
 msgid "Add field to be Base64 encoded in payload"
-msgstr ""
+msgstr "A hasznos adatokban Base64 használatával kódolandó mező hozzáadása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
 msgid "Restore Base64 encoded fields"
-msgstr ""
+msgstr "Base64 használatával kódolt mezők helyreállítása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
 msgid "Fields which will be Base64 encoded in payload of the request, e.g. 'SomeField1'. Nested fields can be referenced by connecting them with '->', e.g. 'SomeField1->SomeField2->SomeField3'."
-msgstr ""
+msgstr "Azok a mezők, amelyek Base64 használatával lesznek kódolva a kérés hasznos adataiban, például „ValamilyenMező1”. A beágyazott mezőkre úgy lehet hivatkozni, hogy „->” jelöléssel kell összekapcsolni azokat, például „ValamilyenMező1->ValamilyenMező2->ValamilyenMező3”."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Global mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Content of different fields can be given by separating those fields by ';'."
-msgstr ""
+msgstr "A Ticket::Generic meghívó nevének (kulcs) globális leképezése a mezők (tartalom) listájára, amelyek értékei Base64 kódolásúak lesznek. Ne feledje, hogy ez meghívónként is beállítható. A mezőket a következő formában kell megadni: Mező1->Mező2;Mező3->Mező4->Mező5;Mező6. Így egy beágyazott adatstruktúra a mezők „->” jelöléssel történő összekapcsolásával adható meg. A különböző mezők tartalmát a mezők „;” karakterrel való elválasztásával lehet megadni."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Global mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Different fields can be omitted by separating them by ';'."
-msgstr ""
+msgstr "A Ticket::Generic meghívó nevének (kulcs) globális leképezése a mezők (tartalom) listájára, amelyek eltávolításra kerülnek a kérésből. Ne feledje, hogy ez meghívónként is beállítható. A mezőket a következő formában kell megadni: Mező1->Mező2;Mező3->Mező4->Mező5;Mező6. Így egy beágyazott adatstruktúra a mezők „->” jelöléssel történő összekapcsolásával adható meg. A különböző mezőket „;” karakterrel elválasztva lehet kihagyni."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Uninstall package and data"
-msgstr ""
+msgstr "Csomag és adatok eltávolítása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Uninstall package only"
-msgstr ""
+msgstr "Csak a csomag eltávolítása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
 msgid "View the admin manual"
-msgstr ""
+msgstr "Adminisztrátori kézikönyv megtekintése"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Set New Password"
@@ -25456,7 +25456,7 @@ msgstr "Jelszó megerősítése"
 
 #. Perl Module: Kernel/System/Web/InterfaceAgent.pm
 msgid "Your password reset link is invalid or has expired. Please request a new one."
-msgstr "A jelszó-visszaállítási hivatkozás érvénytelen vagy lejárt. Kérjen újat."
+msgstr "A jelszó-visszaállítási hivatkozása érvénytelen vagy lejárt. Kérjen egy újat."
 
 #. Perl Module: Kernel/System/Web/InterfaceAgent.pm
 msgid "Passwords do not match!"
@@ -25484,41 +25484,53 @@ msgstr "A jelszónak legalább 2 betűt kell tartalmaznia!"
 
 #. Perl Module: Kernel/System/Web/InterfaceAgent.pm
 msgid "Password changed. Please log in with your new password."
-msgstr "A jelszó megváltozott. Jelentkezzen be az új jelszavával."
+msgstr "A jelszó megváltoztatva. Jelentkezzen be az új jelszavával."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour)."
-msgstr "Meghatározza a jelszó-visszaállítási tokenek érvényességi idejét másodpercben. Ezután a token lejár és új kérés szükséges. Alapértelmezett: 3600 (1 óra)."
+msgstr "Meghatározza a jelszó-visszaállítási tokenek érvényességi időszakát másodpercben. Ezen idő után a token lejár, és új visszaállítási kérés szükséges. Alapértelmezetten: 3600 (1 óra)."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5."
-msgstr "A jelszó-visszaállítási kérések maximális száma IP-címenként vagy felhasználónévenként a rate limiting ablakban. 0 érték kikapcsolja. Alapértelmezett: 5."
+msgstr "IP-címenként vagy felhasználónevenként megengedett jelszó-visszaállítási kérések legnagyobb száma a sebességkorlátozási ablakon belül. Állítsa 0 értékre a sebességkorlátozás letiltásához. Alapértelmezetten: 5."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes)."
-msgstr "Időablak másodpercben a jelszó-visszaállítás rate limitingjéhez. Az ablakon belüli kísérletek a maximumhoz számítódnak. Alapértelmezett: 600 (10 perc)."
+msgstr "Időablak másodpercben a jelszó-visszaállítási sebességkorlátozáshoz. Az ebben az időablakban történt kísérletek beleszámítanak a legnagyobb számba. Alapértelmezetten: 600 (10 perc)."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the subject for notification mails sent to agents, confirming that the password has been reset."
-msgstr "Meghatározza az ügynököknek küldött értesítő e-mailek tárgyát, amelyek megerősítik a jelszó visszaállítását."
+msgstr "Meghatározza az ügyintézőknek küldött értesítési levelek tárgyát, amely megerősíti, hogy a jelszó vissza lett állítva."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the body text for notification mails sent to agents, confirming that the password has been reset."
-msgstr "Meghatározza az ügynököknek küldött értesítő e-mailek szövegét, amelyek megerősítik a jelszó visszaállítását."
+msgstr "Meghatározza az ügyintézőknek küldött értesítési levelek törzsének szövegét, amely megerősíti, hogy a jelszó vissza lett állítva."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the subject for notification mails sent to customers, confirming that the password has been reset."
-msgstr "Meghatározza az ügyfeleknek küldött értesítő e-mailek tárgyát, amelyek megerősítik a jelszó visszaállítását."
+msgstr "Meghatározza az ügyfeleknek küldött értesítési levelek tárgyát, amely megerősíti, hogy a jelszó vissza lett állítva."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the body text for notification mails sent to customers, confirming that the password has been reset."
-msgstr "Meghatározza az ügyfeleknek küldött értesítő e-mailek szövegét, amelyek megerősítik a jelszó visszaállítását."
+msgstr "Meghatározza az ügyfeleknek küldött értesítési levelek törzsének szövegét, amely megerősíti, hogy a jelszó vissza lett állítva."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "A link to set a new password will be sent to your email address."
-msgstr "Egy link az új jelszó beállításához el lesz küldve az e-mail-címére."
+msgstr "Egy új jelszó beállításhoz való hivatkozás el lesz küldve az e-mail-címére."
 
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "Resend is not possible for this article!"
-msgstr "Ennek a bejegyzésnek az újraküldése nem lehetséges!"
+msgstr "Az újraküldés nem lehetséges ennél a bejegyzésnél!"
+
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
 

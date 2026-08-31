@@ -1,3 +1,20 @@
+# 7.3.7 2026-??-??
+ - 2026-08-20 Changed: Admin::Package::List now always reports package deployment status and warns about local modifications.
+ - 2026-08-20 Fixed: Multiselect dynamic field values rendered without proper spacing in customer interface. Thanks to @LuBroering (Lukas Bröring Sector Nord AG) [PR#836](https://github.com/znuny/Znuny/pull/836).
+ - 2026-08-20 Fixed: agent/customer re-direction after accepting initial information dialog (AgentInfo/CustomerAccept).
+
+# 7.3.6 2026-08-19
+ - 2026-08-17 Fixed: Removed unnecessary whitespace in Baselink URLs in TicketInformation templates for AgentTicketActionCommon and AgentTicketZoom.
+ - 2026-08-14 Fixed: Removed unused leftover thirdparty directories jquery-ui-1.13.2 and momentjs-2.29.4.
+ - 2026-08-14 Added: Split Quote and Remove Quote buttons for CKEditor 5.
+ - 2026-08-12 Fixed: Article pagination was displayed incorrectly.
+ - 2026-08-12 Fixed: CustomerSelector losing the customer key for numeric customer user logins. Added a new function to completely set new customer users in field for component "CustomerSelector".
+ - 2026-08-10 Fixed: Marked LinkTarget options as translatable. Thanks to @urbalazs (Balázs Úr) [PR#814](https://github.com/znuny/Znuny/pull/814).
+ - 2026-08-05 Changed: REST transport module now keeps query parameters that don't contain placeholders.
+ - 2026-07-27 Fixed: Migration follow-up step for removing mention flags from archived tickets was shown even when Ticket::ArchiveSystem is disabled.
+ - 2026-07-24 Changed: Cc and Bcc will now also be set when article will only be created instead of sent in generic interface operation TicketCreate.
+ - 2026-07-01 CVE-2025-25977: Updated JavaScript library canvg to version 4.0.3.
+
 # 7.3.5 2026-07-22
  - 2026-07-17 Fixed: Documentation links in config options. Thanks to @bjinthahouse for reporting the issue. [#763](https://github.com/znuny/Znuny/issues/763)
  - 2026-07-13 Fixed: Submenus not visible in customer interface.
@@ -656,6 +673,12 @@
  - 2022-08-22 Core.UI.InputFields.js - Changed the behaviour of the Core.UI.InputFields.js. Now no fields are automatically enlarged or reduced.
  - 2022-08-08 Admin - Added counter of AdminSettingPages per widget and additional focus by filter.
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
+
+# 6.5.24 2026-08-19
+ - 2026-08-17 Changed: REST transport module now keeps query parameters that don't contain placeholders.
+ - 2026-08-12 Fixed: AgentTicketEmailResend does not revert owner to previous if current user that cancelled resend was not actual ticket owner before initialing resend action.
+ - 2026-07-24 Changed: Cc and Bcc will now also be set when article will only be created instead of sent in generic interface operation TicketCreate.
+ - 2026-07-01 CVE-2025-25977: Updated JavaScript library canvg to version 4.0.3.
 
 # 6.5.23 2026-07-22
  - 2026-07-17 Fixed: Documentation links in config options. Thanks to @bjinthahouse for reporting the issue. [#763](https://github.com/znuny/Znuny/issues/763)

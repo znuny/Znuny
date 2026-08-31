@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.200540712468193;
+    $Self->{Completeness}        = 0.200508824932422;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -360,6 +360,7 @@ sub Data {
         'Search' => 'Cercar',
         'Wildcards like \'*\' are allowed.' => 'Es permeten comodins com \'*\'.',
         'Add Customer' => 'Afegir client',
+        'Add Customer User' => '',
         'Select' => 'Seleccionar',
         'Customer Users' => 'Clients',
         'Customers ↔ Groups' => '',
@@ -405,7 +406,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => '',
-        'Add Customer User' => '',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             '',
         'Customer Users ↔ Customers' => '',
@@ -2877,7 +2877,6 @@ sub Data {
         'Drafts' => '',
         'by' => 'per',
         'Article Overview - %s Article(s)' => '',
-        'Page %s' => '',
         'No.' => 'No.',
         'Unread articles' => 'Articles no llegits',
         'Via' => '',
@@ -8821,10 +8820,11 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => '',
         'Article Color' => '',
         'ArticleTree' => '',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => '',
         'Avatar' => '',
         'Based on global RichText setting' => '',
+        'Blank' => '',
         'Bounced to "%s".' => 'Retornar a "%s".',
         'Bulgarian' => '',
         'Bulk Action' => 'Acció múltiple',
@@ -9286,6 +9286,7 @@ Thanks for your help!
             '',
         'Select your preferred layout for the software.' => '',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => '',
         'Send notifications to users.' => '',

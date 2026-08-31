@@ -1142,7 +1142,7 @@ msgstr "Täysi luku ja kirjoitusoikeus tiketteihin tässä ryhmässä/jonossa."
 msgid "Back to search results"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr ""
 
@@ -25508,4 +25508,16 @@ msgstr "Linkki uuden salasanan asettamiseen lähetetään sinulle sähköpostill
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "Resend is not possible for this article!"
 msgstr "Uudelleenlähetys ei ole mahdollista tälle artikkelille!"
+
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
 

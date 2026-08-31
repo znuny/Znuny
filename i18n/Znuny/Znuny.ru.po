@@ -1144,7 +1144,7 @@ msgstr "Полные права на чтение и запись для зая�
 msgid "Back to search results"
 msgstr "Назад к результатам поиска"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "Добавить учётную запись клиента"
 
@@ -25525,4 +25525,16 @@ msgstr "Ссылка для установки нового пароля буд�
 #. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
 msgid "Resend is not possible for this article!"
 msgstr "Повторная отправка этой заметки невозможна!"
+
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
 

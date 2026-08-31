@@ -4336,9 +4336,9 @@
         <Navigation>Frontend::Agent::View::TicketProcess</Navigation>
         <Value>
             <Item ValueType="Select" SelectedID="_blank">
-                <Item ValueType="Option" Value="AsPopup" Translatable="1">AsPopup</Item>
-                <Item ValueType="Option" Value="_blank">Blank</Item>
-                <Item ValueType="Option" Value="_self">Self</Item>
+                <Item ValueType="Option" Value="AsPopup" Translatable="1">As Popup</Item>
+                <Item ValueType="Option" Value="_blank" Translatable="1">Blank</Item>
+                <Item ValueType="Option" Value="_self" Translatable="1">Self</Item>
                 <!--
                     Can be used, but make little sense at this point.
                     There is no frame and therefore no difference to `self`.
@@ -4437,9 +4437,9 @@
         <Navigation>Frontend::Customer::View::TicketProcess</Navigation>
         <Value>
             <Item ValueType="Select" SelectedID="_blank">
-                <Item ValueType="Option" Value="AsPopup" Translatable="1">AsPopup</Item>
-                <Item ValueType="Option" Value="_blank">Blank</Item>
-                <Item ValueType="Option" Value="_self">Self</Item>
+                <Item ValueType="Option" Value="AsPopup" Translatable="1">As Popup</Item>
+                <Item ValueType="Option" Value="_blank" Translatable="1">Blank</Item>
+                <Item ValueType="Option" Value="_self" Translatable="1">Self</Item>
                 <!--
                     Can be used, but make little sense at this point.
                     There is no frame and therefore no difference to `self`.
@@ -4494,9 +4494,9 @@
                 <Item Key="Block">Option</Item>
                 <Item Key="Data">
                     <Hash>
-                        <Item Key="AsPopup">AsPopup</Item>
-                        <Item Key="_blank">Blank</Item>
-                        <Item Key="_self">Self</Item>
+                        <Item Key="AsPopup" Translatable="1">As Popup</Item>
+                        <Item Key="_blank" Translatable="1">Blank</Item>
+                        <Item Key="_self" Translatable="1">Self</Item>
                     </Hash>
                 </Item>
                 <Item Key="SelectedID">_blank</Item>

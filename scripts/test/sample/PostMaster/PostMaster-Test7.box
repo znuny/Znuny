@@ -1,15 +1,15 @@
 Return-Path: <R2.D2@znuny.org>
-X-Original-To: skywalker@osser.znuny.org
-Delivered-To: skywalker@osser.znuny.org
+X-Original-To: skywalker@osser.otrs.org
+Delivered-To: skywalker@osser.otrs.org
 Received: from localhost (localhost [127.0.0.1])
-	by osser.znuny.org (Postfix) with ESMTP id ADD945BDA1
-	for <skywalker@osser.znuny.org>; Thu, 12 Apr 2007 16:03:22 +0200 (CEST)
-Received: from osser.znuny.org ([127.0.0.1])
- by localhost (osser.znuny.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 25141-07 for <skywalker@osser.znuny.org>;
+	by osser.otrs.org (Postfix) with ESMTP id ADD945BDA1
+	for <skywalker@osser.otrs.org>; Thu, 12 Apr 2007 16:03:22 +0200 (CEST)
+Received: from osser.otrs.org ([127.0.0.1])
+ by localhost (osser.otrs.org [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id 25141-07 for <skywalker@osser.otrs.org>;
  Thu, 12 Apr 2007 16:03:19 +0200 (CEST)
-Received: from ana (lancelot.znuny.org [217.64.92.7])
-	by osser.znuny.org (Postfix) with ESMTP id 0CA4F5BE17
+Received: from ana (lancelot.otrs.org [217.64.92.7])
+	by osser.otrs.org (Postfix) with ESMTP id 0CA4F5BE17
 	for <skywalker@znuny.org>; Thu, 12 Apr 2007 16:03:19 +0200 (CEST)
 From: "R2 D2" <R2.D2@znuny.org>
 To: Skywalker <skywalker@znuny.org>
@@ -38,9 +38,9 @@ N=FCcht mal vor Anh=E4ngen machen Umlaute halt:
   Mit freundlichen Gr=FC=DFen
   R2 D2
 =20
-Znuny :: Znuny GmbH :: Marienstraße 18 :: D - 10117 Berlin
-  Fon: +49 (0)30 60 98 54 18-0 :: Fax: +49 (0)30 60 98 54 18-8
-	https://www.znuny.com/
+((otrs)) :: OTRS GmbH :: Europaring 4 :: D - 94315 Straubing
+  Fon: +49 (0)9421 56818 0 :: Fax: +49 (0)9421 56818 18
+    http://www.otrs.org/ :: Communication with success!
 
 ------=_NextPart_000_0061_01C77D1C.2012AE80
 Content-Type: application/pdf;

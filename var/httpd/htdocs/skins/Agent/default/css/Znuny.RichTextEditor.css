@@ -71,10 +71,6 @@ make some content near border radius visible */
     max-width: 100%;
 }
 
-.ck-editor .ck-editor__editable {
-    overflow: auto;
-}
-
 .ck.ck-resizer{
     position: absolute;
     right: -1px;

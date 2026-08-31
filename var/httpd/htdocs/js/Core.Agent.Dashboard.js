@@ -767,8 +767,21 @@ Core.Agent.Dashboard = (function (TargetNS) {
         $('#DownloadSVG' + Core.App.EscapeSelector(StatsData.Name)).off('click').on('click', function() {
             this.href = Core.UI.AdvancedChart.ConvertSVGtoBase64($('#GraphWidgetContainer' + Core.App.EscapeSelector(StatsData.Name)));
         });
-        $('#DownloadPNG' + Core.App.EscapeSelector(StatsData.Name)).off('click').on('click', function() {
-            this.href = Core.UI.AdvancedChart.ConvertSVGtoPNG($('#GraphWidgetContainer' + Core.App.EscapeSelector(StatsData.Name)));
+        $('#DownloadPNG' + Core.App.EscapeSelector(StatsData.Name)).off('click').on('click', function(Event) {
+            var Link = this;
+            Event.preventDefault();
+            if (Link.getAttribute('data-download-pending') === '1') {
+                return false;
+            }
+            Link.setAttribute('data-download-pending', '1');
+            Core.UI.AdvancedChart.ConvertSVGtoPNG(
+                $('#GraphWidgetContainer' + Core.App.EscapeSelector(StatsData.Name))
+            ).then(function(DataUrl) {
+                Core.UI.AdvancedChart.TriggerDataUrlDownload(Link, DataUrl);
+            }).finally(function() {
+                Link.removeAttribute('data-download-pending');
+            });
+            return false;
         });
 
         Core.Config.Set('StatsMaxXaxisAttributes', parseInt(StatsData.MaxXaxisAttributes, 10));

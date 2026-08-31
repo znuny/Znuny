@@ -348,7 +348,7 @@ returns:
         Version         => "3.3.1",
         DefaultLanguage => "en",
         Home            => "/opt/znuny",
-        Host            => "prod.otrs.com",
+        Host            => "prod.znuny.com",
         SystemID        => 70,
     );
 

@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.216284987277354;
+    $Self->{Completeness}        = 0.216250596279218;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -366,6 +366,7 @@ sub Data {
         'Search' => 'חיפוש',
         'Wildcards like \'*\' are allowed.' => 'תווי חיפוש מיוחדים כגון \'*\' מותרים.',
         'Add Customer' => 'הוסף לקוח',
+        'Add Customer User' => 'הוסף משתמש לקוח',
         'Select' => 'בחר',
         'Customer Users' => 'משתמשי לקוח',
         'Customers ↔ Groups' => '',
@@ -411,7 +412,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'חזרה לתוצאות חיפוש',
-        'Add Customer User' => 'הוסף משתמש לקוח',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'משתמשי לקוח נדרשים כדי שתהיה היסטוריית לקוח והתחברות דרך כניסת הלקוחות.',
         'Customer Users ↔ Customers' => '',
@@ -2883,7 +2883,6 @@ sub Data {
         'Drafts' => '',
         'by' => 'על ידי ',
         'Article Overview - %s Article(s)' => '',
-        'Page %s' => '',
         'No.' => 'מס.',
         'Unread articles' => 'מאמרים שלא נקראו',
         'Via' => '',
@@ -8827,10 +8826,11 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => '',
         'Article Color' => '',
         'ArticleTree' => 'Artikelbaum',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => '',
         'Avatar' => '',
         'Based on global RichText setting' => '',
+        'Blank' => '',
         'Bounced to "%s".' => 'חזר "%s".',
         'Bulgarian' => '',
         'Bulk Action' => 'פעולה גורפת',
@@ -9292,6 +9292,7 @@ Thanks for your help!
             '',
         'Select your preferred layout for the software.' => '',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => '',
         'Send notifications to users.' => 'שלח התראות למשתמשים.',

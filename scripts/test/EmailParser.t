@@ -35,13 +35,13 @@ my $EmailParserObject = Kernel::System::EmailParser->new(
 
 $Self->Is(
     $EmailParserObject->GetParam( WHAT => 'To' ),
-    'darthvader@otrs.org',
+    'darthvader@znuny.org',
     "#1 GetParam(WHAT => 'To')",
 );
 
 $Self->Is(
     $EmailParserObject->GetParam( WHAT => 'From' ),
-    'Skywalker Attachment <skywalker@otrs.org>',
+    'Skywalker Attachment <skywalker@znuny.org>',
     "#1 GetParam(WHAT => 'From')",
 );
 
