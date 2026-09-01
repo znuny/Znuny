@@ -244,6 +244,15 @@ sub Run {
     );
     my @ViewableQueueIDs = sort keys %ViewableQueues;
 
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    if ( !@ViewableQueueIDs ) {
+        $LogObject->Log(
+            Priority => 'debug',
+            Message  => "User : $Self->{UserLogin} is missing group permissions.",
+        );
+    }
+
     # get service object
     my $ServiceObject = $Kernel::OM->Get('Kernel::System::Service');
 
@@ -476,13 +485,20 @@ sub Run {
         UserID => $Self->{UserID},
     );
 
+    if ( !%AllServices ) {
+        $LogObject->Log(
+            Priority => 'debug',
+            Message  => 'No services configured in the system.',
+        );
+    }
+
     # store the ticket count data for each service
     my %Data;
 
     my $Count = 0;
 
     # get the agent custom services count
-    if (@MyServiceIDs) {
+    if ( @MyServiceIDs && @ViewableQueueIDs ) {
 
         $Count = $TicketObject->TicketSearch(
             LockIDs    => \@ViewableLockIDs,
@@ -506,17 +522,21 @@ sub Run {
     $Data{TicketsShown} = $Count || 0;
 
     # Get ticket count for all services.
-    my @ServiceIDs           = sort { $AllServices{$a} cmp $AllServices{$b} } keys %AllServices;
-    my @AllServicesTicketIDs = $TicketObject->TicketSearch(
-        LockIDs    => \@ViewableLockIDs,
-        StateIDs   => \@ViewableStateIDs,
-        QueueIDs   => \@ViewableQueueIDs,
-        ServiceIDs => \@ServiceIDs,
-        Permission => $Permission,
-        UserID     => $Self->{UserID},
-        Limit      => 20_000,
-        Result     => 'ARRAY',
-    );
+    my @ServiceIDs = sort { $AllServices{$a} cmp $AllServices{$b} } keys %AllServices;
+    my @AllServicesTicketIDs;
+
+    if ( @ServiceIDs && @ViewableQueueIDs ) {
+        @AllServicesTicketIDs = $TicketObject->TicketSearch(
+            LockIDs    => \@ViewableLockIDs,
+            StateIDs   => \@ViewableStateIDs,
+            QueueIDs   => \@ViewableQueueIDs,
+            ServiceIDs => \@ServiceIDs,
+            Permission => $Permission,
+            UserID     => $Self->{UserID},
+            Limit      => 20_000,
+            Result     => 'ARRAY',
+        );
+    }
 
     my $TicketCountByServiceID = $TicketObject->TicketCountByAttribute(
         Attribute => 'ServiceID',

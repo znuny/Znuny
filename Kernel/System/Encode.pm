@@ -12,10 +12,12 @@ package Kernel::System::Encode;
 
 use strict;
 use warnings;
+use utf8;
 
 use Encode;
 use Encode::Locale;
 use IO::Interactive qw(is_interactive);
+use Try::Tiny;
 
 use Kernel::System::VariableCheck qw(:all);
 
@@ -95,8 +97,8 @@ Convert a string from one charset to another charset.
         To   => 'iso-8859-1',
     );
 
-There is also a Force => 1 option if you need to force the
-already converted string. And Check => 1 if the string result
+There is also a Force =E<gt> 1 option if you need to force the
+already converted string. And Check =E<gt> 1 if the string result
 should be checked to be a valid string (e. g. valid utf-8 string).
 
 =cut
@@ -261,38 +263,88 @@ sub Convert2CharsetInternal {
 
 =head2 EncodeInput()
 
-Convert internal used charset (e. g. utf-8) into given charset (utf-8).
-
-Should be used on all I/O interfaces if data is already utf-8 to set the utf-8 stamp.
+By default, this function assumes incoming bytes to be well-formed UTF-8 and
+will set the utf8 flag to make Perl treat it as such. This Should be used on
+all I/O interfaces if and only if (see the warning in L<Encoding/_utf8_on>!)
+data is already utf-8. It modifies the scalar or array referenced by its
+C<$What> parameter in place!
 
     $EncodeObject->EncodeInput( \$String );
-
     $EncodeObject->EncodeInput( \@Array );
+
+If there is a possibility that strings may not be UTF-8, simply setting the
+UTF-8 flag will probably lead to crashes down the road. In this case, set the
+C<$Safe> argument to a true value to make the function use L<Encode/decode>.
+This is a bit slower and will produce mojibake if the input is
+I<decoded> UTF-8 already but will always yield I<safe> results.
+
+There are three possible values for C<$Safe>:
+
+=over 4
+
+=item 1: A simple 1 will decode UTF-8 and replace malformed sequences with an
+escape code and the hex byte values e.g. C<\x{0d}>
+
+=item A coderef will be passed to L<Encode/decode> to format your own
+replacement codes
+
+=item Anything else will be interpreted as the name of an alternative charset
+that should be tried in case UTF-8 decoding fails, falling back to the
+C<\x{XX}> escapes as a last resort.
+
+=back
 
 =cut
 
 sub EncodeInput {
-    my ( $Self, $What ) = @_;
+    my ( $Self, $What, $Safe ) = @_;
 
     return if !defined $What;
 
+    my $Decoder;
+    if ( defined $Safe ) {
+        if ( ref $Safe eq 'CODE' ) {
+            $Decoder = sub {
+                return decode( "UTF-8", shift, $Safe );
+            };
+        }
+        elsif ( $Safe eq '1' ) {
+            $Decoder = sub {
+                return decode( "UTF-8", shift, sub { sprintf "\\x{%02x}", shift } );
+            };
+        }
+        else {
+            $Decoder = sub {
+                my ($Text) = @_;
+                return try {
+                    no strict 'subs';    ## no critic(ProhibitNoStrict)
+                    decode( "UTF-8", $Text, Encode::FB_CROAK );
+                }
+                catch {
+                    decode( $Safe, $Text, sub { sprintf "\\x{%02x}", shift } );
+                };
+            };
+        }
+    }
+    else {
+        $Decoder = sub {
+            my ($Text) = @_;
+            Encode::_utf8_on($Text);
+            return $Text;
+        };
+    }
+
     if ( ref $What eq 'SCALAR' ) {
-        return $What if !defined ${$What};
-        Encode::_utf8_on( ${$What} );
-        return $What;
+        return $What if !defined $$What;
+        $$What = $Decoder->($$What);
     }
 
     if ( ref $What eq 'ARRAY' ) {
-
-        ROW:
-        for my $Row ( @{$What} ) {
-            next ROW if !defined $Row;
-            Encode::_utf8_on($Row);
+        for my $Row ( grep {defined} @$What ) {
+            $Row = $Decoder->($Row);
         }
         return $What;
     }
-
-    Encode::_utf8_on($What);
 
     return $What;
 }

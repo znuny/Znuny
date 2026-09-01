@@ -86,6 +86,7 @@ sub Run {
     my $Success = $Kernel::OM->Get('Kernel::System::Package')->PackageReinstall(
         String => $FileString,
         Force  => $Self->GetOption('force'),
+        UserID => 1,
     );
 
     if ( !$Success ) {

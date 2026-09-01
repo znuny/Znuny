@@ -1,12 +1,12 @@
 package XML::Simple;
-$XML::Simple::VERSION = '2.24';
+$XML::Simple::VERSION = '2.25';
 =head1 NAME
 
 XML::Simple - An API for simple XML files
 
 =head1 SYNOPSIS
 
-You really don't want to use this module in new code.  If you ignore this
+PLEASE DO NOT USE THIS MODULE IN NEW CODE.  If you ignore this
 warning and use it anyway, the C<qw(:strict)> mode will save you a little pain.
 
     use XML::Simple qw(:strict);
@@ -427,7 +427,8 @@ sub build_tree_xml_parser {
     carp "'nsexpand' option requires XML::SAX";
   }
 
-  my $xp = XML::Parser->new(Style => 'Tree', @{$self->{opt}->{parseropts}});
+  my $xp = $self->new_xml_parser();
+
   my($tree);
   if($filename) {
     # $tree = $xp->parsefile($filename);  # Changed due to prob w/mod_perl
@@ -439,6 +440,23 @@ sub build_tree_xml_parser {
   }
 
   return($tree);
+}
+
+
+##############################################################################
+# Method: new_xml_parser()
+#
+# Simply calls the XML::Parser constructor.  Override this method to customise
+# the behaviour of the parser.
+#
+
+sub new_xml_parser {
+  my($self) = @_;
+
+  my $xp = XML::Parser->new(Style => 'Tree', @{$self->{opt}->{parseropts}});
+  $xp->setHandlers(ExternEnt => sub {return $_[2]});
+
+  return $xp;
 }
 
 
@@ -1906,10 +1924,13 @@ __END__
 
 =head1 STATUS OF THIS MODULE
 
-The use of this module in new code is discouraged.  Other modules are available
-which provide more straightforward and consistent interfaces.  In particular,
-L<XML::LibXML> is highly recommended and L<XML::Twig> is an excellent
-alternative.
+The use of this module in new code is B<strongly discouraged>.  Other modules
+are available which provide more straightforward and consistent interfaces.  In
+particular, L<XML::LibXML> is highly recommended and you can refer to
+L<Perl XML::LibXML by Example|http://grantm.github.io/perl-libxml-by-example/>
+for a tutorial introduction.
+
+L<XML::Twig> is another excellent alternative.
 
 The major problems with this module are the large number of options (some of
 which have unfortunate defaults) and the arbitrary ways in which these options
@@ -2870,6 +2891,11 @@ which to hang your modified behaviour.  You may find other undocumented methods
 by examining the source, but those may be subject to change in future releases.
 
 =over 4
+
+=item new_xml_parser()
+
+This method will be called when a new XML::Parser object must be constructed
+(either because XML::SAX is not installed or XML::Parser is preferred).
 
 =item handle_options(direction, name => value ...)
 

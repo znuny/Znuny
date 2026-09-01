@@ -213,6 +213,20 @@ sub Run {
     my $SessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
     my $UserObject    = $Kernel::OM->Get('Kernel::System::User');
 
+    # when no action parameter exists but there is passed
+    # valid session and requested url, redirect to the link
+    if ( !$Param{Action} && $Param{SessionID} && $Param{RequestedURL} ) {
+
+        # validate session before redirect
+        if ( $SessionObject->CheckSessionID( SessionID => $Param{SessionID} ) ) {
+            print $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Redirect(
+                OP => $Param{RequestedURL},
+            );
+
+            return;
+        }
+    }
+
     # check request type
     if ( $Param{Action} eq 'PreLogin' ) {
         my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');

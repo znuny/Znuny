@@ -3,13 +3,15 @@ package Crypt::PasswdMD5;
 use strict;
 use warnings;
 
+use Crypt::URandom qw(urandom);
 use Digest::MD5;
+use Encode;
 
 use Exporter 'import';
 
-our @EXPORT    = qw/unix_md5_crypt apache_md5_crypt/;
-our @EXPORT_OK = (@EXPORT, 'random_md5_salt');
-our $VERSION   ='1.40';
+our @EXPORT		= qw/unix_md5_crypt apache_md5_crypt/;
+our @EXPORT_OK	= (@EXPORT, 'random_md5_salt');
+our $VERSION	= '1.44';
 
 # ------------------------------------------------
 
@@ -39,7 +41,7 @@ sub random_md5_salt
 	# Sanity check.
 
 	$len  = $max_salt_length unless ( ($len >= 1) and ($len <= $max_salt_length) );
-	$salt .= substr($itoa64,int(rand(64)),1) for (1..$len);
+	$salt .= substr($itoa64,unpack("C",urandom(1))&0x3F,1) for (1..$len);
 
 	return $salt;
 
@@ -67,11 +69,10 @@ sub to64
 
 sub unix_md5_crypt
 {
-	my($pw, $salt) = @_;
+	my($pw, $salt)	= @_;
+	$pw				= Encode::encode('utf8', $pw) if Encode::is_utf8($pw);
 
-	my($passwd);
-
-    if (defined $salt)
+	if (defined $salt)
 	{
 		$salt =~ s/^\Q$Magic//;	# Take care of the magic string if present.
 		$salt =~ s/^(.*)\$.*$/$1/;	# Salt can have up to 8 chars...
@@ -80,7 +81,7 @@ sub unix_md5_crypt
 	else
 	{
 		$salt = random_md5_salt();	 	# In case no salt was proffered.
-    }
+	}
 
 	my($ctx) = Digest::MD5 -> new;	# Here we start the calculation.
 
@@ -161,6 +162,8 @@ sub unix_md5_crypt
 
 	# Final xform
 
+	my($passwd);
+
 	$passwd = '';
 	$passwd .= to64(int(unpack('C', (substr($final, 0, 1) ) ) << 16)
 				| int(unpack('C', (substr($final, 6, 1) ) ) << 8)
@@ -233,14 +236,6 @@ For both functions, if a salt value is not supplied, a random salt will be
 generated, using the function random_md5_salt().
 This function is not exported by default.
 
-=head1 LICENSE AND WARRANTY
-
-This code and all accompanying software comes with NO WARRANTY. You
-use it at your own risk.
-
-This code and all accompanying software can be used freely under the
-same terms as Perl itself.
-
 =head1 METHODS
 
 =head2 apache_md5_crypt($password, $salt)
@@ -267,11 +262,23 @@ Returns an encrypted version of the given password.
 
 Basically, it's a very poor choice for anything other than password authentication.
 
+=head1 Repository
+
+L<https://github.com/ronsavage/Crypt-PasswdMD5.git>
+
 =head1 SUPPORT
 
 Bugs should be reported via the CPAN bug tracker at
 
-L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Crypt-PasswdMD5>
+L<https://github.com/ronsavage/Crypt-PasswdMD5/issues>
+
+=head1 LICENSE, AND DISCLAIMER
+
+See the accompanying LICENSE file.
+
+This program is distributed in the hope that it will be useful, but
+without any warranty; without even the implied warranty of
+merchantability or fitness for a particular purpose.
 
 =head1 AUTHOR
 

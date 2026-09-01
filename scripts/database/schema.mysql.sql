@@ -65,7 +65,7 @@ CREATE TABLE valid (
 CREATE TABLE users (
     id INTEGER NOT NULL AUTO_INCREMENT,
     login VARCHAR (200) NOT NULL,
-    pw VARCHAR (128) NOT NULL,
+    pw VARCHAR (255) NOT NULL,
     title VARCHAR (50) NULL,
     first_name VARCHAR (100) NOT NULL,
     last_name VARCHAR (100) NOT NULL,
@@ -944,7 +944,7 @@ CREATE TABLE customer_user (
     login VARCHAR (200) NOT NULL,
     email VARCHAR (150) NOT NULL,
     customer_id VARCHAR (150) NOT NULL,
-    pw VARCHAR (128) NULL,
+    pw VARCHAR (255) NULL,
     title VARCHAR (50) NULL,
     first_name VARCHAR (100) NOT NULL,
     last_name VARCHAR (100) NOT NULL,
@@ -1012,7 +1012,7 @@ CREATE TABLE customer_user_customer (
 CREATE TABLE mail_account (
     id INTEGER NOT NULL AUTO_INCREMENT,
     login VARCHAR (200) NOT NULL,
-    pw VARCHAR (200) NOT NULL,
+    pw VARCHAR (255) NOT NULL,
     host VARCHAR (200) NOT NULL,
     account_type VARCHAR (20) NOT NULL,
     queue_id INTEGER NOT NULL,

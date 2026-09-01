@@ -81,6 +81,16 @@
             <Item ValueType="String" ValueRegex="^[2-9][0-9]{1,}|[1-9][0-9]{2,}$">20</Item>
         </Value>
     </Setting>
+    <Setting Name="SupportDataCollector::SkipMaskPasswordSettings" Required="1" Valid="1">
+        <Description Translatable="1">When support data is collected via SupportDataCollector, certain SysConfig values marked with ValueType="Password" are automatically masked. This prevents passwords from appearing in plain text in the support data. This setting defines the settings that contain complex configuration hashes that should not be masked when generating the support data.</Description>
+        <Navigation>Core::SupportDataCollector</Navigation>
+        <Value>
+            <Array>
+                <Item ValueType="String">PreferencesGroups###Password</Item>
+                <Item ValueType="String">CustomerPreferencesGroups###Password</Item>
+            </Array>
+        </Value>
+    </Setting>
     <Setting Name="HttpType" Required="1" Valid="1" ConfigLevel="200">
         <Description Translatable="1">Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server's settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, OTRS_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system.</Description>
         <Navigation>Frontend::Base</Navigation>
@@ -243,7 +253,7 @@
         </Value>
     </Setting>
     <Setting Name="DefaultTheme" Required="1" Valid="1" ConfigLevel="200">
-        <Description Translatable="1">Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.otrs.com/doc/.</Description>
+        <Description Translatable="1">Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">Standard</Item>
@@ -3011,8 +3021,9 @@
         <Navigation>Core::Crypt::PGP</Navigation>
         <Value>
             <Hash>
-                <Item Key="D2DF79FA">SomePassword</Item>
-                <Item Key="488A0B8F">SomePassword</Item>
+                <DefaultItem ValueType="Password">Secret</DefaultItem>
+                <Item ValueType="Password" Key="D2DF79FA">SomePassword</Item>
+                <Item ValueType="Password" Key="488A0B8F">SomePassword</Item>
             </Hash>
         </Value>
     </Setting>
@@ -4267,9 +4278,7 @@ via the Preferences button after logging in.
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSLineChart.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSMultiBarChart.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSStackedAreaChart.js</Item>
-                        <Item>thirdparty/canvg-1.5/rgbcolor.js</Item>
-                        <Item>thirdparty/canvg-1.5/StackBlur.js</Item>
-                        <Item>thirdparty/canvg-1.5/canvg.js</Item>
+                        <Item>thirdparty/canvg-4.0.3/canvg.min.js</Item>
                         <Item>thirdparty/StringView-8/stringview.js</Item>
                         <Item>Core.UI.AdvancedChart.js</Item>
                         <Item>Core.UI.AllocationList.js</Item>
@@ -7310,9 +7319,7 @@ via the Preferences button after logging in.
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSLineChart.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSMultiBarChart.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSStackedAreaChart.js</Item>
-                        <Item>thirdparty/canvg-1.5/rgbcolor.js</Item>
-                        <Item>thirdparty/canvg-1.5/StackBlur.js</Item>
-                        <Item>thirdparty/canvg-1.5/canvg.js</Item>
+                        <Item>thirdparty/canvg-4.0.3/canvg.min.js</Item>
                         <Item>thirdparty/StringView-8/stringview.js</Item>
                         <Item>Core.Agent.Statistics.js</Item>
                         <Item>Core.UI.AdvancedChart.js</Item>
@@ -8522,6 +8529,15 @@ via the Preferences button after logging in.
         <Value>
             <Hash>
                 <Item Key="[% Env('CGIHandle') %]?Action=AgentDashboard" Translatable="1">Go to dashboard!</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Customer::PossibleNextActions" Required="0" Valid="1">
+        <Description Translatable="1">Defines the list of possible next actions on an error screen, a full path is required, then is possible to add external links if needed.</Description>
+        <Navigation>Frontend::Customer</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="[% Env('CGIHandle') %]?Action=CustomerTicketOverview" Translatable="1">Go to overview</Item>
             </Hash>
         </Value>
     </Setting>

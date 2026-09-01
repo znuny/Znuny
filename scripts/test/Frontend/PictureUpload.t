@@ -18,9 +18,7 @@ use LWP::UserAgent;
 use Kernel::System::UnitTest::Helper;
 
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
 
-# get helper object
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
         SkipSSLVerify     => 1,
@@ -31,13 +29,17 @@ $Kernel::OM->ObjectParamAdd(
 );
 my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
-my $TestUserLogin         = $HelperObject->TestUserCreate();
+my $TestUserLogin = $HelperObject->TestUserCreate(
+    Groups => ['users'],
+);
 my $TestCustomerUserLogin = $HelperObject->TestCustomerUserCreate();
 
 my $BaseURL = $ConfigObject->Get('HttpType') . '://';
 
 $BaseURL .= $HelperObject->GetTestHTTPHostname() . '/';
-$BaseURL .= $ConfigObject->Get('ScriptAlias') . 'index.pl?';
+$BaseURL .= $ConfigObject->Get('ScriptAlias');
+
+my $AgentBaseURL = $BaseURL . 'index.pl?';
 
 my $UserAgent = LWP::UserAgent->new(
     Timeout => 60,
@@ -45,12 +47,24 @@ my $UserAgent = LWP::UserAgent->new(
 $UserAgent->cookie_jar( {} );    # keep cookies
 
 my $Response = $UserAgent->get(
-    $BaseURL . "Action=Login;User=$TestUserLogin;Password=$TestUserLogin;"
+    $AgentBaseURL . "Action=Login;User=$TestUserLogin;Password=$TestUserLogin;"
 );
-if ( !$Response->is_success() ) {
+
+my $AgentSessionValid = 0;
+$UserAgent->cookie_jar()->scan(
+    sub {
+        if ( $_[1] eq $ConfigObject->Get('SessionName') && $_[2] ) {
+            $AgentSessionValid = 1;
+        }
+    }
+);
+
+if ( !$AgentSessionValid ) {
     $Self->True(
         0,
-        "Could not login to agent interface, aborting! URL: ${BaseURL}Action=Login;User=$TestUserLogin;Password=$TestUserLogin;"
+        "Could not login to agent interface, aborting! URL: "
+            . $AgentBaseURL
+            . "Action=Login;User=$TestUserLogin;Password=$TestUserLogin;"
     );
     return 1;
 }
@@ -77,7 +91,7 @@ my $CheckUpload = sub {
     if ( $Param{Successful} ) {
         my ($ContentID) = $Response->content() =~ m{ContentID=(.*?)"};
 
-        $Response = $UserAgent->get("${BaseURL}Action=PictureUpload;FormID=$FormID;ContentID=$ContentID");
+        $Response = $UserAgent->get("${AgentBaseURL}Action=PictureUpload;FormID=$FormID;ContentID=$ContentID");
 
         $Self->Is(
             $Response->content(),
@@ -95,7 +109,7 @@ my $CheckUpload = sub {
 
 # Upload image correctly and verify it.
 $Response = $UserAgent->post(
-    $BaseURL,
+    $AgentBaseURL,
     Content_Type => 'form-data',
     Content      => {
         Action => 'PictureUpload',
@@ -115,7 +129,7 @@ $CheckUpload->(
 
 # Upload image with wrong content-type, must fail.
 $Response = $UserAgent->post(
-    $BaseURL,
+    $AgentBaseURL,
     Content_Type => 'form-data',
     Content      => {
         Action => 'PictureUpload',
@@ -141,7 +155,7 @@ $UploadCacheObject->FormIDAddFile(
     Disposition => 'inline',       # optional
 );
 
-$Response = $UserAgent->get("${BaseURL}Action=PictureUpload;FormID=$FormID;ContentID=$ContentID");
+$Response = $UserAgent->get("${AgentBaseURL}Action=PictureUpload;FormID=$FormID;ContentID=$ContentID");
 $Self->True(
     index(
         $Response->content(),
@@ -173,7 +187,7 @@ EOF
 
 # Upload svg image with png file and script element.
 $Response = $UserAgent->post(
-    $BaseURL,
+    $AgentBaseURL,
     Content_Type => 'form-data',
     Content      => {
         Action => 'PictureUpload',

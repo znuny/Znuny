@@ -11,6 +11,7 @@ package Kernel::Modules::AdminTemplateAttachment;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::Language qw(Translatable);
 
@@ -45,11 +46,21 @@ sub Run {
             ID => $ID,
         );
 
+        if ( !$Self->_TemplateSupportsAttachments( TemplateType => $StandardTemplateData{TemplateType} ) ) {
+            return $LayoutObject->ErrorScreen(
+                Message => Translatable('The selected template type does not support attachments.'),
+            );
+        }
+
         # get attachment data
         my %StdAttachmentData = $StdAttachmentObject->StdAttachmentList( Valid => 1 );
 
         my %Member = $StdAttachmentObject->StdAttachmentStandardTemplateMemberList(
             StandardTemplateID => $ID,
+        );
+
+        my $StandardTemplateType = $Self->_TranslateStandardTemplateTemplateTypes(
+            TemplateType => $StandardTemplateData{TemplateType},
         );
 
         my $Output = $LayoutObject->Header();
@@ -58,7 +69,7 @@ sub Run {
             Selected => \%Member,
             Data     => \%StdAttachmentData,
             ID       => $StandardTemplateData{ID},
-            Name     => $StandardTemplateData{TemplateType} . ' - ' . $StandardTemplateData{Name},
+            Name     => $StandardTemplateType . ' - ' . $StandardTemplateData{Name},
             Type     => 'Template',
         );
         $Output .= $LayoutObject->Footer();
@@ -80,14 +91,22 @@ sub Run {
         );
 
         if (%StandardTemplateData) {
+            STANDARDTEMPLATEID:
             for my $StandardTemplateID ( sort keys %StandardTemplateData ) {
                 my %Data = $StandardTemplateObject->StandardTemplateGet(
                     ID => $StandardTemplateID
                 );
-                $StandardTemplateData{$StandardTemplateID}
-                    = $LayoutObject->{LanguageObject}->Translate( $Data{TemplateType} )
-                    . ' - '
-                    . $Data{Name};
+
+                if ( !$Self->_TemplateSupportsAttachments( TemplateType => $Data{TemplateType} ) ) {
+                    delete $StandardTemplateData{$StandardTemplateID};
+                    next STANDARDTEMPLATEID;
+                }
+
+                my $TemplateTypeString = $Self->_TranslateStandardTemplateTemplateTypes(
+                    TemplateType => $Data{TemplateType},
+                );
+
+                $StandardTemplateData{$StandardTemplateID} = $TemplateTypeString . ' - ' . $Data{Name};
             }
         }
 
@@ -126,7 +145,15 @@ sub Run {
         my %TemplatesSelected = map { $_ => 1 } @TemplatesSelected;
 
         # check all used templates
+        TEMPLATEID:
         for my $TemplateID (@TemplatesAll) {
+            my %TemplateData = $StandardTemplateObject->StandardTemplateGet(
+                ID => $TemplateID,
+            );
+            if ( !$Self->_TemplateSupportsAttachments( TemplateType => $TemplateData{TemplateType} ) ) {
+                next TEMPLATEID;
+            }
+
             my $Active = $TemplatesSelected{$TemplateID} ? 1 : 0;
 
             # set attachment to standard template relation
@@ -167,6 +194,16 @@ sub Run {
         my @AttachmentsAll      = $ParamObject->GetArray( Param => 'ItemsAll' );
 
         my $TemplateID = $ParamObject->GetParam( Param => 'ID' );
+
+        my %TemplateData = $StandardTemplateObject->StandardTemplateGet(
+            ID => $TemplateID,
+        );
+
+        if ( !$Self->_TemplateSupportsAttachments( TemplateType => $TemplateData{TemplateType} ) ) {
+            return $LayoutObject->ErrorScreen(
+                Message => Translatable('The selected template type does not support attachments.'),
+            );
+        }
 
         # create hash with selected queues
         my %AttachmentsSelected = map { $_ => 1 } @AttachmentsSelected;
@@ -320,14 +357,22 @@ sub _Overview {
 
     # if there are any templates, they are shown
     if (%StandardTemplateData) {
+        STANDARDTEMPLATEID:
         for my $StandardTemplateID ( sort keys %StandardTemplateData ) {
             my %Data = $StandardTemplateObject->StandardTemplateGet(
                 ID => $StandardTemplateID
             );
-            $StandardTemplateData{$StandardTemplateID}
-                = $LayoutObject->{LanguageObject}->Translate( $Data{TemplateType} )
-                . ' - '
-                . $Data{Name};
+
+            if ( !$Self->_TemplateSupportsAttachments( TemplateType => $Data{TemplateType} ) ) {
+                delete $StandardTemplateData{$StandardTemplateID};
+                next STANDARDTEMPLATEID;
+            }
+
+            my $TemplateTypeString = $Self->_TranslateStandardTemplateTemplateTypes(
+                TemplateType => $Data{TemplateType},
+            );
+
+            $StandardTemplateData{$StandardTemplateID} = $TemplateTypeString . ' - ' . $Data{Name};
         }
 
         for my $StandardTemplateID (
@@ -388,6 +433,67 @@ sub _Overview {
         TemplateFile => 'AdminTemplateAttachment',
         Data         => \%Param,
     );
+}
+
+sub _TranslateStandardTemplateTemplateTypes {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    return if !$Param{TemplateType};
+
+    my $TemplateTypeList = $ConfigObject->Get('StandardTemplate::Types');
+
+    my %TemplateTypeKeyByLowercase = map { lc($_) => $_ } keys %{$TemplateTypeList};
+
+    my @TemplateTypes = split( /\s*,\s*/, $Param{TemplateType} );
+    my $TemplateTypeString;
+    if ( scalar @TemplateTypes > 1 ) {
+        for my $TemplateType (@TemplateTypes) {
+            my $TemplateTypeLookup = $TemplateTypeKeyByLowercase{ lc($TemplateType) } // $TemplateType;
+            $TemplateTypeString
+                .= $LayoutObject->{LanguageObject}->Translate( $TemplateTypeList->{$TemplateTypeLookup} ) . ', ';
+        }
+        $TemplateTypeString =~ s{,\s$}{}g;
+    }
+    else {
+        my $TemplateTypeLookup = $TemplateTypeKeyByLowercase{ lc( $TemplateTypes[0] ) } // $TemplateTypes[0];
+        $TemplateTypeString = $LayoutObject->{LanguageObject}->Translate( $TemplateTypeList->{$TemplateTypeLookup} );
+    }
+
+    return $TemplateTypeString;
+}
+
+=head1 PRIVATE
+
+=head2 _TemplateSupportsAttachments()
+
+Returns true if the given standard template type supports standard attachments.
+
+Snippet templates are excluded because they are not used for outbound messages.
+TemplateType may contain a comma-separated list of types; the result is true
+when at least one type is not a snippet.
+
+    my $SupportsAttachments = $Self->_TemplateSupportsAttachments(
+        TemplateType => 'Answer',
+    );
+
+Returns 1 if supported, undef otherwise.
+
+=cut
+
+sub _TemplateSupportsAttachments {
+    my ( $Self, %Param ) = @_;
+
+    return if !defined $Param{TemplateType};
+
+    my @TemplateTypes = grep { defined && $_ ne '' } split( /\s*,\s*/, $Param{TemplateType} );
+    return if !@TemplateTypes;
+
+    return 1 if grep { lc($_) ne 'snippet' } @TemplateTypes;
+
+    return;
 }
 
 1;

@@ -178,7 +178,7 @@ END;
 CREATE TABLE users (
     id NUMBER (12, 0) NOT NULL,
     login VARCHAR2 (200) NOT NULL,
-    pw VARCHAR2 (128) NOT NULL,
+    pw VARCHAR2 (255) NOT NULL,
     title VARCHAR2 (50) NULL,
     first_name VARCHAR2 (100) NOT NULL,
     last_name VARCHAR2 (100) NOT NULL,
@@ -2942,7 +2942,7 @@ CREATE TABLE customer_user (
     login VARCHAR2 (200) NOT NULL,
     email VARCHAR2 (150) NOT NULL,
     customer_id VARCHAR2 (150) NOT NULL,
-    pw VARCHAR2 (128) NULL,
+    pw VARCHAR2 (255) NULL,
     title VARCHAR2 (50) NULL,
     first_name VARCHAR2 (100) NOT NULL,
     last_name VARCHAR2 (100) NOT NULL,
@@ -3068,7 +3068,7 @@ END;
 CREATE TABLE mail_account (
     id NUMBER (12, 0) NOT NULL,
     login VARCHAR2 (200) NOT NULL,
-    pw VARCHAR2 (200) NOT NULL,
+    pw VARCHAR2 (255) NOT NULL,
     host VARCHAR2 (200) NOT NULL,
     account_type VARCHAR2 (20) NOT NULL,
     queue_id NUMBER (12, 0) NOT NULL,

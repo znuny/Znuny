@@ -8877,7 +8877,7 @@ msgstr "Langkau langkah ini"
 msgid "Done"
 msgstr "Selesai"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/InstallerDBResult.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Error"
 msgstr "Kesilapan"
 
@@ -9105,7 +9105,7 @@ msgstr "Ini adalah mesej untuk hari ini. Anda boleh sunting dalam ini %s."
 msgid "Insufficient Rights"
 msgstr "Hak tidak mencukupi"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/NoPermission.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
 msgid "Back to the previous page"
 msgstr "Kembali ke halaman sebelumnya"
 
@@ -17159,8 +17159,8 @@ msgid "Configure your own log text for PGP."
 msgstr "Konfigur teks log anda sendiri untuk PGP."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Configures a default TicketDynamicField setting. \"Name\" defines the dynamic field which should be used, \"Value\" is the data that will be set, and \"Event\" defines the trigger event. Please check the developer manual (https://doc.otrs.com/doc/), chapter \"Ticket Event Module\"."
-msgstr "Mengkonfigurasi tetapan TicketDynamicField default. \"Nama\" mentakrifkan bidang dinamik yang sepatutnya digunakan, \"Nilai\" adalah data yang akan diset, dan \"Event\" mentakrifkan peristiwa pencetus. Sila semak manual pemaju (https://doc.otrs.com/doc/), bab \"Tiket Acara Modul\"."
+msgid "Configures a default TicketDynamicField setting. \"Name\" defines the dynamic field which should be used, \"Value\" is the data that will be set, and \"Event\" defines the trigger event."
+msgstr "Mengkonfigurasi tetapan TicketDynamicField default. \"Nama\" mentakrifkan bidang dinamik yang sepatutnya digunakan, \"Nilai\" adalah data yang akan diset, dan \"Event\" mentakrifkan peristiwa pencetus."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Controls how to display the ticket history entries as readable values."
@@ -18083,8 +18083,8 @@ msgid "Defines the default filter fields in the customer user address book searc
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.otrs.com/doc/."
-msgstr "Mentakrifkan tema (HTML) bahagian depan default yang akan digunakan oleh ejen-ejen dan pelanggan. Jika anda suka, anda boleh menambah tema anda sendiri. Sila rujuk manual pentadbir yang terletak di https://doc.otrs.com/doc/."
+msgid "Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html."
+msgstr "Mentakrifkan tema (HTML) bahagian depan default yang akan digunakan oleh ejen-ejen dan pelanggan. Jika anda suka, anda boleh menambah tema anda sendiri. Sila rujuk manual pentadbir yang terletak di https://doc.znuny.org/developer/general_information/themes.html."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the default front-end language. All the possible values are determined by the available language files on the system (see the next setting)."
@@ -25792,4 +25792,28 @@ msgstr ""
 #. Perl Module: Kernel/Modules/CustomerTicketOverview.pm
 msgid "You have no permission or the ticket does not exist."
 msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Defines which article attributes TicketGeneric dashboard widgets are allowed to request when building additional columns."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "When support data is collected via SupportDataCollector, certain SysConfig values marked with ValueType=\"Password\" are automatically masked. This prevents passwords from appearing in plain text in the support data. This setting defines the settings that contain complex configuration hashes that should not be masked when generating the support data."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
+msgid "The selected template type does not support attachments."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
+msgid "View the admin manual"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AgentTicketEmailResend.pm
+msgid "Resend is not possible for this article!"
+msgstr "Penghantaran semula tidak mungkin untuk artikel ini!"
 

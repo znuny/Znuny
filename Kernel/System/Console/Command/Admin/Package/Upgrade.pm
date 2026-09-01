@@ -89,6 +89,7 @@ sub Run {
     my $Success = $Kernel::OM->Get('Kernel::System::Package')->PackageUpgrade(
         String => $FileString,
         Force  => $Self->GetOption('force'),
+        UserID => 1,
     );
 
     if ( !$Success ) {

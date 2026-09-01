@@ -11,6 +11,7 @@ package Kernel::System::Console::Command::Dev::Code::CPANAudit;
 
 use strict;
 use warnings;
+use utf8;
 use Kernel::System::VariableCheck qw(:all);
 
 use File::Basename;
@@ -86,11 +87,13 @@ sub Run {
             $String .= "$Module$Version has $Count advisories:\n";
 
             for my $Advisory ( @{ $Result->{dists}->{$Module}->{advisories} } ) {
+                my $Affected = $Advisory->{affected_versions};
+                my $Fixed    = $Advisory->{fixed_versions};
                 $AdvisoryCounter++;
                 $String .= "\t* $Advisory->{id}\n\t  $Advisory->{description}";
 
-                $String .= "\n\t  Affected versions: $Advisory->{affected_versions}" if $Advisory->{affected_versions};
-                $String .= "\n\t  Fixed versions: $Advisory->{fixed_versions}"       if $Advisory->{fixed_versions};
+                $String .= "\n\t  Affected versions: @$Affected" if IsArrayRefWithData($Affected);
+                $String .= "\n\t  Fixed versions: @$Fixed"       if IsArrayRefWithData($Fixed);
                 $String .= "\n";
 
                 if ( IsArrayRefWithData( $Advisory->{cves} ) ) {

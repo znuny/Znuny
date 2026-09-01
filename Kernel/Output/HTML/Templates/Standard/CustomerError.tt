@@ -9,19 +9,18 @@
 
 <div id="MainBox">
     <div class="Content Error">
-        <h1>[% Translate("An Error Occurred") | html %]</h1>
-        <p>[% Translate(Data.Message) | truncate(200) | html %]</p>
-    [% IF Data.Comment %]
-        <p>[% Translate(Data.Comment) | html %]</p>
-    [% END %]
-    [% IF Data.BackendTraceback %]
-        <p><a href="#" class="TriggerFullErrorDetails">[% Translate("Error Details") | html %]</a></p>
-    [% END %]
+        <h1>[% Translate("Error") | html %]</h1>
+        <p>[% Translate("An Error Occurred") | html %]</p>
+        <p>
+            <a href="#" class="ReturnToPreviousPage">[% Translate("Back to the previous page") | html %]</a>
+        </p>
+[% RenderBlockStart("PossibleNextActionContainer") %]
+        <p>
+[% RenderBlockStart("PossibleNextActionRow") %]
+            <a href="[% Data.Link | Interpolate %]" title="[% Translate(Data.Description) | html %]">[% Translate(Data.Description) | html %]</a>
+            <br />
+[% RenderBlockEnd("PossibleNextActionRow") %]
+         </p>
+[% RenderBlockEnd("PossibleNextActionContainer") %]
     </div>
-    [% IF Data.BackendTraceback %]
-    <div class="Content Error Hidden ErrorDetails">
-        <h2>[% Translate("Traceback") | html %]</h2>
-        <pre>[% Data.BackendTraceback | html %]</pre>
-    </div>
-    [% END %]
 </div>

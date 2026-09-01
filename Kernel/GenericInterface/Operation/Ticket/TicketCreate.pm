@@ -155,6 +155,13 @@ perform TicketCreate Operation. This will return the created ticket number.
                 },
 
                 # Signing and encryption, only used when ArticleSend is set to 1
+                EmailSecurity => {
+                    Backend     => 'PGP',                       # PGP or SMIME
+                    Method      => 'Detached',                  # Optional Detached or Inline (defaults to Detached)
+                    SignKey     => '81877F5E',                  # Optional
+                    EncryptKeys => [ '81877F5E', '3b630c80' ],  # Optional
+                },
+                # or:
                 Sign => {
                     Type    => 'PGP',
                     SubType => 'Inline|Detached',
@@ -1538,13 +1545,11 @@ sub _TicketCreate {
 
         # set Article To
         my $To;
-        my $Cc;
-        my $Bcc;
+        my $Cc  = $Article->{Cc};
+        my $Bcc = $Article->{Bcc};
 
         if ( $Article->{ArticleSend} ) {
-            $To  = $Article->{To};
-            $Cc  = $Article->{Cc};
-            $Bcc = $Article->{Bcc};
+            $To = $Article->{To};
         }
         elsif ( $Ticket->{Queue} ) {
             $To = $Ticket->{Queue};
@@ -1749,7 +1754,7 @@ sub _TicketCreate {
             }
 
             # signing and encryption
-            for my $Key (qw( Sign Crypt )) {
+            for my $Key (qw( Sign Crypt EmailSecurity )) {
                 if ( IsHashRefWithData( $Article->{$Key} ) ) {
                     $ArticleParams{$Key} = $Article->{$Key};
                 }

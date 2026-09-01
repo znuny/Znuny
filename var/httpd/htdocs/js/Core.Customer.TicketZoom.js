@@ -55,7 +55,7 @@ Core.Customer.TicketZoom = (function (TargetNS) {
 
     /**
      * @private
-     * @name CalculateHeight
+     * @name ResizeIframe
      * @memberof Core.Customer.TicketZoom
      * @function
      * @param {DOMObject} Iframe - DOM representation of an iframe
@@ -64,8 +64,15 @@ Core.Customer.TicketZoom = (function (TargetNS) {
      *      Resizes Iframe to its max inner height and (optionally) calls callback.
      */
     function ResizeIframe(Iframe, Callback){
-        Iframe = isJQueryObject(Iframe) ? Iframe.get(0) : Iframe;
-        CalculateHeight(Iframe);
+        if(isJQueryObject(Iframe)) {
+            Iframe.each(
+                function(n,Frame) {
+                    CalculateHeight(Frame);
+                }
+            );
+        } else {
+            CalculateHeight(Iframe);
+        }
         if ($.isFunction(Callback)) {
             Callback();
         }

@@ -77,6 +77,20 @@ $Selenium->RunTest(
             "Created Template - $TemplateRandomID",
         );
 
+        my $SnippetTemplateRandomID = "snippet-template" . $HelperObject->GetRandomID();
+        my $SnippetTemplateID       = $StandardTemplateObject->StandardTemplateAdd(
+            Name         => $SnippetTemplateRandomID,
+            Template     => 'Snippet content.',
+            ContentType  => 'text/plain; charset=utf-8',
+            TemplateType => 'Snippet',
+            ValidID      => 1,
+            UserID       => $UserID,
+        );
+        $Self->True(
+            $SnippetTemplateID,
+            "Created Snippet Template - $SnippetTemplateRandomID",
+        );
+
         # Login as test user.
         $Selenium->Login(
             Type     => 'Agent',
@@ -109,6 +123,10 @@ $Selenium->RunTest(
         $Self->True(
             $Selenium->execute_script("return \$('#Templates li:contains($TemplateRandomID)').length"),
             "$TemplateRandomID found on screen"
+        );
+        $Self->True(
+            !$Selenium->execute_script("return \$('#Templates li:contains($SnippetTemplateRandomID)').length"),
+            "$SnippetTemplateRandomID not found on screen"
         );
         $Self->True(
             $Selenium->execute_script("return \$('#Attachments li:contains($AttachmentRandomID)').length"),
@@ -206,6 +224,15 @@ $Selenium->RunTest(
         $Self->True(
             $Success,
             "StandardTemplateDelete() for Attachment -> Template tests | with True",
+        );
+
+        $Success = $StandardTemplateObject->StandardTemplateDelete(
+            ID => $SnippetTemplateID,
+        );
+
+        $Self->True(
+            $Success,
+            "StandardTemplateDelete() for Snippet template tests | with True",
         );
     }
 );

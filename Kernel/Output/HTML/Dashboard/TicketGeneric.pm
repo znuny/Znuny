@@ -39,6 +39,11 @@ sub new {
         $Self->{$Item} = $ParamObject->GetParam( Param => $Item ) || $Param{$Item};
     }
 
+    # Validate OrderBy - only Up and Down are valid values.
+    if ( defined $Self->{OrderBy} && $Self->{OrderBy} !~ m{\A(?:Up|Down)\z} ) {
+        $Self->{OrderBy} = undef;
+    }
+
     # Get add filters param.
     $Self->{AddFilters} = $ParamObject->GetParam( Param => 'AddFilters' ) || $Param{AddFilters} || 0;
     $Self->{TabAction}  = $ParamObject->GetParam( Param => 'TabAction' )  || $Param{TabAction}  || 0;
@@ -588,10 +593,22 @@ sub FilterContent {
 sub Run {
     my ( $Self, %Param ) = @_;
 
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
     my %SearchParams        = $Self->_SearchParamsGet(%Param);
-    my @Columns             = @{ $SearchParams{Columns} };
+    my @Columns             = @{ $SearchParams{Columns} // [] };
     my %TicketSearch        = %{ $SearchParams{TicketSearch} };
     my %TicketSearchSummary = %{ $SearchParams{TicketSearchSummary} };
+    my %Filter              = %{ $SearchParams{Filter} // {} };
+
+    # Validate SortBy against known sortable columns; undef falls through to default 'Age'.
+    if ( defined $Self->{SortBy} && !$Self->{ValidSortableColumns}->{ $Self->{SortBy} } ) {
+        $Self->{SortBy} = undef;
+    }
+
+    my @ArticleAttributes = @{ $ConfigObject->Get('DashboardBackend::TicketGeneric::ArticleAttributes') || [] };
+    my %ArticleAttributes = map  { $_ => 1 } @ArticleAttributes;
+    my @ArticleColumns    = grep { $ArticleAttributes{$_} } @Columns;
 
     # Add the additional filter to the ticket search param.
     if ( $Self->{AdditionalFilter} ) {
@@ -677,7 +694,10 @@ sub Run {
     my $CacheUsed = 1;
 
     # get ticket object
-    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $ArticleObject = @ArticleColumns
+        ? $Kernel::OM->Get('Kernel::System::Ticket::Article')
+        : undef;
 
     if ( !$TicketIDs ) {
 
@@ -936,8 +956,6 @@ sub Run {
             %{$Summary},
         },
     );
-
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     # show only AssignedToCustomerUser if we have the filter
     if ( $TicketSearchSummary{AssignedToCustomerUser} ) {
@@ -1729,6 +1747,53 @@ sub Run {
             Silent        => 1
         );
 
+        if (@ArticleColumns) {
+            my @Articles = $ArticleObject->ArticleList(
+                TicketID   => $TicketID,
+                SenderType => 'customer',
+                OnlyLast   => 1,
+            );
+
+            if ( !@Articles ) {
+                @Articles = $ArticleObject->ArticleList(
+                    TicketID   => $TicketID,
+                    SenderType => 'agent',
+                    OnlyLast   => 1,
+                );
+            }
+
+            if ( !@Articles ) {
+                @Articles = $ArticleObject->ArticleList(
+                    TicketID => $TicketID,
+                    OnlyLast => 1,
+                );
+            }
+
+            if (@Articles) {
+                my $Article = $Articles[0];
+                my %Article = $ArticleObject->BackendForArticle( %{$Article} )->ArticleGet(
+                    %{$Article},
+                    DynamicFields => 0,
+                );
+
+                next TICKETID if !$Article{ArticleID};
+
+                my %ArticleFields = $LayoutObject->ArticleFields(
+                    TicketID  => $TicketID,
+                    ArticleID => $Article{ArticleID},
+                );
+
+                COLUMN:
+                for my $ArticleColumn (@ArticleColumns) {
+                    next COLUMN if !IsHashRefWithData( $ArticleFields{$ArticleColumn} );
+                    next COLUMN if !defined $ArticleFields{$ArticleColumn}->{Value};
+
+                    $Ticket{$ArticleColumn} = $ArticleFields{$ArticleColumn}->{Realname}
+                        // $ArticleFields{$ArticleColumn}->{Value};
+                }
+
+            }
+        }
         %Ticket = ( %Ticket, %{ $CustomColumns->{$TicketID} } ) if $CustomColumns->{$TicketID};
 
         next TICKETID if !%Ticket;
@@ -2652,6 +2717,7 @@ sub _DefaultColumnSort {
         EscalationSolutionTime => 114,
         EscalationResponseTime => 115,
         EscalationUpdateTime   => 116,
+        Sender                 => 118,
         Title                  => 120,
         State                  => 130,
         Lock                   => 140,

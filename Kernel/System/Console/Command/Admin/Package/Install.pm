@@ -89,6 +89,7 @@ sub Run {
     my $Success = $PackageObject->PackageInstall(
         String => $FileString,
         Force  => $Self->GetOption('force'),
+        UserID => 1,
     );
 
     if ( !$Success ) {

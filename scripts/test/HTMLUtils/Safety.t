@@ -687,7 +687,31 @@ EOF
     },
     {
         Input => <<EOF,
-<iframe/src=javasc&#x72ipt:alert(\'XSS2\') >
+<iframe src=javasc&#x072ipt:alert(\'XSS2\') >
+EOF
+        Result => {
+            Output => <<EOF,
+<iframe src="" >
+EOF
+            Replace => 1,
+        },
+        Name => 'Safety - decimal entity encoding with leading zero in javascript attribute'
+    },
+    {
+        Input => <<EOF,
+<iframe src=javasc&#0114ipt:alert(\'XSS2\') >
+EOF
+        Result => {
+            Output => <<EOF,
+<iframe src="" >
+EOF
+            Replace => 1,
+        },
+        Name => 'Safety - decimal entity encoding with leading zero in javascript attribute'
+    },
+    {
+        Input => <<EOF,
+<iframe/src=javasc&#0000000000000114;ipt:alert(\'XSS2\') >
 EOF
         Result => {
             Output => <<EOF,
@@ -695,7 +719,7 @@ EOF
 EOF
             Replace => 1,
         },
-        Name => 'Safety - entity encoding in javascript attribute with / separator'
+        Name => 'Safety - entity encoding in javascript attribute with / separator and multiple zeroes'
     },
     {
         Input => <<EOF,

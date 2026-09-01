@@ -30,7 +30,7 @@ Have fun!
 
 
 ## Where do I find:
-  * The developer documentation https://doc.znuny.org/znuny_lts/developer/
+  * The developer documentation https://doc.znuny.org/developer/
   * The documentation in general https://doc.znuny.org/znuny_lts/
 
 
