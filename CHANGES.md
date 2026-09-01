@@ -1,4 +1,5 @@
 # 6.5.25 2026-??-??
+ - 2026-09-01 Fixed: Content type and attachment keys leaked into transition action modules (e.g. DynamicFieldSet) that treat every config key as a dynamic field name, causing the transition action to fail.
  - 2026-08-20 Fixed: agent/customer re-direction after accepting initial information dialog (AgentInfo/CustomerAccept).
  - 2026-08-12 Fixed: Some ticket attributes are not properly inserted into OTRS_TICKET_* placeholders.
 
