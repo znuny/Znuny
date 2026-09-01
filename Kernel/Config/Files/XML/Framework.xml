@@ -8896,6 +8896,15 @@ via the Preferences button after logging in.
                         <Item Key="Prio">1002</Item>
                     </Hash>
                 </Item>
+                <Item>
+                    <Hash>
+                        <Item Key="Key">Advanced</Item>
+                        <Item Key="Name" Translatable="1">Advanced</Item>
+                        <Item Key="Description" Translatable="1">Advanced settings for efficient work.</Item>
+                        <Item Key="Icon">fa-gears</Item>
+                        <Item Key="Prio">1003</Item>
+                    </Hash>
+                </Item>
             </Array>
         </Value>
     </Setting>
