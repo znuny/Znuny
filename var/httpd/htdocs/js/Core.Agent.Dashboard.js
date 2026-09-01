@@ -1466,6 +1466,9 @@ Core.Agent.Dashboard = (function (TargetNS) {
                     });
 
                 // show THIS settings widget
+                Core.UI.Table.AdjustColumnSettingsBox(
+                    $ColumnSettingsContainer.find('.ColumnSettingsBox')
+                );
                 $ColumnSettingsContainer
                     .find('.ColumnSettingsBox')
                     .fadeIn('fast', function() {
