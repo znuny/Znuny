@@ -1,4 +1,5 @@
 # 7.3.7 2026-??-??
+ - 2026-09-01 Fixed: Content type and attachment keys leaked into transition action modules (e.g. DynamicFieldSet) that treat every config key as a dynamic field name, causing the transition action to fail.
  - 2026-08-24 Fixed: Plain text conversion breaking in several ways after upgrade to CKEditor 5.
  - 2026-08-20 Changed: Admin::Package::List now always reports package deployment status and warns about local modifications.
  - 2026-08-20 Fixed: Multiselect dynamic field values rendered without proper spacing in customer interface. Thanks to @LuBroering (Lukas Bröring Sector Nord AG) [PR#836](https://github.com/znuny/Znuny/pull/836).
