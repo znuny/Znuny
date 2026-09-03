@@ -2009,30 +2009,25 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
     TargetNS.InitScopeFilterSelection = function() {
 
         var $Scope = $('#Scope'),
-            Scope;
-        if(!$Scope) { return; }
+            $ScopeEntityID = $('#ScopeEntityID'),
+            $ScopeEntityIDWrapper = $ScopeEntityID.closest('.field-wrapper');
 
-        Scope = $Scope.val();
-        if(Scope == 'Global') {
-            $('label[for="ScopeEntityID"]').hide().next().hide().next().hide();
+        if (!$Scope.length || !$ScopeEntityID.length) { return; }
+
+        function ToggleScopeEntityID() {
+            var Scope = $Scope.val();
+
+            if (Scope == 'Global') {
+                $ScopeEntityIDWrapper.hide();
+            } else {
+                $ScopeEntityIDWrapper.show();
+            }
         }
 
+        ToggleScopeEntityID();
+
         $Scope.change(function() {
-
-            // the ScopeEntityID element will be shown/hidden depending on the scope
-            var $ScopeEntityID = $('#ScopeEntityID'),
-                Scope = $Scope.val();
-
-            if(!$ScopeEntityID) { return; }
-
-            // show/hide the 3 items on the ScopeEntityID Process line depending on the current scope
-            if(Scope == 'Global') {
-                // hide the 3 items on the ScopeEntityID Process line
-                $('label[for="ScopeEntityID"]').hide().next().hide().next().hide();
-            } else {
-                // show the 3 items on the ScopeEntityID Process line
-                $('label[for="ScopeEntityID"]').show().next().show().next().show();
-            }
+            ToggleScopeEntityID();
         });
     };
 
