@@ -281,6 +281,10 @@ To find tickets in your system.
         # tickets with escalation time before ... (optional)
         TicketEscalationTimeOlderDate => '2006-01-09 23:59:59',
 
+        # all time boundaries above are exclusive, set this to also match tickets
+        # with a time exactly on a boundary (optional)
+        TimeSearchInclusive => 1,
+
         # search in archive (optional)
         # if archiving is on, if not specified the search processes unarchived only
         # 'y' searches archived tickets, 'n' searches unarchived tickets
@@ -1582,13 +1586,20 @@ sub TicketSearch {
     # remember current time to prevent searches for future timestamps
     my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
 
+    # time boundaries are exclusive, except for closed time ranges (e. g. statistics)
+    my $OlderOperator = $Param{TimeSearchInclusive} ? '<=' : '<';
+    my $NewerOperator = $Param{TimeSearchInclusive} ? '>=' : '>';
+
+    # operators of minute searches that are handled as date searches later on
+    my %MinutesOperator;
+
     # get articles created older/newer than x minutes or older/newer than a date
     my %ArticleTime = (
         ArticleCreateTime => "art.create_time",
     );
     for my $Key ( sort keys %ArticleTime ) {
 
-        # get articles created older than x minutes
+        # get articles created older than x minutes, 0 minutes means "until now"
         if ( defined $Param{ $Key . 'OlderMinutes' } ) {
 
             $Param{ $Key . 'OlderMinutes' } ||= 0;
@@ -1596,7 +1607,8 @@ sub TicketSearch {
             my $Time = $Kernel::OM->Create('Kernel::System::DateTime');
             $Time->Subtract( Minutes => $Param{ $Key . 'OlderMinutes' } );
 
-            $SQLExt .= sprintf( " AND ( %s <= '%s' )", $ArticleTime{$Key}, $Time->ToString() );
+            my $Op = $Param{ $Key . 'OlderMinutes' } == 0 ? '<=' : $OlderOperator;
+            $SQLExt .= sprintf( " AND ( %s %s '%s' )", $ArticleTime{$Key}, $Op, $Time->ToString() );
         }
 
         # get articles created newer than x minutes
@@ -1607,7 +1619,8 @@ sub TicketSearch {
             my $Time = $Kernel::OM->Create('Kernel::System::DateTime');
             $Time->Subtract( Minutes => $Param{ $Key . 'NewerMinutes' } );
 
-            $SQLExt .= sprintf( " AND ( %s >= '%s' )", $ArticleTime{$Key}, $Time->ToString() );
+            my $Op = $Param{ $Key . 'NewerMinutes' } == 0 ? '>=' : $NewerOperator;
+            $SQLExt .= sprintf( " AND ( %s %s '%s' )", $ArticleTime{$Key}, $Op, $Time->ToString() );
         }
 
         # get articles created older than xxxx-xx-xx xx:xx date
@@ -1648,7 +1661,7 @@ sub TicketSearch {
             }
             $CompareOlderNewerDate = $SystemTime;
 
-            $SQLExt .= " AND ($ArticleTime{$Key} <= '" . $SystemTime->ToString() . "')";
+            $SQLExt .= " AND ($ArticleTime{$Key} $OlderOperator '" . $SystemTime->ToString() . "')";
         }
 
         # get articles created newer than xxxx-xx-xx xx:xx date
@@ -1694,7 +1707,7 @@ sub TicketSearch {
             # don't execute queries if older/newer date restriction show now valid timeframe
             return if $CompareOlderNewerDate && $SystemTime > $CompareOlderNewerDate;
 
-            $SQLExt .= " AND ($ArticleTime{$Key} >= '" . $SystemTime->ToString() . "')";
+            $SQLExt .= " AND ($ArticleTime{$Key} $NewerOperator '" . $SystemTime->ToString() . "')";
         }
     }
 
@@ -1708,7 +1721,7 @@ sub TicketSearch {
     );
     for my $Key ( sort keys %TicketTime ) {
 
-        # get tickets created or escalated older than x minutes
+        # get tickets created or escalated older than x minutes, 0 minutes means "until now"
         if ( defined $Param{ $Key . 'OlderMinutes' } ) {
 
             $Param{ $Key . 'OlderMinutes' } ||= 0;
@@ -1723,7 +1736,8 @@ sub TicketSearch {
 
             my $TargetTime = $Key eq 'TicketCreateTime' ? $Time->ToString() : $Time->ToEpoch();
 
-            $SQLExt .= sprintf( " AND ( %s <= '%s' )", $TicketTime{$Key}, $TargetTime );
+            my $Op = $Param{ $Key . 'OlderMinutes' } == 0 ? '<=' : $OlderOperator;
+            $SQLExt .= sprintf( " AND ( %s %s '%s' )", $TicketTime{$Key}, $Op, $TargetTime );
         }
 
         # get tickets created or escalated newer than x minutes
@@ -1741,7 +1755,8 @@ sub TicketSearch {
 
             my $TargetTime = $Key eq 'TicketCreateTime' ? $Time->ToString() : $Time->ToEpoch();
 
-            $SQLExt .= sprintf( " AND ( %s >= '%s' )", $TicketTime{$Key}, $TargetTime );
+            my $Op = $Param{ $Key . 'NewerMinutes' } == 0 ? '>=' : $NewerOperator;
+            $SQLExt .= sprintf( " AND ( %s %s '%s' )", $TicketTime{$Key}, $Op, $TargetTime );
         }
     }
 
@@ -1789,7 +1804,7 @@ sub TicketSearch {
 
             my $TargetTime = $Key eq 'TicketCreateTime' ? $Time->ToString() : $Time->ToEpoch();
 
-            $SQLExt .= sprintf( " AND ( %s <= '%s' )", $TicketTime{$Key}, $TargetTime );
+            $SQLExt .= sprintf( " AND ( %s %s '%s' )", $TicketTime{$Key}, $OlderOperator, $TargetTime );
         }
 
         # get tickets created/escalated newer than xxxx-xx-xx xx:xx date
@@ -1834,7 +1849,7 @@ sub TicketSearch {
 
             my $TargetTime = $Key eq 'TicketCreateTime' ? $Time->ToString() : $Time->ToEpoch();
 
-            $SQLExt .= sprintf( " AND ( %s >= '%s' )", $TicketTime{$Key}, $TargetTime );
+            $SQLExt .= sprintf( " AND ( %s %s '%s' )", $TicketTime{$Key}, $NewerOperator, $TargetTime );
         }
     }
 
@@ -1847,6 +1862,9 @@ sub TicketSearch {
         $TimeStamp->Subtract( Minutes => $Param{TicketChangeTimeOlderMinutes} );
 
         $Param{TicketChangeTimeOlderDate} = $TimeStamp->ToString();
+        if ( $Param{TicketChangeTimeOlderMinutes} == 0 ) {
+            $MinutesOperator{TicketChangeTimeOlderDate} = '<=';
+        }
     }
 
     # get tickets changed newer than x minutes
@@ -1858,6 +1876,9 @@ sub TicketSearch {
         $TimeStamp->Subtract( Minutes => $Param{TicketChangeTimeNewerMinutes} );
 
         $Param{TicketChangeTimeNewerDate} = $TimeStamp->ToString();
+        if ( $Param{TicketChangeTimeNewerMinutes} == 0 ) {
+            $MinutesOperator{TicketChangeTimeNewerDate} = '>=';
+        }
     }
 
     # get tickets based on ticket history changed older than xxxx-xx-xx xx:xx date
@@ -1900,7 +1921,8 @@ sub TicketSearch {
         );
         return if !$THRef;
 
-        $SQLExt .= " AND ${ THRef }.create_time <= '" . $DBObject->Quote( $Time->ToString() ) . "'";
+        my $Op = $MinutesOperator{TicketChangeTimeOlderDate} || $OlderOperator;
+        $SQLExt .= " AND ${ THRef }.create_time $Op '" . $DBObject->Quote( $Time->ToString() ) . "'";
     }
 
     # get tickets based on ticket history changed newer than xxxx-xx-xx xx:xx date
@@ -1945,7 +1967,8 @@ sub TicketSearch {
         );
         return if !$THRef;
 
-        $SQLExt .= " AND ${ THRef }.create_time >= '" . $DBObject->Quote( $Time->ToString() ) . "'";
+        my $Op = $MinutesOperator{TicketChangeTimeNewerDate} || $NewerOperator;
+        $SQLExt .= " AND ${ THRef }.create_time $Op '" . $DBObject->Quote( $Time->ToString() ) . "'";
     }
 
     # get tickets changed older than x minutes
@@ -1957,6 +1980,9 @@ sub TicketSearch {
         $TimeStamp->Subtract( Minutes => $Param{TicketLastChangeTimeOlderMinutes} );
 
         $Param{TicketLastChangeTimeOlderDate} = $TimeStamp->ToString();
+        if ( $Param{TicketLastChangeTimeOlderMinutes} == 0 ) {
+            $MinutesOperator{TicketLastChangeTimeOlderDate} = '<=';
+        }
     }
 
     # get tickets changed newer than x minutes
@@ -1968,6 +1994,9 @@ sub TicketSearch {
         $TimeStamp->Subtract( Minutes => $Param{TicketLastChangeTimeNewerMinutes} );
 
         $Param{TicketLastChangeTimeNewerDate} = $TimeStamp->ToString();
+        if ( $Param{TicketLastChangeTimeNewerMinutes} == 0 ) {
+            $MinutesOperator{TicketLastChangeTimeNewerDate} = '>=';
+        }
     }
 
     # get tickets changed older than xxxx-xx-xx xx:xx date
@@ -2005,7 +2034,8 @@ sub TicketSearch {
         }
         $CompareLastChangeTimeOlderNewerDate = $Time;
 
-        $SQLExt .= " AND st.change_time <= '" . $DBObject->Quote( $Time->ToString() ) . "'";
+        my $Op = $MinutesOperator{TicketLastChangeTimeOlderDate} || $OlderOperator;
+        $SQLExt .= " AND st.change_time $Op '" . $DBObject->Quote( $Time->ToString() ) . "'";
     }
 
     # get tickets changed newer than xxxx-xx-xx xx:xx date
@@ -2046,7 +2076,8 @@ sub TicketSearch {
         return
             if $CompareLastChangeTimeOlderNewerDate && $Time > $CompareLastChangeTimeOlderNewerDate;
 
-        $SQLExt .= " AND st.change_time >= '" . $DBObject->Quote( $Time->ToString() ) . "'";
+        my $Op = $MinutesOperator{TicketLastChangeTimeNewerDate} || $NewerOperator;
+        $SQLExt .= " AND st.change_time $Op '" . $DBObject->Quote( $Time->ToString() ) . "'";
     }
 
     # get tickets closed older than x minutes
@@ -2058,6 +2089,9 @@ sub TicketSearch {
         $TimeStamp->Subtract( Minutes => $Param{TicketCloseTimeOlderMinutes} );
 
         $Param{TicketCloseTimeOlderDate} = $TimeStamp->ToString();
+        if ( $Param{TicketCloseTimeOlderMinutes} == 0 ) {
+            $MinutesOperator{TicketCloseTimeOlderDate} = '<=';
+        }
     }
 
     # get tickets closed newer than x minutes
@@ -2069,6 +2103,9 @@ sub TicketSearch {
         $TimeStamp->Subtract( Minutes => $Param{TicketCloseTimeNewerMinutes} );
 
         $Param{TicketCloseTimeNewerDate} = $TimeStamp->ToString();
+        if ( $Param{TicketCloseTimeNewerMinutes} == 0 ) {
+            $MinutesOperator{TicketCloseTimeNewerDate} = '>=';
+        }
     }
 
     # get tickets closed older than xxxx-xx-xx xx:xx date
@@ -2118,13 +2155,15 @@ sub TicketSearch {
         my @StateID = ( $Self->HistoryTypeLookup( Type => 'NewTicket' ) );
         push( @StateID, $Self->HistoryTypeLookup( Type => 'StateUpdate' ) );
         if (@StateID) {
+            my $Op = $MinutesOperator{TicketCloseTimeOlderDate} || $OlderOperator;
             $SQLExt .= sprintf(
-                " AND %s.history_type_id IN (%s) AND %s.state_id IN (%s) AND %s.create_time <= '%s'",
+                " AND %s.history_type_id IN (%s) AND %s.state_id IN (%s) AND %s.create_time %s '%s'",
                 $THRef,
                 ( join ', ', sort @StateID ),
                 $THRef,
                 ( join ', ', sort @List ),
                 $THRef,
+                $Op,
                 $DBObject->Quote( $Time->ToString() ),
             );
         }
@@ -2180,13 +2219,15 @@ sub TicketSearch {
         my @StateID = ( $Self->HistoryTypeLookup( Type => 'NewTicket' ) );
         push( @StateID, $Self->HistoryTypeLookup( Type => 'StateUpdate' ) );
         if (@StateID) {
+            my $Op = $MinutesOperator{TicketCloseTimeNewerDate} || $NewerOperator;
             $SQLExt .= sprintf(
-                " AND %s.history_type_id IN (%s) AND %s.state_id IN (%s) AND %s.create_time >= '%s'",
+                " AND %s.history_type_id IN (%s) AND %s.state_id IN (%s) AND %s.create_time %s '%s'",
                 $THRef,
                 ( join ', ', sort @StateID ),
                 $THRef,
                 ( join ', ', sort @List ),
                 $THRef,
+                $Op,
                 $DBObject->Quote( $Time->ToString() ),
             );
         }
@@ -2201,6 +2242,9 @@ sub TicketSearch {
         $TimeStamp->Subtract( Minutes => $Param{TicketLastCloseTimeOlderMinutes} );
 
         $Param{TicketLastCloseTimeOlderDate} = $TimeStamp->ToString();
+        if ( $Param{TicketLastCloseTimeOlderMinutes} == 0 ) {
+            $MinutesOperator{TicketLastCloseTimeOlderDate} = '<=';
+        }
     }
 
     # Get tickets last closed newer than x minutes.
@@ -2212,6 +2256,9 @@ sub TicketSearch {
         $TimeStamp->Subtract( Minutes => $Param{TicketLastCloseTimeNewerMinutes} );
 
         $Param{TicketLastCloseTimeNewerDate} = $TimeStamp->ToString();
+        if ( $Param{TicketLastCloseTimeNewerMinutes} == 0 ) {
+            $MinutesOperator{TicketLastCloseTimeNewerDate} = '>=';
+        }
     }
 
     # Get tickets last closed older than xxxx-xx-xx xx:xx date.
@@ -2261,9 +2308,10 @@ sub TicketSearch {
         my @StateID = ( $Self->HistoryTypeLookup( Type => 'NewTicket' ) );
         push( @StateID, $Self->HistoryTypeLookup( Type => 'StateUpdate' ) );
         if (@StateID) {
+            my $Op = $MinutesOperator{TicketLastCloseTimeOlderDate} || $OlderOperator;
             $SQLExt .= sprintf(
                 " AND %s.history_type_id IN (%s) AND %s.state_id IN (%s) AND "
-                    . "%s.create_time <= '%s' AND "
+                    . "%s.create_time %s '%s' AND "
                     . "%s.create_time IN "
                     . "("
                     . "SELECT lco1.create_time "
@@ -2283,6 +2331,7 @@ sub TicketSearch {
                 $THRef,
                 ( join ', ', sort @List ),
                 $THRef,
+                $Op,
                 $DBObject->Quote( $Time->ToString() ),
                 $THRef,
                 ( join ', ', sort @StateID ),
@@ -2341,9 +2390,10 @@ sub TicketSearch {
         my @StateID = ( $Self->HistoryTypeLookup( Type => 'NewTicket' ) );
         push( @StateID, $Self->HistoryTypeLookup( Type => 'StateUpdate' ) );
         if (@StateID) {
+            my $Op = $MinutesOperator{TicketLastCloseTimeNewerDate} || $NewerOperator;
             $SQLExt .= sprintf(
                 " AND %s.history_type_id IN (%s) AND %s.state_id IN (%s) AND "
-                    . "%s.create_time >= '%s' AND "
+                    . "%s.create_time %s '%s' AND "
                     . "%s.create_time IN "
                     . "("
                     . "SELECT lcn1.create_time "
@@ -2363,6 +2413,7 @@ sub TicketSearch {
                 $THRef,
                 ( join ', ', sort @List ),
                 $THRef,
+                $Op,
                 $DBObject->Quote( $Time->ToString() ),
                 $THRef,
                 ( join ', ', sort @StateID ),
@@ -2400,6 +2451,9 @@ sub TicketSearch {
         $TimeStamp->Subtract( Minutes => $Param{TicketPendingTimeOlderMinutes} );
 
         $Param{TicketPendingTimeOlderDate} = $TimeStamp->ToString();
+        if ( $Param{TicketPendingTimeOlderMinutes} == 0 ) {
+            $MinutesOperator{TicketPendingTimeOlderDate} = '<=';
+        }
     }
 
     # get tickets pending newer than x minutes
@@ -2411,6 +2465,9 @@ sub TicketSearch {
         $TimeStamp->Subtract( Minutes => $Param{TicketPendingTimeNewerMinutes} );
 
         $Param{TicketPendingTimeNewerDate} = $TimeStamp->ToString();
+        if ( $Param{TicketPendingTimeNewerMinutes} == 0 ) {
+            $MinutesOperator{TicketPendingTimeNewerDate} = '>=';
+        }
     }
 
     # get pending tickets older than xxxx-xx-xx xx:xx date
@@ -2448,7 +2505,8 @@ sub TicketSearch {
         }
         $ComparePendingTimeOlderNewerDate = $TimeStamp;
 
-        $SQLExt .= " AND st.until_time <= " . $TimeStamp->ToEpoch();
+        my $Op = $MinutesOperator{TicketPendingTimeOlderDate} || $OlderOperator;
+        $SQLExt .= " AND st.until_time $Op " . $TimeStamp->ToEpoch();
     }
 
     # get pending tickets newer than xxxx-xx-xx xx:xx date
@@ -2486,7 +2544,8 @@ sub TicketSearch {
         return
             if $ComparePendingTimeOlderNewerDate && $TimeStamp > $ComparePendingTimeOlderNewerDate;
 
-        $SQLExt .= " AND st.until_time >= " . $TimeStamp->ToEpoch();
+        my $Op = $MinutesOperator{TicketPendingTimeNewerDate} || $NewerOperator;
+        $SQLExt .= " AND st.until_time $Op " . $TimeStamp->ToEpoch();
     }
 
     # archive flag

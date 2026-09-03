@@ -817,6 +817,9 @@ sub GetStatElement {
         Limit      => 100_000_000,
         StateType  => 'Closed',
         %TicketSearch,
+
+        # statistics search closed time ranges
+        TimeSearchInclusive => 1,
     );
 
     # Do nothing, if there are no tickets.
