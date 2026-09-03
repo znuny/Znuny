@@ -175,5 +175,46 @@ Core.UI.Table = (function (TargetNS) {
         });
     };
 
+    /**
+     * @name AdjustColumnSettingsBox
+     * @memberof Core.UI.Table
+     * @function
+     * @param {jQueryObject} $ColumnSettingsBox - Column filter to adjust.
+     * @description
+     *      Keeps a column filter inside the viewport.
+     * @returns {void}
+     */
+    TargetNS.AdjustColumnSettingsBox = function ($ColumnSettingsBox) {
+        var ViewportPadding = 8,
+            BoxRect,
+            WasHidden = !$ColumnSettingsBox.is(':visible'),
+            OriginalDisplay = $ColumnSettingsBox[0].style.display,
+            OriginalVisibility = $ColumnSettingsBox[0].style.visibility;
+
+        // reset positioning
+        $ColumnSettingsBox.removeClass('OpenRight');
+
+        // render it hidden to calculate the position
+        if (WasHidden) {
+            $ColumnSettingsBox.css({
+                display: 'block',
+                visibility: 'hidden'
+            });
+        }
+
+        BoxRect = $ColumnSettingsBox[0].getBoundingClientRect();
+
+        if (BoxRect.left < ViewportPadding) {
+            $ColumnSettingsBox.addClass('OpenRight');
+        }
+
+        if (WasHidden) {
+            $ColumnSettingsBox.css({
+                display: OriginalDisplay,
+                visibility: OriginalVisibility
+            });
+        }
+    };
+
     return TargetNS;
 }(Core.UI.Table || {}));

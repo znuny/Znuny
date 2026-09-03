@@ -238,6 +238,9 @@ Core.Agent.Overview = (function (TargetNS) {
                     });
 
                 // show THIS settings widget
+                Core.UI.Table.AdjustColumnSettingsBox(
+                    $TriggerObj.next('.ColumnSettingsContainer').find('.ColumnSettingsBox')
+                );
                 $TriggerObj
                     .next('.ColumnSettingsContainer')
                     .find('.ColumnSettingsBox')
