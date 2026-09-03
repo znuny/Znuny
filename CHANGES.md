@@ -1,4 +1,5 @@
 # 7.3.7 2026-??-??
+ - 2026-09-01 Fixed: Accounted time (time units) lost when working with drafts.
  - 2026-09-01 Fixed: Content type and attachment keys leaked into transition action modules (e.g. DynamicFieldSet) that treat every config key as a dynamic field name, causing the transition action to fail.
  - 2026-08-31 Fixed: Ticket search Newer/Older Date and Minutes filters no longer match tickets that fall exactly on the given time. Thanks to @martinpintar-pixel for reporting the issue. [#840](https://github.com/znuny/Znuny/issues/840)
  - 2026-08-24 Fixed: Plain text conversion breaking in several ways after upgrade to CKEditor 5.
