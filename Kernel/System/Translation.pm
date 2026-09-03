@@ -16,7 +16,7 @@ use utf8;
 
 our @ObjectDependencies = (
     'Kernel::Config',
-    'Kernel::Output::HTML::Layout',
+    'Kernel::System::Encode',
     'Kernel::System::Log',
     'Kernel::System::Main',
 );
@@ -60,7 +60,6 @@ sub DataDeployment {
 
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
 
     NEEDED:
@@ -103,34 +102,35 @@ sub DataDeployment {
 
     return 1 if !%Data;
 
-    # Keep comment lines like Copyright in files also in the generated output.
-    local $ENV{TEMPLATE_KEEP_COMMENTS} = 1;
+    my %DefaultUsedLanguages = %{ $ConfigObject->Get('DefaultUsedLanguages') || {} };
 
+    LANGUAGEID:
     for my $LanguageID ( sort keys %Data ) {
 
-        my $Translations;
+        if (
+            !$Self->_IsValidLanguageID(
+                LanguageID           => $LanguageID,
+                DefaultUsedLanguages => \%DefaultUsedLanguages,
+            )
+            )
+        {
+            $LogObject->Log(
+                Priority => 'error',
+                Message  => "Skipping translation deployment for invalid LanguageID '$LanguageID'!",
+            );
+            next LANGUAGEID;
+        }
+
         my $TranslationFileName = $LanguageID . "_zzzTranslationAuto";
         my $FileName            = $Home . "/Kernel/Language/$TranslationFileName.pm";
 
-        for my $Source ( sort keys %{ $Data{$LanguageID} } ) {
-
-            my $Destination = $Data{$LanguageID}->{$Source};
-
-            $LayoutObject->Block(
-                Name => 'TranslationRow',
-                Data => {
-                    Source      => $Source,
-                    Destination => $Destination,
-                },
-            );
-        }
-
-        my $Content = $LayoutObject->Output(
-            TemplateFile => 'Translation/File',
-            Data         => {
-                LanguageID => $LanguageID,
-            },
+        my $Content = $Self->_TranslationDeploymentFileGenerate(
+            LanguageID   => $LanguageID,
+            Translations => $Data{$LanguageID},
         );
+        if ( !defined $Content ) {
+            next LANGUAGEID;
+        }
 
         $MainObject->FileWrite(
             Location => $FileName,
@@ -149,9 +149,102 @@ sub DataDeployment {
         );
     }
 
-    local $ENV{TEMPLATE_KEEP_COMMENTS} = 0;
+    return 1;
+}
+
+sub _IsValidLanguageID {
+    my ( $Self, %Param ) = @_;
+
+    my $LanguageID = $Param{LanguageID} // '';
+
+    return if !length $LanguageID;
+    return if !$Param{DefaultUsedLanguages}->{$LanguageID};
 
     return 1;
+}
+
+sub _TranslationDeploymentFileGenerate {
+    my ( $Self, %Param ) = @_;
+
+    my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
+    my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(LanguageID Translations)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Parameter '$Needed' is needed in _TranslationDeploymentFileGenerate()!",
+        );
+        return;
+    }
+
+    my $LanguageID   = $Param{LanguageID};
+    my $Translations = $Param{Translations};
+
+    my %TranslationsEncoded;
+
+    SOURCE:
+    for my $Source ( sort keys %{$Translations} ) {
+        my $Key         = $Source;
+        my $Destination = $Translations->{$Source};
+
+        $EncodeObject->EncodeInput( \$Key );
+        if ( defined $Destination ) {
+            $EncodeObject->EncodeInput( \$Destination );
+        }
+
+        $TranslationsEncoded{$Key} = $Destination;
+    }
+
+    my $TranslationDump = $MainObject->Dump( \%TranslationsEncoded, 'binary' );
+    $TranslationDump =~ s{\A\$VAR1 = }{};
+    chomp $TranslationDump;
+
+    $TranslationDump =~ s{\A\{\n?}{};
+    $TranslationDump =~ s{\n?\};?\z}{};
+
+    if ( length $TranslationDump ) {
+        $TranslationDump =~ s/^/        /mg;
+        $TranslationDump .= "\n";
+    }
+
+    my $PackageName = 'Kernel::Language::' . $LanguageID . '_zzzTranslationAuto';
+
+    my $Content = <<"EOF";
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+package $PackageName;
+
+use strict;
+use warnings;
+
+use utf8;
+
+sub Data {
+    my \$Self = shift;
+
+    \$Self->{Translation} = {
+        \%{ \$Self->{Translation} // {} },
+$TranslationDump    };
+
+    return 1;
+}
+
+1;
+EOF
+
+    $EncodeObject->EncodeInput( \$Content );
+
+    return $Content;
 }
 
 =head2 TranslationFilesDelete()
