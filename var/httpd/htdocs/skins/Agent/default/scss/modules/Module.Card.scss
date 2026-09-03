@@ -77,6 +77,10 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
             transition: all 0.250s ease-out;
             border-bottom-left-radius: var(--border-radius-sm);
             border-bottom-right-radius: var(--border-radius-sm);
+
+            #ArticleTree & {
+                padding: 0;
+            }
         }
 
         &.Collapsed {
