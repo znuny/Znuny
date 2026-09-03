@@ -11,6 +11,7 @@ package Kernel::Output::HTML::Dashboard::TicketGeneric;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language              qw(Translatable);
@@ -1142,10 +1143,18 @@ sub Run {
     COLUMNNAME:
     for my $ColumnName ( sort keys %GetColumnFilter ) {
         next COLUMNNAME if !$ColumnName;
-        next COLUMNNAME if !$GetColumnFilter{$ColumnName};
-        $ColumnFilterLink
-            .= ';' . $LayoutObject->Ascii2Html( Text => 'ColumnFilter' . $ColumnName )
-            . '=' . $LayoutObject->LinkEncode( $GetColumnFilter{$ColumnName} );
+        next COLUMNNAME if !defined $GetColumnFilter{$ColumnName};
+
+        my $Value  = $GetColumnFilter{$ColumnName};
+        my @Values = ref $Value eq 'ARRAY' ? @{$Value} : ( defined $Value ? $Value : () );
+        @Values = grep { defined $_ && $_ ne '' } @Values;
+        next COLUMNNAME if !@Values;
+
+        for my $Value (@Values) {
+            $ColumnFilterLink
+                .= ';' . $LayoutObject->Ascii2Html( Text => 'ColumnFilter' . $ColumnName )
+                . '=' . $LayoutObject->LinkEncode($Value);
+        }
     }
 
     my $LinkPage =
