@@ -236,9 +236,9 @@ if ( !$SMIMEObject ) {
 # Setup environment
 #
 
-my $Check1Hash       = 'f62a2257';
-my $Check2Hash       = '35c7d865';
-my $Check3Hash       = 'a2ba8622';
+my $Check1Hash       = 'c594735a';
+my $Check2Hash       = '11c4333a';
+my $Check3Hash       = '9c4504e3';
 my $ZnunyRootCAHash  = '7835cf94';
 my $ZnunySub2CAHash  = 'b5d19fb9';
 my $ZnunySub1CAHash  = '19545811';
@@ -585,12 +585,12 @@ for my $Test (@Tests) {
 
     if ( $Test->{FixedTimeSet} ) {
 
-        # create isolated time environment during test
+        # create isolated time environment during test (after cert expiry: Check1/Check2 valid until 2036)
         $HelperObject->FixedTimeSet(
             $Kernel::OM->Create(
                 'Kernel::System::DateTime',
                 ObjectParams => {
-                    String => '2026-10-20 00:00:00',
+                    String => '2037-01-01 00:00:00',
                 },
             )->ToEpoch()
         );

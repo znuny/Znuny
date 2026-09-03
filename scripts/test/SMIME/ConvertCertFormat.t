@@ -212,7 +212,7 @@ my @Certificates = (
         CertificateFileName3 => 'SMIMECertificate-smimeuser1.der',
         CertificateFileName4 => 'SMIMECertificate-smimeuser1.pfx',
         CertificatePassFile  => 'SMIMEPrivateKeyPass-smimeuser1.crt',
-        Success              => 0                                       # Test with passfile will fail (wrong password)
+        Success              => 1
     },
 );
 
@@ -256,11 +256,15 @@ my $CertificationConversionTest = sub {
     my $MainObject  = $Kernel::OM->Get('Kernel::System::Main');
     my $SMIMEObject = $Kernel::OM->Get('Kernel::System::Crypt::SMIME');
 
-    # read
-    my $CertString = $MainObject->FileRead(
+    # read (binary mode for DER and PFX to preserve binary data)
+    my %ReadParam = (
         Directory => $ConfigObject->Get('Home') . "/scripts/test/sample/SMIME/",
         Filename  => $CertificateFileName,
     );
+    if ( $Format eq 'DER' || $Format eq 'PFX' ) {
+        $ReadParam{Mode} = 'binmode';
+    }
+    my $CertString = $MainObject->FileRead(%ReadParam);
     $CheckString ||= ${$CertString};
 
     my $FormatedCertificate;
