@@ -171,4 +171,35 @@ $Self->Is(
     "Dynamic field 'CustomerCompanyURL$RandomID' for ticket with ID $TicketID must match test company URL.",
 );
 
+my $TicketIDWithoutCustomer = $TicketObject->TicketCreate(
+    Title    => 'Some Ticket Title Without Customer',
+    Queue    => 'Raw',
+    Lock     => 'unlock',
+    Priority => '3 normal',
+    State    => 'new',
+    OwnerID  => 1,
+    UserID   => 1,
+);
+
+$Self->IsNot(
+    $TicketIDWithoutCustomer,
+    undef,
+    'TicketCreate() without customer must succeed.',
+);
+
+my %TicketWithoutCustomer = $TicketObject->TicketGet(
+    TicketID      => $TicketIDWithoutCustomer,
+    DynamicFields => 1,
+    UserID        => 1,
+    Silent        => 0,
+);
+
+for my $DynamicFieldName (@AddedDynamicFieldNames) {
+    $Self->Is(
+        $TicketWithoutCustomer{ 'DynamicField_' . $DynamicFieldName } // '',
+        '',
+        "Dynamic field $DynamicFieldName for ticket with ID $TicketIDWithoutCustomer must be empty without customer.",
+    );
+}
+
 1;

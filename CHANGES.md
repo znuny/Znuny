@@ -1,4 +1,5 @@
 # 6.5.25 2026-??-??
+ - 2026-09-04 Fixed: Ticket event to store customer company data in dynamic fields threw a warning if ticket had no customer ID set.
  - 2026-09-01 Fixed: Ticket search Newer/Older Date and Minutes filters no longer match tickets that fall exactly on the given time. Thanks to @martinpintar-pixel for reporting the issue. [#840](https://github.com/znuny/Znuny/issues/840)
  - 2026-09-01 Fixed: Content type and attachment keys leaked into transition action modules (e.g. DynamicFieldSet) that treat every config key as a dynamic field name, causing the transition action to fail.
  - 2026-08-20 Fixed: agent/customer re-direction after accepting initial information dialog (AgentInfo/CustomerAccept).
