@@ -1641,6 +1641,9 @@ sub Run {
                     $BlockType = 'Time';
                     $DataValue = $Article{$TicketColumn} || $UserInfo{$TicketColumn};
                 }
+                elsif ( $TicketColumn eq 'AccountedTime' ) {
+                    $DataValue = $TicketObject->TicketAccountedTimeGet( TicketID => $Article{TicketID} );
+                }
                 elsif ( $TicketColumn eq 'Responsible' ) {
 
                     my %ResponsibleInfo = $UserObject->GetUserData(
