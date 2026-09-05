@@ -13046,6 +13046,13 @@ Thanks for your help!
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="DynamicFields::Driver::TextArea::MaxLength" Required="0" Valid="1">
+        <Description Translatable="1">Defines the maximum valid length of text that can be stored in text area fields. The default value is 3800 characters, which is kept for backward compatibility.</Description>       
+        <Navigation>Core::DynamicFields::Driver::TextArea</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+$">3800</Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::AgentTicketClose###DynamicField" Required="0" Valid="1">
         <Description Translatable="1">Dynamic fields shown in the ticket close screen of the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketClose</Navigation>

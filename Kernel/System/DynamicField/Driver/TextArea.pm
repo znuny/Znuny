@@ -50,7 +50,10 @@ sub new {
 
     # set the maximum length for the text-area fields to still be a searchable field in some
     # databases
-    $Self->{MaxLength} = 3800;
+    my $MaxLength = $Kernel::OM->Get('Kernel::Config')->Get('DynamicFields::Driver::TextArea::MaxLength');
+    $Self->{MaxLength} = IsPositiveInteger($MaxLength)
+        ? $MaxLength
+        : 3800;
 
     # set field behaviors
     $Self->{Behaviors} = {
