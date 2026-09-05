@@ -42,7 +42,6 @@ sub Run {
 
     if (
         $EditUserID
-        && $EditUserID != $Self->{UserID}
         && $Self->_CheckEditPreferencesPermission()
         )
     {
