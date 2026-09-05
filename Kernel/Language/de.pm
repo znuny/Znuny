@@ -3967,6 +3967,8 @@ sub Data {
         'Repository List' => 'Verzeichnisliste',
         'No packages found in selected repository. Please check log for more info!' =>
             'Keine Pakete im gewählten Verzeichnis gefunden. Bitte prüfen Sie das Systemprotokoll für mehr Informationen!',
+        'All packages in this repository are already installed in the current version.' =>
+            'Alle Pakete in diesem Verzeichnis sind bereits in der aktuellen Version installiert.',
 
         # Perl Module: Kernel/Modules/AdminPostMasterFilter.pm
         'No such filter: %s' => 'Kein solcher Filter: %s',
