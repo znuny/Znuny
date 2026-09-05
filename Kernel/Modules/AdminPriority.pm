@@ -24,6 +24,11 @@ sub new {
     my $Self = {%Param};
     bless( $Self, $Type );
 
+    $Self->{AdminSystemConfigurationPermission} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Permission(
+        Action => 'AdminSystemConfiguration',
+        Type   => 'rw',
+    );
+
     return $Self;
 }
 
@@ -40,6 +45,8 @@ sub Run {
     my $LayoutObject   = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ParamObject    = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $PriorityObject = $Kernel::OM->Get('Kernel::System::Priority');
+
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     # ------------------------------------------------------------ #
     # change
@@ -308,6 +315,8 @@ sub _Edit {
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
+
     $LayoutObject->Block(
         Name => 'Overview',
         Data => \%Param,
@@ -403,6 +412,8 @@ sub _Overview {
     my ( $Self, %Param ) = @_;
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     $LayoutObject->Block(
         Name => 'Overview',

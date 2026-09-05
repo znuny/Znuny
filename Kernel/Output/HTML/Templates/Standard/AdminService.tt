@@ -85,6 +85,7 @@
                             </span>
                         </a>
                     </li>
+                    [% IF Data.AdminSystemConfigurationPermission %]
                     <li>
                         <a href='[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=Search;Search=%23%23%23Service' class='CallForAction Fullsize Center'>
                             <span>
@@ -92,6 +93,7 @@
                             </span>
                         </a>
                     </li>
+                    [% END %]
                 </ul>
             </div>
         </div>
