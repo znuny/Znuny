@@ -188,6 +188,19 @@ sub CustomerSearch {
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
     my %Data;
+
+    # Return empty set if no search parameter is defined.
+    if (
+        !$Param{Search}
+        && !$Param{UserLogin}
+        && !$Param{PostMasterSearch}
+        && !$Param{CustomerID}
+        && !$Param{CustomerIDRaw}
+        )
+    {
+        return %Data;
+    }
+
     SOURCE:
     for my $Count ( '', 1 .. 10 ) {
 
