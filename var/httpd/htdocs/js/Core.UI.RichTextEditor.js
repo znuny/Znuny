@@ -883,16 +883,17 @@ Core.UI.RichTextEditor = (function (TargetNS) {
                     insert: {
                         type: 'block',
                     },
-                styles: {
-                    options: [
-                        'inline',
-                        'alignLeft',
-                        'alignRight',
-                        'alignCenter',
-                        'alignBlockLeft',
-                        'alignBlockRight',
-                        'block',
-                        'side' ]
+                    styles: {
+                        options: [
+                            'inline',
+                            'alignLeft',
+                            'alignRight',
+                            'alignCenter',
+                            'alignBlockLeft',
+                            'alignBlockRight',
+                            'block',
+                            'side'
+                        ]
                     },
                     toolbar: [
                         'imageStyle:inline',
@@ -907,7 +908,9 @@ Core.UI.RichTextEditor = (function (TargetNS) {
                         '|',
                         'imageStyle:side',
                         '|',
-                        'imageTextAlternative'
+                        'imageTextAlternative',
+                        '|',
+                        'linkImage'
                     ],
                 },
             },
@@ -1393,6 +1396,7 @@ Core.UI.RichTextEditor = (function (TargetNS) {
             'Indent',
             'IndentBlock',
             'Link',
+            'LinkImage',
             'List',
             'ListProperties',
             'MediaEmbed',

@@ -7,6 +7,7 @@
  - 2026-08-31 Fixed: Process management: Scope entity ID selection remains visible when scope is set to global.
  - 2026-08-31 Fixed: Multiselect column filters are lost when paginating dashboard ticket widgets. Thanks to @ghost-train1 for reporting the issue. [#832](https://github.com/znuny/Znuny/issues/832)
  - 2026-08-31 Fixed: Ticket search Newer/Older Date and Minutes filters no longer match tickets that fall exactly on the given time. Thanks to @martinpintar-pixel for reporting the issue. [#840](https://github.com/znuny/Znuny/issues/840)
+ - 2026-08-25 Changed: Enabled linking images (LinkImage plugin) in CKEditor 5.
  - 2026-08-24 Fixed: Plain text conversion breaking in several ways after upgrade to CKEditor 5.
  - 2026-08-20 Changed: Admin::Package::List now always reports package deployment status and warns about local modifications.
  - 2026-08-20 Fixed: Multiselect dynamic field values rendered without proper spacing in customer interface. Thanks to @LuBroering (Lukas Bröring Sector Nord AG) [PR#836](https://github.com/znuny/Znuny/pull/836).

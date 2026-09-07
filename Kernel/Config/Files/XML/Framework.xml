@@ -576,6 +576,7 @@
                 <Item>Indent</Item>
                 <Item>IndentBlock</Item>
                 <Item>Link</Item>
+                <Item>LinkImage</Item>
                 <Item>List</Item>
                 <Item>ListProperties</Item>
                 <Item>MediaEmbed</Item>
