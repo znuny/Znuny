@@ -1,4 +1,5 @@
 # 7.3.7 2026-??-??
+ - 2026-09-07 Changed: Kernel::SystemAddress::SystemAddressLookup is now case-insensitive when comparing system addresses.
  - 2026-09-03 Fixed: Ticket event to store customer company data in dynamic fields threw a warning if ticket had no customer ID set.
  - 2026-09-01 Fixed: Accounted time (time units) lost when working with drafts.
  - 2026-09-01 Fixed: Content type and attachment keys leaked into transition action modules (e.g. DynamicFieldSet) that treat every config key as a dynamic field name, causing the transition action to fail.
