@@ -1,4 +1,5 @@
 # 6.5.25 2026-??-??
+ - 2026-09-08 Security: Fixed SQL injection for parameter ContentSearch of ticket search. Thanks for reporting to Mokrane ABDELMALEK (via Ghent University VDP programme).
  - 2026-09-07 Changed: Kernel::SystemAddress::SystemAddressLookup is now case-insensitive when comparing system addresses.
  - 2026-09-04 Fixed: Ticket event to store customer company data in dynamic fields threw a warning if ticket had no customer ID set.
  - 2026-09-01 Fixed: Ticket search Newer/Older Date and Minutes filters no longer match tickets that fall exactly on the given time. Thanks to @martinpintar-pixel for reporting the issue. [#840](https://github.com/znuny/Znuny/issues/840)
