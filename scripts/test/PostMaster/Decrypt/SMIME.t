@@ -323,12 +323,14 @@ $Self->Is(
 );
 
 my $GetBody = $FirstArticle{Body};
-chomp($GetBody);
+
+# Decrypted S/MIME content is CRLF canonicalized, remove trailing line breaks.
+$GetBody =~ s{\s+\z}{};
 
 $Self->Is(
     $GetBody,
     'Hi',
-    "Body decrypted $FirstArticle{Body}",
+    "Body decrypted $GetBody",
 );
 
 # Delete needed test directories.
