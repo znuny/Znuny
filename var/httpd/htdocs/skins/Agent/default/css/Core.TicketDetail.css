@@ -650,58 +650,59 @@ tbody td.Sender {
 /*
  * Article colors are rendered per article type as "background: <color> !important"
  * (Kernel/Output/CSS/ArticleColor.pm). Hover and selection therefore must not use
- * background, they are drawn as an inset overlay on top of the article color.
+ * background. The border of every cell is always present but transparent, so that
+ * marking a row only changes the border color and never the row height.
  */
-#ArticleTable tbody tr > td {
+#ArticleTable.DataTable tbody tr > td {
     cursor: pointer;
-    transition: box-shadow ease 0.15s;
+    transition: border-color ease 0.15s, filter ease 0.15s;
+    filter: saturate(0.5);
+    border-top: var(--border-width) var(--border-solid) transparent;
+    border-bottom: var(--border-width) var(--border-solid) transparent;
 }
 
-#ArticleTable tbody tr:hover > td {
-    box-shadow: inset 0 0 0 100vh var(--article-row-hover-overlay);
+#ArticleTable.DataTable tbody tr > td:first-child {
+    border-left: var(--border-width) var(--border-solid) transparent;
 }
 
-#ArticleTable tbody tr.Active > td {
-    box-shadow: inset 0 0 0 100vh var(--article-row-active-overlay);
+#ArticleTable.DataTable tbody tr > td:last-child {
+    border-right: var(--border-width) var(--border-solid) transparent;
 }
 
-#ArticleTable tbody tr.Active:hover > td {
-    box-shadow: inset 0 0 0 100vh var(--article-row-hover-overlay),
-                inset 0 0 0 100vh var(--article-row-active-overlay);
+#ArticleTable.DataTable tbody tr:hover > td,
+#ArticleTable.DataTable tbody tr.Active > td {
+    border-color: var(--article-row-active-accent);
+}
+
+/* The marked row is rounded on its outer corners only, so that the highlighted
+   row reads as a single element instead of separate cells. */
+#ArticleTable.DataTable tbody tr:hover > td:first-child,
+#ArticleTable.DataTable tbody tr.Active > td:first-child {
+    border-top-left-radius: var(--border-radius-xs);
+    border-bottom-left-radius: var(--border-radius-xs);
+}
+
+#ArticleTable.DataTable tbody tr:hover > td:last-child,
+#ArticleTable.DataTable tbody tr.Active > td:last-child {
+    border-top-right-radius: var(--border-radius-xs);
+    border-bottom-right-radius: var(--border-radius-xs);
+}
+
+/* Instead of adding another color, all rows are desaturated. The hovered and the
+   selected row keep their original article color and therefore stand out. */
+#ArticleTable.DataTable tbody tr:hover > td,
+#ArticleTable.DataTable tbody tr.Active > td {
+    filter: none;
 }
 
 #ArticleTable tbody tr > td:first-child {
     position: relative;
 }
 
-#ArticleTable tbody tr:hover > td:first-child::before,
-#ArticleTable tbody tr.Active > td:first-child::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 3px;
-    background: var(--article-row-active-accent);
-}
-
 .UseArticleColors tr:nth-child(even) td {
     transition: background ease 0.3s;
     background-color: var(--table-td-even-bg);
     border-color: #ccc;
-    border-bottom: 1px solid #eee;
-}
-
-.UseArticleColors tr.Active > td,
-.UseArticleColors tr.Active:hover > td {
-    background-color: var(--mail-outgoing-color);
-    border-color: var(--mail-outgoing-color);
-}
-
-.UseArticleColors tr:hover > td {
-    background-color: var(--primary-color-rgb);
-    border-color: var(--primary-color-rgb);
-    border-right-color: var(--primary-color-rgb);
 }
 
 .UseArticleColors tr.NotVisibleForCustomer > td {
@@ -710,21 +711,9 @@ tbody td.Sender {
     border-color: #e7abab;
 }
 
-.UseArticleColors tr.NotVisibleForCustomer.Active > td,
-.UseArticleColors tr.NotVisibleForCustomer:hover > td {
-    background-color: #e7abab;
-    border-color: #e7abab;
-}
-
 .UseArticleColors tr.system > td {
     background: #fff7be;
     border-bottom-color: #ffef80;
-    border-color: #ffef80;
-}
-
-.UseArticleColors tr.system.Active > td,
-.UseArticleColors tr.system:hover > td {
-    background-color: #ffef80;
     border-color: #ffef80;
 }
 
