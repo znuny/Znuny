@@ -344,6 +344,9 @@ sub TicketSearch {
     my $SortBy  = $Param{SortBy}  || 'Age';
     my $Limit   = $Param{Limit}   || 10000;
     $Param{ContentSearch} //= 'AND';
+    if ( $Param{ContentSearch} !~ m{\A(?:AND|OR)\z}i ) {
+        $Param{ContentSearch} = 'AND';
+    }
 
     my %SortOptions = (
         Owner                  => 'st.user_id',
