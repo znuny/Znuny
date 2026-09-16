@@ -2,6 +2,7 @@
  - 2026-09-10 Security: Fixed unauthenticated login via generic interface in combination with HTTP basic auth and request header containing username (REMOTE_USER in HTTP header). Thanks for reporting to Mokrane ABDELMALEK (via Ghent University VDP programme).
  - 2026-09-08 Security: Fixed SQL injection for parameter ContentSearch of ticket search. Thanks for reporting to Mokrane ABDELMALEK (via Ghent University VDP programme).
  - 2026-09-07 Changed: Kernel::SystemAddress::SystemAddressLookup is now case-insensitive when comparing system addresses.
+ - 2026-09-05 CVE-2026-48188: Fixed possible SQL injection in agent login.
  - 2026-09-03 Fixed: Ticket event to store customer company data in dynamic fields threw a warning if ticket had no customer ID set.
  - 2026-09-01 Fixed: Accounted time (time units) lost when working with drafts.
  - 2026-09-01 Fixed: Content type and attachment keys leaked into transition action modules (e.g. DynamicFieldSet) that treat every config key as a dynamic field name, causing the transition action to fail.
