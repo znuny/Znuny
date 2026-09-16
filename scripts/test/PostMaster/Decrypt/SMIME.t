@@ -157,8 +157,8 @@ if ( !$SMIMEObject ) {
 # Setup environment
 #
 
-my $Check1Hash       = 'f62a2257';
-my $Check2Hash       = '35c7d865';
+my $Check1Hash       = 'c594735a';
+my $Check2Hash       = '11c4333a';
 my $ZnunyRootCAHash  = '7835cf94';
 my $ZnunySub2CAHash  = 'b5d19fb9';
 my $ZnunySub1CAHash  = '19545811';
@@ -323,12 +323,14 @@ $Self->Is(
 );
 
 my $GetBody = $FirstArticle{Body};
-chomp($GetBody);
+
+# Decrypted S/MIME content is CRLF canonicalized, remove trailing line breaks.
+$GetBody =~ s{\s+\z}{};
 
 $Self->Is(
     $GetBody,
     'Hi',
-    "Body decrypted $FirstArticle{Body}",
+    "Body decrypted $GetBody",
 );
 
 # Delete needed test directories.
