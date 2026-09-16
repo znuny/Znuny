@@ -11,7 +11,7 @@
 # If you use this module, you should use as fallback the following
 # config settings:
 #
-# If use isn't login through apache ($ENV{REMOTE_USER} or $ENV{HTTP_REMOTE_USER})
+# If use isn't login through apache ($ENV{REMOTE_USER})
 # $Self->{LoginURL} = 'http://host.example.com/not-authorised-for-otrs.html';
 #
 # $Self->{LogoutURL} = 'http://host.example.com/thanks-for-using-otrs.html';
@@ -64,7 +64,7 @@ sub Auth {
     my ( $Self, %Param ) = @_;
 
     # get params
-    my $User       = $ENV{REMOTE_USER} || $ENV{HTTP_REMOTE_USER};
+    my $User       = $ENV{REMOTE_USER};
     my $RemoteAddr = $ENV{REMOTE_ADDR} || 'Got no REMOTE_ADDR env!';
 
     # return on no user
@@ -72,7 +72,7 @@ sub Auth {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'debug',
             Message  =>
-                "User: No \$ENV{REMOTE_USER} or \$ENV{HTTP_REMOTE_USER} !(REMOTE_ADDR: $RemoteAddr).",
+                "User: No \$ENV{REMOTE_USER}!(REMOTE_ADDR: $RemoteAddr).",
         );
         return;
     }

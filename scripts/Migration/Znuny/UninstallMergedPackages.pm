@@ -57,6 +57,7 @@ sub Run {
         'Znuny-SMTPRateLimit',
         'Znuny4OTRS-HideErrors',
         'Znuny-HideErrors',
+        'Znuny-Bugfix1645',
     );
 
     PACKAGENAME:
