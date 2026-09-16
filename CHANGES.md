@@ -1,4 +1,4 @@
-# 7.3.7 2026-??-??
+# 7.3.7 2026-09-16
  - 2026-09-10 Security: Fixed unauthenticated login via generic interface in combination with HTTP basic auth and request header containing username (REMOTE_USER in HTTP header). Thanks for reporting to Mokrane ABDELMALEK (via Ghent University VDP programme).
  - 2026-09-08 Security: Fixed SQL injection for parameter ContentSearch of ticket search. Thanks for reporting to Mokrane ABDELMALEK (via Ghent University VDP programme).
  - 2026-09-07 Changed: Kernel::SystemAddress::SystemAddressLookup is now case-insensitive when comparing system addresses.
@@ -689,6 +689,18 @@
  - 2022-08-22 Core.UI.InputFields.js - Changed the behaviour of the Core.UI.InputFields.js. Now no fields are automatically enlarged or reduced.
  - 2022-08-08 Admin - Added counter of AdminSettingPages per widget and additional focus by filter.
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
+
+# 6.5.25 2026-09-16
+ - 2026-09-08 Security: Fixed SQL injection for parameter ContentSearch of ticket search. Thanks for reporting to Mokrane ABDELMALEK (via Ghent University VDP programme).
+ - 2026-09-07 Security: Fixed unauthenticated login via generic interface in combination with HTTP basic auth and request header containing username (REMOTE_USER in HTTP header). Thanks for reporting to Mokrane ABDELMALEK (via Ghent University VDP programme).
+ - 2026-09-07 Changed: Kernel::SystemAddress::SystemAddressLookup is now case-insensitive when comparing system addresses.
+ - 2026-09-05 CVE-2026-48188: Fixed possible SQL injection in agent login.
+ - 2026-09-04 Fixed: Ticket event to store customer company data in dynamic fields threw a warning if ticket had no customer ID set.
+ - 2026-09-03 Security: Updated nunjucks from version 3.2.3 to 3.2.4.
+ - 2026-09-01 Fixed: Ticket search Newer/Older Date and Minutes filters no longer match tickets that fall exactly on the given time. Thanks to @martinpintar-pixel for reporting the issue. [#840](https://github.com/znuny/Znuny/issues/840)
+ - 2026-09-01 Fixed: Content type and attachment keys leaked into transition action modules (e.g. DynamicFieldSet) that treat every config key as a dynamic field name, causing the transition action to fail.
+ - 2026-08-20 Fixed: agent/customer re-direction after accepting initial information dialog (AgentInfo/CustomerAccept).
+ - 2026-08-12 Fixed: Some ticket attributes are not properly inserted into OTRS_TICKET_* placeholders.
 
 # 6.5.24 2026-08-19
  - 2026-08-17 Changed: REST transport module now keeps query parameters that don't contain placeholders.
