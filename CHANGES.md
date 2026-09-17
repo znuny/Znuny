@@ -1,4 +1,5 @@
 # 7.3.8 2026-??-??
+ - 2026-09-17 Fixed: AdminDynamicFieldScreenConfiguration lists dynamic fields of all object types.
  - 2026-09-17 Fixed: Alignment of accounted time in ticket details.
 
 # 7.3.7 2026-09-16
