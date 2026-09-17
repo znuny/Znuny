@@ -134,3 +134,14 @@ make some content near border radius visible */
 .ck-toolbar__items .ck-labeled-field-view .ck-label {
     min-height: unset;
 }
+
+/* prevent content with oversized images (e.g. logos without a preserved width, see
+Core.RichTextEditor.InternalArticleStyles.css) from stretching the editor container itself */
+.ck-editor {
+    max-width: 100%;
+    min-width: 0;
+}
+
+.ck-editor .ck-editor__editable {
+    overflow-x: auto;
+}

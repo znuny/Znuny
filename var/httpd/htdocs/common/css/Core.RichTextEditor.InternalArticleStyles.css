@@ -106,6 +106,19 @@ body.ck.ck-content hr{
     border:0;
 }
 
+/* all: revert (above) strips the width/height that browsers derive from the HTML width/height
+   attributes on <img> (e.g. logos in a quoted signature). Core.UI.RichTextEditor.js promotes the
+   width attribute to an inline style to survive the revert, but CKEditor's own content CSS still
+   sets flex-grow: 1 on inline images, stretching them to fill the available space regardless of
+   the inline width. Only images that carry an explicit width attribute are affected. */
+.ck.ck-content img {
+    max-width: 100%;
+}
+
+.ck.ck-content .image-inline img[width] {
+    flex-grow: 0;
+}
+
 .ck.ck-content html, .ck.ck-content body, .ck.ck-content div, .ck.ck-content span, .ck.ck-content applet, .ck.ck-content object, .ck.ck-content iframe,
 .ck.ck-content h1, .ck.ck-content h2, .ck.ck-content h3, .ck.ck-content h4, .ck.ck-content h5, .ck.ck-content h6, .ck.ck-content p, .ck.ck-content blockquote, .ck.ck-content pre,
 .ck.ck-content a, .ck.ck-content abbr, .ck.ck-content acronym, .ck.ck-content address, .ck.ck-content big, .ck.ck-content cite, .ck.ck-content code,
