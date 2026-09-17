@@ -1,3 +1,6 @@
+# 7.3.8 2026-??-??
+ - 2026-09-17 Fixed: Alignment of accounted time in ticket details.
+
 # 7.3.7 2026-09-16
  - 2026-09-10 Security: Fixed unauthenticated login via generic interface in combination with HTTP basic auth and request header containing username (REMOTE_USER in HTTP header). Thanks for reporting to Mokrane ABDELMALEK (via Ghent University VDP programme).
  - 2026-09-08 Security: Fixed SQL injection for parameter ContentSearch of ticket search. Thanks for reporting to Mokrane ABDELMALEK (via Ghent University VDP programme).
