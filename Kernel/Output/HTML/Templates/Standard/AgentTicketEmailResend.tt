@@ -25,7 +25,6 @@
                                 <input type="hidden" name="InReplyTo" value="[% Data.InReplyTo | html %]"/>
                                 <input type="hidden" name="References" value="[% Data.References | html %]"/>
                                 <input type="hidden" name="FormID" value="[% Data.FormID | html %]"/>
-                                <input type="hidden" name="IsVisibleForCustomerPresent" value="1"/>
 
                                 [% RenderBlockStart("PropertiesLockNotify") %]
                                     [% INCLUDE "Modules/Alert.tt"
@@ -386,7 +385,6 @@
                                                                 <label for="IsVisibleForCustomer">[% Translate("Visible for customer") | html %]</label>
                                                                 <div class="Field">
                                                                     <input type="checkbox" id="IsVisibleForCustomer" name="IsVisibleForCustomer" value="1" [% IF Data.IsVisibleForCustomer %]checked="checked"[% END %] />
-                                                                    <input type="hidden" name="IsVisibleForCustomerPresent" value="1" />
                                                                 </div>
                                                             </div>
 

@@ -195,7 +195,7 @@ sub Run {
     for my $Needed (
         qw(
         To Cc Bcc Subject Body InReplyTo References ResponseID ReplyArticleID StateID ArticleID
-        IsVisibleForCustomerPresent IsVisibleForCustomer TimeUnits Year Month Day Hour Minute FormID ReplyAll
+        IsVisibleForCustomer TimeUnits Year Month Day Hour Minute FormID ReplyAll
         FormDraftID Title
         ServiceID SLAID TypeID NewPriorityID
         )
@@ -471,6 +471,8 @@ sub Run {
         if ( !$Self->{LoadedFormDraftID} ) {
             $LayoutObject->ChallengeTokenCheck();
         }
+
+        $GetParam{IsVisibleForCustomer} //= 0;
 
         # get valid state id
         if ( !$GetParam{StateID} ) {
@@ -1052,11 +1054,6 @@ sub Run {
             );
         }
 
-        my $IsVisibleForCustomer = $Config->{IsVisibleForCustomerDefault};
-        if ( $GetParam{IsVisibleForCustomerPresent} ) {
-            $IsVisibleForCustomer = $GetParam{IsVisibleForCustomer} ? 1 : 0;
-        }
-
         # Get attributes like sender address
         my %Data = $Kernel::OM->Get('Kernel::System::TemplateGenerator')->Attributes(
             TicketID => $Self->{TicketID},
@@ -1066,7 +1063,7 @@ sub Run {
 
         # send email
         my $ArticleID = $ArticleBackendObject->ArticleSend(
-            IsVisibleForCustomer => $IsVisibleForCustomer,
+            IsVisibleForCustomer => $GetParam{IsVisibleForCustomer},
             SenderType           => 'agent',
             TicketID             => $Self->{TicketID},
             HistoryType          => 'SendAnswer',
@@ -2160,17 +2157,7 @@ sub _Mask {
         Class => 'Modernize',
     );
 
-    my $IsVisibleForCustomer = $Config->{IsVisibleForCustomerDefault};
-    if ( $Param{GetParam}->{IsVisibleForCustomerPresent} ) {
-        $IsVisibleForCustomer = $Param{GetParam}->{IsVisibleForCustomer} ? 1 : 0;
-    }
-
-    $LayoutObject->Block(
-        Name => 'IsVisibleForCustomer',
-        Data => {
-            IsVisibleForCustomer => $IsVisibleForCustomer,
-        },
-    );
+    $Param{IsVisibleForCustomer} //= $Config->{IsVisibleForCustomerDefault};
 
     # get ticket object
     my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');

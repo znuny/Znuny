@@ -611,6 +611,8 @@ sub SendEmail {
     my @MultipleCustomerCc  = @{ $GetParamExtended{MultipleCustomerCc} };
     my @MultipleCustomerBcc = @{ $GetParamExtended{MultipleCustomerBcc} };
 
+    $GetParam{IsVisibleForCustomer} //= 0;
+
     my %DynamicFieldValues;
 
     # get config object
@@ -2220,9 +2222,7 @@ sub _Mask {
         );
     }
 
-    if ( !$Param{IsVisibleForCustomerPresent} ) {
-        $Param{IsVisibleForCustomer} = $Config->{IsVisibleForCustomerDefault};
-    }
+    $Param{IsVisibleForCustomer} //= $Config->{IsVisibleForCustomerDefault};
 
     # prepare errors!
     if ( $Param{Errors} ) {
@@ -2624,7 +2624,7 @@ sub _GetExtendedParams {
     # get params
     my %GetParam;
     for my $Key (
-        qw(To Cc Bcc Subject Body ComposeStateID IsVisibleForCustomer IsVisibleForCustomerPresent
+        qw(To Cc Bcc Subject Body ComposeStateID IsVisibleForCustomer
         ArticleID TimeUnits Year Month Day Hour Minute FormID FormDraftID Title StandardTemplateID
         ServiceID SLAID TicketID TypeID NewPriorityID
         )
