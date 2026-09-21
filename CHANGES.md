@@ -1,4 +1,5 @@
 # 7.3.8 2026-??-??
+ - 2026-09-18 Fixed: "Mark article" link in ticket zoom not working.
  - 2026-09-17 Fixed: AdminDynamicFieldScreenConfiguration lists dynamic fields of all object types.
  - 2026-09-17 Fixed: Alignment of accounted time in ticket details.
  - 2026-09-01 Fixed: Images with explicit HTML width/height attributes (e.g. logos in quoted email signatures) were stretched to fill their container. Thanks to @AVONON-DST for reporting the issue. [#743](https://github.com/znuny/Znuny/issues/743)

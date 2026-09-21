@@ -7,9 +7,16 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
+[% MarkItemName = 'Mark' %]
+[% FOREACH Item IN Data.MenuItems %]
+    [% IF Item.Link.match('Subaction=MarkAsImportant') %]
+        [% MarkItemName = Item.Name %]
+    [% END %]
+[% END %]
+
 <div class="ItemActions">
     <ul class="Actions-Mobile-List">
-        <li>Mark</li>
+        <li class="mobile-action-mark">[% Translate(MarkItemName) | html %]</li>
         <li class="mobile-action-option">Options</li>
     </ul>
 
