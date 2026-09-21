@@ -25,6 +25,16 @@ sub new {
     my $Self = {%Param};
     bless( $Self, $Type );
 
+    $Self->{AdminACLPermission} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Permission(
+        Action => 'AdminACL',
+        Type   => 'rw',
+    );
+
+    $Self->{AdminSystemConfigurationPermission} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Permission(
+        Action => 'AdminSystemConfiguration',
+        Type   => 'rw',
+    );
+
     return $Self;
 }
 
@@ -68,6 +78,9 @@ sub Run {
     my $ProcessObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process');
     my $StateObject   = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process::State');
     my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+
+    $Param{AdminACLPermission}                 = $Self->{AdminACLPermission};
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     # ------------------------------------------------------------ #
     # ProcessImport
@@ -1599,6 +1612,9 @@ sub _ShowOverview {
     my ( $Self, %Param ) = @_;
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    $Param{AdminACLPermission}                 = $Self->{AdminACLPermission};
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     my $Output = $LayoutObject->Header();
     $Output .= $LayoutObject->NavigationBar();
