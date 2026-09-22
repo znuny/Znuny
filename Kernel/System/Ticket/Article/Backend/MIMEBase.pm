@@ -648,7 +648,7 @@ sub ArticleCreate {
     if (
         $FirstArticle &&
         $Param{HistoryType}
-        =~ /^(EmailAgent|EmailCustomer|PhoneCallCustomer|WebRequestCustomer|SystemRequest)$/i
+        =~ /^(AddNote|EmailAgent|EmailCustomer|PhoneCallAgent|PhoneCallCustomer|WebRequestCustomer|SystemRequest)$/i
         )
     {
         # trigger notification event

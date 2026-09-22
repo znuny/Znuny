@@ -1,4 +1,5 @@
 # 6.5.26 2026-??-??
+ - 2026-09-18 Fixed: Notification to agent who created the ticket is not working for some ticket types.
  - 2026-09-17 Fixed: AdminDynamicFieldScreenConfiguration lists dynamic fields of all object types.
 
 # 6.5.25 2026-09-16
