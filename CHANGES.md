@@ -1,4 +1,5 @@
 # 7.3.8 2026-??-??
+ - 2026-09-22 Fixed: Form action buttons hidden behind Safari bottom toolbar on iOS. Thanks to @avononit for reporting the issue. [#667](https://github.com/znuny/Znuny/issues/667)
  - 2026-09-18 Fixed: "Mark article" link in ticket zoom not working.
  - 2026-09-17 Fixed: AdminDynamicFieldScreenConfiguration lists dynamic fields of all object types.
  - 2026-09-17 Fixed: Alignment of accounted time in ticket details.
