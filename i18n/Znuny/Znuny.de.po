@@ -24443,11 +24443,11 @@ msgstr "Die Übersetzungen in der Datenbank sind nicht synchron. Bitte synchroni
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Frontend module registration for the agent admin interface."
-msgstr ""
+msgstr "Frontend-Modulregistrierung im Agent-Admin-Interface."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "This configuration defines the cache settings for the Znuny-DatabasBackend (default: 1 day)."
-msgstr ""
+msgstr "Diese Konfiguration definiert die Cache-Einstellungen für das Znuny-DatabasBackend (Standard: 1 Tag)."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Defines a module to display a notification if translation deployment is needed."
@@ -25299,11 +25299,11 @@ msgstr "Ticketinformation"
 
 #. Perl Module: Kernel/Modules/AgentSession.pm
 msgid "Invalid subaction!"
-msgstr ""
+msgstr "Ungültige Unteraktion!"
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "List of session keys that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession."
-msgstr ""
+msgstr "Liste der Sitzungsschlüssel, die durch die Unteraktion UpdateAJAX des Frontend-Moduls AgentSession aktualisiert werden dürfen."
 
 #. SysConfig
 msgid "Agent Session."
@@ -25535,13 +25535,13 @@ msgstr "Erneutes Senden für diesen Artikel nicht möglich!"
 
 #. SysConfig
 msgid "As Popup"
-msgstr ""
+msgstr "Als Popup"
 
 #. SysConfig
 msgid "Blank"
-msgstr ""
+msgstr "Neues Fenster"
 
 #. SysConfig
 msgid "Self"
-msgstr ""
+msgstr "Gleiches Fenster"
 
