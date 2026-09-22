@@ -1680,6 +1680,9 @@ sub _DefaultReplacements {
     $Replacements{OTRS_TICKET_RESPONSIBLE} = $Replacements{OTRS_RESPONSIBLE};
     $Replacements{OTRS}                    = $Replacements{OTRS_NOTIFICATION_RECIPIENT};
 
+    # ZNUNY_TA_* is the same dummy pass-through as OTRS_TA_*, see its own definition above
+    $Replacements{ZNUNY_TA} = $Replacements{OTRS_TA};
+
     return \%Replacements;
 }
 

@@ -1,10 +1,12 @@
 # 7.3.8 2026-??-??
+ - 2026-09-22 Fixed: Misaligned all-day checkbox label in appointment dialog.
+ - 2026-09-22 Added: ZNUNY_TA_* tag support alongside OTRS_TA_* in transition action ArticleSend.
+ - 2026-09-22 Fixed: Transition action ArticleSend sends empty body/salutation/signature article if it's configured to use a standard template. Usage of any OTRS_TA_* tag should be fixed.
  - 2026-09-22 Fixed: Form action buttons hidden behind Safari bottom toolbar on iOS. Thanks to @avononit for reporting the issue. [#667](https://github.com/znuny/Znuny/issues/667)
  - 2026-09-18 Fixed: "Mark article" link in ticket zoom not working.
  - 2026-09-17 Fixed: AdminDynamicFieldScreenConfiguration lists dynamic fields of all object types.
  - 2026-09-17 Fixed: Alignment of accounted time in ticket details.
  - 2026-09-16 Fixed: Customer ticket process: Subject field is incorrectly indented.
- - 2026-09-14 Fixed: Misaligned all-day checkbox label in appointment dialog.
  - 2026-09-01 Fixed: Images with explicit HTML width/height attributes (e.g. logos in quoted email signatures) were stretched to fill their container. Thanks to @AVONON-DST for reporting the issue. [#743](https://github.com/znuny/Znuny/issues/743)
  - 2026-08-31 Fixed: Missing OutputFilterHook_NoTicketOptionsFallback in AgentTicketCompose and AgentTicketForward. Thanks to @scharfstuttgart for reporting the issue. [#846](https://github.com/znuny/Znuny/issues/846)
 
