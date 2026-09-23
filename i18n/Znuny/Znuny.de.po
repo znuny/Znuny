@@ -16282,7 +16282,7 @@ msgstr "ACL Modul das erlaubt Eltern-Tickets nur dann zu schließen, wenn alle s
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Access Control Lists (ACL)"
-msgstr "Access-Control-Lists (ACL)"
+msgstr "Aktionskontrolllisten (ACL)"
 
 #. SysConfig
 msgid "AccountedTime"
@@ -18326,35 +18326,35 @@ msgstr "Steuert den Ticketstatus, nachdem eine Notiz über den \"Ausgehender Anr
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the default ticket order (after priority sort) in the escalation view of the agent interface. Up: oldest on top. Down: latest on top."
-msgstr "Steuert die Ticket-Sortierung (nach der Sortierung nach Priorität) für die Eskalations-Ansicht des Agentenbereichs. Auf: Älteste oben. Ab: Neuste oben."
+msgstr "Steuert die Ticket-Sortierung (nach der Sortierung nach Priorität) für die Eskalations-Ansicht des Agentenbereichs. Aufsteigend: älteste zuerst. Absteigend: neueste zuerst."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the default ticket order (after priority sort) in the status view of the agent interface. Up: oldest on top. Down: latest on top."
-msgstr "Steuert die Ticket-Sortierung (nach der Sortierung nach Priorität) für die Status-Ansicht des Agentenbereichs. Auf: Älteste oben. Ab: Neuste oben."
+msgstr "Steuert die Ticket-Sortierung (nach der Sortierung nach Priorität) für die Status-Ansicht des Agentenbereichs. Aufsteigend: älteste zuerst. Absteigend: neueste zuerst."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the default ticket order in the responsible view of the agent interface. Up: oldest on top. Down: latest on top."
-msgstr "Steuert die Ticket-Sortierung für die Verantwortlicher-Ansicht des Agentenbereichs. Auf: Älteste oben. Ab: Neuste oben."
+msgstr "Steuert die Ticket-Sortierung für die Verantwortlicher-Ansicht des Agentenbereichs. Aufsteigend: älteste zuerst. Absteigend: neueste zuerst."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the default ticket order in the ticket locked view of the agent interface. Up: oldest on top. Down: latest on top."
-msgstr "Steuert die Ticket-Sortierung für die Gesperrt-Ansicht des Agentenbereichs. Auf: Älteste oben. Ab: Neuste oben."
+msgstr "Steuert die Ticket-Sortierung für die Gesperrt-Ansicht des Agentenbereichs. Aufsteigend: älteste zuerst. Absteigend: neueste zuerst."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the default ticket order in the ticket search result of the agent interface. Up: oldest on top. Down: latest on top."
-msgstr "Steuert die Ticket-Sortierung für die Suchergebnis-Ansicht des Agentenbereichs. Auf: Älteste oben. Ab: Neuste oben."
+msgstr "Steuert die Ticket-Sortierung für die Suchergebnis-Ansicht des Agentenbereichs. Aufsteigend: älteste zuerst. Absteigend: neueste zuerst."
 
 #. XML Definition: Kernel/Config/Files/XML/GenericInterface.xml
 msgid "Defines the default ticket order in the ticket search result of the this operation. Up: oldest on top. Down: latest on top."
-msgstr "Steuert die Ticket-Sortierung für die Suchergebnis-Ansicht dieser Operation. Auf: Älteste oben. Ab: Neuste oben."
+msgstr "Steuert die Ticket-Sortierung für die Suchergebnis-Ansicht dieser Operation. Aufsteigend: älteste zuerst. Absteigend: neueste zuerst."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the default ticket order in the watch view of the agent interface. Up: oldest on top. Down: latest on top."
-msgstr "Steuert die Ticket-Sortierung für die Beobachten-Ansicht des Agentenbereichs. Auf: Älteste oben. Ab: Neuste oben."
+msgstr "Steuert die Ticket-Sortierung für die Beobachten-Ansicht des Agentenbereichs. Aufsteigend: älteste zuerst. Absteigend: neueste zuerst."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the default ticket order of a search result in the customer interface. Up: oldest on top. Down: latest on top."
-msgstr "Steuert die Ticket-Sortierung für die Suchergebnis-Ansicht des Kundenbereichs. Auf: Älteste oben. Ab: Neuste oben."
+msgstr "Steuert die Ticket-Sortierung für die Suchergebnis-Ansicht des Kundenbereichs. Aufsteigend: älteste zuerst. Absteigend: neueste zuerst."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the default ticket priority in the close ticket screen of the agent interface."
@@ -23986,7 +23986,7 @@ msgstr "Deaktiviert (Einstellung \"Ja\") oder aktiviert (Einstellung \"Nein\", D
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessNotInstalled.tt
 msgid "To install this package, you need to update to OTRS %s or higher."
-msgstr ""
+msgstr "Um dieses Paket zu installieren, müssen Sie auf OTRS %s oder höher aktualisieren."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOTRSBusinessNotInstalled.tt
 msgid "Why should I keep OTRS up to date?"
@@ -24066,7 +24066,7 @@ msgstr "Zuletzt gesehen"
 
 #. SysConfig
 msgid "AJAX interface for the Webservice dynamic field backends."
-msgstr ""
+msgstr "AJAX-Schnittstelle für die Webservice-Dynamic-Field-Backends."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Access package repositories via HTTP or HTTPS."
@@ -24246,7 +24246,7 @@ msgstr "Ticket-Event-Modul zur Speicherung von Werten des gewählten Webservice-
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "URL to the OTRS cloud service proxy service. The http or https prefix will be added, depending on SysConfig option 'PackageRepositoryURLSchema'."
-msgstr ""
+msgstr "URL zum OTRS-Cloud-Service-Proxy. Das Präfix http oder https wird abhängig von der SysConfig-Option 'PackageRepositoryURLSchema' hinzugefügt."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "User agent string to use for the WebUserAgent module. Leave empty to use the default user agent string."
@@ -24722,7 +24722,7 @@ msgstr "Soll das Token und dessen Konfiguration wirklich gelöscht werden?"
 
 #. SysConfig
 msgid "AdminOAuth2TokenManagement"
-msgstr ""
+msgstr "AdminOAuth2TokenManagement"
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Agent interface notification module to see the number of tickets an agent is owner for. Additional access control to show or not show this link can be done by using Key \"Group\" and Content like \"rw:group1;move_into:group2\"."
@@ -24798,7 +24798,7 @@ msgstr "Definiert den Standard-Ticketbody für kalenderbasierte Tickets."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Defines the default ticket order in the owner view of the agent interface. Up: oldest on top. Down: latest on top."
-msgstr "Steuert die Ticket-Sortierung für die Besitzer-Ansicht des Agentenbereichs. Auf: Älteste oben. Ab: Neuste oben."
+msgstr "Steuert die Ticket-Sortierung für die Besitzer-Ansicht des Agentenbereichs. Aufsteigend: älteste zuerst. Absteigend: neueste zuerst."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Defines the default ticket priority for calendar based tickets."
@@ -24838,11 +24838,11 @@ msgstr "Ignoriert nicht ticketbezogene Attribute."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Loader module registration for AdminOAuth2TokenManagement."
-msgstr ""
+msgstr "Lade-Modulregistrierung für AdminOAuth2TokenManagement."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Loader module registration for AgentAppointmentEdit."
-msgstr ""
+msgstr "Lade-Modulregistrierung für AgentAppointmentEdit."
 
 #. SysConfig
 msgid "Manage OAuth2 tokens and their configurations."
@@ -24934,7 +24934,7 @@ msgstr "Reservierte Schlüsselwörter. Die folgenden Platzhalter sind nicht erla
 
 #. XML Definition: Kernel/Config/Files/XML/Daemon.xml
 msgid "If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if &lt;$OTRSHome&gt;/var/run/ can not be used."
-msgstr ""
+msgstr "Wenn aktiviert, verwendet der Daemon dieses Verzeichnis für seine PID-Dateien. Hinweis: Bitte stoppen Sie den Daemon vor jeder Änderung und verwenden Sie diese Einstellung nur, wenn &lt;$OTRSHome&gt;/var/run/ nicht genutzt werden kann."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the default value for the action parameter."
@@ -24946,23 +24946,23 @@ msgstr "Ereignis-Modul Registrierung. Für mehr Leistung können Sie ein Trigger
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
 msgid "Dynamic fields groups for process widget. The key is the name of the group, the value contains the fields to be shown. Example: 'Key =&gt; My Group', 'Content: Name_X, NameY'."
-msgstr ""
+msgstr "Gruppen dynamischer Felder für das Prozess-Widget. Der Schlüssel ist der Name der Gruppe, der Wert enthält die anzuzeigenden Felder. Beispiel: 'Key =&gt; Meine Gruppe', 'Content: Name_X, NameY'."
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
 msgid "Filter for debugging Transitions. Note: More filters can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;."
-msgstr ""
+msgstr "Filter zum Debuggen von Transitions. Hinweis: Weitere Filter können im Format &lt;OTRS_TICKET_Attribute&gt; hinzugefügt werden, z. B. &lt;OTRS_TICKET_Priority&gt;."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows having a small format ticket overview (CustomerInfo =&gt; 1 - shows also the customer information)."
-msgstr ""
+msgstr "Ermöglicht eine Ticketübersicht im kleinen Format (CustomerInfo =&gt; 1 – zeigt auch die Kundeninformationen)."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows having a medium format ticket overview (CustomerInfo =&gt; 1 - shows also the customer information)."
-msgstr ""
+msgstr "Ermöglicht eine Ticketübersicht im mittleren Format (CustomerInfo =&gt; 1 – zeigt auch die Kundeninformationen)."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Shows a preview of the ticket overview (CustomerInfo =&gt; 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info)."
-msgstr ""
+msgstr "Zeigt eine Vorschau der Ticketübersicht (CustomerInfo =&gt; 1 – zeigt auch Kundeninformationen, CustomerInfoMaxSize = maximale Zeichenanzahl der Kundeninformationen)."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows extended search conditions in ticket search of the agent interface. With this feature you can search e. g. ticket title with this kind of conditions like \"(*key1*&amp;&amp;*key2*)\" or \"(*key1*||*key2*)\"."
@@ -24970,11 +24970,11 @@ msgstr "Ermöglicht erweiterte Suchbedingungen in der Ticketsuche der Agentensch
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Determines the strings that will be shown as recipient (To:) of the phone ticket and as sender (From:) of the email ticket in the agent interface. For Queue as NewQueueSelectionType \"&lt;Queue&gt;\" shows the names of the queues and for SystemAddress \"&lt;Realname&gt; &lt;&lt;Email&gt;&gt;\" shows the name and email of the recipient."
-msgstr ""
+msgstr "Bestimmt die Zeichenketten, die als Empfänger (An:) des Telefon-Tickets und als Absender (Von:) des E-Mail-Tickets in der Agentenoberfläche angezeigt werden. Bei Queue als NewQueueSelectionType \"&lt;Queue&gt;\" zeigt die Namen der Queues und bei SystemAddress \"&lt;Realname&gt; &lt;&lt;Email&gt;&gt;\" Name und E-Mail des Empfängers."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Determines the strings that will be shown as recipient (To:) of the ticket in the customer interface. For Queue as CustomerPanelSelectionType, \"&lt;Queue&gt;\" shows the names of the queues, and for SystemAddress, \"&lt;Realname&gt; &lt;&lt;Email&gt;&gt;\" shows the name and email of the recipient."
-msgstr ""
+msgstr "Bestimmt die Zeichenketten, die als Empfänger (An:) des Tickets in der Kundenoberfläche angezeigt werden. Bei Queue als CustomerPanelSelectionType zeigt \"&lt;Queue&gt;\" die Namen der Queues und bei SystemAddress \"&lt;Realname&gt; &lt;&lt;Email&gt;&gt;\" Name und E-Mail des Empfängers."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows extended search conditions in ticket search of the customer interface. With this feature you can search e. g. ticket title with this kind of conditions like \"(*key1*&amp;&amp;*key2*)\" or \"(*key1*||*key2*)\"."
@@ -24986,15 +24986,15 @@ msgstr "Ermöglicht erweiterte Suchbedingungen in der Ticketsuche der generische
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;."
-msgstr ""
+msgstr "Filter zum Debuggen von ACLs. Hinweis: Weitere Ticket-Attribute können im Format &lt;OTRS_TICKET_Attribute&gt; hinzugefügt werden, z. B. &lt;OTRS_TICKET_Priority&gt;."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Module to filter and manipulate incoming messages. Get a 4 digit number to ticket free text, use regex in Match e. g. From =&gt; '(.+?)@.+?', and use () as [***] in Set =&gt;."
-msgstr ""
+msgstr "Modul zum Filtern und Bearbeiten eingehender Nachrichten. Extrahiert eine 4-stellige Nummer in ein Ticket-Freitextfeld; Regex in Match verwenden, z. B. From =&gt; '(.+?)@.+?', und () als [***] in Set =&gt;."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event."
-msgstr ""
+msgstr "Event-Modul-Registrierung. Für mehr Performance können Sie ein Trigger-Event definieren (z. B. Event =&gt; TicketCreate). Dies ist nur möglich, wenn alle Ticket-Dynamikfelder dasselbe Event benötigen."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Enables support for huge XML data in load_xml calls of CPAN library XML::LibXML. This should only be enabled if absolutely needed. Disabling this option (default) protects against denial of service through entity expansion attacks. Before enabling this option ensure that alternative measures to protect the application against this type of attack have been taken."
@@ -25330,7 +25330,7 @@ msgstr "Legt fest, ob fred sichtbar oder verborgen ist."
 
 #. SysConfig
 msgid "Which order should the config log data have?"
-msgstr ""
+msgstr "In welcher Reihenfolge sollen die Konfigurations-Logdaten vorliegen?"
 
 #. SysConfig
 msgid "Internal"
@@ -25338,7 +25338,7 @@ msgstr "Intern"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentCalendarOverview.tt
 msgid "Filter for Appointments"
-msgstr ""
+msgstr "Filter für Termine"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminOAuth2TokenManagement/Edit.tt
 msgid "URL for authorization code"
@@ -25442,23 +25442,23 @@ msgstr "Verwandte Aktionen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
 msgid "Relatd Actions"
-msgstr ""
+msgstr "Verwandte Aktionen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
 msgid "Queues ↔ AUto Responses"
-msgstr ""
+msgstr "Queues ↔ Auto-Antworten"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Customers Users"
-msgstr ""
+msgstr "Kundenbenutzer"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
 msgid "Agents  ↔ Groups"
-msgstr ""
+msgstr "Agenten ↔ Gruppen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGroup.tt
 msgid "Customer ↔ Groups"
-msgstr ""
+msgstr "Kunde ↔ Gruppen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPriority.tt
 msgid "Configure Priority Visibility and Defaults"
@@ -25466,7 +25466,7 @@ msgstr "Prioritätssichtbarkeit und Standardeinstellungen konfigurieren"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
 msgid "Add a Dynamic Field"
-msgstr ""
+msgstr "Dynamisches Feld hinzufügen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Manage Process Widget Groups"
@@ -25474,11 +25474,11 @@ msgstr "Prozess-Widget-Gruppen verwalten"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Add a Generic Agent Job"
-msgstr ""
+msgstr "Generic-Agent-Auftrag hinzufügen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Add an ACL"
-msgstr ""
+msgstr "ACL hinzufügen"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminQueue.tt
 msgid "Configure Working Hours"
@@ -25506,7 +25506,7 @@ msgstr "Statustyp-Sichtbarkeit und Standardeinstellungen konfigurieren"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Action Control Lists"
-msgstr ""
+msgstr "Access Control Lists"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Generic Agents"
@@ -25618,7 +25618,7 @@ msgstr "Wählen Sie die maximale Anzahl angezeigter Artikel pro Seite in der Tic
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the selectable format tags in the rich text editor."
-msgstr ""
+msgstr "Legt die auswählbaren Format-Tags im Rich-Text-Editor fest."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Start date (YYYYMMDD) of the range to use when parsing ICS files. The used CPAN module iCal::Parser needs this to be able to parse ICS files with events in a year before the current one. The end date of the range is automatically set to 10 years in the future from the time of parsing/execution."
@@ -25786,15 +25786,15 @@ msgstr "Die folgenden JavaScript-Dateien werden mehrfach geladen:"
 
 #. XML Definition: scripts/database/initial_insert.xml
 msgid "Group for time accounting web service access."
-msgstr ""
+msgstr "Gruppe für den Webservice-Zugriff auf die Zeiterfassung."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Adds the following elements for use in stats: \"Agent/Owner\", \"Created by Agent/Owner\", \"Responsible\", \"Accounted time by Agent\"."
-msgstr ""
+msgstr "Fügt die folgenden Elemente für die Verwendung in Statistiken hinzu: „Agent/Besitzer“, „Erstellt von Agent/Besitzer“, „Verantwortlicher“, „Erfasste Zeit durch Agent“."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active."
-msgstr ""
+msgstr "Erlaubt die Verwendung ungültiger Agenten in Statistiken. Stats::UseAgentElementInStats muss aktiv sein."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicFieldScreenConfiguration.tt
 msgid "Overview Default Columns"
@@ -25818,11 +25818,11 @@ msgstr "Sie können einen Übergang nicht bearbeiten, bevor er mit zwei Aktivit�
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input."
-msgstr ""
+msgstr "Fügt die Feldzuordnung für AgentTicketActionCommon bei einer unbekannten Aktion hinzu. Wird von Znuny.Form.Input verwendet."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values."
-msgstr ""
+msgstr "Aktiviert historische Werte zur Auswahl bei Dynamikfeld-Typen auf Basis von BaseSelect (Dropdown und Multiselect). Deaktivieren Sie dies bei Performance-Problemen durch zu viele unterschiedliche gespeicherte Werte."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Do not verify the signer's certificate of a signed message."
@@ -25850,11 +25850,11 @@ msgstr "Wendet das mit 'SendmailModule::RateLimit' festgelegte Limit je Absender
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Defines the default ticket attribute for ticket sorting in the mention ticket view of the agent interface."
-msgstr ""
+msgstr "Bestimmt das Standard-Ticket-Attribut für das Sortieren der Tickets in der Mention-Ticket-Ansicht der Agentenoberfläche."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Defines the default ticket order in the ticket mention view of the agent interface. Up: oldest on top. Down: latest on top."
-msgstr ""
+msgstr "Steuert die Ticket-Sortierung für die Mention-Ansicht der Agentenoberfläche. Auf: Älteste oben. Ab: Neueste oben."
 
 #. Perl Module: Kernel/Modules/AdminMailAccount.pm
 msgid "Error fetching mail%s, please check the Communication Log!"
@@ -25882,7 +25882,7 @@ msgstr "Wenn Supportdaten über den SupportDataCollector erfasst werden, werden 
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view."
-msgstr ""
+msgstr "Aktiviert die Ticketsuche mit dem Admin-Benutzer (ID 1) statt mit dem angemeldeten Benutzer. Betrifft nur diese Ansicht."
 
 #. Perl Module: Kernel/Modules/AdminTemplateAttachment.pm
 msgid "The selected template type does not support attachments."

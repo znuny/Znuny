@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.996466431095406;
+    $Self->{Completeness}        = 1;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1528,7 +1528,7 @@ sub Data {
         'Everything else will be done as part of your contract.' => 'Alles Weitere wird als Teil Ihres Vertrages durchgeführt.',
         'Your installed OTRS version is %s.' => 'Die Version Ihres installierten OTRS ist %s.',
         'To install this package, you need to update to OTRS %s or higher.' =>
-            '',
+            'Um dieses Paket zu installieren, müssen Sie auf OTRS %s oder höher aktualisieren.',
         'To install this package, the Maximum OTRS Version is %s.' => 'Um dieses Paket zu installieren, können sie OTRS bis maximal zur Version %s verwenden.',
         'To install this package, the required Framework version is %s.' =>
             'Um dieses Paket zu installieren, wird die Framework-Version %s benötigt.',
@@ -1728,7 +1728,7 @@ sub Data {
             'Um einen neuen Prozess zu erstellen, können Sie entweder einen Prozess aus einem anderen System importieren, oder einen ganz neuen erstellen.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'Änderungen an den Prozessen wirken sich erst dann aus, wenn Sie die Prozesskonfiguration synchronisieren. Dabei werden alle Änderungen in die Systemkonfiguration übernommen.',
-        'Access Control Lists (ACL)' => 'Access-Control-Lists (ACL)',
+        'Access Control Lists (ACL)' => 'Aktionskontrolllisten (ACL)',
         'Generic Agent' => 'Generic Agent',
         'Manage Process Widget Groups' => 'Prozess-Widget-Gruppen verwalten',
         'Processes' => 'Prozesse',
@@ -5671,7 +5671,7 @@ sub Data {
         'Type of daemon log rotation to use: Choose \'OTRS\' to let OTRS system to handle the file rotation, or choose \'External\' to use a 3rd party rotation mechanism (i.e. logrotate). Note: External rotation mechanism requires its own and independent configuration.' =>
             'Art der Logrotation, die vom Daemon genutzt werden soll. Wählen Sie "OTRS", um das System die Rotation verwalten zu lassen oder "extern", um eine Drittapplikation dafür zu nutzen (z. B. logrotate). Hinweis: externe Mechanismen erfordern weiterhin eine eigene Konfiguration.',
         'If enabled the daemon will use this directory to create its PID files. Note: Please stop the daemon before any change and use this setting only if &lt;$OTRSHome&gt;/var/run/ can not be used.' =>
-            '',
+            'Wenn aktiviert, verwendet der Daemon dieses Verzeichnis für seine PID-Dateien. Hinweis: Bitte stoppen Sie den Daemon vor jeder Änderung und verwenden Sie diese Einstellung nur, wenn &lt;$OTRSHome&gt;/var/run/ nicht genutzt werden kann.',
         'Defines the number of days to keep the daemon log files.' => 'Definiert die Aufbewahrungszeit für die Daemon Log-Dateien in Tagen.',
         'If enabled the daemon will redirect the standard output stream to a log file.' =>
             'Aktivieren um die Standard-Ausgabe des Daemons in eine Log-Datei umzuleiten.',
@@ -5808,7 +5808,7 @@ sub Data {
             'Steuert die Höhe der Richtext-Editor-Komponente. Geben Sie eine Zahl (für die Höhe in Pixeln) oder einen prozentualen Wert (für eine relative Höhe) an.',
         'Defines the selectable font sizes in the rich text editor.' => 'Legt die wählbaren Schriftgrößen im Rich-Text-Editor fest.',
         'Defines the selectable fonts in the rich text editor.' => 'Legt die auswählbaren Schriftarten im Rich-Text-Editor fest.',
-        'Defines the selectable format tags in the rich text editor.' => '',
+        'Defines the selectable format tags in the rich text editor.' => 'Legt die auswählbaren Format-Tags im Rich-Text-Editor fest.',
         'Defines additional plugins for use in the rich text editor.' => 'Definiert zusätzliche Plugins für die Verwendung im Rich-Text-Editor.',
         'Defines extra content that is allowed for use in the rich text editor.' =>
             'Definiert zusätzliche Inhalte, die für die Verwendung im Rich-Text-Editor zugelassen sind.',
@@ -6275,9 +6275,9 @@ sub Data {
         'Allows agents to exchange the axis of a stat if they generate one.' =>
             'Erlaubt Agenten die Achsen einer Statistik zu tauschen, wenn sie eine Statistik generieren.',
         'Adds the following elements for use in stats: "Agent/Owner", "Created by Agent/Owner", "Responsible", "Accounted time by Agent".' =>
-            '',
+            'Fügt die folgenden Elemente für die Verwendung in Statistiken hinzu: „Agent/Besitzer“, „Erstellt von Agent/Besitzer“, „Verantwortlicher“, „Erfasste Zeit durch Agent“.',
         'Allows invalid agents to be used in stats. Stats::UseAgentElementInStats must be active.' =>
-            '',
+            'Erlaubt die Verwendung ungültiger Agenten in Statistiken. Stats::UseAgentElementInStats muss aktiv sein.',
         'Shows all the customer identifiers in a multi-select field (not useful if you have a lot of customer identifiers).' =>
             'Zeigt alle Kunden-Identifikatoren in einem Mehrfachauswahlfeld (nicht sinnvoll, wenn Sie sehr viele Identifikatoren haben).',
         'Shows all the customer user identifiers in a multi-select field (not useful if you have a lot of customer user identifiers).' =>
@@ -6441,7 +6441,7 @@ sub Data {
         'Defines the default ticket attribute for ticket sorting of the ticket search result of this operation.' =>
             'Bestimmt das Standard-Ticket-Attribut für das Sortieren der Tickets im Ticket-Suchergebnis von dieser Operation.',
         'Defines the default ticket order in the ticket search result of the this operation. Up: oldest on top. Down: latest on top.' =>
-            'Steuert die Ticket-Sortierung für die Suchergebnis-Ansicht dieser Operation. Auf: Älteste oben. Ab: Neuste oben.',
+            'Steuert die Ticket-Sortierung für die Suchergebnis-Ansicht dieser Operation. Aufsteigend: älteste zuerst. Absteigend: neueste zuerst.',
         'GenericInterface module registration for an error handling module.' =>
             'Modulregistrierung für ein Fehlerbehandlungs-Modul des GenericInterface.',
 
@@ -6460,7 +6460,7 @@ sub Data {
         'This option defines the process tickets default priority.' => 'Diese Option setzt die Prozess-Ticket Standardpriorität.',
         'Display settings to override defaults for Process Tickets.' => 'Einstellungen zum Überschreiben der Standardwerte für Prozess-Tickets anzeigen.',
         'Dynamic fields groups for process widget. The key is the name of the group, the value contains the fields to be shown. Example: \'Key =&gt; My Group\', \'Content: Name_X, NameY\'.' =>
-            '',
+            'Gruppen dynamischer Felder für das Prozess-Widget. Der Schlüssel ist der Name der Gruppe, der Wert enthält die anzuzeigenden Felder. Beispiel: \'Key =&gt; Meine Gruppe\', \'Content: Name_X, NameY\'.',
         'Dynamic fields shown in the process widget in ticket zoom screen of the agent interface.' =>
             'Angezeigte Dynamische Felder im Prozess-Widget in der Ticket-Detailansicht des Agentenbereichs.',
         'Shows a link in the menu to enroll a ticket into a process in the ticket zoom view of the agent interface.' =>
@@ -6484,7 +6484,7 @@ sub Data {
         'Defines the priority in which the information is logged and presented.' =>
             'Definiert die Priorität in welcher die Information aufgezeichnet und präsentiert wird.',
         'Filter for debugging Transitions. Note: More filters can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;.' =>
-            '',
+            'Filter zum Debuggen von Transitions. Hinweis: Weitere Filter können im Format &lt;OTRS_TICKET_Attribute&gt; hinzugefügt werden, z. B. &lt;OTRS_TICKET_Priority&gt;.',
         'Parameters for the dashboard backend of the running process tickets overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             'Legt die Parameter für das Dashboard-Backend fest. "Limit" legt die Anzahl an Einträgen fest, die standardmäßig angezeigt werden. "Group" beschränkt den Zugang zum jeweiligen Dashlet (z. B. Group: admin;group1;group2). "Default" bestimmt, ob das Dashlet standardmäßig aktiv ist oder vom Nutzer manuell aktiviert werden muss. "CacheTTLLocal" bestimmt die Cachingdauer für das Dashlet in Minuten. Mit "Mandatory" kann das Dashlet so konfiguriert werden, dass Nutzer es nicht ausblenden können.',
         'DynamicField backend registration.' => 'Backend-Registrierung für Dynamische Felder.',
@@ -6615,11 +6615,11 @@ sub Data {
         'Customizable stop words for fulltext index. These words will be removed from the search index.' =>
             'Anpassbare Stopworte für den Volltext-Index. Diese Worte werden aus dem Suchindex entfernt.',
         'Allows having a small format ticket overview (CustomerInfo =&gt; 1 - shows also the customer information).' =>
-            '',
+            'Ermöglicht eine Ticketübersicht im kleinen Format (CustomerInfo =&gt; 1 – zeigt auch die Kundeninformationen).',
         'Allows having a medium format ticket overview (CustomerInfo =&gt; 1 - shows also the customer information).' =>
-            '',
+            'Ermöglicht eine Ticketübersicht im mittleren Format (CustomerInfo =&gt; 1 – zeigt auch die Kundeninformationen).',
         'Shows a preview of the ticket overview (CustomerInfo =&gt; 1 - shows also Customer-Info, CustomerInfoMaxSize max. size in characters of Customer-Info).' =>
-            '',
+            'Zeigt eine Vorschau der Ticketübersicht (CustomerInfo =&gt; 1 – zeigt auch Kundeninformationen, CustomerInfoMaxSize = maximale Zeichenanzahl der Kundeninformationen).',
         'Defines which article sender types should be shown in the preview of a ticket.' =>
             'Gibt an, welche Artikel-Sendertypen in der Vorschau eines Tickets angezeigt werden sollen.',
         'Sets the count of articles visible in preview mode of ticket overviews.' =>
@@ -6728,13 +6728,13 @@ sub Data {
         'Defines the default ticket attribute for ticket sorting in the status view of the agent interface.' =>
             'Bestimmt das Standard-Ticket-Attribut für das Sortieren der Tickets in der Status-Anzeige im Agent-Interface.',
         'Defines the default ticket order (after priority sort) in the status view of the agent interface. Up: oldest on top. Down: latest on top.' =>
-            'Steuert die Ticket-Sortierung (nach der Sortierung nach Priorität) für die Status-Ansicht des Agentenbereichs. Auf: Älteste oben. Ab: Neuste oben.',
+            'Steuert die Ticket-Sortierung (nach der Sortierung nach Priorität) für die Status-Ansicht des Agentenbereichs. Aufsteigend: älteste zuerst. Absteigend: neueste zuerst.',
         'Defines the required permission to show a ticket in the escalation view of the agent interface.' =>
             'Definiert die benötigten Rechte, um ein Ticket in der Eskalationsansicht der Agenten-Oberfläche anzuzeigen.',
         'Defines the default ticket attribute for ticket sorting in the escalation view of the agent interface.' =>
             'Bestimmt das Standard-Ticket-Attribut für das Sortieren der Tickets in der Eskalations-Anzeige im Agent-Interface.',
         'Defines the default ticket order (after priority sort) in the escalation view of the agent interface. Up: oldest on top. Down: latest on top.' =>
-            'Steuert die Ticket-Sortierung (nach der Sortierung nach Priorität) für die Eskalations-Ansicht des Agentenbereichs. Auf: Älteste oben. Ab: Neuste oben.',
+            'Steuert die Ticket-Sortierung (nach der Sortierung nach Priorität) für die Eskalations-Ansicht des Agentenbereichs. Aufsteigend: älteste zuerst. Absteigend: neueste zuerst.',
         'Allows extended search conditions in ticket search of the agent interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&amp;&amp;*key2*)" or "(*key1*||*key2*)".' =>
             'Ermöglicht erweiterte Suchbedingungen in der Ticketsuche der Agentenschnittstelle. Mit dieser Funktion können Sie z. B. den Titel eines Tickets mit Bedingungen wie "(*key1*&amp;&amp;*key2*)" oder "(*key1*||*key2*)" suchen.',
         'Maximum number of tickets to be displayed in the result of a search in the agent interface.' =>
@@ -6746,7 +6746,7 @@ sub Data {
         'Defines the default ticket attribute for ticket sorting of the ticket search result of the agent interface.' =>
             'Bestimmt das Standard-Ticket-Attribut für das Sortieren der Tickets des Ticket-Suchergebnis im Agent-Interface.',
         'Defines the default ticket order in the ticket search result of the agent interface. Up: oldest on top. Down: latest on top.' =>
-            'Steuert die Ticket-Sortierung für die Suchergebnis-Ansicht des Agentenbereichs. Auf: Älteste oben. Ab: Neuste oben.',
+            'Steuert die Ticket-Sortierung für die Suchergebnis-Ansicht des Agentenbereichs. Aufsteigend: älteste zuerst. Absteigend: neueste zuerst.',
         'Exports the whole article tree in search result (it can affect the system performance).' =>
             'Exportiert den vollständigen Artikelbaum im Suchergebnis (kann die System-Performance beeinträchtigen).',
         'Data used to export the search result in CSV format.' => 'Daten die verwendet werden um das Suchergebnis im CSV-Format zu exportieren.',
@@ -6769,15 +6769,15 @@ sub Data {
         'Defines the default ticket attribute for ticket sorting in the locked ticket view of the agent interface.' =>
             'Bestimmt das Standard-Ticket-Attribut für das Sortieren der Tickets in der Gesperrte-Tickets-Anzeige im Agent-Interface.',
         'Defines the default ticket order in the ticket locked view of the agent interface. Up: oldest on top. Down: latest on top.' =>
-            'Steuert die Ticket-Sortierung für die Gesperrt-Ansicht des Agentenbereichs. Auf: Älteste oben. Ab: Neuste oben.',
+            'Steuert die Ticket-Sortierung für die Gesperrt-Ansicht des Agentenbereichs. Aufsteigend: älteste zuerst. Absteigend: neueste zuerst.',
         'Defines the default ticket attribute for ticket sorting in the responsible view of the agent interface.' =>
             'Bestimmt das Standard-Ticket-Attribut für das Sortieren der Tickets in der Verantwortlicher-Anzeige im Agent-Interface.',
         'Defines the default ticket order in the responsible view of the agent interface. Up: oldest on top. Down: latest on top.' =>
-            'Steuert die Ticket-Sortierung für die Verantwortlicher-Ansicht des Agentenbereichs. Auf: Älteste oben. Ab: Neuste oben.',
+            'Steuert die Ticket-Sortierung für die Verantwortlicher-Ansicht des Agentenbereichs. Aufsteigend: älteste zuerst. Absteigend: neueste zuerst.',
         'Defines the default ticket attribute for ticket sorting in the watch view of the agent interface.' =>
             'Bestimmt das Standard-Ticket-Attribut für das Sortieren der Tickets in der Beobachten-Anzeige im Agent-Interface.',
         'Defines the default ticket order in the watch view of the agent interface. Up: oldest on top. Down: latest on top.' =>
-            'Steuert die Ticket-Sortierung für die Beobachten-Ansicht des Agentenbereichs. Auf: Älteste oben. Ab: Neuste oben.',
+            'Steuert die Ticket-Sortierung für die Beobachten-Ansicht des Agentenbereichs. Aufsteigend: älteste zuerst. Absteigend: neueste zuerst.',
         'Required permissions to use the ticket free text screen in the agent interface.' =>
             'Benötigte Rechte um den "Freitext"-Dialog eines Tickets im Agenten-Interface aufzurufen.',
         'Defines if a ticket lock is required in the ticket free text screen of the agent interface (if the ticket isn\'t locked yet, the ticket gets locked and the current agent will be set automatically as its owner).' =>
@@ -6877,7 +6877,7 @@ sub Data {
         'Defines the recipient target of the phone ticket and the sender of the email ticket ("Queue" shows all queues, "System address" displays all system addresses) in the agent interface.' =>
             'Legt die Art des Empfängers für Telefon-Tickets und des Absenders für E-Mail-Tickets im Agenten-Bereich fest ("Queue" zeigt alle Queues, "System address" alle System-Adressen).',
         'Determines the strings that will be shown as recipient (To:) of the phone ticket and as sender (From:) of the email ticket in the agent interface. For Queue as NewQueueSelectionType "&lt;Queue&gt;" shows the names of the queues and for SystemAddress "&lt;Realname&gt; &lt;&lt;Email&gt;&gt;" shows the name and email of the recipient.' =>
-            '',
+            'Bestimmt die Zeichenketten, die als Empfänger (An:) des Telefon-Tickets und als Absender (Von:) des E-Mail-Tickets in der Agentenoberfläche angezeigt werden. Bei Queue als NewQueueSelectionType "&lt;Queue&gt;" zeigt die Namen der Queues und bei SystemAddress "&lt;Realname&gt; &lt;&lt;Email&gt;&gt;" Name und E-Mail des Empfängers.',
         'Determines which options will be valid of the recipient (phone ticket) and the sender (email ticket) in the agent interface.' =>
             'Definiert, welche Optionen für den Empfänger (Telefon-Ticket) und den Absender (E-Mail-Ticket) im Agenten-Interface gültig sind.',
         'Shows customer history tickets in AgentTicketPhone, AgentTicketEmail and AgentTicketCustomer.' =>
@@ -7551,7 +7551,7 @@ sub Data {
         'Defines the recipient target of the tickets ("Queue" shows all queues, "SystemAddress" shows only the queues which are assigned to system addresses) in the customer interface.' =>
             'Legt die Art des Empfängers für Tickets im Kunden-Bereich fest ("Queue" zeigt alle Queues, "System address" nur die Queues, die System-Adressen zugewiesen sind).',
         'Determines the strings that will be shown as recipient (To:) of the ticket in the customer interface. For Queue as CustomerPanelSelectionType, "&lt;Queue&gt;" shows the names of the queues, and for SystemAddress, "&lt;Realname&gt; &lt;&lt;Email&gt;&gt;" shows the name and email of the recipient.' =>
-            '',
+            'Bestimmt die Zeichenketten, die als Empfänger (An:) des Tickets in der Kundenoberfläche angezeigt werden. Bei Queue als CustomerPanelSelectionType zeigt "&lt;Queue&gt;" die Namen der Queues und bei SystemAddress "&lt;Realname&gt; &lt;&lt;Email&gt;&gt;" Name und E-Mail des Empfängers.',
         'Determines which queues will be valid for ticket\'s recepients in the customer interface.' =>
             'Definiert, welche Queues für Ticket-Empfänger im Kunden-Interface gültig sind.',
         'Module for To-selection in new ticket screen in the customer interface.' =>
@@ -7589,7 +7589,7 @@ sub Data {
         'Defines the default ticket attribute for ticket sorting in a ticket search of the customer interface.' =>
             'Bestimmt das Standard-Ticket-Attribut für das Sortieren der Tickets in einer Ticket-Suche im Kunden-Interface.',
         'Defines the default ticket order of a search result in the customer interface. Up: oldest on top. Down: latest on top.' =>
-            'Steuert die Ticket-Sortierung für die Suchergebnis-Ansicht des Kundenbereichs. Auf: Älteste oben. Ab: Neuste oben.',
+            'Steuert die Ticket-Sortierung für die Suchergebnis-Ansicht des Kundenbereichs. Aufsteigend: älteste zuerst. Absteigend: neueste zuerst.',
         'Allows extended search conditions in ticket search of the customer interface. With this feature you can search e. g. ticket title with this kind of conditions like "(*key1*&amp;&amp;*key2*)" or "(*key1*||*key2*)".' =>
             'Ermöglicht erweiterte Suchbedingungen in der Ticketsuche der Kundenschnittstelle. Mit dieser Funktion können Sie z. B. den Titel eines Tickets mit Bedingungen wie "(*key1*&amp;&amp;*key2*)" oder "(*key1*||*key2*)" suchen.',
         'If enabled, the customer can search for tickets in all services (regardless what services are assigned to the customer).' =>
@@ -7643,7 +7643,7 @@ sub Data {
         'Cache time in seconds for the DB ACL backend.' => 'Cache-Zeit in Sekunden für Datenbank ACL-Backends.',
         'If enabled debugging information for ACLs is logged.' => 'Wenn aktiviert, werden Informationen zur Fehlerbehebung für ACLs geloggt.',
         'Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;.' =>
-            '',
+            'Filter zum Debuggen von ACLs. Hinweis: Weitere Ticket-Attribute können im Format &lt;OTRS_TICKET_Attribute&gt; hinzugefügt werden, z. B. &lt;OTRS_TICKET_Priority&gt;.',
         'Maximal auto email responses to own email-address a day (Loop-Protection).' =>
             'Maximale Anzahl von automatischen E-Mailantworten zur eigenen E-Mail-Adresse pro Tag (Loop-Protection).',
         'Maximal auto email responses to own email-address a day, configurable by email address (Loop-Protection).' =>
@@ -7675,7 +7675,7 @@ sub Data {
         'Module to filter and manipulate incoming messages. Block/ignore all spam email with From: noreply@ address.' =>
             'Modul zum filtern und bearbeiten von eingehenden Nachrichten. Blockiere/Ignoriere alle Nachrichten mit einer noreply@ Absender-Adresse.',
         'Module to filter and manipulate incoming messages. Get a 4 digit number to ticket free text, use regex in Match e. g. From =&gt; \'(.+?)@.+?\', and use () as [***] in Set =&gt;.' =>
-            '',
+            'Modul zum Filtern und Bearbeiten eingehender Nachrichten. Extrahiert eine 4-stellige Nummer in ein Ticket-Freitextfeld; Regex in Match verwenden, z. B. From =&gt; \'(.+?)@.+?\', und () als [***] in Set =&gt;.',
         'Blocks all the incoming emails that do not have a valid ticket number in subject with From: @example.com address.' =>
             'Blockiert alle eingehenden E-Mails, die keine gültige Ticketnummer im Betreff mit Absenderadresse: @ example.com besitzen.',
         'Defines the sender for rejected emails.' => 'Definiert die Absendeadresse für abgelehnte E-Mails.',
@@ -7799,7 +7799,7 @@ sub Data {
         'Dynamic fields shown in the ticket search overview results screen of the customer interface.' =>
             'Angezeigte dynamische Felder in der Anzeige von Suchergebnissen der Ticketsuche im Kundenbereich.',
         'Event module registration. For more performance you can define a trigger event (e. g. Event =&gt; TicketCreate). This is only possible if all Ticket dynamic fields need the same event.' =>
-            '',
+            'Event-Modul-Registrierung. Für mehr Performance können Sie ein Trigger-Event definieren (z. B. Event =&gt; TicketCreate). Dies ist nur möglich, wenn alle Ticket-Dynamikfelder dasselbe Event benötigen.',
         'Configures a default TicketDynamicField setting. "Name" defines the dynamic field which should be used, "Value" is the data that will be set, and "Event" defines the trigger event.' =>
             'Konfiguriert eine Standardeinstellung für TicketDynamicField. "Name" definiert das Dynamische Feld, das verwendet werden soll, "Wert" sind die Daten, die gesetzt werden sollen, und "Ereignis" definiert das Auslöseereignis.',
         'Defines the list of types for templates.' => 'Definiert die Typenliste für Templates.',
@@ -7850,7 +7850,7 @@ sub Data {
         # XML Definition: Kernel/Config/Files/XML/Znuny.xml
         'Access package repositories via HTTP or HTTPS.' => 'Zugriff auf Paket-Repositorys per HTTP oder HTTPS.',
         'URL to the OTRS cloud service proxy service. The http or https prefix will be added, depending on SysConfig option \'PackageRepositoryURLSchema\'.' =>
-            '',
+            'URL zum OTRS-Cloud-Service-Proxy. Das Präfix http oder https wird abhängig von der SysConfig-Option \'PackageRepositoryURLSchema\' hinzugefügt.',
         'Enables/disables the Znuny package verification. If disabled, all packages are shown as verified. It\'s still recommended to use only verified packages.' =>
             'Aktiviert/deaktiviert die Znuny-Paketverifizierung. Wenn deaktiviert werden alle Pakete als verifiziert angezeigt. Es wird trotzdem empfohlen, nur verifizierte Pakete zu verwenden.',
         'Screens for which it is possible to enable or disable dynamic fields.' =>
@@ -7858,7 +7858,7 @@ sub Data {
         'Screens for which it is possible to enable or disable default columns.' =>
             'Dialoge, für die es möglich ist, Standardspalten zu aktivieren oder zu deaktivieren.',
         'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
-            '',
+            'Aktiviert historische Werte zur Auswahl bei Dynamikfeld-Typen auf Basis von BaseSelect (Dropdown und Multiselect). Deaktivieren Sie dies bei Performance-Problemen durch zu viele unterschiedliche gespeicherte Werte.',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             'Mapping von Ticket::Generic-Invoker-Name (Schlüssel) zu einer Liste von Feldern (Inhalt), die base-64-kodiert werden sollen. Felder müssen in der folgenden Form angegeben werden: Feld1->Feld2;Feld3->Feld4->Feld5;Feld6. Eine verschachtelte Datenstruktur kann also durch Verbindung der Felder mit \'->\' angegeben werden. Inhalte aus verschiedenen Feldern je Invoker können kodiert werden, indem die Felder mit \';\' voneinander getrennt werden. Bitte beachten Sie die Dokumentation des Pakets für weitere Informationen.',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
@@ -7966,7 +7966,7 @@ sub Data {
         'Defines the default ticket attribute for ticket sorting in the owner view of the agent interface.' =>
             'Bestimmt das Standard-Ticket-Attribut für das Sortieren der Tickets in der Besitzer-Tickets-Anzeige im Agent-Interface.',
         'Defines the default ticket order in the owner view of the agent interface. Up: oldest on top. Down: latest on top.' =>
-            'Steuert die Ticket-Sortierung für die Besitzer-Ansicht des Agentenbereichs. Auf: Älteste oben. Ab: Neuste oben.',
+            'Steuert die Ticket-Sortierung für die Besitzer-Ansicht des Agentenbereichs. Aufsteigend: älteste zuerst. Absteigend: neueste zuerst.',
         'Columns that can be filtered in the owner view of the agent interface. Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed.' =>
             'Filterbare Spalten in der betreffenden Ansicht des Agentenbereichs. Hinweis: Nur Ticket-Attribute, Dynamische Felder (DynamicField_NameX) und Kundenattribute (z. B. CustomerUserPhone, CustomerCompanyName) sind zulässig.',
         'Agent interface notification module to see the number of tickets an agent is owner for. Additional access control to show or not show this link can be done by using Key "Group" and Content like "rw:group1;move_into:group2".' =>
@@ -8026,9 +8026,9 @@ sub Data {
             'Benachrichtigungsmodul für Agenten-Interface, das die Anzahl der Erwähnungen anzeigt.',
         'Module to grant access to the mentioned agents of a ticket.' => 'Modul, das Zugriff für die erwähnten Agenten eines Tickets gewährt.',
         'Defines the default ticket attribute for ticket sorting in the mention ticket view of the agent interface.' =>
-            '',
+            'Bestimmt das Standard-Ticket-Attribut für das Sortieren der Tickets in der Mention-Ticket-Ansicht der Agentenoberfläche.',
         'Defines the default ticket order in the ticket mention view of the agent interface. Up: oldest on top. Down: latest on top.' =>
-            '',
+            'Steuert die Ticket-Sortierung für die Mention-Ansicht der Agentenoberfläche. Auf: Älteste oben. Ab: Neueste oben.',
         'Mapping of non-standard time zones to official ones.' => 'Mapping von Nicht-Standard-Zeitzonen zu offiziellen Zeitzonen.',
         'Start date (YYYYMMDD) of the range to use when parsing ICS files. The used CPAN module iCal::Parser needs this to be able to parse ICS files with events in a year before the current one. The end date of the range is automatically set to 10 years in the future from the time of parsing/execution.' =>
             'Startdatum (JJJJMMTT) des Bereichs, der beim Parsen von ICS-Dateien verwendet werden soll. Das verwendete CPAN-Modul iCal::Parser benötigt diese Angabe, um ICS-Dateien mit Events in einem Jahr vor dem aktuellen Jahr parsen zu können. Das Enddatum des Bereichs wird automatisch auf 10 Jahre in der Zukunft ab dem Zeitpunkt des Parsens/Ausführens gesetzt.',
@@ -8082,9 +8082,9 @@ sub Data {
             'Zeigt den Ticket-Titel in der "Notiz übergeben"-Aktion im Agenten-Interface an.',
         'Loader module registration for the public interface.' => 'Lade-Modulregistrierung für das öffentliche Interface.',
         'Adds the field mapping for AgentTicketActionCommon for an unknown action. Used by Znuny.Form.Input.' =>
-            '',
+            'Fügt die Feldzuordnung für AgentTicketActionCommon bei einer unbekannten Aktion hinzu. Wird von Znuny.Form.Input verwendet.',
         'Enables ticket search with admin user (ID 1) instead of the logged in user. Only affects this view.' =>
-            '',
+            'Aktiviert die Ticketsuche mit dem Admin-Benutzer (ID 1) statt mit dem angemeldeten Benutzer. Betrifft nur diese Ansicht.',
         'List of user preferences (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentPreferences. These are regular expressions.' =>
             'Liste von Benutzereinstellungen (Keys), für die ein Update per UpdateAJAX-Subaction über das Frontendmodul AgentPreferences erlaubt ist. Eingabe als reguläre Ausdrücke.',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
@@ -8095,7 +8095,7 @@ sub Data {
         'Group for default access.' => 'Gruppe für den Standardzugriff.',
         'Group of all administrators.' => 'Gruppe aller Administratoren.',
         'Group for statistics access.' => 'Gruppe für den Statistikzugriff.',
-        'Group for time accounting web service access.' => '',
+        'Group for time accounting web service access.' => 'Gruppe für den Webservice-Zugriff auf die Zeiterfassung.',
         'new' => 'neu',
         'All new state types (default: viewable).' => 'Alle neuen Statustypen (Standard: sichtbar).',
         'open' => 'offen',
