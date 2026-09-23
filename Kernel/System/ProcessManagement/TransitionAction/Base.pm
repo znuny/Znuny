@@ -614,9 +614,16 @@ sub _ReplaceTicketAttributes {
                         if ( $Attribute eq 'Body' && $IsArticleBodyCaller ) {
                             $Param{Config}->{ContentType} = 'text/html; charset="utf-8"';
 
-                            # get all attachments if there is more than one article tag
-                            $Param{Config}->{Attachment} ||= [];
-                            push @{ $Param{Config}->{Attachment} }, @{ $ArticleAttachments{$ArticleType} };
+                            # only keep attachments actually referenced inline in the body (e.g.
+                            # embedded images), regular file attachments must only be added via
+                            # Attachments/AttachmentIDs/AttachmentsReuse
+                            my @InlineAttachments = grep { ( $_->{Disposition} // '' ) eq 'inline' }
+                                @{ $ArticleAttachments{$ArticleType} };
+
+                            if (@InlineAttachments) {
+                                $Param{Config}->{Attachment} ||= [];
+                                push @{ $Param{Config}->{Attachment} }, @InlineAttachments;
+                            }
                         }
                         $Value = "<blockquoute>$Value</blockquoute>";
                         Encode::_utf8_on($Value);

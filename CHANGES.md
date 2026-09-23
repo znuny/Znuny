@@ -1,6 +1,7 @@
 # 6.5.26 2026-??-??
  - 2026-09-18 Fixed: Notification to agent who created the ticket is not working for some ticket types.
  - 2026-09-17 Fixed: AdminDynamicFieldScreenConfiguration lists dynamic fields of all object types.
+ - 2026-08-25 Fixed: Regular file attachments were unintentionally copied to newly created tickets/articles when using <OTRS_FIRST_ARTICLE_Body> or <OTRS_LAST_ARTICLE_Body> in a Transition Action, even without Attachments/AttachmentIDs/AttachmentsReuse configured.
 
 # 6.5.25 2026-09-16
  - 2026-09-08 Security: Fixed SQL injection for parameter ContentSearch of ticket search. Thanks for reporting to Mokrane ABDELMALEK (via Ghent University VDP programme).
