@@ -2459,13 +2459,18 @@ sub ArticleCreate {
         SenderType           => 'agent',
         Subject              => 'UnitTest subject test',
         Body                 => 'UnitTest body test',
-        ContentType          => 'text/plain; charset=ISO-8859-15',
         HistoryType          => 'OwnerUpdate',
         HistoryComment       => 'Some free text!',
         UserID               => 1,
         NoAgentNotify        => 1,
         %Param,
     );
+
+    # Do not force text/plain when the caller already passed MimeType and/or ContentType.
+    # Otherwise MimeType (e.g. text/html) is ignored because ArticleCreate prefers ContentType.
+    if ( !$ArticleAttributes{ContentType} && !$ArticleAttributes{MimeType} ) {
+        $ArticleAttributes{ContentType} = 'text/plain; charset=ISO-8859-15';
+    }
 
     # create test ticket
     my $ArticleID = $ArticleObject->ArticleCreate(%ArticleAttributes);

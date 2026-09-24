@@ -10,6 +10,7 @@ package Kernel::System::UnitTest::TicketToUnitTest::TicketObject::Service;
 
 use strict;
 use warnings;
+use utf8;
 
 our @ObjectDependencies = (
     'Kernel::System::Service',

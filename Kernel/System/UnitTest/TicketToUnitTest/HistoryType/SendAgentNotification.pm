@@ -11,6 +11,7 @@ package Kernel::System::UnitTest::TicketToUnitTest::HistoryType::SendAgentNotifi
 
 use strict;
 use warnings;
+use utf8;
 
 our @ObjectDependencies = (
     'Kernel::System::Log',
@@ -36,14 +37,15 @@ sub Run {
         return;
     }
 
-    $Param{Name} =~ /^\%\%$Param{Notification}->{Name}\%\%$Param{Recipient}->{UserLogin}\%\%$Param{Transport}/;
+    $Param{Name} =~ /^\%\%($Param{Notification}->{Name})\%\%($Param{Recipient}->{UserLogin})\%\%($Param{Transport})/;
 
     $Param{NotificationName}   ||= $1;
     $Param{RecipientUserLogin} ||= $2;
     $Param{Transport}          ||= $3;
+    $Param{Event}              ||= 'SendAgentNotification';
 
     my $Output = <<OUTPUT;
-my \$NotificationEventObject = $Kernel::OM->Get('Kernel::System::Ticket::Event::NotificationEvent');
+my \$NotificationEventObject = \$Kernel::OM->Get('Kernel::System::Ticket::Event::NotificationEvent');
 
 \$Success = \$NotificationEventObject->_SendRecipientNotification(
     TicketID        => \$TicketID,

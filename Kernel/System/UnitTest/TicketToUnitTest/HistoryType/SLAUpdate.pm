@@ -10,6 +10,7 @@ package Kernel::System::UnitTest::TicketToUnitTest::HistoryType::SLAUpdate;
 
 use strict;
 use warnings;
+use utf8;
 
 our @ObjectDependencies = (
     'Kernel::System::Log',

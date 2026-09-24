@@ -11,6 +11,7 @@ package Kernel::System::UnitTest::TicketToUnitTest::HistoryType::NewTicket;
 
 use strict;
 use warnings;
+use utf8;
 
 our @ObjectDependencies = (
     'Kernel::System::Ticket',
