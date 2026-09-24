@@ -1038,9 +1038,84 @@ my @Tests = (
             RequiredFramework => '4.0.x',
         },
     },
+    # check for changes in 2nd digit
+    {
+        Framework => [
+            {
+                'Content' => '4.0.4',
+                'Minimum' => '4.1.3',
+                'Maximum' => '4.5.4'
+            }
+        ],
+        ExpectedResult => {
+            Success           => 0,
+            RequiredFramework => '4.0.4',
+            RequiredFrameworkMinimum => '4.1.3',
+        },
+    },
+    {
+        Framework => [
+            {
+                'Content' => '4.3.x',
+                'Minimum' => '4.2.3',
+            }
+        ],
+        Version => '4.3.15',
+        ExpectedResult => {
+            Success           => 1,
+            RequiredFramework => '4.3.x',
+        },
+    },
+    {
+        Framework => [
+            {
+                'Content' => '4.1.x',
+                'Minimum' => '4.2.3',
+            }
+        ],
+        Version => '4.1.15',
+        ExpectedResult => {
+            Success           => 0,
+            RequiredFramework => '4.1.x',
+            RequiredFrameworkMinimum => '4.2.3',
+        },
+    },
+    {
+        Framework => [
+            {
+                'Content' => '4.1.x',
+                'Maximum' => '4.0.4'
+            }
+        ],
+        Version => '4.1.15',
+        ExpectedResult => {
+            Success           => 0,
+            RequiredFrameworkMaximum => '4.0.4',
+            RequiredFramework => '4.1.x',
+        },
+    },
+    {
+        Framework => [
+            {
+                'Content' => '4.1.15',
+                'Maximum' => '4.2.4',
+            }
+        ],
+        Version => '4.1.15',
+        ExpectedResult => {
+            Success           => 1,
+            RequiredFramework => '4.1.15',
+        },
+    },
 );
 
 for my $Test (@Tests) {
+    if ( $Test->{Version} ) {
+        $ConfigObject->Set(
+            Key   => 'Version',
+            Value => $Test->{Version},
+        );
+    }
 
     my %VersionCheck = $PackageObject->AnalyzePackageFrameworkRequirements(
         Framework => $Test->{Framework},
@@ -1049,10 +1124,11 @@ for my $Test (@Tests) {
     my $FrameworkVersion = $Test->{Framework}[0]->{Content};
     my $FrameworkMinimum = $Test->{Framework}[0]->{Minimum} || '-';
     my $FrameworkMaximum = $Test->{Framework}[0]->{Maximum} || '-';
+    my $Version = $Test->{Version} || '4.0.4';
 
     my $Name = "AnalyzePackageFrameworkRequirements():";
     if ( $FrameworkMinimum ne '-' || $FrameworkMaximum ne '-' ) {
-        $Name .= "Version => $FrameworkVersion, Minimum => $FrameworkMinimum, Maximum => $FrameworkMaximum";
+        $Name .= "Version => $FrameworkVersion, Minimum => $FrameworkMinimum, Maximum => $FrameworkMaximum, ConfigVersion => $Version";
     }
 
     $Self->IsDeeply(

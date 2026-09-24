@@ -2822,7 +2822,6 @@ sub AnalyzePackageFrameworkRequirements {
                                 )
                             {
                                 $FWCheck = 1;
-                                last COUNT;
                             }
                             else {
 
@@ -2834,6 +2833,7 @@ sub AnalyzePackageFrameworkRequirements {
 
                                 $FWCheck = 0;
                             }
+                            last COUNT;
                         }
                     }
 
@@ -2860,7 +2860,6 @@ sub AnalyzePackageFrameworkRequirements {
                             {
 
                                 $FWCheck = 1;
-                                last COUNT;
                             }
                             else {
 
@@ -2872,7 +2871,7 @@ sub AnalyzePackageFrameworkRequirements {
 
                                 $FWCheck = 0;
                             }
-
+                            last COUNT;
                         }
                     }
                 }
