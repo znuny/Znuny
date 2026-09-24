@@ -114,6 +114,9 @@ sub new {
     elsif ( $Self->{DSN} =~ /(mssql|sybase|sql server)/i ) {
         $Self->{'DB::Type'} = 'mssql';
     }
+    elsif ( $Self->{DSN} =~ /:mariadb/i ) {
+        $Self->{'DB::Type'} = 'MariaDB';
+    }
 
     # get database type (config option)
     if ( $ConfigObject->Get('Database::Type') ) {

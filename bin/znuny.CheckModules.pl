@@ -296,6 +296,17 @@ my @NeededModules = (
         },
     },
     {
+        Module    => 'DBD::MariaDB',
+        Required  => 0,
+        Comment   => 'Required to connect to a MariaDB database.',
+        InstTypes => {
+            aptget => 'libdbd-MariaDB-perl',
+            emerge => 'dev-perl/DBD-MariaDB',
+            zypper => 'perl-DBD-MariaDB',
+            ports  => 'databases/p5-DBD-MariaDB',
+        },
+    },
+    {
         Module    => 'DBD::mysql',
         Required  => 0,
         Comment   => 'Required to connect to a MySQL database.',
