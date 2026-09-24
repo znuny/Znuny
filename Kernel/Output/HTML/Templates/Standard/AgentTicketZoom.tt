@@ -87,6 +87,7 @@
                                     <div class="ActionRow Cluster">
                                         <ul class="Actions-Mobile-List">
                                             <li>Back</li>
+                                            <li class="mobile-action-separator" aria-hidden="true"></li>
                                             <li class="mobile-action-option">Options</li>
                                         </ul>
 
