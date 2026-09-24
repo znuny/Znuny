@@ -3994,6 +3994,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             'データベースから取得したプロセス管理情報はシステム設定と同期していません。全てのプロセスを同期させてください。',
+        'Deploy' => 'デプロイ',
         'Need ExampleProcesses!' => 'プロセス例が必要!',
         'Need ProcessID!' => 'ProcessIDが必要!',
         'Unknown Process %s!' => '',
@@ -8500,7 +8501,6 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         'Please enter at least one search word to find anything.' => '何かを見つけるために少なくとも1つの検索単語を入力してください。',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             '',
-        'Deploy' => 'デプロイ',
         'The deployment is already running.' => 'デプロイメントはすでに実行中です。',
         'Deployment successful. You\'re being redirected...' => 'デプロイに成功しました。 ',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

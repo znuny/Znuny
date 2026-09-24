@@ -3993,6 +3993,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             'Obrađene informacije iz baze podataka nisu sinhronizovane sa sistemskom konfiguracijom, molimo vas da sinhronizujete sve procese.',
+        'Deploy' => 'Rasporedi',
         'Need ExampleProcesses!' => 'Neophodan ExampleProcesses!',
         'Need ProcessID!' => 'Neophodan ProcessID!',
         'Unknown Process %s!' => 'Nepoznat proces %s!',
@@ -8490,7 +8491,6 @@ sub Data {
         'Please enter at least one search word to find anything.' => 'Molimo unesite barem jednu ključnu reč da bi ste nešto pronašli.',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             'Nažalost, raspoređivanje trenutno nije moguće, verovatno zato što drugi korisnik već raspoređuje. Molimo pokušajte kasnije.',
-        'Deploy' => 'Rasporedi',
         'The deployment is already running.' => 'Raspoređivanje je već u toku.',
         'Deployment successful. You\'re being redirected...' => 'Raspoređivanje uspešno, bićete preusmereni...',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

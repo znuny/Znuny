@@ -3994,6 +3994,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             '数据库中的流程管理信息与系统配置不一致，请同步所有流程。',
+        'Deploy' => '部署',
         'Need ExampleProcesses!' => '需要ExampleProcesses！',
         'Need ProcessID!' => '需要流程ID！',
         'Unknown Process %s!' => '未知的流程 %s！',
@@ -8491,7 +8492,6 @@ sub Data {
         'Please enter at least one search word to find anything.' => '请输入至少一个搜索词以查找任何内容。',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             '很遗憾，现在不能开始部署，也许是因为另一个服务人员已经开始部署了。 请稍后再试。',
-        'Deploy' => '部署',
         'The deployment is already running.' => '部署已经在运行。',
         'Deployment successful. You\'re being redirected...' => '部署成功。 您正在重定向...',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

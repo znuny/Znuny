@@ -20958,7 +20958,7 @@ msgstr "검색할 단어를 하나 이상 입력하십시오."
 msgid "Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later."
 msgstr "안타깝게도 다른 에이전트가 이미 배포 중이므로 현재 배포할 수 없습니다. 나중에 다시 시도 해주십시오."
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemConfiguration.js
+#. Perl Module: Kernel/Modules/AdminProcessManagement.pm
 msgid "Deploy"
 msgstr "배포"
 

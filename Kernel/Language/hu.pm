@@ -3993,6 +3993,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             'Az adatbázis folyamatkezelő információi nincsenek szinkronizálva a rendszer beállításaival, szinkronizáljon minden folyamatot.',
+        'Deploy' => 'Üzembe állítás',
         'Need ExampleProcesses!' => 'Példafolyamatok szükségesek!',
         'Need ProcessID!' => 'Folyamatazonosító szükséges!',
         'Unknown Process %s!' => 'Ismeretlen folyamat: %s!',
@@ -8490,7 +8491,6 @@ sub Data {
         'Please enter at least one search word to find anything.' => 'Adjon meg legalább egy keresőszót, ha bármire rá szeretne keresni.',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             'Sajnálatos módon az üzembe állítás jelenleg nem lehetséges, mert talán egy másik ügyintéző már üzembe állította. Próbálja meg később újra.',
-        'Deploy' => 'Üzembe állítás',
         'The deployment is already running.' => 'Az üzembe állítás már fut.',
         'Deployment successful. You\'re being redirected...' => 'Az üzembe állítás sikerült. Most átirányítjuk…',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>
