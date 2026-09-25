@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.581265903307888;
+    $Self->{Completeness}        = 0.581081081081081;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -8834,10 +8834,11 @@ Helpdesk Team Anda
         'Arabic (Saudi Arabia)' => 'Arab (Saudi Arabia)',
         'Article Color' => '',
         'ArticleTree' => 'ArticleTree',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Lampirkan nama',
         'Avatar' => '',
         'Based on global RichText setting' => 'Berdasarkan pengaturan global Rich Text ',
+        'Blank' => '',
         'Bounced to "%s".' => 'Terpental ke "%s".',
         'Bulgarian' => 'Bulgaria',
         'Bulk Action' => 'Tindakan masal',
@@ -9299,6 +9300,7 @@ Helpdesk Team Anda
             '',
         'Select your preferred layout for the software.' => '',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => 'Kirim surat keluar baru dari tiket ini',
         'Send notifications to users.' => 'Mengirimkan pemberitahuan kepada pengguna.',

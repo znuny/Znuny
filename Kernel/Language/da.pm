@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.335718829516539;
+    $Self->{Completeness}        = 0.335612082670906;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -8823,10 +8823,11 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => 'Arabisk (Saudi Arabien)',
         'Article Color' => '',
         'ArticleTree' => 'Indlægstræ',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Vedhæftningsnavn',
         'Avatar' => '',
         'Based on global RichText setting' => '',
+        'Blank' => '',
         'Bounced to "%s".' => 'Overgivet til "%s".',
         'Bulgarian' => '',
         'Bulk Action' => 'Massehandling',
@@ -9288,6 +9289,7 @@ Thanks for your help!
             '',
         'Select your preferred layout for the software.' => '',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => 'Send ny udgående mail fra denne sag',
         'Send notifications to users.' => 'Send beskeder til brugere.',

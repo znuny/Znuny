@@ -25509,3 +25509,15 @@ msgstr "سيتم إرسال رابط لتعيين كلمة مرور جديدة �
 msgid "Resend is not possible for this article!"
 msgstr "إعادة الإرسال غير ممكنة لهذا المقال!"
 
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
+

@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.503657760814249;
+    $Self->{Completeness}        = 0.503497615262321;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -8837,10 +8837,11 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => 'ภาษาอาหรับ (ซาอุดีอาระเบีย)',
         'Article Color' => '',
         'ArticleTree' => 'ArticleTree',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'ชื่อเอกสารที่แนบมา',
         'Avatar' => '',
         'Based on global RichText setting' => 'ขึ้นอยู่กับการตั้งค่าทั่วไปของ RichText',
+        'Blank' => '',
         'Bounced to "%s".' => 'ตีกลับไปยัง "%s".',
         'Bulgarian' => 'ภาษาบุลกาเรีย',
         'Bulk Action' => 'ดำเนินการเป็นกลุ่ม',
@@ -9302,6 +9303,7 @@ Thanks for your help!
             '',
         'Select your preferred layout for the software.' => '',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => '',
         'Send notifications to users.' => '',

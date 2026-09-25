@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.856075063613232;
+    $Self->{Completeness}        = 0.855802861685215;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8832,10 +8832,11 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => 'Арапски (Саудијска арабија)',
         'Article Color' => '',
         'ArticleTree' => 'Чланак у облику дрвета',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Назив прилога',
         'Avatar' => 'Аватар сличица',
         'Based on global RichText setting' => 'Базирано на глобалним RichText поставкама',
+        'Blank' => '',
         'Bounced to "%s".' => 'Одбијено на "%s".',
         'Bulgarian' => 'Бугарски',
         'Bulk Action' => 'Масовна акција',
@@ -9297,6 +9298,7 @@ Thanks for your help!
             'Изаберите вашу личну временску зону. Сва времена ће бити приказана у њој.',
         'Select your preferred layout for the software.' => 'Изаберите изглед апликације по вашој жељи.',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => 'Пошаљи нови одлазни имејл из овог тикета',
         'Send notifications to users.' => 'Пошаљи обавештења корисницима.',

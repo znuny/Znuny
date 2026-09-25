@@ -25519,3 +25519,15 @@ msgstr "设置新密码的链接将会发送到您的邮箱中。"
 msgid "Resend is not possible for this article!"
 msgstr "无法重发此信件！"
 
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
+

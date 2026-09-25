@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.633587786259542;
+    $Self->{Completeness}        = 0.633386327503975;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8835,10 +8835,11 @@ Twój Zespół Helpdesk.
         'Arabic (Saudi Arabia)' => 'Arabski (Arabia Saudyjska)',
         'Article Color' => '',
         'ArticleTree' => 'Drzewo z artykułami',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Nazwa załącznika',
         'Avatar' => 'Awatar',
         'Based on global RichText setting' => '',
+        'Blank' => '',
         'Bounced to "%s".' => 'Przekazano do "%s".',
         'Bulgarian' => 'Bułgarski',
         'Bulk Action' => 'Zbiorcze działanie',
@@ -9300,6 +9301,7 @@ Twój Zespół Helpdesk.
             '',
         'Select your preferred layout for the software.' => '',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => '',
         'Send notifications to users.' => 'Wyślij powiadomienie do użytkowników',

@@ -25525,3 +25525,15 @@ msgstr "Un link per impostare una nuova password sarà inviato al tuo indirizzo 
 msgid "Resend is not possible for this article!"
 msgstr "Non è possibile reinviare questo articolo!"
 
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
+

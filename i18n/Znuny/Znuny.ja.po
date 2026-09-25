@@ -25532,3 +25532,15 @@ msgstr "新しいパスワードを設定するためのリンクを登録され
 msgid "Resend is not possible for this article!"
 msgstr "この記事の再送信はできません！"
 
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
+

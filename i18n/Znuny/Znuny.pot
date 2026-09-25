@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2026-07-06 10:39+0000\n"
+"POT-Creation-Date: 2026-09-25 11:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22722,7 +22722,7 @@ msgid "ArticleTree"
 msgstr ""
 
 #. SysConfig
-msgid "AsPopup"
+msgid "As Popup"
 msgstr ""
 
 #. SysConfig
@@ -22735,6 +22735,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Based on global RichText setting"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
 msgstr ""
 
 #. SysConfig
@@ -24463,6 +24467,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Select your preferred theme for OTRS."
+msgstr ""
+
+#. SysConfig
+msgid "Self"
 msgstr ""
 
 #. SysConfig

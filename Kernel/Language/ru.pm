@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.836673027989822;
+    $Self->{Completeness}        = 0.836406995230525;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -963,13 +963,13 @@ sub Data {
         'Invoker Details' => 'Подробности для Invoker ',
         'The name is typically used to call up an operation of a remote web service.' =>
             'Имя обычно используется для вызова операции удаленного веб-сервиса.',
-        'Invoker backend' => 'Invoker бэкэнд',
+        'Invoker backend' => 'Модуль инициатора вызова (invoker)',
         'This Znuny invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data.' =>
-            'Этот модуль Znuny invoker будет вызываться для подготовки данных, отправляемых в удаленную систему и для обработки ответных данных.',
-        'Mapping for outgoing request data' => 'Соответствие исходящему запросу данных',
+            'Этот Znuny модуль инициатора вызова (invoker) будет вызываться как для подготовки данных, отправляемых в удаленную систему, так и для обработки ответных данных.',
+        'Mapping for outgoing request data' => 'Преобразование данных исходящего запроса',
         'Configure' => 'Конфигурировать',
         'The data from the invoker of Znuny will be processed by this mapping, to transform it to the kind of data the remote system expects.' =>
-            'Данные полученные от инициатора вызова (invoker) Znuny будут преобразованы с использованием этого соответствия в ожидаемый удаленной стороной формат.',
+            'Данные, полученные от инициатора вызова (invoker) Znuny, будут преобразованы с использованием этого соответствия в ожидаемый удаленной стороной формат.',
         'Mapping for incoming response data' => 'Соответствие входящим ответным данным',
         'The response data will be processed by this mapping, to transform it to the kind of data the invoker of Znuny expects.' =>
             'Данные ответа будут преобразованы с использованием этого соответствия в формат, ожидаемый инициатором вызова (invoker) Znuny.',
@@ -1117,7 +1117,7 @@ sub Data {
         'Operation backend' => 'Бэкэнд для операций',
         'This Znuny operation backend module will be called internally to process the request, generating data for the response.' =>
             'Этот модуль Znuny будет вызываться для обработки запроса и подготавливать данные для ответа.',
-        'Mapping for incoming request data' => 'Сопоставление для данных входящего запроса',
+        'Mapping for incoming request data' => 'Преобразование данных входящего запроса',
         'The request data will be processed by this mapping, to transform it to the kind of data Znuny expects.' =>
             'Запрашиваемые данные будут обработаны и преобразованы в формат поддерживаемый Znuny',
         'Mapping for outgoing response data' => 'Сопоставление данных для исходящего ответа',
@@ -3558,7 +3558,7 @@ sub Data {
         'There was an error synchronizing the ACLs.' => 'Произошла ошибка при синхронизации ACL.',
         'ACL %s could not be deleted' => 'Невозможно удалить ACL %s',
         'There was an error getting data for ACL with ID %s' => 'Произошла ошибка при получении данный от ACL с ID %s',
-        '%s (copy) %s' => '%s (копия) %s ',
+        '%s (copy) %s' => '%s (копия) %s',
         'Please note that ACL restrictions will be ignored for the Superuser account (UserID 1).' =>
             'Обратите внимание, что для аккаунта Superuser (UserID 1) ограничения ACL игнорируются.',
         'Exact match' => 'Полное совпадение',
@@ -8843,10 +8843,11 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => 'Арабский (Саудовская Аравия)',
         'Article Color' => '',
         'ArticleTree' => 'Дерево сообщений',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Имя вложения',
         'Avatar' => 'Аватар',
         'Based on global RichText setting' => 'Основано на глобальной настройке RichText',
+        'Blank' => '',
         'Bounced to "%s".' => 'Перенаправлено "%s".',
         'Bulgarian' => 'Болгарский',
         'Bulk Action' => 'Массовое действие',
@@ -9308,6 +9309,7 @@ Thanks for your help!
             'Выберите свой часовой пояс. Все даты и время будут отображаться относительно этого часового пояса.',
         'Select your preferred layout for the software.' => 'Выберите предпочитаемый вами стиль.',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => 'Отправить новое исходящее письмо от этой заявки',
         'Send notifications to users.' => 'Отправить уведомление пользователям.',

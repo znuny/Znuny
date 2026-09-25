@@ -25513,3 +25513,15 @@ msgstr "Ένας σύνδεσμος για τον ορισμό νέου κωδι
 msgid "Resend is not possible for this article!"
 msgstr "Η επαναποστολή δεν είναι δυνατή για αυτό το άρθρο!"
 
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
+

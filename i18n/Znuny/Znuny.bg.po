@@ -25509,3 +25509,15 @@ msgstr "Връзка за задаване на нова парола ще бъ�
 msgid "Resend is not possible for this article!"
 msgstr "Повторното изпращане не е възможно за тази статия!"
 
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
+

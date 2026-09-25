@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.856075063613232;
+    $Self->{Completeness}        = 0.855802861685215;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8837,10 +8837,11 @@ Vaša tehnička podrška
         'Arabic (Saudi Arabia)' => 'Arapski (Saudijska arabija)',
         'Article Color' => '',
         'ArticleTree' => 'Članak u obliku drveta',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Naziv priloga',
         'Avatar' => 'Avatar sličica',
         'Based on global RichText setting' => 'Bazirano na globalnim RichText postavkama',
+        'Blank' => '',
         'Bounced to "%s".' => 'Odbijeno na "%s".',
         'Bulgarian' => 'Bugarski',
         'Bulk Action' => 'Masovna akcija',
@@ -9302,6 +9303,7 @@ Vaša tehnička podrška
             'Izaberite vašu ličnu vremensku zonu. Sva vremena će biti prikazana u njoj.',
         'Select your preferred layout for the software.' => 'Izaberite izgled aplikacije po vašoj želji.',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => 'Pošalji novi odlazni imejl iz ovog tiketa',
         'Send notifications to users.' => 'Pošalji obaveštenja korisnicima.',

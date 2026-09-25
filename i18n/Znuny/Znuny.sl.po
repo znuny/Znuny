@@ -25509,3 +25509,15 @@ msgstr "Povezava za nastavitev novega gesla bo poslana na vašo e-pošto."
 msgid "Resend is not possible for this article!"
 msgstr "Ponovno pošiljanje tega članka ni mogoče!"
 
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
+

@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 1;
+    $Self->{Completeness}        = 0.999523052464229;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8837,10 +8837,11 @@ Az Ön ügyfélszolgálati csapata
         'Arabic (Saudi Arabia)' => 'Arab (Szaúd-Arábia)',
         'Article Color' => 'Bejegyzés színe',
         'ArticleTree' => 'Bejegyzés fa',
-        'AsPopup' => 'Felugróként',
+        'As Popup' => '',
         'Attachment Name' => 'Melléklet neve',
         'Avatar' => 'Profilkép',
         'Based on global RichText setting' => 'Globális RichText beállítás alapján',
+        'Blank' => '',
         'Bounced to "%s".' => 'Átirányítva ide: „%s”.',
         'Bulgarian' => 'Bolgár',
         'Bulk Action' => 'Tömeges művelet',
@@ -9302,6 +9303,7 @@ Az Ön ügyfélszolgálati csapata
             'Személyes időzóna kiválasztása. Az összes idő ettől az időzónától relatívan lesz megjelenítve.',
         'Select your preferred layout for the software.' => 'Az előnyben részesített elrendezés kiválasztása a szoftverhez.',
         'Select your preferred theme for OTRS.' => 'Az előnyben részesített téma kiválasztása az OTRS-hez.',
+        'Self' => '',
         'Send a unit test file' => 'Egységtesztfájl küldése',
         'Send new outgoing mail from this ticket' => 'Új kimenő levél küldése ebből a jegyből',
         'Send notifications to users.' => 'Értesítések küldése a felhasználóknak.',

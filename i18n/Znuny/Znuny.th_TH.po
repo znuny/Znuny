@@ -25526,3 +25526,15 @@ msgstr "ลิงก์สำหรับตั้งรหัสผ่านใ
 msgid "Resend is not possible for this article!"
 msgstr "ไม่สามารถส่งบทความนี้อีกครั้งได้!"
 
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
+

@@ -25523,3 +25523,15 @@ msgstr "Pautan untuk menetapkan kata kunci baharu akan dihantar ke alamat emel a
 msgid "Resend is not possible for this article!"
 msgstr "Penghantaran semula tidak boleh dilakukan untuk artikel ini!"
 
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
+

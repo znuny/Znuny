@@ -25509,3 +25509,15 @@ msgstr "Un link pentru a seta o nouă parolă va fi trimis pe adresa dvs. de ema
 msgid "Resend is not possible for this article!"
 msgstr "Retrimiterea nu este posibilă pentru acest articol!"
 
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
+

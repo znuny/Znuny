@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.298187022900763;
+    $Self->{Completeness}        = 0.298092209856916;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -8824,10 +8824,11 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => '',
         'Article Color' => '',
         'ArticleTree' => '',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => '',
         'Avatar' => '頭像',
         'Based on global RichText setting' => '',
+        'Blank' => '',
         'Bounced to "%s".' => 'Bounced to "%s".',
         'Bulgarian' => '',
         'Bulk Action' => '批量處理',
@@ -9289,6 +9290,7 @@ Thanks for your help!
             '系統中的時間會相對應您所選擇的時區。',
         'Select your preferred layout for the software.' => '選擇您的介面主題｡',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => '',
         'Send notifications to users.' => '給用戶和服務人員發送通知',

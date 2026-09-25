@@ -25522,3 +25522,15 @@ msgstr "Egy új jelszó beállításhoz való hivatkozás el lesz küldve az e-m
 msgid "Resend is not possible for this article!"
 msgstr "Az újraküldés nem lehetséges ennél a bejegyzésnél!"
 
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
+

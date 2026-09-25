@@ -25511,3 +25511,15 @@ msgstr "設定新密碼的連結將會發送到您的郵箱中。"
 msgid "Resend is not possible for this article!"
 msgstr "無法重送此文章！"
 
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
+

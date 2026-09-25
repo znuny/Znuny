@@ -25523,3 +25523,15 @@ msgstr "En lenke for å sette et nytt passord vil bli sendt til din e-postadress
 msgid "Resend is not possible for this article!"
 msgstr "Nyutsending er ikke mulig for denne artikkelen!"
 
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
+

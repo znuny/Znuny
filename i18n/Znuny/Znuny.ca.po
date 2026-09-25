@@ -25509,3 +25509,15 @@ msgstr "S'enviarà un enllaç per establir una nova contrasenya a la seva adreç
 msgid "Resend is not possible for this article!"
 msgstr "No és possible reenviar aquest article!"
 
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
+

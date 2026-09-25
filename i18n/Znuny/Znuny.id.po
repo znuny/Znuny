@@ -25523,3 +25523,15 @@ msgstr "Tautan untuk menetapkan kata sandi baru akan dikirim ke email Anda."
 msgid "Resend is not possible for this article!"
 msgstr "Pengiriman ulang tidak dimungkinkan untuk artikel ini!"
 
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
+

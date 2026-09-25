@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d %T';
-    $Self->{Completeness}        = 0.83206106870229;
+    $Self->{Completeness}        = 0.831796502384738;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -8831,10 +8831,11 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => '아랍어 (사우디 아라비아)',
         'Article Color' => '',
         'ArticleTree' => 'ArticleTree',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => '첨부명',
         'Avatar' => '화신',
         'Based on global RichText setting' => '전역 서식있는 텍스트 설정에 기반',
+        'Blank' => '',
         'Bounced to "%s".' => 'Bounced to "%s".',
         'Bulgarian' => '불가리아 사람',
         'Bulk Action' => '일괄 작업',
@@ -9296,6 +9297,7 @@ Thanks for your help!
             '개인 시간대를 선택하십시오. 모든 시간은이 시간대를 기준으로 표시됩니다.',
         'Select your preferred layout for the software.' => '소프트웨어의 기본 레이아웃을 선택하십시오.',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => '이 티켓에서 보내는 메일을 새로 보냅니다.',
         'Send notifications to users.' => '사용자에게 알림을 보냅니다.',

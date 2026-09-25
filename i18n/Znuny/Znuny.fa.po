@@ -25520,3 +25520,15 @@ msgstr "پیوندی برای تنظیم رمز عبور جدید به آدرس 
 msgid "Resend is not possible for this article!"
 msgstr "ارسال مجدد برای این مقاله ممکن نیست!"
 
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
+

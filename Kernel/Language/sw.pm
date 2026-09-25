@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%m/%d/%Y';
     $Self->{DateInputFormat}     = '%m/%d/%Y';
     $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
-    $Self->{Completeness}        = 0.421119592875318;
+    $Self->{Completeness}        = 0.420985691573927;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -8826,10 +8826,11 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => '',
         'Article Color' => '',
         'ArticleTree' => 'Mti wa makala',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Jina la kiambatanishi',
         'Avatar' => '',
         'Based on global RichText setting' => '',
+        'Blank' => '',
         'Bounced to "%s".' => 'Ilidunda kwenda "%s".',
         'Bulgarian' => '',
         'Bulk Action' => 'Tendo la wingi',
@@ -9291,6 +9292,7 @@ Thanks for your help!
             '',
         'Select your preferred layout for the software.' => '',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => '',
         'Send notifications to users.' => 'tuma taarifa kwa watumiaji',

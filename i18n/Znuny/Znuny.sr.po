@@ -25520,3 +25520,15 @@ msgstr "Линк за постављање нове лозинке биће по
 msgid "Resend is not possible for this article!"
 msgstr "Поновно слање овог чланка није могуће!"
 
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
+

@@ -25509,3 +25509,15 @@ msgstr "Un lien pour définir un nouveau mot de passe sera envoyé à votre adre
 msgid "Resend is not possible for this article!"
 msgstr "Le renvoi de cet article n'est pas possible !"
 
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
+

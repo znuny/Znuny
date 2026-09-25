@@ -25522,3 +25522,15 @@ msgstr "Een link om een nieuw wachtwoord in te stellen wordt naar uw e-mailadres
 msgid "Resend is not possible for this article!"
 msgstr "Opnieuw verzenden is niet mogelijk voor dit artikel!"
 
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
+

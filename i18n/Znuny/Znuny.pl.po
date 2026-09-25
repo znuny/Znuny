@@ -25546,3 +25546,15 @@ msgstr "Link do ustawienia nowego hasła zostanie wysłany na twój adres e-mail
 msgid "Resend is not possible for this article!"
 msgstr "Ponowne wysłanie tego artykułu nie jest możliwe!"
 
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
+

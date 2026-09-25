@@ -25510,3 +25510,15 @@ msgstr "קישור להגדרת סיסמה חדשה יישלח לכתובת הד
 msgid "Resend is not possible for this article!"
 msgstr "שליחה מחדש אינה אפשרית עבור מאמר זה!"
 
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
+

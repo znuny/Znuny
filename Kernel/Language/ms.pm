@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.51558524173028;
+    $Self->{Completeness}        = 0.515421303656598;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8834,10 +8834,11 @@ Kumpulan MejaBantuan Anda
         'Arabic (Saudi Arabia)' => 'Arab (Arab Saudi)',
         'Article Color' => '',
         'ArticleTree' => 'PokokArtikel',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Nama Lampiran',
         'Avatar' => '',
         'Based on global RichText setting' => '',
+        'Blank' => '',
         'Bounced to "%s".' => 'bangkit satu "%s".',
         'Bulgarian' => 'Bulgaria',
         'Bulk Action' => 'Tindakan pukal',
@@ -9299,6 +9300,7 @@ Kumpulan MejaBantuan Anda
             '',
         'Select your preferred layout for the software.' => '',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => 'Hantar mel keluar baru daripada tiket ini.',
         'Send notifications to users.' => 'Hantar notifikasi kepada pelanggan.',

@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.147264631043257;
+    $Self->{Completeness}        = 0.147217806041335;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8832,10 +8832,11 @@ Cảm ơn sự giúp đỡ của bạn!
         'Arabic (Saudi Arabia)' => '',
         'Article Color' => '',
         'ArticleTree' => '',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Tên tập tin đính kèm',
         'Avatar' => '',
         'Based on global RichText setting' => '',
+        'Blank' => '',
         'Bounced to "%s".' => 'Lịch sử::Từ bỏ',
         'Bulgarian' => '',
         'Bulk Action' => 'Lệnh lô',
@@ -9297,6 +9298,7 @@ Cảm ơn sự giúp đỡ của bạn!
             '',
         'Select your preferred layout for the software.' => '',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => '',
         'Send notifications to users.' => '',

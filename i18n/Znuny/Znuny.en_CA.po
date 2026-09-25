@@ -25509,3 +25509,15 @@ msgstr "A link to set a new password will be sent to your email address."
 msgid "Resend is not possible for this article!"
 msgstr "Resend is not possible for this article!"
 
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
+

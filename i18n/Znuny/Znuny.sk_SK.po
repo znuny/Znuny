@@ -25509,3 +25509,15 @@ msgstr "Odkaz na nastavenie nového hesla Vám bude poslaný emailom."
 msgid "Resend is not possible for this article!"
 msgstr "Opätovné odoslanie tohto článku nie je možné!"
 
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
+

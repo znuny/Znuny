@@ -35,7 +35,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.367684478371501;
+    $Self->{Completeness}        = 0.367567567567568;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8829,10 +8829,11 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => '',
         'Article Color' => '',
         'ArticleTree' => '',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Nom de la Pièce Jointe',
         'Avatar' => '',
         'Based on global RichText setting' => '',
+        'Blank' => '',
         'Bounced to "%s".' => 'Redirigé vers "%s".',
         'Bulgarian' => 'Bulgare',
         'Bulk Action' => 'Action groupée',
@@ -9294,6 +9295,7 @@ Thanks for your help!
             'Sélectionnez votre fuseau horaire personnel. L\'horaire du système Znuny sera relatif à cette heure.',
         'Select your preferred layout for the software.' => 'Sélectionnez votre skin préféré pour le système.',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => 'Envoyer un mail à partir de ce ticket',
         'Send notifications to users.' => 'Envoyer des notifications aux utilisateurs.',

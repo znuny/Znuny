@@ -25523,3 +25523,15 @@ msgstr "Một liên kết để đặt mật khẩu mới sẽ được gửi đ
 msgid "Resend is not possible for this article!"
 msgstr "Không thể gửi lại bài viết này!"
 
+#. SysConfig
+msgid "As Popup"
+msgstr ""
+
+#. SysConfig
+msgid "Blank"
+msgstr ""
+
+#. SysConfig
+msgid "Self"
+msgstr ""
+

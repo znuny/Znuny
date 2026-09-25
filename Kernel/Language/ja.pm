@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%m/%d';
     $Self->{DateInputFormat}     = '%Y/%m/%d';
     $Self->{DateInputFormatLong} = '%Y/%m/%d - %T';
-    $Self->{Completeness}        = 0.655693384223919;
+    $Self->{Completeness}        = 0.655484896661367;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8845,10 +8845,11 @@ Thanks for your help!
         'Arabic (Saudi Arabia)' => '',
         'Article Color' => '',
         'ArticleTree' => '',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => '添付ファイル名',
         'Avatar' => 'アバター',
         'Based on global RichText setting' => '',
+        'Blank' => '',
         'Bounced to "%s".' => 'Bounced to "%s".',
         'Bulgarian' => 'ブルガリア語',
         'Bulk Action' => '一括処理',
@@ -9311,6 +9312,7 @@ Thanks for your help!
             '自分のタイムゾーンを選択して下さい。全ての時間は、このタイムゾーンで表示されます。',
         'Select your preferred layout for the software.' => 'ソフトウェアに適したレイアウトを選択して下さい。',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => 'このチケットから新規メールを発信',
         'Send notifications to users.' => 'ユーザーに通知の送信',

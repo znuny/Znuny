@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.826972010178117;
+    $Self->{Completeness}        = 0.82670906200318;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -8835,10 +8835,11 @@ Obrigado pela ajuda!
         'Arabic (Saudi Arabia)' => 'Arábico (Arábia Saudita)',
         'Article Color' => '',
         'ArticleTree' => 'Árvore de Artigo',
-        'AsPopup' => '',
+        'As Popup' => '',
         'Attachment Name' => 'Nome do Anexo',
         'Avatar' => 'Avatar',
         'Based on global RichText setting' => 'Baseado na configuração global RichText',
+        'Blank' => '',
         'Bounced to "%s".' => 'Devolvido a "%s".',
         'Bulgarian' => 'Búlgaro',
         'Bulk Action' => 'Ação em Massa',
@@ -9300,6 +9301,7 @@ Obrigado pela ajuda!
             'Selecione seu fuso horário pessoal. Todos os horários serão exibidos conforme este fuso horário.',
         'Select your preferred layout for the software.' => 'Selecione seu layout preferido para o software.',
         'Select your preferred theme for OTRS.' => '',
+        'Self' => '',
         'Send a unit test file' => '',
         'Send new outgoing mail from this ticket' => 'Enviar novo e-mail de saída deste chamado',
         'Send notifications to users.' => 'Enviar notificações para usuários.',
