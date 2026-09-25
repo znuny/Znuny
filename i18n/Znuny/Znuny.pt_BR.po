@@ -1144,7 +1144,7 @@ msgstr "Acesso de leitura e escrita de chamados neste grupo/fila."
 msgid "Back to search results"
 msgstr "Voltar ao resultado da busca"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "Adicionar Usuário Cliente"
 
@@ -20960,7 +20960,7 @@ msgstr "Por favor, digite ao menos uma palavra de pesquisa para encontrar algo."
 msgid "Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later."
 msgstr "Infelizmente, implantação não é possível no momento possivelmente porque outro agente esta realizando uma implantação. Por favor, tente novamente mais tarde."
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemConfiguration.js
+#. Perl Module: Kernel/Modules/AdminProcessManagement.pm
 msgid "Deploy"
 msgstr "Implantar"
 

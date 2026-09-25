@@ -1,4 +1,4 @@
-Message-ID: <5307A4F6.3020802@otrs.com>
+Message-ID: <5307A4F6.3020802@znuny.com>
 Date: Fri, 21 Feb 2014 13:11:50 -0600
 From: Darth Vader <darth.vader@emprire.gob>
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:24.0) Gecko/20100101 Thunderbird/24.3.0
@@ -37,7 +37,7 @@ Content-Transfer-Encoding: 8bit
     <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
   </head>
   <body bgcolor="#FFFFFF" text="#000000">
-    This is an inline <img src="cid:part1.02040705.00020608@otrs.com"
+    This is an inline <img src="cid:part1.02040705.00020608@znuny.com"
       alt=""> image<br>
     <br>
   </body>
@@ -47,7 +47,7 @@ Content-Transfer-Encoding: 8bit
 Content-Type: image/png;
  name="ceeibejd.png"
 Content-Transfer-Encoding: base64
-Content-ID: <part1.02040705.00020608@otrs.com>
+Content-ID: <part1.02040705.00020608@znuny.com>
 Content-Disposition: attachment;
  filename="ceeibejd.png"
 

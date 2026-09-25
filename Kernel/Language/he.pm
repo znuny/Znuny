@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.216216216216216;
+    $Self->{Completeness}        = 0.216250596279218;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -366,6 +366,7 @@ sub Data {
         'Search' => 'חיפוש',
         'Wildcards like \'*\' are allowed.' => 'תווי חיפוש מיוחדים כגון \'*\' מותרים.',
         'Add Customer' => 'הוסף לקוח',
+        'Add Customer User' => 'הוסף משתמש לקוח',
         'Select' => 'בחר',
         'Customer Users' => 'משתמשי לקוח',
         'Customers ↔ Groups' => '',
@@ -411,7 +412,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'חזרה לתוצאות חיפוש',
-        'Add Customer User' => 'הוסף משתמש לקוח',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'משתמשי לקוח נדרשים כדי שתהיה היסטוריית לקוח והתחברות דרך כניסת הלקוחות.',
         'Customer Users ↔ Customers' => '',
@@ -2883,7 +2883,6 @@ sub Data {
         'Drafts' => '',
         'by' => 'על ידי ',
         'Article Overview - %s Article(s)' => '',
-        'Page %s' => '',
         'No.' => 'מס.',
         'Unread articles' => 'מאמרים שלא נקראו',
         'Via' => '',
@@ -3995,6 +3994,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             '',
+        'Deploy' => '',
         'Need ExampleProcesses!' => '',
         'Need ProcessID!' => '',
         'Unknown Process %s!' => '',
@@ -8492,7 +8492,6 @@ sub Data {
         'Please enter at least one search word to find anything.' => '',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             '',
-        'Deploy' => '',
         'The deployment is already running.' => '',
         'Deployment successful. You\'re being redirected...' => '',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

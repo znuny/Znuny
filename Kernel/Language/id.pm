@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.581081081081081;
+    $Self->{Completeness}        = 0.581173477500397;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -359,6 +359,7 @@ sub Data {
         'Search' => 'Cari',
         'Wildcards like \'*\' are allowed.' => 'Karakter bebas seperti \'*\' di bolehkan.',
         'Add Customer' => 'Tambahkan Pelanggan',
+        'Add Customer User' => 'Tambah Pelanggan pengguna',
         'Select' => 'Pilih',
         'Customer Users' => 'Pengguna pelanggan',
         'Customers ↔ Groups' => '',
@@ -404,7 +405,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Kembali ke hasilpencarian',
-        'Add Customer User' => 'Tambah Pelanggan pengguna',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Pelanggan pengguna diperlukan untuk memiliki riwayat pelanggan dan untuk login melalui panel pelanggan',
         'Customer Users ↔ Customers' => '',
@@ -2878,7 +2878,6 @@ bin/znuny.Daemon.pl status\').',
         'Drafts' => '',
         'by' => 'Oleh',
         'Article Overview - %s Article(s)' => '',
-        'Page %s' => '',
         'No.' => 'Tidak.',
         'Unread articles' => 'Artikel tidak terbaca',
         'Via' => '',
@@ -3990,6 +3989,7 @@ bin/znuny.Daemon.pl status\').',
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             'Informasi manajemen proses dari database tidak sinkron dengan konfigurasi sistem, Silahkan untuk mengsinkronisasikan semua proses.',
+        'Deploy' => '',
         'Need ExampleProcesses!' => 'Perlu contoh proses!',
         'Need ProcessID!' => 'Perlu Proses ID!',
         'Unknown Process %s!' => 'Proses tidak diketahui %s!',
@@ -8488,7 +8488,6 @@ bin/znuny.Daemon.pl status\').',
         'Please enter at least one search word to find anything.' => '',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             '',
-        'Deploy' => '',
         'The deployment is already running.' => '',
         'Deployment successful. You\'re being redirected...' => '',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

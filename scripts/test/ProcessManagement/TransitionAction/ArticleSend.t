@@ -131,6 +131,155 @@ $Self->Is(
     'ArticleSend has correct body',
 );
 
+#
+# send article (rich text), regression test for OTRS_TA_Template/Salutation/Signature
+# being stripped by ToAscii before they could be replaced with the actual
+# template/salutation/signature content, resulting in an empty article body
+#
+
+$TicketID = $HelperObject->TicketCreate(
+    Queue => 'Raw',
+);
+%Ticket = $TicketObject->TicketGet(
+    TicketID      => $TicketID,
+    DynamicFields => 1,
+    UserID        => 1,
+);
+
+$TransitionActionResult = $TransitionActionObject->Run(
+    UserID                   => 1,
+    Ticket                   => \%Ticket,
+    ProcessEntityID          => 'P123',
+    ActivityEntityID         => 'A123',
+    TransitionEntityID       => 'T123',
+    TransitionActionEntityID => 'TA123',
+    Config                   => {
+        SenderType           => 'agent',
+        IsVisibleForCustomer => 1,
+        To                   => 'Some Customer A <customer-a@example.com>',
+        Subject              => 'some short description',
+        Body           => 'the message text | <OTRS_TA_Signature> | <OTRS_TA_Salutation> | <OTRS_TA_Template> | hohoho',
+        Charset        => 'utf-8',
+        MimeType       => 'text/html',
+        HistoryType    => 'AddNote',
+        HistoryComment => 'Some free text!',
+
+        Attachments => 'stdatt1',
+        Template    => 'stdtemplate1',
+        Salutation  => 'salu1',
+        Signature   => 'sig1',
+        UserID      => 1,
+    },
+);
+
+$Self->True(
+    $TransitionActionResult,
+    "TransitionActionObject->Run() (rich text)",
+);
+
+@Articles = $ArticleObject->ArticleList(
+    TicketID => $TicketID,
+    OnlyLast => 1,
+);
+
+%Article = $ArticleObject->ArticleGet(
+    ArticleID => $Articles[0]->{ArticleID},
+    TicketID  => $TicketID,
+    UserID    => 1,
+);
+
+$Self->IsNot(
+    $Article{Body},
+    '',
+    'ArticleSend (rich text) has a non-empty body',
+);
+
+for my $ExpectedContent (qw(StandardTemplateAdd_BLUB SalutationAdd_BLUB SignatureAdd_BLUB)) {
+    $Self->True(
+        ( index( $Article{Body}, $ExpectedContent ) > -1 ) ? 1 : 0,
+        "ArticleSend (rich text) body contains '$ExpectedContent'",
+    );
+}
+
+$Self->True(
+    ( index( $Article{Body}, 'OTRS_TA_' ) == -1 ) ? 1 : 0,
+    'ArticleSend (rich text) body does not contain an unresolved OTRS_TA_ placeholder',
+);
+
+#
+# send article (rich text), same regression test as above but using the ZNUNY_TA_*
+# tag form instead of OTRS_TA_*
+#
+
+$TicketID = $HelperObject->TicketCreate(
+    Queue => 'Raw',
+);
+%Ticket = $TicketObject->TicketGet(
+    TicketID      => $TicketID,
+    DynamicFields => 1,
+    UserID        => 1,
+);
+
+$TransitionActionResult = $TransitionActionObject->Run(
+    UserID                   => 1,
+    Ticket                   => \%Ticket,
+    ProcessEntityID          => 'P123',
+    ActivityEntityID         => 'A123',
+    TransitionEntityID       => 'T123',
+    TransitionActionEntityID => 'TA123',
+    Config                   => {
+        SenderType           => 'agent',
+        IsVisibleForCustomer => 1,
+        To                   => 'Some Customer A <customer-a@example.com>',
+        Subject              => 'some short description',
+        Body        => 'the message text | <ZNUNY_TA_Signature> | <ZNUNY_TA_Salutation> | <ZNUNY_TA_Template> | hohoho',
+        Charset     => 'utf-8',
+        MimeType    => 'text/html',
+        HistoryType => 'AddNote',
+        HistoryComment => 'Some free text!',
+
+        Attachments => 'stdatt1',
+        Template    => 'stdtemplate1',
+        Salutation  => 'salu1',
+        Signature   => 'sig1',
+        UserID      => 1,
+    },
+);
+
+$Self->True(
+    $TransitionActionResult,
+    "TransitionActionObject->Run() (rich text, ZNUNY_TA_ tags)",
+);
+
+@Articles = $ArticleObject->ArticleList(
+    TicketID => $TicketID,
+    OnlyLast => 1,
+);
+
+%Article = $ArticleObject->ArticleGet(
+    ArticleID => $Articles[0]->{ArticleID},
+    TicketID  => $TicketID,
+    UserID    => 1,
+);
+
+$Self->IsNot(
+    $Article{Body},
+    '',
+    'ArticleSend (rich text, ZNUNY_TA_ tags) has a non-empty body',
+);
+
+for my $ExpectedContent (qw(StandardTemplateAdd_BLUB SalutationAdd_BLUB SignatureAdd_BLUB)) {
+    $Self->True(
+        ( index( $Article{Body}, $ExpectedContent ) > -1 ) ? 1 : 0,
+        "ArticleSend (rich text, ZNUNY_TA_ tags) body contains '$ExpectedContent'",
+    );
+}
+
+$Self->True(
+    ( index( $Article{Body}, 'ZNUNY_TA_' ) == -1 ) ? 1 : 0,
+    'ArticleSend (rich text, ZNUNY_TA_ tags) body does not contain an unresolved ZNUNY_TA_ placeholder',
+);
+
 # ConvertText
 
 my $Text = $TransitionActionObject->ConvertText(

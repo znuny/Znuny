@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%m/%d/%Y';
     $Self->{DateInputFormat}     = '%m/%d/%Y';
     $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
-    $Self->{Completeness}        = 0.420985691573927;
+    $Self->{Completeness}        = 0.421052631578947;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -362,6 +362,7 @@ sub Data {
         'Search' => 'Tafuta',
         'Wildcards like \'*\' are allowed.' => 'Wildkadi kama \'*\' zinaruhusiwa.',
         'Add Customer' => 'Ongeza wateja',
+        'Add Customer User' => 'Ongeza mtumiaji wa mteja',
         'Select' => 'chagua',
         'Customer Users' => 'Wateja watumiaji',
         'Customers ↔ Groups' => '',
@@ -407,7 +408,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Rudi kwenye majibu ya utafutaji',
-        'Add Customer User' => 'Ongeza mtumiaji wa mteja',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Mtumiaji wa mteja anahitaji kuwa na historia ya mteja na kuingia kupitia paneli ya mteja.',
         'Customer Users ↔ Customers' => '',
@@ -2879,7 +2879,6 @@ sub Data {
         'Drafts' => '',
         'by' => 'Kwa',
         'Article Overview - %s Article(s)' => '',
-        'Page %s' => '',
         'No.' => 'Hapana.',
         'Unread articles' => 'Makala ambazo hazijasomwa',
         'Via' => '',
@@ -3991,6 +3990,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             'Habari za usimamizi wa mchakato kutoka kwenye hifadhi data hazilandani na  mfumo uliosanidishwa, tafadhali landanisha michakato yote.',
+        'Deploy' => '',
         'Need ExampleProcesses!' => '',
         'Need ProcessID!' => '',
         'Unknown Process %s!' => '',
@@ -8491,7 +8491,6 @@ Mfano:
         'Please enter at least one search word to find anything.' => '',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             '',
-        'Deploy' => '',
         'The deployment is already running.' => '',
         'Deployment successful. You\'re being redirected...' => '',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

@@ -15,7 +15,6 @@ use utf8;
 
 our $ObjectManagerDisabled = 1;
 
-use POSIX qw/ceil/;
 use Kernel::System::EmailParser;
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language              qw(Translatable);
@@ -812,8 +811,9 @@ sub MaskAgentZoom {
     # get param object
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
-    # get article page
-    my $ArticlePage = $ParamObject->GetParam( Param => 'ArticlePage' );
+    # get article page (ArticlePage kept for compatibility; PageNavBar uses StartHit)
+    my $ArticlePage   = $ParamObject->GetParam( Param => 'ArticlePage' );
+    my $StartHitParam = $ParamObject->GetParam( Param => 'StartHit' );
 
     my $IsVisibleForCustomer;
     if ( defined $Self->{ArticleFilter}->{CustomerVisibility} ) {
@@ -861,6 +861,9 @@ sub MaskAgentZoom {
     }
     elsif ($ArticlePage) {
         $Page = $ArticlePage;
+    }
+    elsif ($StartHitParam) {
+        $Page = int( ( $StartHitParam - 1 ) / $Limit ) + 1;
     }
     else {
 
@@ -937,11 +940,6 @@ sub MaskAgentZoom {
     }
 
     $Page ||= 1;
-
-    my $Pages;
-    if ($NeedPagination) {
-        $Pages = ceil( scalar @ArticleBoxAll / $Limit );
-    }
 
     my $ArticleIDFound = 0;
     ARTICLE:
@@ -1077,14 +1075,23 @@ sub MaskAgentZoom {
     # disable the filter)
     if ( @ArticleBox || $Self->{ArticleFilter} ) {
 
-        my $Pagination;
-
         if ($NeedPagination) {
-            $Pagination = {
-                Pages       => $Pages,
-                CurrentPage => $Page,
-                TicketID    => $Ticket{TicketID},
-            };
+            my %PageNav = $LayoutObject->PageNavBar(
+                Limit      => 10_000,
+                StartHit   => ( ( $Page - 1 ) * $Limit ) + 1,
+                PageShown  => $Limit,
+                AllHits    => scalar @ArticleBoxAll,
+                Action     => 'Action=AgentTicketZoom',
+                Link       => "TicketID=$Ticket{TicketID};",
+                IDPrefix   => 'ArticlePages',
+                WindowSize => 5,
+            );
+
+            if ( $PageNav{SiteNavBar} ) {
+                $Param{Pagination} = {
+                    SiteNavBar => $PageNav{SiteNavBar},
+                };
+            }
         }
 
         # show article tree
@@ -1094,7 +1101,7 @@ sub MaskAgentZoom {
             ArticleID         => $ArticleID,
             ArticleMaxLimit   => $ArticleMaxLimit,
             ArticleBox        => \@ArticleBox,
-            Pagination        => $Pagination,
+            Pagination        => $Param{Pagination},
             Page              => $Page,
             ArticleCount      => scalar @ArticleBox,
             AclAction         => \%AclAction,

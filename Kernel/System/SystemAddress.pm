@@ -543,8 +543,8 @@ sub SystemAddressLookup {
         $Key   = 'System address';
         $Value = $Param{SystemAddress} || $Param{Name};
 
-        my %SystemAddressesReverse = reverse %SystemAddresses;
-        $ReturnData = $SystemAddressesReverse{$Value};
+        my %SystemAddressesReverse = map { lc $SystemAddresses{$_} => $_ } keys %SystemAddresses;
+        $ReturnData = $SystemAddressesReverse{ lc $Value };
     }
 
     return $ReturnData;

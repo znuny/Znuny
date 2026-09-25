@@ -52,6 +52,7 @@ BODY
 
 \$ArticleID = \$HelperObject->ArticleCreate(
     TicketID             => \$TicketID,
+    ChannelName          => '$Article{CommunicationChannel}',
     Subject              => '$Article{Subject}',
     Body                 => \$TempValue,
     IsVisibleForCustomer => '$Article{IsVisibleForCustomer}',
@@ -77,6 +78,69 @@ $Self->Is(
     $Output,
     $ExpectedOutout,
     'TicketToUnitTest::HistoryType::AddNote',
+);
+
+my $HTMLBody = '<!DOCTYPE html><html><body><p>UnitTest HTML body</p>'
+    . '<img src="cid:inline-image@example.com" alt=""></body></html>';
+
+my $HTMLTicketID  = $HelperObject->TicketCreate();
+my $HTMLArticleID = $HelperObject->ArticleCreate(
+    TicketID             => $HTMLTicketID,
+    ChannelName          => 'Email',
+    SenderType           => 'customer',
+    HistoryType          => 'EmailCustomer',
+    Subject              => 'UnitTest HTML article',
+    Body                 => $HTMLBody,
+    MimeType             => 'text/html',
+    Charset              => 'utf-8',
+    From                 => 'Customer User <customer@example.com>',
+    To                   => 'Agent User <agent@example.com>',
+    IsVisibleForCustomer => 1,
+    Attachment           => [
+        {
+            Content     => 'fake-png-bytes',
+            ContentType => 'image/png',
+            Filename    => 'inline.png',
+            ContentID   => '<inline-image@example.com>',
+            Disposition => 'inline',
+        },
+    ],
+);
+
+my $HTMLOutput = $TicketToUnitTestHistoryTypeObject->Run(
+    TicketID    => $HTMLTicketID,
+    ArticleID   => $HTMLArticleID,
+    HistoryType => 'AddNote',
+);
+
+$Self->True(
+    ( $HTMLOutput =~ m{MimeType\s+=>\s+'text/html'}sm ),
+    'HTML article generator uses MimeType text/html',
+);
+
+$Self->True(
+    ( $HTMLOutput =~ m{<p>UnitTest HTML body</p>}sm ),
+    'HTML article generator includes HTML body',
+);
+
+$Self->True(
+    ( $HTMLOutput =~ m{ChannelName\s+=>\s+'Email'}sm ),
+    'HTML article generator keeps Email channel',
+);
+
+$Self->True(
+    ( $HTMLOutput =~ m{require MIME::Base64;}sm ),
+    'HTML article generator dumps attachments as Base64',
+);
+
+$Self->True(
+    ( $HTMLOutput =~ m{Filename\s+=>\s+'inline\.png'}sm ),
+    'HTML article generator includes inline image attachment',
+);
+
+$Self->True(
+    ( $HTMLOutput =~ m{ContentID\s+=>\s+'<inline-image\@example\.com>'}sm ),
+    'HTML article generator keeps inline ContentID',
 );
 
 1;

@@ -778,6 +778,186 @@ INSERT INTO article_sender_type (name, valid_id, create_by, create_time, change_
     VALUES
     ('customer', 1, 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('agent::Chat::NotVisibleForCustomer', '#FFCCCCFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('agent::Chat::VisibleForCustomer', '#D1E8D1FF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('agent::Email::NotVisibleForCustomer', '#FFCCCCFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('agent::Email::VisibleForCustomer', '#D1E8D1FF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('agent::Internal::NotVisibleForCustomer', '#FFCCCCFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('agent::Internal::VisibleForCustomer', '#CCCCCCFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('agent::Phone::NotVisibleForCustomer', '#FFCCCCFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('agent::Phone::VisibleForCustomer', '#D1E8D1FF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('agent::Web::NotVisibleForCustomer', '#FFCCCCFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('agent::Web::VisibleForCustomer', '#D1E8D1FF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('system::Chat::NotVisibleForCustomer', '#FFCCCCFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('system::Chat::VisibleForCustomer', '#FFF7BEFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('system::Email::NotVisibleForCustomer', '#FFCCCCFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('system::Email::VisibleForCustomer', '#FFF7BEFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('system::Internal::NotVisibleForCustomer', '#FFCCCCFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('system::Internal::VisibleForCustomer', '#FFF7BEFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('system::Phone::NotVisibleForCustomer', '#FFCCCCFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('system::Phone::VisibleForCustomer', '#FFF7BEFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('system::Web::NotVisibleForCustomer', '#FFCCCCFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('system::Web::VisibleForCustomer', '#FFF7BEFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('customer::Chat::NotVisibleForCustomer', '#FFCCCCFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('customer::Chat::VisibleForCustomer', '#D4DEFCFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('customer::Email::NotVisibleForCustomer', '#FFCCCCFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('customer::Email::VisibleForCustomer', '#D4DEFCFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('customer::Internal::NotVisibleForCustomer', '#FFCCCCFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('customer::Internal::VisibleForCustomer', '#D4DEFCFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('customer::Phone::NotVisibleForCustomer', '#FFCCCCFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('customer::Phone::VisibleForCustomer', '#D4DEFCFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('customer::Web::NotVisibleForCustomer', '#FFCCCCFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
+--  insert into table article_color
+-- ----------------------------------------------------------
+INSERT INTO article_color (name, color, create_by, create_time, change_by, change_time)
+    VALUES
+    ('customer::Web::VisibleForCustomer', '#D4DEFCFF', 1, current_timestamp, 1, current_timestamp);
+-- ----------------------------------------------------------
 --  insert into table ticket
 -- ----------------------------------------------------------
 INSERT INTO ticket (tn, queue_id, ticket_lock_id, user_id, responsible_user_id, ticket_priority_id, ticket_state_id, title, timeout, until_time, escalation_time, escalation_response_time, escalation_update_time, escalation_solution_time, create_by, create_time, change_by, change_time)

@@ -465,7 +465,7 @@ for my $Test (@Tests) {
             Priority     => '3 normal',
             State        => 'closed successful',
             CustomerID   => '123465',
-            CustomerUser => 'unittest@otrs.com',
+            CustomerUser => 'unittest@znuny.com',
             OwnerID      => 1,
             UserID       => 1,
         );
@@ -593,7 +593,7 @@ my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 # cleanup ticket database
 my @DeleteTicketList = $TicketObject->TicketSearch(
     Result            => 'ARRAY',
-    CustomerUserLogin => 'unittest@otrs.com',
+    CustomerUserLogin => 'unittest@znuny.com',
     UserID            => 1,
 );
 for my $TicketID (@DeleteTicketList) {

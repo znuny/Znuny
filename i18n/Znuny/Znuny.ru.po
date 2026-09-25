@@ -1144,7 +1144,7 @@ msgstr "Полные права на чтение и запись для зая�
 msgid "Back to search results"
 msgstr "Назад к результатам поиска"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "Добавить учётную запись клиента"
 
@@ -20960,7 +20960,7 @@ msgstr "Для поиска введите хотя бы одно слово."
 msgid "Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later."
 msgstr "К сожалению, сохранение в настоящий момент невозможно, возможно, это связано с тем, что другой агент уже работает с настройками. Попробуйте, пожалуйста, позже."
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemConfiguration.js
+#. Perl Module: Kernel/Modules/AdminProcessManagement.pm
 msgid "Deploy"
 msgstr "Применить"
 

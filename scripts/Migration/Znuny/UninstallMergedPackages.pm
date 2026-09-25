@@ -40,6 +40,7 @@ sub Run {
         'Znuny-AdditionalTicketAttributeSelection',
         'Znuny-Bugfix1463',
         'Znuny-Bugfix-7_3_1',
+        'Znuny-Bugfix1645',
     );
 
     my $CacheObject   = $Kernel::OM->Get('Kernel::System::Cache');

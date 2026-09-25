@@ -35,7 +35,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.575993640699523;
+    $Self->{Completeness}        = 0.575926220384799;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -368,6 +368,7 @@ sub Data {
         'Search' => 'Cerca',
         'Wildcards like \'*\' are allowed.' => 'Sono permessi i caratteri jolly come \'*\'.',
         'Add Customer' => 'Aggiungi cliente',
+        'Add Customer User' => 'Aggiungi utenza cliente',
         'Select' => 'Seleziona',
         'Customer Users' => 'Utenze clienti',
         'Customers ↔ Groups' => '',
@@ -413,7 +414,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Torna ai risultati della ricerca',
-        'Add Customer User' => 'Aggiungi utenza cliente',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Le utenze cliente sono necessarie per avere una cronologia del cliente e per effettuare l\'accesso dal pannello clienti.',
         'Customer Users ↔ Customers' => 'Utenze clienti ↔ Clienti',
@@ -2885,7 +2885,6 @@ sub Data {
         'Drafts' => 'Bozze',
         'by' => 'da',
         'Article Overview - %s Article(s)' => 'Panoramica dell\'articolo - %s Articolo(i)',
-        'Page %s' => 'Pagina %s',
         'No.' => 'Num.',
         'Unread articles' => 'Articoli non letti',
         'Via' => 'Attraverso',
@@ -3997,6 +3996,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             'Le informazioni di Process Management del database non sono sincronizzate con la configurazione di sistema, sincronizza tutti i processi.',
+        'Deploy' => 'Attiva',
         'Need ExampleProcesses!' => 'Un esempio Processo è necessario!',
         'Need ProcessID!' => 'Il ProcessID è necessario!',
         'Unknown Process %s!' => 'Processo %s sconosciuto!',
@@ -8498,7 +8498,6 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
         'Please enter at least one search word to find anything.' => '',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             'Impossibile eseguire adesso l\'attivazione, forse è in corso un\'altra attivazione da parte di un altro agente. Provare nuovamente in seguito.',
-        'Deploy' => 'Attiva',
         'The deployment is already running.' => 'L\'attivazione è già in esecuzione.',
         'Deployment successful. You\'re being redirected...' => 'Attivazione riuscita. Redirezione ad altra pagina...',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

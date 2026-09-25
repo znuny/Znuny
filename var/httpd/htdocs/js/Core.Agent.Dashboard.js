@@ -531,7 +531,6 @@ Core.Agent.Dashboard = (function (TargetNS) {
             $('#Dashboard' + Core.App.EscapeSelector(WidgetRefresh.Name) + '_toggle').on('click', function() {
 
                 $('#Dashboard' + Core.App.EscapeSelector(WidgetRefresh.Name) + '-box').addClass('Loading');
-                $('#Dashboard' + Core.App.EscapeSelector(WidgetRefresh.Name) + '-box').find('.FilterCount').text($(this).attr('data-filter-count'));
 
                 Core.AJAX.ContentUpdate($('#Dashboard' + Core.App.EscapeSelector(WidgetRefresh.Name)), Core.Config.Get('Baselink') + 'Action=' + Core.Config.Get('Action') +';Subaction=Element;Name=' + WidgetRefresh.Name, function () {
                     $('#Dashboard' + Core.App.EscapeSelector(WidgetRefresh.Name) + '-box').removeClass('Loading');
@@ -767,8 +766,21 @@ Core.Agent.Dashboard = (function (TargetNS) {
         $('#DownloadSVG' + Core.App.EscapeSelector(StatsData.Name)).off('click').on('click', function() {
             this.href = Core.UI.AdvancedChart.ConvertSVGtoBase64($('#GraphWidgetContainer' + Core.App.EscapeSelector(StatsData.Name)));
         });
-        $('#DownloadPNG' + Core.App.EscapeSelector(StatsData.Name)).off('click').on('click', function() {
-            this.href = Core.UI.AdvancedChart.ConvertSVGtoPNG($('#GraphWidgetContainer' + Core.App.EscapeSelector(StatsData.Name)));
+        $('#DownloadPNG' + Core.App.EscapeSelector(StatsData.Name)).off('click').on('click', function(Event) {
+            var Link = this;
+            Event.preventDefault();
+            if (Link.getAttribute('data-download-pending') === '1') {
+                return false;
+            }
+            Link.setAttribute('data-download-pending', '1');
+            Core.UI.AdvancedChart.ConvertSVGtoPNG(
+                $('#GraphWidgetContainer' + Core.App.EscapeSelector(StatsData.Name))
+            ).then(function(DataUrl) {
+                Core.UI.AdvancedChart.TriggerDataUrlDownload(Link, DataUrl);
+            }).finally(function() {
+                Link.removeAttribute('data-download-pending');
+            });
+            return false;
         });
 
         Core.Config.Set('StatsMaxXaxisAttributes', parseInt(StatsData.MaxXaxisAttributes, 10));
@@ -812,7 +824,7 @@ Core.Agent.Dashboard = (function (TargetNS) {
 
         if (WidgetContainer && typeof WidgetContainer['FilterSelected'] !== 'undefined' && WidgetContainer['FilterSelected'] != 'undefined' && typeof WidgetContainer['Filter'] !== 'undefined' && WidgetContainer['Filter'] !== 'undefined'){
             FilterSelected = WidgetContainer['FilterSelected'] || 'All';
-            if(WidgetContainer.Filter[FilterSelected] && WidgetContainer.Filter[FilterSelected].Count){
+            if (WidgetContainer.Filter[FilterSelected] && typeof WidgetContainer.Filter[FilterSelected].Count !== 'undefined') {
                 FilterCount = WidgetContainer.Filter[FilterSelected].Count;
             }
             $('#Dashboard' + Core.App.EscapeSelector(Params.Name) + '-box').find('.FilterCount').text(FilterCount);
@@ -1081,6 +1093,8 @@ Core.Agent.Dashboard = (function (TargetNS) {
             else {
                 $('#Dashboard' + Core.App.EscapeSelector(WidgetContainer.Name) + '-box').find('.RemoveFilters').remove();
             }
+
+            UpdateWidgetFilterCount(WidgetContainer);
         }
 
         // Reinitialize events for Customer Users table on update.
@@ -1173,6 +1187,53 @@ Core.Agent.Dashboard = (function (TargetNS) {
         });
     }
 
+
+    /**
+     * @private
+     * @name UpdateWidgetFilterCount
+     * @memberof Core.Agent.Dashboard
+     * @param {Object} WidgetData - Widget container config (Name, Filter, FilterSelected).
+     * @function
+     * @description
+     *      Syncs the H2 FilterCount badge with the selected tab / current filter total.
+     */
+    function UpdateWidgetFilterCount(WidgetData) {
+        var WidgetName = WidgetData.Name,
+            $Box = $('#Dashboard' + Core.App.EscapeSelector(WidgetName) + '-box'),
+            $SelectedFilterLink,
+            FilterCount,
+            FilterSelected,
+            WidgetContainer;
+
+        if (!$Box.length) {
+            return;
+        }
+
+        $SelectedFilterLink = $Box.find('.HeaderFilter .Tab.Actions li.Selected:not(.AdditionalFilter) a');
+        if (!$SelectedFilterLink.length) {
+            $SelectedFilterLink = $Box.find('.Tab.Actions li.Selected:not(.AdditionalFilter) a');
+        }
+
+        FilterCount = $SelectedFilterLink.attr('data-filter-count');
+
+        if (typeof FilterCount === 'undefined') {
+            WidgetContainer = Core.Config.Get('WidgetContainer' + WidgetName.replace(/-/g, '')) || WidgetData;
+            if (WidgetContainer && WidgetContainer.Filter) {
+                FilterSelected = WidgetContainer.FilterSelected || 'All';
+                if (
+                    WidgetContainer.Filter[FilterSelected]
+                    && typeof WidgetContainer.Filter[FilterSelected].Count !== 'undefined'
+                ) {
+                    FilterCount = WidgetContainer.Filter[FilterSelected].Count;
+                }
+            }
+        }
+
+        if (typeof FilterCount !== 'undefined') {
+            $Box.find('h2 .FilterCount').text(FilterCount);
+        }
+    }
+
     /**
      * @private
      * @name GenericHeaderColumnFilterSort
@@ -1186,10 +1247,6 @@ Core.Agent.Dashboard = (function (TargetNS) {
         var LinkPage, ColumnFilterName, Filter, AdditionalFilter, ColumnFilterID, CustomerID, CustomerUserID, SelectedValues, SeenValues;
 
         $('#ColumnFilter' + Core.App.EscapeSelector(ColumnFilterSort.HeaderColumnName) + Core.App.EscapeSelector(ColumnFilterSort.Name)).off('change').on('change', function(){
-            if ($(this).val() === null) {
-                return false;
-            }
-
             LinkPage         = '';
             Filter           = $('#Filter' + Core.App.EscapeSelector(ColumnFilterSort.Name)).val() || 'All';
             AdditionalFilter = $('#AdditionalFilter' + Core.App.EscapeSelector(ColumnFilterSort.Name)).val() || '';
@@ -1210,13 +1267,22 @@ Core.Agent.Dashboard = (function (TargetNS) {
                     SeenValues[Value] = true;
                     SelectedValues.push(Value);
                 });
-                $.each(SelectedValues, function (Index, Value) {
-                    if (Value) {
-                        LinkPage = LinkPage + ColumnFilterName + '=' + encodeURIComponent(Value) + ';';
-                    }
-                });
+                // Empty multiselect must clear the column filter (jQuery .val() is null when cleared).
+                if (!SelectedValues.length) {
+                    LinkPage = LinkPage + ColumnFilterName + '=DeleteFilter;';
+                }
+                else {
+                    $.each(SelectedValues, function (Index, Value) {
+                        if (Value) {
+                            LinkPage = LinkPage + ColumnFilterName + '=' + encodeURIComponent(Value) + ';';
+                        }
+                    });
+                }
             }
             else {
+                if ($(this).val() === null) {
+                    return false;
+                }
                 LinkPage = LinkPage + ColumnFilterName + '=' + encodeURIComponent($(this).val()) + ';';
             }
 
@@ -1354,10 +1420,6 @@ Core.Agent.Dashboard = (function (TargetNS) {
         $('#ColumnFilter' + Core.App.EscapeSelector(ColumnFilter.HeaderColumnName) + Core.App.EscapeSelector(ColumnFilter.Name)).off('change').on('change', function(){
             var LinkPage, ColumnFilterName, Filter, AdditionalFilter, ColumnFilterID, CustomerID, CustomerUserID, SelectedValues, SeenValues;
 
-            if ($(this).val() === null) {
-                return false;
-            }
-
             LinkPage         = '';
             Filter           = $('#Filter' + Core.App.EscapeSelector(ColumnFilter.Name)).val() || 'All';
             AdditionalFilter = $('#AdditionalFilter' + Core.App.EscapeSelector(ColumnFilter.Name)).val() || '';
@@ -1378,13 +1440,22 @@ Core.Agent.Dashboard = (function (TargetNS) {
                     SeenValues[Value] = true;
                     SelectedValues.push(Value);
                 });
-                $.each(SelectedValues, function (Index, Value) {
-                    if (Value) {
-                        LinkPage = LinkPage + ColumnFilterName + '=' + encodeURIComponent(Value) + ';';
-                    }
-                });
+                // Empty multiselect must clear the column filter (jQuery .val() is null when cleared).
+                if (!SelectedValues.length) {
+                    LinkPage = LinkPage + ColumnFilterName + '=DeleteFilter;';
+                }
+                else {
+                    $.each(SelectedValues, function (Index, Value) {
+                        if (Value) {
+                            LinkPage = LinkPage + ColumnFilterName + '=' + encodeURIComponent(Value) + ';';
+                        }
+                    });
+                }
             }
             else {
+                if ($(this).val() === null) {
+                    return false;
+                }
                 LinkPage = LinkPage + ColumnFilterName + '=' + $(this).val() + ';';
             }
 
@@ -1520,8 +1591,6 @@ Core.Agent.Dashboard = (function (TargetNS) {
                 }
 
                 $('#Dashboard' + Core.App.EscapeSelector(WidgetRefreshData.Name) + '-box').addClass('Loading');
-                $('#Dashboard' + Core.App.EscapeSelector(WidgetRefreshData.Name) + '-box').find('.FilterCount').text($(this).attr('data-filter-count'));
-
                 Core.AJAX.ContentUpdate($('#Dashboard' + Core.App.EscapeSelector(WidgetRefreshData.Name)), Core.Config.Get('Baselink') + 'Action=' + Core.Config.Get('Action') + ';Subaction=Element;Name=' + WidgetRefreshData.Name + ';AdditionalFilter=' + AdditionalFilter + ';Filter=' + Filter + ';CustomerID=' + WidgetRefreshData.CustomerID + ';CustomerUserID=' + WidgetRefreshData.CustomerUserID + ';SortBy=' + SortBy + ';OrderBy=' + OrderBy, function () {
                     $('#Dashboard' + Core.App.EscapeSelector(WidgetRefreshData.Name) + '-box').removeClass('Loading');
                 });
@@ -1554,9 +1623,6 @@ Core.Agent.Dashboard = (function (TargetNS) {
                     // get active filter
                     var Filter = $('#Dashboard' + Core.App.EscapeSelector(WidgetRemoveFilter.Name) + '-box').find('.Tab.Actions li.Selected a').attr('data-filter'),
                     AdditionalFilter = $('#Dashboard' + Core.App.EscapeSelector(WidgetRemoveFilter.Name) + '-box').find('.Tab.Actions li.AdditionalFilter.Selected a').attr('data-filter') || '';
-
-                    // add FilterCount of current selected dropdown filter
-                    $('#Dashboard' + Core.App.EscapeSelector(WidgetRemoveFilter.Name) + '-box').find('.FilterCount').text($(this).attr('data-filter-count'));
 
                     $('#Dashboard' + Core.App.EscapeSelector(WidgetRemoveFilter.Name) + '-box').addClass('Loading');
                     Core.AJAX.ContentUpdate($('#Dashboard' + Core.App.EscapeSelector(WidgetRemoveFilter.Name)), Core.Config.Get('Baselink') + 'Action=' + Core.Config.Get('Action') + ';Subaction=Element;Name=' + WidgetRemoveFilter.Name + ';AdditionalFilter=' + AdditionalFilter + ';Filter=' + Filter + ';CustomerID=' + WidgetRemoveFilter.CustomerID + ';CustomerUserID=' + WidgetRemoveFilter.CustomerUserID + ';RemoveFilters=1', function () {

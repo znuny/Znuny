@@ -1,16 +1,16 @@
-From michiel.beijen@otrs.com  Mon Oct 12 16:49:06 2009
-Return-Path: <michiel.beijen@otrs.com>
-X-Original-To: vo307@vo.otrs.com
-Delivered-To: vo307@vo.otrs.com
-Received: from mail.otrs.com (osser.otrs.com [88.198.17.202])    by vo.otrs.com (Postfix) with ESMTP id 2E38C63406E    for <vo307@vo.otrs.com>; Mon, 12 Oct 2009 16:49:06 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])    by mail.otrs.com (Postfix) with ESMTP id 7DD2E88CE3    for <vo307@vo.otrs.com>; Mon, 12 Oct 2009 16:41:17 +0200 (CEST)
-Received: from mail.otrs.com ([127.0.0.1]) by localhost (osser.otrs.com [127.0.0.1]) (amavisd-new, port 10024) with ESMTP id 26329-06 for <vo307@vo.otrs.com>; Mon, 12 Oct 2009 16:41:13 +0200 (CEST)
-Received: from beefreeitlt (53551B1F.cable.casema.nl [83.85.27.31])    (using TLSv1 with cipher AES128-SHA (128/128 bits))    (No client certificate requested)    by mail.otrs.com (Postfix) with ESMTP id C531688CD0    for <vo307@vo.otrs.com>; Mon, 12 Oct 2009 16:41:12 +0200 (CEST)
-From: "Michiel Beijen" <michiel.beijen@otrs.com>
-To: <vo307@vo.otrs.com>
+From michiel.beijen@znuny.com  Mon Oct 12 16:49:06 2009
+Return-Path: <michiel.beijen@znuny.com>
+X-Original-To: vo307@vo.znuny.com
+Delivered-To: vo307@vo.znuny.com
+Received: from mail.znuny.com (osser.znuny.com [88.198.17.202])    by vo.znuny.com (Postfix) with ESMTP id 2E38C63406E    for <vo307@vo.znuny.com>; Mon, 12 Oct 2009 16:49:06 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])    by mail.znuny.com (Postfix) with ESMTP id 7DD2E88CE3    for <vo307@vo.znuny.com>; Mon, 12 Oct 2009 16:41:17 +0200 (CEST)
+Received: from mail.znuny.com ([127.0.0.1]) by localhost (osser.znuny.com [127.0.0.1]) (amavisd-new, port 10024) with ESMTP id 26329-06 for <vo307@vo.znuny.com>; Mon, 12 Oct 2009 16:41:13 +0200 (CEST)
+Received: from beefreeitlt (53551B1F.cable.casema.nl [83.85.27.31])    (using TLSv1 with cipher AES128-SHA (128/128 bits))    (No client certificate requested)    by mail.znuny.com (Postfix) with ESMTP id C531688CD0    for <vo307@vo.znuny.com>; Mon, 12 Oct 2009 16:41:12 +0200 (CEST)
+From: "Michiel Beijen" <michiel.beijen@znuny.com>
+To: <vo307@vo.znuny.com>
 Subject: Test ticket w/attachment for bug 1970
 Date: Mon, 12 Oct 2009 16:41:12 +0200
-Message-ID: <002901ca4b4a$0b918630$22b49290$@beijen@otrs.com>
+Message-ID: <002901ca4b4a$0b918630$22b49290$@beijen@znuny.com>
 MIME-Version: 1.0
 Content-Type: multipart/mixed; boundary="----=_NextPart_000_002A_01CA4B5A.CF1A5630"
 X-Mailer: Microsoft Office Outlook 12.0
@@ -42,7 +42,7 @@ this happens with otrs 2.0 and also with 2.2.
 see also :
 [Ticket#2007060642000226] email attachments of type .msg (Outlook-Message)
 are
-converted at support@otrs.com
+converted at support@znuny.com
 
 
 
@@ -140,7 +140,7 @@ lang=3DEN-US><o:p>&nbsp;</o:p></span></pre><pre><span lang=3DEN-US>see =
 also :<o:p></o:p></span></pre><pre><span
 lang=3DEN-US>[Ticket#2007060642000226] email attachments of type .msg =
 (Outlook-Message) are<o:p></o:p></span></pre><pre>converted at <a
-href=3D"mailto:support@otrs.com">support@otrs.com</a><o:p></o:p></pre>
+href=3D"mailto:support@znuny.com">support@znuny.com</a><o:p></o:p></pre>
 
 <p class=3DMsoNormal><o:p>&nbsp;</o:p></p>
 

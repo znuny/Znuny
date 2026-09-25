@@ -349,7 +349,16 @@ sub _ReplaceTicketAttributes {
 
     # if we have a TicketArticleCreate transition action then we can't use the data of the parameters
     # for the template generator
-    my $ArticleHashRef = {};
+    #
+    # ContentType/Attachment (added below when resolving <OTRS_FIRST_ARTICLE_Body>/<OTRS_LAST_ARTICLE_Body>)
+    # are only meaningful for transition actions that actually build an article Body; for any other
+    # caller (e.g. DynamicFieldSet) they must not be added to Config, or they get mistaken for
+    # (missing) dynamic field names, even if the config attribute they were resolved for happens
+    # to be named 'Body' too
+    # if a new transition action module is added that also builds an article Body and needs
+    # ContentType/Attachment, add its package name to the regex below as well
+    my $ArticleHashRef      = {};
+    my $IsArticleBodyCaller = 0;
     if ( IsHashRefWithData( $Param{Config} ) ) {
         CALLER:
         for my $Caller ( 0 .. 10 ) {
@@ -357,9 +366,13 @@ sub _ReplaceTicketAttributes {
 
             last CALLER if !$Package1;
 
-            next CALLER if $Subroutine1 !~ m{ ProcessManagement\:\:TransitionAction\:\:TicketArticleCreate }xmsi;
+            next CALLER
+                if $Subroutine1
+                !~ m{ ProcessManagement\:\:TransitionAction\:\:(?:ArticleSend|TicketCreate|TicketArticleCreate) }xmsi;
 
-            $ArticleHashRef = $Param{Config};
+            $IsArticleBodyCaller = 1;
+            $ArticleHashRef      = $Param{Config}
+                if $Subroutine1 =~ m{ ProcessManagement\:\:TransitionAction\:\:TicketArticleCreate }xmsi;
 
             last CALLER;
         }
@@ -593,13 +606,27 @@ sub _ReplaceTicketAttributes {
                                 String => $Article{Body},
                             );
                         }
-                        $Param{Config}->{ContentType} = 'text/html; charset="utf-8"';
+
+                        # only pollute Config with ContentType/Attachment when the tag was resolved
+                        # for the actual article Body of a transition action that builds one, not
+                        # e.g. for an unrelated DynamicFieldSet config key (see bug report about
+                        # Attachment/ContentType leaking in and being mistaken for dynamic field names)
+                        if ( $Attribute eq 'Body' && $IsArticleBodyCaller ) {
+                            $Param{Config}->{ContentType} = 'text/html; charset="utf-8"';
+
+                            # only keep attachments actually referenced inline in the body (e.g.
+                            # embedded images), regular file attachments must only be added via
+                            # Attachments/AttachmentIDs/AttachmentsReuse
+                            my @InlineAttachments = grep { ( $_->{Disposition} // '' ) eq 'inline' }
+                                @{ $ArticleAttachments{$ArticleType} };
+
+                            if (@InlineAttachments) {
+                                $Param{Config}->{Attachment} ||= [];
+                                push @{ $Param{Config}->{Attachment} }, @InlineAttachments;
+                            }
+                        }
                         $Value = "<blockquoute>$Value</blockquoute>";
                         Encode::_utf8_on($Value);
-
-                        # get all attachments if there is more than one article tag
-                        $Param{Config}->{Attachment} ||= [];
-                        push @{ $Param{Config}->{Attachment} }, @{ $ArticleAttachments{$ArticleType} };
                     }
 
                     # replace tag in data
@@ -763,14 +790,14 @@ sub _ReplaceAdditionalAttributes {
 
     my $TemplateGeneratorObject = $Kernel::OM->Get('Kernel::System::TemplateGenerator');
 
-    # start replacing of OTRS smart tags
+    # start replacing of OTRS/ZNUNY smart tags
     ATTRIBUTE:
     for my $Attribute ( sort keys %{ $Param{Config} } ) {
 
         next ATTRIBUTE if !$Param{Config}->{$Attribute};
         my $ConfigValue = $Param{Config}->{$Attribute};
 
-        if ( $ConfigValue =~ m{<OTRS_[A-Za-z0-9_]+(?:\[(?:.+?)\])?>}smxi ) {
+        if ( $ConfigValue =~ m{<(?:OTRS|ZNUNY)_[A-Za-z0-9_]+(?:\[(?:.+?)\])?>}smxi ) {
 
             if ($RichText) {
                 $ConfigValue = $HTMLUtilsObject->ToHTML(
@@ -789,9 +816,25 @@ sub _ReplaceAdditionalAttributes {
             );
 
             if ($RichText) {
+
+                # protect OTRS_TA_*/ZNUNY_TA_* placeholders (e.g. OTRS_TA_Template,
+                # ZNUNY_TA_Salutation, OTRS_TA_Signature) from being stripped by ToAscii below,
+                # since they are meant to survive this pass untouched (see the OTRS_TA dummy
+                # dynamic field in TemplateGenerator::_Replace) and get replaced later in
+                # ArticleSend/Run
+                my @TAPlaceholders;
+                $ConfigValue =~ s{(<|&lt;)((?:OTRS|ZNUNY)_TA_[A-Za-z0-9]+)(>|&gt;)}{
+                    push @TAPlaceholders, "$1$2$3";
+                    sprintf( 'TAPLACEHOLDER%d', $#TAPlaceholders );
+                }xmsige;
+
                 $ConfigValue = $HTMLUtilsObject->ToAscii(
                     String => $ConfigValue,
                 );
+
+                for my $Index ( 0 .. $#TAPlaceholders ) {
+                    $ConfigValue =~ s{TAPLACEHOLDER$Index}{$TAPlaceholders[$Index]}xms;
+                }
 
                 # For body, create a completed html doc for correct displaying.
                 if ( $Attribute eq 'Body' ) {

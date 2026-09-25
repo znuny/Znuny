@@ -324,8 +324,12 @@ $Selenium->RunTest(
                         "FieldID $FieldID exists",
                     );
                     if ( $CheckFields eq 'Mandatory' ) {
+
+                        # InputFields points the label at "<id>_Search" after the select is modernized.
                         $Self->Is(
-                            $Selenium->execute_script("return \$('label[for=$FieldID].Mandatory').length;"),
+                            $Selenium->execute_script(
+                                "return \$('label[for=\"$FieldID\"].Mandatory, label[for=\"${FieldID}_Search\"].Mandatory').length;"
+                            ),
                             1,
                             "FieldID $FieldID is mandatory",
                         );

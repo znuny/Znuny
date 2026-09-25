@@ -47,6 +47,7 @@
                             <input type="hidden" name="Nav" value="[% Data.Nav | html %]"/>
 
                             <button class="CallForAction btn-main btn-primary-ghost" type="submit"><span><i class="fa fa-plus-square"></i> [% Translate("Add Customer User") | html %]</span></button>
+                            <a href="[% Env("Baselink") %]Action=AdminCustomerCompany;Subaction=Add;Nav=[% Data.Nav | uri %]" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-plus-square"></i>[% Translate("Add Customer") | html %]</span></a>
                             <label class="InvisibleText" for="Source">[% Translate("Select") | html %]</label>
                             [% Data.SourceOption %]
                         </form>

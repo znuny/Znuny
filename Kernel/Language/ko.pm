@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d %T';
-    $Self->{Completeness}        = 0.831796502384738;
+    $Self->{Completeness}        = 0.831769756718079;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -359,6 +359,7 @@ sub Data {
         'Search' => '검색',
         'Wildcards like \'*\' are allowed.' => '\'*\'와 같은 와일드 카드는 허용됩니다.',
         'Add Customer' => '고객 추가',
+        'Add Customer User' => '고객 사용자 추가',
         'Select' => '선택',
         'Customer Users' => '고객 사용자',
         'Customers ↔ Groups' => '고객 ↔ 그룹',
@@ -404,7 +405,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => '검색 결과로 돌아가기',
-        'Add Customer User' => '고객 사용자 추가',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             '고객 사용자는 고객 기록을 보유하고 고객 패널을 통해 로그인해야 합니다.',
         'Customer Users ↔ Customers' => '고객 사용자 ↔ 고객',
@@ -2876,7 +2876,6 @@ sub Data {
         'Drafts' => '체커',
         'by' => '으로',
         'Article Overview - %s Article(s)' => '기사 개관 - %s건의 기사',
-        'Page %s' => '페이지 %s',
         'No.' => '아니오.',
         'Unread articles' => '읽지 않은 기사',
         'Via' => '~를 이용해',
@@ -3988,6 +3987,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             '데이터베이스의 프로세스 관리 정보가 시스템 구성과 동기화되지 않았습니다. 모든 프로세스를 동기화 하십시오.',
+        'Deploy' => '배포',
         'Need ExampleProcesses!' => 'ExampleProcesses가 필요합니다!',
         'Need ProcessID!' => 'ProcessID가 필요합니다!',
         'Unknown Process %s!' => '알 수없는 프로세스 %s!',
@@ -8485,7 +8485,6 @@ sub Data {
         'Please enter at least one search word to find anything.' => '검색할 단어를 하나 이상 입력하십시오.',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             '안타깝게도 다른 에이전트가 이미 배포 중이므로 현재 배포할 수 없습니다. 나중에 다시 시도 해주십시오.',
-        'Deploy' => '배포',
         'The deployment is already running.' => '배포가 이미 실행 중입니다.',
         'Deployment successful. You\'re being redirected...' => '배포가 완료되었습니다. 리디렉션 중입니다...',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

@@ -1142,7 +1142,7 @@ msgstr "Visas lasīšanas un rakstīšanas tiesības šajā grupā/rindā."
 msgid "Back to search results"
 msgstr "Atpakaļ pie meklēšanas rezultātiem"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "Pievienot klientu"
 
@@ -20930,7 +20930,7 @@ msgstr ""
 msgid "Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later."
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemConfiguration.js
+#. Perl Module: Kernel/Modules/AdminProcessManagement.pm
 msgid "Deploy"
 msgstr ""
 

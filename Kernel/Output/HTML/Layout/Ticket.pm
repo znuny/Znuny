@@ -1077,12 +1077,26 @@ sub TimeUnits {
 
     if ( $Type eq 'Dropdown' ) {
 
-        my $Config = $ConfigObject->Get( 'Ticket::Frontend::AccountTime::' . $Type );
-        my $DefaultTimeUnits;
+        my $Config      = $ConfigObject->Get( 'Ticket::Frontend::AccountTime::' . $Type );
+        my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
+        my $DefaultTimeUnits;
         for my $Item ( sort keys %{$Config} ) {
 
-            my $Label = $Config->{$Item}->{Label};
+            my $Label      = $Config->{$Item}->{Label};
+            my $FieldName  = $Param{Name} . $Label;
+            my $SelectedID = $Config->{$Item}->{DataSelected};
+
+            if ( defined $Param{$FieldName} && $Param{$FieldName} ne '' ) {
+                $SelectedID = $Param{$FieldName};
+            }
+            else {
+                my $FieldValue = $ParamObject->GetParam( Param => $FieldName );
+                if ( defined $FieldValue && $FieldValue ne '' ) {
+                    $SelectedID = $FieldValue;
+                }
+            }
+
             $DefaultTimeUnits += $Config->{$Item}->{DataSelected} || 0;
 
             my $Field = $LocalLayoutObject->BuildSelection(
@@ -1092,7 +1106,7 @@ sub TimeUnits {
                 },
                 ID           => $Param{ID} . $Label,
                 Name         => $Param{Name} . $Label,
-                SelectedID   => $Config->{$Item}->{DataSelected},
+                SelectedID   => $SelectedID,
                 PossibleNone => 1,
                 Sort         => 'NumericKey',
                 Translation  => 0,
@@ -1115,12 +1129,12 @@ sub TimeUnits {
             Data => \%Param,
         );
 
-        # Initially call SetTimeUnits if default time units are configured.
+        # Initially call SetTimeUnits if default or submitted time units are configured.
         # Otherwise, if time units are configured as required, default values
         # will be shown as selected (hours, minutes and/or seconds) but not be recognized
         # as filled out fields, preventing a submit until one of the values
         # will be re-selected manually.
-        if ($DefaultTimeUnits) {
+        if ( $DefaultTimeUnits || $Param{TimeUnits} ) {
             my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
             my $IDJSONString = $JSONObject->Encode(
                 Data => $Param{ID},

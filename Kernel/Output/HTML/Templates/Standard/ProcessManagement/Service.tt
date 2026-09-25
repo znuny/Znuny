@@ -28,5 +28,4 @@
     <div class="FieldExplanation">[% Translate(Data.DescriptionShort) | html %]</div>
 [% RenderBlockEnd("rw:Service:DescriptionShort") %]
 </div>
-<div class="Clear"></div>
 [% RenderBlockEnd("rw:Service") %]

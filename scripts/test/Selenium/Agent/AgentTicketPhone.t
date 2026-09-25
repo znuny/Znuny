@@ -40,7 +40,7 @@ $Selenium->RunTest(
             1,
             1,
             'var',
-            'http://www.otrs.com',
+            'http://www.znuny.com',
             0,
             '',
             'AsPopup OTRSPopup_TicketAction',

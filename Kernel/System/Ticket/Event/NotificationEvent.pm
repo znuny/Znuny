@@ -11,6 +11,7 @@ package Kernel::System::Ticket::Event::NotificationEvent;
 
 use strict;
 use warnings;
+use utf8;
 
 use List::Util qw(first);
 use Mail::Address;
@@ -20,6 +21,7 @@ use Kernel::System::VariableCheck qw(:all);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::CheckItem',
+    'Kernel::System::CommunicationChannel',
     'Kernel::System::CustomerUser',
     'Kernel::System::DateTime',
     'Kernel::System::DynamicField',
@@ -713,16 +715,46 @@ sub _RecipientsGet {
                 elsif ( $Recipient eq 'AgentCreateBy' ) {
 
                     # Check if the first article was created by an agent.
-                    my @Articles = $ArticleObject->ArticleList(
-                        TicketID   => $Param{Data}->{TicketID},
-                        SenderType => 'agent',
-                        OnlyFirst  => 1,
+                    my ($Article) = $ArticleObject->ArticleList(
+                        TicketID  => $Param{Data}->{TicketID},
+                        OnlyFirst => 1,
                     );
+                    my $WantCreator = 0;
 
-                    if ( $Articles[0] && $Articles[0]->{ArticleNumber} == 1 ) {
-                        push @{ $Notification{Data}->{RecipientAgents} }, $Ticket{CreateBy};
+                    if ( !$Article ) {
+
+                        # We need the ticket creator on the list if the ticket has no articles at all yet
+                        # (happens for process tickets, see #1510)
+                        $WantCreator = 1;
+                    }
+                    else {
+                        my $SenderType = $ArticleObject->ArticleSenderTypeLookup(
+                            SenderTypeID => $Article->{SenderTypeID},
+                        );
+
+                        # Also if the first article is by an agent
+                        if ( defined $SenderType && $SenderType eq 'agent' ) {
+                            $WantCreator = 1;
+                        }
+                        else {
+                            my %CommunicationChannel
+                                = $Kernel::OM->Get('Kernel::System::CommunicationChannel')->ChannelGet(
+                                ChannelID => $Article->{CommunicationChannelID},
+                                );
+                            my $CommunicationChannelModule = $CommunicationChannel{Module};
+
+                            # Finally, if this is a phone ticket
+                            if (
+                                defined $CommunicationChannelModule
+                                && $CommunicationChannelModule eq 'Kernel::System::CommunicationChannel::Phone'
+                                )
+                            {
+                                $WantCreator = 1;
+                            }
+                        }
                     }
 
+                    push @{ $Notification{Data}->{RecipientAgents} }, $Ticket{CreateBy} if $WantCreator;
                 }
             }
 

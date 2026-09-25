@@ -152,6 +152,8 @@ div.Headline .Flag {
     border-bottom: none;
     margin: 0px;
     height: 100% !important;
+    display: flex;
+    flex-direction: column;
 }
 
 #ArticleTableBody .Scroller {
@@ -163,6 +165,13 @@ div.Headline .Flag {
     overflow-x: hidden;
     margin-bottom: 0 !important;
     border: none;
+    /* shrink instead of pushing the resize handle out of the clipped container */
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+#ArticleTableBody .Handle {
+    flex: 0 0 auto;
 }
 
 #ArticleTableBody .Scroller::-webkit-scrollbar-track {
@@ -181,6 +190,20 @@ div.Headline .Flag {
 
 #ArticleTableBody .Scroller .DataTable {
     border: 0px;
+}
+
+#ArticleTable {
+    overflow: visible;
+}
+
+#ArticleTable thead th {
+    position: sticky;
+    top: 0;
+    z-index: 11;
+}
+
+#ArticleTable tbody tr:hover {
+    z-index: 1;
 }
 
 .ArticleMailHeader {
@@ -440,7 +463,7 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
 }
 
 /**
- * @subsection  ControlRow Icons
+ * @subsection  ControlRow Icons / Article pages in header
  */
 
 .ArticleFilter,
@@ -457,6 +480,17 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
     float: right;
 }
 
+#ArticleTree .cardTitle .ArticlePages {
+    position: absolute;
+    right: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    padding-right: 0;
+}
+
+#ArticleTree .cardTitle .ArticlePages a,
+.WidgetActions .ArticlePages a,
 .ControlRow .Icons a {
     display: flex;
     flex-flow: row;
@@ -469,6 +503,8 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
     height: 26px;
 }
 
+#ArticleTree .cardTitle .ArticlePages a:hover,
+.WidgetActions .ArticlePages a:hover,
 .ControlRow .Icons a:hover {
     background-color: var(--icon-hover-color-light);
     color: var(--gray-dark-semi);
@@ -481,6 +517,10 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
     display: block;
 }
 
+#ArticleTree .cardTitle .ArticlePages a.Active,
+#ArticleTree .cardTitle .ArticlePages a.Selected,
+.WidgetActions .ArticlePages a.Active,
+.WidgetActions .ArticlePages a.Selected,
 .ControlRow .Icons a.Active {
     color: var(--primary-color);
     font-weight: bold;
@@ -607,24 +647,62 @@ tbody td.Sender {
     border-right: 0px;
 }
 
+/*
+ * Article colors are rendered per article type as "background: <color> !important"
+ * (Kernel/Output/CSS/ArticleColor.pm). Hover and selection therefore must not use
+ * background. The border of every cell is always present but transparent, so that
+ * marking a row only changes the border color and never the row height.
+ */
+#ArticleTable.DataTable tbody tr > td {
+    cursor: pointer;
+    transition: border-color ease 0.15s, filter ease 0.15s;
+    filter: saturate(0.5);
+    border-top: var(--border-width) var(--border-solid) transparent;
+    border-bottom: var(--border-width) var(--border-solid) transparent;
+}
+
+#ArticleTable.DataTable tbody tr > td:first-child {
+    border-left: var(--border-width) var(--border-solid) transparent;
+}
+
+#ArticleTable.DataTable tbody tr > td:last-child {
+    border-right: var(--border-width) var(--border-solid) transparent;
+}
+
+#ArticleTable.DataTable tbody tr:hover > td,
+#ArticleTable.DataTable tbody tr.Active > td {
+    border-color: var(--article-row-active-accent);
+}
+
+/* The marked row is rounded on its outer corners only, so that the highlighted
+   row reads as a single element instead of separate cells. */
+#ArticleTable.DataTable tbody tr:hover > td:first-child,
+#ArticleTable.DataTable tbody tr.Active > td:first-child {
+    border-top-left-radius: var(--border-radius-xs);
+    border-bottom-left-radius: var(--border-radius-xs);
+}
+
+#ArticleTable.DataTable tbody tr:hover > td:last-child,
+#ArticleTable.DataTable tbody tr.Active > td:last-child {
+    border-top-right-radius: var(--border-radius-xs);
+    border-bottom-right-radius: var(--border-radius-xs);
+}
+
+/* Instead of adding another color, all rows are desaturated. The hovered and the
+   selected row keep their original article color and therefore stand out. */
+#ArticleTable.DataTable tbody tr:hover > td,
+#ArticleTable.DataTable tbody tr.Active > td {
+    filter: none;
+}
+
+#ArticleTable tbody tr > td:first-child {
+    position: relative;
+}
 
 .UseArticleColors tr:nth-child(even) td {
     transition: background ease 0.3s;
     background-color: var(--table-td-even-bg);
     border-color: #ccc;
-    border-bottom: 1px solid #eee;
-}
-
-.UseArticleColors tr.Active > td,
-.UseArticleColors tr.Active:hover > td {
-    background-color: var(--mail-outgoing-color);
-    border-color: var(--mail-outgoing-color);
-}
-
-.UseArticleColors tr:hover > td {
-    background-color: var(--primary-color-rgb);
-    border-color: var(--primary-color-rgb);
-    border-right-color: var(--primary-color-rgb);
 }
 
 .UseArticleColors tr.NotVisibleForCustomer > td {
@@ -633,21 +711,9 @@ tbody td.Sender {
     border-color: #e7abab;
 }
 
-.UseArticleColors tr.NotVisibleForCustomer.Active > td,
-.UseArticleColors tr.NotVisibleForCustomer:hover > td {
-    background-color: #e7abab;
-    border-color: #e7abab;
-}
-
 .UseArticleColors tr.system > td {
     background: #fff7be;
     border-bottom-color: #ffef80;
-    border-color: #ffef80;
-}
-
-.UseArticleColors tr.system.Active > td,
-.UseArticleColors tr.system:hover > td {
-    background-color: #ffef80;
     border-color: #ffef80;
 }
 

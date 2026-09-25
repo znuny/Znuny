@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.855802861685215;
+    $Self->{Completeness}        = 0.855779933216728;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -360,6 +360,7 @@ sub Data {
         'Search' => 'Тражи',
         'Wildcards like \'*\' are allowed.' => 'Џокерски знаци као \'*\' су дозвољени.',
         'Add Customer' => 'Додај клијента',
+        'Add Customer User' => 'Додај клијента корисника',
         'Select' => 'Изабери',
         'Customer Users' => 'Клијенти корисници',
         'Customers ↔ Groups' => 'Клијенти ↔ групе',
@@ -405,7 +406,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Врати се на резултате претраге',
-        'Add Customer User' => 'Додај клијента корисника',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Клијент клијент треба да има клијентски историјат и да се пријави преко клијентског панела.',
         'Customer Users ↔ Customers' => 'Клијент корисници ↔ клијенти',
@@ -2877,7 +2877,6 @@ sub Data {
         'Drafts' => 'Нацрти',
         'by' => 'од',
         'Article Overview - %s Article(s)' => 'Преглед чланака - %s чланак(а)',
-        'Page %s' => 'Страна %s',
         'No.' => 'Бр.',
         'Unread articles' => 'Непрочитани чланци',
         'Via' => 'Преко',
@@ -3989,6 +3988,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             'Обрађене информације из базе података нису синхронизоване са системском конфигурацијом, молимо вас да синхронизујете све процесе.',
+        'Deploy' => 'Распореди',
         'Need ExampleProcesses!' => 'Неопходан ExampleProcesses!',
         'Need ProcessID!' => 'Неопходан ProcessID!',
         'Unknown Process %s!' => 'Непознат процес %s!',
@@ -8486,7 +8486,6 @@ sub Data {
         'Please enter at least one search word to find anything.' => 'Молимо унесите барем једну кључну реч да би сте нешто пронашли.',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             'Нажалост, распоређивање тренутно није могуће, вероватно зато што други корисник већ распоређује. Молимо покушајте касније.',
-        'Deploy' => 'Распореди',
         'The deployment is already running.' => 'Распоређивање је већ у току.',
         'Deployment successful. You\'re being redirected...' => 'Распоређивање успешно, бићете преусмерени...',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.999523052464229;
+    $Self->{Completeness}        = 0.999522976625855;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -365,6 +365,7 @@ sub Data {
         'Search' => 'Keresés',
         'Wildcards like \'*\' are allowed.' => 'Helyettesítő karakterek (például „*”) engedélyezettek.',
         'Add Customer' => 'Ügyfél hozzáadása',
+        'Add Customer User' => 'Ügyfél-felhasználó hozzáadása',
         'Select' => 'Kiválasztás',
         'Customer Users' => 'Ügyfél-felhasználók',
         'Customers ↔ Groups' => 'Ügyfelek ↔ Csoportok',
@@ -410,7 +411,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Vissza a keresési eredményekhez',
-        'Add Customer User' => 'Ügyfél-felhasználó hozzáadása',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Az ügyfél-felhasználó az ügyfél-előzményekhez és az ügyfélpanelen keresztüli bejelentkezéshez szükséges.',
         'Customer Users ↔ Customers' => 'Ügyfél-felhasználók ↔ Ügyfelek',
@@ -2882,7 +2882,6 @@ sub Data {
         'Drafts' => 'Piszkozatok',
         'by' => '–',
         'Article Overview - %s Article(s)' => 'Bejegyzés áttekintő – %s bejegyzés',
-        'Page %s' => '%s. oldal',
         'No.' => 'Szám',
         'Unread articles' => 'Olvasatlan bejegyzések',
         'Via' => 'Ezen keresztül',
@@ -3994,6 +3993,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             'Az adatbázis folyamatkezelő információi nincsenek szinkronizálva a rendszer beállításaival, szinkronizáljon minden folyamatot.',
+        'Deploy' => 'Üzembe állítás',
         'Need ExampleProcesses!' => 'Példafolyamatok szükségesek!',
         'Need ProcessID!' => 'Folyamatazonosító szükséges!',
         'Unknown Process %s!' => 'Ismeretlen folyamat: %s!',
@@ -8491,7 +8491,6 @@ sub Data {
         'Please enter at least one search word to find anything.' => 'Adjon meg legalább egy keresőszót, ha bármire rá szeretne keresni.',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             'Sajnálatos módon az üzembe állítás jelenleg nem lehetséges, mert talán egy másik ügyintéző már üzembe állította. Próbálja meg később újra.',
-        'Deploy' => 'Üzembe állítás',
         'The deployment is already running.' => 'Az üzembe állítás már fut.',
         'Deployment successful. You\'re being redirected...' => 'Az üzembe állítás sikerült. Most átirányítjuk…',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

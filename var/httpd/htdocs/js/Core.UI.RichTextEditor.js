@@ -883,16 +883,17 @@ Core.UI.RichTextEditor = (function (TargetNS) {
                     insert: {
                         type: 'block',
                     },
-                styles: {
-                    options: [
-                        'inline',
-                        'alignLeft',
-                        'alignRight',
-                        'alignCenter',
-                        'alignBlockLeft',
-                        'alignBlockRight',
-                        'block',
-                        'side' ]
+                    styles: {
+                        options: [
+                            'inline',
+                            'alignLeft',
+                            'alignRight',
+                            'alignCenter',
+                            'alignBlockLeft',
+                            'alignBlockRight',
+                            'block',
+                            'side'
+                        ]
                     },
                     toolbar: [
                         'imageStyle:inline',
@@ -907,7 +908,9 @@ Core.UI.RichTextEditor = (function (TargetNS) {
                         '|',
                         'imageStyle:side',
                         '|',
-                        'imageTextAlternative'
+                        'imageTextAlternative',
+                        '|',
+                        'linkImage'
                     ],
                 },
             },
@@ -973,6 +976,34 @@ Core.UI.RichTextEditor = (function (TargetNS) {
                         }
                 }
             });
+
+            // Core.RichTextEditor.InternalArticleStyles.css resets all styles inside the editor
+            // content (all: revert) to keep the framework CSS from leaking into emails,
+            // but this also strips the size hint that browsers derive from width/height HTML
+            // attributes on images (e.g. logos in a quoted signature). Promote the width
+            // attribute to an inline style so it survives the revert, since inline styles are
+            // not affected by it. The observer also catches images loaded later.
+            (function() {
+                var EditableElement = editor.editing.view.getDomRoot();
+
+                function FixImageDimensions() {
+                    var Images = EditableElement.querySelectorAll('img[width]'),
+                        Image,
+                        Width,
+                        Index;
+
+                    for (Index = 0; Index < Images.length; Index++) {
+                        Image = Images[Index];
+                        Width = Image.getAttribute('width');
+                        if (Width && !Image.style.width) {
+                            Image.style.width = (String(Width).indexOf('%') === -1) ? Width + 'px' : Width;
+                        }
+                    }
+                }
+
+                new MutationObserver(FixImageDimensions).observe(EditableElement, { childList: true, subtree: true });
+                FixImageDimensions();
+            })();
 
             editor.model.document.on('change:data', function() {
                 var Changes,
@@ -1393,6 +1424,7 @@ Core.UI.RichTextEditor = (function (TargetNS) {
             'Indent',
             'IndentBlock',
             'Link',
+            'LinkImage',
             'List',
             'ListProperties',
             'MediaEmbed',
@@ -1406,6 +1438,7 @@ Core.UI.RichTextEditor = (function (TargetNS) {
             'SourceEditing',
             'SpecialCharacters',
             'SpecialCharactersMathematical',
+            'SplitQuote',
             'Style',
             'Table',
             'TableCaption',

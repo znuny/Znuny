@@ -1142,7 +1142,7 @@ msgstr "对于组/队列中的工单具有完整的'读写'权限。"
 msgid "Back to search results"
 msgstr "返回到搜索结果"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "添加客户用户"
 
@@ -20958,7 +20958,7 @@ msgstr "请输入至少一个搜索词以查找任何内容。"
 msgid "Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later."
 msgstr "很遗憾，现在不能开始部署，也许是因为另一个服务人员已经开始部署了。 请稍后再试。"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemConfiguration.js
+#. Perl Module: Kernel/Modules/AdminProcessManagement.pm
 msgid "Deploy"
 msgstr "部署"
 

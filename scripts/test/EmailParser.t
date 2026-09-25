@@ -35,13 +35,13 @@ my $EmailParserObject = Kernel::System::EmailParser->new(
 
 $Self->Is(
     $EmailParserObject->GetParam( WHAT => 'To' ),
-    'darthvader@otrs.org',
+    'darthvader@znuny.org',
     "#1 GetParam(WHAT => 'To')",
 );
 
 $Self->Is(
     $EmailParserObject->GetParam( WHAT => 'From' ),
-    'Skywalker Attachment <skywalker@otrs.org>',
+    'Skywalker Attachment <skywalker@znuny.org>',
     "#1 GetParam(WHAT => 'From')",
 );
 
@@ -682,7 +682,7 @@ $Self->Is(
 $MD5 = $MainObject->MD5sum( String => $EmailParserObject->GetMessageBody() ) || '';
 $Self->Is(
     $MD5,
-    '7e45ab84117a417158a1a7162bdfd387',
+    'fd924c11017677380752522ae9280cfe',
     "#14 md5 body check",
 );
 

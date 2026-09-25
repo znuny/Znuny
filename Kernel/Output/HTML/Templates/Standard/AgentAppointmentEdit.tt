@@ -175,6 +175,7 @@
             </div>
 
             <div class="field-wrapper">
+                <label for="AllDay">[% Translate("All-day") | html %]</label>
                 <div class="CheckboxContainer">
                     <div class="Field">
                         [% IF Data.TicketAppointmentRuleID || Data.PermissionLevel < 2 %]
@@ -183,7 +184,6 @@
                         <input type="checkbox" id="AllDay" name="AllDay" [% Data.AllDayChecked %] />
                         [% END %]
                     </div>
-                    <label for="AllDay">[% Translate("All-day") | html %]</label>
                 </div>
             </div>
 

@@ -1142,7 +1142,7 @@ msgstr "Fulla läs- och skrivrättigheter till ärenden i denna grupp/kö."
 msgid "Back to search results"
 msgstr "Tillbaka till sökresultat"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "Lägg till kundanvändare"
 
@@ -20950,7 +20950,7 @@ msgstr ""
 msgid "Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later."
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemConfiguration.js
+#. Perl Module: Kernel/Modules/AdminProcessManagement.pm
 msgid "Deploy"
 msgstr ""
 

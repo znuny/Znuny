@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d %T';
-    $Self->{Completeness}        = 0.297933227344992;
+    $Self->{Completeness}        = 0.297980601049451;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -362,6 +362,7 @@ sub Data {
         'Search' => 'Procurar',
         'Wildcards like \'*\' are allowed.' => '',
         'Add Customer' => 'Adicionar cliente',
+        'Add Customer User' => 'Adicionar utilizador cliente',
         'Select' => 'Selecionar',
         'Customer Users' => 'Utilizadores de cliente',
         'Customers ↔ Groups' => '',
@@ -407,7 +408,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Voltar aos resultados da pesquisa',
-        'Add Customer User' => 'Adicionar utilizador cliente',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             '',
         'Customer Users ↔ Customers' => '',
@@ -2879,7 +2879,6 @@ sub Data {
         'Drafts' => '',
         'by' => 'por',
         'Article Overview - %s Article(s)' => '',
-        'Page %s' => '',
         'No.' => 'Nr.',
         'Unread articles' => 'Artigos por ler',
         'Via' => '',
@@ -3991,6 +3990,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             'Informações do Processo de Manutenção da base de dados não está a sincronizar com o sistema de configuração, por favor, sincronizar todos os processos.',
+        'Deploy' => '',
         'Need ExampleProcesses!' => '',
         'Need ProcessID!' => '',
         'Unknown Process %s!' => '',
@@ -8488,7 +8488,6 @@ sub Data {
         'Please enter at least one search word to find anything.' => '',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             '',
-        'Deploy' => '',
         'The deployment is already running.' => '',
         'Deployment successful. You\'re being redirected...' => '',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

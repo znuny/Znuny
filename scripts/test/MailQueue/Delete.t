@@ -110,8 +110,8 @@ my $CreateTestData = sub {
     );
 
     my %ElementData = (
-        Sender    => 'mailqueue.test@otrs.com',
-        Recipient => 'mailqueue.test@otrs.com',
+        Sender    => 'mailqueue.test@znuny.com',
+        Recipient => 'mailqueue.test@znuny.com',
         Message   => {
             'Key1' => 'Value1',
             'Key2' => 'Value2',
@@ -189,7 +189,7 @@ my $TestDeleteByMultipleColumns = sub {
     $Test->(
         Filters => {
             ArticleID => $Element->{ArticleID},
-            Sender    => 'mailqueue.test@otrs.com',
+            Sender    => 'mailqueue.test@znuny.com',
         },
     );
 

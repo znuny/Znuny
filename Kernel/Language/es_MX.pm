@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.702702702702703;
+    $Self->{Completeness}        = 0.702814437907457;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -360,6 +360,7 @@ sub Data {
         'Search' => 'Buscar',
         'Wildcards like \'*\' are allowed.' => 'Están permitidos comodines como \'*\'.',
         'Add Customer' => 'Agregar Cliente',
+        'Add Customer User' => 'Agregar Usuario del Cliente',
         'Select' => 'Seleccionar',
         'Customer Users' => 'Usuarios de Cliente',
         'Customers ↔ Groups' => 'Clientes ↔ Grupos',
@@ -405,7 +406,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Regresar a los resultados de búsqueda',
-        'Add Customer User' => 'Agregar Usuario del Cliente',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Los usuarios del cliente necesitan tener un historial de cliente e iniciar sesión por medio del panel de cliente.',
         'Customer Users ↔ Customers' => 'Usuarios del Cliente ↔ Clientes',
@@ -2877,7 +2877,6 @@ sub Data {
         'Drafts' => 'Borradores',
         'by' => 'por',
         'Article Overview - %s Article(s)' => 'Resumen del Artículo - %s Artículo(s)',
-        'Page %s' => '',
         'No.' => 'Núm.',
         'Unread articles' => 'Artículos no leídos',
         'Via' => '',
@@ -3989,6 +3988,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             'La información para la gestión de procesos no se encuentra sincronizada con la configuración del sistema, por favor sincronice todos los procesos.',
+        'Deploy' => 'Desplegar',
         'Need ExampleProcesses!' => '¡Se requiere un Ejemplo de Procesos!',
         'Need ProcessID!' => '¡Se requiere el ID de Processo!',
         'Unknown Process %s!' => '¡Proceso Desconocido %s!',
@@ -8486,7 +8486,6 @@ sub Data {
         'Please enter at least one search word to find anything.' => 'Ingrese al menos una palabra de búsqueda para encontrar algo.',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             'Desafortunadamente, en este momento no es posible el despliegue, tal vez porque lo está ejecutando otro agente. Por favor, inténtelo de nuevo más tarde.',
-        'Deploy' => 'Desplegar',
         'The deployment is already running.' => 'El despliegue ya se está ejecutando.',
         'Deployment successful. You\'re being redirected...' => 'Despliegue exitoso. Está siendo redirigido ...',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

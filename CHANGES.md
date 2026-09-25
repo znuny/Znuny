@@ -1,7 +1,50 @@
-# 7.3.6 2026-??-??
+# 7.3.8 2026-??-??
+ - 2026-09-22 Fixed: Misaligned all-day checkbox label in appointment dialog.
+ - 2026-09-22 Added: ZNUNY_TA_* tag support alongside OTRS_TA_* in transition action ArticleSend.
+ - 2026-09-22 Fixed: Transition action ArticleSend sends empty body/salutation/signature article if it's configured to use a standard template. Usage of any OTRS_TA_* tag should be fixed.
+ - 2026-09-22 Fixed: Form action buttons hidden behind Safari bottom toolbar on iOS. Thanks to @avononit for reporting the issue. [#667](https://github.com/znuny/Znuny/issues/667)
+ - 2026-09-18 Fixed: "Mark article" link in ticket zoom not working.
+ - 2026-09-17 Fixed: AdminDynamicFieldScreenConfiguration lists dynamic fields of all object types.
+ - 2026-09-17 Fixed: Alignment of accounted time in ticket details.
+ - 2026-09-16 Fixed: Notifications were shown in the background in some dialogs.
+ - 2026-09-16 Fixed: Customer ticket process: Subject field is incorrectly indented.
+ - 2026-09-07 Fixed: Notification to agent who created the ticket is not working for some ticket types.
+ - 2026-09-01 Fixed: Images with explicit HTML width/height attributes (e.g. logos in quoted email signatures) were stretched to fill their container. Thanks to @AVONON-DST for reporting the issue. [#743](https://github.com/znuny/Znuny/issues/743)
+ - 2026-08-31 Fixed: Missing OutputFilterHook_NoTicketOptionsFallback in AgentTicketCompose and AgentTicketForward. Thanks to @scharfstuttgart for reporting the issue. [#846](https://github.com/znuny/Znuny/issues/846)
+ - 2026-08-20 Fixed: Regular file attachments were unintentionally copied to newly created tickets/articles when using <OTRS_FIRST_ARTICLE_Body> or <OTRS_LAST_ARTICLE_Body> in a Transition Action, even without Attachments/AttachmentIDs/AttachmentsReuse configured.
+
+# 7.3.7 2026-09-16
+ - 2026-09-10 Security: Fixed unauthenticated login via generic interface in combination with HTTP basic auth and request header containing username (REMOTE_USER in HTTP header). Thanks for reporting to Mokrane ABDELMALEK (via Ghent University VDP programme).
+ - 2026-09-08 Security: Fixed SQL injection for parameter ContentSearch of ticket search. Thanks for reporting to Mokrane ABDELMALEK (via Ghent University VDP programme).
+ - 2026-09-07 Changed: Kernel::SystemAddress::SystemAddressLookup is now case-insensitive when comparing system addresses.
+ - 2026-09-05 CVE-2026-48188: Fixed possible SQL injection in agent login.
+ - 2026-09-03 Fixed: Ticket event to store customer company data in dynamic fields threw a warning if ticket had no customer ID set.
+ - 2026-09-01 Fixed: Accounted time (time units) lost when working with drafts.
+ - 2026-09-01 Fixed: Content type and attachment keys leaked into transition action modules (e.g. DynamicFieldSet) that treat every config key as a dynamic field name, causing the transition action to fail.
+ - 2026-08-31 Fixed: Custom translations containing Perl sigils lead to syntax errors.
+ - 2026-08-31 Fixed: Process management: Scope entity ID selection remains visible when scope is set to global.
+ - 2026-08-31 Fixed: Multiselect column filters are lost when paginating dashboard ticket widgets. Thanks to @ghost-train1 for reporting the issue. [#832](https://github.com/znuny/Znuny/issues/832)
+ - 2026-08-31 Fixed: Ticket search Newer/Older Date and Minutes filters no longer match tickets that fall exactly on the given time. Thanks to @martinpintar-pixel for reporting the issue. [#840](https://github.com/znuny/Znuny/issues/840)
+ - 2026-08-25 Changed: Enabled linking images (LinkImage plugin) in CKEditor 5.
+ - 2026-08-24 Fixed: Plain text conversion breaking in several ways after upgrade to CKEditor 5.
+ - 2026-08-20 Changed: Admin::Package::List now always reports package deployment status and warns about local modifications.
+ - 2026-08-20 Fixed: Multiselect dynamic field values rendered without proper spacing in customer interface. Thanks to @LuBroering (Lukas Bröring Sector Nord AG) [PR#836](https://github.com/znuny/Znuny/pull/836).
+ - 2026-08-20 Fixed: agent/customer re-direction after accepting initial information dialog (AgentInfo/CustomerAccept).
+ - 2026-08-11 Fixed: Some ticket attributes are not properly inserted into OTRS_TICKET_* placeholders.
+ - 2026-08-06 Fixed: Clearing multiselect column filters in agent ticket overview screens and dashboard ticket widgets did not remove the filter.
+ - 2026-08-05 Security: Updated nunjucks from version 3.2.3 to 3.2.4.
+
+# 7.3.6 2026-08-19
+ - 2026-08-17 Fixed: Removed unnecessary whitespace in Baselink URLs in TicketInformation templates for AgentTicketActionCommon and AgentTicketZoom.
+ - 2026-08-14 Fixed: Removed unused leftover thirdparty directories jquery-ui-1.13.2 and momentjs-2.29.4.
+ - 2026-08-14 Added: Split Quote and Remove Quote buttons for CKEditor 5.
+ - 2026-08-12 Fixed: Article pagination was displayed incorrectly.
+ - 2026-08-12 Fixed: CustomerSelector losing the customer key for numeric customer user logins. Added a new function to completely set new customer users in field for component "CustomerSelector".
  - 2026-08-10 Fixed: Marked LinkTarget options as translatable. Thanks to @urbalazs (Balázs Úr) [PR#814](https://github.com/znuny/Znuny/pull/814).
+ - 2026-08-05 Changed: REST transport module now keeps query parameters that don't contain placeholders.
  - 2026-07-27 Fixed: Migration follow-up step for removing mention flags from archived tickets was shown even when Ticket::ArchiveSystem is disabled.
  - 2026-07-24 Changed: Cc and Bcc will now also be set when article will only be created instead of sent in generic interface operation TicketCreate.
+ - 2026-07-01 CVE-2025-25977: Updated JavaScript library canvg to version 4.0.3.
 
 # 7.3.5 2026-07-22
  - 2026-07-17 Fixed: Documentation links in config options. Thanks to @bjinthahouse for reporting the issue. [#763](https://github.com/znuny/Znuny/issues/763)
@@ -661,6 +704,24 @@
  - 2022-08-22 Core.UI.InputFields.js - Changed the behaviour of the Core.UI.InputFields.js. Now no fields are automatically enlarged or reduced.
  - 2022-08-08 Admin - Added counter of AdminSettingPages per widget and additional focus by filter.
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
+
+# 6.5.25 2026-09-16
+ - 2026-09-08 Security: Fixed SQL injection for parameter ContentSearch of ticket search. Thanks for reporting to Mokrane ABDELMALEK (via Ghent University VDP programme).
+ - 2026-09-07 Security: Fixed unauthenticated login via generic interface in combination with HTTP basic auth and request header containing username (REMOTE_USER in HTTP header). Thanks for reporting to Mokrane ABDELMALEK (via Ghent University VDP programme).
+ - 2026-09-07 Changed: Kernel::SystemAddress::SystemAddressLookup is now case-insensitive when comparing system addresses.
+ - 2026-09-05 CVE-2026-48188: Fixed possible SQL injection in agent login.
+ - 2026-09-04 Fixed: Ticket event to store customer company data in dynamic fields threw a warning if ticket had no customer ID set.
+ - 2026-09-03 Security: Updated nunjucks from version 3.2.3 to 3.2.4.
+ - 2026-09-01 Fixed: Ticket search Newer/Older Date and Minutes filters no longer match tickets that fall exactly on the given time. Thanks to @martinpintar-pixel for reporting the issue. [#840](https://github.com/znuny/Znuny/issues/840)
+ - 2026-09-01 Fixed: Content type and attachment keys leaked into transition action modules (e.g. DynamicFieldSet) that treat every config key as a dynamic field name, causing the transition action to fail.
+ - 2026-08-20 Fixed: agent/customer re-direction after accepting initial information dialog (AgentInfo/CustomerAccept).
+ - 2026-08-12 Fixed: Some ticket attributes are not properly inserted into OTRS_TICKET_* placeholders.
+
+# 6.5.24 2026-08-19
+ - 2026-08-17 Changed: REST transport module now keeps query parameters that don't contain placeholders.
+ - 2026-08-12 Fixed: AgentTicketEmailResend does not revert owner to previous if current user that cancelled resend was not actual ticket owner before initialing resend action.
+ - 2026-07-24 Changed: Cc and Bcc will now also be set when article will only be created instead of sent in generic interface operation TicketCreate.
+ - 2026-07-01 CVE-2025-25977: Updated JavaScript library canvg to version 4.0.3.
 
 # 6.5.23 2026-07-22
  - 2026-07-17 Fixed: Documentation links in config options. Thanks to @bjinthahouse for reporting the issue. [#763](https://github.com/znuny/Znuny/issues/763)

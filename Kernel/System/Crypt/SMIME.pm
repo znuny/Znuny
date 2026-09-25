@@ -1027,16 +1027,20 @@ sub ConvertCertFormat {
     }
     my $String     = $Param{String};
     my $PassPhrase = $Param{Passphrase} // '';
+    chomp $PassPhrase;
 
     my $FileTempObject = $Kernel::OM->Get('Kernel::System::FileTemp');
 
-    # Create original certificate file.
+    # Create original certificate file (binmode for binary formats: DER, P7B, PFX).
     my ( $FileHandle, $TmpCertificate ) = $FileTempObject->TempFile();
+    binmode $FileHandle;
     print $FileHandle $String;
     close $FileHandle;
 
-    # For PEM format no conversion needed.
-    my $Options   = "x509 -in $TmpCertificate -noout";
+    # For PEM format no conversion needed. Use -inform PEM explicitly because OpenSSL 3.x
+    # auto-detects formats; without it, DER files would be misidentified as PEM and binary
+    # data would be returned instead of PEM.
+    my $Options   = "x509 -inform PEM -in $TmpCertificate -noout";
     my $ReadError = $Self->_CleanOutput(qx{$Self->{Cmd} $Options 2>&1});
 
     return $String if !$ReadError;
@@ -1057,9 +1061,9 @@ sub ConvertCertFormat {
             Convert => "pkcs7 -in $TmpCertificate -print_certs -out $CertFile",
         },
         PFX => {
-            Read    => "pkcs12 -in $TmpCertificate -noout -nomacver -passin pass:'$PassPhrase'",
+            Read => "pkcs12 $Self->{PFXLegacyOption} -in $TmpCertificate -noout -nomacver -passin pass:'$PassPhrase'",
             Convert =>
-                "pkcs12 -in $TmpCertificate -out $CertFile -nomacver -clcerts -nokeys -passin pass:'$PassPhrase'",
+                "pkcs12 $Self->{PFXLegacyOption} -in $TmpCertificate -out $CertFile -nomacver -clcerts -nokeys -passin pass:'$PassPhrase'",
         },
     );
 
@@ -1073,6 +1077,21 @@ sub ConvertCertFormat {
 
         $DetectedFormat = $Format;
         last FORMAT;
+    }
+
+    # Fallback: PFX with RC2-40-CBC fails on OpenSSL 3.x without -legacy. Retry with -legacy
+    # only when we have OpenSSL (not LibreSSL, which does not support -legacy).
+    if (
+        !$DetectedFormat
+        && ( $Self->{OpenSSLVersionString} || '' ) =~ m{ \A OpenSSL \s+ 3 }xms
+        )
+    {
+        my $PFXLegacyRead = "pkcs12 -legacy -in $TmpCertificate -noout -nomacver -passin pass:'$PassPhrase'";
+        if ( !$Self->_CleanOutput(qx{$Self->{Cmd} $PFXLegacyRead 2>&1}) ) {
+            $DetectedFormat = 'PFX';
+            $OptionsLookup{PFX}{Convert} =
+                "pkcs12 -legacy -in $TmpCertificate -out $CertFile -nomacver -clcerts -nokeys -passin pass:'$PassPhrase'";
+        }
     }
 
     if ( !$DetectedFormat ) {
@@ -2628,6 +2647,12 @@ sub _Init {
         $Self->{OpenSSLMajorVersion} = $1;
     }
 
+    # OpenSSL 3.x (not LibreSSL) disabled RC2-40-CBC by default. -legacy enables it.
+    # LibreSSL does not support -legacy and would fail with "unknown option".
+    $Self->{PFXLegacyOption} = ( $Self->{OpenSSLVersionString} || '' ) =~ m{ \A OpenSSL \s+ 3 }xms
+        ? '-legacy'
+        : '';
+
     return $Self;
 }
 
@@ -2886,13 +2911,13 @@ sub _FetchAttributesFromCert {
     # -subject_hash_old was used in otrs in the past (to keep the old hashes style, and perhaps to
     # ease a migration between openssl versions ) but now is not recommended anymore.
 
-    # testing new solution
+    # Use -nameopt compat for consistent Issuer/Subject format across OpenSSL versions (1.x vs 3.x).
     my $OptionString = ' '
         . '-subject_hash '
-        . '-issuer '
+        . '-issuer -nameopt compat '
         . '-fingerprint -sha1 '
         . '-serial '
-        . '-subject '
+        . '-subject -nameopt compat '
         . '-startdate '
         . '-enddate '
         . '-email '

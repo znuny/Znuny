@@ -787,6 +787,7 @@
          * @return {String} The escaped string
          */
         escapeHtmlAttr: function (str) {
+            str = (str === null || typeof str === 'undefined') ? '' : String(str);
             // Check if the string already contains HTML entities
             if (str.indexOf('&amp;') !== -1 || str.indexOf('&quot;') !== -1 ||
                 str.indexOf('&lt;') !== -1 || str.indexOf('&gt;') !== -1) {
@@ -833,7 +834,8 @@
             // Add click event to select a customer
             $suggestItems.click(function (event) {
                 var $item = jQuery(event.currentTarget);
-                var value = $item.data('value');
+                // jQuery.data() converts "9144" to a number; the customer key must stay a string.
+                var value = $item.attr('data-value');
                 var name = $item.text();
 
                 this.addCustomer(value, name, {});
@@ -1241,7 +1243,8 @@
          *
          */
         selectSuggestionItem: function (item) {
-            var value = item.data('value');
+            // jQuery.data() converts "9144" to a number; the customer key must stay a string.
+            var value = item.attr('data-value');
             var name = item.text();
 
             this.addCustomer(value, name, {});

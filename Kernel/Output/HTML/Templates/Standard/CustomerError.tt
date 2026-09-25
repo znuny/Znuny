@@ -24,7 +24,7 @@
                     <a href="[% Data.Link | Interpolate %]" title="[% Translate(Data.Description) | html %]">[% Translate(Data.Description) | html %]</a>
                     <br />
 [% RenderBlockEnd("PossibleNextActionRow") %]
-                 </p>
+                </p>
 [% RenderBlockEnd("PossibleNextActionContainer") %]
             </div>
         </div>

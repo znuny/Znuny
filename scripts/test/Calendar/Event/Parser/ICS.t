@@ -1137,7 +1137,7 @@ my $TicketID = $TicketObject->TicketCreate(
     Priority     => '3 normal',
     State        => 'open',
     CustomerNo   => '123465',
-    CustomerUser => 'unittest@otrs.com',
+    CustomerUser => 'unittest@znuny.com',
     OwnerID      => 1,
     UserID       => 1,
 );

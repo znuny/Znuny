@@ -1142,7 +1142,7 @@ msgstr "Приступ без ограничења за тикете у овим
 msgid "Back to search results"
 msgstr "Врати се на резултате претраге"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "Додај клијента корисника"
 
@@ -20958,7 +20958,7 @@ msgstr "Молимо унесите барем једну кључну реч д
 msgid "Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later."
 msgstr "Нажалост, распоређивање тренутно није могуће, вероватно зато што други корисник већ распоређује. Молимо покушајте касније."
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemConfiguration.js
+#. Perl Module: Kernel/Modules/AdminProcessManagement.pm
 msgid "Deploy"
 msgstr "Распореди"
 

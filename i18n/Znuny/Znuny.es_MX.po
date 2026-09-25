@@ -1142,7 +1142,7 @@ msgstr "Acceso completo de lectura y escritura a los tickets de este grupo/fila.
 msgid "Back to search results"
 msgstr "Regresar a los resultados de búsqueda"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompany.tt
 msgid "Add Customer User"
 msgstr "Agregar Usuario del Cliente"
 
@@ -20958,7 +20958,7 @@ msgstr "Ingrese al menos una palabra de búsqueda para encontrar algo."
 msgid "Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later."
 msgstr "Desafortunadamente, en este momento no es posible el despliegue, tal vez porque lo está ejecutando otro agente. Por favor, inténtelo de nuevo más tarde."
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemConfiguration.js
+#. Perl Module: Kernel/Modules/AdminProcessManagement.pm
 msgid "Deploy"
 msgstr "Desplegar"
 

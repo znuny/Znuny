@@ -1,4 +1,4 @@
-Return-Path: <han.solo@otrs.org>
+Return-Path: <han.solo@znuny.org>
 X-Original-To: skywalker@osser.otrs.org
 Delivered-To: skywalker@osser.otrs.org
 Received: from localhost (localhost [127.0.0.1])
@@ -9,8 +9,8 @@ Received: from osser.otrs.org ([127.0.0.1])
  with ESMTP id 23300-08 for <skywalker@osser.otrs.org>;
  Thu, 12 Apr 2007 15:25:37 +0200 (CEST)
 Date: Thu, 12 Apr 2007 15:25:43 +0200
-From: Han Solo <han.solo@otrs.org>
-To: skywalker@otrs.org
+From: Han Solo <han.solo@znuny.org>
+To: skywalker@znuny.org
 Subject: 2nd try: Again some stuff =?iso-8859-1?B?aPxi?=
 	=?iso-8859-1?Q?sches_z=FCm_t=E4sten=5D?=
 Message-ID: <20070412132542.GB29977@tuxbrett.hq.otrs.org>
@@ -36,9 +36,9 @@ Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
 
-Schönen güten Tag,
+Schï¿½nen gï¿½ten Tag,
 
-Sie möchten Ümlaute, sie krügen Ümlaute.
+Sie mï¿½chten ï¿½mlaute, sie krï¿½gen ï¿½mlaute.
 
 --
 Han Solo
@@ -51,7 +51,7 @@ Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: attachment; filename*=iso-8859-1''test-attachment-%E4%F6%FC%DF-iso-8859-1%2Etxt
 Content-Transfer-Encoding: 8bit
 
-Some German Text with Umlaut: ÄÖÜß
+Some German Text with Umlaut: ï¿½ï¿½ï¿½ï¿½
 
 And with very long lines, with very long lines, with very long lines, with very long lines, with very long lines, with very long lines, with very long lines, with very long lines, with very long lines, with very long lines, with very long lines, with very long lines, with very long lines, with very long lines, with very long lines, with very long lines.
 

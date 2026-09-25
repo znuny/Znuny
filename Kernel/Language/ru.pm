@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.836406995230525;
+    $Self->{Completeness}        = 0.836380982668151;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -371,6 +371,7 @@ sub Data {
         'Search' => 'Поиск',
         'Wildcards like \'*\' are allowed.' => 'Разрешены шаблоны типа \'*\'.',
         'Add Customer' => 'Добавить компанию',
+        'Add Customer User' => 'Добавить учётную запись клиента',
         'Select' => 'Выбор',
         'Customer Users' => 'Клиенты',
         'Customers ↔ Groups' => 'Компании ↔ Группы',
@@ -416,7 +417,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Назад к результатам поиска',
-        'Add Customer User' => 'Добавить учётную запись клиента',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Необходимо для наличия данных о клиенте и подключения к системе через интерфейс клиента.',
         'Customer Users ↔ Customers' => 'Клиенты ↔ Компании',
@@ -963,13 +963,13 @@ sub Data {
         'Invoker Details' => 'Подробности для Invoker ',
         'The name is typically used to call up an operation of a remote web service.' =>
             'Имя обычно используется для вызова операции удаленного веб-сервиса.',
-        'Invoker backend' => 'Модуль инициатора вызова (invoker)',
+        'Invoker backend' => 'Invoker бэкэнд',
         'This Znuny invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data.' =>
-            'Этот Znuny модуль инициатора вызова (invoker) будет вызываться как для подготовки данных, отправляемых в удаленную систему, так и для обработки ответных данных.',
-        'Mapping for outgoing request data' => 'Преобразование данных исходящего запроса',
+            'Этот модуль Znuny invoker будет вызываться для подготовки данных, отправляемых в удаленную систему и для обработки ответных данных.',
+        'Mapping for outgoing request data' => 'Соответствие исходящему запросу данных',
         'Configure' => 'Конфигурировать',
         'The data from the invoker of Znuny will be processed by this mapping, to transform it to the kind of data the remote system expects.' =>
-            'Данные, полученные от инициатора вызова (invoker) Znuny, будут преобразованы с использованием этого соответствия в ожидаемый удаленной стороной формат.',
+            'Данные полученные от инициатора вызова (invoker) Znuny будут преобразованы с использованием этого соответствия в ожидаемый удаленной стороной формат.',
         'Mapping for incoming response data' => 'Соответствие входящим ответным данным',
         'The response data will be processed by this mapping, to transform it to the kind of data the invoker of Znuny expects.' =>
             'Данные ответа будут преобразованы с использованием этого соответствия в формат, ожидаемый инициатором вызова (invoker) Znuny.',
@@ -1117,7 +1117,7 @@ sub Data {
         'Operation backend' => 'Бэкэнд для операций',
         'This Znuny operation backend module will be called internally to process the request, generating data for the response.' =>
             'Этот модуль Znuny будет вызываться для обработки запроса и подготавливать данные для ответа.',
-        'Mapping for incoming request data' => 'Преобразование данных входящего запроса',
+        'Mapping for incoming request data' => 'Сопоставление для данных входящего запроса',
         'The request data will be processed by this mapping, to transform it to the kind of data Znuny expects.' =>
             'Запрашиваемые данные будут обработаны и преобразованы в формат поддерживаемый Znuny',
         'Mapping for outgoing response data' => 'Сопоставление данных для исходящего ответа',
@@ -2888,7 +2888,6 @@ sub Data {
         'Drafts' => 'Черновики',
         'by' => 'кем',
         'Article Overview - %s Article(s)' => 'Обзор заметок/сообщений - %s заметка(ок)',
-        'Page %s' => 'Страница %s',
         'No.' => '№',
         'Unread articles' => 'Непрочитанные сообщения',
         'Via' => 'Через',
@@ -3558,7 +3557,7 @@ sub Data {
         'There was an error synchronizing the ACLs.' => 'Произошла ошибка при синхронизации ACL.',
         'ACL %s could not be deleted' => 'Невозможно удалить ACL %s',
         'There was an error getting data for ACL with ID %s' => 'Произошла ошибка при получении данный от ACL с ID %s',
-        '%s (copy) %s' => '%s (копия) %s',
+        '%s (copy) %s' => '%s (копия) %s ',
         'Please note that ACL restrictions will be ignored for the Superuser account (UserID 1).' =>
             'Обратите внимание, что для аккаунта Superuser (UserID 1) ограничения ACL игнорируются.',
         'Exact match' => 'Полное совпадение',
@@ -4000,6 +3999,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             'Информация по управлению процессами из базы данных не синхронизирована с системой, выполните синхронизацию всех процессов.',
+        'Deploy' => 'Применить',
         'Need ExampleProcesses!' => 'Требуется ExampleProcesses!',
         'Need ProcessID!' => 'Требуется ProcessID!',
         'Unknown Process %s!' => 'Неизвестный Процесс %s!',
@@ -8497,7 +8497,6 @@ sub Data {
         'Please enter at least one search word to find anything.' => 'Для поиска введите хотя бы одно слово.',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             'К сожалению, сохранение в настоящий момент невозможно, возможно, это связано с тем, что другой агент уже работает с настройками. Попробуйте, пожалуйста, позже.',
-        'Deploy' => 'Применить',
         'The deployment is already running.' => 'Процесс применения уже идет.',
         'Deployment successful. You\'re being redirected...' => 'Применение завершено успешно. Вы будете перенаправлены...',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

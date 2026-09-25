@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.445627980922099;
+    $Self->{Completeness}        = 0.445698839243123;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -360,6 +360,7 @@ sub Data {
         'Search' => 'Buscar',
         'Wildcards like \'*\' are allowed.' => 'Comodíns coma \'*\' están permitidos',
         'Add Customer' => 'Engadir un cliente',
+        'Add Customer User' => 'Engadir un usuario cliente',
         'Select' => 'Seleccionar',
         'Customer Users' => 'Usuarios clientes',
         'Customers ↔ Groups' => '',
@@ -405,7 +406,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Retornar aos resultados da busca',
-        'Add Customer User' => 'Engadir un usuario cliente',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Os usuarios clientes son necesarios para ter un historial de cliente e para acceder mediante o panel de cliente.',
         'Customer Users ↔ Customers' => '',
@@ -2877,7 +2877,6 @@ sub Data {
         'Drafts' => '',
         'by' => 'de',
         'Article Overview - %s Article(s)' => '',
-        'Page %s' => '',
         'No.' => 'Nº.',
         'Unread articles' => 'Artigos sen leer',
         'Via' => '',
@@ -3989,6 +3988,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             'A información sobre a xestión de procesos da base de datos non está sincronizada coa configuración do sistema; sincronice todos os procesos.',
+        'Deploy' => '',
         'Need ExampleProcesses!' => '',
         'Need ProcessID!' => '',
         'Unknown Process %s!' => '',
@@ -8486,7 +8486,6 @@ sub Data {
         'Please enter at least one search word to find anything.' => '',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             '',
-        'Deploy' => '',
         'The deployment is already running.' => '',
         'Deployment successful. You\'re being redirected...' => '',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

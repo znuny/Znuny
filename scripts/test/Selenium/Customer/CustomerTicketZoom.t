@@ -159,8 +159,8 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketZoom;TicketNumber=");
 
         $Self->True(
-            index( $Selenium->get_page_source(), 'Need TicketID' ) > -1,
-            "Error message for missing TicketID/TicketNumber.",
+            index( $Selenium->get_page_source(), 'An Error Occurred' ) > -1,
+            "Generic error screen for missing TicketID/TicketNumber.",
         );
 
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketOverview");
@@ -361,7 +361,7 @@ $Selenium->RunTest(
         $Self->Is(
             $FromString,
             $TestDefaultAgentName,
-            "Test From content",
+            "Test From content (is '$FromString' should be '$TestDefaultAgentName')",
         );
 
         # Login to Agent interface and verify customer name in answer article.

@@ -897,6 +897,9 @@ sub GetStatElement {
             Permission => 'ro',
             Limit      => 100_000_000,
             %TicketSearch,
+
+            # statistics search closed time ranges
+            TimeSearchInclusive => 1,
         );
 
         # Do nothing, if there are no tickets.

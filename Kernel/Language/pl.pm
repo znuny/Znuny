@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.633386327503975;
+    $Self->{Completeness}        = 0.633328033073621;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -363,6 +363,7 @@ sub Data {
         'Search' => 'Szukaj',
         'Wildcards like \'*\' are allowed.' => 'Wieloznaczniki (wildcards) takie jak \'*\' są dozwolone.',
         'Add Customer' => 'Dodaj Klienta',
+        'Add Customer User' => 'Dodaj użytkownika klienta',
         'Select' => 'Zaznacz',
         'Customer Users' => 'Użytkownicy klienta',
         'Customers ↔ Groups' => 'Klienci ↔ Grupy',
@@ -409,7 +410,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Wstecz do wyników wyszukiwania',
-        'Add Customer User' => 'Dodaj użytkownika klienta',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Aby posiadać historię klienta i umożliwić mu logowanie się do panelu klienta konieczne jest założenie konta użytkownika klienta.',
         'Customer Users ↔ Customers' => 'Użytkownicy Klientów ↔ Klienci',
@@ -2881,7 +2881,6 @@ sub Data {
         'Drafts' => 'Szkice',
         'by' => 'przez',
         'Article Overview - %s Article(s)' => 'Przegląd artykułów - %s Artykułów',
-        'Page %s' => 'Strona %s',
         'No.' => 'Lp.',
         'Unread articles' => 'Nieprzeczytane wiadomości',
         'Via' => 'Przez',
@@ -3993,6 +3992,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             'Informacje zarządzania procesami z bazy danych nie są zsynchronizowane z konfiguracją systemu, zsynchronizuj wszystkie procesy.',
+        'Deploy' => 'Wdróż',
         'Need ExampleProcesses!' => '',
         'Need ProcessID!' => 'Potrzebny ProcessID!',
         'Unknown Process %s!' => 'Nieznany Proces %s!',
@@ -8490,7 +8490,6 @@ sub Data {
         'Please enter at least one search word to find anything.' => '',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             '',
-        'Deploy' => 'Wdróż',
         'The deployment is already running.' => 'Wdrażanie jest już aktualnie uruchomione.',
         'Deployment successful. You\'re being redirected...' => 'Wdrożenie udane. Zostaniesz przekierowany...',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

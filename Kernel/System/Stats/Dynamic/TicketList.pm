@@ -1038,6 +1038,9 @@ sub GetStatTable {
             TicketCloseTimeOlderDate => $Param{Restrictions}->{HistoricTimeRangeTimeNewerDate},
             ArchiveFlags             => $Param{Restrictions}->{ArchiveFlags},
             Limit                    => 100_000_000,
+
+            # statistics search closed time ranges
+            TimeSearchInclusive => 1,
         );
         %OlderTicketsExclude = map { $_ => 1 } @OldToExclude;
 
@@ -1057,6 +1060,9 @@ sub GetStatTable {
             TicketCreateTimeNewerDate => $Param{Restrictions}->{HistoricTimeRangeTimeOlderDate},
             ArchiveFlags              => $Param{Restrictions}->{ArchiveFlags},
             Limit                     => 100_000_000,
+
+            # statistics search closed time ranges
+            TimeSearchInclusive => 1,
         );
         %NewerTicketsExclude = map { $_ => 1 } @NewToExclude;
 
@@ -1082,6 +1088,9 @@ sub GetStatTable {
             Permission => 'ro',
             %{ $Param{Restrictions} },
             %DynamicFieldRestrictions,
+
+            # statistics search closed time ranges
+            TimeSearchInclusive => 1,
         );
     }
 

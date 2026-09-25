@@ -10,6 +10,7 @@ package Kernel::System::UnitTest::TicketToUnitTest::HistoryType::EscalationUpdat
 
 use strict;
 use warnings;
+use utf8;
 
 our @ObjectDependencies = ();
 

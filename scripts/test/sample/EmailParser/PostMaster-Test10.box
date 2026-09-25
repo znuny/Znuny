@@ -5,7 +5,7 @@ Received: by mail.otrs.org (Postfix)  id DD8A632C83C; Fri, 6 Jul 2007 12:17:38 +
 Date: Fri,  6 Jul 2007 12:17:38 +0200 (CEST)
 From: MAILER-DAEMON@mail.otrs.org (Mail Delivery System)
 Subject:
-To: skywalker@otrs.org
+To: skywalker@znuny.org
 MIME-Version: 1.0
 Content-Type: multipart/report; report-type=delivery-status; boundary="AB35D32CDC7.1183717058/mail.otrs.org"
 Message-ID: <20070706101738.DD8A632C83C@mail.otrs.org>
@@ -38,7 +38,7 @@ Content-Type: message/delivery-status
 
 Reporting-MTA: dns; mail.otrs.org
 X-Postfix-Queue-ID: AB35D32CDC7
-X-Postfix-Sender: rfc822; skywalker@otrs.org
+X-Postfix-Sender: rfc822; skywalker@znuny.org
 Arrival-Date: Fri,  6 Jul 2007 12:17:33 +0200 (CEST)
 
 Final-Recipient: rfc822; asdfasdfasdfasd@example.com
@@ -71,9 +71,9 @@ Subject:
 X-Powered-BY: OTRS - Open Ticket Request System (http://otrs.org/)
 X-Mailer: OTRS Mail Service (2.1.7)
 Date: Fri, 6 Jul 2007 12:17:31 +0200
-Message-ID: <1183717051.586927.929001308.97809.36@otrs.otrs.org>
+Message-ID: <1183717051.586927.929001308.97809.36@znuny.otrs.org>
 To: asdfasdfasdfasd@example.com
-From: Skywalker <skywalker@otrs.org>
+From: Skywalker <skywalker@znuny.org>
 
 YXNkZgoKLS0gCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
 LS0tLS0tLS0tLS0tLS0KVGhvbWFzIFNjaHdlaWdlciwgU3VwcG9ydApPcGVu

@@ -49,7 +49,7 @@ Provider:
   Transport:
     Config:
       MaxLength: '100000000'
-      NameSpace: http://www.otrs.org/TicketConnector/
+      NameSpace: http://www.znuny.org/TicketConnector/
       RequestNameFreeText: ''
       RequestNameScheme: Plain
       ResponseNameFreeText: ''

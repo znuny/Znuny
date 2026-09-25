@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%m/%d/%Y';
     $Self->{DateInputFormat}     = '%m/%d/%Y';
     $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
-    $Self->{Completeness}        = 0.417647058823529;
+    $Self->{Completeness}        = 0.41771346795993;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -360,6 +360,7 @@ sub Data {
         'Search' => 'Пошук',
         'Wildcards like \'*\' are allowed.' => 'Підстановочні символи як-то «*» є дозволеними.',
         'Add Customer' => 'Додати Клієнта',
+        'Add Customer User' => 'Додати користувача-клієнта',
         'Select' => 'Вибір',
         'Customer Users' => 'Клієнти',
         'Customers ↔ Groups' => '',
@@ -405,7 +406,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Повернутись до результатів пошуку',
-        'Add Customer User' => 'Додати користувача-клієнта',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Користувачі-клієнти необхідні для того, щоб мати історію клієнта, а також для входу через панель клієнта.',
         'Customer Users ↔ Customers' => '',
@@ -2877,7 +2877,6 @@ sub Data {
         'Drafts' => '',
         'by' => 'ні',
         'Article Overview - %s Article(s)' => '',
-        'Page %s' => '',
         'No.' => 'Номер',
         'Unread articles' => 'Непрочитані заявки',
         'Via' => '',
@@ -3989,6 +3988,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             'Інформація керування процесами з бази даних не синхронізована з конфігурацією системи, будь ласка, синхронізуйте усі процеси.',
+        'Deploy' => '',
         'Need ExampleProcesses!' => 'Потрібний Зразок Процесів!',
         'Need ProcessID!' => 'Потрібний ProcessID!',
         'Unknown Process %s!' => 'Незнайомий Процес %s!',
@@ -8486,7 +8486,6 @@ sub Data {
         'Please enter at least one search word to find anything.' => '',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             '',
-        'Deploy' => '',
         'The deployment is already running.' => '',
         'Deployment successful. You\'re being redirected...' => '',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

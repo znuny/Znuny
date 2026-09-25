@@ -35,7 +35,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.367567567567568;
+    $Self->{Completeness}        = 0.36762601367467;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -368,6 +368,7 @@ sub Data {
         'Search' => 'Rechercher',
         'Wildcards like \'*\' are allowed.' => 'Les caractères génériques tels que \'*\ sont autorisés',
         'Add Customer' => 'Ajouter un client',
+        'Add Customer User' => 'Ajouter un utilisateur client',
         'Select' => 'Sélectionner',
         'Customer Users' => 'Utilisateurs client',
         'Customers ↔ Groups' => 'Clients ↔ Groupes',
@@ -413,7 +414,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUser.tt
         'Back to search results' => 'Retour aux résultats de la recherche',
-        'Add Customer User' => 'Ajouter un utilisateur client',
         'Customer user are needed to have a customer history and to login via customer panel.' =>
             'Les clients utilisateurs doivent avoir un historique client et se connecter via la page d\'identification client.',
         'Customer Users ↔ Customers' => 'Utilisateurs client ↔ Clients',
@@ -2885,7 +2885,6 @@ sub Data {
         'Drafts' => '',
         'by' => 'par',
         'Article Overview - %s Article(s)' => '',
-        'Page %s' => '',
         'No.' => 'N°.',
         'Unread articles' => 'Articles non lus',
         'Via' => 'Via',
@@ -3997,6 +3996,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             'Les informations de Gestion de Processus de la base de données ne sont pas synchrones avec la configurations système. Veuillez synchroniser tous les processus.',
+        'Deploy' => 'Déployer',
         'Need ExampleProcesses!' => '',
         'Need ProcessID!' => '',
         'Unknown Process %s!' => '',
@@ -8494,7 +8494,6 @@ sub Data {
         'Please enter at least one search word to find anything.' => '',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             '',
-        'Deploy' => 'Déployer',
         'The deployment is already running.' => '',
         'Deployment successful. You\'re being redirected...' => 'Déploiement effectué ! Vous allez être redirigé...',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

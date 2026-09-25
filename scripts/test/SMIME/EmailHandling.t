@@ -151,8 +151,8 @@ if ( !$SMIMEObject ) {
 #
 
 # OpenSSL 1.0.0 hashes
-my $Check1Hash       = 'f62a2257';
-my $Check2Hash       = '35c7d865';
+my $Check1Hash       = 'c594735a';
+my $Check2Hash       = '11c4333a';
 my $ZnunyRootCAHash  = 'dfde6898';
 my $ZnunySub1CAHash  = '5fcf9bdc';
 my $ZnunySub2CAHash  = '37de711c';

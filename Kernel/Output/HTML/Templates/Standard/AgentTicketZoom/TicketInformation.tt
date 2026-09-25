@@ -153,7 +153,7 @@
 
                                         [% RenderBlockStart("CustomerIDTickets") %]
                                         &nbsp;-&nbsp;
-                                            <a href="[% Env(" Baselink") %]Action=AgentTicketSearch;Subaction=Search;CustomerID=[% Data.CustomerID | uri %];StateType=Open" title="[% Translate('Open tickets') | html %]">
+                                            <a href="[% Env("Baselink") %]Action=AgentTicketSearch;Subaction=Search;CustomerID=[% Data.CustomerID | uri %];StateType=Open" title="[% Translate('Open tickets') | html %]">
                                                 [% Translate('Open tickets') | html %]: [% Data.CustomerIDTickets %]
                                             </a>
                                         [% RenderBlockEnd("CustomerIDTickets") %]
