@@ -335,6 +335,9 @@ sub TableCreateComplex {
         elsif ( $Column eq 'CustomerUserID' ) {
             $ColumnTranslate = Translatable('Customer User ID');
         }
+        elsif ( $Column eq 'AccountedTime' ) {
+            $ColumnTranslate = Translatable('Accounted time');
+        }
         elsif ( $Column =~ m{ \A DynamicField_ }xms ) {
             my $DynamicFieldConfig;
 

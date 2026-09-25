@@ -1,4 +1,5 @@
 # 7.3.8 2026-??-??
+ - 2026-09-25 Added: Column TicketAccountedTime for Dashboard, TicketOverview/Small and Linkobject/Ticket Thanks to @LuBroering (Lukas Bröring Sector Nord AG) [PR#574](https://github.com/znuny/Znuny/pull/574).
  - 2026-09-22 Fixed: Misaligned all-day checkbox label in appointment dialog.
  - 2026-09-22 Added: ZNUNY_TA_* tag support alongside OTRS_TA_* in transition action ArticleSend.
  - 2026-09-22 Fixed: Transition action ArticleSend sends empty body/salutation/signature article if it's configured to use a standard template. Usage of any OTRS_TA_* tag should be fixed.

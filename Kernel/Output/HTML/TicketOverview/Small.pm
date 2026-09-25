@@ -342,6 +342,9 @@ sub ActionRow {
             elsif ( $Column eq 'CustomerUserID' ) {
                 $TranslatedWord = Translatable('Customer User ID');
             }
+            elsif ( $Column eq 'AccountedTime' ) {
+                $TranslatedWord = Translatable('Accounted time');
+            }
 
             # send data to JS
             $LayoutObject->AddJSData(
@@ -1028,6 +1031,9 @@ sub Run {
                 }
                 elsif ( $Column eq 'CustomerUserID' ) {
                     $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Customer User ID');
+                }
+                elsif ( $Column eq 'AccountedTime' ) {
+                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Accounted time');
                 }
                 else {
                     $TranslatedWord = $LayoutObject->{LanguageObject}->Translate($Column);
