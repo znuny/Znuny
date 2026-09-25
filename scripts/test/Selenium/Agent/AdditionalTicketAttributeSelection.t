@@ -29,6 +29,15 @@ my $SeleniumTest = sub {
     # setup a full featured test environment
     my $TestEnvironmentData = $HelperObject->SetupTestEnvironment();
 
+    # Priority selection is off by default on these screens.
+    for my $View (qw(AgentTicketPhoneOutbound AgentTicketPhoneInbound AgentTicketCompose AgentTicketForward)) {
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => "Ticket::Frontend::${View}###Priority",
+            Value => 1,
+        );
+    }
+
     for my $SLA (qw(A B)) {
         $SLAObject->SLAUpdate(
             SLAID      => $TestEnvironmentData->{SLA}->{"SLA A::Level - 1::$SLA"},

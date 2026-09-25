@@ -107,7 +107,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         background: transparent;
         background-color: transparent;
         text-align: center;
-        z-index: 999;
+        z-index: 4500;
     }
 
     #ResponsiveNavigationHandle {
