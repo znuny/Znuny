@@ -1249,7 +1249,7 @@
     <Column Name="article_id" Required="true" Type="BIGINT"/>
     <Column Name="filename" Required="false" Size="250" Type="VARCHAR"/>
     <Column Name="content_size" Required="false" Size="30" Type="VARCHAR"/>
-    <Column Name="content_type" Required="false" Size="450" Type="VARCHAR"/>
+    <Column Name="content_type" Required="false" Size="4000" Type="VARCHAR"/>
     <Column Name="content_id" Required="false" Size="250" Type="VARCHAR"/>
     <Column Name="content_alternative" Required="false" Size="50" Type="VARCHAR"/>
     <Column Name="disposition" Required="false" Size="15" Type="VARCHAR"/>
@@ -1806,7 +1806,7 @@
     <Column Name="filename" Required="false" Size="250" Type="VARCHAR"/>
     <Column Name="content_id" Required="false" Size="250" Type="VARCHAR"/>
     <Column Name="content_size" Required="false" Size="30" Type="VARCHAR"/>
-    <Column Name="content_type" Required="false" Size="250" Type="VARCHAR"/>
+    <Column Name="content_type" Required="false" Size="4000" Type="VARCHAR"/>
     <Column Name="disposition" Required="false" Size="15" Type="VARCHAR"/>
     <Column Name="content" Required="true" Type="LONGBLOB"/>
     <Column Name="create_time_unix" Required="true" Type="BIGINT"/>
