@@ -191,7 +191,7 @@ sub Run {
 
     my %GetParam;
     for my $Param (
-        qw( From To Cc Bcc Subject Body InReplyTo References ArticleID IsVisibleForCustomerPresent IsVisibleForCustomer TimeUnits FormID)
+        qw( From To Cc Bcc Subject Body InReplyTo References ArticleID IsVisibleForCustomer TimeUnits FormID)
         )
     {
         $GetParam{$Param} = $ParamObject->GetParam( Param => $Param );
@@ -423,6 +423,8 @@ sub Run {
 
         # Challenge token check for write action.
         $LayoutObject->ChallengeTokenCheck();
+
+        $GetParam{IsVisibleForCustomer} //= 0;
 
         my %Error;
 
@@ -671,14 +673,9 @@ sub Run {
             );
         }
 
-        my $IsVisibleForCustomer = $Config->{IsVisibleForCustomerDefault};
-        if ( $GetParam{IsVisibleForCustomerPresent} ) {
-            $IsVisibleForCustomer = $GetParam{IsVisibleForCustomer} ? 1 : 0;
-        }
-
         # Send email.
         my $ArticleID = $ArticleBackendObject->ArticleSend(
-            IsVisibleForCustomer => $IsVisibleForCustomer,
+            IsVisibleForCustomer => $GetParam{IsVisibleForCustomer},
             SenderType           => 'agent',
             TicketID             => $Self->{TicketID},
             HistoryType          => 'EmailResend',
@@ -958,17 +955,7 @@ sub _Mask {
 
     my $Config = $ConfigObject->Get("Ticket::Frontend::$Self->{Action}");
 
-    my $IsVisibleForCustomer = $Param{IsVisibleForCustomer};
-    if ( $Param{GetParam}->{IsVisibleForCustomerPresent} ) {
-        $IsVisibleForCustomer = $Param{GetParam}->{IsVisibleForCustomer} ? 1 : 0;
-    }
-
-    $LayoutObject->Block(
-        Name => 'IsVisibleForCustomer',
-        Data => {
-            IsVisibleForCustomer => $IsVisibleForCustomer,
-        },
-    );
+    $Param{IsVisibleForCustomer} //= $Config->{IsVisibleForCustomerDefault};
 
     # Prepare errors for the output.
     if ( $Param{Errors} ) {

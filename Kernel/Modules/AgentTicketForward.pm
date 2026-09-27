@@ -43,8 +43,8 @@ sub new {
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
     for my $Param (
-        qw(To Cc Bcc Subject Body InReplyTo References ComposeStateID IsVisibleForCustomerPresent
-        IsVisibleForCustomer ArticleID TimeUnits Year Month Day Hour Minute FormID FormDraftID Title
+        qw(To Cc Bcc Subject Body InReplyTo References ComposeStateID IsVisibleForCustomer ArticleID
+        TimeUnits Year Month Day Hour Minute FormID FormDraftID Title
         ServiceID SLAID TicketID TypeID NewPriorityID
         )
         )
@@ -733,6 +733,8 @@ sub SendEmail {
     my @MultipleCustomerCc  = @{ $GetParamExtended{MultipleCustomerCc} };
     my @MultipleCustomerBcc = @{ $GetParamExtended{MultipleCustomerBcc} };
 
+    $GetParam{IsVisibleForCustomer} //= 0;
+
     my %DynamicFieldValues;
 
     # get config object
@@ -1334,11 +1336,6 @@ sub SendEmail {
         $To .= $GetParam{$Key};
     }
 
-    my $IsVisibleForCustomer = $Config->{IsVisibleForCustomerDefault};
-    if ( $GetParam{IsVisibleForCustomerPresent} ) {
-        $IsVisibleForCustomer = $GetParam{IsVisibleForCustomer} ? 1 : 0;
-    }
-
     my $EmailArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
         ChannelName => 'Email',
     );
@@ -1353,7 +1350,7 @@ sub SendEmail {
     my $ArticleID = $EmailArticleBackendObject->ArticleSend(
         TicketID             => $Self->{TicketID},
         SenderType           => 'agent',
-        IsVisibleForCustomer => $IsVisibleForCustomer,
+        IsVisibleForCustomer => $GetParam{IsVisibleForCustomer},
         HistoryType          => 'Forward',
         HistoryComment       => "\%\%$To",
         From                 => $Data{From},
@@ -1857,10 +1854,7 @@ sub _Mask {
         %State,
     );
 
-    $Param{IsVisibleForCustomer} = $Config->{IsVisibleForCustomerDefault};
-    if ( $Self->{GetParam}->{IsVisibleForCustomerPresent} ) {
-        $Param{IsVisibleForCustomer} = $Self->{GetParam}->{IsVisibleForCustomer} ? 1 : 0;
-    }
+    $Param{IsVisibleForCustomer} //= $Config->{IsVisibleForCustomerDefault};
 
     # get ticket object
     my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
