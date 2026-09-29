@@ -36,7 +36,7 @@ sub Configure {
         Required   => 1,
         HasValue   => 1,
         Multiple   => 0,
-        ValueRegex => qr{\Astable|single|check\z},
+        ValueRegex => qr{\Adevelopment|stable|single|check\z},
     );
 
     $Self->AddOption(
