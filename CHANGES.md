@@ -1,4 +1,5 @@
 # 7.3.8 2026-??-??
+ - 2026-09-26 Improved error handling when sending email messages. Thanks to Paweł Bogusławski (@pboguslawski). [PR#375](https://github.com/znuny/Znuny/pull/375)
  - 2026-09-25 Added: Column TicketAccountedTime for Dashboard, TicketOverview/Small and Linkobject/Ticket Thanks to @LuBroering (Lukas Bröring Sector Nord AG) [PR#574](https://github.com/znuny/Znuny/pull/574).
  - 2026-09-22 Fixed: Misaligned all-day checkbox label in appointment dialog.
  - 2026-09-22 Added: ZNUNY_TA_* tag support alongside OTRS_TA_* in transition action ArticleSend.
