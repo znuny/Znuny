@@ -1,4 +1,5 @@
 # 7.3.8 2026-??-??
+ - 2026-09-30 Fixed: Column settings filters in dashboard and overview screens could extend beyond the viewport. Thanks to @LuBroering (Lukas Bröring, Sector Nord AG) [PR#849](https://github.com/znuny/Znuny/pull/849).
  - 2026-09-30 Fixed: Process management: File preferences of a process (e. g. its icon) were exported as content reference instead of Base64 if the process had been cached before, so that they could not be imported.
  - 2026-09-26 Improved error handling when sending email messages. Thanks to Paweł Bogusławski (@pboguslawski). [PR#375](https://github.com/znuny/Znuny/pull/375)
  - 2026-09-25 Added: Column TicketAccountedTime for Dashboard, TicketOverview/Small and Linkobject/Ticket Thanks to @LuBroering (Lukas Bröring Sector Nord AG) [PR#574](https://github.com/znuny/Znuny/pull/574).
