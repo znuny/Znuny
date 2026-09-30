@@ -427,7 +427,7 @@ EOF
             "There is only one entry in the SLA selection",
         );
 
-        # Verify queue is updated on ACL trigger, see bug#12862 ( https://bugs.otrs.org/show_bug.cgi?id=12862 ).
+        # Verify queue is updated on ACL trigger
         my %JunkQueue = $QueueObject->QueueGet(
             Name => 'Junk',
         );

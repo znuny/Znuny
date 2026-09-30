@@ -65,6 +65,7 @@ Check if provided EffectiveValue matches structure defined in XMLContentParsed.
     );
 
 Result:
+
     %Result = (
         EffectiveValue => '/etc',    # Note for Directory ValueTypes EffectiveValue is not changed.
         Success => 1,

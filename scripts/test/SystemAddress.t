@@ -375,9 +375,23 @@ $Self->False(
         Expected => $SystemAddressID,
     },
     {
+        Name => 'Case-insensitive lookup via Name',
+        Data => {
+            Name => uc( '2' . $SystemAddressEmail ),
+        },
+        Expected => $SystemAddressID,
+    },
+    {
         Name => 'Lookup via Name',
         Data => {
             SystemAddress => '2' . $SystemAddressEmail,
+        },
+        Expected => $SystemAddressID,
+    },
+    {
+        Name => 'Case-insensitive lookup via SystemAddress',
+        Data => {
+            SystemAddress => uc( '2' . $SystemAddressEmail ),
         },
         Expected => $SystemAddressID,
     },

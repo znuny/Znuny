@@ -30,6 +30,10 @@ Base class for scheduler daemon task worker modules.
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _HandleError()
 
 Creates a system error message and sends an email with the error messages form a task execution.
@@ -64,7 +68,7 @@ sub _HandleError {
         my $Sent = $Kernel::OM->Get('Kernel::System::Email')->Send(
             From     => $From,
             To       => $To,
-            Subject  => "OTRS Scheduler Daemon $Param{TaskType}: $Param{TaskName}",
+            Subject  => "Znuny Scheduler Daemon $Param{TaskType}: $Param{TaskName}",
             Charset  => 'utf-8',
             MimeType => 'text/plain',
             Body     => $Param{ErrorMessage},
@@ -146,8 +150,6 @@ sub _CheckTaskParams {
     return 1;
 }
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

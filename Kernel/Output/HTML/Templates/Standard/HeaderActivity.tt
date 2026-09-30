@@ -1,0 +1,26 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+[% RenderBlockStart("ActivityList") %]
+    <li class="Activity" data-activity-id="[% Data.ID %]" data-activity-state="[% Data.State %]">
+        <a href="[% Data.Link %]" target="[% Data.LinkTarget %]" class="activity-link activity dropdown-item">
+            <span class="iconWrapper">
+                <i class="activity-icon [% Data.Icon %]"></i>
+                <span class="ActivityState activity-[% Data.State %]"></span>
+            </span>
+            <span class="textWrapper">
+                <p class="activity-title">[% Data.Title %]</p>
+                <p class="activity-text">[% Data.Text | truncate(100) %]</p>
+                <p class="activity-time">[% Data.CreateTime | Localize("TimeShort") %]</p>
+            </span>
+        </a>
+        <span class="activity-delete icon-hover" data-activity-id="[% Data.ID %]">
+            <i class="fa fa-close"></i>
+        </span>
+    </li>
+[% RenderBlockEnd("ActivityList") %]

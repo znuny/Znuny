@@ -36,7 +36,7 @@ my %DefaultSettingAddTemplate = (
     XMLFilename    => 'UnitTest.xml',
 );
 
-my $SetingsXML = << 'EOF',
+my $SetingsXML = <<'EOF',
 <?xml version="1.0" encoding="utf-8"?>
 <otrs_config version="2.0" init="Application">
     <Setting Name="Test0" Required="1" Valid="1">
@@ -65,7 +65,7 @@ EOF
 
     # Get SysConfig XML object.
     my $SysConfigXMLObject = $Kernel::OM->Get('Kernel::System::SysConfig::XML');
-my $SysConfigObject        = $Kernel::OM->Get('Kernel::System::SysConfig');
+my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
 
 my @DefaultSettingAddParams = $SysConfigXMLObject->SettingListParse(
     %DefaultSettingAddTemplate,
@@ -653,8 +653,8 @@ for my $Test (@Tests) {
     {
         Name   => 'Value Test II Update',
         Params => {
-            DefaultID => $DefaultID0,
-            Name      => "Test0$RandomID",
+            DefaultID      => $DefaultID0,
+            Name           => "Test0$RandomID",
             EffectiveValue =>
                 '☠☬☹♓♻⚛⛑⛯⛴ <br></html></xml> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
             UserID  => 1,
@@ -671,7 +671,7 @@ for my $Test (@Tests) {
             UserModificationPossible => 0,
             UserModificationActive   => 0,
             UserPreferencesGroup     => '',
-            EffectiveValue =>
+            EffectiveValue           =>
                 '☠☬☹♓♻⚛⛑⛯⛴ <br></html></xml> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
             DefaultValue     => $DefaultSettingAddParams[0]->{EffectiveValue},
             IsModified       => 1,
@@ -1300,11 +1300,11 @@ for my $Test (@Tests) {
             UserModificationPossible => 1,
             UserModificationActive   => 1,
             UserPreferencesGroup     => '',
-            DefaultValue => $DefaultSettingAddParams[1]->{EffectiveValue},
-            IsModified   => 1,
-            IsValid      => 1,
-            CreateBy     => 1,
-            ChangeBy     => 1,
+            DefaultValue             => $DefaultSettingAddParams[1]->{EffectiveValue},
+            IsModified               => 1,
+            IsValid                  => 1,
+            CreateBy                 => 1,
+            ChangeBy                 => 1,
         },
     },
 );

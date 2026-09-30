@@ -638,6 +638,7 @@
                 <Item Key="JavaScript">
                     <Array>
                         <Item>Core.Agent.Admin.GenericInterfaceMappingXSLT.js</Item>
+                        <Item>thirdparty/codemirror-6-min-1.0.0/cm6.bundle.iife.min.js</Item>
                     </Array>
                 </Item>
             </Hash>

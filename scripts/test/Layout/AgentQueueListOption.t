@@ -25,7 +25,7 @@ my @Tests = (
                 1 => 'Testqueue',
             },
         },
-        ResultTree => '<select name="test" id="test" class="" data-tree="true"   >
+        ResultTree => '<select name="test" id="test" class="" data-tree="true" placeholder=""   >
 <option value="1">Testqueue</option>
 </select>
 ',
@@ -42,7 +42,7 @@ my @Tests = (
                 '||-' => '-',
             },
         },
-        ResultTree => '<select name="test" id="test" class="" data-tree="true"   >
+        ResultTree => '<select name="test" id="test" class="" data-tree="true" placeholder=""   >
 <option value="||-">-</option>
 <option value="1">Testqueue</option>
 </select>
@@ -61,7 +61,7 @@ my @Tests = (
                 '||-' => '- Move -',
             },
         },
-        ResultTree => '<select name="test" id="test" class="" data-tree="true"   >
+        ResultTree => '<select name="test" id="test" class="" data-tree="true" placeholder=""   >
 <option value="||-">- Move -</option>
 <option value="1">Testqueue</option>
 </select>
@@ -79,7 +79,7 @@ my @Tests = (
                 '1||"><script>alert(\'hey there\');</script>' => '"><script>alert(\'hey there\');</script>',
             },
         },
-        ResultTree => q{<select name="test" id="test" class="" data-tree="true"   >
+        ResultTree => q{<select name="test" id="test" class="" data-tree="true" placeholder=""   >
 <option value="1||&quot;&gt;&lt;script&gt;alert('hey there');&lt;/script&gt;">&quot;&gt;&lt;script&gt;alert('hey there');&lt;/script&gt;</option>
 </select>
 },

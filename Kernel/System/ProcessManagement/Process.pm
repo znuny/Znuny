@@ -11,6 +11,7 @@ package Kernel::System::ProcessManagement::Process;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 
@@ -21,6 +22,7 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
     'Kernel::System::ProcessManagement::Activity',
     'Kernel::System::ProcessManagement::ActivityDialog',
+    'Kernel::System::ProcessManagement::DB::Process',
     'Kernel::System::ProcessManagement::Transition',
     'Kernel::System::ProcessManagement::TransitionAction',
     'Kernel::System::Ticket',
@@ -63,6 +65,7 @@ sub new {
 
     my $Process = $ProcessObject->ProcessGet(
         ProcessEntityID => 'P1',
+        Preferences     => 1,    # (optional) default 1 (0|1), if set to 1, returns Preferences
     );
 
     Returns:
@@ -108,6 +111,8 @@ sub ProcessGet {
         }
     }
 
+    $Param{Preferences} = $Param{Preferences} || 1;
+
     my $Process = $Kernel::OM->Get('Kernel::Config')->Get('Process');
 
     if ( !IsHashRefWithData($Process) ) {
@@ -124,6 +129,20 @@ sub ProcessGet {
             Message  => "No Data for Process '$Param{ProcessEntityID}' found!",
         );
         return;
+    }
+
+    # get process preferences
+
+    if ( $Param{Preferences} ) {
+        my %Preferences = $Self->ProcessPreferencesGet(
+            ProcessEntityID => $Param{ProcessEntityID},
+            Export          => $Param{Export},
+        );
+
+        # merge data
+        if (%Preferences) {
+            %{ $Process->{ $Param{ProcessEntityID} } } = ( %{ $Process->{ $Param{ProcessEntityID} } }, %Preferences );
+        }
     }
 
     return $Process->{ $Param{ProcessEntityID} };
@@ -262,7 +281,10 @@ sub ProcessStartpointGet {
         }
     }
 
-    my $Process = $Self->ProcessGet( ProcessEntityID => $Param{ProcessEntityID} );
+    my $Process = $Self->ProcessGet(
+        ProcessEntityID => $Param{ProcessEntityID},
+        Preferences     => 0,
+    );
 
     # include FadeAway processes so they will be listed as available processes to continue working
     #    with them
@@ -323,7 +345,8 @@ sub ProcessStartpointGet {
         },
     );
 
-    Returns:
+Returns:
+
     $Success = 1; # undef # if "CheckOnly" is NOT set
     1 if Transition was executed and Ticket->ActivityEntityID updated
     undef if no Transition matched or check failed otherwise
@@ -381,7 +404,10 @@ sub ProcessTransition {
         %Data = ( %Data, %{ $Param{Data} } );
     }
 
-    my $Process = $Self->ProcessGet( ProcessEntityID => $Param{ProcessEntityID} );
+    my $Process = $Self->ProcessGet(
+        ProcessEntityID => $Param{ProcessEntityID},
+        Preferences     => 0,
+    );
 
     if ( !$Process->{State} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -599,8 +625,10 @@ sub ProcessTransition {
         UserID           => 123,
     );
 
-    Returns:
+Returns:
+
     $Success = 1; # undef
+
     1 if setting the Activity was executed
     undef if setting failed
 
@@ -638,7 +666,10 @@ sub ProcessTicketActivitySet {
     }
 
     # Check on valid State
-    my $Process = $Self->ProcessGet( ProcessEntityID => $Param{ProcessEntityID} );
+    my $Process = $Self->ProcessGet(
+        ProcessEntityID => $Param{ProcessEntityID},
+        Preferences     => 0,
+    );
 
     if ( !$Process->{State} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -718,7 +749,8 @@ sub ProcessTicketActivitySet {
         UserID          => 123,
     );
 
-    Returns:
+Returns:
+
     $Success = 1; # undef
     1 if setting the Activity was executed
     undef if setting failed
@@ -739,7 +771,10 @@ sub ProcessTicketProcessSet {
     }
 
     # Check on valid ProcessEntityID
-    my $Process = $Self->ProcessGet( ProcessEntityID => $Param{ProcessEntityID} );
+    my $Process = $Self->ProcessGet(
+        ProcessEntityID => $Param{ProcessEntityID},
+        Preferences     => 0,
+    );
 
     if ( !$Process->{State} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -808,6 +843,66 @@ sub ProcessTicketProcessSet {
     }
 
     return;
+}
+
+=head2 ProcessPreferencesSet()
+
+Sets process preferences.
+
+    $ProcessObject->ProcessPreferencesSet(
+        ProcessEntityID => 123,
+        Key             => 'UserComment',
+        Value           => 'some comment',
+        UserID          => 123,
+    );
+
+=cut
+
+sub ProcessPreferencesSet {
+    my ( $Self, %Param ) = @_;
+
+    return $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process')->ProcessPreferencesSet(%Param);
+}
+
+=head2 ProcessPreferencesDelete()
+
+Deletes process preferences.
+
+    $ProcessObject->ProcessPreferencesDelete(
+        ProcessEntityID => 123,
+        Key             => 'UserComment',
+    );
+
+=cut
+
+sub ProcessPreferencesDelete {
+    my ( $Self, %Param ) = @_;
+
+    return $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process')->ProcessPreferencesDelete(%Param);
+}
+
+=head2 ProcessPreferencesGet()
+
+Gets process preferences.
+
+    my %Preferences = $ProcessObject->ProcessPreferencesGet(
+        ProcessEntityID => 123,
+        Export          => 1,       # optional, if set to 1, the content of a file will be exported as Base64
+        UserID          => 123,
+    );
+
+Return:
+
+    my %Preferences = (
+        'UserComment' => 'some comment',
+    );
+
+=cut
+
+sub ProcessPreferencesGet {
+    my ( $Self, %Param ) = @_;
+
+    return $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Process')->ProcessPreferencesGet(%Param);
 }
 
 1;

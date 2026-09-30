@@ -35,13 +35,13 @@ my $EmailParserObject = Kernel::System::EmailParser->new(
 
 $Self->Is(
     $EmailParserObject->GetParam( WHAT => 'To' ),
-    'darthvader@otrs.org',
+    'darthvader@znuny.org',
     "#1 GetParam(WHAT => 'To')",
 );
 
 $Self->Is(
     $EmailParserObject->GetParam( WHAT => 'From' ),
-    'Skywalker Attachment <skywalker@otrs.org>',
+    'Skywalker Attachment <skywalker@znuny.org>',
     "#1 GetParam(WHAT => 'From')",
 );
 
@@ -126,7 +126,7 @@ $EmailParserObject = Kernel::System::EmailParser->new(
 );
 $Self->Is(
     $EmailParserObject->GetCharset(),
-    'utf-8',                                                                       # automatically converted
+    'utf-8',    # automatically converted
     "#3 GetCharset()",
 );
 @Attachments = $EmailParserObject->GetAttachments();
@@ -224,7 +224,7 @@ $EmailParserObject = Kernel::System::EmailParser->new(
 );
 $Self->Is(
     $EmailParserObject->GetCharset(),
-    'utf-8',                                                                       # automatically converted
+    'utf-8',    # automatically converted
     "#5 GetCharset()",
 );
 @Attachments = $EmailParserObject->GetAttachments();
@@ -333,7 +333,7 @@ $EmailParserObject = Kernel::System::EmailParser->new(
 );
 $Self->Is(
     $EmailParserObject->GetCharset(),
-    'utf-8',                                                                       # automatically converted
+    'utf-8',    # automatically converted
     "#7 GetCharset()",
 );
 @Attachments = $EmailParserObject->GetAttachments();
@@ -534,7 +534,7 @@ $EmailParserObject = Kernel::System::EmailParser->new(
 );
 $Self->Is(
     $EmailParserObject->GetCharset(),
-    'utf-8',                                                                        # automatically converted
+    'utf-8',    # automatically converted
     "#12 GetCharset() - iso-8859-1 charset should be found",
 );
 $Self->Is(
@@ -682,7 +682,7 @@ $Self->Is(
 $MD5 = $MainObject->MD5sum( String => $EmailParserObject->GetMessageBody() ) || '';
 $Self->Is(
     $MD5,
-    'b8b01a1acd8fe7efeff8351bf48d8f63',
+    'fd924c11017677380752522ae9280cfe',
     "#14 md5 body check",
 );
 

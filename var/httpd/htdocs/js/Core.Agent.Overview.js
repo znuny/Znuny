@@ -133,8 +133,7 @@ Core.Agent.Overview = (function (TargetNS) {
      */
     TargetNS.InitViewSmall = function () {
 
-        var URL, ColumnFilter, NewColumnFilterStrg, MyRegEx, SessionInformation,
-            $MasterActionLink;
+        var $MasterActionLink;
 
         // initializes a click event for table with checkboxes
         Core.UI.InitCheckboxSelection($('table td.Checkbox'));
@@ -156,6 +155,7 @@ Core.Agent.Overview = (function (TargetNS) {
 
         // change event for column filter
         $('.ColumnFilter').on('change', function () {
+            var URL, SessionInformation, ColumnFilter, NewColumnFilterStrg, MyRegEx, SelectedValues, SeenValues;
 
             // define variables
             URL = Core.Config.Get("Baselink") + 'Action=' + Core.Config.Get("Action") + ';' + Core.Config.Get('LinkPage');
@@ -163,23 +163,53 @@ Core.Agent.Overview = (function (TargetNS) {
             $.each(SessionInformation, function (Key, Value) {
                 URL += encodeURIComponent(Key) + '=' + encodeURIComponent(Value) + ';';
             });
+
             ColumnFilter = $(this)[0].name;
-            NewColumnFilterStrg = $(this)[0].name + '=' + encodeURIComponent($(this).val()) + ';';
+            MyRegEx = new RegExp(ColumnFilter + "=[^;]*;", "g");
+            NewColumnFilterStrg = '';
 
-            MyRegEx = new  RegExp(ColumnFilter+"=[^;]*;");
+            if ($(this).prop('multiple')) {
+                SelectedValues = [];
+                SeenValues = {};
 
-            // check for already set parameter and replace
-            if (URL.match(MyRegEx)) {
-                URL = URL.replace(MyRegEx, NewColumnFilterStrg);
+                $(this).find('option:selected').each(function () {
+                    var Value = $(this).val();
+
+                    if (!Value || SeenValues[Value]) {
+                        return;
+                    }
+
+                    SeenValues[Value] = true;
+                    SelectedValues.push(Value);
+                });
+
+                // Empty multiselect must clear the column filter (jQuery .val() is null when cleared).
+                if (!SelectedValues.length) {
+                    NewColumnFilterStrg = ColumnFilter + '=DeleteFilter;';
+                }
+                else {
+                    $.each(SelectedValues, function (Index, Value) {
+                        NewColumnFilterStrg += ColumnFilter + '=' + encodeURIComponent(Value) + ';';
+                    });
+                }
             }
-
-            // otherwise add the new column filter
             else {
-                URL = URL + NewColumnFilterStrg;
+                if ($(this).val() === null) {
+                    return false;
+                }
+                NewColumnFilterStrg = ColumnFilter + '=' + encodeURIComponent($(this).val()) + ';';
             }
+
+            // remove already set parameter values for the current filter
+            if (URL.match(MyRegEx)) {
+                URL = URL.replace(MyRegEx, '');
+            }
+
+            // add the current filter value(s)
+            URL += NewColumnFilterStrg;
 
             // redirect
-            window.location.href =  URL;
+            window.location.href = URL;
         });
 
         // click event on table header trigger
@@ -208,6 +238,9 @@ Core.Agent.Overview = (function (TargetNS) {
                     });
 
                 // show THIS settings widget
+                Core.UI.Table.AdjustColumnSettingsBox(
+                    $TriggerObj.next('.ColumnSettingsContainer').find('.ColumnSettingsBox')
+                );
                 $TriggerObj
                     .next('.ColumnSettingsContainer')
                     .find('.ColumnSettingsBox')
@@ -223,7 +256,7 @@ Core.Agent.Overview = (function (TargetNS) {
                             ) {
 
                             if (!$TriggerObj.parent().find('.SelectedValue').length) {
-                                Core.AJAX.FormUpdate($('#Nothing'), 'AJAXFilterUpdate', FilterName, [ FilterName ], function() {
+                                Core.AJAX.FormUpdate($('#ColumnFilterAttributes'), 'AJAXFilterUpdate', FilterName, [ FilterName ], function() {
                                     var AutoCompleteValue = $TriggerObj
                                             .next('.ColumnSettingsContainer')
                                             .find('select')
@@ -239,22 +272,7 @@ Core.Agent.Overview = (function (TargetNS) {
                                         $TriggerObj
                                             .next('.ColumnSettingsContainer')
                                             .find('select')
-                                            .after('<span class="SelectedValue Hidden">' + AutoCompleteText + ' (' + AutoCompleteValue + ')</span>')
-                                            .parent()
-                                            .find('input[type=text]')
-                                            .after('<a href="#" class="DeleteFilter"><i class="fa fa-trash-o"></i></a>')
-                                            .parent()
-                                            .find('a.DeleteFilter')
-                                            .off()
-                                            .on('click', function() {
-                                                $(this)
-                                                    .closest('.ColumnSettingsContainer')
-                                                    .find('select')
-                                                    .val('DeleteFilter')
-                                                    .trigger('change');
-
-                                                return false;
-                                            });
+                                            .after('<span class="SelectedValue Hidden">' + AutoCompleteText + ' (' + AutoCompleteValue + ')</span>');
                                     }
                                 });
                             }
@@ -280,7 +298,7 @@ Core.Agent.Overview = (function (TargetNS) {
             // only act if the link was not clicked directly
             if (Event.target !== $MasterActionLink.get(0)) {
                 if (Event.ctrlKey || Event.metaKey) {
-                    Core.UI.Popup.OpenPopup($MasterActionLink.attr('href'));
+                    Core.UI.Popup.OpenPopup($MasterActionLink.attr('href'), undefined, undefined, 1);
                 }
                 else {
                     window.location = $MasterActionLink.attr('href');
@@ -361,7 +379,7 @@ Core.Agent.Overview = (function (TargetNS) {
             // only act if the link was not clicked directly
             if (Event.target !== $MasterActionLink.get(0)) {
                 if (Event.ctrlKey || Event.metaKey) {
-                    Core.UI.Popup.OpenPopup($MasterActionLink.attr('href'));
+                    Core.UI.Popup.OpenPopup($MasterActionLink.attr('href'), undefined, undefined, 1);
                 }
                 else {
                     window.location = $MasterActionLink.attr('href');
@@ -505,7 +523,7 @@ Core.Agent.Overview = (function (TargetNS) {
             // only act if the link was not clicked directly
             if (Event.target !== $MasterActionLink.get(0)) {
                 if (Event.ctrlKey || Event.metaKey) {
-                    Core.UI.Popup.OpenPopup($MasterActionLink.attr('href'));
+                    Core.UI.Popup.OpenPopup($MasterActionLink.attr('href'), undefined, undefined, 1);
                 }
                 else {
                     window.location = $MasterActionLink.attr('href');

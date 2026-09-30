@@ -289,7 +289,6 @@ $Selenium->RunTest(
         );
 
         # Navigate to customer ticket process directly via URL with pre-selected process and activity dialog
-        # see bug#12850 ( https://bugs.otrs.org/show_bug.cgi?id=12850 ).
         $Selenium->VerifiedGet(
             "${ScriptAlias}customer.pl?Action=CustomerTicketProcess;ID=$ListReverse{$ProcessName};ActivityDialogEntityID=$Process->{Activities}->[0]"
         );
@@ -312,7 +311,6 @@ $Selenium->RunTest(
         $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#Subject').length" );
 
         # Check on DynamicField change - ACL restriction on Type field.
-        # See bug#11512 (https://bugs.otrs.org/show_bug.cgi?id=11512).
         $Self->True(
             $Selenium->execute_script("return \$('#TypeID option:contains(\"$Types[0]->{Name}\")').length;"),
             "All Types are visible before ACL"

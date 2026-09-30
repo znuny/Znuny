@@ -40,7 +40,7 @@ $Self->Is(
 
 # provide minimum options
 $ExitCode = $CommandObject->Execute(
-    '--user-name', $UserName, '--first-name', 'Test', '--last-name', 'Test',
+    '--user-name',     $UserName, '--first-name', 'Test', '--last-name', 'Test',
     '--email-address', $UserName . '@test.test'
 );
 $Self->Is(
@@ -51,7 +51,7 @@ $Self->Is(
 
 # provide minimum options
 $ExitCode = $CommandObject->Execute(
-    '--user-name', $UserName, '--first-name', 'Test', '--last-name', 'Test',
+    '--user-name',     $UserName, '--first-name', 'Test', '--last-name', 'Test',
     '--email-address', $UserName . '@test.test'
 );
 $Self->Is(

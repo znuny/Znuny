@@ -139,11 +139,20 @@ $UploadCacheObject->FormIDAddFile(
 );
 
 $Response = $UserAgent->get("${BaseURL}Action=PictureUpload;FormID=$FormID;ContentID=$ContentID");
-$Self->True(
-    index(
-        $Response->content(),
-        q|CKEDITOR.tools.callFunction(0, '', "The file is not an image that can be shown inline!"|
-    ) > -1,
+
+my $JSONString     = $Response->content();
+my $DecodeResponse = $Kernel::OM->Get('Kernel::System::JSON')->Decode(
+    Data => $JSONString,
+);
+
+$Self->IsDeeply(
+    $DecodeResponse,
+    {
+        'error' => {
+            'message' => 'The file is not an image that can be shown inline!'
+        },
+        'errortype' => 'ErrorNoImageFile'
+    },
     'Response check for CKEditor error handler',
 );
 

@@ -661,10 +661,10 @@ sub OperationFunctionCall {
     );
 
     if ( ref $Data eq 'HASH' ) {
-        return $OperationObject->{BackendObject}->$Function( %{ $Data || {} } );
+        return $OperationObject->$Function( %{ $Data || {} } );
     }
     elsif ( ref $Data eq 'ARRAY' ) {
-        return $OperationObject->{BackendObject}->$Function( @{ $Data || [] } );
+        return $OperationObject->$Function( @{ $Data || [] } );
     }
 
     return;
@@ -756,10 +756,10 @@ sub InvokerFunctionCall {
     );
 
     if ( ref $Data eq 'HASH' ) {
-        return $InvokerObject->{BackendObject}->$Function( %{ $Data || {} } );
+        return $InvokerObject->$Function( %{ $Data || {} } );
     }
     elsif ( ref $Data eq 'ARRAY' ) {
-        return $InvokerObject->{BackendObject}->$Function( @{ $Data || [] } );
+        return $InvokerObject->$Function( @{ $Data || [] } );
     }
 
     return;

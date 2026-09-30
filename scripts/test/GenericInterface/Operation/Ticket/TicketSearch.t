@@ -59,6 +59,15 @@ $ConfigObject->Set(
 # get the start time for the test
 my $StartTime = $Kernel::OM->Create('Kernel::System::DateTime');
 
+# Search time filters are exclusive, so tickets created within the same second as the
+# start time would not be found when searching with the start time itself.
+my $BeforeStartTime = $Kernel::OM->Create(
+    'Kernel::System::DateTime',
+    ObjectParams => {
+        Epoch => $StartTime->ToEpoch() - 1,
+    },
+);
+
 # get user object
 my $UserObject = $Kernel::OM->Get('Kernel::System::User');
 
@@ -1413,10 +1422,10 @@ my @Tests = (
         Name           => "Test LastChangeTimeNewerDate +  CreateTimeNewerDate " . $TestCounter++,
         SuccessRequest => 1,
         RequestData    => {
-            TicketLastChangeTimeNewerDate => $StartTime->ToString(),
-            TicketCreateTimeNewerDate     => $StartTime->ToString(),
-            SortBy  => 'Ticket',    # force order, because the Age (default) can be the same
-            OrderBy => 'Down',
+            TicketLastChangeTimeNewerDate => $BeforeStartTime->ToString(),
+            TicketCreateTimeNewerDate     => $BeforeStartTime->ToString(),
+            SortBy                        => 'Ticket',    # force order, because the Age (default) can be the same
+            OrderBy                       => 'Down',
         },
         ExpectedReturnLocalData => {
             Data => {
@@ -1459,11 +1468,11 @@ my @Tests = (
         Name           => "Test Limit " . $TestCounter++,
         SuccessRequest => 1,
         RequestData    => {
-            TicketLastChangeTimeNewerDate => $StartTime->ToString(),
-            TicketCreateTimeNewerDate     => $StartTime->ToString(),
-            SortBy  => 'Ticket',    # force order, because the Age (default) can be the same
-            OrderBy => 'Down',
-            Limit   => 1,
+            TicketLastChangeTimeNewerDate => $BeforeStartTime->ToString(),
+            TicketCreateTimeNewerDate     => $BeforeStartTime->ToString(),
+            SortBy                        => 'Ticket',    # force order, because the Age (default) can be the same
+            OrderBy                       => 'Down',
+            Limit                         => 1,
         },
         ExpectedReturnLocalData => {
             Data => {

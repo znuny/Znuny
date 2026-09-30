@@ -79,6 +79,7 @@ Check if provided EffectiveValue matches structure defined in XMLContentParsed.
     );
 
 Result:
+
     %Result = (
         EffectiveValue => {         # Note for FrontendNavigation ValueTypes EffectiveValue is not changed.
             # ...

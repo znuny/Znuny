@@ -1,0 +1,32 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+/**
+ * @package     Skin "Default"
+ * @section     Autocompletion
+ */
+
+.ck.ck-mentions .ck-button.AutocompletionItemParent:hover
+{
+    background: #2c9cf9 !important;
+    color: white !important;
+}
+
+.ck.ck-mentions .ck-button.AutocompletionItemParent > .AutocompletionItem{
+    padding: var(--ck-list-button-padding);
+    color: inherit;
+    background: inherit;
+}
+
+.ck.ck-list__item>.ck-button.AutocompletionItemParent {
+    padding: 0;
+}
+
+.ck-body-wrapper .ck-on .AutocompletionItem {
+    color: white;
+}

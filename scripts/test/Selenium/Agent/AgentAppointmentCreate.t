@@ -1440,7 +1440,7 @@ $Selenium->RunTest(
                 $Month11    = $Appointment11TimeSettings->{Month};
             }
             elsif (
-                ( $Appointment11TimeSettings->{Day} == $Day11 )    # Check if day is valid
+                ( $Appointment11TimeSettings->{Day} == $Day11 )                         # Check if day is valid
                 && $Appointment11TimeSettings->{Month} == $Month11
                 && ( ( $Appointment11TimeSettings->{Year} - $LastYear11 ) % 2 == 0 )    # Check if Interval matches
                 )

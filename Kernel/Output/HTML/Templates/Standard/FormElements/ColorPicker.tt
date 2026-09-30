@@ -14,5 +14,10 @@
     <div class="Field">
         <input type="text" id="[% Data.ID | html %]" name="[% Data.Name | html %]" class="[% Data.Class | html %]" value="[% Data.Value | html %]"
         data-jscolor="[% Data.ColorPickerConfig | html %]">
+        [% IF Data.Description %]
+        <p class="FieldExplanation">
+            [% Translate(Data.Description) | html %]
+        </p>
+        [% END %]
     </div>
 [% RenderBlockEnd("InputField") %]

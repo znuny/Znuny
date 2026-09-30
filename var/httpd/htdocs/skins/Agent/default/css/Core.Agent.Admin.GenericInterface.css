@@ -163,4 +163,24 @@ span.WarningDialog {
     margin-left: 5px;
 }*/
 
+/**
+ * CodeMirror 6
+ */
+/* Set editor dimensions */
+#XSLTEditor {
+    height: 800px;
+    /* width: 50%; */
+}
+
+/* Stretch codemirror editor to fit inside its containing div */
+.cm-editor {
+    height: 100%;
+    width: 100%;
+}
+
+/* Set background color of editor */
+.cm-content {
+    background-color: white !important;
+}
+
 }/* end @media */

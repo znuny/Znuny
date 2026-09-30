@@ -224,7 +224,7 @@
                                                 <label for="Asynchronous">[% Translate("Asynchronous") | html %]</label>
                                             </div>
                                             <button type="button" id="AddEvent" class="Add GenericInterfaceSpacing HideOnChange icon-hover" title="[% Translate("Add Event") | html %]" name="AddEvent" value="[% Translate("Add Event") | html %]">
-                                                <i class="fa fa-plus-circle"></i>
+                                                <i class="fa fa-plus-square-o"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -241,7 +241,7 @@
 
                         [% END %]
 
-                        [% IF Data.GetAllArticleAttachmentsStrg %]
+[% RenderBlockStart("GetAllArticleAttachments") %]
                         <div class="field-wrapper">
                             <label for="GetAllArticleAttachments">[% Translate("Add all attachments") | html %]</label>
                             <div class="Field">
@@ -251,7 +251,111 @@
                                 </p>
                             </div>
                         </div>
-                        [% END %]
+[% RenderBlockEnd("GetAllArticleAttachments") %]
+
+[% RenderBlockStart("PayloadOmittedFields") %]
+                        <div class="field-wrapper">
+                            <label>[% Translate("Fields to be omitted from payload") | html %]:</label>
+                            <div class="Field ValueInsert PayloadOmittedFieldsRow" data-formelement-restore-destination='PayloadOmittedFields' data-formelement-add-destination="PayloadOmittedFields">
+[% RenderBlockStart("PayloadOmittedFieldsValueCounter") %]
+                                <input type="hidden" name="PayloadOmittedFieldsValueCounter" data-formelement-add-counter="PayloadOmittedFieldsCounter" value="[% Data.PayloadOmittedFieldsValueCounter | html %]" id="PayloadOmittedFieldsValueCounter" class="ValueCounter" />
+[% RenderBlockEnd("PayloadOmittedFieldsValueCounter") %]
+[% RenderBlockStart("PayloadOmittedFieldsRow") %]
+                                <div class="ValueRow single-row-inputs full-width" data-formelement-remove-destination="PayloadOmittedFieldsRow_[% Data.PayloadOmittedFieldsValueCounter | html %]" >
+
+                                    <label class="Mandatory" for="PayloadOmittedField_[% Data.PayloadOmittedFieldsValueCounter | html %]"><span class="Marker">*</span>[% Translate("Field") | html %]:</label>
+                                    <input name="PayloadOmittedField_[% Data.PayloadOmittedFieldsValueCounter | html %]" id="PayloadOmittedField_[% Data.PayloadOmittedFieldsValueCounter | html %]" class="DefaultValueItem Validate_Required DataTable VariableWidth [% Data.PayloadOmittedFieldError | html %]" type="text" maxlength="100" value="[% Data.PayloadOmittedField | html %]"/>
+                                    <div id="PayloadOmittedField_[% Data.PayloadOmittedFieldsValueCounter | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                    <div id="PayloadOmittedField_[% Data.PayloadOmittedFieldsValueCounter | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate(Data.PayloadOmittedFieldErrorMessage) | html %]</p></div>
+
+                                    <a href="#" title="[% Translate("Remove field") | html %]" id="RemoveValue_[% Data.PayloadOmittedFieldsValueCounter | html %]" class="RemoveButton ValueRemove" data-formelement-remove='PayloadOmittedFields'  data-formelement-remove-destination-name="PayloadOmittedFieldsRow_[% Data.PayloadOmittedFieldsValueCounter | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove field") | html %]</span></a>
+                                    <div class="SpacingTopMini" ></div>
+                                </div>
+[% RenderBlockEnd("PayloadOmittedFieldsRow") %]
+[% RenderBlockStart("PayloadOmittedFieldsTemplate") %]
+                                <div class="ValueTemplate single-row-inputs full-width Hidden" data-formelement-add-source="PayloadOmittedFieldsTemplate">
+
+                                    <label class="Mandatory" for="PayloadOmittedField"><span class="Marker">*</span>[% Translate("Field") | html %]:</label>
+                                    <input name="PayloadOmittedField" id="PayloadOmittedField" class="DefaultValueItem DataTable VariableWidth" type="text" maxlength="100" value=""/>
+                                    <div id="PayloadOmittedFieldError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+
+                                    <a href="#" title="[% Translate("Remove field") | html %]" id="RemoveValue" class="RemoveButton ValueRemove" data-formelement-remove='PayloadOmittedFields' data-formelement-remove-destination-name="PayloadOmittedFieldsRow"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove field") | html %]</span></a>
+                                    <div class="SpacingTopMini" ></div>
+                                </div>
+[% RenderBlockEnd("PayloadOmittedFieldsTemplate") %]
+                            </div>
+                        </div>
+
+                        <div class="Field">
+                            <div class="flex-row">
+                                <a href="#" class="AddValue" title="[% Translate("Add field to be omitted from payload") | html %]" id="AddValue" class="AddButton"
+                                    data-formelement-add='PayloadOmittedFields'
+                                    data-formelement-add-destination-name="PayloadOmittedFields"
+                                    data-formelement-add-source-name="PayloadOmittedFieldsTemplate"
+                                    data-formelement-add-counter-name="PayloadOmittedFieldsCounter"
+                                    data-formelement-add-method='append'><i class="fa fa-plus-square-o"></i><span class="InvisibleText">[% Translate("Add field to be omitted from payload") | html %]</span></a>
+                                <a href="#" id="Restore" title="[% Translate("Restore omitted fields") | html %]" class="Restore"
+                                data-formelement-restore
+                                data-formelement-restore-destination-name='PayloadOmittedFields'
+                                ><i class="fa fa-undo"></i><span class="InvisibleText">[% Translate("Restore omitted fields") | html %]</span></a>
+                            </div>
+                            <div>
+                                <p class="FieldExplanation">[% Translate("Fields which will be removed from the payload of the request, e.g. 'SomeField1'. Nested fields can be referenced by connecting them with '->', e.g. 'SomeField1->SomeField2->SomeField3'.") | html %]</p>
+                            </div>
+                        </div>
+[% RenderBlockEnd("PayloadOmittedFields") %]
+
+[% RenderBlockStart("PayloadBase64EncodedFields") %]
+                        <div class="field-wrapper">
+                            <label>[% Translate("Fields to be Base64 encoded in payload") | html %]:</label>
+                            <div class="Field ValueInsert PayloadBase64EncodedFieldsRow" data-formelement-restore-destination='PayloadBase64EncodedFields' data-formelement-add-destination="PayloadBase64EncodedFields">
+[% RenderBlockStart("PayloadBase64EncodedFieldsValueCounter") %]
+                                <input type="hidden" name="PayloadBase64EncodedFieldsValueCounter" data-formelement-add-counter="PayloadBase64EncodedFieldsCounter" value="[% Data.PayloadBase64EncodedFieldsValueCounter | html %]" id="PayloadBase64EncodedFieldsValueCounter" class="ValueCounter" />
+[% RenderBlockEnd("PayloadBase64EncodedFieldsValueCounter") %]
+[% RenderBlockStart("PayloadBase64EncodedFieldsRow") %]
+                                <div class="ValueRow single-row-inputs full-width" data-formelement-remove-destination="PayloadBase64EncodedFieldsRow_[% Data.PayloadBase64EncodedFieldsValueCounter | html %]" >
+
+                                    <label class="Mandatory" for="PayloadBase64EncodedField_[% Data.PayloadBase64EncodedFieldsValueCounter | html %]"><span class="Marker">*</span>[% Translate("Field") | html %]:</label>
+                                    <input name="PayloadBase64EncodedField_[% Data.PayloadBase64EncodedFieldsValueCounter | html %]" id="PayloadBase64EncodedField_[% Data.PayloadBase64EncodedFieldsValueCounter | html %]" class="DefaultValueItem Validate_Required DataTable VariableWidth [% Data.PayloadBase64EncodedFieldError | html %]" type="text" maxlength="100" value="[% Data.PayloadBase64EncodedField | html %]"/>
+                                    <div id="PayloadBase64EncodedField_[% Data.PayloadBase64EncodedFieldsValueCounter | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                                    <div id="PayloadBase64EncodedField_[% Data.PayloadBase64EncodedFieldsValueCounter | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate(Data.PayloadBase64EncodedFieldErrorMessage) | html %]</p></div>
+
+                                    <a href="#" title="[% Translate("Remove field") | html %]" id="RemoveValue_[% Data.PayloadBase64EncodedFieldsValueCounter | html %]" class="RemoveButton ValueRemove" data-formelement-remove='PayloadBase64EncodedFields'  data-formelement-remove-destination-name="PayloadBase64EncodedFieldsRow_[% Data.PayloadBase64EncodedFieldsValueCounter | html %]"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove field") | html %]</span></a>
+                                    <div class="SpacingTopMini" ></div>
+                                </div>
+[% RenderBlockEnd("PayloadBase64EncodedFieldsRow") %]
+[% RenderBlockStart("PayloadBase64EncodedFieldsTemplate") %]
+                                <div class="ValueTemplate single-row-inputs full-width Hidden" data-formelement-add-source="PayloadBase64EncodedFieldsTemplate">
+
+                                    <label class="Mandatory" for="PayloadBase64EncodedField"><span class="Marker">*</span>[% Translate("Field") | html %]:</label>
+                                    <input name="PayloadBase64EncodedField" id="PayloadBase64EncodedField" class="DefaultValueItem DataTable VariableWidth" type="text" maxlength="100" value=""/>
+                                    <div id="PayloadBase64EncodedFieldError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+
+                                    <a href="#" title="[% Translate("Remove field") | html %]" id="RemoveValue" class="RemoveButton ValueRemove" data-formelement-remove='PayloadBase64EncodedFields' data-formelement-remove-destination-name="PayloadBase64EncodedFieldsRow"><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove field") | html %]</span></a>
+                                    <div class="SpacingTopMini" ></div>
+                                </div>
+[% RenderBlockEnd("PayloadBase64EncodedFieldsTemplate") %]
+                            </div>
+                        </div>
+
+                        <div class="Field">
+                            <div class="flex-row">
+                                <a href="#" class="AddValue" title="[% Translate("Add field to be Base64 encoded in payload") | html %]" id="AddValue" class="AddButton"
+                                    data-formelement-add='PayloadBase64EncodedFields'
+                                    data-formelement-add-destination-name="PayloadBase64EncodedFields"
+                                    data-formelement-add-source-name="PayloadBase64EncodedFieldsTemplate"
+                                    data-formelement-add-counter-name="PayloadBase64EncodedFieldsCounter"
+                                    data-formelement-add-method='append'><i class="fa fa-plus-square-o"></i><span class="InvisibleText">[% Translate("Add field to be Base64 encoded in payload") | html %]</span></a>
+                                <a href="#" id="Restore" title="[% Translate("Restore Base64 encoded fields") | html %]" class="Restore"
+                                data-formelement-restore
+                                data-formelement-restore-destination-name='PayloadBase64EncodedFields'
+                                ><i class="fa fa-undo"></i><span class="InvisibleText">[% Translate("Restore Base64 encoded fields") | html %]</span></a>
+                            </div>
+                            <div>
+                                <p class="FieldExplanation">[% Translate("Fields which will be Base64 encoded in payload of the request, e.g. 'SomeField1'. Nested fields can be referenced by connecting them with '->', e.g. 'SomeField1->SomeField2->SomeField3'.") | html %]</p>
+                            </div>
+                        </div>
+[% RenderBlockEnd("PayloadBase64EncodedFields") %]
 
                         <div class="field-wrapper form-button-actions">
                             <div class="Field buttons-field">

@@ -7,6 +7,7 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
+## no critic(RequireExplicitPackage)
 use strict;
 use warnings;
 use utf8;
@@ -526,7 +527,6 @@ for my $Test (@Tests) {
 
         # get EditValueRender HTML
         my $FieldHTML = $BackendObject->EditFieldRender(%Config);
-
         my %HTMLResult;
 
         # get day from HTML

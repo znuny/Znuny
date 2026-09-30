@@ -410,7 +410,7 @@ EOF
         }
 
         # add js to call FormUpdate()
-        $Param{LayoutObject}->AddJSOnDocumentComplete( Code => <<"EOF");
+        $Param{LayoutObject}->AddJSOnDocumentComplete( Code => <<"EOF" );
 \$('$FieldSelector').bind('change', function (Event) {
     Core.AJAX.FormUpdate(\$(this).parents('form'), 'AJAXUpdate', '$FieldName', [ $FieldsToUpdate ]);
 });
@@ -855,19 +855,6 @@ sub ObjectMatch {
     }
 
     return $Match;
-}
-
-sub HistoricalValuesGet {
-    my ( $Self, %Param ) = @_;
-
-    # get historical values from database
-    my $HistoricalValues = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->HistoricalValueGet(
-        FieldID   => $Param{DynamicFieldConfig}->{ID},
-        ValueType => 'Text',
-    );
-
-    # return the historical values from database
-    return $HistoricalValues;
 }
 
 sub ValueLookup {

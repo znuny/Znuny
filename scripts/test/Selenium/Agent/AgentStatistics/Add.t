@@ -227,7 +227,6 @@ $Selenium->RunTest(
                 );
 
                 # Set invalid date for CreateTime (31.06.).
-                # See bug #13938 (https://bugs.otrs.org/show_bug.cgi?id=13938).
                 if ( $StatsData->{XAxis} eq 'XAxisCreateTime' ) {
                     $Selenium->InputFieldValueSet(
                         Element => '#XAxisCreateTimeStopMonth',

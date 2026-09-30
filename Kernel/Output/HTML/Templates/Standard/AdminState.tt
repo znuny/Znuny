@@ -177,9 +177,9 @@
                                 </div>
                                 <div id="NameServerError" class="TooltipErrorMessage">
                                     <p>
-[% RenderBlockStart("RequiredValidOptionServerError") %]
+[% RenderBlockStart("RequiredNameServerError") %]
                                         [% Translate("This field is required.") | html %]
-[% RenderBlockEnd("RequiredValidOptionServerError") %]
+[% RenderBlockEnd("RequiredNameServerError") %]
 [% RenderBlockStart("InSettingNameServerError") %]
                                         [% Translate("This state is present in a SysConfig setting, confirmation for updating settings to point to the new type is needed!") | html %]
 [% RenderBlockEnd("InSettingNameServerError") %]

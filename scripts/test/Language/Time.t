@@ -7,6 +7,7 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
+## no critic(RequireExplicitPackage)
 use strict;
 use warnings;
 use utf8;
@@ -26,7 +27,7 @@ my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
 my @Tests = (
     {
         Name           => 'Default format',
-        DateFormatLong => '%T - %D.%M.%Y',
+        DateFormatLong => '%T - %d.%m.%Y',
         FixedTimeSet   => '2014-01-10 11:12:13',
         Data           => {
             Format => 'DateFormatLong',
@@ -42,7 +43,7 @@ my @Tests = (
     },
     {
         Name           => 'All tags test',
-        DateFormatLong => '%A %B %T - %D.%M.%Y',
+        DateFormatLong => '%a %b %T - %d.%m.%Y',
         FixedTimeSet   => '2014-01-10 11:12:13',
         Data           => {
             Format => 'DateFormatLong',
@@ -59,7 +60,7 @@ my @Tests = (
     {
 
         Name           => 'All tags test, HTML elements (as used in BuildDateSelection)',
-        DateFormatLong => '%A %B %T - %D.%M.%Y',
+        DateFormatLong => '%a %b %T - %d.%m.%Y',
         FixedTimeSet   => '2014-01-10 11:12:13',
         Data           => {
             Format => 'DateFormatLong',
@@ -70,7 +71,7 @@ my @Tests = (
             Minute => '<input value="12"/>',
             Second => '<input value="13"/>',
         },
-        ResultGet => 'Fr Jan 11:12:13 - 10.01.2014',
+        ResultGet    => 'Fr Jan 11:12:13 - 10.01.2014',
         ResultReturn =>
             '  <input value="11"/>:<input value="12"/>:<input value="13"/> - <input value="10"/>.<input value="1"/>.<input value="2014"/>',
     },

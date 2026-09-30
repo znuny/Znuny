@@ -478,6 +478,9 @@ verify a message with signature and returns a hash (Successful, Message, Signers
         Message => $Message,
         CACert  => $PathtoCACert,                   # the certificates autority that endorse a self
                                                     # signed certificate
+        RetryWithNoVerify => 0,                     # optional; if config option SMIME::NoVerify is set,
+                                                    # verification will be tried with '-noverify' option
+                                                    # after initial failure
     );
 
 returns:
@@ -498,6 +501,8 @@ returns:
 
 sub Verify {
     my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     my %Return;
     my $Message     = '';
@@ -531,11 +536,15 @@ sub Verify {
         $CertificateOption = "-CAfile $Param{CACert}";
     }
 
-    my $Options = "smime -verify -in $SignedFile -out $VerifiedFile -signer $SignerFile "
+    my $NoVerifyOption = '';
+    if ( $Param{RetryWithNoVerify} ) {
+        $NoVerifyOption = '-noverify';
+    }
+
+    my $Options = "smime -verify $NoVerifyOption -in $SignedFile -out $VerifiedFile -signer $SignerFile "
         . "-CApath $Self->{CertPath} $CertificateOption $SignedFile";
 
     my @LogLines = qx{$Self->{Cmd} $Options 2>&1};
-
     for my $LogLine (@LogLines) {
         $MessageLong .= $LogLine;
         if ( $LogLine =~ /^\d.*:(.+?):.+?:.+?:$/ || $LogLine =~ /^\d.*:(.+?)$/ ) {
@@ -583,7 +592,7 @@ sub Verify {
         %Return = (
             SignatureFound => 1,
             Successful     => 0,
-            Message =>
+            Message        =>
                 'OpenSSL: self signed certificate, to use it send the \'Certificate\' parameter : '
                 . $Message,
             MessageLong =>
@@ -594,12 +603,12 @@ sub Verify {
         );
     }
 
-    # digest failure means that the content of the email does not match witht he signature
+    # digest failure means that the content of the email does not match with the signature
     elsif ( $Message =~ m{digest failure}i ) {
         %Return = (
             SignatureFound => 1,
             Successful     => 0,
-            Message =>
+            Message        =>
                 'OpenSSL: The signature does not match the message content : ' . $Message,
             MessageLong =>
                 'OpenSSL: The signature does not match the message content : ' . $MessageLong,
@@ -608,12 +617,22 @@ sub Verify {
         );
     }
     else {
-        %Return = (
-            SignatureFound => 0,
-            Successful     => 0,
-            Message        => 'OpenSSL: ' . $Message,
-            MessageLong    => 'OpenSSL: ' . $MessageLong,
-        );
+        # Retry if config option SMIME::NoVerify is set and this is not already the retry.
+        my $NoVerify = $ConfigObject->Get('SMIME::NoVerify');
+        if ( $NoVerify && !$Param{RetryWithNoVerify} ) {
+            %Return = $Self->Verify(
+                %Param,
+                RetryWithNoVerify => 1,
+            );
+        }
+        else {
+            %Return = (
+                SignatureFound => 0,
+                Successful     => 0,
+                Message        => 'OpenSSL: ' . $Message,
+                MessageLong    => 'OpenSSL: ' . $MessageLong,
+            );
+        }
     }
     return %Return;
 }
@@ -1008,16 +1027,20 @@ sub ConvertCertFormat {
     }
     my $String     = $Param{String};
     my $PassPhrase = $Param{Passphrase} // '';
+    chomp $PassPhrase;
 
     my $FileTempObject = $Kernel::OM->Get('Kernel::System::FileTemp');
 
-    # Create original certificate file.
+    # Create original certificate file (binmode for binary formats: DER, P7B, PFX).
     my ( $FileHandle, $TmpCertificate ) = $FileTempObject->TempFile();
+    binmode $FileHandle;
     print $FileHandle $String;
     close $FileHandle;
 
-    # For PEM format no conversion needed.
-    my $Options   = "x509 -in $TmpCertificate -noout";
+    # For PEM format no conversion needed. Use -inform PEM explicitly because OpenSSL 3.x
+    # auto-detects formats; without it, DER files would be misidentified as PEM and binary
+    # data would be returned instead of PEM.
+    my $Options   = "x509 -inform PEM -in $TmpCertificate -noout";
     my $ReadError = $Self->_CleanOutput(qx{$Self->{Cmd} $Options 2>&1});
 
     return $String if !$ReadError;
@@ -1038,9 +1061,9 @@ sub ConvertCertFormat {
             Convert => "pkcs7 -in $TmpCertificate -print_certs -out $CertFile",
         },
         PFX => {
-            Read => "pkcs12 -in $TmpCertificate -noout -nomacver -passin pass:'$PassPhrase'",
+            Read => "pkcs12 $Self->{PFXLegacyOption} -in $TmpCertificate -noout -nomacver -passin pass:'$PassPhrase'",
             Convert =>
-                "pkcs12 -in $TmpCertificate -out $CertFile -nomacver -clcerts -nokeys -passin pass:'$PassPhrase'",
+                "pkcs12 $Self->{PFXLegacyOption} -in $TmpCertificate -out $CertFile -nomacver -clcerts -nokeys -passin pass:'$PassPhrase'",
         },
     );
 
@@ -1054,6 +1077,21 @@ sub ConvertCertFormat {
 
         $DetectedFormat = $Format;
         last FORMAT;
+    }
+
+    # Fallback: PFX with RC2-40-CBC fails on OpenSSL 3.x without -legacy. Retry with -legacy
+    # only when we have OpenSSL (not LibreSSL, which does not support -legacy).
+    if (
+        !$DetectedFormat
+        && ( $Self->{OpenSSLVersionString} || '' ) =~ m{ \A OpenSSL \s+ 3 }xms
+        )
+    {
+        my $PFXLegacyRead = "pkcs12 -legacy -in $TmpCertificate -noout -nomacver -passin pass:'$PassPhrase'";
+        if ( !$Self->_CleanOutput(qx{$Self->{Cmd} $PFXLegacyRead 2>&1}) ) {
+            $DetectedFormat = 'PFX';
+            $OptionsLookup{PFX}{Convert} =
+                "pkcs12 -legacy -in $TmpCertificate -out $CertFile -nomacver -clcerts -nokeys -passin pass:'$PassPhrase'";
+        }
     }
 
     if ( !$DetectedFormat ) {
@@ -1796,8 +1834,8 @@ sub PrivateAdd {
                     VALUES
                     (?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 Bind => [
-                    \$CertificateAttributes{Hash}, \$Attributes{Type},
-                    \$Certificates[0]->{Filename}, \$CertificateAttributes{Email},
+                    \$CertificateAttributes{Hash},         \$Attributes{Type},
+                    \$Certificates[0]->{Filename},         \$CertificateAttributes{Email},
                     \$CertificateAttributes{ShortEndDate}, \$CertificateAttributes{Fingerprint},
                     \$CertificateAttributes{Subject},      \$DateTimeObject->ToString(),
                     \$UserID,
@@ -1944,7 +1982,7 @@ sub PrivateRemove {
     if ( !$SecretDelete ) {
         %Return = (
             Successful => 0,
-            Message =>
+            Message    =>
                 "Delete private aborted, not possible to delete Secret: $Self->{PrivatePath}/$Param{Filename}.P, $!!",
         );
         return %Return;
@@ -2558,6 +2596,14 @@ sub CheckCertPath {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
+=head2 _Init()
+
+initialize the SMIME object
+
 =cut
 
 sub _Init {
@@ -2600,6 +2646,12 @@ sub _Init {
     if ( $Self->{OpenSSLVersionString} =~ m{ \A (?: (?: Open|Libre)SSL )? \s* ( \d )  }xmsi ) {
         $Self->{OpenSSLMajorVersion} = $1;
     }
+
+    # OpenSSL 3.x (not LibreSSL) disabled RC2-40-CBC by default. -legacy enables it.
+    # LibreSSL does not support -legacy and would fail with "unknown option".
+    $Self->{PFXLegacyOption} = ( $Self->{OpenSSLVersionString} || '' ) =~ m{ \A OpenSSL \s+ 3 }xms
+        ? '-legacy'
+        : '';
 
     return $Self;
 }
@@ -2682,8 +2734,8 @@ sub ReIndexCertificate {
                 VALUES
                 (?, ?, ?, ?, ?, ?, ?, ?, ?)",
             Bind => [
-                \$Attributes{Hash}, \$Attributes{Type},
-                \$Filename, \$Attributes{Email},
+                \$Attributes{Hash},         \$Attributes{Type},
+                \$Filename,                 \$Attributes{Email},
                 \$Attributes{ShortEndDate}, \$Attributes{Fingerprint},
                 \$Attributes{Subject},      \$DateTimeObject->ToString(),
                 \1,
@@ -2820,8 +2872,8 @@ sub ReIndexPrivate {
                 VALUES
                 (?, ?, ?, ?, ?, ?, ?, ?, ?)",
             Bind => [
-                \$CertificateAttributes{Hash}, \$PrivateAttributes{Type},
-                \$Filename, \$CertificateAttributes{Email},
+                \$CertificateAttributes{Hash},         \$PrivateAttributes{Type},
+                \$Filename,                            \$CertificateAttributes{Email},
                 \$CertificateAttributes{ShortEndDate}, \$CertificateAttributes{Fingerprint},
                 \$CertificateAttributes{Subject},      \$DateTimeObject->ToString(),
                 \1,
@@ -2859,13 +2911,13 @@ sub _FetchAttributesFromCert {
     # -subject_hash_old was used in otrs in the past (to keep the old hashes style, and perhaps to
     # ease a migration between openssl versions ) but now is not recommended anymore.
 
-    # testing new solution
+    # Use -nameopt compat for consistent Issuer/Subject format across OpenSSL versions (1.x vs 3.x).
     my $OptionString = ' '
         . '-subject_hash '
-        . '-issuer '
+        . '-issuer -nameopt compat '
         . '-fingerprint -sha1 '
         . '-serial '
-        . '-subject '
+        . '-subject -nameopt compat '
         . '-startdate '
         . '-enddate '
         . '-email '
@@ -2887,7 +2939,7 @@ sub _FetchAttributesFromCert {
         Subject     => 'subject=[ ]*(?:\/)?(.+?)',
         StartDate   => 'notBefore=(.*)',
         EndDate     => 'notAfter=(.*)',
-        Email       => '([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4})',
+        Email       => '([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z0-9-]{2,63})',
         Modulus     => 'Modulus=(.*)',
     );
 
@@ -3834,10 +3886,6 @@ sub _NonIndexedAttributesLookup {
 }
 
 1;
-
-=end Internal:
-
-=cut
 
 =head1 TERMS AND CONDITIONS
 

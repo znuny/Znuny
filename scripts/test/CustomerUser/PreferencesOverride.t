@@ -56,6 +56,12 @@ for my $Key ( sort keys %CustomerData ) {
     next KEY if $Key eq 'CustomerCompanyValidID';
     next KEY if $Key eq 'UserLanguage';
 
+    # Skip UserLastPwChangeTime
+    next KEY if $Key eq 'UserLastPwChangeTime';
+
+    # Skip UserLoginFailed
+    next KEY if $Key eq 'UserLoginFailed';
+
     # Skip dropdown-values of last views
     next KEY if $Key =~ m{\AUserLastViews};
 

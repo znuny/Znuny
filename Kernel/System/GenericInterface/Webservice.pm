@@ -150,7 +150,7 @@ sub WebserviceAdd {
             . ' create_time, create_by, change_time, change_by)'
             . ' VALUES (?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
-            \$Param{Name}, \$Config, \$Param{ValidID},
+            \$Param{Name},   \$Config, \$Param{ValidID},
             \$Param{UserID}, \$Param{UserID},
         ],
     );
@@ -628,8 +628,6 @@ sub WebserviceConfigReplace {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

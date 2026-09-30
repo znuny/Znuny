@@ -1216,6 +1216,117 @@ for my $Test (@Tests) {
 }
 
 #
+# ProcessPreferencesSet() and ProcessPreferencesGet()
+#
+
+my $ID = $ProcessObject->ProcessAdd(
+    EntityID      => $EntityID,
+    Name          => $EntityID,
+    StateEntityID => 'S1',
+    Layout        => {},
+    Config        => {
+        Description => 'ProcessPreferences',
+        Path        => {
+            $ActivityEntityID1 => {},
+        }
+    },
+    UserID => $UserID,
+);
+
+@Tests = (
+    {
+        Name => 'No process ID',
+        Data => {
+            ProcessEntityID => undef,
+            Key             => 'Key',
+            Value           => 'Value',
+        },
+        Expected => {
+            ProcessPreferencesSet => undef,
+            ProcessPreferencesGet => {},
+        },
+    },
+    {
+        Name => 'No Key',
+        Data => {
+            ProcessEntityID => $RandomID,
+            Key             => undef,
+            Value           => 'Value',
+        },
+        Expected => {
+            ProcessPreferencesSet => undef,
+            ProcessPreferencesGet => {},
+        },
+    },
+    {
+        Name => 'No Value',
+        Data => {
+            ProcessEntityID => $RandomID,
+            Key             => 'Key',
+            Value           => undef,
+        },
+        Expected => {
+            ProcessPreferencesSet => undef,
+            ProcessPreferencesGet => {},
+        },
+    },
+    {
+        Name => 'Wrong process ID',
+        Data => {
+            ProcessEntityID => 9999999,
+            Key             => 'Key',
+            Value           => 'Value',
+        },
+        Expected => {
+            ProcessPreferencesSet => undef,
+            ProcessPreferencesGet => {},
+        }
+    },
+    {
+        Name => 'All right',
+        Data => {
+            ProcessEntityID => $EntityID,
+            Key             => 'Category',
+            Value           => 'New',
+        },
+        Expected => {
+            ProcessPreferencesSet => 1,
+            ProcessPreferencesGet => {
+                Category => 'New',
+            },
+            ProcessPreferencesDelete => 1,
+        }
+    },
+);
+
+for my $Test (@Tests) {
+
+    my $Success = $ProcessObject->ProcessPreferencesSet( %{ $Test->{Data} } );
+
+    $Self->Is(
+        $Success,
+        $Test->{Expected}->{ProcessPreferencesSet},
+        'ProcessPreferencesSet - ' . $Test->{Name},
+    );
+
+    my %Preferences = $ProcessObject->ProcessPreferencesGet( %{ $Test->{Data} } );
+    $Self->IsDeeply(
+        \%Preferences,
+        $Test->{Expected}->{ProcessPreferencesGet},
+        'ProcessPreferencesGet - ' . $Test->{Name},
+    );
+
+    if ( $Test->{Expected}->{ProcessPreferencesDelete} ) {
+        my $Success = $ProcessObject->ProcessPreferencesDelete( %{ $Test->{Data} } );
+        $Self->Is(
+            $Success,
+            $Test->{Expected}->{ProcessPreferencesDelete},
+            'ProcessPreferencesDelete - ' . $Test->{Name},
+        );
+    }
+}
+
+#
 # ProcessDelete() (test for fail, test for success are done by removing processes at the end)
 #
 @Tests = (

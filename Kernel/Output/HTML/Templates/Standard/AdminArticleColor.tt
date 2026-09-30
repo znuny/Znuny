@@ -1,0 +1,84 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+[% RenderBlockStart("Overview") %]
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+    <div class="SidebarColumn ActionsSideBarComp">
+[% RenderBlockStart("Filter") %]
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2><label for="FilterArticle">[% Translate("Filter for Items") | html %]</label></h2>
+            </div>
+            <div class="Content">
+                <input type="text" id="FilterArticle" class="FilterBox" placeholder="[% Translate("Just start typing to filter...") | html %]" name="FilterArticle" value="" title="[% Translate("Filter for Items") | html %]">
+            </div>
+        </div>
+[% RenderBlockEnd("Filter") %]
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Hint") | html %]</h2>
+            </div>
+            <div class="Content">
+                <p class="FieldExplanation">
+                    [% Translate("Here you can see all possible article combination that are theoretically available in your system.") | html %]
+                </p>
+                <p class="FieldExplanation">
+                    [% Translate("You can define a background color for each article combination. Click on the color code.") | html %]
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("Article Color Management") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate("Article Color Management"),
+                    Link => Env("Action"),
+                },
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        <div class="WidgetSimple">
+            <div class="Header filter-items">
+                <h2>[% Translate("List") | html %]</h2>
+            </div>
+            <div class="Content">
+                <table class="DataTable" id="Articles">
+                    <thead>
+                        <tr>
+                            <th>[% Translate("Sender Type") | html %]</th>
+                            <th>[% Translate("Communication Channel") | html %]</th>
+                            <th>[% Translate("Visible for customer") | html %]</th>
+                            <th>[% Translate("Color") | html %]</th>
+                            <th>[% Translate("Changed") | html %]</th>
+                            <th>[% Translate("Created") | html %]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+[% RenderBlockStart("OverviewRow") %]
+                        <tr>
+                            <td>[% Data.SenderType | html %]</td>
+                            <td>[% Translate(Data.CommunicationChannel) | html %] ([% Data.CommunicationChannel | html %])</td>
+                            <td>[% Translate(Data.IsVisibleForCustomerYesNo) | html %]</td>
+                            <td>[% Data.ColorPicker %]</td>
+                            <td>[% Data.ChangeTime | Localize("TimeShort") %]</td>
+                            <td>[% Data.CreateTime | Localize("TimeShort") %]</td>
+                        </tr>
+[% RenderBlockEnd("OverviewRow") %]
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+[% RenderBlockEnd("Overview") %]

@@ -52,8 +52,8 @@ sub Run {
     }
     else {
         $Self->AddResultWarning(
-            Label => Translatable('Default Ticket Type'),
-            Value => $DefaultTicketType,
+            Label   => Translatable('Default Ticket Type'),
+            Value   => $DefaultTicketType,
             Message =>
                 Translatable(
                 'The configured default ticket type is invalid or missing. Please change the setting Ticket::Type::Default and select a valid ticket type.'

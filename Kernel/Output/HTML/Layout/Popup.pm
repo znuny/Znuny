@@ -156,6 +156,71 @@ sub PopupClose {
     return $Output;
 }
 
+=head2 CustomerPopupClose()
+
+Generate a small HTML page which closes the pop-up window and
+executes an action in the main window.
+
+    # load specific URL in main window
+    $LayoutObject->CustomerPopupClose(
+        URL => "Action=AgentTicketZoom;TicketID=$TicketID"
+    );
+
+    or
+
+    # reload main window
+    $Self->{LayoutObject}->CustomerPopupClose(
+        Reload => 1,
+    );
+
+=cut
+
+sub CustomerPopupClose {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    if ( !$Param{URL} && !$Param{Reload} ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => 'Need URL or Reload!'
+        );
+        return;
+    }
+
+    # Generate the call Header() and Footer(
+    my $Output = $Self->CustomerHeader( Type => 'Small' );
+
+    if ( $Param{URL} ) {
+
+        # add session if no cookies are enabled
+        if ( $Self->{SessionID} && !$Self->{SessionIDCookie} ) {
+            $Param{URL} .= ';' . $Self->{SessionName} . '=' . $Self->{SessionID};
+        }
+
+        # send data to JS
+        $Self->AddJSData(
+            Key   => 'PopupClose',
+            Value => 'LoadParentURLAndClose',
+        );
+        $Self->AddJSData(
+            Key   => 'PopupURL',
+            Value => $Param{URL},
+        );
+    }
+    else {
+
+        # send data to JS
+        $Self->AddJSData(
+            Key   => 'PopupClose',
+            Value => 'ReloadParentAndClose',
+        );
+    }
+
+    $Output .= $Self->CustomerFooter( Type => 'Small' );
+    return $Output;
+}
+
 1;
 
 =head1 TERMS AND CONDITIONS

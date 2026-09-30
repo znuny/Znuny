@@ -1,0 +1,193 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+.modCustomerSelector > .inner {
+  font-size: var(--main-font-size);
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorFieldLabelRequired {
+  color: var(--black);
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField {
+  position: relative;
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldInput {
+  position: relative;
+  display: flex;
+  border: var(--border-width) var(--border-solid) var(--border-color);
+  border-radius: var(--border-radius-sm);
+  flex-wrap: wrap;
+  align-items: center;
+  height: auto !important;
+  padding: 1px 30px 1px 3px;
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldInput:focus-within {
+  border-color: var(--gray-dark);
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldInput .customerSelectorFieldInputSelectedCustomer {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  margin: 1px 5px 1px 0;
+  word-break: break-all;
+  background: var(--disabled-input-color);
+  border-radius: 20px;
+  border: 1px solid var(--disabled-input-color);
+  position: relative;
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldInput .customerSelectorFieldInputSelectedCustomer .customerSelectorFieldInputSelectedCustomerErrors {
+  display: none;
+  position: absolute;
+  top: 100%;
+  border: 1px solid var(--warning-color);
+  background-color: white;
+  padding: 5px;
+  left: 0px;
+  width: 100%;
+  z-index: 10;
+  margin-top: 3px;
+  border-radius: 5px;
+  word-wrap: normal;
+  word-break: break-word;
+  min-width: 250px;
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldInput .customerSelectorFieldInputSelectedCustomer .customerSelectorFieldInputSelectedCustomerErrors p {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldInput .customerSelectorFieldInputSelectedCustomer .customerSelectorFieldInputSelectedCustomerSelect {
+  width: 16px;
+  height: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-dark);
+  background-color: white;
+  margin-right: 10px;
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldInput .customerSelectorFieldInputSelectedCustomer .customerSelectorFieldInputSelectedCustomerSelect:hover {
+  cursor: pointer;
+  background-color: var(--success-color);
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldInput .customerSelectorFieldInputSelectedCustomer.customerSelectorFieldInputSelectedCustomerActive {
+  border-color: #FF8A25;
+  background-color: rgba(255, 138, 37, 0.2);
+  color: #171725;
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldInput .customerSelectorFieldInputSelectedCustomer.customerSelectorFieldInputSelectedCustomerActive .customerSelectorFieldInputSelectedCustomerSelect {
+  background-color: var(--success-color);
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldInput .customerSelectorFieldInputSelectedCustomer.customerSelectorFieldInputSelectedCustomerDisabled {
+  background-color: rgba(255, 0, 0, 0.1);
+  color: red;
+  border-color: red;
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldInput .customerSelectorFieldInputSelectedCustomer.customerSelectorFieldInputSelectedCustomerDisabled .customerSelectorFieldInputSelectedCustomerSelect {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldInput .customerSelectorFieldInputSelectedCustomer.customerSelectorFieldInputSelectedCustomerDisabled:hover .customerSelectorFieldInputSelectedCustomerErrors {
+  display: block;
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldInput .customerSelectorFieldInputSelectedCustomer .customerSelectorFieldInputSelectedCustomerRemove {
+  padding: 2px;
+  margin-left: 10px;
+  align-self: center;
+  text-align: center;
+  border-radius: 20px;
+  width: 18px;
+  height: 18px;
+  background-color: white;
+  margin-top: -1px;
+  border: none;
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldInput .customerSelectorFieldInputSelectedCustomer .customerSelectorFieldInputSelectedCustomerRemove:hover {
+  cursor: pointer;
+  background-color: var(--warning-color);
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldInput .customerSelectorFieldInputSelectedCustomer .customerSelectorFieldInputSelectedCustomerRemove:hover img {
+  filter: brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(0%) hue-rotate(265deg) brightness(103%) contrast(100%);
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldInput .customerSelectorFieldInputSelectedCustomer .customerSelectorFieldInputSelectedCustomerRemove:focus {
+  background-color: var(--warning-color);
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldInput .customerSelectorFieldInputSelectedCustomer .customerSelectorFieldInputSelectedCustomerRemove:focus img {
+  filter: brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(0%) hue-rotate(265deg) brightness(103%) contrast(100%);
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldInput .customerSelectorFieldInputSelectedCustomer .customerSelectorFieldInputSelectedCustomerRemove img {
+  width: 11px;
+  height: auto;
+  margin-left: 0;
+  margin-top: 1px;
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldInputAddressBook {
+  position: absolute;
+  right: 5px;
+  padding: 5px;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  width: 30px;
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldInputAddressBook:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldInputAddressBook:focus {
+  opacity: 0.6;
+  cursor: pointer;
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldInputAddressBook img {
+  margin-top: 3px;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldInputElement {
+  all: revert;
+  line-height: var(--input-line-height);
+  font-size: var(--font-size-sm);
+  border: none;
+  flex: 1 auto;
+  min-width: 160px;
+  margin: 5px 0;
+  outline: none;
+  padding: 0 0 0 5px;
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldInputElement:focus {
+  outline: none;
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldSuggest {
+  display: none;
+  padding: 5px 2px;
+  width: 100%;
+  background-color: white;
+  border-left: var(--border-width) var(--border-solid) var(--gray-dark);
+  border-right: var(--border-width) var(--border-solid) var(--gray-dark);
+  border-bottom: var(--border-width) var(--border-solid) var(--gray-dark);
+  max-height: 180px;
+  overflow-y: scroll;
+  box-shadow: 1px 1px 10px #ccc;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 100;
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldSuggest li {
+  padding: 8px 4px;
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldSuggest li:hover, .modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldSuggest li.customerSelectorFieldSuggestItemHighlighted {
+  background-color: var(--disabled-input-color);
+  cursor: pointer;
+  border-radius: 2px;
+}
+.modCustomerSelector > .inner .customerSelector .customerSelectorField .customerSelectorFieldSuggest.customerSelectorFieldSuggestActive {
+  display: block;
+}
+.modCustomerSelector > .inner .customerSelectorErrorMessages {
+  color: var(--warning-color);
+}
+
+/*# sourceMappingURL=Module.CustomerSelector.css.map */

@@ -15,7 +15,7 @@ use warnings;
 use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -184,7 +184,7 @@ sub _GetRequestList {
     $LogSearchParam{CreatedAtOrAfter}  = $ParamObject->GetParam( Param => 'FilterFrom' );
     $LogSearchParam{CreatedAtOrBefore} = $ParamObject->GetParam( Param => 'FilterTo' );
     $LogSearchParam{Limit}             = $ParamObject->GetParam( Param => 'FilterLimit' ) || 10;
-    $LogSearchParam{Sort}              = $ParamObject->GetParam( Param => 'FilterSort' ) || 'DESC';
+    $LogSearchParam{Sort}              = $ParamObject->GetParam( Param => 'FilterSort' )  || 'DESC';
 
     my $LogData = $Kernel::OM->Get('Kernel::System::GenericInterface::DebugLog')->LogSearch(%LogSearchParam);
 

@@ -168,7 +168,7 @@ sub ActivityDialogGet {
             if ( !$Param{Silent} ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         "Not permitted Interface(s) '"
                         . join( '\', \'', @{ $Param{Interface} } )
                         . "' for ActivityDialog '$Param{ActivityDialogEntityID}'!"

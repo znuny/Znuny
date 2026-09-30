@@ -280,7 +280,7 @@ EOF
         }
 
         # add js to call FormUpdate()
-        $Param{LayoutObject}->AddJSOnDocumentComplete( Code => <<"EOF");
+        $Param{LayoutObject}->AddJSOnDocumentComplete( Code => <<"EOF" );
 \$('$FieldSelector').bind('change', function (Event) {
     Core.AJAX.FormUpdate(\$(this).parents('form'), 'AJAXUpdate', '$FieldName', [ $FieldsToUpdate ]);
 });
@@ -658,15 +658,19 @@ sub StatsFieldParameterBuild {
     my $Values = $Param{DynamicFieldConfig}->{Config}->{PossibleValues};
 
     # get historical values from database
-    my $HistoricalValues = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->HistoricalValueGet(
-        FieldID   => $Param{DynamicFieldConfig}->{ID},
-        ValueType => 'Text,',
-    );
+    my $HistoricalValuesEnabled
+        = $Kernel::OM->Get('Kernel::Config')->Get('DynamicFields::Driver::BaseSelect::EnableHistoricalValues') // 1;
+    if ($HistoricalValuesEnabled) {
+        my $HistoricalValues = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->HistoricalValueGet(
+            FieldID   => $Param{DynamicFieldConfig}->{ID},
+            ValueType => 'Text,',
+        );
 
-    # add historic values to current values (if they don't exist anymore)
-    for my $Key ( sort keys %{$HistoricalValues} ) {
-        if ( !$Values->{$Key} ) {
-            $Values->{$Key} = $HistoricalValues->{$Key};
+        # add historic values to current values (if they don't exist anymore)
+        for my $Key ( sort keys %{$HistoricalValues} ) {
+            if ( !$Values->{$Key} ) {
+                $Values->{$Key} = $HistoricalValues->{$Key};
+            }
         }
     }
 
@@ -786,6 +790,10 @@ sub HistoricalValuesGet {
     my ( $Self, %Param ) = @_;
 
     # get historical values from database
+    my $HistoricalValuesEnabled
+        = $Kernel::OM->Get('Kernel::Config')->Get('DynamicFields::Driver::BaseSelect::EnableHistoricalValues') // 1;
+    return if !$HistoricalValuesEnabled;
+
     my $HistoricalValues = $Kernel::OM->Get('Kernel::System::DynamicFieldValue')->HistoricalValueGet(
         FieldID   => $Param{DynamicFieldConfig}->{ID},
         ValueType => 'Text',
@@ -860,7 +868,7 @@ sub BuildSelectionDataGet {
                     push @Values, {
                         Key      => $Key,
                         Value    => $ConfigPossibleValues->{$Key} || '-',
-                        Selected => defined $Param{Value} || !$Param{Value} ? 1 : 0,
+                        Selected => defined $Param{Value}         || !$Param{Value} ? 1 : 0,
                     };
                 }
 

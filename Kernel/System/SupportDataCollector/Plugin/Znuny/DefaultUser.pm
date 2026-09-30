@@ -15,7 +15,7 @@ use warnings;
 use parent qw(Kernel::System::SupportDataCollector::PluginBase);
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::System::Auth',
@@ -62,8 +62,8 @@ sub Run {
         )
     {
         $Self->AddResultProblem(
-            Label => Translatable('Default Admin Password'),
-            Value => '',
+            Label   => Translatable('Default Admin Password'),
+            Value   => '',
             Message =>
                 Translatable(
                 'Security risk: the agent account root@localhost still has the default password. Please change it or invalidate the account.'

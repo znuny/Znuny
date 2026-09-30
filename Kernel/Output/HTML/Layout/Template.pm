@@ -210,6 +210,9 @@ sub Output {
     #   We cannot do this in the template preprocessor because links are often dynamically generated.
     if ( $Self->{SessionID} && !$Self->{SessionIDCookie} ) {
 
+        # CVE-2025-52204: URL encode session ID for URL param to prevent injecting HTML.
+        my $URLEncodedSessionID = $Self->LinkEncode( $Self->{SessionID} );
+
         # rewrite a hrefs
         $Output =~ s{
             (<a.+?href=")(.+?)(\#.+?|)(".+?>)
@@ -225,7 +228,7 @@ sub Output {
                 $AHref.$Target.$End.$RealEnd;
             }
             else {
-                $AHref.$Target.';'.$Self->{SessionName}.'='.$Self->{SessionID}.$End.$RealEnd;
+                $AHref.$Target.';'.$Self->{SessionName}.'='.$URLEncodedSessionID.$End.$RealEnd;
             }
         }iegxs;
 
@@ -243,7 +246,7 @@ sub Output {
                 $AHref.$Target.$End;
             }
             else {
-                $AHref.$Target.'&'.$Self->{SessionName}.'='.$Self->{SessionID}.$End;
+                $AHref.$Target.'&'.$Self->{SessionName}.'='.$URLEncodedSessionID.$End;
             }
         }iegxs;
     }
@@ -299,6 +302,13 @@ sub Output {
                 Data     => \%Data,
                 SortKeys => 1,
             );
+
+            # CVE-2025-59490: Escape < and > as JSON unicode escapes for safe HTML embedding.
+            # Using unicode escapes instead of tag removal prevents bypass techniques that
+            # reconstruct tags from nested fragments after single-pass removal.
+            $JSONString =~ s/</\\u003c/g;
+            $JSONString =~ s/>/\\u003e/g;
+
             $Output
                 .= "\n<script type=\"text/javascript\">//<![CDATA[\n\"use strict\";\nCore.Config.AddConfig($JSONString);\n//]]></script>";
         }

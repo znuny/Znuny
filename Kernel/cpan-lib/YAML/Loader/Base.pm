@@ -21,6 +21,7 @@ has major_version => default => sub {0};
 has minor_version => default => sub {0};
 has inline        => default => sub {''};
 has numify        => default => sub {0};
+has zero_indent   => default => sub {[]};
 
 sub set_global_options {
     my $self = shift;

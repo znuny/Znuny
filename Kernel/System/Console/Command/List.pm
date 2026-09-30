@@ -97,19 +97,56 @@ Returns:
 sub ListAllCommands {
     my ( $Self, %Param ) = @_;
 
-    my @CommandFiles = $Kernel::OM->Get('Kernel::System::Main')->DirectoryRead(
-        Directory => $Kernel::OM->Get('Kernel::Config')->Get('Home') . '/Kernel/System/Console/Command',
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
+    my $Home         = $ConfigObject->Get('Home');
+
+    # Read commands from standard directory
+    my @CommandFiles = $MainObject->DirectoryRead(
+        Directory => $Home . '/Kernel/System/Console/Command',
         Filter    => '*.pm',
         Recursive => 1,
     );
 
+    # Read commands from custom directory if it exists
+    my $CustomCommandDir = $Home . '/Custom/Kernel/System/Console/Command';
+    if ( -d $CustomCommandDir ) {
+        my @CustomCommandFiles = $MainObject->DirectoryRead(
+            Directory => $CustomCommandDir,
+            Filter    => '*.pm',
+            Recursive => 1,
+        );
+        push @CommandFiles, @CustomCommandFiles;
+    }
+
     my @Commands;
+    my %CommandSeen;
 
     COMMANDFILE:
     for my $CommandFile (@CommandFiles) {
         next COMMANDFILE if ( $CommandFile =~ m{/Internal/}xms );
-        $CommandFile =~ s{^.*(Kernel/System.*)[.]pm$}{$1}xmsg;
+
+        # Handle both standard and custom command files
+        if ( $CommandFile =~ m{^.*Custom/(Kernel/System.*)[.]pm$}xmsg ) {
+
+            # Custom command file
+            $CommandFile = $1;
+        }
+        elsif ( $CommandFile =~ m{^.*(Kernel/System.*)[.]pm$}xmsg ) {
+
+            # Standard command file
+            $CommandFile = $1;
+        }
+        else {
+            next COMMANDFILE;
+        }
+
         $CommandFile =~ s{/+}{::}xmsg;
+
+        # Skip if command already seen (avoid duplicates)
+        next COMMANDFILE if $CommandSeen{$CommandFile};
+        $CommandSeen{$CommandFile} = 1;
+
         push @Commands, $CommandFile;
     }
 

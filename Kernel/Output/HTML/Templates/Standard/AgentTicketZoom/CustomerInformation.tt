@@ -7,14 +7,21 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="WidgetSimple">
-    <div class="Header">
-        <div class="WidgetAction Toggle">
-            <a href="#" title="[% Translate("Show or hide the content") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a>
+<div class="mod modSidebarWidget">
+    <div class="inner">
+        <div class="sidebarWidgetTitle">
+            <h3>[% Translate("Customer Information") | html %]</h3>
         </div>
-        <h2>[% Translate("Customer Information") | html %]</h2>
-    </div>
-    <div class="Content">
-        [% Data.CustomerTable %]
+        <div class="sidebarWidgetContent">
+            <div class="mod modCustomerInformation">
+                <div class="inner">
+                    <div id="CustomerInfo" class="WidgetSimple">
+                        <div class="Content">
+                            [% Data.CustomerTable %]
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

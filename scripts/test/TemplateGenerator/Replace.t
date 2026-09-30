@@ -492,13 +492,13 @@ my @Tests = (
         },
         RichText => 1,
         Template =>
-            'mailto-Link <a href="mailto:skywalker@otrs.org?subject=From%3A%20%3COTRS_CUSTOMER_From%3E&amp;body=From%3A%20%3COTRS_CUSTOMER_From%3E">E-Mail mit Subject und Body</a><br />
+            'mailto-Link <a href="mailto:skywalker@znuny.org?subject=From%3A%20%3COTRS_CUSTOMER_From%3E&amp;body=From%3A%20%3COTRS_CUSTOMER_From%3E">E-Mail mit Subject und Body</a><br />
 <br />
-mailto-Link <a href="mailto:skywalker@otrs.org?subject=From%3A%20%3COTRS_CUSTOMER_From%3E">E-Mail mit Subject</a><br />
+mailto-Link <a href="mailto:skywalker@znuny.org?subject=From%3A%20%3COTRS_CUSTOMER_From%3E">E-Mail mit Subject</a><br />
 <br />
-mailto-Link <a href="mailto:skywalker@otrs.org?body=From%3A%20%3COTRS_CUSTOMER_From%3E">E-Mail mit Body</a><br />',
+mailto-Link <a href="mailto:skywalker@znuny.org?body=From%3A%20%3COTRS_CUSTOMER_From%3E">E-Mail mit Body</a><br />',
         Result =>
-            'mailto-Link <a href="mailto:skywalker@otrs.org?subject=From%3A%20test%40home.com&amp;body=From%3A%20test%40home.com">E-Mail mit Subject und Body</a><br /><br />mailto-Link <a href="mailto:skywalker@otrs.org?subject=From%3A%20test%40home.com">E-Mail mit Subject</a><br /><br />mailto-Link <a href="mailto:skywalker@otrs.org?body=From%3A%20test%40home.com">E-Mail mit Body</a><br />',
+            'mailto-Link <a href="mailto:skywalker@znuny.org?subject=From%3A%20test%40home.com&amp;body=From%3A%20test%40home.com">E-Mail mit Subject und Body</a><br /><br />mailto-Link <a href="mailto:skywalker@znuny.org?subject=From%3A%20test%40home.com">E-Mail mit Subject</a><br /><br />mailto-Link <a href="mailto:skywalker@znuny.org?body=From%3A%20test%40home.com">E-Mail mit Body</a><br />',
     },
     {
         Name => 'mailto-Links',
@@ -507,17 +507,17 @@ mailto-Link <a href="mailto:skywalker@otrs.org?body=From%3A%20%3COTRS_CUSTOMER_F
         },
         RichText => 0,
         Template =>
-            'mailto-Link <a href="mailto:skywalker@otrs.org?subject=From%3A%20%3COTRS_CUSTOMER_From%3E&amp;body=From%3A%20%3COTRS_CUSTOMER_From%3E">E-Mail mit Subject und Body</a><br />
+            'mailto-Link <a href="mailto:skywalker@znuny.org?subject=From%3A%20%3COTRS_CUSTOMER_From%3E&amp;body=From%3A%20%3COTRS_CUSTOMER_From%3E">E-Mail mit Subject und Body</a><br />
 <br />
-mailto-Link <a href="mailto:skywalker@otrs.org?subject=From%3A%20%3COTRS_CUSTOMER_From%3E">E-Mail mit Subject</a><br />
+mailto-Link <a href="mailto:skywalker@znuny.org?subject=From%3A%20%3COTRS_CUSTOMER_From%3E">E-Mail mit Subject</a><br />
 <br />
-mailto-Link <a href="mailto:skywalker@otrs.org?body=From%3A%20%3COTRS_CUSTOMER_From%3E">E-Mail mit Body</a><br />',
+mailto-Link <a href="mailto:skywalker@znuny.org?body=From%3A%20%3COTRS_CUSTOMER_From%3E">E-Mail mit Body</a><br />',
         Result =>
-            'mailto-Link <a href="mailto:skywalker@otrs.org?subject=From%3A%20test%40home.com&amp;body=From%3A%20test%40home.com">E-Mail mit Subject und Body</a><br />
+            'mailto-Link <a href="mailto:skywalker@znuny.org?subject=From%3A%20test%40home.com&amp;body=From%3A%20test%40home.com">E-Mail mit Subject und Body</a><br />
 <br />
-mailto-Link <a href="mailto:skywalker@otrs.org?subject=From%3A%20test%40home.com">E-Mail mit Subject</a><br />
+mailto-Link <a href="mailto:skywalker@znuny.org?subject=From%3A%20test%40home.com">E-Mail mit Subject</a><br />
 <br />
-mailto-Link <a href="mailto:skywalker@otrs.org?body=From%3A%20test%40home.com">E-Mail mit Body</a><br />',
+mailto-Link <a href="mailto:skywalker@znuny.org?body=From%3A%20test%40home.com">E-Mail mit Body</a><br />',
     },
     {
         Name => 'OTRS AGENT + CUSTOMER FROM',    # <OTRS_TICKET_DynamicField_*_Value>
@@ -533,7 +533,7 @@ mailto-Link <a href="mailto:skywalker@otrs.org?body=From%3A%20test%40home.com">E
     },
     {
         Name =>
-            'OTRS AGENT + CUSTOMER BODY',   # this is an special case, it sets the Body as it is since is the Data param
+            'OTRS AGENT + CUSTOMER BODY',    # this is a special case, it sets the Body as it is since is the Data param
         Data => {
             Body => "Line1\nLine2\nLine3",
         },
@@ -556,11 +556,11 @@ mailto-Link <a href="mailto:skywalker@otrs.org?body=From%3A%20test%40home.com">E
         },
         RichText => 1,
         Template => 'Test &lt;OTRS_AGENT_BODY&gt; - &lt;OTRS_CUSTOMER_BODY&gt;',
-        Result   => "Test Line1<br/>
-Line2<br/>
-Line3 - Line1<br/>
-Line2<br/>
-Line3",
+        Result   => "Test <p>Line1</p>
+<p>Line2</p>
+<p>Line3</p> - <p>Line1</p>
+<p>Line2</p>
+<p>Line3</p>",
     },
     {
         Name => 'OTRS AGENT + CUSTOMER BODY[2]',
@@ -584,20 +584,20 @@ Line3",
         },
         RichText => 1,
         Template => 'Test &lt;OTRS_AGENT_BODY[7]&gt; - &lt;OTRS_CUSTOMER_BODY[7]&gt;',
-        Result =>
-            'Test <div  type="cite" style="border:none;border-left:solid blue 1.5pt;padding:0cm 0cm 0cm 4.0pt">Line1<br/>
-Line2<br/>
-Line3<br/>
-Line4<br/>
-Line5<br/>
-Line6<br/>
-Line7</div> - <div  type="cite" style="border:none;border-left:solid blue 1.5pt;padding:0cm 0cm 0cm 4.0pt">Line1<br/>
-Line2<br/>
-Line3<br/>
-Line4<br/>
-Line5<br/>
-Line6<br/>
-Line7</div>',
+        Result   =>
+            'Test <div  type="cite" style="border:none;border-left:solid blue 1.5pt;padding:0cm 0cm 0cm 4.0pt"><p>Line1</p>
+<p>Line2</p>
+<p>Line3</p>
+<p>Line4</p>
+<p>Line5</p>
+<p>Line6</p>
+<p>Line7</p></div> - <div  type="cite" style="border:none;border-left:solid blue 1.5pt;padding:0cm 0cm 0cm 4.0pt"><p>Line1</p>
+<p>Line2</p>
+<p>Line3</p>
+<p>Line4</p>
+<p>Line5</p>
+<p>Line6</p>
+<p>Line7</p></div>',
     },
     {
         Name => 'OTRS AGENT + CUSTOMER EMAIL',    # EMAIL without [ ] does not exists
@@ -897,9 +897,9 @@ my $Result = $Kernel::OM->Get('Kernel::System::CalendarTemplateGenerator')->_Rep
 );
 $Self->Is(
     $Result,
-    "Description Test<br/>
-description<br/>
-$RandomID",
+    "<p>Description Test</p>
+<p>description</p>
+<p>$RandomID</p>",
     "Appointment description tag correctly replaced.",
 );
 

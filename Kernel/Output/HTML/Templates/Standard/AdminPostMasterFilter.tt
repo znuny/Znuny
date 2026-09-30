@@ -41,6 +41,43 @@
             </div>
         </div>
 [% RenderBlockEnd("Filter") %]
+[% RenderBlockStart("ActionImportExport") %]
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Import and export of configurations") | html %]</h2>
+            </div>
+            <div class="Content">
+                <p class="FieldExplanation">
+                    [% Translate("Upload a file in YAML format (as provided by the export) to import postmaster filters.") | html %]
+                </p>
+                <ul class="ActionList SpacingTop">
+                    <li>
+                        <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" class="Validate PreventMultipleSubmits">
+                            <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                            <input type="hidden" name="Subaction" value="FilterImport"/>
+                            <input type="hidden" name="FormID" value="[% Data.FormID | html %]"/>
+                            <input name="FileUpload" id="FileUpload" type="file" size="18" class="Fixed W100pc Validate_Required [% Data.FileUploadInvalid | html %]"/>
+                            <div id="FileUploadError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                            <div id="FileUploadServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                            <fieldset class="Separated">
+                                <div class="checkbox-container">
+                                    <input type="checkbox" id="OverwriteExistingFilters" name="OverwriteExistingFilters" value="1" />
+                                    <label for="OverwriteExistingFilters">[% Translate("Overwrite existing postmaster filters?") | html %]</label>
+                                </div>
+                            </fieldset>
+
+                            <button class="CallForAction btn-main btn-primary-ghost" type="submit" value="[% Translate("Import configurations") | html %]">
+                                <span><i class="fa fa-upload"></i>[% Translate("Import configurations") | html %]</span>
+                            </button>
+                        </form>
+                    </li>
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=FilterExport" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-download"></i>[% Translate("Export configurations") | html %]</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+[% RenderBlockEnd("ActionImportExport") %]
 
         [% IF Env("Subaction") == 'Update' || Env("Subaction") == "AddAction" %]
         <div class="WidgetSimple">
@@ -95,6 +132,8 @@
                     <thead>
                         <tr>
                             <th>[% Translate("Name") | html %]</th>
+                            <th class="Center W10pc">[% Translate("Export") | html %]</th>
+                            <th class="Center W10pc">[% Translate("Copy") | html %]</th>
                             <th class="Center W10pc">[% Translate("Delete") | html %]</th>
                         </tr>
                     </thead>
@@ -111,6 +150,8 @@
                             <td>
                                 <a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Update;Name=[% Data.Name | uri %]">[% Translate(Data.Name) | html %]</a>
                             </td>
+                            <td class="Center"><a class="table-icon-hover-md" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=FilterExport;Name=[% Data.Name | uri %];[% Env("ChallengeTokenParam") | html %]"><i class="fa fa-download"></i><span class="InvisibleText">[% Translate("Export") | html %]</span></a></td>
+                            <td class="Center"><a class="table-icon-hover-md" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=FilterCopy;Name=[% Data.Name | uri %];[% Env("ChallengeTokenParam") | html %]"><i class="fa fa-copy"></i><span class="InvisibleText">[% Translate("Copy") | html %]</span></a></td>
                             <td class="Center">
                                 <a class="TrashCan PostMasterFilterDelete table-icon-hover-md" href="#" data-query-string="Action=[% Env("Action") %];Subaction=Delete;Name=[% Data.Name | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Delete this filter") | html %]">
                                     <i class="fa fa-trash-o"></i>

@@ -28,12 +28,6 @@ Checks if MySQL database is using correct charset.
 
 =cut
 
-sub CheckPreviousRequirement {
-    my ( $Self, %Param ) = @_;
-
-    return 1;
-}
-
 sub Run {
     my ( $Self, %Param ) = @_;
 
@@ -117,16 +111,17 @@ sub Run {
 
     my @SystemTablesWithInvalidCharset;
     my @NonSystemTablesWithInvalidCharset;
+    my @TablesWithOldCollation;
 
     # Check for tables with invalid character set. Views have engine == null, ignore those.
     $DBObject->Prepare( SQL => 'show table status where engine is not null' );
     while ( my @Row = $DBObject->FetchrowArray() ) {
-        if ( $Row[14] !~ /^$RequiredCharacterSet\_unicode_ci$/i ) {
-            my $Table = $Row[0];
-
+        my ( $Table, $Collation ) = @Row[ 0, 14 ];
+        if ( $Collation !~ / ^ ${RequiredCharacterSet}_ /ix ) {
             push @SystemTablesWithInvalidCharset,    $Table if $SystemTables{$Table};
             push @NonSystemTablesWithInvalidCharset, $Table if !$SystemTables{$Table};
         }
+        push @TablesWithOldCollation, $Table if $Collation =~ / _general_ci $ /x;
     }
 
     if (@NonSystemTablesWithInvalidCharset) {
@@ -139,6 +134,14 @@ sub Run {
         print "\n    Error: There were tables found which do not have '$RequiredCharacterSet' as charset: '";
         print join( "', '", @SystemTablesWithInvalidCharset ) . "'.\n";
         return;
+    }
+
+    if (@TablesWithOldCollation) {
+        print "\n    Notice: The following tables are using a collation named *_general_ci: '";
+        print join( "', '", @TablesWithOldCollation ) . "'.\n";
+        print "If your database server supports it and you are using a language other\n" .
+            "than English, it is recommended to use the equivalent *_unicode_ci variant.\n" .
+            "This is optional and safe to ignore though.\n";
     }
 
     if (

@@ -207,13 +207,13 @@ for my $Test (@Tests) {
         Name => 'JSON - complex structure'
     },
     {
-        Result => 1,
+        Result      => 1,
         InputDecode =>
             'true',
         Name => 'JSON - booleans'
     },
     {
-        Result => undef,
+        Result      => undef,
         InputDecode =>
             'false',
         Name => 'JSON - booleans2'

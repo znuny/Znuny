@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -128,6 +128,9 @@ sub Auth {
 
         # next on no config setting
         next COUNT if !$Self->{"Backend$MainCount"};
+
+        # SAML: Only the requested auth backend is checked
+        next COUNT if $Param{IsSAMLLogin} && $Param{Count} ne $MainCount;
 
         # check auth backend
         $User = $Self->{"Backend$MainCount"}->Auth(%Param);

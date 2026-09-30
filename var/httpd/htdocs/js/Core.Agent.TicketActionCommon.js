@@ -31,7 +31,7 @@ Core.Agent.TicketActionCommon = (function (TargetNS) {
     TargetNS.Init = function () {
 
         var DynamicFieldNames = Core.Config.Get('DynamicFieldNames'),
-            Fields = ['TypeID', 'ServiceID', 'SLAID', 'NewOwnerID', 'NewResponsibleID', 'NewStateID', 'NewPriorityID'],
+            Fields = ['TypeID', 'ServiceID', 'SLAID', 'NewOwnerID', 'NewResponsibleID', 'NewStateID', 'NewPriorityID', 'CustomerAutoComplete'],
             ModifiedFields;
 
         // Bind events to specific fields
@@ -56,7 +56,32 @@ Core.Agent.TicketActionCommon = (function (TargetNS) {
         });
 
         // Bind click event to CreateArticle checkbox and toggle widget.
-        $('#CreateArticle, #WidgetArticle .WidgetAction.Toggle').on('click', function () {
+        $('#CreateArticle, #WidgetArticle .WidgetAction.Toggle').on('click', function (Event) {
+            var $EventTarget = $(Event.target),
+                RTEInstance  = Core.UI.RichTextEditor.GetInstance('RichText');
+
+            if ($EventTarget.attr('id') === 'CreateArticle') {
+
+                // After disabling checkbox to create article, collapse article widget
+                if (!$EventTarget.prop('checked')) {
+                    $('#WidgetArticle .WidgetAction.Toggle > a').first().trigger('click');
+                }
+            }
+            else if ($EventTarget.closest('#WidgetArticle.Collapsed').length === 1) {
+
+                // Disable checkbox to create article if widget was collapsed
+                // and there is no subject and body filled
+                if (
+                    $('#Subject').val().length === 0
+                    && (
+                        (RTEInstance && RTEInstance.getData().length === 0)
+                        || (!RTEInstance && $('#RichText').val().length === 0)
+                    )
+                ) {
+                    $('#CreateArticle').prop('checked', false);
+                }
+            }
+
             $('#WidgetArticle .Validate_DependingRequiredAND.Validate_Depending_CreateArticle').each(function (Index, Element) {
                 var $Element = $(Element);
                 var ClosestClass = 'Field';
@@ -79,6 +104,8 @@ Core.Agent.TicketActionCommon = (function (TargetNS) {
                 }
             });
         });
+
+        Core.Agent.CustomerSearch.Init($('#CustomerAutoComplete'));
     };
 
     /**

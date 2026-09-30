@@ -77,11 +77,14 @@ sub Run {
     # get ticket object
     my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
+    my $TicketFrontendConfig = $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Frontend::AgentTicketWatchView') // {};
+    my $UserIDForSearch      = $TicketFrontendConfig->{TicketSearchWithAdminUser} ? 1 : $Self->{UserID};
+
     # find watched tickets
     my $Count = $TicketObject->TicketSearch(
         Result       => 'COUNT',
         WatchUserIDs => [ $Self->{UserID} ],
-        UserID       => 1,
+        UserID       => $UserIDForSearch,
         Permission   => 'ro',
     ) || 0;
     my $CountNew = $TicketObject->TicketSearch(
@@ -91,7 +94,7 @@ sub Run {
             Seen => 1,
         },
         TicketFlagUserID => $Self->{UserID},
-        UserID           => 1,
+        UserID           => $UserIDForSearch,
         Permission       => 'ro',
     ) || 0;
     $CountNew = $Count - $CountNew;
@@ -101,7 +104,7 @@ sub Run {
         StateType                     => ['pending reminder'],
         WatchUserIDs                  => [ $Self->{UserID} ],
         TicketPendingTimeOlderMinutes => 1,
-        UserID                        => 1,
+        UserID                        => $UserIDForSearch,
         Permission                    => 'ro',
     ) || 0;
 

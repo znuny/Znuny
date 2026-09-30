@@ -204,7 +204,7 @@
                         </div>
 [% RenderBlockEnd("ConditionItemEditRow") %]
 [% RenderBlockStart("ConditionItemInitRow") %]
-                       <div class="WidgetSimple ParentWidget" id="Condition[1]">
+                        <div class="WidgetSimple ParentWidget" id="Condition[1]">
                             <div class="Header">
                                 <h2>[% Translate("Condition") | html %] 1</h2>
                             </div>
@@ -247,17 +247,19 @@
                                                                 <label for="ConditionFieldValue[1][1]">[% Translate("Value") | html %]</label>
 
                                                                 <div class="single-row-inputs no-padding full-width">
-                                                                    <input type="text" name="ConditionFieldValue[1][1]"  class="W20pc Validate_Required" id="ConditionFieldValue[1][1]" />
+                                                                    <div class="field-wrapper flex-column">
+                                                                        <input type="text" name="ConditionFieldValue[1][1]"  class="W20pc Validate_Required" id="ConditionFieldValue[1][1]" />
+                                                                    </div>
+                                                                    <div id="ConditionFieldName[1][1]Error" class="TooltipErrorMessage">
+                                                                        [% Translate("This field is required.") | html %] [% Translate("And can't be repeated on the same condition.") | html %]
+                                                                    </div>
+                                                                    <div id="ConditionFieldValue[1][1]Error" class="TooltipErrorMessage">
+                                                                        [% Translate("This field is required.") | html %]
+                                                                    </div>
                                                                     <a href="#" class="RemoveButton" type="button" name="ConditionFieldRemove[1][1]" title="[% Translate("Remove this Field") | html %]">
                                                                         <i class="fa fa-minus-square-o"></i>
                                                                         <span class="InvisibleText">[% Translate("Remove this Field") | html %]</span>
                                                                     </a>
-                                                                </div>
-                                                                <div id="ConditionFieldName[1][1]Error" class="TooltipErrorMessage">
-                                                                    [% Translate("This field is required.") | html %] [% Translate("And can't be repeated on the same condition.") | html %]
-                                                                </div>
-                                                                <div id="ConditionFieldValue[1][1]Error" class="TooltipErrorMessage">
-                                                                    [% Translate("This field is required.") | html %]
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -346,7 +348,6 @@
 
                                                 <div class="field-wrapper flex-column">
                                                     <label for="ConditionFieldValue[_INDEX_][1]">[% Translate("Value") | html %]</label>
-
                                                     <div class="single-row-inputs no-padding full-width">
                                                         <input type="text" name="ConditionFieldValue[_INDEX_][1]" class="W20pc Validate_Required" id="ConditionFieldValue[_INDEX_][1]" />
                                                         <a href="#" class="RemoveButton" type="button" name="ConditionFieldRemove[_INDEX_][1]" title="[% Translate("Remove this Field") | html %]">
@@ -388,18 +389,19 @@
                         <label for="ConditionFieldValue[_INDEX_][_FIELDINDEX_]">[% Translate("Value") | html %]</label>
 
                         <div class="single-row-inputs no-padding full-width">
-                            <input type="text" name="ConditionFieldValue[_INDEX_][_FIELDINDEX_]" class="W20pc Validate_Required" id="ConditionFieldValue[_INDEX_][_FIELDINDEX_]" />
+                            <div class="field-wrapper flex-column">
+                                <input type="text" name="ConditionFieldValue[_INDEX_][_FIELDINDEX_]" class="W20pc Validate_Required" id="ConditionFieldValue[_INDEX_][_FIELDINDEX_]" />
+                            </div>
                             <a href="#" class="RemoveButton" type="button" name="ConditionFieldRemove[_INDEX_][_FIELDINDEX_]" title="[% Translate("Remove this Field") | html %]">
                                 <i class="fa fa-minus-square-o"></i>
                                 <span class="InvisibleText">[% Translate("Remove this Field") | html %]</span>
                             </a>
-                        </div>
-
-                        <div id="ConditionFieldName[_INDEX_][_FIELDINDEX_]Error" class="TooltipErrorMessage">
-                            [% Translate("This field is required.") | html %] [% Translate("And can't be repeated on the same condition.") | html %]
-                        </div>
-                        <div id="ConditionFieldValue[_INDEX_][_FIELDINDEX_]Error" class="TooltipErrorMessage">
-                            [% Translate("This field is required.") | html %]
+                            <div id="ConditionFieldName[_INDEX_][_FIELDINDEX_]Error" class="TooltipErrorMessage">
+                                [% Translate("This field is required.") | html %] [% Translate("And can't be repeated on the same condition.") | html %]
+                            </div>
+                            <div id="ConditionFieldValue[_INDEX_][_FIELDINDEX_]Error" class="TooltipErrorMessage">
+                                [% Translate("This field is required.") | html %]
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -15,7 +15,7 @@ use warnings;
 our $ObjectManagerDisabled = 1;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -732,8 +732,8 @@ sub _ShowScreen {
                 $LayoutObject->Block(
                     Name => 'RegExRow',
                     Data => {
-                        EntryCounter => $CurrentRegExEntryID,
-                        RegEx        => $Param{ 'RegEx_' . $CurrentRegExEntryID },
+                        EntryCounter     => $CurrentRegExEntryID,
+                        RegEx            => $Param{ 'RegEx_' . $CurrentRegExEntryID },
                         RegExServerError =>
                             $Param{ 'RegEx_' . $CurrentRegExEntryID . 'ServerError' }
                             || '',
@@ -801,7 +801,7 @@ sub _ShowScreen {
         if ($IsDirtyConfig) {
             $LayoutObject->Block(
                 Name => 'DynamicFieldInSysConfigDirty',
-                ,
+
             );
         }
 

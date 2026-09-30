@@ -49,14 +49,18 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         font-size: 11px;
     }*/
 
-    .WidgetSimple > .Content.ProcessInfo fieldset .FieldContainer p.CutValue {
-        height: 17px;
+    #DynamicFieldsWidget .FieldContainer p.CutValue {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
         max-width: 600px;
     }
 
-    .WidgetSimple > .Content.ProcessInfo fieldset .FieldContainer p.ValueLong {
+    #DynamicFieldsWidget .FieldContainer p.ValueLong {
         display: none;
     }
+
 
     .WidgetSimple > .Content.ProcessInfo fieldset .FieldContainer label .ShowFieldInfoOverlay {
         display: block;
@@ -104,6 +108,11 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     #DynamicFieldsWidget .Actions li:first-child:after {
         content: "";
+    }
+
+    #DynamicFieldsWidget .LightRow.Bottom {
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-sm);
     }
 
     /**
@@ -183,6 +192,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     .FieldHelpContainer span {
+        white-space: pre-line;
         display: none;
         opacity: 0;
         position: absolute;
@@ -192,7 +202,8 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         padding: var(--padding-sm) var(--padding-md);
         top: 26px;
         left: -9px;
-        max-width: 200px;
+        width: max-content;
+        max-width: min(40rem, calc(100vw - 2rem));
         min-width: 130px;
         z-index: 100;
         font-size: var(--font-size-xs);
@@ -378,6 +389,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         flex-flow: column;
         border: 0;
         gap: var(--gap-md-sm);
+        overflow: visible;
     }
 
     @media only screen and (max-width: 1024px) {
@@ -415,12 +427,9 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         align-items: center;
         width: auto;
         text-align: left;
-        /*padding: var(--padding-sm) 0;*/
         font-size: var(--label-font-size);
         letter-spacing: .2px;
         font-weight: var(--medium);
-        /*font-family: Inter;*/
-        text-transform: capitalize;
     }
 
     #ActivityDialogContent .Row_DynamicField_PreProcVacationStart > div > div:not(.TooltipErrorMessage),

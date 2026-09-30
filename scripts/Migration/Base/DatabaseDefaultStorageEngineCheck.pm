@@ -28,12 +28,6 @@ Checks if MySQL database has the correct default storage engine.
 
 =cut
 
-sub Run {
-    my ( $Self, %Param ) = @_;
-
-    return 1;
-}
-
 =head2 CheckPreviousRequirement()
 
 Check for initial conditions for running this migration step.

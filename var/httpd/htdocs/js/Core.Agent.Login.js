@@ -30,7 +30,8 @@ Core.Agent.Login = (function (TargetNS) {
      */
     TargetNS.Init = function () {
 
-        var LoginFailed = Core.Config.Get('LoginFailed');
+        var LoginFailed   = Core.Config.Get('LoginFailed'),
+            PasswordReset = Core.Config.Get('PasswordReset');
 
         // Browser is too old
         if (!Core.Agent.SupportedBrowser) {
@@ -58,6 +59,12 @@ Core.Agent.Login = (function (TargetNS) {
 
         // save TimeZoneOffset data for OTRS
         $('#TimeZoneOffset').val((new Date()).getTimezoneOffset());
+
+        // show password-reset form when the server has validated a token
+        if (typeof PasswordReset !== 'undefined' && parseInt(PasswordReset, 10) === 1) {
+            $('#LoginBox, #PasswordBox').hide();
+            $('#PasswordResetBox').show();
+        }
 
         // shake login box on authentication failure
         if (typeof LoginFailed !== 'undefined' && parseInt(LoginFailed, 10) === 1) {

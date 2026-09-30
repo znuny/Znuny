@@ -16,7 +16,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Process Management</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -97,7 +97,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Process Management Activity GUI</Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
@@ -139,7 +139,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Process Management Activity Dialog GUI</Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
@@ -181,7 +181,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Process Management Transition GUI</Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
@@ -221,7 +221,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Process Management Transition Action GUI</Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
@@ -261,7 +261,7 @@
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Process Management Path GUI</Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
@@ -469,6 +469,7 @@
                 <Item Key="Target"></Item>
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="Cluster"></Item>
+                <Item Key="Prio">480</Item>
             </Hash>
         </Value>
     </Setting>
@@ -625,7 +626,7 @@
             </Item>
         </Value>
     </Setting>
-    <Setting Name="Ticket::Frontend::AgentTicketProcess::CustomerIDReadOnly" Required="1" Valid="1">
+    <Setting Name="Ticket::Frontend::AgentTicketProcess###CustomerIDReadOnly" Required="1" Valid="1">
         <Description Translatable="1">Controls if CustomerID is read-only in the agent interface.</Description>
         <Navigation>Frontend::Agent::View::TicketProcess</Navigation>
         <Value>
@@ -708,6 +709,17 @@
                         <Item Key="SLA" SelectedID="1"></Item>
                         <Item Key="Title" SelectedID="2"></Item>
                         <Item Key="Type" SelectedID="1"></Item>
+                    </Hash>
+                </Item>
+                <Item Key="DefaultPageShown">
+                    <Hash>
+                        <Item Key="5">  5</Item>
+                        <Item Key="10"> 10</Item>
+                        <Item Key="15"> 15</Item>
+                        <Item Key="20"> 20</Item>
+                        <Item Key="25"> 25</Item>
+                        <Item Key="50"> 50</Item>
+                        <Item Key="100">100</Item>
                     </Hash>
                 </Item>
                 <Item Key="Mandatory">0</Item>
@@ -812,7 +824,9 @@
                         <Item Key="HistoryComment">Some free text!</Item>
                         <Item Key="NoAgentNotify">0</Item>
                         <Item Key="Queue">(optional) Misc</Item>
-                        <Item Key="Attachments">Attachment 1, Attachment 2 (add attachment of the admin interface)</Item>
+                        <Item Key="Attachments">optional, StdAttachmentName1,StdAttachmentName2</Item>
+                        <Item Key="AttachmentIDs">optional, 1,2,3</Item>
+                        <Item Key="AttachmentsReuse">optional, 0|1</Item>
                         <Item Key="Template">(optional) Template 1 (use template to replace in Body by Tag OTRS_TA_TEMPLATE)</Item>
                         <Item Key="Salutation">(optional) Salutation 1 (use salutation to replace in Body by Tag OTRS_TA_SALUTATION)</Item>
                         <Item Key="Signature">(optional) Signature 1 (use signature to replace in Body by Tag OTRS_TA_SIGNATURE)</Item>
@@ -886,8 +900,11 @@
                 </Item>
                 <Item Key="TicketArticleCreate">
                     <Hash>
+                        <Item Key="Attachments">optional, StdAttachmentName1,StdAttachmentName2</Item>
+                        <Item Key="AttachmentIDs">optional, 1,2,3</Item>
+                        <Item Key="AttachmentsReuse">optional, 0|1</Item>
                         <Item Key="Body">(* required) Some text</Item>
-                        <Item Key="CommunicationChannel">(* required) Internal|Phone|Email</Item>
+                        <Item Key="CommunicationChannel">(* required) Internal|Phone|Email|Web</Item>
                         <Item Key="ContentType">(* required) text/html; charset=UTF-8</Item>
                         <Item Key="DynamicField_FieldName">Some Value</Item>
                         <Item Key="From">Some Agent email@example.com</Item>
@@ -904,9 +921,11 @@
                 <Item Key="TicketCreate">
                     <Hash>
                         <Item Key="ArchiveFlag">y|n</Item>
-                        <Item Key="Attachments">optional, 0|1</Item>
+                        <Item Key="Attachments">optional, StdAttachmentName1,StdAttachmentName2</Item>
+                        <Item Key="AttachmentIDs">optional, 1,2,3</Item>
+                        <Item Key="AttachmentsReuse">optional, 0|1</Item>
                         <Item Key="Body">(* required) Some text</Item>
-                        <Item Key="CommunicationChannel">Internal|Phone|Email|...</Item>
+                        <Item Key="CommunicationChannel">Internal|Phone|Email|Web|...</Item>
                         <Item Key="ContentType">(* required) text/html; charset=UTF-8</Item>
                         <Item Key="CustomerID">123</Item>
                         <Item Key="CustomerUser">somecustomeremail</Item>

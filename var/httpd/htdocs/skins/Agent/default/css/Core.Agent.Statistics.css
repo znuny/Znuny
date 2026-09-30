@@ -262,4 +262,11 @@ fieldset legend a {
     width: 100%;
 } */
 
+.StatsResultDownload {
+    display: flex;
+    gap: var(--gap-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 } /* end @media */

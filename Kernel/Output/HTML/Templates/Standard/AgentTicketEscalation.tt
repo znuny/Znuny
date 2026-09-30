@@ -8,32 +8,26 @@
 # --
 
 [% RenderBlockStart("TicketEscalationFirstResponseTimeOver") %]
-<a href="[% Env("Baselink") %]Action=AgentTicketZoom;TicketID=[% Data.TicketID | uri %]" title="[% Data.Title | html %]">
-    [% Translate("Ticket %s: first response time is over (%s/%s)!", Data.TicketNumber, Data.FirstResponseTimeHuman, Localize(Data.FirstResponseTimeDestinationDate, "TimeShort")) | html %]
-</a>
+    [% Translate("Ticket %s: first response time is over (%s %s)!", Data.TicketNumber, Data.FirstResponseTimeHuman, Localize(Data.FirstResponseTimeDestinationDate, "TimeShort")) | html %]
+
 [% RenderBlockEnd("TicketEscalationFirstResponseTimeOver") %]
+
 [% RenderBlockStart("TicketEscalationFirstResponseTimeWillBeOver") %]
-<a href="[% Env("Baselink") %]Action=AgentTicketZoom;TicketID=[% Data.TicketID | uri %]" title="[% Data.Title | html %]">
-    [% Translate("Ticket %s: first response time will be over in %s/%s!", Data.TicketNumber, Data.FirstResponseTimeHuman, Localize(Data.FirstResponseTimeDestinationDate, "TimeShort")) | html %]
-</a>
+    [% Translate("Ticket %s: first response time will be over in %s %s!", Data.TicketNumber, Data.FirstResponseTimeHuman, Localize(Data.FirstResponseTimeDestinationDate, "TimeShort")) | html %]
 [% RenderBlockEnd("TicketEscalationFirstResponseTimeWillBeOver") %]
+
 [% RenderBlockStart("TicketEscalationUpdateTimeOver") %]
-<a href="[% Env("Baselink") %]Action=AgentTicketZoom;TicketID=[% Data.TicketID | uri %]" title="[% Data.Title | html %]">
-    [% Translate("Ticket %s: update time is over (%s/%s)!", Data.TicketNumber, Data.UpdateTimeHuman, Localize(Data.UpdateTimeDestinationDate, "TimeShort")) | html %]
-</a>
+    [% Translate("Ticket %s: update time is over (%s %s)!", Data.TicketNumber, Data.UpdateTimeHuman, Localize(Data.UpdateTimeDestinationDate, "TimeShort")) | html %]
 [% RenderBlockEnd("TicketEscalationUpdateTimeOver") %]
+
 [% RenderBlockStart("TicketEscalationUpdateTimeWillBeOver") %]
-<a href="[% Env("Baselink") %]Action=AgentTicketZoom;TicketID=[% Data.TicketID | uri %]" title="[% Data.Title | html %]">
-    [% Translate("Ticket %s: update time will be over in %s/%s!", Data.TicketNumber, Data.UpdateTimeHuman, Localize(Data.UpdateTimeDestinationDate, "TimeShort")) | html %]
-</a>
+    [% Translate("Ticket %s: update time will be over in %s %s!", Data.TicketNumber, Data.UpdateTimeHuman, Localize(Data.UpdateTimeDestinationDate, "TimeShort")) | html %]
 [% RenderBlockEnd("TicketEscalationUpdateTimeWillBeOver") %]
+
 [% RenderBlockStart("TicketEscalationSolutionTimeOver") %]
-<a href="[% Env("Baselink") %]Action=AgentTicketZoom;TicketID=[% Data.TicketID | uri %]" title="[% Data.Title | html %]">
-    [% Translate("Ticket %s: solution time is over (%s/%s)!", Data.TicketNumber, Data.SolutionTimeHuman, Localize(Data.SolutionTimeDestinationDate, "TimeShort")) | html %]
-</a>
+    [% Translate("Ticket %s: solution time is over (%s %s)!", Data.TicketNumber, Data.SolutionTimeHuman, Localize(Data.SolutionTimeDestinationDate, "TimeShort")) | html %]
 [% RenderBlockEnd("TicketEscalationSolutionTimeOver") %]
+
 [% RenderBlockStart("TicketEscalationSolutionTimeWillBeOver") %]
-<a href="[% Env("Baselink") %]Action=AgentTicketZoom;TicketID=[% Data.TicketID | uri %]" title="[% Data.Title | html %]">
-    [% Translate("Ticket %s: solution time will be over in %s/%s!", Data.TicketNumber, Data.SolutionTimeHuman, Localize(Data.SolutionTimeDestinationDate, "TimeShort")) | html %]
-</a>
+    [% Translate("Ticket %s: solution time will be over in %s %s!", Data.TicketNumber, Data.SolutionTimeHuman, Localize(Data.SolutionTimeDestinationDate, "TimeShort")) | html %]
 [% RenderBlockEnd("TicketEscalationSolutionTimeWillBeOver") %]

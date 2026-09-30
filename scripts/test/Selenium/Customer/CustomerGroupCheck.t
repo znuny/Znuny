@@ -185,8 +185,8 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketZoom;TicketNumber=$TicketNumber");
 
         $Self->True(
-            index( $Selenium->get_page_source(), 'No Permission' ) > -1,
-            'Customer does not have permission for test ticket',
+            index( $Selenium->get_page_source(), 'Create your first ticket' ) > -1,
+            'Customer does not have permission for test ticket, redirected to ticket overview',
         );
 
         # add first customer company to second group with RW permissions
@@ -208,8 +208,7 @@ $Selenium->RunTest(
             "Added customer company $CustomerIDs[0] to group $GroupIDs[1]",
         );
 
-        # refresh the page
-        $Selenium->VerifiedRefresh();
+        $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketZoom;TicketNumber=$TicketNumber");
 
         # check ticket data
         $Self->True(

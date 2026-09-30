@@ -32,9 +32,9 @@ sub Configure {
         ValueRegex  => qr/^\d{1,4}[.]\d{1,4}[.]\d{1,4}$/smx,
     );
     $Self->AddOption(
-        Name => 'module-directory',
+        Name        => 'module-directory',
         Description =>
-            "Specify the directory containing the module sources (otherwise the OTRS home directory will be used).",
+            "Specify the directory containing the module sources (otherwise the Znuny home directory will be used).",
         Required   => 0,
         HasValue   => 1,
         ValueRegex => qr/.*/smx,
@@ -104,7 +104,7 @@ sub Run {
         && !$Structure{PackageIsDownloadable}->{Content}
         )
     {
-        $Self->PrintError("Package cannot be built.\n");
+        $Self->PrintError("Package cannot be built. You have disabled or unset PackageIsDownloadable.\n");
         return $Self->ExitCodeError();
     }
 
@@ -112,7 +112,7 @@ sub Run {
         $Structure{Version}->{Content} = $Self->GetOption('version');
     }
 
-    # build from given package directory, if any (otherwise default to OTRS home)
+    # build from given package directory, if any (otherwise default to Znuny home)
     if ( $Self->GetOption('module-directory') ) {
         $Structure{Home} = $Self->GetOption('module-directory');
     }

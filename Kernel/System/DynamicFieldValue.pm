@@ -163,7 +163,7 @@ sub ValueSet {
                 'INSERT INTO dynamic_field_value (field_id, object_id, value_text, value_date, value_int)'
                 . ' VALUES (?, ?, ?, ?, ?)',
             Bind => [
-                \$Param{FieldID}, \$Param{ObjectID},
+                \$Param{FieldID},     \$Param{ObjectID},
                 \$Value->{ValueText}, \$Value->{ValueDateTime}, \$Value->{ValueInt},
             ],
         );

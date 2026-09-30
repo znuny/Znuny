@@ -89,7 +89,7 @@ sub GetConfig {
         Description => Translatable('View the source for this Article'),
         Name        => Translatable('Plain Format'),
         Class       => 'AsPopup PopupType_TicketAction',
-        Link =>
+        Link        =>
             "Action=AgentTicketPlain;TicketID=$Param{Ticket}->{TicketID};ArticleID=$Param{Article}->{ArticleID}",
     );
 

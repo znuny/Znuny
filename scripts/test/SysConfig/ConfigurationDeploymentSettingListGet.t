@@ -33,9 +33,7 @@ my $SettingName2 = 'ProductName ' . $RandomNumber . 2;
 my $SettingName3 = 'ProductName ' . $RandomNumber . 3;
 my $SettingName4 = 'ProductName ' . $RandomNumber . 4;
 
-#
 # Prepare valid config XML and Perl
-#
 my $ValidSettingXML = <<'EOF',
 <?xml version="1.0" encoding="utf-8" ?>
 <otrs_config version="2.0" init="Framework">
@@ -276,7 +274,7 @@ $Success = $SysConfigDBObject->DefaultSettingUnlock(
 
 # Make sure that there is enough time between two ConfigurationDeploy() calls.
 # DeploymentModifiedVersionList() method works with timestamps, so it can return
-# data which was deployed in previous deployment. See https://bugs.otrs.org/show_bug.cgi?id=13071.
+# data which was deployed in previous deployment.
 $HelperObject->FixedTimeAddSeconds(2);
 
 %DeploymentResult = $SysConfigObject->ConfigurationDeploy(

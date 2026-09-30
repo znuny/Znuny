@@ -109,7 +109,7 @@ $Selenium->RunTest(
         # Check is there notification 'Customer company added!' after customer is added.
         my $Notification = 'Customer company added!';
         $Self->True(
-            $Selenium->execute_script("return \$('.MessageBox.Notice p:contains($Notification)').length"),
+            $Selenium->execute_script("return \$('.messageNotice .alertContent:contains($Notification)').length"),
             "$Notification - notification is found."
         );
 
@@ -197,7 +197,7 @@ $Selenium->RunTest(
         # Check is there notification 'Customer company updated!' after customer is updated.
         $Notification = 'Customer company updated!';
         $Self->True(
-            $Selenium->execute_script("return \$('.MessageBox.Notice p:contains($Notification)').length"),
+            $Selenium->execute_script("return \$('.messageNotice .alertContent:contains($Notification)').length"),
             "$Notification - notification is found."
         );
 

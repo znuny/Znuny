@@ -147,7 +147,6 @@ $Selenium->RunTest(
         $Selenium->find_element( '#RecipientSelect', 'css' )->click();
 
         # Check if CustomerUserListFields are correctly joined.
-        # See bug#13821 (https://bugs.otrs.org/show_bug.cgi?id=13821).
         $Self->Is(
             $Selenium->execute_script("return \$('input[id*=\"CustomerTicketText_\"]').val()"),
             "\"$UserFirstname $UserLastname $CustomerID\" \<$UserEmail\>",

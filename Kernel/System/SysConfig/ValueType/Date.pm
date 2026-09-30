@@ -72,6 +72,7 @@ Check if provided EffectiveValue matches structure defined in XMLContentParsed.
     );
 
 Result:
+
     %Result = (
         EffectiveValue => '2016-02-03',                 # Note that EffectiveValue can be modified
         Success => 1,

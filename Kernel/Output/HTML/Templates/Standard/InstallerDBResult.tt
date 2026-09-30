@@ -21,11 +21,11 @@
 [% RenderBlockStart("DatabaseResultItem") %]
                 <div class="DBItem">
 [% RenderBlockStart("DatabaseResultItemDone") %]
-#                    <img src="[% Config("Frontend::ImagePath") %]/icons/tick.png" alt="[% Translate("Done") | html %]" >
+#                    <img src="[% Config("Frontend::ImagePath") %]icons/tick.png" alt="[% Translate("Done") | html %]" >
                     <i class="fa fa-check"></i>
 [% RenderBlockEnd("DatabaseResultItemDone") %]
 [% RenderBlockStart("DatabaseResultItemFalse") %]
-#                    <img src="[% Config("Frontend::ImagePath") %]/icons/cross.png" alt="[% Translate("Error") | html %]" >
+#                    <img src="[% Config("Frontend::ImagePath") %]icons/cross.png" alt="[% Translate("Error") | html %]" >
                     <i class="fa fa-times"></i>
 [% RenderBlockEnd("DatabaseResultItemFalse") %]
                     [% Data.Item | html %]

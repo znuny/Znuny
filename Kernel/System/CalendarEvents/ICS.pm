@@ -394,7 +394,7 @@ sub _PrepareData {
                             NoJavaScript => 1,
                         );
 
-                        $EncodeObject->EncodeInput( \$Safety{String} );
+                        $EncodeObject->EncodeInput( \$Safety{String}, 'windows-1252' );
 
                         $EventResult{$EventID}->{ $Self->{GlobalPropertiesMap}->{Events}->{ORGANIZER} }
                             = $Safety{String};
@@ -404,7 +404,13 @@ sub _PrepareData {
                     if ( IsArrayRefWithData($Attendees) ) {
                         my @AttendeeSafety;
 
+                        ATTENDEE:
                         for my $Attendee ( @{$Attendees} ) {
+                            if ( !$Attendee->{CN} ) {
+                                push @AttendeeSafety, '';
+                                next ATTENDEE;
+                            }
+
                             my %Safety = $HTMLUtilsObject->Safety(
                                 String       => $Attendee->{CN},
                                 NoApplet     => 1,
@@ -417,7 +423,7 @@ sub _PrepareData {
                                 NoJavaScript => 1,
                             );
 
-                            $EncodeObject->EncodeInput( \$Safety{String} );
+                            $EncodeObject->EncodeInput( \$Safety{String}, 'windows-1252' );
 
                             push @AttendeeSafety, $Safety{String};
                         }
@@ -446,7 +452,7 @@ sub _PrepareData {
                             );
 
                             $PropertyString = $Safety{String};
-                            $EncodeObject->EncodeInput( \$PropertyString );
+                            $EncodeObject->EncodeInput( \$PropertyString, 'windows-1252' );
                         }
                         elsif ( defined $Data->{$Property} && !length $Data->{$Property} ) {
                             $PropertyString = '';

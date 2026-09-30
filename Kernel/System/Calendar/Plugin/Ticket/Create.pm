@@ -26,6 +26,7 @@ our @ObjectDependencies = (
     'Kernel::System::Calendar::Appointment',
     'Kernel::System::Calendar::Plugin',
     'Kernel::System::CustomerUser',
+    'Kernel::System::DateTime',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::Group',
@@ -758,7 +759,7 @@ sub TicketCreate {
 
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Ticket for appointment with ID $Param{AppointmentID} and creation date $Param{Config}->{TicketCreateTime} was not created because catch-up threshold of $TicketCreateCatchUpThresholdMinutes minutes was exceeded.",
         );
         return 0;
@@ -813,11 +814,11 @@ sub TicketCreate {
             ChannelName          => $Config->{ArticleChannelName},
             IsVisibleForCustomer => $Config->{ArticleIsVisibleForCustomer},
             SenderType           => $Config->{SenderType},
-            From                 => $Calendar{CalendarName} || $Config->{From},
-            Subject              => $Appointment{Title} || $Config->{Title},
+            From                 => $Calendar{CalendarName}   || $Config->{From},
+            Subject              => $Appointment{Title}       || $Config->{Title},
             Body                 => $Appointment{Description} || $Config->{Body},
-            ContentType          => $Config->{ContentType} || 'text/plain; charset=ISO-8859-15',
-            HistoryType          => $Config->{HistoryType} || 'NewTicket',
+            ContentType          => $Config->{ContentType}    || 'text/plain; charset=ISO-8859-15',
+            HistoryType          => $Config->{HistoryType}    || 'NewTicket',
             HistoryComment       => $Config->{HistoryComment},
             UserID               => $Param{UserID},
         );
@@ -1626,7 +1627,7 @@ sub _GetServices {
             UserID            => $Param{UserID},
         );
     }
-    if ( $Param{Plugin}->{Param}->{CustomerUserID} eq '<DEFAULT>' ) {
+    if ( $Param{Plugin}->{Param}->{CustomerUserID} && $Param{Plugin}->{Param}->{CustomerUserID} eq '<DEFAULT>' ) {
         $Param{Plugin}->{Param}->{CustomerUserID} = '';
     }
 

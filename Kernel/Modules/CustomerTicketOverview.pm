@@ -16,7 +16,7 @@ use warnings;
 our $ObjectManagerDisabled = 1;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -606,6 +606,30 @@ sub Run {
 
     # build NavigationBar
     $Output .= $LayoutObject->CustomerNavigationBar();
+
+    # show notifications
+    my @NotifyData = @{ $Param{NotifyData} // [] };
+    my @Errors     = $ParamObject->GetArray( Param => 'Errors' );
+
+    for my $Error (@Errors) {
+        if ( $Error eq 'MissingTicketOrNoPermission' ) {
+            push @NotifyData, {
+                Priority => 'Error',
+                Info     => $LayoutObject->{LanguageObject}->Translate(
+                    'You have no permission or the ticket does not exist.',
+                ),
+            };
+        }
+    }
+
+    for my $Notification (@NotifyData) {
+        if ( IsHashRefWithData($Notification) ) {
+            $Output .= $LayoutObject->Notify(
+                %{$Notification},
+            );
+        }
+    }
+
     $Output .= $LayoutObject->Output(
         TemplateFile => 'CustomerTicketOverview',
         Data         => \%Param,
@@ -688,9 +712,9 @@ sub ShowTicketStatus {
     }
 
     # customer info (customer name)
-    if ( $Article{CustomerUserID} ) {
+    if ( $Ticket{CustomerUserID} ) {
         $Param{CustomerName} = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerName(
-            UserLogin => $Article{CustomerUserID},
+            UserLogin => $Ticket{CustomerUserID},
         );
         $Param{CustomerName} = '(' . $Param{CustomerName} . ')' if ( $Param{CustomerName} );
     }

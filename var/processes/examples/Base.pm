@@ -12,6 +12,7 @@ package var::processes::examples::Base;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 
@@ -72,6 +73,7 @@ Creates dynamic fields according to provided configurations.
     );
 
 Result:
+
     %Result = (
         Success => 1,
         Error   => undef,

@@ -229,11 +229,11 @@ $Selenium->RunTest(
         # Wait for the CKE to load.
         $Selenium->WaitFor(
             JavaScript =>
-                "return \$('body.cke_editable', \$('.cke_wysiwyg_frame').contents()).length == 1"
+                "return \$('.ck-editor__editable').length == 1"
         );
 
         my $CKEditorValue = $Selenium->execute_script(
-            "return CKEDITOR.instances.RichText.getData()"
+            "return window.editor.getData()"
         );
 
         # Check if there is inline image in process screen.

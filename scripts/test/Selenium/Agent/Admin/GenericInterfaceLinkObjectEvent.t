@@ -67,7 +67,9 @@ $Selenium->RunTest(
 
         # Verify that web service is created.
         $Self->True(
-            $Selenium->execute_script("return \$('.MessageBox p:contains(Web service \"$Name\" created)').length;"),
+            $Selenium->execute_script(
+                "return \$('.messageNotice .alertContent:contains(Web service \"$Name\" created)').length;"
+            ),
             "$Name is created",
         );
 
@@ -122,7 +124,7 @@ $Selenium->RunTest(
 
         $Self->True(
             $Selenium->execute_script("return \$('#RequestList tr:eq(1)').text().trim();"),
-            "There is a content in RequestList, link tiket add event is trigered",
+            "There is a content in RequestList, link ticket add event is triggered",
         );
         sleep 1;
 
@@ -134,15 +136,16 @@ $Selenium->RunTest(
             JavaScript =>
                 'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete;'
         );
-        $Selenium->WaitFor(
-            ElementExists =>
-                "//span[contains(.,'Delete web service')]"
-        );
+
+        # Wait until page has loaded.
+        $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#Debugger').length;" );
 
         sleep 1;
 
+        $Selenium->WaitFor( ElementExists => [ '#DeleteButton', 'css' ] );
+
         # Delete web service.
-        $Selenium->find_element("//span[contains(.,'Delete web service')]")->click();
+        $Selenium->find_element( "#DeleteButton", 'css' )->click();
 
         $Selenium->WaitFor(
             JavaScript =>

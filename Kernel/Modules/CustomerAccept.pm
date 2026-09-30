@@ -11,6 +11,7 @@ package Kernel::Modules::CustomerAccept;
 
 use strict;
 use warnings;
+use utf8;
 
 our $ObjectManagerDisabled = 1;
 
@@ -37,10 +38,11 @@ sub PreRun {
         $Self->{RequestedURL} = 'Action=';
     }
 
-    # redirect if no primary group is selected
+    # redirect to "customer accept" only if customer didn't
+    # accept it yet and tries to request different URL
     if ( !$Self->{ $Self->{InfoKey} } && $Self->{Action} ne 'CustomerAccept' ) {
 
-        # remove requested url from session storage
+        # remember initial URL the user requested
         $SessionObject->UpdateSessionID(
             SessionID => $Self->{SessionID},
             Key       => 'UserRequestedURL',
@@ -104,7 +106,7 @@ sub Run {
         );
 
         # redirect
-        return $LayoutObject->Redirect( OP => "$Self->{RequestedURL}" );
+        return $LayoutObject->Redirect( OP => "$Self->{UserRequestedURL}" );
     }
     else {
 

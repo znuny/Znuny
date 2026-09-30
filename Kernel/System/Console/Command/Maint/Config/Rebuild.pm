@@ -12,7 +12,7 @@ package Kernel::System::Console::Command::Maint::Config::Rebuild;
 use strict;
 use warnings;
 
-use parent qw(Kernel::System::Console::BaseCommand);
+use parent      qw(Kernel::System::Console::BaseCommand);
 use Time::HiRes qw(sleep);
 
 our @ObjectDependencies = (
@@ -24,7 +24,7 @@ our @ObjectDependencies = (
 sub Configure {
     my ( $Self, %Param ) = @_;
 
-    $Self->Description('Rebuild the system configuration of OTRS.');
+    $Self->Description('Rebuild the system configuration of Znuny.');
 
     $Self->AddOption(
         Name        => 'cleanup',
@@ -58,7 +58,7 @@ sub PreRun {
     my $ShowMessage   = 1;
 
     # Make sure that only one rebuild config command is running at the same time. Wait up to 2 minutes
-    #    until other instances are done (see https://bugs.otrs.org/show_bug.cgi?id=14259).
+    # until other instances are done
     PID:
     while ( $WaitedSeconds <= $Time ) {
         my %PID = $PIDObject->PIDGet(

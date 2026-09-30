@@ -143,6 +143,12 @@ sub ArticleRender {
         ResultType => 'plain',
     );
 
+    # The unshortened plaintext article content is needed for the plaintext view of the full body.
+    my $UnshortenedArticleContent = $LayoutObject->ArticlePreview(
+        %Param,
+        ResultType => 'plain',
+    );
+
     if ( !$ShowHTML ) {
 
         # html quoting
@@ -150,6 +156,15 @@ sub ArticleRender {
             NewLine        => $ConfigObject->Get('DefaultViewNewLine'),
             Text           => $ArticleContent,
             VMax           => $ConfigObject->Get('DefaultViewLines') || 5000,
+            HTMLResultMode => 1,
+            LinkFeature    => 1,
+        );
+
+        $UnshortenedArticleContent = $LayoutObject->Ascii2Html(
+            NewLine => $ConfigObject->Get('DefaultViewNewLine'),
+            Text    => $UnshortenedArticleContent,
+
+            #             VMax           => $ConfigObject->Get('DefaultViewLines') || 5000,
             HTMLResultMode => 1,
             LinkFeature    => 1,
         );
@@ -168,6 +183,20 @@ sub ArticleRender {
     );
 
     my $SafeArticleContent = $SafeArticleContent{String} // '';
+
+    my %SafeUnshortenedArticleContent = $HTMLUtilsObject->Safety(
+        String       => $UnshortenedArticleContent,
+        NoApplet     => 1,
+        NoObject     => 1,
+        NoEmbed      => 1,
+        NoSVG        => 1,
+        NoImg        => 0,
+        NoIntSrcLoad => 0,
+        NoExtSrcLoad => 1,
+        NoJavaScript => 1,
+    );
+
+    my $SafeUnshortenedArticleContent = $SafeUnshortenedArticleContent{String} // '';
 
     my %CommunicationChannel = $Kernel::OM->Get('Kernel::System::CommunicationChannel')->ChannelGet(
         ChannelID => $Article{CommunicationChannelID},
@@ -206,6 +235,7 @@ sub ArticleRender {
             Attachments          => \@ArticleAttachments,
             MenuItems            => $Param{ArticleActions},
             Body                 => $SafeArticleContent,
+            UnshortenedBody      => $SafeUnshortenedArticleContent,
             HTML                 => $ShowHTML,
             CommunicationChannel => $CommunicationChannel{DisplayName},
             ChannelIcon          => $CommunicationChannel{DisplayIcon},

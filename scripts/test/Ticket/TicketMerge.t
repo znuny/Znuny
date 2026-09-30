@@ -452,7 +452,6 @@ $Self->Is(
 );
 
 # Linking objects and linking tickets.
-# See bug#12994 (https://bugs.otrs.org/show_bug.cgi?id=12994).
 my $RandomID = $HelperObject->GetRandomID();
 
 undef @TicketIDs;

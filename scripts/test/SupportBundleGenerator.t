@@ -22,7 +22,7 @@ use Kernel::System::VariableCheck qw(:all);
 #   See https://rt.perl.org/Public/Bug/Display.html?id=52610 and
 #   http://rt.perl.org/rt3/Public/Bug/Display.html?id=78186
 
-no warnings 'redefine';    ## no critic
+no warnings 'redefine';                ## no critic
 use Carp;
 local *Carp::caller_info = sub { };    ## no critic # no-op
 use warnings 'redefine';
@@ -145,7 +145,7 @@ my $TestPackage = '<?xml version="1.0" encoding="utf-8" ?>
   <Name>Test - ' . $RandomNumber . '</Name>
   <Version>0.0.1</Version>
   <Vendor>Znuny GmbH</Vendor>
-  <URL>https://otrs.com/</URL>
+  <URL>https://znuny.com/</URL>
   <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
   <ChangeLog>2005-11-10 New package (some test &lt; &gt; &amp;).</ChangeLog>
   <Description Lang="en">A test package (some test &lt; &gt; &amp;).</Description>

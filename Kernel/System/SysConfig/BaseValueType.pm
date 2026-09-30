@@ -47,6 +47,7 @@ Check if provided EffectiveValue matches structure defined in XMLContentParsed.
     );
 
 Result:
+
     $Result = (
         EffectiveValue => 'open',    # Note for common ValueTypes EffectiveValue is not changed.
         Success => 1,
@@ -431,6 +432,7 @@ Returns attribute name in the parsed XML that contains Value.
     my $Result = $ValueTypeObject->ValueAttributeGet();
 
 Result:
+
     $Result = 'Content';
 
 =cut

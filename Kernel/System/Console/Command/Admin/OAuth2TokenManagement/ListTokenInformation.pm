@@ -11,6 +11,8 @@ package Kernel::System::Console::Command::Admin::OAuth2TokenManagement::ListToke
 use strict;
 use warnings;
 
+use utf8;
+
 use parent qw(Kernel::System::Console::BaseCommand);
 
 our @ObjectDependencies = (
@@ -64,6 +66,9 @@ sub Run {
             $Self->Print("\tNo token record found for this token config.\n\n");
             next TOKENCONFIG;
         }
+
+        my $AuthFlow = $TokenConfig->{Config}->{AuthFlow} // 'AuthorizationCode';
+        $Self->Print("\tAuth flow: $AuthFlow\n");
 
         $Self->Print("\tToken information:\n");
         for my $Field ( sort keys %Token ) {

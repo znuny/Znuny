@@ -19,7 +19,7 @@ use Data::Dumper;
 use File::stat;
 use Unicode::Normalize;
 use List::Util qw();
-use Fcntl qw(:flock);
+use Fcntl      qw(:flock);
 use Encode;
 use Math::Random::Secure qw();
 
@@ -848,7 +848,7 @@ sub Dump {
     }
 
     # fallback if Storable can not be loaded
-    return Data::Dumper::Dumper($Data);                      ## no critic
+    return Data::Dumper::Dumper($Data);    ## no critic
 
 }
 
@@ -1076,6 +1076,20 @@ sub GenerateRandomString {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
+=head2 _Dump()
+
+dump a variable
+
+    my $Dump = $MainObject->_Dump(
+        $Data,
+    );
+
+Returns the dumped variable.
+
 =cut
 
 sub _Dump {
@@ -1160,8 +1174,6 @@ sub _Dump {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

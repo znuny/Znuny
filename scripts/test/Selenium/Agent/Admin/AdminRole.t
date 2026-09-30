@@ -136,7 +136,7 @@ $Selenium->RunTest(
         # Check is there notification 'Role added!' after role is added.
         my $Notification = $LanguageObject->Translate('Role added!');
         $Self->True(
-            $Selenium->execute_script("return \$('.MessageBox.Notice p:contains($Notification)').length"),
+            $Selenium->execute_script("return \$('.messageNotice .alertContent:contains($Notification)').length"),
             "$Notification - notification is found."
         );
 
@@ -189,7 +189,7 @@ $Selenium->RunTest(
         # Check is there notification 'Role updated!' after role is updated.
         $Notification = $LanguageObject->Translate('Role updated!');
         $Self->True(
-            $Selenium->execute_script("return \$('.MessageBox.Notice p:contains($Notification)').length"),
+            $Selenium->execute_script("return \$('.messageNotice .alertContent:contains($Notification)').length"),
             "$Notification - notification is found."
         );
 

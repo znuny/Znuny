@@ -66,6 +66,7 @@ Check if provided EffectiveValue matches structure defined in XMLContentParsed.
     );
 
 Result:
+
     %Result = (
         EffectiveValue => 'open',    # Note for Checkbox ValueTypes EffectiveValue is not changed.
         Success => 1,

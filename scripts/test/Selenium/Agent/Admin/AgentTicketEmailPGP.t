@@ -73,7 +73,15 @@ $Selenium->RunTest(
                 . "/scripts/test/sample/Crypt/PGPPrivateKey-$Key.asc";
             my $LocalFile = $Selenium->upload_file($Location);
             $Selenium->find_element( "#FileUpload", 'css' )->send_keys($LocalFile);
-            $Selenium->find_element("//button[\@type='submit']")->VerifiedClick();
+
+            # Use click() and explicit WaitFor: PGP key add can be slow, and VerifiedClick's
+            # fixed 20s wait for PageLoadComplete may time out in CI/Docker.
+            $Selenium->find_element("//button[\@type='submit']")->click();
+            $Selenium->WaitFor(
+                JavaScript =>
+                    "return typeof(\$) === 'function' && \$('a[href*=\"Action=AdminPGP;Subaction=Add\"]').length > 0;",
+                Time => 60,
+            );
         }
 
         # Add system address.

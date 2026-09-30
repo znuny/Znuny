@@ -23,6 +23,7 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Cache',
     'Kernel::System::Encode',
+    'Kernel::System::Util',
 );
 
 our $SuppressANSI = 0;
@@ -86,9 +87,10 @@ sub new {
             Description => 'Suppress informative output, only retain error messages.',
         },
         {
-            Name => 'allow-root',
+            Name        => 'allow-root',
             Description =>
-                'Allow root user to execute the command. This might damage your system; use at your own risk.',
+                'Allow a user other than the application user to execute the command. This might damage your system; '
+                . 'use at your own risk.',
             Invisible => 1,    # hide from usage screen
         },
     ];
@@ -387,12 +389,21 @@ sub Execute {
 
     my $ParsedGlobalOptions = $Self->_ParseGlobalOptions( \@CommandlineArguments );
 
-    # Don't allow to run these scripts as root.
-    if ( !$ParsedGlobalOptions->{'allow-root'} && $> == 0 ) {    # $EFFECTIVE_USER_ID
+    # Don't allow to run these scripts as another user than the application user.
+    my $ApplicationUser = $Kernel::OM->Get('Kernel::System::Util')->ApplicationUserGet();
+    my $CurrentUser     = getpwuid($>) || $>;                                               ## no critic
+    if (
+        !$ParsedGlobalOptions->{'allow-root'}
+        && $CurrentUser ne $ApplicationUser
+        )
+    {
+
         $Self->PrintError(
-            "You cannot run znuny.Console.pl as root. Please run it as the 'znuny' user or with the help of su:"
+            "You cannot run znuny.Console.pl as user $CurrentUser. Please run it as user $ApplicationUser or with the help of su:"
         );
-        $Self->Print("  <yellow>su -c \"bin/znuny.Console.pl MyCommand\" -s /bin/bash otrs</yellow>\n");
+        $Self->Print(
+            qq{  <yellow>su -c "bin/znuny.Console.pl MyCommand" -s /bin/bash $ApplicationUser</yellow>\n}
+        );
         return $Self->ExitCodeError();
     }
 
@@ -539,7 +550,7 @@ sub GetUsageHelp {
         if ( !$Option->{Required} ) {
             $OptionShort = "[$OptionShort]";
         }
-        $UsageText   .= " $OptionShort";
+        $UsageText .= " $OptionShort";
         $OptionsText .= sprintf " <green>%-30s</green> - %s", $OptionShort, $Option->{Description} . "\n";
     }
 
@@ -558,7 +569,7 @@ sub GetUsageHelp {
         if ( !$Argument->{Required} ) {
             $ArgumentShort = "[$ArgumentShort]";
         }
-        $UsageText     .= " $ArgumentShort";
+        $UsageText .= " $ArgumentShort";
         $ArgumentsText .= sprintf " <green>%-30s</green> - %s", $ArgumentShort,
             $Argument->{Description} . "\n";
     }
@@ -859,6 +870,10 @@ sub TableOutput {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _ParseGlobalOptions()
 
 parses any global options possibly provided by the user.
@@ -1050,8 +1065,6 @@ sub _ReplaceColorTags {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

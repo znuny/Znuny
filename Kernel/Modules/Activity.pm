@@ -11,9 +11,12 @@ package Kernel::Modules::Activity;
 use strict;
 use warnings;
 
+use utf8;
+
 use Kernel::Language qw(Translatable);
 
 our @ObjectDependencies = (
+    'Kernel::Config',
     'Kernel::Output::HTML::Layout',
     'Kernel::System::Activity',
     'Kernel::System::JSON',
@@ -32,6 +35,7 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
+    my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
     my $JSONObject     = $Kernel::OM->Get('Kernel::System::JSON');
     my $LayoutObject   = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ActivityObject = $Kernel::OM->Get('Kernel::System::Activity');
@@ -99,6 +103,34 @@ sub Run {
             $Data{Success} = 0 if !$Success;
         }
     }
+    elsif ( $GetParams{Subaction} eq 'Load' ) {
+        my $ActivityConfig    = $ConfigObject->Get('Activity')       // {};
+        my $MaxKeepActivities = $ActivityConfig->{MaxKeepActivities} // 50;
+        my $LinkTarget        = $ConfigObject->Get('PreferencesGroups')->{ActivityLinkTarget}->{DataSelected}
+            // '_self';
+
+        my @Activities = $ActivityObject->ListGet(
+            UserID => $Self->{UserID},
+        );
+        my $RemoveRecords = @Activities - $MaxKeepActivities;
+        splice( @Activities, -$RemoveRecords, $RemoveRecords ) if $RemoveRecords > 0;
+
+        for my $Activity (@Activities) {
+            $LayoutObject->Block(
+                Name => 'ActivityList',
+                Data => {
+                    %{$Activity},
+                    LinkTarget => $LinkTarget,
+                },
+            );
+        }
+
+        $Data{HTML} = $LayoutObject->Output(
+            TemplateFile => 'HeaderActivity',
+        );
+
+        $Data{Success} = 1;
+    }
 
     my $JSONEncodedData = $JSONObject->Encode(
         Data => \%Data,
@@ -111,21 +143,6 @@ sub Run {
         NoCache     => 1,
     );
 }
-
-=head2 _GetParams()
-
-Gets the params of an admin interface submit.
-
-    my %GetParams = $Self->_GetParams();
-
-Returns:
-
-    my %GetParams = (
-        String => 1,
-        ...
-    );
-
-=cut
 
 sub _GetParams {
     my ( $Self, %Param ) = @_;

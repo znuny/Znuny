@@ -52,6 +52,7 @@ BODY
 
 \$ArticleID = \$HelperObject->ArticleCreate(
     TicketID             => \$TicketID,
+    ChannelName          => '$Article{CommunicationChannel}',
     Subject              => '$Article{Subject}',
     Body                 => \$TempValue,
     IsVisibleForCustomer => '$Article{IsVisibleForCustomer}',

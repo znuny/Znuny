@@ -44,6 +44,8 @@ Core.Agent.Admin = (function (TargetNS) {
 
         Core.UI.Table.InitTableFilter($('#Filter'), $('.Filterable'), undefined, true);
         $('#Filter').focus();
+
+        TargetNS.InitDialogQuickDeploy();
     };
 
         /**
@@ -111,7 +113,7 @@ Core.Agent.Admin = (function (TargetNS) {
                 });
 
                 FavouriteRows.sort(function (a, b) {
-                  return a.localeCompare(b);
+                    return a.localeCompare(b);
                 });
 
                 RowIndex = FavouriteRows.indexOf(ModuleName);
@@ -170,6 +172,92 @@ Core.Agent.Admin = (function (TargetNS) {
         $('#ValidFilter').on('click', function() {
             $('.Invalid').toggle();
             $('#ValidFilter').parent().toggleClass("ValidFilterActive");
+        });
+    }
+
+    /**
+    * @public
+    * @name InitDialogQuickDeploy
+    * @memberof Core.Agent.Admin
+    * @function
+    * @description
+    *      Register click handling for the quick deploy notification/button.
+    */
+    TargetNS.InitDialogQuickDeploy = function () {
+        $(document).off('click.QuickDeploy', '#QuickDeploy').on('click.QuickDeploy', '#QuickDeploy', function() {
+
+            var URL = Core.Config.Get('Baselink') + 'Action=AdminSystemConfigurationDeployment;Subaction=AJAXDeployment',
+                Data = {
+                    DeploymentMode: 'QuickDeploy'
+                },
+                DialogTemplate = Core.Template.Render('SysConfig/DialogQuickDeploy'),
+                $DialogObj = $(DialogTemplate),
+                $DialogContentObj,
+                $DialogFooterObj;
+
+            Core.UI.Dialog.ShowContentDialog($DialogObj, Core.Language.Translate('Quick Deploy'), '35%', 'Center', true);
+
+            $DialogContentObj = $('#DialogQuickDeploy');
+            $DialogFooterObj = $DialogContentObj.next('.ContentFooter');
+
+            $DialogFooterObj.find('.ButtonsFinish').hide();
+
+            // close dialog on "cancel" button click
+            $('.ContentFooter #Cancel').on('click', function () {
+                Core.UI.Dialog.CloseDialog($('.Dialog:visible'));
+            });
+
+            $DialogContentObj.addClass('Deploying').find('.Overlay').fadeIn();
+            $DialogContentObj.find('.Overlay i.Active').fadeIn();
+
+            Core.AJAX.FunctionCall(
+                URL,
+                Data,
+                function(Response) {
+
+                    // success
+                    if (Response && Response.Result && Response.Result.Success == 1) {
+
+                        $DialogContentObj.find('.Overlay i.Active').hide();
+                        $DialogContentObj.find('.Overlay i.Success').fadeIn();
+                        $DialogContentObj.find('em').text(
+                            Core.Language.Translate("Deployment successful. You're being redirected...")
+                        );
+
+                        window.setTimeout(function() {
+
+                            if (!Response.RedirectURL) {
+                                Core.App.InternalRedirect({
+                                    'Action' : 'AdminSystemConfiguration'
+                                });
+                            }
+                            else {
+                                window.location.href = Core.Config.Get('Baselink') + Response.RedirectURL;
+                            }
+                        }, 1000);
+                    }
+                    // error
+                    else {
+
+                        $DialogFooterObj.removeClass('Hidden');
+                        $DialogFooterObj.find('.ButtonsFinish').show();
+                        $DialogContentObj.find('.Overlay i.Active').hide();
+                        $DialogContentObj.find('.Overlay i.Error').fadeIn();
+
+                        $DialogContentObj.find('em').text(
+                            Core.Language.Translate('There was an error. Please save all settings you are editing and check the logs for more information.')
+                        );
+                    }
+
+                    if (Response && Response.Result && Response.Result.Error !== undefined) {
+                        $DialogContentObj.find('em').after(
+                            Response.Result.Error
+                        );
+                    }
+                }
+            );
+
+            return false;
         });
     }
 

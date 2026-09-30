@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Mail::Address;
 
 our $ObjectManagerDisabled = 1;
@@ -113,25 +113,37 @@ sub Run {
                 UserID   => $Self->{UserID}
             );
 
-            # Set new owner if ticket owner is different then logged user.
-            if ( $Lock && ( $Ticket{OwnerID} != $Self->{UserID} ) ) {
+            if ($Lock) {
 
-                # Remember previous owner, which will be used to restore ticket owner on undo action.
-                $Ticket{PreviousOwner} = $Ticket{OwnerID};
+                # Set new owner if ticket owner is different then logged user.
+                if ( $Ticket{OwnerID} != $Self->{UserID} ) {
 
-                my $Success = $TicketObject->TicketOwnerSet(
-                    TicketID  => $Self->{TicketID},
-                    UserID    => $Self->{UserID},
-                    NewUserID => $Self->{UserID},
-                );
+                    # Remember previous owner, which will be used to restore ticket owner on undo action.
+                    $Param{PreviousOwner} = $Ticket{OwnerID};
+
+                    $TicketObject->TicketOwnerSet(
+                        TicketID  => $Self->{TicketID},
+                        UserID    => $Self->{UserID},
+                        NewUserID => $Self->{UserID},
+                    );
+                }
 
                 # Show lock state.
-                if ( !$Success ) {
-                    return $LayoutObject->FatalError();
-                }
+                $LayoutObject->Block(
+                    Name => 'PropertiesLock',
+                    Data => {
+                        %Param,
+                        TicketID => $Self->{TicketID},
+                    },
+                );
+                $LayoutObject->Block(
+                    Name => 'PropertiesLockNotify',
+                    Data => {
+                        %Param,
+                        TicketID => $Self->{TicketID},
+                    },
+                );
             }
-
-            $TicketBackType .= 'Undo';
         }
         else {
             my $AccessOk = $TicketObject->OwnerCheck(
@@ -151,9 +163,28 @@ sub Run {
                 $Output .= $LayoutObject->Footer(
                     Type => 'Small',
                 );
+
                 return $Output;
             }
+            else {
+                $LayoutObject->Block(
+                    Name => 'TicketBack',
+                    Data => {
+                        %Param,
+                        TicketID => $Self->{TicketID},
+                    },
+                );
+            }
         }
+    }
+    else {
+        $LayoutObject->Block(
+            Name => 'TicketBack',
+            Data => {
+                %Param,
+                TicketID => $Self->{TicketID},
+            },
+        );
     }
 
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
@@ -169,6 +200,20 @@ sub Run {
     if ( !$GetParam{ArticleID} ) {
         return $LayoutObject->ErrorScreen(
             Message => Translatable('No ArticleID is given!'),
+            Comment => Translatable('Please contact the administrator.'),
+        );
+    }
+
+    #
+    # Check if resend is possible/allowed (also see Kernel::Output::HTML::ArticleAction::AgentTicketEmailResend).
+    #
+    my $ResendPossible = $Self->_IsResendPossible(
+        TicketID  => $Self->{TicketID},
+        ArticleID => $GetParam{ArticleID},
+    );
+    if ( !$ResendPossible ) {
+        return $LayoutObject->ErrorScreen(
+            Message => Translatable('Resend is not possible for this article!'),
             Comment => Translatable('Please contact the administrator.'),
         );
     }
@@ -552,7 +597,6 @@ sub Run {
                 MultipleCustomerBcc => \@MultipleCustomerBcc,
                 Attachments         => \@Attachments,
                 GetParam            => \%GetParam,
-                TicketBackType      => $TicketBackType,
                 %Ticket,
                 %GetParam,
             );
@@ -898,7 +942,6 @@ sub Run {
             GetParam            => \%GetParam,
             %Ticket,
             %Data,
-            TicketBackType => $TicketBackType,
         );
         $Output .= $LayoutObject->Footer(
             Type => 'Small',
@@ -1165,13 +1208,6 @@ sub _Mask {
         $Param{To} = '';
     }
 
-    $LayoutObject->Block(
-        Name => $Param{TicketBackType},
-        Data => {
-            %Param,
-        },
-    );
-
     # Show time accounting box.
     if ( $ConfigObject->Get('Ticket::Frontend::AccountTime') ) {
         $Param{TimeUnitsBlock} = $LayoutObject->TimeUnits(
@@ -1205,6 +1241,8 @@ sub _Mask {
         );
     }
 
+    my $PreviewContentTypes = $ConfigObject->Get('Attachment')->{PreviewContentTypes} || {};
+
     # Show attachments.
     ATTACHMENT:
     for my $Attachment ( @{ $Param{Attachments} } ) {
@@ -1218,6 +1256,12 @@ sub _Mask {
             next ATTACHMENT;
         }
 
+        # Add preview flag if content type is in the preview content types list.
+        # This is used to determine if the attachment can be previewed in the UI.
+        if ( $Attachment->{ContentType} && $PreviewContentTypes->{ $Attachment->{ContentType} } ) {
+            $Attachment->{Preview} = 1;
+        }
+
         push @{ $Param{AttachmentList} }, $Attachment;
     }
 
@@ -1229,6 +1273,36 @@ sub _Mask {
             %Param,
         },
     );
+}
+
+sub _IsResendPossible {
+    my ( $Self, %Param ) = @_;
+
+    my $ArticleObject        = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+    my $ArticleBackendObject = $ArticleObject->BackendForChannel( ChannelName => 'Email' );
+
+    my %Article = $ArticleObject->ArticleGet(
+        TicketID  => $Param{TicketID},
+        ArticleID => $Param{ArticleID},
+    );
+    return if !%Article;
+
+    return if ( $Article{CommunicationChannel} // '' ) ne 'Email';
+
+    my $TransmissionStatus = $ArticleBackendObject->ArticleTransmissionStatus(
+        ArticleID => $Param{ArticleID},
+    );
+    return if !IsHashRefWithData($TransmissionStatus);
+
+    if (
+        $TransmissionStatus->{Status}
+        && $TransmissionStatus->{Status} ne 'Failed'
+        )
+    {
+        return;
+    }
+
+    return 1;
 }
 
 1;

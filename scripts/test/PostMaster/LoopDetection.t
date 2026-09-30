@@ -26,7 +26,7 @@ my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 # This test checks if OTRS correctly detects that an email must not be auto-responded to.
 my @Tests = (
     {
-        Name => 'Regular mail',
+        Name  => 'Regular mail',
         Email =>
             'From: test@home.com
 To: test@home.com
@@ -40,7 +40,7 @@ Body
         },
     },
     {
-        Name => 'Precedence',
+        Name  => 'Precedence',
         Email =>
             'From: test@home.com
 To: test@home.com
@@ -55,7 +55,7 @@ Body
         },
     },
     {
-        Name => 'X-Loop',
+        Name  => 'X-Loop',
         Email =>
             'From: test@home.com
 To: test@home.com
@@ -70,7 +70,7 @@ Body
         },
     },
     {
-        Name => 'X-No-Loop',
+        Name  => 'X-No-Loop',
         Email =>
             'From: test@home.com
 To: test@home.com
@@ -85,7 +85,7 @@ Body
         },
     },
     {
-        Name => 'X-OTRS-Loop',
+        Name  => 'X-OTRS-Loop',
         Email =>
             'From: test@home.com
 To: test@home.com
@@ -100,7 +100,7 @@ Body
         },
     },
     {
-        Name => 'Auto-submitted: auto-generated',
+        Name  => 'Auto-submitted: auto-generated',
         Email =>
             'From: test@home.com
 To: test@home.com
@@ -115,7 +115,7 @@ Body
         },
     },
     {
-        Name => 'Auto-Submitted: auto-replied',
+        Name  => 'Auto-Submitted: auto-replied',
         Email =>
             'From: test@home.com
 To: test@home.com
@@ -130,7 +130,7 @@ Body
         },
     },
     {
-        Name => 'Auto-submitted: no',
+        Name  => 'Auto-submitted: no',
         Email =>
             'From: test@home.com
 To: test@home.com

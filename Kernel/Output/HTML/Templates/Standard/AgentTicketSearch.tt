@@ -17,7 +17,20 @@
         <div class="top-section">
             <fieldset class="TableLike">
                 <legend><span>[% Translate("Templates") | html %]</span></legend>
-                <label for="SearchProfile">[% Translate("Search template") | html %]</label>
+                <div class="field-wrapper search-template-header">
+                    <label for="SearchProfile">[% Translate("Search template") | html %]</label>
+                    <div class="Field create-tpm-btn">
+                        <button id="SearchProfileNew" class="btn-main btn-ghost-sm" value="[% Translate("Create New") | html %]">
+                            <span>[% Translate("Create New") | html %]</span>
+                        </button>
+                        <button id="SearchProfileDelete" class="btn-main Hidden btn-ghost-sm" value="[% Translate("Delete") | html %]">
+                            <span>[% Translate("Delete") | html %]</span>
+                        </button>
+                        <button id="SearchProfileAsLink" class="btn-main Hidden btn-ghost-sm" value="[% Translate("Profile link") | html %]">
+                            <span>[% Translate("Profile link") | html %]</span>
+                        </button>
+                    </div>
+                </div>
                 <div class="Field">
                     [% Data.ProfilesStrg %]
                     <div id="SearchProfileAddBlock" class="new-tpl-input">
@@ -29,19 +42,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="Field create-tpm-btn">
-                    <button id="SearchProfileNew" class="btn-main btn-ghost-sm" value="[% Translate("Create New") | html %]">
-                        <span>[% Translate("Create New") | html %]</span>
-                    </button>
-                    <button id="SearchProfileDelete" class="btn-main Hidden btn-ghost-sm" value="[% Translate("Delete") | html %]">
-                        <span>[% Translate("Delete") | html %]</span>
-                    </button>
-                    <button id="SearchProfileAsLink" class="btn-main Hidden btn-ghost-sm" value="[% Translate("Profile link") | html %]">
-                        <span>[% Translate("Profile link") | html %]</span>
-                    </button>
-                </div>
 
-                <div class="search-tmp-opt-wrapper">
+                <div class="SaveProfileContainer">
                     <div class="align-item-left">
                         <input type="checkbox" name="SaveProfile" id="SaveProfile" value="1">
                     </div>

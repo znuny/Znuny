@@ -118,8 +118,7 @@ $Selenium->RunTest(
 
         # Wait until page has loaded, if necessary.
         $Selenium->WaitFor(
-            JavaScript =>
-                'return typeof($) === "function" && $(".WidgetSimple").length;'
+            JavaScript => 'return typeof($) === "function" && $("#AppWrapper").length;'
         );
 
         # Check page.
@@ -135,6 +134,7 @@ $Selenium->RunTest(
         # Check client side validation.
         $Selenium->find_element( "#Subject",  'css' )->send_keys('Test');
         $Selenium->find_element( "#RichText", 'css' )->send_keys('Test');
+
         $Selenium->InputFieldValueSet(
             Element => '#NewResponsibleID',
             Value   => '',
@@ -170,7 +170,7 @@ $Selenium->RunTest(
         # Wait until page has loaded, if necessary.
         $Selenium->WaitFor(
             JavaScript =>
-                'return typeof($) === "function" && $(".WidgetSimple").length && $("div.TicketZoom").length;'
+                'return typeof($) === "function" && $("#").length && $("div.TicketZoom").length;'
         );
 
         # Make sure the cache is correct.

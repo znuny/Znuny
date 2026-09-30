@@ -11,9 +11,10 @@ package Kernel::Modules::AgentTicketBounce;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Mail::Address;
 
 our $ObjectManagerDisabled = 1;
@@ -119,6 +120,13 @@ sub Run {
                 # Show lock state.
                 $LayoutObject->Block(
                     Name => 'PropertiesLock',
+                    Data => {
+                        %Param,
+                        TicketID => $Self->{TicketID},
+                    },
+                );
+                $LayoutObject->Block(
+                    Name => 'PropertiesLockNotify',
                     Data => {
                         %Param,
                         TicketID => $Self->{TicketID},
@@ -253,10 +261,10 @@ sub Run {
 
         # build InformationFormat
         if ( $LayoutObject->{BrowserRichText} ) {
-            $Param{InformationFormat} = "$Param{Salutation}<br/>
-<br/>
-$Param{BounceText}<br/>
-<br/>
+            $Param{InformationFormat} = "$Param{Salutation}
+<p></p>
+$Param{BounceText}
+<p></p>
 $Param{Signature}";
         }
         else {

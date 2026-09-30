@@ -6,6 +6,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## no critic (RequireExplicitPackage)
 
 use strict;
 use warnings;
@@ -20,6 +21,79 @@ my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->
 );
 
 my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my @Backends     = $CommandObject->_GetStorageBackends();
+
+my @InvalidTests = (
+    {
+        Name    => 'Mutex Created-Before',
+        Options => [qw( --tickets-created-before-date 2020-02-02 --tickets-created-min-days 22 )],
+        Error   => qr(are mutually exclusive),
+    },
+    {
+        Name    => 'Mutex Closed-Before',
+        Options => [qw( --tickets-closed-before-date 2020-02-02 --tickets-closed-min-days 22 )],
+        Error   => qr(are mutually exclusive),
+    },
+    {
+        Name    => 'Mutex Created-After',
+        Options => [qw( --tickets-created-after-date 2020-02-02 --tickets-created-max-days 22 )],
+        Error   => qr(are mutually exclusive),
+    },
+    {
+        Name    => 'Mutex Closed-After',
+        Options => [qw( --tickets-closed-after-date 2020-02-02 --tickets-closed-max-days 22 )],
+        Error   => qr(are mutually exclusive),
+    },
+    {
+        Name    => 'Invalid month',
+        Options => [qw( --tickets-closed-after-date 2020-13-01 )],
+        Error   => qr(Could not parse datetime),
+    },
+    {
+        Name    => 'Invalid day',
+        Options => [qw( --tickets-closed-after-date 2020-10-00 )],
+        Error   => qr(Could not parse datetime),
+    },
+    {
+        Name    => 'Invalid date order',
+        Options => [qw( --tickets-closed-after-date 2020-12-02 --tickets-closed-before-date 2020-12-01 )],
+        Error   => qr(This will not find anything),
+    },
+    {
+        Name    => 'Invalid day order',
+        Options => [qw( --tickets-closed-min-days 91 --tickets-closed-max-days 90 )],
+        Error   => qr(This will not find anything),
+    },
+);
+
+# Try to execute command without any options
+my $ExitCode = $CommandObject->Execute();
+$Self->Is(
+    $ExitCode,
+    1,
+    "Fails with no options",
+);
+
+for my $Test (@InvalidTests) {
+    my $Output;
+    local *STDOUT;
+    open STDOUT, '>:utf8', \$Output;    ## no critic
+
+    my $ExitCode = $CommandObject->Execute(
+        '--source', $Backends[0],
+        '--target', $Backends[1],
+        @{ $Test->{Options} },
+    );
+    $Self->Is(
+        $ExitCode,
+        1,
+        "StorageSwitch rejects options: @{ $Test->{Options} }",
+    );
+    $Self->True(
+        !!( $Output =~ $Test->{Error} ),
+        "Error message matches $Test->{Error}",
+    );
+}
 
 # Make sure ticket is created in ArticleStorageDB.
 $Kernel::OM->Get('Kernel::Config')->Set(
@@ -96,27 +170,21 @@ $Self->True(
     'ArticleCreate()',
 );
 
-for my $Backend (qw(FS DB)) {
-
-    # try to execute command without any options
-    my $ExitCode = $CommandObject->Execute();
-    $Self->Is(
-        $ExitCode,
-        1,
-        "$Backend No options",
-    );
+for my $BackendIndex ( 0 .. $#Backends ) {
+    my $SourceBackend = $Backends[$BackendIndex];
+    my $TargetBackend = $Backends[ $BackendIndex + 1 % $#Backends ];
 
     # provide options
     $ExitCode = $CommandObject->Execute(
-        '--target',
-        'ArticleStorage' . $Backend,
+        '--source', $SourceBackend,
+        '--target', $TargetBackend,
         '--tickets-closed-before-date',
         '2000-10-21 00:00:00'
     );
     $Self->Is(
         $ExitCode,
         0,
-        "$Backend with option: --target ArticleStorage$Backend --tickets-closed-before-date 2000-10-21 00:00:00",
+        "Option: --source $SourceBackend --target $TargetBackend --tickets-closed-before-date 2000-10-21 00:00:00",
     );
 }
 

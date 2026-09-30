@@ -1,0 +1,28 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+<div class="mod modSidebarWidget">
+    <div class="inner">
+        <div class="sidebarWidgetTitle">
+            <h3 title="[% Translate(Data.WidgetConfig.Description) | html %]">
+                [% Translate(Data.WidgetConfig.Title) | html %]
+            </h3>
+        </div>
+        <div class="sidebarWidgetContent">
+            <div class="mod modAction">
+                <div class="inner">
+                    <div id="Action" class="WidgetSimple">
+                        <div class="Content">
+                            [% Data.Description  %]
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

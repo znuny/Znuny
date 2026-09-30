@@ -8,17 +8,18 @@
 # --
 
 [% RenderBlockStart("LinkTableSimple") %]
-    <div class="WidgetSimple LinkTable DontPrint">
-        <div class="Header">
-            <div class="WidgetAction Toggle">
-                <a href="#" title="[% Translate("Show or hide the content") | html %]">
-                    <i class="fa fa-caret-down"></i>
-                </a>
+    <div class="mod modSidebarWidget">
+        <div class="inner">
+            <div class="sidebarWidgetTitle">
+                <h3>[% Translate("Linked Objects") | html %]</h3>
             </div>
-            <h2>[% Translate("Linked Objects") | html %]</h2>
-        </div>
-        <div class="Content">
-            [% Data.LinkTableStrg %]
+            <div class="sidebarWidgetContent">
+                <div class="mod modLinkedObjects">
+                    <div class="inner">
+                        [% Data.LinkTableStrg %]
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 [% RenderBlockEnd("LinkTableSimple") %]

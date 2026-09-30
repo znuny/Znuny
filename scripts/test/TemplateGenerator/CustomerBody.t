@@ -111,7 +111,7 @@ $Self->True(
 
 # subscribe to ticket create notification
 my $SetPreferences = $UserObject->SetPreferences(
-    Key => 'NotificationTransport',
+    Key   => 'NotificationTransport',
     Value =>
         '{"Notification-2-Email":0,"Notification-3-Email":0,"Notification-1-Email":"1","Notification-13-Email":0,"Notification-4-Email":0,"Notification-8-Email":"0"}',
     UserID => 1,

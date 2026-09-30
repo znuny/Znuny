@@ -72,6 +72,6 @@ use DateTime ();
 
 # Preload dependencies that are always used.
 use Template ();
-use Encode qw(:all);
+use Encode   qw(:all);
 
 1;

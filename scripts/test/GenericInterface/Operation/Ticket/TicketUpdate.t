@@ -161,7 +161,7 @@ my $TicketID1 = $TicketObject->TicketCreate(
     Priority     => '3 normal',
     State        => 'new',
     CustomerID   => $CustomerUserLogin,
-    CustomerUser => 'unittest@otrs.com',
+    CustomerUser => 'unittest@znuny.com',
     OwnerID      => 1,
     UserID       => 1,
 );
@@ -439,7 +439,7 @@ my @Tests = (
         ExpectedReturnLocalData => {
             Data => {
                 Error => {
-                    ErrorCode => 'TicketUpdate.AccessDenied',
+                    ErrorCode    => 'TicketUpdate.AccessDenied',
                     ErrorMessage =>
                         'TicketUpdate: User does not have access to the ticket!'
                 },
@@ -449,7 +449,7 @@ my @Tests = (
         ExpectedReturnRemoteData => {
             Data => {
                 Error => {
-                    ErrorCode => 'TicketUpdate.AccessDenied',
+                    ErrorCode    => 'TicketUpdate.AccessDenied',
                     ErrorMessage =>
                         'TicketUpdate: User does not have access to the ticket!'
                 },
@@ -503,7 +503,7 @@ my @Tests = (
         ExpectedReturnLocalData => {
             Data => {
                 Error => {
-                    ErrorCode => 'TicketUpdate.AccessDenied',
+                    ErrorCode    => 'TicketUpdate.AccessDenied',
                     ErrorMessage =>
                         'TicketUpdate: User does not have access to the ticket!'
                 },
@@ -513,7 +513,7 @@ my @Tests = (
         ExpectedReturnRemoteData => {
             Data => {
                 Error => {
-                    ErrorCode => 'TicketUpdate.AccessDenied',
+                    ErrorCode    => 'TicketUpdate.AccessDenied',
                     ErrorMessage =>
                         'TicketUpdate: User does not have access to the ticket!'
                 },
@@ -725,7 +725,7 @@ my @Tests = (
                 IsVisibleForCustomer => 1,
                 CommunicationChannel => 'Email',
                 SenderType           => 'agent',
-                From                 => 'enjoy@otrs.com',
+                From                 => 'enjoy@znuny.com',
                 Charset              => 'utf8',
                 MimeType             => 'text/plain',
                 HistoryType          => 'AddNote',
@@ -816,10 +816,10 @@ my @Tests = (
                 IsVisibleForCustomer => 1,
                 CommunicationChannel => 'Email',
                 SenderType           => 'agent',
-                From                 => 'enjoy@otrs.com',
-                To                   => 'someTo@otrs.com',
-                Cc                   => 'someCc@otrs.com',
-                Bcc                  => 'someBcc@otrs.com',
+                From                 => 'enjoy@znuny.com',
+                To                   => 'someTo@znuny.com',
+                Cc                   => 'someCc@znuny.com',
+                Bcc                  => 'someBcc@znuny.com',
                 Charset              => 'utf8',
                 MimeType             => 'text/plain',
                 HistoryType          => 'AddNote',
@@ -859,7 +859,7 @@ my @Tests = (
                 IsVisibleForCustomer => 1,
                 CommunicationChannel => 'Email',
                 SenderType           => 'agent',
-                From                 => 'enjoy@otrs.com',
+                From                 => 'enjoy@znuny.com',
                 Charset              => 'utf8',
                 MimeType             => 'text/plain',
                 HistoryType          => 'AddNote',
@@ -1297,7 +1297,7 @@ my $TicketIDNoOutOfOffice = $TicketObject->TicketCreate(
     Priority     => '3 normal',
     State        => 'new',
     CustomerID   => $CustomerUserLogin,
-    CustomerUser => 'unittest@otrs.com',
+    CustomerUser => 'unittest@znuny.com',
     OwnerID      => $UserIDNoOutOfOffice,
     UserID       => 1,
 );
@@ -1310,7 +1310,7 @@ my $TicketIDOutOfOffice = $TicketObject->TicketCreate(
     Priority     => '3 normal',
     State        => 'new',
     CustomerID   => $CustomerUserLogin,
-    CustomerUser => 'unittest@otrs.com',
+    CustomerUser => 'unittest@znuny.com',
     OwnerID      => $UserIDOutOfOffice,
     UserID       => 1,
 );

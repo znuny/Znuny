@@ -80,7 +80,7 @@ for my $CustomerUserLogin (@CustomerLogins) {
             $TicketID,
             "Ticket created for test - $CustomerUserLogin - $TicketID",
         );
-        push @TicketIDs, $TicketID;
+        push @TicketIDs,                                  $TicketID;
         push @{ $CustomerIDTickets{$CustomerUserLogin} }, $TicketID;
 
     }

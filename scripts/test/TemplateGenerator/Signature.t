@@ -83,13 +83,13 @@ my @Tests = (
         ExpectedResult => 'Test: - - - -',
     },
     {
-        Name => 'Test supported tags - <OTRS_TICKET_*> without TicketID',
+        Name      => 'Test supported tags - <OTRS_TICKET_*> without TicketID',
         Signature =>
             'Options of the ticket data (e. g. <OTRS_TICKET_TicketNumber>, <OTRS_TICKET_TicketID>, <OTRS_TICKET_State>)',
         ExpectedResult => 'Options of the ticket data (e. g. -, -, -)',
     },
     {
-        Name => 'Test supported tags - <OTRS_TICKET_*>  with TicketID',
+        Name      => 'Test supported tags - <OTRS_TICKET_*>  with TicketID',
         Signature =>
             'Options of the ticket data (e. g. <OTRS_TICKET_TicketNumber>, <OTRS_TICKET_TicketID>, <OTRS_TICKET_State>)',
     },
@@ -110,7 +110,7 @@ for my $Test (@Tests) {
     # add signature
     my $SignatureID = $SignatureObject->SignatureAdd(
         Name => $HelperObject->GetRandomID() . '-Signature',
-        ,
+
         Text        => $Test->{Signature},
         ContentType => 'text/plain; charset=iso-8859-1',
         Comment     => 'some comment',

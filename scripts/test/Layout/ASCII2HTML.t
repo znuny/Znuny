@@ -17,7 +17,7 @@ use vars (qw($Self));
 my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
 # check the function Ascii2Html
-my $TestString = << 'END_STRING';
+my $TestString = <<'END_STRING';
 Created:
 02/19/2008 12:17:03
 http://localhost/otrs-22-utf8/index.pl?Action=AgentTicketPhone
@@ -183,7 +183,7 @@ my @Tests = (
             ' <a href="http://example.com?some_long_url=yes&some_what_else=index+test.html" target="_blank" title="http://example.com?some_long_url=yes&some_what_else=index+test.html">http://example.com?some_long_url=yes&some_what_else=index+test.html</a> ',
     },
     {
-        Name => 'Ascii2Html() - #11',
+        Name   => 'Ascii2Html() - #11',
         String =>
             ' http://example.com?some_long_url=yes&some_what_else=0123456789.0123456789.0123456789.0123456789.0123456789.0123456789.0123456789.0123456789.index.html ',
         Result =>
@@ -263,7 +263,7 @@ my @Tests = (
         Result => ' ',
     },
     {
-        Name => 'Ascii2Html() - #26',
+        Name   => 'Ascii2Html() - #26',
         String =>
             '<script language="JavaScript" type="text/javascript"> alert("Not safe!"); </script>',
         Result =>

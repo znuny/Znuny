@@ -134,7 +134,7 @@ sub Run {
                         if ( !$Loaded ) {
                             $LogObject->Log(
                                 Priority => 'error',
-                                Message =>
+                                Message  =>
                                     "Could not load $ObjectClass, skipping condition checks for event $InvokerEvent->{Event}!",
                             );
                             next INVOKEREVENT;
@@ -239,7 +239,7 @@ sub Run {
                         my $WebServiceName = $WebserviceData->{Name} // 'N/A';
                         $LogObject->Log(
                             Priority => 'error',
-                            Message =>
+                            Message  =>
                                 "WebService $WebServiceName, Invoker $Invoker returned invalid execution time $ExecutionTime. Falling back to default!",
                         );
                     }
@@ -591,7 +591,7 @@ sub _ConditionCheck {
                 {
                     $LogObject->Log(
                         Priority => 'error',
-                        Message =>
+                        Message  =>
                             "Condition->$ConditionName->Fields->$FieldName Match must"
                             . " be a String if Type is set to String!",
                     );
@@ -750,7 +750,7 @@ sub _ConditionCheck {
                 if ( ref $ActualCondition->{Fields}->{$FieldName}->{Match} ne 'HASH' ) {
                     $LogObject->Log(
                         Priority => 'error',
-                        Message =>
+                        Message  =>
                             "Condition->$ConditionName->Fields->$FieldName Match must"
                             . " be a Hash!",
                     );
@@ -816,7 +816,7 @@ sub _ConditionCheck {
                 {
                     $LogObject->Log(
                         Priority => 'error',
-                        Message =>
+                        Message  =>
                             "Condition->$ConditionName->Fields->$FieldName Match must"
                             . " be a Regular expression if Type is set to Regexp!",
                     );

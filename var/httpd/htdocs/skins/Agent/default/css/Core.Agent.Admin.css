@@ -91,9 +91,12 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     top: 10px;
 }
 
-.ItemListGrid > li > a:hover > .Favourite,
-.ItemListGrid > li.IsFavourite > a > .Favourite {
+.ItemListGrid > li > a:hover > .Favourite {
     display: flex !important;
+}
+
+.ItemListGrid > li.IsFavourite > a > .Favourite {
+    display: none !important;
 }
 
 .ItemListGrid > li > a > .Favourite.Clicked .fa-star {

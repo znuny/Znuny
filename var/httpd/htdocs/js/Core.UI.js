@@ -8,8 +8,11 @@
 // --
 
 "use strict";
+/* global App */
 
-var Core = Core || {};
+var Core = Core || {},
+    Znuny = Znuny || {};
+    Znuny.App = Znuny.App || {};
 
 /**
  * @namespace Core.UI
@@ -405,6 +408,81 @@ Core.UI = (function (TargetNS) {
     };
 
     /**
+     * @name ShowNotificationTemplate
+     * @memberof Core.UI
+     * @function
+     * @param {Object} Data
+        * @param {String} Template  String that contains the template identifier used by Core.Template.Render to generate the notification HTML.
+        * @param {String} Type Error|Notice (default)
+        * @param {String} Link the (internal) URL to which the notification text should point
+        * @param {Function} Callback function which should be executed once the notification was hidden
+        * @param {String} ID The id for the newly created notification (default: no ID)
+        * @param {String} Icon Class of a fontawesome icon which will be added before the text (optional)
+     * @returns {Boolean} true or false depending on if the notification could be shown or not
+     * @description
+     *      Displays a notification on top of the page.
+     */
+    TargetNS.ShowNotificationTemplate = function (Data) {
+
+        var $NotificationObj,
+            ModuleID,
+            ParamCheckSuccess = Znuny.App.ParamCheck(Data, ['ID', 'Template', 'Icon']);
+
+        if (!Data.Template) {
+            return false;
+        }
+
+        if (!Data.Type) {
+            Data.Type = 'Notice';
+        }
+
+
+        if (!ParamCheckSuccess){
+            return false;
+        }
+
+        if (Data.ID && $('#' + Data.ID).length) {
+            return false;
+        }
+
+        // render the notification
+        $NotificationObj = $(
+            Core.Template.Render(Data.Template, {
+                Class: Data.Type,
+                Link: Data.Link,
+                ID: Data.ID,
+                Icon: Data.Icon,
+            })
+        );
+
+        // hide it initially
+        $NotificationObj.hide();
+
+        // if there are other notifications, append the new on the bottom
+        if ($('.MessageBox:visible').length) {
+            $NotificationObj.insertAfter('.MessageBox:visible:last');
+        }
+        // otherwise insert it on top
+        else {
+            $NotificationObj.insertAfter('#ToolBar');
+        }
+
+        // wire up modular alert handling
+        if (typeof App !== 'undefined' && typeof App.registerModule === 'function' && typeof App.start === 'function') {
+            ModuleID = App.registerModule($NotificationObj, 'Alert');
+            App.start(ModuleID);
+        }
+
+        // show it finally with animation and execute possible callbacks
+        $NotificationObj.slideDown(function() {
+            if ($.isFunction(Data.Callback)) {
+                Data.Callback();
+            }
+        });
+        return true;
+    };
+
+    /**
      * @name HideNotification
      * @memberof Core.UI
      * @function
@@ -522,6 +600,7 @@ Core.UI = (function (TargetNS) {
 
             var $ContainerObj = $DropObj.closest('.Field'),
                 $FileuploadFieldObj = $ContainerObj.find('.AjaxDnDUpload'),
+                FieldID = $FileuploadFieldObj.attr('id'),
                 FormID = $FileuploadFieldObj.data('form-id') ? $FileuploadFieldObj.data('form-id') : $DropObj.closest('form').find('input[name=FormID]').val(),
                 ChallengeToken = $DropObj.closest('form').find('input[name=ChallengeToken]').val(),
                 IsMultiple = ($FileuploadFieldObj.attr('multiple') == 'multiple'),
@@ -532,10 +611,10 @@ Core.UI = (function (TargetNS) {
                 FileTypes = $FileuploadFieldObj.data('file-types'),
                 Upload,
                 XHRObj,
-                FileTypeNotAllowed = [],
-                FileTypeNotAllowedText,
-                FilesTooBig = [],
-                FilesTooBigText,
+                FilenameTypeNotAllowed = [],
+                FilenameTypeNotAllowedText,
+                FilenamesTooBig = [],
+                FilenamesTooBigText,
                 FilenamesTooLong = [],
                 FilenamesTooLongText,
                 AttemptedToUploadAgain = [],
@@ -552,7 +631,7 @@ Core.UI = (function (TargetNS) {
                 return false;
             }
 
-            // If SessionUseCookie is disabled use Session cookie in AjaxAttachment. See bug#14432.
+            // If SessionUseCookie is disabled use Session cookie in AJAXAttachment. See bug#14432.
             if (Core.Config.Get('SessionUseCookie') === '0') {
                 if (CGIHandle.indexOf('index') > -1) {
                     SessionName =  Core.Config.Get('SessionName');
@@ -583,7 +662,10 @@ Core.UI = (function (TargetNS) {
             }
 
             if (MaxFiles && $FileuploadFieldObj.closest('.Field').find('.AttachmentList tbody tr').length >= MaxFiles) {
-                alert(Core.Language.Translate("Sorry, you can only upload %s files.", [ MaxFiles ]));
+                Core.UI.Dialog.ShowAlert(
+                    Core.Language.Translate('An Error Occurred'),
+                    Core.Language.Translate("Sorry, you can only upload %s files.", [ MaxFiles ])
+                );
                 return false;
             }
 
@@ -617,7 +699,7 @@ Core.UI = (function (TargetNS) {
                     FileExtension = File.name.slice((File.name.lastIndexOf(".") - 1 >>> 0) + 2),
                     AttachmentItem = Core.Template.Render('AjaxDnDUpload/AttachmentItemUploading', {
                         'Filename' : File.name,
-                        'Filetype' : File.type
+                        'Filetype' : File.type,
                     }),
                     FileExists;
 
@@ -632,13 +714,13 @@ Core.UI = (function (TargetNS) {
 
                 // check for allowed file types
                 if (typeof FileTypes === 'object' && FileTypes.indexOf(FileExtension) < 0) {
-                    FileTypeNotAllowed.push(File.name);
+                    FilenameTypeNotAllowed.push(File.name);
                     return true;
                 }
 
                 // check for max file size per file
                 if (MaxSizePerFile && File.size > MaxSizePerFile) {
-                    FilesTooBig.push(File.name);
+                    FilenamesTooBig.push(File.name);
                     return true;
                 }
 
@@ -669,7 +751,7 @@ Core.UI = (function (TargetNS) {
                 Upload.append('Files', File);
 
                 $.ajax({
-                    url: Core.Config.Get('CGIHandle') + '?Action=AjaxAttachment;Subaction=Upload;FormID=' + FormID + ';ChallengeToken=' + ChallengeToken + SessionToken,
+                    url: Core.Config.Get('CGIHandle') + '?Action=AJAXAttachment;Subaction=Upload;FormID=' + FormID + ';ChallengeToken=' + ChallengeToken + SessionToken,
                     type: 'post',
                     data: Upload,
                     xhr: function() {
@@ -711,7 +793,7 @@ Core.UI = (function (TargetNS) {
                                 $TargetObj;
 
                             // update the existing item if one exists
-                            if ($ExistingItemObj.length) {
+                            if ($ExistingItemObj && $ExistingItemObj.length) {
 
                                 $TargetObj = $ExistingItemObj.closest('tr');
 
@@ -719,33 +801,34 @@ Core.UI = (function (TargetNS) {
                                     return;
                                 }
 
-                                $TargetObj
-                                    .find('.Filetype')
-                                    .text(Attachment.ContentType)
-                                    .closest('tr')
-                                    .find('.Filesize')
-                                    .text(Attachment.HumanReadableDataSize)
-                                    .attr('data-file-size', Attachment.Filesize)
-                                    .next('td')
-                                    .find('a')
-                                    .removeClass('Hidden')
-                                    .data('file-id', Attachment.FileID);
+                                $TargetObj.find('.Filetype').text(Attachment.ContentType);
+                                $TargetObj.find('.Filesize').text(Attachment.HumanReadableDataSize).attr('data-file-size', Attachment.Filesize);
+                                $TargetObj.find('.Download').find('a').attr('href', Core.Config.Get('Baselink') + 'Action=AJAXAttachment;Subaction=Download;FileID=' + Attachment.FileID + ';FormID=' + FormID + ';ChallengeToken=' + ChallengeToken + SessionToken).attr('data-file-id', Attachment.FileID).removeClass('Hidden');
+                                $TargetObj.find('.Delete').find('a').attr('data-file-id', Attachment.FileID).removeClass('Hidden');
+
+                                if (Attachment.Preview) {
+                                    $TargetObj.find('.Preview').find('a').attr('data-file-id', Attachment.FileID).removeClass('Hidden');
+                                }
+
                             }
                             else {
 
                                 AttachmentItem = Core.Template.Render('AjaxDnDUpload/AttachmentItem', {
-                                    'Filename' : Attachment.Filename,
-                                    'Filetype' : Attachment.ContentType,
-                                    'Filesize' : Attachment.Filesize,
-                                    'FileID'   : Attachment.FileID,
+                                    'Filename'   : Attachment.Filename,
+                                    'Filetype'   : Attachment.ContentType,
+                                    'Filesize'   : Attachment.Filesize,
+                                    'FileID'     : Attachment.FileID,
+                                    'DownloadURL': Core.Config.Get('Baselink') + 'Action=AJAXAttachment;Subaction=Download;FileID=' + Attachment.FileID + ';FormID=' + FormID + ';ChallengeToken=' + ChallengeToken + SessionToken,
+                                    'Preview'    : Attachment.Preview,
                                 });
 
                                 $(AttachmentItem).prependTo($ContainerObj.find('.AttachmentList tbody')).fadeIn();
                             }
 
                             // Append input field for validation (see bug#13081).
-                            if (!$('#AttachmentExists').length) {
-                                $('.AttachmentListContainer').append('<input type="hidden" id="AttachmentExists" name="AttachmentExists" value="1" />');
+                            // Add the FieldID to the input field value to make it easier to identify the upload field, which gets a new file.
+                            if (!$ContainerObj.find('.AttachmentListContainer').find('#AttachmentExists').length) {
+                                $ContainerObj.find('.AttachmentListContainer').append('<input type="hidden" id="AttachmentExists" name="AttachmentExists" value="' + FieldID + '" />');
                             }
                         });
 
@@ -755,39 +838,42 @@ Core.UI = (function (TargetNS) {
                         $DropObj.removeClass('Uploading');
                     },
                     error: function() {
-                        // TODO: show an error tooltip?
                         $DropObj.removeClass('Uploading');
                     }
                 });
             });
 
-            if (FileTypeNotAllowed.length || FilesTooBig.length || FilenamesTooLong.length || NoSpaceLeft.length || AttemptedToUploadAgain.length) {
+            if (FilenameTypeNotAllowed.length || FilenamesTooBig.length || FilenamesTooLong.length || NoSpaceLeft.length || AttemptedToUploadAgain.length) {
 
                 // we need to empty the relevant file upload field because it would otherwise
                 // transfer the selected files again (only on click select, not on drag & drop)
                 $DropObj.prev('input[type=file]').val('');
                 $DropObj.removeClass('Uploading');
 
-                FileTypeNotAllowedText     = '';
-                FilesTooBigText            = '';
+                FilenameTypeNotAllowedText = '';
+                FilenamesTooBigText        = '';
                 FilenamesTooLongText       = '';
                 AttemptedToUploadAgainText = '';
                 NoSpaceLeftText            = '';
 
-                if (FileTypeNotAllowed.length) {
-                    FileTypeNotAllowedText =
+                if (FilenameTypeNotAllowed.length) {
+                    FilenameTypeNotAllowedText =
                         Core.Language.Translate(
                             'The following files are not allowed to be uploaded: %s',
-                            '<br>' + FileTypeNotAllowed.join(',<br>') + '<br><br>'
+                            '<br>' + FilenameTypeNotAllowed.join(',<br>') + '<br><br>'
+                        )
+                        + Core.Language.Translate(
+                            'The following files types are allowed: %s',
+                            '<br>' + FileTypes.join(', ') + '<br><br>'
                         );
                 }
 
-                if (FilesTooBig.length) {
-                    FilesTooBigText =
+                if (FilenamesTooBig.length) {
+                    FilenamesTooBigText =
                         Core.Language.Translate(
                             'The following files exceed the maximum allowed size per file of %s and were not uploaded: %s',
                             MaxSizePerFileHR,
-                            '<br>' + FilesTooBig.join(',<br>') + '<br><br>'
+                            '<br>' + FilenamesTooBig.join(',<br>') + '<br><br>'
                         );
                 }
 
@@ -821,7 +907,7 @@ Core.UI = (function (TargetNS) {
                             Core.App.HumanReadableDataSize(WebMaxFileUpload)
                         );
                 }
-                Core.UI.Dialog.ShowAlert(Core.Language.Translate('Upload information'), FileTypeNotAllowedText + FilesTooBigText + FilenamesTooLongText + AttemptedToUploadAgainText + NoSpaceLeftText);
+                Core.UI.Dialog.ShowAlert(Core.Language.Translate('Upload information'), FilenameTypeNotAllowedText + FilenamesTooBigText + FilenamesTooLongText + AttemptedToUploadAgainText + NoSpaceLeftText);
             }
         }
 
@@ -831,20 +917,70 @@ Core.UI = (function (TargetNS) {
             }
         });
 
-        // Attachment deletion
-        $('.AttachmentList').off('click').on('click', '.AttachmentDelete', function() {
-
+        // Attachment Preview
+        $(document).off('click.AttachmentPreview').on('click.AttachmentPreview', '.AttachmentPreview', function() {
             var $TriggerObj = $(this),
                 $AttachmentListContainerObj = $TriggerObj.closest('.AttachmentListContainer'),
-                $UploadFieldObj = $AttachmentListContainerObj.next('.AjaxDnDUpload'),
+                $UploadFieldObj = $AttachmentListContainerObj.nextAll('.AjaxDnDUpload'),
                 FormID = $UploadFieldObj.data('form-id') ? $UploadFieldObj.data('form-id') : $(this).closest('form').find('input[name=FormID]').val(),
                 Data = {
-                    Action: $(this).data('delete-action') ? $(this).data('delete-action') : 'AjaxAttachment',
+                    Action:    $(this).attr('data-preview-action') ? $(this).attr('data-preview-action') : 'AJAXAttachment',
+                    Subaction: 'Preview',
+                    FileID:    $(this).attr('data-file-id'),
+                    FormID:    FormID,
+                    ObjectID:  $(this).attr('data-object-id'),
+                    FieldID:   $(this).attr('data-field-id')
+                };
+
+            $TriggerObj.closest('.AttachmentListContainer').find('.Busy').fadeIn();
+
+            Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), Data, function (Response) {
+                var HTML;
+
+                $AttachmentListContainerObj.find('.Busy').fadeOut();
+
+                if (Response && Response.Message && Response.Message == 'Success') {
+                    HTML = Core.Template.Render('Attachment/Preview/' + Response.Attachment.Template, Response);
+
+                    Core.UI.Dialog.ShowDialog({
+                        Title:               Core.Language.Translate("Preview"),
+                        HTML:                HTML,
+                        Modal:               true,
+                        CloseOnClickOutside: true,
+                        CloseOnEscape:       true,
+                        AllowAutoGrow:       true,
+                        PositionTop:         '5%',
+                        PositionLeft:        'Center',
+                        ModalClass:          'modal-xl',
+                        Buttons:             []
+                    });
+
+                }
+                else {
+                    Core.UI.Dialog.ShowAlert(
+                        Core.Language.Translate('An Error Occurred'),
+                        Core.Language.Translate('An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator.')
+                    );
+                    $AttachmentListContainerObj.find('.Busy').hide();
+                }
+            });
+
+            return false;
+        });
+
+        // Attachment deletion
+        $('.AttachmentList').off('click').on('click', '.AttachmentDelete', function() {
+            var $TriggerObj = $(this),
+                $AttachmentListContainerObj = $TriggerObj.closest('.AttachmentListContainer'),
+                $UploadFieldObj = $AttachmentListContainerObj.nextAll('.AjaxDnDUpload'),
+                FormID = $UploadFieldObj.data('form-id') ? $UploadFieldObj.data('form-id') : $(this).closest('form').find('input[name=FormID]').val(),
+                Data = {
+                    Action:    $(this).attr('data-delete-action') ? $(this).attr('data-delete-action') : 'AJAXAttachment',
                     Subaction: 'Delete',
-                    FileID: $(this).data('file-id'),
-                    FormID: FormID,
-                    ObjectID: $(this).data('object-id'),
-                    FieldID: $(this).data('field-id'),
+                    FileID:    $(this).attr('data-file-id'),
+                    FormID:    FormID,
+                    ObjectID:  $(this).attr('data-object-id'),
+                    FieldID:   $(this).attr('data-field-id')
                 };
 
             $TriggerObj.closest('.AttachmentListContainer').find('.Busy').fadeIn();

@@ -145,7 +145,7 @@ sub SetContent {
         Head      => \@Header,
         Data      => \@Data,
         Separator => $ExportConfig->{Separator} || ';',
-        Quote     => $ExportConfig->{Quote} || '"',
+        Quote     => $ExportConfig->{Quote}     || '"',
         Format    => 'CSV',
     );
 

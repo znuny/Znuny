@@ -985,6 +985,19 @@ sub Bounce {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
+=head2 _EncodeMIMEWords()
+
+encode MIME words
+
+    my $EncodedWords = $Self->_EncodeMIMEWords(
+        Field => 'Subject',
+        Line  => 'Hello, World!',
+    );
+
 =cut
 
 sub _EncodeMIMEWords {
@@ -1049,14 +1062,71 @@ sub _CreateMimeEntity {
     }
 
     # Do some encodings.
-    ATTRIBUTE:
-    for my $Attribute (qw(From To Cc Subject)) {
-        next ATTRIBUTE if !$Header{$Attribute};
-        $Header{$Attribute} = $Self->_EncodeMIMEWords(
-            Field   => $Attribute,
-            Line    => $Header{$Attribute},
+    if ( IsStringWithData( $Header{Subject} ) ) {
+        $Header{Subject} = $Self->_EncodeMIMEWords(
+            Field   => 'Subject',
+            Line    => $Header{Subject},
             Charset => $Param{Charset},
         );
+    }
+
+# Encode phrase and address parts of email addresses separately to be able to
+# set phrase in quotes. This is needed for MSGraph because otherwise it throws an error
+# if the phrase contains "special characters", e.g. for address 'Ööüä Äöü <jp@znuny.com>':
+# 400 Bad Request, {
+#   "error": {
+#       "code":    "ErrorInvalidRecipients",
+#       "message": "At least one recipient is not valid., Recipient '\u00d6\u00f6\u00fc\u00e4 ' is not resolved. All recipients must be resolved before a message can be submitted."
+#   }
+# With adress changed to '"Ööüä Äöü" <jp@znuny.com>' it works.
+    ATTRIBUTE:
+    for my $Attribute (qw(From To Cc)) {
+        next ATTRIBUTE if !IsStringWithData( $Header{$Attribute} );
+
+        my @EmailAddressStrings;
+
+        EMAILADDRESSPARTS:
+        for my $EmailAddressParts ( Mail::Address->parse( $Header{$Attribute} ) ) {
+            my $Address = $EmailAddressParts->address();
+            next EMAILADDRESSPARTS if !IsStringWithData($Address);
+
+            my $EncodedAddress = $Self->_EncodeMIMEWords(
+                Field   => $Attribute,
+                Line    => $Address,
+                Charset => $Param{Charset},
+            );
+
+            # Remove any line breaks that might have been added
+            $EncodedAddress =~ s{(\r\n|\n\r|\r|\n)}{}g;
+
+            my $EmailAddressString = $EncodedAddress;
+
+            my $Phrase = $EmailAddressParts->phrase();
+            if ( IsStringWithData($Phrase) ) {
+                my $EncodedPhrase = $Self->_EncodeMIMEWords(
+                    Field   => $Attribute,
+                    Line    => $Phrase,
+                    Charset => $Param{Charset},
+                );
+
+                # Remove any line breaks that might have been added
+                $EncodedPhrase =~ s{(\r\n|\n\r|\r|\n)}{}g;
+
+                # Prepend/append double quote to phrase if missing.
+                if ( $EncodedPhrase !~ m{\A\s*"} ) {
+                    $EncodedPhrase = '"' . $EncodedPhrase;
+                }
+                if ( $EncodedPhrase !~ m{"\s*\z} ) {
+                    $EncodedPhrase .= '"';
+                }
+
+                $EmailAddressString = $EncodedPhrase . ' <' . $EncodedAddress . '>';
+            }
+
+            push @EmailAddressStrings, $EmailAddressString;
+        }
+
+        $Header{$Attribute} = join ', ', @EmailAddressStrings;
     }
 
     # Check if it's html, add text attachment.
@@ -1112,8 +1182,9 @@ sub _CreateMimeEntity {
     }
 
     # Check if we need to force the encoding.
-    if ( $ConfigObject->Get('SendmailEncodingForce') ) {
-        $Header{Encoding} = $ConfigObject->Get('SendmailEncodingForce');
+    my $SendmailEncodingForce = $ConfigObject->Get('SendmailEncodingForce');
+    if ($SendmailEncodingForce) {
+        $Header{Encoding} = $SendmailEncodingForce;
     }
 
     # Check and create message id.
@@ -1142,7 +1213,6 @@ sub _CreateMimeEntity {
     my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
 
     # build MIME::Entity, Data should be bytes, not utf-8
-    # see http://bugs.otrs.org/show_bug.cgi?id=9832
     $EncodeObject->EncodeOutput( \$Param{Body} );
     my $Entity = MIME::Entity->build( %Header, Data => $Param{Body} );
 
@@ -1235,6 +1305,18 @@ sub _CreateMimeEntity {
                 $ContentID = '<' . $ContentID . '>';
             }
 
+            # Graph has problems with text parts encoded as 'quoted-printable', so their encoding
+            # will be changed here to the one configured in config option SendmailEncodingForce (e.g. '8bit').
+            my $Encoding = $Upload->{Encoding};
+            if (
+                $SendmailEncodingForce
+                && defined $Upload->{ContentType}
+                && $Upload->{ContentType} =~ m{\Atext}i
+                )
+            {
+                $Encoding = $SendmailEncodingForce;
+            }
+
             # Attach file to email.
             $Entity->attach(
                 Filename    => $Filename,
@@ -1242,7 +1324,7 @@ sub _CreateMimeEntity {
                 Type        => $Upload->{ContentType},
                 Id          => $ContentID,
                 Disposition => $Upload->{Disposition} || 'inline',
-                Encoding    => $Upload->{Encoding} || '-SUGGEST',
+                Encoding    => $Encoding              || '-SUGGEST',
             );
         }
 
@@ -1302,8 +1384,6 @@ sub _CreateMimeEntity {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

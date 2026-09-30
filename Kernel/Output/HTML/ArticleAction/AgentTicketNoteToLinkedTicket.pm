@@ -19,6 +19,7 @@ our @ObjectDependencies = (
     'Kernel::Output::HTML::Layout',
     'Kernel::System::LinkObject',
     'Kernel::System::Log',
+    'Kernel::System::Ticket',
 );
 
 sub new {

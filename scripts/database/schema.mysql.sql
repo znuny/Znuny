@@ -84,7 +84,7 @@ CREATE TABLE valid (
 CREATE TABLE users (
     id INTEGER NOT NULL AUTO_INCREMENT,
     login VARCHAR (200) NOT NULL,
-    pw VARCHAR (128) NOT NULL,
+    pw VARCHAR (255) NOT NULL,
     title VARCHAR (50) NULL,
     first_name VARCHAR (100) NOT NULL,
     last_name VARCHAR (100) NOT NULL,
@@ -275,6 +275,31 @@ CREATE TABLE signature (
     change_by INTEGER NOT NULL,
     PRIMARY KEY(id),
     UNIQUE INDEX signature_name (name)
+);
+# ----------------------------------------------------------
+#  create table sendmail_config
+# ----------------------------------------------------------
+CREATE TABLE sendmail_config (
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    sendmail_module VARCHAR (255) NOT NULL,
+    cmd TEXT NULL,
+    host VARCHAR (255) NULL,
+    port SMALLINT NULL,
+    timeout SMALLINT NULL,
+    skip_ssl_verification SMALLINT NULL DEFAULT 0,
+    is_fallback_config SMALLINT NULL DEFAULT 0,
+    authentication_type VARCHAR (100) NULL,
+    auth_user VARCHAR (255) NULL,
+    auth_password VARCHAR (255) NULL,
+    oauth2_token_config_id INTEGER NULL,
+    email_addresses TEXT NULL,
+    comments VARCHAR (255) NULL,
+    valid_id SMALLINT NOT NULL,
+    create_time DATETIME NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time DATETIME NOT NULL,
+    change_by INTEGER NOT NULL,
+    PRIMARY KEY(id)
 );
 # ----------------------------------------------------------
 #  create table system_address
@@ -605,6 +630,38 @@ CREATE TABLE ticket_loop_protection (
     PRIMARY KEY(id),
     INDEX ticket_loop_protection_sent_date (sent_date),
     INDEX ticket_loop_protection_sent_to (sent_to)
+);
+# ----------------------------------------------------------
+#  create table translation
+# ----------------------------------------------------------
+CREATE TABLE translation (
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    dbcrud_uuid VARCHAR (36) NULL,
+    language_id VARCHAR (5) NOT NULL,
+    source_string TEXT NOT NULL,
+    destination_string TEXT NOT NULL,
+    valid_id SMALLINT NOT NULL DEFAULT 1,
+    create_time DATETIME NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time DATETIME NOT NULL,
+    change_by INTEGER NOT NULL,
+    deployment_state SMALLINT NOT NULL DEFAULT 0,
+    PRIMARY KEY(id),
+    UNIQUE INDEX translation_uuid (dbcrud_uuid)
+);
+# ----------------------------------------------------------
+#  create table article_color
+# ----------------------------------------------------------
+CREATE TABLE article_color (
+    id SMALLINT NOT NULL AUTO_INCREMENT,
+    name VARCHAR (200) NOT NULL,
+    color VARCHAR (25) NOT NULL,
+    create_time DATETIME NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time DATETIME NOT NULL,
+    change_by INTEGER NOT NULL,
+    PRIMARY KEY(id),
+    UNIQUE INDEX article_color_name (name)
 );
 # ----------------------------------------------------------
 #  create table article_sender_type
@@ -1005,7 +1062,7 @@ CREATE TABLE customer_user (
     login VARCHAR (200) NOT NULL,
     email VARCHAR (150) NOT NULL,
     customer_id VARCHAR (150) NOT NULL,
-    pw VARCHAR (128) NULL,
+    pw VARCHAR (255) NULL,
     title VARCHAR (50) NULL,
     first_name VARCHAR (100) NOT NULL,
     last_name VARCHAR (100) NOT NULL,
@@ -1077,7 +1134,7 @@ CREATE TABLE customer_user_customer (
 CREATE TABLE mail_account (
     id INTEGER NOT NULL AUTO_INCREMENT,
     login VARCHAR (200) NOT NULL,
-    pw VARCHAR (200) NOT NULL,
+    pw VARCHAR (255) NOT NULL,
     host VARCHAR (200) NOT NULL,
     account_type VARCHAR (20) NOT NULL,
     queue_id INTEGER NOT NULL,
@@ -1473,6 +1530,17 @@ CREATE TABLE pm_process (
     UNIQUE INDEX pm_process_entity_id (entity_id)
 );
 # ----------------------------------------------------------
+#  create table pm_process_preferences
+# ----------------------------------------------------------
+CREATE TABLE pm_process_preferences (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    process_entity_id VARCHAR (50) NOT NULL,
+    preferences_key VARCHAR (150) NOT NULL,
+    preferences_value TEXT NULL,
+    PRIMARY KEY(id),
+    INDEX pm_process_preferences_process_entity_id (process_entity_id)
+);
+# ----------------------------------------------------------
 #  create table pm_activity
 # ----------------------------------------------------------
 CREATE TABLE pm_activity (
@@ -1730,7 +1798,7 @@ CREATE TABLE calendar (
     group_id INTEGER NOT NULL,
     name VARCHAR (200) NOT NULL,
     salt_string VARCHAR (64) NOT NULL,
-    color VARCHAR (7) NOT NULL,
+    color VARCHAR (25) NOT NULL,
     ticket_appointments LONGBLOB NULL,
     valid_id SMALLINT NOT NULL,
     create_time DATETIME NOT NULL,

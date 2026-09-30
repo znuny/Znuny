@@ -97,7 +97,7 @@ sub new {
     return $Self if !eval "require IPC::SysV";    ## no critic
 
     # Setup IPC for shared access to the last log entries.
-    $Self->{IPCKey} = '444423' . $SystemID;       # This name is used to identify the shared memory segment.
+    $Self->{IPCKey}  = '444423' . $SystemID;      # This name is used to identify the shared memory segment.
     $Self->{IPCSize} = $ConfigObject->Get('LogSystemCacheSize') || 32 * 1024;
 
     # Create/access shared memory segment.
@@ -166,7 +166,7 @@ See for more info L<http://en.wikipedia.org/wiki/Syslog#Severity_levels>
 sub Log {
     my ( $Self, %Param ) = @_;
 
-    my $Priority    = lc $Param{Priority}  || 'debug';
+    my $Priority    = lc( $Param{Priority} // 'debug' );
     my $PriorityNum = $LogLevel{$Priority} || $LogLevel{debug};
 
     return 1 if $PriorityNum < $Self->{MinimumLevelNum};
@@ -259,7 +259,7 @@ sub Log {
     if ( lc $Priority ne 'debug' && $Self->{IPC} ) {
         $Priority = lc $Priority;
 
-        my $Data   = $LogTime . ";;$Priority;;$Self->{LogPrefix};;$Message\n";    ## no critic
+        my $Data   = $LogTime . ";;$Priority;;$Self->{LogPrefix};;$Subroutine2;;$Line1;;$Message\n";    ## no critic
         my $String = $Self->GetLog();
 
         # Fix for issue #286 (GitHub) / #328 (internal): Encode output.
@@ -272,6 +272,78 @@ sub Log {
     }
 
     return 1;
+}
+
+=head2 Error()
+
+Convenience function to log an error message.
+
+    $LogObject->Error("Something went wrong!");
+
+=cut
+
+sub Error {
+    my ( $Self, $Message ) = @_;
+
+    return $Self->Log(
+        Priority => 'error',
+        Message  => $Message,
+        Caller   => 1,
+    );
+}
+
+=head2 Notice()
+
+Convenience function to log a notice.
+
+    $LogObject->Notice("Heads up! SNAFU has happened!");
+
+=cut
+
+sub Notice {
+    my ( $Self, $Message ) = @_;
+
+    return $Self->Log(
+        Priority => 'notice',
+        Message  => $Message,
+        Caller   => 1,
+    );
+}
+
+=head2 Info()
+
+Convenience function to log an informational message.
+
+    $LogObject->Info("Oh by the way, this thing worked.");
+
+=cut
+
+sub Info {
+    my ( $Self, $Message ) = @_;
+
+    return $Self->Log(
+        Priority => 'info',
+        Message  => $Message,
+        Caller   => 1,
+    );
+}
+
+=head2 Debug()
+
+Convenience function to log a message at debug level.
+
+    $LogObject->Debug("You won't want to see this unless you're a developer.");
+
+=cut
+
+sub Debug {
+    my ( $Self, $Message ) = @_;
+
+    return $Self->Log(
+        Priority => 'debug',
+        Message  => $Message,
+        Caller   => 1,
+    );
 }
 
 =head2 GetLogEntry()

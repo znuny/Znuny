@@ -64,7 +64,7 @@ sub Run {
     if ( !$Success ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Unable to change dynamic field object mapping name from $Param{Data}->{OldCustomerID} to $Param{Data}->{CustomerID} for type CustomerCompany!",
         );
         return;

@@ -558,7 +558,7 @@
                                     </div>
 [% RenderBlockEnd("ValueRow") %]
                                     <div class="Field">
-                                        <a href="#" id="AddValue" class="CallForAction AddButton Inline btn-main btn-primary btn-width-xl">
+                                        <a href="#" id="AddValue" class="CallForAction AddButton Inline btn-main btn-primary btn-width-max">
                                             <span>
                                             [% IF Data.CommunicationType == 'Provider' %]
                                                 [% Translate("Add response header") | html %]

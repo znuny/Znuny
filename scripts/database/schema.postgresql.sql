@@ -85,7 +85,7 @@ CREATE TABLE valid (
 CREATE TABLE users (
     id serial NOT NULL,
     login VARCHAR (200) NOT NULL,
-    pw VARCHAR (128) NOT NULL,
+    pw VARCHAR (255) NOT NULL,
     title VARCHAR (50) NULL,
     first_name VARCHAR (100) NOT NULL,
     last_name VARCHAR (100) NOT NULL,
@@ -426,6 +426,31 @@ CREATE TABLE signature (
     change_by INTEGER NOT NULL,
     PRIMARY KEY(id),
     CONSTRAINT signature_name UNIQUE (name)
+);
+-- ----------------------------------------------------------
+--  create table sendmail_config
+-- ----------------------------------------------------------
+CREATE TABLE sendmail_config (
+    id serial NOT NULL,
+    sendmail_module VARCHAR (255) NOT NULL,
+    cmd VARCHAR (2000) NULL,
+    host VARCHAR (255) NULL,
+    port SMALLINT NULL,
+    timeout SMALLINT NULL,
+    skip_ssl_verification SMALLINT DEFAULT 0 NULL,
+    is_fallback_config SMALLINT DEFAULT 0 NULL,
+    authentication_type VARCHAR (100) NULL,
+    auth_user VARCHAR (255) NULL,
+    auth_password VARCHAR (255) NULL,
+    oauth2_token_config_id INTEGER NULL,
+    email_addresses VARCHAR (2000) NULL,
+    comments VARCHAR (255) NULL,
+    valid_id SMALLINT NOT NULL,
+    create_time timestamp(0) NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time timestamp(0) NOT NULL,
+    change_by INTEGER NOT NULL,
+    PRIMARY KEY(id)
 );
 -- ----------------------------------------------------------
 --  create table system_address
@@ -1168,6 +1193,38 @@ END IF;
 END$$;
 ;
 -- ----------------------------------------------------------
+--  create table translation
+-- ----------------------------------------------------------
+CREATE TABLE translation (
+    id serial NOT NULL,
+    dbcrud_uuid VARCHAR (36) NULL,
+    language_id VARCHAR (5) NOT NULL,
+    source_string VARCHAR (1000) NOT NULL,
+    destination_string VARCHAR (1000) NOT NULL,
+    valid_id SMALLINT DEFAULT 1 NOT NULL,
+    create_time timestamp(0) NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time timestamp(0) NOT NULL,
+    change_by INTEGER NOT NULL,
+    deployment_state SMALLINT DEFAULT 0 NOT NULL,
+    PRIMARY KEY(id),
+    CONSTRAINT translation_uuid UNIQUE (dbcrud_uuid)
+);
+-- ----------------------------------------------------------
+--  create table article_color
+-- ----------------------------------------------------------
+CREATE TABLE article_color (
+    id serial NOT NULL,
+    name VARCHAR (200) NOT NULL,
+    color VARCHAR (25) NOT NULL,
+    create_time timestamp(0) NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time timestamp(0) NOT NULL,
+    change_by INTEGER NOT NULL,
+    PRIMARY KEY(id),
+    CONSTRAINT article_color_name UNIQUE (name)
+);
+-- ----------------------------------------------------------
 --  create table article_sender_type
 -- ----------------------------------------------------------
 CREATE TABLE article_sender_type (
@@ -1796,7 +1853,7 @@ CREATE TABLE customer_user (
     login VARCHAR (200) NOT NULL,
     email VARCHAR (150) NOT NULL,
     customer_id VARCHAR (150) NOT NULL,
-    pw VARCHAR (128) NULL,
+    pw VARCHAR (255) NULL,
     title VARCHAR (50) NULL,
     first_name VARCHAR (100) NOT NULL,
     last_name VARCHAR (100) NOT NULL,
@@ -1898,7 +1955,7 @@ END$$;
 CREATE TABLE mail_account (
     id serial NOT NULL,
     login VARCHAR (200) NOT NULL,
-    pw VARCHAR (200) NOT NULL,
+    pw VARCHAR (255) NOT NULL,
     host VARCHAR (200) NOT NULL,
     account_type VARCHAR (20) NOT NULL,
     queue_id INTEGER NOT NULL,
@@ -2544,6 +2601,27 @@ CREATE TABLE pm_process (
     CONSTRAINT pm_process_entity_id UNIQUE (entity_id)
 );
 -- ----------------------------------------------------------
+--  create table pm_process_preferences
+-- ----------------------------------------------------------
+CREATE TABLE pm_process_preferences (
+    id bigserial NOT NULL,
+    process_entity_id VARCHAR (50) NOT NULL,
+    preferences_key VARCHAR (150) NOT NULL,
+    preferences_value VARCHAR (3000) NULL,
+    PRIMARY KEY(id)
+);
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_indexes
+    WHERE LOWER(indexname) = LOWER('pm_process_preferences_process_entity_id')
+    ) THEN
+    CREATE INDEX pm_process_preferences_process_entity_id ON pm_process_preferences (process_entity_id);
+END IF;
+END$$;
+;
+-- ----------------------------------------------------------
 --  create table pm_activity
 -- ----------------------------------------------------------
 CREATE TABLE pm_activity (
@@ -2871,7 +2949,7 @@ CREATE TABLE calendar (
     group_id INTEGER NOT NULL,
     name VARCHAR (200) NOT NULL,
     salt_string VARCHAR (64) NOT NULL,
-    color VARCHAR (7) NOT NULL,
+    color VARCHAR (25) NOT NULL,
     ticket_appointments TEXT NULL,
     valid_id SMALLINT NOT NULL,
     create_time timestamp(0) NOT NULL,

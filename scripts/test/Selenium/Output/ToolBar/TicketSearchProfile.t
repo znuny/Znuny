@@ -35,7 +35,7 @@ $Selenium->RunTest(
 
         $HelperObject->ConfigSettingChange(
             Valid => 1,
-            Key   => 'Frontend::ToolBarModule###11-Ticket::TicketSearchProfile',
+            Key   => 'Frontend::ToolBarModule###210-Ticket::TicketSearchProfile',
             Value => \%TicketSearchProfile
         );
 
@@ -65,6 +65,7 @@ $Selenium->RunTest(
             UserID        => 1,
             ResponsibleID => $TestUserID,
         );
+
         $Self->True(
             $TicketID,
             "Ticket is created - $TicketID"
@@ -82,7 +83,23 @@ $Selenium->RunTest(
 
         # Click on search.
         $Selenium->find_element( "#GlobalSearchNav", 'css' )->click();
-        $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#SearchProfileNew').length" );
+
+        # Wait for dialog to be visible
+        $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('.Dialog:visible').length" );
+
+        # Wait for SearchProfileNew to be present and visible (check both existence and visibility)
+        $Selenium->WaitFor(
+            JavaScript =>
+                "return typeof(\$) === 'function' && \$('#SearchProfileNew').length > 0 && \$('#SearchProfileNew').is(':visible') && \$('#SearchProfileNew').css('display') !== 'none'"
+        );
+
+        # Scroll element into view and ensure it's interactable
+        $Selenium->execute_script(
+            "\$('#SearchProfileNew')[0].scrollIntoView({block: 'center'});"
+        );
+
+        # Wait a bit for scroll to complete
+        sleep 1;
 
         # Create new template search.
         my $SearchProfileName = "SeleniumTest";
@@ -99,6 +116,7 @@ $Selenium->RunTest(
             Element => '#Attribute',
             Value   => 'TicketNumber',
         );
+
         $Selenium->WaitFor(
             JavaScript =>
                 "return typeof(\$) === 'function' && \$('#SearchInsert input[name=\"TicketNumber\"]').length"

@@ -43,7 +43,7 @@ my $TestUserID3 = $UserObject->UserLookup(
     UserLogin => $TestUserLogin3,
 );
 
-my $FileBase = << 'EOF';
+my $FileBase = <<'EOF';
 # OTRS config file (automatically generated)
 # VERSION:2.0
 package Kernel::Config::Files::User::0;

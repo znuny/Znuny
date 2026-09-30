@@ -257,7 +257,7 @@ sub _TicketWatch {
     if ( !$Success ) {
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Cannot execute action '$Param{Action}' for user with ID '$Param{WatchUserID}' on ticket with ID '$Param{TicketID}'!",
         );
         return;

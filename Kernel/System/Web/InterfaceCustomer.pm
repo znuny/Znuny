@@ -12,10 +12,12 @@ package Kernel::System::Web::InterfaceCustomer;
 use strict;
 use warnings;
 
+use Digest::SHA qw(sha256_hex);
+
 use Kernel::System::DateTime;
 use Kernel::System::Email;
 use Kernel::System::VariableCheck qw(IsArrayRefWithData IsHashRefWithData);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -241,6 +243,19 @@ sub Run {
             Raw   => 1
         ) || '';
 
+        #
+        # SAML
+        #
+        my $IsSAMLLogin  = $ParamObject->GetParam( Param => 'IsSAMLLogin' );
+        my $Count        = $ParamObject->GetParam( Param => 'Count' ) // '';
+        my $SAMLResponse = $ParamObject->GetParam( Param => 'SAMLResponse' );
+
+        # The request ID stored in the cookie. Will be evaluated when the response is checked.
+        my $ExpectedSAMLRequestID;
+        if ( $IsSAMLLogin && $SAMLResponse ) {
+            $ExpectedSAMLRequestID = $ParamObject->GetCookie( Key => "CustomerUserSAMLRequestID$Count" );
+        }
+
         # create AuthObject
         my $AuthObject = $Kernel::OM->Get('Kernel::System::CustomerAuth');
 
@@ -249,6 +264,12 @@ sub Run {
             User           => $PostUser,
             Pw             => $PostPw,
             TwoFactorToken => $PostTwoFactorToken,
+
+            # The following are SAML specific
+            IsSAMLLogin           => $IsSAMLLogin,
+            Count                 => $Count,
+            SAMLResponse          => $SAMLResponse,
+            ExpectedSAMLRequestID => $ExpectedSAMLRequestID,
         );
 
         my $Expires = '+' . $ConfigObject->Get('SessionMaxTime') . 's';
@@ -571,24 +592,24 @@ sub Run {
         }
 
         # get params
-        my $User  = $ParamObject->GetParam( Param => 'User' )  || '';
-        my $Token = $ParamObject->GetParam( Param => 'Token' ) || '';
+        my $User         = $ParamObject->GetParam( Param => 'User' )         || '';
+        my $Token        = $ParamObject->GetParam( Param => 'Token' )        || '';
+        my $NewPW        = $ParamObject->GetParam( Param => 'NewPW' )        || '';
+        my $NewPWConfirm = $ParamObject->GetParam( Param => 'NewPWConfirm' ) || '';
 
-        # get user login by token
+        # get user login by token (token is stored hashed — search by hash)
         if ( !$User && $Token ) {
 
             # Prevent extracting password reset token character-by-character via wildcard injection
             # The wild card characters "%" and "_" could be used to match arbitrary character.
             if ( $Token !~ m{\A (?: [a-zA-Z] | \d )+ \z}xms ) {
-
-                # Security: pretend that password reset instructions were actually sent to
-                #   make sure that users cannot find out valid usernames by
-                #   just trying and checking the result message.
                 $LayoutObject->Print(
-                    Output => \$LayoutObject->Login(
-                        Title       => 'Login',
-                        Message     => Translatable('Sent password reset instructions. Please check your email.'),
-                        MessageType => 'Success',
+                    Output => \$LayoutObject->CustomerLogin(
+                        Title   => 'Login',
+                        Message => Translatable(
+                            'Your password reset link is invalid or has expired. Please request a new one.'
+                        ),
+                        MessageType => 'Error',
                         %Param,
                     ),
                 );
@@ -597,7 +618,7 @@ sub Run {
 
             my %UserList = $UserObject->SearchPreferences(
                 Key   => 'UserToken',
-                Value => $Token,
+                Value => sha256_hex($Token),
             );
             USER_ID:
             for my $UserID ( sort keys %UserList ) {
@@ -620,24 +641,35 @@ sub Run {
         my $UserIsValid = grep { $UserData{ValidID} && $UserData{ValidID} == $_ } @ValidIDs;
         if ( !$UserData{UserID} || !$UserIsValid ) {
 
-            # Security: pretend that password reset instructions were actually sent to
-            #   make sure that users cannot find out valid usernames by
-            #   just trying and checking the result message.
+            my $Message = $Token
+                ? Translatable('Your password reset link is invalid or has expired. Please request a new one.')
+                : Translatable('Sent password reset instructions. Please check your email.');
+            my $MessageType = $Token ? 'Error' : 'Success';
             $LayoutObject->Print(
                 Output => \$LayoutObject->CustomerLogin(
                     Title       => 'Login',
-                    Message     => Translatable('Sent password reset instructions. Please check your email.'),
-                    MessageType => 'Success',
+                    Message     => $Message,
+                    MessageType => $MessageType,
                 ),
             );
             return;
         }
 
-        # create email object
-        my $EmailObject = Kernel::System::Email->new( %{$Self} );
-
-        # send password reset token
+        # Phase 1: no token yet — generate one and send the reset link email
         if ( !$Token ) {
+
+            if ( $Self->_PasswordResetRateLimitReached( Username => $User, UserType => 'CustomerUser' ) ) {
+                $LayoutObject->Print(
+                    Output => \$LayoutObject->CustomerLogin(
+                        Title       => 'Login',
+                        Message     => Translatable('Sent password reset instructions. Please check your email.'),
+                        MessageType => 'Success',
+                    ),
+                );
+                return;
+            }
+
+            my $EmailObject = Kernel::System::Email->new( %{$Self} );
 
             # generate token
             $UserData{Token} = $UserObject->TokenGenerate(
@@ -657,7 +689,7 @@ sub Run {
                 Subject  => $Subject,
                 Charset  => $LayoutObject->{UserCharset},
                 MimeType => 'text/plain',
-                Body     => $Body
+                Body     => $Body,
             );
             if ( !$Sent->{Success} ) {
                 $LayoutObject->FatalError(
@@ -665,6 +697,14 @@ sub Run {
                 );
                 return;
             }
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'notice',
+                Message  => 'AuditLog PasswordResetRequested'
+                    . " User=$UserData{UserLogin}"
+                    . ' UserType=CustomerUser'
+                    . ' IP=' . $Self->_AuditRemoteAddr()
+                    . ' Timestamp=' . $Kernel::OM->Create('Kernel::System::DateTime')->ToString(),
+            );
             $LayoutObject->Print(
                 Output => \$LayoutObject->CustomerLogin(
                     Title   => 'Login',
@@ -674,80 +714,181 @@ sub Run {
                 ),
             );
             return 1;
-
         }
 
-        # reset password
-        # check if token is valid
-        my $TokenValid = $UserObject->TokenCheck(
-            Token  => $Token,
-            UserID => $UserData{UserID},
-        );
-        if ( !$TokenValid ) {
+        # Phase 2: token present, no new password submitted — validate token and show the set-password form
+        elsif ( !$NewPW ) {
+
+            my $TokenValid = $UserObject->TokenCheck(
+                Token  => $Token,
+                UserID => $UserData{UserID},
+                Peek   => 1,
+            );
+            if ( !$TokenValid ) {
+                $LayoutObject->Print(
+                    Output => \$LayoutObject->CustomerLogin(
+                        Title   => 'Login',
+                        Message => Translatable(
+                            'Your password reset link is invalid or has expired. Please request a new one.'
+                        ),
+                        MessageType => 'Error',
+                        %Param,
+                    ),
+                );
+                return;
+            }
+
             $LayoutObject->Print(
                 Output => \$LayoutObject->CustomerLogin(
-                    Title   => 'Login',
-                    Message => Translatable('Invalid Token!'),
+                    Title         => 'Login',
+                    PasswordReset => 1,
+                    Token         => $Token,
                     %Param,
                 ),
             );
-            return;
+            return 1;
         }
 
-        # get new password
-        $UserData{NewPW} = $UserObject->GenerateRandomPassword();
+        # Phase 3: token + new password submitted — validate, consume token, set password
+        else {
 
-        # update new password
-        my $Success = $UserObject->SetPassword(
-            UserLogin => $User,
-            PW        => $UserData{NewPW}
-        );
+            # peek-validate token first so validation errors can re-show the form with the same token
+            my $TokenValid = $UserObject->TokenCheck(
+                Token  => $Token,
+                UserID => $UserData{UserID},
+                Peek   => 1,
+            );
+            if ( !$TokenValid ) {
+                $LayoutObject->Print(
+                    Output => \$LayoutObject->CustomerLogin(
+                        Title   => 'Login',
+                        Message => Translatable(
+                            'Your password reset link is invalid or has expired. Please request a new one.'
+                        ),
+                        MessageType => 'Error',
+                        %Param,
+                    ),
+                );
+                return;
+            }
 
-        if ( !$Success ) {
+            # verify passwords match
+            if ( $NewPW ne $NewPWConfirm ) {
+                $LayoutObject->Print(
+                    Output => \$LayoutObject->CustomerLogin(
+                        Title         => 'Login',
+                        Message       => Translatable('Passwords do not match!'),
+                        MessageType   => 'Error',
+                        PasswordReset => 1,
+                        Token         => $Token,
+                        %Param,
+                    ),
+                );
+                return;
+            }
+
+            # apply password policy (same config path as Kernel::Output::HTML::Preferences::Password)
+            my $PasswordConfig = $ConfigObject->Get('CustomerPreferencesGroups')->{Password} // {};
+            my @PolicyErrors;
+            if ( $PasswordConfig->{PasswordRegExp} && $NewPW !~ /$PasswordConfig->{PasswordRegExp}/ ) {
+                push @PolicyErrors, Translatable('Password does not match the requirements!');
+            }
+            if ( $PasswordConfig->{PasswordMinSize} && length($NewPW) < $PasswordConfig->{PasswordMinSize} ) {
+                push @PolicyErrors,
+                    $LayoutObject->{LanguageObject}->Translate(
+                    'Password must be at least %s characters long!',
+                    $PasswordConfig->{PasswordMinSize}
+                    );
+            }
+            if (
+                $PasswordConfig->{PasswordMin2Lower2UpperCharacters}
+                && ( $NewPW !~ /[A-Z].*[A-Z]/ || $NewPW !~ /[a-z].*[a-z]/ )
+                )
+            {
+                push @PolicyErrors,
+                    Translatable(
+                    'Password must contain at least 2 lowercase and 2 uppercase letter characters!'
+                    );
+            }
+            if ( $PasswordConfig->{PasswordNeedDigit} && $NewPW !~ /\d/ ) {
+                push @PolicyErrors, Translatable('Password must contain at least 1 digit!');
+            }
+            if ( $PasswordConfig->{PasswordMin2Characters} && $NewPW !~ /[A-z][A-z]/ ) {
+                push @PolicyErrors, Translatable('Password must contain at least 2 letter characters!');
+            }
+
+            if (@PolicyErrors) {
+                $LayoutObject->Print(
+                    Output => \$LayoutObject->CustomerLogin(
+                        Title         => 'Login',
+                        Message       => $PolicyErrors[0],
+                        MessageType   => 'Error',
+                        PasswordReset => 1,
+                        Token         => $Token,
+                        %Param,
+                    ),
+                );
+                return;
+            }
+
+            # all validations passed — consume the token now
+            $UserObject->TokenCheck(
+                Token  => $Token,
+                UserID => $UserData{UserID},
+            );
+
+            # set new password
+            my $Success = $UserObject->SetPassword(
+                UserLogin => $User,
+                PW        => $NewPW,
+            );
+
+            if ( !$Success ) {
+                $LayoutObject->Print(
+                    Output => \$LayoutObject->CustomerLogin(
+                        Title   => 'Login',
+                        Message => Translatable('Reset password unsuccessful. Please contact the administrator.'),
+                        User    => $User,
+                    ),
+                );
+                return;
+            }
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'notice',
+                Message  => 'AuditLog PasswordChanged'
+                    . " User=$User"
+                    . ' UserType=CustomerUser'
+                    . ' IP=' . $Self->_AuditRemoteAddr()
+                    . ' Timestamp=' . $Kernel::OM->Create('Kernel::System::DateTime')->ToString(),
+            );
+
+            # send confirmation email
+            my $EmailObject = Kernel::System::Email->new( %{$Self} );
+            my $Body        = $ConfigObject->Get('CustomerPanelBodyLostPassword')
+                || 'Your password has been successfully reset.';
+            my $Subject = $ConfigObject->Get('CustomerPanelSubjectLostPassword')
+                || 'Password Reset Successful';
+            for my $UserKey ( sort keys %UserData ) {
+                $Body =~ s/<OTRS_$UserKey>/$UserData{$UserKey}/gi;
+            }
+            $EmailObject->Send(
+                To       => $UserData{UserEmail},
+                Subject  => $Subject,
+                Charset  => $LayoutObject->{UserCharset},
+                MimeType => 'text/plain',
+                Body     => $Body,
+            );
+
             $LayoutObject->Print(
                 Output => \$LayoutObject->CustomerLogin(
-                    Title   => 'Login',
-                    Message => Translatable('Reset password unsuccessful. Please contact the administrator.'),
-                    User    => $User,
+                    Title       => 'Login',
+                    Message     => Translatable('Password changed. Please log in with your new password.'),
+                    User        => $User,
+                    MessageType => 'Success',
                 ),
             );
-            return;
+            return 1;
         }
-
-        # send notify email
-        my $Body = $ConfigObject->Get('CustomerPanelBodyLostPassword')
-            || 'New Password is: <OTRS_NEWPW>';
-        my $Subject = $ConfigObject->Get('CustomerPanelSubjectLostPassword')
-            || 'New Password!';
-        for my $UserKey ( sort keys %UserData ) {
-            $Body =~ s/<OTRS_$UserKey>/$UserData{$UserKey}/gi;
-        }
-        my $Sent = $EmailObject->Send(
-            To       => $UserData{UserEmail},
-            Subject  => $Subject,
-            Charset  => $LayoutObject->{UserCharset},
-            MimeType => 'text/plain',
-            Body     => $Body
-        );
-        if ( !$Sent->{Success} ) {
-            $LayoutObject->CustomerFatalError(
-                Comment => Translatable('Please contact the administrator.')
-            );
-            return;
-        }
-        my $Message = $LayoutObject->{LanguageObject}->Translate(
-            'Sent new password to %s. Please check your email.',
-            $UserData{UserEmail},
-        );
-        $LayoutObject->Print(
-            Output => \$LayoutObject->CustomerLogin(
-                Title       => 'Login',
-                Message     => $Message,
-                User        => $User,
-                MessageType => 'Success',
-            ),
-        );
-        return 1;
     }
 
     # create new customer account
@@ -769,11 +910,16 @@ sub Run {
             return;
         }
 
+        my $UserTitleMandatory;
+
         # get params
         my %GetParams;
         for my $Entry ( @{ $ConfigObject->Get('CustomerUser')->{Map} } ) {
-            $GetParams{ $Entry->[0] } = $ParamObject->GetParam( Param => $Entry->[1] )
+            $GetParams{ $Entry->[0] } = $ParamObject->GetParam( Param => $Entry->[0] )
                 || '';
+            if ( !defined $UserTitleMandatory && $Entry->[0] && $Entry->[0] eq 'UserTitle' ) {
+                $UserTitleMandatory = $Entry->[4];
+            }
         }
         $GetParams{ValidID} = 1;
 
@@ -800,13 +946,14 @@ sub Run {
 
             $LayoutObject->Print(
                 Output => \$LayoutObject->CustomerLogin(
-                    Title => 'Login',
+                    Title   => 'Login',
                     Message =>
                         Translatable('This e-mail address already exists. Please log in or reset your password.'),
-                    UserTitle     => $GetParams{UserTitle},
-                    UserFirstname => $GetParams{UserFirstname},
-                    UserLastname  => $GetParams{UserLastname},
-                    UserEmail     => $GetParams{UserEmail},
+                    UserTitle          => $GetParams{UserTitle},
+                    UserFirstname      => $GetParams{UserFirstname},
+                    UserLastname       => $GetParams{UserLastname},
+                    UserEmail          => $GetParams{UserEmail},
+                    UserTitleMandatory => $UserTitleMandatory,
                 ),
             );
             return;
@@ -826,7 +973,7 @@ sub Run {
             if ($@) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         $LayoutObject->{LanguageObject}->Translate(
                         'The customer panel mail address whitelist contains the invalid regular expression $WhitelistEntry, please check and correct it.'
                         ),
@@ -842,7 +989,7 @@ sub Run {
             if ($@) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         $LayoutObject->{LanguageObject}->Translate(
                         'The customer panel mail address blacklist contains the invalid regular expression $BlacklistEntry, please check and correct it.'
                         ),
@@ -863,13 +1010,14 @@ sub Run {
 
             $LayoutObject->Print(
                 Output => \$LayoutObject->CustomerLogin(
-                    Title => 'Login',
+                    Title   => 'Login',
                     Message =>
                         Translatable('This email address is not allowed to register. Please contact support staff.'),
-                    UserTitle     => $GetParams{UserTitle},
-                    UserFirstname => $GetParams{UserFirstname},
-                    UserLastname  => $GetParams{UserLastname},
-                    UserEmail     => $GetParams{UserEmail},
+                    UserTitle          => $GetParams{UserTitle},
+                    UserFirstname      => $GetParams{UserFirstname},
+                    UserLastname       => $GetParams{UserLastname},
+                    UserEmail          => $GetParams{UserEmail},
+                    UserTitleMandatory => $UserTitleMandatory,
                 ),
             );
 
@@ -897,12 +1045,13 @@ sub Run {
 
             $LayoutObject->Print(
                 Output => \$LayoutObject->CustomerLogin(
-                    Title         => 'Login',
-                    Message       => Translatable('Customer user can\'t be added!'),
-                    UserTitle     => $GetParams{UserTitle},
-                    UserFirstname => $GetParams{UserFirstname},
-                    UserLastname  => $GetParams{UserLastname},
-                    UserEmail     => $GetParams{UserEmail},
+                    Title              => 'Login',
+                    Message            => Translatable('Customer user can\'t be added!'),
+                    UserTitle          => $GetParams{UserTitle},
+                    UserFirstname      => $GetParams{UserFirstname},
+                    UserLastname       => $GetParams{UserLastname},
+                    UserEmail          => $GetParams{UserEmail},
+                    UserTitleMandatory => $UserTitleMandatory,
                 ),
             );
             return;
@@ -913,7 +1062,7 @@ sub Run {
         my $Body        = $ConfigObject->Get('CustomerPanelBodyNewAccount')
             || 'No Config Option found!';
         my $Subject = $ConfigObject->Get('CustomerPanelSubjectNewAccount')
-            || 'New OTRS Account!';
+            || 'New Znuny Account!';
         for my $Key ( sort keys %GetParams ) {
             $Body =~ s/<OTRS_$Key>/$GetParams{$Key}/gi;
         }
@@ -960,10 +1109,11 @@ sub Run {
         # login screen
         $LayoutObject->Print(
             Output => \$LayoutObject->CustomerLogin(
-                Title       => 'Login',
-                Message     => $AccountCreatedMessage,
-                User        => $GetParams{UserLogin},
-                MessageType => 'Success',
+                Title              => 'Login',
+                Message            => $AccountCreatedMessage,
+                User               => $GetParams{UserLogin},
+                MessageType        => 'Success',
+                UserTitleMandatory => $UserTitleMandatory,
             ),
         );
         return 1;
@@ -997,10 +1147,20 @@ sub Run {
             return;
         }
 
+        my $UserTitleMandatory;
+        ENTRY:
+        for my $Entry ( @{ $ConfigObject->Get('CustomerUser')->{Map} } ) {
+            if ( $Entry->[0] && $Entry->[0] eq 'UserTitle' ) {
+                $UserTitleMandatory = $Entry->[4];
+                last ENTRY;
+            }
+        }
+
         # login screen
         $LayoutObject->Print(
             Output => \$LayoutObject->CustomerLogin(
-                Title => 'Login',
+                Title              => 'Login',
+                UserTitleMandatory => $UserTitleMandatory,
                 %Param,
             ),
         );
@@ -1060,7 +1220,7 @@ sub Run {
             # show login
             $LayoutObject->Print(
                 Output => \$LayoutObject->CustomerLogin(
-                    Title => 'Login',
+                    Title   => 'Login',
                     Message =>
                         $LayoutObject->{LanguageObject}->Translate( $SessionObject->SessionIDErrorMessage() ),
                     %Param,
@@ -1108,7 +1268,7 @@ sub Run {
             my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Module Kernel::Modules::$Param{Action} not registered in Kernel/Config.pm!",
             );
             $LayoutObject->CustomerFatalError(
@@ -1365,6 +1525,10 @@ sub Run {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _CheckModulePermission()
 
 module permission check
@@ -1459,9 +1623,76 @@ sub _UserTimeZoneGet {
     return $UserTimeZone;
 }
 
-=end Internal:
+sub _AuditRemoteAddr {
+    if ( $ENV{HTTP_X_FORWARDED_FOR} ) {
+        return ( split /,\s*/, $ENV{HTTP_X_FORWARDED_FOR} )[0];
+    }
+    return $ENV{REMOTE_ADDR} || 'unknown';
+}
 
-=cut
+sub _PasswordResetRateLimitReached {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+    my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
+
+    my $MaxAttempts = $ConfigObject->Get('PasswordResetRateLimitMaxAttempts') // 5;
+    return 0 if !$MaxAttempts;
+
+    my $Window = $ConfigObject->Get('PasswordResetRateLimitWindow') // 600;
+
+    my $IP      = $Self->_AuditRemoteAddr();
+    my $Now     = time();
+    my $Blocked = 0;
+
+    KEY:
+    for my $Key ( "IP::$IP", "User::$Param{Username}" ) {
+        my $Entry = $CacheObject->Get(
+            Type => 'PasswordReset',
+            Key  => $Key,
+        ) // {
+            count   => 0,
+            expires => $Now + $Window,
+        };
+
+        if ( $Now >= $Entry->{expires} ) {
+            $Entry = {
+                count   => 0,
+                expires => $Now + $Window,
+            };
+        }
+
+        $Entry->{count}++;
+
+        $CacheObject->Set(
+            Type  => 'PasswordReset',
+            Key   => $Key,
+            Value => $Entry,
+            TTL   => $Entry->{expires} - $Now,
+        );
+
+        next KEY if $Entry->{count} <= $MaxAttempts;
+
+        $Blocked = 1;
+        if ( $Entry->{count} == $MaxAttempts + 1 ) {
+            my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
+            my $DateTimeString = $DateTimeObject->ToString();
+
+            $LogObject->Log(
+                Priority => 'notice',
+                Message  => 'AuditLog PasswordResetRateLimitReached'
+                    . " User=$Param{Username}"
+                    . " UserType=$Param{UserType}"
+                    . " LimitedBy=$Key"
+                    . " IP=$IP"
+                    . " Timestamp=$DateTimeString",
+            );
+        }
+    }
+
+    return $Blocked;
+}
 
 sub DESTROY {
     my $Self = shift;

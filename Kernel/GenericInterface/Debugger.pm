@@ -337,7 +337,9 @@ sub Error {
 
 =begin Internal:
 
-=cut
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
 
 =head2 DESTROY()
 
@@ -353,8 +355,6 @@ sub DESTROY {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

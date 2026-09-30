@@ -1,18 +1,15 @@
 package Mozilla::CA;
-
 use strict;
-our $VERSION = '20211001';
+use warnings;
 
-use Cwd ();
+our $VERSION = '20250202';
+
 use File::Spec ();
 use File::Basename qw(dirname);
 
 sub SSL_ca_file {
     my $file = File::Spec->catfile(dirname(__FILE__), "CA", "cacert.pem");
-    if (!File::Spec->file_name_is_absolute($file)) {
-	$file = File::Spec->catfile(Cwd::cwd(), $file);
-    }
-    return $file;
+    return File::Spec->rel2abs($file);
 }
 
 1;
@@ -30,14 +27,14 @@ Mozilla::CA - Mozilla's CA cert bundle in PEM format
 
     my $host = "www.paypal.com";
     my $client = IO::Socket::SSL->new(
-	PeerHost => "$host:443",
-	SSL_verify_mode => 0x02,
-	SSL_ca_file => Mozilla::CA::SSL_ca_file(),
+        PeerHost => "$host:443",
+        SSL_verify_mode => 0x02,
+        SSL_ca_file => Mozilla::CA::SSL_ca_file(),
     )
-	|| die "Can't connect: $@";
+        || die "Can't connect: $@";
 
     $client->verify_hostname($host, "http")
-	|| die "hostname verification failure";
+        || die "hostname verification failure";
 
 =head1 DESCRIPTION
 

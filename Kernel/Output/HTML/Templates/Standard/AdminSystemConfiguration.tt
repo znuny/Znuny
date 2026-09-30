@@ -9,7 +9,7 @@
 
 [%
     SET DocumentationLinkText  = Translate('online administrator documentation');
-    SET DocumentationLink      = "<a href='https://doc.znuny.org/znuny/admin/sysconfig' target='_blank'>" _ DocumentationLinkText.html() _ "</a>";
+    SET DocumentationLink      = "<a href='https://doc.znuny.org/znuny/admin/systemconfiguration/index.html' target='_blank'>" _ DocumentationLinkText.html() _ "</a>";
 %]
 
 <div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
@@ -43,6 +43,7 @@
         [% END %]
 
         [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
         <div class="WidgetSimple">
             <div class="Content">
                 [% IF Data.SettingCount %]

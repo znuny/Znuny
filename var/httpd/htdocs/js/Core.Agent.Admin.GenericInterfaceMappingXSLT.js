@@ -7,9 +7,13 @@
 // did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 // --
 
+// nofilter(TidyAll::Plugin::Znuny::JavaScript::ESLint)
+
 "use strict";
 
-var Core = Core || {};
+var Core = Core || {},
+    cm6 = cm6 || {};
+
 Core.Agent = Core.Agent || {};
 Core.Agent.Admin = Core.Agent.Admin || {};
 
@@ -141,6 +145,8 @@ Core.Agent.Admin.GenericInterfaceMappingXSLT = (function (TargetNS) {
      */
     TargetNS.Init = function () {
 
+        InitCodeMirror();
+
         // bind click function to add button
         $('#PreAddValue').on('click', function () {
             TargetNS.AddValue(
@@ -162,6 +168,34 @@ Core.Agent.Admin.GenericInterfaceMappingXSLT = (function (TargetNS) {
         });
 
     };
+
+    function InitCodeMirror() {
+        var CodeMirrorPredefinedContent = $('#Template').text(),
+            CodeMirrorOptions = {
+                onContentChanged,
+                customKeyBindings: [
+                    {
+                        key: "Ctrl-Shift-f",
+                        run(editorView) { cm6.autoFormatXML(editorView); return true }
+                    },
+                ]
+            },
+            View;
+
+        View = cm6.createEditorView(
+            cm6.createEditorState(
+                CodeMirrorPredefinedContent,
+                CodeMirrorOptions
+            ),
+            document.getElementById("XSLTEditor")
+        );
+
+        function onContentChanged(ViewUpdate) {
+            $('#Template').text(ViewUpdate.view.state.doc.toString());
+        }
+
+        return true;
+    }
 
     Core.Init.RegisterNamespace(TargetNS, 'APP_MODULE');
 

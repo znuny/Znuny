@@ -1,0 +1,30 @@
+@mixin button() {
+  font-size: 12px;
+  line-height: 110%;
+  font-weight: 600;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: var(--border-radius-sm);
+}
+
+@mixin buttonPrimary() {
+  @include buttonColor(var(--primary-color), var(--btn-primary-text), var(--primary-color), var(--primary-color-darker), var(--btn-primary-text-hover), var(--primary-color-darker))
+}
+
+@mixin buttonSecondary() {
+  @include buttonColor(transparent, var(--gray-dark), var(--border-color), var(--border-color), black, var(--border-color))
+
+}
+
+@mixin buttonColor($background, $color, $borderColor, $hoverBackground, $hoverColor, $hoverBorder) {
+  background-color: $background;
+  color: $color;
+  border-color: $borderColor;
+  &:hover {
+    background-color: $hoverBackground;
+    border-color: $hoverBorder;
+    color: $hoverColor;
+  }
+}

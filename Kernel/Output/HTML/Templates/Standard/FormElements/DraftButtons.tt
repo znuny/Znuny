@@ -8,12 +8,12 @@
 # --
 
 [% IF Data.FormDraftID %]
-    <button class="CallForAction btn-cancel-ghost btn-main btn-width-md" id="FormDraftUpdate" accesskey="u" title="[% Translate("Update draft") | html %] (u)">
+    <button class="CallForAction btn-cancel-ghost btn-main btn-width-md" id="FormDraftUpdate" type="button" accesskey="u" title="[% Translate("Update draft") | html %] (u)">
         <span>[% Translate("Update draft") | html %]</span>
     </button>
 [% END %]
 [% IF Data.FormDraft %]
-    <button class="CallForAction btn-cancel-ghost btn-main btn-width-md" id="FormDraftSave" accesskey="s" title="[% Translate("Save as new draft") | html %] (s)">
+    <button class="CallForAction btn-cancel-ghost btn-main btn-width-md" id="FormDraftSave" type="button" accesskey="s" title="[% Translate("Save as new draft") | html %] (s)">
         <span>[% Translate("Save as new draft") | html %]</span>
     </button>
 [% END %]

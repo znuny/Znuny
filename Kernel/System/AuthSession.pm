@@ -19,7 +19,7 @@ our @ObjectDependencies = (
     'Kernel::System::Cache',
     'Kernel::System::Log',
     'Kernel::System::Main',
-    'Kernel::System::SystemData',
+    'Kernel::System::User',
 );
 
 =head1 NAME
@@ -135,8 +135,10 @@ sub GetSessionIDData {
 create a new session with given data
 
     my $SessionID = $SessionObject->CreateSessionID(
-        UserLogin => 'root',
-        UserEmail => 'root@example.com',
+        UserType      => 'User',                # required, 'User' or 'Customer'
+        UserLogin     => 'root',
+        UserEmail     => 'root@example.com',
+        SessionSource => 'GenericInterface',    # optional, used to identify the source of the session
     );
 
 =cut
@@ -162,9 +164,25 @@ sub CreateSessionID {
         return;
     }
 
-    $CacheObject->CleanUp(
-        Type => 'User',
-    );
+    # Clear cached data of this user (agent).
+    if (
+        $Param{UserType} eq 'User'
+        && $Param{UserLogin}
+        )
+    {
+        my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+
+        my $UserID = $UserObject->UserLookup(
+            UserLogin => $Param{UserLogin},
+            Silent    => 1,
+        );
+
+        if ($UserID) {
+
+            # Note: This function should be public, not private.
+            $UserObject->_UserCacheClear( UserID => $UserID );
+        }
+    }
 
     my $SessionLimit;
     if ( $Param{UserType} eq 'User' ) {
@@ -226,22 +244,38 @@ sub RemoveSessionID {
 
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
-    $CacheObject->CleanUp(
-        Type => 'User',
+    # Clear cached data of the session's user (agent).
+    my %SessionData = $Self->GetSessionIDData(
+        SessionID => $Param{SessionID},
     );
+    if (
+        ( $SessionData{UserType} // '' ) eq 'User'
+        && $SessionData{UserID}
+        )
+    {
+        my $UserObject = $Kernel::OM->Get('Kernel::System::User');
+
+        # Note: This function should be public, not private.
+        $UserObject->_UserCacheClear( UserID => $SessionData{UserID} );
+    }
 
     return $Self->{Backend}->RemoveSessionID(%Param);
 }
 
 =head2 RemoveSessionByUser()
 
-Removes a session from a user.
+Removes all sessions that match the given user login (no distinction between agent and customer user).
 
     $SessionObject->RemoveSessionByUser(
         UserLogin => 'some_user_login'
     );
 
 Returns true (session deleted) or false (if session can't get deleted).
+
+B<NOTE>: Sessions are matched by C<UserLogin> only. The user type (agent or
+customer user) is not considered. If an agent and a customer user share the
+same login, all of their sessions are removed. This is a known limitation.
+See issue #1027.
 
 =cut
 

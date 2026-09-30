@@ -42,7 +42,7 @@ $Selenium->RunTest(
             CustomerCompanyZIP     => $RandomID,
             CustomerCompanyCity    => $RandomID,
             CustomerCompanyCountry => 'Germany',
-            CustomerCompanyURL     => 'http://www.otrs.com',
+            CustomerCompanyURL     => 'http://www.znuny.com',
             CustomerCompanyComment => $RandomID,
             ValidID                => 1,
             UserID                 => 1,
@@ -61,7 +61,7 @@ $Selenium->RunTest(
             CustomerCompanyZIP     => $RandomID2,
             CustomerCompanyCity    => $RandomID2,
             CustomerCompanyCountry => 'Germany',
-            CustomerCompanyURL     => 'http://www.otrs.com',
+            CustomerCompanyURL     => 'http://www.znuny.com',
             CustomerCompanyComment => $RandomID2,
             ValidID                => 1,
             UserID                 => 1,
@@ -166,7 +166,7 @@ $Selenium->RunTest(
         # Check is there notification after customer user is added.
         my $Notification = "Customer $RandomID added ( New phone ticket - New email ticket )!";
         $Self->True(
-            $Selenium->execute_script("return \$('.MessageBox.Notice p:contains($Notification)').length"),
+            $Selenium->execute_script("return \$('.messageNotice .alertContent:contains($Notification)').length"),
             "$Notification - notification is found."
         );
 
@@ -293,7 +293,7 @@ $Selenium->RunTest(
         # Check is there notification after customer user is updated.
         $Notification = "Customer user updated!";
         $Self->True(
-            $Selenium->execute_script("return \$('.MessageBox.Notice p:contains($Notification)').length"),
+            $Selenium->execute_script("return \$('.messageNotice .alertContent:contains($Notification)').length"),
             "$Notification - notification is found."
         );
 
@@ -423,7 +423,7 @@ $Selenium->RunTest(
             "#UserLastname updated value",
         );
 
-        # Create a test case for bug#13782 (https://bugs.otrs.org/show_bug.cgi?id=13782).
+        # Create a test case for .
         # Creating CustomerUser with according DynamicField when AutoLoginCreation is enabled.
         my $RandomID4        = $HelperObject->GetRandomID();
         my $DynamicFieldName = 'Text' . $RandomID4;

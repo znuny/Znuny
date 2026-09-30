@@ -16,6 +16,8 @@ use vars (qw($Self));
 my $HelperObject  = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
 my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
+my $DBObject      = $Kernel::OM->Get('Kernel::System::DB');
+my $MainObject    = $Kernel::OM->Get('Kernel::System::Main');
 
 my @List = $PackageObject->RepositoryList(
     Result => 'short',
@@ -49,6 +51,15 @@ my $CheckBreadcrumb = sub {
     }
 };
 
+# The test package creates the table test_package via DatabaseInstall and drops it again via
+#   DatabaseUninstall, so its presence shows whether the package data was kept or removed.
+my $TableExists = sub {
+
+    my @Tables = $DBObject->ListTables();
+
+    return scalar grep { lc $_ eq 'test_package' } @Tables;
+};
+
 my $NavigateToAdminPackageManager = sub {
 
     # Wait until all AJAX calls finished.
@@ -59,7 +70,7 @@ my $NavigateToAdminPackageManager = sub {
     my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
     $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminPackageManager");
     $Selenium->WaitFor(
-        Time => 120,
+        Time       => 120,
         JavaScript =>
             'return typeof($) == "function" && $("#FileUpload").length;'
     );
@@ -72,7 +83,7 @@ my $ClickAction = sub {
     $Selenium->execute_script('window.Core.App.PageLoadComplete = false;');
     $Selenium->find_element($Selector)->click();
     $Selenium->WaitFor(
-        Time => 120,
+        Time       => 120,
         JavaScript =>
             'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete'
     );
@@ -177,7 +188,7 @@ $Selenium->RunTest(
 
         $NavigateToAdminPackageManager->();
 
-        # Uninstall package.
+        # Uninstall package, keeping its database data.
         $ClickAction->("//a[contains(\@href, \'Subaction=Uninstall;Name=Test' )]");
 
         # Check breadcrumb on uninstall screen.
@@ -185,12 +196,61 @@ $Selenium->RunTest(
             BreadcrumbText => 'Uninstall Package:',
         );
 
-        $ClickAction->("//button[\@value='Uninstall package'][\@type='submit']");
+        # Packages with a DatabaseUninstall section offer a choice between dropping and keeping the data.
+        $Self->Is(
+            $Selenium->execute_script("return \$('#UninstallForm button[name=\"KeepData\"]').length;"),
+            2,
+            'Both uninstall buttons are shown for a package with DatabaseUninstall'
+        );
 
-        # Check if test package is uninstalled.
+        $ClickAction->("//button[\@name='KeepData'][\@value='1'][\@type='submit']");
+
         $Self->True(
             index( $Selenium->get_page_source(), 'Subaction=View;Name=Test' ) == -1,
-            'Test package is uninstalled'
+            'Test package is uninstalled (keeping data)'
+        );
+        $Self->True(
+            $TableExists->(),
+            'Database data of the test package is kept after "Uninstall package only"'
+        );
+
+        # Drop the kept table so the package can be installed again.
+        my $DropSuccess = $DBObject->Do(
+            SQL => 'DROP TABLE test_package',
+        );
+        $Self->True(
+            $DropSuccess,
+            'Kept database data is removed for the next test case'
+        );
+
+        # Install the test package again to verify the second uninstall button.
+        my $PackageContent = $MainObject->FileRead(
+            Location => $Selenium->{Home} . '/scripts/test/sample/PackageManager/TestPackage.opm',
+        );
+        my $PackageInstall = $PackageObject->PackageInstall(
+            String => ${$PackageContent},
+        );
+        $Self->True(
+            $PackageInstall,
+            'Test package is installed again'
+        );
+        $Self->True(
+            $TableExists->(),
+            'Database data of the test package exists again'
+        );
+
+        # Uninstall package including its database data.
+        $NavigateToAdminPackageManager->();
+        $ClickAction->("//a[contains(\@href, \'Subaction=Uninstall;Name=Test' )]");
+        $ClickAction->("//button[\@name='KeepData'][\@value='0'][\@type='submit']");
+
+        $Self->True(
+            index( $Selenium->get_page_source(), 'Subaction=View;Name=Test' ) == -1,
+            'Test package is uninstalled (including data)'
+        );
+        $Self->False(
+            $TableExists->(),
+            'Database data of the test package is removed after "Uninstall package and data"'
         );
 
         $Selenium->VerifiedGet(
@@ -246,7 +306,7 @@ $Selenium->RunTest(
         # Check that there is a notification about no packages.
         my $Notification = 'No packages found in selected repository. Please check log for more info!';
         $Self->True(
-            $Selenium->execute_script("return \$('.MessageBox.Warning p:contains($Notification)').length"),
+            $Selenium->execute_script("return \$('.messageWarning .alertContent:contains($Notification)').length"),
             "$Notification - notification is found."
         );
     }

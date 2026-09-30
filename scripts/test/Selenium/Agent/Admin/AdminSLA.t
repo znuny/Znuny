@@ -142,6 +142,10 @@ $Selenium->RunTest(
             "There is a class 'Invalid' for test SLA",
         );
 
+        $Selenium->CloseNotification(
+            Text => 'Please activate Service first!',
+        );
+
         # Checks for AdminValidFilter
         $Self->True(
             $Selenium->find_element( "#ValidFilter", 'css' )->is_displayed(),

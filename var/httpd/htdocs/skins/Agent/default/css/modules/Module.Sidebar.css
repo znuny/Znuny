@@ -1,0 +1,173 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+.sectionSidebar {
+  position: relative;
+}
+
+.modSidebar {
+  height: 100%;
+}
+.modSidebar > .inner {
+  position: relative;
+  height: 100%;
+  width: 40px;
+  border-left: var(--border-width) var(--border-solid) var(--border-color);
+  transition: width 0.3s ease-in-out;
+  z-index: 99;
+}
+.modSidebar > .inner.sidebarActive {
+  width: 310px;
+  height: 100%;
+  margin-bottom: 5px;
+  background-color: var(--background-tertiary-color);
+  border: var(--border-width) var(--border-solid) var(--border-color);
+  border-top: none;
+  border-bottom: none;
+  padding: var(--padding-sm);
+}
+@media (max-width: 1199px) {
+  .modSidebar > .inner.sidebarActive {
+    right: 0;
+    width: 310px;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: -2px 0 20px rgba(0, 0, 0, 0.1);
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+@media (min-width: 1200px) {
+  .modSidebar > .inner.sidebarActive {
+    width: 310px;
+  }
+}
+@media (min-width: 1400px) {
+  .modSidebar > .inner.sidebarActive {
+    width: 420px;
+  }
+}
+.modSidebar > .inner.sidebarActive .sidebar {
+  display: contents;
+}
+@media (max-width: 1199px) {
+  .modSidebar > .inner.sidebarActive .sidebar {
+    left: -270px;
+    z-index: 2;
+    box-shadow: 1px 1px 10px #ccc;
+  }
+}
+.modSidebar > .inner.sidebarActive .sidebarTrigger {
+  display: none;
+}
+.modSidebar > .inner .sidebar {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  background-color: white;
+  width: 310px;
+  display: none;
+}
+@media (min-width: 1400px) {
+  .modSidebar > .inner .sidebar {
+    width: 420px;
+  }
+}
+.modSidebar > .inner .sidebarTrigger {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  background-color: white;
+  width: 40px;
+}
+.modSidebar > .inner .sidebarTrigger::before {
+  content: "";
+  background-image: url(../../img/icons/arrow-left.svg);
+  width: 8px;
+  height: 14px;
+  position: absolute;
+  right: 17px;
+  top: 11px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.modSidebar > .inner .sidebarTrigger:hover {
+  cursor: pointer;
+  background-color: rgba(234, 234, 238, 0.8);
+}
+.modSidebar > .inner .sidebarTitle {
+  background-color: var(--background-quarternary-color);
+  border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+  padding: 10px 15px;
+  position: relative;
+}
+.modSidebar > .inner .sidebarTitle::before {
+  content: "";
+  background-image: url(../../img/icons/arrow-left.svg);
+  width: 8px;
+  height: 14px;
+  position: absolute;
+  right: 20px;
+  top: 12px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: rotate(180deg);
+}
+.modSidebar > .inner .sidebarTitle:hover {
+  cursor: pointer;
+  background-color: rgba(234, 234, 238, 0.8);
+}
+
+/* Override .btn-toggle (bottom: -14px) so toggle stays at top, not stretched/centered */
+.sectionSidebar #TicketSidebar-toggle {
+  position: absolute;
+  right: 100%;
+  top: 78px;
+  bottom: auto;
+  align-self: flex-start;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15px;
+  height: 42px;
+  background: var(--white);
+  border: var(--border-width) var(--border-solid) var(--border-color);
+  border-right: none;
+  border-radius: var(--border-radius-xxs) 0 0 var(--border-radius-xxs);
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.sectionSidebar #TicketSidebar-toggle.sidebar-animating {
+  display: none;
+}
+
+.sectionSidebar #TicketSidebar-toggle i.fa {
+  font-size: var(--font-size-md);
+  color: var(--gray-dark-semi);
+  text-shadow: none;
+  margin: 0;
+}
+
+/* caret points right when collapsed, left when open */
+.sectionSidebar #TicketSidebar-toggle i.fa-caret-left {
+  transform: rotate(0deg);
+}
+
+.sectionSidebar.sidebarOpen #TicketSidebar-toggle i.fa-caret-left {
+  transform: rotate(180deg);
+}
+
+.sectionSidebar #TicketSidebar-toggle:hover {
+  opacity: 0.9;
+}
+
+/*# sourceMappingURL=Module.Sidebar.css.map */

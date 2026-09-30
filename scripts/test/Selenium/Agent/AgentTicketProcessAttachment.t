@@ -54,7 +54,7 @@ $Selenium->RunTest(
             $ACLObject->ACLUpdate(
                 ID   => $Item,
                 Name => $ACLList->{$Item},
-                ,
+
                 ValidID => 2,
                 UserID  => 1,
             );
@@ -190,7 +190,7 @@ $Selenium->RunTest(
         sleep 1;
         $Selenium->execute_script(
             q{
-                return CKEDITOR.instances.RichText.setData('This is a test text');
+                return window.editor.setData('This is a test text');
             }
         );
 

@@ -1,4 +1,4 @@
-Return-Path: <R2.D2@otrs.org>
+Return-Path: <R2.D2@znuny.org>
 X-Original-To: skywalker@osser.otrs.org
 Delivered-To: skywalker@osser.otrs.org
 Received: from localhost (localhost [127.0.0.1])
@@ -10,12 +10,12 @@ Received: from osser.otrs.org ([127.0.0.1])
  Thu, 12 Apr 2007 16:03:19 +0200 (CEST)
 Received: from ana (lancelot.otrs.org [217.64.92.7])
 	by osser.otrs.org (Postfix) with ESMTP id 0CA4F5BE17
-	for <skywalker@otrs.org>; Thu, 12 Apr 2007 16:03:19 +0200 (CEST)
-From: "R2 D2" <R2.D2@otrs.org>
-To: Skywalker <darthvader@otrs.org>
+	for <skywalker@znuny.org>; Thu, 12 Apr 2007 16:03:19 +0200 (CEST)
+From: "R2 D2" <R2.D2@znuny.org>
+To: Skywalker <darthvader@znuny.org>
 Subject: =?iso-8859-1?Q?_NOT_REGEX_=DC=C4=D6?=
 Date: Thu, 12 Apr 2007 16:03:35 +0200
-Message-ID: <006001c77d0b$5c89de80$159d9b80$@D2@otrs.org>
+Message-ID: <006001c77d0b$5c89de80$159d9b80$@D2@znuny.org>
 MIME-Version: 1.0
 Content-Type: multipart/mixed;
 	boundary="----=_NextPart_000_0061_01C77D1C.2012AE80"

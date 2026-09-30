@@ -132,8 +132,15 @@ $Selenium->RunTest(
         ADMINMODULE:
         for my $AdminModule (@AdminModules) {
 
-            # Navigate to appropriate screen in the test
-            $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=$AdminModule");
+            # Navigate to appropriate screen in the test.
+            # Some admin screens (e.g. package manager, support data collector) collect data on
+            # first load, which can exceed the default page load wait time on slow CI machines.
+            $Selenium->get("${ScriptAlias}index.pl?Action=$AdminModule");
+            $Selenium->WaitFor(
+                JavaScript =>
+                    'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete',
+                Time => 60,
+            ) || die "Znuny API verification failed after page load of $AdminModule.";
 
             # Check if needed frontend module is registered in sysconfig.
             if ( !$FrontendModules->{$AdminModule} ) {

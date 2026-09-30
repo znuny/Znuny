@@ -504,8 +504,8 @@ sub TableAlter {
                 SET \@cmd%s = 'ALTER TABLE %s DROP CONSTRAINT ' + \@defname%s
                 EXEC(\@cmd%s)
 END
-                , $Table . $Tag->{Name}, $Table . $Tag->{Name}, $Table . $Tag->{Name}, $Table,
-                $Table, $Tag->{Name}, $Table . $Tag->{Name}, $Table, $Table . $Tag->{Name},
+                ,       $Table . $Tag->{Name}, $Table . $Tag->{Name}, $Table . $Tag->{Name}, $Table,
+                $Table, $Tag->{Name},          $Table . $Tag->{Name}, $Table,                $Table . $Tag->{Name},
                 $Table . $Tag->{Name},
             );
 

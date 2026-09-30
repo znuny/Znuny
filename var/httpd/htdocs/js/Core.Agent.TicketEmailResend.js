@@ -29,37 +29,7 @@ Core.Agent.TicketEmailResend = (function (TargetNS) {
      *      This function initializes .
      */
     TargetNS.Init = function () {
-        var ArticleComposeOptions = Core.Config.Get('ArticleComposeOptions'),
-            EmailAddressesTo = Core.Config.Get('EmailAddressesTo'),
-            EmailAddressesCc = Core.Config.Get('EmailAddressesCc'),
-            EmailAddressesBcc = Core.Config.Get('EmailAddressesBcc');
-
-        // Remove customer user.
-        $('.CustomerTicketRemove').on('click', function () {
-            Core.Agent.CustomerSearch.RemoveCustomerTicket($(this));
-            return false;
-        });
-
-        // Add 'To' customer users.
-        if (typeof EmailAddressesTo !== 'undefined') {
-            EmailAddressesTo.forEach(function(ToCustomer) {
-                Core.Agent.CustomerSearch.AddTicketCustomer('ToCustomer', ToCustomer.CustomerTicketText, ToCustomer.CustomerKey);
-            });
-        }
-
-        // Add 'Cc' customer users.
-        if (typeof EmailAddressesCc !== 'undefined') {
-            EmailAddressesCc.forEach(function(CcCustomer) {
-                Core.Agent.CustomerSearch.AddTicketCustomer('CcCustomer', CcCustomer.CustomerTicketText, CcCustomer.CustomerKey);
-            });
-        }
-
-        // Add 'BCc' customer users.
-        if (typeof EmailAddressesCc !== 'undefined') {
-            EmailAddressesBcc.forEach(function(BccCustomer) {
-                Core.Agent.CustomerSearch.AddTicketCustomer('BccCustomer', BccCustomer.CustomerTicketText, BccCustomer.CustomerKey);
-            });
-        }
+        var ArticleComposeOptions = Core.Config.Get('ArticleComposeOptions');
 
         // Change article compose options.
         if (typeof ArticleComposeOptions !== 'undefined') {

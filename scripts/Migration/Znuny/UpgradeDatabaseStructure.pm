@@ -37,16 +37,32 @@ sub Run {
 
     my @Tasks = (
         {
-            Message => 'Increase size of columns of database table standard_template',
-            Module  => 'StandardTemplate',
-        },
-        {
             Message => 'Create missing primary keys for database tables.',
             Module  => 'CreatePrimaryKeys',
         },
         {
-            Message => 'Increase size of columns of database table search_profile',
-            Module  => 'SearchProfile',
+            Message => 'Alters database table article_color.',
+            Module  => 'ArticleColor',
+        },
+        {
+            Message => 'Alters database table calendar.',
+            Module  => 'CalendarColor',
+        },
+        {
+            Message => 'Alters color column in database table ticket_priority.',
+            Module  => 'PriorityColor',
+        },
+        {
+            Message => 'Alters color column in database table ticket_state.',
+            Module  => 'StateColor',
+        },
+        {
+            Message => 'Create database table sendmail_config.',
+            Module  => 'SendmailConfig',
+        },
+        {
+            Message => 'Alters password column sizes in users, customer_user and mail_account.',
+            Module  => 'PasswordColumnLength',
         },
     );
 

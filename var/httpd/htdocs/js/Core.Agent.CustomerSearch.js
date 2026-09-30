@@ -389,7 +389,10 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
      *      Initializes the module.
      */
     TargetNS.Init = function ($Element) {
-        var AutocompleteFocus = false;
+        var AutocompleteFocus = false,
+            Action = Core.Config.Get('Action'),
+            IsAllowedAction = false,
+            AllowedActions = [];
 
         // get customer tickets for AgentTicketCustomer
         if (Core.Config.Get('Action') === 'AgentTicketCustomer') {
@@ -404,13 +407,26 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
             });
         }
 
-        // Enable free selection or input of CustomerID field on AgentTicketProcess and AgentTicketCustomer.
-        if ((Core.Config.Get('Action') === 'AgentTicketProcess'
-            && !Core.Config.Get('Ticket::Frontend::AgentTicketProcess::CustomerIDReadOnly'))
-            ||
-            (Core.Config.Get('Action') === 'AgentTicketCustomer'
-            && !Core.Config.Get('Ticket::Frontend::AgentTicketCustomer::CustomerIDReadOnly'))
-            ) {
+        // Enable free selection or input of CustomerID field for configured actions.
+        AllowedActions = [
+            'AgentTicketProcess',
+            'AgentTicketCustomer',
+            'AgentTicketNote',
+            'AgentTicketClose',
+            'AgentTicketFreeText',
+            'AgentTicketOwner',
+            'AgentTicketPending',
+            'AgentTicketPriority',
+            'AgentTicketResponsible'
+        ];
+
+        Action = Core.Config.Get('Action');
+        IsAllowedAction = AllowedActions.some(function(AllowedAction) {
+            var Config = Core.Config.Get('Ticket::Frontend::' + AllowedAction);
+            return Action === AllowedAction && Config && !Config['CustomerIDReadOnly'];
+        });
+
+        if (IsAllowedAction) {
             $('#CustomerAutoComplete').on('blur keyup' , function() {
                 if($('#CustomerAutoComplete').val()) {
                     ActivateSelectionCustomerID();
@@ -435,16 +451,21 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
             // Hide tooltip in autocomplete field, if user already typed something to prevent the autocomplete list
             // to be hidden under the tooltip. (Only needed for serverside errors)
             $Element.off('keyup.Validate').on('keyup.Validate', function () {
-               var Value = $Element.val();
-               if ($Element.hasClass('ServerError') && Value.length) {
-                   $('#OTRS_UI_Tooltips_ErrorTooltip').hide();
-               }
+                var Value = $Element.val();
+                if ($Element.hasClass('ServerError') && Value.length) {
+                    $('#OTRS_UI_Tooltips_ErrorTooltip').hide();
+                }
             });
 
             Core.App.Subscribe('Event.CustomerUserAddressBook.AddTicketCustomer.Callback.' + $Element.attr('id'), function(UserLogin, CustomerTicketText) {
                 $Element.val(CustomerTicketText);
                 TargetNS.AddTicketCustomer($Element.attr('id'), CustomerTicketText, UserLogin);
             });
+
+            // fill up this variable to not loose the value of customer user
+            // when loaded in overview and blur action was triggered
+            // without any search action in autocomplete
+            BackupData.CustomerEmail = Core.Config.Get('CustomerMailString');
 
             Core.UI.Autocomplete.Init($Element, function (Request, Response) {
                 var URL = Core.Config.Get('Baselink'),
@@ -688,6 +709,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
 
         // remove unnecessary classes
         $Clone.removeClass('Hidden CustomerTicketTemplate' + Field);
+        $Clone.removeClass('customerContainerCustomerHidden');
 
         // copy values and change ids and names
         $Clone.find(':input, a').each(function(){
@@ -710,10 +732,16 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
 
                 // bind change function to radio button to select customer
                 $(this).on('change', function () {
+
+                    // we need to add active class to parent element
+                    $('.customerContainerCustomer', $(this).closest('.modCustomerContainer')).removeClass('customerContainerCustomerActive');
+                    $(this).parent().addClass('customerContainerCustomerActive');
+
                     // remove row
                     if ($(this).prop('checked')){
                         TargetNS.ReloadCustomerInfo(CustomerKey);
                     }
+
                     return false;
                 });
             }

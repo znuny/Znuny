@@ -15,7 +15,7 @@ use warnings;
 our $ObjectManagerDisabled = 1;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -280,7 +280,7 @@ sub Run {
         $ACLData->{Description}    = $GetParam->{Description};
         $ACLData->{StopAfterMatch} = $GetParam->{StopAfterMatch} || 0;
         $ACLData->{ValidID}        = $GetParam->{ValidID};
-        $ACLData->{ConfigMatch}    = $GetParam->{ConfigMatch} || '';
+        $ACLData->{ConfigMatch}    = $GetParam->{ConfigMatch}  || '';
         $ACLData->{ConfigChange}   = $GetParam->{ConfigChange} || '';
 
         # check required parameters
@@ -317,7 +317,7 @@ sub Run {
             Description    => $ACLData->{Description},
             StopAfterMatch => $ACLData->{StopAfterMatch} || 0,
             ValidID        => $ACLData->{ValidID},
-            ConfigMatch    => $ACLData->{ConfigMatch} || '',
+            ConfigMatch    => $ACLData->{ConfigMatch}  || '',
             ConfigChange   => $ACLData->{ConfigChange} || '',
             UserID         => $Self->{UserID},
         );
@@ -474,7 +474,6 @@ sub Run {
         else {
 
             # Get all IDs from valid table including invalid-temporarily status.
-            # See bug#13592 (https://bugs.otrs.org/show_bug.cgi?id=13592).
             my %ValidList    = $Kernel::OM->Get('Kernel::System::Valid')->ValidList();
             my @ValidListIDs = grep { $ValidList{$_} } sort keys %ValidList;
 
@@ -536,8 +535,8 @@ sub Run {
             Name           => $ACLName,
             Comment        => $ACLData->{Comment},
             Description    => $ACLData->{Description},
-            ConfigMatch    => $ACLData->{ConfigMatch} || '',
-            ConfigChange   => $ACLData->{ConfigChange} || '',
+            ConfigMatch    => $ACLData->{ConfigMatch}    || '',
+            ConfigChange   => $ACLData->{ConfigChange}   || '',
             StopAfterMatch => $ACLData->{StopAfterMatch} || 0,
             ValidID        => $ACLData->{ValidID},
             UserID         => $Self->{UserID},
@@ -577,7 +576,7 @@ sub _ShowOverview {
         # show error notify, don't work with user id 1
         $Output .= $LayoutObject->Notify(
             Priority => 'Error',
-            Info =>
+            Info     =>
                 Translatable('Please note that ACL restrictions will be ignored for the Superuser account (UserID 1).'),
         );
     }
@@ -790,7 +789,7 @@ sub _ShowEdit {
 
     # get list of all possible actions
     my @PossibleActionsList;
-    my $ACLKeysLevel3Actions = $ConfigObject->Get('ACLKeysLevel3::Actions') || [];
+    my $ACLKeysLevel3Actions = $ConfigObject->Get('ACLKeysLevel3::Actions') || {};
 
     for my $Key ( sort keys %{$ACLKeysLevel3Actions} ) {
         push @PossibleActionsList, @{ $ACLKeysLevel3Actions->{$Key} };

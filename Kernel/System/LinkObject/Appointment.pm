@@ -54,7 +54,7 @@ sub new {
 
 fill up the link list with data
 
-    $Success = $LinkObject->LinkListWithData(
+    my $Success = $LinkObject->LinkListWithData(
         LinkList                     => $HashRef,
         IgnoreLinkedTicketStateTypes => 0|1,        # (optional) default 0
         UserID                       => 1,
@@ -118,7 +118,7 @@ sub LinkListWithData {
 
 checks read permission for a given object and UserID.
 
-    $Permission = $LinkObject->ObjectPermission(
+    my $Permission = $LinkObject->ObjectPermission(
         Object  => 'Appointment',
         Key     => 123,
         UserID  => 1,
@@ -149,16 +149,17 @@ sub ObjectPermission {
 
 return a hash of object descriptions
 
-Return
-    %Description = (
-        Normal => 123,
-        Long   => "The Appointment Title",
-    );
-
-    %Description = $LinkObject->ObjectDescriptionGet(
+    my %Description = $LinkObject->ObjectDescriptionGet(
         Key     => 123,
         Mode    => 'Temporary',  # (optional)
         UserID  => 1,
+    );
+
+Returns:
+
+    %Description = (
+        Normal => 123,
+        Long   => "The Appointment Title",
     );
 
 =cut
@@ -205,6 +206,12 @@ sub ObjectDescriptionGet {
 
 Return a hash list of the search results.
 
+    my $SearchList = $LinkObject->ObjectSearch(
+        SubObject    => 'Bla',     # (optional)
+        SearchParams => $HashRef,  # (optional)
+        UserID       => 1,
+    );
+
 Returns:
 
     $SearchList = {
@@ -216,12 +223,6 @@ Returns:
             },
         },
     };
-
-    $SearchList = $LinkObject->ObjectSearch(
-        SubObject    => 'Bla',     # (optional)
-        SearchParams => $HashRef,  # (optional)
-        UserID       => 1,
-    );
 
 =cut
 

@@ -274,6 +274,10 @@ sub Run {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _CheckService()
 
 checks if a service is assigned to a customer user
@@ -310,8 +314,6 @@ sub _CheckService {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

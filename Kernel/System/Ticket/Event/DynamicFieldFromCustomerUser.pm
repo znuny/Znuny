@@ -96,7 +96,7 @@ sub Run {
         if ( !defined $DynamicFieldsReverse->{ $Mapping{$CustomerUserVariableName} } ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "DynamicField $Mapping{$CustomerUserVariableName} in DynamicFieldFromCustomerUser::Mapping must be set in system and valid.",
             );
             next CUSTOMERUSERVARIABLENAME;

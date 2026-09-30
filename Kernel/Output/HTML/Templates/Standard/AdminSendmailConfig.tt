@@ -1,0 +1,365 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
+    <div class="SidebarColumn ActionsSideBarComp">
+
+[% RenderBlockStart("ActionList") %]
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+[% RenderBlockStart("ActionOverview") %]
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                    </li>
+[% RenderBlockEnd("ActionOverview") %]
+[% RenderBlockStart("ActionAdd") %]
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Add" class="CallForAction btn-main btn-primary-ghost"><span><i class="fa fa-plus-square"></i>[% Translate("Add Outbound Email Profile") | html %]</span></a>
+                    </li>
+[% RenderBlockEnd("ActionAdd") %]
+                </ul>
+            </div>
+        </div>
+[% RenderBlockEnd("ActionList") %]
+[% RenderBlockStart("Filter") %]
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2><label for="FilterSendmailConfigs">[% Translate("Filter for outbound email profiles") | html %]</label></h2>
+            </div>
+            <div class="Content">
+                <input type="text" id="FilterSendmailConfigs" class="FilterBox" placeholder="[% Translate("Just start typing to filter...") | html %]" name="FilterSendmailConfigs" value="" title="[% Translate("Filter for outbound email profiles") | html %]">
+            </div>
+        </div>
+[% RenderBlockEnd("Filter") %]
+        <div class='WidgetSimple'>
+            <div class='Header'>
+                <h2>[% Translate('Related Actions') | html %]</h2>
+            </div>
+            <div class='Content'>
+                <ul class='ActionList SpacingTop'>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminMailAccount' class='CallForAction Fullsize Center'>
+                            <span>
+                                [% Translate('Mail Account Management') | html %]
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("Manage Outbound Email Profiles") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Manage Outbound Email Profiles'),
+                    Link => Env("Action"),
+                },
+            ]
+        %]
+
+        [% SWITCH Data.Subaction %]
+            [% CASE 'Add' %]
+                [% BreadcrumbPath.push({ Name => Translate('Add Outbound Email Profile'),}) %]
+            [% CASE 'Update' %]
+                [% BreadcrumbPath.push({ Name => Translate("Update Outbound Email Profile") }) %]
+        [% END %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        <div class="WidgetSimple">
+[% RenderBlockStart("Overview") %]
+            <div class="Header filter-items">
+                <h2>[% Translate("List") | html %]</h2>
+                <a href="#" id="ValidFilter" title="[% Translate("Filter") | html %]">
+                    <span class="show-valid">[% Translate("Show Valid") | html %]</span>
+                    <span class="show-all">[% Translate("Show All") | html %]</span>
+                </a>
+            </div>
+            <div class="Content">
+                <table class="DataTable" id="SendmailConfigs">
+                    <thead>
+                        <tr>
+                            <th>[% Translate("Module") | html %]</th>
+                            <th>[% Translate("Host") | html %]</th>
+                            <th>[% Translate("Authentication type") | html %]</th>
+                            <th>[% Translate("Email addresses") | html %]</th>
+                            <th>[% Translate("Comment") | html %]</th>
+                            <th>[% Translate("Fallback") | html %]</th>
+                            <th>[% Translate("Validity") | html %]</th>
+                            <th>[% Translate("Changed") | html %]</th>
+                            <th>[% Translate("Created") | html %]</th>
+                            <th>[% Translate("Delete") | html %]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+[% RenderBlockStart("OverviewNoDataFoundMsg") %]
+                        <tr>
+                            <td colspan="10">
+                                [% Translate("No data found.") | html %]
+                            </td>
+                        </tr>
+[% RenderBlockEnd("OverviewNoDataFoundMsg") %]
+[% RenderBlockStart("OverviewRow") %]
+                        <tr [% IF Data.ValidID != 1%]class="Invalid"[% END %]>
+                            <td>
+                                <a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Update;ID=[% Data.ID | uri %]">[% Data.SendmailModule | html %]</a>
+                            </td>
+                            <td>[% Data.Host | html %]</td>
+                            <td>
+                                [% AuthenticationType = Data.AuthenticationType %]
+                                [% IF Data.AuthenticationTypes.item(AuthenticationType) %]
+                                    [% AuthenticationType = Data.AuthenticationTypes.item(AuthenticationType) %]
+                                [% END %]
+                                [% Translate(AuthenticationType) | html %]
+                            </td>
+                            <td >
+                                [% IF !Data.EmailAddressesString && !Data.IsFallbackConfig %]
+                                    <b>[% Translate("Email addresses have to be configured!") | html %]</b>
+                                [% ELSE %]
+                                    [% Data.EmailAddressesString | html %]
+                                [% END %]
+                            </td>
+                            <td title="[% Data.Comments | html %]">[% Data.Comments | truncate(20) | html %]</td>
+                            <td>
+                                [% IF Data.IsFallbackConfig %]
+                                    [% Translate("yes") | html %]
+                                [% ELSE %]
+                                    [% Translate("no") | html %]
+                                [% END %]
+                            </td>
+                            <td>[% Translate(Data.ShownValid) | html %]</td>
+                            <td>[% Data.ChangeTime | Localize("TimeShort") %]</td>
+                            <td>[% Data.CreateTime | Localize("TimeShort") %]</td>
+                            <td class="Center">
+                                <a class="TrashCan SendmailConfigDelete  table-icon-hover-md" href="#" data-url="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Delete;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Delete outbound email profile") | html %]">[% Translate("Delete outbound email profile") | html %]
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                            </td>
+                        </tr>
+[% RenderBlockEnd("OverviewRow") %]
+                        <tr class="FilterMessage Hidden">
+                            <td colspan="10">[% Translate("No matches found.") | html %]</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+[% RenderBlockEnd("Overview") %]
+
+[% RenderBlockStart("Edit") %]
+            <div class="Header">
+                <h2>
+                    [% SWITCH Data.Subaction %]
+                        [% CASE 'Add' %]
+                            [% Translate('Add Outbound Email Profile') | html  %]
+                        [% CASE 'Update' %]
+                            [% Translate('Update Outbound Email Profile') | html  %]
+                    [% END %]
+                </h2>
+            </div>
+            <div class="Content">
+                <form action="[% Env("CGIHandle") %]" method="post" class="Validate PreventMultipleSubmits">
+                    <input type="hidden" id="Action" name="Action" value="[% Env("Action") %]"/>
+                    <input type="hidden" id="Subaction" name="Subaction" value="[% Data.Subaction %]Action"/>
+                    <input type="hidden" id="ID" name="ID" value="[% Data.ID %]"/>
+                    [% IF Data.Subaction == 'Update' %]
+                        <input type="hidden" name="ContinueAfterSave" id="ContinueAfterSave" value=""/>
+                    [% END %]
+                    <fieldset class="TableLike">
+
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="SendmailModule"><span class="Marker">*</span> [% Translate("Module") | html %]</label>
+                            <div class="Field">
+                                [% Data.SendmailModuleSelection %]
+                                <div id="TypeAddError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                                <div id="TypeAddServerError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="Host">[% Translate("Host") | html %]</label>
+                            <div class="Field">
+                                <input type="text" class="W50pc [% Data.HostInvalid | html %]" name="Host" id="Host" value="[% Data.Host | html %]" maxlength="255"/>
+                                <div id="HostError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                                <div id="HostServerError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                                <p class="FieldExplanation">[% Translate("Example: mail.example.com") | html %]</p>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="CMD">[% Translate("Command") | html %]</label>
+                            <div class="Field">
+                                <input type="text" class="W50pc [% Data.CMDInvalid | html %]" name="CMD" id="CMD" value="[% Data.CMD | html %]" maxlength="2000"/>
+                                <div id="CMDServerError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="Port">[% Translate("Port") | html %]</label>
+                            <div class="Field">
+                                <input type="text" class="W50pc [% Data.PortInvalid | html %]" name="Port" id="Port" value="[% Data.Port | html %]" maxlength="5"/>
+                                <div id="PortServerError" class="TooltipErrorMessage">
+                                    <p>[% Translate("Enter a number between 1 and 65535.") | html %]</p>
+                                </div>
+                                <p class="FieldExplanation">[% Translate("Port to use for given host (if non-standard port).") | html %]</p>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="Timeout">[% Translate("Timeout") | html %]</label>
+                            <div class="Field">
+                                <input type="text" class="W50pc [% Data.TimeoutInvalid | html %]" name="Timeout" id="Timeout" value="[% Data.Timeout | html %]" maxlength="3"/>
+                                <div id="TimeoutServerError" class="TooltipErrorMessage">
+                                    <p>[% Translate("Enter a number between 1 and 999.") | html %]</p>
+                                </div>
+                                <p class="FieldExplanation">[% Translate("Timeout (in seconds) for connection to host.") | html %]</p>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="SkipSSLVerification">[% Translate("Skip SSL verification") | html %]</label>
+                            <div class="Field">
+                                <input type="checkbox" name="SkipSSLVerification" id="SkipSSLVerification" value="1" [% IF Data.SkipSSLVerification %]checked="checked"[% END %] />
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="IsFallbackConfig">[% Translate("Fallback") | html %]</label>
+                            <div class="Field">
+                                <input type="checkbox" name="IsFallbackConfig" id="IsFallbackConfig" value="1" [% IF Data.IsFallbackConfig %]checked="checked"[% END %] />
+                                <p class="FieldExplanation">[% Translate("Select to make this the fallback/default config for any email address not configured in other outbound email profiles. Only one outbound email profile can be the fallback.") | html %]</p>
+                                [% IF Data.FallbackSendmailConfig && Data.FallbackSendmailConfig.ID != Data.ID %]
+                                    <p class="FieldExplanation">
+                                        <a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Update;ID=[% Data.FallbackSendmailConfig.ID | uri %]">
+                                            [% Translate("Edit current fallback outbound email profile (host %s).", Data.FallbackSendmailConfig.Host) | html %]
+                                        </a>
+                                    </p>
+                                [% END %]
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="AuthenticationType">[% Translate("Authentication type") | html %]</label>
+                            <div class="Field">
+                                [% Data.AuthenticationTypeSelection %]
+                                <div id="AuthenticationTypeError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                                <div id="AuthenticationTypeServerError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="AuthUser">[% Translate("Username") | html %]</label>
+                            <div class="Field">
+                                <input type="text" class="W50pc [% Data.AuthUserInvalid | html %]" name="AuthUser" id="AuthUser" value="[% Data.AuthUser | html %]" maxlength="255" autocomplete="off" />
+                                <div id="AuthUserError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                                <div id="AuthUserServerError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="AuthPassword">[% Translate("Password") | html %]</label>
+                            <div class="Field">
+                                <input type="password" class="W50pc [% Data.AuthPasswordInvalid | html %]" name="AuthPassword" id="AuthPassword" value="[% Data.AuthPassword | html %]" maxlength="255" autocomplete="off" />
+                                <div id="AuthPasswordError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                                <div id="AuthPasswordServerError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="OAuth2TokenConfigID">[% Translate("OAuth2 token configuration") | html %]</label>
+                            <div class="Field">
+                                [% Data.OAuth2TokenConfigSelection %]
+                            </div>
+                            <div id="OAuth2TokenConfigIDError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                            <div id="OAuth2TokenConfigIDServerError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="EmailAddresses">[% Translate("Email addresses") | html %]</label>
+                            <div class="Field">
+                                [% Data.EmailAddressesSelection %]
+                            </div>
+                            <div id="EmailAddressesError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                            <div id="EmailAddressesServerError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="Comments">[% Translate("Comment") | html %]</label>
+                            <div class="Field">
+                                <input type="text" class="W50pc" name="Comments" id="Comments" value="[% Data.Comments | html %]" maxlength="255"/>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]</label>
+                            <div class="Field">
+                                [% Data.ValidIDSelection %]
+                                <div id="ValidIDError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                                <div id="ValidIDServerError" class="TooltipErrorMessage">
+                                    <p>[% Translate("This field is required.") | html %]</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-cancel-ghost btn-main btn-width-md">[% Translate("Cancel") | html %]</a>
+                                [% IF Data.Subaction == 'Update' %]
+                                    <button class="CallForAction Primary btn-primary-ghost btn-main btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save and finish") | html %]</span></button>
+                                    <button class="CallForAction Primary btn-primary btn-main btn-width-md" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                                [% ELSE %]
+                                    <button class="CallForAction Primary btn-primary btn-main btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
+                                [% END %]
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+[% RenderBlockEnd("Edit") %]
+
+        </div>
+    </div>
+</div>

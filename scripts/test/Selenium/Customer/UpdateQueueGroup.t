@@ -22,7 +22,15 @@ $Selenium->RunTest(
     sub {
 
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
         my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
+
+        # Do not check RichText.
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'Frontend::RichText',
+            Value => 0,
+        );
 
         # make sure that CustomerGroupSupport is disabled
         $HelperObject->ConfigSettingChange(
@@ -59,8 +67,9 @@ $Selenium->RunTest(
             "Queue is created - $QueueName"
         );
 
-        # click on 'Create your first ticket'
-        $Selenium->find_element( ".btn-primary", 'css' )->VerifiedClick();
+        # Navigate to CustomerTicketMessage screen.
+        my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
+        $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketMessage");
 
         # verify that test queue is available for users group
         $Self->True(

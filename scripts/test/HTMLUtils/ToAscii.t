@@ -68,13 +68,25 @@ More Text',
 <div>--Shawn</div>
 <div>&nbsp;</div>',
         Result => 'Martin,
- ' . chr(160) . '
- I am lost. Martin says that...
- ' . chr(160) . '
- --Shawn
- ' . chr(160) . '
+' . chr(160) . '
+I am lost. Martin says that...
+' . chr(160) . '
+--Shawn
+' . chr(160) . '
 ',
         Name => 'ToAscii - simple'
+    },
+    {
+        Input  => '<p>a</p><p>&nbsp;</p><p>b</p>',
+        Result => "a\n\nb\n",
+        Name   =>
+            'ToAscii - CKEditor 5 represents an empty line as <p>&nbsp;</p>, must become an empty line, not a literal non breaking space',
+    },
+    {
+        Input  => "<html><body>A</body></html>\n\n<!DOCTYPE html><html><body>B</body></html>",
+        Result => "A\n\nB",
+        Name   =>
+            'ToAscii - EmailParser concatenates complete HTML documents for multipart/mixed emails, keep them visually separated',
     },
     {
         Input =>
@@ -93,6 +105,19 @@ More Text',
     },
     {
         Input =>
+            '<ol><li data-list-item-id="e94a52ab905a6938044906b47267e137d">one</li><li data-list-item-id="e1e8780a4ab819e68bd4db3e0275bd5c7">two</li></ol><ul><li data-list-item-id="e58f356348597d9f2819aad0e4ec404e8">a</li><li data-list-item-id="e2fa11a028a81cef773db3c266d342d62">b</li></ul>',
+        Result => '
+ - one
+ - two
+
+ - a
+ - b
+
+',
+        Name => 'ToAscii - CKEditor 5 adds a data-list-item-id attribute to <li>, must still be converted',
+    },
+    {
+        Input =>
             '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></head><body style="font-family:Geneva,Helvetica,Arial,sans-serif; font-size: 12px;"><p>test<br />
 test<br />
 test<br />
@@ -100,8 +125,7 @@ test<br />
 test<br />
 </p>
 <ul><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li></ul></body></html>',
-        Result => '
-test
+        Result => 'test
 test
 test
 test
@@ -118,12 +142,12 @@ test
     },
     {
         Input  => "<pre>Some Text\n\nWith new Lines</pre>",
-        Result => "\nSome Text\n\nWith new Lines\n\n",
+        Result => "Some Text\n\nWith new Lines\n\n",
         Name   => 'ToAscii - <pre>'
     },
     {
         Input  => "<code>Some Text\n\nWith new Lines  </code><br />Some Other Text",
-        Result => "\nSome Text\n\nWith new Lines  \n\nSome Other Text",
+        Result => "Some Text\n\nWith new Lines \n\nSome Other Text",
         Name   => 'ToAscii - <code>'
     },
     {
@@ -147,7 +171,7 @@ Line 3</div>",
     {
         Input =>
             "<pre><a class=\"moz-txt-link-freetext\"\rhref=\"mailto:html\@example.com\">mailto:html\@example.com</a></pre>",
-        Result => "\n[1]mailto:html\@example.com\n\n\n\n[1] mailto:html\@example.com\n",
+        Result => "[1]mailto:html\@example.com\n\n\n\n[1] mailto:html\@example.com\n",
         Name   => 'ToAscii - <a class ... href ..>'
     },
     {
@@ -173,6 +197,12 @@ Fifth Line',
         Input  => '<td>Test table cell</td><td>Second cell</td>',
         Result => 'Test table cell Second cell ',
         Name   => 'ToAscii - Test for bug#8352 - Wrong substitution regex in HTMLUtils.pm->ToAscii.'
+    },
+    {
+        Input  => '<table><tr><td>a</td><td>&nbsp;</td></tr></table>',
+        Result => "a \n",
+        Name   =>
+            'ToAscii - CKEditor 5 fills empty table cells with &nbsp;, must become an empty cell, not a literal non breaking space',
     },
     {
         Input  => 'a       b',
@@ -257,6 +287,19 @@ Fifth Line',
             'Ticket::Frontend::TextAreaNote' => 5,
         },
 
+    },
+    {
+        Input  => "<td>Test\ntable\ncell</td>",
+        Result => 'Test table cell ',
+        Name   =>
+            'ToAscii - stray new lines from HTML source formatting (e.g. CKEditor 5 output) must not leak into the result',
+    },
+    {
+        Input =>
+            "<table><tr><td>row1\ncol1</td><td>row1\ncol2</td></tr><tr><td>row2\ncol1</td><td>row2\ncol2</td></tr></table>",
+        Result => "row1 col1 row1 col2 \nrow2 col1 row2 col2 \n",
+        Name   =>
+            'ToAscii - stray new lines inside table cells from HTML source formatting must not leak into the result',
     },
 );
 

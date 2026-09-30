@@ -224,7 +224,7 @@ Core.UI.TreeSelection = (function (TargetNS) {
     TargetNS.ShowTreeSelection = function($TriggerObj) {
 
         var $TreeObj = $('<div class="JSTreeField"><ul></ul></div>'),
-            $SelectObj = $TriggerObj.prevAll('select'),
+            $SelectObj = $TriggerObj.parent().nextAll('select'),
             SelectSize = $SelectObj.attr('size'),
             Multiple = ($SelectObj.attr('multiple') !== '' && $SelectObj.attr('multiple') !== undefined) ? true : false,
             ElementCount = $SelectObj.find('option').length,
@@ -266,7 +266,10 @@ Core.UI.TreeSelection = (function (TargetNS) {
 
         // Check if there are elements to select from
         if (ElementCount === 1 && $SelectObj.find('option').text() === '-') {
-            alert(Core.Language.Translate('There are currently no elements available to select from.'));
+            Core.UI.Dialog.ShowAlert(
+                Core.Language.Translate('An error occurred'),
+                Core.Language.Translate('There are currently no elements available to select from.')
+            );
             return false;
         }
 
@@ -358,7 +361,7 @@ Core.UI.TreeSelection = (function (TargetNS) {
             $('#TreeContainer')
                 .prepend($TreeObj)
                 .prepend('<div id="TreeSearch"><input type="text" id="TreeSearchInput" placeholder="' + Core.Language.Translate('Search') + '..." /><span title="' + Core.Language.Translate('Delete') + '">x</span></div>')
-                .append('<input type="button" id="SubmitTree" class="Primary" title="' + Core.Language.Translate('Apply') + '" value="' + Core.Language.Translate('Apply') + '" />');
+                .append('<input type="button" id="SubmitTree" class="CallForAction Primary btn-primary btn-main btn-width-md" title="' + Core.Language.Translate('Apply') + '" value="' + Core.Language.Translate('Apply') + '" />')
 
             // Get the element which is currently being focused and set the focus to the search field
             $CurrentFocusedObj = document.activeElement;
@@ -459,7 +462,7 @@ Core.UI.TreeSelection = (function (TargetNS) {
      *      To bind click event no tree selection icons next to select boxes.
      */
     TargetNS.InitTreeSelection = function() {
-        $('.Field, fieldset').off('click.ShowTreeSelection').on('click.ShowTreeSelection', '.ShowTreeSelection', function () {
+        $(document).off('click.ShowTreeSelection').on('click.ShowTreeSelection', '.ShowTreeSelection', function () {
             Core.UI.TreeSelection.ShowTreeSelection($(this));
             return false;
         });
@@ -568,10 +571,10 @@ Core.UI.TreeSelection = (function (TargetNS) {
                 KeyB = b.Key.toLowerCase();
 
             if (KeyA < KeyB) {
-               return -1;
+                return -1;
             }
             if (KeyA > KeyB) {
-               return 1;
+                return 1;
             }
             return 0;
         });

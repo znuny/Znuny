@@ -82,10 +82,11 @@ Check if provided EffectiveValue matches structure defined in XMLContentParsed.
     );
 
 Result:
+
     %Result = (
-        EffectiveValue => 'option-1',   # Note for Select ValueTypes EffectiveValue is not changed.
-        Success => 1,
-        Error   => undef,
+        EffectiveValue => 'option-1', # Note for Select ValueTypes EffectiveValue is not changed.
+        Success        => 1,
+        Error          => undef,
     );
 
 =cut
@@ -454,7 +455,9 @@ sub AddItem {
 Returns attribute name in the parsed XML that contains Value.
 
     my $Result = $ValueTypeObject->ValueAttributeGet();
+
 Result:
+
     $Result = 'SelectedID';
 
 =cut

@@ -12,7 +12,7 @@ package Kernel::GenericInterface::Invoker;
 use strict;
 use warnings;
 
-use Kernel::System::VariableCheck qw(IsStringWithData);
+use Kernel::System::VariableCheck qw(:all);
 
 # Prevent 'Used once' warning for Kernel::OM.
 use Kernel::System::ObjectManager;
@@ -140,8 +140,39 @@ prepare the invocation of the configured remote web service.
 sub PrepareRequest {
     my ( $Self, %Param ) = @_;
 
-    # Start map on backend.
-    return $Self->{BackendObject}->PrepareRequest(%Param);
+    my $UtilObject = $Kernel::OM->Get('Kernel::System::Util');
+
+    my $Result = $Self->{BackendObject}->PrepareRequest(%Param);
+
+    #
+    # Handle configured omitted and Base64-encoded fields.
+    #
+    return $Result if !IsHashRefWithData($Result);
+    return $Result if !IsHashRefWithData( $Result->{Data} );
+
+    return $Result if !IsHashRefWithData( $Param{Webservice} );
+    return $Result if !IsStringWithData( $Param{InvokerName} );
+
+    my $InvokerConfig = $Param{Webservice}->{Config}->{Requester}->{Invoker}->{ $Param{InvokerName} } // {};
+    return $Result if !IsHashRefWithData($InvokerConfig);
+
+    # Remove configured fields from payload.
+    if ( IsArrayRefWithData( $InvokerConfig->{PayloadOmittedFields} ) ) {
+        $UtilObject->DataStructureRemoveElements(
+            Data     => $Result->{Data},
+            HashKeys => $InvokerConfig->{PayloadOmittedFields},
+        );
+    }
+
+    # Base64 encode configured field values of payload.
+    if ( IsArrayRefWithData( $InvokerConfig->{PayloadBase64EncodedFields} ) ) {
+        $UtilObject->Base64DeepEncode(
+            Data     => $Result->{Data},
+            HashKeys => $InvokerConfig->{PayloadBase64EncodedFields},
+        );
+    }
+
+    return $Result;
 }
 
 =head2 HandleResponse()

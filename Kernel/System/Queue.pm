@@ -238,6 +238,7 @@ get standard responses of a queue
     my %Templates = $QueueObject->QueueStandardTemplateMemberList( QueueID => 123 );
 
 Returns:
+
     %Templates = (
         1 => 'Some Name',
         2 => 'Some Name',
@@ -249,6 +250,7 @@ Returns:
     );
 
 Returns:
+
     %Responses = (
         Answer => {
             1 => 'Some Name',
@@ -260,6 +262,7 @@ Returns:
     my %Queues = $QueueObject->QueueStandardTemplateMemberList( StandardTemplateID => 123 );
 
 Returns:
+
     %Queues = (
         1 => 'Some Name',
         2 => 'Some Name',
@@ -849,8 +852,8 @@ sub QueueAdd {
             . ' (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, '
             . ' ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
-            \$Param{Name},     \$Param{GroupID},        \$Param{UnlockTimeout}, \$Param{SystemAddressID},
-            \$Param{Calendar}, \$Param{DefaultSignKey}, \$Param{SalutationID},  \$Param{SignatureID},
+            \$Param{Name},              \$Param{GroupID},             \$Param{UnlockTimeout}, \$Param{SystemAddressID},
+            \$Param{Calendar},          \$Param{DefaultSignKey},      \$Param{SalutationID},  \$Param{SignatureID},
             \$Param{FirstResponseTime}, \$Param{FirstResponseNotify}, \$Param{UpdateTime},
             \$Param{UpdateNotify},      \$Param{SolutionTime},        \$Param{SolutionNotify},
             \$Param{FollowUpID},        \$Param{FollowUpLock},        \$Param{ValidID},
@@ -1173,7 +1176,7 @@ sub QueueUpdate {
                 valid_id = ?, change_time = current_timestamp, change_by = ?
             WHERE id = ?',
         Bind => [
-            \$Param{Name}, \$Param{Comment}, \$Param{GroupID}, \$Param{UnlockTimeout},
+            \$Param{Name},              \$Param{Comment},             \$Param{GroupID}, \$Param{UnlockTimeout},
             \$Param{FirstResponseTime}, \$Param{FirstResponseNotify}, \$Param{UpdateTime},
             \$Param{UpdateNotify},      \$Param{SolutionTime},        \$Param{SolutionNotify},
             \$Param{FollowUpID},        \$Param{FollowUpLock},        \$Param{SystemAddressID},

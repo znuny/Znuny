@@ -208,7 +208,7 @@ for my $TicketSubjectConfig ( 'Right', 'Left' ) {
                         },
                         {
                             Key   => 'To',
-                            Value => 'EMAILADDRESS:darthvader@otrs.org',
+                            Value => 'EMAILADDRESS:darthvader@znuny.org',
                         },
                     ],
                     Not => [
@@ -246,7 +246,7 @@ for my $TicketSubjectConfig ( 'Right', 'Left' ) {
                         },
                         {
                             Key   => 'To',
-                            Value => 'EMAILADDRESS:darthvader2@otrs.org',
+                            Value => 'EMAILADDRESS:darthvader2@znuny.org',
                         },
                     ],
                     Not => [
@@ -280,7 +280,7 @@ for my $TicketSubjectConfig ( 'Right', 'Left' ) {
                         },
                         {
                             Key   => 'To',
-                            Value => 'otrs.org',
+                            Value => 'znuny.org',
                         },
                     ],
                     Not => [
@@ -314,7 +314,7 @@ for my $TicketSubjectConfig ( 'Right', 'Left' ) {
                         },
                         {
                             Key   => 'To',
-                            Value => 'darthvader@otrs.org',
+                            Value => 'darthvader@znuny.org',
                         },
                     ],
                     Not => [
@@ -486,7 +486,7 @@ for my $TicketSubjectConfig ( 'Right', 'Left' ) {
                     my $MD5 = $MainObject->MD5sum( String => $Article{Body} ) || '';
                     $Self->Is(
                         $MD5,
-                        'b50d85781d2ac10c210f99bf8142badc',
+                        'd83a38e718fff125e1d1cfd324ff7f24',
                         $NamePrefix . ' md5 body check',
                     );
 

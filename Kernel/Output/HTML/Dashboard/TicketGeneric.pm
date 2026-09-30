@@ -11,9 +11,10 @@ package Kernel::Output::HTML::Dashboard::TicketGeneric;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -39,6 +40,11 @@ sub new {
         $Self->{$Item} = $ParamObject->GetParam( Param => $Item ) || $Param{$Item};
     }
 
+    # Validate OrderBy - only Up and Down are valid values.
+    if ( defined $Self->{OrderBy} && $Self->{OrderBy} !~ m{\A(?:Up|Down)\z} ) {
+        $Self->{OrderBy} = undef;
+    }
+
     # Get add filters param.
     $Self->{AddFilters} = $ParamObject->GetParam( Param => 'AddFilters' ) || $Param{AddFilters} || 0;
     $Self->{TabAction}  = $ParamObject->GetParam( Param => 'TabAction' )  || $Param{TabAction}  || 0;
@@ -48,7 +54,7 @@ sub new {
 
     # set filter settings
     for my $Item (qw(ColumnFilter GetColumnFilter GetColumnFilterSelect)) {
-        $Self->{$Item} = $Param{$Item};
+        $Self->{$Item} = $Param{$Item} || {};
     }
 
     # save column filters
@@ -59,6 +65,10 @@ sub new {
     my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+
+    $Self->{ColumnFilterMultiselectActions} = {
+        AgentDashboard => 1,
+    };
 
     if ($RemoveFilters) {
         $UserObject->SetPreferences(
@@ -77,7 +87,6 @@ sub new {
     elsif (
         IsHashRefWithData( $Self->{GetColumnFilter} )
         && IsHashRefWithData( $Self->{GetColumnFilterSelect} )
-        && IsHashRefWithData( $Self->{ColumnFilter} )
         )
     {
 
@@ -96,11 +105,18 @@ sub new {
 
             PREFVALUES:
             for my $Column ( sort keys %{ $Self->{GetColumnFilterSelect} } ) {
-                if ( $Self->{GetColumnFilterSelect}->{$Column} eq 'DeleteFilter' ) {
+                my $Value = $Self->{GetColumnFilterSelect}->{$Column};
+                if ( ref $Value eq 'ARRAY' ) {
+                    if ( grep { $_ eq 'DeleteFilter' } @{$Value} ) {
+                        delete $ColumnPrefValues->{$Column};
+                        next PREFVALUES;
+                    }
+                }
+                elsif ( $Value eq 'DeleteFilter' ) {
                     delete $ColumnPrefValues->{$Column};
                     next PREFVALUES;
                 }
-                $ColumnPrefValues->{$Column} = $Self->{GetColumnFilterSelect}->{$Column};
+                $ColumnPrefValues->{$Column} = $Value;
             }
 
             $UserObject->SetPreferences(
@@ -116,9 +132,43 @@ sub new {
                     Data => $Preferences{ $Self->{PrefKeyColumnFiltersRealKeys} },
                 );
             }
-            REALKEYVALUES:
+
+            # Remove real-key prefs for columns cleared via DeleteFilter even if ColumnFilter is empty.
+            COLUMN:
+            for my $Column ( sort keys %{ $Self->{GetColumnFilterSelect} } ) {
+                my $Value    = $Self->{GetColumnFilterSelect}->{$Column};
+                my $IsDelete = 0;
+                if ( ref $Value eq 'ARRAY' ) {
+                    $IsDelete = ( grep { $_ eq 'DeleteFilter' } @{$Value} ) ? 1 : 0;
+                }
+                elsif ( defined $Value && $Value eq 'DeleteFilter' ) {
+                    $IsDelete = 1;
+                }
+                next COLUMN if !$IsDelete;
+
+                my @RealKeys;
+                if ( $Column eq 'CustomerID' ) {
+                    @RealKeys = ( 'CustomerID', 'CustomerIDRaw' );
+                }
+                elsif ( $Column eq 'CustomerUserID' ) {
+                    @RealKeys = ( 'CustomerUserLogin', 'CustomerUserLoginRaw' );
+                }
+                elsif ( $Column =~ m{\A DynamicField_}xms ) {
+                    @RealKeys = ($Column);
+                }
+                else {
+                    @RealKeys = ( $Column . 'IDs' );
+                }
+
+                for my $RealKey (@RealKeys) {
+                    delete $ColumnPrefRealKeysValues->{$RealKey};
+                    delete $Self->{ColumnFilter}->{$RealKey};
+                }
+            }
+
+            COLUMN:
             for my $Column ( sort keys %{ $Self->{ColumnFilter} } ) {
-                next REALKEYVALUES if !$Column;
+                next COLUMN if !$Column;
 
                 my $DeleteFilter = 0;
                 if ( IsArrayRefWithData( $Self->{ColumnFilter}->{$Column} ) ) {
@@ -140,7 +190,7 @@ sub new {
                 if ($DeleteFilter) {
                     delete $ColumnPrefRealKeysValues->{$Column};
                     delete $Self->{ColumnFilter}->{$Column};
-                    next REALKEYVALUES;
+                    next COLUMN;
                 }
                 $ColumnPrefRealKeysValues->{$Column} = $Self->{ColumnFilter}->{$Column};
             }
@@ -188,6 +238,7 @@ sub new {
             $Self->{ColumnFilter}->{$Field} = $PreferencesColumnFiltersRealKeys->{$Field};
         }
     }
+    $Self->_SanitizeTreeViewColumnFilters();
 
     # get current filter
     my $Name                     = $ParamObject->GetParam( Param => 'Name' ) || '';
@@ -368,6 +419,20 @@ sub Preferences {
     my @ColumnsAvailableNotEnabled;
 
     # check for default settings
+
+    $Self->{PageShownData} = {
+        5  => ' 5',
+        10 => '10',
+        15 => '15',
+        20 => '20',
+        25 => '25',
+        50 => '50',
+    };
+
+    if ( $Self->{Config}->{DefaultPageShown} && IsHashRefWithData( $Self->{Config}->{DefaultPageShown} ) ) {
+        $Self->{PageShownData} = $Self->{Config}->{DefaultPageShown};
+    }
+
     if (
         $Self->{Config}->{DefaultColumns}
         && IsHashRefWithData( $Self->{Config}->{DefaultColumns} )
@@ -433,17 +498,10 @@ sub Preferences {
 
     my @Params = (
         {
-            Desc  => Translatable('Shown Tickets'),
-            Name  => $Self->{PrefKeyShown},
-            Block => 'Option',
-            Data  => {
-                5  => ' 5',
-                10 => '10',
-                15 => '15',
-                20 => '20',
-                25 => '25',
-                50 => '50',
-            },
+            Desc        => Translatable('Shown Tickets'),
+            Name        => $Self->{PrefKeyShown},
+            Block       => 'Option',
+            Data        => $Self->{PageShownData},
             SelectedID  => $Self->{PageShown},
             Translation => 0,
         },
@@ -590,11 +648,24 @@ sub FilterContent {
 sub Run {
     my ( $Self, %Param ) = @_;
 
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
     my %SearchParams        = $Self->_SearchParamsGet(%Param);
-    my @Columns             = @{ $SearchParams{Columns} };
+    my @Columns             = @{ $SearchParams{Columns} // [] };
     my %TicketSearch        = %{ $SearchParams{TicketSearch} };
     my %TicketSearchSummary = %{ $SearchParams{TicketSearchSummary} };
     my %Filter              = %{ $SearchParams{Filter} };
+
+    # Validate SortBy against known sortable columns; undef falls through to default 'Age'.
+    if ( defined $Self->{SortBy} && !$Self->{ValidSortableColumns}->{ $Self->{SortBy} } ) {
+        $Self->{SortBy} = undef;
+    }
+
+    my @ArticleAttributes        = @{ $ConfigObject->Get('DashboardBackend::TicketGeneric::ArticleAttributes') || [] };
+    my %ArticleAttributes        = map { $_ => 1 } @ArticleAttributes;
+    my @ConfiguredArticleColumns = keys %ArticleAttributes;
+    my %VisibleColumns           = map  { $_ => 1 } @Columns;
+    my @ArticleColumns           = grep { $VisibleColumns{$_} } @ConfiguredArticleColumns;
 
     # Add the additional filter to the ticket search param.
     if ( $Self->{AdditionalFilter} ) {
@@ -604,10 +675,23 @@ sub Run {
         );
     }
 
-    my $CacheKey = join '-', $Self->{Name}, $Self->{Action}, $Self->{PageShown}, $Self->{StartHit}, $Self->{UserID};
+    my $CacheKey     = join '-', $Self->{Name}, $Self->{Action}, $Self->{PageShown}, $Self->{StartHit}, $Self->{UserID};
     my $CacheColumns = join(
         ',',
-        map { $_ . '=>' . $Self->{GetColumnFilterSelect}->{$_} } sort keys %{ $Self->{GetColumnFilterSelect} }
+        map {
+            my $Column = $_;
+            my $Value  = $Self->{GetColumnFilterSelect}->{$Column};
+
+            my $SerializedValue;
+            if ( ref $Value eq 'ARRAY' ) {
+                $SerializedValue = join '|', sort grep { defined $_ && $_ ne '' } @{$Value};
+            }
+            else {
+                $SerializedValue = defined $Value ? $Value : '';
+            }
+
+            $Column . '=>' . $SerializedValue;
+        } sort keys %{ $Self->{GetColumnFilterSelect} || {} }
     );
     $CacheKey .= '-' . $CacheColumns if $CacheColumns;
 
@@ -680,7 +764,10 @@ sub Run {
     my $CacheUsed = 1;
 
     # get ticket object
-    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
+    my $ArticleObject = @ArticleColumns
+        ? $Kernel::OM->Get('Kernel::System::Ticket::Article')
+        : undef;
 
     if ( !$TicketIDs ) {
 
@@ -744,7 +831,6 @@ sub Run {
             }
 
             # Filter is used and is not in user prefered values, show no results.
-            # See bug#12808 ( https://bugs.otrs.org/show_bug.cgi?id=12808 ).
             if (
                 $Filter
                 && IsArrayRefWithData( $TicketSearchSummary{ $Self->{Filter} }->{$Filter} )
@@ -861,7 +947,6 @@ sub Run {
                 }
 
                 # Filter is used and is not in user prefered values, show no results.
-                # See bug#12808 ( https://bugs.otrs.org/show_bug.cgi?id=12808 ).
                 if (
                     $Filter
                     && IsArrayRefWithData( $TicketSearchSummary{$Type}->{$Filter} )
@@ -944,8 +1029,6 @@ sub Run {
             Filter => $Filter{ $Self->{Filter} },
         },
     );
-
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     # show only AssignedToCustomerUser if we have the filter
     if ( $TicketSearchSummary{AssignedToCustomerUser} ) {
@@ -1060,10 +1143,18 @@ sub Run {
     COLUMNNAME:
     for my $ColumnName ( sort keys %GetColumnFilter ) {
         next COLUMNNAME if !$ColumnName;
-        next COLUMNNAME if !$GetColumnFilter{$ColumnName};
-        $ColumnFilterLink
-            .= ';' . $LayoutObject->Ascii2Html( Text => 'ColumnFilter' . $ColumnName )
-            . '=' . $LayoutObject->LinkEncode( $GetColumnFilter{$ColumnName} );
+        next COLUMNNAME if !defined $GetColumnFilter{$ColumnName};
+
+        my $Value  = $GetColumnFilter{$ColumnName};
+        my @Values = ref $Value eq 'ARRAY' ? @{$Value} : ( defined $Value ? $Value : () );
+        @Values = grep { defined $_ && $_ ne '' } @Values;
+        next COLUMNNAME if !@Values;
+
+        for my $Value (@Values) {
+            $ColumnFilterLink
+                .= ';' . $LayoutObject->Ascii2Html( Text => 'ColumnFilter' . $ColumnName )
+                . '=' . $LayoutObject->LinkEncode($Value);
+        }
     }
 
     my $LinkPage =
@@ -1245,6 +1336,9 @@ sub Run {
             }
             elsif ( $HeaderColumn eq 'CustomerUserID' ) {
                 $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Customer User ID');
+            }
+            elsif ( $HeaderColumn eq 'AccountedTime' ) {
+                $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Accounted time');
             }
             else {
                 $TranslatedWord = $LayoutObject->{LanguageObject}->Translate($HeaderColumn);
@@ -1744,6 +1838,53 @@ sub Run {
             Silent        => 1
         );
 
+        if (@ArticleColumns) {
+            my @Articles = $ArticleObject->ArticleList(
+                TicketID   => $TicketID,
+                SenderType => 'customer',
+                OnlyLast   => 1,
+            );
+
+            if ( !@Articles ) {
+                @Articles = $ArticleObject->ArticleList(
+                    TicketID   => $TicketID,
+                    SenderType => 'agent',
+                    OnlyLast   => 1,
+                );
+            }
+
+            if ( !@Articles ) {
+                @Articles = $ArticleObject->ArticleList(
+                    TicketID => $TicketID,
+                    OnlyLast => 1,
+                );
+            }
+
+            if (@Articles) {
+                my $Article = $Articles[0];
+                my %Article = $ArticleObject->BackendForArticle( %{$Article} )->ArticleGet(
+                    %{$Article},
+                    DynamicFields => 0,
+                );
+
+                next TICKETID if !$Article{ArticleID};
+
+                my %ArticleFields = $LayoutObject->ArticleFields(
+                    TicketID  => $TicketID,
+                    ArticleID => $Article{ArticleID},
+                );
+
+                COLUMN:
+                for my $ArticleColumn (@ArticleColumns) {
+                    next COLUMN if !IsHashRefWithData( $ArticleFields{$ArticleColumn} );
+                    next COLUMN if !defined $ArticleFields{$ArticleColumn}->{Value};
+
+                    $Ticket{$ArticleColumn} = $ArticleFields{$ArticleColumn}->{Realname}
+                        // $ArticleFields{$ArticleColumn}->{Value};
+                }
+            }
+        }
+
         %Ticket = ( %Ticket, %{ $CustomColumns->{$TicketID} } ) if $CustomColumns->{$TicketID};
 
         next TICKETID if !%Ticket;
@@ -1968,6 +2109,9 @@ sub Run {
                     }
                     $DataValue = $CustomerCompanyData{CustomerCompanyName};
                 }
+                elsif ( $Column eq 'AccountedTime' ) {
+                    $DataValue = $TicketObject->TicketAccountedTimeGet( TicketID => $Ticket{TicketID} );
+                }
                 else {
                     $DataValue = $Ticket{$Column};
                 }
@@ -2167,13 +2311,29 @@ sub _InitialColumnFilter {
         $Class .= ' ' . $Param{Css};
     }
 
+    my $MultiSelect = $Self->{ColumnFilterMultiselectActions}->{ $Self->{Action} };
+    my $SelectedID  = $Param{SelectedValue};
+    if ($MultiSelect) {
+        if ( ref $SelectedID eq 'ARRAY' ) {
+
+            # Keep array ref for BuildSelection Multiple.
+        }
+        else {
+            $SelectedID = defined $SelectedID && $SelectedID ne '' ? [$SelectedID] : [];
+        }
+    }
+    else {
+        $SelectedID = ref $SelectedID eq 'ARRAY' ? ( $SelectedID->[0] // '' ) : ( $SelectedID // '' );
+    }
+
     # build select HTML
     my $ColumnFilterHTML = $LayoutObject->BuildSelection(
         Name        => 'ColumnFilter' . $Param{ColumnName} . $Self->{Name},
         Data        => $Data,
         Class       => $Class . ' Modernize',
         Translation => $TranslationOption,
-        SelectedID  => '',
+        SelectedID  => $SelectedID,
+        Multiple    => $MultiSelect ? 1 : 0,
         TreeView    => 1,
     );
 
@@ -2297,12 +2457,43 @@ sub _ColumnFilterJSON {
 
         my %Values = %{ $Param{ColumnValues} };
 
-        # Set possible values.
+        my %ExistingValues = map { $_ => 1 } values %Values;
+        my %DisabledParentValues;
+        VALUE:
+        for my $Value ( values %Values ) {
+            next VALUE if !IsStringWithData($Value);
+            next VALUE if $Value !~ m{::};
+
+            my $Parent = '';
+            PART:
+            for my $Part ( split m{::}, $Value ) {
+                $Parent = $Parent ? $Parent . '::' . $Part : $Part;
+                next PART if $Parent eq $Value;
+                next PART if $ExistingValues{$Parent};
+
+                $DisabledParentValues{$Parent} = 1;
+            }
+        }
+
+        my @ColumnFilterValues;
+        for my $Value ( sort keys %DisabledParentValues ) {
+            push @ColumnFilterValues, {
+                Key      => '-',
+                Value    => $Value,
+                Disabled => 1,
+            };
+        }
+
         for my $ValueKey ( sort { lc $Values{$a} cmp lc $Values{$b} } keys %Values ) {
-            push @{$Data}, {
+            push @ColumnFilterValues, {
                 Key   => $ValueKey,
                 Value => $Values{$ValueKey}
             };
+        }
+
+        # Set possible values.
+        for my $Value ( sort { lc( $a->{Value} . '::' ) cmp lc( $b->{Value} . '::' ) } @ColumnFilterValues ) {
+            push @{$Data}, $Value;
         }
     }
 
@@ -2318,6 +2509,21 @@ sub _ColumnFilterJSON {
         $TranslationOption = 1;
     }
 
+    my $MultiSelect = $Self->{ColumnFilterMultiselectActions}->{ $Self->{Action} };
+    my $SelectedID  = $Param{SelectedValue};
+    if ($MultiSelect) {
+        if ( ref $SelectedID eq 'ARRAY' ) {
+
+            # Keep array ref for BuildSelectionJSON Multiple.
+        }
+        else {
+            $SelectedID = defined $SelectedID && $SelectedID ne '' ? [$SelectedID] : [];
+        }
+    }
+    else {
+        $SelectedID = ref $SelectedID eq 'ARRAY' ? ( $SelectedID->[0] // '' ) : ( $SelectedID // '' );
+    }
+
     # build select HTML
     my $JSON = $LayoutObject->BuildSelectionJSON(
         [
@@ -2327,7 +2533,8 @@ sub _ColumnFilterJSON {
                 Class        => 'ColumnFilter',
                 Sort         => 'AlphanumericKey',
                 TreeView     => 1,
-                SelectedID   => $Param{SelectedValue},
+                Multiple     => $MultiSelect ? 1 : 0,
+                SelectedID   => $SelectedID,
                 Translation  => $TranslationOption,
                 AutoComplete => 'off',
             },
@@ -2335,6 +2542,75 @@ sub _ColumnFilterJSON {
     );
 
     return $JSON;
+}
+
+sub _SanitizeTreeViewColumnFilters {
+    my ($Self) = @_;
+
+    # Queue, Service and SLA use TreeView rendering and may submit "null" for parent node
+    # selections, which must be removed before passing values to the ticket search.
+    my %TreeColumns = (
+        Queue   => 'QueueIDs',
+        Service => 'ServiceIDs',
+        SLA     => 'SLAIDs',
+    );
+
+    my $IsNullValue = sub {
+        my ($Value) = @_;
+        return if !defined $Value;
+        return $Value =~ /\A null \z/i;
+    };
+
+    COLUMN:
+    for my $Column ( sort keys %TreeColumns ) {
+
+        if (
+            IsHashRefWithData( $Self->{GetColumnFilterSelect} )
+            && defined $Self->{GetColumnFilterSelect}->{$Column}
+            && $IsNullValue->( $Self->{GetColumnFilterSelect}->{$Column} )
+            )
+        {
+            delete $Self->{GetColumnFilterSelect}->{$Column};
+        }
+
+        if ( IsHashRefWithData( $Self->{GetColumnFilter} ) ) {
+            my $GetKey = $Column . ( $Self->{Name} // '' );
+            if (
+                defined $Self->{GetColumnFilter}->{$GetKey}
+                && $IsNullValue->( $Self->{GetColumnFilter}->{$GetKey} )
+                )
+            {
+                delete $Self->{GetColumnFilter}->{$GetKey};
+            }
+        }
+
+        next COLUMN if !IsHashRefWithData( $Self->{ColumnFilter} );
+        my $FilterKey  = $TreeColumns{$Column};
+        my $ColumnData = $Self->{ColumnFilter}->{$FilterKey};
+        next COLUMN if !$ColumnData;
+
+        if ( IsArrayRefWithData($ColumnData) ) {
+            my @ValidValues = grep { !$IsNullValue->($_) } @{$ColumnData};
+            if (@ValidValues) {
+                $Self->{ColumnFilter}->{$FilterKey} = \@ValidValues;
+            }
+            else {
+                delete $Self->{ColumnFilter}->{$FilterKey};
+            }
+        }
+        elsif ( IsHashRefWithData($ColumnData) ) {
+            for my $Operator ( sort keys %{$ColumnData} ) {
+                if ( $IsNullValue->( $ColumnData->{$Operator} ) ) {
+                    delete $ColumnData->{$Operator};
+                }
+            }
+            if ( !keys %{$ColumnData} ) {
+                delete $Self->{ColumnFilter}->{$FilterKey};
+            }
+        }
+    }
+
+    return 1;
 }
 
 sub _SearchParamsGet {

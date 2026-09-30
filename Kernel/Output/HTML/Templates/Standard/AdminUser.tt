@@ -8,10 +8,10 @@
 # --
 
 [% RenderBlockStart("Overview") %]
-<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar">
     <div class="SidebarColumn ActionsSideBarComp">
 [% RenderBlockStart("ActionList") %]
-        <div class="WidgetSimple WidgetActions">
+        <div class="WidgetSimple">
             <div class="Header">
                 <h2>[% Translate("Actions") | html %]</h2>
             </div>

@@ -94,7 +94,7 @@ sub Run {
                 ObjectLogType => 'Message',
                 Priority      => 'Notice',
                 Key           => 'Kernel::System::PostMaster::Filter::CMD',
-                Value =>
+                Value         =>
                     "Set param '$Key' to '$Value' because of '$Ret' (Message-ID: $Param{GetParam}->{'Message-ID'})",
             );
         }

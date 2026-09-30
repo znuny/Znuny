@@ -11,6 +11,8 @@ package Kernel::System::Console::Command::Admin::OAuth2TokenManagement::RequestT
 use strict;
 use warnings;
 
+use utf8;
+
 use parent qw(Kernel::System::Console::BaseCommand);
 
 our @ObjectDependencies = (
@@ -22,7 +24,7 @@ sub Configure {
     my ( $Self, %Param ) = @_;
 
     $Self->Description(
-        'Requests a token by using a refresh token. The refresh token must have already been retrieved and stored in the token record.'
+        'Requests a token by using a refresh token. The refresh token must have already been retrieved and stored in the token record. Only available for auth flow "AuthorizationCode".'
     );
 
     $Self->AddArgument(
@@ -50,6 +52,14 @@ sub Run {
     );
     if ( !%TokenConfig ) {
         $Self->PrintError("Token config with name '$TokenConfigName' not found.");
+        return $Self->ExitCodeError();
+    }
+
+    my $AuthFlow = $TokenConfig{Config}->{AuthFlow} // 'AuthorizationCode';
+    if ( $AuthFlow ne 'AuthorizationCode' ) {
+        $Self->PrintError(
+            "Token config with name '$TokenConfigName' does not use auth flow 'AuthorizationCode' and therefore does not support refresh tokens."
+        );
         return $Self->ExitCodeError();
     }
 

@@ -13,6 +13,7 @@ use parent 'Kernel::Output::HTML::Base';
 
 use strict;
 use warnings;
+use utf8;
 
 our @ObjectDependencies = (
     'Kernel::Output::HTML::Layout',
@@ -39,6 +40,13 @@ sub Run {
 
     my $HTMLSearchProfiles = '<ul>';
     for my $SearchProfile ( sort keys %SearchProfiles ) {
+
+        my $SearchProfileLabel = $SearchProfile;
+
+        if ( $SearchProfile eq 'last-search' ) {
+            $SearchProfileLabel = $LayoutObject->{LanguageObject}->Translate('last-search');
+        }
+
         $HTMLSearchProfiles .= '<li>';
         $HTMLSearchProfiles
             .= '<a href="'
@@ -46,7 +54,7 @@ sub Run {
             . 'Action=AgentTicketSearch;Subaction=Search;TakeLastSearch=1;SaveProfile=1;Profile='
             . $SearchProfile . '" class="ToolBarSearchProfile dropdown-item">'
             . '<i class="fa fa-search"></i>'
-            . '<span>' . $SearchProfile . '</span>'
+            . '<span>' . $SearchProfileLabel . '</span>'
             . '</a>';
         $HTMLSearchProfiles .= '</li>';
     }

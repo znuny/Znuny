@@ -13,6 +13,7 @@ use parent 'Kernel::Output::HTML::Base';
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::Language qw(Translatable);
 
@@ -72,6 +73,8 @@ sub Run {
             DynamicFields => 0,
         );
 
+        my $Link = $LayoutObject->{Baselink} . 'Action=AgentTicketZoom;TicketID=' . $Ticket{TicketID};
+
         # check response time
         if ( defined $Ticket{FirstResponseTime} ) {
             $Ticket{FirstResponseTimeHuman} = $LayoutObject->CustomerAgeInHours(
@@ -87,9 +90,11 @@ sub Run {
                     TemplateFile => 'AgentTicketEscalation',
                     Data         => \%Param,
                 );
+
                 $ResponseTime .= $LayoutObject->Notify(
                     Priority => 'Error',
                     Data     => $Data,
+                    Link     => $Link,
                 );
                 $Count++;
             }
@@ -102,9 +107,11 @@ sub Run {
                     TemplateFile => 'AgentTicketEscalation',
                     Data         => \%Param,
                 );
+
                 $ResponseTime .= $LayoutObject->Notify(
                     Priority => 'Notice',
                     Data     => $Data,
+                    Link     => $Link,
                 );
                 $Count++;
             }
@@ -128,6 +135,7 @@ sub Run {
                 $UpdateTime .= $LayoutObject->Notify(
                     Priority => 'Error',
                     Data     => $Data,
+                    Link     => $Link,
                 );
                 $Count++;
             }
@@ -143,6 +151,7 @@ sub Run {
                 $UpdateTime .= $LayoutObject->Notify(
                     Priority => 'Notice',
                     Data     => $Data,
+                    Link     => $Link,
                 );
                 $Count++;
             }
@@ -166,6 +175,7 @@ sub Run {
                 $SolutionTime .= $LayoutObject->Notify(
                     Priority => 'Error',
                     Data     => $Data,
+                    Link     => $Link,
                 );
                 $Count++;
             }
@@ -181,6 +191,7 @@ sub Run {
                 $SolutionTime .= $LayoutObject->Notify(
                     Priority => 'Notice',
                     Data     => $Data,
+                    Link     => $Link,
                 );
                 $Count++;
             }

@@ -166,7 +166,7 @@ sub Run {
                         if ( !$Success ) {
                             $Kernel::OM->Get('Kernel::System::Log')->Log(
                                 Priority => 'error',
-                                Message =>
+                                Message  =>
                                     "Could not reset preference $PreferenceKey for customer $UserID",
                             );
                         }

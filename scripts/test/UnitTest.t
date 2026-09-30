@@ -7,6 +7,7 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
+## no critic(RequireExplicitPackage)
 use strict;
 use warnings;
 use utf8;

@@ -48,7 +48,11 @@ sub CheckAccess {
         }
     }
 
+    # check if module is registered
     return if !$ConfigObject->Get('Frontend::Module')->{AgentTicketMarkSeenUnseen};
+
+    # check Acl
+    return if !$Param{AclActionLookup}->{AgentTicketMarkSeenUnseen};
 
     my $TicketPermission = $TicketObject->TicketPermission(
         Type     => 'ro',
@@ -81,7 +85,7 @@ sub GetConfig {
         Description => Translatable('Mark article as unseen'),
         Name        => Translatable('Mark as unseen'),
         Class       => 'AgentTicketMarkSeenUnseenArticle',
-        Link =>
+        Link        =>
             "Action=AgentTicketMarkSeenUnseen;Subaction=Unseen;TicketID=$Param{Ticket}->{TicketID};ArticleID=$Param{Article}->{ArticleID}",
     );
 

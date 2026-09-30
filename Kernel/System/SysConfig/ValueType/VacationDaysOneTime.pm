@@ -89,7 +89,8 @@ Check if provided EffectiveValue matches structure defined in XMLContentParsed.
         },
     );
 
-Result:
+Returns:
+
     %Result = (
         EffectiveValue => {                     # Note for VacationDaysOneTime ValueTypes EffectiveValue is not changed.
             '2014' => {

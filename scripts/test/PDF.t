@@ -73,8 +73,8 @@ $Self->True(
 my $StringWidthText   = 'abcikwAXIJWZ 123 öäüß !$-';
 my @StringWidthReturn = (
     123.38, 117.82, 115.04, 112.26, 106.15, 100.59, 95.03, 89.47, 86.69, 81.13,
-    75.57, 70.01, 67.23, 61.12, 51.68, 46.68, 43.9, 37.23, 30.56, 23.34, 18.34,
-    16.12, 11.12, 5.56, 0
+    75.57,  70.01,  67.23,  61.12,  51.68,  46.68,  43.9,  37.23, 30.56, 23.34, 18.34,
+    16.12,  11.12,  5.56,   0
 );
 
 my $C1 = 0;
@@ -822,16 +822,16 @@ $TableCalculate{1}{Width}  = 300;
 $TableCalculate{1}{Border} = 1;
 
 $TableCalculate{1}{CellData}[0][0]{Content}
-    = "Welcome to OTRS!\n\nthank you for installing OTRS.\n\nYou will find updates and patches at http://otrs.org/. Online\ndocumentation is available at https://doc.otrs.com/doc/. You can also\ntake advantage of our mailing lists http://lists.otrs.org/.\n\n\nYour OTRS Team\n\n    Manage your communication!";
+    = "Welcome to OTRS!\n\nthank you for installing OTRS.\n\nYou will find updates and patches at http://znuny.org/. Online\ndocumentation is available at https://doc.znuny.org/. You can also\ntake advantage of our mailing lists http://lists.znuny.org/.\n\n\nYour OTRS Team\n\n    Manage your communication!";
 $TableCalculate{1}{CellData}[0][1]{Content}
-    = "\nWelcome to OTRS!\n\nthank you for installing OTRS.\n\nYou will find updates and patches at http://otrs.org/. Online\ndocumentation is available at https://doc.otrs.com/doc/. You can also\ntake advantage of our mailing lists http://lists.otrs.org/.\n\n\nYour OTRS Team\n\n\tManage your communication!\n";
+    = "\nWelcome to OTRS!\n\nthank you for installing OTRS.\n\nYou will find updates and patches at http://znuny.org/. Online\ndocumentation is available at https://doc.znuny.org/. You can also\ntake advantage of our mailing lists http://lists.znuny.org/.\n\n\nYour OTRS Team\n\n\tManage your communication!\n";
 $TableCalculate{1}{CellData}[1][0]{Content}
-    = "\tWelcome to OTRS!\n\nthank you for installing OTRS.\n\nYou will find updates and patches at http://otrs.org/. Online\ndocumentation is available at https://doc.otrs.com/doc/. You can also\ntake advantage of our mailing lists http://lists.otrs.org/.\n\n\nYour OTRS Team\n\n    Manage your communication!\n\t";
+    = "\tWelcome to OTRS!\n\nthank you for installing OTRS.\n\nYou will find updates and patches at http://znuny.org/. Online\ndocumentation is available at https://doc.znuny.org/. You can also\ntake advantage of our mailing lists http://lists.znuny.org/.\n\n\nYour OTRS Team\n\n    Manage your communication!\n\t";
 $TableCalculate{1}{CellData}[1][1]{Content}
-    = "\r\r\nWelcome to OTRS!\n\nthank you for installing OTRS.\n\nYou will find updates and patches at http://otrs.org/. Online\ndocumentation is available at https://doc.otrs.com/doc/. You can also\ntake advantage of our mailing lists http://lists.otrs.org/.\n\rYour OTRS Team\n\n    Manage your communication!\r\n";
+    = "\r\r\nWelcome to OTRS!\n\nthank you for installing OTRS.\n\nYou will find updates and patches at http://znuny.org/. Online\ndocumentation is available at https://doc.znuny.org/. You can also\ntake advantage of our mailing lists http://lists.znuny.org/.\n\rYour OTRS Team\n\n    Manage your communication!\r\n";
 
 $TableCalculate{1}{ReturnCellData}[0][0]{Content}
-    = "Welcome to OTRS!\n\nthank you for installing OTRS.\n\nYou will find updates and patches at http://otrs.org/. Online\ndocumentation is available at https://doc.otrs.com/doc/. You can also\ntake advantage of our mailing lists http://lists.otrs.org/.\n\n\nYour OTRS Team\n\n    Manage your communication!";
+    = "Welcome to OTRS!\n\nthank you for installing OTRS.\n\nYou will find updates and patches at http://znuny.org/. Online\ndocumentation is available at https://doc.znuny.org/. You can also\ntake advantage of our mailing lists http://lists.znuny.org/.\n\n\nYour OTRS Team\n\n    Manage your communication!";
 $TableCalculate{1}{ReturnCellData}[0][0]{Type}            = 'ReturnLeftOver';
 $TableCalculate{1}{ReturnCellData}[0][0]{Font}            = 'Testfont1';
 $TableCalculate{1}{ReturnCellData}[0][0]{FontSize}        = 10;
@@ -840,7 +840,7 @@ $TableCalculate{1}{ReturnCellData}[0][0]{Align}           = 'left';
 $TableCalculate{1}{ReturnCellData}[0][0]{Lead}            = 0;
 $TableCalculate{1}{ReturnCellData}[0][0]{BackgroundColor} = 'NULL';
 $TableCalculate{1}{ReturnCellData}[0][1]{Content}
-    = "\nWelcome to OTRS!\n\nthank you for installing OTRS.\n\nYou will find updates and patches at http://otrs.org/. Online\ndocumentation is available at https://doc.otrs.com/doc/. You can also\ntake advantage of our mailing lists http://lists.otrs.org/.\n\n\nYour OTRS Team\n\n  Manage your communication!\n";
+    = "\nWelcome to OTRS!\n\nthank you for installing OTRS.\n\nYou will find updates and patches at http://znuny.org/. Online\ndocumentation is available at https://doc.znuny.org/. You can also\ntake advantage of our mailing lists http://lists.znuny.org/.\n\n\nYour OTRS Team\n\n  Manage your communication!\n";
 $TableCalculate{1}{ReturnCellData}[0][1]{Type}            = 'ReturnLeftOver';
 $TableCalculate{1}{ReturnCellData}[0][1]{Font}            = 'Testfont1';
 $TableCalculate{1}{ReturnCellData}[0][1]{FontSize}        = 10;
@@ -849,7 +849,7 @@ $TableCalculate{1}{ReturnCellData}[0][1]{Align}           = 'left';
 $TableCalculate{1}{ReturnCellData}[0][1]{Lead}            = 0;
 $TableCalculate{1}{ReturnCellData}[0][1]{BackgroundColor} = 'NULL';
 $TableCalculate{1}{ReturnCellData}[1][0]{Content}
-    = "  Welcome to OTRS!\n\nthank you for installing OTRS.\n\nYou will find updates and patches at http://otrs.org/. Online\ndocumentation is available at https://doc.otrs.com/doc/. You can also\ntake advantage of our mailing lists http://lists.otrs.org/.\n\n\nYour OTRS Team\n\n    Manage your communication!\n  ";
+    = "  Welcome to OTRS!\n\nthank you for installing OTRS.\n\nYou will find updates and patches at http://znuny.org/. Online\ndocumentation is available at https://doc.znuny.org/. You can also\ntake advantage of our mailing lists http://lists.znuny.org/.\n\n\nYour OTRS Team\n\n    Manage your communication!\n  ";
 $TableCalculate{1}{ReturnCellData}[1][0]{Type}            = 'ReturnLeftOver';
 $TableCalculate{1}{ReturnCellData}[1][0]{Font}            = 'Testfont1';
 $TableCalculate{1}{ReturnCellData}[1][0]{FontSize}        = 10;
@@ -858,7 +858,7 @@ $TableCalculate{1}{ReturnCellData}[1][0]{Align}           = 'left';
 $TableCalculate{1}{ReturnCellData}[1][0]{Lead}            = 0;
 $TableCalculate{1}{ReturnCellData}[1][0]{BackgroundColor} = 'NULL';
 $TableCalculate{1}{ReturnCellData}[1][1]{Content}
-    = "\nWelcome to OTRS!\n\nthank you for installing OTRS.\n\nYou will find updates and patches at http://otrs.org/. Online\ndocumentation is available at https://doc.otrs.com/doc/. You can also\ntake advantage of our mailing lists http://lists.otrs.org/.\nYour OTRS Team\n\n    Manage your communication!\n";
+    = "\nWelcome to OTRS!\n\nthank you for installing OTRS.\n\nYou will find updates and patches at http://znuny.org/. Online\ndocumentation is available at https://doc.znuny.org/. You can also\ntake advantage of our mailing lists http://lists.znuny.org/.\nYour OTRS Team\n\n    Manage your communication!\n";
 $TableCalculate{1}{ReturnCellData}[1][1]{Type}            = 'ReturnLeftOver';
 $TableCalculate{1}{ReturnCellData}[1][1]{Font}            = 'Testfont1';
 $TableCalculate{1}{ReturnCellData}[1][1]{FontSize}        = 10;
@@ -1730,23 +1730,23 @@ for my $Test ( sort keys %TableCalculate ) {
 
     my %TableCalculateParams;
     $TableCalculateParams{CellData}        = $TableCalculate{$Test}{CellData};
-    $TableCalculateParams{ColumnData}      = $TableCalculate{$Test}{ColumnData} || [];
-    $TableCalculateParams{RowData}         = $TableCalculate{$Test}{RowData} || [];
-    $TableCalculateParams{Type}            = $TableCalculate{$Test}{Type} || 'ReturnLeftOver';
-    $TableCalculateParams{Width}           = $TableCalculate{$Test}{Width} || 500;
-    $TableCalculateParams{Height}          = $TableCalculate{$Test}{Height} || 500;
-    $TableCalculateParams{Font}            = $TableCalculate{$Test}{Font} || 'Testfont1';
-    $TableCalculateParams{FontSize}        = $TableCalculate{$Test}{FontSize} || 10;
-    $TableCalculateParams{FontColor}       = $TableCalculate{$Test}{FontColor} || 'black';
-    $TableCalculateParams{Align}           = $TableCalculate{$Test}{Align} || 'left';
-    $TableCalculateParams{Lead}            = $TableCalculate{$Test}{Lead} || 0;
+    $TableCalculateParams{ColumnData}      = $TableCalculate{$Test}{ColumnData}      || [];
+    $TableCalculateParams{RowData}         = $TableCalculate{$Test}{RowData}         || [];
+    $TableCalculateParams{Type}            = $TableCalculate{$Test}{Type}            || 'ReturnLeftOver';
+    $TableCalculateParams{Width}           = $TableCalculate{$Test}{Width}           || 500;
+    $TableCalculateParams{Height}          = $TableCalculate{$Test}{Height}          || 500;
+    $TableCalculateParams{Font}            = $TableCalculate{$Test}{Font}            || 'Testfont1';
+    $TableCalculateParams{FontSize}        = $TableCalculate{$Test}{FontSize}        || 10;
+    $TableCalculateParams{FontColor}       = $TableCalculate{$Test}{FontColor}       || 'black';
+    $TableCalculateParams{Align}           = $TableCalculate{$Test}{Align}           || 'left';
+    $TableCalculateParams{Lead}            = $TableCalculate{$Test}{Lead}            || 0;
     $TableCalculateParams{BackgroundColor} = $TableCalculate{$Test}{BackgroundColor} || 'NULL';
-    $TableCalculateParams{PaddingLeft}     = $TableCalculate{$Test}{PaddingLeft} || 0;
-    $TableCalculateParams{PaddingRight}    = $TableCalculate{$Test}{PaddingRight} || 0;
-    $TableCalculateParams{PaddingTop}      = $TableCalculate{$Test}{PaddingTop} || 0;
-    $TableCalculateParams{PaddingBottom}   = $TableCalculate{$Test}{PaddingBottom} || 0;
-    $TableCalculateParams{Border}          = $TableCalculate{$Test}{Border} || 0;
-    $TableCalculateParams{BorderColor}     = $TableCalculate{$Test}{BorderColor} || 'black';
+    $TableCalculateParams{PaddingLeft}     = $TableCalculate{$Test}{PaddingLeft}     || 0;
+    $TableCalculateParams{PaddingRight}    = $TableCalculate{$Test}{PaddingRight}    || 0;
+    $TableCalculateParams{PaddingTop}      = $TableCalculate{$Test}{PaddingTop}      || 0;
+    $TableCalculateParams{PaddingBottom}   = $TableCalculate{$Test}{PaddingBottom}   || 0;
+    $TableCalculateParams{Border}          = $TableCalculate{$Test}{Border}          || 0;
+    $TableCalculateParams{BorderColor}     = $TableCalculate{$Test}{BorderColor}     || 'black';
 
     if ( defined( $TableCalculate{$Test}{FontColorOdd} ) ) {
         $TableCalculateParams{FontColorOdd} = $TableCalculate{$Test}{FontColorOdd};
@@ -2589,11 +2589,11 @@ for ( sort keys %TableRowCalculate ) {
 
     my %TableRowCalculateParams;
     $TableRowCalculateParams{CellData}      = $TableRowCalculate{$Test}{CellData};
-    $TableRowCalculateParams{ColumnData}    = $TableRowCalculate{$Test}{ColumnData} || [];
-    $TableRowCalculateParams{RowData}       = $TableRowCalculate{$Test}{RowData} || [];
-    $TableRowCalculateParams{PaddingTop}    = $TableRowCalculate{$Test}{PaddingTop} || 0;
+    $TableRowCalculateParams{ColumnData}    = $TableRowCalculate{$Test}{ColumnData}    || [];
+    $TableRowCalculateParams{RowData}       = $TableRowCalculate{$Test}{RowData}       || [];
+    $TableRowCalculateParams{PaddingTop}    = $TableRowCalculate{$Test}{PaddingTop}    || 0;
     $TableRowCalculateParams{PaddingBottom} = $TableRowCalculate{$Test}{PaddingBottom} || 0;
-    $TableRowCalculateParams{Border}        = $TableRowCalculate{$Test}{Border} || 0;
+    $TableRowCalculateParams{Border}        = $TableRowCalculate{$Test}{Border}        || 0;
 
     my %Return = $PDFObject->_TableRowCalculate(
         Row => 0,

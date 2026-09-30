@@ -70,14 +70,14 @@ my @Tests = (
         STDERR => undef,
     },
     {
-        Name          => "Run with ticket but exceeded catch-up threshold.",
-        CommandModule => 'Kernel::System::Console::Command::Maint::Calendar::Ticket::Generate',
-        Parameter     => [],
-        Ticket        => 1,
+        Name                => "Run with ticket but exceeded catch-up threshold.",
+        CommandModule       => 'Kernel::System::Console::Command::Maint::Calendar::Ticket::Generate',
+        Parameter           => [],
+        Ticket              => 1,
         FixedTimeAddSeconds => 2,    # Ticket won't be created due to exceeded catch-up threshold
         ExitCode            => 0,
-        STDOUT => qr/Number of created tickets:.*?\b0\b/,
-        ,
+        STDOUT              => qr/Number of created tickets:.*?\b0\b/,
+
         STDERR => undef,
     },
 );

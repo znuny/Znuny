@@ -22,6 +22,30 @@ $Selenium->RunTest(
         my $ConfigObject           = $Kernel::OM->Get('Kernel::Config');
         my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');
 
+        # Include invalid templates, so leftovers of previous runs are cleaned up, too.
+        my %StandardTemplates = $StandardTemplateObject->StandardTemplateList(
+            Valid => 0,
+        );
+
+        my @DefaultStandardTemplates = (
+            'empty answer',
+            'test answer',
+        );
+
+        TEMPLATE:
+        for my $StandardTemplateID ( sort keys %StandardTemplates ) {
+            my $TemplateName = $StandardTemplates{$StandardTemplateID};
+
+            # Skip default standard templates
+            my $IsDefaultTemplate = grep { $_ eq $TemplateName } @DefaultStandardTemplates;
+            next TEMPLATE if $IsDefaultTemplate;
+
+            # Delete all non-default standard templates
+            $StandardTemplateObject->StandardTemplateDelete(
+                ID => $StandardTemplateID,
+            );
+        }
+
         # Create test user and login.
         my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
@@ -65,7 +89,16 @@ $Selenium->RunTest(
         # Check client side validation.
         $Selenium->find_element( "#Name",   'css' )->clear();
         $Selenium->find_element( "#Submit", 'css' )->click();
+        $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#TemplateType.Error').length" );
         $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#Name.Error').length" );
+
+        $Self->Is(
+            $Selenium->execute_script(
+                "return \$('#TemplateType').hasClass('Error')"
+            ),
+            '1',
+            'Client side validation correctly detected missing input value',
+        );
 
         $Self->Is(
             $Selenium->execute_script(
@@ -85,6 +118,15 @@ $Selenium->RunTest(
 
         # Create real test template.
         my $TemplateRandomID = "Template" . $HelperObject->GetRandomID();
+
+        $Selenium->InputSet(
+            Attribute   => 'TemplateType',
+            WaitForAJAX => 0,
+            Content     => 'Create',
+            Options     => {
+                TriggerChange => 1,
+            }
+        );
 
         $Selenium->find_element( "#Name",    'css' )->send_keys($TemplateRandomID);
         $Selenium->find_element( "#Comment", 'css' )->send_keys("Selenium template test");
@@ -122,8 +164,8 @@ $Selenium->RunTest(
             "#Name stored value",
         );
         $Self->Is(
-            $Selenium->find_element( '#TemplateType', 'css' )->get_value(),
-            "Answer",
+            $Selenium->execute_script("return [].concat(\$('#TemplateType').val() || []).join(',');"),
+            "Create",
             "#TemplateType stored value",
         );
         $Self->Is(
@@ -132,7 +174,7 @@ $Selenium->RunTest(
             "#Comment stored value",
         );
         $Self->Is(
-            $Selenium->find_element( '#ValidID', 'css' )->get_value(),
+            $Selenium->execute_script("return \$('#ValidID').val();"),
             1,
             "#ValidID stored value",
         );
@@ -170,7 +212,7 @@ $Selenium->RunTest(
         # Check is there notification after template is updated.
         my $Notification = 'Template updated!';
         $Self->True(
-            $Selenium->execute_script("return \$('.MessageBox.Notice p:contains($Notification)').length"),
+            $Selenium->execute_script("return \$('.messageNotice .alertContent:contains($Notification)').length"),
             "$Notification - notification is found."
         );
 
@@ -207,7 +249,7 @@ $Selenium->RunTest(
         $Selenium->find_element( $TemplateRandomID, 'link_text' )->VerifiedClick();
 
         $Self->Is(
-            $Selenium->find_element( '#TemplateType', 'css' )->get_value(),
+            $Selenium->execute_script("return [].concat(\$('#TemplateType').val() || []).join(',');"),
             "Create",
             "#TemplateType updated value",
         );
@@ -217,7 +259,7 @@ $Selenium->RunTest(
             "#Comment updated value",
         );
         $Self->Is(
-            $Selenium->find_element( '#ValidID', 'css' )->get_value(),
+            $Selenium->execute_script("return \$('#ValidID').val();"),
             2,
             "#ValidID updated value",
         );
@@ -243,12 +285,19 @@ $Selenium->RunTest(
         );
 
         # Confirm delete action.
-        $Selenium->find_element( "#DialogButton1", 'css' )->VerifiedClick();
+        $Selenium->find_element( "#DialogButton1", 'css' )->click();
 
-        # Check if template sits on overview page.
-        $Self->True(
-            $Selenium->execute_script("return !\$('#Templates tbody tr:contains($TemplateRandomID)').length"),
-            "Template '$TemplateRandomID' is deleted"
+        # Wait until the overview has been reloaded without the deleted template.
+        $Selenium->WaitFor(
+            JavaScript =>
+                "return typeof(\$) === 'function' && \$('#Templates tbody tr').length && !\$('#Templates tbody tr:contains($TemplateRandomID)').length"
+        );
+
+        # Check overview screen has exactly 2 templates + 1 (FilterMessage Hidden) row.
+        $Self->Is(
+            $Selenium->execute_script("return \$('#Templates tbody tr').length"),
+            3,
+            "Table has exactly 2 templates + 1 (FilterMessage Hidden) rows",
         );
     }
 );

@@ -17,7 +17,6 @@
     </div>
 
     <div class="ContentColumn">
-
         <h1 class="InvisibleText">[% Translate("System configuration") | html %]</h1>
 
         [% BreadcrumbPath = [

@@ -34,7 +34,7 @@
             [% BreadcrumbPath.push({ Name => Translate('Search for category') _ ' "' _ Translate(Data.Category) _ '"', Link => 'AdminSystemConfiguration;Subaction=Search;Category=' _ Data.Category }) %]
         [% END %]
     [% ELSIF Env("Subaction") == 'SearchLocked' %]
-        [% BreadcrumbPath.push({ Name => Translate('Settings I\'m currently editing'), Link => 'AdminSystemConfiguration;Subaction=SearchLocked' }) %]
+        [% BreadcrumbPath.push({ Name => Translate("Settings I'm currently editing"), Link => 'AdminSystemConfiguration;Subaction=SearchLocked' }) %]
     [% END %]
 
         [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]

@@ -15,7 +15,7 @@ use warnings;
 use MIME::Parser;
 use Kernel::System::EmailParser;
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -326,7 +326,7 @@ sub Check {
                     );
 
                     # Write decrypted attachments to the storage.
-                    for my $Attachment ( $ParserObject->GetAttachments() ) {
+                    for my $Attachment ( $ParserObject->GetAttachments( UserType => 'Agent' ) ) {
                         $ArticleBackendObject->ArticleWriteAttachment(
                             %{$Attachment},
                             ArticleID => $Self->{ArticleID},

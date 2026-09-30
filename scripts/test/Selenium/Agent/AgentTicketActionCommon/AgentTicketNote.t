@@ -410,7 +410,7 @@ $Selenium->RunTest(
         # Wait for the CKE to load.
         $Selenium->WaitFor(
             JavaScript =>
-                "return \$('body.cke_editable', \$('.cke_wysiwyg_frame').contents()).length == 1;"
+                "return \$('.ck-editor__editable').contents().length >= 1;"
         );
 
         # Submit note.
@@ -517,6 +517,9 @@ $Selenium->RunTest(
 
         my $Element = $Selenium->find_element("//a[contains(\@href, \'Action=AgentTicketNote;TicketID=$TicketID' )]");
         $Selenium->mouse_move_to_location( element => $Element );
+
+        # TODO (SN): this fails for some reason,
+        # after fix check if rich text adjustments are correct
         $Element->click();
 
         # Wait for the iframe to show up.
@@ -534,7 +537,7 @@ $Selenium->RunTest(
 
         # Check if the richtext is empty.
         my $CKEditorValue = $Selenium->execute_script(
-            "return CKEDITOR.instances.RichText.getData()"
+            "return window.editor.getData()"
         );
         $Self->Is(
             $CKEditorValue,
@@ -557,11 +560,11 @@ $Selenium->RunTest(
 
         $Selenium->WaitFor(
             JavaScript =>
-                "return CKEDITOR.instances.RichText.getData() == '$TemplateText';"
+                "return window.editor.getData() == '$TemplateText';"
         );
 
         $CKEditorValue = $Selenium->execute_script(
-            "return CKEDITOR.instances.RichText.getData()"
+            "return window.editor.getData()"
         );
         sleep 1;
 

@@ -938,7 +938,7 @@ sub _UpdateDynamicFieldConfigs {
 
             $LogObject->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Could not find dynamic field '$DynamicFieldName' (length of name in in ticket attribute relations"
                     . " with ID $Param{TicketAttributeRelationsID}: $DynamicFieldNameLength). Please check the encoding of the stored data."
                     . " This can e.g. happen with a UTF-16 encoded file with an invisible 0xfeff character"
@@ -960,7 +960,7 @@ sub _UpdateDynamicFieldConfigs {
         if ( !$CanPossibleValuesGet ) {
             $LogObject->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Dynamic field backend $Param{DynamicFieldConfig}->{FieldType} is missing function PossibleValuesGet.",
             );
             return;

@@ -9,6 +9,8 @@
 
 "use strict";
 
+/* global App */
+
 var Core = Core || {};
 Core.Agent = Core.Agent || {};
 
@@ -38,6 +40,48 @@ Core.Agent.TicketZoom = (function (TargetNS) {
      *      InitialArticleID
      */
         InitialArticleID;
+
+    /**
+     * @private
+     * @name NormalizeArticleFragmentIdentifier
+     * @memberof Core.Agent.TicketZoom
+     * @function
+     * @param {String} FragmentIdentifier - Raw fragment identifier value (can include leading '#').
+     * @returns {String} Normalized article ID without the 'Article' prefix.
+     * @description
+     *      Normalize the fragment identifier so both '#123' and '#Article123' resolve to the same article.
+     */
+    function NormalizeArticleFragmentIdentifier(FragmentIdentifier) {
+        var Normalized;
+
+        if (typeof FragmentIdentifier !== 'string') {
+            return '';
+        }
+
+        Normalized = FragmentIdentifier.replace(/^#/, '');
+
+        if (/^Article\d+$/i.test(Normalized)) {
+            Normalized = Normalized.replace(/^Article/i, '');
+        }
+
+        if (/^\d+$/.test(Normalized)) {
+            return Normalized;
+        }
+
+        return '';
+    }
+
+    /**
+     * @private
+     * @name BuildArticleFragmentIdentifier
+     * @memberof Core.Agent.TicketZoom
+     * @function
+     * @param {String} ArticleID - Article ID.
+     * @returns {String} Fragment identifier including the 'Article' prefix.
+     */
+    function BuildArticleFragmentIdentifier(ArticleID) {
+        return '#Article' + ArticleID;
+    }
 
     /**
      * @name MarkTicketAsSeen
@@ -206,7 +250,7 @@ Core.Agent.TicketZoom = (function (TargetNS) {
                 TargetNS.ActiveURLHash = ArticleID;
             }
             else {
-                location.hash = '#' + ArticleID;
+                location.hash = BuildArticleFragmentIdentifier(ArticleID);
                 TargetNS.ActiveURLHash = ArticleID;
             }
 
@@ -290,7 +334,7 @@ Core.Agent.TicketZoom = (function (TargetNS) {
      *      'back' in the browser, for example.
      */
     TargetNS.CheckURLHash = function () {
-        var URLHash = location.hash.replace(/#/, ''),
+        var URLHash = NormalizeArticleFragmentIdentifier(location.hash),
             $ArticleElement;
 
         // if URLHash is empty, that means we are watching the initial article,
@@ -398,7 +442,7 @@ Core.Agent.TicketZoom = (function (TargetNS) {
                             $('#CommunicationChannelFilter').val('').trigger('redraw.InputField');
                             $('#ArticleSenderTypeFilter').val('').trigger('redraw.InputField');
                         },
-                        Class: 'btn-cancel-ghost align-left-auto'
+                        Class: 'align-left-auto'
                     },
                     {
                         Label: Core.Language.Translate("Apply"),
@@ -469,7 +513,7 @@ Core.Agent.TicketZoom = (function (TargetNS) {
      * @description
      *      This function initializes calendar events for article.
      */
-     function InitCalendarEvents() {
+    function InitCalendarEvents() {
         var $FieldContainer,
             OverlayTitle,
             OverlayHTML;
@@ -512,7 +556,7 @@ Core.Agent.TicketZoom = (function (TargetNS) {
      * @description
      *      This function initializes events for process widget.
      */
-     function InitProcessWidget() {
+    function InitProcessWidget() {
         var WidgetWidth, FieldsPerRow, FieldMargin, FieldWidth;
 
         if ($('.DynamicFieldAutoResize').length > 0) {
@@ -625,8 +669,32 @@ Core.Agent.TicketZoom = (function (TargetNS) {
                     return false;
                 });
 
-                $('#' + ElementID).find('.WidgetSimple').hide().fadeIn();
+                // Check if the widget has no content and hide it to remove unnecessary gaps between widgets
+                if ($('#' + ElementID).text().trim() === '') {
+                    $('#' + ElementID).hide();
+                }else {
+                    $('#' + ElementID).find('.WidgetSimple').hide().fadeIn();
+                }
+
                 Core.UI.InitWidgetActionToggle();
+
+                // register loaded modules in the modular application
+                // Wait for document ready and App to be initialized
+                $(document).ready(function () {
+                    var moduleIds, id;
+                    // Wait a short time to ensure App is fully initialized
+                    setTimeout(function() {
+                        if (typeof App !== 'undefined') {
+                            // Make App globally accessible
+                            window.App = App;
+                            moduleIds = App.registerModules($('#' + ElementID));
+                            for (id in moduleIds) {
+                                App.start(moduleIds[id]);
+                            }
+                        }
+                    }, 100);
+                });
+
             });
         });
     }
@@ -700,12 +768,12 @@ Core.Agent.TicketZoom = (function (TargetNS) {
 
         // load another article, if in "show one article" mode and article id is provided by location hash
         if (!ZoomExpand) {
-            URLHash = location.hash.replace(/#/, '');
+            URLHash = NormalizeArticleFragmentIdentifier(location.hash);
 
             // if URL hash is empty, set it initially to the active article for working browser history
             if (URLHash === '') {
                 InitialArticleID = $('#ArticleTable tr.Active input.ArticleID').val();
-                //location.hash = '#' + $('#ArticleTable tr.Active input.ArticleID').val();
+                //location.hash = BuildArticleFragmentIdentifier($('#ArticleTable tr.Active input.ArticleID').val());
             }
             else {
                 // if article ID is found in article list (= article id is valid)
@@ -718,6 +786,17 @@ Core.Agent.TicketZoom = (function (TargetNS) {
                     // Load content of new article
                     LoadArticle($ArticleElement.closest('td').find('input.ArticleInfo').val(), URLHash);
                 }
+            }
+        }
+
+        // In "show all articles" mode the backend does not mark any row as active,
+        // so highlight the article referenced by the URL hash.
+        else {
+            URLHash = NormalizeArticleFragmentIdentifier(location.hash);
+
+            if (URLHash !== '') {
+                $ArticleElement = $('#ArticleTable').find('input.ArticleID[value=' + URLHash + ']');
+                $ArticleElement.closest('table').find('tr').removeClass('Active').end().end().closest('tr').addClass('Active');
             }
         }
 
@@ -746,7 +825,10 @@ Core.Agent.TicketZoom = (function (TargetNS) {
 
             // Mode: show all articles - jump to the selected article
             else {
-                location.href = '#Article' + $(this).find('input.ArticleID').val();
+                // Add active state to new row
+                $(this).closest('table').find('tr').removeClass('Active').end().end().addClass('Active');
+
+                location.href = BuildArticleFragmentIdentifier($(this).find('input.ArticleID').val());
             }
 
             return false;

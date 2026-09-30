@@ -19,6 +19,7 @@ our @ObjectDependencies = (
     'Kernel::System::DB',
     'Kernel::System::GeneralCatalog',
     'Kernel::System::Log',
+    'Kernel::System::Util',
     'Kernel::System::Valid',
 );
 
@@ -518,10 +519,10 @@ sub SLAAdd {
                 . 'type_id, min_time_bet_incidents) VALUES '
                 . '(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?, ?, ?)',
             Bind => [
-                \$Param{Name},                \$Param{Calendar},       \$Param{FirstResponseTime},
-                \$Param{FirstResponseNotify}, \$Param{UpdateTime},     \$Param{UpdateNotify},
-                \$Param{SolutionTime},        \$Param{SolutionNotify}, \$Param{ValidID}, \$Param{Comment},
-                \$Param{UserID}, \$Param{UserID}, \$Param{TypeID}, \$Param{MinTimeBetweenIncidents},
+                \$Param{Name},                \$Param{Calendar},   \$Param{FirstResponseTime},
+                \$Param{FirstResponseNotify}, \$Param{UpdateTime}, \$Param{UpdateNotify},
+                \$Param{SolutionTime}, \$Param{SolutionNotify},    \$Param{ValidID}, \$Param{Comment},
+                \$Param{UserID},       \$Param{UserID},            \$Param{TypeID},  \$Param{MinTimeBetweenIncidents},
             ],
         );
     }
@@ -536,7 +537,7 @@ sub SLAAdd {
                 \$Param{Name},                \$Param{Calendar},       \$Param{FirstResponseTime},
                 \$Param{FirstResponseNotify}, \$Param{UpdateTime},     \$Param{UpdateNotify},
                 \$Param{SolutionTime},        \$Param{SolutionNotify}, \$Param{ValidID}, \$Param{Comment},
-                \$Param{UserID}, \$Param{UserID},
+                \$Param{UserID},              \$Param{UserID},
             ],
         );
     }
@@ -691,20 +692,6 @@ sub SLAUpdate {
         return;
     }
 
-    # reset cache
-    $Kernel::OM->Get('Kernel::System::Cache')->Delete(
-        Type => $Self->{CacheType},
-        Key  => 'Cache::SLAGet::' . $Param{SLAID},
-    );
-    $Kernel::OM->Get('Kernel::System::Cache')->Delete(
-        Type => $Self->{CacheType},
-        Key  => 'Cache::SLALookup::Name::' . $Param{Name},
-    );
-    $Kernel::OM->Get('Kernel::System::Cache')->Delete(
-        Type => $Self->{CacheType},
-        Key  => 'Cache::SLALookup::ID::' . $Param{SLAID},
-    );
-
     # update service
     if ( $Self->{IsITSMInstalled} ) {
         return if !$DBObject->Do(
@@ -715,10 +702,10 @@ sub SLAUpdate {
                 . 'type_id = ?, min_time_bet_incidents = ? '
                 . 'WHERE id = ?',
             Bind => [
-                \$Param{Name},                \$Param{Calendar},       \$Param{FirstResponseTime},
-                \$Param{FirstResponseNotify}, \$Param{UpdateTime},     \$Param{UpdateNotify},
-                \$Param{SolutionTime},        \$Param{SolutionNotify}, \$Param{ValidID}, \$Param{Comment},
-                \$Param{UserID},              \$Param{TypeID},         \$Param{MinTimeBetweenIncidents}, \$Param{SLAID},
+                \$Param{Name},                \$Param{Calendar},   \$Param{FirstResponseTime},
+                \$Param{FirstResponseNotify}, \$Param{UpdateTime}, \$Param{UpdateNotify},
+                \$Param{SolutionTime}, \$Param{SolutionNotify},    \$Param{ValidID},                 \$Param{Comment},
+                \$Param{UserID},       \$Param{TypeID},            \$Param{MinTimeBetweenIncidents}, \$Param{SLAID},
             ],
         );
     }
@@ -733,7 +720,7 @@ sub SLAUpdate {
                 \$Param{Name},                \$Param{Calendar},       \$Param{FirstResponseTime},
                 \$Param{FirstResponseNotify}, \$Param{UpdateTime},     \$Param{UpdateNotify},
                 \$Param{SolutionTime},        \$Param{SolutionNotify}, \$Param{ValidID}, \$Param{Comment},
-                \$Param{UserID}, \$Param{SLAID},
+                \$Param{UserID},              \$Param{SLAID},
             ],
         );
     }
@@ -753,6 +740,20 @@ sub SLAUpdate {
             Bind => [ \$ServiceID, \$Param{SLAID} ],
         );
     }
+
+    # reset cache
+    $Kernel::OM->Get('Kernel::System::Cache')->Delete(
+        Type => $Self->{CacheType},
+        Key  => 'Cache::SLAGet::' . $Param{SLAID},
+    );
+    $Kernel::OM->Get('Kernel::System::Cache')->Delete(
+        Type => $Self->{CacheType},
+        Key  => 'Cache::SLALookup::Name::' . $Param{Name},
+    );
+    $Kernel::OM->Get('Kernel::System::Cache')->Delete(
+        Type => $Self->{CacheType},
+        Key  => 'Cache::SLALookup::ID::' . $Param{SLAID},
+    );
 
     return 1;
 }

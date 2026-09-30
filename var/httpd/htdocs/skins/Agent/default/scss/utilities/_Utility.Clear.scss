@@ -1,0 +1,10 @@
+@mixin clear($float: left) {
+    float: $float;
+    width: 100%;
+    display: inline-block;
+
+    // TODO: Tim needed?
+    //display: flex;
+    //flex-direction: $flexDirection; /* or column */
+    //gap: 0; /* no spacing between items */
+}

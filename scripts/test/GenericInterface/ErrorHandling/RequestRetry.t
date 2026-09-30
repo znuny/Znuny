@@ -221,9 +221,9 @@ my @Test = (
         Name  => 'Invalid RetryIntervalStart in ModuleConfig',
         Param => {
             ModuleConfig => {
-                ScheduleRetry       => 0,
+                ScheduleRetry       =>  0,
                 RetryIntervalStart  => -1,
-                RetryIntervalFactor => 1,
+                RetryIntervalFactor =>  1,
             },
         },
         Result => {

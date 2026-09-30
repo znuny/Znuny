@@ -123,6 +123,7 @@ Retrieves messages from an email server using fetchmail backend.
     );
 
 Returns:
+
     $Success = 1,       # or false in case of an error
 
 Note:

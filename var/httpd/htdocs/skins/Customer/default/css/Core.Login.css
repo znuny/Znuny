@@ -38,7 +38,8 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 #Login,
 #Reset,
 #Signup,
-#PreLogin {
+#PreLogin,
+#PasswordReset {
     width: 100%;
     height: 100%;
     padding-left: 0;
@@ -62,7 +63,8 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 .RTL #Login,
 .RTL #Reset,
 .RTL #Signup,
-.RTL #PreLogin {
+.RTL #PreLogin,
+.RTL #PasswordReset {
     padding: 0 142px 0 0;
     float: right;
 }

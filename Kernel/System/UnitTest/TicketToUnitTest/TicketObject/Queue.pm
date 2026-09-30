@@ -10,13 +10,14 @@ package Kernel::System::UnitTest::TicketToUnitTest::TicketObject::Queue;
 
 use strict;
 use warnings;
+use utf8;
 
 our @ObjectDependencies = (
     'Kernel::System::Queue',
 );
 
 use Kernel::System::VariableCheck qw(:all);
-use parent qw( Kernel::System::UnitTest::TicketToUnitTest::Base );
+use parent                        qw( Kernel::System::UnitTest::TicketToUnitTest::Base );
 
 sub Run {
     my ( $Self, %Param ) = @_;

@@ -16,7 +16,7 @@ use MIME::Base64;
 
 use POSIX qw(ceil);
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Output::HTML::Statistics::View;
 
@@ -448,7 +448,7 @@ sub StatsUpdate {
     if ( !$StatOld ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Can't get stats, perhaps you have an invalid stats id! (StatsID => $Param{StatID})"
         );
         return;
@@ -2136,6 +2136,10 @@ sub StatsCleanUp {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _GenerateStaticStats()
 
     take the stat configuration and get the stat table
@@ -3104,7 +3108,7 @@ sub _GenerateDynamicStats {
                 $TimeStart = sprintf( "%04d-%02d-%02d 00:00:00", $VSYear, $VSMonth, $VSDay );
                 ( $ToYear, $ToMonth, $ToDay, $ToHour, $ToMinute, $ToSecond ) = $Self->_AddDeltaDHMS(
                     $VSYear, $VSMonth, $VSDay, $VSHour, $VSMinute, $VSSecond,
-                    $Count, 0, 0, -1
+                    $Count,  0,        0,      -1
                 );
                 $TimeStop = sprintf( "%04d-%02d-%02d 23:59:59", $ToYear, $ToMonth, $ToDay );
 
@@ -3131,7 +3135,7 @@ sub _GenerateDynamicStats {
                 $TimeStart = sprintf( "%04d-%02d-%02d %02d:00:00", $VSYear, $VSMonth, $VSDay, $VSHour );
                 ( $ToYear, $ToMonth, $ToDay, $ToHour, $ToMinute, $ToSecond ) = $Self->_AddDeltaDHMS(
                     $VSYear, $VSMonth, $VSDay, $VSHour, $VSMinute, $VSSecond, 0,
-                    $Count, 0, -1
+                    $Count,  0,        -1
                 );
                 $TimeStop = sprintf( "%04d-%02d-%02d %02d:59:59", $ToYear, $ToMonth, $ToDay, $ToHour );
                 $ValueSeries{
@@ -3164,7 +3168,7 @@ sub _GenerateDynamicStats {
                 );
                 ( $ToYear, $ToMonth, $ToDay, $ToHour, $ToMinute, $ToSecond ) = $Self->_AddDeltaDHMS(
                     $VSYear, $VSMonth, $VSDay, $VSHour, $VSMinute, $VSSecond, 0,
-                    0, $Count, -1
+                    0,       $Count,   -1
                 );
                 $TimeStop = sprintf(
                     "%04d-%02d-%02d %02d:%02d:59",
@@ -4459,8 +4463,6 @@ sub _TimeStamp2DateTime {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

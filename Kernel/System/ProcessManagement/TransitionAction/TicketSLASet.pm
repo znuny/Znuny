@@ -268,6 +268,10 @@ sub Run {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _CheckSLA()
 
 checks if a SLA is assigned to a Service
@@ -303,8 +307,6 @@ sub _CheckSLA {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

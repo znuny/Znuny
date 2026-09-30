@@ -115,7 +115,7 @@ sub GroupMemberAdd {
         if ( $Self->{Debug} ) {
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'notice',
-                Message =>
+                Message  =>
                     "Add UID:$Param{UID} to GID:$Param{GID}, $Type:$Param{Permission}->{$Type}!",
             );
         }
@@ -481,7 +481,7 @@ sub GroupCustomerAdd {
             if ( $Self->{Debug} ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'notice',
-                    Message =>
+                    Message  =>
                         "Add CustomerID:$Param{CustomerID} to GID:$Param{GID}, $Type:$Param{Permission}->{$Context}->{$Type}, Context:$Context!",
                 );
             }
@@ -492,8 +492,8 @@ sub GroupCustomerAdd {
                     . 'permission_context, create_time, create_by, change_time, change_by) '
                     . 'VALUES (?, ?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
                 Bind => [
-                    \$Param{CustomerID}, \$Param{GID}, \$Type, \$Param{Permission}->{$Context}->{$Type},
-                    \$Context, \$Param{UserID}, \$Param{UserID},
+                    \$Param{CustomerID}, \$Param{GID},    \$Type, \$Param{Permission}->{$Context}->{$Type},
+                    \$Context,           \$Param{UserID}, \$Param{UserID},
                 ],
             );
         }

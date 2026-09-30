@@ -1,0 +1,21 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+.modPageHeadline {
+  > .inner {
+    h1 {
+      position: relative;
+      font-size: var(--font-size-xxl);
+      font-weight: var(--semi-bold);
+      letter-spacing: .1px;
+      min-width: 100%;
+      line-height: 90%;
+      margin: 25px 0;
+    }
+  }
+}

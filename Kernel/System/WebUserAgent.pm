@@ -228,7 +228,7 @@ sub Request {
         if ( !IsArrayRefWithData( $Param{Data} ) && !IsHashRefWithData( $Param{Data} ) ) {
             $LogObject->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     'WebUserAgent POST: Need Data param containing a hashref or arrayref with data.',
             );
             return ( Status => 0 );

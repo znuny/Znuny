@@ -205,6 +205,18 @@ sub _SetCharacterSetTables {
     my $Verbose = $Param{CommandlineOptions}->{Verbose} || 0;
     my @FailedTables;
 
+    # Temporarily disable foreign key checks as otherwise database won't
+    # allow converting character set if there are any other
+    # tables that contain specified table column reference as foreign key.
+    my $DisableFK = $DBObject->Do(
+        SQL => 'SET FOREIGN_KEY_CHECKS = 0',
+    );
+
+    if ( !$DisableFK ) {
+        print "\nError: Could not disable foreign key checks!\n";
+        return;
+    }
+
     for my $Table ( sort @TablesToMigrate ) {
 
         # Do not quote table name in this statement!
@@ -216,6 +228,16 @@ sub _SetCharacterSetTables {
             print "\n    Error: Could not change character set for table '" . $Table . "' to utf8mb4!\n";
             push @FailedTables, $Table;
         }
+    }
+
+    # revert foreign key checks
+    my $EnableFK = $DBObject->Do(
+        SQL => 'SET FOREIGN_KEY_CHECKS = 1',
+    );
+
+    if ( !$EnableFK ) {
+        print "\nError: Could not re-enable foreign key checks!\n";
+        return;
     }
 
     if (@FailedTables) {

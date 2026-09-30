@@ -784,7 +784,7 @@ sub CreateMissingUUIDHistoryDatabaseTableColumn {
 
     $LogObject->Log(
         Priority => 'error',
-        Message =>
+        Message  =>
             "Column $UUIDHistoryDatabaseTableColumnName could not be created in database table $HistoryDatabaseTable.",
     );
     return;
@@ -881,7 +881,7 @@ sub MigrateUUIDHistoryDatabaseTableColumn {
 
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Error: Unable to execute SQL: $SQL",
         );
         return;

@@ -183,7 +183,6 @@ my $NotificationEventObject      = $Kernel::OM->Get('Kernel::System::Notificatio
 my $EventNotificationEventObject = $Kernel::OM->Get('Kernel::System::Ticket::Event::NotificationEvent');
 
 # Test translation of 'Alert' email template. See bug#13722
-#   (https://bugs.otrs.org/show_bug.cgi?id=13722).
 $Success = $ConfigObject->Set(
     Key   => 'Frontend::RichText',
     Value => 1,

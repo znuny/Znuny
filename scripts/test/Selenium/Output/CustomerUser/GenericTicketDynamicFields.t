@@ -364,79 +364,79 @@ $Selenium->RunTest(
         my @Tests = (
             {
                 Description => "Dynamic field - $DynamicFields[0]->{Name}, search value - test123-$RandomNumber",
-                Attributes =>
+                Attributes  =>
                     "ShownAttributes=LabelSearch_DynamicField_$DynamicFields[0]->{Name};Search_DynamicField_$DynamicFields[0]->{Name}=test123-$RandomNumber;",
                 Count => 1,
             },
             {
                 Description => "Dynamic field - $DynamicFields[0]->{Name}, search value - test12-$RandomNumber",
-                Attributes =>
+                Attributes  =>
                     "ShownAttributes=LabelSearch_DynamicField_$DynamicFields[0]->{Name};Search_DynamicField_$DynamicFields[0]->{Name}=test12-$RandomNumber;",
                 Count => 2,
             },
             {
                 Description => "Dynamic field - $DynamicFields[0]->{Name}, search value - test12*",
-                Attributes =>
+                Attributes  =>
                     "ShownAttributes=LabelSearch_DynamicField_$DynamicFields[0]->{Name};Search_DynamicField_$DynamicFields[0]->{Name}=test12*;",
                 Count => 3,
             },
             {
                 Description => "Dynamic field - $DynamicFields[1]->{Name}, search value - test456-$RandomNumber",
-                Attributes =>
+                Attributes  =>
                     "ShownAttributes=LabelSearch_DynamicField_$DynamicFields[1]->{Name};Search_DynamicField_$DynamicFields[1]->{Name}=test456-$RandomNumber;",
                 Count => 1,
             },
             {
                 Description => "Dynamic field - $DynamicFields[1]->{Name}, search value - test45-$RandomNumber",
-                Attributes =>
+                Attributes  =>
                     "ShownAttributes=LabelSearch_DynamicField_$DynamicFields[1]->{Name};Search_DynamicField_$DynamicFields[1]->{Name}=test45-$RandomNumber;",
                 Count => 2,
             },
             {
                 Description => "Dynamic field - $DynamicFields[1]->{Name}, search value - test45*",
-                Attributes =>
+                Attributes  =>
                     "ShownAttributes=LabelSearch_DynamicField_$DynamicFields[1]->{Name};Search_DynamicField_$DynamicFields[1]->{Name}=test45*;",
                 Count => 3,
             },
             {
                 Description => "Dynamic field - $DynamicFields[2]->{Name}, search value - A1",
-                Attributes =>
+                Attributes  =>
                     "ShownAttributes=LabelSearch_DynamicField_$DynamicFields[2]->{Name};Search_DynamicField_$DynamicFields[2]->{Name}=A1;",
                 Count => 2,
             },
             {
                 Description => "Dynamic field - $DynamicFields[2]->{Name}, search value - B1",
-                Attributes =>
+                Attributes  =>
                     "ShownAttributes=LabelSearch_DynamicField_$DynamicFields[2]->{Name};Search_DynamicField_$DynamicFields[2]->{Name}=B1;",
                 Count => 1,
             },
             {
                 Description => "Dynamic field - $DynamicFields[2]->{Name}, search values - A1, C1",
-                Attributes =>
+                Attributes  =>
                     "ShownAttributes=LabelSearch_DynamicField_$DynamicFields[2]->{Name};Search_DynamicField_$DynamicFields[2]->{Name}=A1;Search_DynamicField_$DynamicFields[2]->{Name}=C1;",
                 Count => 3,
             },
             {
                 Description => "Dynamic field - $DynamicFields[2]->{Name}, search values - A1, B1, C1",
-                Attributes =>
+                Attributes  =>
                     "ShownAttributes=LabelSearch_DynamicField_$DynamicFields[2]->{Name};Search_DynamicField_$DynamicFields[2]->{Name}=A1;Search_DynamicField_$DynamicFields[2]->{Name}=B1;Search_DynamicField_$DynamicFields[2]->{Name}=C1;",
                 Count => 4,
             },
             {
                 Description => "Dynamic field - $DynamicFields[3]->{Name}, search value - A2, C2",
-                Attributes =>
+                Attributes  =>
                     "ShownAttributes=LabelSearch_DynamicField_$DynamicFields[3]->{Name};Search_DynamicField_$DynamicFields[3]->{Name}=A2;Search_DynamicField_$DynamicFields[3]->{Name}=C2;",
                 Count => 3,
             },
             {
                 Description => "Dynamic field - $DynamicFields[3]->{Name}, search value - B2",
-                Attributes =>
+                Attributes  =>
                     "ShownAttributes=LabelSearch_DynamicField_$DynamicFields[3]->{Name};Search_DynamicField_$DynamicFields[3]->{Name}=B2;",
                 Count => 3,
             },
             {
                 Description => "Dynamic field - $DynamicFields[3]->{Name}, search value - B2, C2",
-                Attributes =>
+                Attributes  =>
                     "ShownAttributes=LabelSearch_DynamicField_$DynamicFields[3]->{Name};Search_DynamicField_$DynamicFields[3]->{Name}=B2;Search_DynamicField_$DynamicFields[3]->{Name}=C2;",
                 Count => 4,
             },
@@ -502,19 +502,19 @@ $Selenium->RunTest(
             },
             {
                 Description => "Dynamic field - $DynamicFields[6]->{Name}, search value - 0 (unchecked)",
-                Attributes =>
+                Attributes  =>
                     "ShownAttributes=LabelSearch_DynamicField_$DynamicFields[6]->{Name};Search_DynamicField_$DynamicFields[6]->{Name}=0;",
                 Count => 2,
             },
             {
                 Description => "Dynamic field - $DynamicFields[6]->{Name}, search value - 1 (checked)",
-                Attributes =>
+                Attributes  =>
                     "ShownAttributes=LabelSearch_DynamicField_$DynamicFields[6]->{Name};Search_DynamicField_$DynamicFields[6]->{Name}=1;",
                 Count => 3,
             },
             {
                 Description => "Dynamic field - $DynamicFields[6]->{Name}, search value - 1 (checked)",
-                Attributes =>
+                Attributes  =>
                     "ShownAttributes=LabelSearch_DynamicField_$DynamicFields[6]->{Name};Search_DynamicField_$DynamicFields[6]->{Name}=0;Search_DynamicField_$DynamicFields[6]->{Name}=1;",
                 Count => 5,
             },

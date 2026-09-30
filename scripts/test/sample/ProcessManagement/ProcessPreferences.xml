@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<otrs_config version="2.0" init="Application">
+    <Setting Name="ProcessPreferences###001-Input" Required="0" Valid="1">
+        <Description Translatable="1">Define a process Input.</Description>
+        <Navigation>Core::ProcessManagement</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::ProcessPreferences::Generic</Item>
+                <Item Key="Label" Translatable="1">Input</Item>
+                <Item Key="Desc" Translatable="1">Define a process Input.</Item>
+                <Item Key="PrefKey" ValueRegex="^(?!.*\b(?:Activities|ChangeTime|Config|CreateTime|EntityID|ID|Layout|Name|State|StateEntityID|TransitionActions|Transitions(?!\w))\b).*">Input</Item>
+                <Item Key="ClusterName" Translatable="1"></Item>
+                <Item Key="ClusterPriority"></Item>
+                <Item Key="Block">Input</Item>
+                <!-- BlockData -->
+                <Item Key="Class"></Item>
+                <Item Key="Attribute">maxlength='8'</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ProcessPreferences###001-TextArea" Required="0" Valid="1">
+        <Description Translatable="1">Define a process TextArea.</Description>
+        <Navigation>Core::ProcessManagement</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::ProcessPreferences::Generic</Item>
+                <Item Key="Label" Translatable="1">TextArea</Item>
+                <Item Key="Desc" Translatable="1">Define a process TextArea.</Item>
+                <Item Key="PrefKey" ValueRegex="^(?!.*\b(?:Activities|ChangeTime|Config|CreateTime|EntityID|ID|Layout|Name|State|StateEntityID|TransitionActions|Transitions(?!\w))\b).*">TextArea</Item>
+                <Item Key="ClusterName" Translatable="1"></Item>
+                <Item Key="ClusterPriority"></Item>
+                <Item Key="Block">TextArea</Item>
+                <!-- BlockData -->
+                <Item Key="Class"></Item>
+                <Item Key="Attribute">maxlength='100'</Item>
+                <Item Key="Cols">10</Item>
+                <Item Key="Rows">10</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ProcessPreferences###001-Option" Required="0" Valid="1">
+        <Description Translatable="1">Define a process Category.</Description>
+        <Navigation>Core::ProcessManagement</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::ProcessPreferences::Generic</Item>
+                <Item Key="Label" Translatable="1">Option</Item>
+                <Item Key="Desc" Translatable="1">Define a process option.</Item>
+                <Item Key="PrefKey" ValueRegex="^(?!.*\b(?:Activities|ChangeTime|Config|CreateTime|EntityID|ID|Layout|Name|State|StateEntityID|TransitionActions|Transitions(?!\w))\b).*">Option</Item>
+                <Item Key="ClusterName" Translatable="1"></Item>
+                <Item Key="ClusterPriority"></Item>
+                <Item Key="Block">Option</Item>
+                <!-- BlockData -->
+                <Item Key="Class"></Item>
+                <Item Key="TreeView">1</Item>
+                <Item Key="Multiple">1</Item>
+                <Item Key="PossibleNone">1</Item>
+                <Item Key="SelectedID">Category 1</Item>
+                <Item Key="Data">
+                    <Hash>
+                        <Item Key="Category 1" Translatable="1">Category 1</Item>
+                        <Item Key="Category 2" Translatable="1">Category 2</Item>
+                        <Item Key="Category 3" Translatable="1">Category 2::SecondCategory1</Item>
+                        <Item Key="Category 4" Translatable="1">Category 2::SecondCategory1::ThirdCategory1</Item>
+                        <Item Key="Category 5" Translatable="1">Category 2::SecondCategory2</Item>
+                        <Item Key="Category 6" Translatable="1">Category 2::SecondCategory2::ThirdCategory2</Item>
+                    </Hash>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ProcessPreferences###001-File" Required="0" Valid="1">
+        <Description Translatable="1">Define a process File.</Description>
+        <Navigation>Core::ProcessManagement</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::ProcessPreferences::Generic</Item>
+                <Item Key="Label" Translatable="1">File</Item>
+                <Item Key="Desc" Translatable="1">Define a process File.</Item>
+                <Item Key="PrefKey" ValueRegex="^(?!.*\b(?:Activities|ChangeTime|Config|CreateTime|EntityID|ID|Layout|Name|State|StateEntityID|TransitionActions|Transitions(?!\w))\b).*">File</Item>
+                <Item Key="ClusterName" Translatable="1"></Item>
+                <Item Key="ClusterPriority"></Item>
+                <Item Key="Block">File</Item>
+                <!-- BlockData -->
+                <Item Key="Class"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ProcessPreferences###001-Password" Required="0" Valid="1">
+        <Description Translatable="1">Define a process Password.</Description>
+        <Navigation>Core::ProcessManagement</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::ProcessPreferences::Generic</Item>
+                <Item Key="Label" Translatable="1">Password</Item>
+                <Item Key="Desc" Translatable="1">Define a process Password.</Item>
+                <Item Key="PrefKey" ValueRegex="^(?!.*\b(?:Activities|ChangeTime|Config|CreateTime|EntityID|ID|Layout|Name|State|StateEntityID|TransitionActions|Transitions(?!\w))\b).*">Password</Item>
+                <Item Key="ClusterName" Translatable="1"></Item>
+                <Item Key="ClusterPriority"></Item>
+                <Item Key="Block">Password</Item>
+                <!-- BlockData -->
+                <Item Key="Class"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ProcessPreferences###001-RichText" Required="0" Valid="1">
+        <Description Translatable="1">Define a process RichText.</Description>
+        <Navigation>Core::ProcessManagement</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::ProcessPreferences::Generic</Item>
+                <Item Key="Label" Translatable="1">RichText</Item>
+                <Item Key="Desc" Translatable="1">Define a process RichText.</Item>
+                <Item Key="PrefKey" ValueRegex="^(?!.*\b(?:Activities|ChangeTime|Config|CreateTime|EntityID|ID|Layout|Name|State|StateEntityID|TransitionActions|Transitions(?!\w))\b).*">RichText</Item>
+                <Item Key="ClusterName" Translatable="1"></Item>
+                <Item Key="ClusterPriority"></Item>
+                <Item Key="Block">RichText</Item>
+                <!-- BlockData -->
+                <Item Key="Class"></Item>
+                <Item Key="ID">UUID-RichText</Item>
+                <Item Key="Name">UUID-RichText</Item>
+                <Item Key="RichTextType"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+</otrs_config>

@@ -34,7 +34,7 @@ sub Configure {
     my ( $Self, %Param ) = @_;
 
     $Self->Description(
-        'Generate (and send, optional) statistics which have been configured previously in the OTRS statistics module.'
+        'Generate (and send, optional) statistics which have been configured previously in the Znuny statistics module.'
     );
 
     $Self->AddOption(
@@ -45,7 +45,7 @@ sub Configure {
         ValueRegex  => qr/\d+/smx,
     );
     $Self->AddOption(
-        Name => 'params',
+        Name        => 'params',
         Description =>
             "Parameters which should be passed to the statistic (e.g. Year=1977&Month=10, not for dynamic statistics).",
         Required   => 0,
@@ -60,7 +60,7 @@ sub Configure {
         ValueRegex  => qr/.*/smx,
     );
     $Self->AddOption(
-        Name => 'target-directory',
+        Name        => 'target-directory',
         Description =>
             "Directory to which the generated file should be written (e.g. /output/dir/). If a target directory is provided, no email will be sent.",
         Required   => 0,
@@ -82,7 +82,7 @@ sub Configure {
         ValueRegex  => qr/.*/smx,
     );
     $Self->AddOption(
-        Name => 'with-header',
+        Name        => 'with-header',
         Description =>
             "Add a heading line consisting of statistics title and creation date in case of Excel or CSV as output format.",
         Required   => 0,
@@ -90,7 +90,7 @@ sub Configure {
         ValueRegex => qr/.*/smx,
     );
     $Self->AddOption(
-        Name => 'timezone',
+        Name        => 'timezone',
         Description =>
             "Target time zone (e.g. Europe/Berlin) for which the file should be generated.",
         Required   => 0,
@@ -98,9 +98,9 @@ sub Configure {
         ValueRegex => qr/.*/smx,
     );
     $Self->AddOption(
-        Name => 'language',
+        Name        => 'language',
         Description =>
-            "Target language (e.g. de) for which the file should be generated (will be OTRS default language or english as fallback if left empty).",
+            "Target language (e.g. de) for which the file should be generated (will be Znuny default language or english as fallback if left empty).",
         Required   => 0,
         HasValue   => 1,
         ValueRegex => qr/.*/smx,

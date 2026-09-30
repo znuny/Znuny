@@ -86,22 +86,25 @@ sub PreRun {
     }
 
     return if $Self->GetOption('reset');
-    return if defined $Self->GetOption('valid');
+
+    my $SettingValid = $Self->GetOption('valid');
 
     my $SourcePath = $Self->GetOption('source-path');
+    my $Value      = $Self->GetOption('value');
 
-    my $Value = $Self->GetOption('value');
-
-    if ( $SourcePath && $Value ) {
-        die "source-path or value is required but not both!";
+    if ( defined $SettingValid ) {
+        if ( defined($SourcePath) || defined($Value) ) {
+            die "--valid cannot be used together with --source-path or --value!\n";
+        }
+    }
+    else {
+        if ( defined($SourcePath) + defined($Value) != 1 ) {
+            die "one of --source-path or --value is required, but not both!\n";
+        }
     }
 
-    if ( !$SourcePath && !defined $Value ) {
-        die "source-path or value is required!";
-    }
-
-    if ( $SourcePath && !-e $SourcePath ) {
-        die "File $SourcePath does not exists!";
+    if ( $SourcePath && !-r $SourcePath ) {
+        die "File $SourcePath does not exist or is not readable!\n";
     }
 
     return;

@@ -12,6 +12,8 @@ package Kernel::System::Ticket::Event::Mentions;
 use strict;
 use warnings;
 
+use utf8;
+
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
@@ -68,9 +70,8 @@ sub Run {
     my $MentionsLimit  = $MentionsConfig->{Limit}       // 20;
 
     my $MentionedUserIDs = $MentionObject->GetMentionedUserIDsFromString(
-        HTMLString      => $HTMLBody,
-        PlainTextString => $Article{Body} // '',
-        Limit           => $MentionsLimit,
+        HTMLString => $HTMLBody,
+        Limit      => $MentionsLimit,
     );
     return 1 if !IsArrayRefWithData($MentionedUserIDs);
 

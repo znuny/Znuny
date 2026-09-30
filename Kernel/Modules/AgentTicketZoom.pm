@@ -15,10 +15,9 @@ use utf8;
 
 our $ObjectManagerDisabled = 1;
 
-use POSIX qw/ceil/;
 use Kernel::System::EmailParser;
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 sub new {
     my ( $Type, %Param ) = @_;
@@ -383,6 +382,12 @@ sub Run {
                     NoCache     => 1,
                 );
             }
+
+            $Ticket{Age} = $LayoutObject->CustomerAge(
+                Age   => $Ticket{Age},
+                Space => ' '
+            );
+
             my $WidgetOutput = $Module->Run(
                 Ticket    => \%Ticket,
                 AclAction => \%AclAction,
@@ -513,8 +518,8 @@ sub Run {
     if ( $Self->{Subaction} eq 'ArticleFilterSet' ) {
 
         # get params
-        my $TicketID     = $ParamObject->GetParam( Param => 'TicketID' );
-        my $SaveDefaults = $ParamObject->GetParam( Param => 'SaveDefaults' );
+        my $TicketID                      = $ParamObject->GetParam( Param => 'TicketID' );
+        my $SaveDefaults                  = $ParamObject->GetParam( Param => 'SaveDefaults' );
         my @CommunicationChannelFilterIDs = $ParamObject->GetArray( Param => 'CommunicationChannelFilter' );
         my $CustomerVisibility            = $ParamObject->GetParam( Param => 'CustomerVisibilityFilter' );
         my @ArticleSenderTypeFilterIDs    = $ParamObject->GetArray( Param => 'ArticleSenderTypeFilter' );
@@ -586,8 +591,8 @@ sub Run {
     if ( $Self->{Subaction} eq 'EvenTypeFilterSet' ) {
 
         # get params
-        my $TicketID     = $ParamObject->GetParam( Param => 'TicketID' );
-        my $SaveDefaults = $ParamObject->GetParam( Param => 'SaveDefaults' );
+        my $TicketID           = $ParamObject->GetParam( Param => 'TicketID' );
+        my $SaveDefaults       = $ParamObject->GetParam( Param => 'SaveDefaults' );
         my @EventTypeFilterIDs = $ParamObject->GetArray( Param => 'EventTypeFilter' );
 
         # build session string
@@ -806,8 +811,9 @@ sub MaskAgentZoom {
     # get param object
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
-    # get article page
-    my $ArticlePage = $ParamObject->GetParam( Param => 'ArticlePage' );
+    # get article page (ArticlePage kept for compatibility; PageNavBar uses StartHit)
+    my $ArticlePage   = $ParamObject->GetParam( Param => 'ArticlePage' );
+    my $StartHitParam = $ParamObject->GetParam( Param => 'StartHit' );
 
     my $IsVisibleForCustomer;
     if ( defined $Self->{ArticleFilter}->{CustomerVisibility} ) {
@@ -855,6 +861,9 @@ sub MaskAgentZoom {
     }
     elsif ($ArticlePage) {
         $Page = $ArticlePage;
+    }
+    elsif ($StartHitParam) {
+        $Page = int( ( $StartHitParam - 1 ) / $Limit ) + 1;
     }
     else {
 
@@ -931,11 +940,6 @@ sub MaskAgentZoom {
     }
 
     $Page ||= 1;
-
-    my $Pages;
-    if ($NeedPagination) {
-        $Pages = ceil( scalar @ArticleBoxAll / $Limit );
-    }
 
     my $ArticleIDFound = 0;
     ARTICLE:
@@ -1014,7 +1018,7 @@ sub MaskAgentZoom {
             if ( !$Config->{Location} ) {
                 $Kernel::OM->Get('Kernel::System::Log')->Log(
                     Priority => 'error',
-                    Message =>
+                    Message  =>
                         "The configuration for $Config->{Module} must contain a Location, because it is marked as Async.",
                 );
                 next WIDGET;
@@ -1071,14 +1075,23 @@ sub MaskAgentZoom {
     # disable the filter)
     if ( @ArticleBox || $Self->{ArticleFilter} ) {
 
-        my $Pagination;
-
         if ($NeedPagination) {
-            $Pagination = {
-                Pages       => $Pages,
-                CurrentPage => $Page,
-                TicketID    => $Ticket{TicketID},
-            };
+            my %PageNav = $LayoutObject->PageNavBar(
+                Limit      => 10_000,
+                StartHit   => ( ( $Page - 1 ) * $Limit ) + 1,
+                PageShown  => $Limit,
+                AllHits    => scalar @ArticleBoxAll,
+                Action     => 'Action=AgentTicketZoom',
+                Link       => "TicketID=$Ticket{TicketID};",
+                IDPrefix   => 'ArticlePages',
+                WindowSize => 5,
+            );
+
+            if ( $PageNav{SiteNavBar} ) {
+                $Param{Pagination} = {
+                    SiteNavBar => $PageNav{SiteNavBar},
+                };
+            }
         }
 
         # show article tree
@@ -1088,7 +1101,7 @@ sub MaskAgentZoom {
             ArticleID         => $ArticleID,
             ArticleMaxLimit   => $ArticleMaxLimit,
             ArticleBox        => \@ArticleBox,
-            Pagination        => $Pagination,
+            Pagination        => $Param{Pagination},
             Page              => $Page,
             ArticleCount      => scalar @ArticleBox,
             AclAction         => \%AclAction,
@@ -1209,28 +1222,33 @@ sub MaskAgentZoom {
 
                 # check the configured priority for this item. The lowest ClusterPriority
                 # within the same cluster wins.
-                my $Priority = $MenuClusters{ $Menus{$Menu}->{ClusterName} }->{Priority} || 0;
+                my $Priority = $MenuClusters{ $Menus{$Menu}->{ClusterName} }->{Prio} || 0;
                 $Menus{$Menu}->{ClusterPriority} ||= 0;
                 if ( !$Priority || $Priority !~ /^\d{3}$/ || $Priority > $Menus{$Menu}->{ClusterPriority} ) {
                     $Priority = $Menus{$Menu}->{ClusterPriority};
                 }
-                $MenuClusters{ $Menus{$Menu}->{ClusterName} }->{Priority} = $Priority;
+                $MenuClusters{ $Menus{$Menu}->{ClusterName} }->{Prio} = $Priority;
                 $MenuClusters{ $Menus{$Menu}->{ClusterName} }->{Items}->{$Menu} = $Item;
             }
         }
 
         for my $Cluster ( sort keys %MenuClusters ) {
-            $ZoomMenuItems{ $MenuClusters{$Cluster}->{Priority} . $Cluster } = {
+            $ZoomMenuItems{ $MenuClusters{$Cluster}->{Prio} . $Cluster } = {
                 Name  => $Cluster,
                 Type  => 'Cluster',
                 Link  => '#',
                 Class => 'ClusterLink',
                 Items => $MenuClusters{$Cluster}->{Items},
+                Prio  => $MenuClusters{$Cluster}->{Prio},
             };
         }
 
-        # display all items
-        for my $Item ( sort keys %ZoomMenuItems ) {
+        # display all items, the lowest Prio will be displayed first
+        for my $Item (
+            sort { ( $ZoomMenuItems{$a}->{Prio} // 999 ) <=> ( $ZoomMenuItems{$b}->{Prio} // 999 ) }
+            keys %ZoomMenuItems
+            )
+        {
             if ( $ZoomMenuItems{$Item}->{ExternalLink} && $ZoomMenuItems{$Item}->{ExternalLink} == 1 ) {
                 $LayoutObject->Block(
                     Name => 'TicketMenuExternalLink',
@@ -1253,7 +1271,13 @@ sub MaskAgentZoom {
                     },
                 );
 
-                for my $SubItem ( sort keys %{ $ZoomMenuItems{$Item}->{Items} } ) {
+                for my $SubItem (
+                    sort {
+                        ( $ZoomMenuItems{$Item}->{Items}->{$a}->{Prio} // 999 )
+                            <=> ( $ZoomMenuItems{$Item}->{Items}->{$b}->{Prio} // 999 )
+                    } keys %{ $ZoomMenuItems{$Item}->{Items} }
+                    )
+                {
                     $LayoutObject->Block(
                         Name => 'TicketMenuSubContainerItem',
                         Data => $ZoomMenuItems{$Item}->{Items}->{$SubItem},
@@ -1880,6 +1904,27 @@ sub MaskAgentZoom {
             Name => 'ArticleFilterDialog',
             Data => {%Param},
         );
+
+        # build article filter links in the header
+        my $HighlightStyle = 'menu';
+        if ( $Self->{ArticleFilter} ) {
+            $HighlightStyle = 'PriorityID-5';
+        }
+
+        $LayoutObject->Block(
+            Name => 'ArticleFilterDialogLink',
+            Data => {
+                %Param,
+                HighlightStyle => $HighlightStyle,
+            },
+        );
+
+        if ( IsHashRefWithData( $Self->{ArticleFilter} ) ) {
+            $LayoutObject->Block(
+                Name => 'ArticleFilterResetLink',
+                Data => {%Param},
+            );
+        }
     }
 
     # check if ticket need to be marked as seen
@@ -2006,33 +2051,6 @@ sub _ArticleTree {
         Key   => 'ZoomExpand',
         Value => $Self->{ZoomExpand},
     );
-
-    # article filter is activated in sysconfig
-    if ( $Self->{ArticleFilterActive} ) {
-
-        # define highlight style for links if filter is active
-        my $HighlightStyle = 'menu';
-        if ( $Self->{ArticleFilter} ) {
-            $HighlightStyle = 'PriorityID-5';
-        }
-
-        # build article filter links
-        $LayoutObject->Block(
-            Name => 'ArticleFilterDialogLink',
-            Data => {
-                %Param,
-                HighlightStyle => $HighlightStyle,
-            },
-        );
-
-        # build article filter reset link only if filter is set
-        if ( IsHashRefWithData( $Self->{ArticleFilter} ) ) {
-            $LayoutObject->Block(
-                Name => 'ArticleFilterResetLink',
-                Data => {%Param},
-            );
-        }
-    }
 
     # get needed objects
     my $TicketObject  = $Kernel::OM->Get('Kernel::System::Ticket');
@@ -2435,6 +2453,7 @@ Returns article html.
     );
 
 Result:
+
     $HTML = "<div>...</div>";
 
 =cut

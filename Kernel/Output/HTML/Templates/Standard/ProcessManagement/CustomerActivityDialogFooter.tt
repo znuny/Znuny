@@ -14,11 +14,11 @@
 [% RenderBlockStart("Footer") %]
                 <div class="PopupFooter">
 [% RenderBlockStart("SubmitAdviceText") %]
-                        <div class="AdviceText">
-                            <span>[% Translate(Data.AdviceText) | html %]</span>
-                        </div>
+                    <div class="AdviceText">
+                        <p>[% Translate(Data.AdviceText) | html %]</p>
+                    </div>
 [% RenderBlockEnd("SubmitAdviceText") %]
-                    <button class="btn-primary btn-main btn-width-md" id="[% Data.ButtonID | html %]" accesskey="g" title="[% Translate(Data.ButtonTitle) | html %] (g)" type="submit" value="[% Translate(Data.ButtonText) | html %]">[% Translate(Data.ButtonText) | html %]</button>
+                    <button class="btn-main btn-width-md btn-primary CallForAction Primary SpacingBottom" id="[% Data.ButtonID | html %]" accesskey="g" title="[% Translate(Data.ButtonTitle) | html %] (g)" type="submit" value="[% Translate(Data.ButtonText) | html %]">[% Translate(Data.ButtonText) | html %]</button>
                 </div>
 [% RenderBlockEnd("Footer") %]
             </div>

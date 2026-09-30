@@ -65,11 +65,11 @@ sub new {
     # Get the NodeID from the SysConfig settings, this is used on High Availability systems.
     $Self->{NodeID} = $Self->{ConfigObject}->Get('NodeID') || 1;
 
-    # Check NodeID, if does not match is impossible to continue.
-    if ( $Self->{NodeID} !~ m{ \A \d+ \z }xms && $Self->{NodeID} > 0 && $Self->{NodeID} < 1000 ) {
+    # check NodeID, if it does not match, it's impossible to continue
+    if ( $Self->{NodeID} !~ m{\A[1-9]\d{0,2}\z} ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => "NodeID '$Self->{NodeID}' is invalid!",
+            Message  => "NodeID '$Self->{NodeID}' is invalid. Change it to a number between 1 and 999.",
         );
         return;
     }
@@ -130,7 +130,7 @@ sub Run {
     };
 
     # Check if there are errors.
-    # Do not log debug messages as Daemon errors. See bug#14722 (https://bugs.otrs.org/show_bug.cgi?id=14722).
+    # Do not log debug messages as Daemon errors.
     if ( ( $ErrorMessage && $ErrorMessage !~ /Debug: /g ) || !$Success ) {
         $Self->_HandleError(
             TaskName     => 'ConfigurationDeploySync',

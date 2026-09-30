@@ -51,7 +51,7 @@ sub new {
     $Self->{RequiredAttributes} = [ 'Webservice', 'InvokerSearch', 'InvokerGet', 'Backend', 'StoredValue', ];
     $Self->{OptionalAttributes} = [
         'SearchKeys', 'CacheTTL', 'DisplayedValues', 'DisplayedValuesSeparator', 'Limit', 'AutocompleteMinLength',
-        'QueryDelay', 'AdditionalDFStorage', 'InputFieldWidth', 'DefaultValue', 'Link',
+        'QueryDelay', 'AdditionalDFStorage', 'InputFieldWidth', 'DefaultValue',  'Link',
     ];
 
     $Self->{SupportedDynamicFieldTypes} = {
@@ -135,8 +135,8 @@ sub Test {
 
     my @StoredValue     = split /\s*,\s*/, $DynamicFieldConfig->{StoredValue};
     my @DisplayedValues = split /\s*,\s*/, $DynamicFieldConfig->{DisplayedValues};
-    my %Attributes = map { $_ => 1 } ( 'DisplayValue', @StoredValue, @DisplayedValues );
-    my @Attributes = sort keys %Attributes;
+    my %Attributes      = map { $_ => 1 } ( 'DisplayValue', @StoredValue, @DisplayedValues );
+    my @Attributes      = sort keys %Attributes;
 
     my $Results = $Self->Search(
         DynamicFieldConfig => $DynamicFieldConfig,
@@ -439,7 +439,7 @@ sub Search {
     my $InvokerType = $SearchType eq 'EQUALS' ? 'InvokerGet' : 'InvokerSearch';
     my $InvokerName = $BackendConfig->{$InvokerType};
 
-    # Remove configured fields.
+    # Remove globally configured fields.
     my $OmittedFields = $ConfigObject->Get(
         'GenericInterface::Invoker::Ticket::Generic::PrepareRequest::OmittedFields'
     ) // {};
@@ -456,7 +456,7 @@ sub Search {
         );
     }
 
-    # Base-64 encode configured field values.
+    # Base-64 encode globally configured field values.
     my $Base64EncodedFields = $ConfigObject->Get(
         'GenericInterface::Invoker::Ticket::Generic::PrepareRequest::Base64EncodedFields'
     ) // {};
@@ -1433,7 +1433,7 @@ sub _BackendConfigGet {
 
         $LogObject->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Config option $BackendConfigField is not defined for dynamic field $Param{DynamicFieldConfig}->{Name}.",
         );
         return;

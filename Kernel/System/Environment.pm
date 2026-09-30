@@ -249,6 +249,7 @@ sub PerlInfoGet {
             Class::Inspector
             Crypt::PasswdMD5
             Crypt::Random::Source
+            Crypt::URandom
             CSS::Minifier
             Email::Valid
             Encode::Locale
@@ -347,7 +348,7 @@ returns:
         Version         => "3.3.1",
         DefaultLanguage => "en",
         Home            => "/opt/znuny",
-        Host            => "prod.otrs.com",
+        Host            => "prod.znuny.com",
         SystemID        => 70,
     );
 

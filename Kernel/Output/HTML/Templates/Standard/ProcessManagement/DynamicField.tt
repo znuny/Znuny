@@ -7,9 +7,9 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 ## nofilter(TidyAll::Plugin::Znuny::Common::Origin)
+
 [% RenderBlockStart("rw:DynamicField") %]
 <div class="Row Row_DynamicField_[% Data.Name %] field-wrapper">
-
     <div class="outer-label-wrapper">
         [% Data.Label %]
 [% RenderBlockStart("rw:DynamicField:DescriptionLong") %]
@@ -19,13 +19,11 @@
         </span>
 [% RenderBlockEnd("rw:DynamicField:DescriptionLong") %]
     </div>
-
     <div class="Field">
         [% Data.Content %]
     </div>
 [% RenderBlockStart("rw:DynamicField:DescriptionShort") %]
-        <div class="FieldExplanation">[% Translate(Data.DescriptionShort) | html %]</div>
+    <div class="FieldExplanation">[% Translate(Data.DescriptionShort) | html %]</div>
 [% RenderBlockEnd("rw:DynamicField:DescriptionShort") %]
-
 </div>
 [% RenderBlockEnd("rw:DynamicField") %]

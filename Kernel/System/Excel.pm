@@ -555,7 +555,7 @@ sub Array2Excel {
                         else {
                             $LogObject->Log(
                                 Priority => 'error',
-                                Message =>
+                                Message  =>
                                     "More than 64 colors used in statistic formatting. Falling back to default color '$DefaultColorsMapping{$CurrentColorElement}'.",
                             );
                             $ColorStorage{ $Format{$CurrentColorElement} }
@@ -618,7 +618,7 @@ sub Array2Excel {
                     # Change to the date format required by write_date_time().
                     my $DateValue = sprintf "%4d-%02d-%02dT", $1, $2, $3;
                     if ( $4 && $5 && $6 ) {
-                        $DateValue         .= sprintf "%02d:%02d:%02d", $4, $5, $6;
+                        $DateValue .= sprintf "%02d:%02d:%02d", $4, $5, $6;
                         $DefaultDateFormat .= ' hh:mm';
                     }
                     $Format{num_format} ||= $DefaultDateFormat;

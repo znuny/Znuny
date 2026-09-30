@@ -181,8 +181,10 @@ sub ChannelGet {
         Key  => $CacheKey,
     );
 
+    my $CommunicationChannelConfig = $ConfigObject->Get('CommunicationChannel') // {};
+
     if ( ref $Cache eq 'HASH' ) {
-        my $Config = $ConfigObject->Get('CommunicationChannel')->{ $Cache->{ChannelName} } || {};
+        my $Config = $CommunicationChannelConfig->{ $Cache->{ChannelName} } // {};
 
         # Add some runtime values from config.
         $Cache->{DisplayName} = $Config->{Name} || $Cache->{ChannelName};
@@ -239,7 +241,7 @@ sub ChannelGet {
         TTL   => $Self->{CacheTTL},
     );
 
-    my $Config = $ConfigObject->Get('CommunicationChannel')->{ $Result{ChannelName} } || {};
+    my $Config = $CommunicationChannelConfig->{ $Result{ChannelName} } // {};
 
     # Add some runtime values from config (do not cache).
     $Result{DisplayName} = $Config->{Name} || $Result{ChannelName};
@@ -415,9 +417,11 @@ sub ChannelList {
         Key  => $CacheKey,
     );
 
+    my $CommunicationChannelConfig = $ConfigObject->Get('CommunicationChannel') // {};
+
     if ( ref $Cache eq 'ARRAY' ) {
         for my $Channel ( @{$Cache} ) {
-            my $Config = $ConfigObject->Get('CommunicationChannel')->{ $Channel->{ChannelName} } || {};
+            my $Config = $CommunicationChannelConfig->{ $Channel->{ChannelName} } // {};
 
             # Add some runtime values from config.
             $Channel->{DisplayName} = $Config->{Name} || $Channel->{ChannelName};
@@ -472,7 +476,7 @@ sub ChannelList {
     );
 
     for my $Channel (@Result) {
-        my $Config = $ConfigObject->Get('CommunicationChannel')->{ $Channel->{ChannelName} } || {};
+        my $Config = $CommunicationChannelConfig->{ $Channel->{ChannelName} } // {};
 
         # Add some runtime values from config (do not cache).
         $Channel->{DisplayName} = $Config->{Name} || $Channel->{ChannelName};

@@ -8,135 +8,217 @@
 # --
 
 <!-- start bounce form -->
-<form action="[% Env("CGIHandle") %]" method="post" name="bounce" class="Validate PreventMultipleSubmits">
-    <input type="hidden" name="Action"     value="[% Env("Action") %]"/>
-    <input type="hidden" name="Subaction"  value="Store"/>
-    <input type="hidden" name="QueueID"    value="[% Data.QueueID | html %]"/>
-    <input type="hidden" name="TicketID"   value="[% Data.TicketID | html %]"/>
-    <input type="hidden" name="ArticleID"  value="[% Data.ArticleID | html %]"/>
-    <input type="hidden" name="NextScreen" value="[% Data.NextScreen | html %]"/>
-    <div class="LayoutPopup ARIARoleMain">
-        <div class="Header">
-            <h1>[% Translate("Bounce %s%s%s", Config('Ticket::Hook'), Config('Ticket::HookDivider'), Data.TicketNumber) | html %] &mdash; [% Data.Title | html %]</h1>
-[% RenderBlockStart("TicketBack") %]
-            <a class="CancelClosePopup btn-cancel-ghost btn-main btn-width-md" href="#">[% Translate("Cancel") | html %]</a>
-[% RenderBlockEnd("TicketBack") %]
-[% RenderBlockStart("PropertiesLock") %]
-            <p>
-                [% Translate("The ticket has been locked") | html %].
-                <a class="UndoClosePopup btn-cancel-ghost btn-main btn-width-md" href="[% Env("Baselink") %]Action=AgentTicketLock;Subaction=Unlock;TicketID=[% Data.TicketID %][% IF Data.PreviousOwner %];PreviousOwner=[% Data.PreviousOwner %][% END %];[% Env("ChallengeTokenParam") | html %]">
-                    [% Translate("cancel") | html %]
-                </a>
-            </p>
-[% RenderBlockEnd("PropertiesLock") %]
-        </div>
 
-        <div class="Content card">
-            <fieldset class="TableLike FixedLabel card-item-wrapper">
-                <div class="card-item col-desktop-100 col-wide-100">
-                    <div>
-                        <label class="Mandatory" for="BounceTo">
-                            <span class="Marker">*</span>
-                            <span>[% Translate("Bounce to") | html %]:</span>
-                        </label>
-                        <div class="Field">
-                            <input type="[% Env("EmailFieldType") | html %]" name="BounceTo" id="BounceTo" value="[% Data.BounceTo | html %]" class="W50pc Validate_Required [% Data.BounceToInvalid | html %]"/>
-                            <div id="BounceToError" class="TooltipErrorMessage" ><p>[% Translate("You need a email address.") | html %]</p></div>
-                            <div id="BounceToServerError" class="TooltipErrorMessage">
+<div class="layoutPopUpSidebar">
+    <main class="sectionContent">
+        <div class="container-fluid ARIARoleMain" role="main">
+            <div class="row">
+                <div class="col-xs-12 order-1">
+                    <div class="mod modForm" >
+                        <div class="inner">
+                            <form action="[% Env("CGIHandle") %]" method="post" name="bounce" class="Validate PreventMultipleSubmits">
+                                <input type="hidden" name="Action"     value="[% Env("Action") %]"/>
+                                <input type="hidden" name="Subaction"  value="Store"/>
+                                <input type="hidden" name="QueueID"    value="[% Data.QueueID | html %]"/>
+                                <input type="hidden" name="TicketID"   value="[% Data.TicketID | html %]"/>
+                                <input type="hidden" name="ArticleID"  value="[% Data.ArticleID | html %]"/>
+                                <input type="hidden" name="NextScreen" value="[% Data.NextScreen | html %]"/>
+
+[% RenderBlockStart("PropertiesLockNotify") %]
+                                    [% INCLUDE "Modules/Alert.tt"
+                                        Data = {
+                                            message   = Translate("The ticket has been locked") _ ".",
+                                            type      = "warning",
+                                            hideAfter = 10,
+                                            actions   = "[
+                                                {
+                                                    \"url\": \"" _ Env("Baselink") _ "Action=AgentTicketLock;Subaction=Unlock;TicketID=" _ Data.TicketID _ "" _
+                                                    (Data.PreviousOwner ? ";PreviousOwner=" _ Data.PreviousOwner : "") _ ";" _ Env("ChallengeTokenParam") _ "\",
+                                                    \"text\": \"" _ Translate("Unlock and close popup") _ "\",
+                                                    \"class\": \"UndoClosePopup\",
+                                                    \"type\": \"cancel\"
+                                                }
+                                            ]"
+                                        }
+                                    %]
+[% RenderBlockEnd("PropertiesLockNotify") %]
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="mod modCard">
+                                            <div class="inner">
+                                                <div class="cardTitle">
+                                                    <h2>[% Translate("Bounce to") | html %]</h2>
+                                                    <span class="cardTitleTrigger"></span>
+                                                </div>
+                                                <div class="cardContent">
+                                                    <div class="row gy-3">
+                                                        <div class="col">
+                                                            <input type="[% Env("EmailFieldType") | html %]" name="BounceTo" id="BounceTo" value="[% Data.BounceTo | html %]" class="W50pc Validate_Required [% Data.BounceToInvalid | html %]"/>
+                                                            <div id="BounceToError" class="TooltipErrorMessage" >
+                                                                <p>[% Translate("You need a email address.") | html %]</p>
+                                                            </div>
+                                                            <div id="BounceToServerError" class="TooltipErrorMessage">
 [% RenderBlockStart("BounceToCustomerGenericServerErrorMsg") %]
-                                <p>[% Translate("Need a valid email address or don't use a local email address.") | html %]</p>
+                                                                <p>[% Translate("Need a valid email address or don't use a local email address.") | html %]</p>
 [% RenderBlockEnd("BounceToCustomerGenericServerErrorMsg") %]
 [% RenderBlockStart("BounceToInvalidConfigServerErrorMsg") %]
-                                <p>[% Translate("This email address is not allowed due to the system configuration.") | html %]</p>
+                                                                <p>[% Translate("This email address is not allowed due to the system configuration.") | html %]</p>
 [% RenderBlockEnd("BounceToInvalidConfigServerErrorMsg") %]
 [% RenderBlockStart("BounceToInvalidMXServerErrorMsg") %]
-                                <p>[% Translate("This email address failed MX check.") | html %]</p>
+                                                                <p>[% Translate("This email address failed MX check.") | html %]</p>
 [% RenderBlockEnd("BounceToInvalidMXServerErrorMsg") %]
 [% RenderBlockStart("BounceToInvalidDNSServerErrorMsg") %]
-                                <p>[% Translate("DNS problem, please check your configuration and the error log.") | html %]</p>
+                                                                <p>[% Translate("DNS problem, please check your configuration and the error log.") | html %]</p>
 [% RenderBlockEnd("BounceToInvalidDNSServerErrorMsg") %]
 [% RenderBlockStart("BounceToInvalidSyntaxServerErrorMsg") %]
-                                <p>[% Translate("The syntax of this email address is incorrect.") | html %]</p>
+                                                                <p>[% Translate("The syntax of this email address is incorrect.") | html %]</p>
 [% RenderBlockEnd("BounceToInvalidSyntaxServerErrorMsg") %]
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                <div class="card-item col-desktop-100 col-wide-100">
-                    <h2 class="card-title">[% Translate("Ticket Data") | html %]</h2>
-                    <div>
-                        <label for="BounceStateID">[% Translate("Next ticket state") | html %]:</label>
-                        <div class="Field">
-                            [% Data.NextStatesStrg %]
-                        </div>
-                    </div>
-                </div>
+                                    <div class="cardTicketData col-12">
+                                        <div class="mod modCard">
+                                            <div class="inner">
+                                                <div class="cardTitle">
+                                                    <h2>[% Translate("Ticket Data") | html %]</h2>
+                                                    <span class="cardTitleTrigger"></span>
+                                                </div>
+                                                <div class="cardContent">
+                                                    <div class="row gy-3">
+                                                        <div class="col">
+                                                            <label for="BounceStateID">[% Translate("State") | html %]:</label>
+                                                            <div class="Field">
+                                                                [% Data.NextStatesStrg %]
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                <div class="card-item col-desktop-100 col-wide-100">
-                    <h2 class="card-title">[% Translate("Communications") | html %]</h2>
-                    <div>
-                        <label>[% Translate("From") | html %]:</label>
-                        <div class="Field">
-                            [% Data.From | html %]
-                        </div>
-                    </div>
-
-                    <div>
-                        <label for="To"><span class="Marker Hidden">*</span>[% Translate("To") | html %]:</label>
-                        <div class="Field">
-                            <input type="text" name="To" id="To" value="[% Data.To | html %]" class="W50pc Validate_DependingRequiredAND Validate_Depending_InformSender [% Data.ToInvalid | html %]"/>
-                            <div id="ToError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
-                            <div id="ToServerError" class="TooltipErrorMessage">
+                                    <div class="cardCommunication col-12">
+                                        <div class="mod modCard">
+                                            <div class="inner">
+                                                <div class="cardTitle">
+                                                    <h2>[% Translate("Communications") | html %]</h2>
+                                                    <span class="cardTitleTrigger"></span>
+                                                </div>
+                                                <div class="cardContent">
+                                                    <div class="row gy-3">
+                                                        <div class="col-12">
+                                                            <label>[% Translate("From") | html %]:</label>
+                                                            <div class="Field">
+                                                                [% Data.From | html %]
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-12">
+                                                            <label for="To"><span class="Marker Hidden">*</span>[% Translate("To") | html %]:</label>
+                                                            <div class="Field">
+                                                                <input type="text" name="To" id="To" value="[% Data.To | html %]" class="W50pc Validate_DependingRequiredAND Validate_Depending_InformSender [% Data.ToInvalid | html %]"/>
+                                                                <div id="ToError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
+                                                                <div id="ToServerError" class="TooltipErrorMessage">
 [% RenderBlockStart("ToCustomerGenericServerErrorMsg") %]
-                                <p>[% Translate("This field is required.") | html %]</p>
+                                                                    <p>[% Translate("This field is required.") | html %]</p>
 [% RenderBlockEnd("ToCustomerGenericServerErrorMsg") %]
 [% RenderBlockStart("ToInvalidConfigServerErrorMsg") %]
-                                <p>[% Translate("This email address is not allowed due to the system configuration.") | html %]</p>
+                                                                    <p>[% Translate("This email address is not allowed due to the system configuration.") | html %]</p>
 [% RenderBlockEnd("ToInvalidConfigServerErrorMsg") %]
 [% RenderBlockStart("ToInvalidMXServerErrorMsg") %]
-                                <p>[% Translate("This email address failed MX check.") | html %]</p>
+                                                                    <p>[% Translate("This email address failed MX check.") | html %]</p>
 [% RenderBlockEnd("ToInvalidMXServerErrorMsg") %]
 [% RenderBlockStart("ToInvalidDNSServerErrorMsg") %]
-                                <p>[% Translate("DNS problem, please check your configuration and the error log.") | html %]</p>
+                                                                    <p>[% Translate("DNS problem, please check your configuration and the error log.") | html %]</p>
 [% RenderBlockEnd("ToInvalidDNSServerErrorMsg") %]
 [% RenderBlockStart("ToInvalidSyntaxServerErrorMsg") %]
-                                <p>[% Translate("The syntax of this email address is incorrect.") | html %]</p>
+                                                                    <p>[% Translate("The syntax of this email address is incorrect.") | html %]</p>
 [% RenderBlockEnd("ToInvalidSyntaxServerErrorMsg") %]
-                            </div>
-                        </div>
-                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
-                    <div>
-                        <label for="Subject"><span class="Marker Hidden">*</span>[% Translate("Subject") | html %]:</label>
-                        <div class="Field">
-                            <input type="text" name="Subject" id="Subject" value="[% Data.Subject | html %]" class="W50pc Validate_DependingRequiredAND Validate_Depending_InformSender [% Data.SubjectInvalid | html %]"/>
-                            <div id="SubjectError" class="TooltipErrorMessage" ><p>[% Translate("This field is required.") | html %]</p></div>
-                            <div id="SubjectServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                        </div>
-                    </div>
+                                                        <div class="col-12">
+                                                            <label for="Subject"><span class="Marker Hidden">*</span>[% Translate("Subject") | html %]:</label>
+                                                            <div class="Field">
+                                                                <input type="text" name="Subject" id="Subject" value="[% Data.Subject | html %]" class="W50pc Validate_DependingRequiredAND Validate_Depending_InformSender [% Data.SubjectInvalid | html %]"/>
+                                                                <div id="SubjectError" class="TooltipErrorMessage">
+                                                                    <p>[% Translate("This field is required.") | html %]</p>
+                                                                </div>
+                                                                <div id="SubjectServerError" class="TooltipErrorMessage">
+                                                                    <p>[% Translate("This field is required.") | html %]</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
-                    <div>
-                        <label for="RichText"><span class="Marker Hidden">*</span>[% Translate("Text") | html %]:</label>
-                        <div class="RichTextField">
-                            <textarea id="RichText" class="RichText Validate_DependingRequiredAND Validate_Depending_InformSender [% Data.BodyInvalid | html %]" name="Body" rows="15" cols="[% Config("Ticket::Frontend::TextAreaEmail") %]">[% Data.InformationFormat %]</textarea>
-                            <div id="RichTextError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                            <div id="RichTextServerError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
-                        </div>
-                    </div>
+                                                        <div class="col-12">
+                                                            <label for="RichText"><span class="Marker Hidden">*</span>[% Translate("Text") | html %]:</label>
+                                                            <div class="RichTextField">
+                                                                <textarea id="RichText" class="RichText Validate_DependingRequiredAND Validate_Depending_InformSender [% Data.BodyInvalid | html %]" name="Body" rows="15" cols="[% Config("Ticket::Frontend::TextAreaEmail") %]">[% Data.InformationFormat %]</textarea>
+                                                                <div id="RichTextError" class="TooltipErrorMessage">
+                                                                    <p>[% Translate("This field is required.") | html %]</p>
+                                                                </div>
+                                                                <div id="RichTextServerError" class="TooltipErrorMessage">
+                                                                    <p>[% Translate("This field is required.") | html %]</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
-                    <div>
-                        <label for="InformSender">[% Translate("Inform sender") | html %]:</label>
-                        <div class="Field">
-                            <input type="checkbox" name="InformSender" id="InformSender" value="1" [% Data.InformSenderChecked | html %]/>
+                                                        <div class="col-12">
+                                                            <label for="InformSender">[% Translate("Inform sender") | html %]:</label>
+                                                            <div class="Field">
+                                                                <input type="checkbox" name="InformSender" id="InformSender" value="1" [% Data.InformSenderChecked | html %]/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="col-12">
+                                            <div class="mod modFormSubmitArea">
+                                                <div class="inner">
+                                                    <div class="formSubmitArea">
+                                                        <div class="formSubmitAreaCancel">
+[% RenderBlockStart("TicketBack") %]
+                                                            <a class="CancelClosePopup btn-cancel-ghost btn-main btn-width-md" href="#">[% Translate("Undo & close") | html %]</a>
+[% RenderBlockEnd("TicketBack") %]
+[% RenderBlockStart("PropertiesLock") %]
+                                                            <div class="ticket-locked">
+                                                                <a class="UndoClosePopup btn-cancel-ghost btn-main btn-width-md" href="[% Env("Baselink") %]Action=AgentTicketLock;Subaction=Unlock;TicketID=[% Data.TicketID %][% IF Data.PreviousOwner %];PreviousOwner=[% Data.PreviousOwner %][% END %];[% Env("ChallengeTokenParam") | html %]">
+                                                                    [% Translate("Unlock and close popup") | html %]
+                                                                </a>
+                                                            </div>
+[% RenderBlockEnd("PropertiesLock") %]
+                                                        </div>
+
+                                                        <div class="formSubmitAreaSubmit">
+                                                            [% INCLUDE "FormElements/DraftButtons.tt" %]
+                                                            <button class="CallForAction Primary btn-primary btn-main btn-width-md"  id="submitRichText" accesskey="g" title="[% Translate("Create") | html %] (g)" type="submit" value="[% Translate("Create") | html %]">
+                                                                <span>[% Translate("Create") | html %]</span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </fieldset>
+            </div>
         </div>
-        <div class="Footer">
-            <button class="btn-main btn-primary btn-width-md" id="submitRichText" accesskey="g" title="[% Translate("Send mail") | html %] (g)" type="submit" value="[% Translate("Send mail") | html %]" ><span><i class="fa fa-envelope-o"></i> [% Translate("Send mail") | html %]</span></button>
-        </div>
-    </div>
-</form>
+    </main>
+</div>
 <!-- end bounce form -->

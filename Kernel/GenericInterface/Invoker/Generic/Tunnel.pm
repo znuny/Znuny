@@ -20,7 +20,11 @@ our $ObjectManagerDisabled = 1;
 
 =head1 NAME
 
-Kernel::GenericInterface::Invoker::Generic::Tunnel
+Kernel::GenericInterface::Invoker::Generic::Tunnel - Generic Interface Invoker for pass-through requester calls
+
+=head1 DESCRIPTION
+
+Invoker that passes request and response data through unchanged.
 
 =head1 PUBLIC INTERFACE
 
@@ -59,9 +63,10 @@ prepare the invocation of the configured remote web service.
         },
     );
 
+Returns:
+
     $Result = {
         Success         => 1,                   # 0 or 1
-        ErrorMessage    => '',                  # in case of error
         Data            => {                    # data payload after Invoker
             ...
         },
@@ -89,6 +94,8 @@ handle response data of the configured remote web service.
             ...
         },
     );
+
+Returns:
 
     $Result = {
         Success         => 1,                   # 0 or 1

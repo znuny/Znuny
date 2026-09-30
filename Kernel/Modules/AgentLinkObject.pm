@@ -31,7 +31,7 @@ sub Run {
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
-    if ( $Self->{Subaction} eq 'UpdateComplextTablePreferences' ) {
+    if ( $Self->{Subaction} eq 'UpdateComplexTablePreferences' ) {
 
         # save user preferences (shown columns)
 
@@ -283,7 +283,7 @@ sub Run {
         if ($SuccessCounter) {
             $Output .= $LayoutObject->Notify(
                 Priority => 'Info',
-                Data =>
+                Data     =>
                     $LayoutObject->{LanguageObject}->Translate( "%s Link(s) deleted successfully.", $SuccessCounter ),
             );
         }

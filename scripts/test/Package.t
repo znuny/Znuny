@@ -15,17 +15,20 @@ use vars (qw($Self));
 
 use File::Copy;
 
-my $ConfigObject  = $Kernel::OM->Get('Kernel::Config');
-my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
-my $CacheObject   = $Kernel::OM->Get('Kernel::System::Cache');
-my $DBObject      = $Kernel::OM->Get('Kernel::System::DB');
-my $MainObject    = $Kernel::OM->Get('Kernel::System::Main');
+my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+my $PackageObject   = $Kernel::OM->Get('Kernel::System::Package');
+my $CacheObject     = $Kernel::OM->Get('Kernel::System::Cache');
+my $DBObject        = $Kernel::OM->Get('Kernel::System::DB');
+my $MainObject      = $Kernel::OM->Get('Kernel::System::Main');
+my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
 
 $Kernel::OM->ObjectParamAdd(
     'Kernel::System::UnitTest::Helper' => {
         RestoreDatabase => 1,
     },
 );
+
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
 my $Version = $ConfigObject->Get('Version');
 my $Home    = $ConfigObject->Get('Home');
@@ -61,6 +64,18 @@ my $CacheClearedCheck = sub {
         scalar $CacheValue,
         scalar undef,
         "CacheGet value was cleared",
+    );
+};
+
+my $LastDeploymentCreateByCheck = sub {
+    my (%Param) = @_;
+
+    my %Deployment = $SysConfigObject->ConfigurationDeployGetLast();
+
+    $Self->Is(
+        $Deployment{CreateBy},
+        $Param{ExpectedUserID},
+        $Param{Name},
     );
 };
 
@@ -125,6 +140,7 @@ my $String = '<?xml version="1.0" encoding="utf-8" ?>
   <Filelist>
     <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
     <File Location="var/Test" Permission="644" Encode="Base64">aGVsbG8K</File>
+    <File Location="Kernel/Config/Files/XML/Test.xml" Permission="644" Encode="Base64">PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiID8+CjxvdHJzX2NvbmZpZyB2ZXJzaW9uPSIyLjAiIGluaXQ9IkFwcGxpY2F0aW9uIj4KICAgIDxTZXR0aW5nIE5hbWU9IlBhY2thZ2U6OlRlc3Q6OlRlc3RTZXR0aW5nIiBSZXF1aXJlZD0iMCIgVmFsaWQ9IjEiPgogICAgICAgIDxEZXNjcmlwdGlvbiBUcmFuc2xhdGFibGU9IjEiPlRlc3Qgc2V0dGluZy48L0Rlc2NyaXB0aW9uPgogICAgICAgIDxOYXZpZ2F0aW9uPkNvcmU8L05hdmlnYXRpb24+CiAgICAgICAgPFZhbHVlPgogICAgICAgICAgICA8SXRlbSBWYWx1ZVR5cGU9IlN0cmluZyIgVmFsdWVSZWdleD0iIj50ZXN0PC9JdGVtPgogICAgICAgIDwvVmFsdWU+CiAgICA8L1NldHRpbmc+Cjwvb3Ryc19jb25maWc+Cg==</File>
   </Filelist>
 </otrs_package>
 ';
@@ -153,8 +169,16 @@ my $StringSecond = '<?xml version="1.0" encoding="utf-8" ?>
 # make sure test package is not installed
 $PackageObject->PackageUninstall( String => $String );
 
+my %Structure = $PackageObject->PackageParse( String => $String );
+
+my $TestPackageName    = $Structure{Name}->{Content};
+my $TestPackageVersion = $Structure{Version}->{Content};
+
+# create test user
+my ( $UserLogin, $UserID ) = $HelperObject->TestUserCreate();
+
 # check if the package is already installed - check by name
-my $PackageIsInstalledByName = $PackageObject->PackageIsInstalled( Name => 'Test' );
+my $PackageIsInstalledByName = $PackageObject->PackageIsInstalled( Name => $TestPackageName );
 $Self->True(
     !$PackageIsInstalledByName,
     '#1 PackageIsInstalled() - check if the package is already installed - check by name',
@@ -167,7 +191,10 @@ $Self->True(
     '#1 PackageIsInstalled() - check if the package is already installed - check by string',
 );
 
-my $RepositoryAdd = $PackageObject->RepositoryAdd( String => $String );
+my $RepositoryAdd = $PackageObject->RepositoryAdd(
+    String => $String,
+    UserID => $UserID,
+);
 
 $Self->True(
     $RepositoryAdd,
@@ -175,13 +202,37 @@ $Self->True(
 );
 
 my $PackageGet = $PackageObject->RepositoryGet(
-    Name    => 'Test',
-    Version => '0.0.1',
+    Name    => $TestPackageName,
+    Version => $TestPackageVersion,
 );
 
 $Self->True(
     $String eq $PackageGet,
     '#1 RepositoryGet()',
+);
+
+$DBObject->Prepare(
+    SQL  => 'SELECT create_by, change_by FROM package_repository WHERE name = ? AND version = ?',
+    Bind => [ \$TestPackageName, \$TestPackageVersion ],
+);
+
+my $CreateBy;
+my $ChangeBy;
+
+while ( my @Row = $DBObject->FetchrowArray() ) {
+    ( $CreateBy, $ChangeBy ) = @Row;
+}
+
+$Self->Is(
+    $CreateBy,
+    $UserID,
+    '#1 RepositoryAdd() - create_by stores the triggering user',
+);
+
+$Self->Is(
+    $ChangeBy,
+    $UserID,
+    '#1 RepositoryAdd() - change_by stores the triggering user',
 );
 
 my @PackageList = $PackageObject->RepositoryList( Result => 'Short' );
@@ -196,8 +247,8 @@ for my $Package (@PackageList) {
 }
 
 my $PackageRemove = $PackageObject->RepositoryRemove(
-    Name    => 'Test',
-    Version => '0.0.1',
+    Name    => $TestPackageName,
+    Version => $TestPackageVersion,
 );
 
 $Self->True(
@@ -207,11 +258,19 @@ $Self->True(
 
 $CachePopulate->();
 
-my $PackageInstall = $PackageObject->PackageInstall( String => $String );
+my $PackageInstall = $PackageObject->PackageInstall(
+    String => $String,
+    UserID => $UserID,
+);
 
 $Self->True(
     $PackageInstall,
     '#1 PackageInstall()',
+);
+
+$LastDeploymentCreateByCheck->(
+    ExpectedUserID => $UserID,
+    Name           => '#1 PackageInstall() - SysConfig deployment CreateBy stores the triggering user',
 );
 
 $PackageInstall = $PackageObject->PackageInstall( String => $StringSecond );
@@ -224,7 +283,7 @@ $Self->True(
 $CacheClearedCheck->();
 
 # check if the package is already installed - check by name
-$PackageIsInstalledByName = $PackageObject->PackageIsInstalled( Name => 'Test' );
+$PackageIsInstalledByName = $PackageObject->PackageIsInstalled( Name => $TestPackageName );
 $Self->True(
     $PackageIsInstalledByName,
     '#1 PackageIsInstalled() - check if the package is already installed - check by name',
@@ -238,8 +297,8 @@ $Self->True(
 );
 
 my $DeployCheck = $PackageObject->DeployCheck(
-    Name    => 'Test',
-    Version => '0.0.1',
+    Name    => $TestPackageName,
+    Version => $TestPackageVersion,
 );
 
 $Self->True(
@@ -261,8 +320,8 @@ $Self->True(
 );
 
 $DeployCheck = $PackageObject->DeployCheck(
-    Name    => 'Test',
-    Version => '0.0.1',
+    Name    => $TestPackageName,
+    Version => $TestPackageVersion,
 );
 
 $Self->False(
@@ -271,21 +330,27 @@ $Self->False(
 );
 
 $Self->True(
-    $PackageObject->PackageReinstall( String => $String ),
+    $PackageObject->PackageReinstall(
+        String => $String,
+        UserID => $UserID
+    ),
     '#1 Reinstall after FileWrite',
 );
 
+$LastDeploymentCreateByCheck->(
+    ExpectedUserID => $UserID,
+    Name           => '#1 PackageReinstall() - SysConfig deployment CreateBy stores the triggering user',
+);
+
 $DeployCheck = $PackageObject->DeployCheck(
-    Name    => 'Test',
-    Version => '0.0.1',
+    Name    => $TestPackageName,
+    Version => $TestPackageVersion,
 );
 
 $Self->True(
     $DeployCheck,
     '#1 DeployCheck after Reinstall()',
 );
-
-my %Structure = $PackageObject->PackageParse( String => $String );
 
 my $PackageBuild = $PackageObject->PackageBuild(%Structure);
 
@@ -294,11 +359,19 @@ $Self->True(
     '#1 PackageBuild()',
 );
 
-my $PackageUninstall = $PackageObject->PackageUninstall( String => $String );
+my $PackageUninstall = $PackageObject->PackageUninstall(
+    String => $String,
+    UserID => $UserID
+);
 
 $Self->True(
     $PackageUninstall,
     '#1 PackageUninstall()',
+);
+
+$LastDeploymentCreateByCheck->(
+    ExpectedUserID => $UserID,
+    Name           => '#1 PackageUninstall() - SysConfig deployment CreateBy stores the triggering user',
 );
 
 $PackageUninstall = $PackageObject->PackageUninstall( String => $StringSecond );
@@ -320,8 +393,8 @@ $Self->True(
 $CacheClearedCheck->();
 
 my $DeployCheck2 = $PackageObject->DeployCheck(
-    Name    => 'Test',
-    Version => '0.0.1',
+    Name    => $TestPackageName,
+    Version => $TestPackageVersion,
 );
 
 $Self->True(

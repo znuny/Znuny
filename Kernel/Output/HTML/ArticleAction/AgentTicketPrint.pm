@@ -74,7 +74,7 @@ sub GetConfig {
         Description => Translatable('Print this article'),
         Name        => Translatable('Print'),
         Class       => 'AsPopup PopupType_TicketAction',
-        Link =>
+        Link        =>
             "Action=AgentTicketPrint;TicketID=$Param{Ticket}->{TicketID};ArticleID=$Param{Article}->{ArticleID};ArticleNumber=$Param{Article}->{ArticleNumber}",
     );
 

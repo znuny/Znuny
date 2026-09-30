@@ -79,10 +79,14 @@ Runs TransitionAction TicketArticleCreate.
             %DataPayload,                                               # some parameters depending of each communication channel, please check ArticleCreate() on each
                                                                         #   communication channel for the full list of optional and mandatory parameters
 
-            AttachmentsReuse => 1                                       # optional, 1|0 - Reuse of attachments stored in the dynamic field configured in Process::DynamicFieldProcessManagementAttachment.
+            # Attachment optional:
+            Attachments      => 'StdAttachmentName1,StdAttachmentName2', # optional, comma separated StandardAttachment Names
+            AttachmentIDs    => '1,2,3',                                 # optional, comma separated StandardAttachment ID
+            AttachmentsReuse => 1                                        # optional, 1|0 - Reuse of attachments stored in the dynamic field configured in Process::DynamicFieldProcessManagementAttachment.
+
             TimeUnit => 123,                                            # optional, to set the accounting time
             UserID   => 123,                                            # optional, to override the UserID from the logged user
-       },
+        },
     );
 
 Returns:

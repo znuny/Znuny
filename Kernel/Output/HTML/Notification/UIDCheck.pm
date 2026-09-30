@@ -13,6 +13,7 @@ use parent 'Kernel::Output::HTML::Base';
 
 use strict;
 use warnings;
+use utf8;
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -39,6 +40,7 @@ sub Run {
             'Don\'t use the Superuser account to work with %s! Create new Agents and work with these accounts instead.',
             $ProductName
         ),
+        KeepClosedForSession => 1,
     );
 }
 

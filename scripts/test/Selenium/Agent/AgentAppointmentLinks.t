@@ -192,8 +192,8 @@ $Selenium->RunTest(
         # Check appointment links - only the last appointment should not be in the table.
         for my $Appointment (@Appointments) {
             my $AppointmentID = $Appointment->{AppointmentID};
-            my $Length        = $AppointmentID != $LastChildAppointmentID ? 1 : 0;
-            my $IsFound       = $Length ? 'found' : 'not found';
+            my $Length        = $AppointmentID != $LastChildAppointmentID ? 1       : 0;
+            my $IsFound       = $Length                                   ? 'found' : 'not found';
 
             $Self->Is(
                 $Selenium->execute_script(

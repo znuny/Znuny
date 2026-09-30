@@ -128,7 +128,7 @@
                                 </ul>
 
                                 <div class="SaveButtons">
-                                    <a href="#" data-entity="" data-id="" data-processid="[% Data.ProcessID %]" data-action="AdminProcessManagementActivityDialog" data-subaction="ActivityDialogNew" class="CallForAction AsPopup_Redirect btn-main btn-primary btn-width-xxl" ><span>[% Translate("Create New Activity Dialog") | html %]</span></a>
+                                    <a href="#" data-entity="" data-id="" data-processid="[% Data.ProcessID %]" data-action="AdminProcessManagementActivityDialog" data-subaction="ActivityDialogNew" class="CallForAction AsPopup_Redirect Edit_Confirm btn-main btn-primary btn-width-xxl" ><span>[% Translate("Create New Activity Dialog") | html %]</span></a>
                                 </div>
                             </div>
                             <div class="Size2of2 modal-col2">

@@ -8,6 +8,8 @@
 # --
 ## nofilter(TidyAll::Plugin::Znuny::Common::Origin)
 
+[% TicketFrontendConfig = Config("Ticket::Frontend::AgentTicketProcess") %]
+
 [% InsertTemplate("AgentCustomerSearch.tt") %]
 [% RenderBlockStart("rw:Customer") %]
 <input type="hidden" name="SelectedCustomerUser" id="SelectedCustomerUser" value="[% Data.SelectedCustomerUser | html %]"/>
@@ -30,5 +32,5 @@
 </div>
 <div class="Clear"></div>
 
-[% INCLUDE "CustomerCompany/TicketCustomerIDSelection.tt" Required = 0 Readonly = Config("Ticket::Frontend::AgentTicketProcess::CustomerIDReadOnly") %]
+[% INCLUDE "CustomerCompany/TicketCustomerIDSelection.tt" Required = 0 Readonly = TicketFrontendConfig.CustomerIDReadOnly %]
 [% RenderBlockEnd("rw:Customer") %]

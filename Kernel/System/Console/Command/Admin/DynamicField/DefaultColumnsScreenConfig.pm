@@ -10,7 +10,7 @@ package Kernel::System::Console::Command::Admin::DynamicField::DefaultColumnsScr
 use strict;
 use warnings;
 
-use parent qw(Kernel::System::Console::BaseCommand);
+use parent                        qw(Kernel::System::Console::BaseCommand);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
@@ -57,7 +57,7 @@ sub Configure {
     );
 
     $Self->AddOption(
-        Name => 'set-default-column-mode',
+        Name        => 'set-default-column-mode',
         Description =>
             'Sets the default columns configuration mode for the given dynamic field(s) and screen(s). Valid modes are: 0 (disabled), 1 (available) and 2 (enabled by default).',
         Required   => 0,
@@ -66,7 +66,7 @@ sub Configure {
     );
 
     $Self->AddOption(
-        Name => 'remove-from-default-columns-screens',
+        Name        => 'remove-from-default-columns-screens',
         Description =>
             'Removes the given dynamic field(s) from the default columns configuration of the given screen(s).',
         Required => 0,

@@ -844,7 +844,7 @@ my @Tests = (
                 Cond1 => {
                     Fields => {
                         Queue => {
-                            Type => 'Module',
+                            Type  => 'Module',
                             Match =>
                                 'Kernel::GenericInterface::Event::Validation::ValidateDemo',
                         },
@@ -891,7 +891,7 @@ my @Tests = (
                 Cond1 => {
                     Fields => {
                         Queue => {
-                            Type => 'Module',
+                            Type  => 'Module',
                             Match =>
                                 'Kernel::GenericInterface::Event::Validation::UnkownModule',
                         },

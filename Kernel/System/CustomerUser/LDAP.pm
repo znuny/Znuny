@@ -17,7 +17,7 @@ use warnings;
 
 use Net::LDAP;
 use Net::LDAP::Constant qw(LDAP_SIZELIMIT_EXCEEDED);
-use Net::LDAP::Util qw(escape_filter_value);
+use Net::LDAP::Util     qw(escape_filter_value);
 
 use Kernel::System::VariableCheck qw(:all);
 

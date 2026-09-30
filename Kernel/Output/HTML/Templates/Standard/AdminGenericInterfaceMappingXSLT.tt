@@ -35,110 +35,262 @@
                     <ul class="ShortCuts">
                         <li>
                             <em>
-                                <span>Ctrl</span><span>K</span>
+                                <span>Alt</span> + <span>↑</span>
                             </em>
-                            <em>[% Translate("Comment code") | html %]</em>
+                            <em>[% Translate("Move line up") | html %]</em>
                         </li>
                         <li>
                             <em>
-                                <span>Ctrl</span><span>Shift</span><span>K</span>
+                                <span>Alt</span> + <span>↓</span>
                             </em>
-                            <em>[% Translate("Uncomment code") | html %]</em>
+                            <em>[% Translate("Move line down") | html %]</em>
                         </li>
                         <li>
                             <em>
-                                <span>Ctrl</span><span>Alt</span><span>K</span>
+                                <span>Shift</span> + <span>Alt</span> + <span>↑</span>
+                            </em>
+                            <em>[% Translate("Copy line upwards") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Shift</span> + <span>Alt</span> + <span>↓</span>
+                            </em>
+                            <em>[% Translate("Copy line downwards") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Ctrl</span> + <span>Enter</span>
+                            </em>
+                            <em>[% Translate("Insert blank line") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Alt</span> + <span>L</span>
+                            </em>
+                            <em>[% Translate("Select line") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Ctrl</span> + <span>Shift</span> + <span>K</span>
+                            </em>
+                            <em>[% Translate("Delete line") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Ctrl</span> + <span>A</span>
+                            </em>
+                            <em>[% Translate("Select all") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Ctrl</span> + <span>C</span>
+                            </em>
+                            <em>[% Translate("Copy (clipboard)") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Ctrl</span> + <span>X</span>
+                            </em>
+                            <em>[% Translate("Cut (clipboard)") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Ctrl</span> + <span>V</span>
+                            </em>
+                            <em>[% Translate("Insert (clipboard)") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Ctrl</span> + <span>Z</span>
+                            </em>
+                            <em>[% Translate("Undo") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Ctrl</span> + <span>/</span>
+                            </em>
+                            <em>[% Translate("Toggle line comment") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Shift</span> + <span>Alt</span> + <span>A</span>
+                            </em>
+                            <em>[% Translate("Toggle block comment") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Ctrl</span> + <span>Shift</span> + <span>F</span>
                             </em>
                             <em>[% Translate("Auto format code") | html %]</em>
                         </li>
                         <li>
                             <em>
-                                <span>Ctrl</span><span>Q</span>
-                            </em>
-                            <em>[% Translate("Expand/Collapse code block") | html %]</em>
-                        </li>
-                        <li>
-                            <em>
-                                <span>Ctrl</span><span>F</span>
+                                <span>Ctrl</span> + <span>F</span>
                             </em>
                             <em>[% Translate("Find") | html %]</em>
                         </li>
                         <li>
                             <em>
-                                <span>Ctrl</span><span>G</span>
+                                <span>Ctrl</span> + <span>G</span>
                             </em>
                             <em>[% Translate("Find next") | html %]</em>
                         </li>
                         <li>
                             <em>
-                                <span>Ctrl</span><span>Shift</span><span>G</span>
+                                <span>Ctrl</span> + <span>Shift</span> + <span>G</span>
                             </em>
                             <em>[% Translate("Find previous") | html %]</em>
                         </li>
-                        <li>
-                            <em>
-                                <span>Ctrl</span><span>Shift</span><span>F</span>
-                            </em>
-                            <em>[% Translate("Find and replace") | html %]</em>
-                        </li>
-                        <li>
-                            <em>
-                                <span>Ctrl</span><span>Shift</span><span>R</span>
-                            </em>
-                            <em>[% Translate("Find and replace all") | html %]</em>
-                        </li>
+
+#
+# Not supported right now
+#
+#                        <li>
+#                            <em>
+#                                <span>Ctrl</span><span>Q</span>
+#                            </em>
+#                            <em>[% Translate("Expand/Collapse code block") | html %]</em>
+#                        </li>
+#                        <li>
+#                            <em>
+#                                <span>Ctrl</span><span>Shift</span><span>F</span>
+#                            </em>
+#                            <em>[% Translate("Find and replace") | html %]</em>
+#                        </li>
+#                        <li>
+#                            <em>
+#                                <span>Ctrl</span><span>Shift</span><span>R</span>
+#                            </em>
+#                            <em>[% Translate("Find and replace all") | html %]</em>
+#                        </li>
                     </ul>
                 </div>
                 <div data-id="MacOS">
                     <ul class="ShortCuts">
                         <li>
                             <em>
-                                <span>Cmd</span><span>K</span>
+                                <span>Alt</span> + <span>↑</span>
                             </em>
-                            <em>[% Translate("Comment code") | html %]</em>
+                            <em>[% Translate("Move line up") | html %]</em>
                         </li>
                         <li>
                             <em>
-                                <span>Cmd</span><span>Shift</span><span>K</span>
+                                <span>Alt</span> + <span>↓</span>
                             </em>
-                            <em>[% Translate("Uncomment code") | html %]</em>
+                            <em>[% Translate("Move line down") | html %]</em>
                         </li>
                         <li>
                             <em>
-                                <span>Cmd</span><span>Alt</span><span>K</span>
+                                <span>Shift</span> + <span>Alt</span> + <span>↑</span>
+                            </em>
+                            <em>[% Translate("Copy line upwards") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Shift</span> + <span>Alt</span> + <span>↓</span>
+                            </em>
+                            <em>[% Translate("Copy line downwards") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Cmd</span> + <span>Enter</span>
+                            </em>
+                            <em>[% Translate("Insert blank line") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Ctrl</span> + <span>L</span>
+                            </em>
+                            <em>[% Translate("Select line") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Cmd</span> + <span>Shift</span> + <span>K</span>
+                            </em>
+                            <em>[% Translate("Delete line") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Cmd</span> + <span>A</span>
+                            </em>
+                            <em>[% Translate("Select all") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Cmd</span> + <span>C</span>
+                            </em>
+                            <em>[% Translate("Copy (clipboard)") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Cmd</span> + <span>X</span>
+                            </em>
+                            <em>[% Translate("Cut (clipboard)") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Cmd</span> + <span>V</span>
+                            </em>
+                            <em>[% Translate("Insert (clipboard)") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Cmd</span> + <span>Z</span>
+                            </em>
+                            <em>[% Translate("Undo") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Cmd</span> + <span>/</span>
+                            </em>
+                            <em>[% Translate("Toggle line comment") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Shift</span> + <span>Alt</span> + <span>A</span>
+                            </em>
+                            <em>[% Translate("Toggle block comment") | html %]</em>
+                        </li>
+                        <li>
+                            <em>
+                                <span>Ctrl</span> + <span>Shift</span> + <span>F</span>
                             </em>
                             <em>[% Translate("Auto format code") | html %]</em>
                         </li>
                         <li>
                             <em>
-                                <span>Cmd</span><span>F</span>
+                                <span>Cmd</span> + <span>F</span>
                             </em>
                             <em>[% Translate("Find") | html %]</em>
                         </li>
                         <li>
                             <em>
-                                <span>Cmd</span><span>G</span>
+                                <span>Cmd</span> + <span>G</span>
                             </em>
                             <em>[% Translate("Find next") | html %]</em>
                         </li>
                         <li>
                             <em>
-                                <span>Cmd</span><span>Shift</span><span>G</span>
+                                <span>Cmd</span> + <span>Shift</span> + <span>G</span>
                             </em>
                             <em>[% Translate("Find previous") | html %]</em>
                         </li>
-                        <li>
-                            <em>
-                                <span>Cmd</span><span>Shift</span><span>F</span>
-                            </em>
-                            <em>[% Translate("Find and replace") | html %]</em>
-                        </li>
-                        <li>
-                            <em>
-                                <span>Cmd</span><span>Shift</span><span>R</span>
-                            </em>
-                            <em>[% Translate("Find and replace all") | html %]</em>
-                        </li>
+
+#
+# Not supported right now
+#
+#                        <li>
+#                            <em>
+#                                <span>Cmd</span><span>Shift</span><span>F</span>
+#                            </em>
+#                            <em>[% Translate("Find and replace") | html %]</em>
+#                        </li>
+#                        <li>
+#                            <em>
+#                                <span>Cmd</span><span>Shift</span><span>R</span>
+#                            </em>
+#                            <em>[% Translate("Find and replace all") | html %]</em>
+#                        </li>
                     </ul>
                 </div>
             </div>
@@ -197,8 +349,11 @@
                     <fieldset class="TableLike FixedLabel">
                         <div class="field-wrapper">
                             <label class="Mandatory" for="Template"><span class="Marker">*</span>[% Translate("XSLT stylesheet") | html %]</label>
+
+                            <div id="XSLTEditor" class="Field"></div>
+
                             <div class="Field">
-                                <textarea id="Template" name="Template" rows="20" cols="80" class="RichText Validate_Required [% Data.TemplateError | html %]">[% Data.Template | html %]</textarea>
+                                <textarea id="Template"  name="Template" rows="20" cols="80" class="Hidden Validate_Required [% Data.TemplateError | html %]">[% Data.Template | html %]</textarea>
                                 <div id="TemplateServerError" class="TooltipErrorMessage">
                                     <p>[% Translate("The entered data is not a valid XSLT style sheet.") | html %]</p>
                                 </div>

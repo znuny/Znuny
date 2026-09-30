@@ -45,8 +45,8 @@ $Self->False(
 $HelperObject->ConsoleCommand(
     CommandModule => 'Kernel::System::Console::Command::Maint::ObjectLink::Add',
     Parameter     => [
-        '--source-object', 'Ticket', '--source-key', $TicketID1, '--target-object', 'Ticket',
-        '--target-key', $TicketID2, '--link-type', 'Normal', '--link-state', 'Valid'
+        '--source-object', 'Ticket',   '--source-key', $TicketID1, '--target-object', 'Ticket',
+        '--target-key',    $TicketID2, '--link-type',  'Normal',   '--link-state',    'Valid'
     ],
 );
 
@@ -68,8 +68,8 @@ $Self->True(
 $HelperObject->ConsoleCommand(
     CommandModule => 'Kernel::System::Console::Command::Maint::ObjectLink::Delete',
     Parameter     => [
-        '--source-object', 'Ticket', '--source-key', $TicketID1, '--target-object', 'Ticket',
-        '--target-key', $TicketID2, '--link-type', 'Normal'
+        '--source-object', 'Ticket',   '--source-key', $TicketID1, '--target-object', 'Ticket',
+        '--target-key',    $TicketID2, '--link-type',  'Normal'
     ],
 );
 

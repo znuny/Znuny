@@ -623,7 +623,7 @@ if ( open( my $DATA, "<", "$Path/$File" ) ) {    ## no critic
         Cc                   => 'Some Customer <customer-b@example.com>',
         ReplyTo              => 'Some Customer <customer-b@example.com>',
         Subject              => 'some short description',
-        Body =>
+        Body                 =>
             'the message text Perl modules provide a range of featurheel, and can be downloaded',
         ContentType    => 'text/plain; charset=ISO-8859-15',
         HistoryType    => 'OwnerUpdate',
@@ -670,8 +670,7 @@ else {
 }
 
 # test bug#[12761]
-# (https://bugs.otrs.org/show_bug.cgi?id=12761) - Cache values can be modified from the outside in function XMLParse().
-#
+# Cache values can be modified from the outside in function XMLParse.
 $XML = '<Test Name="test123" />';
 my @XMLARRAY = $XMLObject->XMLParse( String => $XML );
 

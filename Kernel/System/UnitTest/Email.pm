@@ -81,6 +81,7 @@ Discards the following objects:
     Kernel::System::Ticket
     Kernel::System::Email::Test
     Kernel::System::Email
+
 and triggers transaction notifications.
 
 Also re-initializes the above objects.

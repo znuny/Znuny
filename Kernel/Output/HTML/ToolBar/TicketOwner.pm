@@ -42,12 +42,15 @@ sub Run {
 
     return if !$ConfigObject->Get('Frontend::Module')->{AgentTicketOwnerView};
 
+    my $TicketFrontendConfig = $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Frontend::AgentTicketOwnerView') // {};
+    my $UserIDForSearch      = $TicketFrontendConfig->{TicketSearchWithAdminUser} ? 1 : $Self->{UserID};
+
     # get user lock data
     my $Count = $TicketObject->TicketSearch(
         Result     => 'COUNT',
         StateType  => 'Open',
         OwnerIDs   => [ $Self->{UserID} ],
-        UserID     => $Self->{UserID},
+        UserID     => $UserIDForSearch,
         Permission => 'ro',
     ) || 0;
 
@@ -59,7 +62,7 @@ sub Run {
             Seen => 1,
         },
         TicketFlagUserID => $Self->{UserID},
-        UserID           => $Self->{UserID},
+        UserID           => $UserIDForSearch,
         Permission       => 'ro',
     ) || 0;
 
@@ -70,7 +73,7 @@ sub Run {
         StateType                     => ['pending reminder'],
         TicketPendingTimeOlderMinutes => 1,
         OwnerIDs                      => [ $Self->{UserID} ],
-        UserID                        => $Self->{UserID},
+        UserID                        => $UserIDForSearch,
         Permission                    => 'ro',
     ) || 0;
 

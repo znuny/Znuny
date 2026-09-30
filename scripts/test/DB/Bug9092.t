@@ -66,14 +66,12 @@ $Self->True(
 my $UserObject = $Kernel::OM->Get('Kernel::System::User');
 my ( $UserLogin, $UserID ) = $HelperObject->TestUserCreate();
 
-=cut
-This test is supposed to verify the solution for bug#9092, which showed
-that on certain versions of MySQL with InnoDB, dropping indices causes
-problems because the indices actually contain foreign key constraint data.
-
-A workaround is to first drop the foreign key constraints, then drop the indices, and
-then re-add the foreign keyconstraints again.
-=cut
+# This test is supposed to verify the solution for bug#9092, which showed
+# that on certain versions of MySQL with InnoDB, dropping indices causes
+# problems because the indices actually contain foreign key constraint data.
+#
+# A workaround is to first drop the foreign key constraints, then drop the indices, and
+# then re-add the foreign keyconstraints again.
 
 my @Tests = (
 

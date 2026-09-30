@@ -113,7 +113,7 @@ sub Run {
             Message  => "Switched to User ($Self->{UserLogin} -=> $UserData{UserLogin})",
         );
 
-        # Delete old session, see bug#14322 (https://bugs.otrs.org/show_bug.cgi?id=14322);
+        # Delete old session
         $SessionObject->RemoveSessionID(
             SessionID => $LayoutObject->{SessionID}
         );

@@ -106,7 +106,7 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}customer.pl?Action=CustomerTicketOverview;Subaction=CompanyTickets");
 
         # check for customer user fatal error
-        my $ExpectedMsg = 'Please contact the administrator.';
+        my $ExpectedMsg = 'An Error Occurred';
         $Self->True(
             index( $Selenium->get_page_source(), $ExpectedMsg ) > -1,
             "Customer fatal error message - found",

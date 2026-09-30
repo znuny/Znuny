@@ -28,7 +28,7 @@ Exporter::export_ok_tags('all');
 
 use DateTime;
 use DateTime::TimeZone;
-use Scalar::Util qw( looks_like_number );
+use Scalar::Util                  qw( looks_like_number );
 use Kernel::System::VariableCheck qw( IsArrayRefWithData IsHashRefWithData );
 
 our %ObjectManagerFlags = (
@@ -1541,6 +1541,7 @@ Checks if the given time zone is valid.
     my $Valid = Kernel::System::DateTime->IsTimeZoneValid( TimeZone => 'Europe/Berlin' );
 
 Returns:
+
     $Valid = 1;    # if given time zone is valid, 0 otherwise.
 
 =cut
@@ -1673,6 +1674,10 @@ sub SystemTimeZoneGet {
 }
 
 =begin Internal:
+
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
 
 =head2 _ToCPANDateTimeParamNames()
 
@@ -2230,8 +2235,6 @@ sub _OpNotEquals {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

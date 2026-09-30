@@ -339,7 +339,7 @@ for my $Test (@Tests) {
     {
         Name         => "ActivitySearch Test2 - Correct UTF8 1",
         ActivityName => "Activity-$RandomID-!Â§$%&/()=?Ã*ÃÃL:L@,.-",
-        ,
+
         Result => ["$RandomID-1"],
         Count  => 1,
     },

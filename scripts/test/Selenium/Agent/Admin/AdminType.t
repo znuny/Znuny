@@ -59,10 +59,12 @@ $Selenium->RunTest(
         # Check for error message notification.
         $Self->True(
             $Selenium->execute_script(
-                "return \$(\"div.MessageBox.Error a[href*='Action=AdminSystemConfiguration;Subaction=View;Setting=Ticket%3A%3AType']\").length;",
+                "return \$(\"div.messageError a[href*='Action=AdminSystemConfiguration;Subaction=View;Setting=Ticket%3A%3AType']\").length;",
             ),
             'Error MessageBox is found',
         );
+
+        $Selenium->CreateScreenshot();
 
         # click 'add new type' link.
         $Selenium->find_element("//a[contains(\@href, \'Action=AdminType;Subaction=Add' )]")->VerifiedClick();
@@ -76,10 +78,12 @@ $Selenium->RunTest(
         # Check for error message notification.
         $Self->True(
             $Selenium->execute_script(
-                "return \$(\"div.MessageBox.Error a[href*='Action=AdminSystemConfiguration;Subaction=View;Setting=Ticket%3A%3AType']\").length;",
+                "return \$(\"div.messageError a[href*='Action=AdminSystemConfiguration;Subaction=View;Setting=Ticket%3A%3AType']\").length;",
             ),
             'Error MessageBox is found',
         );
+
+        $Selenium->CreateScreenshot();
 
         # Check client side validation.
         $Selenium->find_element( "#Name",   'css' )->clear();
@@ -129,10 +133,12 @@ $Selenium->RunTest(
         # Check for error message notification.
         $Self->True(
             $Selenium->execute_script(
-                "return \$(\"div.MessageBox.Error a[href*='Action=AdminSystemConfiguration;Subaction=View;Setting=Ticket%3A%3AType']\").length;",
+                "return \$(\"div.messageError a[href*='Action=AdminSystemConfiguration;Subaction=View;Setting=Ticket%3A%3AType']\").length;",
             ),
             'Error MessageBox is found',
         );
+
+        $Selenium->CreateScreenshot();
 
         # Go to new type again.
         $Selenium->find_element( $TypeRandomID, 'link_text' )->VerifiedClick();
@@ -168,10 +174,11 @@ $Selenium->RunTest(
         # Check for error message notification.
         $Self->True(
             $Selenium->execute_script(
-                "return \$(\"div.MessageBox.Error a[href*='Action=AdminSystemConfiguration;Subaction=View;Setting=Ticket%3A%3AType']\").length;",
+                "return \$(\"div.messageError a[href*='Action=AdminSystemConfiguration;Subaction=View;Setting=Ticket%3A%3AType']\").length;",
             ),
             'Error MessageBox is found',
         );
+        $Selenium->CreateScreenshot();
 
         # Get current value of Ticket::Type::Default.
         my $DefaultTicketType = $ConfigObject->Get('Ticket::Type::Default');
@@ -228,6 +235,8 @@ $Selenium->RunTest(
             ),
             "There is a class 'Invalid' for test Type",
         );
+
+        $Selenium->CloseNotification();
 
         # Checks for AdminValidFilter
         $Self->True(

@@ -305,24 +305,74 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 /*  ~ Tablet landscape */
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
 
+    #ResponsiveFooter .Visible-ScreenL {
+        display: block;
+    }
+
+    #ResponsiveFooter .Visible-ScreenXL,
+    #ResponsiveFooter .Visible-ScreenM,
+    #ResponsiveFooter .Visible-ScreenS,
+    #ResponsiveFooter .Visible-ScreenXS {
+        display: none;
+    }
 }
 
 /*  All devices smaller than tablet landscape */
 @media only screen and (min-width: 0px) and (max-width: 767px) {
 
+    #ResponsiveFooter .Visible-ScreenM {
+        display: block;
+    }
+
+    #ResponsiveFooter .Visible-ScreenXL,
+    #ResponsiveFooter .Visible-ScreenL,
+    #ResponsiveFooter .Visible-ScreenS,
+    #ResponsiveFooter .Visible-ScreenXS {
+        display: none;
+    }
 }
 
 /*  ~ Tablet portrait */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
 
+    #ResponsiveFooter .Visible-ScreenS {
+        display: block;
+    }
+
+    #ResponsiveFooter .Visible-ScreenXL,
+    #ResponsiveFooter .Visible-ScreenL,
+    #ResponsiveFooter .Visible-ScreenM,
+    #ResponsiveFooter .Visible-ScreenXS {
+        display: none;
+    }
 }
 
 /*  ~ Smartphone landscape */
 @media only screen and (min-width: 320px) and (max-width: 479px) {
 
+    #ResponsiveFooter .Visible-ScreenS {
+        display: block;
+    }
+
+    #ResponsiveFooter .Visible-ScreenXL,
+    #ResponsiveFooter .Visible-ScreenL,
+    #ResponsiveFooter .Visible-ScreenM,
+    #ResponsiveFooter .Visible-ScreenXS {
+        display: none;
+    }
 }
 
 /*  ~ Smartphone portrait */
 @media only screen and (max-width: 319px) {
 
+    #ResponsiveFooter .Visible-ScreenXS {
+        display: block;
+    }
+
+    #ResponsiveFooter .Visible-ScreenXL,
+    #ResponsiveFooter .Visible-ScreenL,
+    #ResponsiveFooter .Visible-ScreenM,
+    #ResponsiveFooter .Visible-ScreenS {
+        display: none;
+    }
 }

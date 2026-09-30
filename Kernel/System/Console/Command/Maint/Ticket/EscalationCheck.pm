@@ -144,7 +144,7 @@ sub Run {
             if ($DecayTimeInSeconds) {
 
                 my $PrevEventLine = first { $_->{HistoryType} eq $TicketAttr2Event{$Type} }
-                @ReversedHistoryLines;
+                    @ReversedHistoryLines;
 
                 if ( $PrevEventLine && $PrevEventLine->{CreateTime} ) {
                     my $PrevEventTime = $Kernel::OM->Create(

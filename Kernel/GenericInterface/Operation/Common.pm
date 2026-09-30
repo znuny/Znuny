@@ -134,6 +134,10 @@ sub ReturnError {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
 =head2 _AuthUser()
 
 performs user authentication
@@ -220,8 +224,6 @@ sub _AuthCustomerUser {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

@@ -250,14 +250,14 @@ $Selenium->RunTest(
             "#SetValue1 updated value",
         );
 
-        # Make sure that 0 can be stored in match and set as well (see http://bugs.otrs.org/show_bug.cgi?id=12218).
+        # Make sure that 0 can be stored in match and set as well.
         $Selenium->find_element( "#MatchValue1", 'css' )->clear();
         $Selenium->find_element( "#MatchValue1", 'css' )->send_keys('0');
         $Selenium->find_element( "#SetValue1",   'css' )->clear();
         $Selenium->find_element( "#SetValue1",   'css' )->send_keys('0');
         $Selenium->find_element( "#Submit",      'css' )->VerifiedClick();
 
-        # Try to create PostMasterFilter with the same name, (see https://bugs.otrs.org/show_bug.cgi?id=12718).
+        # Try to create PostMasterFilter with the same name.
         $Selenium->find_element("//a[contains(\@href, \'Action=AdminPostMasterFilter;Subaction=AddAction' )]")
             ->VerifiedClick();
 

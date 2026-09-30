@@ -715,7 +715,7 @@ sub Import {
                     if ( !$LinkSuccess ) {
                         $Kernel::OM->Get('Kernel::System::Log')->Log(
                             Priority => 'error',
-                            Message =>
+                            Message  =>
                                 "Unable to create object link (AppointmentID=$Success - $PluginKey=$PluginData) during calendar import!"
                         );
                     }

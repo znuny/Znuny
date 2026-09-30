@@ -14,6 +14,11 @@ use warnings;
 
 use parent qw(Kernel::System::Console::BaseCommand);
 
+use Kernel::System::VariableCheck qw(:all);
+
+use File::Basename;
+use File::Path qw(make_path);
+
 our @ObjectDependencies = (
     'Kernel::System::Main',
     'Kernel::System::Package',
@@ -25,10 +30,17 @@ sub Configure {
     $Self->Description('Export the content of a package to a directory.');
     $Self->AddOption(
         Name        => 'target-directory',
-        Description => "Export content of the package to the specified directory.",
-        Required    => 1,
-        HasValue    => 1,
-        ValueRegex  => qr/.*/smx,
+        Description =>
+            "Export content of the package to the specified directory. If omitted, will use file name of given source path without its extension as target directory.",
+        Required   => 0,
+        HasValue   => 1,
+        ValueRegex => qr/.*/smx,
+    );
+    $Self->AddOption(
+        Name        => 'create-missing-target-directory',
+        Description => "Create the target directory if it does not exist.",
+        Required    => 0,
+        HasValue    => 0,
     );
     $Self->AddArgument(
         Name        => 'source-path',
@@ -49,9 +61,22 @@ sub PreRun {
     }
 
     my $TargetDirectory = $Self->GetOption('target-directory');
-    if ( $TargetDirectory && !-d $TargetDirectory ) {
+    if ( !IsStringWithData($TargetDirectory) ) {
+        $TargetDirectory = basename($SourcePath);
+        $TargetDirectory =~ s{(\A.*)\..*\z}{$1};
+    }
+
+    my $CreateMissingTargetDirectory = $Self->GetOption('create-missing-target-directory');
+    if (
+        !$CreateMissingTargetDirectory
+        && $TargetDirectory
+        && !-d $TargetDirectory
+        )
+    {
         die "Directory $TargetDirectory does not exist.\n";
     }
+
+    $Self->{TargetDirectory} = $TargetDirectory;
 
     return;
 }
@@ -89,8 +114,20 @@ sub Run {
         return $Self->ExitCodeError();
     }
 
-    my $TargetDirectory = $Self->GetOption('target-directory');
-    my $Success         = $Kernel::OM->Get('Kernel::System::Package')->PackageExport(
+    my $TargetDirectory              = $Self->{TargetDirectory};
+    my $CreateMissingTargetDirectory = $Self->GetOption('create-missing-target-directory');
+    if (
+        $CreateMissingTargetDirectory
+        && !-d $TargetDirectory
+        )
+    {
+        make_path($TargetDirectory);
+        if ( !-d $TargetDirectory ) {
+            $Self->PrintError("Error creating target directory $TargetDirectory.");
+            return $Self->ExitCodeError();
+        }
+    }
+    my $Success = $Kernel::OM->Get('Kernel::System::Package')->PackageExport(
         String => $FileString,
         Home   => $TargetDirectory,
     );

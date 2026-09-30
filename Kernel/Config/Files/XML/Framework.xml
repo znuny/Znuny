@@ -89,6 +89,16 @@
             <Item ValueType="String" ValueRegex="^[2-9][0-9]{1,}|[1-9][0-9]{2,}$">20</Item>
         </Value>
     </Setting>
+    <Setting Name="SupportDataCollector::SkipMaskPasswordSettings" Required="1" Valid="1">
+        <Description Translatable="1">When support data is collected via SupportDataCollector, certain SysConfig values marked with ValueType="Password" are automatically masked. This prevents passwords from appearing in plain text in the support data. This setting defines the settings that contain complex configuration hashes that should not be masked when generating the support data.</Description>
+        <Navigation>Core::SupportDataCollector</Navigation>
+        <Value>
+            <Array>
+                <Item ValueType="String">PreferencesGroups###Password</Item>
+                <Item ValueType="String">CustomerPreferencesGroups###Password</Item>
+            </Array>
+        </Value>
+    </Setting>
     <Setting Name="HttpType" Required="1" Valid="1" ConfigLevel="200">
         <Description Translatable="1">Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server's settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, OTRS_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system.</Description>
         <Navigation>Frontend::Base</Navigation>
@@ -251,7 +261,7 @@
         </Value>
     </Setting>
     <Setting Name="DefaultTheme" Required="1" Valid="1" ConfigLevel="200">
-        <Description Translatable="1">Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/manual/developer/.</Description>
+        <Description Translatable="1">Defines the default front-end (HTML) theme to be used by the agents and customers. If you like, you can add your own theme. Please refer the administrator manual located at https://doc.znuny.org/developer/general_information/themes.html.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">Standard</Item>
@@ -355,28 +365,28 @@
     </Setting>
     <Setting Name="AgentShortcutIcon" Required="0" Valid="1">
         <Description Translatable="1">The shortcut icon for the agent interface.</Description>
-        <Navigation>Frontend::Customer</Navigation>
+        <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">skins/Agent/default/img/icons/product.ico</Item>
         </Value>
     </Setting>
     <Setting Name="AgentShortcutIconCustom###default" Required="0" Valid="1">
         <Description Translatable="1">The shortcut icon for the agent interface fot the skin "default".</Description>
-        <Navigation>Frontend::Customer</Navigation>
+        <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">skins/Agent/default/img/icons/product.ico</Item>
         </Value>
     </Setting>
     <Setting Name="AgentAppleTouchIcon" Required="0" Valid="1">
         <Description Translatable="1">The Apple touch icon for the agent interface.</Description>
-        <Navigation>Frontend::Customer</Navigation>
+        <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">skins/Agent/default/img/icons/apple-touch-icon.png</Item>
         </Value>
     </Setting>
     <Setting Name="AgentAppleTouchIconCustom###default" Required="0" Valid="1">
         <Description Translatable="1">The Apple touch icon for the agent interface for the skin "default".</Description>
-        <Navigation>Frontend::Customer</Navigation>
+        <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">skins/Agent/default/img/icons/apple-touch-icon.png</Item>
         </Value>
@@ -420,14 +430,36 @@
         <Description Translatable="1">Defines the URL rich text editor path.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Frontend::WebPath&gt;js/thirdparty/ckeditor-4.25.1-znuny-min/</Item>
+            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Frontend::WebPath&gt;js/thirdparty/ckeditor5-classic-48.0.0/</Item>
         </Value>
     </Setting>
-    <Setting Name="Frontend::RichText::DefaultCSS" Required="1" Valid="1">
-        <Description Translatable="1">Defines the default CSS used in rich text editors.</Description>
+    <Setting Name="Frontend::RichText::CSS::Content::Path###InternalArticleStyles" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Path to RichText content CSS file that will be used to apply internal style to articles. The style will be appended into articles body when using agent interface. Customer internal article styles should match the same or very simillar rules.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">font-family:Geneva,Helvetica,Arial,sans-serif; font-size: 12px;</Item>
+            <Array>
+                <DefaultItem ValueType="String">*path_to_file*/*filename*.css</DefaultItem>
+                <Item ValueType="String" ValueRegex="">common/css/ckeditor5-48.0.0-content.css</Item>
+                <Item ValueType="String" ValueRegex="">common/css/Core.RichTextEditor.InternalArticleStyles.css</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::CSS::Content::Path::Customer###InternalArticleStyles" Required="1" Valid="1" ConfigLevel="200">
+        <Description Translatable="1">Path to RichText content CSS file that will be used to apply internal style to articles. The styles will be appended into articles body when using customer interface. Agent internal article styles should match the same or very simillar rules.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="String">*path_to_file*/*filename*.css</DefaultItem>
+                <Item ValueType="String" ValueRegex="">common/css/ckeditor5-48.0.0-content.css</Item>
+                <Item ValueType="String" ValueRegex="">common/css/Core.RichTextEditor.InternalArticleStyles.css</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::CSS::Content::Default" Required="1" Valid="1">
+        <Description Translatable="1">Defines the additional default CSS used in rich text editors content. The style will be appended into articles body.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">font-family:Geneva,Helvetica,Arial,sans-serif; font-size: 12px; line-height: 1.5;</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::RichText::EnhancedMode" Required="1" Valid="1">
@@ -448,49 +480,174 @@
         <Description Translatable="1">Defines the width for the rich text editor component. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">75%</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">100%</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::RichText::Settings###Height" Required="1" Valid="1">
         <Description Translatable="1">Defines the height for the rich text editor component. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="^\d+%?$">320</Item>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">320px</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Settings###MinHeight" Required="1" Valid="1">
+        <Description Translatable="1">Defines the minimum height for the rich text editor component. Enter number (pixels) or percent value (relative).</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+(%|px)?$">320px</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::RichText::Settings###FontSizes" Required="1" Valid="1">
         <Description Translatable="1">Defines the selectable font sizes in the rich text editor.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String">8px;10px;12px;14px;16px;18px;20px;22px;24px;26px;28px;30px;</Item>
+            <Array>
+                <Item>8px</Item>
+                <Item>10px</Item>
+                <Item>12px</Item>
+                <Item>14px</Item>
+                <Item>16px</Item>
+                <Item>18px</Item>
+                <Item>20px</Item>
+                <Item>22px</Item>
+                <Item>24px</Item>
+                <Item>26px</Item>
+                <Item>28px</Item>
+                <Item>30px</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Settings###FormatTags" Required="1" Valid="1">
+        <Description Translatable="1">Defines the selectable format tags in the rich text editor. Each option is an JSON equivalent of heading options used in CKEditor5, more info: https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#configuring-heading-levels.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Array>
+                <Item>"model": "paragraph", "title": "Paragraph", "class": "ck-heading_paragraph"</Item>
+                <Item>"model": "heading1", "view": "h1", "title": "Heading 1", "class": "ck-heading_heading1"</Item>
+                <Item>"model": "heading2", "view": "h2", "title": "Heading 2", "class": "ck-heading_heading2"</Item>
+                <Item>"model": "heading3", "view": "h3", "title": "Heading 3", "class": "ck-heading_heading3"</Item>
+                <Item>"model": "heading4", "view": "h4", "title": "Heading 4", "class": "ck-heading_heading4"</Item>
+                <Item>"model": "heading5", "view": "h5", "title": "Heading 5", "class": "ck-heading_heading5"</Item>
+                <Item>"model": "heading6", "view": "h6", "title": "Heading 6", "class": "ck-heading_heading6"</Item>
+                <Item>"model": "pre", "view": "pre", "title": "Preformatted", "class": "ck-heading_preformatted"</Item>
+            </Array>
+
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Settings###BuildPlugins" Required="1" Valid="1">
+        <Description Translatable="1">Defines enabled plugins that are available from the CKEditor build.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Array>
+                <Item>Alignment</Item>
+                <Item>Autocomplete</Item>
+                <Item>Autoformat</Item>
+                <Item>AutoImage</Item>
+                <Item>BlockQuote</Item>
+                <Item>Bold</Item>
+                <Item>Base64UploadAdapter</Item>
+                <Item>Italic</Item>
+                <Item>Underline</Item>
+                <Item>Strikethrough</Item>
+                <Item>Code</Item>
+                <Item>Subscript</Item>
+                <Item>Superscript</Item>
+                <Item>CloudServices</Item>
+                <Item>CodeBlock</Item>
+                <Item>Essentials</Item>
+                <Item>FindAndReplace</Item>
+                <Item>FontBackgroundColor</Item>
+                <Item>FontColor</Item>
+                <Item>FontFamily</Item>
+                <Item>FontSize</Item>
+                <Item>Fullscreen</Item>
+                <Item>GeneralHtmlSupport</Item>
+                <Item>Heading</Item>
+                <Item>HorizontalLine</Item>
+                <Item>HtmlEmbed</Item>
+                <Item>Image</Item>
+                <Item>ImageBlock</Item>
+                <Item>ImageCaption</Item>
+                <Item>ImageResize</Item>
+                <Item>ImageStyle</Item>
+                <Item>ImageToolbar</Item>
+                <Item>ImageInline</Item>
+                <Item>ImageInsert</Item>
+                <Item>Indent</Item>
+                <Item>IndentBlock</Item>
+                <Item>Link</Item>
+                <Item>LinkImage</Item>
+                <Item>List</Item>
+                <Item>ListProperties</Item>
+                <Item>MediaEmbed</Item>
+                <Item>PageBreak</Item>
+                <Item>PasteFromOffice</Item>
+                <Item>PictureEditing</Item>
+                <Item>RemoveFormat</Item>
+                <Item>SelectAll</Item>
+                <Item>ShowBlocks</Item>
+                <Item>SimpleUploadAdapter</Item>
+                <Item>SourceEditing</Item>
+                <Item>SpecialCharacters</Item>
+                <Item>SpecialCharactersMathematical</Item>
+                <Item>SplitQuote</Item>
+                <Item>Style</Item>
+                <Item>Table</Item>
+                <Item>TableCaption</Item>
+                <Item>TableCellProperties</Item>
+                <Item>TableColumnResize</Item>
+                <Item>TableProperties</Item>
+                <Item>TableToolbar</Item>
+                <Item>TextPartLanguage</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Settings###ExtraPlugins" Required="0" Valid="1">
+        <Description Translatable="1">Defines additional plugins in the rich text editor.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Array>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::RichText::Settings###ExcludedPlugins" Required="0" Valid="1">
+        <Description Translatable="1">Defines plugins that will be excluded from usage in the rich text editor.</Description>
+        <Navigation>Frontend::Base</Navigation>
+        <Value>
+            <Array>
+            </Array>
         </Value>
     </Setting>
     <Setting Name="Frontend::RichText::Settings###FontNames" Required="1" Valid="1">
         <Description Translatable="1">Defines the selectable fonts in the rich text editor.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String">Arial/Arial, Helvetica, sans-serif;Calibri/Calibri, sans-serif;Comic Sans MS/Comic Sans MS, cursive;Courier New/Courier New, Courier, monospace;Georgia/Georgia, serif;Lucida Sans Unicode/Lucida Sans Unicode, Lucida Grande, sans-serif;Tahoma/Tahoma, Geneva, sans-serif;Times New Roman/Times New Roman, Times, serif;Trebuchet MS/Trebuchet MS, Helvetica, sans-serif;Verdana/Verdana, Geneva, sans-serif</Item>
+            <Array>
+                <Item>Arial/Arial, Helvetica, sans-serif</Item>
+                <Item>Calibri/Calibri, sans-serif</Item>
+                <Item>Comic Sans MS/Comic Sans MS, cursive</Item>
+                <Item>Courier New/Courier New, Courier, monospace</Item>
+                <Item>Georgia/Georgia, serif</Item>
+                <Item>Lucida Sans Unicode/Lucida Sans Unicode, Lucida Grande, sans-serif</Item>
+                <Item>Tahoma/Tahoma, Geneva, sans-serif</Item>
+                <Item>Times New Roman/Times New Roman, Times, serif</Item>
+                <Item>Trebuchet MS/Trebuchet MS, Helvetica, sans-serif</Item>
+                <Item>Verdana/Verdana, Geneva, sans-serif</Item>
+            </Array>
         </Value>
     </Setting>
-    <Setting Name="Frontend::RichText::Settings###FormatTags" Required="1" Valid="1">
-        <Description Translatable="1">Defines the selectable format tags in the rich text editor.</Description>
+    <Setting Name="Frontend::RichText::Settings###ContentAllowed" Required="0" Valid="1">
+        <Description Translatable="1">Defines content that is allowed for use in the rich text editor.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String">p;h1;h2;h3;h4;h5;h6;pre</Item>
+            <Item ValueType="String" ValueRegex="^\[.*\]$">[{"name":"div","attributes":{"type":true},"styles":true},{"name":"img","attributes":true},{"name":"col","attributes":{"width":true}},{"name":"style","attributes":true,"styles":true},{"name":".*","attributes":{"id":true},"classes":true}]</Item>
         </Value>
     </Setting>
-    <Setting Name="Frontend::RichText::Settings###ExtraPlugins" Required="0" Valid="1">
-        <Description Translatable="1">Defines additional plugins for use in the rich text editor.</Description>
+    <Setting Name="Frontend::RichText::Settings###ContentDisallowed" Required="0" Valid="1">
+        <Description Translatable="1">Defines content that is disallowed for use in the rich text editor.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String">splitquote,contextmenu_linkopen</Item>
-        </Value>
-    </Setting>
-    <Setting Name="Frontend::RichText::Settings###ExtraAllowedContent" Required="0" Valid="1">
-        <Description Translatable="1">Defines extra content that is allowed for use in the rich text editor.</Description>
-        <Navigation>Frontend::Base</Navigation>
-        <Value>
-            <Item ValueType="String">div[type]{*}; img[*]; col[width]; style[*]{*}; *[id](*)</Item>
+            <Item ValueType="String" ValueRegex="^\[.*\]$">[]</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::PopupProfiles###001-Framework" Required="1" Valid="1">
@@ -723,7 +880,7 @@
         <Description Translatable="1">If "file" was selected for LogModule, a logfile must be specified. If the file doesn't exist, it will be created by the system.</Description>
         <Navigation>Core::Log</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">/tmp/znuny.log</Item>
+            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Home&gt;/var/log/znuny.log</Item>
         </Value>
     </Setting>
     <Setting Name="LogModule::LogFile::Date" Required="1" Valid="1">
@@ -764,6 +921,13 @@
         <Navigation>Core::Email</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="^[0-9]{1,6}$">25</Item>
+        </Value>
+    </Setting>
+    <Setting Name="SendmailModule::Timeout" Required="0" Valid="0" ConfigLevel="200">
+        <Description Translatable="1">Maximum time, in seconds, to wait for a response from server. Only applies to modules that support timeouts.</Description>
+        <Navigation>Core::Email</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^\d+$">30</Item>
         </Value>
     </Setting>
     <Setting Name="SendmailModule::AuthUser" Required="0" Valid="0" ConfigLevel="200">
@@ -961,16 +1125,6 @@
             </Hash>
         </Value>
     </Setting>
-    <Setting Name="Frontend::NotifyModule###5000-SystemConfigurationIsDirty-Check" Required="1" Valid="1">
-        <Description Translatable="1">Defines the module to display a notification in the agent interface, if there are modified sysconfig settings that are not deployed yet.</Description>
-        <Navigation>Frontend::Agent::FrontendNotification</Navigation>
-        <Value>
-            <Hash>
-                <Item Key="Module">Kernel::Output::HTML::Notification::SystemConfigurationIsDirtyCheck</Item>
-                <Item Key="Group">admin</Item>
-            </Hash>
-        </Value>
-    </Setting>
     <Setting Name="Frontend::NotifyModule###5200-SystemConfigurationInvalid-Check" Required="1" Valid="1">
         <Description Translatable="1">Defines the module to display a notification in the agent interface, if there are invalid sysconfig settings deployed.</Description>
         <Navigation>Frontend::Agent::FrontendNotification</Navigation>
@@ -1025,9 +1179,9 @@
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::Notification::Generic</Item>
                 <Item Key="Priority">Warning</Item>
-                <Item Key="Text">The OTRS Website</Item>
+                <Item Key="Text">The Znuny Website</Item>
                 <Item Key="File">&lt;OTRS_CONFIG_Home&gt;/var/notify.txt</Item>
-                <Item Key="Link">http://www.otrs.com</Item>
+                <Item Key="Link">http://www.znuny.com</Item>
             </Hash>
         </Value>
     </Setting>
@@ -3004,8 +3158,9 @@
         <Navigation>Core::Crypt::PGP</Navigation>
         <Value>
             <Hash>
-                <Item Key="D2DF79FA">SomePassword</Item>
-                <Item Key="488A0B8F">SomePassword</Item>
+                <DefaultItem ValueType="Password">Secret</DefaultItem>
+                <Item ValueType="Password" Key="D2DF79FA">SomePassword</Item>
+                <Item ValueType="Password" Key="488A0B8F">SomePassword</Item>
             </Hash>
         </Value>
     </Setting>
@@ -3092,21 +3247,42 @@
         <Description Translatable="1">Specifies the name that should be used by the application when sending notifications. The sender name is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com).</Description>
         <Navigation>Core::Email</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">OTRS Notifications</Item>
+            <Item ValueType="String" ValueRegex="">Znuny Notifications</Item>
         </Value>
     </Setting>
     <Setting Name="NotificationSenderEmail" Required="1" Valid="1">
         <Description Translatable="1">Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.</Description>
         <Navigation>Core::Email</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">otrs@&lt;OTRS_CONFIG_FQDN&gt;</Item>
+            <Item ValueType="String" ValueRegex="">znuny@&lt;OTRS_CONFIG_FQDN&gt;</Item>
+        </Value>
+    </Setting>
+    <Setting Name="PasswordResetTokenExpiry" Required="1" Valid="1">
+        <Description Translatable="1">Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^[1-9]\d{0,7}$">3600</Item>
+        </Value>
+    </Setting>
+    <Setting Name="PasswordResetRateLimitMaxAttempts" Required="1" Valid="1">
+        <Description Translatable="1">Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^[0-9]{1,4}$">5</Item>
+        </Value>
+    </Setting>
+    <Setting Name="PasswordResetRateLimitWindow" Required="1" Valid="1">
+        <Description Translatable="1">Time window in seconds for password reset rate limiting. Attempts within this window are counted against the maximum. Default: 600 (10 minutes).</Description>
+        <Navigation>Frontend::Agent</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^[1-9]\d{0,7}$">600</Item>
         </Value>
     </Setting>
     <Setting Name="NotificationSubjectLostPasswordToken" Required="1" Valid="1">
         <Description Translatable="1">Defines the subject for notification mails sent to agents, with token about new requested password.</Description>
         <Navigation>Frontend::Agent</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">New OTRS password request</Item>
+            <Item ValueType="String" ValueRegex="">New Znuny password request</Item>
         </Value>
     </Setting>
     <Setting Name="NotificationBodyLostPasswordToken" Required="1" Valid="1">
@@ -3115,10 +3291,11 @@
         <Value>
             <Item ValueType="Textarea">Hi &lt;OTRS_USERFIRSTNAME&gt;,
 
-You or someone impersonating you has requested to change your OTRS
+You or someone impersonating you has requested to change your Znuny
 password.
 
-If you want to do this, click on the link below. You will receive another email containing the password.
+If you want to do this, click on the link below to set a new password.
+This link is valid for a limited time.
 
 &lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=LostPassword;Token=&lt;OTRS_TOKEN&gt;
 
@@ -3127,26 +3304,25 @@ If you did not request a new password, please ignore this email.
         </Value>
     </Setting>
     <Setting Name="NotificationSubjectLostPassword" Required="1" Valid="1">
-        <Description Translatable="1">Defines the subject for notification mails sent to agents, about new password.</Description>
+        <Description Translatable="1">Defines the subject for notification mails sent to agents, confirming that the password has been reset.</Description>
         <Navigation>Frontend::Agent</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">New OTRS password</Item>
+            <Item ValueType="String" ValueRegex="">Your Znuny password has been reset</Item>
         </Value>
     </Setting>
     <Setting Name="NotificationBodyLostPassword" Required="1" Valid="1">
-        <Description Translatable="1">Defines the body text for notification mails sent to agents, about new password.</Description>
+        <Description Translatable="1">Defines the body text for notification mails sent to agents, confirming that the password has been reset.</Description>
         <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Item ValueType="Textarea">Hi &lt;OTRS_USERFIRSTNAME&gt;,
 
-
-Here's your new OTRS password.
-
-New password: &lt;OTRS_NEWPW&gt;
+Your Znuny password has been successfully reset.
 
 You can log in via the following URL:
 
 &lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl
+
+If you did not make this change, please contact your administrator immediately.
             </Item>
         </Value>
     </Setting>
@@ -3707,7 +3883,7 @@ You can log in via the following URL:
         <Description Translatable="1">Defines the subject for notification mails sent to customers, with token about new requested password.</Description>
         <Navigation>Frontend::Customer</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">New OTRS password request</Item>
+            <Item ValueType="String" ValueRegex="">New Znuny password request</Item>
         </Value>
     </Setting>
     <Setting Name="CustomerPanelBodyLostPasswordToken" Required="1" Valid="1">
@@ -3716,10 +3892,11 @@ You can log in via the following URL:
         <Value>
             <Item ValueType="Textarea">Hi &lt;OTRS_USERFIRSTNAME&gt;,
 
-You or someone impersonating you has requested to change your OTRS
+You or someone impersonating you has requested to change your Znuny
 password.
 
-If you want to do this, click on this link. You will receive another email containing the password.
+If you want to do this, click on the link below to set a new password.
+This link is valid for a limited time.
 
 &lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;customer.pl?Action=CustomerLostPassword;Token=&lt;OTRS_TOKEN&gt;
 
@@ -3728,22 +3905,25 @@ If you did not request a new password, please ignore this email.
         </Value>
     </Setting>
     <Setting Name="CustomerPanelSubjectLostPassword" Required="1" Valid="1">
-        <Description Translatable="1">Defines the subject for notification mails sent to customers, about new password.</Description>
+        <Description Translatable="1">Defines the subject for notification mails sent to customers, confirming that the password has been reset.</Description>
         <Navigation>Frontend::Customer</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">New OTRS password</Item>
+            <Item ValueType="String" ValueRegex="">Your Znuny password has been reset</Item>
         </Value>
     </Setting>
     <Setting Name="CustomerPanelBodyLostPassword" Required="1" Valid="1">
-        <Description Translatable="1">Defines the body text for notification mails sent to customers, about new password.</Description>
+        <Description Translatable="1">Defines the body text for notification mails sent to customers, confirming that the password has been reset.</Description>
         <Navigation>Frontend::Customer</Navigation>
         <Value>
             <Item ValueType="Textarea">Hi &lt;OTRS_USERFIRSTNAME&gt;,
 
+Your Znuny password has been successfully reset.
 
-New password: &lt;OTRS_NEWPW&gt;
+You can log in via the following URL:
 
 &lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;customer.pl
+
+If you did not make this change, please contact your administrator immediately.
             </Item>
         </Value>
     </Setting>
@@ -3751,7 +3931,7 @@ New password: &lt;OTRS_NEWPW&gt;
         <Description Translatable="1">Defines the subject for notification mails sent to customers, about new account.</Description>
         <Navigation>Frontend::Customer</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">New OTRS Account!</Item>
+            <Item ValueType="String" ValueRegex="">New Znuny Account!</Item>
         </Value>
     </Setting>
     <Setting Name="CustomerPanelBodyNewAccount" Required="1" Valid="1">
@@ -3760,7 +3940,7 @@ New password: &lt;OTRS_NEWPW&gt;
         <Value>
             <Item ValueType="Textarea">Hi &lt;OTRS_USERFIRSTNAME&gt;,
 
-You or someone impersonating you has created a new OTRS account for
+You or someone impersonating you has created a new Znuny account for
 you.
 
 Full name: &lt;OTRS_USERFIRSTNAME&gt; &lt;OTRS_USERLASTNAME&gt;
@@ -4196,7 +4376,7 @@ via the Preferences button after logging in.
             </Item>
         </Value>
     </Setting>
-    <Setting Name="Frontend::Module###AjaxAttachment" Required="0" Valid="1">
+    <Setting Name="Frontend::Module###AJAXAttachment" Required="0" Valid="1">
         <Description Translatable="1">Frontend module registration for the agent interface.</Description>
         <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
         <Value>
@@ -4210,7 +4390,7 @@ via the Preferences button after logging in.
                         <Array>
                         </Array>
                     </Item>
-                    <Item Key="Description">AjaxAttachment</Item>
+                    <Item Key="Description">AJAXAttachment</Item>
                     <Item Key="Title"></Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
@@ -4247,6 +4427,7 @@ via the Preferences button after logging in.
                     <Array>
                         <Item>Core.Agent.Dashboard.css</Item>
                         <Item>Core.AllocationList.css</Item>
+                        <Item>Core.Agent.ColumnFilterMultiSelect.css</Item>
                         <Item>thirdparty/fullcalendar-3.10.2/fullcalendar.min.css</Item>
                         <Item>thirdparty/nvd3-1.7.1/nv.d3.css</Item>
                     </Array>
@@ -4260,9 +4441,7 @@ via the Preferences button after logging in.
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSLineChart.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSMultiBarChart.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSStackedAreaChart.js</Item>
-                        <Item>thirdparty/canvg-1.5/rgbcolor.js</Item>
-                        <Item>thirdparty/canvg-1.5/StackBlur.js</Item>
-                        <Item>thirdparty/canvg-1.5/canvg.js</Item>
+                        <Item>thirdparty/canvg-4.0.3/canvg.min.js</Item>
                         <Item>thirdparty/StringView-8/stringview.js</Item>
                         <Item>Core.UI.AdvancedChart.js</Item>
                         <Item>Core.UI.AllocationList.js</Item>
@@ -4590,6 +4769,16 @@ via the Preferences button after logging in.
         <Value>
             <Hash>
                 <Item Key="^AgentCustomerUserInformationCenter">Core.Agent.CustomerUserInformationCenterSearch.OpenSearchDialog()</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="AgentCustomerUserInformationCenter::MainMenu###010-EditCustomerUser" Required="0" Valid="0">
+        <Description Translatable="1">Main menu registration.</Description>
+        <Navigation>Frontend::Agent::View::CustomerUserInformationCenter</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name" Translatable="1">Edit customer user</Item>
+                <Item Key="Link">[% Env("Baselink") %]Action=AdminCustomerUser;Subaction=Change;ID=[% Data.CustomerUserID | uri %];Nav=0</Item>
             </Hash>
         </Value>
     </Setting>
@@ -6520,7 +6709,7 @@ via the Preferences button after logging in.
                             <Item>admin</Item>
                         </Array>
                     </Item>
-                    <Item Key="Description" Translatable="1">This module is part of the admin area of OTRS.</Item>
+                    <Item Key="Description" Translatable="1">This module is part of the admin area of Znuny.</Item>
                     <Item Key="Title" Translatable="1">Communication Log GUI</Item>
                     <Item Key="NavBarName">Admin</Item>
                 </Hash>
@@ -6791,7 +6980,7 @@ via the Preferences button after logging in.
                 <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
                 <Item Key="Name" Translatable="1">Package Manager</Item>
                 <Item Key="Block">Administration</Item>
-                <Item Key="Description" Translatable="1">Update and extend your system with software packages.</Item>
+                <Item Key="Description" Translatable="1">Manage add-ons.</Item>
                 <Item Key="IconBig">fa-plug</Item>
                 <Item Key="IconSmall"></Item>
             </Hash>
@@ -6888,7 +7077,7 @@ via the Preferences button after logging in.
             </Item>
         </Value>
     </Setting>
-    <Setting Name="CustomerFrontend::Module###AjaxAttachment" Required="0" Valid="1">
+    <Setting Name="CustomerFrontend::Module###AJAXAttachment" Required="0" Valid="1">
         <Description Translatable="1">Frontend module registration for the customer interface.</Description>
         <Navigation>Frontend::Customer::ModuleRegistration</Navigation>
         <Value>
@@ -6902,7 +7091,7 @@ via the Preferences button after logging in.
                         <Array>
                         </Array>
                     </Item>
-                    <Item Key="Description">AjaxAttachment</Item>
+                    <Item Key="Description">AJAXAttachment</Item>
                     <Item Key="Title"></Item>
                     <Item Key="NavBarName"></Item>
                 </Hash>
@@ -7121,9 +7310,7 @@ via the Preferences button after logging in.
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSLineChart.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSMultiBarChart.js</Item>
                         <Item>thirdparty/nvd3-1.7.1/models/OTRSStackedAreaChart.js</Item>
-                        <Item>thirdparty/canvg-1.5/rgbcolor.js</Item>
-                        <Item>thirdparty/canvg-1.5/StackBlur.js</Item>
-                        <Item>thirdparty/canvg-1.5/canvg.js</Item>
+                        <Item>thirdparty/canvg-4.0.3/canvg.min.js</Item>
                         <Item>thirdparty/StringView-8/stringview.js</Item>
                         <Item>Core.Agent.Statistics.js</Item>
                         <Item>Core.UI.AdvancedChart.js</Item>
@@ -7447,11 +7634,11 @@ via the Preferences button after logging in.
                 <Item Key="Title" Translatable="1">A picture</Item>
                 <Item Key="Description" Translatable="1">Some picture description!</Item>
                 <Item Key="Block">ContentLarge</Item>
-                <Item Key="URL">https://www.otrs.com/wp-uploads//2013/10/OTRS_Logo-300x170.png</Item>
+                <Item Key="URL">https://www.znuny.org</Item>
                 <Item Key="Group"></Item>
                 <Item Key="Default">1</Item>
-                <Item Key="Link">https://otrs.org/</Item>
-                <Item Key="LinkTitle">https://otrs.org/</Item>
+                <Item Key="Link">https://znuny.org/</Item>
+                <Item Key="LinkTitle">https://znuny.org/</Item>
                 <Item Key="Width">198</Item>
                 <Item Key="Height">140</Item>
                 <Item Key="Mandatory">0</Item>
@@ -7464,8 +7651,7 @@ via the Preferences button after logging in.
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::Dashboard::MOTD</Item>
-                <Item Key="Block">ContentLarge</Item>
-                <Item Key="Group"></Item>
+                <Item Key="Block">ContentLarge</Item> <Item Key="Group"></Item>
                 <Item Key="Default">1</Item>
                 <Item Key="Title">Message of the Day</Item>
                 <Item Key="Mandatory">0</Item>
@@ -7481,11 +7667,11 @@ via the Preferences button after logging in.
                 <Item Key="Title" Translatable="1">A Website</Item>
                 <Item Key="Description" Translatable="1">Some description!</Item>
                 <Item Key="Block">ContentLarge</Item>
-                <Item Key="URL">https://otrs.com/</Item>
+                <Item Key="URL">https://znuny.com/</Item>
                 <Item Key="Group"></Item>
                 <Item Key="Default">1</Item>
-                <Item Key="Link">https://otrs.com/</Item>
-                <Item Key="LinkTitle">OTRS.com/</Item>
+                <Item Key="Link">https://znuny.com/</Item>
+                <Item Key="LinkTitle">znuny.com/</Item>
                 <Item Key="Width">1024</Item>
                 <Item Key="Height">800</Item>
                 <Item Key="Marginheight">5</Item>
@@ -7720,6 +7906,13 @@ via the Preferences button after logging in.
             <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
+    <Setting Name="NotificationEmailDefaultTemplate" Required="0" Valid="1">
+        <Description Translatable="1">Default template for notification e-mails (see Kernel/Output/HTML/Templates/Standard/NotificationEvent/Email directory for available templates).</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="">Default</Item>
+        </Value>
+    </Setting>
     <Setting Name="Loader::Enabled::CSS" Required="1" Valid="1">
         <Description Translatable="1">If enabled, Znuny will deliver all CSS files in minified form.</Description>
         <Navigation>Frontend::Base::Loader</Navigation>
@@ -7766,6 +7959,25 @@ via the Preferences button after logging in.
                 <Item>Core.Components.css</Item>
                 <Item>Core.FlexboxModel.css</Item>
                 <Item>Core.Typography.css</Item>
+                <Item>thirdparty/bootstrap-grid-5.1/bootstrap-grid.css</Item>
+                <Item>layouts/Layout.ContentSidebar.css</Item>
+                <Item>layouts/Layout.PopUp.css</Item>
+                <Item>layouts/Layout.PopUpSidebar.css</Item>
+                <Item>modules/Module.Alert.css</Item>
+                <Item>modules/Module.Card.css</Item>
+                <Item>modules/Module.CustomerContainer.css</Item>
+                <Item>modules/Module.CustomerInformation.css</Item>
+                <Item>modules/Module.CustomerSelector.css</Item>
+                <Item>modules/Module.DynamicField.css</Item>
+                <Item>modules/Module.Form.css</Item>
+                <Item>modules/Module.FormSubmitArea.css</Item>
+                <Item>modules/Module.MessageInformation.css</Item>
+                <Item>modules/Module.Notification.css</Item>
+                <Item>modules/Module.PageHeadline.css</Item>
+                <Item>modules/Module.Sidebar.css</Item>
+                <Item>modules/Module.SidebarWidget.css</Item>
+                <Item>modules/Module.Signature.css</Item>
+                <Item>modules/Module.TicketHeader.css</Item>
             </Array>
         </Value>
     </Setting>
@@ -7787,11 +7999,11 @@ via the Preferences button after logging in.
                 <Item>thirdparty/jquery-browser-detection/jquery-browser-detection.js</Item>
                 <Item>thirdparty/jquery-ui-1.13.3/jquery-ui.js</Item>
                 <Item>thirdparty/jquery-ui-touch-punch-0.2.3/jquery.ui.touch-punch.js</Item>
-                <Item>thirdparty/jquery-validate-1.16.0/jquery.validate.js</Item>
+                <Item>thirdparty/jquery-validation-1.21.0/jquery.validate.js</Item>
                 <Item>thirdparty/jquery-pubsub/pubsub.js</Item>
                 <Item>thirdparty/jquery-jstree-3.3.8/jquery.jstree.js</Item>
-                <Item>thirdparty/nunjucks-3.2.3/nunjucks.min.js</Item>
-                <Item>thirdparty/jscolor-2.4.6/jscolor.js</Item>
+                <Item>thirdparty/nunjucks-3.2.4/nunjucks.min.js</Item>
+                <Item>thirdparty/jscolor-2.5.2/jscolor.js</Item>
                 <Item>Core.Init.js</Item>
                 <Item>Core.JavaScriptEnhancements.js</Item>
                 <Item>Core.Debug.js</Item>
@@ -7831,6 +8043,15 @@ via the Preferences button after logging in.
                 <Item>Core.Agent.Header.js</Item>
                 <Item>Core.UI.Notification.js</Item>
                 <Item>Core.Agent.Responsive.js</Item>
+                <Item>modules/application.js</Item>
+                <Item>modules/Module.Sidebar.js</Item>
+                <Item>modules/Module.Card.js</Item>
+                <Item>modules/Module.CustomerSelector.js</Item>
+                <Item>modules/Module.Form.js</Item>
+                <Item>modules/Module.Notification.js</Item>
+                <Item>modules/Module.Alert.js</Item>
+                <Item>modules/Module.SidebarWidget.js</Item>
+                <Item>Znuny.App.js</Item>
             </Array>
         </Value>
     </Setting>
@@ -7840,15 +8061,6 @@ via the Preferences button after logging in.
         <Value>
             <Array>
                 <Item>thirdparty/jquery-migrate-3.0.0/jquery-migrate.js</Item>
-            </Array>
-        </Value>
-    </Setting>
-    <Setting Name="Loader::Agent::CommonJS###100-CKEditor" Required="1" Valid="1">
-        <Description Translatable="1">List of JS files to always be loaded for the agent interface.</Description>
-        <Navigation>Frontend::Base::Loader</Navigation>
-        <Value>
-            <Array>
-                <Item>thirdparty/ckeditor-4.25.1-znuny-min/ckeditor.js</Item>
             </Array>
         </Value>
     </Setting>
@@ -7885,6 +8097,8 @@ via the Preferences button after logging in.
                 <Item>Core.Footer.css</Item>
                 <Item>Core.PageLayout.css</Item>
                 <Item>Core.Components.css</Item>
+                <Item>modules/Module.Alert.css</Item>
+                <Item>modules/Module.Notification.css</Item>
             </Array>
         </Value>
     </Setting>
@@ -7904,11 +8118,11 @@ via the Preferences button after logging in.
             <Array>
                 <Item>thirdparty/jquery-3.7.0/jquery.js</Item>
                 <Item>thirdparty/jquery-browser-detection/jquery-browser-detection.js</Item>
-                <Item>thirdparty/jquery-validate-1.16.0/jquery.validate.js</Item>
+                <Item>thirdparty/jquery-validation-1.21.0/jquery.validate.js</Item>
                 <Item>thirdparty/jquery-ui-1.13.3/jquery-ui.js</Item>
                 <Item>thirdparty/jquery-pubsub/pubsub.js</Item>
                 <Item>thirdparty/jquery-jstree-3.3.8/jquery.jstree.js</Item>
-                <Item>thirdparty/nunjucks-3.2.3/nunjucks.min.js</Item>
+                <Item>thirdparty/nunjucks-3.2.4/nunjucks.min.js</Item>
                 <Item>Core.Init.js</Item>
                 <Item>Core.Debug.js</Item>
                 <Item>Core.Exception.js</Item>
@@ -7936,6 +8150,9 @@ via the Preferences button after logging in.
                 <Item>Core.Form.Validate.js</Item>
                 <Item>Core.Customer.js</Item>
                 <Item>Core.Customer.Responsive.js</Item>
+                <Item>modules/application.js</Item>
+                <Item>modules/Module.Notification.js</Item>
+                <Item>modules/Module.Alert.js</Item>
             </Array>
         </Value>
     </Setting>
@@ -7945,15 +8162,6 @@ via the Preferences button after logging in.
         <Value>
             <Array>
                 <Item>thirdparty/jquery-migrate-3.0.0/jquery-migrate.js</Item>
-            </Array>
-        </Value>
-    </Setting>
-    <Setting Name="Loader::Customer::CommonJS###100-CKEditor" Required="1" Valid="1">
-        <Description Translatable="1">List of JS files to always be loaded for the customer interface.</Description>
-        <Navigation>Frontend::Base::Loader</Navigation>
-        <Value>
-            <Array>
-                <Item>thirdparty/ckeditor-4.25.1-znuny-min/ckeditor.js</Item>
             </Array>
         </Value>
     </Setting>
@@ -8270,6 +8478,15 @@ via the Preferences button after logging in.
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="Customer::PossibleNextActions" Required="0" Valid="1">
+        <Description Translatable="1">Defines the list of possible next actions on an error screen, a full path is required, then is possible to add external links if needed.</Description>
+        <Navigation>Frontend::Customer</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="[% Env('CGIHandle') %]?Action=CustomerTicketOverview" Translatable="1">Go to overview</Item>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="SystemMaintenance::TimeNotifyUpcomingMaintenance" Required="0" Valid="1">
         <Description Translatable="1">Sets the minutes a notification is shown for notice about upcoming system maintenance period.</Description>
         <Navigation>Core::SystemMaintenance</Navigation>
@@ -8579,6 +8796,18 @@ via the Preferences button after logging in.
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="CommunicationChannel###Web" Required="0" Valid="1">
+        <Description Translatable="1">Defines web communication channel.</Description>
+        <Navigation>Core::CommunicationChannel</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Name" Translatable="1">Web</Item>
+                <Item Key="Icon">fa-window-maximize</Item>
+                <Item Key="Description" Translatable="1">Web communication channel.</Item>
+                <Item Key="Module">Kernel::System::CommunicationChannel::Web</Item>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="AgentPreferencesGroups" Required="1" Valid="1">
         <Description Translatable="1">Defines groups for preferences items.</Description>
         <Navigation>Frontend::Agent::View::Preferences</Navigation>
@@ -8632,11 +8861,7 @@ via the Preferences button after logging in.
             <Hash>
                 <DefaultItem>
                     <Hash>
-                        <Item Key="SearchLimit">10000</Item>
-                        <Item Key="PageShown">50</Item>
-                        <Item Key="CustomerTicketTextField">UserMailString</Item>
-                        <Item Key="SortBy::Default">UserLogin</Item>
-                        <Item Key="Order::Default">Up</Item>
+                        <Item Key=""></Item>
                     </Hash>
                 </DefaultItem>
                 <Item Key="Email">

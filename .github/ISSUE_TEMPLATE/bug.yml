@@ -1,0 +1,135 @@
+---
+name: Bug Report
+description: Create a bug report to help us improve the system.
+title: "Bug - "
+labels: ["1 - 🐞 bug 🐞"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        You are amazing! 🚀
+        Thanks for reporting to the Znuny project!
+
+        **Important:** If you believe your issue is security related, please follow the [security guidelines](https://github.com/znuny/Znuny/blob/dev/SECURITY.md).
+
+  - type: checkboxes
+    id: security-confirmation
+    attributes:
+      label: Security Issue Confirmation
+      description: Please confirm that this is not a security-related issue.
+      options:
+        - label: I confirm this is not a security-related issue
+          required: true
+
+  - type: checkboxes
+    id: search-confirmation
+    attributes:
+      label: Issue Search Confirmation
+      description: Please confirm that you have searched for similar issues before reporting.
+      options:
+        - label: I have searched for existing issues and found none that match this problem
+          required: true
+
+  - type: input
+    id: server-os
+    attributes:
+      label: Server Operating System
+      description: Which Linux distribution and version is running on your server?
+      placeholder: e.g. Debian GNU/Linux 12 (bookworm)
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser
+      description: What browser are you using?
+      placeholder: e.g. Chrome, Firefox, Safari
+    validations:
+      required: true
+
+  - type: input
+    id: znuny-version
+    attributes:
+      label: Znuny Version
+      description: What version of Znuny are you using?
+      placeholder: e.g. 7.0.12
+    validations:
+      required: true
+
+  - type: dropdown
+    id: database
+    attributes:
+      label: Database Type
+      multiple: false
+      description: What database are you using with Znuny?
+      options:
+        - MySQL 8.0+
+        - MariaDB 10.3+
+        - PostgreSQL 12.0+
+        - Oracle 19c+
+        - Other
+      default: 0
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: A clear and concise description of what you expected to happen.
+      placeholder: Describe the expected behavior here...
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: Actual Behavior
+      description: A clear and concise description of what actually happened (the issue/bug/problem).
+      placeholder: Describe what actually happened here...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction-steps
+    attributes:
+      label: Steps to Reproduce
+      description: Describe the steps to reproduce the problem.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Scroll down to '...'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: error-messages
+    attributes:
+      label: Error Messages
+      description: If there are any error messages, please include them here.
+      placeholder: Copy and paste any error messages here...
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: Additional Information
+      description: Add any other information about the problem here.
+      placeholder: Any other relevant information...
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots to help explain your problem.
+      placeholder: Add screenshots here or describe where to find them...
+    validations:
+      required: false
+
+

@@ -229,7 +229,7 @@ Core.UI.InputFields = (function (TargetNS) {
                 $ShowTreeObj = $SelectObj.next('.ShowTreeSelection');
 
             if ($SelectObj.data('modernized')) {
-                 $('#' + Core.App.EscapeSelector($SelectObj.data('modernized'))).parents('.InputField_Container')
+                $('#' + Core.App.EscapeSelector($SelectObj.data('modernized'))).parents('.InputField_Container')
                     .blur()
                     .remove();
                 $SelectObj.show()
@@ -485,7 +485,11 @@ Core.UI.InputFields = (function (TargetNS) {
                                             .data('value');
                                     Selection.splice(Selection.indexOf(SelectedValue), 1);
                                     if (HasEmptyElement && Selection.length === 0) {
-                                        $SelectObj.val('');
+                                        if(Multiple){
+                                            $SelectObj.val([]);
+                                        } else {
+                                            $SelectObj.val('');
+                                        }
                                     }
                                     else {
                                         $SelectObj.val(Selection);
@@ -725,9 +729,20 @@ Core.UI.InputFields = (function (TargetNS) {
 
             case 'ClearAll':
                 $ActionObj.off('click.InputField').on('click.InputField', function () {
+                    var SelectID = ($TreeObj.attr('id') || '').replace(/_Select$/, ''),
+                        $SelectObj;
 
                     // Clear selection
                     $TreeObj.jstree('deselect_node', $TreeObj.jstree('get_selected'));
+
+                    // Keep the underlying select in sync (deselect events alone can leave stale values).
+                    if (SelectID) {
+                        $SelectObj = $('#' + Core.App.EscapeSelector(SelectID));
+                        if ($SelectObj.length) {
+                            $SelectObj.val([]);
+                            $SelectObj.data('changed', true);
+                        }
+                    }
 
                     return false;
 
@@ -756,6 +771,47 @@ Core.UI.InputFields = (function (TargetNS) {
 
             case 'Confirm':
                 $ActionObj.off('click.InputField').on('click.InputField', function () {
+                    var SelectID = ($TreeObj.attr('id') || '').replace(/_Select$/, ''),
+                        $SelectObj,
+                        SelectedNodesIDs,
+                        SyncedSelection = [],
+                        CurrentSelection = [],
+                        IsMultiple,
+                        SelectionChanged;
+
+                    // Sync tree selection to the hidden select before close so empty clears fire change.
+                    if (SelectID) {
+                        $SelectObj = $('#' + Core.App.EscapeSelector(SelectID));
+                        IsMultiple = $SelectObj.length
+                            && $SelectObj.attr('multiple') !== ''
+                            && $SelectObj.attr('multiple') !== undefined;
+
+                        if (IsMultiple && $.isFunction($TreeObj.jstree)) {
+                            SelectedNodesIDs = $TreeObj.jstree('get_selected') || [];
+                            $.each(SelectedNodesIDs, function () {
+                                var Value = $('#' + this).data('id');
+                                if (typeof Value !== 'undefined' && Value !== null) {
+                                    SyncedSelection.push(String(Value));
+                                }
+                            });
+
+                            CurrentSelection = $SelectObj.val() || [];
+                            if (!$.isArray(CurrentSelection)) {
+                                CurrentSelection = [CurrentSelection];
+                            }
+                            CurrentSelection = $.map(CurrentSelection, function (Value) {
+                                return String(Value);
+                            });
+
+                            SelectionChanged = SyncedSelection.slice().sort().join('\0')
+                                !== CurrentSelection.slice().sort().join('\0');
+
+                            if (SelectionChanged) {
+                                $SelectObj.val(SyncedSelection);
+                                $SelectObj.data('changed', true);
+                            }
+                        }
+                    }
 
                     // Hide the list
                     $TreeObj.blur();
@@ -1119,7 +1175,7 @@ Core.UI.InputFields = (function (TargetNS) {
      *      Remove all diacritic characters from supplied string (accent folding).
      *      Taken from https://gist.github.com/instanceofme/1731620
      */
-     TargetNS.RemoveDiacritics = function (Str) {
+    TargetNS.RemoveDiacritics = function (Str) {
         var Chars = Str.split(''),
             i = Chars.length - 1,
             Alter = false,
@@ -1223,7 +1279,7 @@ Core.UI.InputFields = (function (TargetNS) {
                 $ShowTreeObj = $SelectObj.next('.ShowTreeSelection');
                 if ($SelectObj.data('tree') || $ShowTreeObj.length) {
                     if ($ShowTreeObj.length) {
-                        $ShowTreeObj.hide();
+                        $ShowTreeObj.show();
                     }
                     $SelectObj.data('tree', true);
                     TreeView = true;
@@ -1237,6 +1293,9 @@ Core.UI.InputFields = (function (TargetNS) {
                 // Container for input field
                 $InputContainerObj = $('<div />').appendTo($ContainerObj);
                 $InputContainerObj.addClass('InputField_InputContainer');
+
+                // Move tree view icon directly "behind" input element
+                $ShowTreeObj.insertAfter($InputContainerObj);
 
                 // Deduce ID of original field
                 SearchID = $SelectObj.attr('id');
@@ -1259,6 +1318,7 @@ Core.UI.InputFields = (function (TargetNS) {
                     .attr('type', 'text')
                     .attr('role', 'search')
                     .attr('autocomplete', 'off')
+                    .attr('placeholder', $SelectObj.attr('placeholder'))
                     .after('<i class="fa fa-caret-down"></i>');
 
                 // If original field has class small, add it to the input field, too
@@ -1289,6 +1349,7 @@ Core.UI.InputFields = (function (TargetNS) {
                     $LabelObj = $('label[for="' + Core.App.EscapeSelector($SelectObj.attr('id')) + '"]');
                     if ($LabelObj.length > 0) {
                         $SearchObj.attr('aria-label', $LabelObj.text());
+                        $LabelObj.attr('for', SearchID);
                     }
                 }
 
@@ -1648,7 +1709,6 @@ Core.UI.InputFields = (function (TargetNS) {
                             Focused = this;
 
                             // In modernize field selection disable 'backspace' key functionality.
-                            // See bug#14011 (https://bugs.otrs.org/show_bug.cgi?id=14011).
                             $('.jstree .jstree-anchor').on('keydown', function (e) {
                                 if (e.which === 8 && !$(e.target).is('input')) {
                                     return false;
@@ -1812,7 +1872,7 @@ Core.UI.InputFields = (function (TargetNS) {
                             // Set selected nodes as selected in initial select box
                             // (which is hidden but is still used for the action)
                             if (HasEmptyElement && SelectedNodes.length === 0) {
-                                $SelectObj.val('');
+                                $SelectObj.val([]);
                             }
                             else {
                                 $SelectObj.val(SelectedNodes);
@@ -2189,28 +2249,9 @@ Core.UI.InputFields = (function (TargetNS) {
 
                                 if (Multiple) {
 
-                                    // Reset select all and clear all functions to original behavior
-                                    $SelectAllObj.off('click.InputField').on('click.InputField', function () {
-
-                                        // Make sure subtrees of all nodes are expanded
-                                        $TreeObj.jstree('open_all');
-
-                                        // Select all nodes
-                                        $TreeObj.find('li')
-                                            .not('.jstree-clicked,.Disabled')
-                                            .each(function () {
-                                                $TreeObj.jstree('select_node', this);
-                                            });
-
-                                        return false;
-                                    });
-                                    $ClearAllObj.off('click.InputField').on('click.InputField', function () {
-
-                                        // Clear selection
-                                        $TreeObj.jstree('deselect_node', $TreeObj.jstree('get_selected'));
-
-                                        return false;
-                                    });
+                                    // Restore original handlers (incl. Clear All select sync).
+                                    RegisterActionEvent($TreeObj, $SelectAllObj, 'SelectAll');
+                                    RegisterActionEvent($TreeObj, $ClearAllObj, 'ClearAll');
 
                                 }
                                 return false;

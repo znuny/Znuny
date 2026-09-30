@@ -1692,7 +1692,7 @@ sub _DynamicFieldsCreate {
             ObjectType    => $NewDynamicField->{ObjectType},
             Config        => $NewDynamicField->{Config},
             InternalField => $NewDynamicField->{InternalField} || 0,
-            ValidID       => $NewDynamicField->{ValidID} || $ValidID,
+            ValidID       => $NewDynamicField->{ValidID}       || $ValidID,
             UserID        => 1,
         );
         next DYNAMICFIELD if !$FieldID;
@@ -2154,10 +2154,10 @@ Returns:
 sub _PostMasterFilterCreateIfNotExists {
     my ( $Self, @Definition ) = @_;
 
-    my $PMFilterObject = $Kernel::OM->Get('Kernel::System::PostMaster::Filter');
+    my $PostMasterFilterObject = $Kernel::OM->Get('Kernel::System::PostMaster::Filter');
 
     my @PostMasterFilterExistsNot;
-    my %FilterList = $PMFilterObject->FilterList();
+    my %FilterList = $PostMasterFilterObject->FilterList();
 
     FILTER:
     for my $NewPostMasterFilter (@Definition) {
@@ -2204,7 +2204,7 @@ Returns:
 sub _PostMasterFilterCreate {
     my ( $Self, @Definition ) = @_;
 
-    my $PMFilterObject = $Kernel::OM->Get('Kernel::System::PostMaster::Filter');
+    my $PostMasterFilterObject = $Kernel::OM->Get('Kernel::System::PostMaster::Filter');
 
     FILTER:
     for my $NewPostMasterFilter (@Definition) {
@@ -2238,10 +2238,10 @@ sub _PostMasterFilterCreate {
         }
 
         # delete first (because no update function exists)
-        $PMFilterObject->FilterDelete(%Filter);
+        $PostMasterFilterObject->FilterDelete(%Filter);
 
         # add filter
-        $PMFilterObject->FilterAdd(%Filter);
+        $PostMasterFilterObject->FilterAdd(%Filter);
     }
 
     return 1;
@@ -2260,10 +2260,10 @@ exports configuration of all postmaster filter
 sub _PostMasterFilterConfigExport {
     my ( $Self, %Param ) = @_;
 
-    my $LogObject      = $Kernel::OM->Get('Kernel::System::Log');
-    my $MainObject     = $Kernel::OM->Get('Kernel::System::Main');
-    my $PMFilterObject = $Kernel::OM->Get('Kernel::System::PostMaster::Filter');
-    my $YAMLObject     = $Kernel::OM->Get('Kernel::System::YAML');
+    my $LogObject              = $Kernel::OM->Get('Kernel::System::Log');
+    my $MainObject             = $Kernel::OM->Get('Kernel::System::Main');
+    my $PostMasterFilterObject = $Kernel::OM->Get('Kernel::System::PostMaster::Filter');
+    my $YAMLObject             = $Kernel::OM->Get('Kernel::System::YAML');
 
     my $Format = lc( $Param{Format} // 'perl' );
     if ( $Format !~ m{\A(ya?ml|perl)\z} ) {
@@ -2275,9 +2275,9 @@ sub _PostMasterFilterConfigExport {
     }
 
     my @Filters;
-    my %FilterList = $PMFilterObject->FilterList();
+    my %FilterList = $PostMasterFilterObject->FilterList();
     for my $FilterName ( sort keys %FilterList ) {
-        my %Data = $PMFilterObject->FilterGet(
+        my %Data = $PostMasterFilterObject->FilterGet(
             Name => $FilterName,
         );
 
@@ -4452,7 +4452,7 @@ sub _ProcessCreateIfNotExists {
 
             $LogObject->Log(
                 Priority => 'error',
-                Message =>
+                Message  =>
                     "Importing process '$ProcessData->{Process}->{Name}' from file '$ProcessYAMLPath' failed.\n"
                     . "\tBackend Error Message:\n\t$ProcessImport{Message}!",
             );
@@ -4732,7 +4732,7 @@ sub _ProcessWidgetDynamicFieldGroupsRemove {
         my $NewDynamicFields;
 
         if ( !$Groups{$Group} ) {
-            $NewDynamicFields = join ',', @{ $ProcessWidgetDynamicFieldGroups{$Group} };
+            $NewDynamicFields              = join ',', @{ $ProcessWidgetDynamicFieldGroups{$Group} };
             $NewDynamicFieldConfig{$Group} = $NewDynamicFields;
             next GROUP;
         }
@@ -4831,7 +4831,7 @@ sub _ModuleGroupAdd {
     return if !IsHashRefWithData($FrontendList);
 
     # Split module "path" (e. g. Admin###001-Framework)
-    my $Module             = $Param{Module};
+    my $Module = $Param{Module};
     my @ModulePathElements = split '###', $Module;
 
     my $ModuleRegistration = $FrontendList;
@@ -4944,7 +4944,7 @@ sub _ModuleGroupRemove {
     return if !IsHashRefWithData($FrontendList);
 
     # Split module "path" (e. g. Admin###001-Framework)
-    my $Module             = $Param{Module};
+    my $Module = $Param{Module};
     my @ModulePathElements = split '###', $Module;
 
     my $ModuleRegistration = $FrontendList;

@@ -37,13 +37,6 @@ sub Configure {
         ValueRegex  => qr/.*/,
     );
 
-    $Self->AddOption(
-        Name        => 'show-deployment-info',
-        Description => 'Show package and files status (package deployment info).',
-        Required    => 0,
-        HasValue    => 0,
-    );
-
     return;
 }
 
@@ -59,10 +52,11 @@ sub Run {
         return $Self->ExitCodeOk();
     }
 
-    my $PackageNameOption        = $Self->GetOption('package-name');
-    my $ShowDeploymentInfoOption = $Self->GetOption('show-deployment-info');
+    my $PackageNameOption = $Self->GetOption('package-name');
 
-    my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
+    my $PackageObject           = $Kernel::OM->Get('Kernel::System::Package');
+    my $ConfigObject            = $Kernel::OM->Get('Kernel::Config');
+    my $AllowLocalModifications = $ConfigObject->Get('Package::AllowLocalModifications') // 0;
 
     PACKAGE:
     for my $Package (@Packages) {
@@ -81,40 +75,51 @@ sub Run {
             next PACKAGE if $PackageString !~ m{$PackageNameOption}i;
         }
 
+        my $PackageName    = $Package->{Name}->{Content};
+        my $PackageVersion = $Package->{Version}->{Content};
+
+        my $PackageDeploymentOK = $PackageObject->DeployCheck(
+            Name    => $PackageName,
+            Version => $PackageVersion,
+            Log     => 0,
+        );
+
+        my $PackageDeploymentMessage;
+        if ( !$PackageDeploymentOK ) {
+            $PackageDeploymentMessage = $AllowLocalModifications
+                ? 'Package has locally modified files.'
+                : 'Package not correctly deployed. Please reinstall the package.';
+        }
+
         my %Data = $Self->_PackageMetadataGet(
             Tag       => $Package->{Description},
             StripHTML => 0,
         );
         $Self->Print("+----------------------------------------------------------------------------+\n");
-        $Self->Print("| <yellow>Name:</yellow>        $Package->{Name}->{Content}\n");
-        $Self->Print("| <yellow>Version:</yellow>     $Package->{Version}->{Content}\n");
+        if ($PackageDeploymentMessage) {
+            $Self->Print("| <red>Status:</red>      $PackageName $PackageVersion - $PackageDeploymentMessage\n");
+        }
+        $Self->Print("| <yellow>Name:</yellow>        $PackageName\n");
+        $Self->Print("| <yellow>Version:</yellow>     $PackageVersion\n");
         $Self->Print("| <yellow>Vendor:</yellow>      $Package->{Vendor}->{Content}\n");
         $Self->Print("| <yellow>URL:</yellow>         $Package->{URL}->{Content}\n");
         $Self->Print("| <yellow>License:</yellow>     $Package->{License}->{Content}\n");
         $Self->Print("| <yellow>Description:</yellow> $Data{Description}\n");
 
-        if ($ShowDeploymentInfoOption) {
-            my $PackageDeploymentOK = $PackageObject->DeployCheck(
-                Name    => $Package->{Name}->{Content},
-                Version => $Package->{Version}->{Content},
-                Log     => 0,
+        my %PackageDeploymentInfo = $PackageObject->DeployCheckInfo();
+        if ( defined $PackageDeploymentInfo{File} && %{ $PackageDeploymentInfo{File} } ) {
+            $Self->Print(
+                '| <red>Deployment:</red>  ' . ( $PackageDeploymentOK ? 'OK' : 'Not OK' ) . "\n"
             );
-
-            my %PackageDeploymentInfo = $PackageObject->DeployCheckInfo();
-            if ( defined $PackageDeploymentInfo{File} && %{ $PackageDeploymentInfo{File} } ) {
-                $Self->Print(
-                    '| <red>Deployment:</red>  ' . ( $PackageDeploymentOK ? 'OK' : 'Not OK' ) . "\n"
-                );
-                for my $File ( sort keys %{ $PackageDeploymentInfo{File} } ) {
-                    my $FileMessage = $PackageDeploymentInfo{File}->{$File};
-                    $Self->Print("| <red>File Status:</red> $File => $FileMessage\n");
-                }
+            for my $File ( sort keys %{ $PackageDeploymentInfo{File} } ) {
+                my $FileMessage = $PackageDeploymentInfo{File}->{$File};
+                $Self->Print("| <red>File Status:</red> $File => $FileMessage\n");
             }
-            else {
-                $Self->Print(
-                    '| <yellow>Pck. Status:</yellow> ' . ( $PackageDeploymentOK ? 'OK' : 'Not OK' ) . "\n"
-                );
-            }
+        }
+        else {
+            $Self->Print(
+                '| <yellow>Installation Status:</yellow> ' . ( $PackageDeploymentOK ? 'OK' : 'Not OK' ) . "\n"
+            );
         }
     }
     $Self->Print("+----------------------------------------------------------------------------+\n");

@@ -406,7 +406,7 @@ sub Export {
         $ICalEvent->add_properties(
             summary         => $Appointment{Title},
             dtstart         => $Appointment{AllDay} ? substr( $ICalStartTime->ical(), 0, -1 ) : $ICalStartTime->ical(),
-            dtend           => $Appointment{AllDay} ? substr( $ICalEndTime->ical(), 0, -1 ) : $ICalEndTime->ical(),
+            dtend           => $Appointment{AllDay} ? substr( $ICalEndTime->ical(),   0, -1 ) : $ICalEndTime->ical(),
             uid             => $Appointment{UniqueID},
             'last-modified' => $ICalChangeTime->ical(),
             %ICalEventProperties,

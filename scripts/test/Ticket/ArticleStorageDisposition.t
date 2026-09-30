@@ -466,7 +466,7 @@ for my $Backend (qw(DB FS)) {
             FileID    => $AttachmentID,
         );
 
-        # add the missing content to the test expected resutls
+        # add the missing content to the test expected results
         my %ExpectedAttachment = (
             %{ $Test->{ExpectedResults} },
             Content => $Test->{Config}->{Content},

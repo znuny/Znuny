@@ -65,7 +65,7 @@
                         <input title="[% Translate("Your password") | html %]" placeholder="[% Translate("Password") | html %]" type="password" name="Password" id="Password" autocomplete="[% Data.PasswordAutocomplete %]" />
 [% RenderBlockStart("LostPasswordLink") %]
                         <div class="Option">
-                            <a href="#Reset" id="ForgotPassword" data-container-link="Reset">[% Translate("Forgot password?") | html %]</a>
+                            <a href="#Reset" id="ForgotPassword" data-container-link="Reset">[% Translate("Lost your password?") | html %]</a>
                         </div>
 [% RenderBlockEnd("LostPasswordLink") %]
                     </div>
@@ -78,6 +78,15 @@
                     <div>
                         <button type="submit" value="[% Translate("Log In") | html %]" class="btn-main btn-primary" disabled="disabled">[% Translate("Log In") | html %]</button>
                     </div>
+[% RenderBlockStart("SAMLLoginLink") %]
+                    <!-- SAML login -->
+                    <div>
+# Don't use filter 'url' on RequestURL because the given URL already contains some URI escaped parts.
+                        <a href="[% Data.RequestURL %]" class="btn-cancel-ghost btn-main">
+                                [% Translate(Data.ButtonText) | html %]
+                        </a>
+                    </div>
+[% RenderBlockEnd("SAMLLoginLink") %]
                 </fieldset>
             </form>
         </div>
@@ -101,7 +110,7 @@
                     </div>
                 </fieldset>
                 <p class="Center Spacing">
-                    [% Translate("A new password will be sent to your email address.") | html %]
+                    [% Translate("A link to set a new password will be sent to your email address.") | html %]
                 </p>
                 <p class="Center">
                     <a href="#Login" id="BackToLogin" data-container-link="Login">&larr; [% Translate("Back to login") | html %]</a>
@@ -110,6 +119,44 @@
 
         </div>
 [% RenderBlockEnd("LostPassword") %]
+[% RenderBlockStart("PasswordReset") %]
+        <div id="PasswordReset">
+            <h2>[% Translate("Set New Password") | html %]</h2>
+            <form class="Validate" action="[% Env('CGIHandle') %]" method="post" enctype="application/x-www-form-urlencoded">
+                <input type="hidden" name="Action" value="CustomerLostPassword" />
+                <input type="hidden" name="Lang" value="[% Env('UserLanguage') | html %]" />
+                <input type="hidden" name="Token" value="[% Data.Token | html %]" />
+                <fieldset>
+                    <div class="Field">
+                        <label class="Mandatory" for="NewPW">
+                            <span class="Marker">*</span>
+                            [% Translate("New password") | html %]
+                        </label>
+                        <div class="field-wrapper">
+                            <input title="[% Translate('New password') | html %]" placeholder="[% Translate("New password") | html %]" type="password" id="NewPW" name="NewPW" maxlength="150" class="Validate_Required" autocomplete="new-password" />
+                            <div id="NewPWError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                        </div>
+                    </div>
+                    <div class="Field">
+                        <label class="Mandatory" for="NewPWConfirm">
+                            <span class="Marker">*</span>
+                            [% Translate("Confirm password") | html %]
+                        </label>
+                        <div class="field-wrapper">
+                            <input title="[% Translate('Confirm password') | html %]" placeholder="[% Translate("Confirm password") | html %]" type="password" id="NewPWConfirm" name="NewPWConfirm" maxlength="150" class="Validate_Required" autocomplete="new-password" />
+                            <div id="NewPWConfirmError" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="Primary CallForAction Fullsize Center btn-main btn-primary"><span>[% Translate("Set New Password") | html %]</span></button>
+                    </div>
+                </fieldset>
+                <p class="Center Spacing">
+                    <a href="#Login" data-container-link="Login">&larr; [% Translate("Back to login") | html %]</a>
+                </p>
+            </form>
+        </div>
+[% RenderBlockEnd("PasswordReset") %]
 [% RenderBlockStart("CreateAccount") %]
         <div id="Signup" class="Hidden">
             <div class="header-content">
@@ -121,36 +168,41 @@
                     <input type="hidden" name="Action" value="CustomerCreateAccount"/>
                     <input type="hidden" name="Lang" value="[% Env("UserLanguage") | html %]"/>
                     <div class="field-wrapper">
-                        <label for="Title">[% Translate("Title or salutation") | html %]</label>
-                        <input title="[% Translate("How we should address you") | html %]" type="text" name="Title"  id="Title" class="W50pc" value="[% Data.UserTitle | html %]"/>
+                        <label for="UserTitle">[% Translate("Title or salutation") | html %]</label>
+                        <input title="[% Translate("How we should address you") | html %]" type="text" name="UserTitle"  id="UserTitle" class="W50pc[% IF Data.UserTitleMandatory %] Validate_Required[% END %]" value="[% Data.UserTitle | html %]"/>
+                            [% IF Data.UserTitleMandatory %]
+                            <div id="UserTitleError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                            [% END %]
                     </div>
                     <div class="field-wrapper">
-                        <label class="Mandatory" for="FirstName">
+                        <label class="Mandatory" for="UserFirstname">
                             <span class="Marker">*</span>
                             [% Translate("Firstname") | html %]
                         </label>
-                        <input title="[% Translate("Your First Name") | html %]" name="Firstname" type="text" id="FirstName" maxlength="100" value="[% Data.UserFirstname | html %]" class="W50pc Validate_Required"/>
-                        <div id="FirstNameError" class="TooltipErrorMessage">
+                        <input title="[% Translate("Your First Name") | html %]" name="UserFirstname" type="text" id="UserFirstname" maxlength="100" value="[% Data.UserFirstname | html %]" class="W50pc Validate_Required"/>
+                        <div id="UserFirstnameError" class="TooltipErrorMessage">
                             <p>[% Translate("This field is required.") | html %]</p>
                         </div>
                     </div>
                     <div class="field-wrapper">
-                        <label class="Mandatory" for="LastName">
+                        <label class="Mandatory" for="UserLastname">
                             <span class="Marker">*</span>
                             [% Translate("Lastname") | html %]
                         </label>
-                        <input title="[% Translate("Your Last Name") | html %]" name="Lastname" type="text" id="LastName" maxlength="100" value="[% Data.UserLastname | html %]" class="W50pc Validate_Required"/>
-                        <div id="LastNameError" class="TooltipErrorMessage">
+                        <input title="[% Translate("Your Last Name") | html %]" name="UserLastname" type="text" id="UserLastname" maxlength="100" value="[% Data.UserLastname | html %]" class="W50pc Validate_Required"/>
+                        <div id="UserLastnameError" class="TooltipErrorMessage">
                             <p>[% Translate("This field is required.") | html %]</p>
                         </div>
                     </div>
                     <div class="field-wrapper">
-                        <label class="Mandatory" for="Email">
+                        <label class="Mandatory" for="UserEmail">
                             <span class="Marker">*</span>
                             [% Translate("Email") | html %]
                         </label>
-                        <input title="[% Translate('Your email address (this will become your username)') | html %]" name="Email" type="[% Env('EmailFieldType') | html %]" id="Email" maxlength="150" value="[% Data.UserEmail | html %]" class="W100pc Validate_Required Validate_Email"/>
-                            <div id="EmailError" class="TooltipErrorMessage">
+                        <input title="[% Translate('Your email address (this will become your username)') | html %]" name="UserEmail" type="[% Env('EmailFieldType') | html %]" id="UserEmail" maxlength="150" value="[% Data.UserEmail | html %]" class="W100pc Validate_Required Validate_Email"/>
+                            <div id="UserEmailError" class="TooltipErrorMessage">
                             <p>[% Translate("This field is required.") | html %]</p>
                         </div>
                     </div>

@@ -318,7 +318,7 @@ sub LoaderCreateJavaScriptTemplateData {
     if ( !-e $JSTemplateDir ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "No existing template directory found ('$JSTemplateDir')!.
                 Default theme used instead.",
         );
@@ -613,6 +613,9 @@ sub LoaderCreateCustomerCSSCalls {
             }
         }
     }
+
+    # save selected skin
+    $Self->{SkinSelected} = $SkinSelected;
 
     my $SkinHome = $ConfigObject->Get('Home') . '/var/httpd/htdocs/skins';
     my $DoMinify = $ConfigObject->Get('Loader::Enabled::CSS');

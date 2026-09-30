@@ -54,7 +54,7 @@ $Selenium->RunTest(
 
         $Selenium->WaitFor(
             JavaScript =>
-                "return typeof(\$) === 'function' && \$('body.cke_editable', \$('.cke_wysiwyg_frame').contents()).length == 1;"
+                "return typeof(\$) === 'function' && \$('.ck-editor__editable').length == 1;"
         );
 
         $Selenium->find_element( "#RichTextField", 'css' )->click();

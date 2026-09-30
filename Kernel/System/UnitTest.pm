@@ -339,6 +339,20 @@ sub Run {
 
 =begin Internal:
 
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
+
+=head2 _HandleFile()
+
+handle a file
+
+    my $Success = $UnitTestObject->_HandleFile(
+        File => 'Kernel/System/MyModule.pm',
+    );
+
+Returns 1 if the file was handled successfully, or undef otherwise.
+
 =cut
 
 sub _HandleFile {
@@ -697,8 +711,6 @@ sub _Color {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

@@ -141,8 +141,8 @@ $DynamicFieldSetResult = $TransitionActionObject->Run(
     TransitionActionEntityID => 'TA123',
     Config                   => {
         Value                    => -10,
-        UnitTestTestDynamicField => 1,
-        UserID                   => 1,
+        UnitTestTestDynamicField =>  1,
+        UserID                   =>  1,
     },
 );
 

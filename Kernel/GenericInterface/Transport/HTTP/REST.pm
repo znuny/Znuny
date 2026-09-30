@@ -250,7 +250,6 @@ sub ProviderProcessRequest {
 
     # No length provided, return the information we have.
     # Also return for 'GET' method because it does not allow sending an entity-body in requests.
-    # For more information, see https://bugs.otrs.org/show_bug.cgi?id=14203.
     if ( !$Length || $RequestMethod eq 'GET' ) {
         return {
             Success   => 1,
@@ -950,13 +949,17 @@ sub RequesterPerformRequest {
             push @ParamsToDelete, $FlattenedParamName;
         }
 
-        # Append query params in the URI.
-        if ($ReplaceFlag) {
+        # Re-append even when no :placeholder was substituted, so
+        # static query strings (e.g. ?api-version=2025-01-01-preview)
+        # configured on the controller are preserved.
+        if ( length $QueryParamsStr ) {
             $Controller .= $QueryParamsStr;
 
             $Self->{DebuggerObject}->Debug(
-                Summary => "URI after interpolating Query params from outgoing data",
-                Data    => $Controller,
+                Summary => $ReplaceFlag
+                ? '"URI after interpolating query params from outgoing data'
+                : 'URI after appending static query params from controller config',
+                Data => $Controller,
             );
         }
     }
@@ -1213,7 +1216,7 @@ sub RequesterPerformRequest {
             $SizeExceeded = 1;
             $Self->{DebuggerObject}->Debug(
                 Summary => "JSON data received from remote system was too large for logging",
-                Data =>
+                Data    =>
                     'See SysConfig option GenericInterface::Operation::ResponseLoggingMaxSize to change the maximum.',
             );
         }
@@ -1269,6 +1272,10 @@ sub RequesterPerformRequest {
 }
 
 =begin Internal:
+
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
 
 =head2 _Output()
 
@@ -1547,8 +1554,6 @@ sub _FlattenDataStructure {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

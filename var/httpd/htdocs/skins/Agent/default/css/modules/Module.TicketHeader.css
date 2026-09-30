@@ -1,0 +1,45 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+.modTicketHeader > .inner {
+  margin: 25px 0;
+  margin-bottom: 15px;
+}
+.modTicketHeader > .inner .ticketHeaderTitle {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.modTicketHeader > .inner .ticketHeaderTitle .ticketHeaderTitleStatusFlag {
+  width: 30px;
+  height: 15px;
+  border-radius: 15px;
+  display: inline-block;
+  top: 50%;
+  transform: translateY(-50%);
+  position: relative;
+}
+.modTicketHeader > .inner .ticketHeaderActions {
+  border: var(--border-width) var(--border-solid) var(--border-color);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--background-tertiary-color);
+  padding: 5px;
+}
+.modTicketHeader > .inner .ticketHeaderActions .ClusterLink i {
+  margin-left: 5px;
+}
+.modTicketHeader > .inner h1 {
+  position: relative;
+  font-size: var(--font-size-xxl);
+  font-weight: var(--semi-bold);
+  letter-spacing: 0.1px;
+  min-width: 100%;
+  line-height: 90%;
+}
+
+/*# sourceMappingURL=Module.TicketHeader.css.map */

@@ -81,7 +81,7 @@ my @Tests = (
         },
         ExpectedValue => {
             Package => 'Kernel::Config::Files::ZZZAAAuto;',
-            Value   => << 'EOF'
+            Value   => <<'EOF'
 $Self->{'SettingName'} =  '1';
 EOF
         },
@@ -107,7 +107,7 @@ EOF
         },
         ExpectedValue => {
             Package => 'Kernel::Config::Files::ZZZAAAuto;',
-            Value   => << 'EOF'
+            Value   => <<'EOF'
 $Self->{'SettingName'} =  '1';
 $Self->{'AnotherSettingName'} =  '2';
 EOF
@@ -132,7 +132,7 @@ EOF
         },
         ExpectedValue => {
             Package => 'Kernel::Config::Files::User::1;',
-            Value   => << 'EOF'
+            Value   => <<'EOF'
 $Self->{'SettingName'} =  [
   {
     'Value' => 1
@@ -168,7 +168,7 @@ EOF
         },
         ExpectedValue => {
             Package => 'Kernel::Config::Files::User::1;',
-            Value   => << 'EOF'
+            Value   => <<'EOF'
 $Self->{'SettingName'} =  [
   {
     'Value' => 1
@@ -211,7 +211,7 @@ EOF
         },
         ExpectedValue => {
             Package => 'Kernel::Config::Files::User::1;',
-            Value   => << 'EOF'
+            Value   => <<'EOF'
 $Self->{'SettingName'}->{'Key1'} =  [
   {
     'Value' => 1
@@ -255,7 +255,7 @@ EOF
         },
         ExpectedValue => {
             Package => 'Kernel::Config::Files::User::1;',
-            Value   => << 'EOF'
+            Value   => <<'EOF'
 delete $Self->{'DefaultUsedLanguages'};
 EOF
         },
@@ -266,7 +266,7 @@ EOF
 my $AssembleExpectedValue = sub {
     my %Param = @_;
 
-    my $File = << "EOF";
+    my $File = <<"EOF";
 # OTRS config file (automatically generated)
 # VERSION:2.0
 package $Param{Package}
@@ -280,7 +280,7 @@ EOF
 
     $File .= $Param{Value};
 
-    $File .= << 'EOF';
+    $File .= <<'EOF';
     return;
 }
 1;

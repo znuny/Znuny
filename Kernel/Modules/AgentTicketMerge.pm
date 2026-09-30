@@ -11,9 +11,10 @@ package Kernel::Modules::AgentTicketMerge;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Mail::Address;
 
 our $ObjectManagerDisabled = 1;
@@ -99,27 +100,35 @@ sub Run {
             );
 
             # Set new owner if ticket owner is different then logged user.
-            if ( $Lock && ( $Ticket{OwnerID} != $Self->{UserID} ) ) {
+            if ($Lock) {
 
-                # Remember previous owner, which will be used to restore ticket owner on undo action.
-                $Param{PreviousOwner} = $Ticket{OwnerID};
+                # Set new owner if ticket owner is different then logged user.
+                if ( $Ticket{OwnerID} != $Self->{UserID} ) {
 
-                my $Success = $TicketObject->TicketOwnerSet(
-                    TicketID  => $Self->{TicketID},
-                    UserID    => $Self->{UserID},
-                    NewUserID => $Self->{UserID},
-                );
+                    # Remember previous owner, which will be used to restore ticket owner on undo action.
+                    $Param{PreviousOwner} = $Ticket{OwnerID};
 
-                # Show lock state.
-                if ($Success) {
-                    $LayoutObject->Block(
-                        Name => 'PropertiesLock',
-                        Data => {
-                            %Param,
-                            TicketID => $Self->{TicketID}
-                        },
+                    $TicketObject->TicketOwnerSet(
+                        TicketID  => $Self->{TicketID},
+                        UserID    => $Self->{UserID},
+                        NewUserID => $Self->{UserID},
                     );
                 }
+
+                $LayoutObject->Block(
+                    Name => 'PropertiesLock',
+                    Data => {
+                        %Param,
+                        TicketID => $Self->{TicketID}
+                    },
+                );
+                $LayoutObject->Block(
+                    Name => 'PropertiesLockNotify',
+                    Data => {
+                        %Param,
+                        TicketID => $Self->{TicketID}
+                    },
+                );
             }
         }
         else {
@@ -146,7 +155,10 @@ sub Run {
             # show back link
             $LayoutObject->Block(
                 Name => 'TicketBack',
-                Data => { %Param, TicketID => $Self->{TicketID} },
+                Data => {
+                    %Param,
+                    TicketID => $Self->{TicketID}
+                },
             );
         }
     }
@@ -155,7 +167,10 @@ sub Run {
         # show back link
         $LayoutObject->Block(
             Name => 'TicketBack',
-            Data => { %Param, TicketID => $Self->{TicketID} },
+            Data => {
+                %Param,
+                TicketID => $Self->{TicketID}
+            },
         );
     }
 
@@ -389,36 +404,25 @@ sub Run {
     else {
         my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
-        # Get last customer article.
-        my @Articles = $ArticleObject->ArticleList(
-            TicketID   => $Self->{TicketID},
-            SenderType => 'customer',
-            OnlyLast   => 1,
-        );
+        my %Article;
 
-        # If the ticket has no customer article, get the last agent article.
-        if ( !@Articles ) {
-            @Articles = $ArticleObject->ArticleList(
+        # Preferentially get the last customer article.
+        # If there are none, get the last one of an agent
+        # Last resort is without SenderType
+        SENDERTYPE:
+        for my $SenderType ( qw( customer agent ), undef ) {
+            my @Articles = $ArticleObject->ArticleList(
                 TicketID   => $Self->{TicketID},
-                SenderType => 'agent',
+                SenderType => $SenderType,
                 OnlyLast   => 1,
             );
-        }
+            next SENDERTYPE if !@Articles;
 
-        # Finally, if everything failed, get latest article.
-        if ( !@Articles ) {
-            @Articles = $ArticleObject->ArticleList(
-                TicketID => $Self->{TicketID},
-                OnlyLast => 1,
-            );
-        }
-
-        my %Article;
-        for my $Article (@Articles) {
-            %Article = $ArticleObject->BackendForArticle( %{$Article} )->ArticleGet(
-                %{$Article},
+            %Article = $ArticleObject->BackendForArticle( %{ $Articles[0] } )->ArticleGet(
+                %{ $Articles[0] },
                 DynamicFields => 1,
             );
+            last SENDERTYPE;
         }
 
         # merge box
@@ -428,13 +432,23 @@ sub Run {
             BodyClass => 'Popup',
         );
 
+        # We need a minimal Recipient salutation templating
+        my %Recipient;
+        my $RecipientName = $Article{From};
+        if ($RecipientName) {
+            my ($ParsedAddress) = Mail::Address->parse($RecipientName);
+            $Recipient{Realname} = $ParsedAddress->phrase() if $ParsedAddress;
+        }
+
         # prepare salutation
         my $TemplateGenerator = $Kernel::OM->Get('Kernel::System::TemplateGenerator');
         my $Salutation        = $TemplateGenerator->Salutation(
-            TicketID  => $Self->{TicketID},
-            ArticleID => $Article{ArticleID},
-            Data      => {%Article},
-            UserID    => $Self->{UserID},
+            TicketID   => $Self->{TicketID},
+            ArticleID  => $Article{ArticleID},
+            Data       => {%Article},
+            TicketData => \%Ticket,
+            UserID     => $Self->{UserID},
+            Recipient  => \%Recipient,
         );
 
         # prepare signature
@@ -462,9 +476,9 @@ sub Run {
                 String => $ConfigObject->Get('Ticket::Frontend::MergeText'),
             );
             $Article{Body} = $Salutation
-                . '<br/><br/>'
+                . '<p></p><p></p>'
                 . $Body
-                . '<br/><br/>'
+                . '<p></p><p></p>'
                 . $Signature;
         }
         else {
@@ -487,6 +501,11 @@ sub Run {
                 Data => \%Param,
             );
         }
+
+        $LayoutObject->AddJSData(
+            Key   => 'InitialTicketSearchFilter',
+            Value => $Config->{SearchFilter} || {},
+        );
 
         $Output .= $LayoutObject->Output(
             TemplateFile => 'AgentTicketMerge',

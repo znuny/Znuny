@@ -72,8 +72,8 @@ $Self->Is(
 # invalid parent
 if ($IsITSMInstalled) {
     $ExitCode = $CommandObject->Execute(
-        '--name', $ChildServiceName, '--parent-name', $ChildServiceName, '--criticality',
-        '3 normal', '--type', 'Demonstration'
+        '--name',   $ChildServiceName, '--parent-name', $ChildServiceName, '--criticality',
+        '3 normal', '--type',          'Demonstration'
     );
 }
 else {
@@ -88,8 +88,8 @@ $Self->Is(
 # valid parent
 if ($IsITSMInstalled) {
     $ExitCode = $CommandObject->Execute(
-        '--name', $ChildServiceName, '--parent-name', $ParentServiceName, '--criticality',
-        '3 normal', '--type', 'Demonstration'
+        '--name',   $ChildServiceName, '--parent-name', $ParentServiceName, '--criticality',
+        '3 normal', '--type',          'Demonstration'
     );
 }
 else {
@@ -104,8 +104,8 @@ $Self->Is(
 # Same again (should fail because already exists).
 if ($IsITSMInstalled) {
     $ExitCode = $CommandObject->Execute(
-        '--name', $ChildServiceName, '--parent-name', $ParentServiceName, '--criticality',
-        '3 normal', '--type', 'Demonstration'
+        '--name',   $ChildServiceName, '--parent-name', $ParentServiceName, '--criticality',
+        '3 normal', '--type',          'Demonstration'
     );
 }
 else {
@@ -120,8 +120,8 @@ $Self->Is(
 # Parent and child service same name.
 if ($IsITSMInstalled) {
     $ExitCode = $CommandObject->Execute(
-        '--name', $ParentServiceName, '--parent-name', $ParentServiceName, '--criticality',
-        '3 normal', '--type', 'Demonstration'
+        '--name',   $ParentServiceName, '--parent-name', $ParentServiceName, '--criticality',
+        '3 normal', '--type',           'Demonstration'
     );
 }
 else {
@@ -137,8 +137,8 @@ $Self->Is(
 # Parent (two levels) and child same name.
 if ($IsITSMInstalled) {
     $ExitCode = $CommandObject->Execute(
-        '--name', $ParentServiceName, '--parent-name', $ServiceName, '--criticality',
-        '3 normal', '--type', 'Demonstration'
+        '--name',   $ParentServiceName, '--parent-name', $ServiceName, '--criticality',
+        '3 normal', '--type',           'Demonstration'
     );
 }
 else {

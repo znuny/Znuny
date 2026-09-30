@@ -198,11 +198,18 @@ div.InputField_ListContainer {
 }
 
 div.InputField_TreeContainer {
+    background-color: var(--white);
+    border: 1px solid #ccc;
+    border-top: none;
+    overflow-y: auto;
+    box-sizing: content-box;
+    line-height: 18px;
     border: 0;
     border-top: none;
     overflow-y: auto;
     box-sizing: border-box;
     line-height: 18px;
+    /*border-radius: var(--border-radius-xs) var(--border-radius-xs) 0 0;*/
     min-width: 75px;
 }
 
@@ -213,32 +220,34 @@ div.InputField_TreeContainer {
 
 div.InputField_ToolbarContainer {
     line-height: 21px;
+    box-sizing: content-box;
     min-height: 21px;
     min-width: 275px;
-    background: var(--white);
-    box-sizing: border-box;
+    background: var(--menu-bg);
+    box-shadow: var(--menu-box-shadow);
+    border-bottom-left-radius: var(--border-radius-xs);
+    border-bottom-right-radius: var(--border-radius-xs);
 }
 
 div.InputField_ToolbarContainer ul {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: var(--padding-sm);
-    border-top: var(--border-width) var(--border-solid) var(--border-color);
+    display: table;
 }
 
 div.InputField_ToolbarContainer ul li {
-    display: flex;
+    display: table-cell;
+    text-align: center;
+    padding: var(--padding-xs);
 }
 
-/* div.InputField_ToolbarContainer ul li:after {
+div.InputField_ToolbarContainer ul li:after {
     color: #bbb;
     content: "|";
     display: inline-block;
     float: right;
     cursor: default;
     width: 0;
-} */
+}
 
 div.InputField_ToolbarContainer ul li:last-child:after {
     display: none;
@@ -253,12 +262,11 @@ div.InputField_ToolbarContainer ul li:last-child:after {
 }
 
 div.InputField_ToolbarContainer ul li a {
+    color: #000;
     display: inline-block;
-    width: 100%;
-    color: var(--black);
-    font-size: var(--font-size-sm);
-    line-height: 100%;
-    border-bottom: 2px solid transparent;
+    margin: 2px 5px;
+    font-size: 11px;
+    line-height: 15px;
 }
 
 div.InputField_ToolbarContainer ul li a:hover {
@@ -489,7 +497,7 @@ div.InputField_ToolbarContainer ul li a:hover {
     background-color: var(--primary-color);
 }
 
-.jstree-InputField .jstree-clicked, 
+.jstree-InputField .jstree-clicked,
 .jstree-InputField .jstree-anchor.jstree-clicked {
     color: var(--white);
 }
@@ -744,12 +752,12 @@ div.InputField_ToolbarContainer ul li a:hover {
     appearance: none; -webkit-appearance: none;
     position: relative;
     display: block;
-    width: 16px; 
+    width: 16px;
     height: 16px;
     line-height: 16px;
     text-align: center;
     cursor: pointer;
-    border: var(--border-width) solid #ccc; 
+    border: var(--border-width) solid #ccc;
     background: transparent;
     border-radius: 3px;
     z-index: 100;
@@ -759,10 +767,10 @@ div.InputField_ToolbarContainer ul li a:hover {
 input[type=checkbox]:hover {
     border-color: var(--success-color);
 }
-  
+
 input[type=checkbox]:checked {
     background:var(--success-color);
-    border: 2px solid var(--success-color); 
+    border: 2px solid var(--success-color);
 }
 
 input[type=checkbox]:checked + label {
@@ -803,12 +811,12 @@ input[type=radio]{
     appearance: none; -webkit-appearance: none;
     position: relative;
     display: block;
-    width: 16px; 
+    width: 16px;
     height: 16px;
     line-height: 16px;
     text-align: center;
     cursor: pointer;
-    border: var(--border-width) solid #ccc; 
+    border: var(--border-width) solid #ccc;
     background: transparent;
     border-radius: var(--border-radius-xl);
     z-index: 100;

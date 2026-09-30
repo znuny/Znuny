@@ -409,8 +409,9 @@ Core.UI.Dialog = (function (TargetNS) {
             if (Params.Buttons) {
                 $Content.append('<div class="InnerContent scroll-bar-styled"></div>').find('.InnerContent').append(Params.HTML);
                 $ButtonFooter = $('<div class="ContentFooter SaveButtons"></div>');
+
                 $.each(Params.Buttons, function (Index, Value) {
-                    var Classes = '';
+                    var Classes = 'btn-main';
                     if (Value.Type === 'Close' || Index == 1) {
                         Classes += ' Close';
                     }
@@ -426,8 +427,9 @@ Core.UI.Dialog = (function (TargetNS) {
                         Classes += ' ' + Value.Class;
                     }
                     // added "btn-primary" & "btn-main" class
-                    $ButtonFooter.append('<button id="DialogButton' + (Index - 0 + 1) + '" class="btn-main ' + Classes + '" type="button"><span>' + Value.Label + '</span></button> ');
+                    $ButtonFooter.append('<button id="DialogButton' + (Index - 0 + 1) + '" class="' + Classes + '" type="button"><span>' + Value.Label + '</span></button> ');
                 });
+
                 $ButtonFooter.appendTo($Content);
             }
             else {

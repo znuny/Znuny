@@ -111,7 +111,7 @@ $Selenium->RunTest(
         # Check is there notification after service is added.
         my $Notification = 'Signature added!';
         $Self->True(
-            $Selenium->execute_script("return \$('.MessageBox.Notice p:contains($Notification)').length"),
+            $Selenium->execute_script("return \$('.messageNotice .alertContent:contains($Notification)').length"),
             "$Notification - notification is found."
         );
 
@@ -163,7 +163,7 @@ $Selenium->RunTest(
         # Check is there notification after service is updated.
         $Notification = 'Signature updated!';
         $Self->True(
-            $Selenium->execute_script("return \$('.MessageBox.Notice p:contains($Notification)').length"),
+            $Selenium->execute_script("return \$('.messageNotice .alertContent:contains($Notification)').length"),
             "$Notification - notification is found."
         );
 

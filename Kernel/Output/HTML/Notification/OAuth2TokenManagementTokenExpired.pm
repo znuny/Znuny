@@ -12,7 +12,7 @@ use strict;
 use warnings;
 use utf8;
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
@@ -108,11 +108,12 @@ sub Run {
     my $Output;
     for my $TranslatedNotification (@TranslatedNotifications) {
         my $NotificationLink    = $LayoutObject->{Baselink} . 'Action=AdminOAuth2TokenManagement';
-        my $NotificationContent = '<a href="' . $NotificationLink . '">' . $TranslatedNotification . '</a>';
+        my $NotificationContent = $TranslatedNotification;
 
         $Output .= $LayoutObject->Notify(
             Priority => 'Warning',
             Data     => $NotificationContent,
+            Link     => $NotificationLink,
         );
     }
 

@@ -321,7 +321,7 @@ sub FormDraftAdd {
             . ' VALUES (?, ?, ?, ?, ?, current_timestamp, ?, current_timestamp, ?)',
         Bind => [
             \$Param{ObjectType}, \$Param{ObjectID}, \$Param{Action}, \$Param{Title}, \$Content,
-            \$Param{UserID}, \$Param{UserID},
+            \$Param{UserID},     \$Param{UserID},
         ],
     );
 
@@ -405,7 +405,7 @@ sub FormDraftUpdate {
 
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Param '$ValidateParam' for draft with ID '$Param{FormDraftID}'"
                 . " must not be changed on update!",
         );

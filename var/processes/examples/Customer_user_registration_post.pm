@@ -11,6 +11,7 @@ package var::processes::examples::Customer_user_registration_post;
 
 use strict;
 use warnings;
+use utf8;
 
 use parent qw(var::processes::examples::Base);
 

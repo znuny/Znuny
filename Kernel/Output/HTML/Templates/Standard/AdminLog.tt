@@ -68,10 +68,12 @@
                 <table class="DataTable" id="LogEntries">
                     <thead>
                         <tr>
-                            <th class="W25pc">[% Translate("Time") | html %]</th>
+                            <th>[% Translate("Time") | html %]</th>
                             <th>[% Translate("Priority") | html %]</th>
-                            <th class="W20pc">[% Translate("Facility") | html %]</th>
-                            <th class="W75pc">[% Translate("Message") | html %]</th>
+                            <th>[% Translate("Facility") | html %]</th>
+                            <th>[% Translate("Source") | html %]</th>
+                            <th>[% Translate("Line") | html %]</th>
+                            <th>[% Translate("Message") | html %]</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -80,6 +82,8 @@
                             <td>[% Data.Time | html %]</td>
                             <td>[% Data.Priority | html %]</td>
                             <td>[% Data.Facility | html %]</td>
+                            <td>[% Data.Source | html %]</td>
+                            <td>[% Data.Line | html %]</td>
                             <td>[% Data.Message | html %]</td>
                         </tr>
 [% RenderBlockEnd("Row") %]

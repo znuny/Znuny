@@ -96,7 +96,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         outline: 0;
         -webkit-box-shadow: none;
         box-shadow: none;
-        border-color: var(--black);
+        border-color: var(--gray-dark);
     }
 
     input[readonly] {
@@ -263,8 +263,12 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         min-height: unset;
         min-width: unset;
     }
-
     /* btn width */
+    .btn-width-max {
+        max-width: max-content;
+        min-width: max-content;
+    }
+
     .btn-width-xxl {
         min-width: var(--btn-max-width-xxl);
         max-width: var(--btn-max-width-xxl);
@@ -706,7 +710,8 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .ShowTreeSelection {
         width: 16px;
         height: 16px;
-        margin-left: 3px;
+        margin-left: 10px;
+        margin-top: 10px;
         display: none;
         color: #333;
     }
@@ -732,6 +737,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     #TreeContainer #TreeSearch {
         position: relative;
+        padding: 0px 10px 0px 10px;
     }
 
     #TreeContainer #TreeSearch span {
@@ -741,8 +747,8 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         font-weight: bold;
         height: 12px;
         position: absolute;
-        right: 9px;
-        top: 4px;
+        right: 10px;
+        top: 10px;
         width: 16px;
     }
 
@@ -756,13 +762,12 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     #TreeContainer #TreeSearch input {
         display: block;
-        margin: 10px 12px 0px 12px;
-        width: 92%;
     }
 
     .JSTreeField {
         background-color: #FFFFFF;
         border: 1px solid #ccc;
+        border-radius: var(--border-radius-sm);
         height: 72%;
         margin: 10px 12px;
         -moz-box-shadow: inset 0px 0px 6px #ccc;
@@ -824,7 +829,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     .OverlayTreeSelector {
-        width: 400px;
         height: 300px;
     }
 

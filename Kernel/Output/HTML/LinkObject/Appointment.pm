@@ -12,7 +12,7 @@ package Kernel::Output::HTML::LinkObject::Appointment;
 use strict;
 use warnings;
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Output::HTML::Layout;
 
@@ -267,7 +267,7 @@ sub TableCreateComplex {
         # user has no own settings
         for my $Column ( sort keys %UserColumns ) {
             if ( !$SortOrder{$Column} ) {
-                $SortOrder{$Column} = 0;               # Set 0, it system will hide this item anyways
+                $SortOrder{$Column} = 0;    # Set 0, it system will hide this item anyways
             }
         }
     }

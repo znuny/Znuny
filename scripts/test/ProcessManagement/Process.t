@@ -1257,7 +1257,7 @@ my @Tests = (
             ActivityEntityID => undef,
             TicketID         => $TicketID,
             UserID           => 1,
-            Message =>
+            Message          =>
                 'ProcessTicketActivitySet() (Set ActivityEntityID on Ticket with no ActivityEntityID)',
             TestType => 'False',
         }
@@ -1306,7 +1306,7 @@ my @Tests = (
             ActivityEntityID => 'A3',
             TicketID         => $TicketID,
             UserID           => 1,
-            Message =>
+            Message          =>
                 'ProcessTicketActivitySet() (Set ActivityEntityID on Ticket with no ProcessEntityID)',
             TestType => 'False',
         }
@@ -1355,7 +1355,7 @@ my @Tests = (
             ActivityEntityID => 'A3',
             TicketID         => undef,
             UserID           => 1,
-            Message =>
+            Message          =>
                 'ProcessTicketActivitySet() (Set ActivityEntityID on Ticket with no TicketID)',
             TestType => 'False',
         }
@@ -1404,7 +1404,7 @@ my @Tests = (
             ActivityEntityID => 'A3',
             TicketID         => $TicketID,
             UserID           => 1,
-            Message =>
+            Message          =>
                 'ProcessTicketActivitySet() (Set ActivityEntityID on Ticket with invalid ActivityEntityID)',
             TestType => 'False',
         }
@@ -1459,7 +1459,7 @@ my @Tests = (
             ActivityEntityID => 'A1',
             TicketID         => $TicketID,
             UserID           => 1,
-            Message =>
+            Message          =>
                 'ProcessTicketActivitySet() (Set ActivityEntityID on Ticket with invalid ProcessEntityID)',
             TestType => 'False',
         }
@@ -1514,7 +1514,7 @@ my @Tests = (
             ActivityEntityID => 'A1',
             TicketID         => $TicketID,
             UserID           => 1,
-            Message =>
+            Message          =>
                 'ProcessTicketActivitySet() (Set ActivityEntityID on Ticket with valid Config)',
             TestType => 'True',
         }
@@ -1555,7 +1555,7 @@ my @Tests = (
             ProcessEntityID => 'P17',
             TicketID        => $TicketID,
             UserID          => 1,
-            Message =>
+            Message         =>
                 'ProcessTicketProcessSet() (Set ProcessEntityID on Ticket with invalid ProcessEntityID)',
             TestType => 'False',
         },
@@ -1596,7 +1596,7 @@ my @Tests = (
             ProcessEntityID => 'P1',
             TicketID        => undef,
             UserID          => 1,
-            Message =>
+            Message         =>
                 'ProcessTicketProcessSet() (Set ProcessEntityID on Ticket with invalid TicketID)',
             TestType => 'False',
         },
@@ -1637,7 +1637,7 @@ my @Tests = (
             ProcessEntityID => 'P1',
             TicketID        => $TicketID,
             UserID          => 1,
-            Message =>
+            Message         =>
                 'ProcessTicketProcessSet() (Set ProcessEntityID on Ticket with valid Config)',
             TestType => 'True',
         },
@@ -1750,7 +1750,7 @@ my @Tests = (
                 },
                 'Process::TransitionAction' => {
                     'TA1' => {
-                        Name => 'Queue Move',
+                        Name   => 'Queue Move',
                         Module =>
                             'Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet',
                         Config => {
@@ -1759,7 +1759,7 @@ my @Tests = (
 
                     },
                     'TA2' => {
-                        Name => 'Queue Move',
+                        Name   => 'Queue Move',
                         Module =>
                             'Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet',
                         Config => {
@@ -1768,7 +1768,7 @@ my @Tests = (
 
                     },
                     'TA3' => {
-                        Name => 'Queue Move',
+                        Name   => 'Queue Move',
                         Module =>
                             'Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet',
                         Config => {
@@ -1783,7 +1783,7 @@ my @Tests = (
             TicketID         => $TicketID,
             UserID           => 1,
             CheckOnly        => 0,
-            Message =>
+            Message          =>
                 'ProcessTransition() (matching Transition change ActivityEntityID and Action Queue Move to Misc)',
             TestType => 'True',
         }
@@ -1914,7 +1914,7 @@ my @Tests = (
                 },
                 'Process::TransitionAction' => {
                     'TA1' => {
-                        Name => 'Queue Move',
+                        Name   => 'Queue Move',
                         Module =>
                             'Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet',
                         Config => {
@@ -1923,7 +1923,7 @@ my @Tests = (
 
                     },
                     'TA2' => {
-                        Name => 'Queue Move',
+                        Name   => 'Queue Move',
                         Module =>
                             'Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet',
                         Config => {
@@ -1932,7 +1932,7 @@ my @Tests = (
 
                     },
                     'TA3' => {
-                        Name => 'Queue Move',
+                        Name   => 'Queue Move',
                         Module =>
                             'Kernel::System::ProcessManagement::TransitionAction::TicketQueueSet',
                         Config => {
@@ -1947,7 +1947,7 @@ my @Tests = (
             TicketID         => $TicketID,
             UserID           => 1,
             CheckOnly        => 0,
-            Message =>
+            Message          =>
                 'ProcessTransition() (matching Transition change ActivityEntityID and TransitionAction Queue Move to Raw)',
             TestType => 'True',
         }
@@ -2019,7 +2019,7 @@ my @Tests = (
                 },
                 'Process::TransitionAction' => {
                     'TA1' => {
-                        Name => 'Service Set',
+                        Name   => 'Service Set',
                         Module =>
                             'Kernel::System::ProcessManagement::TransitionAction::TicketServiceSet',
                         Config => {
@@ -2028,7 +2028,7 @@ my @Tests = (
 
                     },
                     'TA2' => {
-                        Name => 'SLA Set',
+                        Name   => 'SLA Set',
                         Module =>
                             'Kernel::System::ProcessManagement::TransitionAction::TicketSLASet',
                         Config => {
@@ -2042,7 +2042,7 @@ my @Tests = (
             TicketID         => $TicketID,
             UserID           => 1,
             CheckOnly        => 0,
-            Message =>
+            Message          =>
                 'ProcessTransition() (matching Transition Actions Service Set and SLA Set)',
             TestType       => 'TicketValues',
             ExpectedResult => {

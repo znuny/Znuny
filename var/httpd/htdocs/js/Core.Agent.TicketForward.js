@@ -9,7 +9,8 @@
 
 "use strict";
 
-var Core = Core || {};
+var Core = Core || {},
+    Znuny = Znuny || {};
 Core.Agent = Core.Agent || {};
 
 /**
@@ -31,7 +32,47 @@ Core.Agent.TicketForward = (function (TargetNS) {
     TargetNS.Init = function () {
 
         var ArticleComposeOptions = Core.Config.Get('ArticleComposeOptions'),
-            DynamicFieldNames = Core.Config.Get('DynamicFieldNames');
+            UpdateFields = Core.Config.Get('DynamicFieldNames') || [];
+
+        // Move FieldExplanation elements next to their labels, store text as tooltip
+        // used for Tooltips on labels (email security elements)
+        $('.Field p.FieldExplanation').each(function() {
+            var $Label = $(this).closest('.col-12').find('> label');
+            if ($Label.length) {
+                $(this).attr('data-tooltip', $(this).text().trim());
+                $(this).detach().insertAfter($Label);
+            }
+        });
+
+        Znuny.Form.Input.FieldIDMapping('AgentTicketForward',
+            {
+                Body:           'RichText',
+                StateID:        'ComposeStateID',
+                Customer:       'ToCustomer',
+                CustomerUserID: 'ToCustomer',
+                ServiceID:      'ServiceID',
+                SLAID:          'SLAID',
+                TypeID:         'TypeID',
+                PriorityID:     'NewPriorityID'
+            }
+        );
+
+        UpdateFields.push('TypeID');
+        UpdateFields.push('ServiceID');
+        UpdateFields.push('SLAID');
+
+        $('#TypeID').on('change', function () {
+            Core.AJAX.FormUpdate($(this).parents('form'), 'AJAXUpdate', 'TypeID', UpdateFields);
+        });
+
+        $('#ServiceID').on('change', function () {
+            Core.AJAX.FormUpdate($(this).parents('form'), 'AJAXUpdate', 'ServiceID', UpdateFields);
+        });
+
+        $('#SLAID').on('change', function () {
+            Core.AJAX.FormUpdate($(this).parents('form'), 'AJAXUpdate', 'SLAID', UpdateFields);
+        });
+
 
         // remove a customer ticket entry
         $('.CustomerTicketRemove').on('click', function () {
@@ -41,14 +82,14 @@ Core.Agent.TicketForward = (function (TargetNS) {
 
         // update dynamic fields in form
         $('#ComposeStateID').on('change', function () {
-            Core.AJAX.FormUpdate($('#Compose'), 'AJAXUpdate', 'ComposeStateID', DynamicFieldNames);
+            Core.AJAX.FormUpdate($(this).parents('form'), 'AJAXUpdate', 'ComposeStateID', UpdateFields);
         });
 
         // change article compose options
         if (typeof ArticleComposeOptions !== 'undefined') {
             $.each(ArticleComposeOptions, function (Key, Value) {
                 $('#'+Value.Name).on('change', function () {
-                    Core.AJAX.FormUpdate($('#Compose'), 'AJAXUpdate', Value.Name, Value.Fields);
+                    Core.AJAX.FormUpdate($(this).parents('form'), 'AJAXUpdate', Value.Name, Value.Fields);
                 });
             });
         }

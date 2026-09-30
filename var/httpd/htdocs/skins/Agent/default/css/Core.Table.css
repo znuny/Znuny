@@ -45,11 +45,14 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     transition: var(--main-transition);
  }
 
-.DataTable tbody tr:hover td,
+/* The article table in the ticket detail view is excluded, because hovered and
+   selected article rows are marked with a border only (Core.TicketDetail.css). */
+.DataTable:not(#ArticleTable) tbody tr:hover td,
 .TableSmall tbody tr:hover td,
-.DataTable tbody tr:active td.Clickable,
+.DataTable:not(#ArticleTable) tbody tr:active td.Clickable,
 .TableSmall tbody tr:active td.Clickable,
-.DataTable tr:nth-child(even):hover td.Highlight {
+.DataTable:not(#ArticleTable) tr:nth-child(even):hover td.Highlight,
+.DataTable:not(#ArticleTable) tbody tr:nth-child(even):hover td:not(:first-child:last-child) {
     background: var(--primary-color-rgb);
 }
 
@@ -137,8 +140,8 @@ table thead a {
 .DataTable thead th,
 .DataTable thead th.DashboardHeader,
 .TableSmall thead th,
-.TableSmall thead a,
-.TableSmall thead span {
+.TableSmall thead th > a,
+.TableSmall thead th > span {
     position: relative;
     padding: 12px var(--padding-lg);
     font-size: var(--font-size-sm);
@@ -176,16 +179,16 @@ thead tr:not(:only-child):first-child th:last-child {
 }
 
 .TableSmall thead th,
-.TableSmall thead a,
-.TableSmall thead span {
+.TableSmall thead th > a,
+.TableSmall thead th > span {
     padding: 12px var(--padding-sm);
 }
 
 .TicketZoom .DataTable thead th,
 .TicketZoom .DataTable thead th.DashboardHeader,
 .TicketZoom .TableSmall thead th,
-.TicketZoom .TableSmall thead a,
-.TicketZoom .TableSmall thead span {
+.TicketZoom .TableSmall thead th > a,
+.TicketZoom .TableSmall thead th > span {
     /*padding: var(--padding-sm) var(--padding-lg);*/
     padding: var(--padding-sm);
 }
@@ -675,6 +678,8 @@ thead .headerSortDown a {
 
 .TicketList {
     overflow: auto;
+    border-bottom-left-radius: var(--border-radius-sm);
+    border-bottom-right-radius: var(--border-radius-sm);
 }
 
 .TicketList table {
@@ -729,26 +734,51 @@ thead .headerSortDown a {
  */
 .Handle {
     width: 100%;
+    box-sizing: border-box;
+    background: var(--main-bg-color);
+    border-top: var(--border-width) var(--border-solid) var(--border-color);
+    border-bottom: var(--border-width) var(--border-solid) var(--border-color);
 }
 
 .Handle a {
     display: block;
+    position: relative;
     margin: auto;
-    height: 14px;
+    /* same height as a table header row: font size + vertical cell padding */
+    height: calc(var(--font-size-sm) + 2 * var(--padding-sm));
     width: 79px;
-    background: transparent url(../img/handle.png) no-repeat;
     text-indent: -9999px;
     cursor: ns-resize;
+}
+
+.Handle a:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 5px;
+    transform: translate(-50%, -50%);
+    border-top: var(--border-width) var(--border-solid) var(--table-text-color);
+    border-bottom: var(--border-width) var(--border-solid) var(--table-text-color);
+    opacity: 0.4;
+}
+
+.Handle a:hover:after {
+    opacity: 0.8;
 }
 
 .Handle.ui-resizable-s {
     cursor:auto;
     height:auto !important;
     left:auto;
+    /* jQuery UI pulls the handle out of the flow, where it would cover the last table row */
+    bottom: auto;
 }
 
 .Handle.ui-resizable-handle {
     display: block;
+    position: relative;
     font-size: inherit;
     z-index: 19;
 }
@@ -864,8 +894,8 @@ thead .tablesorter-headerAsc > div.tablesorter-header-inner > a:before {
     align-items: center;
 }
 
-.DataTable thead th.DashboardHeader a,
-.TableSmall thead th.OverviewHeader a,
+.DataTable thead th.DashboardHeader > a,
+.TableSmall thead th.OverviewHeader > a,
 .DataTable thead th.DashboardHeader span.Gray,
 th.OverviewHeader .OverviewControl {
     height: auto;
@@ -981,6 +1011,57 @@ th.OverviewHeader .OverviewControl {
     background: transparent;
 }
 
+/* ── Column filter: Modernize widget alignment & styling ── */
+
+/* Give the full input row a white background and a clear border */
+.ColumnSettingsBox div.InputField_Container {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    width: auto;
+    max-width: 100%;
+}
+
+.ColumnSettingsBox div.InputField_InputContainer {
+    background: var(--white);
+    border: var(--border-width) var(--border-solid) var(--border-input-color);
+    border-radius: var(--border-radius-sm);
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+/* Selected-value pill ("-") — constrain to natural height so it fits the container */
+.ColumnSettingsBox div.InputField_Selection {
+    height: 75%;
+    top: 4px;
+    transform: none;
+    padding: 0 var(--padding-xs);
+}
+
+/* ShowTreeSelection icon — vertically center inside the flex row */
+.ColumnSettingsBox a.ShowTreeSelection {
+    margin-top: 0;
+    margin-left: 0;
+    padding: 0;
+    flex-shrink: 0;
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--border-radius-sm);
+    color: var(--gray-dark);
+    background: transparent;
+    transition: var(--main-transition);
+}
+
+.ColumnSettingsBox a.ShowTreeSelection:hover,
+.ColumnSettingsBox a.ShowTreeSelection:focus {
+    color: var(--primary-color);
+}
+
 /* Merged with style above"
 .MainBox.Dashboard .DataTable thead th.DashboardHeader .ColumnSettingsBox,
 .MainBox.Dashboard .TableSmall thead th.OverviewHeader .ColumnSettingsBox {
@@ -995,7 +1076,7 @@ th.OverviewHeader .OverviewControl {
 
 /*.DataTable thead th.DashboardHeader .ColumnSettingsBox span.SelectedValue,
 .TableSmall thead th.OverviewHeader .ColumnSettingsBox span.SelectedValue*/
-.ColumnSettingsBox span.SelectedValue {
+.ColumnSettingsBox span.SelectedValue:not(.Hidden) {
     display: block;
     text-transform: none;
     margin-bottom: 8px;
@@ -1029,20 +1110,6 @@ th.OverviewHeader .OverviewControl {
     top: 0;
     width: 10px;
     padding: 0px 0px 0px 5px;
-}
-
-/*.DataTable thead th.DashboardHeader .ColumnSettingsBox a.DeleteFilter,
-.TableSmall thead th.OverviewHeader .ColumnSettingsBox a.DeleteFilter*/
-.ColumnSettingsBox a.DeleteFilter {
-    display: inline-block;
-    font-size: 13px;
-    line-height: 1;
-}
-
-/*.DataTable thead th.DashboardHeader .ColumnSettingsBox a.DeleteFilter.Hidden,
-.TableSmall thead th.OverviewHeader .ColumnSettingsBox a.DeleteFilter.Hidden*/
-.ColumnSettingsBox a.DeleteFilter.Hidden {
-    display: none;
 }
 
 /*.DataTable thead th.DashboardHeader .ColumnSettingsBox span.SelectedValue a:hover,
@@ -1139,6 +1206,11 @@ td a:hover i {
     color: var(--gray-darker);
 }
 
+button.table-icon-hover-md {
+    background: none;
+    border: none;
+    font-size: var(--font-size-lg);
+}
 
 .table-icon-hover-md {
     position: relative;
@@ -1255,19 +1327,6 @@ td a:hover i {
 /**************************/
 /*          Admin         */
 /**************************/
-.WidgetPermissions table thead tr th,
-table#Users thead tr th,
-table#Groups thead tr th,
-table#Roles thead tr th,
-table#CustomerUsers thead tr th,
-table#Customers thead tr th,
-table#Customer thead tr th,
-table[id='Customer User'] thead tr th,
-table#Group thead tr th,
-table#Group thead tr:nth-child(2) th,
-table#AlwaysGroups thead tr th {
-    width: 100px;
-}
 
 .WidgetPermissions table thead tr th:first-child,
 table#Users thead tr th:first-child,

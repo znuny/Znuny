@@ -21,7 +21,7 @@ our @ObjectDependencies = (
 sub Configure {
     my ( $Self, %Param ) = @_;
 
-    $Self->Description('Delete cache files created by OTRS.');
+    $Self->Description('Delete cache files created by Znuny.');
     $Self->AddOption(
         Name        => 'expired',
         Description => 'Delete only caches which are expired by TTL.',

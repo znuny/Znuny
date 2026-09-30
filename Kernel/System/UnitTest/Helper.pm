@@ -947,6 +947,10 @@ sub _DisableDefaultSysConfigSettings {
     my @DisableSysConfigs = (
         'Ticket::EventModulePost###999-NotifyOnEmptyProcessTickets',
         'Ticket::EventModulePost###Mentions',
+        'Frontend::NotifyModule###2000-UID-Check',
+        'Frontend::NotifyModule###8000-Daemon-Check',
+        'Frontend::NotifyModule###7000-AgentTimeZone-Check',
+        'CustomerFrontend::NotifyModule###7-CustomerUserTimeZone-Check'
     );
 
     $Self->DisableSysConfigs(
@@ -2150,10 +2154,10 @@ sub FillTestEnvironment {
     my %AttributeTestStructure = (
         'A::Level - 1::A'  => 0,
         'A::Level - 1::B'  => 0,
-        'A::Level - 2::Ä' => 0,
-        'A::Level - 2::Ö' => 0,
-        'B::Level - !::Ü' => 0,
-        'B::Level - !::ß' => 0,
+        'A::Level - 2::Ä'  => 0,
+        'A::Level - 2::Ö'  => 0,
+        'B::Level - !::Ü'  => 0,
+        'B::Level - !::ß'  => 0,
         'B::Level - ?::Y'  => 0,
         'B::Level - ?::Z'  => 0,
         'C::Level - &::%'  => 0,
@@ -2341,13 +2345,14 @@ Creates a Ticket with dummy data and tests the creation. All Ticket attributes a
         UserID       => 1,
     );
 
-    To overwrite:
+To overwrite:
 
     my $TicketID = $HelperObject->TicketCreate(
         CustomerUser => 'another_customer@example.com',
     );
 
-    Result:
+Result:
+
     $TicketID = 1337;
 
 =cut
@@ -2419,14 +2424,15 @@ Creates an Article with dummy data and tests the creation. All Article attribute
         NoAgentNotify  => 1,
     );
 
-    To overwrite:
+To overwrite:
 
     my $ArticleID = $HelperObject->ArticleCreate(
         TicketID   => 1337,
         SenderType => 'customer',
     );
 
-    Result:
+Result:
+
     $ArticleID = 1337;
 
 =cut
@@ -2453,13 +2459,18 @@ sub ArticleCreate {
         SenderType           => 'agent',
         Subject              => 'UnitTest subject test',
         Body                 => 'UnitTest body test',
-        ContentType          => 'text/plain; charset=ISO-8859-15',
         HistoryType          => 'OwnerUpdate',
         HistoryComment       => 'Some free text!',
         UserID               => 1,
         NoAgentNotify        => 1,
         %Param,
     );
+
+    # Do not force text/plain when the caller already passed MimeType and/or ContentType.
+    # Otherwise MimeType (e.g. text/html) is ignored because ArticleCreate prefers ContentType.
+    if ( !$ArticleAttributes{ContentType} && !$ArticleAttributes{MimeType} ) {
+        $ArticleAttributes{ContentType} = 'text/plain; charset=ISO-8859-15';
+    }
 
     # create test ticket
     my $ArticleID = $ArticleObject->ArticleCreate(%ArticleAttributes);

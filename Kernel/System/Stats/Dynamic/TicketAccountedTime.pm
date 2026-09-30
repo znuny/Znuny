@@ -13,7 +13,7 @@ use strict;
 use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -897,6 +897,9 @@ sub GetStatElement {
             Permission => 'ro',
             Limit      => 100_000_000,
             %TicketSearch,
+
+            # statistics search closed time ranges
+            TimeSearchInclusive => 1,
         );
 
         # Do nothing, if there are no tickets.

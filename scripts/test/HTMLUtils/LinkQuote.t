@@ -31,28 +31,28 @@ my @Tests = (
         Target => '',
     },
     {
-        Input => 'Some Text with url http://example.com',
+        Input  => 'Some Text with url http://example.com',
         Result =>
             'Some Text with url <a href="http://example.com" title="http://example.com">http://example.com</a>',
         Name   => 'LinkQuote - simple',
         Target => '',
     },
     {
-        Input => 'Some Text with url http://xwww.example.com',
+        Input  => 'Some Text with url http://xwww.example.com',
         Result =>
             'Some Text with url <a href="http://xwww.example.com" title="http://xwww.example.com">http://xwww.example.com</a>',
         Name   => 'LinkQuote - simple',
         Target => '',
     },
     {
-        Input => 'Some Text with nested url http://www.example.com/redirect?location=www.example2.com',
+        Input  => 'Some Text with nested url http://www.example.com/redirect?location=www.example2.com',
         Result =>
             'Some Text with nested url <a href="http://www.example.com/redirect?location=www.example2.com" title="http://www.example.com/redirect?location=www.example2.com">http://www.example.com/redirect?location=www.example2.com</a>',
         Name   => 'LinkQuote - nested URL bug#8761',
         Target => '',
     },
     {
-        Input => 'Some Text with url http://example-domain.com',
+        Input  => 'Some Text with url http://example-domain.com',
         Result =>
             'Some Text with url <a href="http://example-domain.com" title="http://example-domain.com">http://example-domain.com</a>',
         Name   => 'LinkQuote - URL with dash',
@@ -101,7 +101,7 @@ my @Tests = (
         Target => '',
     },
     {
-        Input => 'Some Text with url <a href="http://example.com">http://example.com</a>',
+        Input  => 'Some Text with url <a href="http://example.com">http://example.com</a>',
         Result =>
             'Some Text with url <a href="http://example.com" target="_blank">http://example.com</a>',
         Name      => 'LinkQuote - simple',
@@ -126,14 +126,14 @@ my @Tests = (
         Target => '',
     },
     {
-        Input => '<html>Some Text with url http://example.com</html>',
+        Input  => '<html>Some Text with url http://example.com</html>',
         Result =>
             '<html>Some Text with url <a href="http://example.com" title="http://example.com">http://example.com</a></html>',
         Name   => 'LinkQuote - simple',
         Target => '',
     },
     {
-        Input => '<html>Some Text with url http://example.com </html>',
+        Input  => '<html>Some Text with url http://example.com </html>',
         Result =>
             '<html>Some Text with url <a href="http://example.com" title="http://example.com">http://example.com</a> </html>',
         Name   => 'LinkQuote - simple',
@@ -157,7 +157,7 @@ my @Tests = (
         Target => '',
     },
     {
-        Input => '<html>www.heise.de</html>',
+        Input  => '<html>www.heise.de</html>',
         Result =>
             '<html><a href="http://www.heise.de" title="http://www.heise.de">www.heise.de</a></html>',
         Name   => 'LinkQuote with plain domains.',
@@ -170,42 +170,42 @@ my @Tests = (
         Target => '',
     },
     {
-        Input => '<html>ftp.heise.de</html>',
+        Input  => '<html>ftp.heise.de</html>',
         Result =>
             '<html><a href="ftp://ftp.heise.de" title="ftp://ftp.heise.de">ftp.heise.de</a></html>',
         Name   => 'LinkQuote with plain domains.',
         Target => '',
     },
     {
-        Input => '<html>www.heise.de/Suffix</html>',
+        Input  => '<html>www.heise.de/Suffix</html>',
         Result =>
             '<html><a href="http://www.heise.de/Suffix" title="http://www.heise.de/Suffix">www.heise.de/Suffix</a></html>',
         Name   => 'LinkQuote with plain domains.',
         Target => '',
     },
     {
-        Input => '<html>www.heise.de.</html>',
+        Input  => '<html>www.heise.de.</html>',
         Result =>
             '<html><a href="http://www.heise.de" title="http://www.heise.de">www.heise.de</a>.</html>',
         Name   => 'LinkQuote with plain domains.',
         Target => '',
     },
     {
-        Input => '<html>www.heise-online.de/Suffix</html>',
+        Input  => '<html>www.heise-online.de/Suffix</html>',
         Result =>
             '<html><a href="http://www.heise-online.de/Suffix" title="http://www.heise-online.de/Suffix">www.heise-online.de/Suffix</a></html>',
         Name   => 'LinkQuote with plain domains with a dash.',
         Target => '',
     },
     {
-        Input => '<html>www.heise-online.de/Suffix.</html>',
+        Input  => '<html>www.heise-online.de/Suffix.</html>',
         Result =>
             '<html><a href="http://www.heise-online.de/Suffix" title="http://www.heise-online.de/Suffix">www.heise-online.de/Suffix</a>.</html>',
         Name   => 'LinkQuote with plain domains with a dash.',
         Target => '',
     },
     {
-        Input => '<html>ftp.heise.de/Suffix</html>',
+        Input  => '<html>ftp.heise.de/Suffix</html>',
         Result =>
             '<html><a href="ftp://ftp.heise.de/Suffix" title="ftp://ftp.heise.de/Suffix">ftp.heise.de/Suffix</a></html>',
         Name   => 'LinkQuote with plain domains.',
@@ -236,42 +236,42 @@ my @Tests = (
         Target => '',
     },
     {
-        Input => '<html> www.heise.de </html>',
+        Input  => '<html> www.heise.de </html>',
         Result =>
             '<html> <a href="http://www.heise.de" title="http://www.heise.de">www.heise.de</a> </html>',
         Name   => 'LinkQuote with plain domains.',
         Target => '',
     },
     {
-        Input => '<html> ftp.heise.de </html>',
+        Input  => '<html> ftp.heise.de </html>',
         Result =>
             '<html> <a href="ftp://ftp.heise.de" title="ftp://ftp.heise.de">ftp.heise.de</a> </html>',
         Name   => 'LinkQuote with plain domains.',
         Target => '',
     },
     {
-        Input => '<html>&nbsp;www.heise.de&nbsp;</html>',
+        Input  => '<html>&nbsp;www.heise.de&nbsp;</html>',
         Result =>
             '<html>&nbsp;<a href="http://www.heise.de" title="http://www.heise.de">www.heise.de</a>&nbsp;</html>',
         Name   => 'LinkQuote with plain domains.',
         Target => '',
     },
     {
-        Input => '<html>&nbsp;ftp.heise.de&nbsp;</html>',
+        Input  => '<html>&nbsp;ftp.heise.de&nbsp;</html>',
         Result =>
             '<html>&nbsp;<a href="ftp://ftp.heise.de" title="ftp://ftp.heise.de">ftp.heise.de</a>&nbsp;</html>',
         Name   => 'LinkQuote with plain domains.',
         Target => '',
     },
     {
-        Input => '<html>&nbsp;www.heise.de&nbsp;www.heise.de</html>',
+        Input  => '<html>&nbsp;www.heise.de&nbsp;www.heise.de</html>',
         Result =>
             '<html>&nbsp;<a href="http://www.heise.de" title="http://www.heise.de">www.heise.de</a>&nbsp;<a href="http://www.heise.de" title="http://www.heise.de">www.heise.de</a></html>',
         Name   => 'LinkQuote with plain domains.',
         Target => '',
     },
     {
-        Input => '<html>&nbsp;ftp.heise.de&nbsp;ftp.heise.de</html>',
+        Input  => '<html>&nbsp;ftp.heise.de&nbsp;ftp.heise.de</html>',
         Result =>
             '<html>&nbsp;<a href="ftp://ftp.heise.de" title="ftp://ftp.heise.de">ftp.heise.de</a>&nbsp;<a href="ftp://ftp.heise.de" title="ftp://ftp.heise.de">ftp.heise.de</a></html>',
         Name   => 'LinkQuote with plain domains.',
@@ -370,14 +370,14 @@ my @Tests = (
         Target => '',
     },
     {
-        Input => 'Following unquoted link looks strangely like an ftp URL: www.ftp.de',
+        Input  => 'Following unquoted link looks strangely like an ftp URL: www.ftp.de',
         Result =>
             'Following unquoted link looks strangely like an ftp URL: <a href="http://www.ftp.de" title="http://www.ftp.de">www.ftp.de</a>',
         Name   => 'Text with HTTP url (bug#12472)',
         Target => '',
     },
     {
-        Input => 'Following unquoted link is an actual ftp URL: ftp.my.de',
+        Input  => 'Following unquoted link is an actual ftp URL: ftp.my.de',
         Result =>
             'Following unquoted link is an actual ftp URL: <a href="ftp://ftp.my.de" title="ftp://ftp.my.de">ftp.my.de</a>',
         Name   => 'Text with FTP url (bug#12472)',

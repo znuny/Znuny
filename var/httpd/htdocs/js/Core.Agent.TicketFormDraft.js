@@ -105,6 +105,13 @@ Core.Agent.TicketFormDraft = (function (TargetNS) {
                 }, 300);
             });
 
+            // Allow submitting the new draft when pressing Enter after entering the draft's title.
+            $('#FormDraftTitle').on("keydown", function(Event) {
+                if (Event.which === 13) {
+                    $("button#SaveFormDraft").trigger("click");
+                }
+            });
+
             $("button.CloseDialog").off("click").on("click", function() {
                 Core.UI.Dialog.CloseDialog($(".Dialog"));
             });

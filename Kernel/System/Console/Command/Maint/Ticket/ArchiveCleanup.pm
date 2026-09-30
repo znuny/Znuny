@@ -11,6 +11,7 @@ package Kernel::System::Console::Command::Maint::Ticket::ArchiveCleanup;
 
 use strict;
 use warnings;
+use utf8;
 
 use Time::HiRes();
 
@@ -89,14 +90,15 @@ sub Run {
             $Self->Print("    Removing seen flags of ticket $TicketID\n");
             Time::HiRes::usleep($MicroSleep) if $MicroSleep;
         }
-
         $Self->Print("<green>Done</green> (changed <yellow>$Count</yellow> tickets).\n");
+
+        # Check for archived articles with seen flags
         $Self->Print("<yellow>Checking for archived articles with seen flags...</yellow>\n");
 
         # Find all articles of archived tickets which have ticket seen flags set
         return if !$DBObject->Prepare(
             SQL => "
-                SELECT DISTINCT(article.id)
+                SELECT DISTINCT(article.id), article.ticket_id
                 FROM article
                     INNER JOIN ticket ON ticket.id = article.ticket_id
                     INNER JOIN article_flag ON article.id = article_flag.article_id
@@ -107,20 +109,25 @@ sub Run {
 
         my @ArticleIDs;
         while ( my @Row = $DBObject->FetchrowArray() ) {
-            push @ArticleIDs, $Row[0];
+            push @ArticleIDs,
+                {
+                ArticleID => $Row[0],
+                TicketID  => $Row[1],
+                };
         }
 
         my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 
         $Count = 0;
-        for my $ArticleID (@ArticleIDs) {
+        for my $Article (@ArticleIDs) {
             $ArticleObject->ArticleFlagDelete(
-                ArticleID => $ArticleID,
+                TicketID  => $Article->{TicketID},
+                ArticleID => $Article->{ArticleID},
                 Key       => 'Seen',
                 AllUsers  => 1,
             );
             $Count++;
-            $Self->Print("    Removing seen flags of article $ArticleID\n");
+            $Self->Print("    Removing seen flags of article $Article->{ArticleID}\n");
             Time::HiRes::usleep($MicroSleep) if $MicroSleep;
         }
 
@@ -161,6 +168,79 @@ sub Run {
         }
 
         $Self->Print("<green>Done</green> (changed <yellow>$Count</yellow> tickets).\n");
+    }
+
+    if ( $ConfigObject->Get('Ticket::ArchiveSystem::RemoveMentionFlags') ) {
+
+        $Self->Print("<yellow>Checking for archived tickets with mention seen flags...</yellow>\n");
+
+        return if !$DBObject->Prepare(
+            SQL => "
+                SELECT DISTINCT(ticket.id)
+                FROM ticket
+                    INNER JOIN ticket_flag ON ticket.id = ticket_flag.ticket_id
+                WHERE ticket.archive_flag = 1
+                    AND ticket_flag.ticket_key = 'MentionSeen'",
+            Limit => 1_000_000,
+        );
+
+        my @MentionTicketIDs;
+        while ( my @Row = $DBObject->FetchrowArray() ) {
+            push @MentionTicketIDs, $Row[0];
+        }
+
+        my $Count = 0;
+        for my $TicketID (@MentionTicketIDs) {
+            $TicketObject->TicketFlagDelete(
+                TicketID => $TicketID,
+                Key      => 'MentionSeen',
+                AllUsers => 1,
+            );
+            $Count++;
+            $Self->Print("    Removing mention seen flags of ticket $TicketID\n");
+            Time::HiRes::usleep($MicroSleep) if $MicroSleep;
+        }
+        $Self->Print("<green>Done</green> (changed <yellow>$Count</yellow> tickets).\n");
+
+        # Check for archived articles with mention seen flags
+        $Self->Print("<yellow>Checking for archived articles with mention seen flags...</yellow>\n");
+
+        return if !$DBObject->Prepare(
+            SQL => "
+                SELECT DISTINCT(article.id), article.ticket_id
+                FROM article
+                    INNER JOIN ticket ON ticket.id = article.ticket_id
+                    INNER JOIN article_flag ON article.id = article_flag.article_id
+                WHERE ticket.archive_flag = 1
+                    AND article_flag.article_key = 'MentionSeen'",
+            Limit => 1_000_000,
+        );
+
+        my @MentionArticleIDs;
+        while ( my @Row = $DBObject->FetchrowArray() ) {
+            push @MentionArticleIDs,
+                {
+                ArticleID => $Row[0],
+                TicketID  => $Row[1],
+                };
+        }
+
+        my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+
+        $Count = 0;
+        for my $Article (@MentionArticleIDs) {
+            $ArticleObject->ArticleFlagDelete(
+                TicketID  => $Article->{TicketID},
+                ArticleID => $Article->{ArticleID},
+                Key       => 'MentionSeen',
+                AllUsers  => 1,
+            );
+            $Count++;
+            $Self->Print("    Removing mention seen flags of article $Article->{ArticleID}\n");
+            Time::HiRes::usleep($MicroSleep) if $MicroSleep;
+        }
+
+        $Self->Print("<green>Done</green> (changed <yellow>$Count</yellow> articles).\n");
     }
 
     $Self->Print("<green>Done.</green>\n");

@@ -13,7 +13,7 @@ package Kernel::System::Loader;
 use strict;
 use warnings;
 
-use CSS::Minifier qw();           # default minifier, will only be used if CSS::Minifier:XS is not available.
+use CSS::Minifier        qw();    # default minifier, will only be used if CSS::Minifier:XS is not available.
 use JavaScript::Minifier qw();    # default minifier, will only be used if JavaScript::Minifier:XS is not available.
 
 our @ObjectDependencies = (
@@ -190,6 +190,12 @@ sub MinifyFiles {
                     );
                 }
 
+                # If Loader::Enabled::CSS is enabled and the css files will be minified,
+                # we need to replace '../../' with '../' with a relative path.
+                # This is necessary because the css files are in the css-cache directory,
+                # but the img files are in the img directory.
+                $Content =~ s{../../}{../}g;
+
                 $Content .= "\n";
             }
             elsif ( $Param{Type} eq 'JavaScript' ) {
@@ -290,7 +296,7 @@ sub GetMinifiedFile {
     my $FileContents = $MainObject->FileRead(
         Location => $Location,
 
-        # It would be more correct to use UTF8 mode, but then the JavaScript::Minifier
+        # It would be more correct to use UTF8 mode, but then the ``JavaScript::Minifier``
         #   will cause timeouts due to extreme slowness on some UT servers. Disable for now.
         #   Unicode in the files still works correctly.
         #Mode     => 'utf8',
@@ -372,7 +378,7 @@ returns a minified version of the given JavaScript Code.
 Warning: this function may cause a die() if there are errors in the file,
 protect against that with eval().
 
-This function internally uses the CPAN module JavaScript::Minifier.
+This function internally uses the CPAN module ``JavaScript::Minifier``.
 As of version 1.05 of that module, there is an issue with regular expressions:
 
 This will cause a die:
@@ -565,11 +571,11 @@ sub IsJavaScriptMinifierXSAvailable {
 
 =head2 IsCSSMinifierXSAvailable()
 
-Tries to load CSS::Minifier::XS if available which provides faster creation of minified CSS.
+Tries to load ``JavaScript::Minifier::XS`` if available which provides faster creation of minified JavaScript.
 
     my $IsCSSMinifierXSAvailable = $LoaderObject->IsCSSMinifierXSAvailable();
 
-Returns true value if CSS::Minifier::XS is available and loaded.
+Returns true value if ``CSS::Minifier::XS`` is available and loaded.
 
 =cut
 

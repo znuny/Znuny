@@ -190,6 +190,323 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         display: flex;
         align-items: center;
     }
+
+    /**
+    * @subsection  ItemListGrid
+    */
+
+    .ItemListGrid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--margin-lg);
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .ItemListGrid.Hidden {
+        display: none;
+    }
+
+    .ItemListGrid > li {
+        float: initial;
+        display: flex;
+        line-height: 100%;
+        width: calc(25% - var(--margin-md));
+        max-width: 100%;
+        min-height: 200px;
+        margin: 0;
+    }
+
+    .ItemListGrid > li.IsFavourite > a {
+        box-shadow: none;
+        border-color: var(--primary-color);
+    }
+
+    .ItemListGrid > li > a {
+        overflow: hidden;
+    }
+
+    .ItemListGrid > li > a > .Favourite {
+        display: none !important;
+        right: 10px;
+        transition: all ease 0.25s;
+        color: var(--primary-color);
+        background: var(--primary-color);
+        font-size: 20px;
+        position: absolute;
+        top: 10px;
+        opacity: 0;
+    }
+
+    .ItemListGrid > li > a:hover > .Favourite {
+        color: var(--white);
+        background: var(--white);
+        opacity: 1;
+    }
+
+    .ItemListGrid > li.IsFavourite > a .Favourite {
+        right: 10px;
+        top: 10px;
+    }
+
+    .ItemListGrid > li > a:hover > .Favourite,
+    .ItemListGrid > li.IsFavourite > a > .Favourite {
+        display: flex !important;
+    }
+
+    .ItemListGrid > li > a > .Favourite.Clicked .fa-star {
+        display: flex !important;
+    }
+
+    .ItemListGrid > li > a > .Favourite > .fa {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+    }
+
+    .ItemListGrid > li > a:hover > .Favourite .fa-star-o {
+        opacity: 1;
+    }
+
+    .ItemListGrid > li > a > .Favourite .fa-star {
+        opacity: 0;
+    }
+
+    .ItemListGrid > li.IsFavourite > a:hover > .Favourite .fa-star {
+        opacity: 1;
+    }
+
+    .ItemListGrid > li > a:hover > .Favourite,
+    .ItemListGrid > li > a > .Favourite.Clicked {
+        right: 10px;
+    }
+
+    .ItemListGrid > li > a:hover > .Favourite .fa {
+        transition: all ease 0.2s;
+    }
+
+    .ItemListGrid > li > a:hover > .Favourite:hover .fa {
+        color: var(--white);
+    }
+
+    .ItemListGrid > li > a:hover > .Favourite:hover .fa-star-o {
+        opacity: 0;
+    }
+
+    .ItemListGrid > li > a:hover > .Favourite:hover .fa-star {
+        opacity: 1;
+        display: block;
+    }
+
+    .ItemListGrid > li > a > .Favourite .fa-check {
+        color: var(--white) !important;
+        font-size: var(--icon-main-size);
+        background: var(--primary-color);
+        padding: 5px;
+        border-radius: var(--border-radius-xs);
+    }
+
+    @media only screen and (min-width: 2400px) {
+        .ItemListGrid > li {
+            width: calc(16.6% - 16px);
+        }
+    }
+
+    @media only screen and (min-width: 2000px) and (max-width: 2399px) {
+        .ItemListGrid > li {
+            width: calc(20% - 16px);
+        }
+    }
+
+    @media only screen and (max-width: 1400px) {
+        .ItemListGrid > li {
+            width: calc(33.5% - var(--margin-md));
+        }
+    }
+
+    @media only screen and (max-width: 1200px) {
+        .ItemListGrid > li {
+            width: calc(50% - var(--margin-md));
+        }
+    }
+
+    @media only screen and (max-width: 900px) {
+        .ItemListGrid > li {
+            width: calc(100% - var(--margin-md));
+        }
+    }
+
+    .ItemListGrid.WithIcons > li {
+        height: auto;
+    }
+
+    .ItemListGrid > li.FilterMessage {
+        height: auto;
+        line-height: 90%;
+        margin: -7px 0px 3px 5px;
+        color: #777;
+    }
+
+    .ItemListGrid > li.FilterMessage.Hidden {
+        display: none;
+    }
+
+    .ItemListGrid > li > a {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        height: 100%;
+        width: 100%;
+        padding: var(--padding-xl);
+        text-align: center;
+        background: var(--white);
+        box-sizing: border-box;
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-lg);
+    }
+
+    .ItemListGrid.WithIcons > li > a {
+        padding: var(--padding-xl);
+        transition: var(--main-transition);
+    }
+
+    .ItemListGrid.WithIcons > li > a.Disabled {
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+
+    .ItemListGrid > li > a:not(.Disabled):hover,
+    .ItemListGrid > li > a:not(.Disabled).Active,
+    .ItemListGrid > li > a.Active {
+        background: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+    /*
+    .ItemListGrid > li > a:not(.Disabled):focus,
+    .ItemListGrid > li > a.Active:focus {
+        border-color: var(--primary-color);
+    }
+    */
+
+    /*.ItemListGrid.WithIcons > li a:not(.Disabled):focus span.Icons,*/
+    .ItemListGrid > li span.Icons,
+    ul.GettingStarted > li span.Icons {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 66px;
+        width: 66px;
+        min-width: 66px;
+        min-height: 66px;
+        left: initial;
+        top: initial;
+        margin-left: 0;
+        padding: 10px;
+        border: var(--border-width) var(--border-solid) transparent;
+        border-radius: 50%;
+        transition: var(--main-transition);
+        box-sizing: border-box;
+        background: var(--gray-light-ultra);
+    }
+
+    .ItemListGrid.WithIcons > li a:not(.Disabled):hover span.Icons,
+    .ItemListGrid.WithIcons > li a:not(.Disabled).Active span.Icons {
+        border-color: var(--white);
+        background: rgba(255, 255, 255, 0.3);
+        color: var(--white);
+    }
+
+    .ItemListGrid.WithIcons > li a:not(.Disabled):hover span.Icons i.Icon2,
+    .ItemListGrid.WithIcons > li a:not(.Disabled).Active span.Icons i.Icon2 {
+        border-color: var(--white);
+        background: var(--white);
+        color: var(--primary-color);
+    }
+
+    .ItemListGrid.WithIcons > li span.Icons i {
+        color: var(--gray-dark-semi);
+        font-size: 25px;
+        transition: var(--main-transition);
+    }
+
+    /*.ItemListGrid > li a:not(.Disabled):focus span.Icons i.Icon2,*/
+    .ItemListGrid.WithIcons > li span.Icons i.Icon2 {
+        background: var(--gray-light-ultra);
+        border-radius: 100%;
+        font-size: 12px;
+        line-height: 15px;
+        padding: 3px;
+        position: absolute;
+        right: -14px;
+        top: -5px;
+        width: 32px;
+        min-height: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gray-dark-semi);
+        filter: drop-shadow(0 4px 4px rgba(131, 131, 131, 0.15));
+        transition: var(--main-transition);
+    }
+
+    .ItemListGrid > li > a:not(.Disabled).Active span.Icons i,
+    .ItemListGrid > li > a:not(.Disabled):hover span.Icons i {
+        color: var(--white);
+    }
+
+    /*.ItemListGrid > li a:not(.Disabled):focus span.Title,*/
+    .ItemListGrid > li > a.Active:focus span.Title,
+    .ItemListGrid > li span.Title {
+        display: flex;
+        width: auto;
+        margin: 0px auto;
+        padding: var(--padding-md) var(--padding-xl);
+        font-size: var(--main-font-size);
+        color: var(--black);
+        font-weight: var(--semi-bold);
+        text-align: center;
+        white-space: initial;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        line-height: 100%;
+        transition: var(--main-transition);
+    }
+
+    .ItemListGrid > li > a:not(.Disabled).Active span.Title,
+    .ItemListGrid > li > a:not(.Disabled):hover span.Title {
+        color: var(--white);
+    }
+
+    .ItemListGrid > li span.Description {
+        display: flex;
+        width: auto;
+        margin: 0px auto;
+        font-size: var(--main-font-size);
+        color: var(--gray-medium);
+        font-weight: var(--normal);
+        text-align: center;
+        white-space: initial;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        line-height: 130%;
+        transition: var(--main-transition);
+    }
+
+    .ItemListGrid > li > a:not(.Disabled).Active span.Description,
+    .ItemListGrid > li > a:not(.Disabled):hover span.Description {
+        color: var(--white);
+    }
+
+    .ItemListGrid > li > a:not(.Disabled).Active span.Information,
+    .ItemListGrid > li > a:not(.Disabled):hover span.Information {
+        color: var(--black);
+    }
+
 }
 
 /* **************** START RESPONSIVE COLS | Desktop & Wide **************** */

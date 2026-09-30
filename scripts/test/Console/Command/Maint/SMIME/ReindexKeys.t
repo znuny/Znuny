@@ -170,7 +170,7 @@ my @PublicCerts = $MainObject->DirectoryRead(
 $Self->Is(
     $PublicCerts[0],
     "$CertPath/9d993e95.0",
-    , "Rehash Pubic Certificate."
+    "Rehash Pubic Certificate."
 );
 
 my @CertificateList = $SMIMEObject->CertificateList();

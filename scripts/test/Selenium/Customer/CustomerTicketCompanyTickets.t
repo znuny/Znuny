@@ -303,7 +303,7 @@ $Selenium->RunTest(
         );
 
         $Selenium->WaitFor(
-            Time => 20,
+            Time       => 20,
             JavaScript =>
                 'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete'
         );

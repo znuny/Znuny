@@ -11,6 +11,7 @@ package Kernel::System::Ticket::Article::Backend::MIMEBase;
 
 use strict;
 use warnings;
+use utf8;
 
 use parent 'Kernel::System::Ticket::Article::Backend::Base';
 
@@ -19,6 +20,7 @@ use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::CommunicationChannel',
     'Kernel::System::DB',
     'Kernel::System::DateTime',
     'Kernel::System::HTMLUtils',
@@ -247,7 +249,15 @@ sub ArticleCreate {
     }
 
     # process html article
+    elsif ( $Param{MimeType} =~ /text\/plain/i ) {
+
+        # Delete illegal surrogates in Body
+        $Param{Body} =~ s/\p{Surrogate}//g;
+    }
     elsif ( $Param{MimeType} =~ /text\/html/i ) {
+
+        # Delete illegal surrogates in Body
+        $Param{Body} =~ s/\p{Surrogate}//g;
 
         # add html article as attachment
         my $Attach = {
@@ -299,15 +309,18 @@ sub ArticleCreate {
         $Param{OrigHeader}->{Body} = $Param{Body};
     }
 
-    # fix some bad stuff from some browsers (Opera)!
     else {
+        # Delete illegal surrogates in Body
+        $Param{Body} =~ s/\p{Surrogate}//g;
+
+        # Fix some bad stuff from some browsers (Opera)!
         $Param{Body} =~ s/(\n\r|\r\r\n|\r\n)/\n/g;
     }
 
     # strip not wanted stuff
     for my $Attribute (qw(From To Cc Bcc Subject MessageID InReplyTo References ReplyTo)) {
         if ( defined $Param{$Attribute} ) {
-            $Param{$Attribute} =~ s/\n|\r//g;
+            $Param{$Attribute} =~ s/[\p{Surrogate}\n\r]//g;
         }
         else {
             $Param{$Attribute} = '';
@@ -331,7 +344,6 @@ sub ArticleCreate {
     }
 
     # Generate unique fingerprint for searching created article in database to prevent race conditions
-    #   (see https://bugs.otrs.org/show_bug.cgi?id=12438).
     my $RandomString = $MainObject->GenerateRandomString(
         Length => 32,
     );
@@ -359,7 +371,6 @@ sub ArticleCreate {
     my $UserObject = $Kernel::OM->Get('Kernel::System::User');
 
     # Check if there are additional To's from InvolvedAgent and InformAgent.
-    #   See bug#13422 (https://bugs.otrs.org/show_bug.cgi?id=13422).
     if ( $Param{ForceNotificationToUserID} && ref $Param{ForceNotificationToUserID} eq 'ARRAY' ) {
         my $NewTo = '';
         USER:
@@ -397,8 +408,8 @@ sub ArticleCreate {
             \$ArticleID, \$Param{From}, \$Param{ReplyTo}, \$Param{To}, \$Param{Cc}, \$Param{Bcc},
             \$Param{Subject},
             \$ArticleInsertFingerprint,    # just for next search; will be updated with correct MessageID
-            \$Param{MD5}, \$Param{InReplyTo}, \$Param{References}, \$Param{ContentType},
-            \$Param{Body}, \$IncomingTime, \$ArticleContentPath, \$Param{UserID}, \$Param{UserID},
+            \$Param{MD5},  \$Param{InReplyTo}, \$Param{References},  \$Param{ContentType},
+            \$Param{Body}, \$IncomingTime,     \$ArticleContentPath, \$Param{UserID}, \$Param{UserID},
         ],
     );
 
@@ -424,7 +435,7 @@ sub ArticleCreate {
     if ( !$ArticleDataID ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message =>
+            Message  =>
                 "Can't store article data (TicketID=$Param{TicketID}, ArticleID=$ArticleID, MessageID=$Param{MessageID})!",
         );
         return;
@@ -505,7 +516,7 @@ sub ArticleCreate {
             );
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'notice',
-                Message =>
+                Message  =>
                     "Ticket [$OldTicketData{TicketNumber}] unlocked, current owner is out of office!",
             );
         }
@@ -635,7 +646,7 @@ sub ArticleCreate {
     if (
         $FirstArticle &&
         $Param{HistoryType}
-        =~ /^(EmailAgent|EmailCustomer|PhoneCallCustomer|WebRequestCustomer|SystemRequest)$/i
+        =~ /^(AddNote|EmailAgent|EmailCustomer|PhoneCallAgent|PhoneCallCustomer|WebRequestCustomer|SystemRequest)$/i
         )
     {
         # trigger notification event
@@ -713,27 +724,29 @@ Returns single article data.
 Returns:
 
     %Article = (
-        TicketID             => 123,
-        ArticleID            => 123,
-        From                 => 'Some Agent <email@example.com>',
-        To                   => 'Some Customer A <customer-a@example.com>',
-        Cc                   => 'Some Customer B <customer-b@example.com>',
-        Bcc                  => 'Some Customer C <customer-c@example.com>',
-        ReplyTo              => 'Some Customer B <customer-b@example.com>',
-        Subject              => 'some short description',
-        MessageID            => '<asdasdasd.123@example.com>',
-        InReplyTo            => '<asdasdasd.12@example.com>',
-        References           => '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
-        ContentType          => 'text/plain; charset=ISO-8859-15',
-        Body                 => 'the message text',
-        SenderTypeID         => 1,
-        SenderType           => 'agent',
-        IsVisibleForCustomer => 1,
-        IncomingTime         => 1490690026,
-        CreateBy             => 1,
-        CreateTime           => '2017-03-28 08:33:47',
-        Charset              => 'ISO-8859-15',
-        MimeType             => 'text/plain',
+        TicketID               => 123,
+        ArticleID              => 123,
+        From                   => 'Some Agent <email@example.com>',
+        To                     => 'Some Customer A <customer-a@example.com>',
+        Cc                     => 'Some Customer B <customer-b@example.com>',
+        Bcc                    => 'Some Customer C <customer-c@example.com>',
+        ReplyTo                => 'Some Customer B <customer-b@example.com>',
+        Subject                => 'some short description',
+        MessageID              => '<asdasdasd.123@example.com>',
+        InReplyTo              => '<asdasdasd.12@example.com>',
+        References             => '<asdasdasd.1@example.com> <asdasdasd.12@example.com>',
+        ContentType            => 'text/plain; charset=ISO-8859-15',
+        Body                   => 'the message text',
+        SenderTypeID           => 1,
+        SenderType             => 'agent',
+        CommunicationChannelID => 3,
+        CommunicationChannel   => 'Internal',
+        IsVisibleForCustomer   => 1,
+        IncomingTime           => 1490690026,
+        CreateBy               => 1,
+        CreateTime             => '2017-03-28 08:33:47',
+        Charset                => 'ISO-8859-15',
+        MimeType               => 'text/plain',
 
         # If DynamicFields => 1 was passed, you'll get an entry like this for each dynamic field:
         DynamicField_X => 'value_x',
@@ -769,6 +782,13 @@ sub ArticleGet {
 
     my %ArticleSenderTypeList = $Kernel::OM->Get('Kernel::System::Ticket::Article')->ArticleSenderTypeList();
 
+    my %CommunicationChannel;
+    if ( $Article{CommunicationChannelID} ) {
+        %CommunicationChannel = $Kernel::OM->Get('Kernel::System::CommunicationChannel')->ChannelGet(
+            ChannelID => $Article{CommunicationChannelID},
+        );
+    }
+
     # Email parser object might be used below for its field cleanup methods only.
     my $EmailParser;
     if ( $Param{RealNames} ) {
@@ -798,19 +818,20 @@ sub ArticleGet {
     while ( my @Row = $DBObject->FetchrowArray() ) {
         %Data = (
             %Article,
-            From         => $Row[0],
-            ReplyTo      => $Row[1],
-            To           => $Row[2],
-            Cc           => $Row[3],
-            Bcc          => $Row[4],
-            Subject      => $Row[5],
-            MessageID    => $Row[6],
-            InReplyTo    => $Row[7],
-            References   => $Row[8],
-            ContentType  => $Row[9],
-            Body         => $Row[10],
-            IncomingTime => $Row[11],
-            SenderType   => $ArticleSenderTypeList{ $Article{SenderTypeID} },
+            From                 => $Row[0],
+            ReplyTo              => $Row[1],
+            To                   => $Row[2],
+            Cc                   => $Row[3],
+            Bcc                  => $Row[4],
+            Subject              => $Row[5],
+            MessageID            => $Row[6],
+            InReplyTo            => $Row[7],
+            References           => $Row[8],
+            ContentType          => $Row[9],
+            Body                 => $Row[10],
+            IncomingTime         => $Row[11],
+            SenderType           => $ArticleSenderTypeList{ $Article{SenderTypeID} },
+            CommunicationChannel => $CommunicationChannel{ChannelName},
         );
 
         # Determine charset.
@@ -1079,13 +1100,13 @@ Get plain article/email from storage. This is a delegate method from active back
 Returns:
 
     $PlainMessage = '
-        From: OTRS Feedback <marketing@otrs.com>
-        To: Your OTRS System <otrs@localhost>
-        Subject: Welcome to OTRS!
+        From: Znuny Feedback <marketing@znuny.com>
+        To: Your Znuny System <znuny@localhost>
+        Subject: Welcome to Znuny!
         Content-Type: text/plain; charset=utf-8
         Content-Transfer-Encoding: 8bit
 
-        Welcome to OTRS!
+        Welcome to Znuny!
         # ...
     ';
 
@@ -1450,7 +1471,7 @@ sub ArticleSearchableContentGet {
         $ArticleSearchData{$FieldKey} = {
             String     => $IndexString,
             Key        => $BackendSearchableFields{$FieldKey}->{Key},
-            Type       => $BackendSearchableFields{$FieldKey}->{Type} // 'Text',
+            Type       => $BackendSearchableFields{$FieldKey}->{Type}       // 'Text',
             Filterable => $BackendSearchableFields{$FieldKey}->{Filterable} // 0,
         };
     }

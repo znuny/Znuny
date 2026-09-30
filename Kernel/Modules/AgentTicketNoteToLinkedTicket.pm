@@ -15,7 +15,7 @@ use utf8;
 
 use Kernel::System::EmailParser;
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -295,6 +295,13 @@ sub Run {
                 # Show lock state.
                 $LayoutObject->Block(
                     Name => 'PropertiesLock',
+                    Data => {
+                        %Param,
+                        TicketID => $Self->{TicketID},
+                    },
+                );
+                $LayoutObject->Block(
+                    Name => 'PropertiesLockNotify',
                     Data => {
                         %Param,
                         TicketID => $Self->{TicketID},
@@ -785,7 +792,7 @@ sub Run {
                     DynamicFieldConfig   => $DynamicFieldConfig,
                     PossibleValuesFilter => $PossibleValuesFilter,
                     ParamObject          => $ParamObject,
-                    Mandatory =>
+                    Mandatory            =>
                         $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
                 );
 
@@ -812,7 +819,7 @@ sub Run {
                 my $DynamicFieldHTML = $DynamicFieldBackendObject->EditFieldRender(
                     DynamicFieldConfig   => $DynamicFieldConfig,
                     PossibleValuesFilter => $PossibleValuesFilter,
-                    ServerError          => $ValidationResult->{ServerError} || '',
+                    ServerError          => $ValidationResult->{ServerError}  || '',
                     ErrorMessage         => $ValidationResult->{ErrorMessage} || '',
                     Mandatory            => $Config->{DynamicField}->{ $DynamicFieldConfig->{Name} } == 2,
                     LayoutObject         => $LayoutObject,
@@ -849,7 +856,7 @@ sub Run {
                 my $DynamicFieldHTML = $DynamicFieldBackendObject->EditFieldRender(
                     DynamicFieldConfig   => $DynamicFieldConfig,
                     PossibleValuesFilter => $PossibleValuesFilter,
-                    ServerError          => $ValidationResult->{ServerError} || '',
+                    ServerError          => $ValidationResult->{ServerError}  || '',
                     ErrorMessage         => $ValidationResult->{ErrorMessage} || '',
                     Mandatory            => ( $Class eq 'Validate_Required' ) ? 1 : 0,
                     Class                => $Class,
@@ -1469,7 +1476,7 @@ sub Run {
                     );
 
                     if ( $LayoutObject->{BrowserRichText} ) {
-                        $TemplateText = $TemplateText . '<br><br>' . $Body;
+                        $TemplateText = $TemplateText . '<p></p><p></p>' . $Body;
                     }
                     else {
                         $TemplateText = $TemplateText . "\n\n" . $Body;
@@ -1930,13 +1937,13 @@ sub _Mask {
     if (
         ( $ConfigObject->Get('Ticket::Type') && $Config->{TicketType} )
         ||
-        ( $ConfigObject->Get('Ticket::Service')     && $Config->{Service} )     ||
+        ( $ConfigObject->Get('Ticket::Service') && $Config->{Service} )         ||
         ( $ConfigObject->Get('Ticket::Responsible') && $Config->{Responsible} ) ||
-        $Config->{Title}    ||
-        $Config->{Queue}    ||
-        $Config->{Owner}    ||
-        $Config->{State}    ||
-        $Config->{Priority} ||
+        $Config->{Title}                                                        ||
+        $Config->{Queue}                                                        ||
+        $Config->{Owner}                                                        ||
+        $Config->{State}                                                        ||
+        $Config->{Priority}                                                     ||
         scalar @{ $Param{TicketTypeDynamicFields} } > 0
         )
     {
@@ -2393,7 +2400,7 @@ sub _Mask {
     # Widget Article
     if ( $Config->{Note} ) {
 
-        $Param{WidgetStatus} = 'Collapsed';
+        $Param{CardStatus} = 'Collapsed';
 
         if (
             $Config->{NoteMandatory}
@@ -2402,7 +2409,7 @@ sub _Mask {
             || $Param{CreateArticle}
             )
         {
-            $Param{WidgetStatus} = 'Expanded';
+            $Param{CardStatus} = 'Expanded';
         }
 
         if (
@@ -2426,6 +2433,8 @@ sub _Mask {
             $Param{IsVisibleForCustomer} = $Config->{IsVisibleForCustomerDefault};
         }
 
+        my $PreviewContentTypes = $ConfigObject->Get('Attachment')->{PreviewContentTypes} || {};
+
         # show attachments
         ATTACHMENT:
         for my $Attachment ( @{ $Param{Attachments} } ) {
@@ -2437,6 +2446,12 @@ sub _Mask {
                 )
             {
                 next ATTACHMENT;
+            }
+
+            # Add preview flag if content type is in the preview content types list.
+            # This is used to determine if the attachment can be previewed in the UI.
+            if ( $Attachment->{ContentType} && $PreviewContentTypes->{ $Attachment->{ContentType} } ) {
+                $Attachment->{Preview} = 1;
             }
 
             push @{ $Param{AttachmentList} }, $Attachment;
@@ -3084,17 +3099,17 @@ sub _GetQuotedReplyBody {
 
             }
             else {
-                $Param{Body} = "<br/>" . $Param{Body};
+                $Param{Body} = "<p></p>\n" . $Param{Body};
 
                 if ( $Param{CreateTime} ) {
-                    $Param{Body} = $LayoutObject->{LanguageObject}->Translate('Date') .
-                        ": $Param{CreateTime}<br/>" . $Param{Body};
+                    $Param{Body} = '<p>' . $LayoutObject->{LanguageObject}->Translate('Date') .
+                        ": $Param{CreateTime}</p>" . $Param{Body};
                 }
 
                 for my $Key (qw(Subject ReplyTo Reply-To Cc To From)) {
                     if ( $Param{$Key} ) {
-                        $Param{Body} = $LayoutObject->{LanguageObject}->Translate($Key) .
-                            ": $Param{$Key}<br/>" . $Param{Body};
+                        $Param{Body} = '<p>' . $LayoutObject->{LanguageObject}->Translate($Key) .
+                            ": $Param{$Key}</p>" . $Param{Body};
                     }
                 }
 
@@ -3105,8 +3120,8 @@ sub _GetQuotedReplyBody {
                 my $MessageFrom = $LayoutObject->{LanguageObject}->Translate('Message from');
                 my $EndMessage  = $LayoutObject->{LanguageObject}->Translate('End message');
 
-                $Param{Body} = "<br/>---- $MessageFrom $From ---<br/><br/>" . $Param{Body};
-                $Param{Body} .= "<br/>---- $EndMessage ---<br/>";
+                $Param{Body} = "<p>---- $MessageFrom $From ---</p><p></p>" . $Param{Body};
+                $Param{Body} .= "\n<p>---- $EndMessage ---</p>";
             }
         }
     }

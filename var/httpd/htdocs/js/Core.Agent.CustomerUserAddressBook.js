@@ -131,7 +131,8 @@ Core.Agent.CustomerUserAddressBook = (function (TargetNS) {
         $('#SearchProfileAddBlock').hide();
 
         // hide save changes in template block
-        $('#SaveProfile').parent().hide().prev().hide().prev().hide();
+        // $('#SaveProfile').parent().hide().prev().hide().prev().hide();
+        $('.SaveProfileContainer').hide();
 
         // search profile is selected
         if ($('#SearchProfile').val() && $('#SearchProfile').val() !== 'last-search') {
@@ -140,7 +141,8 @@ Core.Agent.CustomerUserAddressBook = (function (TargetNS) {
             $('#SearchProfileDelete').show();
 
             // show save changes in template block
-            $('#SaveProfile').parent().show().prev().show().prev().show();
+            // $('#SaveProfile').parent().show().prev().show().prev().show();
+            $('.SaveProfileContainer').show();
 
             // set SaveProfile to 0
             $('#SaveProfile').prop('checked', false);
@@ -240,8 +242,8 @@ Core.Agent.CustomerUserAddressBook = (function (TargetNS) {
                 return false;
             }
             else {
-               $('#SearchForm').submit();
-               ShowWaitingLoader('.ContentColumn');
+                $('#SearchForm').submit();
+                ShowWaitingLoader('.ContentColumn');
             }
         });
 

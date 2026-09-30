@@ -40,8 +40,8 @@ sub Run {
     if ( !$Self->{Subaction} ) {
 
         # get needed params
-        my $Search = $ParamObject->GetParam( Param => 'Term' )   || '';
-        my $Groups = $ParamObject->GetParam( Param => 'Groups' ) || '';
+        my $Search     = $ParamObject->GetParam( Param => 'Term' )   || '';
+        my $Groups     = $ParamObject->GetParam( Param => 'Groups' ) || '';
         my $MaxResults = int( $ParamObject->GetParam( Param => 'MaxResults' ) || 20 );
 
         # get all members of the groups

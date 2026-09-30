@@ -42,16 +42,6 @@ sub new {
         $Self->{LogFile} .= ".$Y-$M";
     }
 
-    # Fixed bug# 2265 - For IIS we need to create a own error log file.
-    # Bind stderr to log file, because iis do print stderr to web page.
-    if ( $ENV{SERVER_SOFTWARE} && $ENV{SERVER_SOFTWARE} =~ /^microsoft\-iis/i ) {
-        ## no critic
-        if ( !open STDERR, '>>', $Self->{LogFile} . '.error' ) {
-            ## use critic
-            print STDERR "ERROR: Can't write $Self->{LogFile}.error: $!";
-        }
-    }
-
     return $Self;
 }
 

@@ -201,6 +201,89 @@ for my $Test (@Tests) {
     }
 }
 
+# _ReplaceTicketAttributes: attachment handling for <OTRS_FIRST_ARTICLE_Body>/<OTRS_LAST_ARTICLE_Body>.
+# Only attachments actually referenced inline in the article body (e.g. embedded images) must be
+# copied automatically. Regular file attachments must only be added via
+# Attachments/AttachmentIDs/AttachmentsReuse in TicketCreate.pm/TicketArticleCreate.pm.
+$HelperObject->ConfigSettingChange(
+    Valid => 1,
+    Key   => 'Frontend::RichText',
+    Value => 1,
+);
+
+my $AttachmentArticleID = $HelperObject->ArticleCreate(
+    TicketID => $TicketID,
+);
+
+my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+    ChannelName => 'Internal',
+);
+
+$ArticleBackendObject->ArticleWriteAttachment(
+    Content     => 'inline image content',
+    ContentType => 'image/png',
+    Filename    => 'inline' . $RandomID . '.png',
+    Disposition => 'inline',
+    ContentID   => '<inline' . $RandomID . '>',
+    ArticleID   => $AttachmentArticleID,
+    UserID      => 1,
+);
+
+$ArticleBackendObject->ArticleWriteAttachment(
+    Content     => 'regular file content',
+    ContentType => 'application/pdf',
+    Filename    => 'regular' . $RandomID . '.pdf',
+    Disposition => 'attachment',
+    ArticleID   => $AttachmentArticleID,
+    UserID      => 1,
+);
+
+my %AttachmentTicket = $TicketObject->TicketGet(
+    TicketID      => $TicketID,
+    DynamicFields => 1,
+    UserID        => 1,
+);
+
+# ContentType/Attachment are only resolved by _ReplaceTicketAttributes() when the call stack (as
+# seen by caller()) runs through one of Base.pm's IsArticleBodyCaller whitelist modules - not
+# based on which class the method is called on. To keep this a focused unit test of
+# _ReplaceTicketAttributes() itself (instead of a full TicketCreate->Run() integration test with
+# unrelated side effects like the new article's own auto-generated HTML body attachment), install
+# a throwaway sub into TicketCreate's namespace so caller() sees a legitimate whitelisted frame.
+my $AttachmentTicketCreateObject
+    = $Kernel::OM->Get('Kernel::System::ProcessManagement::TransitionAction::TicketCreate');
+
+# a fully qualified sub declaration (not an anonymous sub assigned via typeglob, whose name for
+# caller() purposes would be ambiguous) so it is unambiguously registered under this name
+sub Kernel::System::ProcessManagement::TransitionAction::TicketCreate::UnitTestReplaceTicketAttributes {
+    my ( $UnitTestSelf, %Param ) = @_;
+    return $UnitTestSelf->_ReplaceTicketAttributes(%Param);
+}
+
+my %AttachmentTestConfig = (
+    UserID => 1,
+    Body   => 'Text <OTRS_FIRST_ARTICLE_Body> Text',
+);
+
+my $AttachmentTestSuccess = $AttachmentTicketCreateObject->UnitTestReplaceTicketAttributes(
+    UserID => 1,
+    Ticket => \%AttachmentTicket,
+    Config => \%AttachmentTestConfig,
+);
+
+$Self->True(
+    $AttachmentTestSuccess,
+    '_ReplaceTicketAttributes: attachment handling - call successful',
+);
+
+my @CopiedAttachmentFilenames = sort map { $_->{Filename} } @{ $AttachmentTestConfig{Attachment} || [] };
+
+$Self->IsDeeply(
+    \@CopiedAttachmentFilenames,
+    [ 'inline' . $RandomID . '.png' ],
+    '_ReplaceTicketAttributes: only inline attachments are copied automatically via <OTRS_FIRST_ARTICLE_Body>, regular file attachments are not',
+);
+
 # _ReplaceAdditionalAttributes
 # <OTRS_OWNER_*>
 # <OTRS_CURRENT_*>

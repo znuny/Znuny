@@ -132,11 +132,7 @@ my @MappingTests = (
         Name   => 'Test array as data',
         Config => {
             Template => qq{<?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0"
- xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
- xmlns:otrs="http://otrs.org"
- extension-element-prefixes="otrs">
-<xsl:import href="$Home/Kernel/GenericInterface/Mapping/OTRSFunctions.xsl" />
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:output method="xml" encoding="utf-8" indent="yes"/>
 <xsl:template match="/RootElement">
 <NewRootElement>
@@ -204,7 +200,74 @@ my @MappingTests = (
     },
 
     {
-        Name   => 'Test replacement with custom functions',
+        Name   => 'Test replacement with custom functions (znuny)',
+        Config => {
+            Template => qq{<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0"
+ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:znuny="http://znuny.org"
+ extension-element-prefixes="znuny">
+<xsl:import href="$Home/Kernel/GenericInterface/Mapping/ZnunyFunctions.xsl" />
+<xsl:output method="xml" encoding="utf-8" indent="yes"/>
+<xsl:template match="/RootElement">
+<NewRootElement>
+    <xsl:for-each select="/RootElement/Structure1/Array1">
+    <FirstLevelArray>
+        <xsl:text>Amended</xsl:text>
+        <xsl:value-of select="." />
+    </FirstLevelArray>
+    </xsl:for-each>
+    <NewStructure>
+        <DateFromISO>
+            <xsl:variable name="dateiso" select="/RootElement/DateISO" />
+            <xsl:value-of select="znuny:date-iso-to-xsd(\$dateiso)" />
+        </DateFromISO>
+        <DateToISO>
+            <xsl:variable name="datexsd" select="/RootElement/DateXSD" />
+            <xsl:value-of select="znuny:date-xsd-to-iso(\$datexsd)" />
+        </DateToISO>
+        <NewKey1>
+            <xsl:value-of select="/RootElement/Key1" />
+        </NewKey1>
+        <NewKey2>
+            <xsl:value-of select="/RootElement/Structure1/Key2" />
+        </NewKey2>
+    </NewStructure>
+</NewRootElement>
+</xsl:template>
+</xsl:stylesheet>},
+        },
+        Data => {
+            DateISO    => '2010-12-31 23:58:59',
+            DateXSD    => '2011-11-30T22:57:58Z',
+            Key1       => 'Value1',
+            Structure1 => {
+                Array1 => [
+                    'ArrayPart1',
+                    'ArrayPart2',
+                    'ArrayPart3',
+                ],
+                Key2 => 'Value2',
+            },
+        },
+        ResultData => {
+            FirstLevelArray => [
+                'AmendedArrayPart1',
+                'AmendedArrayPart2',
+                'AmendedArrayPart3',
+            ],
+            NewStructure => {
+                DateFromISO => '2010-12-31T23:58:59Z',
+                DateToISO   => '2011-11-30 22:57:58',
+                NewKey1     => 'Value1',
+                NewKey2     => 'Value2',
+            },
+        },
+        ResultSuccess => 1,
+        ConfigSuccess => 1,
+    },
+    {
+        Name   => 'Test replacement with custom functions (legacy otrs)',
         Config => {
             Template => qq{<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0"
@@ -278,11 +341,7 @@ my @MappingTests = (
                 'RequesterResponseMapOutput',
             ],
             Template => qq{<?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0"
- xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
- xmlns:otrs="http://otrs.org"
- extension-element-prefixes="otrs">
-<xsl:import href="$Home/Kernel/GenericInterface/Mapping/OTRSFunctions.xsl" />
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:output method="xml" encoding="utf-8" indent="yes"/>
 <xsl:template match="/RootElement">
 <NewRootElement>

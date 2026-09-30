@@ -47,7 +47,6 @@ sub Run {
     if ($Action) {
         return if !$ConfigObject->Get('Frontend::Module')->{$Action};
     }
-
     my $ProcessList = $ProcessObject->ProcessList(
         ProcessState => ['Active'],
         Interface    => ['AgentInterface'],

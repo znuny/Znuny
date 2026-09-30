@@ -740,6 +740,70 @@ END;
 --
 ;
 BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE sendmail_config ADD CONSTRAINT FK_sendmail_config_oauth2_tob4 FOREIGN KEY (oauth2_token_config_id) REFERENCES oauth2_token_config (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_sendmail_config_oauth2_to6f ON sendmail_config (oauth2_token_config_id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE sendmail_config ADD CONSTRAINT FK_sendmail_config_create_by34 FOREIGN KEY (create_by) REFERENCES users (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_sendmail_config_create_by ON sendmail_config (create_by)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE sendmail_config ADD CONSTRAINT FK_sendmail_config_change_by28 FOREIGN KEY (change_by) REFERENCES users (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_sendmail_config_change_by ON sendmail_config (change_by)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE sendmail_config ADD CONSTRAINT FK_sendmail_config_valid_id_id FOREIGN KEY (valid_id) REFERENCES valid (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_sendmail_config_valid_id ON sendmail_config (valid_id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
     EXECUTE IMMEDIATE 'ALTER TABLE system_address ADD CONSTRAINT FK_system_address_create_by_id FOREIGN KEY (create_by) REFERENCES users (id)';
 EXCEPTION
   WHEN OTHERS THEN NULL;
@@ -1789,6 +1853,86 @@ END;
 ;
 BEGIN
     EXECUTE IMMEDIATE 'CREATE INDEX FK_ticket_lock_index_ticket_id ON ticket_lock_index (ticket_id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE translation ADD CONSTRAINT FK_translation_create_by_id FOREIGN KEY (create_by) REFERENCES users (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_translation_create_by ON translation (create_by)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE translation ADD CONSTRAINT FK_translation_change_by_id FOREIGN KEY (change_by) REFERENCES users (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_translation_change_by ON translation (change_by)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE translation ADD CONSTRAINT FK_translation_valid_id_id FOREIGN KEY (valid_id) REFERENCES valid (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_translation_valid_id ON translation (valid_id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE article_color ADD CONSTRAINT FK_article_color_create_by_id FOREIGN KEY (create_by) REFERENCES users (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_article_color_create_by ON article_color (create_by)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE article_color ADD CONSTRAINT FK_article_color_change_by_id FOREIGN KEY (change_by) REFERENCES users (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_article_color_change_by ON article_color (change_by)';
 EXCEPTION
   WHEN OTHERS THEN NULL;
 END;
@@ -3581,6 +3725,22 @@ END;
 ;
 BEGIN
     EXECUTE IMMEDIATE 'CREATE INDEX FK_pm_process_change_by ON pm_process (change_by)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE pm_process_preferences ADD CONSTRAINT FK_pm_process_preferences_pr19 FOREIGN KEY (process_entity_id) REFERENCES pm_process (entity_id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_pm_process_preferences_prdf ON pm_process_preferences (process_entity_id)';
 EXCEPTION
   WHEN OTHERS THEN NULL;
 END;

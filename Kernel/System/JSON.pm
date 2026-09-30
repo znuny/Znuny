@@ -13,7 +13,6 @@ use strict;
 use warnings;
 
 # on PerlEx JSON::XS causes problems so force JSON::PP as backend
-# see http://bugs.otrs.org/show_bug.cgi?id=7337
 BEGIN {
     if ( $ENV{GATEWAY_INTERFACE} && $ENV{GATEWAY_INTERFACE} =~ m{\A CGI-PerlEx}xmsi ) {
         $ENV{PERL_JSON_BACKEND} = 'JSON::PP';    ## no critic
@@ -192,7 +191,9 @@ sub False {
 
 =begin Internal:
 
-=cut
+Private functions used by this package (not part of the documented public API).
+
+=end Internal:
 
 =head2 _BooleansProcess()
 
@@ -236,8 +237,6 @@ sub _BooleansProcess {
 }
 
 1;
-
-=end Internal:
 
 =head1 TERMS AND CONDITIONS
 

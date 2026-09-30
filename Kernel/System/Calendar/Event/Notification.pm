@@ -232,8 +232,8 @@ sub Run {
                 }
 
                 my $Success = $Self->_SendRecipientNotification(
-                    AppointmentID => $Appointment{AppointmentID} || '',
-                    CalendarID    => $Calendar{CalendarID}       || $Appointment{CalendarID} || '',
+                    AppointmentID         => $Appointment{AppointmentID} || '',
+                    CalendarID            => $Calendar{CalendarID} || $Appointment{CalendarID} || '',
                     Notification          => $Bundle->{Notification},
                     CustomerMessageParams => $Param{Data}->{CustomerMessageParams} || {},
                     Recipient             => $Bundle->{Recipient},
@@ -268,8 +268,8 @@ sub Run {
                 );
 
                 my $Success = $Self->_SendRecipientNotification(
-                    AppointmentID => $Appointment{AppointmentID} || '',
-                    CalendarID    => $Calendar{CalendarID}       || $Appointment{CalendarID} || '',
+                    AppointmentID         => $Appointment{AppointmentID} || '',
+                    CalendarID            => $Calendar{CalendarID} || $Appointment{CalendarID} || '',
                     Notification          => \%ReplacedNotification,
                     CustomerMessageParams => $Param{Data}->{CustomerMessageParams} || {},
                     Recipient             => $Recipient,

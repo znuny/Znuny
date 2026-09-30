@@ -79,7 +79,7 @@ my @Tests = (
             Search     => "ValueType=",
             SearchType => 'Metadata',
         },
-        ExpectedResultsInclude => [],
+        ExpectedResultsInclude => [qw(SupportDataCollector::SkipMaskPasswordSettings)],
         Success                => 1,
     },
     {
@@ -284,7 +284,7 @@ my @Tests = (
             SearchType => 'XMLContent',
             Valid      => 1,
         },
-        ExpectedResultsInclude => [qw()],
+        ExpectedResultsInclude    => [qw()],
         ExpectedResultsNotInclude =>
             [qw(Ticket::WatcherGroup Ticket::NumberGenerator Daemon::Log::STDERR AdminEmail )],
         Success => 1,

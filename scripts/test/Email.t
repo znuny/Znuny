@@ -82,8 +82,8 @@ my @Tests = (
     {
         Name => 'utf8 - de',
         Data => {
-            From => '"Fritz Müller" <fritz@example.com>',
-            To   => '"Hans Kölner" <friend@example.com>',
+            From    => '"Fritz Müller" <fritz@example.com>',
+            To      => '"Hans Kölner" <friend@example.com>',
             Subject =>
                 'This is a text with öäüßöäüß to check for problems äöüÄÖüßüöä!',
             Body     => "Some Body\nwith\n\nöäüßüüäöäüß1öää?ÖÄPÜ",
@@ -94,8 +94,8 @@ my @Tests = (
     {
         Name => 'utf8 - ru',
         Data => {
-            From => '"Служба поддержки (support)" <me@example.com>',
-            To   => 'friend@example.com',
+            From    => '"Служба поддержки (support)" <me@example.com>',
+            To      => 'friend@example.com',
             Subject =>
                 'это специальныйсабжект для теста системы тикетов',
             Body     => "Some Body\nlala",

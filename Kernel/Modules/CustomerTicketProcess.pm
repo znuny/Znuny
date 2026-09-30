@@ -12,9 +12,10 @@ package Kernel::Modules::CustomerTicketProcess;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -1188,6 +1189,7 @@ sub _GetParam {
     $GetParam{ResponsibleAll} = $ParamObject->GetParam( Param => 'ResponsibleAll' );
     $GetParam{OwnerAll}       = $ParamObject->GetParam( Param => 'OwnerAll' );
     $GetParam{ElementChanged} = $ParamObject->GetParam( Param => 'ElementChanged' );
+    $GetParam{LinkTarget}     = $ParamObject->GetParam( Param => 'LinkTarget' );
 
     return \%GetParam;
 }
@@ -1473,6 +1475,11 @@ sub _OutputActivityDialog {
         }
     }
 
+    my $Process = $ProcessObject->ProcessGet(
+        ProcessEntityID => $Param{ProcessEntityID},
+        Preferences     => 0,
+    );
+
     $Output .= $LayoutObject->Output(
         TemplateFile => 'ProcessManagement/CustomerActivityDialogHeader',
         Data         => {
@@ -1491,6 +1498,7 @@ sub _OutputActivityDialog {
                 },
             IsMainWindow => $Self->{IsMainWindow},
             MainBoxClass => $MainBoxClass || '',
+            LinkTarget   => $Process->{LinkTarget},
         },
     );
 
@@ -1543,8 +1551,8 @@ sub _OutputActivityDialog {
                 FieldName           => $DynamicFieldName,
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
-                Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Ticket              => \%Ticket       || {},
+                Error               => \%Error        || {},
                 ErrorMessage        => \%ErrorMessage || {},
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
@@ -1585,7 +1593,7 @@ sub _OutputActivityDialog {
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
                 Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Error               => \%Error  || {},
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -1621,7 +1629,7 @@ sub _OutputActivityDialog {
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
                 Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Error               => \%Error  || {},
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -1657,7 +1665,7 @@ sub _OutputActivityDialog {
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
                 Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Error               => \%Error  || {},
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -1693,7 +1701,7 @@ sub _OutputActivityDialog {
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
                 Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Error               => \%Error  || {},
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -1729,7 +1737,7 @@ sub _OutputActivityDialog {
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
                 Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Error               => \%Error  || {},
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -1764,7 +1772,7 @@ sub _OutputActivityDialog {
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
                 Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Error               => \%Error  || {},
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
             );
@@ -1801,7 +1809,7 @@ sub _OutputActivityDialog {
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
                 Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Error               => \%Error  || {},
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 InformAgents        => $ActivityDialog->{Fields}->{Article}->{Config}->{InformAgents},
@@ -1840,7 +1848,7 @@ sub _OutputActivityDialog {
                 DescriptionShort    => $ActivityDialog->{Fields}{$CurrentField}{DescriptionShort},
                 DescriptionLong     => $ActivityDialog->{Fields}{$CurrentField}{DescriptionLong},
                 Ticket              => \%Ticket || {},
-                Error               => \%Error || {},
+                Error               => \%Error  || {},
                 FormID              => $Self->{FormID},
                 GetParam            => $Param{GetParam},
                 AJAXUpdatableFields => $AJAXUpdatableFields,
@@ -2230,7 +2238,7 @@ sub _RenderArticle {
         MandatoryClass   => '',
         ValidateRequired => '',
         Subject          => $Param{GetParam}->{Subject} || $Param{ActivityDialogField}->{Config}->{Subject},
-        Body             => $Param{GetParam}->{Body} || $Param{ActivityDialogField}->{Config}->{Body},
+        Body             => $Param{GetParam}->{Body}    || $Param{ActivityDialogField}->{Config}->{Body},
         LabelSubject     => $Param{ActivityDialogField}->{Config}->{LabelSubject}
             || $LayoutObject->{LanguageObject}->Translate("Subject"),
         LabelBody => $Param{ActivityDialogField}->{Config}->{LabelBody}
@@ -2445,7 +2453,7 @@ sub _RenderCustomer {
     if ( IsHashRefWithData( \%CustomerUserData ) ) {
         $Data{CustomerUserID}       = "\"$CustomerUserData{UserFullname}" . "\" <$CustomerUserData{UserEmail}>";
         $Data{CustomerID}           = $CustomerUserData{UserCustomerID} || '';
-        $Data{SelectedCustomerUser} = $CustomerUserData{UserID} || '';
+        $Data{SelectedCustomerUser} = $CustomerUserData{UserID}         || '';
     }
 
     # set fields that will get an AJAX loader icon when this field changes
@@ -3387,7 +3395,8 @@ sub _RenderType {
 sub _StoreActivityDialog {
     my ( $Self, %Param ) = @_;
 
-    my $TicketID = $Param{GetParam}->{TicketID};
+    my $TicketID   = $Param{GetParam}->{TicketID};
+    my $LinkTarget = $Param{GetParam}->{LinkTarget} || '';
     my $ProcessStartpoint;
     my %Ticket;
     my $ProcessEntityID;
@@ -3945,7 +3954,11 @@ sub _StoreActivityDialog {
                     $HistoryType = 'FollowUp';
                 }
 
-                my $From = "$Self->{UserFullname} <$Self->{UserEmail}>";
+                my $FullName = $Kernel::OM->Get('Kernel::System::CustomerUser')->CustomerName(
+                    UserLogin => $Self->{UserLogin},
+                );
+                my $From = "\"$FullName\" <$Self->{UserEmail}>";
+
                 $ArticleID = $ArticleBackendObject->ArticleCreate(
                     TicketID             => $TicketID,
                     SenderType           => 'customer',
@@ -4168,13 +4181,18 @@ sub _StoreActivityDialog {
     if ($UpdateTicketID) {
 
         # load new URL in parent window and close popup
-        return $LayoutObject->PopupClose(
+        return $LayoutObject->CustomerPopupClose(
             URL => "Action=CustomerTicketZoom;TicketID=$UpdateTicketID",
         );
     }
 
+    my $URL = "Action=CustomerTicketZoom;TicketID=$TicketID";
+
+    return $LayoutObject->CustomerPopupClose(
+        URL => $URL,
+    ) if ( $LinkTarget eq 'AsPopup' );
     return $LayoutObject->Redirect(
-        OP => "Action=CustomerTicketZoom;TicketID=$TicketID",
+        OP => $URL,
     );
 }
 

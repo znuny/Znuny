@@ -584,7 +584,7 @@ my @Tests        = (
                 SenderTypeID                    => 1,
                 IsVisibleForCustomer            => 1,
                 CommunicationChannel            => 'Email',
-                From                            => 'enjoy@otrs.com',
+                From                            => 'enjoy@znuny.com',
                 ContentType                     => 'text/plain; charset=UTF8',
                 HistoryType                     => 'NewTicket',
                 HistoryComment                  => '% % ',

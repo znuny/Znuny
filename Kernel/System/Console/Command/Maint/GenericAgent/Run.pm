@@ -28,7 +28,7 @@ sub Configure {
 
     $Self->Description('Run all generic agent jobs from a configuration file.');
     $Self->AddOption(
-        Name => 'configuration-module',
+        Name        => 'configuration-module',
         Description =>
             "Specify the name of the generic agent configuration module (e.g. 'Kernel::System::GenericAgent')",
         Required   => 1,
@@ -50,13 +50,13 @@ sub Configure {
     );
     $Self->AddOption(
         Name        => 'debug',
-        Description => "Print debug info to the OTRS log.",
+        Description => "Print debug info to the Znuny log.",
         Required    => 0,
         HasValue    => 0,
     );
 
     $Self->AdditionalHelp(
-        "This script only runs file based generic agent jobs, database based jobs are handled by the OTRS Daemon."
+        "This script only runs file based generic agent jobs, database based jobs are handled by the Znuny Daemon."
     );
     return;
 }

@@ -28,9 +28,9 @@ use lib dirname($RealBin);
 use lib dirname($RealBin) . '/Kernel/cpan-lib';
 use lib dirname($RealBin) . '/Custom';
 
-use File::Path qw();
+use File::Path  qw();
 use Time::HiRes qw(sleep);
-use Fcntl qw(:flock);
+use Fcntl       qw(:flock);
 
 use Kernel::System::ObjectManager;
 
@@ -58,23 +58,25 @@ local $Kernel::OM = Kernel::System::ObjectManager->new(
     },
 );
 
-# Don't allow to run these scripts as root.
-if ( $> == 0 ) {    # $EFFECTIVE_USER_ID
+# get config object
+my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+my $ApplicationUser = $Kernel::OM->Get('Kernel::System::Util')->ApplicationUserGet();
+my $CurrentUser     = getpwuid($>) || $>;                                               ## no critic
+
+# Don't allow to run these scripts as another user than the application user.
+if ( $CurrentUser ne $ApplicationUser ) {
     print STDERR
-        "Error: You cannot run znuny.Daemon.pl as root. Please run it as the 'znuny' user or with the help of su:\n";
-    print STDERR "  su -c \"bin/znuny.Daemon.pl ...\" -s /bin/bash znuny\n";
+        "Error: You cannot run znuny.Daemon.pl as user $CurrentUser. Please run it as user $ApplicationUser or with the help of su:\n";
+    print STDERR "  su -c \"bin/znuny.Daemon.pl ...\" -s /bin/bash $ApplicationUser\n";
     exit 1;
 }
-
-# get config object
-my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
 # get the NodeID from the SysConfig settings, this is used on High Availability systems.
 my $NodeID = $ConfigObject->Get('NodeID') || 1;
 
-# check NodeID, if does not match its impossible to continue
-if ( $NodeID !~ m{ \A \d+ \z }xms && $NodeID > 0 && $NodeID < 1000 ) {
-    print STDERR "NodeID '$NodeID' is invalid. Change the NodeID to a number between 1 and 999.";
+# check NodeID, if it does not match, it's impossible to continue
+if ( $NodeID !~ m{\A[1-9]\d{0,2}\z} ) {
+    print STDERR "NodeID '$NodeID' is invalid. Change it to a number between 1 and 999.";
     exit 1;
 }
 
@@ -101,9 +103,9 @@ if ( !@ARGV ) {
 }
 
 my $Action     = lc shift @ARGV;
-my $Debug      = ( grep { lc $_ eq '--debug' } @ARGV ) ? 1 : 0;
+my $Debug      = ( grep { lc $_ eq '--debug' } @ARGV )      ? 1 : 0;
 my $Foreground = ( grep { lc $_ eq '--foreground' } @ARGV ) ? 1 : 0;
-my $ForceStop  = ( grep { lc $_ eq '--force' } @ARGV ) ? 1 : 0;
+my $ForceStop  = ( grep { lc $_ eq '--force' } @ARGV )      ? 1 : 0;
 
 # Remove options: --debug, --foreground, --force so that only daemon names are left
 my @Daemons = grep { lc $_ !~ m{\A--(?:debug|foreground|force)\z} } @ARGV;
@@ -160,10 +162,10 @@ sub PrintUsage {
         'Reduce the time the main daemon waits other daemons to stop.' . "\n";
     $UsageText .= sprintf " %-22s - %s", '[--foreground]', 'Run the daemon in foreground.' . "\n";
     $UsageText .= "\nActions:\n";
-    $UsageText .= sprintf " %-22s - %s", 'start',          'Start the daemon process.' . "\n";
-    $UsageText .= sprintf " %-22s - %s", 'stop',           'Stop the daemon process.' . "\n";
-    $UsageText .= sprintf " %-22s - %s", 'status',         'Show daemon process current state.' . "\n";
-    $UsageText .= sprintf " %-22s - %s", 'help',           'Display help for this command.' . "\n";
+    $UsageText .= sprintf " %-22s - %s", 'start',  'Start the daemon process.' . "\n";
+    $UsageText .= sprintf " %-22s - %s", 'stop',   'Stop the daemon process.' . "\n";
+    $UsageText .= sprintf " %-22s - %s", 'status', 'Show daemon process current state.' . "\n";
+    $UsageText .= sprintf " %-22s - %s", 'help',   'Display help for this command.' . "\n";
     $UsageText .= "\nHelp:\n";
     $UsageText
         .= "In debug mode if a daemon module is specified the debug mode will be activated only for that daemon.\n";
@@ -344,7 +346,7 @@ sub Start {
     # Remove current log files without content.
     _LogFilesCleanup();
 
-    return 0;
+    return 1;
 }
 
 sub Stop {
@@ -506,6 +508,12 @@ sub _LogFilesSet {
 
     # get log rotation type and backup old logs if logs should be rotated by Znuny
     my $RotationType = lc $ConfigObject->Get('Daemon::Log::RotationType') || 'znuny';
+
+    # if rotation type is OTRS, set to Znuny
+    if ( $RotationType eq 'otrs' ) {
+        $RotationType = 'znuny';
+    }
+
     if ( $RotationType eq 'znuny' ) {
         use File::Copy qw(move);
         if ( -e "$FileStdOut.log" ) {
@@ -563,6 +571,12 @@ sub _LogFilesCleanup {
 
     # skip cleanup if Znuny log rotation is not enabled
     my $RotationType = lc $Kernel::OM->Get('Kernel::Config')->Get('Daemon::Log::RotationType') || 'znuny';
+
+    # if rotation type is OTRS, set to Znuny
+    if ( $RotationType eq 'otrs' ) {
+        $RotationType = 'znuny';
+    }
+
     return 1 if $RotationType ne 'znuny';
 
     my @LogFiles = glob "$LogDir/*.log";

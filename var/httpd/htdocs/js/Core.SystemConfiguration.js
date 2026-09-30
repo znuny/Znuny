@@ -20,7 +20,7 @@ var Core = Core || {};
  * @description
  *      This namespace contains the special functions for SystemConfiguration module.
  */
- Core.SystemConfiguration = (function (TargetNS) {
+Core.SystemConfiguration = (function (TargetNS) {
 
     var ValueTypes = new Array();
 
@@ -338,7 +338,11 @@ var Core = Core || {};
             var FullName = $(this).attr('id'),
                 Value,
                 $Container,
-                ValueType;
+                ValueType,
+                SuffixMatch,
+                Suffix,
+                BasePart,
+                LastHashIndex;
 
             if($(this).hasClass("hasDatepicker")) {
                 return;
@@ -419,11 +423,26 @@ var Core = Core || {};
             }
 
             if($(this).parent().parent().hasClass("HashItem")) {
-                // update key name
+                // Rebuild FullName (element id) so ValueSet() maps the value to the correct hash key.
+                // Field ids use "_Hash###" as the structural delimiter before the key; the key itself may
+                // also contain "###" (e.g. Ticket::Frontend::OverviewSmall###DynamicField). Do not use
+                // lastIndexOf("###") here — that would split inside the key and duplicate it on every save.
+
                 Key = $(this).parent().parent().find(".Key").val();
 
-                FullName = FullName.substr(0, FullName.lastIndexOf("###"));
-                FullName += "###" + Key;
+                if (ValueType === "Date" || ValueType === "DateTime") {
+                    FullName = FullName.replace(/(Day|Month|Year|Hour|Minute)$/, '');
+                }
+
+                // Strip structural suffix (_Array0, _Hash), same rules as CheckIDs().
+                SuffixMatch = FullName.match(/(_Array\d*|_Hash|$)$/);
+                Suffix = SuffixMatch ? SuffixMatch[0] : '';
+                BasePart = FullName.substring(0, FullName.length - Suffix.length);
+                LastHashIndex = BasePart.lastIndexOf('_Hash###');
+
+                if (LastHashIndex >= 0) {
+                    FullName = BasePart.substring(0, LastHashIndex + '_Hash###'.length) + Key + Suffix;
+                }
             }
 
             Data[SettingName] = ValueSet(Data[SettingName], FullName, Value);
@@ -482,7 +501,7 @@ var Core = Core || {};
             URL,
             Value,
             function(Response) {
-                var LinkURL = 'Action=AdminSystemConfigurationDeployment;Subaction=Deployment';
+                var LinkURL = Core.Config.Get('Baselink') + 'Action=AdminSystemConfigurationDeployment;Subaction=Deployment';
 
                 TargetNS.CleanWidgetClasses($Widget);
                 TargetNS.SettingRender(Response, $Widget);
@@ -492,25 +511,28 @@ var Core = Core || {};
                         LinkURL += ';' + Core.Config.Get('SessionName') + '=' + Core.Config.Get('SessionID');
                     }
 
-                    Core.UI.ShowNotification(
-                        Core.Language.Translate('You have undeployed settings, would you like to deploy them?'),
-                        'Notice',
-                        LinkURL,
+                    if (!$('#QuickDeployNotification').length) {
+                        Core.UI.ShowNotificationTemplate(
+                            {
+                                ID: 'QuickDeployNotification',
+                                Template: 'SysConfig/DirtyCheck',
+                                Type: 'Notice',
+                                Icon: 'fa-bell',
+                                Link: LinkURL,
+                            }
+                        );
+                    }
+
+                }
+                else if (Response.Data.DeploymentNeeded == 0) {
+
+                    Core.UI.HideNotification(
+                        undefined,
+                        undefined,
                         function() {
                             Core.UI.InitStickyElement();
                         },
-                        undefined,
-                        'fa-bell'
-                    );
-                    Core.UI.InitMessageBoxClose();
-                }
-                else if (Response.Data.DeploymentNeeded == 0) {
-                    Core.UI.HideNotification(
-                        Core.Language.Translate('You have undeployed settings, would you like to deploy them?'),
-                        'Notice',
-                        function() {
-                            Core.UI.InitStickyElement();
-                        }
+                        'QuickDeployNotification'
                     );
                 }
 
@@ -1082,7 +1104,7 @@ var Core = Core || {};
             Core.Config.Get('Baselink'),
             Data,
             function(Response) {
-                var LinkURL = 'Action=AdminSystemConfigurationDeployment;Subaction=Deployment';
+                var LinkURL = Core.Config.Get('Baselink') + 'Action=AdminSystemConfigurationDeployment;Subaction=Deployment';
 
                 TargetNS.SettingRender(Response, $Widget);
                 TargetNS.CleanWidgetClasses($Widget);
@@ -1098,28 +1120,31 @@ var Core = Core || {};
 
                         // hide the "deployment" notification
                         Core.UI.HideNotification(
-                            Core.Language.Translate('You have undeployed settings, would you like to deploy them?'),
-                            'Notice',
+                            undefined,
+                            undefined,
                             function() {
                                 Core.UI.InitStickyElement();
-                            }
+                            },
+                            'QuickDeployNotification'
                         );
                     }
                     else {
                         if (Core.Config.Get('SessionUseCookie') === '0') {
                             LinkURL += ';' + Core.Config.Get('SessionName') + '=' + Core.Config.Get('SessionID');
                         }
-                        Core.UI.ShowNotification(
-                            Core.Language.Translate('You have undeployed settings, would you like to deploy them?'),
-                            'Notice',
-                            LinkURL,
-                            function() {
-                                Core.UI.InitStickyElement();
-                            },
-                            undefined,
-                            'fa-bell'
-                        );
-                        Core.UI.InitMessageBoxClose();
+
+                        if (!$('#QuickDeployNotification').length) {
+                            Core.UI.ShowNotificationTemplate(
+                                {
+                                    ID: 'QuickDeployNotification',
+                                    Template: 'SysConfig/DirtyCheck',
+                                    Type: 'Notice',
+                                    Icon: 'fa-bell',
+                                    Link: LinkURL,
+                                }
+                            );
+                        }
+
                     }
                 }
                 Core.App.Publish('SystemConfiguration.SettingListUpdate');

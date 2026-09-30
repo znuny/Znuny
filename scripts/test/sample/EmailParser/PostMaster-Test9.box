@@ -1,8 +1,8 @@
 Message-ID: 000000B9
 X-Mailer: Novell GroupWise Internet Agent 7.0.2 HP
 Date: Tue, 13 Nov 2007 09:04:10 +0100
-From: "Hans Huber" <hans@otrs.com>
-To: "OTRS" <skywalker@otrs.org>
+From: "Hans Huber" <hans@znuny.com>
+To: "OTRS" <skywalker@znuny.org>
 Subject: Some message with .pdf as only MIME attachment (without text for body)
 MIME-Version: 1.0
 Content-Type: multipart/mixed; boundary="=__Part2600556A.0__="

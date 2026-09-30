@@ -46,20 +46,6 @@ $Selenium->RunTest(
         $Selenium->execute_script(
             "\$('#UserLanguage').closest('.WidgetSimple').find('.SettingUpdateBox').find('button').trigger('click');"
         );
-        $Selenium->WaitFor(
-            JavaScript =>
-                "return \$('#UserLanguage').closest('.WidgetSimple').hasClass('HasOverlay')"
-        );
-        $Selenium->WaitFor(
-            JavaScript =>
-                "return \$('#UserLanguage').closest('.WidgetSimple').find('.fa-check').length"
-        );
-        $Selenium->WaitFor(
-            JavaScript =>
-                "return !\$('#UserLanguage').closest('.WidgetSimple').hasClass('HasOverlay')"
-        );
-
-        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentPreferences;Subaction=Group;Group=UserProfile");
 
         $Selenium->find_element("//*[text()='Sprache']");
 

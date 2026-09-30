@@ -3,7 +3,7 @@ Debugger:
   DebugThreshold: debug
   TestMode: 1
 Description: Connector to send and receive date from Nagios.
-FrameworkVersion: 3.1.x CVS
+FrameworkVersion: 7.2.x git
 Name: Nagios
 Provider:
   Operation:

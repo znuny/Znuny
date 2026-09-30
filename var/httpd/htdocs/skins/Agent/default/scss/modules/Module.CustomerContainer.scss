@@ -1,0 +1,92 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+.modCustomerContainer {
+  > .inner {
+    margin-top: 5px;
+
+    // override existing styles
+    .CustomerContainer, .CcCustomerContainer, .BccCustomerContainer, .CustomerTicketText {
+      all: unset;
+    }
+
+    .RemoveButton {
+      all: unset;
+    }
+
+
+    .customerContainerCustomer {
+      display: grid;
+      grid-template-columns: 25px 1fr 30px;
+      float: left;
+      padding: 5px;
+      border: var(--border-width) var(--border-solid) var(--border-color);
+      border-radius: 21px;
+      margin-right: 5px;
+      &.customerContainerCustomerActive {
+        border-color: #FF8A25;
+        background-color: rgba(#FF8A25, 0.2);
+        color: #171725;
+      }
+
+      &.customerContainerCustomerMail {
+        grid-template-columns: 1fr 30px;
+      }
+    }
+
+    .customerContainerCustomerRemove {
+      padding: 4px;
+      margin-left: 2px;
+      align-self: center;
+      text-align: center;
+      border-radius: 20px;
+      width: 18px;
+      height: 18px;
+      &:hover {
+        cursor: pointer;
+        background-color: var(--icon-hover-color-light);
+      }
+      img {
+        width: 12px;
+        height: auto;
+        margin-top: 2px;
+      }
+    }
+
+    .customerContainerCustomerActive {
+      .customerContainerCustomerRemove {
+        &:hover {
+          background-color: white;
+        }
+      }
+      .customerContainerCustomerName {
+        //font-weight: 600;
+        color: black;
+      }
+    }
+
+
+
+    .customerContainerCustomerName {
+      // reset old styles
+      all: unset;
+      align-self: center;
+      padding-left: 7px;
+      padding-right: 7px;
+    }
+    .customerContainerCustomerSelector {
+      justify-self: center;
+      align-self: center;
+    }
+
+    .customerContainerCustomerHidden {
+      display: none !important;
+    }
+
+  }
+}

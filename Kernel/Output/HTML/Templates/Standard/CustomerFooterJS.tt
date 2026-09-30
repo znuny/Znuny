@@ -8,11 +8,13 @@
 # --
 ## nofilter(TidyAll::Plugin::Znuny::TT::ScriptUsage)
 
-<script type="text/javascript">//<![CDATA[
-    "use strict";
+[% IF Data.JSConfig.RichTextSet %]
+    <script src="[% Config("Frontend::RichText::Path") _ "ckeditor-znuny.js" | html %]"></script>
+[% IF Data.JSConfig.IncludeRichTextTranslation %]
+    <script src="[% Config("Frontend::RichText::Path") _ "translations/" | html %][% Data.JSConfig.CKEUserLanguage | html %].umd.js"></script>
+[% END %]
+[% END %]
 
-    var CKEDITOR_BASEPATH = [% Config("Frontend::RichText::Path") | JSON %];
-//]]></script>
 [% RenderBlockStart("CommonJS") %]
 <script type="text/javascript" src="[% Config("Frontend::JavaScriptPath") | html %][% Data.JSDirectory | html %][% Data.Filename | html %]"></script>
 [% RenderBlockEnd("CommonJS") %]
@@ -62,6 +64,20 @@ Core.App.Ready(function () {
 });
 //]]></script>
 
+# start modular frontend application
+<script type="text/javascript">//<![CDATA[
+    var App = {};
+    jQuery(document).ready(function () {
+        if (typeof Env !== 'undefined' && Env.Application) {
+            App = new Env.Application(
+                {
+                    loadModules: false
+                });
+            App.run();
+        }
+    });
+//]]></script>
+
 <div id="AjaxErrorDialog">
     <div id="AjaxErrorDialogInner">
         <div class="NoConnection" style="display:none;">
@@ -83,6 +99,12 @@ Core.App.Ready(function () {
     </div>
 </div>
 
+<!-- Hide all screen-size indicators by default so that CheckScreenResolution()
+     falls back to the safe ScreenXL default when Core.Responsive.css has not
+     been applied yet (CSS race condition, mainly Chrome). The more-specific
+     #ResponsiveFooter .Visible-ScreenXX selectors in Core.Responsive.css
+     override this rule once the stylesheet is loaded. -->
+<style>#ResponsiveFooter > div { display: none; }</style>
 <div id="ResponsiveFooter">
     <div class="Visible-ScreenXL"></div>
     <div class="Visible-ScreenL"></div>

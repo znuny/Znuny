@@ -90,20 +90,26 @@ sub StateList {
 
 get State name or State EntityID
 
+EntityID:
+
     my $Name = $StateObject->StateLookup(
         EntityID => 'S1',
         UserID   => 123,
     );
 
-    Returns:
+Returns:
+
     $Name = 'Active';
+
+Name:
 
     my $EntityID = $StateObject->StateLookup(
         Name     => 'Active',
         UserID   => 123,
     );
 
-    Returns:
+Returns:
+
     $EntityID = 'S1';
 
 =cut

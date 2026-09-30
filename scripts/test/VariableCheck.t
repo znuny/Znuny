@@ -66,8 +66,8 @@ my @CommonVariables = (
 
 # test variables for numerical checks
 my @NumberVariables = (
-    Number1  => 1,
-    Number2  => 99,
+    Number1  =>  1,
+    Number2  =>  99,
     Number3  => -987654321,
     Number4  => '.00000001',
     Number5  => '-.9999999',

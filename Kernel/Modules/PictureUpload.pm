@@ -12,6 +12,8 @@ package Kernel::Modules::PictureUpload;
 use strict;
 use warnings;
 
+use Kernel::System::VariableCheck qw(:all);
+
 our $ObjectManagerDisabled = 1;
 
 sub new {
@@ -28,27 +30,23 @@ sub Run {
     my ( $Self, %Param ) = @_;
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $Charset      = $LayoutObject->{UserCharset};
 
     # get params
-    my $ParamObject     = $Kernel::OM->Get('Kernel::System::Web::Request');
-    my $FormID          = $ParamObject->GetParam( Param => 'FormID' );
-    my $CKEditorFuncNum = $ParamObject->GetParam( Param => 'CKEditorFuncNum' ) || 0;
-    my $ResponseType    = $ParamObject->GetParam( Param => 'responseType' ) // 'json';
+    my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $FormID       = $ParamObject->GetParam( Param => 'FormID' );
+    my $ResponseType = $ParamObject->GetParam( Param => 'responseType' ) // 'json';
+
+    my %Result;
 
     # return if no form id exists
     if ( !$FormID ) {
-        $LayoutObject->Block(
-            Name => 'ErrorNoFormID',
-            Data => {
-                CKEditorFuncNum => $CKEditorFuncNum,
-            },
-        );
-        return $LayoutObject->Attachment(
-            ContentType => 'text/html; charset=' . $Charset,
-            Content     => $LayoutObject->Output( TemplateFile => 'PictureUpload' ),
-            Type        => 'inline',
-            NoCache     => 1,
+        return $Self->_ReturnResponse(
+            ResponseType => $ResponseType,
+            Error        => {
+                Message   => 'Need FormID!',
+                Translate => 1,
+                Type      => 'ErrorNoFormID',
+            }
         );
     }
 
@@ -72,17 +70,13 @@ sub Run {
                 || substr( $Attachment->{ContentType}, 0, 6 ) ne 'image/'
                 )
             {
-                $LayoutObject->Block(
-                    Name => 'ErrorNoImageFile',
-                    Data => {
-                        CKEditorFuncNum => $CKEditorFuncNum,
-                    },
-                );
-                return $LayoutObject->Attachment(
-                    ContentType => 'text/html; charset=' . $Charset,
-                    Content     => $LayoutObject->Output( TemplateFile => 'PictureUpload' ),
-                    Type        => 'inline',
-                    NoCache     => 1,
+                return $Self->_ReturnResponse(
+                    ResponseType => $ResponseType,
+                    Error        => {
+                        Message   => 'The file is not an image that can be shown inline!',
+                        Translate => 1,
+                        Type      => 'ErrorNoImageFile',
+                    }
                 );
             }
 
@@ -117,36 +111,24 @@ sub Run {
     );
 
     # return error if no file is there
-    if ( !%File ) {
-        $LayoutObject->Block(
-            Name => 'ErrorNoFileFound',
-            Data => {
-                CKEditorFuncNum => $CKEditorFuncNum,
-            },
-        );
-        return $LayoutObject->Attachment(
-            ContentType => 'text/html; charset=' . $Charset,
-            Content     => $LayoutObject->Output( TemplateFile => 'PictureUpload' ),
-            Type        => 'inline',
-            NoCache     => 1,
-        );
-    }
+    return $Self->_ReturnResponse(
+        ResponseType => $ResponseType,
+        Error        => {
+            Message   => 'No file found!',
+            Translate => 1,
+            Type      => 'ErrorNoFileFound',
+        }
+    ) if !%File;
 
     # return error if file is not possible to show inline
-    if ( $File{Filename} !~ /\.(png|gif|jpg|jpeg|bmp)$/i || substr( $File{ContentType}, 0, 6 ) ne 'image/' ) {
-        $LayoutObject->Block(
-            Name => 'ErrorNoImageFile',
-            Data => {
-                CKEditorFuncNum => $CKEditorFuncNum,
-            },
-        );
-        return $LayoutObject->Attachment(
-            ContentType => 'text/html; charset=' . $Charset,
-            Content     => $LayoutObject->Output( TemplateFile => 'PictureUpload' ),
-            Type        => 'inline',
-            NoCache     => 1,
-        );
-    }
+    return $Self->_ReturnResponse(
+        ResponseType => $ResponseType,
+        Error        => {
+            Message   => 'The file is not an image that can be shown inline!',
+            Translate => 1,
+            Type      => 'ErrorNoImageFile',
+        }
+    ) if ( $File{Filename} !~ /\.(png|gif|jpg|jpeg|bmp)$/i || substr( $File{ContentType}, 0, 6 ) ne 'image/' );
 
     if ( $File{ContentType} =~ /xml/i ) {
 
@@ -221,35 +203,66 @@ sub Run {
     my $URL = $LayoutObject->{Baselink}
         . "Action=PictureUpload;FormID=$FormID;ContentID=$ContentIDNew$Session";
 
-    # if ResponseType is JSON, do not return template content but a JSON structure
+    return $Self->_ReturnResponse(
+        ResponseType => $ResponseType,
+        FileName     => $FilenameTmp,
+        Uploaded     => 1,
+        URL          => $URL,
+    );
+}
+
+sub _ReturnResponse {
+    my ( $Self, %Param ) = @_;
+
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ResponseType = $Param{ResponseType} // 'json';
+    my $Charset      = $LayoutObject->{UserCharset};
+
     if ( $ResponseType eq 'json' ) {
-        my %Result = (
-            fileName => $FilenameTmp,
-            uploaded => 1,
-            url      => $URL,
-        );
+        my %JSONData;
+
+        if ( IsHashRefWithData( $Param{Error} ) ) {
+            my $ErrorMessage = $Self->_ErrorMessage( Error => $Param{Error} );
+
+            $JSONData{error}->{message} = $ErrorMessage;
+            $JSONData{errortype} = $Param{Error}->{Type};
+        }
+        else {
+            %JSONData = (
+                fileName => $Param{FileName},
+                uploaded => $Param{Uploaded},
+                url      => $Param{URL},
+            );
+        }
 
         return $LayoutObject->Attachment(
             ContentType => 'application/json; charset=' . $Charset,
-            Content     => $LayoutObject->JSONEncode( Data => \%Result ),
+            Content     => $LayoutObject->JSONEncode( Data => \%JSONData ),
             Type        => 'inline',
             NoCache     => 1,
         );
     }
+    else {
+        return $LayoutObject->Attachment(
+            ContentType => 'text/html; charset=' . $Charset,
+            Content     => $LayoutObject->JSONEncode( Data => { Error => 'Response type is not supported!' } ),
+            Type        => 'inline',
+            NoCache     => 1,
+        );
+    }
+}
 
-    $LayoutObject->Block(
-        Name => 'Success',
-        Data => {
-            CKEditorFuncNum => $CKEditorFuncNum,
-            URL             => $URL,
-        },
-    );
-    return $LayoutObject->Attachment(
-        ContentType => 'text/html; charset=' . $Charset,
-        Content     => $LayoutObject->Output( TemplateFile => 'PictureUpload' ),
-        Type        => 'inline',
-        NoCache     => 1,
-    );
+sub _ErrorMessage {
+    my ( $Self, %Param ) = @_;
+
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ErrorMessage = $Param{Error}->{Message};
+
+    if ( $Param{Error}->{Translate} && $ErrorMessage ) {
+        $ErrorMessage = $LayoutObject->{LanguageObject}->Translate($ErrorMessage);
+    }
+
+    return $ErrorMessage;
 }
 
 1;

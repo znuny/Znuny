@@ -60,7 +60,7 @@ $OAuth2TokenConfigObject->DataImport(
 );
 
 my %TokenConfig = $OAuth2TokenConfigObject->DataGet(
-    Name   => 'Microsoft Outlook (example@outlook.com)',
+    Name   => 'Microsoft Outlook auth code flow (example@outlook.com)',
     UserID => $UserID,
 );
 my $TokenConfigID = $TokenConfig{ $OAuth2TokenConfigObject->{Identifier} };

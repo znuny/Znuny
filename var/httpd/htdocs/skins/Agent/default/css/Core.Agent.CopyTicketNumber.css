@@ -1,0 +1,119 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+/**
+ * @package     Skin "default"
+ * @section
+ */
+
+@media screen,projection,tv,handheld {
+
+    /* Copy Ticket Icon Container */
+    .CopyTicketIcon {
+        position: relative;
+        display: inline-block;
+        cursor: pointer;
+        z-index: 1001;
+        overflow: visible; /* ensure dropdown is not clipped */
+        padding: 5px;
+    }
+
+    .CopyTicketIcon i {
+        color: #666;
+        font-size: 14px;
+        transition: opacity 0.2s ease;
+    }
+
+    .CopyTicketIcon:hover i {
+        opacity: 0.8;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .CopyTicketMenu {
+        display: none;
+        position: absolute;
+        min-width: 140px;
+        z-index: 10050; /* keep above surrounding UI */
+        top: 100%;
+        left: 0;
+        white-space: nowrap;
+        font-size: 11px;
+        transition: var(--main-transition);
+        background: var(--menu-bg);
+        box-shadow: var(--menu-box-shadow);
+        padding: var(--padding-sm);
+        border: var(--border-width) var(--border-solid) var(--border-color);
+        border-radius: var(--border-radius-xs);
+    }
+
+    /* Create invisible bridge between icon and menu for easier navigation */
+    .CopyTicketMenu::before {
+        content: '';
+        position: absolute;
+        top: -20px;
+        left: 0;
+        right: 0;
+        height: 20px;
+        background: transparent;
+    }
+
+    /* Links inside the dropdown */
+    .CopyOption {
+        text-decoration: none;
+        cursor: pointer;
+        white-space: nowrap;
+        color: var(--main-font-color);
+        padding: var(--padding-sm);
+        display: block;
+        font-size: var(--font-size-sm);
+        font-weight: var(--medium);
+        text-transform: unset;
+        border-radius: var(--border-radius-xs);
+        transition: var(--main-transition);
+        width: 100%;
+    }
+
+    /* Add separator line between options (except after last one) */
+    .CopyOption:not(:last-child) {
+        border-bottom: 1px solid #e9ecef;
+        border-radius: 0;
+    }
+
+    /* Change color of dropdown links on hover */
+    .CopyOption:hover {
+        background-color: #e9ecef;
+        border-radius: var(--border-radius-xs);
+    }
+
+    /* Show the dropdown while hovering icon or menu */
+    .CopyTicketIcon:hover .CopyTicketMenu,
+    .CopyTicketMenu:hover {
+        display: block;
+    }
+
+    /* Success Message Styles */
+    .CopySuccessMessage {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 4px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        z-index: 10000;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    /* Position copy icon properly when placed before h1 */
+    .CopyTicketIcon {
+        flex-shrink: 0; /* Prevent icon from shrinking */
+    }
+
+}

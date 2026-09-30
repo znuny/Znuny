@@ -26,12 +26,12 @@ sub Data {
     # possible charsets
     $Self->{Charset} = ['utf-8'];
 
-    # date formats (%A=WeekDay;%B=LongMonth;%T=Time;%D=Day;%M=Month;%Y=Year;)
-    $Self->{DateFormat}          = '%M/%D/%Y %T';
-    $Self->{DateFormatLong}      = '%T - %M/%D/%Y';
-    $Self->{DateFormatShort}     = '%M/%D/%Y';
-    $Self->{DateInputFormat}     = '%M/%D/%Y';
-    $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
+    # date formats (%a=WeekDay;%b=LongMonth;%T=Time;%d=Day;%m=Month;%Y=Year;)
+    $Self->{DateFormat}          = '%m/%d/%Y %T';
+    $Self->{DateFormatLong}      = '%T - %m/%d/%Y';
+    $Self->{DateFormatShort}     = '%m/%d/%Y';
+    $Self->{DateInputFormat}     = '%m/%d/%Y';
+    $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
     $Self->{Separator}           = ',';
     $Self->{DecimalSeparator}    = '.';
     $Self->{ThousandSeparator}   = ',';

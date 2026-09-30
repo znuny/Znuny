@@ -630,12 +630,12 @@ sub FileDetails {
     my $File = $Param{File};
 
     my $Stat        = stat($File);
-    my $Changed     = $Stat ? $Stat->mtime() : '';
-    my $Created     = $Stat ? $Stat->ctime() : '';
-    my $Mode        = $Stat ? $Stat->mode() : '';
+    my $Changed     = $Stat ? $Stat->mtime()                    : '';
+    my $Created     = $Stat ? $Stat->ctime()                    : '';
+    my $Mode        = $Stat ? $Stat->mode()                     : '';
     my $Permissions = $Stat ? ( sprintf '%04o', $Mode & 07777 ) : '';    ## no critic
-    my $User        = $Stat ? getgrgid( $Stat->gid ) : '';               ## no critic
-    my $Group       = $Stat ? getpwuid( $Stat->uid ) : '';               ## no critic
+    my $User        = $Stat ? getgrgid( $Stat->gid )            : '';    ## no critic
+    my $Group       = $Stat ? getpwuid( $Stat->uid )            : '';    ## no critic
     my $FullPath    = $File;
     my $FileName    = $File;
 
@@ -782,8 +782,8 @@ sub FileDetailsExtended {
         # e.g. 6.4.2
         my $Version = $ConfigObject->Get('Version');
 
-        $Version =~ s{\.x\z}{}i;     # 6.4.x => 6.4 (latest)
-        $Version =~ s{\.}{_}smxg;    # 6.4.2 => 6_4_2
+        $Version =~ s{\.x\z}{}i;         # 6.4.x => 6.4 (latest)
+        $Version =~ s{\.}{_}smxg;        # 6.4.2 => 6_4_2
         $Version = 'rel-' . $Version;    # 6_4_2 => rel-6_4_2
 
         my $WebUserAgentObject = Kernel::System::WebUserAgent->new(

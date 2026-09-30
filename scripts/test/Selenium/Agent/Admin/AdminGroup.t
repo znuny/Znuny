@@ -227,11 +227,11 @@ $Selenium->RunTest(
 
         $Selenium->WaitFor(
             JavaScript =>
-                "return typeof(\$) === 'function' &&  \$('.MessageBox.Notice p:contains($Notification)').length"
+                "return typeof(\$) === 'function' &&  \$('.messageNotice .alertContent:contains($Notification)').length"
         );
 
         $Self->True(
-            $Selenium->execute_script("return \$('.MessageBox.Notice p:contains($Notification)').length"),
+            $Selenium->execute_script("return \$('.messageNotice .alertContent:contains($Notification)').length"),
             "$Notification - notification is found."
         );
 

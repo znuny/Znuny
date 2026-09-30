@@ -1,11 +1,11 @@
-From skywalker@otrs.org  Fri Dec 21 23:59:24 2001
-Return-Path: <skywalker@otrs.org>
+From skywalker@znuny.org  Fri Dec 21 23:59:24 2001
+Return-Path: <skywalker@znuny.org>
 Received: (from skywalker@localhost)
 	by avro.de (8.11.3/8.11.3/SuSE Linux 8.11.1-0.5) id f3MMSE303694
 	for martin@localhost; Fri, 21 Dec 2001 23:59:24 +0200
 Date: Fri, 21 Dec 2001 23:59:24 +0200
-From: Skywalker Attachment <skywalker@otrs.org>
-To: darthvader@otrs.org
+From: Skywalker Attachment <skywalker@znuny.org>
+To: darthvader@znuny.org
 Subject: OwnerIDTest
 Message-ID: <20011221002814.A3599@avro>
 Mime-Version: 1.0
@@ -24,7 +24,7 @@ Adios ...
   Little "Skywalker"
 
 --
-System Tester I - <skywalker@otrs.org>
+System Tester I - <skywalker@znuny.org>
 --
 Old programmers never die. They just branch to a new address.
 

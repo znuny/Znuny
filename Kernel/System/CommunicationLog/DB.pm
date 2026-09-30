@@ -960,8 +960,8 @@ sub ObjectLogDelete {
 
     for my $Item ( sort keys %SQL ) {
         return if !$ExecDeleteStmt->(
-            SQL  => $SQL{$Item}->{Stmt},
-            Bind => $SQL{$Item}->{Binds},
+            SQL          => $SQL{$Item}->{Stmt},
+            Bind         => $SQL{$Item}->{Binds},
             ErrorMessage =>
                 sprintf(
                 q{Error deleting communication log %s: %s},

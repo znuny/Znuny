@@ -25,8 +25,8 @@ my $CreateMailQueueElement = sub {
 
     my $MailQueueObject = $Kernel::OM->Get('Kernel::System::MailQueue');
     my %ElementData     = (
-        Sender    => 'mailqueue.test@otrs.com',
-        Recipient => 'mailqueue.test@otrs.com',
+        Sender    => 'mailqueue.test@znuny.com',
+        Recipient => 'mailqueue.test@znuny.com',
         Message   => {
             'Key1' => 'Value1',
             'Key2' => 'Value2',
@@ -83,7 +83,7 @@ $Self->False(
 
 # Pass an invalid Recipient address (array)
 $Result = $CreateMailQueueElement->(
-    Recipient => [ 'mailqueue.test@otrs.com', 'dummy' ],
+    Recipient => [ 'mailqueue.test@znuny.com', 'dummy' ],
 );
 $Self->False(
     $Result,
@@ -99,7 +99,7 @@ $Self->True(
 
 # ArrayRef recipient
 $Result = $CreateMailQueueElement->(
-    Recipient => [ 'mailqueue.test@otrs.com', 'mailqueue.test@otrs.com' ],
+    Recipient => [ 'mailqueue.test@znuny.com', 'mailqueue.test@znuny.com' ],
 );
 $Self->True(
     $Result,

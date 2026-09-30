@@ -426,7 +426,7 @@ form select {
     background-color: var(--white);
     -webkit-box-shadow: none;
     box-shadow: none;
-    /*margin: var(--margin-xs);*/ 
+    /*margin: var(--margin-xs);*/
     padding: var(--padding-xs) var(--padding-sm);
     font-size: var(--font-size-sm);
     color: var(--black);
@@ -536,38 +536,6 @@ form select:first-child {
     padding: 0;
     vertical-align: top;
     text-align: center;
-}
-
-/*.cke_top {
-    background-color: transparent !important;
-}*/
-
-.cke_toolbar_separator {
-    display: none !important;
-}
-
-a.cke_button:hover {
-    background-color: #E2E2EA !important;
-    border-radius: 5px !important ;
-    border: none !important;
-    padding: 4px 6px !important;
-    cursor: pointer;
-}
-
-.RichTextField #cke_RichText,
-.RichTextField #cke_Body,
-.RichTextField #cke_EmailBody,
-.RichTextField .cke {
-    width: 100% !important;
-    max-width: 99.7%; /* to avoid bug where border-right disappears in some containers*/
-    /*max-width: var(--main-field-size) !important;*/
-    border-radius: 10px !important;
-    border: var(--border-width) var(-border-solid) var(--border-color) !important;
-    overflow: hidden;
-}
-
-.cke_inner {
-    border-radius: 10px !important;
 }
 
 .jstree-InputField .jstree-ocl {
@@ -691,7 +659,7 @@ a.cke_button:hover {
     cursor: pointer;
 }
 
-.jstree-InputField .jstree-clicked, 
+.jstree-InputField .jstree-clicked,
 .jstree-InputField .jstree-anchor.jstree-clicked {
     color: var(--white);
 }
@@ -971,7 +939,7 @@ input[type=checkbox] {
     line-height: 16px;
     text-align: center;
     cursor: pointer;
-    border: var(--border-width) solid #ccc; 
+    border: var(--border-width) solid #ccc;
     background: transparent;
     border-radius: 3px;
     z-index: 100;
@@ -985,15 +953,15 @@ input[type=checkbox] + input[type=checkbox]{
 input[type=checkbox]:hover {
     border-color: var(--success-color);
 }
-  
+
 input[type=checkbox]:checked {
     background:var(--success-color);
-    border: 2px solid var(--success-color); 
+    border: 2px solid var(--success-color);
 }
 
 input[type=checkbox]:checked:disabled {
     background: var(--disabled);
-    border: 2px solid var(--disabled); 
+    border: 2px solid var(--disabled);
 }
 
 input[type=checkbox]:checked + label {
@@ -1046,7 +1014,7 @@ div.card-item .checkbox-container .Field {
 /******************************/
 /*        Radio Buttons       */
 input[type=radio]{
-    appearance: none; 
+    appearance: none;
     -webkit-appearance: none;
 }
 
@@ -1066,7 +1034,7 @@ input[type=radio].RadioRound:checked::after {
     border-right: 2px solid var(--success-color);
 }
 
-input[type="radio"], 
+input[type="radio"],
 input[type="radio"].RadioRound {
     -webkit-appearance: none;
     appearance: none;
@@ -1091,18 +1059,18 @@ input[type="radio"].RadioRound:checked {
     border: var(--border-width-md) var(--border-solid) var(--success-color);
 }
 
-input[type="radio"] + label, 
+input[type="radio"] + label,
 input[type="radio"].RadioRound + label {
     cursor: pointer;
 }
 
-input[type="radio"][disabled] + label, 
+input[type="radio"][disabled] + label,
 input[type="radio"][disabled].RadioRound + label {
     color: var(--disabled-text);
     cursor: default;
 }
 
-input[type="radio"][disabled], 
+input[type="radio"][disabled],
 input[type="radio"][disabled].RadioRound,
 input[type="radio"][disabled]:checked,
 input[type="radio"][disabled].RadioRound:checked {
@@ -1142,14 +1110,6 @@ input[type="radio"][disabled].RadioRound::before {
 
 /******************************/
 /*        Dynamic Field       */
-div.Row {
-    padding: 0;
-    display: flex;
-    flex-flow: column;
-    align-items: flex-start;
-    width: 100%;
-    gap: var(--padding-sm);
-}
 
 div.Row label,
 div.Row .Field {

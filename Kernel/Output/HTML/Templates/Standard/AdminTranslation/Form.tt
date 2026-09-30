@@ -1,0 +1,74 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+[% RenderBlockStart("Form") %]
+            <div class="Header">
+[% RenderBlockStart("HeaderAdd") %]
+                <h2>[% Translate("Add Translation") | html %]</h2>
+[% RenderBlockEnd("HeaderAdd") %]
+[% RenderBlockStart("HeaderUpdate") %]
+                <h2>[% Translate("Update Translation") | html %]</h2>
+[% RenderBlockEnd("HeaderUpdate") %]
+            </div>
+            <div class="Content">
+
+                <form action="[% Env("CGIHandle") %]" method="post" class="Validate PreventMultipleSubmits">
+                    <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                    <input type="hidden" name="Subaction" value="[% Data.Action | uri %]Action"/>
+                    <input type="hidden" name="ID" value="[% Data.ID | html %]"/>
+                    <fieldset class="TableLike">
+[% RenderBlockStart("Language") %]
+                        <label for="Language">[% Translate("Language") | html %]: </label>
+                        <div class="Field">
+                            [% Data.LanguageOption %]
+                        </div>
+[% RenderBlockEnd("Language") %]
+                        <label class="Mandatory" for="Source"><span class="Marker">*</span> [% Translate("Source") | html %]:</label>
+                        <div class="Field">
+                            <textarea name="Source" id="Source" class="Validate_MaxLength [% Data.SourceInvalid | html %]" rows="7" cols="60" data-maxlength="1000">[% Data.Source | html %]</textarea>
+                            <div id="SourceError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                            <div id="SourceServerError" class="TooltipErrorMessage">
+[% RenderBlockStart("SourceServerError") %]
+                                <p>[% Translate("This field is required.") | html %]</p>
+[% RenderBlockEnd("SourceServerError") %]
+[% RenderBlockStart("ExistSourceServerError") %]
+                                <p>[% Translate("An entry with this name already exists!") | html %]</p>
+[% RenderBlockEnd("SourceServerError") %]
+                            </div>
+                        </div>
+                        <label class="Mandatory" for="Destination"><span class="Marker">*</span> [% Translate("Destination") | html %]:</label>
+                        <div class="Field">
+                            <textarea name="Destination" id="Destination" class="Validate_MaxLength [% Data.DestinationInvalid | html %]" rows="7" cols="60" data-maxlength="1000">[% Data.Destination | html %]</textarea>
+                            <div id="DestinationError" class="TooltipErrorMessage">
+                                <p>[% Translate("This field is required.") | html %]</p>
+                            </div>
+                            <div id="DestinationServerError" class="TooltipErrorMessage">
+[% RenderBlockStart("DestinationServerError") %]
+                                <p>[% Translate("This field is required.") | html %]</p>
+[% RenderBlockEnd("DestinationServerError") %]
+[% RenderBlockStart("ExistDestinationServerError") %]
+                                <p>[% Translate("An entry with this name already exists!") | html %]</p>
+[% RenderBlockEnd("DestinationServerError") %]
+                            </div>
+                        </div>
+                        <label for="ValidID">[% Translate("Validity") | html %]: </label>
+                        <div class="Field">
+                            [% Data.ValidOption %]
+                        </div>
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-cancel-ghost btn-main btn-width-md">[% Translate("Cancel") | html %]</a>
+                                <button class="Primary CallForAction btn-primary btn-main  btn-width-md" type="submit" value="[% Translate("Submit") | html %]"><span>[% Translate("Submit") | html %]</span></button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+[% RenderBlockEnd("Form") %]

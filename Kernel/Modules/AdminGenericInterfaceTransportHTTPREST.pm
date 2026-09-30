@@ -14,7 +14,7 @@ use warnings;
 use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
 
@@ -779,8 +779,8 @@ sub _ShowEdit {
             for my $CurrentInvoker ( sort keys %{$Invokers} ) {
 
                 my $CommandStrg = $LayoutObject->BuildSelection(
-                    Data => \@PossibleRequestMethods,
-                    Name => 'Command' . $CurrentInvoker,
+                    Data          => \@PossibleRequestMethods,
+                    Name          => 'Command' . $CurrentInvoker,
                     SelectedValue =>
                         $TransportConfig->{InvokerControllerMapping}->{$CurrentInvoker}->{Command}
                         || '-',

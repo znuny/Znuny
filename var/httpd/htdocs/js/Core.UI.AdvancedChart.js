@@ -6,7 +6,7 @@
 // the enclosed file COPYING for license information (GPL). If you
 // did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 // --
-/*global d3, nv, canvg, StringView */
+/*global d3, nv, Canvg, StringView */
 
 "use strict";
 
@@ -27,6 +27,9 @@ Core.UI.AdvancedChart = (function (TargetNS) {
 
     // add dependencies to chart libs here (e.g. nvd3 etc.)
     if (!Core.Debug.CheckDependency('Core.UI.AdvancedChart', 'nv', 'nvd3')) {
+        return false;
+    }
+    if (!Core.Debug.CheckDependency('Core.UI.AdvancedChart', 'Canvg', 'canvg')) {
         return false;
     }
 
@@ -712,12 +715,23 @@ Core.UI.AdvancedChart = (function (TargetNS) {
                 break;
         }
 
-        $('#download-svg').on('click', function() {
+        $('#download-svg').off('click').on('click', function() {
             // window.btoa() does not work because it does not support Unicode DOM strings.
             this.href = TargetNS.ConvertSVGtoBase64($('#svg-container'));
         });
-        $('#download-png').on('click', function() {
-            this.href = TargetNS.ConvertSVGtoPNG($('#svg-container'));
+        $('#download-png').off('click').on('click', function(Event) {
+            var Link = this;
+            Event.preventDefault();
+            if (Link.getAttribute('data-download-pending') === '1') {
+                return false;
+            }
+            Link.setAttribute('data-download-pending', '1');
+            TargetNS.ConvertSVGtoPNG($('#svg-container')).then(function(DataUrl) {
+                TargetNS.TriggerDataUrlDownload(Link, DataUrl);
+            }).finally(function() {
+                Link.removeAttribute('data-download-pending');
+            });
+            return false;
         });
     };
 
@@ -767,23 +781,57 @@ Core.UI.AdvancedChart = (function (TargetNS) {
     }
 
     /**
+     * @name TriggerDataUrlDownload
+     * @memberof Core.UI.AdvancedChart
+     * @function
+     * @param {HTMLElement} LinkElement - Original link element (used for download filename).
+     * @param {String} DataUrl - Data URL to download.
+     * @description
+     *      Trigger file download via temporary anchor to avoid re-triggering click handlers.
+     */
+    TargetNS.TriggerDataUrlDownload = function(LinkElement, DataUrl) {
+        var TempLink = document.createElement('a');
+
+        TempLink.href = DataUrl;
+        if (LinkElement.download) {
+            TempLink.download = LinkElement.download;
+        }
+        TempLink.style.display = 'none';
+        document.body.appendChild(TempLink);
+        TempLink.click();
+        document.body.removeChild(TempLink);
+
+        return;
+    };
+
+    /**
      * @name ConvertSVGtoPNG
      * @memberof Core.UI.AdvancedChart
      * @function
      * @param {jQueryObject} $SVGContainer - The element containing the SVG element. There should be no other content.
-     * @return {String} - The base64 data URL containing the PNG data.
+     * @return {Promise} - Promise resolving to the base64 data URL containing the PNG data.
      * @description
      *      Convert an SVG element to a PNG data URL.
      */
     TargetNS.ConvertSVGtoPNG = function($SVGContainer) {
 
         var SVGContent = GetSVGContent($SVGContainer), // Canvg requires trimmed content
-            Height = $SVGContainer.css('height'),
-            Width = $SVGContainer.css('width'),
+            Height = parseInt($SVGContainer.css('height'), 10),
+            Width = parseInt($SVGContainer.css('width'), 10),
             $CanvasContainer,
             $Canvas,
             $Canvas2,
-            Canvas2Context;
+            Canvas,
+            Canvas2Context,
+            RenderOptions = {
+                ignoreMouse: true,
+                ignoreAnimation: true
+            };
+
+        if (!Height || !Width) {
+            Height = parseInt($SVGContainer.find('svg').attr('height'), 10) || 350;
+            Width = parseInt($SVGContainer.find('svg').attr('width'), 10) || 800;
+        }
 
         $Canvas = $('<canvas></canvas>').attr('height', Height).attr('width', Width);
         $Canvas2 = $('<canvas></canvas>').attr('height', Height).attr('width', Width);
@@ -793,22 +841,23 @@ Core.UI.AdvancedChart = (function (TargetNS) {
             .append($Canvas2)
             .appendTo('body');
 
+        Canvas = $Canvas.get(0);
+
         // First transfer the SVG content to the first canvas. This will be transparent.
-        canvg(
-            $Canvas.get(0),
-            SVGContent,
-            { ignoreMouse: true, ignoreAnimations: true }
-        );
-        $Canvas.get(0).svg.stop();
+        return Canvg.fromString(Canvas.getContext('2d'), SVGContent, RenderOptions)
+            .render(RenderOptions)
+            .then(function () {
+                // Now transfer content of first canvas to second canvas with white background.
+                Canvas2Context = $Canvas2.get(0).getContext('2d');
+                Canvas2Context.fillStyle = 'white';
+                Canvas2Context.fillRect(0, 0, Width, Height);
+                Canvas2Context.drawImage(Canvas, 0, 0);
 
-        // Now transfer content of first canvas to second canvas with white background.
-        Canvas2Context = $Canvas2.get(0).getContext('2d');
-        Canvas2Context.fillStyle = "white";
-        Canvas2Context.fillRect(0, 0, Width.replace('px', ''), Height.replace('px', ''));
-        Canvas2Context.drawImage($Canvas.get(0), 0, 0);
-
-        $CanvasContainer.remove();
-        return $Canvas2.get(0).toDataURL('image/png');
+                return $Canvas2.get(0).toDataURL('image/png');
+            })
+            .finally(function () {
+                $CanvasContainer.remove();
+            });
     };
 
     /**

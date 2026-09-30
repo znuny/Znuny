@@ -18,8 +18,8 @@ New files will be licensed using the AGPL Version 3. If you contribute code to t
   additional information section.
 -->
 
-<!--
 ## Type of change
+<!--
   What type of change does your PR introduce to Znuny?
   NOTE: Please add only one label with a starting '1 - ' to this PR!
   If your PR requires multiple labels to be applied, you'll most likely need to
