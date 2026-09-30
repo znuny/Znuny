@@ -82,9 +82,12 @@ sub Run {
     );
     my %DynamicFieldIDByName = reverse %{$DynamicFieldNameByID};
 
-    my %CustomerCompany = $CustomerCompanyObject->CustomerCompanyGet(
-        CustomerID => $Ticket{CustomerID},
-    );
+    my %CustomerCompany;
+    if ( IsStringWithData( $Ticket{CustomerID} ) ) {
+        %CustomerCompany = $CustomerCompanyObject->CustomerCompanyGet(
+            CustomerID => $Ticket{CustomerID},
+        );
+    }
 
     # also continue if there was no CustomerCompany data found - erase values
     # loop over the configured mapping of customer data variables to dynamic fields

@@ -385,7 +385,7 @@ $Selenium->RunTest(
         $HeaderText =~ s/\s+/ /g;
         $Self->Is(
             $HeaderText,
-            $LanguageObject->Translate('QueueView') . ": Delete",
+            $LanguageObject->Translate('Queue View') . ": Delete",
             "Title for filtered AgentTicketQueue screen is not translated.",
         );
 

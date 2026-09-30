@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2023-03-23 09:27+0000\n"
-"PO-Revision-Date: 2025-09-18 10:38+0000\n"
+"PO-Revision-Date: 2026-08-05 13:40+0000\n"
 "Last-Translator: BuilderNSV <nikitin.sergey.v@gmail.com>\n"
 "Language-Team: Russian <https://translations.znuny.org/projects/znuny/znuny/ru/>\n"
 "Language: ru\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.13\n"
+"X-Generator: Weblate 2026.7.1\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "Actions"
@@ -2786,15 +2786,15 @@ msgstr "Имя обычно используется для вызова опе�
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
 msgid "Invoker backend"
-msgstr "Invoker бэкэнд"
+msgstr "Модуль инициатора вызова (invoker)"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
 msgid "This Znuny invoker backend module will be called to prepare the data to be sent to the remote system, and to process its response data."
-msgstr "Этот модуль Znuny invoker будет вызываться для подготовки данных, отправляемых в удаленную систему и для обработки ответных данных."
+msgstr "Этот Znuny модуль инициатора вызова (invoker) будет вызываться как для подготовки данных, отправляемых в удаленную систему, так и для обработки ответных данных."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
 msgid "Mapping for outgoing request data"
-msgstr "Соответствие исходящему запросу данных"
+msgstr "Преобразование данных исходящего запроса"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
 msgid "Configure"
@@ -2802,7 +2802,7 @@ msgstr "Конфигурировать"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
 msgid "The data from the invoker of Znuny will be processed by this mapping, to transform it to the kind of data the remote system expects."
-msgstr "Данные полученные от инициатора вызова (invoker) Znuny будут преобразованы с использованием этого соответствия в ожидаемый удаленной стороной формат."
+msgstr "Данные, полученные от инициатора вызова (invoker) Znuny, будут преобразованы с использованием этого соответствия в ожидаемый удаленной стороной формат."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceInvokerDefault.tt
 msgid "Mapping for incoming response data"
@@ -3186,7 +3186,7 @@ msgstr "Этот модуль Znuny будет вызываться для об�
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceOperationDefault.tt
 msgid "Mapping for incoming request data"
-msgstr "Сопоставление для данных входящего запроса"
+msgstr "Преобразование данных входящего запроса"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceOperationDefault.tt
 msgid "The request data will be processed by this mapping, to transform it to the kind of data Znuny expects."
@@ -9978,7 +9978,7 @@ msgstr "Произошла ошибка при получении данный �
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "%s (copy) %s"
-msgstr "%s (копия) %s "
+msgstr "%s (копия) %s"
 
 #. Perl Module: Kernel/Modules/AdminACL.pm
 msgid "Please note that ACL restrictions will be ignored for the Superuser account (UserID 1)."
@@ -20960,7 +20960,7 @@ msgstr "Для поиска введите хотя бы одно слово."
 msgid "Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later."
 msgstr "К сожалению, сохранение в настоящий момент невозможно, возможно, это связано с тем, что другой агент уже работает с настройками. Попробуйте, пожалуйста, позже."
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.SystemConfiguration.js
+#. Perl Module: Kernel/Modules/AdminProcessManagement.pm
 msgid "Deploy"
 msgstr "Применить"
 

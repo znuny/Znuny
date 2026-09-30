@@ -438,6 +438,19 @@ sub Run {
 
                 $GetColumnFilter{ $ColumnName . $Name } = ['DeleteFilter'];
                 $GetColumnFilterSelect{$ColumnName} = ['DeleteFilter'];
+
+                # TicketGeneric only persists filter changes when ColumnFilter is non-empty.
+                if ( $ColumnName eq 'CustomerID' ) {
+                    $ColumnFilter{$ColumnName} = ['DeleteFilter'];
+                    $ColumnFilter{ $ColumnName . 'Raw' } = ['DeleteFilter'];
+                }
+                elsif ( $ColumnName eq 'CustomerUserID' ) {
+                    $ColumnFilter{CustomerUserLogin}    = ['DeleteFilter'];
+                    $ColumnFilter{CustomerUserLoginRaw} = ['DeleteFilter'];
+                }
+                else {
+                    $ColumnFilter{ $ColumnName . 'IDs' } = ['DeleteFilter'];
+                }
                 next COLUMNNAME;
             }
 
@@ -492,6 +505,11 @@ sub Run {
             if ($ClearFilter) {
                 $GetColumnFilter{ 'DynamicField_' . $DynamicFieldConfig->{Name} . $Name } = ['DeleteFilter'];
                 $GetColumnFilterSelect{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = ['DeleteFilter'];
+
+                # Keep ColumnFilter populated so dashboard preference cleanup runs.
+                $ColumnFilter{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = {
+                    Equals => 'DeleteFilter',
+                };
                 next DYNAMICFIELD;
             }
 

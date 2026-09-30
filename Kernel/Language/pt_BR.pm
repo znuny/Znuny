@@ -3991,6 +3991,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             'As Informações do Gerenciamento de Processo do banco de dados não estão sincronizadas com as configurações do sistema, por favor, sincronize todos os processos.',
+        'Deploy' => 'Implantar',
         'Need ExampleProcesses!' => 'Requer ExampleProcesses!',
         'Need ProcessID!' => 'Necessário ProcessID!',
         'Unknown Process %s!' => 'Processo Desconhecido %s!',
@@ -8488,7 +8489,6 @@ sub Data {
         'Please enter at least one search word to find anything.' => 'Por favor, digite ao menos uma palavra de pesquisa para encontrar algo.',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             'Infelizmente, implantação não é possível no momento possivelmente porque outro agente esta realizando uma implantação. Por favor, tente novamente mais tarde.',
-        'Deploy' => 'Implantar',
         'The deployment is already running.' => 'A implantação já está em execução.',
         'Deployment successful. You\'re being redirected...' => 'Implantação bem sucedida. Você está sendo redirecionado...',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

@@ -172,7 +172,7 @@ $Selenium->RunTest(
         }
 
         # Click on second page.
-        $Selenium->find_element("//a[contains(\@href, \'TicketID=$TicketID;ArticlePage=2')]")->VerifiedClick();
+        $Selenium->find_element( '#ArticlePagesPage2', 'css' )->VerifiedClick();
 
         # Wait for Asynchronous widget and article filter to load.
         $Selenium->WaitFor(
@@ -260,7 +260,7 @@ $Selenium->RunTest(
         # Click on first page.
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $(".ArticlePages a").length === 2;' );
         sleep 1;
-        $Selenium->find_element("//a[contains(\@href, \'TicketID=$TicketID;ArticlePage=1')]")->VerifiedClick();
+        $Selenium->find_element( '#ArticlePagesPage1', 'css' )->VerifiedClick();
 
         for my $Article (@SecondArticles) {
             $Self->True(
@@ -270,7 +270,7 @@ $Selenium->RunTest(
         }
 
         # Click on second page.
-        $Selenium->find_element("//a[contains(\@href, \'TicketID=$TicketID;ArticlePage=2')]")->VerifiedClick();
+        $Selenium->find_element( '#ArticlePagesPage2', 'css' )->VerifiedClick();
 
         for my $Article (@FirstArticles) {
             $Self->True(

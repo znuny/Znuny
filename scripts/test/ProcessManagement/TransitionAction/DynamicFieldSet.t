@@ -494,6 +494,110 @@ $Self->Is(
     "DynamicField $DFName3 value is correctly set."
 );
 
+# Regression test: <OTRS_FIRST_ARTICLE_Body>/<OTRS_LAST_ARTICLE_Body> tags used in a
+# DynamicFieldSet config value used to leak Attachment/ContentType keys into $Param{Config},
+# which made DynamicFieldSet::Run() treat them as (missing) dynamic field names and fail
+my $ArticleBodyContent = 'ArticleTagRegressionTest' . $RandomID;
+
+$HelperObject->ArticleCreate(
+    TicketID => $TicketID,
+    Body     => $ArticleBodyContent,
+);
+
+%Ticket = $TicketObject->TicketGet(
+    TicketID      => $TicketID,
+    DynamicFields => 1,
+    UserID        => 1,
+);
+
+my $DynamicFieldSetArticleTagResult = $TransitionActionObject->Run(
+    UserID                   => 1,
+    Ticket                   => \%Ticket,
+    ProcessEntityID          => 'P1',
+    ActivityEntityID         => 'A1',
+    TransitionEntityID       => 'T1',
+    TransitionActionEntityID => 'TA1',
+    Config                   => {
+        $DFName3 => '<OTRS_FIRST_ARTICLE_Body>',
+    },
+);
+
+$Self->True(
+    $DynamicFieldSetArticleTagResult,
+    "$ModuleName Run() with <OTRS_FIRST_ARTICLE_Body> in a DynamicField value does not fail "
+        . '(Attachment/ContentType must not leak into Config as if they were dynamic field names)',
+);
+
+%Ticket = $TicketObject->TicketGet(
+    TicketID      => $TicketID,
+    DynamicFields => 1,
+    UserID        => 1,
+);
+
+$Self->True(
+    ( index( $Ticket{ 'DynamicField_' . $DFName3 } // '', $ArticleBodyContent ) > -1 ) ? 1 : 0,
+    "$ModuleName - DynamicField $DFName3 contains the resolved <OTRS_FIRST_ARTICLE_Body> content",
+);
+
+# Regression test: same as above, but with a dynamic field literally named 'Body'. Relying only
+# on the config attribute name (instead of also checking which transition action module is
+# calling) would still leak Attachment/ContentType into Config in this case and break
+# DynamicFieldSet::Run(), since 'Attachment' sorts before 'Body' and would be looked up first.
+my $BodyDynamicFieldID = $DynamicFieldObject->DynamicFieldAdd(
+    Name       => 'Body',
+    Label      => 'Body',
+    FieldType  => 'Text',
+    ObjectType => 'Ticket',
+    Config     => {
+        DefaultValue => '',
+    },
+    FieldOrder => 99999,
+    ValidID    => 1,
+    UserID     => 1,
+);
+
+$Self->True(
+    $BodyDynamicFieldID,
+    "DynamicFieldAdd() - DynamicField literally named 'Body' for $ModuleName regression test",
+);
+
+push @AddedDynamicFields, $BodyDynamicFieldID;
+
+%Ticket = $TicketObject->TicketGet(
+    TicketID      => $TicketID,
+    DynamicFields => 1,
+    UserID        => 1,
+);
+
+my $DynamicFieldSetBodyNamedFieldResult = $TransitionActionObject->Run(
+    UserID                   => 1,
+    Ticket                   => \%Ticket,
+    ProcessEntityID          => 'P1',
+    ActivityEntityID         => 'A1',
+    TransitionEntityID       => 'T1',
+    TransitionActionEntityID => 'TA1',
+    Config                   => {
+        Body => '<OTRS_FIRST_ARTICLE_Body>',
+    },
+);
+
+$Self->True(
+    $DynamicFieldSetBodyNamedFieldResult,
+    "$ModuleName Run() with a dynamic field literally named 'Body' does not fail "
+        . '(Attachment/ContentType must not leak in just because the config key is named Body)',
+);
+
+%Ticket = $TicketObject->TicketGet(
+    TicketID      => $TicketID,
+    DynamicFields => 1,
+    UserID        => 1,
+);
+
+$Self->True(
+    ( index( $Ticket{DynamicField_Body} // '', $ArticleBodyContent ) > -1 ) ? 1 : 0,
+    "$ModuleName - DynamicField 'Body' contains the resolved <OTRS_FIRST_ARTICLE_Body> content",
+);
+
 # Run TransitionAction with ForeignTicketID
 my $ForeignTicketID = $HelperObject->TicketCreate();
 

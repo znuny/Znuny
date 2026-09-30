@@ -553,26 +553,33 @@ ul.ContextFunctions li:last-child:hover > a {
 
     .Actions-Mobile-List {
         display: flex;
-        gap: var(--gap-md);
+        gap: var(--gap-sm);
         align-items: center;
     }
 
-    .Actions-Mobile-List li {
+    .Actions-Mobile-List li:not(.mobile-action-separator) {
         font-size: var(--main-font-size);
         position: relative;
+        cursor: pointer;
+        padding: var(--padding-xs) var(--padding-sm);
+        border-radius: var(--border-radius-xs);
     }
 
-    .Actions-Mobile-List li:not(:first-child)::before {
-        position: absolute;
-        left: -10px;
-        display: inline-block;
-        content: "";
-        position: relative;
+    .ItemActions > .Actions-Mobile-List > li:hover {
+        background: inherit;
+    }
+
+    .Actions-Mobile-List > li:hover {
+        background: var(--gray-light);
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    .Actions-Mobile-List .mobile-action-separator {
         width: 1px;
         height: 13px;
         background-color: var(--gray-dark-semi);
-        align-self: center;
-        margin: 0 10px;
+        pointer-events: none;
     }
 
     #ticketDetails .Actions-overlay {

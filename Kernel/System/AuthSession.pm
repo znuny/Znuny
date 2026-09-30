@@ -264,13 +264,18 @@ sub RemoveSessionID {
 
 =head2 RemoveSessionByUser()
 
-Removes a session from a user.
+Removes all sessions that match the given user login (no distinction between agent and customer user).
 
     $SessionObject->RemoveSessionByUser(
         UserLogin => 'some_user_login'
     );
 
 Returns true (session deleted) or false (if session can't get deleted).
+
+B<NOTE>: Sessions are matched by C<UserLogin> only. The user type (agent or
+customer user) is not considered. If an agent and a customer user share the
+same login, all of their sessions are removed. This is a known limitation.
+See issue #1027.
 
 =cut
 

@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.999522976625855;
+    $Self->{Completeness}        = 1;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3988,6 +3988,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             'Die Konfiguration des Prozessmanagements in der Datenbank ist nicht synchron mit der Systemkonfiguration, bitte synchronisieren Sie alle Prozesse.',
+        'Deploy' => 'In Betrieb nehmen',
         'Need ExampleProcesses!' => 'Benötige Beispiel-Prozesse!',
         'Need ProcessID!' => 'Benötige ProcessID!',
         'Unknown Process %s!' => 'Unbekannter Prozess %s!',
@@ -8485,7 +8486,6 @@ sub Data {
         'Please enter at least one search word to find anything.' => 'Bitte geben Sie mindestens einen Suchbegriff ein.',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             'Inbetriebnahme derzeit nicht möglich. Möglicherweise läuft bereits eine durch einen anderen Agenten angestoßene Inbetriebnahme. Bitte versuchen Sie es später noch einmal.',
-        'Deploy' => 'In Betrieb nehmen',
         'The deployment is already running.' => 'Inbetriebnahme läuft bereits.',
         'Deployment successful. You\'re being redirected...' => 'Inbetriebnahme erfolgreich, sie werden weitergeleitet...',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>
@@ -8830,11 +8830,11 @@ Ihr Helpdesk-Team
         'Arabic (Saudi Arabia)' => 'Arabisch (Saudi-Arabien)',
         'Article Color' => 'Artikel Farbe',
         'ArticleTree' => 'Artikelbaum',
-        'As Popup' => '',
+        'As Popup' => 'Als Popup',
         'Attachment Name' => 'Name des Anhangs',
         'Avatar' => 'Avatar',
         'Based on global RichText setting' => 'Basierend auf der globalen Richtext-Einstellung',
-        'Blank' => '',
+        'Blank' => 'Neues Fenster',
         'Bounced to "%s".' => 'Bounced an "%s".',
         'Bulgarian' => 'Bulgarisch',
         'Bulk Action' => 'Sammel-Aktion',
@@ -9296,7 +9296,7 @@ Ihr Helpdesk-Team
             'Wählen Sie Ihre persönliche Zeitzone aus. Alle Zeiten werden relativ zur eingestellten Zeitzone angezeigt.',
         'Select your preferred layout for the software.' => 'Wählen Sie Ihr bevorzugtes Layout aus.',
         'Select your preferred theme for OTRS.' => 'Wählen Sie Ihr bevorzugtes Theme für Znuny.',
-        'Self' => '',
+        'Self' => 'Gleiches Fenster',
         'Send a unit test file' => 'Unit-Test-Datei versenden',
         'Send new outgoing mail from this ticket' => 'Neue ausgehende E-Mail aus diesem Ticket heraus senden',
         'Send notifications to users.' => 'Benachrichtigungen an Agenten verschicken.',

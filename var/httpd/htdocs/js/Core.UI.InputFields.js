@@ -729,9 +729,20 @@ Core.UI.InputFields = (function (TargetNS) {
 
             case 'ClearAll':
                 $ActionObj.off('click.InputField').on('click.InputField', function () {
+                    var SelectID = ($TreeObj.attr('id') || '').replace(/_Select$/, ''),
+                        $SelectObj;
 
                     // Clear selection
                     $TreeObj.jstree('deselect_node', $TreeObj.jstree('get_selected'));
+
+                    // Keep the underlying select in sync (deselect events alone can leave stale values).
+                    if (SelectID) {
+                        $SelectObj = $('#' + Core.App.EscapeSelector(SelectID));
+                        if ($SelectObj.length) {
+                            $SelectObj.val([]);
+                            $SelectObj.data('changed', true);
+                        }
+                    }
 
                     return false;
 
@@ -760,6 +771,47 @@ Core.UI.InputFields = (function (TargetNS) {
 
             case 'Confirm':
                 $ActionObj.off('click.InputField').on('click.InputField', function () {
+                    var SelectID = ($TreeObj.attr('id') || '').replace(/_Select$/, ''),
+                        $SelectObj,
+                        SelectedNodesIDs,
+                        SyncedSelection = [],
+                        CurrentSelection = [],
+                        IsMultiple,
+                        SelectionChanged;
+
+                    // Sync tree selection to the hidden select before close so empty clears fire change.
+                    if (SelectID) {
+                        $SelectObj = $('#' + Core.App.EscapeSelector(SelectID));
+                        IsMultiple = $SelectObj.length
+                            && $SelectObj.attr('multiple') !== ''
+                            && $SelectObj.attr('multiple') !== undefined;
+
+                        if (IsMultiple && $.isFunction($TreeObj.jstree)) {
+                            SelectedNodesIDs = $TreeObj.jstree('get_selected') || [];
+                            $.each(SelectedNodesIDs, function () {
+                                var Value = $('#' + this).data('id');
+                                if (typeof Value !== 'undefined' && Value !== null) {
+                                    SyncedSelection.push(String(Value));
+                                }
+                            });
+
+                            CurrentSelection = $SelectObj.val() || [];
+                            if (!$.isArray(CurrentSelection)) {
+                                CurrentSelection = [CurrentSelection];
+                            }
+                            CurrentSelection = $.map(CurrentSelection, function (Value) {
+                                return String(Value);
+                            });
+
+                            SelectionChanged = SyncedSelection.slice().sort().join('\0')
+                                !== CurrentSelection.slice().sort().join('\0');
+
+                            if (SelectionChanged) {
+                                $SelectObj.val(SyncedSelection);
+                                $SelectObj.data('changed', true);
+                            }
+                        }
+                    }
 
                     // Hide the list
                     $TreeObj.blur();
@@ -2197,28 +2249,9 @@ Core.UI.InputFields = (function (TargetNS) {
 
                                 if (Multiple) {
 
-                                    // Reset select all and clear all functions to original behavior
-                                    $SelectAllObj.off('click.InputField').on('click.InputField', function () {
-
-                                        // Make sure subtrees of all nodes are expanded
-                                        $TreeObj.jstree('open_all');
-
-                                        // Select all nodes
-                                        $TreeObj.find('li')
-                                            .not('.jstree-clicked,.Disabled')
-                                            .each(function () {
-                                                $TreeObj.jstree('select_node', this);
-                                            });
-
-                                        return false;
-                                    });
-                                    $ClearAllObj.off('click.InputField').on('click.InputField', function () {
-
-                                        // Clear selection
-                                        $TreeObj.jstree('deselect_node', $TreeObj.jstree('get_selected'));
-
-                                        return false;
-                                    });
+                                    // Restore original handlers (incl. Clear All select sync).
+                                    RegisterActionEvent($TreeObj, $SelectAllObj, 'SelectAll');
+                                    RegisterActionEvent($TreeObj, $ClearAllObj, 'ClearAll');
 
                                 }
                                 return false;

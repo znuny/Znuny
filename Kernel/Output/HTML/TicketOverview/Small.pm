@@ -342,6 +342,9 @@ sub ActionRow {
             elsif ( $Column eq 'CustomerUserID' ) {
                 $TranslatedWord = Translatable('Customer User ID');
             }
+            elsif ( $Column eq 'AccountedTime' ) {
+                $TranslatedWord = Translatable('Accounted time');
+            }
 
             # send data to JS
             $LayoutObject->AddJSData(
@@ -1029,6 +1032,9 @@ sub Run {
                 elsif ( $Column eq 'CustomerUserID' ) {
                     $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Customer User ID');
                 }
+                elsif ( $Column eq 'AccountedTime' ) {
+                    $TranslatedWord = $LayoutObject->{LanguageObject}->Translate('Accounted time');
+                }
                 else {
                     $TranslatedWord = $LayoutObject->{LanguageObject}->Translate($Column);
                 }
@@ -1640,6 +1646,9 @@ sub Run {
                 elsif ( $TicketColumn eq 'Created' || $TicketColumn eq 'Changed' ) {
                     $BlockType = 'Time';
                     $DataValue = $Article{$TicketColumn} || $UserInfo{$TicketColumn};
+                }
+                elsif ( $TicketColumn eq 'AccountedTime' ) {
+                    $DataValue = $TicketObject->TicketAccountedTimeGet( TicketID => $Article{TicketID} );
                 }
                 elsif ( $TicketColumn eq 'Responsible' ) {
 

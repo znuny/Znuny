@@ -100,8 +100,14 @@ sub Auth {
         . " $Self->{UserTable} "
         . " WHERE "
         . " valid_id IN ( ${\(join ', ', $Kernel::OM->Get('Kernel::System::Valid')->ValidIDsGet())} ) AND "
-        . " $Self->{UserTableUser} = '" . $DBObject->Quote($User) . "'";
-    $DBObject->Prepare( SQL => $SQL );
+        . " $Self->{UserTableUser} = ?";
+
+    return if !$DBObject->Prepare(
+        SQL  => $SQL,
+        Bind => [
+            \$User,
+        ],
+    );
 
     while ( my @Row = $DBObject->FetchrowArray() ) {
         $GetPw  = $Row[0];

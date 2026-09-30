@@ -131,14 +131,14 @@ $Selenium->RunTest(
         # Check if selected article is in the first row on page 2 - it is the last not seen article (see bug#12663).
         # Check if there are exactly two pages.
         $Self->Is(
-            $Selenium->execute_script("return \$('.ArticlePages a[title*=Page]').length;"),
+            $Selenium->execute_script("return \$('.ArticlePages a[id^=\"ArticlePagesPage\"]').length;"),
             2,
             "There are 2 article pages",
         );
 
-        # Check if page 2 is active.
+        # Check if page 2 is selected.
         $Self->Is(
-            $Selenium->execute_script("return \$('.ArticlePages a.Active').text();"),
+            $Selenium->execute_script("return \$('.ArticlePages a.Selected').text();"),
             2,
             "Active article page is page 2",
         );

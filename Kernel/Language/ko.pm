@@ -3987,6 +3987,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminProcessManagement.pm
         'Process Management information from database is not in sync with the system configuration, please synchronize all processes.' =>
             '데이터베이스의 프로세스 관리 정보가 시스템 구성과 동기화되지 않았습니다. 모든 프로세스를 동기화 하십시오.',
+        'Deploy' => '배포',
         'Need ExampleProcesses!' => 'ExampleProcesses가 필요합니다!',
         'Need ProcessID!' => 'ProcessID가 필요합니다!',
         'Unknown Process %s!' => '알 수없는 프로세스 %s!',
@@ -8484,7 +8485,6 @@ sub Data {
         'Please enter at least one search word to find anything.' => '검색할 단어를 하나 이상 입력하십시오.',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.' =>
             '안타깝게도 다른 에이전트가 이미 배포 중이므로 현재 배포할 수 없습니다. 나중에 다시 시도 해주십시오.',
-        'Deploy' => '배포',
         'The deployment is already running.' => '배포가 이미 실행 중입니다.',
         'Deployment successful. You\'re being redirected...' => '배포가 완료되었습니다. 리디렉션 중입니다...',
         'There was an error. Please save all settings you are editing and check the logs for more information.' =>

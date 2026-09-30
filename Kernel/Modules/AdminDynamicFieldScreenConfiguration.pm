@@ -425,7 +425,7 @@ sub _ShowEdit {
             ObjectType => \@ObjectType,
         );
 
-        my %AvailableElements;
+        %AvailableElements = ();
 
         DYNAMICFIELDCONFIG:
         for my $DynamicFieldConfig ( @{$DynamicFieldConfigs} ) {

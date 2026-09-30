@@ -51,6 +51,8 @@ $Selenium->RunTest(
             Value => $PrivatePath,
         );
 
+        my $SMIMEObject = $Kernel::OM->Get('Kernel::System::Crypt::SMIME');
+
         # create test user and login
         my $TestUserLogin = $HelperObject->TestCustomerUserCreate(
             Groups => ['admin'],
@@ -79,6 +81,16 @@ $Selenium->RunTest(
             index( $Selenium->get_page_source(), 'Certificate uploaded' ) > -1,
             'Customer preference SMIME certificate - updated'
         ) || die "Could not upload certificate";
+
+        # remove certificate
+        my %CertRemovedResult = $SMIMEObject->CertificateRemove(
+            Filename => 'c594735a.0',
+        );
+
+        $Self->True(
+            $CertRemovedResult{Successful},
+            "Test certificate removed",
+        );
 
         # delete needed test directories
         for my $Directory ( $CertPath, $PrivatePath ) {

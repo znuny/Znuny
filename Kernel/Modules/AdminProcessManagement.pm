@@ -74,8 +74,14 @@ sub Run {
         # create a notification if system is not up to date
         $Param{NotifyData} = [
             {
-                Info => $SynchronizeMessage,
-                Link => $LayoutObject->{Baselink} . 'Action=AdminProcessManagement;Subaction=ProcessSync',
+                Info    => $SynchronizeMessage,
+                Actions => [
+                    {
+                        url  => $LayoutObject->{Baselink} . 'Action=AdminProcessManagement;Subaction=ProcessSync',
+                        type => 'notify',
+                        text => $LayoutObject->{LanguageObject}->Translate('Deploy')
+                    }
+                ]
             },
         ];
     }
@@ -212,7 +218,14 @@ sub Run {
                     Info => $ProcessImport{Message},
                 },
                 {
-                    Info => $SynchronizeMessage,
+                    Info    => $SynchronizeMessage,
+                    Actions => [
+                        {
+                            url  => $LayoutObject->{Baselink} . 'Action=AdminProcessManagement;Subaction=ProcessSync',
+                            type => 'notify',
+                            text => $LayoutObject->{LanguageObject}->Translate('Deploy')
+                        }
+                    ]
                 },
             ];
 

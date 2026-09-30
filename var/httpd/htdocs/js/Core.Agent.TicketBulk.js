@@ -213,11 +213,22 @@ Core.Agent.TicketBulk = (function (TargetNS) {
 
             var DynamicFieldConfigs = Core.Config.Get('DynamicFieldConfigs'),
                 UsedSuffix = 'Used',
-                UsedType;
+                UsedType,
+                $Label;
 
             var HasCheckbox = false,
                 IsChecked         = (DynamicFieldConfigs[DynamicFieldName]['IsChecked'] === 'true'),
                 RequireActivation = (DynamicFieldConfigs[DynamicFieldName]['RequireActivation'] === 'true');
+
+            // Label id stays stable. Core.UI.InputFields rewrites for= to *_Search
+            // on modernized selects before this init (APP_GLOBAL before APP_MODULE).
+            $Label = $('#Label' + DynamicFieldName);
+            if (!$Label.length) {
+                $Label = $("[for='" + DynamicFieldName + "']");
+            }
+            if (!$Label.length) {
+                $Label = $("[for='" + DynamicFieldName + "_Search']");
+            }
 
             // check if this current DynamicField has a hidden checkbox "DynamicFieldUsed"
             if ($('#' +  DynamicFieldName + UsedSuffix).length) {
@@ -242,21 +253,32 @@ Core.Agent.TicketBulk = (function (TargetNS) {
                     $('#' + DynamicFieldName + 'Used').prop('type', 'checkbox');
                 }
 
-                // move current checkboxUsed to the <for="DynamicField_DynamicFieldName"> tag
-                $('#' + DynamicFieldName + 'Used').prependTo(
-                    $("[for='" + DynamicFieldName + UsedSuffix + "']")
-                );
+                // move current checkboxUsed to the label
+                if ($("[for='" + DynamicFieldName + UsedSuffix + "']").length) {
+                    $('#' + DynamicFieldName + 'Used').prependTo(
+                        $("[for='" + DynamicFieldName + UsedSuffix + "']")
+                    );
+                }
+                else if ($Label.length) {
+                    $('#' + DynamicFieldName + 'Used').prependTo($Label);
+                }
             }
-            else {
+            else if ($Label.length) {
+
                 // insert a new checkbox with id=DynamicFieldNameUsed to label
-                $("[for='" + DynamicFieldName + "']").prepend(
+                $Label.prepend(
                     '<input type="checkbox" id="' + DynamicFieldName + 'Used" name="' + DynamicFieldName + 'Used" value="1"/>'
                 );
             }
 
             // set the label "for" to the CheckboxUsed
             // otherwise Firefox won't uncheck the CheckboxUsed
-            $("[for='" + DynamicFieldName + "']").prop('for', '' + DynamicFieldName + 'Used');
+            if ($Label.length) {
+                $Label.prop('for', DynamicFieldName + 'Used');
+            }
+            else {
+                $("[for='" + DynamicFieldName + "']").prop('for', '' + DynamicFieldName + 'Used');
+            }
 
             if (IsChecked) {
                 $('#' + DynamicFieldName + 'Used').prop('checked',  true);
@@ -292,6 +314,11 @@ Core.Agent.TicketBulk = (function (TargetNS) {
 
             // set CheckboxUsed to check after clicking into input field
             $('#' + DynamicFieldName).on('click', function () {
+                $('#' + DynamicFieldName + 'Used').prop('checked', true);
+            });
+
+            // Modernized selects are hidden. Visible control sits in the sibling InputField container.
+            $('#' + DynamicFieldName + '_Search').closest('.InputField_Container').on('click', function () {
                 $('#' + DynamicFieldName + 'Used').prop('checked', true);
             });
 

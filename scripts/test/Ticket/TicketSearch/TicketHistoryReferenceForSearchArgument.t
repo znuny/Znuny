@@ -88,7 +88,9 @@ for my $Arg (@ArgsWithReference) {
             Name             => 'Tickets closed older than 1 minute ago',
             SearchParam      => 'TicketCloseTimeOlderMinutes',
             SearchParamValue => 1,
-            FixedTimeMinutes => 1,
+
+            # Create before the exclusive OlderMinutes boundary (now - 1 minute).
+            FixedTimeMinutes => 2,
         },
 
         {
@@ -102,7 +104,9 @@ for my $Arg (@ArgsWithReference) {
             Name             => 'Tickets changed older than 1 minute ago',
             SearchParam      => 'TicketChangeTimeOlderMinutes',
             SearchParamValue => 1,
-            FixedTimeMinutes => 1,
+
+            # Create before the exclusive OlderMinutes boundary (now - 1 minute).
+            FixedTimeMinutes => 2,
         },
 
         {
@@ -116,7 +120,9 @@ for my $Arg (@ArgsWithReference) {
             Name             => 'Tickets where last change is older than 1 minute ago',
             SearchParam      => 'TicketLastChangeTimeOlderMinutes',
             SearchParamValue => 1,
-            FixedTimeMinutes => 1,
+
+            # Create before the exclusive OlderMinutes boundary (now - 1 minute).
+            FixedTimeMinutes => 2,
         },
     );
 

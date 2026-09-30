@@ -22,7 +22,10 @@ $Selenium->RunTest(
         my $ConfigObject           = $Kernel::OM->Get('Kernel::Config');
         my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');
 
-        my %StandardTemplates = $StandardTemplateObject->StandardTemplateList();
+        # Include invalid templates, so leftovers of previous runs are cleaned up, too.
+        my %StandardTemplates = $StandardTemplateObject->StandardTemplateList(
+            Valid => 0,
+        );
 
         my @DefaultStandardTemplates = (
             'empty answer',
@@ -161,7 +164,7 @@ $Selenium->RunTest(
             "#Name stored value",
         );
         $Self->Is(
-            $Selenium->find_element( '#TemplateType', 'css' )->get_value(),
+            $Selenium->execute_script("return [].concat(\$('#TemplateType').val() || []).join(',');"),
             "Create",
             "#TemplateType stored value",
         );
@@ -171,7 +174,7 @@ $Selenium->RunTest(
             "#Comment stored value",
         );
         $Self->Is(
-            $Selenium->find_element( '#ValidID', 'css' )->get_value(),
+            $Selenium->execute_script("return \$('#ValidID').val();"),
             1,
             "#ValidID stored value",
         );
@@ -246,7 +249,7 @@ $Selenium->RunTest(
         $Selenium->find_element( $TemplateRandomID, 'link_text' )->VerifiedClick();
 
         $Self->Is(
-            $Selenium->find_element( '#TemplateType', 'css' )->get_value(),
+            $Selenium->execute_script("return [].concat(\$('#TemplateType').val() || []).join(',');"),
             "Create",
             "#TemplateType updated value",
         );
@@ -256,7 +259,7 @@ $Selenium->RunTest(
             "#Comment updated value",
         );
         $Self->Is(
-            $Selenium->find_element( '#ValidID', 'css' )->get_value(),
+            $Selenium->execute_script("return \$('#ValidID').val();"),
             2,
             "#ValidID updated value",
         );
@@ -284,15 +287,17 @@ $Selenium->RunTest(
         # Confirm delete action.
         $Selenium->find_element( "#DialogButton1", 'css' )->click();
 
+        # Wait until the overview has been reloaded without the deleted template.
         $Selenium->WaitFor(
-            JavaScript => 'return typeof($) === "function" && $("#Templates tbody tr").length'
+            JavaScript =>
+                "return typeof(\$) === 'function' && \$('#Templates tbody tr').length && !\$('#Templates tbody tr:contains($TemplateRandomID)').length"
         );
 
-        # Check overview screen has exactly 3 rows.
+        # Check overview screen has exactly 2 templates + 1 (FilterMessage Hidden) row.
         $Self->Is(
             $Selenium->execute_script("return \$('#Templates tbody tr').length"),
             3,
-            "Table has exactly 3 + 1 (FilterMessage Hidden) rows",
+            "Table has exactly 2 templates + 1 (FilterMessage Hidden) rows",
         );
     }
 );

@@ -150,6 +150,7 @@ my $UserID = 1;
 my $Success;
 my $TempValue;
 my $ArticleID;
+my @Attachments;
 
 HEADER
 

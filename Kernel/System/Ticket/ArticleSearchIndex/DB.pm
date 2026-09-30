@@ -285,6 +285,11 @@ sub ArticleSearchIndexWhereCondition {
     # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
+    my $ContentSearch = $Param{SearchParams}->{ContentSearch} // 'AND';
+    if ( $ContentSearch !~ m{\A(?:AND|OR)\z}i ) {
+        $ContentSearch = 'AND';
+    }
+
     my $SQLCondition = '';
     my $SQLQuery     = '';
 
@@ -305,7 +310,7 @@ sub ArticleSearchIndexWhereCondition {
         next FIELD if $Param{SearchParams}->{$Field} =~ /^\%{1,3}$/;
 
         if ($SQLQuery) {
-            $SQLQuery .= ' ' . $Param{SearchParams}->{ContentSearch} . ' ';
+            $SQLQuery .= ' ' . $ContentSearch . ' ';
         }
 
         # check if search condition extension is used

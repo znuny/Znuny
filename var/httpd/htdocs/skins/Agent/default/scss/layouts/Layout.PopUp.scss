@@ -6,6 +6,7 @@ the enclosed file COPYING for license information (AGPL). If you
 did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 */
 
+@import './../utilities/Utility.MediaQueries';
 
 .layoutPopUp {
   display: grid;
@@ -16,8 +17,14 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
   overflow-x: hidden;
   overflow-y: scroll;
   padding: 20px 10px;
+  // Reserve space for collapsible mobile browser UI (e.g. iOS Safari bottom toolbar); resolves to 20px on desktop.
+  padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px) + (100lvh - 100svh));
   gap: 0;
   max-width: 100%;
+
+  @include respond-below(xs) {
+    padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px) + (100lvh - 100svh));
+  }
 
   .sectionContent {
   }

@@ -427,19 +427,20 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .table-widget.Expanded .Content {
         border-bottom: 0;
         border: none;
-        /*
-        border-bottom-left-radius: var(--border-radius-xs);
-        border-bottom-right-radius: var(--border-radius-xs);
-        */
     }
 
     .Popup .table-widget-parent .table-widget.Expanded,
     .RealPopup .table-widget-parent .table-widget.Expanded,
+    .table-widget-parent .table-widget.Expanded {
+        border-style: var(--border-solid);
+        border-color: var(--border-color);
+        border-width: 0 var(--border-width);
+    }
+
     .Popup .table-widget-parent .table-widget.Expanded .Content,
     .RealPopup .table-widget-parent .table-widget.Expanded .Content,
-    .table-widget-parent .table-widget.Expanded,
     .table-widget-parent .table-widget.Expanded .Content {
-        border: var(--border-width) var(--border-solid) var(--border-color);
+        border: none;
     }
 
     .Popup .table-widget .Content,
@@ -451,10 +452,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .Popup .table-widget .Content .DataTable,
     .RealPopup .table-widget .Content .DataTable,
     .table-widget .Content .DataTable {
-        /*
-        border-bottom-left-radius: var(--border-radius-xs);
-        border-bottom-right-radius: var(--border-radius-xs);
-        */
         border-radius: none;
     }
 
@@ -504,7 +501,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     .manageLinks .WidgetSimple .Content {
-        /*padding: 0;*/
         border: var(--border-width) var(--border-solid) var(--border-color);
     }
 
@@ -581,10 +577,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         border: 0;
     }
 
-    /*.manageLinks .WidgetSimple.Tabs .Content .innerContent .WidgetSimple .Content > :first-child {
-        border-bottom: var(--border-width) var(--border-solid) var(--border-color);
-    }*/
-
     .manageLinks .WidgetSimple.Tabs .Content .innerContent .WidgetSimple .Content > div:nth-child(2) {
         padding: 0 0 var(--padding-md) var(--padding-md);
         margin-left: auto;
@@ -612,9 +604,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         }
     }
 
-
-
-
     .ticketMerge .card-item:first-child .Field {
         display: flex;
         flex-flow: column;
@@ -639,9 +628,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         max-height: unset;
         margin: auto;
     }
-
-
-
 
     .Popup fieldset > div > div,
     .RealPopup fieldset > div > div {
@@ -994,7 +980,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         margin: 0;
         padding: var(--main-page-padding);
         background: var(--white);
-        /*border-right: var(--border-width) var(--border-solid) var(--border-color);*/
         box-sizing: border-box;
         width: 100%;
         max-width: 300px;
@@ -1009,7 +994,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     .ActionsSideBar.LayoutFixedSidebar .ActionsSideBarComp .Header > h2 {
         color: var(--black);
-        /*font-family: 'Inter'*/
         font-size: var(--font-size-lg);
         font-weight: var(--medium);
         letter-spacing: .1px;
@@ -1240,13 +1224,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         border-color: var(--primary-color);
     }
 
-    /*
-    .ItemListGrid > li > a:not(.Disabled):focus,
-    .ItemListGrid > li > a.Active:focus {
-        border-color: var(--primary-color);
-    }
-    */
-
     /*.ItemListGrid.WithIcons > li a:not(.Disabled):focus span.Icons,*/
     .ItemListGrid > li span.Icons,
     ul.GettingStarted > li span.Icons {
@@ -1404,12 +1381,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         gap: var(--gap-md);
     }
 
-
-
 } /* end @media */
-
-
-
 
 @media (min-width: 1600px) {
     /******************/

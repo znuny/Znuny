@@ -430,8 +430,12 @@ Core.SystemConfiguration = (function (TargetNS) {
 
                 Key = $(this).parent().parent().find(".Key").val();
 
-                // Strip structural suffix (_Array0, _Hash, date parts, etc.), same rules as CheckIDs().
-                SuffixMatch = FullName.match(/(_Array\d*|_Hash|Day$|Month$|Year$|Hour$|Minute$|$)$/);
+                if (ValueType === "Date" || ValueType === "DateTime") {
+                    FullName = FullName.replace(/(Day|Month|Year|Hour|Minute)$/, '');
+                }
+
+                // Strip structural suffix (_Array0, _Hash), same rules as CheckIDs().
+                SuffixMatch = FullName.match(/(_Array\d*|_Hash|$)$/);
                 Suffix = SuffixMatch ? SuffixMatch[0] : '';
                 BasePart = FullName.substring(0, FullName.length - Suffix.length);
                 LastHashIndex = BasePart.lastIndexOf('_Hash###');

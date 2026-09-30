@@ -207,7 +207,13 @@ Core.Agent.Responsive = (function (TargetNS) {
         $(this).closest('.ItemActions, .ActionRow').removeClass('active');
     });
 
-
+    // Mark/Unmark article as important shortcut
+    $(document).off('click.Responsive').on('click.Responsive', '.mobile-action-mark', function() {
+        var $MarkLink = $(this).closest('.ItemActions').find('.Actions a[href*="Subaction=MarkAsImportant"]');
+        if ($MarkLink.length) {
+            $MarkLink.get(0).click();
+        }
+    });
 
     return TargetNS;
 

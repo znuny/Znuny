@@ -10,7 +10,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
   top: 90px;
   right: -15px;
   width: 400px;
-  z-index: 99;
+  z-index: 999;
 }
 @media (max-width: 1199px) {
   .modNotification > .inner {

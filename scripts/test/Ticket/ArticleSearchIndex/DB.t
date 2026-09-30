@@ -206,6 +206,23 @@ for my $Test (@ArticleIndexTests) {
     );
 }
 
+my $SQLConditionsInvalidContentSearch = $ArticleObject->ArticleSearchIndexWhereCondition(
+    SearchParams => {
+        ContentSearchPrefix => '*',
+        ContentSearchSuffix => '*',
+        ContentSearch       => ') OR 1=1 -- ',
+        MIMEBase_From       => 'spam@example.com',
+        MIMEBase_Body       => 'some message text',
+    },
+);
+
+$Self->True(
+    $SQLConditionsInvalidContentSearch
+        && $SQLConditionsInvalidContentSearch =~ m{ AND }ms
+        && $SQLConditionsInvalidContentSearch !~ m{ \) OR 1=1 }ms,
+    'ArticleSearchIndexWhereCondition - invalid ContentSearch falls back to AND',
+);
+
 # Remove the first article from search index.
 my $IndexDeleteSuccess = $ArticleObject->ArticleSearchIndexDelete(
     ArticleID => $ArticleIDs{1},

@@ -15,7 +15,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     right: -15px;
     width: 400px;
     //margin-left: -40%;
-    z-index: 99;
+    z-index: 999;
     @include respond-below(lg) {
       //width: 95%;
       //margin-left: -47.5%;
