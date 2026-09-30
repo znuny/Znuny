@@ -117,7 +117,7 @@ $Selenium->RunTest(
         # Verify there is no 'Linked Objects' widget, it's disabled.
         $Self->True(
             $Selenium->execute_script(
-                "return \$('.LinkTable .Header>h2').length == 0"
+                "return \$('.modLinkedObjects').length == 0"
             ),
             "Linked Objects widget is disabled",
         );
@@ -134,9 +134,12 @@ $Selenium->RunTest(
         $Selenium->VerifiedRefresh();
 
         # Verify there is 'Linked Objects' widget, it's enabled.
-
+        my $LinkTableWidget = $Selenium->find_element(
+            "//div[contains(\@class, 'modLinkedObjects')]/ancestor::div[contains(\@class, 'modSidebarWidget')]",
+            'xpath',
+        );
         $Self->Is(
-            $Selenium->find_element( '.LinkTable .Header>h2', 'css' )->get_text(),
+            $Selenium->find_child_element( $LinkTableWidget, '.sidebarWidgetTitle > h3', 'css' )->get_text(),
             'Linked Objects',
             'Linked Objects widget is enabled',
         );
@@ -157,32 +160,38 @@ $Selenium->RunTest(
             "Link to child ticket found",
         );
 
-        # Verify there is no collapsed elements on the screen.
+        # Verify the sidebar widget starts expanded.
         $Self->True(
-            $Selenium->find_element("//div[contains(\@class, 'WidgetSimple LinkTable DontPrint Expanded')]"),
+            $Selenium->execute_script(
+                "return \$('.modLinkedObjects').closest('.modSidebarWidget').children('.inner').not('.sidebarWidgetClosed').length"
+            ),
             "Linked Objects Widget is expanded",
         );
 
         # Toggle to collapse 'Linked Objects' widget.
         $Selenium->execute_script(
-            "\$('h2:contains(Linked Object)').closest('.WidgetSimple.Expanded').find('.Toggle a').trigger('click')"
+            "\$('.modLinkedObjects').closest('.modSidebarWidget').find('.sidebarWidgetTitle').trigger('click')"
         );
 
         $Selenium->WaitFor(
-            JavaScript => "return \$('h2:contains(Linked Object)').closest('.WidgetSimple.Collapsed').length"
+            JavaScript =>
+                "return \$('.modLinkedObjects').closest('.modSidebarWidget').children('.inner').hasClass('sidebarWidgetClosed')"
         );
 
         # Verify there is collapsed element on the screen.
         $Self->True(
             $Selenium->execute_script(
-                "return \$('h2:contains(Linked Object)').closest('.WidgetSimple.Collapsed').length"
+                "return \$('.modLinkedObjects').closest('.modSidebarWidget').children('.inner').hasClass('sidebarWidgetClosed')"
             ),
             "Linked Objects Widget is collapsed",
         );
 
         # Verify 'Linked Objects' widget is in the side bar with simple view.
         $Self->Is(
-            $Selenium->find_element( '.LinkTable .Header>h2', 'css' )->get_text(),
+            $Selenium->find_element(
+                "//aside[contains(\@class, 'sectionSidebar')]//div[contains(\@class, 'modLinkedObjects')]/ancestor::div[contains(\@class, 'modSidebarWidget')]//h3",
+                'xpath',
+            )->get_text(),
             'Linked Objects',
             'Linked Objects widget is positioned in the side bar with simple view',
         );
@@ -199,7 +208,7 @@ $Selenium->RunTest(
 
         # Verify 'Linked Object' widget is in the main column with complex view.
         $Self->Is(
-            $Selenium->find_element( '.ContentColumn #WidgetTicket .Header>h2', 'css' )->get_text(),
+            $Selenium->find_element( 'main.sectionContent #WidgetTicket .Header>h2', 'css' )->get_text(),
             'Linked: Ticket (2)',
             'Linked Objects widget is positioned in the main column with complex view',
         );

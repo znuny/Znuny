@@ -252,18 +252,14 @@ $Selenium->RunTest(
                 "Test ticket with TN $Tickets[1]->{TN} - not found on screen after filtering with customer - $Tickets[0]->{CustomerUser}",
             );
 
-            # Click on column setting filter for 'Customer User ID' in TicketNew generic dashboard overview.
-            $Selenium->find_element("//a[contains(\@title, \'Customer User ID\' )]")->click();
-            sleep 1;
-
-            # Wait for AJAX to finish.
+            # Delete the current filter via the widget clear-all control.
             $Selenium->WaitFor(
                 JavaScript =>
-                    'return typeof($) === "function" && !$("span.AJAXLoader:visible").length'
+                    "return typeof(\$) === 'function' && \$('a#Dashboard0120-TicketNew-remove-filters').length == 1;"
             );
-
-            # Delete the current filter.
-            $Selenium->find_element( "a.DeleteFilter", 'css' )->click();
+            $Selenium->execute_script(
+                "\$('a#Dashboard0120-TicketNew-remove-filters').trigger('click');"
+            );
 
             # Wait for AJAX to finish.
             $Selenium->WaitFor(
@@ -324,18 +320,14 @@ $Selenium->RunTest(
             );
 
             # Cleanup
-            # Click on column setting filter for 'Customer User ID' in TicketNew generic dashboard overview.
-            $Selenium->find_element("//a[contains(\@title, \'Customer User ID\' )]")->click();
-            sleep 1;
-
-            # wait for AJAX to finish
+            # Delete the current filter via the widget clear-all control.
             $Selenium->WaitFor(
                 JavaScript =>
-                    'return typeof($) === "function" && !$("span.AJAXLoader:visible").length'
+                    "return typeof(\$) === 'function' && \$('a#Dashboard0120-TicketNew-remove-filters').length == 1;"
             );
-
-            # Delete the current filter.
-            $Selenium->find_element( "a.DeleteFilter", 'css' )->click();
+            $Selenium->execute_script(
+                "\$('a#Dashboard0120-TicketNew-remove-filters').trigger('click');"
+            );
 
             # Wait for AJAX to finish.
             $Selenium->WaitFor(
@@ -365,9 +357,10 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?");
 
         # Check if 'Customer ID' filter for TicketNew dashboard is set.
+        # Customer ID is also a sort link, so the locator must hit the filter trigger.
         eval {
             $Self->True(
-                $Selenium->find_element("//a[contains(\@title, \'Customer ID\' )]"),
+                $Selenium->find_element( 'a[title*="Customer ID"].ColumnSettingsTrigger', 'css' ),
                 "'Customer ID' filter for TicketNew dashboard is set",
             );
         };
@@ -380,14 +373,17 @@ $Selenium->RunTest(
         else {
 
             # Click on column setting filter for the first customer in TicketNew generic dashboard overview.
-            $Selenium->find_element("//a[contains(\@title, \'Customer ID\' )]")->click();
+            $Selenium->find_element( 'a[title*="Customer ID"].ColumnSettingsTrigger', 'css' )->click();
             $Selenium->WaitFor(
                 JavaScript =>
-                    'return $("div.ColumnSettingsBox").length'
+                    'return $("a.ColumnSettingsTrigger[title*=\'Customer ID\']").next(".ColumnSettingsContainer").find("div.ColumnSettingsBox:visible").length'
             );
 
             # Select the third test Customer ID as filter for TicketNew generic dashboard overview.
-            my $ParentElement = $Selenium->find_element( "div.ColumnSettingsBox", 'css' );
+            my $ParentElement = $Selenium->find_element(
+                '//a[contains(@class, "ColumnSettingsTrigger") and contains(@title, "Customer ID")]/following-sibling::div[contains(@class, "ColumnSettingsContainer")]//div[contains(@class, "ColumnSettingsBox")]',
+                'xpath',
+            );
             $ParentElement->click();
 
             $Selenium->WaitFor(
@@ -430,18 +426,14 @@ $Selenium->RunTest(
                 "Test ticket with TN $Tickets[1]->{TN} - not found on screen after filtering with customer - $Tickets[1]->{CustomerID}",
             );
 
-            # Click on column setting filter for CustomerID in TicketNew generic dashboard overview.
-            $Selenium->find_element("//a[contains(\@title, \'Customer ID\' )]")->click();
-            sleep 1;
-
-            # Wait for AJAX to finish.
+            # Delete the current filter via the widget clear-all control.
             $Selenium->WaitFor(
                 JavaScript =>
-                    'return typeof($) === "function" && !$("span.AJAXLoader:visible").length'
+                    "return typeof(\$) === 'function' && \$('a#Dashboard0120-TicketNew-remove-filters').length == 1;"
             );
-
-            # Delete the current filter.
-            $Selenium->find_element( "a.DeleteFilter", 'css' )->click();
+            $Selenium->execute_script(
+                "\$('a#Dashboard0120-TicketNew-remove-filters').trigger('click');"
+            );
 
             # Wait for AJAX to finish.
             $Selenium->WaitFor(
@@ -450,14 +442,17 @@ $Selenium->RunTest(
             );
 
             # Verify if CustomerID containing special characters is filtered correctly. See bug#14982.
-            $Selenium->find_element("//a[contains(\@title, \'Customer ID\' )]")->click();
+            $Selenium->find_element( 'a[title*="Customer ID"].ColumnSettingsTrigger', 'css' )->click();
 
             $Selenium->WaitFor(
                 JavaScript =>
-                    'return typeof($) === "function" && $(".InputField_Search").length'
+                    'return $("a.ColumnSettingsTrigger[title*=\'Customer ID\']").next(".ColumnSettingsContainer").find("div.ColumnSettingsBox:visible").length'
             );
 
-            $ParentElement = $Selenium->find_element( "div.ColumnSettingsBox", 'css' );
+            $ParentElement = $Selenium->find_element(
+                '//a[contains(@class, "ColumnSettingsTrigger") and contains(@title, "Customer ID")]/following-sibling::div[contains(@class, "ColumnSettingsContainer")]//div[contains(@class, "ColumnSettingsBox")]',
+                'xpath',
+            );
             $Selenium->find_child_element( $ParentElement, '.InputField_Search', 'css' )
                 ->send_keys( $Tickets[3]->{CustomerID} );
             sleep 1;

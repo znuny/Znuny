@@ -128,8 +128,16 @@ $Selenium->RunTest(
             Element => '#QueueID',
             Value   => 2,
         );
-        $Selenium->find_element( "#Subject",  'css' )->send_keys($SubjectRand);
-        $Selenium->find_element( "#RichText", 'css' )->send_keys('Test Process Body');
+        $Selenium->find_element( "#Subject", 'css' )->send_keys($SubjectRand);
+
+        # CKEditor hides #RichText. Write through the editor when it is active.
+        $Selenium->WaitFor(
+            JavaScript =>
+                'return typeof($) === "function" && ( $("#RichText").is(":visible") || (window.editor && typeof window.editor.setData === "function") );'
+        );
+        $Selenium->execute_script(
+            "if (window.editor && typeof window.editor.setData === 'function') { window.editor.setData('Test Process Body'); } else { \$('#RichText').val('Test Process Body'); }"
+        );
 
         # Check if default value for title is shown.
         my $TitleValue = 'Test Process Title Default';
@@ -171,15 +179,18 @@ $Selenium->RunTest(
 
         # Check ticket title.
         $Self->Is(
-            $Selenium->execute_script("return \$('.Headline.NoMargin h1').text().trim().split(\" — \").pop();"),
+            $Selenium->execute_script("return \$('.ticketHeaderTitleHeadline').attr('data-ticket-title');"),
             $TitleValue,
             "Ticket title is: $TitleValue",
         );
 
-        # verify there is 'Process Information' widget
-        my $ParentElement = $Selenium->find_element( ".SidebarColumn", 'css' );
+        # verify there is 'Process Information' widget in the ticket zoom sidebar
+        my $ParentElement = $Selenium->find_element(
+            "//div[contains(\@class, 'modTicketInformation')]/ancestor::div[contains(\@class, 'modSidebarWidget')]",
+            'xpath',
+        );
         $Self->Is(
-            $Selenium->find_child_element( $ParentElement, '.Header>h2', 'css' )->get_text(),
+            $Selenium->find_child_element( $ParentElement, '.sidebarWidgetTitle > h3', 'css' )->get_text(),
             'Process Information',
             'Process Information widget is enabled',
         );
@@ -211,8 +222,14 @@ $Selenium->RunTest(
             Value   => '5',
         );
 
-        $Selenium->find_element( "#Subject",  'css' )->send_keys('TestSubject');
-        $Selenium->find_element( "#RichText", 'css' )->send_keys('TestBody');
+        $Selenium->find_element( "#Subject", 'css' )->send_keys('TestSubject');
+        $Selenium->WaitFor(
+            JavaScript =>
+                'return typeof($) === "function" && ( $("#RichText").is(":visible") || (window.editor && typeof window.editor.setData === "function") );'
+        );
+        $Selenium->execute_script(
+            "if (window.editor && typeof window.editor.setData === 'function') { window.editor.setData('TestBody'); } else { \$('#RichText').val('TestBody'); }"
+        );
         $Selenium->find_element("//button[\@type='submit']")->click();
 
         # switch back screen

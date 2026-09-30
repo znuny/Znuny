@@ -121,8 +121,11 @@ $Selenium->RunTest(
         # Check displayed date and time values.
         for my $FieldGroup (qw(Start End)) {
             for my $FieldType (qw(Year Month Day)) {
+                # Modernize hides the select. WebDriver get_value() on that node is empty.
                 $Self->Is(
-                    int $Selenium->find_element( "#OutOfOffice$FieldGroup$FieldType", 'css' )->get_value(),
+                    int $Selenium->execute_script(
+                        "return \$('#OutOfOffice$FieldGroup$FieldType').val();"
+                    ),
                     int $Date->{$FieldType},
                     "Shown OutOfOffice$FieldGroup$FieldType field value"
                 );

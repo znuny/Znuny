@@ -125,13 +125,13 @@ Core.Agent.Preferences = (function (TargetNS) {
                             Core.UI.WidgetOverlayHide($WidgetObj);
                         }
                         else {
-                            Core.UI.WidgetOverlayHide($WidgetObj, true);
+                            Core.UI.WidgetOverlayHide($WidgetObj, true, function() {
 
-                            // if settings need a reload, show a notification
-                            if (typeof Response.NeedsReload !== 'undefined' && parseInt(Response.NeedsReload, 10) > 0) {
-                                // reload location and show notification with HTML
-                                location.reload();
-                            }
+                                // Reload after the success icon, so the check stays visible.
+                                if (typeof Response.NeedsReload !== 'undefined' && parseInt(Response.NeedsReload, 10) > 0) {
+                                    location.reload();
+                                }
+                            });
                         }
                     }
                     else {

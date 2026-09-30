@@ -38,16 +38,45 @@ $Selenium->RunTest(
         # go to agent preferences
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentPreferences;Subaction=Group;Group=UserProfile");
 
+        my $Language = 'de';
+
         # change test user language preference to Deutsch
         $Selenium->InputFieldValueSet(
-            Element => "#UserLanguage",
-            Value   => 'de',
-        );
-        $Selenium->execute_script(
-            "\$('#UserLanguage').closest('.WidgetSimple').find('.SettingUpdateBox').find('button').trigger('click');"
+            Element => '#UserLanguage',
+            Value   => $Language,
         );
 
-        $Selenium->find_element("//*[text()='Sprache']");
+        $Selenium->WaitFor(
+            JavaScript =>
+                "return typeof(\$) === 'function' && \$('#UserLanguage').closest('.WidgetSimple').find('.SettingUpdateBox button.Update').length",
+        );
+
+        $Selenium->execute_script(
+            "\$('#UserLanguage').closest('.WidgetSimple').find('.SettingUpdateBox button.Update').trigger('click');"
+        );
+
+        # NeedsReload reloads the screen. InputFields shows the label on the search field, not on #UserLanguage.
+        my $LanguageObject = Kernel::Language->new(
+            UserLanguage => $Language,
+        );
+        my $LanguageLabel = $LanguageObject->Translate('Language');
+
+        $Selenium->WaitFor(
+            Callback => sub {
+                my $Ready = eval {
+                    $Selenium->execute_script(
+                        "return typeof(\$) === 'function'"
+                        . " && \$('#UserLanguage').val() === '$Language'"
+                        . " && \$('label[for=\"UserLanguage_Search\"]').text().trim() === '$LanguageLabel';"
+                    );
+                };
+                return $Ready;
+            },
+        );
+
+        $Selenium->find_element(
+            "//label[\@for='UserLanguage_Search' and normalize-space(text())='$LanguageLabel']"
+        );
 
     }
 );

@@ -44,8 +44,12 @@ $Selenium->RunTest(
             Element => "#UserTimeZone",
             Value   => 'Europe/Berlin',
         );
+        # NeedsReload reloads the page as soon as the save succeeds, so the success
+        # icon is gone before it can be observed. A window flag disappears with that
+        # reload; the selected value afterwards comes from the stored preference.
         $Selenium->execute_script(
-            "\$('#UserTimeZone').closest('.WidgetSimple').find('.SettingUpdateBox').find('button').trigger('click');"
+            "window.SeleniumTimeZonePending = 1;"
+            . "\$('#UserTimeZone').closest('.WidgetSimple').find('.SettingUpdateBox').find('button').trigger('click');"
         );
         $Selenium->WaitFor(
             JavaScript =>
@@ -53,11 +57,7 @@ $Selenium->RunTest(
         );
         $Selenium->WaitFor(
             JavaScript =>
-                "return \$('#UserTimeZone').closest('.WidgetSimple').find('.fa-check').length"
-        );
-        $Selenium->WaitFor(
-            JavaScript =>
-                "return !\$('#UserTimeZone').closest('.WidgetSimple').hasClass('HasOverlay')"
+                "return typeof(\$) === 'function' && !window.SeleniumTimeZonePending && \$('#UserTimeZone').val() === 'Europe/Berlin';"
         );
     }
 );

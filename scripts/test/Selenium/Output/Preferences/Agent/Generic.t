@@ -102,9 +102,9 @@ $Selenium->RunTest(
 
         );
 
-        my $UpdateMessage = "Preferences updated successfully!";
-
         # Update generic preferences.
+        # Generic preference modules set NeedsReload, so a successful save reloads the page
+        # before the success icon stays visible.
         for my $Test (@Tests) {
 
             $Selenium->InputFieldValueSet(
@@ -112,25 +112,20 @@ $Selenium->RunTest(
                 Value   => $Test->{Value},
             );
 
-            sleep 1;
-
-            # Save the setting, wait for the ajax call to finish and check if success sign is shown.
+            $Selenium->execute_script('window.Core.App.PageLoadComplete = false;');
             $Selenium->execute_script(
                 "\$('#$Test->{ID}').closest('.WidgetSimple').find('.SettingUpdateBox').find('button').trigger('click');"
             );
             $Selenium->WaitFor(
                 JavaScript =>
-                    "return \$('#$Test->{ID}').closest('.WidgetSimple').hasClass('HasOverlay');"
-            );
-            $Selenium->WaitFor(
-                JavaScript =>
-                    "return \$('#$Test->{ID}').closest('.WidgetSimple').find('.fa-check').length;"
-            );
-            $Selenium->WaitFor(
-                JavaScript =>
-                    "return !\$('#$Test->{ID}').closest('.WidgetSimple').hasClass('HasOverlay');"
+                    'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete',
             );
 
+            $Self->Is(
+                $Selenium->execute_script("return \$('#$Test->{ID}').val();"),
+                $Test->{Value},
+                "Preference $Test->{Name} saved.",
+            );
         }
     }
 );
