@@ -395,11 +395,15 @@ sub ProcessGet {
     # get cache object
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
-    my $Cache = $CacheObject->Get(
-        Type => 'ProcessManagement_Process',
-        Key  => $CacheKey,
-    );
-    return $Cache if $Cache;
+    # Data for an export contains the file contents of preferences as Base64 and therefore
+    #   must not be taken from or written to the cache, which holds the data for regular usage.
+    if ( !$Param{Export} ) {
+        my $Cache = $CacheObject->Get(
+            Type => 'ProcessManagement_Process',
+            Key  => $CacheKey,
+        );
+        return $Cache if $Cache;
+    }
 
     # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
@@ -607,12 +611,14 @@ sub ProcessGet {
     }
 
     # set cache
-    $CacheObject->Set(
-        Type  => 'ProcessManagement_Process',
-        Key   => $CacheKey,
-        Value => \%Data,
-        TTL   => $Self->{CacheTTL},
-    );
+    if ( !$Param{Export} ) {
+        $CacheObject->Set(
+            Type  => 'ProcessManagement_Process',
+            Key   => $CacheKey,
+            Value => \%Data,
+            TTL   => $Self->{CacheTTL},
+        );
+    }
 
     return \%Data;
 }
@@ -2051,8 +2057,17 @@ sub ProcessImport {
                     if ( $PreferenceConfig{Block} eq 'File' ) {
                         my %File;
 
-                        # Decode the file content
-                        $File{Content}     = decode_base64( $Value->{Content} );
+                        # Decode the file content.
+                        # Exports of older versions can contain the raw content as reference
+                        #   instead of Base64. In this case the content has to be turned back
+                        #   into a byte string.
+                        if ( ref $Value->{Content} eq 'SCALAR' ) {
+                            $File{Content} = ${ $Value->{Content} };
+                            utf8::downgrade( $File{Content}, 1 );
+                        }
+                        else {
+                            $File{Content} = decode_base64( $Value->{Content} );
+                        }
                         $File{Preferences} = $Value->{Preferences};
 
                         # To store the file in the VirtualFS, we need to create a unique filename
@@ -2230,11 +2245,15 @@ sub ProcessPreferencesGet {
     return if !$PreferencesConfig;
 
     # return cache
-    my $Cache = $CacheObject->Get(
-        Type => $Self->{CacheType},
-        Key  => $Self->{CachePrefix} . $Param{ProcessEntityID},
-    );
-    return %{$Cache} if $Cache;
+    # Data for an export contains the file contents of preferences as Base64 and therefore
+    #   must not be taken from or written to the cache, which holds the data for regular usage.
+    if ( !$Param{Export} ) {
+        my $Cache = $CacheObject->Get(
+            Type => $Self->{CacheType},
+            Key  => $Self->{CachePrefix} . $Param{ProcessEntityID},
+        );
+        return %{$Cache} if $Cache;
+    }
 
     # get preferences
     return if !$DBObject->Prepare(
@@ -2303,12 +2322,14 @@ sub ProcessPreferencesGet {
     }
 
     # set cache
-    $CacheObject->Set(
-        Type  => $Self->{CacheType},
-        TTL   => $Self->{CacheTTL},
-        Key   => $Self->{CachePrefix} . $Param{ProcessEntityID},
-        Value => \%Data,
-    );
+    if ( !$Param{Export} ) {
+        $CacheObject->Set(
+            Type  => $Self->{CacheType},
+            TTL   => $Self->{CacheTTL},
+            Key   => $Self->{CachePrefix} . $Param{ProcessEntityID},
+            Value => \%Data,
+        );
+    }
 
     return %Data;
 }
