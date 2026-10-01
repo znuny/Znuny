@@ -121,6 +121,7 @@ $Selenium->RunTest(
         # Check displayed date and time values.
         for my $FieldGroup (qw(Start End)) {
             for my $FieldType (qw(Year Month Day)) {
+
                 # Modernize hides the select. WebDriver get_value() on that node is empty.
                 $Self->Is(
                     int $Selenium->execute_script(

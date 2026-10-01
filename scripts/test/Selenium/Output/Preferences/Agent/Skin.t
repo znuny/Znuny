@@ -47,7 +47,8 @@ $Selenium->RunTest(
         );
         $Selenium->execute_script('window.SeleniumSkinUpdated = 1;');
         $Selenium->WaitForjQueryEventBound(
-            CSSSelector => "form:has(input[type=hidden][name=Group][value=Skin]) .WidgetSimple .SettingUpdateBox button.Update",
+            CSSSelector =>
+                "form:has(input[type=hidden][name=Group][value=Skin]) .WidgetSimple .SettingUpdateBox button.Update",
         );
         $Selenium->execute_script(
             "\$('#UserSkin').closest('.WidgetSimple').find('.SettingUpdateBox').find('button.Update').trigger('click');"

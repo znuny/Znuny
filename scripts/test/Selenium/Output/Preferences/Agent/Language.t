@@ -66,8 +66,8 @@ $Selenium->RunTest(
                 my $Ready = eval {
                     $Selenium->execute_script(
                         "return typeof(\$) === 'function'"
-                        . " && \$('#UserLanguage').val() === '$Language'"
-                        . " && \$('label[for=\"UserLanguage_Search\"]').text().trim() === '$LanguageLabel';"
+                            . " && \$('#UserLanguage').val() === '$Language'"
+                            . " && \$('label[for=\"UserLanguage_Search\"]').text().trim() === '$LanguageLabel';"
                     );
                 };
                 return $Ready;
