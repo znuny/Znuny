@@ -210,7 +210,7 @@ sub Run {
     }
 
     # check min 2 char password
-    if ( $Config->{PasswordMin2Characters} && $Pw !~ /[A-z][A-z]/ ) {
+    if ( $Config->{PasswordMin2Characters} && $Pw !~ /[a-z].*[a-z]/i ) {
         $Self->{Error}
             = $LanguageObject->Translate('Can\'t update password, it must contain at least 2 letter characters!');
         return;

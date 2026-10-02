@@ -11,6 +11,7 @@ package Kernel::System::Web::InterfaceAgent;
 
 use strict;
 use warnings;
+use utf8;
 
 use Digest::SHA qw(sha256_hex);
 
@@ -22,6 +23,7 @@ our @ObjectDependencies = (
     'Kernel::Output::HTML::Layout',
     'Kernel::System::Auth',
     'Kernel::System::AuthSession',
+    'Kernel::System::Cache',
     'Kernel::System::DB',
     'Kernel::System::Email',
     'Kernel::System::Group',
@@ -844,7 +846,7 @@ sub Run {
             if ( $PasswordConfig->{PasswordNeedDigit} && $NewPW !~ /\d/ ) {
                 push @PolicyErrors, Translatable('Password must contain at least 1 digit!');
             }
-            if ( $PasswordConfig->{PasswordMin2Characters} && $NewPW !~ /[A-z][A-z]/ ) {
+            if ( $PasswordConfig->{PasswordMin2Characters} && $NewPW !~ /[a-z].*[a-z]/i ) {
                 push @PolicyErrors, Translatable('Password must contain at least 2 letter characters!');
             }
 
