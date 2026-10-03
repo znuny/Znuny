@@ -1164,9 +1164,9 @@ sub Run {
         # challenge token check for write action
         $LayoutObject->ChallengeTokenCheck();
 
-        my $Name               = $ParamObject->GetParam( Param => 'Name' )     || '';
-        my $Version            = $ParamObject->GetParam( Param => 'Version' )  || '';
-        my $KeepData           = $ParamObject->GetParam( Param => 'KeepData' ) || 1;
+        my $Name               = $ParamObject->GetParam( Param => 'Name' )    || '';
+        my $Version            = $ParamObject->GetParam( Param => 'Version' ) || '';
+        my $KeepData           = $ParamObject->GetParam( Param => 'KeepData' ) // 1;
         my $IntroUninstallPost = $ParamObject->GetParam( Param => 'IntroUninstallPost' )
             || '';
 

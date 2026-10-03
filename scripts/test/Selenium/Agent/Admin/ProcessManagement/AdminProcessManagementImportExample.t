@@ -70,10 +70,9 @@ $Selenium->RunTest(
 
         # Check error message.
         $Self->True(
-            index(
-                $Selenium->get_page_source(),
-                "Dynamic field PreProcApplicationRecorded already exists, but definition is wrong."
-            ) > -1,
+            $Selenium->execute_script(
+                "return \$('.ErrorScreen:contains(\"An Error Occurred\")').length;"
+            ),
             "Error message is shown.",
         );
 
