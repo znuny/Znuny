@@ -569,6 +569,14 @@ sub TicketListShow {
         $View = 'Preview';
     }
 
+    # the Medium and Preview (large) overview views are not usable on narrow/tablet screens
+    # (see the NarrowScreenView cookie set by Core.App.Responsive.js) - force Small instead of
+    # rendering their content, since CSS alone only hides them visually without saving the work
+    my $NarrowScreenView = $Kernel::OM->Get('Kernel::System::Web::Request')->GetCookie( Key => 'NarrowScreenView' );
+    if ( $View ne 'Small' && $NarrowScreenView ) {
+        $View = 'Small';
+    }
+
     # store latest view mode
     $Kernel::OM->Get('Kernel::System::AuthSession')->UpdateSessionID(
         SessionID => $Self->{SessionID},
@@ -764,11 +772,14 @@ sub TicketListShow {
     }
 
     # view mode
+    BACKEND:
     for my $Backend (
         sort { $Backends->{$a}->{ModulePriority} <=> $Backends->{$b}->{ModulePriority} }
         keys %{$Backends}
         )
     {
+        # don't offer switching to a view that gets forced back to Small anyway
+        next BACKEND if $NarrowScreenView && $Backend ne 'Small';
 
         $Self->Block(
             Name => 'OverviewNavBarViewMode',

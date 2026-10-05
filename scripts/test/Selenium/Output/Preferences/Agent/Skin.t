@@ -38,25 +38,24 @@ $Selenium->RunTest(
         # go to agent preferences
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentPreferences;Subaction=Group;Group=Miscellaneous");
 
-        # change test users skin to ivory
+        # Available agent skins are "default" and "dark" (Loader::Agent::Skin).
+        # Saving the skin sets NeedsReload, which reloads the page and removes the
+        # success icon before it can be observed.
         $Selenium->InputFieldValueSet(
             Element => '#UserSkin',
-            Value   => 'ivory',
+            Value   => 'dark',
+        );
+        $Selenium->execute_script('window.SeleniumSkinUpdated = 1;');
+        $Selenium->WaitForjQueryEventBound(
+            CSSSelector =>
+                "form:has(input[type=hidden][name=Group][value=Skin]) .WidgetSimple .SettingUpdateBox button.Update",
         );
         $Selenium->execute_script(
-            "\$('#UserSkin').closest('.WidgetSimple').find('.SettingUpdateBox').find('button').trigger('click');"
+            "\$('#UserSkin').closest('.WidgetSimple').find('.SettingUpdateBox').find('button.Update').trigger('click');"
         );
         $Selenium->WaitFor(
             JavaScript =>
-                "return \$('#UserSkin').closest('.WidgetSimple').hasClass('HasOverlay')"
-        );
-        $Selenium->WaitFor(
-            JavaScript =>
-                "return \$('#UserSkin').closest('.WidgetSimple').find('.fa-check').length"
-        );
-        $Selenium->WaitFor(
-            JavaScript =>
-                "return !\$('#UserSkin').closest('.WidgetSimple').hasClass('HasOverlay')"
+                "return !window.SeleniumSkinUpdated && typeof(\$) === 'function' && \$('#UserSkin').val() === 'dark';"
         );
     }
 );

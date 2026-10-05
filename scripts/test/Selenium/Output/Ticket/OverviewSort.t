@@ -219,24 +219,23 @@ $Selenium->RunTest(
         );
 
         # Set filter to test CustomerID.
+        # CustomerID may contain # and %. A CSS attribute selector cannot match that
+        # value (bug#14982), so select the option on the multiselect and fire change.
         $Selenium->execute_script("\$('.ColumnSettingsTrigger[title*=\"Customer ID\"]').click();");
 
-        sleep 3;
+        $Selenium->WaitFor(
+            JavaScript =>
+                'return typeof($) === "function" && $("a.ColumnSettingsTrigger[title*=\'Customer ID\']").next(".ColumnSettingsContainer").find("div.ColumnSettingsBox:visible").length'
+        );
 
         $Selenium->WaitFor(
             JavaScript =>
-                'return typeof($) === "function" && $(".InputField_Search").length'
+                "return \$('select[name=\"ColumnFilterCustomerID\"] option').filter(function () { return this.value === '$TestCompany'; }).length > 0;"
         );
 
-        $Selenium->find_element( '.InputField_Search', 'css' )->send_keys($TestCompany);
-
-        # Wait for AJAX to finish.
-        $Selenium->WaitFor(
-            JavaScript =>
-                'return typeof($) === "function" && !$("span.AJAXLoader:visible").length'
+        $Selenium->execute_script(
+            "\$('select[name=\"ColumnFilterCustomerID\"]').val(['$TestCompany']).trigger('change');"
         );
-
-        $Selenium->find_element( "li[data-id='$TestCompany']", 'css' )->click();
 
         $Selenium->WaitFor(
             JavaScript =>
@@ -275,19 +274,35 @@ $Selenium->RunTest(
             $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $(".Dialog").length' );
 
             # Enable escalation time columns in overview screen.
-            for my $ColumName ( 'EscalationResponseTime', 'EscalationSolutionTime', 'EscalationUpdateTime' ) {
-                $Selenium->mouse_move_to_location(
-                    element => $Selenium->find_element( "//li[\@data-fieldname='$ColumName']", 'xpath' ),
-                );
-                $Selenium->DragAndDrop(
-                    Element      => "li[data-fieldname=\"$ColumName\"]",
-                    Target       => '#AssignedFields-DashboardAgentTicketStatusView',
-                    TargetOffset => {
-                        X => 185,
-                        Y => 10,
-                    },
-                );
-            }
+            # Legacy mouse drag does not update the allocation list on current Chrome.
+            $Selenium->execute_script(
+                q{
+                    var Names = ['EscalationResponseTime', 'EscalationSolutionTime', 'EscalationUpdateTime'];
+                    var $Assigned = $('#AssignedFields-DashboardAgentTicketStatusView');
+                    var $Available = $('#AvailableField-DashboardAgentTicketStatusView');
+                    $.each(Names, function (Index, Name) {
+                        $Assigned.append($Available.find('li[data-fieldname="' + Name + '"]'));
+                    });
+                    var $Container = $Assigned.closest('.AllocationListContainer');
+                    var Data = { Columns: {}, Order: [] };
+                    $Container.find('.AvailableFields li').each(function () {
+                        var FieldName = $(this).attr('data-fieldname');
+                        if (!FieldName) {
+                            return;
+                        }
+                        Data.Columns[FieldName] = 0;
+                    });
+                    $Container.find('.AssignedFields li').each(function () {
+                        var FieldName = $(this).attr('data-fieldname');
+                        if (!FieldName) {
+                            return;
+                        }
+                        Data.Columns[FieldName] = 1;
+                        Data.Order.push(FieldName);
+                    });
+                    $Container.closest('form').find('.ColumnsJSON').val(Core.JSON.Stringify(Data));
+                }
+            );
 
             $Selenium->find_element( "#DialogButton1", 'css' )->VerifiedClick();
 
@@ -334,7 +349,17 @@ $Selenium->RunTest(
             for my $Test (@Tests) {
 
                 # Sort by Escalation column and verify OrderBy of ticket with and without escalation times.
-                $Selenium->find_element("//a[contains(\@title, \'$Test->{ColumnName}\' )]")->VerifiedClick();
+                # Chrome 74 refuses WebDriver clicks on header links outside the table viewport.
+                $Selenium->execute_script('window.Core.App.PageLoadComplete = false;');
+                $Selenium->execute_script(
+                    "var Link = \$('th a[name=\"OverviewControl\"][title*=\"$Test->{ColumnName}\"]')[0];"
+                        . "Link.scrollIntoView(true);"
+                        . "Link.click();"
+                );
+                $Selenium->WaitFor(
+                    JavaScript =>
+                        'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete'
+                );
 
                 my $Index = 0;
                 for my $TicketID ( @{ $Test->{ExpectedOrder} } ) {

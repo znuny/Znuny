@@ -193,15 +193,19 @@ Core.Agent.Responsive = (function (TargetNS) {
 
     // MOBILE - Show Actions Menu
 
+    // delegated from the document since articles (and their own Options button) get replaced
+    // via AJAX in Core.Agent.TicketZoom.js's LoadArticle(), which would otherwise leave newly
+    // loaded buttons without a click handler
+
     //open
-    $('.mobile-action-option').on('click', function() {
+    $(document).on('click', '.mobile-action-option', function() {
         $('body').addClass('has-options-overlay-opened');
         $('html').addClass('NoScroll');
         $(this).closest('.ItemActions, .ActionRow').addClass('active');
     });
 
     //close
-    $('.Actions-close, .btn-collapse').on('click', function() {
+    $(document).on('click', '.Actions-close, .btn-collapse', function() {
         $('body').removeClass('has-options-overlay-opened');
         $('html').removeClass('NoScroll');
         $(this).closest('.ItemActions, .ActionRow').removeClass('active');

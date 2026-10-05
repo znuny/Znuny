@@ -774,7 +774,13 @@ set SLA preferences
 sub SLAPreferencesSet {
     my ( $Self, %Param ) = @_;
 
-    return $Self->{PreferencesObject}->SLAPreferencesSet(%Param);
+    $Self->{PreferencesObject}->SLAPreferencesSet(%Param);
+
+    $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
+        Type => $Self->{CacheType},
+    );
+
+    return 1;
 }
 
 =head2 SLAPreferencesGet()

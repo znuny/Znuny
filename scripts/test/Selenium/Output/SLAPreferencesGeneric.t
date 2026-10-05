@@ -108,8 +108,9 @@ $Selenium->RunTest(
             "#Comment stored value",
         );
 
+        # Textarea content is the element value, not the value attribute.
         $Self->Is(
-            $Selenium->find_element( '#Comment2', 'css' )->get_value(),
+            $Selenium->execute_script("return document.getElementById('Comment2').value;"),
             'SLAPreferences Comment2',
             "#Comment2 stored value",
         );
@@ -125,7 +126,7 @@ $Selenium->RunTest(
         $Selenium->find_element( $RandomSLAName, 'link_text' )->VerifiedClick();
 
         $Self->Is(
-            $Selenium->find_element( '#Comment2', 'css' )->get_value(),
+            $Selenium->execute_script("return document.getElementById('Comment2').value;"),
             $UpdatedComment,
             "#Comment2 updated value",
         );
