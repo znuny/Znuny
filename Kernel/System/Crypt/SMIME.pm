@@ -541,8 +541,21 @@ sub Verify {
         $NoVerifyOption = '-noverify';
     }
 
-    my $Options = "smime -verify $NoVerifyOption -in $SignedFile -out $VerifiedFile -signer $SignerFile "
-        . "-CApath $Self->{CertPath} $CertificateOption $SignedFile";
+    # Don't use default CA certs on S/MIME verification if SMIME::NoDefaultCA is enabled.
+    # See also https://docs.openssl.org/master/man1/openssl-verification-options/#trusted-certificate-options
+    my $NoDefaultCAOptions = '';
+    if ( $ConfigObject->Get('SMIME::NoDefaultCA') ) {
+        $NoDefaultCAOptions = '-no-CAfile -no-CApath';
+        if ( $Self->{OpenSSLMajorVersion} >= 3 ) {
+
+            # Disable also default certificates store (option available in OpenSSL 3+).
+            $NoDefaultCAOptions = $NoDefaultCAOptions . ' -no-CAstore';
+        }
+    }
+
+    my $Options
+        = "smime -verify $NoVerifyOption $NoDefaultCAOptions -in $SignedFile -out $VerifiedFile -signer $SignerFile "
+        . "-CApath $Self->{CertPath} $CertificateOption";
 
     my @LogLines = qx{$Self->{Cmd} $Options 2>&1};
     for my $LogLine (@LogLines) {
