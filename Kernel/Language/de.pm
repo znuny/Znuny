@@ -1858,6 +1858,12 @@ sub Data {
         'A queue with this name already exists!' => 'Eine Queue mit diesem Namen ist bereits vorhanden!',
         'This queue is present in a SysConfig setting, confirmation for updating settings to point to the new queue is needed!' =>
             'Diese Queue ist in einer SysConfig-Einstellung vorhanden. Eine Bestätigung für die Aktualisierung der Einstellung auf die neue Queue ist notwendig!',
+        'It is not possible to invalidate this entry because it is assigned to one or more system e-mail addresses.' =>
+            'Es ist nicht möglich, diesen Eintrag ungültig zu setzen, da er einer oder mehreren System-E-Mail-Adressen zugewiesen ist.',
+        'It is not possible to invalidate this entry because it is assigned to one or more mail accounts.' =>
+            'Es ist nicht möglich, diesen Eintrag ungültig zu setzen, da er einem oder mehreren E-Mail-Konten zugewiesen ist.',
+        'It is not possible to invalidate this entry because it is assigned to one or more system e-mail addresses and one or more mail accounts.' =>
+            'Es ist nicht möglich, diesen Eintrag ungültig zu setzen, da er einer oder mehreren System-E-Mail-Adressen und einem oder mehreren E-Mail-Konten zugewiesen ist.',
         'Sub-queue of' => 'Unter-Queue von',
         'Follow up Option' => 'Nachfrage-Option',
         'Specifies if follow up to closed tickets would re-open the ticket, be rejected or lead to a new ticket.' =>
