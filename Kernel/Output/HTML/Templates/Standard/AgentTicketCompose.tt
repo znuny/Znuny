@@ -27,7 +27,6 @@
                                 <input type="hidden" name="FormID" value="[% Data.FormID | html %]" />
                                 <input type="hidden" name="ResponseID" value="[% Data.ResponseID | html %]" />
                                 <input type="hidden" name="ReplyArticleID" value="[% Data.ReplyArticleID | html %]" />
-                                <input type="hidden" name="IsVisibleForCustomerPresent" value="1" />
                                 <input type="hidden" name="FormDraftTitle" value="[% Data.FormDraftTitle | html %]" />
                                 <input type="hidden" name="FormDraftID" value="[% Data.FormDraftID | html %]" />
                                 <input type="hidden" name="FormDraftAction" id="FormDraftAction" />
