@@ -15,6 +15,7 @@ use warnings;
 use Kernel::System::VariableCheck qw(:all);
 use MIME::Base64;
 use File::Basename;
+use Math::Random::Secure qw();
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -38,7 +39,7 @@ sub FormIDCreate {
     my ( $Self, %Param ) = @_;
 
     # return requested form id
-    return time() . '.' . rand(12341241);
+    return time() . '.' . Math::Random::Secure::rand(12341241);
 }
 
 sub FormIDRemove {
@@ -55,6 +56,7 @@ sub FormIDRemove {
     }
 
     return if !$Self->_FormIDValidate( $Param{FormID} );
+    return if !$Self->_FormIDOwnerCheck(%Param);
 
     return if !$Kernel::OM->Get('Kernel::System::DB')->Do(
         SQL => '
@@ -80,6 +82,7 @@ sub FormIDAddFile {
     }
 
     return if !$Self->_FormIDValidate( $Param{FormID} );
+    return if !$Self->_FormIDOwnerCheck(%Param);
 
     $Param{Content} = '' if !defined( $Param{Content} );
 
@@ -102,7 +105,7 @@ sub FormIDAddFile {
     my $Disposition = $Param{Disposition} || '';
     if ( !$ContentID && lc $Disposition eq 'inline' ) {
 
-        my $Random = rand 999999;
+        my $Random = Math::Random::Secure::rand(999999);
         my $FQDN   = $Kernel::OM->Get('Kernel::Config')->Get('FQDN');
 
         $ContentID = "$Disposition$Random.$Param{FormID}\@$FQDN";
@@ -113,14 +116,22 @@ sub FormIDAddFile {
 
     my $Filename = basename( $Param{Filename} );
 
+    my $UserID;
+    my $UserType;
+    if ( $Param{UserID} && $Param{UserType} ) {
+        $UserID   = $Param{UserID};
+        $UserType = $Param{UserType};
+    }
+
     return if !$DBObject->Do(
         SQL => '
             INSERT INTO web_upload_cache (form_id, filename, content_type, content_size, content,
-                create_time_unix, content_id, disposition)
-            VALUES  (?, ?, ?, ?, ?, ?, ?, ?)',
+                create_time_unix, content_id, disposition, user_id, user_type)
+            VALUES  (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
         Bind => [
             \$Param{FormID},  \$Filename, \$Param{ContentType}, \$Param{Filesize},
-            \$Param{Content}, \$Time,     \$ContentID,          \$Param{Disposition}
+            \$Param{Content}, \$Time,     \$ContentID,          \$Param{Disposition},
+            \$UserID,         \$UserType,
         ],
     );
 
@@ -141,6 +152,7 @@ sub FormIDRemoveFile {
     }
 
     return if !$Self->_FormIDValidate( $Param{FormID} );
+    return if !$Self->_FormIDOwnerCheck(%Param);
 
     my @Index = @{ $Self->FormIDGetAllFilesMeta(%Param) };
 
@@ -177,6 +189,7 @@ sub FormIDGetAllFilesData {
     }
 
     return \@Data if !$Self->_FormIDValidate( $Param{FormID} );
+    return \@Data if !$Self->_FormIDOwnerCheck(%Param);
 
     # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
@@ -233,6 +246,7 @@ sub FormIDGetAllFilesMeta {
     }
 
     return \@Data if !$Self->_FormIDValidate( $Param{FormID} );
+    return \@Data if !$Self->_FormIDOwnerCheck(%Param);
 
     # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
@@ -343,6 +357,55 @@ sub _FormIDValidate {
     }
 
     return 1;
+}
+
+sub _FormIDOwnerCheck {
+    my ( $Self, %Param ) = @_;
+
+    my $DBObject  = $Kernel::OM->Get('Kernel::System::DB');
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    my %Owner;
+
+    # no owner given (e.g. console commands, daemon)
+    return 1 if !$Param{UserID} || !$Param{UserType};
+
+    if ( $Param{UserType} ne 'User' && $Param{UserType} ne 'CustomerUser' ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Invalid UserType '$Param{UserType}'!",
+        );
+        return;
+    }
+
+    return if !$DBObject->Prepare(
+        SQL => '
+            SELECT user_id, user_type
+            FROM web_upload_cache
+            WHERE form_id = ?
+                AND user_id IS NOT NULL',
+        Bind  => [ \$Param{FormID} ],
+        Limit => 1,
+    );
+
+    while ( my @Row = $DBObject->FetchrowArray() ) {
+        %Owner = (
+            UserID   => $Row[0],
+            UserType => $Row[1] // '',
+        );
+    }
+
+    # Form ID has no owner yet
+    return 1 if !%Owner;
+
+    return 1 if $Owner{UserID} eq $Param{UserID} && $Owner{UserType} eq $Param{UserType};
+
+    $LogObject->Log(
+        Priority => 'notice',
+        Message  => "Access to FormID $Param{FormID} denied for $Param{UserType} $Param{UserID}.",
+    );
+
+    return;
 }
 
 1;

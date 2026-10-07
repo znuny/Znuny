@@ -1257,6 +1257,14 @@ sub Run {
         $Kernel::OM->ObjectsDiscard( Objects => ['Kernel::Output::HTML::Layout'] );
         my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
+        # bind upload cache entries of this request to the logged in customer user
+        $Kernel::OM->ObjectParamAdd(
+            'Kernel::System::Web::UploadCache' => {
+                UserID   => $UserData{UserID},
+                UserType => 'CustomerUser',
+            },
+        );
+
         # update last request time
         if (
             !$ParamObject->IsAJAXRequest()

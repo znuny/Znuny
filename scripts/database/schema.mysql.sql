@@ -1082,7 +1082,9 @@ CREATE TABLE web_upload_cache (
     content_type VARCHAR (250) NULL,
     disposition VARCHAR (15) NULL,
     content LONGBLOB NOT NULL,
-    create_time_unix BIGINT NOT NULL
+    create_time_unix BIGINT NOT NULL,
+    user_id VARCHAR (250) NULL,
+    user_type VARCHAR (20) NULL
 );
 # ----------------------------------------------------------
 #  create table notification_event

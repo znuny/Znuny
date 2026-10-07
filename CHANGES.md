@@ -1,4 +1,5 @@
 # 6.5.26 2026-??-??
+ - 2026-10-07 Security: Form IDs for attachment uploads are now generated and handled securely. Thanks to @kta1kri for reporting the issue.
  - 2026-09-29 Fixed: PasswordMin2Characters policy check was slightly off.
  - 2026-09-18 Fixed: Notification to agent who created the ticket is not working for some ticket types.
  - 2026-09-17 Fixed: AdminDynamicFieldScreenConfiguration lists dynamic fields of all object types.
