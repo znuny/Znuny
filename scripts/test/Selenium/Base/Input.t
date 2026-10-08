@@ -53,9 +53,11 @@ my $SeleniumTest = sub {
         Attribute => 'CustomerUserID',
     );
 
-    $Self->Is(
+    # Customer selector stores one or more customers. Get() returns the list,
+    # same as the former CustomerAutoComplete field.
+    $Self->IsDeeply(
         $GetCustomerUserID,
-        $CustomerUser->{UserID},
+        [ $CustomerUser->{UserID} ],
         "Get CustomerUserID is '$CustomerUser->{UserID}'",
     );
 

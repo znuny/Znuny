@@ -1,9 +1,10 @@
 ---
 name: Pull Request
 
-# only trigger on pull request closed events
+# pull_request_target runs in the base repository, so secrets are available
+# for pull requests from forks. This workflow does not check out pull request code.
 on:
-  pull_request:
+  pull_request_target:
     types: [ closed ]
 
 jobs:
@@ -14,10 +15,17 @@ jobs:
     if: github.event.pull_request.merged == true && endsWith( github.base_ref, 'dev' )
     runs-on: ubuntu-latest
     env:
+      CURL_TOKEN: ${{ secrets.CURL_TOKEN }}
       CURL_DATA: ${{ secrets.CURL_DATA }}
-      CURL_URL: ${{ secrets.CURL_URL }}
     steps:
     - run: |
-        echo "PR #${{ github.event.number }} has been merged."
-        curl $CURL_DATA -F ref=$GITHUB_BASE_REF $CURL_URL > /dev/null 2>&1
-
+        if [ -z "$CURL_TOKEN" ] || [ -z "$CURL_DATA" ]; then
+          echo "CURL_TOKEN or CURL_DATA is not set."
+          exit 1
+        fi
+        # CURL_DATA is the full curl argument list. ${CURL_TOKEN} and
+        # ${GITHUB_BASE_REF} in that value are expanded here.
+        if ! eval "curl $CURL_DATA"; then
+          echo "Request failed."
+          exit 1
+        fi

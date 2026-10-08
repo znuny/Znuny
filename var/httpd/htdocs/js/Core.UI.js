@@ -170,10 +170,21 @@ Core.UI = (function (TargetNS) {
      * @function
      * @param {jQueryObject} $Widget - Widget element
      * @param {Boolean} Switch - Whether the overlay should show a success icon before being removed
+     * @param {Function} Callback - Optional function called once the overlay has been removed
      * @description
      *      This function removes an overlay from a given widget
      */
-    TargetNS.WidgetOverlayHide = function ($Widget, Switch) {
+    TargetNS.WidgetOverlayHide = function ($Widget, Switch, Callback) {
+
+        var CallbackCalled = false;
+
+        function Finish() {
+            $Widget.removeClass('HasOverlay');
+            if (!CallbackCalled && typeof Callback === 'function') {
+                CallbackCalled = true;
+                Callback();
+            }
+        }
 
         if (Switch) {
             $Widget
@@ -187,7 +198,7 @@ Core.UI = (function (TargetNS) {
                 .delay(1000)
                 .fadeOut(function() {
                     $(this).remove();
-                    $Widget.removeClass('HasOverlay');
+                    Finish();
                 });
         }
         else {
@@ -195,7 +206,7 @@ Core.UI = (function (TargetNS) {
                 .find('.Overlay')
                 .fadeOut(function() {
                     $(this).remove();
-                    $Widget.removeClass('HasOverlay');
+                    Finish();
                 });
         }
     };

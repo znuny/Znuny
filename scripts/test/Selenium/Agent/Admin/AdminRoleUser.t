@@ -85,7 +85,14 @@ $Selenium->RunTest(
         # Change test role relation for test user.
         $Selenium->find_element( $FullUserID, 'link_text' )->VerifiedClick();
 
-        $Selenium->find_element("//input[\@value='$RoleID']")->click();
+        # Chrome 74 cannot click the styled checkbox directly.
+        $Selenium->execute_script(
+            "var Element = \$('input[type=checkbox][value=$RoleID]:visible')[0];"
+                . "if (!Element) { return false; }"
+                . "Element.scrollIntoView(true);"
+                . "Element.click();"
+                . "return true;"
+        );
         $Selenium->WaitFor(
             JavaScript => "return \$('input[value=$RoleID]:checked:visible').length"
         );
@@ -141,7 +148,14 @@ $Selenium->RunTest(
         );
 
         # Remove test relation.
-        $Selenium->find_element("//input[\@value='$UserID']")->click();
+        # Chrome 74 cannot click the styled checkbox directly.
+        $Selenium->execute_script(
+            "var Element = \$('input[type=checkbox][value=$UserID]:visible')[0];"
+                . "if (!Element) { return false; }"
+                . "Element.scrollIntoView(true);"
+                . "Element.click();"
+                . "return true;"
+        );
         $Selenium->WaitFor(
             JavaScript => "return !\$('input[value=$RoleID]:checked:visible').length"
         );

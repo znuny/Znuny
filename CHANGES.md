@@ -1,7 +1,8 @@
 # 7.3.8 2026-??-??
+ - 2026-09-30 Fixed: Column settings filters in dashboard and overview screens could extend beyond the viewport. Thanks to @LuBroering (Lukas Bröring, Sector Nord AG) [PR#849](https://github.com/znuny/Znuny/pull/849).
  - 2026-09-30 Fixed: Process management: File preferences of a process (e. g. its icon) were exported as content reference instead of Base64 if the process had been cached before, so that they could not be imported.
  - 2026-09-26 Improved error handling when sending email messages. Thanks to Paweł Bogusławski (@pboguslawski). [PR#375](https://github.com/znuny/Znuny/pull/375)
- - 2026-09-25 Added: Column TicketAccountedTime for Dashboard, TicketOverview/Small and Linkobject/Ticket Thanks to @LuBroering (Lukas Bröring Sector Nord AG) [PR#574](https://github.com/znuny/Znuny/pull/574).
+ - 2026-09-25 Added: Column TicketAccountedTime for Dashboard, TicketOverview/Small and Linkobject/Ticket. Thanks to @LuBroering (Lukas Bröring Sector Nord AG) [PR#574](https://github.com/znuny/Znuny/pull/574).
  - 2026-09-22 Fixed: Misaligned all-day checkbox label in appointment dialog.
  - 2026-09-22 Added: ZNUNY_TA_* tag support alongside OTRS_TA_* in transition action ArticleSend.
  - 2026-09-22 Fixed: Transition action ArticleSend sends empty body/salutation/signature article if it's configured to use a standard template. Usage of any OTRS_TA_* tag should be fixed.
@@ -11,6 +12,9 @@
  - 2026-09-17 Fixed: Alignment of accounted time in ticket details.
  - 2026-09-16 Fixed: Notifications were shown in the background in some dialogs.
  - 2026-09-16 Fixed: Customer ticket process: Subject field is incorrectly indented.
+ - 2026-09-14 Fixed: Options button in ticket details mobile view stopped responding after switching to a different article. Thanks to @avononit for reporting the issue. [#671](https://github.com/znuny/Znuny/issues/671)
+ - 2026-09-14 Fixed: Medium and preview ticket overview views were fully accessible and rendered on narrow/tablet screens, with nothing restricting them.
+ - 2026-09-10 Fixed: Password policy check for option "minimum 2 characters" (Min2Characters) was too restrictive.
  - 2026-09-07 Fixed: Notification to agent who created the ticket is not working for some ticket types.
  - 2026-09-01 Fixed: Images with explicit HTML width/height attributes (e.g. logos in quoted email signatures) were stretched to fill their container. Thanks to @AVONON-DST for reporting the issue. [#743](https://github.com/znuny/Znuny/issues/743)
  - 2026-08-31 Fixed: Missing OutputFilterHook_NoTicketOptionsFallback in AgentTicketCompose and AgentTicketForward. Thanks to @scharfstuttgart for reporting the issue. [#846](https://github.com/znuny/Znuny/issues/846)

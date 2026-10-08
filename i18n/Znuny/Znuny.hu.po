@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2023-03-23 09:27+0000\n"
-"PO-Revision-Date: 2026-08-04 09:19+0000\n"
+"PO-Revision-Date: 2026-10-02 00:04+0000\n"
 "Last-Translator: Balázs Úr <balazs@urbalazs.hu>\n"
 "Language-Team: Hungarian <https://translations.znuny.org/projects/znuny/znuny/hu/>\n"
 "Language: hu\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.7.1\n"
+"X-Generator: Weblate 2026.8.1\n"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminACL.tt
 msgid "Actions"
@@ -25524,13 +25524,13 @@ msgstr "Az újraküldés nem lehetséges ennél a bejegyzésnél!"
 
 #. SysConfig
 msgid "As Popup"
-msgstr ""
+msgstr "Felugróként"
 
 #. SysConfig
 msgid "Blank"
-msgstr ""
+msgstr "Üres"
 
 #. SysConfig
 msgid "Self"
-msgstr ""
+msgstr "Önmaga"
 

@@ -146,13 +146,28 @@ $Selenium->RunTest(
         );
 
         # Check if Title or salutation is translated.
+        # Customer info on AgentTicketPhone lives in #CustomerInfo (section sidebar), not .SidebarColumn.
         $Self->Is(
-            $Selenium->execute_script("return \$('.SidebarColumn .TableLike p:first').text().trim()"),
+            $Selenium->execute_script("return \$('#CustomerInfo .TableLike p.Value:first').text().trim()"),
             $Mr,
             "Title of salutation '$Mr' correctly translated"
         );
-        $Selenium->find_element( "#Subject",        'css' )->send_keys('Some Subject');
-        $Selenium->find_element( "#RichText",       'css' )->send_keys('Some Text');
+        $Selenium->find_element( "#Subject",  'css' )->send_keys('Some Subject');
+        $Selenium->find_element( "#RichText", 'css' )->send_keys('Some Text');
+
+        # Kernel/Config.pm is loaded again after ZZZZUnitTest files, so a
+        # Ticket::Type override in this test does not hide the field when
+        # Config.pm enables it. Fill the mandatory type when it is shown.
+        my $TypeIDPresent = $Selenium->execute_script('return $("#TypeID").length');
+        if ($TypeIDPresent) {
+            $Selenium->execute_script(
+                "\$('#TypeID').val(\$('#TypeID option').filter(function () { return \$(this).html() == 'Unclassified'; } ).val() ).trigger('redraw.InputField').trigger('change');"
+            );
+            $Selenium->WaitFor(
+                JavaScript => 'return typeof($) === "function" && !$(".AJAXLoader:visible").length'
+            );
+        }
+
         $Selenium->find_element( "#submitRichText", 'css' )->VerifiedClick();
 
         # Get created test ticket ID and number.
@@ -162,13 +177,17 @@ $Selenium->RunTest(
         # Go to ticket zoom page of created test ticket.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID");
 
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $.active == 0;' );
+        # Customer Information on AgentTicketZoom is loaded asynchronously and uses an h3 title.
+        my $CustomerInformation = $LanguageObject->Translate('Customer Information');
+        $Selenium->WaitFor(
+            JavaScript =>
+                "return typeof(\$) === 'function' && \$('h3:contains($CustomerInformation)').closest('.modSidebarWidget').find('p:contains($Mr)').length;"
+        );
 
         # Check if Title or salutation is translated.
-        my $CustomerInformation = $LanguageObject->Translate('Customer Information');
         $Self->Is(
             $Selenium->execute_script(
-                "return \$('h2:contains($CustomerInformation)').closest('.WidgetSimple').find('p:contains($Mr)').length"
+                "return \$('h3:contains($CustomerInformation)').closest('.modSidebarWidget').find('p:contains($Mr)').length"
             ),
             1,
             "Title or salutation '$Mr' is found on screen."

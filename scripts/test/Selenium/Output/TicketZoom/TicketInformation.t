@@ -336,28 +336,37 @@ $Selenium->RunTest(
         $Selenium->VerifiedRefresh();
 
         # Verify there is 'Ticket Information' widget, it's enabled.
+        my $ParentElement = $Selenium->find_element(
+            "//div[contains(\@class, 'modTicketInformation')]/ancestor::div[contains(\@class, 'modSidebarWidget')]",
+            'xpath',
+        );
         $Self->Is(
-            $Selenium->find_element( '.Header>h2', 'css' )->get_text(),
+            $Selenium->find_child_element( $ParentElement, '.sidebarWidgetTitle > h3', 'css' )->get_text(),
             'Ticket Information',
             'Ticket Information widget is enabled',
         );
 
-        # Verify there is no collapsed elements on the screen.
+        # Verify widget is expanded.
         $Self->True(
-            $Selenium->find_element("//div[contains(\@class, \'WidgetSimple information-widget Expanded')]"),
+            $Selenium->find_element(
+                "//div[contains(\@class, 'modTicketInformation')]/ancestor::div[contains(\@class, 'modSidebarWidget')]/div[contains(\@class, 'inner') and not(contains(\@class, 'sidebarWidgetClosed'))]"
+            ),
             "Ticket Information Widget is expanded",
         );
 
         # Toggle to collapse 'Ticket Information' widget.
-        $Selenium->find_element(
-            "//a[contains(\@title, \'Show or hide the content' )]//i[contains(\@class, 'fa-caret-down')]"
-        )->click();
+        $Selenium->find_child_element( $ParentElement, '.sidebarWidgetTitle', 'css' )->click();
 
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("div.WidgetSimple.Collapsed").length' );
+        $Selenium->WaitFor(
+            JavaScript =>
+                'return typeof($) === "function" && $(".modTicketInformation").closest(".modSidebarWidget").children(".inner.sidebarWidgetClosed").length;'
+        );
 
-        # Verify there is collapsed element on the screen.
+        # Verify widget is collapsed.
         $Self->True(
-            $Selenium->find_element("//div[contains(\@class, 'WidgetSimple information-widget Collapsed')]"),
+            $Selenium->find_element(
+                "//div[contains(\@class, 'modTicketInformation')]/ancestor::div[contains(\@class, 'modSidebarWidget')]/div[contains(\@class, 'inner') and contains(\@class, 'sidebarWidgetClosed')]"
+            ),
             "Ticket Information Widget is collapsed",
         );
 

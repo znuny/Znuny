@@ -147,8 +147,13 @@ $Selenium->RunTest(
         $Selenium->VerifiedRefresh();
 
         # Verify there is 'Customer Information' widget, it's enabled.
+        # Sidebar widgets use an h3 inside .sidebarWidgetTitle.
+        my $ParentElement = $Selenium->find_element(
+            "//div[contains(\@class, 'modCustomerInformation')]/ancestor::div[contains(\@class, 'modSidebarWidget')]",
+            'xpath',
+        );
         $Self->Is(
-            $Selenium->find_element( '.Header>h2', 'css' )->get_text(),
+            $Selenium->find_child_element( $ParentElement, '.sidebarWidgetTitle > h3', 'css' )->get_text(),
             'Customer Information',
             'Customer Information widget is enabled',
         );
@@ -167,32 +172,30 @@ $Selenium->RunTest(
             "Found Ticket search link in Customer Information"
         );
 
-        # Verify there is no collapsed elements on the screen.
-        $Self->True(
-            $Selenium->find_element("//div[contains(\@class, \'WidgetSimple Expanded')]"),
-            "Customer Information Widget is expanded"
-        );
-
-        $Selenium->WaitFor(
-            JavaScript =>
-                'return typeof($) === "function" && $(".SidebarColumn a[title*=\'Show or hide the content\']").length;'
+        # Verify the customer information widget is expanded.
+        $Self->False(
+            $Selenium->execute_script(
+                'return $(".modCustomerInformation").closest(".modSidebarWidget").children(".inner").hasClass("sidebarWidgetClosed");'
+            ),
+            "Customer Information Widget is expanded",
         );
 
         # Toggle to collapse 'Customer Information' widget.
         $Selenium->find_element(
-            "//div[contains(\@class, 'SidebarColumn')]//a[contains(\@title, 'Show or hide the content')]//i[contains(\@class, 'fa-caret-down')]"
+            "//div[contains(\@class, 'modCustomerInformation')]/ancestor::div[contains(\@class, 'modSidebarWidget')]//div[contains(\@class, 'sidebarWidgetTitle')]"
         )->click();
 
         $Selenium->WaitFor(
-            JavaScript => 'return $(".SidebarColumn div.WidgetSimple.Collapsed").length;'
+            JavaScript =>
+                'return typeof($) === "function" && $(".modCustomerInformation").closest(".modSidebarWidget").children(".inner").hasClass("sidebarWidgetClosed");'
         );
 
-        # Verify there is collapsed element on the screen.
+        # Verify the customer information widget is collapsed.
         $Self->True(
-            $Selenium->find_element(
-                "//div[contains(\@class, 'SidebarColumn')]//div[contains(\@class, \'WidgetSimple Collapsed')]"
+            $Selenium->execute_script(
+                'return $(".modCustomerInformation").closest(".modSidebarWidget").children(".inner").hasClass("sidebarWidgetClosed");'
             ),
-            "Customer Information Widget is collapsed"
+            "Customer Information Widget is collapsed",
         );
 
         # Cleanup test data.

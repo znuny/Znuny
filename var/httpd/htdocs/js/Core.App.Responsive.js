@@ -82,6 +82,9 @@ Core.App.Responsive = (function (TargetNS) {
             AllClasses = GetAllScreenClasses().join(' '),
             Key, i;
 
+        // let the backend know about narrow/tablet screens
+        document.cookie = 'NarrowScreenView=' + (window.innerWidth <= 1024 ? '1' : '') + ';path=/';
+
         Core.App.Publish('Event.App.Responsive.CheckScreenResolution');
 
         // check visibility of responsive footer elements
