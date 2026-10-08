@@ -2473,7 +2473,7 @@ sub _Mask {
             Class => 'Modernize '
                 . ( $Config->{StateMandatory} ? 'Validate_Required ' : '' )
                 . ( $Param{NewStateInvalid} || '' ),
-            PossibleNone => 1,
+            PossibleNone => $Config->{StateDefault} ? 0 : 1,
             SelectedID   => $Selected{StateID},
         );
 

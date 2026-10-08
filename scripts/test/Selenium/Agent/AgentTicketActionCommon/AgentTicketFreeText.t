@@ -19,7 +19,7 @@ my $Selenium = $Kernel::OM->Get('Kernel::System::UnitTest::Selenium');
 my $WaitForAJAX = sub {
     $Selenium->WaitFor(
         JavaScript =>
-            'return typeof($) === "function" && !$("span.AJAXLoader:visible").length'
+            'return typeof($) === "function" && $.active == 0 && !$("span.AJAXLoader:visible").length'
     );
 };
 
@@ -461,6 +461,23 @@ $Selenium->RunTest(
                 );
 
                 # Wait for AJAX to finish.
+                $WaitForAJAX->();
+            }
+
+            # State changes rebuild dependent selects and can drop SLA.
+            # Restore service and SLA so the successful submit is not blocked
+            # by an empty required SLA.
+            if ( !$ExpectedErrorFieldID ) {
+                $Selenium->InputFieldValueSet(
+                    Element => '#ServiceID',
+                    Value   => $ServiceID,
+                );
+                $WaitForAJAX->();
+
+                $Selenium->InputFieldValueSet(
+                    Element => '#SLAID',
+                    Value   => $SLAID,
+                );
                 $WaitForAJAX->();
             }
 
