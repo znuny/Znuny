@@ -126,11 +126,22 @@ Core.Customer.TicketZoom = (function (TargetNS) {
             LoadingString = $SubjectHolder.attr('title'),
             $SourceIframe = $('.Iframe iframe', $Message).clone(),
             Source        = $SourceIframe.attr('title'),
-            $Iframe;
+            $Iframe,
+            $MessageContent = $Message.clone(),
+            $VisibleMessageContent = $('#VisibleMessageContent');
 
-        var $MessageContent = $Message.clone().html();
+        // skip if this exact article is already the one loaded, to avoid reloading the iframe
+        // and re-binding its load handler on repeated clicks/bubbled events on the same article
+        if ($VisibleMessageContent.data('LoadedMessage') === $Message.get(0)) return;
+        $VisibleMessageContent.data('LoadedMessage', $Message.get(0));
 
-        $('#VisibleMessageContent').html($MessageContent);
+        // #FollowUp (which contains #VisibleMessageContent) gets appended into the visible
+        // article's <li> on small screens, so a later clone of that <li> would otherwise
+        // duplicate the previously rendered content
+        $MessageContent.find('#FollowUp').remove();
+        $MessageContent = $MessageContent.html();
+
+        $VisibleMessageContent.html($MessageContent);
         $('#VisibleMessageContent .ArticleBody').addClass('Hidden');
         $('#VisibleMessageContent .Iframe').removeClass('Hidden');
 
@@ -210,8 +221,11 @@ Core.Customer.TicketZoom = (function (TargetNS) {
 
         ToggleMessage($('#Messages li:last'));
 
-        $('#Messages li').on('click', function(Event){
-            ToggleMessage($(this));
+        // delegate to .MessageHeader only, not the whole <li>, since #FollowUp (with the reply
+        // form) gets appended inside the visible <li> on small screens and would otherwise
+        // re-trigger ToggleMessage (and reload the iframe) on every click inside the reply form
+        $('#Messages').on('click', '.MessageHeader', function(Event){
+            ToggleMessage($(this).closest('li'));
             Event.preventDefault();
         });
         $('#ReplyButton').on('click', function(Event){
