@@ -209,6 +209,32 @@ $Selenium->RunTest(
                 "QueueID $QueueID is created",
             );
         }
+        else {
+
+            # A queue named Frontend can be left over from an earlier run and
+            # belong to a group this user cannot move into. Grant move_into so
+            # the option is present in the bulk queue list.
+            my $QueueGroupID = $QueueObject->GetQueueGroupID(
+                QueueID => $QueueID,
+            );
+            $Success = $GroupObject->PermissionGroupUserAdd(
+                GID        => $QueueGroupID,
+                UID        => $TestUserID,
+                Permission => {
+                    ro        => 1,
+                    move_into => 1,
+                    create    => 1,
+                    owner     => 1,
+                    priority  => 1,
+                    rw        => 1,
+                },
+                UserID => 1,
+            );
+            $Self->True(
+                $Success,
+                "Test user can move into queue Frontend",
+            );
+        }
         push @QueueIDs, $QueueID;
 
         my $TestCustomerUser      = 'User-' . $RandomNumber;
@@ -428,7 +454,7 @@ $Selenium->RunTest(
         );
 
         # Click on 'Undo & close' link.
-        $Selenium->find_element('.UndoClosePopup')->click();
+        $Selenium->find_element( '.UndoClosePopup', 'css' )->click();
 
         # Return to status view.
         $Selenium->WaitFor( WindowCount => 1 );

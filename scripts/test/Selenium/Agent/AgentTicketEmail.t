@@ -175,6 +175,41 @@ $Selenium->RunTest(
 
         my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
 
+        # Signature is rendered in an iframe, not a textarea.
+        my $SignatureTextGet = sub {
+            return $Selenium->execute_script(
+                q{
+                    var Frame = document.getElementById("Signature");
+                    if (!Frame || !Frame.contentDocument || !Frame.contentDocument.body) {
+                        return "";
+                    }
+                    return Frame.contentDocument.body.innerText.replace(/^\s+|\s+$/g, "");
+                }
+            );
+        };
+        my $SignatureTextWait = sub {
+            my ($Expected) = @_;
+
+            $Selenium->WaitFor(
+                JavaScript =>
+                    "return (function () {"
+                    . " var Frame = document.getElementById('Signature');"
+                    . " if (!Frame || !Frame.contentDocument || !Frame.contentDocument.body) { return false; }"
+                    . " return Frame.contentDocument.body.innerText.indexOf('$Expected') !== -1;"
+                    . " })();",
+            );
+        };
+        my $CustomerSelectedWait = sub {
+            my ($UserLogin) = @_;
+
+            $Selenium->WaitFor(
+                JavaScript =>
+                    'return typeof($) === "function" && $(".customerSelectorFieldInputSelectedCustomer[data-value=\''
+                    . $UserLogin
+                    . '\']").length && !$(".AJAXLoader:visible").length',
+            );
+        };
+
         # Navigate to AgentTicketEmail screen.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketEmail");
 
@@ -222,8 +257,9 @@ $Selenium->RunTest(
 
         # There is no selected customer, should be no replaced tags in signature.
         my $SignatureText = "Customer First Name: -";
+        $SignatureTextWait->($SignatureText);
         $Self->Is(
-            $Selenium->execute_script('return $("#Signature").val()'),
+            $SignatureTextGet->(),
             $SignatureText,
             "Signature is found with no replaced tags"
         );
@@ -272,16 +308,10 @@ $Selenium->RunTest(
         $Selenium->find_element( "#ToCustomer", 'css' )->send_keys( $TestData[0]->{UserLogin} );
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("li.ui-menu-item:visible").length' );
         $Selenium->execute_script("\$('li.ui-menu-item:contains($TestData[0]->{UserLogin})').click()");
-        $Selenium->WaitFor(
-            JavaScript =>
-                'return typeof($) === "function" && $("#CustomerKey_1").length && !$(".AJAXLoader:visible").length'
-        );
+        $CustomerSelectedWait->( $TestData[0]->{UserLogin} );
 
         $SignatureText = "Customer First Name: $TestData[0]->{UserFirstName}";
-        $Selenium->WaitFor(
-            JavaScript =>
-                "return typeof(\$) === 'function' && \$('#Signature').val().indexOf('$SignatureText') !== -1;"
-        );
+        $SignatureTextWait->($SignatureText);
 
         # Input subject data.
         my $TicketSubject = "Selenium Ticket";
@@ -290,7 +320,7 @@ $Selenium->RunTest(
 
         # Queue and customer are selected, signature has replaced tags.
         $Self->Is(
-            $Selenium->execute_script('return $("#Signature").val()'),
+            $SignatureTextGet->(),
             $SignatureText,
             "Signature is found with replaced tags on selected customer"
         );
@@ -307,8 +337,9 @@ $Selenium->RunTest(
 
         # Queue is changed, verify signature change with replaced tags.
         $SignatureText = "Customer Last Name: $TestData[0]->{UserLastName}";
+        $SignatureTextWait->($SignatureText);
         $Self->Is(
-            $Selenium->execute_script('return $("#Signature").val()'),
+            $SignatureTextGet->(),
             $SignatureText,
             "Signature is found with replaced tags on queue change"
         );
@@ -318,17 +349,21 @@ $Selenium->RunTest(
         $Selenium->find_element( "#ToCustomer", 'css' )->send_keys( $TestData[1]->{UserLogin} );
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("li.ui-menu-item:visible").length' );
         $Selenium->execute_script("\$('li.ui-menu-item:contains($TestData[1]->{UserLogin})').click()");
+        $CustomerSelectedWait->( $TestData[1]->{UserLogin} );
 
         # Change selected customer, trigger replacement tag in signature.
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("#CustomerSelected_2").length' );
-        $Selenium->find_element( "#CustomerSelected_2", 'css' )->click();
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$(".AJAXLoader:visible").length' );
-
-        $SignatureText = "Customer Last Name: $TestData[1]->{UserLastName}";
+        $Selenium->execute_script(
+            "\$('.customerSelectorFieldInputSelectedCustomer[data-value=\"$TestData[1]->{UserLogin}\"] .customerSelectorFieldInputSelectedCustomerSelect').trigger('click');"
+        );
         $Selenium->WaitFor(
             JavaScript =>
-                "return typeof(\$) === 'function' && \$('#Signature').val().indexOf('$SignatureText') !== -1;"
+                'return typeof($) === "function" && $(".customerSelectorFieldInputSelectedCustomer[data-value=\''
+                . $TestData[1]->{UserLogin}
+                . '\'].customerSelectorFieldInputSelectedCustomerActive").length && !$(".AJAXLoader:visible").length'
         );
+
+        $SignatureText = "Customer Last Name: $TestData[1]->{UserLastName}";
+        $SignatureTextWait->($SignatureText);
 
         # Input body data.
         my $TicketBody = "Selenium body test";
@@ -337,7 +372,7 @@ $Selenium->RunTest(
 
         # Selected customer is changed, signature replaced tags are changed.
         $Self->Is(
-            $Selenium->execute_script('return $("#Signature").val()'),
+            $SignatureTextGet->(),
             $SignatureText,
             "Signature is found with replaced tags on selected customer change"
         );
@@ -381,6 +416,23 @@ $Selenium->RunTest(
                 $Selenium->find_element( '#PriorityID', 'css' )->get_value(),
                 '3',
                 "#PriorityID updated value",
+            );
+        }
+
+        # Kernel/Config.pm is loaded after ZZZZUnitTest files, so Ticket::Type
+        # stays enabled when Config.pm turns it on. Fill the mandatory type
+        # with the first available value when the field is still empty.
+        my $TypeID = $Selenium->execute_script(
+            'if (!$("#TypeID").length || $("#TypeID").val()) { return ""; }'
+                . ' return $("#TypeID option").filter(function () { return $(this).val(); }).first().val() || "";'
+        );
+        if ($TypeID) {
+            $Selenium->InputFieldValueSet(
+                Element => '#TypeID',
+                Value   => $TypeID,
+            );
+            $Selenium->WaitFor(
+                JavaScript => 'return typeof($) === "function" && !$(".AJAXLoader:visible").length'
             );
         }
 
@@ -468,23 +520,18 @@ $Selenium->RunTest(
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("#ToCustomer").length' );
 
         # Select customer user.
+        # Session cookies are off, so customer search AJAX has no session.
+        # Commit the typed login directly; signature reload appends the session id.
         $Selenium->find_element( "#ToCustomer", 'css' )->send_keys( $TestData[0]->{UserLogin} );
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("li.ui-menu-item:visible").length' );
-        $Selenium->execute_script("\$('li.ui-menu-item:contains($TestData[0]->{UserLogin})').click()");
-        $Selenium->WaitFor(
-            JavaScript =>
-                'return typeof($) === "function" && $("#CustomerSelected_1").length && !$(".AJAXLoader:visible").length'
-        );
+        $Selenium->execute_script("\$('#ToCustomer').trigger('change');");
+        $CustomerSelectedWait->( $TestData[0]->{UserLogin} );
 
         $SignatureText = "Customer First Name: $TestData[0]->{UserFirstName}";
-        $Selenium->WaitFor(
-            JavaScript =>
-                "return typeof(\$) === 'function' && \$('#Signature').val().indexOf('$SignatureText') !== -1;"
-        );
+        $SignatureTextWait->($SignatureText);
 
         # Check if signature have correct text after set queue and customer user.
         $Self->Is(
-            $Selenium->execute_script('return $("#Signature").val()'),
+            $SignatureTextGet->(),
             $SignatureText,
             "Signature has correct text"
         );

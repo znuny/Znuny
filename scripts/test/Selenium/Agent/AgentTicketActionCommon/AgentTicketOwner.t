@@ -160,7 +160,7 @@ $Selenium->RunTest(
         # Wait until page has loaded, if necessary.
         $Selenium->WaitFor(
             JavaScript =>
-                'return typeof($) === "function" && $(".WidgetSimple").length;'
+                'return typeof($) === "function" && $("#Compose").length;'
         );
 
         # Check page.
@@ -229,6 +229,11 @@ $Selenium->RunTest(
         $Selenium->WaitFor(
             JavaScript =>
                 'return typeof($) === "function" && $("#Subject").length && $("#RichText").length && $("#submitRichText").length;'
+        );
+
+        # Collapsed article card posts CreateArticle only when the checkbox is checked.
+        $Selenium->execute_script(
+            "var Box = \$('#CreateArticle'); if (Box.is(':checkbox') && !Box.prop('checked')) { Box.prop('checked', true); }"
         );
 
         # Create Note article.
@@ -346,7 +351,7 @@ $Selenium->RunTest(
 
         # Wait until page has loaded, if necessary.
         $Selenium->WaitFor(
-            JavaScript => 'return typeof($) === "function" && $(".WidgetSimple").length && $("#NewOwnerID").length;'
+            JavaScript => 'return typeof($) === "function" && $("#Compose").length && $("#NewOwnerID").length;'
         );
 
         # Change ticket owner.

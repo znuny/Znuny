@@ -184,8 +184,11 @@ my $SeleniumTest = sub {
         push @ArticleBox, \%Article;
     }
 
+    my $ArticleBody = $ArticleBox[1]->{Body} // '';
+    chomp $ArticleBody;
+
     $Self->Is(
-        $ArticleBox[1]->{Body},
+        $ArticleBody,
         $NoteToLinkedTicket,
         "Article text is correct.",
     );

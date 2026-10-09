@@ -188,9 +188,12 @@ $Selenium->RunTest(
                 );
                 sleep 1;
 
-                # Upload a file.
-                $Selenium->find_element( "#FileUpload", 'css' )
-                    ->send_keys( $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.pdf" );
+                # upload_file copies the sample onto the Selenium node. Chrome cannot
+                # read /opt/znuny paths from the app container.
+                my $Location = $Selenium->upload_file(
+                    $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.pdf"
+                );
+                $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
 
                 # Check if uploaded.
                 $Self->Is(
@@ -333,8 +336,12 @@ $Selenium->RunTest(
         # Verify FormDraft values.
         for my $FieldValue ( sort keys %{ $FormDraftCase->{Fields} } ) {
             if ( $FormDraftCase->{Fields}->{$FieldValue}->{Type} eq 'Input' ) {
+
+                # get_value() reads the value attribute. Textarea content lives in the property.
                 $Self->Is(
-                    $Selenium->find_element( "#$FormDraftCase->{Fields}->{$FieldValue}->{ID}", 'css' )->get_value(),
+                    $Selenium->execute_script(
+                        "return \$('#$FormDraftCase->{Fields}->{$FieldValue}->{ID}').val();"
+                    ),
                     $FormDraftCase->{Fields}->{$FieldValue}->{Value},
                     "Initial FormDraft value for $FormDraftCase->{Module} field $FieldValue is correct"
                 );
@@ -372,9 +379,12 @@ $Selenium->RunTest(
                 );
                 sleep 1;
 
-                # Upload a file.
-                $Selenium->find_element( "#FileUpload", 'css' )
-                    ->send_keys( $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.doc" );
+                # upload_file copies the sample onto the Selenium node. Chrome cannot
+                # read /opt/znuny paths from the app container.
+                my $Location = $Selenium->upload_file(
+                    $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.doc"
+                );
+                $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
 
                 # Check if uploaded.
                 $Self->Is(
@@ -411,8 +421,12 @@ $Selenium->RunTest(
         # Verify updated FormDraft values.
         for my $FieldValue ( sort keys %{ $FormDraftCase->{Fields} } ) {
             if ( $FormDraftCase->{Fields}->{$FieldValue}->{Type} eq 'Input' ) {
+
+                # get_value() reads the value attribute. Textarea content lives in the property.
                 $Self->Is(
-                    $Selenium->find_element( "#$FormDraftCase->{Fields}->{$FieldValue}->{ID}", 'css' )->get_value(),
+                    $Selenium->execute_script(
+                        "return \$('#$FormDraftCase->{Fields}->{$FieldValue}->{ID}').val();"
+                    ),
                     $FormDraftCase->{Fields}->{$FieldValue}->{Update},
                     "Updated FormDraft value for $FormDraftCase->{Module} field $FieldValue is correct"
                 );
@@ -436,8 +450,9 @@ $Selenium->RunTest(
         $Selenium->WaitFor( WindowCount => 1 );
         $Selenium->switch_to_window( $Handles->[0] );
 
-        # Delete draft
-        $Selenium->find_element( ".FormDraftDelete", 'css' )->click();
+        # Delete draft.
+        # Native click misses the control: .table-icon-hover-md uses text-indent:-9999px.
+        $Selenium->execute_script("\$('a.FormDraftDelete').click();");
         $Selenium->WaitFor(
             JavaScript =>
                 'return typeof($) === "function" && $("#DeleteConfirm").length;'

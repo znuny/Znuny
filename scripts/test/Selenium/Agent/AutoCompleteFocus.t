@@ -84,7 +84,7 @@ $Selenium->RunTest(
         );
 
         $Self->Is(
-            $Selenium->find_element( "#FromCustomer", 'css' )->get_value(),
+            $Selenium->execute_script('return $("#FromCustomer").val();'),
             "1-${RandomID}A",
             "'FromCustomer' input field has correct value - 1-${RandomID}A",
         );
@@ -101,7 +101,10 @@ $Selenium->RunTest(
         $Selenium->find_element( "#FromCustomer", 'css' )->send_keys("\N{U+E007}");
 
         $Selenium->WaitFor(
-            JavaScript => 'return $("#CustomerSelected_1").length && !$(".AJAXLoader:visible").length'
+            JavaScript =>
+                'return typeof($) === "function" && $(".customerSelectorFieldInputSelectedCustomer[data-value=\''
+                . $CustomerUserLogins[0]
+                . '\']").length && !$(".AJAXLoader:visible").length'
         );
 
         # Type to match only the second customer user,
@@ -118,7 +121,7 @@ $Selenium->RunTest(
         );
 
         $Self->Is(
-            $Selenium->find_element( "#FromCustomer", 'css' )->get_value(),
+            $Selenium->execute_script('return $("#FromCustomer").val();'),
             "2-${RandomID}A",
             "'FromCustomer' input field has correct value - 2-${RandomID}A",
         );

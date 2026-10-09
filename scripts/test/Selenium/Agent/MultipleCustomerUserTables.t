@@ -349,12 +349,12 @@ $Selenium->RunTest(
 
             $Selenium->WaitFor(
                 JavaScript =>
-                    "return typeof(\$) === 'function' && \$('#TicketCustomerContentToCustomer .CustomerQueue').length == $Test->{WaitFor};"
+                    "return typeof(\$) === 'function' && \$('[data-recipient-field=\"ToCustomer\"] input[name^=\"CustomerQueue_\"]').length == $Test->{WaitFor};"
             );
 
             $Self->Is(
                 $Selenium->execute_script(
-                    "return \$('#TicketCustomerContentToCustomer .CustomerQueue[value*=\"$EmailAddress\"]').length;"
+                    "return \$('[data-recipient-field=\"ToCustomer\"] input[name^=\"CustomerQueue_\"][value*=\"$EmailAddress\"]').length;"
                 ),
                 1,
                 "Only one customer user email address '$EmailAddress' is found"

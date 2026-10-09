@@ -170,7 +170,7 @@ $Selenium->RunTest(
         # Wait until page has loaded, if necessary.
         $Selenium->WaitFor(
             JavaScript =>
-                'return typeof($) === "function" && $("#").length && $("div.TicketZoom").length;'
+                'return typeof($) === "function" && $("div.TicketZoom").length;'
         );
 
         # Make sure the cache is correct.

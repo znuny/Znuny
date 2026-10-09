@@ -257,7 +257,9 @@ $Selenium->RunTest(
         }
 
         $Self->Is(
-            $Selenium->execute_script("return \$('.Headline h1').text().trim();"),
+            $Selenium->execute_script(
+                "return \$('h1.ticketHeaderTitleHeadline').clone().children().remove().end().text().trim();"
+            ),
             "TestTicket#::$TicketNumber — $TitleRandom",
             "Ticket::Hook and Ticket::HookDivider found, check ticket title headline",
         );
@@ -328,9 +330,9 @@ $Selenium->RunTest(
         # Try to click on the email (link) that should open a popup window.
         $Selenium->WaitFor(
             JavaScript =>
-                'return typeof($) === "function" && $(".SidebarColumn div:nth-of-type(2) a.AsPopup").length'
+                'return typeof($) === "function" && $(".sectionSidebar #CustomerInfo a.AsPopup").length'
         );
-        $Selenium->find_element( ".SidebarColumn div:nth-of-type(2) a.AsPopup", "css" )->click();
+        $Selenium->find_element( ".sectionSidebar #CustomerInfo a.AsPopup", "css" )->click();
 
         # Wait for popup and switch.
         $Selenium->WaitFor( WindowCount => 2 );

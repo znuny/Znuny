@@ -2524,7 +2524,6 @@ sub _Mask {
     # get priority
     if ( $Config->{Priority} ) {
 
-        my %Priority;
         my %PriorityList = $TicketObject->TicketPriorityList(
             UserID   => $Self->{UserID},
             TicketID => $Self->{TicketID},
@@ -2543,7 +2542,7 @@ sub _Mask {
             }
         }
         else {
-            $Priority{SelectedID} = $Param{NewPriorityID};
+            $Selected{PriorityID} = $Param{NewPriorityID};
         }
 
         $Param{PriorityStrg} = $LayoutObject->BuildSelection(

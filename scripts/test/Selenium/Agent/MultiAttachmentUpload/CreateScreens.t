@@ -157,19 +157,21 @@ $Selenium->RunTest(
             $Location  = $Selenium->upload_file($LocalFile);
             $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
             $Selenium->WaitFor(
-                AlertPresent => 1,
+                JavaScript => 'return typeof($) === "function" && $(".Dialog:visible").length'
             );
 
-            # Verify alert text.
-            $Self->Is(
-                $Selenium->get_alert_text(),
-                'Sorry, you can only upload 2 files.',
-                "$Action - alert for max files shown correctly",
+            # Verify dialog message.
+            my $MaxFilesMessage = 'Sorry, you can only upload 2 files.';
+            $Self->True(
+                $Selenium->execute_script(
+                    "return \$('.Dialog.Modal .InnerContent:contains(\"$MaxFilesMessage\")').length"
+                ),
+                "$Action - MaxFilesMessage is found",
             );
 
-            # Accept alert.
-            $Selenium->accept_alert();
-            sleep 1;
+            # Confirm dialog action.
+            $Selenium->find_element( "#DialogButton1", 'css' )->click();
+            $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$(".Dialog.Modal").length' );
 
             my $Count = 2;
 

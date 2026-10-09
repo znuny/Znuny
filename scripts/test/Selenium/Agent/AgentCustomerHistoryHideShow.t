@@ -147,16 +147,14 @@ $Selenium->RunTest(
                 "Customer History table is found",
             );
 
-            my $CustomerContentID = 'TicketCustomerContent' . $Test->{FieldID};
-
             # Remove one of the entered customer users.
             $Selenium->execute_script(
-                "\$('#$CustomerContentID input[value=\"$CustomerUserLogins[1]\"]').siblings('a.RemoveButton').trigger('click');"
+                "\$('.customerSelectorFieldInputSelectedCustomer[data-value=\"$CustomerUserLogins[1]\"] .customerSelectorFieldInputSelectedCustomerRemove').trigger('click');"
             );
 
             $Selenium->WaitFor(
                 JavaScript =>
-                    "return typeof(\$) === 'function' && !\$('#$CustomerContentID input[value=\"$CustomerUserLogins[1]\"]').length"
+                    "return typeof(\$) === 'function' && !\$('.customerSelectorFieldInputSelectedCustomer[data-value=\"$CustomerUserLogins[1]\"]').length"
             );
 
             # Check customer history table existence.
@@ -167,12 +165,17 @@ $Selenium->RunTest(
 
             # Remove another (the last) customer user.
             $Selenium->execute_script(
-                "\$('#$CustomerContentID input[value=\"$CustomerUserLogins[0]\"]').siblings('a.RemoveButton').trigger('click');"
+                "\$('.customerSelectorFieldInputSelectedCustomer[data-value=\"$CustomerUserLogins[0]\"] .customerSelectorFieldInputSelectedCustomerRemove').trigger('click');"
             );
 
             $Selenium->WaitFor(
                 JavaScript =>
-                    "return typeof(\$) === 'function' && !\$('#$CustomerContentID input[value=\"$CustomerUserLogins[0]\"]').length"
+                    "return typeof(\$) === 'function' && !\$('.customerSelectorFieldInputSelectedCustomer[data-value=\"$CustomerUserLogins[0]\"]').length"
+            );
+
+            # History is cleared asynchronously after the last customer is removed.
+            $Selenium->WaitFor(
+                JavaScript => 'return typeof($) === "function" && !$("#CustomerTickets .OverviewBox").length'
             );
 
             # Check customer history table existence - should be gone.

@@ -604,8 +604,11 @@ $Selenium->RunTest(
                     }
                 ' );
 
-                $Selenium->find_element( "#OptionCustomerUserAddressBook" . $SubTest->{RecipientField}, 'css' )
-                    ->click();
+                $Selenium->find_element(
+                    '.customerSelectorFieldInputAddressBook[data-recipient-field="'
+                        . $SubTest->{RecipientField} . '"]',
+                    'css'
+                )->click();
 
                 $Selenium->SwitchToFrame(
                     FrameSelector => '.CustomerUserAddressBook',
@@ -928,11 +931,15 @@ $Selenium->RunTest(
                     $Selenium->switch_to_window( $Handles->[0] );
 
                     # Wait until form is updated with the selected customer user.
+                    my $RecipientTextName = $SubTest->{RecipientField} eq 'ToCustomer'
+                        ? 'CustomerTicketText_'
+                        : $SubTest->{RecipientField} . 'TicketText_';
+
                     $Selenium->WaitFor(
                         JavaScript =>
-                            'return typeof($) === "function" && $("#TicketCustomerContent'
-                            . $SubTest->{RecipientField}
-                            . ':visible").length'
+                            'return typeof($) === "function" && $(".inner[data-input-text-name=\\"'
+                            . $RecipientTextName
+                            . '\\"] .customerSelectorFieldInputSelectedCustomer").length'
                     );
 
                     # Wait for ajax call after customer user selection.
@@ -962,11 +969,15 @@ $Selenium->RunTest(
                     $Selenium->switch_to_window( $Handles->[0] );
 
                     # Wait until form is updated with the selected customer user.
+                    my $RecipientTextName = $SubTest->{RecipientField} eq 'ToCustomer'
+                        ? 'CustomerTicketText_'
+                        : $SubTest->{RecipientField} . 'TicketText_';
+
                     $Selenium->WaitFor(
                         JavaScript =>
-                            'return typeof($) === "function" && $("#TicketCustomerContent'
-                            . $SubTest->{RecipientField}
-                            . ':visible").length'
+                            'return typeof($) === "function" && $(".inner[data-input-text-name=\\"'
+                            . $RecipientTextName
+                            . '\\"] .customerSelectorFieldInputSelectedCustomer").length'
                     );
 
                     # Wait for ajax call after customer user selection.
