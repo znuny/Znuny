@@ -1,6 +1,7 @@
 # 7.3.8 2026-??-??
  - 2026-10-08 Fixed: Agent ticket action dialogs showed an empty state option on first load when a default state is configured.
  - 2026-10-08 Fixed: OpenSearch description in agent and customer ticket search did not work in Firefox, because Firefox does not send cookies when requesting the OpenSearch description file. The session ID is now always part of that URL. Thanks to Tim Puettmanns (@tipue-dev) [PR#319](https://github.com/znuny/Znuny/pull/319).
+ - 2026-09-30 Fixed: Invalid UTF-8 in emails causes crashes.
  - 2026-09-30 Fixed: Column settings filters in dashboard and overview screens could extend beyond the viewport. Thanks to @LuBroering (Lukas Bröring, Sector Nord AG) [PR#849](https://github.com/znuny/Znuny/pull/849).
  - 2026-09-30 Fixed: Process management: File preferences of a process (e. g. its icon) were exported as content reference instead of Base64 if the process had been cached before, so that they could not be imported.
  - 2026-09-26 Improved error handling when sending email messages. Thanks to Paweł Bogusławski (@pboguslawski). [PR#375](https://github.com/znuny/Znuny/pull/375)

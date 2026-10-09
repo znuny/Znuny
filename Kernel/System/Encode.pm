@@ -29,6 +29,8 @@ our @ObjectDependencies = (
     'Kernel::System::Log',
 );
 
+=encoding utf8
+
 =head1 NAME
 
 Kernel::System::Encode - character encodings
@@ -101,63 +103,12 @@ There is also a Force => 1 option if you need to force the
 already converted string. And Check => 1 if the string result
 should be checked to be a valid string (e. g. valid utf-8 string).
 
+Note: the Check parameter is broken for conversions to something
+other than UTF-8; don't use it.
+
 =cut
 
-sub Convert {
-    my ( $Self, %Param ) = @_;
-
-    # return if no text is given
-    return    if !defined $Param{Text};
-    return '' if $Param{Text} eq '';
-
-    # check needed stuff
-    for my $Needed (qw(From To)) {
-        if ( !defined $Param{$Needed} ) {
-            print STDERR "Need $Needed!\n";
-            return;
-        }
-    }
-
-    # utf8 cleanup
-    for my $Key (qw(From To)) {
-        $Param{$Key} = lc $Param{$Key};
-        if ( $Param{$Key} eq 'utf8' ) {
-            $Param{$Key} = 'utf-8';
-        }
-    }
-
-    # if no encode is needed
-    if ( $Param{From} eq $Param{To} ) {
-
-        # set utf-8 flag
-        if ( $Param{To} eq 'utf-8' ) {
-            Encode::_utf8_on( $Param{Text} );
-        }
-
-        # check if string is valid utf-8
-        if ( $Param{Check} && !eval { Encode::is_utf8( $Param{Text}, 1 ) } ) {
-            Encode::_utf8_off( $Param{Text} );
-
-            # strip invalid chars / 0 = will put a substitution character in
-            # place of a malformed character
-            eval { Encode::from_to( $Param{Text}, $Param{From}, $Param{To}, 0 ) };
-
-            # set utf-8 flag
-            Encode::_utf8_on( $Param{Text} );
-
-            # return new string
-            return $Param{Text};
-        }
-
-        # return text
-        return $Param{Text};
-    }
-
-    # encode is needed
-    if ( $Param{Force} ) {
-        Encode::_utf8_off( $Param{Text} );
-    }
-
+{
     # this is a workaround for following bug in Encode::HanExtra
     # https://rt.cpan.org/Public/Bug/Display.html?id=71720
     # distributed charsets by Encode::HanExtra
@@ -170,74 +121,130 @@ sub Convert {
         'gb18030'  => 1,
     );
 
-    # check if one of the Encode::HanExtra charsets occurs
-    if ( $AdditionalChineseCharsets{ $Param{From} } ) {
+    sub Convert {
+        my ( $Self, %Param ) = @_;
 
-        # require module, print error if module was not found
-        if ( !eval "require Encode::HanExtra" ) {    ## no critic
-            print STDERR
-                "Charset '$Param{From}' requires Encode::HanExtra, which is not installed!\n";
-        }
-    }
+        # return if no text is given
+        return    if !defined $Param{Text};
+        return '' if $Param{Text} eq '';
 
-    # check if encoding exists
-    if ( !Encode::resolve_alias( $Param{From} ) ) {
-        my $Fallback = 'iso-8859-1';
-        print STDERR "Not supported charset '$Param{From}', fallback to '$Fallback'!\n";
-        $Param{From} = $Fallback;
-    }
-
-    # set check for "Handling Malformed Data", for more info see "perldoc Encode -> CHECK"
-
-    # 1 = methods will die on error immediately with an error
-    my $Check = 1;
-
-    # 0 = will put a substitution character in place of a malformed character
-    if ( $Param{Force} ) {
-        $Check = 0;
-    }
-
-    # convert string
-    if ( !eval { Encode::from_to( $Param{Text}, $Param{From}, $Param{To}, $Check ) } ) {
-
-        # truncate text for error messages
-        my $TruncatedText = $Param{Text};
-        if ( length($TruncatedText) > 65 ) {
-            $TruncatedText = substr( $TruncatedText, 0, 65 ) . '[...]';
+        # check needed stuff
+        for my $Needed (qw(From To)) {
+            if ( !defined $Param{$Needed} ) {
+                print STDERR "Need $Needed!\n";
+                return;
+            }
         }
 
-        print STDERR "Charset encode '$Param{From}' -=> '$Param{To}' ($TruncatedText)"
-            . " not supported!\n";
+        # utf8 cleanup
+        for my $Key (qw(From To)) {
+            $Param{$Key} = lc $Param{$Key};
+            if ( $Param{$Key} eq 'utf8' ) {
+                $Param{$Key} = 'utf-8';
+            }
+        }
 
-        # strip invalid chars / 0 = will put a substitution character in place of
-        # a malformed character
-        eval { Encode::from_to( $Param{Text}, $Param{From}, $Param{To}, 0 ) };
+        # if no encode is needed
+        if ( $Param{From} eq $Param{To} ) {
+
+            # set utf-8 flag
+            if ( $Param{To} eq 'utf-8' ) {
+                Encode::_utf8_on( $Param{Text} );
+            }
+
+            # check if string is valid utf-8
+            if ( $Param{Check} && !eval { Encode::is_utf8( $Param{Text}, 1 ) } ) {
+                Encode::_utf8_off( $Param{Text} );
+
+                # strip invalid chars / 0 = will put a substitution character in
+                # place of a malformed character
+                eval { Encode::from_to( $Param{Text}, $Param{From}, $Param{To}, 0 ) };
+
+                # set utf-8 flag
+                Encode::_utf8_on( $Param{Text} );
+
+                # return new string
+                return $Param{Text};
+            }
+
+            # return text
+            return $Param{Text};
+        }
+
+        # encode is needed
+        if ( $Param{Force} ) {
+            Encode::_utf8_off( $Param{Text} );
+        }
+
+        # check if one of the Encode::HanExtra charsets occurs
+        if ( $AdditionalChineseCharsets{ $Param{From} } ) {
+
+            # require module, print error if module was not found
+            if ( !eval { require Encode::HanExtra } ) {
+                print STDERR
+                    "Charset '$Param{From}' requires Encode::HanExtra, which is not installed!\n";
+            }
+        }
+
+        # check if encoding exists
+        if ( !Encode::resolve_alias( $Param{From} ) ) {
+            my $Fallback = 'iso-8859-1';
+            print STDERR "Not supported charset '$Param{From}', fallback to '$Fallback'!\n";
+            $Param{From} = $Fallback;
+        }
+
+        # set check for "Handling Malformed Data", for more info see "perldoc Encode -> CHECK"
+
+        # 1 = methods will die on error immediately with an error
+        # 0 = will put a substitution character in place of a malformed character
+        my $Check = $Param{Force} ? 0 : 1;
+
+        # convert string
+        if ( !eval { Encode::from_to( $Param{Text}, $Param{From}, $Param{To}, $Check ) } ) {
+
+            # truncate text for error messages
+            my $TruncatedText = $Param{Text};
+            if ( length($TruncatedText) > 65 ) {
+                $TruncatedText = substr( $TruncatedText, 0, 65 ) . '[...]';
+            }
+
+            print STDERR "Charset encode '$Param{From}' -=> '$Param{To}' ($TruncatedText)"
+                . " not supported!\n";
+
+            # strip invalid chars / 0 = will put a substitution character in place of
+            # a malformed character
+            eval { Encode::from_to( $Param{Text}, $Param{From}, $Param{To}, 0 ) };
+
+            # set utf-8 flag
+            if ( $Param{To} eq 'utf-8' ) {
+                Encode::_utf8_on( $Param{Text} );
+            }
+
+            return $Param{Text};
+        }
 
         # set utf-8 flag
         if ( $Param{To} eq 'utf-8' ) {
             Encode::_utf8_on( $Param{Text} );
         }
 
+        # output debug message
+        if ( $Self->{Debug} ) {
+            print STDERR "Charset encode '$Param{From}' -=> '$Param{To}' ($Param{Text})!\n";
+        }
+
         return $Param{Text};
     }
-
-    # set utf-8 flag
-    if ( $Param{To} eq 'utf-8' ) {
-        Encode::_utf8_on( $Param{Text} );
-    }
-
-    # output debug message
-    if ( $Self->{Debug} ) {
-        print STDERR "Charset encode '$Param{From}' -=> '$Param{To}' ($Param{Text})!\n";
-    }
-
-    return $Param{Text};
-}
 
 =head2 Convert2CharsetInternal()
 
 Convert given charset into the internal used charset (utf-8).
 Should be used on all I/O interfaces.
+
+Conversion of UTF-8 byte strings always happens in strict mode,
+so surrogate pairs, high Unicode code points and invalid sequences
+are always replaced with U+FFFD (REPLACEMENT CHARACTER). The previously supported
+arguments C<Check> and C<Force> are silently ignored since Znuny 7.3.2.
 
     my $String = $EncodeObject->Convert2CharsetInternal(
         Text => $String,
@@ -246,18 +253,79 @@ Should be used on all I/O interfaces.
 
 =cut
 
-sub Convert2CharsetInternal {
-    my ( $Self, %Param ) = @_;
+    my %CharsetAlias = (
+        'utf8'         => 'UTF-8',
+        'utf-8'        => 'UTF-8',
+        'utf-8-strict' => 'UTF-8',
+    );
 
-    return if !defined $Param{Text};
+    sub Convert2CharsetInternal {
+        my ( $Self, %Param ) = @_;
+        my $Text = $Param{Text} // return;
+        return '' if !length $Text;
 
-    # check needed stuff
-    if ( !defined $Param{From} ) {
-        print STDERR "Need From!\n";
-        return;
+        my $From = $Param{From};
+        if ( !defined $From ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Error("Need From!");
+            return;
+        }
+        $From = lc $From;
+        $From = $CharsetAlias{$From} // $From;    # replace with alias only if defined
+        if ( Encode::is_utf8($Text) ) {
+            if ( $From eq 'UTF-8' ) {
+
+                # If the input is a character string already, first decode it.
+                # If there are no errors, this is just a validation step and
+                # a flag getting cleared, no actual bytes are converted.
+                $Text = Encode::encode( 'UTF-8', $Text );
+            }
+            else {
+                # If the text is marked UTF-8 and actually all ASCII, just ignore it
+                # and turn the utf-8 flag off. Otherwise, emit a notice.
+                Encode::_utf8_off($Text);
+                if ( $Text =~ /[^\x{00}-\x{7f}]/ ) {
+                    my $TruncatedText = substr( $Text, 0, 65 ) . '[...]';
+                    $Kernel::OM->Get('Kernel::System::Log')->Notice(
+                        "Trying to decode a character string as $From, this is probably a bug: $TruncatedText"
+                    );
+                }
+            }
+        }
+
+        # Decode to character string. Wrapped in eval because unsupported
+        # charsets may make it die no matter what CHECK says.
+        my $Decoded = eval {
+            Encode::decode( $From, $Text );
+        };
+
+        # If the result is defined, it definitely worked. If not, it may be either an
+        # unsupported charset or an encoding problem for UTF-8.
+        return $Decoded if defined $Decoded;
+
+        # Something went wrong, check if we need extra Han charsets
+        if ( $AdditionalChineseCharsets{$From} && !$INC{'Encode/HanExtra.pm'} ) {
+            if ( eval { require Encode::HanExtra } ) {
+
+                # No eval, this charset is definitely supported by Encode::HanExtra
+                my $Decoded = Encode::decode( $From, $Text );
+                return $Decoded if defined $Decoded;
+
+                # This should not happen.
+                $Kernel::OM->Get('Kernel::System::Log')->Error(
+                    "Failed to decode $From text using Encode::HanExtra; fallback ISO decoding will probably produce mojibake."
+                );
+            }
+            else {
+                $Kernel::OM->Get('Kernel::System::Log')
+                    ->Notice("Charset '$From' requires Encode::HanExtra which is not installed!");
+            }
+        }
+
+        # Last resort: decode as ISO-8859-15. No eval because that can't die.
+        $Kernel::OM->Get('Kernel::System::Log')
+            ->Notice("Charset '$From' is not supported, falling back to 'ISO-8859-15'!");
+        return Encode::decode( 'iso-8859-15', $Text );
     }
-
-    return $Self->Convert( %Param, To => 'utf-8' );
 }
 
 =head2 EncodeInput()
@@ -421,19 +489,27 @@ codepoints from 0 to 127 the same way as ASCII.
 
 =cut
 
-sub EncodingIsAsciiSuperset {
-    my ( $Self, %Param ) = @_;
-    if ( !defined $Param{Encoding} ) {
-        print STDERR "Need Encoding!\n";
-        return;
+{
+    my %Cache;
+
+    sub EncodingIsAsciiSuperset {
+        my ( $Self, %Param ) = @_;
+        my $Encoding = $Param{Encoding};
+
+        if ( !defined $Encoding ) {
+            print STDERR "Need Encoding!\n";
+            return;
+        }
+        return $Cache{$Encoding} if exists $Cache{$Encoding};
+
+        if ( !defined Encode::find_encoding($Encoding) ) {
+            print STDERR "Unsupported Encoding $Encoding!\n";
+            $Cache{$Encoding} = undef;
+            return;
+        }
+        my $Test = join '', map {chr} 0 .. 127;
+        return $Cache{$Encoding} = Encode::encode( $Encoding, $Test ) eq $Test;
     }
-    if ( !defined Encode::find_encoding( $Param{Encoding} ) ) {
-        print STDERR "Unsupported Encoding $Param{Encoding}!\n";
-        return;
-    }
-    my $Test = join '', map {chr} 0 .. 127;
-    return Encode::encode( $Param{Encoding}, $Test )
-        eq Encode::encode( 'ASCII',          $Test );
 }
 
 =head2 FindAsciiSupersetEncoding()
