@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.278581650500875;
+    $Self->{Completeness}        = 0.279121578612349;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1543,26 +1543,20 @@ sub Data {
         'Go to updating instructions' => 'Salt la instrucțiunile de actualizare',
         'Go to znuny.org' => '',
         'package information' => 'informații despre pachet',
-        'Package installation requires a patch level update of Znuny.' =>
-            '',
-        'Package update requires a patch level update of Znuny.' => '',
-        'Please note that your installed Znuny version is %s.' => 'Rețineți că versiunea dvs. Znuny instalată este %s.',
-        'To install this package, you need to update Znuny to version %s or newer.' =>
-            'Pentru a instala acest pachet, trebuie să actualizați Znuny la versiunea %s sau mai nouă.',
-        'This package can only be installed on Znuny version %s or older.' =>
-            'Acest pachet poate fi instalat doar pe versiunea Znuny %s sau mai veche.',
-        'This package can only be installed on Znuny version %s.' => '',
-        'Why should I keep Znuny up to date?' => 'De ce trebuie să țin Znuny la zi?',
-        'You will receive updates about relevant security issues.' => '',
-        'You will receive updates for all other relevant Znuny issues.' =>
-            '',
-        'How can I do a patch level update if I don’t have a contract?' =>
-            '',
-        'Please find all relevant information within the updating instructions at %s.' =>
-            'Găsiți toate informațiile relevante în instrucțiunile de actualizare la %s.',
-        'In case you would have further questions we would be glad to answer them.' =>
-            '',
-        'Please visit our customer portal and file a request.' => 'Vă rugăm să vizitați portalul nostru pentru clienți și să depuneți o solicitare.',
+        'Package is incompatible.' => 'Pachetul este incompatibil.',
+        'Your installed Znuny version %s does not support installing this package.' =>
+            'Versiunea Znuny instalată %s nu permite instalarea acestui pachet.',
+        'The package cannot be installed because it requires an older version of Znuny.' =>
+            'Pachetul nu poate fi instalat deoarece necesită o versiune mai veche de Znuny.',
+        'The package cannot be installed because it requires a newer version of Znuny.' =>
+            'Pachetul nu poate fi instalat deoarece necesită o versiune mai nouă de Znuny.',
+        'What to do:' => 'Ce trebuie făcut:',
+        'If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Dacă există o versiune mai nouă a acestui pachet care acceptă Znuny %s, instalați-o sau actualizați la aceasta.',
+        'If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Dacă există o versiune mai veche a acestui pachet care acceptă Znuny %s, instalați-o sau actualizați la aceasta.',
+        'If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.' =>
+            'Dacă este necesară o actualizare Znuny, consultați documentația privind actualizarea la versiunea necesară sau contactați organizația dvs. de asistență.',
         'Install Package' => 'Instalare pachet',
         'Update Package' => 'Actualizare pachet',
         'Package' => '',

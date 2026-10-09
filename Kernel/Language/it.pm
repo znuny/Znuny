@@ -35,7 +35,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.575926220384799;
+    $Self->{Completeness}        = 0.575747931253978;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1552,26 +1552,20 @@ sub Data {
         'Go to updating instructions' => 'Vai alle istruzioni di aggiornamento',
         'Go to znuny.org' => '',
         'package information' => 'informazioni sul pacchetto',
-        'Package installation requires a patch level update of Znuny.' =>
-            'L\'installazione del pacchetto richiede un aggiornamento a livello di patch di Znuny.',
-        'Package update requires a patch level update of Znuny.' => 'L\'aggiornamento del pacchetto richiede un aggiornamento a livello di patch di Znuny.',
-        'Please note that your installed Znuny version is %s.' => 'Si noti che la versione Znuny installata è %s.',
-        'To install this package, you need to update Znuny to version %s or newer.' =>
-            'Per installare questo pacchetto, è necessario aggiornare Znuny alla versione %s o più nuova.',
-        'This package can only be installed on Znuny version %s or older.' =>
-            'Questo pacchetto può essere installato solo sulla versione Znuny %s o più vecchia.',
-        'This package can only be installed on Znuny version %s.' => '',
-        'Why should I keep Znuny up to date?' => 'Perché dovrei tenere aggiornato Znuny?',
-        'You will receive updates about relevant security issues.' => 'Riceverai aggiornamenti su importanti problemi di sicurezza.',
-        'You will receive updates for all other relevant Znuny issues.' =>
-            'Riceverai aggiornamenti per tutti gli altri problemi Znuny pertinenti.',
-        'How can I do a patch level update if I don’t have a contract?' =>
-            'Come posso effettuare un aggiornamento a livello di patch se non ho un contratto?',
-        'Please find all relevant information within the updating instructions at %s.' =>
-            'Tutte le informazioni pertinenti sono disponibili nelle istruzioni di aggiornamento all\'indirizzo %s.',
-        'In case you would have further questions we would be glad to answer them.' =>
-            'Nel caso dovessi avere altre domande, saremo felici di risponderti.',
-        'Please visit our customer portal and file a request.' => 'Per cortesia visita il nostro portale clienti e inoltra una richiesta.',
+        'Package is incompatible.' => 'Il pacchetto non è compatibile.',
+        'Your installed Znuny version %s does not support installing this package.' =>
+            'La versione di Znuny installata (%s) non consente l\'installazione di questo pacchetto.',
+        'The package cannot be installed because it requires an older version of Znuny.' =>
+            'Il pacchetto non può essere installato perché richiede una versione precedente di Znuny.',
+        'The package cannot be installed because it requires a newer version of Znuny.' =>
+            'Il pacchetto non può essere installato perché richiede una versione più recente di Znuny.',
+        'What to do:' => 'Cosa fare:',
+        'If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Se esiste una versione più recente di questo pacchetto che supporta Znuny %s, installala o aggiorna a quella.',
+        'If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Se esiste una versione precedente di questo pacchetto che supporta Znuny %s, installala o aggiorna a quella.',
+        'If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.' =>
+            'Se è necessario un aggiornamento di Znuny, consulta la documentazione per l\'aggiornamento alla versione richiesta oppure contatta la tua organizzazione di supporto.',
         'Install Package' => 'Installa pacchetto',
         'Update Package' => 'Aggiorna pacchetto',
         'Package' => '',

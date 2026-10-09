@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.176498648433773;
+    $Self->{Completeness}        = 0.177912157861235;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1543,26 +1543,20 @@ sub Data {
         'Go to updating instructions' => '',
         'Go to znuny.org' => '',
         'package information' => '',
-        'Package installation requires a patch level update of Znuny.' =>
-            '',
-        'Package update requires a patch level update of Znuny.' => '',
-        'Please note that your installed Znuny version is %s.' => '',
-        'To install this package, you need to update Znuny to version %s or newer.' =>
-            '',
-        'This package can only be installed on Znuny version %s or older.' =>
-            '',
-        'This package can only be installed on Znuny version %s.' => '',
-        'Why should I keep Znuny up to date?' => '',
-        'You will receive updates about relevant security issues.' => '',
-        'You will receive updates for all other relevant Znuny issues.' =>
-            '',
-        'How can I do a patch level update if I don’t have a contract?' =>
-            '',
-        'Please find all relevant information within the updating instructions at %s.' =>
-            '',
-        'In case you would have further questions we would be glad to answer them.' =>
-            '',
-        'Please visit our customer portal and file a request.' => '',
+        'Package is incompatible.' => 'Balík nie je kompatibilný.',
+        'Your installed Znuny version %s does not support installing this package.' =>
+            'Vaša nainštalovaná verzia Znuny %s nepodporuje inštaláciu tohto balíka.',
+        'The package cannot be installed because it requires an older version of Znuny.' =>
+            'Balík nie je možné nainštalovať, pretože vyžaduje staršiu verziu Znuny.',
+        'The package cannot be installed because it requires a newer version of Znuny.' =>
+            'Balík nie je možné nainštalovať, pretože vyžaduje novšiu verziu Znuny.',
+        'What to do:' => 'Čo robiť:',
+        'If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Ak existuje novšia verzia tohto balíka, ktorá podporuje Znuny %s, nainštalujte ju alebo na ňu aktualizujte.',
+        'If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Ak existuje staršia verzia tohto balíka, ktorá podporuje Znuny %s, nainštalujte ju alebo na ňu aktualizujte.',
+        'If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.' =>
+            'Ak je potrebná aktualizácia Znuny, pozrite si dokumentáciu k aktualizácii na požadovanú verziu alebo kontaktujte svoju organizáciu podpory.',
         'Install Package' => '',
         'Update Package' => '',
         'Package' => '',

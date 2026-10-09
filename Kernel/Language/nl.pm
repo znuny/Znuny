@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d-%m-%Y';
     $Self->{DateInputFormat}     = '%d-%m-%Y';
     $Self->{DateInputFormatLong} = '%d-%m-%Y - %T';
-    $Self->{Completeness}        = 0.477023374145333;
+    $Self->{Completeness}        = 0.478516868236792;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1549,26 +1549,20 @@ sub Data {
         'Go to updating instructions' => 'Ga naar update instructies',
         'Go to znuny.org' => '',
         'package information' => 'pakketinformatie',
-        'Package installation requires a patch level update of Znuny.' =>
-            '',
-        'Package update requires a patch level update of Znuny.' => '',
-        'Please note that your installed Znuny version is %s.' => '',
-        'To install this package, you need to update Znuny to version %s or newer.' =>
-            '',
-        'This package can only be installed on Znuny version %s or older.' =>
-            '',
-        'This package can only be installed on Znuny version %s.' => '',
-        'Why should I keep Znuny up to date?' => '',
-        'You will receive updates about relevant security issues.' => '',
-        'You will receive updates for all other relevant Znuny issues.' =>
-            '',
-        'How can I do a patch level update if I don’t have a contract?' =>
-            '',
-        'Please find all relevant information within the updating instructions at %s.' =>
-            '',
-        'In case you would have further questions we would be glad to answer them.' =>
-            'Als u meer vragen heeft beantwoorden we deze graag.',
-        'Please visit our customer portal and file a request.' => '',
+        'Package is incompatible.' => 'Pakket is niet compatibel.',
+        'Your installed Znuny version %s does not support installing this package.' =>
+            'Uw geïnstalleerde Znuny-versie %s ondersteunt de installatie van dit pakket niet.',
+        'The package cannot be installed because it requires an older version of Znuny.' =>
+            'Het pakket kan niet worden geïnstalleerd, omdat het een oudere versie van Znuny vereist.',
+        'The package cannot be installed because it requires a newer version of Znuny.' =>
+            'Het pakket kan niet worden geïnstalleerd, omdat het een nieuwere versie van Znuny vereist.',
+        'What to do:' => 'Wat te doen:',
+        'If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Als er een nieuwere versie van dit pakket bestaat die Znuny %s ondersteunt, installeer die dan of voer een upgrade naar die versie uit.',
+        'If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Als er een oudere versie van dit pakket bestaat die Znuny %s ondersteunt, installeer die dan of voer een upgrade naar die versie uit.',
+        'If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.' =>
+            'Als een update van Znuny nodig is, raadpleeg dan de documentatie voor het updaten naar de vereiste versie of neem contact op met uw supportorganisatie.',
         'Install Package' => 'Installeer pakket',
         'Update Package' => 'Update pakket',
         'Package' => '',

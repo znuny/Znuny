@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.249801240260773;
+    $Self->{Completeness}        = 0.251273074474857;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1546,26 +1546,20 @@ sub Data {
         'Go to updating instructions' => '',
         'Go to znuny.org' => '',
         'package information' => '',
-        'Package installation requires a patch level update of Znuny.' =>
-            '',
-        'Package update requires a patch level update of Znuny.' => '',
-        'Please note that your installed Znuny version is %s.' => '',
-        'To install this package, you need to update Znuny to version %s or newer.' =>
-            '',
-        'This package can only be installed on Znuny version %s or older.' =>
-            '',
-        'This package can only be installed on Znuny version %s.' => '',
-        'Why should I keep Znuny up to date?' => '',
-        'You will receive updates about relevant security issues.' => '',
-        'You will receive updates for all other relevant Znuny issues.' =>
-            '',
-        'How can I do a patch level update if I don’t have a contract?' =>
-            '',
-        'Please find all relevant information within the updating instructions at %s.' =>
-            '',
-        'In case you would have further questions we would be glad to answer them.' =>
-            '',
-        'Please visit our customer portal and file a request.' => '',
+        'Package is incompatible.' => 'पैकेज असंगत है।',
+        'Your installed Znuny version %s does not support installing this package.' =>
+            'आपका स्थापित Znuny संस्करण %s इस पैकेज को स्थापित करने का समर्थन नहीं करता है।',
+        'The package cannot be installed because it requires an older version of Znuny.' =>
+            'पैकेज स्थापित नहीं किया जा सकता क्योंकि इसके लिए Znuny के पुराने संस्करण की आवश्यकता है।',
+        'The package cannot be installed because it requires a newer version of Znuny.' =>
+            'पैकेज स्थापित नहीं किया जा सकता क्योंकि इसके लिए Znuny के नए संस्करण की आवश्यकता है।',
+        'What to do:' => 'क्या करें:',
+        'If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'यदि इस पैकेज का कोई नया संस्करण मौजूद है जो Znuny %s का समर्थन करता है, तो इसके बजाय उसे स्थापित करें या उसमें अपग्रेड करें।',
+        'If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'यदि इस पैकेज का कोई पुराना संस्करण मौजूद है जो Znuny %s का समर्थन करता है, तो इसके बजाय उसे स्थापित करें या उसमें अपग्रेड करें।',
+        'If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.' =>
+            'यदि Znuny अपडेट की आवश्यकता है, तो आवश्यक संस्करण में अपडेट करने के लिए दस्तावेज़ देखें, या अपने सहायता संगठन से संपर्क करें।',
         'Install Package' => 'संकुल स्थापित करें',
         'Update Package' => '',
         'Package' => '',

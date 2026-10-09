@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d %T';
-    $Self->{Completeness}        = 0.831769756718079;
+    $Self->{Completeness}        = 0.831954169318905;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1543,26 +1543,20 @@ sub Data {
         'Go to updating instructions' => '',
         'Go to znuny.org' => '',
         'package information' => '패키지 정보',
-        'Package installation requires a patch level update of Znuny.' =>
-            '패키지를 설치하려면 Znuny의 패치 레벨 업데이트가 필요합니다. ',
-        'Package update requires a patch level update of Znuny.' => '패키지 업데이트에는 Znuny의 패치 수준 업데이트가 필요합니다. ',
-        'Please note that your installed Znuny version is %s.' => '설치된 Znuny 버전은 %s입니다.',
-        'To install this package, you need to update Znuny to version %s or newer.' =>
-            '이 패키지를 설치하려면 Znuny를 버전 %s 이상으로 업데이트해야합니다.',
-        'This package can only be installed on Znuny version %s or older.' =>
-            '이 패키지는 Znuny 버전 %s 또는 그 이상에서만 설치할 수 있습니다.',
-        'This package can only be installed on Znuny version %s.' => '',
-        'Why should I keep Znuny up to date?' => '왜 Znuny를 최신 상태로 유지해야합니까?',
-        'You will receive updates about relevant security issues.' => '관련 보안 문제에 대한 업데이트가 제공됩니다.',
-        'You will receive updates for all other relevant Znuny issues.' =>
-            '다른 모든 관련 Znuny 문제에 대한 업데이트가 제공됩니다.',
-        'How can I do a patch level update if I don’t have a contract?' =>
-            '계약이 없다면 어떻게 패치 레벨 업데이트를 할 수 있습니까?',
-        'Please find all relevant information within the updating instructions at %s.' =>
-            '',
-        'In case you would have further questions we would be glad to answer them.' =>
-            '혹시 더 궁금한 점이 있으시면 답변 해드리겠습니다.',
-        'Please visit our customer portal and file a request.' => '고객 포털을 방문하여 요청을 제출하십시오.',
+        'Package is incompatible.' => '패키지가 호환되지 않습니다.',
+        'Your installed Znuny version %s does not support installing this package.' =>
+            '설치된 Znuny 버전 %s에서는 이 패키지의 설치를 지원하지 않습니다.',
+        'The package cannot be installed because it requires an older version of Znuny.' =>
+            '이 패키지는 이전 버전의 Znuny가 필요하므로 설치할 수 없습니다.',
+        'The package cannot be installed because it requires a newer version of Znuny.' =>
+            '이 패키지는 최신 버전의 Znuny가 필요하므로 설치할 수 없습니다.',
+        'What to do:' => '해야 할 일:',
+        'If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Znuny %s을(를) 지원하는 이 패키지의 최신 버전이 있으면 대신 해당 버전을 설치하거나 해당 버전으로 업그레이드하십시오.',
+        'If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Znuny %s을(를) 지원하는 이 패키지의 이전 버전이 있으면 대신 해당 버전을 설치하거나 해당 버전으로 업그레이드하십시오.',
+        'If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.' =>
+            'Znuny 업데이트가 필요한 경우 필요한 버전으로의 업데이트에 관한 문서를 참조하거나 지원 조직에 문의하십시오.',
         'Install Package' => '패키지 설치',
         'Update Package' => '패키지 업데이트',
         'Package' => '',

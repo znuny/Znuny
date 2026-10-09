@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.826681507393862;
+    $Self->{Completeness}        = 0.826702737110121;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1547,26 +1547,20 @@ sub Data {
         'Go to updating instructions' => 'Vá para instruções de atualização',
         'Go to znuny.org' => 'Ir até znuny.org',
         'package information' => 'informação do pacote',
-        'Package installation requires a patch level update of Znuny.' =>
-            'Pacote de Instalação requer atualização do Znuny',
-        'Package update requires a patch level update of Znuny.' => 'Atualização do pacote requer atualização de nível do Znuny',
-        'Please note that your installed Znuny version is %s.' => 'Por favor note que a sua versão do Znuny instalada é %s.',
-        'To install this package, you need to update Znuny to version %s or newer.' =>
-            'Para instalar este pacote, você precisa atualizar seu Znuny para versão %s ou superior.',
-        'This package can only be installed on Znuny version %s or older.' =>
-            'Este pacote smente pode ser instalado na versão %s ou inferior do Znuny.',
-        'This package can only be installed on Znuny version %s.' => '',
-        'Why should I keep Znuny up to date?' => 'Por que eu deveria manter o Znuny atualizado?',
-        'You will receive updates about relevant security issues.' => 'Você receberá atualizações sobre questões de segurança relevantes.',
-        'You will receive updates for all other relevant Znuny issues.' =>
-            'Você receberá atualizações para todos os outros problemas relevantes do Znuny.',
-        'How can I do a patch level update if I don’t have a contract?' =>
-            'Como eu posso fazer uma atualização de nível de patch se eu não tenho um contrato?',
-        'Please find all relevant information within the updating instructions at %s.' =>
-            'Você encontra toda informação relevante dentro das informações de atualização em %s.',
-        'In case you would have further questions we would be glad to answer them.' =>
-            'No caso de você ter mais perguntas, teremos prazer em respondê-las.',
-        'Please visit our customer portal and file a request.' => 'Por favor visite nosso portal de clientes e registre um pedido.',
+        'Package is incompatible.' => 'O pacote é incompatível.',
+        'Your installed Znuny version %s does not support installing this package.' =>
+            'Sua versão instalada do Znuny %s não oferece suporte à instalação deste pacote.',
+        'The package cannot be installed because it requires an older version of Znuny.' =>
+            'O pacote não pode ser instalado porque requer uma versão mais antiga do Znuny.',
+        'The package cannot be installed because it requires a newer version of Znuny.' =>
+            'O pacote não pode ser instalado porque requer uma versão mais recente do Znuny.',
+        'What to do:' => 'O que fazer:',
+        'If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Se existir uma versão mais recente deste pacote compatível com o Znuny %s, instale-a ou atualize para ela.',
+        'If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Se existir uma versão mais antiga deste pacote compatível com o Znuny %s, instale-a ou atualize para ela.',
+        'If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.' =>
+            'Se for necessária uma atualização do Znuny, consulte a documentação sobre como atualizar para a versão necessária ou entre em contato com sua organização de suporte.',
         'Install Package' => 'Instalar Pacote',
         'Update Package' => 'Atualizar Pacote',
         'Package' => 'Pacote',

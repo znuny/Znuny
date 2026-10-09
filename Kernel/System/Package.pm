@@ -2716,6 +2716,8 @@ Compare a framework array with the current framework.
         RequiredFramework        => '5.0.x',
         RequiredFrameworkMinimum => '5.0.10',
         RequiredFrameworkMaximum => '5.0.16',
+        RequiresNewerFrameworkVersion => 0,
+        RequiresOlderFrameworkVersion => 0,
     );
 
 =cut
@@ -2741,7 +2743,9 @@ sub AnalyzePackageFrameworkRequirements {
     }
 
     my %Response = (
-        Success => 0,
+        Success                       => 0,
+        RequiresNewerFrameworkVersion => 0,
+        RequiresOlderFrameworkVersion => 0,
     );
 
     my $FWCheck           = 0;
@@ -2884,12 +2888,36 @@ sub AnalyzePackageFrameworkRequirements {
     if ($FWCheck) {
         $Response{Success} = 1;
     }
-    elsif ( !$Param{NoLog} ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  => "Sorry, can't install/upgrade package, because the framework version required"
-                . " by the package ($PossibleFramework) does not match your Framework ($CurrentFramework)!",
+    else {
+        # determine the requirement of older vs newer version
+        my $CheckMinOk = $Self->CheckVersion(
+            VersionNew       => $Response{RequiredFramework},
+            VersionInstalled => $CurrentFramework,
+            Type             => 'Min',
         );
+
+        # installed version is equal or greater than the new one
+        if ( defined $CheckMinOk ) {
+
+            # RequiredFrameworkMinimum is the indicator that we need a newer version
+            if ( exists $Response{RequiredFrameworkMinimum} ) {
+                $Response{RequiresNewerFrameworkVersion} = 1;
+            }
+            else {
+                $Response{RequiresOlderFrameworkVersion} = 1;
+            }
+        }
+        else {
+            $Response{RequiresNewerFrameworkVersion} = 1;
+        }
+
+        if ( !$Param{NoLog} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => "Sorry, can't install/upgrade package, because the framework version required"
+                    . " by the package ($PossibleFramework) does not match your Framework ($CurrentFramework)!",
+            );
+        }
     }
 
     return %Response;

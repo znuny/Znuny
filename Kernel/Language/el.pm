@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.134361583717602;
+    $Self->{Completeness}        = 0.135741565881604;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1547,26 +1547,20 @@ sub Data {
         'Go to updating instructions' => '',
         'Go to znuny.org' => '',
         'package information' => '',
-        'Package installation requires a patch level update of Znuny.' =>
-            '',
-        'Package update requires a patch level update of Znuny.' => '',
-        'Please note that your installed Znuny version is %s.' => '',
-        'To install this package, you need to update Znuny to version %s or newer.' =>
-            '',
-        'This package can only be installed on Znuny version %s or older.' =>
-            '',
-        'This package can only be installed on Znuny version %s.' => '',
-        'Why should I keep Znuny up to date?' => '',
-        'You will receive updates about relevant security issues.' => '',
-        'You will receive updates for all other relevant Znuny issues.' =>
-            '',
-        'How can I do a patch level update if I don’t have a contract?' =>
-            '',
-        'Please find all relevant information within the updating instructions at %s.' =>
-            '',
-        'In case you would have further questions we would be glad to answer them.' =>
-            '',
-        'Please visit our customer portal and file a request.' => '',
+        'Package is incompatible.' => 'Το πακέτο δεν είναι συμβατό.',
+        'Your installed Znuny version %s does not support installing this package.' =>
+            'Η εγκατεστημένη έκδοση Znuny %s δεν υποστηρίζει την εγκατάσταση αυτού του πακέτου.',
+        'The package cannot be installed because it requires an older version of Znuny.' =>
+            'Το πακέτο δεν μπορεί να εγκατασταθεί επειδή απαιτεί παλαιότερη έκδοση του Znuny.',
+        'The package cannot be installed because it requires a newer version of Znuny.' =>
+            'Το πακέτο δεν μπορεί να εγκατασταθεί επειδή απαιτεί νεότερη έκδοση του Znuny.',
+        'What to do:' => 'Τι να κάνετε:',
+        'If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Εάν υπάρχει νεότερη έκδοση αυτού του πακέτου που υποστηρίζει το Znuny %s, εγκαταστήστε την ή αναβαθμίστε σε αυτήν.',
+        'If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Εάν υπάρχει παλαιότερη έκδοση αυτού του πακέτου που υποστηρίζει το Znuny %s, εγκαταστήστε την ή αναβαθμίστε σε αυτήν.',
+        'If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.' =>
+            'Εάν απαιτείται ενημέρωση του Znuny, συμβουλευτείτε την τεκμηρίωση για την ενημέρωση στην απαιτούμενη έκδοση ή επικοινωνήστε με τον οργανισμό υποστήριξής σας.',
         'Install Package' => 'Εγκατάσταση Πακετου',
         'Update Package' => '',
         'Package' => '',

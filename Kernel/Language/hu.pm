@@ -1549,26 +1549,20 @@ sub Data {
         'Go to updating instructions' => 'Ugrás a frissítési utasításokhoz',
         'Go to znuny.org' => 'Ugrás a znuny.org webhelyre',
         'package information' => 'csomaginformációk',
-        'Package installation requires a patch level update of Znuny.' =>
-            'A csomagtelepítés a Znuny hibajavító szintű frissítését igényli.',
-        'Package update requires a patch level update of Znuny.' => 'A csomagfrissítés a Znuny hibajavító szintű frissítését igényli.',
-        'Please note that your installed Znuny version is %s.' => 'Ne feledje, hogy a telepített Znuny verziója %s.',
-        'To install this package, you need to update Znuny to version %s or newer.' =>
-            'A csomag telepítéséhez frissítenie kell a Znunyt %s vagy újabb verzióra.',
-        'This package can only be installed on Znuny version %s or older.' =>
-            'Ez a csomag csak a Znuny %s vagy régebbi verziójára telepíthető.',
-        'This package can only be installed on Znuny version %s.' => 'Ez a csomag csak a Znuny %s verziójára telepíthető.',
-        'Why should I keep Znuny up to date?' => 'Miért kell naprakészen tartanom a Znunyt?',
-        'You will receive updates about relevant security issues.' => 'Frissítéseket fog kapni a fontos biztonsági problémákról.',
-        'You will receive updates for all other relevant Znuny issues.' =>
-            'Frissítéseket fog kapni minden egyéb fontos Znuny problémáról.',
-        'How can I do a patch level update if I don’t have a contract?' =>
-            'Hogyan végezhetek hibajavító szintű frissítést, ha nincs szerződésem?',
-        'Please find all relevant information within the updating instructions at %s.' =>
-            'Nézze meg az összes fontos információt a frissítési utasításokban itt: %s.',
-        'In case you would have further questions we would be glad to answer them.' =>
-            'Abban az esetben, ha további kérdései vannak, szívesen megválaszoljuk azokat.',
-        'Please visit our customer portal and file a request.' => 'Látogassa meg az ügyfélportálunkat, és küldjön egy kérést.',
+        'Package is incompatible.' => 'A csomag nem kompatibilis.',
+        'Your installed Znuny version %s does not support installing this package.' =>
+            'A telepített Znuny verzió (%s) nem támogatja ennek a csomagnak a telepítését.',
+        'The package cannot be installed because it requires an older version of Znuny.' =>
+            'A csomag nem telepíthető, mert a Znuny egy régebbi verzióját igényli.',
+        'The package cannot be installed because it requires a newer version of Znuny.' =>
+            'A csomag nem telepíthető, mert a Znuny egy újabb verzióját igényli.',
+        'What to do:' => 'Teendők:',
+        'If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Ha létezik ennek a csomagnak egy újabb verziója, amely támogatja a Znuny %s verziót, akkor inkább azt telepítse, vagy arra frissítsen.',
+        'If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Ha létezik ennek a csomagnak egy régebbi verziója, amely támogatja a Znuny %s verziót, akkor inkább azt telepítse, vagy arra frissítsen.',
+        'If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.' =>
+            'Ha a Znuny frissítése szükséges, akkor olvassa el a szükséges verzióra történő frissítés dokumentációját, vagy vegye fel a kapcsolatot a támogatási szervezetével.',
         'Install Package' => 'Csomag telepítése',
         'Update Package' => 'Csomag frissítése',
         'Package' => 'Csomag',

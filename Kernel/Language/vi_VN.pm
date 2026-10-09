@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.147241214819526;
+    $Self->{Completeness}        = 0.148631444939529;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1543,26 +1543,20 @@ sub Data {
         'Go to updating instructions' => '',
         'Go to znuny.org' => '',
         'package information' => '',
-        'Package installation requires a patch level update of Znuny.' =>
-            '',
-        'Package update requires a patch level update of Znuny.' => '',
-        'Please note that your installed Znuny version is %s.' => '',
-        'To install this package, you need to update Znuny to version %s or newer.' =>
-            '',
-        'This package can only be installed on Znuny version %s or older.' =>
-            '',
-        'This package can only be installed on Znuny version %s.' => '',
-        'Why should I keep Znuny up to date?' => '',
-        'You will receive updates about relevant security issues.' => '',
-        'You will receive updates for all other relevant Znuny issues.' =>
-            '',
-        'How can I do a patch level update if I don’t have a contract?' =>
-            '',
-        'Please find all relevant information within the updating instructions at %s.' =>
-            '',
-        'In case you would have further questions we would be glad to answer them.' =>
-            '',
-        'Please visit our customer portal and file a request.' => '',
+        'Package is incompatible.' => 'Gói không tương thích.',
+        'Your installed Znuny version %s does not support installing this package.' =>
+            'Phiên bản Znuny %s đã cài đặt của bạn không hỗ trợ cài đặt gói này.',
+        'The package cannot be installed because it requires an older version of Znuny.' =>
+            'Không thể cài đặt gói vì gói yêu cầu phiên bản Znuny cũ hơn.',
+        'The package cannot be installed because it requires a newer version of Znuny.' =>
+            'Không thể cài đặt gói vì gói yêu cầu phiên bản Znuny mới hơn.',
+        'What to do:' => 'Cần làm gì:',
+        'If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Nếu có phiên bản mới hơn của gói này hỗ trợ Znuny %s, hãy cài đặt hoặc nâng cấp lên phiên bản đó.',
+        'If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Nếu có phiên bản cũ hơn của gói này hỗ trợ Znuny %s, hãy cài đặt hoặc nâng cấp lên phiên bản đó.',
+        'If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.' =>
+            'Nếu cần cập nhật Znuny, hãy tham khảo tài liệu về việc cập nhật lên phiên bản yêu cầu hoặc liên hệ với tổ chức hỗ trợ của bạn.',
         'Install Package' => '',
         'Update Package' => '',
         'Package' => '',
