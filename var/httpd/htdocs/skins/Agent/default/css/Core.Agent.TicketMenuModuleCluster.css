@@ -67,6 +67,29 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         padding: 0;
         border: unset;
         border-radius: unset;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    .Cluster ul li.Expanded > ul {
+        max-height: 2000px;
+    }
+
+    .Cluster .ClusterLink i {
+        transition: transform 0.2s ease;
+    }
+
+    /*
+        disable hover caret behavior as it misbehaves on mobile view - use Expanded class
+        (toggled by the same tap that shows/hides the list) that should rotate it instead
+    */
+    .Cluster ul li:hover > span > i {
+        transform: none;
+    }
+
+    .Cluster ul li.Expanded > span > i {
+        transform: rotate(180deg);
     }
 }
 

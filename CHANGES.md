@@ -16,6 +16,7 @@
  - 2026-09-16 Fixed: Customer ticket process: Subject field is incorrectly indented.
  - 2026-09-14 Fixed: Options button in ticket details mobile view stopped responding after switching to a different article. Thanks to @avononit for reporting the issue. [#671](https://github.com/znuny/Znuny/issues/671)
  - 2026-09-14 Fixed: Medium and preview ticket overview views were fully accessible and rendered on narrow/tablet screens, with nothing restricting them.
+ - 2026-09-11 Fixed: Cluster sections in the options panel was initially expanded and caret behavior was not consistent.
  - 2026-09-10 Fixed: Password policy check for option "minimum 2 characters" (Min2Characters) was too restrictive.
  - 2026-09-07 Fixed: Notification to agent who created the ticket is not working for some ticket types.
  - 2026-09-01 Fixed: Images with explicit HTML width/height attributes (e.g. logos in quoted email signatures) were stretched to fill their container. Thanks to @AVONON-DST for reporting the issue. [#743](https://github.com/znuny/Znuny/issues/743)
