@@ -1210,7 +1210,7 @@ CREATE TABLE web_upload_cache (
     filename VARCHAR (250) NULL,
     content_id VARCHAR (250) NULL,
     content_size VARCHAR (30) NULL,
-    content_type VARCHAR (250) NULL,
+    content_type TEXT NULL,
     disposition VARCHAR (15) NULL,
     content LONGBLOB NOT NULL,
     create_time_unix BIGINT NOT NULL,

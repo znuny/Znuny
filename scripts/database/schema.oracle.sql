@@ -2966,7 +2966,7 @@ CREATE TABLE article_data_mime_attachment (
     article_id NUMBER (20, 0) NOT NULL,
     filename VARCHAR2 (250) NULL,
     content_size VARCHAR2 (30) NULL,
-    content_type VARCHAR2 (450) NULL,
+    content_type VARCHAR2 (4000) NULL,
     content_id VARCHAR2 (250) NULL,
     content_alternative VARCHAR2 (50) NULL,
     disposition VARCHAR2 (15) NULL,
@@ -4478,7 +4478,7 @@ CREATE TABLE web_upload_cache (
     filename VARCHAR2 (250) NULL,
     content_id VARCHAR2 (250) NULL,
     content_size VARCHAR2 (30) NULL,
-    content_type VARCHAR2 (250) NULL,
+    content_type VARCHAR2 (4000) NULL,
     disposition VARCHAR2 (15) NULL,
     content CLOB NOT NULL,
     create_time_unix NUMBER (20, 0) NOT NULL
