@@ -18,9 +18,11 @@ our $ObjectManagerDisabled = 1;
 use Kernel::System::VariableCheck qw(:all);
 
 use Net::SAML2;
+use Net::SAML2::Object::Response;
 use MIME::Base64;
 use XML::LibXML;
 use XML::LibXML::XPathContext;
+use URN::OASIS::SAML2 qw(URN_ASSERTION URN_PROTOCOL);
 
 =head1 PUBLIC INTERFACE
 
@@ -95,9 +97,25 @@ sub DecodeResponse {
     $Self->{XMLDOM} = $XMLParser->parse_string( $Self->{XMLString} );
     return if !$Self->{XMLDOM};
 
-    $Self->{Assertion} = Net::SAML2::Protocol::Assertion->new_from_xml(
-        xml => MIME::Base64::decode_base64( $Param{Response} ),
+    my $xpath = XML::LibXML::XPathContext->new($Self->{XMLDOM});
+    $xpath->registerNs('saml',  URN_ASSERTION);
+    $xpath->registerNs('samlp', URN_PROTOCOL);
+    
+    my $nodes = $xpath->findnodes('//saml:EncryptedAssertion');
+
+    my $Response = Net::SAML2::Object::Response->new_from_xml(
+        xml => MIME::Base64::decode_base64($Param{Response}),
     );
+
+    if ( $nodes->size > 0 ) {
+        $Self->{Assertion} = $Response->to_assertion (
+            key_file => $Self->{Config}->{ResponseEncryptKey},
+        );
+    }
+    else {
+        $Self->{Assertion} = $Response->to_assertion ();
+    }
+
     return if !$Self->{Assertion};
 
     $Self->{Decoded} = 1;
@@ -163,22 +181,23 @@ sub GetAttributeValues {
     # Note: $Self->{Assertion}->attributes() does not work here because it only
     # return the last one of attributes with the same name.
 
-    my $XPath = XML::LibXML::XPathContext->new( $Self->{XMLDOM} );
+    my $XPath = $Self->{Assertion}->{xpath};
     return if !$XPath;
 
     $XPath->registerNs(
         'samlp',
-        'urn:oasis:names:tc:SAML:2.0:protocol',
+        URN_PROTOCOL,
     );
 
     $XPath->registerNs(
         'saml',
-        'urn:oasis:names:tc:SAML:2.0:assertion',
+        URN_ASSERTION,
     );
 
-    my $Query = '/samlp:Response/saml:Assertion/saml:AttributeStatement/saml:Attribute[@Name="'
-        . $Name
-        . '"]/saml:AttributeValue';
+    my $Query = '//saml:Attribute[
+        @Name="' . $Name . '"
+        or @FriendlyName="' . $Name . '"
+        ]/saml:AttributeValue';
 
     my @Entries = $XPath->findnodes($Query);
     return if !@Entries;
