@@ -1,4 +1,4 @@
-# 7.3.8 2026-??-??
+# 7.3.8 2026-10-14
  - 2026-10-08 Fixed: Agent ticket action dialogs showed an empty state option on first load when a default state is configured.
  - 2026-10-08 Fixed: OpenSearch description in agent and customer ticket search did not work in Firefox, because Firefox does not send cookies when requesting the OpenSearch description file. The session ID is now always part of that URL. Thanks to Tim Puettmanns (@tipue-dev) [PR#319](https://github.com/znuny/Znuny/pull/319).
  - 2026-10-05 Security: Form IDs for attachment uploads are now generated and handled securely. Thanks to @kta1kri for reporting the issue.
@@ -718,6 +718,13 @@
  - 2022-08-22 Core.UI.InputFields.js - Changed the behaviour of the Core.UI.InputFields.js. Now no fields are automatically enlarged or reduced.
  - 2022-08-08 Admin - Added counter of AdminSettingPages per widget and additional focus by filter.
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
+
+# 6.5.26 2026-10-14
+ - 2026-10-07 Security: Form IDs for attachment uploads are now generated and handled securely. Thanks to @kta1kri for reporting the issue.
+ - 2026-09-29 Fixed: PasswordMin2Characters policy check was slightly off.
+ - 2026-09-18 Fixed: Notification to agent who created the ticket is not working for some ticket types.
+ - 2026-09-17 Fixed: AdminDynamicFieldScreenConfiguration lists dynamic fields of all object types.
+ - 2026-08-25 Fixed: Regular file attachments were unintentionally copied to newly created tickets/articles when using <OTRS_FIRST_ARTICLE_Body> or <OTRS_LAST_ARTICLE_Body> in a Transition Action, even without Attachments/AttachmentIDs/AttachmentsReuse configured.
 
 # 6.5.25 2026-09-16
  - 2026-09-08 Security: Fixed SQL injection for parameter ContentSearch of ticket search. Thanks for reporting to Mokrane ABDELMALEK (via Ghent University VDP programme).
