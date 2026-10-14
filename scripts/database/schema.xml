@@ -1810,6 +1810,8 @@
     <Column Name="disposition" Required="false" Size="15" Type="VARCHAR"/>
     <Column Name="content" Required="true" Type="LONGBLOB"/>
     <Column Name="create_time_unix" Required="true" Type="BIGINT"/>
+    <Column Name="user_id" Required="false" Size="250" Type="VARCHAR"/>
+    <Column Name="user_type" Required="false" Size="20" Type="VARCHAR"/>
 </Table>
 
 <!-- notification_event -->

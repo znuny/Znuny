@@ -1137,6 +1137,14 @@ sub Run {
         );
         $Kernel::OM->ObjectsDiscard( Objects => ['Kernel::Output::HTML::Layout'] );
 
+        # bind upload cache entries of this request to the logged in agent
+        $Kernel::OM->ObjectParamAdd(
+            'Kernel::System::Web::UploadCache' => {
+                UserID   => $UserData{UserID},
+                UserType => 'User',
+            },
+        );
+
         # update last request time
         if ( !$ParamObject->IsAJAXRequest() ) {
             my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
