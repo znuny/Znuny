@@ -1,3 +1,6 @@
+# 7.5.1 2026-??-??
+ - 2026-10-16 Fixed: Closing the "add draft" dialog via the header X, a click outside the dialog, or Escape left form validation disabled, so the ticket action could be submitted without required fields.
+
 # 7.3.8 2026-10-14
  - 2026-10-08 Fixed: Agent ticket action dialogs showed an empty state option on first load when a default state is configured.
  - 2026-10-08 Fixed: OpenSearch description in agent and customer ticket search did not work in Firefox, because Firefox does not send cookies when requesting the OpenSearch description file. The session ID is now always part of that URL. Thanks to Tim Puettmanns (@tipue-dev) [PR#319](https://github.com/znuny/Znuny/pull/319).
