@@ -1,5 +1,6 @@
 # 7.5.1 2026-??-??
  - 2026-10-16 Fixed: Closing the "add draft" dialog via the header X, a click outside the dialog, or Escape left form validation disabled, so the ticket action could be submitted without required fields.
+ - 2026-09-21 Fixed: "Back" button in mobile view did nothing in ticket details dialog.
 
 # 7.3.8 2026-10-14
  - 2026-10-08 Fixed: Agent ticket action dialogs showed an empty state option on first load when a default state is configured.
