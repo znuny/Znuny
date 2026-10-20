@@ -17,6 +17,7 @@ use Net::LDAP::Util qw(escape_filter_value);
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::Crypt::Secret',
     'Kernel::System::Encode',
     'Kernel::System::Log',
 );
@@ -68,8 +69,10 @@ sub new {
         return;
     }
     $Self->{SearchUserDN} = $ConfigObject->Get( 'AuthModule::LDAP::SearchUserDN' . $Param{Count} ) || '';
-    $Self->{SearchUserPw} = $ConfigObject->Get( 'AuthModule::LDAP::SearchUserPw' . $Param{Count} ) || '';
-    $Self->{GroupDN}      = $ConfigObject->Get( 'AuthModule::LDAP::GroupDN' . $Param{Count} )
+    $Self->{SearchUserPw} = $Kernel::OM->Get('Kernel::System::Crypt::Secret')->Decrypt(
+        Value => $ConfigObject->Get( 'AuthModule::LDAP::SearchUserPw' . $Param{Count} ) || '',
+    );
+    $Self->{GroupDN} = $ConfigObject->Get( 'AuthModule::LDAP::GroupDN' . $Param{Count} )
         || '';
     $Self->{AccessAttr} = $ConfigObject->Get( 'AuthModule::LDAP::AccessAttr' . $Param{Count} )
         || 'memberUid';

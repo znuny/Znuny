@@ -24,6 +24,7 @@ use Kernel::System::VariableCheck qw(:all);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Cache',
+    'Kernel::System::Crypt::Secret',
     'Kernel::System::DateTime',
     'Kernel::System::DB',
     'Kernel::System::DynamicField',
@@ -108,7 +109,9 @@ sub new {
 
     # search user
     $Self->{SearchUserDN} = $Self->{CustomerUserMap}->{Params}->{UserDN} || '';
-    $Self->{SearchUserPw} = $Self->{CustomerUserMap}->{Params}->{UserPw} || '';
+    $Self->{SearchUserPw} = $Kernel::OM->Get('Kernel::System::Crypt::Secret')->Decrypt(
+        Value => $Self->{CustomerUserMap}->{Params}->{UserPw} || '',
+    );
 
     # group dn
     $Self->{GroupDN} = $Self->{CustomerUserMap}->{Params}->{GroupDN} || '';

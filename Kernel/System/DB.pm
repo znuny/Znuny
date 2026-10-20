@@ -21,6 +21,7 @@ use Kernel::System::VariableCheck qw(:all);
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Cache',
+    'Kernel::System::Crypt::Secret',
     'Kernel::System::DateTime',
     'Kernel::System::Encode',
     'Kernel::System::Log',
@@ -94,7 +95,17 @@ sub new {
         || $ConfigObject->Get('Database::SlowLog');
 
     # decrypt pw (if needed)
-    if ( $Self->{PW} =~ /^\{(.*)\}$/ ) {
+    if ( defined $Self->{PW} && $Self->{PW} =~ /^\{AES256:/ ) {
+        $Self->{PW} = $Kernel::OM->Get('Kernel::System::Crypt::Secret')->Decrypt(
+            Value => $Self->{PW},
+        );
+    }
+    elsif ( defined $Self->{PW} && $Self->{PW} =~ /^\{(.*)\}$/ ) {
+
+        # Legacy obfuscation (not real encryption), kept for backward compatibility with
+        # values created by the (deprecated) Maint::Database::PasswordCrypt command.
+        # New setups should use Maint::Secret::Encrypt instead, see
+        # Kernel::System::Crypt::Secret.
         $Self->{PW} = $Self->_Decrypt($1);
     }
 
@@ -2033,7 +2044,13 @@ Private functions used by this package (not part of the documented public API).
 
 =head2 _Decrypt()
 
-decrypt a password
+Reverses the legacy C<{...}> password obfuscation produced by the (deprecated)
+C<Maint::Database::PasswordCrypt> console command. This is NOT real
+encryption (no key is involved, it's a fixed bit-flip), only kept for
+backward compatibility. New setups should use
+C<bin/znuny.Console.pl Maint::Secret::Encrypt> instead, which produces a
+real, key-based C<{AES256:...}> value handled by
+L<Kernel::System::Crypt::Secret>.
 
     my $Password = $DBObject->_Decrypt(
         Pw => $Password,

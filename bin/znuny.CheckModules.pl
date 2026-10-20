@@ -220,6 +220,18 @@ my @NeededModules = (
         },
     },
     {
+        Module   => 'Crypt::AuthEnc::GCM',
+        Required => 0,
+        Comment  => 'Required only if you encrypt sensitive Kernel/Config.pm values '
+            . '(see Kernel::System::Crypt::Secret / bin/znuny.Console.pl Maint::Secret::Encrypt).',
+        InstTypes => {
+            aptget => 'libcryptx-perl',
+            emerge => 'dev-perl/CryptX',
+            zypper => 'perl-CryptX',
+            ports  => 'security/p5-CryptX',
+        },
+    },
+    {
         Module    => 'Crypt::OpenSSL::X509',
         Required  => 0,
         Comment   => 'X509 certificate support.',

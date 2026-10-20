@@ -16,6 +16,7 @@ use Authen::Radius;
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::Crypt::Secret',
     'Kernel::System::Log',
 );
 
@@ -38,8 +39,11 @@ sub new {
     # get user table
     $Self->{RadiusHost} = $ConfigObject->Get( 'AuthModule::Radius::Host' . $Param{Count} )
         || die "Need AuthModule::Radius::Host$Param{Count} in Kernel/Config.pm";
-    $Self->{RadiusSecret} = $ConfigObject->Get( 'AuthModule::Radius::Password' . $Param{Count} )
+    my $RadiusPassword = $ConfigObject->Get( 'AuthModule::Radius::Password' . $Param{Count} )
         || die "Need AuthModule::Radius::Password$Param{Count} in Kernel/Config.pm";
+    $Self->{RadiusSecret} = $Kernel::OM->Get('Kernel::System::Crypt::Secret')->Decrypt(
+        Value => $RadiusPassword,
+    );
 
     return $Self;
 }
