@@ -1464,6 +1464,7 @@ Core.UI.InputFields = (function (TargetNS) {
                         AvailableHeightBottom,
                         AvailableHeightTop,
                         AvailableMaxHeight,
+                        ListOuterHeight,
                         PossibleNone,
                         $ClearAllObj,
                         $SelectAllObj,
@@ -1501,12 +1502,22 @@ Core.UI.InputFields = (function (TargetNS) {
                             $SearchObj.removeClass('ExpandToBottom')
                                 .addClass('ExpandToTop');
 
+                            ListOuterHeight = $ListContainerObj.outerHeight();
+
                             $ListContainerObj
                                 .removeClass('ExpandToBottom')
                                 .addClass('ExpandToTop')
                                 .css({
-                                    top: 'auto',
-                                    bottom: parseInt($('body').height() - $InputContainerObj.offset().top, 10)
+                                    top: parseInt(
+                                        ListOuterHeight
+                                            ? Math.max(
+                                                $InputContainerObj.offset().top - ListOuterHeight,
+                                                $(window).scrollTop() + Config.SafeMargin
+                                            )
+                                            : $(window).scrollTop() + Config.SafeMargin,
+                                        10
+                                    ),
+                                    bottom: 'auto'
                                 });
                         }
                         else {
@@ -2009,6 +2020,27 @@ Core.UI.InputFields = (function (TargetNS) {
                             }
                         }
                         Core.App.Publish('Event.UI.InputFields.Expanded', $SearchObj);
+
+                        // Refine the vertical position now that the tree has its real content:
+                        // the earlier CalculateListPosition() call had to guess before anything
+                        // was rendered, so it conservatively anchored to the top of the available
+                        // space. Defer to the next tick so any remaining synchronous DOM changes
+                        // (e.g. the toolbar built further below) are accounted for too, then align
+                        // the list flush with the field when there is enough room to do so.
+                        setTimeout(function () {
+                            if ($SearchObj.hasClass('ExpandToTop')) {
+                                $ListContainerObj.css({
+                                    top: parseInt(
+                                        Math.max(
+                                            $InputContainerObj.offset().top - $ListContainerObj.outerHeight(),
+                                            $(window).scrollTop() + Config.SafeMargin
+                                        ),
+                                        10
+                                    ),
+                                    bottom: 'auto'
+                                });
+                            }
+                        }, 0);
                     });
 
                     // Prevent loss of focus when using scrollbar
