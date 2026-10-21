@@ -523,19 +523,18 @@ sub ACLUpdate {
         $CurrentDescription    = $Data[2] || '';
         $CurrentStopAfterMatch = $Data[3] || 0;
         $CurrentValidID        = $Data[4];
-        $CurrentConfigMatch    = $Data[5];
-        $CurrentConfigChange   = $Data[6];
+        $CurrentConfigMatch    = $Data[5] || '';
+        $CurrentConfigChange   = $Data[6] || '';
     }
 
     if (
-        $CurrentName
-        && $CurrentName eq $Param{Name}
-        && $CurrentComment eq $Param{Comment}
-        && $CurrentDescription eq $Param{Description}
-        && $CurrentStopAfterMatch eq $Param{StopAfterMatch}
+        $CurrentName eq $Param{Name}
+        && $CurrentComment eq ( $Param{Comment}               || '' )
+        && $CurrentDescription eq ( $Param{Description}       || '' )
+        && $CurrentStopAfterMatch eq ( $Param{StopAfterMatch} || 0 )
         && $CurrentValidID eq $Param{ValidID}
-        && $CurrentConfigMatch eq $Param{ConfigMatch}
-        && $CurrentConfigChange eq $Param{ConfigChange}
+        && $CurrentConfigMatch eq ( $Param{ConfigMatch}   || '' )
+        && $CurrentConfigChange eq ( $Param{ConfigChange} || '' )
         )
     {
         return 1;
