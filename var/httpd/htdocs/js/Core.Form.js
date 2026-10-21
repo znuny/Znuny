@@ -32,11 +32,30 @@ Core.Form = (function (TargetNS) {
     /*
      * Find checked rw inputs and disable their row, and add class 'Disabled'.
      */
-    $('input[type="checkbox"][name="rw"]').each(function () {
-        if($(this).attr('checked') === 'checked'){
-            $(this).parent().siblings().children().prop('checked', true).prop('disabled', true);
-            $(this).addClass('Disabled');
+    $('input[type="checkbox"]').filter(function () {
+        var InputName = $(this).attr('name') || '';
+        return InputName === 'rw' || InputName.endsWith('_rw');
+    }).each(function () {
+        var InputName, ContextPrefix, $Siblings;
+
+        if ($(this).attr('checked') !== 'checked') {
+            return;
         }
+
+        InputName = $(this).attr('name') || '';
+        $Siblings = $(this).parent().siblings().children('input');
+
+        // Customer-group tables put several permission areas in one row.
+        // Only lock the boxes that belong to this area.
+        if (InputName !== 'rw') {
+            ContextPrefix = InputName.substring(0, InputName.length - 2);
+            $Siblings = $Siblings.filter(function () {
+                return (($(this).attr('name') || '').indexOf(ContextPrefix) === 0);
+            });
+        }
+
+        $Siblings.prop('checked', true).prop('disabled', true);
+        $(this).addClass('Disabled');
     });
 
     /*
@@ -174,7 +193,8 @@ Core.Form = (function (TargetNS) {
      */
     TargetNS.SelectAllCheckboxes = function ($ClickedBox, $SelectAllCheckbox) {
         var ElementName, SelectAllID, $Elements,
-            Status, CountCheckboxes, CountSelectedCheckboxes,RWMasterSwitch, RowInputs, HeadElements, CheckAll;
+            Status, CountCheckboxes, CountSelectedCheckboxes, RWMasterSwitch, RowInputs, HeadElements, CheckAll,
+            ContextPrefix, $NonRW;
 
         if (isJQueryObject($ClickedBox, $SelectAllCheckbox)) {
             ElementName = $ClickedBox.attr('name');
@@ -185,6 +205,19 @@ Core.Form = (function (TargetNS) {
             RWMasterSwitch = $('input[id^="SelectAll"][id$="rw"]');
             HeadElements = $('table th input:not([name$="rw"]:visible)');
             CheckAll = $('input[type="checkbox"]:visible');
+            ContextPrefix = '';
+
+            // "Ticket::CustomerID::Same_rw" -> "Ticket::CustomerID::Same_"
+            if (ElementName !== 'rw' && ElementName.endsWith('_rw')) {
+                ContextPrefix = ElementName.substring(0, ElementName.length - 2);
+                RWMasterSwitch = $SelectAllCheckbox;
+                CheckAll = CheckAll.filter(function () {
+                    return (($(this).attr('name') || '').indexOf(ContextPrefix) === 0);
+                });
+                HeadElements = HeadElements.filter(function () {
+                    return (($(this).attr('name') || '').indexOf(ContextPrefix) === 0);
+                });
+            }
 
             if (ElementName.endsWith('rw')) {
 
@@ -197,7 +230,13 @@ Core.Form = (function (TargetNS) {
                         return;
                     } else {
                         CheckAll.prop('checked', true);
-                        $('input[type="checkbox"]:visible:not([name$="rw"])').not(RWMasterSwitch).prop('disabled', true);
+                        $NonRW = $('input[type="checkbox"]:visible:not([name$="rw"])');
+                        if (ContextPrefix) {
+                            $NonRW = $NonRW.filter(function () {
+                                return (($(this).attr('name') || '').indexOf(ContextPrefix) === 0);
+                            });
+                        }
+                        $NonRW.not(RWMasterSwitch).prop('disabled', true);
                         $Elements.addClass('Disabled');
                         RWMasterSwitch.addClass('Disabled');
                         return;
@@ -207,11 +246,17 @@ Core.Form = (function (TargetNS) {
                     RWMasterSwitch.removeClass('Disabled');
                     HeadElements.prop('disabled', false);
 
+                    RowInputs = $ClickedBox.parent().siblings().children('input');
+                    if (ContextPrefix) {
+                        RowInputs = RowInputs.filter(function () {
+                            return (($(this).attr('name') || '').indexOf(ContextPrefix) === 0);
+                        });
+                    }
+
                     if($ClickedBox.hasClass('Disabled')){
-                        $ClickedBox.parent().siblings().children().prop('disabled', false);
+                        RowInputs.prop('disabled', false);
                         $ClickedBox.removeClass('Disabled');
                     }else{
-                        RowInputs = $ClickedBox.parent().siblings().children('input');
                         RowInputs.each(function(){
                             if(!$(this)[0].checked){
                                 $(this).trigger('click');

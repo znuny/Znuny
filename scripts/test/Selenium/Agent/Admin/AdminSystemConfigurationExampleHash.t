@@ -1807,7 +1807,7 @@ $Selenium->RunTest(
 
         # Check if there is notification.
         $Self->True(
-            index( $Selenium->get_page_source(), 'You have undeployed settings, would you like to deploy them?' ) > -1,
+            index( $Selenium->get_page_source(), 'You have undeployed settings:' ) > -1,
             "Notification shown for undeployed settings."
         );
 
