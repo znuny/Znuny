@@ -1,6 +1,7 @@
 # 7.5.1 2026-??-??
  - 2026-10-16 Fixed: Closing the "add draft" dialog via the header X, a click outside the dialog, or Escape left form validation disabled, so the ticket action could be submitted without required fields.
  - 2026-10-13 Fixed: Select drop-downs could render at wrong position when specific position criteria were met.
+ - 2026-10-08 Fixed: Uninitialized values in Kernel/System/ACL/DB/ACL.pm
  - 2026-09-21 Fixed: "Back" button in mobile view did nothing in ticket details dialog.
  - 2026-09-10 Added: Support for AES encrypted passwords.
 
