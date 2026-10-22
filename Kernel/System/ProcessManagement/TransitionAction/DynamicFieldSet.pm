@@ -18,6 +18,7 @@ use Kernel::System::VariableCheck qw(:all);
 use parent qw(Kernel::System::ProcessManagement::TransitionAction::Base);
 
 our @ObjectDependencies = (
+    'Kernel::Config',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::Log',
@@ -111,8 +112,13 @@ sub Run {
     $Self->_ReplaceAdditionalAttributes(%Param);
 
     # get dynamic field objects
+    my $ConfigObject              = $Kernel::OM->Get('Kernel::Config');
     my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
     my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+    # get the registered backend module for every dynamic field type, used below to detect field
+    # types that are built on top of the Multiselect driver (see bug#14900)
+    my $DynamicFieldDriverConfig = $ConfigObject->Get('DynamicFields::Driver') || {};
 
     for my $CurrentDynamicField ( sort keys %{ $Param{Config} } ) {
 
@@ -131,9 +137,16 @@ sub Run {
             return;
         }
 
-        # Transform value from string to array for multiselect field (see bug#14900).
+        # Transform value from string to array for multiselect field (see bug#14900). This also
+        # covers field types built on top of the Multiselect driver (e.g. ConfigItemMultiselect
+        # from ITSMConfigurationManagement, WebserviceMultiselect), not just the field type named
+        # exactly 'Multiselect', since ValueSet() of the Multiselect driver only stores multiple
+        # rows when it receives an array reference.
+        my $DynamicFieldBackendModule = $DynamicFieldDriverConfig->{ $DynamicFieldConfig->{FieldType} }->{Module};
+
         if (
-            $DynamicFieldConfig->{FieldType} eq 'Multiselect'
+            $DynamicFieldBackendModule
+            && $DynamicFieldBackendModule->isa('Kernel::System::DynamicField::Driver::Multiselect')
             && IsStringWithData( $Param{Config}->{$CurrentDynamicField} )
             )
         {
