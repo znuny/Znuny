@@ -282,6 +282,15 @@
 [% RenderBlockStart("InSettingValidOptionServerError") %]
                                             [% Translate("Is not possible to invalidate this entry, all config settings have to be changed beforehand.") | html %]
 [% RenderBlockEnd("InSettingValidOptionServerError") %]
+[% RenderBlockStart("InSystemAddressValidOptionServerError") %]
+                                            [% Translate("It is not possible to invalidate this entry because it is assigned to one or more system e-mail addresses.") | html %]
+[% RenderBlockEnd("InSystemAddressValidOptionServerError") %]
+[% RenderBlockStart("InMailAccountValidOptionServerError") %]
+                                            [% Translate("It is not possible to invalidate this entry because it is assigned to one or more mail accounts.") | html %]
+[% RenderBlockEnd("InMailAccountValidOptionServerError") %]
+[% RenderBlockStart("InSystemAddressAndMailAccountValidOptionServerError") %]
+                                            [% Translate("It is not possible to invalidate this entry because it is assigned to one or more system e-mail addresses and one or more mail accounts.") | html %]
+[% RenderBlockEnd("InSystemAddressAndMailAccountValidOptionServerError") %]
                                         </p>
                                     </div>
                                 </div>
