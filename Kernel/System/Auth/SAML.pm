@@ -79,7 +79,7 @@ sub new {
     # Optional config options
     #
     for my $ConfigKey (
-        qw(RequestMetaDataURLSSLOptions RequestSignKey IdPCACert)
+        qw(RequestMetaDataURLSSLOptions RequestSignKey IdPCACert ResponseEncryptKey)
         )
     {
         $Self->{Config}->{$ConfigKey} = $ConfigObject->Get("$ConfigOptionPrefix$ConfigKey$Self->{Count}");
