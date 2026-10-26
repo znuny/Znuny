@@ -273,7 +273,7 @@ $Selenium->RunTest(
         # Check if info for incompatible package is shown.
         $Self->True(
             $Selenium->execute_script(
-                "return \$('.WidgetSimple .Content h2:contains(\"Package installation requires a patch level update of Znuny\")').length;"
+                "return \$('.WidgetSimple .Content h2:contains(\"Package is incompatible.\")').length;"
             ),
             'Info for incompatible package is shown'
         );
