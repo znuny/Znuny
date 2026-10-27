@@ -709,9 +709,10 @@ sub Form {
         Attachments         => \@Attachments,
         %Data,
         %GetParam,
-        InReplyTo        => $Data{MessageID},
-        References       => $References,
-        DynamicFieldHTML => \%DynamicFieldHTML,
+        InReplyTo                  => $Data{MessageID},
+        References                 => $References,
+        DynamicFieldHTML           => \%DynamicFieldHTML,
+        SourceIsVisibleForCustomer => $Data{IsVisibleForCustomer},
     );
     $Output .= $LayoutObject->Footer(
         Type => 'Small',
@@ -1858,6 +1859,13 @@ sub _Mask {
     );
 
     $Param{IsVisibleForCustomer} = $Config->{IsVisibleForCustomerDefault};
+    if (
+        !$Param{SourceIsVisibleForCustomer}
+        && $ConfigObject->Get('Ticket::Frontend::HideMessageFromCustomerByDefaultIfSourceMessageHidden')
+        )
+    {
+        $Param{IsVisibleForCustomer} = 0;
+    }
     if ( $Self->{GetParam}->{IsVisibleForCustomerPresent} ) {
         $Param{IsVisibleForCustomer} = $Self->{GetParam}->{IsVisibleForCustomer} ? 1 : 0;
     }
