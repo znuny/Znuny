@@ -280,6 +280,16 @@
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="Ticket::EventModulePost###2750-ForceResponsibleResetOnMove" Required="0" Valid="0">
+        <Description Translatable="1">Resets the responsible of a ticket if it was moved to another queue.</Description>
+        <Navigation>Core::Event::Ticket</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::Ticket::Event::ForceResponsibleReset</Item>
+                <Item Key="Event">\ATicketQueueUpdate\z</Item>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::EventModulePost###2800-ForceStateChangeOnLock" Required="0" Valid="0">
         <Description Translatable="1">Forces to choose a different ticket state (from current) after lock action. Define the current state as key, and the next state after lock action as content.</Description>
         <Navigation>Core::Event::Ticket</Navigation>

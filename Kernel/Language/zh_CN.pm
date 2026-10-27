@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.859166136218969;
+    $Self->{Completeness}        = 0.859188544152745;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -6579,6 +6579,8 @@ sub Data {
         'Updates the ticket index accelerator.' => '更新工单索引加速器。',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             '如果工单转移到另一个队列，重置并解锁工单所有者。',
+        'Resets the responsible of a ticket if it was moved to another queue.' =>
+            '如果工单转移到另一个队列，重置工单负责人。',
         'Forces to choose a different ticket state (from current) after lock action. Define the current state as key, and the next state after lock action as content.' =>
             '工单锁定后强制选择与当前不同的另一个工单状态，定义键为当前状态，值为锁定后的下一个工单状态。',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>

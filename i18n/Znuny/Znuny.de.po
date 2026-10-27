@@ -25525,3 +25525,7 @@ msgstr "Falls es eine ältere Version dieses Pakets gibt, die Znuny %s unterstü
 msgid "If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization."
 msgstr "Falls ein Znuny-Update erforderlich ist, lesen Sie die Dokumentation zum Update auf die benötigte Version oder wenden Sie sich an Ihre Support-Organisation."
 
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Resets the responsible of a ticket if it was moved to another queue."
+msgstr "Setzt den Verantwortlichen eines TIckets zurück, wenn das Ticket in eine andere Queue verschoben wird."
+

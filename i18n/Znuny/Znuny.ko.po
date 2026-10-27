@@ -25512,3 +25512,7 @@ msgstr "Znuny %s을(를) 지원하는 이 패키지의 이전 버전이 있으�
 msgid "If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization."
 msgstr "Znuny 업데이트가 필요한 경우 필요한 버전으로의 업데이트에 관한 문서를 참조하거나 지원 조직에 문의하십시오."
 
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Resets the responsible of a ticket if it was moved to another queue."
+msgstr "다른 대기열로 이동된 티켓의 책임자를 재설정합니다."
+

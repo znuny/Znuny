@@ -6573,6 +6573,8 @@ sub Data {
         'Updates the ticket index accelerator.' => 'Aktualisiert den Ticket-Index-Beschleuniger.',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             'Setzt den Besitzer eines TIckets zurück und entsperrt es, wenn das Ticket in eine andere Queue verschoben wird.',
+        'Resets the responsible of a ticket if it was moved to another queue.' =>
+            'Setzt den Verantwortlichen eines TIckets zurück, wenn das Ticket in eine andere Queue verschoben wird.',
         'Forces to choose a different ticket state (from current) after lock action. Define the current state as key, and the next state after lock action as content.' =>
             'Erzwingt das Setzen eines (vom aktuellen Status) abweichenden Ticket-Status nach dem Sperren eines Tickets. Legen Sie den aktuellen Status als Schlüssel und den neuen Status als Inhalt fest.',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>

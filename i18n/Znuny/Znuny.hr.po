@@ -25501,3 +25501,7 @@ msgstr "Ako postoji starija verzija ovog paketa koja podržava Znuny %s, instali
 msgid "If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization."
 msgstr "Ako je potrebna nadogradnja Znunyja, pogledajte dokumentaciju za nadogradnju na potrebnu verziju ili se obratite svojoj organizaciji za podršku."
 
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Resets the responsible of a ticket if it was moved to another queue."
+msgstr "Resetuje odgovornog za karticu ako je kartica premeštena u drugi red."
+

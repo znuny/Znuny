@@ -25503,3 +25503,7 @@ msgstr "如果存在支援 Znuny %s 的此軟件包較舊版本，請改為安�
 msgid "If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization."
 msgstr "如果需要更新 Znuny，請查閱有關更新至所需版本的文件，或聯絡您的支援機構。"
 
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Resets the responsible of a ticket if it was moved to another queue."
+msgstr "如果工單轉移到另一個隊列，重置工單負責人。"
+

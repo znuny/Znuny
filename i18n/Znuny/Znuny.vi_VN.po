@@ -25515,3 +25515,7 @@ msgstr "Nếu có phiên bản cũ hơn của gói này hỗ trợ Znuny %s, hã
 msgid "If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization."
 msgstr "Nếu cần cập nhật Znuny, hãy tham khảo tài liệu về việc cập nhật lên phiên bản yêu cầu hoặc liên hệ với tổ chức hỗ trợ của bạn."
 
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Resets the responsible of a ticket if it was moved to another queue."
+msgstr "Đặt lại người chịu trách nhiệm của thẻ nếu thẻ được chuyển sang hàng đợi khác."
+

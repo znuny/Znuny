@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.571133036282623;
+    $Self->{Completeness}        = 0.571201272871917;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -6580,6 +6580,8 @@ sub Data {
         'Updates the ticket index accelerator.' => 'Actualiza el acelerador del índice de tickets.',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             '',
+        'Resets the responsible of a ticket if it was moved to another queue.' =>
+            'Restablece al responsable de un ticket si se mueve a otra cola.',
         'Forces to choose a different ticket state (from current) after lock action. Define the current state as key, and the next state after lock action as content.' =>
             '',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>

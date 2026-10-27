@@ -25501,3 +25501,7 @@ msgstr "Pokud existuje starší verze tohoto balíčku, která podporuje Znuny %
 msgid "If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization."
 msgstr "Pokud je nutná aktualizace Znuny, prostudujte si dokumentaci k aktualizaci na požadovanou verzi nebo kontaktujte svou organizaci podpory."
 
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Resets the responsible of a ticket if it was moved to another queue."
+msgstr "Resetuje odpovědného za tiket, pokud byl tiket přesunut do jiné fronty."
+

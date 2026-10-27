@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%m/%d/%Y';
     $Self->{DateInputFormat}     = '%m/%d/%Y';
     $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
-    $Self->{Completeness}        = 0.422501591343094;
+    $Self->{Completeness}        = 0.422593476531424;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -6575,6 +6575,8 @@ sub Data {
         'Updates the ticket index accelerator.' => 'Sasisha kiharakishi cha kielezo cha tiketi.',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             'Inaweka upya na inamfungua mmiliki wa tiketi kama ilikuwa imeamishwa kwenye foleni.',
+        'Resets the responsible of a ticket if it was moved to another queue.' =>
+            'Inaweka upya mmhusika wa tiketi kama ilikuwa imeamishwa kwenye foleni.',
         'Forces to choose a different ticket state (from current) after lock action. Define the current state as key, and the next state after lock action as content.' =>
             'Inalazimisha kuchagua hali tofauti za tiketi (Kutoka sasa) baada ya kitendo cha kufunga. Fafanua hali ya sasa kama funguo, na hali ijayo baada ya kitendo cha kufunga kama maudhui.',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>

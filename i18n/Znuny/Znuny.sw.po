@@ -25505,3 +25505,7 @@ msgstr "Ikiwa kuna toleo la zamani zaidi la kifurushi hiki linalotumia Znuny %s,
 msgid "If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization."
 msgstr "Ikiwa usasishaji wa Znuny unahitajika, angalia nyaraka za kusasisha hadi toleo linalohitajika, au wasiliana na shirika lako la usaidizi."
 
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Resets the responsible of a ticket if it was moved to another queue."
+msgstr "Inaweka upya mmhusika wa tiketi kama ilikuwa imeamishwa kwenye foleni."
+

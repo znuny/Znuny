@@ -25514,3 +25514,7 @@ msgstr "Ha létezik ennek a csomagnak egy régebbi verziója, amely támogatja a
 msgid "If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization."
 msgstr "Ha a Znuny frissítése szükséges, akkor olvassa el a szükséges verzióra történő frissítés dokumentációját, vagy vegye fel a kapcsolatot a támogatási szervezetével."
 
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Resets the responsible of a ticket if it was moved to another queue."
+msgstr "Visszaállítja egy jegy felelősét, ha az egy másik várólistába lett áthelyezve."
+

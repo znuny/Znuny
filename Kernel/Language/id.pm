@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.582431572246977;
+    $Self->{Completeness}        = 0.582498011137629;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -6574,6 +6574,8 @@ bin/znuny.Daemon.pl status\').',
         'Updates the ticket index accelerator.' => 'Updated indeks tiket akselerator.',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             'Ulang dan membuka pemilik tiket jika itu dipindahkan ke antrian yang lain.',
+        'Resets the responsible of a ticket if it was moved to another queue.' =>
+            'Ulang penanggung jawab tiket jika itu dipindahkan ke antrian yang lain.',
         'Forces to choose a different ticket state (from current) after lock action. Define the current state as key, and the next state after lock action as content.' =>
             'Dipaksa untuk memilih keadaan tiket yang berbeda (dari saat ini) setelah aksi kunci. Mendefinisikan keadaan saat sebagai kunci, dan negara berikutnya setelah aksi kunci sebagai konten.',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>

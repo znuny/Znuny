@@ -6578,6 +6578,8 @@ sub Data {
         'Updates the ticket index accelerator.' => 'Frissíti a jegyindex gyorsítót.',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             'Visszaállítja és feloldja egy jegy tulajdonosát, ha az egy másik várólistába lett áthelyezve.',
+        'Resets the responsible of a ticket if it was moved to another queue.' =>
+            'Visszaállítja egy jegy felelősét, ha az egy másik várólistába lett áthelyezve.',
         'Forces to choose a different ticket state (from current) after lock action. Define the current state as key, and the next state after lock action as content.' =>
             'Egy másik jegyállapot (az aktuálisból) kiválasztását kényszeríti a zárolás művelet után. Az aktuális állapotot kulcsként határozza meg, és a zárolás művelet utáni következő állapotot tartalomként.',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>

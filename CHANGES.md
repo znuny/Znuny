@@ -7,6 +7,7 @@
  - 2026-09-21 Fixed: "Back" button in mobile view did nothing in ticket details dialog.
  - 2026-09-10 Added: Support for AES encrypted passwords.
  - 2026-09-04 Fixed: Process transition action "DynamicFieldSet" now correctly saves multiple values for all multiselect-type dynamic fields (e.g. ConfigItemMultiselect, WebserviceMultiselect).
+ - 2026-06-12 Added: Event module to reset responsible of a ticket on queue change.
 
 # 7.3.8 2026-10-14
  - 2026-10-08 Fixed: Agent ticket action dialogs showed an empty state option on first load when a default state is configured.

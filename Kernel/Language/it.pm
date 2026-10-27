@@ -35,7 +35,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.575747931253978;
+    $Self->{Completeness}        = 0.575815433571997;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -6585,6 +6585,8 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
         'Updates the ticket index accelerator.' => 'Carica il "Ticket Index Accelerator".',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             'Azzera e sblocca il proprietario di un ticket se il ticket viene spostato in un’altra coda.',
+        'Resets the responsible of a ticket if it was moved to another queue.' =>
+            'Azzera il responsabile di un ticket se il ticket viene spostato in un’altra coda.',
         'Forces to choose a different ticket state (from current) after lock action. Define the current state as key, and the next state after lock action as content.' =>
             '',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>

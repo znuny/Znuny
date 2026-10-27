@@ -25501,3 +25501,7 @@ msgstr "إذا كان هناك إصدار أقدم من هذه الحزمة يد
 msgid "If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization."
 msgstr "إذا كان تحديث Znuny مطلوبًا، فراجع الوثائق الخاصة بالتحديث إلى الإصدار المطلوب، أو اتصل بجهة الدعم الخاصة بك."
 
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Resets the responsible of a ticket if it was moved to another queue."
+msgstr "يعيد تعيين مسؤول البطاقة إذا تم نقلها إلى قائمة أخرى."
+
