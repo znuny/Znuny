@@ -57,12 +57,6 @@ sub Run {
     # get ticket object
     my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
-    my $CacheKey = '_TicketProcessTransitions::AlreadyProcessed';
-
-    # loop protection: only execute this handler once for each ticket, as multiple events may be
-    #   fired, for example TicketTitleUpdate and TicketPriorityUpdate.
-    return if ( $TicketObject->{$CacheKey}->{ $Param{Data}->{TicketID} } );
-
     # get ticket data in silent mode, it could be that the ticket was deleted
     #   in the meantime.
     my %Ticket = $TicketObject->TicketGet(
@@ -71,14 +65,7 @@ sub Run {
         Silent        => 1,
     );
 
-    if ( !%Ticket ) {
-
-        # remember that the event was executed for this TicketID to avoid multiple executions.
-        #   Store the information on the ticketobject
-        $TicketObject->{$CacheKey}->{ $Param{Data}->{TicketID} } = 1;
-
-        return;
-    }
+    return if !%Ticket;
 
     # get config object
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
@@ -104,11 +91,17 @@ sub Run {
 
     # ok, now we know that we need to call the sequence flow logic for this ticket.
 
-    # Remember that the event was executed for this ticket to avoid multiple executions.
-    #   Store the information on the ticketobject, this needs to be done before the execution of the
-    #   transitions as it could happen that the transition generates new events that will be
-    #   processed in the mean time, before the chache is set, see bug#9748
-    $TicketObject->{$CacheKey}->{ $Param{Data}->{TicketID} } = 1;
+    # Loop protection: track visited activities per ticket, not just "was processed".
+    # This allows chained transitions (A→B→C) while preventing loops (A→B→A).
+    # See bug#9748 for original loop protection rationale.
+    my $CacheKey = '_TicketProcessTransitions::VisitedActivities';
+    $TicketObject->{$CacheKey}->{ $Param{Data}->{TicketID} } //= {};
+
+    # If we already visited this activity in this request, stop (actual loop detected).
+    return if $TicketObject->{$CacheKey}->{ $Param{Data}->{TicketID} }->{$ActivityEntityID};
+
+    # Mark current activity as visited before processing to prevent recursion.
+    $TicketObject->{$CacheKey}->{ $Param{Data}->{TicketID} }->{$ActivityEntityID} = 1;
 
     my $TransitionApplied = $ProcessObject->ProcessTransition(
         ProcessEntityID  => $ProcessEntityID,
