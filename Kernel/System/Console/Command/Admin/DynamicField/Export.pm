@@ -17,6 +17,8 @@ use parent qw(Kernel::System::Console::BaseCommand);
 
 our @ObjectDependencies = (
     'Kernel::System::ZnunyHelper',
+    'Kernel::System::Main',
+    'Kernel::System::YAML',
 );
 
 sub Configure {
@@ -55,13 +57,23 @@ sub Run {
     my ( $Self, %Param ) = @_;
 
     my $ZnunyHelperObject = $Kernel::OM->Get('Kernel::System::ZnunyHelper');
+    my $YAMLObject        = $Kernel::OM->Get('Kernel::System::YAML');
+    my $MainObject        = $Kernel::OM->Get('Kernel::System::Main');
 
-    my $ConfigString = $ZnunyHelperObject->_DynamicFieldsConfigExport(
-        Format                => $Self->GetArgument('format'),
+    # first, collect the data as hashref
+    my %Data;
+    $Data{DynamicFields} = $ZnunyHelperObject->_DynamicFieldsConfigExport(
+        Format                => 'var',
         IncludeInternalFields => $Self->GetOption('include-internal-fields') // 0,
         IncludeAllConfigKeys  => $Self->GetOption('include-all-config-keys') // 0,
+        Result                => 'HASH',
     );
+    %{ $Data{DynamicFieldScreens} } = $ZnunyHelperObject->_DynamicFieldsScreenConfigExport();
 
+    # finally dump the data as YAML or Perl structure
+    my $ConfigString = $Self->GetArgument('format') =~ m{\A ya?ml \z}xi
+        ? $YAMLObject->Dump( Data => \%Data )
+        : $MainObject->Dump( \%Data );
     $Self->Print("$ConfigString\n");
 
     return $Self->ExitCodeOk();
