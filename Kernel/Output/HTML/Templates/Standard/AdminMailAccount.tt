@@ -74,8 +74,13 @@
                     [% Translate("If your account is marked as trusted, the X-OTRS headers already existing at arrival time (for priority etc.) will be kept and used, for example in PostMaster filters.") | html %]
                 </p>
                 <p class="FieldExplanation">
+                    [% IF Data.AdminSystemConfigurationPermission %]
                     [% Translate("Outgoing email can be configured via the Sendmail* settings in %s.",
                     '<a href="?Action=AdminSystemConfigurationGroup;RootNavigation=Core::Email">' _ Translate("System Configuration") _ '</a>') %]
+                    [% ELSE %]
+                    [% Translate("Outgoing email can be configured via the Sendmail* settings in %s.",
+                    Translate("System Configuration")) %]
+                    [% END %]
             </div>
         </div>
         <div class='WidgetSimple'>

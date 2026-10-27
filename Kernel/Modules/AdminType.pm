@@ -23,6 +23,11 @@ sub new {
     my $Self = {%Param};
     bless( $Self, $Type );
 
+    $Self->{AdminSystemConfigurationPermission} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Permission(
+        Action => 'AdminSystemConfiguration',
+        Type   => 'rw',
+    );
+
     return $Self;
 }
 
@@ -51,6 +56,8 @@ sub Run {
                 . 'Action=AdminSystemConfiguration;Subaction=View;Setting=Ticket%3A%3AType',
         );
     }
+
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     # ------------------------------------------------------------ #
     # change
@@ -358,6 +365,8 @@ sub _Edit {
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
+
     $LayoutObject->Block(
         Name => 'Overview',
         Data => \%Param,
@@ -457,6 +466,8 @@ sub _Overview {
     my ( $Self, %Param ) = @_;
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     $LayoutObject->Block(
         Name => 'Overview',

@@ -23,6 +23,11 @@ sub new {
 
     $Self->{IsITSMInstalled} = $Kernel::OM->Get('Kernel::System::Util')->IsITSMInstalled();
 
+    $Self->{AdminSystemConfigurationPermission} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Permission(
+        Action => 'AdminSystemConfiguration',
+        Type   => 'rw',
+    );
+
     return $Self;
 }
 
@@ -35,7 +40,8 @@ sub Run {
     my $SLAObject    = $Kernel::OM->Get('Kernel::System::SLA');
     my %Error        = ();
 
-    $Param{IsITSMInstalled} = $Self->{IsITSMInstalled};
+    $Param{IsITSMInstalled}                    = $Self->{IsITSMInstalled};
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     # ------------------------------------------------------------ #
     # sla edit
@@ -338,7 +344,8 @@ sub _MaskNew {
 
     my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
 
-    $Param{IsITSMInstalled} = $Self->{IsITSMInstalled};
+    $Param{IsITSMInstalled}                    = $Self->{IsITSMInstalled};
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     # get params
     my %SLAData;

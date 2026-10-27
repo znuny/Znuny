@@ -124,6 +124,7 @@
             </div>
             <div class='Content'>
                 <ul class='ActionList SpacingTop'>
+                    [% IF Data.AdminACLPermission %]
                     <li>
                         <a href='[% Env("Baselink") %]Action=AdminACL' class='CallForAction Fullsize Center'>
                             <span>
@@ -131,6 +132,7 @@
                             </span>
                         </a>
                     </li>
+                    [% END %]
                     <li>
                         <a href='[% Env("Baselink") %]Action=AdminDynamicField' class='CallForAction Fullsize Center'>
                             <span>
@@ -145,6 +147,7 @@
                             </span>
                         </a>
                     </li>
+                    [% IF Data.AdminSystemConfigurationPermission %]
                     <li>
                         <a href="[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=View;Setting=Ticket%3A%3AFrontend%3A%3AAgentTicketZoom%23%23%23ProcessWidgetDynamicFieldGroups;ChallengeToken=KDtGaGclmu2ObuGcZSWayxkbvL5rOa5p;" class="CallForAction Fullsize Center">
                             <span>
@@ -152,6 +155,7 @@
                             </span>
                         </a>
                     </li>
+                    [% END %]
                 </ul>
             </div>
         </div>

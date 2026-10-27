@@ -23,6 +23,11 @@ sub new {
     my $Self = {%Param};
     bless( $Self, $Type );
 
+    $Self->{AdminSystemConfigurationPermission} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Permission(
+        Action => 'AdminSystemConfiguration',
+        Type   => 'rw',
+    );
+
     return $Self;
 }
 
@@ -31,6 +36,8 @@ sub Run {
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     # ------------------------------------------------------------ #
     # check if feature is active
@@ -347,6 +354,8 @@ sub _Change {
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
+
     my %Data        = %{ $Param{Data} };
     my $Type        = $Param{Type} || 'CustomerUser';
     my $NeType      = $Type eq 'Group' ? 'CustomerUser' : 'Group';
@@ -404,7 +413,12 @@ sub _Change {
     else {
 
         # output config shortcut to CustomerAlwaysGroups
-        $LayoutObject->Block( Name => 'AlwaysGroupsConfig' );
+        $LayoutObject->Block(
+            Name => 'AlwaysGroupsConfig',
+            Data => {
+                %Param,
+            },
+        );
 
         $LayoutObject->Block( Name => 'Filter' );
     }
@@ -555,6 +569,8 @@ sub _Overview {
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
+
     my $CustomerUserCount   = $Param{CustomerUserCount};
     my @CustomerUserKeyList = @{ $Param{CustomerUserKeyList} };
     my %CustomerUserData    = %{ $Param{CustomerUserData} };
@@ -579,7 +595,12 @@ sub _Overview {
     );
 
     # Output config shutcut to CustomerAlwaysGroups
-    $LayoutObject->Block( Name => 'AlwaysGroupsConfig' );
+    $LayoutObject->Block(
+        Name => 'AlwaysGroupsConfig',
+        Data => {
+            %Param,
+        },
+    );
 
     # output filter and default block
     $LayoutObject->Block(
@@ -694,6 +715,8 @@ sub _Disabled {
     my ( $Self, %Param ) = @_;
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     $LayoutObject->Block(
         Name => 'Overview',

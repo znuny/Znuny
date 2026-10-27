@@ -83,6 +83,7 @@
             </div>
             <div class='Content'>
                 <ul class='ActionList SpacingTop'>
+                    [% IF Data.AdminSystemConfigurationPermission %]
                     <li>
                         <a href='[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=Search;Search=%23%23%23State' class='CallForAction Fullsize Center'>
                             <span>
@@ -97,6 +98,7 @@
                             </span>
                         </a>
                     </li>
+                    [% END %]
                 </ul>
             </div>
         </div>
