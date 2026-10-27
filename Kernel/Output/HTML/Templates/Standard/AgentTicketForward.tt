@@ -25,7 +25,6 @@
                                 <input type="hidden" name="InReplyTo" value="[% Data.InReplyTo | html %]" />
                                 <input type="hidden" name="References" value="[% Data.References | html %]" />
                                 <input type="hidden" name="FormID" value="[% Data.FormID | html %]" />
-                                <input type="hidden" name="IsVisibleForCustomerPresent" value="1" />
                                 <input type="hidden" name="FormDraftTitle" value="[% Data.FormDraftTitle | html %]" />
                                 <input type="hidden" name="FormDraftID" value="[% Data.FormDraftID | html %]" />
                                 <input type="hidden" name="FormDraftAction" id="FormDraftAction" />
