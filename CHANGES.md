@@ -1,5 +1,6 @@
 # 7.5.1 2026-??-??
  - 2026-10-26 Fixed: Customers already selected on a ticket still appeared as selectable in the customer user address book.
+ - 2026-10-19 Fixed: Console command to export/import dynamic field configs used different format than the GUI version.
  - 2026-10-16 Fixed: Closing the "add draft" dialog via the header X, a click outside the dialog, or Escape left form validation disabled, so the ticket action could be submitted without required fields.
  - 2026-10-13 Fixed: Select drop-downs could render at wrong position when specific position criteria were met.
  - 2026-10-08 Fixed: Uninitialized values in Kernel/System/ACL/DB/ACL.pm
