@@ -11,6 +11,7 @@ package Kernel::System::Environment;
 
 use strict;
 use warnings;
+use utf8;
 
 use POSIX;
 use ExtUtils::MakeMaker;
@@ -335,16 +336,16 @@ sub DBInfoGet {
     return %EnvDB;
 }
 
-=head2 OTRSInfoGet()
+=head2 ZnunyInfoGet()
 
-collect OTRS information
+collect product information
 
-    my %OTRSInfo = $EnvironmentObject->OTRSInfoGet();
+    my %ZnunyInfo = $EnvironmentObject->ZnunyInfoGet();
 
 returns:
 
-    %OTRSInfo = (
-        Product         => "OTRS",
+    %ZnunyInfo = (
+        Product         => "Znuny",
         Version         => "3.3.1",
         DefaultLanguage => "en",
         Home            => "/opt/znuny",
@@ -354,14 +355,14 @@ returns:
 
 =cut
 
-sub OTRSInfoGet {
+sub ZnunyInfoGet {
     my ( $Self, %Param ) = @_;
 
     # get config object
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-    # collect OTRS data
-    my %EnvOTRS = (
+    # collect Znuny data
+    my %ZnunyInfo = (
         Version         => $ConfigObject->Get('Version'),
         Home            => $ConfigObject->Get('Home'),
         Host            => $ConfigObject->Get('FQDN'),
@@ -370,7 +371,26 @@ sub OTRSInfoGet {
         DefaultLanguage => $ConfigObject->Get('DefaultLanguage'),
     );
 
-    return %EnvOTRS;
+    return %ZnunyInfo;
+}
+
+=head2 OTRSInfoGet()
+
+collect OTRS information
+
+    my %OTRSInfo = $EnvironmentObject->OTRSInfoGet();
+
+returns the same values as L</ZnunyInfoGet()>.
+
+DEPRECATED: Use L</ZnunyInfoGet()> instead. This wrapper remains for
+compatibility.
+
+=cut
+
+sub OTRSInfoGet {
+    my ( $Self, %Param ) = @_;
+
+    return $Self->ZnunyInfoGet(%Param);
 }
 
 1;
