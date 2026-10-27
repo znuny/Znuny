@@ -1216,7 +1216,7 @@ sub Run {
                     },
                 );
                 if ( $Self->{UserTimeZone} ) {
-                    $StartTimeObject->ToOTRSTimeZone();
+                    $StartTimeObject->ToZnunyTimeZone();
                 }
                 $GetParam{StartTime} = $StartTimeObject->ToString();
             }
@@ -1247,7 +1247,7 @@ sub Run {
                     },
                 );
                 if ( $Self->{UserTimeZone} ) {
-                    $EndTimeObject->ToOTRSTimeZone();
+                    $EndTimeObject->ToZnunyTimeZone();
                 }
 
                 # Get already calculated local start time.
@@ -1424,7 +1424,7 @@ sub Run {
                 );
 
                 if ( $Self->{UserTimeZone} ) {
-                    $NotificationCustomDateTimeObject->ToOTRSTimeZone();
+                    $NotificationCustomDateTimeObject->ToZnunyTimeZone();
                 }
 
                 $GetParam{NotificationCustomDateTime} = $NotificationCustomDateTimeObject->ToString();

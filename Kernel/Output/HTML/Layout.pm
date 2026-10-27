@@ -3587,7 +3587,7 @@ sub TransformDateSelection {
         );
 
         if ($DateTimeObject) {
-            $DateTimeObject->ToOTRSTimeZone();
+            $DateTimeObject->ToZnunyTimeZone();
             my $DateTimeValues = $DateTimeObject->Get();
 
             $Param{ $Prefix . 'Year' }   = $DateTimeValues->{Year};

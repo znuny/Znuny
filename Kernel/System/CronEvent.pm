@@ -80,7 +80,7 @@ sub NextEventGet {
         = $Param{StartDateTime} ? $Param{StartDateTime}->Clone() : $Kernel::OM->Create('Kernel::System::DateTime');
     return if !$StartDateTime;
 
-    $StartDateTime->ToOTRSTimeZone();
+    $StartDateTime->ToZnunyTimeZone();
 
     my $CronObject = $Self->_Init(
         Schedule      => $Param{Schedule},
@@ -108,7 +108,7 @@ sub NextEventGet {
     );
 
     # This will correct times that don't exist in OTRS time zone.
-    $EventDateTime->ToOTRSTimeZone();
+    $EventDateTime->ToZnunyTimeZone();
 
     return $EventDateTime->ToString();
 }
@@ -148,10 +148,10 @@ sub NextEventList {
         = $Param{StartDateTime} ? $Param{StartDateTime}->Clone() : $Kernel::OM->Create('Kernel::System::DateTime');
     return if !$StartDateTime;
 
-    $StartDateTime->ToOTRSTimeZone();
+    $StartDateTime->ToZnunyTimeZone();
 
     my $StopDateTime = $Param{StopDateTime}->Clone();
-    $StopDateTime->ToOTRSTimeZone();
+    $StopDateTime->ToZnunyTimeZone();
 
     if ( $StartDateTime > $StopDateTime ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
@@ -189,7 +189,7 @@ sub NextEventList {
         );
 
         # This will correct times that don't exist in OTRS time zone.
-        $EventDateTime->ToOTRSTimeZone();
+        $EventDateTime->ToZnunyTimeZone();
 
         last EVENTDATETIME if !$EventDateTime;
         last EVENTDATETIME if $EventDateTime > $StopDateTime;
@@ -234,7 +234,7 @@ sub PreviousEventGet {
         = $Param{StartDateTime} ? $Param{StartDateTime}->Clone() : $Kernel::OM->Create('Kernel::System::DateTime');
     return if !$StartDateTime;
 
-    $StartDateTime->ToOTRSTimeZone();
+    $StartDateTime->ToZnunyTimeZone();
 
     # init cron object
     my $CronObject = $Self->_Init(
@@ -264,7 +264,7 @@ sub PreviousEventGet {
     );
 
     # This will correct times that don't exist in OTRS time zone.
-    $EventDateTime->ToOTRSTimeZone();
+    $EventDateTime->ToZnunyTimeZone();
 
     return $EventDateTime->ToString();
 }
@@ -400,7 +400,7 @@ sub _Init {
     }
 
     my $StartDateTime = $Param{StartDateTime}->Clone();
-    $StartDateTime->ToOTRSTimeZone();
+    $StartDateTime->ToZnunyTimeZone();
     my %Start = %{ $StartDateTime->Get() };
 
     # create new internal cron object

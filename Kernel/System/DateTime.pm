@@ -1088,7 +1088,7 @@ sub ToTimeZone {
 
 =head2 ToOTRSTimeZone()
 
-Converts the date and time of this object to the data storage time zone.
+DEPRECATED. Use L</ToZnunyTimeZone> instead.
 
     my $Success = $DateTimeObject->ToOTRSTimeZone();
 
@@ -1099,6 +1099,24 @@ Returns:
 =cut
 
 sub ToOTRSTimeZone {
+    my ( $Self, %Param ) = @_;
+
+    return $Self->ToZnunyTimeZone(%Param);
+}
+
+=head2 ToZnunyTimeZone()
+
+Converts the date and time of this object to the data storage time zone.
+
+    my $Success = $DateTimeObject->ToZnunyTimeZone();
+
+Returns:
+
+    $Success = 1;   # success, or false otherwise.
+
+=cut
+
+sub ToZnunyTimeZone {
     my ( $Self, %Param ) = @_;
 
     return $Self->ToTimeZone( TimeZone => $Self->OTRSTimeZoneGet() );
@@ -1250,7 +1268,7 @@ Returns the date/time of this object as time stamp in RFC 2822 format to be used
     my $MailTimeStamp = $DateTimeObject->ToEmailTimeStamp();
 
     # If you already have a DateTime object, possibly in another time zone:
-    $DateTimeObject->ToOTRSTimeZone();
+    $DateTimeObject->ToZnunyTimeZone();
     my $MailTimeStamp = $DateTimeObject->ToEmailTimeStamp();
 
 Returns:

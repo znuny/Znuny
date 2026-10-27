@@ -229,7 +229,7 @@ sub Import {
             );
 
             if ( !$Parameters{AllDay} ) {
-                $StartTimeObject->ToOTRSTimeZone();
+                $StartTimeObject->ToZnunyTimeZone();
             }
 
             $Parameters{StartTime} = $StartTimeObject->ToString();
@@ -264,7 +264,7 @@ sub Import {
             );
 
             if ( !$Parameters{AllDay} ) {
-                $EndTimeObject->ToOTRSTimeZone();
+                $EndTimeObject->ToZnunyTimeZone();
             }
 
             $Parameters{EndTime} = $EndTimeObject->ToString();
@@ -504,7 +504,7 @@ sub Import {
                         );
 
                         if ( !$Parameters{AllDay} ) {
-                            $ExcludeTimeObject->ToOTRSTimeZone();
+                            $ExcludeTimeObject->ToZnunyTimeZone();
                         }
 
                         push @RecurrenceExclude, $ExcludeTimeObject->ToString();
@@ -633,7 +633,7 @@ sub Import {
             );
 
             if ( !$Parameters{AllDay} ) {
-                $RecurrenceIDObject->ToOTRSTimeZone();
+                $RecurrenceIDObject->ToZnunyTimeZone();
             }
 
             $Param{RecurrenceID} = $RecurrenceIDObject->ToString();

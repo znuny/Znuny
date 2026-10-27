@@ -2482,12 +2482,12 @@ sub _GenerateDynamicStats {
         elsif ( $RestrictionPart->{Block} eq 'Time' ) {
 
             # convert start and stop time to OTRS time zone
-            $RestrictionAttribute{ $RestrictionPart->{Values}{TimeStart} } = $Self->_ToOTRSTimeZone(
+            $RestrictionAttribute{ $RestrictionPart->{Values}{TimeStart} } = $Self->_ToZnunyTimeZone(
                 String   => $RestrictionPart->{TimeStart},
                 TimeZone => $Param{TimeZone},
             );
 
-            $RestrictionAttribute{ $RestrictionPart->{Values}{TimeStop} } = $Self->_ToOTRSTimeZone(
+            $RestrictionAttribute{ $RestrictionPart->{Values}{TimeStop} } = $Self->_ToZnunyTimeZone(
                 String   => $RestrictionPart->{TimeStop},
                 TimeZone => $Param{TimeZone},
             );
@@ -2801,12 +2801,12 @@ sub _GenerateDynamicStats {
                 {
                     # convert to OTRS time zone for correct database search parameter
 
-                    TimeStart => $Self->_ToOTRSTimeZone(
+                    TimeStart => $Self->_ToZnunyTimeZone(
                         String   => $TimeStart,
                         TimeZone => $Param{TimeZone},
                     ),
 
-                    TimeStop => $Self->_ToOTRSTimeZone(
+                    TimeStop => $Self->_ToZnunyTimeZone(
                         String   => $TimeStop,
                         TimeZone => $Param{TimeZone},
                     ),
@@ -3444,7 +3444,7 @@ sub _GenerateDynamicStats {
     }
 
     # convert to OTRS time zone to get the correct time for the check
-    my $CheckTimeStop = $Self->_ToOTRSTimeZone(
+    my $CheckTimeStop = $Self->_ToZnunyTimeZone(
         String   => $TitleTimeStop,
         TimeZone => $Param{TimeZone},
     );
@@ -3960,11 +3960,11 @@ sub _FromOTRSTimeZone {
     return $DateTimeObject->ToString();
 }
 
-=head2 _ToOTRSTimeZone()
+=head2 _ToZnunyTimeZone()
 
 Converts the given date/time string from the given time zone to OTRS time zone.
 
-    my $String = $StatsObject->_ToOTRSTimeZone(
+    my $String = $StatsObject->_ToZnunyTimeZone(
         String    => '2016-02-20 18:00:00',
         TimeZone  => 'Europe/Berlin',
     );
@@ -3975,7 +3975,7 @@ Returns (example for OTRS time zone being set to UTC):
 
 =cut
 
-sub _ToOTRSTimeZone {
+sub _ToZnunyTimeZone {
     my ( $Self, %Param ) = @_;
 
     # check needed params
@@ -4003,7 +4003,7 @@ sub _ToOTRSTimeZone {
         return;
     }
 
-    $DateTimeObject->ToOTRSTimeZone();
+    $DateTimeObject->ToZnunyTimeZone();
 
     return $DateTimeObject->ToString();
 }

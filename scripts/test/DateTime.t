@@ -118,7 +118,7 @@ $ConfigObject->Set(
 
 my $OTRSTimeZone = $DateTimeObject->OTRSTimeZoneGet();
 
-$DateTimeObject->ToOTRSTimeZone();
+$DateTimeObject->ToZnunyTimeZone();
 my $DateTimeValues         = $DateTimeObject->Get();
 my $ExpectedDateTimeValues = {
     Year      => 2016,
@@ -136,7 +136,7 @@ my $ExpectedDateTimeValues = {
 $Self->IsDeeply(
     $DateTimeValues,
     $ExpectedDateTimeValues,
-    'Date and time after call to ToOTRSTimeZone must match expected values.'
+    'Date and time after call to ToZnunyTimeZone must match expected values.'
 );
 
 #

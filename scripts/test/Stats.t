@@ -647,9 +647,9 @@ $Self->True(
     "StatsDelete() delete StatCleanupID1 $StatCleanupID1",
 );
 
-# Check _ToOTRSTimeZone for invalid date (Daylight Saving Time).
+# Check _ToZnunyTimeZone for invalid date (Daylight Saving Time).
 # See bug#14511 for more information.
-my $String = $StatsObject->_ToOTRSTimeZone(
+my $String = $StatsObject->_ToZnunyTimeZone(
     String   => '2019-03-31 02:30:00',
     TimeZone => 'Europe/Berlin',
 );
@@ -657,11 +657,11 @@ my $String = $StatsObject->_ToOTRSTimeZone(
 $Self->Is(
     scalar $String,
     '2019-03-31 03:30:00',
-    '_ToOTRSTimeZone() - invalid date (DST) corrected to valid date',
+    '_ToZnunyTimeZone() - invalid date (DST) corrected to valid date',
 );
 
-# Check _ToOTRSTimeZone for valid date.
-$String = $StatsObject->_ToOTRSTimeZone(
+# Check _ToZnunyTimeZone for valid date.
+$String = $StatsObject->_ToZnunyTimeZone(
     String   => '2019-03-31 12:30:00',
     TimeZone => 'Europe/Berlin',
 );
@@ -669,7 +669,7 @@ $String = $StatsObject->_ToOTRSTimeZone(
 $Self->Is(
     scalar $String,
     '2019-03-31 12:30:00',
-    '_ToOTRSTimeZone() - valid date',
+    '_ToZnunyTimeZone() - valid date',
 );
 
 # cleanup is done by RestoreDatabase

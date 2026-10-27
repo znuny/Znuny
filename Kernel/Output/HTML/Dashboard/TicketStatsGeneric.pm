@@ -119,7 +119,7 @@ sub Run {
             # for past 6 days cache results for 8 days (should not change)
             $CacheTTL = 60 * 60 * 24 * 8;
         }
-        $DateTimeObject->ToOTRSTimeZone();
+        $DateTimeObject->ToZnunyTimeZone();
 
         my $DateTimeValues = $DateTimeObject->Get();
         my $WeekDay        = $DateTimeValues->{DayOfWeek} == 7 ? 0 : $DateTimeValues->{DayOfWeek};
