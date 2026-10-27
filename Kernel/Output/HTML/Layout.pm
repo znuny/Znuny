@@ -1413,7 +1413,9 @@ sub Header {
 
     # Generate the minified CSS and JavaScript files and the tags referencing them (see LayoutLoader)
     $Self->LoaderCreateAgentCSSCalls();
-    $Self->LoaderCreateDynamicCSS();
+    if ( !$Self->{InstallerOnly} ) {
+        $Self->LoaderCreateDynamicCSS();
+    }
 
     my %AgentLogo;
 
@@ -1858,10 +1860,14 @@ sub Footer {
     }
 
     # Set an array with pending states.
-    my @PendingStateIDs = $Kernel::OM->Get('Kernel::System::State')->StateGetStatesByType(
-        StateType => [ 'pending reminder', 'pending auto' ],
-        Result    => 'ID',
-    );
+    my @PendingStateIDs;
+
+    if ( !$Self->{InstallerOnly} ) {
+        @PendingStateIDs = $Kernel::OM->Get('Kernel::System::State')->StateGetStatesByType(
+            StateType => [ 'pending reminder', 'pending auto' ],
+            Result    => 'ID',
+        );
+    }
 
     # Turn UserLanguage (e.g. en_GB into CKE language, e.g. 'en-gb')
     ( my $CKEUserLanguage = lc $Self->{UserLanguage} ) =~ s{_}{-}g;
