@@ -14,6 +14,8 @@ use utf8;
 
 use vars (qw($Self));
 
+use File::Path qw(mkpath rmtree);
+
 use Kernel::System::PostMaster;
 
 # Get helper object.
@@ -33,9 +35,19 @@ $ConfigObject->Set(
     Key   => 'PGP',
     Value => 1,
 );
+
+# Private keyring. The default homedir is shared across unit tests, so a previous
+# run can still hold unittest@example.com and the pre-import KeySearch() fails.
+my $PGPPath = $ConfigObject->Get('Home') . "/var/tmp/pgp" . $HelperObject->GetRandomID();
+if ( -d $PGPPath ) {
+    rmtree( [$PGPPath] );
+}
+mkpath( [$PGPPath], 0, 0700 );    ## no critic
+chmod 0700, $PGPPath;
+
 $ConfigObject->Set(
     Key   => 'PGP::Options',
-    Value => '--batch --no-tty --yes',
+    Value => "--homedir $PGPPath --batch --no-tty --yes",
 );
 
 $ConfigObject->Set(
@@ -48,8 +60,11 @@ $ConfigObject->Set(
     Value => 'Kernel::System::Email::DoNotSendEmail',
 );
 
+# PGP::Bin is invalid by default, so Get() can return undef.
+my $PGPBin = $ConfigObject->Get('PGP::Bin');
+
 # Check if GPG is located there.
-if ( !-e $ConfigObject->Get('PGP::Bin') ) {
+if ( !$PGPBin || !( -e $PGPBin ) ) {
 
     if ( -e '/usr/bin/gpg' ) {
         $ConfigObject->Set(
@@ -79,6 +94,7 @@ my $PGPObject = $Kernel::OM->Get('Kernel::System::Crypt::PGP');
 
 if ( !$PGPObject ) {
     print STDERR "NOTICE: No PGP support!\n";
+    rmtree( [$PGPPath] );
     return;
 }
 
@@ -393,6 +409,13 @@ for my $Count ( 1 .. 2 ) {
         "Key:$Count - KeySearch()",
     );
 }
+
+# Remove the private keyring. RestoreDatabase does not cover it.
+my $PGPPathDeleted = rmtree( [$PGPPath] );
+$Self->True(
+    $PGPPathDeleted,
+    "Directory deleted - '$PGPPath'",
+);
 
 # Cleanup is done by RestoreDatabase.
 

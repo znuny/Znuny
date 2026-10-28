@@ -157,4 +157,31 @@ for my $SettingName ( sort keys %Expected ) {
     }
 }
 
+# SettingsSet deploys ZZZAAuto.pm while the sample settings are still in the
+# transaction. RestoreDatabase rolls the database back in DESTROY only, so the
+# file would keep the empty EmptyString/EmptyArray/EmptyHash defaults.
+# Roll back first, then deploy the cleaned database. Skip the DESTROY rollback,
+# a second rollback has no open transaction.
+my $RollbackSuccess = $HelperObject->Rollback();
+my $CacheObject     = $Kernel::OM->Get('Kernel::System::Cache');
+$CacheObject->CleanUp();
+$HelperObject->{RestoreDatabase} = 0;
+
+$Self->True(
+    $RollbackSuccess,
+    'Rolled back all database changes and cleaned up the cache.',
+);
+
+my %DeploymentResult = $SysConfigObject->ConfigurationDeploy(
+    Comments    => 'Revert MigrateSysConfigSettings.t changes.',
+    UserID      => 1,
+    Force       => 1,
+    AllSettings => 1,
+);
+
+$Self->True(
+    $DeploymentResult{Success},
+    'Configuration restored.',
+);
+
 1;
