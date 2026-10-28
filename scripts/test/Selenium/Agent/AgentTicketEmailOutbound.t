@@ -232,11 +232,19 @@ $Selenium->RunTest(
         my $Subject      = "TestSubject-$RandomID";
         my $EmailAddress = "$RandomID\@example.com";
 
-        $Selenium->find_element( "#Subject",    'css' )->send_keys($Subject);
-        $Selenium->find_element( "#ToCustomer", 'css' )->send_keys($EmailAddress);
+        $Selenium->find_element( "#Subject", 'css' )->send_keys($Subject);
 
+        # Enter commits a free-text recipient. A following click on Send would
+        # otherwise be swallowed while the address is still only in the input.
+        $Selenium->find_element( "#ToCustomer", 'css' )->send_keys( $EmailAddress, "\N{U+E007}" );
+        $Selenium->WaitFor(
+            JavaScript =>
+                'return typeof($) === "function" && $("#ToCustomer").val() === "" && $(".customerSelectorFieldInputSelectedCustomer").length;'
+        );
+
+        # Keep the submit button away from the top edge of the viewport.
         $Selenium->execute_script(
-            "\$('#submitRichText')[0].scrollIntoView(true);",
+            "\$('#submitRichText')[0].scrollIntoView({block: 'center', inline: 'nearest'});",
         );
         $Selenium->find_element( "#submitRichText", 'css' )->VerifiedClick();
 

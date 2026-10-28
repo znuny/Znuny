@@ -18,7 +18,7 @@
         keepClosedForSession = Data.KeepClosedForSession || 0,
         actions = Data.Actions || (Data.Link ? "[
             {
-                \"type\": \"" _ (Data.Priority ? Data.Priority.lower : 'notify') _ "\"" _ (Data.LinkClass ? ",\"classes\":\"" _ Data.LinkClass _ "\"" : "") _ "
+                \"type\": \"" _ (Data.Priority ? Data.Priority.lower : 'notify') _ "\"" _ (Data.LinkClass ? ",\"classes\":\"" _ Data.LinkClass _ "\"" : "") _ ",
                 \"text\": \"" _ Translate("Continue") _ "\",
                 \"url\": \"" _ Data.Link _ "\",
                 \"class\": \"" _ Data.LinkClass _ "\",

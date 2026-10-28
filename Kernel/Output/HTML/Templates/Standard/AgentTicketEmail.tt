@@ -30,651 +30,652 @@
                     <div class="mod modForm">
                         <div class="inner">
                             <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data" name="compose" id="NewEmailTicket" class="Validate PreventMultipleSubmits">
-                            <input type="hidden" name="Action" value="[% Env("Action") %]" />
-                            <input type="hidden" name="Subaction" value="StoreNew" />
-                            <input type="hidden" name="FormID" value="[% Data.FormID | html %]" />
-                            <input type="hidden" name="ExpandCustomerName" id="ExpandCustomerName" value="0" />
-                            <input type="hidden" name="OwnerAll" id="OwnerAll" value="[% Data.OwnerAll | html %]" />
-                            <input type="hidden" name="ResponsibleAll" id="ResponsibleAll" value="[% Data.ResponsibleAll | html %]" />
-                            <input type="hidden" name="PreSelectedCustomerUser" id="PreSelectedCustomerUser" value="" />
-                            <input type="hidden" name="SelectedCustomerUser" id="SelectedCustomerUser" value="[% Data.CustomerUser | html %]" />
-                            <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]" />
-                            <input type="hidden" name="LinkTicketID" value="[% Data.LinkTicketID | html %]" />
+                                <input type="hidden" name="Action" value="[% Env("Action") %]" />
+                                <input type="hidden" name="Subaction" value="StoreNew" />
+                                <input type="hidden" name="FormID" value="[% Data.FormID | html %]" />
+                                <input type="hidden" name="ExpandCustomerName" id="ExpandCustomerName" value="0" />
+                                <input type="hidden" name="OwnerAll" id="OwnerAll" value="[% Data.OwnerAll | html %]" />
+                                <input type="hidden" name="ResponsibleAll" id="ResponsibleAll" value="[% Data.ResponsibleAll | html %]" />
+                                <input type="hidden" name="PreSelectedCustomerUser" id="PreSelectedCustomerUser" value="" />
+                                <input type="hidden" name="SelectedCustomerUser" id="SelectedCustomerUser" value="[% Data.CustomerUser | html %]" />
+                                <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]" />
+                                <input type="hidden" name="LinkTicketID" value="[% Data.LinkTicketID | html %]" />
 
-                            <div class="row">
-                                <div class="cardCustomerData col-12">
-                                    <div class="mod modCard">
-                                        <div class="inner">
-                                            <div class="cardTitle">
-                                                <h2>[% Translate("Customer") | html %]</h2>
-                                                <span class="cardTitleTrigger"></span>
-                                            </div>
-                                            <div class="cardContent">
-                                                <div class="row row-cols-1 row-cols-lg-1 row-cols-xl-2  gy-3">
-                                                    <div class="col">
-                                                        <div class="mod modCustomerSelector">
-                                                            <div class="inner"
-                                                                data-input-name="CustomerKey_"
-                                                                data-input-text-name="CustomerTicketText_"
-                                                                data-input-type="customer"
-                                                                data-input-counter-name="CustomerTicketCounterToCustomer"
-                                                                data-input-selected-name="CustomerSelected"
-                                                                data-selected-customer-allow=true
-                                                                data-selected-customer-field-name="SelectedCustomerUser"
-                                                                data-remove-icon-path="[% Config("Frontend::ImagePath") %]icons/xmark-gray.svg"
-                                                                data-url="[% Env("Baselink") %]Action=AgentCustomerSearch;MaxResults=20">
-
-                                                                <div class="customerSelector" role="form">
-                                                                    <div class="customerSelectorField">
-                                                                        <!-- Customer selector label -->
-                                                                        <label for="customerSelectorInput" class="customerSelectorFieldLabel customerSelectorFieldLabelRequired">
-                                                                            [% Translate("To customer user") | html %]:
-                                                                        </label>
-
-                                                                        <!-- Customer selector input area -->
-                                                                        <div class="customerSelectorFieldInput" aria-labelledby="customerSelectorLabel">
-                                                                            <!-- Selected customers -->
-                                                                            <!-- Customer data as JSON -->
-                                                                            <script class="customerData" type="application/json">
-                                                                            [
-                                                                                [% RenderBlockStart("MultipleCustomer") %]
-                                                                                {
-                                                                                    "customerKey": "[% Data.CustomerKey | html %]",
-                                                                                    "customerElement": "[% Data.CustomerElement | html %]",
-                                                                                    "count": "[% Data.Count | html %]",
-                                                                                    "selected": [% IF Data.CustomerSelected %]true[% ELSE %]false[% END %],
-                                                                                    "disabled": [% IF Data.CustomerDisabled %]true[% ELSE %]false[% END %],
-                                                                                    "errors": {
-                                                                                        "explanation": "[% RenderBlockStart("CustomerErrorExplantion") %][% Translate("Please remove this entry and enter a new one with the correct value.") | html %][% RenderBlockEnd("CustomerErrorExplantion") %]",
-                                                                                        "generic": "[% RenderBlockStart("CustomerGenericServerErrorMsg") %][% Translate("This field is required.") | html %][% RenderBlockEnd("CustomerGenericServerErrorMsg") %]",
-                                                                                        "invalidConfig": "[% RenderBlockStart("InvalidConfigServerErrorMsg") %][% Translate("This email address is not allowed due to the system configuration.") | html %][% RenderBlockEnd("InvalidConfigServerErrorMsg") %]",
-                                                                                        "invalidMX": "[% RenderBlockStart("InvalidMXServerErrorMsg") %][% Translate("This email address failed MX check.") | html %][% RenderBlockEnd("InvalidMXServerErrorMsg") %]",
-                                                                                        "invalidDNS": "[% RenderBlockStart("InvalidDNSServerErrorMsg") %][% Translate("DNS problem, please check your configuration and the error log.") | html %][% RenderBlockEnd("InvalidDNSServerErrorMsg") %]",
-                                                                                        "invalidSyntax": "[% RenderBlockStart("InvalidSyntaxServerErrorMsg") %][% Translate("The syntax of this email address is incorrect.") | html %][% RenderBlockEnd("InvalidSyntaxServerErrorMsg") %]",
-                                                                                        "isDuplicated": "[% RenderBlockStart("IsDuplicatedServerErrorMsg") %][% Translate("This address already exists on the address list.") | html %][% RenderBlockEnd("IsDuplicatedServerErrorMsg") %]"
-                                                                                    }
-                                                                                }[% IF !loop.last %],[% END %]
-                                                                                [% RenderBlockEnd("MultipleCustomer") %]
-                                                                            ]
-                                                                            </script>
-                                                                            <!-- Customer container (will be populated by JS) -->
-                                                                            <div id="customerContainer"></div>
-
-                                                                            <!-- Customer search input -->
-                                                                            <input id="ToCustomer"
-                                                                                type="text"
-                                                                                name="ToCustomer"
-                                                                                value=""
-                                                                                class="customerSelectorFieldInputElement"
-                                                                                autocomplete="off"
-                                                                                aria-label="[% Translate("Search for customer") | html %]" />
-
-                                                                            <!-- Address book button -->
-                                                                            [% IF Data.OptionCustomerUserAddressBook %]
-                                                                            <button type="button"
-                                                                                class="customerSelectorFieldInputAddressBook"
-                                                                                data-recipient-field="ToCustomer"
-                                                                                data-recipient-field-label="[% Translate("To") | html %]"
-                                                                                data-recipient-type="Email"
-                                                                                aria-label="[% Translate("Open address book") | html %]">
-                                                                                <img src="[% Config("Frontend::ImagePath") %]icons/address-book.svg"
-                                                                                    width="16"
-                                                                                    height="16"
-                                                                                    alt="[% Translate("Address book") | html %]"/>
-                                                                            </button>
-                                                                            [% END %]
-                                                                        </div>
-
-                                                                        <!-- Suggestion dropdown -->
-                                                                        <div class="customerSelectorFieldSuggest" role="listbox" aria-label="[% Translate("Customer suggestions") | html %]"></div>
-                                                                    </div>
-
-                                                                    <!-- Error messages container -->
-                                                                    <div class="customerSelectorErrorMessages" role="alert">
-                                                                        [% RenderBlockStart("ToServerErrorMsg") %]
-                                                                        <p class="customerSelectorErrorMessage">[% Translate("Please include at least one customer user for the ticket.") | html %]</p>
-                                                                        [% RenderBlockEnd("ToServerErrorMsg") %]
-
-                                                                        [% RenderBlockStart("ToIsLocalAddressServerErrorMsg") %]
-                                                                        <p class="customerSelectorErrorMessage">[% Translate("This address is registered as system address and cannot be used: %s", Data.To) | html %]</p>
-                                                                        [% RenderBlockEnd("ToIsLocalAddressServerErrorMsg") %]
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col">
-
-                                                        <!-- CC -->
-                                                        <div class="mod modCustomerSelector">
-                                                            <div class="inner"
-                                                                    data-input-name="CcCustomerKey_"
-                                                                    data-input-text-name="CcCustomerTicketText_"
-                                                                    data-input-type="cc"
-                                                                    data-input-counter-name="CustomerTicketCounterCcCustomer"
-                                                                    data-input-selected-name="CcCustomerSelected"
-                                                                    data-selected-customer-allow=false
-                                                                    data-selected-customer-field-name=CcSelectedCustomerUser"
+                                <div class="row">
+                                    <div class="cardCustomerData col-12">
+                                        <div class="mod modCard">
+                                            <div class="inner">
+                                                <div class="cardTitle">
+                                                    <h2>[% Translate("Customer") | html %]</h2>
+                                                    <span class="cardTitleTrigger"></span>
+                                                </div>
+                                                <div class="cardContent">
+                                                    <div class="row row-cols-1 row-cols-lg-1 row-cols-xl-2  gy-3">
+                                                        <div class="col">
+                                                            <div class="mod modCustomerSelector">
+                                                                <div class="inner"
+                                                                    data-input-name="CustomerKey_"
+                                                                    data-input-text-name="CustomerTicketText_"
+                                                                    data-input-type="customer"
+                                                                    data-input-counter-name="CustomerTicketCounterToCustomer"
+                                                                    data-input-selected-name="CustomerSelected"
+                                                                    data-selected-customer-allow=true
+                                                                    data-selected-customer-field-name="SelectedCustomerUser"
                                                                     data-remove-icon-path="[% Config("Frontend::ImagePath") %]icons/xmark-gray.svg"
                                                                     data-url="[% Env("Baselink") %]Action=AgentCustomerSearch;MaxResults=20">
 
-                                                                <div class="customerSelector" role="form">
-                                                                    <div class="customerSelectorField">
-                                                                        <!-- Customer selector label -->
-                                                                        <label for="CcCustomerSelectorInput" class="customerSelectorFieldLabel">
-                                                                            [% Translate("Cc") | html %]:
-                                                                        </label>
+                                                                    <div class="customerSelector" role="form">
+                                                                        <div class="customerSelectorField">
+                                                                            <!-- Customer selector label -->
+                                                                            <label for="customerSelectorInput" class="customerSelectorFieldLabel customerSelectorFieldLabelRequired">
+                                                                                [% Translate("To customer user") | html %]:
+                                                                            </label>
 
-                                                                        <!-- Customer selector input area -->
-                                                                        <div class="customerSelectorFieldInput" aria-labelledby="customerSelectorLabel">
-                                                                            <!-- Selected customers -->
-                                                                            <!-- Customer data as JSON -->
-                                                                            <script class="customerData" type="application/json">
-                                                                            [
-                                                                                [% RenderBlockStart("CcMultipleCustomer") %]
-                                                                                {
-                                                                                    "customerKey": "[% Data.CustomerKey | html %]",
-                                                                                    "customerElement": "[% Data.CustomerElement | html %]",
-                                                                                    "count": "[% Data.Count | html %]",
-                                                                                    "selected": [% IF Data.CustomerSelected %]true[% ELSE %]false[% END %],
-                                                                                    "disabled": [% IF Data.CustomerDisabled %]true[% ELSE %]false[% END %],
-                                                                                    "errors": {
-                                                                                        "explanation": "[% RenderBlockStart("CcCustomerErrorExplantion") %][% Translate("Please remove this entry and enter a new one with the correct value.") | html %][% RenderBlockEnd("CcCustomerErrorExplantion") %]",
-                                                                                        "generic": "[% RenderBlockStart("CcCustomerGenericServerErrorMsg") %][% Translate("This field is required.") | html %][% RenderBlockEnd("CcCustomerGenericServerErrorMsg") %]",
-                                                                                        "invalidConfig": "[% RenderBlockStart("CcInvalidConfigServerErrorMsg") %][% Translate("This email address is not allowed due to the system configuration.") | html %][% RenderBlockEnd("CcInvalidConfigServerErrorMsg") %]",
-                                                                                        "invalidMX": "[% RenderBlockStart("CcInvalidMXServerErrorMsg") %][% Translate("This email address failed MX check.") | html %][% RenderBlockEnd("CcInvalidMXServerErrorMsg") %]",
-                                                                                        "invalidDNS": "[% RenderBlockStart("CcInvalidDNSServerErrorMsg") %][% Translate("DNS problem, please check your configuration and the error log.") | html %][% RenderBlockEnd("CcInvalidDNSServerErrorMsg") %]",
-                                                                                        "invalidSyntax": "[% RenderBlockStart("CcInvalidSyntaxServerErrorMsg") %][% Translate("The syntax of this email address is incorrect.") | html %][% RenderBlockEnd("CcInvalidSyntaxServerErrorMsg") %]",
-                                                                                        "isDuplicated": "[% RenderBlockStart("CcIsDuplicatedServerErrorMsg") %][% Translate("This address already exists on the address list.") | html %][% RenderBlockEnd("CcIsDuplicatedServerErrorMsg") %]"
-                                                                                    }
-                                                                                }[% IF !loop.last %],[% END %]
-                                                                                [% RenderBlockEnd("CcMultipleCustomer") %]
-                                                                            ]
-                                                                            </script>
-                                                                            <!-- Customer container (will be populated by JS) -->
-                                                                            <div id="ccCustomerContainer"></div>
+                                                                            <!-- Customer selector input area -->
+                                                                            <div class="customerSelectorFieldInput" aria-labelledby="customerSelectorLabel">
+                                                                                <!-- Selected customers -->
+                                                                                <!-- Customer data as JSON -->
+                                                                                <script class="customerData" type="application/json">
+                                                                                [
+                                                                                    [% RenderBlockStart("MultipleCustomer") %]
+                                                                                    {
+                                                                                        "customerKey": "[% Data.CustomerKey | html %]",
+                                                                                        "customerElement": "[% Data.CustomerElement | html %]",
+                                                                                        "count": "[% Data.Count | html %]",
+                                                                                        "selected": [% IF Data.CustomerSelected %]true[% ELSE %]false[% END %],
+                                                                                        "disabled": [% IF Data.CustomerDisabled %]true[% ELSE %]false[% END %],
+                                                                                        "errors": {
+                                                                                            "explanation": "[% RenderBlockStart("CustomerErrorExplantion") %][% Translate("Please remove this entry and enter a new one with the correct value.") | html %][% RenderBlockEnd("CustomerErrorExplantion") %]",
+                                                                                            "generic": "[% RenderBlockStart("CustomerGenericServerErrorMsg") %][% Translate("This field is required.") | html %][% RenderBlockEnd("CustomerGenericServerErrorMsg") %]",
+                                                                                            "invalidConfig": "[% RenderBlockStart("InvalidConfigServerErrorMsg") %][% Translate("This email address is not allowed due to the system configuration.") | html %][% RenderBlockEnd("InvalidConfigServerErrorMsg") %]",
+                                                                                            "invalidMX": "[% RenderBlockStart("InvalidMXServerErrorMsg") %][% Translate("This email address failed MX check.") | html %][% RenderBlockEnd("InvalidMXServerErrorMsg") %]",
+                                                                                            "invalidDNS": "[% RenderBlockStart("InvalidDNSServerErrorMsg") %][% Translate("DNS problem, please check your configuration and the error log.") | html %][% RenderBlockEnd("InvalidDNSServerErrorMsg") %]",
+                                                                                            "invalidSyntax": "[% RenderBlockStart("InvalidSyntaxServerErrorMsg") %][% Translate("The syntax of this email address is incorrect.") | html %][% RenderBlockEnd("InvalidSyntaxServerErrorMsg") %]",
+                                                                                            "isDuplicated": "[% RenderBlockStart("IsDuplicatedServerErrorMsg") %][% Translate("This address already exists on the address list.") | html %][% RenderBlockEnd("IsDuplicatedServerErrorMsg") %]"
+                                                                                        }
+                                                                                    }[% IF !loop.last %],[% END %]
+                                                                                    [% RenderBlockEnd("MultipleCustomer") %]
+                                                                                ]
+                                                                                </script>
+                                                                                <!-- Customer container (will be populated by JS) -->
+                                                                                <div id="customerContainer"></div>
 
-                                                                            <!-- Customer search input -->
-                                                                            <input id="CcCustomer"
+                                                                                <!-- Customer search input -->
+                                                                                <input id="ToCustomer"
                                                                                     type="text"
-                                                                                    name="CcCustomerSelectorInput"
+                                                                                    name="ToCustomer"
                                                                                     value=""
                                                                                     class="customerSelectorFieldInputElement"
                                                                                     autocomplete="off"
                                                                                     aria-label="[% Translate("Search for customer") | html %]" />
 
-                                                                            <!-- Address book button -->
-                                                                            [% IF Data.OptionCustomerUserAddressBook %]
+                                                                                <!-- Address book button -->
+                                                                                [% IF Data.OptionCustomerUserAddressBook %]
                                                                                 <button type="button"
-                                                                                        class="customerSelectorFieldInputAddressBook"
-                                                                                        data-recipient-field="CcCustomer"
-                                                                                        data-recipient-field-label="[% Translate("Cc") | html %]"
-                                                                                        data-recipient-type="Email"
-                                                                                        aria-label="[% Translate("Open address book") | html %]">
-                                                                                            <img src="[% Config("Frontend::ImagePath") %]icons/address-book.svg" width="16" height="16" alt="[% Translate("Address book") | html %]"/>
+                                                                                    class="customerSelectorFieldInputAddressBook"
+                                                                                    data-recipient-field="ToCustomer"
+                                                                                    data-recipient-field-label="[% Translate("To") | html %]"
+                                                                                    data-recipient-type="Email"
+                                                                                    aria-label="[% Translate("Open address book") | html %]">
+                                                                                    <img src="[% Config("Frontend::ImagePath") %]icons/address-book.svg"
+                                                                                        width="16"
+                                                                                        height="16"
+                                                                                        alt="[% Translate("Address book") | html %]"/>
                                                                                 </button>
-                                                                            [% END %]
-                                                                        </div>
-                                                                    <!-- Suggestion dropdown -->
-                                                                    <div class="customerSelectorFieldSuggest" role="listbox" aria-label="[% Translate("Customer suggestions") | html %]"></div>
-                                                                </div>
+                                                                                [% END %]
+                                                                            </div>
 
-                                                                    <!-- Error messages container -->
-                                                                    <div class="customerSelectorErrorMessages" role="alert">
-                                                                        [% RenderBlockStart("CcIsLocalAddressServerErrorMsg") %]
-                                                                        <p>[% Translate("This address is registered as system address and cannot be used: %s", Data.Cc) | html %]</p>
-                                                                        [% RenderBlockEnd("CcIsLocalAddressServerErrorMsg") %]
+                                                                            <!-- Suggestion dropdown -->
+                                                                            <div class="customerSelectorFieldSuggest" role="listbox" aria-label="[% Translate("Customer suggestions") | html %]"></div>
+                                                                        </div>
+
+                                                                        <!-- Error messages container -->
+                                                                        <div class="customerSelectorErrorMessages" role="alert">
+                                                                            [% RenderBlockStart("ToServerErrorMsg") %]
+                                                                            <p class="customerSelectorErrorMessage">[% Translate("Please include at least one customer user for the ticket.") | html %]</p>
+                                                                            [% RenderBlockEnd("ToServerErrorMsg") %]
+
+                                                                            [% RenderBlockStart("ToIsLocalAddressServerErrorMsg") %]
+                                                                            <p class="customerSelectorErrorMessage">[% Translate("This address is registered as system address and cannot be used: %s", Data.To) | html %]</p>
+                                                                            [% RenderBlockEnd("ToIsLocalAddressServerErrorMsg") %]
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="col">
+                                                        <div class="col">
 
-                                                        <div class="mod modCustomerSelector">
-                                                            <div class="inner"
-                                                                    data-input-name="BccCustomerKey_"
-                                                                    data-input-text-name="BccCustomerTicketText_"
-                                                                    data-input-type="bcc"
-                                                                    data-input-counter-name="CustomerTicketCounterBccCustomer"
-                                                                    data-input-selected-name="BccCustomerSelected"
-                                                                    data-selected-customer-allow=false
-                                                                    data-selected-customer-field-name="BccSelectedCustomerUser"
-                                                                    data-remove-icon-path="[% Config("Frontend::ImagePath") %]icons/xmark-gray.svg"
-                                                                    data-url="[% Env("Baselink") %]Action=AgentCustomerSearch;MaxResults=20">
+                                                            <!-- CC -->
+                                                            <div class="mod modCustomerSelector">
+                                                                <div class="inner"
+                                                                        data-input-name="CcCustomerKey_"
+                                                                        data-input-text-name="CcCustomerTicketText_"
+                                                                        data-input-type="cc"
+                                                                        data-input-counter-name="CustomerTicketCounterCcCustomer"
+                                                                        data-input-selected-name="CcCustomerSelected"
+                                                                        data-selected-customer-allow=false
+                                                                        data-selected-customer-field-name=CcSelectedCustomerUser"
+                                                                        data-remove-icon-path="[% Config("Frontend::ImagePath") %]icons/xmark-gray.svg"
+                                                                        data-url="[% Env("Baselink") %]Action=AgentCustomerSearch;MaxResults=20">
 
-                                                                <div class="customerSelector" role="form">
-                                                                    <div class="customerSelectorField">
-                                                                        <!-- Customer selector label -->
-                                                                        <label for="BccCustomerSelectorInput" class="customerSelectorFieldLabel">
-                                                                            [% Translate("Bcc") | html %]:
-                                                                        </label>
+                                                                    <div class="customerSelector" role="form">
+                                                                        <div class="customerSelectorField">
+                                                                            <!-- Customer selector label -->
+                                                                            <label for="CcCustomerSelectorInput" class="customerSelectorFieldLabel">
+                                                                                [% Translate("Cc") | html %]:
+                                                                            </label>
 
-                                                                        <!-- Customer selector input area -->
-                                                                        <div class="customerSelectorFieldInput" aria-labelledby="customerSelectorLabel">
-                                                                            <!-- Selected customers -->
-                                                                            <!-- Customer data as JSON -->
-                                                                            <script class="customerData" type="application/json">
-                                                                            [
-                                                                                [% RenderBlockStart("BccMultipleCustomer") %]
-                                                                                {
-                                                                                    "customerKey": "[% Data.CustomerKey | html %]",
-                                                                                    "customerElement": "[% Data.CustomerElement | html %]",
-                                                                                    "count": "[% Data.Count | html %]",
-                                                                                    "selected": [% IF Data.CustomerSelected %]true[% ELSE %]false[% END %],
-                                                                                    "disabled": [% IF Data.CustomerDisabled %]true[% ELSE %]false[% END %],
-                                                                                    "errors": {
-                                                                                        "explanation": "[% RenderBlockStart("BccCustomerErrorExplantion") %][% Translate("Please remove this entry and enter a new one with the correct value.") | html %][% RenderBlockEnd("BccCustomerErrorExplantion") %]",
-                                                                                        "generic": "[% RenderBlockStart("BccCustomerGenericServerErrorMsg") %][% Translate("This field is required.") | html %][% RenderBlockEnd("BccCustomerGenericServerErrorMsg") %]",
-                                                                                        "invalidConfig": "[% RenderBlockStart("BccInvalidConfigServerErrorMsg") %][% Translate("This email address is not allowed due to the system configuration.") | html %][% RenderBlockEnd("BccInvalidConfigServerErrorMsg") %]",
-                                                                                        "invalidMX": "[% RenderBlockStart("BccInvalidMXServerErrorMsg") %][% Translate("This email address failed MX check.") | html %][% RenderBlockEnd("BccInvalidMXServerErrorMsg") %]",
-                                                                                        "invalidDNS": "[% RenderBlockStart("BccInvalidDNSServerErrorMsg") %][% Translate("DNS problem, please check your configuration and the error log.") | html %][% RenderBlockEnd("BccInvalidDNSServerErrorMsg") %]",
-                                                                                        "invalidSyntax": "[% RenderBlockStart("BccInvalidSyntaxServerErrorMsg") %][% Translate("The syntax of this email address is incorrect.") | html %][% RenderBlockEnd("BccInvalidSyntaxServerErrorMsg") %]",
-                                                                                        "isDuplicated": "[% RenderBlockStart("BccIsDuplicatedServerErrorMsg") %][% Translate("This address already exists on the address list.") | html %][% RenderBlockEnd("BccIsDuplicatedServerErrorMsg") %]"
-                                                                                    }
-                                                                                }[% IF !loop.last %],[% END %]
-                                                                                [% RenderBlockEnd("BccMultipleCustomer") %]
-                                                                            ]
-                                                                            </script>
-                                                                            <!-- Customer container (will be populated by JS) -->
-                                                                            <div id="bccCustomerContainer"></div>
+                                                                            <!-- Customer selector input area -->
+                                                                            <div class="customerSelectorFieldInput" aria-labelledby="customerSelectorLabel">
+                                                                                <!-- Selected customers -->
+                                                                                <!-- Customer data as JSON -->
+                                                                                <script class="customerData" type="application/json">
+                                                                                [
+                                                                                    [% RenderBlockStart("CcMultipleCustomer") %]
+                                                                                    {
+                                                                                        "customerKey": "[% Data.CustomerKey | html %]",
+                                                                                        "customerElement": "[% Data.CustomerElement | html %]",
+                                                                                        "count": "[% Data.Count | html %]",
+                                                                                        "selected": [% IF Data.CustomerSelected %]true[% ELSE %]false[% END %],
+                                                                                        "disabled": [% IF Data.CustomerDisabled %]true[% ELSE %]false[% END %],
+                                                                                        "errors": {
+                                                                                            "explanation": "[% RenderBlockStart("CcCustomerErrorExplantion") %][% Translate("Please remove this entry and enter a new one with the correct value.") | html %][% RenderBlockEnd("CcCustomerErrorExplantion") %]",
+                                                                                            "generic": "[% RenderBlockStart("CcCustomerGenericServerErrorMsg") %][% Translate("This field is required.") | html %][% RenderBlockEnd("CcCustomerGenericServerErrorMsg") %]",
+                                                                                            "invalidConfig": "[% RenderBlockStart("CcInvalidConfigServerErrorMsg") %][% Translate("This email address is not allowed due to the system configuration.") | html %][% RenderBlockEnd("CcInvalidConfigServerErrorMsg") %]",
+                                                                                            "invalidMX": "[% RenderBlockStart("CcInvalidMXServerErrorMsg") %][% Translate("This email address failed MX check.") | html %][% RenderBlockEnd("CcInvalidMXServerErrorMsg") %]",
+                                                                                            "invalidDNS": "[% RenderBlockStart("CcInvalidDNSServerErrorMsg") %][% Translate("DNS problem, please check your configuration and the error log.") | html %][% RenderBlockEnd("CcInvalidDNSServerErrorMsg") %]",
+                                                                                            "invalidSyntax": "[% RenderBlockStart("CcInvalidSyntaxServerErrorMsg") %][% Translate("The syntax of this email address is incorrect.") | html %][% RenderBlockEnd("CcInvalidSyntaxServerErrorMsg") %]",
+                                                                                            "isDuplicated": "[% RenderBlockStart("CcIsDuplicatedServerErrorMsg") %][% Translate("This address already exists on the address list.") | html %][% RenderBlockEnd("CcIsDuplicatedServerErrorMsg") %]"
+                                                                                        }
+                                                                                    }[% IF !loop.last %],[% END %]
+                                                                                    [% RenderBlockEnd("CcMultipleCustomer") %]
+                                                                                ]
+                                                                                </script>
+                                                                                <!-- Customer container (will be populated by JS) -->
+                                                                                <div id="ccCustomerContainer"></div>
 
-                                                                            <!-- Customer search input -->
-                                                                            <input id="BccCustomer"
-                                                                                type="text"
-                                                                                name="BccCustomerSelectorInput"
-                                                                                value=""
-                                                                                class="customerSelectorFieldInputElement"
-                                                                                autocomplete="off"
-                                                                                aria-label="[% Translate("Search for customer") | html %]" />
+                                                                                <!-- Customer search input -->
+                                                                                <input id="CcCustomer"
+                                                                                        type="text"
+                                                                                        name="CcCustomerSelectorInput"
+                                                                                        value=""
+                                                                                        class="customerSelectorFieldInputElement"
+                                                                                        autocomplete="off"
+                                                                                        aria-label="[% Translate("Search for customer") | html %]" />
 
-                                                                            <!-- Address book button -->
-                                                                            [% IF Data.OptionCustomerUserAddressBook %]
-                                                                                <button type="button"
-                                                                                    class="customerSelectorFieldInputAddressBook"
-                                                                                    data-recipient-field="BccCustomer"
-                                                                                    data-recipient-field-label="[% Translate("Bcc") | html %]"
-                                                                                    data-recipient-type="Email"
-                                                                                    aria-label="[% Translate("Open address book") | html %]">
-                                                                                        <img src="[% Config("Frontend::ImagePath") %]icons/address-book.svg" width="16" height="16" alt="[% Translate("Address book") | html %]"/>
-                                                                                </button>
-                                                                            [% END %]
-                                                                        </div>
-
+                                                                                <!-- Address book button -->
+                                                                                [% IF Data.OptionCustomerUserAddressBook %]
+                                                                                    <button type="button"
+                                                                                            class="customerSelectorFieldInputAddressBook"
+                                                                                            data-recipient-field="CcCustomer"
+                                                                                            data-recipient-field-label="[% Translate("Cc") | html %]"
+                                                                                            data-recipient-type="Email"
+                                                                                            aria-label="[% Translate("Open address book") | html %]">
+                                                                                                <img src="[% Config("Frontend::ImagePath") %]icons/address-book.svg" width="16" height="16" alt="[% Translate("Address book") | html %]"/>
+                                                                                    </button>
+                                                                                [% END %]
+                                                                            </div>
                                                                         <!-- Suggestion dropdown -->
                                                                         <div class="customerSelectorFieldSuggest" role="listbox" aria-label="[% Translate("Customer suggestions") | html %]"></div>
                                                                     </div>
 
-                                                                    <!-- Error messages container -->
-                                                                    <div class="customerSelectorErrorMessages" role="alert">
-                                                                        [% RenderBlockStart("ToServerErrorMsg") %]
-                                                                        <p class="customerSelectorErrorMessage">[% Translate("Please include at least one customer user for the ticket.") | html %]</p>
-                                                                        [% RenderBlockEnd("ToServerErrorMsg") %]
-
-                                                                        [% RenderBlockStart("ToIsLocalAddressServerErrorMsg") %]
-                                                                        <p class="customerSelectorErrorMessage">[% Translate("This address is registered as system address and cannot be used: %s", Data.To) | html %]</p>
-                                                                        [% RenderBlockEnd("ToIsLocalAddressServerErrorMsg") %]
+                                                                        <!-- Error messages container -->
+                                                                        <div class="customerSelectorErrorMessages" role="alert">
+                                                                            [% RenderBlockStart("CcIsLocalAddressServerErrorMsg") %]
+                                                                            <p>[% Translate("This address is registered as system address and cannot be used: %s", Data.Cc) | html %]</p>
+                                                                            [% RenderBlockEnd("CcIsLocalAddressServerErrorMsg") %]
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        [% INCLUDE "CustomerCompany/TicketCustomerIDSelection.tt" Required = 0 Readonly = TicketFrontendConfig.CustomerIDReadOnly %]
+
+                                                        <div class="col">
+
+                                                            <div class="mod modCustomerSelector">
+                                                                <div class="inner"
+                                                                        data-input-name="BccCustomerKey_"
+                                                                        data-input-text-name="BccCustomerTicketText_"
+                                                                        data-input-type="bcc"
+                                                                        data-input-counter-name="CustomerTicketCounterBccCustomer"
+                                                                        data-input-selected-name="BccCustomerSelected"
+                                                                        data-selected-customer-allow=false
+                                                                        data-selected-customer-field-name="BccSelectedCustomerUser"
+                                                                        data-remove-icon-path="[% Config("Frontend::ImagePath") %]icons/xmark-gray.svg"
+                                                                        data-url="[% Env("Baselink") %]Action=AgentCustomerSearch;MaxResults=20">
+
+                                                                    <div class="customerSelector" role="form">
+                                                                        <div class="customerSelectorField">
+                                                                            <!-- Customer selector label -->
+                                                                            <label for="BccCustomerSelectorInput" class="customerSelectorFieldLabel">
+                                                                                [% Translate("Bcc") | html %]:
+                                                                            </label>
+
+                                                                            <!-- Customer selector input area -->
+                                                                            <div class="customerSelectorFieldInput" aria-labelledby="customerSelectorLabel">
+                                                                                <!-- Selected customers -->
+                                                                                <!-- Customer data as JSON -->
+                                                                                <script class="customerData" type="application/json">
+                                                                                [
+                                                                                    [% RenderBlockStart("BccMultipleCustomer") %]
+                                                                                    {
+                                                                                        "customerKey": "[% Data.CustomerKey | html %]",
+                                                                                        "customerElement": "[% Data.CustomerElement | html %]",
+                                                                                        "count": "[% Data.Count | html %]",
+                                                                                        "selected": [% IF Data.CustomerSelected %]true[% ELSE %]false[% END %],
+                                                                                        "disabled": [% IF Data.CustomerDisabled %]true[% ELSE %]false[% END %],
+                                                                                        "errors": {
+                                                                                            "explanation": "[% RenderBlockStart("BccCustomerErrorExplantion") %][% Translate("Please remove this entry and enter a new one with the correct value.") | html %][% RenderBlockEnd("BccCustomerErrorExplantion") %]",
+                                                                                            "generic": "[% RenderBlockStart("BccCustomerGenericServerErrorMsg") %][% Translate("This field is required.") | html %][% RenderBlockEnd("BccCustomerGenericServerErrorMsg") %]",
+                                                                                            "invalidConfig": "[% RenderBlockStart("BccInvalidConfigServerErrorMsg") %][% Translate("This email address is not allowed due to the system configuration.") | html %][% RenderBlockEnd("BccInvalidConfigServerErrorMsg") %]",
+                                                                                            "invalidMX": "[% RenderBlockStart("BccInvalidMXServerErrorMsg") %][% Translate("This email address failed MX check.") | html %][% RenderBlockEnd("BccInvalidMXServerErrorMsg") %]",
+                                                                                            "invalidDNS": "[% RenderBlockStart("BccInvalidDNSServerErrorMsg") %][% Translate("DNS problem, please check your configuration and the error log.") | html %][% RenderBlockEnd("BccInvalidDNSServerErrorMsg") %]",
+                                                                                            "invalidSyntax": "[% RenderBlockStart("BccInvalidSyntaxServerErrorMsg") %][% Translate("The syntax of this email address is incorrect.") | html %][% RenderBlockEnd("BccInvalidSyntaxServerErrorMsg") %]",
+                                                                                            "isDuplicated": "[% RenderBlockStart("BccIsDuplicatedServerErrorMsg") %][% Translate("This address already exists on the address list.") | html %][% RenderBlockEnd("BccIsDuplicatedServerErrorMsg") %]"
+                                                                                        }
+                                                                                    }[% IF !loop.last %],[% END %]
+                                                                                    [% RenderBlockEnd("BccMultipleCustomer") %]
+                                                                                ]
+                                                                                </script>
+                                                                                <!-- Customer container (will be populated by JS) -->
+                                                                                <div id="bccCustomerContainer"></div>
+
+                                                                                <!-- Customer search input -->
+                                                                                <input id="BccCustomer"
+                                                                                    type="text"
+                                                                                    name="BccCustomerSelectorInput"
+                                                                                    value=""
+                                                                                    class="customerSelectorFieldInputElement"
+                                                                                    autocomplete="off"
+                                                                                    aria-label="[% Translate("Search for customer") | html %]" />
+
+                                                                                <!-- Address book button -->
+                                                                                [% IF Data.OptionCustomerUserAddressBook %]
+                                                                                    <button type="button"
+                                                                                        class="customerSelectorFieldInputAddressBook"
+                                                                                        data-recipient-field="BccCustomer"
+                                                                                        data-recipient-field-label="[% Translate("Bcc") | html %]"
+                                                                                        data-recipient-type="Email"
+                                                                                        aria-label="[% Translate("Open address book") | html %]">
+                                                                                            <img src="[% Config("Frontend::ImagePath") %]icons/address-book.svg" width="16" height="16" alt="[% Translate("Address book") | html %]"/>
+                                                                                    </button>
+                                                                                [% END %]
+                                                                            </div>
+
+                                                                            <!-- Suggestion dropdown -->
+                                                                            <div class="customerSelectorFieldSuggest" role="listbox" aria-label="[% Translate("Customer suggestions") | html %]"></div>
+                                                                        </div>
+
+                                                                        <!-- Error messages container -->
+                                                                        <div class="customerSelectorErrorMessages" role="alert">
+                                                                            [% RenderBlockStart("ToServerErrorMsg") %]
+                                                                            <p class="customerSelectorErrorMessage">[% Translate("Please include at least one customer user for the ticket.") | html %]</p>
+                                                                            [% RenderBlockEnd("ToServerErrorMsg") %]
+
+                                                                            [% RenderBlockStart("ToIsLocalAddressServerErrorMsg") %]
+                                                                            <p class="customerSelectorErrorMessage">[% Translate("This address is registered as system address and cannot be used: %s", Data.To) | html %]</p>
+                                                                            [% RenderBlockEnd("ToIsLocalAddressServerErrorMsg") %]
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            [% INCLUDE "CustomerCompany/TicketCustomerIDSelection.tt" Required = 0 Readonly = TicketFrontendConfig.CustomerIDReadOnly %]
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
 
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                [% IF Config('Ticket::Service') %]
-                                <div class="cardServiceData col-12">
-                                    <div class="mod modCard">
-                                        <div class="inner">
-                                            <div class="cardTitle">
-                                                <h2>[% Translate("Services") | html %]</h2>
-                                                <span class="cardTitleTrigger"></span>
-                                            </div>
-                                            <div class="cardContent">
-                                                <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 gy-3">
-                                                    [% RenderBlockStart("TicketService") %]
-                                                    <div class="col">
-                                                        [% IF Data.ServiceMandatory %]
-                                                        <label class="Mandatory" for="ServiceID"><span class="Marker">*</span> [% Translate("Service") | html %]:</label>
-                                                        [% ELSE %]
-                                                        <label for="ServiceID">[% Translate("Service") | html %]:</label>
-                                                        [% END %]
-                                                        <div class="Field">
-                                                            [% Data.ServiceStrg %]
+                                    [% IF Config('Ticket::Service') %]
+                                    <div class="cardServiceData col-12">
+                                        <div class="mod modCard">
+                                            <div class="inner">
+                                                <div class="cardTitle">
+                                                    <h2>[% Translate("Services") | html %]</h2>
+                                                    <span class="cardTitleTrigger"></span>
+                                                </div>
+                                                <div class="cardContent">
+                                                    <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 gy-3">
+                                                        [% RenderBlockStart("TicketService") %]
+                                                        <div class="col">
                                                             [% IF Data.ServiceMandatory %]
-                                                            <div id="ServiceIDError" class="TooltipErrorMessage">
-                                                                <p>[% Translate("This field is required.") | html %]</p>
-                                                            </div>
+                                                            <label class="Mandatory" for="ServiceID"><span class="Marker">*</span> [% Translate("Service") | html %]:</label>
+                                                            [% ELSE %]
+                                                            <label for="ServiceID">[% Translate("Service") | html %]:</label>
                                                             [% END %]
-                                                            <div id="ServiceIDServerError" class="TooltipErrorMessage">
-                                                                <p>[% Translate("Service invalid.") | html %]</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    [% RenderBlockEnd("TicketService") %]
-
-
-                                                    [% RenderBlockStart("TicketSLA") %]
-                                                    <div class="col">
-                                                        [% IF Data.SLAMandatory %]
-                                                        <label class="Mandatory" for="SLAID"><span class="Marker">*</span> [% Translate("Service Level Agreement") | html %]:</label>
-                                                        [% ELSE %]
-                                                        <label for="SLAID">[% Translate("Service Level Agreement") | html %]:</label>
-                                                        [% END %]
-                                                        <div class="Field">
-                                                            [% Data.SLAStrg %]
-                                                            [% IF Data.SLAMandatory %]
-                                                            <div id="SLAIDError" class="TooltipErrorMessage">
-                                                                <p>[% Translate("This field is required.") | html %]</p>
-                                                            </div>
-                                                            [% END %]
-                                                        </div>
-                                                    </div>
-                                                    [% RenderBlockEnd("TicketSLA") %]
-
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                [% END %]
-
-                                <div class="cardTeamData col-12">
-                                    <div class="mod modCard">
-                                        <div class="inner">
-                                            <div class="cardTitle">
-                                                <h2>[% Translate("Team Data") | html %]</h2>
-                                                <span class="cardTitleTrigger"></span>
-                                            </div>
-                                            <div class="cardContent">
-                                                <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 gy-3">
-                                                    <div class="col">
-                                                        <label class="Mandatory" for="Dest"><span class="Marker">*</span> [% Translate("From queue") | html %]:</label>
-                                                        <div class="Field">
-                                                            [% Data.FromStrg %]
-                                                            <div id="DestError" class="TooltipErrorMessage">
-                                                                <p>[% Translate("This field is required.") | html %]</p>
-                                                            </div>
-                                                            <div id="DestServerError" class="TooltipErrorMessage">
-                                                                <p>[% Translate("This field is required.") | html %]</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    [% RenderBlockStart("OwnerSelection") %]
-                                                    <div class="col">
-                                                        <label for="NewUserID">
-                                                            [% Translate("Owner") | html %]:
-                                                            <a href="#" id="OwnerSelectionGetAll" class="GetAllAJAX icon-hover" title="[% Translate("Get all") | html %]">
-                                                            <span>[% Translate("Get all") | html %]</span>
-                                                            <i class="fa fa-refresh"></i>
-                                                            </a>
-                                                        </label>
-                                                        <div class="Field">
-                                                            [% Data.OptionStrg %]
-                                                        </div>
-                                                    </div>
-                                                    [% RenderBlockEnd("OwnerSelection") %]
-                                                    [% RenderBlockStart("ResponsibleSelection") %]
-                                                    <div class="col">
-                                                        <label for="NewResponsibleID">
-                                                            [% Translate("Responsible") | html %]:
-                                                            <a href="#" id="ResponsibleSelectionGetAll" class="GetAllAJAX icon-hover" title="[% Translate("Get all") | html %]">
-                                                            <span>[% Translate("Get all") | html %]</span>
-                                                            <i class="fa fa-refresh"></i>
-                                                            </a>
-                                                        </label>
-                                                        <div class="Field">
-                                                            [% Data.ResponsibleOptionStrg %]
-                                                        </div>
-                                                    </div>
-                                                    [% RenderBlockEnd("ResponsibleSelection") %]
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="cardTicketData col-12">
-                                    <div class="mod modCard">
-                                        <div class="inner">
-                                            <div class="cardTitle">
-                                                <h2>[% Translate("Ticket Data") | html %]</h2>
-                                                <span class="cardTitleTrigger"></span>
-                                            </div>
-                                            <div class="cardContent">
-                                                <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 gy-3">
-                                                    [% RenderBlockStart("TicketType") %]
-                                                    <div class="col">
-                                                        <label class="Mandatory" for="TypeID"><span class="Marker">*</span> [% Translate("Type") | html %]:</label>
-                                                        <div class="Field">
-                                                            [% Data.TypeStrg %]
-                                                            <div id="TypeIDError" class="TooltipErrorMessage">
-                                                                <p>[% Translate("This field is required.") | html %]</p>
-                                                            </div>
-                                                            <div id="TypeIDServerError" class="TooltipErrorMessage">
-                                                                <p>[% Translate("This field is required.") | html %]</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    [% RenderBlockEnd("TicketType") %]
-                                                    <div class="col">
-                                                        <label for="NextStateID">[% Translate("State") | html %]:</label>
-                                                        <div class="Field">
-                                                            [% Data.NextStatesStrg %]
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col">
-                                                        <label>[% Translate("Pending date") | html %]:</label>
-                                                        <div class="Field">
-                                                            <div class="select-field-wrapper">[% Data.PendingDateString %]</div>
-                                                            <div id="DayServerError" class="TooltipErrorMessage">
-                                                                <p>[% Translate("Date invalid!") | html %]</p>
-                                                            </div>
-                                                            <div id="HourServerError" class="TooltipErrorMessage">
-                                                                <p>[% Translate("Date invalid!") | html %]</p>
-                                                            </div>
-                                                            <p class="FieldExplanation">[% Translate("For all pending* states.") | html %]</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col">
-                                                        <label for="PriorityID">[% Translate("Priority") | html %]:</label>
-                                                        <div class="Field">
-                                                            [% Data.PriorityStrg %]
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                [% IF !Data.DynamicFieldHTML.empty %]
-                                <div class="cardDynamicField col-12">
-                                    <div class="mod modCard">
-                                        <div class="inner">
-                                            <div class="cardTitle">
-                                                <h2>[% Translate("Dynamic Fields") | html %]</h2>
-                                                <span class="cardTitleTrigger"></span>
-                                            </div>
-                                            <div class="cardContent">
-                                                <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 gy-3">
-                                                    [% RenderBlockStart("DynamicField") %]
-                                                    <div class="Row Row_DynamicField_[% Data.Name | html %] dynamicField dynamicField[% Data.Name | html %]">
-                                                        <div class="col-12">
-                                                            <div class="mod modDynamicField">
-                                                                <div class="inner">
-                                                                    <div class="dynamicFieldLabel">
-                                                                        [% Data.Label %]
-                                                                    </div>
-                                                                    <div class="dynamicFieldForm">
-                                                                        [% Data.Field %]
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    [% RenderBlockEnd("DynamicField") %]
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                [% END %]
-                                <div class="cardCommunication col-12">
-                                    <div class="mod modCard">
-                                        <div class=inner>
-                                            <div class="cardTitle">
-                                                <h2>[% Translate("Communications") | html %]</h2>
-                                                <span class="cardTitleTrigger"></span>
-                                            </div>
-                                            <div class="cardContent">
-                                                <div class="row gy-3">
-
-                                                    <div class="col-12">
-                                                        <label class="Mandatory" for="Subject"><span class="Marker">*</span> [% Translate("Subject") | html %]:</label>
-                                                        <div class="Field">
-                                                            <input type="text" class="Validate_Required [% Data.SubjectInvalid | html %] W75pc " name="Subject" id="Subject" value="[% Data.Subject | html %]" />
-                                                            <div id="SubjectError" class="TooltipErrorMessage">
-                                                                <p>[% Translate("This field is required.") | html %]</p>
-                                                            </div>
-                                                            <div id="SubjectServerError" class="TooltipErrorMessage">
-                                                                <p>[% Translate("This field is required.") | html %]</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
-                                                    [% RenderBlockStart("Option") %]
-                                                        <div class="col-12 gy-3">
-                                                            <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]:</label>
                                                             <div class="Field">
-                                                                [% Data.Value %]
-                                                                <div id="[% Data.Name | html %]ServerError" class="TooltipErrorMessage">
-                                                                    <p>[% Data.Invalid | html %]</p>
+                                                                [% Data.ServiceStrg %]
+                                                                [% IF Data.ServiceMandatory %]
+                                                                <div id="ServiceIDError" class="TooltipErrorMessage">
+                                                                    <p>[% Translate("This field is required.") | html %]</p>
                                                                 </div>
-                                                                [% IF Data.FieldExplanation.length %]
-                                                                <p class="FieldExplanation">[% Translate(Data.FieldExplanation) | html %]</p>
+                                                                [% END %]
+                                                                <div id="ServiceIDServerError" class="TooltipErrorMessage">
+                                                                    <p>[% Translate("Service invalid.") | html %]</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        [% RenderBlockEnd("TicketService") %]
+
+
+                                                        [% RenderBlockStart("TicketSLA") %]
+                                                        <div class="col">
+                                                            [% IF Data.SLAMandatory %]
+                                                            <label class="Mandatory" for="SLAID"><span class="Marker">*</span> [% Translate("Service Level Agreement") | html %]:</label>
+                                                            [% ELSE %]
+                                                            <label for="SLAID">[% Translate("Service Level Agreement") | html %]:</label>
+                                                            [% END %]
+                                                            <div class="Field">
+                                                                [% Data.SLAStrg %]
+                                                                [% IF Data.SLAMandatory %]
+                                                                <div id="SLAIDError" class="TooltipErrorMessage">
+                                                                    <p>[% Translate("This field is required.") | html %]</p>
+                                                                </div>
                                                                 [% END %]
                                                             </div>
                                                         </div>
-                                                    [% RenderBlockEnd("Option") %]
-                                                    </div>
+                                                        [% RenderBlockEnd("TicketSLA") %]
 
-                                                    [% RenderBlockStart("TicketOptions") %]
-                                                    <div class="col-12">
-                                                        <div class="ticket-form-options">
-                                                            <label>[% Translate("Options") | html %]:</label>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    [% END %]
+
+                                    <div class="cardTeamData col-12">
+                                        <div class="mod modCard">
+                                            <div class="inner">
+                                                <div class="cardTitle">
+                                                    <h2>[% Translate("Team Data") | html %]</h2>
+                                                    <span class="cardTitleTrigger"></span>
+                                                </div>
+                                                <div class="cardContent">
+                                                    <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 gy-3">
+                                                        <div class="col">
+                                                            <label class="Mandatory" for="Dest"><span class="Marker">*</span> [% Translate("From queue") | html %]:</label>
                                                             <div class="Field">
-                                                                <!-- OutputFilterHook_TicketOptionsBegin -->
-                                                                [% RenderBlockStart("OptionCustomer") %]
-                                                                <a href="#" id="OptionCustomer">[% Translate("Customer user") | html %]</a>
-                                                                [% RenderBlockEnd("OptionCustomer") %]
-                                                                <!-- OutputFilterHook_TicketOptionsEnd -->
+                                                                [% Data.FromStrg %]
+                                                                <div id="DestError" class="TooltipErrorMessage">
+                                                                    <p>[% Translate("This field is required.") | html %]</p>
+                                                                </div>
+                                                                <div id="DestServerError" class="TooltipErrorMessage">
+                                                                    <p>[% Translate("This field is required.") | html %]</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        [% RenderBlockStart("OwnerSelection") %]
+                                                        <div class="col">
+                                                            <label for="NewUserID">
+                                                                [% Translate("Owner") | html %]:
+                                                                <a href="#" id="OwnerSelectionGetAll" class="GetAllAJAX icon-hover" title="[% Translate("Get all") | html %]">
+                                                                <span>[% Translate("Get all") | html %]</span>
+                                                                <i class="fa fa-refresh"></i>
+                                                                </a>
+                                                            </label>
+                                                            <div class="Field">
+                                                                [% Data.OptionStrg %]
+                                                            </div>
+                                                        </div>
+                                                        [% RenderBlockEnd("OwnerSelection") %]
+                                                        [% RenderBlockStart("ResponsibleSelection") %]
+                                                        <div class="col">
+                                                            <label for="NewResponsibleID">
+                                                                [% Translate("Responsible") | html %]:
+                                                                <a href="#" id="ResponsibleSelectionGetAll" class="GetAllAJAX icon-hover" title="[% Translate("Get all") | html %]">
+                                                                <span>[% Translate("Get all") | html %]</span>
+                                                                <i class="fa fa-refresh"></i>
+                                                                </a>
+                                                            </label>
+                                                            <div class="Field">
+                                                                [% Data.ResponsibleOptionStrg %]
+                                                            </div>
+                                                        </div>
+                                                        [% RenderBlockEnd("ResponsibleSelection") %]
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="cardTicketData col-12">
+                                        <div class="mod modCard">
+                                            <div class="inner">
+                                                <div class="cardTitle">
+                                                    <h2>[% Translate("Ticket Data") | html %]</h2>
+                                                    <span class="cardTitleTrigger"></span>
+                                                </div>
+                                                <div class="cardContent">
+                                                    <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 gy-3">
+                                                        [% RenderBlockStart("TicketType") %]
+                                                        <div class="col">
+                                                            <label class="Mandatory" for="TypeID"><span class="Marker">*</span> [% Translate("Type") | html %]:</label>
+                                                            <div class="Field">
+                                                                [% Data.TypeStrg %]
+                                                                <div id="TypeIDError" class="TooltipErrorMessage">
+                                                                    <p>[% Translate("This field is required.") | html %]</p>
+                                                                </div>
+                                                                <div id="TypeIDServerError" class="TooltipErrorMessage">
+                                                                    <p>[% Translate("This field is required.") | html %]</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        [% RenderBlockEnd("TicketType") %]
+                                                        <div class="col">
+                                                            <label for="NextStateID">[% Translate("State") | html %]:</label>
+                                                            <div class="Field">
+                                                                [% Data.NextStatesStrg %]
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col">
+                                                            <label>[% Translate("Pending date") | html %]:</label>
+                                                            <div class="Field">
+                                                                <div class="select-field-wrapper">[% Data.PendingDateString %]</div>
+                                                                <div id="DayServerError" class="TooltipErrorMessage">
+                                                                    <p>[% Translate("Date invalid!") | html %]</p>
+                                                                </div>
+                                                                <div id="HourServerError" class="TooltipErrorMessage">
+                                                                    <p>[% Translate("Date invalid!") | html %]</p>
+                                                                </div>
+                                                                <p class="FieldExplanation">[% Translate("For all pending* states.") | html %]</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label for="PriorityID">[% Translate("Priority") | html %]:</label>
+                                                            <div class="Field">
+                                                                [% Data.PriorityStrg %]
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    [% RenderBlockEnd("TicketOptions") %]
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
-
-                                                    <!-- OutputFilterHook_NoTicketOptionsFallback -->
-                                                    [% RenderBlockStart("StandardTemplate") %]
-                                                    <div class="col-12">
-                                                        <label for="StandardTemplateID">[% Translate("Text Template") | html %]:</label>
-                                                        <div class="Field">
-                                                            [% Data.StandardTemplateStrg %]
-                                                            <p class="FieldExplanation">[% Translate("Setting a template will overwrite any text or attachment.") | html %]</p>
-                                                        </div>
-                                                    </div>
-                                                    [% RenderBlockEnd("StandardTemplate") %]
-
-
-
-
-                                                    <!-- OutputFilterHook_NoTicketOptionsFallback -->
-                                                    [% RenderBlockStart("StandardTemplate") %]
-                                                    <div class="col-12">
-
-                                                        <label for="StandardTemplateID">[% Translate("Text Template") | html %]:</label>
-                                                        <div class="Field">
-                                                            [% Data.StandardTemplateStrg %]
-                                                            <p class="FieldExplanation">[% Translate("Setting a template will overwrite any text or attachment.") | html %]</p>
-                                                        </div>
-                                                    </div>
-
-                                                    [% RenderBlockEnd("StandardTemplate") %]
-                                                    <div class="col-12">
-                                                        <div class="mod modTextEditor">
-                                                            <div class=inner">
-                                                                <label class="Mandatory" for="RichText"><span class="Marker">*</span> [% Translate("Text") | html %]:</label>
-                                                                <div id="RichTextField" class="RichTextField">
-                                                                    <textarea id="RichText" class="RichText Validate_Required [% Data.BodyInvalid | html %]" name="Body" title="[% Translate("Message body") | html %]" rows="15" cols="[% Config(" Ticket::Frontend::TextAreaEmail") | html %]">[% Data.Body | html %]</textarea>
-                                                                    <div id="RichTextError" class="TooltipErrorMessage">
-                                                                        <p>[% Translate("This field is required.") | html %]</p>
+                                    [% IF !Data.DynamicFieldHTML.empty %]
+                                    <div class="cardDynamicField col-12">
+                                        <div class="mod modCard">
+                                            <div class="inner">
+                                                <div class="cardTitle">
+                                                    <h2>[% Translate("Dynamic Fields") | html %]</h2>
+                                                    <span class="cardTitleTrigger"></span>
+                                                </div>
+                                                <div class="cardContent">
+                                                    <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 gy-3">
+                                                        [% RenderBlockStart("DynamicField") %]
+                                                        <div class="Row Row_DynamicField_[% Data.Name | html %] dynamicField dynamicField[% Data.Name | html %]">
+                                                            <div class="col-12">
+                                                                <div class="mod modDynamicField">
+                                                                    <div class="inner">
+                                                                        <div class="dynamicFieldLabel">
+                                                                            [% Data.Label %]
+                                                                        </div>
+                                                                        <div class="dynamicFieldForm">
+                                                                            [% Data.Field %]
+                                                                        </div>
                                                                     </div>
-                                                                    <div id="RichTextServerError" class="TooltipErrorMessage">
-                                                                        <p>[% Translate("This field is required.") | html %]</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        [% RenderBlockEnd("DynamicField") %]
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    [% END %]
+                                    <div class="cardCommunication col-12">
+                                        <div class="mod modCard">
+                                            <div class=inner>
+                                                <div class="cardTitle">
+                                                    <h2>[% Translate("Communications") | html %]</h2>
+                                                    <span class="cardTitleTrigger"></span>
+                                                </div>
+                                                <div class="cardContent">
+                                                    <div class="row gy-3">
+
+                                                        <div class="col-12">
+                                                            <label class="Mandatory" for="Subject"><span class="Marker">*</span> [% Translate("Subject") | html %]:</label>
+                                                            <div class="Field">
+                                                                <input type="text" class="Validate_Required [% Data.SubjectInvalid | html %] W75pc " name="Subject" id="Subject" value="[% Data.Subject | html %]" />
+                                                                <div id="SubjectError" class="TooltipErrorMessage">
+                                                                    <p>[% Translate("This field is required.") | html %]</p>
+                                                                </div>
+                                                                <div id="SubjectServerError" class="TooltipErrorMessage">
+                                                                    <p>[% Translate("This field is required.") | html %]</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
+                                                        [% RenderBlockStart("Option") %]
+                                                            <div class="col-12 gy-3">
+                                                                <label for="[% Data.Name | html %]">[% Translate(Data.Key) | html %]:</label>
+                                                                <div class="Field">
+                                                                    [% Data.Value %]
+                                                                    <div id="[% Data.Name | html %]ServerError" class="TooltipErrorMessage">
+                                                                        <p>[% Data.Invalid | html %]</p>
+                                                                    </div>
+                                                                    [% IF Data.FieldExplanation.length %]
+                                                                    <p class="FieldExplanation">[% Translate(Data.FieldExplanation) | html %]</p>
+                                                                    [% END %]
+                                                                </div>
+                                                            </div>
+                                                        [% RenderBlockEnd("Option") %]
+                                                        </div>
+
+                                                        [% RenderBlockStart("TicketOptions") %]
+                                                        <div class="col-12">
+                                                            <div class="ticket-form-options">
+                                                                <label>[% Translate("Options") | html %]:</label>
+                                                                <div class="Field">
+                                                                    <!-- OutputFilterHook_TicketOptionsBegin -->
+                                                                    [% RenderBlockStart("OptionCustomer") %]
+                                                                    <a href="#" id="OptionCustomer">[% Translate("Customer user") | html %]</a>
+                                                                    [% RenderBlockEnd("OptionCustomer") %]
+                                                                    <!-- OutputFilterHook_TicketOptionsEnd -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        [% RenderBlockEnd("TicketOptions") %]
+
+
+                                                        <!-- OutputFilterHook_NoTicketOptionsFallback -->
+                                                        [% RenderBlockStart("StandardTemplate") %]
+                                                        <div class="col-12">
+                                                            <label for="StandardTemplateID">[% Translate("Text Template") | html %]:</label>
+                                                            <div class="Field">
+                                                                [% Data.StandardTemplateStrg %]
+                                                                <p class="FieldExplanation">[% Translate("Setting a template will overwrite any text or attachment.") | html %]</p>
+                                                            </div>
+                                                        </div>
+                                                        [% RenderBlockEnd("StandardTemplate") %]
+
+
+
+
+                                                        <!-- OutputFilterHook_NoTicketOptionsFallback -->
+                                                        [% RenderBlockStart("StandardTemplate") %]
+                                                        <div class="col-12">
+
+                                                            <label for="StandardTemplateID">[% Translate("Text Template") | html %]:</label>
+                                                            <div class="Field">
+                                                                [% Data.StandardTemplateStrg %]
+                                                                <p class="FieldExplanation">[% Translate("Setting a template will overwrite any text or attachment.") | html %]</p>
+                                                            </div>
+                                                        </div>
+
+                                                        [% RenderBlockEnd("StandardTemplate") %]
+                                                        <div class="col-12">
+                                                            <div class="mod modTextEditor">
+                                                                <div class=inner">
+                                                                    <label class="Mandatory" for="RichText"><span class="Marker">*</span> [% Translate("Text") | html %]:</label>
+                                                                    <div id="RichTextField" class="RichTextField">
+                                                                        <textarea id="RichText" class="RichText Validate_Required [% Data.BodyInvalid | html %]" name="Body" title="[% Translate("Message body") | html %]" rows="15" cols="[% Config(" Ticket::Frontend::TextAreaEmail") | html %]">[% Data.Body | html %]</textarea>
+                                                                        <div id="RichTextError" class="TooltipErrorMessage">
+                                                                            <p>[% Translate("This field is required.") | html %]</p>
+                                                                        </div>
+                                                                        <div id="RichTextServerError" class="TooltipErrorMessage">
+                                                                            <p>[% Translate("This field is required.") | html %]</p>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="col-12">
+                                                        <div class="col-12">
 
-                                                        <div class="mod modSignature">
-                                                            <div class="inner">
-                                                                <label class="signatureHeadline" for="Signature">[% Translate("Signature") | html %]:</label>
-                                                                <div class="RichTextField signatureField">
-                                                                    <input type="hidden" name="Signature" value="[% Data.Signature | html %]" />
-                                                                    <iframe height="140" width="620" frameborder="0" id="Signature" class="Signature" src="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Signature;QueueID=[% Data.QueueID | html %]"></iframe>
+                                                            <div class="mod modSignature">
+                                                                <div class="inner">
+                                                                    <label class="signatureHeadline" for="Signature">[% Translate("Signature") | html %]:</label>
+                                                                    <div class="RichTextField signatureField">
+                                                                        <input type="hidden" name="Signature" value="[% Data.Signature | html %]" />
+                                                                        <iframe height="140" width="620" frameborder="0" id="Signature" class="Signature" src="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Signature;QueueID=[% Data.QueueID | html %]"></iframe>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
-                                                    <div class="col-12">
-                                                        <div class="mod modAttachments">
-                                                            <div class=inner">
-                                                                <label>[% Translate("Attachments") | html %]:</label>
-                                                                <div class="Field component-attachment">
-                                                                    [% INCLUDE "FormElements/AttachmentList.tt" %]
+                                                        <div class="col-12">
+                                                            <div class="mod modAttachments">
+                                                                <div class=inner">
+                                                                    <label>[% Translate("Attachments") | html %]:</label>
+                                                                    <div class="Field component-attachment">
+                                                                        [% INCLUDE "FormElements/AttachmentList.tt" %]
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
-                                                    [% RenderBlockStart("TimeUnits") %]
-                                                    <div class="col-12">
-                                                        [% Data.TimeUnitsBlock %]
+                                                        [% RenderBlockStart("TimeUnits") %]
+                                                        <div class="col-12">
+                                                            [% Data.TimeUnitsBlock %]
+                                                        </div>
+                                                        [% RenderBlockEnd("TimeUnits") %]
                                                     </div>
-                                                    [% RenderBlockEnd("TimeUnits") %]
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="mod modFormSubmitArea">
+                                            <div class="inner">
+                                                <div class="Field SaveButtons align-right">
+                                                    <button class="Primary CallForAction btn-main btn-width-md btn-primary" id="submitRichText" accesskey="g" title="[% Translate("Send mail") | html %] (g)" type="submit" value="[% Translate("Send mail") | html %]"><span><i class="fa fa-envelope-o"></i> [% Translate("Send mail") | html %]</span></button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="col-12">
-                                    <div class="mod modFormSubmitArea">
-                                        <div class="inner">
-                                            <div class="Field SaveButtons align-right">
-                                                <button class="Primary CallForAction btn-main btn-width-md btn-primary" id="submitRichText" accesskey="g" title="[% Translate("Send mail") | html %] (g)" type="submit" value="[% Translate("Send mail") | html %]"><span><i class="fa fa-envelope-o"></i> [% Translate("Send mail") | html %]</span></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </form>
 
                             <div class="row">
                                 <div class="col-12">

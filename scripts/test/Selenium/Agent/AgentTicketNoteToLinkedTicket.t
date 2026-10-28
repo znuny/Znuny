@@ -163,6 +163,10 @@ my $SeleniumTest = sub {
         WaitForAJAX => 0,
     );
 
+    # Keep the submit button away from the top edge of the viewport.
+    $SeleniumObject->execute_script(
+        "document.getElementById('submitRichText').scrollIntoView({block:'center', inline:'nearest'});"
+    );
     $SeleniumObject->find_element( '#submitRichText', 'css' )->click();
 
     my $ArticleObject        = $Kernel::OM->Get('Kernel::System::Ticket::Article');
