@@ -1,4 +1,5 @@
 # 7.5.1 2026-??-??
+ - 2026-10-29 Fixed: calendar appointment failed to create ticket if relative period was zero. Thanks to @Fawkespami for reporting the issue. [#821](https://github.com/znuny/Znuny/issues/821)
  - 2026-10-29 Fixed: SAML login now verifies assertion signatures against the configured IdP certificate (AuthModule::SAML::IdPCACert and Customer::AuthModule::SAML::IdPCACert). Net::SAML2 0.89 or higher is now required (fixes CVE-2026-18089, CVE-2026-18092 and CVE-2026-18108). Thanks to the following reporters: HARIPRASAD M., Fabian Bührmann.
  - 2026-10-26 Fixed: Customers already selected on a ticket still appeared as selectable in the customer user address book.
  - 2026-10-19 Fixed: Console command to export/import dynamic field configs used different format than the GUI version.
