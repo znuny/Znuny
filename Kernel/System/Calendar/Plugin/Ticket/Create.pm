@@ -15,6 +15,7 @@ use parent qw(Kernel::System::Calendar::Plugin::Base);
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 
@@ -967,7 +968,6 @@ sub _PrepareUpdateData {
     if (
         $Param{Plugin}->{Param}->{TicketCreateTimeType}
         && $Param{Plugin}->{Param}->{TicketCreateTimeType} eq 'Relative'
-        && $Param{Plugin}->{Param}->{TicketCreateOffset}
         && $Param{Plugin}->{Param}->{TicketCreateOffsetPoint}
         && $Param{Plugin}->{Param}->{TicketCreateOffsetUnit}
         && $Param{Appointment}->{StartTime}
