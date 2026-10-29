@@ -42,6 +42,7 @@ my $SAMLResponseObject = Kernel::System::Auth::SAML::Response->new(
 my $ExpectedSAMLRequestID = '_54c307de-960b-11f0-b741-ecb5948c096d';
 
 # Note: without signature to make tests easier.
+# Response and Assertion IDs must differ. Net::SAML2 0.89 rejects a repeated ID.
 my $SAMLResponseXML = '<samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"
     xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Destination="https://example.com/znuny/index.pl?Action=Login" ID="ID_aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee" InResponseTo="'
     . $ExpectedSAMLRequestID
@@ -50,7 +51,7 @@ my $SAMLResponseXML = '<samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:
     <samlp:Status>
         <samlp:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Success"/>
     </samlp:Status>
-    <saml:Assertion xmlns="urn:oasis:names:tc:SAML:2.0:assertion" ID="ID_aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee" IssueInstant="2025-09-20T10:19:46.253Z" Version="2.0">
+    <saml:Assertion xmlns="urn:oasis:names:tc:SAML:2.0:assertion" ID="ID_bbbbbbbb-bbbb-cccc-dddd-eeeeeeeeeeee" IssueInstant="2025-09-20T10:19:46.253Z" Version="2.0">
         <saml:Issuer>' . $Issuer . '</saml:Issuer>
         <saml:Subject>
             <saml:NameID Format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress">unittest@znuny.org</saml:NameID>
@@ -175,6 +176,62 @@ $Self->Is(
     scalar $NameID,
     'unittest@znuny.org',
     'GetNameID() must return expected value.',
+);
+
+# Real logins do not set UnitTest. Without IdPCACert the response must be rejected
+# before Net::SAML2 is asked to verify it.
+my $MissingCertDecoded = $SAMLResponseObject->DecodeResponse(
+    Response => $SAMLResponseXMLBase64,
+);
+$Self->False(
+    $MissingCertDecoded,
+    'DecodeResponse() without IdPCACert must fail.',
+);
+
+my $IdPCACert           = '/some/path/cert.pem';
+my $TrustResponseObject = Kernel::System::Auth::SAML::Response->new(
+    Count  => 2,
+    Config => {
+        Issuer    => $Issuer,
+        IdPCACert => $IdPCACert,
+    },
+);
+
+my %SeenAssertionParams;
+{
+    no warnings 'redefine';    ## no critic
+
+    local *Net::SAML2::Binding::POST::new = sub {
+        my ( $Class, %Param ) = @_;
+        return bless \%Param, $Class;
+    };
+    local *Net::SAML2::Binding::POST::handle_response = sub {
+        return $SAMLResponseXML;
+    };
+    local *Net::SAML2::Protocol::Assertion::new_from_xml = sub {
+        my ( $Class, %Param ) = @_;
+        %SeenAssertionParams = %Param;
+        return bless {}, $Class;
+    };
+
+    my $TrustDecoded = $TrustResponseObject->DecodeResponse(
+        Response => $SAMLResponseXMLBase64,
+    );
+    $Self->True(
+        $TrustDecoded,
+        'DecodeResponse() with IdPCACert must be successful.',
+    );
+}
+
+$Self->Is(
+    $SeenAssertionParams{cacert},
+    $IdPCACert,
+    'Assertion must be created with the configured IdPCACert.',
+);
+$Self->Is(
+    $SeenAssertionParams{insecure_trust_embedded_cert},
+    undef,
+    'Assertion must not trust an embedded certificate.',
 );
 
 1;

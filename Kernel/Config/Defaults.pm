@@ -562,7 +562,7 @@ sub LoadDefaults {
 
     # $Self->{'AuthModule::SAML::Issuer1'} = "https://some.url/znuny/";
 
-    # # Optional, CACert of the identity provider (IdP)
+    # # Required path to the IdP signing certificate. Used to verify response and assertion signatures.
     # $Self->{'AuthModule::SAML::IdPCACert1'} = '/some/path/cert.pem';
 
     # --------------------------------------------------- #
@@ -1675,7 +1675,7 @@ via the Preferences button after logging in.
 
     # $Self->{'Customer::AuthModule::SAML::Issuer1'} = "https://some.url/znuny/";
 
-    # # Optional, CACert of the identity provider (IdP)
+    # # Required path to the IdP signing certificate. Used to verify response and assertion signatures.
     # $Self->{'Customer::AuthModule::SAML::IdPCACert1'} = '/some/path/cert.pem';
 
     # --------------------------------------------------- #

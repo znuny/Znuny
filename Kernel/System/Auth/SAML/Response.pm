@@ -73,16 +73,29 @@ sub DecodeResponse {
     delete $Self->{IsValid};
     delete $Self->{Assertion};
 
-    my %PostParams;
-    if ( $Self->{Config}->{IdPCACert} ) {
-        $PostParams{cacert} = $Self->{Config}->{IdPCACert};
+    # One trust anchor for the POST binding and the assertion. Real logins use the
+    # configured IdP certificate. Unit tests use unsigned fixtures, so only that
+    # path may trust an embedded certificate.
+    my %TrustParams;
+    if ( $Param{UnitTest} ) {
+        $TrustParams{insecure_trust_embedded_cert} = 1;
+    }
+    elsif ( $Self->{Config}->{IdPCACert} ) {
+        $TrustParams{cacert} = $Self->{Config}->{IdPCACert};
+    }
+    else {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "IdPCACert is required to verify SAML assertion signatures (count: $Self->{Count}).",
+        );
+        return;
     }
 
     if ( $Param{UnitTest} ) {
         $Self->{XMLString} = MIME::Base64::decode_base64( $Param{Response} );
     }
     else {
-        my $Post = Net::SAML2::Binding::POST->new(%PostParams);
+        my $Post = Net::SAML2::Binding::POST->new(%TrustParams);
         return if !$Post;
 
         $Self->{XMLString} = $Post->handle_response(
@@ -95,10 +108,23 @@ sub DecodeResponse {
     $Self->{XMLDOM} = $XMLParser->parse_string( $Self->{XMLString} );
     return if !$Self->{XMLDOM};
 
-    $Self->{Assertion} = Net::SAML2::Protocol::Assertion->new_from_xml(
-        xml => MIME::Base64::decode_base64( $Param{Response} ),
-    );
-    return if !$Self->{Assertion};
+    my $Assertion;
+    eval {
+        $Assertion = Net::SAML2::Protocol::Assertion->new_from_xml(
+            xml => MIME::Base64::decode_base64( $Param{Response} ),
+            %TrustParams,
+        );
+    };
+    if ($@) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Error creating SAML assertion object: $@",
+        );
+        return;
+    }
+    return if !$Assertion;
+
+    $Self->{Assertion} = $Assertion;
 
     $Self->{Decoded} = 1;
 

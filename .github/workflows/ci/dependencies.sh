@@ -21,5 +21,5 @@ apt-get install -y libapache2-mod-perl2 \
   apache2 gnupg2 mariadb-client cpanminus make gcc git npm gettext gnupg
 
 # Net::SAML2 (no Debian/Ubuntu package, install via CPAN).
-# Pin to 0.85 until Znuny supports newer Net::SAML2 (mandatory IdP CA cert).
-cpanm --notest Net::SAML2@0.85
+# 0.89 or higher is required so assertion signatures are verified against the IdP certificate.
+cpanm --notest Net::SAML2@0.89
