@@ -469,18 +469,35 @@ $ExportContent = $StatsObject->Export(
     UserID => 1,
 );
 
+my $OriginalImportContent = $ImportContent;
+
 # the following line are because of different spelling 'ISO-8859' or 'iso-8859'
 # but this is no solution for the problem if one string is iso and the other utf!
-$ImportContent =~ s/^<\?xml.*?>.*?<otrs_stats/<otrs_stats/ms;
+$ImportContent =~ s/^<\?xml.*?>.*?<(?:otrs|znuny)_stats/<otrs_stats/ms;
+$ImportContent =~ s{</(?:otrs|znuny)_stats>}{</otrs_stats>}g;
 
 # this line is for Windows check-out
 $ImportContent =~ s{\r\n}{\n}smxg;
 
-$ExportContent->{Content} =~ s/^<\?xml.*?>.*?<otrs_stats/<otrs_stats/ms;
+$ExportContent->{Content} =~ s/^<\?xml.*?>.*?<(?:otrs|znuny)_stats/<otrs_stats/ms;
+$ExportContent->{Content} =~ s{</(?:otrs|znuny)_stats>}{</otrs_stats>}g;
 $Self->Is(
     $ImportContent,
     $ExportContent->{Content},
     "Export-Importcheck - check if import file content equal export file content.\n Be careful, if it gives errors if you run OTRS with default charset utf-8,\n because the examplefile is iso-8859-1, but at my test there a no problems to compare a utf-8 string with an iso string?!\n",
+);
+
+my $ImportContentNewStyle = $OriginalImportContent;
+$ImportContentNewStyle =~ s{<(\/?)otrs_stats}{<$1znuny_stats}g;
+
+my $NewStyleStatID = $StatsObject->Import(
+    Content => $ImportContentNewStyle,
+    UserID  => 1,
+);
+
+$Self->True(
+    $NewStyleStatID,
+    'Import() statistic with the new stats root must succeed',
 );
 
 # Import a static statistic with not exsting object module

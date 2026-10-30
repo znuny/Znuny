@@ -149,8 +149,9 @@ sub StatsAdd {
     );
 
     # start new stats record
+    my $RootKey = $Self->_StatsXMLRoot();
     my @XMLHash = (
-        { otrs_stats => [ \%MetaData ] },
+        { $RootKey => [ \%MetaData ] },
     );
     my $Success = $XMLObject->XMLHashAdd(
         Type    => 'Stats',
@@ -225,7 +226,14 @@ sub StatsGet {
     }
 
     my %Stat;
-    my $StatsXML = $XMLHash[0]->{otrs_stats}->[1];
+    my $StatsXML = $Self->_GetStatsXML( XMLHash => \@XMLHash );
+    if ( !$StatsXML ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Can't get StatsXML for StatID $Param{StatID}!",
+        );
+        return;
+    }
 
     # process all strings
     $Stat{StatID} = $Param{StatID};
@@ -545,9 +553,10 @@ sub StatsUpdate {
     # delete cache
     $Self->_DeleteCache( StatID => $Param{StatID} );
 
-    my @Array = (
+    my $RootKey = $Self->_StatsXMLRoot();
+    my @Array   = (
         {
-            otrs_stats => [ \%StatXML ],
+            $RootKey => [ \%StatXML ],
         },
     );
 
@@ -1288,7 +1297,14 @@ sub Export {
         Type => 'Stats',
         Key  => $Param{StatID},
     );
-    my $StatsXML = $XMLHash[0]->{otrs_stats}->[1];
+    my $StatsXML = $Self->_GetStatsXML( XMLHash => \@XMLHash );
+    if ( !$StatsXML ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => "Can't get StatsXML for StatID $Param{StatID}!",
+        );
+        return;
+    }
 
     my %File;
     $File{Filename} = $Self->StringAndTimestamp2Filename(
@@ -1331,9 +1347,10 @@ sub Export {
     }
 
     # convert hash to string
+    my $RootKey = $Self->_StatsXMLRoot();
     $File{Content} = $XMLObject->XMLHash2XML(
         {
-            otrs_stats => [
+            $RootKey => [
                 undef,
                 $StatsXML,
             ],
@@ -1375,7 +1392,15 @@ sub Import {
     if ( !$XMLHash[0] ) {
         shift @XMLHash;
     }
-    my $StatsXML = $XMLHash[0]->{otrs_stats}->[1];
+    my $StatsXML = $Self->_GetStatsXML( XMLHash => \@XMLHash );
+
+    if ( !$StatsXML ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => 'Can\'t import Stat, because no stats root element is available!',
+        );
+        return;
+    }
 
     # Get new StatID
     my @Keys = $XMLObject->XMLHashSearch(
@@ -1482,12 +1507,13 @@ sub Import {
         $StatsXML = $StatObject->ImportWrapper( %{$StatsXML} );
     }
 
+    my $RootKey = $Self->_StatsXMLRoot();
     return if !$XMLObject->XMLHashAdd(
         Type    => 'Stats',
         Key     => $StatID,
         XMLHash => [
             {
-                otrs_stats => [
+                $RootKey => [
                     undef,
                     $StatsXML,
                 ],
@@ -1885,10 +1911,15 @@ sub StatNumber2StatID {
         return;
     }
 
-    my @Key = $Kernel::OM->Get('Kernel::System::XML')->XMLHashSearch(
-        Type => 'Stats',
-        What => [ { "[%]{'otrs_stats'}[%]{'StatNumber'}[%]{'Content'}" => $Param{StatNumber} } ],
-    );
+    my %KeySeen;
+    for my $RootKey ( $Self->_StatsXMLRoot(), 'otrs_stats' ) {
+        my @Key = $Kernel::OM->Get('Kernel::System::XML')->XMLHashSearch(
+            Type => 'Stats',
+            What => [ { "[%]{'$RootKey'}[%]{'StatNumber'}[%]{'Content'}" => $Param{StatNumber} } ],
+        );
+        @KeySeen{@Key} = () if @Key;
+    }
+    my @Key = keys %KeySeen;
     if ( @Key && $#Key < 1 ) {
         return $Key[0];
     }
@@ -3830,6 +3861,26 @@ sub _DeleteCache {
     return $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
         Type => 'Stats',
     );
+}
+
+sub _StatsXMLRoot {
+    return 'znuny_stats';
+}
+
+sub _GetStatsXML {
+    my ( $Self, %Param ) = @_;
+
+    my $XMLHash = $Param{XMLHash};
+    return if !IsArrayRefWithData($XMLHash);
+    return if ref $XMLHash->[0] ne 'HASH';
+
+    ROOTKEY:
+    for my $RootKey ( $Self->_StatsXMLRoot(), 'otrs_stats' ) {
+        next ROOTKEY if !$XMLHash->[0]->{$RootKey};
+        return $XMLHash->[0]->{$RootKey}->[1];
+    }
+
+    return;
 }
 
 sub _MonthArray {
