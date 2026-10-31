@@ -50,6 +50,88 @@ Core.Agent.Search = (function (TargetNS) {
     };
 
     /**
+     * @name InitDatepickerFields
+     * @memberof Core.Agent.Search
+     * @function
+     * @param {jQueryObject} $Context - Container with date selection fields.
+     * @description
+     *      Initialize datepickers for date fields shown in the search dialog.
+     *      Search attributes are cloned from a hidden template, so server-side
+     *      datepicker init from BuildDateSelection does not apply to visible fields.
+     */
+    TargetNS.InitDatepickerFields = function ($Context) {
+        var WeekDayStart = Core.Config.Get('CalendarWeekDayStart'),
+            DatepickerConfig = Core.Config.Get('Datepicker') || {},
+            VacationDays = DatepickerConfig.VacationDays || {
+                TimeVacationDays: {},
+                TimeVacationDaysOneTime: {}
+            };
+
+        if (typeof WeekDayStart === 'undefined' || WeekDayStart === null) {
+            WeekDayStart = 1;
+        }
+
+        if (!$Context || !isJQueryObject($Context) || !$Context.length) {
+            return;
+        }
+
+        if (typeof Core.UI.Datepicker === 'undefined' || typeof Core.UI.Datepicker.Init !== 'function') {
+            return;
+        }
+
+        $Context.find('select[id$="Day"], input[id$="Day"]').each(function () {
+            var $Day = $(this),
+                DayID = $Day.attr('id'),
+                Prefix,
+                $Month,
+                $Year,
+                $Hour,
+                $Minute,
+                $Icon,
+                EscapeDayID;
+
+            if (!DayID || !/Day$/.test(DayID)) {
+                return;
+            }
+
+            Prefix = DayID.replace(/Day$/, '');
+            EscapeDayID = Core.App.EscapeSelector(DayID);
+            $Month = $Context.find('#' + Core.App.EscapeSelector(Prefix + 'Month'));
+            $Year = $Context.find('#' + Core.App.EscapeSelector(Prefix + 'Year'));
+
+            if (!$Month.length || !$Year.length) {
+                return;
+            }
+
+            // Remove only this field's datepicker nodes (Start/Stop share one container).
+            $Icon = $Context.find('#' + EscapeDayID + 'DatepickerIcon');
+            $Icon.prev('input[id^="Datepicker"]').remove();
+            $Icon.remove();
+
+            // Clear matching nodes from the hidden template so ID lookups stay unique.
+            $Icon = $('#SearchAttributesHidden').find('#' + EscapeDayID + 'DatepickerIcon');
+            $Icon.prev('input[id^="Datepicker"]').remove();
+            $Icon.remove();
+
+            $Hour = $Context.find('#' + Core.App.EscapeSelector(Prefix + 'Hour'));
+            $Minute = $Context.find('#' + Core.App.EscapeSelector(Prefix + 'Minute'));
+
+            Core.UI.Datepicker.Init({
+                Day: $Day,
+                Month: $Month,
+                Year: $Year,
+                Hour: $Hour,
+                Minute: $Minute,
+                VacationDays: VacationDays,
+                DateInFuture: false,
+                DateNotInFuture: false,
+                WeekDayStart: WeekDayStart,
+                Disabled: !!$Day.prop('disabled')
+            });
+        });
+    };
+
+    /**
      * @name SearchAttributeAdd
      * @memberof Core.Agent.Search
      * @function
@@ -101,6 +183,8 @@ Core.Agent.Search = (function (TargetNS) {
 
             // Initially display dynamic fields with TreeMode = 1 correctly
             Core.UI.TreeSelection.InitDynamicFieldTreeViewRestore();
+
+            TargetNS.InitDatepickerFields($Clone);
 
             if (InputFieldUUID) {
 

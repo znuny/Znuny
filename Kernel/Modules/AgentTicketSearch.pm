@@ -2575,6 +2575,19 @@ sub Run {
             Value => \@SearchAttributes,
         );
 
+        my $TextDirection = $LayoutObject->{LanguageObject}->{TextDirection} || '';
+        $LayoutObject->AddJSData(
+            Key   => 'Datepicker',
+            Value => {
+                VacationDays => $LayoutObject->DatepickerGetVacationDays(),
+                IsRTL        => ( $TextDirection eq 'rtl' ) ? 1 : 0,
+            },
+        );
+        $LayoutObject->AddJSData(
+            Key   => 'CalendarWeekDayStart',
+            Value => $ConfigObject->Get('CalendarWeekDayStart') // 1,
+        );
+
         my $Output = $LayoutObject->Output(
             TemplateFile => 'AgentTicketSearch',
             Data         => \%Param,

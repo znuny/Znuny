@@ -409,6 +409,31 @@ $Selenium->RunTest(
             Element => '#Attribute',
             Value   => 'TicketCreateTimeSlot',
         );
+
+        # Cloned search date fields must get a working datepicker (InitDatepickerFields).
+        $Selenium->WaitFor(
+            JavaScript =>
+                "return typeof(\$) === 'function' && \$('#TicketCreateTimeStartDayDatepickerIcon:visible').length && \$('#TicketCreateTimeStopDayDatepickerIcon:visible').length;"
+        );
+        for my $Field (qw(Start Stop)) {
+            $Self->True(
+                $Selenium->execute_script(
+                    "return \$('#TicketCreateTime${Field}DayDatepickerIcon:visible').length === 1;"
+                ),
+                "TicketCreateTime${Field}DayDatepickerIcon is visible after cloning search attribute",
+            );
+        }
+
+        $Selenium->find_element( '#TicketCreateTimeStartDayDatepickerIcon', 'css' )->click();
+        $Selenium->WaitFor(
+            JavaScript => 'return typeof($) === "function" && $(".ui-datepicker-calendar:visible").length;',
+        );
+        $Self->True(
+            $Selenium->execute_script('return $(".ui-datepicker-calendar:visible").length;'),
+            'Datepicker opens when Start day calendar icon is clicked',
+        );
+        $Selenium->execute_script("\$('#ui-datepicker-div').hide();");
+
         for my $Field (qw(Start Stop)) {
             $Selenium->execute_script("\$('#TicketCreateTime${Field}Day:eq(0)').val('4');");
             $Selenium->execute_script("\$('#TicketCreateTime${Field}Month:eq(0)').val('5');");
@@ -494,6 +519,21 @@ $Selenium->RunTest(
                 "return \$('#TicketCreateTimeStopDay.Error').length;"
             ),
             'End date in the past highlighted as an error'
+        );
+
+        $Self->Is(
+            $Selenium->execute_script(
+                "return \$('[id=\"TicketCreateTimeStopDayError\"]').length;"
+            ),
+            1,
+            'Stop day error message ID is unique after datepicker init'
+        );
+
+        $Self->True(
+            $Selenium->execute_script(
+                "return \$('#TicketCreateTimeStopDayError').text().indexOf('Please set this to value after start date.') > -1;"
+            ),
+            'Range validation keeps before/after guidance text'
         );
 
         # Fix the end date, and submit the search again.
