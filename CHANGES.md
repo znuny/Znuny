@@ -1,5 +1,4 @@
 # 7.5.1 2026-??-??
-
  - 2026-10-31 Fixed: Datepicker not initialized for date fields added via attribute selection in AgentTicketSearch dialog.
  - 2026-10-30 Changed: Statistics XML export now uses the root element znuny_stats. Import still accepts otrs_stats.
  - 2026-10-30 Changed: SOPM root tag can now also be 'package' instead of 'otrs_package'.
