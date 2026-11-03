@@ -1196,14 +1196,14 @@
         <Description Translatable="1">Defines the name of the session key. E.g. Session, SessionID or Znuny.</Description>
         <Navigation>Core::Session</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">OTRSAgentInterface</Item>
+            <Item ValueType="String" ValueRegex="">ZnunyAgentInterface</Item>
         </Value>
     </Setting>
     <Setting Name="CustomerPanelSessionName" Required="1" Valid="1">
         <Description Translatable="1">Defines the name of the key for customer sessions.</Description>
         <Navigation>Core::Session</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">OTRSCustomerInterface</Item>
+            <Item ValueType="String" ValueRegex="">ZnunyCustomerInterface</Item>
         </Value>
     </Setting>
     <Setting Name="SessionCheckRemoteIP" Required="1" Valid="1">

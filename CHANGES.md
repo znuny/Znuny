@@ -1,4 +1,5 @@
 # 7.5.1 2026-??-??
+ - 2026-11-03 Changed: Default session cookie names are now ZnunyAgentInterface and ZnunyCustomerInterface. Untouched SysConfig values are migrated on upgrade; legacy OTRS cookie names are still accepted during the transition.
  - 2026-11-03 Changed: Renamed $DateTimeObject->OTRSTimeZoneGet() to ZnunyTimeZoneGet() and SysConfig OTRSTimeZone to ZnunyTimeZone.
  - 2026-11-03 Changed: Repository index root tag is now package_list instead of otrs_package_list.
  - 2026-11-03 Fixed: SAML login failed in Chrome and Edge when authentication at the identity provider took too long.

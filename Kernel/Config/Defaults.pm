@@ -921,7 +921,7 @@ sub LoadDefaults {
 
     # SessionName
     # (Name of the session key. E. g. Session, SessionID, OTRS)
-    $Self->{SessionName} = 'OTRSAgentInterface';
+    $Self->{SessionName} = 'ZnunyAgentInterface';
 
     # SessionCheckRemoteIP
     # (If the application is used via a proxy-farm then the
@@ -1430,7 +1430,7 @@ If you did not make this change, please contact your administrator immediately.
 
     # SessionName
     # (Name of the session key. E. g. Session, SessionID, OTRS)
-    $Self->{CustomerPanelSessionName} = 'OTRSCustomerInterface';
+    $Self->{CustomerPanelSessionName} = 'ZnunyCustomerInterface';
 
     # CustomerPanelUserID
     # (The customer panel db-uid.) [default: 1]

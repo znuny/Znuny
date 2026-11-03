@@ -85,6 +85,16 @@ sub _GetMigrateSysConfigSettings {
         "Ticket::Frontend::AgentTicketCustomer::CustomerIDReadOnly" => {
             UpdateName => "Ticket::Frontend::AgentTicketCustomer###CustomerIDReadOnly",
         },
+        SessionName => {
+            UpdateEffectiveValue => {
+                OTRSAgentInterface => 'ZnunyAgentInterface',
+            },
+        },
+        CustomerPanelSessionName => {
+            UpdateEffectiveValue => {
+                OTRSCustomerInterface => 'ZnunyCustomerInterface',
+            },
+        },
         OTRSTimeZone => {
             UpdateName => 'ZnunyTimeZone',
         },

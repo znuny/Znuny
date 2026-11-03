@@ -134,11 +134,19 @@ sub Run {
     my %Param;
 
     # get session id
-    $Param{SessionName} = $ConfigObject->Get('CustomerPanelSessionName')         || 'CSID';
-    $Param{SessionID}   = $ParamObject->GetParam( Param => $Param{SessionName} ) || '';
+    $Param{SessionName} = $ConfigObject->Get('CustomerPanelSessionName') || 'CSID';
+    ( $Param{SessionID}, $Param{SessionIDCookie} ) = $ParamObject->GetSessionID(
+        SessionName => $Param{SessionName},
+    );
 
     # drop old session id (if exists)
     $QueryString =~ s/(\?|&|;|)$Param{SessionName}(=&|=;|=.+?&|=.+?$)/;/g;
+    my $LegacySessionName = $ParamObject->GetLegacySessionName(
+        SessionName => $Param{SessionName},
+    );
+    if ($LegacySessionName) {
+        $QueryString =~ s/(\?|&|;|)$LegacySessionName(=&|=;|=.+?&|=.+?$)/;/g;
+    }
 
     # define framework params
     my $FrameworkParams = {
@@ -158,15 +166,6 @@ sub Run {
     }
 
     my $BrowserHasCookie = 0;
-
-    # Check if the browser sends the SessionID cookie and set the SessionID-cookie
-    # as SessionID! GET or POST SessionID have the lowest priority.
-    if ( $ConfigObject->Get('SessionUseCookie') ) {
-        $Param{SessionIDCookie} = $ParamObject->GetCookie( Key => $Param{SessionName} );
-        if ( $Param{SessionIDCookie} ) {
-            $Param{SessionID} = $Param{SessionIDCookie};
-        }
-    }
 
     my $CookieSecureAttribute;
     if ( $ConfigObject->Get('HttpType') eq 'https' ) {
@@ -459,6 +458,11 @@ sub Run {
                         Secure   => scalar $CookieSecureAttribute,
                         HTTPOnly => 1,
                     ),
+                    LegacySessionIDCookie => $ParamObject->ExpireLegacySessionCookie(
+                        SessionName => $Param{SessionName},
+                        Path        => $ConfigObject->Get('ScriptAlias'),
+                        Secure      => $CookieSecureAttribute,
+                    ),
                     OTRSBrowserHasCookie => $ParamObject->SetCookie(
                         Key      => 'OTRSBrowserHasCookie',
                         Value    => '',
@@ -533,6 +537,11 @@ sub Run {
                         Path     => $ConfigObject->Get('ScriptAlias'),
                         Secure   => scalar $CookieSecureAttribute,
                         HTTPOnly => 1,
+                    ),
+                    LegacySessionIDCookie => $ParamObject->ExpireLegacySessionCookie(
+                        SessionName => $Param{SessionName},
+                        Path        => $ConfigObject->Get('ScriptAlias'),
+                        Secure      => $CookieSecureAttribute,
                     ),
                 },
                 %Param,
@@ -1184,6 +1193,11 @@ sub Run {
                             Path     => $ConfigObject->Get('ScriptAlias'),
                             Secure   => scalar $CookieSecureAttribute,
                             HTTPOnly => 1,
+                        ),
+                        LegacySessionIDCookie => $ParamObject->ExpireLegacySessionCookie(
+                            SessionName => $Param{SessionName},
+                            Path        => $ConfigObject->Get('ScriptAlias'),
+                            Secure      => $CookieSecureAttribute,
                         ),
                     },
                     %Param,
