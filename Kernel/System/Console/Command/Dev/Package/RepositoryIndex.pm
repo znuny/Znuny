@@ -48,7 +48,7 @@ sub Run {
     my ( $Self, %Param ) = @_;
 
     my $Result = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n";
-    $Result .= "<otrs_package_list version=\"1.0\">\n";
+    $Result .= "<package_list version=\"1.0\">\n";
     my $SourceDirectory = $Self->GetArgument('source-directory');
     my @List            = $Kernel::OM->Get('Kernel::System::Main')->DirectoryRead(
         Directory => $SourceDirectory,
@@ -80,7 +80,7 @@ sub Run {
         $Result .= "  <File>$RelativeFile</File>\n";
         $Result .= "</Package>\n";
     }
-    $Result .= "</otrs_package_list>\n";
+    $Result .= "</package_list>\n";
     $Self->Print($Result);
 
     return $Self->ExitCodeOk();

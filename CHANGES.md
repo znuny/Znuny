@@ -1,4 +1,5 @@
 # 7.5.1 2026-??-??
+ - 2026-11-03 Changed: Repository index root tag is now package_list instead of otrs_package_list.
  - 2026-11-03 Fixed: SAML login failed in Chrome and Edge when authentication at the identity provider took too long.
  - 2026-10-31 Fixed: Datepicker not initialized for date fields added via attribute selection in AgentTicketSearch dialog.
  - 2026-10-30 Changed: Statistics XML export now uses the root element znuny_stats. Import still accepts otrs_stats.
