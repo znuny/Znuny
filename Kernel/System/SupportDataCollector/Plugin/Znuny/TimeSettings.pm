@@ -41,18 +41,18 @@ sub Run {
 
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-    # OTRS time zone
-    my $OTRSTimeZone = $ConfigObject->Get('OTRSTimeZone');
-    if ( defined $OTRSTimeZone ) {
+    # Znuny time zone
+    my $ZnunyTimeZone = $ConfigObject->Get('ZnunyTimeZone');
+    if ( defined $ZnunyTimeZone ) {
         $Self->AddResultOk(
-            Identifier => 'OTRSTimeZone',
+            Identifier => 'ZnunyTimeZone',
             Label      => Translatable('Znuny time zone'),
-            Value      => $OTRSTimeZone,
+            Value      => $ZnunyTimeZone,
         );
     }
     else {
         $Self->AddResultProblem(
-            Identifier => 'OTRSTimeZone',
+            Identifier => 'ZnunyTimeZone',
             Label      => Translatable('Znuny time zone'),
             Value      => '',
             Message    => Translatable('Znuny time zone is not set.'),
@@ -90,15 +90,15 @@ sub Run {
 
         if ( defined $CalendarTimeZone ) {
             $Self->AddResultOk(
-                Identifier => "OTRSTimeZone::Calendar$Counter",
-                Label      => "OTRS time zone setting for calendar $Counter",
+                Identifier => "ZnunyTimeZone::Calendar$Counter",
+                Label      => "Znuny time zone setting for calendar $Counter",
                 Value      => $CalendarTimeZone,
             );
         }
         else {
             $Self->AddResultInformation(
-                Identifier => "OTRSTimeZone::Calendar$Counter",
-                Label      => "OTRS time zone setting for calendar $Counter",
+                Identifier => "ZnunyTimeZone::Calendar$Counter",
+                Label      => "Znuny time zone setting for calendar $Counter",
                 Value      => '',
                 Message    => Translatable('Calendar time zone is not set.'),
             );

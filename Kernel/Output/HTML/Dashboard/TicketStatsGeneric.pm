@@ -100,7 +100,7 @@ sub Run {
 
     my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
-    my $TimeZone = $Self->{UserTimeZone} || OTRSTimeZoneGet();
+    my $TimeZone = $Self->{UserTimeZone} || ZnunyTimeZoneGet();
 
     for my $DaysBack ( 0 .. 6 ) {
 

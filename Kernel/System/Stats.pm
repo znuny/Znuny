@@ -258,7 +258,7 @@ sub StatsGet {
             $Stat{TimeZone} = $StatsXML->{TimeZone}->[1]->{Content};
         }
         else {
-            $Stat{TimeZone} = Kernel::System::DateTime->OTRSTimeZoneGet();
+            $Stat{TimeZone} = Kernel::System::DateTime->ZnunyTimeZoneGet();
         }
     }
 

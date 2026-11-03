@@ -16,7 +16,7 @@ use vars (qw($Self));
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
 $ConfigObject->Set(
-    Key   => 'OTRSTimeZone',
+    Key   => 'ZnunyTimeZone',
     Value => 'UTC',
 );
 

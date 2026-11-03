@@ -1225,7 +1225,7 @@ sub _FindRecipientTimeZone {
     my ( $Self, $AddTimezoneInfo, $Ticket, $Recipient ) = @_;
     my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
 
-    my $RecipientTimeZone = $Kernel::OM->Create('Kernel::System::DateTime')->OTRSTimeZoneGet();
+    my $RecipientTimeZone = $Kernel::OM->Create('Kernel::System::DateTime')->ZnunyTimeZoneGet();
 
     my %CustomerUser;
     if ( %$Ticket && $Ticket->{CustomerUserID} ) {
@@ -1531,7 +1531,7 @@ sub _DefaultReplacements {
                         $DateTimeObject->ToTimeZone( TimeZone => $Timezone );
                     }
                     else {
-                        $Timezone = $DateTimeObject->OTRSTimeZoneGet();
+                        $Timezone = $DateTimeObject->ZnunyTimeZoneGet();
                     }
                     return $DateTimeObject->Format( Format => "%A, %B %e, %Y at %T ($Timezone)" );
                 },

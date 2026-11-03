@@ -17,71 +17,71 @@ use vars (qw($Self));
 my @Tests = (
 
     {
-        Name         => 'UTC',
-        TimeStampUTC => '2014-01-10 11:12:13',
-        OTRSTimeZone => 'UTC',
-        Result       => 'Fri, 10 Jan 2014 11:12:13 +0000',
+        Name          => 'UTC',
+        TimeStampUTC  => '2014-01-10 11:12:13',
+        ZnunyTimeZone => 'UTC',
+        Result        => 'Fri, 10 Jan 2014 11:12:13 +0000',
     },
     {
-        Name         => 'Europe/Berlin',
-        TimeStampUTC => '2014-01-10 11:12:13',
-        OTRSTimeZone => 'Europe/Berlin',
-        Result       => 'Fri, 10 Jan 2014 12:12:13 +0100',
+        Name          => 'Europe/Berlin',
+        TimeStampUTC  => '2014-01-10 11:12:13',
+        ZnunyTimeZone => 'Europe/Berlin',
+        Result        => 'Fri, 10 Jan 2014 12:12:13 +0100',
     },
     {
-        Name         => 'America/Los_Angeles',
-        TimeStampUTC => '2014-01-10 11:12:13',
-        OTRSTimeZone => 'America/Los_Angeles',
-        Result       => 'Fri, 10 Jan 2014 03:12:13 -0800',
+        Name          => 'America/Los_Angeles',
+        TimeStampUTC  => '2014-01-10 11:12:13',
+        ZnunyTimeZone => 'America/Los_Angeles',
+        Result        => 'Fri, 10 Jan 2014 03:12:13 -0800',
     },
     {
-        Name         => 'Australia/Sydney',
-        TimeStampUTC => '2014-01-10 11:12:13',
-        OTRSTimeZone => 'Australia/Sydney',
-        Result       => 'Fri, 10 Jan 2014 22:12:13 +1100',
+        Name          => 'Australia/Sydney',
+        TimeStampUTC  => '2014-01-10 11:12:13',
+        ZnunyTimeZone => 'Australia/Sydney',
+        Result        => 'Fri, 10 Jan 2014 22:12:13 +1100',
     },
     {
-        Name         => 'Europe/London',
-        TimeStampUTC => '2014-01-10 11:12:13',
-        OTRSTimeZone => 'Europe/London',
-        Result       => 'Fri, 10 Jan 2014 11:12:13 +0000',
+        Name          => 'Europe/London',
+        TimeStampUTC  => '2014-01-10 11:12:13',
+        ZnunyTimeZone => 'Europe/London',
+        Result        => 'Fri, 10 Jan 2014 11:12:13 +0000',
     },
     {
-        Name         => 'Europe/Berlin',
-        TimeStampUTC => '2014-08-03 02:03:04',
-        OTRSTimeZone => 'Europe/Berlin',
-        Result       => 'Sun, 3 Aug 2014 04:03:04 +0200',
+        Name          => 'Europe/Berlin',
+        TimeStampUTC  => '2014-08-03 02:03:04',
+        ZnunyTimeZone => 'Europe/Berlin',
+        Result        => 'Sun, 3 Aug 2014 04:03:04 +0200',
     },
     {
 
-        Name         => 'America/Los_Angeles',
-        TimeStampUTC => '2014-08-03 02:03:04',
-        OTRSTimeZone => 'America/Los_Angeles',
-        Result       => 'Sat, 2 Aug 2014 19:03:04 -0700',
+        Name          => 'America/Los_Angeles',
+        TimeStampUTC  => '2014-08-03 02:03:04',
+        ZnunyTimeZone => 'America/Los_Angeles',
+        Result        => 'Sat, 2 Aug 2014 19:03:04 -0700',
     },
     {
-        Name         => 'Australia/Sydney',
-        TimeStampUTC => '2014-08-03 02:03:04',
-        OTRSTimeZone => 'Australia/Sydney',
-        Result       => 'Sun, 3 Aug 2014 12:03:04 +1000',
+        Name          => 'Australia/Sydney',
+        TimeStampUTC  => '2014-08-03 02:03:04',
+        ZnunyTimeZone => 'Australia/Sydney',
+        Result        => 'Sun, 3 Aug 2014 12:03:04 +1000',
     },
     {
-        Name         => 'Europe/London DST',
-        TimeStampUTC => '2014-08-03 02:03:04',
-        OTRSTimeZone => 'Europe/London',
-        Result       => 'Sun, 3 Aug 2014 03:03:04 +0100',
+        Name          => 'Europe/London DST',
+        TimeStampUTC  => '2014-08-03 02:03:04',
+        ZnunyTimeZone => 'Europe/London',
+        Result        => 'Sun, 3 Aug 2014 03:03:04 +0100',
     },
     {
-        Name         => 'Europe/Berlin DST',
-        TimeStampUTC => '2014-08-03 02:03:04',
-        OTRSTimeZone => 'Europe/Berlin',
-        Result       => 'Sun, 3 Aug 2014 04:03:04 +0200',
+        Name          => 'Europe/Berlin DST',
+        TimeStampUTC  => '2014-08-03 02:03:04',
+        ZnunyTimeZone => 'Europe/Berlin',
+        Result        => 'Sun, 3 Aug 2014 04:03:04 +0200',
     },
     {
-        Name         => 'Asia/Kathmandu, offset with minutes',
-        TimeStampUTC => '2014-08-03 02:03:04',
-        OTRSTimeZone => 'Asia/Kathmandu',
-        Result       => 'Sun, 3 Aug 2014 07:48:04 +0545',
+        Name          => 'Asia/Kathmandu, offset with minutes',
+        TimeStampUTC  => '2014-08-03 02:03:04',
+        ZnunyTimeZone => 'Asia/Kathmandu',
+        Result        => 'Sun, 3 Aug 2014 07:48:04 +0545',
     },
 );
 
@@ -99,10 +99,10 @@ for my $Test (@Tests) {
         },
     );
 
-    # Set OTRS time zone to matching one.
+    # Set Znuny time zone to matching one.
     $ConfigObject->Set(
-        Key   => 'OTRSTimeZone',
-        Value => $Test->{OTRSTimeZone},
+        Key   => 'ZnunyTimeZone',
+        Value => $Test->{ZnunyTimeZone},
     );
 
     $HelperObject->FixedTimeSet($DateTimeObject);
@@ -113,14 +113,14 @@ for my $Test (@Tests) {
     );
     my $TimeObject = $Kernel::OM->Get('Kernel::System::Time');
 
-    $DateTimeObject->ToTimeZone( TimeZone => $Test->{OTRSTimeZone} );
+    $DateTimeObject->ToTimeZone( TimeZone => $Test->{ZnunyTimeZone} );
 
     my $MailTimeStamp = $TimeObject->MailTimeStamp();
 
     $Self->Is(
         $MailTimeStamp,
         $Test->{Result},
-        "$Test->{Name} ($Test->{OTRSTimeZone}) Timestamp $Test->{TimeStampUTC}:",
+        "$Test->{Name} ($Test->{ZnunyTimeZone}) Timestamp $Test->{TimeStampUTC}:",
     );
 
     $HelperObject->FixedTimeUnset();

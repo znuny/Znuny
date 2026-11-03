@@ -27,7 +27,7 @@ $HelperObject->ConfigSettingChange(
 );
 
 $Kernel::OM->Get('Kernel::Config')->Set(
-    Key   => 'OTRSTimeZone',
+    Key   => 'ZnunyTimeZone',
     Value => 'UTC',
 );
 

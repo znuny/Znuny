@@ -65,7 +65,7 @@ $ConfigObject->Set(
 # Set system timezone.
 my $SystemTimezone = 'UTC';
 $ConfigObject->Set(
-    Key   => 'OTRSTimeZone',
+    Key   => 'ZnunyTimeZone',
     Value => $SystemTimezone,
 );
 

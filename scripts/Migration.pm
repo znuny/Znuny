@@ -282,6 +282,10 @@ sub _TasksGet {
             Message => 'Migrate SysConfig settings',
             Module  => 'scripts::Migration::Znuny::MigrateSysConfigSettings',
         },
+        {
+            Message => 'Migrate ZnunyTimeZone from legacy OTRSTimeZone',
+            Module  => 'scripts::Migration::Znuny::MigrateZnunyTimeZoneFromLegacyOTRSTimeZone',
+        },
 
         # NOTE: UninstallMergedPackages has to be called only after
         # SysConfig settings of the merged packages have been migrated.

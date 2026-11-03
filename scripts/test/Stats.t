@@ -17,7 +17,7 @@ my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 my $StatsObject  = $Kernel::OM->Get('Kernel::System::Stats');
 
 $ConfigObject->Set(
-    Key   => 'OTRSTimeZone',
+    Key   => 'ZnunyTimeZone',
     Value => 'Europe/Berlin',
 );
 

@@ -85,6 +85,9 @@ sub _GetMigrateSysConfigSettings {
         "Ticket::Frontend::AgentTicketCustomer::CustomerIDReadOnly" => {
             UpdateName => "Ticket::Frontend::AgentTicketCustomer###CustomerIDReadOnly",
         },
+        OTRSTimeZone => {
+            UpdateName => 'ZnunyTimeZone',
+        },
     );
 
     return %MigrateSysConfigSettings;

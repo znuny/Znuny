@@ -33,7 +33,7 @@ my @Tests = (
 for my $Timezone (@Timezones) {
 
     $ConfigObject->Set(
-        Key   => 'OTRSTimeZone',
+        Key   => 'ZnunyTimeZone',
         Value => $Timezone,
     );
 

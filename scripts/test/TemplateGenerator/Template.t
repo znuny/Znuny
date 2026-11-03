@@ -50,10 +50,10 @@ $HelperObject->ConfigSettingChange(
     Value => 'en',
 );
 
-# Set OTRSTimeZone to UTC.
+# Set ZnunyTimeZone to UTC.
 $HelperObject->ConfigSettingChange(
     Valid => 1,
-    Key   => 'OTRSTimeZone',
+    Key   => 'ZnunyTimeZone',
     Value => 'UTC',
 );
 

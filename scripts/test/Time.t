@@ -18,7 +18,7 @@ my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
 # set time zone for data storage and calendars
 $ConfigObject->Set(
-    Key   => 'OTRSTimeZone',
+    Key   => 'ZnunyTimeZone',
     Value => 'Europe/Berlin',
 );
 $ConfigObject->Set(
@@ -728,7 +728,7 @@ $Self->Is(
 
 # set time zone for data storage
 $ConfigObject->Set(
-    Key   => 'OTRSTimeZone',
+    Key   => 'ZnunyTimeZone',
     Value => 'UTC',
 );
 my @Tests = (

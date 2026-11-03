@@ -409,12 +409,12 @@ sub Get {
         )
     {
 
-        my $OTRSTimeZone   = Kernel::System::DateTime->OTRSTimeZoneGet();
+        my $ZnunyTimeZone  = Kernel::System::DateTime->ZnunyTimeZoneGet();
         my $DateTimeObject = $Kernel::OM->Create(
             'Kernel::System::DateTime',
             ObjectParams => {
                 String   => $Data{Config}->{TicketCreateTime},
-                TimeZone => $OTRSTimeZone,
+                TimeZone => $ZnunyTimeZone,
             }
         );
 

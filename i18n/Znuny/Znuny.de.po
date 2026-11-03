@@ -25529,3 +25529,19 @@ msgstr "Falls ein Znuny-Update erforderlich ist, lesen Sie die Dokumentation zum
 msgid "Resets the responsible of a ticket if it was moved to another queue."
 msgstr "Setzt den Verantwortlichen eines TIckets zurück, wenn das Ticket in eine andere Queue verschoben wird."
 
+#. Perl Module: Kernel/System/SysConfig/ValueType/Date.pm
+msgid "System was not able to calculate user Date in ZnunyTimeZone!"
+msgstr "Das Datum des Benutzers konnte in der Znuny-Zeitzone nicht berechnet werden!"
+
+#. Perl Module: Kernel/System/SysConfig/ValueType/DateTime.pm
+msgid "System was not able to calculate user DateTime in ZnunyTimeZone!"
+msgstr "Das Datum und die Uhrzeit des Benutzers konnte in der Znuny-Zeitzone nicht berechnet werden!"
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "This setting is deprecated. Set ZnunyTimeZone instead."
+msgstr "Diese Einstellung ist veraltet. Bitte nutzen Sie stattdessen die Einstellung ZnunyTimeZone."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "If enabled, users that haven't selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) ZnunyTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC."
+msgstr "Wenn aktiviert, werden Benutzer, die bislang noch keine Zeitzone ausgewählt haben, benachrichtigt dies zu tun. Hinweis: Die Benachrichtigung wird nicht angezeigt, wenn (1) der Benutzer noch keine Zeitzone ausgewählt hat und (2) ZnunyTimeZone und UserDefaultTimeZone identisch sind und (3) nicht auf UTC gesetzt sind."
+

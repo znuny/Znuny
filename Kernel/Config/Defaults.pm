@@ -974,7 +974,7 @@ sub LoadDefaults {
     # --------------------------------------------------- #
     # TimeZone
     # (set the OTRS time zone, default is UTC)
-#    $Self->{'OTRSTimeZone'} = 'UTC';
+#    $Self->{'ZnunyTimeZone'} = 'UTC';
 
     # Time*
     # (Used for ticket age, escalation and system unlock calculation)
