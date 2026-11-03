@@ -10,6 +10,7 @@ package Kernel::GenericInterface::Invoker::Ticket::Generic;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::ObjectManager;
 use Kernel::System::VariableCheck qw(:all);
@@ -34,7 +35,7 @@ Invoker that prepares requests and processes responses for ticket-related Generi
 =head2 new()
 
 usually, you want to create an instance of this
-by using Kernel::GenericInterface::Invoker->new();
+by using Kernel::GenericInterface::Invoker-E<gt>new();
 
 =cut
 
@@ -231,12 +232,17 @@ sub HandleResponse {
         };
     }
 
+    # Map legacy OTRS_* tags to canonical ZNUNY_* tags.
+    $Param{Data} = $Self->_NormalizeTags(
+        Data => $Param{Data},
+    );
+
     # Set data and execute functions even in error case.
     RESULT:
     for my $Key ( sort keys %{ $Param{Data} } ) {
 
         my $Success = 1;
-        if ( $Key =~ m{OTRS_TicketDynamicFieldSet_(.*)}xmsi ) {
+        if ( $Key =~ m{ZNUNY_TicketDynamicFieldSet_(.*)}xmsi ) {
             my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
                 Name => $1,
             );
@@ -250,42 +256,42 @@ sub HandleResponse {
                 UserID             => 1,
             );
         }
-        elsif ( $Key eq 'OTRS_TicketTitleUpdate' ) {
+        elsif ( $Key eq 'ZNUNY_TicketTitleUpdate' ) {
             $Success = $TicketObject->TicketTitleUpdate(
                 Title    => $Param{Data}->{$Key},
                 TicketID => $Self->{RequestData}->{Ticket}->{TicketID},
                 UserID   => 1,
             );
         }
-        elsif ( $Key eq 'OTRS_TicketServiceSet' ) {
+        elsif ( $Key eq 'ZNUNY_TicketServiceSet' ) {
             $Success = $TicketObject->TicketServiceSet(
                 Service  => $Param{Data}->{$Key},
                 TicketID => $Self->{RequestData}->{Ticket}->{TicketID},
                 UserID   => 1,
             );
         }
-        elsif ( $Key eq 'OTRS_TicketTypeSet' ) {
+        elsif ( $Key eq 'ZNUNY_TicketTypeSet' ) {
             $Success = $TicketObject->TicketTypeSet(
                 Type     => $Param{Data}->{$Key},
                 TicketID => $Self->{RequestData}->{Ticket}->{TicketID},
                 UserID   => 1,
             );
         }
-        elsif ( $Key eq 'OTRS_TicketQueueSet' ) {
+        elsif ( $Key eq 'ZNUNY_TicketQueueSet' ) {
             $Success = $TicketObject->TicketQueueSet(
                 Queue    => $Param{Data}->{$Key},
                 TicketID => $Self->{RequestData}->{Ticket}->{TicketID},
                 UserID   => 1,
             );
         }
-        elsif ( $Key eq 'OTRS_TicketSLASet' ) {
+        elsif ( $Key eq 'ZNUNY_TicketSLASet' ) {
             $Success = $TicketObject->TicketSLASet(
                 SLA      => $Param{Data}->{$Key},
                 TicketID => $Self->{RequestData}->{Ticket}->{TicketID},
                 UserID   => 1,
             );
         }
-        elsif ( $Key eq 'OTRS_TicketCustomerSet' ) {
+        elsif ( $Key eq 'ZNUNY_TicketCustomerSet' ) {
             my @Value = split /;/, $Param{Data}->{$Key};
 
             $Success = $TicketObject->TicketCustomerSet(
@@ -295,35 +301,35 @@ sub HandleResponse {
                 UserID   => 1,
             );
         }
-        elsif ( $Key eq 'OTRS_TicketStateSet' ) {
+        elsif ( $Key eq 'ZNUNY_TicketStateSet' ) {
             $Success = $TicketObject->TicketStateSet(
                 State    => $Param{Data}->{$Key},
                 TicketID => $Self->{RequestData}->{Ticket}->{TicketID},
                 UserID   => 1,
             );
         }
-        elsif ( $Key eq 'OTRS_TicketOwnerSet' ) {
+        elsif ( $Key eq 'ZNUNY_TicketOwnerSet' ) {
             $Success = $TicketObject->TicketOwnerSet(
                 TicketID => $Self->{RequestData}->{Ticket}->{TicketID},
                 NewUser  => $Param{Data}->{$Key},
                 UserID   => 1,
             );
         }
-        elsif ( $Key eq 'OTRS_TicketResponsibleSet' ) {
+        elsif ( $Key eq 'ZNUNY_TicketResponsibleSet' ) {
             $Success = $TicketObject->TicketResponsibleSet(
                 TicketID => $Self->{RequestData}->{Ticket}->{TicketID},
                 NewUser  => $Param{Data}->{$Key},
                 UserID   => 1,
             );
         }
-        elsif ( $Key eq 'OTRS_TicketPrioritySet' ) {
+        elsif ( $Key eq 'ZNUNY_TicketPrioritySet' ) {
             $Success = $TicketObject->TicketPrioritySet(
                 TicketID => $Self->{RequestData}->{Ticket}->{TicketID},
                 Priority => $Param{Data}->{$Key},
                 UserID   => 1,
             );
         }
-        elsif ( $Key eq 'OTRS_TicketHistoryAdd' ) {
+        elsif ( $Key eq 'ZNUNY_TicketHistoryAdd' ) {
             NEEDED:
             for my $Needed (qw(HistoryType)) {
                 next NEEDED if defined $Param{Data}->{$Key}->{$Needed};
@@ -341,7 +347,7 @@ sub HandleResponse {
                 CreateUserID => 1,
             );
         }
-        elsif ( $Key eq 'OTRS_TicketArticleAdd' ) {
+        elsif ( $Key eq 'ZNUNY_TicketArticleAdd' ) {
             NEEDED:
             for my $Needed (qw(Subject Body)) {
                 next NEEDED if defined $Param{Data}->{$Key}->{$Needed};
@@ -385,12 +391,12 @@ sub HandleResponse {
                 %{ $Param{Data}->{$Key} },
             );
         }
-        elsif ( $Key eq 'OTRS_TicketCreate' ) {
+        elsif ( $Key eq 'ZNUNY_TicketCreate' ) {
             $Success = $TicketObject->TicketCreate(
                 %{ $Param{Data}->{$Key} },
             );
         }
-        elsif ( $Key eq 'OTRS_AsynchronousInvokerExecution' ) {
+        elsif ( $Key eq 'ZNUNY_AsynchronousInvokerExecution' ) {
             if ( !IsArrayRefWithData( $Param{Data}->{$Key} ) ) {
                 return $Self->{DebuggerObject}->Error(
                     Summary =>
@@ -428,7 +434,7 @@ sub HandleResponse {
 
             $Success = 1;
         }
-        elsif ( $Key eq 'OTRS_TicketArticleCreateEvent' ) {
+        elsif ( $Key eq 'ZNUNY_TicketArticleCreateEvent' ) {
             $Self->EventHandlerInit(
                 Config => 'Ticket::EventModulePost',
             );
@@ -496,6 +502,45 @@ sub HandleError {
         ResponseSuccess => 0,
         Data            => $Param{Data},
     );
+}
+
+=head2 _NormalizeTags()
+
+Normalize response tags by mapping legacy OTRS_* to canonical ZNUNY_*.
+When both spellings are present, the ZNUNY_* value is kept.
+
+=cut
+
+sub _NormalizeTags {
+    my ( $Self, %Param ) = @_;
+
+    my $Data = $Param{Data};
+
+    return $Data if !IsHashRefWithData($Data);
+
+    my %Normalized;
+
+    KEY:
+    for my $Key ( sort keys %{$Data} ) {
+
+        if ( $Key =~ m{\A(?:OTRS|ZNUNY)_(.*)}i ) {
+            my $CanonicalKey = 'ZNUNY_' . $1;
+
+            # Prefer an existing ZNUNY_* value over a mapped OTRS_* value.
+            if ( $Key =~ m{\AZNUNY_}i ) {
+                $Normalized{$CanonicalKey} = $Data->{$Key};
+            }
+            else {
+                $Normalized{$CanonicalKey} //= $Data->{$Key};
+            }
+
+            next KEY;
+        }
+
+        $Normalized{$Key} = $Data->{$Key};
+    }
+
+    return \%Normalized;
 }
 
 1;
