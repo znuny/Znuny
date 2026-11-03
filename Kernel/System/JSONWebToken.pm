@@ -10,6 +10,7 @@ package Kernel::System::JSONWebToken;
 
 use strict;
 use warnings;
+use utf8;
 
 our @ObjectDependencies = (
     'Kernel::System::Log',
@@ -195,7 +196,7 @@ sub Encode {
             }
 
             # Remove unknown placeholders.
-            $DataValue =~ s{<OTRS_.*?>}{}g;
+            $DataValue =~ s{<(?:OTRS|ZNUNY)_.*?>}{}g;
 
             $Data->{$DataKey} = $DataValue;
         }
