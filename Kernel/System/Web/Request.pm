@@ -410,6 +410,7 @@ set a cookie
         Path    => 'otrs/',     # optional, only allow cookie for given path
         Secure  => 1,           # optional, set secure attribute to disable cookie on HTTP (HTTPS only)
         HTTPOnly => 1,          # optional, sets HttpOnly attribute of cookie to prevent access via JavaScript
+        SameSite => 'None',     # optional, Strict, Lax or None; None is emitted only together with Secure
     );
 
 =cut
@@ -419,14 +420,37 @@ sub SetCookie {
 
     $Param{Path} ||= '';
 
-    return $Self->{Query}->cookie(
+    # Bundled CGI::Cookie accepts only Strict and Lax. SameSite=None is appended
+    # below. Browsers drop SameSite=None unless the cookie is also Secure.
+    my $SameSite       = ucfirst lc( $Param{SameSite} || '' );
+    my $SameSiteForCGI = '';
+
+    if ( $SameSite eq 'Lax' || $SameSite eq 'Strict' ) {
+        $SameSiteForCGI = $SameSite;
+    }
+    elsif ( $SameSite ne 'None' || !$Param{Secure} ) {
+        $SameSite = '';
+    }
+
+    my $Cookie = $Self->{Query}->cookie(
         -name     => $Param{Key},
         -value    => $Param{Value},
         -expires  => $Param{Expires},
         -secure   => $Param{Secure}   || '',
         -httponly => $Param{HTTPOnly} || '',
+        -samesite => $SameSiteForCGI,
         -path     => '/' . $Param{Path},
     );
+
+    return $Cookie if $SameSite ne 'None';
+    return $Cookie if !$Cookie;
+
+    my $CookieString = "$Cookie";
+    if ( $CookieString !~ m{SameSite=}i ) {
+        $CookieString .= '; SameSite=None';
+    }
+
+    return $CookieString;
 }
 
 =head2 GetCookie()

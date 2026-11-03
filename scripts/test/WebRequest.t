@@ -199,4 +199,61 @@ use Kernel::System::Web::Request;
 
 }
 
+{
+    local %ENV = (
+        REQUEST_METHOD => 'GET',
+        QUERY_STRING   => '',
+    );
+
+    CGI->initialize_globals();
+    my $ParamObject = Kernel::System::Web::Request->new();
+
+    my $NoneSecureCookie = $ParamObject->SetCookie(
+        Key      => 'UserSAMLRequestID',
+        Value    => 'request-id',
+        Secure   => 1,
+        HTTPOnly => 1,
+        SameSite => 'None',
+    );
+    my $NoneSecureCookieString = "$NoneSecureCookie";
+    $Self->True(
+        scalar( $NoneSecureCookieString =~ m{SameSite=None} ),
+        'SetCookie() SameSite=None with Secure includes SameSite=None',
+    );
+    $Self->True(
+        scalar( $NoneSecureCookieString =~ m{\bsecure\b}i ),
+        'SetCookie() SameSite=None with Secure includes secure',
+    );
+
+    my $NoneCookie = $ParamObject->SetCookie(
+        Key      => 'UserSAMLRequestID',
+        Value    => 'request-id',
+        HTTPOnly => 1,
+        SameSite => 'None',
+    );
+    $Self->False(
+        scalar( "$NoneCookie" =~ m{SameSite=}i ),
+        'SetCookie() SameSite=None without Secure omits SameSite',
+    );
+
+    my $LaxCookie = $ParamObject->SetCookie(
+        Key      => 'UserSAMLRequestID',
+        Value    => 'request-id',
+        SameSite => 'Lax',
+    );
+    $Self->True(
+        scalar( "$LaxCookie" =~ m{SameSite=Lax} ),
+        'SetCookie() SameSite=Lax',
+    );
+
+    my $DefaultCookie = $ParamObject->SetCookie(
+        Key   => 'UserSAMLRequestID',
+        Value => 'request-id',
+    );
+    $Self->False(
+        scalar( "$DefaultCookie" =~ m{SameSite=}i ),
+        'SetCookie() without SameSite omits SameSite',
+    );
+}
+
 1;

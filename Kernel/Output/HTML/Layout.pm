@@ -899,6 +899,7 @@ sub Login {
                 Path     => $ConfigObject->Get('ScriptAlias'),
                 Secure   => $CookieSecureAttribute,
                 HTTPOnly => 1,
+                SameSite => 'None',
             );
 
             # Note: This only works here because at this point, no body has been added to $Output.
@@ -4302,6 +4303,7 @@ sub CustomerLogin {
                 Path     => $ConfigObject->Get('ScriptAlias'),
                 Secure   => $CookieSecureAttribute,
                 HTTPOnly => 1,
+                SameSite => 'None',
             );
 
             # Note: This only works here because at this point, no body has been added to $Output.

@@ -154,7 +154,7 @@ sub IsValid {
 
     my $IsValid = $Self->{Assertion}->valid(
         $Self->{Config}->{Issuer},
-        $Param{ExpectedRequestID},
+        $Param{ExpectedSAMLRequestID},
     );
 
     if ( !$IsValid ) {
