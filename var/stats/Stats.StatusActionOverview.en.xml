@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<otrs_stats>
+<znuny_stats>
 <Cache>1</Cache>
 <Description>Monthly overview, which reports status changes per day of a selected month.</Description>
 <Format>CSV</Format>
@@ -16,4 +16,4 @@
 <SumRow>1</SumRow>
 <Title>Changes of status in a monthly overview</Title>
 <Valid>1</Valid>
-</otrs_stats>
+</znuny_stats>

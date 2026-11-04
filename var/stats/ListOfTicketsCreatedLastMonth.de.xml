@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<otrs_stats>
+<znuny_stats>
 <Cache>0</Cache>
 <Description>Liste aller Tickets die im letzten Monat erstellt wurden.
 Sortiert nach Alter.
@@ -33,4 +33,4 @@ HINWEIS: Bitte prüfen Sie den Output der Statistik und deren Konfiguration sorg
 <UseAsXvalue Element="TicketAttributes" Fixed="1">
 </UseAsXvalue>
 <Valid>1</Valid>
-</otrs_stats>
+</znuny_stats>

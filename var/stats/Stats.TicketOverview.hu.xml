@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<otrs_stats>
+<znuny_stats>
 <Cache>0</Cache>
 <Title>Áttekintő a rendszeren lévő összes jegyről</Title>
 <Description>A rendszeren lévő összes jegy jelenlegi állapota időkorlátozások nélkül.</Description>
@@ -20,4 +20,4 @@
 <UseAsXvalue Element="StateIDs" Fixed="1">
 </UseAsXvalue>
 <Valid>1</Valid>
-</otrs_stats>
+</znuny_stats>

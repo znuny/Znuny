@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<otrs_stats>
+<znuny_stats>
 <Cache>1</Cache>
 <Description>Monatsauflistung, in der dargestellt wird, welche Statusveränderung an den jeweiligen Monatstagen geschehen sind.</Description>
 <Format>CSV</Format>
@@ -18,4 +18,4 @@
 <SumRow>1</SumRow>
 <Title>Statusveränderungen in der Monatsübersicht</Title>
 <Valid>1</Valid>
-</otrs_stats>
+</znuny_stats>

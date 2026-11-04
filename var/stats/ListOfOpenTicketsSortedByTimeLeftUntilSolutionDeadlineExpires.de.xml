@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<otrs_stats>
+<znuny_stats>
 <Cache>0</Cache>
 <Description>Ticketliste aller offenen Tickets geordnet nach der noch verbleibenden Zeit bis zum Ablauf der definierten Lösungsfrist.
 
@@ -35,4 +35,4 @@ Konfiguration sorgfältig, ob diese die von Ihnen erwarteten Werte liefert! Änd
 <UseAsXvalue Element="TicketAttributes" Fixed="1">
 </UseAsXvalue>
 <Valid>1</Valid>
-</otrs_stats>
+</znuny_stats>
