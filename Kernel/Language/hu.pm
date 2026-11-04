@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.999363564041368;
+    $Self->{Completeness}        = 0.999363260108246;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5298,13 +5298,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModules.pm
         'Perl Modules' => 'Perl-modulok',
         'Not all required Perl modules are correctly installed.' => 'Nincs minden szükséges Perm-modul megfelelően telepítve.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-        'Perl Modules Audit' => 'Perl-modulok vizsgálata',
-        'CPAN::Audit reported that one or more installed Perl modules have known vulnerabilities. Please note that there might be false positives for distributions patching Perl modules without changing their version number.' =>
-            'A CPAN::Audit azt jelentette, hogy egy vagy több telepített Perl-modul ismert sebezhetőséggel rendelkezik. Ne feledje, hogy lehetnek tévesen jelzett jelentések is azoknál a disztribúcióknál, amelyek úgy foltozzák a Perl-modulokat, hogy nem változtatják meg a verziószámokat.',
-        'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
-            'A CPAN::Audit nem jelentett semmilyen ismert sebezhetőséget a telepített Perl modulokban.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
         'Perl Version' => 'Perl verzió',

@@ -1,4 +1,5 @@
 # 7.5.1 2026-??-??
+ - 2026-11-04 Removed: Console commands Dev::Code::CPANAudit and Dev::Code::CPANUpdate and the support data collector Perl modules audit.
  - 2026-11-03 Changed: Refactored REST transport to support both OTRS and Znuny aliases.
  - 2026-11-03 Added: ZNUNY_* response tag support alongside OTRS_* in GenericInterface invoker Ticket::Generic.
  - 2026-11-03 Changed: Default session cookie names are now ZnunyAgentInterface and ZnunyCustomerInterface. Untouched SysConfig values are migrated on upgrade; legacy OTRS cookie names are still accepted during the transition.

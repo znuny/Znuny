@@ -14118,18 +14118,6 @@ msgstr "펄 모듈"
 msgid "Not all required Perl modules are correctly installed."
 msgstr "필요한 Perl 모듈이 모두 올바르게 설치되지는 않았습니다."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-msgid "Perl Modules Audit"
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-msgid "CPAN::Audit reported that one or more installed Perl modules have known vulnerabilities. Please note that there might be false positives for distributions patching Perl modules without changing their version number."
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-msgid "CPAN::Audit did not report any known vulnerabilities in the installed Perl modules."
-msgstr ""
-
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
 msgid "Perl Version"
 msgstr "펄 버전"

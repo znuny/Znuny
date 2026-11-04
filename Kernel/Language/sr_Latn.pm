@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.855210819411297;
+    $Self->{Completeness}        = 0.855141674625915;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5298,13 +5298,6 @@ sub Data {
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModules.pm
         'Perl Modules' => 'Perl moduli',
         'Not all required Perl modules are correctly installed.' => 'Svi zahtevani Perl moduli nisu korektno instalirani.',
-
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-        'Perl Modules Audit' => 'Sigurnosna provera Perl modula',
-        'CPAN::Audit reported that one or more installed Perl modules have known vulnerabilities. Please note that there might be false positives for distributions patching Perl modules without changing their version number.' =>
-            'CPAN::Audit je detektovao jedan ili više ranjivih Perl modula instaliranih na sistemu. Molimo obratite pažnju da su mogući lažno pozitivni rezultati za distribucije koje osvežavaju Perl module bez promene njihove verzije.',
-        'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
-            'CPAN::Audit nije detektovao ranjive Perl module instalirane na sistemu.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
         'Perl Version' => 'Perl verzija',

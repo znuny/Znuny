@@ -14120,18 +14120,6 @@ msgstr "Модули Perl"
 msgid "Not all required Perl modules are correctly installed."
 msgstr "Не все требуемые модули Perl установлены корректно."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-msgid "Perl Modules Audit"
-msgstr "Аудит модулей Perl"
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-msgid "CPAN::Audit reported that one or more installed Perl modules have known vulnerabilities. Please note that there might be false positives for distributions patching Perl modules without changing their version number."
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-msgid "CPAN::Audit did not report any known vulnerabilities in the installed Perl modules."
-msgstr ""
-
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
 msgid "Perl Version"
 msgstr "Версия Perl"
