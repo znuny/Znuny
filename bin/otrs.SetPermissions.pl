@@ -1,1 +1,0 @@
-znuny.SetPermissions.pl

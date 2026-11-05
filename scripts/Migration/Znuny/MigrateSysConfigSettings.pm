@@ -46,45 +46,6 @@ sub _GetMigrateSysConfigSettings {
     my ( $Self, %Param ) = @_;
 
     my %MigrateSysConfigSettings = (
-        "Loader::Agent::CommonJS###000-Framework" => {
-            UpdateEffectiveValue => {
-                'thirdparty/jscolor-2.4.6/jscolor.js' =>
-                    'thirdparty/jscolor-2.5.2/jscolor.js',
-            },
-        },
-        "Frontend::ToolBarModule###210-Ticket::TicketSearchProfile" => {
-            AddEffectiveValue => {
-                Name => 'SearchTemplate',
-            },
-        },
-        "Frontend::ToolBarModule###220-Ticket::TicketSearchFulltext" => {
-            AddEffectiveValue => {
-                Block => 'ToolBarSearch',
-            },
-        },
-        "Frontend::ToolBarModule###230-CICSearchCustomerID" => {
-            AddEffectiveValue => {
-                Block => 'ToolBarSearch',
-            },
-        },
-        "Frontend::ToolBarModule###240-CICSearchCustomerUser" => {
-            AddEffectiveValue => {
-                Block => 'ToolBarSearch',
-                Name  => 'CustomerUser',
-            },
-        },
-        "Ticket::Frontend::AgentTicketProcess::CustomerIDReadOnly" => {
-            UpdateName => "Ticket::Frontend::AgentTicketProcess###CustomerIDReadOnly",
-        },
-        "Ticket::Frontend::AgentTicketPhone::CustomerIDReadOnly" => {
-            UpdateName => "Ticket::Frontend::AgentTicketPhone###CustomerIDReadOnly",
-        },
-        "Ticket::Frontend::AgentTicketEmail::CustomerIDReadOnly" => {
-            UpdateName => "Ticket::Frontend::AgentTicketEmail###CustomerIDReadOnly",
-        },
-        "Ticket::Frontend::AgentTicketCustomer::CustomerIDReadOnly" => {
-            UpdateName => "Ticket::Frontend::AgentTicketCustomer###CustomerIDReadOnly",
-        },
         SessionName => {
             UpdateEffectiveValue => {
                 OTRSAgentInterface => 'ZnunyAgentInterface',

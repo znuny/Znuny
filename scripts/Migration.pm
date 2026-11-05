@@ -238,11 +238,8 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Base::DatabaseDefaultStorageEngineCheck',
         },
 
-        # 7.3 specific tasks before database migration
-        {
-            Message => 'Phone state settings migration notice',
-            Module  => 'scripts::Migration::Znuny::MigratePhoneStateSettings',
-        },
+        # 7.5 specific tasks before database migration
+        # ...to be added here...
 
         # Base
         {
@@ -262,12 +259,8 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Base::DatabaseCharsetCheck',
         },
 
-        # 7.3 specific tasks after database migration
+        # 7.5 specific tasks after database migration
         # ...to be added here...
-        {
-            Message => 'Additional ticket attribute selection settings migration',
-            Module  => 'scripts::Migration::Znuny::MigrateAdditionalTicketAttributeSelectionSettings',
-        },
 
         # Base tasks after database migration
         {
@@ -295,7 +288,8 @@ sub _TasksGet {
         },
     );
 
-    # 7.3 specific tasks after SysConfig migration
+    # 7.5 specific tasks after SysConfig migration
+    # ...to be added here...
     if ( $ConfigObject->Get('Ticket::ArchiveSystem') ) {
         push @Tasks, {
             Message => 'Remove mention flag from archived tickets',

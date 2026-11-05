@@ -248,7 +248,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     #Navigation #HeaderToolBar .logo-navbar-mobile {
         width: 120px;
         height: 27px;
-        background: url(../img/znuny-logo-black.svg) no-repeat;
+        background: url(../img/logo.svg) no-repeat;
         background-size: auto;
         background-size: contain;
         position: relative;

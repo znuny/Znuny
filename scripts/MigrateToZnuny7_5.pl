@@ -33,7 +33,7 @@ use Getopt::Long;
 
 local $Kernel::OM = Kernel::System::ObjectManager->new(
     'Kernel::System::Log' => {
-        LogPrefix => 'MigrateToZnuny7_3.pl',
+        LogPrefix => 'MigrateToZnuny7_5.pl',
     },
 );
 
@@ -55,7 +55,7 @@ Getopt::Long::GetOptions(
     if ( $Options{Help} ) {
         print <<"EOF";
 
-Migrates Znuny 7.2 to Znuny 7.3.
+Migrates Znuny 7.3 to Znuny 7.5.
 Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
 Copyright (C) 2021 Znuny GmbH, https://znuny.org/
 

@@ -388,7 +388,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         #HeaderToolBar li.logo-navigation-wrapper .logo-navigation {
             width:           120px;
             height:          27px;
-            background:      url(../img/znuny-logo-black.svg) no-repeat;
+            background:      url(../img/logo.svg) no-repeat;
             background-size: contain;
             position:        relative;
             display: flex !important;

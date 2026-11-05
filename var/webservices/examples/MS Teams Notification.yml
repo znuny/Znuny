@@ -3,7 +3,7 @@ Debugger:
   DebugThreshold: debug
   TestMode: '0'
 Description: ''
-FrameworkVersion: 7.3.6
+FrameworkVersion: 7.5.1
 Provider:
   Transport:
     Type: ''
