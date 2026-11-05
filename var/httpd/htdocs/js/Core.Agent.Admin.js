@@ -162,17 +162,45 @@ Core.Agent.Admin = (function (TargetNS) {
 
     /**
     * @private
+    * @name ToggleInvalidTableEntries
+    * @memberof Core.Agent.Admin
+    * @function
+    * @param {jQueryObject} $ValidFilter - The valid filter link.
+    * @description
+    *      Shows or hides all invalid entries in the table and switches the state of the valid filter.
+    */
+    function ToggleInvalidTableEntries($ValidFilter) {
+        $('.Invalid').toggle();
+        $ValidFilter.parent().toggleClass("ValidFilterActive");
+    }
+
+    /**
+    * @private
     * @name InitFilterInvalidTableEntries
     * @memberof Core.Agent.Admin
     * @function
     * @description
     *      If the filter has been activated, this function hides all invalid entries in the table.
+    *      The last state of the filter is stored in the agent's preferences and restored on the next page load.
     */
     TargetNS.InitFilterInvalidTableEntries = function () {
-        $('#ValidFilter').on('click', function() {
-            $('.Invalid').toggle();
-            $('#ValidFilter').parent().toggleClass("ValidFilterActive");
+        var $ValidFilter = $('#ValidFilter');
+
+        if (!$ValidFilter.length) {
+            return;
+        }
+
+        $ValidFilter.on('click', function() {
+            ToggleInvalidTableEntries($ValidFilter);
+            Core.Agent.PreferencesUpdate(
+                'UserAdminHideInvalidEntries',
+                $ValidFilter.parent().hasClass("ValidFilterActive") ? 1 : 0
+            );
         });
+
+        if (parseInt(Core.Config.Get('UserAdminHideInvalidEntries'), 10) === 1) {
+            ToggleInvalidTableEntries($ValidFilter);
+        }
     }
 
     /**

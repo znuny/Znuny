@@ -4115,6 +4115,9 @@
 
                 <!-- Core.UI.AdvancedChart.UpdatePreferences, line diagram dashboard widgets -->
                 <Item>\AGraphWidget.+</Item>
+
+                <!-- Core.Agent.Admin.InitFilterInvalidTableEntries, valid filter of admin overview lists -->
+                <Item>\AUserAdminHideInvalidEntries\z</Item>
             </Array>
         </Value>
     </Setting>

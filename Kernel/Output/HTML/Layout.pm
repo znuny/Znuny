@@ -1927,6 +1927,7 @@ sub Footer {
         InputFieldsActivated          => $ConfigObject->Get('ModernizeFormFields'),
         DatepickerShowWeek            => $ConfigObject->Get('Datepicker::ShowWeek') || 0,
         PendingStateIDs               => \@PendingStateIDs,
+        UserAdminHideInvalidEntries   => $Self->{UserAdminHideInvalidEntries} ? 1 : 0,
 
         'Ticket::Frontend::' . $Self->{Action} => $ConfigObject->Get( 'Ticket::Frontend::' . $Self->{Action} ),
 
