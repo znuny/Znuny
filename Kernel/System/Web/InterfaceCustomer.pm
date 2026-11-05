@@ -213,6 +213,36 @@ sub Run {
     # security check Action Param (replace non-word chars)
     $Param{Action} =~ s/\W//g;
 
+    # Only an explicitly passed RequestedURL is used here (not the query string fallback),
+    # otherwise the redirect could point to the current request again.
+    my $RequestedURLParam      = $ParamObject->GetParam( Param => 'RequestedURL' ) // '';
+    my %BlockedRedirectActions = (
+        Logout       => 1,
+        Login        => 1,
+        LostPassword => 1,
+        PreLogin     => 1,
+    );
+
+    my ($RequestedAction) = $RequestedURLParam =~ m{(?:^|[?;&])Action=(\w+)}xms;
+    $RequestedAction //= '';
+
+    # when no action parameter exists but there is passed
+    # valid session and requested url, redirect to the link
+    if (
+        !$ParamObject->GetParam( Param => 'Action' )
+        && $Param{SessionID}
+        && $RequestedURLParam
+        && !$BlockedRedirectActions{$RequestedAction}
+        && $SessionObject->CheckSessionID( SessionID => $Param{SessionID} )
+        )
+    {
+        print $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Redirect(
+            OP => $RequestedURLParam,
+        );
+
+        return;
+    }
+
     # check request type
     if ( $Param{Action} eq 'PreLogin' ) {
         my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');

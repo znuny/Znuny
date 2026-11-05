@@ -2,6 +2,7 @@
  - 2026-10-29 Fixed: calendar appointment failed to create ticket if relative period was zero. Thanks to @Fawkespami for reporting the issue. [#821](https://github.com/znuny/Znuny/issues/821)
  - 2026-10-20 Fixed: Console command to export/import dynamic field configs used different format than the GUI version.
  - 2026-10-08 Fixed: Uninitialized values in Kernel/System/ACL/DB/ACL.pm
+ - 2026-10-02 Changed: Enabled the use of URL parameter RequestedURL within existing sessions.
  - 2026-09-04 Fixed: Process transition action "DynamicFieldSet" now correctly saves multiple values for all multiselect-type dynamic fields (e.g. ConfigItemMultiselect, WebserviceMultiselect).
 
 # 6.5.26 2026-10-14

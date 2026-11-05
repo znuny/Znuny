@@ -213,18 +213,34 @@ sub Run {
     my $SessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
     my $UserObject    = $Kernel::OM->Get('Kernel::System::User');
 
+    # Only an explicitly passed RequestedURL is used here (not the query string fallback),
+    # otherwise the redirect could point to the current request again.
+    my $RequestedURLParam      = $ParamObject->GetParam( Param => 'RequestedURL' ) // '';
+    my %BlockedRedirectActions = (
+        Logout       => 1,
+        Login        => 1,
+        LostPassword => 1,
+        PreLogin     => 1,
+    );
+
+    my ($RequestedAction) = $RequestedURLParam =~ m{(?:^|[?;&])Action=(\w+)}xms;
+    $RequestedAction //= '';
+
     # when no action parameter exists but there is passed
     # valid session and requested url, redirect to the link
-    if ( !$Param{Action} && $Param{SessionID} && $Param{RequestedURL} ) {
+    if (
+        !$ParamObject->GetParam( Param => 'Action' )
+        && $Param{SessionID}
+        && $RequestedURLParam
+        && !$BlockedRedirectActions{$RequestedAction}
+        && $SessionObject->CheckSessionID( SessionID => $Param{SessionID} )
+        )
+    {
+        print $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Redirect(
+            OP => $RequestedURLParam,
+        );
 
-        # validate session before redirect
-        if ( $SessionObject->CheckSessionID( SessionID => $Param{SessionID} ) ) {
-            print $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Redirect(
-                OP => $Param{RequestedURL},
-            );
-
-            return;
-        }
+        return;
     }
 
     # check request type
