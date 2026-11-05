@@ -16,6 +16,7 @@
  - 2026-10-16 Fixed: Closing the "add draft" dialog via the header X, a click outside the dialog, or Escape left form validation disabled, so the ticket action could be submitted without required fields.
  - 2026-10-13 Fixed: Select drop-downs could render at wrong position when specific position criteria were met.
  - 2026-10-08 Fixed: Uninitialized values in Kernel/System/ACL/DB/ACL.pm
+ - 2026-10-02 Changed: Enabled the use of URL parameter RequestedURL within existing sessions.
  - 2026-09-21 Fixed: "Back" button in mobile view did nothing in ticket details dialog.
  - 2026-09-10 Added: Support for AES encrypted passwords.
  - 2026-09-04 Fixed: Process transition action "DynamicFieldSet" now correctly saves multiple values for all multiselect-type dynamic fields (e.g. ConfigItemMultiselect, WebserviceMultiselect).

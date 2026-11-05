@@ -25,7 +25,7 @@ Requester:
             version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" xmlns:date=\"http://exslt.org/dates-and-times\"
             extension-element-prefixes=\"date\">\r\n    <xsl:output method=\"xml\"
             encoding=\"utf-8\" indent=\"yes\"/>\r\n    <xsl:template match=\"RootElement\">\r\n
-            \       <xsl:copy>\r\n            <username>&lt;OTRS_CONFIG_ProductName&gt;</username>\r\n
+            \       <xsl:copy>\r\n            <username>&lt;ZNUNY_CONFIG_ProductName&gt;</username>\r\n
             \           <icon_url>https://www.znuny.org/favicon.ico</icon_url>\r\n
             \           <channel>@<xsl:value-of select=\"//Recipient/MattermostUsername\"
             /></channel>\r\n            <text>A new ticket has been created in queue&#x20;**<xsl:value-of
