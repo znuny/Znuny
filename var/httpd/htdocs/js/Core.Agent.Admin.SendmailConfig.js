@@ -20,7 +20,6 @@ Znuny.Form.Input = Znuny.Form.Input || {};
 /**
  * @namespace Core.Agent.Admin.SendmailConfig
  * @memberof Core.Agent.Admin
- * @author OTRS AG
  * @description
  *      This namespace contains the special module functions for MultiSendmail module.
  */
