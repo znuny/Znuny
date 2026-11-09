@@ -4685,4 +4685,13 @@
             </Array>
         </Value>
     </Setting>
+
+    <!-- TemplateGenerator -->
+    <Setting Name="TemplateGenerator::EmptyValueReplacement" Required="1" Valid="1">
+        <Description Translatable="1">What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder.</Description>
+        <Navigation>Core::Ticket::Templates</Navigation>
+        <Value>
+            <Item ValueType="String">-</Item>
+        </Value>
+    </Setting>
 </otrs_config>

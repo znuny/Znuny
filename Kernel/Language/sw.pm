@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%m/%d/%Y';
     $Self->{DateInputFormat}     = '%m/%d/%Y';
     $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
-    $Self->{Completeness}        = 0.422795288124801;
+    $Self->{Completeness}        = 0.422887155817285;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -8179,6 +8179,8 @@ Mfano:
             '',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             '',
+        'What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder.' =>
+            'Cha kutumia badala ya thamani isiyofafanuliwa inapoingizwa kwenye kiolezo kwa kutumia kishika nafasi cha ZNUNY_.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'isiyo halali kwa muda mfupi',

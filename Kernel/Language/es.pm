@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.571474052849411;
+    $Self->{Completeness}        = 0.571542256883654;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8187,6 +8187,8 @@ El control del acceso adicional para demostrar o no demostrar éste enlace puede
             '',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             '',
+        'What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder.' =>
+            'Con qué sustituir un valor no definido al insertarlo en una plantilla mediante un marcador de posición ZNUNY_.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'temporalmente-no-válido',

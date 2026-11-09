@@ -25533,3 +25533,7 @@ msgstr "Diese Einstellung ist veraltet. Bitte nutzen Sie stattdessen die Einstel
 msgid "If enabled, users that haven't selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) ZnunyTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC."
 msgstr "Wenn aktiviert, werden Benutzer, die bislang noch keine Zeitzone ausgewählt haben, benachrichtigt dies zu tun. Hinweis: Die Benachrichtigung wird nicht angezeigt, wenn (1) der Benutzer noch keine Zeitzone ausgewählt hat und (2) ZnunyTimeZone und UserDefaultTimeZone identisch sind und (3) nicht auf UTC gesetzt sind."
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder."
+msgstr "Text, der anstelle eines undefinierten Wertes für einen ZNUNY_-Platzhalter eingefügt wird."
+

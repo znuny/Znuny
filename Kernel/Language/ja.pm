@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%m/%d';
     $Self->{DateInputFormat}     = '%Y/%m/%d';
     $Self->{DateInputFormatLong} = '%Y/%m/%d - %T';
-    $Self->{Completeness}        = 0.656638013371538;
+    $Self->{Completeness}        = 0.656692662740729;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8189,6 +8189,8 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             '',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             '',
+        'What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder.' =>
+            'ZNUNY_ プレースホルダーを使ってテンプレートへ挿入するとき、未定義の値を何に置き換えるか。',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '無効-暫定',

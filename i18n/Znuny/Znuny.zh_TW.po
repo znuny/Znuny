@@ -25511,3 +25511,7 @@ msgstr ""
 msgid "If enabled, users that haven't selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) ZnunyTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC."
 msgstr ""
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder."
+msgstr "使用 ZNUNY_ 佔位符將未定義值插入範本時，要用什麼取代該值。"
+

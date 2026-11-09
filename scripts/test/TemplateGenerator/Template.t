@@ -400,6 +400,27 @@ my @Tests = (
         }
     },
     {
+        Name         => 'Tag <OTRS_AGENT_From/To/Cc/SUBJECT>',
+        TemplateText =>
+            'Test: <OTRS_AGENT_From>|<OTRS_AGENT_To>|<OTRS_AGENT_Cc>|<OTRS_AGENT_SUBJECT>',
+        TicketID       => $TicketID,
+        EmptyValue     => '😊',
+        TemplateResult => {
+
+            # Template() only copies Subject/Body into DataAgent, so From/To/Cc stay empty.
+            Note      => "Test: 😊|😊|😊|$LastAgentSubject",
+            Supported => {
+                $Articles[0]->{ArticleID} => "Test: 😊|😊|😊|$Articles[0]->{Subject}",
+                $Articles[1]->{ArticleID} => "Test: 😊|😊|😊|$Articles[1]->{Subject}",
+                $Articles[2]->{ArticleID} => "Test: 😊|😊|😊|$Articles[2]->{Subject}",
+                $Articles[3]->{ArticleID} => 'Test: 😊|😊|😊|😊',
+                $Articles[4]->{ArticleID} => 'Test: 😊|😊|😊|😊',
+                $Articles[5]->{ArticleID} => 'Test: 😊|😊|😊|😊',
+            },
+            Unsupported => 'Test: 😊|😊|😊|😊',
+        }
+    },
+    {
         Name           => 'Tag <OTRS_AGENT_SUBJECT[9]>',
         TemplateText   => 'Test: <OTRS_AGENT_SUBJECT[9]>',
         TicketID       => $TicketID,
@@ -681,10 +702,26 @@ push @Types, ( 'Email,PhoneCall', 'Answer,Forward', );
 TEST:
 my $OldRichTextSetting = 42;    # random non-boolean value
 for my $Test (@Tests) {
+    my $OldEmptyValue;
 
     # Get a $TemplateGeneratorObject with appropriate RichText setting
     # Only change the settings if different from last time through the loop
     $Test->{RichText} //= 0;    # Make sure it's defined
+
+    if ( $Test->{EmptyValue} ) {
+
+        # Change only if explicityly requested and restore it after the test
+        $OldEmptyValue = $ConfigObject->Get('TemplateGenerator::EmptyValueReplacement');
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'TemplateGenerator::EmptyValueReplacement',
+            Value => $Test->{EmptyValue}
+        );
+        $Kernel::OM->ObjectsDiscard(
+            Objects => ['Kernel::System::TemplateGenerator']
+        );
+
+    }
     if ( $OldRichTextSetting != $Test->{RichText} ) {
         $Kernel::OM->ObjectsDiscard(
             Objects => ['Kernel::System::TemplateGenerator']
@@ -768,6 +805,18 @@ for my $Test (@Tests) {
                 }
             }
         }
+    }
+
+    # Restore previous value
+    if ( $Test->{EmptyValue} ) {
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'TemplateGenerator::EmptyValueReplacement',
+            Value => $OldEmptyValue
+        );
+        $Kernel::OM->ObjectsDiscard(
+            Objects => ['Kernel::System::TemplateGenerator']
+        );
     }
 }
 

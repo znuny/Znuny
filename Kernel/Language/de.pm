@@ -8174,6 +8174,8 @@ sub Data {
             'Namen von Systemkonfigurationsoptionen mit E-Mail-Adressen, die ebenfalls in einem Profil für ausgehende E-Mails auswählbar sein sollen (neben Systemadressen).',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             'Liste der Sitzungen (Schlüssel), die durch die Unteraktion UpdateAJAX des Frontend-Moduls AgentSession aktualisiert werden dürfen. Dabei handelt es sich um reguläre Ausdrücke.',
+        'What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder.' =>
+            'Text, der anstelle eines undefinierten Wertes für einen ZNUNY_-Platzhalter eingefügt wird.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'ungültig-temporär',

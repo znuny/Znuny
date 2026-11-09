@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.999363260108246;
+    $Self->{Completeness}        = 0.999363361451536;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8179,6 +8179,8 @@ sub Data {
             'E-mail-címekkel rendelkező rendszerbeállítási lehetőségek nevei, amelyek szintén kiválaszthatók egy kimenő e-mail-profilhoz (a rendszercímeken kívül).',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             'Azon munkamenetek (kulcsok) listája, amelyeknél engedélyezett, hogy az ügyintéző munkamenetei előtétprogram-modul UpdateAJAX alművelete frissítse azokat. Ezek reguláris kifejezések.',
+        'What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder.' =>
+            'Mivel kell helyettesíteni egy nem definiált értéket, amikor az egy sablonba kerül beszúrásra egy ZNUNY_ helykitöltő használatával.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'átmenetileg érvénytelen',

@@ -60,12 +60,14 @@ Don't use the constructor directly, use the ObjectManager instead:
 
 sub new {
     my ( $Type, %Param ) = @_;
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     # allocate new hash for object
     my $Self = {};
     bless( $Self, $Type );
 
-    $Self->{RichText} = $Kernel::OM->Get('Kernel::Config')->Get('Frontend::RichText');
+    $Self->{RichText}           = $ConfigObject->Get('Frontend::RichText');
+    $Self->{DefaultReplacement} = $ConfigObject->Get('TemplateGenerator::EmptyValueReplacement');
 
     return $Self;
 }
@@ -1282,7 +1284,7 @@ sub _FindRecipientTimeZone {
 sub _ReplaceDynamicField {
     my ( $Self, $LanguageObject, $Ticket, $RecipientTimeZone, $Name ) = @_;
 
-    my $Result = '-';
+    my $Result = $Self->{DefaultReplacement};
     my $ValueRequested;
     if ( $Name =~ /(.*)_value$/i ) {
         $Name           = $1;
@@ -1293,13 +1295,12 @@ sub _ReplaceDynamicField {
     # real one
     my $DynamicFieldConfig = $Self->_GetTicketDynamicFields()->{$Name};
 
-    return '-' if !defined $DynamicFieldConfig;    # should not normally happen but seems to happen in some test cases
+    return $Result if !defined $DynamicFieldConfig;  # should not normally happen but seems to happen in some test cases
 
     my $FullName    = "DynamicField_$DynamicFieldConfig->{Name}";
     my $TicketValue = $Ticket->{$FullName};
 
-    # TODO: empty string or '-'?
-    return '-' if !defined $TicketValue;           # Return if nothing set in current ticket
+    return $Result if !defined $TicketValue;         # Return if nothing set in current ticket
 
     # We'll need this condition a couple of times
     my $IsDateTimeWithZone = $RecipientTimeZone && $DynamicFieldConfig->{FieldType} eq 'DateTime';
@@ -1417,7 +1418,7 @@ sub _DefaultReplacements {
         # in Unix timestamp format
         return sub {
 
-            return '-' if !defined $Ticket->{$TicketKey};
+            return $Self->{DefaultReplacement} if !defined $Ticket->{$TicketKey};
 
             my $DateTime = $Kernel::OM->Create(
                 'Kernel::System::DateTime',
@@ -1437,8 +1438,8 @@ sub _DefaultReplacements {
         # necessary
         return sub {
 
-            return '-'                   if !defined $Ticket->{$TicketKey};
-            return $Ticket->{$TicketKey} if !$RecipientTimeZone;
+            return $Self->{DefaultReplacement} if !defined $Ticket->{$TicketKey};
+            return $Ticket->{$TicketKey}       if !$RecipientTimeZone;
 
             my $DateTime = $Kernel::OM->Create(
                 'Kernel::System::DateTime',
@@ -1456,7 +1457,7 @@ sub _DefaultReplacements {
 
         # Take a value in seconds and convert it to human readable form
         return sub {
-            return '-' if !defined $Ticket->{$TicketKey};
+            return $Self->{DefaultReplacement} if !defined $Ticket->{$TicketKey};
             return $Callbacks->{ReadableTimeInSeconds}->( $Ticket->{$TicketKey} );
         }
     };
@@ -1466,7 +1467,7 @@ sub _DefaultReplacements {
 
         # Simply translate a value, usually an enum
         return sub {
-            return '-' if !defined $Ticket->{$TicketKey};
+            return $Self->{DefaultReplacement} if !defined $Ticket->{$TicketKey};
             return $Callbacks->{Translated}->( $Ticket->{$TicketKey} );
         }
     };
@@ -1506,9 +1507,9 @@ sub _DefaultReplacements {
                     return $Recipient->{Realname} if defined $Recipient->{Realname};
 
                     my $From = $Param->{Data}{ReplyTo} || $Param->{Data}{To};
-                    return '-' if !$From;
+                    return $Self->{DefaultReplacement} if !$From;
                     my @Addresses = Mail::Address->parse($From);
-                    return '-' if !@Addresses;
+                    return $Self->{DefaultReplacement} if !@Addresses;
                     return $Addresses[0]->name() // $Addresses[0]->address();
                 },
                 map {
@@ -1559,7 +1560,7 @@ sub _DefaultReplacements {
                 # OTRS_NOTIFICATION_RECIPIENT_QUEUE which hopefully nobody will
                 # use but it should do no harm.
                 queue => sub {
-                    return $Ticket->{Queue} // '-';
+                    return $Ticket->{Queue} // $Self->{DefaultReplacement};
                 },
                 comment => sub {
                     my ($Lines) = @_;
@@ -1669,7 +1670,7 @@ sub _DefaultReplacements {
         $ReplaceSpec->{Hash} = $KeysToLower->( $ReplaceSpec->{Hash} );
 
         # Add a dummy Dynamic section if not present to catch invalid tags
-        $ReplaceSpec->{Dynamic} //= sub {'-'};
+        $ReplaceSpec->{Dynamic} //= sub { $Self->{DefaultReplacement} };
     }
 
     # Set up some aliases for tag readability
@@ -1812,7 +1813,7 @@ sub _Replacements {
                 my ( $Where, $Lines ) = @_;
                 my $SafeLines = $Lines || 2500;
                 my $RichText  = !!$Param{RichText};
-                return '-' if !defined $Param{$Where} || !defined $Param{$Where}{Body};
+                return $Self->{DefaultReplacement} if !defined $Param{$Where} || !defined $Param{$Where}{Body};
 
                 my ($Snippet) = $Param{$Where}{Body} =~ / ( (?: .*\n? ){0,$SafeLines} ) /x;
                 return ( '', $RichText ) if !defined $Snippet;
@@ -1852,7 +1853,7 @@ sub _Replacements {
             # Get a subject line, optionally cut down to $Chars characters
             GetSubjectSnippet => sub {
                 my ( $Where, $Chars ) = @_;
-                return '-' if !$Param{$Where} || !defined $Param{$Where}{Subject};
+                return $Self->{DefaultReplacement} if !$Param{$Where} || !defined $Param{$Where}{Subject};
 
                 my $Subject = $TicketObject->TicketSubjectClean(
                     TicketNumber => $Ticket{TicketNumber},
@@ -2035,8 +2036,8 @@ sub _Replacements {
             $Value = $Self->_MaskSensitiveValue( $Elem, $Value );
         }
         elsif( $Spec->{Hash} && $Spec->{Hash}{$Elem} ) {
-            # Just substitute the value found in hash or '-'
-            $Value = $Spec->{Hash}{$Elem} // '-';
+            # Just substitute the value found in hash or the default from Sysconfig
+            $Value = $Spec->{Hash}{$Elem} // $Self->{DefaultReplacement};
             $Value = $Self->_MaskSensitiveValue( $Elem, $Value );
         }
         elsif( $Spec->{Dynamic} ) {
@@ -2048,7 +2049,7 @@ sub _Replacements {
                 Priority => 'error',
                 Message  => "BUG: unmatched key: '$Prefix' / '$Elem' in '$OrigText'",
             );
-            $Value = '-';
+            $Value = $Self->{DefaultReplacement};
         }
         if( $Param{RichText} && !$SkipHTMLFilter ) {
             $Value = $HTMLUtilsObject->ToHTMLReplaceWithParagraphs(
@@ -2098,7 +2099,7 @@ sub _RemoveUnSupportedTag {
 
     # Cleanup all not supported tags with and without number, e.g. OTRS_CUSTOMER_BODY and OTRS_CUSTOMER_BODY[n].
     my $NotSupportedTag = $Start . "(?:" . join( "|", @{ $Param{ListOfUnSupportedTag} } ) . ")(\\[.*?\\])?" . $End;
-    $Param{Text} =~ s/$NotSupportedTag/-/gi;
+    $Param{Text} =~ s/$NotSupportedTag/$Self->{DefaultReplacement}/gi;
 
     return $Param{Text};
 }

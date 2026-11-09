@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.59360076408787;
+    $Self->{Completeness}        = 0.593665446442782;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -8179,6 +8179,8 @@ sub Data {
             '',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             '',
+        'What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder.' =>
+            'هنگام درج مقدار تعریف‌نشده در قالب با استفاده از جای‌نگهدار ZNUNY_، آن مقدار با چه چیزی جایگزین شود.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'موقتا غیر معتبر',
