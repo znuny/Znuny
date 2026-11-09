@@ -33,7 +33,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     background: var(--gray-light);
 }*/
 
-.Cluster ul li:hover > span > i {
+.Cluster ul li:hover > span > i.fa-caret-down {
     transform: rotate(180deg);
 }
 
@@ -76,7 +76,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         max-height: 2000px;
     }
 
-    .Cluster .ClusterLink i {
+    .Cluster .ClusterLink i.fa-caret-down {
         transition: transform 0.2s ease;
     }
 
@@ -84,11 +84,11 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         disable hover caret behavior as it misbehaves on mobile view - use Expanded class
         (toggled by the same tap that shows/hides the list) that should rotate it instead
     */
-    .Cluster ul li:hover > span > i {
+    .Cluster ul li:hover > span > i.fa-caret-down {
         transform: none;
     }
 
-    .Cluster ul li.Expanded > span > i {
+    .Cluster ul li.Expanded > span > i.fa-caret-down {
         transform: rotate(180deg);
     }
 }
@@ -150,8 +150,12 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     width: 100%;
 }
 
-.Cluster a.ClusterLink i {
+.Cluster a.ClusterLink i.fa-caret-down {
     margin-left: 3px;
+}
+
+.Cluster .ClusterMenuIcon {
+    margin-right: 5px;
 }
 
 /*.Cluster ul ul li:first-child a {

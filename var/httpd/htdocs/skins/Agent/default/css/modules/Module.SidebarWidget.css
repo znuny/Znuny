@@ -5,15 +5,17 @@ This software comes with ABSOLUTELY NO WARRANTY. For details, see
 the enclosed file COPYING for license information (AGPL). If you
 did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 */
+.modSidebarWidget {
+  margin-bottom: var(--margin-sm);
+}
+.modSidebarWidget:last-child {
+  margin-bottom: 0;
+}
 .modSidebarWidget > .inner {
   border: var(--border-width) var(--border-solid) var(--border-color);
   border-radius: var(--border-radius-sm);
   background-color: var(--background-secondary-color);
-  margin-bottom: var(--margin-sm);
   overflow: hidden;
-}
-.modSidebarWidget > .inner:last-child {
-  margin-bottom: 0;
 }
 .modSidebarWidget > .inner .sidebarWidgetTitle {
   background-color: #FAFAFB;

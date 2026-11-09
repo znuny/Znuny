@@ -2865,6 +2865,7 @@ sub Data {
         'Save filter settings as default' => 'Sla filter op als standaard',
         'Event Type' => 'Gebeurtenis type',
         'Save as default' => 'Opslaan als standaard',
+        'Back' => 'Terug',
         'Change Queue' => 'Wijzig wachtrij',
         'Add Filter' => 'Nieuw filter',
         'Set' => 'Nieuwe waarden',
@@ -2925,7 +2926,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => '',
-        'Back' => 'Terug',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -4691,7 +4691,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => '',
-        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Markeer',
@@ -9151,6 +9150,7 @@ Het Helpdesk Team
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Markeer als spam',
         'Mark as seen' => '',
+        'Mark as unseen' => '',
         'Mark this ticket as junk!' => 'Markeer het ticket als junk!',
         'Mark ticket as seen' => '',
         'Mark ticket as unseen' => '',

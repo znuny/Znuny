@@ -2867,6 +2867,7 @@ sub Data {
         'Save filter settings as default' => 'Sauvegarder les paramètres des filtres en tant que paramètres par défaut',
         'Event Type' => '',
         'Save as default' => '',
+        'Back' => 'Retour',
         'Change Queue' => 'Changer de file',
         'Add Filter' => 'Ajouter un filtre',
         'Set' => 'Définir',
@@ -2927,7 +2928,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => '',
-        'Back' => 'Retour',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -4693,7 +4693,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => '',
-        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Marquer',
@@ -9142,6 +9141,7 @@ Thanks for your help!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Marquer comme pourriel!',
         'Mark as seen' => '',
+        'Mark as unseen' => '',
         'Mark this ticket as junk!' => 'Marquer cette demande comme pourriel!',
         'Mark ticket as seen' => '',
         'Mark ticket as unseen' => '',

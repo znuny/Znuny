@@ -83,7 +83,8 @@ sub GetConfig {
     my %MenuItem = (
         ItemType    => 'Link',
         Description => Translatable('Mark article as unseen'),
-        Name        => Translatable('Mark as unseen'),
+        Name        => '',
+        Icon        => 'fa fa-star',
         Class       => 'AgentTicketMarkSeenUnseenArticle',
         Link        =>
             "Action=AgentTicketMarkSeenUnseen;Subaction=Unseen;TicketID=$Param{Ticket}->{TicketID};ArticleID=$Param{Article}->{ArticleID}",

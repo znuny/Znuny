@@ -2859,6 +2859,7 @@ sub Data {
         'Save filter settings as default' => 'Simpan tetapan penapis sebagai piawai.',
         'Event Type' => 'Jenis Acara',
         'Save as default' => 'Simpan sebagai lalai',
+        'Back' => 'Kebelakang',
         'Change Queue' => 'Ubah Barisan',
         'Add Filter' => 'Tambah Tapisan',
         'Set' => 'Tetapkan',
@@ -2919,7 +2920,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => '',
-        'Back' => 'Kebelakang',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -4685,7 +4685,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => '',
-        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Tanda',
@@ -9148,6 +9147,7 @@ Kumpulan MejaBantuan Anda
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Tanda sebagai Spam!',
         'Mark as seen' => '',
+        'Mark as unseen' => '',
         'Mark this ticket as junk!' => 'Tanda tiket ini sebagai junk!',
         'Mark ticket as seen' => '',
         'Mark ticket as unseen' => '',

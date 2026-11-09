@@ -11,6 +11,7 @@ package Kernel::Output::HTML::ArticleAction::AgentTicketMessageLog;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::Language qw(Translatable);
 
@@ -110,7 +111,9 @@ sub GetConfig {
         ItemType    => 'Link',
         Description => Translatable('View message log details for this article'),
         Name        => Translatable('Message Log'),
-        Link        =>
+
+        # Icon        => 'fa fa-list',
+        Link =>
             "Action=AdminCommunicationLog;Subaction=Zoom;CommunicationID=$CommunicationID;ObjectLogID=$ObjectLogID"
     );
 

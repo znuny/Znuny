@@ -8401,7 +8401,7 @@ msgstr "Załaduj zablokowaną treść."
 msgid "Home"
 msgstr "Strona startowa"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "Back"
 msgstr "Powrót"
 
@@ -24138,7 +24138,7 @@ msgstr "Oznacz zgłoszenia jako nieprzeczytane"
 msgid "Mark article as unseen"
 msgstr "Oznacz artykuł jako nieprzeczytany"
 
-#. Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+#. SysConfig
 msgid "Mark as unseen"
 msgstr "Nieprzeczytany"
 

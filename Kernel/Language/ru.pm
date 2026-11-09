@@ -2871,6 +2871,7 @@ sub Data {
         'Save filter settings as default' => 'Сохранить условия фильтра для показа по умолчанию',
         'Event Type' => 'Тип события',
         'Save as default' => 'Сохранить, как значение по умолчанию',
+        'Back' => 'Назад',
         'Change Queue' => 'Сменить очередь',
         'Add Filter' => 'Добавить фильтр',
         'Set' => 'Установить',
@@ -2931,7 +2932,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => 'Домой',
-        'Back' => 'Назад',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -4697,7 +4697,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => 'Пометить сообщение как непрочитанное',
-        'Mark as unseen' => 'Пометить как непрочитанное',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Пометить',
@@ -9157,6 +9156,7 @@ Thanks for your help!
         'Management of ticket attribute relations.' => 'Управление связями свойств заявки.',
         'Mark as Spam!' => 'Пометить как спам!',
         'Mark as seen' => '',
+        'Mark as unseen' => 'Пометить как непрочитанное',
         'Mark this ticket as junk!' => 'Пометить эту заявку как мусор!',
         'Mark ticket as seen' => 'Пометить заявку как прочитанную',
         'Mark ticket as unseen' => 'Пометить заявку как непрочитанную',

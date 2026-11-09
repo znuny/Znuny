@@ -2862,6 +2862,7 @@ sub Data {
         'Save filter settings as default' => 'Hifadhi mipangilio ya kichuja kuwa chaguo-msingi',
         'Event Type' => 'Aina ya tukio',
         'Save as default' => 'Hifadhi kama chaguo-msingi',
+        'Back' => 'Nyuma',
         'Change Queue' => 'Badili foleni',
         'Add Filter' => 'Ongeza kichuja',
         'Set' => 'Weka',
@@ -2922,7 +2923,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => '',
-        'Back' => 'Nyuma',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -4688,7 +4688,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => '',
-        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Alama',
@@ -9140,6 +9139,7 @@ Thanks for your help!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Weka alama kama barua taka',
         'Mark as seen' => '',
+        'Mark as unseen' => '',
         'Mark this ticket as junk!' => '',
         'Mark ticket as seen' => '',
         'Mark ticket as unseen' => '',

@@ -8376,7 +8376,7 @@ msgstr "Blokkolt tartalom betöltése."
 msgid "Home"
 msgstr "Kezdőoldal"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "Back"
 msgstr "Vissza"
 
@@ -24114,7 +24114,7 @@ msgstr "Jegyek megjelölése olvasatlanként"
 msgid "Mark article as unseen"
 msgstr "Bejegyzés megjelölése olvasatlanként"
 
-#. Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+#. SysConfig
 msgid "Mark as unseen"
 msgstr "Megjelölés olvasatlanként"
 

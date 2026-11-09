@@ -10,15 +10,17 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 
 $sidebarWidgetTitleBackgroundColor: #FAFAFB;
 .modSidebarWidget {
+  margin-bottom: var(--margin-sm);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
   > .inner {
     border: var(--border-width) var(--border-solid) var(--border-color);
     border-radius: var(--border-radius-sm);
     background-color: var(--background-secondary-color);
-    margin-bottom: var(--margin-sm);
     overflow: hidden;
-    &:last-child {
-      margin-bottom: 0;
-    }
     .sidebarWidgetTitle {
       background-color: $sidebarWidgetTitleBackgroundColor;
       @include clear();

@@ -2860,6 +2860,7 @@ sub Data {
         'Save filter settings as default' => 'Сачувај подешавања филтера као подразумевана',
         'Event Type' => 'Тип догађаја',
         'Save as default' => 'Сачувај као подразумевано',
+        'Back' => 'Назад',
         'Change Queue' => 'Промени Ред',
         'Add Filter' => 'Додај Филтер',
         'Set' => 'Подеси',
@@ -2920,7 +2921,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => 'Почетна',
-        'Back' => 'Назад',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -4686,7 +4686,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => '',
-        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Означено',
@@ -9146,6 +9145,7 @@ Thanks for your help!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Означи као Спам!',
         'Mark as seen' => '',
+        'Mark as unseen' => '',
         'Mark this ticket as junk!' => 'Означи овај тикет као бесмислен junk!',
         'Mark ticket as seen' => '',
         'Mark ticket as unseen' => '',

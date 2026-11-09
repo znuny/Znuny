@@ -2862,6 +2862,7 @@ sub Data {
         'Save filter settings as default' => 'तयशुदा रूप में निस्पादक की व्यवस्थाऐं सुरक्षित करें',
         'Event Type' => '',
         'Save as default' => '',
+        'Back' => 'वापस',
         'Change Queue' => 'श्रेणी बदलें',
         'Add Filter' => 'निस्पादक जोड़ें',
         'Set' => 'निर्धारित करें',
@@ -2922,7 +2923,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => '',
-        'Back' => 'वापस',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -4688,7 +4688,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => '',
-        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => '',
@@ -9137,6 +9136,7 @@ Thanks for your help!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'अवांछनीय मार्क करें',
         'Mark as seen' => '',
+        'Mark as unseen' => '',
         'Mark this ticket as junk!' => '',
         'Mark ticket as seen' => '',
         'Mark ticket as unseen' => '',

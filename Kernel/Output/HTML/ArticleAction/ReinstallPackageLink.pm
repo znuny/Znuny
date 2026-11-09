@@ -87,8 +87,10 @@ sub GetConfig {
         ItemType    => 'Link',
         Description => Translatable('Re-install Package'),
         Name        => Translatable('Re-install'),
-        Link        => 'Action=AdminPackageManager',
-        Class       => undef,
+
+        # Icon        => 'fa fa-download',
+        Link  => 'Action=AdminPackageManager',
+        Class => undef,
     );
 
     return ( \%MenuItem );

@@ -33,9 +33,25 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
       padding: 5px;
 
       .ClusterLink {
-        i {
+        i.fa-caret-down {
           margin-left: 5px;
         }
+      }
+
+      .ClusterLink.NoClusterName .ClusterMenuIcon {
+        margin-right: 0;
+      }
+
+      .Actions i {
+        font-size: var(--font-size-md);
+      }
+
+      a i.fa-star {
+        color: var(--color-icon-favorite);
+      }
+
+      a i.fa-star-o {
+        color: var(--gray-dark);
       }
     }
 

@@ -2865,6 +2865,7 @@ sub Data {
         'Save filter settings as default' => '',
         'Event Type' => '',
         'Save as default' => '',
+        'Back' => 'Προηγούμενο',
         'Change Queue' => 'Αλλαγή Ουράς',
         'Add Filter' => 'Προσθηκη Φιλτρου',
         'Set' => 'Σετ',
@@ -2925,7 +2926,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => '',
-        'Back' => 'Προηγούμενο',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -4691,7 +4691,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => '',
-        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Επιλογή',
@@ -9140,6 +9139,7 @@ Thanks for your help!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Χαρακτηρισμός ως ανεπυθήμητο!',
         'Mark as seen' => '',
+        'Mark as unseen' => '',
         'Mark this ticket as junk!' => '',
         'Mark ticket as seen' => '',
         'Mark ticket as unseen' => '',

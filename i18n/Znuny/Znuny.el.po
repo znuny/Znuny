@@ -8350,7 +8350,7 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "Back"
 msgstr "Προηγούμενο"
 
@@ -24077,7 +24077,7 @@ msgstr ""
 msgid "Mark article as unseen"
 msgstr ""
 
-#. Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+#. SysConfig
 msgid "Mark as unseen"
 msgstr ""
 

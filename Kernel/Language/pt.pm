@@ -2862,6 +2862,7 @@ sub Data {
         'Save filter settings as default' => 'Guardar definições do filtro como padrão',
         'Event Type' => '',
         'Save as default' => '',
+        'Back' => 'Voltar',
         'Change Queue' => 'Mudar fila',
         'Add Filter' => 'Adicionar filtro',
         'Set' => 'Definir',
@@ -2922,7 +2923,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => '',
-        'Back' => 'Voltar',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -4688,7 +4688,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => '',
-        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Marca',
@@ -9148,6 +9147,7 @@ A sua equipa de Helpdesk
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Marcar como Spam!',
         'Mark as seen' => '',
+        'Mark as unseen' => '',
         'Mark this ticket as junk!' => '',
         'Mark ticket as seen' => '',
         'Mark ticket as unseen' => '',

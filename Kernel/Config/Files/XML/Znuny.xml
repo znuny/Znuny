@@ -304,6 +304,9 @@
                 <Item Key="Target"></Item>
                 <Item Key="PopupType"></Item>
                 <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
+                <Item Key="ClusterNameVisible">1</Item>
+                <!-- <Item Key="ClusterIcon">fa fa-ellipsis-h</Item> -->
+                <Item Key="ClusterIcon"></Item>
                 <Item Key="ClusterPriority">998</Item>
                 <Item Key="Prio">999</Item>
             </Hash>
@@ -323,6 +326,9 @@
                 <Item Key="Target"></Item>
                 <Item Key="PopupType"></Item>
                 <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
+                <Item Key="ClusterNameVisible">1</Item>
+                <!-- <Item Key="ClusterIcon">fa fa-ellipsis-h</Item> -->
+                <Item Key="ClusterIcon"></Item>
                 <Item Key="ClusterPriority">999</Item>
                 <Item Key="Prio">999</Item>
             </Hash>
@@ -3828,14 +3834,15 @@
         <Navigation>Frontend::Agent::View::TicketZoom::MenuModule</Navigation>
         <Value>
             <Hash>
-                <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
-                <Item Key="Name" Translatable="1">Mark as unseen</Item>
+                <Item Key="Module">Kernel::Output::HTML::TicketMenu::MarkSeenUnseen</Item>
+                <Item Key="Name" Translatable="1"></Item>
+                <Item Key="Icon">fa fa-star</Item>
                 <Item Key="Description" Translatable="1">Mark ticket as unseen</Item>
                 <Item Key="Action">AgentTicketMarkSeenUnseen</Item>
                 <Item Key="Link">Action=AgentTicketMarkSeenUnseen;Subaction=Unseen;TicketID=[% Data.TicketID | html %]</Item>
                 <Item Key="Target"></Item>
                 <Item Key="PopupType"></Item>
-                <Item Key="Prio">001</Item>
+                <Item Key="Prio">101</Item>
             </Hash>
         </Value>
     </Setting>
@@ -3844,14 +3851,15 @@
         <Navigation>Frontend::Agent::View::TicketZoom::MenuModule</Navigation>
         <Value>
             <Hash>
-                <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
-                <Item Key="Name" Translatable="1">Mark as seen</Item>
+                <Item Key="Module">Kernel::Output::HTML::TicketMenu::MarkSeenUnseen</Item>
+                <Item Key="Name" Translatable="1"></Item>
+                <Item Key="Icon">fa fa-star-o</Item>
                 <Item Key="Description" Translatable="1">Mark ticket as seen</Item>
                 <Item Key="Action">AgentTicketMarkSeenUnseen</Item>
                 <Item Key="Link">Action=AgentTicketMarkSeenUnseen;Subaction=Seen;TicketID=[% Data.TicketID | html %]</Item>
                 <Item Key="Target"></Item>
                 <Item Key="PopupType"></Item>
-                <Item Key="Prio">002</Item>
+                <Item Key="Prio">102</Item>
             </Hash>
         </Value>
     </Setting>

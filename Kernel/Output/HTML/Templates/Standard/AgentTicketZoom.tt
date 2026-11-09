@@ -86,7 +86,7 @@
                                 <div class="ticketHeaderActions">
                                     <div class="ActionRow Cluster">
                                         <ul class="Actions-Mobile-List">
-                                            <li class="ReturnToPreviousPage">Back</li>
+                                            <li class="ReturnToPreviousPage" title="[% Translate("Back") | html %]" aria-label="[% Translate("Back") | html %]"><i class="fa fa-arrow-left" aria-hidden="true"></i></li>
                                             <li class="mobile-action-separator" aria-hidden="true"></li>
                                             <li class="mobile-action-option">Options</li>
                                         </ul>
@@ -96,11 +96,16 @@
                                                 <div class="Actions-top">Options</div>
                                                 <ul class="Actions">
                                                     [% RenderBlockStart("TicketMenu") %]
-                                                    <li id="nav-[% Data.Name | replace(' ', '-') | html %]">
+                                                    [% MenuNavID = Data.Name || Data.Description || Data.Action %]
+                                                    <li id="nav-[% MenuNavID | replace(' ', '-') | html %]"[% IF Data.ListClass %] class="[% Data.ListClass | html %]"[% END %]>
                                                         [% IF Data.Type == 'Cluster' %]
-                                                        <span class="[% Data.Class %]">[% Translate(Data.Name) | html %] <i class="fa fa-caret-down"></i></span>
+                                                        <span class="[% Data.Class %][% IF !Data.NameVisible %] NoClusterName[% END %]"[% IF !Data.NameVisible %] title="[% Translate(Data.Name) | html %]" aria-label="[% Translate(Data.Name) | html %]"[% END %]>[% IF Data.Icon %]<i class="[% Data.Icon | html %] ClusterMenuIcon" aria-hidden="true"></i> [% END %][% IF Data.NameVisible %][% Translate(Data.Name) | html %] [% END %]<i class="fa fa-caret-down" aria-hidden="true"></i></span>
                                                         [% ELSIF Data.Type == 'HTML' || Data.Config.Type == 'HTML' %]
                                                         [% Data.HTML %]
+                                                        [% ELSIF Data.Icon && Data.Name %]
+                                                        <a href="[% Env("Baselink") %][% Data.Link | Interpolate %]" class="[% Data.Class %]" [% Data.LinkParam %] title="[% Translate(Data.Description) | html %]" target="[% Data.Target | html %]"><i class="[% Data.Icon | html %] ClusterMenuIcon" aria-hidden="true"></i> [% Translate(Data.Name) | html %]</a>
+                                                        [% ELSIF Data.Icon %]
+                                                        <a href="[% Env("Baselink") %][% Data.Link | Interpolate %]" class="[% Data.Class %]" [% Data.LinkParam %] title="[% Translate(Data.Description) | html %]" aria-label="[% Translate(Data.Description) | html %]" target="[% Data.Target | html %]"><i class="[% Data.Icon | html %]" aria-hidden="true"></i></a>
                                                         [% ELSE %]
                                                         <a href="[% Env("Baselink") %][% Data.Link | Interpolate %]" class="[% Data.Class %]" [% Data.LinkParam %] title="[% Translate(Data.Description) | html %]" target="[% Data.Target | html %]">[% Translate(Data.Name) | html %]</a>
                                                         [% END %]

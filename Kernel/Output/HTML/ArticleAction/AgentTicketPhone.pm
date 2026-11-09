@@ -11,6 +11,7 @@ package Kernel::Output::HTML::ArticleAction::AgentTicketPhone;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::Language qw(Translatable);
 
@@ -78,8 +79,10 @@ sub GetConfig {
         ItemType    => 'Link',
         Description => Translatable('Split this article'),
         Name        => Translatable('Split'),
-        Class       => 'SplitSelection',
-        Link        =>
+
+        # Icon        => 'fa fa-code-fork',
+        Class => 'SplitSelection',
+        Link  =>
             "Action=AgentTicketPhone;TicketID=$Param{Ticket}->{TicketID};ArticleID=$Param{Article}->{ArticleID};LinkTicketID=$Param{Ticket}->{TicketID}",
     );
 

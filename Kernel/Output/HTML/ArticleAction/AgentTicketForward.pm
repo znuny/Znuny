@@ -11,6 +11,7 @@ package Kernel::Output::HTML::ArticleAction::AgentTicketForward;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(IsHashRefWithData);
@@ -148,11 +149,13 @@ sub GetConfig {
             DropdownType         => 'Forward',
             StandardForwardsStrg => $StandardForwardsStrg,
             Name                 => Translatable('Forward'),
-            Class                => 'AsPopup PopupType_TicketAction',
-            Action               => 'AgentTicketForward',
-            FormID               => 'Forward' . $Param{Article}->{ArticleID},
-            ForwardElementID     => 'ForwardTemplateID',
-            Type                 => $Param{Type},
+
+            # Icon                 => 'fa fa-mail-forward',
+            Class            => 'AsPopup PopupType_TicketAction',
+            Action           => 'AgentTicketForward',
+            FormID           => 'Forward' . $Param{Article}->{ArticleID},
+            ForwardElementID => 'ForwardTemplateID',
+            Type             => $Param{Type},
         };
     }
     else {
@@ -161,8 +164,10 @@ sub GetConfig {
             ItemType    => 'Link',
             Description => Translatable('Forward article via mail'),
             Name        => Translatable('Forward'),
-            Class       => 'AsPopup PopupType_TicketAction',
-            Link        =>
+
+            # Icon        => 'fa fa-mail-forward',
+            Class => 'AsPopup PopupType_TicketAction',
+            Link  =>
                 "Action=AgentTicketForward;TicketID=$Param{Ticket}->{TicketID};ArticleID=$Param{Article}->{ArticleID}"
         };
     }

@@ -11,6 +11,7 @@ package Kernel::Output::HTML::ArticleAction::MarkAsImportant;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::Language qw(Translatable);
 
@@ -86,8 +87,12 @@ sub GetConfig {
     my $Link
         = "Action=AgentTicketZoom;Subaction=MarkAsImportant;TicketID=$Param{Ticket}->{TicketID};ArticleID=$Param{Article}->{ArticleID}";
     my $Description = Translatable('Mark');
+
+    # my $Icon = 'fa fa-star-o';
     if ($ArticleIsImportant) {
         $Description = Translatable('Unmark');
+
+        # $Icon = 'fa fa-star';
     }
 
     # set important menu item
@@ -95,7 +100,9 @@ sub GetConfig {
         ItemType    => 'Link',
         Description => $Description,
         Name        => $Description,
-        Link        => $Link,
+
+        # Icon => $Icon,
+        Link => $Link,
     );
 
     return ( \%MenuItem );

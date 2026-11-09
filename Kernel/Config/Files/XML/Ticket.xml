@@ -5966,7 +5966,8 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
-                <Item Key="Name" Translatable="1">Back</Item>
+                <Item Key="Name" Translatable="1"></Item>
+                <Item Key="Icon">fa fa-arrow-left</Item>
                 <Item Key="Description" Translatable="1">Go back</Item>
                 <Item Key="Action"></Item>
                 <Item Key="Link">[% Env("LastScreenOverview") %]</Item>
@@ -5989,6 +5990,9 @@
                 <Item Key="Action">AgentTicketLock</Item>
                 <Item Key="Target"></Item>
                 <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
+                <Item Key="ClusterNameVisible">1</Item>
+                <!-- <Item Key="ClusterIcon">fa fa-ellipsis-h</Item> -->
+                <Item Key="ClusterIcon"></Item>
                 <Item Key="ClusterPriority">800</Item>
                 <Item Key="Prio">100</Item>
             </Hash>
@@ -6007,6 +6011,9 @@
                 <Item Key="Target"></Item>
                 <Item Key="PopupType">TicketHistory</Item>
                 <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
+                <Item Key="ClusterNameVisible">1</Item>
+                <!-- <Item Key="ClusterIcon">fa fa-ellipsis-h</Item> -->
+                <Item Key="ClusterIcon"></Item>
                 <Item Key="ClusterPriority">800</Item>
                 <Item Key="Prio">200</Item>
             </Hash>
@@ -6018,7 +6025,8 @@
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
-                <Item Key="Name" Translatable="1">Print</Item>
+                <Item Key="Name" Translatable="1"></Item>
+                <Item Key="Icon">fa fa-print</Item>
                 <Item Key="Description" Translatable="1">Print this ticket</Item>
                 <Item Key="Action">AgentTicketPrint</Item>
                 <Item Key="Link">Action=AgentTicketPrint;TicketID=[% Data.TicketID | html %]</Item>
@@ -6038,6 +6046,7 @@
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
                 <Item Key="Name" Translatable="1">Priority</Item>
+                <Item Key="Icon"></Item>
                 <Item Key="Description" Translatable="1">Change the priority for this ticket</Item>
                 <Item Key="Action">AgentTicketPriority</Item>
                 <Item Key="Link">Action=AgentTicketPriority;TicketID=[% Data.TicketID | html %]</Item>
@@ -6062,6 +6071,9 @@
                 <Item Key="Target"></Item>
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
+                <Item Key="ClusterNameVisible">1</Item>
+                <!-- <Item Key="ClusterIcon">fa fa-ellipsis-h</Item> -->
+                <Item Key="ClusterIcon"></Item>
                 <Item Key="ClusterPriority">800</Item>
                 <Item Key="Prio">310</Item>
             </Hash>
@@ -6080,6 +6092,9 @@
                 <Item Key="Target"></Item>
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
+                <Item Key="ClusterNameVisible">1</Item>
+                <!-- <Item Key="ClusterIcon">fa fa-ellipsis-h</Item> -->
+                <Item Key="ClusterIcon"></Item>
                 <Item Key="ClusterPriority">800</Item>
                 <Item Key="Prio">320</Item>
             </Hash>
@@ -6098,6 +6113,9 @@
                 <Item Key="Target"></Item>
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="ClusterName" Translatable="1">People</Item>
+                <Item Key="ClusterNameVisible">1</Item>
+                <!-- <Item Key="ClusterIcon">fa fa-users</Item> -->
+                <Item Key="ClusterIcon"></Item>
                 <Item Key="ClusterPriority">430</Item>
                 <Item Key="Prio">400</Item>
             </Hash>
@@ -6116,6 +6134,9 @@
                 <Item Key="Target"></Item>
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="ClusterName" Translatable="1">People</Item>
+                <Item Key="ClusterNameVisible">1</Item>
+                <!-- <Item Key="ClusterIcon">fa fa-users</Item> -->
+                <Item Key="ClusterIcon"></Item>
                 <Item Key="ClusterPriority">430</Item>
                 <Item Key="Prio">410</Item>
             </Hash>
@@ -6134,6 +6155,9 @@
                 <Item Key="Target"></Item>
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="ClusterName" Translatable="1">People</Item>
+                <Item Key="ClusterNameVisible">1</Item>
+                <!-- <Item Key="ClusterIcon">fa fa-users</Item> -->
+                <Item Key="ClusterIcon"></Item>
                 <Item Key="ClusterPriority">430</Item>
                 <Item Key="Prio">420</Item>
             </Hash>
@@ -6152,6 +6176,9 @@
                 <Item Key="Target"></Item>
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="ClusterName" Translatable="1">Communication</Item>
+                <Item Key="ClusterNameVisible">1</Item>
+                <!-- <Item Key="ClusterIcon">fa fa-comments</Item> -->
+                <Item Key="ClusterIcon"></Item>
                 <Item Key="ClusterPriority">435</Item>
                 <Item Key="Prio">420</Item>
             </Hash>
@@ -6170,6 +6197,9 @@
                 <Item Key="Target"></Item>
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="ClusterName" Translatable="1">Communication</Item>
+                <Item Key="ClusterNameVisible">1</Item>
+                <!-- <Item Key="ClusterIcon">fa fa-comments</Item> -->
+                <Item Key="ClusterIcon"></Item>
                 <Item Key="ClusterPriority">435</Item>
                 <Item Key="Prio">425</Item>
             </Hash>
@@ -6188,6 +6218,9 @@
                 <Item Key="Target"></Item>
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="ClusterName" Translatable="1">Communication</Item>
+                <Item Key="ClusterNameVisible">1</Item>
+                <!-- <Item Key="ClusterIcon">fa fa-comments</Item> -->
+                <Item Key="ClusterIcon"></Item>
                 <Item Key="ClusterPriority">435</Item>
                 <Item Key="Prio">426</Item>
             </Hash>
@@ -6206,6 +6239,9 @@
                 <Item Key="Target"></Item>
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="ClusterName" Translatable="1">Communication</Item>
+                <Item Key="ClusterNameVisible">1</Item>
+                <!-- <Item Key="ClusterIcon">fa fa-comments</Item> -->
+                <Item Key="ClusterIcon"></Item>
                 <Item Key="ClusterPriority">435</Item>
                 <Item Key="Prio">427</Item>
             </Hash>
@@ -6224,6 +6260,9 @@
                 <Item Key="Target"></Item>
                 <Item Key="PopupType">TicketAction</Item>
                 <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
+                <Item Key="ClusterNameVisible">1</Item>
+                <!-- <Item Key="ClusterIcon">fa fa-ellipsis-h</Item> -->
+                <Item Key="ClusterIcon"></Item>
                 <Item Key="ClusterPriority">800</Item>
                 <Item Key="Prio">430</Item>
             </Hash>
@@ -6236,6 +6275,7 @@
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
                 <Item Key="Name" Translatable="1">Pending</Item>
+                <Item Key="Icon"></Item>
                 <Item Key="Description" Translatable="1">Set this ticket to pending</Item>
                 <Item Key="Action">AgentTicketPending</Item>
                 <Item Key="Link">Action=AgentTicketPending;TicketID=[% Data.TicketID | html %]</Item>
@@ -6270,6 +6310,7 @@
             <Hash>
                 <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
                 <Item Key="Name" Translatable="1">Close</Item>
+                <Item Key="Icon"></Item>
                 <Item Key="Description" Translatable="1">Close this ticket</Item>
                 <Item Key="Action">AgentTicketClose</Item>
                 <Item Key="Link">Action=AgentTicketClose;TicketID=[% Data.TicketID | html %]</Item>
@@ -6330,6 +6371,9 @@
                 <Item Key="Target">_blank</Item>
                 <Item Key="PopupType"></Item>
                 <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
+                <Item Key="ClusterNameVisible">1</Item>
+                <!-- <Item Key="ClusterIcon">fa fa-ellipsis-h</Item> -->
+                <Item Key="ClusterIcon"></Item>
                 <Item Key="ClusterPriority"></Item>
                 <Item Key="ExternalLink">1</Item>
                 <Item Key="Prio">500</Item>
@@ -14646,7 +14690,7 @@ Thanks for your help!
                 <Item Key="AgentTicketPrint">
                     <Hash>
                         <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketPrint</Item>
-                        <Item Key="Prio">500</Item>
+                        <Item Key="Prio">1000</Item>
                         <Item Key="Valid">1</Item>
                     </Hash>
                 </Item>
@@ -14681,7 +14725,7 @@ Thanks for your help!
                 <Item Key="MarkArticleSeenUnseen">
                     <Hash>
                         <Item Key="Module">Kernel::Output::HTML::ArticleAction::MarkArticleSeenUnseen</Item>
-                        <Item Key="Prio">50</Item>
+                        <Item Key="Prio">1100</Item>
                         <Item Key="Valid">1</Item>
                     </Hash>
                 </Item>
@@ -14729,7 +14773,7 @@ Thanks for your help!
                 <Item Key="AgentTicketPrint">
                     <Hash>
                         <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketPrint</Item>
-                        <Item Key="Prio">500</Item>
+                        <Item Key="Prio">1000</Item>
                         <Item Key="Valid">1</Item>
                     </Hash>
                 </Item>
@@ -14764,7 +14808,7 @@ Thanks for your help!
                 <Item Key="MarkArticleSeenUnseen">
                     <Hash>
                         <Item Key="Module">Kernel::Output::HTML::ArticleAction::MarkArticleSeenUnseen</Item>
-                        <Item Key="Prio">50</Item>
+                        <Item Key="Prio">1100</Item>
                         <Item Key="Valid">1</Item>
                     </Hash>
                 </Item>
@@ -14812,7 +14856,7 @@ Thanks for your help!
                 <Item Key="AgentTicketPrint">
                     <Hash>
                         <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketPrint</Item>
-                        <Item Key="Prio">500</Item>
+                        <Item Key="Prio">1000</Item>
                         <Item Key="Valid">1</Item>
                     </Hash>
                 </Item>
@@ -14847,7 +14891,7 @@ Thanks for your help!
                 <Item Key="MarkArticleSeenUnseen">
                     <Hash>
                         <Item Key="Module">Kernel::Output::HTML::ArticleAction::MarkArticleSeenUnseen</Item>
-                        <Item Key="Prio">50</Item>
+                        <Item Key="Prio">1100</Item>
                         <Item Key="Valid">1</Item>
                     </Hash>
                 </Item>
@@ -14895,7 +14939,7 @@ Thanks for your help!
                 <Item Key="AgentTicketPrint">
                     <Hash>
                         <Item Key="Module">Kernel::Output::HTML::ArticleAction::AgentTicketPrint</Item>
-                        <Item Key="Prio">500</Item>
+                        <Item Key="Prio">1000</Item>
                         <Item Key="Valid">1</Item>
                     </Hash>
                 </Item>
@@ -14944,7 +14988,7 @@ Thanks for your help!
                 <Item Key="MarkArticleSeenUnseen">
                     <Hash>
                         <Item Key="Module">Kernel::Output::HTML::ArticleAction::MarkArticleSeenUnseen</Item>
-                        <Item Key="Prio">50</Item>
+                        <Item Key="Prio">1100</Item>
                         <Item Key="Valid">1</Item>
                     </Hash>
                 </Item>

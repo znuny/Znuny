@@ -2862,6 +2862,7 @@ sub Data {
         'Save filter settings as default' => 'บันทึกการตั้งค่าตัวกรองเป็นค่าเริ่มต้น',
         'Event Type' => 'ประเภทของกิจกรรม',
         'Save as default' => 'บันทึกเป็นค่าเริ่มต้น',
+        'Back' => 'กลับไป',
         'Change Queue' => 'เปลี่ยนคิว',
         'Add Filter' => 'เพิ่มตัวกรอง',
         'Set' => 'กำหนด',
@@ -2922,7 +2923,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => '',
-        'Back' => 'กลับไป',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -4688,7 +4688,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => '',
-        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'มาร์ค',
@@ -9151,6 +9150,7 @@ Thanks for your help!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'มาร์คว่าเป็นสแปม!',
         'Mark as seen' => '',
+        'Mark as unseen' => '',
         'Mark this ticket as junk!' => 'ทำเครื่องหมายตั๋วนี้เป็นขยะ!',
         'Mark ticket as seen' => '',
         'Mark ticket as unseen' => '',

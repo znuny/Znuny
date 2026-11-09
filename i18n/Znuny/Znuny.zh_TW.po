@@ -8363,7 +8363,7 @@ msgstr "載入被阻擋的内容。"
 msgid "Home"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "Back"
 msgstr "上一步"
 
@@ -24091,7 +24091,7 @@ msgstr ""
 msgid "Mark article as unseen"
 msgstr ""
 
-#. Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+#. SysConfig
 msgid "Mark as unseen"
 msgstr ""
 

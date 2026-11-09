@@ -2865,6 +2865,7 @@ sub Data {
         'Save filter settings as default' => 'デフォルトのフィルター設定を保存',
         'Event Type' => 'イベントタイプ',
         'Save as default' => 'ドラフトとして保存',
+        'Back' => '戻る',
         'Change Queue' => 'キューを変更',
         'Add Filter' => 'フィルターを追加',
         'Set' => '設定',
@@ -2925,7 +2926,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => 'ホーム',
-        'Back' => '戻る',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -4692,7 +4692,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => '',
-        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'マーク',
@@ -9159,6 +9158,7 @@ Thanks for your help!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => '迷惑メールにする',
         'Mark as seen' => '',
+        'Mark as unseen' => '',
         'Mark this ticket as junk!' => 'このチケットをジャンクとしてマークします!',
         'Mark ticket as seen' => '',
         'Mark ticket as unseen' => '',

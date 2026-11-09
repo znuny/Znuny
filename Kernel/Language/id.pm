@@ -2861,6 +2861,7 @@ bin/znuny.Daemon.pl status\').',
         'Save filter settings as default' => 'Simpan aturan filter sebagai default',
         'Event Type' => 'Jenis event',
         'Save as default' => 'Simpan sebagai default',
+        'Back' => 'Kembali',
         'Change Queue' => 'Ubah queue',
         'Add Filter' => 'Tambahkan filter',
         'Set' => 'Aturan',
@@ -2921,7 +2922,6 @@ bin/znuny.Daemon.pl status\').',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => '',
-        'Back' => 'Kembali',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -4687,7 +4687,6 @@ bin/znuny.Daemon.pl status\').',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => '',
-        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Tandai',
@@ -9148,6 +9147,7 @@ Helpdesk Team Anda
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Tandai sebagai Spam!',
         'Mark as seen' => '',
+        'Mark as unseen' => '',
         'Mark this ticket as junk!' => 'Tandai tiket ini sebagai sampah!',
         'Mark ticket as seen' => '',
         'Mark ticket as unseen' => '',

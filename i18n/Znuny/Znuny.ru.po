@@ -8376,7 +8376,7 @@ msgstr "Загрузить заблокированное содержимое."
 msgid "Home"
 msgstr "Домой"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "Back"
 msgstr "Назад"
 
@@ -24114,7 +24114,7 @@ msgstr "Пометить заявки как непрочитанные"
 msgid "Mark article as unseen"
 msgstr "Пометить сообщение как непрочитанное"
 
-#. Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+#. SysConfig
 msgid "Mark as unseen"
 msgstr "Пометить как непрочитанное"
 

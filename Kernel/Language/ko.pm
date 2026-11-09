@@ -2859,6 +2859,7 @@ sub Data {
         'Save filter settings as default' => '필터 설정을 기본값으로 저장',
         'Event Type' => '이벤트 유형',
         'Save as default' => '기본값으로 저장',
+        'Back' => '뒤',
         'Change Queue' => '대기열 변경',
         'Add Filter' => '필터 추가',
         'Set' => '세트',
@@ -2919,7 +2920,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => '홈',
-        'Back' => '뒤',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -4685,7 +4685,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => '',
-        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => '마크',
@@ -9145,6 +9144,7 @@ Thanks for your help!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => '스팸으로 표시하십시오!',
         'Mark as seen' => '',
+        'Mark as unseen' => '',
         'Mark this ticket as junk!' => '이 티켓을 정크로 표시하십시오!',
         'Mark ticket as seen' => '',
         'Mark ticket as unseen' => '',

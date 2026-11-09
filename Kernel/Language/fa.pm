@@ -2865,6 +2865,7 @@ sub Data {
         'Save filter settings as default' => 'ذخیره تنظیمات فیلتر به عنوان تنظیمات پیش فرض',
         'Event Type' => 'نوع رویداد',
         'Save as default' => 'ذخیره به عنوان پیش فرض',
+        'Back' => 'بازگشت',
         'Change Queue' => 'تغییر صف درخواست',
         'Add Filter' => 'افزودن فیلتر',
         'Set' => 'ثبت',
@@ -2925,7 +2926,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => '',
-        'Back' => 'بازگشت',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -4691,7 +4691,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => '',
-        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'علامت دار',
@@ -9151,6 +9150,7 @@ Thanks for your help!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'به‌عنوان هرزنامه علامت بزن',
         'Mark as seen' => '',
+        'Mark as unseen' => '',
         'Mark this ticket as junk!' => 'علامت گذاری به عنوان این درخواست به عنوان آشغال!',
         'Mark ticket as seen' => '',
         'Mark ticket as unseen' => '',

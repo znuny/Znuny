@@ -2868,6 +2868,7 @@ sub Data {
         'Save filter settings as default' => 'Lagre filter som standard',
         'Event Type' => '',
         'Save as default' => 'Lagre som standard',
+        'Back' => 'Tilbake',
         'Change Queue' => 'Bytt kø',
         'Add Filter' => 'Legg til filter',
         'Set' => 'Sett',
@@ -2928,7 +2929,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => '',
-        'Back' => 'Tilbake',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -4694,7 +4694,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => '',
-        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Merk',
@@ -9143,6 +9142,7 @@ Thanks for your help!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Marker som søppel',
         'Mark as seen' => '',
+        'Mark as unseen' => '',
         'Mark this ticket as junk!' => 'Marker denne saken som søppel!',
         'Mark ticket as seen' => '',
         'Mark ticket as unseen' => '',

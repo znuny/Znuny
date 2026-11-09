@@ -429,8 +429,12 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         background: var(--gray-light);
     }*/
 
-    div.WidgetSimpleSecondary span.ClusterLink i {
+    div.WidgetSimpleSecondary span.ClusterLink i.fa-caret-down {
         margin: -1px 0 0 var(--margin-sm);
+    }
+
+    div.WidgetSimpleSecondary span.ClusterLink i.ClusterMenuIcon {
+        margin-right: var(--margin-sm);
     }
 
     div.ContentColumn div.WidgetSimple.WidgetSimpleSecondary > div.Content {

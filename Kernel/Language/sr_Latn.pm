@@ -2865,6 +2865,7 @@ sub Data {
         'Save filter settings as default' => 'Sačuvaj podešavanja filtera kao podrazumevana',
         'Event Type' => 'Tip događaja',
         'Save as default' => 'Sačuvaj kao podrazumevano',
+        'Back' => 'Nazad',
         'Change Queue' => 'Promeni Red',
         'Add Filter' => 'Dodaj Filter',
         'Set' => 'Podesi',
@@ -2925,7 +2926,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => 'Početna',
-        'Back' => 'Nazad',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -4691,7 +4691,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => '',
-        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Označeno',
@@ -9151,6 +9150,7 @@ Vaša tehnička podrška
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Označi kao Spam!',
         'Mark as seen' => '',
+        'Mark as unseen' => '',
         'Mark this ticket as junk!' => 'Označi ovaj tiket kao besmislen junk!',
         'Mark ticket as seen' => '',
         'Mark ticket as unseen' => '',

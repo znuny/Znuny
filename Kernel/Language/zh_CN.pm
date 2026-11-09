@@ -2866,6 +2866,7 @@ sub Data {
         'Save filter settings as default' => '将过滤器设置保存为默认过滤器',
         'Event Type' => '事件类型',
         'Save as default' => '保存为默认',
+        'Back' => '后退',
         'Change Queue' => '改变队列',
         'Add Filter' => '添加过滤器',
         'Set' => '设置',
@@ -2926,7 +2927,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => '首页',
-        'Back' => '后退',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -4692,7 +4692,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => '',
-        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => '标记',
@@ -9151,6 +9150,7 @@ Thanks for your help!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => '标记为垃圾!',
         'Mark as seen' => '',
+        'Mark as unseen' => '',
         'Mark this ticket as junk!' => '标记这个工单为垃圾!',
         'Mark ticket as seen' => '',
         'Mark ticket as unseen' => '',

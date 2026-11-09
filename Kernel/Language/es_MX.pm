@@ -2860,6 +2860,7 @@ sub Data {
         'Save filter settings as default' => 'Grabar configuración de filtros como defecto',
         'Event Type' => 'Tipo de Evento',
         'Save as default' => 'Guardar como predeterminado',
+        'Back' => 'Atrás',
         'Change Queue' => 'Cambiar Fila',
         'Add Filter' => 'Añadir Filtro',
         'Set' => 'Ajustar',
@@ -2920,7 +2921,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => 'Inicio',
-        'Back' => 'Atrás',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -4686,7 +4686,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => '',
-        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Marcar',
@@ -9146,6 +9145,7 @@ Tu Equipo de Soporte
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => '¡Marcar como correo no deseado!',
         'Mark as seen' => '',
+        'Mark as unseen' => '',
         'Mark this ticket as junk!' => 'Marcar este ticket como basura!',
         'Mark ticket as seen' => '',
         'Mark ticket as unseen' => '',

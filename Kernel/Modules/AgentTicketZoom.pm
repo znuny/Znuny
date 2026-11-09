@@ -1229,17 +1229,37 @@ sub MaskAgentZoom {
                 }
                 $MenuClusters{ $Menus{$Menu}->{ClusterName} }->{Prio} = $Priority;
                 $MenuClusters{ $Menus{$Menu}->{ClusterName} }->{Items}->{$Menu} = $Item;
+
+                # ClusterIcon from any member defines the icon of the cluster.
+                if ( $Menus{$Menu}->{ClusterIcon} ) {
+                    $MenuClusters{ $Menus{$Menu}->{ClusterName} }->{Icon} = $Menus{$Menu}->{ClusterIcon};
+                }
+
+                # ClusterNameVisible 0 on any member hides the cluster label.
+                # A missing key keeps the name visible.
+                if (
+                    defined $Menus{$Menu}->{ClusterNameVisible}
+                    && $Menus{$Menu}->{ClusterNameVisible} eq '0'
+                    )
+                {
+                    $MenuClusters{ $Menus{$Menu}->{ClusterName} }->{NameVisible} = 0;
+                }
+                elsif ( !defined $MenuClusters{ $Menus{$Menu}->{ClusterName} }->{NameVisible} ) {
+                    $MenuClusters{ $Menus{$Menu}->{ClusterName} }->{NameVisible} = 1;
+                }
             }
         }
 
         for my $Cluster ( sort keys %MenuClusters ) {
             $ZoomMenuItems{ $MenuClusters{$Cluster}->{Prio} . $Cluster } = {
-                Name  => $Cluster,
-                Type  => 'Cluster',
-                Link  => '#',
-                Class => 'ClusterLink',
-                Items => $MenuClusters{$Cluster}->{Items},
-                Prio  => $MenuClusters{$Cluster}->{Prio},
+                Name        => $Cluster,
+                Type        => 'Cluster',
+                Link        => '#',
+                Class       => 'ClusterLink',
+                Items       => $MenuClusters{$Cluster}->{Items},
+                Prio        => $MenuClusters{$Cluster}->{Prio},
+                Icon        => $MenuClusters{$Cluster}->{Icon} || '',
+                NameVisible => $MenuClusters{$Cluster}->{NameVisible} // 1,
             };
         }
 

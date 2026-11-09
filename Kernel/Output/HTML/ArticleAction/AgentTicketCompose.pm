@@ -11,6 +11,7 @@ package Kernel::Output::HTML::ArticleAction::AgentTicketCompose;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::Language qw(Translatable);
 
@@ -142,11 +143,13 @@ sub GetConfig {
         DropdownType          => 'Reply',
         StandardResponsesStrg => $StandardResponsesStrg,
         Name                  => Translatable('Reply'),
-        Class                 => 'AsPopup PopupType_TicketAction',
-        Action                => 'AgentTicketCompose',
-        FormID                => 'Reply' . $Param{Article}->{ArticleID},
-        ResponseElementID     => 'ResponseID' . $Param{Article}->{ArticleID},
-        Type                  => $Param{Type},
+
+        # Icon                  => 'fa fa-reply',
+        Class             => 'AsPopup PopupType_TicketAction',
+        Action            => 'AgentTicketCompose',
+        FormID            => 'Reply' . $Param{Article}->{ArticleID},
+        ResponseElementID => 'ResponseID' . $Param{Article}->{ArticleID},
+        Type              => $Param{Type},
     };
 
     # check if reply all is needed
@@ -192,12 +195,14 @@ sub GetConfig {
             DropdownType          => 'Reply',
             StandardResponsesStrg => $StandardResponsesStrg,
             Name                  => Translatable('Reply All'),
-            Class                 => 'AsPopup PopupType_TicketAction',
-            Action                => 'AgentTicketCompose',
-            FormID                => 'ReplyAll' . $Param{Article}->{ArticleID},
-            ReplyAll              => 1,
-            ResponseElementID     => 'ResponseIDAll' . $Param{Article}->{ArticleID},
-            Type                  => $Param{Type},
+
+            # Icon                  => 'fa fa-reply-all',
+            Class             => 'AsPopup PopupType_TicketAction',
+            Action            => 'AgentTicketCompose',
+            FormID            => 'ReplyAll' . $Param{Article}->{ArticleID},
+            ReplyAll          => 1,
+            ResponseElementID => 'ResponseIDAll' . $Param{Article}->{ArticleID},
+            Type              => $Param{Type},
         };
     }
 

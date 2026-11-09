@@ -140,6 +140,13 @@ sub Run {
         );
     }
 
+    # whole-ticket "seen" from the zoom menu stays on that ticket
+    if ( $GetParam{Subaction} eq 'Seen' && !$GetParam{ArticleID} ) {
+        return $LayoutObject->Redirect(
+            OP => "Action=AgentTicketZoom;TicketID=$GetParam{TicketID}",
+        );
+    }
+
     my %UserPreferences = $UserObject->GetPreferences(
         UserID => $Self->{UserID},
     );

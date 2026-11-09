@@ -2865,6 +2865,7 @@ sub Data {
         'Save filter settings as default' => 'Szűrőbeállítások mentése alapértelmezettként',
         'Event Type' => 'Eseménytípus',
         'Save as default' => 'Mentés alapértelmezettként',
+        'Back' => 'Vissza',
         'Change Queue' => 'Várólista módosítása',
         'Add Filter' => 'Szűrő hozzáadása',
         'Set' => 'Beállítás',
@@ -2925,7 +2926,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => 'Kezdőoldal',
-        'Back' => 'Vissza',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => 'Jegylétrehozás',
@@ -4691,7 +4691,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => 'Bejegyzés megjelölése olvasatlanként',
-        'Mark as unseen' => 'Megjelölés olvasatlanként',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Megjelölés',
@@ -9151,6 +9150,7 @@ Az Ön ügyfélszolgálati csapata
         'Management of ticket attribute relations.' => 'Jegyattribútum-kapcsolatok kezelése.',
         'Mark as Spam!' => 'Megjelölés szemétként!',
         'Mark as seen' => 'Megjelölés olvasottként',
+        'Mark as unseen' => 'Megjelölés olvasatlanként',
         'Mark this ticket as junk!' => 'Jegy megjelölése szemétként!',
         'Mark ticket as seen' => 'Jegy megjelölése olvasottként',
         'Mark ticket as unseen' => 'Jegy megjelölése olvasatlanként',
