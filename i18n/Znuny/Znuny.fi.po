@@ -4463,58 +4463,6 @@ msgid "package information"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Package installation requires a patch level update of Znuny."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Package update requires a patch level update of Znuny."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Please note that your installed Znuny version is %s."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "To install this package, you need to update Znuny to version %s or newer."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "This package can only be installed on Znuny version %s or older."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "This package can only be installed on Znuny version %s."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Why should I keep Znuny up to date?"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "You will receive updates about relevant security issues."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "You will receive updates for all other relevant Znuny issues."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "How can I do a patch level update if I don’t have a contract?"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Please find all relevant information within the updating instructions at %s."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "In case you would have further questions we would be glad to answer them."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Please visit our customer portal and file a request."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Install Package"
 msgstr "Asenna paketti"
 
@@ -25520,4 +25468,36 @@ msgstr ""
 #. SysConfig
 msgid "Self"
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Package is incompatible."
+msgstr "Paketti ei ole yhteensopiva."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Your installed Znuny version %s does not support installing this package."
+msgstr "Asennettu Znuny-versiosi %s ei tue tämän paketin asentamista."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "The package cannot be installed because it requires an older version of Znuny."
+msgstr "Pakettia ei voi asentaa, koska se vaatii vanhemman Znuny-version."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "The package cannot be installed because it requires a newer version of Znuny."
+msgstr "Pakettia ei voi asentaa, koska se vaatii uudemman Znuny-version."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "What to do:"
+msgstr "Mitä tehdä:"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead."
+msgstr "Jos tästä paketista on olemassa uudempi versio, joka tukee Znuny-versiota %s, asenna se tai päivitä siihen."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "If an older version of this package exists that supports Znuny %s, install or upgrade to that instead."
+msgstr "Jos tästä paketista on olemassa vanhempi versio, joka tukee Znuny-versiota %s, asenna se tai päivitä siihen."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization."
+msgstr "Jos Znunyn päivitys tarvitaan, katso ohjeet vaadittuun versioon päivittämisestä dokumentaatiosta tai ota yhteyttä tukiorganisaatioosi."
 

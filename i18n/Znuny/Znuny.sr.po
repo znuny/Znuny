@@ -4463,58 +4463,6 @@ msgid "package information"
 msgstr "Информације о пакету"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Package installation requires a patch level update of Znuny."
-msgstr "Инсталација пакета захтева ажурирану верзију Znuny."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Package update requires a patch level update of Znuny."
-msgstr "Ажурирање пакета захтева ажурирану верзију Znuny."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Please note that your installed Znuny version is %s."
-msgstr "Тренутно инсталирана Znuny верзија је %s."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "To install this package, you need to update Znuny to version %s or newer."
-msgstr "Да бисте инсталирали овај пакет, неопходно је да ажурирате ваш Znuny на верзију %s или новију."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "This package can only be installed on Znuny version %s or older."
-msgstr "Овај пакет се може инсталирати само на Znuny верзију%s или старију."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "This package can only be installed on Znuny version %s."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Why should I keep Znuny up to date?"
-msgstr "Зашто би требало да Znuny увек буде ажуриран?"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "You will receive updates about relevant security issues."
-msgstr "Добићете ажурирања одговарајућих безбедносних издања."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "You will receive updates for all other relevant Znuny issues."
-msgstr "Добићете ажурирања свих других релевантних Znuny издања."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "How can I do a patch level update if I don’t have a contract?"
-msgstr "Како могу да ажурирам верзију Znuny уколико немам уговор?"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Please find all relevant information within the updating instructions at %s."
-msgstr "Молимо пронађите све релевантне информације у оквиру инструкција за ажурирање на %s."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "In case you would have further questions we would be glad to answer them."
-msgstr "У случају да имате додтана питања, биће нам задовољство да одговоримо на њих."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Please visit our customer portal and file a request."
-msgstr "Молимо посетите наш кориснички портал и поднесите захтев."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Install Package"
 msgstr "Инсталирај пакет"
 
@@ -25531,4 +25479,36 @@ msgstr ""
 #. SysConfig
 msgid "Self"
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Package is incompatible."
+msgstr "Пакет није компатибилан."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Your installed Znuny version %s does not support installing this package."
+msgstr "Ваша инсталирана верзија Znuny %s не подржава инсталацију овог пакета."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "The package cannot be installed because it requires an older version of Znuny."
+msgstr "Пакет не може да се инсталира јер захтева старију верзију Znuny."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "The package cannot be installed because it requires a newer version of Znuny."
+msgstr "Пакет не може да се инсталира јер захтева новију верзију Znuny."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "What to do:"
+msgstr "Шта урадити:"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead."
+msgstr "Ако постоји новија верзија овог пакета која подржава Znuny %s, инсталирајте је или надоградите на њу."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "If an older version of this package exists that supports Znuny %s, install or upgrade to that instead."
+msgstr "Ако постоји старија верзија овог пакета која подржава Znuny %s, инсталирајте је или надоградите на њу."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization."
+msgstr "Ако је потребно ажурирање Znuny, погледајте документацију за ажурирање на потребну верзију или се обратите својој организацији за подршку."
 

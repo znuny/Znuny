@@ -32,6 +32,18 @@ Don't use the constructor directly, use the ObjectManager instead:
 
     my $WebUploadCacheObject = $Kernel::OM->Get('Kernel::System::Web::UploadCache');
 
+The agent and customer interfaces set the owner of the current request via ObjectParamAdd(),
+so that all upload cache entries are bound to and checked against the logged in user:
+
+    $Kernel::OM->ObjectParamAdd(
+        'Kernel::System::Web::UploadCache' => {
+            UserID   => 123,                 # agent UserID or customer UserLogin
+            UserType => 'User',              # 'User' or 'CustomerUser'
+        },
+    );
+
+Without an owner (e.g. console commands, daemon) no ownership check is done.
+
 =cut
 
 sub new {
@@ -40,6 +52,9 @@ sub new {
     # allocate new hash for object
     my $Self = {};
     bless( $Self, $Type );
+
+    $Self->{UserID}   = $Param{UserID};
+    $Self->{UserType} = $Param{UserType};
 
     my $GenericModule = $Kernel::OM->Get('Kernel::Config')->Get('WebUploadCacheModule')
         || 'Kernel::System::Web::UploadCache::DB';
@@ -72,12 +87,25 @@ remove all data for a provided Form ID
 
     $UploadCacheObject->FormIDRemove( FormID => 123456 );
 
+All methods working on a Form ID accept the optional parameters UserID and UserType.
+They default to the owner given via ObjectParamAdd() (see new()).
+Access is denied if the Form ID belongs to another owner.
+
+    $UploadCacheObject->FormIDRemove(
+        FormID   => 123456,
+        UserID   => 123,             # optional
+        UserType => 'User',          # optional, 'User' or 'CustomerUser'
+    );
+
 =cut
 
 sub FormIDRemove {
     my ( $Self, %Param ) = @_;
 
-    return $Self->{Backend}->FormIDRemove(%Param);
+    return $Self->{Backend}->FormIDRemove(
+        $Self->_OwnerParamsGet(),
+        %Param,
+    );
 }
 
 =head2 FormIDAddFile()
@@ -108,7 +136,10 @@ ContentID is optional (automatically generated if not given on disposition = inl
 sub FormIDAddFile {
     my ( $Self, %Param ) = @_;
 
-    return $Self->{Backend}->FormIDAddFile(%Param);
+    return $Self->{Backend}->FormIDAddFile(
+        $Self->_OwnerParamsGet(),
+        %Param,
+    );
 }
 
 =head2 FormIDRemoveFile()
@@ -125,7 +156,10 @@ removes a file from a form id
 sub FormIDRemoveFile {
     my ( $Self, %Param ) = @_;
 
-    return $Self->{Backend}->FormIDRemoveFile(%Param);
+    return $Self->{Backend}->FormIDRemoveFile(
+        $Self->_OwnerParamsGet(),
+        %Param,
+    );
 }
 
 =head2 FormIDGetAllFilesData()
@@ -143,7 +177,12 @@ returns an array with a hash ref of all files for a Form ID
 sub FormIDGetAllFilesData {
     my ( $Self, %Param ) = @_;
 
-    return @{ $Self->{Backend}->FormIDGetAllFilesData(%Param) // [] };
+    return @{
+        $Self->{Backend}->FormIDGetAllFilesData(
+            $Self->_OwnerParamsGet(),
+            %Param,
+        ) // []
+    };
 }
 
 =head2 FormIDGetAllFilesMeta()
@@ -163,7 +202,12 @@ Note: returns no content, only meta data.
 sub FormIDGetAllFilesMeta {
     my ( $Self, %Param ) = @_;
 
-    return @{ $Self->{Backend}->FormIDGetAllFilesMeta(%Param) // [] };
+    return @{
+        $Self->{Backend}->FormIDGetAllFilesMeta(
+            $Self->_OwnerParamsGet(),
+            %Param,
+        ) // []
+    };
 }
 
 =head2 FormIDCleanUp()
@@ -180,6 +224,17 @@ sub FormIDCleanUp {
     my ( $Self, %Param ) = @_;
 
     return $Self->{Backend}->FormIDCleanUp(%Param);
+}
+
+sub _OwnerParamsGet {
+    my ( $Self, %Param ) = @_;
+
+    return if !$Self->{UserID} || !$Self->{UserType};
+
+    return (
+        UserID   => $Self->{UserID},
+        UserType => $Self->{UserType},
+    );
 }
 
 1;

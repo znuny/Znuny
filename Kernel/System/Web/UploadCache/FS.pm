@@ -14,6 +14,7 @@ use warnings;
 
 use Kernel::System::VariableCheck qw(:all);
 use File::Basename;
+use Math::Random::Secure qw();
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -31,6 +32,9 @@ sub new {
 
     $Self->{TempDir} = $Kernel::OM->Get('Kernel::Config')->Get('TempDir') . '/upload_cache';
 
+    # dot file, so it is not listed by DirectoryRead() with filter '*'
+    $Self->{OwnerFilename} = '.Owner';
+
     if ( !-d $Self->{TempDir} ) {
         mkdir $Self->{TempDir};
     }
@@ -42,7 +46,7 @@ sub FormIDCreate {
     my ( $Self, %Param ) = @_;
 
     # return requested form id
-    return time() . '.' . rand(12341241);
+    return time() . '.' . Math::Random::Secure::rand(12341241);
 }
 
 sub FormIDRemove {
@@ -57,6 +61,7 @@ sub FormIDRemove {
     }
 
     return if !$Self->_FormIDValidate( $Param{FormID} );
+    return if !$Self->_FormIDOwnerCheck(%Param);
 
     my $Directory = $Self->{TempDir} . '/' . $Param{FormID};
 
@@ -73,7 +78,9 @@ sub FormIDRemove {
     );
 
     my @Data;
-    for my $File (@List) {
+    FILE:
+    for my $File ( @List, "$Directory/$Self->{OwnerFilename}" ) {
+        next FILE if !-e $File;
         $MainObject->FileDelete(
             Location => $File,
         );
@@ -103,6 +110,7 @@ sub FormIDAddFile {
     }
 
     return if !$Self->_FormIDValidate( $Param{FormID} );
+    return if !$Self->_FormIDOwnerCheck(%Param);
 
     $Param{Content} = '' if !defined( $Param{Content} );
 
@@ -111,7 +119,7 @@ sub FormIDAddFile {
     my $Disposition = $Param{Disposition} || '';
     if ( !$ContentID && lc $Disposition eq 'inline' ) {
 
-        my $Random       = rand 999999;
+        my $Random       = Math::Random::Secure::rand(999999);
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
         my $ExternalFQDN = $ConfigObject->Get('ExternalFQDN') || $ConfigObject->Get('FQDN');
 
@@ -137,6 +145,18 @@ sub FormIDAddFile {
 
     # get main object
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+
+    if ( $Param{UserID} && $Param{UserType} && !-e "$Directory/$Self->{OwnerFilename}" ) {
+        my $Owner = "$Param{UserType}\n$Param{UserID}";
+
+        # use Location, Filename would be cleaned up to 'Owner'
+        return if !$MainObject->FileWrite(
+            Location   => "$Directory/$Self->{OwnerFilename}",
+            Content    => \$Owner,
+            Mode       => 'utf8',
+            Permission => '640',
+        );
+    }
 
     my $Filename = basename( $Param{Filename} );
 
@@ -190,6 +210,7 @@ sub FormIDRemoveFile {
     }
 
     return if !$Self->_FormIDValidate( $Param{FormID} );
+    return if !$Self->_FormIDOwnerCheck(%Param);
 
     my @Index = @{ $Self->FormIDGetAllFilesMeta(%Param) };
 
@@ -246,6 +267,7 @@ sub FormIDGetAllFilesData {
     my @Data;
 
     return \@Data if !$Self->_FormIDValidate( $Param{FormID} );
+    return \@Data if !$Self->_FormIDOwnerCheck(%Param);
 
     my $Directory = $Self->{TempDir} . '/' . $Param{FormID};
 
@@ -344,6 +366,7 @@ sub FormIDGetAllFilesMeta {
     my @Data;
 
     return \@Data if !$Self->_FormIDValidate( $Param{FormID} );
+    return \@Data if !$Self->_FormIDOwnerCheck(%Param);
 
     my $Directory = $Self->{TempDir} . '/' . $Param{FormID};
 
@@ -495,7 +518,9 @@ sub FormIDCleanUp {
                 Filter    => "*",
             );
 
-            for my $File (@Sublist) {
+            FILE:
+            for my $File ( @Sublist, "$Subdir/$Self->{OwnerFilename}" ) {
+                next FILE if !-e $File;
                 $MainObject->FileDelete(
                     Location => $File,
                 );
@@ -528,6 +553,46 @@ sub _FormIDValidate {
     }
 
     return 1;
+}
+
+sub _FormIDOwnerCheck {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject  = $Kernel::OM->Get('Kernel::System::Log');
+    my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+
+    my $OwnerFile = "$Self->{TempDir}/$Param{FormID}/$Self->{OwnerFilename}";
+
+    # no owner given (e.g. console commands, daemon)
+    return 1 if !$Param{UserID} || !$Param{UserType};
+
+    if ( $Param{UserType} ne 'User' && $Param{UserType} ne 'CustomerUser' ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Invalid UserType '$Param{UserType}'!",
+        );
+        return;
+    }
+
+    # Form ID has no owner yet
+    return 1 if !-e $OwnerFile;
+
+    my $Owner = $MainObject->FileRead(
+        Location => $OwnerFile,
+        Mode     => 'utf8',
+    );
+    return if !$Owner;
+
+    my ( $OwnerUserType, $OwnerUserID ) = split /\n/, ${$Owner}, 2;
+
+    return 1 if ( $OwnerUserType // '' ) eq $Param{UserType} && ( $OwnerUserID // '' ) eq $Param{UserID};
+
+    $LogObject->Log(
+        Priority => 'notice',
+        Message  => "Access to FormID $Param{FormID} denied for $Param{UserType} $Param{UserID}.",
+    );
+
+    return;
 }
 
 1;

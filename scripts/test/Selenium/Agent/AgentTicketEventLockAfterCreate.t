@@ -124,7 +124,7 @@ $Selenium->RunTest(
 
             # Wait for "Customer Information".
             $Selenium->WaitFor(
-                JavaScript => 'return typeof($) === "function" && $(".SidebarColumn fieldset .Value").length'
+                JavaScript => 'return typeof($) === "function" && $(".sectionSidebar fieldset .Value").length'
             );
             $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$(".AJAXLoader:visible").length;' );
 
@@ -135,6 +135,14 @@ $Selenium->RunTest(
 
             $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$(".AJAXLoader:visible").length;' );
             $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("#Dest").val() === "2||Raw";' );
+
+            # Type is mandatory. An open empty list blocks submit.
+            $Selenium->execute_script(
+                "\$('#TypeID').val(\$('#TypeID option').filter(function () { return \$(this).html() == 'Unclassified'; } ).val() ).trigger('redraw.InputField').trigger('change').blur();"
+            );
+            $Selenium->WaitFor(
+                JavaScript => 'return typeof($) === "function" && $("#TypeID").val()'
+            );
 
             $Selenium->find_element( "#Subject",  'css' )->send_keys($TicketSubject);
             $Selenium->find_element( "#RichText", 'css' )->send_keys($TicketBody);

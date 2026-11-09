@@ -30,6 +30,8 @@ Core.Agent.TicketFormDraft = (function (TargetNS) {
      */
     TargetNS.Init = function () {
 
+        var DraftDialogCloseHandle;
+
         // Bind click event to FormDraftUpdate button.
         $("#FormDraftUpdate").on("click", function() {
             var $Form = $(this).closest('form'),
@@ -67,9 +69,27 @@ Core.Agent.TicketFormDraft = (function (TargetNS) {
             var $Form = $(this).closest('form'),
                 DialogTemplate = Core.Template.Render('Agent/FormDraftAddDialog', {});
 
+            // Drop a previous close handler first. ShowContentDialog closes an open dialog,
+            // and that close would otherwise turn validation back on.
+            if (DraftDialogCloseHandle) {
+                Core.App.Unsubscribe(DraftDialogCloseHandle);
+                DraftDialogCloseHandle = null;
+            }
+
             Core.Form.Validate.DisableValidation($Form);
 
             Core.UI.Dialog.ShowContentDialog($(DialogTemplate), Core.Language.Translate('Add new draft'), '150px', 'Center', true);
+
+            // Cancel, header X, overlay click and Escape all publish this event.
+            DraftDialogCloseHandle = Core.App.Subscribe('Event.UI.Dialog.CloseDialog.Close', function (Dialog) {
+                if (!$(Dialog).find('#SaveFormDraft').length) {
+                    return;
+                }
+
+                Core.Form.Validate.EnableValidation($Form);
+                Core.App.Unsubscribe(DraftDialogCloseHandle);
+                DraftDialogCloseHandle = null;
+            });
 
             $("button#SaveFormDraft").off("click").on("click", function() {
                 var Data;

@@ -230,14 +230,22 @@ $Selenium->RunTest(
         $Selenium->switch_to_window( $Handles->[1] );
 
         # Wait until page has loaded, if necessary.
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $(".WidgetSimple").length;' );
-
-        # Open collapsed widgets, if necessary.
-        $Selenium->execute_script(
-            "\$('.WidgetSimple.Collapsed .WidgetAction > a').trigger('click');"
+        $Selenium->WaitFor(
+            JavaScript =>
+                'return typeof($) === "function" && $("#Compose").length && $("#WidgetArticle").length;'
         );
 
-        $Selenium->WaitFor( JavaScript => 'return $(".WidgetSimple.Expanded").length;' );
+        # Article widget is a collapsible card. Expand it so subject and body are interactable.
+        my $IsCollapsed = $Selenium->execute_script(
+            "return \$('#WidgetArticle').hasClass('Collapsed') ? 1 : 0;"
+        );
+        if ( $IsCollapsed == 1 ) {
+            $Selenium->execute_script("\$('#WidgetArticle .cardTitleTrigger').click();");
+            $Selenium->WaitFor(
+                JavaScript =>
+                    'return typeof($) === "function" && $("#WidgetArticle.Expanded").length;'
+            );
+        }
 
         # Check page.
         for my $ID (
@@ -329,7 +337,10 @@ $Selenium->RunTest(
         $Selenium->switch_to_window( $Handles->[1] );
 
         # Wait until page has loaded, if necessary.
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $(".WidgetSimple").length;' );
+        $Selenium->WaitFor(
+            JavaScript =>
+                'return typeof($) === "function" && $("#Compose").length && $("#Subject").length;'
+        );
 
         # Check for subject pre-loaded value.
         my $NoteSubjectRe = $ConfigObject->Get('Ticket::SubjectRe') || 'Re';
@@ -502,25 +513,25 @@ $Selenium->RunTest(
         $Selenium->set_window_size( 600, 400 );
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID");
 
-        $Selenium->execute_script(
-            "\$('.Cluster ul.Actions').scrollLeft(\$('#nav-Note').offset().left - \$('#nav-Note').width());"
-        );
-
-        # open the actions menu.
+        # Open the actions overlay and wait until the slide-in has reached the viewport.
         $Selenium->find_element( ".mobile-action-option", "css" )->click();
 
-        sleep 1;
-
-        $Selenium->execute_script(
-            "\$('.Cluster ul.Actions').scrollTop(50);"
+        $Selenium->WaitFor(
+            JavaScript =>
+                'return typeof($) === "function" && $("#ticketDetails .ActionRow.active .Actions-wrapper").length && $("#ticketDetails .ActionRow.active .Actions-wrapper")[0].getBoundingClientRect().left >= 0;'
         );
 
-        my $Element = $Selenium->find_element("//a[contains(\@href, \'Action=AgentTicketNote;TicketID=$TicketID' )]");
-        $Selenium->mouse_move_to_location( element => $Element );
+        # Note sits under the Actions-bottom fade. Scroll it to the top of the menu.
+        $Selenium->execute_script(
+            "var \$Link = \$('#ticketDetails .ActionRow.active #nav-Note a'); var \$List = \$Link.closest('ul.Actions'); \$List.scrollTop(0); \$List.scrollTop(\$Link.offset().top - \$List.offset().top);"
+        );
 
-        # TODO (SN): this fails for some reason,
-        # after fix check if rich text adjustments are correct
-        $Element->click();
+        $Selenium->WaitFor(
+            JavaScript =>
+                'var Link = $("#ticketDetails .ActionRow.active #nav-Note a")[0].getBoundingClientRect(); var Bottom = $("#ticketDetails .ActionRow.active .Actions-bottom")[0].getBoundingClientRect(); return Link.width > 0 && Link.left >= 0 && Link.top >= 0 && Link.bottom <= Bottom.top;'
+        );
+
+        $Selenium->find_element( '#nav-Note a', 'css' )->click();
 
         # Wait for the iframe to show up.
         $Selenium->WaitFor(
@@ -533,17 +544,42 @@ $Selenium->RunTest(
             WaitForLoad   => 1,
         );
 
-        $Selenium->WaitFor( JavaScript => "return \$('#RichText').length;" );
+        $Selenium->WaitFor(
+            JavaScript =>
+                'return typeof($) === "function" && $("#RichText").length && window.editor && typeof window.editor.getData === "function";'
+        );
 
-        # Check if the richtext is empty.
+        # Article widget is a collapsible card. Expand it so the template field is usable.
+        my $MobileArticleCollapsed = $Selenium->execute_script(
+            "return \$('#WidgetArticle').hasClass('Collapsed') ? 1 : 0;"
+        );
+        if ( $MobileArticleCollapsed == 1 ) {
+            $Selenium->execute_script("\$('#WidgetArticle .cardTitleTrigger').click();");
+            $Selenium->WaitFor(
+                JavaScript =>
+                    'return typeof($) === "function" && $("#WidgetArticle.Expanded").length;'
+            );
+        }
+
+        $Selenium->execute_script(
+            "var Box = \$('#CreateArticle'); if (Box.length && Box.is(':checkbox') && !Box.prop('checked')) { Box.prop('checked', true).trigger('change'); }"
+        );
+
+        # CKEditor 5 returns HTML. An empty note is '', a configured default body is wrapped in <p>.
+        my $DefaultNoteBody     = $ConfigObject->Get('Ticket::Frontend::AgentTicketNote')->{Body} || '';
+        my $ExpectedInitialBody = $DefaultNoteBody ? "<p>$DefaultNoteBody</p>" : '';
+
         my $CKEditorValue = $Selenium->execute_script(
             "return window.editor.getData()"
         );
         $Self->Is(
             $CKEditorValue,
-            '',
-            "RichText is empty",
+            $ExpectedInitialBody,
+            "RichText matches the configured default body",
         );
+
+        # Clear existing text so template selection does not open the overwrite confirm.
+        $Selenium->execute_script("window.editor.setData('');");
 
         # Select the created template.
         $Selenium->InputFieldValueSet(
@@ -551,26 +587,19 @@ $Selenium->RunTest(
             Value   => $TemplateID,
         );
 
-        # Wait a short time and for the spinner to disappear.
-        sleep(2);
+        # Already inside the popup iframe.
         $Selenium->WaitFor(
             JavaScript =>
-                "return typeof(\$) === 'function' && \$('.AJAXLoader:visible', \$('.PopupIframe').contents()).length == 0"
-        );
-
-        $Selenium->WaitFor(
-            JavaScript =>
-                "return window.editor.getData() == '$TemplateText';"
+                "return typeof(\$) === 'function' && \$('.AJAXLoader:visible').length == 0 && window.editor.getData().indexOf('$TemplateText') > -1;"
         );
 
         $CKEditorValue = $Selenium->execute_script(
             "return window.editor.getData()"
         );
-        sleep 1;
 
         $Self->Is(
             $CKEditorValue,
-            $TemplateText,
+            "<p>$TemplateText</p>",
             "RichText contains the correct value from the selected template",
         ) || die;
 

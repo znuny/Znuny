@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%m/%d/%Y';
     $Self->{DateInputFormat}     = '%m/%d/%Y';
     $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
-    $Self->{Completeness}        = 0.421052631578947;
+    $Self->{Completeness}        = 0.422501591343094;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1546,26 +1546,20 @@ sub Data {
         'Go to updating instructions' => '',
         'Go to znuny.org' => '',
         'package information' => '',
-        'Package installation requires a patch level update of Znuny.' =>
-            '',
-        'Package update requires a patch level update of Znuny.' => '',
-        'Please note that your installed Znuny version is %s.' => '',
-        'To install this package, you need to update Znuny to version %s or newer.' =>
-            '',
-        'This package can only be installed on Znuny version %s or older.' =>
-            '',
-        'This package can only be installed on Znuny version %s.' => '',
-        'Why should I keep Znuny up to date?' => '',
-        'You will receive updates about relevant security issues.' => '',
-        'You will receive updates for all other relevant Znuny issues.' =>
-            '',
-        'How can I do a patch level update if I don’t have a contract?' =>
-            '',
-        'Please find all relevant information within the updating instructions at %s.' =>
-            '',
-        'In case you would have further questions we would be glad to answer them.' =>
-            'Kama una maswali zaidi tungependa kuyajibu.',
-        'Please visit our customer portal and file a request.' => '',
+        'Package is incompatible.' => 'Kifurushi hakioani.',
+        'Your installed Znuny version %s does not support installing this package.' =>
+            'Toleo lako la Znuny lililosakinishwa %s halitumii usakinishaji wa kifurushi hiki.',
+        'The package cannot be installed because it requires an older version of Znuny.' =>
+            'Kifurushi hakiwezi kusakinishwa kwa sababu kinahitaji toleo la zamani zaidi la Znuny.',
+        'The package cannot be installed because it requires a newer version of Znuny.' =>
+            'Kifurushi hakiwezi kusakinishwa kwa sababu kinahitaji toleo jipya zaidi la Znuny.',
+        'What to do:' => 'Nini cha kufanya:',
+        'If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Ikiwa kuna toleo jipya zaidi la kifurushi hiki linalotumia Znuny %s, sakinisha au pandisha gredi hadi toleo hilo badala yake.',
+        'If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Ikiwa kuna toleo la zamani zaidi la kifurushi hiki linalotumia Znuny %s, sakinisha au pandisha gredi hadi toleo hilo badala yake.',
+        'If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.' =>
+            'Ikiwa usasishaji wa Znuny unahitajika, angalia nyaraka za kusasisha hadi toleo linalohitajika, au wasiliana na shirika lako la usaidizi.',
         'Install Package' => 'Sanikisha kifueushi',
         'Update Package' => '',
         'Package' => '',

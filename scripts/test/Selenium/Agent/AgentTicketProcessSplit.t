@@ -106,7 +106,11 @@ $Selenium->RunTest(
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminProcessManagement");
 
         # Import test Selenium Process.
-        my $Location = $Selenium->{Home} . "/scripts/test/sample/ProcessManagement/CustomerTicketOverviewProcess.yml";
+        # upload_file copies the sample onto the Selenium node. Chrome cannot
+        # read /opt/znuny paths from the app container.
+        my $Location = $Selenium->upload_file(
+            $Selenium->{Home} . "/scripts/test/sample/ProcessManagement/CustomerTicketOverviewProcess.yml"
+        );
         $Selenium->find_element( "#FileUpload",                      'css' )->send_keys($Location);
         $Selenium->find_element( "#OverwriteExistingEntitiesImport", 'css' )->click();
         $Selenium->WaitFor(
@@ -166,12 +170,12 @@ $Selenium->RunTest(
 
         # Check if CustomerID read only field can be disabled. See bug#14412.
         # Disable CustomerID read only.
+        # Nested key only. Replacing Ticket::Frontend::AgentTicketProcess drops SplitLinkType,
+        # so the new process ticket is not linked to the parent.
         $HelperObject->ConfigSettingChange(
             Valid => 1,
-            Key   => 'Ticket::Frontend::AgentTicketProcess',
-            Value => {
-                CustomerIDReadOnly => 0,
-            },
+            Key   => 'Ticket::Frontend::AgentTicketProcess###CustomerIDReadOnly',
+            Value => 0,
         );
 
         $Selenium->VerifiedRefresh();
@@ -199,10 +203,8 @@ $Selenium->RunTest(
 
         $HelperObject->ConfigSettingChange(
             Valid => 1,
-            Key   => 'Ticket::Frontend::AgentTicketProcess',
-            Value => {
-                CustomerIDReadOnly => 1,
-            },
+            Key   => 'Ticket::Frontend::AgentTicketProcess###CustomerIDReadOnly',
+            Value => 1,
         );
 
         $Selenium->VerifiedRefresh();

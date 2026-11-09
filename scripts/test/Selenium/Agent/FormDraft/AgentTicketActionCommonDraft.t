@@ -43,17 +43,15 @@ $Selenium->RunTest(
             );
         }
 
-        # Enable NoteMandatory for AgentTicketOwner and AgentTicketResponsible screen.
-        $HelperObject->ConfigSettingChange(
-            Valid => 1,
-            Key   => "Ticket::Frontend::AgentTicketOwner###NoteMandatory",
-            Value => 1
-        );
-        $HelperObject->ConfigSettingChange(
-            Valid => 1,
-            Key   => "Ticket::Frontend::AgentTicketResponsible###NoteMandatory",
-            Value => 1
-        );
+        # Enable NoteMandatory so subject/body stay required.
+        # The empty-submit check at the end runs on AgentTicketNote.
+        for my $NoteScreen (qw(Note Owner Responsible)) {
+            $HelperObject->ConfigSettingChange(
+                Valid => 1,
+                Key   => "Ticket::Frontend::AgentTicket${NoteScreen}###NoteMandatory",
+                Value => 1
+            );
+        }
 
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
@@ -260,6 +258,27 @@ $Selenium->RunTest(
             },
         );
 
+        # Article widget is a collapsible card. Expand it and enable CreateArticle
+        # when the note is optional, otherwise subject/body are not interactable.
+        my $ExpandArticleWidget = sub {
+            my $IsCollapsed = $Selenium->execute_script(
+                "return \$('#WidgetArticle').hasClass('Collapsed') ? 1 : 0;"
+            );
+            if ( $IsCollapsed == 1 ) {
+                $Selenium->execute_script("\$('#WidgetArticle .cardTitleTrigger').click();");
+                $Selenium->WaitFor(
+                    JavaScript =>
+                        'return typeof($) === "function" && $("#WidgetArticle.Expanded").length;'
+                );
+            }
+
+            $Selenium->execute_script(
+                "var Box = \$('#CreateArticle'); if (Box.length && Box.is(':checkbox') && !Box.prop('checked')) { Box.prop('checked', true).trigger('change'); }"
+            );
+
+            return;
+        };
+
         # Execute test scenarios.
         my $Handles;
         for my $Test (@Tests) {
@@ -274,6 +293,8 @@ $Selenium->RunTest(
                 JavaScript =>
                     'return typeof($) === "function" && $("#AppWrapper").length;'
             );
+
+            $ExpandArticleWidget->();
 
             # Input fields.
             for my $Field ( sort keys %{ $Test->{Fields} } ) {
@@ -301,9 +322,12 @@ $Selenium->RunTest(
                     );
                     sleep 1;
 
-                    # Upload a file.
-                    $Selenium->find_element( "#FileUpload", 'css' )
-                        ->send_keys( $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.pdf" );
+                    # upload_file copies the sample onto the Selenium node. Chrome cannot
+                    # read /opt/znuny paths from the app container.
+                    my $Location = $Selenium->upload_file(
+                        $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.pdf"
+                    );
+                    $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
 
                     $Selenium->WaitFor(
                         JavaScript =>
@@ -424,6 +448,8 @@ $Selenium->RunTest(
                 'Outdated notification is present',
             );
 
+            $ExpandArticleWidget->();
+
             # Verify initial Draft values and update them.
             for my $FieldValue ( sort keys %{ $Test->{Fields} } ) {
 
@@ -467,6 +493,7 @@ $Selenium->RunTest(
 
                     # Add a second file.
                     $Selenium->VerifiedRefresh();
+                    $ExpandArticleWidget->();
                     $Selenium->execute_script(
                         "\$('#FileUpload').css('display', 'block');"
                     );
@@ -476,9 +503,12 @@ $Selenium->RunTest(
                     );
                     sleep 1;
 
-                    # Upload a file.
-                    $Selenium->find_element( "#FileUpload", 'css' )
-                        ->send_keys( $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.doc" );
+                    # upload_file copies the sample onto the Selenium node. Chrome cannot
+                    # read /opt/znuny paths from the app container.
+                    my $Location = $Selenium->upload_file(
+                        $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.doc"
+                    );
+                    $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
 
                     $Selenium->WaitFor(
                         JavaScript =>
@@ -508,9 +538,10 @@ $Selenium->RunTest(
                             "return \$('.ck-editor__editable').contents().length >= 1;"
                     );
 
+                    # CKEditor 5 wraps plain text in a paragraph.
                     $Self->Is(
                         $Selenium->execute_script('return window.editor.getData();'),
-                        $Test->{Fields}->{$FieldValue}->{Value},
+                        '<p>' . $Test->{Fields}->{$FieldValue}->{Value} . '</p>',
                         "Initial Draft value for $Test->{Module} field $FieldValue is correct"
                     );
 
@@ -573,8 +604,9 @@ $Selenium->RunTest(
             # Navigate to zoom view of created test ticket.
             $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID");
 
-            # Delete draft
-            $Selenium->find_element( ".FormDraftDelete", 'css' )->click();
+            # Delete draft.
+            # Native click misses the control: .table-icon-hover-md uses text-indent:-9999px.
+            $Selenium->execute_script("\$('a.FormDraftDelete').click();");
             $Selenium->WaitFor(
                 JavaScript =>
                     'return typeof($) === "function" && $("#DeleteConfirm").length;'
@@ -630,14 +662,24 @@ $Selenium->RunTest(
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $(".Dialog:visible").length === 0;' );
 
         # Submit empty form to check validation.
-        $Selenium->find_element( "#submitRichText", 'css' )->click();
+        # Draft save disables validation until the dialog closes.
+        # Dev Config.pm also pre-fills AgentTicketNote subject/body.
+        $Selenium->execute_script("Core.Form.Validate.EnableValidation(\$('#Compose'));");
+        $ExpandArticleWidget->();
+        $Selenium->execute_script(
+            "\$('#Subject').val(''); if (window.editor) { window.editor.setData(''); window.editor.updateSourceElement(); }"
+        );
+        $Selenium->WaitFor(
+            JavaScript =>
+                "return \$('#Subject').val() === '' && (!window.editor || window.editor.getData() === '');"
+        );
+        $Selenium->execute_script("\$('#submitRichText')[0].scrollIntoView(true); \$('#submitRichText').click();");
 
-        # Wait error Dialog to be visible.
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $(".Dialog:visible").length === 1;' );
-
-        # Close error Dialog.
-        $Selenium->find_element( "#DialogButton1", 'css' )->click();
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $(".Dialog:visible").length === 0;' );
+        # Client validation highlights the field. It does not open a dialog.
+        $Selenium->WaitFor(
+            JavaScript =>
+                "return typeof(\$) === 'function' && \$('#Subject').hasClass('Error');"
+        );
 
         # Check validation.
         $Self->Is(

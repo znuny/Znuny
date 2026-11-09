@@ -27,14 +27,13 @@ our $ObjectManagerDisabled = 1;
 #
 # Example for debugging/logging
 #
-# use Data::Dumper;
-# use SOAP::Lite +trace => [ all => \&log_all ];
-#
-# sub log_all {
-#   open LOGFILE,">>/tmp/znuny.gi.log";
-#   print LOGFILE Dumper( \@_ ) . "\n";
-#   close LOGFILE;
-# }
+#sub log_all {
+#  open my $Logfile, '>>', 'znuny.gi.log' or die "$!";
+#  $Logfile->print( Dumper( \@_ ), "\n" );
+#  $Logfile->close();
+#}
+#use Data::Dumper;
+#use SOAP::Lite +trace => all => \&log_all;
 
 =head1 NAME
 
@@ -254,6 +253,7 @@ sub ProviderProcessRequest {
     );
 
     # Deserialize data.
+    chomp $Content;    # for some reason, trailing newlines can cause horrible breakage in deserialization
     my $Deserialized      = eval { SOAP::Deserializer->deserialize($Content); };
     my $DeserializedFault = $@ || '';
     if ($DeserializedFault) {

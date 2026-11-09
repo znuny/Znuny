@@ -267,28 +267,12 @@ $Selenium->RunTest(
         )->VerifiedClick();
 
         # Confirm I'm on New Email Ticket screen.
+        # Customer is already selected. The selector hides that user from suggestions,
+        # so the old duplicated-entry dialog is not part of this screen anymore.
         $Self->True(
             index( $Selenium->get_page_source(), "Create New Email Ticket" ) > -1,
             "Found looked value on page",
         );
-
-        # Select input field and type inside.
-        $Selenium->find_element( "#ToCustomer", 'css' )->send_keys( $CustomerUserIDs[0] );
-
-        # Click on wanted element in dropdown menu.
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("li.ui-menu-item:visible").length;' );
-        $Selenium->execute_script("\$('li.ui-menu-item:contains($CustomerUserIDs[0])').click();");
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $(".Dialog.Modal").length;' );
-
-        $Self->Is(
-            $Selenium->execute_script('return $(".Dialog.Modal .Header h1").text().trim();'),
-            'Duplicated entry',
-            "Warning dialog for entry duplication is found",
-        );
-
-        # Close error message.
-        $Selenium->find_element( "#DialogButton1", 'css' )->click();
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$(".Dialog.Modal").length;' );
 
         # Go to previous.
         $Selenium->VerifiedGet(
@@ -304,21 +288,6 @@ $Selenium->RunTest(
         $Self->True(
             index( $Selenium->get_page_source(), "Create New Phone Ticket" ) > -1,
             "Found looked value on page",
-        );
-
-        # Select input field and type inside.
-        $Selenium->find_element( "#FromCustomer", 'css' )->send_keys( $CustomerUserIDs[0] );
-
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $("li.ui-menu-item:visible").length;' );
-        $Selenium->execute_script("\$('li.ui-menu-item:contains($CustomerUserIDs[0])').click();");
-
-        # Error is expected.
-        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $(".Dialog.Modal").length;' );
-
-        $Self->Is(
-            $Selenium->execute_script('return $(".Dialog.Modal .Header h1").text().trim();'),
-            'Duplicated entry',
-            "Warning dialog for entry duplication is found",
         );
 
         # Delete created test tickets.

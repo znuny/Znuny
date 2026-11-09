@@ -196,25 +196,25 @@ $Selenium->RunTest(
             "$CustomerUser" => {
                 Expected          => 2,    # AgentCustomerSearch should return only 2 records (see bug#11996)
                 CustomerUser      => "\"$CustomerUser-1 $CustomerUser-1\" <$CustomerUser-1\@localunittest.com>",
+                CustomerUserLogin => $TestCustomerUser1,
                 CustomerID        => $CustomerIDs[0],
-                AutocompleteInput =>
-                    "\"$CustomerUser-1 $CustomerUser-1\" <$CustomerUser-1\@localunittest.com> ($TestCustomerUser1)",
             },
             "$CustomerUser-1" => {
-                Expected          => 1,
-                CustomerUser      => "\"$CustomerUser-1 $CustomerUser-1\" <$CustomerUser-1\@localunittest.com>",
-                CustomerID        => $CustomerIDs[1],
-                AutocompleteInput =>
-                    "\"$CustomerUser-1 $CustomerUser-1\" <$CustomerUser-1\@localunittest.com> ($TestCustomerUser1)",
+                Expected                 => 1,
+                CustomerUser             => "\"$CustomerUser-1 $CustomerUser-1\" <$CustomerUser-1\@localunittest.com>",
+                CustomerUserLogin        => $TestCustomerUser1,
+                CustomerID               => $CustomerIDs[1],
                 SelectAssigendCustomerID => $CustomerIDs[1],
             },
         );
 
         for my $AutocompleteInput ( sort keys %AutoCompleteExpected ) {
 
-            # Check autocomplete field.
-            $Selenium->find_element( "input.CustomerAutoComplete", 'css' )->clear();
-            $Selenium->find_element( "input.CustomerAutoComplete", 'css' )->send_keys($AutocompleteInput);
+            my $CustomerUserLogin = $AutoCompleteExpected{$AutocompleteInput}->{CustomerUserLogin};
+
+            # Customer user field on AgentTicketPhone is the customer selector input.
+            $Selenium->find_element( "#FromCustomer", 'css' )->clear();
+            $Selenium->find_element( "#FromCustomer", 'css' )->send_keys($AutocompleteInput);
 
             if ( $AutoCompleteExpected{$AutocompleteInput}->{Expected} ) {
 
@@ -228,17 +228,17 @@ $Selenium->RunTest(
 
                 # Send a "return" key to trigger the javascript events, because we need a change of the field,
                 #   if no auto complete result exists.
-                $Selenium->find_element( "input.CustomerAutoComplete", 'css' )->send_keys("\N{U+E015}");
-                $Selenium->find_element( "input.CustomerAutoComplete", 'css' )->send_keys("\N{U+E007}");
+                $Selenium->find_element( "#FromCustomer", 'css' )->send_keys("\N{U+E015}");
+                $Selenium->find_element( "#FromCustomer", 'css' )->send_keys("\N{U+E007}");
 
                 # Wait for ajax call after customer user selection.
                 $Selenium->WaitFor(
-                    JavaScript => 'return typeof($) === "function" && !$("span.AJAXLoader:visible").length;',
+                    JavaScript => 'return typeof($) === "function" && !$(".AJAXLoader:visible").length;',
                 );
             }
 
             my $AutoCompleteEntries = $Selenium->execute_script(
-                "return \$('ul.ui-autocomplete li.ui-menu-item:visible').length;",
+                "return \$('li.ui-menu-item:visible').length;",
             );
 
             $Self->Is(
@@ -249,20 +249,22 @@ $Selenium->RunTest(
 
             if ( $AutoCompleteExpected{$AutocompleteInput}->{Expected} ) {
 
-                # Select customer user.
-                $Selenium->execute_script("\$('li.ui-menu-item:contains($AutocompleteInput)').click();");
-
-                # Wait until customer data is loading (CustomerID is filled after CustomerAutoComplete).
-                $Selenium->WaitFor( JavaScript => 'return $("#CustomerID").val().length;' );
-
-                # Wait for ajax call after customer user selection.
-                $Selenium->WaitFor(
-                    JavaScript => 'return !$("span.AJAXLoader:visible").length;',
+                # Select the expected customer user. The search term can match more than one row.
+                $Selenium->execute_script(
+                    "\$('li.customerSelectorFieldSuggestItem[data-value=\"$CustomerUserLogin\"]').click();"
                 );
 
-                # Check if customer user is selected.
+                # Wait until customer data is loading (CustomerID is filled after customer selection).
+                $Selenium->WaitFor(
+                    JavaScript =>
+                        'return typeof($) === "function" && $(".customerSelectorFieldInputSelectedCustomer[data-value=\''
+                        . $CustomerUserLogin
+                        . '\']").length && $("#CustomerID").val().length && !$(".AJAXLoader:visible").length;',
+                );
+
+                # Selected customer text is stored in a hidden input without an id.
                 $Self->Is(
-                    $Selenium->find_element( "#CustomerTicketText_1", 'css' )->get_value(),
+                    $Selenium->find_element( 'input[name="CustomerTicketText_1"]', 'css' )->get_value(),
                     $AutoCompleteExpected{$AutocompleteInput}->{CustomerUser},
                     "Customer user is selected",
                 );
@@ -291,9 +293,9 @@ $Selenium->RunTest(
                 );
             }
 
-            # Check if correct CustomerID is filled.
+            # CustomerID is set via jQuery. Read the live value, not the initial HTML attribute.
             $Self->Is(
-                $Selenium->find_element( "#CustomerID", 'css' )->get_value(),
+                $Selenium->execute_script('return $("#CustomerID").val();'),
                 $AutoCompleteExpected{$AutocompleteInput}->{CustomerID},
                 "CustomerID is selected",
             );
@@ -325,9 +327,9 @@ $Selenium->RunTest(
 
         $Selenium->VerifiedRefresh();
 
-        # Check autocomplete field.
-        $Selenium->find_element( "input.CustomerAutoComplete", 'css' )->clear();
-        $Selenium->find_element( "input.CustomerAutoComplete", 'css' )->send_keys('ot');
+        # Customer selector searches from 3 characters. "quot" still hits the quoted customer name (bug#14592).
+        $Selenium->find_element( "#FromCustomer", 'css' )->clear();
+        $Selenium->find_element( "#FromCustomer", 'css' )->send_keys('quot');
 
         $Selenium->WaitFor(
             JavaScript =>

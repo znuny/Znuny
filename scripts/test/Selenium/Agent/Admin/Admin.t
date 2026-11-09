@@ -63,6 +63,15 @@ $Selenium->RunTest(
             Value => 1
         );
 
+        # AdminEmail loads the CKEditor 5 bundle. That file uses syntax Chrome 74
+        # (GitLab Selenium image) cannot parse, so Core.App.PageLoadComplete stays
+        # false. This test only checks that the admin screen itself renders.
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'Frontend::RichText',
+            Value => 0,
+        );
+
         # create test user and login
         my $TestUserLogin = $HelperObject->TestUserCreate(
             Groups => ['admin'],
@@ -136,11 +145,15 @@ $Selenium->RunTest(
             # Some admin screens (e.g. package manager, support data collector) collect data on
             # first load, which can exceed the default page load wait time on slow CI machines.
             $Selenium->get("${ScriptAlias}index.pl?Action=$AdminModule");
-            $Selenium->WaitFor(
+            my $PageLoaded = $Selenium->WaitFor(
                 JavaScript =>
                     'return typeof(Core) == "object" && typeof(Core.App) == "object" && Core.App.PageLoadComplete',
-                Time => 60,
-            ) || die "Znuny API verification failed after page load of $AdminModule.";
+                Time    => 60,
+                SkipDie => 1,
+            );
+            if ( !$PageLoaded ) {
+                die "Znuny API verification failed after page load of $AdminModule.";
+            }
 
             # Check if needed frontend module is registered in sysconfig.
             if ( !$FrontendModules->{$AdminModule} ) {

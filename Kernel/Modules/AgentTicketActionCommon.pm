@@ -2473,7 +2473,7 @@ sub _Mask {
             Class => 'Modernize '
                 . ( $Config->{StateMandatory} ? 'Validate_Required ' : '' )
                 . ( $Param{NewStateInvalid} || '' ),
-            PossibleNone => 1,
+            PossibleNone => $Config->{StateDefault} ? 0 : 1,
             SelectedID   => $Selected{StateID},
         );
 
@@ -2524,7 +2524,6 @@ sub _Mask {
     # get priority
     if ( $Config->{Priority} ) {
 
-        my %Priority;
         my %PriorityList = $TicketObject->TicketPriorityList(
             UserID   => $Self->{UserID},
             TicketID => $Self->{TicketID},
@@ -2543,7 +2542,7 @@ sub _Mask {
             }
         }
         else {
-            $Priority{SelectedID} = $Param{NewPriorityID};
+            $Selected{PriorityID} = $Param{NewPriorityID};
         }
 
         $Param{PriorityStrg} = $LayoutObject->BuildSelection(

@@ -64,17 +64,17 @@ my @Tests = (
     },
     {
         Name        => 'ISO-8859-1 Complex Content Type',
-        Value       => 'c©',
+        Value       => do { no utf8; "c\251" },             # '®' in ISO-8859-1, there is no '™'
         ContentType => 'application/soap+xml;charset=iso-8859-1;action="urn:MyService/MyAction"',
     },
     {
         Name        => 'ISO-8859-1 Single Content Type',
-        Value       => 'c©',
+        Value       => do { no utf8; "c\251" },             # Make sure non-utf-8 tests use byte strings
         ContentType => 'text/xml;charset=iso-8859-1;',
     },
     {
         Name        => 'ISO-8859-1 Complex Content Type (Just ASCII)',
-        Value       => 'cTM',
+        Value       => 'cTM',    # No code point >127 in use, so there is no difference between UTF-8 and ISO-*
         ContentType => 'application/soap+xml;charset=iso-8859-1;action="urn:MyService/MyAction"',
     },
     {
@@ -97,18 +97,8 @@ for my $Test (@Tests) {
 </soapenv:Envelope>
 EOF
 
-    my ($TestCharset) = $Test->{ContentType} =~ /charset=([^;]+)/;
-    $Self->True( $TestCharset, 'ContentType has charset defined' );
-
-    # Encode test text to a byte string
+    # Encode test text to a byte string where necessary
     $EncodeObject->EncodeOutput( \$Request );
-    if ( lc($TestCharset) ne 'utf-8' ) {
-        $Request = $EncodeObject->Convert(
-            Text => $Request,
-            From => 'utf-8',
-            To   => $TestCharset,
-        );
-    }
 
     # Fake STDIN and fill it with the request.
     open my $StandardInput, '<', \"$Request";    ## no critic

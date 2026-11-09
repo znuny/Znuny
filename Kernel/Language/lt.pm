@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.186993162664971;
+    $Self->{Completeness}        = 0.188415022278803;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1544,26 +1544,20 @@ sub Data {
         'Go to updating instructions' => '',
         'Go to znuny.org' => '',
         'package information' => '',
-        'Package installation requires a patch level update of Znuny.' =>
-            '',
-        'Package update requires a patch level update of Znuny.' => '',
-        'Please note that your installed Znuny version is %s.' => '',
-        'To install this package, you need to update Znuny to version %s or newer.' =>
-            '',
-        'This package can only be installed on Znuny version %s or older.' =>
-            '',
-        'This package can only be installed on Znuny version %s.' => '',
-        'Why should I keep Znuny up to date?' => '',
-        'You will receive updates about relevant security issues.' => '',
-        'You will receive updates for all other relevant Znuny issues.' =>
-            '',
-        'How can I do a patch level update if I don’t have a contract?' =>
-            '',
-        'Please find all relevant information within the updating instructions at %s.' =>
-            '',
-        'In case you would have further questions we would be glad to answer them.' =>
-            '',
-        'Please visit our customer portal and file a request.' => '',
+        'Package is incompatible.' => 'Paketas nesuderinamas.',
+        'Your installed Znuny version %s does not support installing this package.' =>
+            'Jūsų įdiegta Znuny versija %s nepalaiko šio paketo diegimo.',
+        'The package cannot be installed because it requires an older version of Znuny.' =>
+            'Paketo negalima įdiegti, nes jam reikalinga senesnė Znuny versija.',
+        'The package cannot be installed because it requires a newer version of Znuny.' =>
+            'Paketo negalima įdiegti, nes jam reikalinga naujesnė Znuny versija.',
+        'What to do:' => 'Ką daryti:',
+        'If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Jei yra naujesnė šio paketo versija, palaikanti Znuny %s, įdiekite ją arba atnaujinkite iki jos.',
+        'If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Jei yra senesnė šio paketo versija, palaikanti Znuny %s, įdiekite ją arba atnaujinkite iki jos.',
+        'If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.' =>
+            'Jei reikia atnaujinti Znuny, peržiūrėkite dokumentaciją apie atnaujinimą iki reikiamos versijos arba susisiekite su savo palaikymo organizacija.',
         'Install Package' => 'Įdiegti paketą',
         'Update Package' => '',
         'Package' => '',

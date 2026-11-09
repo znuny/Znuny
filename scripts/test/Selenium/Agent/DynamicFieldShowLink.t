@@ -137,7 +137,7 @@ $Selenium->RunTest(
         # Check existence of test dynamic field in 'Ticket Information' widget.
         $Self->Is(
             $Selenium->execute_script(
-                "return \$('.SidebarColumn a.DynamicFieldLink').parent('span').attr('title').trim();"
+                "return \$('.sectionSidebar a.DynamicFieldLink').parent('span').attr('title').trim();"
             ),
             $ValueText,
             "DynamicFieldID $DynamicFieldID is found in 'Ticket Information' widget",
@@ -148,7 +148,7 @@ $Selenium->RunTest(
         $ValueTextShortened .= '[...]';
         $Self->Is(
             $Selenium->execute_script(
-                "return \$('.SidebarColumn a.DynamicFieldLink').text();"
+                "return \$('.sectionSidebar a.DynamicFieldLink').text();"
             ),
             $ValueTextShortened,
             "Dynamic field text '$ValueTextShortened' is correct",
@@ -158,7 +158,7 @@ $Selenium->RunTest(
         $DynamicFieldLink = "http://znuny.com/bugs/?id=$TicketID";
         $Self->Is(
             $Selenium->execute_script(
-                "return \$('.SidebarColumn a.DynamicFieldLink').attr('href');"
+                "return \$('.sectionSidebar a.DynamicFieldLink').attr('href');"
             ),
             $DynamicFieldLink,
             "Dynamic field link '$DynamicFieldLink' is correct",
@@ -167,7 +167,7 @@ $Selenium->RunTest(
         # Check dynamic field link preview.
         $Self->Is(
             $Selenium->execute_script(
-                "return \$('.SidebarColumn a.DynamicFieldLink').attr('data-floater-url');"
+                "return \$('.sectionSidebar a.DynamicFieldLink').attr('data-floater-url');"
             ),
             $DynamicFieldLink,
             "Dynamic field link preview '$DynamicFieldLink' is correct",
@@ -175,7 +175,7 @@ $Selenium->RunTest(
 
         # Hover dynamic field link.
         $Selenium->execute_script(
-            "\$('.SidebarColumn a.DynamicFieldLink').mouseenter();"
+            "\$('.sectionSidebar a.DynamicFieldLink').mouseenter();"
         );
 
         # Wait for the floater to be fully visible.

@@ -185,9 +185,12 @@ $Selenium->RunTest(
                 );
                 sleep 1;
 
-                # Upload a file.
-                $Selenium->find_element( "#FileUpload", 'css' )
-                    ->send_keys( $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.pdf" );
+                # upload_file copies the sample onto the Selenium node. Chrome cannot
+                # read /opt/znuny paths from the app container.
+                my $Location = $Selenium->upload_file(
+                    $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.pdf"
+                );
+                $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
 
                 # Check if uploaded.
                 $Self->Is(
@@ -249,8 +252,13 @@ $Selenium->RunTest(
 
         my $Message = 'Article subject will be empty if the subject contains only the ticket hook!';
 
+        # Notifications render into .modNotification .message (warning), not the old .messageNotice box.
+        $Selenium->WaitFor(
+            JavaScript =>
+                "return \$('.modNotification .message:contains(\"$Message\")').length;"
+        );
         $Self->True(
-            $Selenium->execute_script("return \$('.messageNotice .alertContent:contains(\"$Message\")').length;"),
+            $Selenium->execute_script("return \$('.modNotification .message:contains(\"$Message\")').length;"),
             "Notification about empty subject is found",
         );
 
@@ -309,9 +317,10 @@ $Selenium->RunTest(
         $Selenium->VerifiedRefresh();
 
         # Click on test created FormDraft and switch window.
-        $Selenium->find_element(
-            "//a[contains(\@href, \'Action=AgentTicket$FormDraftCase->{Module};TicketID=$TicketID;LoadFormDraft=1' )]"
-        )->click();
+        # JS click: daemon/timezone toasts sit over the sidebar link and intercept the native click.
+        $Selenium->execute_script(
+            "\$('a.MasterActionLink[href*=\"LoadFormDraft=1\"][href*=\"TicketID=$TicketID\"]').get(0).click();"
+        );
 
         $Selenium->WaitFor( WindowCount => 2 );
         $Handles = $Selenium->get_window_handles();
@@ -341,8 +350,12 @@ $Selenium->RunTest(
         # Verify FormDraft values.
         for my $FieldValue ( sort keys %{ $FormDraftCase->{Fields} } ) {
             if ( $FormDraftCase->{Fields}->{$FieldValue}->{Type} eq 'Input' ) {
+
+                # Chrome getElementAttribute('value') is null for textarea. Read the property via jQuery.
                 $Self->Is(
-                    $Selenium->find_element( "#$FormDraftCase->{Fields}->{$FieldValue}->{ID}", 'css' )->get_value(),
+                    $Selenium->execute_script(
+                        "return \$('#$FormDraftCase->{Fields}->{$FieldValue}->{ID}').val();"
+                    ),
                     $FormDraftCase->{Fields}->{$FieldValue}->{Value},
                     "Initial FormDraft value for $FormDraftCase->{Module} field $FieldValue is correct"
                 );
@@ -380,9 +393,12 @@ $Selenium->RunTest(
                 );
                 sleep 1;
 
-                # Upload a file.
-                $Selenium->find_element( "#FileUpload", 'css' )
-                    ->send_keys( $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.doc" );
+                # upload_file copies the sample onto the Selenium node. Chrome cannot
+                # read /opt/znuny paths from the app container.
+                my $Location = $Selenium->upload_file(
+                    $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.doc"
+                );
+                $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
 
                 # Check if uploaded.
                 $Self->Is(
@@ -405,9 +421,10 @@ $Selenium->RunTest(
         $Selenium->VerifiedRefresh();
 
         # Click on test created FormDraft and switch window.
-        $Selenium->find_element(
-            "//a[contains(\@href, \'Action=AgentTicket$FormDraftCase->{Module};TicketID=$TicketID;LoadFormDraft=1' )]"
-        )->click();
+        # JS click: daemon/timezone toasts sit over the sidebar link and intercept the native click.
+        $Selenium->execute_script(
+            "\$('a.MasterActionLink[href*=\"LoadFormDraft=1\"][href*=\"TicketID=$TicketID\"]').get(0).click();"
+        );
 
         $Selenium->WaitFor( WindowCount => 2 );
         $Handles = $Selenium->get_window_handles();
@@ -422,8 +439,12 @@ $Selenium->RunTest(
         # Verify updated FormDraft values.
         for my $FieldValue ( sort keys %{ $FormDraftCase->{Fields} } ) {
             if ( $FormDraftCase->{Fields}->{$FieldValue}->{Type} eq 'Input' ) {
+
+                # Chrome getElementAttribute('value') is null for textarea. Read the property via jQuery.
                 $Self->Is(
-                    $Selenium->find_element( "#$FormDraftCase->{Fields}->{$FieldValue}->{ID}", 'css' )->get_value(),
+                    $Selenium->execute_script(
+                        "return \$('#$FormDraftCase->{Fields}->{$FieldValue}->{ID}').val();"
+                    ),
                     $FormDraftCase->{Fields}->{$FieldValue}->{Update},
                     "Updated FormDraft value for $FormDraftCase->{Module} field $FieldValue is correct"
                 );
@@ -448,7 +469,8 @@ $Selenium->RunTest(
         $Selenium->switch_to_window( $Handles->[0] );
 
         # Delete draft.
-        $Selenium->find_element( ".FormDraftDelete", 'css' )->click();
+        # Native click misses the control: .table-icon-hover-md uses text-indent:-9999px.
+        $Selenium->execute_script("\$('a.FormDraftDelete').click();");
         $Selenium->WaitFor(
             JavaScript =>
                 'return typeof($) === "function" && $("#DeleteConfirm").length;'

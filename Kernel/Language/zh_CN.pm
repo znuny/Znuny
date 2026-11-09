@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.859119096835745;
+    $Self->{Completeness}        = 0.859166136218969;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1550,26 +1550,20 @@ sub Data {
         'Go to updating instructions' => '转到升级说明',
         'Go to znuny.org' => '',
         'package information' => '软件包信息',
-        'Package installation requires a patch level update of Znuny.' =>
-            '安装软件包需要将Znuny补丁级别更新。',
-        'Package update requires a patch level update of Znuny.' => '升级软件包需要将Znuny补丁级别更新。',
-        'Please note that your installed Znuny version is %s.' => '请注意，您安装的Znuny版本是%s。',
-        'To install this package, you need to update Znuny to version %s or newer.' =>
-            '安装这个软件包，你需要升级Znuny版本到%s或者更高。',
-        'This package can only be installed on Znuny version %s or older.' =>
-            '这个软件包只能安装在Znuny版本%s或者更低。',
-        'This package can only be installed on Znuny version %s.' => '',
-        'Why should I keep Znuny up to date?' => '为什么要保持Znuny是最新的？',
-        'You will receive updates about relevant security issues.' => '您将收到有关安全问题的更新。',
-        'You will receive updates for all other relevant Znuny issues.' =>
-            '你将收到所有其他有关Znuny问题的更新。',
-        'How can I do a patch level update if I don’t have a contract?' =>
-            '如果没有合约，我怎么更新补丁级别？',
-        'Please find all relevant information within the updating instructions at %s.' =>
-            '请在升级说明%s中查找所有相关的信息。',
-        'In case you would have further questions we would be glad to answer them.' =>
-            '如果您还有其它问题，我们非常愿意答复您。',
-        'Please visit our customer portal and file a request.' => '请访问我们的客户门户并提出请求。',
+        'Package is incompatible.' => '软件包不兼容。',
+        'Your installed Znuny version %s does not support installing this package.' =>
+            '您安装的 Znuny 版本 %s 不支持安装此软件包。',
+        'The package cannot be installed because it requires an older version of Znuny.' =>
+            '无法安装此软件包，因为它需要较旧版本的 Znuny。',
+        'The package cannot be installed because it requires a newer version of Znuny.' =>
+            '无法安装此软件包，因为它需要较新版本的 Znuny。',
+        'What to do:' => '处理方法：',
+        'If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            '如果存在支持 Znuny %s 的此软件包的较新版本，请改为安装或升级到该版本。',
+        'If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            '如果存在支持 Znuny %s 的此软件包的较旧版本，请改为安装或升级到该版本。',
+        'If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.' =>
+            '如果需要更新 Znuny，请查阅有关更新到所需版本的文档，或联系您的支持机构。',
         'Install Package' => '安装软件包',
         'Update Package' => '更新软件包',
         'Package' => '',

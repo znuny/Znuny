@@ -145,8 +145,12 @@ $Selenium->RunTest(
             Value   => 4,
         );
 
-        $Selenium->execute_script("\$('#WidgetArticle.Collapsed .WidgetAction > a').trigger('click');");
-        $Selenium->WaitFor( JavaScript => 'return $("#WidgetArticle.Expanded").length;' );
+        # Article widget is a collapsible card. Expand it so subject and body are interactable.
+        $Selenium->execute_script("\$('#WidgetArticle .cardTitleTrigger').click();");
+        $Selenium->WaitFor(
+            JavaScript =>
+                'return typeof($) === "function" && $("#WidgetArticle.Expanded").length;'
+        );
 
         $Selenium->find_element( "#Subject",        'css' )->send_keys("Subject-QueueMove$RandomID");
         $Selenium->find_element( "#RichText",       'css' )->send_keys("Body-QueueMove$RandomID");

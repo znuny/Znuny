@@ -201,36 +201,26 @@
                     <h2> [% Data.Name | html %] [% Data.Version | html %] [% Translate("package information") | html %]</h2>
                 </div>
                 <div class="Content">
-                    [% IF Data.Type == 'InstallIncompatible' %]
-                    <h2>[% Translate("Package installation requires a patch level update of Znuny.") | html %]</h2>
-                    [% ELSIF Data.Type =='UpgradeIncompatible' %]
-                    <h2>[% Translate("Package update requires a patch level update of Znuny.") | html %]</h2>
+                    <h2>[% Translate("Package is incompatible.") | html %]</h2>
+                    <p>[% Translate("Your installed Znuny version %s does not support installing this package.", Config("Version")) | html %]</p>
+                    [% IF Data.RequiresOlderFrameworkVersion %]
+                        <p>[% Translate("The package cannot be installed because it requires an older version of Znuny.") | html %]
+                    [% ELSIF Data.RequiresNewerFrameworkVersion %]
+                        <p>[% Translate("The package cannot be installed because it requires a newer version of Znuny.") | html %]
                     [% END %]
-                    <p>[% Translate("Please note that your installed Znuny version is %s.", Config("Version")) | html %]</p>
-                    [% IF Data.RequiredMinimumVersion %]
-                    <p><span class="MinimumRequired">[% Translate("To install this package, you need to update Znuny to version %s or newer.", Data.RequiredMinimumVersion) | html %]</span></p>
-                    [% END %]
-                    [% IF Data.RequiredMaximumVersion %]
-                    <p><span class="MaximumRequired">[% Translate("This package can only be installed on Znuny version %s or older.", Data.RequiredMaximumVersion) | html %] </span></p>
-                    [% END %]
-                    [% IF !Data.RequiredMinimumVersion && !Data.RequiredMaximumVersion && Data.RequiredFramework %]
-                    <p><span class="MaximumRequired">[% Translate("This package can only be installed on Znuny version %s.", Data.RequiredFramework) | html %] </span></p>
-                    [% END %]
-                    <h2>[% Translate("Why should I keep Znuny up to date?") | html %]</h2>
+
+                    <p>[% Translate("What to do:") | html %]
                     <ul class="Default">
-                        <li>
-                            [% Translate("You will receive updates about relevant security issues.") | html %]
-                        </li>
-                        <li>
-                            [% Translate("You will receive updates for all other relevant Znuny issues.") | html %]
-                        </li>
+                    <li>
+                    [% IF Data.RequiresOlderFrameworkVersion %]
+                        [% Translate("If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.", Config("Version")) | html %]
+                    [% ELSIF Data.RequiresNewerFrameworkVersion %]
+                        [% Translate("If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.", Config("Version")) | html %]
+                    [% END %]
+                    </li>
+                    <li>[% Translate("If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.") | html %]</li>
                     </ul>
-                    <h2>[% Translate("How can I do a patch level update if I don’t have a contract?") | html %]</h2>
-                    <p>
-                        [% Translate("Please find all relevant information within the updating instructions at %s.") | html
-                        | ReplacePlaceholders('<a href="https://doc.znuny.org/doc/manual/admin/6.0/en/html/updating.html" target="_blank">doc.znuny.org</a>') %]
                     </p>
-                    <p>[% Translate("In case you would have further questions we would be glad to answer them.") | html %] <br />[% Translate("Please visit our customer portal and file a request.") | html %]</p>
                 </div>
             </div>
         </div>

@@ -47,8 +47,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 1,
-            RequiredFramework => '4.0.x',
+            Success                       => 1,
+            RequiredFramework             => '4.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -58,8 +60,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '4.0.3',
+            Success                       => 0,
+            RequiredFramework             => '4.0.3',
+            RequiresOlderFrameworkVersion => 1,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -69,8 +73,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 1,
-            RequiredFramework => '4.0.4',
+            Success                       => 1,
+            RequiredFramework             => '4.0.4',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -80,8 +86,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '4.0.5',
+            Success                       => 0,
+            RequiredFramework             => '4.0.5',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -91,8 +99,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '4.1.x',
+            Success                       => 0,
+            RequiredFramework             => '4.1.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -102,8 +112,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '4.1.3',
+            Success                       => 0,
+            RequiredFramework             => '4.1.3',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -113,8 +125,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '5.0.4',
+            Success                       => 0,
+            RequiredFramework             => '5.0.4',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -124,8 +138,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '3.0.5',
+            Success                       => 0,
+            RequiredFramework             => '3.0.5',
+            RequiresOlderFrameworkVersion => 1,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
 
@@ -138,8 +154,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 1,
-            RequiredFramework => '4.0.x',
+            Success                       => 1,
+            RequiredFramework             => '4.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -150,8 +168,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 1,
-            RequiredFramework => '4.0.x',
+            Success                       => 1,
+            RequiredFramework             => '4.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -162,9 +182,11 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success                  => 0,
-            RequiredFramework        => '4.0.x',
-            RequiredFrameworkMinimum => '4.0.5',
+            Success                       => 0,
+            RequiredFramework             => '4.0.x',
+            RequiredFrameworkMinimum      => '4.0.5',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -175,8 +197,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '5.0.x',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -187,8 +211,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '5.0.x',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -199,8 +225,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '3.0.x',
+            Success                       => 0,
+            RequiredFramework             => '3.0.x',
+            RequiresOlderFrameworkVersion => 1,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -211,8 +239,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '3.0.x',
+            Success                       => 0,
+            RequiredFramework             => '3.0.x',
+            RequiresOlderFrameworkVersion => 1,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
 
@@ -225,8 +255,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 1,
-            RequiredFramework => '4.0.x',
+            Success                       => 1,
+            RequiredFramework             => '4.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -237,8 +269,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 1,
-            RequiredFramework => '4.0.x',
+            Success                       => 1,
+            RequiredFramework             => '4.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -249,9 +283,11 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success                  => 0,
-            RequiredFramework        => '4.0.x',
-            RequiredFrameworkMaximum => '4.0.3',
+            Success                       => 0,
+            RequiredFramework             => '4.0.x',
+            RequiredFrameworkMaximum      => '4.0.3',
+            RequiresOlderFrameworkVersion => 1,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -262,8 +298,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '5.0.x',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -274,8 +312,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '5.0.x',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -286,8 +326,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '3.0.x',
+            Success                       => 0,
+            RequiredFramework             => '3.0.x',
+            RequiresOlderFrameworkVersion => 1,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -298,8 +340,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '3.0.x',
+            Success                       => 0,
+            RequiredFramework             => '3.0.x',
+            RequiresOlderFrameworkVersion => 1,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -310,8 +354,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '3.0.x',
+            Success                       => 0,
+            RequiredFramework             => '3.0.x',
+            RequiresOlderFrameworkVersion => 1,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
 
@@ -326,8 +372,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 1,
-            RequiredFramework => '4.0.x',
+            Success                       => 1,
+            RequiredFramework             => '4.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -339,8 +387,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 1,
-            RequiredFramework => '4.0.x',
+            Success                       => 1,
+            RequiredFramework             => '4.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -352,8 +402,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 1,
-            RequiredFramework => '4.0.x',
+            Success                       => 1,
+            RequiredFramework             => '4.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -365,9 +417,11 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success                  => 0,
-            RequiredFramework        => '4.0.x',
-            RequiredFrameworkMinimum => '4.0.5',
+            Success                       => 0,
+            RequiredFramework             => '4.0.x',
+            RequiredFrameworkMinimum      => '4.0.5',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -379,9 +433,11 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success                  => 0,
-            RequiredFramework        => '4.0.x',
-            RequiredFrameworkMaximum => '4.0.3',
+            Success                       => 0,
+            RequiredFramework             => '4.0.x',
+            RequiredFrameworkMaximum      => '4.0.3',
+            RequiresOlderFrameworkVersion => 1,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -393,9 +449,11 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success                  => 0,
-            RequiredFramework        => '4.0.x',
-            RequiredFrameworkMinimum => '4.0.5',
+            Success                       => 0,
+            RequiredFramework             => '4.0.x',
+            RequiredFrameworkMinimum      => '4.0.5',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -407,8 +465,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '5.0.x',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -420,8 +480,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '5.0.x',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -433,8 +495,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '5.0.x',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -446,8 +510,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '3.0.x',
+            Success                       => 0,
+            RequiredFramework             => '3.0.x',
+            RequiresOlderFrameworkVersion => 1,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -459,8 +525,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '3.0.x',
+            Success                       => 0,
+            RequiredFramework             => '3.0.x',
+            RequiresOlderFrameworkVersion => 1,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -472,8 +540,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '3.0.x',
+            Success                       => 0,
+            RequiredFramework             => '3.0.x',
+            RequiresOlderFrameworkVersion => 1,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -485,8 +555,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '3.0.x',
+            Success                       => 0,
+            RequiredFramework             => '3.0.x',
+            RequiresOlderFrameworkVersion => 1,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
 
@@ -504,8 +576,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 1,
-            RequiredFramework => '3.x.x',
+            Success                       => 1,
+            RequiredFramework             => '3.x.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -521,8 +595,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 1,
-            RequiredFramework => '4.0.5',
+            Success                       => 1,
+            RequiredFramework             => '4.0.5',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -538,8 +614,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 1,
-            RequiredFramework => '5.0.x',
+            Success                       => 1,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -556,9 +634,11 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success                  => 0,
-            RequiredFramework        => '5.0.x',
-            RequiredFrameworkMinimum => '4.0.5',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiredFrameworkMinimum      => '4.0.5',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -575,8 +655,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 1,
-            RequiredFramework => '5.0.x',
+            Success                       => 1,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -593,8 +675,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 1,
-            RequiredFramework => '5.0.x',
+            Success                       => 1,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -611,8 +695,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 1,
-            RequiredFramework => '5.0.x',
+            Success                       => 1,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -629,9 +715,11 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success                  => 0,
-            RequiredFramework        => '5.0.x',
-            RequiredFrameworkMaximum => '4.0.3',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiredFrameworkMaximum      => '4.0.3',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -648,8 +736,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 1,
-            RequiredFramework => '5.0.x',
+            Success                       => 1,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -667,8 +757,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 1,
-            RequiredFramework => '5.0.x',
+            Success                       => 1,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -686,8 +778,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 1,
-            RequiredFramework => '5.0.x',
+            Success                       => 1,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -705,8 +799,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 1,
-            RequiredFramework => '5.0.x',
+            Success                       => 1,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
     {
@@ -724,9 +820,11 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success                  => 0,
-            RequiredFramework        => '5.0.x',
-            RequiredFrameworkMinimum => '4.0.5',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiredFrameworkMinimum      => '4.0.5',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -744,9 +842,11 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success                  => 0,
-            RequiredFramework        => '5.0.x',
-            RequiredFrameworkMaximum => '4.0.3',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiredFrameworkMaximum      => '4.0.3',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -764,9 +864,11 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success                  => 0,
-            RequiredFramework        => '5.0.x',
-            RequiredFrameworkMaximum => '4.0.3',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiredFrameworkMaximum      => '4.0.3',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -781,8 +883,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '5.0.x',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -800,8 +904,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '5.0.x',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -819,8 +925,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '5.0.x',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -835,8 +943,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '5.0.x',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -851,8 +961,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '5.0.x',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -867,8 +979,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '5.0.x',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -883,8 +997,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '5.0.x',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -902,8 +1018,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '5.0.x',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -921,8 +1039,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '5.0.x',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -937,8 +1057,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '5.0.x',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -953,8 +1075,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '5.0.x',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -969,8 +1093,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '5.0.x',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -981,9 +1107,11 @@ my @Tests = (
             },
         ],
         ExpectedResult => {
-            Success                  => 0,
-            RequiredFramework        => '4.0.x',
-            RequiredFrameworkMinimum => '4.0.5',
+            Success                       => 0,
+            RequiredFramework             => '4.0.x',
+            RequiredFrameworkMinimum      => '4.0.5',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -995,9 +1123,11 @@ my @Tests = (
             },
         ],
         ExpectedResult => {
-            Success                  => 0,
-            RequiredFramework        => '4.0.x',
-            RequiredFrameworkMinimum => '4.0.5',
+            Success                       => 0,
+            RequiredFramework             => '4.0.x',
+            RequiredFrameworkMinimum      => '4.0.5',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -1015,8 +1145,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 0,
-            RequiredFramework => '5.0.x',
+            Success                       => 0,
+            RequiredFramework             => '5.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 1,
         },
     },
     {
@@ -1034,8 +1166,10 @@ my @Tests = (
             }
         ],
         ExpectedResult => {
-            Success           => 1,
-            RequiredFramework => '4.0.x',
+            Success                       => 1,
+            RequiredFramework             => '4.0.x',
+            RequiresOlderFrameworkVersion => 0,
+            RequiresNewerFrameworkVersion => 0,
         },
     },
 );

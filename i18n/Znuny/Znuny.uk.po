@@ -4463,58 +4463,6 @@ msgid "package information"
 msgstr "інформація про пакет"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Package installation requires a patch level update of Znuny."
-msgstr "Установка пакунку потребує оновлення рівня виправлень Znuny."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Package update requires a patch level update of Znuny."
-msgstr "Оновлення пакунку потребує оновлення рівня оновлень Znuny."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Please note that your installed Znuny version is %s."
-msgstr "Зверніть увагу, що версія встановленого Znuny %s."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "To install this package, you need to update Znuny to version %s or newer."
-msgstr "Щоб встановити цей пакунок, ви маєте оновити Znuny до версії %s або новіше."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "This package can only be installed on Znuny version %s or older."
-msgstr "Цей пакунок можна встановити на Znuny версії %s або старше."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "This package can only be installed on Znuny version %s."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Why should I keep Znuny up to date?"
-msgstr "Чому я маю тримати Znuny в актуальному стані?"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "You will receive updates about relevant security issues."
-msgstr "Ви будете отримувати нову інформацію з відповідних питань безпеки."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "You will receive updates for all other relevant Znuny issues."
-msgstr "Ви будете отримувати оновлення для всіх інших питань стосовно Znuny."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "How can I do a patch level update if I don’t have a contract?"
-msgstr "Як я можу оновити рівень виправлень якщо у мене немає угоди?"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Please find all relevant information within the updating instructions at %s."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "In case you would have further questions we would be glad to answer them."
-msgstr "У разі, якщо ви маєте додаткові запитання, ми будемо раді відповісти на них."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
-msgid "Please visit our customer portal and file a request."
-msgstr "Будь ласка, відвідайте наш портал клієнта та подайте заявку."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Install Package"
 msgstr "Установити пакет"
 
@@ -25520,4 +25468,36 @@ msgstr ""
 #. SysConfig
 msgid "Self"
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Package is incompatible."
+msgstr "Пакет несумісний."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "Your installed Znuny version %s does not support installing this package."
+msgstr "Встановлена версія Znuny %s не підтримує встановлення цього пакета."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "The package cannot be installed because it requires an older version of Znuny."
+msgstr "Пакет неможливо встановити, оскільки він потребує старішої версії Znuny."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "The package cannot be installed because it requires a newer version of Znuny."
+msgstr "Пакет неможливо встановити, оскільки він потребує новішої версії Znuny."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "What to do:"
+msgstr "Що робити:"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead."
+msgstr "Якщо існує новіша версія цього пакета, яка підтримує Znuny %s, встановіть її або оновіться до неї."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "If an older version of this package exists that supports Znuny %s, install or upgrade to that instead."
+msgstr "Якщо існує старіша версія цього пакета, яка підтримує Znuny %s, встановіть її або оновіться до неї."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+msgid "If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization."
+msgstr "Якщо потрібне оновлення Znuny, ознайомтеся з документацією щодо оновлення до потрібної версії або зверніться до вашої служби підтримки."
 

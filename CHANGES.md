@@ -1,4 +1,11 @@
-# 7.3.8 2026-??-??
+# 7.5.1 2026-??-??
+ - 2026-10-16 Fixed: Closing the "add draft" dialog via the header X, a click outside the dialog, or Escape left form validation disabled, so the ticket action could be submitted without required fields.
+
+# 7.3.8 2026-10-14
+ - 2026-10-08 Fixed: Agent ticket action dialogs showed an empty state option on first load when a default state is configured.
+ - 2026-10-08 Fixed: OpenSearch description in agent and customer ticket search did not work in Firefox, because Firefox does not send cookies when requesting the OpenSearch description file. The session ID is now always part of that URL. Thanks to Tim Puettmanns (@tipue-dev) [PR#319](https://github.com/znuny/Znuny/pull/319).
+ - 2026-10-05 Security: Form IDs for attachment uploads are now generated and handled securely. Thanks to @kta1kri for reporting the issue.
+ - 2026-09-30 Fixed: Invalid UTF-8 in emails causes crashes.
  - 2026-09-30 Fixed: Column settings filters in dashboard and overview screens could extend beyond the viewport. Thanks to @LuBroering (Lukas Bröring, Sector Nord AG) [PR#849](https://github.com/znuny/Znuny/pull/849).
  - 2026-09-30 Fixed: Process management: File preferences of a process (e. g. its icon) were exported as content reference instead of Base64 if the process had been cached before, so that they could not be imported.
  - 2026-09-26 Improved error handling when sending email messages. Thanks to Paweł Bogusławski (@pboguslawski). [PR#375](https://github.com/znuny/Znuny/pull/375)
@@ -7,6 +14,7 @@
  - 2026-09-22 Added: ZNUNY_TA_* tag support alongside OTRS_TA_* in transition action ArticleSend.
  - 2026-09-22 Fixed: Transition action ArticleSend sends empty body/salutation/signature article if it's configured to use a standard template. Usage of any OTRS_TA_* tag should be fixed.
  - 2026-09-22 Fixed: Form action buttons hidden behind Safari bottom toolbar on iOS. Thanks to @avononit for reporting the issue. [#667](https://github.com/znuny/Znuny/issues/667)
+ - 2026-09-18 Changed: Improved information shown to the user about incompatible version when installing packages via package manager.
  - 2026-09-18 Fixed: "Mark article" link in ticket zoom not working.
  - 2026-09-17 Fixed: AdminDynamicFieldScreenConfiguration lists dynamic fields of all object types.
  - 2026-09-17 Fixed: Alignment of accounted time in ticket details.
@@ -14,6 +22,8 @@
  - 2026-09-16 Fixed: Customer ticket process: Subject field is incorrectly indented.
  - 2026-09-14 Fixed: Options button in ticket details mobile view stopped responding after switching to a different article. Thanks to @avononit for reporting the issue. [#671](https://github.com/znuny/Znuny/issues/671)
  - 2026-09-14 Fixed: Medium and preview ticket overview views were fully accessible and rendered on narrow/tablet screens, with nothing restricting them.
+ - 2026-09-11 Fixed: Cluster sections in the options panel was initially expanded and caret behavior was not consistent.
+ - 2026-09-10 Fixed: Article duplication and iframe reload on customer ticket details small screen view.
  - 2026-09-10 Fixed: Password policy check for option "minimum 2 characters" (Min2Characters) was too restrictive.
  - 2026-09-07 Fixed: Notification to agent who created the ticket is not working for some ticket types.
  - 2026-09-01 Fixed: Images with explicit HTML width/height attributes (e.g. logos in quoted email signatures) were stretched to fill their container. Thanks to @AVONON-DST for reporting the issue. [#743](https://github.com/znuny/Znuny/issues/743)
@@ -711,6 +721,13 @@
  - 2022-08-22 Core.UI.InputFields.js - Changed the behaviour of the Core.UI.InputFields.js. Now no fields are automatically enlarged or reduced.
  - 2022-08-08 Admin - Added counter of AdminSettingPages per widget and additional focus by filter.
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
+
+# 6.5.26 2026-10-14
+ - 2026-10-07 Security: Form IDs for attachment uploads are now generated and handled securely. Thanks to @kta1kri for reporting the issue.
+ - 2026-09-29 Fixed: PasswordMin2Characters policy check was slightly off.
+ - 2026-09-18 Fixed: Notification to agent who created the ticket is not working for some ticket types.
+ - 2026-09-17 Fixed: AdminDynamicFieldScreenConfiguration lists dynamic fields of all object types.
+ - 2026-08-25 Fixed: Regular file attachments were unintentionally copied to newly created tickets/articles when using <OTRS_FIRST_ARTICLE_Body> or <OTRS_LAST_ARTICLE_Body> in a Transition Action, even without Attachments/AttachmentIDs/AttachmentsReuse configured.
 
 # 6.5.25 2026-09-16
  - 2026-09-08 Security: Fixed SQL injection for parameter ContentSearch of ticket search. Thanks for reporting to Mokrane ABDELMALEK (via Ghent University VDP programme).

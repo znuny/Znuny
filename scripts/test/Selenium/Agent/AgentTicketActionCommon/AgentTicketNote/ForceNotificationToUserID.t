@@ -61,6 +61,27 @@ $Selenium->RunTest(
             return;
         };
 
+        # Article widget is a collapsible card. Expand it and enable CreateArticle
+        # when the note is optional, otherwise subject/body are not submitted.
+        my $ExpandArticleWidget = sub {
+            my $IsCollapsed = $Selenium->execute_script(
+                "return \$('#WidgetArticle').hasClass('Collapsed') ? 1 : 0;"
+            );
+            if ( $IsCollapsed == 1 ) {
+                $Selenium->execute_script("\$('#WidgetArticle .cardTitleTrigger').click();");
+                $Selenium->WaitFor(
+                    JavaScript =>
+                        'return typeof($) === "function" && $("#WidgetArticle.Expanded").length;'
+                );
+            }
+
+            $Selenium->execute_script(
+                "var Box = \$('#CreateArticle'); if (Box.is(':checkbox') && !Box.prop('checked')) { Box.prop('checked', true); }"
+            );
+
+            return;
+        };
+
         # Make sure we start with a clean mail queue.
         $MailQueueClean->();
 
@@ -187,8 +208,10 @@ $Selenium->RunTest(
         # Wait until page has loaded, if necessary.
         $Selenium->WaitFor(
             JavaScript =>
-                'return typeof($) === "function" && $(".WidgetSimple").length;'
+                'return typeof($) === "function" && $("#Compose").length && $("#InvolvedUserID").length;'
         );
+
+        $ExpandArticleWidget->();
 
         # Check page.
         for my $ID (
@@ -274,13 +297,7 @@ $Selenium->RunTest(
             Value   => $UserID[1],
         );
 
-        if ( $Selenium->execute_script("return \$('#WidgetArticle.Collapsed').length;") ) {
-            $Selenium->execute_script("\$('#WidgetArticle .Header a').click();");
-            $Selenium->WaitFor(
-                JavaScript =>
-                    'return typeof($) === "function" && $("#WidgetArticle.Expanded").length;'
-            );
-        }
+        $ExpandArticleWidget->();
 
         $Selenium->find_element( "#Subject",        'css' )->send_keys('Test');
         $Selenium->find_element( "#RichText",       'css' )->send_keys('Test');
@@ -490,8 +507,10 @@ $Selenium->RunTest(
         # Wait until page has loaded, if necessary.
         $Selenium->WaitFor(
             JavaScript =>
-                'return typeof($) === "function" && $(".WidgetSimple").length;'
+                'return typeof($) === "function" && $("#Compose").length && $("#InvolvedUserID").length;'
         );
+
+        $ExpandArticleWidget->();
 
         # Select involved user, fill necessary fields and save the note.
         $Selenium->InputFieldValueSet(

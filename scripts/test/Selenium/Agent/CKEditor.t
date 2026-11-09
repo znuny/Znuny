@@ -131,8 +131,13 @@ $Selenium->RunTest(
                 JavaScript => "return window.editor.getData();",
             );
 
+            # CKEditor 5 adds a random data-list-item-id on each <li>.
+            # The test checks semantic markup, not those generated ids.
+            my $CKEditorData = $Selenium->execute_script("return window.editor.getData();");
+            $CKEditorData =~ s{\sdata-list-item-id="[^"]*"}{}g;
+
             $Self->Is(
-                $Selenium->execute_script("return window.editor.getData();"),
+                $CKEditorData,
                 $TestCase->{Expected},
                 $TestCase->{Name}
             );

@@ -64,6 +64,10 @@ sub Run {
             Message => 'Alters password column sizes in users, customer_user and mail_account.',
             Module  => 'PasswordColumnLength',
         },
+        {
+            Message => 'Adds owner columns to database table web_upload_cache.',
+            Module  => 'WebUploadCacheOwner',
+        },
     );
 
     return 1   if !@Tasks;

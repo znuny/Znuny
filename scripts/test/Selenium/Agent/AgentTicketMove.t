@@ -280,8 +280,9 @@ $Selenium->RunTest(
             "ACL restriction error message found for 'Delete' menu",
         );
 
-        # Click to return back to AgentTicketZoom screen.
-        $Selenium->find_element( ".ReturnToPreviousPage", 'css' )->VerifiedClick();
+        # history.back() restores the previous page from cache and does not reload it.
+        # VerifiedClick waits for PageLoadComplete, which stays false in that case.
+        $Selenium->find_element( ".ReturnToPreviousPage", 'css' )->click();
 
         $Selenium->WaitFor(
             JavaScript => "return typeof(\$) === 'function' && \$('a[title*=\"Mark this ticket as junk!\"]').length;"
@@ -323,7 +324,7 @@ $Selenium->RunTest(
 
         # Wait for Asynchronous widget to load.
         $Selenium->WaitFor(
-            JavaScript => "return typeof(\$) === 'function' && \$('.SidebarColumn .WidgetSimple').length;"
+            JavaScript => "return typeof(\$) === 'function' && \$('.sectionSidebar .modTicketInformation').length;"
         );
 
         # Check that nothing happens, after the queue selection in the dropdown.
@@ -348,7 +349,7 @@ $Selenium->RunTest(
 
         # Wait for reload to kick in.
         $Selenium->WaitFor(
-            JavaScript => "return typeof(\$) === 'function' && \$('.SidebarColumn .WidgetSimple').length;"
+            JavaScript => "return typeof(\$) === 'function' && \$('.sectionSidebar .modTicketInformation').length;"
         );
         $Selenium->WaitFor(
             JavaScript =>

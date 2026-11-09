@@ -24,7 +24,8 @@ my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
     use utf8;
     my @Tests = (
         {
-            Name          => 'Convert()',
+            Name          => 'ascii to utf8',
+            Method        => 'Convert',
             Input         => 'abc123',
             Result        => 'abc123',
             InputCharset  => 'ascii',
@@ -32,7 +33,8 @@ my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
             UTF8          => 1,
         },
         {
-            Name          => 'Convert()',
+            Name          => 'us-ascii to utf8',
+            Method        => 'Convert',
             Input         => 'abc123',
             Result        => 'abc123',
             InputCharset  => 'us-ascii',
@@ -40,7 +42,8 @@ my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
             UTF8          => 1,
         },
         {
-            Name          => 'Convert()',
+            Name          => 'utf8 to utf8 with invalid encoding',
+            Method        => 'Convert',
             Input         => 'abc123���',
             Result        => 'abc123���',
             InputCharset  => 'utf8',
@@ -48,7 +51,8 @@ my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
             UTF8          => 1,
         },
         {
-            Name          => 'Convert()',
+            Name          => 'iso-8859-15 to utf8',
+            Method        => 'Convert',
             Input         => 'abc123���',
             Result        => 'abc123���',
             InputCharset  => 'iso-8859-15',
@@ -56,7 +60,8 @@ my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
             UTF8          => 1,
         },
         {
-            Name          => 'Convert()',
+            Name          => 'utf8 to utf-8',
+            Method        => 'Convert',
             Input         => 'abc123���',
             Result        => 'abc123���',
             InputCharset  => 'utf8',
@@ -64,7 +69,8 @@ my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
             UTF8          => 1,
         },
         {
-            Name          => 'Convert()',
+            Name          => 'utf8 to iso-8859-15 with invalid encoding',
+            Method        => 'Convert',
             Input         => 'abc123���',
             Result        => 'abc123���',
             InputCharset  => 'utf8',
@@ -72,7 +78,8 @@ my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
             UTF8          => 1,
         },
         {
-            Name          => 'Convert()',
+            Name          => 'utf8 to iso-8859-15 with invalid encoding, forced',
+            Method        => 'Convert',
             Input         => 'abc123���',
             Result        => 'abc123???',
             InputCharset  => 'utf8',
@@ -80,22 +87,96 @@ my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
             Force         => 1,
             UTF8          => '',
         },
+        {
+            Name          => 'HanExtra charsets handled correctly',
+            Method        => 'Convert',
+            Input         => do { no utf8; "\x{c0}\x{c4}\x{f3}\x{c4}\x{b3}\x{e4}\x{ca}\x{fd}" },
+            InputCharset  => 'gb18030',
+            ResultCharset => 'utf8',
+            Result        => do { use utf8; '滥竽充数' },
+            UTF8          => 1,
+        },
+
+        # This is broken and now documented as something to avoid
+        #        {
+        #            Name          => 'iso-8859-1 to iso-8859-1 with check',
+        #            Method        => 'Convert',
+        #            Input         => do { no utf8; "F\x{fc}\x{df}" },
+        #            Result        => do { no utf8; "F\x{fc}\x{df}" },
+        #            InputCharset  => 'iso-8859-1',
+        #            ResultCharset => 'iso-8859-1',
+        #            Check         => 1,
+        #            UTF8          => '',
+        #        },
+        {
+            Name         => 'iso-8859-1',
+            Method       => 'Convert2CharsetInternal',
+            Input        => do { no utf8; "\x{e4}\x{f6}\x{fc}\x{df}\x{c4}\x{d6}\x{dc}" },
+            Result       => "äöüßÄÖÜ",
+            InputCharset => 'iso-8859-1',
+            UTF8         => 1,
+        },
+        {
+            Name         => 'utf-8 bytes',
+            Method       => 'Convert2CharsetInternal',
+            Input        => do { no utf8; "າບຈαβγäöüßÄÖÜ" },
+            Result       => "າບຈαβγäöüßÄÖÜ",
+            InputCharset => 'utf8',
+            UTF8         => 1,
+        },
+        {
+            Name         => 'invalid utf8 encoding',
+            Method       => 'Convert2CharsetInternal',
+            Input        => do { no utf8; "a\x{fd}\x{bf}\x{bf}\x{bd}\x{a3}\x{ac}b" },
+            InputCharset => 'utf8',
+            Result       => "a\x{fffd}b",                                              # "invalid character" substituted
+            UTF8         => 1,
+        },
+        {
+            Name         => 'utf8 character string',
+            Method       => 'Convert2CharsetInternal',
+            Input        => "າບຈαβγäöüßÄÖÜ",
+            InputCharset => 'utf8',
+            Result       => "າບຈαβγäöüßÄÖÜ",
+            UTF8         => 1,
+        },
+        {
+            Name         => 'ascii character string as 8bit',
+            Method       => 'Convert2CharsetInternal',
+            Input        => "abc",
+            InputCharset => 'iso-8859-15',
+            Result       => "abc",
+            UTF8         => 1,
+        },
+        {
+            Name         => 'utf8 character string as 8bit',
+            Method       => 'Convert2CharsetInternal',
+            Input        => "ä",
+            InputCharset => 'iso-8859-15',
+            Result       => "Ã€",
+            UTF8         => 1,
+        },
     );
     for my $Test (@Tests) {
-        my $Result = $EncodeObject->Convert(
+        my $Method   = $Test->{Method};
+        my $TestName = "$Method(): $Test->{Name}";
+        my $Result   = $EncodeObject->$Method(
             Text  => $Test->{Input},
             From  => $Test->{InputCharset},
             To    => $Test->{ResultCharset},
             Force => $Test->{Force},
+            Check => $Test->{Check},
         );
         my $IsUTF8 = Encode::is_utf8($Result);
-        $Self->True(
-            $IsUTF8 eq $Test->{UTF8},
-            $Test->{Name} . " is_utf8",
+        $Self->Is(
+            $IsUTF8,
+            $Test->{UTF8},
+            $TestName . ": is_utf8 matches",
         );
-        $Self->True(
-            $Result eq $Test->{Result},
-            $Test->{Name},
+        $Self->Is(
+            $Result,
+            $Test->{Result},
+            "$TestName: correct result",
         );
     }
 }
@@ -154,7 +235,8 @@ my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
         },
     );
     for my $Test (@Tests) {
-        my $Result = $Test->{Input};
+        my $TestName = "EncodeInput(): $Test->{Name}";
+        my $Result   = $Test->{Input};
         $Result = try {
             use warnings FATAL => 'utf8';
             $EncodeObject->EncodeInput( \$Result, $Test->{Safe} );
@@ -165,16 +247,16 @@ my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
             "Exception: $_";
         };
         if ( ref $Test->{Result} eq 'Regexp' ) {
-            $Self->True( scalar( $Result =~ $Test->{Result} ), $Test->{Name} );
+            $Self->True( scalar( $Result =~ $Test->{Result} ), $TestName );
         }
         else {
-            $Self->Is( $Result, $Test->{Result}, $Test->{Name} );
+            $Self->Is( $Result, $Test->{Result}, $TestName );
         }
         if ( exists $Test->{UTF8} ) {
             my $IsUTF8 = Encode::is_utf8($Result);
             $Self->True(
                 $IsUTF8 eq $Test->{UTF8},
-                $Test->{Name} . ": is_utf8 matches",
+                "$TestName: is_utf8 matches",
             );
         }
     }

@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.855779933216728;
+    $Self->{Completeness}        = 0.85582431572247;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1549,26 +1549,20 @@ sub Data {
         'Go to updating instructions' => 'Idi na uputstvo za ažuriranje',
         'Go to znuny.org' => '',
         'package information' => 'Informacije o paketu',
-        'Package installation requires a patch level update of Znuny.' =>
-            'Instalacija paketa zahteva ažuriranu verziju Znuny.',
-        'Package update requires a patch level update of Znuny.' => 'Ažuriranje paketa zahteva ažuriranu verziju Znuny.',
-        'Please note that your installed Znuny version is %s.' => 'Trenutno instalirana Znuny verzija je %s.',
-        'To install this package, you need to update Znuny to version %s or newer.' =>
-            'Da biste instalirali ovaj paket, neophodno je da ažurirate vaš Znuny na verziju %s ili noviju.',
-        'This package can only be installed on Znuny version %s or older.' =>
-            'Ovaj paket se može instalirati samo na Znuny verziju%s ili stariju.',
-        'This package can only be installed on Znuny version %s.' => '',
-        'Why should I keep Znuny up to date?' => 'Zašto bi trebalo da Znuny uvek bude ažuriran?',
-        'You will receive updates about relevant security issues.' => 'Dobićete ažuriranja odgovarajućih bezbednosnih izdanja.',
-        'You will receive updates for all other relevant Znuny issues.' =>
-            'Dobićete ažuriranja svih drugih relevantnih Znuny izdanja.',
-        'How can I do a patch level update if I don’t have a contract?' =>
-            'Kako mogu da ažuriram verziju Znuny ukoliko nemam ugovor?',
-        'Please find all relevant information within the updating instructions at %s.' =>
-            'Molimo pronađite sve relevantne informacije u okviru instrukcija za ažuriranje na %s.',
-        'In case you would have further questions we would be glad to answer them.' =>
-            'U slučaju da imate dodtana pitanja, biće nam zadovoljstvo da odgovorimo na njih.',
-        'Please visit our customer portal and file a request.' => 'Molimo posetite naš korisnički portal i podnesite zahtev.',
+        'Package is incompatible.' => 'Paket nije kompatibilan.',
+        'Your installed Znuny version %s does not support installing this package.' =>
+            'Vaša instalirana verzija Znuny %s ne podržava instalaciju ovog paketa.',
+        'The package cannot be installed because it requires an older version of Znuny.' =>
+            'Paket ne može da se instalira jer zahteva stariju verziju Znuny.',
+        'The package cannot be installed because it requires a newer version of Znuny.' =>
+            'Paket ne može da se instalira jer zahteva noviju verziju Znuny.',
+        'What to do:' => 'Šta uraditi:',
+        'If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Ako postoji novija verzija ovog paketa koja podržava Znuny %s, instalirajte je ili nadogradite na nju.',
+        'If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Ako postoji starija verzija ovog paketa koja podržava Znuny %s, instalirajte je ili nadogradite na nju.',
+        'If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.' =>
+            'Ako je potrebno ažuriranje Znuny, pogledajte dokumentaciju za ažuriranje na potrebnu verziju ili se obratite svojoj organizaciji za podršku.',
         'Install Package' => 'Instaliraj paket',
         'Update Package' => 'Ažuriraj paket',
         'Package' => '',

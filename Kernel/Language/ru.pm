@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.836380982668151;
+    $Self->{Completeness}        = 0.836409929980904;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1555,26 +1555,20 @@ sub Data {
         'Go to updating instructions' => 'Перейдите к инструкциям по обновлению',
         'Go to znuny.org' => '',
         'package information' => 'Информация о пакете',
-        'Package installation requires a patch level update of Znuny.' =>
-            'Установка пакета требует обновления уровня патчей Znuny.',
-        'Package update requires a patch level update of Znuny.' => 'Обновление пакета требует обновления уровня патчей Znuny.',
-        'Please note that your installed Znuny version is %s.' => 'Установлена Znuny версии %s.',
-        'To install this package, you need to update Znuny to version %s or newer.' =>
-            'Для установки пакета необходимо обновить Znuny до версии %s или выше.',
-        'This package can only be installed on Znuny version %s or older.' =>
-            'Этот пакет может быть установлен для версий Znuny не выше %s.',
-        'This package can only be installed on Znuny version %s.' => '',
-        'Why should I keep Znuny up to date?' => 'Почему я должен постоянно обновлять Znuny?',
-        'You will receive updates about relevant security issues.' => 'Вы получите обновления о соответствующих выпусках безопасности.',
-        'You will receive updates for all other relevant Znuny issues.' =>
-            'Вы получите обновления для всех других соответствующих вопросов Znuny.',
-        'How can I do a patch level update if I don’t have a contract?' =>
-            'Как я могу выполнить обновление уровня патч если у меня нет контракта?',
-        'Please find all relevant information within the updating instructions at %s.' =>
-            'Пожалуйста, найдите всю соответствующую информацию в инструкциях по обновлению здесь %s.',
-        'In case you would have further questions we would be glad to answer them.' =>
-            'В случае, если у Вас возникли вопросы, мы будем рады ответить на них.',
-        'Please visit our customer portal and file a request.' => 'Посетите наш клиентский портал и отправьте запрос.',
+        'Package is incompatible.' => 'Пакет несовместим.',
+        'Your installed Znuny version %s does not support installing this package.' =>
+            'Установленная версия Znuny %s не поддерживает установку этого пакета.',
+        'The package cannot be installed because it requires an older version of Znuny.' =>
+            'Пакет не может быть установлен, так как для него требуется более старая версия Znuny.',
+        'The package cannot be installed because it requires a newer version of Znuny.' =>
+            'Пакет не может быть установлен, так как для него требуется более новая версия Znuny.',
+        'What to do:' => 'Что делать:',
+        'If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Если существует более новая версия этого пакета, поддерживающая Znuny %s, установите её или обновитесь до неё.',
+        'If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'Если существует более старая версия этого пакета, поддерживающая Znuny %s, установите её или обновитесь до неё.',
+        'If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.' =>
+            'Если требуется обновление Znuny, ознакомьтесь с документацией по обновлению до требуемой версии или обратитесь в вашу службу поддержки.',
         'Install Package' => 'Установить пакет',
         'Update Package' => 'Обновить пакет',
         'Package' => '',

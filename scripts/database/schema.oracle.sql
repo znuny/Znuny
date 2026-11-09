@@ -4481,7 +4481,9 @@ CREATE TABLE web_upload_cache (
     content_type VARCHAR2 (250) NULL,
     disposition VARCHAR2 (15) NULL,
     content CLOB NOT NULL,
-    create_time_unix NUMBER (20, 0) NOT NULL
+    create_time_unix NUMBER (20, 0) NOT NULL,
+    user_id VARCHAR2 (250) NULL,
+    user_type VARCHAR2 (20) NULL
 );
 ALTER TABLE web_upload_cache ADD CONSTRAINT PK_web_upload_cache PRIMARY KEY (id);
 BEGIN

@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.50357767530609;
+    $Self->{Completeness}        = 0.505092297899427;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1543,26 +1543,20 @@ sub Data {
         'Go to updating instructions' => '',
         'Go to znuny.org' => '',
         'package information' => '',
-        'Package installation requires a patch level update of Znuny.' =>
-            '',
-        'Package update requires a patch level update of Znuny.' => '',
-        'Please note that your installed Znuny version is %s.' => '',
-        'To install this package, you need to update Znuny to version %s or newer.' =>
-            '',
-        'This package can only be installed on Znuny version %s or older.' =>
-            '',
-        'This package can only be installed on Znuny version %s.' => '',
-        'Why should I keep Znuny up to date?' => '',
-        'You will receive updates about relevant security issues.' => '',
-        'You will receive updates for all other relevant Znuny issues.' =>
-            '',
-        'How can I do a patch level update if I don’t have a contract?' =>
-            '',
-        'Please find all relevant information within the updating instructions at %s.' =>
-            '',
-        'In case you would have further questions we would be glad to answer them.' =>
-            'ในกรณีที่คุณมีคำถามอื่นๆเรายินดีที่จะตอบคำถามเหล่านั้น',
-        'Please visit our customer portal and file a request.' => '',
+        'Package is incompatible.' => 'แพคเกจเข้ากันไม่ได้',
+        'Your installed Znuny version %s does not support installing this package.' =>
+            'Znuny เวอร์ชัน %s ที่ติดตั้งอยู่ไม่รองรับการติดตั้งแพคเกจนี้',
+        'The package cannot be installed because it requires an older version of Znuny.' =>
+            'ไม่สามารถติดตั้งแพคเกจได้ เนื่องจากต้องใช้ Znuny เวอร์ชันที่เก่ากว่า',
+        'The package cannot be installed because it requires a newer version of Znuny.' =>
+            'ไม่สามารถติดตั้งแพคเกจได้ เนื่องจากต้องใช้ Znuny เวอร์ชันที่ใหม่กว่า',
+        'What to do:' => 'สิ่งที่ต้องทำ:',
+        'If a newer version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'หากมีแพคเกจนี้เวอร์ชันที่ใหม่กว่าซึ่งรองรับ Znuny %s ให้ติดตั้งหรืออัปเกรดเป็นเวอร์ชันนั้นแทน',
+        'If an older version of this package exists that supports Znuny %s, install or upgrade to that instead.' =>
+            'หากมีแพคเกจนี้เวอร์ชันที่เก่ากว่าซึ่งรองรับ Znuny %s ให้ติดตั้งหรืออัปเกรดเป็นเวอร์ชันนั้นแทน',
+        'If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization.' =>
+            'หากจำเป็นต้องอัปเดต Znuny โปรดดูเอกสารเกี่ยวกับการอัปเดตเป็นเวอร์ชันที่ต้องการ หรือติดต่อองค์กรฝ่ายสนับสนุนของคุณ',
         'Install Package' => 'ติดตั้งแพคเกจ',
         'Update Package' => '',
         'Package' => '',

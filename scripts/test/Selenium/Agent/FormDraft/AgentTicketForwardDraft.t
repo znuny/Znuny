@@ -179,9 +179,12 @@ $Selenium->RunTest(
                 );
                 sleep 1;
 
-                # Upload a file.
-                $Selenium->find_element( "#FileUpload", 'css' )
-                    ->send_keys( $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.pdf" );
+                # upload_file copies the sample onto the Selenium node. Chrome cannot
+                # read /opt/znuny paths from the app container.
+                my $Location = $Selenium->upload_file(
+                    $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.pdf"
+                );
+                $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
 
                 $Selenium->WaitFor(
                     JavaScript =>
@@ -217,7 +220,10 @@ $Selenium->RunTest(
                 'return typeof($) === "function" && $("#FormDraftTitle").length && $("#SaveFormDraft").length;'
         );
         $Selenium->find_element( "#FormDraftTitle", 'css' )->send_keys($Title);
-        $Selenium->find_element( "#SaveFormDraft",  'css' )->VerifiedClick();
+
+        # Draft save is AJAX and closes the dialog. It does not load a new page.
+        $Selenium->execute_script("\$('#SaveFormDraft').click();");
+        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$(".Dialog.Modal").length;' );
 
         # Navigate to zoom view of created test ticket.
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketZoom;TicketID=$TicketID");
@@ -357,9 +363,12 @@ $Selenium->RunTest(
                 $Selenium->WaitFor( JavaScript => 'return $("#FileUpload:visible").length;' );
                 sleep 1;
 
-                # Upload a file.
-                $Selenium->find_element( "#FileUpload", 'css' )
-                    ->send_keys( $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.doc" );
+                # upload_file copies the sample onto the Selenium node. Chrome cannot
+                # read /opt/znuny paths from the app container.
+                my $Location = $Selenium->upload_file(
+                    $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.doc"
+                );
+                $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
 
                 $Selenium->WaitFor(
                     JavaScript =>
@@ -385,7 +394,7 @@ $Selenium->RunTest(
         # Verify current test user name as From.
         $Self->True(
             $Selenium->execute_script(
-                "return \$('.TableLike .Field:contains(\"$TestUserLogin\")').length === 1;"
+                "return \$('.messageInformationContent:contains(\"$TestUserLogin\")').length === 1;"
             ),
             "From correct is '$TestUserLogin'."
         );
@@ -416,7 +425,7 @@ $Selenium->RunTest(
         # Verify current second test user name as From.
         $Self->True(
             $Selenium->execute_script(
-                "return \$('.TableLike .Field:contains(\"$TestUserLogin2\")').length === 1;"
+                "return \$('.messageInformationContent:contains(\"$TestUserLogin2\")').length === 1;"
             ),
             "From correct is '$TestUserLogin2'."
         );
@@ -429,7 +438,8 @@ $Selenium->RunTest(
         );
 
         # Delete draft.
-        $Selenium->find_element( ".FormDraftDelete", 'css' )->click();
+        # Native click misses the control: .table-icon-hover-md uses text-indent:-9999px.
+        $Selenium->execute_script("\$('a.FormDraftDelete').click();");
         $Selenium->WaitFor(
             JavaScript =>
                 'return typeof($) === "function" && $("#DeleteConfirm").length;'

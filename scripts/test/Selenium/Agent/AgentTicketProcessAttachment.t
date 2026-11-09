@@ -106,8 +106,11 @@ $Selenium->RunTest(
         );
 
         # Import test Selenium Process.
-        my $Location = $Selenium->{Home}
-            . "/scripts/test/sample/ProcessManagement/TestProcess.yml";
+        # upload_file copies the sample onto the Selenium node. Chrome cannot
+        # read /opt/znuny paths from the app container.
+        my $Location = $Selenium->upload_file(
+            $Selenium->{Home} . "/scripts/test/sample/ProcessManagement/TestProcess.yml"
+        );
         $Selenium->find_element( "#FileUpload",                      'css' )->send_keys($Location);
         $Selenium->find_element( "#OverwriteExistingEntitiesImport", 'css' )->click();
         $Selenium->WaitFor(
@@ -165,7 +168,9 @@ $Selenium->RunTest(
         $Selenium->execute_script("\$('#FileUpload')[0].scrollIntoView(true);");
 
         # Add an attachment.
-        $Location = $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.txt";
+        $Location = $Selenium->upload_file(
+            $Selenium->{Home} . "/scripts/test/sample/Main/Main-Test1.txt"
+        );
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
 
         # Wait until attachment is uploaded, i.e. until it appears in the attachment list table.
@@ -187,7 +192,13 @@ $Selenium->RunTest(
         );
 
         $Selenium->find_element( "#Subject", 'css' )->send_keys('Test');
-        sleep 1;
+
+        # Activity dialog initializes CKEditor asynchronously. setData before that
+        # hits an undefined window.editor.
+        $Selenium->WaitFor(
+            JavaScript =>
+                'return typeof($) === "function" && $(".ck-editor__editable").length && window.editor && typeof window.editor.setData === "function";'
+        );
         $Selenium->execute_script(
             q{
                 return window.editor.setData('This is a test text');

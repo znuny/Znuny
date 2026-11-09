@@ -156,6 +156,12 @@ Core.Agent.Responsive = (function (TargetNS) {
 
         // Collapse widgets in preferences screen for better overview
         $('.PreferencesScreen .Size1of3 > .WidgetSimple').removeClass('Expanded').addClass('Collapsed');
+
+        // register "click" event to toggle a cluster dropdown section
+        // expansion inside the Options overlay in mobile view
+        $('.Cluster .ClusterLink').off('click.ClusterLinkMobileExpansion').on('click.ClusterLinkMobileExpansion', function() {
+            $(this).closest('li').toggleClass('Expanded');
+        });
     });
 
     Core.App.Subscribe('Event.App.Responsive.ScreenXL', function () {
@@ -189,6 +195,9 @@ Core.Agent.Responsive = (function (TargetNS) {
         // re-expand widgets in preferences screen
         $('.PreferencesScreen .WidgetSimple').removeClass('Collapsed').addClass('Expanded');
 
+        // disable a cluster dropdown section expansion inside the
+        // Options overlay in mobile view as XL screen does not need it
+        $('.Cluster .ClusterLink').off('click.ClusterLinkMobileExpansion');
     });
 
     // MOBILE - Show Actions Menu
