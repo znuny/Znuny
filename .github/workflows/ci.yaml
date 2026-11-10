@@ -39,7 +39,7 @@ jobs:
 
       - name: Prepare code policy
         run: |
-          cpanm --verbose Algorithm::Diff Code::TidyAll Perl::Critic Perl::Tidy Pod::POM XML::Parser
+          cpanm --verbose Algorithm::Diff Code::TidyAll JSON Perl::Critic Perl::Tidy Pod::POM XML::Parser
           codepolicy/bin/znuny.CodePolicy.pl --install-eslint
 
       - name: Run code policy
