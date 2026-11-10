@@ -797,6 +797,7 @@ $Selenium->RunTest(
             Element => '#UserLanguage',
             Value   => 'de',
         );
+        $Selenium->execute_script("document.documentElement.setAttribute('data-selenium-reload', '1');");
         $Selenium->execute_script(
             "\$('#UserLanguage').closest('.WidgetSimple').find('.SettingUpdateBox').find('button').trigger('click');"
         );
@@ -806,11 +807,7 @@ $Selenium->RunTest(
         );
         $Selenium->WaitFor(
             JavaScript =>
-                "return \$('#UserLanguage').closest('.WidgetSimple').find('.fa-check').length"
-        );
-        $Selenium->WaitFor(
-            JavaScript =>
-                "return !\$('#UserLanguage').closest('.WidgetSimple').hasClass('HasOverlay')"
+                "return !document.documentElement.getAttribute('data-selenium-reload');"
         );
 
         # Navigate to AgentTicketSearch screen.

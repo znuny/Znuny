@@ -336,12 +336,12 @@ $Selenium->RunTest(
 
         # Wait for "Customer Information".
         $Selenium->WaitFor(
-            JavaScript => 'return typeof($) === "function" && $(".SidebarColumn fieldset .Value").length;'
+            JavaScript => 'return typeof($) === "function" && $("#CustomerInfo fieldset .Value").length;'
         );
 
         # Make sure that Customer email is link.
         my $LinkVisible = $Selenium->WaitFor(
-            JavaScript => 'return typeof($) === "function" && $(".SidebarColumn fieldset a.AsPopup:visible").length;'
+            JavaScript => 'return typeof($) === "function" && $("#CustomerInfo fieldset a.AsPopup:visible").length;'
         );
         $Self->True(
             $LinkVisible,
@@ -367,7 +367,7 @@ $Selenium->RunTest(
         );
 
         # Remove customer.
-        $Selenium->find_element( "#TicketCustomerContentFromCustomer a.CustomerTicketRemove", "css" )->click();
+        $Selenium->find_element( ".customerSelectorFieldInputSelectedCustomerRemove", "css" )->click();
 
         # Add customer again.
         $Selenium->find_element( "#FromCustomer", 'css' )->send_keys($TestCustomer);
@@ -378,16 +378,33 @@ $Selenium->RunTest(
         $Selenium->execute_script("\$('li.ui-menu-item:contains($TestCustomer)').click();");
 
         # Make sure that Customer email is not a link.
-        $LinkVisible = $Selenium->execute_script("return \$('.SidebarColumn fieldset a.AsPopup').length;");
+        $LinkVisible = $Selenium->execute_script("return \$('#CustomerInfo fieldset a.AsPopup').length;");
         $Self->False(
             $LinkVisible,
             "Customer email is not a link with class AsPopup."
         );
 
+        # Kernel/Config.pm is loaded after ZZZZUnitTest files, so Ticket::Type
+        # stays enabled when Config.pm turns it on. Fill the mandatory type
+        # with the first available value when the field is still empty.
+        my $TypeID = $Selenium->execute_script(
+            'if (!$("#TypeID").length || $("#TypeID").val()) { return ""; }'
+                . ' return $("#TypeID option").filter(function () { return $(this).val(); }).first().val() || "";'
+        );
+        if ($TypeID) {
+            $Selenium->InputFieldValueSet(
+                Element => '#TypeID',
+                Value   => $TypeID,
+            );
+            $Selenium->WaitFor(
+                JavaScript => 'return typeof($) === "function" && !$(".AJAXLoader:visible").length'
+            );
+        }
+
         $Selenium->find_element( "#submitRichText", 'css' )->click();
         $Selenium->WaitFor(
             JavaScript =>
-                'return typeof($) === "function" && $(".MessageBox a[href*=\'AgentTicketZoom;TicketID=\']").length !== 0;'
+                'return typeof($) === "function" && $("a[href*=\'AgentTicketZoom;TicketID=\']").length !== 0;'
         );
 
         # Get created test ticket ID and number.

@@ -257,6 +257,7 @@ $Selenium->RunTest(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketCustomer',
             Value => {
+                Permission         => 'customer',
                 CustomerIDReadOnly => 0,
             },
         );
@@ -311,6 +312,7 @@ $Selenium->RunTest(
             Valid => 1,
             Key   => 'Ticket::Frontend::AgentTicketCustomer',
             Value => {
+                Permission         => 'customer',
                 CustomerIDReadOnly => 1,
             },
         );
@@ -323,9 +325,10 @@ $Selenium->RunTest(
 
         $Selenium->VerifiedRefresh();
 
-        # Wait for "Customer Information".
+        # Wait until the zoom sidebar shows the updated customer id link.
         $Selenium->WaitFor(
-            JavaScript => 'return typeof($) === "function" && $(".SidebarColumn fieldset .Value").length'
+            JavaScript =>
+                "return typeof(\$) === 'function' && \$(\"a[href*='Action=AgentCustomerInformationCenter;CustomerID=$RandomCustomerUser']\").length"
         );
 
         # Check if CustomerID is changed correctly.

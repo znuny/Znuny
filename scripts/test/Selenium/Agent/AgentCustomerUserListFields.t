@@ -99,15 +99,17 @@ $Selenium->RunTest(
 
         $Selenium->WaitFor(
             JavaScript =>
-                "return typeof(\$) === 'function' && \$('#OptionCustomerUserAddressBookToCustomer').length === 1;"
+                "return typeof(\$) === 'function' && \$('.customerSelectorFieldInputAddressBook[data-recipient-field=ToCustomer]').length === 1;"
         );
 
         $Selenium->WaitForjQueryEventBound(
-            CSSSelector => '#OptionCustomerUserAddressBookToCustomer',
+            CSSSelector => '.customerSelectorFieldInputAddressBook[data-recipient-field=ToCustomer]',
         );
 
         # Open customer user address book search.
-        $Selenium->find_element( "#OptionCustomerUserAddressBookToCustomer", 'css' )->click();
+        $Selenium->execute_script(
+            "\$('.customerSelectorFieldInputAddressBook[data-recipient-field=ToCustomer]').trigger('click');"
+        );
 
         # Wait for dialog to appears.
         $Selenium->WaitFor(
