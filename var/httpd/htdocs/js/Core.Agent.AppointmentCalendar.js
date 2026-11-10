@@ -901,7 +901,6 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
             TeamID: AppointmentData.CalEvent.teamIds ? AppointmentData.CalEvent.teamIds : undefined,
             ResourceID: AppointmentData.CalEvent.resourceIds ? AppointmentData.CalEvent.resourceIds :
                 AppointmentData.CalEvent.resourceId ? [ AppointmentData.CalEvent.resourceId ] : undefined,
-            Plugin: AppointmentData.CalEvent.pluginData,
         };
 
         // Assigned resource didn't change
