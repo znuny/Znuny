@@ -14,6 +14,7 @@
  - 2026-10-29 Fixed: SAML login now verifies assertion signatures against the configured IdP certificate (AuthModule::SAML::IdPCACert and Customer::AuthModule::SAML::IdPCACert). Net::SAML2 0.89 or higher is now required (fixes CVE-2026-18089, CVE-2026-18092 and CVE-2026-18108). Thanks to the following reporters: HARIPRASAD M., Fabian Bührmann.
  - 2026-10-26 Fixed: PostMaster filter ExternalTicketNumberRecognition ignores CC.
  - 2026-10-26 Fixed: Customers already selected on a ticket still appeared as selectable in the customer user address book.
+ - 2026-10-23 Fixed: SAML auth IdP metadata download now uses the WebUserAgent config options.
  - 2026-10-19 Fixed: Console command to export/import dynamic field configs used different format than the GUI version.
  - 2026-10-16 Fixed: Closing the "add draft" dialog via the header X, a click outside the dialog, or Escape left form validation disabled, so the ticket action could be submitted without required fields.
  - 2026-10-13 Fixed: Select drop-downs could render at wrong position when specific position criteria were met.
