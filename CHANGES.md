@@ -1,4 +1,5 @@
 # 6.5.27 2026-??-??
+ - 2026-11-10 Fixed: Moving or resizing an appointment in the calendar or resource overview via drag and drop removed linked tickets.
  - 2026-10-29 Fixed: calendar appointment failed to create ticket if relative period was zero. Thanks to @Fawkespami for reporting the issue. [#821](https://github.com/znuny/Znuny/issues/821)
  - 2026-10-26 Fixed: PostMaster filter ExternalTicketNumberRecognition ignores CC.
  - 2026-10-20 Fixed: Console command to export/import dynamic field configs used different format than the GUI version.
