@@ -304,6 +304,14 @@ $Selenium->RunTest(
             "$Notification - notification is found."
         );
 
+        # Notice is position:fixed at the top-right and intercepts #ValidFilter.
+        # CloseNotification() is not stable enough: the toast slides in for 1s
+        # (messageActive after 200ms), the helper clicks .messageClose while the
+        # toast uses .notificationClose, and remove() only drops :visible nodes.
+        # Notification and Alert both call addMessage, so a second toast can
+        # appear after close and intercept the click again.
+        $Selenium->CloseNotification();
+
         # Checks for AdminValidFilter
         $Self->True(
             $Selenium->find_element( "#ValidFilter", 'css' )->is_displayed(),
