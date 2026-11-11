@@ -212,8 +212,11 @@ $Selenium->RunTest(
         # create menu module test params
         my @MenuModule = (
             {
-                Name   => "Back",
-                Action => "AgentDashboard",
+
+                # Icon-only item: Name is empty, nav id falls back to Description ("Go back").
+                # Link is LastScreenOverview; this test opened the queue view before zoom.
+                Name   => "Go back",
+                Action => "AgentTicketQueue",
             },
             {
                 Name   => "Lock",
@@ -224,7 +227,9 @@ $Selenium->RunTest(
                 Action => "AgentTicketHistory",
             },
             {
-                Name   => "Print",
+
+                # Icon-only item: Name is empty, nav id falls back to Description.
+                Name   => "Print this ticket",
                 Action => "AgentTicketPrint",
             },
             {
