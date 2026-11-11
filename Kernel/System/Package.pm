@@ -50,8 +50,8 @@ Kernel::System::Package - to manage application packages/modules
 
 All functions to manage application packages/modules.
 
-SOPM files use C<< <package> >> as the canonical root tag. During the transition
-period, C<< <otrs_package> >> is still accepted by L</PackageParse()>.
+SOPM files use C<E<lt>packageE<gt>> as the canonical root tag. During the transition
+period, C<E<lt>otrs_packageE<gt>> is still accepted by L</PackageParse()>.
 
 =encoding utf-8
 
@@ -1590,7 +1590,7 @@ sub RepositoryPackageListGet {
 
     # Default: Handle source as direct URL.
     my %DownloadParams = (
-        URL => $Param{Source} . '/otrs.xml',
+        URL => $Param{Source} . '/packages.xml',
     );
 
     # If Source is a known repository name, use its URL and credentials instead.
@@ -1598,7 +1598,7 @@ sub RepositoryPackageListGet {
     if ( $RepositoryList{ $Param{Source} } ) {
         my $Repository = $RepositoryList{ $Param{Source} };
 
-        $DownloadParams{URL}             = $Repository->{URL} . '/otrs.xml';
+        $DownloadParams{URL}             = $Repository->{URL} . '/packages.xml';
         $DownloadParams{AuthHeaderKey}   = $Repository->{AuthHeaderKey};
         $DownloadParams{AuthHeaderValue} = $Repository->{AuthHeaderValue};
     }
@@ -1606,6 +1606,7 @@ sub RepositoryPackageListGet {
     my %Package;
     my $Filelist;
     my $XML = $Self->_Download(%DownloadParams);
+
     return if !$XML;
 
     my @XMLARRAY = $Kernel::OM->Get('Kernel::System::XML')->XMLParse( String => $XML );
@@ -2295,8 +2296,8 @@ parse a package
 
     my %Structure = $PackageObject->PackageParse( String => $FileString );
 
-Accepts both the canonical C<< <package> >> root and the legacy
-C<< <otrs_package> >> root.
+Accepts both the canonical C<E<lt>packageE<gt>> root and the legacy
+C<E<lt>otrs_packageE<gt>> root.
 
 =cut
 
@@ -3405,7 +3406,7 @@ sub PackageUpgradeAllIsRunning {
 
 Compare the two version strings $VersionNew and $VersionInstalled.
 The type is either 'Min' or 'Max'.
-'Min' returns a true value if $VersionInstalled >= $VersionNew.
+'Min' returns a true value if $VersionInstalled E<gt>= $VersionNew.
 'Max' returns a true value if $VersionInstalled < $VersionNew.
 Otherwise undef is returned in scalar context.
 
@@ -3586,8 +3587,10 @@ download a file
 sub _Download {
     my ( $Self, %Param ) = @_;
 
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
     if ( !defined $Param{URL} ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => 'URL not defined!',
         );
@@ -3613,7 +3616,14 @@ sub _Download {
         Header => \%Header,
     );
 
-    return if !$Response{Content};
+    if ( !$Response{Content} ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Got no response from URL $Param{URL}!",
+        );
+        return;
+    }
+
     return ${ $Response{Content} };
 }
 

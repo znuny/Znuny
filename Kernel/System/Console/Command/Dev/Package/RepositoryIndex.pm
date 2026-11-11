@@ -22,7 +22,7 @@ our @ObjectDependencies = (
 sub Configure {
     my ( $Self, %Param ) = @_;
 
-    $Self->Description('Generate an index file (otrs.xml) for a package repository.');
+    $Self->Description('Generate an index file (packages.xml) for a package repository.');
     $Self->AddArgument(
         Name        => 'source-directory',
         Description => "Specify the directory containing the packages.",

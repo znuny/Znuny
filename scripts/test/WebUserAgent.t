@@ -52,7 +52,7 @@ my @Tests = (
     },
     {
         Name        => 'GET - http - invalid proxy - Test ' . $TestNumber++,
-        URL         => "https://download.znuny.org/releases/packages/otrs.xml",
+        URL         => "https://download.znuny.org/releases/packages/packages.xml",
         Timeout     => $TimeOut,
         Proxy       => 'http://NoProxy',
         Success     => 0,
@@ -60,7 +60,7 @@ my @Tests = (
     },
     {
         Name        => 'GET - http - ftp proxy - Test ' . $TestNumber++,
-        URL         => "https://download.znuny.org/releases/packages/otrs.xml",
+        URL         => "https://download.znuny.org/releases/packages/packages.xml",
         Timeout     => $TimeOut,
         Proxy       => 'ftp://NoProxy',
         Success     => 0,
@@ -68,7 +68,7 @@ my @Tests = (
     },
     {
         Name        => 'GET - http - ftp NoProxy option - Test ' . $TestNumber++,
-        URL         => "https://download.znuny.org/releases/packages/otrs.xml",
+        URL         => "https://download.znuny.org/releases/packages/packages.xml",
         Timeout     => $TimeOut,
         Proxy       => 'ftp://NoProxy',
         NoProxy     => 'download.znuny.org',
@@ -77,7 +77,7 @@ my @Tests = (
     },
     {
         Name        => 'GET - http - ftp NoProxy option with multiple domains - Test ' . $TestNumber++,
-        URL         => "https://download.znuny.org/releases/packages/otrs.xml",
+        URL         => "https://download.znuny.org/releases/packages/packages.xml",
         Timeout     => $TimeOut,
         Proxy       => 'ftp://NoProxy',
         NoProxy     => 'download2.znuny.org;download.znuny.org',
@@ -86,7 +86,7 @@ my @Tests = (
     },
     {
         Name        => 'GET - http - ftp no matching NoProxy option - Test ' . $TestNumber++,
-        URL         => "https://download.znuny.org/releases/packages/otrs.xml",
+        URL         => "https://download.znuny.org/releases/packages/packages.xml",
         Timeout     => $TimeOut,
         Proxy       => 'ftp://NoProxy',
         NoProxy     => 'download2.znuny.org',
@@ -95,7 +95,7 @@ my @Tests = (
     },
     {
         Name        => 'GET - http - ftp no matching NoProxy option with multiple domains - Test ' . $TestNumber++,
-        URL         => "https://download.znuny.org/releases/packages/otrs.xml",
+        URL         => "https://download.znuny.org/releases/packages/packages.xml",
         Timeout     => $TimeOut,
         Proxy       => 'ftp://NoProxy',
         NoProxy     => 'download2.znuny.org;download3.znuny.org',
@@ -104,14 +104,14 @@ my @Tests = (
     },
     {
         Name    => 'GET - http - long timeout - Test ' . $TestNumber++,
-        URL     => "https://download.znuny.org/releases/packages/otrs.xml",
+        URL     => "https://download.znuny.org/releases/packages/packages.xml",
         Timeout => 100,
         Proxy   => $Proxy,
         Success => 1,
     },
     {
         Name    => 'GET - http - Header ' . $TestNumber++,
-        URL     => "https://download.znuny.org/releases/packages/otrs.xml",
+        URL     => "https://download.znuny.org/releases/packages/packages.xml",
         Timeout => 100,
         Proxy   => $Proxy,
         Success => 1,

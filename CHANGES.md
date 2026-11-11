@@ -1,5 +1,6 @@
 # 7.5.1 2026-??-??
- - 2026-11-12 Fixed: User search with option PostMasterSearch now also searches the login for a matching email address as a fallback to the email address stored in the user preferences.
+ - 2026-11-11 Changed: Package repository index file is now packages.xml. otrs.xml is no longer requested or served. Package downloads now log the URL when the request returns no content.
+ - 2026-11-11 Fixed: User search with option PostMasterSearch now also searches the login for a matching email address as a fallback to the email address stored in the user preferences.
  - 2026-11-10 Fixed: Moving or resizing an appointment in the calendar or resource overview via drag and drop removed linked tickets.
  - 2026-11-05 Added: New config option TemplateGenerator::EmptyValueReplacement to choose the text shown for missing values of placeholders in templates.
  - 2026-11-04 Removed: Console commands Dev::Code::CPANAudit and Dev::Code::CPANUpdate and the support data collector Perl modules audit.
