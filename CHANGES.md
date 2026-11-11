@@ -1,4 +1,5 @@
 # 6.5.27 2026-??-??
+ - 2026-11-12 Fixed: User search with option PostMasterSearch now also searches the login for a matching email address as a fallback to the email address stored in the user preferences.
  - 2026-11-10 Fixed: Moving or resizing an appointment in the calendar or resource overview via drag and drop removed linked tickets.
  - 2026-10-29 Fixed: calendar appointment failed to create ticket if relative period was zero. Thanks to @Fawkespami for reporting the issue. [#821](https://github.com/znuny/Znuny/issues/821)
  - 2026-10-26 Fixed: PostMaster filter ExternalTicketNumberRecognition ignores CC.
