@@ -82,6 +82,7 @@ my @IgnoreFiles = (
     qr{^/\.tx}smx,
     qr{^/\.settings}smx,
     qr{^/\.ssh}smx,
+    qr{^/\.postgresql}smx,
     qr{^/\.gpg}smx,
     qr{^/\.gnupg}smx,
 );
