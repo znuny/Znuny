@@ -1,0 +1,56 @@
+---
+DynamicFieldScreens:
+  ProcessManagementActivityID:
+    DashboardBackend###0140-RunningTicketProcess: '2'
+  ProcessManagementProcessID:
+    DashboardBackend###0140-RunningTicketProcess: '2'
+DynamicFields:
+  TestNumber:
+    ChangeTime: 2026-11-03 11:32:07
+    Config:
+      DefaultValue: ''
+      Link: ''
+      LinkPreview: ''
+      RegExList: []
+    CreateTime: 2026-11-03 11:32:07
+    FieldOrder: 6
+    FieldType: Text
+    ID: 93
+    InternalField: 0
+    Label: Test Number
+    Name: TestNumber
+    ObjectType: Ticket
+    ValidID: 1
+  TicketCalendarEndTime:
+    ChangeTime: 2026-10-27 15:53:37
+    Config:
+      DefaultValue: 0,
+      YearsInFuture: 0,
+      YearsInPast: 0,
+      YearsPeriod: 0,
+    CreateTime: 2026-10-27 13:24:09
+    FieldOrder: 5
+    FieldType: DateTime
+    ID: 5
+    InternalField: 0
+    Label: Ticket Calendar EndTime
+    Name: TicketCalendarEndTime
+    ObjectType: Ticket
+    ValidID: 1
+  TicketCalendarStartTime:
+    ChangeTime: 2026-10-27 15:53:37
+    Config:
+      DefaultValue: 0,
+      YearsInFuture: 0,
+      YearsInPast: 0,
+      YearsPeriod: 0,
+    CreateTime: 2026-10-27 13:24:09
+    FieldOrder: 4
+    FieldType: DateTime
+    ID: 4
+    InternalField: 0
+    Label: Ticket Calendar StartTime
+    Name: TicketCalendarStartTime
+    ObjectType: Ticket
+    ValidID: 1
+
