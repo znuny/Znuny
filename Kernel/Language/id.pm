@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.582842591118892;
+    $Self->{Completeness}        = 0.582604547622834;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -4499,6 +4499,9 @@ bin/znuny.Daemon.pl status\').',
         'Available tickets' => 'Tiket yang tersedia',
         'including subqueues' => 'Termasuk sub-antrian',
         'excluding subqueues' => 'Tidak termasuk sub-antrian',
+        'System default' => '',
+        'Position' => '',
+        'Right' => 'Kanan',
         'Queue View' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
@@ -6707,6 +6710,8 @@ bin/znuny.Daemon.pl status\').',
             'Mengaktifkan mekanisme berkedip dari antrian yang berisi tiket tertua.',
         'Include tickets of subqueues per default when selecting a queue.' =>
             'Termasuk tiket dari subqueues per default ketika memilih antrian.',
+        'Defines the queue navigation in the queue view. Top shows one queue level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            '',
         'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the queue view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the QueueID for the key and 0 or 1 for value.' =>
             'Macam tiket (ascendingly atau descendingly) ketika antrian tunggal yang dipilih dalam tampilan antrian dan setelah tiket diurutkan berdasarkan prioritas. Nilai: 0 = naik (tertua di atas, default), 1 = descending (termuda di atas). Gunakan QueueID untuk kunci dan 0 atau 1 untuk nilai.',
         'Defines the default sort criteria for all queues displayed in the queue view.' =>
@@ -6732,6 +6737,8 @@ bin/znuny.Daemon.pl status\').',
         'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
             '',
         'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
+        'Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
             '',
         'Activates time accounting.' => 'Mengaktifkan akuntansi waktu.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
@@ -8650,6 +8657,10 @@ bin/znuny.Daemon.pl status\').',
         'Filters' => 'Filter',
         'Clear search' => 'Hapus pencarian',
 
+        # JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+        'Collapse' => 'Ciutkan',
+        'Expand' => 'Perluas',
+
         # JS File: var/httpd/htdocs/js/Core.UI.Popup.js
         'If you now leave this page, all open popup windows will be closed, too!' =>
             'Apabila anda meninggalkan halam ini, semua jendela yang terbuka akan tertutup, juga!',
@@ -9257,7 +9268,6 @@ Helpdesk Team Anda
         'Resent email to "%s".' => '',
         'Responsible Tickets' => 'Tiket bertanggung jawab',
         'Responsible Tickets.' => 'Tiket penanggung jawab',
-        'Right' => 'Kanan',
         'Romanian' => '',
         'Running Process Tickets' => 'Menjalankan proses tiket',
         'Russian' => 'Rusia',
@@ -9551,6 +9561,7 @@ Helpdesk Team Anda
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Collapse',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9632,10 +9643,12 @@ Helpdesk Team Anda
         'Error in the mail settings. Please correct and try again.',
         'Error: Browser Check failed!',
         'Event Type Filter',
+        'Expand',
         'Expanded',
         'Favourites',
         'Feb',
         'February',
+        'Filter',
         'Filters',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
@@ -9840,6 +9853,7 @@ Helpdesk Team Anda
         'Timeline Week',
         'Title',
         'Today',
+        'Toggle sidebar',
         'Too many active calendars',
         'Try again',
         'Tu',

@@ -7,8 +7,29 @@
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
 
-<div class="WidgetSimple QueueOverview level-filter-view">
+[% IF Data.NavLayout == 'TopHover' %]
+<div class="WidgetSimple QueueOverview HierarchicalNav level-filter-view" data-nav-layout="TopHover" data-selected-queue="[% Data.SelectedQueue | html %]">
+    <ul id="QueueNavAllQueues" class="HierarchicalNavAllItems Hidden">
+        [% Data.AllQueueItems %]
+    </ul>
     <div class="Content">
         [% Data.MainContent %]
     </div>
 </div>
+[% ELSIF Data.NavLayout == 'Sidebar' %]
+<div class="WidgetSimple QueueOverview HierarchicalNav nav-layout-side" data-nav-layout="Sidebar" data-nav-title="Queues" data-nav-state-key="UserNavLayoutQueueState" data-nav-state="[% Data.NavTreeState | html %]" data-selected-queue="[% Data.SelectedQueue | html %]">
+    <ul id="QueueNavAllQueues" class="HierarchicalNavAllItems Hidden">
+        [% Data.AllQueueItems %]
+    </ul>
+    <div class="Header">
+        <h2>[% Translate("Queues") | html %]</h2>
+    </div>
+    <div class="Content"></div>
+</div>
+[% ELSE %]
+<div class="WidgetSimple QueueOverview" data-nav-layout="Top" data-selected-queue="[% Data.SelectedQueue | html %]">
+    <div class="Content">
+        [% Data.MainContent %]
+    </div>
+</div>
+[% END %]

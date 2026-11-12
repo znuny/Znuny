@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%m/%d';
     $Self->{DateInputFormat}     = '%Y/%m/%d';
     $Self->{DateInputFormatLong} = '%Y/%m/%d - %T';
-    $Self->{Completeness}        = 0.656692662740729;
+    $Self->{Completeness}        = 0.656384162823978;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4504,6 +4504,9 @@ sub Data {
         'Available tickets' => '利用可能チケット',
         'including subqueues' => 'サブキューを含む',
         'excluding subqueues' => 'サブキューを除く',
+        'System default' => '',
+        'Position' => '',
+        'Right' => '権限',
         'Queue View' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
@@ -6712,6 +6715,8 @@ sub Data {
             '最も古いチケットを含むキューの、点滅メカニズムを有効にします。',
         'Include tickets of subqueues per default when selecting a queue.' =>
             '',
+        'Defines the queue navigation in the queue view. Top shows one queue level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            '',
         'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the queue view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the QueueID for the key and 0 or 1 for value.' =>
             '1つのキューがキュー・ビューで選択され、チケットが優先度によってソートされた後に、チケットをソートします（昇順または降順）。Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top)。キーに関してキューIDを使用し、値（value）に関して0または1を使用してください。',
         'Defines the default sort criteria for all queues displayed in the queue view.' =>
@@ -6737,6 +6742,8 @@ sub Data {
         'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
             '',
         'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
+        'Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
             '',
         'Activates time accounting.' => 'タイム・アカウンティングを有効にします。',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
@@ -8663,6 +8670,10 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         'Filters' => 'フィルター',
         'Clear search' => '検索条件をクリア',
 
+        # JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+        'Collapse' => '折りたたむ',
+        'Expand' => '展開',
+
         # JS File: var/httpd/htdocs/js/Core.UI.Popup.js
         'If you now leave this page, all open popup windows will be closed, too!' =>
             'このページから移動します。全てのポップアップウィンドウを閉じてもよろしいですか？',
@@ -9269,7 +9280,6 @@ Thanks for your help!
         'Resent email to "%s".' => '',
         'Responsible Tickets' => '',
         'Responsible Tickets.' => '',
-        'Right' => '権限',
         'Romanian' => '',
         'Running Process Tickets' => '実行中のプロセスチケット',
         'Russian' => 'ロシア語',
@@ -9563,6 +9573,7 @@ Thanks for your help!
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Collapse',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9644,10 +9655,12 @@ Thanks for your help!
         'Error in the mail settings. Please correct and try again.',
         'Error: Browser Check failed!',
         'Event Type Filter',
+        'Expand',
         'Expanded',
         'Favourites',
         'Feb',
         'February',
+        'Filter',
         'Filters',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
@@ -9852,6 +9865,7 @@ Thanks for your help!
         'Timeline Week',
         'Title',
         'Today',
+        'Toggle sidebar',
         'Too many active calendars',
         'Try again',
         'Tu',

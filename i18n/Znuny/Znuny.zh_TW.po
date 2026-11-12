@@ -23255,7 +23255,7 @@ msgstr ""
 msgid "Responsible Tickets."
 msgstr ""
 
-#. SysConfig
+#. Perl Module: Kernel/Modules/AgentTicketQueue.pm
 msgid "Right"
 msgstr ""
 
@@ -25514,4 +25514,20 @@ msgstr ""
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder."
 msgstr "使用 ZNUNY_ 佔位符將未定義值插入範本時，要用什麼取代該值。"
+
+#. Perl Module: Kernel/Modules/AgentTicketQueue.pm
+msgid "System default"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AgentTicketQueue.pm
+msgid "Position"
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Defines the queue navigation in the queue view. Top shows one queue level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus."
+msgstr ""
 

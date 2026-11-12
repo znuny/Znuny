@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d %T';
-    $Self->{Completeness}        = 0.831768263568359;
+    $Self->{Completeness}        = 0.831292733343934;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -4497,6 +4497,9 @@ sub Data {
         'Available tickets' => '가능한 티켓',
         'including subqueues' => '하위대기열 포함',
         'excluding subqueues' => '하위대기열 제외',
+        'System default' => '',
+        'Position' => '',
+        'Right' => '권리',
         'Queue View' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
@@ -6705,6 +6708,8 @@ sub Data {
             '가장 오래된 티켓을 포함하는 큐의 깜박이는 메커니즘을 활성화합니다.',
         'Include tickets of subqueues per default when selecting a queue.' =>
             '큐를 선택할 때 기본값 당 서브 큐 티켓을 포함하십시오.',
+        'Defines the queue navigation in the queue view. Top shows one queue level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            '',
         'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the queue view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the QueueID for the key and 0 or 1 for value.' =>
             '대기열보기에서 하나의 대기열을 선택한 경우와 티켓을 우선 순위별로 정렬 한 후에 티켓을 정렬합니다 (오름차순 또는 내림차순). 값 : 0 = 오름차순 (가장 오래된 것, 기본값), 1 = 내림차순 (맨 위에 가장 어린 것). 키에는 QueueID를 사용하고 값에는 0 또는 1을 사용하십시오.',
         'Defines the default sort criteria for all queues displayed in the queue view.' =>
@@ -6730,6 +6735,8 @@ sub Data {
         'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
             '',
         'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
+        'Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
             '',
         'Activates time accounting.' => '시간 계산을 활성화 합니다.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
@@ -8647,6 +8654,10 @@ sub Data {
         'Filters' => '필터',
         'Clear search' => '명확한 검색',
 
+        # JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+        'Collapse' => '접기',
+        'Expand' => '넓히다',
+
         # JS File: var/httpd/htdocs/js/Core.UI.Popup.js
         'If you now leave this page, all open popup windows will be closed, too!' =>
             '지금 이 페이지를 떠나면 열려있는 모든 팝업 창이 닫힙니다.',
@@ -9254,7 +9265,6 @@ Thanks for your help!
         'Resent email to "%s".' => '이메일을 "%s"로 다시 보내십시오.',
         'Responsible Tickets' => '책임 티켓',
         'Responsible Tickets.' => '책임 티켓.',
-        'Right' => '권리',
         'Romanian' => '',
         'Running Process Tickets' => '프로세스 티켓 실행',
         'Russian' => '러시아인',
@@ -9548,6 +9558,7 @@ Thanks for your help!
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Collapse',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9629,10 +9640,12 @@ Thanks for your help!
         'Error in the mail settings. Please correct and try again.',
         'Error: Browser Check failed!',
         'Event Type Filter',
+        'Expand',
         'Expanded',
         'Favourites',
         'Feb',
         'February',
+        'Filter',
         'Filters',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
@@ -9837,6 +9850,7 @@ Thanks for your help!
         'Timeline Week',
         'Title',
         'Today',
+        'Toggle sidebar',
         'Too many active calendars',
         'Try again',
         'Tu',

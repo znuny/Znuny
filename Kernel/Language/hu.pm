@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.999363361451536;
+    $Self->{Completeness}        = 0.998727937668946;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4503,6 +4503,9 @@ sub Data {
         'Available tickets' => 'Elérhető jegyek',
         'including subqueues' => 'alvárólisták felvétele',
         'excluding subqueues' => 'alvárólisták kizárása',
+        'System default' => '',
+        'Position' => '',
+        'Right' => 'Jobb',
         'Queue View' => 'Várólista nézet',
 
         # Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
@@ -6711,6 +6714,8 @@ sub Data {
             'A legrégebbi jegyet tartalmazó várólista villogási mechanizmusát aktiválja.',
         'Include tickets of subqueues per default when selecting a queue.' =>
             'Az alvárólisták jegyeinek felvétele alapértelmezetten egy várólista kijelölésekor.',
+        'Defines the queue navigation in the queue view. Top shows one queue level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            '',
         'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the queue view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the QueueID for the key and 0 or 1 for value.' =>
             'Rendezi a jegyeket (növekvően vagy csökkenően), ha egyedüli várólista van kiválasztva a várólista nézetben, és miután a jegyek prioritás szerint lettek rendezve. Értékek: 0 = növekvő (legrégebbi felül, alapértelmezett), 1 = csökkenő (legfiatalabb felül). Használja a várólista-azonosítót a kulcshoz és a 0 vagy az 1 számjegyeket az értékhez.',
         'Defines the default sort criteria for all queues displayed in the queue view.' =>
@@ -6737,6 +6742,8 @@ sub Data {
             'Beállítja az életkort percben (második szint) a szolgáltatások kiemeléséhez, amelyek érintetlen jegyeket tartalmaznak.',
         'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
             'A legrégebbi jegyet tartalmazó szolgáltatás villogási mechanizmusát aktiválja.',
+        'Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            '',
         'Activates time accounting.' => 'Bekapcsolja az időelszámolást.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             'Beállítja az előnyben részesített időegységeket (például munkaegység, óra, perc).',
@@ -8653,6 +8660,10 @@ sub Data {
         'Filters' => 'Szűrők',
         'Clear search' => 'Keresés törlése',
 
+        # JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+        'Collapse' => 'Összecsuk',
+        'Expand' => 'Kinyitás',
+
         # JS File: var/httpd/htdocs/js/Core.UI.Popup.js
         'If you now leave this page, all open popup windows will be closed, too!' =>
             'Ha most elhagyja ezt az oldalt, az összes megnyitott felugró ablak is be fog záródni!',
@@ -9260,7 +9271,6 @@ Az Ön ügyfélszolgálati csapata
         'Resent email to "%s".' => 'E-mail újraküldve neki: „%s”.',
         'Responsible Tickets' => 'Felelős jegyek',
         'Responsible Tickets.' => 'Felelős jegyek.',
-        'Right' => 'Jobb',
         'Romanian' => 'Román',
         'Running Process Tickets' => 'Futó folyamatjegyek',
         'Russian' => 'Orosz',
@@ -9554,6 +9564,7 @@ Az Ön ügyfélszolgálati csapata
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Collapse',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9635,10 +9646,12 @@ Az Ön ügyfélszolgálati csapata
         'Error in the mail settings. Please correct and try again.',
         'Error: Browser Check failed!',
         'Event Type Filter',
+        'Expand',
         'Expanded',
         'Favourites',
         'Feb',
         'February',
+        'Filter',
         'Filters',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
@@ -9843,6 +9856,7 @@ Az Ön ügyfélszolgálati csapata
         'Timeline Week',
         'Title',
         'Today',
+        'Toggle sidebar',
         'Too many active calendars',
         'Try again',
         'Tu',

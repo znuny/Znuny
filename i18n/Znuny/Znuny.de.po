@@ -23285,7 +23285,7 @@ msgstr "Verantwortliche Tickets"
 msgid "Responsible Tickets."
 msgstr "Verantwortliche Tickets."
 
-#. SysConfig
+#. Perl Module: Kernel/Modules/AgentTicketQueue.pm
 msgid "Right"
 msgstr "Rechts"
 
@@ -25536,4 +25536,20 @@ msgstr "Wenn aktiviert, werden Benutzer, die bislang noch keine Zeitzone ausgew�
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder."
 msgstr "Text, der anstelle eines undefinierten Wertes f체r einen ZNUNY_-Platzhalter eingef체gt wird."
+
+#. Perl Module: Kernel/Modules/AgentTicketQueue.pm
+msgid "System default"
+msgstr "Systemstandard"
+
+#. Perl Module: Kernel/Modules/AgentTicketQueue.pm
+msgid "Position"
+msgstr "Position"
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Defines the queue navigation in the queue view. Top shows one queue level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus."
+msgstr "Definiert die Queue-Navigation in der Queue-Ansicht. Top zeigt jeweils eine Queue-Ebene, ohne Hover-Men체s. TopHover zeigt die hierarchische Navigationsleiste mit Hover-Untermen체s."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus."
+msgstr "Definiert die Service-Navigation in der Service-Ansicht. Top zeigt jeweils eine Service-Ebene, ohne Hover-Men체s. TopHover zeigt die hierarchische Navigationsleiste mit Hover-Untermen체s."
 

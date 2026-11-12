@@ -23276,7 +23276,7 @@ msgstr "책임 티켓"
 msgid "Responsible Tickets."
 msgstr "책임 티켓."
 
-#. SysConfig
+#. Perl Module: Kernel/Modules/AgentTicketQueue.pm
 msgid "Right"
 msgstr "권리"
 
@@ -25523,4 +25523,20 @@ msgstr ""
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder."
 msgstr "ZNUNY_ 자리 표시자를 사용하여 템플릿에 삽입할 때 정의되지 않은 값을 무엇으로 바꿀지."
+
+#. Perl Module: Kernel/Modules/AgentTicketQueue.pm
+msgid "System default"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AgentTicketQueue.pm
+msgid "Position"
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Defines the queue navigation in the queue view. Top shows one queue level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus."
+msgstr ""
 

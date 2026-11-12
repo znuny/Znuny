@@ -586,15 +586,64 @@ sub Run {
         AllServices => \%AllServices,
     );
 
+    my $ServiceWidget = $LayoutObject->Output(
+        TemplateFile => 'AgentTicketService',
+        Data         => \%NavBar,
+    );
+
+    # Sidebar sits beside the ticket list. #OverviewBody is a sibling of .OverviewBox,
+    # so the widget cannot stay inside DataInTheMiddle.
+    my $DataInTheMiddle = $ServiceWidget;
+    if ( ( $NavBar{NavLayout} || '' ) eq 'Sidebar' ) {
+        $DataInTheMiddle = '';
+    }
+
+    # Service navigation fields in the ticket list settings dialog.
+    my @ContextSettingsFields = (
+        {
+            Name   => 'UserNavLayoutService',
+            Label  => Translatable('Navigation'),
+            Option => $LayoutObject->BuildSelection(
+                Data => {
+                    SystemDefault => $LayoutObject->{LanguageObject}->Translate('System default'),
+                    Top           => 'Top',
+                    TopHover      => 'Top + Hover',
+                    Sidebar       => 'Sidebar',
+                },
+                Name           => 'UserNavLayoutService',
+                ID             => 'UserNavLayoutService',
+                SelectedID     => $Self->{UserNavLayoutService} || 'SystemDefault',
+                Class          => 'Modernize ContextSettingsAJAX',
+                Sort           => 'IndividualKey',
+                SortIndividual => [ 'SystemDefault', 'Top', 'TopHover', 'Sidebar' ],
+                Translation    => 0,
+            ),
+        },
+        {
+            Name   => 'UserNavLayoutServicePosition',
+            Label  => Translatable('Position'),
+            Option => $LayoutObject->BuildSelection(
+                Data => {
+                    Left  => $LayoutObject->{LanguageObject}->Translate('Left'),
+                    Right => $LayoutObject->{LanguageObject}->Translate('Right'),
+                },
+                Name           => 'UserNavLayoutServicePosition',
+                ID             => 'UserNavLayoutServicePosition',
+                SelectedID     => $NavBar{NavLayoutPosition} || 'Left',
+                Class          => 'Modernize ContextSettingsAJAX',
+                Sort           => 'IndividualKey',
+                SortIndividual => [ 'Left', 'Right' ],
+                Translation    => 0,
+            ),
+        },
+    );
+
     # show tickets
-    $Output .= $LayoutObject->TicketListShow(
+    my $TicketList = $LayoutObject->TicketListShow(
         Filter  => $Filter,
         Filters => \%NavBarFilter,
 
-        DataInTheMiddle => $LayoutObject->Output(
-            TemplateFile => 'AgentTicketService',
-            Data         => \%NavBar,
-        ),
+        DataInTheMiddle => $DataInTheMiddle,
 
         TicketIDs => \@ViewableTickets,
 
@@ -624,10 +673,24 @@ sub Run {
             ServiceID => $ServiceID || '',
             Filter    => $Filter    || '',
         },
+        ContextSettingsFields => \@ContextSettingsFields,
 
         # do not print the result earlier, but return complete content
         Output => 1,
     );
+
+    if ( ( $NavBar{NavLayout} || '' ) eq 'Sidebar' ) {
+        my $CollapsedClass = $NavBar{NavTreeCollapsed}                       ? ' IsCollapsed' : '';
+        my $PositionClass  = ( $NavBar{NavLayoutPosition} || '' ) eq 'Right' ? ' SidebarLast' : ' SidebarFirst';
+        $Output .= '<div class="MainBox ARIARoleMain LayoutFixedSidebar ActionsSideBar NavLayout'
+            . $PositionClass . $CollapsedClass . '">';
+        $Output .= '<div class="SidebarColumn ActionsSideBarComp">' . $ServiceWidget . '</div>';
+        $Output .= '<div class="ContentColumn">' . $TicketList . '</div>';
+        $Output .= '</div>';
+    }
+    else {
+        $Output .= $TicketList;
+    }
 
     # get page footer
     $Output .= $LayoutObject->Footer() if $Self->{Subaction} ne 'AJAXFilterUpdate';
@@ -653,6 +716,56 @@ sub _MaskServiceView {
     my %UsedService;
     my @ListedServices;
     my $Level = 0;
+
+    my %ValidNavLayout = (
+        Top      => 1,
+        TopHover => 1,
+        Sidebar  => 1,
+    );
+
+    my $SystemNavLayout = $Config->{NavLayout} || 'Top';
+    if ( !$ValidNavLayout{$SystemNavLayout} ) {
+        $SystemNavLayout = 'Top';
+    }
+
+    # A saved agent preference overrides the system setting.
+    # SystemDefault and an empty value are not in the allowlist.
+    my $NavLayout     = $SystemNavLayout;
+    my $UserNavLayout = $Self->{UserNavLayoutService} || '';
+    if ( $ValidNavLayout{$UserNavLayout} ) {
+        $NavLayout = $UserNavLayout;
+    }
+
+    # Left is the default. A saved Right preference moves the sidebar.
+    my %ValidNavPosition = (
+        Left  => 1,
+        Right => 1,
+    );
+    my $NavLayoutPosition = 'Left';
+    my $UserNavPosition   = $Self->{UserNavLayoutServicePosition} || '';
+    if ( $ValidNavPosition{$UserNavPosition} ) {
+        $NavLayoutPosition = $UserNavPosition;
+    }
+
+    my $NavTreeState     = $Self->{UserNavLayoutServiceState} || '';
+    my $NavTreeCollapsed = 0;
+    if ($NavTreeState) {
+        my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
+        my $State;
+
+        eval {
+            $State = $JSONObject->Decode(
+                Data => $NavTreeState,
+            );
+        };
+        if ( $@ || ref $State ne 'HASH' ) {
+            $NavTreeState     = '';
+            $NavTreeCollapsed = 0;
+        }
+        elsif ( $State->{collapsed} ) {
+            $NavTreeCollapsed = 1;
+        }
+    }
 
     $Self->{HighlightAge1} = $Config->{HighlightAge1};
     $Self->{HighlightAge2} = $Config->{HighlightAge2};
@@ -758,7 +871,9 @@ sub _MaskServiceView {
         my $View = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'View' ) || '';
 
         $ServiceStrg
-            .= "<li><a href=\"$LayoutObject->{Baselink}Action=AgentTicketService;ServiceID=$Service{ServiceID}";
+            .= "<li><a data-item-path=\""
+            . $LayoutObject->Ascii2Html( Text => $Service{Service} )
+            . "\" href=\"$LayoutObject->{Baselink}Action=AgentTicketService;ServiceID=$Service{ServiceID}";
         $ServiceStrg .= ';View=' . $LayoutObject->Ascii2Html( Text => $View ) . '"';
 
         $ServiceStrg .= ' class="';
@@ -844,6 +959,9 @@ sub _MaskServiceView {
 
         $ServiceStrg .= '</a></li>';
 
+        # All services for TopHover and Sidebar, independent of the selected level.
+        $Param{AllServiceItems} .= $ServiceStrg;
+
         if ( $#ServiceName == 0 ) {
             $Param{ServiceStrg1} .= $ServiceStrg;
         }
@@ -882,7 +1000,7 @@ sub _MaskServiceView {
     for my $Level ( 1 .. 5 ) {
         next LEVEL if !$Param{ 'ServiceStrg' . $Level };
         $Param{ServiceStrg}
-            .= '<ul class="ServiceOverviewList Level_' . $Level . '">' . $Param{ 'ServiceStrg' . $Level } . '</ul>';
+            .= '<ul class="NavOverviewList Level_' . $Level . '">' . $Param{ 'ServiceStrg' . $Level } . '</ul>';
     }
 
     return (
@@ -890,6 +1008,11 @@ sub _MaskServiceView {
         SelectedService   => $Param{SelectedService},
         BreadcrumbService => $Param{BreadcrumbService},
         MainContent       => $Param{ServiceStrg},
+        AllServiceItems   => $Param{AllServiceItems},
+        NavLayout         => $NavLayout,
+        NavLayoutPosition => $NavLayoutPosition,
+        NavTreeState      => $NavTreeState,
+        NavTreeCollapsed  => $NavTreeCollapsed,
         Total             => $Param{TicketsShown},
     );
 }

@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.702371478593029;
+    $Self->{Completeness}        = 0.702019398950549;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4498,6 +4498,9 @@ sub Data {
         'Available tickets' => 'Tickets disponibles',
         'including subqueues' => 'incluir subsecuencias',
         'excluding subqueues' => 'excluir subsecuencias',
+        'System default' => '',
+        'Position' => '',
+        'Right' => 'Derecho',
         'Queue View' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
@@ -6706,6 +6709,8 @@ sub Data {
             'Activa un mecanismo de parpadeo para la fila que contiene el ticket más antiguo.',
         'Include tickets of subqueues per default when selecting a queue.' =>
             '',
+        'Defines the queue navigation in the queue view. Top shows one queue level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            '',
         'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the queue view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the QueueID for the key and 0 or 1 for value.' =>
             'Ordena los tickets (ascendente o descendentemente), luego de haberse ordenado por prioridad, cuando una sola fila se selecciona en la vista de filas. Values: 0 = ascendente (por defecto, más antiguo arriba), 1 = descendente (más reciente arriba). Use el identificador de la fila como Key y 0 ó 1 como Valor.',
         'Defines the default sort criteria for all queues displayed in the queue view.' =>
@@ -6731,6 +6736,8 @@ sub Data {
         'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
             '',
         'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
+        'Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
             '',
         'Activates time accounting.' => 'Activa la contatibilidad de tiempo.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
@@ -8648,6 +8655,10 @@ sub Data {
         'Filters' => 'Filtros',
         'Clear search' => 'Limpiar búsqueda',
 
+        # JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+        'Collapse' => 'Contraer',
+        'Expand' => 'Expandir',
+
         # JS File: var/httpd/htdocs/js/Core.UI.Popup.js
         'If you now leave this page, all open popup windows will be closed, too!' =>
             '¡Si sale de esta página ahora, todas las ventanas pop-up también se cerrarán!',
@@ -9255,7 +9266,6 @@ Tu Equipo de Soporte
         'Resent email to "%s".' => 'Reenviar email a "%s".',
         'Responsible Tickets' => '',
         'Responsible Tickets.' => '',
-        'Right' => 'Derecho',
         'Romanian' => 'Rumano',
         'Running Process Tickets' => 'Procesos de Tickets en Ejecución',
         'Russian' => 'Ruso',
@@ -9549,6 +9559,7 @@ Tu Equipo de Soporte
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Collapse',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9630,10 +9641,12 @@ Tu Equipo de Soporte
         'Error in the mail settings. Please correct and try again.',
         'Error: Browser Check failed!',
         'Event Type Filter',
+        'Expand',
         'Expanded',
         'Favourites',
         'Feb',
         'February',
+        'Filter',
         'Filters',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
@@ -9838,6 +9851,7 @@ Tu Equipo de Soporte
         'Timeline Week',
         'Title',
         'Today',
+        'Toggle sidebar',
         'Too many active calendars',
         'Try again',
         'Tu',

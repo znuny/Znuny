@@ -22,6 +22,8 @@ Core.Agent = Core.Agent || {};
 Core.Agent.Responsive = (function (TargetNS) {
 
     Core.App.Subscribe('Event.App.Responsive.SmallerOrEqualScreenL', function () {
+        var $DrawerSidebar;
+
         // Add switch for Desktop mode
         if (!$('#ViewModeSwitch').length) {
             $('#Footer').append('<div id="ViewModeSwitch"><a href="#">' + Core.Language.Translate('Switch to desktop mode') + '</a></div>');
@@ -47,9 +49,12 @@ Core.Agent.Responsive = (function (TargetNS) {
             return false;
         });
 
+        // Queue nav keeps its own mobile bar. The generic drawer is for action sidebars.
+        $DrawerSidebar = $('.SidebarColumn').not('.NavLayout .SidebarColumn');
+
         // wrap sidebar modules with an additional container
-        if ($('.SidebarColumn').children().length && !$('.SidebarColumn').closest('.ResponsiveSidebarContainer').length) {
-            $('.SidebarColumn').wrap('<div class="ResponsiveSidebarContainer" />');
+        if ($DrawerSidebar.children().length && !$DrawerSidebar.closest('.ResponsiveSidebarContainer').length) {
+            $DrawerSidebar.wrap('<div class="ResponsiveSidebarContainer" />');
         }
         if (!$('#NavigationContainer').closest('.ResponsiveSidebarContainer').length) {
             $('#NavigationContainer').wrap('<div class="ResponsiveSidebarContainer" />');
@@ -68,8 +73,8 @@ Core.Agent.Responsive = (function (TargetNS) {
         });
 
         // add handles for navigation and sidebar
-        if (!$('#ResponsiveSidebarHandle').length) {
-            $('.SidebarColumn').closest('.ResponsiveSidebarContainer').before('<span class="ResponsiveHandle" id="ResponsiveSidebarHandle"><i class="fa fa-sign-out"></i></span>');
+        if (!$('#ResponsiveSidebarHandle').length && $DrawerSidebar.length) {
+            $DrawerSidebar.closest('.ResponsiveSidebarContainer').before('<span class="ResponsiveHandle" id="ResponsiveSidebarHandle"><i class="fa fa-sign-out"></i></span>');
         }
         if (!$('#ResponsiveNavigationHandle').length) {
             $('#NavigationContainer').closest('.ResponsiveSidebarContainer').before('<span class="ResponsiveHandle" id="ResponsiveNavigationHandle"><i class="fa fa-navicon"></i></span>');
@@ -102,13 +107,13 @@ Core.Agent.Responsive = (function (TargetNS) {
 
         // add sidebar column expansion handling
         $('#ResponsiveSidebarHandle').off().on('click', function() {
-            if (parseInt($('.SidebarColumn').css('right'), 10) < 0) {
+            if (parseInt($DrawerSidebar.css('right'), 10) < 0) {
                 $('#ResponsiveNavigationHandle').animate({
                     'left': '-45px'
                 });
-                $('.SidebarColumn').closest('.ResponsiveSidebarContainer').fadeIn();
+                $DrawerSidebar.closest('.ResponsiveSidebarContainer').fadeIn();
                 $('html').addClass('NoScroll');
-                $('.SidebarColumn').animate({
+                $DrawerSidebar.animate({
                     'right': '0'
                 });
             }
@@ -116,9 +121,9 @@ Core.Agent.Responsive = (function (TargetNS) {
                 $('#ResponsiveNavigationHandle').animate({
                     'left': '20px'
                 });
-                $('.SidebarColumn').closest('.ResponsiveSidebarContainer').fadeOut();
+                $DrawerSidebar.closest('.ResponsiveSidebarContainer').fadeOut();
                 $('html').removeClass('NoScroll');
-                $('.SidebarColumn').animate({
+                $DrawerSidebar.animate({
                     'right': '-300px'
                 });
             }

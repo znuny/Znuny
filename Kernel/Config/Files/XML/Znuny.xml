@@ -4116,6 +4116,12 @@
                 <Item>\AUserToolBar\z</Item>
                 <Item>\AUserToolBarSearchBackend\z</Item>
                 <Item>\AUserNavBarItemsOrder\z</Item>
+                <Item>\AUserNavLayoutQueue\z</Item>
+                <Item>\AUserNavLayoutQueuePosition\z</Item>
+                <Item>\AUserNavLayoutQueueState\z</Item>
+                <Item>\AUserNavLayoutService\z</Item>
+                <Item>\AUserNavLayoutServicePosition\z</Item>
+                <Item>\AUserNavLayoutServiceState\z</Item>
                 <Item>\ATicketProcessCategoryFavourites\z</Item>
 
                 <!-- Core.Agent.Admin.SystemConfiguration.Init, sidebar action widget toggle -->

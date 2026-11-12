@@ -4498,6 +4498,9 @@ sub Data {
         'Available tickets' => 'Verfügbare Tickets',
         'including subqueues' => 'untergeordnete Queues miteinbeziehen',
         'excluding subqueues' => 'untergeordnete Queues ausschließen',
+        'System default' => 'Systemstandard',
+        'Position' => 'Position',
+        'Right' => 'Rechts',
         'Queue View' => 'Ansicht nach Queue',
 
         # Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
@@ -6706,6 +6709,8 @@ sub Data {
             'Aktiviert einen Blinkmechanismus der Queue, die das älteste Ticket enthält.',
         'Include tickets of subqueues per default when selecting a queue.' =>
             'Tickets von Unterqueues automatisch mit einschließen, wenn eine Queue ausgewählt wird.',
+        'Defines the queue navigation in the queue view. Top shows one queue level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            'Definiert die Queue-Navigation in der Queue-Ansicht. Top zeigt jeweils eine Queue-Ebene, ohne Hover-Menüs. TopHover zeigt die hierarchische Navigationsleiste mit Hover-Untermenüs.',
         'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the queue view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the QueueID for the key and 0 or 1 for value.' =>
             'Steuert die Sortierreihenfolge von Tickets bei Auswahl einer einzelnen Queue in der Queue-Ansicht nach dem Sortieren nach Priorität. Mögliche Werte: 0 = aufsteigend (älteste Tickets zuerst), 1 = absteigend (neuste Tickets zuerst). Tragen Sie die ID der Queue als Schlüssel und 0 oder 1 als Wert ein.',
         'Defines the default sort criteria for all queues displayed in the queue view.' =>
@@ -6732,6 +6737,8 @@ sub Data {
             'Definiert das Ticket Alter in Minuten bevor die Services mit unbearbeiteten Tickets hervorgehoben werden (zweites Level).',
         'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
             'Aktiviert einen Blinkmechanismus des Services, welcher das älteste Ticket enthält.',
+        'Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            'Definiert die Service-Navigation in der Service-Ansicht. Top zeigt jeweils eine Service-Ebene, ohne Hover-Menüs. TopHover zeigt die hierarchische Navigationsleiste mit Hover-Untermenüs.',
         'Activates time accounting.' => 'Aktiviert die Zeitabrechnung.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             'Legt die bevorzugten Zeiteinheiten fest (z.B. Arbeitseinheiten, Stunden, Minuten).',
@@ -8648,6 +8655,10 @@ sub Data {
         'Filters' => 'Filter',
         'Clear search' => 'Suche löschen',
 
+        # JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+        'Collapse' => 'Zuklappen',
+        'Expand' => 'Ausklappen',
+
         # JS File: var/httpd/htdocs/js/Core.UI.Popup.js
         'If you now leave this page, all open popup windows will be closed, too!' =>
             'Wenn Sie diese Seite verlassen, werden auch alle geöffneten Dialoge geschlossen!',
@@ -9254,7 +9265,6 @@ Ihr Helpdesk-Team
         'Resent email to "%s".' => 'E-Mail erneut senden an "%s".',
         'Responsible Tickets' => 'Verantwortliche Tickets',
         'Responsible Tickets.' => 'Verantwortliche Tickets.',
-        'Right' => 'Rechts',
         'Romanian' => 'Rumänisch',
         'Running Process Tickets' => 'Aktive Prozess-Tickets',
         'Russian' => 'Russisch',
@@ -9548,6 +9558,7 @@ Ihr Helpdesk-Team
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Collapse',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9629,10 +9640,12 @@ Ihr Helpdesk-Team
         'Error in the mail settings. Please correct and try again.',
         'Error: Browser Check failed!',
         'Event Type Filter',
+        'Expand',
         'Expanded',
         'Favourites',
         'Feb',
         'February',
+        'Filter',
         'Filters',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
@@ -9837,6 +9850,7 @@ Ihr Helpdesk-Team
         'Timeline Week',
         'Title',
         'Today',
+        'Toggle sidebar',
         'Too many active calendars',
         'Try again',
         'Tu',

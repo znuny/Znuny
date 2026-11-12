@@ -2765,6 +2765,44 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         width: auto;
     }
 
+    .WidgetSettingsForm fieldset > .ticket-modal:not(.modal-col-wrapper),
+    .WidgetSettingsForm fieldset .ContextSettingsNav {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: var(--padding-sm);
+        padding-bottom: var(--padding-sm);
+    }
+
+    .WidgetSettingsForm fieldset > .ticket-modal.modal-col-wrapper {
+        gap: var(--padding-sm);
+    }
+
+    .WidgetSettingsForm fieldset > .ticket-modal > label,
+    .WidgetSettingsForm fieldset .ContextSettingsNav > label {
+        flex: 0 0 160px;
+        width: 160px;
+        min-width: 160px;
+        padding-top: 0;
+    }
+
+    .WidgetSettingsForm fieldset > .ticket-modal:not(.modal-col-wrapper) > .Field,
+    .WidgetSettingsForm fieldset .ContextSettingsNav > .Field {
+        flex: 1 1 auto;
+        width: auto;
+        min-width: 0;
+        max-width: none;
+    }
+
+    .WidgetSettingsForm fieldset > .ticket-modal:not(.modal-col-wrapper) .Field .InputField_Container,
+    .WidgetSettingsForm fieldset > .ticket-modal:not(.modal-col-wrapper) .Field .InputField_InputContainer,
+    .WidgetSettingsForm fieldset .ContextSettingsNav .Field .InputField_Container,
+    .WidgetSettingsForm fieldset .ContextSettingsNav .Field .InputField_InputContainer {
+        width: 100%;
+        max-width: none;
+    }
+
     .WidgetSettingsForm fieldset .row-wrapper .Field .inner-field,
     .WidgetSettingsForm fieldset .Field .inner-field {
         position: relative;

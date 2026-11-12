@@ -25,7 +25,6 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         margin: 0;
         padding: var(--main-page-padding);
         padding-top: 0;
-        background: var(--main-bg-color);
     }
 
     .Overview div.UnreadArticles {
@@ -143,35 +142,44 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         color: initial;
         display: flex;
         justify-content: flex-start;
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
     }
 
     .level-filter-view .Content {
         width: 100%;
+        min-width: 0;
+        max-width: 100%;
     }
 
+    ul.NavOverviewList,
     ul.QueueOverviewList,
     ul.ServiceOverviewList {
         display: flex;
         flex-wrap: wrap;
         gap: var(--margin-sm);
         padding: var(--padding-sm);
-        margin-bottom: var(--margin-lg);
+        margin: var(--margin-xs);
         background: var(--main-bg-color);
         border: var(--border-width) var(--border-solid) var(--border-color);
         border-radius: var(--border-radius-sm);
     }
 
+    ul.NavOverviewList li,
     ul.QueueOverviewList li,
     ul.ServiceOverviewList li {
         display: flex;
         white-space: nowrap;
     }
 
+    ul.NavOverviewList li:first-child,
     ul.QueueOverviewList li:first-child,
     ul.ServiceOverviewList li:first-child {
         margin-left: 0;
     }
 
+    ul.NavOverviewList li a,
     ul.QueueOverviewList li a,
     ul.ServiceOverviewList li a {
         font-size: var(--font-size-sm);
@@ -186,6 +194,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         border: var(--border-width) var(--border-solid) var(--border-color);
     }
 
+    ul.NavOverviewList li a:hover,
     ul.QueueOverviewList li a:hover,
     ul.ServiceOverviewList li a:hover {
         border: var(--border-width) var(--border-solid) var(--primary-color-darker);

@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.593665446442782;
+    $Self->{Completeness}        = 0.593417077436794;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4503,6 +4503,9 @@ sub Data {
         'Available tickets' => 'درخواست موجود',
         'including subqueues' => 'از جمله subqueues',
         'excluding subqueues' => 'به استثنای subqueues',
+        'System default' => '',
+        'Position' => '',
+        'Right' => 'راست',
         'Queue View' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
@@ -6711,6 +6714,8 @@ sub Data {
             'مکانیزم چشمک زدن را برای صف درخواستی که شامل قدیمی‌ترین درخواست می‌باشد فعال می‌کند.',
         'Include tickets of subqueues per default when selecting a queue.' =>
             'شامل بلیط از subqueues در به طور پیش فرض در هنگام انتخاب یک صف.',
+        'Defines the queue navigation in the queue view. Top shows one queue level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            '',
         'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the queue view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the QueueID for the key and 0 or 1 for value.' =>
             'انواع بلیط (ascendingly یا descendingly) که یک صف واحد در نمایش صف انتخاب و پس از بلیط ها با اولویت طبقه بندی شده اند. ارزش: 0 = صعودی (قدیمی ترین در بالا، به طور پیش فرض)، 1 = نزولی (جوانترین در بالا). استفاده از QueueID برای کلید و 0 یا 1 برای ارزش.',
         'Defines the default sort criteria for all queues displayed in the queue view.' =>
@@ -6736,6 +6741,8 @@ sub Data {
         'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
             '',
         'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
+        'Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
             '',
         'Activates time accounting.' => 'محاسبه زمان را فعال می‌کند.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
@@ -8653,6 +8660,10 @@ sub Data {
         'Filters' => 'فیلترها ',
         'Clear search' => ' پاک کردن جستجو',
 
+        # JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+        'Collapse' => 'جمع کردن',
+        'Expand' => 'گسترش',
+
         # JS File: var/httpd/htdocs/js/Core.UI.Popup.js
         'If you now leave this page, all open popup windows will be closed, too!' =>
             'اگر اکنون این صفحه را ترک نمایید، تمام پنجره‌های popup باز شده نیز بسته خواهند شد!',
@@ -9260,7 +9271,6 @@ Thanks for your help!
         'Resent email to "%s".' => '',
         'Responsible Tickets' => 'کارشناس درخواست',
         'Responsible Tickets.' => 'کارشناس درخواست.',
-        'Right' => 'راست',
         'Romanian' => '',
         'Running Process Tickets' => 'در حال اجرا فرآیند درخواست',
         'Russian' => 'روسی',
@@ -9554,6 +9564,7 @@ Thanks for your help!
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Collapse',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9635,10 +9646,12 @@ Thanks for your help!
         'Error in the mail settings. Please correct and try again.',
         'Error: Browser Check failed!',
         'Event Type Filter',
+        'Expand',
         'Expanded',
         'Favourites',
         'Feb',
         'February',
+        'Filter',
         'Filters',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
@@ -9843,6 +9856,7 @@ Thanks for your help!
         'Timeline Week',
         'Title',
         'Today',
+        'Toggle sidebar',
         'Too many active calendars',
         'Try again',
         'Tu',

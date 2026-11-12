@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.855164730224415;
+    $Self->{Completeness}        = 0.854666878677055;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4503,6 +4503,9 @@ sub Data {
         'Available tickets' => 'Slobodni tiketi',
         'including subqueues' => 'uključujući podredove',
         'excluding subqueues' => 'isključujući podredove',
+        'System default' => '',
+        'Position' => '',
+        'Right' => 'Desno',
         'Queue View' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
@@ -6711,6 +6714,8 @@ sub Data {
             'Aktivira mehanizam treptanja reda koji sarži najstariji tiket.',
         'Include tickets of subqueues per default when selecting a queue.' =>
             'Kod izbora reda, podrazumevano uključi i tikete podredova.',
+        'Defines the queue navigation in the queue view. Top shows one queue level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            '',
         'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the queue view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the QueueID for the key and 0 or 1 for value.' =>
             'Sortiranje tiketa (rastuće ili opadajuće) kada se izabere jedan red iz pregleda redova posle sortiranja tiketa po prioritetu. Vrednosti: 0 = rastuće (najstarije na vrhu, podrazumevano), 1 = opadajuće (najnovije na vrhu). Koristi ID reda za ključ i 0 ili 1 za vrednost.',
         'Defines the default sort criteria for all queues displayed in the queue view.' =>
@@ -6736,6 +6741,8 @@ sub Data {
         'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
             '',
         'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
+        'Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
             '',
         'Activates time accounting.' => 'Aktivira merenje vremena.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
@@ -8653,6 +8660,10 @@ sub Data {
         'Filters' => 'Filteri',
         'Clear search' => 'Očisti pretragu',
 
+        # JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+        'Collapse' => 'Smanji',
+        'Expand' => 'Proširi',
+
         # JS File: var/httpd/htdocs/js/Core.UI.Popup.js
         'If you now leave this page, all open popup windows will be closed, too!' =>
             'Ako napustite ovu stranicu, svi otvoreni prozori će biti zatvoreni!',
@@ -9260,7 +9271,6 @@ Vaša tehnička podrška
         'Resent email to "%s".' => 'Ponovo poslat imejl na "%s".',
         'Responsible Tickets' => 'Odgovorni tiketi',
         'Responsible Tickets.' => 'Odgovorni tiketi.',
-        'Right' => 'Desno',
         'Romanian' => 'Rumunski',
         'Running Process Tickets' => 'Aktivni proces tiketi',
         'Russian' => 'Ruski',
@@ -9554,6 +9564,7 @@ Vaša tehnička podrška
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Collapse',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9635,10 +9646,12 @@ Vaša tehnička podrška
         'Error in the mail settings. Please correct and try again.',
         'Error: Browser Check failed!',
         'Event Type Filter',
+        'Expand',
         'Expanded',
         'Favourites',
         'Feb',
         'February',
+        'Filter',
         'Filters',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
@@ -9843,6 +9856,7 @@ Vaša tehnička podrška
         'Timeline Week',
         'Title',
         'Today',
+        'Toggle sidebar',
         'Too many active calendars',
         'Try again',
         'Tu',

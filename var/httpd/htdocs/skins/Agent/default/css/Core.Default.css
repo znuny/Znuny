@@ -702,10 +702,10 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .OverviewBox {
         position: relative;
         padding: var(--main-page-padding) var(--main-page-padding) 0;
-        background-color: var(--main-bg-color);
         display: flex;
         flex-flow: column;
         gap: var(--gap-md);
+        /* background-color: var(--main-bg-color); */
     }
 
     .MainBox > h1 {

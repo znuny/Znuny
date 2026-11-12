@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.279484322775744;
+    $Self->{Completeness}        = 0.279535697249165;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4497,6 +4497,9 @@ sub Data {
         'Available tickets' => 'Tichete disponibile',
         'including subqueues' => 'include subcozi',
         'excluding subqueues' => 'exclude subcozi',
+        'System default' => '',
+        'Position' => '',
+        'Right' => '',
         'Queue View' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
@@ -6705,6 +6708,8 @@ sub Data {
             '',
         'Include tickets of subqueues per default when selecting a queue.' =>
             '',
+        'Defines the queue navigation in the queue view. Top shows one queue level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            '',
         'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the queue view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the QueueID for the key and 0 or 1 for value.' =>
             '',
         'Defines the default sort criteria for all queues displayed in the queue view.' =>
@@ -6730,6 +6735,8 @@ sub Data {
         'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
             '',
         'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
+        'Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
             '',
         'Activates time accounting.' => '',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
@@ -8647,6 +8654,10 @@ sub Data {
         'Filters' => 'Filtre',
         'Clear search' => 'Ștergeți căutarea',
 
+        # JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+        'Collapse' => 'Restrânge',
+        'Expand' => 'Extindere',
+
         # JS File: var/httpd/htdocs/js/Core.UI.Popup.js
         'If you now leave this page, all open popup windows will be closed, too!' =>
             'Dacă părăsiți această pagină, toate ferestrele asociate vor fi închise și ele!',
@@ -9243,7 +9254,6 @@ Thanks for your help!
         'Resent email to "%s".' => '',
         'Responsible Tickets' => '',
         'Responsible Tickets.' => '',
-        'Right' => '',
         'Romanian' => '',
         'Running Process Tickets' => '',
         'Russian' => '',
@@ -9537,6 +9547,7 @@ Thanks for your help!
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Collapse',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9618,10 +9629,12 @@ Thanks for your help!
         'Error in the mail settings. Please correct and try again.',
         'Error: Browser Check failed!',
         'Event Type Filter',
+        'Expand',
         'Expanded',
         'Favourites',
         'Feb',
         'February',
+        'Filter',
         'Filters',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
@@ -9826,6 +9839,7 @@ Thanks for your help!
         'Timeline Week',
         'Title',
         'Today',
+        'Toggle sidebar',
         'Too many active calendars',
         'Try again',
         'Tu',

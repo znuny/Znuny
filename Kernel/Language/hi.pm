@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.251631386280439;
+    $Self->{Completeness}        = 0.251709333757354;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4500,6 +4500,9 @@ sub Data {
         'Available tickets' => '',
         'including subqueues' => '',
         'excluding subqueues' => '',
+        'System default' => '',
+        'Position' => '',
+        'Right' => '',
         'Queue View' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
@@ -6708,6 +6711,8 @@ sub Data {
             'श्रेणी के एक निमिष व्यवस्था सक्रिय करता है जिसमें सबसे पुराना टिकट शामिल होता है।',
         'Include tickets of subqueues per default when selecting a queue.' =>
             '',
+        'Defines the queue navigation in the queue view. Top shows one queue level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            '',
         'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the queue view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the QueueID for the key and 0 or 1 for value.' =>
             'टिकटों(आरोही या अवरोही) को क्रमबद्ध करता है जब श्रेणी दृश्य में एक ही श्रेणी का चयन किया जाता है और टिकट प्राथमिकता के आधार पर बाद में क्रमबद्ध किए जाते हैं। मान:0=आरोही(शीर्ष में सबसे पुराना,तयशुदा),1=अवरोही(शीर्ष में नवीनतम)। कुंजी के लिए QueueID और मूल्य के लिए 0 या 1 का प्रयोग करें।',
         'Defines the default sort criteria for all queues displayed in the queue view.' =>
@@ -6733,6 +6738,8 @@ sub Data {
         'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
             '',
         'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
+        'Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
             '',
         'Activates time accounting.' => 'समय लेखाकरण सक्रिय करता है।',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
@@ -8650,6 +8657,10 @@ sub Data {
         'Filters' => '',
         'Clear search' => '',
 
+        # JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+        'Collapse' => 'संक्षिप्त करें',
+        'Expand' => 'विस्तार',
+
         # JS File: var/httpd/htdocs/js/Core.UI.Popup.js
         'If you now leave this page, all open popup windows will be closed, too!' =>
             'यदि अब आप इस पृष्ठ को छॊडॆंगॆ,सभी खुले पॉपअप विंडोज़ भी बंद हो जायेंगे।',
@@ -9246,7 +9257,6 @@ Thanks for your help!
         'Resent email to "%s".' => '',
         'Responsible Tickets' => '',
         'Responsible Tickets.' => '',
-        'Right' => '',
         'Romanian' => '',
         'Running Process Tickets' => '',
         'Russian' => '',
@@ -9540,6 +9550,7 @@ Thanks for your help!
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Collapse',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9621,10 +9632,12 @@ Thanks for your help!
         'Error in the mail settings. Please correct and try again.',
         'Error: Browser Check failed!',
         'Event Type Filter',
+        'Expand',
         'Expanded',
         'Favourites',
         'Feb',
         'February',
+        'Filter',
         'Filters',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
@@ -9829,6 +9842,7 @@ Thanks for your help!
         'Timeline Week',
         'Title',
         'Today',
+        'Toggle sidebar',
         'Too many active calendars',
         'Try again',
         'Tu',

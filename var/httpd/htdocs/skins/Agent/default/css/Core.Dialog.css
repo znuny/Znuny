@@ -243,6 +243,11 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     width: calc(100% - var(--margin-xl));
 }
 
+.Dialog.modal-settings {
+    max-width: 1040px;
+    width: calc(100% - var(--margin-xl));
+}
+
 .Dialog.modal-xl {
     width: 80%;
 }

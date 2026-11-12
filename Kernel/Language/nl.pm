@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d-%m-%Y';
     $Self->{DateInputFormat}     = '%d-%m-%Y';
     $Self->{DateInputFormatLong} = '%d-%m-%Y - %T';
-    $Self->{Completeness}        = 0.478911348082126;
+    $Self->{Completeness}        = 0.478772459850533;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4503,6 +4503,9 @@ sub Data {
         'Available tickets' => 'Beschikbare tickets',
         'including subqueues' => 'Inclusief sub-wachtrijen',
         'excluding subqueues' => 'Exclusief sub-wachtrijen',
+        'System default' => '',
+        'Position' => '',
+        'Right' => '',
         'Queue View' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
@@ -6711,6 +6714,8 @@ sub Data {
             'Activeert een knipper mechanisme van de wachtrij met het oudste ticket.',
         'Include tickets of subqueues per default when selecting a queue.' =>
             '',
+        'Defines the queue navigation in the queue view. Top shows one queue level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            '',
         'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the queue view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the QueueID for the key and 0 or 1 for value.' =>
             '',
         'Defines the default sort criteria for all queues displayed in the queue view.' =>
@@ -6736,6 +6741,8 @@ sub Data {
         'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
             '',
         'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
+        'Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
             '',
         'Activates time accounting.' => 'Activeert tijd registratie.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
@@ -8653,6 +8660,10 @@ sub Data {
         'Filters' => 'Filters',
         'Clear search' => 'Verwijder zoekactie',
 
+        # JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+        'Collapse' => 'Inklappen',
+        'Expand' => 'Klap uit',
+
         # JS File: var/httpd/htdocs/js/Core.UI.Popup.js
         'If you now leave this page, all open popup windows will be closed, too!' =>
             'Als u deze pagina verlaat worden alle openstaande popup-vensters ook gesloten.',
@@ -9260,7 +9271,6 @@ Het Helpdesk Team
         'Resent email to "%s".' => '',
         'Responsible Tickets' => 'Verantwoordelijke tickets',
         'Responsible Tickets.' => 'Verantwoordelijke tickets.',
-        'Right' => '',
         'Romanian' => '',
         'Running Process Tickets' => '',
         'Russian' => '',
@@ -9554,6 +9564,7 @@ Het Helpdesk Team
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Collapse',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9635,10 +9646,12 @@ Het Helpdesk Team
         'Error in the mail settings. Please correct and try again.',
         'Error: Browser Check failed!',
         'Event Type Filter',
+        'Expand',
         'Expanded',
         'Favourites',
         'Feb',
         'February',
+        'Filter',
         'Filters',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
@@ -9843,6 +9856,7 @@ Het Helpdesk Team
         'Timeline Week',
         'Title',
         'Today',
+        'Toggle sidebar',
         'Too many active calendars',
         'Try again',
         'Tu',

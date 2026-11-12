@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.836224733407608;
+    $Self->{Completeness}        = 0.835744951502624;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4509,6 +4509,9 @@ sub Data {
         'Available tickets' => 'Доступные заявки',
         'including subqueues' => 'включая подочереди',
         'excluding subqueues' => 'исключая подочереди',
+        'System default' => '',
+        'Position' => '',
+        'Right' => 'Правый',
         'Queue View' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
@@ -6717,6 +6720,8 @@ sub Data {
             'Включить "мигание" для очередей содержащих наиболее старые заявки',
         'Include tickets of subqueues per default when selecting a queue.' =>
             'Включает заявки подочередей по умолчанию при выборе очереди.',
+        'Defines the queue navigation in the queue view. Top shows one queue level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            '',
         'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the queue view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the QueueID for the key and 0 or 1 for value.' =>
             'Сортировать заявки (по возрастанию или убыванию) если выбрана одна очередь при просмотре очередей и после сортировки по приоритету. Значения: 0 = по возрастанию (старые сверху, по умолчанию), 1 = по убыванию (новейшие сверху). Используйте QueueID в качестве ключа и 0 или 1 в качестве значения ключа.',
         'Defines the default sort criteria for all queues displayed in the queue view.' =>
@@ -6743,6 +6748,8 @@ sub Data {
             '',
         'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
             'Активирует механизм моргания сервиса, который содержит самую старую заявку.',
+        'Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            '',
         'Activates time accounting.' => 'Включить учет времени выполнения',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             'Задает единицы измерения для единиц времени (например: рабочие часы, часы, минуты).',
@@ -8659,6 +8666,10 @@ sub Data {
         'Filters' => 'Фильтры',
         'Clear search' => 'Очистить параметры поиска',
 
+        # JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+        'Collapse' => 'Свернуть',
+        'Expand' => 'Развернуть',
+
         # JS File: var/httpd/htdocs/js/Core.UI.Popup.js
         'If you now leave this page, all open popup windows will be closed, too!' =>
             'Если вы сейчас покинете эту страницу, будут также закрыты и все всплывающие окна!',
@@ -9266,7 +9277,6 @@ Thanks for your help!
         'Resent email to "%s".' => '',
         'Responsible Tickets' => 'Заявки, за которые ответственный',
         'Responsible Tickets.' => 'Заявки, за которые ответственный.',
-        'Right' => 'Правый',
         'Romanian' => '',
         'Running Process Tickets' => 'Запущенные Процессные заявки',
         'Russian' => 'Русский',
@@ -9560,6 +9570,7 @@ Thanks for your help!
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Collapse',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9641,10 +9652,12 @@ Thanks for your help!
         'Error in the mail settings. Please correct and try again.',
         'Error: Browser Check failed!',
         'Event Type Filter',
+        'Expand',
         'Expanded',
         'Favourites',
         'Feb',
         'February',
+        'Filter',
         'Filters',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
@@ -9849,6 +9862,7 @@ Thanks for your help!
         'Timeline Week',
         'Title',
         'Today',
+        'Toggle sidebar',
         'Too many active calendars',
         'Try again',
         'Tu',

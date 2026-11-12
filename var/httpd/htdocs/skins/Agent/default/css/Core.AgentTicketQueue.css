@@ -59,7 +59,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 .QueueOverviewList li:first-child {
-    margin-left: 0;
+    margin-left: 5px;
 }
 
 .QueueOverviewList li a {
@@ -86,95 +86,95 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 */
 
-.QueueOverviewList.Level_1 {
-    margin-left: 0;
+.NavOverviewList.Level_1 {
+    margin-left: 5px;
 }
 
-.QueueOverviewList.Level_2 {
-    margin-left: 0;
+.NavOverviewList.Level_2 {
+    margin-left: 5px;
 }
 
-.QueueOverviewList.Level_3 {
-    margin-left: 0;
+.NavOverviewList.Level_3 {
+    margin-left: 5px;
 }
 
-.QueueOverviewList.Level_4 {
-    margin-left: 0;
+.NavOverviewList.Level_4 {
+    margin-left: 5px;
 }
 
-.QueueOverviewList.Level_5 {
-    margin-left: 0;
+.NavOverviewList.Level_5 {
+    margin-left: 5px;
 }
 
-.QueueOverviewList.Level_6 {
-    margin-left: 0;
+.NavOverviewList.Level_6 {
+    margin-left: 5px;
 }
 
-.QueueOverviewList.Level_7 {
-    margin-left: 0;
+.NavOverviewList.Level_7 {
+    margin-left: 5px;
 }
 
-.QueueOverviewList.Level_8 {
-    margin-left: 0;
+.NavOverviewList.Level_8 {
+    margin-left: 5px;
 }
 
-.QueueOverviewList.Level_9 {
-    margin-left: 0;
+.NavOverviewList.Level_9 {
+    margin-left: 5px;
 }
 
-.QueueOverviewList.Level_10 {
-    margin-left: 0;
+.NavOverviewList.Level_10 {
+    margin-left: 5px;
 }
 
-.QueueOverviewList.Level_X {
-    margin-left: 0;
+.NavOverviewList.Level_X {
+    margin-left: 5px;
 }
 
-.RTL .QueueOverviewList.Level_1 {
+.RTL .NavOverviewList.Level_1 {
     margin-right: 10px;
 }
 
-.RTL .QueueOverviewList.Level_2 {
+.RTL .NavOverviewList.Level_2 {
     margin-right: 20px;
 }
 
-.RTL .QueueOverviewList.Level_3 {
+.RTL .NavOverviewList.Level_3 {
     margin-right: 30px;
 }
 
-.RTL .QueueOverviewList.Level_4 {
+.RTL .NavOverviewList.Level_4 {
     margin-right: 40px;
 }
 
-.RTL .QueueOverviewList.Level_5 {
+.RTL .NavOverviewList.Level_5 {
     margin-right: 50px;
 }
 
-.RTL .QueueOverviewList.Level_6 {
+.RTL .NavOverviewList.Level_6 {
     margin-right: 60px;
 }
 
-.RTL .QueueOverviewList.Level_7 {
+.RTL .NavOverviewList.Level_7 {
     margin-right: 70px;
 }
 
-.RTL .QueueOverviewList.Level_8 {
+.RTL .NavOverviewList.Level_8 {
     margin-right: 80px;
 }
 
-.RTL .QueueOverviewList.Level_9 {
+.RTL .NavOverviewList.Level_9 {
     margin-right: 90px;
 }
 
-.RTL .QueueOverviewList.Level_10 {
+.RTL .NavOverviewList.Level_10 {
     margin-right: 100px;
 }
 
-.RTL .QueueOverviewList.Level_X {
+.RTL .NavOverviewList.Level_X {
     margin-right: 100px;
 }
 
-.RTL .QueueOverviewList li {
+.RTL .NavOverviewList li {
     float: right;
 }
 
@@ -191,11 +191,11 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     -webkit-animation: Blinking 1s steps(10, start) infinite;
 }
 
-.QueueOverviewList:not(:last-of-type) li a.Active {
+.NavOverviewList:not(:last-of-type) li a.Active {
     opacity: 0.5;
 }
 
-.QueueOverviewList:not(:last-of-type) li a:hover {
+.NavOverviewList:not(:last-of-type) li a:hover {
     opacity: 1;
 }
 

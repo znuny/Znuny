@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.858507082603852;
+    $Self->{Completeness}        = 0.858006042296072;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4504,6 +4504,9 @@ sub Data {
         'Available tickets' => '未锁定的工单',
         'including subqueues' => '包含子队列',
         'excluding subqueues' => '排除子队列',
+        'System default' => '',
+        'Position' => '',
+        'Right' => '权限',
         'Queue View' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
@@ -6712,6 +6715,8 @@ sub Data {
             '包含最早工单的队列激活闪烁提醒机制。',
         'Include tickets of subqueues per default when selecting a queue.' =>
             '选择队列的时候默认包括子队列的工单。',
+        'Defines the queue navigation in the queue view. Top shows one queue level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            '',
         'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the queue view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the QueueID for the key and 0 or 1 for value.' =>
             '队列视图选择一个队列后按升序或降序排序工单（在工单以优先级排序之后）。值：0 = 升序（最老的在最上面，默认），1 = 降序（最近的在最上面），键为队列ID，值为0或1。',
         'Defines the default sort criteria for all queues displayed in the queue view.' =>
@@ -6737,6 +6742,8 @@ sub Data {
         'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
             '',
         'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
+        'Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
             '',
         'Activates time accounting.' => '激活工时管理。',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
@@ -8654,6 +8661,10 @@ sub Data {
         'Filters' => '过滤器',
         'Clear search' => '清除搜索',
 
+        # JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+        'Collapse' => '收起',
+        'Expand' => '展开',
+
         # JS File: var/httpd/htdocs/js/Core.UI.Popup.js
         'If you now leave this page, all open popup windows will be closed, too!' =>
             '如果你现在离开该页, 所有弹出的窗口也随之关闭!',
@@ -9260,7 +9271,6 @@ Thanks for your help!
         'Resent email to "%s".' => '已重发邮件到"%s"。',
         'Responsible Tickets' => '负责的工单',
         'Responsible Tickets.' => '负责的工单.',
-        'Right' => '权限',
         'Romanian' => '罗马尼亚',
         'Running Process Tickets' => '运行中的流程工单',
         'Russian' => '俄语',
@@ -9554,6 +9564,7 @@ Thanks for your help!
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Collapse',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9635,10 +9646,12 @@ Thanks for your help!
         'Error in the mail settings. Please correct and try again.',
         'Error: Browser Check failed!',
         'Event Type Filter',
+        'Expand',
         'Expanded',
         'Favourites',
         'Feb',
         'February',
+        'Filter',
         'Filters',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
@@ -9843,6 +9856,7 @@ Thanks for your help!
         'Timeline Week',
         'Title',
         'Today',
+        'Toggle sidebar',
         'Too many active calendars',
         'Try again',
         'Tu',
