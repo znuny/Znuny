@@ -15047,7 +15047,7 @@ msgid "Delete expired ticket draft entries."
 msgstr "Брише застареле нацрте тикета."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box."
+msgid "Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If not enabled, it also disables the GenericAgent, PackageManager and SQL Box."
 msgstr "Онемогућује приступ инсталационом екрану (http://yourhost.example.com/znuny/installer.pl) у сврху заштите система од недозвољеног преузимања. Ако је искључено, систем може бити поново инсталиран и тренутна основна конфигурација ће бити коришћена да унапред попуни питања унутар инсталационог екрана. Уколико није укључено, такође се онемогућују GenericAgent, PackageManager и SQL Box."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml

@@ -15047,8 +15047,8 @@ msgid "Delete expired ticket draft entries."
 msgstr "删除过期的工单草稿条目。"
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box."
-msgstr "禁用WEB安装程序(http://yourhost.example.com/znuny/installer.pl)，防止系统被劫持。如果不启用，系统能够被重新安装，当前的基本配置将被安装脚本的预设问题替换。如果启用了，还同时禁用了通用代理、软件包管理和SQL查询窗口。"
+msgid "Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If not enabled, it also disables the GenericAgent, PackageManager and SQL Box."
+msgstr "禁用WEB安装程序(http://yourhost.example.com/znuny/installer.pl)，防止系统被劫持。如果不启用，系统能够被重新安装，当前的基本配置将被安装脚本的预设问题替换。如果未启用，还同时禁用了通用代理、软件包管理和SQL查询窗口。"
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Enables or disables the debug mode over frontend interface."
