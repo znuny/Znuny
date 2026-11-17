@@ -12,6 +12,7 @@ package Kernel::Modules::AdminGenericInterfaceWebservice;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language              qw(Translatable);
@@ -666,6 +667,12 @@ sub Run {
             ValidID => $WebserviceData->{ValidID},
             UserID  => $Self->{UserID},
         );
+
+        if ( !$Success ) {
+            return $LayoutObject->ErrorScreen(
+                Message => Translatable('There was an error creating the web service.'),
+            );
+        }
 
         if (
             $FileWithoutExtension

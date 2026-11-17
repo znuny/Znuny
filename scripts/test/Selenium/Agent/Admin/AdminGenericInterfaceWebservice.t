@@ -211,6 +211,47 @@ $Selenium->RunTest(
             );
 
         }
+
+        # Import a structurally invalid web service. The error screen is shown and nothing is stored.
+        my $InvalidName = $HelperObject->GetRandomID();
+
+        $Selenium->find_element("//button[\@type='submit']")->VerifiedClick();
+        $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#ImportButton').length" );
+
+        $Selenium->find_element( "#ImportButton", 'css' )->click();
+        $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('.Dialog.Modal').length" );
+
+        $Selenium->find_element( "#WebserviceName", 'css' )->send_keys($InvalidName);
+        $Selenium->find_element( "#ConfigFile",     'css' )->send_keys(
+            "$Selenium->{Home}/scripts/test/sample/Webservice/webserviceconfig_invalid_transport.yml"
+        );
+        $Selenium->find_element( "#ImportButtonAction", 'css' )->click();
+
+        $Selenium->WaitFor(
+            JavaScript =>
+                "return typeof(\$) === 'function' && \$('.ErrorScreen:contains(\"An Error Occurred\")').length"
+        );
+
+        $Self->True(
+            $Selenium->execute_script(
+                "return \$('.ErrorScreen:contains(\"An Error Occurred\")').length"
+            ),
+            'Error screen is shown for an invalid web service import',
+        );
+
+        $Self->False(
+            index( $Selenium->get_page_source(), "Web service \"$InvalidName\" created!" ) > -1,
+            'Success notice is not shown for an invalid web service import',
+        );
+
+        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminGenericInterfaceWebservice");
+
+        $Self->False(
+            $Selenium->execute_script(
+                "return \$('tr td a:contains(\"$InvalidName\")').length"
+            ),
+            "$InvalidName is not stored",
+        );
     }
 );
 

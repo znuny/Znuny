@@ -1,0 +1,6 @@
+---
+Debugger:
+  DebugThreshold: debug
+Description: Invalid transport for import regression.
+Provider:
+  Transport: {}
