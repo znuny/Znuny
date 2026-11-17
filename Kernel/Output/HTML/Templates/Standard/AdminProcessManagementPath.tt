@@ -96,6 +96,9 @@
                                     <!-- <li data-id="[% Data.ID | html %]" id="[% Data.EntityID | html %]" title="[% Translate("Name: %s, EntityID: %s", Data.Name, Data.EntityID) | html %]"> -->
                                         [% Data.Name | html %] ([% Data.EntityID | html %])
                                         <span class="Functions">
+                                            <a href="#" class="CloneEntity Icon icon-hover" data-entity-type="TransitionAction" data-entity="[% Data.EntityID | html %]" data-name="[% Data.Name | html %]" title="[% Translate("Clone") | html %]">
+                                                <i class="fa fa-clone"></i>
+                                            </a>
                                             <a href="#" data-entity="[% Data.EntityID | html %]" data-id="[% Data.ID | html %]" data-action="AdminProcessManagementTransitionAction" data-subaction="TransitionActionEdit" class="AsPopup_Redirect Edit_Confirm PopupType_TransitionAction Icon icon-hover" title="[% Translate("Edit") | html %]">
                                                 <i class="fa fa-edit"></i>
                                             </a>
@@ -131,4 +134,7 @@
     <div class="Footer">
         <button class="Primary CallForAction btn-main btn-primary btn-width-md" id="Submit" title="[% Translate("Save") | html %]" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
     </div>
+</div>
+<div id="Dialogs" class="Hidden">
+[% INCLUDE "AdminProcessManagementCloneDialog.tt" %]
 </div>

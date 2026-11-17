@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.582604547622834;
+    $Self->{Completeness}        = 0.582869855394883;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1682,6 +1682,8 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
             'Untuk membuat proses yang baru, baik impor proses yang telah diekspor dari sistem lain atau membuat yang telah lengkap',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'Perubahan pada proses ini hanya mempengaruhi perilaku sistem, jika anda menyinkronkan proses data. Dengan proses sinkronisasi, perubahan baru yang telah dibuat akan ditulis kedalam Konfigurasi.',
+        'Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.' =>
+            'Menyalin hanya menduplikasi proses dan mempertahankan referensi ke elemen asli. Klon membuat salinan independen yang tidak aktif. Setiap elemen yang tercakup menerima ID internal baru, dan proses asli tetap tidak berubah.',
         'Access Control Lists (ACL)' => 'Access Control Lists (ACL)',
         'Generic Agent' => '',
         'Manage Process Widget Groups' => '',
@@ -1690,6 +1692,7 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Print' => 'Mencetak',
         'Export Process Configuration' => 'Ekspor proses konfigurasi',
         'Copy Process' => 'Menyalin proses',
+        'Clone Process' => 'Mengkloning proses',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Please note, that changing this activity will affect the following processes' =>
@@ -1741,6 +1744,13 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Auto fill' => '',
         'Display' => 'Tampilkan',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+        'Please enter a name for the cloned process. The original process stays unchanged.' =>
+            'Masukkan nama untuk proses yang dikloning. Proses asli tetap tidak berubah.',
+        'Process Name' => 'Nama proses',
+        'Please enter a name for the cloned element. The original element stays unchanged.' =>
+            'Masukkan nama untuk elemen yang dikloning. Elemen asli tetap tidak berubah.',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => 'Garis edar',
         'Edit this transition' => 'Ubah transisi',
@@ -1780,7 +1790,6 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
             'Tindakan dapat ditugaskan ke sebuah Transisi dengan menjatuhkan Action Elemen ke label Transisi a.',
         'Edit Process' => 'Ubah proses',
         'Edit Process Information' => 'Mengubah proses informasi',
-        'Process Name' => 'Nama proses',
         'The selected state does not exist.' => 'Pilihan yang ditetapkan tidak ada',
         'Process Preferences' => '',
         'Add and Edit Activities, Activity Dialogs and Transitions' => 'Tambah dan ubah aktivitas, aktivitas dialog dan transisi',
@@ -9558,6 +9567,8 @@ Helpdesk Team Anda
         'Click to download this file.',
         'Click to preview this file.',
         'Click to select a file for upload.',
+        'Clone',
+        'Clone Process',
         'Clone web service',
         'Close preview',
         'Close this dialog',

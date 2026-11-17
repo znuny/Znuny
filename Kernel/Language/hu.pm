@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.998727937668946;
+    $Self->{Completeness}        = 0.998728746225965;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1687,6 +1687,8 @@ sub Data {
             'Egy új folyamat létrehozásához importálhat egy másik rendszerből exportált folyamatot, vagy létrehozhat egy teljesen újat.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'A folyamatokon itt elvégzett módosítás csak akkor lesz hatással a rendszer viselkedésére, ha szinkronizálja a folyamatadatokat. A folyamatok szinkronizálásával az újonnan elvégzett módosítások be lesznek írva a beállításokba.',
+        'Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.' =>
+            'A másolás csak a folyamatot duplikálja, és megtartja a hivatkozásokat az eredeti elemekre. A klónozás független inaktív másolatot hoz létre. Minden tartalmazott elem új belső azonosítót kap, az eredeti folyamat pedig változatlan marad.',
         'Access Control Lists (ACL)' => 'Hozzáférés-vezérlési listák (ACL)',
         'Generic Agent' => 'Általános ügyintéző',
         'Manage Process Widget Groups' => 'Folyamat felületi elem csoportok kezelése',
@@ -1695,6 +1697,7 @@ sub Data {
         'Print' => 'Nyomtatás',
         'Export Process Configuration' => 'Folyamat-beállítás exportálása',
         'Copy Process' => 'Folyamat másolása',
+        'Clone Process' => 'Folyamat klónozása',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Please note, that changing this activity will affect the following processes' =>
@@ -1746,6 +1749,13 @@ sub Data {
         'Auto fill' => 'Automatikus kitöltés',
         'Display' => 'Megjelenítés',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+        'Please enter a name for the cloned process. The original process stays unchanged.' =>
+            'Adjon meg egy nevet a klónozott folyamatnak. Az eredeti folyamat változatlan marad.',
+        'Process Name' => 'Folyamat neve',
+        'Please enter a name for the cloned element. The original element stays unchanged.' =>
+            'Adjon meg egy nevet a klónozott elemnek. Az eredeti elem változatlan marad.',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => 'Útvonal',
         'Edit this transition' => 'Átmenet szerkesztése',
@@ -1785,7 +1795,6 @@ sub Data {
             'Műveletek rendelhetők egy átmenethez, ha a műveletelemet egy átmenet címkéjére ejti.',
         'Edit Process' => 'Folyamat szerkesztése',
         'Edit Process Information' => 'Folyamatinformációk szerkesztése',
-        'Process Name' => 'Folyamat neve',
         'The selected state does not exist.' => 'A kijelölt állapot nem létezik.',
         'Process Preferences' => 'Folyamat beállításai',
         'Add and Edit Activities, Activity Dialogs and Transitions' => 'Tevékenységek, tevékenység-párbeszédablakok és átmenetek hozzáadása és szerkesztése',
@@ -9561,6 +9570,8 @@ Az Ön ügyfélszolgálati csapata
         'Click to download this file.',
         'Click to preview this file.',
         'Click to select a file for upload.',
+        'Clone',
+        'Clone Process',
         'Clone web service',
         'Close preview',
         'Close this dialog',

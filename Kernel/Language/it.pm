@@ -35,7 +35,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.575767212593417;
+    $Self->{Completeness}        = 0.576036866359447;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1690,6 +1690,8 @@ sub Data {
             'Per creare un nuovo processo puoi importare un processo esportato da un altro sistema o crearne uno completamente nuovo.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'I cambiamenti al processo sono riportati a sistema solo se effettuate la sincronizzazione. Con la sincronizzazione le modifiche sono scritte nella configurazione.',
+        'Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.' =>
+            'La copia duplica solo il processo e mantiene i riferimenti agli elementi originali. La clonazione crea una copia indipendente inattiva. Ogni elemento contenuto riceve un nuovo ID interno e il processo originale resta invariato.',
         'Access Control Lists (ACL)' => 'Access Control List (ACL)',
         'Generic Agent' => '',
         'Manage Process Widget Groups' => '',
@@ -1698,6 +1700,7 @@ sub Data {
         'Print' => 'Stampa',
         'Export Process Configuration' => 'Esporta la configurazione del processo',
         'Copy Process' => 'Copia il Processo',
+        'Clone Process' => 'Clona il processo',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Please note, that changing this activity will affect the following processes' =>
@@ -1749,6 +1752,13 @@ sub Data {
         'Auto fill' => '',
         'Display' => 'Mostra',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+        'Please enter a name for the cloned process. The original process stays unchanged.' =>
+            'Inserire un nome per il processo clonato. Il processo originale resta invariato.',
+        'Process Name' => 'Nome del Processo',
+        'Please enter a name for the cloned element. The original element stays unchanged.' =>
+            'Inserire un nome per l\'elemento clonato. L\'elemento originale resta invariato.',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => 'percorso',
         'Edit this transition' => 'Modifica questa transizione',
@@ -1788,7 +1798,6 @@ sub Data {
             'Le azioni possono essere assegnate ad una transizione trascinando l\'elemento sulla descrizione della trascrizione.',
         'Edit Process' => 'Modifica Processo',
         'Edit Process Information' => 'Modifica le informazioni del Processo',
-        'Process Name' => 'Nome del Processo',
         'The selected state does not exist.' => 'Lo stato selezionato non esiste.',
         'Process Preferences' => '',
         'Add and Edit Activities, Activity Dialogs and Transitions' => 'Aggiungi e modifica le attività, le interazioni delle attività e le transizioni',
@@ -9568,6 +9577,8 @@ Il tuo helpdesk.
         'Click to download this file.',
         'Click to preview this file.',
         'Click to select a file for upload.',
+        'Clone',
+        'Clone Process',
         'Clone web service',
         'Close preview',
         'Close this dialog',

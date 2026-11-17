@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.299888694546033;
+    $Self->{Completeness}        = 0.300333704115684;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1684,6 +1684,8 @@ sub Data {
             '為了創建新的流程，您可以導入流程配置文件或從新創建它。',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             '對流程所做的一切修改僅保存在數據庫中。只有執行同步操作後，才會生成或重新生成流程配置文件。',
+        'Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.' =>
+            '複製只會複製流程本身並保留對原始元素的參照。克隆會建立一個獨立的非活動複本。每個包含的元素都會取得新的內部 ID，原始流程保持不變。',
         'Access Control Lists (ACL)' => '訪問控制列表(ACL)',
         'Generic Agent' => '',
         'Manage Process Widget Groups' => '',
@@ -1692,6 +1694,7 @@ sub Data {
         'Print' => '打印',
         'Export Process Configuration' => '導出流程配置',
         'Copy Process' => '複製流程',
+        'Clone Process' => '克隆流程',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Please note, that changing this activity will affect the following processes' =>
@@ -1743,6 +1746,13 @@ sub Data {
         'Auto fill' => '',
         'Display' => '顯示',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+        'Please enter a name for the cloned process. The original process stays unchanged.' =>
+            '請輸入克隆流程的名稱。原始流程保持不變。',
+        'Process Name' => '流程名稱',
+        'Please enter a name for the cloned element. The original element stays unchanged.' =>
+            '請輸入克隆元素的名稱。原始元素保持不變。',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => '路徑',
         'Edit this transition' => '編輯這個轉向',
@@ -1782,7 +1792,6 @@ sub Data {
             '為了給轉向指派轉向動作，需要將左側轉向動作拖放至轉向標簽上。',
         'Edit Process' => '編輯流程',
         'Edit Process Information' => '編輯流程信息',
-        'Process Name' => '流程名稱',
         'The selected state does not exist.' => '選擇的狀態不存在',
         'Process Preferences' => '',
         'Add and Edit Activities, Activity Dialogs and Transitions' => '添加並編輯環節、環節操作和轉向',
@@ -9548,6 +9557,8 @@ Thanks for your help!
         'Click to download this file.',
         'Click to preview this file.',
         'Click to select a file for upload.',
+        'Clone',
+        'Clone Process',
         'Clone web service',
         'Close preview',
         'Close this dialog',

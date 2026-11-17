@@ -5174,7 +5174,7 @@ msgstr "編輯流程"
 msgid "Edit Process Information"
 msgstr "編輯流程信息"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
 msgid "Process Name"
 msgstr "流程名稱"
 
@@ -8687,7 +8687,7 @@ msgstr "工單字段"
 msgid "Error Details"
 msgstr "詳細錯誤信息"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
 msgid "Expand"
 msgstr "展開"
 
@@ -25530,4 +25530,24 @@ msgstr ""
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus."
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged."
+msgstr "複製只會複製流程本身並保留對原始元素的參照。克隆會建立一個獨立的非活動複本。每個包含的元素都會取得新的內部 ID，原始流程保持不變。"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Clone Process"
+msgstr "克隆流程"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned process. The original process stays unchanged."
+msgstr "請輸入克隆流程的名稱。原始流程保持不變。"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned element. The original element stays unchanged."
+msgstr "請輸入克隆元素的名稱。原始元素保持不變。"
+
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+msgid "Collapse"
+msgstr "收合"
 

@@ -5176,7 +5176,7 @@ msgstr "Folyamat szerkesztése"
 msgid "Edit Process Information"
 msgstr "Folyamatinformációk szerkesztése"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
 msgid "Process Name"
 msgstr "Folyamat neve"
 
@@ -8700,7 +8700,7 @@ msgstr "Jegymezők"
 msgid "Error Details"
 msgstr "Hiba részletei"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
 msgid "Expand"
 msgstr "Kinyitás"
 
@@ -25541,4 +25541,24 @@ msgstr ""
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus."
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged."
+msgstr "A másolás csak a folyamatot duplikálja, és megtartja a hivatkozásokat az eredeti elemekre. A klónozás független inaktív másolatot hoz létre. Minden tartalmazott elem új belső azonosítót kap, az eredeti folyamat pedig változatlan marad."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Clone Process"
+msgstr "Folyamat klónozása"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned process. The original process stays unchanged."
+msgstr "Adjon meg egy nevet a klónozott folyamatnak. Az eredeti folyamat változatlan marad."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned element. The original element stays unchanged."
+msgstr "Adjon meg egy nevet a klónozott elemnek. Az eredeti elem változatlan marad."
+
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+msgid "Collapse"
+msgstr "Összecsuk"
 

@@ -5176,7 +5176,7 @@ msgstr "Prozess bearbeiten"
 msgid "Edit Process Information"
 msgstr "Prozessinformationen bearbeiten"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
 msgid "Process Name"
 msgstr "Prozessname"
 
@@ -8708,7 +8708,7 @@ msgstr "Ticket-Felder"
 msgid "Error Details"
 msgstr "Fehlerdetails"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
 msgid "Expand"
 msgstr "Ausklappen"
 
@@ -25552,4 +25552,24 @@ msgstr "Definiert die Queue-Navigation in der Queue-Ansicht. Top zeigt jeweils e
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus."
 msgstr "Definiert die Service-Navigation in der Service-Ansicht. Top zeigt jeweils eine Service-Ebene, ohne Hover-Menüs. TopHover zeigt die hierarchische Navigationsleiste mit Hover-Untermenüs."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged."
+msgstr "Kopieren dupliziert nur den Prozess und behält die Verweise auf die ursprünglichen Elemente. Klonen erstellt eine unabhängige inaktive Kopie. Jedes enthaltene Element erhält eine neue interne ID, und der ursprüngliche Prozess bleibt unverändert."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Clone Process"
+msgstr "Prozess klonen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned process. The original process stays unchanged."
+msgstr "Bitte geben Sie einen Namen für den geklonten Prozess ein. Der ursprüngliche Prozess bleibt unverändert."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned element. The original element stays unchanged."
+msgstr "Bitte geben Sie einen Namen für das geklonte Element ein. Das ursprüngliche Element bleibt unverändert."
+
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+msgid "Collapse"
+msgstr "Zuklappen"
 

@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%m/%d/%Y';
     $Self->{DateInputFormat}     = '%m/%d/%Y';
     $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
-    $Self->{Completeness}        = 0.417872475751312;
+    $Self->{Completeness}        = 0.418242491657397;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1682,6 +1682,8 @@ sub Data {
             'Щоб створити новий процес Ви можете або імпортувати Процес, що був експортований з іншої системи, або створити цілком новий.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'Зміни в процесах тут вплинуть на поведінку системи тільки після синхронізації даних процесу. При синхронізації процесів, нещодавно зроблені зміни будуть записані до конфігурації.',
+        'Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.' =>
+            'Копіювання дублює лише процес і зберігає посилання на вихідні елементи. Клонування створює незалежну неактивну копію. Кожен включений елемент отримує новий внутрішній ID, а вихідний процес залишається незмінним.',
         'Access Control Lists (ACL)' => '',
         'Generic Agent' => '',
         'Manage Process Widget Groups' => '',
@@ -1690,6 +1692,7 @@ sub Data {
         'Print' => 'Друк',
         'Export Process Configuration' => 'Експорт конфігурації процесу',
         'Copy Process' => 'Копіювання процесу',
+        'Clone Process' => 'Клонувати процес',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Please note, that changing this activity will affect the following processes' =>
@@ -1741,6 +1744,13 @@ sub Data {
         'Auto fill' => '',
         'Display' => 'Відображення',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+        'Please enter a name for the cloned process. The original process stays unchanged.' =>
+            'Введіть назву для клонованого процесу. Вихідний процес залишається незмінним.',
+        'Process Name' => 'Ім\'я Процесу',
+        'Please enter a name for the cloned element. The original element stays unchanged.' =>
+            'Введіть назву для клонованого елемента. Вихідний елемент залишається незмінним.',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => 'Шлях',
         'Edit this transition' => 'Редагувати цей перехід',
@@ -1780,7 +1790,6 @@ sub Data {
             'Дії можуть бути віднесені до Переходу перетягуючи Елемент Дії на позначку Переходу.',
         'Edit Process' => 'Редагувати Процес',
         'Edit Process Information' => 'Редагувати Інформацію про Процес',
-        'Process Name' => 'Ім\'я Процесу',
         'The selected state does not exist.' => 'Вибраного стану не існує.',
         'Process Preferences' => '',
         'Add and Edit Activities, Activity Dialogs and Transitions' => 'Додати та Редагувати Активності, Діалоги Активності та Переходи',
@@ -9545,6 +9554,8 @@ Thanks for your help!
         'Click to download this file.',
         'Click to preview this file.',
         'Click to select a file for upload.',
+        'Clone',
+        'Clone Process',
         'Clone web service',
         'Close preview',
         'Close this dialog',

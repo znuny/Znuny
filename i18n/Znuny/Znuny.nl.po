@@ -5176,7 +5176,7 @@ msgstr "Bewerk proces"
 msgid "Edit Process Information"
 msgstr "Bewerk proces-informatie"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
 msgid "Process Name"
 msgstr "Naam"
 
@@ -8692,7 +8692,7 @@ msgstr "Ticket-velden"
 msgid "Error Details"
 msgstr "Error gegevens"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
 msgid "Expand"
 msgstr "Klap uit"
 
@@ -25541,4 +25541,24 @@ msgstr ""
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus."
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged."
+msgstr "Kopiëren dupliceert alleen het proces en behoudt de verwijzingen naar de oorspronkelijke elementen. Klonen maakt een onafhankelijke inactieve kopie. Elk opgenomen element krijgt een nieuwe interne ID en het oorspronkelijke proces blijft ongewijzigd."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Clone Process"
+msgstr "Kloon proces"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned process. The original process stays unchanged."
+msgstr "Voer een naam in voor het gekloonde proces. Het oorspronkelijke proces blijft ongewijzigd."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned element. The original element stays unchanged."
+msgstr "Voer een naam in voor het gekloonde element. Het oorspronkelijke element blijft ongewijzigd."
+
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+msgid "Collapse"
+msgstr "Inklappen"
 

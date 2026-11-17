@@ -1682,6 +1682,8 @@ sub Data {
             'Um einen neuen Prozess zu erstellen, können Sie entweder einen Prozess aus einem anderen System importieren, oder einen ganz neuen erstellen.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'Änderungen an den Prozessen wirken sich erst dann aus, wenn Sie die Prozesskonfiguration synchronisieren. Dabei werden alle Änderungen in die Systemkonfiguration übernommen.',
+        'Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.' =>
+            'Kopieren dupliziert nur den Prozess und behält die Verweise auf die ursprünglichen Elemente. Klonen erstellt eine unabhängige inaktive Kopie. Jedes enthaltene Element erhält eine neue interne ID, und der ursprüngliche Prozess bleibt unverändert.',
         'Access Control Lists (ACL)' => 'Access-Control-Lists (ACL)',
         'Generic Agent' => 'Generic Agent',
         'Manage Process Widget Groups' => 'Prozess-Widget-Gruppen verwalten',
@@ -1690,6 +1692,7 @@ sub Data {
         'Print' => 'Drucken',
         'Export Process Configuration' => 'Prozesskonfiguration exportieren',
         'Copy Process' => 'Prozess kopieren',
+        'Clone Process' => 'Prozess klonen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Please note, that changing this activity will affect the following processes' =>
@@ -1741,6 +1744,13 @@ sub Data {
         'Auto fill' => 'automatisch ausfüllen',
         'Display' => 'Anzeige',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+        'Please enter a name for the cloned process. The original process stays unchanged.' =>
+            'Bitte geben Sie einen Namen für den geklonten Prozess ein. Der ursprüngliche Prozess bleibt unverändert.',
+        'Process Name' => 'Prozessname',
+        'Please enter a name for the cloned element. The original element stays unchanged.' =>
+            'Bitte geben Sie einen Namen für das geklonte Element ein. Das ursprüngliche Element bleibt unverändert.',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => 'Pfad',
         'Edit this transition' => 'Diesen Übergang bearbeiten',
@@ -1780,7 +1790,6 @@ sub Data {
             'Aktionen können einem Übergang zugeweisen werden, indem Sie das Aktionselement auf den Namen des Übergangs ziehen.',
         'Edit Process' => 'Prozess bearbeiten',
         'Edit Process Information' => 'Prozessinformationen bearbeiten',
-        'Process Name' => 'Prozessname',
         'The selected state does not exist.' => 'Der ausgewählte Status existiert nicht.',
         'Process Preferences' => 'Prozess Einstellungen',
         'Add and Edit Activities, Activity Dialogs and Transitions' => 'Aktivitäten, Aktivitäts-Dialoge und Übergänge hinzufügen und bearbeiten',
@@ -9555,6 +9564,8 @@ Ihr Helpdesk-Team
         'Click to download this file.',
         'Click to preview this file.',
         'Click to select a file for upload.',
+        'Clone',
+        'Clone Process',
         'Clone web service',
         'Close preview',
         'Close this dialog',

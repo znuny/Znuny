@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.517252345364923;
+    $Self->{Completeness}        = 0.517559192753854;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1681,6 +1681,8 @@ sub Data {
             'Untuk cipta Proses baru anda boleh sama ada import sebuah Proses yang telah diexport daripada sistem lain atau cipta proses yang baru.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'Perubahan kepada Proses disini hanya akan memberi kesan kepada kelakuan sistem, jika anda menyamakan data Proses. Dengan menyamakan Proses, perubahan yang baru akan ditulis ke Konfigurasi.',
+        'Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.' =>
+            'Salin hanya menduplikasi proses dan mengekalkan rujukan kepada elemen asal. Klon mencipta salinan bebas yang tidak aktif. Setiap elemen yang terkandung menerima ID dalaman baharu, dan proses asal kekal tidak berubah.',
         'Access Control Lists (ACL)' => 'Senarai Kawalan Akses (ACL)',
         'Generic Agent' => '',
         'Manage Process Widget Groups' => '',
@@ -1689,6 +1691,7 @@ sub Data {
         'Print' => 'Cetak',
         'Export Process Configuration' => 'Export Konfigurasi Proses',
         'Copy Process' => 'Salin Proses',
+        'Clone Process' => 'Klon Proses',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Please note, that changing this activity will affect the following processes' =>
@@ -1740,6 +1743,13 @@ sub Data {
         'Auto fill' => '',
         'Display' => 'Pameran',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+        'Please enter a name for the cloned process. The original process stays unchanged.' =>
+            'Sila masukkan nama untuk proses yang diklon. Proses asal kekal tidak berubah.',
+        'Process Name' => 'Nama Proses',
+        'Please enter a name for the cloned element. The original element stays unchanged.' =>
+            'Sila masukkan nama untuk elemen yang diklon. Elemen asal kekal tidak berubah.',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => 'Laluan',
         'Edit this transition' => 'Edit peralihan ini',
@@ -1779,7 +1789,6 @@ sub Data {
             'Tindakan boleh diberikan kepada Peralihan dengan menjatuhkan Unsur Tindakan ke label Peralihan.',
         'Edit Process' => 'Edit Proses',
         'Edit Process Information' => 'Edit Maklumat Proses',
-        'Process Name' => 'Nama Proses',
         'The selected state does not exist.' => 'Keadaan yang dipilih tidak wujud.',
         'Process Preferences' => '',
         'Add and Edit Activities, Activity Dialogs and Transitions' => 'Tambah dan Edit Aktiviti, Dialog Kegiatan dan Peralihan',
@@ -9558,6 +9567,8 @@ Kumpulan MejaBantuan Anda
         'Click to download this file.',
         'Click to preview this file.',
         'Click to select a file for upload.',
+        'Clone',
+        'Clone Process',
         'Clone web service',
         'Close preview',
         'Close this dialog',

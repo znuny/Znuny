@@ -119,8 +119,10 @@ $Selenium->RunTest(
             $ActivityID = $Row[0];
         }
 
-        # Check for stored value and edit test Activity.
-        $Selenium->find_element("//a[contains(\@href, \'Subaction=ActivityEdit;ID=$ActivityID' )]")->click();
+        # Edit link stays hidden until the row is hovered.
+        $Selenium->execute_script(
+            "\$('a[href*=\"Subaction=ActivityEdit;ID=$ActivityID\"]').click();"
+        );
         $Selenium->WaitFor( WindowCount => 2 );
         $Handles = $Selenium->get_window_handles();
         $Selenium->switch_to_window( $Handles->[1] );

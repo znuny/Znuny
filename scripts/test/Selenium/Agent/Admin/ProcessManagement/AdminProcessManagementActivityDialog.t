@@ -164,9 +164,10 @@ $Selenium->RunTest(
             $ActivityDialogID = $Row[0];
         }
 
-        # Go to edit test ActivityDialog screen.
-        $Selenium->find_element("//a[contains(\@href, \'Subaction=ActivityDialogEdit;ID=$ActivityDialogID' )]")
-            ->click();
+        # Edit link stays hidden until the row is hovered.
+        $Selenium->execute_script(
+            "\$('a[href*=\"Subaction=ActivityDialogEdit;ID=$ActivityDialogID\"]').click();"
+        );
         $Selenium->WaitFor( WindowCount => 2 );
         $Handles = $Selenium->get_window_handles();
         $Selenium->switch_to_window( $Handles->[1] );
@@ -239,9 +240,10 @@ $Selenium->RunTest(
             "Edited $ActivityDialogRandomEdit activity dialog found on page",
         );
 
-        # Go to edit test ActivityDialog screen again.
-        $Selenium->find_element("//a[contains(\@href, \'Subaction=ActivityDialogEdit;ID=$ActivityDialogID' )]")
-            ->click();
+        # Edit link stays hidden until the row is hovered.
+        $Selenium->execute_script(
+            "\$('a[href*=\"Subaction=ActivityDialogEdit;ID=$ActivityDialogID\"]').click();"
+        );
         $Selenium->WaitFor( WindowCount => 2 );
         $Handles = $Selenium->get_window_handles();
         $Selenium->switch_to_window( $Handles->[1] );

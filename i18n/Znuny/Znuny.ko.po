@@ -5174,7 +5174,7 @@ msgstr "프로세스 편집"
 msgid "Edit Process Information"
 msgstr "프로세스 정보 편집"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
 msgid "Process Name"
 msgstr "프로세스 이름"
 
@@ -8698,7 +8698,7 @@ msgstr "타켓 필드"
 msgid "Error Details"
 msgstr "오류 정보"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
 msgid "Expand"
 msgstr "넓히다"
 
@@ -25539,4 +25539,24 @@ msgstr ""
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus."
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged."
+msgstr "복사는 프로세스만 복제하고 원본 요소에 대한 참조를 유지합니다. 클론은 독립적인 비활성 사본을 만듭니다. 포함된 각 요소는 새 내부 ID를 받으며 원본 프로세스는 변경되지 않습니다."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Clone Process"
+msgstr "프로세스 복제"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned process. The original process stays unchanged."
+msgstr "복제된 프로세스의 이름을 입력하십시오. 원본 프로세스는 변경되지 않습니다."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned element. The original element stays unchanged."
+msgstr "복제된 요소의 이름을 입력하십시오. 원본 요소는 변경되지 않습니다."
+
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+msgid "Collapse"
+msgstr "접기"
 

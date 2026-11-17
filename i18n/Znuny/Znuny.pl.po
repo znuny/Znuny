@@ -5197,7 +5197,7 @@ msgstr "Edytuj proces"
 msgid "Edit Process Information"
 msgstr "Edytuj informacje o procesie"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
 msgid "Process Name"
 msgstr "Nazwa procesu"
 
@@ -8725,7 +8725,7 @@ msgstr "Pola zgłoszenia"
 msgid "Error Details"
 msgstr "Szczegóły błędu"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
 msgid "Expand"
 msgstr "Rozwiń"
 
@@ -25565,4 +25565,24 @@ msgstr ""
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus."
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged."
+msgstr "Kopiowanie powiela tylko proces i zachowuje odwołania do oryginalnych elementów. Klonowanie tworzy niezależną nieaktywną kopię. Każdy zawarty element otrzymuje nowy wewnętrzny identyfikator, a oryginalny proces pozostaje niezmieniony."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Clone Process"
+msgstr "Klonuj proces"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned process. The original process stays unchanged."
+msgstr "Podaj nazwę sklonowanego procesu. Oryginalny proces pozostaje niezmieniony."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned element. The original element stays unchanged."
+msgstr "Podaj nazwę sklonowanego elementu. Oryginalny element pozostaje niezmieniony."
+
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+msgid "Collapse"
+msgstr "Zwiń"
 

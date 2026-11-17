@@ -5174,7 +5174,7 @@ msgstr "ویرایش فرآیند"
 msgid "Edit Process Information"
 msgstr "ویرایش اطلاعات فرآیند"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
 msgid "Process Name"
 msgstr "نام پردازش"
 
@@ -8694,7 +8694,7 @@ msgstr "زمینه های درخواست"
 msgid "Error Details"
 msgstr "جزئیات خطا"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
 msgid "Expand"
 msgstr "گسترش"
 
@@ -25539,4 +25539,24 @@ msgstr ""
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus."
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged."
+msgstr "کپی فقط فرایند را تکرار می‌کند و ارجاع‌ها به عنصرهای اصلی را نگه می‌دارد. کلون یک نسخهٔ مستقل غیرفعال می‌سازد. هر عنصر موجود شناسهٔ داخلی جدیدی می‌گیرد و فرایند اصلی بدون تغییر می‌ماند."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Clone Process"
+msgstr "کلون فرایند"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned process. The original process stays unchanged."
+msgstr "لطفاً نامی برای فرایند کلون‌شده وارد کنید. فرایند اصلی بدون تغییر می‌ماند."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned element. The original element stays unchanged."
+msgstr "لطفاً نامی برای عنصر کلون‌شده وارد کنید. عنصر اصلی بدون تغییر می‌ماند."
+
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+msgid "Collapse"
+msgstr "جمع کردن"
 

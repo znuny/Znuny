@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.50532676101129;
+    $Self->{Completeness}        = 0.505641188622279;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1682,6 +1682,8 @@ sub Data {
             'เพื่อสร้างขั้นตอนใหม่คุณสามารถสร้างโดยนำเข้าขั้นตอนที่ถูกส่งเข้ามาจากระบบอื่นหรือสร้างใหม่',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'เปลี่ยนแปลงที่ขั้นตอนต่างๆที่นี่ส่งผลกระทบต่อการทำงานของระบบเท่านั้นหากคุณเชื่อมโยงข้อมูลของขั้นตอน โดยการเชื่อมโยงขั้นตอนต่างๆนั้นจะทำให้การเปลี่ยนแปลงที่ทำใหม่ถูกเขียนไปที่ตั้งค่า',
+        'Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.' =>
+            'การคัดลอกจะทำซ้ำเฉพาะขั้นตอนและคงการอ้างอิงไปยังองค์ประกอบเดิม การโคลนจะสร้างสำเนาอิสระที่ไม่ได้ใช้งาน องค์ประกอบที่บรรจุอยู่ทุกชิ้นจะได้รับ ID ภายในใหม่ และขั้นตอนเดิมจะไม่เปลี่ยนแปลง',
         'Access Control Lists (ACL)' => 'รายการการควบคุมการเข้าถึง (ACL)',
         'Generic Agent' => '',
         'Manage Process Widget Groups' => '',
@@ -1690,6 +1692,7 @@ sub Data {
         'Print' => 'พิมพ์',
         'Export Process Configuration' => 'ส่งออกการกำหนดค่าขั้นตอน',
         'Copy Process' => 'คัดลอกขั้นตอน',
+        'Clone Process' => 'โคลนขั้นตอน',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Please note, that changing this activity will affect the following processes' =>
@@ -1742,6 +1745,13 @@ sub Data {
         'Auto fill' => '',
         'Display' => 'แสดง',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+        'Please enter a name for the cloned process. The original process stays unchanged.' =>
+            'โปรดป้อนชื่อสำหรับขั้นตอนที่โคลน ขั้นตอนเดิมจะไม่เปลี่ยนแปลง',
+        'Process Name' => 'ชื่อกระบวนการ',
+        'Please enter a name for the cloned element. The original element stays unchanged.' =>
+            'โปรดป้อนชื่อสำหรับองค์ประกอบที่โคลน องค์ประกอบเดิมจะไม่เปลี่ยนแปลง',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => 'เส้นทาง',
         'Edit this transition' => 'แก้ไขการเปลี่ยนแปลงนี้',
@@ -1781,7 +1791,6 @@ sub Data {
             'การกระทำสามารถกำหนดไปยังการเปลี่ยนผ่านโดยวางองค์ประกอบการกระทำบนฉลากของการเปลี่ยนผ่าน',
         'Edit Process' => 'แก้ไขขั้นตอน',
         'Edit Process Information' => 'แก้ไขข้อมูลกระบวนการ',
-        'Process Name' => 'ชื่อกระบวนการ',
         'The selected state does not exist.' => 'สถานภาพที่เลือกไม่มีอยู่',
         'Process Preferences' => '',
         'Add and Edit Activities, Activity Dialogs and Transitions' => 'เพิ่มและแก้ไขกิจกรรม กิจกรรมไดอะล็อกและการเปลี่ยนผ่าน',
@@ -9561,6 +9570,8 @@ Thanks for your help!
         'Click to download this file.',
         'Click to preview this file.',
         'Click to select a file for upload.',
+        'Clone',
+        'Clone Process',
         'Clone web service',
         'Close preview',
         'Close this dialog',

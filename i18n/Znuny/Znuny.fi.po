@@ -5174,7 +5174,7 @@ msgstr ""
 msgid "Edit Process Information"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
 msgid "Process Name"
 msgstr "Prosessin nimi"
 
@@ -8674,7 +8674,7 @@ msgstr "Tiketin kentät"
 msgid "Error Details"
 msgstr "Virheen tarkemmat tiedot"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
 msgid "Expand"
 msgstr "Laajenna"
 
@@ -25528,4 +25528,24 @@ msgstr ""
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus."
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged."
+msgstr "Kopiointi monistaa vain prosessin ja säilyttää viittaukset alkuperäisiin elementteihin. Kloonaus luo itsenäisen passiivisen kopion. Jokainen prosessin sisältämä elementti saa uuden sisäisen tunnuksen, ja alkuperäinen prosessi pysyy muuttumattomana."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Clone Process"
+msgstr "Kloonaa prosessi"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned process. The original process stays unchanged."
+msgstr "Anna nimi kloonatulle prosessille. Alkuperäinen prosessi pysyy muuttumattomana."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned element. The original element stays unchanged."
+msgstr "Anna nimi kloonatulle elementille. Alkuperäinen elementti pysyy muuttumattomana."
+
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+msgid "Collapse"
+msgstr "Pienennä"
 

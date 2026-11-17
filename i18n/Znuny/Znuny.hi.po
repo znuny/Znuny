@@ -5174,7 +5174,7 @@ msgstr ""
 msgid "Edit Process Information"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
 msgid "Process Name"
 msgstr ""
 
@@ -8674,7 +8674,7 @@ msgstr ""
 msgid "Error Details"
 msgstr "त्रुटि का विवरण"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
 msgid "Expand"
 msgstr "विस्तार"
 
@@ -25528,4 +25528,24 @@ msgstr ""
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus."
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged."
+msgstr "कॉपी केवल प्रक्रिया की प्रति बनाती है और मूल तत्वों के संदर्भ रखती है। क्लोन एक स्वतंत्र निष्क्रिय प्रति बनाता है। प्रत्येक शामिल तत्व को नई आंतरिक आईडी मिलती है, और मूल प्रक्रिया अपरिवर्तित रहती है।"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Clone Process"
+msgstr "प्रक्रिया क्लोन करें"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned process. The original process stays unchanged."
+msgstr "कृपया क्लोन की गई प्रक्रिया का नाम दर्ज करें। मूल प्रक्रिया अपरिवर्तित रहती है।"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned element. The original element stays unchanged."
+msgstr "कृपया क्लोन किए गए तत्व का नाम दर्ज करें। मूल तत्व अपरिवर्तित रहता है।"
+
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+msgid "Collapse"
+msgstr "संक्षिप्त करें"
 

@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d %T';
-    $Self->{Completeness}        = 0.831292733343934;
+    $Self->{Completeness}        = 0.831399968218656;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1681,6 +1681,8 @@ sub Data {
             '새 프로세스를 만들려면 다른 시스템에서 내 보낸 프로세스를 가져 오거나 완전히 새로운 프로세스를 생성 할 수 있습니다.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             '여기에서 프로세스 변경은 프로세스 데이터를 동기화 할 경우에만 시스템의 동작에 영향을 미칩니다. 프로세스를 동기화함으로써 새로 변경된 변경 사항이 구성에 기록됩니다.',
+        'Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.' =>
+            '복사는 프로세스만 복제하고 원본 요소에 대한 참조를 유지합니다. 클론은 독립적인 비활성 사본을 만듭니다. 포함된 각 요소는 새 내부 ID를 받으며 원본 프로세스는 변경되지 않습니다.',
         'Access Control Lists (ACL)' => '액세스 제어 목록 (ACL)',
         'Generic Agent' => '',
         'Manage Process Widget Groups' => '',
@@ -1689,6 +1691,7 @@ sub Data {
         'Print' => '인쇄',
         'Export Process Configuration' => '프로세스 구성 내보내기',
         'Copy Process' => '프로세스 복사',
+        'Clone Process' => '프로세스 복제',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Please note, that changing this activity will affect the following processes' =>
@@ -1740,6 +1743,13 @@ sub Data {
         'Auto fill' => '',
         'Display' => '다스플레이',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+        'Please enter a name for the cloned process. The original process stays unchanged.' =>
+            '복제된 프로세스의 이름을 입력하십시오. 원본 프로세스는 변경되지 않습니다.',
+        'Process Name' => '프로세스 이름',
+        'Please enter a name for the cloned element. The original element stays unchanged.' =>
+            '복제된 요소의 이름을 입력하십시오. 원본 요소는 변경되지 않습니다.',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => '통로',
         'Edit this transition' => '이 전환 편집',
@@ -1779,7 +1789,6 @@ sub Data {
             '동작 요소를 전환 레이블에 놓음으로써 동작을 전환에 할당할 수 있습니다.',
         'Edit Process' => '프로세스 편집',
         'Edit Process Information' => '프로세스 정보 편집',
-        'Process Name' => '프로세스 이름',
         'The selected state does not exist.' => '선택한 상태가 존재하지 않습니다.',
         'Process Preferences' => '',
         'Add and Edit Activities, Activity Dialogs and Transitions' => '활동, 활동 대화 상자 및 전환 추가 및 편집',
@@ -9555,6 +9564,8 @@ Thanks for your help!
         'Click to download this file.',
         'Click to preview this file.',
         'Click to select a file for upload.',
+        'Clone',
+        'Clone Process',
         'Clone web service',
         'Close preview',
         'Close this dialog',

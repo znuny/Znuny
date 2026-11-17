@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.3202416918429;
+    $Self->{Completeness}        = 0.320673764500238;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1684,6 +1684,8 @@ sub Data {
             '',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             '',
+        'Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.' =>
+            'Kopiering duplicerar bara processen och behåller referenserna till de ursprungliga elementen. Kloning skapar en oberoende inaktiv kopia. Varje ingående element får ett nytt internt ID och den ursprungliga processen förblir oförändrad.',
         'Access Control Lists (ACL)' => 'Åtkomstkontroll (ACL)',
         'Generic Agent' => '',
         'Manage Process Widget Groups' => '',
@@ -1692,6 +1694,7 @@ sub Data {
         'Print' => 'Skriv ut',
         'Export Process Configuration' => 'Exportera processkonfiguration',
         'Copy Process' => 'Kopiera process',
+        'Clone Process' => 'Klona process',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Please note, that changing this activity will affect the following processes' =>
@@ -1743,6 +1746,13 @@ sub Data {
         'Auto fill' => '',
         'Display' => '',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+        'Please enter a name for the cloned process. The original process stays unchanged.' =>
+            'Ange ett namn för den klonade processen. Den ursprungliga processen förblir oförändrad.',
+        'Process Name' => '',
+        'Please enter a name for the cloned element. The original element stays unchanged.' =>
+            'Ange ett namn för det klonade elementet. Det ursprungliga elementet förblir oförändrat.',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => 'Sökväg',
         'Edit this transition' => '',
@@ -1782,7 +1792,6 @@ sub Data {
             '',
         'Edit Process' => '',
         'Edit Process Information' => '',
-        'Process Name' => '',
         'The selected state does not exist.' => '',
         'Process Preferences' => '',
         'Add and Edit Activities, Activity Dialogs and Transitions' => '',
@@ -9547,6 +9556,8 @@ Thanks for your help!
         'Click to download this file.',
         'Click to preview this file.',
         'Click to select a file for upload.',
+        'Clone',
+        'Clone Process',
         'Clone web service',
         'Close preview',
         'Close this dialog',

@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%m/%d/%Y';
     $Self->{DateInputFormat}     = '%m/%d/%Y';
     $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
-    $Self->{Completeness}        = 0.422801717284147;
+    $Self->{Completeness}        = 0.423168600031781;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1684,6 +1684,8 @@ sub Data {
             'Kutengeenza mchakato mpya unaweza kuleta mchakato ambao uliumehamishwa kutoka kwenye mfumo mwingine au kutengeneza mpya uliokamilika.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'Mabadiliko katika michakato hapa inaadhiri tabia ya mfumo, kama unalandanisha data za mchakato. Kwa kulandanisha michakato, mabadiliko mapya yaliyofanywa yataandikwa kwneye usanidi.',
+        'Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.' =>
+            'Kunakili kunarudufu mchakato pekee na kuhifadhi marejeleo ya vipengele asili. Kukloni huunda nakala huru isiyotumika. Kila kipengele kilichomo hupokea kitambulisho kipya cha ndani, na mchakato asili hubaki bila kubadilika.',
         'Access Control Lists (ACL)' => 'Orodha Dhibiti Ufikivu (ACL)',
         'Generic Agent' => '',
         'Manage Process Widget Groups' => '',
@@ -1692,6 +1694,7 @@ sub Data {
         'Print' => 'Chapisha',
         'Export Process Configuration' => 'Hamisha usanidi wa mchakato',
         'Copy Process' => 'Nakili mchakato',
+        'Clone Process' => 'Kloni mchakato',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Please note, that changing this activity will affect the following processes' =>
@@ -1743,6 +1746,13 @@ sub Data {
         'Auto fill' => '',
         'Display' => 'Onyesha',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+        'Please enter a name for the cloned process. The original process stays unchanged.' =>
+            'Tafadhali weka jina la mchakato ulioklonwa. Mchakato asili hubaki bila kubadilika.',
+        'Process Name' => 'Jina la mchakato',
+        'Please enter a name for the cloned element. The original element stays unchanged.' =>
+            'Tafadhali weka jina la kipengele kilichoklonwa. Kipengele asili hubaki bila kubadilika.',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => 'Njia',
         'Edit this transition' => 'Hariri mpito huu',
@@ -1782,7 +1792,6 @@ sub Data {
             'Vitendo vinaweza kugaiwa kwa Mpito kwa kudondosha Kipengele cha kitendo katika lebo ta Mpito.',
         'Edit Process' => 'Hariri mchakato',
         'Edit Process Information' => 'Hariri taarifa za mchakato',
-        'Process Name' => 'Jina la mchakato',
         'The selected state does not exist.' => 'Hali iliyochaguliwa haipo.',
         'Process Preferences' => '',
         'Add and Edit Activities, Activity Dialogs and Transitions' => 'Ongeza na hariri shuguli, mazungumzo ya shuguli na mipito',
@@ -9550,6 +9559,8 @@ Thanks for your help!
         'Click to download this file.',
         'Click to preview this file.',
         'Click to select a file for upload.',
+        'Clone',
+        'Clone Process',
         'Clone web service',
         'Close preview',
         'Close this dialog',

@@ -199,6 +199,20 @@ ul#ProcessElements li.AccordionElement div.Content ul li.OneRow {
     cursor: move;
 }
 
+/* nth-child counts hidden scope rows. Stripe only the visible rows. */
+ul#ProcessElements ul.Tablelike li.OneRow:nth-child(even) {
+    background-color: var(--white);
+}
+
+ul#ProcessElements ul.Tablelike li.OneRow.Stripe {
+    background-color: var(--main-bg-color);
+}
+
+ul#ProcessElements ul.Tablelike li.OneRow:hover,
+ul#ProcessElements ul.Tablelike li.OneRow.Stripe:hover {
+    background: #ffe8d3;
+}
+
 ul#ProcessElements li.AccordionElement div.Content ul li.OneRow.InScope {
     display:block;
 }
@@ -207,9 +221,20 @@ ul#ProcessElements li.AccordionElement div.Content ul li.OneRow.NotInScope {
     display:none;
 }
 
+ul#ProcessElements li.AccordionElement div.Content ul li.OneRow .AsBlock {
+    flex: 1;
+    min-width: 0;
+}
+
 ul#ProcessElements li.AccordionElement div.Content ul li > span {
-    display: flex;
+    display: none;
     align-items: center;
+    flex-shrink: 0;
+}
+
+ul#ProcessElements li.AccordionElement div.Content ul li:hover > span,
+ul#ProcessElements li.AccordionElement div.Content ul li:focus-within > span {
+    display: flex;
 }
 
 ul#ProcessElements li.AccordionElement div.Content ul li > span a {

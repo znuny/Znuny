@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.149149308316107;
+    $Self->{Completeness}        = 0.149690131892579;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1681,6 +1681,8 @@ sub Data {
             '',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             '',
+        'Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.' =>
+            'Sao chép chỉ nhân đôi quy trình và giữ các tham chiếu tới phần tử gốc. Nhân bản tạo một bản sao độc lập không hoạt động. Mỗi phần tử bên trong nhận một ID nội bộ mới và quy trình gốc giữ nguyên.',
         'Access Control Lists (ACL)' => '',
         'Generic Agent' => '',
         'Manage Process Widget Groups' => '',
@@ -1689,6 +1691,7 @@ sub Data {
         'Print' => 'In',
         'Export Process Configuration' => '',
         'Copy Process' => '',
+        'Clone Process' => 'Nhân bản quy trình',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Please note, that changing this activity will affect the following processes' =>
@@ -1740,6 +1743,13 @@ sub Data {
         'Auto fill' => '',
         'Display' => '',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+        'Please enter a name for the cloned process. The original process stays unchanged.' =>
+            'Vui lòng nhập tên cho quy trình được nhân bản. Quy trình gốc giữ nguyên.',
+        'Process Name' => '',
+        'Please enter a name for the cloned element. The original element stays unchanged.' =>
+            'Vui lòng nhập tên cho phần tử được nhân bản. Phần tử gốc giữ nguyên.',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => '',
         'Edit this transition' => '',
@@ -1779,7 +1789,6 @@ sub Data {
             '',
         'Edit Process' => '',
         'Edit Process Information' => '',
-        'Process Name' => '',
         'The selected state does not exist.' => '',
         'Process Preferences' => '',
         'Add and Edit Activities, Activity Dialogs and Transitions' => '',
@@ -9556,6 +9565,8 @@ Cảm ơn sự giúp đỡ của bạn!
         'Click to download this file.',
         'Click to preview this file.',
         'Click to select a file for upload.',
+        'Clone',
+        'Clone Process',
         'Clone web service',
         'Close preview',
         'Close this dialog',

@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.858006042296072;
+    $Self->{Completeness}        = 0.858096297473383;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1688,6 +1688,8 @@ sub Data {
             '为了创建新的流程，你可以导入从其它系统导出的流程配置文件，或者重新创建一个。',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             '对流程所做的一切修改仅保存在数据库中。只有执行部署流程操作后，才会生成或重新生成流程配置文件。',
+        'Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.' =>
+            '复制仅复制流程本身并保留对原始元素的引用。克隆会创建一个独立的非活动副本。每个包含的元素都会获得新的内部 ID，原始流程保持不变。',
         'Access Control Lists (ACL)' => '访问控制列表(ACL)',
         'Generic Agent' => '',
         'Manage Process Widget Groups' => '',
@@ -1696,6 +1698,7 @@ sub Data {
         'Print' => '打印',
         'Export Process Configuration' => '导出流程配置',
         'Copy Process' => '复制流程',
+        'Clone Process' => '克隆流程',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Please note, that changing this activity will affect the following processes' =>
@@ -1747,6 +1750,13 @@ sub Data {
         'Auto fill' => '',
         'Display' => 'Display（显示）',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+        'Please enter a name for the cloned process. The original process stays unchanged.' =>
+            '请输入克隆流程的名称。原始流程保持不变。',
+        'Process Name' => '流程名称',
+        'Please enter a name for the cloned element. The original element stays unchanged.' =>
+            '请输入克隆元素的名称。原始元素保持不变。',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => '路径',
         'Edit this transition' => '编辑这个转换',
@@ -1786,7 +1796,6 @@ sub Data {
             '为了给转换分配转换动作，需要将左侧转换动作拖放到转换标签上。',
         'Edit Process' => '编辑流程',
         'Edit Process Information' => '编辑流程信息',
-        'Process Name' => '流程名称',
         'The selected state does not exist.' => '选择的状态不存在。',
         'Process Preferences' => '',
         'Add and Edit Activities, Activity Dialogs and Transitions' => '添加并编辑活动、活动对话框和转换',
@@ -9561,6 +9570,8 @@ Thanks for your help!
         'Click to download this file.',
         'Click to preview this file.',
         'Click to select a file for upload.',
+        'Clone',
+        'Clone Process',
         'Clone web service',
         'Close preview',
         'Close this dialog',

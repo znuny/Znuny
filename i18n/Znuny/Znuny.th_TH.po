@@ -5176,7 +5176,7 @@ msgstr "แก้ไขขั้นตอน"
 msgid "Edit Process Information"
 msgstr "แก้ไขข้อมูลกระบวนการ"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
 msgid "Process Name"
 msgstr "ชื่อกระบวนการ"
 
@@ -8697,7 +8697,7 @@ msgstr "ช่องข้อมูลตั๋ว"
 msgid "Error Details"
 msgstr "รายละเอียด ข้อผิดพลาด"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
 msgid "Expand"
 msgstr "การขยาย"
 
@@ -25545,4 +25545,24 @@ msgstr ""
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus."
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged."
+msgstr "การคัดลอกจะทำซ้ำเฉพาะขั้นตอนและคงการอ้างอิงไปยังองค์ประกอบเดิม การโคลนจะสร้างสำเนาอิสระที่ไม่ได้ใช้งาน องค์ประกอบที่บรรจุอยู่ทุกชิ้นจะได้รับ ID ภายในใหม่ และขั้นตอนเดิมจะไม่เปลี่ยนแปลง"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Clone Process"
+msgstr "โคลนขั้นตอน"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned process. The original process stays unchanged."
+msgstr "โปรดป้อนชื่อสำหรับขั้นตอนที่โคลน ขั้นตอนเดิมจะไม่เปลี่ยนแปลง"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned element. The original element stays unchanged."
+msgstr "โปรดป้อนชื่อสำหรับองค์ประกอบที่โคลน องค์ประกอบเดิมจะไม่เปลี่ยนแปลง"
+
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+msgid "Collapse"
+msgstr "ยุบ"
 

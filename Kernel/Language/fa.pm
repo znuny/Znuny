@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.593417077436794;
+    $Self->{Completeness}        = 0.593675512474178;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1687,6 +1687,8 @@ sub Data {
             'برای ایجاد یک فرایند جدید شما هم می توانید یک فرایند است که از یک سیستم دیگر صادر شد وارد و یا ایجاد یک جدید کامل.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'تغییرات در فرایندهای اینجا تنها رفتار سیستم را تحت تاثیر قرار، اگر شما داده های فرایند همگام سازی. با هماهنگ سازی فرآیندها، تغییرات تازه ساخته شده را به پیکربندی نوشته شده است.',
+        'Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.' =>
+            'کپی فقط فرایند را تکرار می‌کند و ارجاع‌ها به عنصرهای اصلی را نگه می‌دارد. کلون یک نسخهٔ مستقل غیرفعال می‌سازد. هر عنصر موجود شناسهٔ داخلی جدیدی می‌گیرد و فرایند اصلی بدون تغییر می‌ماند.',
         'Access Control Lists (ACL)' => 'فهرست سطخ دسترسی (ACL)',
         'Generic Agent' => '',
         'Manage Process Widget Groups' => '',
@@ -1695,6 +1697,7 @@ sub Data {
         'Print' => 'چاپ',
         'Export Process Configuration' => 'استخراج پیکربندی فرایند',
         'Copy Process' => 'فرایند کپی',
+        'Clone Process' => 'کلون فرایند',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Please note, that changing this activity will affect the following processes' =>
@@ -1746,6 +1749,13 @@ sub Data {
         'Auto fill' => '',
         'Display' => 'نمایش',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+        'Please enter a name for the cloned process. The original process stays unchanged.' =>
+            'لطفاً نامی برای فرایند کلون‌شده وارد کنید. فرایند اصلی بدون تغییر می‌ماند.',
+        'Process Name' => 'نام پردازش',
+        'Please enter a name for the cloned element. The original element stays unchanged.' =>
+            'لطفاً نامی برای عنصر کلون‌شده وارد کنید. عنصر اصلی بدون تغییر می‌ماند.',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => 'PATH, 1998',
         'Edit this transition' => 'ویرایش این انتقال',
@@ -1785,7 +1795,6 @@ sub Data {
             'اقدامات را می توان به انتقال با حذف اقدام عنصر بر روی برچسب از یک انتقال داده می شود.',
         'Edit Process' => 'ویرایش فرآیند',
         'Edit Process Information' => 'ویرایش اطلاعات فرآیند',
-        'Process Name' => 'نام پردازش',
         'The selected state does not exist.' => 'وضعیت انتخاب شده وجود ندارد.',
         'Process Preferences' => '',
         'Add and Edit Activities, Activity Dialogs and Transitions' => 'اضافه کردن و ویرایش فعالیت، تبادل و انتقال فعالیت',
@@ -9561,6 +9570,8 @@ Thanks for your help!
         'Click to download this file.',
         'Click to preview this file.',
         'Click to select a file for upload.',
+        'Clone',
+        'Clone Process',
         'Clone web service',
         'Close preview',
         'Close this dialog',

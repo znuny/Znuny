@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d-%m-%Y';
     $Self->{DateInputFormat}     = '%d-%m-%Y';
     $Self->{DateInputFormatLong} = '%d-%m-%Y - %T';
-    $Self->{Completeness}        = 0.478772459850533;
+    $Self->{Completeness}        = 0.479103766089306;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1687,6 +1687,8 @@ sub Data {
             'Om een nieuw proces aan te maken kunt u een bestand importeren, aangemaakt op een ander systeem, of een compleet nieuw proces aanmaken.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'Wijzigingen aan de processen hebben alleen invloed op het systeem als u de proces-data synchroniseert. Door het synchroniseren van de processen worden de wijzigingen weggeschreven naar de configuratie.',
+        'Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.' =>
+            'Kopiëren dupliceert alleen het proces en behoudt de verwijzingen naar de oorspronkelijke elementen. Klonen maakt een onafhankelijke inactieve kopie. Elk opgenomen element krijgt een nieuwe interne ID en het oorspronkelijke proces blijft ongewijzigd.',
         'Access Control Lists (ACL)' => 'Access Control Lists (ACL)',
         'Generic Agent' => '',
         'Manage Process Widget Groups' => '',
@@ -1695,6 +1697,7 @@ sub Data {
         'Print' => 'Afdrukken',
         'Export Process Configuration' => 'Exporteer procesconfiguratie',
         'Copy Process' => 'Kopiëer proces',
+        'Clone Process' => 'Kloon proces',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Please note, that changing this activity will affect the following processes' =>
@@ -1746,6 +1749,13 @@ sub Data {
         'Auto fill' => '',
         'Display' => 'Weergave',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+        'Please enter a name for the cloned process. The original process stays unchanged.' =>
+            'Voer een naam in voor het gekloonde proces. Het oorspronkelijke proces blijft ongewijzigd.',
+        'Process Name' => 'Naam',
+        'Please enter a name for the cloned element. The original element stays unchanged.' =>
+            'Voer een naam in voor het gekloonde element. Het oorspronkelijke element blijft ongewijzigd.',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => 'Pad',
         'Edit this transition' => 'Bewerk transitie',
@@ -1785,7 +1795,6 @@ sub Data {
             'Acties kunnen gekoppeld worden aan een transitie door het actie-element naar het label van een transitie te slepen.',
         'Edit Process' => 'Bewerk proces',
         'Edit Process Information' => 'Bewerk proces-informatie',
-        'Process Name' => 'Naam',
         'The selected state does not exist.' => 'De geselecteerde status bestaat niet.',
         'Process Preferences' => '',
         'Add and Edit Activities, Activity Dialogs and Transitions' => 'Beheren activiteiten, dialogen en transities',
@@ -9561,6 +9570,8 @@ Het Helpdesk Team
         'Click to download this file.',
         'Click to preview this file.',
         'Click to select a file for upload.',
+        'Clone',
+        'Clone Process',
         'Clone web service',
         'Close preview',
         'Close this dialog',

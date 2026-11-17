@@ -5188,7 +5188,7 @@ msgstr "Endre prosess"
 msgid "Edit Process Information"
 msgstr "Endre prosessinformasjon"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
 msgid "Process Name"
 msgstr "Prosessnavn"
 
@@ -8700,7 +8700,7 @@ msgstr "Saksfelt"
 msgid "Error Details"
 msgstr "Feildetaljer"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
 msgid "Expand"
 msgstr "Utvid"
 
@@ -25542,4 +25542,24 @@ msgstr ""
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus."
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged."
+msgstr "Kopiering dupliserer bare prosessen og beholder referansene til de opprinnelige elementene. Kloning oppretter en uavhengig inaktiv kopi. Hvert inneholdt element får en ny intern ID, og den opprinnelige prosessen forblir uendret."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Clone Process"
+msgstr "Klon prosess"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned process. The original process stays unchanged."
+msgstr "Skriv inn et navn for den klonede prosessen. Den opprinnelige prosessen forblir uendret."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned element. The original element stays unchanged."
+msgstr "Skriv inn et navn for det klonede elementet. Det opprinnelige elementet forblir uendret."
+
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+msgid "Collapse"
+msgstr "Slå sammen"
 

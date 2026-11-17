@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.854666878677055;
+    $Self->{Completeness}        = 0.854759256316542;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1687,6 +1687,8 @@ sub Data {
             'Za kreiranje novog procesa možete ili uvesti proces koji je izvezen iz drugog sistema ili kreirati kompletno nov.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'Promene u procesima jedino utiču na ponašanje sistema, ako sinhronizujete podatke procesa. Sinhronizovanjem procesa, novonapravljene promene će biti upisane u konfiguraciju.',
+        'Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.' =>
+            'Kopiranje duplira samo proces i zadržava reference na originalne elemente. Kloniranje stvara nezavisnu neaktivnu kopiju. Svaki sadržani element dobija novi interni ID, a originalni proces ostaje nepromenjen.',
         'Access Control Lists (ACL)' => 'Liste za kontrolu pristupa (ACL)',
         'Generic Agent' => '',
         'Manage Process Widget Groups' => '',
@@ -1695,6 +1697,7 @@ sub Data {
         'Print' => 'Štampaj',
         'Export Process Configuration' => 'Izvezi konfiguraciju procesa',
         'Copy Process' => 'Kopiraj proces',
+        'Clone Process' => 'Kloniraj proces',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Please note, that changing this activity will affect the following processes' =>
@@ -1746,6 +1749,13 @@ sub Data {
         'Auto fill' => '',
         'Display' => 'Prikaži',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+        'Please enter a name for the cloned process. The original process stays unchanged.' =>
+            'Unesite naziv kloniranog procesa. Originalni proces ostaje nepromenjen.',
+        'Process Name' => 'Naziv procesa',
+        'Please enter a name for the cloned element. The original element stays unchanged.' =>
+            'Unesite naziv kloniranog elementa. Originalni element ostaje nepromenjen.',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => 'Putanja',
         'Edit this transition' => 'Uredite ovu tranziciju',
@@ -1785,7 +1795,6 @@ sub Data {
             'Aktivnost može biti dodeljena tranziciji prevlačenjem elementa aktivnosti na oznaku tranzicije.',
         'Edit Process' => 'Uredi proces',
         'Edit Process Information' => 'Uredi informacije o procesu',
-        'Process Name' => 'Naziv procesa',
         'The selected state does not exist.' => 'Odabrani status ne postoji.',
         'Process Preferences' => '',
         'Add and Edit Activities, Activity Dialogs and Transitions' => 'Dodaj i uredi aktivosti, dijaloge aktivnosti i tranzicije',
@@ -9561,6 +9570,8 @@ Vaša tehnička podrška
         'Click to download this file.',
         'Click to preview this file.',
         'Click to select a file for upload.',
+        'Clone',
+        'Clone Process',
         'Clone web service',
         'Close preview',
         'Close this dialog',

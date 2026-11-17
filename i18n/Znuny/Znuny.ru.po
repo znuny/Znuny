@@ -5176,7 +5176,7 @@ msgstr "Редактировать процесс"
 msgid "Edit Process Information"
 msgstr "Редактировать информацию о Процессе"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
 msgid "Process Name"
 msgstr "Имя Процесса"
 
@@ -8700,7 +8700,7 @@ msgstr "Поля заявки"
 msgid "Error Details"
 msgstr "Подробности об ошибке"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
 msgid "Expand"
 msgstr "Развернуть"
 
@@ -25545,4 +25545,24 @@ msgstr ""
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus."
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged."
+msgstr "Копирование дублирует только процесс и сохраняет ссылки на исходные элементы. Клонирование создаёт независимую неактивную копию. Каждый содержащийся элемент получает новый внутренний ID, а исходный процесс остаётся без изменений."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Clone Process"
+msgstr "Клонировать процесс"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned process. The original process stays unchanged."
+msgstr "Введите имя для клонированного процесса. Исходный процесс остаётся без изменений."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned element. The original element stays unchanged."
+msgstr "Введите имя для клонированного элемента. Исходный элемент остаётся без изменений."
+
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+msgid "Collapse"
+msgstr "Свернуть"
 

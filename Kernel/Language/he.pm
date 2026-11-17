@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.218158689775799;
+    $Self->{Completeness}        = 0.218655649133958;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1688,6 +1688,8 @@ sub Data {
             '',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             '',
+        'Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.' =>
+            'העתקה משכפלת רק את התהליך ושומרת את ההפניות לפריטים המקוריים. שכפול יוצר עותק עצמאי לא פעיל. כל פריט שנכלל מקבל מזהה פנימי חדש, והתהליך המקורי נשאר ללא שינוי.',
         'Access Control Lists (ACL)' => 'Access Control Lists (ACL)',
         'Generic Agent' => '',
         'Manage Process Widget Groups' => '',
@@ -1696,6 +1698,7 @@ sub Data {
         'Print' => 'הדפס',
         'Export Process Configuration' => 'ייצא הגדרות תהליך',
         'Copy Process' => 'העתק תהליך',
+        'Clone Process' => 'שכפול תהליך',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Please note, that changing this activity will affect the following processes' =>
@@ -1747,6 +1750,13 @@ sub Data {
         'Auto fill' => '',
         'Display' => 'הצג',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+        'Please enter a name for the cloned process. The original process stays unchanged.' =>
+            'נא להזין שם לתהליך המשוכפל. התהליך המקורי נשאר ללא שינוי.',
+        'Process Name' => 'שם התהליך',
+        'Please enter a name for the cloned element. The original element stays unchanged.' =>
+            'נא להזין שם לפריט המשוכפל. הפריט המקורי נשאר ללא שינוי.',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => 'נתיב',
         'Edit this transition' => '',
@@ -1786,7 +1796,6 @@ sub Data {
             '',
         'Edit Process' => 'ערוך תהליך',
         'Edit Process Information' => 'ערוך מידע תהליך',
-        'Process Name' => 'שם התהליך',
         'The selected state does not exist.' => '',
         'Process Preferences' => '',
         'Add and Edit Activities, Activity Dialogs and Transitions' => '',
@@ -9551,6 +9560,8 @@ Thanks for your help!
         'Click to download this file.',
         'Click to preview this file.',
         'Click to select a file for upload.',
+        'Clone',
+        'Clone Process',
         'Clone web service',
         'Close preview',
         'Close this dialog',

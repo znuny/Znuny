@@ -104,6 +104,9 @@
                 <p class="FieldExplanation">
                     [% Translate("Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.") | html %]
                 </p>
+                <p class="FieldExplanation">
+                    [% Translate("Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.") | html %]
+                </p>
 
             </div>
         </div>
@@ -176,6 +179,7 @@
                             <th>[% Translate("State") | html %]</th>
                             <th class="Center">[% Translate("Export") | html %]</th>
                             <th class="Center">[% Translate("Copy") | html %]</th>
+                            <th class="Center">[% Translate("Clone") | html %]</th>
                             <th class="Center">[% Translate("Print") | html %]</th>
                         </tr>
                     </thead>
@@ -200,6 +204,11 @@
                                 </a>
                             </td>
                             <td class="Center">
+                                <a href="#" class="CloneProcess table-icon-hover-md" data-id="[% Data.ID | html %]" data-name="[% Data.Name | html %]" title="[% Translate("Clone Process") | html %]">
+                                    <i class="fa fa-clone"></i> <span class="InvisibleText">[% Translate("Clone") | html %]</span>
+                                </a>
+                            </td>
+                            <td class="Center">
                                 <a class="table-icon-hover-md AsPopup PopupType_ProcessOverview" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ProcessPrint;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]">
                                     <i class="fa fa-print"></i> <span class="InvisibleText">[% Translate("Print") | html %]</span>
                                 </a>
@@ -208,17 +217,20 @@
 [% RenderBlockEnd("ProcessRow") %]
 [% RenderBlockStart("ProcessNoDataRow") %]
                         <tr>
-                            <td colspan="6">
+                            <td colspan="7">
                                 [% Translate("No data found.") | html %]
                             </td>
                         </tr>
 [% RenderBlockEnd("ProcessNoDataRow") %]
                         <tr class="FilterMessage Hidden">
-                            <td colspan="6">[% Translate("No matches found.") | html %]</td>
+                            <td colspan="7">[% Translate("No matches found.") | html %]</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+</div>
+<div id="Dialogs" class="Hidden">
+[% INCLUDE "AdminProcessManagementCloneDialog.tt" %]
 </div>

@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%m/%d';
     $Self->{DateInputFormat}     = '%Y/%m/%d';
     $Self->{DateInputFormatLong} = '%Y/%m/%d - %T';
-    $Self->{Completeness}        = 0.656384162823978;
+    $Self->{Completeness}        = 0.656602574288892;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1687,6 +1687,8 @@ sub Data {
             '新規プロセスを作成するには他システムでエクスポートしたプロセスをインポートするか新規に作成してください。',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             '変更はプロセスデータを同期させた場合にのみ反映されます。同期により、行われた変更は実際の設定に反映されます。',
+        'Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.' =>
+            'コピーはプロセスのみを複製し、元の要素への参照を保持します。複製は独立した非アクティブなコピーを作成します。含まれる各要素は新しい内部IDを受け取り、元のプロセスは変更されません。',
         'Access Control Lists (ACL)' => 'アクセス制御リスト (ACL)',
         'Generic Agent' => '',
         'Manage Process Widget Groups' => '',
@@ -1695,6 +1697,7 @@ sub Data {
         'Print' => '印刷',
         'Export Process Configuration' => 'プロセスの設定をエクスポート',
         'Copy Process' => 'プロセスをコピー',
+        'Clone Process' => 'プロセスを複製',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Please note, that changing this activity will affect the following processes' =>
@@ -1746,6 +1749,13 @@ sub Data {
         'Auto fill' => '',
         'Display' => '表示',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+        'Please enter a name for the cloned process. The original process stays unchanged.' =>
+            '複製するプロセスの名前を入力してください。元のプロセスは変更されません。',
+        'Process Name' => 'プロセス名',
+        'Please enter a name for the cloned element. The original element stays unchanged.' =>
+            '複製する要素の名前を入力してください。元の要素は変更されません。',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => 'パス',
         'Edit this transition' => 'この遷移を編集',
@@ -1785,7 +1795,6 @@ sub Data {
             '',
         'Edit Process' => 'プロセスを編集',
         'Edit Process Information' => 'プロセスの情報を編集',
-        'Process Name' => 'プロセス名',
         'The selected state does not exist.' => '選択されたステータスは存在しません。',
         'Process Preferences' => '',
         'Add and Edit Activities, Activity Dialogs and Transitions' => 'アクティビティ、アクティビティダイアログ、遷移を追加、編集',
@@ -9570,6 +9579,8 @@ Thanks for your help!
         'Click to download this file.',
         'Click to preview this file.',
         'Click to select a file for upload.',
+        'Clone',
+        'Clone Process',
         'Clone web service',
         'Close preview',
         'Close this dialog',

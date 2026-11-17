@@ -21,6 +21,9 @@
                     <li>
                         <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=ProcessPrint;ID=[% Data.ID | uri %];[% Env("ChallengeTokenParam") | html %]" class="CallForAction btn-main btn-primary-ghost AsPopup PopupType_ProcessOverview"><span> [% Translate("Print process information") | html %]</span></a>
                     </li>
+                    <li>
+                        <a href="#" class="CloneProcess CallForAction btn-main btn-primary-ghost" data-id="[% Data.ID | html %]" data-name="[% Data.Name | html %]"><span><i class="fa fa-clone"></i> [% Translate("Clone Process") | html %]</span></a>
+                    </li>
 [% RenderBlockStart("ProcessDeleteAction") %]
                     <li>
                         <a href="#" id="ProcessDelete" class="CallForAction btn-main btn-primary-ghost" data-dialog-element="DeleteProcessConfirmationDialog" data-dialog-title="[% Translate("Delete Process") | html %]" data-id="[% Data.ID | html %]"><span><i class="fa fa-trash-o"></i> [% Translate("Delete Inactive Process") | html %]</span></a>
@@ -214,6 +217,7 @@
 </div>
 
 <div id="Dialogs" class="Hidden">
+[% INCLUDE "AdminProcessManagementCloneDialog.tt" %]
     <div id="DeleteProcessConfirmationDialog">
         <p>[% Translate("Do you really want to delete this Process?") | html %]</p>
         <p class="SpacingTop"><strong>[% Data.Name | html %]</strong></p>
