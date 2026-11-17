@@ -41,7 +41,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         font-size: 13px;
         line-height: 0.9em;
         color: inherit;
-        opacity: 0.3;
+        opacity: 0.4;
         margin-right: 2px;
     }
 
@@ -57,11 +57,13 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     .AppointmentTooltip {
         position: absolute;
-        z-index: 1000;
+        z-index: 4500;
         background-color: #FFF;
         border: 1px solid #CCC;
         width: 375px;
         padding: 5px;
+        max-height: calc(100vh - 96px);
+        overflow-y: auto;
     }
 
     .AppointmentTooltip > .Icons i {
@@ -137,6 +139,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     .PluginContainer div {
         display: flex;
+        align-items: center;
         width: 100%;
         gap: var(--gap-sm);
     }
@@ -501,7 +504,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         height: 2px;
         left: 0;
         bottom: -6px;
-      }
+    }
 
     .fc-toolbar h2 {
         font-size: var(--font-size-md);
@@ -615,7 +618,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     }
 
     .CalendarWidget .Icons i {
-        color: var(--white);
+        color: inherit;
     }
 
     .CalendarWidget .fc-event .fc-content {

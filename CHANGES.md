@@ -1,4 +1,5 @@
 # 7.5.1 2026-??-??
+ - 2026-11-17 Changed: Updated tooltip positioning logic in AppointmentCalendar and improved CSS styles for better visibility and layout.
  - 2026-11-17 Added: Process management: Clone activity dialogs and transition actions from the Edit Activity and Edit Path screens.
  - 2026-11-13 Fixed: SecureMode setting description now says GenericAgent, Package Manager and SQL Box are disabled when SecureMode is not enabled. Thanks to @BuilderNSV for reporting the issue. [#715](https://github.com/znuny/Znuny/issues/715)
  - 2026-11-11 Added: Queue and service navigation layouts.
