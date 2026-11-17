@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.505641188622279;
+    $Self->{Completeness}        = 0.505798252581414;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1732,6 +1732,8 @@ sub Data {
         'Required Lock' => 'ล็อคที่จำเป็น',
         'The selected required lock does not exist.' => 'ไม่มีล็อคจำเป็นที่ถูกเลือก',
         'This field is required for activitiy dialogs with a scope.' => '',
+        'One-click execution' => 'การดำเนินการคลิกเดียว',
+        'Skip the activity dialog popup and submit immediately.' => 'ข้ามป๊อปอัปของกล่องโต้ตอบกิจกรรมและส่งทันที',
         'Submit Advice Text' => 'ส่งข้อความแนะนำ',
         'Submit Button Text' => 'ส่งข้อความปุ่ม',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>

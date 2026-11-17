@@ -25549,3 +25549,11 @@ msgstr "Anna nimi kloonatulle elementille. Alkuperäinen elementti pysyy muuttum
 msgid "Collapse"
 msgstr "Pienennä"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "Yhdellä napsautuksella suoritus"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "Ohita toimintodialogin ponnahdusikkuna ja lähetä heti."
+

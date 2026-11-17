@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d-%m-%Y';
     $Self->{DateInputFormat}     = '%d-%m-%Y';
     $Self->{DateInputFormatLong} = '%d-%m-%Y - %T';
-    $Self->{Completeness}        = 0.479103766089306;
+    $Self->{Completeness}        = 0.479269261318507;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1736,6 +1736,8 @@ sub Data {
         'Required Lock' => 'Vergrendeling nodig',
         'The selected required lock does not exist.' => 'De gekozen vergrendeling bestaat niet.',
         'This field is required for activitiy dialogs with a scope.' => '',
+        'One-click execution' => 'Uitvoering met één klik',
+        'Skip the activity dialog popup and submit immediately.' => 'Sla het pop-upvenster van de activiteitendialoog over en verzend direct.',
         'Submit Advice Text' => 'Verstuur-advies tekst',
         'Submit Button Text' => 'Tekst op Verstuur-knop',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>

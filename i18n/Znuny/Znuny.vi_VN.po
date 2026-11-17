@@ -25563,3 +25563,11 @@ msgstr "Vui lòng nhập tên cho phần tử được nhân bản. Phần tử 
 msgid "Collapse"
 msgstr "Thu gọn"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "Thực thi bằng một cú nhấp"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "Bỏ qua cửa sổ bật lên của hộp thoại hoạt động và gửi ngay."
+

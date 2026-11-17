@@ -25560,3 +25560,11 @@ msgstr "لطفاً نامی برای عنصر کلون‌شده وارد کنی�
 msgid "Collapse"
 msgstr "جمع کردن"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "اجرا با یک کلیک"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "رد کردن پنجره‌ی بازشوی گفتگوی فعالیت و ارسال فوری."
+

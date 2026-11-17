@@ -25560,3 +25560,11 @@ msgstr "Унесите назив клонираног елемента. Ори�
 msgid "Collapse"
 msgstr "Смањи"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "Извршавање једним кликом"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "Прескочи искачући прозор дијалога активности и одмах пошаљи."
+

@@ -25562,3 +25562,11 @@ msgstr "Adjon meg egy nevet a klónozott elemnek. Az eredeti elem változatlan m
 msgid "Collapse"
 msgstr "Összecsuk"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "Végrehajtás egy kattintással"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "A tevékenység párbeszédablak felugró ablakának kihagyása és azonnali elküldése."
+

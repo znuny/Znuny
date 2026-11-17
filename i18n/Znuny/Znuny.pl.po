@@ -25586,3 +25586,11 @@ msgstr "Podaj nazwę sklonowanego elementu. Oryginalny element pozostaje niezmie
 msgid "Collapse"
 msgstr "Zwiń"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "Wykonanie jednym kliknięciem"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "Pomiń wyskakujące okno dialogowe aktywności i zatwierdź natychmiast."
+

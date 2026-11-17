@@ -25549,3 +25549,11 @@ msgstr "Klonlanan öğe için bir ad girin. Özgün öğe değişmeden kalır."
 msgid "Collapse"
 msgstr "Daralt"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "Tek tıklamayla çalıştırma"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "Etkinlik iletişim kutusunun açılır penceresini atla ve hemen gönder."
+

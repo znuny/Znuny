@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.854759256316542;
+    $Self->{Completeness}        = 0.854805401111994;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1736,6 +1736,8 @@ sub Data {
         'Required Lock' => 'Obavezno zaključaj',
         'The selected required lock does not exist.' => 'Odabrano zahtevano zaključavanje ne postoji.',
         'This field is required for activitiy dialogs with a scope.' => '',
+        'One-click execution' => 'Izvršavanje jednim klikom',
+        'Skip the activity dialog popup and submit immediately.' => 'Preskoči iskačući prozor dijaloga aktivnosti i odmah pošalji.',
         'Submit Advice Text' => 'Pošalji tekst saveta',
         'Submit Button Text' => 'Pošalji tekst dugmeta',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>

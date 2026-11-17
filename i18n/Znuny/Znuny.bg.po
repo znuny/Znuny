@@ -25549,3 +25549,11 @@ msgstr "Моля, въведете име за клонирания елемен
 msgid "Collapse"
 msgstr "Свий"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "Изпълнение с едно кликване"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "Пропусни изскачащия прозорец на диалога за дейност и изпрати веднага."
+

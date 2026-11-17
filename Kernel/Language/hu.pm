@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.998728746225965;
+    $Self->{Completeness}        = 0.998729150119142;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1736,6 +1736,8 @@ sub Data {
         'Required Lock' => 'Zárolás szükséges',
         'The selected required lock does not exist.' => 'A kijelölt szükséges zárolás nem létezik.',
         'This field is required for activitiy dialogs with a scope.' => 'Ez a mező kötelező a hatókörrel rendelkező tevékenység-párbeszédablakoknál.',
+        'One-click execution' => 'Végrehajtás egy kattintással',
+        'Skip the activity dialog popup and submit immediately.' => 'A tevékenység párbeszédablak felugró ablakának kihagyása és azonnali elküldése.',
         'Submit Advice Text' => 'Elküldés értesítőszövege',
         'Submit Button Text' => 'Elküldés gomb szövege',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>

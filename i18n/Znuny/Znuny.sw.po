@@ -25553,3 +25553,11 @@ msgstr "Tafadhali weka jina la kipengele kilichoklonwa. Kipengele asili hubaki b
 msgid "Collapse"
 msgstr "Kunja"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "Utekelezaji wa kubofya mara moja"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "Ruka dirisha ibukizi la mazungumzo ya shughuli na uwasilishe mara moja."
+

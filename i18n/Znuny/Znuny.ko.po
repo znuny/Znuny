@@ -25560,3 +25560,11 @@ msgstr "복제된 요소의 이름을 입력하십시오. 원본 요소는 변�
 msgid "Collapse"
 msgstr "접기"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "원클릭 실행"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "활동 대화 상자 팝업을 건너뛰고 즉시 제출합니다."
+

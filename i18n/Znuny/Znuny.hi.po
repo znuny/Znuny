@@ -25549,3 +25549,11 @@ msgstr "कृपया क्लोन किए गए तत्व का न
 msgid "Collapse"
 msgstr "संक्षिप्त करें"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "एक-क्लिक निष्पादन"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "गतिविधि संवाद का पॉपअप छोड़ें और तुरंत सबमिट करें।"
+

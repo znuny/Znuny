@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%m/%d/%Y';
     $Self->{DateInputFormat}     = '%m/%d/%Y';
     $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
-    $Self->{Completeness}        = 0.423168600031781;
+    $Self->{Completeness}        = 0.423351866560763;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1733,6 +1733,8 @@ sub Data {
         'Required Lock' => 'Kufuli inayohitajika',
         'The selected required lock does not exist.' => 'Kufuli inayohitajika iliyochaguliwa haipo.',
         'This field is required for activitiy dialogs with a scope.' => '',
+        'One-click execution' => 'Utekelezaji wa kubofya mara moja',
+        'Skip the activity dialog popup and submit immediately.' => 'Ruka dirisha ibukizi la mazungumzo ya shughuli na uwasilishe mara moja.',
         'Submit Advice Text' => 'Kusanya matini ya ushauri',
         'Submit Button Text' => 'Kusanya kitufe cha matini',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>

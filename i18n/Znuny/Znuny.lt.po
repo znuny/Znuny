@@ -25549,3 +25549,11 @@ msgstr "Įveskite klonuoto elemento pavadinimą. Pirminis elementas lieka nepaki
 msgid "Collapse"
 msgstr "Sutraukti"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "Vykdymas vienu spustelėjimu"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "Praleisti veiklos dialogo iššokantįjį langą ir iš karto pateikti."
+

@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.447799141903703;
+    $Self->{Completeness}        = 0.447974583002383;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1731,6 +1731,8 @@ sub Data {
         'Required Lock' => 'Bloqueo Requirido',
         'The selected required lock does not exist.' => 'O bloqueo requirido seleccionado non existe.',
         'This field is required for activitiy dialogs with a scope.' => '',
+        'One-click execution' => 'Execución cun clic',
+        'Skip the activity dialog popup and submit immediately.' => 'Omitir a xanela emerxente do diálogo de actividade e enviar inmediatamente.',
         'Submit Advice Text' => 'Envíe Texto de Consello',
         'Submit Button Text' => 'Botón Envíe Texto ',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>

@@ -176,7 +176,11 @@
                             <ul class="next-links">
 [% RenderBlockStart("ActivityDialog") %]
                                 <li class="activity-dialog">
+[% IF Data.OneClickExecution %]
+                                    <a title="[% Data.Name | html %]" href="[% Env("Baselink") %]Action=CustomerTicketProcess;Subaction=ActivityDialogOneClick;TicketID=[% Data.TicketID | uri %];ProcessEntityID=[% Data.ProcessEntityID | uri %];ActivityDialogEntityID=[% Data.ActivityDialogEntityID | uri %];[% Env("ChallengeTokenParam") | html %]">[% Data.Name | html %]</a>
+[% ELSE %]
                                     <a title="[% Data.Name | html %]" class="AsPopup PopupType_TicketAction" href="[% Env("Baselink") %]Action=CustomerTicketProcess;Subaction=DisplayActivityDialog;TicketID=[% Data.TicketID | uri %];ProcessEntityID=[% Data.ProcessEntityID | uri %];ActivityDialogEntityID=[% Data.ActivityDialogEntityID | uri %]">[% Data.Name | html %]</a>
+[% END %]
                                 </li>
 [% RenderBlockEnd("ActivityDialog") %]
                             </ul>

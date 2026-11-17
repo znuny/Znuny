@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.320673764500238;
+    $Self->{Completeness}        = 0.3208895949166;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1733,6 +1733,8 @@ sub Data {
         'Required Lock' => '',
         'The selected required lock does not exist.' => '',
         'This field is required for activitiy dialogs with a scope.' => '',
+        'One-click execution' => 'Körning med ett klick',
+        'Skip the activity dialog popup and submit immediately.' => 'Hoppa över popup-fönstret för aktivitetsdialogen och skicka direkt.',
         'Submit Advice Text' => '',
         'Submit Button Text' => '',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>

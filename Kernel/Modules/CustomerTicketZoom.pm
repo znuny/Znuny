@@ -1171,6 +1171,7 @@ sub _Mask {
                         Name                   => $ActivityDialogData->{Name},
                         ProcessEntityID        => $Param{$ProcessEntityIDField},
                         TicketID               => $Param{TicketID},
+                        OneClickExecution      => $ActivityDialogData->{OneClickExecution} || 0,
                     },
                 );
             }

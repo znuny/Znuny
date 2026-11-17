@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.252184967424122;
+    $Self->{Completeness}        = 0.252422557585385;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1733,6 +1733,8 @@ sub Data {
         'Required Lock' => '',
         'The selected required lock does not exist.' => '',
         'This field is required for activitiy dialogs with a scope.' => '',
+        'One-click execution' => 'एक-क्लिक निष्पादन',
+        'Skip the activity dialog popup and submit immediately.' => 'गतिविधि संवाद का पॉपअप छोड़ें और तुरंत सबमिट करें।',
         'Submit Advice Text' => '',
         'Submit Button Text' => '',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>

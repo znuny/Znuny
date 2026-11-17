@@ -220,7 +220,11 @@
                                         </li>
                                         [% RenderBlockStart("ActivityDialog") %]
                                         <li>
+                                            [% IF Data.OneClickExecution %]
+                                            <a title="[% Translate(Data.Name) | html %]" class="approval-val" href="[% Env("Baselink") %]Action=AgentTicketProcess;Subaction=ActivityDialogOneClick;TicketID=[% Data.TicketID | uri %];ProcessEntityID=[% Data.ProcessEntityID | uri %];ActivityDialogEntityID=[% Data.ActivityDialogEntityID | uri %];[% Env("ChallengeTokenParam") | html %]">[% Translate(Data.Name) | html %]</a>
+                                            [% ELSE %]
                                             <a title="[% Translate(Data.Name) | html %]" class="approval-val AsPopup PopupType_TicketAction" href="[% Env("Baselink") %]Action=AgentTicketProcess;Subaction=DisplayActivityDialog;TicketID=[% Data.TicketID | uri %];ProcessEntityID=[% Data.ProcessEntityID | uri %];ActivityDialogEntityID=[% Data.ActivityDialogEntityID | uri %]">[% Translate(Data.Name) | html %]</a>
+                                            [% END %]
                                         </li>
                                         [% RenderBlockEnd("ActivityDialog") %]
                                     </ul>

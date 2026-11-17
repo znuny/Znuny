@@ -25549,3 +25549,11 @@ msgstr "Introduceți un nume pentru elementul clonat. Elementul original rămân
 msgid "Collapse"
 msgstr "Restrânge"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "Execuție cu un singur clic"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "Omite fereastra pop-up a dialogului de activitate și trimite imediat."
+

@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.582869855394883;
+    $Self->{Completeness}        = 0.583002382843527;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1731,6 +1731,8 @@ EMAILADDRESS:info@example.com dari, kepada atau Cc.',
         'Required Lock' => 'Kunci diperlukan',
         'The selected required lock does not exist.' => 'Kunci yang diperlukan tidak ada.',
         'This field is required for activitiy dialogs with a scope.' => '',
+        'One-click execution' => 'Eksekusi satu klik',
+        'Skip the activity dialog popup and submit immediately.' => 'Lewati popup dialog aktivitas dan kirim segera.',
         'Submit Advice Text' => 'Menghantar saran teks',
         'Submit Button Text' => 'Menghantar tombol teks',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>

@@ -378,7 +378,9 @@ sub Run {
                 );
 
                 for my $ElementAttribute (
-                    qw(DescriptionShort DescriptionLong SubmitButtonText SubmitAdviceText Permission RequiredLock)
+                    qw(
+                    DescriptionShort DescriptionLong SubmitButtonText SubmitAdviceText Permission RequiredLock OneClickExecution
+                    )
                     )
                 {
 
@@ -387,7 +389,11 @@ sub Run {
 
                     if ( defined $Value ) {
 
-                        if ( $ElementAttribute eq 'RequiredLock' ) {
+                        if (
+                            $ElementAttribute eq 'RequiredLock'
+                            || $ElementAttribute eq 'OneClickExecution'
+                            )
+                        {
                             $Value = $BooleanMapping->{$Value};
                         }
 

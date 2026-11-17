@@ -25549,3 +25549,11 @@ msgstr "Ievadiet klonētā elementa nosaukumu. Sākotnējais elements paliek nem
 msgid "Collapse"
 msgstr "Sakļaut"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "Izpilde ar vienu klikšķi"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "Izlaist aktivitātes dialoga uznirstošo logu un nekavējoties iesniegt."
+

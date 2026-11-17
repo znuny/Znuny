@@ -1395,6 +1395,12 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
         var MandatoryFields = ['Queue', 'State', 'Lock', 'Priority', 'Type', 'CustomerID'],
             FieldsWithoutDefaultValue = ['CustomerID', 'Article', 'Attachments'];
 
+        function ToggleSubmitTextFields() {
+            var HideSubmitTextFields = $('#OneClickExecution').val() === '1';
+
+            $('#SubmitAdviceTextContainer, #SubmitButtonTextContainer').toggle(!HideSubmitTextFields);
+        }
+
         function UpdateFields(Event, UI) {
             var Fieldname,
                 DefaultFieldConfig = {};
@@ -1430,6 +1436,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
         // Initialize list filter
         Core.UI.Table.InitTableFilter($('#FilterAvailableFields'), $('#AvailableFields'));
         Core.UI.Table.InitTableFilter($('#FilterAssignedFields'), $('#AssignedFields'));
+
+        $('#OneClickExecution').on('change', ToggleSubmitTextFields);
+        ToggleSubmitTextFields();
 
         $('#Submit').on('click', function() {
             $('#ActivityDialogForm').submit();

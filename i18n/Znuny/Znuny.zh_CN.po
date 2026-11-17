@@ -25559,3 +25559,11 @@ msgstr "请输入克隆元素的名称。原始元素保持不变。"
 msgid "Collapse"
 msgstr "收起"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "一键执行"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "跳过活动对话框弹窗，立即提交。"
+

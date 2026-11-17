@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.835849356427777;
+    $Self->{Completeness}        = 0.835901509134234;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1742,6 +1742,8 @@ sub Data {
         'Required Lock' => 'Требуется блокировка',
         'The selected required lock does not exist.' => 'Выбранное требование - "требуется блокировка" не существует.',
         'This field is required for activitiy dialogs with a scope.' => '',
+        'One-click execution' => 'Выполнение в один клик',
+        'Skip the activity dialog popup and submit immediately.' => 'Пропустить всплывающее окно диалога активности и сразу отправить.',
         'Submit Advice Text' => 'Текст подсказки кнопки Отправить',
         'Submit Button Text' => 'Название кнопки Отправить',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>

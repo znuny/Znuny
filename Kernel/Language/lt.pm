@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.189416812331162;
+    $Self->{Completeness}        = 0.18967434471803;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1731,6 +1731,8 @@ sub Data {
         'Required Lock' => '',
         'The selected required lock does not exist.' => '',
         'This field is required for activitiy dialogs with a scope.' => '',
+        'One-click execution' => 'Vykdymas vienu spustelėjimu',
+        'Skip the activity dialog popup and submit immediately.' => 'Praleisti veiklos dialogo iššokantįjį langą ir iš karto pateikti.',
         'Submit Advice Text' => '',
         'Submit Button Text' => '',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>

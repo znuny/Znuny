@@ -25553,3 +25553,11 @@ msgstr "Εισαγάγετε ένα όνομα για το κλωνοποιημ�
 msgid "Collapse"
 msgstr "Σύμπτυξη"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "Εκτέλεση με ένα κλικ"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "Παράλειψη του αναδυόμενου παραθύρου διαλόγου δραστηριότητας και άμεση υποβολή."
+

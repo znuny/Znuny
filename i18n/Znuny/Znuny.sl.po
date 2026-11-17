@@ -25549,3 +25549,11 @@ msgstr "Vnesite ime kloniranega elementa. Izvirni element ostane nespremenjen."
 msgid "Collapse"
 msgstr "Skrči"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "Izvedba z enim klikom"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "Preskoči pojavno okno dialoga aktivnosti in takoj pošlji."
+

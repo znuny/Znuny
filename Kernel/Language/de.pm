@@ -1731,6 +1731,8 @@ sub Data {
         'Required Lock' => 'Erforderliche Sperre',
         'The selected required lock does not exist.' => 'Die ausgewählte Sperre existiert nicht.',
         'This field is required for activitiy dialogs with a scope.' => 'Dieses Feld ist für Aktivitäts-Dialoge mit einem Geltungsbereich erforderlich.',
+        'One-click execution' => 'Ein-Klick-Ausführung',
+        'Skip the activity dialog popup and submit immediately.' => 'Das Popup des Aktivitäts-Dialogs überspringen und sofort absenden.',
         'Submit Advice Text' => 'Hinweistext beim Absenden',
         'Submit Button Text' => 'Hinweistext für die Schaltfläche "Absenden"',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>

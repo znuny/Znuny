@@ -25549,3 +25549,11 @@ msgstr "يرجى إدخال اسم للعنصر المستنسخ. يبقى ال�
 msgid "Collapse"
 msgstr "طي"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "تنفيذ بنقرة واحدة"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "تخطَّ نافذة حوار النشاط المنبثقة وأرسل فوراً."
+

@@ -25573,3 +25573,11 @@ msgstr "Bitte geben Sie einen Namen für das geklonte Element ein. Das ursprüng
 msgid "Collapse"
 msgstr "Zuklappen"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "Ein-Klick-Ausführung"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "Das Popup des Aktivitäts-Dialogs überspringen und sofort absenden."
+

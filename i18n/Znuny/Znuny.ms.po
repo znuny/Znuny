@@ -25563,3 +25563,11 @@ msgstr "Sila masukkan nama untuk elemen yang diklon. Elemen asal kekal tidak ber
 msgid "Collapse"
 msgstr "Kuncupkan"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "Pelaksanaan satu klik"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "Langkau pop timbul dialog aktiviti dan hantar serta-merta."
+

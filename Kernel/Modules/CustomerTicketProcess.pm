@@ -322,6 +322,30 @@ sub Run {
             GetParam        => $GetParam,
         );
     }
+    elsif ( $Self->{Subaction} eq 'ActivityDialogOneClick' && $ProcessEntityID ) {
+        $LayoutObject->ChallengeTokenCheck( Type => 'Customer' );
+
+        my $ActivityDialogConfig = $ActivityDialogObject->ActivityDialogGet(
+            ActivityDialogEntityID => $GetParam->{ActivityDialogEntityID},
+            Interface              => 'CustomerInterface',
+        );
+
+        if ( !$ActivityDialogConfig || !$ActivityDialogConfig->{OneClickExecution} ) {
+            return $Self->_OutputActivityDialog(
+                %Param,
+                ProcessEntityID => $ProcessEntityID,
+                GetParam        => $GetParam,
+            );
+        }
+
+        return $Self->_StoreActivityDialog(
+            %Param,
+            ProcessName       => $ProcessList->{$ProcessEntityID},
+            ProcessEntityID   => $ProcessEntityID,
+            GetParam          => $GetParam,
+            OneClickExecution => 1,
+        );
+    }
     if ( $Self->{Subaction} eq 'DisplayActivityDialog' && $ProcessEntityID ) {
 
         return $Self->_OutputActivityDialog(
@@ -3493,8 +3517,13 @@ sub _StoreActivityDialog {
             # Will be extended later on for ACL Checking:
             my $PossibleValuesFilter;
 
-            # if we have an invisible field, use configuration default value
-            if ( $ActivityDialog->{Fields}->{$CurrentField}{Display} == 0 ) {
+            # if we have an invisible field, or a one-click dialog without a rendered form,
+            # use configuration default value
+            if (
+                $ActivityDialog->{Fields}->{$CurrentField}{Display} == 0
+                || $Param{OneClickExecution}
+                )
+            {
                 $TicketParam{$CurrentField} = $ActivityDialog->{Fields}->{$CurrentField}->{DefaultValue}
                     || '';
             }
@@ -4180,9 +4209,17 @@ sub _StoreActivityDialog {
     # else (new ticket) just go to zoom to show the new ticket
     if ($UpdateTicketID) {
 
+        my $URL = "Action=CustomerTicketZoom;TicketID=$UpdateTicketID";
+
+        if ( $Param{OneClickExecution} && $LinkTarget ne 'AsPopup' ) {
+            return $LayoutObject->Redirect(
+                OP => $URL,
+            );
+        }
+
         # load new URL in parent window and close popup
         return $LayoutObject->CustomerPopupClose(
-            URL => "Action=CustomerTicketZoom;TicketID=$UpdateTicketID",
+            URL => $URL,
         );
     }
 

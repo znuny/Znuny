@@ -434,7 +434,31 @@ sub Run {
             GetParam        => $GetParam,
         );
     }
-    if ( $Self->{Subaction} eq 'DisplayActivityDialog' && $ProcessEntityID ) {
+    elsif ( $Self->{Subaction} eq 'ActivityDialogOneClick' && $ProcessEntityID ) {
+        $LayoutObject->ChallengeTokenCheck();
+
+        my $ActivityDialogConfig = $ActivityDialogObject->ActivityDialogGet(
+            ActivityDialogEntityID => $GetParam->{ActivityDialogEntityID},
+            Interface              => 'AgentInterface',
+        );
+
+        if ( !$ActivityDialogConfig || !$ActivityDialogConfig->{OneClickExecution} ) {
+            return $Self->_OutputActivityDialog(
+                %Param,
+                ProcessEntityID => $ProcessEntityID,
+                GetParam        => $GetParam,
+            );
+        }
+
+        return $Self->_StoreActivityDialog(
+            %Param,
+            ProcessName       => $ProcessList->{$ProcessEntityID},
+            ProcessEntityID   => $ProcessEntityID,
+            GetParam          => $GetParam,
+            OneClickExecution => 1,
+        );
+    }
+    elsif ( $Self->{Subaction} eq 'DisplayActivityDialog' && $ProcessEntityID ) {
 
         return $Self->_OutputActivityDialog(
             %Param,
@@ -4906,8 +4930,13 @@ sub _StoreActivityDialog {
             # Will be extended later on for ACL Checking:
             my $PossibleValuesFilter;
 
-            # if we have an invisible field, use config's default value
-            if ( $ActivityDialog->{Fields}->{$CurrentField}->{Display} == 0 ) {
+            # if we have an invisible field, or a one-click dialog without a rendered form,
+            # use config's default value
+            if (
+                $ActivityDialog->{Fields}->{$CurrentField}->{Display} == 0
+                || $Param{OneClickExecution}
+                )
+            {
                 if (
                     defined $ActivityDialog->{Fields}->{$CurrentField}->{DefaultValue}
                     && length $ActivityDialog->{Fields}->{$CurrentField}->{DefaultValue}
@@ -5971,9 +6000,17 @@ sub _StoreActivityDialog {
     # else (new ticket) just go to zoom to show the new ticket
     if ($UpdateTicketID) {
 
+        my $URL = "Action=AgentTicketZoom;TicketID=$UpdateTicketID";
+
+        if ( $Param{OneClickExecution} && $LinkTarget ne 'AsPopup' ) {
+            return $LayoutObject->Redirect(
+                OP => $URL,
+            );
+        }
+
         # load new URL in parent window and close pop-up
         return $LayoutObject->PopupClose(
-            URL => "Action=AgentTicketZoom;TicketID=$UpdateTicketID",
+            URL => $URL,
         );
     }
 

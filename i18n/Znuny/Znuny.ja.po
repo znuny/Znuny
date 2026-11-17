@@ -25572,3 +25572,11 @@ msgstr "複製する要素の名前を入力してください。元の要素は
 msgid "Collapse"
 msgstr "折りたたむ"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "ワンクリック実行"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "アクティビティダイアログのポップアップをスキップして、すぐに送信します。"
+

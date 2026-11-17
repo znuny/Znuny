@@ -25549,3 +25549,11 @@ msgstr "Veuillez saisir un nom pour l'élément cloné. L'élément d'origine re
 msgid "Collapse"
 msgstr "Réduire"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "Exécution en un clic"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "Ignorer la fenêtre contextuelle de la boîte de dialogue d’activité et soumettre immédiatement."
+

@@ -25550,3 +25550,11 @@ msgstr "נא להזין שם לפריט המשוכפל. הפריט המקורי 
 msgid "Collapse"
 msgstr "כווץ"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "ביצוע בלחיצה אחת"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "דלג על חלון הקופץ של דיאלוג הפעילות ושלח מיד."
+

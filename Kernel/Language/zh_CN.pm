@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.858096297473383;
+    $Self->{Completeness}        = 0.858141382049245;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1737,6 +1737,8 @@ sub Data {
         'Required Lock' => '需要锁定',
         'The selected required lock does not exist.' => '选择的需要锁定不存在（无法锁定）。',
         'This field is required for activitiy dialogs with a scope.' => '',
+        'One-click execution' => '一键执行',
+        'Skip the activity dialog popup and submit immediately.' => '跳过活动对话框弹窗，立即提交。',
         'Submit Advice Text' => '提交按钮的建议文本',
         'Submit Button Text' => '提交按钮的文本',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>

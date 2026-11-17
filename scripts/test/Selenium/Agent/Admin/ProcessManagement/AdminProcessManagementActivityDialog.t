@@ -75,7 +75,7 @@ $Selenium->RunTest(
         # Check AdminProcessManagementActivityDialog screen.
         for my $ID (
             qw(Name Interface DescriptionShort DescriptionLong Permission RequiredLock SubmitAdviceText
-            SubmitButtonText FilterAvailableFields AvailableFields AssignedFields Submit)
+            SubmitButtonText OneClickExecution FilterAvailableFields AvailableFields AssignedFields Submit)
             )
         {
             $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#$ID').length" );

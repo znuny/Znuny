@@ -25566,3 +25566,11 @@ msgstr "โปรดป้อนชื่อสำหรับองค์ปร
 msgid "Collapse"
 msgstr "ยุบ"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "การดำเนินการคลิกเดียว"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "ข้ามป๊อปอัปของกล่องโต้ตอบกิจกรรมและส่งทันที"
+

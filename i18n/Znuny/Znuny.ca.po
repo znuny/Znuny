@@ -25549,3 +25549,11 @@ msgstr "Introduïu un nom per a l'element clonat. L'element original es manté s
 msgid "Collapse"
 msgstr "Plega"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "Execució amb un clic"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "Omet la finestra emergent del diàleg d’activitat i envia’l immediatament."
+

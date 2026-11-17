@@ -25549,3 +25549,11 @@ msgstr "Zadajte názov klonovaného prvku. Pôvodný prvok zostane nezmenený."
 msgid "Collapse"
 msgstr "Zbaliť"
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "Vykonanie jedným kliknutím"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "Preskočiť vyskakovacie okno dialógu aktivity a okamžite odoslať."
+

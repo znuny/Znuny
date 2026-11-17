@@ -1623,9 +1623,10 @@ sub MaskAgentZoom {
                         Data => {
                             ActivityDialogEntityID
                                 => $NextActivityDialogs->{$NextActivityDialogKey},
-                            Name            => $ActivityDialogData->{Name},
-                            ProcessEntityID => $Ticket{$ProcessEntityIDField},
-                            TicketID        => $Ticket{TicketID},
+                            Name              => $ActivityDialogData->{Name},
+                            ProcessEntityID   => $Ticket{$ProcessEntityIDField},
+                            TicketID          => $Ticket{TicketID},
+                            OneClickExecution => $ActivityDialogData->{OneClickExecution} || 0,
                         },
                     );
                 }
