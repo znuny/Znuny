@@ -1975,7 +1975,14 @@ sub _Replacements {
         # - if ArticleID is sent, data is from selected article.
         # - if ArticleID is not sent, data is from last customer/agent/any article.
         if ( $Param{Template} && $Ticket{TicketID} ) {
-            if ( grep { $_ eq 'Note' } @{ $Param{Template} } ) {
+
+            # Note screens pass no article data, so the last agent/customer article is used.
+            # Skip this for multi-type templates if an article was passed (e.g. AgentTicketCompose),
+            # otherwise the selected article in the caller's data hash would be overwritten.
+            my $IsNoteTemplate     = grep { $_ eq 'Note' } @{ $Param{Template} };
+            my $IsOnlyNoteTemplate = $IsNoteTemplate && scalar @{ $Param{Template} } == 1;
+
+            if ( $IsOnlyNoteTemplate || ( $IsNoteTemplate && !$Param{Data}->{ArticleID} ) ) {
 
                 # Get last article from agent.
                 my @AgentArticles = $ArticleObject->ArticleList(

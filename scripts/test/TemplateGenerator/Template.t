@@ -255,10 +255,11 @@ my $ArticleTo   = 'Supplier <supplier@example.com>';
 
 # Define for which template types certain tags are supported.
 my %Supported = (
-    Answer           => 1,
-    Forward          => 1,
-    Note             => 1,
-    'Answer,Forward' => 1,
+    Answer                      => 1,
+    Forward                     => 1,
+    Note                        => 1,
+    'Answer,Forward'            => 1,
+    'Answer,Email,Forward,Note' => 1,
 );
 
 my $AgentBodyTemplate
@@ -697,7 +698,7 @@ my @Tests = (
 my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');
 
 my @Types = qw( Answer Forward Create Note Email PhoneCall );
-push @Types, ( 'Email,PhoneCall', 'Answer,Forward', );
+push @Types, ( 'Email,PhoneCall', 'Answer,Forward', 'Answer,Email,Forward,Note', );
 
 TEST:
 my $OldRichTextSetting = 42;    # random non-boolean value
@@ -819,6 +820,77 @@ for my $Test (@Tests) {
         );
     }
 }
+
+# Template types including Note: with a selected article (e.g. AgentTicketCompose)
+# and without article data (e.g. AgentTicketNote).
+$HelperObject->ConfigSettingChange(
+    Valid => 1,
+    Key   => 'Frontend::RichText',
+    Value => 0,
+);
+$Kernel::OM->ObjectsDiscard(
+    Objects => ['Kernel::System::TemplateGenerator']
+);
+my $TemplateGeneratorObject = $Kernel::OM->Get('Kernel::System::TemplateGenerator');
+
+my %ComposeData = ( %TicketData, %{ $Articles[3] } );
+
+my @NoteTemplateTests = (
+    {
+        Name           => 'Selected article is used instead of the last customer article',
+        TemplateType   => 'Answer,Email,Forward,Note',
+        Data           => \%ComposeData,
+        ExpectedResult => "Test: $Articles[3]->{Subject}|> customer-Article#4-Line1|-",
+    },
+    {
+        Name           => 'Last agent/customer articles are used without article data',
+        TemplateType   => 'Answer,Note',
+        ExpectedResult => "Test: $LastCustomerSubject|$LastCustomerBody1|$LastAgentSubject",
+    },
+    {
+        Name           => 'Last agent/customer articles are used without article data',
+        TemplateType   => 'Note',
+        ExpectedResult => "Test: $LastCustomerSubject|$LastCustomerBody1|$LastAgentSubject",
+    },
+);
+
+for my $Test (@NoteTemplateTests) {
+    my $TemplateID = $StandardTemplateObject->StandardTemplateAdd(
+        Name         => $HelperObject->GetRandomID() . '-StandardTemplate',
+        Template     => 'Test: <OTRS_CUSTOMER_SUBJECT>|<OTRS_CUSTOMER_BODY[1]>|<OTRS_AGENT_SUBJECT>',
+        ContentType  => 'text/plain; charset=utf-8',
+        TemplateType => $Test->{TemplateType},
+        ValidID      => 1,
+        UserID       => 1,
+    );
+    $Self->True(
+        $TemplateID,
+        "'$Test->{TemplateType}' type - TemplateID $TemplateID is created",
+    );
+
+    my $Template = $TemplateGeneratorObject->Template(
+        TemplateID => $TemplateID,
+        TicketID   => $TicketID,
+        Data       => $Test->{Data},
+        UserID     => 1,
+    );
+    $Self->Is(
+        $Template,
+        $Test->{ExpectedResult},
+        "'$Test->{TemplateType}' type - $Test->{Name}",
+    );
+}
+
+$Self->Is(
+    $ComposeData{Subject},
+    $Articles[3]->{Subject},
+    'Subject of the passed article data is not overwritten',
+);
+$Self->Is(
+    $ComposeData{Body},
+    $Articles[3]->{Body},
+    'Body of the passed article data is not overwritten',
+);
 
 # Cleanup is done by RestoreDatabase.
 
