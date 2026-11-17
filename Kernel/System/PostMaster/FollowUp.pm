@@ -11,14 +11,15 @@ package Kernel::System::PostMaster::FollowUp;
 
 use strict;
 use warnings;
+use utf8;
 
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::DateTime',
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
-    'Kernel::System::Log',
     'Kernel::System::Service',
+    'Kernel::System::State',
     'Kernel::System::Ticket',
     'Kernel::System::Ticket::Article',
     'Kernel::System::User',
@@ -111,6 +112,54 @@ sub Run {
         UserID => $Ticket{OwnerID},
     );
 
+    # Resolve the follow-up state before the lock decision. A kept or still-closed
+    # state must not lock the ticket to the last owner.
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $StateObject  = $Kernel::OM->Get('Kernel::System::State');
+
+    # set state
+    my $State = $ConfigObject->Get('PostmasterFollowUpState') || 'open';
+    if (
+        $Ticket{StateType} =~ /^close/
+        && $ConfigObject->Get('PostmasterFollowUpStateClosed')
+        )
+    {
+        $State = $ConfigObject->Get('PostmasterFollowUpStateClosed');
+    }
+
+    if ( $GetParam{'X-OTRS-FollowUp-StateID'} ) {
+        $GetParam{'X-OTRS-FollowUp-State'} = $StateObject->StateLookup(
+            StateID => $GetParam{'X-OTRS-FollowUp-StateID'},
+        );
+    }
+
+    if ( $GetParam{'X-OTRS-FollowUp-State'} ) {
+        $State = $GetParam{'X-OTRS-FollowUp-State'};
+    }
+
+    my $KeepStateHeader = $ConfigObject->Get('KeepStateHeader') || 'X-OTRS-FollowUp-State-Keep';
+
+    # Same conditions as TicketStateSet below, plus a different target state name.
+    my $StateWillChange = 0;
+    if (
+        ( $Ticket{StateType} !~ /^new/ || $GetParam{'X-OTRS-FollowUp-State'} )
+        && !$GetParam{$KeepStateHeader}
+        && $State ne $Ticket{State}
+        )
+    {
+        $StateWillChange = 1;
+    }
+
+    my $NextStateLeavesClosed = 0;
+    if ($StateWillChange) {
+        my %NextState = $StateObject->StateGet(
+            Name => $State,
+        );
+        if ( %NextState && ( $NextState{TypeName} // '' ) !~ /^close/i ) {
+            $NextStateLeavesClosed = 1;
+        }
+    }
+
     # 1) check user, out of office, unlock ticket
     if ( $UserInfo{OutOfOfficeMessage} ) {
 
@@ -128,11 +177,11 @@ sub Run {
         );
     }
 
-    # 2) check user, just lock it if user is valid and ticket was closed
+    # 2) check user, just lock it if user is valid and the follow-up leaves the closed state
     elsif ( $UserInfo{ValidID} eq 1 ) {
 
         # set lock (if ticket should be locked on follow up)
-        if ( $Lock && $Ticket{StateType} =~ /^close/i ) {
+        if ( $Lock && $Ticket{StateType} =~ /^close/i && $NextStateLeavesClosed ) {
 
             $TicketObject->TicketLockSet(
                 TicketID => $Param{TicketID},
@@ -145,6 +194,15 @@ sub Run {
                 Priority      => 'Notice',
                 Key           => 'Kernel::System::PostMaster::FollowUp',
                 Value         => "Ticket [$Param{Tn}] still locked.",
+            );
+        }
+        elsif ( $Lock && $Ticket{StateType} =~ /^close/i ) {
+
+            $Self->{CommunicationLogObject}->ObjectLog(
+                ObjectLogType => 'Message',
+                Priority      => 'Notice',
+                Key           => 'Kernel::System::PostMaster::FollowUp',
+                Value         => "Ticket [$Param{Tn}] not locked, follow-up keeps a closed state.",
             );
         }
     }
@@ -166,23 +224,6 @@ sub Run {
         );
     }
 
-    # get config object
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-
-    # set state
-    my $State = $ConfigObject->Get('PostmasterFollowUpState') || 'open';
-    if (
-        $Ticket{StateType} =~ /^close/
-        && $ConfigObject->Get('PostmasterFollowUpStateClosed')
-        )
-    {
-        $State = $ConfigObject->Get('PostmasterFollowUpStateClosed');
-    }
-    if ( $GetParam{'X-OTRS-FollowUp-State'} ) {
-        $State = $GetParam{'X-OTRS-FollowUp-State'};
-    }
-
-    my $KeepStateHeader = $ConfigObject->Get('KeepStateHeader') || 'X-OTRS-FollowUp-State-Keep';
     if (
         ( $Ticket{StateType} !~ /^new/ || $GetParam{'X-OTRS-FollowUp-State'} )
         && !$GetParam{$KeepStateHeader}
