@@ -2088,7 +2088,16 @@ sub _SQLSortPrepare {
 
         return '' if !defined $Self->{Columns}->{$CurrentSortBy};
 
-        push @OrderBySQL, $Self->{Columns}->{$CurrentSortBy}->{Column} . ' ' . $OrderBy->[$Index];
+        my $Direction = uc( $OrderBy->[$Index] // '' );
+        if ( $Direction ne 'ASC' && $Direction ne 'DESC' ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Priority => 'error',
+                Message  => 'Need valid OrderBy direction (ASC or DESC)!',
+            );
+            return '';
+        }
+
+        push @OrderBySQL, $Self->{Columns}->{$CurrentSortBy}->{Column} . ' ' . $Direction;
     }
 
     $SQLSort .= ' ORDER BY ' . join( ', ', @OrderBySQL );
