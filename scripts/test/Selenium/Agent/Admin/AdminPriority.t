@@ -169,6 +169,29 @@ $Selenium->RunTest(
             "AdminValidFilter - All invalid entries are displayed again.",
         );
 
+        # The last state of the valid filter is stored in the agent's preferences and restored on the next page load.
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $.active == 0' );
+        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminPriority");
+
+        $Self->False(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are still not displayed after reload.",
+        );
+        $Self->True(
+            $Selenium->execute_script("return \$('#ValidFilter').parent().hasClass('ValidFilterActive')"),
+            "AdminValidFilter - Valid filter is still active after reload.",
+        );
+
+        $Selenium->find_element( "#ValidFilter", 'css' )->click();
+        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && $.active == 0' );
+        $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AdminPriority");
+
+        $Self->True(
+            $Selenium->find_element( "tr.Invalid", 'css' )->is_displayed(),
+            "AdminValidFilter - All invalid entries are still displayed after reload.",
+        );
+
         # Go to new priority again.
         $Selenium->find_element( $RandomID, 'link_text' )->VerifiedClick();
         $Selenium->WaitFor(
