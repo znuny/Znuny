@@ -1,4 +1,5 @@
 # 7.5.1 2026-??-??
+ - 2026-11-18 Changed: Excess activity notifications will now be cleaned up during migration.
  - 2026-11-17 Added: Optional one-click process dialogs so activity buttons can skip the popup when no input is needed.
  - 2026-11-17 Changed: Updated tooltip positioning logic in AppointmentCalendar and improved CSS styles for better visibility and layout.
  - 2026-11-17 Added: Process management: Clone activity dialogs and transition actions from the Edit Activity and Edit Path screens.

@@ -21,6 +21,7 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::HTMLUtils',
     'Kernel::System::Log',
+    'Kernel::System::Scheduler',
 );
 
 =head1 NAME
@@ -67,8 +68,6 @@ sub Add {
     my ( $Self, %Param ) = @_;
 
     my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
-    my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
-    my $LogObject       = $Kernel::OM->Get('Kernel::System::Log');
 
     my $Title = $HTMLUtilsObject->ToAscii( String => $Param{Title} );
     my $Text  = $HTMLUtilsObject->ToAscii( String => $Param{Text} );
@@ -83,18 +82,57 @@ sub Add {
         UserID   => $Param{UserID},
     );
 
-    # Trim to maximum number of entries
+    my $TrimResult = $Self->TrimToMaxKeepActivities(
+        UserID   => $Param{UserID},
+        CreateBy => $Param{CreateBy},
+    );
+    return if !defined $TrimResult;
+
+    return $ActivityID;
+}
+
+=head2 TrimToMaxKeepActivities()
+
+Deletes oldest activities for the given user and creator until the configured limit is reached.
+
+    my $DeletedCount = $ActivityObject->TrimToMaxKeepActivities(
+        UserID   => 123,
+        CreateBy => 1,
+    );
+
+Returns the number of deleted activities, 0 if none were deleted, or undef on error.
+
+=cut
+
+sub TrimToMaxKeepActivities {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(UserID CreateBy)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Need $Needed!",
+        );
+        return;
+    }
+
     my @ExistingActivities = $Self->DataListGet(
         CreateBy => $Param{CreateBy},
         SortBy   => [ $Self->{Identifier}, ],
         OrderBy  => [ 'ASC', ],
         UserID   => $Param{UserID},
+        Cache    => 0,
     );
 
-    my $ActivityConfig             = $ConfigObject->Get('Activity')       // {};
-    my $MaxKeepActivities          = $ActivityConfig->{MaxKeepActivities} // 50;
+    my $ActivityConfig             = $ConfigObject->Get('Activity') // {};
+    my $MaxKeepActivities          = $Param{MaxKeepActivities} // $ActivityConfig->{MaxKeepActivities} // 50;
     my $NumberOfActivitiesToDelete = ( scalar @ExistingActivities ) - $MaxKeepActivities;
-    return $ActivityID if $NumberOfActivitiesToDelete <= 0;
+    return 0 if $NumberOfActivitiesToDelete <= 0;
 
     my @ActivitiesToDelete = splice @ExistingActivities, 0, $NumberOfActivitiesToDelete;
     for my $ActivityToDelete (@ActivitiesToDelete) {
@@ -104,7 +142,63 @@ sub Add {
         );
     }
 
-    return $ActivityID;
+    return scalar @ActivitiesToDelete;
+}
+
+=head2 CleanupExcessActivities()
+
+Schedules deletion of oldest activities for all user and creator combinations until the configured limit is reached.
+
+    my $ScheduledTaskCount = $ActivityObject->CleanupExcessActivities();
+
+Returns the total number of scheduled tasks, or undef on error.
+
+=cut
+
+sub CleanupExcessActivities {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject       = $Kernel::OM->Get('Kernel::System::Log');
+    my $SchedulerObject = $Kernel::OM->Get('Kernel::System::Scheduler');
+
+    my $Groups = $Self->{DBObject}->SelectAll(
+        SQL => '
+            SELECT DISTINCT user_id, create_by
+            FROM   activity',
+    );
+
+    return 0 if !$Groups || !@{$Groups};
+
+    my $ScheduledTasks = 0;
+
+    GROUP:
+    for my $Group ( @{$Groups} ) {
+        my $Success = $SchedulerObject->TaskAdd(
+            Type                     => 'AsynchronousExecutor',
+            Name                     => "Activity-TrimToMaxKeepActivities-UserID-$Group->[0]-CreateBy-$Group->[1]",
+            MaximumParallelInstances => 1,
+            Data                     => {
+                Object   => ref $Self,
+                Function => 'TrimToMaxKeepActivities',
+                Params   => {
+                    UserID   => $Group->[0],
+                    CreateBy => $Group->[1],
+                },
+            },
+        );
+
+        if ( !$Success ) {
+            $LogObject->Log(
+                Priority => 'error',
+                Message  => "Could not schedule activity cleanup for UserID '$Group->[0]' and CreateBy '$Group->[1]'.",
+            );
+            return;
+        }
+
+        $ScheduledTasks++;
+    }
+
+    return $ScheduledTasks;
 }
 
 =head2 GetLink()

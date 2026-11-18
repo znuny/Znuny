@@ -276,6 +276,10 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Znuny::MigrateSysConfigSettings',
         },
         {
+            Message => 'Clean up excess activities',
+            Module  => 'scripts::Migration::Znuny::CleanupActivities',
+        },
+        {
             Message => 'Migrate ZnunyTimeZone from legacy OTRSTimeZone',
             Module  => 'scripts::Migration::Znuny::MigrateZnunyTimeZoneFromLegacyOTRSTimeZone',
         },
