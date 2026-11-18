@@ -1025,6 +1025,56 @@ sub Run {
         }
     }
 
+    # Show a small advisory feed on the agent/admin dashboard. Only tickets
+    # explicitly visible to the logged-in user are considered; suggestions
+    # additionally enforce tenant ownership and module entitlements.
+    if ( $Self->{Action} eq 'AgentDashboard' ) {
+        my $Tenant = $Kernel::OM->Get('Kernel::System::SaaS::Tenant');
+        my $Context = $Tenant->ContextGet();
+        if ( $Context && $Context->{UserID} == $Self->{UserID}
+            && $Tenant->ModuleEnabled( Module => 'ticket_ai' ) )
+        {
+            my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+            my @Recent = $TicketObject->TicketSearch(
+                Result => 'ARRAY',
+                UserID => $Self->{UserID},
+                Permission => 'ro',
+                Limit => 3,
+                SortBy => 'Changed',
+                OrderBy => 'Down',
+                CacheTTL => 60,
+            );
+            my $Recommender = $Kernel::OM->Get(
+                'Kernel::System::SaaS::TicketRecommendations'
+            );
+            for my $TicketID (@Recent) {
+                my $Recommendation = $Recommender->Recommend(
+                    TicketID => $TicketID,
+                    UserID   => $Self->{UserID},
+                );
+                next if !$Recommendation;
+                my %Ticket = $TicketObject->TicketGet(
+                    TicketID => $TicketID,
+                    UserID   => $Self->{UserID},
+                );
+                next if !%Ticket;
+                $LayoutObject->Block(
+                    Name => 'TeztarifDashboardAI',
+                ) if !$Param{TeztarifAIHeaderRendered}++;
+                $LayoutObject->Block(
+                    Name => 'TeztarifDashboardAITicket',
+                    Data => {
+                        TicketID         => $TicketID,
+                        Title            => $Ticket{Title},
+                        Category         => $Recommendation->{Category},
+                        SuggestedOwnerID => $Recommendation->{SuggestedOwnerID},
+                        SimilarCount     => scalar @{ $Recommendation->{SimilarTickets} },
+                    },
+                );
+            }
+        }
+    }
+
     my $Output = $LayoutObject->Header();
     $Output .= $LayoutObject->NavigationBar();
     $Output .= $LayoutObject->Output(
