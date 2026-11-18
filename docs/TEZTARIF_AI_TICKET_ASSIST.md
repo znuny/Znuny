@@ -21,3 +21,19 @@ This branch introduces a zero-cost, deterministic triage helper, **not a trained
 - The TicketAssist Perl module provides rule-based *advisory* categorization only.
 - Real LLM/ML, retrieval indexes, provider credentials, UI and event wiring are **not implemented in this PR**.
 - The SaaS tenant foundation remains pending integration and comprehensive denial testing.
+
+## Ticket recommendations and dashboard wiring (experimental)
+
+- `Kernel::System::SaaS::TicketRecommendations` provides permission-filtered lexical similarity, possible duplicate ticket links, resolved-ticket pointers and historical technician suggestions.
+- `AgentTicketZoom` shows the panel once the ticket has passed ro permission checks.
+- `AgentDashboard` shows a small feed of recently changed tickets with suggestions.
+- These recommendations are **NOT** a generative LLM, trained semantic embedding model or automated assignment system.
+- No write operations are performed. Linked tickets must still pass authorization on navigation.
+- Both panels fail closed without an active tenant context and the `ticket_ai` module license.
+- Provisioning the `ticket_ai` module catalog entry and plan entitlements is necessary; no default enablement is provided.
+- Tenant context is not globally wired yet in the parent stacked PRs. Until proper request lifecycle integration, the panels remain hidden.
+- Validate rendering and performance under realistic ticket loads and multiple database engines. Current repository CI must pass before merge.
+
+### Planned real-model integration
+
+Attach a provider-agnostic adapter **only after** tenant-scoped retrieval and audit controls are complete. Supply authorized, redacted ticket context. Require grounded output with linked source ticket IDs, provider timeouts, per-tenant usage limits and explicit human acceptance. Do not send raw tickets to a third-party AI provider without configuring access and consent.
