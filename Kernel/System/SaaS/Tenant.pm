@@ -170,7 +170,25 @@ sub ModuleEnabled {
     return if !$Param{Module};
 
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+     # Module overrides cannot bypass expiry or cancellation. Check the
+    # subscription first, regardless of the requested module.
     return if !$DBObject->Prepare(
+        SQL => <<'SQL',
+SELECT id
+FROM saas_subscription
+WHERE tenant_id = ?
+    AND status IN ('active', 'trial')
+    AND start_time <= current_timestamp
+    AND (end_time IS NULL OR end_time > current_timestamp)
+ORDER BY id DESC
+SQL
+        Bind  => [ \$Self->{TenantID} ],
+        Limit => 1,
+    );
+    my @ActiveSubscription = $DBObject->FetchrowArray();
+    return 0 if !@ActiveSubscription;
+
+   return if !$DBObject->Prepare(
         SQL => <<'SQL',
 SELECT tm.enabled
 FROM saas_tenant_module tm
@@ -189,15 +207,12 @@ SELECT pm.enabled
 FROM saas_subscription s
 INNER JOIN saas_plan_module pm ON pm.plan_id = s.plan_id
 INNER JOIN saas_module m ON m.id = pm.module_id
-WHERE s.tenant_id = ?
-    AND s.status IN ('active', 'trial')
-    AND s.start_time <= current_timestamp
-    AND (s.end_time IS NULL OR s.end_time > current_timestamp)
+WHERE s.id = ?
     AND m.code = ?
     AND m.valid_id = 1
 ORDER BY s.id DESC
 SQL
-        Bind  => [ \$Self->{TenantID}, \$Param{Module} ],
+        Bind  => [ \$ActiveSubscription[0], \$Param{Module} ],
         Limit => 1,
     );
     my @Plan = $DBObject->FetchrowArray();
