@@ -2084,6 +2084,33 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         border-radius: var(--border-radius-xs);
     }
 
+    /* One options menu stays open after a click. On a touch device, hover must not keep the previous menu visible. */
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu.Opened .ActionMenuList,
+    .SidebarColumn .WidgetSimple .Header .ActionMenu.Opened .ActionMenuList {
+        display: flex;
+    }
+
+    body.TouchDevice .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu:hover .ActionMenuList,
+    body.TouchDevice .SidebarColumn .WidgetSimple .Header .ActionMenu:hover .ActionMenuList {
+        display: none;
+    }
+
+    body.TouchDevice .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu.Opened .ActionMenuList,
+    body.TouchDevice .SidebarColumn .WidgetSimple .Header .ActionMenu.Opened .ActionMenuList {
+        display: flex;
+    }
+
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu.Dismissed .ActionMenuList,
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu.Dismissed:hover .ActionMenuList,
+    .SidebarColumn .WidgetSimple .Header .ActionMenu.Dismissed .ActionMenuList,
+    .SidebarColumn .WidgetSimple .Header .ActionMenu.Dismissed:hover .ActionMenuList,
+    body.TouchDevice .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu.Dismissed .ActionMenuList,
+    body.TouchDevice .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu.Dismissed:hover .ActionMenuList,
+    body.TouchDevice .SidebarColumn .WidgetSimple .Header .ActionMenu.Dismissed .ActionMenuList,
+    body.TouchDevice .SidebarColumn .WidgetSimple .Header .ActionMenu.Dismissed:hover .ActionMenuList {
+        display: none;
+    }
+
     .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .ActionMenuList li {
         height: auto;
         width: auto;

@@ -1639,6 +1639,72 @@ Core.Agent.Dashboard = (function (TargetNS) {
 
     /**
      * @private
+     * @name DismissDashboardWidgetMenu
+     * @memberof Core.Agent.Dashboard
+     * @function
+     * @param {jQueryObject} $Menu - Filter dropdown or options menu to hide.
+     * @description
+     *      Hides a menu even when the pointer is still resting on it.
+     */
+    function DismissDashboardWidgetMenu ($Menu) {
+        $Menu.removeClass('Opened').addClass('Dismissed');
+    }
+
+    /**
+     * @private
+     * @name CloseDashboardWidgetMenus
+     * @memberof Core.Agent.Dashboard
+     * @function
+     * @description
+     *      Closes every open dashboard filter list and options menu.
+     */
+    function CloseDashboardWidgetMenus () {
+        DismissDashboardWidgetMenu($('.DashboardActions.dropdown-container.Opened'));
+        DismissDashboardWidgetMenu($('.WidgetSimple .Header .ActionMenu.Opened'));
+    }
+
+    /**
+     * @private
+     * @name IsDashboardWidgetMenuOpen
+     * @memberof Core.Agent.Dashboard
+     * @function
+     * @param {jQueryObject} $Menu - Filter dropdown or options menu.
+     * @returns {Boolean} True if the menu list is currently shown.
+     * @description
+     *      A menu counts as open when a click opened it, or when the pointer is resting on it.
+     */
+    function IsDashboardWidgetMenuOpen ($Menu) {
+        if ($Menu.hasClass('Opened')) {
+            return true;
+        }
+
+        return $Menu.find('.dropdown-menu, .ActionMenuList').filter(':visible').length > 0;
+    }
+
+    /**
+     * @private
+     * @name ToggleDashboardWidgetMenu
+     * @memberof Core.Agent.Dashboard
+     * @function
+     * @param {jQueryObject} $Menu - Filter dropdown or options menu to open or close.
+     * @description
+     *      Opens one dashboard menu and closes any other open dashboard menu.
+     */
+    function ToggleDashboardWidgetMenu ($Menu) {
+        var WasOpen = IsDashboardWidgetMenuOpen($Menu);
+
+        CloseDashboardWidgetMenus();
+
+        if (WasOpen) {
+            DismissDashboardWidgetMenu($Menu);
+            return;
+        }
+
+        $Menu.removeClass('Dismissed').addClass('Opened');
+    }
+
+    /**
+     * @private
      * @name DashboardTicketWidgetFilter
      * @memberof Core.Agent.Dashboard
      * @param {Object} WidgetFilterData - Hash with different config options.
@@ -1663,14 +1729,27 @@ Core.Agent.Dashboard = (function (TargetNS) {
         $('#Dashboard' + Core.App.EscapeSelector(WidgetFilterData.Name) + '-box').find('h2').after($FilterContainer);
         $('#Dashboard' + Core.App.EscapeSelector(WidgetFilterData.Name) + '-box').find('.HeaderFilter').prepend($DashboardActions);
 
-        // additional click event for dropdown-menu to show/hide
-        $('#Dashboard' + Core.App.EscapeSelector(WidgetFilterData.Name) + '-box').find('.DashboardActions').off('click.DashboardActions').on('click.DashboardActions', function() {
-            $(this).find('.Tab.Actions').toggle();
+        // A click opens this filter list and closes any filter list or options menu already open.
+        $('#Dashboard' + Core.App.EscapeSelector(WidgetFilterData.Name) + '-box').find('.DashboardActions.dropdown-container').off('click.DashboardActions mouseenter.DashboardActions').on('click.DashboardActions', function (Event) {
+            var $Menu = $(this);
+
+            if ($(Event.target).closest('.dropdown-menu').length) {
+                return;
+            }
+
+            Event.preventDefault();
+            Event.stopPropagation();
+            ToggleDashboardWidgetMenu($Menu);
+        }).on('mouseenter.DashboardActions', function () {
+            $(this).removeClass('Dismissed');
         });
 
         $('#Dashboard' + Core.App.EscapeSelector(WidgetFilterData.Name) + '-box').find('.Tab.Actions li a').off('click.TabAction').on('click.TabAction', function() {
                 var Filter, AdditionalFilter = '',
                 CustomerID, CustomerUserID;
+
+                DismissDashboardWidgetMenu($(this).closest('.DashboardActions'));
+                CloseDashboardWidgetMenus();
 
                 if ($(this).parent().hasClass('AdditionalFilter')) {
                     Filter           = $(this).parent().siblings('li.Selected:not(.AdditionalFilter)').find('a').attr('data-filter');
@@ -1764,9 +1843,30 @@ Core.Agent.Dashboard = (function (TargetNS) {
      */
     TargetNS.InitDashboardWidgetBinding = function () {
 
-        // additional click event for ActionMenuList to show/hide
-        $('.WidgetSimple').find('.ActionMenu').off('click.ActionMenu').on('click.ActionMenu', function() {
-            $(this).find('.ActionMenuList').toggle();
+        // Only the menu button opens this menu. The chart download sits in the same header and must still start a file download.
+        $('.WidgetSimple').find('.ActionMenu').off('click.ActionMenu mouseenter.ActionMenu').on('mouseenter.ActionMenu', function () {
+            $(this).removeClass('Dismissed');
+        });
+
+        $('.WidgetSimple').find('.ActionMenu > .Btn-Menu-Vertical').off('click.ActionMenu').on('click.ActionMenu', function (Event) {
+            var $Menu = $(this).closest('.ActionMenu');
+
+            Event.preventDefault();
+            Event.stopPropagation();
+            ToggleDashboardWidgetMenu($Menu);
+        });
+
+        $('.WidgetSimple').find('.ActionMenu .ActionMenuList a').off('click.ActionMenuItem').on('click.ActionMenuItem', function () {
+            DismissDashboardWidgetMenu($(this).closest('.ActionMenu'));
+            CloseDashboardWidgetMenus();
+        });
+
+        $(document).off('click.DashboardWidgetMenu').on('click.DashboardWidgetMenu', function (Event) {
+            if ($(Event.target).closest('.DashboardActions.dropdown-container.Opened, .WidgetSimple .Header .ActionMenu.Opened').length) {
+                return;
+            }
+
+            CloseDashboardWidgetMenus();
         });
 
     }
