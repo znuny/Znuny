@@ -1058,6 +1058,21 @@ sub Run {
             return;
         }
 
+        # Never rely on sidebar visibility for security. Enforce mapped SaaS
+        # module access in the authenticated backend request path as well.
+        if (
+            !$Kernel::OM->Get('Kernel::System::SaaS::Navigation')->AllowedAction(
+                UserID => $UserData{UserID},
+                Action => $Param{Action},
+            )
+            )
+        {
+            $Kernel::OM->Get('Kernel::Output::HTML::Layout')->NoPermission(
+                Message => Translatable('You do not have access to this module.'),
+            );
+            return;
+        }
+
         # module permisson check
         if (
             ref $ModuleReg->{GroupRo} eq 'ARRAY'
