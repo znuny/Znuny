@@ -1047,6 +1047,7 @@ sub Run {
             my $Recommender = $Kernel::OM->Get(
                 'Kernel::System::SaaS::TicketRecommendations'
             );
+            my $RenderedAIHeader = 0;
             for my $TicketID (@Recent) {
                 my $Recommendation = $Recommender->Recommend(
                     TicketID => $TicketID,
@@ -1060,7 +1061,7 @@ sub Run {
                 next if !%Ticket;
                 $LayoutObject->Block(
                     Name => 'TeztarifDashboardAI',
-                ) if !$Param{TeztarifAIHeaderRendered}++;
+                ) if !$RenderedAIHeader++;
                 $LayoutObject->Block(
                     Name => 'TeztarifDashboardAITicket',
                     Data => {
