@@ -11,6 +11,7 @@ package Kernel::Output::HTML::Layout::Template;
 
 use strict;
 use warnings;
+use utf8;
 
 use Scalar::Util qw();
 use Template;
@@ -369,6 +370,7 @@ sub AddJSOnDocumentCompleteIfNotExists {
         return;
     }
 
+    # TODO: return if any { m{ ^ //\ Key:\ $Param{Key} \n }x } @{ $Self->{_JSOnDocumentComplete} // [] };
     my $Exists;
 
     CODEJS:

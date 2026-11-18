@@ -269,17 +269,19 @@ function CheckIFrameHeight(IFrameID) {
                                                 [% Attachment.FilesizeRaw | Localize("Filesize") %]
                                             </span>
                                         </div>
-                                        [% FOREACH Item IN Attachment.Links %]
-                                            [% IF Item.Action == "Download" %]
+                                        <div class="file-actions">
+                                            [% FOREACH Item IN Attachment.Links %]
+                                                [% IF Item.Action == "Download" %]
                                             <a class="[% Item.Class %] file-icon" href="[% Item.Link %]" title="[% Translate("Download") | html %] [% Attachment.Filename | html %]" [% Item.Target %]>
                                                 <i class="fa fa-download"></i>
                                             </a>
-                                            [% ELSIF Item.Link %]
-                                            <a class="[% Item.Class %] file-icon" href="[% Item.Link %]" title="[% Translate("View") | html %] [% Attachment.Filename | html %]" [% Item.Target %]>
+                                                [% ELSIF Item.Link %]
+                                            <a class="[% Item.Class %] file-icon" href="[% Item.Link %]" title="[% Translate("View") | html %] [% Attachment.Filename | html %]" data-attachment-name="[% Attachment.Filename | html %]" data-attachment-download-url="[% Item.DownloadLink | html %]" [% Item.Target %]>
                                                 <i class="fa fa-search"></i>
                                             </a>
+                                                [% END %]
                                             [% END %]
-                                        [% END %]
+                                        </div>
                                     </div>
                                 </li>
                             [% END %]

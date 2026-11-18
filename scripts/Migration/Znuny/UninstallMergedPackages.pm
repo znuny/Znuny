@@ -34,6 +34,12 @@ sub Run {
 
     my @PackageNames = (
 
+        # Packages newly merged into the framework for this version.
+        'Znuny-AdvancedAttachments',
+        'Znuny4OTRS-AdvancedAttachments',
+        'Znuny-ZoomArticlePDFPreview',
+        'Znuny4OTRS-ZoomArticlePDFPreview',
+
         # 'Znuny-NAME',
     );
 

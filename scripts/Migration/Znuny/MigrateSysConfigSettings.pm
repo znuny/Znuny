@@ -46,6 +46,71 @@ sub _GetMigrateSysConfigSettings {
     my ( $Self, %Param ) = @_;
 
     my %MigrateSysConfigSettings = (
+
+        # Znuny-ZoomArticlePDFPreview and its Znuny4OTRS predecessor were merged into the framework.
+        "Znuny4OTRSZoomArticlePDFPreview###Width" => {
+            UpdateName => "ArticleZoomPDFPreview###Width",
+        },
+        "Znuny4OTRSZoomArticlePDFPreview###Height" => {
+            UpdateName => "ArticleZoomPDFPreview###Height",
+        },
+        "Znuny4OTRSZoomArticlePDFPreview###TicketAttributes###ActivatePreview" => {
+            UpdateName => "ArticleZoomPDFPreview###TicketAttributes###ActivatePreview",
+        },
+        "Znuny4OTRSZoomArticlePDFPreview###TicketAttributes###ShowFirstPreview" => {
+            UpdateName => "ArticleZoomPDFPreview###TicketAttributes###ShowFirstPreview",
+        },
+
+        # Znuny-AdvancedAttachments and its Znuny4OTRS predecessor were merged into the
+        # framework's generic attachment handling.
+        "Znuny4OTRSAdvancedAttachments###ShowDuplicateFiles" => {
+            UpdateName => "Attachment###ShowDuplicateFiles",
+        },
+        "Znuny4OTRSAdvancedAttachments###DeactivateWidgetArticleCount" => {
+            UpdateName => "Attachment###DeactivateWidgetArticleCount",
+        },
+        "Znuny4OTRSAdvancedAttachments###DeactivateWidgetAttachmentCount" => {
+            UpdateName => "Attachment###DeactivateWidgetAttachmentCount",
+        },
+        "Znuny4OTRSAdvancedAttachments###ShowAttachmentsCount" => {
+            UpdateName => "Attachment###ShowAttachmentsCount",
+        },
+        "ZnunyAdvancedAttachments###ShowDuplicateFiles" => {
+            UpdateName => "Attachment###ShowDuplicateFiles",
+        },
+        "ZnunyAdvancedAttachments###EnablePreview" => {
+            UpdateName => "Attachment###EnablePreview",
+        },
+        "ZnunyAdvancedAttachments###DeactivateWidgetArticleCount" => {
+            UpdateName => "Attachment###DeactivateWidgetArticleCount",
+        },
+        "ZnunyAdvancedAttachments###DeactivateWidgetAttachmentCount" => {
+            UpdateName => "Attachment###DeactivateWidgetAttachmentCount",
+        },
+        "ZnunyAdvancedAttachments###ShowAttachmentsCount" => {
+            UpdateName => "Attachment###ShowAttachmentsCount",
+        },
+        "ZnunyAdvancedAttachments###AgentTicketZoom###ShowAttachmentsCount" => {
+            UpdateName => "Attachment###AgentTicketZoom###ShowAttachmentsCount",
+        },
+        "Frontend::Module###AgentTicketZnunyAdvancedAttachmentsList" => {
+            UpdateName => "Frontend::Module###AgentTicketAttachmentList",
+        },
+        "Loader::Module::AgentTicketZnunyAdvancedAttachmentsList###001-Default" => {
+            UpdateName => "Loader::Module::AgentTicketAttachmentList###001-Default",
+        },
+        "Loader::Agent::CommonJS###999-ZnunyAdvancedAttachments" => {
+            UpdateName           => "Loader::Agent::CommonJS###999-Attachments",
+            UpdateEffectiveValue => {
+                'Core.Znuny.AdvancedAttachments.js' => 'Core.Agent.Attachments.js',
+            },
+        },
+        "Loader::Agent::CommonCSS###999-ZnunyAdvancedAttachments" => {
+            UpdateName           => "Loader::Agent::CommonCSS###999-Attachments",
+            UpdateEffectiveValue => {
+                'Core.Znuny.AdvancedAttachments.css' => 'Core.Agent.Attachments.css',
+            },
+        },
         SessionName => {
             UpdateEffectiveValue => {
                 OTRSAgentInterface => 'ZnunyAgentInterface',

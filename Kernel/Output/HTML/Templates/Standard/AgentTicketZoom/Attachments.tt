@@ -1,0 +1,38 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+<div class="mod modSidebarWidget">
+    <div class="inner">
+        <div class="sidebarWidgetTitle">
+            <h3>[% Translate("Ticket attachments") | html %]</h3>
+        </div>
+        <div class="sidebarWidgetContent">
+            [% IF Data.Attachments %]
+                <form id="DownloadZipArchive" name="DownloadZipArchive" action="[% Env("CGIHandle") %]" method="post" class="Validate">
+                    <input type="hidden" name="Action" value="AgentTicketAttachmentList">
+                    <input type="hidden" name="Subaction" value="DownloadZipArchive" />
+                    <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]" />
+                    [% PROCESS 'AttachmentList.tt' %]
+                    <label>[% Translate("Download as ZIP archive") | html %]:</label>
+                    <div class="DownloadButtons">
+                        <button id="ZnunyTicketAttachmentsZipDownloadAll" type="submit" class="CallForAction Primary btn-primary btn-main btn-width-lg " value="DownloadAll">
+                            <span>[% Translate("All attachments") | html %]</span>
+                        </button>
+                        <div class="SelectedAttachments Hidden">
+                            <button id="ZnunyTicketAttachmentsZipDownloadSelected" type="submit" class="CallForAction Primary btn-primary btn-main btn-width-lg " value="DownloadSelected">
+                                <span>[% Translate("Selected attachments") | html %]</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            [% ELSE %]
+                <p>[% Translate("none") | html %]</p>
+            [% END %]
+        </div>
+    </div>
+</div>

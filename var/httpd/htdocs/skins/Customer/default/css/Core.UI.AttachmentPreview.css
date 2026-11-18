@@ -1,0 +1,107 @@
+/**
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+/**
+ * @package     Skin "default"
+ * @section     Attachment preview overlay
+ */
+
+@media screen,projection,tv,handheld {
+
+    /* Preview trigger links must not inherit the old thumbnail box from Core.TicketDetail.css. */
+    a.AttachmentPreview {
+        display: inline-flex;
+        height: auto;
+        width: auto;
+        border: none;
+        float: none;
+        margin: 0;
+        background: none;
+        clear: none;
+    }
+
+    /* The horizontal padding makes room for the gallery navigation, the bottom one for the caption.
+       Featherlight defaults to 5% side margins; with width: 95vw that overflows the viewport and
+       pushes the overlay off-center, so the margins are reset here. */
+    .featherlight .featherlight-content {
+        max-width: 95vw;
+        width: 95vw;
+        height: 90vh;
+        max-height: 90vh;
+        margin-right: auto;
+        margin-left: auto;
+        padding: 25px 48px 44px;
+    }
+
+    .featherlight iframe.featherlight-inner {
+        width: 100%;
+        height: 100%;
+        border: 0;
+        background: #fff;
+    }
+
+    /* Confine the gallery navigation to the padding so that it never covers the preview. */
+    .featherlight .featherlight-previous,
+    .featherlight .featherlight-next {
+        top: 25px;
+        bottom: 44px;
+        width: 48px;
+    }
+
+    .featherlight .featherlight-previous {
+        right: auto;
+        left: 0;
+    }
+
+    .featherlight .featherlight-next {
+        right: 0;
+        left: auto;
+    }
+
+    .featherlight .featherlight-previous span,
+    .featherlight .featherlight-next span {
+        display: block;
+        right: 0;
+        left: 0;
+        width: 100%;
+        margin-top: -16px;
+        font-size: 32px;
+        line-height: 32px;
+        color: #666;
+        text-shadow: none;
+    }
+
+    .featherlight .AttachmentPreviewCaption {
+        display: flex;
+        position: absolute;
+        right: 48px;
+        bottom: 0;
+        left: 48px;
+        align-items: center;
+        gap: 10px;
+        height: 44px;
+    }
+
+    .featherlight .AttachmentPreviewName {
+        min-width: 0;
+        overflow: hidden;
+        font-weight: bold;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .featherlight .AttachmentPreviewPosition {
+        flex: none;
+        color: #666;
+    }
+
+    .featherlight .AttachmentPreviewDownload {
+        flex: none;
+        margin-left: auto;
+    }
+}

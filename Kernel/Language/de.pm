@@ -2697,6 +2697,15 @@ sub Data {
         'Solution Time' => 'Lösungszeit',
         'Accounted time' => 'Erfasste Zeit',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketAttachmentList.tt
+        'Download attachments of %s%s%s' => 'Anhänge von %s%s%s herunterladen',
+        'Start typing to filter...' => 'Tippen zum filtern...',
+        'Filter attachments...' => 'Anhänge filtern...',
+        'Hide all inline attachments' => 'Eingebettete Anhänge ausblenden',
+        'Preview' => 'Vorschau',
+        'This ticket does not have any attachments.' => 'Dieses Ticket enthält keine Anhänge.',
+        'Download as ZIP file' => 'Als ZIP-Datei herunterladen',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
         'Bounce to' => 'Umleiten an',
         'You need a email address.' => 'Sie benötigen eine E-Mail-Adresse.',
@@ -2758,7 +2767,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => 'Verlauf von %s%s%s',
-        'Start typing to filter...' => 'Tippen zum filtern...',
         'Filter for history items' => 'Filter für Historieneinträge',
         'Expand/Collapse all' => 'Alle einblenden/ausblenden',
         'CreateTime' => 'Erstellzeit',
@@ -2916,6 +2924,12 @@ sub Data {
         'PDF' => 'PDF',
         'View' => 'Ansehen',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/Attachments.tt
+        'Ticket attachments' => 'Ticket-Anhänge',
+        'Download as ZIP archive' => 'Als ZIP-Archiv herunterladen',
+        'All attachments' => 'Alle Anhänge',
+        'Selected attachments' => 'Gewählte Anhänge',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
         'Linked Objects' => 'Verknüpfte Objekte',
 
@@ -2929,6 +2943,13 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AttachmentBlocker.tt
         'To protect your privacy, remote content was blocked.' => 'Zum Schutz Ihrer Privatsphäre wurden entfernte Inhalte blockiert.',
         'Load blocked content.' => 'Blockierte Inhalte laden.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AttachmentList.tt
+        'Show more' => 'Mehr anzeigen',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Attachments.tt
+        'Add attachments of other articles' => 'Anhänge anderer Artikel hinzufügen',
+        'Select all attachments' => 'Alle Anhänge auswählen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => 'Startseite',
@@ -3062,7 +3083,6 @@ sub Data {
         'Ticket fields' => 'Ticket-Felder',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
-        'Preview' => 'Vorschau',
         'Click to preview this file.' => 'Klicken Sie hier, um eine Vorschau dieser Datei anzuzeigen.',
         'Click to download this file.' => 'Klicken Sie, um diese Datei herunterzuladen.',
         'Click to delete this attachment.' => 'Klicken Sie, um diesen Anhang zu löschen.',
@@ -3531,6 +3551,8 @@ sub Data {
         '%s is missing. The file could not be downloaded properly.' => '%s fehlt. Die Datei konnte nicht ordnungsgemäß heruntergeladen werden.',
         'Please contact the administrator.' => 'Bitte kontaktieren Sie den Administrator.',
         '%s is missing. The file could not be previewed properly.' => '%s fehlt. Die Datei konnte nicht ordnungsgemäß in der Vorschau angezeigt werden.',
+        'The file could not be previewed properly.' => 'Die Datei konnte nicht ordnungsgemäß in der Vorschau angezeigt werden.',
+        'This file cannot be previewed.' => 'Diese Datei kann nicht in der Vorschau angezeigt werden.',
         '%s is missing. The file could not be deleted properly.' => '%s fehlt. Die Datei konnte nicht ordnungsgemäß gelöscht werden.',
 
         # Perl Module: Kernel/Modules/AdminACL.pm
@@ -6428,6 +6450,24 @@ sub Data {
             'Legt die angezeigten Spalten und ihre Position für den Ergebnisbildschirm von AgentCustomerUserAddressBook fest.',
         'Example package autoload configuration.' => 'Beispielhafte Autoload-Konfiguration für Pakete.',
         'Activates week number for datepickers.' => 'Kalenderwochen für Datumsauswahl aktivieren.',
+        'If this configuration is deactivated, all duplicate files are removed from the selection lists.' =>
+            'Wenn diese Konfiguration deaktiviert ist, werden alle doppelten Dateien aus den Auswahllisten entfernt.',
+        'If enabled, a preview overlay is available for article attachments (images, PDFs and other permitted types).' =>
+            'Falls aktiviert, steht eine Vorschau für Artikelanhänge (Bilder, PDFs und andere zulässige Typen) zur Verfügung.',
+        'Disables the widgets when the number of article in the ticket is reached.' =>
+            'Deaktiviert die Widgets bei der erreichten Anzahl der Artikel im Ticket.',
+        'Disables the widgets when the number of attachments in the ticket is reached.' =>
+            'Deaktiviert die Widgets bei der erreichten Anzahl der Anhänge im Ticket.',
+        'Number of a attachments shown by default.' => 'Standardmäßige Anzahl der angezeigten Anhänge.',
+        'Number of a attachments shown in AgentTicketZoom.' => 'Anzahl der im AgentTicketZoom angezeigten Anhänge.',
+        'AgentTicketZoom widget which provides all attachments of the ticket for download.' =>
+            'AgentTicketZoom-Widget, welches alle Attachments des Tickets zum Download bereitstellt.',
+        'Shows a link to preview article attachments in the zoom view of the article in the agent interface.' =>
+            'Zeigt einen Link zur Vorschau von Artikelanhängen in der Zoom-Ansicht des Artikels in der Agentenoberfläche.',
+        'Agent ticket dialogs that show a selection to reuse attachments of other articles of the ticket.' =>
+            'Agenten-Ticket-Dialoge, die eine Auswahl zur Wiederverwendung von Anhängen anderer Artikel des Tickets anzeigen.',
+        'Shows a link in the menu to select and download all attachments of the ticket.' =>
+            'Zeigt einen Ticketmenü-Link an, mit dem alle Anhänge eines Tickets gewählt und heruntergeladen werden können.',
 
         # XML Definition: Kernel/Config/Files/XML/GenericInterface.xml
         'Performs the configured action for each event (as an Invoker) for each configured web service.' =>
@@ -8191,6 +8231,14 @@ sub Data {
             'Namen von Systemkonfigurationsoptionen mit E-Mail-Adressen, die ebenfalls in einem Profil für ausgehende E-Mails auswählbar sein sollen (neben Systemadressen).',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             'Liste der Sitzungen (Schlüssel), die durch die Unteraktion UpdateAJAX des Frontend-Moduls AgentSession aktualisiert werden dürfen. Dabei handelt es sich um reguläre Ausdrücke.',
+        'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
+            'Definiert die Breite für die PDF-Vorschau-Komponente für AgentTicketZoom. Geben Sie die Anzahl (Pixel) oder den Prozentwert (relativ) ein.',
+        'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
+            'Definiert die Höhe für die PDF-Vorschau-Komponente für AgentTicketZoom. Geben Sie die Anzahl (Pixel) oder den prozentualen Wert (relativ) ein.',
+        'Defines the required ticket attributes to activate the preview. The following ticket attributes are supported: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.' =>
+            'Definiert die benötigten Ticketattribute, um die Vorschau zu aktivieren. Folgende TicketAttribute werden unterstützt: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.',
+        'Defines the required ticket attributes to activate showing the first preview for the first PDF. The following ticket attributes are supported: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.' =>
+            'Definiert die benötigten Ticketattribute, um die Vorschau für das erste PDF zu aktivieren. Folgende TicketAttribute werden unterstützt: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.',
         'What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder.' =>
             'Text, der anstelle eines undefinierten Wertes für einen ZNUNY_-Platzhalter eingefügt wird.',
 
@@ -8541,6 +8589,10 @@ sub Data {
         'Are you sure you want to delete this appointment? This operation cannot be undone.' =>
             'Möchten Sie diesen Termin wirklich löschen? Diese Änderung kann nicht rückgängig gemacht werden.',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Attachments.js
+        'Please select attachments for download.' => 'Bitte wählen Sie Anhänge für den Download.',
+        'Show less' => 'Weniger anzeigen',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
         'Copied to clipboard!' => 'In Zwischenablage kopiert!',
 
@@ -8709,10 +8761,9 @@ sub Data {
         'No space left for the following files: %s' => 'Kein Speicherplatz verfügbar für folgende Dateien: %s',
         'Available space %s of %s.' => 'Verfügbarer Platz %s von %s.',
         'Upload information' => 'Upload-Information',
-        'An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator.' =>
-            'Bei der Vorschau des Anhangs ist ein unbekannter Fehler aufgetreten. Bitte versuchen Sie es erneut. Wenn der Fehler weiterhin auftritt, kontaktieren Sie bitte Ihren Systemadministrator.',
         'An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator.' =>
             'Beim Löschen des Anhangs ist ein unbekannter Fehler aufgetreten. Bitte versuchen Sie es erneut. Wenn der Fehler weiterhin auftritt, kontaktieren Sie bitte Ihren Systemadministrator.',
+        '%s of %s' => '%s von %s',
 
         # JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
         'This is %s' => 'Dies ist %s',
@@ -9510,6 +9561,7 @@ Ihr Helpdesk-Team
         '%s KB',
         '%s MB',
         '%s TB',
+        '%s of %s',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9533,7 +9585,6 @@ Ihr Helpdesk-Team
         'An item with this name is already present.',
         'An unconnected transition is already placed on the canvas. Please connect this transition first before placing another transition.',
         'An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator.',
-        'An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator.',
         'An unknown error occurred. Please contact the administrator.',
         'Apply',
         'Appointment',
@@ -9639,6 +9690,7 @@ Ihr Helpdesk-Team
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',
         'Don\'t save, update manually',
+        'Download',
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
@@ -9741,6 +9793,7 @@ Ihr Helpdesk-Team
         'Please only select one file for upload.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
         'Preparing to deploy, please wait...',
@@ -9795,6 +9848,8 @@ Ihr Helpdesk-Team
         'Show',
         'Show EntityIDs',
         'Show current selection',
+        'Show less',
+        'Show more',
         'Show or hide the content.',
         'Slide the navigation bar',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',

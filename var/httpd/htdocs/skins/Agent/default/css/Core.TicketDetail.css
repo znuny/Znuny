@@ -589,19 +589,19 @@ body.TouchDevice #ArticleItems .ArticleMailContentHTMLWrapper {
     border-bottom: 0px;
 }
 
-.AttachmentPreview {
+div.AttachmentPreview {
     height: 80px;
     width: 60px;
     border: 1px solid #DDD;
     float: left;
     margin-right: 15px;
-    background-color: #E6E6E6;
+    background-color: unset;
     background-position: center;
     background-repeat: no-repeat;
     clear: left;
 }
 
-.AttachmentPreview a {
+div.AttachmentPreview a {
     display: block;
     height: 100%;
     width: 100%;

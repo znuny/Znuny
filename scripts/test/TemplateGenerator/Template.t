@@ -125,8 +125,6 @@ my $DynamicFieldExpect = "Test: " . join(
         sort keys %DynamicFieldTests
 );
 
-#STDERR->say("TEMPLATE: $DynamicFieldTemplate\nEXPECT:   $DynamicFieldExpect");
-
 # Attach a dynamic field of each type to the ticket
 my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 for my $Type ( sort keys %DynamicFieldTests ) {

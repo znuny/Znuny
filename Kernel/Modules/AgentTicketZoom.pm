@@ -1997,6 +1997,15 @@ sub MaskAgentZoom {
         },
     );
 
+    my $PDFPreviewSettings = $Kernel::OM->Get('Kernel::System::AttachmentPreview')->GetPDFSettings(
+        Ticket => \%Ticket,
+        UserID => $Self->{UserID},
+    );
+    $LayoutObject->AddJSData(
+        Key   => 'ZoomArticlePDFPreview',
+        Value => $PDFPreviewSettings,
+    );
+
     # init js
     $LayoutObject->Block(
         Name => 'TicketZoomInit',

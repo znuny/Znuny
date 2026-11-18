@@ -167,10 +167,11 @@ sub ArticleRender {
 
                 $File{Links} = [
                     {
-                        Action => $File{Action},
-                        Class  => $File{Class},
-                        Link   => $File{Link},
-                        Target => $File{Target},
+                        Action       => $File{Action},
+                        Class        => $File{Class},
+                        Link         => $File{Link},
+                        Target       => $File{Target},
+                        DownloadLink => $File{DownloadLink},
                     },
                 ];
                 if ( $File{Action} && $File{Action} ne 'Download' ) {
@@ -178,6 +179,7 @@ sub ArticleRender {
                     delete $File{Class};
                     delete $File{Link};
                     delete $File{Target};
+                    delete $File{DownloadLink};
                 }
 
                 if ($Attachment) {

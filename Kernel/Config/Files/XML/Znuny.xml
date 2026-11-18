@@ -21,6 +21,8 @@
                 <Item>Znuny.Form.Input.js</Item>
                 <Item>Znuny.Form.Generic.js</Item>
                 <Item>Znuny.DynamicField.Webservice.js</Item>
+                <Item>thirdparty/featherlight-1.7.14/featherlight.min.js</Item>
+                <Item>thirdparty/featherlight-1.7.14/featherlight.gallery.min.js</Item>
             </Array>
         </Value>
     </Setting>
@@ -32,6 +34,8 @@
                 <Item>Znuny.Form.Input.js</Item>
                 <Item>Znuny.Form.Generic.js</Item>
                 <Item>Znuny.DynamicField.Webservice.js</Item>
+                <Item>thirdparty/featherlight-1.7.14/featherlight.min.js</Item>
+                <Item>thirdparty/featherlight-1.7.14/featherlight.gallery.min.js</Item>
             </Array>
         </Value>
     </Setting>
@@ -42,6 +46,9 @@
         <Value>
             <Array>
                 <Item>Core.LastViews.css</Item>
+                <Item>thirdparty/featherlight-1.7.14/featherlight.min.css</Item>
+                <Item>thirdparty/featherlight-1.7.14/featherlight.gallery.min.css</Item>
+                <Item>Core.UI.AttachmentPreview.css</Item>
             </Array>
         </Value>
     </Setting>
@@ -51,6 +58,9 @@
         <Value>
             <Array>
                 <Item>Core.LastViews.css</Item>
+                <Item>thirdparty/featherlight-1.7.14/featherlight.min.css</Item>
+                <Item>thirdparty/featherlight-1.7.14/featherlight.gallery.min.css</Item>
+                <Item>Core.UI.AttachmentPreview.css</Item>
             </Array>
         </Value>
     </Setting>
@@ -4564,13 +4574,11 @@
                 <Item Key="image/gif">gif</Item>
                 <Item Key="image/jpeg">jpeg</Item>
                 <Item Key="image/png">png</Item>
-                <Item Key="image/svg+xml">svg</Item>
-                <Item Key="text/css">css</Item>
-                <Item Key="text/html">html</Item>
+                <Item Key="image/bmp">bmp</Item>
+                <Item Key="image/webp">webp</Item>
                 <Item Key="text/markdown">markdown</Item>
                 <Item Key="text/plain">plain</Item>
                 <Item Key="text/x-sh">sh</Item>
-                <Item Key="text/xml">xml</Item>
             </Hash>
         </Value>
     </Setting>
@@ -4700,6 +4708,63 @@
         </Value>
     </Setting>
 
+    <Setting Name="ArticleZoomPDFPreview###Width" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
+        <Description Translatable="1">Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).</Description>
+        <Navigation>Core::Znuny::ZoomArticlePDFPreview</Navigation>
+        <Value>
+            <Item ValueType="String">100%</Item>
+        </Value>
+    </Setting>
+    <Setting Name="ArticleZoomPDFPreview###Height" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
+        <Description Translatable="1">Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).</Description>
+        <Navigation>Core::Znuny::ZoomArticlePDFPreview</Navigation>
+        <Value>
+            <Item ValueType="String">500px</Item>
+        </Value>
+    </Setting>
+    <Setting Name="ArticleZoomPDFPreview###TicketAttributes###ActivatePreview" Required="0" Valid="1">
+        <Description Translatable="1">Defines the required ticket attributes to activate the preview. The following ticket attributes are supported: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.</Description>
+        <Navigation>Core::Znuny::ZoomArticlePDFPreview</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem>
+                    <Array>
+                    </Array>
+                </DefaultItem>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ArticleZoomPDFPreview###TicketAttributes###ShowFirstPreview" Required="0" Valid="1">
+        <Description Translatable="1">Defines the required ticket attributes to activate showing the first preview for the first PDF. The following ticket attributes are supported: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.</Description>
+        <Navigation>Core::Znuny::ZoomArticlePDFPreview</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem>
+                    <Array>
+                    </Array>
+                </DefaultItem>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="Loader::Module::AgentTicketZoom###003-ZoomArticlePDFPreview" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.ArticleZoomPDFPreview.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.ArticleZoomPDFPreview.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
     <!-- TemplateGenerator -->
     <Setting Name="TemplateGenerator::EmptyValueReplacement" Required="1" Valid="1">
         <Description Translatable="1">What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder.</Description>

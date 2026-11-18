@@ -1,0 +1,91 @@
+/*
+Copyright (C) 2012 Znuny GmbH, https://znuny.com/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (GPL). If you
+did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+*/
+
+/**
+ * @project     OTRS (http://www.otrs.org) - Agent Frontend
+ * Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+ * @license     AGPL (http://www.gnu.org/licenses/agpl.txt)
+ */
+
+/**
+ * @package     Skin "default"
+ * @section
+ */
+
+@media screen,projection,tv,handheld {
+
+    li.AttachmentListItem {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: var(--padding-xs);
+        list-style: none;
+        margin: 0 0 var(--padding-xs);
+        padding: 0;
+        min-width: 0;
+        line-height: 22px;
+    }
+
+    li.AttachmentListItem.Hidden {
+        display: none;
+    }
+
+    ul:has(> li.AttachmentListItem) {
+        list-style: none;
+        margin: 0 0 var(--margin-sm);
+        padding: 0;
+    }
+
+    li.AttachmentListItem > input,
+    li.AttachmentListItem > .AttachmentIcon,
+    li.AttachmentListItem > .AttachmentPreview {
+        flex: 0 0 auto;
+    }
+
+    li.AttachmentListItem > .AttachmentPreview {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    li.AttachmentListItem > .AttachmentLink {
+        flex: 1 1 auto;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .DownloadButtons {
+        display: flex;
+        gap: var(--padding-xs);
+        flex-wrap: nowrap;
+    }
+
+    .DownloadButtons > button {
+        max-width: calc(50% - calc(var(--padding-xs) / 2));
+    }
+
+    .DownloadButtons > .SelectedAttachments {
+        flex: 0 0 calc(50% - calc(var(--padding-xs) / 2));
+    }
+
+    .DownloadButtons > .SelectedAttachments > button {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .DownloadButtons .SelectedAttachments.Hidden {
+        display: none;
+    }
+
+    .padding-none {
+        padding: var(--padding-none) !important;
+    }
+
+}

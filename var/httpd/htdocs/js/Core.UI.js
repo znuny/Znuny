@@ -801,7 +801,9 @@ Core.UI = (function (TargetNS) {
                                         return $(this);
                                     }
                                 }),
-                                $TargetObj;
+                                $TargetObj,
+                                DownloadURL = Core.Config.Get('Baselink') + 'Action=AJAXAttachment;Subaction=Download;FileID=' + Attachment.FileID + ';FormID=' + FormID + ';ChallengeToken=' + ChallengeToken + SessionToken,
+                                PreviewURL = Core.Config.Get('Baselink') + 'Action=AJAXAttachment;Subaction=Preview;FileID=' + Attachment.FileID + ';FormID=' + FormID + ';ChallengeToken=' + ChallengeToken + SessionToken;
 
                             // update the existing item if one exists
                             if ($ExistingItemObj && $ExistingItemObj.length) {
@@ -814,11 +816,11 @@ Core.UI = (function (TargetNS) {
 
                                 $TargetObj.find('.Filetype').text(Attachment.ContentType);
                                 $TargetObj.find('.Filesize').text(Attachment.HumanReadableDataSize).attr('data-file-size', Attachment.Filesize);
-                                $TargetObj.find('.Download').find('a').attr('href', Core.Config.Get('Baselink') + 'Action=AJAXAttachment;Subaction=Download;FileID=' + Attachment.FileID + ';FormID=' + FormID + ';ChallengeToken=' + ChallengeToken + SessionToken).attr('data-file-id', Attachment.FileID).removeClass('Hidden');
+                                $TargetObj.find('.Download').find('a').attr('href', DownloadURL).attr('data-file-id', Attachment.FileID).removeClass('Hidden');
                                 $TargetObj.find('.Delete').find('a').attr('data-file-id', Attachment.FileID).removeClass('Hidden');
 
                                 if (Attachment.Preview) {
-                                    $TargetObj.find('.Preview').find('a').attr('data-file-id', Attachment.FileID).removeClass('Hidden');
+                                    $TargetObj.find('.Preview').find('a').attr('href', PreviewURL).attr('data-file-id', Attachment.FileID).removeClass('Hidden');
                                 }
 
                             }
@@ -829,7 +831,8 @@ Core.UI = (function (TargetNS) {
                                     'Filetype'   : Attachment.ContentType,
                                     'Filesize'   : Attachment.Filesize,
                                     'FileID'     : Attachment.FileID,
-                                    'DownloadURL': Core.Config.Get('Baselink') + 'Action=AJAXAttachment;Subaction=Download;FileID=' + Attachment.FileID + ';FormID=' + FormID + ';ChallengeToken=' + ChallengeToken + SessionToken,
+                                    'DownloadURL': DownloadURL,
+                                    'PreviewURL' : PreviewURL,
                                     'Preview'    : Attachment.Preview,
                                 });
 
@@ -926,57 +929,6 @@ Core.UI = (function (TargetNS) {
             if ($(this).find('tbody tr').length) {
                 $(this).show();
             }
-        });
-
-        // Attachment Preview
-        $(document).off('click.AttachmentPreview').on('click.AttachmentPreview', '.AttachmentPreview', function() {
-            var $TriggerObj = $(this),
-                $AttachmentListContainerObj = $TriggerObj.closest('.AttachmentListContainer'),
-                $UploadFieldObj = $AttachmentListContainerObj.nextAll('.AjaxDnDUpload'),
-                FormID = $UploadFieldObj.data('form-id') ? $UploadFieldObj.data('form-id') : $(this).closest('form').find('input[name=FormID]').val(),
-                Data = {
-                    Action:    $(this).attr('data-preview-action') ? $(this).attr('data-preview-action') : 'AJAXAttachment',
-                    Subaction: 'Preview',
-                    FileID:    $(this).attr('data-file-id'),
-                    FormID:    FormID,
-                    ObjectID:  $(this).attr('data-object-id'),
-                    FieldID:   $(this).attr('data-field-id')
-                };
-
-            $TriggerObj.closest('.AttachmentListContainer').find('.Busy').fadeIn();
-
-            Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), Data, function (Response) {
-                var HTML;
-
-                $AttachmentListContainerObj.find('.Busy').fadeOut();
-
-                if (Response && Response.Message && Response.Message == 'Success') {
-                    HTML = Core.Template.Render('Attachment/Preview/' + Response.Attachment.Template, Response);
-
-                    Core.UI.Dialog.ShowDialog({
-                        Title:               Core.Language.Translate("Preview"),
-                        HTML:                HTML,
-                        Modal:               true,
-                        CloseOnClickOutside: true,
-                        CloseOnEscape:       true,
-                        AllowAutoGrow:       true,
-                        PositionTop:         '5%',
-                        PositionLeft:        'Center',
-                        ModalClass:          'modal-xl',
-                        Buttons:             []
-                    });
-
-                }
-                else {
-                    Core.UI.Dialog.ShowAlert(
-                        Core.Language.Translate('An Error Occurred'),
-                        Core.Language.Translate('An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator.')
-                    );
-                    $AttachmentListContainerObj.find('.Busy').hide();
-                }
-            });
-
-            return false;
         });
 
         // Attachment deletion
@@ -1092,13 +1044,132 @@ Core.UI = (function (TargetNS) {
     };
 
     /**
-     * @name InitStickyWidget
+     * @private
+     * @name GetAttachmentPreviewSlides
      * @memberof Core.UI
      * @function
-     * @param {jQueryObject} $Element - The element to animate.
-     * @param {String} Type - The animation type as defined in Core.Animations.css, e.g. 'Shake'
+     * @returns {jQueryObject} The preview links that can be paged through.
+     * @param {jQueryObject} $Link - The preview link that was clicked.
      * @description
-     *      Animate an element on demand using a css-based animation of the given type
+     *      Collects the attachment list the given link belongs to.
+     */
+    function GetAttachmentPreviewSlides($Link) {
+        const $Container = $Link.closest('ul, table');
+
+        if (!$Container.length) {
+            return $Link;
+        }
+
+        return $Container.find('a.AttachmentPreview').filter(function () {
+            var URL = $(this).attr('href');
+
+            return URL && URL !== '#';
+        });
+    }
+
+    /**
+     * @private
+     * @name UpdateAttachmentPreviewCaption
+     * @memberof Core.UI
+     * @function
+     * @param {Object} Gallery - The Featherlight gallery instance.
+     * @description
+     *      Shows name, position and download link of the attachment currently displayed.
+     */
+    function UpdateAttachmentPreviewCaption(Gallery) {
+        const $Caption = Gallery.$instance.find('.AttachmentPreviewCaption'),
+            $Link = Gallery.$currentTarget,
+            SlideCount = Gallery.slides().length,
+            DownloadURL = $Link.attr('data-attachment-download-url');
+
+        $Caption.find('.AttachmentPreviewName').text($Link.attr('data-attachment-name') || '');
+
+        $Caption.find('.AttachmentPreviewPosition').text(
+            SlideCount > 1
+                ? Core.Language.Translate('%s of %s', Gallery.currentNavigation() + 1, SlideCount)
+                : ''
+        );
+
+        $Caption.find('.AttachmentPreviewDownload')
+            .attr('href', DownloadURL || '#')
+            .toggle(Boolean(DownloadURL));
+    }
+
+    /**
+     * @name InitAttachmentPreview
+     * @memberof Core.UI
+     * @function
+     * @description
+     *      Opens previewable attachments in a Featherlight iframe overlay that can be
+     *      paged through the remaining attachments of the same list.
+     */
+    TargetNS.InitAttachmentPreview = function () {
+        const $DocumentObj = $(document),
+            IframeConfig = {
+                iframeWidth: '95%',
+                iframeHeight: '90%',
+                iframeStyle: 'border: none; background: #fff;'
+            };
+
+        if ($.featherlight) {
+            $.featherlight.autoBind = false;
+        }
+
+        if ($.featherlightGallery) {
+            $.featherlightGallery.autoBind = false;
+        }
+
+        $DocumentObj.off('click.AttachmentPreview').on('click.AttachmentPreview', '.AttachmentPreview', function (Event) {
+            const $Link = $(this),
+                PreviewURL = $Link.attr('href');
+
+            if (!PreviewURL || PreviewURL === '#') {
+                return false;
+            }
+
+            Event.preventDefault();
+
+            // Without the gallery extension only the clicked attachment can be shown.
+            if (!$.featherlightGallery) {
+                if ($.featherlight) {
+                    $.featherlight($.extend({ iframe: PreviewURL }, IframeConfig));
+                }
+
+                return false;
+            }
+
+            // The gallery resolves every slide from the href of its link, so the clicked
+            // link only has to be marked as the one to start with.
+            $.featherlightGallery(GetAttachmentPreviewSlides($Link), $.extend({
+                type: 'iframe',
+                $currentTarget: $Link,
+                beforeOpen: function () {
+                    this.$instance.find('.featherlight-content').append(
+                        '<div class="AttachmentPreviewCaption">'
+                            + '<span class="AttachmentPreviewName"></span>'
+                            + '<span class="AttachmentPreviewPosition"></span>'
+                            + '<a class="AttachmentPreviewDownload" href="#" target="_blank">'
+                                + '<i class="fa fa-download"></i> '
+                                + Core.App.EscapeHTML(Core.Language.Translate('Download'))
+                            + '</a>'
+                        + '</div>'
+                    );
+                },
+                afterContent: function () {
+                    UpdateAttachmentPreviewCaption(this);
+                }
+            }, IframeConfig));
+
+            return false;
+        });
+    };
+
+    /**
+     * @name InitStickyElement
+     * @memberof Core.UI
+     * @function
+     * @description
+     *      Initializes sticky elements.
      */
     TargetNS.InitStickyElement = function () {
 
@@ -1161,6 +1232,7 @@ Core.UI = (function (TargetNS) {
         Core.UI.InitMessageBoxClose();
         Core.UI.InitMasterAction();
         Core.UI.InitAjaxDnDUpload();
+        Core.UI.InitAttachmentPreview();
         Core.UI.InitStickyElement();
     };
 

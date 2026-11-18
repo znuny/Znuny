@@ -1323,6 +1323,8 @@ sub SendEmail {
         );
     }
 
+    push @AttachmentData, $LayoutObject->GetReusedArticleAttachments();
+
     # send email
     my $To = '';
     KEY:
@@ -2345,6 +2347,10 @@ sub _Mask {
         Action     => $Self->{Action},
         UserID     => $Self->{UserID},
     ) // [];
+
+    $Param{AttachmentSelection} = $LayoutObject->RenderArticleAttachmentSelection(
+        TicketID => $Self->{TicketID},
+    );
 
     # create & return output
     return $LayoutObject->Output(

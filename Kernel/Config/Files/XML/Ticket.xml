@@ -12041,6 +12041,7 @@
                 <Item>AgentTicketSearch</Item>
                 <Item>AgentTicketWatcher</Item>
                 <Item>AgentTicketZoom</Item>
+                <Item>AgentTicketAttachmentList</Item>
                 <Item>AgentLinkObject</Item>
                 <Item>AgentSplitSelection</Item>
                 <Item>CustomerTicketMessage</Item>

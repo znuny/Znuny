@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d %T';
-    $Self->{Completeness}        = 0.831453534551231;
+    $Self->{Completeness}        = 0.827509881422925;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2696,6 +2696,15 @@ sub Data {
         'Solution Time' => '솔루션 시간',
         'Accounted time' => '소요 시간',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketAttachmentList.tt
+        'Download attachments of %s%s%s' => '',
+        'Start typing to filter...' => '',
+        'Filter attachments...' => '',
+        'Hide all inline attachments' => '',
+        'Preview' => '',
+        'This ticket does not have any attachments.' => '',
+        'Download as ZIP file' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
         'Bounce to' => '바운스',
         'You need a email address.' => '이메일 주소가 필요합니다.',
@@ -2757,7 +2766,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => '%s%s%s의 기록',
-        'Start typing to filter...' => '',
         'Filter for history items' => '기록 항목 필터링',
         'Expand/Collapse all' => '',
         'CreateTime' => 'Created',
@@ -2915,6 +2923,12 @@ sub Data {
         'PDF' => 'PDF',
         'View' => '전망',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/Attachments.tt
+        'Ticket attachments' => '',
+        'Download as ZIP archive' => '',
+        'All attachments' => '',
+        'Selected attachments' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
         'Linked Objects' => '연결된 개체',
 
@@ -2928,6 +2942,13 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AttachmentBlocker.tt
         'To protect your privacy, remote content was blocked.' => '개인 정보를 보호하기 위해 원격 콘텐츠가 차단되었습니다.',
         'Load blocked content.' => '차단된 콘텐츠를 로드합니다.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AttachmentList.tt
+        'Show more' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Attachments.tt
+        'Add attachments of other articles' => '',
+        'Select all attachments' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => '홈',
@@ -3061,7 +3082,6 @@ sub Data {
         'Ticket fields' => '타켓 필드',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
-        'Preview' => '',
         'Click to preview this file.' => '',
         'Click to download this file.' => '',
         'Click to delete this attachment.' => '첨부파일을 삭제하려면 클릭하십시오.',
@@ -3530,6 +3550,8 @@ sub Data {
         '%s is missing. The file could not be downloaded properly.' => '',
         'Please contact the administrator.' => '관리자에게 문의하십시오.',
         '%s is missing. The file could not be previewed properly.' => '',
+        'The file could not be previewed properly.' => '',
+        'This file cannot be previewed.' => '',
         '%s is missing. The file could not be deleted properly.' => '',
 
         # Perl Module: Kernel/Modules/AdminACL.pm
@@ -6427,6 +6449,24 @@ sub Data {
             'AgentCustomerUserAddressBook 결과 화면에 표시된 열과 위치를 정의합니다.',
         'Example package autoload configuration.' => '패키지 자동로드 구성 예제.',
         'Activates week number for datepickers.' => '',
+        'If this configuration is deactivated, all duplicate files are removed from the selection lists.' =>
+            '',
+        'If enabled, a preview overlay is available for article attachments (images, PDFs and other permitted types).' =>
+            '',
+        'Disables the widgets when the number of article in the ticket is reached.' =>
+            '',
+        'Disables the widgets when the number of attachments in the ticket is reached.' =>
+            '',
+        'Number of a attachments shown by default.' => '',
+        'Number of a attachments shown in AgentTicketZoom.' => '',
+        'AgentTicketZoom widget which provides all attachments of the ticket for download.' =>
+            '',
+        'Shows a link to preview article attachments in the zoom view of the article in the agent interface.' =>
+            '',
+        'Agent ticket dialogs that show a selection to reuse attachments of other articles of the ticket.' =>
+            '',
+        'Shows a link in the menu to select and download all attachments of the ticket.' =>
+            '',
 
         # XML Definition: Kernel/Config/Files/XML/GenericInterface.xml
         'Performs the configured action for each event (as an Invoker) for each configured web service.' =>
@@ -8190,6 +8230,14 @@ sub Data {
             '',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             '',
+        'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
+            '',
+        'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
+            '',
+        'Defines the required ticket attributes to activate the preview. The following ticket attributes are supported: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.' =>
+            '',
+        'Defines the required ticket attributes to activate showing the first preview for the first PDF. The following ticket attributes are supported: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.' =>
+            '',
         'What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder.' =>
             'ZNUNY_ 자리 표시자를 사용하여 템플릿에 삽입할 때 정의되지 않은 값을 무엇으로 바꿀지.',
 
@@ -8540,6 +8588,10 @@ sub Data {
         'Are you sure you want to delete this appointment? This operation cannot be undone.' =>
             '이 약속을 삭제 하시겠습니까? 이 작업은 실행 취소할 수 없습니다.',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Attachments.js
+        'Please select attachments for download.' => '',
+        'Show less' => '',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
         'Copied to clipboard!' => '',
 
@@ -8708,10 +8760,9 @@ sub Data {
         'No space left for the following files: %s' => '다음 파일에 공간이 없습니다 : %s',
         'Available space %s of %s.' => '사용 가능한 공간 %s / %s',
         'Upload information' => '정보 업로드',
-        'An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator.' =>
-            '',
         'An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator.' =>
             '첨부파일을 삭제할 때 알 수없는 오류가 발생했습니다. 다시 시도하십시오. 오류가 계속되면 시스템 관리자에게 문의하십시오.',
+        '%s of %s' => '',
 
         # JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
         'This is %s' => '이것은 %s입니다.',
@@ -9510,6 +9561,7 @@ Thanks for your help!
         '%s KB',
         '%s MB',
         '%s TB',
+        '%s of %s',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9533,7 +9585,6 @@ Thanks for your help!
         'An item with this name is already present.',
         'An unconnected transition is already placed on the canvas. Please connect this transition first before placing another transition.',
         'An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator.',
-        'An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator.',
         'An unknown error occurred. Please contact the administrator.',
         'Apply',
         'Appointment',
@@ -9639,6 +9690,7 @@ Thanks for your help!
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',
         'Don\'t save, update manually',
+        'Download',
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
@@ -9741,6 +9793,7 @@ Thanks for your help!
         'Please only select one file for upload.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
         'Preparing to deploy, please wait...',
@@ -9795,6 +9848,8 @@ Thanks for your help!
         'Show',
         'Show EntityIDs',
         'Show current selection',
+        'Show less',
+        'Show more',
         'Show or hide the content.',
         'Slide the navigation bar',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',

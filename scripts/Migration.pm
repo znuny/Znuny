@@ -290,6 +290,10 @@ sub _TasksGet {
             Message => 'Uninstall merged packages',
             Module  => 'scripts::Migration::Znuny::UninstallMergedPackages',
         },
+        {
+            Message => 'Remove leftover ReusedArticleFileIDs dynamic field',
+            Module  => 'scripts::Migration::Znuny::RemoveReusedArticleFileIDsDynamicField',
+        },
     );
 
     # 7.5 specific tasks after SysConfig migration

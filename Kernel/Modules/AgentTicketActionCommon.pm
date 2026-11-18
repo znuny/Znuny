@@ -1334,6 +1334,8 @@ sub Run {
                 );
             }
 
+            push @Attachments, $LayoutObject->GetReusedArticleAttachments();
+
             my $From = "\"$Self->{UserFullname}\" <$Self->{UserEmail}>";
             my @NotifyUserIDs;
 
@@ -2643,6 +2645,10 @@ sub _Mask {
 
             push @{ $Param{AttachmentList} }, $Attachment;
         }
+
+        $Param{AttachmentSelection} = $LayoutObject->RenderArticleAttachmentSelection(
+            TicketID => $Self->{TicketID},
+        );
 
         $LayoutObject->Block(
             Name => 'WidgetArticle',

@@ -526,6 +526,7 @@
                                                                 [% INCLUDE "FormElements/AttachmentList.tt" %]
                                                             </div>
                                                         </div>
+                                                        [% Data.AttachmentSelection %]
                                                         <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-2 gy-3">
                                                             <div class="col-12">
                                                                 <label for="IsVisibleForCustomer">[% Translate("Visible for customer") | html %]</label>

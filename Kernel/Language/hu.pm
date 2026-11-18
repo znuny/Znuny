@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.998729150119142;
+    $Self->{Completeness}        = 0.998577075098814;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2702,6 +2702,15 @@ sub Data {
         'Solution Time' => 'Megoldás ideje',
         'Accounted time' => 'Elszámolt idő',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketAttachmentList.tt
+        'Download attachments of %s%s%s' => '%s%s%s mellékleteinek letöltése',
+        'Start typing to filter...' => 'Kezdjen el gépelni a szűréshez…',
+        'Filter attachments...' => 'Mellékletek szűrése...',
+        'Hide all inline attachments' => 'Az összes beágyazott melléklet elrejtése',
+        'Preview' => 'Előnézet',
+        'This ticket does not have any attachments.' => 'Ennek a jegynek nincsenek mellékletei.',
+        'Download as ZIP file' => 'Letöltés ZIP-fájlként',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
         'Bounce to' => 'Átirányítás ide',
         'You need a email address.' => 'Egy e-mail-címre van szüksége.',
@@ -2763,7 +2772,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => '%s%s%s előzményei',
-        'Start typing to filter...' => 'Kezdjen el gépelni a szűréshez…',
         'Filter for history items' => 'Szűrő az előzményelemekhez',
         'Expand/Collapse all' => 'Összes kinyitása vagy összecsukása',
         'CreateTime' => 'Létrehozás ideje',
@@ -2921,6 +2929,12 @@ sub Data {
         'PDF' => 'PDF',
         'View' => 'Nézet',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/Attachments.tt
+        'Ticket attachments' => 'Jegymellékletek',
+        'Download as ZIP archive' => 'Letöltés ZIP-archívumként',
+        'All attachments' => 'Összes melléklet',
+        'Selected attachments' => 'Kijelölt mellékletek',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
         'Linked Objects' => 'Kapcsolt objektumok',
 
@@ -2934,6 +2948,13 @@ sub Data {
         # TT Template: Kernel/Output/HTML/Templates/Standard/AttachmentBlocker.tt
         'To protect your privacy, remote content was blocked.' => 'Az adatai védelme érdekében a távoli tartalom blokkolva lett.',
         'Load blocked content.' => 'Blokkolt tartalom betöltése.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AttachmentList.tt
+        'Show more' => 'Több megjelenítése',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Attachments.tt
+        'Add attachments of other articles' => 'Mellékletek hozzáadása más bejegyzésekből',
+        'Select all attachments' => 'Összes melléklet kijelölése',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => 'Kezdőoldal',
@@ -3067,7 +3088,6 @@ sub Data {
         'Ticket fields' => 'Jegymezők',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
-        'Preview' => 'Előnézet',
         'Click to preview this file.' => 'Kattintson a fájl előnézetéhez.',
         'Click to download this file.' => 'Kattintson a fájl letöltéséhez.',
         'Click to delete this attachment.' => 'Kattintson a melléklet törléséhez.',
@@ -3536,6 +3556,8 @@ sub Data {
         '%s is missing. The file could not be downloaded properly.' => 'A(z) %s hiányzik. A fájlt nem sikerült megfelelően letölteni.',
         'Please contact the administrator.' => 'Vegye fel a kapcsolatot a rendszergazdával.',
         '%s is missing. The file could not be previewed properly.' => 'A(z) %s hiányzik. A fájl előnézetét nem sikerült megfelelően megjeleníteni.',
+        'The file could not be previewed properly.' => 'A fájl előnézetét nem sikerült megfelelően megjeleníteni.',
+        'This file cannot be previewed.' => 'Ennek a fájlnak nem jeleníthető meg előnézete.',
         '%s is missing. The file could not be deleted properly.' => 'A(z) %s hiányzik. A fájlt nem sikerült megfelelően törölni.',
 
         # Perl Module: Kernel/Modules/AdminACL.pm
@@ -6433,6 +6455,24 @@ sub Data {
             'Meghatározza a megjelenített oszlopokat és a pozíciót az ügyintézői ügyfél-felhasználó címjegyzék eredményei képernyőn.',
         'Example package autoload configuration.' => 'Csomag automatikus betöltés beállításának példája.',
         'Activates week number for datepickers.' => 'Bekapcsolja a hét számát a dátumválasztóknál.',
+        'If this configuration is deactivated, all duplicate files are removed from the selection lists.' =>
+            'Ha ez a beállítás ki van kapcsolva, akkor az összes kettőzött fájl eltávolításra kerül a kiválasztási listákból.',
+        'If enabled, a preview overlay is available for article attachments (images, PDFs and other permitted types).' =>
+            'Ha engedélyezve van, akkor előnézet érhető el a bejegyzések mellékleteihez (képek, PDF-ek és egyéb engedélyezett típusok).',
+        'Disables the widgets when the number of article in the ticket is reached.' =>
+            'Letiltja a felületi elemeket, ha a jegyben lévő bejegyzések száma elérte a határt.',
+        'Disables the widgets when the number of attachments in the ticket is reached.' =>
+            'Letiltja a felületi elemeket, ha a jegyben lévő mellékletek száma elérte a határt.',
+        'Number of a attachments shown by default.' => 'Az alapértelmezetten megjelenített mellékletek száma.',
+        'Number of a attachments shown in AgentTicketZoom.' => 'Az AgentTicketZoom felületen megjelenített mellékletek száma.',
+        'AgentTicketZoom widget which provides all attachments of the ticket for download.' =>
+            'AgentTicketZoom felületi elem, amely a jegy összes mellékletét letölthetővé teszi.',
+        'Shows a link to preview article attachments in the zoom view of the article in the agent interface.' =>
+            'Egy hivatkozást jelenít meg a bejegyzés mellékleteinek előnézetéhez a bejegyzés nagyított nézetében az ügyintézői felületen.',
+        'Agent ticket dialogs that show a selection to reuse attachments of other articles of the ticket.' =>
+            'Ügyintézői jegypárbeszédablakok, amelyek kijelölési lehetőséget jelenítenek meg a jegy más bejegyzéseihez tartozó mellékletek újrafelhasználásához.',
+        'Shows a link in the menu to select and download all attachments of the ticket.' =>
+            'Egy hivatkozást jelenít meg a menüben a jegy összes mellékletének kijelöléséhez és letöltéséhez.',
 
         # XML Definition: Kernel/Config/Files/XML/GenericInterface.xml
         'Performs the configured action for each event (as an Invoker) for each configured web service.' =>
@@ -8196,6 +8236,14 @@ sub Data {
             'E-mail-címekkel rendelkező rendszerbeállítási lehetőségek nevei, amelyek szintén kiválaszthatók egy kimenő e-mail-profilhoz (a rendszercímeken kívül).',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             'Azon munkamenetek (kulcsok) listája, amelyeknél engedélyezett, hogy az ügyintéző munkamenetei előtétprogram-modul UpdateAJAX alművelete frissítse azokat. Ezek reguláris kifejezések.',
+        'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
+            'Meghatározza a PDF-előnézeti összetevő szélességét az AgentTicketZoom felületen. Adjon meg egy számot (képpont) vagy egy százalékos értéket (relatív).',
+        'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
+            'Meghatározza a PDF-előnézeti összetevő magasságát az AgentTicketZoom felületen. Adjon meg egy számot (képpont) vagy egy százalékos értéket (relatív).',
+        'Defines the required ticket attributes to activate the preview. The following ticket attributes are supported: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.' =>
+            'Meghatározza az előnézet bekapcsolásához szükséges jegyjellemzőket. A következő jegyjellemzők támogatottak: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.',
+        'Defines the required ticket attributes to activate showing the first preview for the first PDF. The following ticket attributes are supported: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.' =>
+            'Meghatározza azokat a szükséges jegyjellemzőket, amelyek az első PDF első előnézete megjelenítésének bekapcsolásához kellenek. A következő jegyjellemzők támogatottak: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.',
         'What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder.' =>
             'Mivel kell helyettesíteni egy nem definiált értéket, amikor az egy sablonba kerül beszúrásra egy ZNUNY_ helykitöltő használatával.',
 
@@ -8546,6 +8594,10 @@ sub Data {
         'Are you sure you want to delete this appointment? This operation cannot be undone.' =>
             'Biztosan törölni szeretné ezt az időpontot? Ezt a műveletet nem lehet visszavonni.',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Attachments.js
+        'Please select attachments for download.' => 'Válasszon mellékleteket a letöltéshez.',
+        'Show less' => 'Kevesebb megjelenítése',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
         'Copied to clipboard!' => 'Vágólapra másolva!',
 
@@ -8714,10 +8766,9 @@ sub Data {
         'No space left for the following files: %s' => 'Nincs több hely a következő fájloknak: %s',
         'Available space %s of %s.' => 'Elérhető hely: %s/%s.',
         'Upload information' => 'Feltöltési információk',
-        'An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator.' =>
-            'Ismeretlen hiba történt a melléklet előnézete során. Próbálja meg újra. Ha a hiba továbbra is fennáll, akkor vegye fel a kapcsolatot a rendszergazdával.',
         'An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator.' =>
             'Ismeretlen hiba történt a melléklet törlése során. Próbálja meg újra. Ha a hiba továbbra is fennáll, akkor vegye fel a kapcsolatot a rendszergazdával.',
+        '%s of %s' => '',
 
         # JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
         'This is %s' => 'Ez egy %s',
@@ -9516,6 +9567,7 @@ Az Ön ügyfélszolgálati csapata
         '%s KB',
         '%s MB',
         '%s TB',
+        '%s of %s',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9539,7 +9591,6 @@ Az Ön ügyfélszolgálati csapata
         'An item with this name is already present.',
         'An unconnected transition is already placed on the canvas. Please connect this transition first before placing another transition.',
         'An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator.',
-        'An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator.',
         'An unknown error occurred. Please contact the administrator.',
         'Apply',
         'Appointment',
@@ -9645,6 +9696,7 @@ Az Ön ügyfélszolgálati csapata
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',
         'Don\'t save, update manually',
+        'Download',
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
@@ -9747,6 +9799,7 @@ Az Ön ügyfélszolgálati csapata
         'Please only select one file for upload.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
         'Preparing to deploy, please wait...',
@@ -9801,6 +9854,8 @@ Az Ön ügyfélszolgálati csapata
         'Show',
         'Show EntityIDs',
         'Show current selection',
+        'Show less',
+        'Show more',
         'Show or hide the content.',
         'Slide the navigation bar',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',
