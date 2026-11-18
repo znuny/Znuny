@@ -72,6 +72,23 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="inner">
+                    [% RenderBlockStart("TeztarifAISuggestions") %]
+                    <section class="WidgetSimple" aria-label="Ticket suggestions" style="margin:12px 0;padding:14px;border:1px solid #ddd;border-radius:8px;">
+                        <h2>Teztarif Ticket Suggestions <small>(advisory, verify before applying)</small></h2>
+                        <p><strong>Category:</strong> [% Data.Category | html %]</p>
+                        <p><strong>Suggested next step:</strong> [% Data.SolutionHint | html %]</p>
+                        [% IF Data.SuggestedOwnerID %]
+                        <p><strong>Experienced technician user ID:</strong> [% Data.SuggestedOwnerID | html %] (check availability and permissions before assignment)</p>
+                        [% END %]
+                        <ul>
+                        [% RenderBlockStart("TeztarifAISimilarTicket") %]
+                            <li><a href="[% Env('Baselink') %]Action=AgentTicketZoom;TicketID=[% Data.TicketID | uri %]">Ticket #[% Data.TicketID | html %]: [% Data.Title | html %]</a>
+                                (similarity [% Data.Score | html %], [% IF Data.Closed %]resolved example[% ELSE %]possible duplicate[% END %])
+                            </li>
+                        [% RenderBlockEnd("TeztarifAISimilarTicket") %]
+                        </ul>
+                    </section>
+                    [% RenderBlockEnd("TeztarifAISuggestions") %]
                     <div class="mod modTicketHeader">
                         <div class="inner">
                             <div class="ticketHeader">
