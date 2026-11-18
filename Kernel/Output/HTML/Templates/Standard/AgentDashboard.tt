@@ -10,6 +10,22 @@
 [% RenderBlockStart("Content") %]
 <div class="MainBox Dashboard ARIARoleMain LayoutFixedSidebar mainStructure SidebarLast">
     <h1 class="InvisibleText">[% Translate("Dashboard") | html %]</h1>
+    [% RenderBlockStart("TeztarifDashboardAI") %]
+    <section class="WidgetSimple" aria-label="AI ticket suggestions" style="margin:12px;padding:14px;border:1px solid #ddd;border-radius:8px;">
+        <h2>Teztarif Ticket Suggestions <small>(review only)</small></h2>
+        <ul>
+            [% RenderBlockStart("TeztarifDashboardAITicket") %]
+            <li>
+                <a href="[% Env('Baselink') %]Action=AgentTicketZoom;TicketID=[% Data.TicketID | uri %]">[% Data.Title | html %]</a>
+                — [% Data.Category | html %] |
+                [% Data.SimilarCount | html %] similar ticket(s)
+                [% IF Data.SuggestedOwnerID %]| Experienced agent ID: [% Data.SuggestedOwnerID | html %][% END %]
+            </li>
+            [% RenderBlockEnd("TeztarifDashboardAITicket") %]
+        </ul>
+        <p>Open a ticket to review related cases, possible duplicates and suggested resolutions.</p>
+    </section>
+    [% RenderBlockEnd("TeztarifDashboardAI") %]
     [% InsertTemplate("AgentDashboardCommon.tt") %]
 </div>
 [% RenderBlockEnd("Content") %]
