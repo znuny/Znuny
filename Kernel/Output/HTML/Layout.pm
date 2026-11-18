@@ -3177,6 +3177,15 @@ sub NavigationBar {
     MODULE:
     for my $Module ( sort keys %{$FrontendNavigation} ) {
 
+        # Filter licensed, permission-mapped SaaS navigation items.
+        # Original Znuny group permissions still apply below.
+        next MODULE if !$Kernel::OM->Get(
+            'Kernel::System::SaaS::Navigation'
+        )->AllowedAction(
+            UserID => $Self->{UserID},
+            Action => $Module,
+        );
+
         # Skip if module is disabled in frontend registration.
         next MODULE if !IsHashRefWithData( $FrontendRegistration->{$Module} );
 
