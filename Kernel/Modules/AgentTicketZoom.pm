@@ -1164,6 +1164,31 @@ sub MaskAgentZoom {
     # number of articles
     $Param{ArticleCount} = scalar @ArticleBox;
 
+    # Advisory recommendations are rendered only after ticket ro permission has
+    # been verified by Run(), with an active tenant and licensed AI module.
+    my $AIRecommendations = $Kernel::OM->Get(
+        'Kernel::System::SaaS::TicketRecommendations'
+    )->Recommend(
+        TicketID => $Ticket{TicketID},
+        UserID   => $Self->{UserID},
+    );
+    if ($AIRecommendations) {
+        $LayoutObject->Block(
+            Name => 'TeztarifAISuggestions',
+            Data => {
+                Category         => $AIRecommendations->{Category},
+                SolutionHint     => $AIRecommendations->{SolutionHint},
+                SuggestedOwnerID => $AIRecommendations->{SuggestedOwnerID},
+            },
+        );
+        for my $Suggestion ( @{ $AIRecommendations->{SimilarTickets} } ) {
+            $LayoutObject->Block(
+                Name => 'TeztarifAISimilarTicket',
+                Data => $Suggestion,
+            );
+        }
+    }
+
     $LayoutObject->Block(
         Name => 'Header',
         Data => { %Param, %Ticket, %AclAction },
