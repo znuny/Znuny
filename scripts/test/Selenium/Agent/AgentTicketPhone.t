@@ -385,21 +385,25 @@ $Selenium->RunTest(
         );
 
         # Kernel/Config.pm is loaded after ZZZZUnitTest files, so Ticket::Type
-        # stays enabled when Config.pm turns it on. Fill the mandatory type
-        # with the first available value when the field is still empty.
-        my $TypeID = $Selenium->execute_script(
-            'if (!$("#TypeID").length || $("#TypeID").val()) { return ""; }'
-                . ' return $("#TypeID option").filter(function () { return $(this).val(); }).first().val() || "";'
+        # stays enabled when Config.pm turns it on. Dest and customer changes
+        # post FormUpdate, which replaces TypeID. Wait until that request is idle.
+        # Do not trigger change here: that update would replace the select again
+        # with an empty selection and client validation blocks submit.
+        $Selenium->WaitFor(
+            JavaScript =>
+                'return typeof($) === "function" && $.active === 0 && !$(".AJAXLoader:visible").length;'
         );
-        if ($TypeID) {
-            $Selenium->InputFieldValueSet(
-                Element => '#TypeID',
-                Value   => $TypeID,
-            );
-            $Selenium->WaitFor(
-                JavaScript => 'return typeof($) === "function" && !$(".AJAXLoader:visible").length'
-            );
-        }
+        $Selenium->execute_script(
+            "if (\$('#TypeID').length && !\$('#TypeID').val()) {"
+                . "\$('#TypeID').val(\$('#TypeID option').filter(function () { return \$(this).text().trim() == 'Unclassified'; }).val())"
+                . ".trigger('redraw.InputField');"
+                . "\$('#TypeID_Search').blur();"
+                . "}"
+        );
+        $Selenium->WaitFor(
+            JavaScript =>
+                'return typeof($) === "function" && (!$("#TypeID").length || $("#TypeID").val());'
+        );
 
         $Selenium->find_element( "#submitRichText", 'css' )->click();
         $Selenium->WaitFor(
