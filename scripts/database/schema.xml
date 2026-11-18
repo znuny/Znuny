@@ -336,6 +336,100 @@
     </ForeignKey>
 </Table>
 
+<!-- Teztarif roles are tenant-local; platform roles are not stored here. -->
+<Table Name="saas_role">
+    <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="BIGINT"/>
+    <Column Name="tenant_id" Required="true" Type="BIGINT"/>
+    <Column Name="name" Required="true" Size="120" Type="VARCHAR"/>
+    <Column Name="valid_id" Required="true" Type="SMALLINT"/>
+    <Column Name="create_time" Required="true" Type="DATE"/>
+    <Column Name="create_by" Required="true" Type="INTEGER"/>
+    <Column Name="change_time" Required="true" Type="DATE"/>
+    <Column Name="change_by" Required="true" Type="INTEGER"/>
+    <Unique Name="saas_role_tenant_name">
+        <UniqueColumn Name="tenant_id"/>
+        <UniqueColumn Name="name"/>
+    </Unique>
+    <ForeignKey ForeignTable="saas_tenant">
+        <Reference Local="tenant_id" Foreign="id"/>
+    </ForeignKey>
+    <ForeignKey ForeignTable="valid">
+        <Reference Local="valid_id" Foreign="id"/>
+    </ForeignKey>
+</Table>
+
+<!-- Roles can only be assigned to users in the same tenant (enforced in service layer). -->
+<Table Name="saas_user_role">
+    <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="BIGINT"/>
+    <Column Name="tenant_id" Required="true" Type="BIGINT"/>
+    <Column Name="user_id" Required="true" Type="INTEGER"/>
+    <Column Name="role_id" Required="true" Type="BIGINT"/>
+    <Unique Name="saas_user_role_unique">
+        <UniqueColumn Name="tenant_id"/>
+        <UniqueColumn Name="user_id"/>
+        <UniqueColumn Name="role_id"/>
+    </Unique>
+    <ForeignKey ForeignTable="saas_tenant">
+        <Reference Local="tenant_id" Foreign="id"/>
+    </ForeignKey>
+    <ForeignKey ForeignTable="users">
+        <Reference Local="user_id" Foreign="id"/>
+    </ForeignKey>
+    <ForeignKey ForeignTable="saas_role">
+        <Reference Local="role_id" Foreign="id"/>
+    </ForeignKey>
+</Table>
+
+<!-- Action examples: view,create,edit,delete,assign,export,approve.
+     Scope examples: own,team,department,company. Explicit denial wins. -->
+<Table Name="saas_role_permission">
+    <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="BIGINT"/>
+    <Column Name="role_id" Required="true" Type="BIGINT"/>
+    <Column Name="module_id" Required="true" Type="INTEGER"/>
+    <Column Name="action" Required="true" Size="30" Type="VARCHAR"/>
+    <Column Name="scope" Required="true" Size="30" Type="VARCHAR"/>
+    <Column Name="allowed" Required="true" Type="SMALLINT"/>
+    <Unique Name="saas_role_permission_unique">
+        <UniqueColumn Name="role_id"/>
+        <UniqueColumn Name="module_id"/>
+        <UniqueColumn Name="action"/>
+        <UniqueColumn Name="scope"/>
+    </Unique>
+    <ForeignKey ForeignTable="saas_role">
+        <Reference Local="role_id" Foreign="id"/>
+    </ForeignKey>
+    <ForeignKey ForeignTable="saas_module">
+        <Reference Local="module_id" Foreign="id"/>
+    </ForeignKey>
+</Table>
+
+<!-- Company admin's per-user exceptions; never bypass subscription licensing. -->
+<Table Name="saas_user_permission">
+    <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="BIGINT"/>
+    <Column Name="tenant_id" Required="true" Type="BIGINT"/>
+    <Column Name="user_id" Required="true" Type="INTEGER"/>
+    <Column Name="module_id" Required="true" Type="INTEGER"/>
+    <Column Name="action" Required="true" Size="30" Type="VARCHAR"/>
+    <Column Name="scope" Required="true" Size="30" Type="VARCHAR"/>
+    <Column Name="allowed" Required="true" Type="SMALLINT"/>
+    <Unique Name="saas_user_permission_unique">
+        <UniqueColumn Name="tenant_id"/>
+        <UniqueColumn Name="user_id"/>
+        <UniqueColumn Name="module_id"/>
+        <UniqueColumn Name="action"/>
+        <UniqueColumn Name="scope"/>
+    </Unique>
+    <ForeignKey ForeignTable="saas_tenant">
+        <Reference Local="tenant_id" Foreign="id"/>
+    </ForeignKey>
+    <ForeignKey ForeignTable="users">
+        <Reference Local="user_id" Foreign="id"/>
+    </ForeignKey>
+    <ForeignKey ForeignTable="saas_module">
+        <Reference Local="module_id" Foreign="id"/>
+    </ForeignKey>
+</Table>
+
 <!-- user preferences -->
 <Table Name="user_preferences">
     <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="BIGINT"/>
