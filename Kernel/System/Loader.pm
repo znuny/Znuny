@@ -12,6 +12,7 @@ package Kernel::System::Loader;
 
 use strict;
 use warnings;
+use utf8;
 
 use CSS::Minifier        qw();    # default minifier, will only be used if CSS::Minifier:XS is not available.
 use JavaScript::Minifier qw();    # default minifier, will only be used if JavaScript::Minifier:XS is not available.
@@ -125,18 +126,21 @@ sub MinifyFiles {
     }
 
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+    my $LogObject  = $Kernel::OM->Get('Kernel::System::Log');
 
     my $Filename;
     if ( $Param{Checksum} ) {
         $Filename = $TargetFilenamePrefix . $Param{Checksum};
     }
     else {
-        my $FileString;
+        my $FileString = '';
+        my @MissingLocations;
 
         if ( $Param{List} ) {
             LOCATION:
             for my $Location ( @{$List} ) {
                 if ( !-e $Location ) {
+                    push @MissingLocations, $Location;
                     next LOCATION;
                 }
                 my $FileMTime = $MainObject->FileGetMTime(
@@ -147,6 +151,17 @@ sub MinifyFiles {
                 #   caches are correctly regenerated on changes.
                 $FileString .= "$Location:$FileMTime:";
             }
+        }
+
+        if (@MissingLocations) {
+            $LogObject->Log(
+                Priority => 'error',
+                Message  => 'These files do not exist: ' . join( ', ', @MissingLocations ),
+            );
+        }
+
+        if ( $Param{List} && !length $FileString ) {
+            return;
         }
 
         $Filename = $TargetFilenamePrefix . $MainObject->MD5sum(

@@ -188,6 +188,33 @@ my $Home = $ConfigObject->Get('Home');
     );
 }
 
+{
+    my @Warnings;
+    local $SIG{__WARN__} = sub {
+        push @Warnings, $_[0];
+    };
+
+    my $MissingFilename = $LoaderObject->MinifyFiles(
+        List => [
+            $Home . '/scripts/test/sample/Loader/does-not-exist.css',
+        ],
+        Type                 => 'CSS',
+        TargetDirectory      => $ConfigObject->Get('TempDir'),
+        TargetFilenamePrefix => 'MissingCSS',
+    );
+
+    $Self->False(
+        $MissingFilename,
+        'MinifyFiles() missing files returns false',
+    );
+
+    my $HasUninitializedWarning = grep { $_ =~ m{uninitialized} } @Warnings;
+    $Self->False(
+        $HasUninitializedWarning,
+        'MinifyFiles() missing files does not warn about uninitialized values',
+    );
+}
+
 my @JSTests = (
 
     # this next test shows a case where the minification currently only works with

@@ -799,17 +799,20 @@ sub RTEContentCssInternalGet {
 
     return if !IsArrayRefWithData($InternalArticleStylesPaths);
 
-    @{$InternalArticleStylesPaths} = map {
-        $ConfigObject->Get('Home') . '/var/httpd/htdocs/' . $_
+    # Copy the configured paths. Config->Get() returns the live array,
+    # and rewriting it would prepend Home again on the next call.
+    my $Home                          = $ConfigObject->Get('Home');
+    my @InternalArticleStyleLocations = map {
+        $Home . '/var/httpd/htdocs/' . $_
     } @{$InternalArticleStylesPaths};
 
     my $RTEContentPrefix = 'MinifiedRTEContentStyles';
 
-    my $TargetDirectory = $ConfigObject->Get('Home') . "/var/httpd/htdocs/skins/$Interface/default/css-cache/";
+    my $TargetDirectory = $Home . "/var/httpd/htdocs/skins/$Interface/default/css-cache/";
 
     # minify files only once if not changed
     my $ActualMinifiedFilename = $LoaderObject->MinifyFiles(
-        List                 => $InternalArticleStylesPaths,
+        List                 => \@InternalArticleStyleLocations,
         Type                 => 'CSS',
         TargetDirectory      => $TargetDirectory,
         TargetFilenamePrefix => $RTEContentPrefix,
@@ -877,6 +880,8 @@ sub RTEContentCssInternalGet {
 
     # clean new lines that are still present
     # after minification of multiple files
+    return if ref $MinifiedRTEContentCSS ne 'SCALAR';
+
     ${$MinifiedRTEContentCSS} =~ s/\n//g;
 
     return $MinifiedRTEContentCSS;
