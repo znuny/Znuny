@@ -3402,6 +3402,8 @@ Depending on the SysConfig settings the controls to set the date could be multip
         Area     => 'some area',                  # optional, default 'Agent' (Deprecated)
         DiffTime => 123,                          # optional, default 0, used to set the initial time influencing the
                                                   #   current time (in seconds)
+        PendingSkipUnavailableDays => 1,          # optional (1 or 0), when active apply TimePendingSkipUnavailableDays
+                                                  #   so pending default dates skip holidays and days without working hours
         OverrideTimeZone => 1,                    # optional (1 or 0), when active the time is not translated to the user
                                                   #   time zone
         YearPeriodFuture => 3,                    # optional, used to define the number of years in future to be display
@@ -3476,13 +3478,42 @@ sub BuildDateSelection {
             $DateTimeObject->Add( Seconds => $Param{AddSeconds} );
         }
 
+        # Optionally move the pending default date past holidays and days without working hours.
+        if ( $Param{SkipUnavailableDays} ) {
+            my %IsWorkingDayParam;
+            if ( $Param{Calendar} ) {
+                $IsWorkingDayParam{Calendar} = $Param{Calendar};
+            }
+
+            my $MaxDays = 365;
+            while ( $MaxDays-- > 0 && !$DateTimeObject->IsWorkingDay(%IsWorkingDayParam) ) {
+                $DateTimeObject->Add( Days => 1 );
+            }
+        }
+
         my %Details = %{ $DateTimeObject->Get() };
 
         return map { $Details{$_} } (qw(Second Minute Hour Day Month Year));
     };
 
+    # Resolve whether pending defaults should skip unavailable days for this calendar.
+    my $SkipUnavailableDays = 0;
+    if ( $Param{PendingSkipUnavailableDays} ) {
+        my $SkipUnavailableDaysKey = 'TimePendingSkipUnavailableDays';
+        if (
+            $Param{Calendar}
+            && $ConfigObject->Get( "TimeZone::Calendar" . $Param{Calendar} . "Name" )
+            )
+        {
+            $SkipUnavailableDaysKey .= '::Calendar' . $Param{Calendar};
+        }
+        $SkipUnavailableDays = $ConfigObject->Get($SkipUnavailableDaysKey) ? 1 : 0;
+    }
+
     my ( $s, $m, $h, $D, $M, $Y ) = $GetCurSysDTUnitFromLowest->(
-        AddSeconds => $DiffTime,
+        AddSeconds          => $DiffTime,
+        SkipUnavailableDays => $SkipUnavailableDays,
+        Calendar            => $Param{Calendar},
     );
     my ( $Cs, $Cm, $Ch, $CD, $CM, $CY ) = $GetCurSysDTUnitFromLowest->();
 
@@ -3756,13 +3787,10 @@ sub BuildDateSelection {
     # Do not initialise Datepicker if Disabled is set.
     return $Output if $Param{Disabled};
 
-    # prepare datepicker for specific calendar
-    my $VacationDays = '';
-    if ( $Param{Calendar} ) {
-        $VacationDays = $Self->DatepickerGetVacationDays(
-            Calendar => $Param{Calendar},
-        );
-    }
+    # prepare datepicker for specific calendar (vacation days and working hours)
+    my $VacationDays = $Self->DatepickerGetVacationDays(
+        Calendar => $Param{Calendar},
+    );
     my $VacationDaysJSON = $Self->JSONEncode(
         Data => $VacationDays,
     );

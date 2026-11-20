@@ -2831,13 +2831,14 @@ sub _MaskPhoneNew {
     # pending data string
     $Param{PendingDateString} = $LayoutObject->BuildDateSelection(
         %Param,
-        Format               => 'DateInputFormatLong',
-        YearPeriodPast       => 0,
-        YearPeriodFuture     => 5,
-        DiffTime             => $ConfigObject->Get('Ticket::Frontend::PendingDiffTime') || 0,
-        Class                => $Param{Errors}->{DateInvalid},
-        Validate             => 1,
-        ValidateDateInFuture => 1,
+        Format                     => 'DateInputFormatLong',
+        YearPeriodPast             => 0,
+        YearPeriodFuture           => 5,
+        DiffTime                   => $ConfigObject->Get('Ticket::Frontend::PendingDiffTime') || 0,
+        Class                      => $Param{Errors}->{DateInvalid},
+        Validate                   => 1,
+        ValidateDateInFuture       => 1,
+        PendingSkipUnavailableDays => 1,
     );
 
     # show owner selection

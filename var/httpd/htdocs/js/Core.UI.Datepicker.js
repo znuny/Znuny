@@ -22,81 +22,16 @@ Core.UI = Core.UI || {};
 Core.UI.Datepicker = (function (TargetNS) {
     /**
      * @private
-     * @name VacationDays
-     * @memberof Core.UI.Datepicker
-     * @member {Object}
-     * @description
-     *      Vacation days, defined in SysConfig.
-     */
-    var VacationDays,
-
-    /**
-     * @private
-     * @name VacationDaysOneTime
-     * @memberof Core.UI.Datepicker
-     * @member {Object}
-     * @description
-     *      One time vacations, defined in SysConfig.
-     */
-        VacationDaysOneTime,
-
-    /**
-     * @private
      * @name DatepickerCount
      * @memberof Core.UI.Datepicker
      * @member {Number}
      * @description
      *      Number of initialized datepicker.
      */
-        DatepickerCount = 0;
+    var DatepickerCount = 0;
 
     if (!Core.Debug.CheckDependency('Core.UI.Datepicker', '$([]).datepicker', 'jQuery UI datepicker')) {
         return false;
-    }
-
-    /**
-     * @private
-     * @name CheckDate
-     * @memberof Core.UI.Datepicker
-     * @function
-     * @returns {Array} First element is always true, second element contains the name of a CSS class, third element a description for the date.
-     * @param {DateObject} DateObject - A JS date object to check.
-     * @description
-     *      Check if date is on of the defined vacation days.
-     */
-    function CheckDate(DateObject) {
-        var DayDescription = '',
-            DayClass = '';
-
-        // Get defined days from Config, if not done already
-        if (typeof VacationDays === 'undefined') {
-            VacationDays = Core.Config.Get('Datepicker.VacationDays').TimeVacationDays;
-        }
-        if (typeof VacationDaysOneTime === 'undefined') {
-            VacationDaysOneTime = Core.Config.Get('Datepicker.VacationDays').TimeVacationDaysOneTime;
-        }
-
-        // Check if date is one of the vacation days
-        if (typeof VacationDays[DateObject.getMonth() + 1] !== 'undefined' &&
-            typeof VacationDays[DateObject.getMonth() + 1][DateObject.getDate()] !== 'undefined') {
-            DayDescription += VacationDays[DateObject.getMonth() + 1][DateObject.getDate()];
-            DayClass = 'Highlight ';
-        }
-
-        // Check if date is one of the one time vacation days
-        if (typeof VacationDaysOneTime[DateObject.getFullYear()] !== 'undefined' &&
-            typeof VacationDaysOneTime[DateObject.getFullYear()][DateObject.getMonth() + 1] !== 'undefined' &&
-            typeof VacationDaysOneTime[DateObject.getFullYear()][DateObject.getMonth() + 1][DateObject.getDate()] !== 'undefined') {
-            DayDescription += VacationDaysOneTime[DateObject.getFullYear()][DateObject.getMonth() + 1][DateObject.getDate()];
-            DayClass = 'Highlight ';
-        }
-
-        if (DayClass.length) {
-            return [true, DayClass, DayDescription];
-        }
-        else {
-            return [true, ''];
-        }
     }
 
     /**
@@ -114,10 +49,82 @@ Core.UI.Datepicker = (function (TargetNS) {
         var $DatepickerElement,
             HasDateSelectBoxes = false,
             Options,
-            ErrorMessage;
+            ErrorMessage,
+            VacationDays,
+            VacationDaysOneTime,
+            WorkingHours,
+            DatepickerData = Core.Config.Get('Datepicker') || {};
 
-        if (typeof Element.VacationDays === 'object') {
-            Core.Config.Set('Datepicker.VacationDays', Element.VacationDays);
+        if (typeof Element.VacationDays === 'object' && Element.VacationDays !== null) {
+            VacationDays = Element.VacationDays.TimeVacationDays;
+            VacationDaysOneTime = Element.VacationDays.TimeVacationDaysOneTime;
+            WorkingHours = Element.VacationDays.TimeWorkingHours;
+        }
+        else {
+            VacationDays = (DatepickerData.VacationDays || {}).TimeVacationDays;
+            VacationDaysOneTime = (DatepickerData.VacationDays || {}).TimeVacationDaysOneTime;
+            WorkingHours = (DatepickerData.VacationDays || {}).TimeWorkingHours || DatepickerData.WorkingHours;
+        }
+
+        if (typeof Element.WorkingHours === 'object' && Element.WorkingHours !== null) {
+            WorkingHours = Element.WorkingHours;
+        }
+
+        VacationDays = VacationDays || {};
+        VacationDaysOneTime = VacationDaysOneTime || {};
+        WorkingHours = WorkingHours || {};
+
+        /**
+         * @private
+         * @name CheckDate
+         * @memberof Core.UI.Datepicker.Init
+         * @function
+         * @returns {Array} First element is always true, second element contains the name of a CSS class, third element a description for the date.
+         * @param {DateObject} DateObject - A JS date object to check.
+         * @description
+         *      Check if date is one of the defined vacation days or a day without working hours.
+         */
+        function CheckDate(DateObject) {
+            var DayDescription = '',
+                DayClass = '',
+                DayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                DayAbbr = DayNames[DateObject.getDay()],
+                DayWorkingHours;
+
+            // Check if date is one of the vacation days
+            if (typeof VacationDays[DateObject.getMonth() + 1] !== 'undefined' &&
+                typeof VacationDays[DateObject.getMonth() + 1][DateObject.getDate()] !== 'undefined') {
+                DayDescription += VacationDays[DateObject.getMonth() + 1][DateObject.getDate()];
+                DayClass = 'Highlight ';
+            }
+
+            // Check if date is one of the one time vacation days
+            if (typeof VacationDaysOneTime[DateObject.getFullYear()] !== 'undefined' &&
+                typeof VacationDaysOneTime[DateObject.getFullYear()][DateObject.getMonth() + 1] !== 'undefined' &&
+                typeof VacationDaysOneTime[DateObject.getFullYear()][DateObject.getMonth() + 1][DateObject.getDate()] !== 'undefined') {
+                if (DayDescription.length) {
+                    DayDescription += ' ';
+                }
+                DayDescription += VacationDaysOneTime[DateObject.getFullYear()][DateObject.getMonth() + 1][DateObject.getDate()];
+                DayClass = 'Highlight ';
+            }
+
+            // Check if date is a day without working hours
+            DayWorkingHours = WorkingHours[DayAbbr];
+            if (!DayWorkingHours || !DayWorkingHours.length) {
+                if (DayDescription.length) {
+                    DayDescription += ' ';
+                }
+                DayDescription += Core.Language.Translate('No working hours');
+                DayClass = 'Highlight ';
+            }
+
+            if (DayClass.length) {
+                return [true, DayClass, DayDescription];
+            }
+            else {
+                return [true, ''];
+            }
         }
 
         /**
@@ -269,7 +276,6 @@ Core.UI.Datepicker = (function (TargetNS) {
 
             // add datepicker icon and click event
             $DatepickerElement.after('<a href="#" class="DatepickerIcon" id="' + Element.Day.attr('id') + 'DatepickerIcon" title="' + Core.Language.Translate('Open date selection') + '"><i class="fa fa-calendar"></i></a>');
-
             if (Element.DateInFuture) {
                 ErrorMessage = Core.Language.Translate('Invalid date (need a future date)!');
             }

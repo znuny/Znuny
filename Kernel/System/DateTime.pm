@@ -1365,6 +1365,56 @@ sub IsVacationDay {
     return 0;
 }
 
+=head2 IsWorkingDay()
+
+Returns whether the current date is a working day according to the configured
+working hours and vacation days.
+
+    my $IsWorkingDay = $DateTimeObject->IsWorkingDay();
+
+    my $IsWorkingDay = $DateTimeObject->IsWorkingDay(
+        Calendar => 9, # optional, OTRS vacation days calendar number
+    );
+
+Returns:
+
+    my $IsWorkingDay = 1;    # or 0 if the day is a vacation day or has no working hours
+
+=cut
+
+sub IsWorkingDay {
+    my ( $Self, %Param ) = @_;
+
+    return 0 if $Self->IsVacationDay(%Param);
+
+    my $ConfigObject           = $Kernel::OM->Get('Kernel::Config');
+    my $TimeWorkingHours       = $ConfigObject->Get('TimeWorkingHours');
+    my $OriginalDateTimeValues = $Self->Get();
+
+    if ( $Param{Calendar} ) {
+        if ( $ConfigObject->Get( "TimeZone::Calendar" . $Param{Calendar} . "Name" ) ) {
+            $TimeWorkingHours = $ConfigObject->Get( "TimeWorkingHours::Calendar" . $Param{Calendar} );
+
+            my $TimeZone = $ConfigObject->Get( "TimeZone::Calendar" . $Param{Calendar} )
+                || $Self->OTRSTimeZoneGet();
+
+            if ( defined $TimeZone ) {
+                $Self->ToTimeZone( TimeZone => $TimeZone );
+            }
+        }
+    }
+
+    my $DateTimeValues = $Self->Get();
+    my $DayAbbr        = $DateTimeValues->{DayAbbr};
+    my $WorkingHours   = $TimeWorkingHours->{$DayAbbr} || [];
+
+    $Self->ToTimeZone( TimeZone => $OriginalDateTimeValues->{TimeZone} );
+
+    return 1 if IsArrayRefWithData($WorkingHours);
+
+    return 0;
+}
+
 =head2 LastDayOfMonthGet()
 
 Returns the last day of the month.

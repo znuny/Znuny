@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.912785094763893;
+    $Self->{Completeness}        = 0.912813102119461;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5982,6 +5982,8 @@ sub Data {
             'Ukoliko je uključeno, korisnici koji još nisu odabrali vremensku zonu biće obavešteni o tome. Napomena: obaveštenje neće biti prikazano ukoliko (1) korisnik još nije odabrao vremensku zonu i (2) OTRSTimeZone i UserDefaultTimeZone se podudaraju i (3) nisu postavljena na UTC.',
         'Maximum Number of a calendar shown in a dropdown.' => 'Maksimalni broj kalendara prikazan u listi.',
         'Define the start day of the week for the date picker.' => 'Definiši prvi dan u nedelji za izbor datuma.',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Određuje da li podrazumevani datum čekanja zasnovan na Ticket::Frontend::PendingDiffTime treba da preskoči dane koji su praznici ili nemaju radno vreme u ovom kalendaru.',
         'Adds the permanent vacation days.' => 'Trajno dodaje neradne dane.',
         'Adds the one time vacation days.' => 'Jednokratno dodaje neradne dane.',
         'Defines the hours and week days to count the working time.' => 'Određuje sate i dane u nedelji u naznačenom kalendaru, radi računanja radnog vremena.',
@@ -8543,6 +8545,7 @@ sub Data {
             'Da li stvarno želite da poništite ovo podešavanje na njegovu prethodnu vrednost?',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'Nema radnog vremena',
         'Open date selection' => 'Otvori izbor datuma',
         'Invalid date (need a future date)!' => 'Neispravan datum (neophodan datum u budućnosti)!',
         'Invalid date (need a past date)!' => 'Neispravan datum (neophodan datum u prošlosti)!',
@@ -9569,6 +9572,7 @@ Vaša tehnička podrška
         'No response from package upgrade all.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
         'Notice',
         'Notification',

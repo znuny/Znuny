@@ -25806,3 +25806,19 @@ msgstr "Adminisztrátori kézikönyv megtekintése"
 msgid "Resend is not possible for this article!"
 msgstr "Az újraküldés nem lehetséges ennél a bejegyzésnél!"
 
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar."
+msgstr "Meghatározza, hogy a Ticket::Frontend::PendingDiffTime alapján számított alapértelmezett várakozási dátumnak ki kell-e hagynia azokat a napokat, amelyek munkaszüneti napok, vagy amelyeken ebben a naptárban nincs munkaidő."
+
+#. JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+msgid "No working hours"
+msgstr "Nincs munkaidő"
+
+#. SysConfig
+msgid "Copies matching email follow-up articles to directly linked parent tickets."
+msgstr ""
+
+#. SysConfig
+msgid "Defines ordered rules for copying email follow-up articles to parent tickets. Processing stops after the first matching rule."
+msgstr ""
+

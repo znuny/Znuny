@@ -25804,3 +25804,19 @@ msgstr ""
 msgid "Resend is not possible for this article!"
 msgstr "Ponovno slanje nije moguće za ovaj članak!"
 
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar."
+msgstr "Određuje treba li zadani datum čekanja na temelju Ticket::Frontend::PendingDiffTime preskočiti dane koji su praznici ili nemaju radno vrijeme u ovom kalendaru."
+
+#. JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+msgid "No working hours"
+msgstr "Nema radnog vremena"
+
+#. SysConfig
+msgid "Copies matching email follow-up articles to directly linked parent tickets."
+msgstr ""
+
+#. SysConfig
+msgid "Defines ordered rules for copying email follow-up articles to parent tickets. Processing stops after the first matching rule."
+msgstr ""
+

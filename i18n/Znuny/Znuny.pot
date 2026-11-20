@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2026-07-06 10:14+0000\n"
+"POT-Creation-Date: 2026-10-09 10:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16323,6 +16323,10 @@ msgid "Define the start day of the week for the date picker."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Adds the permanent vacation days."
 msgstr ""
 
@@ -22024,6 +22028,10 @@ msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.SystemConfiguration.js
 msgid "Do you really want to revert this setting to its historical value?"
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+msgid "No working hours"
 msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js

@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D %T';
-    $Self->{Completeness}        = 0.887568262126566;
+    $Self->{Completeness}        = 0.887604367373154;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -5976,6 +5976,8 @@ sub Data {
             '사용하도록 설정하면 아직 시간대를 선택하지 않은 사용자에게 알림이 전송됩니다. 참고 : (1) 사용자가 아직 시간대를 선택하지 않았으며 (2) OTRSTimeZone과 UserDefaultTimeZone이 일치하고 (3) UTC로 설정되지 않은 경우 알림이 표시되지 않습니다.',
         'Maximum Number of a calendar shown in a dropdown.' => '드롭 다운에 표시된 최대 달력 수입니다.',
         'Define the start day of the week for the date picker.' => '날짜 선택 도구의 시작 요일을 정의하십시오.',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Ticket::Frontend::PendingDiffTime을 기준으로 한 기본 보류 날짜가 공휴일이거나 이 달력에 근무 시간이 없는 날을 건너뛸지 정의합니다.',
         'Adds the permanent vacation days.' => '영구 휴가 일을 추가합니다.',
         'Adds the one time vacation days.' => '한 번 휴가를 추가합니다.',
         'Defines the hours and week days to count the working time.' => '근무 시간을 계산할 시간과 요일을 정의합니다.',
@@ -8537,6 +8539,7 @@ sub Data {
             '이 설정을 이전 값으로 되돌리시겠습니까?',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => '근무 시간 없음',
         'Open date selection' => '영업일 선택',
         'Invalid date (need a future date)!' => '날짜가 잘못 되었습니다 (미래 날짜 필요)!',
         'Invalid date (need a past date)!' => '날짜가 잘못 되었습니다 (지난 날짜 필요)!',
@@ -9563,6 +9566,7 @@ Thanks for your help!
         'No response from package upgrade all.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
         'Notice',
         'Notification',

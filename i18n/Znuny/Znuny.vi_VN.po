@@ -25801,3 +25801,19 @@ msgstr ""
 msgid "Resend is not possible for this article!"
 msgstr "Không thể gửi lại bài viết này!"
 
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar."
+msgstr "Xác định xem ngày chờ mặc định dựa trên Ticket::Frontend::PendingDiffTime có nên bỏ qua các ngày là ngày lễ hoặc không có giờ làm việc trong lịch này hay không."
+
+#. JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+msgid "No working hours"
+msgstr "Không có giờ làm việc"
+
+#. SysConfig
+msgid "Copies matching email follow-up articles to directly linked parent tickets."
+msgstr ""
+
+#. SysConfig
+msgid "Defines ordered rules for copying email follow-up articles to parent tickets. Processing stops after the first matching rule."
+msgstr ""
+

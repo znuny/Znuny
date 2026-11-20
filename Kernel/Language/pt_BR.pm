@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.880661741085769;
+    $Self->{Completeness}        = 0.880700064226076;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5981,6 +5981,8 @@ sub Data {
             'Se ativado, usuários que ainda não tiverem selecionado um fuso horário serão notificados para fazê-lo. Nota: Notificação só será mostrada se (1) o usuário ainda não tiver selecionado um fuso horário (2) OTRSTimeZone e UserDefaultTimeZone forem diferentes e (3) não estiverem definidos como UTC.',
         'Maximum Number of a calendar shown in a dropdown.' => 'Número Máximo de calendários exibidos em um campo de seleção.',
         'Define the start day of the week for the date picker.' => 'Define o dia de início da semana para o selecionador de data.',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Define se a data de pendência padrão com base em Ticket::Frontend::PendingDiffTime deve ignorar os dias que são feriados ou que não têm horário de trabalho neste calendário.',
         'Adds the permanent vacation days.' => '',
         'Adds the one time vacation days.' => 'Adiciona os feriados de data única.',
         'Defines the hours and week days to count the working time.' => 'Define as horas e dias de semana para contabilizar o tempo de trabalho.',
@@ -8542,6 +8544,7 @@ sub Data {
             'Você realmente quer reverte esta definição ao seu valor histórico?',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'Sem horário de trabalho',
         'Open date selection' => 'Abrir seleção de data',
         'Invalid date (need a future date)!' => 'Data inválida (é necessária uma data futura)!',
         'Invalid date (need a past date)!' => 'Data inválida (é necessário uma data no passado)!',
@@ -9568,6 +9571,7 @@ Obrigado pela ajuda!
         'No response from package upgrade all.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
         'Notice',
         'Notification',

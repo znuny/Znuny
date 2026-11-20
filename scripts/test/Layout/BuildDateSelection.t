@@ -455,4 +455,114 @@ for my $Test (@Tests) {
     }
 }
 
+# DiffTime pending default: optionally skip weekends/holidays.
+# These cases only use FixedTimeSet (no explicit Year/Month/Day override).
+my @DiffTimeTests = (
+    {
+        Name                       => 'DiffTime Friday + 1 day, skip off lands on Saturday',
+        DateTimeString             => '2026-01-09 10:00:00',                                   # Friday
+        DiffTime                   => 86400,
+        SkipUnavailableDays        => 0,
+        PendingSkipUnavailableDays => 1,
+        ExpectedDay                => 10,
+        ExpectedMonth              => 1,
+        ExpectedYear               => 2026,
+    },
+    {
+        Name                       => 'DiffTime Friday + 1 day, skip on lands on Monday',
+        DateTimeString             => '2026-01-09 10:00:00',                                   # Friday
+        DiffTime                   => 86400,
+        SkipUnavailableDays        => 1,
+        PendingSkipUnavailableDays => 1,
+        ExpectedDay                => 12,
+        ExpectedMonth              => 1,
+        ExpectedYear               => 2026,
+    },
+    {
+        Name                       => 'DiffTime New Year\'s Eve + 1 day, skip on lands after New Year\'s Day',
+        DateTimeString             => '2025-12-31 10:00:00',    # New Year's Eve (vacation)
+        DiffTime                   => 86400,                    # -> Thursday Jan 1 holiday
+        SkipUnavailableDays        => 1,
+        PendingSkipUnavailableDays => 1,
+        ExpectedDay                => 2,
+        ExpectedMonth              => 1,
+        ExpectedYear               => 2026,
+    },
+    {
+        Name                       => 'DiffTime Friday + 1 day, skip on without pending flag stays Saturday',
+        DateTimeString             => '2026-01-09 10:00:00',                                                    # Friday
+        DiffTime                   => 86400,
+        SkipUnavailableDays        => 1,
+        PendingSkipUnavailableDays => 0,
+        ExpectedDay                => 10,
+        ExpectedMonth              => 1,
+        ExpectedYear               => 2026,
+    },
+);
+
+for my $Test (@DiffTimeTests) {
+
+    $ConfigObject->Set(
+        Key   => 'OTRSTimeZone',
+        Value => 'UTC',
+    );
+    $ConfigObject->Set(
+        Key   => 'TimeInputFormat',
+        Value => 'Option',
+    );
+    $ConfigObject->Set(
+        Key   => 'TimePendingSkipUnavailableDays',
+        Value => $Test->{SkipUnavailableDays},
+    );
+
+    my $DateTimeObject = $Kernel::OM->Create(
+        'Kernel::System::DateTime',
+        ObjectParams => {
+            String => $Test->{DateTimeString},
+        },
+    );
+    $HelperObject->FixedTimeSet( $DateTimeObject->ToEpoch() );
+
+    $Kernel::OM->ObjectParamAdd(
+        'Kernel::Output::HTML::Layout' => {
+            Lang         => 'en',
+            UserTimeZone => 'UTC',
+        },
+    );
+
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $HTML         = $LayoutObject->BuildDateSelection(
+        DiffTime                   => $Test->{DiffTime},
+        PendingSkipUnavailableDays => $Test->{PendingSkipUnavailableDays},
+    );
+
+    $HTML =~ s{\s+<option\s+value="\d+">\d+</option>}{}msxg;
+
+    my $ExpectedValue = qq{<select id="Month" name="Month" title="Month">
+  <option value="$Test->{ExpectedMonth}" selected="selected">}
+        . sprintf( '%02d', $Test->{ExpectedMonth} )
+        . qq{</option>
+</select>
+<select class=" " id="Day" name="Day" title="Day">
+  <option value="$Test->{ExpectedDay}" selected="selected">} . sprintf( '%02d', $Test->{ExpectedDay} ) . qq{</option>
+</select>
+<select id="Year" name="Year" title="Year">
+  <option value="$Test->{ExpectedYear}" selected="selected">$Test->{ExpectedYear}</option>
+</select>};
+
+    # remove /, : and - and convert them into new lines
+    $HTML =~ s{</select>(?: / | : | \s-\s)<select}{</select>\n<select}msxg;
+
+    $Self->Is(
+        $HTML,
+        $ExpectedValue,
+        "BuildDateSelection(): $Test->{Name}",
+    );
+
+    $Kernel::OM->ObjectsDiscard(
+        Objects => [ 'Kernel::Output::HTML::Layout', ],
+    );
+    $HelperObject->FixedTimeUnset();
+}
+
 1;

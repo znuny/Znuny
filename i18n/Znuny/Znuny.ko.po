@@ -25813,3 +25813,19 @@ msgstr ""
 msgid "Resend is not possible for this article!"
 msgstr "이 기사는 다시 보낼 수 없습니다!"
 
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar."
+msgstr "Ticket::Frontend::PendingDiffTime을 기준으로 한 기본 보류 날짜가 공휴일이거나 이 달력에 근무 시간이 없는 날을 건너뛸지 정의합니다."
+
+#. JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+msgid "No working hours"
+msgstr "근무 시간 없음"
+
+#. SysConfig
+msgid "Copies matching email follow-up articles to directly linked parent tickets."
+msgstr ""
+
+#. SysConfig
+msgid "Defines ordered rules for copying email follow-up articles to parent tickets. Processing stops after the first matching rule."
+msgstr ""
+

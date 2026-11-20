@@ -25800,3 +25800,19 @@ msgstr ""
 msgid "Resend is not possible for this article!"
 msgstr "Selle artikli uuesti saatmine pole võimalik!"
 
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar."
+msgstr "Määrab, kas Ticket::Frontend::PendingDiffTime põhjal arvutatud ootel oleku vaikekuupäev peab vahele jätma päevad, mis on pühad või millel selles kalendris tööaega ei ole."
+
+#. JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+msgid "No working hours"
+msgstr "Tööaeg puudub"
+
+#. SysConfig
+msgid "Copies matching email follow-up articles to directly linked parent tickets."
+msgstr ""
+
+#. SysConfig
+msgid "Defines ordered rules for copying email follow-up articles to parent tickets. Processing stops after the first matching rule."
+msgstr ""
+

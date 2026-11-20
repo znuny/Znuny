@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.618535175072278;
+    $Self->{Completeness}        = 0.618657675016057;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -5989,6 +5989,8 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
             '',
         'Maximum Number of a calendar shown in a dropdown.' => '',
         'Define the start day of the week for the date picker.' => 'Definire il giorno di inizio settimana per il selezionatore di date.',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Definisce se la data predefinita di attesa basata su Ticket::Frontend::PendingDiffTime deve saltare i giorni festivi o i giorni senza orario di lavoro in questo calendario.',
         'Adds the permanent vacation days.' => '',
         'Adds the one time vacation days.' => '',
         'Defines the hours and week days to count the working time.' => '',
@@ -8550,6 +8552,7 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
             '',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'Nessun orario di lavoro',
         'Open date selection' => 'Apri selezione data',
         'Invalid date (need a future date)!' => 'Data non valida (è necessaria una data nel futuro)!',
         'Invalid date (need a past date)!' => 'Data non valida (è necessaria una data nel passato)!',
@@ -9576,6 +9579,7 @@ Il tuo helpdesk.
         'No response from package upgrade all.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
         'Notice',
         'Notification',

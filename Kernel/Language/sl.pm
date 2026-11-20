@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.210086733054931;
+    $Self->{Completeness}        = 0.21034039820167;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -5980,6 +5980,8 @@ sub Data {
             '',
         'Maximum Number of a calendar shown in a dropdown.' => '',
         'Define the start day of the week for the date picker.' => 'Določi prvi dan v tednu za izbor datuma.',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Določa, ali naj privzeti datum čakanja na podlagi Ticket::Frontend::PendingDiffTime preskoči dneve, ki so prazniki ali v tem koledarju nimajo delovnega časa.',
         'Adds the permanent vacation days.' => '',
         'Adds the one time vacation days.' => '',
         'Defines the hours and week days to count the working time.' => 'Določa ure in dni za štetje delovnega časa.',
@@ -8541,6 +8543,7 @@ sub Data {
             '',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'Ni delovnega časa',
         'Open date selection' => 'Odpri izbor datuma',
         'Invalid date (need a future date)!' => 'Napravilen datum (potreben datum v prihodnosti)!',
         'Invalid date (need a past date)!' => '',
@@ -9556,6 +9559,7 @@ Thanks for your help!
         'No response from package upgrade all.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
         'Notice',
         'Notification',

@@ -26,7 +26,7 @@ All valid functions.
 
 =head2 DatepickerGetVacationDays()
 
-Returns a hash of all vacation days defined in the system.
+Returns a hash of all vacation days and working hours defined in the system.
 
     $LayoutObject->DatepickerGetVacationDays();
 
@@ -38,15 +38,17 @@ sub DatepickerGetVacationDays {
     # get config object
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-    # get the defined vacation days
+    # get the defined vacation days and working hours
     my $TimeVacationDays        = $ConfigObject->Get('TimeVacationDays');
     my $TimeVacationDaysOneTime = $ConfigObject->Get('TimeVacationDaysOneTime');
+    my $TimeWorkingHours        = $ConfigObject->Get('TimeWorkingHours');
     if ( $Param{Calendar} ) {
         if ( $ConfigObject->Get( "TimeZone::Calendar" . $Param{Calendar} . "Name" ) ) {
             $TimeVacationDays        = $ConfigObject->Get( "TimeVacationDays::Calendar" . $Param{Calendar} );
             $TimeVacationDaysOneTime = $ConfigObject->Get(
                 "TimeVacationDaysOneTime::Calendar" . $Param{Calendar}
             );
+            $TimeWorkingHours = $ConfigObject->Get( "TimeWorkingHours::Calendar" . $Param{Calendar} );
         }
     }
 
@@ -70,6 +72,7 @@ sub DatepickerGetVacationDays {
     return {
         'TimeVacationDays'        => $TimeVacationDays,
         'TimeVacationDaysOneTime' => $TimeVacationDaysOneTime,
+        'TimeWorkingHours'        => $TimeWorkingHours,
     };
 }
 

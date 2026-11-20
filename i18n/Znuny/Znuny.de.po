@@ -25896,3 +25896,19 @@ msgstr "Admin-Handbuch anzeigen"
 msgid "Resend is not possible for this article!"
 msgstr "Erneutes Senden für diesen Artikel nicht möglich!"
 
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar."
+msgstr "Definiert, ob das standardmäßige Warten-bis-Datum basierend auf Ticket::Frontend::PendingDiffTime Tage überspringen soll, die Feiertage sind oder in diesem Kalender keine Arbeitszeiten haben."
+
+#. JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+msgid "No working hours"
+msgstr "Keine Arbeitszeiten"
+
+#. SysConfig
+msgid "Copies matching email follow-up articles to directly linked parent tickets."
+msgstr "Kopiert passende E-Mail-Follow-Up-Artikel in direkt verknüpfte Eltern-Tickets."
+
+#. SysConfig
+msgid "Defines ordered rules for copying email follow-up articles to parent tickets. Processing stops after the first matching rule."
+msgstr "Definiert geordnete Regeln zum Kopieren von E-Mail-Follow-Up-Artikeln in Eltern-Tickets. Die Verarbeitung wird nach der ersten passenden Regel beendet."
+

@@ -5976,6 +5976,8 @@ sub Data {
             'Wenn aktiviert, werden Benutzer, die bislang noch keine Zeitzone ausgewählt haben, benachrichtigt dies zu tun. Hinweis: Die Benachrichtigung wird nicht angezeigt, wenn (1) der Benutzer noch keine Zeitzone ausgewählt hat und (2) OTRSTimeZone und UserDefaultTimeZone identisch sind und (3) nicht auf UTC gesetzt sind.',
         'Maximum Number of a calendar shown in a dropdown.' => 'Maximale Anzahl an Kalendern, die in Auswahlmenüs angezeigt werden.',
         'Define the start day of the week for the date picker.' => 'Definiert den Beginn einer Woche für den Datumswähler.',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Definiert, ob das standardmäßige Warten-bis-Datum basierend auf Ticket::Frontend::PendingDiffTime Tage überspringen soll, die Feiertage sind oder in diesem Kalender keine Arbeitszeiten haben.',
         'Adds the permanent vacation days.' => 'Fügt die dauerhaften Urlaubstage hinzu.',
         'Adds the one time vacation days.' => 'Fügt die einmaligen Urlaubstage hinzu.',
         'Defines the hours and week days to count the working time.' => 'Definiert den Zeitraum und die Wochentage welche als Arbeitszeit zählen.',
@@ -8537,6 +8539,7 @@ sub Data {
             'Möchten Sie diese Einstellung wirklich auf ihren ursprünglichen Wert zurücksetzen?',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'Keine Arbeitszeiten',
         'Open date selection' => 'Datumsauswahl öffnen',
         'Invalid date (need a future date)!' => 'Ungültiges Datum (Benötige Datum in der Zukunft)!',
         'Invalid date (need a past date)!' => 'Ungültiges Datum (Benötige Datum in der Vergangenheit)!',
@@ -9562,6 +9565,7 @@ Ihr Helpdesk-Team
         'No response from package upgrade all.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
         'Notice',
         'Notification',
