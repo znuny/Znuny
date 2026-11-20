@@ -21030,7 +21030,7 @@ msgstr ""
 msgid "month"
 msgstr "kuukausi"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/LinkObject.tt
 msgid "Remove active filters for this widget."
 msgstr ""
 
@@ -25692,4 +25692,16 @@ msgstr "Ei työaikaa"
 #. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "%s of %s"
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/LinkObject.tt
+msgid "No results found."
+msgstr "Tuloksia ei löytynyt."
+
+#. Perl Module: Kernel/Output/HTML/Layout/LinkObject.pm
+msgid "filter"
+msgstr "Suodatin"
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = \"complex\"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup."
+msgstr "Ota käyttöön monivalintaiset sarakesuodattimet linkitetyille tiketeille monimutkaisessa linkitettyjen objektien widgetissä (LinkObject::ViewMode = \"complex\"). Suodattimet ovat käytettävissä näkymässä AgentTicketZoom, eikä niitä näytetä AgentLinkObject-ponnahdusikkunassa."
 

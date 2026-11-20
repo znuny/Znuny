@@ -21050,7 +21050,7 @@ msgstr "لطفا فیلدهای مشخص شده به عنوان قرمز برا�
 msgid "month"
 msgstr "ماه"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/LinkObject.tt
 msgid "Remove active filters for this widget."
 msgstr "حذف فیلتر فعال برای این عنصر است."
 
@@ -25703,4 +25703,16 @@ msgstr "بدون ساعت کاری"
 #. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "%s of %s"
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/LinkObject.tt
+msgid "No results found."
+msgstr "نتیجه‌ای یافت نشد."
+
+#. Perl Module: Kernel/Output/HTML/Layout/LinkObject.pm
+msgid "filter"
+msgstr "فیلتر"
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = \"complex\"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup."
+msgstr "فیلترهای ستون با انتخاب چندگانه را برای درخواست‌های پیوندشده در ابزارک پیچیدهٔ اشیاء پیوندشده فعال می‌کند (LinkObject::ViewMode = \"complex\"). فیلترها در AgentTicketZoom در دسترس هستند و در پنجرهٔ بازشوی AgentLinkObject نشان داده نمی‌شوند."
 

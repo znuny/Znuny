@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%m/%d';
     $Self->{DateInputFormat}     = '%Y/%m/%d';
     $Self->{DateInputFormatLong} = '%Y/%m/%d - %T';
-    $Self->{Completeness}        = 0.653706337916864;
+    $Self->{Completeness}        = 0.653870458135861;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3227,6 +3227,8 @@ sub Data {
         'Delete link' => 'リンクを削除',
         'Delete Link' => 'リンクを削除',
         'Object#' => '対象の番号',
+        'Remove active filters for this widget.' => 'このウィジットに対するアクティブ・フィルターを除去',
+        'No results found.' => '結果が見つかりません。',
         'Add links' => 'リンクを追加',
         'Delete links' => 'リンクを削除',
 
@@ -4849,6 +4851,7 @@ sub Data {
         'Linked as' => 'リンク先',
         'Search Result' => '検索結果',
         'Linked' => 'リンク済',
+        'filter' => 'フィルター',
         'Bulk' => '一括',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -7936,6 +7939,8 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             'AgentTicketZoom および CustomerTicketZoom 上でデフォルト表示する受信者名(To,Cc)',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             'AgentTicketZoom および CustomerTicketZoom 上でデフォルト表示する送信者名(From)',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            '複雑なリンクオブジェクトウィジェットで、リンクされたチケットの複数選択列フィルターを有効にします (LinkObject::ViewMode = "complex")。フィルターは AgentTicketZoom で利用でき、AgentLinkObject のポップアップには表示されません。',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8630,7 +8635,6 @@ Contentはダイナミック・フィールドの形式によって設定内容�
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => '',
         'month' => '月',
-        'Remove active filters for this widget.' => 'このウィジットに対するアクティブ・フィルターを除去',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => 'しばらくお待ちください..',

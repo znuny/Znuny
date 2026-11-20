@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.251461988304094;
+    $Self->{Completeness}        = 0.251816745655608;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3224,6 +3224,8 @@ sub Data {
         'Delete link' => '',
         'Delete Link' => '',
         'Object#' => 'वस्तु#',
+        'Remove active filters for this widget.' => '',
+        'No results found.' => 'कोई परिणाम नहीं मिला.',
         'Add links' => 'लिंक जोड़ें',
         'Delete links' => 'लिंक हटाएँ',
 
@@ -4845,6 +4847,7 @@ sub Data {
         'Linked as' => '',
         'Search Result' => '',
         'Linked' => 'लिंक किए गए',
+        'filter' => 'निस्पादक',
         'Bulk' => 'थोक',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -7923,6 +7926,8 @@ sub Data {
             '',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             '',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'जटिल लिंक किए गए ऑब्जेक्ट विजेट में लिंक किए गए टिकटों के लिए बहुचयन कॉलम निस्पादक सक्षम करें (LinkObject::ViewMode = "complex"). निस्पादक AgentTicketZoom में उपलब्ध हैं और AgentLinkObject पॉपअप में नहीं दिखाए जाते.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8617,7 +8622,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => '',
         'month' => 'महीना',
-        'Remove active filters for this widget.' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '',

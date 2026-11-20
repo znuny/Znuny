@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%m/%d/%Y';
     $Self->{DateInputFormat}     = '%m/%d/%Y';
     $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
-    $Self->{Completeness}        = 0.421526789947843;
+    $Self->{Completeness}        = 0.421800947867299;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -3224,6 +3224,8 @@ sub Data {
         'Delete link' => '',
         'Delete Link' => '',
         'Object#' => 'Kipengee#',
+        'Remove active filters for this widget.' => 'Ondoa vichuja amilifu kwa hiki kifaa.',
+        'No results found.' => 'Hakuna matokeo yaliyopatikana.',
         'Add links' => 'Ongeza viungo',
         'Delete links' => 'Futa viungo',
 
@@ -4845,6 +4847,7 @@ sub Data {
         'Linked as' => '',
         'Search Result' => '',
         'Linked' => 'Imeunganishwa',
+        'filter' => 'Chuja',
         'Bulk' => 'Kwa wingi',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -7926,6 +7929,8 @@ Mfano:
             '',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             '',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Washa vichujio vya safu wima vya chaguo nyingi kwa tiketi zilizounganishwa katika wijeti changamano ya vitu vilivyounganishwa (LinkObject::ViewMode = "complex"). Vichujio vinapatikana katika AgentTicketZoom na havionyeshwi kwenye dirisha ibukizi la AgentLinkObject.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8620,7 +8625,6 @@ Mfano:
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => 'Tafadhali angalia uga zote ziliizowekwa alama nyekundu kwa ajili ya maingizo batili.',
         'month' => 'Mwezi',
-        'Remove active filters for this widget.' => 'Ondoa vichuja amilifu kwa hiki kifaa.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '',

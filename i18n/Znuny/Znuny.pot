@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2026-11-20 11:30+0000\n"
+"POT-Creation-Date: 2026-11-20 12:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9471,6 +9471,14 @@ msgid "Object#"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/LinkObject.tt
+msgid "Remove active filters for this widget."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/LinkObject.tt
+msgid "No results found."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/LinkObject.tt
 msgid "Add links"
 msgstr ""
 
@@ -13772,6 +13780,10 @@ msgstr ""
 
 #. Perl Module: Kernel/Output/HTML/Layout/LinkObject.pm
 msgid "Linked"
+msgstr ""
+
+#. Perl Module: Kernel/Output/HTML/Layout/LinkObject.pm
+msgid "filter"
 msgstr ""
 
 #. Perl Module: Kernel/Output/HTML/Layout/LinkObject.pm
@@ -20463,6 +20475,10 @@ msgid "Default display type for sender (From) names in AgentTicketZoom and Custo
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = \"complex\"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = \"complex\"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns."
 msgstr ""
 
@@ -22168,10 +22184,6 @@ msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
 msgid "month"
-msgstr ""
-
-#. JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
-msgid "Remove active filters for this widget."
 msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js

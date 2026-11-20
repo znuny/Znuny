@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.85079816658764;
+    $Self->{Completeness}        = 0.85086887835703;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3227,6 +3227,8 @@ sub Data {
         'Delete link' => 'Obriši vezu',
         'Delete Link' => 'Obriši vezu',
         'Object#' => 'Objekat#',
+        'Remove active filters for this widget.' => 'Ukloni aktivne filtere za ovaj dodatak.',
+        'No results found.' => 'Nema pronađenih rezultata.',
         'Add links' => 'Dodaj veze',
         'Delete links' => 'Obriši veze',
 
@@ -4848,6 +4850,7 @@ sub Data {
         'Linked as' => 'Povezano kao',
         'Search Result' => 'Rezultat pretrage',
         'Linked' => 'Povezano',
+        'filter' => 'Filter',
         'Bulk' => 'Masovno',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -7926,6 +7929,8 @@ sub Data {
             'Podrazumevani tip prikaza za imena primaoca (To,Cc) na detaljnom prikazu tiketa u interfejsu operatara i klijenta.',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             'Podrazumevani tip prikaza za imena (Od) pošiljaoca na detaljnom prikazu tiketa u interfejsu operatera i klijenta.',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Omogućava filtere kolona sa višestrukim izborom za povezane tikete u složenom dodatku povezanih objekata (LinkObject::ViewMode = "complex"). Filteri su dostupni u AgentTicketZoom i ne prikazuju se u iskačućem prozoru AgentLinkObject.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             'Definiše koje kolone će biti prikazane u dodatku povezanih tiketa (LinkObject::ViewMode = "složeno"). Napomena: samo atributi tiketa i dinamička polja (DynamicField_NameX) su dozvoljena za DefaultColumns.',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8620,7 +8625,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => 'Molimo proverite polja označena crvenim za važeće unose.',
         'month' => 'mesec',
-        'Remove active filters for this widget.' => 'Ukloni aktivne filtere za ovaj dodatak.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => 'Molimo sačekajte...',

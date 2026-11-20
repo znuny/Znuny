@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.569148095463885;
+    $Self->{Completeness}        = 0.569352290679305;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3228,6 +3228,8 @@ sub Data {
         'Delete link' => '',
         'Delete Link' => '',
         'Object#' => 'Objeto nº',
+        'Remove active filters for this widget.' => 'Eliminar los filtros activos para este componente.',
+        'No results found.' => 'No se encontraron resultados.',
         'Add links' => 'Añadir enlaces',
         'Delete links' => 'Borrar enlaces',
 
@@ -4849,6 +4851,7 @@ sub Data {
         'Linked as' => 'Enlazado como',
         'Search Result' => 'Resultado de la búsqueda',
         'Linked' => 'Enlazado',
+        'filter' => 'Filtro',
         'Bulk' => 'Bloque',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -7934,6 +7937,8 @@ El control del acceso adicional para demostrar o no demostrar éste enlace puede
             'Tipo de pantalla por defecto para nombre del destinatario ( Para, CC) en AgenteTicketZoom y ClienteTicketZoom.',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             'Tipo de pantalla por defecto para nombres del remitente (De) en AgenteTicketZoom y ClienteTicketZoom.',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Activa los filtros de columna de selección múltiple para los tickets enlazados en el widget complejo de objetos enlazados (LinkObject::ViewMode = "complex"). Los filtros están disponibles en AgentTicketZoom y no se muestran en la ventana emergente de AgentLinkObject.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8628,7 +8633,6 @@ El control del acceso adicional para demostrar o no demostrar éste enlace puede
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => 'Compruebe que los campos marcados en rojo tienen datos válidos.',
         'month' => 'mes',
-        'Remove active filters for this widget.' => 'Eliminar los filtros activos para este componente.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '',

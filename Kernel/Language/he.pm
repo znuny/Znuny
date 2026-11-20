@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.218112849691797;
+    $Self->{Completeness}        = 0.218483412322275;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -3228,6 +3228,8 @@ sub Data {
         'Delete link' => '',
         'Delete Link' => '',
         'Object#' => 'אובייקט#',
+        'Remove active filters for this widget.' => 'הסר מסננים פעילים לחלונית זו.',
+        'No results found.' => 'לא נמצאו תוצאות.',
         'Add links' => 'הוסף קישורים',
         'Delete links' => 'מחק קישורים',
 
@@ -4849,6 +4851,7 @@ sub Data {
         'Linked as' => '',
         'Search Result' => '',
         'Linked' => 'מקושר',
+        'filter' => 'מסנן',
         'Bulk' => 'מרובה',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -7927,6 +7930,8 @@ sub Data {
             '',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             '',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'הפעלת מסנני עמודות עם בחירה מרובה עבור קריאות מקושרות ביישומון המורכב של אובייקטים מקושרים (LinkObject::ViewMode = "complex"). המסננים זמינים ב-AgentTicketZoom ואינם מוצגים בחלון הקופץ של AgentLinkObject.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8621,7 +8626,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => '',
         'month' => 'חודש',
-        'Remove active filters for this widget.' => 'הסר מסננים פעילים לחלונית זו.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '',

@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.998577524893314;
+    $Self->{Completeness}        = 0.998578199052133;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3227,6 +3227,8 @@ sub Data {
         'Delete link' => 'Kapcsolat törlése',
         'Delete Link' => 'Kapcsolat törlése',
         'Object#' => 'Objektum#',
+        'Remove active filters for this widget.' => 'A felületi elem aktív szűrőinek eltávolítása.',
+        'No results found.' => 'Nem található eredmény.',
         'Add links' => 'Kapcsolatok hozzáadása',
         'Delete links' => 'Kapcsolatok törlése',
 
@@ -4848,6 +4850,7 @@ sub Data {
         'Linked as' => 'Összekapcsolva mint',
         'Search Result' => 'Keresési eredmény',
         'Linked' => 'Összekapcsolt',
+        'filter' => 'Szűrő',
         'Bulk' => 'Tömeges',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -7926,6 +7929,8 @@ sub Data {
             'Alapértelmezett megjelenítési típus a címzett (címzett, másolat) neveihez az ügyintézői jegynagyítás és az ügyfél jegynagyítás képernyőkön.',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             'Alapértelmezett megjelenítési típus a küldő (feladó) neveihez az ügyintézői jegynagyítás és az ügyfél jegynagyítás képernyőkön.',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Többszörös kijelölésű oszlopszűrők engedélyezése a kapcsolt jegyekhez a kapcsolt objektumok összetett felületi elemén (LinkObject::ViewMode = "complex"). A szűrők az AgentTicketZoom nézetben érhetők el, és nem jelennek meg az AgentLinkObject felugró ablakában.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             'Annak meghatározása, hogy mely oszlopok legyenek láthatók a kapcsolt jegyek felületi elemen (LinkObject::ViewMode = „összetett”). Megjegyzés: csak jegyattribútumok és dinamikus mezők (DynamicField_NévX) engedélyezettek a DefaultColumns értékeinél.',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8620,7 +8625,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => 'Ellenőrizze a pirosan megjelölt mezőket a helyes bevitelekért.',
         'month' => 'hónap',
-        'Remove active filters for this widget.' => 'A felületi elem aktív szűrőinek eltávolítása.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => 'Kis türelmet…',

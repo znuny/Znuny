@@ -9274,6 +9274,7 @@
                         <Item>Core.Agent.TicketProcess.css</Item>
                         <Item>Core.Agent.TicketMenuModuleCluster.css</Item>
                         <Item>Core.AllocationList.css</Item>
+                        <Item>Core.Agent.ColumnFilterMultiSelect.css</Item>
                     </Array>
                 </Item>
                 <Item Key="JavaScript">
@@ -14511,6 +14512,13 @@ Thanks for your help!
             <Array>
                 <Item>AgentTicketZoom</Item>
             </Array>
+        </Value>
+    </Setting>
+    <Setting Name="LinkObject::ComplexTable::ColumnFilters###Ticket" Required="0" Valid="1">
+        <Description Translatable="1">Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.</Description>
+        <Navigation>Frontend::Agent::LinkObject</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">1</Item>
         </Value>
     </Setting>
     <Setting Name="LinkObject::ComplexTable###Ticket" Required="0" Valid="1">

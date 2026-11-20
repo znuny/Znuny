@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.503556187766714;
+    $Self->{Completeness}        = 0.503791469194313;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -3224,6 +3224,8 @@ sub Data {
         'Delete link' => '',
         'Delete Link' => '',
         'Object#' => 'ออบเจค#',
+        'Remove active filters for this widget.' => 'ลบตัวกรองการใช้งานสำหรับเครื่องมือนี้',
+        'No results found.' => 'ไม่พบผลลัพธ์',
         'Add links' => 'เพิ่มลิงค์',
         'Delete links' => 'ลบการเชื่อมโยง',
 
@@ -4845,6 +4847,7 @@ sub Data {
         'Linked as' => 'เชื่อมโยงเป็น',
         'Search Result' => 'ผลการค้นหา',
         'Linked' => 'เชื่อมต่อแล้ว',
+        'filter' => 'ตัวกรอง',
         'Bulk' => 'จำนวนมาก',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -7926,6 +7929,8 @@ sub Data {
             'ประเภทการแสดงผลเริ่มต้นสำหรับผู้รับ (To, CC) ชื่ออยู่ใน AgentTicketZoom และ CustomerTicketZoom',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             'ประเภทการแสดงผลเริ่มต้นสำหรับผู้ส่ง (From) ชื่ออยู่ใน AgentTicketZoom และ CustomerTicketZoom',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'เปิดใช้ตัวกรองคอลัมน์แบบเลือกได้หลายค่าสำหรับตั๋วที่เชื่อมโยงในวิดเจ็ตวัตถุที่เชื่อมโยงแบบซับซ้อน (LinkObject::ViewMode = "complex") ตัวกรองใช้ได้ใน AgentTicketZoom และไม่แสดงในหน้าต่างป๊อปอัปของ AgentLinkObject',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8620,7 +8625,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => 'กรุณาตรวจสอบฟิลด์ที่ทำเครื่องหมายสีแดงสำหรับปัจจัยการป้อนข้อมูลที่ถูกต้อง',
         'month' => 'เดือน',
-        'Remove active filters for this widget.' => 'ลบตัวกรองการใช้งานสำหรับเครื่องมือนี้',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '',

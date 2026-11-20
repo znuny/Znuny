@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.279121226489648;
+    $Self->{Completeness}        = 0.279462875197472;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3221,6 +3221,8 @@ sub Data {
         'Delete link' => '',
         'Delete Link' => '',
         'Object#' => '',
+        'Remove active filters for this widget.' => 'Sterge filtrele active din acest modul.',
+        'No results found.' => 'Nu s-au găsit rezultate.',
         'Add links' => '',
         'Delete links' => '',
 
@@ -4842,6 +4844,7 @@ sub Data {
         'Linked as' => '',
         'Search Result' => '',
         'Linked' => 'Conectat',
+        'filter' => 'Filtru',
         'Bulk' => 'En gros',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -7920,6 +7923,8 @@ sub Data {
             '',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             '',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Activează filtrele de coloană cu selecție multiplă pentru tichetele legate din widgetul complex de obiecte legate (LinkObject::ViewMode = "complex"). Filtrele sunt disponibile în AgentTicketZoom și nu sunt afișate în fereastra pop-up AgentLinkObject.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8614,7 +8619,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => 'Verifică câmpurile marcate cu roșu.',
         'month' => 'lună',
-        'Remove active filters for this widget.' => 'Sterge filtrele active din acest modul.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '',

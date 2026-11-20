@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.208313576734629;
+    $Self->{Completeness}        = 0.2086887835703;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3226,6 +3226,8 @@ sub Data {
         'Delete link' => '',
         'Delete Link' => '',
         'Object#' => 'Objekt#',
+        'Remove active filters for this widget.' => '',
+        'No results found.' => 'Ni najdenih rezultatov.',
         'Add links' => 'Dodaj povezave',
         'Delete links' => 'Izbriši povezave',
 
@@ -4847,6 +4849,7 @@ sub Data {
         'Linked as' => '',
         'Search Result' => '',
         'Linked' => 'Povezano',
+        'filter' => 'Filter',
         'Bulk' => 'Količinsko',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -7925,6 +7928,8 @@ sub Data {
             '',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             '',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Omogoči filtre stolpcev z večizbiro za povezane zahtevke v kompleksnem gradniku povezanih objektov (LinkObject::ViewMode = "complex"). Filtri so na voljo v AgentTicketZoom in niso prikazani v pojavnem oknu AgentLinkObject.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8619,7 +8624,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => '',
         'month' => 'mesec',
-        'Remove active filters for this widget.' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '',

@@ -15,6 +15,8 @@ use strict;
 use warnings;
 use utf8;
 
+use Kernel::System::VariableCheck qw(:all);
+
 our $ObjectManagerDisabled = 1;
 
 sub Run {
@@ -40,12 +42,50 @@ sub Run {
     # get link table view mode
     my $LinkTableViewMode = $ConfigObject->Get('LinkObject::ViewMode');
 
+    my %ColumnFilterResult;
+    my @OriginalTicketIDs;
+    my $EnableColumnFilters = 0;
+    my $ShowEmptyTable      = 0;
+
+    my $ColumnFiltersConfig = $ConfigObject->Get('LinkObject::ComplexTable::ColumnFilters') || {};
+    if (
+        $LinkTableViewMode eq 'Complex'
+        && IsHashRefWithData($ColumnFiltersConfig)
+        && $ColumnFiltersConfig->{Ticket}
+        )
+    {
+        $EnableColumnFilters = 1;
+
+        for my $LinkType ( sort keys %{ $LinkListWithData->{Ticket} || {} } ) {
+            for my $Direction ( sort keys %{ $LinkListWithData->{Ticket}->{$LinkType} } ) {
+                push @OriginalTicketIDs, keys %{ $LinkListWithData->{Ticket}->{$LinkType}->{$Direction} };
+            }
+        }
+
+        my %Seen;
+        @OriginalTicketIDs = grep { !$Seen{$_}++ } @OriginalTicketIDs;
+
+        %ColumnFilterResult = $LayoutObject->LinkObjectColumnFilterParamGet();
+
+        if ( IsHashRefWithData( $ColumnFilterResult{ColumnFilter} ) ) {
+            $ShowEmptyTable   = 1;
+            $LinkListWithData = $LayoutObject->LinkObjectColumnFilterApply(
+                LinkListWithData => $LinkListWithData,
+                ColumnFilter     => $ColumnFilterResult{ColumnFilter},
+            );
+        }
+    }
+
     # create the link table
     my $LinkTableStrg = $LayoutObject->LinkObjectTableCreate(
-        LinkListWithData => $LinkListWithData,
-        ViewMode         => $LinkTableViewMode,
-        Object           => 'Ticket',
-        Key              => $Param{Ticket}->{TicketID},
+        LinkListWithData    => $LinkListWithData,
+        ViewMode            => $LinkTableViewMode,
+        Object              => 'Ticket',
+        Key                 => $Param{Ticket}->{TicketID},
+        EnableColumnFilters => $EnableColumnFilters,
+        OriginalTicketIDs   => \@OriginalTicketIDs,
+        GetColumnFilter     => $ColumnFilterResult{GetColumnFilter},
+        ShowEmptyTable      => $ShowEmptyTable,
     );
     return if !$LinkTableStrg;
 

@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.85079816658764;
+    $Self->{Completeness}        = 0.85086887835703;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3222,6 +3222,8 @@ sub Data {
         'Delete link' => 'Обриши везу',
         'Delete Link' => 'Обриши везу',
         'Object#' => 'Објекат#',
+        'Remove active filters for this widget.' => 'Уклони активне филтере за овај додатак.',
+        'No results found.' => 'Нема пронађених резултата.',
         'Add links' => 'Додај везе',
         'Delete links' => 'Обриши везе',
 
@@ -4843,6 +4845,7 @@ sub Data {
         'Linked as' => 'Повезано као',
         'Search Result' => 'Резултат претраге',
         'Linked' => 'Повезано',
+        'filter' => 'Филтер',
         'Bulk' => 'Масовно',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -7921,6 +7924,8 @@ sub Data {
             'Подразумевани тип приказа за имена примаоца (To,Cc) на детаљном приказу тикета у интерфејсу оператара и клијента.',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             'Подразумевани тип приказа за имена (Од) пошиљаоца на детаљном приказу тикета у интерфејсу оператера и клијента.',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Омогућава филтере колона са вишеструким избором за повезане тикете у сложеном додатку повезаних објеката (LinkObject::ViewMode = "complex"). Филтери су доступни у AgentTicketZoom и не приказују се у искачућем прозору AgentLinkObject.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             'Дефинише које колоне ће бити приказане у додатку повезаних тикета (LinkObject::ViewMode = "сложено"). Напомена: само атрибути тикета и динамичка поља (DynamicField_NameX) су дозвољена за DefaultColumns.',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8615,7 +8620,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => 'Молимо проверите поља означена црвеним за важеће уносе.',
         'month' => 'месец',
-        'Remove active filters for this widget.' => 'Уклони активне филтере за овај додатак.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => 'Молимо сачекајте...',

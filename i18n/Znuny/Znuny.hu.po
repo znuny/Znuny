@@ -21056,7 +21056,7 @@ msgstr "Ellenőrizze a pirosan megjelölt mezőket a helyes bevitelekért."
 msgid "month"
 msgstr "hónap"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/LinkObject.tt
 msgid "Remove active filters for this widget."
 msgstr "A felületi elem aktív szűrőinek eltávolítása."
 
@@ -25705,4 +25705,16 @@ msgstr "Nincs munkaidő"
 #. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "%s of %s"
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/LinkObject.tt
+msgid "No results found."
+msgstr "Nem található eredmény."
+
+#. Perl Module: Kernel/Output/HTML/Layout/LinkObject.pm
+msgid "filter"
+msgstr "Szűrő"
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = \"complex\"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup."
+msgstr "Többszörös kijelölésű oszlopszűrők engedélyezése a kapcsolt jegyekhez a kapcsolt objektumok összetett felületi elemén (LinkObject::ViewMode = \"complex\"). A szűrők az AgentTicketZoom nézetben érhetők el, és nem jelennek meg az AgentLinkObject felugró ablakában."
 

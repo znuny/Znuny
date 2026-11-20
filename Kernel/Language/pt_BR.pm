@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.822348664453928;
+    $Self->{Completeness}        = 0.822432859399684;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -3225,6 +3225,8 @@ sub Data {
         'Delete link' => 'Excluir link',
         'Delete Link' => 'Excluir link',
         'Object#' => 'Objeto#',
+        'Remove active filters for this widget.' => 'Remover filtros ativos para este painel.',
+        'No results found.' => 'Nenhum resultado encontrado.',
         'Add links' => 'Adicionar Associações',
         'Delete links' => 'Deletar Associações',
 
@@ -4846,6 +4848,7 @@ sub Data {
         'Linked as' => 'Associado como',
         'Search Result' => 'Resultados da pesquisa',
         'Linked' => 'Associado',
+        'filter' => 'Filtro',
         'Bulk' => 'Massa',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -7924,6 +7927,8 @@ sub Data {
             '',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             '',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Ativar filtros de coluna com seleção múltipla para tickets associados no widget complexo de objetos associados (LinkObject::ViewMode = "complex"). Os filtros estão disponíveis em AgentTicketZoom e não são exibidos no pop-up do AgentLinkObject.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             'Definir quais colunas são apresentadas no widget de tickets associados (LinkObject::ViewMode = "complex"). Observação: Somente atributos de Ticket e Campos Dinâmicos (DynamicField_NomeX) são permitidos para Colunas Padrão.',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8618,7 +8623,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => 'Por favor, verifique os campos marcados em vermelho para entradas válidas.',
         'month' => 'mês',
-        'Remove active filters for this widget.' => 'Remover filtros ativos para este painel.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => 'Por favor aguarde...',

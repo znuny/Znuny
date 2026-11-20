@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.831989884621464;
+    $Self->{Completeness}        = 0.832069510268562;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3233,6 +3233,8 @@ sub Data {
         'Delete link' => 'Удалить связь',
         'Delete Link' => 'Удалить связь',
         'Object#' => 'Объект#',
+        'Remove active filters for this widget.' => 'Удалить активные фильтры для этого виджета.',
+        'No results found.' => 'Результаты не найдены.',
         'Add links' => 'Добавить связи',
         'Delete links' => 'Удалить связи',
 
@@ -4854,6 +4856,7 @@ sub Data {
         'Linked as' => 'Связан как',
         'Search Result' => 'Результат поиска',
         'Linked' => 'Связан',
+        'filter' => 'Фильтр',
         'Bulk' => 'Массовое действие',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -7932,6 +7935,8 @@ sub Data {
             'Способ отображения по умолчанию имен получателей (To,Cc) в AgentTicketZoom и CustomerTicketZoom.',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             'Способ отображения по умолчанию имени отправителя  (From) в AgentTicketZoom и CustomerTicketZoom.',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Включает фильтры столбцов с множественным выбором для связанных заявок в сложном виджете связанных объектов (LinkObject::ViewMode = "complex"). Фильтры доступны в AgentTicketZoom и не показываются во всплывающем окне AgentLinkObject.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             'Задает, какие колонки отображаются в виджете связанных заявок (LinkObject::ViewMode = "complex"). Внимание: только атрибуты заявки и динамических полей (DynamicField_NameX) разрешены для DefaultColumns/Колонки по умолчанию. Возможные значения: 0 = Отключено, 1 = Включено, 2 = Включено по умолчанию.',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8626,7 +8631,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => 'Проверьте поля отмеченные красным цветом и исправьте их.',
         'month' => 'месяц',
-        'Remove active filters for this widget.' => 'Удалить активные фильтры для этого виджета.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => 'Подождите пожалуйста',

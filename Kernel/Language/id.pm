@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.580369843527738;
+    $Self->{Completeness}        = 0.580568720379147;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -3223,6 +3223,8 @@ bin/znuny.Daemon.pl status\').',
         'Delete link' => '',
         'Delete Link' => '',
         'Object#' => 'Objek#',
+        'Remove active filters for this widget.' => 'Hapuskan filter yang aktif untuk widget ini',
+        'No results found.' => 'Tidak ada hasil yang ditemukan.',
         'Add links' => 'Tambahkan penghubung',
         'Delete links' => 'Hapus penghubung',
 
@@ -4844,6 +4846,7 @@ bin/znuny.Daemon.pl status\').',
         'Linked as' => 'Terkait sebagai',
         'Search Result' => 'Hasil pencarian',
         'Linked' => 'Terhubung',
+        'filter' => 'Saringan',
         'Bulk' => 'Massal',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -7923,6 +7926,8 @@ bin/znuny.Daemon.pl status\').',
             'Jenis tampilan default untuk penerima (To, Cc) nama dalam AgentTicketZoom dan CustomerTicketZoom.',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             'display Jenis default untuk jenis kelamin (Dari) nama di Agen Tiket Zoom dan TicketZoom Pelanggan.',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Aktifkan saringan kolom dengan pilihan ganda untuk tiket tertaut di widget kompleks objek tertaut (LinkObject::ViewMode = "complex"). Saringan tersedia di AgentTicketZoom dan tidak ditampilkan di popup AgentLinkObject.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8617,7 +8622,6 @@ bin/znuny.Daemon.pl status\').',
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => 'Silahkan periksa bidang yang ditandai sebagai warna merah untuk pemasukkan yang sah',
         'month' => 'bulan',
-        'Remove active filters for this widget.' => 'Hapuskan filter yang aktif untuk widget ini',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '',

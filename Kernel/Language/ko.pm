@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d %T';
-    $Self->{Completeness}        = 0.827564406511775;
+    $Self->{Completeness}        = 0.827646129541864;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -3221,6 +3221,8 @@ sub Data {
         'Delete link' => '링크 삭제',
         'Delete Link' => '링크 삭제',
         'Object#' => '목적#',
+        'Remove active filters for this widget.' => '이 위젯에 대한 활성 필터를 제거하십시오.',
+        'No results found.' => '결과를 찾을 수 없습니다.',
         'Add links' => '링크 추가',
         'Delete links' => '링크 삭제',
 
@@ -4842,6 +4844,7 @@ sub Data {
         'Linked as' => '로 연결된',
         'Search Result' => '검색 결과',
         'Linked' => '연결됨',
+        'filter' => '필터',
         'Bulk' => '일괄',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -7920,6 +7923,8 @@ sub Data {
             'AgentTicketZoom 및 CustomerTicketZoom의받는 사람 (받는 사람, 참조) 이름의 기본 표시 유형입니다.',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             'AgentTicketZoom 및 CustomerTicketZoom의 보낸 사람 (보낸 사람) 이름의 기본 표시 유형입니다.',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            '복잡한 연결 개체 위젯에서 연결된 티켓의 다중 선택 열 필터를 사용합니다 (LinkObject::ViewMode = "complex"). 필터는 AgentTicketZoom에서 사용할 수 있으며 AgentLinkObject 팝업에는 표시되지 않습니다.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '연결된 티켓 위젯에 표시 할 열을 정의하십시오 (LinkObject :: ViewMode = "complex"). 참고 : Ticket 속성과 Dynamic Fields (DynamicField_NameX) 만 DefaultColumn에 허용됩니다.',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8614,7 +8619,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => '유효한 입력을 위해 빨간색으로 표시된 필드를 확인하십시오.',
         'month' => '달',
-        'Remove active filters for this widget.' => '이 위젯에 대한 활성 필터를 제거하십시오.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '잠시만 기다려주십시오...',

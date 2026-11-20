@@ -21046,7 +21046,7 @@ msgstr "Prosím skontrolujte hodnoty polí označených červeným"
 msgid "month"
 msgstr "mesiac"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/LinkObject.tt
 msgid "Remove active filters for this widget."
 msgstr "Vymazať aktívne filtre pre toto riešenie"
 
@@ -25692,4 +25692,16 @@ msgstr "Žiadny pracovný čas"
 #. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "%s of %s"
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/LinkObject.tt
+msgid "No results found."
+msgstr "Nenašli sa žiadne výsledky."
+
+#. Perl Module: Kernel/Output/HTML/Layout/LinkObject.pm
+msgid "filter"
+msgstr "Filter"
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = \"complex\"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup."
+msgstr "Povoliť filtre stĺpcov s viacnásobným výberom pre prepojené tikety v zložitom widgete prepojených objektov (LinkObject::ViewMode = \"complex\"). Filtre sú dostupné v AgentTicketZoom a nezobrazujú sa vo vyskakovacom okne AgentLinkObject."
 

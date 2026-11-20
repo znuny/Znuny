@@ -21026,7 +21026,7 @@ msgstr ""
 msgid "month"
 msgstr "mēnesis"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/LinkObject.tt
 msgid "Remove active filters for this widget."
 msgstr ""
 
@@ -25692,4 +25692,16 @@ msgstr "Nav darba laika"
 #. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "%s of %s"
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/LinkObject.tt
+msgid "No results found."
+msgstr "Rezultāti nav atrasti."
+
+#. Perl Module: Kernel/Output/HTML/Layout/LinkObject.pm
+msgid "filter"
+msgstr "Filtrs"
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = \"complex\"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup."
+msgstr "Iespējot vairākatlases kolonnu filtrus saistītajiem pieteikumiem sarežģītajā saistīto objektu logrīkā (LinkObject::ViewMode = \"complex\"). Filtri ir pieejami AgentTicketZoom un netiek rādīti AgentLinkObject uznirstošajā logā."
 

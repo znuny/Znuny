@@ -11,8 +11,10 @@ package Kernel::Modules::AgentLinkObject;
 
 use strict;
 use warnings;
+use utf8;
 
-use Kernel::Language qw(Translatable);
+use Kernel::Language              qw(Translatable);
+use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
 
@@ -87,19 +89,125 @@ sub Run {
             };
         }
 
+        my @OriginalTicketIDs;
+        my %ColumnFilterResult;
+        my $EnableColumnFilters = 0;
+        my $ShowEmptyTable      = 0;
+
+        my $ColumnFiltersConfig = $ConfigObject->Get('LinkObject::ComplexTable::ColumnFilters') || {};
+        if (
+            $DestinationObject eq 'Ticket'
+            && IsHashRefWithData($ColumnFiltersConfig)
+            && $ColumnFiltersConfig->{Ticket}
+            )
+        {
+            $EnableColumnFilters = 1;
+
+            for my $LinkType ( sort keys %{ $LinkListWithData->{Ticket} || {} } ) {
+                for my $Direction ( sort keys %{ $LinkListWithData->{Ticket}->{$LinkType} } ) {
+                    push @OriginalTicketIDs, keys %{ $LinkListWithData->{Ticket}->{$LinkType}->{$Direction} };
+                }
+            }
+
+            my %Seen;
+            @OriginalTicketIDs = grep { !$Seen{$_}++ } @OriginalTicketIDs;
+
+            %ColumnFilterResult = $LayoutObject->LinkObjectColumnFilterParamGet();
+            if ( IsHashRefWithData( $ColumnFilterResult{ColumnFilter} ) ) {
+                $ShowEmptyTable   = 1;
+                $LinkListWithData = $LayoutObject->LinkObjectColumnFilterApply(
+                    LinkListWithData => $LinkListWithData,
+                    ColumnFilter     => $ColumnFilterResult{ColumnFilter},
+                );
+            }
+        }
+
         # create the link table
         my $LinkTableStrg = $LayoutObject->LinkObjectTableCreate(
             LinkListWithData               => $LinkListWithData,
-            ViewMode                       => 'Complex',                         # only make sense for complex
+            ViewMode                       => 'Complex',                              # only make sense for complex
             Object                         => $SourceObject,
             Key                            => $SourceObjectID,
             AJAX                           => 1,
             AdditionalLinkListWithDataJSON => $AdditionalLinkListWithDataJSON,
+            EnableColumnFilters            => $EnableColumnFilters,
+            OriginalTicketIDs              => \@OriginalTicketIDs,
+            GetColumnFilter                => $ColumnFilterResult{GetColumnFilter},
+            ShowEmptyTable                 => $ShowEmptyTable,
         );
 
         return $LayoutObject->Attachment(
             ContentType => 'text/html',
             Content     => $LinkTableStrg,
+            Type        => 'inline',
+            NoCache     => 1,
+        );
+    }
+
+    if ( $Self->{Subaction} eq 'FilterComplexTable' ) {
+
+        my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
+        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+        $LayoutObject->ChallengeTokenCheck();
+
+        my $SourceObject   = $ParamObject->GetParam( Param => 'SourceObject' )   || '';
+        my $SourceObjectID = $ParamObject->GetParam( Param => 'SourceObjectID' ) || '';
+
+        my %ColumnFilterResult = $LayoutObject->LinkObjectColumnFilterParamGet();
+        $LayoutObject->LinkObjectColumnFilterPreferencesSet(
+            ColumnFilter => $ColumnFilterResult{ColumnFilter} || {},
+        );
+
+        my $LinkListWithData = $Kernel::OM->Get('Kernel::System::LinkObject')->LinkListWithData(
+            Object           => $SourceObject,
+            Key              => $SourceObjectID,
+            State            => 'Valid',
+            UserID           => $Self->{UserID},
+            ObjectParameters => {
+                Ticket => {
+                    IgnoreLinkedTicketStateTypes => 1,
+                },
+            },
+        );
+
+        my @OriginalTicketIDs;
+        for my $LinkType ( sort keys %{ $LinkListWithData->{Ticket} || {} } ) {
+            for my $Direction ( sort keys %{ $LinkListWithData->{Ticket}->{$LinkType} } ) {
+                push @OriginalTicketIDs, keys %{ $LinkListWithData->{Ticket}->{$LinkType}->{$Direction} };
+            }
+        }
+
+        my %Seen;
+        @OriginalTicketIDs = grep { !$Seen{$_}++ } @OriginalTicketIDs;
+
+        my $ShowEmptyTable = 0;
+        if ( IsHashRefWithData( $ColumnFilterResult{ColumnFilter} ) ) {
+            $ShowEmptyTable   = 1;
+            $LinkListWithData = $LayoutObject->LinkObjectColumnFilterApply(
+                LinkListWithData => $LinkListWithData,
+                ColumnFilter     => $ColumnFilterResult{ColumnFilter},
+            );
+        }
+
+        my $ColumnFiltersConfig = $ConfigObject->Get('LinkObject::ComplexTable::ColumnFilters') || {};
+        my $EnableColumnFilters = IsHashRefWithData($ColumnFiltersConfig) && $ColumnFiltersConfig->{Ticket} ? 1 : 0;
+
+        my $LinkTableStrg = $LayoutObject->LinkObjectTableCreate(
+            LinkListWithData    => $LinkListWithData,
+            ViewMode            => 'Complex',
+            Object              => $SourceObject,
+            Key                 => $SourceObjectID,
+            AJAX                => 1,
+            EnableColumnFilters => $EnableColumnFilters,
+            OriginalTicketIDs   => \@OriginalTicketIDs,
+            GetColumnFilter     => $ColumnFilterResult{GetColumnFilter},
+            ShowEmptyTable      => $ShowEmptyTable,
+        );
+
+        return $LayoutObject->Attachment(
+            ContentType => 'text/html',
+            Content     => $LinkTableStrg || '',
             Type        => 'inline',
             NoCache     => 1,
         );

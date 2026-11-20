@@ -106,6 +106,13 @@
             <h2>[% Translate(Data.BlockDescription) | html %]: [% Translate(Data.Blockname) | html %]</h2>
 
             <div class="ActionMenu">
+[% RenderBlockStart("TableComplexColumnFilterClear") %]
+                    <div class="WidgetAction RemoveFilters">
+                        <a href="#" class="LinkObjectClearColumnFilters" title="[% Translate("Remove active filters for this widget.") | html %]">
+                            [% Translate("Clear all filters") | html %]
+                        </a>
+                    </div>
+[% RenderBlockEnd("TableComplexColumnFilterClear") %]
 [% RenderBlockStart("ContentLargePreferences") %]
                     <div class="WidgetAction Settings">
                         <a href="#" class="icon-hover" id="linkobject-[% Data.Name | html %]-toggle" title="[% Translate("Settings") | html %]">
@@ -191,11 +198,28 @@
                         <thead>
                             <tr>
 [% RenderBlockStart("TableComplexBlockColumn") %]
-                                <th> [% Translate(Data.Content) | html %] </th>
+                                <th class="OverviewHeader [% Data.ColumnName | html %][% IF Data.CSSClass %] [% Data.CSSClass | html %][% END %]">
+                                    <span class="Gray" title="[% Translate(Data.Content) | html %]">[% Translate(Data.Content) | html %]</span>
+[% RenderBlockStart("TableComplexBlockColumnFilter") %]
+                                    <a href="#" class="ColumnSettingsTrigger" title="[% Translate(Data.FilterTitle) | html %]">
+                                        <i class="fa fa-filter"></i>
+                                    </a>
+                                    <div class="ColumnSettingsContainer DontPrint">
+                                        <div class="ColumnSettingsBox">
+                                            [% Data.ColumnFilterStrg %]
+                                        </div>
+                                    </div>
+[% RenderBlockEnd("TableComplexBlockColumnFilter") %]
+                                </th>
 [% RenderBlockEnd("TableComplexBlockColumn") %]
                             </tr>
                         </thead>
                         <tbody>
+[% RenderBlockStart("TableComplexBlockRowEmpty") %]
+                            <tr>
+                                <td colspan="[% Data.ColSpan | html %]">[% Translate("No results found.") | html %]</td>
+                            </tr>
+[% RenderBlockEnd("TableComplexBlockRowEmpty") %]
 [% RenderBlockStart("TableComplexBlockRow") %]
                             <tr>
 [% RenderBlockStart("TableComplexBlockRowColumn") %]
@@ -208,6 +232,15 @@
                         </tbody>
                     </table>
                 </div>
+[% RenderBlockStart("TableComplexColumnFilterForm") %]
+                <form action="[% Env("CGIHandle") %]" method="post" name="linkobject-[% Data.Name | html %]-column-filter" id="linkobject-[% Data.Name | html %]-column-filter" class="Hidden">
+                    <input type="hidden" name="Action" value="AgentLinkObject"/>
+                    <input type="hidden" name="Subaction" value="FilterComplexTable"/>
+                    <input type="hidden" name="OriginalAction" value="[% Data.OriginalAction | html %]"/>
+                    <input type="hidden" name="SourceObject" value="[% Data.SourceObject | html %]"/>
+                    <input type="hidden" name="SourceObjectID" value="[% Data.SourceObjectID | html %]"/>
+                </form>
+[% RenderBlockEnd("TableComplexColumnFilterForm") %]
 [% RenderBlockStart("TableComplexBlockFooterNormal") %]
 [% RenderBlockEnd("TableComplexBlockFooterNormal") %]
 [% RenderBlockStart("TableComplexBlockFooterAdd") %]

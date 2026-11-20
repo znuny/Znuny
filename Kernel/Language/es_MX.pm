@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.699067488541173;
+    $Self->{Completeness}        = 0.699210110584518;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3222,6 +3222,8 @@ sub Data {
         'Delete link' => 'Borrar enlace',
         'Delete Link' => 'Borrar Enlace',
         'Object#' => 'Objecto#',
+        'Remove active filters for this widget.' => 'Eliminar los filtros activos para este widget.',
+        'No results found.' => 'No se encontraron resultados.',
         'Add links' => 'Agregar enlaces',
         'Delete links' => 'Eliminar enlaces',
 
@@ -4843,6 +4845,7 @@ sub Data {
         'Linked as' => 'Enlazado como',
         'Search Result' => 'Resultados de Búsqueda',
         'Linked' => 'Enlazado',
+        'filter' => 'Filtro',
         'Bulk' => 'Acciones en Lote',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -7921,6 +7924,8 @@ sub Data {
             '',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             '',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Activa los filtros de columna de selección múltiple para los tickets enlazados en el widget complejo de objetos enlazados (LinkObject::ViewMode = "complex"). Los filtros están disponibles en AgentTicketZoom y no se muestran en la ventana emergente de AgentLinkObject.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8615,7 +8620,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => 'Compruebe que los campos marcados en rojo tienen datos válidos.',
         'month' => 'mes',
-        'Remove active filters for this widget.' => 'Eliminar los filtros activos para este widget.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => 'Por favor espere...',

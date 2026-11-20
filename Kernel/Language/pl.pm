@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.634740003161056;
+    $Self->{Completeness}        = 0.634913112164297;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3226,6 +3226,8 @@ sub Data {
         'Delete link' => 'Usuń połączenie',
         'Delete Link' => 'Usuń Połączenie',
         'Object#' => 'Obiekt#',
+        'Remove active filters for this widget.' => 'Usuń aktywne filtry dla tego widgeta.',
+        'No results found.' => 'Nie znaleziono wyników.',
         'Add links' => 'Dodaj odnośniki',
         'Delete links' => 'Usuń odnośniki',
 
@@ -4847,6 +4849,7 @@ sub Data {
         'Linked as' => 'Połączone jako',
         'Search Result' => 'Wynik wyszukiwania',
         'Linked' => 'Połączone',
+        'filter' => 'Filtr',
         'Bulk' => 'Zbiorczo',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -7925,6 +7928,8 @@ sub Data {
             '',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             '',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Włącz filtry kolumn z wielokrotnym wyborem dla połączonych zgłoszeń w złożonym widżecie połączonych obiektów (LinkObject::ViewMode = "complex"). Filtry są dostępne w AgentTicketZoom i nie są pokazywane w oknie podręcznym AgentLinkObject.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8619,7 +8624,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => 'Proszę sprawdź poprawnośc danych w polach oznaczonych jako czerowne.',
         'month' => 'miesiąc',
-        'Remove active filters for this widget.' => 'Usuń aktywne filtry dla tego widgeta.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => 'Proszę czekać...',

@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.29935198356251;
+    $Self->{Completeness}        = 0.299684044233807;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -3225,6 +3225,8 @@ sub Data {
         'Delete link' => '',
         'Delete Link' => '',
         'Object#' => '對象#',
+        'Remove active filters for this widget.' => '',
+        'No results found.' => '沒有找到結果。',
         'Add links' => '添加鏈接',
         'Delete links' => '刪除鏈接',
 
@@ -4846,6 +4848,7 @@ sub Data {
         'Linked as' => '',
         'Search Result' => '搜尋結果',
         'Linked' => '已鏈接',
+        'filter' => '過濾器',
         'Bulk' => '批量',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -7924,6 +7927,8 @@ sub Data {
             '',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             '',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            '在複雜的連結物件小工具中，為連結的工單啟用多選欄過濾器（LinkObject::ViewMode = "complex"）。過濾器可在 AgentTicketZoom 使用，且不會顯示在 AgentLinkObject 彈出視窗中。',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8618,7 +8623,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => '',
         'month' => '月',
-        'Remove active filters for this widget.' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '',

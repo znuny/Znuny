@@ -35,7 +35,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.368262999841947;
+    $Self->{Completeness}        = 0.368562401263823;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -3230,6 +3230,8 @@ sub Data {
         'Delete link' => 'Supprimer le lien',
         'Delete Link' => 'Supprimer le lien',
         'Object#' => 'N° Objet',
+        'Remove active filters for this widget.' => 'Supprimer les filtres actifs pour ce widget',
+        'No results found.' => 'Aucun résultat trouvé.',
         'Add links' => 'Ajouter des liens',
         'Delete links' => 'Supprimer les liens',
 
@@ -4851,6 +4853,7 @@ sub Data {
         'Linked as' => '',
         'Search Result' => '',
         'Linked' => 'Lié',
+        'filter' => 'Filtre',
         'Bulk' => 'Actions groupées',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -7929,6 +7932,8 @@ sub Data {
             '',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             '',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Active les filtres de colonne à sélection multiple pour les tickets liés dans le widget complexe des objets liés (LinkObject::ViewMode = "complex"). Les filtres sont disponibles dans AgentTicketZoom et ne sont pas affichés dans la fenêtre contextuelle d\'AgentLinkObject.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8623,7 +8628,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => 'Veuillez vérifier la validité des données pour les champs marqués en rouge. ',
         'month' => 'mois',
-        'Remove active filters for this widget.' => 'Supprimer les filtres actifs pour ce widget',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '',

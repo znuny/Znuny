@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.854117275169907;
+    $Self->{Completeness}        = 0.854186413902054;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -3228,6 +3228,8 @@ sub Data {
         'Delete link' => '删除链接',
         'Delete Link' => '删除链接',
         'Object#' => '对象号',
+        'Remove active filters for this widget.' => '移除这个小部件的活动过滤器。',
+        'No results found.' => '没有找到结果。',
         'Add links' => '添加链接',
         'Delete links' => '删除链接',
 
@@ -4849,6 +4851,7 @@ sub Data {
         'Linked as' => '链接为',
         'Search Result' => '搜索结果',
         'Linked' => '已链接',
+        'filter' => '过滤器',
         'Bulk' => '批量',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -7927,6 +7930,8 @@ sub Data {
             '在服务人员和客户工单详情中收件人（TO，CC）的默认显示类型。',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             '在服务人员和客户工单详情中发件人（From）的默认显示类型。',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            '在复杂的链接对象小部件中，为链接的工单启用多选列过滤器（LinkObject::ViewMode = "complex"）。过滤器在 AgentTicketZoom 中可用，不会在 AgentLinkObject 弹出窗口中显示。',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '定义链接的工单小部件中显示哪些列（LinkObject::ViewMode = "complex"）。 注意：只有工单属性和动态字段（DynamicField_NameX）才允许使用DefaultColumns（默认字段）。',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8621,7 +8626,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => '请检查标记为红色的字段，需要输入有效的值。',
         'month' => '月',
-        'Remove active filters for this widget.' => '移除这个小部件的活动过滤器。',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '请稍候...',

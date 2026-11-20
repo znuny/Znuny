@@ -21052,7 +21052,7 @@ msgstr "Sila semak bahagian yang bertanda merah untuk input sah."
 msgid "month"
 msgstr "bulan"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/LinkObject.tt
 msgid "Remove active filters for this widget."
 msgstr "Buang tapisan aktif untuk wiget ini."
 
@@ -25706,4 +25706,16 @@ msgstr "Tiada waktu bekerja"
 #. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "%s of %s"
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/LinkObject.tt
+msgid "No results found."
+msgstr "Tiada hasil dijumpai."
+
+#. Perl Module: Kernel/Output/HTML/Layout/LinkObject.pm
+msgid "filter"
+msgstr "Tapisan"
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = \"complex\"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup."
+msgstr "Dayakan tapisan lajur berbilang pilihan untuk tiket yang dipautkan dalam widget kompleks objek yang dipautkan (LinkObject::ViewMode = \"complex\"). Tapisan tersedia di AgentTicketZoom dan tidak dipaparkan dalam tetingkap timbul AgentLinkObject."
 

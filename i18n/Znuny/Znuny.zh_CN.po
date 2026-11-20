@@ -21054,7 +21054,7 @@ msgstr "请检查标记为红色的字段，需要输入有效的值。"
 msgid "month"
 msgstr "月"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/LinkObject.tt
 msgid "Remove active filters for this widget."
 msgstr "移除这个小部件的活动过滤器。"
 
@@ -25702,4 +25702,16 @@ msgstr "无工作时间"
 #. JS File: var/httpd/htdocs/js/Core.UI.js
 msgid "%s of %s"
 msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/LinkObject.tt
+msgid "No results found."
+msgstr "没有找到结果。"
+
+#. Perl Module: Kernel/Output/HTML/Layout/LinkObject.pm
+msgid "filter"
+msgstr "过滤器"
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = \"complex\"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup."
+msgstr "在复杂的链接对象小部件中，为链接的工单启用多选列过滤器（LinkObject::ViewMode = \"complex\"）。过滤器在 AgentTicketZoom 中可用，不会在 AgentLinkObject 弹出窗口中显示。"
 

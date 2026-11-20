@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.591117433222696;
+    $Self->{Completeness}        = 0.5913112164297;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -3227,6 +3227,8 @@ sub Data {
         'Delete link' => '',
         'Delete Link' => '',
         'Object#' => 'شماره آبجکت',
+        'Remove active filters for this widget.' => 'حذف فیلتر فعال برای این عنصر است.',
+        'No results found.' => 'نتیجه‌ای یافت نشد.',
         'Add links' => 'افزودن رابطه‌ها',
         'Delete links' => 'حذف رابطه‌ها',
 
@@ -4848,6 +4850,7 @@ sub Data {
         'Linked as' => 'مرتبط به عنوان',
         'Search Result' => 'نتیجه جستجو',
         'Linked' => 'لینک شده',
+        'filter' => 'فیلتر',
         'Bulk' => 'دسته جمعی',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -7926,6 +7929,8 @@ sub Data {
             'به طور پیش فرض نوع صفحه نمایش برای گیرنده (برای، سی) نام در AgentTicketZoom و CustomerTicketZoom.',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             'نوع صفحه نمایش به طور پیش فرض برای فرستنده (از) نام در AgentTicketZoom و CustomerTicketZoom.',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'فیلترهای ستون با انتخاب چندگانه را برای درخواست‌های پیوندشده در ابزارک پیچیدهٔ اشیاء پیوندشده فعال می‌کند (LinkObject::ViewMode = "complex"). فیلترها در AgentTicketZoom در دسترس هستند و در پنجرهٔ بازشوی AgentLinkObject نشان داده نمی‌شوند.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8620,7 +8625,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => 'لطفا فیلدهای مشخص شده به عنوان قرمز برای ورودی های معتبر را بررسی کنید.',
         'month' => 'ماه',
-        'Remove active filters for this widget.' => 'حذف فیلتر فعال برای این عنصر است.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '',

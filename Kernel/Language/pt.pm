@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d %T';
-    $Self->{Completeness}        = 0.29935198356251;
+    $Self->{Completeness}        = 0.299684044233807;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -3224,6 +3224,8 @@ sub Data {
         'Delete link' => '',
         'Delete Link' => '',
         'Object#' => 'Objeto#',
+        'Remove active filters for this widget.' => 'Remover filtros',
+        'No results found.' => 'Nenhum resultado encontrado.',
         'Add links' => 'Adicionar ligações',
         'Delete links' => 'Apagar ligações',
 
@@ -4845,6 +4847,7 @@ sub Data {
         'Linked as' => 'Ligado como',
         'Search Result' => 'Resultado da pesquisa',
         'Linked' => 'Ligado',
+        'filter' => 'Filtro',
         'Bulk' => 'Em bloco',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -7923,6 +7926,8 @@ sub Data {
             '',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             '',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Ativar filtros de coluna com seleção múltipla para os tickets associados no widget complexo de objetos associados (LinkObject::ViewMode = "complex"). Os filtros estão disponíveis em AgentTicketZoom e não são mostrados na janela emergente do AgentLinkObject.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8617,7 +8622,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => '',
         'month' => 'mês',
-        'Remove active filters for this widget.' => 'Remover filtros',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '',
