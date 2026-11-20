@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.296563904945408;
+    $Self->{Completeness}        = 0.296902583854919;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4631,6 +4631,8 @@ sub Data {
         'Database already contains data - it should be empty!' => 'Baza de date conține informații - ar trebui sa fie goală!',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            'Eroare: setați valoarea innodb_redo_log_capacity din baza de date la cel puțin %s MB (curent: %s MB, recomandat: %s MB). Pentru mai multe informații, consultați %s.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             '',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
@@ -5222,6 +5224,9 @@ sub Data {
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'Capacitatea jurnalului redo InnoDB',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'Setarea innodb_redo_log_capacity trebuie să fie de cel puțin 256 MB.',
         'InnoDB Log File Size' => 'Dimensiunea fișierului de log pentru InnoDB',
         'The setting innodb_log_file_size must be at least 256 MB.' => 'Setarea innodb_log_file_size trebuie să fie de cel puțin 256 MB.',
 

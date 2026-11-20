@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.253211303789338;
+    $Self->{Completeness}        = 0.253570855400417;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4634,6 +4634,8 @@ sub Data {
         'Database already contains data - it should be empty!' => '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            'त्रुटि: कृपया अपने आंकड़ाकोष में innodb_redo_log_capacity का मान कम से कम %s MB पर सेट करें (वर्तमान: %s MB, अनुशंसित: %s MB)। अधिक जानकारी के लिए %s देखें।',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             '',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
@@ -5225,6 +5227,9 @@ sub Data {
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'InnoDB रीडू लॉग क्षमता',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'सेटिंग innodb_redo_log_capacity कम से कम 256 MB होनी चाहिए।',
         'InnoDB Log File Size' => '',
         'The setting innodb_log_file_size must be at least 256 MB.' => '',
 

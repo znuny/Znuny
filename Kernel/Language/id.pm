@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.619460500963391;
+    $Self->{Completeness}        = 0.619643716899374;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -4633,6 +4633,8 @@ bin/otrs.Daemon.pl status\').',
         'Database already contains data - it should be empty!' => 'Database telah terisi data - database seharusnya kosong!',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Kesalahan: Pastikan database Anda menerima paket lebih dari %s MB (itu saat ini hanya menerima paket sampai %s MB). Silahkan menyesuaikan pengaturan max_allowed_packet dari database Anda untuk menghindari kesalahan.',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            'Kesalahan: Silakan menetapkan nilai untuk innodb_redo_log_capacity pada database Anda untuk setidaknya %s MB (saat ini: %s MB, direkomendasikan: %s MB). Untuk informasi lebih lanjut, silakan lihat di %s.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Kesalahan: Silakan menetapkan nilai untuk innodb_log_file_size pada database Anda untuk setidaknya%s MB (saat ini: %s MB, direkomendasikan: %s MB). Untuk informasi lebih lanjut, silakan lihat di %s.',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
@@ -5224,6 +5226,9 @@ bin/otrs.Daemon.pl status\').',
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'Kapasitas Redo Log InnoDB',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'Pengaturan innodb_redo_log_capacity harus minimal 256 MB.',
         'InnoDB Log File Size' => 'InnoDB Log Ukuran File',
         'The setting innodb_log_file_size must be at least 256 MB.' => 'Pengaturan innodb_log_file_size harus minimal 256 MB.',
 

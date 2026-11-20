@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D %T';
-    $Self->{Completeness}        = 0.887604367373154;
+    $Self->{Completeness}        = 0.887658481784625;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -4631,6 +4631,8 @@ sub Data {
         'Database already contains data - it should be empty!' => '데이터베이스에 이미 데이터가 있습니다. 비워두워야 합니다.',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '오류 : 데이터베이스가 크기가 %s를 넘는 패킷을 수락하는지 확인하십시오 (패키지는 현재 최대 %s MB 만 허용). 오류를 피하기 위해 데이터베이스의 max_allowed_packet 설정을 조정하십시오.',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            '오류 : 데이터베이스의 innodb_redo_log_capacity 값을 최소 %s MB (현재 : %s MB, 권장 : %s MB)로 설정하십시오. 자세한 내용은 %s를보십시오.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             '오류 : 데이터베이스의 innodb_log_file_size 값을 최소 %s MB (현재 : %s MB, 권장 : %s MB)로 설정하십시오. 자세한 내용은 %s를보십시오.',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
@@ -5222,6 +5224,9 @@ sub Data {
             '\'utf8\'이없는 테이블이 charset으로 발견되었습니다.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'InnoDB Redo 로그 용량',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'innodb_redo_log_capacity 설정은 256MB 이상이어야합니다.',
         'InnoDB Log File Size' => 'InnoDB 로그 파일 사이즈',
         'The setting innodb_log_file_size must be at least 256 MB.' => 'innodb_log_file_size 설정은 256MB 이상이어야합니다.',
 

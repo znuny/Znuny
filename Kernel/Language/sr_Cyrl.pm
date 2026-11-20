@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.912813102119461;
+    $Self->{Completeness}        = 0.912855079441502;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4631,6 +4631,8 @@ sub Data {
         'Database already contains data - it should be empty!' => 'База података већ садржи податке - требало би да буде празна.',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Грешка: Молимо да проверите да ваша база података прихвата пакете по величини веће од %s MB  (тренутно прихвата пакете величине до %s MB). Молимо да прилагодите параметар max_allowed_packet подешавање у вашој бази података како би избегли грешке.',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            'Грешка: Молимо да подесете вредност за innodb_redo_log_capacity у вашој бази података на најмање %s MB (тренутно: %s MB, препоручено: %s MB). За више информација, молимо погледајте на %s.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Грешка: Молимо да подесете вредност за innodb_log_file_size у вашој бази података на најмање %s MB (тренутно: %s MB, препоручено: %s MB). За више информација, молимо погледајте на %s.',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
@@ -5222,6 +5224,9 @@ sub Data {
             'Пронађене су табеле које немају \'utf8\' као карактерсет.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'Капацитет InnoDB redo лога',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'Подешавање innodb_redo_log_capacity мора бити барем 256 MB.',
         'InnoDB Log File Size' => 'Величина InnoDB лог датотеке',
         'The setting innodb_log_file_size must be at least 256 MB.' => 'Подешавање innodb_log_file_size мора бити барем 256 MB.',
 

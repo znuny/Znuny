@@ -25825,3 +25825,15 @@ msgstr ""
 msgid "Defines ordered rules for copying email follow-up articles to parent tickets. Processing stops after the first matching rule."
 msgstr ""
 
+#. Perl Module: Kernel/Modules/Installer.pm
+msgid "Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s."
+msgstr "Σφάλμα: Ορίστε την τιμή innodb_redo_log_capacity στη βάση δεδομένων σε τουλάχιστον %s MB (τρέχουσα: %s MB, συνιστώμενη: %s MB). Για περισσότερες πληροφορίες, δείτε το %s."
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+msgid "InnoDB Redo Log Capacity"
+msgstr "Χωρητικότητα αρχείου καταγραφής redo του InnoDB"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+msgid "The setting innodb_redo_log_capacity must be at least 256 MB."
+msgstr "Η ρύθμιση innodb_redo_log_capacity πρέπει να είναι τουλάχιστον 256 MB."
+

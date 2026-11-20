@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.700224791265254;
+    $Self->{Completeness}        = 0.700369122131279;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4638,6 +4638,8 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'Database already contains data - it should be empty!' => '既にデータベースにデータが含まれている場合、空にしなければなりません。',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            'innodb_redo_log_capacityの設定を少なくとも%s MB以上にしてください(現在: %s MB, 推奨: %s MB)。詳細は%sを参照して下さい。',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'innodb_log_file_sizeの設定を少なくとも%s MB以上にしてください(現在: %s MB, 推奨: %s MB)。詳細は%sを参照して下さい。',
         'Wrong database collation (%s is %s, but it needs to be utf8).' =>
@@ -5229,6 +5231,9 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'InnoDB Redoログの容量',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'innodb_redo_log_capacity 設定は最低でも256MBにする必要があります。',
         'InnoDB Log File Size' => 'InnoDBログのファイルサイズ',
         'The setting innodb_log_file_size must be at least 256 MB.' => 'innodb_log_file_size 設定は最低でも256MBにする必要があります。',
 

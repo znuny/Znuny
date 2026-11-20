@@ -54,9 +54,33 @@ sub Run {
         return $Self->GetResults();
     }
 
+    # MySQL >= 8.0.30: check innodb_redo_log_capacity instead of innodb_log_file_size
+    $DBObject->Prepare( SQL => "show variables like 'innodb_redo_log_capacity'" );
+    while ( my @Row = $DBObject->FetchrowArray() ) {
+        if (
+            !$Row[1]
+            || $Row[1] < 1024 * 1024 * 256
+            )
+        {
+            $Self->AddResultProblem(
+                Label   => Translatable('InnoDB Redo Log Capacity'),
+                Value   => ( $Row[1] // 0 ) / 1024 / 1024 . ' MB',
+                Message =>
+                    Translatable("The setting innodb_redo_log_capacity must be at least 256 MB."),
+            );
+        }
+        else {
+            $Self->AddResultOk(
+                Label => Translatable('InnoDB Redo Log Capacity'),
+                Value => $Row[1] / 1024 / 1024 . ' MB',
+            );
+        }
+
+        return $Self->GetResults();
+    }
+
     $DBObject->Prepare( SQL => "show variables like 'innodb_log_file_size'" );
     while ( my @Row = $DBObject->FetchrowArray() ) {
-
         if (
             !$Row[1]
             || $Row[1] < 1024 * 1024 * 256
@@ -64,7 +88,7 @@ sub Run {
         {
             $Self->AddResultProblem(
                 Label   => Translatable('InnoDB Log File Size'),
-                Value   => $Row[1] / 1024 / 1024 . ' MB',
+                Value   => ( $Row[1] // 0 ) / 1024 / 1024 . ' MB',
                 Message =>
                     Translatable("The setting innodb_log_file_size must be at least 256 MB."),
             );
@@ -72,7 +96,7 @@ sub Run {
         else {
             $Self->AddResultOk(
                 Label => Translatable('InnoDB Log File Size'),
-                Value => $Row[1] / 1024 / 1024 . ' MB',
+                Value => ( $Row[1] // 0 ) / 1024 / 1024 . ' MB',
             );
         }
     }
