@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.189543516032222;
+    $Self->{Completeness}        = 0.189927376065677;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4666,6 +4666,8 @@ sub Data {
             '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            'Klaida: nustatykite duomenų bazėje innodb_redo_log_capacity reikšmę bent į %s MB (dabartinė: %s MB, rekomenduojama: %s MB). Daugiau informacijos rasite adresu %s.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             '',
         'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
@@ -5249,6 +5251,9 @@ sub Data {
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'InnoDB redo žurnalo talpa',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'Nustatymas innodb_redo_log_capacity turi būti bent 256 MB.',
         'InnoDB Log File Size' => '',
         'The setting innodb_log_file_size must be at least 256 MB.' => '',
 

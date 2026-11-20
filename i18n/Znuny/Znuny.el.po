@@ -25713,3 +25713,15 @@ msgstr "Ενεργοποίηση φίλτρων στηλών πολλαπλής 
 msgid "Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported."
 msgstr "Δυναμικά πεδία που εμφανίζονται στο παράθυρο διαλόγου του φίλτρου άρθρων στην οθόνη λεπτομερειών του δελτίου στη διεπαφή υπαλλήλου. Υποστηρίζονται μόνο πεδία τύπου αντικειμένου Άρθρο των τύπων Κείμενο, TextArea, Dropdown, Multiselect και Checkbox."
 
+#. Perl Module: Kernel/Modules/Installer.pm
+msgid "Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s."
+msgstr "Σφάλμα: Ορίστε την τιμή innodb_redo_log_capacity στη βάση δεδομένων σε τουλάχιστον %s MB (τρέχουσα: %s MB, συνιστώμενη: %s MB). Για περισσότερες πληροφορίες, δείτε το %s."
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+msgid "InnoDB Redo Log Capacity"
+msgstr "Χωρητικότητα αρχείου καταγραφής redo του InnoDB"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+msgid "The setting innodb_redo_log_capacity must be at least 256 MB."
+msgstr "Η ρύθμιση innodb_redo_log_capacity πρέπει να είναι τουλάχιστον 256 MB."
+

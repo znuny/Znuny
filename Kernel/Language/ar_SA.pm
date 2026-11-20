@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.0781867003632917;
+    $Self->{Completeness}        = 0.0786233028102305;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4669,6 +4669,8 @@ sub Data {
             '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            'خطأ: يرجى ضبط قيمة innodb_redo_log_capacity في قاعدة البيانات إلى %s ميجابايت على الأقل (الحالية: %s ميجابايت، الموصى بها: %s ميجابايت). لمزيد من المعلومات، راجع %s.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             '',
         'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
@@ -5252,6 +5254,9 @@ sub Data {
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'سعة سجل الإعادة في InnoDB',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'يجب أن يكون الإعداد innodb_redo_log_capacity بمقدار 256 ميجابايت على الأقل.',
         'InnoDB Log File Size' => '',
         'The setting innodb_log_file_size must be at least 256 MB.' => '',
 

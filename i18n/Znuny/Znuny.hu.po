@@ -25722,3 +25722,15 @@ msgstr "Többszörös kijelölésű oszlopszűrők engedélyezése a kapcsolt je
 msgid "Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported."
 msgstr "Az ügyintézői felület jegynagyítás képernyőjének bejegyzésszűrő párbeszédablakában megjelenített dinamikus mezők. Csak a Bejegyzés objektumtípus mezői támogatottak, a következő típusokkal: Szöveg, Szövegdoboz, Legördülő, Többválasztós és Jelölőnégyzet."
 
+#. Perl Module: Kernel/Modules/Installer.pm
+msgid "Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s."
+msgstr "Hiba: állítsa be az adatbázison az innodb_redo_log_capacity értékét legalább %s MB méretűre (jelenleg: %s MB, ajánlott: %s MB). További információkért nézze meg a következőt: %s."
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+msgid "InnoDB Redo Log Capacity"
+msgstr "InnoDB redo napló kapacitása"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+msgid "The setting innodb_redo_log_capacity must be at least 256 MB."
+msgstr "Az innodb_redo_log_capacity beállításnak legalább 256 MB értékűnek kell lennie."
+

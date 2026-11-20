@@ -25720,3 +25720,15 @@ msgstr "복잡한 연결 개체 위젯에서 연결된 티켓의 다중 선택 �
 msgid "Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported."
 msgstr "에이전트 인터페이스의 티켓 확대 화면에서 기사 필터 대화 상자에 표시되는 동적 필드입니다. 객체 유형이 기사인 본문, 텍스트 영역, 드롭다운, 다중선택 및 체크 박스 필드만 지원됩니다."
 
+#. Perl Module: Kernel/Modules/Installer.pm
+msgid "Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s."
+msgstr "오류 : 데이터베이스의 innodb_redo_log_capacity 값을 최소 %s MB (현재 : %s MB, 권장 : %s MB)로 설정하십시오. 자세한 내용은 %s를보십시오."
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+msgid "InnoDB Redo Log Capacity"
+msgstr "InnoDB Redo 로그 용량"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+msgid "The setting innodb_redo_log_capacity must be at least 256 MB."
+msgstr "innodb_redo_log_capacity 설정은 256MB 이상이어야합니다."
+

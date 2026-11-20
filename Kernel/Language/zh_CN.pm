@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.854209445585216;
+    $Self->{Completeness}        = 0.854278497000316;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4672,6 +4672,8 @@ sub Data {
             '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '错误：请确认你的数据库能够接收大于%sMB的数据包（目前能够接收的最大数据包为%sMB）。为了避免程序报错，请调整数据库max_allowed_packet参数。',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            '错误：请设置数据库参数innodb_redo_log_capacity至少为%s MB（当前：%s MB，推荐：%s MB），请参阅 %s 获取更多信息。',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             '错误：请设置数据库参数innodb_log_file_size至少为%s MB（当前：%s MB，推荐：%s MB），请参阅 %s 获取更多信息。',
         'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
@@ -5255,6 +5257,9 @@ sub Data {
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'InnoDB重做日志容量',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            '参数innodb_redo_log_capacity必须设置为至少256MB。',
         'InnoDB Log File Size' => 'InnoDB日志文件大小',
         'The setting innodb_log_file_size must be at least 256 MB.' => '参数innodb_log_file_size必须设置为至少256MB。',
 

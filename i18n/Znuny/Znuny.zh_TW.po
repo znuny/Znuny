@@ -25711,3 +25711,15 @@ msgstr "在複雜的連結物件小工具中，為連結的工單啟用多選欄
 msgid "Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported."
 msgstr "在客服人員介面的工單詳細畫面的信件過濾器對話方塊中顯示的動態欄位。僅支援物件類型為信件，且類型為正文、文本塊、下拉、多選和複選框的欄位。"
 
+#. Perl Module: Kernel/Modules/Installer.pm
+msgid "Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s."
+msgstr "錯誤：請設置數據庫參數innodb_redo_log_capacity至少為%s MB（當前：%s MB，推薦：%s MB），請參閱 %s 獲取更多信息。"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+msgid "InnoDB Redo Log Capacity"
+msgstr "InnoDB重做日誌容量"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+msgid "The setting innodb_redo_log_capacity must be at least 256 MB."
+msgstr "參數innodb_redo_log_capacity必須設置為至少256MB。"
+

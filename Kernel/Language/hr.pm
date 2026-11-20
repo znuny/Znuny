@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.214342126046438;
+    $Self->{Completeness}        = 0.214714240606252;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4669,6 +4669,8 @@ sub Data {
             '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            'Pogreška: postavite vrijednost innodb_redo_log_capacity u bazi podataka na najmanje %s MB (trenutno: %s MB, preporučeno: %s MB). Više informacija potražite na %s.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             '',
         'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
@@ -5252,6 +5254,9 @@ sub Data {
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'Kapacitet InnoDB redo zapisnika',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'Postavka innodb_redo_log_capacity mora iznositi najmanje 256 MB.',
         'InnoDB Log File Size' => '',
         'The setting innodb_log_file_size must be at least 256 MB.' => '',
 

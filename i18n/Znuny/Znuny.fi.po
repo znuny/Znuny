@@ -25709,3 +25709,15 @@ msgstr "Ota käyttöön monivalintaiset sarakesuodattimet linkitetyille tiketeil
 msgid "Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported."
 msgstr "Dynaamiset kentät, jotka näytetään artikkelisuodatuksen valintaikkunassa palvelupyynnön zoomausnäkymässä asiakaspalvelijan käyttöliittymässä. Vain objektityypin Artikkeli kenttiä tyypeillä Teksti, TextArea, Dropdown, Multiselect ja Checkbox tuetaan."
 
+#. Perl Module: Kernel/Modules/Installer.pm
+msgid "Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s."
+msgstr "Virhe: aseta tietokannan innodb_redo_log_capacity-arvoksi vähintään %s MB (nykyinen: %s MB, suositeltu: %s MB). Lisätietoja on osoitteessa %s."
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+msgid "InnoDB Redo Log Capacity"
+msgstr "InnoDB-redo-lokin kapasiteetti"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+msgid "The setting innodb_redo_log_capacity must be at least 256 MB."
+msgstr "Asetuksen innodb_redo_log_capacity on oltava vähintään 256 MB."
+

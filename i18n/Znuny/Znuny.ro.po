@@ -25709,3 +25709,15 @@ msgstr "Activează filtrele de coloană cu selecție multiplă pentru tichetele 
 msgid "Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported."
 msgstr "Câmpuri dinamice afișate în dialogul filtrului de articole de pe ecranul de zoom al tichetului din interfața agentului. Sunt acceptate numai câmpurile de tipul obiectului Articol de tipurile Text, TextArea, Dropdown, Selecție multiplă și Checkbox."
 
+#. Perl Module: Kernel/Modules/Installer.pm
+msgid "Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s."
+msgstr "Eroare: setați valoarea innodb_redo_log_capacity din baza de date la cel puțin %s MB (curent: %s MB, recomandat: %s MB). Pentru mai multe informații, consultați %s."
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+msgid "InnoDB Redo Log Capacity"
+msgstr "Capacitatea jurnalului redo InnoDB"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+msgid "The setting innodb_redo_log_capacity must be at least 256 MB."
+msgstr "Setarea innodb_redo_log_capacity trebuie să fie de cel puțin 256 MB."
+

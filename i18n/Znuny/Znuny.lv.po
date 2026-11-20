@@ -25709,3 +25709,15 @@ msgstr "Iespējot vairākatlases kolonnu filtrus saistītajiem pieteikumiem sare
 msgid "Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported."
 msgstr "Dinamiskie lauki, kas tiek rādīti rakstu filtra dialoglodziņā biļetes tālummaiņas ekrānā aģenta saskarnē. Tiek atbalstīti tikai objekta tipa Ziņojums lauki ar tipiem Teksts, TextArea, Dropdown, Multiselect un Checkbox."
 
+#. Perl Module: Kernel/Modules/Installer.pm
+msgid "Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s."
+msgstr "Kļūda: lūdzu, iestatiet datubāzē innodb_redo_log_capacity vērtību vismaz %s MB (pašreizējā: %s MB, ieteicamā: %s MB). Papildinformāciju skatiet šeit: %s."
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+msgid "InnoDB Redo Log Capacity"
+msgstr "InnoDB redo žurnāla ietilpība"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+msgid "The setting innodb_redo_log_capacity must be at least 256 MB."
+msgstr "Iestatījumam innodb_redo_log_capacity jābūt vismaz 256 MB."
+

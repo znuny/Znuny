@@ -25713,3 +25713,15 @@ msgstr "Washa vichujio vya safu wima vya chaguo nyingi kwa tiketi zilizounganish
 msgid "Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported."
 msgstr "Sehemu zinazobadilika zinazoonyeshwa kwenye kisanduku cha mazungumzo cha kichuja cha makala katika skrini ya kukuza tiketi kwenye kiolesura cha wakala. Zinatumika tu sehemu za aina ya kipengele Makala za aina za Nakala, Sehemu ya nakala, Kunjuzi, Uchaguzi wa wingi na Kisandukutiki."
 
+#. Perl Module: Kernel/Modules/Installer.pm
+msgid "Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s."
+msgstr "Kosa: tafadhali weka thamani ya innodb_redo_log_capacity kwenye hifadhidata kuwa angalau %s MB (sasa: %s MB, inayopendekezwa: %s MB). Kwa maelezo zaidi, angalia %s."
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+msgid "InnoDB Redo Log Capacity"
+msgstr "Uwezo wa kumbukumbu ya redo ya InnoDB"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+msgid "The setting innodb_redo_log_capacity must be at least 256 MB."
+msgstr "Mpangilio wa innodb_redo_log_capacity lazima uwe angalau 256 MB."
+

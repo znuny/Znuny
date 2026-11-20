@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.822460906649818;
+    $Self->{Completeness}        = 0.822544995263656;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4669,6 +4669,8 @@ sub Data {
             '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Error: Certifique-se que seu banco da dados aceita pacotes com tamanho acima de %s MB (atualmente ele aceita somente até %sMB). Por Favor, ajuste o parametro max_allowed_packet do seu banco de dados, a fim de previnir erros.',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            'Erro: defina o valor de innodb_redo_log_capacity no seu banco de dados para ao menos %s MB (atualmente: %s MB, recomendado: %s MB). Para mais informações, consulte %s.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Error: Defina o valor para innodb_log_file_size no seu banco de dados para, ao menos %s MB (atualmente %sMB, recomendado: %sMB). Para mais informações verifique em %s.',
         'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
@@ -5252,6 +5254,9 @@ sub Data {
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'Capacidade do redo log do InnoDB',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'O parâmetro innodb_redo_log_capacity deve ser ao menos 256 MB.',
         'InnoDB Log File Size' => 'Tamanho de arquivo de log InooDB',
         'The setting innodb_log_file_size must be at least 256 MB.' => 'O parâmetro innodb_log_file_size deve ser ao menos 256 MB.',
 

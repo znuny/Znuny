@@ -25710,3 +25710,15 @@ msgstr "הפעלת מסנני עמודות עם בחירה מרובה עבור �
 msgid "Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported."
 msgstr "שדות דינמיים המוצגים בתיבת הדו-שיח של מסנן המאמרים במסך פירוט הפנייה בממשק הסוכן. נתמכים רק שדות מסוג האובייקט מאמר מהסוגים מלל, אזור טקסט, רשימה נפתחת, בחירה מרובה ותיבת סימון."
 
+#. Perl Module: Kernel/Modules/Installer.pm
+msgid "Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s."
+msgstr "שגיאה: נא להגדיר את הערך של innodb_redo_log_capacity בבסיס הנתונים ללפחות %s MB (נוכחי: %s MB, מומלץ: %s MB). למידע נוסף, עיינו ב-%s."
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+msgid "InnoDB Redo Log Capacity"
+msgstr "קיבולת יומן ה-redo של InnoDB"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+msgid "The setting innodb_redo_log_capacity must be at least 256 MB."
+msgstr "ההגדרה innodb_redo_log_capacity חייבת להיות לפחות 256 MB."
+

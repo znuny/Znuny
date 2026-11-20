@@ -25709,3 +25709,15 @@ msgstr "Omogući filtre stupaca s višestrukim odabirom za povezane tikete u slo
 msgid "Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported."
 msgstr "Dinamička polja prikazana u dijalogu filtra za članke na zaslonu detalja tiketa u sučelju agenta. Podržana su samo polja tipa objekta Članak vrsta Tekst, TextArea, Dropdown, Multiselect i Checkbox."
 
+#. Perl Module: Kernel/Modules/Installer.pm
+msgid "Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s."
+msgstr "Pogreška: postavite vrijednost innodb_redo_log_capacity u bazi podataka na najmanje %s MB (trenutno: %s MB, preporučeno: %s MB). Više informacija potražite na %s."
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+msgid "InnoDB Redo Log Capacity"
+msgstr "Kapacitet InnoDB redo zapisnika"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+msgid "The setting innodb_redo_log_capacity must be at least 256 MB."
+msgstr "Postavka innodb_redo_log_capacity mora iznositi najmanje 256 MB."
+

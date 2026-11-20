@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.591375770020534;
+    $Self->{Completeness}        = 0.591569308493843;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4671,6 +4671,8 @@ sub Data {
             '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'خطا: لطفا مطمئن شوید که پایگاه داده خود را بسته بر می پذیرد %s MB در اندازه (در حال حاضر تنها بسته می پذیرد تا %s MB). لطفا تنظیمات max_allowed_packet از پایگاه داده خود را به منظور جلوگیری از اشتباهات وفق دهند.',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            'خطا: لطفاً مقدار innodb_redo_log_capacity را در پایگاه داده حداقل روی %s مگابایت تنظیم کنید (فعلی: %s مگابایت، توصیه‌شده: %s مگابایت). برای اطلاعات بیشتر %s را ببینید.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'خطا: لطفا مقدار را برای innodb_log_file_size در پایگاه داده خود را به حداقل مجموعه %s (: در حال حاضر MB %s MB، توصیه می شود: %s MB). برای کسب اطلاعات بیشتر، لطفا یک نگاهی به %s .',
         'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
@@ -5254,6 +5256,9 @@ sub Data {
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'ظرفیت لاگ Redo در InnoDB',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'تنظیم innodb_redo_log_capacity باید حداقل 256 مگابایت باشد.',
         'InnoDB Log File Size' => 'سازی InnoDB ورود حجم فایل',
         'The setting innodb_log_file_size must be at least 256 MB.' => 'innodb_log_file_size تنظیم باید حداقل 256 مگابایت باشد.',
 

@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.998578423629758;
+    $Self->{Completeness}        = 0.998579096937165;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4671,6 +4671,8 @@ sub Data {
             'Hiba: rossz adatbázis-verzió van telepítve (%s). Legalább %s verzió szükséges! ',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Hiba: győződjön meg arról, hogy az adatbázisa elfogad-e %s MB méretűnél nagyobb csomagot (jelenleg csak legfeljebb %s MB méretű csomagot fogad el). A hibák elkerülése érdekében alkalmazkodjon az adatbázisa max_allowed_packet beállításához.',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            'Hiba: állítsa be az adatbázison az innodb_redo_log_capacity értékét legalább %s MB méretűre (jelenleg: %s MB, ajánlott: %s MB). További információkért nézze meg a következőt: %s.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Hiba: állítsa be az adatbázison az innodb_log_file_size értékét legalább %s MB méretűre (jelenleg: %s MB, ajánlott: %s MB). További információkért nézze meg a következőt: %s.',
         'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
@@ -5254,6 +5256,9 @@ sub Data {
             'Olyan táblák találhatók, amelyek nem „utf8mb4” karakterkészletűek.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'InnoDB redo napló kapacitása',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'Az innodb_redo_log_capacity beállításnak legalább 256 MB értékűnek kell lennie.',
         'InnoDB Log File Size' => 'InnoDB naplófájl méret',
         'The setting innodb_log_file_size must be at least 256 MB.' => 'Az innodb_log_file_size beállításnak legalább 256 MB értékűnek kell lennie.',
 

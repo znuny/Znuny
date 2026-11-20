@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.202969515084505;
+    $Self->{Completeness}        = 0.203347016103568;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4666,6 +4666,8 @@ sub Data {
             '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            'Error: definiu el valor de innodb_redo_log_capacity a la base de dades com a mínim a %s MB (actual: %s MB, recomanat: %s MB). Per a més informació, consulteu %s.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             '',
         'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
@@ -5249,6 +5251,9 @@ sub Data {
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'Capacitat del redo log d’InnoDB',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'El paràmetre innodb_redo_log_capacity ha de ser com a mínim de 256 MB.',
         'InnoDB Log File Size' => '',
         'The setting innodb_log_file_size must be at least 256 MB.' => '',
 
