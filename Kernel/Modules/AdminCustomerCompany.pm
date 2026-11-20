@@ -11,6 +11,7 @@ package Kernel::Modules::AdminCustomerCompany;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::Language qw(Translatable);
 
@@ -831,8 +832,8 @@ sub _Overview {
 
         # get valid list
         my %ValidList = $Kernel::OM->Get('Kernel::System::Valid')->ValidList();
-
-        if ( !$ConfigObject->Get( $Param{Source} )->{Params}->{ForeignDB} ) {
+        my $ForeignDB = ( $ConfigObject->Get( $Param{Source} ) // {} )->{Params}->{ForeignDB};
+        if ( !$ForeignDB ) {
             $LayoutObject->Block( Name => 'LocalDB' );
         }
 
@@ -850,7 +851,7 @@ sub _Overview {
                     },
                 );
 
-                if ( !$ConfigObject->Get( $Param{Source} )->{Params}->{ForeignDB} ) {
+                if ( !$ForeignDB ) {
                     $LayoutObject->Block(
                         Name => 'LocalDBRow',
                         Data => {

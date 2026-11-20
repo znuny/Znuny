@@ -860,7 +860,7 @@ sub CustomerUserDataGet {
         my %Company;
         if (
             $ConfigObject->Get("CustomerCompany")
-            && $ConfigObject->Get("CustomerUser$Count")->{CustomerCompanySupport}
+            && ( $ConfigObject->Get("CustomerUser$Count") // {} )->{CustomerCompanySupport}
             )
         {
             %Company = $CustomerCompanyObject->CustomerCompanyGet(
