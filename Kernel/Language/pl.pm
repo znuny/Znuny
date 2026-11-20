@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.634913112164297;
+    $Self->{Completeness}        = 0.634970778707945;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2880,6 +2880,8 @@ sub Data {
         'Archive Search' => 'Szukanie w archiwum',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'Zawartość',
+        'e.g. Text or Te*t' => 'np.: Tekst albo Te*t',
         'Save filter settings as default' => 'Zapisz ustawienia filtru jako domyślne',
         'Event Type' => 'Typ zdarzenia',
         'Save as default' => 'Zapisz jako domyślny',
@@ -4978,7 +4980,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => 'Przywróć wartość domyślną tego ustawienia.',
         'Unable to load %s!' => 'Nie można załadować %s!',
-        'Content' => 'Zawartość',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'Informacje o zgłoszeniu',
@@ -5082,9 +5083,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'przed/po',
         'between' => 'pomiędzy',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => 'np.: Tekst albo Te*t',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -6722,6 +6720,8 @@ sub Data {
             'Wyświetla zliczony czas artykułu w widoku przybliżonym zgłoszenia.',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             'W widoku rozszerzonym aktywuje filtr wiadomości umożliwiający wybór, które artykuły powinny być widoczne.',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Pola dynamiczne wyświetlane w oknie dialogowym filtra wiadomości na ekranie szczegółów zgłoszenia w interfejsie agenta. Obsługiwane są tylko pola typu obiektu Wiadomość typów Tekst, Obszar tekstowy, Lista rozwijana, Multiwybór i Pole wyboru.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>

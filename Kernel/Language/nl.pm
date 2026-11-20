@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d-%m-%Y';
     $Self->{DateInputFormat}     = '%d-%m-%Y';
     $Self->{DateInputFormatLong} = '%d-%m-%Y - %T';
-    $Self->{Completeness}        = 0.47740916271722;
+    $Self->{Completeness}        = 0.477491707471174;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2881,6 +2881,8 @@ sub Data {
         'Archive Search' => 'Zoek in archief',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'Inhoud',
+        'e.g. Text or Te*t' => '',
         'Save filter settings as default' => 'Sla filter op als standaard',
         'Event Type' => 'Gebeurtenis type',
         'Save as default' => 'Opslaan als standaard',
@@ -4979,7 +4981,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => '',
         'Unable to load %s!' => '',
-        'Content' => 'Inhoud',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'Ticket-informatie',
@@ -5083,9 +5084,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'voor/na',
         'between' => 'tussen',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -6723,6 +6721,8 @@ sub Data {
             '',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             'Activeert het artikel filter in de zoom weergave om te bepalen welke artikelen moeten worden weergegeven.',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Dynamische velden die worden getoond in het dialoogvenster van het filter voor interacties op het zoomscherm van het ticket in de agentinterface. Alleen velden van het objecttype Interactie van de typen Tekst, Tekstvak, Dropdown, Multiselect en Checkbox worden ondersteund.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>

@@ -13368,7 +13368,7 @@ msgstr "A beállítás visszaállítása az alapértelmezett értékére."
 msgid "Unable to load %s!"
 msgstr "Nem lehet betölteni: %s!"
 
-#. Perl Module: Kernel/Output/HTML/SysConfig.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "Content"
 msgstr "Tartalom"
 
@@ -13588,7 +13588,7 @@ msgstr "előtt/után"
 msgid "between"
 msgstr "között"
 
-#. Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "e.g. Text or Te*t"
 msgstr "például Szöveg vagy Sz*eg"
 
@@ -25717,4 +25717,8 @@ msgstr "Szűrő"
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = \"complex\"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup."
 msgstr "Többszörös kijelölésű oszlopszűrők engedélyezése a kapcsolt jegyekhez a kapcsolt objektumok összetett felületi elemén (LinkObject::ViewMode = \"complex\"). A szűrők az AgentTicketZoom nézetben érhetők el, és nem jelennek meg az AgentLinkObject felugró ablakában."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported."
+msgstr "Az ügyintézői felület jegynagyítás képernyőjének bejegyzésszűrő párbeszédablakában megjelenített dinamikus mezők. Csak a Bejegyzés objektumtípus mezői támogatottak, a következő típusokkal: Szöveg, Szövegdoboz, Legördülő, Többválasztós és Jelölőnégyzet."
 

@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.178988941548183;
+    $Self->{Completeness}        = 0.17911862265045;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2875,6 +2875,8 @@ sub Data {
         'Archive Search' => 'Prehľadávať archív',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => '',
+        'e.g. Text or Te*t' => '',
         'Save filter settings as default' => 'Uložiť nastavenie filtra ako predvolené',
         'Event Type' => 'Typ udalosti',
         'Save as default' => 'Uložiť do prednastavených',
@@ -4973,7 +4975,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => '',
         'Unable to load %s!' => '',
-        'Content' => '',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'Informácia o tikete',
@@ -5077,9 +5078,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'predtým/potom',
         'between' => 'medzi',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -6717,6 +6715,8 @@ sub Data {
             '',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             '',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Dynamické polia zobrazené v dialógu filtra článku na obrazovke detailu tiketu v rozhraní agenta. Podporované sú iba polia typu objektu článok typov Text, TextArea, Dropdown, Hromadný výber a Checkbox.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>

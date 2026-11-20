@@ -360,6 +360,96 @@ sub ArticleSearchIndexWhereCondition {
     return $SQLCondition;
 }
 
+sub ArticleSearchIndexArticleIDsGet {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $DBObject     = $Kernel::OM->Get('Kernel::System::DB');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+
+    NEEDED:
+    for my $Needed (qw(TicketID SearchTerm)) {
+        next NEEDED if $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Need $Needed!",
+        );
+        return;
+    }
+
+    my %StopWord;
+    my $StopWordRaw = $ConfigObject->Get('Ticket::SearchIndex::StopWords') || {};
+    if ( IsHashRefWithData($StopWordRaw) ) {
+
+        LANGUAGE:
+        for my $Language ( sort keys %{$StopWordRaw} ) {
+            next LANGUAGE if ref $StopWordRaw->{$Language} ne 'ARRAY';
+
+            STOPWORD:
+            for my $StopWord ( @{ $StopWordRaw->{$Language} } ) {
+                next STOPWORD if !defined $StopWord || !length $StopWord;
+                $StopWord{ lc $StopWord } = 1;
+            }
+        }
+    }
+
+    my $SearchIndexAttributes = $ConfigObject->Get('Ticket::SearchIndex::Attribute') || {};
+    my $WordLengthMin         = $SearchIndexAttributes->{WordLengthMin}              || 3;
+    my $WordLengthMax         = $SearchIndexAttributes->{WordLengthMax}              || 30;
+
+    my @LikeTerms;
+    WORD:
+    for my $Word ( split /\s+/, $Param{SearchTerm} ) {
+        next WORD if !length $Word;
+
+        my $PlainWord = lc $Word;
+        $PlainWord =~ s/\*//g;
+
+        if ( length $PlainWord ) {
+            next WORD if $StopWord{$PlainWord};
+            next WORD if length $PlainWord < $WordLengthMin;
+            next WORD if length $PlainWord > $WordLengthMax;
+        }
+
+        $Word =~ s/\*/%/gi;
+
+        $Word = '%' . $Word . '%';
+
+        $Word =~ s/%%/%/gi;
+
+        next WORD if $Word =~ /^%{1,3}$/;
+
+        push @LikeTerms, lc $DBObject->Quote( $Word, 'Like' );
+    }
+
+    if ( !@LikeTerms ) {
+        my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+        my @Articles      = $ArticleObject->ArticleList(
+            TicketID => $Param{TicketID},
+        );
+
+        return map { $_->{ArticleID} } @Articles;
+    }
+
+    my $SQL = 'SELECT DISTINCT article_id FROM article_search_index WHERE ticket_id = ?';
+    for my $LikeTerm (@LikeTerms) {
+        $SQL .= " AND article_value LIKE '$LikeTerm'";
+    }
+
+    return if !$DBObject->Prepare(
+        SQL  => $SQL,
+        Bind => [ \$Param{TicketID} ],
+    );
+
+    my @ArticleIDs;
+    while ( my @Row = $DBObject->FetchrowArray() ) {
+        push @ArticleIDs, $Row[0];
+    }
+
+    return @ArticleIDs;
+}
+
 sub SearchStringStopWordsFind {
     my ( $Self, %Param ) = @_;
 

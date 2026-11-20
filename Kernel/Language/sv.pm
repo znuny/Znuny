@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.319905213270142;
+    $Self->{Completeness}        = 0.320012636234402;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2878,6 +2878,8 @@ sub Data {
         'Archive Search' => 'Arkivsökning',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'Innehåll',
+        'e.g. Text or Te*t' => '',
         'Save filter settings as default' => 'Spara filterinställningar som standard',
         'Event Type' => 'Händelsetyp',
         'Save as default' => '',
@@ -4976,7 +4978,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => '',
         'Unable to load %s!' => '',
-        'Content' => 'Innehåll',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'Ärende-information',
@@ -5080,9 +5081,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'före/efter',
         'between' => 'mellan',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -6720,6 +6718,8 @@ sub Data {
             '',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             '',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Dynamiska fält som visas i artikelfiltrets dialogruta på ärendets zoomvy i agentgränssnittet. Endast fält av objekttypen Artikel av typerna Text, Textarea, Dropdown, Multiselect och Kryssruta stöds.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>

@@ -13338,7 +13338,7 @@ msgstr ""
 msgid "Unable to load %s!"
 msgstr ""
 
-#. Perl Module: Kernel/Output/HTML/SysConfig.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "Content"
 msgstr "Saturs"
 
@@ -13558,7 +13558,7 @@ msgstr "pirms/pēc"
 msgid "between"
 msgstr "starp"
 
-#. Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "e.g. Text or Te*t"
 msgstr ""
 
@@ -25704,4 +25704,8 @@ msgstr "Filtrs"
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = \"complex\"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup."
 msgstr "Iespējot vairākatlases kolonnu filtrus saistītajiem pieteikumiem sarežģītajā saistīto objektu logrīkā (LinkObject::ViewMode = \"complex\"). Filtri ir pieejami AgentTicketZoom un netiek rādīti AgentLinkObject uznirstošajā logā."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported."
+msgstr "Dinamiskie lauki, kas tiek rādīti rakstu filtra dialoglodziņā biļetes tālummaiņas ekrānā aģenta saskarnē. Tiek atbalstīti tikai objekta tipa Ziņojums lauki ar tipiem Teksts, TextArea, Dropdown, Multiselect un Checkbox."
 

@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.503791469194313;
+    $Self->{Completeness}        = 0.503869846785658;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2878,6 +2878,8 @@ sub Data {
         'Archive Search' => 'ค้นหาเอกสารเก่า',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'เนื้อหา',
+        'e.g. Text or Te*t' => '',
         'Save filter settings as default' => 'บันทึกการตั้งค่าตัวกรองเป็นค่าเริ่มต้น',
         'Event Type' => 'ประเภทของกิจกรรม',
         'Save as default' => 'บันทึกเป็นค่าเริ่มต้น',
@@ -4976,7 +4978,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => '',
         'Unable to load %s!' => '',
-        'Content' => 'เนื้อหา',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'ข้อมูลของตั๋ว',
@@ -5080,9 +5081,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'ก่อน/หลัง',
         'between' => 'ระหว่าง',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -6721,6 +6719,8 @@ sub Data {
             'แสดงเวลาคิดสำหรับบทความในมุมมองการซูมตั๋ว',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             'เปิดใช้งานตัวกรองบทความในมุมมองการซูมเพื่อระบุว่าควรแสดงบทความใด',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'ฟิลด์แบบไดนามิกที่แสดงในกล่องโต้ตอบตัวกรองบทความของหน้าจอซูมตั๋วในอินเทอร์เฟซเจ้าหน้าที่ รองรับเฉพาะฟิลด์ประเภทออบเจคบทความที่เป็นประเภทข้อความ, Textarea, ดรอปดาวน์, หลายรายการ และกล่องตรวจสอบ',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>

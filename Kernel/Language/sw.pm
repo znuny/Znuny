@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%m/%d/%Y';
     $Self->{DateInputFormat}     = '%m/%d/%Y';
     $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
-    $Self->{Completeness}        = 0.421800947867299;
+    $Self->{Completeness}        = 0.421892276101722;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2878,6 +2878,8 @@ sub Data {
         'Archive Search' => 'Tafuta nyaraka',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'Maudhui',
+        'e.g. Text or Te*t' => '',
         'Save filter settings as default' => 'Hifadhi mipangilio ya kichuja kuwa chaguo-msingi',
         'Event Type' => 'Aina ya tukio',
         'Save as default' => 'Hifadhi kama chaguo-msingi',
@@ -4976,7 +4978,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => '',
         'Unable to load %s!' => '',
-        'Content' => 'Maudhui',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'Taarifa za tiketi',
@@ -5080,9 +5081,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'kabla/baada',
         'between' => 'katikati',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -6720,6 +6718,8 @@ sub Data {
             'Inaonyesha muda ulihesabiwa kwa ajili ya makala ya mandhari ya ukuzaji wa tiketi.',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             'Amilisha kichuja cha makala katika mandhari ya kukuza kubainisha makala ipi ionyeshwe.',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Sehemu zinazobadilika zinazoonyeshwa kwenye kisanduku cha mazungumzo cha kichuja cha makala katika skrini ya kukuza tiketi kwenye kiolesura cha wakala. Zinatumika tu sehemu za aina ya kipengele Makala za aina za Nakala, Sehemu ya nakala, Kunjuzi, Uchaguzi wa wingi na Kisandukutiki.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>

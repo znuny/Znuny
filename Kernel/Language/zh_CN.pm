@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.854186413902054;
+    $Self->{Completeness}        = 0.854209445585216;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2882,6 +2882,8 @@ sub Data {
         'Archive Search' => '归档搜索',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => '值',
+        'e.g. Text or Te*t' => '如：Text或Te*t',
         'Save filter settings as default' => '将过滤器设置保存为默认过滤器',
         'Event Type' => '事件类型',
         'Save as default' => '保存为默认',
@@ -4980,7 +4982,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '取消编辑并解锁此设置',
         'Reset this setting to its default value.' => '将这个设置重置为默认值。',
         'Unable to load %s!' => '无法加载%s！',
-        'Content' => '值',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => '工单信息',
@@ -5084,9 +5085,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => '在...之前/之后',
         'between' => '在...之间',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '如：Text或Te*t',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '忽略该字段。',
@@ -6724,6 +6722,8 @@ sub Data {
             '在工单详情视图中显示所用工时。',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             '在详情视图中激活信件过滤器以指定显示的信件。',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            '在服务人员界面的工单详情屏幕的信件过滤器对话框中显示的动态字段。仅支持对象类型为信件、字段类型为文本、文本区域、下拉选择框、多选框和复选框的字段。',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '在工单详情视图中显示与当前工单具有相同的客户ID的所有工单数。',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>

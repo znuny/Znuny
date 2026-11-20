@@ -13354,7 +13354,7 @@ msgstr ""
 msgid "Unable to load %s!"
 msgstr ""
 
-#. Perl Module: Kernel/Output/HTML/SysConfig.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "Content"
 msgstr "Contenu"
 
@@ -13574,7 +13574,7 @@ msgstr "avant/après"
 msgid "between"
 msgstr "entre"
 
-#. Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "e.g. Text or Te*t"
 msgstr ""
 
@@ -25704,4 +25704,8 @@ msgstr "Filtre"
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = \"complex\"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup."
 msgstr "Active les filtres de colonne à sélection multiple pour les tickets liés dans le widget complexe des objets liés (LinkObject::ViewMode = \"complex\"). Les filtres sont disponibles dans AgentTicketZoom et ne sont pas affichés dans la fenêtre contextuelle d'AgentLinkObject."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported."
+msgstr "Champs dynamiques affichés dans la boîte de dialogue du filtre d'article de l'écran de zoom du ticket de l'interface agent. Seuls les champs du type d'objet Article des types Texte, Zone de texte, Liste déroulante, Sélection multiple et Case à cocher sont pris en charge."
 

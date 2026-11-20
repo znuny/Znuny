@@ -26,12 +26,71 @@ $Selenium->RunTest(
         my $ConfigObject               = $Kernel::OM->Get('Kernel::Config');
         my $CommunicationChannelObject = $Kernel::OM->Get('Kernel::System::CommunicationChannel');
         my $ArticleBackendPhoneObject  = $Kernel::OM->Get("Kernel::System::Ticket::Article::Backend::Phone");
+        my $DynamicFieldObject         = $Kernel::OM->Get('Kernel::System::DynamicField');
+        my $DynamicFieldBackendObject  = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
         # Enable article filter.
         $HelperObject->ConfigSettingChange(
             Valid => 1,
             Key   => 'Ticket::Frontend::TicketArticleFilter',
             Value => 1,
+        );
+
+        my $RandomID              = $HelperObject->GetRandomID();
+        my $ArticleDFName         = 'ArticleCallType' . $RandomID;
+        my $ArticleCheckboxName   = 'ArticleCallback' . $RandomID;
+        my $ArticleDynamicFieldID = $DynamicFieldObject->DynamicFieldAdd(
+            Name       => $ArticleDFName,
+            Label      => 'Call Type',
+            FieldOrder => 9991,
+            FieldType  => 'Dropdown',
+            ObjectType => 'Article',
+            Config     => {
+                DefaultValue   => '',
+                PossibleValues => {
+                    Sales   => 'Sales',
+                    Support => 'Support',
+                },
+                TranslatableValues => 0,
+            },
+            ValidID => 1,
+            UserID  => 1,
+            Reorder => 0,
+        );
+        $Self->True(
+            $ArticleDynamicFieldID,
+            "Article Dropdown dynamic field $ArticleDFName - created",
+        );
+
+        my $ArticleDynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
+            ID => $ArticleDynamicFieldID,
+        );
+
+        my $ArticleCheckboxID = $DynamicFieldObject->DynamicFieldAdd(
+            Name       => $ArticleCheckboxName,
+            Label      => 'Callback',
+            FieldOrder => 9992,
+            FieldType  => 'Checkbox',
+            ObjectType => 'Article',
+            Config     => {
+                DefaultValue => 0,
+            },
+            ValidID => 1,
+            UserID  => 1,
+            Reorder => 0,
+        );
+        $Self->True(
+            $ArticleCheckboxID,
+            "Article Checkbox dynamic field $ArticleCheckboxName - created",
+        );
+
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'Ticket::Frontend::TicketArticleFilterDynamicField',
+            Value => {
+                $ArticleDFName       => 1,
+                $ArticleCheckboxName => 1,
+            },
         );
 
         # Set ZoomExpandSort to reverse.
@@ -120,13 +179,18 @@ $Selenium->RunTest(
 
         # Create test articles.
         for my $Test (@Tests) {
+            my $Body = 'Selenium body article';
+            if ( $Test->{Subject} eq 'First Test Article' || $Test->{Subject} eq 'Fourth Test Article' ) {
+                $Body .= ' PINEAPPLE-4412';
+            }
+
             my $ArticleID
                 = $Kernel::OM->Get("Kernel::System::Ticket::Article::Backend::$Test->{Backend}")->ArticleCreate(
                 TicketID             => $TicketID,
                 IsVisibleForCustomer => $Test->{IsVisibleForCustomer},
                 SenderType           => $Test->{SenderType},
                 Subject              => $Test->{Subject},
-                Body                 => 'Selenium body article',
+                Body                 => $Body,
                 Charset              => 'ISO-8859-15',
                 MimeType             => 'text/plain',
                 HistoryType          => 'AddNote',
@@ -136,6 +200,31 @@ $Selenium->RunTest(
             $Self->True(
                 $ArticleID,
                 "Article $Test->{Subject} - created",
+            );
+
+            my $CallType = 'Sales';
+            if ( $Test->{Subject} eq 'First Test Article' || $Test->{Subject} eq 'Fourth Test Article' ) {
+                $CallType = 'Support';
+            }
+            my $ValueSet = $DynamicFieldBackendObject->ValueSet(
+                DynamicFieldConfig => $ArticleDynamicFieldConfig,
+                ObjectID           => $ArticleID,
+                Value              => $CallType,
+                UserID             => $TestUserID,
+            );
+            $Self->True(
+                $ValueSet,
+                "Article DF $CallType set for $Test->{Subject}",
+            );
+
+            my $IndexBuilt = $ArticleObject->ArticleSearchIndexBuild(
+                TicketID  => $TicketID,
+                ArticleID => $ArticleID,
+                UserID    => $TestUserID,
+            );
+            $Self->True(
+                $IndexBuilt,
+                "Search index built for $Test->{Subject}",
             );
         }
 
@@ -368,6 +457,138 @@ $Selenium->RunTest(
                 "Article type $ArticleType - \"$TestArticles{$ArticleType}\" found on page",
             );
         }
+
+        # Reset article filter.
+        $Selenium->find_element( "#ResetArticleFilter", 'css' )->click();
+        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$("#ResetArticleFilter").length;' );
+        $Selenium->VerifiedRefresh();
+
+        # Set content filter.
+        $Selenium->find_element( "#SetArticleFilter", 'css' )->click();
+        $Selenium->WaitFor(
+            JavaScript => 'return typeof($) === "function" && $(".Dialog:visible").length === 1;'
+        );
+
+        $Selenium->find_element( '#FulltextFilter', 'css' )->clear();
+        $Selenium->find_element( '#FulltextFilter', 'css' )->send_keys('PINEAPPLE-4412');
+
+        # Save as default and apply.
+        $Selenium->find_element( '#SaveDefaults',  'css' )->click();
+        $Selenium->find_element( '#DialogButton2', 'css' )->click();
+        $Selenium->WaitFor(
+            JavaScript => 'return typeof($) === "function" && $(".Dialog:visible").length === 0;'
+        );
+        $Selenium->VerifiedRefresh();
+
+        my @ContentFilterArticles = (
+            'First Test Article',
+            'Fourth Test Article',
+        );
+        for my $Article (@ContentFilterArticles) {
+            $Self->True(
+                $Selenium->execute_script("return \$('#ArticleTable:contains(\"$Article\")').length;"),
+                "Content filter - $Article found on page",
+            );
+        }
+
+        my @ContentFilterHidden = (
+            'Second Test Article',
+            'Third Test Article',
+            'Fifth Test Article',
+            'Sixth Test Article',
+        );
+        for my $Article (@ContentFilterHidden) {
+            $Self->False(
+                $Selenium->execute_script("return \$('#ArticleTable:contains(\"$Article\")').length;"),
+                "Content filter - $Article not found on page",
+            );
+        }
+
+        # Reset content filter.
+        $Selenium->find_element( "#ResetArticleFilter", 'css' )->click();
+        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$("#ResetArticleFilter").length;' );
+        $Selenium->VerifiedRefresh();
+
+        # Set article DF filter.
+        $Selenium->find_element( "#SetArticleFilter", 'css' )->click();
+        $Selenium->WaitFor(
+            JavaScript => 'return typeof($) === "function" && $(".Dialog:visible").length === 1;'
+        );
+
+        $Self->True(
+            $Selenium->execute_script(
+                "return \$('#Search_DynamicField_$ArticleDFName').length;"
+            ),
+            "Article DF filter field Search_DynamicField_$ArticleDFName is shown",
+        );
+
+        $Selenium->InputFieldValueSet(
+            Element => "#Search_DynamicField_$ArticleDFName",
+            Value   => 'Support',
+        );
+
+        $Selenium->find_element( '#DialogButton2', 'css' )->click();
+        $Selenium->WaitFor(
+            JavaScript => 'return typeof($) === "function" && $(".Dialog:visible").length === 0;'
+        );
+        $Selenium->VerifiedRefresh();
+
+        for my $Article ( 'First Test Article', 'Fourth Test Article' ) {
+            $Self->True(
+                $Selenium->execute_script("return \$('#ArticleTable:contains(\"$Article\")').length;"),
+                "Article DF filter - $Article found on page",
+            );
+        }
+        for my $Article (
+            'Second Test Article',
+            'Third Test Article',
+            'Fifth Test Article',
+            'Sixth Test Article',
+            )
+        {
+            $Self->False(
+                $Selenium->execute_script("return \$('#ArticleTable:contains(\"$Article\")').length;"),
+                "Article DF filter - $Article not found on page",
+            );
+        }
+
+        # Reset DF filter.
+        $Selenium->find_element( "#ResetArticleFilter", 'css' )->click();
+        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$("#ResetArticleFilter").length;' );
+        $Selenium->VerifiedRefresh();
+
+        # Set Checkbox Unchecked and confirm it is still selected after reload.
+        $Selenium->find_element( "#SetArticleFilter", 'css' )->click();
+        $Selenium->WaitFor(
+            JavaScript => 'return typeof($) === "function" && $(".Dialog:visible").length === 1;'
+        );
+
+        $Selenium->InputFieldValueSet(
+            Element => "#Search_DynamicField_$ArticleCheckboxName",
+            Value   => '-1',
+        );
+
+        $Selenium->find_element( '#DialogButton2', 'css' )->click();
+        $Selenium->WaitFor(
+            JavaScript => 'return typeof($) === "function" && $(".Dialog:visible").length === 0;'
+        );
+        $Selenium->VerifiedRefresh();
+
+        $Selenium->find_element( "#SetArticleFilter", 'css' )->click();
+        $Selenium->WaitFor(
+            JavaScript => 'return typeof($) === "function" && $(".Dialog:visible").length === 1;'
+        );
+
+        $Self->Is(
+            $Selenium->execute_script(
+                "return \$('#Search_DynamicField_$ArticleCheckboxName option:selected').val();"
+            ),
+            '-1',
+            "Checkbox Unchecked stays selected after reload for Search_DynamicField_$ArticleCheckboxName",
+        );
+
+        $Selenium->find_element( "#ResetArticleFilter", 'css' )->click();
+        $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$("#ResetArticleFilter").length;' );
 
         # Delete test created ticket.
         my $Success = $TicketObject->TicketDelete(

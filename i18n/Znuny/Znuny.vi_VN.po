@@ -13340,7 +13340,7 @@ msgstr ""
 msgid "Unable to load %s!"
 msgstr ""
 
-#. Perl Module: Kernel/Output/HTML/SysConfig.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "Content"
 msgstr "Nội dung"
 
@@ -13560,7 +13560,7 @@ msgstr "trước / sau"
 msgid "between"
 msgstr "giữa"
 
-#. Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "e.g. Text or Te*t"
 msgstr ""
 
@@ -25718,4 +25718,8 @@ msgstr "Lọc"
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = \"complex\"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup."
 msgstr "Bật bộ lọc cột chọn nhiều giá trị cho các phiếu được liên kết trong tiện ích đối tượng liên kết phức tạp (LinkObject::ViewMode = \"complex\"). Bộ lọc có trong AgentTicketZoom và không hiển thị trong cửa sổ bật lên AgentLinkObject."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported."
+msgstr "Các trường động được hiển thị trong hộp thoại bộ lọc bài viết trên màn hình thu phóng phiếu ở giao diện nhân viên. Chỉ hỗ trợ các trường thuộc loại đối tượng Bài viết với các kiểu Văn bản, TextArea, Dropdown, Multiselect và Checkbox."
 

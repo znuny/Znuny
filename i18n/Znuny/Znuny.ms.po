@@ -13362,7 +13362,7 @@ msgstr ""
 msgid "Unable to load %s!"
 msgstr ""
 
-#. Perl Module: Kernel/Output/HTML/SysConfig.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "Content"
 msgstr "kandungan"
 
@@ -13582,7 +13582,7 @@ msgstr "sebelum/selepas"
 msgid "between"
 msgstr "diantara"
 
-#. Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "e.g. Text or Te*t"
 msgstr ""
 
@@ -25718,4 +25718,8 @@ msgstr "Tapisan"
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = \"complex\"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup."
 msgstr "Dayakan tapisan lajur berbilang pilihan untuk tiket yang dipautkan dalam widget kompleks objek yang dipautkan (LinkObject::ViewMode = \"complex\"). Tapisan tersedia di AgentTicketZoom dan tidak dipaparkan dalam tetingkap timbul AgentLinkObject."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported."
+msgstr "Medan dinamik yang dipaparkan dalam dialog tapisan artikel pada skrin zum tiket antara muka ejen. Hanya medan jenis objek Artikel bagi jenis Teks, Textarea, Dropdown, Pelbagaipilih dan Kotak petak disokong."
 

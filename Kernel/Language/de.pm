@@ -2876,6 +2876,8 @@ sub Data {
         'Archive Search' => 'Archivsuche',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'Inhalt',
+        'e.g. Text or Te*t' => 'z.B. Text oder Te*t',
         'Save filter settings as default' => 'Filtereinstellungen als Standard speichern',
         'Event Type' => 'Ereignistyp',
         'Save as default' => 'Als Standard speichern',
@@ -4974,7 +4976,6 @@ sub Data {
         'Cancel editing and unlock this setting' => 'Bearbeitung abbrechen und diese Einstellung freigeben',
         'Reset this setting to its default value.' => 'Einstellung auf Standardwert zurücksetzen.',
         'Unable to load %s!' => 'Kann %s nicht laden!',
-        'Content' => 'Inhalt',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'Ticket-Informationen',
@@ -5078,9 +5079,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'vor/nach',
         'between' => 'zwischen',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => 'z.B. Text oder Te*t',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => 'Dieses Feld ignorieren.',
@@ -6718,6 +6716,8 @@ sub Data {
             'Zeigt die bisher benötigte Zeit für einen Artikel in der TicketZoomView an.',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             'Aktiviert verschiedene Artikelfilter in der Zoomansicht, um festzulegen, welche Artikel angezeigt werden sollen.',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Dynamische Felder, die im Artikelfilter-Dialog der Ticket-Detailansicht des Agentenbereichs angezeigt werden. Unterstützt werden nur Felder des Objekttyps Artikel der Typen Text, Textfeld, Einfachauswahl, Mehrfachauswahl und Kontrollkästchen.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             'Zeigt die Anzahl aller Tickets mit derselben Kundennummer wie das aktuelle Ticket in der Ticket-Zoom-Ansicht an.',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>

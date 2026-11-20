@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%m/%d';
     $Self->{DateInputFormat}     = '%Y/%m/%d';
     $Self->{DateInputFormatLong} = '%Y/%m/%d - %T';
-    $Self->{Completeness}        = 0.653870458135861;
+    $Self->{Completeness}        = 0.653925130311167;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2881,6 +2881,8 @@ sub Data {
         'Archive Search' => 'アーカイブ検索',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => '内容',
+        'e.g. Text or Te*t' => '例: Text または Te*t',
         'Save filter settings as default' => 'デフォルトのフィルター設定を保存',
         'Event Type' => 'イベントタイプ',
         'Save as default' => 'ドラフトとして保存',
@@ -4980,7 +4982,6 @@ sub Data {
         'Cancel editing and unlock this setting' => 'この設定の編集をキャンセルしてアンロックする',
         'Reset this setting to its default value.' => 'この設定をデフォルトの値にリセットする',
         'Unable to load %s!' => '%sを読み込めません！',
-        'Content' => '内容',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'チケット情報',
@@ -5084,9 +5085,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => '前／後',
         'between' => '期間中',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '例: Text または Te*t',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -6724,6 +6722,8 @@ sub Data {
             'チケット・ズーム・ビューで、項目に関してアカウントされた時間を表示します。',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             'ズーム・ビューで、どの項目を表示するか特定するために項目フィルタを有効にします。',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            '担当者インタフェースのチケット詳細画面の記事フィルタダイアログに表示するダイナミック・フィールド。オブジェクトタイプ「記事」の本文、Textarea、ドロップダウン、Multiselect、チェックボックスのみがサポートされます。',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>

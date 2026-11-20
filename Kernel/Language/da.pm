@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.33696682464455;
+    $Self->{Completeness}        = 0.337071552677302;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2878,6 +2878,8 @@ sub Data {
         'Archive Search' => 'Arkivsøgning',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'Indhold',
+        'e.g. Text or Te*t' => '',
         'Save filter settings as default' => 'Gem disse filterinstillinger som standard',
         'Event Type' => 'Hændelsestype',
         'Save as default' => 'Gem som standard',
@@ -4976,7 +4978,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => '',
         'Unable to load %s!' => '',
-        'Content' => 'Indhold',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'Sagsinformation',
@@ -5080,9 +5081,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'før/efter',
         'between' => 'mellem',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -6720,6 +6718,8 @@ sub Data {
             '',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             'Aktiverer indlægsfilteret i ZoomView for at specificere hvilke indlæg, der skal vises.',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Dynamiske felter, der vises i dialogen til indlægsfilteret på zoomskærmen for sager i agentgrænsefladen. Kun felter af objekttypen Indlæg af typerne Tekst, TextArea, Dropdown, Multiselect og Checkboks understøttes.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>

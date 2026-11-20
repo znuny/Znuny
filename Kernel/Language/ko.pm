@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d %T';
-    $Self->{Completeness}        = 0.827646129541864;
+    $Self->{Completeness}        = 0.827673353340704;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2875,6 +2875,8 @@ sub Data {
         'Archive Search' => '아카이브 검색',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => '만족',
+        'e.g. Text or Te*t' => '예 : 텍스트 또는 문자 *',
         'Save filter settings as default' => '필터 설정을 기본값으로 저장',
         'Event Type' => '이벤트 유형',
         'Save as default' => '기본값으로 저장',
@@ -4973,7 +4975,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '이 설정 편집 및 잠금 해제를 취소하십시오.',
         'Reset this setting to its default value.' => '이 설정을 기본값으로 다시 설정하십시오.',
         'Unable to load %s!' => '%s를 로드 할 수 없습니다!',
-        'Content' => '만족',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => '티켓 정보',
@@ -5077,9 +5078,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => '전/후',
         'between' => '사이에',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '예 : 텍스트 또는 문자 *',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '이 입력란을 무시하십시오.',
@@ -6717,6 +6715,8 @@ sub Data {
             '티켓 확대보기에서 기사의 계정 시간을 표시합니다.',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             '확대 / 축소 보기에서 기사 필터를 활성화하여 표시할 기사를 지정합니다.',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            '에이전트 인터페이스의 티켓 확대 화면에서 기사 필터 대화 상자에 표시되는 동적 필드입니다. 객체 유형이 기사인 본문, 텍스트 영역, 드롭다운, 다중선택 및 체크 박스 필드만 지원됩니다.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '티켓 확대보기에서 현재 티켓과 동일한 CustomerID를 가진 모든 티켓 수를 표시합니다.',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>

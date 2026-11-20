@@ -13366,7 +13366,7 @@ msgstr "将这个设置重置为默认值。"
 msgid "Unable to load %s!"
 msgstr "无法加载%s！"
 
-#. Perl Module: Kernel/Output/HTML/SysConfig.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "Content"
 msgstr "值"
 
@@ -13586,7 +13586,7 @@ msgstr "在...之前/之后"
 msgid "between"
 msgstr "在...之间"
 
-#. Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "e.g. Text or Te*t"
 msgstr "如：Text或Te*t"
 
@@ -25714,4 +25714,8 @@ msgstr "过滤器"
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = \"complex\"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup."
 msgstr "在复杂的链接对象小部件中，为链接的工单启用多选列过滤器（LinkObject::ViewMode = \"complex\"）。过滤器在 AgentTicketZoom 中可用，不会在 AgentLinkObject 弹出窗口中显示。"
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported."
+msgstr "在服务人员界面的工单详情屏幕的信件过滤器对话框中显示的动态字段。仅支持对象类型为信件、字段类型为文本、文本区域、下拉选择框、多选框和复选框的字段。"
 

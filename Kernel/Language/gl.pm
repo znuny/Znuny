@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.446287519747235;
+    $Self->{Completeness}        = 0.446374980255884;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2876,6 +2876,8 @@ sub Data {
         'Archive Search' => 'Busca no arquivo',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'Contido',
+        'e.g. Text or Te*t' => '',
         'Save filter settings as default' => 'Gardar axustes filtro como por defecto',
         'Event Type' => 'Tipo de evento',
         'Save as default' => 'Gardar como por defecto',
@@ -4974,7 +4976,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => '',
         'Unable to load %s!' => '',
-        'Content' => 'Contido',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'Información Ticket',
@@ -5078,9 +5079,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'antes/despois',
         'between' => 'entre',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -6718,6 +6716,8 @@ sub Data {
             'Mostra o tempo rexistrado para un artigo na vista zoom de ticket.',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             'Activa o filtro de artigo na vista zoom para especificar que artigos deberían ser mostrados.',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Campos dinámicos mostrados no diálogo do filtro de artigos da pantalla de zoom do ticket na interface de axente. Só se admiten campos do tipo de obxecto Artigo dos tipos Texto, Área de texto, Despregable, Multiselección e Checkbox.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>

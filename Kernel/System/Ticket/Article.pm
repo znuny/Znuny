@@ -1411,6 +1411,26 @@ sub ArticleSearchIndexWhereCondition {
     return $Kernel::OM->Get( $Self->{ArticleSearchIndexModule} )->ArticleSearchIndexWhereCondition(%Param);
 }
 
+=head2 ArticleSearchIndexArticleIDsGet()
+
+Return article IDs for a ticket that match a contains-search term.
+Each space-separated word must appear. Word order does not matter.
+Words that are not stored in the search index are ignored.
+If no usable search words remain, all article IDs of the ticket are returned.
+
+    my @ArticleIDs = $ArticleObject->ArticleSearchIndexArticleIDsGet(
+        TicketID   => 123,
+        SearchTerm => 'refund invoice',
+    );
+
+=cut
+
+sub ArticleSearchIndexArticleIDsGet {
+    my ( $Self, %Param ) = @_;
+
+    return $Kernel::OM->Get( $Self->{ArticleSearchIndexModule} )->ArticleSearchIndexArticleIDsGet(%Param);
+}
+
 =head2 SearchStringStopWordsFind()
 
 Find stop words within given search string.

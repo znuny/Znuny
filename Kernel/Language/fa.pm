@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.5913112164297;
+    $Self->{Completeness}        = 0.591375770020534;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -2881,6 +2881,8 @@ sub Data {
         'Archive Search' => 'جستجوی آرشیو',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'محتوا',
+        'e.g. Text or Te*t' => '',
         'Save filter settings as default' => 'ذخیره تنظیمات فیلتر به عنوان تنظیمات پیش فرض',
         'Event Type' => 'نوع رویداد',
         'Save as default' => 'ذخیره به عنوان پیش فرض',
@@ -4979,7 +4981,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => '',
         'Unable to load %s!' => '',
-        'Content' => 'محتوا',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'اطلاعات درخواست',
@@ -5083,9 +5084,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'قبل/بعد',
         'between' => 'بین',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -6723,6 +6721,8 @@ sub Data {
             'نمایش زمان به حساب برای یک مقاله در نظر زوم درخواست است.',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             'فیلتر مطلب را در نمای نمایش کامل برای مشخص کردن اینکه کدام مطلب نمایش داده شود، فعال می‌کند.',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'فیلدهای پویا که در گفتگوی فیلتر مطلب در صفحه بزرگ‌نمایی تیکت رابط نماینده نمایش داده می‌شوند. فقط فیلدهای نوع موضوع نوشته از انواع متن، ناحیه متنی، فهرست کشویی، چندین انتخاب و قابل انتخاب پشتیبانی می‌شوند.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>

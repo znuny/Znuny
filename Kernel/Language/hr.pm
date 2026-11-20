@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.214218009478673;
+    $Self->{Completeness}        = 0.214342126046438;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2879,6 +2879,8 @@ sub Data {
         'Archive Search' => 'Pretraga arhive',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'Sadržaj',
+        'e.g. Text or Te*t' => '',
         'Save filter settings as default' => 'Spremi postavke filtra kao zadane',
         'Event Type' => '',
         'Save as default' => 'Spremi kao zadano',
@@ -4977,7 +4979,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => '',
         'Unable to load %s!' => '',
-        'Content' => 'Sadržaj',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => '',
@@ -5081,9 +5082,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => '',
         'between' => 'između',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -6721,6 +6719,8 @@ sub Data {
             '',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             'Aktivira filter za članke u proširenom pregledu radi definiranja koji članci trebaju biti prikazani.',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Dinamička polja prikazana u dijalogu filtra za članke na zaslonu detalja tiketa u sučelju agenta. Podržana su samo polja tipa objekta Članak vrsta Tekst, TextArea, Dropdown, Multiselect i Checkbox.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>

@@ -13368,7 +13368,7 @@ msgstr ""
 msgid "Unable to load %s!"
 msgstr ""
 
-#. Perl Module: Kernel/Output/HTML/SysConfig.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "Content"
 msgstr "Innhold"
 
@@ -13588,7 +13588,7 @@ msgstr "før/etter"
 msgid "between"
 msgstr "mellom"
 
-#. Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "e.g. Text or Te*t"
 msgstr ""
 
@@ -25718,4 +25718,8 @@ msgstr "Filter"
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = \"complex\"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup."
 msgstr "Aktiver kolonnefiltre med flervalg for koblede saker i den komplekse widgeten for koblede objekter (LinkObject::ViewMode = \"complex\"). Filtrene er tilgjengelige i AgentTicketZoom og vises ikke i AgentLinkObject-popupvinduet."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported."
+msgstr "Dynamiske felt som vises i innleggsfilterdialogen på sakens zoom-skjerm i agentdelen. Bare felt av objekttypen Innlegg av typene Tekst, Tekstareale, Nedfellsmeny, Multiselect og Avkryssningsfelt støttes."
 

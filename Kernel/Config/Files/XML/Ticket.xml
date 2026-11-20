@@ -1640,6 +1640,18 @@
             <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Frontend::TicketArticleFilterDynamicField" Required="0" Valid="1">
+        <Description Translatable="1">Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.</Description>
+        <Navigation>Frontend::Agent::View::TicketZoom</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem ValueType="Select">
+                    <Item ValueType="Option" Value="0" Translatable="1">0 - Disabled</Item>
+                    <Item ValueType="Option" Value="1" Translatable="1">1 - Enabled</Item>
+                </DefaultItem>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::Frontend::ZoomCustomerTickets" Required="0" Valid="1">
         <Description Translatable="1">Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.</Description>
         <Navigation>Frontend::Agent::View::TicketZoom</Navigation>

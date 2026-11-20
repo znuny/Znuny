@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.580568720379147;
+    $Self->{Completeness}        = 0.580634970778708;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -2877,6 +2877,8 @@ bin/znuny.Daemon.pl status\').',
         'Archive Search' => 'Pencarian arsip',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'Konten',
+        'e.g. Text or Te*t' => '',
         'Save filter settings as default' => 'Simpan aturan filter sebagai default',
         'Event Type' => 'Jenis event',
         'Save as default' => 'Simpan sebagai default',
@@ -4975,7 +4977,6 @@ bin/znuny.Daemon.pl status\').',
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => '',
         'Unable to load %s!' => '',
-        'Content' => 'Konten',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'Informasi tiket',
@@ -5079,9 +5080,6 @@ bin/znuny.Daemon.pl status\').',
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'sebelum/sesudah',
         'between' => 'antara',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -6719,6 +6717,8 @@ bin/znuny.Daemon.pl status\').',
             'Menampilkan waktu sebuah artikel dalam tampilan zoom tiket.',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             'Mengaktifkan artikel saringan dalam tampilan zoom untuk menentukan artikel harus ditampilkan.',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Bidang dinamis yang ditampilkan pada dialog filter artikel di layar zoom tiket antarmuka agen. Hanya bidang tipe objek Artikel dari jenis Teks, Area teks, Daftar tarik-turun, Berbagai pilihan, dan Kotak centang yang didukung.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>

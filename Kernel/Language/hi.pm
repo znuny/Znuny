@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.251816745655608;
+    $Self->{Completeness}        = 0.251934923392829;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2878,6 +2878,8 @@ sub Data {
         'Archive Search' => 'संग्रह खोजें',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'अंतर्वस्तु',
+        'e.g. Text or Te*t' => '',
         'Save filter settings as default' => 'तयशुदा रूप में निस्पादक की व्यवस्थाऐं सुरक्षित करें',
         'Event Type' => '',
         'Save as default' => '',
@@ -4976,7 +4978,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => '',
         'Unable to load %s!' => '',
-        'Content' => 'अंतर्वस्तु',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => '',
@@ -5080,9 +5081,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => '',
         'between' => 'बीच में',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -6720,6 +6718,8 @@ sub Data {
             'टिकट ज़ूम दृश्य में एक अनुच्छेद के समय का हिसाब प्रदर्शित करता है।',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             'ज़ूम दृश्य में जो अनुच्छेद दिखाया जाना चाहिये अनुच्छेद निस्पादक को सक्रिय करता है।',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'एजेंट इंटरफ़ेस की टिकट ज़ूम स्क्रीन के अनुच्छेद फ़िल्टर संवाद में दिखाए गए गतिशील फ़ील्ड। केवल ऑब्जेक्ट प्रकार अनुच्छेद के टेक्स्ट, पाठ क्षेत्र, ड्रॉपडाउन, बहुविकल्प और चेकबॉक्स प्रकार के फ़ील्ड समर्थित हैं।',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>

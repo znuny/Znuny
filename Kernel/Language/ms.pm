@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.51563981042654;
+    $Self->{Completeness}        = 0.515716316537672;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2875,6 +2875,8 @@ sub Data {
         'Archive Search' => 'Carian Arkib',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'kandungan',
+        'e.g. Text or Te*t' => '',
         'Save filter settings as default' => 'Simpan tetapan penapis sebagai piawai.',
         'Event Type' => 'Jenis Acara',
         'Save as default' => 'Simpan sebagai lalai',
@@ -4973,7 +4975,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => '',
         'Unable to load %s!' => '',
-        'Content' => 'kandungan',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'Informasi Tiket',
@@ -5077,9 +5078,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'sebelum/selepas',
         'between' => 'diantara',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -6717,6 +6715,8 @@ sub Data {
             'Pamerkan masa yang diperuntukkan untuk artikel dalam paparan zum tiket.',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             'Mengaktifkan tapisan artikel dalam paparan besar untuk menyatakan artikel yang perlu dipaparkan.',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Medan dinamik yang dipaparkan dalam dialog tapisan artikel pada skrin zum tiket antara muka ejen. Hanya medan jenis objek Artikel bagi jenis Teks, Textarea, Dropdown, Pelbagaipilih dan Kotak petak disokong.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>

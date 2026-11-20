@@ -15,6 +15,7 @@ use utf8;
 
 our $ObjectManagerDisabled = 1;
 
+use MIME::Base64 qw(encode_base64 decode_base64);
 use Kernel::System::EmailParser;
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language              qw(Translatable);
@@ -523,9 +524,90 @@ sub Run {
         my @CommunicationChannelFilterIDs = $ParamObject->GetArray( Param => 'CommunicationChannelFilter' );
         my $CustomerVisibility            = $ParamObject->GetParam( Param => 'CustomerVisibilityFilter' );
         my @ArticleSenderTypeFilterIDs    = $ParamObject->GetArray( Param => 'ArticleSenderTypeFilter' );
+        my $FulltextFilter                = $ParamObject->GetParam( Param => 'FulltextFilter' );
+        $FulltextFilter //= '';
+        $FulltextFilter =~ s{ \A \s+ | \s+ \z }{}xmsg;
+
+        my $EncodeObject               = $Kernel::OM->Get('Kernel::System::Encode');
+        my $JSONObject                 = $Kernel::OM->Get('Kernel::System::JSON');
+        my $BackendObject              = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+        my @ArticleFilterDynamicFields = $Self->_ArticleFilterDynamicFieldsGet();
 
         # build session string
         my $SessionString = '';
+        if ($FulltextFilter) {
+
+            # encode to UTF-8 bytes for Base64.
+            my $FulltextFilterBytes = $FulltextFilter;
+            $EncodeObject->EncodeOutput( \$FulltextFilterBytes );
+            $SessionString .= 'FulltextFilter<' . encode_base64( $FulltextFilterBytes, '' ) . '>';
+        }
+
+        my %DynamicFieldCriteria;
+        DYNAMICFIELD:
+        for my $DynamicFieldConfig (@ArticleFilterDynamicFields) {
+
+            my $SearchFieldPreferences = $BackendObject->SearchFieldPreferences(
+                DynamicFieldConfig => $DynamicFieldConfig,
+            );
+            next DYNAMICFIELD if !IsArrayRefWithData($SearchFieldPreferences);
+
+            # SearchFieldParameterBuild reads a profile. Copy the submitted values into one first.
+            my %Profile;
+            PREFERENCE:
+            for my $Preference ( @{$SearchFieldPreferences} ) {
+
+                my $DynamicFieldValue = $BackendObject->SearchFieldValueGet(
+                    DynamicFieldConfig     => $DynamicFieldConfig,
+                    ParamObject            => $ParamObject,
+                    ReturnProfileStructure => 1,
+                    LayoutObject           => $LayoutObject,
+                    Type                   => $Preference->{Type},
+                );
+                next PREFERENCE if !IsHashRefWithData($DynamicFieldValue);
+
+                %Profile = (
+                    %Profile,
+                    %{$DynamicFieldValue},
+                );
+            }
+
+            next DYNAMICFIELD if !%Profile;
+
+            my $SearchParam = $BackendObject->SearchFieldParameterBuild(
+                DynamicFieldConfig => $DynamicFieldConfig,
+                Profile            => \%Profile,
+                LayoutObject       => $LayoutObject,
+            );
+
+            next DYNAMICFIELD if !IsHashRefWithData($SearchParam);
+            next DYNAMICFIELD if !IsHashRefWithData( $SearchParam->{Parameter} );
+
+            my $HasValue;
+            OPERATOR:
+            for my $Operator ( sort keys %{ $SearchParam->{Parameter} } ) {
+                my $Value = $SearchParam->{Parameter}->{$Operator};
+                if ( ref $Value eq 'ARRAY' ) {
+                    $HasValue = scalar grep { defined $_ && length $_ } @{$Value};
+                }
+                elsif ( defined $Value && length $Value ) {
+                    $HasValue = 1;
+                }
+                last OPERATOR if $HasValue;
+            }
+            next DYNAMICFIELD if !$HasValue;
+
+            $DynamicFieldCriteria{ $DynamicFieldConfig->{Name} } = $SearchParam->{Parameter};
+        }
+
+        if (%DynamicFieldCriteria) {
+            my $DynamicFieldJSON = $JSONObject->Encode(
+                Data => \%DynamicFieldCriteria,
+            );
+            $EncodeObject->EncodeOutput( \$DynamicFieldJSON );
+            $SessionString .= 'DynamicFieldFilter<' . encode_base64( $DynamicFieldJSON, '' ) . '>';
+        }
+
         if (@CommunicationChannelFilterIDs) {
             $SessionString .= 'CommunicationChannelFilter<';
             $SessionString .= join ',', @CommunicationChannelFilterIDs;
@@ -695,6 +777,38 @@ sub Run {
             $Self->{ArticleFilter}->{ArticleSenderTypeID} = \@IDs;
         }
 
+        # extract FulltextFilter
+        if (
+            $ArticleFilterSessionString
+            && $ArticleFilterSessionString =~ m{ FulltextFilter < ( [^<>]+ ) > }xms
+            )
+        {
+            my $EncodeObject    = $Kernel::OM->Get('Kernel::System::Encode');
+            my $DecodedFulltext = decode_base64($1);
+            $EncodeObject->EncodeInput( \$DecodedFulltext );
+            if ( defined $DecodedFulltext && length $DecodedFulltext ) {
+                $Self->{ArticleFilter}->{Fulltext} = $DecodedFulltext;
+            }
+        }
+
+        # extract DynamicFieldFilter
+        if (
+            $ArticleFilterSessionString
+            && $ArticleFilterSessionString =~ m{ DynamicFieldFilter < ( [^<>]+ ) > }xms
+            )
+        {
+            my $EncodeObject = $Kernel::OM->Get('Kernel::System::Encode');
+            my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
+            my $DecodedJSON  = decode_base64($1);
+            $EncodeObject->EncodeInput( \$DecodedJSON );
+            my $DynamicFieldCriteria = $JSONObject->Decode(
+                Data => $DecodedJSON,
+            );
+            if ( IsHashRefWithData($DynamicFieldCriteria) ) {
+                $Self->{ArticleFilter}->{DynamicField} = $DynamicFieldCriteria;
+            }
+        }
+
         # get event type filter settings from session string
         my $EventTypeFilterSessionString = $Self->{ 'EventTypeFilter' . $Self->{TicketID} };
 
@@ -836,6 +950,85 @@ sub MaskAgentZoom {
         my %Filter = map { $_ => 1 } @{ $Self->{ArticleFilter}->{ArticleSenderTypeID} };
 
         @ArticleBoxAll = grep { $Filter{ $_->{SenderTypeID} } } @ArticleBoxAll;
+    }
+
+    if ( IsStringWithData( $Self->{ArticleFilter}->{Fulltext} ) ) {
+        my @MatchingArticleIDs = $ArticleObject->ArticleSearchIndexArticleIDsGet(
+            TicketID   => $Self->{TicketID},
+            SearchTerm => $Self->{ArticleFilter}->{Fulltext},
+        );
+        my %MatchingArticleID = map { $_ => 1 } @MatchingArticleIDs;
+        @ArticleBoxAll = grep { $MatchingArticleID{ $_->{ArticleID} } } @ArticleBoxAll;
+    }
+
+    if ( IsHashRefWithData( $Self->{ArticleFilter}->{DynamicField} ) ) {
+        my $BackendObject           = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+        my $DynamicFieldValueObject = $Kernel::OM->Get('Kernel::System::DynamicFieldValue');
+
+        # only apply currently configured article dynamic fields.
+        my %AllowedDynamicField = map { $_->{Name} => $_ } $Self->_ArticleFilterDynamicFieldsGet();
+
+        my @TicketArticleIDs = map { $_->{ArticleID} } @ArticleBoxAll;
+
+        DYNAMICFIELD:
+        for my $FieldName ( sort keys %{ $Self->{ArticleFilter}->{DynamicField} } ) {
+
+            last DYNAMICFIELD if !@TicketArticleIDs;
+
+            my $DynamicFieldConfig = $AllowedDynamicField{$FieldName};
+            next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
+            my $Parameter = $Self->{ArticleFilter}->{DynamicField}->{$FieldName};
+            next DYNAMICFIELD if !IsHashRefWithData($Parameter);
+
+            my %MatchingArticleID;
+            OPERATOR:
+            for my $Operator (qw(Equals Like)) {
+                next OPERATOR if !exists $Parameter->{$Operator};
+
+                my $Value = $Parameter->{$Operator};
+                my @Terms;
+                if ( ref $Value eq 'ARRAY' ) {
+                    @Terms = @{$Value};
+                }
+                else {
+                    push @Terms, $Value;
+                }
+
+                TERM:
+                for my $Term (@Terms) {
+                    next TERM if !defined $Term || !length $Term;
+
+                    my $SearchTerm = $Term;
+                    if ( $Operator eq 'Like' ) {
+                        $SearchTerm =~ s/\*/%/g;
+                    }
+
+                    my $SearchSQL = $BackendObject->SearchSQLGet(
+                        DynamicFieldConfig => $DynamicFieldConfig,
+                        TableAlias         => 'dynamic_field_value',
+                        SearchTerm         => $SearchTerm,
+                        Operator           => $Operator,
+                    );
+                    next TERM if !defined $SearchSQL || !length $SearchSQL;
+
+                    # limit search to current ticket articles.
+                    my $Values = $DynamicFieldValueObject->ValueSearch(
+                        FieldID   => $DynamicFieldConfig->{ID},
+                        Search    => $Term,
+                        SearchSQL => $SearchSQL,
+                        ObjectIDs => \@TicketArticleIDs,
+                    );
+                    next TERM if !IsArrayRefWithData($Values);
+
+                    for my $Row ( @{$Values} ) {
+                        $MatchingArticleID{ $Row->{ObjectID} } = 1;
+                    }
+                }
+            }
+
+            @ArticleBoxAll = grep { $MatchingArticleID{ $_->{ArticleID} } } @ArticleBoxAll;
+        }
     }
 
     if ( $Order eq 'DESC' ) {
@@ -1912,6 +2105,8 @@ sub MaskAgentZoom {
             Class       => 'Modernize',
         );
 
+        $Param{FulltextFilter} = $Self->{ArticleFilter}->{Fulltext} // '';
+
         # Ticket ID
         $Param{TicketID} = $Self->{TicketID};
 
@@ -1925,6 +2120,74 @@ sub MaskAgentZoom {
             Name => 'ArticleFilterDialog',
             Data => {%Param},
         );
+
+        my $BackendObject              = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+        my @ArticleFilterDynamicFields = $Self->_ArticleFilterDynamicFieldsGet();
+
+        # rebuild DF search profile from stored filter.
+        my %ArticleFilterDynamicFieldByName = map { $_->{Name} => $_ } @ArticleFilterDynamicFields;
+        my %DynamicFieldProfile;
+        if ( IsHashRefWithData( $Self->{ArticleFilter}->{DynamicField} ) ) {
+            FIELDNAME:
+            for my $FieldName ( sort keys %{ $Self->{ArticleFilter}->{DynamicField} } ) {
+                my $Parameter = $Self->{ArticleFilter}->{DynamicField}->{$FieldName};
+                next FIELDNAME if !IsHashRefWithData($Parameter);
+
+                my $ProfileValue       = $Parameter->{Equals} // $Parameter->{Like};
+                my $DynamicFieldConfig = $ArticleFilterDynamicFieldByName{$FieldName};
+
+                # Checkbox Unchecked is stored as 0. The search field widget shows Unchecked only for -1.
+                if (
+                    IsHashRefWithData($DynamicFieldConfig)
+                    && $DynamicFieldConfig->{FieldType} eq 'Checkbox'
+                    )
+                {
+                    if ( ref $ProfileValue eq 'ARRAY' ) {
+                        VALUE:
+                        for my $Value ( @{$ProfileValue} ) {
+                            next VALUE if !defined $Value;
+                            next VALUE if "$Value" ne '0';
+                            $Value = -1;
+                        }
+                    }
+                    elsif ( defined $ProfileValue && "$ProfileValue" eq '0' ) {
+                        $ProfileValue = -1;
+                    }
+                }
+
+                $DynamicFieldProfile{ 'Search_DynamicField_' . $FieldName } = $ProfileValue;
+            }
+        }
+
+        DYNAMICFIELD:
+        for my $DynamicFieldConfig (@ArticleFilterDynamicFields) {
+
+            my $SearchFieldPreferences = $BackendObject->SearchFieldPreferences(
+                DynamicFieldConfig => $DynamicFieldConfig,
+            );
+            next DYNAMICFIELD if !IsArrayRefWithData($SearchFieldPreferences);
+
+            PREFERENCE:
+            for my $Preference ( @{$SearchFieldPreferences} ) {
+
+                my $DynamicFieldHTML = $BackendObject->SearchFieldRender(
+                    DynamicFieldConfig => $DynamicFieldConfig,
+                    Profile            => \%DynamicFieldProfile,
+                    LayoutObject       => $LayoutObject,
+                    Type               => $Preference->{Type},
+                    UseLabelHints      => 1,
+                );
+                next PREFERENCE if !IsHashRefWithData($DynamicFieldHTML);
+
+                $LayoutObject->Block(
+                    Name => 'ArticleFilterDynamicField',
+                    Data => {
+                        Label => $DynamicFieldHTML->{Label},
+                        Field => $DynamicFieldHTML->{Field},
+                    },
+                );
+            }
+        }
 
         # build article filter links in the header
         my $HighlightStyle = 'menu';
@@ -2518,6 +2781,35 @@ sub _ArticleRender {
         ArticleActions => $Param{MenuItems},
         UserID         => $Self->{UserID},
     );
+}
+
+sub _ArticleFilterDynamicFieldsGet {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+    my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+
+    my $DynamicFieldFilter = $ConfigObject->Get('Ticket::Frontend::TicketArticleFilterDynamicField') || {};
+
+    my $DynamicFieldList = $DynamicFieldObject->DynamicFieldListGet(
+        Valid       => 1,
+        ObjectType  => ['Article'],
+        FieldFilter => $DynamicFieldFilter,
+    );
+
+    return if !IsArrayRefWithData($DynamicFieldList);
+
+    my %SupportedFieldType = map { $_ => 1 } qw(Text TextArea Dropdown Multiselect Checkbox);
+
+    my @DynamicFields;
+    DYNAMICFIELD:
+    for my $DynamicFieldConfig ( @{$DynamicFieldList} ) {
+        next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+        next DYNAMICFIELD if !$SupportedFieldType{ $DynamicFieldConfig->{FieldType} };
+        push @DynamicFields, $DynamicFieldConfig;
+    }
+
+    return @DynamicFields;
 }
 
 1;

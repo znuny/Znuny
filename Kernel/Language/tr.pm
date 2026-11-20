@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.180094786729858;
+    $Self->{Completeness}        = 0.180224293160638;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2876,6 +2876,8 @@ sub Data {
         'Archive Search' => 'Arşiv arama',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'İçerik',
+        'e.g. Text or Te*t' => '',
         'Save filter settings as default' => 'Filtreyi varsayılan olarak kaydet',
         'Event Type' => '',
         'Save as default' => '',
@@ -4974,7 +4976,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => '',
         'Unable to load %s!' => '',
-        'Content' => 'İçerik',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'Bilet Bilgileri',
@@ -5078,9 +5079,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'önce/sonra',
         'between' => 'arasında',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -6718,6 +6716,8 @@ sub Data {
             '',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             '',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Temsilci arayüzündeki bilet yakınlaştırma ekranının makale filtresi iletişim kutusunda gösterilen dinamik alanlar. Yalnızca Yazı nesne türündeki Metin, TextArea, Dropdown, Çoklu Seçim ve Checkbox türündeki alanlar desteklenir.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>

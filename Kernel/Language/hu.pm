@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.998578199052133;
+    $Self->{Completeness}        = 0.998578423629758;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2881,6 +2881,8 @@ sub Data {
         'Archive Search' => 'Archívum keresés',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'Tartalom',
+        'e.g. Text or Te*t' => 'például Szöveg vagy Sz*eg',
         'Save filter settings as default' => 'Szűrőbeállítások mentése alapértelmezettként',
         'Event Type' => 'Eseménytípus',
         'Save as default' => 'Mentés alapértelmezettként',
@@ -4979,7 +4981,6 @@ sub Data {
         'Cancel editing and unlock this setting' => 'Szerkesztés megszakítása és a beállítás feloldása',
         'Reset this setting to its default value.' => 'A beállítás visszaállítása az alapértelmezett értékére.',
         'Unable to load %s!' => 'Nem lehet betölteni: %s!',
-        'Content' => 'Tartalom',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'Jegyinformációk',
@@ -5083,9 +5084,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'előtt/után',
         'between' => 'között',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => 'például Szöveg vagy Sz*eg',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => 'A mező mellőzése.',
@@ -6723,6 +6721,8 @@ sub Data {
             'Megjeleníti az elszámolt időt egy bejegyzésnél a jegy nagyítás nézeten.',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             'A nagyítás nézeten lévő bejegyzésszűrőt aktiválja, amely megadja, hogy mely bejegyzések legyenek láthatók.',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Az ügyintézői felület jegynagyítás képernyőjének bejegyzésszűrő párbeszédablakában megjelenített dinamikus mezők. Csak a Bejegyzés objektumtípus mezői támogatottak, a következő típusokkal: Szöveg, Szövegdoboz, Legördülő, Többválasztós és Jelölőnégyzet.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             'Megjeleníti az aktuális jeggyel azonos ügyfél-azonosítóval rendelkező összes jegy számát a jegynagyítás nézeten.',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>

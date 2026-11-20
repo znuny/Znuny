@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.85086887835703;
+    $Self->{Completeness}        = 0.850892434054652;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -2881,6 +2881,8 @@ sub Data {
         'Archive Search' => 'Pretraga arhiva',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'Sadržaj',
+        'e.g. Text or Te*t' => 'npr. Text ili Te*t',
         'Save filter settings as default' => 'Sačuvaj podešavanja filtera kao podrazumevana',
         'Event Type' => 'Tip događaja',
         'Save as default' => 'Sačuvaj kao podrazumevano',
@@ -4979,7 +4981,6 @@ sub Data {
         'Cancel editing and unlock this setting' => 'Odustani od promene i otključaj ovo podešavanje',
         'Reset this setting to its default value.' => 'Poništi ovo podešavanje na podrazumevanu vrednost',
         'Unable to load %s!' => 'Nije moguće učitati %s!',
-        'Content' => 'Sadržaj',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'Informacije o tiketu',
@@ -5083,9 +5084,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'pre/posle',
         'between' => 'između',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => 'npr. Text ili Te*t',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => 'Ignoriši ovo polje.',
@@ -6723,6 +6721,8 @@ sub Data {
             'Prikazuje obračunato vreme za jedan članak u detaljnom pregledu tiketa.',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             'Aktivira filter za članke u proširenom pregledu radi definisanja koji članci treba da budu prikazani.',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Dinamička polja prikazana u dijalogu filtera za članke u detaljnom pregledu tiketa u interfejsu operatera. Podržana su samo polja tipa objekta Članak tipova Tekst, Oblast teksta, Padajući, Višestruki izbor i Polje za potvrdu.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             'Prikazuje broj svih tiketa sa istim ID klijenta kao trenutni tiket u detaljnom pregledu tiketa.',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>
