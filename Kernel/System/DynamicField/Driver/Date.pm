@@ -11,6 +11,7 @@ package Kernel::System::DynamicField::Driver::Date;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 
@@ -43,7 +44,7 @@ Please look there for a detailed reference of the functions.
 =head2 new()
 
 usually, you want to create an instance of this
-by using Kernel::System::DynamicField::Backend->new();
+by using Kernel::System::DynamicField::Backend-E<gt>new();
 
 =cut
 
@@ -169,50 +170,43 @@ sub ValueValidate {
         UserID => $Param{UserID},
     );
 
-    if ($DateRestriction) {
+    if ( $DateRestriction && $Param{Value} ) {
 
-        my $ValueSystemTimeObject = $Kernel::OM->Create(
-            'Kernel::System::DateTime',
-            ObjectParams => {
-                String => $Param{Value},
-            },
-        );
+        my ($ValueDate) = $Param{Value} =~ m{\A (\d{4}-\d{2}-\d{2}) }xms;
 
-        my $SystemTimePastObject   = $Kernel::OM->Create('Kernel::System::DateTime');
-        my $SystemTimeFutureObject = $Kernel::OM->Create('Kernel::System::DateTime');
+        # Date values are a calendar day, not a time of day. Compare that day with
+        # today in the user time zone. Outside the frontend, today is the Znuny day.
+        if ( IsStringWithData($ValueDate) ) {
 
-        # if validating date only value, allow today for selection
-        if ( $Param{DynamicFieldConfig}->{FieldType} eq 'Date' ) {
+            my $TimeZone = $Self->_FrontendUserTimeZoneGet();
 
-            # calculate today system time boundaries
-            $SystemTimePastObject->Set(
-                Hour   => 0,
-                Minute => 0,
-                Second => 0,
+            my $TodayDateTimeObject = $Kernel::OM->Create(
+                'Kernel::System::DateTime',
+                ObjectParams => {
+                    TimeZone => $TimeZone,
+                },
             );
 
-            $SystemTimeFutureObject->Set(
-                Hour   => 23,
-                Minute => 59,
-                Second => 59,
+            my $Today = $TodayDateTimeObject->Format(
+                Format => '%Y-%m-%d',
             );
-        }
 
-        if ( $DateRestriction eq 'DisableFutureDates' && $ValueSystemTimeObject > $SystemTimeFutureObject ) {
-            $LogObject->Log(
-                Priority => 'error',
-                Message  =>
-                    "The value for the Date field ($Param{DynamicFieldConfig}->{Name}) is in the future! The date needs to be in the past!",
-            );
-            return;
-        }
-        elsif ( $DateRestriction eq 'DisablePastDates' && $ValueSystemTimeObject < $SystemTimePastObject ) {
-            $LogObject->Log(
-                Priority => 'error',
-                Message  =>
-                    "The value for the Date field ($Param{DynamicFieldConfig}->{Name}) is in the past! The date needs to be in the future!",
-            );
-            return;
+            if ( $DateRestriction eq 'DisableFutureDates' && $ValueDate gt $Today ) {
+                $LogObject->Log(
+                    Priority => 'error',
+                    Message  =>
+                        "The value for the Date field ($Param{DynamicFieldConfig}->{Name}) is in the future! The date needs to be in the past!",
+                );
+                return;
+            }
+            elsif ( $DateRestriction eq 'DisablePastDates' && $ValueDate lt $Today ) {
+                $LogObject->Log(
+                    Priority => 'error',
+                    Message  =>
+                        "The value for the Date field ($Param{DynamicFieldConfig}->{Name}) is in the past! The date needs to be in the future!",
+                );
+                return;
+            }
         }
     }
 
@@ -514,51 +508,35 @@ sub EditFieldValueValidate {
 
     if ( $Value->{ $Prefix . 'Used' } && $DateRestriction ) {
 
-        my $Year   = $Value->{ $Prefix . 'Year' }   || '0000';
-        my $Month  = $Value->{ $Prefix . 'Month' }  || '00';
-        my $Day    = $Value->{ $Prefix . 'Day' }    || '00';
-        my $Hour   = $Value->{ $Prefix . 'Hour' }   || '00';
-        my $Minute = $Value->{ $Prefix . 'Minute' } || '00';
-        my $Second = $Value->{ $Prefix . 'Second' } || '00';
+        # Date values are the calendar day the user picked. Do not convert them
+        # through the time zone. Compare that day with today in the user time zone.
+        my $ValueDate = sprintf(
+            '%04d-%02d-%02d',
+            $Value->{ $Prefix . 'Year' }  || 0,
+            $Value->{ $Prefix . 'Month' } || 0,
+            $Value->{ $Prefix . 'Day' }   || 0,
+        );
 
-        my $ManualTimeStamp =
-            $Year . '-' . $Month . '-' . $Day . ' '
-            . $Hour . ':' . $Minute . ':' . $Second;
+        my $TimeZone = $Self->_FrontendUserTimeZoneGet(
+            LayoutObject => $Param{LayoutObject},
+        );
 
-        # get time object
-        my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
+        my $TodayDateTimeObject = $Kernel::OM->Create(
+            'Kernel::System::DateTime',
+            ObjectParams => {
+                TimeZone => $TimeZone,
+            },
+        );
 
-        my $ValueSystemTime = $DateTimeObject->Set( String => $ManualTimeStamp );
-        $ValueSystemTime = $ValueSystemTime ? $DateTimeObject->ToEpoch() : undef;
+        my $Today = $TodayDateTimeObject->Format(
+            Format => '%Y-%m-%d',
+        );
 
-        my $SystemTime     = $DateTimeObject->ToEpoch();
-        my $SystemTimePast = $SystemTime;
-        my $SystemTimeFuture;
-
-        # if validating date only value, allow today for selection
-        if ( $Param{DynamicFieldConfig}->{FieldType} eq 'Date' ) {
-
-            # calculate today system time boundaries
-            $DateTimeObject->Set(
-                Hour   => 0,
-                Minute => 0,
-                Second => 0
-            );
-            $SystemTimePast = $DateTimeObject->ToEpoch();
-
-            $DateTimeObject->Set(
-                Hour   => 23,
-                Minute => 59,
-                Second => 59
-            );
-            $SystemTimeFuture = $DateTimeObject->ToEpoch();
-        }
-
-        if ( $DateRestriction eq 'DisableFutureDates' && $ValueSystemTime > $SystemTimeFuture ) {
+        if ( $DateRestriction eq 'DisableFutureDates' && $ValueDate gt $Today ) {
             $ServerError  = 1;
             $ErrorMessage = "Invalid date (need a past date)!";
         }
-        elsif ( $DateRestriction eq 'DisablePastDates' && $ValueSystemTime < $SystemTimePast ) {
+        elsif ( $DateRestriction eq 'DisablePastDates' && $ValueDate lt $Today ) {
             $ServerError  = 1;
             $ErrorMessage = "Invalid date (need a future date)!";
         }
