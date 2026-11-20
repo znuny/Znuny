@@ -2678,11 +2678,25 @@ sub _TextCalculate {
         $Row =~ s/^\s//;
 
         # calculate width of the row
-        my $RowWidth = $Self->_StringWidth(
-            Text     => $Row,
-            Font     => $Param{Font},
-            FontSize => $Param{FontSize},
-        );
+        # A long row is only measured up to a prefix that is already wider than
+        # $Param{Width}: it gets cut there anyway, and measuring the whole row
+        # for every output row is quadratic in the row length.
+        my $MeasuredLength = int( 2 * $Param{Width} / $Param{FontSize} ) + 1;
+        my $RowWidth;
+        MEASURE:
+        while (1) {
+            if ( $MeasuredLength > length $Row ) {
+                $MeasuredLength = length $Row;
+            }
+            $RowWidth = $Self->_StringWidth(
+                Text     => substr( $Row, 0, $MeasuredLength ),
+                Font     => $Param{Font},
+                FontSize => $Param{FontSize},
+            );
+            last MEASURE if $RowWidth > $Param{Width};
+            last MEASURE if $MeasuredLength == length $Row;
+            $MeasuredLength *= 2;
+        }
 
         # calculate height of the row
         my $RowHeight = $Param{FontSize};
@@ -2697,7 +2711,7 @@ sub _TextCalculate {
 
                 # estimate point of cut
                 my $Factor = $RowWidth / $Param{Width};
-                my $Cut    = int( length($Row) / $Factor );
+                my $Cut    = int( $MeasuredLength / $Factor );
 
                 # cut the row
                 my $RowFore = substr( $Row, 0, $Cut );
@@ -2895,6 +2909,12 @@ sub _StringWidth {
     return $Self->{CacheStringWidth}->{ $Param{Font} }->{ $Param{FontSize} }->{ $Param{Text} }
         if $Self->{CacheStringWidth}->{ $Param{Font} }->{ $Param{FontSize} }->{ $Param{Text} };
 
+    # Strings longer than 20 chars are cached for the lifetime of this object
+    # only: Table() wraps the same rows again on every page, but they would
+    # bloat the persistent cache.
+    return $Self->{CacheStringWidthLong}->{ $Param{Font} }->{ $Param{FontSize} }->{ $Param{Text} }
+        if defined $Self->{CacheStringWidthLong}->{ $Param{Font} }->{ $Param{FontSize} }->{ $Param{Text} };
+
     # create a text object
     $Self->{TextWidthObject} ||= $Self->{Page}->text();
 
@@ -2904,7 +2924,10 @@ sub _StringWidth {
     # calculate width of given text
     my $StringWidth = $Self->{TextWidthObject}->advancewidth( $Param{Text} );
 
-    return $StringWidth if length $Param{Text} > 20;
+    if ( length $Param{Text} > 20 ) {
+        $Self->{CacheStringWidthLong}->{ $Param{Font} }->{ $Param{FontSize} }->{ $Param{Text} } = $StringWidth;
+        return $StringWidth;
+    }
 
     # write width cache if length is not more than 20 chars
     $Self->{CacheStringWidth}->{ $Param{Font} }->{ $Param{FontSize} }->{ $Param{Text} } = $StringWidth;
