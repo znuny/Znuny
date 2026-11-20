@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d %T';
-    $Self->{Completeness}        = 0.299130434782609;
+    $Self->{Completeness}        = 0.29935198356251;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -6012,6 +6012,8 @@ sub Data {
             '',
         'Maximum Number of a calendar shown in a dropdown.' => '',
         'Define the start day of the week for the date picker.' => '',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Define se a data pendente predefinida com base em Ticket::Frontend::PendingDiffTime deve ignorar os dias que são feriados ou que não têm horário de trabalho neste calendário.',
         'Adds the permanent vacation days.' => '',
         'Adds the one time vacation days.' => '',
         'Defines the hours and week days to count the working time.' => '',
@@ -8707,6 +8709,7 @@ sub Data {
             '',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'Sem horário de trabalho',
         'Open date selection' => 'Data aberta',
         'Invalid date (need a future date)!' => 'Data inválida (escolha uma data futura)!',
         'Invalid date (need a past date)!' => 'Data inválida (escolha uma data passada)!',
@@ -9777,6 +9780,7 @@ Devemos voltar a estar online dentro de momentos.',
         'No response from package upgrade all.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
         'Notice',
         'Notification',

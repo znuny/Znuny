@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%m/%d/%Y';
     $Self->{DateInputFormat}     = '%m/%d/%Y';
     $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
-    $Self->{Completeness}        = 0.421343873517787;
+    $Self->{Completeness}        = 0.421526789947843;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -6012,6 +6012,8 @@ sub Data {
             '',
         'Maximum Number of a calendar shown in a dropdown.' => '',
         'Define the start day of the week for the date picker.' => 'Inafafanua siku ya kwanza ya wiki kwa kichagua tarehe.',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Inafafanua kama tarehe chaguo-msingi ya kusubiri kulingana na Ticket::Frontend::PendingDiffTime inapaswa kuruka siku ambazo ni sikukuu au ambazo hazina saa za kazi katika kalenda hii.',
         'Adds the permanent vacation days.' => '',
         'Adds the one time vacation days.' => '',
         'Defines the hours and week days to count the working time.' => 'Inafafanua masaa na siku za wiki za kuhesabu muda wa kufanya kazi.',
@@ -8710,6 +8712,7 @@ Mfano:
             '',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'Hakuna saa za kazi',
         'Open date selection' => 'Fungua chaguo la tarehe',
         'Invalid date (need a future date)!' => 'Tarehe batili (Tarehe ijayo inatakiwa)',
         'Invalid date (need a past date)!' => 'Tarehe batili (Tarehe ya zamani inahitajika)',
@@ -9767,6 +9770,7 @@ Thanks for your help!
         'No response from package upgrade all.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
         'Notice',
         'Notification',

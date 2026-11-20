@@ -1394,6 +1394,13 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="TimePendingSkipUnavailableDays" Required="1" Valid="1">
+        <Description Translatable="1">Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.</Description>
+        <Navigation>Core::Time</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
     <Setting Name="TimeVacationDays" Required="1" Valid="1">
         <Description Translatable="1">Adds the permanent vacation days.</Description>
         <Navigation>Core::Time</Navigation>
@@ -1533,6 +1540,14 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="TimePendingSkipUnavailableDays::Calendar1" Required="1" Valid="1">
+        <Description Translatable="1">Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.</Description>
+        <Navigation>Core::Time::Calendar1</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+
     <Setting Name="TimeVacationDays::Calendar1" Required="1" Valid="1">
         <Description Translatable="1">Adds the permanent vacation days for the indicated calendar.</Description>
         <Navigation>Core::Time::Calendar1</Navigation>
@@ -1672,6 +1687,14 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="TimePendingSkipUnavailableDays::Calendar2" Required="1" Valid="1">
+        <Description Translatable="1">Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.</Description>
+        <Navigation>Core::Time::Calendar2</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+
     <Setting Name="TimeVacationDays::Calendar2" Required="1" Valid="1">
         <Description Translatable="1">Adds the permanent vacation days for the indicated calendar.</Description>
         <Navigation>Core::Time::Calendar2</Navigation>
@@ -1811,6 +1834,14 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="TimePendingSkipUnavailableDays::Calendar3" Required="1" Valid="1">
+        <Description Translatable="1">Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.</Description>
+        <Navigation>Core::Time::Calendar3</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+
     <Setting Name="TimeVacationDays::Calendar3" Required="1" Valid="1">
         <Description Translatable="1">Adds the permanent vacation days for the indicated calendar.</Description>
         <Navigation>Core::Time::Calendar3</Navigation>
@@ -1950,6 +1981,14 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="TimePendingSkipUnavailableDays::Calendar4" Required="1" Valid="1">
+        <Description Translatable="1">Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.</Description>
+        <Navigation>Core::Time::Calendar4</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+
     <Setting Name="TimeVacationDays::Calendar4" Required="1" Valid="1">
         <Description Translatable="1">Adds the permanent vacation days for the indicated calendar.</Description>
         <Navigation>Core::Time::Calendar4</Navigation>
@@ -2089,6 +2128,14 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="TimePendingSkipUnavailableDays::Calendar5" Required="1" Valid="1">
+        <Description Translatable="1">Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.</Description>
+        <Navigation>Core::Time::Calendar5</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+
     <Setting Name="TimeVacationDays::Calendar5" Required="1" Valid="1">
         <Description Translatable="1">Adds the permanent vacation days for the indicated calendar.</Description>
         <Navigation>Core::Time::Calendar5</Navigation>
@@ -2228,6 +2275,14 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="TimePendingSkipUnavailableDays::Calendar6" Required="1" Valid="1">
+        <Description Translatable="1">Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.</Description>
+        <Navigation>Core::Time::Calendar6</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+
     <Setting Name="TimeVacationDays::Calendar6" Required="1" Valid="1">
         <Description Translatable="1">Adds the permanent vacation days for the indicated calendar.</Description>
         <Navigation>Core::Time::Calendar6</Navigation>
@@ -2367,6 +2422,14 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="TimePendingSkipUnavailableDays::Calendar7" Required="1" Valid="1">
+        <Description Translatable="1">Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.</Description>
+        <Navigation>Core::Time::Calendar7</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+
     <Setting Name="TimeVacationDays::Calendar7" Required="1" Valid="1">
         <Description Translatable="1">Adds the permanent vacation days for the indicated calendar.</Description>
         <Navigation>Core::Time::Calendar7</Navigation>
@@ -2506,6 +2569,14 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="TimePendingSkipUnavailableDays::Calendar8" Required="1" Valid="1">
+        <Description Translatable="1">Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.</Description>
+        <Navigation>Core::Time::Calendar8</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+
     <Setting Name="TimeVacationDays::Calendar8" Required="1" Valid="1">
         <Description Translatable="1">Adds the permanent vacation days for the indicated calendar.</Description>
         <Navigation>Core::Time::Calendar8</Navigation>
@@ -2645,6 +2716,14 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="TimePendingSkipUnavailableDays::Calendar9" Required="1" Valid="1">
+        <Description Translatable="1">Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.</Description>
+        <Navigation>Core::Time::Calendar9</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+
     <Setting Name="TimeVacationDays::Calendar9" Required="1" Valid="1">
         <Description Translatable="1">Adds the permanent vacation days for the indicated calendar.</Description>
         <Navigation>Core::Time::Calendar9</Navigation>

@@ -1014,6 +1014,10 @@ sub LoadDefaults {
         },
     };
 
+    # TimePendingSkipUnavailableDays
+    # (skip holidays and days without working hours for pending default dates)
+    $Self->{TimePendingSkipUnavailableDays} = 0;
+
     # --------------------------------------------------- #
     # Web Settings
     # --------------------------------------------------- #

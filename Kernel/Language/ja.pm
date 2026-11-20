@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%m/%d';
     $Self->{DateInputFormat}     = '%Y/%m/%d';
     $Self->{DateInputFormatLong} = '%Y/%m/%d - %T';
-    $Self->{Completeness}        = 0.653596837944664;
+    $Self->{Completeness}        = 0.653706337916864;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -6016,6 +6016,8 @@ sub Data {
             '',
         'Maximum Number of a calendar shown in a dropdown.' => '',
         'Define the start day of the week for the date picker.' => '日付ピッカーにおける週の開始曜日を設定します。',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Ticket::Frontend::PendingDiffTime に基づく既定の保留日が、祝日、またはこのカレンダーで勤務時間のない日をスキップするかどうかを定義します。',
         'Adds the permanent vacation days.' => '',
         'Adds the one time vacation days.' => '',
         'Defines the hours and week days to count the working time.' => '業務時間とカウントする時間と週の平日数を定義します。',
@@ -8720,6 +8722,7 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             '',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => '勤務時間なし',
         'Open date selection' => '対応開始日を選択',
         'Invalid date (need a future date)!' => '無効な日付です。 (未来の日付が必要)',
         'Invalid date (need a past date)!' => '',
@@ -9787,6 +9790,7 @@ Thanks for your help!
         'No response from package upgrade all.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
         'Notice',
         'Notification',

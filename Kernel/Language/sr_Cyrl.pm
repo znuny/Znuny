@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.850750988142292;
+    $Self->{Completeness}        = 0.85079816658764;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -6010,6 +6010,8 @@ sub Data {
             '',
         'Maximum Number of a calendar shown in a dropdown.' => 'Максимални број календара приказан у листи.',
         'Define the start day of the week for the date picker.' => 'Дефиниши први дан у недељи за избор датума.',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Одређује да ли подразумевани датум чекања заснован на Ticket::Frontend::PendingDiffTime треба да прескочи дане који су празници или немају радно време у овом календару.',
         'Adds the permanent vacation days.' => 'Трајно додаје нерадне дане.',
         'Adds the one time vacation days.' => 'Једнократно додаје нерадне дане.',
         'Defines the hours and week days to count the working time.' => 'Одређује сате и дане у недељи у назначеном календару, ради рачунања радног времена.',
@@ -8705,6 +8707,7 @@ sub Data {
             'Да ли стварно желите да поништите ово подешавање на његову претходну вредност?',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'Нема радног времена',
         'Open date selection' => 'Отвори избор датума',
         'Invalid date (need a future date)!' => 'Неисправан датум (неопходан датум у будућности)!',
         'Invalid date (need a past date)!' => 'Неисправан датум (неопходан датум у прошлости)!',
@@ -9773,6 +9776,7 @@ Thanks for your help!
         'No response from package upgrade all.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
         'Notice',
         'Notification',

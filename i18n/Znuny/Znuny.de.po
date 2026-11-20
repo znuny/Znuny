@@ -13428,7 +13428,7 @@ msgstr "Diesen Artikel drucken"
 msgid "Mark article as unseen"
 msgstr "Artikel als ungelesen markieren"
 
-#. Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+#. SysConfig
 msgid "Mark as unseen"
 msgstr "Als ungelesen markieren"
 
@@ -25384,3 +25384,16 @@ msgstr "Ein-Klick-Ausführung"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
 msgid "Skip the activity dialog popup and submit immediately."
 msgstr "Das Popup des Aktivitäts-Dialogs überspringen und sofort absenden."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar."
+msgstr "Definiert, ob das standardmäßige Warten-bis-Datum basierend auf Ticket::Frontend::PendingDiffTime Tage überspringen soll, die Feiertage sind oder in diesem Kalender keine Arbeitszeiten haben."
+
+#. JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+msgid "No working hours"
+msgstr "Keine Arbeitszeiten"
+
+#. JS File: var/httpd/htdocs/js/Core.UI.js
+msgid "%s of %s"
+msgstr "%s von %s"
+

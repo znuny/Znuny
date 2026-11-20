@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.149249011857708;
+    $Self->{Completeness}        = 0.149517938991623;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -6009,6 +6009,8 @@ sub Data {
             '',
         'Maximum Number of a calendar shown in a dropdown.' => '',
         'Define the start day of the week for the date picker.' => '',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Xác định xem ngày chờ mặc định dựa trên Ticket::Frontend::PendingDiffTime có nên bỏ qua các ngày là ngày lễ hoặc không có giờ làm việc trong lịch này hay không.',
         'Adds the permanent vacation days.' => '',
         'Adds the one time vacation days.' => '',
         'Defines the hours and week days to count the working time.' => '',
@@ -8704,6 +8706,7 @@ sub Data {
             '',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'Không có giờ làm việc',
         'Open date selection' => '',
         'Invalid date (need a future date)!' => '',
         'Invalid date (need a past date)!' => '',
@@ -9773,6 +9776,7 @@ Cảm ơn sự giúp đỡ của bạn!
         'No response from package upgrade all.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
         'Notice',
         'Notification',

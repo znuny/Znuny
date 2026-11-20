@@ -1630,11 +1630,12 @@ sub _Mask {
             next STATE_ID if $StateData{TypeName} !~ /pending/i;
             $Param{DateString} = $LayoutObject->BuildDateSelection(
                 %Param,
-                Format               => 'DateInputFormatLong',
-                DiffTime             => $ConfigObject->Get('Ticket::Frontend::PendingDiffTime') || 0,
-                Class                => $Param{Errors}->{DateInvalid}                           || '',
-                Validate             => 1,
-                ValidateDateInFuture => 1,
+                Format                     => 'DateInputFormatLong',
+                DiffTime                   => $ConfigObject->Get('Ticket::Frontend::PendingDiffTime') || 0,
+                Class                      => $Param{Errors}->{DateInvalid}                           || '',
+                Validate                   => 1,
+                ValidateDateInFuture       => 1,
+                PendingSkipUnavailableDays => 1,
             );
             $LayoutObject->Block(
                 Name => 'StatePending',

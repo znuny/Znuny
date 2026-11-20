@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.251225296442688;
+    $Self->{Completeness}        = 0.251461988304094;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -6012,6 +6012,8 @@ sub Data {
             '',
         'Maximum Number of a calendar shown in a dropdown.' => '',
         'Define the start day of the week for the date picker.' => 'दिनांक पिकर के लिए सप्ताह की शुरुआत के दिन निर्धारित करें।',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'यह निर्धारित करता है कि Ticket::Frontend::PendingDiffTime पर आधारित विचाराधीन डिफ़ॉल्ट तिथि को उन दिनों को छोड़ना चाहिए जो अवकाश हैं या जिनका इस पंचांग में कोई कार्य समय नहीं है।',
         'Adds the permanent vacation days.' => '',
         'Adds the one time vacation days.' => '',
         'Defines the hours and week days to count the working time.' => 'कार्य समय की गणना करने के लिए घंटे और सप्ताह के दिनों को परिभाषित करता है।',
@@ -8707,6 +8709,7 @@ sub Data {
             '',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'कोई कार्य समय नहीं',
         'Open date selection' => 'दिनांक चयन को खोलें',
         'Invalid date (need a future date)!' => 'अवैध दिनांक(आगामी दिनांक की जरूरत है)',
         'Invalid date (need a past date)!' => '',
@@ -9764,6 +9767,7 @@ Thanks for your help!
         'No response from package upgrade all.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
         'Notice',
         'Notification',

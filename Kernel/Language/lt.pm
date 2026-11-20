@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.188774703557312;
+    $Self->{Completeness}        = 0.189031136399557;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -6010,6 +6010,8 @@ sub Data {
             '',
         'Maximum Number of a calendar shown in a dropdown.' => '',
         'Define the start day of the week for the date picker.' => '',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Nurodo, ar numatytoji laukimo data pagal Ticket::Frontend::PendingDiffTime turi praleisti dienas, kurios yra šventinės arba neturi darbo valandų šiame kalendoriuje.',
         'Adds the permanent vacation days.' => '',
         'Adds the one time vacation days.' => '',
         'Defines the hours and week days to count the working time.' => '',
@@ -8705,6 +8707,7 @@ sub Data {
             '',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'Nėra darbo valandų',
         'Open date selection' => 'Atverti datos parinkiklį',
         'Invalid date (need a future date)!' => 'Negalima data (turi būti ateities data)!',
         'Invalid date (need a past date)!' => '',
@@ -9762,6 +9765,7 @@ Thanks for your help!
         'No response from package upgrade all.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
         'Notice',
         'Notification',

@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.998577075098814;
+    $Self->{Completeness}        = 0.998577524893314;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -6015,6 +6015,8 @@ sub Data {
             '',
         'Maximum Number of a calendar shown in a dropdown.' => 'Egy legördülőben megjelenített naptár legnagyobb száma.',
         'Define the start day of the week for the date picker.' => 'A hét kezdőnapjának meghatározása a dátumválasztónál.',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Meghatározza, hogy a Ticket::Frontend::PendingDiffTime alapján számított alapértelmezett várakozási dátumnak ki kell-e hagynia azokat a napokat, amelyek munkaszüneti napok, vagy amelyeken ebben a naptárban nincs munkaidő.',
         'Adds the permanent vacation days.' => 'Hozzáadja az állandó munkaszüneti napokat.',
         'Adds the one time vacation days.' => 'Hozzáadja az egyszeri munkaszüneti napokat.',
         'Defines the hours and week days to count the working time.' => 'Meghatározza az órákat és a hétköznapokat a munkaidő számításához.',
@@ -8710,6 +8712,7 @@ sub Data {
             'Valóban vissza szeretné állítani ezt a beállítást a korábbi értékére?',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'Nincs munkaidő',
         'Open date selection' => 'Dátumkijelölés megnyitása',
         'Invalid date (need a future date)!' => 'Érvénytelen dátum (jövőbeli dátum szükséges)!',
         'Invalid date (need a past date)!' => 'Érvénytelen dátum (múltbeli dátum szükséges)!',
@@ -9778,6 +9781,7 @@ Az Ön ügyfélszolgálati csapata
         'No response from package upgrade all.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
         'Notice',
         'Notification',

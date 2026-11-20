@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.59098814229249;
+    $Self->{Completeness}        = 0.591117433222696;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -6015,6 +6015,8 @@ sub Data {
             '',
         'Maximum Number of a calendar shown in a dropdown.' => 'حداکثر تعداد یک تقویم نشان داده شده در منوی کرکره ای.',
         'Define the start day of the week for the date picker.' => 'تعریف روز شروع هفته برای جمع کننده اطلاعات.',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'تعریف می‌کند که آیا تاریخ پیش‌فرض انتظار مبتنی بر Ticket::Frontend::PendingDiffTime باید روزهایی را که تعطیل هستند یا در این تقویم ساعت کاری ندارند، رد کند.',
         'Adds the permanent vacation days.' => '',
         'Adds the one time vacation days.' => '',
         'Defines the hours and week days to count the working time.' => 'تعریف می کند که ساعت و روز هفته برای شمارش زمان کار است.',
@@ -8710,6 +8712,7 @@ sub Data {
             '',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'بدون ساعت کاری',
         'Open date selection' => 'باز کردن انتخاب تاریخ',
         'Invalid date (need a future date)!' => 'تاریخ نامعتبر (نیاز به تاریخی در آینده)!',
         'Invalid date (need a past date)!' => 'تاریخ نامعتبر (نیاز به یک تاریخ گذشته)!',
@@ -9778,6 +9781,7 @@ Thanks for your help!
         'No response from package upgrade all.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
         'Notice',
         'Notification',

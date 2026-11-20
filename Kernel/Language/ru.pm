@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.831936758893281;
+    $Self->{Completeness}        = 0.831989884621464;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -6021,6 +6021,8 @@ sub Data {
             '',
         'Maximum Number of a calendar shown in a dropdown.' => '',
         'Define the start day of the week for the date picker.' => 'Укажите первый день недели для использовании при выборе даты',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Определяет, должна ли дата ожидания по умолчанию на основе Ticket::Frontend::PendingDiffTime пропускать дни, которые являются праздниками или не имеют рабочих часов в этом календаре.',
         'Adds the permanent vacation days.' => 'Добавляет постоянные дни отпуска.',
         'Adds the one time vacation days.' => 'Добавляет одноразовые дни отпуска.',
         'Defines the hours and week days to count the working time.' => 'Задает часы и дни недели для подсчета рабочего времени',
@@ -8716,6 +8718,7 @@ sub Data {
             'Вы действительно желаете вернуть эту настройку к ее историческому значению?',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'Нет рабочих часов',
         'Open date selection' => 'Открыть выбор даты',
         'Invalid date (need a future date)!' => 'Некорректная дата (нужна дата в будущем)!',
         'Invalid date (need a past date)!' => 'Некорректная дата (нужна дата в прошлом)!',
@@ -9784,6 +9787,7 @@ Thanks for your help!
         'No response from package upgrade all.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
         'Notice',
         'Notification',

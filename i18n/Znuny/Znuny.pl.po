@@ -25514,7 +25514,7 @@ msgstr "Zaznaczone załączniki"
 msgid "Click here to download."
 msgstr "Kliknij tutaj aby pobrać."
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Attachments.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AttachmentList.tt
 msgid "Show more"
 msgstr "Pokaż więcej"
 
@@ -25729,4 +25729,16 @@ msgstr "Wykonanie jednym kliknięciem"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
 msgid "Skip the activity dialog popup and submit immediately."
 msgstr "Pomiń wyskakujące okno dialogowe aktywności i zatwierdź natychmiast."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar."
+msgstr "Określa, czy domyślna data oczekiwania oparta na Ticket::Frontend::PendingDiffTime ma pomijać dni, które są świętami lub nie mają godzin pracy w tym kalendarzu."
+
+#. JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+msgid "No working hours"
+msgstr "Brak godzin pracy"
+
+#. JS File: var/httpd/htdocs/js/Core.UI.js
+msgid "%s of %s"
+msgstr ""
 

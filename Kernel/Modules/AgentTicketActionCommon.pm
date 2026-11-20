@@ -2507,10 +2507,11 @@ sub _Mask {
                     YearPeriodFuture => 5,
                     DiffTime         => $ConfigObject->Get('Ticket::Frontend::PendingDiffTime')
                         || 0,
-                    Class                => $Param{DateInvalid} || ' ',
-                    Validate             => 1,
-                    ValidateDateInFuture => 1,
-                    Calendar             => $Calendar,
+                    Class                      => $Param{DateInvalid} || ' ',
+                    Validate                   => 1,
+                    ValidateDateInFuture       => 1,
+                    PendingSkipUnavailableDays => 1,
+                    Calendar                   => $Calendar,
                 );
 
                 $LayoutObject->Block(

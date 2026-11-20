@@ -1,4 +1,5 @@
 # 7.5.1 2026-??-??
+ - 2026-11-20 Changed: Improved date picker calendar handling for non-working days and pending default times.
  - 2026-11-18 Fixed: Use of uninitialized value when minifying RTE content CSS. Thanks to @devdog1 for reporting this issue. [#868](https://github.com/znuny/Znuny/issues/868)
  - 2026-11-18 Added: Integrated package Znuny-AdvancedAttachments.
  - 2026-11-18 Added: Integrated package Znuny-ZoomArticlePDFPreview.
