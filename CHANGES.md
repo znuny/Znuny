@@ -1,4 +1,5 @@
 # 7.5.1 2026-??-??
+ - 2026-11-20 Fixed: Recipients listed on folded To and Cc lines were sent as Bcc by the MSGraph backend and were missing from the received message.
  - 2026-11-20 Added: Content filter for articles in the article filter dialog of agent ticket details view.
  - 2026-11-20 Added: Multiselect column filters for linked tickets complex table in agent ticket details view.
  - 2026-11-20 Changed: Improved date picker calendar handling for non-working days and pending default times.
