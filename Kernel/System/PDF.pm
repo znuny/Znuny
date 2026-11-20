@@ -2683,6 +2683,7 @@ sub _TextCalculate {
         # for every output row is quadratic in the row length.
         my $MeasuredLength = int( 2 * $Param{Width} / $Param{FontSize} ) + 1;
         my $RowWidth;
+        MEASURE:
         while (1) {
             if ( $MeasuredLength > length $Row ) {
                 $MeasuredLength = length $Row;
@@ -2692,8 +2693,8 @@ sub _TextCalculate {
                 Font     => $Param{Font},
                 FontSize => $Param{FontSize},
             );
-            last if $RowWidth > $Param{Width};
-            last if $MeasuredLength == length $Row;
+            last MEASURE if $RowWidth > $Param{Width};
+            last MEASURE if $MeasuredLength == length $Row;
             $MeasuredLength *= 2;
         }
 
