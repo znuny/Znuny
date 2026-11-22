@@ -106,8 +106,8 @@ sub Run {
             );
 
             if ( $Self->{UserTimeZone} ) {
-                $StartTimeObject->ToOTRSTimeZone();
-                $EndTimeObject->ToOTRSTimeZone();
+                $StartTimeObject->ToZnunyTimeZone();
+                $EndTimeObject->ToZnunyTimeZone();
             }
 
             $GetParam{StartTime} = $StartTimeObject->ToString();

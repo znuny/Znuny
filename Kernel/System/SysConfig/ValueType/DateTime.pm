@@ -114,14 +114,14 @@ sub SettingEffectiveValueCheck {
         UserID => $Param{UserID},
     );
 
-    my $OTRSTimeZone = $Kernel::OM->Get('Kernel::Config')->Get("OTRSTimeZone");
+    my $ZnunyTimeZone = $Kernel::OM->Get('Kernel::Config')->Get("ZnunyTimeZone");
     my $DateTimeObject;
 
-    if ( !$Preferences{UserTimeZone} || $Preferences{UserTimeZone} eq $OTRSTimeZone ) {
+    if ( !$Preferences{UserTimeZone} || $Preferences{UserTimeZone} eq $ZnunyTimeZone ) {
         $DateTimeObject = $Kernel::OM->Create(
             'Kernel::System::DateTime',
             ObjectParams => {
-                TimeZone => $OTRSTimeZone,
+                TimeZone => $ZnunyTimeZone,
             },
         );
 
@@ -154,7 +154,7 @@ sub SettingEffectiveValueCheck {
         }
 
         my $Success = $DateTimeObject->ToTimeZone(
-            TimeZone => $OTRSTimeZone,
+            TimeZone => $ZnunyTimeZone,
         );
 
         if ($Success) {
@@ -162,12 +162,12 @@ sub SettingEffectiveValueCheck {
         }
         else {
             $Result{Error} = $Kernel::OM->Get('Kernel::Language')->Translate(
-                "System was not able to calculate user DateTime in OTRSTimeZone!"
+                "System was not able to calculate user DateTime in ZnunyTimeZone!"
             );
 
             $Kernel::OM->Get('Kernel::System::Log')->Log(
                 Priority => 'error',
-                Message  => "System was not able to calculate user DateTime in OTRSTimeZone!"
+                Message  => "System was not able to calculate user DateTime in ZnunyTimeZone!"
             );
         }
     }
@@ -270,7 +270,7 @@ sub SettingRender {
         );
     }
 
-    my $TimeZone = $Kernel::OM->Get('Kernel::Config')->Get("OTRSTimeZone");
+    my $TimeZone = $Kernel::OM->Get('Kernel::Config')->Get("ZnunyTimeZone");
 
     my $DateTimeObject = $Kernel::OM->Create(
         'Kernel::System::DateTime',
@@ -416,7 +416,7 @@ sub AddItem {
     my $Name = $Param{Name} . $IDSuffix;
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $TimeZone     = $Kernel::OM->Get('Kernel::Config')->Get("OTRSTimeZone");
+    my $TimeZone     = $Kernel::OM->Get('Kernel::Config')->Get("ZnunyTimeZone");
 
     my %Preferences = $Kernel::OM->Get('Kernel::System::User')->GetPreferences(
         UserID => $Param{UserID},

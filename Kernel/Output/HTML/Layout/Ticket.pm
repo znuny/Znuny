@@ -831,6 +831,16 @@ sub TicketListShow {
                 },
             );
 
+            # extra fields of the calling screen, saved via AgentPreferences UpdateAJAX
+            FIELD:
+            for my $Field ( @{ $Param{ContextSettingsFields} || [] } ) {
+                next FIELD if ref $Field ne 'HASH';
+                $Self->Block(
+                    Name => 'ContextSettingsField',
+                    Data => $Field,
+                );
+            }
+
             # show column filter preferences
             if ( $View eq 'Small' ) {
 

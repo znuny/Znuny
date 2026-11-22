@@ -56,7 +56,11 @@ $Selenium->RunTest(
 
         my $File     = 'GenericTicketConnectorREST.yml';
         my $Location = "$Selenium->{Home}/scripts/test/sample/Webservice/$File";
-        my $Name     = "Webservice" . $HelperObject->GetRandomID();
+
+        # Chrome runs on the Selenium machine, so the sample file must be uploaded there first.
+        $Location = $Selenium->upload_file($Location);
+
+        my $Name = "Webservice" . $HelperObject->GetRandomID();
         $Selenium->find_element( "#WebserviceName",     'css' )->send_keys($Name);
         $Selenium->find_element( "#ConfigFile",         'css' )->send_keys($Location);
         $Selenium->find_element( "#ImportButtonAction", 'css' )->click();
@@ -142,6 +146,18 @@ $Selenium->RunTest(
 
         sleep 1;
 
+        # Delete is only offered for invalid web services.
+        $Selenium->InputFieldValueSet(
+            Element => '#ValidID',
+            Value   => 2,
+        );
+        $Selenium->find_element( "#Submit", 'css' )->VerifiedClick();
+        $Selenium->WaitFor(
+            JavaScript =>
+                "return typeof(\$) === 'function' && \$('tr.Invalid td:contains(\"$Name\")').length;"
+        );
+
+        $Selenium->find_element( $Name, 'link_text' )->VerifiedClick();
         $Selenium->WaitFor( ElementExists => [ '#DeleteButton', 'css' ] );
 
         # Delete web service.
@@ -156,13 +172,13 @@ $Selenium->RunTest(
         # Wait until delete dialog has closed and action performed.
         $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && !\$('#DialogButton2').length;" );
         $Selenium->WaitFor(
-            ElementExists =>
-                "//p[contains(.,\'Web service \"$Name\" deleted!\')]",
+            JavaScript =>
+                "return \$('body').text().indexOf('Web service \"$Name\" deleted!') !== -1;"
         );
 
         # Verify that web service is deleted.
         $Self->True(
-            $Selenium->find_element("//p[contains(.,\'Web service \"$Name\" deleted!\')]"),
+            index( $Selenium->get_page_source(), "Web service \"$Name\" deleted!" ) > -1,
             "$Name is deleted",
         );
 

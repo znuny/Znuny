@@ -577,7 +577,9 @@ sub Redirect {
     # add cookies if exists
     my $Cookies = '';
     if ( $Self->{SetCookies} && $ConfigObject->Get('SessionUseCookie') ) {
+        COOKIE:
         for my $Key ( sort keys %{ $Self->{SetCookies} } ) {
+            next COOKIE if !defined $Self->{SetCookies}->{$Key} || !length $Self->{SetCookies}->{$Key};
             $Cookies .= "Set-Cookie: $Self->{SetCookies}->{$Key}\n";
         }
     }
@@ -705,7 +707,9 @@ sub Login {
 
     # add cookies if exists
     if ( $Self->{SetCookies} && $ConfigObject->Get('SessionUseCookie') ) {
+        COOKIE:
         for my $Key ( sort keys %{ $Self->{SetCookies} } ) {
+            next COOKIE if !defined $Self->{SetCookies}->{$Key} || !length $Self->{SetCookies}->{$Key};
             $Output .= "Set-Cookie: $Self->{SetCookies}->{$Key}\n";
         }
     }
@@ -899,6 +903,7 @@ sub Login {
                 Path     => $ConfigObject->Get('ScriptAlias'),
                 Secure   => $CookieSecureAttribute,
                 HTTPOnly => 1,
+                SameSite => 'None',
             );
 
             # Note: This only works here because at this point, no body has been added to $Output.
@@ -1471,7 +1476,9 @@ sub Header {
     # add cookies if exists
     my $Output = '';
     if ( $Self->{SetCookies} && $ConfigObject->Get('SessionUseCookie') ) {
+        COOKIE:
         for my $Key ( sort keys %{ $Self->{SetCookies} } ) {
+            next COOKIE if !defined $Self->{SetCookies}->{$Key} || !length $Self->{SetCookies}->{$Key};
             $Output .= "Set-Cookie: $Self->{SetCookies}->{$Key}\n";
         }
     }
@@ -3587,7 +3594,7 @@ sub TransformDateSelection {
         );
 
         if ($DateTimeObject) {
-            $DateTimeObject->ToOTRSTimeZone();
+            $DateTimeObject->ToZnunyTimeZone();
             my $DateTimeValues = $DateTimeObject->Get();
 
             $Param{ $Prefix . 'Year' }   = $DateTimeValues->{Year};
@@ -4155,7 +4162,9 @@ sub CustomerLogin {
 
     # add cookies if exists
     if ( $Self->{SetCookies} && $ConfigObject->Get('SessionUseCookie') ) {
+        COOKIE:
         for my $Key ( sort keys %{ $Self->{SetCookies} } ) {
+            next COOKIE if !defined $Self->{SetCookies}->{$Key} || !length $Self->{SetCookies}->{$Key};
             $Output .= "Set-Cookie: $Self->{SetCookies}->{$Key}\n";
         }
     }
@@ -4302,6 +4311,7 @@ sub CustomerLogin {
                 Path     => $ConfigObject->Get('ScriptAlias'),
                 Secure   => $CookieSecureAttribute,
                 HTTPOnly => 1,
+                SameSite => 'None',
             );
 
             # Note: This only works here because at this point, no body has been added to $Output.
@@ -4410,7 +4420,9 @@ sub CustomerHeader {
     # add cookies if exists
     my $Output = '';
     if ( $Self->{SetCookies} && $ConfigObject->Get('SessionUseCookie') ) {
+        COOKIE:
         for my $Key ( sort keys %{ $Self->{SetCookies} } ) {
+            next COOKIE if !defined $Self->{SetCookies}->{$Key} || !length $Self->{SetCookies}->{$Key};
             $Output .= "Set-Cookie: $Self->{SetCookies}->{$Key}\n";
         }
     }

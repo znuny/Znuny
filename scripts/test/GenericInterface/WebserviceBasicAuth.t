@@ -66,6 +66,10 @@ my $ID = $WebserviceObject->WebserviceAdd(
                         'AuthType'          => 'BasicAuth',
                         'BasicAuthUser'     => '<OTRS_CONFIG_WebService_BasicAuth_User>'
                     },
+                    'AdditionalHeaders' => {
+                        'X-Znuny-Test'    => '<ZNUNY_CONFIG_WebService_BasicAuth_User>',
+                        'X-Znuny-Escaped' => '&lt;ZNUNY_CONFIG_WebService_BasicAuth_Password&gt;',
+                    },
                     'DefaultCommand' => 'GET'
                 },
             },
@@ -99,6 +103,16 @@ $Self->Is(
     'testpass',
     'Replaced of config variables worked for basic auth password',
 );
+$Self->Is(
+    $WebserviceConfig->{Config}->{Requester}->{Transport}->{Config}->{AdditionalHeaders}->{'X-Znuny-Test'},
+    'testuser',
+    'ZNUNY_CONFIG tag in a requester header is replaced',
+);
+$Self->Is(
+    $WebserviceConfig->{Config}->{Requester}->{Transport}->{Config}->{AdditionalHeaders}->{'X-Znuny-Escaped'},
+    'testpass',
+    'Escaped ZNUNY_CONFIG tag in a requester header is replaced',
+);
 
 # clear cache in memory to simulate new request on cache
 $CacheObject->{Cache} = {};
@@ -117,6 +131,11 @@ $Self->Is(
     'testpass',
     'Replaced of config variables worked for basic auth password',
 );
+$Self->Is(
+    $WebserviceConfig->{Config}->{Requester}->{Transport}->{Config}->{AdditionalHeaders}->{'X-Znuny-Test'},
+    'testuser',
+    'ZNUNY_CONFIG tag in a requester header is replaced from cache',
+);
 
 # For the admin interface we want to see the old data
 $LayoutObject->{Action} = 'AdminGenericInterfaceWebservice';
@@ -134,6 +153,11 @@ $Self->Is(
     $WebserviceConfig->{Config}->{Requester}->{Transport}->{Config}->{Authentication}->{BasicAuthPassword},
     '&lt;OTRS_CONFIG_WebService_BasicAuth_Password&gt;',
     'Replaced of config variables should not be replaced for the admin interface e.g. password',
+);
+$Self->Is(
+    $WebserviceConfig->{Config}->{Requester}->{Transport}->{Config}->{AdditionalHeaders}->{'X-Znuny-Test'},
+    '<ZNUNY_CONFIG_WebService_BasicAuth_User>',
+    'ZNUNY_CONFIG tag stays visible in the admin interface',
 );
 
 1;

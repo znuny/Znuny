@@ -145,13 +145,21 @@
                             </div>
 
                             <div class="field-wrapper">
+                                <label for="OneClickExecution">[% Translate("One-click execution") | html %]</label>
+                                <div class="Field">
+                                    [% Data.OneClickExecutionSelection %]
+                                </div>
+                                <p class="FieldExplanation">[% Translate("Skip the activity dialog popup and submit immediately.") | html %]</p>
+                            </div>
+
+                            <div class="field-wrapper" id="SubmitAdviceTextContainer">
                                 <label for="SubmitAdviceText">[% Translate("Submit Advice Text") | html %]</label>
                                 <div class="Field">
                                     <input type="text" name="SubmitAdviceText" id="SubmitAdviceText" value="[% Data.SubmitAdviceText | html %]" maxlength="70"/>
                                 </div>
                             </div>
 
-                            <div class="field-wrapper">
+                            <div class="field-wrapper" id="SubmitButtonTextContainer">
                                 <label for="SubmitButtonText">[% Translate("Submit Button Text") | html %]</label>
                                 <div class="Field">
                                     <input type="text" name="SubmitButtonText" id="SubmitButtonText" value="[% Data.SubmitButtonText | html %]" maxlength="70"/>

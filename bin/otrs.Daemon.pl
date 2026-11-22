@@ -1,1 +1,0 @@
-znuny.Daemon.pl

@@ -11,6 +11,7 @@ package Kernel::Output::HTML::ArticleAction::AgentTicketPlain;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::Language qw(Translatable);
 
@@ -88,8 +89,10 @@ sub GetConfig {
         ItemType    => 'Link',
         Description => Translatable('View the source for this Article'),
         Name        => Translatable('Plain Format'),
-        Class       => 'AsPopup PopupType_TicketAction',
-        Link        =>
+
+        # Icon        => 'fa fa-file-code-o',
+        Class => 'AsPopup PopupType_TicketAction',
+        Link  =>
             "Action=AgentTicketPlain;TicketID=$Param{Ticket}->{TicketID};ArticleID=$Param{Article}->{ArticleID}",
     );
 

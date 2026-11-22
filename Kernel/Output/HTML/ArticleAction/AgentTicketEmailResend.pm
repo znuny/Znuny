@@ -11,6 +11,7 @@ package Kernel::Output::HTML::ArticleAction::AgentTicketEmailResend;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::Language              qw(Translatable);
 use Kernel::System::VariableCheck qw(IsHashRefWithData);
@@ -122,8 +123,10 @@ sub GetConfig {
         ItemType    => 'Link',
         Description => Translatable('Resend this article'),
         Name        => Translatable('Resend'),
-        Class       => 'AsPopup PopupType_TicketAction',
-        Link        =>
+
+        # Icon        => 'fa fa-refresh',
+        Class => 'AsPopup PopupType_TicketAction',
+        Link  =>
             "Action=AgentTicketEmailResend;TicketID=$Param{Ticket}->{TicketID};ArticleID=$Param{Article}->{ArticleID}",
     );
 

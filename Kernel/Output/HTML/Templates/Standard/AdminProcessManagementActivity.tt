@@ -119,6 +119,9 @@
                                         [% Data.Name | html %]
                                         <span class="Functions">
                                             <span class="AvailableIn">[% Translate(Data.AvailableIn) | html %]</span>
+                                            <a href="#" class="CloneEntity Icon icon-hover" data-entity-type="ActivityDialog" data-entity="[% Data.EntityID | html %]" data-name="[% Data.Name | html %]" title="[% Translate("Clone") | html %]">
+                                                <i class="fa fa-clone"></i>
+                                            </a>
                                             <a href="#" data-entity="[% Data.EntityID | html %]" data-id="[% Data.ID | html %]" data-action="AdminProcessManagementActivityDialog" data-subaction="ActivityDialogEdit" class="AsPopup_Redirect Edit_Confirm PopupType_ActivityDialog Icon icon-hover" title="[% Translate("Edit") | html %]">
                                                 <i class="fa fa-edit"></i>
                                             </a>
@@ -146,6 +149,9 @@
                                         [% Data.Name | html %]
                                         <span class="Functions">
                                             <span class="AvailableIn">[% Translate(Data.AvailableIn) | html %]</span>
+                                            <a href="#" class="CloneEntity Icon icon-hover" data-entity-type="ActivityDialog" data-entity="[% Data.EntityID | html %]" data-name="[% Data.Name | html %]" title="[% Translate("Clone") | html %]">
+                                                <i class="fa fa-clone"></i>
+                                            </a>
                                             <a href="#" data-entity="[% Data.EntityID | html %]" data-id="[% Data.ID | html %]" data-action="AdminProcessManagementActivityDialog" data-subaction="ActivityDialogEdit" class="AsPopup_Redirect Edit_Confirm PopupType_ActivityDialog Icon icon-hover" title="[% Translate("Edit") | html %]">
                                                 <i class="fa fa-edit"></i>
                                             </a>
@@ -166,4 +172,7 @@
     <div class="Footer">
         <button class="Primary CallForAction btn-main btn-primary btn-width-md" id="Submit" title="[% Translate("Save") | html %]" type="submit" value="[% Translate("Save") | html %]"><span>[% Translate("Save") | html %]</span></button>
     </div>
+</div>
+<div id="Dialogs" class="Hidden">
+[% INCLUDE "AdminProcessManagementCloneDialog.tt" %]
 </div>

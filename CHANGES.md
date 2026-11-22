@@ -1,5 +1,43 @@
 # 7.5.1 2026-??-??
+ - 2026-11-18 Added: Integrated package Znuny-AdvancedAttachments.
+ - 2026-11-18 Added: Integrated package Znuny-ZoomArticlePDFPreview.
+ - 2026-11-18 Changed: Excess activity notifications will now be cleaned up during migration.
+ - 2026-11-17 Added: Optional one-click process dialogs so activity buttons can skip the popup when no input is needed.
+ - 2026-11-17 Changed: Updated tooltip positioning logic in AppointmentCalendar and improved CSS styles for better visibility and layout.
+ - 2026-11-17 Added: Process management: Clone activity dialogs and transition actions from the Edit Activity and Edit Path screens.
+ - 2026-11-13 Fixed: Importing a web service with an invalid configuration showed a success notice even though nothing was stored. Thanks to @natanaraujo3001-crypto for reporting the issue. [#870](https://github.com/znuny/Znuny/issues/870)
+ - 2026-11-13 Fixed: SecureMode setting description now says GenericAgent, Package Manager and SQL Box are disabled when SecureMode is not enabled. Thanks to @BuilderNSV for reporting the issue. [#715](https://github.com/znuny/Znuny/issues/715)
+ - 2026-11-12 Fixed: Follow-up on a closed ticket no longer locks the last owner when the state is kept or stays closed.
+ - 2026-11-11 Added: Queue and service navigation layouts.
+ - 2026-11-11 Changed: Package repository index file is now packages.xml. otrs.xml is no longer requested or served. Package downloads now log the URL when the request returns no content.
+ - 2026-11-11 Fixed: User search with option PostMasterSearch now also searches the login for a matching email address as a fallback to the email address stored in the user preferences.
+ - 2026-11-10 Fixed: Moving or resizing an appointment in the calendar or resource overview via drag and drop removed linked tickets.
+ - 2026-11-09 Fixed: Ticket reply (AgentTicketCompose) quoted the last customer article as plain text instead of the selected article if the template also had the type Note.
+ - 2026-11-05 Added: New config option TemplateGenerator::EmptyValueReplacement to choose the text shown for missing values of placeholders in templates.
+ - 2026-11-04 Removed: Console commands Dev::Code::CPANAudit and Dev::Code::CPANUpdate and the support data collector Perl modules audit.
+ - 2026-11-03 Changed: Refactored REST transport to support both OTRS and Znuny aliases.
+ - 2026-11-03 Added: ZNUNY_* response tag support alongside OTRS_* in GenericInterface invoker Ticket::Generic.
+ - 2026-11-03 Changed: Default session cookie names are now ZnunyAgentInterface and ZnunyCustomerInterface. Untouched SysConfig values are migrated on upgrade; legacy OTRS cookie names are still accepted during the transition.
+ - 2026-11-03 Changed: Renamed $DateTimeObject->OTRSTimeZoneGet() to ZnunyTimeZoneGet() and SysConfig OTRSTimeZone to ZnunyTimeZone.
+ - 2026-11-03 Changed: Repository index root tag is now package_list instead of otrs_package_list.
+ - 2026-11-03 Fixed: SAML login failed in Chrome and Edge when authentication at the identity provider took too long.
+ - 2026-10-31 Fixed: Datepicker not initialized for date fields added via attribute selection in AgentTicketSearch dialog.
+ - 2026-10-30 Changed: Statistics XML export now uses the root element znuny_stats. Import still accepts otrs_stats.
+ - 2026-10-30 Changed: SOPM root tag can now also be 'package' instead of 'otrs_package'.
+ - 2026-10-29 Fixed: calendar appointment failed to create ticket if relative period was zero. Thanks to @Fawkespami for reporting the issue. [#821](https://github.com/znuny/Znuny/issues/821)
+ - 2026-10-29 Fixed: SAML login now verifies assertion signatures against the configured IdP certificate (AuthModule::SAML::IdPCACert and Customer::AuthModule::SAML::IdPCACert). Net::SAML2 0.89 or higher is now required (fixes CVE-2026-18089, CVE-2026-18092 and CVE-2026-18108). Thanks to the following reporters: HARIPRASAD M., Fabian Bührmann.
+ - 2026-10-26 Fixed: PostMaster filter ExternalTicketNumberRecognition ignores CC.
+ - 2026-10-26 Fixed: Customers already selected on a ticket still appeared as selectable in the customer user address book.
+ - 2026-10-23 Fixed: SAML auth IdP metadata download now uses the WebUserAgent config options.
+ - 2026-10-19 Fixed: Console command to export/import dynamic field configs used different format than the GUI version.
  - 2026-10-16 Fixed: Closing the "add draft" dialog via the header X, a click outside the dialog, or Escape left form validation disabled, so the ticket action could be submitted without required fields.
+ - 2026-10-13 Fixed: Select drop-downs could render at wrong position when specific position criteria were met.
+ - 2026-10-08 Fixed: Uninitialized values in Kernel/System/ACL/DB/ACL.pm
+ - 2026-10-02 Changed: Enabled the use of URL parameter RequestedURL within existing sessions.
+ - 2026-09-21 Fixed: "Back" button in mobile view did nothing in ticket details dialog.
+ - 2026-09-10 Added: Support for AES encrypted passwords.
+ - 2026-09-04 Fixed: Process transition action "DynamicFieldSet" now correctly saves multiple values for all multiselect-type dynamic fields (e.g. ConfigItemMultiselect, WebserviceMultiselect).
+ - 2026-06-12 Added: Event module to reset responsible of a ticket on queue change.
 
 # 7.3.8 2026-10-14
  - 2026-10-08 Fixed: Agent ticket action dialogs showed an empty state option on first load when a default state is configured.

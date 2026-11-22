@@ -30,8 +30,20 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
   background-color: var(--background-tertiary-color);
   padding: 5px;
 }
-.modTicketHeader > .inner .ticketHeaderActions .ClusterLink i {
+.modTicketHeader > .inner .ticketHeaderActions .ClusterLink i.fa-caret-down {
   margin-left: 5px;
+}
+.modTicketHeader > .inner .ticketHeaderActions .ClusterLink.NoClusterName .ClusterMenuIcon {
+  margin-right: 0;
+}
+.modTicketHeader > .inner .ticketHeaderActions .Actions i {
+  font-size: var(--font-size-md);
+}
+.modTicketHeader > .inner .ticketHeaderActions a i.fa-star {
+  color: var(--color-icon-favorite);
+}
+.modTicketHeader > .inner .ticketHeaderActions a i.fa-star-o {
+  color: var(--gray-dark);
 }
 .modTicketHeader > .inner h1 {
   position: relative;

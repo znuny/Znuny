@@ -11,6 +11,7 @@ package Kernel::Output::HTML::ArticleAction::AgentTicketBounce;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::Language qw(Translatable);
 
@@ -107,8 +108,10 @@ sub GetConfig {
         ItemType    => 'Link',
         Description => Translatable('Bounce Article to a different mail address'),
         Name        => Translatable('Bounce'),
-        Class       => 'AsPopup PopupType_TicketAction',
-        Link        =>
+
+        # Icon        => 'fa fa-exchange',
+        Class => 'AsPopup PopupType_TicketAction',
+        Link  =>
             "Action=AgentTicketBounce;TicketID=$Param{Ticket}->{TicketID};ArticleID=$Param{Article}->{ArticleID}",
     );
 

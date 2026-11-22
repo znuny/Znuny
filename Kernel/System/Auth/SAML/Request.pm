@@ -16,6 +16,7 @@ our $ObjectManagerDisabled = 1;
 
 use Kernel::System::VariableCheck qw(:all);
 
+use LWP::UserAgent;
 use Net::SAML2;
 
 sub new {
@@ -46,9 +47,9 @@ sub CreateURL {
     if ( $Self->{Config}->{RequestMetaDataURL} ) {
         $IdPParams{url} = $Self->{Config}->{RequestMetaDataURL};
 
-        if ( IsHashRefWithData( $Self->{Config}->{RequestMetaDataURLSSLOptions} ) ) {
-            $IdPParams{ssl_opts} = $Self->{Config}->{RequestMetaDataURLSSLOptions};
-        }
+        # Net::SAML2 applies ssl_opts only when it creates the user agent itself.
+        # Proxy settings and SSL options are therefore set on the user agent.
+        $IdPParams{ua} = $Self->_GetMetadataUserAgent();
 
         $IdP = Net::SAML2::IdP->new_from_url(%IdPParams);
     }
@@ -111,6 +112,47 @@ sub GetID {
     my ( $Self, %Param ) = @_;
 
     return $Self->{RequestID};
+}
+
+sub _GetMetadataUserAgent {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    my $UserAgent = LWP::UserAgent->new();
+
+    my $Proxy = $ConfigObject->Get('WebUserAgent::Proxy') || '';
+    if ($Proxy) {
+        $UserAgent->proxy( [ 'http', 'https', 'ftp' ], $Proxy );
+    }
+
+    my $NoProxy = $ConfigObject->Get('WebUserAgent::NoProxy');
+    if ( defined $NoProxy && length $NoProxy ) {
+        my @Hosts;
+        HOST:
+        for my $Host ( split /\s*;\s*/, $NoProxy ) {
+            next HOST if !defined $Host || !length $Host;
+
+            push @Hosts, $Host;
+        }
+
+        $UserAgent->no_proxy(@Hosts) if @Hosts;
+    }
+
+    my %SSLOptions;
+    if ( IsHashRefWithData( $Self->{Config}->{RequestMetaDataURLSSLOptions} ) ) {
+        %SSLOptions = %{ $Self->{Config}->{RequestMetaDataURLSSLOptions} };
+    }
+
+    if ( $ConfigObject->Get('WebUserAgent::DisableSSLVerification') ) {
+        $SSLOptions{verify_hostname} = 0;
+    }
+
+    if (%SSLOptions) {
+        $UserAgent->ssl_opts(%SSLOptions);
+    }
+
+    return $UserAgent;
 }
 
 1;

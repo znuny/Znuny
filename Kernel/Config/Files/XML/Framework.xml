@@ -2,7 +2,7 @@
 <otrs_config version="2.0" init="Framework">
     <!-- nofilter(TidyAll::Plugin::Znuny::Config::ACLKeysLevel3Actions) -->
     <Setting Name="SecureMode" Required="1" Valid="1" ConfigLevel="200">
-        <Description Translatable="1">Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.</Description>
+        <Description Translatable="1">Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If not enabled, it also disables the GenericAgent, PackageManager and SQL Box.</Description>
         <Navigation>Core</Navigation>
         <Value>
             <Item ValueType="Checkbox">0</Item>
@@ -1196,14 +1196,14 @@
         <Description Translatable="1">Defines the name of the session key. E.g. Session, SessionID or Znuny.</Description>
         <Navigation>Core::Session</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">OTRSAgentInterface</Item>
+            <Item ValueType="String" ValueRegex="">ZnunyAgentInterface</Item>
         </Value>
     </Setting>
     <Setting Name="CustomerPanelSessionName" Required="1" Valid="1">
         <Description Translatable="1">Defines the name of the key for customer sessions.</Description>
         <Navigation>Core::Session</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">OTRSCustomerInterface</Item>
+            <Item ValueType="String" ValueRegex="">ZnunyCustomerInterface</Item>
         </Value>
     </Setting>
     <Setting Name="SessionCheckRemoteIP" Required="1" Valid="1">
@@ -1319,7 +1319,7 @@
         </Value>
     </Setting>
     <Setting Name="TimeZone" Required="0" Valid="0">
-        <Description Translatable="1">This setting is deprecated. Set OTRSTimeZone instead.</Description>
+        <Description Translatable="1">This setting is deprecated. Set ZnunyTimeZone instead.</Description>
         <Navigation>Core::Time</Navigation>
         <Value>
             <Item ValueType="Select" SelectedID="+0">
@@ -1351,7 +1351,7 @@
             </Item>
         </Value>
     </Setting>
-    <Setting Name="OTRSTimeZone" Required="1" Valid="1">
+    <Setting Name="ZnunyTimeZone" Required="1" Valid="1">
         <Description Translatable="1">Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.</Description>
         <Navigation>Core::Time</Navigation>
         <Value>
@@ -1366,7 +1366,7 @@
         </Value>
     </Setting>
     <Setting Name="ShowUserTimeZoneSelectionNotification" Required="1" Valid="1">
-        <Description Translatable="1">If enabled, users that haven't selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.</Description>
+        <Description Translatable="1">If enabled, users that haven't selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) ZnunyTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.</Description>
         <Navigation>Core::Time</Navigation>
         <Value>
             <Item ValueType="Checkbox">1</Item>
@@ -8942,6 +8942,171 @@ via the Preferences button after logging in.
         <Navigation>Frontend::Agent</Navigation>
         <Value>
             <Item ValueType="Checkbox" ValueRegex="">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Attachment###ShowDuplicateFiles" Required="1" Valid="1">
+        <Description Translatable="1">If this configuration is deactivated, all duplicate files are removed from the selection lists.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="1">
+                <Item ValueType="Option" Value="0" Translatable="1">No</Item>
+                <Item ValueType="Option" Value="1" Translatable="1">Yes</Item>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Attachment###EnablePreview" Required="1" Valid="1">
+        <Description Translatable="1">If enabled, a preview overlay is available for article attachments (images, PDFs and other permitted types).</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="1">
+                <Item ValueType="Option" Value="0" Translatable="1">No</Item>
+                <Item ValueType="Option" Value="1" Translatable="1">Yes</Item>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Attachment###DeactivateWidgetArticleCount" Required="1" Valid="1">
+        <Description Translatable="1">Disables the widgets when the number of article in the ticket is reached.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <!-- 0 => no limit -->
+            <Item ValueType="String" ValueRegex="^[0-9]{1,3}$">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Attachment###DeactivateWidgetAttachmentCount" Required="1" Valid="1">
+        <Description Translatable="1">Disables the widgets when the number of attachments in the ticket is reached.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <!-- 0 => no limit -->
+            <Item ValueType="String" ValueRegex="^[0-9]{1,3}$">0</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Attachment###ShowAttachmentsCount" Required="0" Valid="1">
+        <Description Translatable="1">Number of a attachments shown by default.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <!-- 0 => no limit -->
+            <Item ValueType="String" ValueRegex="^[0-9]{1,3}$">10</Item>
+        </Value>
+    </Setting>
+    <Setting Name="Attachment###AgentTicketZoom###ShowAttachmentsCount" Required="0" Valid="1">
+        <Description Translatable="1">Number of a attachments shown in AgentTicketZoom.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^[0-9]{1,3}$">5</Item>
+        </Value>
+    </Setting>
+    <!-- AgentTicketZoom Widget -->
+    <Setting Name="Ticket::Frontend::AgentTicketZoom###Widgets###0900-Attachments" Required="0" Valid="1">
+        <Description Translatable="1">AgentTicketZoom widget which provides all attachments of the ticket for download.</Description>
+        <Navigation>Frontend::Agent::View::TicketZoom</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketZoom::Attachments</Item>
+                <Item Key="Location">Sidebar</Item>
+                <Item Key="Rank">0999</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::ArticleAttachmentModule###0-Preview" Required="1" Valid="1">
+        <Description Translatable="1">Shows a link to preview article attachments in the zoom view of the article in the agent interface.</Description>
+        <Navigation>Frontend::Agent::View::TicketZoom</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::ArticleAttachment::Preview</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <!-- Selection -->
+    <Setting Name="Attachment###SelectionActions" Required="0" Valid="1">
+        <Description Translatable="1">Agent ticket dialogs that show a selection to reuse attachments of other articles of the ticket.</Description>
+        <Navigation>Core</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="AgentTicketClose">1</Item>
+                <Item Key="AgentTicketCompose">1</Item>
+                <Item Key="AgentTicketEmailOutbound">1</Item>
+                <Item Key="AgentTicketForward">1</Item>
+                <Item Key="AgentTicketNote">1</Item>
+                <Item Key="AgentTicketOwner">1</Item>
+                <Item Key="AgentTicketPending">1</Item>
+                <Item Key="AgentTicketPhoneInbound">1</Item>
+                <Item Key="AgentTicketPhoneOutbound">1</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <!-- AgentTicketAttachmentList -->
+    <Setting Name="Frontend::Module###AgentTicketAttachmentList" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="Group">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Description" Translatable="1"></Item>
+                    <Item Key="NavBarName"></Item>
+                    <Item Key="Title" Translatable="1"></Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Ticket::Frontend::MenuModule###999-AgentTicketAttachmentList" Required="0" Valid="1">
+        <Description Translatable="1">Shows a link in the menu to select and download all attachments of the ticket.</Description>
+        <Navigation>Frontend::Agent::View::TicketZoom::MenuModule</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
+                <Item Key="Name" Translatable="1">Attachments</Item>
+                <Item Key="Description" Translatable="1">Attachments</Item>
+                <Item Key="Action">AgentTicketAttachmentList</Item>
+                <Item Key="Link">Action=AgentTicketAttachmentList;TicketID=[% Data.TicketID | html %]</Item>
+                <Item Key="Target"></Item>
+                <Item Key="PopupType">TicketAction</Item>
+                <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
+                <Item Key="ClusterPriority">2000</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AgentTicketAttachmentList###001-Default" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>thirdparty/jquery-tablesorter-2.28.14/jquery.tablesorter.js</Item>
+                        <Item>Core.UI.Table.Sort.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Agent::CommonJS###999-Attachments" Required="0" Valid="1">
+        <Description Translatable="1">List of JS files to always be loaded for the agent interface.</Description>
+        <Navigation>Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Core.Agent.Attachments.js</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Agent::CommonCSS###999-Attachments" Required="0" Valid="1">
+        <Description Translatable="1">List of CSS files to always be loaded for the agent interface.</Description>
+        <Navigation>Frontend::Base::Loader</Navigation>
+        <Value>
+            <Array>
+                <Item>Core.Agent.Attachments.css</Item>
+            </Array>
         </Value>
     </Setting>
 </otrs_config>

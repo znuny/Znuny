@@ -510,15 +510,64 @@ sub Run {
         $SubQueueIndicatorTitle = ' (' . $LayoutObject->{LanguageObject}->Translate('excluding subqueues') . ')';
     }
 
+    my $QueueWidget = $LayoutObject->Output(
+        TemplateFile => 'AgentTicketQueue',
+        Data         => \%NavBar,
+    );
+
+    # Sidebar sits beside the ticket list. #OverviewBody is a sibling of .OverviewBox,
+    # so the widget cannot stay inside DataInTheMiddle.
+    my $DataInTheMiddle = $QueueWidget;
+    if ( ( $NavBar{NavLayout} || '' ) eq 'Sidebar' ) {
+        $DataInTheMiddle = '';
+    }
+
+    # Queue navigation fields in the ticket list settings dialog.
+    my @ContextSettingsFields = (
+        {
+            Name   => 'UserNavLayoutQueue',
+            Label  => Translatable('Navigation'),
+            Option => $LayoutObject->BuildSelection(
+                Data => {
+                    SystemDefault => $LayoutObject->{LanguageObject}->Translate('System default'),
+                    Top           => 'Top',
+                    TopHover      => 'Top + Hover',
+                    Sidebar       => 'Sidebar',
+                },
+                Name           => 'UserNavLayoutQueue',
+                ID             => 'UserNavLayoutQueue',
+                SelectedID     => $Self->{UserNavLayoutQueue} || 'SystemDefault',
+                Class          => 'Modernize ContextSettingsAJAX',
+                Sort           => 'IndividualKey',
+                SortIndividual => [ 'SystemDefault', 'Top', 'TopHover', 'Sidebar' ],
+                Translation    => 0,
+            ),
+        },
+        {
+            Name   => 'UserNavLayoutQueuePosition',
+            Label  => Translatable('Position'),
+            Option => $LayoutObject->BuildSelection(
+                Data => {
+                    Left  => $LayoutObject->{LanguageObject}->Translate('Left'),
+                    Right => $LayoutObject->{LanguageObject}->Translate('Right'),
+                },
+                Name           => 'UserNavLayoutQueuePosition',
+                ID             => 'UserNavLayoutQueuePosition',
+                SelectedID     => $NavBar{NavLayoutPosition} || 'Left',
+                Class          => 'Modernize ContextSettingsAJAX',
+                Sort           => 'IndividualKey',
+                SortIndividual => [ 'Left', 'Right' ],
+                Translation    => 0,
+            ),
+        },
+    );
+
     # show tickets
-    $Output .= $LayoutObject->TicketListShow(
+    my $TicketList = $LayoutObject->TicketListShow(
         Filter  => $Filter,
         Filters => \%NavBarFilter,
 
-        DataInTheMiddle => $LayoutObject->Output(
-            TemplateFile => 'AgentTicketQueue',
-            Data         => \%NavBar,
-        ),
+        DataInTheMiddle => $DataInTheMiddle,
 
         TicketIDs => \@ViewableTickets,
 
@@ -548,11 +597,25 @@ sub Run {
             QueueID => $Self->{QueueID} || '',
             Filter  => $Filter          || '',
         },
-        UseSubQueues => $UseSubQueues,
+        UseSubQueues          => $UseSubQueues,
+        ContextSettingsFields => \@ContextSettingsFields,
 
         # do not print the result earlier, but return complete content
         Output => 1,
     );
+
+    if ( ( $NavBar{NavLayout} || '' ) eq 'Sidebar' ) {
+        my $CollapsedClass = $NavBar{NavTreeCollapsed}                       ? ' IsCollapsed' : '';
+        my $PositionClass  = ( $NavBar{NavLayoutPosition} || '' ) eq 'Right' ? ' SidebarLast' : ' SidebarFirst';
+        $Output .= '<div class="MainBox ARIARoleMain LayoutFixedSidebar ActionsSideBar NavLayout'
+            . $PositionClass . $CollapsedClass . '">';
+        $Output .= '<div class="SidebarColumn ActionsSideBarComp">' . $QueueWidget . '</div>';
+        $Output .= '<div class="ContentColumn">' . $TicketList . '</div>';
+        $Output .= '</div>';
+    }
+    else {
+        $Output .= $TicketList;
+    }
 
     # get page footer
     $Output .= $LayoutObject->Footer() if $Self->{Subaction} ne 'AJAXFilterUpdate';
@@ -591,12 +654,68 @@ sub _MaskQueueView {
     my $HaveTotals = 0;    # flag for "Total" in index backend
     my %UsedQueue;
     my @ListedQueues;
-    my $Level        = 0;
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-    my $CustomQueues = $ConfigObject->Get('Ticket::CustomQueue') || '???';
-    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $CustomQueue  = $LayoutObject->{LanguageObject}->Translate($CustomQueues);
-    my $Config       = $ConfigObject->Get("Ticket::Frontend::$Self->{Action}");
+    my $Level          = 0;
+    my $ConfigObject   = $Kernel::OM->Get('Kernel::Config');
+    my $CustomQueues   = $ConfigObject->Get('Ticket::CustomQueue') || '???';
+    my $LayoutObject   = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $CustomQueue    = $LayoutObject->{LanguageObject}->Translate($CustomQueues);
+    my $Config         = $ConfigObject->Get("Ticket::Frontend::$Self->{Action}");
+    my %ValidNavLayout = (
+        Top      => 1,
+        TopHover => 1,
+        Sidebar  => 1,
+    );
+
+    my $SystemNavLayout = $Config->{NavLayout} || 'Top';
+    if ( !$ValidNavLayout{$SystemNavLayout} ) {
+        $SystemNavLayout = 'Top';
+    }
+
+    # A saved agent preference overrides the system setting.
+    # SystemDefault and an empty value are not in the allowlist.
+    my $NavLayout     = $SystemNavLayout;
+    my $UserNavLayout = $Self->{UserNavLayoutQueue} || '';
+
+    # Older saves used Side. Keep them and show Sidebar in the dialog.
+    if ( $UserNavLayout eq 'Side' ) {
+        $UserNavLayout = 'Sidebar';
+        $Self->{UserNavLayoutQueue} = 'Sidebar';
+    }
+    if ( $ValidNavLayout{$UserNavLayout} ) {
+        $NavLayout = $UserNavLayout;
+    }
+
+    # Left is the default. A saved Right preference moves the sidebar.
+    my %ValidNavPosition = (
+        Left  => 1,
+        Right => 1,
+    );
+    my $NavLayoutPosition = 'Left';
+    my $UserNavPosition   = $Self->{UserNavLayoutQueuePosition} || '';
+    if ( $ValidNavPosition{$UserNavPosition} ) {
+        $NavLayoutPosition = $UserNavPosition;
+    }
+
+    my $NavTreeState     = $Self->{UserNavLayoutQueueState} || '';
+    my $NavTreeCollapsed = 0;
+    if ($NavTreeState) {
+        my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
+        my $State;
+
+        eval {
+            $State = $JSONObject->Decode(
+                Data => $NavTreeState,
+            );
+        };
+        if ( $@ || ref $State ne 'HASH' ) {
+            $NavTreeState     = '';
+            $NavTreeCollapsed = 0;
+        }
+        elsif ( $State->{collapsed} ) {
+            $NavTreeCollapsed = 1;
+        }
+    }
+
     $Self->{HighlightAge1} = $Config->{HighlightAge1};
     $Self->{HighlightAge2} = $Config->{HighlightAge2};
     $Self->{Blink}         = $Config->{Blink};
@@ -698,7 +817,9 @@ sub _MaskQueueView {
         my $Filter = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'Filter' ) || 'Unlocked';
 
         $QueueStrg
-            .= "<li><a href=\"$LayoutObject->{Baselink}Action=AgentTicketQueue;QueueID=$Queue{QueueID}";
+            .= "<li><a data-item-path=\""
+            . $LayoutObject->Ascii2Html( Text => $Queue{Queue} )
+            . "\" href=\"$LayoutObject->{Baselink}Action=AgentTicketQueue;QueueID=$Queue{QueueID}";
         $QueueStrg .= ';View=' . $LayoutObject->Ascii2Html( Text => $View );
         $QueueStrg .= ';Filter=' . $LayoutObject->Ascii2Html( Text => $Filter );
         if ( $QueueID eq $Queue{QueueID} && $Config->{UseSubQueues} eq $Param{UseSubQueues} ) {
@@ -765,6 +886,9 @@ sub _MaskQueueView {
 
         $QueueStrg .= '</a></li>';
 
+        # Unconditionally collect all queue items for the nav bar (every page load)
+        $Param{AllQueueItems} .= $QueueStrg;
+
         if ( scalar @QueueName eq 1 ) {
             $Param{QueueStrg} .= $QueueStrg;
         }
@@ -792,16 +916,21 @@ sub _MaskQueueView {
         }
 
         $Param{QueueStrgLevel}
-            .= '<ul class="QueueOverviewList Level_' . $Class . '">' . $Param{$Keys} . '</ul>';
+            .= '<ul class="NavOverviewList Level_' . $Class . '">' . $Param{$Keys} . '</ul>';
         $Counter++;
     }
 
     return (
-        MainName        => 'Queues',
-        SelectedQueue   => $Param{SelectedQueue},
-        BreadcrumbQueue => $Param{BreadcrumbQueue},
-        MainContent     => $Param{QueueStrgLevel},
-        Total           => $Param{TicketsShown},
+        MainName          => 'Queues',
+        SelectedQueue     => $Param{SelectedQueue},
+        BreadcrumbQueue   => $Param{BreadcrumbQueue},
+        MainContent       => $Param{QueueStrgLevel},
+        AllQueueItems     => $Param{AllQueueItems},
+        NavLayout         => $NavLayout,
+        NavLayoutPosition => $NavLayoutPosition,
+        NavTreeState      => $NavTreeState,
+        NavTreeCollapsed  => $NavTreeCollapsed,
+        Total             => $Param{TicketsShown},
     );
 }
 

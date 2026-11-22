@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<otrs_stats>
+<znuny_stats>
 <Cache>0</Cache>
 <Description>Ticketliste aller geschlossenen Tickets des letzten Monats geordnet nach der Lösungszeit. Es werden dabei die Tickets zuerst gelistet bei denen die vereinbarte Reaktionszeit überschritten wurde, bzw. beinahe überschritten wurde.
 
@@ -29,4 +29,4 @@ HINWEIS: Bitte prüfen Sie den Output der Statistik und deren Konfiguration sorg
 <UseAsXvalue Element="TicketAttributes" Fixed="1">
 </UseAsXvalue>
 <Valid>1</Valid>
-</otrs_stats>
+</znuny_stats>

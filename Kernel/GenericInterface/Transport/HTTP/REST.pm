@@ -224,12 +224,18 @@ sub ProviderProcessRequest {
     }
 
     my %DataHeaderOverwrite = (
-        HTTP_X_OTRS_HEADER_USERLOGIN         => 'UserLogin',
-        HTTP_X_OTRS_HEADER_CUSTOMERUSERLOGIN => 'CustomerUserLogin',
-        HTTP_X_OTRS_HEADER_SESSIONID         => 'SessionID',
-        HTTP_X_OTRS_HEADER_PASSWORD          => 'Password',
-        HTTP_X_OTRS_HEADER_IMPERSONATEASUSER => 'ImpersonateAsUser',
-        HTTP_X_OTRS_HEADER_TWOFACTORTOKEN    => 'TwoFactorToken',
+        HTTP_X_OTRS_HEADER_USERLOGIN          => 'UserLogin',
+        HTTP_X_OTRS_HEADER_CUSTOMERUSERLOGIN  => 'CustomerUserLogin',
+        HTTP_X_OTRS_HEADER_SESSIONID          => 'SessionID',
+        HTTP_X_OTRS_HEADER_PASSWORD           => 'Password',
+        HTTP_X_OTRS_HEADER_IMPERSONATEASUSER  => 'ImpersonateAsUser',
+        HTTP_X_OTRS_HEADER_TWOFACTORTOKEN     => 'TwoFactorToken',
+        HTTP_X_ZNUNY_HEADER_USERLOGIN         => 'UserLogin',
+        HTTP_X_ZNUNY_HEADER_CUSTOMERUSERLOGIN => 'CustomerUserLogin',
+        HTTP_X_ZNUNY_HEADER_SESSIONID         => 'SessionID',
+        HTTP_X_ZNUNY_HEADER_PASSWORD          => 'Password',
+        HTTP_X_ZNUNY_HEADER_IMPERSONATEASUSER => 'ImpersonateAsUser',
+        HTTP_X_ZNUNY_HEADER_TWOFACTORTOKEN    => 'TwoFactorToken',
     );
 
     HEADER:
@@ -743,7 +749,8 @@ sub RequesterPerformRequest {
 
             for my $X509CertificateKey ( sort keys %{$X509Certificate} ) {
                 my $X509CertificateValue = $X509Certificate->{$X509CertificateKey} // '';
-                $JWTPlaceholderData{ 'OTRS_JWT_Cert' . $X509CertificateKey } = $X509CertificateValue;
+                $JWTPlaceholderData{ 'OTRS_JWT_Cert' . $X509CertificateKey }  = $X509CertificateValue;
+                $JWTPlaceholderData{ 'ZNUNY_JWT_Cert' . $X509CertificateKey } = $X509CertificateValue;
             }
         }
 
@@ -757,10 +764,12 @@ sub RequesterPerformRequest {
             }
         );
         $DateTimeObject->Add( Seconds => $TTL );
-        $JWTPlaceholderData{OTRS_JWT_ExpirationDateTimestamp} = $DateTimeObject->ToEpoch();
-        $JWTPlaceholderData{OTRS_JWT_ExpirationDateString}    = $DateTimeObject->Format(
+        $JWTPlaceholderData{OTRS_JWT_ExpirationDateTimestamp}  = $DateTimeObject->ToEpoch();
+        $JWTPlaceholderData{ZNUNY_JWT_ExpirationDateTimestamp} = $JWTPlaceholderData{OTRS_JWT_ExpirationDateTimestamp};
+        $JWTPlaceholderData{OTRS_JWT_ExpirationDateString}     = $DateTimeObject->Format(
             Format => '%Y-%m-%dT%H:%M:%S %{time_zone_long_name}',
         );
+        $JWTPlaceholderData{ZNUNY_JWT_ExpirationDateString} = $JWTPlaceholderData{OTRS_JWT_ExpirationDateString};
 
         my $Payload              = $Config->{Authentication}->{JWTAuthPayload}              // {};
         my $AdditionalHeaderData = $Config->{Authentication}->{JWTAuthAdditionalHeaderData} // {};
@@ -1084,7 +1093,8 @@ sub RequesterPerformRequest {
                 && IsStringWithData($JWT)
                 )
             {
-                $PlaceholderData{OTRS_JWT} = $JWT;
+                $PlaceholderData{OTRS_JWT}  = $JWT;
+                $PlaceholderData{ZNUNY_JWT} = $JWT;
             }
 
             # OAuth2 token
@@ -1109,7 +1119,8 @@ sub RequesterPerformRequest {
                     };
                 }
 
-                $PlaceholderData{OTRS_OAUTH2_TOKEN} = $OAuth2Token;
+                $PlaceholderData{OTRS_OAUTH2_TOKEN}  = $OAuth2Token;
+                $PlaceholderData{ZNUNY_OAUTH2_TOKEN} = $OAuth2Token;
             }
         }
 
@@ -1124,7 +1135,7 @@ sub RequesterPerformRequest {
             }
 
             # Remove unknown placeholders.
-            $HeaderValue =~ s{<OTRS_.*?>}{}g;
+            $HeaderValue =~ s{<(?:OTRS|ZNUNY)_.*?>}{}g;
 
             $AdditionalHeaders->{$HeaderFieldname} = $HeaderValue;
         }

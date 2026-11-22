@@ -3,7 +3,7 @@ Debugger:
   DebugThreshold: debug
   TestMode: '0'
 Description: ''
-FrameworkVersion: 7.3.6
+FrameworkVersion: 7.5.1
 Provider:
   Transport:
     Type: ''
@@ -72,7 +72,7 @@ Requester:
                                     <actions>
                                         <type>Action.OpenUrl</type>
                                         <title>View ticket in Znuny</title>
-                                        <url>&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;/index.pl?Action=AgentTicketZoom;TicketID=<xsl:value-of select="//Ticket/TicketID"/></url>
+                                        <url>&lt;ZNUNY_CONFIG_HttpType&gt;://&lt;ZNUNY_CONFIG_FQDN&gt;/&lt;ZNUNY_CONFIG_ScriptAlias&gt;/index.pl?Action=AgentTicketZoom;TicketID=<xsl:value-of select="//Ticket/TicketID"/></url>
                                     </actions>
                                 </body>
                             </content>

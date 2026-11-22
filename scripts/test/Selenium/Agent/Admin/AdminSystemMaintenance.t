@@ -41,7 +41,7 @@ $Selenium->RunTest(
         # Make sure system is based on UTC.
         $HelperObject->ConfigSettingChange(
             Valid => 1,
-            Key   => 'OTRSTimeZone',
+            Key   => 'ZnunyTimeZone',
             Value => 'UTC',
         );
 

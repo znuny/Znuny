@@ -12,6 +12,7 @@ package Kernel::Modules::AgentTicketAttachment;
 
 use strict;
 use warnings;
+use utf8;
 
 our $ObjectManagerDisabled = 1;
 
@@ -90,10 +91,30 @@ sub Run {
         return $LayoutObject->ErrorScreen();
     }
 
-    my $Viewers = $ParamObject->GetParam( Param => 'Viewer' ) || 0;
+    my $Viewers = $ParamObject->GetParam( Param => 'Viewer' )  || 0;
+    my $Preview = $ParamObject->GetParam( Param => 'Preview' ) || 0;
 
     # get config object
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    if ($Preview) {
+        my $AttachmentPreviewObject = $Kernel::OM->Get('Kernel::System::AttachmentPreview');
+        if ( !$AttachmentPreviewObject->IsPreviewable(%Data) ) {
+            $LogObject->Error("Attachment ($FileID) cannot be previewed.");
+            return $LayoutObject->ErrorScreen();
+        }
+
+        my %PreviewData = (
+            %Data,
+            Type    => 'inline',
+            Sandbox => 1,
+        );
+        if ( $AttachmentPreviewObject->IsPDF(%Data) ) {
+            $PreviewData{ContentType} = 'application/pdf';
+        }
+
+        return $LayoutObject->Attachment(%PreviewData);
+    }
 
     # find viewer for ContentType
     my $Viewer = '';

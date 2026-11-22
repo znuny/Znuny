@@ -21,6 +21,8 @@
                 <Item>Znuny.Form.Input.js</Item>
                 <Item>Znuny.Form.Generic.js</Item>
                 <Item>Znuny.DynamicField.Webservice.js</Item>
+                <Item>thirdparty/featherlight-1.7.14/featherlight.min.js</Item>
+                <Item>thirdparty/featherlight-1.7.14/featherlight.gallery.min.js</Item>
             </Array>
         </Value>
     </Setting>
@@ -32,6 +34,8 @@
                 <Item>Znuny.Form.Input.js</Item>
                 <Item>Znuny.Form.Generic.js</Item>
                 <Item>Znuny.DynamicField.Webservice.js</Item>
+                <Item>thirdparty/featherlight-1.7.14/featherlight.min.js</Item>
+                <Item>thirdparty/featherlight-1.7.14/featherlight.gallery.min.js</Item>
             </Array>
         </Value>
     </Setting>
@@ -42,6 +46,9 @@
         <Value>
             <Array>
                 <Item>Core.LastViews.css</Item>
+                <Item>thirdparty/featherlight-1.7.14/featherlight.min.css</Item>
+                <Item>thirdparty/featherlight-1.7.14/featherlight.gallery.min.css</Item>
+                <Item>Core.UI.AttachmentPreview.css</Item>
             </Array>
         </Value>
     </Setting>
@@ -51,6 +58,9 @@
         <Value>
             <Array>
                 <Item>Core.LastViews.css</Item>
+                <Item>thirdparty/featherlight-1.7.14/featherlight.min.css</Item>
+                <Item>thirdparty/featherlight-1.7.14/featherlight.gallery.min.css</Item>
+                <Item>Core.UI.AttachmentPreview.css</Item>
             </Array>
         </Value>
     </Setting>
@@ -304,6 +314,9 @@
                 <Item Key="Target"></Item>
                 <Item Key="PopupType"></Item>
                 <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
+                <Item Key="ClusterNameVisible">1</Item>
+                <!-- <Item Key="ClusterIcon">fa fa-ellipsis-h</Item> -->
+                <Item Key="ClusterIcon"></Item>
                 <Item Key="ClusterPriority">998</Item>
                 <Item Key="Prio">999</Item>
             </Hash>
@@ -323,6 +336,9 @@
                 <Item Key="Target"></Item>
                 <Item Key="PopupType"></Item>
                 <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
+                <Item Key="ClusterNameVisible">1</Item>
+                <!-- <Item Key="ClusterIcon">fa fa-ellipsis-h</Item> -->
+                <Item Key="ClusterIcon"></Item>
                 <Item Key="ClusterPriority">999</Item>
                 <Item Key="Prio">999</Item>
             </Hash>
@@ -3829,14 +3845,15 @@
         <Navigation>Frontend::Agent::View::TicketZoom::MenuModule</Navigation>
         <Value>
             <Hash>
-                <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
-                <Item Key="Name" Translatable="1">Mark as unseen</Item>
+                <Item Key="Module">Kernel::Output::HTML::TicketMenu::MarkSeenUnseen</Item>
+                <Item Key="Name" Translatable="1"></Item>
+                <Item Key="Icon">fa fa-star</Item>
                 <Item Key="Description" Translatable="1">Mark ticket as unseen</Item>
                 <Item Key="Action">AgentTicketMarkSeenUnseen</Item>
                 <Item Key="Link">Action=AgentTicketMarkSeenUnseen;Subaction=Unseen;TicketID=[% Data.TicketID | html %]</Item>
                 <Item Key="Target"></Item>
                 <Item Key="PopupType"></Item>
-                <Item Key="Prio">001</Item>
+                <Item Key="Prio">101</Item>
             </Hash>
         </Value>
     </Setting>
@@ -3845,14 +3862,15 @@
         <Navigation>Frontend::Agent::View::TicketZoom::MenuModule</Navigation>
         <Value>
             <Hash>
-                <Item Key="Module">Kernel::Output::HTML::TicketMenu::Generic</Item>
-                <Item Key="Name" Translatable="1">Mark as seen</Item>
+                <Item Key="Module">Kernel::Output::HTML::TicketMenu::MarkSeenUnseen</Item>
+                <Item Key="Name" Translatable="1"></Item>
+                <Item Key="Icon">fa fa-star-o</Item>
                 <Item Key="Description" Translatable="1">Mark ticket as seen</Item>
                 <Item Key="Action">AgentTicketMarkSeenUnseen</Item>
                 <Item Key="Link">Action=AgentTicketMarkSeenUnseen;Subaction=Seen;TicketID=[% Data.TicketID | html %]</Item>
                 <Item Key="Target"></Item>
                 <Item Key="PopupType"></Item>
-                <Item Key="Prio">002</Item>
+                <Item Key="Prio">102</Item>
             </Hash>
         </Value>
     </Setting>
@@ -4109,6 +4127,12 @@
                 <Item>\AUserToolBar\z</Item>
                 <Item>\AUserToolBarSearchBackend\z</Item>
                 <Item>\AUserNavBarItemsOrder\z</Item>
+                <Item>\AUserNavLayoutQueue\z</Item>
+                <Item>\AUserNavLayoutQueuePosition\z</Item>
+                <Item>\AUserNavLayoutQueueState\z</Item>
+                <Item>\AUserNavLayoutService\z</Item>
+                <Item>\AUserNavLayoutServicePosition\z</Item>
+                <Item>\AUserNavLayoutServiceState\z</Item>
                 <Item>\ATicketProcessCategoryFavourites\z</Item>
 
                 <!-- Core.Agent.Admin.SystemConfiguration.Init, sidebar action widget toggle -->
@@ -4551,13 +4575,11 @@
                 <Item Key="image/gif">gif</Item>
                 <Item Key="image/jpeg">jpeg</Item>
                 <Item Key="image/png">png</Item>
-                <Item Key="image/svg+xml">svg</Item>
-                <Item Key="text/css">css</Item>
-                <Item Key="text/html">html</Item>
+                <Item Key="image/bmp">bmp</Item>
+                <Item Key="image/webp">webp</Item>
                 <Item Key="text/markdown">markdown</Item>
                 <Item Key="text/plain">plain</Item>
                 <Item Key="text/x-sh">sh</Item>
-                <Item Key="text/xml">xml</Item>
             </Hash>
         </Value>
     </Setting>
@@ -4684,6 +4706,72 @@
             <Array>
                 <Item>\AUserClosedNotifications\z</Item>
             </Array>
+        </Value>
+    </Setting>
+
+    <Setting Name="ArticleZoomPDFPreview###Width" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
+        <Description Translatable="1">Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).</Description>
+        <Navigation>Core::Znuny::ZoomArticlePDFPreview</Navigation>
+        <Value>
+            <Item ValueType="String">100%</Item>
+        </Value>
+    </Setting>
+    <Setting Name="ArticleZoomPDFPreview###Height" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
+        <Description Translatable="1">Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).</Description>
+        <Navigation>Core::Znuny::ZoomArticlePDFPreview</Navigation>
+        <Value>
+            <Item ValueType="String">500px</Item>
+        </Value>
+    </Setting>
+    <Setting Name="ArticleZoomPDFPreview###TicketAttributes###ActivatePreview" Required="0" Valid="1">
+        <Description Translatable="1">Defines the required ticket attributes to activate the preview. The following ticket attributes are supported: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.</Description>
+        <Navigation>Core::Znuny::ZoomArticlePDFPreview</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem>
+                    <Array>
+                    </Array>
+                </DefaultItem>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="ArticleZoomPDFPreview###TicketAttributes###ShowFirstPreview" Required="0" Valid="1">
+        <Description Translatable="1">Defines the required ticket attributes to activate showing the first preview for the first PDF. The following ticket attributes are supported: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.</Description>
+        <Navigation>Core::Znuny::ZoomArticlePDFPreview</Navigation>
+        <Value>
+            <Hash>
+                <DefaultItem>
+                    <Array>
+                    </Array>
+                </DefaultItem>
+            </Hash>
+        </Value>
+    </Setting>
+
+    <Setting Name="Loader::Module::AgentTicketZoom###003-ZoomArticlePDFPreview" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Agent::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.ArticleZoomPDFPreview.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.ArticleZoomPDFPreview.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <!-- TemplateGenerator -->
+    <Setting Name="TemplateGenerator::EmptyValueReplacement" Required="1" Valid="1">
+        <Description Translatable="1">What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder.</Description>
+        <Navigation>Core::Ticket::Templates</Navigation>
+        <Value>
+            <Item ValueType="String">-</Item>
         </Value>
     </Setting>
 </otrs_config>

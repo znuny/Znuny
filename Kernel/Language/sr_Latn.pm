@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.85582431572247;
+    $Self->{Completeness}        = 0.850750988142292;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1687,6 +1687,8 @@ sub Data {
             'Za kreiranje novog procesa možete ili uvesti proces koji je izvezen iz drugog sistema ili kreirati kompletno nov.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'Promene u procesima jedino utiču na ponašanje sistema, ako sinhronizujete podatke procesa. Sinhronizovanjem procesa, novonapravljene promene će biti upisane u konfiguraciju.',
+        'Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.' =>
+            'Kopiranje duplira samo proces i zadržava reference na originalne elemente. Kloniranje stvara nezavisnu neaktivnu kopiju. Svaki sadržani element dobija novi interni ID, a originalni proces ostaje nepromenjen.',
         'Access Control Lists (ACL)' => 'Liste za kontrolu pristupa (ACL)',
         'Generic Agent' => '',
         'Manage Process Widget Groups' => '',
@@ -1695,6 +1697,7 @@ sub Data {
         'Print' => 'Štampaj',
         'Export Process Configuration' => 'Izvezi konfiguraciju procesa',
         'Copy Process' => 'Kopiraj proces',
+        'Clone Process' => 'Kloniraj proces',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Please note, that changing this activity will affect the following processes' =>
@@ -1733,6 +1736,8 @@ sub Data {
         'Required Lock' => 'Obavezno zaključaj',
         'The selected required lock does not exist.' => 'Odabrano zahtevano zaključavanje ne postoji.',
         'This field is required for activitiy dialogs with a scope.' => '',
+        'One-click execution' => 'Izvršavanje jednim klikom',
+        'Skip the activity dialog popup and submit immediately.' => 'Preskoči iskačući prozor dijaloga aktivnosti i odmah pošalji.',
         'Submit Advice Text' => 'Pošalji tekst saveta',
         'Submit Button Text' => 'Pošalji tekst dugmeta',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1745,6 +1750,13 @@ sub Data {
         'Text Template' => 'Šablon teksta',
         'Auto fill' => '',
         'Display' => 'Prikaži',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+        'Please enter a name for the cloned process. The original process stays unchanged.' =>
+            'Unesite naziv kloniranog procesa. Originalni proces ostaje nepromenjen.',
+        'Process Name' => 'Naziv procesa',
+        'Please enter a name for the cloned element. The original element stays unchanged.' =>
+            'Unesite naziv kloniranog elementa. Originalni element ostaje nepromenjen.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => 'Putanja',
@@ -1785,7 +1797,6 @@ sub Data {
             'Aktivnost može biti dodeljena tranziciji prevlačenjem elementa aktivnosti na oznaku tranzicije.',
         'Edit Process' => 'Uredi proces',
         'Edit Process Information' => 'Uredi informacije o procesu',
-        'Process Name' => 'Naziv procesa',
         'The selected state does not exist.' => 'Odabrani status ne postoji.',
         'Process Preferences' => '',
         'Add and Edit Activities, Activity Dialogs and Transitions' => 'Dodaj i uredi aktivosti, dijaloge aktivnosti i tranzicije',
@@ -2691,6 +2702,15 @@ sub Data {
         'Solution Time' => 'Vreme rešavanja',
         'Accounted time' => 'Obračunato vreme',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketAttachmentList.tt
+        'Download attachments of %s%s%s' => '',
+        'Start typing to filter...' => '',
+        'Filter attachments...' => '',
+        'Hide all inline attachments' => '',
+        'Preview' => '',
+        'This ticket does not have any attachments.' => '',
+        'Download as ZIP file' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
         'Bounce to' => 'Preusmeri na',
         'You need a email address.' => 'Potrebna vam je imejl adresa.',
@@ -2752,7 +2772,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => 'Istorijat od %s%s%s',
-        'Start typing to filter...' => '',
         'Filter for history items' => 'Filter za stavke istorijata',
         'Expand/Collapse all' => '',
         'CreateTime' => 'Vreme kreiranja',
@@ -2865,6 +2884,7 @@ sub Data {
         'Save filter settings as default' => 'Sačuvaj podešavanja filtera kao podrazumevana',
         'Event Type' => 'Tip događaja',
         'Save as default' => 'Sačuvaj kao podrazumevano',
+        'Back' => 'Nazad',
         'Change Queue' => 'Promeni Red',
         'Add Filter' => 'Dodaj Filter',
         'Set' => 'Podesi',
@@ -2909,6 +2929,12 @@ sub Data {
         'PDF' => 'PDF',
         'View' => 'Pregled',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/Attachments.tt
+        'Ticket attachments' => '',
+        'Download as ZIP archive' => '',
+        'All attachments' => '',
+        'Selected attachments' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
         'Linked Objects' => 'Povezani objekti',
 
@@ -2923,9 +2949,15 @@ sub Data {
         'To protect your privacy, remote content was blocked.' => 'Da biste zaštitili svoju privatnost, udaljeni sadržaj je blokiran.',
         'Load blocked content.' => 'Učitaj blokirani sadržaj.',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AttachmentList.tt
+        'Show more' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Attachments.tt
+        'Add attachments of other articles' => '',
+        'Select all attachments' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => 'Početna',
-        'Back' => 'Nazad',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -3056,7 +3088,6 @@ sub Data {
         'Ticket fields' => 'Polja tiketa',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
-        'Preview' => '',
         'Click to preview this file.' => '',
         'Click to download this file.' => '',
         'Click to delete this attachment.' => 'Kliknite ovde da obrišete prilog.',
@@ -3525,6 +3556,8 @@ sub Data {
         '%s is missing. The file could not be downloaded properly.' => '',
         'Please contact the administrator.' => 'Molimo kontaktirajte administratora!',
         '%s is missing. The file could not be previewed properly.' => '',
+        'The file could not be previewed properly.' => '',
+        'This file cannot be previewed.' => '',
         '%s is missing. The file could not be deleted properly.' => '',
 
         # Perl Module: Kernel/Modules/AdminACL.pm
@@ -4503,6 +4536,9 @@ sub Data {
         'Available tickets' => 'Slobodni tiketi',
         'including subqueues' => 'uključujući podredove',
         'excluding subqueues' => 'isključujući podredove',
+        'System default' => '',
+        'Position' => '',
+        'Right' => 'Desno',
         'Queue View' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
@@ -4691,7 +4727,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => '',
-        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Označeno',
@@ -5299,13 +5334,6 @@ sub Data {
         'Perl Modules' => 'Perl moduli',
         'Not all required Perl modules are correctly installed.' => 'Svi zahtevani Perl moduli nisu korektno instalirani.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-        'Perl Modules Audit' => 'Sigurnosna provera Perl modula',
-        'CPAN::Audit reported that one or more installed Perl modules have known vulnerabilities. Please note that there might be false positives for distributions patching Perl modules without changing their version number.' =>
-            'CPAN::Audit je detektovao jedan ili više ranjivih Perl modula instaliranih na sistemu. Molimo obratite pažnju da su mogući lažno pozitivni rezultati za distribucije koje osvežavaju Perl module bez promene njihove verzije.',
-        'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
-            'CPAN::Audit nije detektovao ranjive Perl module instalirane na sistemu.',
-
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
         'Perl Version' => 'Perl verzija',
 
@@ -5538,11 +5566,12 @@ sub Data {
         'Disabled' => 'Onemogućen',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/Date.pm
-        'System was not able to calculate user Date in OTRSTimeZone!' => 'Sistem nije uspeo da izračuna korisnički Date u OTRSTimeZone!',
+        'System was not able to calculate user Date in ZnunyTimeZone!' =>
+            '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/DateTime.pm
-        'System was not able to calculate user DateTime in OTRSTimeZone!' =>
-            'Sistem nije uspeo da izračuna korisnički DateTime u OTRSTimeZone!',
+        'System was not able to calculate user DateTime in ZnunyTimeZone!' =>
+            '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/FrontendNavigation.pm
         'Value is not correct! Please, consider updating this module.' =>
@@ -5723,7 +5752,7 @@ sub Data {
         'Remove closed tickets from agents\' ticket watch lists.' => '',
 
         # XML Definition: Kernel/Config/Files/XML/Framework.xml
-        'Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
+        'Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If not enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
             'Onemogućuje pristup instalacionom ekranu (http://yourhost.example.com/znuny/installer.pl) u svrhu zaštite sistema od nedozvoljenog preuzimanja. Ako je isključeno, sistem može biti ponovo instaliran i trenutna osnovna konfiguracija će biti korišćena da unapred popuni pitanja unutar instalacionog ekrana. Ukoliko nije uključeno, takođe se onemogućuju GenericAgent, PackageManager i SQL Box.',
         'Enables or disables the debug mode over frontend interface.' => 'Uključuje ili isključuje mod traženja grešaka preko pristupnog interfejsa.',
         'Delivers extended debugging information in the frontend in case any AJAX errors occur, if enabled.' =>
@@ -5977,13 +6006,13 @@ sub Data {
             'Definiše vremenski period (u minutima) posle kog će operater biti označen kao "odsutan" zbog neaktivnosti (npr. u dodatku "Prijavljeni korisnici" ili za ćaskanja).',
         'Defines the period of time (in minutes) before customer is marked as "away" due to inactivity (e.g. in the "Logged-In Users" widget or for the chat).' =>
             'Definiše vremenski period (u minutima) posle kog će klijent biti označen kao "odsutan" zbog neaktivnosti (npr. u dodatku "Prijavljeni korisnici" ili za ćaskanja).',
-        'This setting is deprecated. Set OTRSTimeZone instead.' => 'Ovo podešavanje je zastarelo. Podesite OTRSTimeZone umesto njega.',
+        'This setting is deprecated. Set ZnunyTimeZone instead.' => '',
         'Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.' =>
             'Podešava internu vremensku zonu Znuny za npr. čuvanje datuma i vremena u bazi podataka. Upozorenje: ovo podešavanje ne smete menjati jednom kada ga podesite i ako su kreirani tiketi ili bilo koji drugi podaci sa vremenom.',
         'Sets the time zone that will be assigned to newly created users and will be used for users that haven\'t yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user\'s time zone.' =>
             'Podešava vremensku zonu koja će biti dodeljena novo-kreiranim korisnicima i koja će biti korišćena za one koji još nisu podesili vremensku zonu. Ovo je podrazumevana vremenska zona za konverziju datuma i vremena između interne Znuny vremenske zone i vremenske zone korisnika.',
-        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
-            'Ukoliko je uključeno, korisnici koji još nisu odabrali vremensku zonu biće obavešteni o tome. Napomena: obaveštenje neće biti prikazano ukoliko (1) korisnik još nije odabrao vremensku zonu i (2) OTRSTimeZone i UserDefaultTimeZone se podudaraju i (3) nisu postavljena na UTC.',
+        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) ZnunyTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
+            '',
         'Maximum Number of a calendar shown in a dropdown.' => 'Maksimalni broj kalendara prikazan u listi.',
         'Define the start day of the week for the date picker.' => 'Definiši prvi dan u nedelji za izbor datuma.',
         'Adds the permanent vacation days.' => 'Trajno dodaje neradne dane.',
@@ -6426,6 +6455,24 @@ sub Data {
             'Definiše prikazane kolone i njihov redosled u ekranu rezultata pretrage adresara klijent korisnika.',
         'Example package autoload configuration.' => 'Primer automatskog učitavanja paketne konfiguracije.',
         'Activates week number for datepickers.' => '',
+        'If this configuration is deactivated, all duplicate files are removed from the selection lists.' =>
+            '',
+        'If enabled, a preview overlay is available for article attachments (images, PDFs and other permitted types).' =>
+            '',
+        'Disables the widgets when the number of article in the ticket is reached.' =>
+            '',
+        'Disables the widgets when the number of attachments in the ticket is reached.' =>
+            '',
+        'Number of a attachments shown by default.' => '',
+        'Number of a attachments shown in AgentTicketZoom.' => '',
+        'AgentTicketZoom widget which provides all attachments of the ticket for download.' =>
+            '',
+        'Shows a link to preview article attachments in the zoom view of the article in the agent interface.' =>
+            '',
+        'Agent ticket dialogs that show a selection to reuse attachments of other articles of the ticket.' =>
+            '',
+        'Shows a link in the menu to select and download all attachments of the ticket.' =>
+            '',
 
         # XML Definition: Kernel/Config/Files/XML/GenericInterface.xml
         'Performs the configured action for each event (as an Invoker) for each configured web service.' =>
@@ -6578,6 +6625,8 @@ sub Data {
         'Updates the ticket index accelerator.' => 'Ažuriraj akcelerator indeksa tiketa.',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             'Resetuje i otključava vlasnika ako je tiketa premešten u drugi red.',
+        'Resets the responsible of a ticket if it was moved to another queue.' =>
+            'Resetuje odgovornog za tiket ako je tiket premešten u drugi red.',
         'Forces to choose a different ticket state (from current) after lock action. Define the current state as key, and the next state after lock action as content.' =>
             'Nameće izbor različitog stanja tiketa (od aktuelnog) posle akcije zaključavanja. Definiše aktuelno stanje kao ključ, a sledeće stanje posle zaključavanja kao sadržaj.',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>
@@ -6716,6 +6765,8 @@ sub Data {
             'Aktivira mehanizam treptanja reda koji sarži najstariji tiket.',
         'Include tickets of subqueues per default when selecting a queue.' =>
             'Kod izbora reda, podrazumevano uključi i tikete podredova.',
+        'Defines the queue navigation in the queue view. Top shows one queue level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            '',
         'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the queue view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the QueueID for the key and 0 or 1 for value.' =>
             'Sortiranje tiketa (rastuće ili opadajuće) kada se izabere jedan red iz pregleda redova posle sortiranja tiketa po prioritetu. Vrednosti: 0 = rastuće (najstarije na vrhu, podrazumevano), 1 = opadajuće (najnovije na vrhu). Koristi ID reda za ključ i 0 ili 1 za vrednost.',
         'Defines the default sort criteria for all queues displayed in the queue view.' =>
@@ -6741,6 +6792,8 @@ sub Data {
         'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
             '',
         'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
+        'Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
             '',
         'Activates time accounting.' => 'Aktivira merenje vremena.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
@@ -8183,6 +8236,16 @@ sub Data {
             '',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             '',
+        'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
+            '',
+        'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
+            '',
+        'Defines the required ticket attributes to activate the preview. The following ticket attributes are supported: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.' =>
+            '',
+        'Defines the required ticket attributes to activate showing the first preview for the first PDF. The following ticket attributes are supported: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.' =>
+            '',
+        'What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder.' =>
+            'Čime zameniti nedefinisanu vrednost pri umetanju u šablon pomoću rezervisanog mesta ZNUNY_.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'nevažeći-privremeno',
@@ -8531,6 +8594,10 @@ sub Data {
         'Are you sure you want to delete this appointment? This operation cannot be undone.' =>
             'Da li ste sigurni da želite da izbrišete ovaj termin? Ovu operaciju nije moguće opozvati.',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Attachments.js
+        'Please select attachments for download.' => '',
+        'Show less' => '',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
         'Copied to clipboard!' => '',
 
@@ -8656,6 +8723,10 @@ sub Data {
         'Filters' => 'Filteri',
         'Clear search' => 'Očisti pretragu',
 
+        # JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+        'Collapse' => 'Smanji',
+        'Expand' => 'Proširi',
+
         # JS File: var/httpd/htdocs/js/Core.UI.Popup.js
         'If you now leave this page, all open popup windows will be closed, too!' =>
             'Ako napustite ovu stranicu, svi otvoreni prozori će biti zatvoreni!',
@@ -8695,10 +8766,9 @@ sub Data {
         'No space left for the following files: %s' => 'Za sledeće datoteke nema više mesta: %s',
         'Available space %s of %s.' => 'Raspoloživ prostor %s od %s.',
         'Upload information' => 'Informacije o otpremanju',
-        'An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator.' =>
-            '',
         'An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator.' =>
             'Dogodila se nepoznata greška prilikom brisanja priloga. Molimo pokušajte ponovo. Ako se greška ponovo, molimo kontaktirajte vašeg administratora.',
+        '%s of %s' => '',
 
         # JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
         'This is %s' => 'Ovo je %s',
@@ -9153,6 +9223,7 @@ Vaša tehnička podrška
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'Označi kao Spam!',
         'Mark as seen' => '',
+        'Mark as unseen' => '',
         'Mark this ticket as junk!' => 'Označi ovaj tiket kao besmislen junk!',
         'Mark ticket as seen' => '',
         'Mark ticket as unseen' => '',
@@ -9262,7 +9333,6 @@ Vaša tehnička podrška
         'Resent email to "%s".' => 'Ponovo poslat imejl na "%s".',
         'Responsible Tickets' => 'Odgovorni tiketi',
         'Responsible Tickets.' => 'Odgovorni tiketi.',
-        'Right' => 'Desno',
         'Romanian' => 'Rumunski',
         'Running Process Tickets' => 'Aktivni proces tiketi',
         'Russian' => 'Ruski',
@@ -9497,6 +9567,7 @@ Vaša tehnička podrška
         '%s KB',
         '%s MB',
         '%s TB',
+        '%s of %s',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9520,7 +9591,6 @@ Vaša tehnička podrška
         'An item with this name is already present.',
         'An unconnected transition is already placed on the canvas. Please connect this transition first before placing another transition.',
         'An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator.',
-        'An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator.',
         'An unknown error occurred. Please contact the administrator.',
         'Apply',
         'Appointment',
@@ -9553,9 +9623,12 @@ Vaša tehnička podrška
         'Click to download this file.',
         'Click to preview this file.',
         'Click to select a file for upload.',
+        'Clone',
+        'Clone Process',
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Collapse',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9623,6 +9696,7 @@ Vaša tehnička podrška
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',
         'Don\'t save, update manually',
+        'Download',
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
@@ -9637,10 +9711,12 @@ Vaša tehnička podrška
         'Error in the mail settings. Please correct and try again.',
         'Error: Browser Check failed!',
         'Event Type Filter',
+        'Expand',
         'Expanded',
         'Favourites',
         'Feb',
         'February',
+        'Filter',
         'Filters',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
@@ -9723,6 +9799,7 @@ Vaša tehnička podrška
         'Please only select one file for upload.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
         'Preparing to deploy, please wait...',
@@ -9777,6 +9854,8 @@ Vaša tehnička podrška
         'Show',
         'Show EntityIDs',
         'Show current selection',
+        'Show less',
+        'Show more',
         'Show or hide the content.',
         'Slide the navigation bar',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',
@@ -9845,6 +9924,7 @@ Vaša tehnička podrška
         'Timeline Week',
         'Title',
         'Today',
+        'Toggle sidebar',
         'Too many active calendars',
         'Try again',
         'Tu',

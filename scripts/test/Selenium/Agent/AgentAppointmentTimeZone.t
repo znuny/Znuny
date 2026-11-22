@@ -30,7 +30,7 @@ $Selenium->RunTest(
         # Make sure system is based on UTC.
         $HelperObject->ConfigSettingChange(
             Valid => 1,
-            Key   => 'OTRSTimeZone',
+            Key   => 'ZnunyTimeZone',
             Value => 'UTC',
         );
         $HelperObject->ConfigSettingChange(
@@ -87,14 +87,18 @@ $Selenium->RunTest(
                 'return typeof($) === "function" && $(".fc-timelineWeek-view .fc-slats td.fc-widget-content:nth-child(5)").length;'
         );
 
-        # Hide indicator line if visible. This was causing issue in some of tests in specific execution time.
-        if ( $Selenium->execute_script("return \$('.fc-now-indicator.fc-now-indicator-line:visible').length;") ) {
-            $Selenium->execute_script("\$('.fc-now-indicator.fc-now-indicator-line').hide();");
-            $Selenium->WaitFor(
-                JavaScript =>
-                    'return typeof($) === "function" &&  $(".fc-now-indicator.fc-now-indicator-line:visible").length === 0;'
-            );
-        }
+        # The now indicator overlaps the timeline cell at some times of day.
+        # FullCalendar redraws it, so a one-shot hide() does not stick.
+        $Selenium->execute_script(
+            "if (!\$('#ZnunyTestHideNowIndicator').length) {"
+                . " \$('<style id=\"ZnunyTestHideNowIndicator\">"
+                . ".fc-now-indicator{display:none !important}</style>').appendTo('head');"
+                . " }"
+        );
+        $Selenium->WaitFor(
+            JavaScript =>
+                'return typeof($) === "function" && $(".fc-now-indicator.fc-now-indicator-line:visible").length === 0;'
+        );
 
         # Click on the timeline view for an appointment dialog.
         $Selenium->find_element( '.fc-timelineWeek-view .fc-slats td.fc-widget-content:nth-child(5)', 'css' )->click();

@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.593252705283259;
+    $Self->{Completeness}        = 0.59098814229249;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1687,6 +1687,8 @@ sub Data {
             'برای ایجاد یک فرایند جدید شما هم می توانید یک فرایند است که از یک سیستم دیگر صادر شد وارد و یا ایجاد یک جدید کامل.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'تغییرات در فرایندهای اینجا تنها رفتار سیستم را تحت تاثیر قرار، اگر شما داده های فرایند همگام سازی. با هماهنگ سازی فرآیندها، تغییرات تازه ساخته شده را به پیکربندی نوشته شده است.',
+        'Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.' =>
+            'کپی فقط فرایند را تکرار می‌کند و ارجاع‌ها به عنصرهای اصلی را نگه می‌دارد. کلون یک نسخهٔ مستقل غیرفعال می‌سازد. هر عنصر موجود شناسهٔ داخلی جدیدی می‌گیرد و فرایند اصلی بدون تغییر می‌ماند.',
         'Access Control Lists (ACL)' => 'فهرست سطخ دسترسی (ACL)',
         'Generic Agent' => '',
         'Manage Process Widget Groups' => '',
@@ -1695,6 +1697,7 @@ sub Data {
         'Print' => 'چاپ',
         'Export Process Configuration' => 'استخراج پیکربندی فرایند',
         'Copy Process' => 'فرایند کپی',
+        'Clone Process' => 'کلون فرایند',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Please note, that changing this activity will affect the following processes' =>
@@ -1733,6 +1736,8 @@ sub Data {
         'Required Lock' => 'قفل مورد نیاز',
         'The selected required lock does not exist.' => 'انتخاب قفل مورد نیاز وجود ندارد.',
         'This field is required for activitiy dialogs with a scope.' => '',
+        'One-click execution' => 'اجرا با یک کلیک',
+        'Skip the activity dialog popup and submit immediately.' => 'رد کردن پنجره‌ی بازشوی گفتگوی فعالیت و ارسال فوری.',
         'Submit Advice Text' => 'ارسال مشاوره متن',
         'Submit Button Text' => 'ارایه دادن دکمه متن',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1745,6 +1750,13 @@ sub Data {
         'Text Template' => 'قالب متن',
         'Auto fill' => '',
         'Display' => 'نمایش',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+        'Please enter a name for the cloned process. The original process stays unchanged.' =>
+            'لطفاً نامی برای فرایند کلون‌شده وارد کنید. فرایند اصلی بدون تغییر می‌ماند.',
+        'Process Name' => 'نام پردازش',
+        'Please enter a name for the cloned element. The original element stays unchanged.' =>
+            'لطفاً نامی برای عنصر کلون‌شده وارد کنید. عنصر اصلی بدون تغییر می‌ماند.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => 'PATH, 1998',
@@ -1785,7 +1797,6 @@ sub Data {
             'اقدامات را می توان به انتقال با حذف اقدام عنصر بر روی برچسب از یک انتقال داده می شود.',
         'Edit Process' => 'ویرایش فرآیند',
         'Edit Process Information' => 'ویرایش اطلاعات فرآیند',
-        'Process Name' => 'نام پردازش',
         'The selected state does not exist.' => 'وضعیت انتخاب شده وجود ندارد.',
         'Process Preferences' => '',
         'Add and Edit Activities, Activity Dialogs and Transitions' => 'اضافه کردن و ویرایش فعالیت، تبادل و انتقال فعالیت',
@@ -2691,6 +2702,15 @@ sub Data {
         'Solution Time' => 'زمان ارائه راهکار',
         'Accounted time' => 'زمان محاسبه شده',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketAttachmentList.tt
+        'Download attachments of %s%s%s' => '',
+        'Start typing to filter...' => '',
+        'Filter attachments...' => '',
+        'Hide all inline attachments' => '',
+        'Preview' => '',
+        'This ticket does not have any attachments.' => '',
+        'Download as ZIP file' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
         'Bounce to' => 'ارجاع شده به',
         'You need a email address.' => 'به یک آدرس ایمیل نیاز دارید',
@@ -2752,7 +2772,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => 'تاریخ %s %s %s',
-        'Start typing to filter...' => '',
         'Filter for history items' => '',
         'Expand/Collapse all' => '',
         'CreateTime' => 'زمان ساختن',
@@ -2865,6 +2884,7 @@ sub Data {
         'Save filter settings as default' => 'ذخیره تنظیمات فیلتر به عنوان تنظیمات پیش فرض',
         'Event Type' => 'نوع رویداد',
         'Save as default' => 'ذخیره به عنوان پیش فرض',
+        'Back' => 'بازگشت',
         'Change Queue' => 'تغییر صف درخواست',
         'Add Filter' => 'افزودن فیلتر',
         'Set' => 'ثبت',
@@ -2909,6 +2929,12 @@ sub Data {
         'PDF' => '',
         'View' => 'نمایش',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/Attachments.tt
+        'Ticket attachments' => '',
+        'Download as ZIP archive' => '',
+        'All attachments' => '',
+        'Selected attachments' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
         'Linked Objects' => 'آبجکت‌های مرتبط شده',
 
@@ -2923,9 +2949,15 @@ sub Data {
         'To protect your privacy, remote content was blocked.' => 'برای محافظت از حریم خصوصی شما، محتوای راه دور متوقف شد.',
         'Load blocked content.' => 'بارگذاری محتوای مسدود شده.',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AttachmentList.tt
+        'Show more' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Attachments.tt
+        'Add attachments of other articles' => '',
+        'Select all attachments' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => '',
-        'Back' => 'بازگشت',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -3056,7 +3088,6 @@ sub Data {
         'Ticket fields' => 'زمینه های درخواست',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
-        'Preview' => '',
         'Click to preview this file.' => '',
         'Click to download this file.' => '',
         'Click to delete this attachment.' => '',
@@ -3525,6 +3556,8 @@ sub Data {
         '%s is missing. The file could not be downloaded properly.' => '',
         'Please contact the administrator.' => 'لطفا با مدیر تماس بگیرید.',
         '%s is missing. The file could not be previewed properly.' => '',
+        'The file could not be previewed properly.' => '',
+        'This file cannot be previewed.' => '',
         '%s is missing. The file could not be deleted properly.' => '',
 
         # Perl Module: Kernel/Modules/AdminACL.pm
@@ -4503,6 +4536,9 @@ sub Data {
         'Available tickets' => 'درخواست موجود',
         'including subqueues' => 'از جمله subqueues',
         'excluding subqueues' => 'به استثنای subqueues',
+        'System default' => '',
+        'Position' => '',
+        'Right' => 'راست',
         'Queue View' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
@@ -4691,7 +4727,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => '',
-        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'علامت دار',
@@ -5299,13 +5334,6 @@ sub Data {
         'Perl Modules' => 'ماژول پرل',
         'Not all required Perl modules are correctly installed.' => 'همه ماژول های مورد نیاز پرل به درستی نصب نشده است.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-        'Perl Modules Audit' => '',
-        'CPAN::Audit reported that one or more installed Perl modules have known vulnerabilities. Please note that there might be false positives for distributions patching Perl modules without changing their version number.' =>
-            '',
-        'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
-            '',
-
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
         'Perl Version' => 'پرل نسخه',
 
@@ -5538,10 +5566,11 @@ sub Data {
         'Disabled' => '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/Date.pm
-        'System was not able to calculate user Date in OTRSTimeZone!' => '',
+        'System was not able to calculate user Date in ZnunyTimeZone!' =>
+            '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/DateTime.pm
-        'System was not able to calculate user DateTime in OTRSTimeZone!' =>
+        'System was not able to calculate user DateTime in ZnunyTimeZone!' =>
             '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/FrontendNavigation.pm
@@ -5723,7 +5752,7 @@ sub Data {
         'Remove closed tickets from agents\' ticket watch lists.' => '',
 
         # XML Definition: Kernel/Config/Files/XML/Framework.xml
-        'Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
+        'Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If not enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
             '',
         'Enables or disables the debug mode over frontend interface.' => 'فعال یا غیر فعال کردن حالت اشکال زدایی بیش از رابط ظاهر.',
         'Delivers extended debugging information in the frontend in case any AJAX errors occur, if enabled.' =>
@@ -5977,12 +6006,12 @@ sub Data {
             '',
         'Defines the period of time (in minutes) before customer is marked as "away" due to inactivity (e.g. in the "Logged-In Users" widget or for the chat).' =>
             '',
-        'This setting is deprecated. Set OTRSTimeZone instead.' => '',
+        'This setting is deprecated. Set ZnunyTimeZone instead.' => '',
         'Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.' =>
             '',
         'Sets the time zone that will be assigned to newly created users and will be used for users that haven\'t yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user\'s time zone.' =>
             '',
-        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
+        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) ZnunyTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
             '',
         'Maximum Number of a calendar shown in a dropdown.' => 'حداکثر تعداد یک تقویم نشان داده شده در منوی کرکره ای.',
         'Define the start day of the week for the date picker.' => 'تعریف روز شروع هفته برای جمع کننده اطلاعات.',
@@ -6426,6 +6455,24 @@ sub Data {
             '',
         'Example package autoload configuration.' => '',
         'Activates week number for datepickers.' => '',
+        'If this configuration is deactivated, all duplicate files are removed from the selection lists.' =>
+            '',
+        'If enabled, a preview overlay is available for article attachments (images, PDFs and other permitted types).' =>
+            '',
+        'Disables the widgets when the number of article in the ticket is reached.' =>
+            '',
+        'Disables the widgets when the number of attachments in the ticket is reached.' =>
+            '',
+        'Number of a attachments shown by default.' => '',
+        'Number of a attachments shown in AgentTicketZoom.' => '',
+        'AgentTicketZoom widget which provides all attachments of the ticket for download.' =>
+            '',
+        'Shows a link to preview article attachments in the zoom view of the article in the agent interface.' =>
+            '',
+        'Agent ticket dialogs that show a selection to reuse attachments of other articles of the ticket.' =>
+            '',
+        'Shows a link in the menu to select and download all attachments of the ticket.' =>
+            '',
 
         # XML Definition: Kernel/Config/Files/XML/GenericInterface.xml
         'Performs the configured action for each event (as an Invoker) for each configured web service.' =>
@@ -6578,6 +6625,8 @@ sub Data {
         'Updates the ticket index accelerator.' => 'به روز رسانی شتاب دهنده شاخص درخواست',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             'بازنشانی و بازکردن دسترسی صاحب یک درخواست اگر آن را به صف دیگری انتقال داده.',
+        'Resets the responsible of a ticket if it was moved to another queue.' =>
+            'بازنشانی مسئول یک درخواست اگر آن را به صف دیگری انتقال داده.',
         'Forces to choose a different ticket state (from current) after lock action. Define the current state as key, and the next state after lock action as content.' =>
             'نیروهای به انتخاب یک دولت بلیط مختلف (از فعلی) بعد از عمل قفل. تعریف وضعیت فعلی به عنوان کلید، و دولت بعدی پس از عمل قفل به عنوان محتوا.',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>
@@ -6716,6 +6765,8 @@ sub Data {
             'مکانیزم چشمک زدن را برای صف درخواستی که شامل قدیمی‌ترین درخواست می‌باشد فعال می‌کند.',
         'Include tickets of subqueues per default when selecting a queue.' =>
             'شامل بلیط از subqueues در به طور پیش فرض در هنگام انتخاب یک صف.',
+        'Defines the queue navigation in the queue view. Top shows one queue level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            '',
         'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the queue view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the QueueID for the key and 0 or 1 for value.' =>
             'انواع بلیط (ascendingly یا descendingly) که یک صف واحد در نمایش صف انتخاب و پس از بلیط ها با اولویت طبقه بندی شده اند. ارزش: 0 = صعودی (قدیمی ترین در بالا، به طور پیش فرض)، 1 = نزولی (جوانترین در بالا). استفاده از QueueID برای کلید و 0 یا 1 برای ارزش.',
         'Defines the default sort criteria for all queues displayed in the queue view.' =>
@@ -6741,6 +6792,8 @@ sub Data {
         'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
             '',
         'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
+        'Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
             '',
         'Activates time accounting.' => 'محاسبه زمان را فعال می‌کند.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
@@ -8183,6 +8236,16 @@ sub Data {
             '',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             '',
+        'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
+            '',
+        'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
+            '',
+        'Defines the required ticket attributes to activate the preview. The following ticket attributes are supported: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.' =>
+            '',
+        'Defines the required ticket attributes to activate showing the first preview for the first PDF. The following ticket attributes are supported: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.' =>
+            '',
+        'What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder.' =>
+            'هنگام درج مقدار تعریف‌نشده در قالب با استفاده از جای‌نگهدار ZNUNY_، آن مقدار با چه چیزی جایگزین شود.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'موقتا غیر معتبر',
@@ -8531,6 +8594,10 @@ sub Data {
         'Are you sure you want to delete this appointment? This operation cannot be undone.' =>
             '',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Attachments.js
+        'Please select attachments for download.' => '',
+        'Show less' => '',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
         'Copied to clipboard!' => '',
 
@@ -8656,6 +8723,10 @@ sub Data {
         'Filters' => 'فیلترها ',
         'Clear search' => ' پاک کردن جستجو',
 
+        # JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+        'Collapse' => 'جمع کردن',
+        'Expand' => 'گسترش',
+
         # JS File: var/httpd/htdocs/js/Core.UI.Popup.js
         'If you now leave this page, all open popup windows will be closed, too!' =>
             'اگر اکنون این صفحه را ترک نمایید، تمام پنجره‌های popup باز شده نیز بسته خواهند شد!',
@@ -8695,10 +8766,9 @@ sub Data {
         'No space left for the following files: %s' => '',
         'Available space %s of %s.' => '',
         'Upload information' => '',
-        'An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator.' =>
-            '',
         'An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator.' =>
             '',
+        '%s of %s' => '',
 
         # JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
         'This is %s' => '',
@@ -9153,6 +9223,7 @@ Thanks for your help!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => 'به‌عنوان هرزنامه علامت بزن',
         'Mark as seen' => '',
+        'Mark as unseen' => '',
         'Mark this ticket as junk!' => 'علامت گذاری به عنوان این درخواست به عنوان آشغال!',
         'Mark ticket as seen' => '',
         'Mark ticket as unseen' => '',
@@ -9262,7 +9333,6 @@ Thanks for your help!
         'Resent email to "%s".' => '',
         'Responsible Tickets' => 'کارشناس درخواست',
         'Responsible Tickets.' => 'کارشناس درخواست.',
-        'Right' => 'راست',
         'Romanian' => '',
         'Running Process Tickets' => 'در حال اجرا فرآیند درخواست',
         'Russian' => 'روسی',
@@ -9497,6 +9567,7 @@ Thanks for your help!
         '%s KB',
         '%s MB',
         '%s TB',
+        '%s of %s',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9520,7 +9591,6 @@ Thanks for your help!
         'An item with this name is already present.',
         'An unconnected transition is already placed on the canvas. Please connect this transition first before placing another transition.',
         'An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator.',
-        'An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator.',
         'An unknown error occurred. Please contact the administrator.',
         'Apply',
         'Appointment',
@@ -9553,9 +9623,12 @@ Thanks for your help!
         'Click to download this file.',
         'Click to preview this file.',
         'Click to select a file for upload.',
+        'Clone',
+        'Clone Process',
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Collapse',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9623,6 +9696,7 @@ Thanks for your help!
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',
         'Don\'t save, update manually',
+        'Download',
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
@@ -9637,10 +9711,12 @@ Thanks for your help!
         'Error in the mail settings. Please correct and try again.',
         'Error: Browser Check failed!',
         'Event Type Filter',
+        'Expand',
         'Expanded',
         'Favourites',
         'Feb',
         'February',
+        'Filter',
         'Filters',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
@@ -9723,6 +9799,7 @@ Thanks for your help!
         'Please only select one file for upload.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
         'Preparing to deploy, please wait...',
@@ -9777,6 +9854,8 @@ Thanks for your help!
         'Show',
         'Show EntityIDs',
         'Show current selection',
+        'Show less',
+        'Show more',
         'Show or hide the content.',
         'Slide the navigation bar',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',
@@ -9845,6 +9924,7 @@ Thanks for your help!
         'Timeline Week',
         'Title',
         'Today',
+        'Toggle sidebar',
         'Too many active calendars',
         'Try again',
         'Tu',

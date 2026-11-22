@@ -34,15 +34,30 @@ my $StatsRef = $StatsObject->StatsListGet(
     UserID   => 1,
 );
 
-my $StatNumber = '10001';
+my $StatNumber;
 
 if ( IsHashRefWithData($StatsRef) ) {
-    $Self->Is(
-        $StatsRef->{1}->{StatNumber},
-        $StatNumber,
-        "StatNumber exists: $StatNumber.",
-    );
+    STATID:
+    for my $StatID ( sort { $a <=> $b } keys %{$StatsRef} ) {
+        my $Stat = $StatsRef->{$StatID};
+
+        next STATID if !IsHashRefWithData($Stat);
+        next STATID if !IsStringWithData( $Stat->{StatNumber} );
+
+        $StatNumber = $Stat->{StatNumber};
+        last STATID;
+    }
 }
+
+my $StatNumberMessage = 'StatNumber exists.';
+if ( IsStringWithData($StatNumber) ) {
+    $StatNumberMessage = "StatNumber exists: $StatNumber.";
+}
+
+$Self->True(
+    $StatNumber,
+    $StatNumberMessage,
+) || return 1;
 
 my @Tests = (
     {
@@ -65,7 +80,7 @@ my @Tests = (
         Name          => "Format CSV",
         CommandModule => 'Kernel::System::Console::Command::Maint::Stats::Generate',
         Parameter     => [
-            '--number',           '10001',          '--language',        'en',
+            '--number',           $StatNumber,      '--language',        'en',
             '--target-directory', $TargetDirectory, '--target-filename', 'FormatCSV',
             '--format',           'CSV'
         ],
@@ -81,7 +96,7 @@ my @Tests = (
         Name          => "Format Excel",
         CommandModule => 'Kernel::System::Console::Command::Maint::Stats::Generate',
         Parameter     => [
-            '--number',           '10001',          '--language',        'en',
+            '--number',           $StatNumber,      '--language',        'en',
             '--target-directory', $TargetDirectory, '--target-filename', 'FormatExcel',
             '--format',           'Excel'
         ],
@@ -97,7 +112,7 @@ my @Tests = (
         Name          => "Format Print|PDF",
         CommandModule => 'Kernel::System::Console::Command::Maint::Stats::Generate',
         Parameter     => [
-            '--number',           '10001',          '--language',        'en',
+            '--number',           $StatNumber,      '--language',        'en',
             '--target-directory', $TargetDirectory, '--target-filename', 'FormatPDF',
             '--format',           'PDF'
         ],

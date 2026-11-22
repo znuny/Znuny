@@ -134,11 +134,19 @@ sub Run {
     my %Param;
 
     # get session id
-    $Param{SessionName} = $ConfigObject->Get('CustomerPanelSessionName')         || 'CSID';
-    $Param{SessionID}   = $ParamObject->GetParam( Param => $Param{SessionName} ) || '';
+    $Param{SessionName} = $ConfigObject->Get('CustomerPanelSessionName') || 'CSID';
+    ( $Param{SessionID}, $Param{SessionIDCookie} ) = $ParamObject->GetSessionID(
+        SessionName => $Param{SessionName},
+    );
 
     # drop old session id (if exists)
     $QueryString =~ s/(\?|&|;|)$Param{SessionName}(=&|=;|=.+?&|=.+?$)/;/g;
+    my $LegacySessionName = $ParamObject->GetLegacySessionName(
+        SessionName => $Param{SessionName},
+    );
+    if ($LegacySessionName) {
+        $QueryString =~ s/(\?|&|;|)$LegacySessionName(=&|=;|=.+?&|=.+?$)/;/g;
+    }
 
     # define framework params
     my $FrameworkParams = {
@@ -158,15 +166,6 @@ sub Run {
     }
 
     my $BrowserHasCookie = 0;
-
-    # Check if the browser sends the SessionID cookie and set the SessionID-cookie
-    # as SessionID! GET or POST SessionID have the lowest priority.
-    if ( $ConfigObject->Get('SessionUseCookie') ) {
-        $Param{SessionIDCookie} = $ParamObject->GetCookie( Key => $Param{SessionName} );
-        if ( $Param{SessionIDCookie} ) {
-            $Param{SessionID} = $Param{SessionIDCookie};
-        }
-    }
 
     my $CookieSecureAttribute;
     if ( $ConfigObject->Get('HttpType') eq 'https' ) {
@@ -214,6 +213,36 @@ sub Run {
 
     # security check Action Param (replace non-word chars)
     $Param{Action} =~ s/\W//g;
+
+    # Only an explicitly passed RequestedURL is used here (not the query string fallback),
+    # otherwise the redirect could point to the current request again.
+    my $RequestedURLParam      = $ParamObject->GetParam( Param => 'RequestedURL' ) // '';
+    my %BlockedRedirectActions = (
+        Logout       => 1,
+        Login        => 1,
+        LostPassword => 1,
+        PreLogin     => 1,
+    );
+
+    my ($RequestedAction) = $RequestedURLParam =~ m{(?:^|[?;&])Action=(\w+)}xms;
+    $RequestedAction //= '';
+
+    # when no action parameter exists but there is passed
+    # valid session and requested url, redirect to the link
+    if (
+        !$ParamObject->GetParam( Param => 'Action' )
+        && $Param{SessionID}
+        && $RequestedURLParam
+        && !$BlockedRedirectActions{$RequestedAction}
+        && $SessionObject->CheckSessionID( SessionID => $Param{SessionID} )
+        )
+    {
+        print $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Redirect(
+            OP => $RequestedURLParam,
+        );
+
+        return;
+    }
 
     # check request type
     if ( $Param{Action} eq 'PreLogin' ) {
@@ -459,6 +488,11 @@ sub Run {
                         Secure   => scalar $CookieSecureAttribute,
                         HTTPOnly => 1,
                     ),
+                    LegacySessionIDCookie => $ParamObject->ExpireLegacySessionCookie(
+                        SessionName => $Param{SessionName},
+                        Path        => $ConfigObject->Get('ScriptAlias'),
+                        Secure      => $CookieSecureAttribute,
+                    ),
                     OTRSBrowserHasCookie => $ParamObject->SetCookie(
                         Key      => 'OTRSBrowserHasCookie',
                         Value    => '',
@@ -533,6 +567,11 @@ sub Run {
                         Path     => $ConfigObject->Get('ScriptAlias'),
                         Secure   => scalar $CookieSecureAttribute,
                         HTTPOnly => 1,
+                    ),
+                    LegacySessionIDCookie => $ParamObject->ExpireLegacySessionCookie(
+                        SessionName => $Param{SessionName},
+                        Path        => $ConfigObject->Get('ScriptAlias'),
+                        Secure      => $CookieSecureAttribute,
                     ),
                 },
                 %Param,
@@ -1184,6 +1223,11 @@ sub Run {
                             Path     => $ConfigObject->Get('ScriptAlias'),
                             Secure   => scalar $CookieSecureAttribute,
                             HTTPOnly => 1,
+                        ),
+                        LegacySessionIDCookie => $ParamObject->ExpireLegacySessionCookie(
+                            SessionName => $Param{SessionName},
+                            Path        => $ConfigObject->Get('ScriptAlias'),
+                            Secure      => $CookieSecureAttribute,
                         ),
                     },
                     %Param,

@@ -1682,6 +1682,8 @@ sub Data {
             'Um einen neuen Prozess zu erstellen, können Sie entweder einen Prozess aus einem anderen System importieren, oder einen ganz neuen erstellen.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'Änderungen an den Prozessen wirken sich erst dann aus, wenn Sie die Prozesskonfiguration synchronisieren. Dabei werden alle Änderungen in die Systemkonfiguration übernommen.',
+        'Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.' =>
+            'Kopieren dupliziert nur den Prozess und behält die Verweise auf die ursprünglichen Elemente. Klonen erstellt eine unabhängige inaktive Kopie. Jedes enthaltene Element erhält eine neue interne ID, und der ursprüngliche Prozess bleibt unverändert.',
         'Access Control Lists (ACL)' => 'Access-Control-Lists (ACL)',
         'Generic Agent' => 'Generic Agent',
         'Manage Process Widget Groups' => 'Prozess-Widget-Gruppen verwalten',
@@ -1690,6 +1692,7 @@ sub Data {
         'Print' => 'Drucken',
         'Export Process Configuration' => 'Prozesskonfiguration exportieren',
         'Copy Process' => 'Prozess kopieren',
+        'Clone Process' => 'Prozess klonen',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Please note, that changing this activity will affect the following processes' =>
@@ -1728,6 +1731,8 @@ sub Data {
         'Required Lock' => 'Erforderliche Sperre',
         'The selected required lock does not exist.' => 'Die ausgewählte Sperre existiert nicht.',
         'This field is required for activitiy dialogs with a scope.' => 'Dieses Feld ist für Aktivitäts-Dialoge mit einem Geltungsbereich erforderlich.',
+        'One-click execution' => 'Ein-Klick-Ausführung',
+        'Skip the activity dialog popup and submit immediately.' => 'Das Popup des Aktivitäts-Dialogs überspringen und sofort absenden.',
         'Submit Advice Text' => 'Hinweistext beim Absenden',
         'Submit Button Text' => 'Hinweistext für die Schaltfläche "Absenden"',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1740,6 +1745,13 @@ sub Data {
         'Text Template' => 'Textvorlage',
         'Auto fill' => 'automatisch ausfüllen',
         'Display' => 'Anzeige',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+        'Please enter a name for the cloned process. The original process stays unchanged.' =>
+            'Bitte geben Sie einen Namen für den geklonten Prozess ein. Der ursprüngliche Prozess bleibt unverändert.',
+        'Process Name' => 'Prozessname',
+        'Please enter a name for the cloned element. The original element stays unchanged.' =>
+            'Bitte geben Sie einen Namen für das geklonte Element ein. Das ursprüngliche Element bleibt unverändert.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => 'Pfad',
@@ -1780,7 +1792,6 @@ sub Data {
             'Aktionen können einem Übergang zugeweisen werden, indem Sie das Aktionselement auf den Namen des Übergangs ziehen.',
         'Edit Process' => 'Prozess bearbeiten',
         'Edit Process Information' => 'Prozessinformationen bearbeiten',
-        'Process Name' => 'Prozessname',
         'The selected state does not exist.' => 'Der ausgewählte Status existiert nicht.',
         'Process Preferences' => 'Prozess Einstellungen',
         'Add and Edit Activities, Activity Dialogs and Transitions' => 'Aktivitäten, Aktivitäts-Dialoge und Übergänge hinzufügen und bearbeiten',
@@ -2686,6 +2697,15 @@ sub Data {
         'Solution Time' => 'Lösungszeit',
         'Accounted time' => 'Erfasste Zeit',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketAttachmentList.tt
+        'Download attachments of %s%s%s' => 'Anhänge von %s%s%s herunterladen',
+        'Start typing to filter...' => 'Tippen zum filtern...',
+        'Filter attachments...' => 'Anhänge filtern...',
+        'Hide all inline attachments' => 'Eingebettete Anhänge ausblenden',
+        'Preview' => 'Vorschau',
+        'This ticket does not have any attachments.' => 'Dieses Ticket enthält keine Anhänge.',
+        'Download as ZIP file' => 'Als ZIP-Datei herunterladen',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
         'Bounce to' => 'Umleiten an',
         'You need a email address.' => 'Sie benötigen eine E-Mail-Adresse.',
@@ -2747,7 +2767,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => 'Verlauf von %s%s%s',
-        'Start typing to filter...' => 'Tippen zum filtern...',
         'Filter for history items' => 'Filter für Historieneinträge',
         'Expand/Collapse all' => 'Alle einblenden/ausblenden',
         'CreateTime' => 'Erstellzeit',
@@ -2860,6 +2879,7 @@ sub Data {
         'Save filter settings as default' => 'Filtereinstellungen als Standard speichern',
         'Event Type' => 'Ereignistyp',
         'Save as default' => 'Als Standard speichern',
+        'Back' => 'Zurück',
         'Change Queue' => 'Queue ändern',
         'Add Filter' => 'Filter hinzufügen',
         'Set' => 'Setzen',
@@ -2904,6 +2924,12 @@ sub Data {
         'PDF' => 'PDF',
         'View' => 'Ansehen',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/Attachments.tt
+        'Ticket attachments' => 'Ticket-Anhänge',
+        'Download as ZIP archive' => 'Als ZIP-Archiv herunterladen',
+        'All attachments' => 'Alle Anhänge',
+        'Selected attachments' => 'Gewählte Anhänge',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
         'Linked Objects' => 'Verknüpfte Objekte',
 
@@ -2918,9 +2944,15 @@ sub Data {
         'To protect your privacy, remote content was blocked.' => 'Zum Schutz Ihrer Privatsphäre wurden entfernte Inhalte blockiert.',
         'Load blocked content.' => 'Blockierte Inhalte laden.',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AttachmentList.tt
+        'Show more' => 'Mehr anzeigen',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Attachments.tt
+        'Add attachments of other articles' => 'Anhänge anderer Artikel hinzufügen',
+        'Select all attachments' => 'Alle Anhänge auswählen',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => 'Startseite',
-        'Back' => 'Zurück',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => 'Ticketerstellung',
@@ -3051,7 +3083,6 @@ sub Data {
         'Ticket fields' => 'Ticket-Felder',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
-        'Preview' => 'Vorschau',
         'Click to preview this file.' => 'Klicken Sie hier, um eine Vorschau dieser Datei anzuzeigen.',
         'Click to download this file.' => 'Klicken Sie, um diese Datei herunterzuladen.',
         'Click to delete this attachment.' => 'Klicken Sie, um diesen Anhang zu löschen.',
@@ -3520,6 +3551,8 @@ sub Data {
         '%s is missing. The file could not be downloaded properly.' => '%s fehlt. Die Datei konnte nicht ordnungsgemäß heruntergeladen werden.',
         'Please contact the administrator.' => 'Bitte kontaktieren Sie den Administrator.',
         '%s is missing. The file could not be previewed properly.' => '%s fehlt. Die Datei konnte nicht ordnungsgemäß in der Vorschau angezeigt werden.',
+        'The file could not be previewed properly.' => 'Die Datei konnte nicht ordnungsgemäß in der Vorschau angezeigt werden.',
+        'This file cannot be previewed.' => 'Diese Datei kann nicht in der Vorschau angezeigt werden.',
         '%s is missing. The file could not be deleted properly.' => '%s fehlt. Die Datei konnte nicht ordnungsgemäß gelöscht werden.',
 
         # Perl Module: Kernel/Modules/AdminACL.pm
@@ -4498,6 +4531,9 @@ sub Data {
         'Available tickets' => 'Verfügbare Tickets',
         'including subqueues' => 'untergeordnete Queues miteinbeziehen',
         'excluding subqueues' => 'untergeordnete Queues ausschließen',
+        'System default' => 'Systemstandard',
+        'Position' => 'Position',
+        'Right' => 'Rechts',
         'Queue View' => 'Ansicht nach Queue',
 
         # Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
@@ -4686,7 +4722,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => 'Artikel als ungelesen markieren',
-        'Mark as unseen' => 'Als ungelesen markieren',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Markieren',
@@ -5294,13 +5329,6 @@ sub Data {
         'Perl Modules' => 'Perlmodule',
         'Not all required Perl modules are correctly installed.' => 'Es sind nicht alle benötigten Perl-Module installiert.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-        'Perl Modules Audit' => 'Perl Module Audit',
-        'CPAN::Audit reported that one or more installed Perl modules have known vulnerabilities. Please note that there might be false positives for distributions patching Perl modules without changing their version number.' =>
-            'CPAN::Audit hat berichtet, dass ein oder mehrere installierte Perl-Module bekannte Schwachstellen aufweisen. Bitte beachten Sie, dass es möglicherweise falsche Positivmeldungen für Distributionen gibt, die Perl-Module patchen, ohne ihre Versionsnummer zu ändern.',
-        'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
-            'CPAN::Audit hat keine bekannten Schwachstellen in den installierten Perl-Modulen gemeldet.',
-
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
         'Perl Version' => 'Perl-Version',
 
@@ -5533,10 +5561,11 @@ sub Data {
         'Disabled' => 'Deaktiviert',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/Date.pm
-        'System was not able to calculate user Date in OTRSTimeZone!' => 'Das Datum des Benutzers konnte in der Znuny-Zeitzone nicht berechnet werden!',
+        'System was not able to calculate user Date in ZnunyTimeZone!' =>
+            'Das Datum des Benutzers konnte in der Znuny-Zeitzone nicht berechnet werden!',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/DateTime.pm
-        'System was not able to calculate user DateTime in OTRSTimeZone!' =>
+        'System was not able to calculate user DateTime in ZnunyTimeZone!' =>
             'Das Datum und die Uhrzeit des Benutzers konnte in der Znuny-Zeitzone nicht berechnet werden!',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/FrontendNavigation.pm
@@ -5718,7 +5747,7 @@ sub Data {
         'Remove closed tickets from agents\' ticket watch lists.' => 'Geschlossene Tickets von den Beobachtungslisten der Agenten entfernen.',
 
         # XML Definition: Kernel/Config/Files/XML/Framework.xml
-        'Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
+        'Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If not enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
             'Deaktiviert den Web-Installer (http://yourhost.example.com/znuny/installer.pl), um unerwünschte Zugriffe auf das System zu verhindern. Wenn auf "Nein" gesetzt, kann das System neu installiert werden und die aktuelle Basiskonfiguration wird genutzt, um die Fragen des Installationsscripts vorauszufüllen. Wenn nicht aktiv, werden ebenso GenericAgent, die Paketverwaltung und die SQL-Box deaktiviert.',
         'Enables or disables the debug mode over frontend interface.' => 'Aktiviert oder deaktiviert den Debug-Modus für das Frontend.',
         'Delivers extended debugging information in the frontend in case any AJAX errors occur, if enabled.' =>
@@ -5972,13 +6001,13 @@ sub Data {
             'Legt den Zeitraum in Minuten fest, bevor ein Agent aufgrund von Inaktivität als "abwesend" markiert wird (z. B. im "Angemeldete Nutzer"-Dashlet oder im Chat).',
         'Defines the period of time (in minutes) before customer is marked as "away" due to inactivity (e.g. in the "Logged-In Users" widget or for the chat).' =>
             'Legt den Zeitraum in Minuten fest, bevor ein Kunde aufgrund von Inaktivität als "abwesend" markiert wird (z. B. im "Angemeldete Nutzer"-Dashlet oder im Chat).',
-        'This setting is deprecated. Set OTRSTimeZone instead.' => 'Diese Einstellung ist veraltet. Bitte nutzen Sie stattdessen die Einstellung OTRSTimeZone.',
+        'This setting is deprecated. Set ZnunyTimeZone instead.' => 'Diese Einstellung ist veraltet. Bitte nutzen Sie stattdessen die Einstellung ZnunyTimeZone.',
         'Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.' =>
             'Legt die Zeitzone fest, die intern von Znuny genutzt werden soll (z. B. um Datumsangaben und Zeiten in der Datenbank zu speichern). ACHTUNG: Diese Einstellung darf nicht mehr geändert werden, sobald Tickets und/oder andere Objekte erstellt wurden, die Datumsangaben enthalten.',
         'Sets the time zone that will be assigned to newly created users and will be used for users that haven\'t yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user\'s time zone.' =>
             'Legt die Zeitzone fest, die als Voreinstellung für neu angelegte Nutzer gelten soll. Diese Zeitzone wird dazu verwendet, um Datumsangaben und Uhrzeiten zwischen der Znuny-Zeitzone und der Nutzer-Zeitzone korrekt zu konvertieren.',
-        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
-            'Wenn aktiviert, werden Benutzer, die bislang noch keine Zeitzone ausgewählt haben, benachrichtigt dies zu tun. Hinweis: Die Benachrichtigung wird nicht angezeigt, wenn (1) der Benutzer noch keine Zeitzone ausgewählt hat und (2) OTRSTimeZone und UserDefaultTimeZone identisch sind und (3) nicht auf UTC gesetzt sind.',
+        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) ZnunyTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
+            'Wenn aktiviert, werden Benutzer, die bislang noch keine Zeitzone ausgewählt haben, benachrichtigt dies zu tun. Hinweis: Die Benachrichtigung wird nicht angezeigt, wenn (1) der Benutzer noch keine Zeitzone ausgewählt hat und (2) ZnunyTimeZone und UserDefaultTimeZone identisch sind und (3) nicht auf UTC gesetzt sind.',
         'Maximum Number of a calendar shown in a dropdown.' => 'Maximale Anzahl an Kalendern, die in Auswahlmenüs angezeigt werden.',
         'Define the start day of the week for the date picker.' => 'Definiert den Beginn einer Woche für den Datumswähler.',
         'Adds the permanent vacation days.' => 'Fügt die dauerhaften Urlaubstage hinzu.',
@@ -6421,6 +6450,24 @@ sub Data {
             'Legt die angezeigten Spalten und ihre Position für den Ergebnisbildschirm von AgentCustomerUserAddressBook fest.',
         'Example package autoload configuration.' => 'Beispielhafte Autoload-Konfiguration für Pakete.',
         'Activates week number for datepickers.' => 'Kalenderwochen für Datumsauswahl aktivieren.',
+        'If this configuration is deactivated, all duplicate files are removed from the selection lists.' =>
+            'Wenn diese Konfiguration deaktiviert ist, werden alle doppelten Dateien aus den Auswahllisten entfernt.',
+        'If enabled, a preview overlay is available for article attachments (images, PDFs and other permitted types).' =>
+            'Falls aktiviert, steht eine Vorschau für Artikelanhänge (Bilder, PDFs und andere zulässige Typen) zur Verfügung.',
+        'Disables the widgets when the number of article in the ticket is reached.' =>
+            'Deaktiviert die Widgets bei der erreichten Anzahl der Artikel im Ticket.',
+        'Disables the widgets when the number of attachments in the ticket is reached.' =>
+            'Deaktiviert die Widgets bei der erreichten Anzahl der Anhänge im Ticket.',
+        'Number of a attachments shown by default.' => 'Standardmäßige Anzahl der angezeigten Anhänge.',
+        'Number of a attachments shown in AgentTicketZoom.' => 'Anzahl der im AgentTicketZoom angezeigten Anhänge.',
+        'AgentTicketZoom widget which provides all attachments of the ticket for download.' =>
+            'AgentTicketZoom-Widget, welches alle Attachments des Tickets zum Download bereitstellt.',
+        'Shows a link to preview article attachments in the zoom view of the article in the agent interface.' =>
+            'Zeigt einen Link zur Vorschau von Artikelanhängen in der Zoom-Ansicht des Artikels in der Agentenoberfläche.',
+        'Agent ticket dialogs that show a selection to reuse attachments of other articles of the ticket.' =>
+            'Agenten-Ticket-Dialoge, die eine Auswahl zur Wiederverwendung von Anhängen anderer Artikel des Tickets anzeigen.',
+        'Shows a link in the menu to select and download all attachments of the ticket.' =>
+            'Zeigt einen Ticketmenü-Link an, mit dem alle Anhänge eines Tickets gewählt und heruntergeladen werden können.',
 
         # XML Definition: Kernel/Config/Files/XML/GenericInterface.xml
         'Performs the configured action for each event (as an Invoker) for each configured web service.' =>
@@ -6573,6 +6620,8 @@ sub Data {
         'Updates the ticket index accelerator.' => 'Aktualisiert den Ticket-Index-Beschleuniger.',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             'Setzt den Besitzer eines TIckets zurück und entsperrt es, wenn das Ticket in eine andere Queue verschoben wird.',
+        'Resets the responsible of a ticket if it was moved to another queue.' =>
+            'Setzt den Verantwortlichen eines TIckets zurück, wenn das Ticket in eine andere Queue verschoben wird.',
         'Forces to choose a different ticket state (from current) after lock action. Define the current state as key, and the next state after lock action as content.' =>
             'Erzwingt das Setzen eines (vom aktuellen Status) abweichenden Ticket-Status nach dem Sperren eines Tickets. Legen Sie den aktuellen Status als Schlüssel und den neuen Status als Inhalt fest.',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>
@@ -6711,6 +6760,8 @@ sub Data {
             'Aktiviert einen Blinkmechanismus der Queue, die das älteste Ticket enthält.',
         'Include tickets of subqueues per default when selecting a queue.' =>
             'Tickets von Unterqueues automatisch mit einschließen, wenn eine Queue ausgewählt wird.',
+        'Defines the queue navigation in the queue view. Top shows one queue level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            'Definiert die Queue-Navigation in der Queue-Ansicht. Top zeigt jeweils eine Queue-Ebene, ohne Hover-Menüs. TopHover zeigt die hierarchische Navigationsleiste mit Hover-Untermenüs.',
         'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the queue view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the QueueID for the key and 0 or 1 for value.' =>
             'Steuert die Sortierreihenfolge von Tickets bei Auswahl einer einzelnen Queue in der Queue-Ansicht nach dem Sortieren nach Priorität. Mögliche Werte: 0 = aufsteigend (älteste Tickets zuerst), 1 = absteigend (neuste Tickets zuerst). Tragen Sie die ID der Queue als Schlüssel und 0 oder 1 als Wert ein.',
         'Defines the default sort criteria for all queues displayed in the queue view.' =>
@@ -6737,6 +6788,8 @@ sub Data {
             'Definiert das Ticket Alter in Minuten bevor die Services mit unbearbeiteten Tickets hervorgehoben werden (zweites Level).',
         'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
             'Aktiviert einen Blinkmechanismus des Services, welcher das älteste Ticket enthält.',
+        'Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            'Definiert die Service-Navigation in der Service-Ansicht. Top zeigt jeweils eine Service-Ebene, ohne Hover-Menüs. TopHover zeigt die hierarchische Navigationsleiste mit Hover-Untermenüs.',
         'Activates time accounting.' => 'Aktiviert die Zeitabrechnung.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             'Legt die bevorzugten Zeiteinheiten fest (z.B. Arbeitseinheiten, Stunden, Minuten).',
@@ -8178,6 +8231,16 @@ sub Data {
             'Namen von Systemkonfigurationsoptionen mit E-Mail-Adressen, die ebenfalls in einem Profil für ausgehende E-Mails auswählbar sein sollen (neben Systemadressen).',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             'Liste der Sitzungen (Schlüssel), die durch die Unteraktion UpdateAJAX des Frontend-Moduls AgentSession aktualisiert werden dürfen. Dabei handelt es sich um reguläre Ausdrücke.',
+        'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
+            'Definiert die Breite für die PDF-Vorschau-Komponente für AgentTicketZoom. Geben Sie die Anzahl (Pixel) oder den Prozentwert (relativ) ein.',
+        'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
+            'Definiert die Höhe für die PDF-Vorschau-Komponente für AgentTicketZoom. Geben Sie die Anzahl (Pixel) oder den prozentualen Wert (relativ) ein.',
+        'Defines the required ticket attributes to activate the preview. The following ticket attributes are supported: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.' =>
+            'Definiert die benötigten Ticketattribute, um die Vorschau zu aktivieren. Folgende TicketAttribute werden unterstützt: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.',
+        'Defines the required ticket attributes to activate showing the first preview for the first PDF. The following ticket attributes are supported: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.' =>
+            'Definiert die benötigten Ticketattribute, um die Vorschau für das erste PDF zu aktivieren. Folgende TicketAttribute werden unterstützt: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.',
+        'What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder.' =>
+            'Text, der anstelle eines undefinierten Wertes für einen ZNUNY_-Platzhalter eingefügt wird.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'ungültig-temporär',
@@ -8526,6 +8589,10 @@ sub Data {
         'Are you sure you want to delete this appointment? This operation cannot be undone.' =>
             'Möchten Sie diesen Termin wirklich löschen? Diese Änderung kann nicht rückgängig gemacht werden.',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Attachments.js
+        'Please select attachments for download.' => 'Bitte wählen Sie Anhänge für den Download.',
+        'Show less' => 'Weniger anzeigen',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
         'Copied to clipboard!' => 'In Zwischenablage kopiert!',
 
@@ -8651,6 +8718,10 @@ sub Data {
         'Filters' => 'Filter',
         'Clear search' => 'Suche löschen',
 
+        # JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+        'Collapse' => 'Zuklappen',
+        'Expand' => 'Ausklappen',
+
         # JS File: var/httpd/htdocs/js/Core.UI.Popup.js
         'If you now leave this page, all open popup windows will be closed, too!' =>
             'Wenn Sie diese Seite verlassen, werden auch alle geöffneten Dialoge geschlossen!',
@@ -8690,10 +8761,9 @@ sub Data {
         'No space left for the following files: %s' => 'Kein Speicherplatz verfügbar für folgende Dateien: %s',
         'Available space %s of %s.' => 'Verfügbarer Platz %s von %s.',
         'Upload information' => 'Upload-Information',
-        'An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator.' =>
-            'Bei der Vorschau des Anhangs ist ein unbekannter Fehler aufgetreten. Bitte versuchen Sie es erneut. Wenn der Fehler weiterhin auftritt, kontaktieren Sie bitte Ihren Systemadministrator.',
         'An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator.' =>
             'Beim Löschen des Anhangs ist ein unbekannter Fehler aufgetreten. Bitte versuchen Sie es erneut. Wenn der Fehler weiterhin auftritt, kontaktieren Sie bitte Ihren Systemadministrator.',
+        '%s of %s' => '%s von %s',
 
         # JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
         'This is %s' => 'Dies ist %s',
@@ -9147,6 +9217,7 @@ Ihr Helpdesk-Team
         'Management of ticket attribute relations.' => 'Verwaltung von abhängigen Ticketattributen.',
         'Mark as Spam!' => 'Als Spam makieren!',
         'Mark as seen' => 'Als gelesen markieren',
+        'Mark as unseen' => 'Als ungelesen markieren',
         'Mark this ticket as junk!' => 'Dieses Ticket als Junk markieren!',
         'Mark ticket as seen' => 'Ticket als gelesen markieren',
         'Mark ticket as unseen' => 'Ticket als ungelesen markieren',
@@ -9256,7 +9327,6 @@ Ihr Helpdesk-Team
         'Resent email to "%s".' => 'E-Mail erneut senden an "%s".',
         'Responsible Tickets' => 'Verantwortliche Tickets',
         'Responsible Tickets.' => 'Verantwortliche Tickets.',
-        'Right' => 'Rechts',
         'Romanian' => 'Rumänisch',
         'Running Process Tickets' => 'Aktive Prozess-Tickets',
         'Russian' => 'Russisch',
@@ -9491,6 +9561,7 @@ Ihr Helpdesk-Team
         '%s KB',
         '%s MB',
         '%s TB',
+        '%s of %s',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9514,7 +9585,6 @@ Ihr Helpdesk-Team
         'An item with this name is already present.',
         'An unconnected transition is already placed on the canvas. Please connect this transition first before placing another transition.',
         'An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator.',
-        'An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator.',
         'An unknown error occurred. Please contact the administrator.',
         'Apply',
         'Appointment',
@@ -9547,9 +9617,12 @@ Ihr Helpdesk-Team
         'Click to download this file.',
         'Click to preview this file.',
         'Click to select a file for upload.',
+        'Clone',
+        'Clone Process',
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Collapse',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9617,6 +9690,7 @@ Ihr Helpdesk-Team
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',
         'Don\'t save, update manually',
+        'Download',
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
@@ -9631,10 +9705,12 @@ Ihr Helpdesk-Team
         'Error in the mail settings. Please correct and try again.',
         'Error: Browser Check failed!',
         'Event Type Filter',
+        'Expand',
         'Expanded',
         'Favourites',
         'Feb',
         'February',
+        'Filter',
         'Filters',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
@@ -9717,6 +9793,7 @@ Ihr Helpdesk-Team
         'Please only select one file for upload.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
         'Preparing to deploy, please wait...',
@@ -9771,6 +9848,8 @@ Ihr Helpdesk-Team
         'Show',
         'Show EntityIDs',
         'Show current selection',
+        'Show less',
+        'Show more',
         'Show or hide the content.',
         'Slide the navigation bar',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',
@@ -9839,6 +9918,7 @@ Ihr Helpdesk-Team
         'Timeline Week',
         'Title',
         'Today',
+        'Toggle sidebar',
         'Too many active calendars',
         'Try again',
         'Tu',

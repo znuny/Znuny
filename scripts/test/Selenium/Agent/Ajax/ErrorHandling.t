@@ -36,6 +36,14 @@ $Selenium->RunTest(
             Value => 'link',
         );
 
+        # CKEditor 5 on AgentTicketPhone can keep PageLoadComplete false past the 20s
+        # VerifiedGet wait. This test only checks AJAX error dialogs.
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'Frontend::RichText',
+            Value => 0,
+        );
+
         my $Language      = 'de';
         my $TestUserLogin = $HelperObject->TestUserCreate(
             Language => $Language,
@@ -54,6 +62,9 @@ $Selenium->RunTest(
 
         my $ScriptAlias = $ConfigObject->Get('ScriptAlias');
         $Selenium->VerifiedGet("${ScriptAlias}index.pl?Action=AgentTicketPhone");
+
+# Wait until all AJAX calls of the page initialization are finished, so they do not interfere with the faked error below.
+        $Selenium->WaitFor( JavaScript => "return \$.active == 0" );
 
         # Provoke an ajax error caused by unexpected result (404), should show no dialog, but an regular alert.
         $Selenium->execute_script(

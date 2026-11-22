@@ -58,30 +58,18 @@ sub Run {
     # check if sender is of interest
     return 1 if !$Param{GetParam}->{From};
 
-    if ( defined $Param{JobConfig}->{FromAddressRegExp} && $Param{JobConfig}->{FromAddressRegExp} )
-    {
-
-        if ( $Param{GetParam}->{From} !~ /$Param{JobConfig}->{FromAddressRegExp}/i ) {
-            return 1;
-        }
+    if ( defined $Param{JobConfig}->{FromAddressRegExp} && $Param{JobConfig}->{FromAddressRegExp} ) {
+        return 1 if ( $Param{GetParam}->{From} // '' ) !~ m{$Param{JobConfig}->{FromAddressRegExp}}i;
     }
 
     # check recipient (To)
-    if (
-        $Param{GetParam}->{To}
-        && $Param{JobConfig}->{ToAddressRegExp}
-        )
-    {
-        return 1 if $Param{GetParam}->{To} !~ m{$Param{JobConfig}->{ToAddressRegExp}}i;
+    if ( defined $Param{JobConfig}->{ToAddressRegExp} && $Param{JobConfig}->{ToAddressRegExp} ) {
+        return 1 if ( $Param{GetParam}->{To} // '' ) !~ m{$Param{JobConfig}->{ToAddressRegExp}}i;
     }
 
     # check recipient (Cc)
-    if (
-        $Param{GetParam}->{Cc}
-        && $Param{JobConfig}->{CcAddressRegExp}
-        )
-    {
-        return 1 if $Param{GetParam}->{Cc} !~ m{$Param{JobConfig}->{CcAddressRegExp}}i;
+    if ( defined $Param{JobConfig}->{CcAddressRegExp} && $Param{JobConfig}->{CcAddressRegExp} ) {
+        return 1 if ( $Param{GetParam}->{Cc} // '' ) !~ m{$Param{JobConfig}->{CcAddressRegExp}}i;
     }
 
     my $NumberRegExp = $Param{JobConfig}->{NumberRegExp};

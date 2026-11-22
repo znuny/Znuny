@@ -45,7 +45,13 @@ ul.AllocationList li span.Functions {
 }
 
 ul.AllocationList li span.Functions a.Icon {
+    display: none;
     margin-left: 0;
+}
+
+ul.AllocationList li:hover span.Functions a.Icon,
+ul.AllocationList li:focus-within span.Functions a.Icon {
+    display: flex;
 }
 
 ul.AllocationList li label {

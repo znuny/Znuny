@@ -6,6 +6,7 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::Deprecated::OTRSTimeZoneGet)
 
 use strict;
 use warnings;
@@ -53,9 +54,62 @@ my $Values = $DateTimeObject->Get();
 
 $Self->Is(
     $Values->{TimeZone},
-    $DateTimeObject->OTRSTimeZoneGet(),
+    $DateTimeObject->ZnunyTimeZoneGet(),
     'Time zone of DateTime object must match the one configured for data storage.'
 );
+
+$Self->Is(
+    $DateTimeObject->OTRSTimeZoneGet(),
+    $DateTimeObject->ZnunyTimeZoneGet(),
+    'Legacy OTRSTimeZoneGet() must return the same value as ZnunyTimeZoneGet().'
+);
+
+# Legacy Kernel/Config.pm style: OTRSTimeZone set while ZnunyTimeZone is still the
+# unmodified SysConfig default (UTC). The getter must prefer OTRSTimeZone.
+{
+    my $SysConfigObject      = $Kernel::OM->Get('Kernel::System::SysConfig');
+    my %ZnunyTimeZoneSetting = $SysConfigObject->SettingGet(
+        Name  => 'ZnunyTimeZone',
+        NoLog => 1,
+    );
+
+    if ( !$ZnunyTimeZoneSetting{IsModified} ) {
+        my $PreviousZnunyTimeZone = $ConfigObject->Get('ZnunyTimeZone');
+        my $PreviousOTRSTimeZone  = $ConfigObject->Get('OTRSTimeZone');
+
+        $ConfigObject->Set(
+            Key   => 'ZnunyTimeZone',
+            Value => 'UTC',
+        );
+        $ConfigObject->Set(
+            Key   => 'OTRSTimeZone',
+            Value => 'Europe/Berlin',
+        );
+
+        $Self->Is(
+            $DateTimeObject->ZnunyTimeZoneGet(),
+            'Europe/Berlin',
+            'ZnunyTimeZoneGet() must honor legacy OTRSTimeZone when ZnunyTimeZone is unmodified.',
+        );
+
+        $ConfigObject->Set(
+            Key   => 'ZnunyTimeZone',
+            Value => $PreviousZnunyTimeZone,
+        );
+        if ( defined $PreviousOTRSTimeZone ) {
+            $ConfigObject->Set(
+                Key   => 'OTRSTimeZone',
+                Value => $PreviousOTRSTimeZone,
+            );
+        }
+        else {
+            $ConfigObject->Set(
+                Key   => 'OTRSTimeZone',
+                Value => '',
+            );
+        }
+    }
+}
 
 # With invalid time zone
 $DateTimeObject = $Kernel::OM->Create(
@@ -108,17 +162,17 @@ $DateTimeObject = $Kernel::OM->Create(
     },
 );
 
-my $OriginalOTRSTimeZone = $DateTimeObject->OTRSTimeZoneGet();
+my $OriginalZnunyTimeZone = $DateTimeObject->ZnunyTimeZoneGet();
 
 # set specific time zone for data storage
 $ConfigObject->Set(
-    Key   => 'OTRSTimeZone',
+    Key   => 'ZnunyTimeZone',
     Value => 'UTC',
 );
 
-my $OTRSTimeZone = $DateTimeObject->OTRSTimeZoneGet();
+my $ZnunyTimeZone = $DateTimeObject->ZnunyTimeZoneGet();
 
-$DateTimeObject->ToOTRSTimeZone();
+$DateTimeObject->ToZnunyTimeZone();
 my $DateTimeValues         = $DateTimeObject->Get();
 my $ExpectedDateTimeValues = {
     Year      => 2016,
@@ -136,7 +190,7 @@ my $ExpectedDateTimeValues = {
 $Self->IsDeeply(
     $DateTimeValues,
     $ExpectedDateTimeValues,
-    'Date and time after call to ToOTRSTimeZone must match expected values.'
+    'Date and time after call to ToZnunyTimeZone must match expected values.'
 );
 
 #
@@ -350,7 +404,7 @@ for my $TestConfig (@TestConfigs) {
 
         my $ExpectedValue = $TestConfig->{Params}->{$ValueName} || 0;
         if ( !$ExpectedValue && $ValueName eq 'TimeZone' ) {
-            $ExpectedValue = $DateTimeObject->OTRSTimeZoneGet();
+            $ExpectedValue = $DateTimeObject->ZnunyTimeZoneGet();
         }
 
         if ( !defined $Values->{$ValueName} || $Values->{$ValueName} ne $ExpectedValue ) {
@@ -383,7 +437,7 @@ for my $TestConfig (@TestConfigs) {
             Hour      => 14,
             Minute    => 59,
             Second    => 0,
-            TimeZone  => $OTRSTimeZone,
+            TimeZone  => $ZnunyTimeZone,
         },
     },
     {
@@ -400,7 +454,7 @@ for my $TestConfig (@TestConfigs) {
             Hour      => 0,
             Minute    => 7,
             Second    => 45,
-            TimeZone  => $OTRSTimeZone,
+            TimeZone  => $ZnunyTimeZone,
         },
     },
     {

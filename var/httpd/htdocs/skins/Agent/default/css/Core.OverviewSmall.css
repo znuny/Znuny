@@ -28,7 +28,6 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 }
 
 #OverviewBody.Overview.TicketList {
-    background-color: var(--main-bg-color);
     overflow: unset;
     padding: 0 var(--main-page-padding) var(--main-page-padding);
 }
@@ -53,7 +52,7 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
 #OverviewBody.Overview.TicketList form {
     overflow-x: auto;
-    border: var(--border-width) var(--border-solid) var(--table-tr-border-bottom);
+    border: var(--border-width) var(--border-solid) var(--border-color);
     border-top: 0;
     border-bottom-left-radius: var(--border-radius-sm);
     border-bottom-right-radius: var(--border-radius-sm);
@@ -63,6 +62,9 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     overflow: visible;
     border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
     overflow: hidden;
+    /* Form already draws the frame that continues the bulk-action bar. */
+    border-left: 0;
+    border-right: 0;
 }
 
 @media only screen and (max-width: 1024px) {

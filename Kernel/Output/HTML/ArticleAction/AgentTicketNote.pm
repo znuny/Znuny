@@ -11,6 +11,7 @@ package Kernel::Output::HTML::ArticleAction::AgentTicketNote;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::Language qw(Translatable);
 
@@ -81,8 +82,10 @@ sub GetConfig {
         ItemType    => 'Link',
         Description => $Description,
         Name        => $Description,
-        Class       => 'AsPopup PopupType_TicketAction',
-        Link        => $Link,
+
+        # Icon        => 'fa fa-file-text-o',
+        Class => 'AsPopup PopupType_TicketAction',
+        Link  => $Link,
     );
 
     return ( \%MenuItem );

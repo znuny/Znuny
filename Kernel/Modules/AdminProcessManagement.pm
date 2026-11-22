@@ -378,7 +378,9 @@ sub Run {
                 );
 
                 for my $ElementAttribute (
-                    qw(DescriptionShort DescriptionLong SubmitButtonText SubmitAdviceText Permission RequiredLock)
+                    qw(
+                    DescriptionShort DescriptionLong SubmitButtonText SubmitAdviceText Permission RequiredLock OneClickExecution
+                    )
                     )
                 {
 
@@ -387,7 +389,11 @@ sub Run {
 
                     if ( defined $Value ) {
 
-                        if ( $ElementAttribute eq 'RequiredLock' ) {
+                        if (
+                            $ElementAttribute eq 'RequiredLock'
+                            || $ElementAttribute eq 'OneClickExecution'
+                            )
+                        {
                             $Value = $BooleanMapping->{$Value};
                         }
 
@@ -890,6 +896,34 @@ sub Run {
 
         # return to overview
         return $LayoutObject->Redirect( OP => "Action=$Self->{Action}" );
+    }
+
+    # ------------------------------------------------------------ #
+    # ProcessClone
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'ProcessClone' ) {
+
+        # challenge token check for write action
+        $LayoutObject->ChallengeTokenCheck();
+
+        my $CloneObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Clone');
+        my $Result      = $CloneObject->ProcessClone(
+            ID     => $ProcessID,
+            Name   => $ParamObject->GetParam( Param => 'Name' ) || '',
+            UserID => $Self->{UserID},
+        );
+
+        if ( !$Result->{Success} ) {
+            return $LayoutObject->ErrorScreen(
+                Message => $LayoutObject->{LanguageObject}->Translate(
+                    $Result->{Message} || 'Could not create the cloned process.'
+                ),
+            );
+        }
+
+        return $LayoutObject->Redirect(
+            OP => "Action=$Self->{Action};Subaction=ProcessEdit;ID=$Result->{ProcessID};EntityID=$Result->{EntityID}",
+        );
     }
 
     # ------------------------------------------------------------ #
@@ -1462,6 +1496,51 @@ sub Run {
         }
 
         # send JSON response
+        return $LayoutObject->Attachment(
+            ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
+            Content     => $JSON,
+            Type        => 'inline',
+            NoCache     => 1,
+        );
+    }
+
+    # ------------------------------------------------------------ #
+    # EntityClone AJAX
+    # ------------------------------------------------------------ #
+    elsif ( $Self->{Subaction} eq 'EntityClone' ) {
+
+        # challenge token check for write action
+        $LayoutObject->ChallengeTokenCheck();
+
+        my %GetParam;
+        for my $Param (qw(EntityType EntityID Name)) {
+            $GetParam{$Param} = $ParamObject->GetParam( Param => $Param ) || '';
+        }
+
+        my $CloneObject = $Kernel::OM->Get('Kernel::System::ProcessManagement::DB::Clone');
+        my $Result      = $CloneObject->EntityClone(
+            EntityType => $GetParam{EntityType},
+            EntityID   => $GetParam{EntityID},
+            Name       => $GetParam{Name},
+            UserID     => $Self->{UserID},
+        );
+
+        my $Message = '';
+        if ( $Result->{Message} ) {
+            $Message = $LayoutObject->{LanguageObject}->Translate( $Result->{Message} );
+        }
+
+        my $JSON = $LayoutObject->JSONEncode(
+            Data => {
+                Success    => $Result->{Success} || 0,
+                Message    => $Message,
+                ID         => $Result->{ID}         || '',
+                EntityID   => $Result->{EntityID}   || '',
+                EntityType => $Result->{EntityType} || '',
+                Config     => $Result->{Config}     || {},
+            },
+        );
+
         return $LayoutObject->Attachment(
             ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
             Content     => $JSON,

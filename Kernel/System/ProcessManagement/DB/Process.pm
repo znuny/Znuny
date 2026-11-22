@@ -1367,18 +1367,19 @@ sub ProcessDump {
         next ACTIVITY if !IsHashRefWithData($ActivityDialogData);
 
         $ActivityDialogDump{ $ActivityDialogData->{EntityID} } = {
-            Name             => $ActivityDialogData->{Name},
-            CreateTime       => $ActivityDialogData->{CreateTime},
-            ChangeTime       => $ActivityDialogData->{ChangeTime},
-            Interface        => $ActivityDialogData->{Config}->{Interface}        || '',
-            DescriptionShort => $ActivityDialogData->{Config}->{DescriptionShort} || '',
-            DescriptionLong  => $ActivityDialogData->{Config}->{DescriptionLong}  || '',
-            Fields           => $ActivityDialogData->{Config}->{Fields}           || {},
-            FieldOrder       => $ActivityDialogData->{Config}->{FieldOrder}       || [],
-            Permission       => $ActivityDialogData->{Config}->{Permission}       || '',
-            RequiredLock     => $ActivityDialogData->{Config}->{RequiredLock}     || '',
-            SubmitAdviceText => $ActivityDialogData->{Config}->{SubmitAdviceText} || '',
-            SubmitButtonText => $ActivityDialogData->{Config}->{SubmitButtonText} || '',
+            Name              => $ActivityDialogData->{Name},
+            CreateTime        => $ActivityDialogData->{CreateTime},
+            ChangeTime        => $ActivityDialogData->{ChangeTime},
+            Interface         => $ActivityDialogData->{Config}->{Interface}        || '',
+            DescriptionShort  => $ActivityDialogData->{Config}->{DescriptionShort} || '',
+            DescriptionLong   => $ActivityDialogData->{Config}->{DescriptionLong}  || '',
+            Fields            => $ActivityDialogData->{Config}->{Fields}           || {},
+            FieldOrder        => $ActivityDialogData->{Config}->{FieldOrder}       || [],
+            Permission        => $ActivityDialogData->{Config}->{Permission}       || '',
+            RequiredLock      => $ActivityDialogData->{Config}->{RequiredLock}     || '',
+            SubmitAdviceText  => $ActivityDialogData->{Config}->{SubmitAdviceText} || '',
+            SubmitButtonText  => $ActivityDialogData->{Config}->{SubmitButtonText} || '',
+            OneClickExecution => $ActivityDialogData->{Config}->{OneClickExecution} ? 1 : 0,
         };
     }
 

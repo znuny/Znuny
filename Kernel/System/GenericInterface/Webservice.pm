@@ -12,6 +12,7 @@ package Kernel::System::GenericInterface::Webservice;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 
@@ -592,7 +593,7 @@ sub WebserviceList {
 
 =head2 WebserviceConfigReplace()
 
-Replaces <OTRS_CONFIG> tags in arrays, hashes and strings recursively.
+Replaces OTRS_CONFIG_* and ZNUNY_CONFIG_* tags in arrays, hashes and strings recursively.
 
     my $Data   = '<OTRS_CONFIG_Home>';
     my $Result = $WebserviceObject->WebserviceConfigReplace($Data);
@@ -609,7 +610,7 @@ sub WebserviceConfigReplace {
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
     if ( IsStringWithData($Data) ) {
-        $Data =~ s{(?:<|&lt;)OTRS_CONFIG_(.+?)(?:>|&gt;)}{$ConfigObject->{$1} // ''}eg;
+        $Data =~ s{(?:<|&lt;)(?:OTRS|ZNUNY)_CONFIG_(.+?)(?:>|&gt;)}{$ConfigObject->{$1} // ''}eg;
     }
     elsif ( IsArrayRefWithData($Data) ) {
 

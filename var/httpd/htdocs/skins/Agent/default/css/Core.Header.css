@@ -388,7 +388,7 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
         #HeaderToolBar li.logo-navigation-wrapper .logo-navigation {
             width:           120px;
             height:          27px;
-            background:      url(../img/znuny-logo-black.svg) no-repeat;
+            background:      url(../img/logo.svg) no-repeat;
             background-size: contain;
             position:        relative;
             display: flex !important;
@@ -632,6 +632,28 @@ did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
     .dropdown-container:hover .dropdown-menu {
         display: flex;
         flex-flow: column;
+    }
+
+    /* Dashboard filter lists stay open after a click. On a touch device, hover must not keep an old list on screen. */
+    .DashboardActions.dropdown-container.Opened .dropdown-menu {
+        display: flex;
+        flex-flow: column;
+    }
+
+    body.TouchDevice .DashboardActions.dropdown-container:hover .dropdown-menu {
+        display: none;
+    }
+
+    body.TouchDevice .DashboardActions.dropdown-container.Opened .dropdown-menu {
+        display: flex;
+        flex-flow: column;
+    }
+
+    .DashboardActions.dropdown-container.Dismissed .dropdown-menu,
+    .DashboardActions.dropdown-container.Dismissed:hover .dropdown-menu,
+    body.TouchDevice .DashboardActions.dropdown-container.Dismissed .dropdown-menu,
+    body.TouchDevice .DashboardActions.dropdown-container.Dismissed:hover .dropdown-menu {
+        display: none;
     }
 
     .dropdown-filter:hover label{

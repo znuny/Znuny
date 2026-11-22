@@ -908,6 +908,10 @@ handheld {
         border: unset;
         float: unset;
         background-color: unset;
+        width: auto;
+        height: auto;
+        margin: 0;
+        clear: none;
     }
 
     table.AttachmentList tbody tr:nth-child(2n) td {
@@ -1383,7 +1387,7 @@ handheld {
         width: 33.3%;
         min-width: 255px;
         max-width: 350px;
-        flex: 1;
+        flex: 0 1 33.3%;
         padding-top: var(--padding-md);
         padding-right: var(--padding-md);
     }
@@ -1391,8 +1395,11 @@ handheld {
     .ArticleAttachments li .inner-content {
         display: flex;
         flex: 1;
+        min-width: 0;
         flex-direction: row;
-        justify-content: space-between;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        justify-content: flex-start;
         border-radius: var(--border-radius-sm);
         border: var(--border-width) var(--border-solid) var(--border-color);
         transition: var(--main-transition);
@@ -1401,7 +1408,9 @@ handheld {
 
     .ArticleAttachments li .file-info {
         display: flex;
+        flex: 1 1 auto;
         flex-direction: column;
+        min-width: 0;
         padding: var(--padding-md) var(--padding-xs) var(--padding-md) var(--padding-md);
         gap: var(--gap-sm);
         overflow: hidden;
@@ -1409,14 +1418,27 @@ handheld {
 
     .ArticleAttachments li .file-name {
         color: var(--primary-color);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     .ArticleAttachments li .file-weight {
         color: var(--gray-dark-semi);
     }
 
+    .ArticleAttachments li .file-actions {
+        display: flex;
+        flex: 0 0 auto;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        margin-left: auto;
+    }
+
     .ArticleAttachments li .file-icon {
         display: flex;
+        flex: 0 0 auto;
         padding: var(--padding-md);
         align-items: center;
         transition: var(--main-transition);

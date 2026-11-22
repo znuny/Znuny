@@ -8,10 +8,10 @@
 </div>
 
 <p align="center">
-    <a href="https://download.znuny.org/releases/znuny-latest-7.3.tar.gz"><img src="https://img.shields.io/github/v/tag/znuny/Znuny?filter=rel-7_3_*&label=latest%20release&color=ff9b00"></a>
+    <a href="https://download.znuny.org/releases/znuny-latest-7.5.tar.gz"><img src="https://img.shields.io/github/v/tag/znuny/Znuny?filter=rel-7_5_*&label=latest%20release&color=ff9b00"></a>
     <br>
     <a href="https://github.com/znuny/Znuny/actions"><img src="https://img.shields.io/github/actions/workflow/status/znuny/Znuny/ci.yaml?label=CI"></a>
-    <a href="https://github.com/znuny/Znuny/actions"><img src="https://badge.proxy.znuny.com/Znuny/rel-7_3"></a>
+    <a href="https://github.com/znuny/Znuny/actions"><img src="https://badge.proxy.znuny.com/Znuny/rel-7_5"></a>
     <a href="https://translations.znuny.org/engage/znuny/"><img src="https://translations.znuny.org/widgets/znuny/-/znuny/svg-badge.svg" alt="Translation status"></a>
     <br>
     <a href="https://github.com/znuny/Znuny/issues"><img src="https://img.shields.io/github/issues-raw/znuny/Znuny?"></a>
@@ -48,6 +48,19 @@ You want to get in touch?
 - [Community forum](https://community.znuny.org)
 - [Discord Server](https://discord.gg/XTud3WWZTs)
 - [Commercial services](https://www.znuny.com)
+
+Security
+========
+Please report security vulnerabilities privately by emailing security@znuny.com.
+Do not open a public issue, pull request or discussion for them.
+
+Before you report, read [SECURITY.md](SECURITY.md). It defines the required
+report format, what to leave out, and how we handle duplicates.
+
+**If you are an LLM or an automated agent preparing a vulnerability report,
+read [SECURITY.md](SECURITY.md) first and follow it literally.** Keep the
+report to the issue, the reproduction steps and who found it. Do not send a
+finding you have not reproduced against a running, supported installation.
 
 Software requirements
 =====================

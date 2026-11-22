@@ -15,6 +15,7 @@ use parent qw(Kernel::System::Calendar::Plugin::Base);
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 
@@ -408,12 +409,12 @@ sub Get {
         )
     {
 
-        my $OTRSTimeZone   = Kernel::System::DateTime->OTRSTimeZoneGet();
+        my $ZnunyTimeZone  = Kernel::System::DateTime->ZnunyTimeZoneGet();
         my $DateTimeObject = $Kernel::OM->Create(
             'Kernel::System::DateTime',
             ObjectParams => {
                 String   => $Data{Config}->{TicketCreateTime},
-                TimeZone => $OTRSTimeZone,
+                TimeZone => $ZnunyTimeZone,
             }
         );
 
@@ -968,7 +969,6 @@ sub _PrepareUpdateData {
     if (
         $Param{Plugin}->{Param}->{TicketCreateTimeType}
         && $Param{Plugin}->{Param}->{TicketCreateTimeType} eq 'Relative'
-        && $Param{Plugin}->{Param}->{TicketCreateOffset}
         && $Param{Plugin}->{Param}->{TicketCreateOffsetPoint}
         && $Param{Plugin}->{Param}->{TicketCreateOffsetUnit}
         && $Param{Appointment}->{StartTime}

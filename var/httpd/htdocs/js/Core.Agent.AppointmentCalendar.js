@@ -404,6 +404,8 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                     }),
                     DocumentVisibleLeft = $(document).scrollLeft() + $(window).width(),
                     DocumentVisibleTop = $(document).scrollTop() + $(window).height(),
+                    VisibleTop = $(document).scrollTop() + ($('#Header').outerHeight() || 0) + 8,
+                    VisibleLeft = $(document).scrollLeft() + 8,
                     LastXPosition,
                     LastYPosition;
 
@@ -443,8 +445,20 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
                     LastXPosition = PosX + $TooltipObj.width();
                     if (LastXPosition > DocumentVisibleLeft) {
                         PosX = PosX - $TooltipObj.width() - 30;
-                        $TooltipObj.css('left', PosX + 'px');
                     }
+
+                    // Keep the tooltip inside the viewport. Flipping by the full height
+                    // can place it under the header or above the page.
+                    if (PosY < VisibleTop) {
+                        PosY = VisibleTop;
+                    }
+                    if (PosX < VisibleLeft) {
+                        PosX = VisibleLeft;
+                    }
+                    $TooltipObj.css({
+                        top: PosY + 'px',
+                        left: PosX + 'px'
+                    });
 
                     // Show the tooltip
                     $TooltipObj.fadeIn('fast');
@@ -901,7 +915,6 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
             TeamID: AppointmentData.CalEvent.teamIds ? AppointmentData.CalEvent.teamIds : undefined,
             ResourceID: AppointmentData.CalEvent.resourceIds ? AppointmentData.CalEvent.resourceIds :
                 AppointmentData.CalEvent.resourceId ? [ AppointmentData.CalEvent.resourceId ] : undefined,
-            Plugin: AppointmentData.CalEvent.pluginData,
         };
 
         // Assigned resource didn't change
@@ -1094,15 +1107,18 @@ Core.Agent.AppointmentCalendar = (function (TargetNS) {
             var $LinkObj = $(Element),
                 BaseURL  = $LinkObj.data('baseUrl');
 
+            // Clear inline display from previous animations so icon-hover stays flex-centered.
+            $LinkObj.css('display', '');
+
             // Update link URL and show it if location is set
             if (LocationValue.length > 0 && LocationValue !== '-') {
                 $LinkObj.attr('href', BaseURL + encodeURIComponent(LocationValue))
-                    .fadeIn('fast');
+                    .removeClass('Hidden');
             }
 
             // Otherwise, hide the link
             else {
-                $LinkObj.fadeOut('fast');
+                $LinkObj.addClass('Hidden');
             }
         });
 

@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.836409929980904;
+    $Self->{Completeness}        = 0.831936758893281;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1693,6 +1693,8 @@ sub Data {
             'Для создания нового Процесса Вы можете импортировать Процесс, экспортированный из другой системы или создать полностью новый.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'Изменения в Процессах сделанные здесь будут актуальны после синхронизации данных Процесса. При синхронизации, все вновь внесенные изменения будут записаны в конигурационные файлы системы.',
+        'Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.' =>
+            'Копирование дублирует только процесс и сохраняет ссылки на исходные элементы. Клонирование создаёт независимую неактивную копию. Каждый содержащийся элемент получает новый внутренний ID, а исходный процесс остаётся без изменений.',
         'Access Control Lists (ACL)' => 'Списки управления доступом (ACL)',
         'Generic Agent' => 'Планировщик задач',
         'Manage Process Widget Groups' => '',
@@ -1701,6 +1703,7 @@ sub Data {
         'Print' => 'Печать',
         'Export Process Configuration' => 'Экспортировать конфигурацию процесса',
         'Copy Process' => 'Скопировать процесс',
+        'Clone Process' => 'Клонировать процесс',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Please note, that changing this activity will affect the following processes' =>
@@ -1739,6 +1742,8 @@ sub Data {
         'Required Lock' => 'Требуется блокировка',
         'The selected required lock does not exist.' => 'Выбранное требование - "требуется блокировка" не существует.',
         'This field is required for activitiy dialogs with a scope.' => '',
+        'One-click execution' => 'Выполнение в один клик',
+        'Skip the activity dialog popup and submit immediately.' => 'Пропустить всплывающее окно диалога активности и сразу отправить.',
         'Submit Advice Text' => 'Текст подсказки кнопки Отправить',
         'Submit Button Text' => 'Название кнопки Отправить',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1751,6 +1756,13 @@ sub Data {
         'Text Template' => 'Текстовый шаблон',
         'Auto fill' => '',
         'Display' => 'Отобразить',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+        'Please enter a name for the cloned process. The original process stays unchanged.' =>
+            'Введите имя для клонированного процесса. Исходный процесс остаётся без изменений.',
+        'Process Name' => 'Имя Процесса',
+        'Please enter a name for the cloned element. The original element stays unchanged.' =>
+            'Введите имя для клонированного элемента. Исходный элемент остаётся без изменений.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => 'Путь',
@@ -1791,7 +1803,6 @@ sub Data {
             'Действия могут быть назначены Переходу переиаскиванием Действия на метку(значок) Перехода',
         'Edit Process' => 'Редактировать процесс',
         'Edit Process Information' => 'Редактировать информацию о Процессе',
-        'Process Name' => 'Имя Процесса',
         'The selected state does not exist.' => 'Выбранное состояние не существует.',
         'Process Preferences' => '',
         'Add and Edit Activities, Activity Dialogs and Transitions' => 'Добавление и Редактирование Активностей, Диалогов Активности и Переходов',
@@ -2697,6 +2708,15 @@ sub Data {
         'Solution Time' => 'Время до решения заявки',
         'Accounted time' => 'Потраченное на заявку время',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketAttachmentList.tt
+        'Download attachments of %s%s%s' => '',
+        'Start typing to filter...' => '',
+        'Filter attachments...' => '',
+        'Hide all inline attachments' => '',
+        'Preview' => '',
+        'This ticket does not have any attachments.' => '',
+        'Download as ZIP file' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
         'Bounce to' => 'Перенаправить на',
         'You need a email address.' => 'Нужно указать адрес электронной почты.',
@@ -2758,7 +2778,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => 'История для %s%s%s',
-        'Start typing to filter...' => '',
         'Filter for history items' => 'Фильтр для элементов истории',
         'Expand/Collapse all' => 'Раскрыть/Свернуть все',
         'CreateTime' => 'ВремяСоздания',
@@ -2871,6 +2890,7 @@ sub Data {
         'Save filter settings as default' => 'Сохранить условия фильтра для показа по умолчанию',
         'Event Type' => 'Тип события',
         'Save as default' => 'Сохранить, как значение по умолчанию',
+        'Back' => 'Назад',
         'Change Queue' => 'Сменить очередь',
         'Add Filter' => 'Добавить фильтр',
         'Set' => 'Установить',
@@ -2915,6 +2935,12 @@ sub Data {
         'PDF' => 'PDF',
         'View' => 'Просмотр',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/Attachments.tt
+        'Ticket attachments' => '',
+        'Download as ZIP archive' => '',
+        'All attachments' => '',
+        'Selected attachments' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
         'Linked Objects' => 'Связанные объекты',
 
@@ -2929,9 +2955,15 @@ sub Data {
         'To protect your privacy, remote content was blocked.' => 'Для защиты конфиденциальности, содержимое из внешнего источника было заблокировано',
         'Load blocked content.' => 'Загрузить заблокированное содержимое.',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AttachmentList.tt
+        'Show more' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Attachments.tt
+        'Add attachments of other articles' => '',
+        'Select all attachments' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => 'Домой',
-        'Back' => 'Назад',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -3062,7 +3094,6 @@ sub Data {
         'Ticket fields' => 'Поля заявки',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
-        'Preview' => '',
         'Click to preview this file.' => '',
         'Click to download this file.' => '',
         'Click to delete this attachment.' => 'Нажмите для удаления вложения.',
@@ -3531,6 +3562,8 @@ sub Data {
         '%s is missing. The file could not be downloaded properly.' => '',
         'Please contact the administrator.' => 'Свяжитесь с администратором.',
         '%s is missing. The file could not be previewed properly.' => '',
+        'The file could not be previewed properly.' => '',
+        'This file cannot be previewed.' => '',
         '%s is missing. The file could not be deleted properly.' => '',
 
         # Perl Module: Kernel/Modules/AdminACL.pm
@@ -4195,7 +4228,7 @@ sub Data {
         # Perl Module: Kernel/Modules/AdminSystemFiles.pm
         'Package files - %s' => '',
         '(Files where only the permissions have been changed will not be displayed.)' =>
-            '',
+            '(Файлы, у которых были изменены только права доступа, отображаться не будут.)',
 
         # Perl Module: Kernel/Modules/AdminSystemMaintenance.pm
         'Start date shouldn\'t be defined after Stop date!' => 'Начальная дата не может быть задана позднее даты окончания!',
@@ -4509,6 +4542,9 @@ sub Data {
         'Available tickets' => 'Доступные заявки',
         'including subqueues' => 'включая подочереди',
         'excluding subqueues' => 'исключая подочереди',
+        'System default' => '',
+        'Position' => '',
+        'Right' => 'Правый',
         'Queue View' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
@@ -4697,7 +4733,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => 'Пометить сообщение как непрочитанное',
-        'Mark as unseen' => 'Пометить как непрочитанное',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Пометить',
@@ -5305,13 +5340,6 @@ sub Data {
         'Perl Modules' => 'Модули Perl',
         'Not all required Perl modules are correctly installed.' => 'Не все требуемые модули Perl установлены корректно.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-        'Perl Modules Audit' => 'Аудит модулей Perl',
-        'CPAN::Audit reported that one or more installed Perl modules have known vulnerabilities. Please note that there might be false positives for distributions patching Perl modules without changing their version number.' =>
-            '',
-        'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
-            '',
-
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
         'Perl Version' => 'Версия Perl',
 
@@ -5544,11 +5572,12 @@ sub Data {
         'Disabled' => 'Отключено',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/Date.pm
-        'System was not able to calculate user Date in OTRSTimeZone!' => 'Системе не удалось вычислить дату пользователя в OTRSTimeZone!',
+        'System was not able to calculate user Date in ZnunyTimeZone!' =>
+            '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/DateTime.pm
-        'System was not able to calculate user DateTime in OTRSTimeZone!' =>
-            'Системе не удалось вычислить DateTime пользователя в OTRSTimeZone!',
+        'System was not able to calculate user DateTime in ZnunyTimeZone!' =>
+            '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/FrontendNavigation.pm
         'Value is not correct! Please, consider updating this module.' =>
@@ -5729,7 +5758,7 @@ sub Data {
         'Remove closed tickets from agents\' ticket watch lists.' => '',
 
         # XML Definition: Kernel/Config/Files/XML/Framework.xml
-        'Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
+        'Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If not enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
             '',
         'Enables or disables the debug mode over frontend interface.' => 'Включает или выключает режим отладки через интерфейс системы.',
         'Delivers extended debugging information in the frontend in case any AJAX errors occur, if enabled.' =>
@@ -5983,13 +6012,13 @@ sub Data {
             '',
         'Defines the period of time (in minutes) before customer is marked as "away" due to inactivity (e.g. in the "Logged-In Users" widget or for the chat).' =>
             'Задает интервал времени (в минутах), после которого клиент будет помечен как "отсутствующий", потому как неактивен (например в "Залогированные Пользователи" виджете или в чате).',
-        'This setting is deprecated. Set OTRSTimeZone instead.' => 'Этот параметр устарел. Вместо него используйте OTRSTimeZone.',
+        'This setting is deprecated. Set ZnunyTimeZone instead.' => '',
         'Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.' =>
             '',
         'Sets the time zone that will be assigned to newly created users and will be used for users that haven\'t yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user\'s time zone.' =>
             '',
-        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
-            'Если включено, пользователи, еще не выбравшие временную зону, будут уведомлены сделать это. Примечание: Уведомление будет показано если (1) пользователь еще не выбрал временную зону и (2) OTRSTimeZone совпадает с UserDefaultTimeZone и (3) они не установлены в UTC.',
+        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) ZnunyTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
+            '',
         'Maximum Number of a calendar shown in a dropdown.' => '',
         'Define the start day of the week for the date picker.' => 'Укажите первый день недели для использовании при выборе даты',
         'Adds the permanent vacation days.' => 'Добавляет постоянные дни отпуска.',
@@ -6432,6 +6461,24 @@ sub Data {
             '',
         'Example package autoload configuration.' => '',
         'Activates week number for datepickers.' => 'Активирует номер недели при выборе даты.',
+        'If this configuration is deactivated, all duplicate files are removed from the selection lists.' =>
+            '',
+        'If enabled, a preview overlay is available for article attachments (images, PDFs and other permitted types).' =>
+            '',
+        'Disables the widgets when the number of article in the ticket is reached.' =>
+            '',
+        'Disables the widgets when the number of attachments in the ticket is reached.' =>
+            '',
+        'Number of a attachments shown by default.' => '',
+        'Number of a attachments shown in AgentTicketZoom.' => '',
+        'AgentTicketZoom widget which provides all attachments of the ticket for download.' =>
+            '',
+        'Shows a link to preview article attachments in the zoom view of the article in the agent interface.' =>
+            '',
+        'Agent ticket dialogs that show a selection to reuse attachments of other articles of the ticket.' =>
+            '',
+        'Shows a link in the menu to select and download all attachments of the ticket.' =>
+            '',
 
         # XML Definition: Kernel/Config/Files/XML/GenericInterface.xml
         'Performs the configured action for each event (as an Invoker) for each configured web service.' =>
@@ -6584,6 +6631,8 @@ sub Data {
         'Updates the ticket index accelerator.' => 'Обновляет ticket index accelerator.',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             'Сбрасывает Владельца и разблокирует заявку при перемещении ее в другую очередь.',
+        'Resets the responsible of a ticket if it was moved to another queue.' =>
+            'Сбрасывает Ответственного заявки при перемещении ее в другую очередь.',
         'Forces to choose a different ticket state (from current) after lock action. Define the current state as key, and the next state after lock action as content.' =>
             'Принудительно устанавливать новое состояние (отличное от текущего) поcле блокирования заявки. Задайте текущее состояние как Ключ и следующее состояние как Содержимое.',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>
@@ -6722,6 +6771,8 @@ sub Data {
             'Включить "мигание" для очередей содержащих наиболее старые заявки',
         'Include tickets of subqueues per default when selecting a queue.' =>
             'Включает заявки подочередей по умолчанию при выборе очереди.',
+        'Defines the queue navigation in the queue view. Top shows one queue level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            '',
         'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the queue view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the QueueID for the key and 0 or 1 for value.' =>
             'Сортировать заявки (по возрастанию или убыванию) если выбрана одна очередь при просмотре очередей и после сортировки по приоритету. Значения: 0 = по возрастанию (старые сверху, по умолчанию), 1 = по убыванию (новейшие сверху). Используйте QueueID в качестве ключа и 0 или 1 в качестве значения ключа.',
         'Defines the default sort criteria for all queues displayed in the queue view.' =>
@@ -6748,6 +6799,8 @@ sub Data {
             '',
         'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
             'Активирует механизм моргания сервиса, который содержит самую старую заявку.',
+        'Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            '',
         'Activates time accounting.' => 'Включить учет времени выполнения',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             'Задает единицы измерения для единиц времени (например: рабочие часы, часы, минуты).',
@@ -8189,6 +8242,16 @@ sub Data {
             '',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             '',
+        'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
+            '',
+        'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
+            '',
+        'Defines the required ticket attributes to activate the preview. The following ticket attributes are supported: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.' =>
+            '',
+        'Defines the required ticket attributes to activate showing the first preview for the first PDF. The following ticket attributes are supported: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.' =>
+            '',
+        'What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder.' =>
+            'Чем заменять неопределённое значение при вставке в шаблон с помощью заполнителя ZNUNY_.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'временно недействительный',
@@ -8537,6 +8600,10 @@ sub Data {
         'Are you sure you want to delete this appointment? This operation cannot be undone.' =>
             'Вы действительно желаете удалить это мероприятие? Эта операция не может быть отменена.',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Attachments.js
+        'Please select attachments for download.' => '',
+        'Show less' => '',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
         'Copied to clipboard!' => '',
 
@@ -8662,6 +8729,10 @@ sub Data {
         'Filters' => 'Фильтры',
         'Clear search' => 'Очистить параметры поиска',
 
+        # JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+        'Collapse' => 'Свернуть',
+        'Expand' => 'Развернуть',
+
         # JS File: var/httpd/htdocs/js/Core.UI.Popup.js
         'If you now leave this page, all open popup windows will be closed, too!' =>
             'Если вы сейчас покинете эту страницу, будут также закрыты и все всплывающие окна!',
@@ -8701,10 +8772,9 @@ sub Data {
         'No space left for the following files: %s' => 'Недостаточно места для следующих файлов: %s',
         'Available space %s of %s.' => 'Доступное место %s из %s',
         'Upload information' => 'Информация о загрузке',
-        'An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator.' =>
-            '',
         'An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator.' =>
             'Неизвестная ошибка обнаружена при удалении вложения. Попробуйте повторить. Если ошибка повторяется постоянно, свяжитесь в вашим системным администратором.',
+        '%s of %s' => '',
 
         # JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
         'This is %s' => 'Это %s',
@@ -9159,6 +9229,7 @@ Thanks for your help!
         'Management of ticket attribute relations.' => 'Управление связями свойств заявки.',
         'Mark as Spam!' => 'Пометить как спам!',
         'Mark as seen' => '',
+        'Mark as unseen' => 'Пометить как непрочитанное',
         'Mark this ticket as junk!' => 'Пометить эту заявку как мусор!',
         'Mark ticket as seen' => 'Пометить заявку как прочитанную',
         'Mark ticket as unseen' => 'Пометить заявку как непрочитанную',
@@ -9268,7 +9339,6 @@ Thanks for your help!
         'Resent email to "%s".' => '',
         'Responsible Tickets' => 'Заявки, за которые ответственный',
         'Responsible Tickets.' => 'Заявки, за которые ответственный.',
-        'Right' => 'Правый',
         'Romanian' => '',
         'Running Process Tickets' => 'Запущенные Процессные заявки',
         'Russian' => 'Русский',
@@ -9503,6 +9573,7 @@ Thanks for your help!
         '%s KB',
         '%s MB',
         '%s TB',
+        '%s of %s',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9526,7 +9597,6 @@ Thanks for your help!
         'An item with this name is already present.',
         'An unconnected transition is already placed on the canvas. Please connect this transition first before placing another transition.',
         'An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator.',
-        'An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator.',
         'An unknown error occurred. Please contact the administrator.',
         'Apply',
         'Appointment',
@@ -9559,9 +9629,12 @@ Thanks for your help!
         'Click to download this file.',
         'Click to preview this file.',
         'Click to select a file for upload.',
+        'Clone',
+        'Clone Process',
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Collapse',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9629,6 +9702,7 @@ Thanks for your help!
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',
         'Don\'t save, update manually',
+        'Download',
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
@@ -9643,10 +9717,12 @@ Thanks for your help!
         'Error in the mail settings. Please correct and try again.',
         'Error: Browser Check failed!',
         'Event Type Filter',
+        'Expand',
         'Expanded',
         'Favourites',
         'Feb',
         'February',
+        'Filter',
         'Filters',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
@@ -9729,6 +9805,7 @@ Thanks for your help!
         'Please only select one file for upload.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
         'Preparing to deploy, please wait...',
@@ -9783,6 +9860,8 @@ Thanks for your help!
         'Show',
         'Show EntityIDs',
         'Show current selection',
+        'Show less',
+        'Show more',
         'Show or hide the content.',
         'Slide the navigation bar',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',
@@ -9851,6 +9930,7 @@ Thanks for your help!
         'Timeline Week',
         'Title',
         'Today',
+        'Toggle sidebar',
         'Too many active calendars',
         'Try again',
         'Tu',

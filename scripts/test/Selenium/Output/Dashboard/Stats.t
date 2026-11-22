@@ -173,7 +173,7 @@ $Selenium->RunTest(
         my $SelectedTimeZone = $Selenium->execute_script("return \$('#TimeZone').val();");
         $Self->Is(
             $SelectedTimeZone,
-            $ConfigObject->Get('OTRSTimeZone'),
+            $ConfigObject->Get('ZnunyTimeZone'),
             'Default time zone'
         );
 

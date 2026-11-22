@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 1;
+    $Self->{Completeness}        = 0.998577075098814;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1687,6 +1687,8 @@ sub Data {
             'Egy új folyamat létrehozásához importálhat egy másik rendszerből exportált folyamatot, vagy létrehozhat egy teljesen újat.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             'A folyamatokon itt elvégzett módosítás csak akkor lesz hatással a rendszer viselkedésére, ha szinkronizálja a folyamatadatokat. A folyamatok szinkronizálásával az újonnan elvégzett módosítások be lesznek írva a beállításokba.',
+        'Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.' =>
+            'A másolás csak a folyamatot duplikálja, és megtartja a hivatkozásokat az eredeti elemekre. A klónozás független inaktív másolatot hoz létre. Minden tartalmazott elem új belső azonosítót kap, az eredeti folyamat pedig változatlan marad.',
         'Access Control Lists (ACL)' => 'Hozzáférés-vezérlési listák (ACL)',
         'Generic Agent' => 'Általános ügyintéző',
         'Manage Process Widget Groups' => 'Folyamat felületi elem csoportok kezelése',
@@ -1695,6 +1697,7 @@ sub Data {
         'Print' => 'Nyomtatás',
         'Export Process Configuration' => 'Folyamat-beállítás exportálása',
         'Copy Process' => 'Folyamat másolása',
+        'Clone Process' => 'Folyamat klónozása',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Please note, that changing this activity will affect the following processes' =>
@@ -1733,6 +1736,8 @@ sub Data {
         'Required Lock' => 'Zárolás szükséges',
         'The selected required lock does not exist.' => 'A kijelölt szükséges zárolás nem létezik.',
         'This field is required for activitiy dialogs with a scope.' => 'Ez a mező kötelező a hatókörrel rendelkező tevékenység-párbeszédablakoknál.',
+        'One-click execution' => 'Végrehajtás egy kattintással',
+        'Skip the activity dialog popup and submit immediately.' => 'A tevékenység párbeszédablak felugró ablakának kihagyása és azonnali elküldése.',
         'Submit Advice Text' => 'Elküldés értesítőszövege',
         'Submit Button Text' => 'Elküldés gomb szövege',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1745,6 +1750,13 @@ sub Data {
         'Text Template' => 'Szövegsablon',
         'Auto fill' => 'Automatikus kitöltés',
         'Display' => 'Megjelenítés',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+        'Please enter a name for the cloned process. The original process stays unchanged.' =>
+            'Adjon meg egy nevet a klónozott folyamatnak. Az eredeti folyamat változatlan marad.',
+        'Process Name' => 'Folyamat neve',
+        'Please enter a name for the cloned element. The original element stays unchanged.' =>
+            'Adjon meg egy nevet a klónozott elemnek. Az eredeti elem változatlan marad.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => 'Útvonal',
@@ -1785,7 +1797,6 @@ sub Data {
             'Műveletek rendelhetők egy átmenethez, ha a műveletelemet egy átmenet címkéjére ejti.',
         'Edit Process' => 'Folyamat szerkesztése',
         'Edit Process Information' => 'Folyamatinformációk szerkesztése',
-        'Process Name' => 'Folyamat neve',
         'The selected state does not exist.' => 'A kijelölt állapot nem létezik.',
         'Process Preferences' => 'Folyamat beállításai',
         'Add and Edit Activities, Activity Dialogs and Transitions' => 'Tevékenységek, tevékenység-párbeszédablakok és átmenetek hozzáadása és szerkesztése',
@@ -2691,6 +2702,15 @@ sub Data {
         'Solution Time' => 'Megoldás ideje',
         'Accounted time' => 'Elszámolt idő',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketAttachmentList.tt
+        'Download attachments of %s%s%s' => '%s%s%s mellékleteinek letöltése',
+        'Start typing to filter...' => 'Kezdjen el gépelni a szűréshez…',
+        'Filter attachments...' => 'Mellékletek szűrése...',
+        'Hide all inline attachments' => 'Az összes beágyazott melléklet elrejtése',
+        'Preview' => 'Előnézet',
+        'This ticket does not have any attachments.' => 'Ennek a jegynek nincsenek mellékletei.',
+        'Download as ZIP file' => 'Letöltés ZIP-fájlként',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
         'Bounce to' => 'Átirányítás ide',
         'You need a email address.' => 'Egy e-mail-címre van szüksége.',
@@ -2752,7 +2772,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => '%s%s%s előzményei',
-        'Start typing to filter...' => 'Kezdjen el gépelni a szűréshez…',
         'Filter for history items' => 'Szűrő az előzményelemekhez',
         'Expand/Collapse all' => 'Összes kinyitása vagy összecsukása',
         'CreateTime' => 'Létrehozás ideje',
@@ -2865,6 +2884,7 @@ sub Data {
         'Save filter settings as default' => 'Szűrőbeállítások mentése alapértelmezettként',
         'Event Type' => 'Eseménytípus',
         'Save as default' => 'Mentés alapértelmezettként',
+        'Back' => 'Vissza',
         'Change Queue' => 'Várólista módosítása',
         'Add Filter' => 'Szűrő hozzáadása',
         'Set' => 'Beállítás',
@@ -2909,6 +2929,12 @@ sub Data {
         'PDF' => 'PDF',
         'View' => 'Nézet',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/Attachments.tt
+        'Ticket attachments' => 'Jegymellékletek',
+        'Download as ZIP archive' => 'Letöltés ZIP-archívumként',
+        'All attachments' => 'Összes melléklet',
+        'Selected attachments' => 'Kijelölt mellékletek',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
         'Linked Objects' => 'Kapcsolt objektumok',
 
@@ -2923,9 +2949,15 @@ sub Data {
         'To protect your privacy, remote content was blocked.' => 'Az adatai védelme érdekében a távoli tartalom blokkolva lett.',
         'Load blocked content.' => 'Blokkolt tartalom betöltése.',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AttachmentList.tt
+        'Show more' => 'Több megjelenítése',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Attachments.tt
+        'Add attachments of other articles' => 'Mellékletek hozzáadása más bejegyzésekből',
+        'Select all attachments' => 'Összes melléklet kijelölése',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => 'Kezdőoldal',
-        'Back' => 'Vissza',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => 'Jegylétrehozás',
@@ -3056,7 +3088,6 @@ sub Data {
         'Ticket fields' => 'Jegymezők',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
-        'Preview' => 'Előnézet',
         'Click to preview this file.' => 'Kattintson a fájl előnézetéhez.',
         'Click to download this file.' => 'Kattintson a fájl letöltéséhez.',
         'Click to delete this attachment.' => 'Kattintson a melléklet törléséhez.',
@@ -3525,6 +3556,8 @@ sub Data {
         '%s is missing. The file could not be downloaded properly.' => 'A(z) %s hiányzik. A fájlt nem sikerült megfelelően letölteni.',
         'Please contact the administrator.' => 'Vegye fel a kapcsolatot a rendszergazdával.',
         '%s is missing. The file could not be previewed properly.' => 'A(z) %s hiányzik. A fájl előnézetét nem sikerült megfelelően megjeleníteni.',
+        'The file could not be previewed properly.' => 'A fájl előnézetét nem sikerült megfelelően megjeleníteni.',
+        'This file cannot be previewed.' => 'Ennek a fájlnak nem jeleníthető meg előnézete.',
         '%s is missing. The file could not be deleted properly.' => 'A(z) %s hiányzik. A fájlt nem sikerült megfelelően törölni.',
 
         # Perl Module: Kernel/Modules/AdminACL.pm
@@ -4503,6 +4536,9 @@ sub Data {
         'Available tickets' => 'Elérhető jegyek',
         'including subqueues' => 'alvárólisták felvétele',
         'excluding subqueues' => 'alvárólisták kizárása',
+        'System default' => '',
+        'Position' => '',
+        'Right' => 'Jobb',
         'Queue View' => 'Várólista nézet',
 
         # Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
@@ -4691,7 +4727,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => 'Bejegyzés megjelölése olvasatlanként',
-        'Mark as unseen' => 'Megjelölés olvasatlanként',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => 'Megjelölés',
@@ -5299,13 +5334,6 @@ sub Data {
         'Perl Modules' => 'Perl-modulok',
         'Not all required Perl modules are correctly installed.' => 'Nincs minden szükséges Perm-modul megfelelően telepítve.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-        'Perl Modules Audit' => 'Perl-modulok vizsgálata',
-        'CPAN::Audit reported that one or more installed Perl modules have known vulnerabilities. Please note that there might be false positives for distributions patching Perl modules without changing their version number.' =>
-            'A CPAN::Audit azt jelentette, hogy egy vagy több telepített Perl-modul ismert sebezhetőséggel rendelkezik. Ne feledje, hogy lehetnek tévesen jelzett jelentések is azoknál a disztribúcióknál, amelyek úgy foltozzák a Perl-modulokat, hogy nem változtatják meg a verziószámokat.',
-        'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
-            'A CPAN::Audit nem jelentett semmilyen ismert sebezhetőséget a telepített Perl modulokban.',
-
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
         'Perl Version' => 'Perl verzió',
 
@@ -5538,11 +5566,12 @@ sub Data {
         'Disabled' => 'Letiltva',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/Date.pm
-        'System was not able to calculate user Date in OTRSTimeZone!' => 'A rendszer nem volt képes kiszámítani a felhasználó dátumát az OTRS időzónájában!',
+        'System was not able to calculate user Date in ZnunyTimeZone!' =>
+            '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/DateTime.pm
-        'System was not able to calculate user DateTime in OTRSTimeZone!' =>
-            'A rendszer nem volt képes kiszámítani a felhasználó dátumát és idejét az OTRS időzónájában!',
+        'System was not able to calculate user DateTime in ZnunyTimeZone!' =>
+            '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/FrontendNavigation.pm
         'Value is not correct! Please, consider updating this module.' =>
@@ -5723,8 +5752,8 @@ sub Data {
         'Remove closed tickets from agents\' ticket watch lists.' => 'Lezárt jegyek eltávolítása az ügyintézők jegymegfigyelő listájáról.',
 
         # XML Definition: Kernel/Config/Files/XML/Framework.xml
-        'Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
-            'Letiltja a webes telepítőt (http://yourhost.example.com/znuny/installer.pl), hogy megakadályozza a rendszer feltörését. Ha nincs engedélyezve, akkor a rendszer újratelepíthető, és a jelenlegi alap konfiguráció lesz felhasználva a telepítő parancsfájlon belüli kérdések előre kitöltéséhez. Ha engedélyezve van, akkor letiltja az általános ügyintézőt, a csomagkezelőt és az SQL dobozt is.',
+        'Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If not enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
+            'Letiltja a webes telepítőt (http://yourhost.example.com/znuny/installer.pl), hogy megakadályozza a rendszer feltörését. Ha nincs engedélyezve, akkor a rendszer újratelepíthető, és a jelenlegi alap konfiguráció lesz felhasználva a telepítő parancsfájlon belüli kérdések előre kitöltéséhez. Ha nincs engedélyezve, akkor letiltja az általános ügyintézőt, a csomagkezelőt és az SQL dobozt is.',
         'Enables or disables the debug mode over frontend interface.' => 'Engedélyezi vagy letiltja a hibakereső módot az előtétprogram felületén.',
         'Delivers extended debugging information in the frontend in case any AJAX errors occur, if enabled.' =>
             'Kiterjesztett hibakeresési információkat szolgáltat az előtétprogramon abban az esetben, ha bármilyen AJAX-hiba történik, ha engedélyezve van.',
@@ -5977,13 +6006,13 @@ sub Data {
             'Meghatározza azt az időtartamot (percben), mielőtt az ügyintéző „távol” lesz inaktivitás miatt (például a „Bejelentkezett felhasználók” felületi elemben vagy a csevegésnél).',
         'Defines the period of time (in minutes) before customer is marked as "away" due to inactivity (e.g. in the "Logged-In Users" widget or for the chat).' =>
             'Meghatározza azt az időtartamot (percben), mielőtt az ügyfél „távol” lesz inaktivitás miatt (például a „Bejelentkezett felhasználók” felületi elemben vagy a csevegésnél).',
-        'This setting is deprecated. Set OTRSTimeZone instead.' => 'Ez a beállítás elavult. Állítsa be az OTRSTimeZone beállítást helyette.',
+        'This setting is deprecated. Set ZnunyTimeZone instead.' => '',
         'Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.' =>
             'Beállítja a Znuny által belsőleg használt időzónát, hogy például dátumokat és időket tároljon az adatbázisban. FIGYELEM: ezt a beállítást nem szabad megváltoztatni, miután beállították, és jegyek vagy bármilyen dátumot és időt tartalmazó egyéb adatok létrejöttek.',
         'Sets the time zone that will be assigned to newly created users and will be used for users that haven\'t yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user\'s time zone.' =>
             'Beállítja az időzónát, amely hozzá lesz rendelve az újonnan létrehozott felhasználókhoz, valamint olyan felhasználóknál lesz használva, akiknek még nincs beállított időzónájuk. Ez az alapértelmezetten használt időzóna a Znuny időzónája és a felhasználó időzónája közötti dátum és idő átalakításához.',
-        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
-            'Ha engedélyezve van, akkor azok a felhasználók, akik még nem választottak időzónát, értesítve lesznek, hogy válasszanak. Megjegyzés: az értesítés nem lesz megjelenítve, ha (1) a felhasználó még nem választott időzónát és (2) az OTRS időzónája, valamint a felhasználó alapértelmezett időzónája megegyezik és (3) nincsenek UTC-re állítva.',
+        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) ZnunyTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
+            '',
         'Maximum Number of a calendar shown in a dropdown.' => 'Egy legördülőben megjelenített naptár legnagyobb száma.',
         'Define the start day of the week for the date picker.' => 'A hét kezdőnapjának meghatározása a dátumválasztónál.',
         'Adds the permanent vacation days.' => 'Hozzáadja az állandó munkaszüneti napokat.',
@@ -6426,6 +6455,24 @@ sub Data {
             'Meghatározza a megjelenített oszlopokat és a pozíciót az ügyintézői ügyfél-felhasználó címjegyzék eredményei képernyőn.',
         'Example package autoload configuration.' => 'Csomag automatikus betöltés beállításának példája.',
         'Activates week number for datepickers.' => 'Bekapcsolja a hét számát a dátumválasztóknál.',
+        'If this configuration is deactivated, all duplicate files are removed from the selection lists.' =>
+            'Ha ez a beállítás ki van kapcsolva, akkor az összes kettőzött fájl eltávolításra kerül a kiválasztási listákból.',
+        'If enabled, a preview overlay is available for article attachments (images, PDFs and other permitted types).' =>
+            'Ha engedélyezve van, akkor előnézet érhető el a bejegyzések mellékleteihez (képek, PDF-ek és egyéb engedélyezett típusok).',
+        'Disables the widgets when the number of article in the ticket is reached.' =>
+            'Letiltja a felületi elemeket, ha a jegyben lévő bejegyzések száma elérte a határt.',
+        'Disables the widgets when the number of attachments in the ticket is reached.' =>
+            'Letiltja a felületi elemeket, ha a jegyben lévő mellékletek száma elérte a határt.',
+        'Number of a attachments shown by default.' => 'Az alapértelmezetten megjelenített mellékletek száma.',
+        'Number of a attachments shown in AgentTicketZoom.' => 'Az AgentTicketZoom felületen megjelenített mellékletek száma.',
+        'AgentTicketZoom widget which provides all attachments of the ticket for download.' =>
+            'AgentTicketZoom felületi elem, amely a jegy összes mellékletét letölthetővé teszi.',
+        'Shows a link to preview article attachments in the zoom view of the article in the agent interface.' =>
+            'Egy hivatkozást jelenít meg a bejegyzés mellékleteinek előnézetéhez a bejegyzés nagyított nézetében az ügyintézői felületen.',
+        'Agent ticket dialogs that show a selection to reuse attachments of other articles of the ticket.' =>
+            'Ügyintézői jegypárbeszédablakok, amelyek kijelölési lehetőséget jelenítenek meg a jegy más bejegyzéseihez tartozó mellékletek újrafelhasználásához.',
+        'Shows a link in the menu to select and download all attachments of the ticket.' =>
+            'Egy hivatkozást jelenít meg a menüben a jegy összes mellékletének kijelöléséhez és letöltéséhez.',
 
         # XML Definition: Kernel/Config/Files/XML/GenericInterface.xml
         'Performs the configured action for each event (as an Invoker) for each configured web service.' =>
@@ -6578,6 +6625,8 @@ sub Data {
         'Updates the ticket index accelerator.' => 'Frissíti a jegyindex gyorsítót.',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             'Visszaállítja és feloldja egy jegy tulajdonosát, ha az egy másik várólistába lett áthelyezve.',
+        'Resets the responsible of a ticket if it was moved to another queue.' =>
+            'Visszaállítja egy jegy felelősét, ha az egy másik várólistába lett áthelyezve.',
         'Forces to choose a different ticket state (from current) after lock action. Define the current state as key, and the next state after lock action as content.' =>
             'Egy másik jegyállapot (az aktuálisból) kiválasztását kényszeríti a zárolás művelet után. Az aktuális állapotot kulcsként határozza meg, és a zárolás művelet utáni következő állapotot tartalomként.',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>
@@ -6716,6 +6765,8 @@ sub Data {
             'A legrégebbi jegyet tartalmazó várólista villogási mechanizmusát aktiválja.',
         'Include tickets of subqueues per default when selecting a queue.' =>
             'Az alvárólisták jegyeinek felvétele alapértelmezetten egy várólista kijelölésekor.',
+        'Defines the queue navigation in the queue view. Top shows one queue level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            '',
         'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the queue view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the QueueID for the key and 0 or 1 for value.' =>
             'Rendezi a jegyeket (növekvően vagy csökkenően), ha egyedüli várólista van kiválasztva a várólista nézetben, és miután a jegyek prioritás szerint lettek rendezve. Értékek: 0 = növekvő (legrégebbi felül, alapértelmezett), 1 = csökkenő (legfiatalabb felül). Használja a várólista-azonosítót a kulcshoz és a 0 vagy az 1 számjegyeket az értékhez.',
         'Defines the default sort criteria for all queues displayed in the queue view.' =>
@@ -6742,6 +6793,8 @@ sub Data {
             'Beállítja az életkort percben (második szint) a szolgáltatások kiemeléséhez, amelyek érintetlen jegyeket tartalmaznak.',
         'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
             'A legrégebbi jegyet tartalmazó szolgáltatás villogási mechanizmusát aktiválja.',
+        'Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            '',
         'Activates time accounting.' => 'Bekapcsolja az időelszámolást.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
             'Beállítja az előnyben részesített időegységeket (például munkaegység, óra, perc).',
@@ -8183,6 +8236,16 @@ sub Data {
             'E-mail-címekkel rendelkező rendszerbeállítási lehetőségek nevei, amelyek szintén kiválaszthatók egy kimenő e-mail-profilhoz (a rendszercímeken kívül).',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             'Azon munkamenetek (kulcsok) listája, amelyeknél engedélyezett, hogy az ügyintéző munkamenetei előtétprogram-modul UpdateAJAX alművelete frissítse azokat. Ezek reguláris kifejezések.',
+        'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
+            'Meghatározza a PDF-előnézeti összetevő szélességét az AgentTicketZoom felületen. Adjon meg egy számot (képpont) vagy egy százalékos értéket (relatív).',
+        'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
+            'Meghatározza a PDF-előnézeti összetevő magasságát az AgentTicketZoom felületen. Adjon meg egy számot (képpont) vagy egy százalékos értéket (relatív).',
+        'Defines the required ticket attributes to activate the preview. The following ticket attributes are supported: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.' =>
+            'Meghatározza az előnézet bekapcsolásához szükséges jegyjellemzőket. A következő jegyjellemzők támogatottak: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.',
+        'Defines the required ticket attributes to activate showing the first preview for the first PDF. The following ticket attributes are supported: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.' =>
+            'Meghatározza azokat a szükséges jegyjellemzőket, amelyek az első PDF első előnézete megjelenítésének bekapcsolásához kellenek. A következő jegyjellemzők támogatottak: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.',
+        'What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder.' =>
+            'Mivel kell helyettesíteni egy nem definiált értéket, amikor az egy sablonba kerül beszúrásra egy ZNUNY_ helykitöltő használatával.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'átmenetileg érvénytelen',
@@ -8531,6 +8594,10 @@ sub Data {
         'Are you sure you want to delete this appointment? This operation cannot be undone.' =>
             'Biztosan törölni szeretné ezt az időpontot? Ezt a műveletet nem lehet visszavonni.',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Attachments.js
+        'Please select attachments for download.' => 'Válasszon mellékleteket a letöltéshez.',
+        'Show less' => 'Kevesebb megjelenítése',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
         'Copied to clipboard!' => 'Vágólapra másolva!',
 
@@ -8656,6 +8723,10 @@ sub Data {
         'Filters' => 'Szűrők',
         'Clear search' => 'Keresés törlése',
 
+        # JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+        'Collapse' => 'Összecsuk',
+        'Expand' => 'Kinyitás',
+
         # JS File: var/httpd/htdocs/js/Core.UI.Popup.js
         'If you now leave this page, all open popup windows will be closed, too!' =>
             'Ha most elhagyja ezt az oldalt, az összes megnyitott felugró ablak is be fog záródni!',
@@ -8695,10 +8766,9 @@ sub Data {
         'No space left for the following files: %s' => 'Nincs több hely a következő fájloknak: %s',
         'Available space %s of %s.' => 'Elérhető hely: %s/%s.',
         'Upload information' => 'Feltöltési információk',
-        'An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator.' =>
-            'Ismeretlen hiba történt a melléklet előnézete során. Próbálja meg újra. Ha a hiba továbbra is fennáll, akkor vegye fel a kapcsolatot a rendszergazdával.',
         'An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator.' =>
             'Ismeretlen hiba történt a melléklet törlése során. Próbálja meg újra. Ha a hiba továbbra is fennáll, akkor vegye fel a kapcsolatot a rendszergazdával.',
+        '%s of %s' => '',
 
         # JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
         'This is %s' => 'Ez egy %s',
@@ -9153,6 +9223,7 @@ Az Ön ügyfélszolgálati csapata
         'Management of ticket attribute relations.' => 'Jegyattribútum-kapcsolatok kezelése.',
         'Mark as Spam!' => 'Megjelölés szemétként!',
         'Mark as seen' => 'Megjelölés olvasottként',
+        'Mark as unseen' => 'Megjelölés olvasatlanként',
         'Mark this ticket as junk!' => 'Jegy megjelölése szemétként!',
         'Mark ticket as seen' => 'Jegy megjelölése olvasottként',
         'Mark ticket as unseen' => 'Jegy megjelölése olvasatlanként',
@@ -9262,7 +9333,6 @@ Az Ön ügyfélszolgálati csapata
         'Resent email to "%s".' => 'E-mail újraküldve neki: „%s”.',
         'Responsible Tickets' => 'Felelős jegyek',
         'Responsible Tickets.' => 'Felelős jegyek.',
-        'Right' => 'Jobb',
         'Romanian' => 'Román',
         'Running Process Tickets' => 'Futó folyamatjegyek',
         'Russian' => 'Orosz',
@@ -9497,6 +9567,7 @@ Az Ön ügyfélszolgálati csapata
         '%s KB',
         '%s MB',
         '%s TB',
+        '%s of %s',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9520,7 +9591,6 @@ Az Ön ügyfélszolgálati csapata
         'An item with this name is already present.',
         'An unconnected transition is already placed on the canvas. Please connect this transition first before placing another transition.',
         'An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator.',
-        'An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator.',
         'An unknown error occurred. Please contact the administrator.',
         'Apply',
         'Appointment',
@@ -9553,9 +9623,12 @@ Az Ön ügyfélszolgálati csapata
         'Click to download this file.',
         'Click to preview this file.',
         'Click to select a file for upload.',
+        'Clone',
+        'Clone Process',
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Collapse',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9623,6 +9696,7 @@ Az Ön ügyfélszolgálati csapata
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',
         'Don\'t save, update manually',
+        'Download',
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
@@ -9637,10 +9711,12 @@ Az Ön ügyfélszolgálati csapata
         'Error in the mail settings. Please correct and try again.',
         'Error: Browser Check failed!',
         'Event Type Filter',
+        'Expand',
         'Expanded',
         'Favourites',
         'Feb',
         'February',
+        'Filter',
         'Filters',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
@@ -9723,6 +9799,7 @@ Az Ön ügyfélszolgálati csapata
         'Please only select one file for upload.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
         'Preparing to deploy, please wait...',
@@ -9777,6 +9854,8 @@ Az Ön ügyfélszolgálati csapata
         'Show',
         'Show EntityIDs',
         'Show current selection',
+        'Show less',
+        'Show more',
         'Show or hide the content.',
         'Slide the navigation bar',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',
@@ -9845,6 +9924,7 @@ Az Ön ügyfélszolgálati csapata
         'Timeline Week',
         'Title',
         'Today',
+        'Toggle sidebar',
         'Too many active calendars',
         'Try again',
         'Tu',

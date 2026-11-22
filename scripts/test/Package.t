@@ -359,9 +359,14 @@ $Self->True(
     '#1 PackageBuild()',
 );
 
+$Self->True(
+    $PackageBuild =~ m{\A <\?xml \s+ version="1\.0" \s+ encoding="utf-8" \s* \?> \n <package \s+ version="1\.1"> }xms,
+    '#1 PackageBuild() uses canonical package root tag',
+);
+
 my $PackageUninstall = $PackageObject->PackageUninstall(
     String => $String,
-    UserID => $UserID
+    UserID => $UserID,
 );
 
 $Self->True(

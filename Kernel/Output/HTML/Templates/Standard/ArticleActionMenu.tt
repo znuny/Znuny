@@ -36,7 +36,7 @@
                         <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]"/>
                         <input type="hidden" name="ArticleID" value="[% Data.ArticleID | html %]"/>
                         <input type="hidden" name="ForwardAll" value="[% Item.ForwardAll | html %]"/>
-                        <label for="[% Item.ForwardElementID | html %]">[% Translate(Item.Name) | html %]</label>
+                        <label for="[% Item.ForwardElementID | html %]">[% IF Item.Icon %]<i class="[% Item.Icon | html %]" aria-hidden="true"></i>[% END %][% Translate(Item.Name) | html %]</label>
                         [% Item.StandardForwardsStrg %]
                     </form>
                 </li>
@@ -47,7 +47,7 @@
                         <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]"/>
                         <input type="hidden" name="ArticleID" value="[% Data.ArticleID | html %]"/>
                         <input type="hidden" name="ReplyAll" value="[% Item.ReplyAll | html %]"/>
-                        <label for="[% Item.ResponseElementID | html %]">[% Translate(Item.Name) | html %]</label>
+                        <label for="[% Item.ResponseElementID | html %]">[% IF Item.Icon %]<i class="[% Item.Icon | html %]" aria-hidden="true"></i>[% END %][% Translate(Item.Name) | html %]</label>
                         [% Item.StandardResponsesStrg %]
                     </form>
                 </li>
@@ -55,7 +55,7 @@
 
         [% ELSIF Item.ItemType == 'Link' %]
             <li>
-                <a href="[% IF Item.Link.match('^(?!(mailto)|(http(s)?):)') %][% Env("Baselink") %][% END %][% Item.Link %]" class="[% Item.Class | html %]" [% Item.LinkParam %] title="[% Translate(Item.Description) | html %]">[% Translate(Item.Name) | html %]</a>
+                <a href="[% IF Item.Link.match('^(?!(mailto)|(http(s)?):)') %][% Env("Baselink") %][% END %][% Item.Link %]" class="[% Item.Class | html %]" [% Item.LinkParam %] title="[% Translate(Item.Description) | html %]"[% IF Item.Icon && !Item.Name %] aria-label="[% Translate(Item.Description) | html %]"[% END %]>[% IF Item.Icon %]<i class="[% Item.Icon | html %]" aria-hidden="true"></i>[% END %][% IF Item.Name %][% Translate(Item.Name) | html %][% END %]</a>
             </li>
         [% END %]
 

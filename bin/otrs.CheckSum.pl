@@ -1,1 +1,0 @@
-znuny.CheckSum.pl

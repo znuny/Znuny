@@ -72,7 +72,8 @@ sub GetConfig {
     my %MenuItem = (
         ItemType    => 'Link',
         Description => Translatable('Print this article'),
-        Name        => Translatable('Print'),
+        Name        => '',
+        Icon        => 'fa fa-print',
         Class       => 'AsPopup PopupType_TicketAction',
         Link        =>
             "Action=AgentTicketPrint;TicketID=$Param{Ticket}->{TicketID};ArticleID=$Param{Article}->{ArticleID};ArticleNumber=$Param{Article}->{ArticleNumber}",

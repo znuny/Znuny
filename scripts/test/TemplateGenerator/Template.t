@@ -50,10 +50,10 @@ $HelperObject->ConfigSettingChange(
     Value => 'en',
 );
 
-# Set OTRSTimeZone to UTC.
+# Set ZnunyTimeZone to UTC.
 $HelperObject->ConfigSettingChange(
     Valid => 1,
-    Key   => 'OTRSTimeZone',
+    Key   => 'ZnunyTimeZone',
     Value => 'UTC',
 );
 
@@ -124,8 +124,6 @@ my $DynamicFieldExpect = "Test: " . join(
         }
         sort keys %DynamicFieldTests
 );
-
-#STDERR->say("TEMPLATE: $DynamicFieldTemplate\nEXPECT:   $DynamicFieldExpect");
 
 # Attach a dynamic field of each type to the ticket
 my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
@@ -255,10 +253,11 @@ my $ArticleTo   = 'Supplier <supplier@example.com>';
 
 # Define for which template types certain tags are supported.
 my %Supported = (
-    Answer           => 1,
-    Forward          => 1,
-    Note             => 1,
-    'Answer,Forward' => 1,
+    Answer                      => 1,
+    Forward                     => 1,
+    Note                        => 1,
+    'Answer,Forward'            => 1,
+    'Answer,Email,Forward,Note' => 1,
 );
 
 my $AgentBodyTemplate
@@ -397,6 +396,27 @@ my @Tests = (
                 $Articles[5]->{ArticleID} => 'Test: -|-|-|-',
             },
             Unsupported => 'Test: -|-|-|-',
+        }
+    },
+    {
+        Name         => 'Tag <OTRS_AGENT_From/To/Cc/SUBJECT>',
+        TemplateText =>
+            'Test: <OTRS_AGENT_From>|<OTRS_AGENT_To>|<OTRS_AGENT_Cc>|<OTRS_AGENT_SUBJECT>',
+        TicketID       => $TicketID,
+        EmptyValue     => '😊',
+        TemplateResult => {
+
+            # Template() only copies Subject/Body into DataAgent, so From/To/Cc stay empty.
+            Note      => "Test: 😊|😊|😊|$LastAgentSubject",
+            Supported => {
+                $Articles[0]->{ArticleID} => "Test: 😊|😊|😊|$Articles[0]->{Subject}",
+                $Articles[1]->{ArticleID} => "Test: 😊|😊|😊|$Articles[1]->{Subject}",
+                $Articles[2]->{ArticleID} => "Test: 😊|😊|😊|$Articles[2]->{Subject}",
+                $Articles[3]->{ArticleID} => 'Test: 😊|😊|😊|😊',
+                $Articles[4]->{ArticleID} => 'Test: 😊|😊|😊|😊',
+                $Articles[5]->{ArticleID} => 'Test: 😊|😊|😊|😊',
+            },
+            Unsupported => 'Test: 😊|😊|😊|😊',
         }
     },
     {
@@ -676,15 +696,31 @@ my @Tests = (
 my $StandardTemplateObject = $Kernel::OM->Get('Kernel::System::StandardTemplate');
 
 my @Types = qw( Answer Forward Create Note Email PhoneCall );
-push @Types, ( 'Email,PhoneCall', 'Answer,Forward', );
+push @Types, ( 'Email,PhoneCall', 'Answer,Forward', 'Answer,Email,Forward,Note', );
 
 TEST:
 my $OldRichTextSetting = 42;    # random non-boolean value
 for my $Test (@Tests) {
+    my $OldEmptyValue;
 
     # Get a $TemplateGeneratorObject with appropriate RichText setting
     # Only change the settings if different from last time through the loop
     $Test->{RichText} //= 0;    # Make sure it's defined
+
+    if ( $Test->{EmptyValue} ) {
+
+        # Change only if explicityly requested and restore it after the test
+        $OldEmptyValue = $ConfigObject->Get('TemplateGenerator::EmptyValueReplacement');
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'TemplateGenerator::EmptyValueReplacement',
+            Value => $Test->{EmptyValue}
+        );
+        $Kernel::OM->ObjectsDiscard(
+            Objects => ['Kernel::System::TemplateGenerator']
+        );
+
+    }
     if ( $OldRichTextSetting != $Test->{RichText} ) {
         $Kernel::OM->ObjectsDiscard(
             Objects => ['Kernel::System::TemplateGenerator']
@@ -769,7 +805,90 @@ for my $Test (@Tests) {
             }
         }
     }
+
+    # Restore previous value
+    if ( $Test->{EmptyValue} ) {
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'TemplateGenerator::EmptyValueReplacement',
+            Value => $OldEmptyValue
+        );
+        $Kernel::OM->ObjectsDiscard(
+            Objects => ['Kernel::System::TemplateGenerator']
+        );
+    }
 }
+
+# Template types including Note: with a selected article (e.g. AgentTicketCompose)
+# and without article data (e.g. AgentTicketNote).
+$HelperObject->ConfigSettingChange(
+    Valid => 1,
+    Key   => 'Frontend::RichText',
+    Value => 0,
+);
+$Kernel::OM->ObjectsDiscard(
+    Objects => ['Kernel::System::TemplateGenerator']
+);
+my $TemplateGeneratorObject = $Kernel::OM->Get('Kernel::System::TemplateGenerator');
+
+my %ComposeData = ( %TicketData, %{ $Articles[3] } );
+
+my @NoteTemplateTests = (
+    {
+        Name           => 'Selected article is used instead of the last customer article',
+        TemplateType   => 'Answer,Email,Forward,Note',
+        Data           => \%ComposeData,
+        ExpectedResult => "Test: $Articles[3]->{Subject}|> customer-Article#4-Line1|-",
+    },
+    {
+        Name           => 'Last agent/customer articles are used without article data',
+        TemplateType   => 'Answer,Note',
+        ExpectedResult => "Test: $LastCustomerSubject|$LastCustomerBody1|$LastAgentSubject",
+    },
+    {
+        Name           => 'Last agent/customer articles are used without article data',
+        TemplateType   => 'Note',
+        ExpectedResult => "Test: $LastCustomerSubject|$LastCustomerBody1|$LastAgentSubject",
+    },
+);
+
+for my $Test (@NoteTemplateTests) {
+    my $TemplateID = $StandardTemplateObject->StandardTemplateAdd(
+        Name         => $HelperObject->GetRandomID() . '-StandardTemplate',
+        Template     => 'Test: <OTRS_CUSTOMER_SUBJECT>|<OTRS_CUSTOMER_BODY[1]>|<OTRS_AGENT_SUBJECT>',
+        ContentType  => 'text/plain; charset=utf-8',
+        TemplateType => $Test->{TemplateType},
+        ValidID      => 1,
+        UserID       => 1,
+    );
+    $Self->True(
+        $TemplateID,
+        "'$Test->{TemplateType}' type - TemplateID $TemplateID is created",
+    );
+
+    my $Template = $TemplateGeneratorObject->Template(
+        TemplateID => $TemplateID,
+        TicketID   => $TicketID,
+        Data       => $Test->{Data},
+        UserID     => 1,
+    );
+    $Self->Is(
+        $Template,
+        $Test->{ExpectedResult},
+        "'$Test->{TemplateType}' type - $Test->{Name}",
+    );
+}
+
+$Self->Is(
+    $ComposeData{Subject},
+    $Articles[3]->{Subject},
+    'Subject of the passed article data is not overwritten',
+);
+$Self->Is(
+    $ComposeData{Body},
+    $Articles[3]->{Body},
+    'Body of the passed article data is not overwritten',
+);
 
 # Cleanup is done by RestoreDatabase.
 

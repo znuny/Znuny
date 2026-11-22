@@ -112,9 +112,20 @@ sub Run {
 
     # Import dynamic fields screens
     if ( IsHashRefWithData( $ImportData->{DynamicFieldScreens} ) ) {
-        $ZnunyHelperObject->_DynamicFieldsScreenConfigImport(
-            Config => $ImportData->{DynamicFieldScreens},
-        );
+        my %DynamicFieldScreenConfigurations;
+        DYNAMICFIELDNAME:
+        for my $DynamicFieldName ( sort keys %{ $ImportData->{DynamicFieldScreens} } ) {
+            next DYNAMICFIELDNAME if !IsHashRefWithData( $ImportData->{DynamicFieldScreens}->{$DynamicFieldName} );
+
+            $DynamicFieldScreenConfigurations{$DynamicFieldName}
+                = $ImportData->{DynamicFieldScreens}->{$DynamicFieldName};
+        }
+
+        if (%DynamicFieldScreenConfigurations) {
+            $ZnunyHelperObject->_DynamicFieldsScreenConfigImport(
+                Config => $ImportData->{DynamicFieldScreens},
+            );
+        }
     }
 
     $Self->Print("<green>Done.</green>\n");

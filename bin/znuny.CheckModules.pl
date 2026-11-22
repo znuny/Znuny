@@ -19,6 +19,7 @@
 
 use strict;
 use warnings;
+use utf8;
 
 use File::Basename;
 use FindBin qw($RealBin);
@@ -217,6 +218,18 @@ my @NeededModules = (
             emerge => 'dev-perl/Crypt-JWT',
             zypper => 'perl-Crypt-JWT',
             ports  => 'security/p5-Crypt-JWT',
+        },
+    },
+    {
+        Module   => 'Crypt::AuthEnc::GCM',
+        Required => 0,
+        Comment  => 'Required only if you encrypt sensitive Kernel/Config.pm values '
+            . '(see Kernel::System::Crypt::Secret / bin/znuny.Console.pl Maint::Secret::Encrypt).',
+        InstTypes => {
+            aptget => 'libcryptx-perl',
+            emerge => 'dev-perl/CryptX',
+            zypper => 'perl-CryptX',
+            ports  => 'security/p5-CryptX',
         },
     },
     {
@@ -581,9 +594,11 @@ my @NeededModules = (
         },
     },
     {
-        Module    => 'Net::SAML2',
-        Required  => 0,
-        Comment   => 'Needed if SAML authentication is configured.',
+        Module          => 'Net::SAML2',
+        VersionRequired => '0.89',
+        Required        => 0,
+        Comment         =>
+            'Needed if SAML authentication is configured. Version 0.89 or higher verifies assertion signatures against the configured IdP certificate (CVE-2026-18089, CVE-2026-18092, CVE-2026-18108).',
         InstTypes => {
             aptget => 'libnet-saml2-perl',
             emerge => 'dev-perl/Net-SAML2',

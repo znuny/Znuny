@@ -98,6 +98,14 @@
                                         [% Data.PageShownString %]
                                     </div>
                                 </span>
+[% RenderBlockStart("ContextSettingsField") %]
+                                <div class="row-wrapper ContextSettingsNav">
+                                    <label for="[% Data.Name | html %]">[% Translate(Data.Label) | html %]:</label>
+                                    <div class="Field">
+                                        [% Data.Option %]
+                                    </div>
+                                </div>
+[% RenderBlockEnd("ContextSettingsField") %]
 
 
                                 <span class="ticket-modal modal-col-wrapper">

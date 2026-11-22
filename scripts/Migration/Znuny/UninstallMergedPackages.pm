@@ -33,14 +33,14 @@ sub Run {
     my ( $Self, %Param ) = @_;
 
     my @PackageNames = (
-        'Znuny-MultiSendmail',
-        'Znuny-CopyTicketNumber',
-        'Znuny-AgentTicketActionCommonCustomer',
-        'Znuny4OTRS-AdditionalTicketAttributeSelection',
-        'Znuny-AdditionalTicketAttributeSelection',
-        'Znuny-Bugfix1463',
-        'Znuny-Bugfix-7_3_1',
-        'Znuny-Bugfix1645',
+
+        # Packages newly merged into the framework for this version.
+        'Znuny-AdvancedAttachments',
+        'Znuny4OTRS-AdvancedAttachments',
+        'Znuny-ZoomArticlePDFPreview',
+        'Znuny4OTRS-ZoomArticlePDFPreview',
+
+        # 'Znuny-NAME',
     );
 
     my $CacheObject   = $Kernel::OM->Get('Kernel::System::Cache');

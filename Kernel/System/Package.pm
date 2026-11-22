@@ -50,6 +50,9 @@ Kernel::System::Package - to manage application packages/modules
 
 All functions to manage application packages/modules.
 
+SOPM files use C<E<lt>packageE<gt>> as the canonical root tag. During the transition
+period, C<E<lt>otrs_packageE<gt>> is still accepted by L</PackageParse()>.
+
 =encoding utf-8
 
 =head1 PUBLIC INTERFACE
@@ -123,6 +126,11 @@ sub new {
 
     # reserve space for merged packages
     $Self->{MergedPackages} = {};
+
+    # Canonical SOPM root tag for PackageBuild().
+    # PackageParse() also accepts the legacy root during the transition period.
+    $Self->{PackageRootTag}       = 'package';
+    $Self->{PackageRootTagLegacy} = 'otrs_package';
 
     return $Self;
 }
@@ -1582,7 +1590,7 @@ sub RepositoryPackageListGet {
 
     # Default: Handle source as direct URL.
     my %DownloadParams = (
-        URL => $Param{Source} . '/otrs.xml',
+        URL => $Param{Source} . '/packages.xml',
     );
 
     # If Source is a known repository name, use its URL and credentials instead.
@@ -1590,7 +1598,7 @@ sub RepositoryPackageListGet {
     if ( $RepositoryList{ $Param{Source} } ) {
         my $Repository = $RepositoryList{ $Param{Source} };
 
-        $DownloadParams{URL}             = $Repository->{URL} . '/otrs.xml';
+        $DownloadParams{URL}             = $Repository->{URL} . '/packages.xml';
         $DownloadParams{AuthHeaderKey}   = $Repository->{AuthHeaderKey};
         $DownloadParams{AuthHeaderValue} = $Repository->{AuthHeaderValue};
     }
@@ -1598,6 +1606,7 @@ sub RepositoryPackageListGet {
     my %Package;
     my $Filelist;
     my $XML = $Self->_Download(%DownloadParams);
+
     return if !$XML;
 
     my @XMLARRAY = $Kernel::OM->Get('Kernel::System::XML')->XMLParse( String => $XML );
@@ -2047,7 +2056,7 @@ sub PackageBuild {
     if ( !$Param{Type} ) {
         $XML .= '<?xml version="1.0" encoding="utf-8" ?>';
         $XML .= "\n";
-        $XML .= '<otrs_package version="1.1">';
+        $XML .= '<' . $Self->{PackageRootTag} . ' version="1.1">';
         $XML .= "\n";
     }
 
@@ -2276,7 +2285,7 @@ sub PackageBuild {
         }
     }
 
-    $XML .= '</otrs_package>';
+    $XML .= '</' . $Self->{PackageRootTag} . '>';
 
     return $XML;
 }
@@ -2286,6 +2295,9 @@ sub PackageBuild {
 parse a package
 
     my %Structure = $PackageObject->PackageParse( String => $FileString );
+
+Accepts both the canonical C<E<lt>packageE<gt>> root and the legacy
+C<E<lt>otrs_packageE<gt>> root.
 
 =cut
 
@@ -2336,6 +2348,33 @@ sub PackageParse {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => "Invalid XMLParse in PackageParse()!",
+        );
+        return;
+    }
+
+    my $RootTag;
+    TAG:
+    for my $Tag (@XMLARRAY) {
+        next TAG if $Tag->{TagType} ne 'Start';
+        next TAG if !$Tag->{TagLevel} || $Tag->{TagLevel} != 1;
+
+        $RootTag = $Tag->{Tag};
+        last TAG;
+    }
+
+    if (
+        !$RootTag
+        || (
+            $RootTag ne $Self->{PackageRootTag}
+            && $RootTag ne $Self->{PackageRootTagLegacy}
+        )
+        )
+    {
+        my $RootTagForMessage = defined $RootTag ? $RootTag : '<none>';
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  =>
+                "Unsupported SOPM root tag '$RootTagForMessage'. Use '<$Self->{PackageRootTag}>'. Legacy '<$Self->{PackageRootTagLegacy}>' is accepted during transition for backward compatibility.",
         );
         return;
     }
@@ -3367,7 +3406,7 @@ sub PackageUpgradeAllIsRunning {
 
 Compare the two version strings $VersionNew and $VersionInstalled.
 The type is either 'Min' or 'Max'.
-'Min' returns a true value if $VersionInstalled >= $VersionNew.
+'Min' returns a true value if $VersionInstalled E<gt>= $VersionNew.
 'Max' returns a true value if $VersionInstalled < $VersionNew.
 Otherwise undef is returned in scalar context.
 
@@ -3548,8 +3587,10 @@ download a file
 sub _Download {
     my ( $Self, %Param ) = @_;
 
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
     if ( !defined $Param{URL} ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => 'URL not defined!',
         );
@@ -3575,7 +3616,14 @@ sub _Download {
         Header => \%Header,
     );
 
-    return if !$Response{Content};
+    if ( !$Response{Content} ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Got no response from URL $Param{URL}!",
+        );
+        return;
+    }
+
     return ${ $Response{Content} };
 }
 

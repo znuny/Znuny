@@ -604,6 +604,131 @@ $Self->Is(
     "UserSearch after update",
 );
 
+# No UserEmail preference is stored when the login is the email address.
+# PostMasterSearch then returns that login.
+my $EmailLogin = 'unittest-' . $HelperObject->GetRandomID() . '@example.com';
+
+my $EmailLoginUserID = $UserObject->UserAdd(
+    UserFirstname => 'Email',
+    UserLastname  => 'Login',
+    UserLogin     => $EmailLogin,
+    UserEmail     => $EmailLogin,
+    ValidID       => 1,
+    ChangeUserID  => 1,
+);
+
+$Self->True(
+    $EmailLoginUserID,
+    'UserAdd() - login equals email',
+);
+
+my %EmailLoginPreferences = $UserObject->GetPreferences(
+    UserID => $EmailLoginUserID,
+);
+
+$Self->False(
+    $EmailLoginPreferences{UserEmail},
+    'GetPreferences() - no UserEmail when the login is the email address',
+);
+
+%UserSearch = $UserObject->UserSearch(
+    PostMasterSearch => $EmailLogin,
+);
+
+$Self->Is(
+    $UserSearch{$EmailLoginUserID},
+    $EmailLogin,
+    'UserSearch() - PostMasterSearch login is the email address',
+);
+
+%UserSearch = $UserObject->UserSearch(
+    PostMasterSearch => uc $EmailLogin,
+);
+
+$Self->Is(
+    $UserSearch{$EmailLoginUserID},
+    $EmailLogin,
+    'UserSearch() - PostMasterSearch returns the login',
+);
+
+# Stored UserEmail differs from the login. Preference search returns that email.
+# A search for the login itself is answered by the login fallback.
+my $OtherLogin = 'unittest-' . $HelperObject->GetRandomID() . '@example.com';
+my $OtherEmail = 'unittest-' . $HelperObject->GetRandomID() . '@example.net';
+
+my $OtherUserID = $UserObject->UserAdd(
+    UserFirstname => 'Other',
+    UserLastname  => 'Email',
+    UserLogin     => $OtherLogin,
+    UserEmail     => $OtherEmail,
+    ValidID       => 1,
+    ChangeUserID  => 1,
+);
+
+$Self->True(
+    $OtherUserID,
+    'UserAdd() - login is an email, UserEmail differs',
+);
+
+%UserSearch = $UserObject->UserSearch(
+    PostMasterSearch => $OtherLogin,
+);
+
+$Self->Is(
+    $UserSearch{$OtherUserID},
+    $OtherLogin,
+    'UserSearch() - PostMasterSearch login fallback',
+);
+
+%UserSearch = $UserObject->UserSearch(
+    PostMasterSearch => $OtherEmail,
+);
+
+$Self->Is(
+    $UserSearch{$OtherUserID},
+    $OtherEmail,
+    'UserSearch() - PostMasterSearch returns the stored UserEmail',
+);
+
+# Invalid user whose login is the email address.
+my $InvalidEmailLogin = 'unittest-' . $HelperObject->GetRandomID() . '@example.com';
+
+my $InvalidUserID = $UserObject->UserAdd(
+    UserFirstname => 'Invalid',
+    UserLastname  => 'Email',
+    UserLogin     => $InvalidEmailLogin,
+    UserEmail     => $InvalidEmailLogin,
+    ValidID       => 2,
+    ChangeUserID  => 1,
+);
+
+$Self->True(
+    $InvalidUserID,
+    'UserAdd() - invalid user, login is the email address',
+);
+
+%UserSearch = $UserObject->UserSearch(
+    PostMasterSearch => $InvalidEmailLogin,
+    Valid            => 1,
+);
+
+$Self->Is(
+    $UserSearch{$InvalidUserID},
+    undef,
+    'UserSearch() - PostMasterSearch omits invalid user when Valid is 1',
+);
+
+%UserSearch = $UserObject->UserSearch(
+    PostMasterSearch => $InvalidEmailLogin,
+    Valid            => 0,
+);
+
+$Self->Is(
+    $UserSearch{$InvalidUserID},
+    $InvalidEmailLogin,
+    'UserSearch() - PostMasterSearch login fallback with Valid 0',
+);
+
 # cleanup is done by RestoreDatabase
 
 1;

@@ -36,7 +36,7 @@ sub Run {
         'Version',
         'ProductName',
         'Organization',
-        'OTRSTimeZone',
+        'ZnunyTimeZone',
         'Ticket::IndexModule',
         'Ticket::SearchIndexModule',
         'Ticket::Article::Backend::MIMEBase::ArticleStorage',

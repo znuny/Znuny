@@ -82,6 +82,33 @@ $Selenium->RunTest(
             return;
         };
 
+        # A ticket without articles treats the next note as NotificationNewTicket.
+        # That event notifies My Queues / My Services plus forced recipients, not the owner.
+        # Seed one article so the tested note raises NotificationAddNote (includes the owner).
+        my $SeedArticle = sub {
+            my (%Param) = @_;
+
+            my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
+                ChannelName => 'Internal',
+            );
+
+            my $ArticleID = $ArticleBackendObject->ArticleCreate(
+                TicketID             => $Param{TicketID},
+                SenderType           => 'agent',
+                IsVisibleForCustomer => 0,
+                From                 => '"Seed" <seed@localhost>',
+                Subject              => 'Seed',
+                Body                 => 'Seed',
+                ContentType          => 'text/plain; charset=utf-8',
+                HistoryType          => 'AddNote',
+                HistoryComment       => 'Seed article',
+                NoAgentNotify        => 1,
+                UserID               => $Param{UserID},
+            );
+
+            return $ArticleID;
+        };
+
         # Make sure we start with a clean mail queue.
         $MailQueueClean->();
 
@@ -185,6 +212,14 @@ $Selenium->RunTest(
             UserID    => $UserID[2],
         );
 
+        $Self->True(
+            $SeedArticle->(
+                TicketID => $TicketID,
+                UserID   => $UserID[0],
+            ),
+            "Seed article created for ticket $TicketID",
+        );
+
         my $TestEmailObject = $Kernel::OM->Get('Kernel::System::Email::Test');
 
         $Success = $TestEmailObject->CleanUp();
@@ -274,7 +309,7 @@ $Selenium->RunTest(
         );
         my %Article = $ArticleBackendObject->ArticleGet(
             TicketID  => $TicketID,
-            ArticleID => $Articles[0]->{ArticleID},
+            ArticleID => $Articles[-1]->{ArticleID},
         );
         my $ExpectedArticleTo
             = "\"$TestUser[1] $TestUser[1]\" <$TestUser[1]\@localunittest.com>, \"$TestUser[2] $TestUser[2]\" <$TestUser[2]\@localunittest.com>";
@@ -483,6 +518,14 @@ $Selenium->RunTest(
             Lock     => 'lock',
             TicketID => $NewTicketID,
             UserID   => $UserID[1],
+        );
+
+        $Self->True(
+            $SeedArticle->(
+                TicketID => $NewTicketID,
+                UserID   => $UserID[1],
+            ),
+            "Seed article created for ticket $NewTicketID",
         );
 
         # Make sure we start with a clean mail queue.

@@ -51,11 +51,11 @@ sub Run {
     my $PackageObject = $Kernel::OM->Get('Kernel::System::Package');
 
     # get repository index
-    if ( $File =~ /otrs.xml$/ ) {
+    if ( $File =~ /packages\.xml$/ ) {
 
         # get repository index
         my $Index = "<?xml version=\"1.0\" encoding=\"utf-8\" ?>";
-        $Index .= "<otrs_package_list version=\"1.0\">\n";
+        $Index .= "<package_list version=\"1.0\">\n";
         my @List = $PackageObject->RepositoryList();
         for my $Package (@List) {
             $Index .= "<Package>\n";
@@ -63,10 +63,10 @@ sub Run {
             $Index .= $PackageObject->PackageBuild( %{$Package}, Type => 'Index' );
             $Index .= "</Package>\n";
         }
-        $Index .= "</otrs_package_list>\n";
+        $Index .= "</package_list>\n";
         return $LayoutObject->Attachment(
-            Type        => 'inline',     # inline|attachment
-            Filename    => 'otrs.xml',
+            Type        => 'inline',         # inline|attachment
+            Filename    => 'packages.xml',
             ContentType => 'text/xml',
             Content     => $Index,
         );

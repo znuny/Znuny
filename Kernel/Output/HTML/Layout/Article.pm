@@ -11,6 +11,9 @@ package Kernel::Output::HTML::Layout::Article;
 
 use strict;
 use warnings;
+use utf8;
+use List::Util 'uniq';
+use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
 
@@ -531,6 +534,116 @@ sub ArticleQuote {
 
     # return body as plain text
     return $Article{Body};
+}
+
+=head2 GetReusedArticleAttachments()
+
+Returns reused attachment references from the current web request as hashes suitable
+for the C<Attachment> parameter of C<ArticleCreate()> / C<ArticleSend()>.
+
+Reads checked C<ArticleFileIDString> values (C<ArticleID,FileID>) and falls back to
+the hidden field C<ReusedArticleFileIDs> (used by form drafts).
+
+    my @ReusedAttachments = $LayoutObject->GetReusedArticleAttachments();
+
+Returns:
+
+    (
+        {
+            ArticleID => 355,
+            FileID    => 2,
+        },
+        {
+            ArticleID => 356,
+            FileID    => 5,
+        },
+    );
+
+=cut
+
+sub GetReusedArticleAttachments {
+    my ( $Self, %Param ) = @_;
+
+    my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
+
+    my @ArticleFileIDPairs = $ParamObject->GetArray( Param => 'ArticleFileIDString' );
+    if ( !@ArticleFileIDPairs ) {
+        my $ReusedArticleFileIDsString = $ParamObject->GetParam( Param => 'ReusedArticleFileIDs' ) || '';
+        @ArticleFileIDPairs = split /;/, $ReusedArticleFileIDsString;
+    }
+
+    my @Attachments;
+
+    FILEIDPAIR:
+    for my $FileIDPair ( uniq grep {length} @ArticleFileIDPairs ) {
+        my ( $ArticleID, $FileID ) = $FileIDPair =~ m{ \A (\d+) , (\d+) \z}x;
+        next FILEIDPAIR if !defined $FileID;
+
+        push @Attachments, {
+            ArticleID => $ArticleID,
+            FileID    => $FileID,
+        };
+    }
+
+    return @Attachments;
+}
+
+=head2 RenderArticleAttachmentSelection()
+
+Returns the HTML of the selection for reusing attachments of other articles of the ticket,
+or an empty string if the selection is not enabled for the current action in
+C<Attachment###SelectionActions>, or the ticket has no attachments or exceeds the configured
+article or attachment limits.
+
+The selected attachments are fetched on submit with L</GetReusedArticleAttachments()>.
+
+    my $AttachmentSelectionHTML = $LayoutObject->RenderArticleAttachmentSelection(
+        TicketID => 123,
+    );
+
+=cut
+
+sub RenderArticleAttachmentSelection {
+    my ( $Self, %Param ) = @_;
+
+    my $AttachmentPreviewObject = $Kernel::OM->Get('Kernel::System::AttachmentPreview');
+    my $AttachmentsObject       = $Kernel::OM->Get('Kernel::System::Attachments');
+    my $Config                  = $Kernel::OM->Get('Kernel::Config')->Get('Attachment');
+
+    return '' if !$Param{TicketID};
+    return '' if !$Self->{Action} || !$Config->{SelectionActions}->{ $Self->{Action} };
+    return '' if $AttachmentsObject->IsArticleCountReached( TicketID => $Param{TicketID} );
+    return '' if $AttachmentsObject->IsArticleAttachmentCountReached( TicketID => $Param{TicketID} );
+
+    my $TicketAttachments = $AttachmentsObject->ArticleAttachmentListGet(
+        TicketID => $Param{TicketID},
+    );
+    return '' if !IsArrayRefWithData($TicketAttachments);
+
+    my $ShowAttachmentsCount = $Config->{ $Self->{Action} }->{ShowAttachmentsCount} // $Config->{ShowAttachmentsCount};
+
+    # Add previewability to every attachment
+    $_->{IsPreviewable} = $AttachmentPreviewObject->IsPreviewable(%$_) for @{$TicketAttachments};
+
+    $Self->AddJSOnDocumentCompleteIfNotExists(
+        Key  => __PACKAGE__ . '::RenderArticleAttachmentSelection',
+        Code => 'Core.Agent.Attachments.InitTicketAttachmentReuseSelection();',
+    );
+
+    my @ReusedAttachments    = $Self->GetReusedArticleAttachments();
+    my $ReusedArticleFileIDs = join ';', map {"$_->{ArticleID},$_->{FileID}"} @ReusedAttachments;
+
+    my $S = $Self->Output(
+        TemplateFile => 'Attachments',
+        Data         => {
+            TicketID             => $Param{TicketID},
+            Attachments          => $TicketAttachments,
+            EnablePreview        => $Config->{EnablePreview},
+            ShowAttachmentsCount => $ShowAttachmentsCount,
+            ReusedArticleFileIDs => $ReusedArticleFileIDs,
+        },
+    );
+    return $S;
 }
 
 sub _BackendGet {

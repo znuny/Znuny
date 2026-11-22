@@ -909,6 +909,8 @@ sub Run {
                 );
             }
 
+            my @ReusedAttachments = $LayoutObject->GetReusedArticleAttachments();
+
             my $From;
 
             my $ArticleObject        = $Kernel::OM->Get('Kernel::System::Ticket::Article');
@@ -967,6 +969,7 @@ sub Run {
                 HistoryType          => $Config->{HistoryType},
                 HistoryComment       => $Config->{HistoryComment} || '%%',
                 UnlockOnAway         => 1,
+                Attachment           => \@ReusedAttachments,
             );
 
             # show error of creating article
@@ -1874,6 +1877,10 @@ sub _MaskPhone {
         Action     => $Self->{Action},
         UserID     => $Self->{UserID},
     ) // [];
+
+    $Param{AttachmentSelection} = $LayoutObject->RenderArticleAttachmentSelection(
+        TicketID => $Self->{TicketID},
+    );
 
     # get output back
     return $LayoutObject->Output(

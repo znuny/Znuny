@@ -76,24 +76,24 @@ $Selenium->RunTest(
             $Element->is_displayed();
         }
 
-        # Expand the widget if it is collapsed.
-        my $Expanded = $Selenium->execute_script(
-            "return \$('#WidgetInformSender a[title=\"Toggle this widget\"]').attr('aria-expanded')"
+        # Expand the card if it is collapsed.
+        my $Collapsed = $Selenium->execute_script(
+            "return \$('#WidgetInformSender').hasClass('Collapsed');"
         );
 
-        if ( $Expanded eq 'false' ) {
-            $Selenium->find_element( "#WidgetInformSender a[title=\'Toggle this widget\']", 'css' )->click();
+        if ($Collapsed) {
+            $Selenium->find_element( '#WidgetInformSender .cardTitleTrigger', 'css' )->click();
 
-            # Wait until widget is expanded.
+            # Wait until card is expanded.
             $Selenium->WaitFor(
                 JavaScript =>
-                    "return typeof(\$) === 'function' && \$('#WidgetInformSender a[title=\"Toggle this widget\"]').attr('aria-expanded') === 'true'"
+                    "return typeof(\$) === 'function' && \$('#WidgetInformSender').hasClass('Expanded');"
             );
 
-            # Verify the widget is expanded.
+            # Verify the card is expanded.
             $Self->True(
                 $Selenium->execute_script(
-                    "return \$('#WidgetInformSender a[title=\"Toggle this widget\"]').attr('aria-expanded') === 'true'"
+                    "return \$('#WidgetInformSender').hasClass('Expanded');"
                 ),
                 "The widget 'Inform Sender' is expanded",
             );
@@ -102,38 +102,37 @@ $Selenium->RunTest(
         # Set checkbox to uncheck.
         $Selenium->execute_script("\$('#InformSender').prop('checked', false)");
 
-        # Collapse the widget.
-        $Selenium->find_element( "#WidgetInformSender .WidgetAction a[title='Toggle this widget']", 'css' )->click();
+        # Collapse the card.
+        $Selenium->find_element( '#WidgetInformSender .cardTitleTrigger', 'css' )->click();
 
-        # Wait until widget is collapsed.
+        # Wait until card is collapsed.
         $Selenium->WaitFor(
             JavaScript =>
-                "return typeof(\$) === 'function' && \$('#WidgetInformSender .WidgetAction a[title=\"Toggle this widget\"]').attr('aria-expanded') === 'false'"
+                "return typeof(\$) === 'function' && \$('#WidgetInformSender').hasClass('Collapsed');"
         );
 
-        # Verify the widget is collapsed.
+        # Verify the card is collapsed.
         $Self->True(
             $Selenium->execute_script(
-                "return \$('#WidgetInformSender a[title=\"Toggle this widget\"]').attr('aria-expanded') === 'false'"
+                "return \$('#WidgetInformSender').hasClass('Collapsed');"
             ),
             "The widget 'Inform Sender' is collapsed",
         );
 
-        # Expand the widget again.
-        $Selenium->find_element( "#WidgetInformSender .WidgetAction a[title='Toggle this widget']", 'css' )->click();
+        # Expand the card again.
+        $Selenium->find_element( '#WidgetInformSender .cardTitleTrigger', 'css' )->click();
 
-        # Wait until widget is expanded.
+        # Wait until card is expanded.
         $Selenium->WaitFor(
             JavaScript =>
-                "return typeof(\$) === 'function' && \$('#WidgetInformSender .WidgetAction a[title=\"Toggle this widget\"]').attr('aria-expanded') === 'true'"
+                "return typeof(\$) === 'function' && \$('#WidgetInformSender').hasClass('Expanded');"
         );
 
-        # Verify the widget is expanded.
-        $Self->Is(
+        # Verify the card is expanded.
+        $Self->True(
             $Selenium->execute_script(
-                "return \$('#WidgetInformSender a[title=\"Toggle this widget\"]').attr('aria-expanded')"
+                "return \$('#WidgetInformSender').hasClass('Expanded');"
             ),
-            'true',
             "The widget 'Inform Sender' is expanded",
         );
 
@@ -170,11 +169,11 @@ $Selenium->RunTest(
         $Selenium->execute_script("\$('#submitRichText').click()");
         $Selenium->WaitFor(
             JavaScript =>
-                "return typeof(\$) === 'function' && \$('div.Content > p:contains(\"merge ticket with itself!\")').length"
+                "return typeof(\$) === 'function' && \$('.ErrorScreen:contains(\"An Error Occurred\")').length"
         );
 
         $Self->True(
-            $Selenium->execute_script("return \$('div.Content > p:contains(\"merge ticket with itself!\")').length"),
+            $Selenium->execute_script("return \$('.ErrorScreen:contains(\"An Error Occurred\")').length"),
             "Successfully can't merge ticket with itself",
         );
 

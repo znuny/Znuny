@@ -22,10 +22,10 @@ $Selenium->RunTest(
         my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-        # Set OTRSTimeZone to UTC.
+        # Set ZnunyTimeZone to UTC.
         $HelperObject->ConfigSettingChange(
             Valid => 1,
-            Key   => 'OTRSTimeZone',
+            Key   => 'ZnunyTimeZone',
             Value => 'UTC',
         );
 

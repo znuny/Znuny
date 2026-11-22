@@ -31,12 +31,12 @@ if ( grep { $^V eq $_ } @BlacklistPerlVersions ) {
     return 1;
 }
 
-my $DefaultOTRSTimeZone = 'Europe/Berlin';
+my $DefaultZnunyTimeZone = 'Europe/Berlin';
 
 my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 $ConfigObject->Set(
-    Key   => 'OTRSTimeZone',
-    Value => $DefaultOTRSTimeZone,
+    Key   => 'ZnunyTimeZone',
+    Value => $DefaultZnunyTimeZone,
 );
 
 my $SystemTime = $Kernel::OM->Create('Kernel::System::DateTime')->ToEpoch();
@@ -286,7 +286,7 @@ for my $Test (@Tests) {
 
     if ( $Test->{Config}->{TimeZone} ) {
         $ConfigObject->Set(
-            Key   => 'OTRSTimeZone',
+            Key   => 'ZnunyTimeZone',
             Value => $Test->{Config}->{TimeZone},
         );
     }
@@ -318,11 +318,11 @@ for my $Test (@Tests) {
         );
     }
 
-    # Reset back OTRSTimeZone if it was changed.
+    # Reset back ZnunyTimeZone if it was changed.
     if ( $Test->{Config}->{TimeZone} ) {
         $ConfigObject->Set(
-            Key   => 'OTRSTimeZone',
-            Value => $DefaultOTRSTimeZone,
+            Key   => 'ZnunyTimeZone',
+            Value => $DefaultZnunyTimeZone,
         );
     }
 }
@@ -464,7 +464,7 @@ for my $Test (@Tests) {
 
     if ( $Test->{Config}->{TimeZone} ) {
         $ConfigObject->Set(
-            Key   => 'OTRSTimeZone',
+            Key   => 'ZnunyTimeZone',
             Value => $Test->{Config}->{TimeZone},
         );
     }
@@ -504,11 +504,11 @@ for my $Test (@Tests) {
         );
     }
 
-    # Reset back OTRSTimeZone if it was changed.
+    # Reset back ZnunyTimeZone if it was changed.
     if ( $Test->{Config}->{TimeZone} ) {
         $ConfigObject->Set(
-            Key   => 'OTRSTimeZone',
-            Value => $DefaultOTRSTimeZone,
+            Key   => 'ZnunyTimeZone',
+            Value => $DefaultZnunyTimeZone,
         );
     }
 }
@@ -682,7 +682,7 @@ for my $Test (@Tests) {
 
     if ( $Test->{Config}->{TimeZone} ) {
         $ConfigObject->Set(
-            Key   => 'OTRSTimeZone',
+            Key   => 'ZnunyTimeZone',
             Value => $Test->{Config}->{TimeZone},
         );
     }
@@ -714,11 +714,11 @@ for my $Test (@Tests) {
         );
     }
 
-    # Reset back OTRSTimeZone if it was changed.
+    # Reset back ZnunyTimeZone if it was changed.
     if ( $Test->{Config}->{TimeZone} ) {
         $ConfigObject->Set(
-            Key   => 'OTRSTimeZone',
-            Value => $DefaultOTRSTimeZone,
+            Key   => 'ZnunyTimeZone',
+            Value => $DefaultZnunyTimeZone,
         );
     }
 }

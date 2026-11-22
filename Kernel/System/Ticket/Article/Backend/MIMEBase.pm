@@ -78,7 +78,7 @@ sub new {
     return $Self;
 }
 
-=head2 ArticleCreate()
+=head1 ArticleCreate()
 
 Create a MIME article.
 
@@ -113,6 +113,10 @@ Create a MIME article.
                 Content     => $Content,
                 ContentType => $ContentType,
                 Filename    => 'lala1.txt',
+            },
+            {
+                ArticleID => 355,    # reuse an existing attachment of the same ticket
+                FileID    => 2,
             },
         ],
         NoAgentNotify    => 0,                                      # if you don't want to send agent notifications
@@ -248,12 +252,13 @@ sub ArticleCreate {
         $Param{Body} = '';
     }
 
-    # process html article
     elsif ( $Param{MimeType} =~ /text\/plain/i ) {
 
         # Delete illegal surrogates in Body
         $Param{Body} =~ s/\p{Surrogate}//g;
     }
+
+    # process html article
     elsif ( $Param{MimeType} =~ /text\/html/i ) {
 
         # Delete illegal surrogates in Body
@@ -309,6 +314,7 @@ sub ArticleCreate {
         $Param{OrigHeader}->{Body} = $Param{Body};
     }
 
+    # fix some bad stuff from some browsers (Opera)!
     else {
         # Delete illegal surrogates in Body
         $Param{Body} =~ s/\p{Surrogate}//g;
@@ -473,6 +479,21 @@ sub ArticleCreate {
 
     # add attachments
     if ( $Param{Attachment} ) {
+        my $ExpandedAttachments = $Self->_ArticleAttachmentExpand(
+            Attachments => $Param{Attachment},
+            TicketID    => $Param{TicketID},
+            UserID      => $Param{UserID},
+        );
+        if ($ExpandedAttachments) {
+            $Param{Attachment} = $ExpandedAttachments;
+        }
+        else {
+            $Kernel::OM->Get('Kernel::System::Log')->Error("Error expanding reused attachments, skipping reused ones");
+            $Param{Attachment} = [
+                grep { defined $_->{Content} } @{ $Param{Attachment} }
+            ];
+        }
+
         for my $Attachment ( @{ $Param{Attachment} } ) {
             $Kernel::OM->Get( $Self->{ArticleStorageModule} )->ArticleWriteAttachment(
                 %{$Attachment},
@@ -706,7 +727,6 @@ sub ArticleCreate {
         );
     }
 
-    # return ArticleID
     return $ArticleID;
 }
 
@@ -1518,6 +1538,97 @@ sub ArticleHasHTMLContent {
     my ($HTMLBodyAttachmentID) = sort keys %AttachmentIndexHTMLBody;
 
     return $HTMLBodyAttachmentID ? 1 : 0;
+}
+
+=head2 _ArticleAttachmentExpand()
+
+Resolve reused attachment references (C<ArticleID> + C<FileID>) in the C<Attachment>
+array into full attachment hashes with content. Items that already contain C<Content>
+are left unchanged. Source articles must belong to the same ticket.
+
+References that cannot be resolved are dropped from the result, so the caller always
+receives a list that is safe to hand to C<ArticleWriteAttachment()>.
+
+Returns a reference to the expanded Attachments array (empty if there was nothing to
+expand) or undef if the parameters are unusable.
+
+    $Attachments = $ArticleBackendObject->_ArticleAttachmentExpand(
+        Attachments => $Param{Attachment},
+        TicketID    => 123,
+        UserID      => 1,
+    );
+
+=cut
+
+sub _ArticleAttachmentExpand {
+    my ( $Self, %Param ) = @_;
+
+    NEEDED:
+    for my $Needed (qw(TicketID UserID)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $Kernel::OM->Get('Kernel::System::Log')->Error("Need $Needed!");
+        return;
+    }
+    if ( ref $Param{Attachments} ne 'ARRAY' ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Error("Attachments must be an arrayref!");
+        return;
+    }
+    return [] if !@{ $Param{Attachments} };
+
+    my $LogObject     = $Kernel::OM->Get('Kernel::System::Log');
+    my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+
+    my @Expanded;
+
+    ATTACHMENT:
+    for my $Attachment ( @{ $Param{Attachments} } ) {
+        if ( !IsHashRefWithData($Attachment) ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Error("Skipping attachment not a hashref!");
+            next ATTACHMENT;
+        }
+        if (
+            defined $Attachment->{Content}
+            || !$Attachment->{ArticleID}
+            || !$Attachment->{FileID}
+            )
+        {
+            push @Expanded, $Attachment;
+            next ATTACHMENT;
+        }
+
+        my $SourceTicketID = $ArticleObject->TicketIDLookup(
+            ArticleID => $Attachment->{ArticleID},
+        );
+        if ( !$SourceTicketID || $SourceTicketID != $Param{TicketID} ) {
+            $LogObject->Error(
+                "Cannot reuse attachment (ArticleID=$Attachment->{ArticleID}, FileID=$Attachment->{FileID}) for TicketID $Param{TicketID}."
+            );
+            next ATTACHMENT;
+        }
+
+        my %ArticleAttachment = $ArticleObject->ArticleAttachment(
+            TicketID  => $SourceTicketID,
+            ArticleID => $Attachment->{ArticleID},
+            FileID    => $Attachment->{FileID},
+            UserID    => $Param{UserID},
+        );
+        if ( !IsHashRefWithData( \%ArticleAttachment ) ) {
+            $LogObject->Error(
+                "Attachment for ticket ID $SourceTicketID, article ID $Attachment->{ArticleID} and file ID $Attachment->{FileID} could not be found.",
+            );
+            next ATTACHMENT;
+        }
+
+        push @Expanded, {
+            Content     => $ArticleAttachment{Content},
+            ContentType => $ArticleAttachment{ContentType},
+            Filename    => $ArticleAttachment{Filename},
+            Disposition => 'attachment',
+        };
+    }
+
+    return \@Expanded;
 }
 
 1;

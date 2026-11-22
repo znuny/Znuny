@@ -12,9 +12,9 @@ package Kernel::Modules::AJAXAttachment;
 use strict;
 use warnings;
 use utf8;
+use List::Util 'first';
 
-use MIME::Base64;
-
+use Kernel::System::VariableCheck ':all';
 use Kernel::Language qw(Translatable);
 
 our $ObjectManagerDisabled = 1;
@@ -66,8 +66,6 @@ sub Run {
 
         my @AttachmentData;
 
-        my $PreviewContentTypes = $ConfigObject->Get('Attachment')->{PreviewContentTypes} || {};
-
         ATTACHMENT:
         for my $Attachment (@Attachments) {
 
@@ -80,10 +78,10 @@ sub Run {
             );
 
             # Add preview flag if content type is in the preview content types list.
-            # This is used to determine if the attachment can be previewed in the UI.
-            if ( $Attachment->{ContentType} && $PreviewContentTypes->{ $Attachment->{ContentType} } ) {
-                $Attachment->{Preview} = 1;
-            }
+            $Attachment->{Preview} = $Self->_PreviewContentTypeIsAllowed(
+                $Attachment->{ContentType},
+                $Attachment->{Filename},
+            );
 
             push @AttachmentData, $Attachment;
         }
@@ -148,32 +146,25 @@ sub Run {
             FormID => $GetParam{FormID},
         );
 
-        ATTACHMENT:
-        for my $Attachment (@Attachments) {
-
-            next ATTACHMENT if $Attachment->{FileID} ne $GetParam{FileID};
-            %Attachment = %{$Attachment};
-
-            if ( $Attachment->{ContentType} ) {
-                $Attachment{ContentBase64} = encode_base64( $Attachment->{Content} );
-                $Attachment{SourceData}    = "data:$Attachment->{ContentType};base64,";
-                $Attachment{Template}      = "Iframe";
-            }
-
-            last ATTACHMENT;
+        my $Attachment = first { $_->{FileID} eq $GetParam{FileID} } @Attachments;
+        if ( !IsHashRefWithData($Attachment) ) {
+            return $LayoutObject->ErrorScreen(
+                Message => $LayoutObject->{LanguageObject}->Translate('The file could not be previewed properly.'),
+                Comment => Translatable('Please contact the administrator.'),
+            );
         }
 
-        my $Content = $JSONObject->Encode(
-            Data => {
-                Message    => 'Success',
-                Attachment => \%Attachment,
-            }
-        );
+        if ( !$Self->_PreviewContentTypeIsAllowed( $Attachment->{ContentType}, $Attachment->{Filename} ) ) {
+            return $LayoutObject->ErrorScreen(
+                Message => $LayoutObject->{LanguageObject}->Translate('This file cannot be previewed.'),
+                Comment => Translatable('Please contact the administrator.'),
+            );
+        }
 
         return $LayoutObject->Attachment(
-            ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
-            Content     => $Content,
-            Sandbox     => 1,
+            %$Attachment,
+            Type    => 'inline',
+            Sandbox => 1,
         );
     }
     elsif ( $Self->{Subaction} eq 'Delete' ) {
@@ -230,6 +221,18 @@ sub Run {
             NoCache => 1,
         );
     }
+
+    return;
+}
+
+# Returns true iff the file is allowed by Attachment###PreviewContentTypes.
+sub _PreviewContentTypeIsAllowed {
+    my ( $Self, $ContentType, $Filename ) = @_;
+
+    return $Kernel::OM->Get('Kernel::System::AttachmentPreview')->IsPreviewable(
+        ContentType => $ContentType,
+        Filename    => $Filename,
+    );
 }
 
 1;

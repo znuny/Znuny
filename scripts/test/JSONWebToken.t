@@ -10,6 +10,8 @@ use strict;
 use warnings;
 use utf8;
 
+use MIME::Base64 qw(decode_base64);
+
 use vars (qw($Self));
 
 use Kernel::System::VariableCheck qw(:all);
@@ -165,6 +167,67 @@ $Self->IsDeeply(
     $DecodedJWT,
     \%ExpectedDecodedJWT,
     'Decode() must return expected data.',
+);
+
+#
+# Unknown ZNUNY placeholders must be removed, same as unknown OTRS placeholders.
+# This covers both the token body and the extra header data.
+#
+
+my $PlaceholderValue = 'a<ZNUNY_JWT_Known>b<OTRS_JWT_DoesNotExist>c<ZNUNY_JWT_DoesNotExist>d';
+
+$JWT = $JWTObject->Encode(
+    Payload => {
+        Mixed => $PlaceholderValue,
+    },
+    AdditionalHeaderData => {
+        Mixed => $PlaceholderValue,
+    },
+    Algorithm       => 'RS512',
+    KeyFilePath     => "$Home/scripts/test/sample/JSONWebToken/PrivateKeyWithoutPassword.pem",
+    PlaceholderData => {
+        ZNUNY_JWT_Known => 'VALUE',
+    },
+);
+
+$Self->True(
+    scalar $JWT,
+    'Encode() must return a token when ZNUNY placeholders are used.',
+);
+
+$DecodedJWT = $JWTObject->Decode(
+    Token => $JWT,
+    Key   => ${
+        $MainObject->FileRead(
+            Location        => "$Home/scripts/test/sample/JSONWebToken/PrivateKeyWithoutPassword.pem",
+            Mode            => 'binmode',
+            Type            => 'Local',
+            Result          => 'SCALAR',
+            DisableWarnings => 0,
+        )
+    },
+);
+
+$Self->Is(
+    $DecodedJWT->{Mixed},
+    'aVALUEbcd',
+    'Unknown OTRS and ZNUNY placeholders are removed from the token body.',
+);
+
+my ($HeaderSegment) = split /\./, $JWT;
+$HeaderSegment =~ tr{-_}{+/};
+my $HeaderPadding = ( 4 - ( length($HeaderSegment) % 4 ) ) % 4;
+$HeaderSegment .= '=' x $HeaderPadding if $HeaderPadding;
+
+my $JSONObject = $Kernel::OM->Get('Kernel::System::JSON');
+my $Header     = $JSONObject->Decode(
+    Data => decode_base64($HeaderSegment),
+);
+
+$Self->Is(
+    $Header->{Mixed},
+    'aVALUEbcd',
+    'Unknown OTRS and ZNUNY placeholders are removed from the token header.',
 );
 
 1;

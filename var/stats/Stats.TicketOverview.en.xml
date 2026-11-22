@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<otrs_stats>
+<znuny_stats>
 <Cache>0</Cache>
 <Title>Overview about all tickets in the system</Title>
 <Description>Current state of all tickets in the system without time restrictions.</Description>
@@ -20,4 +20,4 @@
 <UseAsXvalue Element="StateIDs" Fixed="1">
 </UseAsXvalue>
 <Valid>1</Valid>
-</otrs_stats>
+</znuny_stats>

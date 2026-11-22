@@ -1406,7 +1406,7 @@ sub GetStatTable {
             # convert from OTRS time zone to given time zone
             if (
                 $Param{TimeZone}
-                && $Param{TimeZone} ne Kernel::System::DateTime->OTRSTimeZoneGet()
+                && $Param{TimeZone} ne Kernel::System::DateTime->ZnunyTimeZoneGet()
                 && $Ticket{$Attribute}
                 && $Ticket{$Attribute} =~ /\A(\d{4})-(\d{2})-(\d{2})\s(\d{2}):(\d{2}):(\d{2})\z/
                 )

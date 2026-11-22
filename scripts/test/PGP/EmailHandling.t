@@ -13,6 +13,8 @@ use utf8;
 
 use vars (qw($Self));
 
+use File::Path qw(mkpath rmtree);
+
 use Kernel::Output::HTML::ArticleCheck::PGP;
 use Kernel::System::PostMaster;
 
@@ -51,9 +53,13 @@ $ConfigObject->Set(
     Key   => 'PGP',
     Value => 1,
 );
+my $PGPPath = $ConfigObject->Get('Home') . "/var/tmp/pgp" . $HelperObject->GetRandomID();
+mkpath( [$PGPPath], 0, 0700 );    ## no critic
+chmod 0700, $PGPPath;
+
 $ConfigObject->Set(
     Key   => 'PGP::Options',
-    Value => '--batch --no-tty --yes',
+    Value => "--homedir $PGPPath --batch --no-tty --yes",
 );
 
 $ConfigObject->Set(
@@ -105,6 +111,7 @@ my $PGPObject = $Kernel::OM->Get('Kernel::System::Crypt::PGP');
 
 if ( !$PGPObject ) {
     print STDERR "NOTICE: No PGP support!\n";
+    rmtree( [$PGPPath] );
     return;
 }
 
@@ -925,6 +932,12 @@ for my $Count ( 1 .. 2 ) {
         "Key:$Count - KeySearch()",
     );
 }
+
+my $PGPPathDeleted = rmtree( [$PGPPath] );
+$Self->True(
+    $PGPPathDeleted,
+    "Directory deleted - '$PGPPath'",
+);
 
 # cleanup is done by RestoreDatabase.
 

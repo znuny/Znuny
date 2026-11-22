@@ -122,21 +122,21 @@ my @Tests = (
     #
     {
         Config => {
-            Type         => 'Date',
-            OTRSTimeZone => 'UTC',
-            UserTimeZone => 'Europe/Berlin',
-            Common       => {
+            Type          => 'Date',
+            ZnunyTimeZone => 'UTC',
+            UserTimeZone  => 'Europe/Berlin',
+            Common        => {
                 DynamicFieldConfig => $DynamicFieldConfigsByType{Date},
             },
             EditFieldRender => {
 
-                # in OTRS time zone
+                # in Znuny time zone
                 Value => {
                     Value       => '2013-10-01 23:30:00',
                     ParamObject => $ParamObject,
                 },
 
-                # in OTRS time zone
+                # in Znuny time zone
                 WebRequest => {
                     CGIParam => {
                         'DynamicField_DFDate' . $RandomID . 'Used'  => 1,
@@ -181,21 +181,21 @@ my @Tests = (
     },
     {
         Config => {
-            Type         => 'Date',
-            OTRSTimeZone => 'Europe/Berlin',
-            UserTimeZone => 'America/New_York',
-            Common       => {
+            Type          => 'Date',
+            ZnunyTimeZone => 'Europe/Berlin',
+            UserTimeZone  => 'America/New_York',
+            Common        => {
                 DynamicFieldConfig => $DynamicFieldConfigsByType{Date},
             },
             EditFieldRender => {
 
-                # in OTRS time zone
+                # in Znuny time zone
                 Value => {
                     Value       => '2013-10-01 23:30:00',
                     ParamObject => $ParamObject,
                 },
 
-                # in OTRS time zone
+                # in Znuny time zone
                 WebRequest => {
                     CGIParam => {
                         'DynamicField_DFDate' . $RandomID . 'Used'  => 1,
@@ -244,15 +244,15 @@ my @Tests = (
     #
     {
         Config => {
-            Type         => 'DateTime',
-            OTRSTimeZone => 'UTC',
-            UserTimeZone => 'Europe/Berlin',
-            Common       => {
+            Type          => 'DateTime',
+            ZnunyTimeZone => 'UTC',
+            UserTimeZone  => 'Europe/Berlin',
+            Common        => {
                 DynamicFieldConfig => $DynamicFieldConfigsByType{DateTime},
             },
             EditFieldRender => {
 
-                # in OTRS time zone
+                # in Znuny time zone
                 Value => {
                     Value       => '2013-09-30 23:01:00',
                     ParamObject => $ParamObject,
@@ -284,7 +284,7 @@ my @Tests = (
             },
             ValueSetGet => {
 
-                # in OTRS time zone
+                # in Znuny time zone
                 Value    => '2013-09-30 23:01:00',
                 ObjectID => $TicketID,
                 UserID   => 1,
@@ -312,24 +312,24 @@ my @Tests = (
                 },
             },
 
-            # in OTRS time zone
+            # in Znuny time zone
             EditFieldValueGet => '2013-09-30 21:01:00',
 
-            # in OTRS time zone
+            # in Znuny time zone
             ValueSetGet => '2013-09-30 23:01:00',
         },
     },
     {
         Config => {
-            Type         => 'DateTime',
-            OTRSTimeZone => 'Europe/Berlin',
-            UserTimeZone => 'America/New_York',
-            Common       => {
+            Type          => 'DateTime',
+            ZnunyTimeZone => 'Europe/Berlin',
+            UserTimeZone  => 'America/New_York',
+            Common        => {
                 DynamicFieldConfig => $DynamicFieldConfigsByType{DateTime},
             },
             EditFieldRender => {
 
-                # in OTRS time zone
+                # in Znuny time zone
                 Value => {
                     Value       => '2013-10-01 03:01:00',
                     ParamObject => $ParamObject,
@@ -361,7 +361,7 @@ my @Tests = (
             },
             ValueSetGet => {
 
-                # in OTRS time zone
+                # in Znuny time zone
                 Value    => '2013-10-01 03:01:00',
                 ObjectID => $TicketID,
                 UserID   => 1,
@@ -389,24 +389,24 @@ my @Tests = (
                 },
             },
 
-            # in OTRS time zone
+            # in Znuny time zone
             EditFieldValueGet => '2013-10-01 09:01:00',
 
-            # in OTRS time zone
+            # in Znuny time zone
             ValueSetGet => '2013-10-01 03:01:00',
         },
     },
     {
         Config => {
-            Type         => 'DateTime',
-            OTRSTimeZone => 'Europe/Berlin',
-            UserTimeZone => 'Europe/Berlin',
-            Common       => {
+            Type          => 'DateTime',
+            ZnunyTimeZone => 'Europe/Berlin',
+            UserTimeZone  => 'Europe/Berlin',
+            Common        => {
                 DynamicFieldConfig => $DynamicFieldConfigsByType{DateTime},
             },
             EditFieldRender => {
 
-                # in OTRS time zone
+                # in Znuny time zone
                 Value => {
                     Value       => '2013-10-01 03:01:00',
                     ParamObject => $ParamObject,
@@ -438,7 +438,7 @@ my @Tests = (
             },
             ValueSetGet => {
 
-                # in OTRS time zone
+                # in Znuny time zone
                 Value    => '2013-10-01 03:01:00',
                 ObjectID => $TicketID,
                 UserID   => 1,
@@ -466,10 +466,10 @@ my @Tests = (
                 },
             },
 
-            # in OTRS time zone
+            # in Znuny time zone
             EditFieldValueGet => '2013-10-01 03:01:00',
 
-            # in OTRS time zone
+            # in Znuny time zone
             ValueSetGet => '2013-10-01 03:01:00',
         },
     },
@@ -479,8 +479,8 @@ my @Tests = (
 for my $Test (@Tests) {
 
     $ConfigObject->Set(
-        Key   => 'OTRSTimeZone',
-        Value => $Test->{Config}->{OTRSTimeZone},
+        Key   => 'ZnunyTimeZone',
+        Value => $Test->{Config}->{ZnunyTimeZone},
     );
 
     # get Layout object with correct user time zone
@@ -571,7 +571,7 @@ for my $Test (@Tests) {
         $Self->IsDeeply(
             \%HTMLResult,
             $Test->{ExpectedResults}->{EditFieldRender}->{$Type},
-            "EditFieldRender() for type $Type: Field type $Test->{Config}->{Type}, OTRS time zone $Test->{Config}->{OTRSTimeZone}, "
+            "EditFieldRender() for type $Type: Field type $Test->{Config}->{Type}, Znuny time zone $Test->{Config}->{ZnunyTimeZone}, "
                 . (
                 $Test->{Config}->{UserTimeZone} ? "user time zone $Test->{Config}->{UserTimeZone}" : 'no user time zone'
                 ),
@@ -596,7 +596,7 @@ for my $Test (@Tests) {
     $Self->Is(
         $Value,
         $Test->{ExpectedResults}->{EditFieldValueGet},
-        "EditFieldValueGet(): Field type $Test->{Config}->{Type}, OTRS time zone $Test->{Config}->{OTRSTimeZone}, "
+        "EditFieldValueGet(): Field type $Test->{Config}->{Type}, Znuny time zone $Test->{Config}->{ZnunyTimeZone}, "
             . (
             $Test->{Config}->{UserTimeZone} ? "user time zone $Test->{Config}->{UserTimeZone}" : 'no user time zone'
             ),
@@ -615,7 +615,7 @@ for my $Test (@Tests) {
     $Self->Is(
         $Value,
         $Test->{ExpectedResults}->{ValueSetGet},
-        "ValueGet(): Field type $Test->{Config}->{Type}, OTRS time zone $Test->{Config}->{OTRSTimeZone}, "
+        "ValueGet(): Field type $Test->{Config}->{Type}, Znuny time zone $Test->{Config}->{ZnunyTimeZone}, "
             . (
             $Test->{Config}->{UserTimeZone} ? "user time zone $Test->{Config}->{UserTimeZone}" : 'no user time zone'
             ),

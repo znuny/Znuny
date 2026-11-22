@@ -146,7 +146,11 @@ $Selenium->RunTest(
             );
 
             # Import test Selenium Process.
-            my $Location = $Selenium->{Home} . "/scripts/test/sample/ProcessManagement/AgentTicketProcess.yml";
+            # upload_file copies the sample onto the Selenium node. Chrome cannot
+            # read /opt/znuny paths from the app container.
+            my $Location = $Selenium->upload_file(
+                $Selenium->{Home} . "/scripts/test/sample/ProcessManagement/AgentTicketProcess.yml"
+            );
             $Selenium->find_element( "#FileUpload",                      'css' )->send_keys($Location);
             $Selenium->find_element( "#OverwriteExistingEntitiesImport", 'css' )->click();
             $Selenium->WaitFor(
@@ -199,9 +203,10 @@ $Selenium->RunTest(
                 "return typeof(\$) === 'function' && \$('#ActivityDialogs li:visible').length;"
         );
 
-        # Go to edit test ActivityDialog screen.
-        $Selenium->find_element("//a[contains(\@href, \'Subaction=ActivityDialogEdit;ID=$ActivityDialogData->{ID}' )]")
-            ->click();
+        # Edit link stays hidden until the row is hovered.
+        $Selenium->execute_script(
+            "\$('a[href*=\"Subaction=ActivityDialogEdit;ID=$ActivityDialogData->{ID}\"]').click();"
+        );
         $Selenium->WaitFor( WindowCount => 2 );
         my $Handles = $Selenium->get_window_handles();
         $Selenium->switch_to_window( $Handles->[1] );

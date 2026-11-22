@@ -22,6 +22,13 @@ $Kernel::OM->ObjectParamAdd(
 );
 my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 
+# Remove sessions of previous tests, otherwise already orphaned sessions would be deleted too.
+my $CleanUp = $SessionObject->CleanUp();
+$Self->True(
+    $CleanUp,
+    'All existing sessions have been removed.',
+);
+
 # Create test users and a session for every one.
 my @TestUserLogins;
 for my $Count ( 1 .. 3 ) {

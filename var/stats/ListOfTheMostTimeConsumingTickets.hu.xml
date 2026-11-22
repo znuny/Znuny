@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<otrs_stats>
+<znuny_stats>
 <Cache>0</Cache>
 <Description>A múlt hónapban lezárt jegyek listája, amelyek a legtöbb időt igényelték a feldolgozáshoz.
 
@@ -32,4 +32,4 @@ MEGJEGYZÉS: Alaposan nézze át a statisztikák kimenetét és beállításait,
 <UseAsXvalue Element="TicketAttributes" Fixed="1">
 </UseAsXvalue>
 <Valid>1</Valid>
-</otrs_stats>
+</znuny_stats>

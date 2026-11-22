@@ -574,7 +574,7 @@ sub Run {
                     );
 
                     # Convert start time to local system time zone.
-                    $DateTimeObject->ToOTRSTimeZone();
+                    $DateTimeObject->ToZnunyTimeZone();
                     $GetParam{ $TimeType . 'TimeNewerDate' } = $DateTimeObject->ToString();
                 }
                 if (
@@ -597,7 +597,7 @@ sub Run {
                     );
 
                     # Convert stop time to local system time zone.
-                    $DateTimeObject->ToOTRSTimeZone();
+                    $DateTimeObject->ToZnunyTimeZone();
                     $GetParam{ $TimeType . 'TimeOlderDate' } = $DateTimeObject->ToString();
                 }
             }
@@ -2573,6 +2573,19 @@ sub Run {
         $LayoutObject->AddJSData(
             Key   => 'SearchAttributes',
             Value => \@SearchAttributes,
+        );
+
+        my $TextDirection = $LayoutObject->{LanguageObject}->{TextDirection} || '';
+        $LayoutObject->AddJSData(
+            Key   => 'Datepicker',
+            Value => {
+                VacationDays => $LayoutObject->DatepickerGetVacationDays(),
+                IsRTL        => ( $TextDirection eq 'rtl' ) ? 1 : 0,
+            },
+        );
+        $LayoutObject->AddJSData(
+            Key   => 'CalendarWeekDayStart',
+            Value => $ConfigObject->Get('CalendarWeekDayStart') // 1,
         );
 
         my $Output = $LayoutObject->Output(

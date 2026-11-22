@@ -49,15 +49,17 @@ my $SeleniumTest = sub {
         TicketID => $TicketID
     );
 
-    # check for elements
+    # Icon-only menu entries keep an empty name. MarkTicketSeen / MarkTicketUnseen
+    # come from the menu module. Seen stays available only while an unread article
+    # remains. Unseen stays available only while a read article remains.
     $Self->True(
-        $SeleniumObject->find_element( 'li#nav-Mark-as-seen a', 'css' )->is_displayed(),
+        $SeleniumObject->find_element( 'li.MarkTicketSeen a', 'css' )->is_displayed(),
         '"Mark ticket as seen" link is visible',
     );
 
-    $Self->True(
-        $SeleniumObject->find_element( 'li#nav-Mark-as-unseen a', 'css' )->is_displayed(),
-        '"Mark ticket as unseen" link is visible',
+    $Self->False(
+        $SeleniumObject->find_element( 'li.MarkTicketUnseen a', 'css' )->is_displayed(),
+        '"Mark ticket as unseen" link is hidden while every article is unread',
     );
 
     $Self->True(
@@ -65,10 +67,14 @@ my $SeleniumTest = sub {
         '"Mark article as unseen" link is visible',
     );
 
-    # mark ticket as unseen
-    # TODO: Unknown, why click AND AgentInterface call are both necessary. If one is omitted,
-    # not all articles will be marked as unseen. Manual testing works.
-    $SeleniumObject->find_element( 'li#nav-Mark-as-unseen a', 'css' )->click();
+    # Unseen entry is hidden on an unread ticket, so invoke the action directly.
+    # A second call covers a delayed zoom "mark as seen" request landing in between.
+    $SeleniumObject->AgentInterface(
+        Action      => 'AgentTicketMarkSeenUnseen',
+        Subaction   => 'Unseen',
+        TicketID    => $TicketID,
+        WaitForAJAX => 0,
+    );
     $SeleniumObject->AgentInterface(
         Action      => 'AgentTicketMarkSeenUnseen',
         Subaction   => 'Unseen',
@@ -161,6 +167,17 @@ my $SeleniumTest = sub {
     $Self->True(
         $Flags{Seen},
         "Zoom AJAX article seen flag - ID $ArticleIDSecond",
+    );
+
+    # After the delayed mark-as-seen request, only the unseen action stays available.
+    $Self->False(
+        $SeleniumObject->find_element( 'li.MarkTicketSeen a', 'css' )->is_displayed(),
+        '"Mark ticket as seen" link is hidden after every article is seen',
+    );
+
+    $Self->True(
+        $SeleniumObject->find_element( 'li.MarkTicketUnseen a', 'css' )->is_displayed(),
+        '"Mark ticket as unseen" link is visible after an article is seen',
     );
 };
 

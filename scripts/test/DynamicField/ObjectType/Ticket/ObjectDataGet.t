@@ -67,7 +67,7 @@ my %TicketData = $TicketObject->TicketGet(
     UserID        => 1,
 );
 for my $Attribute (
-    qw(Age EscalationDestinationIn EscalationDestinationTime  EscalationSolutionTime EscalationTime EscalationTimeWorkingTime RealTillTimeNotUsed SolutionTime SolutionTimeDestinationTime SolutionTimeEscalation SolutionTimeWorkingTime UnlockTimeout UntilTime)
+    qw(Age EscalationDestinationIn EscalationDestinationTime EscalationSolutionTime EscalationTime EscalationTimeWorkingTime RealTillTimeNotUsed SolutionTime SolutionTimeDestinationTime SolutionTimeEscalation SolutionTimeWorkingTime UnlockTimeout UntilTime)
     )
 {
     delete $TicketData{$Attribute};
@@ -153,6 +153,23 @@ for my $Test (@Tests) {
 
     CGI->initialize_globals();
     my $Request = Kernel::System::Web::Request->new();
+
+    # ObjectsDiscard() in earlier iterations flushes queued TicketCreate transaction
+    # events. Those can change lock state and timestamps before this read.
+    if ( $Test->{Name} eq 'Correct Ticket' ) {
+        %TicketData = $TicketObject->TicketGet(
+            TicketID      => $TicketID,
+            DynamicFields => 1,
+            Extended      => 1,
+            UserID        => 1,
+        );
+        for my $Attribute (
+            qw(Age EscalationDestinationIn EscalationDestinationTime EscalationSolutionTime EscalationTime EscalationTimeWorkingTime RealTillTimeNotUsed SolutionTime SolutionTimeDestinationTime SolutionTimeEscalation SolutionTimeWorkingTime UnlockTimeout UntilTime)
+            )
+        {
+            delete $TicketData{$Attribute};
+        }
+    }
 
     my %ObjectData = $ObjectHandlerObject->ObjectDataGet( %{ $Test->{Config} } );
 

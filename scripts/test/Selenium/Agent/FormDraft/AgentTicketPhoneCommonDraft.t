@@ -22,11 +22,11 @@ $Selenium->RunTest(
         my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
         my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
-        # Hide Fred. Keep RichText enabled: CKEditor hides #RichText, so clear() is not interactable.
+        # Use plain textarea instead of CKEditor 5.
         $HelperObject->ConfigSettingChange(
             Valid => 1,
-            Key   => 'Fred::Active',
-            Value => 0
+            Key   => 'Frontend::RichText',
+            Value => 0,
         );
 
         # Enable FormDrafts in AgentTicketActionCommon screens.
@@ -50,6 +50,7 @@ $Selenium->RunTest(
             OwnerID      => 1,
             UserID       => 1,
         );
+
         $Self->True(
             $TicketID,
             "Ticket ID $TicketID is created",
@@ -93,7 +94,7 @@ $Selenium->RunTest(
                     },
                     Body => {
                         ID     => 'RichText',
-                        Type   => 'RichText',
+                        Type   => 'Input',
                         Value  => 'Selenium Outbound Body',
                         Update => 'Selenium Outbound Body - Update',
                     },
@@ -120,7 +121,7 @@ $Selenium->RunTest(
                     },
                     Body => {
                         ID     => 'RichText',
-                        Type   => 'RichText',
+                        Type   => 'Input',
                         Value  => 'Selenium Inbound Body',
                         Update => 'Selenium Inbound Body - Update',
                     },
@@ -501,7 +502,6 @@ $Selenium->RunTest(
             "Ticket ID $TicketID is deleted"
         );
     }
-
 );
 
 1;

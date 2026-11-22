@@ -881,6 +881,20 @@ sub _ShowEdit {
         Class       => 'Modernize ' . ( $Param{RequiredLockServerError} || '' ),
     );
 
+    # create OneClickExecution selection
+    $Param{OneClickExecutionSelection} = $LayoutObject->BuildSelection(
+        Data => {
+            0 => Translatable('No'),
+            1 => Translatable('Yes'),
+        },
+        Name        => 'OneClickExecution',
+        ID          => 'OneClickExecution',
+        SelectedID  => $ActivityDialogData->{Config}->{OneClickExecution} || 0,
+        Sort        => 'AlphanumericKey',
+        Translation => 1,
+        Class       => 'Modernize',
+    );
+
     # create Display selection
     $Param{DisplaySelection} = $LayoutObject->BuildSelection(
         Data => {
@@ -984,10 +998,11 @@ sub _ShowEdit {
     }
 
     # extract parameters from config
-    $Param{DescriptionShort} = $Param{ActivityDialogData}->{Config}->{DescriptionShort};
-    $Param{DescriptionLong}  = $Param{ActivityDialogData}->{Config}->{DescriptionLong};
-    $Param{SubmitAdviceText} = $Param{ActivityDialogData}->{Config}->{SubmitAdviceText};
-    $Param{SubmitButtonText} = $Param{ActivityDialogData}->{Config}->{SubmitButtonText};
+    $Param{DescriptionShort}  = $Param{ActivityDialogData}->{Config}->{DescriptionShort};
+    $Param{DescriptionLong}   = $Param{ActivityDialogData}->{Config}->{DescriptionLong};
+    $Param{SubmitAdviceText}  = $Param{ActivityDialogData}->{Config}->{SubmitAdviceText};
+    $Param{SubmitButtonText}  = $Param{ActivityDialogData}->{Config}->{SubmitButtonText};
+    $Param{OneClickExecution} = $Param{ActivityDialogData}->{Config}->{OneClickExecution} // 0;
 
     $Param{ScopeSelection} = $LayoutObject->BuildSelection(
         Data => {
@@ -1048,11 +1063,12 @@ sub _GetParams {
 
     for my $ParamName (
         qw( Interface DescriptionShort DescriptionLong Permission RequiredLock Scope ScopeEntityID SubmitAdviceText
-        SubmitButtonText ProcessEntityID)
+        SubmitButtonText OneClickExecution ProcessEntityID)
         )
     {
         $GetParam->{Config}->{$ParamName} = $ParamObject->GetParam( Param => $ParamName ) || '';
     }
+    $GetParam->{Config}->{OneClickExecution} = $GetParam->{Config}->{OneClickExecution} ? 1 : 0;
     $GetParam->{Config}->{Scope} //= 'Global';
     if ( $GetParam->{Config}->{Scope} eq 'Global' ) {
         delete $GetParam->{Config}->{ScopeEntityID};

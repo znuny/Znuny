@@ -86,21 +86,28 @@ sub Run {
             $SecureAttribute = 1;
         }
 
+        my $SessionName = $ConfigObject->Get('SessionName') || 'SessionID';
+
         $Kernel::OM->ObjectParamAdd(
             'Kernel::Output::HTML::Layout' => {
                 %UserData,
                 SetCookies => {
                     SessionIDCookie => $ParamObject->SetCookie(
-                        Key      => $ConfigObject->Get('SessionName'),
+                        Key      => $SessionName,
                         Value    => $NewSessionID,
                         Expires  => $Expires,
                         Path     => $ConfigObject->Get('ScriptAlias'),
                         Secure   => scalar $SecureAttribute,
                         HTTPOnly => 1,
                     ),
+                    LegacySessionIDCookie => $ParamObject->ExpireLegacySessionCookie(
+                        SessionName => $SessionName,
+                        Path        => $ConfigObject->Get('ScriptAlias'),
+                        Secure      => $SecureAttribute,
+                    ),
                 },
                 SessionID   => $NewSessionID,
-                SessionName => $ConfigObject->Get('SessionName'),
+                SessionName => $SessionName,
             }
         );
 

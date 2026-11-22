@@ -145,6 +145,11 @@ sub Run {
                     Secure   => scalar $SecureAttribute,
                     HTTPOnly => 1,
                 ),
+                LegacySessionIDCookie => $ParamObject->ExpireLegacySessionCookie(
+                    SessionName => $SessionName,
+                    Path        => $ConfigObject->Get('ScriptAlias'),
+                    Secure      => $SecureAttribute,
+                ),
             },
             SessionID   => $NewSessionID,
             SessionName => $ConfigObject->Get('SessionName'),

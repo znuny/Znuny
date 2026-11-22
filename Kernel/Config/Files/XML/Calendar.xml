@@ -794,6 +794,9 @@
                 <Item Key="Target"></Item>
                 <Item Key="PopupType"></Item>
                 <Item Key="ClusterName" Translatable="1">Miscellaneous</Item>
+                <Item Key="ClusterNameVisible">1</Item>
+                <!-- <Item Key="ClusterIcon">fa fa-ellipsis-h</Item> -->
+                <Item Key="ClusterIcon"></Item>
                 <Item Key="ClusterPriority">800</Item>
                 <Item Key="Prio">550</Item>
             </Hash>

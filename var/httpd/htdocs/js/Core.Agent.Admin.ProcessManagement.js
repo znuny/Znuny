@@ -89,6 +89,16 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
         // Init handling of scope filter change
         TargetNS.InitScopeFilter();
+
+        Core.App.Subscribe('Event.UI.Table.InitTableFilter.Change', function (FilterInput, $Container) {
+            if (!$Container || !$Container.is('#Activities, #ActivityDialogs, #Transitions, #TransitionActions')) {
+                return;
+            }
+            StripeProcessElementList($Container);
+        });
+
+        TargetNS.InitCloneProcess();
+        TargetNS.InitCloneEntity();
     };
 
     /**
@@ -377,6 +387,255 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
             return false;
         });
     }
+
+    /**
+     * @private
+     * @name CloneDefaultName
+     * @memberof Core.Agent.Admin.ProcessManagement
+     * @function
+     * @param {String} Name
+     * @returns {String} Default name for a clone.
+     * @description
+     *      Builds the default clone name by appending " (Clone)".
+     */
+    function CloneDefaultName(Name) {
+        return Name + ' (Clone)';
+    }
+
+    /**
+     * @private
+     * @name ShowClonedEntityOnCurrentScreen
+     * @memberof Core.Agent.Admin.ProcessManagement
+     * @function
+     * @param {Object} Config
+     * @param {jQueryObject} $ParentForm - Edit Activity or Edit Path form, when the clone was started there.
+     * @description
+     *      Stays on the screen where the clone button was used. Edit Activity and Edit Path
+     *      reload so the clone shows up in the available list. The process screen only
+     *      refreshes that list.
+     */
+    function ShowClonedEntityOnCurrentScreen(Config, $ParentForm) {
+        var Opener = window.opener,
+            ProcessManagement;
+
+        if (Opener && Opener.Core && Opener.Core.Agent && Opener.Core.Agent.Admin && Opener.Core.Agent.Admin.ProcessManagement) {
+            ProcessManagement = Opener.Core.Agent.Admin.ProcessManagement;
+        }
+        else {
+            ProcessManagement = TargetNS;
+        }
+
+        ProcessManagement.UpdateConfig(Config);
+        ProcessManagement.UpdateAccordion();
+        ProcessManagement.UpdateSyncMessage();
+
+        if ($ParentForm && $ParentForm.length) {
+            $(window).off('beforeunload.PMPopup');
+            window.location.reload();
+        }
+    }
+
+    /**
+     * @private
+     * @name ShowCloneProcessDialog
+     * @memberof Core.Agent.Admin.ProcessManagement
+     * @function
+     * @param {jQueryObject} $Element
+     * @description
+     *      Asks for the process name. Cancel creates nothing.
+     */
+    function ShowCloneProcessDialog($Element) {
+        var $Dialog = $('#CloneProcessDialog'),
+            ProcessID = $Element.attr('data-id'),
+            ProcessName = $Element.attr('data-name') || '';
+
+        if (!$Dialog.length) {
+            return;
+        }
+
+        // ShowContentDialog copies innerHTML. .val() only sets the property and is lost.
+        $Dialog.find('#ProcessCloneID').attr('value', ProcessID);
+        $Dialog.find('#ProcessCloneName').attr('value', CloneDefaultName(ProcessName));
+
+        Core.UI.Dialog.ShowContentDialog(
+            $Dialog,
+            Core.Language.Translate('Clone Process'),
+            '460px',
+            'Center',
+            true,
+            [
+                {
+                    Label: Core.Language.Translate('Cancel'),
+                    Type: 'Secondary',
+                    Function: function () {
+                        Core.UI.Dialog.CloseDialog($('.Dialog'));
+                    }
+                },
+                {
+                    Label: Core.Language.Translate('Clone'),
+                    Type: 'Primary',
+                    Function: function () {
+                        var Name = $.trim($('#ProcessCloneName').val());
+
+                        if (!Name) {
+                            Core.UI.Dialog.ShowAlert(
+                                Core.Language.Translate('An Error Occurred'),
+                                Core.Language.Translate('This field is required.')
+                            );
+                            return;
+                        }
+
+                        $('#ProcessCloneName').val(Name);
+                        $('#ProcessCloneForm').submit();
+                    }
+                }
+            ]
+        );
+    }
+
+    /**
+     * @private
+     * @name ShowCloneEntityDialog
+     * @memberof Core.Agent.Admin.ProcessManagement
+     * @function
+     * @param {String} EntityType
+     * @param {String} EntityName
+     * @param {String} EntityID
+     * @param {jQueryObject} [$ParentForm] - Edit Activity or Edit Path form, when the clone was started there.
+     * @description
+     *      Asks for the element name. Cancel creates nothing.
+     */
+    function ShowCloneEntityDialog(EntityType, EntityName, EntityID, $ParentForm) {
+        var $Dialog = $('#CloneEntityDialog');
+
+        if (!$ParentForm || !$ParentForm.length) {
+            $ParentForm = $();
+        }
+
+        if (!$Dialog.length || !EntityID) {
+            return;
+        }
+
+        $Dialog.find('span.EntityName').text(EntityName);
+        // ShowContentDialog copies innerHTML. .val() only sets the property and is lost.
+        $Dialog.find('#CloneEntityName').attr('value', CloneDefaultName(EntityName));
+
+        Core.UI.Dialog.ShowContentDialog(
+            $Dialog,
+            Core.Language.Translate('Clone'),
+            '460px',
+            'Center',
+            true,
+            [
+                {
+                    Label: Core.Language.Translate('Cancel'),
+                    Type: 'Secondary',
+                    Function: function () {
+                        Core.UI.Dialog.CloseDialog($('.Dialog'));
+                    }
+                },
+                {
+                    Label: Core.Language.Translate('Clone'),
+                    Type: 'Primary',
+                    Function: function () {
+                        var Name = $.trim($('#CloneEntityName').val()),
+                            Data;
+
+                        if (!Name) {
+                            Core.UI.Dialog.ShowAlert(
+                                Core.Language.Translate('An Error Occurred'),
+                                Core.Language.Translate('This field is required.')
+                            );
+                            return;
+                        }
+
+                        Data = {
+                            Action: 'AdminProcessManagement',
+                            Subaction: 'EntityClone',
+                            EntityType: EntityType,
+                            EntityID: EntityID,
+                            Name: Name
+                        };
+
+                        $('.Dialog')
+                            .find('.ContentFooter').empty().end()
+                            .find('.InnerContent').empty().append('<div class="Spacing Center"><span class="AJAXLoader"></span></div>');
+
+                        Core.AJAX.FunctionCall(Core.Config.Get('CGIHandle'), Data, function (Response) {
+                            if (!Response || !Response.Success) {
+                                Core.UI.Dialog.CloseDialog($('.Dialog'));
+                                Core.UI.Dialog.ShowAlert(
+                                    Core.Language.Translate('An Error Occurred'),
+                                    (Response && Response.Message) ? Response.Message : Core.Language.Translate('An Error Occurred')
+                                );
+                                return;
+                            }
+
+                            Core.UI.Dialog.CloseDialog($('.Dialog'));
+                            ShowClonedEntityOnCurrentScreen(Response.Config, $ParentForm);
+                        }, 'json');
+                    }
+                }
+            ]
+        );
+    }
+
+    /**
+     * @name ShowCloneEntityDialog
+     * @memberof Core.Agent.Admin.ProcessManagement
+     * @function
+     * @param {String} EntityType
+     * @param {String} EntityName
+     * @param {String} EntityID
+     * @param {jQueryObject} [$ParentForm] - Edit Activity or Edit Path form, when the clone was started there.
+     * @description
+     *      Public wrapper used by the process canvas.
+     */
+    TargetNS.ShowCloneEntityDialog = function (EntityType, EntityName, EntityID, $ParentForm) {
+        ShowCloneEntityDialog(EntityType, EntityName, EntityID, $ParentForm);
+    };
+
+    /**
+     * @name InitCloneProcess
+     * @memberof Core.Agent.Admin.ProcessManagement
+     * @function
+     * @description
+     *      Binds the clone action for a whole process.
+     */
+    TargetNS.InitCloneProcess = function () {
+        $('a.CloneProcess').off('click.CloneProcess').on('click.CloneProcess', function (Event) {
+            ShowCloneProcessDialog($(this));
+            Event.preventDefault();
+            Event.stopPropagation();
+            return false;
+        });
+    };
+
+    /**
+     * @name InitCloneEntity
+     * @memberof Core.Agent.Admin.ProcessManagement
+     * @function
+     * @description
+     *      Binds the clone action for a single process element.
+     */
+    TargetNS.InitCloneEntity = function () {
+        $('a.CloneEntity').off('click.CloneEntity').on('click.CloneEntity', function (Event) {
+            var EntityType = $(this).attr('data-entity-type'),
+                EntityID = $(this).attr('data-entity'),
+                EntityName = $(this).attr('data-name') || '',
+                $ParentForm = $(this).closest('form');
+
+            // Only Edit Activity and Edit Path keep a popup return target.
+            if (!$ParentForm.find('#PopupRedirect').length) {
+                $ParentForm = $();
+            }
+
+            ShowCloneEntityDialog(EntityType, EntityName, EntityID, $ParentForm);
+            Event.preventDefault();
+            Event.stopPropagation();
+            return false;
+        });
+    };
 
     /**
      * @name ProcessData
@@ -875,6 +1134,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
             // Initialize the different Delete Links
             InitDeleteEntity();
+
+            // Initialize clone links in the replaced accordion
+            TargetNS.InitCloneEntity();
         }, 'html');
     };
 
@@ -1133,6 +1395,12 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
         var MandatoryFields = ['Queue', 'State', 'Lock', 'Priority', 'Type', 'CustomerID'],
             FieldsWithoutDefaultValue = ['CustomerID', 'Article', 'Attachments'];
 
+        function ToggleSubmitTextFields() {
+            var HideSubmitTextFields = $('#OneClickExecution').val() === '1';
+
+            $('#SubmitAdviceTextContainer, #SubmitButtonTextContainer').toggle(!HideSubmitTextFields);
+        }
+
         function UpdateFields(Event, UI) {
             var Fieldname,
                 DefaultFieldConfig = {};
@@ -1168,6 +1436,9 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
         // Initialize list filter
         Core.UI.Table.InitTableFilter($('#FilterAvailableFields'), $('#AvailableFields'));
         Core.UI.Table.InitTableFilter($('#FilterAssignedFields'), $('#AssignedFields'));
+
+        $('#OneClickExecution').on('change', ToggleSubmitTextFields);
+        ToggleSubmitTextFields();
 
         $('#Submit').on('click', function() {
             $('#ActivityDialogForm').submit();
@@ -1926,6 +2197,59 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
 
     /**
      * @private
+     * @name StripeProcessElementList
+     * @memberof Core.Agent.Admin.ProcessManagement
+     * @function
+     * @param {jQueryObject} $List - Process element list.
+     * @description
+     *      Paints every second visible row. Hidden scope rows must not count.
+     */
+    function StripeProcessElementList($List) {
+        var Index = 0;
+
+        if (!$List || !$List.length) {
+            return;
+        }
+
+        $List.children('li.OneRow').each(function () {
+            var $Row = $(this);
+
+            $Row.removeClass('Stripe');
+            if ($Row.css('display') === 'none') {
+                return;
+            }
+
+            Index = Index + 1;
+            if (Index % 2 === 0) {
+                $Row.addClass('Stripe');
+            }
+        });
+    }
+
+    /**
+     * @private
+     * @name StripeProcessElementListByType
+     * @memberof Core.Agent.Admin.ProcessManagement
+     * @function
+     * @param {String} EntityType - Activity, ActivityDialog, Transition or TransitionAction.
+     */
+    function StripeProcessElementListByType(EntityType) {
+        if (EntityType === 'Activity') {
+            StripeProcessElementList($('#Activities'));
+        }
+        else if (EntityType === 'ActivityDialog') {
+            StripeProcessElementList($('#ActivityDialogs'));
+        }
+        else if (EntityType === 'Transition') {
+            StripeProcessElementList($('#Transitions'));
+        }
+        else if (EntityType === 'TransitionAction') {
+            StripeProcessElementList($('#TransitionActions'));
+        }
+    }
+
+    /**
+     * @private
      * @name InitScopeFilter
      * @memberof Core.Agent.Admin.ProcessManagement
      * @function
@@ -1962,7 +2286,7 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 var EntityType = $(this).data('scopeFilter'),
                     FilterType         = 'Process',
                     ScopeEntityID      = $('#ProcessEntityID').val(),
-                    $HideScopeElements = $('[data-entity-type=' + EntityType + ']'),
+                    $HideScopeElements = $('li[data-entity-type=' + EntityType + ']'),
                     $ShowGlobalScopeElements,
                     $ShowScopeElements,
                     $ElementsToRemove     = $('li[data-scope=Process][data-scope-entity-id != ' + ScopeEntityID + ']');
@@ -1973,12 +2297,12 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                 // current process and global ones.
                 $ElementsToRemove.remove();
 
-                $ShowScopeElements = $('[data-entity-type=' + EntityType + '][data-scope=' + FilterType +'][data-scope-entity-id=' + ScopeEntityID + ']');
+                $ShowScopeElements = $('li[data-entity-type=' + EntityType + '][data-scope=' + FilterType +'][data-scope-entity-id=' + ScopeEntityID + ']');
 
                 // change / improve this FilterType if you need more types
                 if(this.checked) {
                     FilterType = 'Global';
-                    $ShowGlobalScopeElements = $('[data-entity-type=' + EntityType + '][data-scope=Global]');
+                    $ShowGlobalScopeElements = $('li[data-entity-type=' + EntityType + '][data-scope=Global]');
                 }
 
                 $HideScopeElements.each(function(){
@@ -1992,6 +2316,8 @@ Core.Agent.Admin.ProcessManagement = (function (TargetNS) {
                         $(this).show();
                     });
                 }
+
+                StripeProcessElementListByType(EntityType);
             });
             $(this).trigger('change');
         });

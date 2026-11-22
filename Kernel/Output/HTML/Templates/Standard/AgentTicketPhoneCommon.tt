@@ -275,6 +275,7 @@
                                                                 [% INCLUDE "FormElements/AttachmentList.tt" %]
                                                             </div>
                                                         </div>
+                                                        [% Data.AttachmentSelection %]
 
 [% RenderBlockStart("TimeUnits") %]
                                                         <div class="col">

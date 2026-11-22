@@ -1,0 +1,20 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+<div class="field-wrapper">
+    <label for="">[% Translate("Add attachments of other articles") | html %]</label>
+    <div class="Field">
+        <input type="hidden" id="ReusedArticleFileIDs" name="ReusedArticleFileIDs" value="[% Data.ReusedArticleFileIDs | html %]" />
+        [% PROCESS 'AttachmentList.tt' %]
+        <div>
+            <button id="ZnunyTicketAttachmentsSelectAll" type="button" class="CallForAction btn-main btn-width-lg btn-cancel-ghost">
+                <span>[% Translate("Select all attachments") | html %]</span>
+            </button>
+        </div>
+    </div>
+</div>

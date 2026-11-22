@@ -114,7 +114,12 @@ Core.UI.Datepicker = (function (TargetNS) {
         var $DatepickerElement,
             HasDateSelectBoxes = false,
             Options,
-            ErrorMessage;
+            ErrorMessage,
+            DayID,
+            EscapeDayID,
+            $FieldContainer,
+            $ErrorContainer,
+            $DatepickerIcon;
 
         if (typeof Element.VacationDays === 'object') {
             Core.Config.Set('Datepicker.VacationDays', Element.VacationDays);
@@ -264,12 +269,27 @@ Core.UI.Datepicker = (function (TargetNS) {
 
         $DatepickerElement.datepicker(Options);
 
+        DayID = Element.Day.attr('id');
+        EscapeDayID = Core.App.EscapeSelector(DayID);
+
+        $FieldContainer = Element.Year.parent();
+        $ErrorContainer = Element.Day.closest('.field-wrapper');
+        if (!$ErrorContainer.length) {
+            $ErrorContainer = $FieldContainer;
+        }
+        $DatepickerIcon = $FieldContainer.children('#' + EscapeDayID + 'DatepickerIcon');
+
         // Add some DOM notes to the datepicker, but only if it was not initialized previously.
         //      Check if one additional DOM node is already present.
-        if (!$('#' + Core.App.EscapeSelector(Element.Day.attr('id')) + 'DatepickerIcon').length) {
+        if (!$DatepickerIcon.length) {
 
             // add datepicker icon and click event
-            $DatepickerElement.after('<a href="#" class="DatepickerIcon icon-hover" id="' + Element.Day.attr('id') + 'DatepickerIcon" title="' + Core.Language.Translate('Open date selection') + '"><i class="fa fa-calendar"></i></a>');
+            $DatepickerElement.after('<a href="#" class="DatepickerIcon icon-hover" id="' + DayID + 'DatepickerIcon" title="' + Core.Language.Translate('Open date selection') + '"><i class="fa fa-calendar"></i></a>');
+            $DatepickerIcon = $DatepickerElement.next('#' + EscapeDayID + 'DatepickerIcon');
+        }
+
+        // Keep template-provided error messages (e.g. search before/after range text).
+        if (!$ErrorContainer.find('#' + EscapeDayID + 'Error').length) {
             if (Element.DateInFuture) {
                 ErrorMessage = Core.Language.Translate('Invalid date (need a future date)!');
             }
@@ -282,7 +302,7 @@ Core.UI.Datepicker = (function (TargetNS) {
 
             // Add validation error messages for all dateselection elements
             Element.Year
-            .after('<div id="' + Element.Day.attr('id') + 'Error" class="TooltipErrorMessage"><p>' + ErrorMessage + '</p></div>')
+            .after('<div id="' + DayID + 'Error" class="TooltipErrorMessage"><p>' + ErrorMessage + '</p></div>')
             .after('<div id="' + Element.Month.attr('id') + 'Error" class="TooltipErrorMessage"><p>' + ErrorMessage + '</p></div>')
             .after('<div id="' + Element.Year.attr('id') + 'Error" class="TooltipErrorMessage"><p>' + ErrorMessage + '</p></div>');
 
@@ -294,7 +314,7 @@ Core.UI.Datepicker = (function (TargetNS) {
             }
         }
 
-        $('#' + Core.App.EscapeSelector(Element.Day.attr('id')) + 'DatepickerIcon').off('click.Datepicker').on('click.Datepicker', function () {
+        $DatepickerIcon.off('click.Datepicker').on('click.Datepicker', function () {
             if (!(typeof Element.Disabled !== 'undefined' && Element.Disabled === true)) {
                 $DatepickerElement.datepicker('show');
             }

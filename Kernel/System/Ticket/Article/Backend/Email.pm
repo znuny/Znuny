@@ -11,6 +11,7 @@ package Kernel::System::Ticket::Article::Backend::Email;
 
 use strict;
 use warnings;
+use utf8;
 
 use Mail::Address;
 
@@ -155,6 +156,10 @@ Send article via email and create article with attachments.
                 ContentType => $ContentType,
                 Filename    => 'lala1.txt',
             },
+            {
+                ArticleID => 355,    # reuse an existing attachment of the same ticket
+                FileID    => 2,
+            },
         ],
         EmailSecurity => {
             Backend     => 'PGP',                       # PGP or SMIME
@@ -226,7 +231,6 @@ Events:
 
 sub ArticleSend {
     my ( $Self, %Param ) = @_;
-
     my $ToOrig      = $Param{To}          || '';
     my $CcOrig      = $Param{Cc}          || '';
     my $Loop        = $Param{Loop}        || 0;
@@ -278,6 +282,23 @@ sub ArticleSend {
         DocumentRef    => \$Param{Body},
         AttachmentsRef => $Param{Attachment},
     );
+
+    # Resolve reuse references before the article is created and the mail is assembled,
+    # so that both get the actual attachment content.
+    my $ExpandedAttachments = $Self->_ArticleAttachmentExpand(
+        Attachments => $Param{Attachment},
+        TicketID    => $Param{TicketID},
+        UserID      => $Param{UserID},
+    );
+    if ($ExpandedAttachments) {
+        $Param{Attachment} = $ExpandedAttachments;
+    }
+    else {
+        $Kernel::OM->Get('Kernel::System::Log')->Error("Error expanding attachments, skipping reused ones");
+        $Param{Attachment} = [
+            grep { defined $_->{Content} } @{ $Param{Attachment} }
+        ];
+    }
 
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 

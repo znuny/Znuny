@@ -1216,7 +1216,7 @@ sub Run {
                     },
                 );
                 if ( $Self->{UserTimeZone} ) {
-                    $StartTimeObject->ToOTRSTimeZone();
+                    $StartTimeObject->ToZnunyTimeZone();
                 }
                 $GetParam{StartTime} = $StartTimeObject->ToString();
             }
@@ -1247,7 +1247,7 @@ sub Run {
                     },
                 );
                 if ( $Self->{UserTimeZone} ) {
-                    $EndTimeObject->ToOTRSTimeZone();
+                    $EndTimeObject->ToZnunyTimeZone();
                 }
 
                 # Get already calculated local start time.
@@ -1424,7 +1424,7 @@ sub Run {
                 );
 
                 if ( $Self->{UserTimeZone} ) {
-                    $NotificationCustomDateTimeObject->ToOTRSTimeZone();
+                    $NotificationCustomDateTimeObject->ToZnunyTimeZone();
                 }
 
                 $GetParam{NotificationCustomDateTime} = $NotificationCustomDateTimeObject->ToString();
@@ -1496,8 +1496,13 @@ sub Run {
         # pass current user ID
         $GetParam{UserID} = $Self->{UserID};
 
-        # Get passed plugin parameters.
-        my @PluginParams = grep { $_ =~ /^Plugin/ } keys %GetParam;
+        # Edit screen sends Plugin_* or Plugin[Key][Config][Attr].
+        # Drag and drop must not count: a bare Plugin key or jQuery-serialized
+        # pluginData (Plugin[TicketLink][Icon]) would delete every link.
+        my @PluginParams = grep {
+            $_ =~ m{^Plugin_}
+                || $_ =~ m{^Plugin\[.+\]\[Config\]\[}
+        } keys %GetParam;
 
         my @OldRecurringAppointments;
         if (%Appointment) {

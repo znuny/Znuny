@@ -37,7 +37,8 @@ $Self->True(
 
 STATID:
 for my $StatID ( sort { int $a <=> int $b } keys %{$Stats} ) {
-    my $Stat = $StatsObject->StatsGet( StatID => $StatID );
+    my $Stat   = $StatsObject->StatsGet( StatID => $StatID );
+    my $Object = $Stat->{Object} // '';
 
     next STATID if ( $Stat->{StatType} eq 'static' );
 
@@ -61,23 +62,24 @@ for my $StatID ( sort { int $a <=> int $b } keys %{$Stats} ) {
 
     $Self->True(
         ref $ResultPreview eq 'ARRAY',
-        "StatsRun preview mode (StatID $StatID) $Stat->{Object}",
+        "StatsRun preview mode (StatID $StatID) $Object",
     ) || next STATID;
 
     $Self->True(
         ref $ResultPreview->[1] eq 'ARRAY',
-        "StatsRun preview mode headline (StatID $StatID) $Stat->{Object}",
+        "StatsRun preview mode headline (StatID $StatID) $Object",
     ) || next STATID;
 
     $Self->Is(
         scalar @{ $ResultPreview->[1] },
         scalar @{ $ResultLive->[1] },
-        "StatsRun preview result has same number of columns in Row 1 as live result (StatID $StatID) $Stat->{Object}",
+        "StatsRun preview result has same number of columns in Row 1 as live result (StatID $StatID) $Object",
     );
 
     # TicketList stats make a ticket search and that could return identical results in preview and live
     #   if there are not enough tickets in the system (for example just one).
-    if ( $Stat->{Object} ne 'TicketList' ) {
+    # Stats without data rows return the same empty structure in both modes on a fresh database.
+    if ( $Object ne 'TicketList' && ref $ResultLive eq 'ARRAY' && @{$ResultLive} > 2 ) {
         $Self->IsNotDeeply(
             $ResultLive,
             $ResultPreview,

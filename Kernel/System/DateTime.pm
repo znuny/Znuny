@@ -19,6 +19,7 @@ use Exporter qw(import);
 our %EXPORT_TAGS = (    ## no critic
     all => [
         'OTRSTimeZoneGet',
+        'ZnunyTimeZoneGet',
         'SystemTimeZoneGet',
         'TimeZoneList',
         'UserDefaultTimeZoneGet',
@@ -29,7 +30,7 @@ Exporter::export_ok_tags('all');
 use DateTime;
 use DateTime::TimeZone;
 use Scalar::Util                  qw( looks_like_number );
-use Kernel::System::VariableCheck qw( IsArrayRefWithData IsHashRefWithData );
+use Kernel::System::VariableCheck qw( IsArrayRefWithData IsHashRefWithData IsStringWithData );
 
 our %ObjectManagerFlags = (
     NonSingleton            => 1,
@@ -40,6 +41,7 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Main',
     'Kernel::System::Log',
+    'Kernel::System::SysConfig',
 );
 
 our $Locale = DateTime::Locale->load('en_US');
@@ -68,7 +70,7 @@ Handles date and time calculations.
 Creates a DateTime object. Do not use new() directly, instead use the object manager:
 
     # Create an object with current date and time
-    # within time zone set in SysConfig OTRSTimeZone:
+    # within time zone set in SysConfig ZnunyTimeZone:
     my $DateTimeObject = $Kernel::OM->Create(
         'Kernel::System::DateTime'
     );
@@ -92,7 +94,7 @@ Creates a DateTime object. Do not use new() directly, instead use the object man
             Hour     => 12,                     # optional, defaults to 0
             Minute   => 35,                     # optional, defaults to 0
             Second   => 59,                     # optional, defaults to 0
-            TimeZone => 'Europe/Berlin',        # optional, defaults to setting of SysConfig OTRSTimeZone
+            TimeZone => 'Europe/Berlin',        # optional, defaults to setting of SysConfig ZnunyTimeZone
         }
     );
 
@@ -114,7 +116,7 @@ Creates a DateTime object. Do not use new() directly, instead use the object man
         'Kernel::System::DateTime',
         ObjectParams => {
             String   => '2016-08-14 22:45:00',
-            TimeZone => 'Europe/Berlin',        # optional, defaults to setting of SysConfig OTRSTimeZone
+            TimeZone => 'Europe/Berlin',        # optional, defaults to setting of SysConfig ZnunyTimeZone
         }
     );
 
@@ -440,7 +442,7 @@ sub Add {
 
             # Switch to time zone of calendar
             $TimeZone = $ConfigObject->Get( "TimeZone::Calendar" . $Param{Calendar} )
-                || $Self->OTRSTimeZoneGet();
+                || $Self->ZnunyTimeZoneGet();
 
             # Use Kernel::System::DateTime's ToTimeZone() here because of error handling
             # and because performance is irrelevant at this point.
@@ -802,7 +804,7 @@ sub Delta {
 
             # switch to time zone of calendar
             $TimeZone = $ConfigObject->Get( "TimeZone::Calendar" . $Param{Calendar} )
-                || $Self->OTRSTimeZoneGet();
+                || $Self->ZnunyTimeZoneGet();
 
             eval {
                 $StartDateTimeObject->set_time_zone($TimeZone);
@@ -1088,7 +1090,7 @@ sub ToTimeZone {
 
 =head2 ToOTRSTimeZone()
 
-Converts the date and time of this object to the data storage time zone.
+DEPRECATED. Use L</ToZnunyTimeZone> instead.
 
     my $Success = $DateTimeObject->ToOTRSTimeZone();
 
@@ -1101,7 +1103,25 @@ Returns:
 sub ToOTRSTimeZone {
     my ( $Self, %Param ) = @_;
 
-    return $Self->ToTimeZone( TimeZone => $Self->OTRSTimeZoneGet() );
+    return $Self->ToZnunyTimeZone(%Param);
+}
+
+=head2 ToZnunyTimeZone()
+
+Converts the date and time of this object to the data storage time zone.
+
+    my $Success = $DateTimeObject->ToZnunyTimeZone();
+
+Returns:
+
+    $Success = 1;   # success, or false otherwise.
+
+=cut
+
+sub ToZnunyTimeZone {
+    my ( $Self, %Param ) = @_;
+
+    return $Self->ToTimeZone( TimeZone => $Self->ZnunyTimeZoneGet() );
 }
 
 =head2 Validate()
@@ -1250,7 +1270,7 @@ Returns the date/time of this object as time stamp in RFC 2822 format to be used
     my $MailTimeStamp = $DateTimeObject->ToEmailTimeStamp();
 
     # If you already have a DateTime object, possibly in another time zone:
-    $DateTimeObject->ToOTRSTimeZone();
+    $DateTimeObject->ToZnunyTimeZone();
     my $MailTimeStamp = $DateTimeObject->ToEmailTimeStamp();
 
 Returns:
@@ -1342,7 +1362,7 @@ sub IsVacationDay {
 
             # Switch to time zone of calendar
             my $TimeZone = $ConfigObject->Get( "TimeZone::Calendar" . $Param{Calendar} )
-                || $Self->OTRSTimeZoneGet();
+                || $Self->ZnunyTimeZoneGet();
 
             if ( defined $TimeZone ) {
                 $Self->ToTimeZone( TimeZone => $TimeZone );
@@ -1613,9 +1633,51 @@ sub GetRealTimeZone {
     return;
 }
 
+=head2 ZnunyTimeZoneGet()
+
+Returns the time zone set for Znuny (data storage time zone).
+
+    my $ZnunyTimeZone = $DateTimeObject->ZnunyTimeZoneGet();
+
+    # You can also call this function without an object:
+    my $ZnunyTimeZone = Kernel::System::DateTime->ZnunyTimeZoneGet();
+
+Returns:
+
+    my $ZnunyTimeZone = 'Europe/Berlin';
+
+=cut
+
+sub ZnunyTimeZoneGet {
+    my $ConfigObject    = $Kernel::OM->Get('Kernel::Config');
+    my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');
+
+    my $ZnunyTimeZone = $ConfigObject->Get('ZnunyTimeZone');
+    my $OTRSTimeZone  = $ConfigObject->Get('OTRSTimeZone');
+
+    # SysConfig default for ZnunyTimeZone is UTC. That value is truthy, so a plain
+    # || fallback never reaches a legacy OTRSTimeZone from Kernel/Config.pm.
+    # If ZnunyTimeZone was never customized, prefer OTRSTimeZone when present.
+    my %ZnunyTimeZoneSetting = $SysConfigObject->SettingGet(
+        Name  => 'ZnunyTimeZone',
+        NoLog => 1,
+    );
+    if (
+        !$ZnunyTimeZoneSetting{IsModified}
+        && IsStringWithData($OTRSTimeZone)
+        )
+    {
+        return $OTRSTimeZone;
+    }
+
+    return $ZnunyTimeZone || $OTRSTimeZone || 'UTC';
+}
+
 =head2 OTRSTimeZoneGet()
 
-Returns the time zone set for OTRS.
+DEPRECATED. Use L</ZnunyTimeZoneGet> instead.
+
+Returns the time zone set for Znuny (data storage time zone).
 
     my $OTRSTimeZone = $DateTimeObject->OTRSTimeZoneGet();
 
@@ -1629,7 +1691,7 @@ Returns:
 =cut
 
 sub OTRSTimeZoneGet {
-    return $Kernel::OM->Get('Kernel::Config')->Get('OTRSTimeZone') || 'UTC';
+    return Kernel::System::DateTime->ZnunyTimeZoneGet();
 }
 
 =head2 UserDefaultTimeZoneGet()
@@ -1851,7 +1913,7 @@ sub _StringToHash {
 
         $DT->set_time_zone('UTC');
 
-        my $TimeZone = $Param{TimeZone} // $Self->OTRSTimeZoneGet();
+        my $TimeZone = $Param{TimeZone} // $Self->ZnunyTimeZoneGet();
         if (
             $TimeZone ne 'UTC'    # because it's already UTC
             && $Self->IsTimeZoneValid( TimeZone => $TimeZone )
@@ -1880,7 +1942,7 @@ sub _StringToHash {
 Creates a CPAN DateTime object which will be stored within this object and used for date/time calculations.
 
     # Create an object with current date and time
-    # within time zone set in SysConfig OTRSTimeZone:
+    # within time zone set in SysConfig ZnunyTimeZone:
     my $CPANDateTimeObject = $DateTimeObject->_CPANDateTimeObjectCreate();
 
     # Create an object with current date and time
@@ -1897,7 +1959,7 @@ Creates a CPAN DateTime object which will be stored within this object and used 
         Hour     => 12,                 # optional, defaults to 0
         Minute   => 35,                 # optional, defaults to 0
         Second   => 59,                 # optional, defaults to 0
-        TimeZone => 'Europe/Berlin',    # optional, defaults to setting of SysConfig OTRSTimeZone
+        TimeZone => 'Europe/Berlin',    # optional, defaults to setting of SysConfig ZnunyTimeZone
     );
 
     # Create an object from an epoch timestamp. These timestamps are always UTC/GMT,
@@ -1914,7 +1976,7 @@ Creates a CPAN DateTime object which will be stored within this object and used 
     # for the list of supported string formats.
     my $CPANDateTimeObject = $DateTimeObject->_CPANDateTimeObjectCreate(
         String   => '2016-08-14 22:45:00',
-        TimeZone => 'Europe/Berlin',        # optional, defaults to setting of SysConfig OTRSTimeZone
+        TimeZone => 'Europe/Berlin',        # optional, defaults to setting of SysConfig ZnunyTimeZone
     );
 
 =cut
@@ -1948,7 +2010,7 @@ sub _CPANDateTimeObjectCreate {
     }
 
     my $CPANDateTimeObject;
-    my $TimeZone = $Param{TimeZone} || $Self->OTRSTimeZoneGet();
+    my $TimeZone = $Param{TimeZone} || $Self->ZnunyTimeZoneGet();
 
     if ( !$Self->IsTimeZoneValid( TimeZone => $TimeZone ) ) {
         $Kernel::OM->Get('Kernel::System::Log')->Log(

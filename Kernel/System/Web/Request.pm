@@ -12,6 +12,7 @@ package Kernel::System::Web::Request;
 
 use strict;
 use warnings;
+use utf8;
 
 use CGI ();
 use CGI::Carp;
@@ -58,7 +59,7 @@ If you need to reset the CGI data before creating a new instance, use
 
     CGI::initialize_globals();
 
-before calling Kernel::System::Web::Request->new();
+before calling Kernel::System::Web::Request-E<gt>new();
 
 =cut
 
@@ -410,6 +411,7 @@ set a cookie
         Path    => 'otrs/',     # optional, only allow cookie for given path
         Secure  => 1,           # optional, set secure attribute to disable cookie on HTTP (HTTPS only)
         HTTPOnly => 1,          # optional, sets HttpOnly attribute of cookie to prevent access via JavaScript
+        SameSite => 'None',     # optional, Strict, Lax or None; None is emitted only together with Secure
     );
 
 =cut
@@ -419,14 +421,37 @@ sub SetCookie {
 
     $Param{Path} ||= '';
 
-    return $Self->{Query}->cookie(
+    # Bundled CGI::Cookie accepts only Strict and Lax. SameSite=None is appended
+    # below. Browsers drop SameSite=None unless the cookie is also Secure.
+    my $SameSite       = ucfirst lc( $Param{SameSite} || '' );
+    my $SameSiteForCGI = '';
+
+    if ( $SameSite eq 'Lax' || $SameSite eq 'Strict' ) {
+        $SameSiteForCGI = $SameSite;
+    }
+    elsif ( $SameSite ne 'None' || !$Param{Secure} ) {
+        $SameSite = '';
+    }
+
+    my $Cookie = $Self->{Query}->cookie(
         -name     => $Param{Key},
         -value    => $Param{Value},
         -expires  => $Param{Expires},
         -secure   => $Param{Secure}   || '',
         -httponly => $Param{HTTPOnly} || '',
+        -samesite => $SameSiteForCGI,
         -path     => '/' . $Param{Path},
     );
+
+    return $Cookie if $SameSite ne 'None';
+    return $Cookie if !$Cookie;
+
+    my $CookieString = "$Cookie";
+    if ( $CookieString !~ m{SameSite=}i ) {
+        $CookieString .= '; SameSite=None';
+    }
+
+    return $CookieString;
 }
 
 =head2 GetCookie()
@@ -652,6 +677,120 @@ sub SaveFormDraft {
     # create new draft
     return if !$Kernel::OM->Get('Kernel::System::FormDraft')->FormDraftAdd(%FormDraft);
     return 1;
+}
+
+=head2 GetLegacySessionName()
+
+Return the previous cookie name for a known default session name.
+Custom names have no previous name, so the result is empty.
+
+    my $LegacySessionName = $ParamObject->GetLegacySessionName(
+        SessionName => 'ZnunyAgentInterface',    # returns OTRSAgentInterface
+    );
+
+=cut
+
+sub GetLegacySessionName {
+    my ( $Self, %Param ) = @_;
+
+    return '' if !$Param{SessionName};
+
+    my %LegacySessionName = (
+        ZnunyAgentInterface    => 'OTRSAgentInterface',
+        ZnunyCustomerInterface => 'OTRSCustomerInterface',
+    );
+
+    my $LegacySessionName = $LegacySessionName{ $Param{SessionName} } // '';
+    return '' if $LegacySessionName eq $Param{SessionName};
+
+    return $LegacySessionName;
+}
+
+=head2 GetSessionID()
+
+Resolve a session ID from the request. The configured session name is tried
+first. When that name is a known Znuny default, the previous OTRS name is
+tried as well. Query/body params are read first; if SessionUseCookie is
+enabled, a cookie value overrides them (same priority as before).
+
+    my $SessionID = $ParamObject->GetSessionID(
+        SessionName => 'ZnunyAgentInterface',
+    );
+
+    # List context also returns the cookie value when the session came from a cookie:
+    my ( $SessionID, $SessionIDCookie ) = $ParamObject->GetSessionID(
+        SessionName => 'ZnunyAgentInterface',
+    );
+
+=cut
+
+sub GetSessionID {
+    my ( $Self, %Param ) = @_;
+
+    return if !$Param{SessionName};
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    my @SessionNames      = ( $Param{SessionName} );
+    my $LegacySessionName = $Self->GetLegacySessionName(
+        SessionName => $Param{SessionName},
+    );
+    if ($LegacySessionName) {
+        push @SessionNames, $LegacySessionName;
+    }
+
+    my $SessionID = '';
+    SESSIONNAME:
+    for my $SessionName (@SessionNames) {
+        $SessionID = $Self->GetParam( Param => $SessionName ) || '';
+        last SESSIONNAME if $SessionID;
+    }
+
+    my $SessionIDCookie = '';
+    if ( $ConfigObject->Get('SessionUseCookie') ) {
+        COOKIE:
+        for my $SessionName (@SessionNames) {
+            $SessionIDCookie = $Self->GetCookie( Key => $SessionName ) || '';
+            last COOKIE if $SessionIDCookie;
+        }
+        if ($SessionIDCookie) {
+            $SessionID = $SessionIDCookie;
+        }
+    }
+
+    return ( $SessionID, $SessionIDCookie ) if wantarray;
+    return $SessionID;
+}
+
+=head2 ExpireLegacySessionCookie()
+
+Build a SetCookies entry that expires the previous cookie name for a known
+default session name. Does nothing when that session name has no previous name.
+
+    my $Cookie = $ParamObject->ExpireLegacySessionCookie(
+        SessionName => 'ZnunyAgentInterface',
+        Path        => $ConfigObject->Get('ScriptAlias'),
+        Secure      => $CookieSecureAttribute,
+    );
+
+=cut
+
+sub ExpireLegacySessionCookie {
+    my ( $Self, %Param ) = @_;
+
+    my $LegacySessionName = $Self->GetLegacySessionName(
+        SessionName => $Param{SessionName},
+    );
+    return if !$LegacySessionName;
+
+    return $Self->SetCookie(
+        Key      => $LegacySessionName,
+        Value    => '',
+        Expires  => '-1y',
+        Path     => $Param{Path} // '',
+        Secure   => $Param{Secure},
+        HTTPOnly => 1,
+    );
 }
 
 1;

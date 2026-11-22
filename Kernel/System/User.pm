@@ -795,6 +795,17 @@ sub UserSearch {
             }
         }
 
+        # UserEmail is not stored when it equals the login.
+        # GetUserData() then reports the login as the email.
+        my %User = $Self->GetUserData(
+            User  => $Param{PostMasterSearch},
+            Valid => $Param{Valid},
+        );
+
+        if (%User) {
+            return $User{UserID} => $User{UserLogin};
+        }
+
         return;
     }
     elsif ( $Param{UserLogin} ) {

@@ -39,7 +39,25 @@ Core.Agent.TicketZoom = (function (TargetNS) {
      * @description
      *      InitialArticleID
      */
-        InitialArticleID;
+        InitialArticleID,
+    /**
+     * @private
+     * @name MarkTicketSeenCount
+     * @memberof Core.Agent.TicketZoom
+     * @member {Number}
+     * @description
+     *      Articles of the current ticket that are marked as seen.
+     */
+        MarkTicketSeenCount,
+    /**
+     * @private
+     * @name MarkTicketUnseenCount
+     * @memberof Core.Agent.TicketZoom
+     * @member {Number}
+     * @description
+     *      Articles of the current ticket that are not marked as seen.
+     */
+        MarkTicketUnseenCount;
 
     /**
      * @private
@@ -84,6 +102,71 @@ Core.Agent.TicketZoom = (function (TargetNS) {
     }
 
     /**
+     * @private
+     * @name UpdateMarkSeenUnseenMenu
+     * @memberof Core.Agent.TicketZoom
+     * @function
+     * @description
+     *      Show "mark as seen" while an unread article remains.
+     *      Show "mark as unseen" while a read article remains.
+     */
+    function UpdateMarkSeenUnseenMenu() {
+        var $SeenMenu,
+            $UnseenMenu;
+
+        $SeenMenu = $('.ticketHeaderActions li.MarkTicketSeen');
+        $UnseenMenu = $('.ticketHeaderActions li.MarkTicketUnseen');
+
+        if (!$SeenMenu.length && !$UnseenMenu.length) {
+            return;
+        }
+
+        if (MarkTicketUnseenCount > 0) {
+            $SeenMenu.removeClass('Hidden');
+        }
+        else {
+            $SeenMenu.addClass('Hidden');
+        }
+
+        if (MarkTicketSeenCount > 0) {
+            $UnseenMenu.removeClass('Hidden');
+        }
+        else {
+            $UnseenMenu.addClass('Hidden');
+        }
+    }
+
+    /**
+     * @private
+     * @name RegisterArticleSeen
+     * @memberof Core.Agent.TicketZoom
+     * @function
+     * @param {String} ArticleID - Article that was marked as seen.
+     * @description
+     *      Count one unread article as seen and refresh the ticket menu.
+     */
+    function RegisterArticleSeen(ArticleID) {
+        var $Row;
+
+        if (!ArticleID) {
+            return;
+        }
+
+        $Row = $('#ArticleTable .ArticleID[value=' + ArticleID + ']').closest('tr');
+
+        if (!$Row.length || !$Row.hasClass('UnreadArticles')) {
+            return;
+        }
+
+        if (MarkTicketUnseenCount > 0) {
+            MarkTicketUnseenCount--;
+        }
+        MarkTicketSeenCount++;
+
+        UpdateMarkSeenUnseenMenu();
+    }
+
+    /**
      * @name MarkTicketAsSeen
      * @memberof Core.Agent.TicketZoom
      * @function
@@ -100,8 +183,11 @@ Core.Agent.TicketZoom = (function (TargetNS) {
                 TicketID: TicketID
             };
 
-            // Mark old row as read
+            // Mark old row as read. Backend marks every article of the ticket.
             $('#ArticleTable .ArticleID').closest('tr').removeClass('UnreadArticles').find('span.UnreadArticles').remove();
+            MarkTicketSeenCount += MarkTicketUnseenCount;
+            MarkTicketUnseenCount = 0;
+            UpdateMarkSeenUnseenMenu();
 
             // Mark article as seen in backend
             Core.AJAX.FunctionCall(
@@ -138,6 +224,7 @@ Core.Agent.TicketZoom = (function (TargetNS) {
             };
 
             // Mark old row as readed
+            RegisterArticleSeen(ArticleID);
             $('#ArticleTable .ArticleID[value=' + ArticleID + ']').closest('tr').removeClass('UnreadArticles').find('span.UnreadArticles').remove();
 
             // Mark article as seen in backend
@@ -717,7 +804,11 @@ Core.Agent.TicketZoom = (function (TargetNS) {
             Count, ArticleIDs = Core.Config.Get('ArticleIDs'),
             ArticleFilterDialog = parseInt(Core.Config.Get('ArticleFilterDialog'), 10),
             AsyncWidgetActions = Core.Config.Get('AsyncWidgetActions') || {},
-            ProcessWidget = Core.Config.Get('ProcessWidget');
+            ProcessWidget = Core.Config.Get('ProcessWidget'),
+            MarkSeenUnseen = Core.Config.Get('MarkSeenUnseen') || {};
+
+        MarkTicketSeenCount = parseInt(MarkSeenUnseen.Seen, 10) || 0;
+        MarkTicketUnseenCount = parseInt(MarkSeenUnseen.Unseen, 10) || 0;
 
         // create open popup event for dropdown elements
         if (MenuItems.length > 0) {
@@ -805,30 +896,40 @@ Core.Agent.TicketZoom = (function (TargetNS) {
 
         // loading new articles
         $('#ArticleTable tbody tr').on('click', function () {
+            var ArticleID;
 
             Core.App.Publish('Event.Agent.TicketZoom.ArticleClick');
 
             // Mode: show one article - load new article via ajax
             if (!ZoomExpand) {
+                ArticleID = $(this).find('input.ArticleID').val();
+
                 // Add active state to new row
                 $(this).closest('table').find('tr').removeClass('Active').end().end().addClass('Active');
 
-                // Mark old row as readed
+                // Mark old row as readed and refresh seen/unseen menu entries.
+                RegisterArticleSeen(ArticleID);
                 $(this).closest('tr').removeClass('UnreadArticles').find('span.UnreadArticles').remove();
 
                 // Load content of new article
-                LoadArticle($(this).find('input.ArticleInfo').val(), $(this).find('input.ArticleID').val());
+                LoadArticle($(this).find('input.ArticleInfo').val(), ArticleID);
 
                 // mark an article as seen
-                TargetNS.MarkAsSeen(TicketID, $(this).find('input.ArticleID').val());
+                TargetNS.MarkAsSeen(TicketID, ArticleID);
             }
 
             // Mode: show all articles - jump to the selected article
             else {
+                ArticleID = $(this).find('input.ArticleID').val();
+
                 // Add active state to new row
                 $(this).closest('table').find('tr').removeClass('Active').end().end().addClass('Active');
 
-                location.href = BuildArticleFragmentIdentifier($(this).find('input.ArticleID').val());
+                // Click marks this article seen in the menu before the ticket-wide timeout.
+                RegisterArticleSeen(ArticleID);
+                $(this).closest('tr').removeClass('UnreadArticles').find('span.UnreadArticles').remove();
+
+                location.href = BuildArticleFragmentIdentifier(ArticleID);
             }
 
             return false;

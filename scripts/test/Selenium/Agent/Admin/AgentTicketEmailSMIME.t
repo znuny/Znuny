@@ -285,6 +285,17 @@ $Selenium->RunTest(
             );
         }
 
+        # Delete S/MIME key relations created by this test, otherwise they stay in the database
+        #   and break other tests that list all certificates (e.g. AdminSMIME.t).
+        $Success = $DBObject->Do(
+            SQL  => "DELETE FROM smime_keys WHERE email_address = ?",
+            Bind => [ \$SystemAddressEmail ],
+        );
+        $Self->True(
+            $Success,
+            "Deleted test S/MIME keys",
+        );
+
         # Make sure the cache is correct.
         $CacheObject->CleanUp();
     }

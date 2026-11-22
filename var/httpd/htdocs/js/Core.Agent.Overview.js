@@ -22,6 +22,37 @@ Core.Agent = Core.Agent || {};
 Core.Agent.Overview = (function (TargetNS) {
 
     /**
+     * @private
+     * @name SaveContextSettingsAJAX
+     * @memberof Core.Agent.Overview
+     * @function
+     * @returns {Boolean} true if the dialog form can be submitted right away.
+     * @description
+     *      Saves the extra settings dialog fields (select.ContextSettingsAJAX) as agent preferences,
+     *      then submits the dialog form. These keys are not part of a preferences group.
+     */
+    function SaveContextSettingsAJAX() {
+        var $Form = $('.Dialog:visible form'),
+            $Fields = $Form.find('select.ContextSettingsAJAX'),
+            Pending = $Fields.length;
+
+        if (!Pending) {
+            return true;
+        }
+
+        $Fields.each(function () {
+            Core.Agent.PreferencesUpdate($(this).attr('name'), $(this).val(), function () {
+                Pending--;
+                if (!Pending) {
+                    $Form.submit();
+                }
+            });
+        });
+
+        return false;
+    }
+
+    /**
      * @name Init
      * @memberof Core.Agent.Overview
      * @function
@@ -87,10 +118,10 @@ Core.Agent.Overview = (function (TargetNS) {
                                     }
                                 });
                             }
-                            return true;
+                            return SaveContextSettingsAJAX();
                         }
                     }
-                ], true);
+                ], true, 'modal-settings');
             Event.preventDefault();
             Event.stopPropagation();
             Core.Agent.TableFilters.SetAllocationList();

@@ -304,6 +304,14 @@ $Selenium->RunTest(
             "$Notification - notification is found."
         );
 
+        # Notice is position:fixed at the top-right and intercepts #ValidFilter.
+        # CloseNotification() is not stable enough: the toast slides in for 1s
+        # (messageActive after 200ms), the helper clicks .messageClose while the
+        # toast uses .notificationClose, and remove() only drops :visible nodes.
+        # Notification and Alert both call addMessage, so a second toast can
+        # appear after close and intercept the click again.
+        $Selenium->CloseNotification();
+
         # Checks for AdminValidFilter
         $Self->True(
             $Selenium->find_element( "#ValidFilter", 'css' )->is_displayed(),
@@ -502,6 +510,9 @@ $Selenium->RunTest(
         my $Location = $Selenium->{Home}
             . "/scripts/test/sample/NotificationEvent/Export_Notification_Ticket_create_notification.yml";
 
+        # Chrome runs on the Selenium machine, so the sample file must be uploaded there first.
+        $Location = $Selenium->upload_file($Location);
+
         # Import existing template without overwrite.
         $Selenium->find_element( "#FileUpload", 'css' )->send_keys($Location);
 
@@ -517,18 +528,20 @@ $Selenium->RunTest(
             "Notification is uploaded",
         );
 
-        $Selenium->find_element("//button[\@value=\'Upload Notification configuration']")->VerifiedClick();
+        $Selenium->find_element("//button[\@value='Import configurations']")->VerifiedClick();
 
-        my $ErrorMessage = 'There where errors adding/updating the following Notifications';
+        my $ErrorMessage = 'The following notifications were not updated:';
         $Selenium->WaitFor(
             JavaScript =>
                 "return typeof(\$) === 'function' && !\$('tr.Invalid td a:contains($ErrorMessage)').length;"
         );
 
-        $Selenium->WaitFor( JavaScript => "return \$('p:contains($ErrorMessage)').length;" );
+        $Selenium->WaitFor(
+            JavaScript => "return \$('body').text().indexOf('$ErrorMessage') !== -1;"
+        );
 
         $Selenium->find_element(
-            "//p[contains(text(), \'There where errors adding/updating the following Notifications')]"
+            "//*[contains(., 'The following notifications were not updated:')]"
         );
 
         # Import existing template with overwrite.
@@ -536,9 +549,16 @@ $Selenium->RunTest(
 
         $Selenium->find_element( "#OverwriteExistingNotifications", 'css' )->click();
 
-        $Selenium->find_element("//button[\@value=\'Upload Notification configuration']")->VerifiedClick();
+        $Selenium->find_element("//button[\@value='Import configurations']")->VerifiedClick();
 
-        $Selenium->find_element("//p[contains(text(), \'The following Notifications have been updated successfully')]");
+        $Selenium->WaitFor(
+            JavaScript =>
+                "return \$('body').text().indexOf('The following notifications have been updated successfully:') !== -1;"
+        );
+
+        $Selenium->find_element(
+            "//*[contains(., 'The following notifications have been updated successfully:')]"
+        );
 
        # For English notification text remove button is added.
        # Notification text it is not shown on add screen if DefaultUsedLanguages has no English included. See bug#14594.

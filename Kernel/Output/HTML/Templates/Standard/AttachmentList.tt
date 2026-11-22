@@ -1,0 +1,29 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+<ul>
+    [% ItemNum = 0 %]
+    [% FOREACH Attachment = Data.Attachments %]
+        [% IF Data.ShowAttachmentsCount %]
+            [% ItemNum = ItemNum + 1;  IF ItemNum >= Data.ShowAttachmentsCount; ShowMore = 1; END %]
+        [% END %]
+        <li class="AttachmentListItem[% IF ShowMore; ' ShowMore Hidden'; ELSE; ''; END %]">
+            <input type="checkbox" class="SelectedAttachment" name="ArticleFileIDString" value="[% Attachment.ArticleID | html %],[% Attachment.FileID | html %]" />
+            <i class="fa [% Attachment.IconClass | html %] AttachmentIcon"></i>
+            [% IF Attachment.IsPreviewable && Data.EnablePreview %]
+                <a href="[% Env("Baselink") %]Action=AgentTicketAttachment;TicketID=[% Data.TicketID | html %];ArticleID=[% Attachment.ArticleID | html %];FileID=[% Attachment.FileID | html %];Preview=1" class="AttachmentPreview" title="[% Translate("Preview") | html %] [% Attachment.Filename | html %]" data-attachment-name="[% Attachment.Filename | html %]" data-attachment-download-url="[% Env("Baselink") %]Action=AgentTicketAttachment;TicketID=[% Data.TicketID | html %];ArticleID=[% Attachment.ArticleID | html %];FileID=[% Attachment.FileID | html %]"><i class="fa fa-search"></i></a>
+            [% END %]
+            <a href="[% Env("Baselink") %]Action=AgentTicketAttachment;TicketID=[% Data.TicketID | html %];ArticleID=[% Attachment.ArticleID | html %];FileID=[% Attachment.FileID | html %]" class="AttachmentLink" title="[% Attachment.Filename | html %]">[% Attachment.Filename | truncate(27) | html %]</a>
+        </li>
+    [% END %]
+[% IF ShowMore %]
+    <button type="button" id="ShowMoreButton" class="CallForAction CenterButton ShowMoreButton More btn-main btn-cancel-ghost">
+        <span>[% Translate("Show more") | html %]</span>
+    </button>
+[% END %]
+</ul>

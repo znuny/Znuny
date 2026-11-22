@@ -48,11 +48,11 @@ sub Run {
     # Do not show notification if user has already valid time zone in the preferences.
     return '' if $CustomerUserPreferences{UserTimeZone};
 
-    # If OTRSTimeZone and UserDefaultTimeZone match and are not set to UTC, don't show a notification,
+    # If ZnunyTimeZone and UserDefaultTimeZone match and are not set to UTC, don't show a notification,
     # because in this case it almost certainly means that only this time zone is relevant.
-    my $OTRSTimeZone        = Kernel::System::DateTime->OTRSTimeZoneGet();
+    my $ZnunyTimeZone       = Kernel::System::DateTime->ZnunyTimeZoneGet();
     my $UserDefaultTimeZone = Kernel::System::DateTime->UserDefaultTimeZoneGet();
-    return '' if $OTRSTimeZone eq $UserDefaultTimeZone && $OTRSTimeZone ne 'UTC';
+    return '' if $ZnunyTimeZone eq $UserDefaultTimeZone && $ZnunyTimeZone ne 'UTC';
 
     # show notification to set time zone
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');

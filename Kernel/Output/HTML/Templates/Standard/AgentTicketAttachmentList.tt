@@ -1,0 +1,133 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+<div class="LayoutPopup ARIARoleMain">
+    <div class="Header">
+        <div>
+            <h1>[% Translate("Download attachments of %s%s%s", Config('Ticket::Hook'), Config('Ticket::HookDivider'), Data.TicketNumber) | html %] &mdash; [% Data.Title | html %]</h1>
+        </div>
+        <div>
+            <a class="CancelClosePopup btn-cancel-ghost btn-main btn-width-md" href="#">
+            [% Translate("Close and Back") | html %]
+            </a>
+        </div>
+    </div>
+    <div class="Content table-widget-parent">
+        <div class="WidgetSimple inline-filter-field card">
+            <div class="Content">
+                <span>
+                    <input type="text" id="FilterFiles" placeholder="[% Translate("Start typing to filter...") | html %]" name="FilterFiles" value="" title="[% Translate("Filter attachments...") | html %]">
+                </span>
+                <span>
+                    <div class="field-wrapper">
+                        <div class="Field">
+                            <button name="HideInlineFiles" class="HideInlineFiles CallForAction Primary btn-primary btn-main btn-width-md" id="HideInlineFiles" title="[% Translate("Hide all inline attachments") | html %]" type="submit" value="[% Translate("Hide all inline attachments") | html %]">
+                                <span>[% Translate("Hide all inline attachments") | html %]</span>
+                            </button>
+                        </div>
+                    </div>
+                </span>
+            </div>
+        </div>
+        <div class="FilterMessageWidget Hidden">
+            <div class="Header">
+                <h2>[% Translate("No Matches") | html %]</h2>
+            </div>
+            <div class="Content">
+                <p>[% Translate("Sorry, your search didn't match any items.") | html %]</p>
+            </div>
+        </div>
+
+        <div class="WidgetSimple Expanded table-widget">
+            <div class="Header">
+                <div class="WidgetAction Toggle"><a href="#" title="[% Translate("Show or hide the content") | html %]"><i class="fa fa-caret-right"></i><i class="fa fa-caret-down"></i></a></div>
+                <h2>
+                    [% Translate("Attachments") | html %]
+                </h2>
+            </div>
+            <div class="Content">
+                <fieldset class="TableLike card-item-wrapper padding-none">
+                    <form action="[% Env("CGIHandle") %]" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                        <input type="hidden" name="Subaction" value="DownloadAsZIP"/>
+                        <input type="hidden" name="TicketID" value="[% Data.TicketID | html %]"/>
+
+                        <table class="DataTable" id="AttachmentList">
+                            <thead>
+                                <tr>
+                                    <th class="FileAsZip"><input type="checkbox" id="FileMarkAll" class="Modernize" /></th>
+                                    <th class="Type Sortable"><a href="#">[% Translate("Type") | html %]</a></th>
+                                    <th class="Download Sortable"><a href="#">[% Translate("Download") | html %]</a></th>
+                                    <th class="Preview Sortable"><a href="#">[% Translate("Preview") | html %]</a></th>
+                                    <th class="Filename Sortable"><a href="#">[% Translate("Filename") | html %]</a></th>
+                                    <th class="FileSize Sortable"><a href="#">[% Translate("Size") | html %]</a></th>
+                                    <th class="FileDate Sortable InitialSorting Descending"><a href="#">[% Translate("Date") | html %]</a></th>
+                                    <th title="[% Translate("Direction") | html %]" class="FileArticleType Sortable"><a href="#"><i class="fa fa-exchange"></i></a></th>
+                                    <th class="FileArticle Sortable"><a href="#">[% Translate("Article") | html %]</a></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            [% FOREACH Attachment IN Data.Attachments %]
+                                <tr[% IF Attachment.InlineElement %] class="InlineFile"[% END %]>
+                                    <td class="FileAsZip">
+                                        <input type="checkbox" name="Attachments" value="[% Attachment.DataJSON | html %]" class="Modernize" />
+                                    </td>
+                                    <td class="Type">
+                                        <i class="fa [% Attachment.FileTypeCSS | html %]"></i>
+                                        <input type="hidden" class="SortData" value="[% Attachment.FileTypeCSS | html %]" />
+                                    </td>
+                                    <td class="Download">
+                                        <a href="[% Env("Baselink") %]Action=AgentTicketAttachment;TicketID=[% Attachment.TicketID | uri %];ArticleID=[% Attachment.ArticleID | uri %];FileID=[% Attachment.FileID | uri %]"><i class="fa fa-download"></i></a>
+                                    </td>
+                                    <td class="Preview">
+                                    [% IF Attachment.IsPreviewable && Data.EnablePreview %]
+                                        <a href="[% Env("Baselink") %]Action=AgentTicketAttachment;TicketID=[% Data.TicketID | uri %];ArticleID=[% Attachment.ArticleID | uri %];FileID=[% Attachment.FileID | uri %];Preview=1" class="AttachmentPreview" title="[% Translate("Preview") | html %]" data-attachment-name="[% Attachment.Filename | html %]" data-attachment-download-url="[% Env("Baselink") %]Action=AgentTicketAttachment;TicketID=[% Attachment.TicketID | uri %];ArticleID=[% Attachment.ArticleID | uri %];FileID=[% Attachment.FileID | uri %]"><i class="fa fa-search"></i></a>
+                                    [% END %]
+                                    </td>
+                                    <td class="Filename">
+                                        <a href="[% Env("Baselink") %]Action=AgentTicketAttachment;TicketID=[% Attachment.TicketID | uri %];ArticleID=[% Attachment.ArticleID | uri %];FileID=[% Attachment.FileID | uri %]">[% Attachment.Filename | html %]</a>
+                                        <input type="hidden" class="SortData" value="[% Attachment.Filename | html %]" />
+                                    </td>
+                                    <td class="FileSize">
+                                        [% Attachment.FilesizeRaw | Localize("Filesize") %]
+                                        <input type="hidden" class="SortData" value="[% Attachment.FilesizeRaw | html %]" />
+                                    </td>
+                                    <td class="FileDate">
+                                        [% Attachment.CreateTime | Localize("TimeShort") %]
+                                        <input type="hidden" class="SortData" value="[% Attachment.CreateTime | html %]" />
+                                    </td>
+                                    <td class="FileArticleType">
+                                        [% IF Attachment.FileArticleTypeCSS %]<i class="fa [% Attachment.FileArticleTypeCSS | html %]"></i>[% END %]
+                                        <input type="hidden" class="SortData" value="[% Attachment.FileArticleTypeCSS | html %]" />
+                                    </td>
+                                    <td class="FileArticle">
+                                        <a href="[% Env("CGIHandle") %]?Action=AgentTicketZoom;TicketID=[% Attachment.TicketID | html %];ArticlePage=[% Attachment.ArticlePage | html %]#[% Attachment.ArticleID | html %]" target="_blank">#[% Attachment.ArticleNumber | html %] - [% Attachment.Subject | html %]</a>
+                                        <input type="hidden" class="SortData" value="#[% Attachment.ArticleNumber | html %] - [% Attachment.Subject | html %]" />
+                                    </td>
+                                </tr>
+                            [% END %]
+                            [% IF !Data.Attachments.size %]
+                                <tr>
+                                    <td class="NoTickets" colspan="7">[% Translate("This ticket does not have any attachments.") | html %]</td>
+                                </tr>
+                            [% END %]
+                            </tbody>
+                        </table>
+                        <div class="field-wrapper">
+                            <div class="Field">
+                                <button class="TableButtons CallForAction Primary btn-primary btn-main btn-width-md" id="submitRichText" accesskey="g" title="[% Translate("Download as ZIP file") | html %] (g)" type="submit" value="[% Translate("Download as ZIP file") | html %]">
+                                    <span><i class="fa fa-check-square-o"></i> [% Translate("Download as ZIP file") | html %]</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>

@@ -88,12 +88,12 @@ for my $Key (qw(Database Host Type User Version)) {
     );
 }
 
-my %OTRSInfo = $EnvironmentObject->OTRSInfoGet();
+my %ZnunyInfo = $EnvironmentObject->ZnunyInfoGet();
 
 for my $Key (qw(Version Home Host Product SystemID DefaultLanguage)) {
     $Self->True(
-        $OTRSInfo{$Key},
-        "OTRSInfoGet - returned value for $Key",
+        $ZnunyInfo{$Key},
+        "ZnunyInfoGet - returned value for $Key",
     );
 }
 

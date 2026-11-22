@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<otrs_stats>
+<znuny_stats>
 <Cache>1</Cache>
 <Description>Anzahl der neuen Tickets pro Tag und Queue die im letzten
 Monat in das System gelangt sind.</Description>
@@ -22,4 +22,4 @@ Monat in das System gelangt sind.</Description>
 <SelectedValues>open</SelectedValues>
 </UseAsXvalue>
 <Valid>1</Valid>
-</otrs_stats>
+</znuny_stats>

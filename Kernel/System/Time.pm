@@ -52,7 +52,7 @@ sub new {
 
     $Self->{TimeZone} = $Param{TimeZone}
         || $Param{UserTimeZone}
-        || $DateTimeObject->OTRSTimeZoneGet();
+        || $DateTimeObject->ZnunyTimeZoneGet();
 
     # check if time zone is valid
     if ( !$DateTimeObject->IsTimeZoneValid( TimeZone => $Self->{TimeZone} ) ) {
@@ -61,7 +61,7 @@ sub new {
 
         $Self->{TimeZone} = $Param{UserTimeZone}
             ? $DateTimeObject->UserDefaultTimeZoneGet()
-            : $DateTimeObject->OTRSTimeZoneGet();
+            : $DateTimeObject->ZnunyTimeZoneGet();
 
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',

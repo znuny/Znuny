@@ -1,0 +1,29 @@
+/**
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+/**
+ * @package     Skin "dark"
+ * @section     Attachment preview overlay
+ */
+
+@media screen,projection,tv,handheld {
+
+    .featherlight .featherlight-content {
+        background: #222;
+    }
+
+    .featherlight .featherlight-previous span,
+    .featherlight .featherlight-next span,
+    .featherlight .AttachmentPreviewPosition {
+        color: #bbb;
+    }
+
+    iframe.ArticleAttachmentPreviewIframe {
+        border-color: #444;
+    }
+}

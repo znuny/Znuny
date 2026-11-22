@@ -256,6 +256,7 @@ my $SAMLAuthObject = Kernel::System::Auth::SAML->new(
 
 my $ExpectedSAMLRequestID = '_54c307de-960b-11f0-b741-ecb5948c096d';
 
+# Unsigned fixture. Response and Assertion IDs must differ: Net::SAML2 0.89 rejects a repeated ID.
 my $SAMLResponseXML = '<samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"
     xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Destination="https://example.com/znuny/index.pl?Action=Login" ID="ID_aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee" InResponseTo="'
     . $ExpectedSAMLRequestID
@@ -264,7 +265,7 @@ my $SAMLResponseXML = '<samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:
     <samlp:Status>
         <samlp:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Success"/>
     </samlp:Status>
-    <saml:Assertion xmlns="urn:oasis:names:tc:SAML:2.0:assertion" ID="ID_aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee" IssueInstant="2025-09-20T10:19:46.253Z" Version="2.0">
+    <saml:Assertion xmlns="urn:oasis:names:tc:SAML:2.0:assertion" ID="ID_bbbbbbbb-bbbb-cccc-dddd-eeeeeeeeeeee" IssueInstant="2025-09-20T10:19:46.253Z" Version="2.0">
         <saml:Issuer>' . $Issuer . '</saml:Issuer>
         <saml:Subject>
             <saml:NameID Format="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress">'

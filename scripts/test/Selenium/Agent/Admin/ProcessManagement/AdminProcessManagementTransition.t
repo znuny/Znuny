@@ -207,8 +207,10 @@ $Selenium->RunTest(
             $TransitionID = $Row[0];
         }
 
-        # Go to edit test Transition screen.
-        $Selenium->find_element("//a[contains(\@href, \'Subaction=TransitionEdit;ID=$TransitionID' )]")->click();
+        # Edit link stays hidden until the row is hovered.
+        $Selenium->execute_script(
+            "\$('a[href*=\"Subaction=TransitionEdit;ID=$TransitionID\"]').click();"
+        );
 
         $Selenium->WaitFor( WindowCount => 2 );
         $Handles = $Selenium->get_window_handles();
@@ -288,7 +290,7 @@ $Selenium->RunTest(
 
         $Selenium->WaitFor(
             JavaScript =>
-                "return typeof(\$) === 'function' && \$('a[href*=\"Subaction=TransitionEdit;ID=$TransitionID\"]:visible').length && \$.active == 0"
+                "return typeof(\$) === 'function' && \$('#Transitions li:visible a[href*=\"Subaction=TransitionEdit;ID=$TransitionID\"]').length && \$.active == 0"
         );
 
         # Get test ProcesID.
@@ -336,8 +338,10 @@ $Selenium->RunTest(
         );
         sleep 2;
 
-        # Go to edit test Transition screen again.
-        $Selenium->find_element("//a[contains(\@href, \'Subaction=TransitionEdit;ID=$TransitionID' )]")->click();
+        # Edit link stays hidden until the row is hovered.
+        $Selenium->execute_script(
+            "\$('a[href*=\"Subaction=TransitionEdit;ID=$TransitionID\"]').click();"
+        );
 
         $Selenium->WaitFor( WindowCount => 2 );
         $Handles = $Selenium->get_window_handles();

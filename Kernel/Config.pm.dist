@@ -38,8 +38,12 @@ sub Load {
     # The database user
     $Self->{DatabaseUser} = 'znuny';
 
-    # The password of database user. You also can use bin/znuny.Console.pl Maint::Database::PasswordCrypt
-    # for crypted passwords
+    # The password of database user. Instead of plain text, you can store this (and other
+    # sensitive values below, such as LDAP bind passwords) as real, key-based ciphertext using
+    # bin/znuny.Console.pl Maint::Secret::Encrypt (see Kernel::System::Crypt::Secret
+    # for details, including how to configure the required encryption key).
+    # (Maint::Database::PasswordCrypt also exists, but only produces a fixed, keyless
+    # obfuscation - not real encryption - and is kept for backward compatibility only.)
     $Self->{DatabasePw} = 'some-pass';
 
     # The database DSN for MySQL ==> more: "perldoc DBD::mysql"
@@ -57,6 +61,17 @@ sub Load {
 #    $ENV{ORACLE_HOME}     = '/path/to/your/oracle';
 #    $ENV{NLS_DATE_FORMAT} = 'YYYY-MM-DD HH24:MI:SS';
 #    $ENV{NLS_LANG}        = 'AMERICAN_AMERICA.AL32UTF8';
+
+    # ---------------------------------------------------- #
+    # encryption key for sensitive config values            #
+    # (DatabasePw, AuthModule::LDAP::SearchUserPw, ...)     #
+    # ---------------------------------------------------- #
+    # If you encrypt any config value with
+    # "bin/znuny.Console.pl Maint::Secret::Encrypt", the key used to encrypt/decrypt it must
+    # be available at runtime. Do NOT store the key itself in this file - use one of:
+    #   - the ZNUNY_CONFIG_SECRET_KEY environment variable (e.g. set for the webserver process), or
+    #   - a key file outside of the webroot, referenced here, with permissions 0600:
+    # $Self->{ConfigSecretKeyFile} = '/etc/znuny/config_secret.key';
 
     # ---------------------------------------------------- #
     # fs root directory

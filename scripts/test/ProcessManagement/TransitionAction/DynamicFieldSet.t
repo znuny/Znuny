@@ -22,7 +22,21 @@ $Kernel::OM->ObjectParamAdd(
         UseTmpArticleDir => 1,
     },
 );
-my $HelperObject              = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+
+# Register a dynamic field driver derived from Multiselect (but not literally named 'Multiselect',
+# like ConfigItemMultiselect from ITSMConfigurationManagement) to test that the string-to-array
+# conversion for multiple selected values is applied to such field types too.
+$HelperObject->ConfigSettingChange(
+    Key   => 'DynamicFields::Driver###TestMultiselectDerived',
+    Value => {
+        DisplayName   => 'Test Multiselect Derived',
+        Module        => 'scripts::test::sample::DynamicField::Driver::TestMultiselectDerived',
+        ConfigDialog  => 'AdminDynamicFieldMultiselect',
+        ItemSeparator => ', ',
+    },
+);
+
 my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
 my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
 
@@ -36,6 +50,7 @@ my $DFName1           = 'Test1' . $RandomID;
 my $DFName2           = 'Test2' . $RandomID;
 my $DFName3           = 'Test3' . $RandomID;
 my $DFName4           = 'Test4' . $RandomID;
+my $DFName5           = 'Test5' . $RandomID;
 my $DFForeignTicketID = 'UnitTestForeignTicketID' . $RandomID;
 my $DFForeignField    = 'UnitTestForeignField' . $RandomID;
 
@@ -81,6 +96,20 @@ my @NewDynamicFieldConfig = (
         Name       => $DFName4,
         Label      => $DFName4,
         FieldType  => 'Multiselect',
+        ObjectType => 'Ticket',
+        Config     => {
+            TranslatableValues => '0',
+            PossibleValues     => {
+                'a' => 'A',
+                'b' => 'B',
+                'c' => 'C',
+            },
+        },
+    },
+    {
+        Name       => $DFName5,
+        Label      => $DFName5,
+        FieldType  => 'TestMultiselectDerived',
         ObjectType => 'Ticket',
         Config     => {
             TranslatableValues => '0',
@@ -355,6 +384,19 @@ my @Tests = (
             Ticket => \%Ticket,
             Config => {
                 $DFName4 => 'a, b',
+            },
+        },
+        Multiselect    => 1,
+        ExpectedResult => [ 'a', 'b' ],
+        Success        => 1,
+    },
+    {
+        Name   => 'Correct multiple values set for a field type derived from Multiselect',
+        Config => {
+            UserID => $UserID,
+            Ticket => \%Ticket,
+            Config => {
+                $DFName5 => 'a, b',
             },
         },
         Multiselect    => 1,

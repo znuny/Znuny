@@ -81,7 +81,7 @@ sub new {
     }
 
     # take time zone
-    $Self->{TimeZone} = $Param{UserTimeZone} || $Param{TimeZone} || Kernel::System::DateTime->OTRSTimeZoneGet();
+    $Self->{TimeZone} = $Param{UserTimeZone} || $Param{TimeZone} || Kernel::System::DateTime->ZnunyTimeZoneGet();
 
     # Debug
     if ( $Self->{Debug} > 0 ) {
@@ -343,7 +343,7 @@ sub FormatTimeString {
             return $String;
         }
 
-        if ( $Self->{TimeZone} && $Self->{TimeZone} ne Kernel::System::DateTime->OTRSTimeZoneGet() ) {
+        if ( $Self->{TimeZone} && $Self->{TimeZone} ne Kernel::System::DateTime->ZnunyTimeZoneGet() ) {
             $DateTimeObject->ToTimeZone( TimeZone => $Self->{TimeZone} ) if $Self->{TimeZone};
             $Format .= " ($Self->{TimeZone})"                            if $Config ne 'DateFormatShort';
         }

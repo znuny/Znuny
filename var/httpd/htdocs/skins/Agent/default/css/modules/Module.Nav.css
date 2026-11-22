@@ -1,0 +1,1215 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (AGPL). If you
+did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+*/
+
+/* Hierarchical nav host (queue / service; Core.UI.Nav.js) — one hook class for layout */
+/* ── Allow dropdown to overflow every ancestor ── */
+.OverviewBox,
+.OverviewBox > .WidgetSimple.HierarchicalNav,
+.HierarchicalNav,
+.HierarchicalNav .Content,
+.WidgetSimple.HierarchicalNav > .Content {
+  overflow: visible;
+}
+
+/* Hide flat list (replaced by JS nav) */
+.HierarchicalNav .NavOverviewList {
+  display: none;
+}
+
+/* ── Nav host: stay inside overview column ── */
+.HierarchicalNav.level-filter-view {
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.HierarchicalNav .Content {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* ── Nav bar ── */
+.nav-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: flex-start;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  list-style: none;
+  padding: 5px;
+  gap: var(--margin-sm);
+}
+
+/* ── Nav item — pill button ── */
+.nav-item {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+  flex-shrink: 0;
+  overflow: visible;
+  list-style: none;
+  padding: 0;
+  border-radius: var(--border-radius-sm);
+  border: 1.5px var(--border-solid) var(--border-color);
+  background: var(--white);
+  color: var(--main-font-color);
+  font-size: var(--font-size-sm);
+  font-weight: var(--medium);
+  line-height: 1.2;
+  transition: var(--main-transition);
+}
+
+.nav-item.nav-active-leaf,
+.nav-item.nav-active-root {
+  border: 1.5px var(--border-solid) var(--primary-color);
+  background: var(--white);
+  color: var(--main-font-color);
+}
+
+.nav-item.nav-active-leaf > .nav-link,
+.nav-item.nav-active-root > .nav-link {
+  background: var(--primary-color-rgb);
+  color: var(--main-font-color);
+  font-weight: var(--bold);
+}
+
+.nav-item.nav-active-leaf > .nav-link:hover,
+.nav-item.nav-active-root > .nav-link:hover {
+  background: var(--primary-color-darker);
+  color: var(--white);
+}
+
+/* ── Separator (hidden; gap on .nav-bar handles spacing when wrapping) ── */
+.nav-sep {
+  display: none;
+}
+
+/* ── Link fills pill (hover affects link only) ── */
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  align-self: stretch;
+  gap: 0;
+  padding: 8px var(--padding-lg);
+  margin: 0;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  box-sizing: border-box;
+  transition: background 0.12s, color 0.12s;
+}
+
+.nav-item:not(.nav-has-dropdown) > .nav-link {
+  border-radius: inherit;
+}
+
+.nav-item.nav-has-dropdown > .nav-link {
+  flex: 1;
+  padding-right: var(--padding-sm);
+  border-radius: var(--border-radius-sm) 0 0 var(--border-radius-sm);
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  background: var(--primary-color-darker);
+  color: var(--white);
+  text-decoration: none;
+}
+
+.nav-menu-trigger {
+  position: relative;
+  display: flex;
+  align-self: stretch;
+  flex-shrink: 0;
+  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+  transition: background 0.12s, color 0.12s;
+}
+
+.nav-item.nav-has-dropdown > .nav-menu-trigger:hover,
+.nav-dropdown-item.nav-has-sub > .nav-menu-trigger:hover {
+  background: var(--primary-color-darker);
+}
+
+/* Color stays on the toggle. Setting it on the trigger paints nested
+   carets white, because the flyout lives inside the hovered trigger. */
+.nav-item.nav-has-dropdown > .nav-menu-trigger:hover > .nav-toggle,
+.nav-dropdown-item.nav-has-sub > .nav-menu-trigger:hover > .nav-toggle {
+  color: var(--white);
+}
+
+/* ── Sub-level sibling row, same inset and rhythm as .nav-bar ── */
+.nav-sub-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: flex-start;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  list-style: none;
+  padding: 10px 5px 5px;
+  margin: 5px 0 0;
+  border-top: 1px solid var(--border-color);
+  gap: var(--margin-sm);
+}
+
+.nav-sub-item {
+  display: inline-flex;
+  align-items: stretch;
+  flex-shrink: 0;
+  list-style: none;
+  padding: 0;
+  border-radius: var(--border-radius-sm);
+  border: 1.5px var(--border-solid) var(--border-color);
+  background: var(--white);
+  color: var(--main-font-color);
+  font-size: var(--font-size-sm);
+  font-weight: var(--medium);
+  line-height: 1.2;
+}
+
+.nav-sub-item > .nav-link {
+  border-radius: inherit;
+}
+
+/* Leaf pills have no arrow column. Keep the count as far from the next
+   pill as on a pill that ends with the caret (trigger is ~38px, leaf
+   padding-right is already 10px larger than the split link). */
+.nav-sub-bar > .nav-sub-item:not(.nav-has-dropdown):not(:last-child) {
+  margin-right: 28px;
+}
+
+.nav-sub-item.nav-active-leaf {
+  border: 1.5px var(--border-solid) var(--primary-color);
+  background: var(--white);
+}
+
+.nav-sub-item.nav-active-leaf > .nav-link {
+  background: var(--primary-color-rgb);
+  color: var(--main-font-color);
+  font-weight: var(--bold);
+}
+
+.nav-sub-item.nav-active-leaf > .nav-link:hover {
+  background: var(--primary-color-darker);
+  color: var(--white);
+}
+
+.nav-menu-trigger > .nav-toggle,
+.nav-item.nav-has-dropdown > .nav-toggle,
+.nav-dropdown-item.nav-has-sub > .nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  flex-shrink: 0;
+  min-width: 28px;
+  height: 100%;
+  padding: 0 var(--padding-sm);
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  background: transparent;
+  color: var(--main-font-color);
+  font-size: inherit;
+  font-family: inherit;
+  line-height: 1;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+  z-index: 1;
+}
+
+.nav-menu-trigger > .nav-toggle .nav-caret,
+.nav-item.nav-has-dropdown > .nav-toggle .nav-caret,
+.nav-dropdown-item.nav-has-sub > .nav-toggle .nav-caret {
+  position: static;
+  transform: none;
+  pointer-events: none;
+  font-size: var(--font-size-lg);
+}
+
+/* ── Count — inline like legacy "(0)" ── */
+.nav-count {
+  background: none;
+  color: inherit;
+  border-radius: 0;
+  padding: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  flex-shrink: 0;
+  padding-left: 5px;
+}
+
+.nav-count::before {
+  content: '(';
+}
+
+.nav-count::after {
+  content: ')';
+}
+
+/* ── Caret (fa-caret-down) ── */
+.nav-caret {
+  display: inline-block;
+  font-size: var(--font-size-lg);
+  line-height: 1;
+  width: 1em;
+  text-align: center;
+  color: inherit;
+  opacity: 0.75;
+}
+
+/* ── Dropdown panel (open on caret hover) ── */
+.nav-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.10);
+  min-width: 140px;
+  width: max-content;
+  box-sizing: border-box;
+  overflow: visible;
+  z-index: 9000;
+  list-style: none;
+}
+
+.nav-item.nav-has-dropdown > .nav-dropdown {
+  left: 0;
+  right: auto;
+  min-width: 100%;
+}
+
+.nav-item.nav-has-dropdown:has(> .nav-menu-trigger:hover) > .nav-dropdown,
+.nav-item.nav-has-dropdown:has(> .nav-dropdown:hover) > .nav-dropdown,
+.nav-item.nav-has-dropdown.nav-open > .nav-dropdown,
+.nav-menu-trigger:hover > .nav-dropdown,
+.nav-menu-trigger.nav-open > .nav-dropdown {
+  display: block;
+}
+
+.nav-item.nav-has-dropdown > .nav-dropdown::before,
+.nav-menu-trigger > .nav-dropdown::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -4px;
+  height: 4px;
+}
+
+/* ── Dropdown item ── */
+.nav-dropdown-item {
+  list-style: none;
+  position: relative;
+  overflow: visible;
+}
+
+.nav-dropdown-item > a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px var(--padding-lg);
+  border-radius: 0;
+  font-size: var(--font-size-sm);
+  color: var(--main-font-color);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.12s, color 0.12s;
+  cursor: pointer;
+}
+
+/* One menu shape: only the outer corners of the list are rounded. */
+.nav-dropdown > .nav-dropdown-item:first-child > a {
+  border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+}
+
+.nav-dropdown > .nav-dropdown-item:last-child > a {
+  border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
+}
+
+.nav-dropdown > .nav-dropdown-item:only-child > a {
+  border-radius: var(--border-radius-sm);
+}
+
+.nav-dropdown-item:not(.nav-has-sub):hover > a,
+.nav-dropdown-item:not(.nav-has-sub) > a:hover {
+  background: var(--primary-color-darker);
+  color: var(--white);
+  text-decoration: none;
+}
+
+.nav-dropdown-item.nav-has-sub {
+  display: flex;
+  align-items: stretch;
+  border-radius: 0;
+  background: transparent;
+}
+
+.nav-dropdown-item.nav-has-sub > a {
+  flex: 1;
+  width: auto;
+  min-width: 0;
+  padding-right: var(--padding-sm);
+  border-radius: 0;
+}
+
+.nav-dropdown-item.nav-has-sub > a:hover {
+  background: var(--primary-color-darker);
+  color: var(--white);
+  text-decoration: none;
+}
+
+.nav-dropdown-item.nav-has-sub.nav-active-row > a {
+  background: var(--primary-color-rgb);
+  color: var(--main-font-color);
+  font-weight: var(--bold);
+}
+
+.nav-dropdown-item.nav-has-sub.nav-active-row > a:hover {
+  background: var(--primary-color-darker);
+  color: var(--white);
+}
+
+.nav-dropdown-item.nav-has-sub > .nav-menu-trigger {
+  border-radius: 0;
+}
+
+.nav-dropdown > .nav-dropdown-item:first-child.nav-has-sub > a {
+  border-radius: var(--border-radius-sm) 0 0 0;
+}
+
+.nav-dropdown > .nav-dropdown-item:first-child.nav-has-sub > .nav-menu-trigger {
+  border-radius: 0 var(--border-radius-sm) 0 0;
+}
+
+.nav-dropdown > .nav-dropdown-item:last-child.nav-has-sub > a {
+  border-radius: 0 0 0 var(--border-radius-sm);
+}
+
+.nav-dropdown > .nav-dropdown-item:last-child.nav-has-sub > .nav-menu-trigger {
+  border-radius: 0 0 var(--border-radius-sm) 0;
+}
+
+.nav-dropdown > .nav-dropdown-item:only-child.nav-has-sub > a {
+  border-radius: var(--border-radius-sm) 0 0 var(--border-radius-sm);
+}
+
+.nav-dropdown > .nav-dropdown-item:only-child.nav-has-sub > .nav-menu-trigger {
+  border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+}
+
+.nav-dropdown-item > a .nav-count {
+  margin-left: auto;
+}
+
+/* Leaf rows have no caret. Inset the count by the caret column so it
+   lines up with the count on a row that has one. Trigger is 38px. */
+.nav-dropdown-item:not(.nav-has-sub) > a {
+  padding-right: calc(38px + var(--padding-sm));
+}
+
+.nav-dropdown-item > a.nav-active-leaf {
+  background: var(--primary-color-rgb);
+  color: var(--main-font-color);
+  font-weight: var(--bold);
+}
+
+.nav-dropdown-item > a.nav-active-leaf:hover {
+  background: var(--primary-color-darker);
+  color: var(--white);
+}
+
+.nav-dropdown-item > a.nav-active-leaf .nav-count {
+  background: none;
+  color: inherit;
+}
+
+/* ── Sub-dropdown (nested, open on nav-menu-trigger hover) ── */
+.nav-dropdown-item.nav-has-sub > .nav-menu-trigger > .nav-dropdown {
+  top: calc(-1 * var(--border-width));
+  left: 100%;
+  right: auto;
+  margin-left: 4px;
+  min-width: 140px;
+  z-index: 9100;
+}
+
+.nav-dropdown-item.nav-has-sub > .nav-menu-trigger > .nav-dropdown::before {
+  top: 0;
+  bottom: 0;
+  left: -4px;
+  right: auto;
+  width: 4px;
+  height: auto;
+}
+
+/* Not enough room on the right: top menu aligns to the pill, flyouts open left. */
+.nav-item.nav-has-dropdown > .nav-dropdown.nav-open-left {
+  left: auto;
+  right: 0;
+}
+
+.nav-dropdown-item.nav-has-sub > .nav-menu-trigger > .nav-dropdown.nav-open-left {
+  left: auto;
+  right: 100%;
+  margin-left: 0;
+  margin-right: 4px;
+}
+
+.nav-dropdown-item.nav-has-sub > .nav-menu-trigger > .nav-dropdown.nav-open-left::before {
+  left: auto;
+  right: -4px;
+}
+
+/* ── h1 breadcrumb host — styled to match native .BreadCrumb ── */
+.OverviewBox h1 {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 6px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--semi-bold);
+  color: var(--bread-crumb);
+  text-transform: uppercase;
+  line-height: normal;
+}
+
+.OverviewBox h1 .overview-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Breadcrumb in overview header (queue / service / other hierarchical views) — mirrors ul.BreadCrumb ── */
+ul.HierarchicalNavBreadCrumb {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul.HierarchicalNavBreadCrumb li {
+  display: flex;
+  align-items: center;
+}
+
+ul.HierarchicalNavBreadCrumb li i {
+  font-size: var(--font-size-xl);
+  color: var(--bread-crumb);
+  margin: 0 4px;
+}
+
+ul.HierarchicalNavBreadCrumb li a {
+  color: var(--bread-crumb);
+  font-size: var(--font-size-sm);
+  text-decoration: none;
+}
+
+ul.HierarchicalNavBreadCrumb li a:hover {
+  text-decoration: underline;
+}
+
+ul.HierarchicalNavBreadCrumb li span {
+  color: var(--bread-crumb-active);
+  font-size: var(--font-size-sm);
+  font-weight: var(--semi-bold);
+}
+
+/* Breadcrumb suffix: e.g. "(including subqueues)"; same class for other hierarchical views */
+.nav-subitems {
+  font-size: var(--font-size-sm);
+  font-weight: var(--normal);
+  color: var(--bread-crumb);
+  text-transform: none;
+  opacity: 0.75;
+}
+
+/* Side tree uses the same column as Admin and Personal Preferences
+   (MainBox.LayoutFixedSidebar.ActionsSideBar). Long names scroll sideways.
+   Registered length so the open/close width can ease like the ticket zoom sidebar. */
+@property --nav-sidebar-width {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 300px;
+}
+
+.NavLayout {
+  position: relative;
+}
+
+.NavLayout > form {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}
+
+.NavLayout > .ContentColumn > .OverviewBox {
+  padding: 0;
+}
+
+/* OverviewControl and the ticket table share one panel. The column gap and the
+   list padding were splitting them. */
+.NavLayout > .ContentColumn > #OverviewBody.Overview.TicketList {
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Shared rows: title with the breadcrumb, filter and toggle with the ControlRow. */
+.NavLayout.ActionsSideBar {
+  --nav-sidebar-width: 300px;
+  display: grid;
+  grid-template-columns: var(--nav-sidebar-width) minmax(0, 1fr);
+  grid-template-rows: auto auto auto minmax(0, 1fr);
+  column-gap: 0;
+  row-gap: 0;
+  align-items: stretch;
+}
+
+.NavLayout.ActionsSideBar.SidebarLast {
+  grid-template-columns: minmax(0, 1fr) var(--nav-sidebar-width);
+  border-top: var(--border-width) var(--border-solid) var(--border-color);
+}
+
+.NavLayout.IsCollapsed.ActionsSideBar {
+  --nav-sidebar-width: 40px;
+}
+
+.NavLayout.ActionsSideBar > .SidebarColumn,
+.NavLayout.ActionsSideBar > .ContentColumn {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: subgrid;
+  grid-row: 1 / -1;
+  align-self: stretch;
+}
+
+.NavLayout.ActionsSideBar.SidebarFirst > .SidebarColumn,
+.NavLayout.ActionsSideBar.SidebarLast > .ContentColumn {
+  grid-column: 1;
+}
+
+.NavLayout.ActionsSideBar.SidebarFirst > .ContentColumn,
+.NavLayout.ActionsSideBar.SidebarLast > .SidebarColumn {
+  grid-column: 2;
+}
+
+/* Same open width as the Admin sidebar. A wide ticket table must not shrink it. */
+/* overflow visible: the edge toggle sits outside the column. The tree scrolls itself. */
+.NavLayout.ActionsSideBar.LayoutFixedSidebar > .SidebarColumn {
+  position: relative;
+  z-index: 2;
+  overflow: visible;
+  row-gap: 0;
+  flex: 0 0 var(--nav-sidebar-width);
+  width: var(--nav-sidebar-width);
+  min-width: var(--nav-sidebar-width);
+  max-width: var(--nav-sidebar-width);
+  padding: 0 var(--padding-sm) var(--padding-sm);
+}
+
+.NavLayout.ActionsSideBar > .ContentColumn {
+  min-width: 0;
+  width: auto;
+  max-width: none;
+  overflow: visible;
+  gap: 0;
+  padding-top: 0;
+}
+
+.NavLayout.ActionsSideBar .nav-layout-side.WidgetSimple {
+  display: grid;
+  grid-column: 1;
+  grid-template-rows: subgrid;
+  grid-row: 1 / -1;
+  min-height: 0;
+  overflow: visible;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.NavLayout.ActionsSideBar .ActionsSideBarComp .nav-layout-side.WidgetSimple > .Header {
+  grid-row: 1;
+  align-self: end;
+  margin: 0 0 var(--gap-md);
+  padding-top: var(--padding-sm);
+}
+
+.NavLayout .nav-layout-side > .Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--margin-sm);
+}
+
+.NavLayout .nav-layout-side > .Header h2 {
+  min-width: 0;
+  margin: 0;
+}
+
+.NavLayout.ActionsSideBar .ActionsSideBarComp .nav-layout-side.WidgetSimple > .Content {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: 2 / -1;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  row-gap: 0;
+  column-gap: 0;
+}
+
+.NavLayout .OverviewBox {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: 1 / 4;
+  gap: 0;
+}
+
+.NavLayout .OverviewBox > h1 {
+  grid-row: 1;
+  align-self: end;
+  margin: 0 0 var(--gap-md);
+  padding-top: var(--padding-sm);
+}
+
+.NavLayout .OverviewControl {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: 2 / 4;
+  min-height: 0;
+}
+
+.NavLayout .OverviewControl > div {
+  display: contents;
+}
+
+.NavLayout .OverviewControl .ControlRow {
+  grid-row: 1;
+  align-self: center;
+}
+
+.NavLayout .OverviewControl .ActionRow {
+  grid-row: 2;
+  align-self: start;
+}
+
+.NavLayout > .ContentColumn > #OverviewBody.Overview.TicketList {
+  grid-row: 4;
+}
+
+.NavLayout .nav-side-filter {
+  grid-row: 1;
+  align-self: center;
+  width: 100%;
+}
+
+.NavLayout .nav-side-tree {
+  grid-row: 2 / -1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.NavLayout.IsCollapsed.ActionsSideBar > .SidebarColumn {
+  align-self: stretch;
+  padding: 0;
+  overflow: visible;
+  background-color: var(--white);
+}
+
+/* Same 0.3s ease as .modSidebar > .inner in the ticket zoom sidebar.
+   IsCollapsed is rendered by the server, so the first paint does not slide. */
+.NavLayout.ActionsSideBar {
+  transition: --nav-sidebar-width 0.3s ease-in-out;
+}
+
+.NavLayout.ActionsSideBar > .SidebarColumn {
+  transition: padding 0.3s ease-in-out;
+}
+
+/* Clip the tree while the column grows; the edge toggle lives outside the widget. */
+.NavLayout.ActionsSideBar .ActionsSideBarComp .nav-layout-side.WidgetSimple {
+  min-width: 0;
+  overflow: hidden;
+}
+
+/* Border on the toggle edge, open and collapsed. The tab has no border on that side. */
+.NavLayout.SidebarLast > .SidebarColumn {
+  border-left: var(--border-width) var(--border-solid) var(--border-color);
+}
+
+.NavLayout.SidebarFirst > .SidebarColumn {
+  border-right: var(--border-width) var(--border-solid) var(--border-color);
+}
+
+.NavLayout.IsCollapsed.ActionsSideBar .ActionsSideBarComp .nav-layout-side.WidgetSimple {
+  display: none;
+}
+
+/* Same edge tab as the ticket zoom sidebar, on the ControlRow row. */
+.NavLayout .nav-side-collapse {
+  position: relative;
+  grid-column: 1;
+  grid-row: 2;
+  align-self: center;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 42px;
+  margin: 0;
+  padding: 0;
+  background: var(--white);
+  border: var(--border-width) var(--border-solid) var(--border-color);
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.NavLayout.SidebarLast .nav-side-collapse {
+  justify-self: start;
+  margin-left: calc(-1 * (var(--padding-sm) + 15px));
+  border-right: none;
+  border-radius: var(--border-radius-xxs) 0 0 var(--border-radius-xxs);
+}
+
+.NavLayout.SidebarFirst .nav-side-collapse {
+  justify-self: end;
+  margin-right: calc(-1 * (var(--padding-sm) + 15px));
+  border-left: none;
+  border-radius: 0 var(--border-radius-xxs) var(--border-radius-xxs) 0;
+}
+
+.NavLayout.IsCollapsed.SidebarLast .nav-side-collapse {
+  margin-left: -15px;
+}
+
+.NavLayout.IsCollapsed.SidebarFirst .nav-side-collapse {
+  margin-right: -15px;
+}
+
+.NavLayout .nav-side-collapse i.fa {
+  font-size: var(--font-size-md);
+  color: var(--gray-dark-semi);
+  margin: 0;
+}
+
+.NavLayout.SidebarLast .nav-side-collapse i.fa-caret-left,
+.NavLayout.SidebarFirst.IsCollapsed .nav-side-collapse i.fa-caret-left {
+  transform: rotate(180deg);
+}
+
+.NavLayout.SidebarLast.IsCollapsed .nav-side-collapse i.fa-caret-left,
+.NavLayout.SidebarFirst .nav-side-collapse i.fa-caret-left {
+  transform: rotate(0deg);
+}
+
+.NavLayout .nav-side-collapse:hover {
+  opacity: 0.9;
+}
+
+/* Collapsed rail: same trigger as the ticket zoom / phone sidebar. */
+.NavLayout .nav-side-trigger {
+  display: none;
+}
+
+.NavLayout.IsCollapsed .nav-side-trigger {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.NavLayout.IsCollapsed .nav-side-trigger::before {
+  content: "";
+  position: absolute;
+  top: 11px;
+  right: 16px;
+  width: 8px;
+  height: 14px;
+  background-image: url(../../img/icons/arrow-left.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.NavLayout.IsCollapsed.SidebarFirst .nav-side-trigger::before {
+  transform: rotate(180deg);
+}
+
+.NavLayout.IsCollapsed .nav-side-trigger:hover {
+  background-color: rgba(234, 234, 238, 0.8);
+}
+
+.nav-side-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--main-font-color);
+  cursor: pointer;
+}
+
+.nav-side-toggle .nav-caret {
+  transition: transform 0.15s ease;
+}
+
+.nav-side-node.is-open > .nav-side-row .nav-caret,
+.nav-side-node.is-filter-open > .nav-side-row .nav-caret {
+  transform: rotate(90deg);
+}
+
+.nav-side-toggle-spacer {
+  cursor: default;
+}
+
+.nav-layout-side input.nav-side-filter {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.nav-side-tree {
+  overflow: auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  padding-bottom: var(--padding-sm);
+}
+
+.nav-side-tree-list,
+.nav-side-children {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-side-children {
+  display: none;
+}
+
+.nav-side-node.is-open > .nav-side-children,
+.nav-side-node.is-filter-open > .nav-side-children {
+  display: block;
+}
+
+.nav-side-node.is-filter-hidden {
+  display: none;
+}
+
+.nav-side-row {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  min-width: max-content;
+}
+
+.nav-side-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--margin-xs);
+  padding: 4px var(--padding-sm) 4px 0;
+  color: var(--main-font-color);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.nav-side-link:hover,
+.nav-side-link:focus {
+  color: var(--primary-color-darker);
+  text-decoration: none;
+}
+
+.nav-side-link.nav-side-current,
+.nav-side-node.nav-side-current > .nav-side-row .nav-side-link {
+  font-weight: var(--bold);
+  color: var(--primary-color);
+}
+
+.nav-side-count {
+  color: var(--gray-dark);
+}
+
+.nav-layout-side .Oldest {
+  animation: none;
+  -webkit-animation: none;
+}
+
+.nav-side-summary {
+  display: none;
+}
+
+/* Phones and tablets: queue tree is an overlay. The ticket list keeps the width.
+   Same breakpoint as the agent shell (Core.Responsive.css). */
+@media only screen and (max-width: 1024px) {
+  .NavLayout.ActionsSideBar,
+  .NavLayout.ActionsSideBar.SidebarLast,
+  .NavLayout.IsCollapsed.ActionsSideBar,
+  .NavLayout.IsCollapsed.ActionsSideBar.SidebarLast {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Own stacking context: bulk checkboxes (z-index 100) and the sticky table head
+     must stay below the queue overlay. */
+  .NavLayout.ActionsSideBar > .ContentColumn {
+    display: block;
+    position: relative;
+    z-index: 0;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    order: 2;
+  }
+
+  .NavLayout.ActionsSideBar > .SidebarColumn,
+  .NavLayout.ActionsSideBar.LayoutFixedSidebar > .SidebarColumn,
+  .NavLayout.IsCollapsed.ActionsSideBar > .SidebarColumn,
+  .NavLayout.IsCollapsed.ActionsSideBar.LayoutFixedSidebar > .SidebarColumn {
+    display: block;
+    position: relative;
+    z-index: 5;
+    order: 1;
+    flex: 0 0 auto;
+    align-self: stretch;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    min-height: 48px;
+    padding: 0;
+    overflow: visible;
+    background-color: var(--white);
+    border-left: 0;
+    border-right: 0;
+    border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+  }
+
+  .NavLayout.IsCollapsed.ActionsSideBar .ActionsSideBarComp .nav-layout-side.WidgetSimple,
+  .NavLayout.ActionsSideBar .ActionsSideBarComp .nav-layout-side.WidgetSimple,
+  .NavLayout.ActionsSideBar .nav-layout-side.WidgetSimple {
+    display: block;
+    max-height: none;
+    overflow: visible;
+    background: transparent;
+  }
+
+  .NavLayout .OverviewBox,
+  .NavLayout .OverviewControl {
+    display: block;
+    grid-row: auto;
+    grid-column: auto;
+  }
+
+  .NavLayout .OverviewControl > div {
+    display: block;
+  }
+
+  .MainBox.NavLayout .SidebarColumn .nav-layout-side.WidgetSimple > .Header {
+    display: flex;
+    align-items: center;
+    gap: var(--margin-sm);
+    height: 48px;
+    min-height: 48px;
+    margin: 0;
+    padding: 0 52px 0 var(--padding-md);
+    box-sizing: border-box;
+    border-radius: 0;
+    cursor: pointer;
+  }
+
+  .RTL .MainBox.NavLayout .SidebarColumn .nav-layout-side.WidgetSimple > .Header {
+    padding: 0 var(--padding-md) 0 52px;
+  }
+
+  .MainBox.NavLayout .SidebarColumn .nav-layout-side.WidgetSimple > .Header h2 {
+    flex: 0 0 auto;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .NavLayout .nav-side-summary {
+    display: block;
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: right;
+    font-size: var(--font-size-sm);
+    font-weight: var(--normal);
+    color: var(--gray-dark);
+  }
+
+  .RTL .NavLayout .nav-side-summary {
+    text-align: left;
+  }
+
+  .NavLayout.IsCollapsed .nav-side-trigger,
+  .NavLayout .nav-side-trigger {
+    display: none;
+  }
+
+  .NavLayout .nav-side-collapse,
+  .NavLayout.SidebarFirst .nav-side-collapse,
+  .NavLayout.SidebarLast .nav-side-collapse,
+  .NavLayout.IsCollapsed.SidebarFirst .nav-side-collapse,
+  .NavLayout.IsCollapsed.SidebarLast .nav-side-collapse {
+    position: absolute;
+    top: 2px;
+    right: 4px;
+    left: auto;
+    z-index: 2;
+    width: 44px;
+    height: 44px;
+    margin: 0;
+    border: 0;
+    border-radius: var(--border-radius-xxs);
+    background: transparent;
+    justify-self: auto;
+  }
+
+  .RTL .NavLayout .nav-side-collapse,
+  .RTL .NavLayout.SidebarFirst .nav-side-collapse,
+  .RTL .NavLayout.SidebarLast .nav-side-collapse {
+    right: auto;
+    left: 4px;
+  }
+
+  .NavLayout.SidebarFirst .nav-side-collapse i.fa-caret-left,
+  .NavLayout.SidebarLast .nav-side-collapse i.fa-caret-left,
+  .NavLayout.IsCollapsed.SidebarFirst .nav-side-collapse i.fa-caret-left,
+  .NavLayout.IsCollapsed.SidebarLast .nav-side-collapse i.fa-caret-left {
+    transform: rotate(-90deg);
+  }
+
+  .NavLayout.NavMobileOpen.SidebarFirst .nav-side-collapse i.fa-caret-left,
+  .NavLayout.NavMobileOpen.SidebarLast .nav-side-collapse i.fa-caret-left,
+  .NavLayout.NavMobileOpen.IsCollapsed .nav-side-collapse i.fa-caret-left {
+    transform: rotate(90deg);
+  }
+
+  .NavLayout.NavMobile .nav-layout-side > .Header:active,
+  .NavLayout.NavMobile .nav-side-collapse:active {
+    background-color: rgba(234, 234, 238, 0.8);
+  }
+
+  .NavLayout.NavMobile .nav-layout-side > .Header:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: -2px;
+  }
+
+  .NavLayout.ActionsSideBar .ActionsSideBarComp .nav-layout-side.WidgetSimple > .Content {
+    display: none;
+  }
+
+  .NavLayout.NavMobileOpen.ActionsSideBar .ActionsSideBarComp .nav-layout-side.WidgetSimple > .Content {
+    display: block;
+    position: absolute;
+    top: 48px;
+    left: 0;
+    right: 0;
+    z-index: 6;
+    max-height: min(55vh, 420px);
+    margin: 0;
+    padding: var(--padding-sm) var(--padding-md) var(--padding-md);
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    background: var(--white);
+    border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+    box-sizing: border-box;
+  }
+
+  .NavLayout.NavMobileOpen::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 4;
+    background: rgba(0, 0, 0, 0.28);
+  }
+
+  .NavLayout .nav-layout-side input.nav-side-filter {
+    display: block;
+    width: 100%;
+    min-height: 44px;
+    margin: 0 0 var(--margin-sm);
+    padding: 8px var(--padding-sm);
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+
+  .NavLayout .nav-side-tree {
+    overflow: visible;
+    max-height: none;
+  }
+
+  .NavLayout .nav-side-row {
+    white-space: normal;
+    min-width: 0;
+    min-height: 44px;
+  }
+
+  .NavLayout .nav-side-link {
+    flex: 1 1 auto;
+    min-width: 0;
+    white-space: normal;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .NavLayout .nav-side-name {
+    overflow-wrap: anywhere;
+  }
+
+  .NavLayout .nav-side-toggle {
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+  }
+}

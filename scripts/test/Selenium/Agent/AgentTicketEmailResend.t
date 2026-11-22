@@ -138,8 +138,10 @@ $Selenium->RunTest(
         $Selenium->switch_to_window( $Handles->[1] );
 
         # Wait until page has loaded, if necessary.
+        # CustomerSelector stores the recipient in a hidden input by name, without an id.
         $Selenium->WaitFor(
-            JavaScript => 'return typeof($) === "function" && $("#CustomerTicketText_1").length == 1;'
+            JavaScript =>
+                'return typeof($) === "function" && $("input[name=\'CustomerTicketText_1\']").length == 1;'
         );
 
         # Input several fields and submit compose.
@@ -159,8 +161,11 @@ $Selenium->RunTest(
             my $Value = $ComposeData{$Field};
 
             if ( $Field eq 'FileUpload' ) {
-                $Value = $Selenium->{Home}
+                my $LocalFile = $Selenium->{Home}
                     . "/scripts/test/sample/StdAttachment/$ComposeData{$Field}";
+
+                # Chrome runs in the Selenium container, so upload the file from this host first.
+                $Value = $Selenium->upload_file($LocalFile);
 
                 # It's necessary to hide drag&drop upload and show input field.
                 $Selenium->execute_script(
@@ -171,8 +176,17 @@ $Selenium->RunTest(
                 );
             }
 
-            $Selenium->find_element( "#$Field", 'css' )->clear();
-            $Selenium->find_element( "#$Field", 'css' )->send_keys($Value);
+            if ( $Field ne 'FileUpload' ) {
+                $Selenium->find_element( "#$Field", 'css' )->clear();
+            }
+
+            # Enter commits a free-text recipient. Blur does not.
+            if ( $Field eq 'CcCustomer' || $Field eq 'BccCustomer' ) {
+                $Selenium->find_element( "#$Field", 'css' )->send_keys( $Value, "\N{U+E007}" );
+            }
+            else {
+                $Selenium->find_element( "#$Field", 'css' )->send_keys($Value);
+            }
 
             # Lose the focus.
             $Selenium->find_element( '#Subject', 'css' )->click();
@@ -187,7 +201,8 @@ $Selenium->RunTest(
             }
             else {
                 $Selenium->WaitFor(
-                    JavaScript => "return typeof(\$) === 'function' && \$('#${Field}TicketText_1').length;"
+                    JavaScript =>
+                        "return typeof(\$) === 'function' && \$('input[name=\"${Field}TicketText_1\"]').length;"
                 );
             }
         }
@@ -343,15 +358,14 @@ $Selenium->RunTest(
                     $Selector =~ s{^To}{}x;
                 }
 
+                # Hidden recipient input is addressed by name. The id is optional.
                 $Selenium->WaitFor(
-                    JavaScript => "return \$('#${Selector}TicketText_1').length;"
+                    JavaScript =>
+                        "return typeof(\$) === 'function' && \$('input[name=\"${Selector}TicketText_1\"]').length;"
                 );
 
-                my $Value = $Selenium->InputGet(
-                    Attribute => "${Selector}TicketText_1",
-                    Options   => {
-                        KeyOrValue => 'Value',
-                    }
+                my $Value = $Selenium->execute_script(
+                    "return \$('input[name=\"${Selector}TicketText_1\"]').val();"
                 );
 
                 $Self->Is(
@@ -363,8 +377,14 @@ $Selenium->RunTest(
         }
 
         # Remove all recipients.
-        for my $Field (qw(RemoveCustomer CcRemoveCustomer BccRemoveCustomer)) {
-            $Selenium->find_element( "#${Field}Ticket_1", 'css' )->click();
+        for my $Field (qw(ToCustomer CcCustomer BccCustomer)) {
+            $Selenium->execute_script(
+                "\$('#$Field').closest('.customerSelector').find('.customerSelectorFieldInputSelectedCustomerRemove').trigger('click');"
+            );
+            $Selenium->WaitFor(
+                JavaScript =>
+                    "return typeof(\$) === 'function' && !\$('#$Field').closest('.customerSelector').find('.customerSelectorFieldInputSelectedCustomer').length;"
+            );
         }
 
         # Add a single 'To' recipient.

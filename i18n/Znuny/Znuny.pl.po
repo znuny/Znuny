@@ -5197,7 +5197,7 @@ msgstr "Edytuj proces"
 msgid "Edit Process Information"
 msgstr "Edytuj informacje o procesie"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementProcessEdit.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
 msgid "Process Name"
 msgstr "Nazwa procesu"
 
@@ -7865,7 +7865,7 @@ msgstr "Prześlij %s%s%s"
 msgid "History of %s%s%s"
 msgstr "Historia %s%s%s"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketAttachmentList.tt
 msgid "Start typing to filter..."
 msgstr ""
 
@@ -8401,7 +8401,7 @@ msgstr "Załaduj zablokowaną treść."
 msgid "Home"
 msgstr "Strona startowa"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "Back"
 msgstr "Powrót"
 
@@ -8725,7 +8725,7 @@ msgstr "Pola zgłoszenia"
 msgid "Error Details"
 msgstr "Szczegóły błędu"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
 msgid "Expand"
 msgstr "Rozwiń"
 
@@ -14145,18 +14145,6 @@ msgstr "Moduły Perl"
 msgid "Not all required Perl modules are correctly installed."
 msgstr "Nie wszystkie wymagane moduły Perl są poprawnie zainstalowane."
 
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-msgid "Perl Modules Audit"
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-msgid "CPAN::Audit reported that one or more installed Perl modules have known vulnerabilities. Please note that there might be false positives for distributions patching Perl modules without changing their version number."
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-msgid "CPAN::Audit did not report any known vulnerabilities in the installed Perl modules."
-msgstr ""
-
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
 msgid "Perl Version"
 msgstr "Wersja Perl"
@@ -15086,7 +15074,7 @@ msgid "Delete expired ticket draft entries."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box."
+msgid "Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If not enabled, it also disables the GenericAgent, PackageManager and SQL Box."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -23314,7 +23302,7 @@ msgstr ""
 msgid "Responsible Tickets."
 msgstr ""
 
-#. SysConfig
+#. Perl Module: Kernel/Modules/AgentTicketQueue.pm
 msgid "Right"
 msgstr "Prawa"
 
@@ -24150,7 +24138,7 @@ msgstr "Oznacz zgłoszenia jako nieprzeczytane"
 msgid "Mark article as unseen"
 msgstr "Oznacz artykuł jako nieprzeczytany"
 
-#. Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
+#. SysConfig
 msgid "Mark as unseen"
 msgstr "Nieprzeczytany"
 
@@ -24686,7 +24674,7 @@ msgstr ""
 msgid "%s is missing. The file could not be previewed properly."
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketAttachmentList.tt
 msgid "Preview"
 msgstr ""
 
@@ -25506,6 +25494,138 @@ msgstr ""
 msgid "Self"
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/Attachments.tt
+msgid "Ticket attachments"
+msgstr "Załączniki zgłoszenia"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/Attachments.tt
+msgid "Download as ZIP archive"
+msgstr "Pobierz jako archiwum ZIP"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/Attachments.tt
+msgid "All attachments"
+msgstr "Wszystkie załączniki"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/Attachments.tt
+msgid "Selected attachments"
+msgstr "Zaznaczone załączniki"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Attachments.tt
+msgid "Click here to download."
+msgstr "Kliknij tutaj aby pobrać."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Attachments.js
+msgid "Show more"
+msgstr "Pokaż więcej"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Attachments.tt
+msgid "Add attachments of other articles"
+msgstr "Dodaj załączniki z innych artykułów"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/Attachments.tt
+msgid "Select all attachments"
+msgstr "Zaznacz wszystkie załączniki"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketAttachmentList.tt
+msgid "Download attachments of %s%s%s"
+msgstr "Pobierz załączniki z %s%s%s"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketAttachmentList.tt
+msgid "Hide all inline attachments"
+msgstr "Ukryj załączniki w treści"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketAttachmentList.tt
+msgid "Filter attachments..."
+msgstr "Filtruj załączniki..."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketAttachmentList.tt
+msgid "This ticket does not have any attachments."
+msgstr "To zgłoszenie nie zawiera żadnych załączników"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketAttachmentList.tt
+msgid "Download as ZIP file"
+msgstr "Pobierz jako plik ZIP"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Attachments.js
+msgid "Please select attachments for download."
+msgstr "Zaznacz proszę załączniki do pobrania."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Attachments.js
+msgid "Show less"
+msgstr "Pokaż mniej"
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "If this configuration is deactivated, all duplicate files are removed from the selection lists."
+msgstr "Jeśli ta konfiguracja jest wyłączona, wszystkie duplikaty plików są usuwane z list wyboru."
+
+#. SysConfig
+msgid "If enabled, an image preview (lightbox) will be available. This might increase the loading time."
+msgstr "Jeżeli opcja ta jest włączona, dostępny będzie podgląd obrazu (lightbox). Może to wydłużyć czas ładowania."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Disables the widgets when the number of article in the ticket is reached."
+msgstr "Wyłącza widżety po osiągnięciu liczby artykułów w zgłoszeniu."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Disables the widgets when the number of attachments in the ticket is reached."
+msgstr "Wyłącza widżety po osiągnięciu liczby załączników w zgłoszeniu."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Number of a attachments shown by default."
+msgstr "Ilość załączników wyświetlanych domyślnie."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Number of a attachments shown in AgentTicketZoom."
+msgstr "Ilość załączników wyświetlnaych w AgentTicketZoom."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "AgentTicketZoom widget which provides all attachments of the ticket for download."
+msgstr "Widżet AgentTicketZoom, który udostępnia do pobrania wszystkie załączniki zgłoszenia."
+
+#. SysConfig
+msgid "Shows a link to access the image attachments of the article in a preview (lightbox)."
+msgstr "Wyświetla łącze umożliwiające dostęp do podglądu załączników graficznych artykułu (lightbox)."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Output filter to show attachment selection in certain agent ticket dialogs."
+msgstr "Filtr wyjściowy pokazujący wybór załącznika we wskazanych oknach dialogowych zgłoszeń agentów."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Shows a link in the menu to select and download all attachments of the ticket."
+msgstr "Wyświetla łącze w menu umożliwiające zaznaczenie i pobranie wszystkich załączników zgłoszenia."
+
+#. Perl Module: Kernel/Modules/AJAXAttachment.pm
+msgid "The file could not be previewed properly."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AJAXAttachment.pm
+msgid "This file cannot be previewed."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "If enabled, a preview overlay is available for article attachments (images, PDFs and other permitted types)."
+msgstr "Jeżeli opcja ta jest włączona, dostępny będzie podgląd załączników artykułu (obrazy, PDF-y i inne dozwolone typy)."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Shows a link to preview article attachments in the zoom view of the article in the agent interface."
+msgstr "Wyświetla łącze umożliwiające podgląd załączników artykułu w widoku powiększenia zgłoszenia."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative)."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative)."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the required ticket attributes to activate the preview. The following ticket attributes are supported: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the required ticket attributes to activate showing the first preview for the first PDF. The following ticket attributes are supported: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime."
+msgstr ""
+
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "Package is incompatible."
 msgstr "Pakiet jest niezgodny."
@@ -25537,4 +25657,76 @@ msgstr "Jeśli istnieje starsza wersja tego pakietu obsługująca Znuny %s, zain
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
 msgid "If a Znuny update is needed, consult the documentation for updating to the required version, or contact your support organization."
 msgstr "Jeśli wymagana jest aktualizacja Znuny, zapoznaj się z dokumentacją dotyczącą aktualizacji do wymaganej wersji lub skontaktuj się ze swoją organizacją wsparcia."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Agent ticket dialogs that show a selection to reuse attachments of other articles of the ticket."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Resets the responsible of a ticket if it was moved to another queue."
+msgstr "Resetuje odpowiedzialnego, jeśli zgłoszenie zostało przesunięte do innej kolejki."
+
+#. Perl Module: Kernel/System/SysConfig/ValueType/Date.pm
+msgid "System was not able to calculate user Date in ZnunyTimeZone!"
+msgstr ""
+
+#. Perl Module: Kernel/System/SysConfig/ValueType/DateTime.pm
+msgid "System was not able to calculate user DateTime in ZnunyTimeZone!"
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "This setting is deprecated. Set ZnunyTimeZone instead."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "If enabled, users that haven't selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) ZnunyTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder."
+msgstr "Czym zastąpić niezdefiniowaną wartość podczas wstawiania jej do szablonu przy użyciu symbolu zastępczego ZNUNY_."
+
+#. Perl Module: Kernel/Modules/AgentTicketQueue.pm
+msgid "System default"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AgentTicketQueue.pm
+msgid "Position"
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Defines the queue navigation in the queue view. Top shows one queue level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged."
+msgstr "Kopiowanie powiela tylko proces i zachowuje odwołania do oryginalnych elementów. Klonowanie tworzy niezależną nieaktywną kopię. Każdy zawarty element otrzymuje nowy wewnętrzny identyfikator, a oryginalny proces pozostaje niezmieniony."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
+msgid "Clone Process"
+msgstr "Klonuj proces"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned process. The original process stays unchanged."
+msgstr "Podaj nazwę sklonowanego procesu. Oryginalny proces pozostaje niezmieniony."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+msgid "Please enter a name for the cloned element. The original element stays unchanged."
+msgstr "Podaj nazwę sklonowanego elementu. Oryginalny element pozostaje niezmieniony."
+
+#. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+msgid "Collapse"
+msgstr "Zwiń"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "One-click execution"
+msgstr "Wykonanie jednym kliknięciem"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
+msgid "Skip the activity dialog popup and submit immediately."
+msgstr "Pomiń wyskakujące okno dialogowe aktywności i zatwierdź natychmiast."
 

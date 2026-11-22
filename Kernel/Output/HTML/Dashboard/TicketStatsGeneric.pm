@@ -100,7 +100,7 @@ sub Run {
 
     my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
-    my $TimeZone = $Self->{UserTimeZone} || OTRSTimeZoneGet();
+    my $TimeZone = $Self->{UserTimeZone} || ZnunyTimeZoneGet();
 
     for my $DaysBack ( 0 .. 6 ) {
 
@@ -119,7 +119,7 @@ sub Run {
             # for past 6 days cache results for 8 days (should not change)
             $CacheTTL = 60 * 60 * 24 * 8;
         }
-        $DateTimeObject->ToOTRSTimeZone();
+        $DateTimeObject->ToZnunyTimeZone();
 
         my $DateTimeValues = $DateTimeObject->Get();
         my $WeekDay        = $DateTimeValues->{DayOfWeek} == 7 ? 0 : $DateTimeValues->{DayOfWeek};

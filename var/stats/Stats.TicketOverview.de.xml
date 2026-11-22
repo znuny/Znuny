@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<otrs_stats>
+<znuny_stats>
 <Cache>0</Cache>
 <Description>Aktueller Status aller im System befindlicher Tickets ohne Zeitbeschränkung.</Description>
 <Format>CSV</Format>
@@ -20,4 +20,4 @@
 <UseAsXvalue Element="StateIDs" Fixed="1">
 </UseAsXvalue>
 <Valid>1</Valid>
-</otrs_stats>
+</znuny_stats>

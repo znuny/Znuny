@@ -193,6 +193,44 @@ Core.UI.Dialog = (function (TargetNS) {
     }
 
     /**
+     * @private
+     * @name CenterDialogOnScreen
+     * @memberof Core.UI.Dialog
+     * @function
+     * @param {jQueryObject} $Dialog - Visible dialog.
+     * @description
+     *      Places the dialog in the middle of the viewport.
+     *      position:fixed follows the screen, not a scrolled layout container.
+     */
+    function CenterDialogOnScreen($Dialog) {
+        var Top,
+            Left;
+
+        if (!$Dialog || !$Dialog.length || $Dialog.hasClass('Fullsize')) {
+            return;
+        }
+
+        Top = Math.round(($(window).height() - $Dialog.outerHeight()) / 2);
+        Left = Math.round(($(window).width() - $Dialog.outerWidth()) / 2);
+
+        if (Top < 16) {
+            Top = 16;
+        }
+        if (Left < 16) {
+            Left = 16;
+        }
+
+        $Dialog.css({
+            position: 'fixed',
+            top: Top,
+            left: Left,
+            right: 'auto',
+            bottom: 'auto',
+            margin: 0
+        });
+    }
+
+    /**
      * @name ShowDialog
      * @memberof Core.UI.Dialog
      * @function
@@ -205,7 +243,7 @@ Core.UI.Dialog = (function (TargetNS) {
      * @param {String} Params.HTML - Used for content dialog windows. Contains a complete HTML snippet or an jQuery object with containing HTML (default: undefined).
      * @param {Number} Params.PositionTop - Defines the top position of the dialog window (default: undefined).
      * @param {Number} Params.PositionBottom - Defines the bottom position of the dialog window (default: undefined).
-     * @param {Number|String} Params.PositionLeft - Defines the left position of the dialog window. 'Center' centers the window (default: undefined).
+     * @param {Number|String} Params.PositionLeft - Defines the left position of the dialog window. 'Center' places the dialog in the middle of the viewport and ignores PositionTop (default: undefined).
      * @param {Number} Params.PositionRight - Defines the right position of the dialog window (default: undefined).
      * @param {Boolean} Params.CloseOnClickOutside - If true, clicking outside the dialog closes the dialog (default: false).
      * @param {Boolean} Params.CloseOnEscape - If true, pressing escape key closes the dialog (default: false).
@@ -534,9 +572,15 @@ Core.UI.Dialog = (function (TargetNS) {
                     }
                 },
                 stop: function() {
+                    $Dialog.data('DialogMoved', 1);
                     Core.App.Publish('Event.UI.Dialog.ShowDialog.DragStop', $Dialog);
                 }
             });
+        }
+
+        // 'Center' is the screen middle. A fixed pixel top stays too low when the page scrolls inside a layout container.
+        if (!$Dialog.hasClass('Fullsize') && (Params.PositionLeft === 'Center' || Params.Type === 'Alert')) {
+            CenterDialogOnScreen($Dialog);
         }
 
         // Add button events
@@ -592,6 +636,9 @@ Core.UI.Dialog = (function (TargetNS) {
         // Add resize event handler for calculating the scroll height
         $(window).off('resize.Dialog').on('resize.Dialog', function () {
             AdjustScrollableHeight(Params.AllowAutoGrow);
+            if (!$Dialog.hasClass('Fullsize') && !$Dialog.data('DialogMoved') && (Params.PositionLeft === 'Center' || Params.Type === 'Alert')) {
+                CenterDialogOnScreen($Dialog);
+            }
         });
 
         Core.App.Subscribe('Event.App.Responsive.SmallerOrEqualScreenL', function () {

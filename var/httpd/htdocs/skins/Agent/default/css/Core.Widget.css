@@ -429,8 +429,12 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         background: var(--gray-light);
     }*/
 
-    div.WidgetSimpleSecondary span.ClusterLink i {
+    div.WidgetSimpleSecondary span.ClusterLink i.fa-caret-down {
         margin: -1px 0 0 var(--margin-sm);
+    }
+
+    div.WidgetSimpleSecondary span.ClusterLink i.ClusterMenuIcon {
+        margin-right: var(--margin-sm);
     }
 
     div.ContentColumn div.WidgetSimple.WidgetSimpleSecondary > div.Content {
@@ -2080,6 +2084,33 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
         border-radius: var(--border-radius-xs);
     }
 
+    /* One options menu stays open after a click. On a touch device, hover must not keep the previous menu visible. */
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu.Opened .ActionMenuList,
+    .SidebarColumn .WidgetSimple .Header .ActionMenu.Opened .ActionMenuList {
+        display: flex;
+    }
+
+    body.TouchDevice .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu:hover .ActionMenuList,
+    body.TouchDevice .SidebarColumn .WidgetSimple .Header .ActionMenu:hover .ActionMenuList {
+        display: none;
+    }
+
+    body.TouchDevice .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu.Opened .ActionMenuList,
+    body.TouchDevice .SidebarColumn .WidgetSimple .Header .ActionMenu.Opened .ActionMenuList {
+        display: flex;
+    }
+
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu.Dismissed .ActionMenuList,
+    .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu.Dismissed:hover .ActionMenuList,
+    .SidebarColumn .WidgetSimple .Header .ActionMenu.Dismissed .ActionMenuList,
+    .SidebarColumn .WidgetSimple .Header .ActionMenu.Dismissed:hover .ActionMenuList,
+    body.TouchDevice .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu.Dismissed .ActionMenuList,
+    body.TouchDevice .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu.Dismissed:hover .ActionMenuList,
+    body.TouchDevice .SidebarColumn .WidgetSimple .Header .ActionMenu.Dismissed .ActionMenuList,
+    body.TouchDevice .SidebarColumn .WidgetSimple .Header .ActionMenu.Dismissed:hover .ActionMenuList {
+        display: none;
+    }
+
     .mainStructure .ContentColumn .WidgetSimple .Header .ActionMenu .ActionMenuList li {
         height: auto;
         width: auto;
@@ -2759,6 +2790,44 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
     .WidgetSettingsForm fieldset .row-wrapper .Field .InputField_Container,
     .WidgetSettingsForm fieldset .Field .InputField_Container {
         width: auto;
+    }
+
+    .WidgetSettingsForm fieldset > .ticket-modal:not(.modal-col-wrapper),
+    .WidgetSettingsForm fieldset .ContextSettingsNav {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: flex-start;
+        gap: var(--padding-sm);
+        padding-bottom: var(--padding-sm);
+    }
+
+    .WidgetSettingsForm fieldset > .ticket-modal.modal-col-wrapper {
+        gap: var(--padding-sm);
+    }
+
+    .WidgetSettingsForm fieldset > .ticket-modal > label,
+    .WidgetSettingsForm fieldset .ContextSettingsNav > label {
+        flex: 0 0 160px;
+        width: 160px;
+        min-width: 160px;
+        padding-top: 0;
+    }
+
+    .WidgetSettingsForm fieldset > .ticket-modal:not(.modal-col-wrapper) > .Field,
+    .WidgetSettingsForm fieldset .ContextSettingsNav > .Field {
+        flex: 1 1 auto;
+        width: auto;
+        min-width: 0;
+        max-width: none;
+    }
+
+    .WidgetSettingsForm fieldset > .ticket-modal:not(.modal-col-wrapper) .Field .InputField_Container,
+    .WidgetSettingsForm fieldset > .ticket-modal:not(.modal-col-wrapper) .Field .InputField_InputContainer,
+    .WidgetSettingsForm fieldset .ContextSettingsNav .Field .InputField_Container,
+    .WidgetSettingsForm fieldset .ContextSettingsNav .Field .InputField_InputContainer {
+        width: 100%;
+        max-width: none;
     }
 
     .WidgetSettingsForm fieldset .row-wrapper .Field .inner-field,

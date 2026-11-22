@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<otrs_stats>
+<znuny_stats>
 <Cache>1</Cache>
 <Title>Új jegyek</Title>
 <Description>Az új jegyek összes száma naponta és várólistánként, amelyek a múlt hónap során lettek létrehozva.</Description>
@@ -21,4 +21,4 @@
 <SelectedValues>Day</SelectedValues>
 </UseAsXvalue>
 <Valid>1</Valid>
-</otrs_stats>
+</znuny_stats>

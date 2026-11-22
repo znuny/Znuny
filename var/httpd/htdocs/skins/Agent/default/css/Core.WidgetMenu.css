@@ -390,21 +390,14 @@ ul.ContextFunctions li:last-child:hover > a {
 
 .Actions li a,
 .Actions li span {
-    /*padding: 0 !important;
-    display: inline-block;*/
     color: var(--black);
     display: flex;
     align-items: center;
-    /*border-bottom: var(--border-width) var(--border-solid) var(--border-color);*/
     transition: var(--main-transition);
-    /*letter-spacing: 1px;*/
-    /*text-transform: uppercase;*/
-    /*padding: 0 6px;*/
     color: var(--gray-darker);
     font-size: var(--font-size-sm);
-
     border-radius: var(--border-radius-xs);
-    padding: var(--padding-xs) var(--padding-sm);
+    padding: var(--padding-xs) var(--padding-xs);
 }
 
 .Actions li:hover > a,
@@ -478,6 +471,11 @@ ul.ContextFunctions li:last-child:hover > a {
     flex-wrap: wrap;
     gap: var(--gap-sm) 0;
     z-index: unset;
+}
+
+#ticketDetails .Actions > li.Hidden,
+.ActionRow .Actions > li.Hidden {
+    display: none;
 }
 
 /*.Actions li a:hover,*/

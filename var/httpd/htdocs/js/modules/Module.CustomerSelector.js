@@ -634,7 +634,7 @@
 
             if (!hasErrors) {
                 // Add input fields for customer data (escape value for HTML attributes to prevent broken markup with quotes/angle brackets in addresses)
-                inputFieldsHtml = '<input type="hidden" name="' + params.inputFields.inputName + '" value="' + this.escapeHtmlAttr(params.value || '') + '">' + '<input type="hidden" name="' + params.inputFields.textInputName + '" value="' + this.escapeHtmlAttr(params.originalName || '') + '">';
+                inputFieldsHtml = '<input type="hidden" class="CustomerKey" id="' + params.inputFields.inputName + '" name="' + params.inputFields.inputName + '" value="' + this.escapeHtmlAttr(params.value || '') + '">' + '<input type="hidden" class="CustomerTicketText" id="' + params.inputFields.textInputName + '" name="' + params.inputFields.textInputName + '" value="' + this.escapeHtmlAttr(params.originalName || '') + '">';
 
                 // Generate customer queue input HTML if the attribute is set
                 if (this.customerQueueAttribute) {
@@ -896,7 +896,7 @@
                     jQuery('.customerSelectorFieldInputSelectedCustomer', this.ctx).each(function(i, element) {
                         if (jQuery(element).is(customerElement)) {
                             index = i + 1; // 1-based index
-                            return false; // break the loop
+                            return false;  // break the loop
                         }
                     });
                     this.selectedInput.val(index);

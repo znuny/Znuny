@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d %T';
-    $Self->{Completeness}        = 0.831954169318905;
+    $Self->{Completeness}        = 0.827509881422925;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -1681,6 +1681,8 @@ sub Data {
             '새 프로세스를 만들려면 다른 시스템에서 내 보낸 프로세스를 가져 오거나 완전히 새로운 프로세스를 생성 할 수 있습니다.',
         'Changes to the Processes here only affect the behavior of the system, if you synchronize the Process data. By synchronizing the Processes, the newly made changes will be written to the Configuration.' =>
             '여기에서 프로세스 변경은 프로세스 데이터를 동기화 할 경우에만 시스템의 동작에 영향을 미칩니다. 프로세스를 동기화함으로써 새로 변경된 변경 사항이 구성에 기록됩니다.',
+        'Copy duplicates only the process and keeps the references to the original elements. Clone creates an independent inactive copy. Every contained element receives a new internal ID, and the original process stays unchanged.' =>
+            '복사는 프로세스만 복제하고 원본 요소에 대한 참조를 유지합니다. 클론은 독립적인 비활성 사본을 만듭니다. 포함된 각 요소는 새 내부 ID를 받으며 원본 프로세스는 변경되지 않습니다.',
         'Access Control Lists (ACL)' => '액세스 제어 목록 (ACL)',
         'Generic Agent' => '',
         'Manage Process Widget Groups' => '',
@@ -1689,6 +1691,7 @@ sub Data {
         'Print' => '인쇄',
         'Export Process Configuration' => '프로세스 구성 내보내기',
         'Copy Process' => '프로세스 복사',
+        'Clone Process' => '프로세스 복제',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivity.tt
         'Please note, that changing this activity will affect the following processes' =>
@@ -1727,6 +1730,8 @@ sub Data {
         'Required Lock' => '필수 잠금',
         'The selected required lock does not exist.' => '선택한 필수 잠금이 없습니다.',
         'This field is required for activitiy dialogs with a scope.' => '',
+        'One-click execution' => '원클릭 실행',
+        'Skip the activity dialog popup and submit immediately.' => '활동 대화 상자 팝업을 건너뛰고 즉시 제출합니다.',
         'Submit Advice Text' => 'Submit Advice Text',
         'Submit Button Text' => '제출 버튼 텍스트',
         'You can assign Fields to this Activity Dialog by dragging the elements with the mouse from the left list to the right list.' =>
@@ -1739,6 +1744,13 @@ sub Data {
         'Text Template' => '텍스트 템플릿',
         'Auto fill' => '',
         'Display' => '다스플레이',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementCloneDialog.tt
+        'Please enter a name for the cloned process. The original process stays unchanged.' =>
+            '복제된 프로세스의 이름을 입력하십시오. 원본 프로세스는 변경되지 않습니다.',
+        'Process Name' => '프로세스 이름',
+        'Please enter a name for the cloned element. The original element stays unchanged.' =>
+            '복제된 요소의 이름을 입력하십시오. 원본 요소는 변경되지 않습니다.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementPath.tt
         'Path' => '통로',
@@ -1779,7 +1791,6 @@ sub Data {
             '동작 요소를 전환 레이블에 놓음으로써 동작을 전환에 할당할 수 있습니다.',
         'Edit Process' => '프로세스 편집',
         'Edit Process Information' => '프로세스 정보 편집',
-        'Process Name' => '프로세스 이름',
         'The selected state does not exist.' => '선택한 상태가 존재하지 않습니다.',
         'Process Preferences' => '',
         'Add and Edit Activities, Activity Dialogs and Transitions' => '활동, 활동 대화 상자 및 전환 추가 및 편집',
@@ -2685,6 +2696,15 @@ sub Data {
         'Solution Time' => '솔루션 시간',
         'Accounted time' => '소요 시간',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketAttachmentList.tt
+        'Download attachments of %s%s%s' => '',
+        'Start typing to filter...' => '',
+        'Filter attachments...' => '',
+        'Hide all inline attachments' => '',
+        'Preview' => '',
+        'This ticket does not have any attachments.' => '',
+        'Download as ZIP file' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
         'Bounce to' => '바운스',
         'You need a email address.' => '이메일 주소가 필요합니다.',
@@ -2746,7 +2766,6 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
         'History of %s%s%s' => '%s%s%s의 기록',
-        'Start typing to filter...' => '',
         'Filter for history items' => '기록 항목 필터링',
         'Expand/Collapse all' => '',
         'CreateTime' => 'Created',
@@ -2859,6 +2878,7 @@ sub Data {
         'Save filter settings as default' => '필터 설정을 기본값으로 저장',
         'Event Type' => '이벤트 유형',
         'Save as default' => '기본값으로 저장',
+        'Back' => '뒤',
         'Change Queue' => '대기열 변경',
         'Add Filter' => '필터 추가',
         'Set' => '세트',
@@ -2903,6 +2923,12 @@ sub Data {
         'PDF' => 'PDF',
         'View' => '전망',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/Attachments.tt
+        'Ticket attachments' => '',
+        'Download as ZIP archive' => '',
+        'All attachments' => '',
+        'Selected attachments' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/LinkTable.tt
         'Linked Objects' => '연결된 개체',
 
@@ -2917,9 +2943,15 @@ sub Data {
         'To protect your privacy, remote content was blocked.' => '개인 정보를 보호하기 위해 원격 콘텐츠가 차단되었습니다.',
         'Load blocked content.' => '차단된 콘텐츠를 로드합니다.',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AttachmentList.tt
+        'Show more' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/Attachments.tt
+        'Add attachments of other articles' => '',
+        'Select all attachments' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/Breadcrumb.tt
         'Home' => '홈',
-        'Back' => '뒤',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/Calendar/Plugin/Ticket/Create.tt
         'Ticket Creation' => '',
@@ -3050,7 +3082,6 @@ sub Data {
         'Ticket fields' => '타켓 필드',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/FormElements/AttachmentList.tt
-        'Preview' => '',
         'Click to preview this file.' => '',
         'Click to download this file.' => '',
         'Click to delete this attachment.' => '첨부파일을 삭제하려면 클릭하십시오.',
@@ -3519,6 +3550,8 @@ sub Data {
         '%s is missing. The file could not be downloaded properly.' => '',
         'Please contact the administrator.' => '관리자에게 문의하십시오.',
         '%s is missing. The file could not be previewed properly.' => '',
+        'The file could not be previewed properly.' => '',
+        'This file cannot be previewed.' => '',
         '%s is missing. The file could not be deleted properly.' => '',
 
         # Perl Module: Kernel/Modules/AdminACL.pm
@@ -4497,6 +4530,9 @@ sub Data {
         'Available tickets' => '가능한 티켓',
         'including subqueues' => '하위대기열 포함',
         'excluding subqueues' => '하위대기열 제외',
+        'System default' => '',
+        'Position' => '',
+        'Right' => '권리',
         'Queue View' => '',
 
         # Perl Module: Kernel/Modules/AgentTicketResponsibleView.pm
@@ -4685,7 +4721,6 @@ sub Data {
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
         'Mark article as unseen' => '',
-        'Mark as unseen' => '',
 
         # Perl Module: Kernel/Output/HTML/ArticleAction/MarkAsImportant.pm
         'Mark' => '마크',
@@ -5293,13 +5328,6 @@ sub Data {
         'Perl Modules' => '펄 모듈',
         'Not all required Perl modules are correctly installed.' => '필요한 Perl 모듈이 모두 올바르게 설치되지는 않았습니다.',
 
-        # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlModulesAudit.pm
-        'Perl Modules Audit' => '',
-        'CPAN::Audit reported that one or more installed Perl modules have known vulnerabilities. Please note that there might be false positives for distributions patching Perl modules without changing their version number.' =>
-            '',
-        'CPAN::Audit did not report any known vulnerabilities in the installed Perl modules.' =>
-            '',
-
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/OS/PerlVersion.pm
         'Perl Version' => '펄 버전',
 
@@ -5532,11 +5560,12 @@ sub Data {
         'Disabled' => '불구가 된',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/Date.pm
-        'System was not able to calculate user Date in OTRSTimeZone!' => '시스템이 OTRSTimeZone에서 사용자 날짜를 계산할 수 없습니다!',
+        'System was not able to calculate user Date in ZnunyTimeZone!' =>
+            '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/DateTime.pm
-        'System was not able to calculate user DateTime in OTRSTimeZone!' =>
-            '시스템은 OTRSTimeZone에서 사용자 DateTime을 계산할 수 없었습니다!',
+        'System was not able to calculate user DateTime in ZnunyTimeZone!' =>
+            '',
 
         # Perl Module: Kernel/System/SysConfig/ValueType/FrontendNavigation.pm
         'Value is not correct! Please, consider updating this module.' =>
@@ -5717,8 +5746,8 @@ sub Data {
         'Remove closed tickets from agents\' ticket watch lists.' => '',
 
         # XML Definition: Kernel/Config/Files/XML/Framework.xml
-        'Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
-            '시스템이 하이재킹되지 않도록 웹 설치 프로그램 (http://yourhost.example.com/znuny/installer.pl)을 비활성화합니다. 사용하도록 설정하지 않으면 시스템을 다시 설치하고 현재 기본 구성을 사용하여 설치 프로그램 스크립트에서 질문을 미리 채 웁니다. 활성화 된 경우 GenericAgent, PackageManager 및 SQL Box도 비활성화됩니다.',
+        'Disables the web installer (http://yourhost.example.com/znuny/installer.pl), to prevent the system from being hijacked. If not enabled, the system can be reinstalled and the current basic configuration will be used to pre-populate the questions within the installer script. If not enabled, it also disables the GenericAgent, PackageManager and SQL Box.' =>
+            '시스템이 하이재킹되지 않도록 웹 설치 프로그램 (http://yourhost.example.com/znuny/installer.pl)을 비활성화합니다. 사용하도록 설정하지 않으면 시스템을 다시 설치하고 현재 기본 구성을 사용하여 설치 프로그램 스크립트에서 질문을 미리 채 웁니다. 활성화되지 않은 경우 GenericAgent, PackageManager 및 SQL Box도 비활성화됩니다.',
         'Enables or disables the debug mode over frontend interface.' => '프론트 엔드 인터페이스에서 디버그 모드를 활성화 또는 비활성화합니다. ',
         'Delivers extended debugging information in the frontend in case any AJAX errors occur, if enabled.' =>
             '활성화 된 경우 AJAX 오류가 발생할 경우 프론트 엔드에 확장 디버깅 정보를 제공합니다.',
@@ -5971,13 +6000,13 @@ sub Data {
             '비활성 상태 (예 : \'로그인 사용자\'위젯 또는 채팅)로 인해 상담원이 \'자리 비움\'으로 표시되기까지의 시간 (분)을 정의합니다.',
         'Defines the period of time (in minutes) before customer is marked as "away" due to inactivity (e.g. in the "Logged-In Users" widget or for the chat).' =>
             '비활성 상태 (예 : \'로그인 사용자\'위젯 또는 채팅)로 인해 고객이 \'자리 비움\'으로 표시되기까지의 시간 (분)을 정의합니다.',
-        'This setting is deprecated. Set OTRSTimeZone instead.' => '이 설정은 사용되지 않습니다. 대신 OTRSTimeZone을 설정하십시오.',
+        'This setting is deprecated. Set ZnunyTimeZone instead.' => '',
         'Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created.' =>
             'Znuny에 의해 내부적으로 사용되는 시간대를 e로 설정합니다. 지. 날짜와 시간을 데이터베이스에 저장하십시오. 경고 :이 설정은 일단 설정하고 티켓 또는 날짜 / 시간이 포함 된 다른 데이터를 작성한 후에 변경하면 안됩니다.',
         'Sets the time zone that will be assigned to newly created users and will be used for users that haven\'t yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user\'s time zone.' =>
             '새로 생성 된 사용자에게 할당되고 아직 시간대를 설정하지 않은 사용자에게 사용될 시간대를 설정합니다. 이 시간대는 Znuny 시간대와 사용자 시간대 사이의 날짜와 시간을 변환하기 위해 기본값으로 사용됩니다.',
-        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
-            '사용하도록 설정하면 아직 시간대를 선택하지 않은 사용자에게 알림이 전송됩니다. 참고 : (1) 사용자가 아직 시간대를 선택하지 않았으며 (2) OTRSTimeZone과 UserDefaultTimeZone이 일치하고 (3) UTC로 설정되지 않은 경우 알림이 표시되지 않습니다.',
+        'If enabled, users that haven\'t selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) ZnunyTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC.' =>
+            '',
         'Maximum Number of a calendar shown in a dropdown.' => '드롭 다운에 표시된 최대 달력 수입니다.',
         'Define the start day of the week for the date picker.' => '날짜 선택 도구의 시작 요일을 정의하십시오.',
         'Adds the permanent vacation days.' => '영구 휴가 일을 추가합니다.',
@@ -6420,6 +6449,24 @@ sub Data {
             'AgentCustomerUserAddressBook 결과 화면에 표시된 열과 위치를 정의합니다.',
         'Example package autoload configuration.' => '패키지 자동로드 구성 예제.',
         'Activates week number for datepickers.' => '',
+        'If this configuration is deactivated, all duplicate files are removed from the selection lists.' =>
+            '',
+        'If enabled, a preview overlay is available for article attachments (images, PDFs and other permitted types).' =>
+            '',
+        'Disables the widgets when the number of article in the ticket is reached.' =>
+            '',
+        'Disables the widgets when the number of attachments in the ticket is reached.' =>
+            '',
+        'Number of a attachments shown by default.' => '',
+        'Number of a attachments shown in AgentTicketZoom.' => '',
+        'AgentTicketZoom widget which provides all attachments of the ticket for download.' =>
+            '',
+        'Shows a link to preview article attachments in the zoom view of the article in the agent interface.' =>
+            '',
+        'Agent ticket dialogs that show a selection to reuse attachments of other articles of the ticket.' =>
+            '',
+        'Shows a link in the menu to select and download all attachments of the ticket.' =>
+            '',
 
         # XML Definition: Kernel/Config/Files/XML/GenericInterface.xml
         'Performs the configured action for each event (as an Invoker) for each configured web service.' =>
@@ -6572,6 +6619,8 @@ sub Data {
         'Updates the ticket index accelerator.' => '티켓 인덱스 가속기를 업데이트 합니다.',
         'Resets and unlocks the owner of a ticket if it was moved to another queue.' =>
             '다른 대기열로 이동된 티켓의 소유자를 재설정하고 잠금 해제합니다.',
+        'Resets the responsible of a ticket if it was moved to another queue.' =>
+            '다른 대기열로 이동된 티켓의 책임자를 재설정합니다.',
         'Forces to choose a different ticket state (from current) after lock action. Define the current state as key, and the next state after lock action as content.' =>
             '잠금 조치 후 다른 티켓 상태 (현재 상태에서)를 강제로 선택합니다. 현재 상태를 키로 정의하고, 잠금 조치 후 다음 상태를 내용으로 정의하십시오.',
         'Automatically sets the responsible of a ticket (if it is not set yet) after the first owner update.' =>
@@ -6710,6 +6759,8 @@ sub Data {
             '가장 오래된 티켓을 포함하는 큐의 깜박이는 메커니즘을 활성화합니다.',
         'Include tickets of subqueues per default when selecting a queue.' =>
             '큐를 선택할 때 기본값 당 서브 큐 티켓을 포함하십시오.',
+        'Defines the queue navigation in the queue view. Top shows one queue level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
+            '',
         'Sorts the tickets (ascendingly or descendingly) when a single queue is selected in the queue view and after the tickets are sorted by priority. Values: 0 = ascending (oldest on top, default), 1 = descending (youngest on top). Use the QueueID for the key and 0 or 1 for value.' =>
             '대기열보기에서 하나의 대기열을 선택한 경우와 티켓을 우선 순위별로 정렬 한 후에 티켓을 정렬합니다 (오름차순 또는 내림차순). 값 : 0 = 오름차순 (가장 오래된 것, 기본값), 1 = 내림차순 (맨 위에 가장 어린 것). 키에는 QueueID를 사용하고 값에는 0 또는 1을 사용하십시오.',
         'Defines the default sort criteria for all queues displayed in the queue view.' =>
@@ -6735,6 +6786,8 @@ sub Data {
         'Sets the age in minutes (second level) for highlighting services that contain untouched tickets.' =>
             '',
         'Activates a blinking mechanism of the service that contains the oldest ticket.' =>
+            '',
+        'Defines the service navigation in the service view. Top shows one service level at a time, without hover menus. TopHover shows the hierarchical navigation bar with hover submenus.' =>
             '',
         'Activates time accounting.' => '시간 계산을 활성화 합니다.',
         'Sets the prefered time units (e.g. work units, hours, minutes).' =>
@@ -8177,6 +8230,16 @@ sub Data {
             '',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             '',
+        'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
+            '',
+        'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
+            '',
+        'Defines the required ticket attributes to activate the preview. The following ticket attributes are supported: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.' =>
+            '',
+        'Defines the required ticket attributes to activate showing the first preview for the first PDF. The following ticket attributes are supported: Age, ArchiveFlag, ChangeBy, Changed, CreateBy, Created, CustomerID, CustomerUserID, DynamicField_NAME, EscalationResponseTime, EscalationSolutionTime, EscalationTime, EscalationUpdateTime, GroupID, Lock, LockID, Owner, OwnerID, Priority, PriorityID, Queue, QueueID, RealTillTimeNotUsed, Responsible, ResponsibleID, ServiceID, SLAID, State, StateID, StateType, TicketID, TicketNumber, Title, Type, TypeID, UnlockTimeout, UntilTime.' =>
+            '',
+        'What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder.' =>
+            'ZNUNY_ 자리 표시자를 사용하여 템플릿에 삽입할 때 정의되지 않은 값을 무엇으로 바꿀지.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '유효하지 않은 일시적',
@@ -8525,6 +8588,10 @@ sub Data {
         'Are you sure you want to delete this appointment? This operation cannot be undone.' =>
             '이 약속을 삭제 하시겠습니까? 이 작업은 실행 취소할 수 없습니다.',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Attachments.js
+        'Please select attachments for download.' => '',
+        'Show less' => '',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
         'Copied to clipboard!' => '',
 
@@ -8650,6 +8717,10 @@ sub Data {
         'Filters' => '필터',
         'Clear search' => '명확한 검색',
 
+        # JS File: var/httpd/htdocs/js/Core.UI.Nav.js
+        'Collapse' => '접기',
+        'Expand' => '넓히다',
+
         # JS File: var/httpd/htdocs/js/Core.UI.Popup.js
         'If you now leave this page, all open popup windows will be closed, too!' =>
             '지금 이 페이지를 떠나면 열려있는 모든 팝업 창이 닫힙니다.',
@@ -8689,10 +8760,9 @@ sub Data {
         'No space left for the following files: %s' => '다음 파일에 공간이 없습니다 : %s',
         'Available space %s of %s.' => '사용 가능한 공간 %s / %s',
         'Upload information' => '정보 업로드',
-        'An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator.' =>
-            '',
         'An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator.' =>
             '첨부파일을 삭제할 때 알 수없는 오류가 발생했습니다. 다시 시도하십시오. 오류가 계속되면 시스템 관리자에게 문의하십시오.',
+        '%s of %s' => '',
 
         # JS File: var/httpd/htdocs/js/test/Core.Language.UnitTest.js
         'This is %s' => '이것은 %s입니다.',
@@ -9147,6 +9217,7 @@ Thanks for your help!
         'Management of ticket attribute relations.' => '',
         'Mark as Spam!' => '스팸으로 표시하십시오!',
         'Mark as seen' => '',
+        'Mark as unseen' => '',
         'Mark this ticket as junk!' => '이 티켓을 정크로 표시하십시오!',
         'Mark ticket as seen' => '',
         'Mark ticket as unseen' => '',
@@ -9256,7 +9327,6 @@ Thanks for your help!
         'Resent email to "%s".' => '이메일을 "%s"로 다시 보내십시오.',
         'Responsible Tickets' => '책임 티켓',
         'Responsible Tickets.' => '책임 티켓.',
-        'Right' => '권리',
         'Romanian' => '',
         'Running Process Tickets' => '프로세스 티켓 실행',
         'Russian' => '러시아인',
@@ -9491,6 +9561,7 @@ Thanks for your help!
         '%s KB',
         '%s MB',
         '%s TB',
+        '%s of %s',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9514,7 +9585,6 @@ Thanks for your help!
         'An item with this name is already present.',
         'An unconnected transition is already placed on the canvas. Please connect this transition first before placing another transition.',
         'An unknown error occurred when deleting the attachment. Please try again. If the error persists, please contact your system administrator.',
-        'An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator.',
         'An unknown error occurred. Please contact the administrator.',
         'Apply',
         'Appointment',
@@ -9547,9 +9617,12 @@ Thanks for your help!
         'Click to download this file.',
         'Click to preview this file.',
         'Click to select a file for upload.',
+        'Clone',
+        'Clone Process',
         'Clone web service',
         'Close preview',
         'Close this dialog',
+        'Collapse',
         'Complex %s with %s arguments',
         'Confirm',
         'Copied to clipboard!',
@@ -9617,6 +9690,7 @@ Thanks for your help!
         'Do you really want to reset this setting to it\'s default value?',
         'Do you really want to revert this setting to its historical value?',
         'Don\'t save, update manually',
+        'Download',
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
@@ -9631,10 +9705,12 @@ Thanks for your help!
         'Error in the mail settings. Please correct and try again.',
         'Error: Browser Check failed!',
         'Event Type Filter',
+        'Expand',
         'Expanded',
         'Favourites',
         'Feb',
         'February',
+        'Filter',
         'Filters',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
@@ -9717,6 +9793,7 @@ Thanks for your help!
         'Please only select one file for upload.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
         'Preparing to deploy, please wait...',
@@ -9771,6 +9848,8 @@ Thanks for your help!
         'Show',
         'Show EntityIDs',
         'Show current selection',
+        'Show less',
+        'Show more',
         'Show or hide the content.',
         'Slide the navigation bar',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',
@@ -9839,6 +9918,7 @@ Thanks for your help!
         'Timeline Week',
         'Title',
         'Today',
+        'Toggle sidebar',
         'Too many active calendars',
         'Try again',
         'Tu',

@@ -38,7 +38,8 @@ $HelperObject->ConfigSettingChange(
 );
 
 my $PGPPath = $ConfigObject->Get('Home') . "/var/tmp/pgp" . $HelperObject->GetRandomID();
-mkpath( [$PGPPath], 0, 0770 );    ## no critic
+mkpath( [$PGPPath], 0, 0700 );    ## no critic
+chmod 0700, $PGPPath;
 
 # Enable PGP in config.
 $HelperObject->ConfigSettingChange(
@@ -133,7 +134,7 @@ $ConfigObject->Set(
 );
 $ConfigObject->Set(
     Key   => 'PGP::Options',
-    Value => '--batch --no-tty --yes',
+    Value => "--homedir $PGPPath --batch --no-tty --yes",
 );
 $ConfigObject->Set(
     Key   => 'PGP::Key::Password',
@@ -179,6 +180,7 @@ my $PGPObject = $Kernel::OM->Get('Kernel::System::Crypt::PGP');
 
 if ( !$PGPObject ) {
     print STDERR "NOTICE: No PGP support!\n";
+    rmtree( [$PGPPath] );
     return;
 }
 

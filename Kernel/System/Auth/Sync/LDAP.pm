@@ -18,6 +18,7 @@ use URI;
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::Crypt::Secret',
     'Kernel::System::Encode',
     'Kernel::System::Group',
     'Kernel::System::Log',
@@ -65,8 +66,10 @@ sub new {
     $Self->{BaseDN}       = $ConfigObject->Get( 'AuthSyncModule::LDAP::BaseDN' . $Param{Count} );
     $Self->{UID}          = $ConfigObject->Get( 'AuthSyncModule::LDAP::UID' . $Param{Count} );
     $Self->{SearchUserDN} = $ConfigObject->Get( 'AuthSyncModule::LDAP::SearchUserDN' . $Param{Count} ) || '';
-    $Self->{SearchUserPw} = $ConfigObject->Get( 'AuthSyncModule::LDAP::SearchUserPw' . $Param{Count} ) || '';
-    $Self->{GroupDN}      = $ConfigObject->Get( 'AuthSyncModule::LDAP::GroupDN' . $Param{Count} )
+    $Self->{SearchUserPw} = $Kernel::OM->Get('Kernel::System::Crypt::Secret')->Decrypt(
+        Value => $ConfigObject->Get( 'AuthSyncModule::LDAP::SearchUserPw' . $Param{Count} ) || '',
+    );
+    $Self->{GroupDN} = $ConfigObject->Get( 'AuthSyncModule::LDAP::GroupDN' . $Param{Count} )
         || '';
     $Self->{AccessAttr} = $ConfigObject->Get( 'AuthSyncModule::LDAP::AccessAttr' . $Param{Count} )
         || 'memberUid';

@@ -95,7 +95,7 @@ my @Tests = (
 for my $Test (@Tests) {
 
     $Kernel::OM->Get('Kernel::Config')->Set(
-        Key   => 'OTRSTimeZone',
+        Key   => 'ZnunyTimeZone',
         Value => 'UTC',
     );
 

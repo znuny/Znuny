@@ -245,7 +245,7 @@ sub ImportAction {
             Param    => 'File',
             Encoding => 'Raw'
         );
-        if ( $UploadStuff{Content} =~ m{<otrs_stats>}x ) {
+        if ( $UploadStuff{Content} =~ m{<(?:otrs|znuny)_stats>}x ) {
             my $StatID = $Kernel::OM->Get('Kernel::System::Stats')->Import(
                 Content => $UploadStuff{Content},
                 UserID  => $Self->{UserID},

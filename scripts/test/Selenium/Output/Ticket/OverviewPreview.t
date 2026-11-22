@@ -49,6 +49,15 @@ $Selenium->RunTest(
             Value => 0,
         );
 
+        # Do not check email addresses.
+        # Default CheckEmailInvalidAddress rejects @example.com, so no auto response
+        # article would be created and the preview selection assertions would fail.
+        $HelperObject->ConfigSettingChange(
+            Valid => 1,
+            Key   => 'CheckEmailAddresses',
+            Value => 0,
+        );
+
         # Override FirstnameLastnameOrder setting to check if it is taken into account
         #   (see bug#12554 for more information).
         $HelperObject->ConfigSettingChange(

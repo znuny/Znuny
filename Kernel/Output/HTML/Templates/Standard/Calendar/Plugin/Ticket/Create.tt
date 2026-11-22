@@ -6,10 +6,6 @@
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-<div class="Field">
-    <b>[% Translate(Data.Plugin.Name) | html %]</b>
-</div>
-
 <div class="field-wrapper">
     <label for="Plugin_[% Data.Plugin.PluginKey | html %]_TicketCreateTimeType">[% Translate("Ticket Creation") | html %]</label>
     <div class="Field">

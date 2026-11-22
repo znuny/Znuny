@@ -443,6 +443,8 @@ sub LoadDefaults {
 
     # The following is valid but would only be necessary if the
     # anonymous user do NOT have permission to read from the LDAP tree
+    # SearchUserPw can be stored encrypted, see Kernel::System::Crypt::Secret
+    # and bin/znuny.Console.pl Maint::Secret::Encrypt.
 #    $Self->{'AuthModule::LDAP::SearchUserDN'} = '';
 #    $Self->{'AuthModule::LDAP::SearchUserPw'} = '';
 
@@ -495,6 +497,8 @@ sub LoadDefaults {
 #    $Self->{LogoutURL} = 'http://host.example.com/thanks-for-using-otrs.html';
 
     # This is example configuration to auth. agents against a radius server.
+    # The shared secret (Password) can be stored encrypted, see Kernel::System::Crypt::Secret
+    # and bin/znuny.Console.pl Maint::Secret::Encrypt.
 #    $Self->{'AuthModule'} = 'Kernel::System::Auth::Radius';
 #    $Self->{'AuthModule::Radius::Host'} = 'radiushost';
 #    $Self->{'AuthModule::Radius::Password'} = 'radiussecret';
@@ -558,7 +562,7 @@ sub LoadDefaults {
 
     # $Self->{'AuthModule::SAML::Issuer1'} = "https://some.url/znuny/";
 
-    # # Optional, CACert of the identity provider (IdP)
+    # # Required path to the IdP signing certificate. Used to verify response and assertion signatures.
     # $Self->{'AuthModule::SAML::IdPCACert1'} = '/some/path/cert.pem';
 
     # --------------------------------------------------- #
@@ -595,6 +599,8 @@ sub LoadDefaults {
 
     # The following is valid but would only be necessary if the
     # anonymous user do NOT have permission to read from the LDAP tree
+    # SearchUserPw can be stored encrypted, see Kernel::System::Crypt::Secret
+    # and bin/znuny.Console.pl Maint::Secret::Encrypt.
 #    $Self->{'AuthSyncModule::LDAP::SearchUserDN'} = '';
 #    $Self->{'AuthSyncModule::LDAP::SearchUserPw'} = '';
 
@@ -915,7 +921,7 @@ sub LoadDefaults {
 
     # SessionName
     # (Name of the session key. E. g. Session, SessionID, OTRS)
-    $Self->{SessionName} = 'OTRSAgentInterface';
+    $Self->{SessionName} = 'ZnunyAgentInterface';
 
     # SessionCheckRemoteIP
     # (If the application is used via a proxy-farm then the
@@ -968,7 +974,7 @@ sub LoadDefaults {
     # --------------------------------------------------- #
     # TimeZone
     # (set the OTRS time zone, default is UTC)
-#    $Self->{'OTRSTimeZone'} = 'UTC';
+#    $Self->{'ZnunyTimeZone'} = 'UTC';
 
     # Time*
     # (Used for ticket age, escalation and system unlock calculation)
@@ -1424,7 +1430,7 @@ If you did not make this change, please contact your administrator immediately.
 
     # SessionName
     # (Name of the session key. E. g. Session, SessionID, OTRS)
-    $Self->{CustomerPanelSessionName} = 'OTRSCustomerInterface';
+    $Self->{CustomerPanelSessionName} = 'ZnunyCustomerInterface';
 
     # CustomerPanelUserID
     # (The customer panel db-uid.) [default: 1]
@@ -1535,6 +1541,9 @@ via the Preferences button after logging in.
 
 #    $Self->{'Customer::AuthModule::DB::DSN'} = "DBI:mysql:database=customerdb;host=customerdbhost";
 #    $Self->{'Customer::AuthModule::DB::User'} = "some_user";
+    # Password can be stored encrypted, see Kernel::System::Crypt::Secret and
+    # bin/znuny.Console.pl Maint::Secret::Encrypt (it is passed straight through to
+    # Kernel::System::DB, same as the main DatabasePw).
 #    $Self->{'Customer::AuthModule::DB::Password'} = "some_password";
 
     # if you use odbc or you want to define a database type (without autodetection)
@@ -1561,6 +1570,8 @@ via the Preferences button after logging in.
 
     # The following is valid but would only be necessary if the
     # anonymous user do NOT have permission to read from the LDAP tree
+    # SearchUserPw can be stored encrypted, see Kernel::System::Crypt::Secret
+    # and bin/znuny.Console.pl Maint::Secret::Encrypt.
 #    $Self->{'Customer::AuthModule::LDAP::SearchUserDN'} = '';
 #    $Self->{'Customer::AuthModule::LDAP::SearchUserPw'} = '';
 
@@ -1602,6 +1613,8 @@ via the Preferences button after logging in.
 #    $Self->{CustomerPanelLogoutURL} = 'http://host.example.com/thanks-for-using-otrs.html';
 
     # This is example configuration to auth. agents against a radius server
+    # The shared secret (Password) can be stored encrypted, see Kernel::System::Crypt::Secret
+    # and bin/znuny.Console.pl Maint::Secret::Encrypt.
 #    $Self->{'Customer::AuthModule'} = 'Kernel::System::Auth::Radius';
 #    $Self->{'Customer::AuthModule::Radius::Host'} = 'radiushost';
 #    $Self->{'Customer::AuthModule::Radius::Password'} = 'radiussecret';
@@ -1662,7 +1675,7 @@ via the Preferences button after logging in.
 
     # $Self->{'Customer::AuthModule::SAML::Issuer1'} = "https://some.url/znuny/";
 
-    # # Optional, CACert of the identity provider (IdP)
+    # # Required path to the IdP signing certificate. Used to verify response and assertion signatures.
     # $Self->{'Customer::AuthModule::SAML::IdPCACert1'} = '/some/path/cert.pem';
 
     # --------------------------------------------------- #
@@ -1704,6 +1717,9 @@ via the Preferences button after logging in.
 #            Type => 'mssql', # only for ODBC connections
 #            DSN => 'DBI:mysql:database=customerdb;host=customerdbhost',
 #            User => '',
+            # Password can be stored encrypted, see Kernel::System::Crypt::Secret and
+            # bin/znuny.Console.pl Maint::Secret::Encrypt (it is passed straight through to
+            # Kernel::System::DB, same as the main DatabasePw).
 #            Password => '',
             Table => 'customer_user',
 #            ForeignDB => 0,    # set this to 1 if your table does not have create_time, create_by, change_time and change_by fields
@@ -1818,6 +1834,8 @@ via the Preferences button after logging in.
 #            SSCOPE => 'sub',
 #            # The following is valid but would only be necessary if the
 #            # anonymous user does NOT have permission to read from the LDAP tree
+#            # UserPw can be stored encrypted, see Kernel::System::Crypt::Secret
+#            # and bin/znuny.Console.pl Maint::Secret::Encrypt.
 #            UserDN => '',
 #            UserPw => '',
 #            # in case you want to add always one filter to each ldap query, use
@@ -1888,6 +1906,9 @@ via the Preferences button after logging in.
 #            Type => 'mssql', # only for ODBC connections
 #            DSN => 'DBI:mysql:database=customerdb;host=customerdbhost',
 #            User => '',
+            # Password can be stored encrypted, see Kernel::System::Crypt::Secret and
+            # bin/znuny.Console.pl Maint::Secret::Encrypt (it is passed straight through to
+            # Kernel::System::DB, same as the main DatabasePw).
 #            Password => '',
             Table => 'customer_company',
 #            ForeignDB => 0,    # set this to 1 if your table does not have create_time, create_by, change_time and change_by fields

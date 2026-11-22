@@ -38,9 +38,9 @@ my @Tests = (
 
     {
         Name           => 'No options',
-        OTRSTimeZone   => 'UTC',
+        ZnunyTimeZone  => 'UTC',
         UserTimeZone   => undef,
-        DateTimeString => '2016-02-10 09:04:23',                            # in OTRS time zone
+        DateTimeString => '2016-02-10 09:04:23',                            # in Znuny time zone
         Config         => {},
         ExpectedValue  => '<select id="Month" name="Month" title="Month">
   <option value="2" selected="selected">02</option>
@@ -54,9 +54,9 @@ my @Tests = (
     },
     {
         Name           => 'No options',
-        OTRSTimeZone   => 'UTC',
+        ZnunyTimeZone  => 'UTC',
         UserTimeZone   => 'Europe/Berlin',
-        DateTimeString => '2016-02-10 23:04:23',                            # in OTRS time zone
+        DateTimeString => '2016-02-10 23:04:23',                            # in Znuny time zone
         Config         => {},
         ExpectedValue  => '<select id="Month" name="Month" title="Month">
   <option value="2" selected="selected">02</option>
@@ -70,9 +70,9 @@ my @Tests = (
     },
     {
         Name           => 'Long Format',
-        OTRSTimeZone   => 'UTC',
+        ZnunyTimeZone  => 'UTC',
         UserTimeZone   => undef,
-        DateTimeString => '2016-02-10 09:04:23',    # in OTRS time zone
+        DateTimeString => '2016-02-10 09:04:23',    # in Znuny time zone
         Config         => {
             Format => 'DateInputFormatLong',
         },
@@ -94,9 +94,9 @@ my @Tests = (
     },
     {
         Name           => 'Long Format',
-        OTRSTimeZone   => 'Europe/Berlin',
+        ZnunyTimeZone  => 'Europe/Berlin',
         UserTimeZone   => 'America/New_York',
-        DateTimeString => '2016-05-01 04:24:06',    # in OTRS time zone
+        DateTimeString => '2016-05-01 04:24:06',    # in Znuny time zone
         Config         => {
             Format => 'DateInputFormatLong',
         },
@@ -118,9 +118,9 @@ my @Tests = (
     },
     {
         Name           => 'Optional',
-        OTRSTimeZone   => 'UTC',
+        ZnunyTimeZone  => 'UTC',
         UserTimeZone   => undef,
-        DateTimeString => '2016-10-02 09:04:23',    # in OTRS time zone
+        DateTimeString => '2016-10-02 09:04:23',    # in Znuny time zone
         Config         => {
             Prefix       => 'Test',
             TestOptional => 1,
@@ -139,9 +139,9 @@ my @Tests = (
     },
     {
         Name           => 'Optional',
-        OTRSTimeZone   => 'Europe/Berlin',
+        ZnunyTimeZone  => 'Europe/Berlin',
         UserTimeZone   => 'Europe/Berlin',
-        DateTimeString => '2016-10-02 00:04:23',    # in OTRS time zone
+        DateTimeString => '2016-10-02 00:04:23',    # in Znuny time zone
         Config         => {
             Prefix       => 'Test',
             TestOptional => 1,
@@ -160,9 +160,9 @@ my @Tests = (
     },
     {
         Name           => 'No Options (Input)',
-        OTRSTimeZone   => 'Europe/Berlin',
+        ZnunyTimeZone  => 'Europe/Berlin',
         UserTimeZone   => 'Europe/Berlin',
-        DateTimeString => '2016-10-02 00:04:23',    # in OTRS time zone
+        DateTimeString => '2016-10-02 00:04:23',    # in Znuny time zone
         Config         => {},
         SetConfig      => {
             Key     => 'TimeInputFormat',
@@ -176,9 +176,9 @@ my @Tests = (
     },
     {
         Name           => 'Long Format (Input)',
-        OTRSTimeZone   => 'Europe/Berlin',
+        ZnunyTimeZone  => 'Europe/Berlin',
         UserTimeZone   => 'UTC',
-        DateTimeString => '2016-10-02 00:04:23',    # in OTRS time zone
+        DateTimeString => '2016-10-02 00:04:23',    # in Znuny time zone
         Config         => {
             Format => 'DateInputFormatLong',
         },
@@ -191,9 +191,9 @@ my @Tests = (
     },
     {
         Name           => 'Optional (Input)',
-        OTRSTimeZone   => 'UTC',
+        ZnunyTimeZone  => 'UTC',
         UserTimeZone   => 'Europe/Berlin',
-        DateTimeString => '2016-06-08 23:04:23',    # in OTRS time zone
+        DateTimeString => '2016-06-08 23:04:23',    # in Znuny time zone
         Config         => {
             Prefix       => 'Test',
             TestOptional => 1,
@@ -208,9 +208,9 @@ my @Tests = (
     # TODO: add more tests for the different parameters here!
     {
         Name           => 'Disabled',
-        OTRSTimeZone   => 'UTC',
+        ZnunyTimeZone  => 'UTC',
         UserTimeZone   => undef,
-        DateTimeString => '2016-06-08 23:04:23',    # in OTRS time zone
+        DateTimeString => '2016-06-08 23:04:23',    # in Znuny time zone
         Config         => {
             Disabled => 1,
         },
@@ -231,9 +231,9 @@ my @Tests = (
     },
     {
         Name           => 'Disabled Long Format',
-        OTRSTimeZone   => 'UTC',
+        ZnunyTimeZone  => 'UTC',
         UserTimeZone   => 'Europe/Berlin',
-        DateTimeString => '2014-06-08 23:24:23',    # in OTRS time zone
+        DateTimeString => '2014-06-08 23:24:23',    # in Znuny time zone
         Config         => {
             Format   => 'DateInputFormatLong',
             Disabled => 1,
@@ -256,9 +256,9 @@ my @Tests = (
     },
     {
         Name           => 'Disabled Optional',
-        OTRSTimeZone   => 'UTC',
+        ZnunyTimeZone  => 'UTC',
         UserTimeZone   => undef,
-        DateTimeString => '2014-06-08 23:24:23',    # in OTRS time zone
+        DateTimeString => '2014-06-08 23:24:23',    # in Znuny time zone
         Config         => {
             Prefix       => 'Test',
             TestOptional => 1,
@@ -278,9 +278,9 @@ my @Tests = (
     },
     {
         Name           => 'Disabled (Input)',
-        OTRSTimeZone   => 'UTC',
+        ZnunyTimeZone  => 'UTC',
         UserTimeZone   => undef,
-        DateTimeString => '2014-06-08 23:24:23',    # in OTRS time zone
+        DateTimeString => '2014-06-08 23:24:23',    # in Znuny time zone
         Config         => {
             Disabled => 1,
         },
@@ -296,9 +296,9 @@ my @Tests = (
     },
     {
         Name           => 'Disabled (Input)',
-        OTRSTimeZone   => 'UTC',
+        ZnunyTimeZone  => 'UTC',
         UserTimeZone   => 'Europe/Berlin',
-        DateTimeString => '2014-06-09 01:24:23',    # in OTRS time zone
+        DateTimeString => '2014-06-09 01:24:23',    # in Znuny time zone
         Config         => {
             Disabled => 1,
         },
@@ -314,9 +314,9 @@ my @Tests = (
     },
     {
         Name           => 'Disabled Long Format (Input)',
-        OTRSTimeZone   => 'UTC',
+        ZnunyTimeZone  => 'UTC',
         UserTimeZone   => undef,
-        DateTimeString => '2014-06-08 23:24:23',            # in OTRS time zone
+        DateTimeString => '2014-06-08 23:24:23',            # in Znuny time zone
         Config         => {
             Format   => 'DateInputFormatLong',
             Disabled => 1,
@@ -330,9 +330,9 @@ my @Tests = (
     },
     {
         Name           => 'Disabled Long Format (Input)',
-        OTRSTimeZone   => 'UTC',
+        ZnunyTimeZone  => 'UTC',
         UserTimeZone   => 'Europe/Berlin',
-        DateTimeString => '2014-06-08 23:24:23',            # in OTRS time zone
+        DateTimeString => '2014-06-08 23:24:23',            # in Znuny time zone
         Config         => {
             Format   => 'DateInputFormatLong',
             Disabled => 1,
@@ -346,9 +346,9 @@ my @Tests = (
     },
     {
         Name           => 'Disabled Optional (Input)',
-        OTRSTimeZone   => 'UTC',
+        ZnunyTimeZone  => 'UTC',
         UserTimeZone   => undef,
-        DateTimeString => '2014-06-08 23:24:23',         # in OTRS time zone
+        DateTimeString => '2014-06-08 23:24:23',         # in Znuny time zone
         Config         => {
             Prefix       => 'Test',
             TestOptional => 1,
@@ -362,9 +362,9 @@ my @Tests = (
     },
     {
         Name           => 'Disabled Optional (Input)',
-        OTRSTimeZone   => 'UTC',
+        ZnunyTimeZone  => 'UTC',
         UserTimeZone   => 'Europe/Berlin',
-        DateTimeString => '2014-06-08 23:24:23',         # in OTRS time zone
+        DateTimeString => '2014-06-08 23:24:23',         # in Znuny time zone
         Config         => {
             Prefix       => 'Test',
             TestOptional => 1,
@@ -382,8 +382,8 @@ TESTCASE:
 for my $Test (@Tests) {
 
     $ConfigObject->Set(
-        Key   => 'OTRSTimeZone',
-        Value => $Test->{OTRSTimeZone},
+        Key   => 'ZnunyTimeZone',
+        Value => $Test->{ZnunyTimeZone},
     );
 
     my $DateTimeObject = $Kernel::OM->Create(
@@ -442,7 +442,7 @@ for my $Test (@Tests) {
         $Self->Is(
             $HTML,
             $Test->{ExpectedValue},
-            "BuildDateSelection(): $Test->{Name}, OTRS time zone $Test->{OTRSTimeZone}, "
+            "BuildDateSelection(): $Test->{Name}, Znuny time zone $Test->{ZnunyTimeZone}, "
                 . ( $Test->{UserTimeZone} ? "user time zone $Test->{UserTimeZone}" : 'no user time zone' )
                 . ", date/time " . ( $DateTimeAsParams ? 'as explicit parameters' : 'via fixed date/time' ),
         );

@@ -55,7 +55,7 @@ for a package file.',
         Success => 0,
     },
     {
-        Name   => 'Normal package content',
+        Name   => 'Legacy otrs_package root',
         String => '<?xml version="1.0" encoding="utf-8" ?>
     <otrs_package version="1.0">
       <Name>TestPackage</Name>
@@ -78,6 +78,49 @@ for a package file.',
     </otrs_package>
 ',
         Success => 1,
+    },
+    {
+        Name   => 'Canonical package root',
+        String => '<?xml version="1.0" encoding="utf-8" ?>
+        <package version="1.0">
+            <Name>TestPackage</Name>
+            <Version>1.0.1</Version>
+            <Vendor>Znuny GmbH</Vendor>
+            <URL>https://otrs.com/</URL>
+            <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+            <ChangeLog>2013-08-14 New package (some test &lt; &gt; &amp;).</ChangeLog>
+            <Description Lang="en">A test package (some test &lt; &gt; &amp;).</Description>
+            <Description Lang="de">Ein Test Paket (some test &lt; &gt; &amp;).</Description>
+            <ModuleRequired Version="1.112">Encode</ModuleRequired>
+            <Framework>' . $Version . '</Framework>
+            <BuildDate>2005-11-10 21:17:16</BuildDate>
+            <BuildHost>yourhost.example.com</BuildHost>
+            <Filelist>
+                <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
+                <File Location="var/Test" Permission="644" Encode="Base64">aGVsbG8K</File>
+                <File Location="bin/otrs.CheckDB.pl" Permission="755" Encode="Base64">aGVsbG8K</File>
+            </Filelist>
+        </package>
+',
+        Success => 1,
+    },
+    {
+        Name   => 'Unsupported SOPM root tag',
+        String => '<?xml version="1.0" encoding="utf-8" ?>
+        <not_a_package version="1.0">
+            <Name>TestPackage</Name>
+            <Version>1.0.1</Version>
+            <Vendor>Znuny GmbH</Vendor>
+            <URL>https://otrs.com/</URL>
+            <License>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</License>
+            <Description Lang="en">A test package.</Description>
+            <Framework>' . $Version . '</Framework>
+            <Filelist>
+                <File Location="Test" Permission="644" Encode="Base64">aGVsbG8K</File>
+            </Filelist>
+        </not_a_package>
+',
+        Success => 0,
     },
 );
 

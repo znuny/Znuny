@@ -1052,6 +1052,8 @@ sub Run {
             );
         }
 
+        push @AttachmentData, $LayoutObject->GetReusedArticleAttachments();
+
         my $IsVisibleForCustomer = $Config->{IsVisibleForCustomerDefault};
         if ( $GetParam{IsVisibleForCustomerPresent} ) {
             $IsVisibleForCustomer = $GetParam{IsVisibleForCustomer} ? 1 : 0;
@@ -2739,6 +2741,10 @@ sub _Mask {
         Action     => $Self->{Action},
         UserID     => $Self->{UserID},
     ) // [];
+
+    $Param{AttachmentSelection} = $LayoutObject->RenderArticleAttachmentSelection(
+        TicketID => $Self->{TicketID},
+    );
 
     # create & return output
     return $LayoutObject->Output(
