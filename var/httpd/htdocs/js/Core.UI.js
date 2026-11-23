@@ -628,7 +628,6 @@ Core.UI = (function (TargetNS) {
                     );
                     return true;
                 }
-                UsedSpace += File.size;
 
                 // check for allowed file types
                 if (typeof FileTypes === 'object' && FileTypes.indexOf(FileExtension) < 0) {
@@ -753,6 +752,9 @@ Core.UI = (function (TargetNS) {
                         // transfer the selected files again (only on click select, not on drag & drop)
                         $DropObj.prev('input[type=file]').val('');
                         $DropObj.removeClass('Uploading');
+
+                        // update the amount of used space if only the file was uploaded successfully
+                        UsedSpace += File.size;
                     },
                     error: function() {
                         // TODO: show an error tooltip?
