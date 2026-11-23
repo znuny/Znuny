@@ -249,12 +249,12 @@ did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 
     .OverviewMedium table.Infos td:last-child {
         border-right: none;
-    }
+    }*/
 
     .OverviewMedium table.Infos td:first-child {
-        padding: 0 0 5px 0;
+        padding: 0 0 var(--padding-md) 0;
         border-left: none;
-    }*/
+    }
 
     .RTL .OverviewMedium table.Infos td:first-child {
         padding: 0 10px 5px 10px;

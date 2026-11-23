@@ -236,6 +236,8 @@
                                 <label>[% Translate("Service") | html %]</label>
                                 <div title="[% Data.Service | html %]">[% Data.Service | html %]</div>
 [% RenderBlockEnd("Service") %]
+                            </td>
+                            <td>
 [% RenderBlockStart("SLA") %]
                                 <label>[% Translate("Service Level Agreement") | html %]</label>
                                 <div title="[% Data.SLA | html %]">[% Data.SLA | html %]</div>
