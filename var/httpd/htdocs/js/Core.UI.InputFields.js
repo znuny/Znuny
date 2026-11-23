@@ -2296,6 +2296,9 @@ Core.UI.InputFields = (function (TargetNS) {
                             $TreeObj.jstree('search', Core.App.EscapeHTML(SearchValue));
                             Searching = true;
 
+                            // re-calculate the list postion after every jsTree search
+                            CalculateListPosition();
+
                             if (Multiple) {
 
                                 // Change select all action to select only matched values
@@ -2325,6 +2328,8 @@ Core.UI.InputFields = (function (TargetNS) {
                                 $TreeObj.find('li:visible')
                                     .not('.jstree-no-match')
                                     .hide();
+
+                                CalculateListPosition();
                             }
 
                             // Check if we are searching for something
