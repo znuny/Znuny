@@ -313,7 +313,10 @@ sub LinkObjectTableCreateComplex {
         for my $Block (@OutputData) {
 
             # define the headline column
-            my $Column;
+            # An undefined column dies later when the headline hash is copied.
+            my $Column = {
+                Content => '',
+            };
 
             # add new column to the headline
             unshift @{ $Block->{Headline} }, $Column;
