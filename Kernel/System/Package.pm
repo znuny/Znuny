@@ -2416,6 +2416,8 @@ sub PackageParse {
         'Kernel/Config/Files/ZZZAuto.pm$',
         'Kernel/Config/Files/ZZZAAuto.pm$',
         'Kernel/Config/Files/ZZZProcessManagement.pm$',
+        'Kernel/Config/Files/ZZZZnunyGeneratedAuthentication.pm$',
+        'var/saml/',
         'var/tmp/Cache',
         'var/log/',
         '\.\./',

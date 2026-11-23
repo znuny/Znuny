@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.503399209486166;
+    $Self->{Completeness}        = 0.516247700797057;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -268,6 +268,169 @@ sub Data {
         'Do you really want to delete this attachment?' => '',
         'Attachment' => 'สิ่งที่แนบมา',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+        'Certificate/key is stored in VirtualFS.' => 'ใบรับรอง/คีย์ถูกจัดเก็บใน VirtualFS.',
+        'No certificate/key set.' => 'ยังไม่ได้ตั้งค่าใบรับรอง/คีย์.',
+        'View certificate details' => 'ดูรายละเอียดใบรับรอง',
+        'The selected certificate/key is not available. Please select or upload it again.' =>
+            'ใบรับรอง/คีย์ที่เลือกไม่พร้อมใช้งาน. โปรดเลือกหรืออัพโหลดอีกครั้ง.',
+        '- Select an existing certificate/key -' => '- เลือกใบรับรอง/คีย์ที่มีอยู่ -',
+        'Paste key' => '',
+        'Paste certificate' => '',
+        'Generate' => '',
+        'Use certificate from metadata' => 'ใช้ใบรับรองจากข้อมูลเมต้า',
+        'Extracts the signing certificate embedded in the Identity Provider metadata and stores it here, instead of uploading it separately.' =>
+            'ดึงใบรับรองสำหรับลงนามที่ฝังอยู่ในข้อมูลเมต้าของผู้ให้บริการข้อมูลประจำตัวมาจัดเก็บที่นี่, แทนการอัพโหลดแยก.',
+        'Paste the PEM text including the BEGIN and END lines.' => 'วางข้อความ PEM รวมถึงบรรทัด BEGIN และ END.',
+        'Common Name' => 'ชื่อทั่วไป',
+        'Key size' => 'ขนาดคีย์',
+        'Validity (days)' => 'อายุการใช้งาน (วัน)',
+        'Generate self-signed certificate' => 'สร้างใบรับรองที่ลงนามด้วยตนเอง',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+        'Authentication Management' => 'การจัดการการรับรองความถูกต้อง',
+        'Agent authentication' => 'การรับรองความถูกต้องของเอเย่นต์',
+        'Basic settings' => 'การตั้งค่าพื้นฐาน',
+        'Slot' => 'สล็อต',
+        'Determines which numbered AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'กำหนดว่าการกำหนดค่านี้ใช้สล็อตหมายเลข AuthModule<N> ใด. มีให้เลือกเฉพาะสล็อตที่ยังไม่ได้ใช้เท่านั้น.',
+        'SAML request settings' => 'การตั้งค่าคำขอ SAML',
+        'Login button text' => 'ข้อความปุ่มเข้าสู่ระบบ',
+        'Assertion consumer URL' => 'URL ผู้รับการยืนยัน',
+        'Automatically derived from this system\'s HTTP type, FQDN and script alias - not editable.' =>
+            'ได้มาโดยอัตโนมัติจากประเภท HTTP, FQDN และนามแฝงสคริปต์ของระบบนี้ - แก้ไขไม่ได้.',
+        'Znuny appends a ";IsSAMLLogin=1;Count=<N>;" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration\'s slot), so the value the Identity Provider actually receives is:' =>
+            'Znuny ต่อท้าย ";IsSAMLLogin=1;Count=<N>;" เข้ากับ URL นี้เมื่อสร้างคำขอ SAML ขาออกจริง (<N> คือสล็อตของการกำหนดค่านี้), ดังนั้นค่าที่ผู้ให้บริการข้อมูลประจำตัวได้รับจริงคือ:',
+        'Copy to clipboard' => 'คัดลอกไปยังคลิปบอร์ด',
+        'Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honor the value from the request. If your IdP\'s field rejects semicolons, register the base URL instead.' =>
+            'ผู้ให้บริการข้อมูลประจำตัวบางรายต้องการให้ลงทะเบียนค่านี้ทุกตัวอักษรเป็น ACS URL. รายอื่นยอมรับ URL ฐานด้านบนและใช้ค่าจากคำขอ. หากช่องของ IdP ไม่รับเครื่องหมายอัฒภาค, ให้ลงทะเบียน URL ฐานแทน.',
+        'Download SP metadata XML' => 'ดาวน์โหลด XML ข้อมูลเมต้าของ SP',
+        'Issuer (SP entity ID)' => 'ผู้ออก (รหัสเอนทิตี SP)',
+        'Requested NameID format' => 'รูปแบบ NameID ที่ร้องขอ',
+        'Unspecified' => 'ไม่ระบุ',
+        'Persistent' => 'ถาวร',
+        'Transient' => 'ชั่วคราว',
+        'Email address' => 'ที่อยู่อีเมล',
+        'Sent as the NameIDPolicy Format in the outgoing request and published in the SP metadata. Change this only if your Identity Provider requires a specific format.' =>
+            'ส่งเป็นรูปแบบ NameIDPolicy ในคำขอขาออกและเผยแพร่ในข้อมูลเมต้าของ SP. เปลี่ยนค่านี้เฉพาะเมื่อผู้ให้บริการข้อมูลประจำตัวต้องการรูปแบบที่เจาะจง.',
+        'Login attribute' => '',
+        'Please enter attribute names separated by commas.' => '',
+        'Optional. By default the NameID is the login. Enter one or more SAML attribute names (Name or FriendlyName), separated by commas, to take the login from the first of these attributes the assertion contains instead, e.g. if the Identity Provider sends a persistent NameID. The attribute must have exactly one value, otherwise the login fails. Changing this changes the login of existing users.' =>
+            '',
+        'Load metadata from URL' => 'โหลดข้อมูลเมต้าจาก URL',
+        'Switch off to paste the metadata XML instead. Switching clears the entered URL or XML and the SSL options.' =>
+            'ปิดเพื่อวาง XML ข้อมูลเมต้าแทน. การสลับจะล้าง URL หรือ XML ที่ป้อนและตัวเลือก SSL.',
+        'Please select a metadata source.' => 'โปรดเลือกแหล่งข้อมูลเมต้า.',
+        'Metadata URL' => 'URL ข้อมูลเมต้า',
+        'Verify' => 'ตรวจสอบ',
+        'Metadata XML' => 'XML ข้อมูลเมต้า',
+        'Use custom SSL options for metadata URL fetch' => 'ใช้ตัวเลือก SSL ที่กำหนดเองสำหรับดึง URL ข้อมูลเมต้า',
+        'SSL CA file' => 'ไฟล์ SSL CA',
+        'SSL CA path' => 'พาธ SSL CA',
+        'Verify hostname' => 'ตรวจสอบชื่อโฮสต์',
+        'Certificates and keys' => 'ใบรับรองและคีย์',
+        'SP signing key (used to sign outgoing requests)' => 'คีย์ลงนามของ SP (ใช้ลงนามคำขอขาออก)',
+        'SP signing certificate (matches the key above)' => 'ใบรับรองลงนามของ SP (ตรงกับคีย์ด้านบน)',
+        'Required for the SP metadata\'s KeyDescriptor to be published. "Generate" above already produces this together with the key - only needed as a separate step if you uploaded your own key.' =>
+            'จำเป็นเพื่อเผยแพร่ KeyDescriptor ในข้อมูลเมต้าของ SP. "สร้าง" ด้านบนสร้างสิ่งนี้พร้อมกับคีย์อยู่แล้ว - ต้องทำเป็นขั้นตอนแยกเฉพาะเมื่อคุณอัพโหลดคีย์ของตนเอง.',
+        'Signing algorithm' => 'อัลกอริทึมการลงนาม',
+        'SHA-256 (default)' => 'SHA-256 (ค่าเริ่มต้น)',
+        'SHA-384' => 'SHA-384',
+        'SHA-512' => 'SHA-512',
+        'SHA-1 (legacy, not recommended)' => 'SHA-1 (รุ่นเก่า, ไม่แนะนำ)',
+        'Used to sign the outgoing request when a signing key is set above. Only change this if your Identity Provider requires a specific algorithm.' =>
+            'ใช้ลงนามคำขอขาออกเมื่อตั้งคีย์ลงนามด้านบน. เปลี่ยนค่านี้เฉพาะเมื่อผู้ให้บริการข้อมูลประจำตัวต้องการอัลกอริทึมที่เจาะจง.',
+        'Decrypt encrypted assertions' => 'ถอดรหัสการยืนยันที่เข้ารหัส',
+        'Uses the SP signing key above to decrypt SAML assertions the Identity Provider encrypts. Has no effect on responses that aren\'t encrypted, so it\'s safe to leave enabled. Requires a signing key above.' =>
+            'ใช้คีย์ลงนามของ SP ด้านบนเพื่อถอดรหัสการยืนยัน SAML ที่ผู้ให้บริการข้อมูลประจำตัวเข้ารหัส. ไม่มีผลต่อคำตอบที่ไม่ได้เข้ารหัส, จึงปล่อยให้เปิดใช้งานไว้ได้อย่างปลอดภัย. ต้องมีคีย์ลงนามด้านบน.',
+        'Identity provider CA certificate' => 'ใบรับรอง CA ของผู้ให้บริการข้อมูลประจำตัว',
+        'Required for SAML login to work. Without it, Net::SAML2 cannot verify the Identity Provider\'s response signature and authentication will fail.' =>
+            'จำเป็นเพื่อให้การเข้าสู่ระบบ SAML ทำงาน. หากไม่มี, Net::SAML2 จะไม่สามารถตรวจสอบลายเซ็นคำตอบของผู้ให้บริการข้อมูลประจำตัว และการรับรองความถูกต้องจะล้มเหลว.',
+        'Attribute, group and role sync' => 'การซิงค์แอตทริบิวต์, กลุ่ม และบทบาท',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+        'Customer authentication' => 'การรับรองความถูกต้องของลูกค้า',
+        'Determines which numbered Customer::AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'กำหนดว่าการกำหนดค่านี้ใช้สล็อตหมายเลข Customer::AuthModule<N> ใด. มีให้เลือกเฉพาะสล็อตที่ยังไม่ได้ใช้เท่านั้น.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+        'SAML wizard' => 'ตัวช่วย SAML',
+        'Add agent SAML authentication' => 'เพิ่มการรับรองความถูกต้อง SAML ของเอเย่นต์',
+        'Add customer SAML authentication' => 'เพิ่มการรับรองความถูกต้อง SAML ของลูกค้า',
+        'Deploy configuration' => 'ปรับใช้การกำหนดค่า',
+        'Deployment failed' => '',
+        'Fix the configurations below and deploy again. Or set a configuration to invalid: its login stops working and the other configurations are deployed.' =>
+            '',
+        'Problem' => 'ปัญหา',
+        'Edit' => 'แก้ไข',
+        'Set to invalid and deploy the rest' => '',
+        'Sync' => 'ซิงค์',
+        'Status' => 'สถานะ',
+        'Metadata' => 'ข้อมูลเมต้า',
+        'Slot %s' => 'สล็อต %s',
+        'Default' => 'เริ่มต้น',
+        'Yes' => 'ใช่',
+        'No' => 'ไม่',
+        'OK' => 'โอเค',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+        'Enable sync' => 'เปิดใช้งานการซิงค์',
+        'Also registers Kernel::System::Auth::Sync::SAML for the same slot, to sync attributes/groups/roles from the SAML assertion on every login.' =>
+            'ลงทะเบียน Kernel::System::Auth::Sync::SAML สำหรับสล็อตเดียวกันด้วย, เพื่อซิงค์แอตทริบิวต์/กลุ่ม/บทบาทจากการยืนยัน SAML ทุกครั้งที่เข้าสู่ระบบ.',
+        'The AuthSyncModule for this slot is already configured outside of AdminAuthentication - sync cannot be enabled for it.' =>
+            'AuthSyncModule ของสล็อตนี้ถูกกำหนดค่าไว้นอก AdminAuthentication แล้ว - ไม่สามารถเปิดใช้งานการซิงค์ได้.',
+        'User attribute sync map' => 'แผนที่ซิงค์แอตทริบิวต์ผู้ใช้',
+        'Maps Znuny user attributes (left) to SAML assertion attribute names (right).' =>
+            'จับคู่แอตทริบิวต์ผู้ใช้ Znuny (ซ้าย) กับชื่อแอตทริบิวต์ของการยืนยัน SAML (ขวา).',
+        'Znuny attribute' => 'แอตทริบิวต์ Znuny',
+        'SAML attribute URI' => 'URI แอตทริบิวต์ SAML',
+        'Initial groups for new users' => 'กลุ่มเริ่มต้นสำหรับผู้ใช้ใหม่',
+        'Groups (with rw permission) granted only when a brand-new agent is created via sync. Ctrl/Cmd-click to select multiple.' =>
+            'กลุ่ม (ที่มีการอนุญาต rw) จะให้เฉพาะเมื่อสร้างเอเย่นต์ใหม่ทั้งหมดผ่านการซิงค์. Ctrl/Cmd-click เพื่อเลือกหลายรายการ.',
+        'SAML attribute carrying group values' => 'แอตทริบิวต์ SAML ที่เก็บค่ากลุ่ม',
+        'Group sync rules (by group value)' => 'กฎการซิงค์กลุ่ม (ตามค่ากลุ่ม)',
+        'Maps a SAML group value to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'จับคู่ค่ากลุ่ม SAML กับกลุ่ม Znuny และการอนุญาต. Ctrl/Cmd-click เพื่อเลือกการอนุญาตหลายรายการ.',
+        'SAML value' => 'ค่า SAML',
+        'Group sync rules (by arbitrary attribute/value)' => 'กฎการซิงค์กลุ่ม (ตามแอตทริบิวต์/ค่าใดก็ได้)',
+        'Maps any SAML attribute name/value combination to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'จับคู่ชุดชื่อ/ค่าของแอตทริบิวต์ SAML ใดก็ได้กับกลุ่ม Znuny และการอนุญาต. Ctrl/Cmd-click เพื่อเลือกการอนุญาตหลายรายการ.',
+        'SAML attribute' => 'แอตทริบิวต์ SAML',
+        'Role sync requires at least one active role. Create or activate a role under Admin → Roles.' =>
+            'การซิงค์บทบาทต้องมีบทบาทที่ใช้งานอย่างน้อยหนึ่งบทบาท. สร้างหรือเปิดใช้งานบทบาทภายใต้ ผู้ดูแลระบบ → บทบาท.',
+        'SAML attribute carrying role values' => 'แอตทริบิวต์ SAML ที่เก็บค่าบทบาท',
+        'Role sync rules (by role value)' => 'กฎการซิงค์บทบาท (ตามค่าบทบาท)',
+        'Maps a SAML role value to one or more Znuny roles, active or inactive.' =>
+            'จับคู่ค่าบทบาท SAML กับบทบาท Znuny, ไม่ว่าจะใช้งานหรือไม่ใช้งาน.',
+        'Active' => 'ใช้งาน',
+        'Role sync rules (by arbitrary attribute/value)' => 'กฎการซิงค์บทบาท (ตามแอตทริบิวต์/ค่าใดก็ได้)',
+        'Maps any SAML attribute name/value combination to one or more Znuny roles, active or inactive.' =>
+            'จับคู่ชุดชื่อ/ค่าของแอตทริบิวต์ SAML ใดก็ได้กับบทบาท Znuny, ไม่ว่าจะใช้งานหรือไม่ใช้งาน.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+        'Setup steps' => 'ขั้นตอนการตั้งค่า',
+        'Setup wizard' => 'ตัวช่วยตั้งค่า',
+        'SAML setup wizard' => 'ตัวช่วยตั้งค่า SAML',
+        'Step' => 'ขั้นตอน',
+        'What are you setting up?' => 'คุณกำลังตั้งค่าอะไร?',
+        'Agent authentication - staff logging into the agent interface' =>
+            'การรับรองความถูกต้องของเอเย่นต์ - เจ้าหน้าที่เข้าสู่ระบบในอินเทอร์เฟซเอเย่นต์',
+        'Customer authentication - customers logging into the customer portal' =>
+            'การรับรองความถูกต้องของลูกค้า - ลูกค้าเข้าสู่ระบบในพอร์ทัลลูกค้า',
+        'Login with SSO' => 'เข้าสู่ระบบด้วย SSO',
+        'User sync (optional)' => 'การซิงค์ผู้ใช้ (ไม่บังคับ)',
+        'Optionally sync user attributes, groups and roles from the SAML assertion on every login. This can also be set up later on the edit screen.' =>
+            'ซิงค์แอตทริบิวต์ผู้ใช้, กลุ่ม และบทบาทจากการยืนยัน SAML ทุกครั้งที่เข้าสู่ระบบได้ตามต้องการ. สามารถตั้งค่าภายหลังได้ในหน้าแก้ไข.',
+        'Review' => 'ทบทวน',
+        'Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective.' =>
+            'คลิกบันทึกเพื่อสร้างการกำหนดค่า SAML นี้. ยังไม่ใช้งาน - จากนั้นใช้การดำเนินการปรับใช้การกำหนดค่าในหน้าภาพรวมเพื่อให้มีผล.',
+        'If you skipped the Identity Provider CA certificate here, it is taken from the metadata when saving. Please check it on the edit screen afterwards.' =>
+            '',
+        'You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only).' =>
+            'คุณสามารถกลับไปยังขั้นตอนก่อนหน้าเพื่อแก้ไข, หรือใช้หน้าแก้ไขแบบเต็มในภายหลังสำหรับตัวเลือกขั้นสูง เช่น การซิงค์แอตทริบิวต์/กลุ่ม/บทบาท (เฉพาะการรับรองความถูกต้องของเอเย่นต์).',
+        'Back' => 'กลับไป',
+        'Next' => 'ถัดไป',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
         'Add Auto Response' => 'เพิ่มการตอบสนองอัตโนมัติ',
         'Filter for Auto Responses' => 'ตัวกรองสำหรับการตอบสนองอัตโนมัติ',
@@ -325,9 +488,7 @@ sub Data {
             '',
         'Account Status' => '',
         'Account status for: %s' => '',
-        'Status' => 'สถานะ',
         'Account' => '',
-        'Edit' => 'แก้ไข',
         'No accounts found.' => '',
         'Communication Log Details (%s)' => '',
         'Direction' => 'ทิศทาง',
@@ -446,7 +607,6 @@ sub Data {
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => 'สลับสถานะการทำงานทั้งหมด',
-        'Active' => 'ใช้งาน',
         'Toggle active state for %s' => 'สลับสถานะการทำงานสำหรับ %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
@@ -1583,14 +1743,11 @@ sub Data {
         'Download package' => 'ดาวน์โหลดแพคเกจ',
         'Rebuild package' => 'สร้างแพคเกจอีกครั้ง',
         'Package Information' => '',
-        'Metadata' => 'ข้อมูลเมต้า',
         'Change Log' => 'เปลี่ยนแปลงการเข้าสู่ระบบ',
         'Date' => 'วัน',
         'List of Files' => 'รายการไฟล์',
         'Permission' => 'การอนุญาต',
         'Size' => 'ขนาด',
-        'Problem' => 'ปัญหา',
-        'OK' => 'โอเค',
         'Download file from package!' => 'ดาวน์โหลดไฟล์จากแพคเกจ',
         'Required' => 'ที่จำเป็น',
         'Primary Key' => '',
@@ -2137,7 +2294,6 @@ sub Data {
         'System Email Addresses Management' => 'การจัดการที่อยู่อีเมลของระบบ',
         'Add System Email Address' => 'เพิ่มที่อยู่อีเมลของระบบ',
         'Edit System Email Address' => 'แก้ไขที่อยู่อีเมลของระบบ',
-        'Email address' => 'ที่อยู่อีเมล',
         'Display name' => 'ชื่อที่แสดง',
         'This email address is already used as system email address.' => '',
         'The display name and email address will be shown on mail you send.' =>
@@ -2352,8 +2508,6 @@ sub Data {
         'All-day' => 'ทั้งวัน',
         'Repeat' => '',
         'Notification' => 'การแจ้งเตือน',
-        'Yes' => 'ใช่',
-        'No' => 'ไม่',
         'No calendars found. Please add a calendar first by using Manage Calendars page.' =>
             '',
 
@@ -2878,10 +3032,11 @@ sub Data {
         'Archive Search' => 'ค้นหาเอกสารเก่า',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'เนื้อหา',
+        'e.g. Text or Te*t' => '',
         'Save filter settings as default' => 'บันทึกการตั้งค่าตัวกรองเป็นค่าเริ่มต้น',
         'Event Type' => 'ประเภทของกิจกรรม',
         'Save as default' => 'บันทึกเป็นค่าเริ่มต้น',
-        'Back' => 'กลับไป',
         'Change Queue' => 'เปลี่ยนคิว',
         'Add Filter' => 'เพิ่มตัวกรอง',
         'Set' => 'กำหนด',
@@ -3129,7 +3284,6 @@ sub Data {
         'Phone' => 'โทรศัพท์',
         'Web site' => 'เว็บไซต์',
         'Community' => '',
-        'Next' => 'ถัดไป',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => 'กำหนดค่าเมล์ขาออก',
@@ -3224,6 +3378,8 @@ sub Data {
         'Delete link' => '',
         'Delete Link' => '',
         'Object#' => 'ออบเจค#',
+        'Remove active filters for this widget.' => 'ลบตัวกรองการใช้งานสำหรับเครื่องมือนี้',
+        'No results found.' => 'ไม่พบผลลัพธ์',
         'Add links' => 'เพิ่มลิงค์',
         'Delete links' => 'ลบการเชื่อมโยง',
 
@@ -3630,6 +3786,34 @@ sub Data {
             '',
         'All agents with write permission for the appointment (calendar)' =>
             '',
+
+        # Perl Module: Kernel/Modules/AdminAuthentication.pm
+        'Perl module Net::SAML2 is not installed. SAML authentication cannot work until it is installed on the server.' =>
+            'ยังไม่ได้ติดตั้งโมดูล Perl Net::SAML2. การรับรองความถูกต้องแบบ SAML จะทำงานไม่ได้จนกว่าจะติดตั้งบนเซิร์ฟเวอร์.',
+        'Authentication configuration is not in sync with the deployed configuration, but it can\'t be deployed: a valid configuration has a problem, see the status below. Fix it or set it to invalid, then deploy.' =>
+            '',
+        'Authentication configuration is not in sync with the deployed configuration, please deploy.' =>
+            'การกำหนดค่าการรับรองความถูกต้องไม่ตรงกับการกำหนดค่าที่ปรับใช้แล้ว, โปรดปรับใช้.',
+        'No IdP CA certificate was uploaded and none could be taken from the IdP metadata.' =>
+            'ไม่มีใบรับรอง CA ของ IdP ที่ถูกอัพโหลด และไม่สามารถนำจากข้อมูลเมต้าของ IdP ได้.',
+        'Only invalid authentication configurations can be deleted. Please set the configuration to invalid first.' =>
+            'ลบได้เฉพาะการกำหนดค่าการรับรองความถูกต้องที่ไม่ถูกต้อง. โปรดตั้งค่าการกำหนดค่าเป็นไม่ถูกต้องก่อน.',
+        'Invalid or missing Role.' => 'บทบาทไม่ถูกต้องหรือขาดหาย.',
+        'No file was uploaded.' => 'ไม่มีไฟล์ที่ถูกอัพโหลด.',
+        'Error storing the uploaded file.' => 'ข้อผิดพลาดในการจัดเก็บไฟล์ที่อัพโหลด.',
+        'Only the SP signing key can be generated.' => 'สร้างได้เฉพาะคีย์ลงนามของ SP.',
+        'Error generating certificate. Please check the system log.' => 'ข้อผิดพลาดในการสร้างใบรับรอง. โปรดตรวจสอบบันทึกระบบ.',
+        'Error storing the generated key in VirtualFS.' => 'ข้อผิดพลาดในการจัดเก็บคีย์ที่สร้างใน VirtualFS.',
+        'Error storing the generated certificate in VirtualFS.' => 'ข้อผิดพลาดในการจัดเก็บใบรับรองที่สร้างใน VirtualFS.',
+        'Could not find a certificate in the metadata. Please check the URL/XML and try again.' =>
+            'ไม่พบใบรับรองในข้อมูลเมต้า. โปรดตรวจสอบ URL/XML แล้วลองอีกครั้ง.',
+        'Error storing the certificate.' => 'ข้อผิดพลาดในการจัดเก็บใบรับรอง.',
+        'Could not read the certificate from VirtualFS.' => 'ไม่สามารถอ่านใบรับรองจาก VirtualFS.',
+        'The authentication configuration was not deployed. The previously deployed configuration is still active.' =>
+            'การกำหนดค่าการรับรองความถูกต้องไม่ถูกปรับใช้. การกำหนดค่าที่ปรับใช้ก่อนหน้านี้ยังใช้งานอยู่.',
+        'Please check the system log for details.' => 'โปรดตรวจสอบบันทึกระบบสำหรับรายละเอียด.',
+        'Authentication configuration not found.' => '',
+        'Could not set the authentication configuration to invalid.' => '',
 
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
@@ -4664,6 +4848,8 @@ sub Data {
             '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'ข้อผิดพลาด: โปรดตรวจสอบฐานข้อมูลของคุณว่าสามารถรับแพคเกจได้มากกว่า% s MB (ปัจจุบันรับเฉพาะแพคเกจขนาด% s MB) กรุณาปรับให้เข้าการตั้งค่า max_allowed_packet ของฐานข้อมูลของคุณเพื่อหลีกเลี่ยงข้อผิดพลาด',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            'ข้อผิดพลาด: กรุณาตั้งค่า innodb_redo_log_capacity ในฐานข้อมูลของคุณให้มีอย่างน้อย %s MB (ปัจจุบัน: %s MB, แนะนำ: %s MB) สำหรับข้อมูลเพิ่มเติมโปรดดูที่ %s',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'ข้อผิดพลาด: กรุณาระบุค่าสำหรับ innodb_log_file_size ในฐานข้อมูลของคุณอย่างน้อย% s MB (ปัจจุบัน:% s MB แนะนำ:% s MB) สำหรับข้อมูลเพิ่มเติมโปรดดูได้ที่',
         'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
@@ -4845,6 +5031,7 @@ sub Data {
         'Linked as' => 'เชื่อมโยงเป็น',
         'Search Result' => 'ผลการค้นหา',
         'Linked' => 'เชื่อมต่อแล้ว',
+        'filter' => 'ตัวกรอง',
         'Bulk' => 'จำนวนมาก',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -4973,7 +5160,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => '',
         'Unable to load %s!' => '',
-        'Content' => 'เนื้อหา',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'ข้อมูลของตั๋ว',
@@ -5034,6 +5220,34 @@ sub Data {
         'Session invalid. Please log in again.' => 'เซสชั่นที่ไม่ถูกต้อง กรุณาเข้าสู่ระบบอีกครั้ง',
         'Session has timed out. Please log in again.' => 'เซสชั่นได้หมดเวลา กรุณาเข้าสู่ระบบอีกครั้ง',
 
+        # Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+        'This is not an unencrypted private key in PEM format (-----BEGIN PRIVATE KEY-----).' =>
+            'นี่ไม่ใช่คีย์ส่วนตัวที่ไม่ได้เข้ารหัสในรูปแบบ PEM (-----BEGIN PRIVATE KEY-----).',
+        'This is not a certificate in PEM format (-----BEGIN CERTIFICATE-----).' =>
+            'นี่ไม่ใช่ใบรับรองในรูปแบบ PEM (-----BEGIN CERTIFICATE-----).',
+        'The private key could not be read. Only unencrypted private keys are supported.' =>
+            'ไม่สามารถอ่านคีย์ส่วนตัว. รองรับเฉพาะคีย์ส่วนตัวที่ไม่ได้เข้ารหัส.',
+        'The certificate could not be read.' => 'ไม่สามารถอ่านใบรับรอง.',
+        'Could not read the SP signing key.' => 'ไม่สามารถอ่านคีย์ลงนามของ SP.',
+        'Could not read the IdP CA certificate.' => 'ไม่สามารถอ่านใบรับรอง CA ของ IdP.',
+        'No IdP CA certificate is stored. It is taken from the IdP metadata on every deploy. Save the configuration to store it.' =>
+            '',
+        'Could not decrypt the SP signing key. Please check the configured encryption key.' =>
+            'ไม่สามารถถอดรหัสคีย์ลงนามของ SP. โปรดตรวจสอบคีย์เข้ารหัสที่กำหนดค่าไว้.',
+        'Net::SAML2 is not installed on the server, metadata cannot be verified.' =>
+            'ยังไม่ได้ติดตั้ง Net::SAML2 บนเซิร์ฟเวอร์, จึงไม่สามารถตรวจสอบข้อมูลเมต้า.',
+        'Metadata URL is empty.' => 'URL ข้อมูลเมต้าว่างเปล่า.',
+        'Metadata XML is empty.' => 'XML ข้อมูลเมต้าว่างเปล่า.',
+        'Could not parse the metadata. Please check the URL/XML and try again.' =>
+            'ไม่สามารถแยกวิเคราะห์ข้อมูลเมต้า. โปรดตรวจสอบ URL/XML แล้วลองอีกครั้ง.',
+        'Perl module Crypt::OpenSSL::X509 is not installed, certificate details cannot be parsed.' =>
+            'ยังไม่ได้ติดตั้งโมดูล Perl Crypt::OpenSSL::X509, จึงไม่สามารถแยกวิเคราะห์รายละเอียดใบรับรอง.',
+        'Could not parse the certificate.' => 'ไม่สามารถแยกวิเคราะห์ใบรับรอง.',
+
+        # Perl Module: Kernel/System/AuthenticationConfig.pm
+        'No authentication plugin is registered for this type.' => 'ไม่มีปลั๊กอินการรับรองความถูกต้องที่ลงทะเบียนสำหรับประเภทนี้.',
+        'Could not write the certificate files.' => 'ไม่สามารถเขียนไฟล์ใบรับรอง.',
+
         # Perl Module: Kernel/System/AutoResponse.pm
         'Couldn\'t read auto response configuration file. Please make sure the file is valid.' =>
             '',
@@ -5077,9 +5291,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'ก่อน/หลัง',
         'between' => 'ระหว่าง',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -5250,6 +5461,9 @@ sub Data {
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'ความจุ Redo Log ของ InnoDB',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'การตั้งค่า innodb_redo_log_capacity ต้องมีอย่างน้อย 256 MB',
         'InnoDB Log File Size' => 'ขนาดInnoDB Log File',
         'The setting innodb_log_file_size must be at least 256 MB.' => 'การตั้งค่า innodb_log_file_size ต้องมีขนาดอย่างน้อย256 MB',
 
@@ -5554,7 +5768,6 @@ sub Data {
         'All Settings' => '',
 
         # Perl Module: Kernel/System/SysConfig/BaseValueType.pm
-        'Default' => 'เริ่มต้น',
         'Value is not correct! Please, consider updating this field.' => '',
         'Value doesn\'t satisfy regex (%s).' => '',
 
@@ -6013,6 +6226,8 @@ sub Data {
             '',
         'Maximum Number of a calendar shown in a dropdown.' => '',
         'Define the start day of the week for the date picker.' => 'กำหนดวันเริ่มต้นของสัปดาห์สำหรับตัวเลือกวัน',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'กำหนดว่าวันที่รอดำเนินการเริ่มต้นตาม Ticket::Frontend::PendingDiffTime ควรข้ามวันที่เป็นวันหยุดหรือไม่มีเวลาทำงานในปฏิทินนี้หรือไม่',
         'Adds the permanent vacation days.' => '',
         'Adds the one time vacation days.' => '',
         'Defines the hours and week days to count the working time.' => 'กำหนดเวลาและวันเพื่อนับเวลาการทำงาน',
@@ -6294,6 +6509,8 @@ sub Data {
             '',
         'Frontend module registration (disable company link if no company feature is used).' =>
             'การลงทะเบียนโมดูล Frontend (ปิดการใช้งานการเชื่อมโยงบริษัท ถ้าไม่มีฟีเจอร์บริษัทถูกนำมาใช้)',
+        'Registers the SAML 2.0 authentication plugin for AdminAuthentication.' =>
+            'ลงทะเบียนปลั๊กอินการรับรองความถูกต้อง SAML 2.0 สำหรับ AdminAuthentication.',
         'Frontend module registration for the customer interface.' => 'การลงทะเบียนโมดูล Frontend สำหรับอินเตอร์เฟซลูกค้า',
         'Activates the available themes on the system. Value 1 means active, 0 means inactive.' =>
             'เปิดใช้งานธีมที่มีอยู่ในระบบ ค่า 1หมายถึงใช้งาน, 0 หมายถึงไม่ใช้งาน',
@@ -6716,6 +6933,8 @@ sub Data {
             'แสดงเวลาคิดสำหรับบทความในมุมมองการซูมตั๋ว',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             'เปิดใช้งานตัวกรองบทความในมุมมองการซูมเพื่อระบุว่าควรแสดงบทความใด',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'ฟิลด์แบบไดนามิกที่แสดงในกล่องโต้ตอบตัวกรองบทความของหน้าจอซูมตั๋วในอินเทอร์เฟซเจ้าหน้าที่ รองรับเฉพาะฟิลด์ประเภทออบเจคบทความที่เป็นประเภทข้อความ, Textarea, ดรอปดาวน์, หลายรายการ และกล่องตรวจสอบ',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>
@@ -7924,6 +8143,8 @@ sub Data {
             'ประเภทการแสดงผลเริ่มต้นสำหรับผู้รับ (To, CC) ชื่ออยู่ใน AgentTicketZoom และ CustomerTicketZoom',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             'ประเภทการแสดงผลเริ่มต้นสำหรับผู้ส่ง (From) ชื่ออยู่ใน AgentTicketZoom และ CustomerTicketZoom',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'เปิดใช้ตัวกรองคอลัมน์แบบเลือกได้หลายค่าสำหรับตั๋วที่เชื่อมโยงในวิดเจ็ตวัตถุที่เชื่อมโยงแบบซับซ้อน (LinkObject::ViewMode = "complex") ตัวกรองใช้ได้ใน AgentTicketZoom และไม่แสดงในหน้าต่างป๊อปอัปของ AgentLinkObject',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8392,6 +8613,55 @@ sub Data {
             '',
         'Attachment was deleted successfully.' => '',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?' =>
+            'การเปลี่ยนแหล่งข้อมูลเมต้าจะลบ URL หรือ XML ข้อมูลเมต้าที่ป้อนและตัวเลือก SSL. ดำเนินการต่อ?',
+        'Change metadata source' => 'เปลี่ยนแหล่งข้อมูลเมต้า',
+        'Uploaded key' => 'คีย์ที่อัพโหลด',
+        'EXPIRED' => 'หมดอายุแล้ว',
+        'expires' => 'หมดอายุ',
+        'used by %s configuration(s)' => 'ใช้โดยการกำหนดค่า %s รายการ',
+        'Could not read the certificate.' => 'ไม่สามารถอ่านใบรับรองได้.',
+        'Certificate (PEM)' => 'ใบรับรอง (PEM)',
+        'Issuer' => 'ผู้ออก',
+        'Valid from' => 'ใช้ได้ตั้งแต่',
+        'Valid until' => 'ใช้ได้จนถึง',
+        'Serial' => 'หมายเลขซีเรียล',
+        'Fingerprint (SHA-256)' => 'ลายนิ้วมือ (SHA-256)',
+        'Show raw PEM' => 'แสดง PEM ดิบ',
+        'Certificate details' => 'รายละเอียดใบรับรอง',
+        'Metadata is valid.' => 'ข้อมูลเมต้าถูกต้อง.',
+        'Entity ID' => 'รหัสเอนทิตี',
+        'SSO URL' => 'SSO URL',
+        'Includes a signing certificate.' => 'มีใบรับรองสำหรับลงนาม.',
+        'No signing certificate found in the metadata.' => 'ไม่พบใบรับรองสำหรับลงนามในข้อมูลเมต้า.',
+        'Found %s attribute(s) in the metadata.' => 'พบแอตทริบิวต์ %s รายการในข้อมูลเมต้า.',
+        'Verifying...' => 'กำลังตรวจสอบ...',
+        'Metadata verification failed.' => 'การตรวจสอบข้อมูลเมต้าล้มเหลว.',
+        'Upload failed.' => 'การอัพโหลดล้มเหลว.',
+        'Please paste a certificate or key first.' => 'โปรดวางใบรับรองหรือคีย์ก่อน.',
+        'Saving the pasted certificate/key failed.' => 'การบันทึกใบรับรอง/คีย์ที่วางล้มเหลว.',
+        'Certificate generation failed.' => 'การสร้างใบรับรองล้มเหลว.',
+        'Please select a metadata source (URL or XML) first.' => 'โปรดเลือกแหล่งข้อมูลเมต้า (URL หรือ XML) ก่อน.',
+        'Could not find a certificate in the metadata.' => 'ไม่พบใบรับรองในข้อมูลเมต้า.',
+        'Copied to clipboard!' => '',
+        'Do you really want to delete this SAML configuration?' => 'คุณต้องการลบการกำหนดค่า SAML นี้จริงหรือไม่?',
+        'Delete SAML configuration' => 'ลบการกำหนดค่า SAML',
+        'There was an error deleting the SAML configuration.' => 'เกิดข้อผิดพลาดในการลบการกำหนดค่า SAML.',
+        'NameID (default)' => '',
+        '(pasted XML)' => '(XML ที่วาง)',
+        'Not configured yet' => 'ยังไม่ได้กำหนดค่า',
+        'Identity provider metadata' => 'ข้อมูลเมต้าของผู้ให้บริการข้อมูลประจำตัว',
+        'SP signing key' => 'คีย์ลงนามของ SP',
+        'Configured' => 'กำหนดค่าแล้ว',
+        'Not set' => 'ยังไม่ได้ตั้งค่า',
+        'SP signing certificate' => 'ใบรับรองลงนามของ SP',
+        'Not set (will be taken from the metadata when saving)' => '',
+        'User sync' => 'การซิงค์ผู้ใช้',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)' =>
+            'เปิดใช้งานแล้ว (%s การแมปแอตทริบิวต์, %s กฎกลุ่ม, %s กฎบทบาท)',
+        'Please fill in all required fields before continuing.' => 'โปรดกรอกช่องที่จำเป็นทั้งหมดก่อนดำเนินการต่อ.',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.AutoResponse.js
         'Delete this %s' => '',
         'Deleting the %s and its data. This may take a while...' => '',
@@ -8598,9 +8868,6 @@ sub Data {
         'Please select attachments for download.' => '',
         'Show less' => '',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
-        'Copied to clipboard!' => '',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
         'First select a customer user, then select a customer ID to assign to this ticket.' =>
             '',
@@ -8618,7 +8885,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => 'กรุณาตรวจสอบฟิลด์ที่ทำเครื่องหมายสีแดงสำหรับปัจจัยการป้อนข้อมูลที่ถูกต้อง',
         'month' => 'เดือน',
-        'Remove active filters for this widget.' => 'ลบตัวกรองการใช้งานสำหรับเครื่องมือนี้',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '',
@@ -8646,9 +8912,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Search.js
         'Please remove the following words from your search as they cannot be searched for:' =>
             'โปรดลบคำต่อไปนี้จากการค้นหาของคุณเนื่องจากไม่สามารถค้นหาได้:',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.SharedSecretGenerator.js
-        'Generate' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
@@ -8710,6 +8973,7 @@ sub Data {
             '',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'ไม่มีเวลาทำงาน',
         'Open date selection' => 'การเลือกวันที่เปิด',
         'Invalid date (need a future date)!' => 'วันที่ไม่ถูกต้อง (ต้องใช้วันที่ในอนาคต)!',
         'Invalid date (need a past date)!' => 'วันที่ไม่ถูกต้อง (ต้องใช้วันที่ผ่านมา)!',
@@ -9212,6 +9476,7 @@ Thanks for your help!
         'Manage POP3 or IMAP accounts to fetch email from.' => '',
         'Manage S/MIME certificates for email encryption.' => '',
         'Manage System Configuration Deployments.' => '',
+        'Manage agent and customer authentication (e.g. SAML 2.0).' => 'จัดการการรับรองความถูกต้องของเอเย่นต์และลูกค้า (เช่น SAML 2.0).',
         'Manage different calendars.' => '',
         'Manage existing sessions.' => '',
         'Manage outbound email profiles.' => '',
@@ -9337,6 +9602,7 @@ Thanks for your help!
         'Running Process Tickets' => '',
         'Russian' => 'ภาษารัสเซีย',
         'S/MIME Certificates' => 'ใบรับรอง S/MIME',
+        'SAML' => 'SAML',
         'Schedule a maintenance period.' => '',
         'Screen after marking as seen' => '',
         'Screen after marking as unseen' => '',
@@ -9568,6 +9834,7 @@ Thanks for your help!
         '%s MB',
         '%s TB',
         '%s of %s',
+        '(pasted XML)',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9582,6 +9849,7 @@ Thanks for your help!
         'Add new entry',
         'Add to favourites',
         'Agent',
+        'Agent authentication',
         'All occurrences',
         'All-day',
         'An Error Occurred',
@@ -9604,6 +9872,7 @@ Thanks for your help!
         'Article filter',
         'As soon as you use this button or link, you will leave this screen and its current state will be saved automatically. Do you want to continue?',
         'Ascending sort applied, ',
+        'Assertion consumer URL',
         'Attachment was deleted successfully.',
         'Attachments',
         'Aug',
@@ -9614,6 +9883,11 @@ Thanks for your help!
         'Calendar',
         'Cancel',
         'Cannot proceed',
+        'Certificate (PEM)',
+        'Certificate details',
+        'Certificate generation failed.',
+        'Certificate/key is stored in VirtualFS.',
+        'Change metadata source',
         'Clear',
         'Clear all',
         'Clear all filters',
@@ -9626,27 +9900,34 @@ Thanks for your help!
         'Clone',
         'Clone Process',
         'Clone web service',
+        'Close',
         'Close preview',
         'Close this dialog',
         'Collapse',
         'Complex %s with %s arguments',
+        'Configured',
         'Confirm',
         'Copied to clipboard!',
         'Copy Ticket Number',
         'Copy Ticket Number + Title',
         'Copy ticket information',
+        'Could not find a certificate in the metadata.',
         'Could not load activities.',
         'Could not open popup window. Please disable any popup blockers for this application.',
+        'Could not read the certificate.',
         'Current selection',
         'Currently not possible',
+        'Customer authentication',
         'Customer interface does not support articles not visible for customers.',
         'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',
         'December',
+        'Decrypt encrypted assertions',
         'Delete',
         'Delete Entity',
+        'Delete SAML configuration',
         'Delete conditions',
         'Delete draft',
         'Delete error handling module',
@@ -9680,10 +9961,12 @@ Thanks for your help!
         'Deployment successful. You\'re being redirected...',
         'Descending sort applied, ',
         'Description',
+        'Disabled',
         'Dismiss',
         'Do not show this warning again.',
         'Do you really want to continue?',
         'Do you really want to delete "%s"?',
+        'Do you really want to delete this SAML configuration?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
         'Do you really want to delete this key?',
@@ -9700,11 +9983,14 @@ Thanks for your help!
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
+        'EXPIRED',
         'Edit Field Details',
         'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)',
         'End date',
+        'Entity ID',
         'Error',
         'Error during AJAX communication',
         'Error during AJAX communication. Status: %s, Error: %s',
@@ -9718,8 +10004,10 @@ Thanks for your help!
         'February',
         'Filter',
         'Filters',
+        'Fingerprint (SHA-256)',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
+        'Found %s attribute(s) in the metadata.',
         'Fr',
         'Fri',
         'Friday',
@@ -9729,13 +10017,18 @@ Thanks for your help!
         'Grouped',
         'Help',
         'Hide EntityIDs',
+        'Identity provider CA certificate',
+        'Identity provider metadata',
         'If you now leave this page, all open popup windows will be closed, too!',
         'Import web service',
+        'Includes a signing certificate.',
         'Information about the Znuny Daemon',
         'Insert selected customer user(s) into the "%s:" field.',
         'Invalid date (need a future date)!',
         'Invalid date (need a past date)!',
         'Invalid date!',
+        'Issuer',
+        'Issuer (SP entity ID)',
         'It is going to be deleted from the field, please try again.',
         'It is not possible to add a new event trigger because the event is not set.',
         'It is not possible to set this entry to invalid. All affected configuration settings have to be changed beforehand.',
@@ -9753,6 +10046,8 @@ Thanks for your help!
         'Loading, please wait...',
         'Loading...',
         'Location',
+        'Login attribute',
+        'Login button text',
         'Mail check successful.',
         'Mapping for Key',
         'Mapping for Key %s',
@@ -9760,15 +10055,20 @@ Thanks for your help!
         'March',
         'May',
         'May_long',
+        'Metadata is valid.',
+        'Metadata verification failed.',
         'Mo',
         'Mon',
         'Monday',
         'Month',
         'Name',
+        'NameID (default)',
         'Namespace %s could not be initialized, because %s could not be found.',
         'Next',
+        'No',
         'No Data Available.',
         'No TransitionActions assigned.',
+        'No certificate/key set.',
         'No data found.',
         'No dialogs assigned yet. Just pick an activity dialog from the list on the left and drag it here.',
         'No matches found.',
@@ -9776,9 +10076,14 @@ Thanks for your help!
         'No response from get package upgrade result.',
         'No response from get package upgrade run status.',
         'No response from package upgrade all.',
+        'No signing certificate found in the metadata.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
+        'Not configured yet',
+        'Not set',
+        'Not set (will be taken from the metadata when saving)',
         'Notice',
         'Notification',
         'Nov',
@@ -9795,10 +10100,13 @@ Thanks for your help!
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
+        'Please fill in all required fields before continuing.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
+        'Please paste a certificate or key first.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select a metadata source (URL or XML) first.',
         'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
@@ -9832,11 +10140,15 @@ Thanks for your help!
         'Restore web service configuration',
         'Rule',
         'Running',
+        'SP signing certificate',
+        'SP signing key',
+        'SSO URL',
         'Sa',
         'Sat',
         'Saturday',
         'Save',
         'Save and update automatically',
+        'Saving the pasted certificate/key failed.',
         'Scale preview content',
         'Search',
         'Search attributes',
@@ -9849,6 +10161,7 @@ Thanks for your help!
         'Select files or drop them here',
         'Sep',
         'September',
+        'Serial',
         'Setting a template will overwrite any text or attachment.',
         'Settings',
         'Show',
@@ -9857,7 +10170,9 @@ Thanks for your help!
         'Show less',
         'Show more',
         'Show or hide the content.',
+        'Show raw PEM',
         'Slide the navigation bar',
+        'Slot',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',
         'Sorry, but you can\'t disable all methods for this notification.',
         'Sorry, the only existing condition can\'t be removed.',
@@ -9872,12 +10187,14 @@ Thanks for your help!
         'Status',
         'Stream',
         'Su',
+        'Subject',
         'Successful',
         'Sun',
         'Sunday',
         'Support Bundle',
         'Switch to desktop mode',
         'Switch to mobile mode',
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?',
         'Team',
         'Th',
         'The activities could not be marked as seen.',
@@ -9899,6 +10216,7 @@ Thanks for your help!
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',
+        'There was an error deleting the SAML configuration.',
         'There was an error deleting the attachment. Please check the logs for more information.',
         'There was an error. Please save all settings you are editing and check the logs for more information.',
         'This Activity cannot be deleted because it is the Start Activity.',
@@ -9930,15 +10248,22 @@ Thanks for your help!
         'Tu',
         'Tue',
         'Tuesday',
+        'Type',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.',
         'Unknown',
         'Unlock setting.',
         'Update All Packages',
         'Update all packages',
         'Update manually',
+        'Upload failed.',
         'Upload information',
+        'Uploaded key',
         'Uploading...',
         'Use options below to narrow down for which tickets appointments will be automatically created.',
+        'User sync',
+        'Valid from',
+        'Valid until',
+        'Verifying...',
         'WARNING: When you change the name of the group \'admin\', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement.',
         'Warning',
         'We',
@@ -9955,12 +10280,14 @@ Thanks for your help!
         'activate to remove the sort',
         'and %s more...',
         'day',
+        'expires',
         'month',
         'more',
         'no',
         'none',
         'or',
         'sorting is disabled',
+        'used by %s configuration(s)',
         'week',
         'yes',
     ];

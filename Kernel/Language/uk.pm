@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%m/%d/%Y';
     $Self->{DateInputFormat}     = '%m/%d/%Y';
     $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
-    $Self->{Completeness}        = 0.416442687747036;
+    $Self->{Completeness}        = 0.431943592887799;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -269,6 +269,169 @@ sub Data {
         'Do you really want to delete this attachment?' => 'Ви насправді хочете вилучити це долучення?',
         'Attachment' => 'Прикріплення',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+        'Certificate/key is stored in VirtualFS.' => 'Сертифікат/ключ зберігається у VirtualFS.',
+        'No certificate/key set.' => 'Сертифікат/ключ не задано.',
+        'View certificate details' => 'Переглянути відомості про сертифікат',
+        'The selected certificate/key is not available. Please select or upload it again.' =>
+            'Вибраний сертифікат/ключ недоступний. Будь ласка, виберіть або вивантажте його знову.',
+        '- Select an existing certificate/key -' => '- Виберіть наявний сертифікат/ключ -',
+        'Paste key' => '',
+        'Paste certificate' => '',
+        'Generate' => '',
+        'Use certificate from metadata' => 'Використати сертифікат із метаданих',
+        'Extracts the signing certificate embedded in the Identity Provider metadata and stores it here, instead of uploading it separately.' =>
+            'Витягує сертифікат підпису, вбудований у метадані постачальника посвідчень, і зберігає його тут замість окремого вивантаження.',
+        'Paste the PEM text including the BEGIN and END lines.' => 'Вставте текст PEM разом із рядками BEGIN та END.',
+        'Common Name' => 'Загальне ім\'я',
+        'Key size' => 'Розмір ключа',
+        'Validity (days)' => 'Термін дії (днів)',
+        'Generate self-signed certificate' => 'Згенерувати самопідписаний сертифікат',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+        'Authentication Management' => 'Керування автентифікацією',
+        'Agent authentication' => 'Автентифікація агентів',
+        'Basic settings' => 'Основні параметри',
+        'Slot' => 'Слот',
+        'Determines which numbered AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Визначає, який нумерований слот AuthModule<N> займає ця конфігурація. Пропонуються лише вільні слоти.',
+        'SAML request settings' => 'Параметри SAML-запиту',
+        'Login button text' => 'Текст кнопки входу',
+        'Assertion consumer URL' => 'URL отримувача тверджень (ACS)',
+        'Automatically derived from this system\'s HTTP type, FQDN and script alias - not editable.' =>
+            'Автоматично формується з типу HTTP, FQDN і псевдоніма скрипту цієї системи - не редагується.',
+        'Znuny appends a ";IsSAMLLogin=1;Count=<N>;" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration\'s slot), so the value the Identity Provider actually receives is:' =>
+            'Під час формування вихідного SAML-запиту Znuny додає до цього URL суфікс «;IsSAMLLogin=1;Count=<N>;» (<N> - слот цієї конфігурації), тому постачальник посвідчень фактично отримує значення:',
+        'Copy to clipboard' => 'Копіювати в буфер обміну',
+        'Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honor the value from the request. If your IdP\'s field rejects semicolons, register the base URL instead.' =>
+            'Деякі постачальники посвідчень вимагають зареєструвати як ACS URL саме це значення. Інші приймають базовий URL, указаний вище, і враховують значення із запиту. Якщо поле у вашому IdP не приймає крапку з комою, зареєструйте натомість базовий URL.',
+        'Download SP metadata XML' => 'Завантажити XML метаданих SP',
+        'Issuer (SP entity ID)' => 'Видавець (ідентифікатор сутності SP)',
+        'Requested NameID format' => 'Запитуваний формат NameID',
+        'Unspecified' => 'Не вказано',
+        'Persistent' => 'Постійний',
+        'Transient' => 'Тимчасовий',
+        'Email address' => 'Email адреса',
+        'Sent as the NameIDPolicy Format in the outgoing request and published in the SP metadata. Change this only if your Identity Provider requires a specific format.' =>
+            'Надсилається як NameIDPolicy Format у вихідному запиті та публікується в метаданих SP. Змінюйте лише тоді, коли ваш постачальник посвідчень вимагає певного формату.',
+        'Login attribute' => '',
+        'Please enter attribute names separated by commas.' => '',
+        'Optional. By default the NameID is the login. Enter one or more SAML attribute names (Name or FriendlyName), separated by commas, to take the login from the first of these attributes the assertion contains instead, e.g. if the Identity Provider sends a persistent NameID. The attribute must have exactly one value, otherwise the login fails. Changing this changes the login of existing users.' =>
+            '',
+        'Load metadata from URL' => 'Завантажити метадані з URL',
+        'Switch off to paste the metadata XML instead. Switching clears the entered URL or XML and the SSL options.' =>
+            'Вимкніть, щоб натомість вставити XML метаданих. Перемикання очищає введений URL або XML і параметри SSL.',
+        'Please select a metadata source.' => 'Будь ласка, виберіть джерело метаданих.',
+        'Metadata URL' => 'URL метаданих',
+        'Verify' => 'Перевірити',
+        'Metadata XML' => 'XML метаданих',
+        'Use custom SSL options for metadata URL fetch' => 'Використовувати власні параметри SSL для завантаження метаданих за URL',
+        'SSL CA file' => 'Файл CA для SSL',
+        'SSL CA path' => 'Шлях до CA для SSL',
+        'Verify hostname' => 'Перевіряти ім\'я хоста',
+        'Certificates and keys' => 'Сертифікати та ключі',
+        'SP signing key (used to sign outgoing requests)' => 'Ключ підпису SP (для підписання вихідних запитів)',
+        'SP signing certificate (matches the key above)' => 'Сертифікат підпису SP (відповідає ключу вище)',
+        'Required for the SP metadata\'s KeyDescriptor to be published. "Generate" above already produces this together with the key - only needed as a separate step if you uploaded your own key.' =>
+            'Потрібен для публікації KeyDescriptor у метаданих SP. Кнопка «Згенерувати» вище вже створює його разом із ключем - окремий крок потрібен лише тоді, коли ви вивантажили власний ключ.',
+        'Signing algorithm' => 'Алгоритм підпису',
+        'SHA-256 (default)' => 'SHA-256 (за замовчуванням)',
+        'SHA-384' => 'SHA-384',
+        'SHA-512' => 'SHA-512',
+        'SHA-1 (legacy, not recommended)' => 'SHA-1 (застарілий, не рекомендується)',
+        'Used to sign the outgoing request when a signing key is set above. Only change this if your Identity Provider requires a specific algorithm.' =>
+            'Використовується для підписання вихідного запиту, якщо вище задано ключ підпису. Змінюйте лише тоді, коли ваш постачальник посвідчень вимагає певного алгоритму.',
+        'Decrypt encrypted assertions' => 'Розшифровувати зашифровані твердження',
+        'Uses the SP signing key above to decrypt SAML assertions the Identity Provider encrypts. Has no effect on responses that aren\'t encrypted, so it\'s safe to leave enabled. Requires a signing key above.' =>
+            'Використовує ключ підпису SP, указаний вище, для розшифрування SAML-тверджень, які шифрує постачальник посвідчень. Не впливає на незашифровані відповіді, тому параметр можна безпечно залишити увімкненим. Потребує ключа підпису, указаного вище.',
+        'Identity provider CA certificate' => 'Сертифікат CA постачальника посвідчень',
+        'Required for SAML login to work. Without it, Net::SAML2 cannot verify the Identity Provider\'s response signature and authentication will fail.' =>
+            'Потрібен для роботи входу через SAML. Без нього Net::SAML2 не зможе перевірити підпис відповіді постачальника посвідчень, і автентифікація не вдасться.',
+        'Attribute, group and role sync' => 'Синхронізація атрибутів, груп і ролей',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+        'Customer authentication' => 'Автентифікація клієнтів',
+        'Determines which numbered Customer::AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Визначає, який нумерований слот Customer::AuthModule<N> займає ця конфігурація. Пропонуються лише вільні слоти.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+        'SAML wizard' => 'Майстер SAML',
+        'Add agent SAML authentication' => 'Додати SAML-автентифікацію агентів',
+        'Add customer SAML authentication' => 'Додати SAML-автентифікацію клієнтів',
+        'Deploy configuration' => 'Розгорнути конфігурацію',
+        'Deployment failed' => '',
+        'Fix the configurations below and deploy again. Or set a configuration to invalid: its login stops working and the other configurations are deployed.' =>
+            '',
+        'Problem' => '',
+        'Edit' => 'Редагувати',
+        'Set to invalid and deploy the rest' => '',
+        'Sync' => 'Синхронізація',
+        'Status' => 'Статус',
+        'Metadata' => 'Метадані',
+        'Slot %s' => 'Слот %s',
+        'Default' => 'Стандартна',
+        'Yes' => 'Так',
+        'No' => 'Ні',
+        'OK' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+        'Enable sync' => 'Увімкнути синхронізацію',
+        'Also registers Kernel::System::Auth::Sync::SAML for the same slot, to sync attributes/groups/roles from the SAML assertion on every login.' =>
+            'Також реєструє Kernel::System::Auth::Sync::SAML для того самого слоту, щоб під час кожного входу синхронізувати атрибути/групи/ролі із SAML-твердження.',
+        'The AuthSyncModule for this slot is already configured outside of AdminAuthentication - sync cannot be enabled for it.' =>
+            'AuthSyncModule для цього слоту вже налаштовано поза AdminAuthentication - синхронізацію для нього увімкнути неможливо.',
+        'User attribute sync map' => 'Зіставлення атрибутів користувача',
+        'Maps Znuny user attributes (left) to SAML assertion attribute names (right).' =>
+            'Зіставляє атрибути користувача Znuny (ліворуч) з іменами атрибутів SAML-твердження (праворуч).',
+        'Znuny attribute' => 'Атрибут Znuny',
+        'SAML attribute URI' => 'URI атрибута SAML',
+        'Initial groups for new users' => 'Початкові групи для нових користувачів',
+        'Groups (with rw permission) granted only when a brand-new agent is created via sync. Ctrl/Cmd-click to select multiple.' =>
+            'Групи (з правами rw), що надаються лише під час створення нового агента через синхронізацію. Для вибору кількох використовуйте Ctrl/Cmd+клік.',
+        'SAML attribute carrying group values' => 'Атрибут SAML зі значеннями груп',
+        'Group sync rules (by group value)' => 'Правила синхронізації груп (за значенням групи)',
+        'Maps a SAML group value to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Зіставляє значення групи SAML з групою Znuny та правами. Для вибору кількох прав використовуйте Ctrl/Cmd+клік.',
+        'SAML value' => 'Значення SAML',
+        'Group sync rules (by arbitrary attribute/value)' => 'Правила синхронізації груп (за довільним атрибутом/значенням)',
+        'Maps any SAML attribute name/value combination to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Зіставляє будь-яку комбінацію імені/значення атрибута SAML з групою Znuny та правами. Для вибору кількох прав використовуйте Ctrl/Cmd+клік.',
+        'SAML attribute' => 'Атрибут SAML',
+        'Role sync requires at least one active role. Create or activate a role under Admin → Roles.' =>
+            'Для синхронізації ролей потрібна принаймні одна активна роль. Створіть або активуйте роль у розділі Адміністрування → Ролі.',
+        'SAML attribute carrying role values' => 'Атрибут SAML зі значеннями ролей',
+        'Role sync rules (by role value)' => 'Правила синхронізації ролей (за значенням ролі)',
+        'Maps a SAML role value to one or more Znuny roles, active or inactive.' =>
+            'Зіставляє значення ролі SAML з роллю Znuny - активною або неактивною.',
+        'Active' => 'Активний',
+        'Role sync rules (by arbitrary attribute/value)' => 'Правила синхронізації ролей (за довільним атрибутом/значенням)',
+        'Maps any SAML attribute name/value combination to one or more Znuny roles, active or inactive.' =>
+            'Зіставляє будь-яку комбінацію імені/значення атрибута SAML з роллю Znuny - активною або неактивною.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+        'Setup steps' => 'Кроки налаштування',
+        'Setup wizard' => 'Майстер налаштування',
+        'SAML setup wizard' => 'Майстер налаштування SAML',
+        'Step' => 'Крок',
+        'What are you setting up?' => 'Що ви налаштовуєте?',
+        'Agent authentication - staff logging into the agent interface' =>
+            'Автентифікація агентів - вхід співробітників до інтерфейсу агента',
+        'Customer authentication - customers logging into the customer portal' =>
+            'Автентифікація клієнтів - вхід клієнтів на клієнтський портал',
+        'Login with SSO' => 'Вхід через SSO',
+        'User sync (optional)' => 'Синхронізація користувачів (необов\'язково)',
+        'Optionally sync user attributes, groups and roles from the SAML assertion on every login. This can also be set up later on the edit screen.' =>
+            'За потреби синхронізуйте атрибути, групи та ролі користувачів із SAML-твердження під час кожного входу. Це також можна налаштувати пізніше на екрані редагування.',
+        'Review' => 'Перевірка',
+        'Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective.' =>
+            'Натисніть «Зберегти», щоб створити цю конфігурацію SAML. Вона ще не буде активною - потім скористайтеся дією «Розгорнути» на сторінці огляду, щоб вона набула чинності.',
+        'If you skipped the Identity Provider CA certificate here, it is taken from the metadata when saving. Please check it on the edit screen afterwards.' =>
+            '',
+        'You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only).' =>
+            'Ви можете повернутися до будь-якого попереднього кроку, щоб внести зміни, або згодом скористатися повним екраном редагування для розширених параметрів, як-от синхронізація атрибутів/груп/ролей (лише для автентифікації агентів).',
+        'Back' => 'Назад',
+        'Next' => 'Далі',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
         'Add Auto Response' => 'Додати автовідповідь',
         'Filter for Auto Responses' => 'Фільтр для Авто-Відповідей',
@@ -326,9 +489,7 @@ sub Data {
             '',
         'Account Status' => '',
         'Account status for: %s' => '',
-        'Status' => 'Статус',
         'Account' => '',
-        'Edit' => 'Редагувати',
         'No accounts found.' => '',
         'Communication Log Details (%s)' => '',
         'Direction' => 'Напрямок',
@@ -447,7 +608,6 @@ sub Data {
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => 'Встановити активний стан для всіх',
-        'Active' => 'Активний',
         'Toggle active state for %s' => 'Встановити активний стан для %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
@@ -1584,14 +1744,11 @@ sub Data {
         'Download package' => 'Скачати пакет',
         'Rebuild package' => 'Перезібрати пакет',
         'Package Information' => '',
-        'Metadata' => 'Метадані',
         'Change Log' => 'Журнал змін',
         'Date' => 'Дата',
         'List of Files' => 'Список файлів',
         'Permission' => 'Права доступу',
         'Size' => 'Розмір',
-        'Problem' => '',
-        'OK' => '',
         'Download file from package!' => 'Завантажити файл із пакета!',
         'Required' => ' Потрібно',
         'Primary Key' => 'Первинний ключ',
@@ -2135,7 +2292,6 @@ sub Data {
         'System Email Addresses Management' => 'Керування системними адресами електронної пошти',
         'Add System Email Address' => 'Додати системну Email адресу',
         'Edit System Email Address' => 'Коригувати системну Email адресу',
-        'Email address' => 'Email адреса',
         'Display name' => 'Відображуване ім\'я',
         'This email address is already used as system email address.' => 'Ця поштова скринька вже використовується як системна.',
         'The display name and email address will be shown on mail you send.' =>
@@ -2350,8 +2506,6 @@ sub Data {
         'All-day' => 'Всі дні',
         'Repeat' => 'Повторити',
         'Notification' => 'Повідомлення',
-        'Yes' => 'Так',
-        'No' => 'Ні',
         'No calendars found. Please add a calendar first by using Manage Calendars page.' =>
             'Календарі не знайдені. Будь ласка, спочатку додайте календар за допомогою сторінки Управління календарями',
 
@@ -2876,10 +3030,11 @@ sub Data {
         'Archive Search' => 'Пошук в архіві',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'Зміст',
+        'e.g. Text or Te*t' => 'наприклад Text або Te*t',
         'Save filter settings as default' => 'Зберегти умови фільтра для показу за замовчуванням',
         'Event Type' => 'Тип події',
         'Save as default' => 'Зберегти як типовий',
-        'Back' => 'Назад',
         'Change Queue' => 'Перемінити черга',
         'Add Filter' => 'Додати фільтр',
         'Set' => 'Установити',
@@ -3127,7 +3282,6 @@ sub Data {
         'Phone' => 'Телефон',
         'Web site' => 'Веб-сторінка',
         'Community' => '',
-        'Next' => 'Далі',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => 'Налаштування Вихідної пошти',
@@ -3222,6 +3376,8 @@ sub Data {
         'Delete link' => '',
         'Delete Link' => '',
         'Object#' => 'Об\'єкт#',
+        'Remove active filters for this widget.' => 'Скасувати активні фільтри для цього віджету.',
+        'No results found.' => 'Результатів не знайдено.',
         'Add links' => 'Додати посилання',
         'Delete links' => 'Вилучити посилання',
 
@@ -3628,6 +3784,34 @@ sub Data {
             'Всі агенти з дозволом на читання для події (календар)',
         'All agents with write permission for the appointment (calendar)' =>
             'Всі агенти, які мають дозвіл на запис для подій (календар)',
+
+        # Perl Module: Kernel/Modules/AdminAuthentication.pm
+        'Perl module Net::SAML2 is not installed. SAML authentication cannot work until it is installed on the server.' =>
+            'Модуль Perl Net::SAML2 не встановлено. SAML-автентифікація не працюватиме, доки його не буде встановлено на сервері.',
+        'Authentication configuration is not in sync with the deployed configuration, but it can\'t be deployed: a valid configuration has a problem, see the status below. Fix it or set it to invalid, then deploy.' =>
+            '',
+        'Authentication configuration is not in sync with the deployed configuration, please deploy.' =>
+            'Конфігурація автентифікації не синхронізована з розгорнутою конфігурацією, будь ласка, розгорніть її.',
+        'No IdP CA certificate was uploaded and none could be taken from the IdP metadata.' =>
+            'Сертифікат CA IdP не вивантажено, і його не вдалося отримати з метаданих IdP.',
+        'Only invalid authentication configurations can be deleted. Please set the configuration to invalid first.' =>
+            'Видаляти можна лише недійсні конфігурації автентифікації. Будь ласка, спочатку зробіть конфігурацію недійсною.',
+        'Invalid or missing Role.' => 'Недійсна або відсутня роль.',
+        'No file was uploaded.' => 'Файл не вивантажено.',
+        'Error storing the uploaded file.' => 'Помилка збереження вивантаженого файлу.',
+        'Only the SP signing key can be generated.' => 'Згенерувати можна лише ключ підпису SP.',
+        'Error generating certificate. Please check the system log.' => 'Помилка генерування сертифіката. Будь ласка, перевірте системний журнал.',
+        'Error storing the generated key in VirtualFS.' => 'Помилка збереження згенерованого ключа у VirtualFS.',
+        'Error storing the generated certificate in VirtualFS.' => 'Помилка збереження згенерованого сертифіката у VirtualFS.',
+        'Could not find a certificate in the metadata. Please check the URL/XML and try again.' =>
+            'Не вдалося знайти сертифікат у метаданих. Будь ласка, перевірте URL/XML і спробуйте ще раз.',
+        'Error storing the certificate.' => 'Помилка збереження сертифіката.',
+        'Could not read the certificate from VirtualFS.' => 'Не вдалося прочитати сертифікат із VirtualFS.',
+        'The authentication configuration was not deployed. The previously deployed configuration is still active.' =>
+            'Конфігурацію автентифікації не розгорнуто. Попередньо розгорнута конфігурація залишається активною.',
+        'Please check the system log for details.' => 'Будь ласка, перегляньте подробиці в системному журналі.',
+        'Authentication configuration not found.' => '',
+        'Could not set the authentication configuration to invalid.' => '',
 
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
@@ -4662,6 +4846,8 @@ sub Data {
             '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Помилка: Будь ласка, переконайтеся в тому. що ваша база даних приймає пакунки розміром завбільшки %s МБ (в даний час приймаються пакунки за розміром до %s МБ). Будь ласка адаптуйте установку max_allowed_packet вашої бази даних, щоб уникнути помилок.',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            'Помилка: Будь ласка, встановіть значення для innodb_redo_log_capacity вашої бази даних, принаймні %s МБ (зараз: %s МБ, рекомендовано: %s МБ). Для отримання додаткової інформації, будь ласка, перегляньте %s.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Помилка: Будь ласка, встановіть значення для innodb_log_file_size вашої бази даних, принаймні %s МБ (зараз: %s МБ, рекомендовано: %s МБ). Для отримання додаткової інформації, будь ласка, перегляньте %s.',
         'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
@@ -4843,6 +5029,7 @@ sub Data {
         'Linked as' => 'Пов\'язаний, як',
         'Search Result' => 'Результат Пошуку',
         'Linked' => 'Пов\'язаний',
+        'filter' => 'Фільтр',
         'Bulk' => 'Масово',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -4971,7 +5158,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => '',
         'Unable to load %s!' => '',
-        'Content' => 'Зміст',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'Інформація про заявку',
@@ -5032,6 +5218,34 @@ sub Data {
         'Session invalid. Please log in again.' => 'Сесія недійсна. Будь ласка, увійдіть знову.',
         'Session has timed out. Please log in again.' => 'Сесія завершена. Будь ласка, увійдіть повторно.',
 
+        # Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+        'This is not an unencrypted private key in PEM format (-----BEGIN PRIVATE KEY-----).' =>
+            'Це не незашифрований закритий ключ у форматі PEM (-----BEGIN PRIVATE KEY-----).',
+        'This is not a certificate in PEM format (-----BEGIN CERTIFICATE-----).' =>
+            'Це не сертифікат у форматі PEM (-----BEGIN CERTIFICATE-----).',
+        'The private key could not be read. Only unencrypted private keys are supported.' =>
+            'Не вдалося прочитати закритий ключ. Підтримуються лише незашифровані закриті ключі.',
+        'The certificate could not be read.' => 'Не вдалося прочитати сертифікат.',
+        'Could not read the SP signing key.' => 'Не вдалося прочитати ключ підпису SP.',
+        'Could not read the IdP CA certificate.' => 'Не вдалося прочитати сертифікат CA IdP.',
+        'No IdP CA certificate is stored. It is taken from the IdP metadata on every deploy. Save the configuration to store it.' =>
+            '',
+        'Could not decrypt the SP signing key. Please check the configured encryption key.' =>
+            'Не вдалося розшифрувати ключ підпису SP. Будь ласка, перевірте налаштований ключ шифрування.',
+        'Net::SAML2 is not installed on the server, metadata cannot be verified.' =>
+            'Net::SAML2 не встановлено на сервері, метадані неможливо перевірити.',
+        'Metadata URL is empty.' => 'URL метаданих порожній.',
+        'Metadata XML is empty.' => 'XML метаданих порожній.',
+        'Could not parse the metadata. Please check the URL/XML and try again.' =>
+            'Не вдалося розібрати метадані. Будь ласка, перевірте URL/XML і спробуйте ще раз.',
+        'Perl module Crypt::OpenSSL::X509 is not installed, certificate details cannot be parsed.' =>
+            'Модуль Perl Crypt::OpenSSL::X509 не встановлено, відомості про сертифікат неможливо розібрати.',
+        'Could not parse the certificate.' => 'Не вдалося розібрати сертифікат.',
+
+        # Perl Module: Kernel/System/AuthenticationConfig.pm
+        'No authentication plugin is registered for this type.' => 'Для цього типу не зареєстровано плагін автентифікації.',
+        'Could not write the certificate files.' => 'Не вдалося записати файли сертифікатів.',
+
         # Perl Module: Kernel/System/AutoResponse.pm
         'Couldn\'t read auto response configuration file. Please make sure the file is valid.' =>
             '',
@@ -5075,9 +5289,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'до/після',
         'between' => 'між',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => 'наприклад Text або Te*t',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => 'Пропустити це поле.',
@@ -5248,6 +5459,9 @@ sub Data {
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'Ємність redo-журналу InnoDB',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'Налаштування innodb_redo_log_capacity має бути, принаймні, 256 МБ.',
         'InnoDB Log File Size' => 'Розмір файлу журналу InnoDB',
         'The setting innodb_log_file_size must be at least 256 MB.' => 'Налаштування innodb_log_file_size має бути, принаймні, 256 МБ.',
 
@@ -5552,7 +5766,6 @@ sub Data {
         'All Settings' => '',
 
         # Perl Module: Kernel/System/SysConfig/BaseValueType.pm
-        'Default' => 'Стандартна',
         'Value is not correct! Please, consider updating this field.' => '',
         'Value doesn\'t satisfy regex (%s).' => '',
 
@@ -6010,6 +6223,8 @@ sub Data {
             '',
         'Maximum Number of a calendar shown in a dropdown.' => '',
         'Define the start day of the week for the date picker.' => '',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Визначає, чи повинна дата очікування за замовчуванням на основі Ticket::Frontend::PendingDiffTime пропускати дні, які є святами або не мають робочих годин у цьому календарі.',
         'Adds the permanent vacation days.' => '',
         'Adds the one time vacation days.' => '',
         'Defines the hours and week days to count the working time.' => '',
@@ -6291,6 +6506,8 @@ sub Data {
             '',
         'Frontend module registration (disable company link if no company feature is used).' =>
             '',
+        'Registers the SAML 2.0 authentication plugin for AdminAuthentication.' =>
+            'Реєструє плагін автентифікації SAML 2.0 для AdminAuthentication.',
         'Frontend module registration for the customer interface.' => '',
         'Activates the available themes on the system. Value 1 means active, 0 means inactive.' =>
             '',
@@ -6713,6 +6930,8 @@ sub Data {
             '',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             '',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Динамічні поля, що відображаються в діалозі фільтра статті на екрані детального перегляду заявки в інтерфейсі агента. Підтримуються лише поля типу об\'єкта Повідомлення типів Текст, TextArea, Dropdown, Multiselect і Checkbox.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>
@@ -7919,6 +8138,8 @@ sub Data {
             '',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             '',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Увімкнути фільтри стовпців із множинним вибором для пов’язаних заявок у складному віджеті пов’язаних об’єктів (LinkObject::ViewMode = "complex"). Фільтри доступні в AgentTicketZoom і не показуються у спливному вікні AgentLinkObject.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8387,6 +8608,55 @@ sub Data {
             '',
         'Attachment was deleted successfully.' => '',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?' =>
+            'Зміна джерела метаданих видалить введений URL або XML метаданих і параметри SSL. Продовжити?',
+        'Change metadata source' => 'Змінити джерело метаданих',
+        'Uploaded key' => 'Вивантажений ключ',
+        'EXPIRED' => 'ПРОСТРОЧЕНО',
+        'expires' => 'минає',
+        'used by %s configuration(s)' => 'використовується в конфігураціях: %s',
+        'Could not read the certificate.' => 'Не вдалося прочитати сертифікат.',
+        'Certificate (PEM)' => 'Сертифікат (PEM)',
+        'Issuer' => 'Видавець',
+        'Valid from' => 'Дійсний з',
+        'Valid until' => 'Дійсний до',
+        'Serial' => 'Серійний номер',
+        'Fingerprint (SHA-256)' => 'Цифровий відбиток (SHA-256)',
+        'Show raw PEM' => 'Показати необроблений PEM',
+        'Certificate details' => 'Відомості про сертифікат',
+        'Metadata is valid.' => 'Метадані коректні.',
+        'Entity ID' => 'Ідентифікатор сутності',
+        'SSO URL' => 'URL SSO',
+        'Includes a signing certificate.' => 'Містить сертифікат підпису.',
+        'No signing certificate found in the metadata.' => 'У метаданих не знайдено сертифіката підпису.',
+        'Found %s attribute(s) in the metadata.' => 'Знайдено атрибутів у метаданих: %s.',
+        'Verifying...' => 'Перевірка...',
+        'Metadata verification failed.' => 'Не вдалося перевірити метадані.',
+        'Upload failed.' => 'Помилка вивантаження.',
+        'Please paste a certificate or key first.' => 'Будь ласка, спочатку вставте сертифікат або ключ.',
+        'Saving the pasted certificate/key failed.' => 'Не вдалося зберегти вставлений сертифікат/ключ.',
+        'Certificate generation failed.' => 'Не вдалося згенерувати сертифікат.',
+        'Please select a metadata source (URL or XML) first.' => 'Будь ласка, спочатку виберіть джерело метаданих (URL або XML).',
+        'Could not find a certificate in the metadata.' => 'Не вдалося знайти сертифікат у метаданих.',
+        'Copied to clipboard!' => '',
+        'Do you really want to delete this SAML configuration?' => 'Ви дійсно хочете видалити цю конфігурацію SAML?',
+        'Delete SAML configuration' => 'Вилучити конфігурацію SAML',
+        'There was an error deleting the SAML configuration.' => 'Під час видалення конфігурації SAML виникла помилка.',
+        'NameID (default)' => '',
+        '(pasted XML)' => '(вставлений XML)',
+        'Not configured yet' => 'Ще не налаштовано',
+        'Identity provider metadata' => 'Метадані постачальника посвідчень',
+        'SP signing key' => 'Ключ підпису SP',
+        'Configured' => 'Налаштовано',
+        'Not set' => 'Не задано',
+        'SP signing certificate' => 'Сертифікат підпису SP',
+        'Not set (will be taken from the metadata when saving)' => '',
+        'User sync' => 'Синхронізація користувачів',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)' =>
+            'Увімкнено (зіставлень атрибутів: %s, правил груп: %s, правил ролей: %s)',
+        'Please fill in all required fields before continuing.' => 'Перш ніж продовжити, заповніть усі обов\'язкові поля.',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.AutoResponse.js
         'Delete this %s' => '',
         'Deleting the %s and its data. This may take a while...' => '',
@@ -8593,9 +8863,6 @@ sub Data {
         'Please select attachments for download.' => '',
         'Show less' => '',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
-        'Copied to clipboard!' => '',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
         'First select a customer user, then select a customer ID to assign to this ticket.' =>
             '',
@@ -8613,7 +8880,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => 'Будь ласка, перевірте поля, що відмічені червоним, щодо коректного введення.',
         'month' => 'місяць',
-        'Remove active filters for this widget.' => 'Скасувати активні фільтри для цього віджету.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '',
@@ -8641,9 +8907,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Search.js
         'Please remove the following words from your search as they cannot be searched for:' =>
             'Будь ласка вилучіть наступні слова з вашого пошуку оскільки їх не можна знайти:',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.SharedSecretGenerator.js
-        'Generate' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
@@ -8705,6 +8968,7 @@ sub Data {
             '',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'Немає робочих годин',
         'Open date selection' => 'Відкрити вибір дати',
         'Invalid date (need a future date)!' => 'Неправильна дата (треба вказати дату у майбутньому)!',
         'Invalid date (need a past date)!' => 'Неправильна дата (треба вказати дату у минулому)!',
@@ -9196,6 +9460,7 @@ Thanks for your help!
         'Manage POP3 or IMAP accounts to fetch email from.' => 'Керування POP3 або IMAP обліковими записами для одержання поштових повідомлень.',
         'Manage S/MIME certificates for email encryption.' => '',
         'Manage System Configuration Deployments.' => '',
+        'Manage agent and customer authentication (e.g. SAML 2.0).' => 'Керування автентифікацією агентів і клієнтів (наприклад, SAML 2.0).',
         'Manage different calendars.' => 'Керувати різнимим календарями',
         'Manage existing sessions.' => 'Керування активними сеансами.',
         'Manage outbound email profiles.' => '',
@@ -9321,6 +9586,7 @@ Thanks for your help!
         'Running Process Tickets' => '',
         'Russian' => '',
         'S/MIME Certificates' => 'S/MIME-сертифікати',
+        'SAML' => 'SAML',
         'Schedule a maintenance period.' => '',
         'Screen after marking as seen' => '',
         'Screen after marking as unseen' => '',
@@ -9552,6 +9818,7 @@ Thanks for your help!
         '%s MB',
         '%s TB',
         '%s of %s',
+        '(pasted XML)',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9566,6 +9833,7 @@ Thanks for your help!
         'Add new entry',
         'Add to favourites',
         'Agent',
+        'Agent authentication',
         'All occurrences',
         'All-day',
         'An Error Occurred',
@@ -9588,6 +9856,7 @@ Thanks for your help!
         'Article filter',
         'As soon as you use this button or link, you will leave this screen and its current state will be saved automatically. Do you want to continue?',
         'Ascending sort applied, ',
+        'Assertion consumer URL',
         'Attachment was deleted successfully.',
         'Attachments',
         'Aug',
@@ -9598,6 +9867,11 @@ Thanks for your help!
         'Calendar',
         'Cancel',
         'Cannot proceed',
+        'Certificate (PEM)',
+        'Certificate details',
+        'Certificate generation failed.',
+        'Certificate/key is stored in VirtualFS.',
+        'Change metadata source',
         'Clear',
         'Clear all',
         'Clear all filters',
@@ -9610,27 +9884,34 @@ Thanks for your help!
         'Clone',
         'Clone Process',
         'Clone web service',
+        'Close',
         'Close preview',
         'Close this dialog',
         'Collapse',
         'Complex %s with %s arguments',
+        'Configured',
         'Confirm',
         'Copied to clipboard!',
         'Copy Ticket Number',
         'Copy Ticket Number + Title',
         'Copy ticket information',
+        'Could not find a certificate in the metadata.',
         'Could not load activities.',
         'Could not open popup window. Please disable any popup blockers for this application.',
+        'Could not read the certificate.',
         'Current selection',
         'Currently not possible',
+        'Customer authentication',
         'Customer interface does not support articles not visible for customers.',
         'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',
         'December',
+        'Decrypt encrypted assertions',
         'Delete',
         'Delete Entity',
+        'Delete SAML configuration',
         'Delete conditions',
         'Delete draft',
         'Delete error handling module',
@@ -9664,10 +9945,12 @@ Thanks for your help!
         'Deployment successful. You\'re being redirected...',
         'Descending sort applied, ',
         'Description',
+        'Disabled',
         'Dismiss',
         'Do not show this warning again.',
         'Do you really want to continue?',
         'Do you really want to delete "%s"?',
+        'Do you really want to delete this SAML configuration?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
         'Do you really want to delete this key?',
@@ -9684,11 +9967,14 @@ Thanks for your help!
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
+        'EXPIRED',
         'Edit Field Details',
         'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)',
         'End date',
+        'Entity ID',
         'Error',
         'Error during AJAX communication',
         'Error during AJAX communication. Status: %s, Error: %s',
@@ -9702,8 +9988,10 @@ Thanks for your help!
         'February',
         'Filter',
         'Filters',
+        'Fingerprint (SHA-256)',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
+        'Found %s attribute(s) in the metadata.',
         'Fr',
         'Fri',
         'Friday',
@@ -9713,13 +10001,18 @@ Thanks for your help!
         'Grouped',
         'Help',
         'Hide EntityIDs',
+        'Identity provider CA certificate',
+        'Identity provider metadata',
         'If you now leave this page, all open popup windows will be closed, too!',
         'Import web service',
+        'Includes a signing certificate.',
         'Information about the Znuny Daemon',
         'Insert selected customer user(s) into the "%s:" field.',
         'Invalid date (need a future date)!',
         'Invalid date (need a past date)!',
         'Invalid date!',
+        'Issuer',
+        'Issuer (SP entity ID)',
         'It is going to be deleted from the field, please try again.',
         'It is not possible to add a new event trigger because the event is not set.',
         'It is not possible to set this entry to invalid. All affected configuration settings have to be changed beforehand.',
@@ -9737,6 +10030,8 @@ Thanks for your help!
         'Loading, please wait...',
         'Loading...',
         'Location',
+        'Login attribute',
+        'Login button text',
         'Mail check successful.',
         'Mapping for Key',
         'Mapping for Key %s',
@@ -9744,15 +10039,20 @@ Thanks for your help!
         'March',
         'May',
         'May_long',
+        'Metadata is valid.',
+        'Metadata verification failed.',
         'Mo',
         'Mon',
         'Monday',
         'Month',
         'Name',
+        'NameID (default)',
         'Namespace %s could not be initialized, because %s could not be found.',
         'Next',
+        'No',
         'No Data Available.',
         'No TransitionActions assigned.',
+        'No certificate/key set.',
         'No data found.',
         'No dialogs assigned yet. Just pick an activity dialog from the list on the left and drag it here.',
         'No matches found.',
@@ -9760,9 +10060,14 @@ Thanks for your help!
         'No response from get package upgrade result.',
         'No response from get package upgrade run status.',
         'No response from package upgrade all.',
+        'No signing certificate found in the metadata.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
+        'Not configured yet',
+        'Not set',
+        'Not set (will be taken from the metadata when saving)',
         'Notice',
         'Notification',
         'Nov',
@@ -9779,10 +10084,13 @@ Thanks for your help!
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
+        'Please fill in all required fields before continuing.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
+        'Please paste a certificate or key first.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select a metadata source (URL or XML) first.',
         'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
@@ -9816,11 +10124,15 @@ Thanks for your help!
         'Restore web service configuration',
         'Rule',
         'Running',
+        'SP signing certificate',
+        'SP signing key',
+        'SSO URL',
         'Sa',
         'Sat',
         'Saturday',
         'Save',
         'Save and update automatically',
+        'Saving the pasted certificate/key failed.',
         'Scale preview content',
         'Search',
         'Search attributes',
@@ -9833,6 +10145,7 @@ Thanks for your help!
         'Select files or drop them here',
         'Sep',
         'September',
+        'Serial',
         'Setting a template will overwrite any text or attachment.',
         'Settings',
         'Show',
@@ -9841,7 +10154,9 @@ Thanks for your help!
         'Show less',
         'Show more',
         'Show or hide the content.',
+        'Show raw PEM',
         'Slide the navigation bar',
+        'Slot',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',
         'Sorry, but you can\'t disable all methods for this notification.',
         'Sorry, the only existing condition can\'t be removed.',
@@ -9856,12 +10171,14 @@ Thanks for your help!
         'Status',
         'Stream',
         'Su',
+        'Subject',
         'Successful',
         'Sun',
         'Sunday',
         'Support Bundle',
         'Switch to desktop mode',
         'Switch to mobile mode',
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?',
         'Team',
         'Th',
         'The activities could not be marked as seen.',
@@ -9883,6 +10200,7 @@ Thanks for your help!
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',
+        'There was an error deleting the SAML configuration.',
         'There was an error deleting the attachment. Please check the logs for more information.',
         'There was an error. Please save all settings you are editing and check the logs for more information.',
         'This Activity cannot be deleted because it is the Start Activity.',
@@ -9914,15 +10232,22 @@ Thanks for your help!
         'Tu',
         'Tue',
         'Tuesday',
+        'Type',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.',
         'Unknown',
         'Unlock setting.',
         'Update All Packages',
         'Update all packages',
         'Update manually',
+        'Upload failed.',
         'Upload information',
+        'Uploaded key',
         'Uploading...',
         'Use options below to narrow down for which tickets appointments will be automatically created.',
+        'User sync',
+        'Valid from',
+        'Valid until',
+        'Verifying...',
         'WARNING: When you change the name of the group \'admin\', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement.',
         'Warning',
         'We',
@@ -9939,12 +10264,14 @@ Thanks for your help!
         'activate to remove the sort',
         'and %s more...',
         'day',
+        'expires',
         'month',
         'more',
         'no',
         'none',
         'or',
         'sorting is disabled',
+        'used by %s configuration(s)',
         'week',
         'yes',
     ];

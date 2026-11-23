@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.136442687747036;
+    $Self->{Completeness}        = 0.160484365419988;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -270,6 +270,169 @@ sub Data {
         'Do you really want to delete this attachment?' => '',
         'Attachment' => 'Συνημμένο',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+        'Certificate/key is stored in VirtualFS.' => 'Το πιστοποιητικό/κλειδί είναι αποθηκευμένο στο VirtualFS.',
+        'No certificate/key set.' => 'Δεν έχει οριστεί πιστοποιητικό/κλειδί.',
+        'View certificate details' => 'Προβολή λεπτομερειών πιστοποιητικού',
+        'The selected certificate/key is not available. Please select or upload it again.' =>
+            'Το επιλεγμένο πιστοποιητικό/κλειδί δεν είναι διαθέσιμο. Επιλέξτε το ή μεταφορτώστε το ξανά.',
+        '- Select an existing certificate/key -' => '- Επιλέξτε υπάρχον πιστοποιητικό/κλειδί -',
+        'Paste key' => '',
+        'Paste certificate' => '',
+        'Generate' => '',
+        'Use certificate from metadata' => 'Χρήση πιστοποιητικού από τα μεταδεδομένα',
+        'Extracts the signing certificate embedded in the Identity Provider metadata and stores it here, instead of uploading it separately.' =>
+            'Εξάγει το πιστοποιητικό υπογραφής που είναι ενσωματωμένο στα μεταδεδομένα του παρόχου ταυτότητας και το αποθηκεύει εδώ, αντί να το μεταφορτώσετε ξεχωριστά.',
+        'Paste the PEM text including the BEGIN and END lines.' => 'Επικολλήστε το κείμενο PEM, συμπεριλαμβανομένων των γραμμών BEGIN και END.',
+        'Common Name' => 'Κοινό όνομα',
+        'Key size' => 'Μέγεθος κλειδιού',
+        'Validity (days)' => 'Εγκυρότητα (ημέρες)',
+        'Generate self-signed certificate' => 'Δημιουργία αυτοϋπογεγραμμένου πιστοποιητικού',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+        'Authentication Management' => 'Διαχείριση ελέγχου ταυτότητας',
+        'Agent authentication' => 'Έλεγχος ταυτότητας συνεργάτη',
+        'Basic settings' => 'Βασικές ρυθμίσεις',
+        'Slot' => 'Θέση',
+        'Determines which numbered AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Καθορίζει ποια αριθμημένη θέση AuthModule<N> καταλαμβάνει αυτή η διαμόρφωση. Προσφέρονται μόνο οι αχρησιμοποίητες θέσεις.',
+        'SAML request settings' => 'Ρυθμίσεις αιτήματος SAML',
+        'Login button text' => 'Κείμενο κουμπιού σύνδεσης',
+        'Assertion consumer URL' => 'URL καταναλωτή βεβαίωσης',
+        'Automatically derived from this system\'s HTTP type, FQDN and script alias - not editable.' =>
+            'Προκύπτει αυτόματα από τον τύπο HTTP, το FQDN και το ψευδώνυμο δέσμης αυτού του συστήματος - μη επεξεργάσιμο.',
+        'Znuny appends a ";IsSAMLLogin=1;Count=<N>;" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration\'s slot), so the value the Identity Provider actually receives is:' =>
+            'Το Znuny προσαρτά το επίθημα ";IsSAMLLogin=1;Count=<N>;" σε αυτό το URL κατά τη δημιουργία του πραγματικού εξερχόμενου αιτήματος SAML (το <N> είναι η θέση αυτής της διαμόρφωσης), οπότε η τιμή που λαμβάνει πράγματι ο πάροχος ταυτότητας είναι:',
+        'Copy to clipboard' => 'Αντιγραφή στο πρόχειρο',
+        'Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honor the value from the request. If your IdP\'s field rejects semicolons, register the base URL instead.' =>
+            'Ορισμένοι πάροχοι ταυτότητας απαιτούν να καταχωριστεί αυτή ακριβώς η τιμή ως το ACS URL. Άλλοι δέχονται το βασικό URL παραπάνω και τιμούν την τιμή του αιτήματος. Αν το πεδίο του IdP απορρίπτει τα ερωτηματικά, καταχωρίστε το βασικό URL.',
+        'Download SP metadata XML' => 'Λήψη XML μεταδεδομένων SP',
+        'Issuer (SP entity ID)' => 'Εκδότης (αναγνωριστικό οντότητας SP)',
+        'Requested NameID format' => 'Ζητούμενη μορφή NameID',
+        'Unspecified' => 'Απροσδιόριστο',
+        'Persistent' => 'Μόνιμο',
+        'Transient' => 'Παροδικό',
+        'Email address' => '',
+        'Sent as the NameIDPolicy Format in the outgoing request and published in the SP metadata. Change this only if your Identity Provider requires a specific format.' =>
+            'Στέλνεται ως NameIDPolicy Format στο εξερχόμενο αίτημα και δημοσιεύεται στα μεταδεδομένα SP. Αλλάξτε το μόνο αν ο πάροχος ταυτότητας απαιτεί συγκεκριμένη μορφή.',
+        'Login attribute' => '',
+        'Please enter attribute names separated by commas.' => '',
+        'Optional. By default the NameID is the login. Enter one or more SAML attribute names (Name or FriendlyName), separated by commas, to take the login from the first of these attributes the assertion contains instead, e.g. if the Identity Provider sends a persistent NameID. The attribute must have exactly one value, otherwise the login fails. Changing this changes the login of existing users.' =>
+            '',
+        'Load metadata from URL' => 'Φόρτωση μεταδεδομένων από URL',
+        'Switch off to paste the metadata XML instead. Switching clears the entered URL or XML and the SSL options.' =>
+            'Απενεργοποιήστε το για να επικολλήσετε αντ\' αυτού το XML μεταδεδομένων. Η εναλλαγή διαγράφει το URL ή το XML που εισαγάγατε και τις επιλογές SSL.',
+        'Please select a metadata source.' => 'Επιλέξτε πηγή μεταδεδομένων.',
+        'Metadata URL' => 'URL μεταδεδομένων',
+        'Verify' => 'Επαλήθευση',
+        'Metadata XML' => 'XML μεταδεδομένων',
+        'Use custom SSL options for metadata URL fetch' => 'Χρήση προσαρμοσμένων επιλογών SSL για την ανάκτηση του URL μεταδεδομένων',
+        'SSL CA file' => 'Αρχείο CA SSL',
+        'SSL CA path' => 'Διαδρομή CA SSL',
+        'Verify hostname' => 'Επαλήθευση ονόματος κεντρικού υπολογιστή',
+        'Certificates and keys' => 'Πιστοποιητικά και κλειδιά',
+        'SP signing key (used to sign outgoing requests)' => 'Κλειδί υπογραφής SP (χρησιμοποιείται για την υπογραφή εξερχόμενων αιτημάτων)',
+        'SP signing certificate (matches the key above)' => 'Πιστοποιητικό υπογραφής SP (ταιριάζει με το παραπάνω κλειδί)',
+        'Required for the SP metadata\'s KeyDescriptor to be published. "Generate" above already produces this together with the key - only needed as a separate step if you uploaded your own key.' =>
+            'Απαιτείται για τη δημοσίευση του KeyDescriptor στα μεταδεδομένα SP. Η "Δημιουργία" παραπάνω το παράγει ήδη μαζί με το κλειδί - χρειάζεται ως ξεχωριστό βήμα μόνο αν μεταφορτώσατε δικό σας κλειδί.',
+        'Signing algorithm' => 'Αλγόριθμος υπογραφής',
+        'SHA-256 (default)' => 'SHA-256 (προεπιλογή)',
+        'SHA-384' => 'SHA-384',
+        'SHA-512' => 'SHA-512',
+        'SHA-1 (legacy, not recommended)' => 'SHA-1 (παλαιό, δεν συνιστάται)',
+        'Used to sign the outgoing request when a signing key is set above. Only change this if your Identity Provider requires a specific algorithm.' =>
+            'Χρησιμοποιείται για την υπογραφή του εξερχόμενου αιτήματος όταν έχει οριστεί κλειδί υπογραφής παραπάνω. Αλλάξτε το μόνο αν ο πάροχος ταυτότητας απαιτεί συγκεκριμένο αλγόριθμο.',
+        'Decrypt encrypted assertions' => 'Αποκρυπτογράφηση κρυπτογραφημένων βεβαιώσεων',
+        'Uses the SP signing key above to decrypt SAML assertions the Identity Provider encrypts. Has no effect on responses that aren\'t encrypted, so it\'s safe to leave enabled. Requires a signing key above.' =>
+            'Χρησιμοποιεί το παραπάνω κλειδί υπογραφής SP για την αποκρυπτογράφηση των βεβαιώσεων SAML που κρυπτογραφεί ο πάροχος ταυτότητας. Δεν επηρεάζει αποκρίσεις που δεν είναι κρυπτογραφημένες, οπότε είναι ασφαλές να μείνει ενεργοποιημένο. Απαιτεί κλειδί υπογραφής παραπάνω.',
+        'Identity provider CA certificate' => 'Πιστοποιητικό CA παρόχου ταυτότητας',
+        'Required for SAML login to work. Without it, Net::SAML2 cannot verify the Identity Provider\'s response signature and authentication will fail.' =>
+            'Απαιτείται για να λειτουργεί η σύνδεση SAML. Χωρίς αυτό, το Net::SAML2 δεν μπορεί να επαληθεύσει την υπογραφή απόκρισης του παρόχου ταυτότητας και ο έλεγχος ταυτότητας θα αποτύχει.',
+        'Attribute, group and role sync' => 'Συγχρονισμός χαρακτηριστικών, ομάδων και ρόλων',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+        'Customer authentication' => 'Έλεγχος ταυτότητας πελάτη',
+        'Determines which numbered Customer::AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Καθορίζει ποια αριθμημένη θέση Customer::AuthModule<N> καταλαμβάνει αυτή η διαμόρφωση. Προσφέρονται μόνο οι αχρησιμοποίητες θέσεις.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+        'SAML wizard' => 'Οδηγός SAML',
+        'Add agent SAML authentication' => 'Προσθήκη ελέγχου ταυτότητας SAML συνεργάτη',
+        'Add customer SAML authentication' => 'Προσθήκη ελέγχου ταυτότητας SAML πελάτη',
+        'Deploy configuration' => 'Ανάπτυξη διαμόρφωσης',
+        'Deployment failed' => '',
+        'Fix the configurations below and deploy again. Or set a configuration to invalid: its login stops working and the other configurations are deployed.' =>
+            '',
+        'Problem' => 'Πρόβλημα',
+        'Edit' => 'Αλλαγή',
+        'Set to invalid and deploy the rest' => '',
+        'Sync' => 'Συγχρονισμός',
+        'Status' => 'Κατάσταση',
+        'Metadata' => '',
+        'Slot %s' => 'Θέση %s',
+        'Default' => '',
+        'Yes' => 'Ναι',
+        'No' => 'Όχι',
+        'OK' => 'Εντάξει',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+        'Enable sync' => 'Ενεργοποίηση συγχρονισμού',
+        'Also registers Kernel::System::Auth::Sync::SAML for the same slot, to sync attributes/groups/roles from the SAML assertion on every login.' =>
+            'Καταχωρίζει επίσης το Kernel::System::Auth::Sync::SAML για την ίδια θέση, ώστε να συγχρονίζονται χαρακτηριστικά/ομάδες/ρόλοι από τη βεβαίωση SAML σε κάθε σύνδεση.',
+        'The AuthSyncModule for this slot is already configured outside of AdminAuthentication - sync cannot be enabled for it.' =>
+            'Το AuthSyncModule για αυτή τη θέση είναι ήδη ρυθμισμένο εκτός του AdminAuthentication - ο συγχρονισμός δεν μπορεί να ενεργοποιηθεί για αυτό.',
+        'User attribute sync map' => 'Χάρτης συγχρονισμού χαρακτηριστικών χρήστη',
+        'Maps Znuny user attributes (left) to SAML assertion attribute names (right).' =>
+            'Αντιστοιχίζει χαρακτηριστικά χρήστη Znuny (αριστερά) σε ονόματα χαρακτηριστικών βεβαίωσης SAML (δεξιά).',
+        'Znuny attribute' => 'Χαρακτηριστικό Znuny',
+        'SAML attribute URI' => 'URI χαρακτηριστικού SAML',
+        'Initial groups for new users' => 'Αρχικές ομάδες για νέους χρήστες',
+        'Groups (with rw permission) granted only when a brand-new agent is created via sync. Ctrl/Cmd-click to select multiple.' =>
+            'Ομάδες (με δικαίωμα ανάγνωσης και εγγραφής) που χορηγούνται μόνο όταν δημιουργείται νέος συνεργάτης μέσω συγχρονισμού. Ctrl/Cmd-κλικ για πολλαπλή επιλογή.',
+        'SAML attribute carrying group values' => 'Χαρακτηριστικό SAML που φέρει τιμές ομάδας',
+        'Group sync rules (by group value)' => 'Κανόνες συγχρονισμού ομάδων (κατά τιμή ομάδας)',
+        'Maps a SAML group value to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Αντιστοιχίζει μια τιμή ομάδας SAML σε ομάδα Znuny και δικαιώματα. Ctrl/Cmd-κλικ για επιλογή πολλών δικαιωμάτων.',
+        'SAML value' => 'Τιμή SAML',
+        'Group sync rules (by arbitrary attribute/value)' => 'Κανόνες συγχρονισμού ομάδων (κατά αυθαίρετο χαρακτηριστικό/τιμή)',
+        'Maps any SAML attribute name/value combination to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Αντιστοιχίζει οποιονδήποτε συνδυασμό ονόματος/τιμής χαρακτηριστικού SAML σε ομάδα Znuny και δικαιώματα. Ctrl/Cmd-κλικ για επιλογή πολλών δικαιωμάτων.',
+        'SAML attribute' => 'Χαρακτηριστικό SAML',
+        'Role sync requires at least one active role. Create or activate a role under Admin → Roles.' =>
+            'Ο συγχρονισμός ρόλων απαιτεί τουλάχιστον έναν ενεργό ρόλο. Δημιουργήστε ή ενεργοποιήστε έναν ρόλο στην περιοχή Διαχειριστής → Ρόλοι.',
+        'SAML attribute carrying role values' => 'Χαρακτηριστικό SAML που φέρει τιμές ρόλου',
+        'Role sync rules (by role value)' => 'Κανόνες συγχρονισμού ρόλων (κατά τιμή ρόλου)',
+        'Maps a SAML role value to one or more Znuny roles, active or inactive.' =>
+            'Αντιστοιχίζει μια τιμή ρόλου SAML σε ρόλο Znuny, ενεργό ή ανενεργό.',
+        'Active' => 'Ενεργό',
+        'Role sync rules (by arbitrary attribute/value)' => 'Κανόνες συγχρονισμού ρόλων (κατά αυθαίρετο χαρακτηριστικό/τιμή)',
+        'Maps any SAML attribute name/value combination to one or more Znuny roles, active or inactive.' =>
+            'Αντιστοιχίζει οποιονδήποτε συνδυασμό ονόματος/τιμής χαρακτηριστικού SAML σε ρόλο Znuny, ενεργό ή ανενεργό.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+        'Setup steps' => 'Βήματα ρύθμισης',
+        'Setup wizard' => 'Οδηγός ρύθμισης',
+        'SAML setup wizard' => 'Οδηγός ρύθμισης SAML',
+        'Step' => 'Βήμα',
+        'What are you setting up?' => 'Τι ρυθμίζετε?',
+        'Agent authentication - staff logging into the agent interface' =>
+            'Έλεγχος ταυτότητας συνεργάτη - προσωπικό που συνδέεται στη διεπαφή συνεργάτη',
+        'Customer authentication - customers logging into the customer portal' =>
+            'Έλεγχος ταυτότητας πελάτη - πελάτες που συνδέονται στην πύλη πελατών',
+        'Login with SSO' => 'Σύνδεση με SSO',
+        'User sync (optional)' => 'Συγχρονισμός χρήστη (προαιρετικό)',
+        'Optionally sync user attributes, groups and roles from the SAML assertion on every login. This can also be set up later on the edit screen.' =>
+            'Προαιρετικά, συγχρονίστε χαρακτηριστικά χρήστη, ομάδες και ρόλους από τη βεβαίωση SAML σε κάθε σύνδεση. Αυτό μπορεί να ρυθμιστεί και αργότερα στην οθόνη επεξεργασίας.',
+        'Review' => 'Ανασκόπηση',
+        'Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective.' =>
+            'Κάντε κλικ στην Αποθήκευση για να δημιουργήσετε αυτή τη διαμόρφωση SAML. Δεν θα είναι ακόμη ενεργή - χρησιμοποιήστε στη συνέχεια την ενέργεια Ανάπτυξη στη σελίδα επισκόπησης για να τεθεί σε ισχύ.',
+        'If you skipped the Identity Provider CA certificate here, it is taken from the metadata when saving. Please check it on the edit screen afterwards.' =>
+            '',
+        'You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only).' =>
+            'Μπορείτε να επιστρέψετε σε οποιοδήποτε προηγούμενο βήμα για αλλαγές ή να χρησιμοποιήσετε στη συνέχεια την πλήρη οθόνη επεξεργασίας για προχωρημένες επιλογές, όπως συγχρονισμό χαρακτηριστικών/ομάδων/ρόλων (μόνο έλεγχος ταυτότητας συνεργάτη).',
+        'Back' => 'Προηγούμενο',
+        'Next' => 'Επόμενο',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
         'Add Auto Response' => 'Προσθήκη Αυτόματης Απάντησης',
         'Filter for Auto Responses' => '',
@@ -327,9 +490,7 @@ sub Data {
             '',
         'Account Status' => '',
         'Account status for: %s' => '',
-        'Status' => 'Κατάσταση',
         'Account' => '',
-        'Edit' => 'Αλλαγή',
         'No accounts found.' => '',
         'Communication Log Details (%s)' => '',
         'Direction' => 'Κατεύθυνση',
@@ -448,7 +609,6 @@ sub Data {
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => '',
-        'Active' => 'Ενεργό',
         'Toggle active state for %s' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
@@ -1587,14 +1747,11 @@ sub Data {
         'Download package' => '',
         'Rebuild package' => '',
         'Package Information' => '',
-        'Metadata' => '',
         'Change Log' => 'Αρχειο Καταγραφών',
         'Date' => 'Ημερομηνία',
         'List of Files' => 'Καταλογος Αρχείων',
         'Permission' => 'Δικαίωμα',
         'Size' => 'Μέγεθος',
-        'Problem' => 'Πρόβλημα',
-        'OK' => 'Εντάξει',
         'Download file from package!' => 'Κατέβασμα αρχείου απο πακέτο !',
         'Required' => 'Απαιτείται',
         'Primary Key' => '',
@@ -2140,7 +2297,6 @@ sub Data {
         'System Email Addresses Management' => 'Email συστηματος',
         'Add System Email Address' => '',
         'Edit System Email Address' => '',
-        'Email address' => '',
         'Display name' => '',
         'This email address is already used as system email address.' => '',
         'The display name and email address will be shown on mail you send.' =>
@@ -2355,8 +2511,6 @@ sub Data {
         'All-day' => '',
         'Repeat' => '',
         'Notification' => 'Ειδοποιήσεις',
-        'Yes' => 'Ναι',
-        'No' => 'Όχι',
         'No calendars found. Please add a calendar first by using Manage Calendars page.' =>
             '',
 
@@ -2881,10 +3035,11 @@ sub Data {
         'Archive Search' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'Περιεχόμενο',
+        'e.g. Text or Te*t' => '',
         'Save filter settings as default' => '',
         'Event Type' => '',
         'Save as default' => '',
-        'Back' => 'Προηγούμενο',
         'Change Queue' => 'Αλλαγή Ουράς',
         'Add Filter' => 'Προσθηκη Φιλτρου',
         'Set' => 'Σετ',
@@ -3132,7 +3287,6 @@ sub Data {
         'Phone' => 'Τηλέφωνο',
         'Web site' => '',
         'Community' => '',
-        'Next' => 'Επόμενο',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => '',
@@ -3227,6 +3381,8 @@ sub Data {
         'Delete link' => '',
         'Delete Link' => '',
         'Object#' => '',
+        'Remove active filters for this widget.' => '',
+        'No results found.' => 'Δεν βρέθηκαν αποτελέσματα.',
         'Add links' => '',
         'Delete links' => '',
 
@@ -3633,6 +3789,34 @@ sub Data {
             '',
         'All agents with write permission for the appointment (calendar)' =>
             '',
+
+        # Perl Module: Kernel/Modules/AdminAuthentication.pm
+        'Perl module Net::SAML2 is not installed. SAML authentication cannot work until it is installed on the server.' =>
+            'Η μονάδα Perl Net::SAML2 δεν είναι εγκατεστημένη. Ο έλεγχος ταυτότητας SAML δεν μπορεί να λειτουργήσει μέχρι να εγκατασταθεί στον διακομιστή.',
+        'Authentication configuration is not in sync with the deployed configuration, but it can\'t be deployed: a valid configuration has a problem, see the status below. Fix it or set it to invalid, then deploy.' =>
+            '',
+        'Authentication configuration is not in sync with the deployed configuration, please deploy.' =>
+            'Η διαμόρφωση ελέγχου ταυτότητας δεν είναι συγχρονισμένη με την ανεπτυγμένη διαμόρφωση, παρακαλούμε εκτελέστε την Ανάπτυξη.',
+        'No IdP CA certificate was uploaded and none could be taken from the IdP metadata.' =>
+            'Δεν μεταφορτώθηκε πιστοποιητικό CA του IdP και κανένα δεν ήταν δυνατό να ληφθεί από τα μεταδεδομένα του IdP.',
+        'Only invalid authentication configurations can be deleted. Please set the configuration to invalid first.' =>
+            'Μόνο άκυρες διαμορφώσεις ελέγχου ταυτότητας μπορούν να διαγραφούν. Ορίστε πρώτα τη διαμόρφωση ως άκυρη.',
+        'Invalid or missing Role.' => 'Άκυρος ή ελλιπής ρόλος.',
+        'No file was uploaded.' => 'Δεν μεταφορτώθηκε αρχείο.',
+        'Error storing the uploaded file.' => 'Σφάλμα αποθήκευσης του μεταφορτωμένου αρχείου.',
+        'Only the SP signing key can be generated.' => 'Μπορεί να δημιουργηθεί μόνο το κλειδί υπογραφής SP.',
+        'Error generating certificate. Please check the system log.' => 'Σφάλμα δημιουργίας πιστοποιητικού. Ελέγξτε τις καταγραφές συστήματος.',
+        'Error storing the generated key in VirtualFS.' => 'Σφάλμα αποθήκευσης του δημιουργημένου κλειδιού στο VirtualFS.',
+        'Error storing the generated certificate in VirtualFS.' => 'Σφάλμα αποθήκευσης του δημιουργημένου πιστοποιητικού στο VirtualFS.',
+        'Could not find a certificate in the metadata. Please check the URL/XML and try again.' =>
+            'Δεν βρέθηκε πιστοποιητικό στα μεταδεδομένα. Ελέγξτε το URL/XML και δοκιμάστε ξανά.',
+        'Error storing the certificate.' => 'Σφάλμα αποθήκευσης του πιστοποιητικού.',
+        'Could not read the certificate from VirtualFS.' => 'Δεν ήταν δυνατή η ανάγνωση του πιστοποιητικού από το VirtualFS.',
+        'The authentication configuration was not deployed. The previously deployed configuration is still active.' =>
+            'Η διαμόρφωση ελέγχου ταυτότητας δεν αναπτύχθηκε. Η προηγουμένως ανεπτυγμένη διαμόρφωση παραμένει ενεργή.',
+        'Please check the system log for details.' => 'Ελέγξτε τις καταγραφές συστήματος για λεπτομέρειες.',
+        'Authentication configuration not found.' => '',
+        'Could not set the authentication configuration to invalid.' => '',
 
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
@@ -4667,6 +4851,8 @@ sub Data {
             '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            'Σφάλμα: Ορίστε την τιμή innodb_redo_log_capacity στη βάση δεδομένων σε τουλάχιστον %s MB (τρέχουσα: %s MB, συνιστώμενη: %s MB). Για περισσότερες πληροφορίες, δείτε το %s.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             '',
         'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
@@ -4848,6 +5034,7 @@ sub Data {
         'Linked as' => '',
         'Search Result' => '',
         'Linked' => 'Δεσμευμένοι',
+        'filter' => 'Φίλτρο',
         'Bulk' => 'Μαζική Ενέργεια',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -4976,7 +5163,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => '',
         'Unable to load %s!' => '',
-        'Content' => 'Περιεχόμενο',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'Πληροφορίες Δελτίου',
@@ -5037,6 +5223,34 @@ sub Data {
         'Session invalid. Please log in again.' => 'Η σύνδεση δεν ήταν εφικτή. Παρακαλούμε συνδεθείτε ξανά.',
         'Session has timed out. Please log in again.' => 'Εξαντλήθηκε το χρονικό όριο σύνδεσης. Παρακαλούμε συνδεθείτε ξανά.',
 
+        # Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+        'This is not an unencrypted private key in PEM format (-----BEGIN PRIVATE KEY-----).' =>
+            'Αυτό δεν είναι μη κρυπτογραφημένο ιδιωτικό κλειδί σε μορφή PEM (-----BEGIN PRIVATE KEY-----).',
+        'This is not a certificate in PEM format (-----BEGIN CERTIFICATE-----).' =>
+            'Αυτό δεν είναι πιστοποιητικό σε μορφή PEM (-----BEGIN CERTIFICATE-----).',
+        'The private key could not be read. Only unencrypted private keys are supported.' =>
+            'Δεν ήταν δυνατή η ανάγνωση του ιδιωτικού κλειδιού. Υποστηρίζονται μόνο μη κρυπτογραφημένα ιδιωτικά κλειδιά.',
+        'The certificate could not be read.' => 'Δεν ήταν δυνατή η ανάγνωση του πιστοποιητικού.',
+        'Could not read the SP signing key.' => 'Δεν ήταν δυνατή η ανάγνωση του κλειδιού υπογραφής SP.',
+        'Could not read the IdP CA certificate.' => 'Δεν ήταν δυνατή η ανάγνωση του πιστοποιητικού CA του IdP.',
+        'No IdP CA certificate is stored. It is taken from the IdP metadata on every deploy. Save the configuration to store it.' =>
+            '',
+        'Could not decrypt the SP signing key. Please check the configured encryption key.' =>
+            'Δεν ήταν δυνατή η αποκρυπτογράφηση του κλειδιού υπογραφής SP. Ελέγξτε το ρυθμισμένο κλειδί κρυπτογράφησης.',
+        'Net::SAML2 is not installed on the server, metadata cannot be verified.' =>
+            'Το Net::SAML2 δεν είναι εγκατεστημένο στον διακομιστή, τα μεταδεδομένα δεν μπορούν να επαληθευτούν.',
+        'Metadata URL is empty.' => 'Το URL μεταδεδομένων είναι κενό.',
+        'Metadata XML is empty.' => 'Το XML μεταδεδομένων είναι κενό.',
+        'Could not parse the metadata. Please check the URL/XML and try again.' =>
+            'Δεν ήταν δυνατή η ανάλυση των μεταδεδομένων. Ελέγξτε το URL/XML και δοκιμάστε ξανά.',
+        'Perl module Crypt::OpenSSL::X509 is not installed, certificate details cannot be parsed.' =>
+            'Η μονάδα Perl Crypt::OpenSSL::X509 δεν είναι εγκατεστημένη, οι λεπτομέρειες του πιστοποιητικού δεν μπορούν να αναλυθούν.',
+        'Could not parse the certificate.' => 'Δεν ήταν δυνατή η ανάλυση του πιστοποιητικού.',
+
+        # Perl Module: Kernel/System/AuthenticationConfig.pm
+        'No authentication plugin is registered for this type.' => 'Δεν έχει καταχωριστεί πρόσθετο ελέγχου ταυτότητας για αυτόν τον τύπο.',
+        'Could not write the certificate files.' => 'Δεν ήταν δυνατή η εγγραφή των αρχείων πιστοποιητικού.',
+
         # Perl Module: Kernel/System/AutoResponse.pm
         'Couldn\'t read auto response configuration file. Please make sure the file is valid.' =>
             '',
@@ -5080,9 +5294,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'πριν/μετά',
         'between' => 'μεταξύ',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -5253,6 +5464,9 @@ sub Data {
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'Χωρητικότητα αρχείου καταγραφής redo του InnoDB',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'Η ρύθμιση innodb_redo_log_capacity πρέπει να είναι τουλάχιστον 256 MB.',
         'InnoDB Log File Size' => '',
         'The setting innodb_log_file_size must be at least 256 MB.' => '',
 
@@ -5557,7 +5771,6 @@ sub Data {
         'All Settings' => '',
 
         # Perl Module: Kernel/System/SysConfig/BaseValueType.pm
-        'Default' => '',
         'Value is not correct! Please, consider updating this field.' => '',
         'Value doesn\'t satisfy regex (%s).' => '',
 
@@ -6015,6 +6228,8 @@ sub Data {
             '',
         'Maximum Number of a calendar shown in a dropdown.' => '',
         'Define the start day of the week for the date picker.' => '',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Καθορίζει αν η προεπιλεγμένη ημερομηνία εκκρεμότητας βάσει του Ticket::Frontend::PendingDiffTime πρέπει να παραλείπει ημέρες που είναι αργίες ή δεν έχουν ώρες εργασίας σε αυτό το ημερολόγιο.',
         'Adds the permanent vacation days.' => '',
         'Adds the one time vacation days.' => '',
         'Defines the hours and week days to count the working time.' => '',
@@ -6296,6 +6511,8 @@ sub Data {
             '',
         'Frontend module registration (disable company link if no company feature is used).' =>
             '',
+        'Registers the SAML 2.0 authentication plugin for AdminAuthentication.' =>
+            'Καταχωρίζει το πρόσθετο ελέγχου ταυτότητας SAML 2.0 για το AdminAuthentication.',
         'Frontend module registration for the customer interface.' => '',
         'Activates the available themes on the system. Value 1 means active, 0 means inactive.' =>
             '',
@@ -6718,6 +6935,8 @@ sub Data {
             '',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             '',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Δυναμικά πεδία που εμφανίζονται στο παράθυρο διαλόγου του φίλτρου άρθρων στην οθόνη λεπτομερειών του δελτίου στη διεπαφή υπαλλήλου. Υποστηρίζονται μόνο πεδία τύπου αντικειμένου Άρθρο των τύπων Κείμενο, TextArea, Dropdown, Multiselect και Checkbox.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>
@@ -7924,6 +8143,8 @@ sub Data {
             '',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             '',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Ενεργοποίηση φίλτρων στηλών πολλαπλής επιλογής για τα συνδεδεμένα δελτία στο σύνθετο γραφικό στοιχείο συνδεδεμένων αντικειμένων (LinkObject::ViewMode = "complex"). Τα φίλτρα είναι διαθέσιμα στο AgentTicketZoom και δεν εμφανίζονται στο αναδυόμενο παράθυρο του AgentLinkObject.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8392,6 +8613,55 @@ sub Data {
             '',
         'Attachment was deleted successfully.' => '',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?' =>
+            'Η αλλαγή της πηγής μεταδεδομένων αφαιρεί το URL ή το XML μεταδεδομένων που εισαγάγατε και τις επιλογές SSL. Συνέχεια?',
+        'Change metadata source' => 'Αλλαγή πηγής μεταδεδομένων',
+        'Uploaded key' => 'Μεταφορτωμένο κλειδί',
+        'EXPIRED' => 'ΕΛΗΞΕ',
+        'expires' => 'λήγει',
+        'used by %s configuration(s)' => 'χρησιμοποιείται από %s διαμορφώσεις',
+        'Could not read the certificate.' => 'Δεν ήταν δυνατή η ανάγνωση του πιστοποιητικού.',
+        'Certificate (PEM)' => 'Πιστοποιητικό (PEM)',
+        'Issuer' => 'Εκδότης',
+        'Valid from' => 'Έγκυρο από',
+        'Valid until' => 'Έγκυρο έως',
+        'Serial' => 'Σειριακός',
+        'Fingerprint (SHA-256)' => 'Αποτύπωμα (SHA-256)',
+        'Show raw PEM' => 'Εμφάνιση ακατέργαστου PEM',
+        'Certificate details' => 'Λεπτομέρειες πιστοποιητικού',
+        'Metadata is valid.' => 'Τα μεταδεδομένα είναι έγκυρα.',
+        'Entity ID' => 'Αναγνωριστικό οντότητας',
+        'SSO URL' => 'URL SSO',
+        'Includes a signing certificate.' => 'Περιλαμβάνει πιστοποιητικό υπογραφής.',
+        'No signing certificate found in the metadata.' => 'Δεν βρέθηκε πιστοποιητικό υπογραφής στα μεταδεδομένα.',
+        'Found %s attribute(s) in the metadata.' => 'Βρέθηκαν %s χαρακτηριστικά στα μεταδεδομένα.',
+        'Verifying...' => 'Επαλήθευση...',
+        'Metadata verification failed.' => 'Η επαλήθευση μεταδεδομένων απέτυχε.',
+        'Upload failed.' => 'Η μεταφόρτωση απέτυχε.',
+        'Please paste a certificate or key first.' => 'Επικολλήστε πρώτα ένα πιστοποιητικό ή κλειδί.',
+        'Saving the pasted certificate/key failed.' => 'Η αποθήκευση του επικολλημένου πιστοποιητικού/κλειδιού απέτυχε.',
+        'Certificate generation failed.' => 'Η δημιουργία πιστοποιητικού απέτυχε.',
+        'Please select a metadata source (URL or XML) first.' => 'Επιλέξτε πρώτα πηγή μεταδεδομένων (URL ή XML).',
+        'Could not find a certificate in the metadata.' => 'Δεν βρέθηκε πιστοποιητικό στα μεταδεδομένα.',
+        'Copied to clipboard!' => '',
+        'Do you really want to delete this SAML configuration?' => 'Θέλετε πράγματι να διαγράψετε αυτή τη διαμόρφωση SAML?',
+        'Delete SAML configuration' => 'Διαγραφή διαμόρφωσης SAML',
+        'There was an error deleting the SAML configuration.' => 'Παρουσιάστηκε σφάλμα κατά τη διαγραφή της διαμόρφωσης SAML.',
+        'NameID (default)' => '',
+        '(pasted XML)' => '(επικολλημένο XML)',
+        'Not configured yet' => 'Δεν έχει ρυθμιστεί ακόμη',
+        'Identity provider metadata' => 'Μεταδεδομένα παρόχου ταυτότητας',
+        'SP signing key' => 'Κλειδί υπογραφής SP',
+        'Configured' => 'Ρυθμισμένο',
+        'Not set' => 'Δεν έχει οριστεί',
+        'SP signing certificate' => 'Πιστοποιητικό υπογραφής SP',
+        'Not set (will be taken from the metadata when saving)' => '',
+        'User sync' => 'Συγχρονισμός χρήστη',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)' =>
+            'Ενεργοποιημένο (%s αντιστοιχίσεις χαρακτηριστικών, %s κανόνες ομάδων, %s κανόνες ρόλων)',
+        'Please fill in all required fields before continuing.' => 'Συμπληρώστε όλα τα απαιτούμενα πεδία πριν συνεχίσετε.',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.AutoResponse.js
         'Delete this %s' => '',
         'Deleting the %s and its data. This may take a while...' => '',
@@ -8598,9 +8868,6 @@ sub Data {
         'Please select attachments for download.' => '',
         'Show less' => '',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
-        'Copied to clipboard!' => '',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
         'First select a customer user, then select a customer ID to assign to this ticket.' =>
             '',
@@ -8618,7 +8885,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => '',
         'month' => 'μήνας',
-        'Remove active filters for this widget.' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '',
@@ -8646,9 +8912,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Search.js
         'Please remove the following words from your search as they cannot be searched for:' =>
             '',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.SharedSecretGenerator.js
-        'Generate' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
@@ -8710,6 +8973,7 @@ sub Data {
             '',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'Χωρίς ώρες εργασίας',
         'Open date selection' => '',
         'Invalid date (need a future date)!' => '',
         'Invalid date (need a past date)!' => '',
@@ -9201,6 +9465,7 @@ Thanks for your help!
         'Manage POP3 or IMAP accounts to fetch email from.' => '',
         'Manage S/MIME certificates for email encryption.' => '',
         'Manage System Configuration Deployments.' => '',
+        'Manage agent and customer authentication (e.g. SAML 2.0).' => 'Διαχείριση ελέγχου ταυτότητας συνεργατών και πελατών (π.χ. SAML 2.0).',
         'Manage different calendars.' => '',
         'Manage existing sessions.' => '',
         'Manage outbound email profiles.' => '',
@@ -9326,6 +9591,7 @@ Thanks for your help!
         'Running Process Tickets' => '',
         'Russian' => '',
         'S/MIME Certificates' => 'Πιστοποιητικά S/MIME',
+        'SAML' => 'SAML',
         'Schedule a maintenance period.' => '',
         'Screen after marking as seen' => '',
         'Screen after marking as unseen' => '',
@@ -9557,6 +9823,7 @@ Thanks for your help!
         '%s MB',
         '%s TB',
         '%s of %s',
+        '(pasted XML)',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9571,6 +9838,7 @@ Thanks for your help!
         'Add new entry',
         'Add to favourites',
         'Agent',
+        'Agent authentication',
         'All occurrences',
         'All-day',
         'An Error Occurred',
@@ -9593,6 +9861,7 @@ Thanks for your help!
         'Article filter',
         'As soon as you use this button or link, you will leave this screen and its current state will be saved automatically. Do you want to continue?',
         'Ascending sort applied, ',
+        'Assertion consumer URL',
         'Attachment was deleted successfully.',
         'Attachments',
         'Aug',
@@ -9603,6 +9872,11 @@ Thanks for your help!
         'Calendar',
         'Cancel',
         'Cannot proceed',
+        'Certificate (PEM)',
+        'Certificate details',
+        'Certificate generation failed.',
+        'Certificate/key is stored in VirtualFS.',
+        'Change metadata source',
         'Clear',
         'Clear all',
         'Clear all filters',
@@ -9615,27 +9889,34 @@ Thanks for your help!
         'Clone',
         'Clone Process',
         'Clone web service',
+        'Close',
         'Close preview',
         'Close this dialog',
         'Collapse',
         'Complex %s with %s arguments',
+        'Configured',
         'Confirm',
         'Copied to clipboard!',
         'Copy Ticket Number',
         'Copy Ticket Number + Title',
         'Copy ticket information',
+        'Could not find a certificate in the metadata.',
         'Could not load activities.',
         'Could not open popup window. Please disable any popup blockers for this application.',
+        'Could not read the certificate.',
         'Current selection',
         'Currently not possible',
+        'Customer authentication',
         'Customer interface does not support articles not visible for customers.',
         'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',
         'December',
+        'Decrypt encrypted assertions',
         'Delete',
         'Delete Entity',
+        'Delete SAML configuration',
         'Delete conditions',
         'Delete draft',
         'Delete error handling module',
@@ -9669,10 +9950,12 @@ Thanks for your help!
         'Deployment successful. You\'re being redirected...',
         'Descending sort applied, ',
         'Description',
+        'Disabled',
         'Dismiss',
         'Do not show this warning again.',
         'Do you really want to continue?',
         'Do you really want to delete "%s"?',
+        'Do you really want to delete this SAML configuration?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
         'Do you really want to delete this key?',
@@ -9689,11 +9972,14 @@ Thanks for your help!
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
+        'EXPIRED',
         'Edit Field Details',
         'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)',
         'End date',
+        'Entity ID',
         'Error',
         'Error during AJAX communication',
         'Error during AJAX communication. Status: %s, Error: %s',
@@ -9707,8 +9993,10 @@ Thanks for your help!
         'February',
         'Filter',
         'Filters',
+        'Fingerprint (SHA-256)',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
+        'Found %s attribute(s) in the metadata.',
         'Fr',
         'Fri',
         'Friday',
@@ -9718,13 +10006,18 @@ Thanks for your help!
         'Grouped',
         'Help',
         'Hide EntityIDs',
+        'Identity provider CA certificate',
+        'Identity provider metadata',
         'If you now leave this page, all open popup windows will be closed, too!',
         'Import web service',
+        'Includes a signing certificate.',
         'Information about the Znuny Daemon',
         'Insert selected customer user(s) into the "%s:" field.',
         'Invalid date (need a future date)!',
         'Invalid date (need a past date)!',
         'Invalid date!',
+        'Issuer',
+        'Issuer (SP entity ID)',
         'It is going to be deleted from the field, please try again.',
         'It is not possible to add a new event trigger because the event is not set.',
         'It is not possible to set this entry to invalid. All affected configuration settings have to be changed beforehand.',
@@ -9742,6 +10035,8 @@ Thanks for your help!
         'Loading, please wait...',
         'Loading...',
         'Location',
+        'Login attribute',
+        'Login button text',
         'Mail check successful.',
         'Mapping for Key',
         'Mapping for Key %s',
@@ -9749,15 +10044,20 @@ Thanks for your help!
         'March',
         'May',
         'May_long',
+        'Metadata is valid.',
+        'Metadata verification failed.',
         'Mo',
         'Mon',
         'Monday',
         'Month',
         'Name',
+        'NameID (default)',
         'Namespace %s could not be initialized, because %s could not be found.',
         'Next',
+        'No',
         'No Data Available.',
         'No TransitionActions assigned.',
+        'No certificate/key set.',
         'No data found.',
         'No dialogs assigned yet. Just pick an activity dialog from the list on the left and drag it here.',
         'No matches found.',
@@ -9765,9 +10065,14 @@ Thanks for your help!
         'No response from get package upgrade result.',
         'No response from get package upgrade run status.',
         'No response from package upgrade all.',
+        'No signing certificate found in the metadata.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
+        'Not configured yet',
+        'Not set',
+        'Not set (will be taken from the metadata when saving)',
         'Notice',
         'Notification',
         'Nov',
@@ -9784,10 +10089,13 @@ Thanks for your help!
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
+        'Please fill in all required fields before continuing.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
+        'Please paste a certificate or key first.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select a metadata source (URL or XML) first.',
         'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
@@ -9821,11 +10129,15 @@ Thanks for your help!
         'Restore web service configuration',
         'Rule',
         'Running',
+        'SP signing certificate',
+        'SP signing key',
+        'SSO URL',
         'Sa',
         'Sat',
         'Saturday',
         'Save',
         'Save and update automatically',
+        'Saving the pasted certificate/key failed.',
         'Scale preview content',
         'Search',
         'Search attributes',
@@ -9838,6 +10150,7 @@ Thanks for your help!
         'Select files or drop them here',
         'Sep',
         'September',
+        'Serial',
         'Setting a template will overwrite any text or attachment.',
         'Settings',
         'Show',
@@ -9846,7 +10159,9 @@ Thanks for your help!
         'Show less',
         'Show more',
         'Show or hide the content.',
+        'Show raw PEM',
         'Slide the navigation bar',
+        'Slot',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',
         'Sorry, but you can\'t disable all methods for this notification.',
         'Sorry, the only existing condition can\'t be removed.',
@@ -9861,12 +10176,14 @@ Thanks for your help!
         'Status',
         'Stream',
         'Su',
+        'Subject',
         'Successful',
         'Sun',
         'Sunday',
         'Support Bundle',
         'Switch to desktop mode',
         'Switch to mobile mode',
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?',
         'Team',
         'Th',
         'The activities could not be marked as seen.',
@@ -9888,6 +10205,7 @@ Thanks for your help!
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',
+        'There was an error deleting the SAML configuration.',
         'There was an error deleting the attachment. Please check the logs for more information.',
         'There was an error. Please save all settings you are editing and check the logs for more information.',
         'This Activity cannot be deleted because it is the Start Activity.',
@@ -9919,15 +10237,22 @@ Thanks for your help!
         'Tu',
         'Tue',
         'Tuesday',
+        'Type',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.',
         'Unknown',
         'Unlock setting.',
         'Update All Packages',
         'Update all packages',
         'Update manually',
+        'Upload failed.',
         'Upload information',
+        'Uploaded key',
         'Uploading...',
         'Use options below to narrow down for which tickets appointments will be automatically created.',
+        'User sync',
+        'Valid from',
+        'Valid until',
+        'Verifying...',
         'WARNING: When you change the name of the group \'admin\', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement.',
         'Warning',
         'We',
@@ -9944,12 +10269,14 @@ Thanks for your help!
         'activate to remove the sort',
         'and %s more...',
         'day',
+        'expires',
         'month',
         'more',
         'no',
         'none',
         'or',
         'sorting is disabled',
+        'used by %s configuration(s)',
         'week',
         'yes',
     ];

@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.163478260869565;
+    $Self->{Completeness}        = 0.186695278969957;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -269,6 +269,169 @@ sub Data {
         'Do you really want to delete this attachment?' => '',
         'Attachment' => 'Manus',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+        'Certificate/key is stored in VirtualFS.' => 'Sertifikaat/võti on salvestatud VirtualFS-i.',
+        'No certificate/key set.' => 'Sertifikaati/võtit pole määratud.',
+        'View certificate details' => 'Kuva sertifikaadi üksikasjad',
+        'The selected certificate/key is not available. Please select or upload it again.' =>
+            'Valitud sertifikaat/võti ei ole saadaval. Palun valige või laadige see uuesti üles.',
+        '- Select an existing certificate/key -' => '- Valige olemasolev sertifikaat/võti -',
+        'Paste key' => '',
+        'Paste certificate' => '',
+        'Generate' => '',
+        'Use certificate from metadata' => 'Kasuta sertifikaati metaandmetest',
+        'Extracts the signing certificate embedded in the Identity Provider metadata and stores it here, instead of uploading it separately.' =>
+            'Eraldab identiteedipakkuja metaandmetesse manustatud allkirjastamissertifikaadi ja salvestab selle siia, selle asemel et see eraldi üles laadida.',
+        'Paste the PEM text including the BEGIN and END lines.' => 'Kleepige PEM-tekst, sealhulgas read BEGIN ja END.',
+        'Common Name' => 'Üldnimi',
+        'Key size' => 'Võtme suurus',
+        'Validity (days)' => 'Kehtivus (päevades)',
+        'Generate self-signed certificate' => 'Genereeri iseallkirjastatud sertifikaat',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+        'Authentication Management' => 'Autentimise haldus',
+        'Agent authentication' => 'Töötaja autentimine',
+        'Basic settings' => 'Põhiseaded',
+        'Slot' => 'Pesa',
+        'Determines which numbered AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Määrab, millise nummerdatud AuthModule<N> pesa see konfiguratsioon hõivab. Pakutakse ainult vabu pesi.',
+        'SAML request settings' => 'SAML-päringu seaded',
+        'Login button text' => 'Sisselogimisnupu tekst',
+        'Assertion consumer URL' => 'Väite tarbija URL',
+        'Automatically derived from this system\'s HTTP type, FQDN and script alias - not editable.' =>
+            'Tuletatakse automaatselt selle süsteemi HTTP tüübist, FQDN-ist ja skripti aliasest - ei ole muudetav.',
+        'Znuny appends a ";IsSAMLLogin=1;Count=<N>;" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration\'s slot), so the value the Identity Provider actually receives is:' =>
+            'Znuny lisab sellele URL-ile sufiksi ";IsSAMLLogin=1;Count=<N>;", kui koostatakse tegelik väljuv SAML-päring (<N> on selle konfiguratsiooni pesa), seega on väärtus, mille identiteedipakkuja tegelikult saab:',
+        'Copy to clipboard' => 'Kopeeri lõikelauale',
+        'Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honor the value from the request. If your IdP\'s field rejects semicolons, register the base URL instead.' =>
+            'Mõned identiteedipakkujad nõuavad, et ACS URL-ina registreeritaks täpselt see väärtus. Teised aktsepteerivad ülaltoodud baas-URL-i ja arvestavad päringu väärtust. Kui teie IdP väli lükkab semikoolonid tagasi, registreerige selle asemel baas-URL.',
+        'Download SP metadata XML' => 'Lae alla SP metaandmete XML',
+        'Issuer (SP entity ID)' => 'Väljaandja (SP olemi ID)',
+        'Requested NameID format' => 'Nõutav NameID vorming',
+        'Unspecified' => 'Määratlemata',
+        'Persistent' => 'Püsiv',
+        'Transient' => 'Ajutine',
+        'Email address' => 'E-posti aadress',
+        'Sent as the NameIDPolicy Format in the outgoing request and published in the SP metadata. Change this only if your Identity Provider requires a specific format.' =>
+            'Saadetakse väljuvas päringus NameIDPolicy Format-ina ja avaldatakse SP metaandmetes. Muutke seda ainult siis, kui teie identiteedipakkuja nõuab kindlat vormingut.',
+        'Login attribute' => '',
+        'Please enter attribute names separated by commas.' => '',
+        'Optional. By default the NameID is the login. Enter one or more SAML attribute names (Name or FriendlyName), separated by commas, to take the login from the first of these attributes the assertion contains instead, e.g. if the Identity Provider sends a persistent NameID. The attribute must have exactly one value, otherwise the login fails. Changing this changes the login of existing users.' =>
+            '',
+        'Load metadata from URL' => 'Laadi metaandmed URL-ilt',
+        'Switch off to paste the metadata XML instead. Switching clears the entered URL or XML and the SSL options.' =>
+            'Lülitage välja, et kleepida selle asemel metaandmete XML. Vahetamine kustutab sisestatud URL-i või XML-i ja SSL-suvandid.',
+        'Please select a metadata source.' => 'Palun valige metaandmete allikas.',
+        'Metadata URL' => 'Metaandmete URL',
+        'Verify' => 'Kontrolli',
+        'Metadata XML' => 'Metaandmete XML',
+        'Use custom SSL options for metadata URL fetch' => 'Kasuta metaandmete URL-i toomiseks kohandatud SSL-suvandeid',
+        'SSL CA file' => 'SSL CA fail',
+        'SSL CA path' => 'SSL CA tee',
+        'Verify hostname' => 'Kontrolli hostinime',
+        'Certificates and keys' => 'Sertifikaadid ja võtmed',
+        'SP signing key (used to sign outgoing requests)' => 'SP allkirjastamisvõti (kasutatakse väljuvate päringute allkirjastamiseks)',
+        'SP signing certificate (matches the key above)' => 'SP allkirjastamissertifikaat (vastab ülalolevale võtmele)',
+        'Required for the SP metadata\'s KeyDescriptor to be published. "Generate" above already produces this together with the key - only needed as a separate step if you uploaded your own key.' =>
+            'Vajalik, et SP metaandmete KeyDescriptor avaldataks. "Genereeri" ülal loob selle juba koos võtmega - eraldi sammuna on seda vaja ainult siis, kui laadisite üles oma võtme.',
+        'Signing algorithm' => 'Allkirjastamisalgoritm',
+        'SHA-256 (default)' => 'SHA-256 (vaikimisi)',
+        'SHA-384' => 'SHA-384',
+        'SHA-512' => 'SHA-512',
+        'SHA-1 (legacy, not recommended)' => 'SHA-1 (aegunud, ei soovitata)',
+        'Used to sign the outgoing request when a signing key is set above. Only change this if your Identity Provider requires a specific algorithm.' =>
+            'Kasutatakse väljuva päringu allkirjastamiseks, kui ülal on määratud allkirjastamisvõti. Muutke seda ainult siis, kui teie identiteedipakkuja nõuab kindlat algoritmi.',
+        'Decrypt encrypted assertions' => 'Dekrüpteeri krüpteeritud väited',
+        'Uses the SP signing key above to decrypt SAML assertions the Identity Provider encrypts. Has no effect on responses that aren\'t encrypted, so it\'s safe to leave enabled. Requires a signing key above.' =>
+            'Kasutab ülaltoodud SP allkirjastamisvõtit identiteedipakkuja krüpteeritud SAML-väidete dekrüpteerimiseks. Ei mõjuta krüpteerimata vastuseid, seega võib selle turvaliselt sisse jäetuna hoida. Nõuab ülal allkirjastamisvõtit.',
+        'Identity provider CA certificate' => 'Identiteedipakkuja CA-sertifikaat',
+        'Required for SAML login to work. Without it, Net::SAML2 cannot verify the Identity Provider\'s response signature and authentication will fail.' =>
+            'Vajalik, et SAML-sisselogimine töötaks. Ilma selleta ei saa Net::SAML2 kontrollida identiteedipakkuja vastuse signatuuri ja autentimine ebaõnnestub.',
+        'Attribute, group and role sync' => 'Atribuutide, gruppide ja rollide sünkroonimine',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+        'Customer authentication' => 'Kliendi autentimine',
+        'Determines which numbered Customer::AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Määrab, millise nummerdatud Customer::AuthModule<N> pesa see konfiguratsioon hõivab. Pakutakse ainult vabu pesi.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+        'SAML wizard' => 'SAML-i viisard',
+        'Add agent SAML authentication' => 'Lisa töötaja SAML-autentimine',
+        'Add customer SAML authentication' => 'Lisa kliendi SAML-autentimine',
+        'Deploy configuration' => 'Juuruta konfiguratsioon',
+        'Deployment failed' => '',
+        'Fix the configurations below and deploy again. Or set a configuration to invalid: its login stops working and the other configurations are deployed.' =>
+            '',
+        'Problem' => '',
+        'Edit' => 'Muuda',
+        'Set to invalid and deploy the rest' => '',
+        'Sync' => 'Sünkroonimine',
+        'Status' => 'Seisund',
+        'Metadata' => '',
+        'Slot %s' => 'Pesa %s',
+        'Default' => '',
+        'Yes' => 'Jah',
+        'No' => 'Ei',
+        'OK' => 'OK',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+        'Enable sync' => 'Luba sünkroonimine',
+        'Also registers Kernel::System::Auth::Sync::SAML for the same slot, to sync attributes/groups/roles from the SAML assertion on every login.' =>
+            'Registreerib sama pesa jaoks ka Kernel::System::Auth::Sync::SAML, et sünkroonida atribuute/gruppe/rolle SAML-väitest igal sisselogimisel.',
+        'The AuthSyncModule for this slot is already configured outside of AdminAuthentication - sync cannot be enabled for it.' =>
+            'Selle pesa AuthSyncModule on juba konfigureeritud väljaspool AdminAuthentication - sünkroonimist ei saa selle jaoks lubada.',
+        'User attribute sync map' => 'Kasutaja atribuutide sünkroonimise vastendus',
+        'Maps Znuny user attributes (left) to SAML assertion attribute names (right).' =>
+            'Vastendab Znuny kasutajaatribuudid (vasakul) SAML-väite atribuudinimedega (paremal).',
+        'Znuny attribute' => 'Znuny atribuut',
+        'SAML attribute URI' => 'SAML-atribuudi URI',
+        'Initial groups for new users' => 'Alggrupid uutele kasutajatele',
+        'Groups (with rw permission) granted only when a brand-new agent is created via sync. Ctrl/Cmd-click to select multiple.' =>
+            'Grupid (rw õigusega), mis antakse ainult siis, kui sünkroonimise teel luuakse täiesti uus töötaja. Mitme valimiseks Ctrl/Cmd-klõps.',
+        'SAML attribute carrying group values' => 'SAML-atribuut, mis kannab grupi väärtusi',
+        'Group sync rules (by group value)' => 'Grupi sünkroonimise reeglid (grupi väärtuse järgi)',
+        'Maps a SAML group value to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Vastendab SAML-grupi väärtuse Znuny grupi ja õigustega. Mitme õiguse valimiseks Ctrl/Cmd-klõps.',
+        'SAML value' => 'SAML-i väärtus',
+        'Group sync rules (by arbitrary attribute/value)' => 'Grupi sünkroonimise reeglid (suvalise atribuudi/väärtuse järgi)',
+        'Maps any SAML attribute name/value combination to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Vastendab mis tahes SAML-atribuudi nime/väärtuse kombinatsiooni Znuny grupi ja õigustega. Mitme õiguse valimiseks Ctrl/Cmd-klõps.',
+        'SAML attribute' => 'SAML-atribuut',
+        'Role sync requires at least one active role. Create or activate a role under Admin → Roles.' =>
+            'Rollide sünkroonimine nõuab vähemalt ühte aktiivset rolli. Looge või aktiveerige roll jaotises Admin → Rollid.',
+        'SAML attribute carrying role values' => 'SAML-atribuut, mis kannab rolli väärtusi',
+        'Role sync rules (by role value)' => 'Rolli sünkroonimise reeglid (rolli väärtuse järgi)',
+        'Maps a SAML role value to one or more Znuny roles, active or inactive.' =>
+            'Vastendab SAML-rolli väärtuse Znuny rolliga, aktiivne või mitteaktiivne.',
+        'Active' => 'Aktiivne',
+        'Role sync rules (by arbitrary attribute/value)' => 'Rolli sünkroonimise reeglid (suvalise atribuudi/väärtuse järgi)',
+        'Maps any SAML attribute name/value combination to one or more Znuny roles, active or inactive.' =>
+            'Vastendab mis tahes SAML-atribuudi nime/väärtuse kombinatsiooni Znuny rolliga, aktiivne või mitteaktiivne.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+        'Setup steps' => 'Seadistamise sammud',
+        'Setup wizard' => 'Seadistusviisard',
+        'SAML setup wizard' => 'SAML-i seadistusviisard',
+        'Step' => 'Samm',
+        'What are you setting up?' => 'Mida te seadistate?',
+        'Agent authentication - staff logging into the agent interface' =>
+            'Töötaja autentimine - töötajad, kes logivad sisse töötaja liidesesse',
+        'Customer authentication - customers logging into the customer portal' =>
+            'Kliendi autentimine - kliendid, kes logivad sisse kliendiportaali',
+        'Login with SSO' => 'Logi sisse SSO-ga',
+        'User sync (optional)' => 'Kasutajate sünkroonimine (valikuline)',
+        'Optionally sync user attributes, groups and roles from the SAML assertion on every login. This can also be set up later on the edit screen.' =>
+            'Soovi korral sünkroonige kasutaja atribuudid, grupid ja rollid SAML-väitest igal sisselogimisel. Seda saab seadistada ka hiljem muutmise kuval.',
+        'Review' => 'Ülevaatus',
+        'Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective.' =>
+            'Klõpsake "Salvesta", et luua see SAML-i konfiguratsioon. See ei ole veel aktiivne - kasutage seejärel ülevaate lehel toimingut "Juuruta", et see jõustuks.',
+        'If you skipped the Identity Provider CA certificate here, it is taken from the metadata when saving. Please check it on the edit screen afterwards.' =>
+            '',
+        'You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only).' =>
+            'Võite minna tagasi mis tahes eelmise sammu juurde, et teha muudatusi, või kasutada seejärel täielikku muutmise kuva täpsemate suvandite jaoks, nagu atribuutide/gruppide/rollide sünkroonimine (ainult töötaja autentimine).',
+        'Back' => 'Tagasi',
+        'Next' => 'Edasi',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
         'Add Auto Response' => 'Automaatvastuse lisamine',
         'Filter for Auto Responses' => '',
@@ -326,9 +489,7 @@ sub Data {
             '',
         'Account Status' => '',
         'Account status for: %s' => '',
-        'Status' => 'Seisund',
         'Account' => '',
-        'Edit' => 'Muuda',
         'No accounts found.' => '',
         'Communication Log Details (%s)' => '',
         'Direction' => '',
@@ -447,7 +608,6 @@ sub Data {
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => '',
-        'Active' => 'Aktiivne',
         'Toggle active state for %s' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
@@ -1584,14 +1744,11 @@ sub Data {
         'Download package' => '',
         'Rebuild package' => '',
         'Package Information' => '',
-        'Metadata' => '',
         'Change Log' => '',
         'Date' => 'Kuupäev',
         'List of Files' => '',
         'Permission' => 'Õigus',
         'Size' => 'Suurus',
-        'Problem' => '',
-        'OK' => 'OK',
         'Download file from package!' => 'Lae alla fail paketist!',
         'Required' => 'Vajalik',
         'Primary Key' => '',
@@ -2135,7 +2292,6 @@ sub Data {
         'System Email Addresses Management' => 'Süsteemi epostiaadresside haldus',
         'Add System Email Address' => '',
         'Edit System Email Address' => '',
-        'Email address' => 'E-posti aadress',
         'Display name' => 'Kuvatav nimi',
         'This email address is already used as system email address.' => '',
         'The display name and email address will be shown on mail you send.' =>
@@ -2350,8 +2506,6 @@ sub Data {
         'All-day' => 'kogu päev',
         'Repeat' => '',
         'Notification' => 'Teavitus',
-        'Yes' => 'Jah',
-        'No' => 'Ei',
         'No calendars found. Please add a calendar first by using Manage Calendars page.' =>
             '',
 
@@ -2876,10 +3030,11 @@ sub Data {
         'Archive Search' => 'Arhiivist otsimine',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'Sisu',
+        'e.g. Text or Te*t' => '',
         'Save filter settings as default' => '',
         'Event Type' => '',
         'Save as default' => '',
-        'Back' => 'Tagasi',
         'Change Queue' => 'Muuda järjekorda',
         'Add Filter' => 'Filtri lisamine',
         'Set' => 'Sea',
@@ -3127,7 +3282,6 @@ sub Data {
         'Phone' => 'Telefon',
         'Web site' => '',
         'Community' => '',
-        'Next' => 'Edasi',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => '',
@@ -3222,6 +3376,8 @@ sub Data {
         'Delete link' => '',
         'Delete Link' => '',
         'Object#' => '',
+        'Remove active filters for this widget.' => '',
+        'No results found.' => 'Tulemusi ei leitud.',
         'Add links' => '',
         'Delete links' => '',
 
@@ -3628,6 +3784,34 @@ sub Data {
             '',
         'All agents with write permission for the appointment (calendar)' =>
             '',
+
+        # Perl Module: Kernel/Modules/AdminAuthentication.pm
+        'Perl module Net::SAML2 is not installed. SAML authentication cannot work until it is installed on the server.' =>
+            'Perli moodul Net::SAML2 ei ole paigaldatud. SAML-autentimine ei saa töötada, kuni see on serverisse paigaldatud.',
+        'Authentication configuration is not in sync with the deployed configuration, but it can\'t be deployed: a valid configuration has a problem, see the status below. Fix it or set it to invalid, then deploy.' =>
+            '',
+        'Authentication configuration is not in sync with the deployed configuration, please deploy.' =>
+            'Autentimise konfiguratsioon ei ole juurutatud konfiguratsiooniga sünkroonis, palun juurutage.',
+        'No IdP CA certificate was uploaded and none could be taken from the IdP metadata.' =>
+            'IdP CA-sertifikaati ei laaditud üles ja seda ei saanud võtta IdP metaandmetest.',
+        'Only invalid authentication configurations can be deleted. Please set the configuration to invalid first.' =>
+            'Kustutada saab ainult kehtetuid autentimise konfiguratsioone. Palun määrake konfiguratsioon esmalt kehtetuks.',
+        'Invalid or missing Role.' => 'Kehtetu või puuduv roll.',
+        'No file was uploaded.' => 'Ühtegi faili ei laaditud üles.',
+        'Error storing the uploaded file.' => 'Viga üleslaaditud faili salvestamisel.',
+        'Only the SP signing key can be generated.' => 'Genereerida saab ainult SP allkirjastamisvõtit.',
+        'Error generating certificate. Please check the system log.' => 'Viga sertifikaadi genereerimisel. Palun kontrollige süsteemilogi.',
+        'Error storing the generated key in VirtualFS.' => 'Viga genereeritud võtme salvestamisel VirtualFS-i.',
+        'Error storing the generated certificate in VirtualFS.' => 'Viga genereeritud sertifikaadi salvestamisel VirtualFS-i.',
+        'Could not find a certificate in the metadata. Please check the URL/XML and try again.' =>
+            'Metaandmetest ei leitud sertifikaati. Palun kontrollige URL-i/XML-i ja proovige uuesti.',
+        'Error storing the certificate.' => 'Viga sertifikaadi salvestamisel.',
+        'Could not read the certificate from VirtualFS.' => 'Sertifikaati ei saanud VirtualFS-ist lugeda.',
+        'The authentication configuration was not deployed. The previously deployed configuration is still active.' =>
+            'Autentimise konfiguratsiooni ei juurutatud. Varem juurutatud konfiguratsioon on endiselt aktiivne.',
+        'Please check the system log for details.' => 'Palun vaadake üksikasju süsteemilogist.',
+        'Authentication configuration not found.' => '',
+        'Could not set the authentication configuration to invalid.' => '',
 
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
@@ -4662,6 +4846,8 @@ sub Data {
             '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            'Viga: palun seadke andmebaasis innodb_redo_log_capacity väärtuseks vähemalt %s MB (praegune: %s MB, soovitatav: %s MB). Lisateavet leiate aadressilt %s.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             '',
         'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
@@ -4843,6 +5029,7 @@ sub Data {
         'Linked as' => '',
         'Search Result' => '',
         'Linked' => 'Viidatud',
+        'filter' => 'Filter',
         'Bulk' => 'Hulgi',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -4971,7 +5158,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => '',
         'Unable to load %s!' => '',
-        'Content' => 'Sisu',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'Pileti teave',
@@ -5032,6 +5218,34 @@ sub Data {
         'Session invalid. Please log in again.' => 'Vigane seanss. Palun logi uuesti sisse.',
         'Session has timed out. Please log in again.' => 'Sesesioon aegus. Palun logi uuesti sisse.',
 
+        # Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+        'This is not an unencrypted private key in PEM format (-----BEGIN PRIVATE KEY-----).' =>
+            'See ei ole krüpteerimata privaatvõti PEM-vormingus (-----BEGIN PRIVATE KEY-----).',
+        'This is not a certificate in PEM format (-----BEGIN CERTIFICATE-----).' =>
+            'See ei ole sertifikaat PEM-vormingus (-----BEGIN CERTIFICATE-----).',
+        'The private key could not be read. Only unencrypted private keys are supported.' =>
+            'Privaatvõtit ei saanud lugeda. Toetatakse ainult krüpteerimata privaatvõtmeid.',
+        'The certificate could not be read.' => 'Sertifikaati ei saanud lugeda.',
+        'Could not read the SP signing key.' => 'SP allkirjastamisvõtit ei saanud lugeda.',
+        'Could not read the IdP CA certificate.' => 'IdP CA-sertifikaati ei saanud lugeda.',
+        'No IdP CA certificate is stored. It is taken from the IdP metadata on every deploy. Save the configuration to store it.' =>
+            '',
+        'Could not decrypt the SP signing key. Please check the configured encryption key.' =>
+            'SP allkirjastamisvõtit ei saanud dekrüpteerida. Palun kontrollige konfigureeritud krüptovõtit.',
+        'Net::SAML2 is not installed on the server, metadata cannot be verified.' =>
+            'Net::SAML2 ei ole serverisse paigaldatud, metaandmeid ei saa kontrollida.',
+        'Metadata URL is empty.' => 'Metaandmete URL on tühi.',
+        'Metadata XML is empty.' => 'Metaandmete XML on tühi.',
+        'Could not parse the metadata. Please check the URL/XML and try again.' =>
+            'Metaandmeid ei saanud sõeluda. Palun kontrollige URL-i/XML-i ja proovige uuesti.',
+        'Perl module Crypt::OpenSSL::X509 is not installed, certificate details cannot be parsed.' =>
+            'Perli moodul Crypt::OpenSSL::X509 ei ole paigaldatud, sertifikaadi üksikasju ei saa sõeluda.',
+        'Could not parse the certificate.' => 'Sertifikaati ei saanud sõeluda.',
+
+        # Perl Module: Kernel/System/AuthenticationConfig.pm
+        'No authentication plugin is registered for this type.' => 'Selle tüübi jaoks ei ole registreeritud ühtegi autentimise pluginat.',
+        'Could not write the certificate files.' => 'Sertifikaadi faile ei saanud kirjutada.',
+
         # Perl Module: Kernel/System/AutoResponse.pm
         'Couldn\'t read auto response configuration file. Please make sure the file is valid.' =>
             '',
@@ -5075,9 +5289,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'enne/pärast',
         'between' => 'vahel',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -5248,6 +5459,9 @@ sub Data {
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'InnoDB redo logi maht',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'Säte innodb_redo_log_capacity peab olema vähemalt 256 MB.',
         'InnoDB Log File Size' => '',
         'The setting innodb_log_file_size must be at least 256 MB.' => '',
 
@@ -5552,7 +5766,6 @@ sub Data {
         'All Settings' => '',
 
         # Perl Module: Kernel/System/SysConfig/BaseValueType.pm
-        'Default' => '',
         'Value is not correct! Please, consider updating this field.' => '',
         'Value doesn\'t satisfy regex (%s).' => '',
 
@@ -6010,6 +6223,8 @@ sub Data {
             '',
         'Maximum Number of a calendar shown in a dropdown.' => '',
         'Define the start day of the week for the date picker.' => '',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Määrab, kas Ticket::Frontend::PendingDiffTime põhjal arvutatud ootel oleku vaikekuupäev peab vahele jätma päevad, mis on pühad või millel selles kalendris tööaega ei ole.',
         'Adds the permanent vacation days.' => '',
         'Adds the one time vacation days.' => '',
         'Defines the hours and week days to count the working time.' => '',
@@ -6291,6 +6506,8 @@ sub Data {
             '',
         'Frontend module registration (disable company link if no company feature is used).' =>
             '',
+        'Registers the SAML 2.0 authentication plugin for AdminAuthentication.' =>
+            'Registreerib SAML 2.0 autentimise plugina AdminAuthentication jaoks.',
         'Frontend module registration for the customer interface.' => '',
         'Activates the available themes on the system. Value 1 means active, 0 means inactive.' =>
             '',
@@ -6713,6 +6930,8 @@ sub Data {
             '',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             '',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Dünaamilised väljad, mida kuvatakse artiklifiltri dialoogis pileti suumikuval agendi liideses. Toetatakse ainult objektitüübi artikkel välju tüüpidega Tekst, Tekstiala, Dropdown, Multiselect ja Checkbox.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>
@@ -7919,6 +8138,8 @@ sub Data {
             '',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             '',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Luba lingitud piletite mitmikvalikuga veerufiltrid keerulises lingitud objektide vidinas (LinkObject::ViewMode = "complex"). Filtrid on saadaval vaates AgentTicketZoom ja neid ei kuvata AgentLinkObject hüpikaknas.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8387,6 +8608,55 @@ sub Data {
             '',
         'Attachment was deleted successfully.' => '',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?' =>
+            'Metaandmete allika vahetamine eemaldab sisestatud metaandmete URL-i või XML-i ja SSL-suvandid. Jätka?',
+        'Change metadata source' => 'Muuda metaandmete allikat',
+        'Uploaded key' => 'Üleslaaditud võti',
+        'EXPIRED' => 'AEGUNUD',
+        'expires' => 'aegub',
+        'used by %s configuration(s)' => 'kasutab %s konfiguratsioon(i)',
+        'Could not read the certificate.' => 'Sertifikaati ei saanud lugeda.',
+        'Certificate (PEM)' => 'Sertifikaat (PEM)',
+        'Issuer' => 'Väljaandja',
+        'Valid from' => 'Kehtiv alates',
+        'Valid until' => 'Kehtiv kuni',
+        'Serial' => 'Seerianumber',
+        'Fingerprint (SHA-256)' => 'Sõrmejälg (SHA-256)',
+        'Show raw PEM' => 'Näita toorest PEM-i',
+        'Certificate details' => 'Sertifikaadi üksikasjad',
+        'Metadata is valid.' => 'Metaandmed on kehtivad.',
+        'Entity ID' => 'Olemi ID',
+        'SSO URL' => 'SSO URL',
+        'Includes a signing certificate.' => 'Sisaldab allkirjastamissertifikaati.',
+        'No signing certificate found in the metadata.' => 'Metaandmetest ei leitud allkirjastamissertifikaati.',
+        'Found %s attribute(s) in the metadata.' => 'Metaandmetest leiti %s atribuut(i).',
+        'Verifying...' => 'Kontrollimine...',
+        'Metadata verification failed.' => 'Metaandmete kontrollimine ebaõnnestus.',
+        'Upload failed.' => 'Üleslaadimine ebaõnnestus.',
+        'Please paste a certificate or key first.' => 'Palun kleepige esmalt sertifikaat või võti.',
+        'Saving the pasted certificate/key failed.' => 'Kleebitud sertifikaadi/võtme salvestamine ebaõnnestus.',
+        'Certificate generation failed.' => 'Sertifikaadi genereerimine ebaõnnestus.',
+        'Please select a metadata source (URL or XML) first.' => 'Palun valige esmalt metaandmete allikas (URL või XML).',
+        'Could not find a certificate in the metadata.' => 'Metaandmetest ei leitud sertifikaati.',
+        'Copied to clipboard!' => '',
+        'Do you really want to delete this SAML configuration?' => 'Kas soovite tõesti selle SAML-i konfiguratsiooni kustutada?',
+        'Delete SAML configuration' => 'Kustuta SAML-i konfiguratsioon',
+        'There was an error deleting the SAML configuration.' => 'SAML-i konfiguratsiooni kustutamisel ilmnes viga.',
+        'NameID (default)' => '',
+        '(pasted XML)' => '(kleebitud XML)',
+        'Not configured yet' => 'Pole veel seadistatud',
+        'Identity provider metadata' => 'Identiteedipakkuja metaandmed',
+        'SP signing key' => 'SP allkirjastamisvõti',
+        'Configured' => 'Seadistatud',
+        'Not set' => 'Määramata',
+        'SP signing certificate' => 'SP allkirjastamissertifikaat',
+        'Not set (will be taken from the metadata when saving)' => '',
+        'User sync' => 'Kasutajate sünkroonimine',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)' =>
+            'Lubatud (%s atribuudivastendust, %s grupireeglit, %s rollireeglit)',
+        'Please fill in all required fields before continuing.' => 'Palun täitke kõik vajalikud väljad, enne kui jätkate.',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.AutoResponse.js
         'Delete this %s' => '',
         'Deleting the %s and its data. This may take a while...' => '',
@@ -8593,9 +8863,6 @@ sub Data {
         'Please select attachments for download.' => '',
         'Show less' => '',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
-        'Copied to clipboard!' => '',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
         'First select a customer user, then select a customer ID to assign to this ticket.' =>
             '',
@@ -8613,7 +8880,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => '',
         'month' => 'kuu',
-        'Remove active filters for this widget.' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '',
@@ -8641,9 +8907,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Search.js
         'Please remove the following words from your search as they cannot be searched for:' =>
             'Palun eemalda otsingust järgnevad sõnad, kuna neid ei saa otsida:',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.SharedSecretGenerator.js
-        'Generate' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
@@ -8705,6 +8968,7 @@ sub Data {
             '',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'Tööaeg puudub',
         'Open date selection' => '',
         'Invalid date (need a future date)!' => 'Vigane kuupäev (peab olema tulevikus)!',
         'Invalid date (need a past date)!' => 'Vigane kuupäev (peab olema minevikus)!',
@@ -9196,6 +9460,7 @@ Thanks for your help!
         'Manage POP3 or IMAP accounts to fetch email from.' => 'E-posti tõmbamiseks kasutatavate POP3 ja IMAP kontode haldamine.',
         'Manage S/MIME certificates for email encryption.' => 'E-posti krüptimiseks kasutatavate S/MIME sertifikaatide haldamine.',
         'Manage System Configuration Deployments.' => '',
+        'Manage agent and customer authentication (e.g. SAML 2.0).' => 'Halda töötaja ja kliendi autentimist (nt SAML 2.0).',
         'Manage different calendars.' => '',
         'Manage existing sessions.' => 'Olemasolevate seansside haldamine.',
         'Manage outbound email profiles.' => '',
@@ -9321,6 +9586,7 @@ Thanks for your help!
         'Running Process Tickets' => '',
         'Russian' => 'Vene',
         'S/MIME Certificates' => 'S/MIME sertifikaadid',
+        'SAML' => 'SAML',
         'Schedule a maintenance period.' => '',
         'Screen after marking as seen' => '',
         'Screen after marking as unseen' => '',
@@ -9552,6 +9818,7 @@ Thanks for your help!
         '%s MB',
         '%s TB',
         '%s of %s',
+        '(pasted XML)',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9566,6 +9833,7 @@ Thanks for your help!
         'Add new entry',
         'Add to favourites',
         'Agent',
+        'Agent authentication',
         'All occurrences',
         'All-day',
         'An Error Occurred',
@@ -9588,6 +9856,7 @@ Thanks for your help!
         'Article filter',
         'As soon as you use this button or link, you will leave this screen and its current state will be saved automatically. Do you want to continue?',
         'Ascending sort applied, ',
+        'Assertion consumer URL',
         'Attachment was deleted successfully.',
         'Attachments',
         'Aug',
@@ -9598,6 +9867,11 @@ Thanks for your help!
         'Calendar',
         'Cancel',
         'Cannot proceed',
+        'Certificate (PEM)',
+        'Certificate details',
+        'Certificate generation failed.',
+        'Certificate/key is stored in VirtualFS.',
+        'Change metadata source',
         'Clear',
         'Clear all',
         'Clear all filters',
@@ -9610,27 +9884,34 @@ Thanks for your help!
         'Clone',
         'Clone Process',
         'Clone web service',
+        'Close',
         'Close preview',
         'Close this dialog',
         'Collapse',
         'Complex %s with %s arguments',
+        'Configured',
         'Confirm',
         'Copied to clipboard!',
         'Copy Ticket Number',
         'Copy Ticket Number + Title',
         'Copy ticket information',
+        'Could not find a certificate in the metadata.',
         'Could not load activities.',
         'Could not open popup window. Please disable any popup blockers for this application.',
+        'Could not read the certificate.',
         'Current selection',
         'Currently not possible',
+        'Customer authentication',
         'Customer interface does not support articles not visible for customers.',
         'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',
         'December',
+        'Decrypt encrypted assertions',
         'Delete',
         'Delete Entity',
+        'Delete SAML configuration',
         'Delete conditions',
         'Delete draft',
         'Delete error handling module',
@@ -9664,10 +9945,12 @@ Thanks for your help!
         'Deployment successful. You\'re being redirected...',
         'Descending sort applied, ',
         'Description',
+        'Disabled',
         'Dismiss',
         'Do not show this warning again.',
         'Do you really want to continue?',
         'Do you really want to delete "%s"?',
+        'Do you really want to delete this SAML configuration?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
         'Do you really want to delete this key?',
@@ -9684,11 +9967,14 @@ Thanks for your help!
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
+        'EXPIRED',
         'Edit Field Details',
         'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)',
         'End date',
+        'Entity ID',
         'Error',
         'Error during AJAX communication',
         'Error during AJAX communication. Status: %s, Error: %s',
@@ -9702,8 +9988,10 @@ Thanks for your help!
         'February',
         'Filter',
         'Filters',
+        'Fingerprint (SHA-256)',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
+        'Found %s attribute(s) in the metadata.',
         'Fr',
         'Fri',
         'Friday',
@@ -9713,13 +10001,18 @@ Thanks for your help!
         'Grouped',
         'Help',
         'Hide EntityIDs',
+        'Identity provider CA certificate',
+        'Identity provider metadata',
         'If you now leave this page, all open popup windows will be closed, too!',
         'Import web service',
+        'Includes a signing certificate.',
         'Information about the Znuny Daemon',
         'Insert selected customer user(s) into the "%s:" field.',
         'Invalid date (need a future date)!',
         'Invalid date (need a past date)!',
         'Invalid date!',
+        'Issuer',
+        'Issuer (SP entity ID)',
         'It is going to be deleted from the field, please try again.',
         'It is not possible to add a new event trigger because the event is not set.',
         'It is not possible to set this entry to invalid. All affected configuration settings have to be changed beforehand.',
@@ -9737,6 +10030,8 @@ Thanks for your help!
         'Loading, please wait...',
         'Loading...',
         'Location',
+        'Login attribute',
+        'Login button text',
         'Mail check successful.',
         'Mapping for Key',
         'Mapping for Key %s',
@@ -9744,15 +10039,20 @@ Thanks for your help!
         'March',
         'May',
         'May_long',
+        'Metadata is valid.',
+        'Metadata verification failed.',
         'Mo',
         'Mon',
         'Monday',
         'Month',
         'Name',
+        'NameID (default)',
         'Namespace %s could not be initialized, because %s could not be found.',
         'Next',
+        'No',
         'No Data Available.',
         'No TransitionActions assigned.',
+        'No certificate/key set.',
         'No data found.',
         'No dialogs assigned yet. Just pick an activity dialog from the list on the left and drag it here.',
         'No matches found.',
@@ -9760,9 +10060,14 @@ Thanks for your help!
         'No response from get package upgrade result.',
         'No response from get package upgrade run status.',
         'No response from package upgrade all.',
+        'No signing certificate found in the metadata.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
+        'Not configured yet',
+        'Not set',
+        'Not set (will be taken from the metadata when saving)',
         'Notice',
         'Notification',
         'Nov',
@@ -9779,10 +10084,13 @@ Thanks for your help!
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
+        'Please fill in all required fields before continuing.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
+        'Please paste a certificate or key first.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select a metadata source (URL or XML) first.',
         'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
@@ -9816,11 +10124,15 @@ Thanks for your help!
         'Restore web service configuration',
         'Rule',
         'Running',
+        'SP signing certificate',
+        'SP signing key',
+        'SSO URL',
         'Sa',
         'Sat',
         'Saturday',
         'Save',
         'Save and update automatically',
+        'Saving the pasted certificate/key failed.',
         'Scale preview content',
         'Search',
         'Search attributes',
@@ -9833,6 +10145,7 @@ Thanks for your help!
         'Select files or drop them here',
         'Sep',
         'September',
+        'Serial',
         'Setting a template will overwrite any text or attachment.',
         'Settings',
         'Show',
@@ -9841,7 +10154,9 @@ Thanks for your help!
         'Show less',
         'Show more',
         'Show or hide the content.',
+        'Show raw PEM',
         'Slide the navigation bar',
+        'Slot',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',
         'Sorry, but you can\'t disable all methods for this notification.',
         'Sorry, the only existing condition can\'t be removed.',
@@ -9856,12 +10171,14 @@ Thanks for your help!
         'Status',
         'Stream',
         'Su',
+        'Subject',
         'Successful',
         'Sun',
         'Sunday',
         'Support Bundle',
         'Switch to desktop mode',
         'Switch to mobile mode',
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?',
         'Team',
         'Th',
         'The activities could not be marked as seen.',
@@ -9883,6 +10200,7 @@ Thanks for your help!
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',
+        'There was an error deleting the SAML configuration.',
         'There was an error deleting the attachment. Please check the logs for more information.',
         'There was an error. Please save all settings you are editing and check the logs for more information.',
         'This Activity cannot be deleted because it is the Start Activity.',
@@ -9914,15 +10232,22 @@ Thanks for your help!
         'Tu',
         'Tue',
         'Tuesday',
+        'Type',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.',
         'Unknown',
         'Unlock setting.',
         'Update All Packages',
         'Update all packages',
         'Update manually',
+        'Upload failed.',
         'Upload information',
+        'Uploaded key',
         'Uploading...',
         'Use options below to narrow down for which tickets appointments will be automatically created.',
+        'User sync',
+        'Valid from',
+        'Valid until',
+        'Verifying...',
         'WARNING: When you change the name of the group \'admin\', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement.',
         'Warning',
         'We',
@@ -9939,12 +10264,14 @@ Thanks for your help!
         'activate to remove the sort',
         'and %s more...',
         'day',
+        'expires',
         'month',
         'more',
         'no',
         'none',
         'or',
         'sorting is disabled',
+        'used by %s configuration(s)',
         'week',
         'yes',
     ];

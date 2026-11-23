@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%m/%d/%Y';
     $Self->{DateInputFormat}     = '%m/%d/%Y';
     $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
-    $Self->{Completeness}        = 0.421343873517787;
+    $Self->{Completeness}        = 0.436695278969957;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -271,6 +271,169 @@ sub Data {
         'Do you really want to delete this attachment?' => '',
         'Attachment' => 'Kiambatanishi',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+        'Certificate/key is stored in VirtualFS.' => 'Cheti/ufunguo kimehifadhiwa katika VirtualFS.',
+        'No certificate/key set.' => 'Hakuna cheti/ufunguo uliowekwa.',
+        'View certificate details' => 'Angalia maelezo ya cheti',
+        'The selected certificate/key is not available. Please select or upload it again.' =>
+            'Cheti/ufunguo uliochaguliwa haupatikani. Tafadhali uchague au uupakie tena.',
+        '- Select an existing certificate/key -' => '- Chagua cheti/ufunguo uliopo -',
+        'Paste key' => '',
+        'Paste certificate' => '',
+        'Generate' => '',
+        'Use certificate from metadata' => 'Tumia cheti kutoka Metadata',
+        'Extracts the signing certificate embedded in the Identity Provider metadata and stores it here, instead of uploading it separately.' =>
+            'Hutoa cheti cha kusaini kilichopachikwa katika Metadata ya mtoa utambulisho na kuhifadhi hapa, badala ya kukipakia kando.',
+        'Paste the PEM text including the BEGIN and END lines.' => 'Bandika maandishi ya PEM pamoja na mistari ya BEGIN na END.',
+        'Common Name' => 'Jina la kawaida',
+        'Key size' => 'Ukubwa wa ufunguo',
+        'Validity (days)' => 'Uhalali (siku)',
+        'Generate self-signed certificate' => 'Zalisha cheti cha kujisaini',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+        'Authentication Management' => 'Usimamizi wa uthibitisho',
+        'Agent authentication' => 'Uthibitisho wa wakala',
+        'Basic settings' => 'Mpangilio wa msingi',
+        'Slot' => 'Nafasi',
+        'Determines which numbered AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Hubainisha nafasi ya AuthModule<N> yenye namba ambayo usanidi huu unatumia. Nafasi ambazo hazijatumika pekee ndizo zinazotolewa.',
+        'SAML request settings' => 'Mpangilio wa ombi la SAML',
+        'Login button text' => 'Maandishi ya kitufe cha Ingia',
+        'Assertion consumer URL' => 'URL ya mpokeaji wa dai',
+        'Automatically derived from this system\'s HTTP type, FQDN and script alias - not editable.' =>
+            'Hutolewa kiotomatiki kutoka aina ya HTTP, FQDN na lakabu ya skripti ya mfumo huu - haiwezi kuhaririwa.',
+        'Znuny appends a ";IsSAMLLogin=1;Count=<N>;" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration\'s slot), so the value the Identity Provider actually receives is:' =>
+            'Znuny huambatisha kiambishi ";IsSAMLLogin=1;Count=<N>;" kwenye URL hii wakati wa kujenga ombi halisi la SAML linalotoka (<N> ni nafasi ya usanidi huu), hivyo thamani ambayo mtoa utambulisho hupokea kwa hakika ni:',
+        'Copy to clipboard' => 'Nakili kwenye ubao wa kunakili',
+        'Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honor the value from the request. If your IdP\'s field rejects semicolons, register the base URL instead.' =>
+            'Baadhi ya watoa utambulisho wanahitaji thamani hii kamili kusajiliwa kama ACS URL. Wengine hukubali URL ya msingi hapo juu na kutumia thamani kutoka ombini. Ikiwa sehemu ya IdP wako inakataa nukta mkato, sajili URL ya msingi badala yake.',
+        'Download SP metadata XML' => 'Pakua XML ya Metadata ya SP',
+        'Issuer (SP entity ID)' => 'Mtoaji (kitambulisho cha chombo cha SP)',
+        'Requested NameID format' => 'Umbizo la NameID lililoombwa',
+        'Unspecified' => 'Haijabainishwa',
+        'Persistent' => 'Endelevu',
+        'Transient' => 'Muda',
+        'Email address' => 'Anuani ya barua pepe',
+        'Sent as the NameIDPolicy Format in the outgoing request and published in the SP metadata. Change this only if your Identity Provider requires a specific format.' =>
+            'Hutumwa kama umbizo la NameIDPolicy katika ombi linalotoka na kuchapishwa katika Metadata ya SP. Badilisha hili tu ikiwa mtoa utambulisho wako unahitaji umbizo mahususi.',
+        'Login attribute' => '',
+        'Please enter attribute names separated by commas.' => '',
+        'Optional. By default the NameID is the login. Enter one or more SAML attribute names (Name or FriendlyName), separated by commas, to take the login from the first of these attributes the assertion contains instead, e.g. if the Identity Provider sends a persistent NameID. The attribute must have exactly one value, otherwise the login fails. Changing this changes the login of existing users.' =>
+            '',
+        'Load metadata from URL' => 'Leta Metadata kutoka URL',
+        'Switch off to paste the metadata XML instead. Switching clears the entered URL or XML and the SSL options.' =>
+            'Zima ili kubandika XML ya Metadata badala yake. Kubadili kunafuta URL au XML iliyoingizwa na chaguo za SSL.',
+        'Please select a metadata source.' => 'Tafadhali chagua chanzo cha Metadata.',
+        'Metadata URL' => 'URL ya Metadata',
+        'Verify' => 'Thibitisha',
+        'Metadata XML' => 'XML ya Metadata',
+        'Use custom SSL options for metadata URL fetch' => 'Tumia chaguo maalum za SSL kupata URL ya Metadata',
+        'SSL CA file' => 'Faili ya SSL CA',
+        'SSL CA path' => 'Njia ya SSL CA',
+        'Verify hostname' => 'Thibitisha jina la seva pangishi',
+        'Certificates and keys' => 'Vyeti na funguo',
+        'SP signing key (used to sign outgoing requests)' => 'Ufunguo wa kusaini wa SP (hutumika kusaini maombi yanayotoka)',
+        'SP signing certificate (matches the key above)' => 'Cheti cha kusaini cha SP (kinalingana na ufunguo hapo juu)',
+        'Required for the SP metadata\'s KeyDescriptor to be published. "Generate" above already produces this together with the key - only needed as a separate step if you uploaded your own key.' =>
+            'Kinahitajika ili KeyDescriptor ya Metadata ya SP ichapishwe. "Zalisha" hapo juu tayari hukitengeneza pamoja na ufunguo - kinahitajika kama hatua tofauti tu ikiwa ulipakia ufunguo wako.',
+        'Signing algorithm' => 'Kanuni ya kusaini',
+        'SHA-256 (default)' => 'SHA-256 (chaguo-msingi)',
+        'SHA-384' => 'SHA-384',
+        'SHA-512' => 'SHA-512',
+        'SHA-1 (legacy, not recommended)' => 'SHA-1 (la zamani, halipendekezwi)',
+        'Used to sign the outgoing request when a signing key is set above. Only change this if your Identity Provider requires a specific algorithm.' =>
+            'Hutumika kusaini ombi linalotoka wakati ufunguo wa kusaini umewekwa hapo juu. Badilisha hili tu ikiwa mtoa utambulisho wako unahitaji kanuni mahususi.',
+        'Decrypt encrypted assertions' => 'Fungua dai zilizosimbwa',
+        'Uses the SP signing key above to decrypt SAML assertions the Identity Provider encrypts. Has no effect on responses that aren\'t encrypted, so it\'s safe to leave enabled. Requires a signing key above.' =>
+            'Hutumia ufunguo wa kusaini wa SP hapo juu kufungua dai za SAML ambazo mtoa utambulisho huzisimba. Haathiri majibu ambayo hayajasimbwa, kwa hiyo ni salama kuiacha ikiwezeshwa. Inahitaji ufunguo wa kusaini hapo juu.',
+        'Identity provider CA certificate' => 'Cheti cha CA cha mtoa utambulisho',
+        'Required for SAML login to work. Without it, Net::SAML2 cannot verify the Identity Provider\'s response signature and authentication will fail.' =>
+            'Kinahitajika ili kuingia kwa SAML kufanye kazi. Bila hicho, Net::SAML2 haiwezi kuthibitisha saini ya jibu la mtoa utambulisho na uthibitisho utashindwa.',
+        'Attribute, group and role sync' => 'Usawazishaji wa sifa, kundi na jukumu',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+        'Customer authentication' => 'Uthibitisho wa mteja',
+        'Determines which numbered Customer::AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Hubainisha nafasi ya Customer::AuthModule<N> yenye namba ambayo usanidi huu unatumia. Nafasi ambazo hazijatumika pekee ndizo zinazotolewa.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+        'SAML wizard' => 'Mchawi wa SAML',
+        'Add agent SAML authentication' => 'Ongeza uthibitisho wa SAML wa wakala',
+        'Add customer SAML authentication' => 'Ongeza uthibitisho wa SAML wa mteja',
+        'Deploy configuration' => 'Sambaza usanidi',
+        'Deployment failed' => '',
+        'Fix the configurations below and deploy again. Or set a configuration to invalid: its login stops working and the other configurations are deployed.' =>
+            '',
+        'Problem' => 'Tatizo',
+        'Edit' => 'Hariri',
+        'Set to invalid and deploy the rest' => '',
+        'Sync' => 'Sawazisha',
+        'Status' => 'Hali/hadhi',
+        'Metadata' => 'Metadata',
+        'Slot %s' => 'Nafasi %s',
+        'Default' => '',
+        'Yes' => 'Ndio',
+        'No' => 'Hapana',
+        'OK' => 'Sawa',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+        'Enable sync' => 'Wezesha usawazishaji',
+        'Also registers Kernel::System::Auth::Sync::SAML for the same slot, to sync attributes/groups/roles from the SAML assertion on every login.' =>
+            'Pia husajili Kernel::System::Auth::Sync::SAML kwa nafasi ile ile, ili kusawazisha sifa/makundi/majukumu kutoka dai la SAML kila kuingia.',
+        'The AuthSyncModule for this slot is already configured outside of AdminAuthentication - sync cannot be enabled for it.' =>
+            'AuthSyncModule ya nafasi hii tayari imesanidiwa nje ya AdminAuthentication - usawazishaji hauwezi kuwezeshwa kwake.',
+        'User attribute sync map' => 'Ramani ya usawazishaji wa sifa za mtumiaji',
+        'Maps Znuny user attributes (left) to SAML assertion attribute names (right).' =>
+            'Huunganisha sifa za mtumiaji wa Znuny (kushoto) na majina ya sifa za dai la SAML (kulia).',
+        'Znuny attribute' => 'Sifa ya Znuny',
+        'SAML attribute URI' => 'URI ya sifa ya SAML',
+        'Initial groups for new users' => 'Makundi ya awali kwa watumiaji wapya',
+        'Groups (with rw permission) granted only when a brand-new agent is created via sync. Ctrl/Cmd-click to select multiple.' =>
+            'Makundi (yenye ruhusa ya rw) hutolewa tu wakati wakala mpya kabisa anapoundwa kupitia usawazishaji. Ctrl/Cmd-click kuchagua zaidi ya moja.',
+        'SAML attribute carrying group values' => 'Sifa ya SAML inayobeba thamani za kundi',
+        'Group sync rules (by group value)' => 'Sheria za usawazishaji wa kundi (kwa thamani ya kundi)',
+        'Maps a SAML group value to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Huunganisha thamani ya kundi la SAML na kundi la Znuny na ruhusa. Ctrl/Cmd-click kuchagua ruhusa nyingi.',
+        'SAML value' => 'Thamani ya SAML',
+        'Group sync rules (by arbitrary attribute/value)' => 'Sheria za usawazishaji wa kundi (kwa sifa/thamani yoyote)',
+        'Maps any SAML attribute name/value combination to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Huunganisha mchanganyiko wowote wa jina/thamani ya sifa ya SAML na kundi la Znuny na ruhusa. Ctrl/Cmd-click kuchagua ruhusa nyingi.',
+        'SAML attribute' => 'Sifa ya SAML',
+        'Role sync requires at least one active role. Create or activate a role under Admin → Roles.' =>
+            'Usawazishaji wa majukumu unahitaji angalau jukumu moja amilifu. Tengeneza au wezesha jukumu chini ya Kiongozi → Majukumu.',
+        'SAML attribute carrying role values' => 'Sifa ya SAML inayobeba thamani za jukumu',
+        'Role sync rules (by role value)' => 'Sheria za usawazishaji wa jukumu (kwa thamani ya jukumu)',
+        'Maps a SAML role value to one or more Znuny roles, active or inactive.' =>
+            'Huunganisha thamani ya jukumu la SAML na jukumu la Znuny, amilifu au si amilifu.',
+        'Active' => 'Amilifu',
+        'Role sync rules (by arbitrary attribute/value)' => 'Sheria za usawazishaji wa jukumu (kwa sifa/thamani yoyote)',
+        'Maps any SAML attribute name/value combination to one or more Znuny roles, active or inactive.' =>
+            'Huunganisha mchanganyiko wowote wa jina/thamani ya sifa ya SAML na jukumu la Znuny, amilifu au si amilifu.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+        'Setup steps' => 'Hatua za usanidi',
+        'Setup wizard' => 'Mchawi wa usanidi',
+        'SAML setup wizard' => 'Mchawi wa usanidi wa SAML',
+        'Step' => 'Hatua',
+        'What are you setting up?' => 'Unasanidi nini?',
+        'Agent authentication - staff logging into the agent interface' =>
+            'Uthibitisho wa wakala - wafanyakazi wanaoingia kwenye kiolesura cha wakala',
+        'Customer authentication - customers logging into the customer portal' =>
+            'Uthibitisho wa mteja - wateja wanaoingia kwenye lango la mteja',
+        'Login with SSO' => 'Ingia kwa SSO',
+        'User sync (optional)' => 'Usawazishaji wa mtumiaji (hiari)',
+        'Optionally sync user attributes, groups and roles from the SAML assertion on every login. This can also be set up later on the edit screen.' =>
+            'Kwa hiari sawazisha sifa za mtumiaji, makundi na majukumu kutoka dai la SAML kila kuingia. Hili linaweza pia kusanidiwa baadaye kwenye skrini ya kuhariri.',
+        'Review' => 'Kagua',
+        'Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective.' =>
+            'Bofya Hifadhi kuunda usanidi huu wa SAML. Bado hautakuwa amilifu - baadaye tumia kitendo cha Sambaza usanidi kwenye ukurasa wa Mapitio ili kifanye kazi.',
+        'If you skipped the Identity Provider CA certificate here, it is taken from the metadata when saving. Please check it on the edit screen afterwards.' =>
+            '',
+        'You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only).' =>
+            'Unaweza kurudi kwenye hatua yoyote ya awali kufanya mabadiliko, au baadaye utumie skrini kamili ya kuhariri kwa chaguo za juu kama usawazishaji wa sifa/kundi/jukumu (uthibitisho wa wakala pekee).',
+        'Back' => 'Nyuma',
+        'Next' => 'Baadae',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
         'Add Auto Response' => 'Ongeza Majibu ya Kiautomatiki',
         'Filter for Auto Responses' => 'Chuja kwa ajili ya majibu ya otomatiki.',
@@ -328,9 +491,7 @@ sub Data {
             '',
         'Account Status' => '',
         'Account status for: %s' => '',
-        'Status' => 'Hali/hadhi',
         'Account' => '',
-        'Edit' => 'Hariri',
         'No accounts found.' => '',
         'Communication Log Details (%s)' => '',
         'Direction' => 'Muelekeo',
@@ -449,7 +610,6 @@ sub Data {
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => 'Geuza hali amilifu kwa wote',
-        'Active' => 'Amilifu',
         'Toggle active state for %s' => 'Geuza hali amilifu kwa %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
@@ -1586,14 +1746,11 @@ sub Data {
         'Download package' => 'Pakua kifurushi',
         'Rebuild package' => 'Jenga kifurushi',
         'Package Information' => '',
-        'Metadata' => 'Metadata',
         'Change Log' => 'Badili Kuingia',
         'Date' => 'Tarehe',
         'List of Files' => 'Orodha ya mafaili',
         'Permission' => 'Ruhusa',
         'Size' => 'Ukubwa',
-        'Problem' => 'Tatizo',
-        'OK' => 'Sawa',
         'Download file from package!' => 'Pakua faili kutoka kwenye kifurushi',
         'Required' => 'Hitajika',
         'Primary Key' => '',
@@ -2137,7 +2294,6 @@ sub Data {
         'System Email Addresses Management' => 'Mfumo wa Usimamizi wa anuani za barua pepe',
         'Add System Email Address' => 'Ongeza Anuani ya barua pepe ya mfumo',
         'Edit System Email Address' => 'Hariri Anuani ya Barua pepe ya Mfumo',
-        'Email address' => 'Anuani ya barua pepe',
         'Display name' => 'Jina la kuonyesha',
         'This email address is already used as system email address.' => '',
         'The display name and email address will be shown on mail you send.' =>
@@ -2352,8 +2508,6 @@ sub Data {
         'All-day' => 'Siku nzima',
         'Repeat' => '',
         'Notification' => 'Taarifa',
-        'Yes' => 'Ndio',
-        'No' => 'Hapana',
         'No calendars found. Please add a calendar first by using Manage Calendars page.' =>
             '',
 
@@ -2878,10 +3032,11 @@ sub Data {
         'Archive Search' => 'Tafuta nyaraka',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'Maudhui',
+        'e.g. Text or Te*t' => '',
         'Save filter settings as default' => 'Hifadhi mipangilio ya kichuja kuwa chaguo-msingi',
         'Event Type' => 'Aina ya tukio',
         'Save as default' => 'Hifadhi kama chaguo-msingi',
-        'Back' => 'Nyuma',
         'Change Queue' => 'Badili foleni',
         'Add Filter' => 'Ongeza kichuja',
         'Set' => 'Weka',
@@ -3129,7 +3284,6 @@ sub Data {
         'Phone' => 'Simu',
         'Web site' => 'Tovuti',
         'Community' => '',
-        'Next' => 'Baadae',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => 'Sanidi barua pepe ya iliyofungwa nje',
@@ -3224,6 +3378,8 @@ sub Data {
         'Delete link' => '',
         'Delete Link' => '',
         'Object#' => 'Kipengee#',
+        'Remove active filters for this widget.' => 'Ondoa vichuja amilifu kwa hiki kifaa.',
+        'No results found.' => 'Hakuna matokeo yaliyopatikana.',
         'Add links' => 'Ongeza viungo',
         'Delete links' => 'Futa viungo',
 
@@ -3630,6 +3786,34 @@ sub Data {
             '',
         'All agents with write permission for the appointment (calendar)' =>
             '',
+
+        # Perl Module: Kernel/Modules/AdminAuthentication.pm
+        'Perl module Net::SAML2 is not installed. SAML authentication cannot work until it is installed on the server.' =>
+            'Moduli ya Perl Net::SAML2 haijasakinishwa. Uthibitisho wa SAML hauwezi kufanya kazi mpaka isakinishwe kwenye seva.',
+        'Authentication configuration is not in sync with the deployed configuration, but it can\'t be deployed: a valid configuration has a problem, see the status below. Fix it or set it to invalid, then deploy.' =>
+            '',
+        'Authentication configuration is not in sync with the deployed configuration, please deploy.' =>
+            'Usanidi wa uthibitisho haujasawazishwa na usanidi uliosambazwa, tafadhali sambaza.',
+        'No IdP CA certificate was uploaded and none could be taken from the IdP metadata.' =>
+            'Hakuna cheti cha CA cha IdP kilichopakiwa na hakuna kilichoweza kuchukuliwa kutoka Metadata ya IdP.',
+        'Only invalid authentication configurations can be deleted. Please set the configuration to invalid first.' =>
+            'Usanidi batili wa uthibitisho pekee unaweza kufutwa. Tafadhali weka kwanza usanidi kuwa batili.',
+        'Invalid or missing Role.' => 'Jukumu batili au halipo.',
+        'No file was uploaded.' => 'Hakuna faili iliyopakiwa.',
+        'Error storing the uploaded file.' => 'Kasoro kuhifadhi faili iliyopakiwa.',
+        'Only the SP signing key can be generated.' => 'Ufunguo wa kusaini wa SP pekee unaweza kuzalishwa.',
+        'Error generating certificate. Please check the system log.' => 'Kasoro kuzalisha cheti. Tafadhali angalia kumbukumbu ya mfumo.',
+        'Error storing the generated key in VirtualFS.' => 'Kasoro kuhifadhi ufunguo uliozalishwa katika VirtualFS.',
+        'Error storing the generated certificate in VirtualFS.' => 'Kasoro kuhifadhi cheti kilichozalishwa katika VirtualFS.',
+        'Could not find a certificate in the metadata. Please check the URL/XML and try again.' =>
+            'Haikuwezekana kupata cheti katika Metadata. Tafadhali angalia URL/XML na ujaribu tena.',
+        'Error storing the certificate.' => 'Kasoro kuhifadhi cheti.',
+        'Could not read the certificate from VirtualFS.' => 'Haikuwezekana kusoma cheti kutoka VirtualFS.',
+        'The authentication configuration was not deployed. The previously deployed configuration is still active.' =>
+            'Usanidi wa uthibitisho haukusambazwa. Usanidi uliosambazwa awali bado uko amilifu.',
+        'Please check the system log for details.' => 'Tafadhali angalia kumbukumbu ya mfumo kwa maelezo.',
+        'Authentication configuration not found.' => '',
+        'Could not set the authentication configuration to invalid.' => '',
 
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
@@ -4664,6 +4848,8 @@ sub Data {
             '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            'Kosa: tafadhali weka thamani ya innodb_redo_log_capacity kwenye hifadhidata kuwa angalau %s MB (sasa: %s MB, inayopendekezwa: %s MB). Kwa maelezo zaidi, angalia %s.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             '',
         'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
@@ -4845,6 +5031,7 @@ sub Data {
         'Linked as' => '',
         'Search Result' => '',
         'Linked' => 'Imeunganishwa',
+        'filter' => 'Chuja',
         'Bulk' => 'Kwa wingi',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -4973,7 +5160,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => '',
         'Unable to load %s!' => '',
-        'Content' => 'Maudhui',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'Taarifa za tiketi',
@@ -5034,6 +5220,34 @@ sub Data {
         'Session invalid. Please log in again.' => 'Kipindi batili. Tafadhani ingia tena.',
         'Session has timed out. Please log in again.' => 'Muda wa kipindi umeisha.Tafadhali jaribu tena baadae',
 
+        # Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+        'This is not an unencrypted private key in PEM format (-----BEGIN PRIVATE KEY-----).' =>
+            'Huu si ufunguo wa faragha usiosimbwa katika umbizo la PEM (-----BEGIN PRIVATE KEY-----).',
+        'This is not a certificate in PEM format (-----BEGIN CERTIFICATE-----).' =>
+            'Huu si cheti katika umbizo la PEM (-----BEGIN CERTIFICATE-----).',
+        'The private key could not be read. Only unencrypted private keys are supported.' =>
+            'Ufunguo wa faragha haukuweza kusomwa. Funguo za faragha zisizosimbwa pekee ndizo zinazotumika.',
+        'The certificate could not be read.' => 'Cheti hakikuweza kusomwa.',
+        'Could not read the SP signing key.' => 'Haikuwezekana kusoma ufunguo wa kusaini wa SP.',
+        'Could not read the IdP CA certificate.' => 'Haikuwezekana kusoma cheti cha CA cha IdP.',
+        'No IdP CA certificate is stored. It is taken from the IdP metadata on every deploy. Save the configuration to store it.' =>
+            '',
+        'Could not decrypt the SP signing key. Please check the configured encryption key.' =>
+            'Haikuwezekana kufungua ufunguo wa kusaini wa SP. Tafadhali angalia ufunguo wa usimbaji uliosanidiwa.',
+        'Net::SAML2 is not installed on the server, metadata cannot be verified.' =>
+            'Net::SAML2 haijasakinishwa kwenye seva, Metadata haiwezi kuthibitishwa.',
+        'Metadata URL is empty.' => 'URL ya Metadata ni tupu.',
+        'Metadata XML is empty.' => 'XML ya Metadata ni tupu.',
+        'Could not parse the metadata. Please check the URL/XML and try again.' =>
+            'Haikuwezekana kuchambua Metadata. Tafadhali angalia URL/XML na ujaribu tena.',
+        'Perl module Crypt::OpenSSL::X509 is not installed, certificate details cannot be parsed.' =>
+            'Moduli ya Perl Crypt::OpenSSL::X509 haijasakinishwa, maelezo ya cheti hayawezi kuchambuliwa.',
+        'Could not parse the certificate.' => 'Haikuwezekana kuchambua cheti.',
+
+        # Perl Module: Kernel/System/AuthenticationConfig.pm
+        'No authentication plugin is registered for this type.' => 'Hakuna programu-jalizi ya uthibitisho iliyosajiliwa kwa aina hii.',
+        'Could not write the certificate files.' => 'Haikuwezekana kuandika faili za cheti.',
+
         # Perl Module: Kernel/System/AutoResponse.pm
         'Couldn\'t read auto response configuration file. Please make sure the file is valid.' =>
             '',
@@ -5077,9 +5291,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'kabla/baada',
         'between' => 'katikati',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -5250,6 +5461,9 @@ sub Data {
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'Uwezo wa kumbukumbu ya redo ya InnoDB',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'Mpangilio wa innodb_redo_log_capacity lazima uwe angalau 256 MB.',
         'InnoDB Log File Size' => '',
         'The setting innodb_log_file_size must be at least 256 MB.' => '',
 
@@ -5554,7 +5768,6 @@ sub Data {
         'All Settings' => '',
 
         # Perl Module: Kernel/System/SysConfig/BaseValueType.pm
-        'Default' => '',
         'Value is not correct! Please, consider updating this field.' => '',
         'Value doesn\'t satisfy regex (%s).' => '',
 
@@ -6012,6 +6225,8 @@ sub Data {
             '',
         'Maximum Number of a calendar shown in a dropdown.' => '',
         'Define the start day of the week for the date picker.' => 'Inafafanua siku ya kwanza ya wiki kwa kichagua tarehe.',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Inafafanua kama tarehe chaguo-msingi ya kusubiri kulingana na Ticket::Frontend::PendingDiffTime inapaswa kuruka siku ambazo ni sikukuu au ambazo hazina saa za kazi katika kalenda hii.',
         'Adds the permanent vacation days.' => '',
         'Adds the one time vacation days.' => '',
         'Defines the hours and week days to count the working time.' => 'Inafafanua masaa na siku za wiki za kuhesabu muda wa kufanya kazi.',
@@ -6293,6 +6508,8 @@ sub Data {
             '',
         'Frontend module registration (disable company link if no company feature is used).' =>
             'Usajili wa moduli ya mazingira ya mbele (lemaza kiunganishi cha kampuni kama hakuna kipengele cha kampuni kinachotumika).',
+        'Registers the SAML 2.0 authentication plugin for AdminAuthentication.' =>
+            'Husajili programu-jalizi ya uthibitisho ya SAML 2.0 kwa AdminAuthentication.',
         'Frontend module registration for the customer interface.' => 'Usajili wa moduli ya mazingira ya mbele kwa ajili ya kiolesura cha mteja.',
         'Activates the available themes on the system. Value 1 means active, 0 means inactive.' =>
             'Amilisha dhima zinazopatikana katika mfumo. Thamani 1 inamaanisha amilifu, 0 inamaanisha isiyoamilifu.',
@@ -6715,6 +6932,8 @@ sub Data {
             'Inaonyesha muda ulihesabiwa kwa ajili ya makala ya mandhari ya ukuzaji wa tiketi.',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             'Amilisha kichuja cha makala katika mandhari ya kukuza kubainisha makala ipi ionyeshwe.',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Sehemu zinazobadilika zinazoonyeshwa kwenye kisanduku cha mazungumzo cha kichuja cha makala katika skrini ya kukuza tiketi kwenye kiolesura cha wakala. Zinatumika tu sehemu za aina ya kipengele Makala za aina za Nakala, Sehemu ya nakala, Kunjuzi, Uchaguzi wa wingi na Kisandukutiki.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>
@@ -7924,6 +8143,8 @@ Mfano:
             '',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             '',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Washa vichujio vya safu wima vya chaguo nyingi kwa tiketi zilizounganishwa katika wijeti changamano ya vitu vilivyounganishwa (LinkObject::ViewMode = "complex"). Vichujio vinapatikana katika AgentTicketZoom na havionyeshwi kwenye dirisha ibukizi la AgentLinkObject.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8392,6 +8613,55 @@ Mfano:
             '',
         'Attachment was deleted successfully.' => '',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?' =>
+            'Kubadilisha chanzo cha Metadata huondoa URL au XML ya Metadata iliyoingizwa na chaguo za SSL. Endelea?',
+        'Change metadata source' => 'Badilisha chanzo cha Metadata',
+        'Uploaded key' => 'Ufunguo uliopakiwa',
+        'EXPIRED' => 'IMEISHA',
+        'expires' => 'inaisha',
+        'used by %s configuration(s)' => 'inatumika na usanidi %s',
+        'Could not read the certificate.' => 'Haikuweza kusoma cheti.',
+        'Certificate (PEM)' => 'Cheti (PEM)',
+        'Issuer' => 'Mtoaji',
+        'Valid from' => 'Halali kuanzia',
+        'Valid until' => 'Halali hadi',
+        'Serial' => 'Namba ya mfululizo',
+        'Fingerprint (SHA-256)' => 'Alama za vidole (SHA-256)',
+        'Show raw PEM' => 'Onyesha PEM ghafi',
+        'Certificate details' => 'Maelezo ya cheti',
+        'Metadata is valid.' => 'Metadata ni halali.',
+        'Entity ID' => 'Kitambulisho cha chombo',
+        'SSO URL' => 'SSO URL',
+        'Includes a signing certificate.' => 'Inajumuisha cheti cha kusaini.',
+        'No signing certificate found in the metadata.' => 'Hakuna cheti cha kusaini kilichopatikana katika Metadata.',
+        'Found %s attribute(s) in the metadata.' => 'Sifa %s zimepatikana katika Metadata.',
+        'Verifying...' => 'Inathibitisha...',
+        'Metadata verification failed.' => 'Uthibitisho wa Metadata umeshindwa.',
+        'Upload failed.' => 'Upakiaji umeshindwa.',
+        'Please paste a certificate or key first.' => 'Tafadhali bandika kwanza cheti au ufunguo.',
+        'Saving the pasted certificate/key failed.' => 'Kuhifadhi cheti/ufunguo uliobandikwa kumeshindwa.',
+        'Certificate generation failed.' => 'Kuzalisha cheti kumeshindwa.',
+        'Please select a metadata source (URL or XML) first.' => 'Tafadhali chagua kwanza chanzo cha Metadata (URL au XML).',
+        'Could not find a certificate in the metadata.' => 'Haikuwezekana kupata cheti katika Metadata.',
+        'Copied to clipboard!' => '',
+        'Do you really want to delete this SAML configuration?' => 'Je, kweli unataka kufuta usanidi huu wa SAML?',
+        'Delete SAML configuration' => 'Futa usanidi wa SAML',
+        'There was an error deleting the SAML configuration.' => 'Kulikuwa na kasoro kufuta usanidi wa SAML.',
+        'NameID (default)' => '',
+        '(pasted XML)' => '(XML iliyobandikwa)',
+        'Not configured yet' => 'Bado haijasanidiwa',
+        'Identity provider metadata' => 'Metadata ya mtoa utambulisho',
+        'SP signing key' => 'Ufunguo wa kusaini wa SP',
+        'Configured' => 'Imesanidiwa',
+        'Not set' => 'Haijawekwa',
+        'SP signing certificate' => 'Cheti cha kusaini cha SP',
+        'Not set (will be taken from the metadata when saving)' => '',
+        'User sync' => 'Usawazishaji wa mtumiaji',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)' =>
+            'Imewezeshwa (%s ramani za sifa, %s sheria za makundi, %s sheria za majukumu)',
+        'Please fill in all required fields before continuing.' => 'Tafadhali jaza sehemu zote zinazohitajika kabla ya kuendelea.',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.AutoResponse.js
         'Delete this %s' => '',
         'Deleting the %s and its data. This may take a while...' => '',
@@ -8598,9 +8868,6 @@ Mfano:
         'Please select attachments for download.' => '',
         'Show less' => '',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
-        'Copied to clipboard!' => '',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
         'First select a customer user, then select a customer ID to assign to this ticket.' =>
             '',
@@ -8618,7 +8885,6 @@ Mfano:
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => 'Tafadhali angalia uga zote ziliizowekwa alama nyekundu kwa ajili ya maingizo batili.',
         'month' => 'Mwezi',
-        'Remove active filters for this widget.' => 'Ondoa vichuja amilifu kwa hiki kifaa.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '',
@@ -8646,9 +8912,6 @@ Mfano:
         # JS File: var/httpd/htdocs/js/Core.Agent.Search.js
         'Please remove the following words from your search as they cannot be searched for:' =>
             '',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.SharedSecretGenerator.js
-        'Generate' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
@@ -8710,6 +8973,7 @@ Mfano:
             '',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'Hakuna saa za kazi',
         'Open date selection' => 'Fungua chaguo la tarehe',
         'Invalid date (need a future date)!' => 'Tarehe batili (Tarehe ijayo inatakiwa)',
         'Invalid date (need a past date)!' => 'Tarehe batili (Tarehe ya zamani inahitajika)',
@@ -9201,6 +9465,7 @@ Thanks for your help!
         'Manage POP3 or IMAP accounts to fetch email from.' => 'Simamia akaunti za POP3 au IMAP kupata barua pepe kutika huko. ',
         'Manage S/MIME certificates for email encryption.' => 'Simamia vyeti vya S/MIME kwa ajili ya usimbaji fiche.',
         'Manage System Configuration Deployments.' => '',
+        'Manage agent and customer authentication (e.g. SAML 2.0).' => 'Simamia uthibitisho wa wakala na mteja (k.m. SAML 2.0).',
         'Manage different calendars.' => '',
         'Manage existing sessions.' => 'Simamia vipindi vilivyopo.',
         'Manage outbound email profiles.' => '',
@@ -9326,6 +9591,7 @@ Thanks for your help!
         'Running Process Tickets' => 'Endeshaji wa tiketi za mchakato.',
         'Russian' => '',
         'S/MIME Certificates' => 'Vyeti vya S/MIME',
+        'SAML' => 'SAML',
         'Schedule a maintenance period.' => 'Panga ratiba ya muda wa matengenezo.',
         'Screen after marking as seen' => '',
         'Screen after marking as unseen' => '',
@@ -9557,6 +9823,7 @@ Thanks for your help!
         '%s MB',
         '%s TB',
         '%s of %s',
+        '(pasted XML)',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9571,6 +9838,7 @@ Thanks for your help!
         'Add new entry',
         'Add to favourites',
         'Agent',
+        'Agent authentication',
         'All occurrences',
         'All-day',
         'An Error Occurred',
@@ -9593,6 +9861,7 @@ Thanks for your help!
         'Article filter',
         'As soon as you use this button or link, you will leave this screen and its current state will be saved automatically. Do you want to continue?',
         'Ascending sort applied, ',
+        'Assertion consumer URL',
         'Attachment was deleted successfully.',
         'Attachments',
         'Aug',
@@ -9603,6 +9872,11 @@ Thanks for your help!
         'Calendar',
         'Cancel',
         'Cannot proceed',
+        'Certificate (PEM)',
+        'Certificate details',
+        'Certificate generation failed.',
+        'Certificate/key is stored in VirtualFS.',
+        'Change metadata source',
         'Clear',
         'Clear all',
         'Clear all filters',
@@ -9615,27 +9889,34 @@ Thanks for your help!
         'Clone',
         'Clone Process',
         'Clone web service',
+        'Close',
         'Close preview',
         'Close this dialog',
         'Collapse',
         'Complex %s with %s arguments',
+        'Configured',
         'Confirm',
         'Copied to clipboard!',
         'Copy Ticket Number',
         'Copy Ticket Number + Title',
         'Copy ticket information',
+        'Could not find a certificate in the metadata.',
         'Could not load activities.',
         'Could not open popup window. Please disable any popup blockers for this application.',
+        'Could not read the certificate.',
         'Current selection',
         'Currently not possible',
+        'Customer authentication',
         'Customer interface does not support articles not visible for customers.',
         'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',
         'December',
+        'Decrypt encrypted assertions',
         'Delete',
         'Delete Entity',
+        'Delete SAML configuration',
         'Delete conditions',
         'Delete draft',
         'Delete error handling module',
@@ -9669,10 +9950,12 @@ Thanks for your help!
         'Deployment successful. You\'re being redirected...',
         'Descending sort applied, ',
         'Description',
+        'Disabled',
         'Dismiss',
         'Do not show this warning again.',
         'Do you really want to continue?',
         'Do you really want to delete "%s"?',
+        'Do you really want to delete this SAML configuration?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
         'Do you really want to delete this key?',
@@ -9689,11 +9972,14 @@ Thanks for your help!
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
+        'EXPIRED',
         'Edit Field Details',
         'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)',
         'End date',
+        'Entity ID',
         'Error',
         'Error during AJAX communication',
         'Error during AJAX communication. Status: %s, Error: %s',
@@ -9707,8 +9993,10 @@ Thanks for your help!
         'February',
         'Filter',
         'Filters',
+        'Fingerprint (SHA-256)',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
+        'Found %s attribute(s) in the metadata.',
         'Fr',
         'Fri',
         'Friday',
@@ -9718,13 +10006,18 @@ Thanks for your help!
         'Grouped',
         'Help',
         'Hide EntityIDs',
+        'Identity provider CA certificate',
+        'Identity provider metadata',
         'If you now leave this page, all open popup windows will be closed, too!',
         'Import web service',
+        'Includes a signing certificate.',
         'Information about the Znuny Daemon',
         'Insert selected customer user(s) into the "%s:" field.',
         'Invalid date (need a future date)!',
         'Invalid date (need a past date)!',
         'Invalid date!',
+        'Issuer',
+        'Issuer (SP entity ID)',
         'It is going to be deleted from the field, please try again.',
         'It is not possible to add a new event trigger because the event is not set.',
         'It is not possible to set this entry to invalid. All affected configuration settings have to be changed beforehand.',
@@ -9742,6 +10035,8 @@ Thanks for your help!
         'Loading, please wait...',
         'Loading...',
         'Location',
+        'Login attribute',
+        'Login button text',
         'Mail check successful.',
         'Mapping for Key',
         'Mapping for Key %s',
@@ -9749,15 +10044,20 @@ Thanks for your help!
         'March',
         'May',
         'May_long',
+        'Metadata is valid.',
+        'Metadata verification failed.',
         'Mo',
         'Mon',
         'Monday',
         'Month',
         'Name',
+        'NameID (default)',
         'Namespace %s could not be initialized, because %s could not be found.',
         'Next',
+        'No',
         'No Data Available.',
         'No TransitionActions assigned.',
+        'No certificate/key set.',
         'No data found.',
         'No dialogs assigned yet. Just pick an activity dialog from the list on the left and drag it here.',
         'No matches found.',
@@ -9765,9 +10065,14 @@ Thanks for your help!
         'No response from get package upgrade result.',
         'No response from get package upgrade run status.',
         'No response from package upgrade all.',
+        'No signing certificate found in the metadata.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
+        'Not configured yet',
+        'Not set',
+        'Not set (will be taken from the metadata when saving)',
         'Notice',
         'Notification',
         'Nov',
@@ -9784,10 +10089,13 @@ Thanks for your help!
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
+        'Please fill in all required fields before continuing.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
+        'Please paste a certificate or key first.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select a metadata source (URL or XML) first.',
         'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
@@ -9821,11 +10129,15 @@ Thanks for your help!
         'Restore web service configuration',
         'Rule',
         'Running',
+        'SP signing certificate',
+        'SP signing key',
+        'SSO URL',
         'Sa',
         'Sat',
         'Saturday',
         'Save',
         'Save and update automatically',
+        'Saving the pasted certificate/key failed.',
         'Scale preview content',
         'Search',
         'Search attributes',
@@ -9838,6 +10150,7 @@ Thanks for your help!
         'Select files or drop them here',
         'Sep',
         'September',
+        'Serial',
         'Setting a template will overwrite any text or attachment.',
         'Settings',
         'Show',
@@ -9846,7 +10159,9 @@ Thanks for your help!
         'Show less',
         'Show more',
         'Show or hide the content.',
+        'Show raw PEM',
         'Slide the navigation bar',
+        'Slot',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',
         'Sorry, but you can\'t disable all methods for this notification.',
         'Sorry, the only existing condition can\'t be removed.',
@@ -9861,12 +10176,14 @@ Thanks for your help!
         'Status',
         'Stream',
         'Su',
+        'Subject',
         'Successful',
         'Sun',
         'Sunday',
         'Support Bundle',
         'Switch to desktop mode',
         'Switch to mobile mode',
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?',
         'Team',
         'Th',
         'The activities could not be marked as seen.',
@@ -9888,6 +10205,7 @@ Thanks for your help!
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',
+        'There was an error deleting the SAML configuration.',
         'There was an error deleting the attachment. Please check the logs for more information.',
         'There was an error. Please save all settings you are editing and check the logs for more information.',
         'This Activity cannot be deleted because it is the Start Activity.',
@@ -9919,15 +10237,22 @@ Thanks for your help!
         'Tu',
         'Tue',
         'Tuesday',
+        'Type',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.',
         'Unknown',
         'Unlock setting.',
         'Update All Packages',
         'Update all packages',
         'Update manually',
+        'Upload failed.',
         'Upload information',
+        'Uploaded key',
         'Uploading...',
         'Use options below to narrow down for which tickets appointments will be automatically created.',
+        'User sync',
+        'Valid from',
+        'Valid until',
+        'Verifying...',
         'WARNING: When you change the name of the group \'admin\', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement.',
         'Warning',
         'We',
@@ -9944,12 +10269,14 @@ Thanks for your help!
         'activate to remove the sort',
         'and %s more...',
         'day',
+        'expires',
         'month',
         'more',
         'no',
         'none',
         'or',
         'sorting is disabled',
+        'used by %s configuration(s)',
         'week',
         'yes',
     ];

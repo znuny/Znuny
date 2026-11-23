@@ -1394,6 +1394,13 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="TimePendingSkipUnavailableDays" Required="1" Valid="1">
+        <Description Translatable="1">Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.</Description>
+        <Navigation>Core::Time</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
     <Setting Name="TimeVacationDays" Required="1" Valid="1">
         <Description Translatable="1">Adds the permanent vacation days.</Description>
         <Navigation>Core::Time</Navigation>
@@ -1533,6 +1540,14 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="TimePendingSkipUnavailableDays::Calendar1" Required="1" Valid="1">
+        <Description Translatable="1">Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.</Description>
+        <Navigation>Core::Time::Calendar1</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+
     <Setting Name="TimeVacationDays::Calendar1" Required="1" Valid="1">
         <Description Translatable="1">Adds the permanent vacation days for the indicated calendar.</Description>
         <Navigation>Core::Time::Calendar1</Navigation>
@@ -1672,6 +1687,14 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="TimePendingSkipUnavailableDays::Calendar2" Required="1" Valid="1">
+        <Description Translatable="1">Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.</Description>
+        <Navigation>Core::Time::Calendar2</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+
     <Setting Name="TimeVacationDays::Calendar2" Required="1" Valid="1">
         <Description Translatable="1">Adds the permanent vacation days for the indicated calendar.</Description>
         <Navigation>Core::Time::Calendar2</Navigation>
@@ -1811,6 +1834,14 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="TimePendingSkipUnavailableDays::Calendar3" Required="1" Valid="1">
+        <Description Translatable="1">Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.</Description>
+        <Navigation>Core::Time::Calendar3</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+
     <Setting Name="TimeVacationDays::Calendar3" Required="1" Valid="1">
         <Description Translatable="1">Adds the permanent vacation days for the indicated calendar.</Description>
         <Navigation>Core::Time::Calendar3</Navigation>
@@ -1950,6 +1981,14 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="TimePendingSkipUnavailableDays::Calendar4" Required="1" Valid="1">
+        <Description Translatable="1">Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.</Description>
+        <Navigation>Core::Time::Calendar4</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+
     <Setting Name="TimeVacationDays::Calendar4" Required="1" Valid="1">
         <Description Translatable="1">Adds the permanent vacation days for the indicated calendar.</Description>
         <Navigation>Core::Time::Calendar4</Navigation>
@@ -2089,6 +2128,14 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="TimePendingSkipUnavailableDays::Calendar5" Required="1" Valid="1">
+        <Description Translatable="1">Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.</Description>
+        <Navigation>Core::Time::Calendar5</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+
     <Setting Name="TimeVacationDays::Calendar5" Required="1" Valid="1">
         <Description Translatable="1">Adds the permanent vacation days for the indicated calendar.</Description>
         <Navigation>Core::Time::Calendar5</Navigation>
@@ -2228,6 +2275,14 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="TimePendingSkipUnavailableDays::Calendar6" Required="1" Valid="1">
+        <Description Translatable="1">Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.</Description>
+        <Navigation>Core::Time::Calendar6</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+
     <Setting Name="TimeVacationDays::Calendar6" Required="1" Valid="1">
         <Description Translatable="1">Adds the permanent vacation days for the indicated calendar.</Description>
         <Navigation>Core::Time::Calendar6</Navigation>
@@ -2367,6 +2422,14 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="TimePendingSkipUnavailableDays::Calendar7" Required="1" Valid="1">
+        <Description Translatable="1">Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.</Description>
+        <Navigation>Core::Time::Calendar7</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+
     <Setting Name="TimeVacationDays::Calendar7" Required="1" Valid="1">
         <Description Translatable="1">Adds the permanent vacation days for the indicated calendar.</Description>
         <Navigation>Core::Time::Calendar7</Navigation>
@@ -2506,6 +2569,14 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="TimePendingSkipUnavailableDays::Calendar8" Required="1" Valid="1">
+        <Description Translatable="1">Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.</Description>
+        <Navigation>Core::Time::Calendar8</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+
     <Setting Name="TimeVacationDays::Calendar8" Required="1" Valid="1">
         <Description Translatable="1">Adds the permanent vacation days for the indicated calendar.</Description>
         <Navigation>Core::Time::Calendar8</Navigation>
@@ -2645,6 +2716,14 @@
             </Item>
         </Value>
     </Setting>
+    <Setting Name="TimePendingSkipUnavailableDays::Calendar9" Required="1" Valid="1">
+        <Description Translatable="1">Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.</Description>
+        <Navigation>Core::Time::Calendar9</Navigation>
+        <Value>
+            <Item ValueType="Checkbox">0</Item>
+        </Value>
+    </Setting>
+
     <Setting Name="TimeVacationDays::Calendar9" Required="1" Valid="1">
         <Description Translatable="1">Adds the permanent vacation days for the indicated calendar.</Description>
         <Navigation>Core::Time::Calendar9</Navigation>
@@ -6204,6 +6283,79 @@ via the Preferences button after logging in.
                 <Item Key="Description" Translatable="1">Manage S/MIME certificates for email encryption.</Item>
                 <Item Key="IconBig">fa-user-secret</Item>
                 <Item Key="IconSmall"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Module###AdminAuthentication" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Admin</Item>
+                    <Item Key="Title" Translatable="1">Authentication Management</Item>
+                    <Item Key="NavBarName">Admin</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AdminAuthentication###001-Framework" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="CSS">
+                    <Array>
+                        <Item>Core.Agent.Admin.Authentication.css</Item>
+                    </Array>
+                </Item>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.Authentication.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::NavigationModule###AdminAuthentication" Required="0" Valid="1">
+        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Group">
+                    <Array>
+                        <Item>admin</Item>
+                    </Array>
+                </Item>
+                <Item Key="GroupRo">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
+                <Item Key="Name" Translatable="1">Authentication</Item>
+                <Item Key="Block">Users</Item>
+                <Item Key="Description" Translatable="1">Manage agent and customer authentication (e.g. SAML 2.0).</Item>
+                <Item Key="IconBig">fa-key</Item>
+                <Item Key="IconSmall"></Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="AuthenticationConfig::Plugin###SAML" Required="0" Valid="1">
+        <Description Translatable="1">Registers the SAML 2.0 authentication plugin for AdminAuthentication.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="DisplayName" Translatable="1">SAML</Item>
+                <Item Key="Module">Kernel::System::Authentication::Plugin::SAML</Item>
             </Hash>
         </Value>
     </Setting>

@@ -11,6 +11,7 @@ package Kernel::System::CustomerUser;
 
 use strict;
 use warnings;
+use utf8;
 
 use Digest::SHA qw(sha256_hex);
 
@@ -862,7 +863,7 @@ sub CustomerUserDataGet {
         my %Company;
         if (
             $ConfigObject->Get("CustomerCompany")
-            && $ConfigObject->Get("CustomerUser$Count")->{CustomerCompanySupport}
+            && ( $ConfigObject->Get("CustomerUser$Count") // {} )->{CustomerCompanySupport}
             )
         {
             %Company = $CustomerCompanyObject->CustomerCompanyGet(

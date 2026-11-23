@@ -3357,6 +3357,29 @@ CREATE TABLE oauth2_token_config (
     CONSTRAINT oauth2_token_config_uuid UNIQUE (dbcrud_uuid)
 );
 -- ----------------------------------------------------------
+--  create table authentication_config
+-- ----------------------------------------------------------
+CREATE TABLE authentication_config (
+    id serial NOT NULL,
+    dbcrud_uuid VARCHAR (36) NULL,
+    name VARCHAR (250) NOT NULL,
+    type VARCHAR (50) NOT NULL,
+    context_type VARCHAR (20) NOT NULL,
+    slot VARCHAR (2) NOT NULL,
+    auth_config VARCHAR NOT NULL,
+    sync_enabled SMALLINT DEFAULT 0 NOT NULL,
+    sync_config VARCHAR NULL,
+    valid_id SMALLINT NOT NULL,
+    create_time timestamp(0) NOT NULL,
+    create_by INTEGER NOT NULL,
+    change_time timestamp(0) NOT NULL,
+    change_by INTEGER NOT NULL,
+    PRIMARY KEY(id),
+    CONSTRAINT authentication_config_context_slot UNIQUE (context_type, slot),
+    CONSTRAINT authentication_config_name UNIQUE (name),
+    CONSTRAINT authentication_config_uuid UNIQUE (dbcrud_uuid)
+);
+-- ----------------------------------------------------------
 --  create table oauth2_token
 -- ----------------------------------------------------------
 CREATE TABLE oauth2_token (

@@ -56,6 +56,8 @@
                     <input type="hidden" name="RequestedURL" value="[% Data.RequestedURL | html %]"/>
                     <input type="hidden" name="Lang" value="[% Env("UserLanguage") | html %]"/>
                     <input type="hidden" name="TimeZoneOffset" id="TimeZoneOffset" value=""/>
+# Hidden if only SAML is configured, its login buttons below are the only way to log in then.
+[% IF Data.ShowLoginForm %]
                     <div>
                         <label for="User">[% Translate("User name") | html %]</label>
                         <input autocorrect="off" autocapitalize="off" autocomplete="[% Data.UserNameAutocomplete %]" placeholder="[% Translate("Username") | html %]" title="[% Translate("Your user name") | html %]" type="text" name="User" id="User" maxlength="150" />
@@ -78,6 +80,7 @@
                     <div>
                         <button type="submit" value="[% Translate("Log In") | html %]" class="btn-main btn-primary" disabled="disabled">[% Translate("Log In") | html %]</button>
                     </div>
+[% END %]
 [% RenderBlockStart("SAMLLoginLink") %]
                     <!-- SAML login -->
                     <div>

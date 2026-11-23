@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.179446640316206;
+    $Self->{Completeness}        = 0.202176578786021;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -269,6 +269,169 @@ sub Data {
         'Do you really want to delete this attachment?' => '',
         'Attachment' => 'Ek',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+        'Certificate/key is stored in VirtualFS.' => 'Sertifika/anahtar VirtualFS içinde saklanır.',
+        'No certificate/key set.' => 'Sertifika/anahtar ayarlanmadı.',
+        'View certificate details' => 'Sertifika ayrıntılarını görüntüle',
+        'The selected certificate/key is not available. Please select or upload it again.' =>
+            'Seçilen sertifika/anahtar kullanılamıyor. Lütfen yeniden seçin veya yükleyin.',
+        '- Select an existing certificate/key -' => '- Mevcut bir sertifika/anahtar seçin -',
+        'Paste key' => '',
+        'Paste certificate' => '',
+        'Generate' => '',
+        'Use certificate from metadata' => 'Meta verilerden sertifika kullan',
+        'Extracts the signing certificate embedded in the Identity Provider metadata and stores it here, instead of uploading it separately.' =>
+            'Kimlik sağlayıcının meta verilerine gömülü imzalama sertifikasını çıkarıp buraya kaydeder, ayrı olarak yüklemek yerine.',
+        'Paste the PEM text including the BEGIN and END lines.' => 'BEGIN ve END satırları dahil PEM metnini yapıştırın.',
+        'Common Name' => 'Ortak ad',
+        'Key size' => 'Anahtar boyutu',
+        'Validity (days)' => 'Geçerlilik (gün)',
+        'Generate self-signed certificate' => 'Oluştur kendinden imzalı sertifika',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+        'Authentication Management' => 'Kimlik doğrulama yönetimi',
+        'Agent authentication' => 'Aracı kimlik doğrulaması',
+        'Basic settings' => 'Temel ayarlar',
+        'Slot' => 'Yuva',
+        'Determines which numbered AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Bu yapılandırmanın hangi numaralı AuthModule<N> yuvasını kapladığını belirler. Yalnızca kullanılmayan yuvalar sunulur.',
+        'SAML request settings' => 'SAML istek ayarları',
+        'Login button text' => 'Oturum açma düğmesi metni',
+        'Assertion consumer URL' => 'Beyan tüketici URL\'si',
+        'Automatically derived from this system\'s HTTP type, FQDN and script alias - not editable.' =>
+            'Bu sistemin HTTP türünden, FQDN değerinden ve betik takma adından otomatik türetilir - düzenlenemez.',
+        'Znuny appends a ";IsSAMLLogin=1;Count=<N>;" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration\'s slot), so the value the Identity Provider actually receives is:' =>
+            'Znuny, gerçek giden SAML isteğini oluştururken bu URL\'ye ";IsSAMLLogin=1;Count=<N>;" sonekini ekler (<N> bu yapılandırmanın yuvasıdır), bu nedenle kimlik sağlayıcının gerçekten aldığı değer şudur:',
+        'Copy to clipboard' => 'Panoya kopyala',
+        'Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honor the value from the request. If your IdP\'s field rejects semicolons, register the base URL instead.' =>
+            'Bazı kimlik sağlayıcılar bu değerin tam olarak ACS URL olarak kaydedilmesini gerektirir. Diğerleri yukarıdaki temel URL\'yi kabul eder ve istekteki değeri dikkate alır. IdP alanınız noktalı virgülleri reddediyorsa, bunun yerine temel URL\'yi kaydedin.',
+        'Download SP metadata XML' => 'SP meta veri XML dosyasını indir',
+        'Issuer (SP entity ID)' => 'Düzenleyen (SP varlık kimliği)',
+        'Requested NameID format' => 'İstenen NameID biçimi',
+        'Unspecified' => 'Belirtilmemiş',
+        'Persistent' => 'Kalıcı',
+        'Transient' => 'Geçici',
+        'Email address' => 'E-posta adresi',
+        'Sent as the NameIDPolicy Format in the outgoing request and published in the SP metadata. Change this only if your Identity Provider requires a specific format.' =>
+            'Giden istekte NameIDPolicy Format olarak gönderilir ve SP meta verilerinde yayımlanır. Bunu yalnızca kimlik sağlayıcınız belirli bir biçim gerektiriyorsa değiştirin.',
+        'Login attribute' => '',
+        'Please enter attribute names separated by commas.' => '',
+        'Optional. By default the NameID is the login. Enter one or more SAML attribute names (Name or FriendlyName), separated by commas, to take the login from the first of these attributes the assertion contains instead, e.g. if the Identity Provider sends a persistent NameID. The attribute must have exactly one value, otherwise the login fails. Changing this changes the login of existing users.' =>
+            '',
+        'Load metadata from URL' => 'Meta verileri URL\'den yükle',
+        'Switch off to paste the metadata XML instead. Switching clears the entered URL or XML and the SSL options.' =>
+            'Bunun yerine meta veri XML\'ini yapıştırmak için kapatın. Değiştirmek, girilen URL veya XML\'i ve SSL seçeneklerini temizler.',
+        'Please select a metadata source.' => 'Lütfen bir meta veri kaynağı seçin.',
+        'Metadata URL' => 'Meta veri URL\'si',
+        'Verify' => 'Doğrula',
+        'Metadata XML' => 'Meta veri XML',
+        'Use custom SSL options for metadata URL fetch' => 'Meta veri URL\'si getirme için özel SSL seçeneklerini kullan',
+        'SSL CA file' => 'SSL CA dosyası',
+        'SSL CA path' => 'SSL CA yolu',
+        'Verify hostname' => 'Ana bilgisayar adını doğrula',
+        'Certificates and keys' => 'Sertifikalar ve anahtarlar',
+        'SP signing key (used to sign outgoing requests)' => 'SP imzalama anahtarı (giden istekleri imzalamak için kullanılır)',
+        'SP signing certificate (matches the key above)' => 'SP imzalama sertifikası (yukarıdaki anahtarla eşleşir)',
+        'Required for the SP metadata\'s KeyDescriptor to be published. "Generate" above already produces this together with the key - only needed as a separate step if you uploaded your own key.' =>
+            'SP meta verilerinin KeyDescriptor değerinin yayımlanması için gereklidir. Yukarıdaki "Oluştur" bunu anahtarla birlikte zaten üretir - yalnızca kendi anahtarınızı yüklediyseniz ayrı bir adım olarak gerekir.',
+        'Signing algorithm' => 'İmzalama algoritması',
+        'SHA-256 (default)' => 'SHA-256 (varsayılan)',
+        'SHA-384' => 'SHA-384',
+        'SHA-512' => 'SHA-512',
+        'SHA-1 (legacy, not recommended)' => 'SHA-1 (eski, önerilmez)',
+        'Used to sign the outgoing request when a signing key is set above. Only change this if your Identity Provider requires a specific algorithm.' =>
+            'Yukarıda bir imzalama anahtarı ayarlandığında giden isteği imzalamak için kullanılır. Bunu yalnızca kimlik sağlayıcınız belirli bir algoritma gerektiriyorsa değiştirin.',
+        'Decrypt encrypted assertions' => 'Şifrelenmiş beyanların şifresini çöz',
+        'Uses the SP signing key above to decrypt SAML assertions the Identity Provider encrypts. Has no effect on responses that aren\'t encrypted, so it\'s safe to leave enabled. Requires a signing key above.' =>
+            'Kimlik sağlayıcının şifrelediği SAML beyanlarının şifresini çözmek için yukarıdaki SP imzalama anahtarını kullanır. Şifrelenmemiş yanıtları etkilemez, bu nedenle etkin bırakmak güvenlidir. Yukarıda bir imzalama anahtarı gerekir.',
+        'Identity provider CA certificate' => 'Kimlik sağlayıcı CA sertifikası',
+        'Required for SAML login to work. Without it, Net::SAML2 cannot verify the Identity Provider\'s response signature and authentication will fail.' =>
+            'SAML oturum açmanın çalışması için gereklidir. Bu olmadan Net::SAML2, kimlik sağlayıcının yanıt imzasını doğrulayamaz ve kimlik doğrulama başarısız olur.',
+        'Attribute, group and role sync' => 'Nitelik, grup ve rol eşitleme',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+        'Customer authentication' => 'Müşteri kimlik doğrulaması',
+        'Determines which numbered Customer::AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Bu yapılandırmanın hangi numaralı Customer::AuthModule<N> yuvasını kapladığını belirler. Yalnızca kullanılmayan yuvalar sunulur.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+        'SAML wizard' => 'SAML sihirbazı',
+        'Add agent SAML authentication' => 'Aracı SAML kimlik doğrulaması ekle',
+        'Add customer SAML authentication' => 'Müşteri SAML kimlik doğrulaması ekle',
+        'Deploy configuration' => 'Dağıt yapılandırmayı',
+        'Deployment failed' => '',
+        'Fix the configurations below and deploy again. Or set a configuration to invalid: its login stops working and the other configurations are deployed.' =>
+            '',
+        'Problem' => '',
+        'Edit' => 'Düzenle',
+        'Set to invalid and deploy the rest' => '',
+        'Sync' => 'Eşitle',
+        'Status' => 'Durum',
+        'Metadata' => '',
+        'Slot %s' => 'Yuva %s',
+        'Default' => '',
+        'Yes' => 'Evet',
+        'No' => 'Hayır',
+        'OK' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+        'Enable sync' => 'Eşitlemeyi etkinleştir',
+        'Also registers Kernel::System::Auth::Sync::SAML for the same slot, to sync attributes/groups/roles from the SAML assertion on every login.' =>
+            'Aynı yuva için Kernel::System::Auth::Sync::SAML kaydını da yapar, böylece her oturum açmada SAML beyanından nitelikler/gruplar/roller eşitlenir.',
+        'The AuthSyncModule for this slot is already configured outside of AdminAuthentication - sync cannot be enabled for it.' =>
+            'Bu yuva için AuthSyncModule, AdminAuthentication dışında zaten yapılandırılmış - eşitleme bunun için etkinleştirilemez.',
+        'User attribute sync map' => 'Kullanıcı niteliği eşleme haritası',
+        'Maps Znuny user attributes (left) to SAML assertion attribute names (right).' =>
+            'Znuny kullanıcı niteliklerini (sol) SAML beyanı nitelik adlarıyla (sağ) eşler.',
+        'Znuny attribute' => 'Znuny niteliği',
+        'SAML attribute URI' => 'SAML nitelik URI',
+        'Initial groups for new users' => 'Yeni kullanıcılar için başlangıç grupları',
+        'Groups (with rw permission) granted only when a brand-new agent is created via sync. Ctrl/Cmd-click to select multiple.' =>
+            'Yalnızca eşitleme ile yepyeni bir aracı oluşturulduğunda verilen gruplar (rw izniyle). Birden fazla seçmek için Ctrl/Cmd-tıklayın.',
+        'SAML attribute carrying group values' => 'Grup değerlerini taşıyan SAML niteliği',
+        'Group sync rules (by group value)' => 'Grup eşitleme kuralları (grup değerine göre)',
+        'Maps a SAML group value to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Bir SAML grup değerini bir Znuny grubu ve izinlerle eşler. Birden fazla izin seçmek için Ctrl/Cmd-tıklayın.',
+        'SAML value' => 'SAML değeri',
+        'Group sync rules (by arbitrary attribute/value)' => 'Grup eşitleme kuralları (herhangi bir nitelik/değer ile)',
+        'Maps any SAML attribute name/value combination to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Herhangi bir SAML nitelik adı/değer birleşimini bir Znuny grubu ve izinlerle eşler. Birden fazla izin seçmek için Ctrl/Cmd-tıklayın.',
+        'SAML attribute' => 'SAML niteliği',
+        'Role sync requires at least one active role. Create or activate a role under Admin → Roles.' =>
+            'Rol eşitleme en az bir etkin rol gerektirir. Yönetici → Roller altında bir rol oluşturun veya etkinleştirin.',
+        'SAML attribute carrying role values' => 'Rol değerlerini taşıyan SAML niteliği',
+        'Role sync rules (by role value)' => 'Rol eşitleme kuralları (rol değerine göre)',
+        'Maps a SAML role value to one or more Znuny roles, active or inactive.' =>
+            'Bir SAML rol değerini, etkin veya etkin değil olarak, bir Znuny rolüne eşler.',
+        'Active' => 'Etkin',
+        'Role sync rules (by arbitrary attribute/value)' => 'Rol eşitleme kuralları (herhangi bir nitelik/değer ile)',
+        'Maps any SAML attribute name/value combination to one or more Znuny roles, active or inactive.' =>
+            'Herhangi bir SAML nitelik adı/değer birleşimini, etkin veya etkin değil olarak, bir Znuny rolüne eşler.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+        'Setup steps' => 'Kurulum adımları',
+        'Setup wizard' => 'Kurulum sihirbazı',
+        'SAML setup wizard' => 'SAML kurulum sihirbazı',
+        'Step' => 'Adım',
+        'What are you setting up?' => 'Neyi kuruyorsunuz?',
+        'Agent authentication - staff logging into the agent interface' =>
+            'Aracı kimlik doğrulaması - aracı arayüzüne giriş yapan personel',
+        'Customer authentication - customers logging into the customer portal' =>
+            'Müşteri kimlik doğrulaması - müşteri portalına giriş yapan müşteriler',
+        'Login with SSO' => 'SSO ile oturum aç',
+        'User sync (optional)' => 'Kullanıcı eşitleme (isteğe bağlı)',
+        'Optionally sync user attributes, groups and roles from the SAML assertion on every login. This can also be set up later on the edit screen.' =>
+            'İsteğe bağlı olarak her oturum açmada SAML beyanından kullanıcı niteliklerini, grupları ve rolleri eşitleyin. Bu daha sonra düzenleme ekranında da ayarlanabilir.',
+        'Review' => 'Gözden geçirme',
+        'Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective.' =>
+            'Bu SAML yapılandırmasını oluşturmak için Kaydet düğmesine tıklayın. Henüz etkin olmayacak - ardından genel bakış sayfasındaki Dağıt eylemini kullanarak yürürlüğe koyun.',
+        'If you skipped the Identity Provider CA certificate here, it is taken from the metadata when saving. Please check it on the edit screen afterwards.' =>
+            '',
+        'You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only).' =>
+            'Değişiklik yapmak için önceki herhangi bir adıma dönebilir veya ardından nitelik/grup/rol eşitleme gibi gelişmiş seçenekler için tam düzenleme ekranını kullanabilirsiniz (yalnızca aracı kimlik doğrulaması).',
+        'Back' => 'Geri',
+        'Next' => 'Ileri',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
         'Add Auto Response' => 'Otomatik Cevap Ekle',
         'Filter for Auto Responses' => '',
@@ -326,9 +489,7 @@ sub Data {
             '',
         'Account Status' => '',
         'Account status for: %s' => '',
-        'Status' => 'Durum',
         'Account' => '',
-        'Edit' => 'Düzenle',
         'No accounts found.' => '',
         'Communication Log Details (%s)' => '',
         'Direction' => '',
@@ -447,7 +608,6 @@ sub Data {
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => '',
-        'Active' => 'Etkin',
         'Toggle active state for %s' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
@@ -1584,14 +1744,11 @@ sub Data {
         'Download package' => 'Paketi indir',
         'Rebuild package' => 'Paketi yeniden oluştur',
         'Package Information' => '',
-        'Metadata' => '',
         'Change Log' => 'Log değiştir',
         'Date' => 'Tarih',
         'List of Files' => 'Dosyaların listesi',
         'Permission' => 'İzin',
         'Size' => 'Boyut',
-        'Problem' => '',
-        'OK' => '',
         'Download file from package!' => 'Paketten dosya indir!',
         'Required' => 'Gerektirir',
         'Primary Key' => '',
@@ -2135,7 +2292,6 @@ sub Data {
         'System Email Addresses Management' => 'Sistem E-Posta Adresleri Yönetimi',
         'Add System Email Address' => 'Sistem e-posta adresi ekle',
         'Edit System Email Address' => 'Sistem e-posta adresi düzenle',
-        'Email address' => 'E-posta adresi',
         'Display name' => 'Görünen ad',
         'This email address is already used as system email address.' => '',
         'The display name and email address will be shown on mail you send.' =>
@@ -2350,8 +2506,6 @@ sub Data {
         'All-day' => '',
         'Repeat' => '',
         'Notification' => 'Bildirimler',
-        'Yes' => 'Evet',
-        'No' => 'Hayır',
         'No calendars found. Please add a calendar first by using Manage Calendars page.' =>
             '',
 
@@ -2876,10 +3030,11 @@ sub Data {
         'Archive Search' => 'Arşiv arama',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'İçerik',
+        'e.g. Text or Te*t' => '',
         'Save filter settings as default' => 'Filtreyi varsayılan olarak kaydet',
         'Event Type' => '',
         'Save as default' => '',
-        'Back' => 'Geri',
         'Change Queue' => 'Kuyruk Değiştir',
         'Add Filter' => 'Filtre ekle',
         'Set' => 'Ayarla',
@@ -3127,7 +3282,6 @@ sub Data {
         'Phone' => 'Telefon',
         'Web site' => 'Web sitesi',
         'Community' => '',
-        'Next' => 'Ileri',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => '',
@@ -3222,6 +3376,8 @@ sub Data {
         'Delete link' => '',
         'Delete Link' => '',
         'Object#' => '',
+        'Remove active filters for this widget.' => '',
+        'No results found.' => 'Sonuç bulunamadı.',
         'Add links' => '',
         'Delete links' => '',
 
@@ -3628,6 +3784,34 @@ sub Data {
             '',
         'All agents with write permission for the appointment (calendar)' =>
             '',
+
+        # Perl Module: Kernel/Modules/AdminAuthentication.pm
+        'Perl module Net::SAML2 is not installed. SAML authentication cannot work until it is installed on the server.' =>
+            'Perl modülü Net::SAML2 yüklü değil. Sunucuya yüklenene kadar SAML kimlik doğrulaması çalışamaz.',
+        'Authentication configuration is not in sync with the deployed configuration, but it can\'t be deployed: a valid configuration has a problem, see the status below. Fix it or set it to invalid, then deploy.' =>
+            '',
+        'Authentication configuration is not in sync with the deployed configuration, please deploy.' =>
+            'Kimlik doğrulama yapılandırması dağıtılan yapılandırmayla eşitlenmemiş, lütfen Dağıt eylemini çalıştırın.',
+        'No IdP CA certificate was uploaded and none could be taken from the IdP metadata.' =>
+            'IdP CA sertifikası yüklenmedi ve IdP meta verilerinden hiçbiri alınamadı.',
+        'Only invalid authentication configurations can be deleted. Please set the configuration to invalid first.' =>
+            'Yalnızca geçersiz kimlik doğrulama yapılandırmaları silinebilir. Lütfen önce yapılandırmayı geçersiz yapın.',
+        'Invalid or missing Role.' => 'Geçersiz veya eksik rol.',
+        'No file was uploaded.' => 'Dosya yüklenmedi.',
+        'Error storing the uploaded file.' => 'Yüklenen dosya saklanırken hata oluştu.',
+        'Only the SP signing key can be generated.' => 'Yalnızca SP imzalama anahtarı oluşturulabilir.',
+        'Error generating certificate. Please check the system log.' => 'Sertifika oluşturulurken hata oluştu. Lütfen sistem günlüğünü kontrol edin.',
+        'Error storing the generated key in VirtualFS.' => 'Oluşturulan anahtar VirtualFS içine saklanırken hata oluştu.',
+        'Error storing the generated certificate in VirtualFS.' => 'Oluşturulan sertifika VirtualFS içine saklanırken hata oluştu.',
+        'Could not find a certificate in the metadata. Please check the URL/XML and try again.' =>
+            'Meta verilerde sertifika bulunamadı. Lütfen URL/XML değerini kontrol edip yeniden deneyin.',
+        'Error storing the certificate.' => 'Sertifika saklanırken hata oluştu.',
+        'Could not read the certificate from VirtualFS.' => 'Sertifika VirtualFS içinden okunamadı.',
+        'The authentication configuration was not deployed. The previously deployed configuration is still active.' =>
+            'Kimlik doğrulama yapılandırması dağıtılmadı. Önceden dağıtılan yapılandırma hâlâ etkin.',
+        'Please check the system log for details.' => 'Ayrıntılar için lütfen sistem günlüğünü kontrol edin.',
+        'Authentication configuration not found.' => '',
+        'Could not set the authentication configuration to invalid.' => '',
 
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
@@ -4662,6 +4846,8 @@ sub Data {
             '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            'Hata: veritabanınızdaki innodb_redo_log_capacity değerini en az %s MB olarak ayarlayın (geçerli: %s MB, önerilen: %s MB). Daha fazla bilgi için %s adresine bakın.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             '',
         'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
@@ -4843,6 +5029,7 @@ sub Data {
         'Linked as' => '',
         'Search Result' => '',
         'Linked' => 'Bağlandı',
+        'filter' => 'Filtre',
         'Bulk' => '',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -4971,7 +5158,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => '',
         'Unable to load %s!' => '',
-        'Content' => 'İçerik',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'Bilet Bilgileri',
@@ -5032,6 +5218,34 @@ sub Data {
         'Session invalid. Please log in again.' => 'Geçersiz oturum. Lütfen tekrar giriş yapın.',
         'Session has timed out. Please log in again.' => 'Oturum süresi doldu. Lütfen tekrar oturum açın.',
 
+        # Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+        'This is not an unencrypted private key in PEM format (-----BEGIN PRIVATE KEY-----).' =>
+            'Bu, PEM biçiminde şifrelenmemiş bir özel anahtar değil (-----BEGIN PRIVATE KEY-----).',
+        'This is not a certificate in PEM format (-----BEGIN CERTIFICATE-----).' =>
+            'Bu, PEM biçiminde bir sertifika değil (-----BEGIN CERTIFICATE-----).',
+        'The private key could not be read. Only unencrypted private keys are supported.' =>
+            'Özel anahtar okunamadı. Yalnızca şifrelenmemiş özel anahtarlar desteklenir.',
+        'The certificate could not be read.' => 'Sertifika okunamadı.',
+        'Could not read the SP signing key.' => 'SP imzalama anahtarı okunamadı.',
+        'Could not read the IdP CA certificate.' => 'IdP CA sertifikası okunamadı.',
+        'No IdP CA certificate is stored. It is taken from the IdP metadata on every deploy. Save the configuration to store it.' =>
+            '',
+        'Could not decrypt the SP signing key. Please check the configured encryption key.' =>
+            'SP imzalama anahtarının şifresi çözülemedi. Lütfen yapılandırılmış şifreleme anahtarını kontrol edin.',
+        'Net::SAML2 is not installed on the server, metadata cannot be verified.' =>
+            'Net::SAML2 sunucuda yüklü değil, meta veriler doğrulanamıyor.',
+        'Metadata URL is empty.' => 'Meta veri URL\'si boş.',
+        'Metadata XML is empty.' => 'Meta veri XML boş.',
+        'Could not parse the metadata. Please check the URL/XML and try again.' =>
+            'Meta veriler ayrıştırılamadı. Lütfen URL/XML değerini kontrol edip yeniden deneyin.',
+        'Perl module Crypt::OpenSSL::X509 is not installed, certificate details cannot be parsed.' =>
+            'Perl modülü Crypt::OpenSSL::X509 yüklü değil, sertifika ayrıntıları ayrıştırılamaz.',
+        'Could not parse the certificate.' => 'Sertifika ayrıştırılamadı.',
+
+        # Perl Module: Kernel/System/AuthenticationConfig.pm
+        'No authentication plugin is registered for this type.' => 'Bu tür için kayıtlı bir kimlik doğrulama eklentisi yok.',
+        'Could not write the certificate files.' => 'Sertifika dosyaları yazılamadı.',
+
         # Perl Module: Kernel/System/AutoResponse.pm
         'Couldn\'t read auto response configuration file. Please make sure the file is valid.' =>
             '',
@@ -5075,9 +5289,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'önce/sonra',
         'between' => 'arasında',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -5248,6 +5459,9 @@ sub Data {
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'InnoDB yineleme günlüğü kapasitesi',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'innodb_redo_log_capacity ayarı en az 256 MB olmalıdır.',
         'InnoDB Log File Size' => '',
         'The setting innodb_log_file_size must be at least 256 MB.' => '',
 
@@ -5552,7 +5766,6 @@ sub Data {
         'All Settings' => '',
 
         # Perl Module: Kernel/System/SysConfig/BaseValueType.pm
-        'Default' => '',
         'Value is not correct! Please, consider updating this field.' => '',
         'Value doesn\'t satisfy regex (%s).' => '',
 
@@ -6010,6 +6223,8 @@ sub Data {
             '',
         'Maximum Number of a calendar shown in a dropdown.' => '',
         'Define the start day of the week for the date picker.' => '',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Ticket::Frontend::PendingDiffTime değerine dayalı varsayılan bekleme tarihinin bu takvimde tatil olan veya çalışma saati bulunmayan günleri atlayıp atlamayacağını tanımlar.',
         'Adds the permanent vacation days.' => '',
         'Adds the one time vacation days.' => '',
         'Defines the hours and week days to count the working time.' => '',
@@ -6291,6 +6506,8 @@ sub Data {
             '',
         'Frontend module registration (disable company link if no company feature is used).' =>
             '',
+        'Registers the SAML 2.0 authentication plugin for AdminAuthentication.' =>
+            'AdminAuthentication için SAML 2.0 kimlik doğrulama eklentisini kaydeder.',
         'Frontend module registration for the customer interface.' => '',
         'Activates the available themes on the system. Value 1 means active, 0 means inactive.' =>
             '',
@@ -6713,6 +6930,8 @@ sub Data {
             '',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             '',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Temsilci arayüzündeki bilet yakınlaştırma ekranının makale filtresi iletişim kutusunda gösterilen dinamik alanlar. Yalnızca Yazı nesne türündeki Metin, TextArea, Dropdown, Çoklu Seçim ve Checkbox türündeki alanlar desteklenir.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>
@@ -7919,6 +8138,8 @@ sub Data {
             '',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             '',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Bağlı kayıtlar için karmaşık bağlı nesneler gerecinde çoklu seçimli sütun filtrelerini etkinleştirir (LinkObject::ViewMode = "complex"). Filtreler AgentTicketZoom içinde kullanılabilir ve AgentLinkObject açılır penceresinde gösterilmez.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8387,6 +8608,55 @@ sub Data {
             '',
         'Attachment was deleted successfully.' => '',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?' =>
+            'Meta veri kaynağını değiştirmek, girilen meta veri URL\'sini veya XML\'i ve SSL seçeneklerini kaldırır. Devam et?',
+        'Change metadata source' => 'Meta veri kaynağını değiştir',
+        'Uploaded key' => 'Yüklenen anahtar',
+        'EXPIRED' => 'SÜRESİ DOLDU',
+        'expires' => 'sona erer',
+        'used by %s configuration(s)' => '%s yapılandırma tarafından kullanılıyor',
+        'Could not read the certificate.' => 'Sertifika okunamadı.',
+        'Certificate (PEM)' => 'Sertifika (PEM)',
+        'Issuer' => 'Düzenleyen',
+        'Valid from' => 'Geçerlilik başlangıcı',
+        'Valid until' => 'Geçerlilik bitişi',
+        'Serial' => 'Seri',
+        'Fingerprint (SHA-256)' => 'Parmak izi (SHA-256)',
+        'Show raw PEM' => 'Ham PEM göster',
+        'Certificate details' => 'Sertifika ayrıntıları',
+        'Metadata is valid.' => 'Meta veriler geçerli.',
+        'Entity ID' => 'Varlık kimliği',
+        'SSO URL' => 'SSO URL',
+        'Includes a signing certificate.' => 'Bir imzalama sertifikası içerir.',
+        'No signing certificate found in the metadata.' => 'Meta verilerde imzalama sertifikası bulunamadı.',
+        'Found %s attribute(s) in the metadata.' => 'Meta verilerde %s nitelik bulundu.',
+        'Verifying...' => 'Doğrulanıyor...',
+        'Metadata verification failed.' => 'Meta veri doğrulaması başarısız.',
+        'Upload failed.' => 'Yükleme başarısız.',
+        'Please paste a certificate or key first.' => 'Lütfen önce bir sertifika veya anahtar yapıştırın.',
+        'Saving the pasted certificate/key failed.' => 'Yapıştırılan sertifika/anahtar kaydedilemedi.',
+        'Certificate generation failed.' => 'Sertifika oluşturma başarısız.',
+        'Please select a metadata source (URL or XML) first.' => 'Lütfen önce bir meta veri kaynağı (URL veya XML) seçin.',
+        'Could not find a certificate in the metadata.' => 'Meta verilerde sertifika bulunamadı.',
+        'Copied to clipboard!' => '',
+        'Do you really want to delete this SAML configuration?' => 'Bu SAML yapılandırmasını silmek istediğinizden emin misiniz?',
+        'Delete SAML configuration' => 'SAML yapılandırmasını sil',
+        'There was an error deleting the SAML configuration.' => 'SAML yapılandırması silinirken bir hata oluştu.',
+        'NameID (default)' => '',
+        '(pasted XML)' => '(yapıştırılan XML)',
+        'Not configured yet' => 'Henüz yapılandırılmadı',
+        'Identity provider metadata' => 'Kimlik sağlayıcı meta verileri',
+        'SP signing key' => 'SP imzalama anahtarı',
+        'Configured' => 'Yapılandırıldı',
+        'Not set' => 'Ayarlanmadı',
+        'SP signing certificate' => 'SP imzalama sertifikası',
+        'Not set (will be taken from the metadata when saving)' => '',
+        'User sync' => 'Kullanıcı eşitleme',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)' =>
+            'Etkin (%s nitelik eşlemesi, %s grup kuralı, %s rol kuralı)',
+        'Please fill in all required fields before continuing.' => 'Devam etmeden önce lütfen tüm zorunlu alanları doldurun.',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.AutoResponse.js
         'Delete this %s' => '',
         'Deleting the %s and its data. This may take a while...' => '',
@@ -8593,9 +8863,6 @@ sub Data {
         'Please select attachments for download.' => '',
         'Show less' => '',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
-        'Copied to clipboard!' => '',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
         'First select a customer user, then select a customer ID to assign to this ticket.' =>
             '',
@@ -8613,7 +8880,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => '',
         'month' => 'ay',
-        'Remove active filters for this widget.' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '',
@@ -8641,9 +8907,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Search.js
         'Please remove the following words from your search as they cannot be searched for:' =>
             '',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.SharedSecretGenerator.js
-        'Generate' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
@@ -8705,6 +8968,7 @@ sub Data {
             '',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'Çalışma saati yok',
         'Open date selection' => 'Seçili tarihi aç',
         'Invalid date (need a future date)!' => 'Hatalı tarih (ileri bir tarih olmalı)!',
         'Invalid date (need a past date)!' => '',
@@ -9196,6 +9460,7 @@ Thanks for your help!
         'Manage POP3 or IMAP accounts to fetch email from.' => 'E-posta almak için POP3 veya IMAP hesapları yönetin.',
         'Manage S/MIME certificates for email encryption.' => 'Posta şifreleme için S/MIME sertifikalarını yönet.',
         'Manage System Configuration Deployments.' => '',
+        'Manage agent and customer authentication (e.g. SAML 2.0).' => 'Aracı ve müşteri kimlik doğrulamasını yönetin (örn. SAML 2.0).',
         'Manage different calendars.' => '',
         'Manage existing sessions.' => 'Mevcut oturumları yönet.',
         'Manage outbound email profiles.' => '',
@@ -9321,6 +9586,7 @@ Thanks for your help!
         'Running Process Tickets' => '',
         'Russian' => '',
         'S/MIME Certificates' => 'S/MIME Sertifikaları',
+        'SAML' => 'SAML',
         'Schedule a maintenance period.' => '',
         'Screen after marking as seen' => '',
         'Screen after marking as unseen' => '',
@@ -9552,6 +9818,7 @@ Thanks for your help!
         '%s MB',
         '%s TB',
         '%s of %s',
+        '(pasted XML)',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9566,6 +9833,7 @@ Thanks for your help!
         'Add new entry',
         'Add to favourites',
         'Agent',
+        'Agent authentication',
         'All occurrences',
         'All-day',
         'An Error Occurred',
@@ -9588,6 +9856,7 @@ Thanks for your help!
         'Article filter',
         'As soon as you use this button or link, you will leave this screen and its current state will be saved automatically. Do you want to continue?',
         'Ascending sort applied, ',
+        'Assertion consumer URL',
         'Attachment was deleted successfully.',
         'Attachments',
         'Aug',
@@ -9598,6 +9867,11 @@ Thanks for your help!
         'Calendar',
         'Cancel',
         'Cannot proceed',
+        'Certificate (PEM)',
+        'Certificate details',
+        'Certificate generation failed.',
+        'Certificate/key is stored in VirtualFS.',
+        'Change metadata source',
         'Clear',
         'Clear all',
         'Clear all filters',
@@ -9610,27 +9884,34 @@ Thanks for your help!
         'Clone',
         'Clone Process',
         'Clone web service',
+        'Close',
         'Close preview',
         'Close this dialog',
         'Collapse',
         'Complex %s with %s arguments',
+        'Configured',
         'Confirm',
         'Copied to clipboard!',
         'Copy Ticket Number',
         'Copy Ticket Number + Title',
         'Copy ticket information',
+        'Could not find a certificate in the metadata.',
         'Could not load activities.',
         'Could not open popup window. Please disable any popup blockers for this application.',
+        'Could not read the certificate.',
         'Current selection',
         'Currently not possible',
+        'Customer authentication',
         'Customer interface does not support articles not visible for customers.',
         'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',
         'December',
+        'Decrypt encrypted assertions',
         'Delete',
         'Delete Entity',
+        'Delete SAML configuration',
         'Delete conditions',
         'Delete draft',
         'Delete error handling module',
@@ -9664,10 +9945,12 @@ Thanks for your help!
         'Deployment successful. You\'re being redirected...',
         'Descending sort applied, ',
         'Description',
+        'Disabled',
         'Dismiss',
         'Do not show this warning again.',
         'Do you really want to continue?',
         'Do you really want to delete "%s"?',
+        'Do you really want to delete this SAML configuration?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
         'Do you really want to delete this key?',
@@ -9684,11 +9967,14 @@ Thanks for your help!
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
+        'EXPIRED',
         'Edit Field Details',
         'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)',
         'End date',
+        'Entity ID',
         'Error',
         'Error during AJAX communication',
         'Error during AJAX communication. Status: %s, Error: %s',
@@ -9702,8 +9988,10 @@ Thanks for your help!
         'February',
         'Filter',
         'Filters',
+        'Fingerprint (SHA-256)',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
+        'Found %s attribute(s) in the metadata.',
         'Fr',
         'Fri',
         'Friday',
@@ -9713,13 +10001,18 @@ Thanks for your help!
         'Grouped',
         'Help',
         'Hide EntityIDs',
+        'Identity provider CA certificate',
+        'Identity provider metadata',
         'If you now leave this page, all open popup windows will be closed, too!',
         'Import web service',
+        'Includes a signing certificate.',
         'Information about the Znuny Daemon',
         'Insert selected customer user(s) into the "%s:" field.',
         'Invalid date (need a future date)!',
         'Invalid date (need a past date)!',
         'Invalid date!',
+        'Issuer',
+        'Issuer (SP entity ID)',
         'It is going to be deleted from the field, please try again.',
         'It is not possible to add a new event trigger because the event is not set.',
         'It is not possible to set this entry to invalid. All affected configuration settings have to be changed beforehand.',
@@ -9737,6 +10030,8 @@ Thanks for your help!
         'Loading, please wait...',
         'Loading...',
         'Location',
+        'Login attribute',
+        'Login button text',
         'Mail check successful.',
         'Mapping for Key',
         'Mapping for Key %s',
@@ -9744,15 +10039,20 @@ Thanks for your help!
         'March',
         'May',
         'May_long',
+        'Metadata is valid.',
+        'Metadata verification failed.',
         'Mo',
         'Mon',
         'Monday',
         'Month',
         'Name',
+        'NameID (default)',
         'Namespace %s could not be initialized, because %s could not be found.',
         'Next',
+        'No',
         'No Data Available.',
         'No TransitionActions assigned.',
+        'No certificate/key set.',
         'No data found.',
         'No dialogs assigned yet. Just pick an activity dialog from the list on the left and drag it here.',
         'No matches found.',
@@ -9760,9 +10060,14 @@ Thanks for your help!
         'No response from get package upgrade result.',
         'No response from get package upgrade run status.',
         'No response from package upgrade all.',
+        'No signing certificate found in the metadata.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
+        'Not configured yet',
+        'Not set',
+        'Not set (will be taken from the metadata when saving)',
         'Notice',
         'Notification',
         'Nov',
@@ -9779,10 +10084,13 @@ Thanks for your help!
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
+        'Please fill in all required fields before continuing.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
+        'Please paste a certificate or key first.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select a metadata source (URL or XML) first.',
         'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
@@ -9816,11 +10124,15 @@ Thanks for your help!
         'Restore web service configuration',
         'Rule',
         'Running',
+        'SP signing certificate',
+        'SP signing key',
+        'SSO URL',
         'Sa',
         'Sat',
         'Saturday',
         'Save',
         'Save and update automatically',
+        'Saving the pasted certificate/key failed.',
         'Scale preview content',
         'Search',
         'Search attributes',
@@ -9833,6 +10145,7 @@ Thanks for your help!
         'Select files or drop them here',
         'Sep',
         'September',
+        'Serial',
         'Setting a template will overwrite any text or attachment.',
         'Settings',
         'Show',
@@ -9841,7 +10154,9 @@ Thanks for your help!
         'Show less',
         'Show more',
         'Show or hide the content.',
+        'Show raw PEM',
         'Slide the navigation bar',
+        'Slot',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',
         'Sorry, but you can\'t disable all methods for this notification.',
         'Sorry, the only existing condition can\'t be removed.',
@@ -9856,12 +10171,14 @@ Thanks for your help!
         'Status',
         'Stream',
         'Su',
+        'Subject',
         'Successful',
         'Sun',
         'Sunday',
         'Support Bundle',
         'Switch to desktop mode',
         'Switch to mobile mode',
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?',
         'Team',
         'Th',
         'The activities could not be marked as seen.',
@@ -9883,6 +10200,7 @@ Thanks for your help!
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',
+        'There was an error deleting the SAML configuration.',
         'There was an error deleting the attachment. Please check the logs for more information.',
         'There was an error. Please save all settings you are editing and check the logs for more information.',
         'This Activity cannot be deleted because it is the Start Activity.',
@@ -9914,15 +10232,22 @@ Thanks for your help!
         'Tu',
         'Tue',
         'Tuesday',
+        'Type',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.',
         'Unknown',
         'Unlock setting.',
         'Update All Packages',
         'Update all packages',
         'Update manually',
+        'Upload failed.',
         'Upload information',
+        'Uploaded key',
         'Uploading...',
         'Use options below to narrow down for which tickets appointments will be automatically created.',
+        'User sync',
+        'Valid from',
+        'Valid until',
+        'Verifying...',
         'WARNING: When you change the name of the group \'admin\', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement.',
         'Warning',
         'We',
@@ -9939,12 +10264,14 @@ Thanks for your help!
         'activate to remove the sort',
         'and %s more...',
         'day',
+        'expires',
         'month',
         'more',
         'no',
         'none',
         'or',
         'sorting is disabled',
+        'used by %s configuration(s)',
         'week',
         'yes',
     ];

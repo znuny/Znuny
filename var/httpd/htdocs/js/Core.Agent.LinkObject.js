@@ -72,6 +72,171 @@ Core.Agent.LinkObject = (function (TargetNS) {
     }
 
     /**
+     * @private
+     * @name InitColumnFilters
+     * @memberof Core.Agent.LinkObject
+     * @function
+     * @description
+     *      Initializes column filter controls for linked ticket Complex tables.
+     */
+    function InitColumnFilters() {
+        $('.WidgetSimple .ColumnSettingsTrigger').off('click.LinkObjectColumnFilter').on('click.LinkObjectColumnFilter', function() {
+            var $TriggerObj = $(this),
+                FilterName = $TriggerObj.next('.ColumnSettingsContainer').find('select').attr('name');
+
+            if (FilterName) {
+                Core.UI.InputFields.InitSelect($('#' + FilterName), {Force: true});
+            }
+
+            if ($TriggerObj.hasClass('Active')) {
+                $TriggerObj
+                    .next('.ColumnSettingsContainer')
+                    .find('.ColumnSettingsBox')
+                    .fadeOut('fast', function() {
+                        $TriggerObj.removeClass('Active');
+                    });
+            }
+            else {
+                $('.WidgetSimple .ColumnSettingsTrigger')
+                    .next('.ColumnSettingsContainer')
+                    .find('.ColumnSettingsBox')
+                    .fadeOut('fast', function() {
+                        $(this).parent().prev('.ColumnSettingsTrigger').removeClass('Active');
+                    });
+
+                $TriggerObj
+                    .next('.ColumnSettingsContainer')
+                    .find('.ColumnSettingsBox')
+                    .fadeIn('fast', function() {
+                        $TriggerObj.addClass('Active');
+                        $TriggerObj.next('.ColumnSettingsContainer')
+                            .find('select')
+                            .trigger('redraw.InputField');
+                    });
+            }
+
+            return false;
+        });
+
+        $('.WidgetSimple .ColumnFilter').off('change.LinkObjectColumnFilter').on('change.LinkObjectColumnFilter', function () {
+            var $Select = $(this),
+                $Widget = $Select.closest('.WidgetSimple'),
+                WidgetID = $Widget.attr('id'),
+                Name,
+                $Form,
+                SelectedValues = [],
+                SeenValues = {},
+                ColumnFilter;
+
+            if (!WidgetID || WidgetID.indexOf('Widget') !== 0) {
+                return false;
+            }
+
+            Name = WidgetID.replace(/^Widget/, '');
+            $Form = $('#linkobject-' + Name + '-column-filter');
+            if (!$Form.length) {
+                return false;
+            }
+
+            ColumnFilter = $Select.attr('name');
+            $Form.find('input[name^="ColumnFilter"]').remove();
+            $Form.find('input[name="DeleteFilters"]').remove();
+
+            if ($Select.prop('multiple')) {
+                $Select.find('option:selected').each(function () {
+                    var Value = $(this).val();
+
+                    if (!Value || SeenValues[Value]) {
+                        return;
+                    }
+
+                    SeenValues[Value] = true;
+                    SelectedValues.push(Value);
+                });
+
+                // Empty multiselect must clear the column filter (jQuery .val() is null when cleared).
+                if (!SelectedValues.length || $.inArray('DeleteFilter', SelectedValues) !== -1) {
+                    SelectedValues = ['DeleteFilter'];
+                }
+
+                $.each(SelectedValues, function (Index, Value) {
+                    $Form.append(
+                        $('<input type="hidden" />').attr('name', ColumnFilter).val(Value)
+                    );
+                });
+            }
+            else {
+                if ($Select.val() === null) {
+                    return false;
+                }
+                $Form.append(
+                    $('<input type="hidden" />').attr('name', ColumnFilter).val($Select.val())
+                );
+            }
+
+            UpdateColumnFilterWidget($Widget, $Form, Name);
+
+            return false;
+        });
+
+        $('.WidgetSimple .LinkObjectClearColumnFilters').off('click.LinkObjectClearFilters').on('click.LinkObjectClearFilters', function () {
+            var $Widget = $(this).closest('.WidgetSimple'),
+                WidgetID = $Widget.attr('id'),
+                Name,
+                $Form;
+
+            if (!WidgetID || WidgetID.indexOf('Widget') !== 0) {
+                return false;
+            }
+
+            Name = WidgetID.replace(/^Widget/, '');
+            $Form = $('#linkobject-' + Name + '-column-filter');
+            if (!$Form.length) {
+                return false;
+            }
+
+            $Form.find('input[name^="ColumnFilter"]').remove();
+            $Form.find('input[name="DeleteFilters"]').remove();
+            $Form.append(
+                $('<input type="hidden" />').attr('name', 'DeleteFilters').val('DeleteFilters')
+            );
+
+            UpdateColumnFilterWidget($Widget, $Form, Name);
+
+            return false;
+        });
+    }
+
+    /**
+     * @private
+     * @name UpdateColumnFilterWidget
+     * @memberof Core.Agent.LinkObject
+     * @function
+     * @param {jQueryObject} $Widget - Linked object widget container.
+     * @param {jQueryObject} $Form - Hidden column filter form.
+     * @param {String} Name - Link object table name (e.g. Ticket).
+     * @description
+     *      Reloads the linked object widget after a column filter change.
+     */
+    function UpdateColumnFilterWidget($Widget, $Form, Name) {
+        var URL = Core.Config.Get('Baselink') + Core.AJAX.SerializeForm($Form),
+            SessionInformation = Core.App.GetSessionInformation();
+
+        $.each(SessionInformation, function (Key, Value) {
+            URL += encodeURIComponent(Key) + '=' + encodeURIComponent(Value) + ';';
+        });
+
+        Core.AJAX.ContentUpdate($Widget, URL, function () {
+            InitInstantLinkDelete();
+            InitColumnFilters();
+            Core.UI.InitWidgetActionToggle();
+            Core.Agent.TableFilters.SetAllocationList(Name);
+            RegisterActions(Name);
+            Core.UI.InputFields.Activate($Widget);
+        });
+    }
+
+    /**
      * @name RegisterUpdatePreferences
      * @memberof Core.Agent.LinkObject
      * @function
@@ -92,11 +257,13 @@ Core.Agent.LinkObject = (function (TargetNS) {
 
                     Core.Agent.TableFilters.SetAllocationList(Name);
                     RegisterActions(Name);
+                    InitColumnFilters();
                 });
             });
         }
 
         InitInstantLinkDelete();
+        InitColumnFilters();
         Core.UI.InitWidgetActionToggle();
     };
 
@@ -113,20 +280,21 @@ Core.Agent.LinkObject = (function (TargetNS) {
             ArrayIndex;
 
         // If there are no link object complex tables dont't do anything.
-        if (typeof LinkObjectTables === 'undefined') return;
+        if (typeof LinkObjectTables !== 'undefined') {
+            for (ArrayIndex in LinkObjectTables) {
 
-        for (ArrayIndex in LinkObjectTables) {
-
-            // Events for link object complex table.
-            if (typeof LinkObjectTables[ArrayIndex] !== 'undefined') {
-                RegisterActions(Core.App.EscapeSelector(LinkObjectTables[ArrayIndex]));
+                // Events for link object complex table.
+                if (typeof LinkObjectTables[ArrayIndex] !== 'undefined') {
+                    RegisterActions(Core.App.EscapeSelector(LinkObjectTables[ArrayIndex]));
+                }
             }
+
+            // Initialize allocation list.
+            Core.Agent.TableFilters.SetAllocationList();
         }
 
-        // Initialize allocation list.
-        Core.Agent.TableFilters.SetAllocationList();
-
         InitInstantLinkDelete();
+        InitColumnFilters();
     };
 
     /**

@@ -1440,10 +1440,11 @@ sub AgentMove {
                 DiffTime         => $ConfigObject->Get('Ticket::Frontend::PendingDiffTime')
                     || 0,
                 %Param,
-                Class                => $Param{DateInvalid} || ' ',
-                Validate             => 1,
-                ValidateDateInFuture => 1,
-                Calendar             => $Calendar,
+                Class                      => $Param{DateInvalid} || ' ',
+                Validate                   => 1,
+                ValidateDateInFuture       => 1,
+                PendingSkipUnavailableDays => 1,
+                Calendar                   => $Calendar,
             );
             $LayoutObject->Block(
                 Name => 'StatePending',

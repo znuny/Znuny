@@ -890,7 +890,7 @@ msgstr ""
 msgid "Account status for: %s"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogAccounts.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "Status"
 msgstr "สถานะ"
 
@@ -898,7 +898,7 @@ msgstr "สถานะ"
 msgid "Account"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogAccounts.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "Edit"
 msgstr "แก้ไข"
 
@@ -1274,7 +1274,7 @@ msgstr ""
 msgid "Toggle active state for all"
 msgstr "สลับสถานะการทำงานทั้งหมด"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
 msgid "Active"
 msgstr "ใช้งาน"
 
@@ -4562,7 +4562,7 @@ msgstr "สร้างแพคเกจอีกครั้ง"
 msgid "Package Information"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "Metadata"
 msgstr "ข้อมูลเมต้า"
 
@@ -4586,11 +4586,11 @@ msgstr "การอนุญาต"
 msgid "Size"
 msgstr "ขนาด"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "Problem"
 msgstr "ปัญหา"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "OK"
 msgstr "โอเค"
 
@@ -6105,7 +6105,7 @@ msgstr "เพิ่มที่อยู่อีเมลของระบบ
 msgid "Edit System Email Address"
 msgstr "แก้ไขที่อยู่อีเมลของระบบ"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
 msgid "Email address"
 msgstr "ที่อยู่อีเมล"
 
@@ -6625,11 +6625,11 @@ msgstr ""
 msgid "Notification"
 msgstr "การแจ้งเตือน"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentAgendaOverview.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "Yes"
 msgstr "ใช่"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentAgendaOverview.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "No"
 msgstr "ไม่"
 
@@ -8373,7 +8373,7 @@ msgstr "โหลดเนื้อหาที่ถูกบล็อก"
 msgid "Home"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
 msgid "Back"
 msgstr "กลับไป"
 
@@ -8813,7 +8813,7 @@ msgstr "เว็บไซต์"
 msgid "Community"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
 msgid "Next"
 msgstr "ถัดไป"
 
@@ -13365,7 +13365,7 @@ msgstr ""
 msgid "Unable to load %s!"
 msgstr ""
 
-#. Perl Module: Kernel/Output/HTML/SysConfig.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "Content"
 msgstr "เนื้อหา"
 
@@ -13585,7 +13585,7 @@ msgstr "ก่อน/หลัง"
 msgid "between"
 msgstr "ระหว่าง"
 
-#. Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "e.g. Text or Te*t"
 msgstr ""
 
@@ -14625,7 +14625,7 @@ msgstr ""
 msgid "All Settings"
 msgstr ""
 
-#. Perl Module: Kernel/System/SysConfig/BaseValueType.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "Default"
 msgstr "เริ่มต้น"
 
@@ -21056,7 +21056,7 @@ msgstr "กรุณาตรวจสอบฟิลด์ที่ทำเค
 msgid "month"
 msgstr "เดือน"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/LinkObject.tt
 msgid "Remove active filters for this widget."
 msgstr "ลบตัวกรองการใช้งานสำหรับเครื่องมือนี้"
 
@@ -21104,7 +21104,7 @@ msgstr "สลับเป็นโหมดเดสก์ทอป"
 msgid "Please remove the following words from your search as they cannot be searched for:"
 msgstr "โปรดลบคำต่อไปนี้จากการค้นหาของคุณเนื่องจากไม่สามารถค้นหาได้:"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.SharedSecretGenerator.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
 msgid "Generate"
 msgstr ""
 
@@ -24950,7 +24950,7 @@ msgstr ""
 msgid "Copy Ticket Number + Title"
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
 msgid "Copied to clipboard!"
 msgstr ""
 
@@ -25510,7 +25510,7 @@ msgstr ""
 msgid "Selected attachments"
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.Attachments.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AttachmentList.tt
 msgid "Show more"
 msgstr ""
 
@@ -25654,6 +25654,722 @@ msgstr ""
 msgid "What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder."
 msgstr "จะแทนที่ค่าที่ไม่ได้กำหนดด้วยอะไรเมื่อแทรกลงในเทมเพลตโดยใช้ตัวยึดตำแหน่ง ZNUNY_."
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Certificate/key is stored in VirtualFS."
+msgstr "ใบรับรอง/คีย์ถูกจัดเก็บใน VirtualFS."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "No certificate/key set."
+msgstr "ยังไม่ได้ตั้งค่าใบรับรอง/คีย์."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "View certificate details"
+msgstr "ดูรายละเอียดใบรับรอง"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "The selected certificate/key is not available. Please select or upload it again."
+msgstr "ใบรับรอง/คีย์ที่เลือกไม่พร้อมใช้งาน. โปรดเลือกหรืออัพโหลดอีกครั้ง."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "- Select an existing certificate/key -"
+msgstr "- เลือกใบรับรอง/คีย์ที่มีอยู่ -"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Paste"
+msgstr "วาง"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Use certificate from metadata"
+msgstr "ใช้ใบรับรองจากข้อมูลเมต้า"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Extracts the signing certificate embedded in the Identity Provider metadata and stores it here, instead of uploading it separately."
+msgstr "ดึงใบรับรองสำหรับลงนามที่ฝังอยู่ในข้อมูลเมต้าของผู้ให้บริการข้อมูลประจำตัวมาจัดเก็บที่นี่, แทนการอัพโหลดแยก."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Paste the PEM text including the BEGIN and END lines."
+msgstr "วางข้อความ PEM รวมถึงบรรทัด BEGIN และ END."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Common Name"
+msgstr "ชื่อทั่วไป"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Key size"
+msgstr "ขนาดคีย์"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Validity (days)"
+msgstr "อายุการใช้งาน (วัน)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Generate self-signed certificate"
+msgstr "สร้างใบรับรองที่ลงนามด้วยตนเอง"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Authentication Management"
+msgstr "การจัดการการรับรองความถูกต้อง"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Agent authentication"
+msgstr "การรับรองความถูกต้องของเอเย่นต์"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Basic settings"
+msgstr "การตั้งค่าพื้นฐาน"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Slot"
+msgstr "สล็อต"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Determines which numbered AuthModule<N> slot this configuration occupies. Only unused slots are offered."
+msgstr "กำหนดว่าการกำหนดค่านี้ใช้สล็อตหมายเลข AuthModule<N> ใด. มีให้เลือกเฉพาะสล็อตที่ยังไม่ได้ใช้เท่านั้น."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SAML request settings"
+msgstr "การตั้งค่าคำขอ SAML"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Login button text"
+msgstr "ข้อความปุ่มเข้าสู่ระบบ"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Assertion consumer URL"
+msgstr "URL ผู้รับการยืนยัน"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Automatically derived from this system's HTTP type, FQDN and script alias - not editable."
+msgstr "ได้มาโดยอัตโนมัติจากประเภท HTTP, FQDN และนามแฝงสคริปต์ของระบบนี้ - แก้ไขไม่ได้."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Znuny appends a \";IsSAMLLogin=1;Count=<N>;\" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration's slot), so the value the Identity Provider actually receives is:"
+msgstr "Znuny ต่อท้าย \";IsSAMLLogin=1;Count=<N>;\" เข้ากับ URL นี้เมื่อสร้างคำขอ SAML ขาออกจริง (<N> คือสล็อตของการกำหนดค่านี้), ดังนั้นค่าที่ผู้ให้บริการข้อมูลประจำตัวได้รับจริงคือ:"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Copy to clipboard"
+msgstr "คัดลอกไปยังคลิปบอร์ด"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honor the value from the request. If your IdP's field rejects semicolons, register the base URL instead."
+msgstr "ผู้ให้บริการข้อมูลประจำตัวบางรายต้องการให้ลงทะเบียนค่านี้ทุกตัวอักษรเป็น ACS URL. รายอื่นยอมรับ URL ฐานด้านบนและใช้ค่าจากคำขอ. หากช่องของ IdP ไม่รับเครื่องหมายอัฒภาค, ให้ลงทะเบียน URL ฐานแทน."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Download SP metadata XML"
+msgstr "ดาวน์โหลด XML ข้อมูลเมต้าของ SP"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Issuer (SP entity ID)"
+msgstr "ผู้ออก (รหัสเอนทิตี SP)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Requested NameID format"
+msgstr "รูปแบบ NameID ที่ร้องขอ"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Unspecified"
+msgstr "ไม่ระบุ"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Persistent"
+msgstr "ถาวร"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Transient"
+msgstr "ชั่วคราว"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Sent as the NameIDPolicy Format in the outgoing request and published in the SP metadata. Change this only if your Identity Provider requires a specific format."
+msgstr "ส่งเป็นรูปแบบ NameIDPolicy ในคำขอขาออกและเผยแพร่ในข้อมูลเมต้าของ SP. เปลี่ยนค่านี้เฉพาะเมื่อผู้ให้บริการข้อมูลประจำตัวต้องการรูปแบบที่เจาะจง."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Load metadata from URL"
+msgstr "โหลดข้อมูลเมต้าจาก URL"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Switch off to paste the metadata XML instead. Switching clears the entered URL or XML and the SSL options."
+msgstr "ปิดเพื่อวาง XML ข้อมูลเมต้าแทน. การสลับจะล้าง URL หรือ XML ที่ป้อนและตัวเลือก SSL."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Please select a metadata source."
+msgstr "โปรดเลือกแหล่งข้อมูลเมต้า."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Metadata URL"
+msgstr "URL ข้อมูลเมต้า"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Verify"
+msgstr "ตรวจสอบ"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Metadata XML"
+msgstr "XML ข้อมูลเมต้า"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Use custom SSL options for metadata URL fetch"
+msgstr "ใช้ตัวเลือก SSL ที่กำหนดเองสำหรับดึง URL ข้อมูลเมต้า"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SSL CA file"
+msgstr "ไฟล์ SSL CA"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SSL CA path"
+msgstr "พาธ SSL CA"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Verify hostname"
+msgstr "ตรวจสอบชื่อโฮสต์"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Certificates and keys"
+msgstr "ใบรับรองและคีย์"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SP signing key (used to sign outgoing requests)"
+msgstr "คีย์ลงนามของ SP (ใช้ลงนามคำขอขาออก)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SP signing certificate (matches the key above)"
+msgstr "ใบรับรองลงนามของ SP (ตรงกับคีย์ด้านบน)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Required for the SP metadata's KeyDescriptor to be published. \"Generate\" above already produces this together with the key - only needed as a separate step if you uploaded your own key."
+msgstr "จำเป็นเพื่อเผยแพร่ KeyDescriptor ในข้อมูลเมต้าของ SP. \"สร้าง\" ด้านบนสร้างสิ่งนี้พร้อมกับคีย์อยู่แล้ว - ต้องทำเป็นขั้นตอนแยกเฉพาะเมื่อคุณอัพโหลดคีย์ของตนเอง."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Signing algorithm"
+msgstr "อัลกอริทึมการลงนาม"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SHA-256 (default)"
+msgstr "SHA-256 (ค่าเริ่มต้น)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SHA-384"
+msgstr "SHA-384"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SHA-512"
+msgstr "SHA-512"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SHA-1 (legacy, not recommended)"
+msgstr "SHA-1 (รุ่นเก่า, ไม่แนะนำ)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Used to sign the outgoing request when a signing key is set above. Only change this if your Identity Provider requires a specific algorithm."
+msgstr "ใช้ลงนามคำขอขาออกเมื่อตั้งคีย์ลงนามด้านบน. เปลี่ยนค่านี้เฉพาะเมื่อผู้ให้บริการข้อมูลประจำตัวต้องการอัลกอริทึมที่เจาะจง."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Decrypt encrypted assertions"
+msgstr "ถอดรหัสการยืนยันที่เข้ารหัส"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Uses the SP signing key above to decrypt SAML assertions the Identity Provider encrypts. Has no effect on responses that aren't encrypted, so it's safe to leave enabled. Requires a signing key above."
+msgstr "ใช้คีย์ลงนามของ SP ด้านบนเพื่อถอดรหัสการยืนยัน SAML ที่ผู้ให้บริการข้อมูลประจำตัวเข้ารหัส. ไม่มีผลต่อคำตอบที่ไม่ได้เข้ารหัส, จึงปล่อยให้เปิดใช้งานไว้ได้อย่างปลอดภัย. ต้องมีคีย์ลงนามด้านบน."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Identity provider CA certificate"
+msgstr "ใบรับรอง CA ของผู้ให้บริการข้อมูลประจำตัว"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Required for SAML login to work. Without it, Net::SAML2 cannot verify the Identity Provider's response signature and authentication will fail."
+msgstr "จำเป็นเพื่อให้การเข้าสู่ระบบ SAML ทำงาน. หากไม่มี, Net::SAML2 จะไม่สามารถตรวจสอบลายเซ็นคำตอบของผู้ให้บริการข้อมูลประจำตัว และการรับรองความถูกต้องจะล้มเหลว."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Attribute, group and role sync"
+msgstr "การซิงค์แอตทริบิวต์, กลุ่ม และบทบาท"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+msgid "Customer authentication"
+msgstr "การรับรองความถูกต้องของลูกค้า"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+msgid "Determines which numbered Customer::AuthModule<N> slot this configuration occupies. Only unused slots are offered."
+msgstr "กำหนดว่าการกำหนดค่านี้ใช้สล็อตหมายเลข Customer::AuthModule<N> ใด. มีให้เลือกเฉพาะสล็อตที่ยังไม่ได้ใช้เท่านั้น."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "SAML wizard"
+msgstr "ตัวช่วย SAML"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Add agent SAML authentication"
+msgstr "เพิ่มการรับรองความถูกต้อง SAML ของเอเย่นต์"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Add customer SAML authentication"
+msgstr "เพิ่มการรับรองความถูกต้อง SAML ของลูกค้า"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Deploy configuration"
+msgstr "ปรับใช้การกำหนดค่า"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Sync"
+msgstr "ซิงค์"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Slot %s"
+msgstr "สล็อต %s"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Only invalid configurations can be deleted. Set this configuration to invalid first."
+msgstr "ลบได้เฉพาะการกำหนดค่าที่ไม่ถูกต้อง. ตั้งค่าการกำหนดค่านี้เป็นไม่ถูกต้องก่อน."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Enable sync"
+msgstr "เปิดใช้งานการซิงค์"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Also registers Kernel::System::Auth::Sync::SAML for the same slot, to sync attributes/groups/roles from the SAML assertion on every login."
+msgstr "ลงทะเบียน Kernel::System::Auth::Sync::SAML สำหรับสล็อตเดียวกันด้วย, เพื่อซิงค์แอตทริบิวต์/กลุ่ม/บทบาทจากการยืนยัน SAML ทุกครั้งที่เข้าสู่ระบบ."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "The AuthSyncModule for this slot is already configured outside of AdminAuthentication - sync cannot be enabled for it."
+msgstr "AuthSyncModule ของสล็อตนี้ถูกกำหนดค่าไว้นอก AdminAuthentication แล้ว - ไม่สามารถเปิดใช้งานการซิงค์ได้."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "User attribute sync map"
+msgstr "แผนที่ซิงค์แอตทริบิวต์ผู้ใช้"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Maps Znuny user attributes (left) to SAML assertion attribute names (right)."
+msgstr "จับคู่แอตทริบิวต์ผู้ใช้ Znuny (ซ้าย) กับชื่อแอตทริบิวต์ของการยืนยัน SAML (ขวา)."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Znuny attribute"
+msgstr "แอตทริบิวต์ Znuny"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "SAML attribute URI"
+msgstr "URI แอตทริบิวต์ SAML"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Initial groups for new users"
+msgstr "กลุ่มเริ่มต้นสำหรับผู้ใช้ใหม่"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Groups (with rw permission) granted only when a brand-new agent is created via sync. Ctrl/Cmd-click to select multiple."
+msgstr "กลุ่ม (ที่มีการอนุญาต rw) จะให้เฉพาะเมื่อสร้างเอเย่นต์ใหม่ทั้งหมดผ่านการซิงค์. Ctrl/Cmd-click เพื่อเลือกหลายรายการ."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "SAML attribute carrying group values"
+msgstr "แอตทริบิวต์ SAML ที่เก็บค่ากลุ่ม"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Group sync rules (by group value)"
+msgstr "กฎการซิงค์กลุ่ม (ตามค่ากลุ่ม)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Maps a SAML group value to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions."
+msgstr "จับคู่ค่ากลุ่ม SAML กับกลุ่ม Znuny และการอนุญาต. Ctrl/Cmd-click เพื่อเลือกการอนุญาตหลายรายการ."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "SAML value"
+msgstr "ค่า SAML"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Group sync rules (by arbitrary attribute/value)"
+msgstr "กฎการซิงค์กลุ่ม (ตามแอตทริบิวต์/ค่าใดก็ได้)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Maps any SAML attribute name/value combination to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions."
+msgstr "จับคู่ชุดชื่อ/ค่าของแอตทริบิวต์ SAML ใดก็ได้กับกลุ่ม Znuny และการอนุญาต. Ctrl/Cmd-click เพื่อเลือกการอนุญาตหลายรายการ."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "SAML attribute"
+msgstr "แอตทริบิวต์ SAML"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Role sync requires at least one active role. Create or activate a role under Admin → Roles."
+msgstr "การซิงค์บทบาทต้องมีบทบาทที่ใช้งานอย่างน้อยหนึ่งบทบาท. สร้างหรือเปิดใช้งานบทบาทภายใต้ ผู้ดูแลระบบ → บทบาท."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "SAML attribute carrying role values"
+msgstr "แอตทริบิวต์ SAML ที่เก็บค่าบทบาท"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Role sync rules (by role value)"
+msgstr "กฎการซิงค์บทบาท (ตามค่าบทบาท)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Maps a SAML role value to one or more Znuny roles, active or inactive."
+msgstr "จับคู่ค่าบทบาท SAML กับบทบาท Znuny, ไม่ว่าจะใช้งานหรือไม่ใช้งาน."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Role sync rules (by arbitrary attribute/value)"
+msgstr "กฎการซิงค์บทบาท (ตามแอตทริบิวต์/ค่าใดก็ได้)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Maps any SAML attribute name/value combination to one or more Znuny roles, active or inactive."
+msgstr "จับคู่ชุดชื่อ/ค่าของแอตทริบิวต์ SAML ใดก็ได้กับบทบาท Znuny, ไม่ว่าจะใช้งานหรือไม่ใช้งาน."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Setup steps"
+msgstr "ขั้นตอนการตั้งค่า"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Setup wizard"
+msgstr "ตัวช่วยตั้งค่า"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "SAML setup wizard"
+msgstr "ตัวช่วยตั้งค่า SAML"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Step"
+msgstr "ขั้นตอน"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "What are you setting up?"
+msgstr "คุณกำลังตั้งค่าอะไร?"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Agent authentication - staff logging into the agent interface"
+msgstr "การรับรองความถูกต้องของเอเย่นต์ - เจ้าหน้าที่เข้าสู่ระบบในอินเทอร์เฟซเอเย่นต์"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Customer authentication - customers logging into the customer portal"
+msgstr "การรับรองความถูกต้องของลูกค้า - ลูกค้าเข้าสู่ระบบในพอร์ทัลลูกค้า"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Login with SSO"
+msgstr "เข้าสู่ระบบด้วย SSO"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "User sync (optional)"
+msgstr "การซิงค์ผู้ใช้ (ไม่บังคับ)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Optionally sync user attributes, groups and roles from the SAML assertion on every login. This can also be set up later on the edit screen."
+msgstr "ซิงค์แอตทริบิวต์ผู้ใช้, กลุ่ม และบทบาทจากการยืนยัน SAML ทุกครั้งที่เข้าสู่ระบบได้ตามต้องการ. สามารถตั้งค่าภายหลังได้ในหน้าแก้ไข."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Review"
+msgstr "ทบทวน"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective."
+msgstr "คลิกบันทึกเพื่อสร้างการกำหนดค่า SAML นี้. ยังไม่ใช้งาน - จากนั้นใช้การดำเนินการปรับใช้การกำหนดค่าในหน้าภาพรวมเพื่อให้มีผล."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "If you skipped the Identity Provider CA certificate here and provided metadata instead, it will be derived from that metadata automatically during Deploy."
+msgstr "หากคุณข้ามใบรับรอง CA ของผู้ให้บริการข้อมูลประจำตัวที่นี่และให้ข้อมูลเมต้าแทน, ระบบจะดึงจากข้อมูลเมต้านั้นโดยอัตโนมัติระหว่างการปรับใช้."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only)."
+msgstr "คุณสามารถกลับไปยังขั้นตอนก่อนหน้าเพื่อแก้ไข, หรือใช้หน้าแก้ไขแบบเต็มในภายหลังสำหรับตัวเลือกขั้นสูง เช่น การซิงค์แอตทริบิวต์/กลุ่ม/บทบาท (เฉพาะการรับรองความถูกต้องของเอเย่นต์)."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Perl module Net::SAML2 is not installed. SAML authentication cannot work until it is installed on the server."
+msgstr "ยังไม่ได้ติดตั้งโมดูล Perl Net::SAML2. การรับรองความถูกต้องแบบ SAML จะทำงานไม่ได้จนกว่าจะติดตั้งบนเซิร์ฟเวอร์."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Authentication configuration is not in sync with the deployed configuration, please deploy."
+msgstr "การกำหนดค่าการรับรองความถูกต้องไม่ตรงกับการกำหนดค่าที่ปรับใช้แล้ว, โปรดปรับใช้."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Only invalid authentication configurations can be deleted. Please set the configuration to invalid first."
+msgstr "ลบได้เฉพาะการกำหนดค่าการรับรองความถูกต้องที่ไม่ถูกต้อง. โปรดตั้งค่าการกำหนดค่าเป็นไม่ถูกต้องก่อน."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Invalid or missing Role."
+msgstr "บทบาทไม่ถูกต้องหรือขาดหาย."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "No file was uploaded."
+msgstr "ไม่มีไฟล์ที่ถูกอัพโหลด."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Error storing the uploaded file."
+msgstr "ข้อผิดพลาดในการจัดเก็บไฟล์ที่อัพโหลด."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Only the SP signing key can be generated."
+msgstr "สร้างได้เฉพาะคีย์ลงนามของ SP."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Error generating certificate. Please check the system log."
+msgstr "ข้อผิดพลาดในการสร้างใบรับรอง. โปรดตรวจสอบบันทึกระบบ."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Error storing the generated key in VirtualFS."
+msgstr "ข้อผิดพลาดในการจัดเก็บคีย์ที่สร้างใน VirtualFS."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Error storing the generated certificate in VirtualFS."
+msgstr "ข้อผิดพลาดในการจัดเก็บใบรับรองที่สร้างใน VirtualFS."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Could not find a certificate in the metadata. Please check the URL/XML and try again."
+msgstr "ไม่พบใบรับรองในข้อมูลเมต้า. โปรดตรวจสอบ URL/XML แล้วลองอีกครั้ง."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Error storing the certificate."
+msgstr "ข้อผิดพลาดในการจัดเก็บใบรับรอง."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Could not read the certificate from VirtualFS."
+msgstr "ไม่สามารถอ่านใบรับรองจาก VirtualFS."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "The authentication configuration was not deployed. The previously deployed configuration is still active."
+msgstr "การกำหนดค่าการรับรองความถูกต้องไม่ถูกปรับใช้. การกำหนดค่าที่ปรับใช้ก่อนหน้านี้ยังใช้งานอยู่."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Please check the system log for details."
+msgstr "โปรดตรวจสอบบันทึกระบบสำหรับรายละเอียด."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "This is not an unencrypted private key in PEM format (-----BEGIN PRIVATE KEY-----)."
+msgstr "นี่ไม่ใช่คีย์ส่วนตัวที่ไม่ได้เข้ารหัสในรูปแบบ PEM (-----BEGIN PRIVATE KEY-----)."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "This is not a certificate in PEM format (-----BEGIN CERTIFICATE-----)."
+msgstr "นี่ไม่ใช่ใบรับรองในรูปแบบ PEM (-----BEGIN CERTIFICATE-----)."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "The private key could not be read. Only unencrypted private keys are supported."
+msgstr "ไม่สามารถอ่านคีย์ส่วนตัว. รองรับเฉพาะคีย์ส่วนตัวที่ไม่ได้เข้ารหัส."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "The certificate could not be read."
+msgstr "ไม่สามารถอ่านใบรับรอง."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Could not read the SP signing key."
+msgstr "ไม่สามารถอ่านคีย์ลงนามของ SP."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Could not read the IdP CA certificate."
+msgstr "ไม่สามารถอ่านใบรับรอง CA ของ IdP."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "No IdP CA certificate was uploaded and none could be taken from the IdP metadata."
+msgstr "ไม่มีใบรับรอง CA ของ IdP ที่ถูกอัพโหลด และไม่สามารถนำจากข้อมูลเมต้าของ IdP ได้."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Could not decrypt the SP signing key. Please check the configured encryption key."
+msgstr "ไม่สามารถถอดรหัสคีย์ลงนามของ SP. โปรดตรวจสอบคีย์เข้ารหัสที่กำหนดค่าไว้."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Net::SAML2 is not installed on the server, metadata cannot be verified."
+msgstr "ยังไม่ได้ติดตั้ง Net::SAML2 บนเซิร์ฟเวอร์, จึงไม่สามารถตรวจสอบข้อมูลเมต้า."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Metadata URL is empty."
+msgstr "URL ข้อมูลเมต้าว่างเปล่า."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Metadata XML is empty."
+msgstr "XML ข้อมูลเมต้าว่างเปล่า."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Could not parse the metadata. Please check the URL/XML and try again."
+msgstr "ไม่สามารถแยกวิเคราะห์ข้อมูลเมต้า. โปรดตรวจสอบ URL/XML แล้วลองอีกครั้ง."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Perl module Crypt::OpenSSL::X509 is not installed, certificate details cannot be parsed."
+msgstr "ยังไม่ได้ติดตั้งโมดูล Perl Crypt::OpenSSL::X509, จึงไม่สามารถแยกวิเคราะห์รายละเอียดใบรับรอง."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Could not parse the certificate."
+msgstr "ไม่สามารถแยกวิเคราะห์ใบรับรอง."
+
+#. Perl Module: Kernel/System/AuthenticationConfig.pm
+msgid "No authentication plugin is registered for this type."
+msgstr "ไม่มีปลั๊กอินการรับรองความถูกต้องที่ลงทะเบียนสำหรับประเภทนี้."
+
+#. Perl Module: Kernel/System/AuthenticationConfig.pm
+msgid "Could not write the certificate files."
+msgstr "ไม่สามารถเขียนไฟล์ใบรับรอง."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Registers the SAML 2.0 authentication plugin for AdminAuthentication."
+msgstr "ลงทะเบียนปลั๊กอินการรับรองความถูกต้อง SAML 2.0 สำหรับ AdminAuthentication."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?"
+msgstr "การเปลี่ยนแหล่งข้อมูลเมต้าจะลบ URL หรือ XML ข้อมูลเมต้าที่ป้อนและตัวเลือก SSL. ดำเนินการต่อ?"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Change metadata source"
+msgstr "เปลี่ยนแหล่งข้อมูลเมต้า"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Uploaded key"
+msgstr "คีย์ที่อัพโหลด"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "EXPIRED"
+msgstr "หมดอายุแล้ว"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "expires"
+msgstr "หมดอายุ"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "used by %s configuration(s)"
+msgstr "ใช้โดยการกำหนดค่า %s รายการ"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Could not read the certificate."
+msgstr "ไม่สามารถอ่านใบรับรองได้."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Certificate (PEM)"
+msgstr "ใบรับรอง (PEM)"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Issuer"
+msgstr "ผู้ออก"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Valid from"
+msgstr "ใช้ได้ตั้งแต่"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Valid until"
+msgstr "ใช้ได้จนถึง"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Serial"
+msgstr "หมายเลขซีเรียล"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Fingerprint (SHA-256)"
+msgstr "ลายนิ้วมือ (SHA-256)"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Show raw PEM"
+msgstr "แสดง PEM ดิบ"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Certificate details"
+msgstr "รายละเอียดใบรับรอง"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Metadata is valid."
+msgstr "ข้อมูลเมต้าถูกต้อง."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Entity ID"
+msgstr "รหัสเอนทิตี"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "SSO URL"
+msgstr "SSO URL"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Includes a signing certificate."
+msgstr "มีใบรับรองสำหรับลงนาม."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "No signing certificate found in the metadata."
+msgstr "ไม่พบใบรับรองสำหรับลงนามในข้อมูลเมต้า."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Found %s attribute(s) in the metadata."
+msgstr "พบแอตทริบิวต์ %s รายการในข้อมูลเมต้า."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Verifying..."
+msgstr "กำลังตรวจสอบ..."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Metadata verification failed."
+msgstr "การตรวจสอบข้อมูลเมต้าล้มเหลว."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Upload failed."
+msgstr "การอัพโหลดล้มเหลว."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Please paste a certificate or key first."
+msgstr "โปรดวางใบรับรองหรือคีย์ก่อน."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Saving the pasted certificate/key failed."
+msgstr "การบันทึกใบรับรอง/คีย์ที่วางล้มเหลว."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Certificate generation failed."
+msgstr "การสร้างใบรับรองล้มเหลว."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Please select a metadata source (URL or XML) first."
+msgstr "โปรดเลือกแหล่งข้อมูลเมต้า (URL หรือ XML) ก่อน."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Could not find a certificate in the metadata."
+msgstr "ไม่พบใบรับรองในข้อมูลเมต้า."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Do you really want to delete this SAML configuration?"
+msgstr "คุณต้องการลบการกำหนดค่า SAML นี้จริงหรือไม่?"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Delete SAML configuration"
+msgstr "ลบการกำหนดค่า SAML"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "There was an error deleting the SAML configuration."
+msgstr "เกิดข้อผิดพลาดในการลบการกำหนดค่า SAML."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "(pasted XML)"
+msgstr "(XML ที่วาง)"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Not configured yet"
+msgstr "ยังไม่ได้กำหนดค่า"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Identity provider metadata"
+msgstr "ข้อมูลเมต้าของผู้ให้บริการข้อมูลประจำตัว"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "SP signing key"
+msgstr "คีย์ลงนามของ SP"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Configured"
+msgstr "กำหนดค่าแล้ว"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Not set"
+msgstr "ยังไม่ได้ตั้งค่า"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "SP signing certificate"
+msgstr "ใบรับรองลงนามของ SP"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Not set (will be derived automatically from metadata during Deploy, if possible)"
+msgstr "ยังไม่ได้ตั้งค่า (จะดึงจากข้อมูลเมต้าโดยอัตโนมัติระหว่างการปรับใช้, หากทำได้)"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "User sync"
+msgstr "การซิงค์ผู้ใช้"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Enabled (%s attribute mappings, %s group rules, %s role rules)"
+msgstr "เปิดใช้งานแล้ว (%s การแมปแอตทริบิวต์, %s กฎกลุ่ม, %s กฎบทบาท)"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Please fill in all required fields before continuing."
+msgstr "โปรดกรอกช่องที่จำเป็นทั้งหมดก่อนดำเนินการต่อ."
+
+#. SysConfig
+msgid "Manage agent and customer authentication (e.g. SAML 2.0)."
+msgstr "จัดการการรับรองความถูกต้องของเอเย่นต์และลูกค้า (เช่น SAML 2.0)."
+
+#. SysConfig
+msgid "SAML"
+msgstr "SAML"
+
 #. Perl Module: Kernel/Modules/AgentTicketQueue.pm
 msgid "System default"
 msgstr ""
@@ -25697,4 +26413,104 @@ msgstr "การดำเนินการคลิกเดียว"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagementActivityDialog.tt
 msgid "Skip the activity dialog popup and submit immediately."
 msgstr "ข้ามป๊อปอัปของกล่องโต้ตอบกิจกรรมและส่งทันที"
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar."
+msgstr "กำหนดว่าวันที่รอดำเนินการเริ่มต้นตาม Ticket::Frontend::PendingDiffTime ควรข้ามวันที่เป็นวันหยุดหรือไม่มีเวลาทำงานในปฏิทินนี้หรือไม่"
+
+#. JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+msgid "No working hours"
+msgstr "ไม่มีเวลาทำงาน"
+
+#. JS File: var/httpd/htdocs/js/Core.UI.js
+msgid "%s of %s"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/LinkObject.tt
+msgid "No results found."
+msgstr "ไม่พบผลลัพธ์"
+
+#. Perl Module: Kernel/Output/HTML/Layout/LinkObject.pm
+msgid "filter"
+msgstr "ตัวกรอง"
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = \"complex\"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup."
+msgstr "เปิดใช้ตัวกรองคอลัมน์แบบเลือกได้หลายค่าสำหรับตั๋วที่เชื่อมโยงในวิดเจ็ตวัตถุที่เชื่อมโยงแบบซับซ้อน (LinkObject::ViewMode = \"complex\") ตัวกรองใช้ได้ใน AgentTicketZoom และไม่แสดงในหน้าต่างป๊อปอัปของ AgentLinkObject"
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported."
+msgstr "ฟิลด์แบบไดนามิกที่แสดงในกล่องโต้ตอบตัวกรองบทความของหน้าจอซูมตั๋วในอินเทอร์เฟซเจ้าหน้าที่ รองรับเฉพาะฟิลด์ประเภทออบเจคบทความที่เป็นประเภทข้อความ, Textarea, ดรอปดาวน์, หลายรายการ และกล่องตรวจสอบ"
+
+#. Perl Module: Kernel/Modules/Installer.pm
+msgid "Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s."
+msgstr "ข้อผิดพลาด: กรุณาตั้งค่า innodb_redo_log_capacity ในฐานข้อมูลของคุณให้มีอย่างน้อย %s MB (ปัจจุบัน: %s MB, แนะนำ: %s MB) สำหรับข้อมูลเพิ่มเติมโปรดดูที่ %s"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+msgid "InnoDB Redo Log Capacity"
+msgstr "ความจุ Redo Log ของ InnoDB"
+
+#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+msgid "The setting innodb_redo_log_capacity must be at least 256 MB."
+msgstr "การตั้งค่า innodb_redo_log_capacity ต้องมีอย่างน้อย 256 MB"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Paste key"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Paste certificate"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Login attribute"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Please enter attribute names separated by commas."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Optional. By default the NameID is the login. Enter one or more SAML attribute names (Name or FriendlyName), separated by commas, to take the login from the first of these attributes the assertion contains instead, e.g. if the Identity Provider sends a persistent NameID. The attribute must have exactly one value, otherwise the login fails. Changing this changes the login of existing users."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Deployment failed"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Fix the configurations below and deploy again. Or set a configuration to invalid: its login stops working and the other configurations are deployed."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Set to invalid and deploy the rest"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "If you skipped the Identity Provider CA certificate here, it is taken from the metadata when saving. Please check it on the edit screen afterwards."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Authentication configuration is not in sync with the deployed configuration, but it can't be deployed: a valid configuration has a problem, see the status below. Fix it or set it to invalid, then deploy."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Authentication configuration not found."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Could not set the authentication configuration to invalid."
+msgstr ""
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "No IdP CA certificate is stored. It is taken from the IdP metadata on every deploy. Save the configuration to store it."
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "NameID (default)"
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Not set (will be taken from the metadata when saving)"
+msgstr ""
 

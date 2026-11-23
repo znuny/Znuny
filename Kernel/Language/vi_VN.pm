@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.149249011857708;
+    $Self->{Completeness}        = 0.172900061312078;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -268,6 +268,169 @@ sub Data {
         'Do you really want to delete this attachment?' => '',
         'Attachment' => 'Đính kèm',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+        'Certificate/key is stored in VirtualFS.' => 'Chứng chỉ/khóa được lưu trong VirtualFS.',
+        'No certificate/key set.' => 'Chưa thiết lập chứng chỉ/khóa.',
+        'View certificate details' => 'Xem chi tiết chứng chỉ',
+        'The selected certificate/key is not available. Please select or upload it again.' =>
+            'Chứng chỉ/khóa đã chọn không khả dụng. Vui lòng chọn hoặc tải lên lại.',
+        '- Select an existing certificate/key -' => '- Chọn chứng chỉ/khóa hiện có -',
+        'Paste key' => '',
+        'Paste certificate' => '',
+        'Generate' => '',
+        'Use certificate from metadata' => 'Dùng chứng chỉ từ siêu dữ liệu',
+        'Extracts the signing certificate embedded in the Identity Provider metadata and stores it here, instead of uploading it separately.' =>
+            'Trích xuất chứng chỉ ký được nhúng trong siêu dữ liệu của Nhà cung cấp danh tính và lưu tại đây, thay vì tải lên riêng.',
+        'Paste the PEM text including the BEGIN and END lines.' => 'Dán văn bản PEM bao gồm cả dòng BEGIN và END.',
+        'Common Name' => 'Tên chung (CN)',
+        'Key size' => 'Độ dài khóa',
+        'Validity (days)' => 'Thời hạn hiệu lực (ngày)',
+        'Generate self-signed certificate' => 'Tạo chứng chỉ tự ký',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+        'Authentication Management' => 'Quản lý xác thực',
+        'Agent authentication' => 'Xác thực điều hành viên',
+        'Basic settings' => 'Thiết lập cơ bản',
+        'Slot' => 'Slot',
+        'Determines which numbered AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Xác định slot AuthModule<N> được đánh số mà cấu hình này chiếm dụng. Chỉ các slot chưa được sử dụng mới được hiển thị.',
+        'SAML request settings' => 'Thiết lập yêu cầu SAML',
+        'Login button text' => 'Văn bản nút đăng nhập',
+        'Assertion consumer URL' => 'URL tiếp nhận assertion',
+        'Automatically derived from this system\'s HTTP type, FQDN and script alias - not editable.' =>
+            'Được tự động suy ra từ loại HTTP, FQDN và bí danh script của hệ thống này - không thể chỉnh sửa.',
+        'Znuny appends a ";IsSAMLLogin=1;Count=<N>;" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration\'s slot), so the value the Identity Provider actually receives is:' =>
+            'Znuny thêm hậu tố ";IsSAMLLogin=1;Count=<N>;" vào URL này khi tạo yêu cầu SAML gửi đi thực tế (<N> là slot của cấu hình này), vì vậy giá trị mà Nhà cung cấp danh tính thực sự nhận được là:',
+        'Copy to clipboard' => 'Sao chép vào bộ nhớ tạm',
+        'Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honor the value from the request. If your IdP\'s field rejects semicolons, register the base URL instead.' =>
+            'Một số Nhà cung cấp danh tính yêu cầu đăng ký chính xác giá trị này làm URL ACS. Một số khác chấp nhận URL cơ sở ở trên và tuân theo giá trị từ yêu cầu. Nếu trường của IdP của bạn không chấp nhận dấu chấm phẩy, hãy đăng ký URL cơ sở thay thế.',
+        'Download SP metadata XML' => 'Tải xuống XML siêu dữ liệu SP',
+        'Issuer (SP entity ID)' => 'Bên phát hành (ID thực thể SP)',
+        'Requested NameID format' => 'Định dạng NameID được yêu cầu',
+        'Unspecified' => 'Không xác định',
+        'Persistent' => 'Cố định',
+        'Transient' => 'Tạm thời',
+        'Email address' => '',
+        'Sent as the NameIDPolicy Format in the outgoing request and published in the SP metadata. Change this only if your Identity Provider requires a specific format.' =>
+            'Được gửi dưới dạng NameIDPolicy Format trong yêu cầu gửi đi và được công bố trong siêu dữ liệu SP. Chỉ thay đổi nếu Nhà cung cấp danh tính của bạn yêu cầu một định dạng cụ thể.',
+        'Login attribute' => '',
+        'Please enter attribute names separated by commas.' => '',
+        'Optional. By default the NameID is the login. Enter one or more SAML attribute names (Name or FriendlyName), separated by commas, to take the login from the first of these attributes the assertion contains instead, e.g. if the Identity Provider sends a persistent NameID. The attribute must have exactly one value, otherwise the login fails. Changing this changes the login of existing users.' =>
+            '',
+        'Load metadata from URL' => 'Tải siêu dữ liệu từ URL',
+        'Switch off to paste the metadata XML instead. Switching clears the entered URL or XML and the SSL options.' =>
+            'Tắt để dán XML siêu dữ liệu thay thế. Việc chuyển đổi sẽ xóa URL hoặc XML đã nhập và các tùy chọn SSL.',
+        'Please select a metadata source.' => 'Vui lòng chọn nguồn siêu dữ liệu.',
+        'Metadata URL' => 'URL siêu dữ liệu',
+        'Verify' => 'Xác minh',
+        'Metadata XML' => 'XML siêu dữ liệu',
+        'Use custom SSL options for metadata URL fetch' => 'Dùng tùy chọn SSL tùy chỉnh khi tải URL siêu dữ liệu',
+        'SSL CA file' => 'Tệp CA SSL',
+        'SSL CA path' => 'Đường dẫn CA SSL',
+        'Verify hostname' => 'Xác minh tên máy chủ',
+        'Certificates and keys' => 'Chứng chỉ và khóa',
+        'SP signing key (used to sign outgoing requests)' => 'Khóa ký SP (dùng để ký các yêu cầu gửi đi)',
+        'SP signing certificate (matches the key above)' => 'Chứng chỉ ký SP (khớp với khóa ở trên)',
+        'Required for the SP metadata\'s KeyDescriptor to be published. "Generate" above already produces this together with the key - only needed as a separate step if you uploaded your own key.' =>
+            'Bắt buộc để KeyDescriptor trong siêu dữ liệu SP được công bố. "Tạo" ở trên đã tạo chứng chỉ này cùng với khóa - chỉ cần làm bước riêng nếu bạn đã tải lên khóa của mình.',
+        'Signing algorithm' => 'Thuật toán ký',
+        'SHA-256 (default)' => 'SHA-256 (mặc định)',
+        'SHA-384' => 'SHA-384',
+        'SHA-512' => 'SHA-512',
+        'SHA-1 (legacy, not recommended)' => 'SHA-1 (cũ, không khuyến nghị)',
+        'Used to sign the outgoing request when a signing key is set above. Only change this if your Identity Provider requires a specific algorithm.' =>
+            'Dùng để ký yêu cầu gửi đi khi đã thiết lập khóa ký ở trên. Chỉ thay đổi nếu Nhà cung cấp danh tính của bạn yêu cầu một thuật toán cụ thể.',
+        'Decrypt encrypted assertions' => 'Giải mã assertion được mã hóa',
+        'Uses the SP signing key above to decrypt SAML assertions the Identity Provider encrypts. Has no effect on responses that aren\'t encrypted, so it\'s safe to leave enabled. Requires a signing key above.' =>
+            'Dùng khóa ký SP ở trên để giải mã các assertion SAML do Nhà cung cấp danh tính mã hóa. Không ảnh hưởng đến các phản hồi không được mã hóa, nên có thể để bật một cách an toàn. Yêu cầu có khóa ký ở trên.',
+        'Identity provider CA certificate' => 'Chứng chỉ CA của Nhà cung cấp danh tính',
+        'Required for SAML login to work. Without it, Net::SAML2 cannot verify the Identity Provider\'s response signature and authentication will fail.' =>
+            'Bắt buộc để đăng nhập SAML hoạt động. Nếu thiếu, Net::SAML2 không thể xác minh chữ ký phản hồi của Nhà cung cấp danh tính và việc xác thực sẽ thất bại.',
+        'Attribute, group and role sync' => 'Đồng bộ thuộc tính, nhóm và vai trò',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+        'Customer authentication' => 'Xác thực khách hàng',
+        'Determines which numbered Customer::AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Xác định slot Customer::AuthModule<N> được đánh số mà cấu hình này chiếm dụng. Chỉ các slot chưa được sử dụng mới được hiển thị.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+        'SAML wizard' => 'Trình hướng dẫn SAML',
+        'Add agent SAML authentication' => 'Thêm xác thực SAML cho điều hành viên',
+        'Add customer SAML authentication' => 'Thêm xác thực SAML cho khách hàng',
+        'Deploy configuration' => 'Triển khai cấu hình',
+        'Deployment failed' => '',
+        'Fix the configurations below and deploy again. Or set a configuration to invalid: its login stops working and the other configurations are deployed.' =>
+            '',
+        'Problem' => 'Vấn đề',
+        'Edit' => 'Sửa',
+        'Set to invalid and deploy the rest' => '',
+        'Sync' => 'Đồng bộ',
+        'Status' => 'Trạng thái',
+        'Metadata' => '',
+        'Slot %s' => 'Slot %s',
+        'Default' => '',
+        'Yes' => 'Có',
+        'No' => 'Không',
+        'OK' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+        'Enable sync' => 'Bật đồng bộ',
+        'Also registers Kernel::System::Auth::Sync::SAML for the same slot, to sync attributes/groups/roles from the SAML assertion on every login.' =>
+            'Đồng thời đăng ký Kernel::System::Auth::Sync::SAML cho cùng slot, để đồng bộ thuộc tính/nhóm/vai trò từ assertion SAML mỗi lần đăng nhập.',
+        'The AuthSyncModule for this slot is already configured outside of AdminAuthentication - sync cannot be enabled for it.' =>
+            'AuthSyncModule cho slot này đã được cấu hình bên ngoài AdminAuthentication - không thể bật đồng bộ cho slot này.',
+        'User attribute sync map' => 'Ánh xạ đồng bộ thuộc tính người dùng',
+        'Maps Znuny user attributes (left) to SAML assertion attribute names (right).' =>
+            'Ánh xạ thuộc tính người dùng Znuny (bên trái) sang tên thuộc tính trong assertion SAML (bên phải).',
+        'Znuny attribute' => 'Thuộc tính Znuny',
+        'SAML attribute URI' => 'URI thuộc tính SAML',
+        'Initial groups for new users' => 'Nhóm ban đầu cho người dùng mới',
+        'Groups (with rw permission) granted only when a brand-new agent is created via sync. Ctrl/Cmd-click to select multiple.' =>
+            'Các nhóm (với quyền rw) chỉ được cấp khi một điều hành viên hoàn toàn mới được tạo qua đồng bộ. Ctrl/Cmd-nhấp để chọn nhiều mục.',
+        'SAML attribute carrying group values' => 'Thuộc tính SAML chứa giá trị nhóm',
+        'Group sync rules (by group value)' => 'Quy tắc đồng bộ nhóm (theo giá trị nhóm)',
+        'Maps a SAML group value to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Ánh xạ một giá trị nhóm SAML sang một nhóm Znuny và các quyền. Ctrl/Cmd-nhấp để chọn nhiều quyền.',
+        'SAML value' => 'Giá trị SAML',
+        'Group sync rules (by arbitrary attribute/value)' => 'Quy tắc đồng bộ nhóm (theo thuộc tính/giá trị tùy ý)',
+        'Maps any SAML attribute name/value combination to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Ánh xạ bất kỳ tổ hợp tên/giá trị thuộc tính SAML nào sang một nhóm Znuny và các quyền. Ctrl/Cmd-nhấp để chọn nhiều quyền.',
+        'SAML attribute' => 'Thuộc tính SAML',
+        'Role sync requires at least one active role. Create or activate a role under Admin → Roles.' =>
+            'Đồng bộ vai trò cần ít nhất một vai trò đang hoạt động. Hãy tạo hoặc kích hoạt một vai trò trong Quản trị → Vai trò.',
+        'SAML attribute carrying role values' => 'Thuộc tính SAML chứa giá trị vai trò',
+        'Role sync rules (by role value)' => 'Quy tắc đồng bộ vai trò (theo giá trị vai trò)',
+        'Maps a SAML role value to one or more Znuny roles, active or inactive.' =>
+            'Ánh xạ một giá trị vai trò SAML sang một vai trò Znuny, ở trạng thái hoạt động hoặc không hoạt động.',
+        'Active' => 'Hoạt động',
+        'Role sync rules (by arbitrary attribute/value)' => 'Quy tắc đồng bộ vai trò (theo thuộc tính/giá trị tùy ý)',
+        'Maps any SAML attribute name/value combination to one or more Znuny roles, active or inactive.' =>
+            'Ánh xạ bất kỳ tổ hợp tên/giá trị thuộc tính SAML nào sang một vai trò Znuny, ở trạng thái hoạt động hoặc không hoạt động.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+        'Setup steps' => 'Các bước thiết lập',
+        'Setup wizard' => 'Trình hướng dẫn thiết lập',
+        'SAML setup wizard' => 'Trình hướng dẫn thiết lập SAML',
+        'Step' => 'Bước',
+        'What are you setting up?' => 'Bạn đang thiết lập gì?',
+        'Agent authentication - staff logging into the agent interface' =>
+            'Xác thực điều hành viên - nhân viên đăng nhập vào giao diện điều hành viên',
+        'Customer authentication - customers logging into the customer portal' =>
+            'Xác thực khách hàng - khách hàng đăng nhập vào cổng khách hàng',
+        'Login with SSO' => 'Đăng nhập bằng SSO',
+        'User sync (optional)' => 'Đồng bộ người dùng (tùy chọn)',
+        'Optionally sync user attributes, groups and roles from the SAML assertion on every login. This can also be set up later on the edit screen.' =>
+            'Tùy chọn đồng bộ thuộc tính người dùng, nhóm và vai trò từ assertion SAML mỗi lần đăng nhập. Bạn cũng có thể thiết lập việc này sau trên màn hình chỉnh sửa.',
+        'Review' => 'Xem lại',
+        'Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective.' =>
+            'Nhấp Lưu để tạo cấu hình SAML này. Cấu hình sẽ chưa có hiệu lực - sau đó hãy dùng thao tác Triển khai trên trang tổng quan để áp dụng.',
+        'If you skipped the Identity Provider CA certificate here, it is taken from the metadata when saving. Please check it on the edit screen afterwards.' =>
+            '',
+        'You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only).' =>
+            'Bạn có thể quay lại bất kỳ bước nào trước đó để thay đổi, hoặc sau đó dùng màn hình chỉnh sửa đầy đủ cho các tùy chọn nâng cao như đồng bộ thuộc tính/nhóm/vai trò (chỉ dành cho xác thực điều hành viên).',
+        'Back' => 'Trở lại',
+        'Next' => 'Tiếp',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
         'Add Auto Response' => 'Thêm Phản Hồi Tự Động',
         'Filter for Auto Responses' => '',
@@ -325,9 +488,7 @@ sub Data {
             '',
         'Account Status' => '',
         'Account status for: %s' => '',
-        'Status' => 'Trạng thái',
         'Account' => '',
-        'Edit' => 'Sửa',
         'No accounts found.' => '',
         'Communication Log Details (%s)' => '',
         'Direction' => 'Phương hướng',
@@ -446,7 +607,6 @@ sub Data {
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => 'Trạng thái hoạt động Toggle cho tất cả',
-        'Active' => 'Hoạt động',
         'Toggle active state for %s' => 'Toggle trạng thái hoạt động cho% s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
@@ -1583,14 +1743,11 @@ sub Data {
         'Download package' => '',
         'Rebuild package' => '',
         'Package Information' => '',
-        'Metadata' => '',
         'Change Log' => '',
         'Date' => 'Dữ liệu',
         'List of Files' => '',
         'Permission' => 'Quyền',
         'Size' => 'Cỡ',
-        'Problem' => 'Vấn đề',
-        'OK' => '',
         'Download file from package!' => 'Tải file từ gói xuống!',
         'Required' => 'Được yêu cầu',
         'Primary Key' => '',
@@ -2134,7 +2291,6 @@ sub Data {
         'System Email Addresses Management' => 'Quản trị địa chỉ email hệ thống',
         'Add System Email Address' => '',
         'Edit System Email Address' => '',
-        'Email address' => '',
         'Display name' => '',
         'This email address is already used as system email address.' => '',
         'The display name and email address will be shown on mail you send.' =>
@@ -2349,8 +2505,6 @@ sub Data {
         'All-day' => '',
         'Repeat' => '',
         'Notification' => 'Thông báo',
-        'Yes' => 'Có',
-        'No' => 'Không',
         'No calendars found. Please add a calendar first by using Manage Calendars page.' =>
             '',
 
@@ -2875,10 +3029,11 @@ sub Data {
         'Archive Search' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'Nội dung',
+        'e.g. Text or Te*t' => '',
         'Save filter settings as default' => '',
         'Event Type' => '',
         'Save as default' => '',
-        'Back' => 'Trở lại',
         'Change Queue' => '',
         'Add Filter' => '',
         'Set' => 'Thiết đặt',
@@ -3126,7 +3281,6 @@ sub Data {
         'Phone' => 'Điện thoại',
         'Web site' => '',
         'Community' => '',
-        'Next' => 'Tiếp',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => '',
@@ -3221,6 +3375,8 @@ sub Data {
         'Delete link' => '',
         'Delete Link' => '',
         'Object#' => '',
+        'Remove active filters for this widget.' => '',
+        'No results found.' => 'Không tìm thấy kết quả.',
         'Add links' => '',
         'Delete links' => '',
 
@@ -3627,6 +3783,34 @@ sub Data {
             '',
         'All agents with write permission for the appointment (calendar)' =>
             '',
+
+        # Perl Module: Kernel/Modules/AdminAuthentication.pm
+        'Perl module Net::SAML2 is not installed. SAML authentication cannot work until it is installed on the server.' =>
+            'Mô-đun Perl Net::SAML2 chưa được cài đặt. Xác thực SAML không thể hoạt động cho đến khi mô-đun này được cài đặt trên máy chủ.',
+        'Authentication configuration is not in sync with the deployed configuration, but it can\'t be deployed: a valid configuration has a problem, see the status below. Fix it or set it to invalid, then deploy.' =>
+            '',
+        'Authentication configuration is not in sync with the deployed configuration, please deploy.' =>
+            'Cấu hình xác thực không đồng bộ với cấu hình đã triển khai, vui lòng triển khai.',
+        'No IdP CA certificate was uploaded and none could be taken from the IdP metadata.' =>
+            'Chưa tải lên chứng chỉ CA của IdP và không thể lấy chứng chỉ nào từ siêu dữ liệu IdP.',
+        'Only invalid authentication configurations can be deleted. Please set the configuration to invalid first.' =>
+            'Chỉ có thể xóa các cấu hình xác thực không hợp lệ. Vui lòng đặt cấu hình thành không hợp lệ trước.',
+        'Invalid or missing Role.' => 'Vai trò không hợp lệ hoặc bị thiếu.',
+        'No file was uploaded.' => 'Không có tệp nào được tải lên.',
+        'Error storing the uploaded file.' => 'Lỗi khi lưu tệp đã tải lên.',
+        'Only the SP signing key can be generated.' => 'Chỉ có thể tạo khóa ký SP.',
+        'Error generating certificate. Please check the system log.' => 'Lỗi khi tạo chứng chỉ. Vui lòng kiểm tra bản ghi hệ thống.',
+        'Error storing the generated key in VirtualFS.' => 'Lỗi khi lưu khóa đã tạo vào VirtualFS.',
+        'Error storing the generated certificate in VirtualFS.' => 'Lỗi khi lưu chứng chỉ đã tạo vào VirtualFS.',
+        'Could not find a certificate in the metadata. Please check the URL/XML and try again.' =>
+            'Không tìm thấy chứng chỉ trong siêu dữ liệu. Vui lòng kiểm tra URL/XML và thử lại.',
+        'Error storing the certificate.' => 'Lỗi khi lưu chứng chỉ.',
+        'Could not read the certificate from VirtualFS.' => 'Không thể đọc chứng chỉ từ VirtualFS.',
+        'The authentication configuration was not deployed. The previously deployed configuration is still active.' =>
+            'Cấu hình xác thực chưa được triển khai. Cấu hình đã triển khai trước đó vẫn đang có hiệu lực.',
+        'Please check the system log for details.' => 'Vui lòng kiểm tra bản ghi hệ thống để biết chi tiết.',
+        'Authentication configuration not found.' => '',
+        'Could not set the authentication configuration to invalid.' => '',
 
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
@@ -4661,6 +4845,8 @@ sub Data {
             '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            'Lỗi: vui lòng đặt giá trị innodb_redo_log_capacity trên cơ sở dữ liệu thành ít nhất %s MB (hiện tại: %s MB, khuyến nghị: %s MB). Để biết thêm thông tin, hãy xem %s.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             '',
         'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
@@ -4842,6 +5028,7 @@ sub Data {
         'Linked as' => '',
         'Search Result' => '',
         'Linked' => 'Đã liên kết',
+        'filter' => 'Lọc',
         'Bulk' => '',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -4970,7 +5157,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => '',
         'Unable to load %s!' => '',
-        'Content' => 'Nội dung',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'Tin tức về vé',
@@ -5031,6 +5217,34 @@ sub Data {
         'Session invalid. Please log in again.' => 'Phiên đã bị gián đoạn. Xin hãy đăng nhập lại.',
         'Session has timed out. Please log in again.' => 'Phiên đã bị gián đoạn. Xin hãy đăng nhập lại.',
 
+        # Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+        'This is not an unencrypted private key in PEM format (-----BEGIN PRIVATE KEY-----).' =>
+            'Đây không phải là khóa cá nhân không mã hóa ở định dạng PEM (-----BEGIN PRIVATE KEY-----).',
+        'This is not a certificate in PEM format (-----BEGIN CERTIFICATE-----).' =>
+            'Đây không phải là chứng chỉ ở định dạng PEM (-----BEGIN CERTIFICATE-----).',
+        'The private key could not be read. Only unencrypted private keys are supported.' =>
+            'Không thể đọc khóa cá nhân. Chỉ hỗ trợ khóa cá nhân không mã hóa.',
+        'The certificate could not be read.' => 'Không thể đọc chứng chỉ.',
+        'Could not read the SP signing key.' => 'Không thể đọc khóa ký SP.',
+        'Could not read the IdP CA certificate.' => 'Không thể đọc chứng chỉ CA của IdP.',
+        'No IdP CA certificate is stored. It is taken from the IdP metadata on every deploy. Save the configuration to store it.' =>
+            '',
+        'Could not decrypt the SP signing key. Please check the configured encryption key.' =>
+            'Không thể giải mã khóa ký SP. Vui lòng kiểm tra khóa mã hóa đã cấu hình.',
+        'Net::SAML2 is not installed on the server, metadata cannot be verified.' =>
+            'Net::SAML2 chưa được cài đặt trên máy chủ, không thể xác minh siêu dữ liệu.',
+        'Metadata URL is empty.' => 'URL siêu dữ liệu đang trống.',
+        'Metadata XML is empty.' => 'XML siêu dữ liệu đang trống.',
+        'Could not parse the metadata. Please check the URL/XML and try again.' =>
+            'Không thể phân tích siêu dữ liệu. Vui lòng kiểm tra URL/XML và thử lại.',
+        'Perl module Crypt::OpenSSL::X509 is not installed, certificate details cannot be parsed.' =>
+            'Mô-đun Perl Crypt::OpenSSL::X509 chưa được cài đặt, không thể phân tích chi tiết chứng chỉ.',
+        'Could not parse the certificate.' => 'Không thể phân tích chứng chỉ.',
+
+        # Perl Module: Kernel/System/AuthenticationConfig.pm
+        'No authentication plugin is registered for this type.' => 'Không có plugin xác thực nào được đăng ký cho loại này.',
+        'Could not write the certificate files.' => 'Không thể ghi các tệp chứng chỉ.',
+
         # Perl Module: Kernel/System/AutoResponse.pm
         'Couldn\'t read auto response configuration file. Please make sure the file is valid.' =>
             '',
@@ -5074,9 +5288,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'trước / sau',
         'between' => 'giữa',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -5247,6 +5458,9 @@ sub Data {
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'Dung lượng nhật ký redo của InnoDB',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'Thiết lập innodb_redo_log_capacity phải ít nhất là 256 MB.',
         'InnoDB Log File Size' => '',
         'The setting innodb_log_file_size must be at least 256 MB.' => '',
 
@@ -5551,7 +5765,6 @@ sub Data {
         'All Settings' => '',
 
         # Perl Module: Kernel/System/SysConfig/BaseValueType.pm
-        'Default' => '',
         'Value is not correct! Please, consider updating this field.' => '',
         'Value doesn\'t satisfy regex (%s).' => '',
 
@@ -6009,6 +6222,8 @@ sub Data {
             '',
         'Maximum Number of a calendar shown in a dropdown.' => '',
         'Define the start day of the week for the date picker.' => '',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Xác định xem ngày chờ mặc định dựa trên Ticket::Frontend::PendingDiffTime có nên bỏ qua các ngày là ngày lễ hoặc không có giờ làm việc trong lịch này hay không.',
         'Adds the permanent vacation days.' => '',
         'Adds the one time vacation days.' => '',
         'Defines the hours and week days to count the working time.' => '',
@@ -6290,6 +6505,8 @@ sub Data {
             '',
         'Frontend module registration (disable company link if no company feature is used).' =>
             '',
+        'Registers the SAML 2.0 authentication plugin for AdminAuthentication.' =>
+            'Đăng ký plugin xác thực SAML 2.0 cho AdminAuthentication.',
         'Frontend module registration for the customer interface.' => '',
         'Activates the available themes on the system. Value 1 means active, 0 means inactive.' =>
             '',
@@ -6712,6 +6929,8 @@ sub Data {
             '',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             '',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Các trường động được hiển thị trong hộp thoại bộ lọc bài viết trên màn hình thu phóng phiếu ở giao diện nhân viên. Chỉ hỗ trợ các trường thuộc loại đối tượng Bài viết với các kiểu Văn bản, TextArea, Dropdown, Multiselect và Checkbox.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>
@@ -7918,6 +8137,8 @@ sub Data {
             '',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             '',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Bật bộ lọc cột chọn nhiều giá trị cho các phiếu được liên kết trong tiện ích đối tượng liên kết phức tạp (LinkObject::ViewMode = "complex"). Bộ lọc có trong AgentTicketZoom và không hiển thị trong cửa sổ bật lên AgentLinkObject.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8386,6 +8607,55 @@ sub Data {
             '',
         'Attachment was deleted successfully.' => '',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?' =>
+            'Việc chuyển nguồn siêu dữ liệu sẽ xóa URL hoặc XML siêu dữ liệu đã nhập và các tùy chọn SSL. Tiếp tục?',
+        'Change metadata source' => 'Thay đổi nguồn siêu dữ liệu',
+        'Uploaded key' => 'Khóa đã tải lên',
+        'EXPIRED' => 'ĐÃ HẾT HẠN',
+        'expires' => 'hết hạn',
+        'used by %s configuration(s)' => 'được dùng bởi %s cấu hình',
+        'Could not read the certificate.' => 'Không thể đọc chứng chỉ.',
+        'Certificate (PEM)' => 'Chứng chỉ (PEM)',
+        'Issuer' => 'Bên phát hành',
+        'Valid from' => 'Hiệu lực từ',
+        'Valid until' => 'Hiệu lực đến',
+        'Serial' => 'Số sê-ri',
+        'Fingerprint (SHA-256)' => 'Dấu tay (SHA-256)',
+        'Show raw PEM' => 'Hiển thị PEM thô',
+        'Certificate details' => 'Chi tiết chứng chỉ',
+        'Metadata is valid.' => 'Siêu dữ liệu hợp lệ.',
+        'Entity ID' => 'ID thực thể',
+        'SSO URL' => 'URL SSO',
+        'Includes a signing certificate.' => 'Có chứa chứng chỉ ký.',
+        'No signing certificate found in the metadata.' => 'Không tìm thấy chứng chỉ ký trong siêu dữ liệu.',
+        'Found %s attribute(s) in the metadata.' => 'Tìm thấy %s thuộc tính trong siêu dữ liệu.',
+        'Verifying...' => 'Đang xác minh...',
+        'Metadata verification failed.' => 'Xác minh siêu dữ liệu thất bại.',
+        'Upload failed.' => 'Tải lên thất bại.',
+        'Please paste a certificate or key first.' => 'Vui lòng dán chứng chỉ hoặc khóa trước.',
+        'Saving the pasted certificate/key failed.' => 'Lưu chứng chỉ/khóa đã dán thất bại.',
+        'Certificate generation failed.' => 'Tạo chứng chỉ thất bại.',
+        'Please select a metadata source (URL or XML) first.' => 'Vui lòng chọn nguồn siêu dữ liệu (URL hoặc XML) trước.',
+        'Could not find a certificate in the metadata.' => 'Không tìm thấy chứng chỉ trong siêu dữ liệu.',
+        'Copied to clipboard!' => '',
+        'Do you really want to delete this SAML configuration?' => 'Bạn có thực sự muốn xóa cấu hình SAML này không?',
+        'Delete SAML configuration' => 'Xóa cấu hình SAML',
+        'There was an error deleting the SAML configuration.' => 'Đã xảy ra lỗi khi xóa cấu hình SAML.',
+        'NameID (default)' => '',
+        '(pasted XML)' => '(XML đã dán)',
+        'Not configured yet' => 'Chưa được cấu hình',
+        'Identity provider metadata' => 'Siêu dữ liệu của Nhà cung cấp danh tính',
+        'SP signing key' => 'Khóa ký SP',
+        'Configured' => 'Đã cấu hình',
+        'Not set' => 'Chưa thiết lập',
+        'SP signing certificate' => 'Chứng chỉ ký SP',
+        'Not set (will be taken from the metadata when saving)' => '',
+        'User sync' => 'Đồng bộ người dùng',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)' =>
+            'Đã bật (%s ánh xạ thuộc tính, %s quy tắc nhóm, %s quy tắc vai trò)',
+        'Please fill in all required fields before continuing.' => 'Vui lòng điền tất cả các trường bắt buộc trước khi tiếp tục.',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.AutoResponse.js
         'Delete this %s' => '',
         'Deleting the %s and its data. This may take a while...' => '',
@@ -8592,9 +8862,6 @@ sub Data {
         'Please select attachments for download.' => '',
         'Show less' => '',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
-        'Copied to clipboard!' => '',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
         'First select a customer user, then select a customer ID to assign to this ticket.' =>
             '',
@@ -8612,7 +8879,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => '',
         'month' => 'tháng',
-        'Remove active filters for this widget.' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '',
@@ -8640,9 +8906,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Search.js
         'Please remove the following words from your search as they cannot be searched for:' =>
             '',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.SharedSecretGenerator.js
-        'Generate' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
@@ -8704,6 +8967,7 @@ sub Data {
             '',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'Không có giờ làm việc',
         'Open date selection' => '',
         'Invalid date (need a future date)!' => '',
         'Invalid date (need a past date)!' => '',
@@ -9207,6 +9471,7 @@ Cảm ơn sự giúp đỡ của bạn!
         'Manage POP3 or IMAP accounts to fetch email from.' => '',
         'Manage S/MIME certificates for email encryption.' => '',
         'Manage System Configuration Deployments.' => '',
+        'Manage agent and customer authentication (e.g. SAML 2.0).' => 'Quản lý xác thực điều hành viên và khách hàng (ví dụ: SAML 2.0).',
         'Manage different calendars.' => '',
         'Manage existing sessions.' => '',
         'Manage outbound email profiles.' => '',
@@ -9332,6 +9597,7 @@ Cảm ơn sự giúp đỡ của bạn!
         'Running Process Tickets' => '',
         'Russian' => '',
         'S/MIME Certificates' => '',
+        'SAML' => 'SAML',
         'Schedule a maintenance period.' => '',
         'Screen after marking as seen' => '',
         'Screen after marking as unseen' => '',
@@ -9563,6 +9829,7 @@ Cảm ơn sự giúp đỡ của bạn!
         '%s MB',
         '%s TB',
         '%s of %s',
+        '(pasted XML)',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9577,6 +9844,7 @@ Cảm ơn sự giúp đỡ của bạn!
         'Add new entry',
         'Add to favourites',
         'Agent',
+        'Agent authentication',
         'All occurrences',
         'All-day',
         'An Error Occurred',
@@ -9599,6 +9867,7 @@ Cảm ơn sự giúp đỡ của bạn!
         'Article filter',
         'As soon as you use this button or link, you will leave this screen and its current state will be saved automatically. Do you want to continue?',
         'Ascending sort applied, ',
+        'Assertion consumer URL',
         'Attachment was deleted successfully.',
         'Attachments',
         'Aug',
@@ -9609,6 +9878,11 @@ Cảm ơn sự giúp đỡ của bạn!
         'Calendar',
         'Cancel',
         'Cannot proceed',
+        'Certificate (PEM)',
+        'Certificate details',
+        'Certificate generation failed.',
+        'Certificate/key is stored in VirtualFS.',
+        'Change metadata source',
         'Clear',
         'Clear all',
         'Clear all filters',
@@ -9621,27 +9895,34 @@ Cảm ơn sự giúp đỡ của bạn!
         'Clone',
         'Clone Process',
         'Clone web service',
+        'Close',
         'Close preview',
         'Close this dialog',
         'Collapse',
         'Complex %s with %s arguments',
+        'Configured',
         'Confirm',
         'Copied to clipboard!',
         'Copy Ticket Number',
         'Copy Ticket Number + Title',
         'Copy ticket information',
+        'Could not find a certificate in the metadata.',
         'Could not load activities.',
         'Could not open popup window. Please disable any popup blockers for this application.',
+        'Could not read the certificate.',
         'Current selection',
         'Currently not possible',
+        'Customer authentication',
         'Customer interface does not support articles not visible for customers.',
         'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',
         'December',
+        'Decrypt encrypted assertions',
         'Delete',
         'Delete Entity',
+        'Delete SAML configuration',
         'Delete conditions',
         'Delete draft',
         'Delete error handling module',
@@ -9675,10 +9956,12 @@ Cảm ơn sự giúp đỡ của bạn!
         'Deployment successful. You\'re being redirected...',
         'Descending sort applied, ',
         'Description',
+        'Disabled',
         'Dismiss',
         'Do not show this warning again.',
         'Do you really want to continue?',
         'Do you really want to delete "%s"?',
+        'Do you really want to delete this SAML configuration?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
         'Do you really want to delete this key?',
@@ -9695,11 +9978,14 @@ Cảm ơn sự giúp đỡ của bạn!
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
+        'EXPIRED',
         'Edit Field Details',
         'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)',
         'End date',
+        'Entity ID',
         'Error',
         'Error during AJAX communication',
         'Error during AJAX communication. Status: %s, Error: %s',
@@ -9713,8 +9999,10 @@ Cảm ơn sự giúp đỡ của bạn!
         'February',
         'Filter',
         'Filters',
+        'Fingerprint (SHA-256)',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
+        'Found %s attribute(s) in the metadata.',
         'Fr',
         'Fri',
         'Friday',
@@ -9724,13 +10012,18 @@ Cảm ơn sự giúp đỡ của bạn!
         'Grouped',
         'Help',
         'Hide EntityIDs',
+        'Identity provider CA certificate',
+        'Identity provider metadata',
         'If you now leave this page, all open popup windows will be closed, too!',
         'Import web service',
+        'Includes a signing certificate.',
         'Information about the Znuny Daemon',
         'Insert selected customer user(s) into the "%s:" field.',
         'Invalid date (need a future date)!',
         'Invalid date (need a past date)!',
         'Invalid date!',
+        'Issuer',
+        'Issuer (SP entity ID)',
         'It is going to be deleted from the field, please try again.',
         'It is not possible to add a new event trigger because the event is not set.',
         'It is not possible to set this entry to invalid. All affected configuration settings have to be changed beforehand.',
@@ -9748,6 +10041,8 @@ Cảm ơn sự giúp đỡ của bạn!
         'Loading, please wait...',
         'Loading...',
         'Location',
+        'Login attribute',
+        'Login button text',
         'Mail check successful.',
         'Mapping for Key',
         'Mapping for Key %s',
@@ -9755,15 +10050,20 @@ Cảm ơn sự giúp đỡ của bạn!
         'March',
         'May',
         'May_long',
+        'Metadata is valid.',
+        'Metadata verification failed.',
         'Mo',
         'Mon',
         'Monday',
         'Month',
         'Name',
+        'NameID (default)',
         'Namespace %s could not be initialized, because %s could not be found.',
         'Next',
+        'No',
         'No Data Available.',
         'No TransitionActions assigned.',
+        'No certificate/key set.',
         'No data found.',
         'No dialogs assigned yet. Just pick an activity dialog from the list on the left and drag it here.',
         'No matches found.',
@@ -9771,9 +10071,14 @@ Cảm ơn sự giúp đỡ của bạn!
         'No response from get package upgrade result.',
         'No response from get package upgrade run status.',
         'No response from package upgrade all.',
+        'No signing certificate found in the metadata.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
+        'Not configured yet',
+        'Not set',
+        'Not set (will be taken from the metadata when saving)',
         'Notice',
         'Notification',
         'Nov',
@@ -9790,10 +10095,13 @@ Cảm ơn sự giúp đỡ của bạn!
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
+        'Please fill in all required fields before continuing.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
+        'Please paste a certificate or key first.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select a metadata source (URL or XML) first.',
         'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
@@ -9827,11 +10135,15 @@ Cảm ơn sự giúp đỡ của bạn!
         'Restore web service configuration',
         'Rule',
         'Running',
+        'SP signing certificate',
+        'SP signing key',
+        'SSO URL',
         'Sa',
         'Sat',
         'Saturday',
         'Save',
         'Save and update automatically',
+        'Saving the pasted certificate/key failed.',
         'Scale preview content',
         'Search',
         'Search attributes',
@@ -9844,6 +10156,7 @@ Cảm ơn sự giúp đỡ của bạn!
         'Select files or drop them here',
         'Sep',
         'September',
+        'Serial',
         'Setting a template will overwrite any text or attachment.',
         'Settings',
         'Show',
@@ -9852,7 +10165,9 @@ Cảm ơn sự giúp đỡ của bạn!
         'Show less',
         'Show more',
         'Show or hide the content.',
+        'Show raw PEM',
         'Slide the navigation bar',
+        'Slot',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',
         'Sorry, but you can\'t disable all methods for this notification.',
         'Sorry, the only existing condition can\'t be removed.',
@@ -9867,12 +10182,14 @@ Cảm ơn sự giúp đỡ của bạn!
         'Status',
         'Stream',
         'Su',
+        'Subject',
         'Successful',
         'Sun',
         'Sunday',
         'Support Bundle',
         'Switch to desktop mode',
         'Switch to mobile mode',
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?',
         'Team',
         'Th',
         'The activities could not be marked as seen.',
@@ -9894,6 +10211,7 @@ Cảm ơn sự giúp đỡ của bạn!
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',
+        'There was an error deleting the SAML configuration.',
         'There was an error deleting the attachment. Please check the logs for more information.',
         'There was an error. Please save all settings you are editing and check the logs for more information.',
         'This Activity cannot be deleted because it is the Start Activity.',
@@ -9925,15 +10243,22 @@ Cảm ơn sự giúp đỡ của bạn!
         'Tu',
         'Tue',
         'Tuesday',
+        'Type',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.',
         'Unknown',
         'Unlock setting.',
         'Update All Packages',
         'Update all packages',
         'Update manually',
+        'Upload failed.',
         'Upload information',
+        'Uploaded key',
         'Uploading...',
         'Use options below to narrow down for which tickets appointments will be automatically created.',
+        'User sync',
+        'Valid from',
+        'Valid until',
+        'Verifying...',
         'WARNING: When you change the name of the group \'admin\', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement.',
         'Warning',
         'We',
@@ -9950,12 +10275,14 @@ Cảm ơn sự giúp đỡ của bạn!
         'activate to remove the sort',
         'and %s more...',
         'day',
+        'expires',
         'month',
         'more',
         'no',
         'none',
         'or',
         'sorting is disabled',
+        'used by %s configuration(s)',
         'week',
         'yes',
     ];

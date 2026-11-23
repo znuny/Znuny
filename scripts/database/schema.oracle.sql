@@ -7473,6 +7473,66 @@ END;
 --
 ;
 -- ----------------------------------------------------------
+--  create table authentication_config
+-- ----------------------------------------------------------
+CREATE TABLE authentication_config (
+    id NUMBER (12, 0) NOT NULL,
+    dbcrud_uuid VARCHAR2 (36) NULL,
+    name VARCHAR2 (250) NOT NULL,
+    type VARCHAR2 (50) NOT NULL,
+    context_type VARCHAR2 (20) NOT NULL,
+    slot VARCHAR2 (2) NOT NULL,
+    auth_config CLOB NOT NULL,
+    sync_enabled NUMBER (5, 0) DEFAULT 0 NOT NULL,
+    sync_config CLOB NULL,
+    valid_id NUMBER (5, 0) NOT NULL,
+    create_time DATE NOT NULL,
+    create_by NUMBER (12, 0) NOT NULL,
+    change_time DATE NOT NULL,
+    change_by NUMBER (12, 0) NOT NULL,
+    CONSTRAINT authentication_config_contex20 UNIQUE (context_type, slot),
+    CONSTRAINT authentication_config_name UNIQUE (name),
+    CONSTRAINT authentication_config_uuid UNIQUE (dbcrud_uuid)
+);
+ALTER TABLE authentication_config ADD CONSTRAINT PK_authentication_config PRIMARY KEY (id);
+BEGIN
+    EXECUTE IMMEDIATE 'DROP SEQUENCE SE_authentication_config';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE SEQUENCE SE_authentication_config
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+CACHE 20
+ORDER
+;
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TRIGGER SE_authentication_config_t';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE OR REPLACE TRIGGER SE_authentication_config_t
+BEFORE INSERT ON authentication_config
+FOR EACH ROW
+BEGIN
+    IF :new.id IS NULL THEN
+        SELECT SE_authentication_config.nextval
+        INTO :new.id
+        FROM DUAL;
+    END IF;
+END;
+/
+--
+;
+-- ----------------------------------------------------------
 --  create table oauth2_token
 -- ----------------------------------------------------------
 CREATE TABLE oauth2_token (

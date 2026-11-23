@@ -513,7 +513,7 @@ sub LoadDefaults {
 
     # $Self->{'AuthModule::SAML::RequestMetaDataURL1'} = 'https://some.url/auth/realms/master/protocol/saml/descriptor';
     # or XML as string
-    # $Self->{'AuthModule::SAML::Request::MetaDataXML1'} = '<?xml version="1.0" encoding="UTF-8" ?>
+    # $Self->{'AuthModule::SAML::RequestMetaDataXML1'} = '<?xml version="1.0" encoding="UTF-8" ?>
 # <md:EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
 #                      xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
 #                      xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
@@ -564,6 +564,12 @@ sub LoadDefaults {
 
     # # Required path to the IdP signing certificate. Used to verify response and assertion signatures.
     # $Self->{'AuthModule::SAML::IdPCACert1'} = '/some/path/cert.pem';
+
+    # # Optional: take the login from an attribute of the signed assertion instead of the NameID,
+    # # e.g. if the Identity Provider sends a persistent NameID. The first of the given attributes
+    # # (Name or FriendlyName) the assertion contains is used. It must have exactly one value,
+    # # otherwise the login fails. There is no fallback to the NameID.
+    # $Self->{'AuthModule::SAML::UserLoginAttribute1'} = [ 'uid', 'mail' ];
 
     # --------------------------------------------------- #
     # 2 factor authentication settings                    #
@@ -1013,6 +1019,10 @@ sub LoadDefaults {
             },
         },
     };
+
+    # TimePendingSkipUnavailableDays
+    # (skip holidays and days without working hours for pending default dates)
+    $Self->{TimePendingSkipUnavailableDays} = 0;
 
     # --------------------------------------------------- #
     # Web Settings
@@ -1626,7 +1636,7 @@ via the Preferences button after logging in.
 
     # $Self->{'Customer::AuthModule::SAML::RequestMetaDataURL1'} = 'https://some.url/auth/realms/master/protocol/saml/descriptor';
     # or XML as string
-    # $Self->{'Customer::AuthModule::SAML::Request::MetaDataXML1'} = '<?xml version="1.0" encoding="UTF-8" ?>
+    # $Self->{'Customer::AuthModule::SAML::RequestMetaDataXML1'} = '<?xml version="1.0" encoding="UTF-8" ?>
 # <md:EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
 #                      xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata"
 #                      xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
@@ -1677,6 +1687,12 @@ via the Preferences button after logging in.
 
     # # Required path to the IdP signing certificate. Used to verify response and assertion signatures.
     # $Self->{'Customer::AuthModule::SAML::IdPCACert1'} = '/some/path/cert.pem';
+
+    # # Optional: take the login from an attribute of the signed assertion instead of the NameID,
+    # # e.g. if the Identity Provider sends a persistent NameID. The first of the given attributes
+    # # (Name or FriendlyName) the assertion contains is used. It must have exactly one value,
+    # # otherwise the login fails. There is no fallback to the NameID.
+    # $Self->{'Customer::AuthModule::SAML::UserLoginAttribute1'} = [ 'uid', 'mail' ];
 
     # --------------------------------------------------- #
     # 2 factor customer authentication settings           #

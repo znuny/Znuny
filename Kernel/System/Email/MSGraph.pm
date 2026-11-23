@@ -13,6 +13,7 @@ use warnings;
 
 use utf8;
 
+use Mail::Address;
 use MIME::Base64;
 
 use Kernel::System::VariableCheck qw(:all);
@@ -201,23 +202,17 @@ sub Send {
     # Bcc can be determined by matching To and Cc in the given header with given ToArray. Any address
     # in ToArray not found in To or Cc of header will be added as Bcc.
     #
-    my @MIMEMessageRecipients = ( ${ $Param{Header} } =~ m{^(?:To|Cc):\s*(.+?)$}msgi );
-    my %BccRecipients;
+    # Folded To/Cc fields must be read in full. Inserting Bcc after only the first physical line
+    # makes the continuation lines part of Bcc, so those recipients disappear from To/Cc.
+    #
+    my $Header = ${ $Param{Header} };
 
-    TO:
-    for my $To ( @{ $Param{ToArray} } ) {
-        my $IsMIMEMessageRecipient = grep { $_ =~ m{\b$To\b}i } @MIMEMessageRecipients;
-        next TO if $IsMIMEMessageRecipient;
+    $Header = $Self->_AddBccHeader(
+        Header  => $Header,
+        ToArray => $Param{ToArray},
+    );
 
-        $BccRecipients{$To} = 1;
-    }
-    if (%BccRecipients) {
-        my $BccRecipientsString = join ', ', sort keys %BccRecipients;
-
-        ${ $Param{Header} } =~ s{(^To:.+?$)}{$1\nBcc: $BccRecipientsString}ims;
-    }
-
-    my $MIMEMessage = ${ $Param{Header} } . "\n" . ${ $Param{Body} };
+    my $MIMEMessage = $Header . "\n" . ${ $Param{Body} };
 
     my $Base64EncodedMIMEMessage = MIME::Base64::encode_base64($MIMEMessage);
 
@@ -272,6 +267,105 @@ sub Send {
     return $Self->_Success(
         %Param,
     );
+}
+
+# Graph delivers Bcc and strips that header. To and Cc may be folded across
+# several physical lines; the whole field has to be parsed, and Bcc has to be
+# inserted after the complete To field so continuation lines stay on To.
+sub _AddBccHeader {
+    my ( $Self, %Param ) = @_;
+
+    return $Param{Header} if ref $Param{ToArray} ne 'ARRAY';
+    return $Param{Header} if !defined $Param{Header};
+
+    my $Header = $Param{Header};
+
+    my %VisibleRecipient;
+
+    FIELD:
+    for my $Field (qw(To Cc)) {
+        my @FieldValues = $Self->_HeaderFieldValues(
+            Header => $Header,
+            Name   => $Field,
+        );
+
+        FIELDVALUE:
+        for my $FieldValue (@FieldValues) {
+            next FIELDVALUE if !IsStringWithData($FieldValue);
+
+            EMAIL:
+            for my $Email ( Mail::Address->parse($FieldValue) ) {
+                next EMAIL if !$Email;
+
+                my $Address = $Email->address();
+                next EMAIL if !IsStringWithData($Address);
+
+                $VisibleRecipient{ lc $Address } = 1;
+            }
+        }
+    }
+
+    my %BccRecipient;
+
+    RECIPIENT:
+    for my $Recipient ( @{ $Param{ToArray} } ) {
+        next RECIPIENT if !IsStringWithData($Recipient);
+
+        my $Address = $Recipient;
+        $Address =~ s{\A\s+|\s+\z}{}g;
+
+        next RECIPIENT if !IsStringWithData($Address);
+        next RECIPIENT if $VisibleRecipient{ lc $Address };
+
+        $BccRecipient{$Address} = 1;
+    }
+
+    return $Header if !%BccRecipient;
+
+    my $BccLine = 'Bcc: ' . join( ', ', sort keys %BccRecipient ) . "\n";
+
+    # Consume the To field including every continuation line and its terminating newline.
+    my $Inserted = $Header =~ s{^(To:[^\n]*\n(?:[ \t][^\n]*\n)*)}{$1$BccLine}im;
+
+    if ( !$Inserted ) {
+        if ( $Header ne '' ) {
+            $Header =~ s{\n*\z}{\n};
+        }
+        $Header .= $BccLine;
+    }
+
+    return $Header;
+}
+
+sub _HeaderFieldValues {
+    my ( $Self, %Param ) = @_;
+
+    my @Values;
+    return @Values if !IsStringWithData( $Param{Header} );
+    return @Values if !IsStringWithData( $Param{Name} );
+
+    my $Collecting = 0;
+    my @Lines      = split /\n/, $Param{Header};
+
+    LINE:
+    for my $Line (@Lines) {
+        last LINE if !IsStringWithData($Line);
+
+        if ( $Line =~ m{\A\Q$Param{Name}\E:\s*(.*)\z}i ) {
+            push @Values, $1;
+            $Collecting = 1;
+            next LINE;
+        }
+
+        if ( $Collecting && $Line =~ m{\A[ \t]+(.*)\z} ) {
+            $Values[-1] .= " $1";
+            next LINE;
+        }
+
+        $Collecting = 0;
+    }
+
+    return @Values;
 }
 
 sub _Success {

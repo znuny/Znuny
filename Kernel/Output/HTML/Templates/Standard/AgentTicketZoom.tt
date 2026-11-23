@@ -16,6 +16,22 @@
         <input type="hidden" value="[% Data.TicketID | html %]" name="TicketID"/>
         <fieldset class="TableLike modal-article-filter">
             <div class="field-wrapper">
+                <label for="FulltextFilter">[% Translate("Content") | html %] ([% Translate("e.g. Text or Te*t") | html %]):</label>
+                <div class="Field">
+                    <input type="text" id="FulltextFilter" name="FulltextFilter" value="[% Data.FulltextFilter | html %]" />
+                </div>
+            </div>
+
+[% RenderBlockStart("ArticleFilterDynamicField") %]
+            <div class="field-wrapper">
+                [% Data.Label %]
+                <div class="Field">
+                    [% Data.Field %]
+                </div>
+            </div>
+[% RenderBlockEnd("ArticleFilterDynamicField") %]
+
+            <div class="field-wrapper">
                 <label for="CommunicationChannelFilter">[% Translate("Communication channel") | html %]:</label>
                 <div class="Field">
                     [% Data.Channels %]

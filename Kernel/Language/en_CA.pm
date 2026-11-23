@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.00395256916996047;
+    $Self->{Completeness}        = 0.0320355610055181;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -274,6 +274,169 @@ sub Data {
         'Do you really want to delete this attachment?' => '',
         'Attachment' => '',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+        'Certificate/key is stored in VirtualFS.' => 'Certificate/key is stored in VirtualFS.',
+        'No certificate/key set.' => 'No certificate/key set.',
+        'View certificate details' => 'View certificate details',
+        'The selected certificate/key is not available. Please select or upload it again.' =>
+            'The selected certificate/key is not available. Please select or upload it again.',
+        '- Select an existing certificate/key -' => '- Select an existing certificate/key -',
+        'Paste key' => '',
+        'Paste certificate' => '',
+        'Generate' => '',
+        'Use certificate from metadata' => 'Use certificate from metadata',
+        'Extracts the signing certificate embedded in the Identity Provider metadata and stores it here, instead of uploading it separately.' =>
+            'Extracts the signing certificate embedded in the Identity Provider metadata and stores it here, instead of uploading it separately.',
+        'Paste the PEM text including the BEGIN and END lines.' => 'Paste the PEM text including the BEGIN and END lines.',
+        'Common Name' => 'Common Name',
+        'Key size' => 'Key size',
+        'Validity (days)' => 'Validity (days)',
+        'Generate self-signed certificate' => 'Generate self-signed certificate',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+        'Authentication Management' => 'Authentication Management',
+        'Agent authentication' => 'Agent authentication',
+        'Basic settings' => 'Basic settings',
+        'Slot' => 'Slot',
+        'Determines which numbered AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Determines which numbered AuthModule<N> slot this configuration occupies. Only unused slots are offered.',
+        'SAML request settings' => 'SAML request settings',
+        'Login button text' => 'Login button text',
+        'Assertion consumer URL' => 'Assertion consumer URL',
+        'Automatically derived from this system\'s HTTP type, FQDN and script alias - not editable.' =>
+            'Automatically derived from this system\'s HTTP type, FQDN and script alias - not editable.',
+        'Znuny appends a ";IsSAMLLogin=1;Count=<N>;" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration\'s slot), so the value the Identity Provider actually receives is:' =>
+            'Znuny appends a ";IsSAMLLogin=1;Count=<N>;" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration\'s slot), so the value the Identity Provider actually receives is:',
+        'Copy to clipboard' => 'Copy to clipboard',
+        'Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honor the value from the request. If your IdP\'s field rejects semicolons, register the base URL instead.' =>
+            'Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honour the value from the request. If your IdP\'s field rejects semicolons, register the base URL instead.',
+        'Download SP metadata XML' => 'Download SP metadata XML',
+        'Issuer (SP entity ID)' => 'Issuer (SP entity ID)',
+        'Requested NameID format' => 'Requested NameID format',
+        'Unspecified' => 'Unspecified',
+        'Persistent' => 'Persistent',
+        'Transient' => 'Transient',
+        'Email address' => '',
+        'Sent as the NameIDPolicy Format in the outgoing request and published in the SP metadata. Change this only if your Identity Provider requires a specific format.' =>
+            'Sent as the NameIDPolicy Format in the outgoing request and published in the SP metadata. Change this only if your Identity Provider requires a specific format.',
+        'Login attribute' => '',
+        'Please enter attribute names separated by commas.' => '',
+        'Optional. By default the NameID is the login. Enter one or more SAML attribute names (Name or FriendlyName), separated by commas, to take the login from the first of these attributes the assertion contains instead, e.g. if the Identity Provider sends a persistent NameID. The attribute must have exactly one value, otherwise the login fails. Changing this changes the login of existing users.' =>
+            '',
+        'Load metadata from URL' => 'Load metadata from URL',
+        'Switch off to paste the metadata XML instead. Switching clears the entered URL or XML and the SSL options.' =>
+            'Switch off to paste the metadata XML instead. Switching clears the entered URL or XML and the SSL options.',
+        'Please select a metadata source.' => 'Please select a metadata source.',
+        'Metadata URL' => 'Metadata URL',
+        'Verify' => 'Verify',
+        'Metadata XML' => 'Metadata XML',
+        'Use custom SSL options for metadata URL fetch' => 'Use custom SSL options for metadata URL fetch',
+        'SSL CA file' => 'SSL CA file',
+        'SSL CA path' => 'SSL CA path',
+        'Verify hostname' => 'Verify hostname',
+        'Certificates and keys' => 'Certificates and keys',
+        'SP signing key (used to sign outgoing requests)' => 'SP signing key (used to sign outgoing requests)',
+        'SP signing certificate (matches the key above)' => 'SP signing certificate (matches the key above)',
+        'Required for the SP metadata\'s KeyDescriptor to be published. "Generate" above already produces this together with the key - only needed as a separate step if you uploaded your own key.' =>
+            'Required for the SP metadata\'s KeyDescriptor to be published. "Generate" above already produces this together with the key - only needed as a separate step if you uploaded your own key.',
+        'Signing algorithm' => 'Signing algorithm',
+        'SHA-256 (default)' => 'SHA-256 (default)',
+        'SHA-384' => 'SHA-384',
+        'SHA-512' => 'SHA-512',
+        'SHA-1 (legacy, not recommended)' => 'SHA-1 (legacy, not recommended)',
+        'Used to sign the outgoing request when a signing key is set above. Only change this if your Identity Provider requires a specific algorithm.' =>
+            'Used to sign the outgoing request when a signing key is set above. Only change this if your Identity Provider requires a specific algorithm.',
+        'Decrypt encrypted assertions' => 'Decrypt encrypted assertions',
+        'Uses the SP signing key above to decrypt SAML assertions the Identity Provider encrypts. Has no effect on responses that aren\'t encrypted, so it\'s safe to leave enabled. Requires a signing key above.' =>
+            'Uses the SP signing key above to decrypt SAML assertions the Identity Provider encrypts. Has no effect on responses that aren\'t encrypted, so it\'s safe to leave enabled. Requires a signing key above.',
+        'Identity provider CA certificate' => 'Identity provider CA certificate',
+        'Required for SAML login to work. Without it, Net::SAML2 cannot verify the Identity Provider\'s response signature and authentication will fail.' =>
+            'Required for SAML login to work. Without it, Net::SAML2 cannot verify the Identity Provider\'s response signature and authentication will fail.',
+        'Attribute, group and role sync' => 'Attribute, group and role sync',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+        'Customer authentication' => 'Customer authentication',
+        'Determines which numbered Customer::AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Determines which numbered Customer::AuthModule<N> slot this configuration occupies. Only unused slots are offered.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+        'SAML wizard' => 'SAML wizard',
+        'Add agent SAML authentication' => 'Add agent SAML authentication',
+        'Add customer SAML authentication' => 'Add customer SAML authentication',
+        'Deploy configuration' => 'Deploy configuration',
+        'Deployment failed' => '',
+        'Fix the configurations below and deploy again. Or set a configuration to invalid: its login stops working and the other configurations are deployed.' =>
+            '',
+        'Problem' => '',
+        'Edit' => '',
+        'Set to invalid and deploy the rest' => '',
+        'Sync' => 'Sync',
+        'Status' => '',
+        'Metadata' => '',
+        'Slot %s' => 'Slot %s',
+        'Default' => '',
+        'Yes' => '',
+        'No' => '',
+        'OK' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+        'Enable sync' => 'Enable sync',
+        'Also registers Kernel::System::Auth::Sync::SAML for the same slot, to sync attributes/groups/roles from the SAML assertion on every login.' =>
+            'Also registers Kernel::System::Auth::Sync::SAML for the same slot, to sync attributes/groups/roles from the SAML assertion on every login.',
+        'The AuthSyncModule for this slot is already configured outside of AdminAuthentication - sync cannot be enabled for it.' =>
+            'The AuthSyncModule for this slot is already configured outside of AdminAuthentication - sync cannot be enabled for it.',
+        'User attribute sync map' => 'User attribute sync map',
+        'Maps Znuny user attributes (left) to SAML assertion attribute names (right).' =>
+            'Maps Znuny user attributes (left) to SAML assertion attribute names (right).',
+        'Znuny attribute' => 'Znuny attribute',
+        'SAML attribute URI' => 'SAML attribute URI',
+        'Initial groups for new users' => 'Initial groups for new users',
+        'Groups (with rw permission) granted only when a brand-new agent is created via sync. Ctrl/Cmd-click to select multiple.' =>
+            'Groups (with rw permission) granted only when a brand-new agent is created via sync. Ctrl/Cmd-click to select multiple.',
+        'SAML attribute carrying group values' => 'SAML attribute carrying group values',
+        'Group sync rules (by group value)' => 'Group sync rules (by group value)',
+        'Maps a SAML group value to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Maps a SAML group value to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.',
+        'SAML value' => 'SAML value',
+        'Group sync rules (by arbitrary attribute/value)' => 'Group sync rules (by arbitrary attribute/value)',
+        'Maps any SAML attribute name/value combination to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Maps any SAML attribute name/value combination to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.',
+        'SAML attribute' => 'SAML attribute',
+        'Role sync requires at least one active role. Create or activate a role under Admin → Roles.' =>
+            'Role sync requires at least one active role. Create or activate a role under Admin → Roles.',
+        'SAML attribute carrying role values' => 'SAML attribute carrying role values',
+        'Role sync rules (by role value)' => 'Role sync rules (by role value)',
+        'Maps a SAML role value to one or more Znuny roles, active or inactive.' =>
+            'Maps a SAML role value to one or more Znuny roles, active or inactive.',
+        'Active' => '',
+        'Role sync rules (by arbitrary attribute/value)' => 'Role sync rules (by arbitrary attribute/value)',
+        'Maps any SAML attribute name/value combination to one or more Znuny roles, active or inactive.' =>
+            'Maps any SAML attribute name/value combination to one or more Znuny roles, active or inactive.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+        'Setup steps' => 'Setup steps',
+        'Setup wizard' => 'Setup wizard',
+        'SAML setup wizard' => 'SAML setup wizard',
+        'Step' => 'Step',
+        'What are you setting up?' => 'What are you setting up?',
+        'Agent authentication - staff logging into the agent interface' =>
+            'Agent authentication - staff logging into the agent interface',
+        'Customer authentication - customers logging into the customer portal' =>
+            'Customer authentication - customers logging into the customer portal',
+        'Login with SSO' => 'Login with SSO',
+        'User sync (optional)' => 'User sync (optional)',
+        'Optionally sync user attributes, groups and roles from the SAML assertion on every login. This can also be set up later on the edit screen.' =>
+            'Optionally sync user attributes, groups and roles from the SAML assertion on every login. This can also be set up later on the edit screen.',
+        'Review' => 'Review',
+        'Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective.' =>
+            'Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective.',
+        'If you skipped the Identity Provider CA certificate here, it is taken from the metadata when saving. Please check it on the edit screen afterwards.' =>
+            '',
+        'You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only).' =>
+            'You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only).',
+        'Back' => '',
+        'Next' => '',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
         'Add Auto Response' => '',
         'Filter for Auto Responses' => '',
@@ -331,9 +494,7 @@ sub Data {
             '',
         'Account Status' => '',
         'Account status for: %s' => '',
-        'Status' => '',
         'Account' => '',
-        'Edit' => '',
         'No accounts found.' => '',
         'Communication Log Details (%s)' => '',
         'Direction' => '',
@@ -452,7 +613,6 @@ sub Data {
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => '',
-        'Active' => '',
         'Toggle active state for %s' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
@@ -1589,14 +1749,11 @@ sub Data {
         'Download package' => '',
         'Rebuild package' => '',
         'Package Information' => '',
-        'Metadata' => '',
         'Change Log' => '',
         'Date' => '',
         'List of Files' => '',
         'Permission' => '',
         'Size' => '',
-        'Problem' => '',
-        'OK' => '',
         'Download file from package!' => '',
         'Required' => '',
         'Primary Key' => '',
@@ -2140,7 +2297,6 @@ sub Data {
         'System Email Addresses Management' => '',
         'Add System Email Address' => '',
         'Edit System Email Address' => '',
-        'Email address' => '',
         'Display name' => '',
         'This email address is already used as system email address.' => '',
         'The display name and email address will be shown on mail you send.' =>
@@ -2355,8 +2511,6 @@ sub Data {
         'All-day' => '',
         'Repeat' => '',
         'Notification' => '',
-        'Yes' => '',
-        'No' => '',
         'No calendars found. Please add a calendar first by using Manage Calendars page.' =>
             '',
 
@@ -2881,10 +3035,11 @@ sub Data {
         'Archive Search' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => '',
+        'e.g. Text or Te*t' => '',
         'Save filter settings as default' => '',
         'Event Type' => '',
         'Save as default' => '',
-        'Back' => '',
         'Change Queue' => '',
         'Add Filter' => '',
         'Set' => '',
@@ -3132,7 +3287,6 @@ sub Data {
         'Phone' => '',
         'Web site' => '',
         'Community' => '',
-        'Next' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => '',
@@ -3227,6 +3381,8 @@ sub Data {
         'Delete link' => '',
         'Delete Link' => '',
         'Object#' => '',
+        'Remove active filters for this widget.' => '',
+        'No results found.' => 'No results found.',
         'Add links' => '',
         'Delete links' => '',
 
@@ -3633,6 +3789,34 @@ sub Data {
             '',
         'All agents with write permission for the appointment (calendar)' =>
             '',
+
+        # Perl Module: Kernel/Modules/AdminAuthentication.pm
+        'Perl module Net::SAML2 is not installed. SAML authentication cannot work until it is installed on the server.' =>
+            'Perl module Net::SAML2 is not installed. SAML authentication cannot work until it is installed on the server.',
+        'Authentication configuration is not in sync with the deployed configuration, but it can\'t be deployed: a valid configuration has a problem, see the status below. Fix it or set it to invalid, then deploy.' =>
+            '',
+        'Authentication configuration is not in sync with the deployed configuration, please deploy.' =>
+            'Authentication configuration is not in sync with the deployed configuration, please deploy.',
+        'No IdP CA certificate was uploaded and none could be taken from the IdP metadata.' =>
+            'No IdP CA certificate was uploaded and none could be taken from the IdP metadata.',
+        'Only invalid authentication configurations can be deleted. Please set the configuration to invalid first.' =>
+            'Only invalid authentication configurations can be deleted. Please set the configuration to invalid first.',
+        'Invalid or missing Role.' => 'Invalid or missing Role.',
+        'No file was uploaded.' => 'No file was uploaded.',
+        'Error storing the uploaded file.' => 'Error storing the uploaded file.',
+        'Only the SP signing key can be generated.' => 'Only the SP signing key can be generated.',
+        'Error generating certificate. Please check the system log.' => 'Error generating certificate. Please check the system log.',
+        'Error storing the generated key in VirtualFS.' => 'Error storing the generated key in VirtualFS.',
+        'Error storing the generated certificate in VirtualFS.' => 'Error storing the generated certificate in VirtualFS.',
+        'Could not find a certificate in the metadata. Please check the URL/XML and try again.' =>
+            'Could not find a certificate in the metadata. Please check the URL/XML and try again.',
+        'Error storing the certificate.' => 'Error storing the certificate.',
+        'Could not read the certificate from VirtualFS.' => 'Could not read the certificate from VirtualFS.',
+        'The authentication configuration was not deployed. The previously deployed configuration is still active.' =>
+            'The authentication configuration was not deployed. The previously deployed configuration is still active.',
+        'Please check the system log for details.' => 'Please check the system log for details.',
+        'Authentication configuration not found.' => '',
+        'Could not set the authentication configuration to invalid.' => '',
 
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
@@ -4667,6 +4851,8 @@ sub Data {
             '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             '',
         'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
@@ -4848,6 +5034,7 @@ sub Data {
         'Linked as' => '',
         'Search Result' => '',
         'Linked' => '',
+        'filter' => 'filter',
         'Bulk' => '',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -4976,7 +5163,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => '',
         'Unable to load %s!' => '',
-        'Content' => '',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => '',
@@ -5037,6 +5223,34 @@ sub Data {
         'Session invalid. Please log in again.' => '',
         'Session has timed out. Please log in again.' => '',
 
+        # Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+        'This is not an unencrypted private key in PEM format (-----BEGIN PRIVATE KEY-----).' =>
+            'This is not an unencrypted private key in PEM format (-----BEGIN PRIVATE KEY-----).',
+        'This is not a certificate in PEM format (-----BEGIN CERTIFICATE-----).' =>
+            'This is not a certificate in PEM format (-----BEGIN CERTIFICATE-----).',
+        'The private key could not be read. Only unencrypted private keys are supported.' =>
+            'The private key could not be read. Only unencrypted private keys are supported.',
+        'The certificate could not be read.' => 'The certificate could not be read.',
+        'Could not read the SP signing key.' => 'Could not read the SP signing key.',
+        'Could not read the IdP CA certificate.' => 'Could not read the IdP CA certificate.',
+        'No IdP CA certificate is stored. It is taken from the IdP metadata on every deploy. Save the configuration to store it.' =>
+            '',
+        'Could not decrypt the SP signing key. Please check the configured encryption key.' =>
+            'Could not decrypt the SP signing key. Please check the configured encryption key.',
+        'Net::SAML2 is not installed on the server, metadata cannot be verified.' =>
+            'Net::SAML2 is not installed on the server, metadata cannot be verified.',
+        'Metadata URL is empty.' => 'Metadata URL is empty.',
+        'Metadata XML is empty.' => 'Metadata XML is empty.',
+        'Could not parse the metadata. Please check the URL/XML and try again.' =>
+            'Could not parse the metadata. Please check the URL/XML and try again.',
+        'Perl module Crypt::OpenSSL::X509 is not installed, certificate details cannot be parsed.' =>
+            'Perl module Crypt::OpenSSL::X509 is not installed, certificate details cannot be parsed.',
+        'Could not parse the certificate.' => 'Could not parse the certificate.',
+
+        # Perl Module: Kernel/System/AuthenticationConfig.pm
+        'No authentication plugin is registered for this type.' => 'No authentication plugin is registered for this type.',
+        'Could not write the certificate files.' => 'Could not write the certificate files.',
+
         # Perl Module: Kernel/System/AutoResponse.pm
         'Couldn\'t read auto response configuration file. Please make sure the file is valid.' =>
             '',
@@ -5080,9 +5294,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => '',
         'between' => '',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -5253,6 +5464,9 @@ sub Data {
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'InnoDB Redo Log Capacity',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'The setting innodb_redo_log_capacity must be at least 256 MB.',
         'InnoDB Log File Size' => '',
         'The setting innodb_log_file_size must be at least 256 MB.' => '',
 
@@ -5557,7 +5771,6 @@ sub Data {
         'All Settings' => '',
 
         # Perl Module: Kernel/System/SysConfig/BaseValueType.pm
-        'Default' => '',
         'Value is not correct! Please, consider updating this field.' => '',
         'Value doesn\'t satisfy regex (%s).' => '',
 
@@ -6015,6 +6228,8 @@ sub Data {
             '',
         'Maximum Number of a calendar shown in a dropdown.' => '',
         'Define the start day of the week for the date picker.' => '',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.',
         'Adds the permanent vacation days.' => '',
         'Adds the one time vacation days.' => '',
         'Defines the hours and week days to count the working time.' => '',
@@ -6296,6 +6511,8 @@ sub Data {
             '',
         'Frontend module registration (disable company link if no company feature is used).' =>
             '',
+        'Registers the SAML 2.0 authentication plugin for AdminAuthentication.' =>
+            'Registers the SAML 2.0 authentication plugin for AdminAuthentication.',
         'Frontend module registration for the customer interface.' => '',
         'Activates the available themes on the system. Value 1 means active, 0 means inactive.' =>
             '',
@@ -6718,6 +6935,8 @@ sub Data {
             '',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             '',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>
@@ -7924,6 +8143,8 @@ sub Data {
             '',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             '',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8392,6 +8613,55 @@ sub Data {
             '',
         'Attachment was deleted successfully.' => '',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?' =>
+            'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?',
+        'Change metadata source' => 'Change metadata source',
+        'Uploaded key' => 'Uploaded key',
+        'EXPIRED' => 'EXPIRED',
+        'expires' => 'expires',
+        'used by %s configuration(s)' => 'used by %s configuration(s)',
+        'Could not read the certificate.' => 'Could not read the certificate.',
+        'Certificate (PEM)' => 'Certificate (PEM)',
+        'Issuer' => 'Issuer',
+        'Valid from' => 'Valid from',
+        'Valid until' => 'Valid until',
+        'Serial' => 'Serial',
+        'Fingerprint (SHA-256)' => 'Fingerprint (SHA-256)',
+        'Show raw PEM' => 'Show raw PEM',
+        'Certificate details' => 'Certificate details',
+        'Metadata is valid.' => 'Metadata is valid.',
+        'Entity ID' => 'Entity ID',
+        'SSO URL' => 'SSO URL',
+        'Includes a signing certificate.' => 'Includes a signing certificate.',
+        'No signing certificate found in the metadata.' => 'No signing certificate found in the metadata.',
+        'Found %s attribute(s) in the metadata.' => 'Found %s attribute(s) in the metadata.',
+        'Verifying...' => 'Verifying...',
+        'Metadata verification failed.' => 'Metadata verification failed.',
+        'Upload failed.' => 'Upload failed.',
+        'Please paste a certificate or key first.' => 'Please paste a certificate or key first.',
+        'Saving the pasted certificate/key failed.' => 'Saving the pasted certificate/key failed.',
+        'Certificate generation failed.' => 'Certificate generation failed.',
+        'Please select a metadata source (URL or XML) first.' => 'Please select a metadata source (URL or XML) first.',
+        'Could not find a certificate in the metadata.' => 'Could not find a certificate in the metadata.',
+        'Copied to clipboard!' => '',
+        'Do you really want to delete this SAML configuration?' => 'Do you really want to delete this SAML configuration?',
+        'Delete SAML configuration' => 'Delete SAML configuration',
+        'There was an error deleting the SAML configuration.' => 'There was an error deleting the SAML configuration.',
+        'NameID (default)' => '',
+        '(pasted XML)' => '(pasted XML)',
+        'Not configured yet' => 'Not configured yet',
+        'Identity provider metadata' => 'Identity provider metadata',
+        'SP signing key' => 'SP signing key',
+        'Configured' => 'Configured',
+        'Not set' => 'Not set',
+        'SP signing certificate' => 'SP signing certificate',
+        'Not set (will be taken from the metadata when saving)' => '',
+        'User sync' => 'User sync',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)' =>
+            'Enabled (%s attribute mappings, %s group rules, %s role rules)',
+        'Please fill in all required fields before continuing.' => 'Please fill in all required fields before continuing.',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.AutoResponse.js
         'Delete this %s' => '',
         'Deleting the %s and its data. This may take a while...' => '',
@@ -8598,9 +8868,6 @@ sub Data {
         'Please select attachments for download.' => '',
         'Show less' => '',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
-        'Copied to clipboard!' => '',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
         'First select a customer user, then select a customer ID to assign to this ticket.' =>
             '',
@@ -8618,7 +8885,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => '',
         'month' => '',
-        'Remove active filters for this widget.' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '',
@@ -8646,9 +8912,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Search.js
         'Please remove the following words from your search as they cannot be searched for:' =>
             '',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.SharedSecretGenerator.js
-        'Generate' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
@@ -8710,6 +8973,7 @@ sub Data {
             '',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'No working hours',
         'Open date selection' => '',
         'Invalid date (need a future date)!' => '',
         'Invalid date (need a past date)!' => '',
@@ -9201,6 +9465,7 @@ Thanks for your help!
         'Manage POP3 or IMAP accounts to fetch email from.' => '',
         'Manage S/MIME certificates for email encryption.' => '',
         'Manage System Configuration Deployments.' => '',
+        'Manage agent and customer authentication (e.g. SAML 2.0).' => 'Manage agent and customer authentication (e.g. SAML 2.0).',
         'Manage different calendars.' => '',
         'Manage existing sessions.' => '',
         'Manage outbound email profiles.' => '',
@@ -9326,6 +9591,7 @@ Thanks for your help!
         'Running Process Tickets' => '',
         'Russian' => '',
         'S/MIME Certificates' => '',
+        'SAML' => 'SAML',
         'Schedule a maintenance period.' => '',
         'Screen after marking as seen' => '',
         'Screen after marking as unseen' => '',
@@ -9557,6 +9823,7 @@ Thanks for your help!
         '%s MB',
         '%s TB',
         '%s of %s',
+        '(pasted XML)',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9571,6 +9838,7 @@ Thanks for your help!
         'Add new entry',
         'Add to favourites',
         'Agent',
+        'Agent authentication',
         'All occurrences',
         'All-day',
         'An Error Occurred',
@@ -9593,6 +9861,7 @@ Thanks for your help!
         'Article filter',
         'As soon as you use this button or link, you will leave this screen and its current state will be saved automatically. Do you want to continue?',
         'Ascending sort applied, ',
+        'Assertion consumer URL',
         'Attachment was deleted successfully.',
         'Attachments',
         'Aug',
@@ -9603,6 +9872,11 @@ Thanks for your help!
         'Calendar',
         'Cancel',
         'Cannot proceed',
+        'Certificate (PEM)',
+        'Certificate details',
+        'Certificate generation failed.',
+        'Certificate/key is stored in VirtualFS.',
+        'Change metadata source',
         'Clear',
         'Clear all',
         'Clear all filters',
@@ -9615,27 +9889,34 @@ Thanks for your help!
         'Clone',
         'Clone Process',
         'Clone web service',
+        'Close',
         'Close preview',
         'Close this dialog',
         'Collapse',
         'Complex %s with %s arguments',
+        'Configured',
         'Confirm',
         'Copied to clipboard!',
         'Copy Ticket Number',
         'Copy Ticket Number + Title',
         'Copy ticket information',
+        'Could not find a certificate in the metadata.',
         'Could not load activities.',
         'Could not open popup window. Please disable any popup blockers for this application.',
+        'Could not read the certificate.',
         'Current selection',
         'Currently not possible',
+        'Customer authentication',
         'Customer interface does not support articles not visible for customers.',
         'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',
         'December',
+        'Decrypt encrypted assertions',
         'Delete',
         'Delete Entity',
+        'Delete SAML configuration',
         'Delete conditions',
         'Delete draft',
         'Delete error handling module',
@@ -9669,10 +9950,12 @@ Thanks for your help!
         'Deployment successful. You\'re being redirected...',
         'Descending sort applied, ',
         'Description',
+        'Disabled',
         'Dismiss',
         'Do not show this warning again.',
         'Do you really want to continue?',
         'Do you really want to delete "%s"?',
+        'Do you really want to delete this SAML configuration?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
         'Do you really want to delete this key?',
@@ -9689,11 +9972,14 @@ Thanks for your help!
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
+        'EXPIRED',
         'Edit Field Details',
         'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)',
         'End date',
+        'Entity ID',
         'Error',
         'Error during AJAX communication',
         'Error during AJAX communication. Status: %s, Error: %s',
@@ -9707,8 +9993,10 @@ Thanks for your help!
         'February',
         'Filter',
         'Filters',
+        'Fingerprint (SHA-256)',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
+        'Found %s attribute(s) in the metadata.',
         'Fr',
         'Fri',
         'Friday',
@@ -9718,13 +10006,18 @@ Thanks for your help!
         'Grouped',
         'Help',
         'Hide EntityIDs',
+        'Identity provider CA certificate',
+        'Identity provider metadata',
         'If you now leave this page, all open popup windows will be closed, too!',
         'Import web service',
+        'Includes a signing certificate.',
         'Information about the Znuny Daemon',
         'Insert selected customer user(s) into the "%s:" field.',
         'Invalid date (need a future date)!',
         'Invalid date (need a past date)!',
         'Invalid date!',
+        'Issuer',
+        'Issuer (SP entity ID)',
         'It is going to be deleted from the field, please try again.',
         'It is not possible to add a new event trigger because the event is not set.',
         'It is not possible to set this entry to invalid. All affected configuration settings have to be changed beforehand.',
@@ -9742,6 +10035,8 @@ Thanks for your help!
         'Loading, please wait...',
         'Loading...',
         'Location',
+        'Login attribute',
+        'Login button text',
         'Mail check successful.',
         'Mapping for Key',
         'Mapping for Key %s',
@@ -9749,15 +10044,20 @@ Thanks for your help!
         'March',
         'May',
         'May_long',
+        'Metadata is valid.',
+        'Metadata verification failed.',
         'Mo',
         'Mon',
         'Monday',
         'Month',
         'Name',
+        'NameID (default)',
         'Namespace %s could not be initialized, because %s could not be found.',
         'Next',
+        'No',
         'No Data Available.',
         'No TransitionActions assigned.',
+        'No certificate/key set.',
         'No data found.',
         'No dialogs assigned yet. Just pick an activity dialog from the list on the left and drag it here.',
         'No matches found.',
@@ -9765,9 +10065,14 @@ Thanks for your help!
         'No response from get package upgrade result.',
         'No response from get package upgrade run status.',
         'No response from package upgrade all.',
+        'No signing certificate found in the metadata.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
+        'Not configured yet',
+        'Not set',
+        'Not set (will be taken from the metadata when saving)',
         'Notice',
         'Notification',
         'Nov',
@@ -9784,10 +10089,13 @@ Thanks for your help!
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
+        'Please fill in all required fields before continuing.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
+        'Please paste a certificate or key first.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select a metadata source (URL or XML) first.',
         'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
@@ -9821,11 +10129,15 @@ Thanks for your help!
         'Restore web service configuration',
         'Rule',
         'Running',
+        'SP signing certificate',
+        'SP signing key',
+        'SSO URL',
         'Sa',
         'Sat',
         'Saturday',
         'Save',
         'Save and update automatically',
+        'Saving the pasted certificate/key failed.',
         'Scale preview content',
         'Search',
         'Search attributes',
@@ -9838,6 +10150,7 @@ Thanks for your help!
         'Select files or drop them here',
         'Sep',
         'September',
+        'Serial',
         'Setting a template will overwrite any text or attachment.',
         'Settings',
         'Show',
@@ -9846,7 +10159,9 @@ Thanks for your help!
         'Show less',
         'Show more',
         'Show or hide the content.',
+        'Show raw PEM',
         'Slide the navigation bar',
+        'Slot',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',
         'Sorry, but you can\'t disable all methods for this notification.',
         'Sorry, the only existing condition can\'t be removed.',
@@ -9861,12 +10176,14 @@ Thanks for your help!
         'Status',
         'Stream',
         'Su',
+        'Subject',
         'Successful',
         'Sun',
         'Sunday',
         'Support Bundle',
         'Switch to desktop mode',
         'Switch to mobile mode',
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?',
         'Team',
         'Th',
         'The activities could not be marked as seen.',
@@ -9888,6 +10205,7 @@ Thanks for your help!
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',
+        'There was an error deleting the SAML configuration.',
         'There was an error deleting the attachment. Please check the logs for more information.',
         'There was an error. Please save all settings you are editing and check the logs for more information.',
         'This Activity cannot be deleted because it is the Start Activity.',
@@ -9919,15 +10237,22 @@ Thanks for your help!
         'Tu',
         'Tue',
         'Tuesday',
+        'Type',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.',
         'Unknown',
         'Unlock setting.',
         'Update All Packages',
         'Update all packages',
         'Update manually',
+        'Upload failed.',
         'Upload information',
+        'Uploaded key',
         'Uploading...',
         'Use options below to narrow down for which tickets appointments will be automatically created.',
+        'User sync',
+        'Valid from',
+        'Valid until',
+        'Verifying...',
         'WARNING: When you change the name of the group \'admin\', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement.',
         'Warning',
         'We',
@@ -9944,12 +10269,14 @@ Thanks for your help!
         'activate to remove the sort',
         'and %s more...',
         'day',
+        'expires',
         'month',
         'more',
         'no',
         'none',
         'or',
         'sorting is disabled',
+        'used by %s configuration(s)',
         'week',
         'yes',
     ];

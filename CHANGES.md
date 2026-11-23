@@ -1,4 +1,12 @@
 # 7.5.1 2026-??-??
+ - 2026-11-23 Fixed: UsedSpace is calculated too early in Core.UI.js. Thanks to @BuilderNSV for reporting the issue. [#604](https://github.com/znuny/Znuny/issues/604)
+ - 2026-11-23 Added: Admin module to configure SAML2 authentication.
+ - 2026-11-20 Fixed: Date and DateTime dynamic fields ignored the user time zone when restricting dates to the past or the future.
+ - 2026-11-20 Fixed: Recipients listed on folded To and Cc lines were sent as Bcc by the MSGraph backend and were missing from the received message.
+ - 2026-11-20 Added: Content filter for articles in the article filter dialog of agent ticket details view.
+ - 2026-11-20 Added: Multiselect column filters for linked tickets complex table in agent ticket details view.
+ - 2026-11-20 Changed: Improved date picker calendar handling for non-working days and pending default times.
+ - 2026-11-18 Fixed: Use of uninitialized value when minifying RTE content CSS. Thanks to @devdog1 for reporting this issue. [#868](https://github.com/znuny/Znuny/issues/868)
  - 2026-11-18 Added: Integrated package Znuny-AdvancedAttachments.
  - 2026-11-18 Added: Integrated package Znuny-ZoomArticlePDFPreview.
  - 2026-11-18 Changed: Excess activity notifications will now be cleaned up during migration.

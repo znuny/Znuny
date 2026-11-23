@@ -302,6 +302,35 @@ sub TableCreateComplex {
 
     # Define Headline columns
 
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+
+    my %FilterableColumns = (
+        Owner          => 1,
+        Responsible    => 1,
+        CustomerID     => 1,
+        CustomerUserID => 1,
+        State          => 1,
+        Queue          => 1,
+        Priority       => 1,
+        Type           => 1,
+        Lock           => 1,
+        Service        => 1,
+        SLA            => 1,
+    );
+
+    DYNAMICFIELD:
+    for my $DynamicFieldConfig ( @{ $Self->{DynamicField} } ) {
+        next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+
+        my $IsFiltrable = $DynamicFieldBackendObject->HasBehavior(
+            DynamicFieldConfig => $DynamicFieldConfig,
+            Behavior           => 'IsFiltrable',
+        );
+        next DYNAMICFIELD if !$IsFiltrable;
+
+        $FilterableColumns{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = 1;
+    }
+
     # Sort
     my @AllColumns;
     COLUMN:
@@ -374,7 +403,9 @@ sub TableCreateComplex {
             }
 
             push @Headline, {
-                Content => $ColumnName,
+                Content    => $ColumnName,
+                ColumnName => $Column,
+                Filterable => $FilterableColumns{$Column} ? 1 : 0,
             };
         }
     }
@@ -564,7 +595,7 @@ sub TableCreateComplex {
         push @ItemList, \@ItemColumns;
     }
 
-    return if !@ItemList;
+    return if !@ItemList && !$Param{ShowEmptyTable};
 
     my %Block = (
         Object     => $Self->{ObjectData}->{Object},

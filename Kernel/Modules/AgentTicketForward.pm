@@ -2036,14 +2036,15 @@ sub _Mask {
     # pending data string
     $Param{PendingDateString} = $LayoutObject->BuildDateSelection(
         %Param,
-        YearPeriodPast       => 0,
-        YearPeriodFuture     => 5,
-        Format               => 'DateInputFormatLong',
-        DiffTime             => $ConfigObject->Get('Ticket::Frontend::PendingDiffTime') || 0,
-        Class                => $Param{Errors}->{DateInvalid}                           || ' ',
-        Validate             => 1,
-        ValidateDateInFuture => 1,
-        Calendar             => $Calendar,
+        YearPeriodPast             => 0,
+        YearPeriodFuture           => 5,
+        Format                     => 'DateInputFormatLong',
+        DiffTime                   => $ConfigObject->Get('Ticket::Frontend::PendingDiffTime') || 0,
+        Class                      => $Param{Errors}->{DateInvalid}                           || ' ',
+        Validate                   => 1,
+        ValidateDateInFuture       => 1,
+        PendingSkipUnavailableDays => 1,
+        Calendar                   => $Calendar,
     );
 
     # Multiple-Autocomplete

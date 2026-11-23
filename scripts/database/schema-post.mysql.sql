@@ -1133,6 +1133,18 @@ SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHER
 SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE oauth2_token_config ADD CONSTRAINT FK_oauth2_token_config_valid_id_id FOREIGN KEY (valid_id) REFERENCES valid (id)', 'SELECT ''INFO: Foreign key constraint FK_oauth2_token_config_valid_id_id does already exist, skipping.''' );
 PREPARE FKStatement FROM @FKSQLStatement;
 EXECUTE FKStatement;
+SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHERE table_schema = DATABASE() AND table_name = 'authentication_config' AND constraint_name = 'FK_authentication_config_create_by_id');
+SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE authentication_config ADD CONSTRAINT FK_authentication_config_create_by_id FOREIGN KEY (create_by) REFERENCES users (id)', 'SELECT ''INFO: Foreign key constraint FK_authentication_config_create_by_id does already exist, skipping.''' );
+PREPARE FKStatement FROM @FKSQLStatement;
+EXECUTE FKStatement;
+SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHERE table_schema = DATABASE() AND table_name = 'authentication_config' AND constraint_name = 'FK_authentication_config_change_by_id');
+SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE authentication_config ADD CONSTRAINT FK_authentication_config_change_by_id FOREIGN KEY (change_by) REFERENCES users (id)', 'SELECT ''INFO: Foreign key constraint FK_authentication_config_change_by_id does already exist, skipping.''' );
+PREPARE FKStatement FROM @FKSQLStatement;
+EXECUTE FKStatement;
+SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHERE table_schema = DATABASE() AND table_name = 'authentication_config' AND constraint_name = 'FK_authentication_config_valid_id_id');
+SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE authentication_config ADD CONSTRAINT FK_authentication_config_valid_id_id FOREIGN KEY (valid_id) REFERENCES valid (id)', 'SELECT ''INFO: Foreign key constraint FK_authentication_config_valid_id_id does already exist, skipping.''' );
+PREPARE FKStatement FROM @FKSQLStatement;
+EXECUTE FKStatement;
 SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHERE table_schema = DATABASE() AND table_name = 'oauth2_token' AND constraint_name = 'FK_oauth2_token_token_config_id_id');
 SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE oauth2_token ADD CONSTRAINT FK_oauth2_token_token_config_id_id FOREIGN KEY (token_config_id) REFERENCES oauth2_token_config (id)', 'SELECT ''INFO: Foreign key constraint FK_oauth2_token_token_config_id_id does already exist, skipping.''' );
 PREPARE FKStatement FROM @FKSQLStatement;

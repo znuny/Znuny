@@ -70,6 +70,10 @@ sub LinkObjectTableCreate {
             SourceObject                   => $Param{Object},
             ObjectID                       => $Param{Key},
             AdditionalLinkListWithDataJSON => $Param{AdditionalLinkListWithDataJSON},
+            EnableColumnFilters            => $Param{EnableColumnFilters},
+            OriginalTicketIDs              => $Param{OriginalTicketIDs},
+            GetColumnFilter                => $Param{GetColumnFilter},
+            ShowEmptyTable                 => $Param{ShowEmptyTable},
         );
     }
 }
@@ -155,6 +159,7 @@ sub LinkObjectTableCreateComplex {
             ObjectLinkListWithData => $Param{LinkListWithData}->{$Object},
             Action                 => $Self->{Action},
             ObjectID               => $Param{ObjectID},
+            ShowEmptyTable         => $Param{ShowEmptyTable},
         );
 
         next OBJECT if !@BlockData;
@@ -401,13 +406,20 @@ sub LinkObjectTableCreateComplex {
     my $OriginalAction = $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'OriginalAction' )
         || $Self->{Action};
 
+    my $ColumnFiltersEnabled = $Kernel::OM->Get('Kernel::Config')->Get('LinkObject::ComplexTable::ColumnFilters')
+        || {};
+    my $TicketColumnFiltersEnabled = $Param{EnableColumnFilters}
+        && $OriginalAction ne 'AgentLinkObject'
+        && IsHashRefWithData($ColumnFiltersEnabled)
+        && $ColumnFiltersEnabled->{Ticket};
+
     my @LinkObjectTables;
     BLOCK:
     for my $Block (@OutputData) {
 
         next BLOCK if !$Block->{ItemList};
         next BLOCK if ref $Block->{ItemList} ne 'ARRAY';
-        next BLOCK if !@{ $Block->{ItemList} };
+        next BLOCK if !@{ $Block->{ItemList} } && !( $TicketColumnFiltersEnabled && $Block->{Object} eq 'Ticket' );
 
         # output the block
         $LayoutObject->Block(
@@ -481,18 +493,106 @@ sub LinkObjectTableCreateComplex {
                 },
             );
         }
+        elsif ( $TicketColumnFiltersEnabled && $Block->{Object} eq 'Ticket' ) {
+
+            # Ensure JS init also runs when only column filters are enabled.
+            if ( !grep { $_ eq $Block->{Blockname} } @LinkObjectTables ) {
+                push @LinkObjectTables, $Block->{Blockname};
+            }
+        }
+
+        if (
+            $TicketColumnFiltersEnabled
+            && $Block->{Object} eq 'Ticket'
+            && IsHashRefWithData( $Param{GetColumnFilter} )
+            )
+        {
+            $LayoutObject->Block(
+                Name => 'TableComplexColumnFilterClear',
+            );
+        }
+
+        if (
+            $TicketColumnFiltersEnabled
+            && $Block->{Object} eq 'Ticket'
+            && $Param{SourceObject}
+            && $Param{ObjectID}
+            )
+        {
+            $LayoutObject->Block(
+                Name => 'TableComplexColumnFilterForm',
+                Data => {
+                    Name           => $Block->{Blockname},
+                    SourceObject   => $Param{SourceObject},
+                    SourceObjectID => $Param{ObjectID},
+                    OriginalAction => $OriginalAction,
+                },
+            );
+        }
 
         # output table headline
         for my $HeadlineColumn ( @{ $Block->{Headline} } ) {
 
+            my %HeadlineData = %{$HeadlineColumn};
+            if (
+                $TicketColumnFiltersEnabled
+                && $Block->{Object} eq 'Ticket'
+                && $HeadlineColumn->{ColumnName}
+                && IsArrayRefWithData( $Param{GetColumnFilter}->{ $HeadlineColumn->{ColumnName} } )
+                )
+            {
+                $HeadlineData{CSSClass} = 'FilterActive';
+            }
+
             # output a headline column block
             $LayoutObject->Block(
                 Name => 'TableComplexBlockColumn',
-                Data => $HeadlineColumn,
+                Data => \%HeadlineData,
             );
+
+            if (
+                $TicketColumnFiltersEnabled
+                && $Block->{Object} eq 'Ticket'
+                && $HeadlineColumn->{Filterable}
+                && $HeadlineColumn->{ColumnName}
+                && IsArrayRefWithData( $Param{OriginalTicketIDs} )
+                )
+            {
+                my $ColumnValues = $Self->LinkObjectColumnFilterValuesGet(
+                    ColumnName => $HeadlineColumn->{ColumnName},
+                    TicketIDs  => $Param{OriginalTicketIDs},
+                );
+
+                my $ColumnFilterHTML = $Self->LinkObjectColumnFilterHTML(
+                    ColumnName    => $HeadlineColumn->{ColumnName},
+                    Label         => $HeadlineColumn->{Content},
+                    ColumnValues  => $ColumnValues,
+                    SelectedValue => $Param{GetColumnFilter}->{ $HeadlineColumn->{ColumnName} },
+                );
+
+                if ($ColumnFilterHTML) {
+                    $LayoutObject->Block(
+                        Name => 'TableComplexBlockColumnFilter',
+                        Data => {
+                            ColumnName       => $HeadlineColumn->{ColumnName},
+                            ColumnFilterStrg => $ColumnFilterHTML,
+                            FilterTitle      => Translatable('filter'),
+                        },
+                    );
+                }
+            }
         }
 
         # output item list
+        if ( !@{ $Block->{ItemList} } ) {
+            $LayoutObject->Block(
+                Name => 'TableComplexBlockRowEmpty',
+                Data => {
+                    ColSpan => scalar @{ $Block->{Headline} },
+                },
+            );
+        }
+
         for my $Row ( @{ $Block->{ItemList} } ) {
 
             # output a table row block
@@ -974,6 +1074,378 @@ sub ComplexTablePreferencesGet {
     );
 
     return %Params;
+}
+
+=head2 LinkObjectColumnFilterParamGet()
+
+Return column filter parameters from the web request or stored user preferences.
+
+    my %Result = $LayoutObject->LinkObjectColumnFilterParamGet(
+        PrefKey => 'LinkObject::ComplexTableFilters-Ticket',    # optional
+    );
+
+Returns:
+
+    (
+        ColumnFilter    => { StateIDs => [1, 2], ... },
+        GetColumnFilter => { State => [1, 2], ... },
+    );
+
+=cut
+
+sub LinkObjectColumnFilterParamGet {
+    my ( $Self, %Param ) = @_;
+
+    my $ParamObject = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $JSONObject  = $Kernel::OM->Get('Kernel::System::JSON');
+    my $UserObject  = $Kernel::OM->Get('Kernel::System::User');
+
+    my $PrefKey = $Param{PrefKey} || 'LinkObject::ComplexTableFilters-Ticket';
+
+    my %Preferences = $UserObject->GetPreferences(
+        UserID => $Self->{UserID},
+    );
+
+    my $StoredFilters = {};
+    if ( $Preferences{$PrefKey} ) {
+        $StoredFilters = $JSONObject->Decode(
+            Data => $Preferences{$PrefKey},
+        ) || {};
+    }
+
+    if ( $ParamObject->GetParam( Param => 'DeleteFilters' ) ) {
+        $StoredFilters = {};
+    }
+
+    my %ColumnFilter;
+    my %GetColumnFilter;
+
+    COLUMNNAME:
+    for my $ColumnName (
+        qw(Owner Responsible State Queue Priority Type Lock Service SLA CustomerID CustomerUserID)
+        )
+    {
+        my @FilterValues = $ParamObject->GetArray( Param => 'ColumnFilter' . $ColumnName );
+
+        if ( !@FilterValues ) {
+            if ( $ColumnName eq 'CustomerID' ) {
+                @FilterValues = @{ $StoredFilters->{$ColumnName} || [] };
+            }
+            elsif ( $ColumnName eq 'CustomerUserID' ) {
+                @FilterValues = @{ $StoredFilters->{CustomerUserLogin} || [] };
+            }
+            else {
+                @FilterValues = @{ $StoredFilters->{ $ColumnName . 'IDs' } || [] };
+            }
+        }
+
+        if (@FilterValues) {
+            my %Seen;
+            @FilterValues = grep { defined $_ && $_ ne '' && $_ ne 'DeleteFilter' && !$Seen{$_}++ } @FilterValues;
+        }
+        else {
+            @FilterValues = ();
+        }
+        next COLUMNNAME if !@FilterValues;
+
+        if ( $ColumnName eq 'CustomerID' ) {
+            push @{ $ColumnFilter{$ColumnName} },           @FilterValues;
+            push @{ $ColumnFilter{ $ColumnName . 'Raw' } }, @FilterValues;
+            $GetColumnFilter{$ColumnName} = \@FilterValues;
+        }
+        elsif ( $ColumnName eq 'CustomerUserID' ) {
+            push @{ $ColumnFilter{CustomerUserLogin} },    @FilterValues;
+            push @{ $ColumnFilter{CustomerUserLoginRaw} }, @FilterValues;
+            $GetColumnFilter{$ColumnName} = \@FilterValues;
+        }
+        else {
+            push @{ $ColumnFilter{ $ColumnName . 'IDs' } }, @FilterValues;
+            $GetColumnFilter{$ColumnName} = \@FilterValues;
+        }
+    }
+
+    my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
+    my $DynamicFieldList   = $DynamicFieldObject->DynamicFieldListGet(
+        Valid      => 1,
+        ObjectType => ['Ticket'],
+    );
+
+    DYNAMICFIELD:
+    for my $DynamicFieldConfig ( @{$DynamicFieldList} ) {
+        next DYNAMICFIELD if !IsHashRefWithData($DynamicFieldConfig);
+        next DYNAMICFIELD if !$DynamicFieldConfig->{Name};
+
+        my @FilterValues = $ParamObject->GetArray(
+            Param => 'ColumnFilterDynamicField_' . $DynamicFieldConfig->{Name}
+        );
+
+        if ( !@FilterValues ) {
+            my $StoredValue = $StoredFilters->{ 'DynamicField_' . $DynamicFieldConfig->{Name} }->{Equals};
+            if ( ref $StoredValue eq 'ARRAY' ) {
+                @FilterValues = @{$StoredValue};
+            }
+            elsif ( defined $StoredValue ) {
+                @FilterValues = ($StoredValue);
+            }
+        }
+
+        if (@FilterValues) {
+            my %Seen;
+            @FilterValues = grep { defined $_ && $_ ne '' && $_ ne 'DeleteFilter' && !$Seen{$_}++ } @FilterValues;
+        }
+        else {
+            @FilterValues = ();
+        }
+        next DYNAMICFIELD if !@FilterValues;
+
+        $ColumnFilter{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = {
+            Equals => \@FilterValues,
+        };
+        $GetColumnFilter{ 'DynamicField_' . $DynamicFieldConfig->{Name} } = \@FilterValues;
+    }
+
+    return (
+        ColumnFilter    => \%ColumnFilter,
+        GetColumnFilter => \%GetColumnFilter,
+    );
+}
+
+=head2 LinkObjectColumnFilterApply()
+
+Filter linked Ticket entries in a LinkListWithData structure using TicketSearch.
+
+    my $FilteredLinkList = $LayoutObject->LinkObjectColumnFilterApply(
+        LinkListWithData => $LinkListWithData,
+        ColumnFilter     => \%ColumnFilter,
+    );
+
+=cut
+
+sub LinkObjectColumnFilterApply {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    if ( !$Param{LinkListWithData} || ref $Param{LinkListWithData} ne 'HASH' ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => 'Need LinkListWithData!',
+        );
+        return;
+    }
+
+    return $Param{LinkListWithData} if !IsHashRefWithData( $Param{ColumnFilter} );
+    return $Param{LinkListWithData} if !IsHashRefWithData( $Param{LinkListWithData}->{Ticket} );
+
+    my @TicketIDs;
+    for my $LinkType ( sort keys %{ $Param{LinkListWithData}->{Ticket} } ) {
+        for my $Direction ( sort keys %{ $Param{LinkListWithData}->{Ticket}->{$LinkType} } ) {
+            push @TicketIDs, keys %{ $Param{LinkListWithData}->{Ticket}->{$LinkType}->{$Direction} };
+        }
+    }
+
+    return $Param{LinkListWithData} if !@TicketIDs;
+
+    my %Seen;
+    @TicketIDs = grep { !$Seen{$_}++ } @TicketIDs;
+
+    my $TicketObject      = $Kernel::OM->Get('Kernel::System::Ticket');
+    my @FilteredTicketIDs = $TicketObject->TicketSearch(
+        TicketID => \@TicketIDs,
+        %{ $Param{ColumnFilter} },
+        UserID => $Self->{UserID},
+        Result => 'ARRAY',
+        Limit  => scalar @TicketIDs,
+    );
+
+    my %Keep = map { $_ => 1 } @FilteredTicketIDs;
+
+    LINKTYPE:
+    for my $LinkType ( sort keys %{ $Param{LinkListWithData}->{Ticket} } ) {
+        DIRECTION:
+        for my $Direction ( sort keys %{ $Param{LinkListWithData}->{Ticket}->{$LinkType} } ) {
+            TICKETID:
+            for my $TicketID (
+                sort keys %{ $Param{LinkListWithData}->{Ticket}->{$LinkType}->{$Direction} }
+                )
+            {
+                next TICKETID if $Keep{$TicketID};
+                delete $Param{LinkListWithData}->{Ticket}->{$LinkType}->{$Direction}->{$TicketID};
+            }
+            if ( !%{ $Param{LinkListWithData}->{Ticket}->{$LinkType}->{$Direction} } ) {
+                delete $Param{LinkListWithData}->{Ticket}->{$LinkType}->{$Direction};
+            }
+        }
+        if ( !%{ $Param{LinkListWithData}->{Ticket}->{$LinkType} } ) {
+            delete $Param{LinkListWithData}->{Ticket}->{$LinkType};
+        }
+    }
+
+    if ( !%{ $Param{LinkListWithData}->{Ticket} } ) {
+
+        # Keep an empty Ticket entry so the Complex table headers/filters can still render.
+        $Param{LinkListWithData}->{Ticket} = {};
+    }
+
+    return $Param{LinkListWithData};
+}
+
+=head2 LinkObjectColumnFilterPreferencesSet()
+
+Store linked ticket column filters in user preferences.
+
+    my $Success = $LayoutObject->LinkObjectColumnFilterPreferencesSet(
+        ColumnFilter => \%ColumnFilter,
+        PrefKey      => 'LinkObject::ComplexTableFilters-Ticket',    # optional
+    );
+
+=cut
+
+sub LinkObjectColumnFilterPreferencesSet {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $JSONObject   = $Kernel::OM->Get('Kernel::System::JSON');
+    my $UserObject   = $Kernel::OM->Get('Kernel::System::User');
+
+    my $PrefKey = $Param{PrefKey} || 'LinkObject::ComplexTableFilters-Ticket';
+
+    return if $ConfigObject->Get('DemoSystem');
+
+    return $UserObject->SetPreferences(
+        UserID => $Self->{UserID},
+        Key    => $PrefKey,
+        Value  => $JSONObject->Encode(
+            Data => $Param{ColumnFilter} || {},
+        ),
+    );
+}
+
+=head2 LinkObjectColumnFilterValuesGet()
+
+Get selectable values for one linked-ticket column filter.
+
+    my $Values = $LayoutObject->LinkObjectColumnFilterValuesGet(
+        ColumnName => 'State',
+        TicketIDs  => \@TicketIDs,
+    );
+
+=cut
+
+sub LinkObjectColumnFilterValuesGet {
+    my ( $Self, %Param ) = @_;
+
+    return if !$Param{ColumnName};
+    return if !IsArrayRefWithData( $Param{TicketIDs} );
+
+    my $ColumnFilterObject        = $Kernel::OM->Get('Kernel::System::Ticket::ColumnFilter');
+    my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
+    my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
+
+    if ( $Param{ColumnName} !~ m{\A DynamicField_}xms ) {
+        my $FunctionName = $Param{ColumnName} . 'FilterValuesGet';
+        if ( $Param{ColumnName} eq 'CustomerID' ) {
+            $FunctionName = 'CustomerFilterValuesGet';
+        }
+
+        return $ColumnFilterObject->$FunctionName(
+            TicketIDs    => $Param{TicketIDs},
+            HeaderColumn => $Param{ColumnName},
+            UserID       => $Self->{UserID},
+        );
+    }
+
+    my $FieldName = $Param{ColumnName};
+    $FieldName =~ s{\A DynamicField_}{}xms;
+
+    my $DynamicFieldConfig = $DynamicFieldObject->DynamicFieldGet(
+        Name => $FieldName,
+    );
+    return if !IsHashRefWithData($DynamicFieldConfig);
+
+    my $IsFiltrable = $DynamicFieldBackendObject->HasBehavior(
+        DynamicFieldConfig => $DynamicFieldConfig,
+        Behavior           => 'IsFiltrable',
+    );
+    return if !$IsFiltrable;
+
+    return $DynamicFieldBackendObject->ColumnFilterValuesGet(
+        DynamicFieldConfig => $DynamicFieldConfig,
+        LayoutObject       => $Self,
+        TicketIDs          => $Param{TicketIDs},
+    );
+}
+
+=head2 LinkObjectColumnFilterHTML()
+
+Build HTML for a linked-ticket multiselect column filter.
+
+    my $HTML = $LayoutObject->LinkObjectColumnFilterHTML(
+        ColumnName    => 'State',
+        Label         => 'State',
+        ColumnValues  => \%Values,
+        SelectedValue => [1, 2],
+    );
+
+=cut
+
+sub LinkObjectColumnFilterHTML {
+    my ( $Self, %Param ) = @_;
+
+    return if !$Param{ColumnName};
+
+    my $Label = $Param{Label} || $Param{ColumnName};
+    $Label =~ s{\A DynamicField_}{}xms;
+    $Label = $Self->{LanguageObject}->Translate($Label);
+
+    my $Data = [
+        {
+            Key   => 'DeleteFilter',
+            Value => '-',
+        },
+        {
+            Key      => '-',
+            Value    => '-',
+            Disabled => 1,
+        },
+    ];
+
+    if ( IsHashRefWithData( $Param{ColumnValues} ) ) {
+        my %Values = %{ $Param{ColumnValues} };
+
+        for my $ValueKey ( sort { lc $Values{$a} cmp lc $Values{$b} } keys %Values ) {
+            push @{$Data}, {
+                Key   => $ValueKey,
+                Value => $Values{$ValueKey},
+            };
+        }
+    }
+
+    my $TranslationOption = 0;
+    if (
+        $Param{ColumnName} eq 'State'
+        || $Param{ColumnName} eq 'Lock'
+        || $Param{ColumnName} eq 'Priority'
+        )
+    {
+        $TranslationOption = 1;
+    }
+
+    my $SelectedID = $Param{SelectedValue};
+    if ( ref $SelectedID ne 'ARRAY' ) {
+        $SelectedID = defined $SelectedID && $SelectedID ne '' ? [$SelectedID] : [];
+    }
+
+    return $Self->BuildSelection(
+        Name         => 'ColumnFilter' . $Param{ColumnName},
+        Data         => $Data,
+        Class        => 'ColumnFilter Modernize',
+        Translation  => $TranslationOption,
+        SelectedID   => $SelectedID,
+        Multiple     => 1,
+        TreeView     => 1,
+        AutoComplete => 'off',
+    );
 }
 
 =head2 ComplexTablePreferencesSet()

@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.278893280632411;
+    $Self->{Completeness}        = 0.298589822194972;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -268,6 +268,169 @@ sub Data {
         'Do you really want to delete this attachment?' => 'Doriți cu adevărat să ștergeți acest atașament?',
         'Attachment' => 'Atașament',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+        'Certificate/key is stored in VirtualFS.' => 'Certificatul/cheia este stocat(ă) în VirtualFS.',
+        'No certificate/key set.' => 'Nu este setat niciun certificat/nicio cheie.',
+        'View certificate details' => 'Vizualizați detaliile certificatului',
+        'The selected certificate/key is not available. Please select or upload it again.' =>
+            'Certificatul/cheia selectat(ă) nu este disponibil(ă). Vă rugăm să îl/o selectați sau să îl/o încărcați din nou.',
+        '- Select an existing certificate/key -' => '- Selectați un certificat/o cheie existent(ă) -',
+        'Paste key' => '',
+        'Paste certificate' => '',
+        'Generate' => '',
+        'Use certificate from metadata' => 'Folosește certificatul din metadate',
+        'Extracts the signing certificate embedded in the Identity Provider metadata and stores it here, instead of uploading it separately.' =>
+            'Extrage certificatul de semnare inclus în metadatele furnizorului de identitate și îl stochează aici, în loc să fie încărcat separat.',
+        'Paste the PEM text including the BEGIN and END lines.' => 'Lipiți textul PEM, inclusiv liniile BEGIN și END.',
+        'Common Name' => 'Nume comun',
+        'Key size' => 'Dimensiunea cheii',
+        'Validity (days)' => 'Valabilitate (zile)',
+        'Generate self-signed certificate' => 'Generează certificat autosemnat',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+        'Authentication Management' => 'Administrarea autentificării',
+        'Agent authentication' => 'Autentificare agenți',
+        'Basic settings' => 'Setări de bază',
+        'Slot' => 'Slot',
+        'Determines which numbered AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Determină ce slot numerotat AuthModule<N> ocupă această configurare. Sunt oferite doar sloturile neutilizate.',
+        'SAML request settings' => 'Setări cerere SAML',
+        'Login button text' => 'Textul butonului de autentificare',
+        'Assertion consumer URL' => 'URL consumator de aserțiuni',
+        'Automatically derived from this system\'s HTTP type, FQDN and script alias - not editable.' =>
+            'Derivat automat din tipul HTTP, FQDN-ul și aliasul de script ale acestui sistem - nu poate fi editat.',
+        'Znuny appends a ";IsSAMLLogin=1;Count=<N>;" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration\'s slot), so the value the Identity Provider actually receives is:' =>
+            'Znuny adaugă sufixul ";IsSAMLLogin=1;Count=<N>;" la acest URL atunci când construiește cererea SAML efectiv trimisă (<N> este slotul acestei configurări), astfel încât valoarea primită efectiv de furnizorul de identitate este:',
+        'Copy to clipboard' => 'Copiază în clipboard',
+        'Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honor the value from the request. If your IdP\'s field rejects semicolons, register the base URL instead.' =>
+            'Unii furnizori de identitate necesită înregistrarea exactă a acestei valori ca URL ACS. Alții acceptă URL-ul de bază de mai sus și respectă valoarea din cerere. Dacă câmpul IdP-ului dumneavoastră nu acceptă caracterul punct și virgulă, înregistrați în schimb URL-ul de bază.',
+        'Download SP metadata XML' => 'Descărcare XML metadate SP',
+        'Issuer (SP entity ID)' => 'Emitent (ID entitate SP)',
+        'Requested NameID format' => 'Format NameID solicitat',
+        'Unspecified' => 'Nespecificat',
+        'Persistent' => 'Persistent',
+        'Transient' => 'Tranzitoriu',
+        'Email address' => '',
+        'Sent as the NameIDPolicy Format in the outgoing request and published in the SP metadata. Change this only if your Identity Provider requires a specific format.' =>
+            'Trimis ca NameIDPolicy Format în cererea trimisă și publicat în metadatele SP. Modificați această valoare doar dacă furnizorul de identitate necesită un anumit format.',
+        'Login attribute' => '',
+        'Please enter attribute names separated by commas.' => '',
+        'Optional. By default the NameID is the login. Enter one or more SAML attribute names (Name or FriendlyName), separated by commas, to take the login from the first of these attributes the assertion contains instead, e.g. if the Identity Provider sends a persistent NameID. The attribute must have exactly one value, otherwise the login fails. Changing this changes the login of existing users.' =>
+            '',
+        'Load metadata from URL' => 'Încarcă metadatele de la URL',
+        'Switch off to paste the metadata XML instead. Switching clears the entered URL or XML and the SSL options.' =>
+            'Dezactivați pentru a lipi în schimb XML-ul metadatelor. Comutarea șterge URL-ul sau XML-ul introdus și opțiunile SSL.',
+        'Please select a metadata source.' => 'Vă rugăm să selectați o sursă de metadate.',
+        'Metadata URL' => 'URL metadate',
+        'Verify' => 'Verifică',
+        'Metadata XML' => 'XML metadate',
+        'Use custom SSL options for metadata URL fetch' => 'Folosește opțiuni SSL personalizate pentru preluarea metadatelor de la URL',
+        'SSL CA file' => 'Fișier CA SSL',
+        'SSL CA path' => 'Cale CA SSL',
+        'Verify hostname' => 'Verifică numele gazdei',
+        'Certificates and keys' => 'Certificate și chei',
+        'SP signing key (used to sign outgoing requests)' => 'Cheie de semnare SP (folosită pentru semnarea cererilor trimise)',
+        'SP signing certificate (matches the key above)' => 'Certificat de semnare SP (corespunde cheii de mai sus)',
+        'Required for the SP metadata\'s KeyDescriptor to be published. "Generate" above already produces this together with the key - only needed as a separate step if you uploaded your own key.' =>
+            'Necesar pentru publicarea KeyDescriptor în metadatele SP. „Generează” de mai sus îl produce deja împreună cu cheia - este necesar ca pas separat doar dacă ați încărcat propria cheie.',
+        'Signing algorithm' => 'Algoritm de semnare',
+        'SHA-256 (default)' => 'SHA-256 (implicit)',
+        'SHA-384' => 'SHA-384',
+        'SHA-512' => 'SHA-512',
+        'SHA-1 (legacy, not recommended)' => 'SHA-1 (învechit, nerecomandat)',
+        'Used to sign the outgoing request when a signing key is set above. Only change this if your Identity Provider requires a specific algorithm.' =>
+            'Folosit pentru semnarea cererii trimise atunci când mai sus este setată o cheie de semnare. Modificați doar dacă furnizorul de identitate necesită un anumit algoritm.',
+        'Decrypt encrypted assertions' => 'Decriptează aserțiunile criptate',
+        'Uses the SP signing key above to decrypt SAML assertions the Identity Provider encrypts. Has no effect on responses that aren\'t encrypted, so it\'s safe to leave enabled. Requires a signing key above.' =>
+            'Folosește cheia de semnare SP de mai sus pentru a decripta aserțiunile SAML criptate de furnizorul de identitate. Nu are efect asupra răspunsurilor necriptate, deci poate rămâne activat în siguranță. Necesită o cheie de semnare setată mai sus.',
+        'Identity provider CA certificate' => 'Certificat CA al furnizorului de identitate',
+        'Required for SAML login to work. Without it, Net::SAML2 cannot verify the Identity Provider\'s response signature and authentication will fail.' =>
+            'Necesar pentru funcționarea autentificării SAML. Fără acesta, Net::SAML2 nu poate verifica semnătura răspunsului furnizorului de identitate, iar autentificarea va eșua.',
+        'Attribute, group and role sync' => 'Sincronizare atribute, grupuri și roluri',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+        'Customer authentication' => 'Autentificare clienți',
+        'Determines which numbered Customer::AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Determină ce slot numerotat Customer::AuthModule<N> ocupă această configurare. Sunt oferite doar sloturile neutilizate.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+        'SAML wizard' => 'Asistent SAML',
+        'Add agent SAML authentication' => 'Adăugați autentificare SAML pentru agenți',
+        'Add customer SAML authentication' => 'Adăugați autentificare SAML pentru clienți',
+        'Deploy configuration' => 'Lansează configurarea',
+        'Deployment failed' => '',
+        'Fix the configurations below and deploy again. Or set a configuration to invalid: its login stops working and the other configurations are deployed.' =>
+            '',
+        'Problem' => 'Problemă',
+        'Edit' => 'Editează',
+        'Set to invalid and deploy the rest' => '',
+        'Sync' => 'Sincronizare',
+        'Status' => 'Starea',
+        'Metadata' => '',
+        'Slot %s' => 'Slot %s',
+        'Default' => '',
+        'Yes' => 'Da',
+        'No' => 'Nu',
+        'OK' => 'OK',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+        'Enable sync' => 'Activează sincronizarea',
+        'Also registers Kernel::System::Auth::Sync::SAML for the same slot, to sync attributes/groups/roles from the SAML assertion on every login.' =>
+            'Înregistrează și Kernel::System::Auth::Sync::SAML pentru același slot, pentru a sincroniza atributele/grupurile/rolurile din aserțiunea SAML la fiecare autentificare.',
+        'The AuthSyncModule for this slot is already configured outside of AdminAuthentication - sync cannot be enabled for it.' =>
+            'AuthSyncModule pentru acest slot este deja configurat în afara AdminAuthentication - sincronizarea nu poate fi activată pentru acesta.',
+        'User attribute sync map' => 'Mapare sincronizare atribute utilizator',
+        'Maps Znuny user attributes (left) to SAML assertion attribute names (right).' =>
+            'Mapează atributele utilizatorilor Znuny (stânga) la numele atributelor din aserțiunea SAML (dreapta).',
+        'Znuny attribute' => 'Atribut Znuny',
+        'SAML attribute URI' => 'URI atribut SAML',
+        'Initial groups for new users' => 'Grupuri inițiale pentru utilizatorii noi',
+        'Groups (with rw permission) granted only when a brand-new agent is created via sync. Ctrl/Cmd-click to select multiple.' =>
+            'Grupuri (cu permisiune rw) atribuite doar atunci când un agent complet nou este creat prin sincronizare. Ctrl/Cmd-clic pentru selecție multiplă.',
+        'SAML attribute carrying group values' => 'Atribut SAML care conține valorile grupurilor',
+        'Group sync rules (by group value)' => 'Reguli de sincronizare a grupurilor (după valoarea grupului)',
+        'Maps a SAML group value to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Mapează o valoare de grup SAML la un grup Znuny și permisiuni. Ctrl/Cmd-clic pentru a selecta mai multe permisiuni.',
+        'SAML value' => 'Valoare SAML',
+        'Group sync rules (by arbitrary attribute/value)' => 'Reguli de sincronizare a grupurilor (după orice atribut/valoare)',
+        'Maps any SAML attribute name/value combination to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Mapează orice combinație nume/valoare de atribut SAML la un grup Znuny și permisiuni. Ctrl/Cmd-clic pentru a selecta mai multe permisiuni.',
+        'SAML attribute' => 'Atribut SAML',
+        'Role sync requires at least one active role. Create or activate a role under Admin → Roles.' =>
+            'Sincronizarea rolurilor necesită cel puțin un rol activ. Creați sau activați un rol în Administrare → Roluri.',
+        'SAML attribute carrying role values' => 'Atribut SAML care conține valorile rolurilor',
+        'Role sync rules (by role value)' => 'Reguli de sincronizare a rolurilor (după valoarea rolului)',
+        'Maps a SAML role value to one or more Znuny roles, active or inactive.' =>
+            'Mapează o valoare de rol SAML la un rol Znuny, activ sau inactiv.',
+        'Active' => 'Activ',
+        'Role sync rules (by arbitrary attribute/value)' => 'Reguli de sincronizare a rolurilor (după orice atribut/valoare)',
+        'Maps any SAML attribute name/value combination to one or more Znuny roles, active or inactive.' =>
+            'Mapează orice combinație nume/valoare de atribut SAML la un rol Znuny, activ sau inactiv.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+        'Setup steps' => 'Pași de configurare',
+        'Setup wizard' => 'Asistent de configurare',
+        'SAML setup wizard' => 'Asistent de configurare SAML',
+        'Step' => 'Pas',
+        'What are you setting up?' => 'Ce configurați?',
+        'Agent authentication - staff logging into the agent interface' =>
+            'Autentificare agenți - personalul care se autentifică în interfața agenților',
+        'Customer authentication - customers logging into the customer portal' =>
+            'Autentificare clienți - clienții care se autentifică în portalul clienților',
+        'Login with SSO' => 'Autentificare cu SSO',
+        'User sync (optional)' => 'Sincronizare utilizatori (opțional)',
+        'Optionally sync user attributes, groups and roles from the SAML assertion on every login. This can also be set up later on the edit screen.' =>
+            'Opțional, sincronizați atributele utilizatorilor, grupurile și rolurile din aserțiunea SAML la fiecare autentificare. Acest lucru poate fi configurat și ulterior în ecranul de editare.',
+        'Review' => 'Revizuire',
+        'Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective.' =>
+            'Faceți clic pe Salvare pentru a crea această configurare SAML. Nu va fi încă activă - folosiți ulterior acțiunea Lansare de pe pagina de prezentare generală pentru a o aplica.',
+        'If you skipped the Identity Provider CA certificate here, it is taken from the metadata when saving. Please check it on the edit screen afterwards.' =>
+            '',
+        'You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only).' =>
+            'Puteți reveni la orice pas anterior pentru a face modificări sau puteți folosi ulterior ecranul complet de editare pentru opțiuni avansate, cum ar fi sincronizarea atributelor/grupurilor/rolurilor (doar pentru autentificarea agenților).',
+        'Back' => 'Înapoi',
+        'Next' => 'Următorul',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
         'Add Auto Response' => 'Adăugați un răspuns automat',
         'Filter for Auto Responses' => 'Filtru pentru răspunsuri automate',
@@ -325,9 +488,7 @@ sub Data {
             'Puteți modifica sortarea și ordinea acestor coloane făcând clic pe antetul coloanei.',
         'Account Status' => 'Starea contului',
         'Account status for: %s' => 'Starea contului pentru: %s',
-        'Status' => 'Starea',
         'Account' => 'Cont',
-        'Edit' => 'Editează',
         'No accounts found.' => 'Nu s-au găsit conturi.',
         'Communication Log Details (%s)' => 'Detalii jurnal de comunicare (%s)',
         'Direction' => 'Direcție',
@@ -446,7 +607,6 @@ sub Data {
         'Change Customer Relations for Customer User' => 'Schimbați relațiile la clientul utilizator',
         'Change Customer User Relations for Customer' => 'Schimbați relațiile la clientul utilizator',
         'Toggle active state for all' => 'Comutați starea activă pentru toți',
-        'Active' => 'Activ',
         'Toggle active state for %s' => 'Comutați starea activă pentru %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
@@ -1583,14 +1743,11 @@ sub Data {
         'Download package' => 'Descărcare pachet',
         'Rebuild package' => '',
         'Package Information' => 'Informații despre pachet',
-        'Metadata' => '',
         'Change Log' => '',
         'Date' => 'Dată',
         'List of Files' => 'Lista de fișiere',
         'Permission' => 'Permisiune',
         'Size' => 'Dimensiune',
-        'Problem' => 'Problemă',
-        'OK' => 'OK',
         'Download file from package!' => '',
         'Required' => 'Obligatoriu',
         'Primary Key' => '',
@@ -2134,7 +2291,6 @@ sub Data {
         'System Email Addresses Management' => 'Administrarea adreselor de e-mail de sistem',
         'Add System Email Address' => '',
         'Edit System Email Address' => '',
-        'Email address' => '',
         'Display name' => '',
         'This email address is already used as system email address.' => '',
         'The display name and email address will be shown on mail you send.' =>
@@ -2349,8 +2505,6 @@ sub Data {
         'All-day' => 'Toată ziua',
         'Repeat' => '',
         'Notification' => 'Notificare',
-        'Yes' => 'Da',
-        'No' => 'Nu',
         'No calendars found. Please add a calendar first by using Manage Calendars page.' =>
             '',
 
@@ -2875,10 +3029,11 @@ sub Data {
         'Archive Search' => 'Căutare în arhivă',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'Conținut',
+        'e.g. Text or Te*t' => '',
         'Save filter settings as default' => 'Salvează configurația filtrului ca fiind implicită',
         'Event Type' => 'Tip Eveniment',
         'Save as default' => 'Salvează ca implicit',
-        'Back' => 'Înapoi',
         'Change Queue' => 'Schimbă Coada',
         'Add Filter' => 'Adaugă Filtru',
         'Set' => 'Pune',
@@ -3126,7 +3281,6 @@ sub Data {
         'Phone' => 'Telefon',
         'Web site' => '',
         'Community' => '',
-        'Next' => 'Următorul',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => '',
@@ -3221,6 +3375,8 @@ sub Data {
         'Delete link' => '',
         'Delete Link' => '',
         'Object#' => '',
+        'Remove active filters for this widget.' => 'Sterge filtrele active din acest modul.',
+        'No results found.' => 'Nu s-au găsit rezultate.',
         'Add links' => '',
         'Delete links' => '',
 
@@ -3627,6 +3783,34 @@ sub Data {
             '',
         'All agents with write permission for the appointment (calendar)' =>
             '',
+
+        # Perl Module: Kernel/Modules/AdminAuthentication.pm
+        'Perl module Net::SAML2 is not installed. SAML authentication cannot work until it is installed on the server.' =>
+            'Modulul Perl Net::SAML2 nu este instalat. Autentificarea SAML nu poate funcționa până când nu este instalat pe server.',
+        'Authentication configuration is not in sync with the deployed configuration, but it can\'t be deployed: a valid configuration has a problem, see the status below. Fix it or set it to invalid, then deploy.' =>
+            '',
+        'Authentication configuration is not in sync with the deployed configuration, please deploy.' =>
+            'Configurarea autentificării nu este sincronizată cu configurarea lansată, vă rugăm să o lansați.',
+        'No IdP CA certificate was uploaded and none could be taken from the IdP metadata.' =>
+            'Nu a fost încărcat niciun certificat CA al IdP și niciunul nu a putut fi preluat din metadatele IdP.',
+        'Only invalid authentication configurations can be deleted. Please set the configuration to invalid first.' =>
+            'Doar configurările de autentificare invalide pot fi șterse. Vă rugăm să setați mai întâi configurarea ca invalidă.',
+        'Invalid or missing Role.' => 'Rol invalid sau lipsă.',
+        'No file was uploaded.' => 'Nu a fost încărcat niciun fișier.',
+        'Error storing the uploaded file.' => 'Eroare la stocarea fișierului încărcat.',
+        'Only the SP signing key can be generated.' => 'Doar cheia de semnare SP poate fi generată.',
+        'Error generating certificate. Please check the system log.' => 'Eroare la generarea certificatului. Vă rugăm să verificați jurnalul sistemului.',
+        'Error storing the generated key in VirtualFS.' => 'Eroare la stocarea cheii generate în VirtualFS.',
+        'Error storing the generated certificate in VirtualFS.' => 'Eroare la stocarea certificatului generat în VirtualFS.',
+        'Could not find a certificate in the metadata. Please check the URL/XML and try again.' =>
+            'Nu s-a găsit niciun certificat în metadate. Vă rugăm să verificați URL-ul/XML-ul și să încercați din nou.',
+        'Error storing the certificate.' => 'Eroare la stocarea certificatului.',
+        'Could not read the certificate from VirtualFS.' => 'Certificatul nu a putut fi citit din VirtualFS.',
+        'The authentication configuration was not deployed. The previously deployed configuration is still active.' =>
+            'Configurarea autentificării nu a fost lansată. Configurarea lansată anterior este încă activă.',
+        'Please check the system log for details.' => 'Vă rugăm să verificați jurnalul sistemului pentru detalii.',
+        'Authentication configuration not found.' => '',
+        'Could not set the authentication configuration to invalid.' => '',
 
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
@@ -4661,6 +4845,8 @@ sub Data {
             '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            'Eroare: setați valoarea innodb_redo_log_capacity din baza de date la cel puțin %s MB (curent: %s MB, recomandat: %s MB). Pentru mai multe informații, consultați %s.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             '',
         'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
@@ -4842,6 +5028,7 @@ sub Data {
         'Linked as' => '',
         'Search Result' => '',
         'Linked' => 'Conectat',
+        'filter' => 'Filtru',
         'Bulk' => 'En gros',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -4970,7 +5157,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => '',
         'Unable to load %s!' => '',
-        'Content' => 'Conținut',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'Informații depsre tichet',
@@ -5031,6 +5217,34 @@ sub Data {
         'Session invalid. Please log in again.' => 'Sesiune invalidă. Vă rugăm să vă autentificați din nou.',
         'Session has timed out. Please log in again.' => 'Sesiunea a expirat. Vă rugăm să vă autentificați din nou.',
 
+        # Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+        'This is not an unencrypted private key in PEM format (-----BEGIN PRIVATE KEY-----).' =>
+            'Aceasta nu este o cheie privată necriptată în format PEM (-----BEGIN PRIVATE KEY-----).',
+        'This is not a certificate in PEM format (-----BEGIN CERTIFICATE-----).' =>
+            'Acesta nu este un certificat în format PEM (-----BEGIN CERTIFICATE-----).',
+        'The private key could not be read. Only unencrypted private keys are supported.' =>
+            'Cheia privată nu a putut fi citită. Sunt acceptate doar chei private necriptate.',
+        'The certificate could not be read.' => 'Certificatul nu a putut fi citit.',
+        'Could not read the SP signing key.' => 'Cheia de semnare SP nu a putut fi citită.',
+        'Could not read the IdP CA certificate.' => 'Certificatul CA al IdP nu a putut fi citit.',
+        'No IdP CA certificate is stored. It is taken from the IdP metadata on every deploy. Save the configuration to store it.' =>
+            '',
+        'Could not decrypt the SP signing key. Please check the configured encryption key.' =>
+            'Cheia de semnare SP nu a putut fi decriptată. Vă rugăm să verificați cheia de criptare configurată.',
+        'Net::SAML2 is not installed on the server, metadata cannot be verified.' =>
+            'Net::SAML2 nu este instalat pe server, metadatele nu pot fi verificate.',
+        'Metadata URL is empty.' => 'URL-ul metadatelor este gol.',
+        'Metadata XML is empty.' => 'XML-ul metadatelor este gol.',
+        'Could not parse the metadata. Please check the URL/XML and try again.' =>
+            'Metadatele nu au putut fi analizate. Vă rugăm să verificați URL-ul/XML-ul și să încercați din nou.',
+        'Perl module Crypt::OpenSSL::X509 is not installed, certificate details cannot be parsed.' =>
+            'Modulul Perl Crypt::OpenSSL::X509 nu este instalat, detaliile certificatului nu pot fi analizate.',
+        'Could not parse the certificate.' => 'Certificatul nu a putut fi analizat.',
+
+        # Perl Module: Kernel/System/AuthenticationConfig.pm
+        'No authentication plugin is registered for this type.' => 'Niciun plugin de autentificare nu este înregistrat pentru acest tip.',
+        'Could not write the certificate files.' => 'Fișierele certificatului nu au putut fi scrise.',
+
         # Perl Module: Kernel/System/AutoResponse.pm
         'Couldn\'t read auto response configuration file. Please make sure the file is valid.' =>
             '',
@@ -5074,9 +5288,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'înainte/după',
         'between' => 'între',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -5247,6 +5458,9 @@ sub Data {
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'Capacitatea jurnalului redo InnoDB',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'Setarea innodb_redo_log_capacity trebuie să fie de cel puțin 256 MB.',
         'InnoDB Log File Size' => 'Dimensiunea fișierului de log pentru InnoDB',
         'The setting innodb_log_file_size must be at least 256 MB.' => 'Setarea innodb_log_file_size trebuie să fie de cel puțin 256 MB.',
 
@@ -5551,7 +5765,6 @@ sub Data {
         'All Settings' => '',
 
         # Perl Module: Kernel/System/SysConfig/BaseValueType.pm
-        'Default' => '',
         'Value is not correct! Please, consider updating this field.' => '',
         'Value doesn\'t satisfy regex (%s).' => '',
 
@@ -6009,6 +6222,8 @@ sub Data {
             '',
         'Maximum Number of a calendar shown in a dropdown.' => '',
         'Define the start day of the week for the date picker.' => '',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Definește dacă data implicită de așteptare bazată pe Ticket::Frontend::PendingDiffTime trebuie să omită zilele care sunt sărbători sau care nu au program de lucru în acest calendar.',
         'Adds the permanent vacation days.' => '',
         'Adds the one time vacation days.' => '',
         'Defines the hours and week days to count the working time.' => '',
@@ -6290,6 +6505,8 @@ sub Data {
             '',
         'Frontend module registration (disable company link if no company feature is used).' =>
             '',
+        'Registers the SAML 2.0 authentication plugin for AdminAuthentication.' =>
+            'Înregistrează pluginul de autentificare SAML 2.0 pentru AdminAuthentication.',
         'Frontend module registration for the customer interface.' => '',
         'Activates the available themes on the system. Value 1 means active, 0 means inactive.' =>
             '',
@@ -6712,6 +6929,8 @@ sub Data {
             '',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             '',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Câmpuri dinamice afișate în dialogul filtrului de articole de pe ecranul de zoom al tichetului din interfața agentului. Sunt acceptate numai câmpurile de tipul obiectului Articol de tipurile Text, TextArea, Dropdown, Selecție multiplă și Checkbox.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>
@@ -7918,6 +8137,8 @@ sub Data {
             '',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             '',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Activează filtrele de coloană cu selecție multiplă pentru tichetele legate din widgetul complex de obiecte legate (LinkObject::ViewMode = "complex"). Filtrele sunt disponibile în AgentTicketZoom și nu sunt afișate în fereastra pop-up AgentLinkObject.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8386,6 +8607,55 @@ sub Data {
             '',
         'Attachment was deleted successfully.' => '',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?' =>
+            'Schimbarea sursei de metadate elimină URL-ul sau XML-ul metadatelor introdus și opțiunile SSL. Continuați?',
+        'Change metadata source' => 'Schimbă sursa metadatelor',
+        'Uploaded key' => 'Cheie încărcată',
+        'EXPIRED' => 'EXPIRAT',
+        'expires' => 'expiră',
+        'used by %s configuration(s)' => 'folosit de %s configurare(ări)',
+        'Could not read the certificate.' => 'Certificatul nu a putut fi citit.',
+        'Certificate (PEM)' => 'Certificat (PEM)',
+        'Issuer' => 'Emitent',
+        'Valid from' => 'Valabil de la',
+        'Valid until' => 'Valabil până la',
+        'Serial' => 'Număr de serie',
+        'Fingerprint (SHA-256)' => 'Amprenta (SHA-256)',
+        'Show raw PEM' => 'Afișează PEM brut',
+        'Certificate details' => 'Detalii certificat',
+        'Metadata is valid.' => 'Metadatele sunt valide.',
+        'Entity ID' => 'ID entitate',
+        'SSO URL' => 'URL SSO',
+        'Includes a signing certificate.' => 'Include un certificat de semnare.',
+        'No signing certificate found in the metadata.' => 'Nu s-a găsit niciun certificat de semnare în metadate.',
+        'Found %s attribute(s) in the metadata.' => 'S-au găsit %s atribut(e) în metadate.',
+        'Verifying...' => 'Se verifică...',
+        'Metadata verification failed.' => 'Verificarea metadatelor a eșuat.',
+        'Upload failed.' => 'Încărcarea a eșuat.',
+        'Please paste a certificate or key first.' => 'Vă rugăm să lipiți mai întâi un certificat sau o cheie.',
+        'Saving the pasted certificate/key failed.' => 'Salvarea certificatului/cheii lipite a eșuat.',
+        'Certificate generation failed.' => 'Generarea certificatului a eșuat.',
+        'Please select a metadata source (URL or XML) first.' => 'Vă rugăm să selectați mai întâi o sursă de metadate (URL sau XML).',
+        'Could not find a certificate in the metadata.' => 'Nu s-a găsit niciun certificat în metadate.',
+        'Copied to clipboard!' => '',
+        'Do you really want to delete this SAML configuration?' => 'Sunteți sigur că doriți să ștergeți această configurare SAML?',
+        'Delete SAML configuration' => 'Șterge configurarea SAML',
+        'There was an error deleting the SAML configuration.' => 'A apărut o eroare la ștergerea configurării SAML.',
+        'NameID (default)' => '',
+        '(pasted XML)' => '(XML lipit)',
+        'Not configured yet' => 'Neconfigurat încă',
+        'Identity provider metadata' => 'Metadatele furnizorului de identitate',
+        'SP signing key' => 'Cheie de semnare SP',
+        'Configured' => 'Configurat',
+        'Not set' => 'Nesetat',
+        'SP signing certificate' => 'Certificat de semnare SP',
+        'Not set (will be taken from the metadata when saving)' => '',
+        'User sync' => 'Sincronizare utilizatori',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)' =>
+            'Activat (%s mapări de atribute, %s reguli de grup, %s reguli de rol)',
+        'Please fill in all required fields before continuing.' => 'Vă rugăm să completați toate câmpurile obligatorii înainte de a continua.',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.AutoResponse.js
         'Delete this %s' => '',
         'Deleting the %s and its data. This may take a while...' => '',
@@ -8592,9 +8862,6 @@ sub Data {
         'Please select attachments for download.' => '',
         'Show less' => '',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
-        'Copied to clipboard!' => '',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
         'First select a customer user, then select a customer ID to assign to this ticket.' =>
             '',
@@ -8612,7 +8879,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => 'Verifică câmpurile marcate cu roșu.',
         'month' => 'lună',
-        'Remove active filters for this widget.' => 'Sterge filtrele active din acest modul.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '',
@@ -8640,9 +8906,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Search.js
         'Please remove the following words from your search as they cannot be searched for:' =>
             '',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.SharedSecretGenerator.js
-        'Generate' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
@@ -8704,6 +8967,7 @@ sub Data {
             '',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'Fără program de lucru',
         'Open date selection' => 'Deschide selectia de data',
         'Invalid date (need a future date)!' => 'Data nevalidă (specificați o dată viitoare)!',
         'Invalid date (need a past date)!' => 'Data nevalidă (specificați o dată trecută)!',
@@ -9195,6 +9459,7 @@ Thanks for your help!
         'Manage POP3 or IMAP accounts to fetch email from.' => '',
         'Manage S/MIME certificates for email encryption.' => '',
         'Manage System Configuration Deployments.' => '',
+        'Manage agent and customer authentication (e.g. SAML 2.0).' => 'Administrează autentificarea agenților și a clienților (de ex. SAML 2.0).',
         'Manage different calendars.' => '',
         'Manage existing sessions.' => '',
         'Manage outbound email profiles.' => '',
@@ -9320,6 +9585,7 @@ Thanks for your help!
         'Running Process Tickets' => '',
         'Russian' => '',
         'S/MIME Certificates' => 'Certificate S/MIME',
+        'SAML' => 'SAML',
         'Schedule a maintenance period.' => '',
         'Screen after marking as seen' => '',
         'Screen after marking as unseen' => '',
@@ -9551,6 +9817,7 @@ Thanks for your help!
         '%s MB',
         '%s TB',
         '%s of %s',
+        '(pasted XML)',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9565,6 +9832,7 @@ Thanks for your help!
         'Add new entry',
         'Add to favourites',
         'Agent',
+        'Agent authentication',
         'All occurrences',
         'All-day',
         'An Error Occurred',
@@ -9587,6 +9855,7 @@ Thanks for your help!
         'Article filter',
         'As soon as you use this button or link, you will leave this screen and its current state will be saved automatically. Do you want to continue?',
         'Ascending sort applied, ',
+        'Assertion consumer URL',
         'Attachment was deleted successfully.',
         'Attachments',
         'Aug',
@@ -9597,6 +9866,11 @@ Thanks for your help!
         'Calendar',
         'Cancel',
         'Cannot proceed',
+        'Certificate (PEM)',
+        'Certificate details',
+        'Certificate generation failed.',
+        'Certificate/key is stored in VirtualFS.',
+        'Change metadata source',
         'Clear',
         'Clear all',
         'Clear all filters',
@@ -9609,27 +9883,34 @@ Thanks for your help!
         'Clone',
         'Clone Process',
         'Clone web service',
+        'Close',
         'Close preview',
         'Close this dialog',
         'Collapse',
         'Complex %s with %s arguments',
+        'Configured',
         'Confirm',
         'Copied to clipboard!',
         'Copy Ticket Number',
         'Copy Ticket Number + Title',
         'Copy ticket information',
+        'Could not find a certificate in the metadata.',
         'Could not load activities.',
         'Could not open popup window. Please disable any popup blockers for this application.',
+        'Could not read the certificate.',
         'Current selection',
         'Currently not possible',
+        'Customer authentication',
         'Customer interface does not support articles not visible for customers.',
         'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',
         'December',
+        'Decrypt encrypted assertions',
         'Delete',
         'Delete Entity',
+        'Delete SAML configuration',
         'Delete conditions',
         'Delete draft',
         'Delete error handling module',
@@ -9663,10 +9944,12 @@ Thanks for your help!
         'Deployment successful. You\'re being redirected...',
         'Descending sort applied, ',
         'Description',
+        'Disabled',
         'Dismiss',
         'Do not show this warning again.',
         'Do you really want to continue?',
         'Do you really want to delete "%s"?',
+        'Do you really want to delete this SAML configuration?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
         'Do you really want to delete this key?',
@@ -9683,11 +9966,14 @@ Thanks for your help!
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
+        'EXPIRED',
         'Edit Field Details',
         'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)',
         'End date',
+        'Entity ID',
         'Error',
         'Error during AJAX communication',
         'Error during AJAX communication. Status: %s, Error: %s',
@@ -9701,8 +9987,10 @@ Thanks for your help!
         'February',
         'Filter',
         'Filters',
+        'Fingerprint (SHA-256)',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
+        'Found %s attribute(s) in the metadata.',
         'Fr',
         'Fri',
         'Friday',
@@ -9712,13 +10000,18 @@ Thanks for your help!
         'Grouped',
         'Help',
         'Hide EntityIDs',
+        'Identity provider CA certificate',
+        'Identity provider metadata',
         'If you now leave this page, all open popup windows will be closed, too!',
         'Import web service',
+        'Includes a signing certificate.',
         'Information about the Znuny Daemon',
         'Insert selected customer user(s) into the "%s:" field.',
         'Invalid date (need a future date)!',
         'Invalid date (need a past date)!',
         'Invalid date!',
+        'Issuer',
+        'Issuer (SP entity ID)',
         'It is going to be deleted from the field, please try again.',
         'It is not possible to add a new event trigger because the event is not set.',
         'It is not possible to set this entry to invalid. All affected configuration settings have to be changed beforehand.',
@@ -9736,6 +10029,8 @@ Thanks for your help!
         'Loading, please wait...',
         'Loading...',
         'Location',
+        'Login attribute',
+        'Login button text',
         'Mail check successful.',
         'Mapping for Key',
         'Mapping for Key %s',
@@ -9743,15 +10038,20 @@ Thanks for your help!
         'March',
         'May',
         'May_long',
+        'Metadata is valid.',
+        'Metadata verification failed.',
         'Mo',
         'Mon',
         'Monday',
         'Month',
         'Name',
+        'NameID (default)',
         'Namespace %s could not be initialized, because %s could not be found.',
         'Next',
+        'No',
         'No Data Available.',
         'No TransitionActions assigned.',
+        'No certificate/key set.',
         'No data found.',
         'No dialogs assigned yet. Just pick an activity dialog from the list on the left and drag it here.',
         'No matches found.',
@@ -9759,9 +10059,14 @@ Thanks for your help!
         'No response from get package upgrade result.',
         'No response from get package upgrade run status.',
         'No response from package upgrade all.',
+        'No signing certificate found in the metadata.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
+        'Not configured yet',
+        'Not set',
+        'Not set (will be taken from the metadata when saving)',
         'Notice',
         'Notification',
         'Nov',
@@ -9778,10 +10083,13 @@ Thanks for your help!
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
+        'Please fill in all required fields before continuing.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
+        'Please paste a certificate or key first.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select a metadata source (URL or XML) first.',
         'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
@@ -9815,11 +10123,15 @@ Thanks for your help!
         'Restore web service configuration',
         'Rule',
         'Running',
+        'SP signing certificate',
+        'SP signing key',
+        'SSO URL',
         'Sa',
         'Sat',
         'Saturday',
         'Save',
         'Save and update automatically',
+        'Saving the pasted certificate/key failed.',
         'Scale preview content',
         'Search',
         'Search attributes',
@@ -9832,6 +10144,7 @@ Thanks for your help!
         'Select files or drop them here',
         'Sep',
         'September',
+        'Serial',
         'Setting a template will overwrite any text or attachment.',
         'Settings',
         'Show',
@@ -9840,7 +10153,9 @@ Thanks for your help!
         'Show less',
         'Show more',
         'Show or hide the content.',
+        'Show raw PEM',
         'Slide the navigation bar',
+        'Slot',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',
         'Sorry, but you can\'t disable all methods for this notification.',
         'Sorry, the only existing condition can\'t be removed.',
@@ -9855,12 +10170,14 @@ Thanks for your help!
         'Status',
         'Stream',
         'Su',
+        'Subject',
         'Successful',
         'Sun',
         'Sunday',
         'Support Bundle',
         'Switch to desktop mode',
         'Switch to mobile mode',
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?',
         'Team',
         'Th',
         'The activities could not be marked as seen.',
@@ -9882,6 +10199,7 @@ Thanks for your help!
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',
+        'There was an error deleting the SAML configuration.',
         'There was an error deleting the attachment. Please check the logs for more information.',
         'There was an error. Please save all settings you are editing and check the logs for more information.',
         'This Activity cannot be deleted because it is the Start Activity.',
@@ -9913,15 +10231,22 @@ Thanks for your help!
         'Tu',
         'Tue',
         'Tuesday',
+        'Type',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.',
         'Unknown',
         'Unlock setting.',
         'Update All Packages',
         'Update all packages',
         'Update manually',
+        'Upload failed.',
         'Upload information',
+        'Uploaded key',
         'Uploading...',
         'Use options below to narrow down for which tickets appointments will be automatically created.',
+        'User sync',
+        'Valid from',
+        'Valid until',
+        'Verifying...',
         'WARNING: When you change the name of the group \'admin\', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement.',
         'Warning',
         'We',
@@ -9938,12 +10263,14 @@ Thanks for your help!
         'activate to remove the sort',
         'and %s more...',
         'day',
+        'expires',
         'month',
         'more',
         'no',
         'none',
         'or',
         'sorting is disabled',
+        'used by %s configuration(s)',
         'week',
         'yes',
     ];

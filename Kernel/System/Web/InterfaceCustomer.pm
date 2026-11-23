@@ -359,6 +359,18 @@ sub Run {
             Valid => 1
         );
 
+        # SAML: capture NameID/SessionIndex on the session for Single Logout, but only if the
+        # assertion actually carried a SessionIndex (some IdPs omit it, and a LogoutRequest
+        # cannot be built without one).
+        if ($IsSAMLLogin) {
+            my %SLOData = $AuthObject->GetSAMLSLOData( Count => $Count );
+            if ( length( $SLOData{NameID} // '' ) && length( $SLOData{SessionIndex} // '' ) ) {
+                $UserData{SAMLNameID}       = $SLOData{NameID};
+                $UserData{SAMLNameIDFormat} = $SLOData{NameIDFormat};
+                $UserData{SAMLSessionIndex} = $SLOData{SessionIndex};
+            }
+        }
+
         # check if the browser supports cookies
         if ( $ParamObject->GetCookie( Key => 'OTRSBrowserHasCookie' ) ) {
             $Kernel::OM->ObjectParamAdd(
@@ -582,12 +594,63 @@ sub Run {
         $Kernel::OM->ObjectsDiscard( Objects => ['Kernel::Output::HTML::Layout'] );
         my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
+        # SAML: tell the Identity Provider too, if this session was established via a SAML
+        # slot that captured a NameID/SessionIndex at login time (see the Login branch above).
+        # Built before RemoveSessionID below, but local logout must never be gated on this -
+        # it may involve an outbound metadata fetch that can transiently fail.
+        my $SAMLLogoutURL;
+        if (
+            defined $UserData{UserAuthBackend}
+            && length( $UserData{SAMLNameID}       // '' )
+            && length( $UserData{SAMLSessionIndex} // '' )
+            )
+        {
+            my $AuthModule = $ConfigObject->Get( 'Customer::AuthModule' . $UserData{UserAuthBackend} ) || '';
+            if ( $AuthModule eq 'Kernel::System::CustomerAuth::SAML' ) {
+                my $AuthObject = $Kernel::OM->Get('Kernel::System::CustomerAuth');
+
+                $SAMLLogoutURL = $AuthObject->InitiateSAMLLogout(
+                    Count        => $UserData{UserAuthBackend},
+                    NameID       => $UserData{SAMLNameID},
+                    NameIDFormat => $UserData{SAMLNameIDFormat},
+                    SessionIndex => $UserData{SAMLSessionIndex},
+                );
+
+                # Replay protection for the SAMLSLO confirmation below, mirroring the
+                # CustomerUserSAMLRequestID<Count> cookie already used for login.
+                if ($SAMLLogoutURL) {
+                    my $LogoutRequestID = $AuthObject->GetSAMLLogoutRequestID(
+                        Count => $UserData{UserAuthBackend},
+                    );
+                    if ($LogoutRequestID) {
+                        $LayoutObject->{SetCookies}->{SAMLLogoutRequestIDCookie} = $ParamObject->SetCookie(
+                            Key      => "SAMLLogoutRequestID$UserData{UserAuthBackend}",
+                            Value    => $LogoutRequestID,
+                            Expires  => '+10m',
+                            Path     => $ConfigObject->Get('ScriptAlias'),
+                            Secure   => $CookieSecureAttribute,
+                            HTTPOnly => 1,
+                        );
+                    }
+                }
+            }
+        }
+
         # remove session id
         if ( !$SessionObject->RemoveSessionID( SessionID => $Param{SessionID} ) ) {
             $LayoutObject->CustomerFatalError(
                 Comment => Translatable('Please contact the administrator.')
             );
             return;
+        }
+
+        # SAML: redirect to the Identity Provider's logout endpoint, taking priority over the
+        # generic CustomerPanelLogoutURL below - local logout has already happened either way.
+        if ($SAMLLogoutURL) {
+            print $LayoutObject->Redirect(
+                ExtURL => $SAMLLogoutURL,
+            );
+            return 1;
         }
 
         # redirect to alternate login
@@ -598,6 +661,40 @@ sub Run {
         }
 
         # show logout screen
+        my $LogoutMessage = $LayoutObject->{LanguageObject}->Translate('Logout successful.');
+
+        $LayoutObject->Print(
+            Output => \$LayoutObject->CustomerLogin(
+                Title       => 'Logout',
+                Message     => $LogoutMessage,
+                MessageType => 'Success',
+                %Param,
+            ),
+        );
+        return 1;
+    }
+
+    # SAML Single Logout confirmation - the Identity Provider redirects back here after an
+    # SP-initiated logout (see the Logout branch above). This never touches the session
+    # store: the local session was already removed before redirecting to the IdP, so there
+    # is nothing left to do here except verify the IdP's signature (for diagnosability) and
+    # show the same logout-successful screen regardless of the outcome.
+    elsif ( $Param{Action} eq 'SAMLSLO' ) {
+
+        my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+        my $Count        = $ParamObject->GetParam( Param => 'Count' ) // '';
+
+        my $AuthModule = $ConfigObject->Get( 'Customer::AuthModule' . $Count ) || '';
+        if ( $AuthModule eq 'Kernel::System::CustomerAuth::SAML' ) {
+            my $ExpectedLogoutRequestID = $ParamObject->GetCookie( Key => "SAMLLogoutRequestID$Count" );
+
+            $Kernel::OM->Get('Kernel::System::CustomerAuth')->VerifySAMLLogoutResponse(
+                Count                   => $Count,
+                QueryString             => $ENV{QUERY_STRING} || '',
+                ExpectedLogoutRequestID => $ExpectedLogoutRequestID,
+            );
+        }
+
         my $LogoutMessage = $LayoutObject->{LanguageObject}->Translate('Logout successful.');
 
         $LayoutObject->Print(

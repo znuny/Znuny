@@ -1251,11 +1251,6 @@ sub CheckDBRequirements {
 
     if ( $Param{DBType} eq 'mysql' && $Result{Successful} == 1 ) {
 
-        # Set innodb_log_file_size.
-        my $MySQLInnoDBLogFileSize            = 0;
-        my $MySQLInnoDBLogFileSizeMinimum     = 256;
-        my $MySQLInnoDBLogFileSizeRecommended = 512;
-
         # Default storage engine variable has changed its name in MySQL 5.5.3, we need to support both of them for now.
         #   <= 5.5.2 storage_engine
         #   >= 5.5.3 default_storage_engine
@@ -1266,18 +1261,47 @@ sub CheckDBRequirements {
 
         if ( lc $DefaultStorageEngine eq 'innodb' ) {
 
-            my $Data = $Result{DBH}->selectall_arrayref("SHOW variables WHERE Variable_name = 'innodb_log_file_size'");
-            $MySQLInnoDBLogFileSize = $Data->[0]->[1] / 1024 / 1024;
+            # MySQL >= 8.0.30: check innodb_redo_log_capacity instead of innodb_log_file_size
+            my $Data = $Result{DBH}->selectall_arrayref(
+                "SHOW variables WHERE Variable_name = 'innodb_redo_log_capacity'"
+            );
+            if ( IsArrayRefWithData($Data) ) {
+                my $MySQLInnoDBRedoLogCapacityMinimum     = 256;
+                my $MySQLInnoDBRedoLogCapacityRecommended = 512;
 
-            if ( $MySQLInnoDBLogFileSize < $MySQLInnoDBLogFileSizeMinimum ) {
-                $Result{Successful} = 0;
-                $Result{Message}    = $LayoutObject->{LanguageObject}->Translate(
-                    "Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.",
-                    $MySQLInnoDBLogFileSizeMinimum,
-                    $MySQLInnoDBLogFileSize,
-                    $MySQLInnoDBLogFileSizeRecommended,
-                    'https://dev.mysql.com/doc/refman/5.6/en/innodb-parameters.html',
+                my $MySQLInnoDBRedoLogCapacity = int( ( $Data->[0]->[1] // 0 ) / 1024 / 1024 );
+
+                if ( $MySQLInnoDBRedoLogCapacity < $MySQLInnoDBRedoLogCapacityMinimum ) {
+                    $Result{Successful} = 0;
+                    $Result{Message}    = $LayoutObject->{LanguageObject}->Translate(
+                        "Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.",
+                        $MySQLInnoDBRedoLogCapacityMinimum,
+                        $MySQLInnoDBRedoLogCapacity,
+                        $MySQLInnoDBRedoLogCapacityRecommended,
+                        'https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_redo_log_capacity',
+                    );
+                }
+
+            }
+            else {
+                my $MySQLInnoDBLogFileSizeMinimum     = 256;
+                my $MySQLInnoDBLogFileSizeRecommended = 512;
+
+                my $Data = $Result{DBH}->selectall_arrayref(
+                    "SHOW variables WHERE Variable_name = 'innodb_log_file_size'"
                 );
+                my $MySQLInnoDBLogFileSize = int( ( IsArrayRefWithData($Data) ? $Data->[0]->[1] : 0 ) / 1024 / 1024 );
+
+                if ( $MySQLInnoDBLogFileSize < $MySQLInnoDBLogFileSizeMinimum ) {
+                    $Result{Successful} = 0;
+                    $Result{Message}    = $LayoutObject->{LanguageObject}->Translate(
+                        "Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.",
+                        $MySQLInnoDBLogFileSizeMinimum,
+                        $MySQLInnoDBLogFileSize,
+                        $MySQLInnoDBLogFileSizeRecommended,
+                        'https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_log_file_size',
+                    );
+                }
             }
 
             # Check innodb_file_per_table is activated.

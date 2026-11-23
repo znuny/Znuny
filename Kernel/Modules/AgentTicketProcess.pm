@@ -2561,10 +2561,11 @@ sub _RenderPendingTime {
         DiffTime         => $Param{ActivityDialogField}->{DefaultValue}
             || $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Frontend::PendingDiffTime')
             || 86400,
-        Class                => $Error,
-        Validate             => 1,
-        ValidateDateInFuture => 1,
-        Calendar             => $Calendar,
+        Class                      => $Error,
+        Validate                   => 1,
+        ValidateDateInFuture       => 1,
+        PendingSkipUnavailableDays => 1,
+        Calendar                   => $Calendar,
     );
 
     $LayoutObject->Block(

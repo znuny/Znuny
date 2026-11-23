@@ -296,7 +296,7 @@ body.TouchDevice .OverviewLarge > li ul.InlineActions li.ResponsiveActionMenu {
 }
 
 .OverviewLarge .Infos table tr:last-child td:first-child {
-    padding: 0;
+    padding: 0 0 var(--padding-sm) 0;
 }
 
 /*.OverviewLarge .Infos table td label {

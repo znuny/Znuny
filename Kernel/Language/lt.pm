@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.188774703557312;
+    $Self->{Completeness}        = 0.211220110361741;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -269,6 +269,169 @@ sub Data {
         'Do you really want to delete this attachment?' => '',
         'Attachment' => 'Priedas',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+        'Certificate/key is stored in VirtualFS.' => 'Sertifikatas/raktas saugomas VirtualFS.',
+        'No certificate/key set.' => 'Sertifikatas/raktas nenustatytas.',
+        'View certificate details' => 'Rodyti sertifikato informaciją',
+        'The selected certificate/key is not available. Please select or upload it again.' =>
+            'Pasirinktas sertifikatas/raktas nepasiekiamas. Prašome pasirinkti arba įkelti jį dar kartą.',
+        '- Select an existing certificate/key -' => '- Pasirinkite esamą sertifikatą/raktą -',
+        'Paste key' => '',
+        'Paste certificate' => '',
+        'Generate' => '',
+        'Use certificate from metadata' => 'Naudoti sertifikatą iš meta-duomenų',
+        'Extracts the signing certificate embedded in the Identity Provider metadata and stores it here, instead of uploading it separately.' =>
+            'Išskleidžia tapatybės teikėjo meta-duomenyse įtrauktą pasirašymo sertifikatą ir išsaugo jį čia, užuot įkėlus atskirai.',
+        'Paste the PEM text including the BEGIN and END lines.' => 'Įklijuokite PEM tekstą, įskaitant eilutes BEGIN ir END.',
+        'Common Name' => 'Bendrasis pavadinimas',
+        'Key size' => 'Rakto dydis',
+        'Validity (days)' => 'Galiojimas (dienomis)',
+        'Generate self-signed certificate' => 'Generuoti savarankiškai pasirašytą sertifikatą',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+        'Authentication Management' => 'Autentifikavimo valdymas',
+        'Agent authentication' => 'Agento autentifikavimas',
+        'Basic settings' => 'Pagrindiniai nustatymai',
+        'Slot' => 'Lizdas',
+        'Determines which numbered AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Nustato, kurį sunumeruotą AuthModule<N> lizdą užima ši konfigūracija. Siūlomi tik nenaudojami lizdai.',
+        'SAML request settings' => 'SAML užklausos nustatymai',
+        'Login button text' => 'Prisijungimo mygtuko tekstas',
+        'Assertion consumer URL' => 'Tvirtinimų gavėjo URL',
+        'Automatically derived from this system\'s HTTP type, FQDN and script alias - not editable.' =>
+            'Automatiškai nustatomas pagal šios sistemos HTTP tipą, FQDN ir scenarijaus pseudonimą - neredaguojama.',
+        'Znuny appends a ";IsSAMLLogin=1;Count=<N>;" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration\'s slot), so the value the Identity Provider actually receives is:' =>
+            'Znuny prideda priesagą ";IsSAMLLogin=1;Count=<N>;" prie šio URL, kai sudaro tikrąją siunčiamą SAML užklausą (<N> yra šios konfigūracijos lizdas), todėl reikšmė, kurią tapatybės teikėjas iš tikrųjų gauna, yra:',
+        'Copy to clipboard' => 'Kopijuoti į iškarpinę',
+        'Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honor the value from the request. If your IdP\'s field rejects semicolons, register the base URL instead.' =>
+            'Kai kurie tapatybės teikėjai reikalauja, kad kaip ACS URL būtų užregistruota būtent ši reikšmė. Kiti priima aukščiau esantį bazinį URL ir atsižvelgia į užklausos reikšmę. Jei jūsų IdP laukas atmeta kabliataškius, užregistruokite bazinį URL.',
+        'Download SP metadata XML' => 'Atsisiųsti SP meta-duomenų XML',
+        'Issuer (SP entity ID)' => 'Leidėjas (SP objekto ID)',
+        'Requested NameID format' => 'Prašomas NameID formatas',
+        'Unspecified' => 'Nenurodytas',
+        'Persistent' => 'Pastovus',
+        'Transient' => 'Laikinas',
+        'Email address' => 'El. pašto adresas',
+        'Sent as the NameIDPolicy Format in the outgoing request and published in the SP metadata. Change this only if your Identity Provider requires a specific format.' =>
+            'Siunčiama kaip NameIDPolicy Format išsiunčiamoje užklausoje ir paskelbiama SP meta-duomenyse. Keiskite tai tik jei jūsų tapatybės teikėjas reikalauja konkretaus formato.',
+        'Login attribute' => '',
+        'Please enter attribute names separated by commas.' => '',
+        'Optional. By default the NameID is the login. Enter one or more SAML attribute names (Name or FriendlyName), separated by commas, to take the login from the first of these attributes the assertion contains instead, e.g. if the Identity Provider sends a persistent NameID. The attribute must have exactly one value, otherwise the login fails. Changing this changes the login of existing users.' =>
+            '',
+        'Load metadata from URL' => 'Įkelti meta-duomenis iš URL',
+        'Switch off to paste the metadata XML instead. Switching clears the entered URL or XML and the SSL options.' =>
+            'Išjunkite, jei norite įklijuoti meta-duomenų XML. Perjungimas išvalo įvestą URL arba XML ir SSL parinktis.',
+        'Please select a metadata source.' => 'Prašome pasirinkti meta-duomenų šaltinį.',
+        'Metadata URL' => 'Meta-duomenų URL',
+        'Verify' => 'Tikrinti',
+        'Metadata XML' => 'Meta-duomenų XML',
+        'Use custom SSL options for metadata URL fetch' => 'Naudoti pasirinktines SSL parinktis meta-duomenų URL gavimui',
+        'SSL CA file' => 'SSL CA failas',
+        'SSL CA path' => 'SSL CA kelias',
+        'Verify hostname' => 'Tikrinti mazgo vardą',
+        'Certificates and keys' => 'Sertifikatai ir raktai',
+        'SP signing key (used to sign outgoing requests)' => 'SP pasirašymo raktas (naudojamas siunčiamoms užklausoms pasirašyti)',
+        'SP signing certificate (matches the key above)' => 'SP pasirašymo sertifikatas (atitinka aukščiau esantį raktą)',
+        'Required for the SP metadata\'s KeyDescriptor to be published. "Generate" above already produces this together with the key - only needed as a separate step if you uploaded your own key.' =>
+            'Reikalaujama, kad būtų paskelbtas SP meta-duomenų KeyDescriptor. "Generuoti" aukščiau jau sukuria jį kartu su raktu - atskiro žingsnio reikia tik jei įkėlėte savo raktą.',
+        'Signing algorithm' => 'Pasirašymo algoritmas',
+        'SHA-256 (default)' => 'SHA-256 (numatytasis)',
+        'SHA-384' => 'SHA-384',
+        'SHA-512' => 'SHA-512',
+        'SHA-1 (legacy, not recommended)' => 'SHA-1 (pasenęs, nerekomenduojama)',
+        'Used to sign the outgoing request when a signing key is set above. Only change this if your Identity Provider requires a specific algorithm.' =>
+            'Naudojamas siunčiamai užklausai pasirašyti, kai aukščiau nustatytas pasirašymo raktas. Keiskite tai tik jei jūsų tapatybės teikėjas reikalauja konkretaus algoritmo.',
+        'Decrypt encrypted assertions' => 'Iššifruoti šifruotus tvirtinimus',
+        'Uses the SP signing key above to decrypt SAML assertions the Identity Provider encrypts. Has no effect on responses that aren\'t encrypted, so it\'s safe to leave enabled. Requires a signing key above.' =>
+            'Naudoja aukščiau esantį SP pasirašymo raktą tapatybės teikėjo šifruotiems SAML tvirtinimams iššifruoti. Neturi poveikio nešifruotiems atsakymams, todėl galima saugiai palikti įjungtą. Reikia pasirašymo rakto aukščiau.',
+        'Identity provider CA certificate' => 'Tapatybės teikėjo CA sertifikatas',
+        'Required for SAML login to work. Without it, Net::SAML2 cannot verify the Identity Provider\'s response signature and authentication will fail.' =>
+            'Reikalaujama, kad SAML prisijungimas veiktų. Be jo Net::SAML2 negali patikrinti tapatybės teikėjo atsakymo parašo ir autentifikavimas nepavyks.',
+        'Attribute, group and role sync' => 'Atributų, grupių ir rolių sinchronizavimas',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+        'Customer authentication' => 'Kliento autentifikavimas',
+        'Determines which numbered Customer::AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Nustato, kurį sunumeruotą Customer::AuthModule<N> lizdą užima ši konfigūracija. Siūlomi tik nenaudojami lizdai.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+        'SAML wizard' => 'SAML vedlys',
+        'Add agent SAML authentication' => 'Pridėti agento SAML autentifikavimą',
+        'Add customer SAML authentication' => 'Pridėti kliento SAML autentifikavimą',
+        'Deploy configuration' => 'Diegti konfigūraciją',
+        'Deployment failed' => '',
+        'Fix the configurations below and deploy again. Or set a configuration to invalid: its login stops working and the other configurations are deployed.' =>
+            '',
+        'Problem' => '',
+        'Edit' => 'Redaguoti',
+        'Set to invalid and deploy the rest' => '',
+        'Sync' => 'Sinchronizavimas',
+        'Status' => 'Statusas',
+        'Metadata' => 'Meta-duomenys',
+        'Slot %s' => 'Lizdas %s',
+        'Default' => '',
+        'Yes' => 'Taip',
+        'No' => 'Ne',
+        'OK' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+        'Enable sync' => 'Įjungti sinchronizavimą',
+        'Also registers Kernel::System::Auth::Sync::SAML for the same slot, to sync attributes/groups/roles from the SAML assertion on every login.' =>
+            'Taip pat registruoja Kernel::System::Auth::Sync::SAML tam pačiam lizdui, kad sinchronizuotų atributus/grupes/roles iš SAML tvirtinimo kiekvieno prisijungimo metu.',
+        'The AuthSyncModule for this slot is already configured outside of AdminAuthentication - sync cannot be enabled for it.' =>
+            'Šio lizdo AuthSyncModule jau sukonfigūruotas už AdminAuthentication ribų - sinchronizavimo jam įjungti negalima.',
+        'User attribute sync map' => 'Naudotojo atributų sinchronizavimo susiejimas',
+        'Maps Znuny user attributes (left) to SAML assertion attribute names (right).' =>
+            'Susieja Znuny naudotojo atributus (kairėje) su SAML tvirtinimo atributų pavadinimais (dešinėje).',
+        'Znuny attribute' => 'Znuny atributas',
+        'SAML attribute URI' => 'SAML atributo URI',
+        'Initial groups for new users' => 'Pradinės grupės naujiems naudotojams',
+        'Groups (with rw permission) granted only when a brand-new agent is created via sync. Ctrl/Cmd-click to select multiple.' =>
+            'Grupės (su rw leidimu), suteikiamos tik kai sinchronizavimo būdu sukuriamas visiškai naujas agentas. Ctrl/Cmd-spustelėkite, kad pasirinktumėte kelis.',
+        'SAML attribute carrying group values' => 'SAML atributas, kuriame yra grupės reikšmės',
+        'Group sync rules (by group value)' => 'Grupių sinchronizavimo taisyklės (pagal grupės reikšmę)',
+        'Maps a SAML group value to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Susieja SAML grupės reikšmę su Znuny grupe ir leidimais. Ctrl/Cmd-spustelėkite, kad pasirinktumėte kelis leidimus.',
+        'SAML value' => 'SAML reikšmė',
+        'Group sync rules (by arbitrary attribute/value)' => 'Grupių sinchronizavimo taisyklės (pagal bet kurį atributą/reikšmę)',
+        'Maps any SAML attribute name/value combination to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Susieja bet kurią SAML atributo pavadinimo/reikšmės kombinaciją su Znuny grupe ir leidimais. Ctrl/Cmd-spustelėkite, kad pasirinktumėte kelis leidimus.',
+        'SAML attribute' => 'SAML atributas',
+        'Role sync requires at least one active role. Create or activate a role under Admin → Roles.' =>
+            'Rolių sinchronizavimui reikia bent vienos aktyvios rolės. Sukurkite arba aktyvinkite rolę skiltyje Admin → Rolės.',
+        'SAML attribute carrying role values' => 'SAML atributas, kuriame yra rolės reikšmės',
+        'Role sync rules (by role value)' => 'Rolių sinchronizavimo taisyklės (pagal rolės reikšmę)',
+        'Maps a SAML role value to one or more Znuny roles, active or inactive.' =>
+            'Susieja SAML rolės reikšmę su Znuny role, aktyvia arba neaktyvia.',
+        'Active' => 'Aktyvus',
+        'Role sync rules (by arbitrary attribute/value)' => 'Rolių sinchronizavimo taisyklės (pagal bet kurį atributą/reikšmę)',
+        'Maps any SAML attribute name/value combination to one or more Znuny roles, active or inactive.' =>
+            'Susieja bet kurią SAML atributo pavadinimo/reikšmės kombinaciją su Znuny role, aktyvia arba neaktyvia.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+        'Setup steps' => 'Sąrankos žingsniai',
+        'Setup wizard' => 'Sąrankos vedlys',
+        'SAML setup wizard' => 'SAML sąrankos vedlys',
+        'Step' => 'Žingsnis',
+        'What are you setting up?' => 'Ką nustatote?',
+        'Agent authentication - staff logging into the agent interface' =>
+            'Agento autentifikavimas - darbuotojai, prisijungiantys prie agento sąsajos',
+        'Customer authentication - customers logging into the customer portal' =>
+            'Kliento autentifikavimas - klientai, prisijungiantys prie klientų portalo',
+        'Login with SSO' => 'Prisijungti su SSO',
+        'User sync (optional)' => 'Naudotojų sinchronizavimas (pasirinktinai)',
+        'Optionally sync user attributes, groups and roles from the SAML assertion on every login. This can also be set up later on the edit screen.' =>
+            'Pasirinktinai sinchronizuokite naudotojo atributus, grupes ir roles iš SAML tvirtinimo kiekvieno prisijungimo metu. Tai galima nustatyti ir vėliau redagavimo lange.',
+        'Review' => 'Peržiūra',
+        'Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective.' =>
+            'Spustelėkite "Išsaugoti", kad sukurtumėte šią SAML konfigūraciją. Ji dar nebus aktyvi - paskui naudokite veiksmą "Diegti" apžvalgos puslapyje, kad ji įsigaliotų.',
+        'If you skipped the Identity Provider CA certificate here, it is taken from the metadata when saving. Please check it on the edit screen afterwards.' =>
+            '',
+        'You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only).' =>
+            'Galite grįžti į bet kurį ankstesnį žingsnį ir atlikti pakeitimus arba paskui naudoti visą redagavimo langą išplėstinėms parinktims, tokioms kaip atributų/grupių/rolių sinchronizavimas (tik agento autentifikavimas).',
+        'Back' => 'Atgal',
+        'Next' => 'Sekantis',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
         'Add Auto Response' => 'Pridėti Automatinį atsakymą',
         'Filter for Auto Responses' => 'Filtruoti auto. atsakymus',
@@ -326,9 +489,7 @@ sub Data {
             '',
         'Account Status' => '',
         'Account status for: %s' => '',
-        'Status' => 'Statusas',
         'Account' => '',
-        'Edit' => 'Redaguoti',
         'No accounts found.' => '',
         'Communication Log Details (%s)' => '',
         'Direction' => 'Kryptis',
@@ -447,7 +608,6 @@ sub Data {
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => 'Perjungti visiems aktyvią būseną',
-        'Active' => 'Aktyvus',
         'Toggle active state for %s' => 'Perjungti %s aktyvią būseną',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
@@ -1584,14 +1744,11 @@ sub Data {
         'Download package' => 'Parsisiųsti paketą',
         'Rebuild package' => 'Iš naujo surinkti paketą (rebuild)',
         'Package Information' => '',
-        'Metadata' => 'Meta-duomenys',
         'Change Log' => 'Pakeitimų žurnalas',
         'Date' => 'Data',
         'List of Files' => 'Failų sąrašas',
         'Permission' => 'Leidimas',
         'Size' => 'Dydis',
-        'Problem' => '',
-        'OK' => '',
         'Download file from package!' => 'Parsiųsti failą iš paketo!',
         'Required' => 'Reikalaujama',
         'Primary Key' => '',
@@ -2135,7 +2292,6 @@ sub Data {
         'System Email Addresses Management' => 'Sistemos el. pašto adresų valdymas',
         'Add System Email Address' => 'Pridėti sistemos el. pašto adresą',
         'Edit System Email Address' => 'Redaguoti sistemos el. pašto adresą',
-        'Email address' => 'El. pašto adresas',
         'Display name' => 'Rodomas vardas',
         'This email address is already used as system email address.' => '',
         'The display name and email address will be shown on mail you send.' =>
@@ -2350,8 +2506,6 @@ sub Data {
         'All-day' => '',
         'Repeat' => '',
         'Notification' => 'Pranešimas',
-        'Yes' => 'Taip',
-        'No' => 'Ne',
         'No calendars found. Please add a calendar first by using Manage Calendars page.' =>
             '',
 
@@ -2876,10 +3030,11 @@ sub Data {
         'Archive Search' => 'Paieška archyve',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'Turinys',
+        'e.g. Text or Te*t' => '',
         'Save filter settings as default' => 'Išsaugoti filtro nustatymus kaip numatytuosius',
         'Event Type' => '',
         'Save as default' => '',
-        'Back' => 'Atgal',
         'Change Queue' => 'Pakeisti eilę',
         'Add Filter' => 'Pridėti filtrą',
         'Set' => 'Nustatyti',
@@ -3127,7 +3282,6 @@ sub Data {
         'Phone' => 'Telefonas',
         'Web site' => 'Interneto puslapis',
         'Community' => '',
-        'Next' => 'Sekantis',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => 'Išeinančio el. pašto konfigūracija',
@@ -3222,6 +3376,8 @@ sub Data {
         'Delete link' => '',
         'Delete Link' => '',
         'Object#' => 'Objekto numeris',
+        'Remove active filters for this widget.' => '',
+        'No results found.' => 'Rezultatų nerasta.',
         'Add links' => 'Pridėti nuorodas',
         'Delete links' => 'Ištrinti nuorodas',
 
@@ -3628,6 +3784,34 @@ sub Data {
             '',
         'All agents with write permission for the appointment (calendar)' =>
             '',
+
+        # Perl Module: Kernel/Modules/AdminAuthentication.pm
+        'Perl module Net::SAML2 is not installed. SAML authentication cannot work until it is installed on the server.' =>
+            'Perl modulis Net::SAML2 neįdiegtas. SAML autentifikavimas negali veikti, kol jis nebus įdiegtas serveryje.',
+        'Authentication configuration is not in sync with the deployed configuration, but it can\'t be deployed: a valid configuration has a problem, see the status below. Fix it or set it to invalid, then deploy.' =>
+            '',
+        'Authentication configuration is not in sync with the deployed configuration, please deploy.' =>
+            'Autentifikavimo konfigūracija nesutampa su įdiegta konfigūracija, prašome įdiegti.',
+        'No IdP CA certificate was uploaded and none could be taken from the IdP metadata.' =>
+            'IdP CA sertifikatas nebuvo įkeltas ir jo nepavyko paimti iš IdP meta-duomenų.',
+        'Only invalid authentication configurations can be deleted. Please set the configuration to invalid first.' =>
+            'Ištrinti galima tik negaliojančias autentifikavimo konfigūracijas. Prašome pirmiausia nustatyti konfigūraciją kaip negaliojančią.',
+        'Invalid or missing Role.' => 'Negaliojanti arba trūkstama rolė.',
+        'No file was uploaded.' => 'Nebuvo įkeltas joks failas.',
+        'Error storing the uploaded file.' => 'Klaida saugant įkeltą failą.',
+        'Only the SP signing key can be generated.' => 'Galima generuoti tik SP pasirašymo raktą.',
+        'Error generating certificate. Please check the system log.' => 'Klaida generuojant sertifikatą. Prašome patikrinti sistemos žurnalą.',
+        'Error storing the generated key in VirtualFS.' => 'Klaida saugant sugeneruotą raktą VirtualFS.',
+        'Error storing the generated certificate in VirtualFS.' => 'Klaida saugant sugeneruotą sertifikatą VirtualFS.',
+        'Could not find a certificate in the metadata. Please check the URL/XML and try again.' =>
+            'Meta-duomenyse nepavyko rasti sertifikato. Prašome patikrinti URL/XML ir bandyti dar kartą.',
+        'Error storing the certificate.' => 'Klaida saugant sertifikatą.',
+        'Could not read the certificate from VirtualFS.' => 'Nepavyko perskaityti sertifikato iš VirtualFS.',
+        'The authentication configuration was not deployed. The previously deployed configuration is still active.' =>
+            'Autentifikavimo konfigūracija nebuvo įdiegta. Anksčiau įdiegta konfigūracija tebėra aktyvi.',
+        'Please check the system log for details.' => 'Prašome išsamią informaciją žiūrėti sistemos žurnale.',
+        'Authentication configuration not found.' => '',
+        'Could not set the authentication configuration to invalid.' => '',
 
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
@@ -4662,6 +4846,8 @@ sub Data {
             '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             '',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            'Klaida: nustatykite duomenų bazėje innodb_redo_log_capacity reikšmę bent į %s MB (dabartinė: %s MB, rekomenduojama: %s MB). Daugiau informacijos rasite adresu %s.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             '',
         'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
@@ -4843,6 +5029,7 @@ sub Data {
         'Linked as' => '',
         'Search Result' => '',
         'Linked' => 'Susijęs',
+        'filter' => 'Filtras',
         'Bulk' => 'Masiškai',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -4971,7 +5158,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => '',
         'Unable to load %s!' => '',
-        'Content' => 'Turinys',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => '',
@@ -5032,6 +5218,34 @@ sub Data {
         'Session invalid. Please log in again.' => '',
         'Session has timed out. Please log in again.' => 'Baigėsi sesijai skirtas laikas. Prisijunkite iš naujo.',
 
+        # Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+        'This is not an unencrypted private key in PEM format (-----BEGIN PRIVATE KEY-----).' =>
+            'Tai nėra nešifruotas privatus raktas PEM formatu (-----BEGIN PRIVATE KEY-----).',
+        'This is not a certificate in PEM format (-----BEGIN CERTIFICATE-----).' =>
+            'Tai nėra sertifikatas PEM formatu (-----BEGIN CERTIFICATE-----).',
+        'The private key could not be read. Only unencrypted private keys are supported.' =>
+            'Privataus rakto nepavyko perskaityti. Palaikomi tik nešifruoti privatūs raktai.',
+        'The certificate could not be read.' => 'Sertifikato nepavyko perskaityti.',
+        'Could not read the SP signing key.' => 'Nepavyko perskaityti SP pasirašymo rakto.',
+        'Could not read the IdP CA certificate.' => 'Nepavyko perskaityti IdP CA sertifikato.',
+        'No IdP CA certificate is stored. It is taken from the IdP metadata on every deploy. Save the configuration to store it.' =>
+            '',
+        'Could not decrypt the SP signing key. Please check the configured encryption key.' =>
+            'Nepavyko iššifruoti SP pasirašymo rakto. Prašome patikrinti sukonfigūruotą šifravimo raktą.',
+        'Net::SAML2 is not installed on the server, metadata cannot be verified.' =>
+            'Net::SAML2 serveryje neįdiegtas, meta-duomenų negalima patikrinti.',
+        'Metadata URL is empty.' => 'Meta-duomenų URL tuščias.',
+        'Metadata XML is empty.' => 'Meta-duomenų XML tuščias.',
+        'Could not parse the metadata. Please check the URL/XML and try again.' =>
+            'Nepavyko išanalizuoti meta-duomenų. Prašome patikrinti URL/XML ir bandyti dar kartą.',
+        'Perl module Crypt::OpenSSL::X509 is not installed, certificate details cannot be parsed.' =>
+            'Perl modulis Crypt::OpenSSL::X509 neįdiegtas, sertifikato informacijos negalima išanalizuoti.',
+        'Could not parse the certificate.' => 'Nepavyko išanalizuoti sertifikato.',
+
+        # Perl Module: Kernel/System/AuthenticationConfig.pm
+        'No authentication plugin is registered for this type.' => 'Šiam tipui nėra užregistruotas joks autentifikavimo įskiepis.',
+        'Could not write the certificate files.' => 'Nepavyko įrašyti sertifikato failų.',
+
         # Perl Module: Kernel/System/AutoResponse.pm
         'Couldn\'t read auto response configuration file. Please make sure the file is valid.' =>
             '',
@@ -5075,9 +5289,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'prieš/po',
         'between' => 'tarp',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -5248,6 +5459,9 @@ sub Data {
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'InnoDB redo žurnalo talpa',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'Nustatymas innodb_redo_log_capacity turi būti bent 256 MB.',
         'InnoDB Log File Size' => '',
         'The setting innodb_log_file_size must be at least 256 MB.' => '',
 
@@ -5552,7 +5766,6 @@ sub Data {
         'All Settings' => '',
 
         # Perl Module: Kernel/System/SysConfig/BaseValueType.pm
-        'Default' => '',
         'Value is not correct! Please, consider updating this field.' => '',
         'Value doesn\'t satisfy regex (%s).' => '',
 
@@ -6010,6 +6223,8 @@ sub Data {
             '',
         'Maximum Number of a calendar shown in a dropdown.' => '',
         'Define the start day of the week for the date picker.' => '',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Nurodo, ar numatytoji laukimo data pagal Ticket::Frontend::PendingDiffTime turi praleisti dienas, kurios yra šventinės arba neturi darbo valandų šiame kalendoriuje.',
         'Adds the permanent vacation days.' => '',
         'Adds the one time vacation days.' => '',
         'Defines the hours and week days to count the working time.' => '',
@@ -6291,6 +6506,8 @@ sub Data {
             '',
         'Frontend module registration (disable company link if no company feature is used).' =>
             '',
+        'Registers the SAML 2.0 authentication plugin for AdminAuthentication.' =>
+            'Registruoja SAML 2.0 autentifikavimo įskiepį AdminAuthentication.',
         'Frontend module registration for the customer interface.' => '',
         'Activates the available themes on the system. Value 1 means active, 0 means inactive.' =>
             '',
@@ -6713,6 +6930,8 @@ sub Data {
             '',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             '',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Dinaminiai laukai, rodomi straipsnių filtro dialogo lange agento sąsajos bilieto mastelio ekrane. Palaikomi tik objekto tipo Straipsnis laukai, kurių tipai yra Tekstas, TextArea, Dropdown, Multiselect ir Checkbox.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>
@@ -7919,6 +8138,8 @@ sub Data {
             '',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             '',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Įjungti kelių pasirinkimų stulpelių filtrus susietiems bilietams sudėtingame susietų objektų valdiklyje (LinkObject::ViewMode = "complex"). Filtrai pasiekiami AgentTicketZoom ir nerodomi AgentLinkObject iškylančiajame lange.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8387,6 +8608,55 @@ sub Data {
             '',
         'Attachment was deleted successfully.' => '',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?' =>
+            'Meta-duomenų šaltinio keitimas pašalina įvestą meta-duomenų URL arba XML ir SSL parinktis. Tęsti?',
+        'Change metadata source' => 'Keisti meta-duomenų šaltinį',
+        'Uploaded key' => 'Įkeltas raktas',
+        'EXPIRED' => 'NEGALIOJA',
+        'expires' => 'baigia galioti',
+        'used by %s configuration(s)' => 'naudoja %s konfigūracija (-os)',
+        'Could not read the certificate.' => 'Nepavyko perskaityti sertifikato.',
+        'Certificate (PEM)' => 'Sertifikatas (PEM)',
+        'Issuer' => 'Leidėjas',
+        'Valid from' => 'Galioja nuo',
+        'Valid until' => 'Galioja iki',
+        'Serial' => 'Serijos numeris',
+        'Fingerprint (SHA-256)' => 'Piršto atspaudas (SHA-256)',
+        'Show raw PEM' => 'Rodyti neapdorotą PEM',
+        'Certificate details' => 'Sertifikato informacija',
+        'Metadata is valid.' => 'Meta-duomenys galioja.',
+        'Entity ID' => 'Objekto ID',
+        'SSO URL' => 'SSO URL',
+        'Includes a signing certificate.' => 'Yra pasirašymo sertifikatas.',
+        'No signing certificate found in the metadata.' => 'Meta-duomenyse pasirašymo sertifikato nerasta.',
+        'Found %s attribute(s) in the metadata.' => 'Meta-duomenyse rasta %s atributas (-ai).',
+        'Verifying...' => 'Tikrinama...',
+        'Metadata verification failed.' => 'Meta-duomenų tikrinimas nepavyko.',
+        'Upload failed.' => 'Įkėlimas nepavyko.',
+        'Please paste a certificate or key first.' => 'Prašome pirmiausia įklijuoti sertifikatą arba raktą.',
+        'Saving the pasted certificate/key failed.' => 'Įklijuoto sertifikato/rakto išsaugoti nepavyko.',
+        'Certificate generation failed.' => 'Sertifikato generavimas nepavyko.',
+        'Please select a metadata source (URL or XML) first.' => 'Prašome pirmiausia pasirinkti meta-duomenų šaltinį (URL arba XML).',
+        'Could not find a certificate in the metadata.' => 'Meta-duomenyse nepavyko rasti sertifikato.',
+        'Copied to clipboard!' => '',
+        'Do you really want to delete this SAML configuration?' => 'Ar tikrai norite ištrinti šią SAML konfigūraciją?',
+        'Delete SAML configuration' => 'Ištrinti SAML konfigūraciją',
+        'There was an error deleting the SAML configuration.' => 'Ištrinant SAML konfigūraciją įvyko klaida.',
+        'NameID (default)' => '',
+        '(pasted XML)' => '(įklijuotas XML)',
+        'Not configured yet' => 'Dar nesukonfigūruota',
+        'Identity provider metadata' => 'Tapatybės teikėjo meta-duomenys',
+        'SP signing key' => 'SP pasirašymo raktas',
+        'Configured' => 'Sukonfigūruota',
+        'Not set' => 'Nenustatyta',
+        'SP signing certificate' => 'SP pasirašymo sertifikatas',
+        'Not set (will be taken from the metadata when saving)' => '',
+        'User sync' => 'Naudotojų sinchronizavimas',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)' =>
+            'Įjungta (%s atributų susiejimai, %s grupės taisyklės, %s rolės taisyklės)',
+        'Please fill in all required fields before continuing.' => 'Prašome užpildyti visus reikalaujamus laukus prieš tęsdami.',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.AutoResponse.js
         'Delete this %s' => '',
         'Deleting the %s and its data. This may take a while...' => '',
@@ -8593,9 +8863,6 @@ sub Data {
         'Please select attachments for download.' => '',
         'Show less' => '',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
-        'Copied to clipboard!' => '',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
         'First select a customer user, then select a customer ID to assign to this ticket.' =>
             '',
@@ -8613,7 +8880,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => '',
         'month' => 'mėnesis',
-        'Remove active filters for this widget.' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '',
@@ -8641,9 +8907,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Search.js
         'Please remove the following words from your search as they cannot be searched for:' =>
             '',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.SharedSecretGenerator.js
-        'Generate' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
@@ -8705,6 +8968,7 @@ sub Data {
             '',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'Nėra darbo valandų',
         'Open date selection' => 'Atverti datos parinkiklį',
         'Invalid date (need a future date)!' => 'Negalima data (turi būti ateities data)!',
         'Invalid date (need a past date)!' => '',
@@ -9196,6 +9460,7 @@ Thanks for your help!
         'Manage POP3 or IMAP accounts to fetch email from.' => 'Valdyti POP3 arba IMAP paskyras laiškams gauti.',
         'Manage S/MIME certificates for email encryption.' => 'Valdyti S/MIME sertifikatus el. laiškų šifravimui.',
         'Manage System Configuration Deployments.' => '',
+        'Manage agent and customer authentication (e.g. SAML 2.0).' => 'Tvarkyti agento ir kliento autentifikavimą (pvz., SAML 2.0).',
         'Manage different calendars.' => '',
         'Manage existing sessions.' => 'Valdyti esamas sesijas.',
         'Manage outbound email profiles.' => '',
@@ -9321,6 +9586,7 @@ Thanks for your help!
         'Running Process Tickets' => '',
         'Russian' => '',
         'S/MIME Certificates' => 'S/MIME sertifikatai',
+        'SAML' => 'SAML',
         'Schedule a maintenance period.' => '',
         'Screen after marking as seen' => '',
         'Screen after marking as unseen' => '',
@@ -9552,6 +9818,7 @@ Thanks for your help!
         '%s MB',
         '%s TB',
         '%s of %s',
+        '(pasted XML)',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9566,6 +9833,7 @@ Thanks for your help!
         'Add new entry',
         'Add to favourites',
         'Agent',
+        'Agent authentication',
         'All occurrences',
         'All-day',
         'An Error Occurred',
@@ -9588,6 +9856,7 @@ Thanks for your help!
         'Article filter',
         'As soon as you use this button or link, you will leave this screen and its current state will be saved automatically. Do you want to continue?',
         'Ascending sort applied, ',
+        'Assertion consumer URL',
         'Attachment was deleted successfully.',
         'Attachments',
         'Aug',
@@ -9598,6 +9867,11 @@ Thanks for your help!
         'Calendar',
         'Cancel',
         'Cannot proceed',
+        'Certificate (PEM)',
+        'Certificate details',
+        'Certificate generation failed.',
+        'Certificate/key is stored in VirtualFS.',
+        'Change metadata source',
         'Clear',
         'Clear all',
         'Clear all filters',
@@ -9610,27 +9884,34 @@ Thanks for your help!
         'Clone',
         'Clone Process',
         'Clone web service',
+        'Close',
         'Close preview',
         'Close this dialog',
         'Collapse',
         'Complex %s with %s arguments',
+        'Configured',
         'Confirm',
         'Copied to clipboard!',
         'Copy Ticket Number',
         'Copy Ticket Number + Title',
         'Copy ticket information',
+        'Could not find a certificate in the metadata.',
         'Could not load activities.',
         'Could not open popup window. Please disable any popup blockers for this application.',
+        'Could not read the certificate.',
         'Current selection',
         'Currently not possible',
+        'Customer authentication',
         'Customer interface does not support articles not visible for customers.',
         'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',
         'December',
+        'Decrypt encrypted assertions',
         'Delete',
         'Delete Entity',
+        'Delete SAML configuration',
         'Delete conditions',
         'Delete draft',
         'Delete error handling module',
@@ -9664,10 +9945,12 @@ Thanks for your help!
         'Deployment successful. You\'re being redirected...',
         'Descending sort applied, ',
         'Description',
+        'Disabled',
         'Dismiss',
         'Do not show this warning again.',
         'Do you really want to continue?',
         'Do you really want to delete "%s"?',
+        'Do you really want to delete this SAML configuration?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
         'Do you really want to delete this key?',
@@ -9684,11 +9967,14 @@ Thanks for your help!
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
+        'EXPIRED',
         'Edit Field Details',
         'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)',
         'End date',
+        'Entity ID',
         'Error',
         'Error during AJAX communication',
         'Error during AJAX communication. Status: %s, Error: %s',
@@ -9702,8 +9988,10 @@ Thanks for your help!
         'February',
         'Filter',
         'Filters',
+        'Fingerprint (SHA-256)',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
+        'Found %s attribute(s) in the metadata.',
         'Fr',
         'Fri',
         'Friday',
@@ -9713,13 +10001,18 @@ Thanks for your help!
         'Grouped',
         'Help',
         'Hide EntityIDs',
+        'Identity provider CA certificate',
+        'Identity provider metadata',
         'If you now leave this page, all open popup windows will be closed, too!',
         'Import web service',
+        'Includes a signing certificate.',
         'Information about the Znuny Daemon',
         'Insert selected customer user(s) into the "%s:" field.',
         'Invalid date (need a future date)!',
         'Invalid date (need a past date)!',
         'Invalid date!',
+        'Issuer',
+        'Issuer (SP entity ID)',
         'It is going to be deleted from the field, please try again.',
         'It is not possible to add a new event trigger because the event is not set.',
         'It is not possible to set this entry to invalid. All affected configuration settings have to be changed beforehand.',
@@ -9737,6 +10030,8 @@ Thanks for your help!
         'Loading, please wait...',
         'Loading...',
         'Location',
+        'Login attribute',
+        'Login button text',
         'Mail check successful.',
         'Mapping for Key',
         'Mapping for Key %s',
@@ -9744,15 +10039,20 @@ Thanks for your help!
         'March',
         'May',
         'May_long',
+        'Metadata is valid.',
+        'Metadata verification failed.',
         'Mo',
         'Mon',
         'Monday',
         'Month',
         'Name',
+        'NameID (default)',
         'Namespace %s could not be initialized, because %s could not be found.',
         'Next',
+        'No',
         'No Data Available.',
         'No TransitionActions assigned.',
+        'No certificate/key set.',
         'No data found.',
         'No dialogs assigned yet. Just pick an activity dialog from the list on the left and drag it here.',
         'No matches found.',
@@ -9760,9 +10060,14 @@ Thanks for your help!
         'No response from get package upgrade result.',
         'No response from get package upgrade run status.',
         'No response from package upgrade all.',
+        'No signing certificate found in the metadata.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
+        'Not configured yet',
+        'Not set',
+        'Not set (will be taken from the metadata when saving)',
         'Notice',
         'Notification',
         'Nov',
@@ -9779,10 +10084,13 @@ Thanks for your help!
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
+        'Please fill in all required fields before continuing.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
+        'Please paste a certificate or key first.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select a metadata source (URL or XML) first.',
         'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
@@ -9816,11 +10124,15 @@ Thanks for your help!
         'Restore web service configuration',
         'Rule',
         'Running',
+        'SP signing certificate',
+        'SP signing key',
+        'SSO URL',
         'Sa',
         'Sat',
         'Saturday',
         'Save',
         'Save and update automatically',
+        'Saving the pasted certificate/key failed.',
         'Scale preview content',
         'Search',
         'Search attributes',
@@ -9833,6 +10145,7 @@ Thanks for your help!
         'Select files or drop them here',
         'Sep',
         'September',
+        'Serial',
         'Setting a template will overwrite any text or attachment.',
         'Settings',
         'Show',
@@ -9841,7 +10154,9 @@ Thanks for your help!
         'Show less',
         'Show more',
         'Show or hide the content.',
+        'Show raw PEM',
         'Slide the navigation bar',
+        'Slot',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',
         'Sorry, but you can\'t disable all methods for this notification.',
         'Sorry, the only existing condition can\'t be removed.',
@@ -9856,12 +10171,14 @@ Thanks for your help!
         'Status',
         'Stream',
         'Su',
+        'Subject',
         'Successful',
         'Sun',
         'Sunday',
         'Support Bundle',
         'Switch to desktop mode',
         'Switch to mobile mode',
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?',
         'Team',
         'Th',
         'The activities could not be marked as seen.',
@@ -9883,6 +10200,7 @@ Thanks for your help!
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',
+        'There was an error deleting the SAML configuration.',
         'There was an error deleting the attachment. Please check the logs for more information.',
         'There was an error. Please save all settings you are editing and check the logs for more information.',
         'This Activity cannot be deleted because it is the Start Activity.',
@@ -9914,15 +10232,22 @@ Thanks for your help!
         'Tu',
         'Tue',
         'Tuesday',
+        'Type',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.',
         'Unknown',
         'Unlock setting.',
         'Update All Packages',
         'Update all packages',
         'Update manually',
+        'Upload failed.',
         'Upload information',
+        'Uploaded key',
         'Uploading...',
         'Use options below to narrow down for which tickets appointments will be automatically created.',
+        'User sync',
+        'Valid from',
+        'Valid until',
+        'Verifying...',
         'WARNING: When you change the name of the group \'admin\', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement.',
         'Warning',
         'We',
@@ -9939,12 +10264,14 @@ Thanks for your help!
         'activate to remove the sort',
         'and %s more...',
         'day',
+        'expires',
         'month',
         'more',
         'no',
         'none',
         'or',
         'sorting is disabled',
+        'used by %s configuration(s)',
         'week',
         'yes',
     ];

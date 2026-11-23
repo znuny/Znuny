@@ -6,11 +6,13 @@
 # the enclosed file COPYING for license information (GPL). If you
 # did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
 # --
+## nofilter(TidyAll::Plugin::Znuny::Perl::LayoutObject)
 
 package Kernel::System::DynamicField::Driver::BaseDateTime;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language              qw(Translatable);
@@ -18,6 +20,7 @@ use Kernel::Language              qw(Translatable);
 use parent qw(Kernel::System::DynamicField::Driver::Base);
 
 our @ObjectDependencies = (
+    'Kernel::Output::HTML::Layout',
     'Kernel::System::DateTime',
     'Kernel::System::DB',
     'Kernel::System::DynamicFieldValue',
@@ -392,12 +395,27 @@ sub EditFieldValueGet {
 sub EditFieldValueValidate {
     my ( $Self, %Param ) = @_;
 
-    # get the field value from the http request
-    my $Value = $Self->EditFieldValueGet(
+    # Form values are in the user time zone. Convert them to the Znuny time zone
+    # before comparing with "now", the same way the value is stored.
+    # Do not create a layout object here. Console commands and unit tests have none,
+    # and their values are already in the Znuny time zone.
+    my $LayoutObject = $Self->_FrontendLayoutObjectGet(
+        LayoutObject => $Param{LayoutObject},
+    );
+
+    my %EditFieldValueGetParam = (
         DynamicFieldConfig   => $Param{DynamicFieldConfig},
         ParamObject          => $Param{ParamObject},
         ReturnValueStructure => 1,
     );
+
+    if ($LayoutObject) {
+        $EditFieldValueGetParam{LayoutObject}   = $LayoutObject;
+        $EditFieldValueGetParam{TransformDates} = 1;
+    }
+
+    # get the field value from the http request
+    my $Value = $Self->EditFieldValueGet(%EditFieldValueGetParam);
 
     # on normal basis Used field could be empty but if there was no value from EditFieldValueGet()
     # it must be an error
@@ -1221,6 +1239,36 @@ sub ValueLookup {
     }
 
     return $Value;
+}
+
+sub _FrontendLayoutObjectGet {
+    my ( $Self, %Param ) = @_;
+
+    if ( $Param{LayoutObject} ) {
+        return $Param{LayoutObject};
+    }
+
+    # Do not create a layout object. Outside the frontend the value is already
+    # stored in the Znuny time zone.
+    if ( !exists $Kernel::OM->{Objects}->{'Kernel::Output::HTML::Layout'} ) {
+        return;
+    }
+
+    my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    return $LayoutObject;
+}
+
+sub _FrontendUserTimeZoneGet {
+    my ( $Self, %Param ) = @_;
+
+    my $LayoutObject = $Self->_FrontendLayoutObjectGet(%Param);
+
+    if ( $LayoutObject && $LayoutObject->{UserTimeZone} ) {
+        return $LayoutObject->{UserTimeZone};
+    }
+
+    return Kernel::System::DateTime->ZnunyTimeZoneGet();
 }
 
 1;

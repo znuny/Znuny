@@ -76,7 +76,7 @@ sub new {
     # Optional config options
     #
     for my $ConfigKey (
-        qw(RequestMetaDataURLSSLOptions RequestSignKey IdPCACert)
+        qw(RequestMetaDataURLSSLOptions RequestSignKey IdPCACert RequestNameIDFormat RequestSignSigAlg ResponseEncryptKey UserLoginAttribute)
         )
     {
         $Self->{Config}->{$ConfigKey} = $ConfigObject->Get("$ConfigOptionPrefix$ConfigKey$Self->{Count}");
@@ -146,8 +146,33 @@ sub Auth {
         return;
     }
 
-    my $UserID = $Self->{Response}->GetNameID();
+    # The NameID, or the configured login attribute (UserLoginAttribute).
+    my $UserID = $Self->{Response}->GetLogin();
     return $UserID;
+}
+
+sub GetLastSLOData {
+    my ( $Self, %Param ) = @_;
+
+    return $Self->{Response}->GetSLOData();
+}
+
+sub CreateLogoutURL {
+    my ( $Self, %Param ) = @_;
+
+    return $Self->{Request}->CreateLogoutURL(%Param);
+}
+
+sub GetLastLogoutRequestID {
+    my ( $Self, %Param ) = @_;
+
+    return $Self->{Request}->GetLogoutRequestID();
+}
+
+sub VerifySAMLLogoutResponse {
+    my ( $Self, %Param ) = @_;
+
+    return $Self->{Request}->VerifyLogoutRedirect(%Param);
 }
 
 1;

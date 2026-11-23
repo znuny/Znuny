@@ -4532,6 +4532,54 @@ END;
 --
 ;
 BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE authentication_config ADD CONSTRAINT FK_authentication_config_cre88 FOREIGN KEY (create_by) REFERENCES users (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_authentication_config_cre5f ON authentication_config (create_by)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE authentication_config ADD CONSTRAINT FK_authentication_config_cha02 FOREIGN KEY (change_by) REFERENCES users (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_authentication_config_chada ON authentication_config (change_by)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE authentication_config ADD CONSTRAINT FK_authentication_config_val29 FOREIGN KEY (valid_id) REFERENCES valid (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_authentication_config_val5c ON authentication_config (valid_id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
     EXECUTE IMMEDIATE 'ALTER TABLE oauth2_token ADD CONSTRAINT FK_oauth2_token_token_configbb FOREIGN KEY (token_config_id) REFERENCES oauth2_token_config (id)';
 EXCEPTION
   WHEN OTHERS THEN NULL;

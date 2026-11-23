@@ -2353,14 +2353,15 @@ sub _Mask {
     # pending data string
     $Param{PendingDateString} = $LayoutObject->BuildDateSelection(
         %Param,
-        Format               => 'DateInputFormatLong',
-        YearPeriodPast       => 0,
-        YearPeriodFuture     => 5,
-        DiffTime             => $ConfigObject->Get('Ticket::Frontend::PendingDiffTime') || 0,
-        Class                => $Param{Errors}->{DateInvalid}                           || ' ',
-        Validate             => 1,
-        ValidateDateInFuture => 1,
-        Calendar             => $Calendar,
+        Format                     => 'DateInputFormatLong',
+        YearPeriodPast             => 0,
+        YearPeriodFuture           => 5,
+        DiffTime                   => $ConfigObject->Get('Ticket::Frontend::PendingDiffTime') || 0,
+        Class                      => $Param{Errors}->{DateInvalid}                           || ' ',
+        Validate                   => 1,
+        ValidateDateInFuture       => 1,
+        PendingSkipUnavailableDays => 1,
+        Calendar                   => $Calendar,
     );
 
     # Multiple-Autocomplete

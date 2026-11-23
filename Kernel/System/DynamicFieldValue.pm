@@ -591,6 +591,7 @@ Searches/fetches dynamic field value.
         FieldID   => 142,             # ID of dynamic field to search
         Search    => 'test',
         SearchSQL => "dynamic_field_value.value_text = 'test'",
+        ObjectIDs => [ 1, 2, 3 ],     # optional, limit search to these object IDs
     );
 
     Returns [
@@ -629,35 +630,45 @@ sub ValueSearch {
         }
     }
 
+    # Optional object ID filter (skips cache).
+    my @ScopeObjectIDs;
+    if ( defined $Param{ObjectIDs} ) {
+        return [] if !IsArrayRefWithData( $Param{ObjectIDs} );
+        @ScopeObjectIDs = @{ $Param{ObjectIDs} };
+    }
+
     my @Values;
 
-    # Cache handling
+    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+
+    # Cache handling.
     my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
 
     my $CacheType      = 'DynamicFieldValue';
     my $CacheKey       = 'ValueSearch::' . $Param{FieldID};
     my $CacheSearchKey = $Param{Search};
 
-    my $Cache = $CacheObject->Get(
-        Type => $CacheType,
-        Key  => $CacheKey,
-    );
+    my $Cache;
+    if ( !@ScopeObjectIDs ) {
+        $Cache = $CacheObject->Get(
+            Type => $CacheType,
+            Key  => $CacheKey,
+        );
 
-    # Check if a cache entry exists
-    if (
-        IsHashRefWithData($Cache)
-        && exists $Cache->{$CacheSearchKey}
-        && IsArrayRefWithData( $Cache->{$CacheSearchKey} )
-        )
-    {
-        for my $Value ( @{ $Cache->{$CacheSearchKey} } ) {
-            push @Values, $Value;
+        # Check if a cache entry exists
+        if (
+            IsHashRefWithData($Cache)
+            && exists $Cache->{$CacheSearchKey}
+            && IsArrayRefWithData( $Cache->{$CacheSearchKey} )
+            )
+        {
+            for my $Value ( @{ $Cache->{$CacheSearchKey} } ) {
+                push @Values, $Value;
+            }
         }
+
+        return \@Values if @Values;
     }
-
-    return \@Values if @Values;
-
-    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
 
     my $SQL = '
         SELECT id, field_id, object_id, value_text, value_date, value_int
@@ -666,6 +677,12 @@ sub ValueSearch {
             AND ';
 
     $SQL .= $Param{SearchSQL};
+
+    if (@ScopeObjectIDs) {
+        my @QuotedObjectIDs = map { $DBObject->Quote( $_, 'Integer' ) } @ScopeObjectIDs;
+        return if grep { !defined $_ } @QuotedObjectIDs;
+        $SQL .= ' AND dynamic_field_value.object_id IN (' . ( join ', ', @QuotedObjectIDs ) . ')';
+    }
 
     return if !$DBObject->Prepare(
         SQL  => $SQL,
@@ -686,6 +703,9 @@ sub ValueSearch {
             ValueInt  => $Data[5],
         };
     }
+
+    # Skip cache for scoped searches.
+    return \@Values if @ScopeObjectIDs;
 
     # get the cache TTL (in seconds)
     my $CacheTTL = $Kernel::OM->Get('Kernel::Config')->Get('DynamicField::CacheTTL') || 60 * 60 * 12;

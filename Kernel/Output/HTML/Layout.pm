@@ -841,6 +841,9 @@ sub Login {
         $Param{UserNameAutocomplete} = $DisableLoginAutocomplete ? 'off' : 'username';
         $Param{PasswordAutocomplete} = $DisableLoginAutocomplete ? 'off' : 'current-password';
 
+        # Only SAML configured: the SAML login buttons are the only way to log in.
+        $Param{ShowLoginForm} = $Self->_LoginFormNeeded( ConfigKey => 'AuthModule' );
+
         $Self->Block(
             Name => 'LoginBox',
             Data => \%Param,
@@ -921,7 +924,7 @@ sub Login {
         # get lost password
         if (
             $ConfigObject->Get('LostPassword')
-            && $ConfigObject->Get('AuthModule') eq 'Kernel::System::Auth::DB'
+            && ( $ConfigObject->Get('AuthModule') // '' ) eq 'Kernel::System::Auth::DB'
             )
         {
             $Self->Block(
@@ -3634,6 +3637,8 @@ Depending on the SysConfig settings the controls to set the date could be multip
         Area     => 'some area',                  # optional, default 'Agent' (Deprecated)
         DiffTime => 123,                          # optional, default 0, used to set the initial time influencing the
                                                   #   current time (in seconds)
+        PendingSkipUnavailableDays => 1,          # optional (1 or 0), when active apply TimePendingSkipUnavailableDays
+                                                  #   so pending default dates skip holidays and days without working hours
         OverrideTimeZone => 1,                    # optional (1 or 0), when active the time is not translated to the user
                                                   #   time zone
         YearPeriodFuture => 3,                    # optional, used to define the number of years in future to be display
@@ -3711,13 +3716,42 @@ sub BuildDateSelection {
             $DateTimeObject->Add( Seconds => $Param{AddSeconds} );
         }
 
+        # Optionally move the pending default date past holidays and days without working hours.
+        if ( $Param{SkipUnavailableDays} ) {
+            my %IsWorkingDayParam;
+            if ( $Param{Calendar} ) {
+                $IsWorkingDayParam{Calendar} = $Param{Calendar};
+            }
+
+            my $MaxDays = 365;
+            while ( $MaxDays-- > 0 && !$DateTimeObject->IsWorkingDay(%IsWorkingDayParam) ) {
+                $DateTimeObject->Add( Days => 1 );
+            }
+        }
+
         my %Details = %{ $DateTimeObject->Get() };
 
         return map { $Details{$_} } (qw(Second Minute Hour Day Month Year));
     };
 
+    # Resolve whether pending defaults should skip unavailable days for this calendar.
+    my $SkipUnavailableDays = 0;
+    if ( $Param{PendingSkipUnavailableDays} ) {
+        my $SkipUnavailableDaysKey = 'TimePendingSkipUnavailableDays';
+        if (
+            $Param{Calendar}
+            && $ConfigObject->Get( "TimeZone::Calendar" . $Param{Calendar} . "Name" )
+            )
+        {
+            $SkipUnavailableDaysKey .= '::Calendar' . $Param{Calendar};
+        }
+        $SkipUnavailableDays = $ConfigObject->Get($SkipUnavailableDaysKey) ? 1 : 0;
+    }
+
     my ( $s, $m, $h, $D, $M, $Y ) = $GetCurSysDTUnitFromLowest->(
-        AddSeconds => $DiffTime,
+        AddSeconds          => $DiffTime,
+        SkipUnavailableDays => $SkipUnavailableDays,
+        Calendar            => $Param{Calendar},
     );
     my ( $Cs, $Cm, $Ch, $CD, $CM, $CY ) = $GetCurSysDTUnitFromLowest->();
 
@@ -3996,13 +4030,10 @@ sub BuildDateSelection {
         %Param,
     );
 
-    # prepare datepicker for specific calendar
-    my $VacationDays = '';
-    if ( $Param{Calendar} ) {
-        $VacationDays = $Self->DatepickerGetVacationDays(
-            Calendar => $Param{Calendar},
-        );
-    }
+    # prepare datepicker for specific calendar (vacation days and working hours)
+    my $VacationDays = $Self->DatepickerGetVacationDays(
+        Calendar => $Param{Calendar},
+    );
     my $VacationDaysJSON = $Self->JSONEncode(
         Data => $VacationDays,
     );
@@ -4269,6 +4300,9 @@ sub CustomerLogin {
         $Param{UserNameAutocomplete} = $DisableLoginAutocomplete ? 'off' : 'username';
         $Param{PasswordAutocomplete} = $DisableLoginAutocomplete ? 'off' : 'current-password';
 
+        # Only SAML configured: the SAML login buttons are the only way to log in.
+        $Param{ShowLoginForm} = $Self->_LoginFormNeeded( ConfigKey => 'Customer::AuthModule' );
+
         $Self->Block(
             Name => 'LoginBox',
             Data => \%Param,
@@ -4329,7 +4363,7 @@ sub CustomerLogin {
         # get lost password output
         if (
             $ConfigObject->Get('CustomerPanelLostPassword')
-            && $ConfigObject->Get('Customer::AuthModule') eq
+            && ( $ConfigObject->Get('Customer::AuthModule') // '' ) eq
             'Kernel::System::CustomerAuth::DB'
             )
         {
@@ -4346,7 +4380,7 @@ sub CustomerLogin {
         # get create account output
         if (
             $ConfigObject->Get('CustomerPanelCreateAccount')
-            && $ConfigObject->Get('Customer::AuthModule') eq
+            && ( $ConfigObject->Get('Customer::AuthModule') // '' ) eq
             'Kernel::System::CustomerAuth::DB'
             )
 
@@ -7002,6 +7036,43 @@ sub _BuildLastViewsOutput {
     );
 
     return $LastViewHTML;
+}
+
+=head2 _LoginFormNeeded()
+
+Checks if at least one configured authentication module needs the username/password
+login form. SAML (login button) and HTTPBasicAuth (authenticated by the web server)
+don't, every other module (DB, LDAP, Radius, modules from packages) does.
+
+    my $LoginFormNeeded = $LayoutObject->_LoginFormNeeded(
+        ConfigKey => 'AuthModule',    # or 'Customer::AuthModule'
+    );
+
+=cut
+
+sub _LoginFormNeeded {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    my %ModulesWithoutLoginForm = map { $_ => 1 } qw(
+        Kernel::System::Auth::SAML
+        Kernel::System::Auth::HTTPBasicAuth
+        Kernel::System::CustomerAuth::SAML
+        Kernel::System::CustomerAuth::HTTPBasicAuth
+    );
+
+    COUNT:
+    for my $Count ( '', 1 .. 10 ) {
+        my $Module = $ConfigObject->Get("$Param{ConfigKey}$Count");
+
+        next COUNT if !$Module;
+        next COUNT if $ModulesWithoutLoginForm{$Module};
+
+        return 1;
+    }
+
+    return 0;
 }
 
 =head2 _GetShortcutIconsForInterface()

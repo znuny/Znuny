@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.998577075098814;
+    $Self->{Completeness}        = 0.996321275291232;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -274,6 +274,169 @@ sub Data {
         'Do you really want to delete this attachment?' => 'Valóban törölni szeretné ezt a mellékletet?',
         'Attachment' => 'Melléklet',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+        'Certificate/key is stored in VirtualFS.' => 'A tanúsítvány/kulcs a VirtualFS-ben van tárolva.',
+        'No certificate/key set.' => 'Nincs beállítva tanúsítvány/kulcs.',
+        'View certificate details' => 'Tanúsítvány részleteinek megtekintése',
+        'The selected certificate/key is not available. Please select or upload it again.' =>
+            'A kiválasztott tanúsítvány/kulcs nem érhető el. Válassza ki vagy töltse fel újra.',
+        '- Select an existing certificate/key -' => '- Válasszon egy meglévő tanúsítványt/kulcsot -',
+        'Paste key' => '',
+        'Paste certificate' => '',
+        'Generate' => 'Előállítás',
+        'Use certificate from metadata' => 'Tanúsítvány használata a metaadatokból',
+        'Extracts the signing certificate embedded in the Identity Provider metadata and stores it here, instead of uploading it separately.' =>
+            'Kinyeri az identitásszolgáltató metaadataiba ágyazott aláíró tanúsítványt, és itt tárolja el, így nem kell külön feltölteni.',
+        'Paste the PEM text including the BEGIN and END lines.' => 'Illessze be a PEM-szöveget a BEGIN és END sorokkal együtt.',
+        'Common Name' => 'Általános név',
+        'Key size' => 'Kulcsméret',
+        'Validity (days)' => 'Érvényesség (nap)',
+        'Generate self-signed certificate' => 'Önaláírt tanúsítvány előállítása',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+        'Authentication Management' => 'Hitelesítéskezelés',
+        'Agent authentication' => 'Ügyintézői hitelesítés',
+        'Basic settings' => 'Alapbeállítások',
+        'Slot' => 'Hely',
+        'Determines which numbered AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Meghatározza, hogy ez a beállítás melyik számozott AuthModule<N> helyet foglalja el. Csak a nem használt helyek választhatók.',
+        'SAML request settings' => 'SAML-kérés beállításai',
+        'Login button text' => 'Bejelentkezési gomb szövege',
+        'Assertion consumer URL' => 'Állításfogadó URL',
+        'Automatically derived from this system\'s HTTP type, FQDN and script alias - not editable.' =>
+            'Automatikusan származtatva a rendszer HTTP-típusából, teljes tartománynevéből (FQDN) és parancsfájl-álnevéből - nem szerkeszthető.',
+        'Znuny appends a ";IsSAMLLogin=1;Count=<N>;" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration\'s slot), so the value the Identity Provider actually receives is:' =>
+            'A Znuny a tényleges kimenő SAML-kérés összeállításakor egy ";IsSAMLLogin=1;Count=<N>;" utótagot fűz ehhez az URL-hez (<N> ennek a beállításnak a helye), így az identitásszolgáltató ténylegesen ezt az értéket kapja:',
+        'Copy to clipboard' => 'Másolás a vágólapra',
+        'Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honor the value from the request. If your IdP\'s field rejects semicolons, register the base URL instead.' =>
+            'Egyes identitásszolgáltatók megkövetelik, hogy pontosan ez az érték legyen regisztrálva ACS URL-ként. Mások elfogadják a fenti alap URL-t, és a kérésben szereplő értéket veszik figyelembe. Ha az IdP mezője nem fogadja el a pontosvesszőt, regisztrálja inkább az alap URL-t.',
+        'Download SP metadata XML' => 'SP-metaadatok letöltése XML-ként',
+        'Issuer (SP entity ID)' => 'Kibocsátó (SP entitásazonosító)',
+        'Requested NameID format' => 'Kért NameID formátum',
+        'Unspecified' => 'Nem meghatározott',
+        'Persistent' => 'Állandó',
+        'Transient' => 'Átmeneti',
+        'Email address' => 'E-mail-cím',
+        'Sent as the NameIDPolicy Format in the outgoing request and published in the SP metadata. Change this only if your Identity Provider requires a specific format.' =>
+            'A kimenő kérésben NameIDPolicy Format értékként kerül elküldésre, és az SP-metaadatokban kerül közzétételre. Csak akkor módosítsa, ha az identitásszolgáltató egy adott formátumot követel meg.',
+        'Login attribute' => '',
+        'Please enter attribute names separated by commas.' => '',
+        'Optional. By default the NameID is the login. Enter one or more SAML attribute names (Name or FriendlyName), separated by commas, to take the login from the first of these attributes the assertion contains instead, e.g. if the Identity Provider sends a persistent NameID. The attribute must have exactly one value, otherwise the login fails. Changing this changes the login of existing users.' =>
+            '',
+        'Load metadata from URL' => 'Metaadatok betöltése URL-ről',
+        'Switch off to paste the metadata XML instead. Switching clears the entered URL or XML and the SSL options.' =>
+            'Kapcsolja ki, ha inkább a metaadat XML-t szeretné beilleszteni. A váltás törli a megadott URL-t vagy XML-t és az SSL-beállításokat.',
+        'Please select a metadata source.' => 'Válasszon egy metaadatforrást.',
+        'Metadata URL' => 'Metaadat URL',
+        'Verify' => 'Ellenőrzés',
+        'Metadata XML' => 'Metaadat XML',
+        'Use custom SSL options for metadata URL fetch' => 'Egyéni SSL-beállítások használata a metaadatok URL-ről való lekéréséhez',
+        'SSL CA file' => 'SSL CA fájl',
+        'SSL CA path' => 'SSL CA útvonal',
+        'Verify hostname' => 'Gépnév ellenőrzése',
+        'Certificates and keys' => 'Tanúsítványok és kulcsok',
+        'SP signing key (used to sign outgoing requests)' => 'SP aláíró kulcs (a kimenő kérések aláírásához)',
+        'SP signing certificate (matches the key above)' => 'SP aláíró tanúsítvány (a fenti kulcshoz tartozik)',
+        'Required for the SP metadata\'s KeyDescriptor to be published. "Generate" above already produces this together with the key - only needed as a separate step if you uploaded your own key.' =>
+            'Szükséges ahhoz, hogy az SP-metaadatok KeyDescriptor eleme közzé legyen téve. A fenti „Előállítás” ezt már a kulccsal együtt létrehozza - külön lépésként csak akkor szükséges, ha saját kulcsot töltött fel.',
+        'Signing algorithm' => 'Aláírási algoritmus',
+        'SHA-256 (default)' => 'SHA-256 (alapértelmezett)',
+        'SHA-384' => 'SHA-384',
+        'SHA-512' => 'SHA-512',
+        'SHA-1 (legacy, not recommended)' => 'SHA-1 (elavult, nem ajánlott)',
+        'Used to sign the outgoing request when a signing key is set above. Only change this if your Identity Provider requires a specific algorithm.' =>
+            'A kimenő kérés aláírására szolgál, ha fent be van állítva aláíró kulcs. Csak akkor módosítsa, ha az identitásszolgáltató egy adott algoritmust követel meg.',
+        'Decrypt encrypted assertions' => 'Titkosított állítások visszafejtése',
+        'Uses the SP signing key above to decrypt SAML assertions the Identity Provider encrypts. Has no effect on responses that aren\'t encrypted, so it\'s safe to leave enabled. Requires a signing key above.' =>
+            'A fenti SP aláíró kulccsal fejti vissza az identitásszolgáltató által titkosított SAML-állításokat. A nem titkosított válaszokra nincs hatással, így nyugodtan engedélyezve hagyható. Fent beállított aláíró kulcsot igényel.',
+        'Identity provider CA certificate' => 'Identitásszolgáltató CA tanúsítványa',
+        'Required for SAML login to work. Without it, Net::SAML2 cannot verify the Identity Provider\'s response signature and authentication will fail.' =>
+            'Szükséges a SAML-bejelentkezés működéséhez. Enélkül a Net::SAML2 nem tudja ellenőrizni az identitásszolgáltató válaszának aláírását, és a hitelesítés sikertelen lesz.',
+        'Attribute, group and role sync' => 'Attribútum-, csoport- és szerepszinkronizálás',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+        'Customer authentication' => 'Ügyfél-hitelesítés',
+        'Determines which numbered Customer::AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Meghatározza, hogy ez a beállítás melyik számozott Customer::AuthModule<N> helyet foglalja el. Csak a nem használt helyek választhatók.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+        'SAML wizard' => 'SAML-varázsló',
+        'Add agent SAML authentication' => 'Ügyintézői SAML-hitelesítés hozzáadása',
+        'Add customer SAML authentication' => 'Ügyfél SAML-hitelesítés hozzáadása',
+        'Deploy configuration' => 'Beállítás üzembe állítása',
+        'Deployment failed' => '',
+        'Fix the configurations below and deploy again. Or set a configuration to invalid: its login stops working and the other configurations are deployed.' =>
+            '',
+        'Problem' => 'Probléma',
+        'Edit' => 'Szerkesztés',
+        'Set to invalid and deploy the rest' => '',
+        'Sync' => 'Szinkronizálás',
+        'Status' => 'Állapot',
+        'Metadata' => 'Metaadatok',
+        'Slot %s' => '%s. hely',
+        'Default' => 'Alapértelmezett',
+        'Yes' => 'Igen',
+        'No' => 'Nem',
+        'OK' => 'OK',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+        'Enable sync' => 'Szinkronizálás engedélyezése',
+        'Also registers Kernel::System::Auth::Sync::SAML for the same slot, to sync attributes/groups/roles from the SAML assertion on every login.' =>
+            'Ugyanahhoz a helyhez a Kernel::System::Auth::Sync::SAML modult is regisztrálja, hogy minden bejelentkezéskor szinkronizálja az attribútumokat/csoportokat/szerepeket a SAML-állításból.',
+        'The AuthSyncModule for this slot is already configured outside of AdminAuthentication - sync cannot be enabled for it.' =>
+            'Az ehhez a helyhez tartozó AuthSyncModule már az AdminAuthentication modulon kívül be van állítva - a szinkronizálás nem engedélyezhető hozzá.',
+        'User attribute sync map' => 'Felhasználói attribútumok szinkronizálási leképezése',
+        'Maps Znuny user attributes (left) to SAML assertion attribute names (right).' =>
+            'A Znuny felhasználói attribútumait (bal oldalon) a SAML-állítás attribútumneveire (jobb oldalon) képezi le.',
+        'Znuny attribute' => 'Znuny attribútum',
+        'SAML attribute URI' => 'SAML-attribútum URI',
+        'Initial groups for new users' => 'Kezdeti csoportok új felhasználóknak',
+        'Groups (with rw permission) granted only when a brand-new agent is created via sync. Ctrl/Cmd-click to select multiple.' =>
+            'Csoportok (rw jogosultsággal), amelyeket csak akkor kap meg egy ügyintéző, ha szinkronizálással teljesen újként jön létre. Több elem kijelöléséhez használja a Ctrl/Cmd + kattintást.',
+        'SAML attribute carrying group values' => 'Csoportértékeket tartalmazó SAML-attribútum',
+        'Group sync rules (by group value)' => 'Csoportszinkronizálási szabályok (csoportérték alapján)',
+        'Maps a SAML group value to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Egy SAML-csoportértéket képez le egy Znuny csoportra és jogosultságokra. Több jogosultság kijelöléséhez használja a Ctrl/Cmd + kattintást.',
+        'SAML value' => 'SAML-érték',
+        'Group sync rules (by arbitrary attribute/value)' => 'Csoportszinkronizálási szabályok (tetszőleges attribútum/érték alapján)',
+        'Maps any SAML attribute name/value combination to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Bármely SAML-attribútumnév/érték kombinációt egy Znuny csoportra és jogosultságokra képez le. Több jogosultság kijelöléséhez használja a Ctrl/Cmd + kattintást.',
+        'SAML attribute' => 'SAML-attribútum',
+        'Role sync requires at least one active role. Create or activate a role under Admin → Roles.' =>
+            'A szerepszinkronizáláshoz legalább egy aktív szerep szükséges. Hozzon létre vagy aktiváljon egy szerepet az Adminisztráció → Szerepek menüpontban.',
+        'SAML attribute carrying role values' => 'Szerepértékeket tartalmazó SAML-attribútum',
+        'Role sync rules (by role value)' => 'Szerepszinkronizálási szabályok (szerepérték alapján)',
+        'Maps a SAML role value to one or more Znuny roles, active or inactive.' =>
+            'Egy SAML-szerepértéket képez le egy Znuny szerepre, aktív vagy inaktív állapottal.',
+        'Active' => 'Aktív',
+        'Role sync rules (by arbitrary attribute/value)' => 'Szerepszinkronizálási szabályok (tetszőleges attribútum/érték alapján)',
+        'Maps any SAML attribute name/value combination to one or more Znuny roles, active or inactive.' =>
+            'Bármely SAML-attribútumnév/érték kombinációt egy Znuny szerepre képez le, aktív vagy inaktív állapottal.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+        'Setup steps' => 'Beállítási lépések',
+        'Setup wizard' => 'Beállítási varázsló',
+        'SAML setup wizard' => 'SAML beállítási varázsló',
+        'Step' => 'Lépés',
+        'What are you setting up?' => 'Mit szeretne beállítani?',
+        'Agent authentication - staff logging into the agent interface' =>
+            'Ügyintézői hitelesítés - az ügyintézői felületre bejelentkező munkatársak',
+        'Customer authentication - customers logging into the customer portal' =>
+            'Ügyfél-hitelesítés - az ügyfélportálra bejelentkező ügyfelek',
+        'Login with SSO' => 'Bejelentkezés SSO-val',
+        'User sync (optional)' => 'Felhasználó-szinkronizálás (elhagyható)',
+        'Optionally sync user attributes, groups and roles from the SAML assertion on every login. This can also be set up later on the edit screen.' =>
+            'A felhasználói attribútumok, csoportok és szerepek igény szerint minden bejelentkezéskor szinkronizálhatók a SAML-állításból. Ez később a szerkesztő képernyőn is beállítható.',
+        'Review' => 'Összegzés',
+        'Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective.' =>
+            'Kattintson a Mentés gombra a SAML-beállítás létrehozásához. Ez még nem lesz aktív - utána használja az áttekintő oldalon az Üzembe állítás műveletet, hogy érvénybe lépjen.',
+        'If you skipped the Identity Provider CA certificate here, it is taken from the metadata when saving. Please check it on the edit screen afterwards.' =>
+            '',
+        'You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only).' =>
+            'Bármelyik korábbi lépésre visszaléphet a módosításokhoz, vagy utána használhatja a teljes szerkesztő képernyőt a speciális beállításokhoz, mint például az attribútum-/csoport-/szerepszinkronizálás (csak ügyintézői hitelesítésnél).',
+        'Back' => 'Vissza',
+        'Next' => 'Következő',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
         'Add Auto Response' => 'Automatikus válasz hozzáadása',
         'Filter for Auto Responses' => 'Szűrő az automatikus válaszokhoz',
@@ -331,9 +494,7 @@ sub Data {
             'Megváltoztathatja a rendezést és az oszlopok sorrendjét az oszlopfejlécre kattintva.',
         'Account Status' => 'Fiókállapot',
         'Account status for: %s' => 'Fiókállapot ennél: %s',
-        'Status' => 'Állapot',
         'Account' => 'Fiók',
-        'Edit' => 'Szerkesztés',
         'No accounts found.' => 'Nem találhatók fiókok.',
         'Communication Log Details (%s)' => 'Kommunikációs napló részletei (%s)',
         'Direction' => 'Irány',
@@ -452,7 +613,6 @@ sub Data {
         'Change Customer Relations for Customer User' => 'Ügyfélkapcsolatok megváltoztatása egy ügyfél-felhasználónál',
         'Change Customer User Relations for Customer' => 'Ügyfél-felhasználó kapcsolatok megváltoztatása egy ügyfélnél',
         'Toggle active state for all' => 'Aktivált állapot ki- és bekapcsolása mindenkinek',
-        'Active' => 'Aktív',
         'Toggle active state for %s' => 'Aktivált állapot ki- és bekapcsolása ehhez: %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
@@ -1589,14 +1749,11 @@ sub Data {
         'Download package' => 'Csomag letöltése',
         'Rebuild package' => 'Csomag újraépítése',
         'Package Information' => 'Csomaginformációk',
-        'Metadata' => 'Metaadatok',
         'Change Log' => 'Változásnapló',
         'Date' => 'Dátum',
         'List of Files' => 'Fájlok listája',
         'Permission' => 'Jogosultság',
         'Size' => 'Méret',
-        'Problem' => 'Probléma',
-        'OK' => 'OK',
         'Download file from package!' => 'Fájl letöltése a csomagból!',
         'Required' => 'Kötelező',
         'Primary Key' => 'Elsődleges kulcs',
@@ -2140,7 +2297,6 @@ sub Data {
         'System Email Addresses Management' => 'Rendszer e-mail-címek kezelése',
         'Add System Email Address' => 'Rendszer e-mail-cím hozzáadása',
         'Edit System Email Address' => 'Rendszer e-mail-cím szerkesztése',
-        'Email address' => 'E-mail-cím',
         'Display name' => 'Megjelenített név',
         'This email address is already used as system email address.' => 'Ez az e-mail-cím már használatban van rendszer e-mail-címként.',
         'The display name and email address will be shown on mail you send.' =>
@@ -2355,8 +2511,6 @@ sub Data {
         'All-day' => 'Egész nap',
         'Repeat' => 'Ismétlés',
         'Notification' => 'Értesítés',
-        'Yes' => 'Igen',
-        'No' => 'Nem',
         'No calendars found. Please add a calendar first by using Manage Calendars page.' =>
             'Nem találhatók naptárak. Először adjon hozzá egy naptárat a naptárak kezelése oldal használatával.',
 
@@ -2881,10 +3035,11 @@ sub Data {
         'Archive Search' => 'Archívum keresés',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'Tartalom',
+        'e.g. Text or Te*t' => 'például Szöveg vagy Sz*eg',
         'Save filter settings as default' => 'Szűrőbeállítások mentése alapértelmezettként',
         'Event Type' => 'Eseménytípus',
         'Save as default' => 'Mentés alapértelmezettként',
-        'Back' => 'Vissza',
         'Change Queue' => 'Várólista módosítása',
         'Add Filter' => 'Szűrő hozzáadása',
         'Set' => 'Beállítás',
@@ -3132,7 +3287,6 @@ sub Data {
         'Phone' => 'Telefon',
         'Web site' => 'Weboldal',
         'Community' => 'Közösség',
-        'Next' => 'Következő',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => 'Kimenő levél beállítása',
@@ -3227,6 +3381,8 @@ sub Data {
         'Delete link' => 'Kapcsolat törlése',
         'Delete Link' => 'Kapcsolat törlése',
         'Object#' => 'Objektum#',
+        'Remove active filters for this widget.' => 'A felületi elem aktív szűrőinek eltávolítása.',
+        'No results found.' => 'Nem található eredmény.',
         'Add links' => 'Kapcsolatok hozzáadása',
         'Delete links' => 'Kapcsolatok törlése',
 
@@ -3633,6 +3789,34 @@ sub Data {
             'Az összes ügyintéző, akiknek (legalább) olvasási jogosultságuk van az időponthoz (naptárhoz)',
         'All agents with write permission for the appointment (calendar)' =>
             'Az összes ügyintéző, akiknek írási jogosultságuk van az időponthoz (naptárhoz)',
+
+        # Perl Module: Kernel/Modules/AdminAuthentication.pm
+        'Perl module Net::SAML2 is not installed. SAML authentication cannot work until it is installed on the server.' =>
+            'A Net::SAML2 Perl-modul nincs telepítve. A SAML-hitelesítés addig nem működik, amíg nincs telepítve a kiszolgálóra.',
+        'Authentication configuration is not in sync with the deployed configuration, but it can\'t be deployed: a valid configuration has a problem, see the status below. Fix it or set it to invalid, then deploy.' =>
+            '',
+        'Authentication configuration is not in sync with the deployed configuration, please deploy.' =>
+            'A hitelesítési beállítás nincs szinkronban az üzembe állított beállítással, állítsa üzembe.',
+        'No IdP CA certificate was uploaded and none could be taken from the IdP metadata.' =>
+            'Nem lett IdP CA tanúsítvány feltöltve, és az IdP metaadataiból sem sikerült kinyerni.',
+        'Only invalid authentication configurations can be deleted. Please set the configuration to invalid first.' =>
+            'Csak az érvénytelen hitelesítési beállítások törölhetők. Először állítsa érvénytelenre a beállítást.',
+        'Invalid or missing Role.' => 'Érvénytelen vagy hiányzó szerep.',
+        'No file was uploaded.' => 'Nem lett fájl feltöltve.',
+        'Error storing the uploaded file.' => 'Hiba a feltöltött fájl tárolásakor.',
+        'Only the SP signing key can be generated.' => 'Csak az SP aláíró kulcs állítható elő.',
+        'Error generating certificate. Please check the system log.' => 'Hiba a tanúsítvány előállításakor. Nézze meg a rendszernaplót.',
+        'Error storing the generated key in VirtualFS.' => 'Hiba az előállított kulcs VirtualFS-ben való tárolásakor.',
+        'Error storing the generated certificate in VirtualFS.' => 'Hiba az előállított tanúsítvány VirtualFS-ben való tárolásakor.',
+        'Could not find a certificate in the metadata. Please check the URL/XML and try again.' =>
+            'Nem található tanúsítvány a metaadatokban. Ellenőrizze az URL-t/XML-t, és próbálja újra.',
+        'Error storing the certificate.' => 'Hiba a tanúsítvány tárolásakor.',
+        'Could not read the certificate from VirtualFS.' => 'Nem sikerült beolvasni a tanúsítványt a VirtualFS-ből.',
+        'The authentication configuration was not deployed. The previously deployed configuration is still active.' =>
+            'A hitelesítési beállítás nem lett üzembe állítva. A korábban üzembe állított beállítás továbbra is aktív.',
+        'Please check the system log for details.' => 'A részletekért nézze meg a rendszernaplót.',
+        'Authentication configuration not found.' => '',
+        'Could not set the authentication configuration to invalid.' => '',
 
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => 'Automatikus válasz hozzáadva!',
@@ -4667,6 +4851,8 @@ sub Data {
             'Hiba: rossz adatbázis-verzió van telepítve (%s). Legalább %s verzió szükséges! ',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Hiba: győződjön meg arról, hogy az adatbázisa elfogad-e %s MB méretűnél nagyobb csomagot (jelenleg csak legfeljebb %s MB méretű csomagot fogad el). A hibák elkerülése érdekében alkalmazkodjon az adatbázisa max_allowed_packet beállításához.',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            'Hiba: állítsa be az adatbázison az innodb_redo_log_capacity értékét legalább %s MB méretűre (jelenleg: %s MB, ajánlott: %s MB). További információkért nézze meg a következőt: %s.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Hiba: állítsa be az adatbázison az innodb_log_file_size értékét legalább %s MB méretűre (jelenleg: %s MB, ajánlott: %s MB). További információkért nézze meg a következőt: %s.',
         'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
@@ -4848,6 +5034,7 @@ sub Data {
         'Linked as' => 'Összekapcsolva mint',
         'Search Result' => 'Keresési eredmény',
         'Linked' => 'Összekapcsolt',
+        'filter' => 'Szűrő',
         'Bulk' => 'Tömeges',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -4976,7 +5163,6 @@ sub Data {
         'Cancel editing and unlock this setting' => 'Szerkesztés megszakítása és a beállítás feloldása',
         'Reset this setting to its default value.' => 'A beállítás visszaállítása az alapértelmezett értékére.',
         'Unable to load %s!' => 'Nem lehet betölteni: %s!',
-        'Content' => 'Tartalom',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'Jegyinformációk',
@@ -5037,6 +5223,34 @@ sub Data {
         'Session invalid. Please log in again.' => 'A munkamenet érvénytelen. Jelentkezzen be újra.',
         'Session has timed out. Please log in again.' => 'A munkamenet túllépte az időkorlátot. Jelentkezzen be újra.',
 
+        # Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+        'This is not an unencrypted private key in PEM format (-----BEGIN PRIVATE KEY-----).' =>
+            'Ez nem egy PEM formátumú, titkosítatlan személyes kulcs (-----BEGIN PRIVATE KEY-----).',
+        'This is not a certificate in PEM format (-----BEGIN CERTIFICATE-----).' =>
+            'Ez nem egy PEM formátumú tanúsítvány (-----BEGIN CERTIFICATE-----).',
+        'The private key could not be read. Only unencrypted private keys are supported.' =>
+            'A személyes kulcsot nem sikerült beolvasni. Csak titkosítatlan személyes kulcsok támogatottak.',
+        'The certificate could not be read.' => 'A tanúsítványt nem sikerült beolvasni.',
+        'Could not read the SP signing key.' => 'Nem sikerült beolvasni az SP aláíró kulcsot.',
+        'Could not read the IdP CA certificate.' => 'Nem sikerült beolvasni az IdP CA tanúsítványt.',
+        'No IdP CA certificate is stored. It is taken from the IdP metadata on every deploy. Save the configuration to store it.' =>
+            '',
+        'Could not decrypt the SP signing key. Please check the configured encryption key.' =>
+            'Nem sikerült visszafejteni az SP aláíró kulcsot. Ellenőrizze a beállított titkosítási kulcsot.',
+        'Net::SAML2 is not installed on the server, metadata cannot be verified.' =>
+            'A Net::SAML2 nincs telepítve a kiszolgálón, a metaadatok nem ellenőrizhetők.',
+        'Metadata URL is empty.' => 'A metaadat URL üres.',
+        'Metadata XML is empty.' => 'A metaadat XML üres.',
+        'Could not parse the metadata. Please check the URL/XML and try again.' =>
+            'Nem sikerült feldolgozni a metaadatokat. Ellenőrizze az URL-t/XML-t, és próbálja újra.',
+        'Perl module Crypt::OpenSSL::X509 is not installed, certificate details cannot be parsed.' =>
+            'A Crypt::OpenSSL::X509 Perl-modul nincs telepítve, a tanúsítvány részletei nem dolgozhatók fel.',
+        'Could not parse the certificate.' => 'Nem sikerült feldolgozni a tanúsítványt.',
+
+        # Perl Module: Kernel/System/AuthenticationConfig.pm
+        'No authentication plugin is registered for this type.' => 'Ehhez a típushoz nincs hitelesítési bővítmény regisztrálva.',
+        'Could not write the certificate files.' => 'Nem sikerült kiírni a tanúsítványfájlokat.',
+
         # Perl Module: Kernel/System/AutoResponse.pm
         'Couldn\'t read auto response configuration file. Please make sure the file is valid.' =>
             'Nem sikerült beolvasni az automatikus válasz beállítófájlját. Győződjön meg arról, hogy a fájl érvényes-e.',
@@ -5080,9 +5294,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'előtt/után',
         'between' => 'között',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => 'például Szöveg vagy Sz*eg',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => 'A mező mellőzése.',
@@ -5253,6 +5464,9 @@ sub Data {
             'Olyan táblák találhatók, amelyek nem „utf8mb4” karakterkészletűek.',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'InnoDB redo napló kapacitása',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'Az innodb_redo_log_capacity beállításnak legalább 256 MB értékűnek kell lennie.',
         'InnoDB Log File Size' => 'InnoDB naplófájl méret',
         'The setting innodb_log_file_size must be at least 256 MB.' => 'Az innodb_log_file_size beállításnak legalább 256 MB értékűnek kell lennie.',
 
@@ -5557,7 +5771,6 @@ sub Data {
         'All Settings' => 'Összes beállítás',
 
         # Perl Module: Kernel/System/SysConfig/BaseValueType.pm
-        'Default' => 'Alapértelmezett',
         'Value is not correct! Please, consider updating this field.' => 'Az érték nem helyes! Érdemes lenne frissíteni ezt a mezőt.',
         'Value doesn\'t satisfy regex (%s).' => 'Az érték nem teljesíti a reguláris kifejezést (%s).',
 
@@ -6015,6 +6228,8 @@ sub Data {
             '',
         'Maximum Number of a calendar shown in a dropdown.' => 'Egy legördülőben megjelenített naptár legnagyobb száma.',
         'Define the start day of the week for the date picker.' => 'A hét kezdőnapjának meghatározása a dátumválasztónál.',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Meghatározza, hogy a Ticket::Frontend::PendingDiffTime alapján számított alapértelmezett várakozási dátumnak ki kell-e hagynia azokat a napokat, amelyek munkaszüneti napok, vagy amelyeken ebben a naptárban nincs munkaidő.',
         'Adds the permanent vacation days.' => 'Hozzáadja az állandó munkaszüneti napokat.',
         'Adds the one time vacation days.' => 'Hozzáadja az egyszeri munkaszüneti napokat.',
         'Defines the hours and week days to count the working time.' => 'Meghatározza az órákat és a hétköznapokat a munkaidő számításához.',
@@ -6296,6 +6511,8 @@ sub Data {
             'Előtétprogram-modul regisztráció (személyes kedvencek megjelenítése az „Adminisztráció” alnavigációs elemeiként).',
         'Frontend module registration (disable company link if no company feature is used).' =>
             'Előtétprogram-modul regisztráció (ügyfél adminisztráció menüpont letiltása, ha nincs vállalat-szolgáltatás használatban).',
+        'Registers the SAML 2.0 authentication plugin for AdminAuthentication.' =>
+            'Regisztrálja a SAML 2.0 hitelesítési bővítményt az AdminAuthentication modulhoz.',
         'Frontend module registration for the customer interface.' => 'Előtétprogram-modul regisztráció az ügyfélfelülethez.',
         'Activates the available themes on the system. Value 1 means active, 0 means inactive.' =>
             'Az elérhető témákat aktiválja a rendszeren. Az 1 érték aktívat, a 0 inaktívat jelent.',
@@ -6718,6 +6935,8 @@ sub Data {
             'Megjeleníti az elszámolt időt egy bejegyzésnél a jegy nagyítás nézeten.',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             'A nagyítás nézeten lévő bejegyzésszűrőt aktiválja, amely megadja, hogy mely bejegyzések legyenek láthatók.',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Az ügyintézői felület jegynagyítás képernyőjének bejegyzésszűrő párbeszédablakában megjelenített dinamikus mezők. Csak a Bejegyzés objektumtípus mezői támogatottak, a következő típusokkal: Szöveg, Szövegdoboz, Legördülő, Többválasztós és Jelölőnégyzet.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             'Megjeleníti az aktuális jeggyel azonos ügyfél-azonosítóval rendelkező összes jegy számát a jegynagyítás nézeten.',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>
@@ -7924,6 +8143,8 @@ sub Data {
             'Alapértelmezett megjelenítési típus a címzett (címzett, másolat) neveihez az ügyintézői jegynagyítás és az ügyfél jegynagyítás képernyőkön.',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             'Alapértelmezett megjelenítési típus a küldő (feladó) neveihez az ügyintézői jegynagyítás és az ügyfél jegynagyítás képernyőkön.',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Többszörös kijelölésű oszlopszűrők engedélyezése a kapcsolt jegyekhez a kapcsolt objektumok összetett felületi elemén (LinkObject::ViewMode = "complex"). A szűrők az AgentTicketZoom nézetben érhetők el, és nem jelennek meg az AgentLinkObject felugró ablakában.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             'Annak meghatározása, hogy mely oszlopok legyenek láthatók a kapcsolt jegyek felületi elemen (LinkObject::ViewMode = „összetett”). Megjegyzés: csak jegyattribútumok és dinamikus mezők (DynamicField_NévX) engedélyezettek a DefaultColumns értékeinél.',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8392,6 +8613,55 @@ sub Data {
             'Hiba történt a melléklet törlésekor. További információkért nézze meg a naplókat.',
         'Attachment was deleted successfully.' => 'A melléklet sikeresen törölve lett.',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?' =>
+            'A metaadatforrás váltása eltávolítja a megadott metaadat URL-t vagy XML-t és az SSL-beállításokat. Folytatja?',
+        'Change metadata source' => 'Metaadatforrás módosítása',
+        'Uploaded key' => 'Feltöltött kulcs',
+        'EXPIRED' => 'LEJÁRT',
+        'expires' => 'lejár',
+        'used by %s configuration(s)' => '%s beállítás használja',
+        'Could not read the certificate.' => 'Nem sikerült beolvasni a tanúsítványt.',
+        'Certificate (PEM)' => 'Tanúsítvány (PEM)',
+        'Issuer' => 'Kibocsátó',
+        'Valid from' => 'Érvényesség kezdete',
+        'Valid until' => 'Érvényesség vége',
+        'Serial' => 'Sorozatszám',
+        'Fingerprint (SHA-256)' => 'Ujjlenyomat (SHA-256)',
+        'Show raw PEM' => 'Nyers PEM megjelenítése',
+        'Certificate details' => 'Tanúsítvány részletek',
+        'Metadata is valid.' => 'A metaadatok érvényesek.',
+        'Entity ID' => 'Entitásazonosító',
+        'SSO URL' => 'SSO URL',
+        'Includes a signing certificate.' => 'Aláíró tanúsítványt tartalmaz.',
+        'No signing certificate found in the metadata.' => 'Nem található aláíró tanúsítvány a metaadatokban.',
+        'Found %s attribute(s) in the metadata.' => '%s attribútum található a metaadatokban.',
+        'Verifying...' => 'Ellenőrzés…',
+        'Metadata verification failed.' => 'A metaadatok ellenőrzése sikertelen.',
+        'Upload failed.' => 'A feltöltés sikertelen.',
+        'Please paste a certificate or key first.' => 'Először illesszen be egy tanúsítványt vagy kulcsot.',
+        'Saving the pasted certificate/key failed.' => 'A beillesztett tanúsítvány/kulcs mentése sikertelen.',
+        'Certificate generation failed.' => 'A tanúsítvány előállítása sikertelen.',
+        'Please select a metadata source (URL or XML) first.' => 'Először válasszon egy metaadatforrást (URL vagy XML).',
+        'Could not find a certificate in the metadata.' => 'Nem található tanúsítvány a metaadatokban.',
+        'Copied to clipboard!' => 'Vágólapra másolva!',
+        'Do you really want to delete this SAML configuration?' => 'Valóban törölni szeretné ezt a SAML-beállítást?',
+        'Delete SAML configuration' => 'SAML-beállítás törlése',
+        'There was an error deleting the SAML configuration.' => 'Hiba történt a SAML-beállítás törlésekor.',
+        'NameID (default)' => '',
+        '(pasted XML)' => '(beillesztett XML)',
+        'Not configured yet' => 'Még nincs beállítva',
+        'Identity provider metadata' => 'Identitásszolgáltató metaadatai',
+        'SP signing key' => 'SP aláíró kulcs',
+        'Configured' => 'Beállítva',
+        'Not set' => 'Nincs megadva',
+        'SP signing certificate' => 'SP aláíró tanúsítvány',
+        'Not set (will be taken from the metadata when saving)' => '',
+        'User sync' => 'Felhasználó-szinkronizálás',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)' =>
+            'Engedélyezve (%s attribútum-leképezés, %s csoportszabály, %s szerepszabály)',
+        'Please fill in all required fields before continuing.' => 'A folytatás előtt töltse ki az összes kötelező mezőt.',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.AutoResponse.js
         'Delete this %s' => 'A(z) %s törlése',
         'Deleting the %s and its data. This may take a while...' => 'A(z) %s és az adatainak törlése folyamatban van. Ez eltarthat egy ideig…',
@@ -8598,9 +8868,6 @@ sub Data {
         'Please select attachments for download.' => 'Válasszon mellékleteket a letöltéshez.',
         'Show less' => 'Kevesebb megjelenítése',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
-        'Copied to clipboard!' => 'Vágólapra másolva!',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
         'First select a customer user, then select a customer ID to assign to this ticket.' =>
             'Először válasszon egy ügyfél-felhasználót, majd válasszon egy ügyfél-azonosítót, hogy hozzárendelje ehhez a jegyhez.',
@@ -8618,7 +8885,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => 'Ellenőrizze a pirosan megjelölt mezőket a helyes bevitelekért.',
         'month' => 'hónap',
-        'Remove active filters for this widget.' => 'A felületi elem aktív szűrőinek eltávolítása.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => 'Kis türelmet…',
@@ -8646,9 +8912,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Search.js
         'Please remove the following words from your search as they cannot be searched for:' =>
             'Távolítsa el a következő szavakat a keresésből, mivel azokra nem lehet rákeresni:',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.SharedSecretGenerator.js
-        'Generate' => 'Előállítás',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
@@ -8710,6 +8973,7 @@ sub Data {
             'Valóban vissza szeretné állítani ezt a beállítást a korábbi értékére?',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'Nincs munkaidő',
         'Open date selection' => 'Dátumkijelölés megnyitása',
         'Invalid date (need a future date)!' => 'Érvénytelen dátum (jövőbeli dátum szükséges)!',
         'Invalid date (need a past date)!' => 'Érvénytelen dátum (múltbeli dátum szükséges)!',
@@ -9212,6 +9476,7 @@ Az Ön ügyfélszolgálati csapata
         'Manage POP3 or IMAP accounts to fetch email from.' => 'POP3 vagy IMAP fiókok kezelése e-mailek letöltéséhez.',
         'Manage S/MIME certificates for email encryption.' => 'S/MIME tanúsítványok kezelése e-mailek titkosításához.',
         'Manage System Configuration Deployments.' => 'Rendszer-konfigurációs üzembe állítások kezelése.',
+        'Manage agent and customer authentication (e.g. SAML 2.0).' => 'Ügyintézői és ügyfél-hitelesítés kezelése (például SAML 2.0).',
         'Manage different calendars.' => 'Különböző naptárak kezelése.',
         'Manage existing sessions.' => 'Meglévő munkamenetek kezelése.',
         'Manage outbound email profiles.' => 'Kimenő e-mail-profilok kezelése.',
@@ -9337,6 +9602,7 @@ Az Ön ügyfélszolgálati csapata
         'Running Process Tickets' => 'Futó folyamatjegyek',
         'Russian' => 'Orosz',
         'S/MIME Certificates' => 'S/MIME tanúsítványok',
+        'SAML' => 'SAML',
         'Schedule a maintenance period.' => 'Egy karbantartási időszakot ütemez.',
         'Screen after marking as seen' => 'Olvasottként megjelölés utáni képernyő',
         'Screen after marking as unseen' => 'Olvasatlanként megjelölés utáni képernyő',
@@ -9568,6 +9834,7 @@ Az Ön ügyfélszolgálati csapata
         '%s MB',
         '%s TB',
         '%s of %s',
+        '(pasted XML)',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9582,6 +9849,7 @@ Az Ön ügyfélszolgálati csapata
         'Add new entry',
         'Add to favourites',
         'Agent',
+        'Agent authentication',
         'All occurrences',
         'All-day',
         'An Error Occurred',
@@ -9604,6 +9872,7 @@ Az Ön ügyfélszolgálati csapata
         'Article filter',
         'As soon as you use this button or link, you will leave this screen and its current state will be saved automatically. Do you want to continue?',
         'Ascending sort applied, ',
+        'Assertion consumer URL',
         'Attachment was deleted successfully.',
         'Attachments',
         'Aug',
@@ -9614,6 +9883,11 @@ Az Ön ügyfélszolgálati csapata
         'Calendar',
         'Cancel',
         'Cannot proceed',
+        'Certificate (PEM)',
+        'Certificate details',
+        'Certificate generation failed.',
+        'Certificate/key is stored in VirtualFS.',
+        'Change metadata source',
         'Clear',
         'Clear all',
         'Clear all filters',
@@ -9626,27 +9900,34 @@ Az Ön ügyfélszolgálati csapata
         'Clone',
         'Clone Process',
         'Clone web service',
+        'Close',
         'Close preview',
         'Close this dialog',
         'Collapse',
         'Complex %s with %s arguments',
+        'Configured',
         'Confirm',
         'Copied to clipboard!',
         'Copy Ticket Number',
         'Copy Ticket Number + Title',
         'Copy ticket information',
+        'Could not find a certificate in the metadata.',
         'Could not load activities.',
         'Could not open popup window. Please disable any popup blockers for this application.',
+        'Could not read the certificate.',
         'Current selection',
         'Currently not possible',
+        'Customer authentication',
         'Customer interface does not support articles not visible for customers.',
         'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',
         'December',
+        'Decrypt encrypted assertions',
         'Delete',
         'Delete Entity',
+        'Delete SAML configuration',
         'Delete conditions',
         'Delete draft',
         'Delete error handling module',
@@ -9680,10 +9961,12 @@ Az Ön ügyfélszolgálati csapata
         'Deployment successful. You\'re being redirected...',
         'Descending sort applied, ',
         'Description',
+        'Disabled',
         'Dismiss',
         'Do not show this warning again.',
         'Do you really want to continue?',
         'Do you really want to delete "%s"?',
+        'Do you really want to delete this SAML configuration?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
         'Do you really want to delete this key?',
@@ -9700,11 +9983,14 @@ Az Ön ügyfélszolgálati csapata
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
+        'EXPIRED',
         'Edit Field Details',
         'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)',
         'End date',
+        'Entity ID',
         'Error',
         'Error during AJAX communication',
         'Error during AJAX communication. Status: %s, Error: %s',
@@ -9718,8 +10004,10 @@ Az Ön ügyfélszolgálati csapata
         'February',
         'Filter',
         'Filters',
+        'Fingerprint (SHA-256)',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
+        'Found %s attribute(s) in the metadata.',
         'Fr',
         'Fri',
         'Friday',
@@ -9729,13 +10017,18 @@ Az Ön ügyfélszolgálati csapata
         'Grouped',
         'Help',
         'Hide EntityIDs',
+        'Identity provider CA certificate',
+        'Identity provider metadata',
         'If you now leave this page, all open popup windows will be closed, too!',
         'Import web service',
+        'Includes a signing certificate.',
         'Information about the Znuny Daemon',
         'Insert selected customer user(s) into the "%s:" field.',
         'Invalid date (need a future date)!',
         'Invalid date (need a past date)!',
         'Invalid date!',
+        'Issuer',
+        'Issuer (SP entity ID)',
         'It is going to be deleted from the field, please try again.',
         'It is not possible to add a new event trigger because the event is not set.',
         'It is not possible to set this entry to invalid. All affected configuration settings have to be changed beforehand.',
@@ -9753,6 +10046,8 @@ Az Ön ügyfélszolgálati csapata
         'Loading, please wait...',
         'Loading...',
         'Location',
+        'Login attribute',
+        'Login button text',
         'Mail check successful.',
         'Mapping for Key',
         'Mapping for Key %s',
@@ -9760,15 +10055,20 @@ Az Ön ügyfélszolgálati csapata
         'March',
         'May',
         'May_long',
+        'Metadata is valid.',
+        'Metadata verification failed.',
         'Mo',
         'Mon',
         'Monday',
         'Month',
         'Name',
+        'NameID (default)',
         'Namespace %s could not be initialized, because %s could not be found.',
         'Next',
+        'No',
         'No Data Available.',
         'No TransitionActions assigned.',
+        'No certificate/key set.',
         'No data found.',
         'No dialogs assigned yet. Just pick an activity dialog from the list on the left and drag it here.',
         'No matches found.',
@@ -9776,9 +10076,14 @@ Az Ön ügyfélszolgálati csapata
         'No response from get package upgrade result.',
         'No response from get package upgrade run status.',
         'No response from package upgrade all.',
+        'No signing certificate found in the metadata.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
+        'Not configured yet',
+        'Not set',
+        'Not set (will be taken from the metadata when saving)',
         'Notice',
         'Notification',
         'Nov',
@@ -9795,10 +10100,13 @@ Az Ön ügyfélszolgálati csapata
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
+        'Please fill in all required fields before continuing.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
+        'Please paste a certificate or key first.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select a metadata source (URL or XML) first.',
         'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
@@ -9832,11 +10140,15 @@ Az Ön ügyfélszolgálati csapata
         'Restore web service configuration',
         'Rule',
         'Running',
+        'SP signing certificate',
+        'SP signing key',
+        'SSO URL',
         'Sa',
         'Sat',
         'Saturday',
         'Save',
         'Save and update automatically',
+        'Saving the pasted certificate/key failed.',
         'Scale preview content',
         'Search',
         'Search attributes',
@@ -9849,6 +10161,7 @@ Az Ön ügyfélszolgálati csapata
         'Select files or drop them here',
         'Sep',
         'September',
+        'Serial',
         'Setting a template will overwrite any text or attachment.',
         'Settings',
         'Show',
@@ -9857,7 +10170,9 @@ Az Ön ügyfélszolgálati csapata
         'Show less',
         'Show more',
         'Show or hide the content.',
+        'Show raw PEM',
         'Slide the navigation bar',
+        'Slot',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',
         'Sorry, but you can\'t disable all methods for this notification.',
         'Sorry, the only existing condition can\'t be removed.',
@@ -9872,12 +10187,14 @@ Az Ön ügyfélszolgálati csapata
         'Status',
         'Stream',
         'Su',
+        'Subject',
         'Successful',
         'Sun',
         'Sunday',
         'Support Bundle',
         'Switch to desktop mode',
         'Switch to mobile mode',
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?',
         'Team',
         'Th',
         'The activities could not be marked as seen.',
@@ -9899,6 +10216,7 @@ Az Ön ügyfélszolgálati csapata
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',
+        'There was an error deleting the SAML configuration.',
         'There was an error deleting the attachment. Please check the logs for more information.',
         'There was an error. Please save all settings you are editing and check the logs for more information.',
         'This Activity cannot be deleted because it is the Start Activity.',
@@ -9930,15 +10248,22 @@ Az Ön ügyfélszolgálati csapata
         'Tu',
         'Tue',
         'Tuesday',
+        'Type',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.',
         'Unknown',
         'Unlock setting.',
         'Update All Packages',
         'Update all packages',
         'Update manually',
+        'Upload failed.',
         'Upload information',
+        'Uploaded key',
         'Uploading...',
         'Use options below to narrow down for which tickets appointments will be automatically created.',
+        'User sync',
+        'Valid from',
+        'Valid until',
+        'Verifying...',
         'WARNING: When you change the name of the group \'admin\', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement.',
         'Warning',
         'We',
@@ -9955,12 +10280,14 @@ Az Ön ügyfélszolgálati csapata
         'activate to remove the sort',
         'and %s more...',
         'day',
+        'expires',
         'month',
         'more',
         'no',
         'none',
         'or',
         'sorting is disabled',
+        'used by %s configuration(s)',
         'week',
         'yes',
     ];

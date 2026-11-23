@@ -526,8 +526,12 @@ Core.Agent.TicketZoom = (function (TargetNS) {
                         Label: Core.Language.Translate("Reset"),
                         Type: 'Secondary',
                         Function: function () {
+                            $('#FulltextFilter').val('');
                             $('#CommunicationChannelFilter').val('').trigger('redraw.InputField');
                             $('#ArticleSenderTypeFilter').val('').trigger('redraw.InputField');
+                            $('#ArticleFilterDialogForm').find('[name^="Search_DynamicField_"]').each(function () {
+                                $(this).val('').trigger('redraw.InputField');
+                            });
                         },
                         Class: 'align-left-auto'
                     },

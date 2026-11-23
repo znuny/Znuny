@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.515256916996047;
+    $Self->{Completeness}        = 0.527743715511956;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -268,6 +268,169 @@ sub Data {
         'Do you really want to delete this attachment?' => 'Adakah anda benar ingin buang lampiran ini?',
         'Attachment' => 'Lampiran',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+        'Certificate/key is stored in VirtualFS.' => 'Sijil/kunci disimpan dalam VirtualFS.',
+        'No certificate/key set.' => 'Tiada sijil/kunci ditetapkan.',
+        'View certificate details' => 'Lihat butiran sijil',
+        'The selected certificate/key is not available. Please select or upload it again.' =>
+            'Sijil/kunci yang dipilih tidak tersedia. Sila pilih atau muat naik semula.',
+        '- Select an existing certificate/key -' => '- Pilih sijil/kunci sedia ada -',
+        'Paste key' => '',
+        'Paste certificate' => '',
+        'Generate' => '',
+        'Use certificate from metadata' => 'Gunakan sijil daripada metadata',
+        'Extracts the signing certificate embedded in the Identity Provider metadata and stores it here, instead of uploading it separately.' =>
+            'Mengekstrak sijil penandatangan yang terbenam dalam metadata Pembekal Identiti dan menyimpannya di sini, bukannya memuat naiknya secara berasingan.',
+        'Paste the PEM text including the BEGIN and END lines.' => 'Tampal teks PEM termasuk baris BEGIN dan END.',
+        'Common Name' => 'Nama umum (CN)',
+        'Key size' => 'Saiz kunci',
+        'Validity (days)' => 'Tempoh sah (hari)',
+        'Generate self-signed certificate' => 'Jana sijil yang ditandatangani sendiri',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+        'Authentication Management' => 'Pengurusan Pengesahan',
+        'Agent authentication' => 'Pengesahan ejen',
+        'Basic settings' => 'Tetapan asas',
+        'Slot' => 'Slot',
+        'Determines which numbered AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Menentukan slot AuthModule<N> bernombor yang diduduki oleh konfigurasi ini. Hanya slot yang belum digunakan ditawarkan.',
+        'SAML request settings' => 'Tetapan permintaan SAML',
+        'Login button text' => 'Teks butang log masuk',
+        'Assertion consumer URL' => 'URL penerima penegasan',
+        'Automatically derived from this system\'s HTTP type, FQDN and script alias - not editable.' =>
+            'Diperoleh secara automatik daripada jenis HTTP, FQDN dan alias skrip sistem ini - tidak boleh diedit.',
+        'Znuny appends a ";IsSAMLLogin=1;Count=<N>;" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration\'s slot), so the value the Identity Provider actually receives is:' =>
+            'Znuny menambahkan akhiran ";IsSAMLLogin=1;Count=<N>;" pada URL ini semasa membina permintaan SAML keluar yang sebenar (<N> ialah slot konfigurasi ini), jadi nilai yang sebenarnya diterima oleh Pembekal Identiti ialah:',
+        'Copy to clipboard' => 'Salin ke papan keratan',
+        'Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honor the value from the request. If your IdP\'s field rejects semicolons, register the base URL instead.' =>
+            'Sesetengah Pembekal Identiti memerlukan nilai tepat ini didaftarkan sebagai URL ACS. Yang lain menerima URL asas di atas dan mematuhi nilai daripada permintaan. Jika medan IdP anda menolak koma bertitik, daftarkan URL asas sebaliknya.',
+        'Download SP metadata XML' => 'Muat turun XML metadata SP',
+        'Issuer (SP entity ID)' => 'Pengeluar (ID entiti SP)',
+        'Requested NameID format' => 'Format NameID yang diminta',
+        'Unspecified' => 'Tidak ditentukan',
+        'Persistent' => 'Kekal',
+        'Transient' => 'Sementara',
+        'Email address' => 'alamat e-mel',
+        'Sent as the NameIDPolicy Format in the outgoing request and published in the SP metadata. Change this only if your Identity Provider requires a specific format.' =>
+            'Dihantar sebagai NameIDPolicy Format dalam permintaan keluar dan diterbitkan dalam metadata SP. Ubah ini hanya jika Pembekal Identiti anda memerlukan format tertentu.',
+        'Login attribute' => '',
+        'Please enter attribute names separated by commas.' => '',
+        'Optional. By default the NameID is the login. Enter one or more SAML attribute names (Name or FriendlyName), separated by commas, to take the login from the first of these attributes the assertion contains instead, e.g. if the Identity Provider sends a persistent NameID. The attribute must have exactly one value, otherwise the login fails. Changing this changes the login of existing users.' =>
+            '',
+        'Load metadata from URL' => 'Muatkan metadata daripada URL',
+        'Switch off to paste the metadata XML instead. Switching clears the entered URL or XML and the SSL options.' =>
+            'Matikan untuk menampal XML metadata sebaliknya. Penukaran akan mengosongkan URL atau XML yang dimasukkan serta pilihan SSL.',
+        'Please select a metadata source.' => 'Sila pilih sumber metadata.',
+        'Metadata URL' => 'URL metadata',
+        'Verify' => 'Sahkan',
+        'Metadata XML' => 'XML metadata',
+        'Use custom SSL options for metadata URL fetch' => 'Gunakan pilihan SSL tersuai untuk pengambilan URL metadata',
+        'SSL CA file' => 'Fail CA SSL',
+        'SSL CA path' => 'Laluan CA SSL',
+        'Verify hostname' => 'Sahkan nama hos',
+        'Certificates and keys' => 'Sijil dan kunci',
+        'SP signing key (used to sign outgoing requests)' => 'Kunci penandatangan SP (digunakan untuk menandatangani permintaan keluar)',
+        'SP signing certificate (matches the key above)' => 'Sijil penandatangan SP (sepadan dengan kunci di atas)',
+        'Required for the SP metadata\'s KeyDescriptor to be published. "Generate" above already produces this together with the key - only needed as a separate step if you uploaded your own key.' =>
+            'Diperlukan supaya KeyDescriptor dalam metadata SP diterbitkan. "Jana" di atas sudah menghasilkan sijil ini bersama kunci - hanya diperlukan sebagai langkah berasingan jika anda memuat naik kunci anda sendiri.',
+        'Signing algorithm' => 'Algoritma tandatangan',
+        'SHA-256 (default)' => 'SHA-256 (lalai)',
+        'SHA-384' => 'SHA-384',
+        'SHA-512' => 'SHA-512',
+        'SHA-1 (legacy, not recommended)' => 'SHA-1 (lama, tidak disyorkan)',
+        'Used to sign the outgoing request when a signing key is set above. Only change this if your Identity Provider requires a specific algorithm.' =>
+            'Digunakan untuk menandatangani permintaan keluar apabila kunci penandatangan ditetapkan di atas. Ubah ini hanya jika Pembekal Identiti anda memerlukan algoritma tertentu.',
+        'Decrypt encrypted assertions' => 'Nyahsulit penegasan yang disulitkan',
+        'Uses the SP signing key above to decrypt SAML assertions the Identity Provider encrypts. Has no effect on responses that aren\'t encrypted, so it\'s safe to leave enabled. Requires a signing key above.' =>
+            'Menggunakan kunci penandatangan SP di atas untuk menyahsulit penegasan SAML yang disulitkan oleh Pembekal Identiti. Tiada kesan pada respons yang tidak disulitkan, jadi selamat untuk dibiarkan dibolehkan. Memerlukan kunci penandatangan di atas.',
+        'Identity provider CA certificate' => 'Sijil CA Pembekal Identiti',
+        'Required for SAML login to work. Without it, Net::SAML2 cannot verify the Identity Provider\'s response signature and authentication will fail.' =>
+            'Diperlukan supaya log masuk SAML berfungsi. Tanpanya, Net::SAML2 tidak dapat mengesahkan tandatangan respons Pembekal Identiti dan pengesahan akan gagal.',
+        'Attribute, group and role sync' => 'Penyelarasan atribut, kumpulan dan peranan',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+        'Customer authentication' => 'Pengesahan pelanggan',
+        'Determines which numbered Customer::AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Menentukan slot Customer::AuthModule<N> bernombor yang diduduki oleh konfigurasi ini. Hanya slot yang belum digunakan ditawarkan.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+        'SAML wizard' => 'Wizard SAML',
+        'Add agent SAML authentication' => 'Tambah pengesahan SAML ejen',
+        'Add customer SAML authentication' => 'Tambah pengesahan SAML pelanggan',
+        'Deploy configuration' => 'Gerakkan konfigurasi',
+        'Deployment failed' => '',
+        'Fix the configurations below and deploy again. Or set a configuration to invalid: its login stops working and the other configurations are deployed.' =>
+            '',
+        'Problem' => 'Masalah',
+        'Edit' => 'Mengedit',
+        'Set to invalid and deploy the rest' => '',
+        'Sync' => 'Selaraskan',
+        'Status' => 'Status',
+        'Metadata' => 'metadata',
+        'Slot %s' => 'Slot %s',
+        'Default' => '',
+        'Yes' => 'Ya',
+        'No' => 'Tidak',
+        'OK' => 'OK',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+        'Enable sync' => 'Bolehkan penyelarasan',
+        'Also registers Kernel::System::Auth::Sync::SAML for the same slot, to sync attributes/groups/roles from the SAML assertion on every login.' =>
+            'Turut mendaftarkan Kernel::System::Auth::Sync::SAML untuk slot yang sama, bagi menyelaraskan atribut/kumpulan/peranan daripada penegasan SAML pada setiap log masuk.',
+        'The AuthSyncModule for this slot is already configured outside of AdminAuthentication - sync cannot be enabled for it.' =>
+            'AuthSyncModule untuk slot ini sudah dikonfigurasikan di luar AdminAuthentication - penyelarasan tidak dapat dibolehkan bagi slot ini.',
+        'User attribute sync map' => 'Peta penyelarasan atribut pengguna',
+        'Maps Znuny user attributes (left) to SAML assertion attribute names (right).' =>
+            'Memetakan atribut pengguna Znuny (kiri) kepada nama atribut penegasan SAML (kanan).',
+        'Znuny attribute' => 'Atribut Znuny',
+        'SAML attribute URI' => 'URI atribut SAML',
+        'Initial groups for new users' => 'Kumpulan awal untuk pengguna baharu',
+        'Groups (with rw permission) granted only when a brand-new agent is created via sync. Ctrl/Cmd-click to select multiple.' =>
+            'Kumpulan (dengan kebenaran rw) yang diberikan hanya apabila ejen baharu dicipta melalui penyelarasan. Ctrl/Cmd-klik untuk memilih berbilang.',
+        'SAML attribute carrying group values' => 'Atribut SAML yang membawa nilai kumpulan',
+        'Group sync rules (by group value)' => 'Peraturan penyelarasan kumpulan (mengikut nilai kumpulan)',
+        'Maps a SAML group value to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Memetakan nilai kumpulan SAML kepada kumpulan dan kebenaran Znuny. Ctrl/Cmd-klik untuk memilih berbilang kebenaran.',
+        'SAML value' => 'Nilai SAML',
+        'Group sync rules (by arbitrary attribute/value)' => 'Peraturan penyelarasan kumpulan (mengikut atribut/nilai sebarang)',
+        'Maps any SAML attribute name/value combination to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Memetakan sebarang gabungan nama/nilai atribut SAML kepada kumpulan dan kebenaran Znuny. Ctrl/Cmd-klik untuk memilih berbilang kebenaran.',
+        'SAML attribute' => 'Atribut SAML',
+        'Role sync requires at least one active role. Create or activate a role under Admin → Roles.' =>
+            'Penyelarasan peranan memerlukan sekurang-kurangnya satu peranan aktif. Cipta atau aktifkan peranan di bawah Admin → Peranan.',
+        'SAML attribute carrying role values' => 'Atribut SAML yang membawa nilai peranan',
+        'Role sync rules (by role value)' => 'Peraturan penyelarasan peranan (mengikut nilai peranan)',
+        'Maps a SAML role value to one or more Znuny roles, active or inactive.' =>
+            'Memetakan nilai peranan SAML kepada peranan Znuny, aktif atau tidak aktif.',
+        'Active' => 'Aktif',
+        'Role sync rules (by arbitrary attribute/value)' => 'Peraturan penyelarasan peranan (mengikut atribut/nilai sebarang)',
+        'Maps any SAML attribute name/value combination to one or more Znuny roles, active or inactive.' =>
+            'Memetakan sebarang gabungan nama/nilai atribut SAML kepada peranan Znuny, aktif atau tidak aktif.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+        'Setup steps' => 'Langkah persediaan',
+        'Setup wizard' => 'Wizard persediaan',
+        'SAML setup wizard' => 'Wizard persediaan SAML',
+        'Step' => 'Langkah',
+        'What are you setting up?' => 'Apakah yang anda sediakan?',
+        'Agent authentication - staff logging into the agent interface' =>
+            'Pengesahan ejen - kakitangan yang log masuk ke antara muka ejen',
+        'Customer authentication - customers logging into the customer portal' =>
+            'Pengesahan pelanggan - pelanggan yang log masuk ke portal pelanggan',
+        'Login with SSO' => 'Log masuk dengan SSO',
+        'User sync (optional)' => 'Penyelarasan pengguna (pilihan)',
+        'Optionally sync user attributes, groups and roles from the SAML assertion on every login. This can also be set up later on the edit screen.' =>
+            'Secara pilihan, selaraskan atribut pengguna, kumpulan dan peranan daripada penegasan SAML pada setiap log masuk. Ini juga boleh ditetapkan kemudian pada skrin edit.',
+        'Review' => 'Semakan',
+        'Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective.' =>
+            'Klik Simpan untuk mencipta konfigurasi SAML ini. Ia belum akan aktif - selepas itu gunakan tindakan Gerakkan pada halaman gambaran keseluruhan untuk menjadikannya berkuat kuasa.',
+        'If you skipped the Identity Provider CA certificate here, it is taken from the metadata when saving. Please check it on the edit screen afterwards.' =>
+            '',
+        'You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only).' =>
+            'Anda boleh kembali ke mana-mana langkah sebelumnya untuk membuat perubahan, atau selepas itu gunakan skrin edit penuh untuk pilihan lanjutan seperti penyelarasan atribut/kumpulan/peranan (pengesahan ejen sahaja).',
+        'Back' => 'Kebelakang',
+        'Next' => 'Seterusnya',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
         'Add Auto Response' => 'Tambah balasan automatik',
         'Filter for Auto Responses' => 'Penapis untuk Tindak Balas Auto',
@@ -325,9 +488,7 @@ sub Data {
             '',
         'Account Status' => '',
         'Account status for: %s' => '',
-        'Status' => 'Status',
         'Account' => '',
-        'Edit' => 'Mengedit',
         'No accounts found.' => '',
         'Communication Log Details (%s)' => '',
         'Direction' => 'Arah',
@@ -446,7 +607,6 @@ sub Data {
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => 'ubah keadaan aktif untuk semua',
-        'Active' => 'Aktif',
         'Toggle active state for %s' => 'ubah keadaan aktif untuk %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
@@ -1583,14 +1743,11 @@ sub Data {
         'Download package' => 'Muat pakej',
         'Rebuild package' => 'membina pakej',
         'Package Information' => '',
-        'Metadata' => 'metadata',
         'Change Log' => 'Perubahan Log',
         'Date' => 'Tarikh',
         'List of Files' => 'Senarai Fail',
         'Permission' => 'Kebenaran',
         'Size' => 'Saiz',
-        'Problem' => 'Masalah',
-        'OK' => 'OK',
         'Download file from package!' => 'Muat turun fail dari pakej!',
         'Required' => 'Diperlukan',
         'Primary Key' => 'Kunci Utama',
@@ -2134,7 +2291,6 @@ sub Data {
         'System Email Addresses Management' => 'Sistem E-mel Alamat Pengurusan',
         'Add System Email Address' => 'Tambah Sistem Alamat E-mel',
         'Edit System Email Address' => 'Edit Alamat E-mel System',
-        'Email address' => 'alamat e-mel',
         'Display name' => 'Paparkan nama',
         'This email address is already used as system email address.' => '',
         'The display name and email address will be shown on mail you send.' =>
@@ -2349,8 +2505,6 @@ sub Data {
         'All-day' => 'Setiap-hari',
         'Repeat' => '',
         'Notification' => 'Pemberitahuan',
-        'Yes' => 'Ya',
-        'No' => 'Tidak',
         'No calendars found. Please add a calendar first by using Manage Calendars page.' =>
             '',
 
@@ -2875,10 +3029,11 @@ sub Data {
         'Archive Search' => 'Carian Arkib',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+        'Content' => 'kandungan',
+        'e.g. Text or Te*t' => '',
         'Save filter settings as default' => 'Simpan tetapan penapis sebagai piawai.',
         'Event Type' => 'Jenis Acara',
         'Save as default' => 'Simpan sebagai lalai',
-        'Back' => 'Kebelakang',
         'Change Queue' => 'Ubah Barisan',
         'Add Filter' => 'Tambah Tapisan',
         'Set' => 'Tetapkan',
@@ -3126,7 +3281,6 @@ sub Data {
         'Phone' => 'Telefon',
         'Web site' => 'Laman web',
         'Community' => '',
-        'Next' => 'Seterusnya',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => 'Konfigurasi penghantaran mel',
@@ -3221,6 +3375,8 @@ sub Data {
         'Delete link' => '',
         'Delete Link' => '',
         'Object#' => 'Objek#',
+        'Remove active filters for this widget.' => 'Buang tapisan aktif untuk wiget ini.',
+        'No results found.' => 'Tiada hasil dijumpai.',
         'Add links' => 'Tambah pautan',
         'Delete links' => 'Padam pautan',
 
@@ -3627,6 +3783,34 @@ sub Data {
             '',
         'All agents with write permission for the appointment (calendar)' =>
             '',
+
+        # Perl Module: Kernel/Modules/AdminAuthentication.pm
+        'Perl module Net::SAML2 is not installed. SAML authentication cannot work until it is installed on the server.' =>
+            'Modul Perl Net::SAML2 tidak dipasang. Pengesahan SAML tidak dapat berfungsi sehingga modul itu dipasang pada pelayan.',
+        'Authentication configuration is not in sync with the deployed configuration, but it can\'t be deployed: a valid configuration has a problem, see the status below. Fix it or set it to invalid, then deploy.' =>
+            '',
+        'Authentication configuration is not in sync with the deployed configuration, please deploy.' =>
+            'Konfigurasi pengesahan tidak selari dengan konfigurasi yang telah digerakkan, sila gerakkan.',
+        'No IdP CA certificate was uploaded and none could be taken from the IdP metadata.' =>
+            'Tiada sijil CA IdP dimuat naik dan tiada yang dapat diambil daripada metadata IdP.',
+        'Only invalid authentication configurations can be deleted. Please set the configuration to invalid first.' =>
+            'Hanya konfigurasi pengesahan yang tidak sah boleh dipadam. Sila tetapkan konfigurasi kepada tidak sah terlebih dahulu.',
+        'Invalid or missing Role.' => 'Peranan tidak sah atau tiada.',
+        'No file was uploaded.' => 'Tiada fail dimuat naik.',
+        'Error storing the uploaded file.' => 'Ralat semasa menyimpan fail yang dimuat naik.',
+        'Only the SP signing key can be generated.' => 'Hanya kunci penandatangan SP boleh dijana.',
+        'Error generating certificate. Please check the system log.' => 'Ralat semasa menjana sijil. Sila semak log sistem.',
+        'Error storing the generated key in VirtualFS.' => 'Ralat semasa menyimpan kunci yang dijana dalam VirtualFS.',
+        'Error storing the generated certificate in VirtualFS.' => 'Ralat semasa menyimpan sijil yang dijana dalam VirtualFS.',
+        'Could not find a certificate in the metadata. Please check the URL/XML and try again.' =>
+            'Tidak dapat mencari sijil dalam metadata. Sila semak URL/XML dan cuba lagi.',
+        'Error storing the certificate.' => 'Ralat semasa menyimpan sijil.',
+        'Could not read the certificate from VirtualFS.' => 'Tidak dapat membaca sijil daripada VirtualFS.',
+        'The authentication configuration was not deployed. The previously deployed configuration is still active.' =>
+            'Konfigurasi pengesahan tidak digerakkan. Konfigurasi yang digerakkan sebelum ini masih aktif.',
+        'Please check the system log for details.' => 'Sila semak log sistem untuk butiran.',
+        'Authentication configuration not found.' => '',
+        'Could not set the authentication configuration to invalid.' => '',
 
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
@@ -4661,6 +4845,8 @@ sub Data {
             '',
         'Error: Please make sure your database accepts packages over %s MB in size (it currently only accepts packages up to %s MB). Please adapt the max_allowed_packet setting of your database in order to avoid errors.' =>
             'Ralat: Sila pastikan pangkalan data anda menerima pakej melebihi saiz %s MB (buat masa ini ia hanya menerima pakej sehingga %s MB). Sila sesuaikan tetapan max_paket_dibenarkan pada pangkalan data anda agar tidak terdapat ralat.',
+        'Error: Please set the value for innodb_redo_log_capacity on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
+            'Ralat: Sila tetapkan nilai untuk innodb_redo_log_capacity pada pangkalan data anda kepada sekurang-kurangnya %s MB ( semasa: %s MB, disyorkan: %s MB) . Untuk maklumat lanjut, sila lihat di %s.',
         'Error: Please set the value for innodb_log_file_size on your database to at least %s MB (current: %s MB, recommended: %s MB). For more information, please have a look at %s.' =>
             'Ralat: Sila tetapkan nilai untuk innodb_log_file_size pada pangkalan data anda kepada sekurang-kurangnya %s MB ( semasa: %s MB, disyorkan: %s MB) . Untuk maklumat lanjut, sila lihat di %s.',
         'Error: Please set the value for innodb_file_per_table on your database to ON.' =>
@@ -4842,6 +5028,7 @@ sub Data {
         'Linked as' => 'Dipautkan sebagai',
         'Search Result' => '',
         'Linked' => 'Dipautkan',
+        'filter' => 'Tapisan',
         'Bulk' => 'Pukal',
 
         # Perl Module: Kernel/Output/HTML/Layout/Ticket.pm
@@ -4970,7 +5157,6 @@ sub Data {
         'Cancel editing and unlock this setting' => '',
         'Reset this setting to its default value.' => '',
         'Unable to load %s!' => '',
-        'Content' => 'kandungan',
 
         # Perl Module: Kernel/Output/HTML/TicketActionCommon/TicketInformation.pm
         'Ticket Information' => 'Informasi Tiket',
@@ -5031,6 +5217,34 @@ sub Data {
         'Session invalid. Please log in again.' => 'Sesi tidak sah. Sila log masuk semula.',
         'Session has timed out. Please log in again.' => 'Sesi ini sudah tamat. Sila log masuk semula',
 
+        # Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+        'This is not an unencrypted private key in PEM format (-----BEGIN PRIVATE KEY-----).' =>
+            'Ini bukan kunci peribadi tidak disulitkan dalam format PEM (-----BEGIN PRIVATE KEY-----).',
+        'This is not a certificate in PEM format (-----BEGIN CERTIFICATE-----).' =>
+            'Ini bukan sijil dalam format PEM (-----BEGIN CERTIFICATE-----).',
+        'The private key could not be read. Only unencrypted private keys are supported.' =>
+            'Kunci peribadi tidak dapat dibaca. Hanya kunci peribadi yang tidak disulitkan disokong.',
+        'The certificate could not be read.' => 'Sijil tidak dapat dibaca.',
+        'Could not read the SP signing key.' => 'Tidak dapat membaca kunci penandatangan SP.',
+        'Could not read the IdP CA certificate.' => 'Tidak dapat membaca sijil CA IdP.',
+        'No IdP CA certificate is stored. It is taken from the IdP metadata on every deploy. Save the configuration to store it.' =>
+            '',
+        'Could not decrypt the SP signing key. Please check the configured encryption key.' =>
+            'Tidak dapat menyahsulit kunci penandatangan SP. Sila semak kunci penyulitan yang dikonfigurasikan.',
+        'Net::SAML2 is not installed on the server, metadata cannot be verified.' =>
+            'Net::SAML2 tidak dipasang pada pelayan, metadata tidak dapat disahkan.',
+        'Metadata URL is empty.' => 'URL metadata kosong.',
+        'Metadata XML is empty.' => 'XML metadata kosong.',
+        'Could not parse the metadata. Please check the URL/XML and try again.' =>
+            'Tidak dapat menghurai metadata. Sila semak URL/XML dan cuba lagi.',
+        'Perl module Crypt::OpenSSL::X509 is not installed, certificate details cannot be parsed.' =>
+            'Modul Perl Crypt::OpenSSL::X509 tidak dipasang, butiran sijil tidak dapat dihurai.',
+        'Could not parse the certificate.' => 'Tidak dapat menghurai sijil.',
+
+        # Perl Module: Kernel/System/AuthenticationConfig.pm
+        'No authentication plugin is registered for this type.' => 'Tiada pemalam pengesahan didaftarkan untuk jenis ini.',
+        'Could not write the certificate files.' => 'Tidak dapat menulis fail sijil.',
+
         # Perl Module: Kernel/System/AutoResponse.pm
         'Couldn\'t read auto response configuration file. Please make sure the file is valid.' =>
             '',
@@ -5074,9 +5288,6 @@ sub Data {
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => 'sebelum/selepas',
         'between' => 'diantara',
-
-        # Perl Module: Kernel/System/DynamicField/Driver/BaseText.pm
-        'e.g. Text or Te*t' => '',
 
         # Perl Module: Kernel/System/DynamicField/Driver/Checkbox.pm
         'Ignore this field.' => '',
@@ -5247,6 +5458,9 @@ sub Data {
             '',
 
         # Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
+        'InnoDB Redo Log Capacity' => 'Kapasiti Redo Log InnoDB',
+        'The setting innodb_redo_log_capacity must be at least 256 MB.' =>
+            'Tetapan innodb_redo_log_capacity haruslah sekurang-kurangnya 256 MB.',
         'InnoDB Log File Size' => 'Saiz Fail Log InnoDB',
         'The setting innodb_log_file_size must be at least 256 MB.' => 'Tetapan saiz_fail_innodb haruslah sekurang-kurangnya 256 MB.',
 
@@ -5551,7 +5765,6 @@ sub Data {
         'All Settings' => '',
 
         # Perl Module: Kernel/System/SysConfig/BaseValueType.pm
-        'Default' => '',
         'Value is not correct! Please, consider updating this field.' => '',
         'Value doesn\'t satisfy regex (%s).' => '',
 
@@ -6009,6 +6222,8 @@ sub Data {
             '',
         'Maximum Number of a calendar shown in a dropdown.' => '',
         'Define the start day of the week for the date picker.' => 'Menetukan hari permulaan mingguan untuk pemilih tarikh.',
+        'Defines whether the pending default date based on Ticket::Frontend::PendingDiffTime should skip days that are holidays or have no working hours in this calendar.' =>
+            'Mentakrifkan sama ada tarikh menunggu lalai berdasarkan Ticket::Frontend::PendingDiffTime harus melangkau hari yang merupakan cuti atau tidak mempunyai waktu bekerja dalam kalendar ini.',
         'Adds the permanent vacation days.' => '',
         'Adds the one time vacation days.' => '',
         'Defines the hours and week days to count the working time.' => 'Mentakrifkan jam dan minggu hari untuk mengira masa berkerja.',
@@ -6290,6 +6505,8 @@ sub Data {
             '',
         'Frontend module registration (disable company link if no company feature is used).' =>
             'Pendaftaran modul frontend (melumpuhkan pautan syarikat jika tiada fungsi syarikat yang digunakan).',
+        'Registers the SAML 2.0 authentication plugin for AdminAuthentication.' =>
+            'Mendaftarkan pemalam pengesahan SAML 2.0 untuk AdminAuthentication.',
         'Frontend module registration for the customer interface.' => 'Pendaftaran modul frontend untuk paparan pelanggan.',
         'Activates the available themes on the system. Value 1 means active, 0 means inactive.' =>
             'Mengaktifkan tema yang disediajan di dalam sistem. Nilai 1 bermaksud aktif, 0 bermaksud tidak aktif.',
@@ -6712,6 +6929,8 @@ sub Data {
             'Pamerkan masa yang diperuntukkan untuk artikel dalam paparan zum tiket.',
         'Activates the article filter in the zoom view to specify which articles should be shown.' =>
             'Mengaktifkan tapisan artikel dalam paparan besar untuk menyatakan artikel yang perlu dipaparkan.',
+        'Dynamic fields shown in the article filter dialog of the ticket zoom screen of the agent interface. Only Article object type fields of types Text, TextArea, Dropdown, Multiselect and Checkbox are supported.' =>
+            'Medan dinamik yang dipaparkan dalam dialog tapisan artikel pada skrin zum tiket antara muka ejen. Hanya medan jenis objek Artikel bagi jenis Teks, Textarea, Dropdown, Pelbagaipilih dan Kotak petak disokong.',
         'Displays the number of all tickets with the same CustomerID as current ticket in the ticket zoom view.' =>
             '',
         'Shows the ticket history (reverse ordered) in the agent interface.' =>
@@ -7920,6 +8139,8 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
             'Jenis paparan default untuk nama penerima (Ke,Cc) dalam AgentTicketZoom dan CustomerTicketZoom.',
         'Default display type for sender (From) names in AgentTicketZoom and CustomerTicketZoom.' =>
             'Jenis paparan default untuk nama penghantar (Daripada) dalam AgentTicketZoom dan CustomerTicketZoom.',
+        'Enable multiselect column filters for linked tickets in the complex linked objects widget (LinkObject::ViewMode = "complex"). Filters are available in AgentTicketZoom and are not shown in the AgentLinkObject popup.' =>
+            'Dayakan tapisan lajur berbilang pilihan untuk tiket yang dipautkan dalam widget kompleks objek yang dipautkan (LinkObject::ViewMode = "complex"). Tapisan tersedia di AgentTicketZoom dan tidak dipaparkan dalam tetingkap timbul AgentLinkObject.',
         'Define which columns are shown in the linked tickets widget (LinkObject::ViewMode = "complex"). Note: Only Ticket attributes and Dynamic Fields (DynamicField_NameX) are allowed for DefaultColumns.' =>
             '',
         'Whether or not to collect meta information from articles using filters configured in Ticket::Frontend::ZoomCollectMetaFilters.' =>
@@ -8388,6 +8609,55 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
             '',
         'Attachment was deleted successfully.' => '',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?' =>
+            'Menukar sumber metadata akan mengalih keluar URL atau XML metadata yang dimasukkan serta pilihan SSL. Sambung?',
+        'Change metadata source' => 'Tukar sumber metadata',
+        'Uploaded key' => 'Kunci yang dimuat naik',
+        'EXPIRED' => 'TAMAT TEMPOH',
+        'expires' => 'tamat tempoh',
+        'used by %s configuration(s)' => 'digunakan oleh %s konfigurasi',
+        'Could not read the certificate.' => 'Tidak dapat membaca sijil.',
+        'Certificate (PEM)' => 'Sijil (PEM)',
+        'Issuer' => 'Pengeluar',
+        'Valid from' => 'Sah dari',
+        'Valid until' => 'Sah hingga',
+        'Serial' => 'Nombor siri',
+        'Fingerprint (SHA-256)' => 'Cap jari (SHA-256)',
+        'Show raw PEM' => 'Tunjukkan PEM mentah',
+        'Certificate details' => 'Butiran sijil',
+        'Metadata is valid.' => 'Metadata sah.',
+        'Entity ID' => 'ID entiti',
+        'SSO URL' => 'URL SSO',
+        'Includes a signing certificate.' => 'Mengandungi sijil penandatangan.',
+        'No signing certificate found in the metadata.' => 'Tiada sijil penandatangan ditemui dalam metadata.',
+        'Found %s attribute(s) in the metadata.' => '%s atribut ditemui dalam metadata.',
+        'Verifying...' => 'Mengesahkan...',
+        'Metadata verification failed.' => 'Pengesahan metadata gagal.',
+        'Upload failed.' => 'Muat naik gagal.',
+        'Please paste a certificate or key first.' => 'Sila tampal sijil atau kunci terlebih dahulu.',
+        'Saving the pasted certificate/key failed.' => 'Gagal menyimpan sijil/kunci yang ditampal.',
+        'Certificate generation failed.' => 'Penjanaan sijil gagal.',
+        'Please select a metadata source (URL or XML) first.' => 'Sila pilih sumber metadata (URL atau XML) terlebih dahulu.',
+        'Could not find a certificate in the metadata.' => 'Tidak dapat mencari sijil dalam metadata.',
+        'Copied to clipboard!' => '',
+        'Do you really want to delete this SAML configuration?' => 'Adakah anda pasti mahu memadam konfigurasi SAML ini?',
+        'Delete SAML configuration' => 'Padam konfigurasi SAML',
+        'There was an error deleting the SAML configuration.' => 'Terdapat ralat semasa memadam konfigurasi SAML.',
+        'NameID (default)' => '',
+        '(pasted XML)' => '(XML yang ditampal)',
+        'Not configured yet' => 'Belum dikonfigurasikan',
+        'Identity provider metadata' => 'Metadata Pembekal Identiti',
+        'SP signing key' => 'Kunci penandatangan SP',
+        'Configured' => 'Dikonfigurasikan',
+        'Not set' => 'Tidak ditetapkan',
+        'SP signing certificate' => 'Sijil penandatangan SP',
+        'Not set (will be taken from the metadata when saving)' => '',
+        'User sync' => 'Penyelarasan pengguna',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)' =>
+            'Dibolehkan (%s pemetaan atribut, %s peraturan kumpulan, %s peraturan peranan)',
+        'Please fill in all required fields before continuing.' => 'Sila isi semua medan yang diperlukan sebelum meneruskan.',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.AutoResponse.js
         'Delete this %s' => '',
         'Deleting the %s and its data. This may take a while...' => '',
@@ -8594,9 +8864,6 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
         'Please select attachments for download.' => '',
         'Show less' => '',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
-        'Copied to clipboard!' => '',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
         'First select a customer user, then select a customer ID to assign to this ticket.' =>
             '',
@@ -8614,7 +8881,6 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
         # JS File: var/httpd/htdocs/js/Core.Agent.Dashboard.js
         'Please check the fields marked as red for valid inputs.' => 'Sila semak bahagian yang bertanda merah untuk input sah.',
         'month' => 'bulan',
-        'Remove active filters for this widget.' => 'Buang tapisan aktif untuk wiget ini.',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.LinkObject.SearchForm.js
         'Please wait...' => '',
@@ -8642,9 +8908,6 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
         # JS File: var/httpd/htdocs/js/Core.Agent.Search.js
         'Please remove the following words from your search as they cannot be searched for:' =>
             'Sila keluarkan perkataan yang berikut daripada carian kerana ia tidak boleh dicari:',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.SharedSecretGenerator.js
-        'Generate' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
@@ -8706,6 +8969,7 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
             '',
 
         # JS File: var/httpd/htdocs/js/Core.UI.Datepicker.js
+        'No working hours' => 'Tiada waktu bekerja',
         'Open date selection' => 'Buka pilihan tarikh',
         'Invalid date (need a future date)!' => 'Tarikh tidak sah (memerlukan tarikh di hadapan)!',
         'Invalid date (need a past date)!' => 'Tarikh tidak sah (memerlukan tarikh yang lepas)!',
@@ -9209,6 +9473,7 @@ Kumpulan MejaBantuan Anda
         'Manage POP3 or IMAP accounts to fetch email from.' => 'Mengurus akaun POP3 atau IMAP untuk mengambil emel dari.',
         'Manage S/MIME certificates for email encryption.' => 'Mengurus Perakuan S/MIME untuk enkripsi emel.',
         'Manage System Configuration Deployments.' => '',
+        'Manage agent and customer authentication (e.g. SAML 2.0).' => 'Urus pengesahan ejen dan pelanggan (cth. SAML 2.0).',
         'Manage different calendars.' => '',
         'Manage existing sessions.' => 'Mengurus sesi yang sedia ada.',
         'Manage outbound email profiles.' => '',
@@ -9334,6 +9599,7 @@ Kumpulan MejaBantuan Anda
         'Running Process Tickets' => 'Menjalankan Tiket Proses',
         'Russian' => 'Rusia',
         'S/MIME Certificates' => 'Sijil S/MIME',
+        'SAML' => 'SAML',
         'Schedule a maintenance period.' => 'Menjadualkan satu tempoh penyelenggaraan.',
         'Screen after marking as seen' => '',
         'Screen after marking as unseen' => '',
@@ -9565,6 +9831,7 @@ Kumpulan MejaBantuan Anda
         '%s MB',
         '%s TB',
         '%s of %s',
+        '(pasted XML)',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9579,6 +9846,7 @@ Kumpulan MejaBantuan Anda
         'Add new entry',
         'Add to favourites',
         'Agent',
+        'Agent authentication',
         'All occurrences',
         'All-day',
         'An Error Occurred',
@@ -9601,6 +9869,7 @@ Kumpulan MejaBantuan Anda
         'Article filter',
         'As soon as you use this button or link, you will leave this screen and its current state will be saved automatically. Do you want to continue?',
         'Ascending sort applied, ',
+        'Assertion consumer URL',
         'Attachment was deleted successfully.',
         'Attachments',
         'Aug',
@@ -9611,6 +9880,11 @@ Kumpulan MejaBantuan Anda
         'Calendar',
         'Cancel',
         'Cannot proceed',
+        'Certificate (PEM)',
+        'Certificate details',
+        'Certificate generation failed.',
+        'Certificate/key is stored in VirtualFS.',
+        'Change metadata source',
         'Clear',
         'Clear all',
         'Clear all filters',
@@ -9623,27 +9897,34 @@ Kumpulan MejaBantuan Anda
         'Clone',
         'Clone Process',
         'Clone web service',
+        'Close',
         'Close preview',
         'Close this dialog',
         'Collapse',
         'Complex %s with %s arguments',
+        'Configured',
         'Confirm',
         'Copied to clipboard!',
         'Copy Ticket Number',
         'Copy Ticket Number + Title',
         'Copy ticket information',
+        'Could not find a certificate in the metadata.',
         'Could not load activities.',
         'Could not open popup window. Please disable any popup blockers for this application.',
+        'Could not read the certificate.',
         'Current selection',
         'Currently not possible',
+        'Customer authentication',
         'Customer interface does not support articles not visible for customers.',
         'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',
         'December',
+        'Decrypt encrypted assertions',
         'Delete',
         'Delete Entity',
+        'Delete SAML configuration',
         'Delete conditions',
         'Delete draft',
         'Delete error handling module',
@@ -9677,10 +9958,12 @@ Kumpulan MejaBantuan Anda
         'Deployment successful. You\'re being redirected...',
         'Descending sort applied, ',
         'Description',
+        'Disabled',
         'Dismiss',
         'Do not show this warning again.',
         'Do you really want to continue?',
         'Do you really want to delete "%s"?',
+        'Do you really want to delete this SAML configuration?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
         'Do you really want to delete this key?',
@@ -9697,11 +9980,14 @@ Kumpulan MejaBantuan Anda
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
+        'EXPIRED',
         'Edit Field Details',
         'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)',
         'End date',
+        'Entity ID',
         'Error',
         'Error during AJAX communication',
         'Error during AJAX communication. Status: %s, Error: %s',
@@ -9715,8 +10001,10 @@ Kumpulan MejaBantuan Anda
         'February',
         'Filter',
         'Filters',
+        'Fingerprint (SHA-256)',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
+        'Found %s attribute(s) in the metadata.',
         'Fr',
         'Fri',
         'Friday',
@@ -9726,13 +10014,18 @@ Kumpulan MejaBantuan Anda
         'Grouped',
         'Help',
         'Hide EntityIDs',
+        'Identity provider CA certificate',
+        'Identity provider metadata',
         'If you now leave this page, all open popup windows will be closed, too!',
         'Import web service',
+        'Includes a signing certificate.',
         'Information about the Znuny Daemon',
         'Insert selected customer user(s) into the "%s:" field.',
         'Invalid date (need a future date)!',
         'Invalid date (need a past date)!',
         'Invalid date!',
+        'Issuer',
+        'Issuer (SP entity ID)',
         'It is going to be deleted from the field, please try again.',
         'It is not possible to add a new event trigger because the event is not set.',
         'It is not possible to set this entry to invalid. All affected configuration settings have to be changed beforehand.',
@@ -9750,6 +10043,8 @@ Kumpulan MejaBantuan Anda
         'Loading, please wait...',
         'Loading...',
         'Location',
+        'Login attribute',
+        'Login button text',
         'Mail check successful.',
         'Mapping for Key',
         'Mapping for Key %s',
@@ -9757,15 +10052,20 @@ Kumpulan MejaBantuan Anda
         'March',
         'May',
         'May_long',
+        'Metadata is valid.',
+        'Metadata verification failed.',
         'Mo',
         'Mon',
         'Monday',
         'Month',
         'Name',
+        'NameID (default)',
         'Namespace %s could not be initialized, because %s could not be found.',
         'Next',
+        'No',
         'No Data Available.',
         'No TransitionActions assigned.',
+        'No certificate/key set.',
         'No data found.',
         'No dialogs assigned yet. Just pick an activity dialog from the list on the left and drag it here.',
         'No matches found.',
@@ -9773,9 +10073,14 @@ Kumpulan MejaBantuan Anda
         'No response from get package upgrade result.',
         'No response from get package upgrade run status.',
         'No response from package upgrade all.',
+        'No signing certificate found in the metadata.',
         'No sort applied, ',
         'No space left for the following files: %s',
+        'No working hours',
         'Not available',
+        'Not configured yet',
+        'Not set',
+        'Not set (will be taken from the metadata when saving)',
         'Notice',
         'Notification',
         'Nov',
@@ -9792,10 +10097,13 @@ Kumpulan MejaBantuan Anda
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
+        'Please fill in all required fields before continuing.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
+        'Please paste a certificate or key first.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select a metadata source (URL or XML) first.',
         'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
@@ -9829,11 +10137,15 @@ Kumpulan MejaBantuan Anda
         'Restore web service configuration',
         'Rule',
         'Running',
+        'SP signing certificate',
+        'SP signing key',
+        'SSO URL',
         'Sa',
         'Sat',
         'Saturday',
         'Save',
         'Save and update automatically',
+        'Saving the pasted certificate/key failed.',
         'Scale preview content',
         'Search',
         'Search attributes',
@@ -9846,6 +10158,7 @@ Kumpulan MejaBantuan Anda
         'Select files or drop them here',
         'Sep',
         'September',
+        'Serial',
         'Setting a template will overwrite any text or attachment.',
         'Settings',
         'Show',
@@ -9854,7 +10167,9 @@ Kumpulan MejaBantuan Anda
         'Show less',
         'Show more',
         'Show or hide the content.',
+        'Show raw PEM',
         'Slide the navigation bar',
+        'Slot',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',
         'Sorry, but you can\'t disable all methods for this notification.',
         'Sorry, the only existing condition can\'t be removed.',
@@ -9869,12 +10184,14 @@ Kumpulan MejaBantuan Anda
         'Status',
         'Stream',
         'Su',
+        'Subject',
         'Successful',
         'Sun',
         'Sunday',
         'Support Bundle',
         'Switch to desktop mode',
         'Switch to mobile mode',
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?',
         'Team',
         'Th',
         'The activities could not be marked as seen.',
@@ -9896,6 +10213,7 @@ Kumpulan MejaBantuan Anda
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',
+        'There was an error deleting the SAML configuration.',
         'There was an error deleting the attachment. Please check the logs for more information.',
         'There was an error. Please save all settings you are editing and check the logs for more information.',
         'This Activity cannot be deleted because it is the Start Activity.',
@@ -9927,15 +10245,22 @@ Kumpulan MejaBantuan Anda
         'Tu',
         'Tue',
         'Tuesday',
+        'Type',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.',
         'Unknown',
         'Unlock setting.',
         'Update All Packages',
         'Update all packages',
         'Update manually',
+        'Upload failed.',
         'Upload information',
+        'Uploaded key',
         'Uploading...',
         'Use options below to narrow down for which tickets appointments will be automatically created.',
+        'User sync',
+        'Valid from',
+        'Valid until',
+        'Verifying...',
         'WARNING: When you change the name of the group \'admin\', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement.',
         'Warning',
         'We',
@@ -9952,12 +10277,14 @@ Kumpulan MejaBantuan Anda
         'activate to remove the sort',
         'and %s more...',
         'day',
+        'expires',
         'month',
         'more',
         'no',
         'none',
         'or',
         'sorting is disabled',
+        'used by %s configuration(s)',
         'week',
         'yes',
     ];
