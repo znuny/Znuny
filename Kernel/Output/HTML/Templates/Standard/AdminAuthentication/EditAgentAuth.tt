@@ -1,0 +1,280 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement AdminAuthentication">
+
+    <div class="SidebarColumn ActionsSideBarComp">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminAuthentication" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("Authentication Management") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate("Authentication Management"),
+                    Link => Env("Action"),
+                },
+                {
+                    Name => Translate("Agent authentication"),
+                },
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        <form id="SAMLEditForm" action="[% Env("CGIHandle") %]" method="post" class="Validate PreventMultipleSubmits" enctype="multipart/form-data">
+            <input type="hidden" id="Action" name="Action" value="AdminAuthentication"/>
+            <input type="hidden" id="Subaction" name="Subaction" value="SaveAgentAuth"/>
+            <input type="hidden" id="ID" name="ID" value="[% Data.ID | html %]"/>
+            <input type="hidden" id="ContinueAfterSave" name="ContinueAfterSave" value=""/>
+
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("Basic settings") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <fieldset class="TableLike">
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Name") | html %]</label>
+                            <div class="Field">
+                                <input type="text" id="Name" name="Name" value="[% Data.Name | html %]" class="W50pc Validate_Required [% Data.NameInvalid | html %]" maxlength="250" />
+                            </div>
+                        </div>
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="Slot"><span class="Marker">*</span> [% Translate("Slot") | html %]</label>
+                            <div class="Field">
+                                [% Data.SlotSelection %]
+                                <p class="FieldExplanation">[% Translate("Determines which numbered AuthModule<N> slot this configuration occupies. Only unused slots are offered.") | html %]</p>
+                            </div>
+                        </div>
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="ValidID"><span class="Marker">*</span> [% Translate("Validity") | html %]</label>
+                            <div class="Field">
+                                [% Data.ValidIDSelection %]
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("SAML request settings") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <fieldset class="TableLike">
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="RequestLoginButtonText"><span class="Marker">*</span> [% Translate("Login button text") | html %]</label>
+                            <div class="Field">
+                                <input type="text" id="RequestLoginButtonText" name="RequestLoginButtonText" value="[% Data.RequestLoginButtonText | html %]" class="W50pc Validate_Required [% Data.RequestLoginButtonTextInvalid | html %]" />
+                            </div>
+                        </div>
+                        <div class="field-wrapper">
+                            <label>[% Translate("Assertion consumer URL") | html %]</label>
+                            <p class="Value">
+                                [% Data.RequestAssertionConsumerURL | html %]
+                            </p>
+                            <p class="FieldExplanation">[% Translate("Automatically derived from this system's HTTP type, FQDN and script alias - not editable.") | html %]</p>
+                            <p class="FieldExplanation">[% Translate("Znuny appends a \";IsSAMLLogin=1;Count=<N>;\" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration's slot), so the value the Identity Provider actually receives is:") | html %]</p>
+                            <p class="Value CopyableURL">
+                                <code id="ACSURLDisplay">[% Data.RequestAssertionConsumerURL | html %];IsSAMLLogin=1;Count=<span data-acs-url-count>[% Data.Slot | html %]</span>;</code>
+                                <button type="button" class="CopyToClipboardButton" data-copy-target="#ACSURLDisplay" title="[% Translate("Copy to clipboard") | html %]"><i class="fa fa-copy"></i><span class="InvisibleText">[% Translate("Copy to clipboard") | html %]</span></button>
+                            </p>
+                            <p class="FieldExplanation">[% Translate("Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honor the value from the request. If your IdP's field rejects semicolons, register the base URL instead.") | html %]</p>
+                            [% IF Data.ID %]
+                                <p class="Value">
+                                    <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=DownloadMetadata;ID=[% Data.ID | uri %]" class="CallForAction btn-main btn-primary-ghost btn-width-max"><span><i class="fa fa-download"></i> [% Translate("Download SP metadata XML") | html %]</span></a>
+                                </p>
+                            [% END %]
+                        </div>
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="Issuer"><span class="Marker">*</span> [% Translate("Issuer (SP entity ID)") | html %]</label>
+                            <div class="Field">
+                                <input type="text" id="Issuer" name="Issuer" value="[% Data.Issuer | html %]" class="W50pc Validate_Required [% Data.IssuerInvalid | html %]" />
+                            </div>
+                        </div>
+                        <div class="field-wrapper">
+                            <label for="RequestNameIDFormat">[% Translate("Requested NameID format") | html %]</label>
+                            <div class="Field">
+                                <select id="RequestNameIDFormat" name="RequestNameIDFormat" class="Modernize">
+                                    <option value="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified" [% IF Data.RequestNameIDFormat == "urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified" || !Data.RequestNameIDFormat %]selected="selected"[% END %]>[% Translate("Unspecified") | html %]</option>
+                                    <option value="urn:oasis:names:tc:SAML:2.0:nameid-format:persistent" [% IF Data.RequestNameIDFormat == "urn:oasis:names:tc:SAML:2.0:nameid-format:persistent" %]selected="selected"[% END %]>[% Translate("Persistent") | html %]</option>
+                                    <option value="urn:oasis:names:tc:SAML:2.0:nameid-format:transient" [% IF Data.RequestNameIDFormat == "urn:oasis:names:tc:SAML:2.0:nameid-format:transient" %]selected="selected"[% END %]>[% Translate("Transient") | html %]</option>
+                                    <option value="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress" [% IF Data.RequestNameIDFormat == "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress" %]selected="selected"[% END %]>[% Translate("Email address") | html %]</option>
+                                </select>
+                            </div>
+                            <p class="FieldExplanation">[% Translate("Sent as the NameIDPolicy Format in the outgoing request and published in the SP metadata. Change this only if your Identity Provider requires a specific format.") | html %]</p>
+                        </div>
+                        <div class="field-wrapper">
+                            <label for="UserLoginAttribute">[% Translate("Login attribute") | html %]</label>
+                            <div class="Field">
+                                <input type="text" id="UserLoginAttribute" name="UserLoginAttribute" value="[% Data.UserLoginAttribute | html %]" class="W50pc [% Data.UserLoginAttributeInvalid | html %]" placeholder="e.g. uid, mail" />
+                                <div id="UserLoginAttributeServerError" class="TooltipErrorMessage"><p>[% Translate("Please enter attribute names separated by commas.") | html %]</p></div>
+                            </div>
+                            <p class="FieldExplanation">[% Translate("Optional. By default the NameID is the login. Enter one or more SAML attribute names (Name or FriendlyName), separated by commas, to take the login from the first of these attributes the assertion contains instead, e.g. if the Identity Provider sends a persistent NameID. The attribute must have exactly one value, otherwise the login fails. Changing this changes the login of existing users.") | html %]</p>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="MetaDataSourceSwitch">[% Translate("Load metadata from URL") | html %]</label>
+                            <div class="Field">
+# URL is the default. The hidden field carries the value that is sent, the switch has no name.
+                                [% MetaDataSourceType = Data.MetaDataSourceType || 'URL' %]
+                                <input type="hidden" id="MetaDataSourceType" name="MetaDataSourceType" value="[% MetaDataSourceType | html %]" />
+                                <span class="ToggleSwitch">
+                                    <input type="checkbox" id="MetaDataSourceSwitch" role="switch" data-metadata-source-switch [% IF MetaDataSourceType == 'URL' %]checked="checked"[% END %] />
+                                    <span class="ToggleSwitchSlider" aria-hidden="true"></span>
+                                </span>
+                                <p class="FieldExplanation">[% Translate("Switch off to paste the metadata XML instead. Switching clears the entered URL or XML and the SSL options.") | html %]</p>
+                                [% IF Data.MetaDataSourceTypeInvalid %]
+                                    <p class="ServerError">[% Translate("Please select a metadata source.") | html %]</p>
+                                [% END %]
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper MetaDataURLField[% IF MetaDataSourceType != 'URL' %] Hidden[% END %]">
+                            <label class="Mandatory" for="RequestMetaDataURL"><span class="Marker">*</span> [% Translate("Metadata URL") | html %]</label>
+                            <div class="Field FieldInlineButton">
+                                <input type="text" id="RequestMetaDataURL" name="RequestMetaDataURL" value="[% Data.RequestMetaDataURL | html %]" class="W75pc [% Data.RequestMetaDataURLInvalid | html %]" />
+                                <button type="button" class="CallForAction btn-main btn-primary-ghost btn-width-max" data-metadata-verify data-source="URL"><span>[% Translate("Verify") | html %]</span></button>
+                                <p class="FieldExplanation MetaDataVerifyResult" data-metadata-verify-result data-source="URL"></p>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper MetaDataXMLField[% IF MetaDataSourceType != 'XML' %] Hidden[% END %]">
+                            <label class="Mandatory" for="RequestMetaDataXML"><span class="Marker">*</span> [% Translate("Metadata XML") | html %]</label>
+                            <div class="Field">
+                                <textarea id="RequestMetaDataXML" name="RequestMetaDataXML" rows="8" class="W75pc [% Data.RequestMetaDataXMLInvalid | html %]">[% Data.RequestMetaDataXML | html %]</textarea>
+                                <button type="button" class="CallForAction btn-main btn-primary-ghost btn-width-max" data-metadata-verify data-source="XML"><span>[% Translate("Verify") | html %]</span></button>
+                                <p class="FieldExplanation" data-metadata-verify-result data-source="XML"></p>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper MetaDataURLField[% IF MetaDataSourceType != 'URL' %] Hidden[% END %]">
+                            <label for="SSLOptionsEnabled">[% Translate("Use custom SSL options for metadata URL fetch") | html %]</label>
+                            <div class="Field">
+                                <input type="checkbox" id="SSLOptionsEnabled" name="SSLOptionsEnabled" value="1" data-ssl-options-toggle [% Data.SSLOptionsEnabled ? 'checked="checked"' : '' %] />
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper SSLOptionsField[% IF !Data.SSLOptionsEnabled %] Hidden[% END %]">
+                            <label for="SSLCAFile">[% Translate("SSL CA file") | html %]</label>
+                            <div class="Field">
+                                <input type="text" id="SSLCAFile" name="SSLCAFile" value="[% Data.SSLCAFile | html %]" class="W50pc" placeholder="/etc/ssl/certs/cacert.pem" />
+                            </div>
+                        </div>
+                        <div class="field-wrapper SSLOptionsField[% IF !Data.SSLOptionsEnabled %] Hidden[% END %]">
+                            <label for="SSLCAPath">[% Translate("SSL CA path") | html %]</label>
+                            <div class="Field">
+                                <input type="text" id="SSLCAPath" name="SSLCAPath" value="[% Data.SSLCAPath | html %]" class="W50pc" placeholder="/etc/ssl/certs" />
+                            </div>
+                        </div>
+                        <div class="field-wrapper SSLOptionsField[% IF !Data.SSLOptionsEnabled %] Hidden[% END %]">
+                            <label for="SSLVerifyHostname">[% Translate("Verify hostname") | html %]</label>
+                            <div class="Field">
+                                <input type="checkbox" id="SSLVerifyHostname" name="SSLVerifyHostname" value="1" [% Data.SSLVerifyHostname ? 'checked="checked"' : '' %] />
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("Certificates and keys") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <fieldset class="TableLike">
+                        [% INCLUDE "AdminAuthentication/CertificateWidget.tt"
+                            Role         = 'RequestSignKey'
+                            Label        = Translate("SP signing key (used to sign outgoing requests)")
+                            VFSFilename  = Data.RequestSignKeyVFSFilename
+                            Error        = Data.RequestSignKeyVFSFilenameInvalid
+                            ErrorMessage = Data.RequestSignKeyVFSFilenameErrorMessage
+                            ShowGenerate = 1
+                        %]
+                        [% INCLUDE "AdminAuthentication/CertificateWidget.tt"
+                            Role        = 'RequestSignKeyCert'
+                            ShowDownload = 1
+                            Label       = Translate("SP signing certificate (matches the key above)")
+                            VFSFilename = Data.RequestSignKeyCertVFSFilename
+                            Error       = Data.RequestSignKeyCertVFSFilenameInvalid
+                            ErrorMessage = Data.RequestSignKeyCertVFSFilenameErrorMessage
+                            Warning     = Translate("Required for the SP metadata's KeyDescriptor to be published. \"Generate\" above already produces this together with the key - only needed as a separate step if you uploaded your own key.")
+                        %]
+                        <div class="field-wrapper">
+                            <label for="RequestSignSigAlg">[% Translate("Signing algorithm") | html %]</label>
+                            <div class="Field">
+                                <select id="RequestSignSigAlg" name="RequestSignSigAlg" class="Modernize">
+                                    <option value="sha256" [% IF Data.RequestSignSigAlg == "sha256" || !Data.RequestSignSigAlg %]selected="selected"[% END %]>[% Translate("SHA-256 (default)") | html %]</option>
+                                    <option value="sha384" [% IF Data.RequestSignSigAlg == "sha384" %]selected="selected"[% END %]>[% Translate("SHA-384") | html %]</option>
+                                    <option value="sha512" [% IF Data.RequestSignSigAlg == "sha512" %]selected="selected"[% END %]>[% Translate("SHA-512") | html %]</option>
+                                    <option value="sha1" [% IF Data.RequestSignSigAlg == "sha1" %]selected="selected"[% END %]>[% Translate("SHA-1 (legacy, not recommended)") | html %]</option>
+                                </select>
+                            </div>
+                            <p class="FieldExplanation">[% Translate("Used to sign the outgoing request when a signing key is set above. Only change this if your Identity Provider requires a specific algorithm.") | html %]</p>
+                        </div>
+                        <div class="field-wrapper">
+                            <label for="ResponseEncryptionEnabled">[% Translate("Decrypt encrypted assertions") | html %]</label>
+                            <div class="Field">
+                                <input type="checkbox" id="ResponseEncryptionEnabled" name="ResponseEncryptionEnabled" value="1" [% Data.ResponseEncryptionEnabled ? 'checked="checked"' : '' %] />
+                                <p class="FieldExplanation">[% Translate("Uses the SP signing key above to decrypt SAML assertions the Identity Provider encrypts. Has no effect on responses that aren't encrypted, so it's safe to leave enabled. Requires a signing key above.") | html %]</p>
+                            </div>
+                        </div>
+                        [% INCLUDE "AdminAuthentication/CertificateWidget.tt"
+                            Role             = 'IdPCACert'
+                            Label            = Translate("Identity provider CA certificate")
+                            VFSFilename      = Data.IdPCACertVFSFilename
+                            Error            = Data.IdPCACertVFSFilenameInvalid
+                            ErrorMessage = Data.IdPCACertVFSFilenameErrorMessage
+                            Warning          = Translate("Required for SAML login to work. Without it, Net::SAML2 cannot verify the Identity Provider's response signature and authentication will fail.")
+                            ShowUseFromMetadata = 1
+                        %]
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("Attribute, group and role sync") | html %]</h2>
+                </div>
+                <div class="Content">
+                    [% INCLUDE "AdminAuthentication/SyncSettings.tt" %]
+                </div>
+            </div>
+
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("Save") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <fieldset class="TableLike">
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                <a href="[% Env("Baselink") %]Action=AdminAuthentication" class="btn-cancel-ghost btn-main btn-width-md"><span>[% Translate("Cancel") | html %]</span></a>
+                                <button class="CallForAction Primary btn-primary-ghost btn-main btn-width-md" id="Submit" type="submit"><span>[% Translate("Save and finish") | html %]</span></button>
+                                <button class="CallForAction Primary btn-primary btn-main btn-width-md" id="SubmitAndContinue" type="button"><span>[% Translate("Save") | html %]</span></button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -26,6 +26,7 @@ Kernel/Language/*zzzTranslationAuto.pm
 bin/cgi-bin/.htaccess
 scripts/apache2-perl-startup2.pl
 var/virtualfs
+var/saml
 var/run
 var/etc
 var/etc/*

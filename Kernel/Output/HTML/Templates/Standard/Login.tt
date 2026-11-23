@@ -145,6 +145,8 @@ X-OTRS-Login: [% Env("Baselink") %]
                             <input type="hidden" name="Lang" value="[% Env("UserLanguage") | html %]"/>
                             <input type="hidden" name="TimeZoneOffset" id="TimeZoneOffset" value=""/>
                             <fieldset>
+# Hidden if only SAML is configured, its login buttons below are the only way to log in then.
+[% IF Data.ShowLoginForm %]
                                 <div>
                                     <label for="User" class="Mandatory">
                                         <span class="Marker">*</span> [% Translate("Username") | html %]
@@ -186,6 +188,7 @@ X-OTRS-Login: [% Env("Baselink") %]
                                 <div class="Field">
                                     <button type="submit" id="LoginButton" class="btn-main btn-primary" value="[% Translate("Login") | html %]" disabled="disabled"><span>[% Translate("Login") | html %]</span></button>
                                 </div>
+[% END %]
 
 [% RenderBlockStart("SAMLLoginLink") %]
                                 <!-- SAML login -->

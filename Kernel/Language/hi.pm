@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.252289232712346;
+    $Self->{Completeness}        = 0.271765787860208;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -271,6 +271,169 @@ sub Data {
         'Do you really want to delete this attachment?' => '',
         'Attachment' => 'संलग्नक',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+        'Certificate/key is stored in VirtualFS.' => 'प्रमाणपत्र/कुंजी VirtualFS में संग्रहीत है.',
+        'No certificate/key set.' => 'कोई प्रमाणपत्र/कुंजी सेट नहीं है.',
+        'View certificate details' => 'प्रमाणपत्र विवरण देखें',
+        'The selected certificate/key is not available. Please select or upload it again.' =>
+            'चयनित प्रमाणपत्र/कुंजी उपलब्ध नहीं है. कृपया उसे फिर से चुनें या अपलोड करें.',
+        '- Select an existing certificate/key -' => '- कोई मौजूदा प्रमाणपत्र/कुंजी चुनें -',
+        'Paste key' => '',
+        'Paste certificate' => '',
+        'Generate' => '',
+        'Use certificate from metadata' => 'मेटाडेटा से प्रमाणपत्र उपयोग करें',
+        'Extracts the signing certificate embedded in the Identity Provider metadata and stores it here, instead of uploading it separately.' =>
+            'पहचान प्रदाता के मेटाडेटा में सन्निहित हस्ताक्षर प्रमाणपत्र निकालकर यहाँ संग्रहीत करता है, अलग से अपलोड करने के बजाय.',
+        'Paste the PEM text including the BEGIN and END lines.' => 'BEGIN और END पंक्तियों सहित PEM पाठ चिपकाएँ.',
+        'Common Name' => 'सामान्य नाम',
+        'Key size' => 'कुंजी आकार',
+        'Validity (days)' => 'वैधता (दिन)',
+        'Generate self-signed certificate' => 'स्व-हस्ताक्षरित प्रमाणपत्र उत्पन्न करें',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+        'Authentication Management' => 'प्रमाणीकरण प्रबंधन',
+        'Agent authentication' => 'प्रतिनिधि प्रमाणीकरण',
+        'Basic settings' => 'मूल सेटिंग्स',
+        'Slot' => 'स्लॉट',
+        'Determines which numbered AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'निर्धारित करता है कि यह कॉन्फ़िगरेशन कौन-सा क्रमांकित AuthModule<N> स्लॉट लेता है. केवल अप्रयुक्त स्लॉट दिए जाते हैं.',
+        'SAML request settings' => 'SAML अनुरोध सेटिंग्स',
+        'Login button text' => 'प्रवेश बटन पाठ',
+        'Assertion consumer URL' => 'अभिकथन उपभोक्ता URL',
+        'Automatically derived from this system\'s HTTP type, FQDN and script alias - not editable.' =>
+            'इस सिस्टम के HTTP प्रकार, FQDN और स्क्रिप्ट उपनाम से स्वतः निकाला जाता है - संपादित नहीं किया जा सकता.',
+        'Znuny appends a ";IsSAMLLogin=1;Count=<N>;" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration\'s slot), so the value the Identity Provider actually receives is:' =>
+            'वास्तविक आउटगोइंग SAML अनुरोध बनाते समय Znuny इस URL में ";IsSAMLLogin=1;Count=<N>;" प्रत्यय जोड़ता है (<N> इस कॉन्फ़िगरेशन का स्लॉट है), इसलिए पहचान प्रदाता को वास्तव में यह मान मिलता है:',
+        'Copy to clipboard' => 'क्लिपबोर्ड पर कॉपी करें',
+        'Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honor the value from the request. If your IdP\'s field rejects semicolons, register the base URL instead.' =>
+            'कुछ पहचान प्रदाता चाहते हैं कि यही मान ACS URL के रूप में पंजीकृत हो. अन्य ऊपर वाला आधार URL स्वीकार करते हैं और अनुरोध का मान मानते हैं. यदि आपके IdP का फ़ील्ड अर्धविराम अस्वीकार करता है, तो इसके बजाय आधार URL पंजीकृत करें.',
+        'Download SP metadata XML' => 'SP मेटाडेटा XML डाउनलोड करें',
+        'Issuer (SP entity ID)' => 'जारीकर्ता (SP एंटिटी ID)',
+        'Requested NameID format' => 'अनुरोधित NameID प्रारूप',
+        'Unspecified' => 'अनिर्दिष्ट',
+        'Persistent' => 'स्थायी',
+        'Transient' => 'अस्थायी',
+        'Email address' => 'ईमेल पता',
+        'Sent as the NameIDPolicy Format in the outgoing request and published in the SP metadata. Change this only if your Identity Provider requires a specific format.' =>
+            'आउटगोइंग अनुरोध में NameIDPolicy प्रारूप के रूप में भेजा जाता है और SP मेटाडेटा में प्रकाशित होता है. इसे केवल तभी बदलें जब आपका पहचान प्रदाता कोई विशिष्ट प्रारूप माँगे.',
+        'Login attribute' => '',
+        'Please enter attribute names separated by commas.' => '',
+        'Optional. By default the NameID is the login. Enter one or more SAML attribute names (Name or FriendlyName), separated by commas, to take the login from the first of these attributes the assertion contains instead, e.g. if the Identity Provider sends a persistent NameID. The attribute must have exactly one value, otherwise the login fails. Changing this changes the login of existing users.' =>
+            '',
+        'Load metadata from URL' => 'URL से मेटाडेटा लोड करें',
+        'Switch off to paste the metadata XML instead. Switching clears the entered URL or XML and the SSL options.' =>
+            'इसके बजाय मेटाडेटा XML चिपकाने के लिए बंद करें. बदलने पर दर्ज URL या XML और SSL विकल्प साफ हो जाते हैं.',
+        'Please select a metadata source.' => 'कृपया मेटाडेटा स्रोत चुनें.',
+        'Metadata URL' => 'मेटाडेटा URL',
+        'Verify' => 'सत्यापित करें',
+        'Metadata XML' => 'मेटाडेटा XML',
+        'Use custom SSL options for metadata URL fetch' => 'मेटाडेटा URL प्राप्त करने के लिए कस्टम SSL विकल्प उपयोग करें',
+        'SSL CA file' => 'SSL CA संचिका',
+        'SSL CA path' => 'SSL CA पथ',
+        'Verify hostname' => 'होस्टनाम सत्यापित करें',
+        'Certificates and keys' => 'प्रमाणपत्र और कुंजियाँ',
+        'SP signing key (used to sign outgoing requests)' => 'SP हस्ताक्षर कुंजी (आउटगोइंग अनुरोधों पर हस्ताक्षर के लिए)',
+        'SP signing certificate (matches the key above)' => 'SP हस्ताक्षर प्रमाणपत्र (ऊपर वाली कुंजी से मेल खाता है)',
+        'Required for the SP metadata\'s KeyDescriptor to be published. "Generate" above already produces this together with the key - only needed as a separate step if you uploaded your own key.' =>
+            'SP मेटाडेटा का KeyDescriptor प्रकाशित करने के लिए आवश्यक है. ऊपर "उत्पन्न करें" इसे कुंजी के साथ पहले से बनाता है - अलग चरण के रूप में केवल तभी चाहिए जब आपने अपनी कुंजी अपलोड की हो.',
+        'Signing algorithm' => 'हस्ताक्षर एल्गोरिथ्म',
+        'SHA-256 (default)' => 'SHA-256 (डिफ़ॉल्ट)',
+        'SHA-384' => 'SHA-384',
+        'SHA-512' => 'SHA-512',
+        'SHA-1 (legacy, not recommended)' => 'SHA-1 (पुराना, अनुशंसित नहीं)',
+        'Used to sign the outgoing request when a signing key is set above. Only change this if your Identity Provider requires a specific algorithm.' =>
+            'ऊपर हस्ताक्षर कुंजी सेट होने पर आउटगोइंग अनुरोध पर हस्ताक्षर करने के लिए उपयोग होता है. इसे केवल तभी बदलें जब आपका पहचान प्रदाता कोई विशिष्ट एल्गोरिथ्म माँगे.',
+        'Decrypt encrypted assertions' => 'एन्क्रिप्टेड अभिकथन डिक्रिप्ट करें',
+        'Uses the SP signing key above to decrypt SAML assertions the Identity Provider encrypts. Has no effect on responses that aren\'t encrypted, so it\'s safe to leave enabled. Requires a signing key above.' =>
+            'पहचान प्रदाता द्वारा एन्क्रिप्ट किए गए SAML अभिकथनों को डिक्रिप्ट करने के लिए ऊपर वाली SP हस्ताक्षर कुंजी का उपयोग करता है. जो प्रतिक्रियाएँ एन्क्रिप्ट नहीं हैं उन पर कोई प्रभाव नहीं पड़ता, इसलिए इसे सक्षम छोड़ना सुरक्षित है. ऊपर हस्ताक्षर कुंजी आवश्यक है.',
+        'Identity provider CA certificate' => 'पहचान प्रदाता CA प्रमाणपत्र',
+        'Required for SAML login to work. Without it, Net::SAML2 cannot verify the Identity Provider\'s response signature and authentication will fail.' =>
+            'SAML प्रवेश के काम करने के लिए आवश्यक है. इसके बिना, Net::SAML2 पहचान प्रदाता के प्रतिक्रिया हस्ताक्षर का सत्यापन नहीं कर सकता और प्रमाणीकरण विफल हो जाएगा.',
+        'Attribute, group and role sync' => 'विशेषता, समूह और भूमिका समन्वयन',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+        'Customer authentication' => 'ग्राहक प्रमाणीकरण',
+        'Determines which numbered Customer::AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'निर्धारित करता है कि यह कॉन्फ़िगरेशन कौन-सा क्रमांकित Customer::AuthModule<N> स्लॉट लेता है. केवल अप्रयुक्त स्लॉट दिए जाते हैं.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+        'SAML wizard' => 'SAML विज़ार्ड',
+        'Add agent SAML authentication' => 'प्रतिनिधि SAML प्रमाणीकरण जोड़ें',
+        'Add customer SAML authentication' => 'ग्राहक SAML प्रमाणीकरण जोड़ें',
+        'Deploy configuration' => 'कॉन्फ़िगरेशन परिनियोजित करें',
+        'Deployment failed' => '',
+        'Fix the configurations below and deploy again. Or set a configuration to invalid: its login stops working and the other configurations are deployed.' =>
+            '',
+        'Problem' => '',
+        'Edit' => 'संपादित करें',
+        'Set to invalid and deploy the rest' => '',
+        'Sync' => 'समन्वयन',
+        'Status' => 'स्तर',
+        'Metadata' => 'मेटाडेटा',
+        'Slot %s' => 'स्लॉट %s',
+        'Default' => '',
+        'Yes' => 'हाँ',
+        'No' => 'नहीं',
+        'OK' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+        'Enable sync' => 'समन्वयन सक्षम करें',
+        'Also registers Kernel::System::Auth::Sync::SAML for the same slot, to sync attributes/groups/roles from the SAML assertion on every login.' =>
+            'उसी स्लॉट के लिए Kernel::System::Auth::Sync::SAML भी पंजीकृत करता है, ताकि प्रत्येक प्रवेश पर SAML अभिकथन से विशेषताएँ/समूह/भूमिकाएँ समन्वयित हों.',
+        'The AuthSyncModule for this slot is already configured outside of AdminAuthentication - sync cannot be enabled for it.' =>
+            'इस स्लॉट का AuthSyncModule पहले से AdminAuthentication के बाहर कॉन्फ़िगर है - इसके लिए समन्वयन सक्षम नहीं किया जा सकता.',
+        'User attribute sync map' => 'उपयोगकर्ता विशेषता समन्वयन मानचित्र',
+        'Maps Znuny user attributes (left) to SAML assertion attribute names (right).' =>
+            'Znuny उपयोगकर्ता विशेषताएँ (बाएँ) को SAML अभिकथन विशेषता नामों (दाएँ) से जोड़ता है.',
+        'Znuny attribute' => 'Znuny विशेषता',
+        'SAML attribute URI' => 'SAML विशेषता URI',
+        'Initial groups for new users' => 'नए उपयोगकर्ताओं के लिए प्रारंभिक समूह',
+        'Groups (with rw permission) granted only when a brand-new agent is created via sync. Ctrl/Cmd-click to select multiple.' =>
+            'समूह (rw अनुमति के साथ) केवल तभी दिए जाते हैं जब समन्वयन से बिल्कुल नया प्रतिनिधि बनाया जाए. कई चुनने के लिए Ctrl/Cmd-click.',
+        'SAML attribute carrying group values' => 'समूह मान रखने वाली SAML विशेषता',
+        'Group sync rules (by group value)' => 'समूह समन्वयन नियम (समूह मान के अनुसार)',
+        'Maps a SAML group value to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'SAML समूह मान को Znuny समूह और अनुमतियों से जोड़ता है. कई अनुमतियाँ चुनने के लिए Ctrl/Cmd-click.',
+        'SAML value' => 'SAML मान',
+        'Group sync rules (by arbitrary attribute/value)' => 'समूह समन्वयन नियम (किसी भी विशेषता/मान के अनुसार)',
+        'Maps any SAML attribute name/value combination to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'किसी भी SAML विशेषता नाम/मान संयोजन को Znuny समूह और अनुमतियों से जोड़ता है. कई अनुमतियाँ चुनने के लिए Ctrl/Cmd-click.',
+        'SAML attribute' => 'SAML विशेषता',
+        'Role sync requires at least one active role. Create or activate a role under Admin → Roles.' =>
+            'भूमिका समन्वयन के लिए कम से कम एक क्रियाशील भूमिका आवश्यक है. व्यवस्थापक → भूमिकाएं के अंतर्गत भूमिका बनाएँ या क्रियाशील करें.',
+        'SAML attribute carrying role values' => 'भूमिका मान रखने वाली SAML विशेषता',
+        'Role sync rules (by role value)' => 'भूमिका समन्वयन नियम (भूमिका मान के अनुसार)',
+        'Maps a SAML role value to one or more Znuny roles, active or inactive.' =>
+            'SAML भूमिका मान को Znuny भूमिका से जोड़ता है, क्रियाशील या निष्क्रिय.',
+        'Active' => 'क्रियाशील',
+        'Role sync rules (by arbitrary attribute/value)' => 'भूमिका समन्वयन नियम (किसी भी विशेषता/मान के अनुसार)',
+        'Maps any SAML attribute name/value combination to one or more Znuny roles, active or inactive.' =>
+            'किसी भी SAML विशेषता नाम/मान संयोजन को Znuny भूमिका से जोड़ता है, क्रियाशील या निष्क्रिय.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+        'Setup steps' => 'सेटअप चरण',
+        'Setup wizard' => 'सेटअप विज़ार्ड',
+        'SAML setup wizard' => 'SAML सेटअप विज़ार्ड',
+        'Step' => 'चरण',
+        'What are you setting up?' => 'आप क्या सेट अप कर रहे हैं?',
+        'Agent authentication - staff logging into the agent interface' =>
+            'प्रतिनिधि प्रमाणीकरण - कर्मचारी प्रतिनिधि इंटरफ़ेस में प्रवेश करते हैं',
+        'Customer authentication - customers logging into the customer portal' =>
+            'ग्राहक प्रमाणीकरण - ग्राहक ग्राहक पोर्टल में प्रवेश करते हैं',
+        'Login with SSO' => 'SSO से प्रवेश',
+        'User sync (optional)' => 'उपयोगकर्ता समन्वयन (वैकल्पिक)',
+        'Optionally sync user attributes, groups and roles from the SAML assertion on every login. This can also be set up later on the edit screen.' =>
+            'प्रत्येक प्रवेश पर SAML अभिकथन से उपयोगकर्ता विशेषताएँ, समूह और भूमिकाएँ वैकल्पिक रूप से समन्वयित करें. इसे बाद में संपादन स्क्रीन पर भी सेट किया जा सकता है.',
+        'Review' => 'समीक्षा',
+        'Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective.' =>
+            'यह SAML कॉन्फ़िगरेशन बनाने के लिए सुरक्षित करे पर क्लिक करें. यह अभी क्रियाशील नहीं होगा - बाद में इसे प्रभावी बनाने के लिए अवलोकन पृष्ठ पर कॉन्फ़िगरेशन परिनियोजित करें क्रिया का उपयोग करें.',
+        'If you skipped the Identity Provider CA certificate here, it is taken from the metadata when saving. Please check it on the edit screen afterwards.' =>
+            '',
+        'You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only).' =>
+            'बदलाव के लिए किसी भी पिछले चरण पर वापस जा सकते हैं, या बाद में विशेषता/समूह/भूमिका समन्वयन जैसे उन्नत विकल्पों के लिए पूर्ण संपादन स्क्रीन का उपयोग करें (केवल प्रतिनिधि प्रमाणीकरण).',
+        'Back' => 'वापस',
+        'Next' => 'अगला',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
         'Add Auto Response' => 'स्वत प्रतिक्रिया जोड़ें',
         'Filter for Auto Responses' => 'स्वतप्रतिक्रियाओं के लिए निस्पादक',
@@ -328,9 +491,7 @@ sub Data {
             '',
         'Account Status' => '',
         'Account status for: %s' => '',
-        'Status' => 'स्तर',
         'Account' => '',
-        'Edit' => 'संपादित करें',
         'No accounts found.' => '',
         'Communication Log Details (%s)' => '',
         'Direction' => 'दिशा',
@@ -449,7 +610,6 @@ sub Data {
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => 'सभी के लिए सक्रिय स्थिति स्विच करें',
-        'Active' => 'क्रियाशील',
         'Toggle active state for %s' => 'सक्रिय स्थिति स्विच करें %s के लिए',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
@@ -1586,14 +1746,11 @@ sub Data {
         'Download package' => 'संकुल डाउनलोड करें ',
         'Rebuild package' => 'संकुल फिर से बनाएँ',
         'Package Information' => '',
-        'Metadata' => 'मेटाडेटा',
         'Change Log' => 'अभिलेख बदलना',
         'Date' => 'दिनांक',
         'List of Files' => 'फाइलों की सूची',
         'Permission' => 'अनुमति',
         'Size' => 'आकार',
-        'Problem' => '',
-        'OK' => '',
         'Download file from package!' => 'संकुल से फ़ाइल डाउनलोड करें ',
         'Required' => 'आवश्यकता',
         'Primary Key' => '',
@@ -2137,7 +2294,6 @@ sub Data {
         'System Email Addresses Management' => 'तंत्र ईमेल पते प्रबंधन',
         'Add System Email Address' => 'प्रणाली का ईमेल पता शामिल करें',
         'Edit System Email Address' => 'प्रणाली का ईमेल पता संपादित करें',
-        'Email address' => 'ईमेल पता',
         'Display name' => 'प्रदर्शित होने वाला नाम',
         'This email address is already used as system email address.' => '',
         'The display name and email address will be shown on mail you send.' =>
@@ -2352,8 +2508,6 @@ sub Data {
         'All-day' => '',
         'Repeat' => '',
         'Notification' => 'अधिसूचनाएँ',
-        'Yes' => 'हाँ',
-        'No' => 'नहीं',
         'No calendars found. Please add a calendar first by using Manage Calendars page.' =>
             '',
 
@@ -2883,7 +3037,6 @@ sub Data {
         'Save filter settings as default' => 'तयशुदा रूप में निस्पादक की व्यवस्थाऐं सुरक्षित करें',
         'Event Type' => '',
         'Save as default' => '',
-        'Back' => 'वापस',
         'Change Queue' => 'श्रेणी बदलें',
         'Add Filter' => 'निस्पादक जोड़ें',
         'Set' => 'निर्धारित करें',
@@ -3131,7 +3284,6 @@ sub Data {
         'Phone' => 'फोन',
         'Web site' => 'वेबसाइट',
         'Community' => '',
-        'Next' => 'अगला',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => 'आउटबाउंड मेल विन्यस्त करें',
@@ -3634,6 +3786,34 @@ sub Data {
             '',
         'All agents with write permission for the appointment (calendar)' =>
             '',
+
+        # Perl Module: Kernel/Modules/AdminAuthentication.pm
+        'Perl module Net::SAML2 is not installed. SAML authentication cannot work until it is installed on the server.' =>
+            'Perl मॉड्यूल Net::SAML2 स्थापित नहीं है. सर्वर पर स्थापित होने तक SAML प्रमाणीकरण काम नहीं कर सकता.',
+        'Authentication configuration is not in sync with the deployed configuration, but it can\'t be deployed: a valid configuration has a problem, see the status below. Fix it or set it to invalid, then deploy.' =>
+            '',
+        'Authentication configuration is not in sync with the deployed configuration, please deploy.' =>
+            'प्रमाणीकरण कॉन्फ़िगरेशन परिनियोजित कॉन्फ़िगरेशन के साथ समन्वयित नहीं है, कृपया परिनियोजित करें.',
+        'No IdP CA certificate was uploaded and none could be taken from the IdP metadata.' =>
+            'कोई IdP CA प्रमाणपत्र अपलोड नहीं हुआ और IdP मेटाडेटा से कोई नहीं लिया जा सका.',
+        'Only invalid authentication configurations can be deleted. Please set the configuration to invalid first.' =>
+            'केवल अमान्य प्रमाणीकरण कॉन्फ़िगरेशन हटाए जा सकते हैं. कृपया पहले कॉन्फ़िगरेशन को अमान्य करें.',
+        'Invalid or missing Role.' => 'अमान्य या अनुपस्थित भूमिका.',
+        'No file was uploaded.' => 'कोई संचिका अपलोड नहीं हुई.',
+        'Error storing the uploaded file.' => 'अपलोड की गई संचिका सहेजने में त्रुटि.',
+        'Only the SP signing key can be generated.' => 'केवल SP हस्ताक्षर कुंजी उत्पन्न की जा सकती है.',
+        'Error generating certificate. Please check the system log.' => 'प्रमाणपत्र उत्पन्न करने में त्रुटि. कृपया सिस्टम लॉग देखें.',
+        'Error storing the generated key in VirtualFS.' => 'VirtualFS में उत्पन्न कुंजी सहेजने में त्रुटि.',
+        'Error storing the generated certificate in VirtualFS.' => 'VirtualFS में उत्पन्न प्रमाणपत्र सहेजने में त्रुटि.',
+        'Could not find a certificate in the metadata. Please check the URL/XML and try again.' =>
+            'मेटाडेटा में प्रमाणपत्र नहीं मिला. कृपया URL/XML जाँचें और फिर कोशिश करें.',
+        'Error storing the certificate.' => 'प्रमाणपत्र सहेजने में त्रुटि.',
+        'Could not read the certificate from VirtualFS.' => 'VirtualFS से प्रमाणपत्र नहीं पढ़ा जा सका.',
+        'The authentication configuration was not deployed. The previously deployed configuration is still active.' =>
+            'प्रमाणीकरण कॉन्फ़िगरेशन परिनियोजित नहीं किया गया. पहले परिनियोजित कॉन्फ़िगरेशन अभी भी क्रियाशील है.',
+        'Please check the system log for details.' => 'विवरण के लिए कृपया सिस्टम लॉग देखें.',
+        'Authentication configuration not found.' => '',
+        'Could not set the authentication configuration to invalid.' => '',
 
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
@@ -5040,6 +5220,34 @@ sub Data {
         'Session invalid. Please log in again.' => '',
         'Session has timed out. Please log in again.' => 'सत्र का समय समाप्त हो गया है। कृपया फिर से प्रवेश करें।',
 
+        # Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+        'This is not an unencrypted private key in PEM format (-----BEGIN PRIVATE KEY-----).' =>
+            'यह PEM प्रारूप में अनएन्क्रिप्टेड निजी कुंजी नहीं है (-----BEGIN PRIVATE KEY-----).',
+        'This is not a certificate in PEM format (-----BEGIN CERTIFICATE-----).' =>
+            'यह PEM प्रारूप में प्रमाणपत्र नहीं है (-----BEGIN CERTIFICATE-----).',
+        'The private key could not be read. Only unencrypted private keys are supported.' =>
+            'निजी कुंजी नहीं पढ़ी जा सकी. केवल अनएन्क्रिप्टेड निजी कुंजियाँ समर्थित हैं.',
+        'The certificate could not be read.' => 'प्रमाणपत्र नहीं पढ़ा जा सका.',
+        'Could not read the SP signing key.' => 'SP हस्ताक्षर कुंजी नहीं पढ़ी जा सकी.',
+        'Could not read the IdP CA certificate.' => 'IdP CA प्रमाणपत्र नहीं पढ़ा जा सका.',
+        'No IdP CA certificate is stored. It is taken from the IdP metadata on every deploy. Save the configuration to store it.' =>
+            '',
+        'Could not decrypt the SP signing key. Please check the configured encryption key.' =>
+            'SP हस्ताक्षर कुंजी डिक्रिप्ट नहीं हो सकी. कृपया कॉन्फ़िगर की गई एन्क्रिप्शन कुंजी जाँचें.',
+        'Net::SAML2 is not installed on the server, metadata cannot be verified.' =>
+            'सर्वर पर Net::SAML2 स्थापित नहीं है, मेटाडेटा सत्यापित नहीं किया जा सकता.',
+        'Metadata URL is empty.' => 'मेटाडेटा URL खाली है.',
+        'Metadata XML is empty.' => 'मेटाडेटा XML खाली है.',
+        'Could not parse the metadata. Please check the URL/XML and try again.' =>
+            'मेटाडेटा पार्स नहीं हो सका. कृपया URL/XML जाँचें और फिर कोशिश करें.',
+        'Perl module Crypt::OpenSSL::X509 is not installed, certificate details cannot be parsed.' =>
+            'Perl मॉड्यूल Crypt::OpenSSL::X509 स्थापित नहीं है, प्रमाणपत्र विवरण पार्स नहीं किए जा सकते.',
+        'Could not parse the certificate.' => 'प्रमाणपत्र पार्स नहीं हो सका.',
+
+        # Perl Module: Kernel/System/AuthenticationConfig.pm
+        'No authentication plugin is registered for this type.' => 'इस प्रकार के लिए कोई प्रमाणीकरण प्लगइन पंजीकृत नहीं है.',
+        'Could not write the certificate files.' => 'प्रमाणपत्र संचिकाएँ लिखी नहीं जा सकीं.',
+
         # Perl Module: Kernel/System/AutoResponse.pm
         'Couldn\'t read auto response configuration file. Please make sure the file is valid.' =>
             '',
@@ -5560,7 +5768,6 @@ sub Data {
         'All Settings' => '',
 
         # Perl Module: Kernel/System/SysConfig/BaseValueType.pm
-        'Default' => '',
         'Value is not correct! Please, consider updating this field.' => '',
         'Value doesn\'t satisfy regex (%s).' => '',
 
@@ -6301,6 +6508,8 @@ sub Data {
             '',
         'Frontend module registration (disable company link if no company feature is used).' =>
             'दृश्यपटल मॉड्यूल पंजीकरण(कंपनी लिंक निष्क्रिय करे यदि कंपनी सुविधा का उपयोग नहीं किया है)।',
+        'Registers the SAML 2.0 authentication plugin for AdminAuthentication.' =>
+            'AdminAuthentication के लिए SAML 2.0 प्रमाणीकरण प्लगइन पंजीकृत करता है.',
         'Frontend module registration for the customer interface.' => 'ग्राहक अंतरफलक के लिए दृश्यपटल मॉड्यूल पंजीकरण।',
         'Activates the available themes on the system. Value 1 means active, 0 means inactive.' =>
             'प्रणाली पर उपलब्ध थीम को सक्रिय करता है।मान 1 का मतलब सक्रिय है,0 का मतलब है निष्क्रिय।',
@@ -8401,6 +8610,55 @@ sub Data {
             '',
         'Attachment was deleted successfully.' => '',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?' =>
+            'मेटाडेटा स्रोत बदलने से दर्ज मेटाडेटा URL या XML और SSL विकल्प हट जाते हैं. जारी रखें?',
+        'Change metadata source' => 'मेटाडेटा स्रोत बदलें',
+        'Uploaded key' => 'अपलोड की गई कुंजी',
+        'EXPIRED' => 'समाप्त',
+        'expires' => 'समाप्त होता है',
+        'used by %s configuration(s)' => '%s कॉन्फ़िगरेशन द्वारा उपयोग',
+        'Could not read the certificate.' => 'प्रमाणपत्र पढ़ा नहीं जा सका.',
+        'Certificate (PEM)' => 'प्रमाणपत्र (PEM)',
+        'Issuer' => 'जारीकर्ता',
+        'Valid from' => 'वैध से',
+        'Valid until' => 'वैध तक',
+        'Serial' => 'क्रम संख्या',
+        'Fingerprint (SHA-256)' => 'अंगुली-चिह्न (SHA-256)',
+        'Show raw PEM' => 'कच्चा PEM दिखाएँ',
+        'Certificate details' => 'प्रमाणपत्र विवरण',
+        'Metadata is valid.' => 'मेटाडेटा मान्य है.',
+        'Entity ID' => 'एंटिटी ID',
+        'SSO URL' => 'SSO URL',
+        'Includes a signing certificate.' => 'हस्ताक्षर प्रमाणपत्र शामिल है.',
+        'No signing certificate found in the metadata.' => 'मेटाडेटा में कोई हस्ताक्षर प्रमाणपत्र नहीं मिला.',
+        'Found %s attribute(s) in the metadata.' => 'मेटाडेटा में %s विशेषता मिलीं.',
+        'Verifying...' => 'सत्यापित किया जा रहा है...',
+        'Metadata verification failed.' => 'मेटाडेटा सत्यापन विफल.',
+        'Upload failed.' => 'अपलोड विफल.',
+        'Please paste a certificate or key first.' => 'कृपया पहले प्रमाणपत्र या कुंजी चिपकाएँ.',
+        'Saving the pasted certificate/key failed.' => 'चिपकाया गया प्रमाणपत्र/कुंजी सहेजना विफल रहा.',
+        'Certificate generation failed.' => 'प्रमाणपत्र उत्पन्न करना विफल रहा.',
+        'Please select a metadata source (URL or XML) first.' => 'कृपया पहले मेटाडेटा स्रोत (URL या XML) चुनें.',
+        'Could not find a certificate in the metadata.' => 'मेटाडेटा में प्रमाणपत्र नहीं मिला.',
+        'Copied to clipboard!' => '',
+        'Do you really want to delete this SAML configuration?' => 'क्या आप वाकई इस SAML कॉन्फ़िगरेशन को हटाना चाहते हैं?',
+        'Delete SAML configuration' => 'SAML कॉन्फ़िगरेशन हटाएँ',
+        'There was an error deleting the SAML configuration.' => 'SAML कॉन्फ़िगरेशन हटाने में त्रुटि हुई.',
+        'NameID (default)' => '',
+        '(pasted XML)' => '(चिपकाया गया XML)',
+        'Not configured yet' => 'अभी कॉन्फ़िगर नहीं',
+        'Identity provider metadata' => 'पहचान प्रदाता मेटाडेटा',
+        'SP signing key' => 'SP हस्ताक्षर कुंजी',
+        'Configured' => 'कॉन्फ़िगर किया गया',
+        'Not set' => 'सेट नहीं',
+        'SP signing certificate' => 'SP हस्ताक्षर प्रमाणपत्र',
+        'Not set (will be taken from the metadata when saving)' => '',
+        'User sync' => 'उपयोगकर्ता समन्वयन',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)' =>
+            'सक्षम (%s विशेषता मैपिंग, %s समूह नियम, %s भूमिका नियम)',
+        'Please fill in all required fields before continuing.' => 'जारी रखने से पहले कृपया सभी आवश्यक फ़ील्ड भरें.',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.AutoResponse.js
         'Delete this %s' => '',
         'Deleting the %s and its data. This may take a while...' => '',
@@ -8607,9 +8865,6 @@ sub Data {
         'Please select attachments for download.' => '',
         'Show less' => '',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
-        'Copied to clipboard!' => '',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
         'First select a customer user, then select a customer ID to assign to this ticket.' =>
             '',
@@ -8654,9 +8909,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Search.js
         'Please remove the following words from your search as they cannot be searched for:' =>
             '',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.SharedSecretGenerator.js
-        'Generate' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
@@ -9210,6 +9462,7 @@ Thanks for your help!
         'Manage POP3 or IMAP accounts to fetch email from.' => 'ईमेल आनयन करने के लिए POP3 या IMAP खातों का प्रबंधन करें।',
         'Manage S/MIME certificates for email encryption.' => 'ईमेल कूटलेखन के लिए S/MIME प्रमाणपत्र कुंजी प्रबंधित का प्रबंधन करें।',
         'Manage System Configuration Deployments.' => '',
+        'Manage agent and customer authentication (e.g. SAML 2.0).' => 'प्रतिनिधि और ग्राहक प्रमाणीकरण प्रबंधित करें (उदाहरण के लिए SAML 2.0).',
         'Manage different calendars.' => '',
         'Manage existing sessions.' => 'मौजूदा सत्र का प्रबंधन करें।',
         'Manage outbound email profiles.' => '',
@@ -9335,6 +9588,7 @@ Thanks for your help!
         'Running Process Tickets' => '',
         'Russian' => '',
         'S/MIME Certificates' => 'S/MIME प्रमाणपत्रों',
+        'SAML' => 'SAML',
         'Schedule a maintenance period.' => '',
         'Screen after marking as seen' => '',
         'Screen after marking as unseen' => '',
@@ -9566,6 +9820,7 @@ Thanks for your help!
         '%s MB',
         '%s TB',
         '%s of %s',
+        '(pasted XML)',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9580,6 +9835,7 @@ Thanks for your help!
         'Add new entry',
         'Add to favourites',
         'Agent',
+        'Agent authentication',
         'All occurrences',
         'All-day',
         'An Error Occurred',
@@ -9602,6 +9858,7 @@ Thanks for your help!
         'Article filter',
         'As soon as you use this button or link, you will leave this screen and its current state will be saved automatically. Do you want to continue?',
         'Ascending sort applied, ',
+        'Assertion consumer URL',
         'Attachment was deleted successfully.',
         'Attachments',
         'Aug',
@@ -9612,6 +9869,11 @@ Thanks for your help!
         'Calendar',
         'Cancel',
         'Cannot proceed',
+        'Certificate (PEM)',
+        'Certificate details',
+        'Certificate generation failed.',
+        'Certificate/key is stored in VirtualFS.',
+        'Change metadata source',
         'Clear',
         'Clear all',
         'Clear all filters',
@@ -9624,27 +9886,34 @@ Thanks for your help!
         'Clone',
         'Clone Process',
         'Clone web service',
+        'Close',
         'Close preview',
         'Close this dialog',
         'Collapse',
         'Complex %s with %s arguments',
+        'Configured',
         'Confirm',
         'Copied to clipboard!',
         'Copy Ticket Number',
         'Copy Ticket Number + Title',
         'Copy ticket information',
+        'Could not find a certificate in the metadata.',
         'Could not load activities.',
         'Could not open popup window. Please disable any popup blockers for this application.',
+        'Could not read the certificate.',
         'Current selection',
         'Currently not possible',
+        'Customer authentication',
         'Customer interface does not support articles not visible for customers.',
         'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',
         'December',
+        'Decrypt encrypted assertions',
         'Delete',
         'Delete Entity',
+        'Delete SAML configuration',
         'Delete conditions',
         'Delete draft',
         'Delete error handling module',
@@ -9678,10 +9947,12 @@ Thanks for your help!
         'Deployment successful. You\'re being redirected...',
         'Descending sort applied, ',
         'Description',
+        'Disabled',
         'Dismiss',
         'Do not show this warning again.',
         'Do you really want to continue?',
         'Do you really want to delete "%s"?',
+        'Do you really want to delete this SAML configuration?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
         'Do you really want to delete this key?',
@@ -9698,11 +9969,14 @@ Thanks for your help!
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
+        'EXPIRED',
         'Edit Field Details',
         'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)',
         'End date',
+        'Entity ID',
         'Error',
         'Error during AJAX communication',
         'Error during AJAX communication. Status: %s, Error: %s',
@@ -9716,8 +9990,10 @@ Thanks for your help!
         'February',
         'Filter',
         'Filters',
+        'Fingerprint (SHA-256)',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
+        'Found %s attribute(s) in the metadata.',
         'Fr',
         'Fri',
         'Friday',
@@ -9727,13 +10003,18 @@ Thanks for your help!
         'Grouped',
         'Help',
         'Hide EntityIDs',
+        'Identity provider CA certificate',
+        'Identity provider metadata',
         'If you now leave this page, all open popup windows will be closed, too!',
         'Import web service',
+        'Includes a signing certificate.',
         'Information about the Znuny Daemon',
         'Insert selected customer user(s) into the "%s:" field.',
         'Invalid date (need a future date)!',
         'Invalid date (need a past date)!',
         'Invalid date!',
+        'Issuer',
+        'Issuer (SP entity ID)',
         'It is going to be deleted from the field, please try again.',
         'It is not possible to add a new event trigger because the event is not set.',
         'It is not possible to set this entry to invalid. All affected configuration settings have to be changed beforehand.',
@@ -9751,6 +10032,8 @@ Thanks for your help!
         'Loading, please wait...',
         'Loading...',
         'Location',
+        'Login attribute',
+        'Login button text',
         'Mail check successful.',
         'Mapping for Key',
         'Mapping for Key %s',
@@ -9758,15 +10041,20 @@ Thanks for your help!
         'March',
         'May',
         'May_long',
+        'Metadata is valid.',
+        'Metadata verification failed.',
         'Mo',
         'Mon',
         'Monday',
         'Month',
         'Name',
+        'NameID (default)',
         'Namespace %s could not be initialized, because %s could not be found.',
         'Next',
+        'No',
         'No Data Available.',
         'No TransitionActions assigned.',
+        'No certificate/key set.',
         'No data found.',
         'No dialogs assigned yet. Just pick an activity dialog from the list on the left and drag it here.',
         'No matches found.',
@@ -9774,10 +10062,14 @@ Thanks for your help!
         'No response from get package upgrade result.',
         'No response from get package upgrade run status.',
         'No response from package upgrade all.',
+        'No signing certificate found in the metadata.',
         'No sort applied, ',
         'No space left for the following files: %s',
         'No working hours',
         'Not available',
+        'Not configured yet',
+        'Not set',
+        'Not set (will be taken from the metadata when saving)',
         'Notice',
         'Notification',
         'Nov',
@@ -9794,10 +10086,13 @@ Thanks for your help!
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
+        'Please fill in all required fields before continuing.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
+        'Please paste a certificate or key first.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select a metadata source (URL or XML) first.',
         'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
@@ -9831,11 +10126,15 @@ Thanks for your help!
         'Restore web service configuration',
         'Rule',
         'Running',
+        'SP signing certificate',
+        'SP signing key',
+        'SSO URL',
         'Sa',
         'Sat',
         'Saturday',
         'Save',
         'Save and update automatically',
+        'Saving the pasted certificate/key failed.',
         'Scale preview content',
         'Search',
         'Search attributes',
@@ -9848,6 +10147,7 @@ Thanks for your help!
         'Select files or drop them here',
         'Sep',
         'September',
+        'Serial',
         'Setting a template will overwrite any text or attachment.',
         'Settings',
         'Show',
@@ -9856,7 +10156,9 @@ Thanks for your help!
         'Show less',
         'Show more',
         'Show or hide the content.',
+        'Show raw PEM',
         'Slide the navigation bar',
+        'Slot',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',
         'Sorry, but you can\'t disable all methods for this notification.',
         'Sorry, the only existing condition can\'t be removed.',
@@ -9871,12 +10173,14 @@ Thanks for your help!
         'Status',
         'Stream',
         'Su',
+        'Subject',
         'Successful',
         'Sun',
         'Sunday',
         'Support Bundle',
         'Switch to desktop mode',
         'Switch to mobile mode',
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?',
         'Team',
         'Th',
         'The activities could not be marked as seen.',
@@ -9898,6 +10202,7 @@ Thanks for your help!
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',
+        'There was an error deleting the SAML configuration.',
         'There was an error deleting the attachment. Please check the logs for more information.',
         'There was an error. Please save all settings you are editing and check the logs for more information.',
         'This Activity cannot be deleted because it is the Start Activity.',
@@ -9929,15 +10234,22 @@ Thanks for your help!
         'Tu',
         'Tue',
         'Tuesday',
+        'Type',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.',
         'Unknown',
         'Unlock setting.',
         'Update All Packages',
         'Update all packages',
         'Update manually',
+        'Upload failed.',
         'Upload information',
+        'Uploaded key',
         'Uploading...',
         'Use options below to narrow down for which tickets appointments will be automatically created.',
+        'User sync',
+        'Valid from',
+        'Valid until',
+        'Verifying...',
         'WARNING: When you change the name of the group \'admin\', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement.',
         'Warning',
         'We',
@@ -9954,12 +10266,14 @@ Thanks for your help!
         'activate to remove the sort',
         'and %s more...',
         'day',
+        'expires',
         'month',
         'more',
         'no',
         'none',
         'or',
         'sorting is disabled',
+        'used by %s configuration(s)',
         'week',
         'yes',
     ];

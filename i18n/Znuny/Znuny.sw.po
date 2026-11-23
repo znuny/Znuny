@@ -890,7 +890,7 @@ msgstr ""
 msgid "Account status for: %s"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogAccounts.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "Status"
 msgstr "Hali/hadhi"
 
@@ -898,7 +898,7 @@ msgstr "Hali/hadhi"
 msgid "Account"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogAccounts.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "Edit"
 msgstr "Hariri"
 
@@ -1274,7 +1274,7 @@ msgstr ""
 msgid "Toggle active state for all"
 msgstr "Geuza hali amilifu kwa wote"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
 msgid "Active"
 msgstr "Amilifu"
 
@@ -4562,7 +4562,7 @@ msgstr "Jenga kifurushi"
 msgid "Package Information"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "Metadata"
 msgstr "Metadata"
 
@@ -4586,11 +4586,11 @@ msgstr "Ruhusa"
 msgid "Size"
 msgstr "Ukubwa"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "Problem"
 msgstr "Tatizo"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "OK"
 msgstr "Sawa"
 
@@ -6102,7 +6102,7 @@ msgstr "Ongeza Anuani ya barua pepe ya mfumo"
 msgid "Edit System Email Address"
 msgstr "Hariri Anuani ya Barua pepe ya Mfumo"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
 msgid "Email address"
 msgstr "Anuani ya barua pepe"
 
@@ -6622,11 +6622,11 @@ msgstr ""
 msgid "Notification"
 msgstr "Taarifa"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentAgendaOverview.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "Yes"
 msgstr "Ndio"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentAgendaOverview.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "No"
 msgstr "Hapana"
 
@@ -8366,7 +8366,7 @@ msgstr "Pakia yaliyomo yaliyozuiliwa."
 msgid "Home"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
 msgid "Back"
 msgstr "Nyuma"
 
@@ -8806,7 +8806,7 @@ msgstr "Tovuti"
 msgid "Community"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
 msgid "Next"
 msgstr "Baadae"
 
@@ -14618,7 +14618,7 @@ msgstr ""
 msgid "All Settings"
 msgstr ""
 
-#. Perl Module: Kernel/System/SysConfig/BaseValueType.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "Default"
 msgstr ""
 
@@ -21098,7 +21098,7 @@ msgstr ""
 msgid "Please remove the following words from your search as they cannot be searched for:"
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.SharedSecretGenerator.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
 msgid "Generate"
 msgstr ""
 
@@ -24937,7 +24937,7 @@ msgstr ""
 msgid "Copy Ticket Number + Title"
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
 msgid "Copied to clipboard!"
 msgstr ""
 
@@ -25641,6 +25641,722 @@ msgstr ""
 msgid "What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder."
 msgstr "Cha kutumia badala ya thamani isiyofafanuliwa inapoingizwa kwenye kiolezo kwa kutumia kishika nafasi cha ZNUNY_."
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Certificate/key is stored in VirtualFS."
+msgstr "Cheti/ufunguo kimehifadhiwa katika VirtualFS."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "No certificate/key set."
+msgstr "Hakuna cheti/ufunguo uliowekwa."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "View certificate details"
+msgstr "Angalia maelezo ya cheti"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "The selected certificate/key is not available. Please select or upload it again."
+msgstr "Cheti/ufunguo uliochaguliwa haupatikani. Tafadhali uchague au uupakie tena."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "- Select an existing certificate/key -"
+msgstr "- Chagua cheti/ufunguo uliopo -"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Paste"
+msgstr "Bandika"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Use certificate from metadata"
+msgstr "Tumia cheti kutoka Metadata"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Extracts the signing certificate embedded in the Identity Provider metadata and stores it here, instead of uploading it separately."
+msgstr "Hutoa cheti cha kusaini kilichopachikwa katika Metadata ya mtoa utambulisho na kuhifadhi hapa, badala ya kukipakia kando."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Paste the PEM text including the BEGIN and END lines."
+msgstr "Bandika maandishi ya PEM pamoja na mistari ya BEGIN na END."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Common Name"
+msgstr "Jina la kawaida"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Key size"
+msgstr "Ukubwa wa ufunguo"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Validity (days)"
+msgstr "Uhalali (siku)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Generate self-signed certificate"
+msgstr "Zalisha cheti cha kujisaini"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Authentication Management"
+msgstr "Usimamizi wa uthibitisho"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Agent authentication"
+msgstr "Uthibitisho wa wakala"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Basic settings"
+msgstr "Mpangilio wa msingi"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Slot"
+msgstr "Nafasi"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Determines which numbered AuthModule<N> slot this configuration occupies. Only unused slots are offered."
+msgstr "Hubainisha nafasi ya AuthModule<N> yenye namba ambayo usanidi huu unatumia. Nafasi ambazo hazijatumika pekee ndizo zinazotolewa."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SAML request settings"
+msgstr "Mpangilio wa ombi la SAML"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Login button text"
+msgstr "Maandishi ya kitufe cha Ingia"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Assertion consumer URL"
+msgstr "URL ya mpokeaji wa dai"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Automatically derived from this system's HTTP type, FQDN and script alias - not editable."
+msgstr "Hutolewa kiotomatiki kutoka aina ya HTTP, FQDN na lakabu ya skripti ya mfumo huu - haiwezi kuhaririwa."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Znuny appends a \";IsSAMLLogin=1;Count=<N>;\" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration's slot), so the value the Identity Provider actually receives is:"
+msgstr "Znuny huambatisha kiambishi \";IsSAMLLogin=1;Count=<N>;\" kwenye URL hii wakati wa kujenga ombi halisi la SAML linalotoka (<N> ni nafasi ya usanidi huu), hivyo thamani ambayo mtoa utambulisho hupokea kwa hakika ni:"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Copy to clipboard"
+msgstr "Nakili kwenye ubao wa kunakili"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honor the value from the request. If your IdP's field rejects semicolons, register the base URL instead."
+msgstr "Baadhi ya watoa utambulisho wanahitaji thamani hii kamili kusajiliwa kama ACS URL. Wengine hukubali URL ya msingi hapo juu na kutumia thamani kutoka ombini. Ikiwa sehemu ya IdP wako inakataa nukta mkato, sajili URL ya msingi badala yake."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Download SP metadata XML"
+msgstr "Pakua XML ya Metadata ya SP"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Issuer (SP entity ID)"
+msgstr "Mtoaji (kitambulisho cha chombo cha SP)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Requested NameID format"
+msgstr "Umbizo la NameID lililoombwa"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Unspecified"
+msgstr "Haijabainishwa"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Persistent"
+msgstr "Endelevu"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Transient"
+msgstr "Muda"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Sent as the NameIDPolicy Format in the outgoing request and published in the SP metadata. Change this only if your Identity Provider requires a specific format."
+msgstr "Hutumwa kama umbizo la NameIDPolicy katika ombi linalotoka na kuchapishwa katika Metadata ya SP. Badilisha hili tu ikiwa mtoa utambulisho wako unahitaji umbizo mahususi."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Load metadata from URL"
+msgstr "Leta Metadata kutoka URL"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Switch off to paste the metadata XML instead. Switching clears the entered URL or XML and the SSL options."
+msgstr "Zima ili kubandika XML ya Metadata badala yake. Kubadili kunafuta URL au XML iliyoingizwa na chaguo za SSL."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Please select a metadata source."
+msgstr "Tafadhali chagua chanzo cha Metadata."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Metadata URL"
+msgstr "URL ya Metadata"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Verify"
+msgstr "Thibitisha"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Metadata XML"
+msgstr "XML ya Metadata"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Use custom SSL options for metadata URL fetch"
+msgstr "Tumia chaguo maalum za SSL kupata URL ya Metadata"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SSL CA file"
+msgstr "Faili ya SSL CA"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SSL CA path"
+msgstr "Njia ya SSL CA"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Verify hostname"
+msgstr "Thibitisha jina la seva pangishi"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Certificates and keys"
+msgstr "Vyeti na funguo"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SP signing key (used to sign outgoing requests)"
+msgstr "Ufunguo wa kusaini wa SP (hutumika kusaini maombi yanayotoka)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SP signing certificate (matches the key above)"
+msgstr "Cheti cha kusaini cha SP (kinalingana na ufunguo hapo juu)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Required for the SP metadata's KeyDescriptor to be published. \"Generate\" above already produces this together with the key - only needed as a separate step if you uploaded your own key."
+msgstr "Kinahitajika ili KeyDescriptor ya Metadata ya SP ichapishwe. \"Zalisha\" hapo juu tayari hukitengeneza pamoja na ufunguo - kinahitajika kama hatua tofauti tu ikiwa ulipakia ufunguo wako."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Signing algorithm"
+msgstr "Kanuni ya kusaini"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SHA-256 (default)"
+msgstr "SHA-256 (chaguo-msingi)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SHA-384"
+msgstr "SHA-384"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SHA-512"
+msgstr "SHA-512"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SHA-1 (legacy, not recommended)"
+msgstr "SHA-1 (la zamani, halipendekezwi)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Used to sign the outgoing request when a signing key is set above. Only change this if your Identity Provider requires a specific algorithm."
+msgstr "Hutumika kusaini ombi linalotoka wakati ufunguo wa kusaini umewekwa hapo juu. Badilisha hili tu ikiwa mtoa utambulisho wako unahitaji kanuni mahususi."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Decrypt encrypted assertions"
+msgstr "Fungua dai zilizosimbwa"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Uses the SP signing key above to decrypt SAML assertions the Identity Provider encrypts. Has no effect on responses that aren't encrypted, so it's safe to leave enabled. Requires a signing key above."
+msgstr "Hutumia ufunguo wa kusaini wa SP hapo juu kufungua dai za SAML ambazo mtoa utambulisho huzisimba. Haathiri majibu ambayo hayajasimbwa, kwa hiyo ni salama kuiacha ikiwezeshwa. Inahitaji ufunguo wa kusaini hapo juu."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Identity provider CA certificate"
+msgstr "Cheti cha CA cha mtoa utambulisho"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Required for SAML login to work. Without it, Net::SAML2 cannot verify the Identity Provider's response signature and authentication will fail."
+msgstr "Kinahitajika ili kuingia kwa SAML kufanye kazi. Bila hicho, Net::SAML2 haiwezi kuthibitisha saini ya jibu la mtoa utambulisho na uthibitisho utashindwa."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Attribute, group and role sync"
+msgstr "Usawazishaji wa sifa, kundi na jukumu"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+msgid "Customer authentication"
+msgstr "Uthibitisho wa mteja"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+msgid "Determines which numbered Customer::AuthModule<N> slot this configuration occupies. Only unused slots are offered."
+msgstr "Hubainisha nafasi ya Customer::AuthModule<N> yenye namba ambayo usanidi huu unatumia. Nafasi ambazo hazijatumika pekee ndizo zinazotolewa."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "SAML wizard"
+msgstr "Mchawi wa SAML"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Add agent SAML authentication"
+msgstr "Ongeza uthibitisho wa SAML wa wakala"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Add customer SAML authentication"
+msgstr "Ongeza uthibitisho wa SAML wa mteja"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Deploy configuration"
+msgstr "Sambaza usanidi"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Sync"
+msgstr "Sawazisha"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Slot %s"
+msgstr "Nafasi %s"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Only invalid configurations can be deleted. Set this configuration to invalid first."
+msgstr "Usanidi batili pekee unaweza kufutwa. Weka kwanza usanidi huu kuwa batili."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Enable sync"
+msgstr "Wezesha usawazishaji"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Also registers Kernel::System::Auth::Sync::SAML for the same slot, to sync attributes/groups/roles from the SAML assertion on every login."
+msgstr "Pia husajili Kernel::System::Auth::Sync::SAML kwa nafasi ile ile, ili kusawazisha sifa/makundi/majukumu kutoka dai la SAML kila kuingia."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "The AuthSyncModule for this slot is already configured outside of AdminAuthentication - sync cannot be enabled for it."
+msgstr "AuthSyncModule ya nafasi hii tayari imesanidiwa nje ya AdminAuthentication - usawazishaji hauwezi kuwezeshwa kwake."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "User attribute sync map"
+msgstr "Ramani ya usawazishaji wa sifa za mtumiaji"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Maps Znuny user attributes (left) to SAML assertion attribute names (right)."
+msgstr "Huunganisha sifa za mtumiaji wa Znuny (kushoto) na majina ya sifa za dai la SAML (kulia)."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Znuny attribute"
+msgstr "Sifa ya Znuny"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "SAML attribute URI"
+msgstr "URI ya sifa ya SAML"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Initial groups for new users"
+msgstr "Makundi ya awali kwa watumiaji wapya"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Groups (with rw permission) granted only when a brand-new agent is created via sync. Ctrl/Cmd-click to select multiple."
+msgstr "Makundi (yenye ruhusa ya rw) hutolewa tu wakati wakala mpya kabisa anapoundwa kupitia usawazishaji. Ctrl/Cmd-click kuchagua zaidi ya moja."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "SAML attribute carrying group values"
+msgstr "Sifa ya SAML inayobeba thamani za kundi"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Group sync rules (by group value)"
+msgstr "Sheria za usawazishaji wa kundi (kwa thamani ya kundi)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Maps a SAML group value to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions."
+msgstr "Huunganisha thamani ya kundi la SAML na kundi la Znuny na ruhusa. Ctrl/Cmd-click kuchagua ruhusa nyingi."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "SAML value"
+msgstr "Thamani ya SAML"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Group sync rules (by arbitrary attribute/value)"
+msgstr "Sheria za usawazishaji wa kundi (kwa sifa/thamani yoyote)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Maps any SAML attribute name/value combination to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions."
+msgstr "Huunganisha mchanganyiko wowote wa jina/thamani ya sifa ya SAML na kundi la Znuny na ruhusa. Ctrl/Cmd-click kuchagua ruhusa nyingi."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "SAML attribute"
+msgstr "Sifa ya SAML"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Role sync requires at least one active role. Create or activate a role under Admin → Roles."
+msgstr "Usawazishaji wa majukumu unahitaji angalau jukumu moja amilifu. Tengeneza au wezesha jukumu chini ya Kiongozi → Majukumu."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "SAML attribute carrying role values"
+msgstr "Sifa ya SAML inayobeba thamani za jukumu"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Role sync rules (by role value)"
+msgstr "Sheria za usawazishaji wa jukumu (kwa thamani ya jukumu)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Maps a SAML role value to one or more Znuny roles, active or inactive."
+msgstr "Huunganisha thamani ya jukumu la SAML na jukumu la Znuny, amilifu au si amilifu."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Role sync rules (by arbitrary attribute/value)"
+msgstr "Sheria za usawazishaji wa jukumu (kwa sifa/thamani yoyote)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Maps any SAML attribute name/value combination to one or more Znuny roles, active or inactive."
+msgstr "Huunganisha mchanganyiko wowote wa jina/thamani ya sifa ya SAML na jukumu la Znuny, amilifu au si amilifu."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Setup steps"
+msgstr "Hatua za usanidi"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Setup wizard"
+msgstr "Mchawi wa usanidi"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "SAML setup wizard"
+msgstr "Mchawi wa usanidi wa SAML"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Step"
+msgstr "Hatua"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "What are you setting up?"
+msgstr "Unasanidi nini?"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Agent authentication - staff logging into the agent interface"
+msgstr "Uthibitisho wa wakala - wafanyakazi wanaoingia kwenye kiolesura cha wakala"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Customer authentication - customers logging into the customer portal"
+msgstr "Uthibitisho wa mteja - wateja wanaoingia kwenye lango la mteja"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Login with SSO"
+msgstr "Ingia kwa SSO"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "User sync (optional)"
+msgstr "Usawazishaji wa mtumiaji (hiari)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Optionally sync user attributes, groups and roles from the SAML assertion on every login. This can also be set up later on the edit screen."
+msgstr "Kwa hiari sawazisha sifa za mtumiaji, makundi na majukumu kutoka dai la SAML kila kuingia. Hili linaweza pia kusanidiwa baadaye kwenye skrini ya kuhariri."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Review"
+msgstr "Kagua"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective."
+msgstr "Bofya Hifadhi kuunda usanidi huu wa SAML. Bado hautakuwa amilifu - baadaye tumia kitendo cha Sambaza usanidi kwenye ukurasa wa Mapitio ili kifanye kazi."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "If you skipped the Identity Provider CA certificate here and provided metadata instead, it will be derived from that metadata automatically during Deploy."
+msgstr "Ikiwa uliruka cheti cha CA cha mtoa utambulisho hapa na kutoa Metadata badala yake, kitatolewa kiotomatiki kutoka Metadata hiyo wakati wa usambazaji."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only)."
+msgstr "Unaweza kurudi kwenye hatua yoyote ya awali kufanya mabadiliko, au baadaye utumie skrini kamili ya kuhariri kwa chaguo za juu kama usawazishaji wa sifa/kundi/jukumu (uthibitisho wa wakala pekee)."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Perl module Net::SAML2 is not installed. SAML authentication cannot work until it is installed on the server."
+msgstr "Moduli ya Perl Net::SAML2 haijasakinishwa. Uthibitisho wa SAML hauwezi kufanya kazi mpaka isakinishwe kwenye seva."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Authentication configuration is not in sync with the deployed configuration, please deploy."
+msgstr "Usanidi wa uthibitisho haujasawazishwa na usanidi uliosambazwa, tafadhali sambaza."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Only invalid authentication configurations can be deleted. Please set the configuration to invalid first."
+msgstr "Usanidi batili wa uthibitisho pekee unaweza kufutwa. Tafadhali weka kwanza usanidi kuwa batili."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Invalid or missing Role."
+msgstr "Jukumu batili au halipo."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "No file was uploaded."
+msgstr "Hakuna faili iliyopakiwa."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Error storing the uploaded file."
+msgstr "Kasoro kuhifadhi faili iliyopakiwa."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Only the SP signing key can be generated."
+msgstr "Ufunguo wa kusaini wa SP pekee unaweza kuzalishwa."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Error generating certificate. Please check the system log."
+msgstr "Kasoro kuzalisha cheti. Tafadhali angalia kumbukumbu ya mfumo."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Error storing the generated key in VirtualFS."
+msgstr "Kasoro kuhifadhi ufunguo uliozalishwa katika VirtualFS."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Error storing the generated certificate in VirtualFS."
+msgstr "Kasoro kuhifadhi cheti kilichozalishwa katika VirtualFS."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Could not find a certificate in the metadata. Please check the URL/XML and try again."
+msgstr "Haikuwezekana kupata cheti katika Metadata. Tafadhali angalia URL/XML na ujaribu tena."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Error storing the certificate."
+msgstr "Kasoro kuhifadhi cheti."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Could not read the certificate from VirtualFS."
+msgstr "Haikuwezekana kusoma cheti kutoka VirtualFS."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "The authentication configuration was not deployed. The previously deployed configuration is still active."
+msgstr "Usanidi wa uthibitisho haukusambazwa. Usanidi uliosambazwa awali bado uko amilifu."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Please check the system log for details."
+msgstr "Tafadhali angalia kumbukumbu ya mfumo kwa maelezo."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "This is not an unencrypted private key in PEM format (-----BEGIN PRIVATE KEY-----)."
+msgstr "Huu si ufunguo wa faragha usiosimbwa katika umbizo la PEM (-----BEGIN PRIVATE KEY-----)."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "This is not a certificate in PEM format (-----BEGIN CERTIFICATE-----)."
+msgstr "Huu si cheti katika umbizo la PEM (-----BEGIN CERTIFICATE-----)."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "The private key could not be read. Only unencrypted private keys are supported."
+msgstr "Ufunguo wa faragha haukuweza kusomwa. Funguo za faragha zisizosimbwa pekee ndizo zinazotumika."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "The certificate could not be read."
+msgstr "Cheti hakikuweza kusomwa."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Could not read the SP signing key."
+msgstr "Haikuwezekana kusoma ufunguo wa kusaini wa SP."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Could not read the IdP CA certificate."
+msgstr "Haikuwezekana kusoma cheti cha CA cha IdP."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "No IdP CA certificate was uploaded and none could be taken from the IdP metadata."
+msgstr "Hakuna cheti cha CA cha IdP kilichopakiwa na hakuna kilichoweza kuchukuliwa kutoka Metadata ya IdP."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Could not decrypt the SP signing key. Please check the configured encryption key."
+msgstr "Haikuwezekana kufungua ufunguo wa kusaini wa SP. Tafadhali angalia ufunguo wa usimbaji uliosanidiwa."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Net::SAML2 is not installed on the server, metadata cannot be verified."
+msgstr "Net::SAML2 haijasakinishwa kwenye seva, Metadata haiwezi kuthibitishwa."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Metadata URL is empty."
+msgstr "URL ya Metadata ni tupu."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Metadata XML is empty."
+msgstr "XML ya Metadata ni tupu."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Could not parse the metadata. Please check the URL/XML and try again."
+msgstr "Haikuwezekana kuchambua Metadata. Tafadhali angalia URL/XML na ujaribu tena."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Perl module Crypt::OpenSSL::X509 is not installed, certificate details cannot be parsed."
+msgstr "Moduli ya Perl Crypt::OpenSSL::X509 haijasakinishwa, maelezo ya cheti hayawezi kuchambuliwa."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Could not parse the certificate."
+msgstr "Haikuwezekana kuchambua cheti."
+
+#. Perl Module: Kernel/System/AuthenticationConfig.pm
+msgid "No authentication plugin is registered for this type."
+msgstr "Hakuna programu-jalizi ya uthibitisho iliyosajiliwa kwa aina hii."
+
+#. Perl Module: Kernel/System/AuthenticationConfig.pm
+msgid "Could not write the certificate files."
+msgstr "Haikuwezekana kuandika faili za cheti."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Registers the SAML 2.0 authentication plugin for AdminAuthentication."
+msgstr "Husajili programu-jalizi ya uthibitisho ya SAML 2.0 kwa AdminAuthentication."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?"
+msgstr "Kubadilisha chanzo cha Metadata huondoa URL au XML ya Metadata iliyoingizwa na chaguo za SSL. Endelea?"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Change metadata source"
+msgstr "Badilisha chanzo cha Metadata"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Uploaded key"
+msgstr "Ufunguo uliopakiwa"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "EXPIRED"
+msgstr "IMEISHA"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "expires"
+msgstr "inaisha"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "used by %s configuration(s)"
+msgstr "inatumika na usanidi %s"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Could not read the certificate."
+msgstr "Haikuweza kusoma cheti."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Certificate (PEM)"
+msgstr "Cheti (PEM)"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Issuer"
+msgstr "Mtoaji"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Valid from"
+msgstr "Halali kuanzia"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Valid until"
+msgstr "Halali hadi"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Serial"
+msgstr "Namba ya mfululizo"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Fingerprint (SHA-256)"
+msgstr "Alama za vidole (SHA-256)"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Show raw PEM"
+msgstr "Onyesha PEM ghafi"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Certificate details"
+msgstr "Maelezo ya cheti"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Metadata is valid."
+msgstr "Metadata ni halali."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Entity ID"
+msgstr "Kitambulisho cha chombo"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "SSO URL"
+msgstr "SSO URL"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Includes a signing certificate."
+msgstr "Inajumuisha cheti cha kusaini."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "No signing certificate found in the metadata."
+msgstr "Hakuna cheti cha kusaini kilichopatikana katika Metadata."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Found %s attribute(s) in the metadata."
+msgstr "Sifa %s zimepatikana katika Metadata."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Verifying..."
+msgstr "Inathibitisha..."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Metadata verification failed."
+msgstr "Uthibitisho wa Metadata umeshindwa."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Upload failed."
+msgstr "Upakiaji umeshindwa."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Please paste a certificate or key first."
+msgstr "Tafadhali bandika kwanza cheti au ufunguo."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Saving the pasted certificate/key failed."
+msgstr "Kuhifadhi cheti/ufunguo uliobandikwa kumeshindwa."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Certificate generation failed."
+msgstr "Kuzalisha cheti kumeshindwa."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Please select a metadata source (URL or XML) first."
+msgstr "Tafadhali chagua kwanza chanzo cha Metadata (URL au XML)."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Could not find a certificate in the metadata."
+msgstr "Haikuwezekana kupata cheti katika Metadata."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Do you really want to delete this SAML configuration?"
+msgstr "Je, kweli unataka kufuta usanidi huu wa SAML?"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Delete SAML configuration"
+msgstr "Futa usanidi wa SAML"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "There was an error deleting the SAML configuration."
+msgstr "Kulikuwa na kasoro kufuta usanidi wa SAML."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "(pasted XML)"
+msgstr "(XML iliyobandikwa)"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Not configured yet"
+msgstr "Bado haijasanidiwa"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Identity provider metadata"
+msgstr "Metadata ya mtoa utambulisho"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "SP signing key"
+msgstr "Ufunguo wa kusaini wa SP"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Configured"
+msgstr "Imesanidiwa"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Not set"
+msgstr "Haijawekwa"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "SP signing certificate"
+msgstr "Cheti cha kusaini cha SP"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Not set (will be derived automatically from metadata during Deploy, if possible)"
+msgstr "Haijawekwa (kitatolewa kiotomatiki kutoka Metadata wakati wa usambazaji, ikiwezekana)"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "User sync"
+msgstr "Usawazishaji wa mtumiaji"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Enabled (%s attribute mappings, %s group rules, %s role rules)"
+msgstr "Imewezeshwa (%s ramani za sifa, %s sheria za makundi, %s sheria za majukumu)"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Please fill in all required fields before continuing."
+msgstr "Tafadhali jaza sehemu zote zinazohitajika kabla ya kuendelea."
+
+#. SysConfig
+msgid "Manage agent and customer authentication (e.g. SAML 2.0)."
+msgstr "Simamia uthibitisho wa wakala na mteja (k.m. SAML 2.0)."
+
+#. SysConfig
+msgid "SAML"
+msgstr "SAML"
+
 #. Perl Module: Kernel/Modules/AgentTicketQueue.pm
 msgid "System default"
 msgstr ""
@@ -25724,4 +26440,64 @@ msgstr "Uwezo wa kumbukumbu ya redo ya InnoDB"
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
 msgid "The setting innodb_redo_log_capacity must be at least 256 MB."
 msgstr "Mpangilio wa innodb_redo_log_capacity lazima uwe angalau 256 MB."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Paste key"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Paste certificate"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Login attribute"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Please enter attribute names separated by commas."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Optional. By default the NameID is the login. Enter one or more SAML attribute names (Name or FriendlyName), separated by commas, to take the login from the first of these attributes the assertion contains instead, e.g. if the Identity Provider sends a persistent NameID. The attribute must have exactly one value, otherwise the login fails. Changing this changes the login of existing users."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Deployment failed"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Fix the configurations below and deploy again. Or set a configuration to invalid: its login stops working and the other configurations are deployed."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Set to invalid and deploy the rest"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "If you skipped the Identity Provider CA certificate here, it is taken from the metadata when saving. Please check it on the edit screen afterwards."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Authentication configuration is not in sync with the deployed configuration, but it can't be deployed: a valid configuration has a problem, see the status below. Fix it or set it to invalid, then deploy."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Authentication configuration not found."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Could not set the authentication configuration to invalid."
+msgstr ""
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "No IdP CA certificate is stored. It is taken from the IdP metadata on every deploy. Save the configuration to store it."
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "NameID (default)"
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Not set (will be taken from the metadata when saving)"
+msgstr ""
 

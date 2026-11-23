@@ -1,0 +1,323 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement AdminAuthentication">
+
+    <div class="SidebarColumn ActionsSideBarComp">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Setup steps") | html %]</h2>
+            </div>
+            <div class="Content">
+# Filled by Core.Agent.Admin.Authentication.js from the step widget titles.
+                <ol class="WizardSteps" data-wizard-step-list></ol>
+            </div>
+        </div>
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=AdminAuthentication" class="CallForAction Fullsize Center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("Authentication Management") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate("Authentication Management"),
+                    Link => Env("Action"),
+                },
+                {
+                    Name => Translate("Setup wizard"),
+                },
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        <form id="AuthenticationWizardForm" action="[% Env("CGIHandle") %]" method="post" class="Validate PreventMultipleSubmits" enctype="multipart/form-data">
+            <input type="hidden" id="Action" name="Action" value="AdminAuthentication"/>
+            <input type="hidden" id="Subaction" name="Subaction" value="SaveAgentAuth"/>
+            <input type="hidden" id="ID" name="ID" value=""/>
+            <input type="hidden" id="ValidID" name="ValidID" value="1"/>
+            <input type="hidden" id="Slot" name="Slot" value=""/>
+            <input type="hidden" id="WizardDiscoveredAttributes" name="WizardDiscoveredAttributes" value=""/>
+            <input type="hidden" id="ContinueAfterSave" name="ContinueAfterSave" value=""/>
+
+            <div class="WidgetSimple">
+                <div class="Header">
+                    <h2>[% Translate("SAML setup wizard") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <p class="FieldExplanation">
+                        [% Translate("Step") | html %] <span data-wizard-step-number>1</span> / <span data-wizard-step-count>5</span>: <strong data-wizard-step-title></strong>
+                    </p>
+                </div>
+            </div>
+
+            <div class="WidgetSimple" data-wizard-step="0">
+                <div class="Header">
+                    <h2>[% Translate("What are you setting up?") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <fieldset class="TableLike">
+                        <div class="field-wrapper">
+                            <div class="Field">
+                                <label>
+                                    <input type="radio" name="WizardContext" value="Agent" data-wizard-context-radio checked="checked" />
+                                    [% Translate("Agent authentication - staff logging into the agent interface") | html %]
+                                </label>
+                            </div>
+                            <div class="Field">
+                                <label>
+                                    <input type="radio" name="WizardContext" value="Customer" data-wizard-context-radio />
+                                    [% Translate("Customer authentication - customers logging into the customer portal") | html %]
+                                </label>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="WidgetSimple Hidden" data-wizard-step="1">
+                <div class="Header">
+                    <h2>[% Translate("Basic settings") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <fieldset class="TableLike">
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="Name"><span class="Marker">*</span> [% Translate("Name") | html %]</label>
+                            <div class="Field">
+                                <input type="text" id="Name" name="Name" value="" class="W50pc Validate_Required" maxlength="250" />
+                            </div>
+                        </div>
+                        <div class="field-wrapper" data-wizard-slot="Agent">
+                            <label class="Mandatory" for="WizardSlotAgent"><span class="Marker">*</span> [% Translate("Slot") | html %]</label>
+                            <div class="Field">
+                                [% Data.AgentSlotSelection %]
+                                <p class="FieldExplanation">[% Translate("Determines which numbered AuthModule<N> slot this configuration occupies. Only unused slots are offered.") | html %]</p>
+                            </div>
+                        </div>
+                        <div class="field-wrapper Hidden" data-wizard-slot="Customer">
+                            <label class="Mandatory" for="WizardSlotCustomer"><span class="Marker">*</span> [% Translate("Slot") | html %]</label>
+                            <div class="Field">
+                                [% Data.CustomerSlotSelection %]
+                                <p class="FieldExplanation">[% Translate("Determines which numbered Customer::AuthModule<N> slot this configuration occupies. Only unused slots are offered.") | html %]</p>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="WidgetSimple Hidden" data-wizard-step="2">
+                <div class="Header">
+                    <h2>[% Translate("SAML request settings") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <fieldset class="TableLike">
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="RequestLoginButtonText"><span class="Marker">*</span> [% Translate("Login button text") | html %]</label>
+                            <div class="Field">
+                                <input type="text" id="RequestLoginButtonText" name="RequestLoginButtonText" value="[% Translate("Login with SSO") | html %]" class="W50pc Validate_Required" />
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper" data-wizard-acsurl="Agent">
+                            <label>[% Translate("Assertion consumer URL") | html %]</label>
+                            <p class="Value">
+                                [% Data.AgentRequestAssertionConsumerURL | html %]
+                            </p>
+                            <p class="FieldExplanation">[% Translate("Automatically derived from this system's HTTP type, FQDN and script alias - not editable.") | html %]</p>
+                            <p class="FieldExplanation">[% Translate("Znuny appends a \";IsSAMLLogin=1;Count=<N>;\" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration's slot), so the value the Identity Provider actually receives is:") | html %]</p>
+                            <p class="Value"><code>[% Data.AgentRequestAssertionConsumerURL | html %];IsSAMLLogin=1;Count=<span data-acs-url-count></span>;</code></p>
+                            <p class="FieldExplanation">[% Translate("Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honor the value from the request. If your IdP's field rejects semicolons, register the base URL instead.") | html %]</p>
+                        </div>
+                        <div class="field-wrapper Hidden" data-wizard-acsurl="Customer">
+                            <label>[% Translate("Assertion consumer URL") | html %]</label>
+                            <p class="Value">
+                                [% Data.CustomerRequestAssertionConsumerURL | html %]
+                            </p>
+                            <p class="FieldExplanation">[% Translate("Automatically derived from this system's HTTP type, FQDN and script alias - not editable.") | html %]</p>
+                            <p class="FieldExplanation">[% Translate("Znuny appends a \";IsSAMLLogin=1;Count=<N>;\" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration's slot), so the value the Identity Provider actually receives is:") | html %]</p>
+                            <p class="Value"><code>[% Data.CustomerRequestAssertionConsumerURL | html %];IsSAMLLogin=1;Count=<span data-acs-url-count></span>;</code></p>
+                            <p class="FieldExplanation">[% Translate("Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honor the value from the request. If your IdP's field rejects semicolons, register the base URL instead.") | html %]</p>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label class="Mandatory" for="Issuer"><span class="Marker">*</span> [% Translate("Issuer (SP entity ID)") | html %]</label>
+                            <div class="Field">
+                                <input type="text" id="Issuer" name="Issuer" value="[% Data.Issuer | html %]" class="W50pc Validate_Required" />
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="UserLoginAttribute">[% Translate("Login attribute") | html %]</label>
+                            <div class="Field">
+                                <input type="text" id="UserLoginAttribute" name="UserLoginAttribute" value="" class="W50pc" placeholder="e.g. uid, mail" />
+                            </div>
+                            <p class="FieldExplanation">[% Translate("Optional. By default the NameID is the login. Enter one or more SAML attribute names (Name or FriendlyName), separated by commas, to take the login from the first of these attributes the assertion contains instead, e.g. if the Identity Provider sends a persistent NameID. The attribute must have exactly one value, otherwise the login fails. Changing this changes the login of existing users.") | html %]</p>
+                        </div>
+
+                        <div class="field-wrapper">
+                            <label for="MetaDataSourceSwitch">[% Translate("Load metadata from URL") | html %]</label>
+                            <div class="Field">
+# URL is the default. The hidden field carries the value that is sent, the switch has no name.
+                                [% MetaDataSourceType = 'URL' %]
+                                <input type="hidden" id="MetaDataSourceType" name="MetaDataSourceType" value="[% MetaDataSourceType | html %]" />
+                                <span class="ToggleSwitch">
+                                    <input type="checkbox" id="MetaDataSourceSwitch" role="switch" data-metadata-source-switch [% IF MetaDataSourceType == 'URL' %]checked="checked"[% END %] />
+                                    <span class="ToggleSwitchSlider" aria-hidden="true"></span>
+                                </span>
+                                <p class="FieldExplanation">[% Translate("Switch off to paste the metadata XML instead. Switching clears the entered URL or XML and the SSL options.") | html %]</p>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper MetaDataURLField">
+                            <label class="Mandatory" for="RequestMetaDataURL"><span class="Marker">*</span> [% Translate("Metadata URL") | html %]</label>
+                            <div class="Field FieldInlineButton">
+                                <input type="text" id="RequestMetaDataURL" name="RequestMetaDataURL" value="" class="W75pc" />
+                                <button type="button" class="CallForAction btn-main btn-primary-ghost btn-width-max" data-metadata-verify data-source="URL"><span>[% Translate("Verify") | html %]</span></button>
+                                <p class="FieldExplanation MetaDataVerifyResult" data-metadata-verify-result data-source="URL"></p>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper MetaDataXMLField Hidden">
+                            <label class="Mandatory" for="RequestMetaDataXML"><span class="Marker">*</span> [% Translate("Metadata XML") | html %]</label>
+                            <div class="Field">
+                                <textarea id="RequestMetaDataXML" name="RequestMetaDataXML" rows="8" class="W75pc"></textarea>
+                                <button type="button" class="CallForAction btn-main btn-primary-ghost btn-width-max" data-metadata-verify data-source="XML"><span>[% Translate("Verify") | html %]</span></button>
+                                <p class="FieldExplanation" data-metadata-verify-result data-source="XML"></p>
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper MetaDataURLField">
+                            <label for="SSLOptionsEnabled">[% Translate("Use custom SSL options for metadata URL fetch") | html %]</label>
+                            <div class="Field">
+                                <input type="checkbox" id="SSLOptionsEnabled" name="SSLOptionsEnabled" value="1" data-ssl-options-toggle />
+                            </div>
+                        </div>
+
+                        <div class="field-wrapper SSLOptionsField Hidden">
+                            <label for="SSLCAFile">[% Translate("SSL CA file") | html %]</label>
+                            <div class="Field">
+                                <input type="text" id="SSLCAFile" name="SSLCAFile" value="" class="W50pc" placeholder="/etc/ssl/certs/cacert.pem" />
+                            </div>
+                        </div>
+                        <div class="field-wrapper SSLOptionsField Hidden">
+                            <label for="SSLCAPath">[% Translate("SSL CA path") | html %]</label>
+                            <div class="Field">
+                                <input type="text" id="SSLCAPath" name="SSLCAPath" value="" class="W50pc" placeholder="/etc/ssl/certs" />
+                            </div>
+                        </div>
+                        <div class="field-wrapper SSLOptionsField Hidden">
+                            <label for="SSLVerifyHostname">[% Translate("Verify hostname") | html %]</label>
+                            <div class="Field">
+                                <input type="checkbox" id="SSLVerifyHostname" name="SSLVerifyHostname" value="1" />
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="WidgetSimple Hidden" data-wizard-step="3">
+                <div class="Header">
+                    <h2>[% Translate("Certificates and keys") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <fieldset class="TableLike">
+                        [% INCLUDE "AdminAuthentication/CertificateWidget.tt"
+                            Role            = 'RequestSignKey'
+                            Label           = Translate("SP signing key (used to sign outgoing requests)")
+                            VFSFilename     = ''
+                            CertVFSFilename = ''
+                            ShowGenerate    = 1
+                        %]
+                        [% INCLUDE "AdminAuthentication/CertificateWidget.tt"
+                            Role        = 'RequestSignKeyCert'
+                            ShowDownload = 1
+                            Label       = Translate("SP signing certificate (matches the key above)")
+                            VFSFilename = ''
+                        %]
+                        <div class="field-wrapper">
+                            <label for="ResponseEncryptionEnabled">[% Translate("Decrypt encrypted assertions") | html %]</label>
+                            <div class="Field">
+                                <input type="checkbox" id="ResponseEncryptionEnabled" name="ResponseEncryptionEnabled" value="1" checked="checked" />
+                                <p class="FieldExplanation">[% Translate("Uses the SP signing key above to decrypt SAML assertions the Identity Provider encrypts. Has no effect on responses that aren't encrypted, so it's safe to leave enabled. Requires a signing key above.") | html %]</p>
+                            </div>
+                        </div>
+                        [% INCLUDE "AdminAuthentication/CertificateWidget.tt"
+                            Role                = 'IdPCACert'
+                            Label               = Translate("Identity provider CA certificate")
+                            VFSFilename         = ''
+                            Warning             = Translate("Required for SAML login to work. Without it, Net::SAML2 cannot verify the Identity Provider's response signature and authentication will fail.")
+                            ShowUseFromMetadata = 1
+                        %]
+                    </fieldset>
+                </div>
+            </div>
+
+# Only for agent authentication: customer authentication has no sync, so the wizard
+# skips this step for the customer context (see InitWizard()).
+            <div class="WidgetSimple Hidden" data-wizard-step="4" data-wizard-context="Agent">
+                <div class="Header">
+                    <h2>[% Translate("User sync (optional)") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <p class="FieldExplanation">[% Translate("Optionally sync user attributes, groups and roles from the SAML assertion on every login. This can also be set up later on the edit screen.") | html %]</p>
+                    [% INCLUDE "AdminAuthentication/SyncSettings.tt" %]
+                </div>
+            </div>
+
+            <div class="WidgetSimple Hidden" data-wizard-step="5">
+                <div class="Header">
+                    <h2>[% Translate("Review") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <fieldset class="TableLike" data-wizard-review>
+                    </fieldset>
+                    <fieldset class="TableLike">
+                        <div class="field-wrapper">
+                            <p class="FieldExplanation">
+                                [% Translate("Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective.") | html %]
+                            </p>
+                            <p class="FieldExplanation">
+                                [% Translate("If you skipped the Identity Provider CA certificate here, it is taken from the metadata when saving. Please check it on the edit screen afterwards.") | html %]
+                            </p>
+                            <p class="FieldExplanation">
+                                [% Translate("You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only).") | html %]
+                            </p>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+
+            <div class="WidgetSimple">
+                <div class="Content">
+                    <fieldset class="TableLike">
+                        <div class="field-wrapper form-button-actions">
+                            <div class="Field buttons-field">
+                                <a href="[% Env("Baselink") %]Action=AdminAuthentication" class="btn-cancel-ghost btn-main btn-width-md"><span>[% Translate("Cancel") | html %]</span></a>
+                                <button type="button" class="CallForAction btn-cancel-ghost btn-main btn-width-md Hidden" data-wizard-back><span>[% Translate("Back") | html %]</span></button>
+                                <button type="button" class="CallForAction Primary btn-primary btn-main btn-width-md" data-wizard-next><span>[% Translate("Next") | html %]</span></button>
+                                <button class="CallForAction Primary btn-primary btn-main btn-width-md Hidden" id="Submit" type="submit" data-wizard-submit><span>[% Translate("Save") | html %]</span></button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

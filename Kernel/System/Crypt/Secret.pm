@@ -229,6 +229,33 @@ sub Decrypt {
     return Encode::decode( 'UTF-8', $PlainBytes );
 }
 
+=head2 IsAvailable()
+
+Checks whether values can be encrypted, i.e. an encryption key is configured
+and CryptX is installed. Unlike L</Encrypt()>, a missing key is not logged as
+an error, so callers can fall back to storing a value unencrypted.
+
+    my $CanEncrypt = $SecretObject->IsAvailable();
+
+=cut
+
+sub IsAvailable {
+    my ( $Self, %Param ) = @_;
+
+    my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
+
+    return 0 if !$Self->_GetKey();
+
+    for my $Module (qw(Crypt::AuthEnc::GCM Crypt::URandom)) {
+        return 0 if !$MainObject->Require(
+            $Module,
+            Silent => 1,
+        );
+    }
+
+    return 1;
+}
+
 =head2 GenerateKey()
 
 Generates a new random passphrase suitable for use as the encryption key

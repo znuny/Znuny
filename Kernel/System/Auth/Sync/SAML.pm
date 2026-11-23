@@ -63,11 +63,12 @@ sub Sync {
     }
 
     # Check if there's an auth backend which matches the requested user.
+    # GetLogin() is what the auth backend returned as login (NameID or UserLoginAttribute).
     # This can only be done here (not in new()) because the response is not yet available when this object
     # is being created.
     my @AuthBackends = grep {
         $_->{Response}->IsValid()
-            && $_->{Response}->GetNameID() eq $Param{User}
+            && ( $_->{Response}->GetLogin() // '' ) eq $Param{User}
     } @{ $Self->{AuthBackends} };
 
     return if !@AuthBackends;

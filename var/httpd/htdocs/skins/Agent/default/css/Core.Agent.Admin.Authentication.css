@@ -1,0 +1,348 @@
+/*
+Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+
+This software comes with ABSOLUTELY NO WARRANTY. For details, see
+the enclosed file COPYING for license information (GPL). If you
+did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+*/
+
+/**
+ * @package     Skin "Default"
+ * @section     Application
+ * @subsection  AdminAuthentication
+ */
+
+@media screen,projection,tv,handheld {
+
+/**
+ * @subsubsection     Verify metadata button next to its input field
+ */
+
+.AdminAuthentication .FieldInlineButton {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    gap: var(--gap-xs);
+}
+
+.AdminAuthentication .FieldInlineButton input[type="text"] {
+    flex: 1 1 auto;
+    width: auto;
+}
+
+.AdminAuthentication .FieldInlineButton > .MetaDataVerifyResult {
+    flex-basis: 100%;
+    margin: 0;
+}
+
+/**
+ * @subsubsection     Certificate widget: file upload and action buttons in one row
+ */
+
+.AdminAuthentication .CertActions {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    gap: var(--gap-xs);
+}
+
+/**
+ * @subsubsection     Hidden field-wrapper override
+ * @note              Core.Form.css's "fieldset > .field-wrapper { display: flex }" (element +
+ *                     class = higher specificity) otherwise wins over the plain ".Hidden {
+ *                     display: none }" utility class for any field-wrapper that is a direct
+ *                     child of a fieldset - which every toggled section on these screens is.
+ */
+.AdminAuthentication fieldset.TableLike > .field-wrapper.Hidden {
+    display: none;
+}
+
+/**
+ * @subsubsection     Hidden fieldset override
+ * @note              Core.Widget.css's ".AdminManagement .Content fieldset.TableLike { display: flex }"
+ *                    wins over core's "fieldset.Hidden { display: none }", so a hidden fieldset
+ *                    (e.g. the sync settings while "Enable sync" is off) would still be shown.
+ */
+.AdminAuthentication .Content fieldset.TableLike.Hidden {
+    display: none;
+}
+
+/**
+ * @subsubsection     User attribute sync map column widths
+ * @note              Both columns default to an equal 1-to-1 flex split via
+ *                     "Core.Components.css"'s ".WidgetSimple .Content .single-row-inputs
+ *                     .field-wrapper { flex: 1 }" (4 classes = higher specificity than a
+ *                     2-class override here, so !important is needed to win this one). The
+ *                     SAML attribute URI column holds much longer values than the Znuny
+ *                     attribute column, so give it more of the row.
+ */
+.AdminAuthentication .UserSyncMapKeyField {
+    flex: 1 1 0 !important;
+    min-width: 0;
+}
+
+.AdminAuthentication .UserSyncMapValueField {
+    flex: 3 1 0 !important;
+    min-width: 0;
+}
+
+/**
+ * @subsubsection     Repeatable row tables use only a fraction of the available width
+ * @note              Root cause: "Core.Form.css"'s "fieldset div.Field { align-items:
+ *                     flex-start }" stops a direct block child of .Field from stretching to
+ *                     the fieldset's full width - it shrink-wraps to its content instead.
+ *                     Every repeatable-row table on these screens (UserSyncMap and its four
+ *                     siblings) nests its rows directly inside such a .Field via
+ *                     [data-row-container], so all of them inherit the same shrink-wrapped,
+ *                     much-too-narrow width. Forcing the container itself to be full width
+ *                     lets its own ".full-width" rows resolve their "width: 100%" against a
+ *                     sane basis instead of against a shrink-wrapped parent.
+ */
+.AdminAuthentication [data-row-container] {
+    align-self: stretch;
+    width: 100%;
+}
+
+/**
+ * @subsubsection     Copy-to-clipboard button next to a displayed URL
+ */
+.AdminAuthentication .CopyableURL {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-xs);
+}
+
+.AdminAuthentication .CopyableURL code {
+    flex: 1;
+    word-break: break-all;
+}
+
+.AdminAuthentication .CopyToClipboardButton {
+    flex: 0 0 auto;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--gray-dark);
+    padding: var(--padding-xs);
+}
+
+.AdminAuthentication .CopyToClipboardButton:hover {
+    color: var(--main-color);
+}
+
+/**
+ * @subsubsection     Certificate pool select + info button
+ * @note              Same root cause as the [data-row-container] fix above: .CertPoolSelect
+ *                     is itself a direct block child of the widget's outer .Field, so without
+ *                     an explicit width it shrink-wraps instead of stretching. On top of that,
+ *                     Core.UI.InputFields' own modernized dropdown widget (the ".InputField_
+ *                     Container" it builds around the <select>) needs its own explicit width -
+ *                     every other admin screen that widens one sets this locally too, there is
+ *                     no wide-by-default global rule for it.
+ */
+.AdminAuthentication .CertPoolSelect {
+    align-self: stretch;
+    width: 100%;
+    margin-bottom: var(--gap-xs);
+}
+
+.AdminAuthentication .CertPoolSelect .InputField_Container {
+    width: 100%;
+    max-width: 100%;
+}
+
+.AdminAuthentication .CertInfoButton {
+    margin-bottom: var(--gap-xs);
+}
+
+/**
+ * @subsubsection     Certificate details dialog
+ * @note              Rendered by Core.UI.Dialog into a global overlay, not inside
+ *                     .AdminAuthentication's own DOM subtree - deliberately unscoped.
+ */
+.CertificateInfoList {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: var(--gap-xs) var(--gap-md);
+    margin-bottom: var(--gap-md);
+}
+
+.CertificateInfoList dt {
+    font-weight: bold;
+}
+
+.CertificateInfoList dd {
+    margin: 0;
+    word-break: break-all;
+}
+
+/**
+ * @subsubsection     Disabled buttons (e.g. role "Add" without active roles)
+ * @note              pointer-events: none keeps the hover highlight of .btn-primary-ghost
+ *                    and any cursor change away from disabled buttons.
+ */
+
+.AdminAuthentication .CallForAction:disabled,
+.AdminAuthentication .CallForAction.Disabled {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/**
+ * @subsubsection     Switch (e.g. metadata source URL/XML)
+ * @note              The checkbox stays the clickable element, invisible on top of the
+ *                    slider, so keyboard, form and label behavior are unchanged.
+ */
+
+.AdminAuthentication .ToggleSwitch {
+    position: relative;
+    display: inline-block;
+    width: 36px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.AdminAuthentication .ToggleSwitch input[type="checkbox"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+    min-height: 0;
+    margin: 0;
+    opacity: 0;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.AdminAuthentication .ToggleSwitchSlider {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 10px;
+    background: var(--gray-dark-semi);
+    transition: background-color 0.15s;
+}
+
+.AdminAuthentication .ToggleSwitchSlider::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--white);
+    transition: transform 0.15s;
+}
+
+.AdminAuthentication .ToggleSwitch input[type="checkbox"]:checked + .ToggleSwitchSlider {
+    background: var(--primary-color);
+}
+
+.AdminAuthentication .ToggleSwitch input[type="checkbox"]:checked + .ToggleSwitchSlider::before {
+    transform: translateX(16px);
+}
+
+.AdminAuthentication .ToggleSwitch input[type="checkbox"]:focus-visible + .ToggleSwitchSlider {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/**
+ * @subsubsection     Certificate widget: paste PEM text
+ * @note              Same root cause as the [data-row-container] fix above: the form is a
+ *                    direct block child of the widget's .Field and would shrink-wrap.
+ */
+
+.AdminAuthentication .CertPasteForm {
+    align-self: stretch;
+    width: 100%;
+    margin-top: var(--gap-sm);
+}
+
+.AdminAuthentication .CertPasteForm textarea {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    font-family: monospace;
+}
+
+/**
+ * @subsubsection     Overview: status column and deploy errors
+ */
+
+.AdminAuthentication .ConfigStatusOK i {
+    color: var(--success-color);
+}
+
+.AdminAuthentication .ConfigStatusWarning i {
+    color: var(--warning-color);
+}
+
+.AdminAuthentication .ConfigStatusError {
+    color: var(--error-color);
+}
+
+.AdminAuthentication .DeployErrorActions {
+    display: flex;
+    flex-flow: row wrap;
+    gap: var(--gap-xs);
+}
+
+/**
+ * @subsubsection     Wizard progress in the sidebar
+ */
+
+.AdminAuthentication .WizardSteps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.AdminAuthentication .WizardSteps li {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
+    padding: var(--padding-xs) 0;
+    border-bottom: var(--border-width) var(--border-solid) var(--border-color);
+    color: var(--gray-dark-semi);
+}
+
+.AdminAuthentication .WizardSteps li:last-child {
+    border-bottom: 0;
+}
+
+.AdminAuthentication .WizardSteps li.Active {
+    color: var(--main-font-color);
+    font-weight: var(--semi-bold);
+}
+
+.AdminAuthentication .WizardSteps li.Done {
+    color: var(--main-font-color);
+}
+
+.AdminAuthentication .WizardSteps .StepNumber {
+    flex: 0 0 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    border-radius: 50%;
+    background: var(--gray-dark-semi);
+    color: var(--white);
+    font-size: var(--font-size-sm);
+    font-weight: var(--semi-bold);
+}
+
+.AdminAuthentication .WizardSteps li.Active .StepNumber {
+    background: var(--primary-color);
+}
+
+.AdminAuthentication .WizardSteps li.Done .StepNumber {
+    background: var(--success-color);
+}
+
+} /* end @media */

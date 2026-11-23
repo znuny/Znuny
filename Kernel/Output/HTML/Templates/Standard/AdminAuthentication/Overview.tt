@@ -1,0 +1,213 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminAuthentication">
+
+    <div class="SidebarColumn ActionsSideBarComp">
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Wizard" class="CallForAction Fullsize Center"><span><i class="fa fa-magic"></i>[% Translate("SAML wizard") | html %]</span></a>
+                    </li>
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=EditAgentAuth" class="CallForAction Fullsize Center"><span><i class="fa fa-plus-square"></i>[% Translate("Add agent SAML authentication") | html %]</span></a>
+                    </li>
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=EditCustomerAuth" class="CallForAction Fullsize Center"><span><i class="fa fa-plus-square"></i>[% Translate("Add customer SAML authentication") | html %]</span></a>
+                    </li>
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Deploy;[% Env("ChallengeTokenParam") | html %]" class="CallForAction Fullsize Center"><span><i class="fa fa-upload"></i>[% Translate("Deploy configuration") | html %]</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("Authentication Management") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate("Authentication Management"),
+                    Link => Env("Action"),
+                },
+            ]
+        %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        [% IF Data.DeployErrors.size %]
+            <div class="WidgetSimple DeployErrors">
+                <div class="Header">
+                    <h2>[% Translate("Deployment failed") | html %]</h2>
+                </div>
+                <div class="Content">
+                    <p class="FieldExplanation">[% Translate("Fix the configurations below and deploy again. Or set a configuration to invalid: its login stops working and the other configurations are deployed.") | html %]</p>
+                    <table class="DataTable">
+                        <thead>
+                            <tr>
+                                <th>[% Translate("Name") | html %]</th>
+                                <th>[% Translate("Problem") | html %]</th>
+                                <th>[% Translate("Actions") | html %]</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            [% FOR Error IN Data.DeployErrors %]
+                                <tr>
+                                    <td>[% Error.Name | html %]</td>
+                                    <td>[% Translate(Error.Message) | html %]</td>
+                                    <td>
+                                        [% IF Error.ID %]
+                                            <div class="DeployErrorActions">
+                                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=[% IF Error.Context == 'Customer' %]EditCustomerAuth[% ELSE %]EditAgentAuth[% END %];ID=[% Error.ID | uri %]" class="CallForAction btn-main btn-primary-ghost btn-width-max"><span>[% Translate("Edit") | html %]</span></a>
+                                                <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=InvalidateAndDeploy;ID=[% Error.ID | uri %];[% Env("ChallengeTokenParam") | html %]" class="CallForAction btn-main btn-primary-ghost btn-width-max"><span>[% Translate("Set to invalid and deploy the rest") | html %]</span></a>
+                                            </div>
+                                        [% END %]
+                                    </td>
+                                </tr>
+                            [% END %]
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        [% END %]
+
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Agent authentication") | html %]</h2>
+            </div>
+            <div class="Content">
+                <table class="DataTable">
+                    <thead>
+                        <tr>
+                            <th>[% Translate("Name") | html %]</th>
+                            <th>[% Translate("Slot") | html %]</th>
+                            <th>[% Translate("Sync") | html %]</th>
+                            <th>[% Translate("Validity") | html %]</th>
+                            <th>[% Translate("Type") | html %]</th>
+                            <th>[% Translate("Status") | html %]</th>
+                            <th>[% Translate("Metadata") | html %]</th>
+                            <th>[% Translate("Delete") | html %]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        [% IF Data.AgentConfigs && Data.AgentConfigs.size %]
+                            [% FOR Config IN Data.AgentConfigs %]
+                                <tr class="[% IF Data.ValidIDs.item(Config.ValidID) != 'valid' %] Invalid[% END %]">
+                                    <td>
+                                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=EditAgentAuth;ID=[% Config.ID | uri %]" class="MasterActionLink">[% Config.Name | html %]</a>
+                                    </td>
+                                    <td>[% IF Config.Slot %][% Translate("Slot %s", Config.Slot) | html %][% ELSE %][% Translate("Default") | html %][% END %]</td>
+                                    <td>[% IF Config.SyncEnabled %][% Translate("Yes") | html %][% ELSE %][% Translate("No") | html %][% END %]</td>
+                                    <td>[% Translate(Data.ValidIDs.item(Config.ValidID)) | html %]</td>
+                                    <td>[% Config.Type | html %]</td>
+                                    <td>
+                                        [% Problem = Data.ConfigProblems.item(Config.ID) %]
+                                        [% IF Data.ValidIDs.item(Config.ValidID) != 'valid' %]
+                                            -
+                                        [% ELSIF Problem %]
+                                            <span class="ConfigStatus ConfigStatus[% Problem.State | html %]"><i class="fa fa-exclamation-triangle"></i> [% Translate(Problem.Message) | html %]</span>
+                                        [% ELSE %]
+                                            <span class="ConfigStatus ConfigStatusOK"><i class="fa fa-check"></i> [% Translate("OK") | html %]</span>
+                                        [% END %]
+                                    </td>
+                                    <td>
+                                        <a class="table-actions-button table-icon-hover-md" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=DownloadMetadata;ID=[% Config.ID | uri %]" title="[% Translate("Download SP metadata XML") | html %]">
+                                            <i class="fa fa-download"></i>
+                                            <span>[% Translate("Download") | html %]</span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        [% IF Data.ValidIDs.item(Config.ValidID) != 'valid' %]
+                                            <a class="CallForAction table-actions-button table-icon-hover-md" data-action-delete-saml-config data-id="[% Config.ID | html %]" href="#" title="[% Translate("Delete") | html %]">
+                                                <i class="fa fa-trash"></i>
+                                                <span>[% Translate("Delete") | html %]</span>
+                                            </a>
+                                        [% END %]
+                                    </td>
+                                </tr>
+                            [% END %]
+                        [% ELSE %]
+                            <tr>
+                                <td colspan="8">[% Translate("No data found.") | html %]</td>
+                            </tr>
+                        [% END %]
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Customer authentication") | html %]</h2>
+            </div>
+            <div class="Content">
+                <table class="DataTable">
+                    <thead>
+                        <tr>
+                            <th>[% Translate("Name") | html %]</th>
+                            <th>[% Translate("Slot") | html %]</th>
+                            <th>[% Translate("Validity") | html %]</th>
+                            <th>[% Translate("Type") | html %]</th>
+                            <th>[% Translate("Status") | html %]</th>
+                            <th>[% Translate("Metadata") | html %]</th>
+                            <th>[% Translate("Delete") | html %]</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        [% IF Data.CustomerConfigs && Data.CustomerConfigs.size %]
+                            [% FOR Config IN Data.CustomerConfigs %]
+                                <tr class="[% IF Data.ValidIDs.item(Config.ValidID) != 'valid' %] Invalid[% END %]">
+                                    <td>
+                                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=EditCustomerAuth;ID=[% Config.ID | uri %]" class="MasterActionLink">[% Config.Name | html %]</a>
+                                    </td>
+                                    <td>[% IF Config.Slot %][% Translate("Slot %s", Config.Slot) | html %][% ELSE %][% Translate("Default") | html %][% END %]</td>
+                                    <td>[% Translate(Data.ValidIDs.item(Config.ValidID)) | html %]</td>
+                                    <td>[% Config.Type | html %]</td>
+                                    <td>
+                                        [% Problem = Data.ConfigProblems.item(Config.ID) %]
+                                        [% IF Data.ValidIDs.item(Config.ValidID) != 'valid' %]
+                                            -
+                                        [% ELSIF Problem %]
+                                            <span class="ConfigStatus ConfigStatus[% Problem.State | html %]"><i class="fa fa-exclamation-triangle"></i> [% Translate(Problem.Message) | html %]</span>
+                                        [% ELSE %]
+                                            <span class="ConfigStatus ConfigStatusOK"><i class="fa fa-check"></i> [% Translate("OK") | html %]</span>
+                                        [% END %]
+                                    </td>
+                                    <td>
+                                        <a class="table-actions-button table-icon-hover-md" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=DownloadMetadata;ID=[% Config.ID | uri %]" title="[% Translate("Download SP metadata XML") | html %]">
+                                            <i class="fa fa-download"></i>
+                                            <span>[% Translate("Download") | html %]</span>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        [% IF Data.ValidIDs.item(Config.ValidID) != 'valid' %]
+                                            <a class="CallForAction table-actions-button table-icon-hover-md" data-action-delete-saml-config data-id="[% Config.ID | html %]" href="#" title="[% Translate("Delete") | html %]">
+                                                <i class="fa fa-trash"></i>
+                                                <span>[% Translate("Delete") | html %]</span>
+                                            </a>
+                                        [% END %]
+                                    </td>
+                                </tr>
+                            [% END %]
+                        [% ELSE %]
+                            <tr>
+                                <td colspan="7">[% Translate("No data found.") | html %]</td>
+                            </tr>
+                        [% END %]
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

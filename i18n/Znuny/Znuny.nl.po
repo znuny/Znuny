@@ -892,7 +892,7 @@ msgstr "Accountstatus"
 msgid "Account status for: %s"
 msgstr "Accountstatus voor: %s"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogAccounts.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "Status"
 msgstr "Status"
 
@@ -900,7 +900,7 @@ msgstr "Status"
 msgid "Account"
 msgstr "Account"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogAccounts.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "Edit"
 msgstr "Wijzig"
 
@@ -1276,7 +1276,7 @@ msgstr "Wijzig Klant Gebruiker koppelingen voor Klant"
 msgid "Toggle active state for all"
 msgstr "Alles actief aan/uit"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
 msgid "Active"
 msgstr "Actief"
 
@@ -4564,7 +4564,7 @@ msgstr "Genereer pakket opnieuw"
 msgid "Package Information"
 msgstr "Pakketinformatie"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "Metadata"
 msgstr "Metadata"
 
@@ -4588,11 +4588,11 @@ msgstr "Permissie"
 msgid "Size"
 msgstr "Grootte"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "Problem"
 msgstr "Probleem"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "OK"
 msgstr "OK"
 
@@ -6104,7 +6104,7 @@ msgstr "Nieuw e-mailadres"
 msgid "Edit System Email Address"
 msgstr "Bewerk e-mailadres"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
 msgid "Email address"
 msgstr "E-mailadres"
 
@@ -6624,11 +6624,11 @@ msgstr "Herhaal"
 msgid "Notification"
 msgstr "Melding"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentAgendaOverview.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "Yes"
 msgstr "Ja"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentAgendaOverview.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "No"
 msgstr "Nee"
 
@@ -8368,7 +8368,7 @@ msgstr "Laad actieve inhoud."
 msgid "Home"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
 msgid "Back"
 msgstr "Terug"
 
@@ -8808,7 +8808,7 @@ msgstr "Website"
 msgid "Community"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
 msgid "Next"
 msgstr "Volgende"
 
@@ -14620,7 +14620,7 @@ msgstr ""
 msgid "All Settings"
 msgstr ""
 
-#. Perl Module: Kernel/System/SysConfig/BaseValueType.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "Default"
 msgstr ""
 
@@ -21096,7 +21096,7 @@ msgstr "Omschakelen naar desktop weergave"
 msgid "Please remove the following words from your search as they cannot be searched for:"
 msgstr "Verwijder de volgende woorden van je zoekactie omdat daar niet op gezocht kan worden:"
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.SharedSecretGenerator.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
 msgid "Generate"
 msgstr ""
 
@@ -24946,7 +24946,7 @@ msgstr ""
 msgid "Copy Ticket Number + Title"
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
 msgid "Copied to clipboard!"
 msgstr ""
 
@@ -25650,6 +25650,722 @@ msgstr ""
 msgid "What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder."
 msgstr "Waarmee een ongedefinieerde waarde moet worden vervangen bij het invoegen in een sjabloon met een ZNUNY_-plaatshouder."
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Certificate/key is stored in VirtualFS."
+msgstr "Certificaat/sleutel is opgeslagen in VirtualFS."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "No certificate/key set."
+msgstr "Geen certificaat/sleutel ingesteld."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "View certificate details"
+msgstr "Certificaatdetails bekijken"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "The selected certificate/key is not available. Please select or upload it again."
+msgstr "Het geselecteerde certificaat/de geselecteerde sleutel is niet beschikbaar. Selecteer of upload deze opnieuw."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "- Select an existing certificate/key -"
+msgstr "- Selecteer een bestaand certificaat/bestaande sleutel -"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Paste"
+msgstr "Plakken"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Use certificate from metadata"
+msgstr "Certificaat uit metadata gebruiken"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Extracts the signing certificate embedded in the Identity Provider metadata and stores it here, instead of uploading it separately."
+msgstr "Haalt het ondertekeningscertificaat uit de metadata van de Identity Provider en slaat het hier op, in plaats van het apart te uploaden."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Paste the PEM text including the BEGIN and END lines."
+msgstr "Plak de PEM-tekst inclusief de BEGIN- en END-regels."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Common Name"
+msgstr "Common Name"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Key size"
+msgstr "Sleutellengte"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Validity (days)"
+msgstr "Geldigheid (dagen)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Generate self-signed certificate"
+msgstr "Zelfondertekend certificaat genereren"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Authentication Management"
+msgstr "Authenticatiebeheer"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Agent authentication"
+msgstr "Authenticatie voor behandelaars"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Basic settings"
+msgstr "Basisinstellingen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Slot"
+msgstr "Slot"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Determines which numbered AuthModule<N> slot this configuration occupies. Only unused slots are offered."
+msgstr "Bepaalt welk genummerd AuthModule<N>-slot deze configuratie inneemt. Alleen ongebruikte slots worden aangeboden."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SAML request settings"
+msgstr "Instellingen voor SAML-verzoeken"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Login button text"
+msgstr "Tekst van de inlogknop"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Assertion consumer URL"
+msgstr "Assertion Consumer URL"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Automatically derived from this system's HTTP type, FQDN and script alias - not editable."
+msgstr "Wordt automatisch afgeleid van het HTTP-type, de FQDN en de script-alias van dit systeem - niet bewerkbaar."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Znuny appends a \";IsSAMLLogin=1;Count=<N>;\" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration's slot), so the value the Identity Provider actually receives is:"
+msgstr "Znuny voegt bij het opbouwen van het uitgaande SAML-verzoek het achtervoegsel \";IsSAMLLogin=1;Count=<N>;\" toe aan deze URL (<N> is het slot van deze configuratie), dus de waarde die de Identity Provider daadwerkelijk ontvangt is:"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Copy to clipboard"
+msgstr "Kopiëren naar klembord"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honor the value from the request. If your IdP's field rejects semicolons, register the base URL instead."
+msgstr "Sommige Identity Providers vereisen dat precies deze waarde als ACS URL wordt geregistreerd. Andere accepteren de basis-URL hierboven en respecteren de waarde uit het verzoek. Als het veld van uw IdP geen puntkomma's accepteert, registreer dan in plaats daarvan de basis-URL."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Download SP metadata XML"
+msgstr "SP-metadata-XML downloaden"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Issuer (SP entity ID)"
+msgstr "Uitgever (SP entity ID)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Requested NameID format"
+msgstr "Aangevraagd NameID-formaat"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Unspecified"
+msgstr "Niet gespecificeerd"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Persistent"
+msgstr "Persistent"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Transient"
+msgstr "Transient"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Sent as the NameIDPolicy Format in the outgoing request and published in the SP metadata. Change this only if your Identity Provider requires a specific format."
+msgstr "Wordt als NameIDPolicy Format in het uitgaande verzoek verzonden en in de SP-metadata gepubliceerd. Wijzig dit alleen als uw Identity Provider een specifiek formaat vereist."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Load metadata from URL"
+msgstr "Metadata laden vanaf URL"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Switch off to paste the metadata XML instead. Switching clears the entered URL or XML and the SSL options."
+msgstr "Schakel uit om in plaats daarvan de metadata-XML te plakken. Bij het omschakelen worden de ingevoerde URL of XML en de SSL-opties gewist."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Please select a metadata source."
+msgstr "Selecteer een metadatabron."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Metadata URL"
+msgstr "Metadata-URL"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Verify"
+msgstr "Controleren"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Metadata XML"
+msgstr "Metadata-XML"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Use custom SSL options for metadata URL fetch"
+msgstr "Aangepaste SSL-opties gebruiken voor het ophalen van de metadata-URL"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SSL CA file"
+msgstr "SSL CA-bestand"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SSL CA path"
+msgstr "SSL CA-pad"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Verify hostname"
+msgstr "Hostnaam controleren"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Certificates and keys"
+msgstr "Certificaten en sleutels"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SP signing key (used to sign outgoing requests)"
+msgstr "SP-ondertekeningssleutel (gebruikt om uitgaande verzoeken te ondertekenen)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SP signing certificate (matches the key above)"
+msgstr "SP-ondertekeningscertificaat (hoort bij de sleutel hierboven)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Required for the SP metadata's KeyDescriptor to be published. \"Generate\" above already produces this together with the key - only needed as a separate step if you uploaded your own key."
+msgstr "Vereist om de KeyDescriptor in de SP-metadata te publiceren. \"Genereren\" hierboven maakt dit al samen met de sleutel aan - alleen als aparte stap nodig als u uw eigen sleutel hebt geüpload."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Signing algorithm"
+msgstr "Ondertekeningsalgoritme"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SHA-256 (default)"
+msgstr "SHA-256 (standaard)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SHA-384"
+msgstr "SHA-384"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SHA-512"
+msgstr "SHA-512"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SHA-1 (legacy, not recommended)"
+msgstr "SHA-1 (verouderd, niet aanbevolen)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Used to sign the outgoing request when a signing key is set above. Only change this if your Identity Provider requires a specific algorithm."
+msgstr "Wordt gebruikt om het uitgaande verzoek te ondertekenen als hierboven een ondertekeningssleutel is ingesteld. Wijzig dit alleen als uw Identity Provider een specifiek algoritme vereist."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Decrypt encrypted assertions"
+msgstr "Versleutelde assertions ontsleutelen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Uses the SP signing key above to decrypt SAML assertions the Identity Provider encrypts. Has no effect on responses that aren't encrypted, so it's safe to leave enabled. Requires a signing key above."
+msgstr "Gebruikt de SP-ondertekeningssleutel hierboven om SAML-assertions te ontsleutelen die de Identity Provider versleutelt. Heeft geen effect op niet-versleutelde antwoorden en kan dus veilig ingeschakeld blijven. Vereist hierboven een ondertekeningssleutel."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Identity provider CA certificate"
+msgstr "CA-certificaat van de Identity Provider"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Required for SAML login to work. Without it, Net::SAML2 cannot verify the Identity Provider's response signature and authentication will fail."
+msgstr "Vereist om via SAML te kunnen inloggen. Zonder dit certificaat kan Net::SAML2 de handtekening van het antwoord van de Identity Provider niet verifiëren en mislukt de authenticatie."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Attribute, group and role sync"
+msgstr "Synchronisatie van attributen, groepen en rollen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+msgid "Customer authentication"
+msgstr "Authenticatie voor klanten"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+msgid "Determines which numbered Customer::AuthModule<N> slot this configuration occupies. Only unused slots are offered."
+msgstr "Bepaalt welk genummerd Customer::AuthModule<N>-slot deze configuratie inneemt. Alleen ongebruikte slots worden aangeboden."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "SAML wizard"
+msgstr "SAML-wizard"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Add agent SAML authentication"
+msgstr "SAML-authenticatie voor behandelaars toevoegen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Add customer SAML authentication"
+msgstr "SAML-authenticatie voor klanten toevoegen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Deploy configuration"
+msgstr "Configuratie implementeren"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Sync"
+msgstr "Synchronisatie"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Slot %s"
+msgstr "Slot %s"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Only invalid configurations can be deleted. Set this configuration to invalid first."
+msgstr "Alleen ongeldige configuraties kunnen worden verwijderd. Zet deze configuratie eerst op ongeldig."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Enable sync"
+msgstr "Synchronisatie inschakelen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Also registers Kernel::System::Auth::Sync::SAML for the same slot, to sync attributes/groups/roles from the SAML assertion on every login."
+msgstr "Registreert ook Kernel::System::Auth::Sync::SAML voor hetzelfde slot, om bij elke login attributen/groepen/rollen uit de SAML-assertion te synchroniseren."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "The AuthSyncModule for this slot is already configured outside of AdminAuthentication - sync cannot be enabled for it."
+msgstr "De AuthSyncModule voor dit slot is al buiten AdminAuthentication geconfigureerd - synchronisatie kan hiervoor niet worden ingeschakeld."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "User attribute sync map"
+msgstr "Synchronisatietoewijzing van gebruikersattributen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Maps Znuny user attributes (left) to SAML assertion attribute names (right)."
+msgstr "Wijst Znuny-gebruikersattributen (links) toe aan attribuutnamen in de SAML-assertion (rechts)."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Znuny attribute"
+msgstr "Znuny-attribuut"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "SAML attribute URI"
+msgstr "SAML-attribuut-URI"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Initial groups for new users"
+msgstr "Initiële groepen voor nieuwe gebruikers"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Groups (with rw permission) granted only when a brand-new agent is created via sync. Ctrl/Cmd-click to select multiple."
+msgstr "Groepen (met rw-permissie) die alleen worden toegekend wanneer een geheel nieuwe behandelaar via synchronisatie wordt aangemaakt. Ctrl/Cmd-klik om meerdere te selecteren."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "SAML attribute carrying group values"
+msgstr "SAML-attribuut met groepswaarden"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Group sync rules (by group value)"
+msgstr "Groepssynchronisatieregels (op groepswaarde)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Maps a SAML group value to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions."
+msgstr "Wijst een SAML-groepswaarde toe aan een Znuny-groep en permissies. Ctrl/Cmd-klik om meerdere permissies te selecteren."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "SAML value"
+msgstr "SAML-waarde"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Group sync rules (by arbitrary attribute/value)"
+msgstr "Groepssynchronisatieregels (op willekeurig attribuut/waarde)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Maps any SAML attribute name/value combination to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions."
+msgstr "Wijst elke combinatie van SAML-attribuutnaam/-waarde toe aan een Znuny-groep en permissies. Ctrl/Cmd-klik om meerdere permissies te selecteren."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "SAML attribute"
+msgstr "SAML-attribuut"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Role sync requires at least one active role. Create or activate a role under Admin → Roles."
+msgstr "Rolsynchronisatie vereist ten minste één actieve rol. Maak een rol aan of activeer er een onder Beheer → Rollen."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "SAML attribute carrying role values"
+msgstr "SAML-attribuut met rolwaarden"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Role sync rules (by role value)"
+msgstr "Rolsynchronisatieregels (op rolwaarde)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Maps a SAML role value to one or more Znuny roles, active or inactive."
+msgstr "Wijst een SAML-rolwaarde toe aan een Znuny-rol, actief of inactief."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Role sync rules (by arbitrary attribute/value)"
+msgstr "Rolsynchronisatieregels (op willekeurig attribuut/waarde)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Maps any SAML attribute name/value combination to one or more Znuny roles, active or inactive."
+msgstr "Wijst elke combinatie van SAML-attribuutnaam/-waarde toe aan een Znuny-rol, actief of inactief."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Setup steps"
+msgstr "Configuratiestappen"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Setup wizard"
+msgstr "Configuratiewizard"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "SAML setup wizard"
+msgstr "SAML-configuratiewizard"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Step"
+msgstr "Stap"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "What are you setting up?"
+msgstr "Wat wilt u instellen?"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Agent authentication - staff logging into the agent interface"
+msgstr "Authenticatie voor behandelaars - medewerkers die inloggen op de behandelaarsinterface"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Customer authentication - customers logging into the customer portal"
+msgstr "Authenticatie voor klanten - klanten die inloggen op het klantenportaal"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Login with SSO"
+msgstr "Inloggen met SSO"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "User sync (optional)"
+msgstr "Gebruikerssynchronisatie (optioneel)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Optionally sync user attributes, groups and roles from the SAML assertion on every login. This can also be set up later on the edit screen."
+msgstr "Synchroniseer optioneel bij elke login gebruikersattributen, groepen en rollen uit de SAML-assertion. Dit kan ook later in het bewerkingsscherm worden ingesteld."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Review"
+msgstr "Samenvatting"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective."
+msgstr "Klik op \"Opslaan\" om deze SAML-configuratie aan te maken. Deze is dan nog niet actief - gebruik daarna de actie \"Configuratie implementeren\" op de overzichtspagina om deze actief te maken."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "If you skipped the Identity Provider CA certificate here and provided metadata instead, it will be derived from that metadata automatically during Deploy."
+msgstr "Als u het CA-certificaat van de Identity Provider hier hebt overgeslagen en in plaats daarvan metadata hebt opgegeven, wordt het tijdens het implementeren automatisch uit die metadata afgeleid."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only)."
+msgstr "U kunt naar elke vorige stap teruggaan om wijzigingen aan te brengen, of daarna het volledige bewerkingsscherm gebruiken voor geavanceerde opties zoals synchronisatie van attributen/groepen/rollen (alleen authenticatie voor behandelaars)."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Perl module Net::SAML2 is not installed. SAML authentication cannot work until it is installed on the server."
+msgstr "Perl-module Net::SAML2 is niet geïnstalleerd. SAML-authenticatie werkt pas als deze op de server is geïnstalleerd."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Authentication configuration is not in sync with the deployed configuration, please deploy."
+msgstr "De authenticatieconfiguratie komt niet overeen met de geïmplementeerde configuratie, implementeer deze alstublieft."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Only invalid authentication configurations can be deleted. Please set the configuration to invalid first."
+msgstr "Alleen ongeldige authenticatieconfiguraties kunnen worden verwijderd. Zet de configuratie eerst op ongeldig."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Invalid or missing Role."
+msgstr "Ongeldige of ontbrekende rol."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "No file was uploaded."
+msgstr "Er is geen bestand geüpload."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Error storing the uploaded file."
+msgstr "Fout bij het opslaan van het geüploade bestand."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Only the SP signing key can be generated."
+msgstr "Alleen de SP-ondertekeningssleutel kan worden gegenereerd."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Error generating certificate. Please check the system log."
+msgstr "Fout bij het genereren van het certificaat. Controleer het logboek."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Error storing the generated key in VirtualFS."
+msgstr "Fout bij het opslaan van de gegenereerde sleutel in VirtualFS."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Error storing the generated certificate in VirtualFS."
+msgstr "Fout bij het opslaan van het gegenereerde certificaat in VirtualFS."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Could not find a certificate in the metadata. Please check the URL/XML and try again."
+msgstr "Er is geen certificaat gevonden in de metadata. Controleer de URL/XML en probeer het opnieuw."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Error storing the certificate."
+msgstr "Fout bij het opslaan van het certificaat."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Could not read the certificate from VirtualFS."
+msgstr "Het certificaat kon niet uit VirtualFS worden gelezen."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "The authentication configuration was not deployed. The previously deployed configuration is still active."
+msgstr "De authenticatieconfiguratie is niet geïmplementeerd. De eerder geïmplementeerde configuratie is nog steeds actief."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Please check the system log for details."
+msgstr "Controleer het logboek voor details."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "This is not an unencrypted private key in PEM format (-----BEGIN PRIVATE KEY-----)."
+msgstr "Dit is geen onversleutelde private sleutel in PEM-formaat (-----BEGIN PRIVATE KEY-----)."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "This is not a certificate in PEM format (-----BEGIN CERTIFICATE-----)."
+msgstr "Dit is geen certificaat in PEM-formaat (-----BEGIN CERTIFICATE-----)."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "The private key could not be read. Only unencrypted private keys are supported."
+msgstr "De private sleutel kon niet worden gelezen. Alleen onversleutelde private sleutels worden ondersteund."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "The certificate could not be read."
+msgstr "Het certificaat kon niet worden gelezen."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Could not read the SP signing key."
+msgstr "De SP-ondertekeningssleutel kon niet worden gelezen."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Could not read the IdP CA certificate."
+msgstr "Het IdP CA-certificaat kon niet worden gelezen."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "No IdP CA certificate was uploaded and none could be taken from the IdP metadata."
+msgstr "Er is geen IdP CA-certificaat geüpload en er kon er ook geen uit de IdP-metadata worden overgenomen."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Could not decrypt the SP signing key. Please check the configured encryption key."
+msgstr "De SP-ondertekeningssleutel kon niet worden ontsleuteld. Controleer de geconfigureerde versleutelingssleutel."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Net::SAML2 is not installed on the server, metadata cannot be verified."
+msgstr "Net::SAML2 is niet geïnstalleerd op de server, metadata kan niet worden gecontroleerd."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Metadata URL is empty."
+msgstr "Metadata-URL is leeg."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Metadata XML is empty."
+msgstr "Metadata-XML is leeg."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Could not parse the metadata. Please check the URL/XML and try again."
+msgstr "De metadata kon niet worden verwerkt. Controleer de URL/XML en probeer het opnieuw."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Perl module Crypt::OpenSSL::X509 is not installed, certificate details cannot be parsed."
+msgstr "Perl-module Crypt::OpenSSL::X509 is niet geïnstalleerd, certificaatdetails kunnen niet worden uitgelezen."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Could not parse the certificate."
+msgstr "Het certificaat kon niet worden verwerkt."
+
+#. Perl Module: Kernel/System/AuthenticationConfig.pm
+msgid "No authentication plugin is registered for this type."
+msgstr "Er is geen authenticatieplug-in geregistreerd voor dit type."
+
+#. Perl Module: Kernel/System/AuthenticationConfig.pm
+msgid "Could not write the certificate files."
+msgstr "De certificaatbestanden konden niet worden geschreven."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Registers the SAML 2.0 authentication plugin for AdminAuthentication."
+msgstr "Registreert de authenticatieplug-in voor SAML 2.0 voor AdminAuthentication."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?"
+msgstr "Bij het wijzigen van de metadatabron worden de ingevoerde metadata-URL of XML en de SSL-opties verwijderd. Doorgaan?"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Change metadata source"
+msgstr "Metadatabron wijzigen"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Uploaded key"
+msgstr "Geüploade sleutel"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "EXPIRED"
+msgstr "VERLOPEN"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "expires"
+msgstr "verloopt"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "used by %s configuration(s)"
+msgstr "gebruikt door %s configuratie(s)"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Could not read the certificate."
+msgstr "Het certificaat kon niet worden gelezen."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Certificate (PEM)"
+msgstr "Certificaat (PEM)"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Issuer"
+msgstr "Uitgever"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Valid from"
+msgstr "Geldig vanaf"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Valid until"
+msgstr "Geldig tot"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Serial"
+msgstr "Serienummer"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Fingerprint (SHA-256)"
+msgstr "Fingerprint (SHA-256)"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Show raw PEM"
+msgstr "Ruwe PEM tonen"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Certificate details"
+msgstr "Certificaatdetails"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Metadata is valid."
+msgstr "Metadata is geldig."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Entity ID"
+msgstr "Entity ID"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "SSO URL"
+msgstr "SSO-URL"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Includes a signing certificate."
+msgstr "Bevat een ondertekeningscertificaat."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "No signing certificate found in the metadata."
+msgstr "Geen ondertekeningscertificaat gevonden in de metadata."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Found %s attribute(s) in the metadata."
+msgstr "%s attribuut/attributen gevonden in de metadata."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Verifying..."
+msgstr "Controleren..."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Metadata verification failed."
+msgstr "Controle van de metadata mislukt."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Upload failed."
+msgstr "Uploaden mislukt."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Please paste a certificate or key first."
+msgstr "Plak eerst een certificaat of sleutel."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Saving the pasted certificate/key failed."
+msgstr "Opslaan van het geplakte certificaat/de geplakte sleutel mislukt."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Certificate generation failed."
+msgstr "Genereren van het certificaat mislukt."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Please select a metadata source (URL or XML) first."
+msgstr "Selecteer eerst een metadatabron (URL of XML)."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Could not find a certificate in the metadata."
+msgstr "Er is geen certificaat gevonden in de metadata."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Do you really want to delete this SAML configuration?"
+msgstr "Wilt u deze SAML-configuratie echt verwijderen?"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Delete SAML configuration"
+msgstr "SAML-configuratie verwijderen"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "There was an error deleting the SAML configuration."
+msgstr "Er is een fout opgetreden bij het verwijderen van de SAML-configuratie."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "(pasted XML)"
+msgstr "(geplakte XML)"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Not configured yet"
+msgstr "Nog niet geconfigureerd"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Identity provider metadata"
+msgstr "Metadata van de Identity Provider"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "SP signing key"
+msgstr "SP-ondertekeningssleutel"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Configured"
+msgstr "Geconfigureerd"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Not set"
+msgstr "Niet ingesteld"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "SP signing certificate"
+msgstr "SP-ondertekeningscertificaat"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Not set (will be derived automatically from metadata during Deploy, if possible)"
+msgstr "Niet ingesteld (wordt tijdens het implementeren indien mogelijk automatisch uit de metadata afgeleid)"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "User sync"
+msgstr "Gebruikerssynchronisatie"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Enabled (%s attribute mappings, %s group rules, %s role rules)"
+msgstr "Ingeschakeld (%s attribuuttoewijzingen, %s groepsregels, %s rolregels)"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Please fill in all required fields before continuing."
+msgstr "Vul alle verplichte velden in voordat u verdergaat."
+
+#. SysConfig
+msgid "Manage agent and customer authentication (e.g. SAML 2.0)."
+msgstr "Authenticatie voor behandelaars en klanten beheren (bijv. SAML 2.0)."
+
+#. SysConfig
+msgid "SAML"
+msgstr "SAML"
+
 #. Perl Module: Kernel/Modules/AgentTicketQueue.pm
 msgid "System default"
 msgstr ""
@@ -25733,4 +26449,64 @@ msgstr "InnoDB redo-logcapaciteit"
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
 msgid "The setting innodb_redo_log_capacity must be at least 256 MB."
 msgstr "De instelling innodb_redo_log_capacity moet minimaal 256 MB zijn."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Paste key"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Paste certificate"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Login attribute"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Please enter attribute names separated by commas."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Optional. By default the NameID is the login. Enter one or more SAML attribute names (Name or FriendlyName), separated by commas, to take the login from the first of these attributes the assertion contains instead, e.g. if the Identity Provider sends a persistent NameID. The attribute must have exactly one value, otherwise the login fails. Changing this changes the login of existing users."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Deployment failed"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Fix the configurations below and deploy again. Or set a configuration to invalid: its login stops working and the other configurations are deployed."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Set to invalid and deploy the rest"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "If you skipped the Identity Provider CA certificate here, it is taken from the metadata when saving. Please check it on the edit screen afterwards."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Authentication configuration is not in sync with the deployed configuration, but it can't be deployed: a valid configuration has a problem, see the status below. Fix it or set it to invalid, then deploy."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Authentication configuration not found."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Could not set the authentication configuration to invalid."
+msgstr ""
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "No IdP CA certificate is stored. It is taken from the IdP metadata on every deploy. Save the configuration to store it."
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "NameID (default)"
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Not set (will be taken from the metadata when saving)"
+msgstr ""
 

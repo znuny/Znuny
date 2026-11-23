@@ -1,0 +1,96 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+<div class="field-wrapper" data-cert-widget data-role="[% Role | html %]">
+    <label>[% Label %]</label>
+    <div class="Field">
+        <input type="hidden" id="[% Role %]VFSFilename" name="[% Role %]VFSFilename" value="[% VFSFilename | html %]" />
+
+        <p class="Value" data-cert-status>
+            [% IF VFSFilename %]
+                [% Translate("Certificate/key is stored in VirtualFS.") | html %]
+            [% ELSE %]
+                [% Translate("No certificate/key set.") | html %]
+            [% END %]
+        </p>
+        [% UNLESS ShowGenerate %]
+            <button type="button" class="CallForAction Small CertInfoButton[% IF !VFSFilename %] Hidden[% END %]" data-cert-info data-role="[% Role %]" title="[% Translate("View certificate details") | html %]"><i class="fa fa-info-circle"></i><span class="InvisibleText">[% Translate("View certificate details") | html %]</span></button>
+        [% END %]
+        [% IF Error && ErrorMessage %]
+            <p class="ServerError">[% Translate(ErrorMessage) | html %]</p>
+        [% ELSIF Error %]
+            <p class="ServerError">[% Translate("The selected certificate/key is not available. Please select or upload it again.") | html %]</p>
+        [% END %]
+        [% IF Warning && !VFSFilename %]
+            <p class="FieldExplanation ServerError">[% Warning | html %]</p>
+        [% END %]
+
+        <div class="Field CertPoolSelect">
+            <select data-cert-pool-select data-role="[% Role %]">
+                <option value="">[% Translate("- Select an existing certificate/key -") | html %]</option>
+            </select>
+        </div>
+
+        <div class="CertActions">
+            <input type="file" data-cert-upload data-role="[% Role %]" />
+            <button type="button" class="CallForAction btn-main btn-primary-ghost btn-width-max" data-cert-paste-toggle data-role="[% Role %]"><span><i class="fa fa-paste"></i> [% IF Role == 'RequestSignKey' %][% Translate("Paste key") | html %][% ELSE %][% Translate("Paste certificate") | html %][% END %]</span></button>
+            [% IF ShowGenerate %]
+                <button type="button" class="CallForAction btn-main btn-primary-ghost btn-width-max" data-cert-generate-toggle data-role="[% Role %]"><span>[% Translate("Generate") | html %]</span></button>
+            [% END %]
+            [% IF ShowUseFromMetadata %]
+                <button type="button" class="CallForAction btn-main btn-primary-ghost btn-width-max" data-cert-use-metadata data-role="[% Role %]"><span>[% Translate("Use certificate from metadata") | html %]</span></button>
+            [% END %]
+            [% IF ShowDownload %]
+                <button type="button" class="CallForAction btn-main btn-primary-ghost btn-width-max[% IF !VFSFilename %] Hidden[% END %]" data-cert-download data-role="[% Role %]"><span><i class="fa fa-download"></i> [% Translate("Download") | html %]</span></button>
+            [% END %]
+            <button type="button" class="CallForAction btn-main btn-primary-ghost btn-width-max" data-cert-remove data-role="[% Role %]"><span>[% Translate("Remove") | html %]</span></button>
+        </div>
+        [% IF ShowUseFromMetadata %]
+            <p class="FieldExplanation">[% Translate("Extracts the signing certificate embedded in the Identity Provider metadata and stores it here, instead of uploading it separately.") | html %]</p>
+        [% END %]
+
+        <div class="Hidden CertPasteForm" data-cert-paste-form data-role="[% Role %]">
+            <textarea rows="12" class="W100pc" data-cert-paste-text data-role="[% Role %]" aria-label="[% Label | html %]" placeholder="[% IF Role == 'RequestSignKey' %]-----BEGIN PRIVATE KEY-----[% ELSE %]-----BEGIN CERTIFICATE-----[% END %]"></textarea>
+            <p class="FieldExplanation">[% Translate("Paste the PEM text including the BEGIN and END lines.") | html %]</p>
+            <button type="button" class="CallForAction btn-main btn-primary btn-width-max" data-cert-paste-submit data-role="[% Role %]"><span>[% Translate("Save") | html %]</span></button>
+        </div>
+
+        [% IF ShowGenerate %]
+            <div class="Hidden" data-cert-generate-form data-role="[% Role %]">
+                <fieldset class="TableLike">
+                    <div class="field-wrapper">
+                        <label for="[% Role %]GenCommonName">[% Translate("Common Name") | html %]</label>
+                        <div class="Field">
+                            <input type="text" id="[% Role %]GenCommonName" value="[% Data.FQDN | html %]" class="W50pc" placeholder="e.g. sso.example.com" />
+                        </div>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="[% Role %]GenKeySize">[% Translate("Key size") | html %]</label>
+                        <div class="Field">
+                            <select id="[% Role %]GenKeySize" class="Modernize">
+                                <option value="2048">2048</option>
+                                <option value="4096">4096</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field-wrapper">
+                        <label for="[% Role %]GenValidityDays">[% Translate("Validity (days)") | html %]</label>
+                        <div class="Field">
+                            <input type="text" id="[% Role %]GenValidityDays" value="365" class="W25pc" />
+                        </div>
+                    </div>
+                    <div class="field-wrapper">
+                        <div class="Field">
+                            <button type="button" class="CallForAction Primary btn-main btn-primary btn-width-max" data-cert-generate-submit data-role="[% Role %]"><span>[% Translate("Generate self-signed certificate") | html %]</span></button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        [% END %]
+    </div>
+</div>

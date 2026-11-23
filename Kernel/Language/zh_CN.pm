@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.854278497000316;
+    $Self->{Completeness}        = 0.856223175965665;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -275,6 +275,169 @@ sub Data {
         'Do you really want to delete this attachment?' => '你是否确定要删除该附件？',
         'Attachment' => '附件',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+        'Certificate/key is stored in VirtualFS.' => '证书/密钥已存储在VirtualFS中。',
+        'No certificate/key set.' => '未设置证书/密钥。',
+        'View certificate details' => '查看证书详情',
+        'The selected certificate/key is not available. Please select or upload it again.' =>
+            '所选证书/密钥不可用。请重新选择或上传。',
+        '- Select an existing certificate/key -' => '- 选择现有证书/密钥 -',
+        'Paste key' => '',
+        'Paste certificate' => '',
+        'Generate' => '生成',
+        'Use certificate from metadata' => '使用元数据中的证书',
+        'Extracts the signing certificate embedded in the Identity Provider metadata and stores it here, instead of uploading it separately.' =>
+            '提取身份提供者元数据中嵌入的签名证书并存储在此处，无需单独上传。',
+        'Paste the PEM text including the BEGIN and END lines.' => '请粘贴包括BEGIN和END行在内的PEM文本。',
+        'Common Name' => '通用名称',
+        'Key size' => '密钥长度',
+        'Validity (days)' => '有效期 (天)',
+        'Generate self-signed certificate' => '生成自签名证书',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+        'Authentication Management' => '身份验证管理',
+        'Agent authentication' => '服务人员身份验证',
+        'Basic settings' => '基本设置',
+        'Slot' => '槽位',
+        'Determines which numbered AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            '确定此配置占用哪个编号的AuthModule<N>槽位。仅提供未使用的槽位。',
+        'SAML request settings' => 'SAML请求设置',
+        'Login button text' => '登录按钮文本',
+        'Assertion consumer URL' => '断言消费者URL',
+        'Automatically derived from this system\'s HTTP type, FQDN and script alias - not editable.' =>
+            '根据本系统的HTTP类型、FQDN和脚本别名自动生成 - 不可编辑。',
+        'Znuny appends a ";IsSAMLLogin=1;Count=<N>;" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration\'s slot), so the value the Identity Provider actually receives is:' =>
+            'Znuny在构建实际发出的SAML请求时，会在此URL后附加后缀“;IsSAMLLogin=1;Count=<N>;”(<N>为此配置的槽位)，因此身份提供者实际收到的值为:',
+        'Copy to clipboard' => '复制到剪贴板',
+        'Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honor the value from the request. If your IdP\'s field rejects semicolons, register the base URL instead.' =>
+            '某些身份提供者要求将此值原样注册为ACS URL。其他身份提供者接受上面的基础URL，并采用请求中的值。如果您的IdP的字段不接受分号，请改为注册基础URL。',
+        'Download SP metadata XML' => '下载SP元数据XML',
+        'Issuer (SP entity ID)' => '颁发者 (SP实体ID)',
+        'Requested NameID format' => '请求的NameID格式',
+        'Unspecified' => '未指定',
+        'Persistent' => '持久',
+        'Transient' => '临时',
+        'Email address' => '电子邮件地址',
+        'Sent as the NameIDPolicy Format in the outgoing request and published in the SP metadata. Change this only if your Identity Provider requires a specific format.' =>
+            '作为NameIDPolicy Format在发出的请求中发送，并发布在SP元数据中。仅当您的身份提供者要求特定格式时才更改此项。',
+        'Login attribute' => '',
+        'Please enter attribute names separated by commas.' => '',
+        'Optional. By default the NameID is the login. Enter one or more SAML attribute names (Name or FriendlyName), separated by commas, to take the login from the first of these attributes the assertion contains instead, e.g. if the Identity Provider sends a persistent NameID. The attribute must have exactly one value, otherwise the login fails. Changing this changes the login of existing users.' =>
+            '',
+        'Load metadata from URL' => '从URL加载元数据',
+        'Switch off to paste the metadata XML instead. Switching clears the entered URL or XML and the SSL options.' =>
+            '关闭后可改为粘贴元数据XML。切换会清除已输入的URL或XML以及SSL选项。',
+        'Please select a metadata source.' => '请选择元数据来源。',
+        'Metadata URL' => '元数据URL',
+        'Verify' => '验证',
+        'Metadata XML' => '元数据XML',
+        'Use custom SSL options for metadata URL fetch' => '获取元数据URL时使用自定义SSL选项',
+        'SSL CA file' => 'SSL CA文件',
+        'SSL CA path' => 'SSL CA路径',
+        'Verify hostname' => '验证主机名',
+        'Certificates and keys' => '证书和密钥',
+        'SP signing key (used to sign outgoing requests)' => 'SP签名密钥 (用于对发出的请求签名)',
+        'SP signing certificate (matches the key above)' => 'SP签名证书 (与上面的密钥匹配)',
+        'Required for the SP metadata\'s KeyDescriptor to be published. "Generate" above already produces this together with the key - only needed as a separate step if you uploaded your own key.' =>
+            '发布SP元数据中的KeyDescriptor时需要。上面的“生成”已与密钥一起生成此证书 - 仅当您上传了自己的密钥时才需要单独执行此步骤。',
+        'Signing algorithm' => '签名算法',
+        'SHA-256 (default)' => 'SHA-256 (默认)',
+        'SHA-384' => 'SHA-384',
+        'SHA-512' => 'SHA-512',
+        'SHA-1 (legacy, not recommended)' => 'SHA-1 (旧版，不推荐)',
+        'Used to sign the outgoing request when a signing key is set above. Only change this if your Identity Provider requires a specific algorithm.' =>
+            '当上面设置了签名密钥时，用于对发出的请求进行签名。仅当您的身份提供者要求特定算法时才更改此项。',
+        'Decrypt encrypted assertions' => '解密加密的断言',
+        'Uses the SP signing key above to decrypt SAML assertions the Identity Provider encrypts. Has no effect on responses that aren\'t encrypted, so it\'s safe to leave enabled. Requires a signing key above.' =>
+            '使用上面的SP签名密钥解密身份提供者加密的SAML断言。对未加密的响应没有影响，因此可以放心保持启用。需要在上面设置签名密钥。',
+        'Identity provider CA certificate' => '身份提供者CA证书',
+        'Required for SAML login to work. Without it, Net::SAML2 cannot verify the Identity Provider\'s response signature and authentication will fail.' =>
+            'SAML登录必需。缺少此证书时，Net::SAML2无法验证身份提供者的响应签名，身份验证将失败。',
+        'Attribute, group and role sync' => '属性、组和角色同步',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+        'Customer authentication' => '客户身份验证',
+        'Determines which numbered Customer::AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            '确定此配置占用哪个编号的Customer::AuthModule<N>槽位。仅提供未使用的槽位。',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+        'SAML wizard' => 'SAML向导',
+        'Add agent SAML authentication' => '添加服务人员SAML身份验证',
+        'Add customer SAML authentication' => '添加客户SAML身份验证',
+        'Deploy configuration' => '部署配置',
+        'Deployment failed' => '',
+        'Fix the configurations below and deploy again. Or set a configuration to invalid: its login stops working and the other configurations are deployed.' =>
+            '',
+        'Problem' => '问题',
+        'Edit' => '编辑',
+        'Set to invalid and deploy the rest' => '',
+        'Sync' => '同步',
+        'Status' => '状态',
+        'Metadata' => '元数据',
+        'Slot %s' => '槽位 %s',
+        'Default' => '默认',
+        'Yes' => '是',
+        'No' => '否',
+        'OK' => '好',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+        'Enable sync' => '启用同步',
+        'Also registers Kernel::System::Auth::Sync::SAML for the same slot, to sync attributes/groups/roles from the SAML assertion on every login.' =>
+            '同时为同一槽位注册Kernel::System::Auth::Sync::SAML，以便在每次登录时从SAML断言同步属性/组/角色。',
+        'The AuthSyncModule for this slot is already configured outside of AdminAuthentication - sync cannot be enabled for it.' =>
+            '此槽位的AuthSyncModule已在AdminAuthentication之外配置 - 无法为其启用同步。',
+        'User attribute sync map' => '用户属性同步映射',
+        'Maps Znuny user attributes (left) to SAML assertion attribute names (right).' =>
+            '将Znuny用户属性 (左) 映射到SAML断言属性名称 (右)。',
+        'Znuny attribute' => 'Znuny属性',
+        'SAML attribute URI' => 'SAML属性URI',
+        'Initial groups for new users' => '新用户的初始组',
+        'Groups (with rw permission) granted only when a brand-new agent is created via sync. Ctrl/Cmd-click to select multiple.' =>
+            '仅在通过同步创建全新服务人员时授予的组 (具有rw权限)。按住Ctrl/Cmd单击可多选。',
+        'SAML attribute carrying group values' => '包含组值的SAML属性',
+        'Group sync rules (by group value)' => '组同步规则 (按组值)',
+        'Maps a SAML group value to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            '将SAML组值映射到Znuny组和权限。按住Ctrl/Cmd单击可选择多个权限。',
+        'SAML value' => 'SAML值',
+        'Group sync rules (by arbitrary attribute/value)' => '组同步规则 (按任意属性/值)',
+        'Maps any SAML attribute name/value combination to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            '将任意SAML属性名称/值组合映射到Znuny组和权限。按住Ctrl/Cmd单击可选择多个权限。',
+        'SAML attribute' => 'SAML属性',
+        'Role sync requires at least one active role. Create or activate a role under Admin → Roles.' =>
+            '角色同步至少需要一个有效的角色。请在 系统管理 → 角色 中创建或激活角色。',
+        'SAML attribute carrying role values' => '包含角色值的SAML属性',
+        'Role sync rules (by role value)' => '角色同步规则 (按角色值)',
+        'Maps a SAML role value to one or more Znuny roles, active or inactive.' =>
+            '将SAML角色值映射到Znuny角色 (活动或非活动)。',
+        'Active' => 'Active（活动的）',
+        'Role sync rules (by arbitrary attribute/value)' => '角色同步规则 (按任意属性/值)',
+        'Maps any SAML attribute name/value combination to one or more Znuny roles, active or inactive.' =>
+            '将任意SAML属性名称/值组合映射到Znuny角色 (活动或非活动)。',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+        'Setup steps' => '设置步骤',
+        'Setup wizard' => '设置向导',
+        'SAML setup wizard' => 'SAML设置向导',
+        'Step' => '步骤',
+        'What are you setting up?' => '您要设置什么？',
+        'Agent authentication - staff logging into the agent interface' =>
+            '服务人员身份验证 - 员工登录服务人员界面',
+        'Customer authentication - customers logging into the customer portal' =>
+            '客户身份验证 - 客户登录客户门户',
+        'Login with SSO' => '使用SSO登录',
+        'User sync (optional)' => '用户同步 (可选)',
+        'Optionally sync user attributes, groups and roles from the SAML assertion on every login. This can also be set up later on the edit screen.' =>
+            '可选择在每次登录时从SAML断言同步用户属性、组和角色。也可以稍后在编辑界面中进行设置。',
+        'Review' => '确认',
+        'Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective.' =>
+            '点击“保存”以创建此SAML配置。该配置尚不会生效 - 之后请在概览页面使用“部署配置”使其生效。',
+        'If you skipped the Identity Provider CA certificate here, it is taken from the metadata when saving. Please check it on the edit screen afterwards.' =>
+            '',
+        'You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only).' =>
+            '您可以返回之前的任意步骤进行修改，也可以之后使用完整的编辑界面设置高级选项，例如属性/组/角色同步 (仅限服务人员身份验证)。',
+        'Back' => '后退',
+        'Next' => '下一步',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
         'Add Auto Response' => '添加自动响应',
         'Filter for Auto Responses' => '自动响应过滤器',
@@ -332,9 +495,7 @@ sub Data {
             '你可以通过单击列标题来更改列的排序和顺序。',
         'Account Status' => '帐户状态',
         'Account status for: %s' => '%s的帐户状态',
-        'Status' => '状态',
         'Account' => '帐户',
-        'Edit' => '编辑',
         'No accounts found.' => '没有找到帐户。',
         'Communication Log Details (%s)' => '通信日志详情（%s）',
         'Direction' => '方向',
@@ -453,7 +614,6 @@ sub Data {
         'Change Customer Relations for Customer User' => '修改客户用户和客户的关联',
         'Change Customer User Relations for Customer' => '修改客户关联的用户',
         'Toggle active state for all' => '全部激活/不激活状态',
-        'Active' => 'Active（活动的）',
         'Toggle active state for %s' => '%s 激活/不激活状态',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
@@ -1590,14 +1750,11 @@ sub Data {
         'Download package' => '下载该软件包',
         'Rebuild package' => '重新编译',
         'Package Information' => '软件包信息',
-        'Metadata' => '元数据',
         'Change Log' => '更新记录',
         'Date' => '日期',
         'List of Files' => '文件清单',
         'Permission' => '权限',
         'Size' => '大小',
-        'Problem' => '问题',
-        'OK' => '好',
         'Download file from package!' => '从软件包中下载这个文件！',
         'Required' => '必需的',
         'Primary Key' => '主密钥',
@@ -2141,7 +2298,6 @@ sub Data {
         'System Email Addresses Management' => '系统邮件地址管理',
         'Add System Email Address' => '添加统邮件地址',
         'Edit System Email Address' => '编辑统邮件地址',
-        'Email address' => '电子邮件地址',
         'Display name' => '显示名称',
         'This email address is already used as system email address.' => '这个电子邮件地址已经用于系统电子邮件地址。',
         'The display name and email address will be shown on mail you send.' =>
@@ -2356,8 +2512,6 @@ sub Data {
         'All-day' => '全天',
         'Repeat' => '重复',
         'Notification' => '通知',
-        'Yes' => '是',
-        'No' => '否',
         'No calendars found. Please add a calendar first by using Manage Calendars page.' =>
             '没有找到日历。请先通过管理日历界面添加一个日历。',
 
@@ -2887,7 +3041,6 @@ sub Data {
         'Save filter settings as default' => '将过滤器设置保存为默认过滤器',
         'Event Type' => '事件类型',
         'Save as default' => '保存为默认',
-        'Back' => '后退',
         'Change Queue' => '改变队列',
         'Add Filter' => '添加过滤器',
         'Set' => '设置',
@@ -3135,7 +3288,6 @@ sub Data {
         'Phone' => '电话',
         'Web site' => '网址',
         'Community' => '',
-        'Next' => '下一步',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => '外发邮件配置',
@@ -3638,6 +3790,34 @@ sub Data {
             '所有对这个预约（日历）至少有读权限的服务人员',
         'All agents with write permission for the appointment (calendar)' =>
             '所有对这个预约（日历）有写权限的服务人员',
+
+        # Perl Module: Kernel/Modules/AdminAuthentication.pm
+        'Perl module Net::SAML2 is not installed. SAML authentication cannot work until it is installed on the server.' =>
+            '未安装Perl模块Net::SAML2。在服务器上安装之前，SAML身份验证无法工作。',
+        'Authentication configuration is not in sync with the deployed configuration, but it can\'t be deployed: a valid configuration has a problem, see the status below. Fix it or set it to invalid, then deploy.' =>
+            '',
+        'Authentication configuration is not in sync with the deployed configuration, please deploy.' =>
+            '身份验证配置与已部署的配置不同步，请部署。',
+        'No IdP CA certificate was uploaded and none could be taken from the IdP metadata.' =>
+            '未上传IdP CA证书，也无法从IdP元数据中获取。',
+        'Only invalid authentication configurations can be deleted. Please set the configuration to invalid first.' =>
+            '只能删除无效的身份验证配置。请先将该配置设置为无效。',
+        'Invalid or missing Role.' => '角色无效或缺失。',
+        'No file was uploaded.' => '未上传文件。',
+        'Error storing the uploaded file.' => '存储上传的文件时出错。',
+        'Only the SP signing key can be generated.' => '只能生成SP签名密钥。',
+        'Error generating certificate. Please check the system log.' => '生成证书时出错。请检查系统日志。',
+        'Error storing the generated key in VirtualFS.' => '将生成的密钥存储到VirtualFS时出错。',
+        'Error storing the generated certificate in VirtualFS.' => '将生成的证书存储到VirtualFS时出错。',
+        'Could not find a certificate in the metadata. Please check the URL/XML and try again.' =>
+            '在元数据中找不到证书。请检查URL/XML后重试。',
+        'Error storing the certificate.' => '存储证书时出错。',
+        'Could not read the certificate from VirtualFS.' => '无法从VirtualFS读取证书。',
+        'The authentication configuration was not deployed. The previously deployed configuration is still active.' =>
+            '身份验证配置未部署。之前部署的配置仍然有效。',
+        'Please check the system log for details.' => '详情请检查系统日志。',
+        'Authentication configuration not found.' => '',
+        'Could not set the authentication configuration to invalid.' => '',
 
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '自动响应已添加！',
@@ -5044,6 +5224,34 @@ sub Data {
         'Session invalid. Please log in again.' => '会话无效，请重新登录。',
         'Session has timed out. Please log in again.' => '会话超时，请重新登录。',
 
+        # Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+        'This is not an unencrypted private key in PEM format (-----BEGIN PRIVATE KEY-----).' =>
+            '这不是PEM格式的未加密私钥 (-----BEGIN PRIVATE KEY-----)。',
+        'This is not a certificate in PEM format (-----BEGIN CERTIFICATE-----).' =>
+            '这不是PEM格式的证书 (-----BEGIN CERTIFICATE-----)。',
+        'The private key could not be read. Only unencrypted private keys are supported.' =>
+            '无法读取私钥。仅支持未加密的私钥。',
+        'The certificate could not be read.' => '无法读取证书。',
+        'Could not read the SP signing key.' => '无法读取SP签名密钥。',
+        'Could not read the IdP CA certificate.' => '无法读取IdP CA证书。',
+        'No IdP CA certificate is stored. It is taken from the IdP metadata on every deploy. Save the configuration to store it.' =>
+            '',
+        'Could not decrypt the SP signing key. Please check the configured encryption key.' =>
+            '无法解密SP签名密钥。请检查配置的加密密钥。',
+        'Net::SAML2 is not installed on the server, metadata cannot be verified.' =>
+            '服务器上未安装Net::SAML2，无法验证元数据。',
+        'Metadata URL is empty.' => '元数据URL为空。',
+        'Metadata XML is empty.' => '元数据XML为空。',
+        'Could not parse the metadata. Please check the URL/XML and try again.' =>
+            '无法解析元数据。请检查URL/XML后重试。',
+        'Perl module Crypt::OpenSSL::X509 is not installed, certificate details cannot be parsed.' =>
+            '未安装Perl模块Crypt::OpenSSL::X509，无法解析证书详情。',
+        'Could not parse the certificate.' => '无法解析证书。',
+
+        # Perl Module: Kernel/System/AuthenticationConfig.pm
+        'No authentication plugin is registered for this type.' => '此类型没有注册身份验证插件。',
+        'Could not write the certificate files.' => '无法写入证书文件。',
+
         # Perl Module: Kernel/System/AutoResponse.pm
         'Couldn\'t read auto response configuration file. Please make sure the file is valid.' =>
             '',
@@ -5564,7 +5772,6 @@ sub Data {
         'All Settings' => '所有设置',
 
         # Perl Module: Kernel/System/SysConfig/BaseValueType.pm
-        'Default' => '默认',
         'Value is not correct! Please, consider updating this field.' => '值不正确！ 请考虑更新这个字段。',
         'Value doesn\'t satisfy regex (%s).' => '值不满足正则表达式（%s）。',
 
@@ -6305,6 +6512,8 @@ sub Data {
             '前端模块注册（作为“系统管理”的子导航项目显示个人收藏夹）。',
         'Frontend module registration (disable company link if no company feature is used).' =>
             '前端模块注册（如果没有使用客户单位功能，禁用客户单位链接）。',
+        'Registers the SAML 2.0 authentication plugin for AdminAuthentication.' =>
+            '为AdminAuthentication注册SAML 2.0身份验证插件。',
         'Frontend module registration for the customer interface.' => '客户界面的前端模块注册。',
         'Activates the available themes on the system. Value 1 means active, 0 means inactive.' =>
             '激活系统中的可用主题。值1-代表激活，0-代表不激活。',
@@ -8405,6 +8614,55 @@ sub Data {
             '删除附件时出错。 请检查日志以获取更多信息。',
         'Attachment was deleted successfully.' => '附件已成功删除。',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?' =>
+            '切换元数据来源将删除已输入的元数据URL或XML以及SSL选项。是否继续？',
+        'Change metadata source' => '更改元数据来源',
+        'Uploaded key' => '已上传的密钥',
+        'EXPIRED' => '已过期',
+        'expires' => '到期',
+        'used by %s configuration(s)' => '被 %s 个配置使用',
+        'Could not read the certificate.' => '无法读取证书。',
+        'Certificate (PEM)' => '证书 (PEM)',
+        'Issuer' => '颁发者',
+        'Valid from' => '有效期起',
+        'Valid until' => '有效期至',
+        'Serial' => '序列号',
+        'Fingerprint (SHA-256)' => '指纹 (SHA-256)',
+        'Show raw PEM' => '显示原始PEM',
+        'Certificate details' => '证书详情',
+        'Metadata is valid.' => '元数据有效。',
+        'Entity ID' => '实体ID',
+        'SSO URL' => 'SSO URL',
+        'Includes a signing certificate.' => '包含签名证书。',
+        'No signing certificate found in the metadata.' => '元数据中未找到签名证书。',
+        'Found %s attribute(s) in the metadata.' => '在元数据中找到 %s 个属性。',
+        'Verifying...' => '正在验证...',
+        'Metadata verification failed.' => '元数据验证失败。',
+        'Upload failed.' => '上传失败。',
+        'Please paste a certificate or key first.' => '请先粘贴证书或密钥。',
+        'Saving the pasted certificate/key failed.' => '保存粘贴的证书/密钥失败。',
+        'Certificate generation failed.' => '证书生成失败。',
+        'Please select a metadata source (URL or XML) first.' => '请先选择元数据来源 (URL或XML)。',
+        'Could not find a certificate in the metadata.' => '在元数据中找不到证书。',
+        'Copied to clipboard!' => '',
+        'Do you really want to delete this SAML configuration?' => '您真的要删除此SAML配置吗？',
+        'Delete SAML configuration' => '删除SAML配置',
+        'There was an error deleting the SAML configuration.' => '删除SAML配置时出错。',
+        'NameID (default)' => '',
+        '(pasted XML)' => '(粘贴的XML)',
+        'Not configured yet' => '尚未配置',
+        'Identity provider metadata' => '身份提供者元数据',
+        'SP signing key' => 'SP签名密钥',
+        'Configured' => '已配置',
+        'Not set' => '未设置',
+        'SP signing certificate' => 'SP签名证书',
+        'Not set (will be taken from the metadata when saving)' => '',
+        'User sync' => '用户同步',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)' =>
+            '已启用 (%s 个属性映射，%s 个组规则，%s 个角色规则)',
+        'Please fill in all required fields before continuing.' => '继续之前，请填写所有必填字段。',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.AutoResponse.js
         'Delete this %s' => '',
         'Deleting the %s and its data. This may take a while...' => '',
@@ -8611,9 +8869,6 @@ sub Data {
         'Please select attachments for download.' => '',
         'Show less' => '',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
-        'Copied to clipboard!' => '',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
         'First select a customer user, then select a customer ID to assign to this ticket.' =>
             '首先选择一个客户用户，然后选择一个客户ID来分配给这个工单。',
@@ -8658,9 +8913,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Search.js
         'Please remove the following words from your search as they cannot be searched for:' =>
             '请移除以下不能用于搜索的词语：',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.SharedSecretGenerator.js
-        'Generate' => '生成',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
@@ -9224,6 +9476,7 @@ Thanks for your help!
         'Manage POP3 or IMAP accounts to fetch email from.' => '管理收取邮件的POP3或IMAP帐号。',
         'Manage S/MIME certificates for email encryption.' => '管理邮件加密的S/MIME证书。',
         'Manage System Configuration Deployments.' => '管理系统配置部署。',
+        'Manage agent and customer authentication (e.g. SAML 2.0).' => '管理服务人员和客户身份验证 (例如SAML 2.0)。',
         'Manage different calendars.' => '管理不同的日历。',
         'Manage existing sessions.' => '管理已登录会话。',
         'Manage outbound email profiles.' => '',
@@ -9349,6 +9602,7 @@ Thanks for your help!
         'Running Process Tickets' => '运行中的流程工单',
         'Russian' => '俄语',
         'S/MIME Certificates' => 'S/MIME证书',
+        'SAML' => 'SAML',
         'Schedule a maintenance period.' => '计划一个系统维护期。',
         'Screen after marking as seen' => '',
         'Screen after marking as unseen' => '',
@@ -9580,6 +9834,7 @@ Thanks for your help!
         '%s MB',
         '%s TB',
         '%s of %s',
+        '(pasted XML)',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9594,6 +9849,7 @@ Thanks for your help!
         'Add new entry',
         'Add to favourites',
         'Agent',
+        'Agent authentication',
         'All occurrences',
         'All-day',
         'An Error Occurred',
@@ -9616,6 +9872,7 @@ Thanks for your help!
         'Article filter',
         'As soon as you use this button or link, you will leave this screen and its current state will be saved automatically. Do you want to continue?',
         'Ascending sort applied, ',
+        'Assertion consumer URL',
         'Attachment was deleted successfully.',
         'Attachments',
         'Aug',
@@ -9626,6 +9883,11 @@ Thanks for your help!
         'Calendar',
         'Cancel',
         'Cannot proceed',
+        'Certificate (PEM)',
+        'Certificate details',
+        'Certificate generation failed.',
+        'Certificate/key is stored in VirtualFS.',
+        'Change metadata source',
         'Clear',
         'Clear all',
         'Clear all filters',
@@ -9638,27 +9900,34 @@ Thanks for your help!
         'Clone',
         'Clone Process',
         'Clone web service',
+        'Close',
         'Close preview',
         'Close this dialog',
         'Collapse',
         'Complex %s with %s arguments',
+        'Configured',
         'Confirm',
         'Copied to clipboard!',
         'Copy Ticket Number',
         'Copy Ticket Number + Title',
         'Copy ticket information',
+        'Could not find a certificate in the metadata.',
         'Could not load activities.',
         'Could not open popup window. Please disable any popup blockers for this application.',
+        'Could not read the certificate.',
         'Current selection',
         'Currently not possible',
+        'Customer authentication',
         'Customer interface does not support articles not visible for customers.',
         'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',
         'December',
+        'Decrypt encrypted assertions',
         'Delete',
         'Delete Entity',
+        'Delete SAML configuration',
         'Delete conditions',
         'Delete draft',
         'Delete error handling module',
@@ -9692,10 +9961,12 @@ Thanks for your help!
         'Deployment successful. You\'re being redirected...',
         'Descending sort applied, ',
         'Description',
+        'Disabled',
         'Dismiss',
         'Do not show this warning again.',
         'Do you really want to continue?',
         'Do you really want to delete "%s"?',
+        'Do you really want to delete this SAML configuration?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
         'Do you really want to delete this key?',
@@ -9712,11 +9983,14 @@ Thanks for your help!
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
+        'EXPIRED',
         'Edit Field Details',
         'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)',
         'End date',
+        'Entity ID',
         'Error',
         'Error during AJAX communication',
         'Error during AJAX communication. Status: %s, Error: %s',
@@ -9730,8 +10004,10 @@ Thanks for your help!
         'February',
         'Filter',
         'Filters',
+        'Fingerprint (SHA-256)',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
+        'Found %s attribute(s) in the metadata.',
         'Fr',
         'Fri',
         'Friday',
@@ -9741,13 +10017,18 @@ Thanks for your help!
         'Grouped',
         'Help',
         'Hide EntityIDs',
+        'Identity provider CA certificate',
+        'Identity provider metadata',
         'If you now leave this page, all open popup windows will be closed, too!',
         'Import web service',
+        'Includes a signing certificate.',
         'Information about the Znuny Daemon',
         'Insert selected customer user(s) into the "%s:" field.',
         'Invalid date (need a future date)!',
         'Invalid date (need a past date)!',
         'Invalid date!',
+        'Issuer',
+        'Issuer (SP entity ID)',
         'It is going to be deleted from the field, please try again.',
         'It is not possible to add a new event trigger because the event is not set.',
         'It is not possible to set this entry to invalid. All affected configuration settings have to be changed beforehand.',
@@ -9765,6 +10046,8 @@ Thanks for your help!
         'Loading, please wait...',
         'Loading...',
         'Location',
+        'Login attribute',
+        'Login button text',
         'Mail check successful.',
         'Mapping for Key',
         'Mapping for Key %s',
@@ -9772,15 +10055,20 @@ Thanks for your help!
         'March',
         'May',
         'May_long',
+        'Metadata is valid.',
+        'Metadata verification failed.',
         'Mo',
         'Mon',
         'Monday',
         'Month',
         'Name',
+        'NameID (default)',
         'Namespace %s could not be initialized, because %s could not be found.',
         'Next',
+        'No',
         'No Data Available.',
         'No TransitionActions assigned.',
+        'No certificate/key set.',
         'No data found.',
         'No dialogs assigned yet. Just pick an activity dialog from the list on the left and drag it here.',
         'No matches found.',
@@ -9788,10 +10076,14 @@ Thanks for your help!
         'No response from get package upgrade result.',
         'No response from get package upgrade run status.',
         'No response from package upgrade all.',
+        'No signing certificate found in the metadata.',
         'No sort applied, ',
         'No space left for the following files: %s',
         'No working hours',
         'Not available',
+        'Not configured yet',
+        'Not set',
+        'Not set (will be taken from the metadata when saving)',
         'Notice',
         'Notification',
         'Nov',
@@ -9808,10 +10100,13 @@ Thanks for your help!
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
+        'Please fill in all required fields before continuing.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
+        'Please paste a certificate or key first.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select a metadata source (URL or XML) first.',
         'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
@@ -9845,11 +10140,15 @@ Thanks for your help!
         'Restore web service configuration',
         'Rule',
         'Running',
+        'SP signing certificate',
+        'SP signing key',
+        'SSO URL',
         'Sa',
         'Sat',
         'Saturday',
         'Save',
         'Save and update automatically',
+        'Saving the pasted certificate/key failed.',
         'Scale preview content',
         'Search',
         'Search attributes',
@@ -9862,6 +10161,7 @@ Thanks for your help!
         'Select files or drop them here',
         'Sep',
         'September',
+        'Serial',
         'Setting a template will overwrite any text or attachment.',
         'Settings',
         'Show',
@@ -9870,7 +10170,9 @@ Thanks for your help!
         'Show less',
         'Show more',
         'Show or hide the content.',
+        'Show raw PEM',
         'Slide the navigation bar',
+        'Slot',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',
         'Sorry, but you can\'t disable all methods for this notification.',
         'Sorry, the only existing condition can\'t be removed.',
@@ -9885,12 +10187,14 @@ Thanks for your help!
         'Status',
         'Stream',
         'Su',
+        'Subject',
         'Successful',
         'Sun',
         'Sunday',
         'Support Bundle',
         'Switch to desktop mode',
         'Switch to mobile mode',
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?',
         'Team',
         'Th',
         'The activities could not be marked as seen.',
@@ -9912,6 +10216,7 @@ Thanks for your help!
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',
+        'There was an error deleting the SAML configuration.',
         'There was an error deleting the attachment. Please check the logs for more information.',
         'There was an error. Please save all settings you are editing and check the logs for more information.',
         'This Activity cannot be deleted because it is the Start Activity.',
@@ -9943,15 +10248,22 @@ Thanks for your help!
         'Tu',
         'Tue',
         'Tuesday',
+        'Type',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.',
         'Unknown',
         'Unlock setting.',
         'Update All Packages',
         'Update all packages',
         'Update manually',
+        'Upload failed.',
         'Upload information',
+        'Uploaded key',
         'Uploading...',
         'Use options below to narrow down for which tickets appointments will be automatically created.',
+        'User sync',
+        'Valid from',
+        'Valid until',
+        'Verifying...',
         'WARNING: When you change the name of the group \'admin\', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement.',
         'Warning',
         'We',
@@ -9968,12 +10280,14 @@ Thanks for your help!
         'activate to remove the sort',
         'and %s more...',
         'day',
+        'expires',
         'month',
         'more',
         'no',
         'none',
         'or',
         'sorting is disabled',
+        'used by %s configuration(s)',
         'week',
         'yes',
     ];

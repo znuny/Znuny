@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.155667824439533;
+    $Self->{Completeness}        = 0.177958307786634;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -269,6 +269,169 @@ sub Data {
         'Do you really want to delete this attachment?' => '',
         'Attachment' => 'Pielikums',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+        'Certificate/key is stored in VirtualFS.' => 'Sertifikāts/atslēga ir saglabāts VirtualFS.',
+        'No certificate/key set.' => 'Sertifikāts/atslēga nav iestatīts.',
+        'View certificate details' => 'Skatīt sertifikāta datus',
+        'The selected certificate/key is not available. Please select or upload it again.' =>
+            'Atlasītais sertifikāts/atslēga nav pieejams. Lūdzu, atlasiet vai augšupielādējiet to vēlreiz.',
+        '- Select an existing certificate/key -' => '- Atlasiet esošu sertifikātu/atslēgu -',
+        'Paste key' => '',
+        'Paste certificate' => '',
+        'Generate' => '',
+        'Use certificate from metadata' => 'Izmantot sertifikātu no metadatiem',
+        'Extracts the signing certificate embedded in the Identity Provider metadata and stores it here, instead of uploading it separately.' =>
+            'Izvelk identitātes nodrošinātāja metadatos iegulto parakstīšanas sertifikātu un saglabā to šeit, nevis augšupielādē atsevišķi.',
+        'Paste the PEM text including the BEGIN and END lines.' => 'Ielīmējiet PEM tekstu, ieskaitot rindas BEGIN un END.',
+        'Common Name' => 'Vispārīgais nosaukums',
+        'Key size' => 'Atslēgas izmērs',
+        'Validity (days)' => 'Derīgums (dienās)',
+        'Generate self-signed certificate' => 'Ģenerēt pašparakstītu sertifikātu',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+        'Authentication Management' => 'Autentifikācijas pārvaldība',
+        'Agent authentication' => 'Aģenta autentifikācija',
+        'Basic settings' => 'Pamatiestatījumi',
+        'Slot' => 'Vieta',
+        'Determines which numbered AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Nosaka, kuru numurētu AuthModule<N> vietu šī konfigurācija aizņem. Tiek piedāvātas tikai neizmantotas vietas.',
+        'SAML request settings' => 'SAML pieprasījuma iestatījumi',
+        'Login button text' => 'Pieteikšanās pogas teksts',
+        'Assertion consumer URL' => 'Apliecinājumu patērētāja URL',
+        'Automatically derived from this system\'s HTTP type, FQDN and script alias - not editable.' =>
+            'Automātiski iegūts no šīs sistēmas HTTP tipa, FQDN un skripta aizstājvārda - nav rediģējams.',
+        'Znuny appends a ";IsSAMLLogin=1;Count=<N>;" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration\'s slot), so the value the Identity Provider actually receives is:' =>
+            'Znuny pievieno sufiksu ";IsSAMLLogin=1;Count=<N>;" šim URL, veidojot faktisko izejošo SAML pieprasījumu (<N> ir šīs konfigurācijas vieta), tāpēc vērtība, ko identitātes nodrošinātājs patiesībā saņem, ir:',
+        'Copy to clipboard' => 'Kopēt starpliktuvē',
+        'Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honor the value from the request. If your IdP\'s field rejects semicolons, register the base URL instead.' =>
+            'Daži identitātes nodrošinātāji pieprasa, lai kā ACS URL tiktu reģistrēta tieši šī vērtība. Citi pieņem iepriekš minēto bāzes URL un ievēro pieprasījuma vērtību. Ja jūsu IdP lauks noraida semikolus, reģistrējiet bāzes URL.',
+        'Download SP metadata XML' => 'Lejupielādēt SP metadatu XML',
+        'Issuer (SP entity ID)' => 'Izdevējs (SP entītijas ID)',
+        'Requested NameID format' => 'Pieprasītais NameID formāts',
+        'Unspecified' => 'Nenorādīts',
+        'Persistent' => 'Pastāvīgs',
+        'Transient' => 'Pārejošs',
+        'Email address' => '',
+        'Sent as the NameIDPolicy Format in the outgoing request and published in the SP metadata. Change this only if your Identity Provider requires a specific format.' =>
+            'Tiek nosūtīts kā NameIDPolicy Format izejošajā pieprasījumā un publicēts SP metadatos. Mainiet to tikai tad, ja jūsu identitātes nodrošinātājs pieprasa noteiktu formātu.',
+        'Login attribute' => '',
+        'Please enter attribute names separated by commas.' => '',
+        'Optional. By default the NameID is the login. Enter one or more SAML attribute names (Name or FriendlyName), separated by commas, to take the login from the first of these attributes the assertion contains instead, e.g. if the Identity Provider sends a persistent NameID. The attribute must have exactly one value, otherwise the login fails. Changing this changes the login of existing users.' =>
+            '',
+        'Load metadata from URL' => 'Ielādēt metadatus no URL',
+        'Switch off to paste the metadata XML instead. Switching clears the entered URL or XML and the SSL options.' =>
+            'Izslēdziet, lai tā vietā ielīmētu metadatu XML. Pārslēgšana notīra ievadīto URL vai XML un SSL opcijas.',
+        'Please select a metadata source.' => 'Lūdzu, atlasiet metadatu avotu.',
+        'Metadata URL' => 'Metadatu URL',
+        'Verify' => 'Pārbaudīt',
+        'Metadata XML' => 'Metadatu XML',
+        'Use custom SSL options for metadata URL fetch' => 'Izmantot pielāgotas SSL opcijas metadatu URL ielādei',
+        'SSL CA file' => 'SSL CA fails',
+        'SSL CA path' => 'SSL CA ceļš',
+        'Verify hostname' => 'Pārbaudīt resursdatora nosaukumu',
+        'Certificates and keys' => 'Sertifikāti un atslēgas',
+        'SP signing key (used to sign outgoing requests)' => 'SP parakstīšanas atslēga (tiek izmantota izejošo pieprasījumu parakstīšanai)',
+        'SP signing certificate (matches the key above)' => 'SP parakstīšanas sertifikāts (atbilst iepriekšējai atslēgai)',
+        'Required for the SP metadata\'s KeyDescriptor to be published. "Generate" above already produces this together with the key - only needed as a separate step if you uploaded your own key.' =>
+            'Nepieciešams, lai tiktu publicēts SP metadatu KeyDescriptor. "Ģenerēt" augstāk jau izveido to kopā ar atslēgu - atsevišķs solis ir vajadzīgs tikai tad, ja augšupielādējāt savu atslēgu.',
+        'Signing algorithm' => 'Parakstīšanas algoritms',
+        'SHA-256 (default)' => 'SHA-256 (noklusējums)',
+        'SHA-384' => 'SHA-384',
+        'SHA-512' => 'SHA-512',
+        'SHA-1 (legacy, not recommended)' => 'SHA-1 (novecojis, nav ieteicams)',
+        'Used to sign the outgoing request when a signing key is set above. Only change this if your Identity Provider requires a specific algorithm.' =>
+            'Tiek izmantots izejošā pieprasījuma parakstīšanai, ja augstāk ir iestatīta parakstīšanas atslēga. Mainiet to tikai tad, ja jūsu identitātes nodrošinātājs pieprasa noteiktu algoritmu.',
+        'Decrypt encrypted assertions' => 'Atšifrēt šifrētos apliecinājumus',
+        'Uses the SP signing key above to decrypt SAML assertions the Identity Provider encrypts. Has no effect on responses that aren\'t encrypted, so it\'s safe to leave enabled. Requires a signing key above.' =>
+            'Izmanto iepriekšējo SP parakstīšanas atslēgu, lai atšifrētu SAML apliecinājumus, ko šifrē identitātes nodrošinātājs. Neietekmē nešifrētas atbildes, tāpēc to var droši atstāt ieslēgtu. Nepieciešama parakstīšanas atslēga augstāk.',
+        'Identity provider CA certificate' => 'Identitātes nodrošinātāja CA sertifikāts',
+        'Required for SAML login to work. Without it, Net::SAML2 cannot verify the Identity Provider\'s response signature and authentication will fail.' =>
+            'Nepieciešams, lai SAML pieteikšanās darbotos. Bez tā Net::SAML2 nevar pārbaudīt identitātes nodrošinātāja atbildes parakstu, un autentifikācija neizdosies.',
+        'Attribute, group and role sync' => 'Atribūtu, grupu un lomu sinhronizācija',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+        'Customer authentication' => 'Klientu autentifikācija',
+        'Determines which numbered Customer::AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Nosaka, kuru numurētu Customer::AuthModule<N> vietu šī konfigurācija aizņem. Tiek piedāvātas tikai neizmantotas vietas.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+        'SAML wizard' => 'SAML vednis',
+        'Add agent SAML authentication' => 'Pievienot aģenta SAML autentifikāciju',
+        'Add customer SAML authentication' => 'Pievienot klientu SAML autentifikāciju',
+        'Deploy configuration' => 'Izvietot konfigurāciju',
+        'Deployment failed' => '',
+        'Fix the configurations below and deploy again. Or set a configuration to invalid: its login stops working and the other configurations are deployed.' =>
+            '',
+        'Problem' => 'Problēma',
+        'Edit' => 'Labot',
+        'Set to invalid and deploy the rest' => '',
+        'Sync' => 'Sinhronizācija',
+        'Status' => 'Statuss',
+        'Metadata' => '',
+        'Slot %s' => 'Vieta %s',
+        'Default' => '',
+        'Yes' => 'Jā',
+        'No' => 'Nē',
+        'OK' => 'Labi',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+        'Enable sync' => 'Iespējot sinhronizāciju',
+        'Also registers Kernel::System::Auth::Sync::SAML for the same slot, to sync attributes/groups/roles from the SAML assertion on every login.' =>
+            'Reģistrē arī Kernel::System::Auth::Sync::SAML tai pašai vietai, lai sinhronizētu atribūtus/grupas/lomas no SAML apliecinājuma katrā pieteikšanās reizē.',
+        'The AuthSyncModule for this slot is already configured outside of AdminAuthentication - sync cannot be enabled for it.' =>
+            'Šīs vietas AuthSyncModule jau ir konfigurēts ārpus AdminAuthentication - sinhronizāciju tam nevar iespējot.',
+        'User attribute sync map' => 'Lietotāja atribūtu sinhronizācijas kartējums',
+        'Maps Znuny user attributes (left) to SAML assertion attribute names (right).' =>
+            'Kartē Znuny lietotāja atribūtus (pa kreisi) ar SAML apliecinājuma atribūtu nosaukumiem (pa labi).',
+        'Znuny attribute' => 'Znuny atribūts',
+        'SAML attribute URI' => 'SAML atribūta URI',
+        'Initial groups for new users' => 'Sākotnējās grupas jauniem lietotājiem',
+        'Groups (with rw permission) granted only when a brand-new agent is created via sync. Ctrl/Cmd-click to select multiple.' =>
+            'Grupas (ar rakstīšanas tiesībām), kas tiek piešķirtas tikai tad, kad sinhronizācijā tiek izveidots pavisam jauns aģents. Ctrl/Cmd-klikšķis, lai atlasītu vairākus.',
+        'SAML attribute carrying group values' => 'SAML atribūts, kas satur grupas vērtības',
+        'Group sync rules (by group value)' => 'Grupas sinhronizācijas kārtulas (pēc grupas vērtības)',
+        'Maps a SAML group value to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Kartē SAML grupas vērtību ar Znuny grupu un tiesībām. Ctrl/Cmd-klikšķis, lai atlasītu vairākas tiesības.',
+        'SAML value' => 'SAML vērtība',
+        'Group sync rules (by arbitrary attribute/value)' => 'Grupas sinhronizācijas kārtulas (pēc jebkura atribūta/vērtības)',
+        'Maps any SAML attribute name/value combination to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Kartē jebkuru SAML atribūta nosaukuma/vērtības kombināciju ar Znuny grupu un tiesībām. Ctrl/Cmd-klikšķis, lai atlasītu vairākas tiesības.',
+        'SAML attribute' => 'SAML atribūts',
+        'Role sync requires at least one active role. Create or activate a role under Admin → Roles.' =>
+            'Lomu sinhronizācijai nepieciešama vismaz viena aktīva loma. Izveidojiet vai aktivizējiet lomu sadaļā Admin → Lomas.',
+        'SAML attribute carrying role values' => 'SAML atribūts, kas satur lomas vērtības',
+        'Role sync rules (by role value)' => 'Lomas sinhronizācijas kārtulas (pēc lomas vērtības)',
+        'Maps a SAML role value to one or more Znuny roles, active or inactive.' =>
+            'Kartē SAML lomas vērtību ar Znuny lomu, aktīvu vai neaktīvu.',
+        'Active' => 'Aktīvs',
+        'Role sync rules (by arbitrary attribute/value)' => 'Lomas sinhronizācijas kārtulas (pēc jebkura atribūta/vērtības)',
+        'Maps any SAML attribute name/value combination to one or more Znuny roles, active or inactive.' =>
+            'Kartē jebkuru SAML atribūta nosaukuma/vērtības kombināciju ar Znuny lomu, aktīvu vai neaktīvu.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+        'Setup steps' => 'Iestatīšanas soļi',
+        'Setup wizard' => 'Iestatīšanas vednis',
+        'SAML setup wizard' => 'SAML iestatīšanas vednis',
+        'Step' => 'Solis',
+        'What are you setting up?' => 'Ko jūs iestatāt?',
+        'Agent authentication - staff logging into the agent interface' =>
+            'Aģenta autentifikācija - darbinieki, kas piesakās aģenta saskarnē',
+        'Customer authentication - customers logging into the customer portal' =>
+            'Klientu autentifikācija - klienti, kas piesakās klientu portālā',
+        'Login with SSO' => 'Pieteikties ar SSO',
+        'User sync (optional)' => 'Lietotāju sinhronizācija (neobligāti)',
+        'Optionally sync user attributes, groups and roles from the SAML assertion on every login. This can also be set up later on the edit screen.' =>
+            'Pēc izvēles sinhronizējiet lietotāja atribūtus, grupas un lomas no SAML apliecinājuma katrā pieteikšanās reizē. To var iestatīt arī vēlāk labošanas ekrānā.',
+        'Review' => 'Pārskatīšana',
+        'Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective.' =>
+            'Noklikšķiniet uz "Saglabāt", lai izveidotu šo SAML konfigurāciju. Tā vēl nebūs aktīva - pēc tam izmantojiet darbību "Izvietot" pārskata lapā, lai tā stātos spēkā.',
+        'If you skipped the Identity Provider CA certificate here, it is taken from the metadata when saving. Please check it on the edit screen afterwards.' =>
+            '',
+        'You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only).' =>
+            'Varat atgriezties pie jebkura iepriekšējā soļa, lai veiktu izmaiņas, vai pēc tam izmantot pilno labošanas ekrānu papildu opcijām, piemēram, atribūtu/grupu/lomu sinhronizācijai (tikai aģenta autentifikācija).',
+        'Back' => 'Atpakaļ',
+        'Next' => 'Nākamais',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
         'Add Auto Response' => 'Pievienot automātisko atbildi',
         'Filter for Auto Responses' => '',
@@ -326,9 +489,7 @@ sub Data {
             '',
         'Account Status' => '',
         'Account status for: %s' => '',
-        'Status' => 'Statuss',
         'Account' => '',
-        'Edit' => 'Labot',
         'No accounts found.' => '',
         'Communication Log Details (%s)' => '',
         'Direction' => 'Virziens',
@@ -447,7 +608,6 @@ sub Data {
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => 'Pārslēgt aktīvs stāvoklis visiem',
-        'Active' => 'Aktīvs',
         'Toggle active state for %s' => 'Pārslēgt aktīvs stāvoklis priekš %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
@@ -1584,14 +1744,11 @@ sub Data {
         'Download package' => '',
         'Rebuild package' => '',
         'Package Information' => '',
-        'Metadata' => '',
         'Change Log' => '',
         'Date' => 'Datums',
         'List of Files' => '',
         'Permission' => 'Tiesības',
         'Size' => 'Izmērs',
-        'Problem' => 'Problēma',
-        'OK' => 'Labi',
         'Download file from package!' => 'Lejupielādēt failu (datni) no pakotnes!',
         'Required' => 'Pieprasīts',
         'Primary Key' => '',
@@ -2135,7 +2292,6 @@ sub Data {
         'System Email Addresses Management' => 'Sistēmas e-pasta adrešu pārvaldība',
         'Add System Email Address' => '',
         'Edit System Email Address' => '',
-        'Email address' => '',
         'Display name' => '',
         'This email address is already used as system email address.' => '',
         'The display name and email address will be shown on mail you send.' =>
@@ -2350,8 +2506,6 @@ sub Data {
         'All-day' => '',
         'Repeat' => '',
         'Notification' => 'Paziņojumi',
-        'Yes' => 'Jā',
-        'No' => 'Nē',
         'No calendars found. Please add a calendar first by using Manage Calendars page.' =>
             '',
 
@@ -2881,7 +3035,6 @@ sub Data {
         'Save filter settings as default' => 'Saglabāt filtra iestatījumus kā noklusētos',
         'Event Type' => '',
         'Save as default' => '',
-        'Back' => 'Atpakaļ',
         'Change Queue' => '',
         'Add Filter' => '',
         'Set' => 'Uzstādīt',
@@ -3129,7 +3282,6 @@ sub Data {
         'Phone' => 'Telefons',
         'Web site' => '',
         'Community' => '',
-        'Next' => 'Nākamais',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => '',
@@ -3632,6 +3784,34 @@ sub Data {
             '',
         'All agents with write permission for the appointment (calendar)' =>
             '',
+
+        # Perl Module: Kernel/Modules/AdminAuthentication.pm
+        'Perl module Net::SAML2 is not installed. SAML authentication cannot work until it is installed on the server.' =>
+            'Perl modulis Net::SAML2 nav instalēts. SAML autentifikācija nevar darboties, kamēr tas nav instalēts serverī.',
+        'Authentication configuration is not in sync with the deployed configuration, but it can\'t be deployed: a valid configuration has a problem, see the status below. Fix it or set it to invalid, then deploy.' =>
+            '',
+        'Authentication configuration is not in sync with the deployed configuration, please deploy.' =>
+            'Autentifikācijas konfigurācija nav sinhronizēta ar izvietoto konfigurāciju, lūdzu, izvietojiet.',
+        'No IdP CA certificate was uploaded and none could be taken from the IdP metadata.' =>
+            'IdP CA sertifikāts netika augšupielādēts, un to nevarēja ņemt no IdP metadatiem.',
+        'Only invalid authentication configurations can be deleted. Please set the configuration to invalid first.' =>
+            'Dzēst var tikai nederīgas autentifikācijas konfigurācijas. Lūdzu, vispirms iestatiet konfigurāciju kā nederīgu.',
+        'Invalid or missing Role.' => 'Nederīga vai trūkstoša loma.',
+        'No file was uploaded.' => 'Neviens fails netika augšupielādēts.',
+        'Error storing the uploaded file.' => 'Kļūda, saglabājot augšupielādēto failu.',
+        'Only the SP signing key can be generated.' => 'Ģenerēt var tikai SP parakstīšanas atslēgu.',
+        'Error generating certificate. Please check the system log.' => 'Kļūda, ģenerējot sertifikātu. Lūdzu, pārbaudiet sistēmas žurnālu.',
+        'Error storing the generated key in VirtualFS.' => 'Kļūda, saglabājot ģenerēto atslēgu VirtualFS.',
+        'Error storing the generated certificate in VirtualFS.' => 'Kļūda, saglabājot ģenerēto sertifikātu VirtualFS.',
+        'Could not find a certificate in the metadata. Please check the URL/XML and try again.' =>
+            'Metadatos neizdevās atrast sertifikātu. Lūdzu, pārbaudiet URL/XML un mēģiniet vēlreiz.',
+        'Error storing the certificate.' => 'Kļūda, saglabājot sertifikātu.',
+        'Could not read the certificate from VirtualFS.' => 'Neizdevās nolasīt sertifikātu no VirtualFS.',
+        'The authentication configuration was not deployed. The previously deployed configuration is still active.' =>
+            'Autentifikācijas konfigurācija netika izvietota. Iepriekš izvietotā konfigurācija joprojām ir aktīva.',
+        'Please check the system log for details.' => 'Lūdzu, skatiet sistēmas žurnālu, lai uzzinātu detalizētu informāciju.',
+        'Authentication configuration not found.' => '',
+        'Could not set the authentication configuration to invalid.' => '',
 
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
@@ -5038,6 +5218,34 @@ sub Data {
         'Session invalid. Please log in again.' => 'Nederīga sesija. Lūdzu, piesakieties vēlreiz.',
         'Session has timed out. Please log in again.' => 'Sesija ir beigusies. Lūdzu, piesakieties vēlreiz.',
 
+        # Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+        'This is not an unencrypted private key in PEM format (-----BEGIN PRIVATE KEY-----).' =>
+            'Šī nav nešifrēta privātā atslēga PEM formātā (-----BEGIN PRIVATE KEY-----).',
+        'This is not a certificate in PEM format (-----BEGIN CERTIFICATE-----).' =>
+            'Šis nav sertifikāts PEM formātā (-----BEGIN CERTIFICATE-----).',
+        'The private key could not be read. Only unencrypted private keys are supported.' =>
+            'Privāto atslēgu neizdevās nolasīt. Tiek atbalstītas tikai nešifrētas privātās atslēgas.',
+        'The certificate could not be read.' => 'Sertifikātu neizdevās nolasīt.',
+        'Could not read the SP signing key.' => 'Neizdevās nolasīt SP parakstīšanas atslēgu.',
+        'Could not read the IdP CA certificate.' => 'Neizdevās nolasīt IdP CA sertifikātu.',
+        'No IdP CA certificate is stored. It is taken from the IdP metadata on every deploy. Save the configuration to store it.' =>
+            '',
+        'Could not decrypt the SP signing key. Please check the configured encryption key.' =>
+            'Neizdevās atšifrēt SP parakstīšanas atslēgu. Lūdzu, pārbaudiet konfigurēto šifrēšanas atslēgu.',
+        'Net::SAML2 is not installed on the server, metadata cannot be verified.' =>
+            'Net::SAML2 serverī nav instalēts, metadatus nevar pārbaudīt.',
+        'Metadata URL is empty.' => 'Metadatu URL ir tukšs.',
+        'Metadata XML is empty.' => 'Metadatu XML ir tukšs.',
+        'Could not parse the metadata. Please check the URL/XML and try again.' =>
+            'Neizdevās parsēt metadatus. Lūdzu, pārbaudiet URL/XML un mēģiniet vēlreiz.',
+        'Perl module Crypt::OpenSSL::X509 is not installed, certificate details cannot be parsed.' =>
+            'Perl modulis Crypt::OpenSSL::X509 nav instalēts, sertifikāta datus nevar parsēt.',
+        'Could not parse the certificate.' => 'Neizdevās parsēt sertifikātu.',
+
+        # Perl Module: Kernel/System/AuthenticationConfig.pm
+        'No authentication plugin is registered for this type.' => 'Šim tipam nav reģistrēts neviens autentifikācijas spraudnis.',
+        'Could not write the certificate files.' => 'Neizdevās ierakstīt sertifikāta failus.',
+
         # Perl Module: Kernel/System/AutoResponse.pm
         'Couldn\'t read auto response configuration file. Please make sure the file is valid.' =>
             '',
@@ -5558,7 +5766,6 @@ sub Data {
         'All Settings' => '',
 
         # Perl Module: Kernel/System/SysConfig/BaseValueType.pm
-        'Default' => '',
         'Value is not correct! Please, consider updating this field.' => '',
         'Value doesn\'t satisfy regex (%s).' => '',
 
@@ -6299,6 +6506,8 @@ sub Data {
             '',
         'Frontend module registration (disable company link if no company feature is used).' =>
             '',
+        'Registers the SAML 2.0 authentication plugin for AdminAuthentication.' =>
+            'Reģistrē SAML 2.0 autentifikācijas spraudni AdminAuthentication.',
         'Frontend module registration for the customer interface.' => '',
         'Activates the available themes on the system. Value 1 means active, 0 means inactive.' =>
             '',
@@ -8399,6 +8608,55 @@ sub Data {
             '',
         'Attachment was deleted successfully.' => '',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?' =>
+            'Metadatu avota maiņa noņem ievadīto metadatu URL vai XML un SSL opcijas. Turpināt?',
+        'Change metadata source' => 'Mainīt metadatu avotu',
+        'Uploaded key' => 'Augšupielādētā atslēga',
+        'EXPIRED' => 'BEIDZIES',
+        'expires' => 'beidzas',
+        'used by %s configuration(s)' => 'izmanto %s konfigurācija(-s)',
+        'Could not read the certificate.' => 'Neizdevās nolasīt sertifikātu.',
+        'Certificate (PEM)' => 'Sertifikāts (PEM)',
+        'Issuer' => 'Izdevējs',
+        'Valid from' => 'Derīgs no',
+        'Valid until' => 'Derīgs līdz',
+        'Serial' => 'Sērijas numurs',
+        'Fingerprint (SHA-256)' => 'Identificētājsumma (SHA-256)',
+        'Show raw PEM' => 'Rādīt neapstrādātu PEM',
+        'Certificate details' => 'Sertifikāta dati',
+        'Metadata is valid.' => 'Metadati ir derīgi.',
+        'Entity ID' => 'Entītijas ID',
+        'SSO URL' => 'SSO URL',
+        'Includes a signing certificate.' => 'Ietver parakstīšanas sertifikātu.',
+        'No signing certificate found in the metadata.' => 'Metadatos nav atrasts parakstīšanas sertifikāts.',
+        'Found %s attribute(s) in the metadata.' => 'Metadatos atrasts(-i) %s atribūts(-i).',
+        'Verifying...' => 'Pārbauda...',
+        'Metadata verification failed.' => 'Metadatu pārbaude neizdevās.',
+        'Upload failed.' => 'Augšupielāde neizdevās.',
+        'Please paste a certificate or key first.' => 'Lūdzu, vispirms ielīmējiet sertifikātu vai atslēgu.',
+        'Saving the pasted certificate/key failed.' => 'Ielīmētā sertifikāta/atslēgas saglabāšana neizdevās.',
+        'Certificate generation failed.' => 'Sertifikāta ģenerēšana neizdevās.',
+        'Please select a metadata source (URL or XML) first.' => 'Lūdzu, vispirms atlasiet metadatu avotu (URL vai XML).',
+        'Could not find a certificate in the metadata.' => 'Metadatos neizdevās atrast sertifikātu.',
+        'Copied to clipboard!' => '',
+        'Do you really want to delete this SAML configuration?' => 'Vai tiešām vēlaties dzēst šo SAML konfigurāciju?',
+        'Delete SAML configuration' => 'Dzēst SAML konfigurāciju',
+        'There was an error deleting the SAML configuration.' => 'Dzēšot SAML konfigurāciju, radās kļūda.',
+        'NameID (default)' => '',
+        '(pasted XML)' => '(ielīmēts XML)',
+        'Not configured yet' => 'Vēl nav konfigurēts',
+        'Identity provider metadata' => 'Identitātes nodrošinātāja metadati',
+        'SP signing key' => 'SP parakstīšanas atslēga',
+        'Configured' => 'Konfigurēts',
+        'Not set' => 'Nav iestatīts',
+        'SP signing certificate' => 'SP parakstīšanas sertifikāts',
+        'Not set (will be taken from the metadata when saving)' => '',
+        'User sync' => 'Lietotāju sinhronizācija',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)' =>
+            'Iespējots (%s atribūtu kartējumi, %s grupas kārtulas, %s lomas kārtulas)',
+        'Please fill in all required fields before continuing.' => 'Lūdzu, aizpildiet visus obligātos laukus, pirms turpināt.',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.AutoResponse.js
         'Delete this %s' => '',
         'Deleting the %s and its data. This may take a while...' => '',
@@ -8605,9 +8863,6 @@ sub Data {
         'Please select attachments for download.' => '',
         'Show less' => '',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
-        'Copied to clipboard!' => '',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
         'First select a customer user, then select a customer ID to assign to this ticket.' =>
             '',
@@ -8652,9 +8907,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Search.js
         'Please remove the following words from your search as they cannot be searched for:' =>
             '',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.SharedSecretGenerator.js
-        'Generate' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
@@ -9208,6 +9460,7 @@ Thanks for your help!
         'Manage POP3 or IMAP accounts to fetch email from.' => '',
         'Manage S/MIME certificates for email encryption.' => '',
         'Manage System Configuration Deployments.' => '',
+        'Manage agent and customer authentication (e.g. SAML 2.0).' => 'Pārvaldīt aģenta un klientu autentifikāciju (piem., SAML 2.0).',
         'Manage different calendars.' => '',
         'Manage existing sessions.' => '',
         'Manage outbound email profiles.' => '',
@@ -9333,6 +9586,7 @@ Thanks for your help!
         'Running Process Tickets' => '',
         'Russian' => '',
         'S/MIME Certificates' => 'S/MIME sertifikāti',
+        'SAML' => 'SAML',
         'Schedule a maintenance period.' => '',
         'Screen after marking as seen' => '',
         'Screen after marking as unseen' => '',
@@ -9564,6 +9818,7 @@ Thanks for your help!
         '%s MB',
         '%s TB',
         '%s of %s',
+        '(pasted XML)',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9578,6 +9833,7 @@ Thanks for your help!
         'Add new entry',
         'Add to favourites',
         'Agent',
+        'Agent authentication',
         'All occurrences',
         'All-day',
         'An Error Occurred',
@@ -9600,6 +9856,7 @@ Thanks for your help!
         'Article filter',
         'As soon as you use this button or link, you will leave this screen and its current state will be saved automatically. Do you want to continue?',
         'Ascending sort applied, ',
+        'Assertion consumer URL',
         'Attachment was deleted successfully.',
         'Attachments',
         'Aug',
@@ -9610,6 +9867,11 @@ Thanks for your help!
         'Calendar',
         'Cancel',
         'Cannot proceed',
+        'Certificate (PEM)',
+        'Certificate details',
+        'Certificate generation failed.',
+        'Certificate/key is stored in VirtualFS.',
+        'Change metadata source',
         'Clear',
         'Clear all',
         'Clear all filters',
@@ -9622,27 +9884,34 @@ Thanks for your help!
         'Clone',
         'Clone Process',
         'Clone web service',
+        'Close',
         'Close preview',
         'Close this dialog',
         'Collapse',
         'Complex %s with %s arguments',
+        'Configured',
         'Confirm',
         'Copied to clipboard!',
         'Copy Ticket Number',
         'Copy Ticket Number + Title',
         'Copy ticket information',
+        'Could not find a certificate in the metadata.',
         'Could not load activities.',
         'Could not open popup window. Please disable any popup blockers for this application.',
+        'Could not read the certificate.',
         'Current selection',
         'Currently not possible',
+        'Customer authentication',
         'Customer interface does not support articles not visible for customers.',
         'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',
         'December',
+        'Decrypt encrypted assertions',
         'Delete',
         'Delete Entity',
+        'Delete SAML configuration',
         'Delete conditions',
         'Delete draft',
         'Delete error handling module',
@@ -9676,10 +9945,12 @@ Thanks for your help!
         'Deployment successful. You\'re being redirected...',
         'Descending sort applied, ',
         'Description',
+        'Disabled',
         'Dismiss',
         'Do not show this warning again.',
         'Do you really want to continue?',
         'Do you really want to delete "%s"?',
+        'Do you really want to delete this SAML configuration?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
         'Do you really want to delete this key?',
@@ -9696,11 +9967,14 @@ Thanks for your help!
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
+        'EXPIRED',
         'Edit Field Details',
         'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)',
         'End date',
+        'Entity ID',
         'Error',
         'Error during AJAX communication',
         'Error during AJAX communication. Status: %s, Error: %s',
@@ -9714,8 +9988,10 @@ Thanks for your help!
         'February',
         'Filter',
         'Filters',
+        'Fingerprint (SHA-256)',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
+        'Found %s attribute(s) in the metadata.',
         'Fr',
         'Fri',
         'Friday',
@@ -9725,13 +10001,18 @@ Thanks for your help!
         'Grouped',
         'Help',
         'Hide EntityIDs',
+        'Identity provider CA certificate',
+        'Identity provider metadata',
         'If you now leave this page, all open popup windows will be closed, too!',
         'Import web service',
+        'Includes a signing certificate.',
         'Information about the Znuny Daemon',
         'Insert selected customer user(s) into the "%s:" field.',
         'Invalid date (need a future date)!',
         'Invalid date (need a past date)!',
         'Invalid date!',
+        'Issuer',
+        'Issuer (SP entity ID)',
         'It is going to be deleted from the field, please try again.',
         'It is not possible to add a new event trigger because the event is not set.',
         'It is not possible to set this entry to invalid. All affected configuration settings have to be changed beforehand.',
@@ -9749,6 +10030,8 @@ Thanks for your help!
         'Loading, please wait...',
         'Loading...',
         'Location',
+        'Login attribute',
+        'Login button text',
         'Mail check successful.',
         'Mapping for Key',
         'Mapping for Key %s',
@@ -9756,15 +10039,20 @@ Thanks for your help!
         'March',
         'May',
         'May_long',
+        'Metadata is valid.',
+        'Metadata verification failed.',
         'Mo',
         'Mon',
         'Monday',
         'Month',
         'Name',
+        'NameID (default)',
         'Namespace %s could not be initialized, because %s could not be found.',
         'Next',
+        'No',
         'No Data Available.',
         'No TransitionActions assigned.',
+        'No certificate/key set.',
         'No data found.',
         'No dialogs assigned yet. Just pick an activity dialog from the list on the left and drag it here.',
         'No matches found.',
@@ -9772,10 +10060,14 @@ Thanks for your help!
         'No response from get package upgrade result.',
         'No response from get package upgrade run status.',
         'No response from package upgrade all.',
+        'No signing certificate found in the metadata.',
         'No sort applied, ',
         'No space left for the following files: %s',
         'No working hours',
         'Not available',
+        'Not configured yet',
+        'Not set',
+        'Not set (will be taken from the metadata when saving)',
         'Notice',
         'Notification',
         'Nov',
@@ -9792,10 +10084,13 @@ Thanks for your help!
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
+        'Please fill in all required fields before continuing.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
+        'Please paste a certificate or key first.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select a metadata source (URL or XML) first.',
         'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
@@ -9829,11 +10124,15 @@ Thanks for your help!
         'Restore web service configuration',
         'Rule',
         'Running',
+        'SP signing certificate',
+        'SP signing key',
+        'SSO URL',
         'Sa',
         'Sat',
         'Saturday',
         'Save',
         'Save and update automatically',
+        'Saving the pasted certificate/key failed.',
         'Scale preview content',
         'Search',
         'Search attributes',
@@ -9846,6 +10145,7 @@ Thanks for your help!
         'Select files or drop them here',
         'Sep',
         'September',
+        'Serial',
         'Setting a template will overwrite any text or attachment.',
         'Settings',
         'Show',
@@ -9854,7 +10154,9 @@ Thanks for your help!
         'Show less',
         'Show more',
         'Show or hide the content.',
+        'Show raw PEM',
         'Slide the navigation bar',
+        'Slot',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',
         'Sorry, but you can\'t disable all methods for this notification.',
         'Sorry, the only existing condition can\'t be removed.',
@@ -9869,12 +10171,14 @@ Thanks for your help!
         'Status',
         'Stream',
         'Su',
+        'Subject',
         'Successful',
         'Sun',
         'Sunday',
         'Support Bundle',
         'Switch to desktop mode',
         'Switch to mobile mode',
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?',
         'Team',
         'Th',
         'The activities could not be marked as seen.',
@@ -9896,6 +10200,7 @@ Thanks for your help!
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',
+        'There was an error deleting the SAML configuration.',
         'There was an error deleting the attachment. Please check the logs for more information.',
         'There was an error. Please save all settings you are editing and check the logs for more information.',
         'This Activity cannot be deleted because it is the Start Activity.',
@@ -9927,15 +10232,22 @@ Thanks for your help!
         'Tu',
         'Tue',
         'Tuesday',
+        'Type',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.',
         'Unknown',
         'Unlock setting.',
         'Update All Packages',
         'Update all packages',
         'Update manually',
+        'Upload failed.',
         'Upload information',
+        'Uploaded key',
         'Uploading...',
         'Use options below to narrow down for which tickets appointments will be automatically created.',
+        'User sync',
+        'Valid from',
+        'Valid until',
+        'Verifying...',
         'WARNING: When you change the name of the group \'admin\', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement.',
         'Warning',
         'We',
@@ -9952,12 +10264,14 @@ Thanks for your help!
         'activate to remove the sort',
         'and %s more...',
         'day',
+        'expires',
         'month',
         'more',
         'no',
         'none',
         'or',
         'sorting is disabled',
+        'used by %s configuration(s)',
         'week',
         'yes',
     ];

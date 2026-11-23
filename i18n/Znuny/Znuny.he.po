@@ -891,7 +891,7 @@ msgstr ""
 msgid "Account status for: %s"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogAccounts.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "Status"
 msgstr "סטטוס"
 
@@ -899,7 +899,7 @@ msgstr "סטטוס"
 msgid "Account"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCommunicationLogAccounts.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "Edit"
 msgstr "ערוך"
 
@@ -1275,7 +1275,7 @@ msgstr ""
 msgid "Toggle active state for all"
 msgstr "שנה את המצב הפעיל עבור כולם"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
 msgid "Active"
 msgstr "פעיל"
 
@@ -4563,7 +4563,7 @@ msgstr "בנה חבילה מחדש"
 msgid "Package Information"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "Metadata"
 msgstr ""
 
@@ -4587,11 +4587,11 @@ msgstr "הרשאה"
 msgid "Size"
 msgstr "גודל"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "Problem"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminPackageManager.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "OK"
 msgstr "אישור"
 
@@ -6103,7 +6103,7 @@ msgstr "הוסף כתובת דוא\"ל מערכת"
 msgid "Edit System Email Address"
 msgstr "ערוך כתובת דוא\"ל מערכת"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSystemAddress.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
 msgid "Email address"
 msgstr "כתובת דוא\"ל"
 
@@ -6623,11 +6623,11 @@ msgstr ""
 msgid "Notification"
 msgstr "התראה"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentAgendaOverview.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "Yes"
 msgstr "כן"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentAppointmentAgendaOverview.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "No"
 msgstr "לא"
 
@@ -8367,7 +8367,7 @@ msgstr "טען תוכן חסום."
 msgid "Home"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
 msgid "Back"
 msgstr "אחורה"
 
@@ -8807,7 +8807,7 @@ msgstr "אתר"
 msgid "Community"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Installer.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
 msgid "Next"
 msgstr "קדימה"
 
@@ -14619,7 +14619,7 @@ msgstr ""
 msgid "All Settings"
 msgstr ""
 
-#. Perl Module: Kernel/System/SysConfig/BaseValueType.pm
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
 msgid "Default"
 msgstr ""
 
@@ -21095,7 +21095,7 @@ msgstr ""
 msgid "Please remove the following words from your search as they cannot be searched for:"
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.SharedSecretGenerator.js
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
 msgid "Generate"
 msgstr ""
 
@@ -24934,7 +24934,7 @@ msgstr ""
 msgid "Copy Ticket Number + Title"
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
 msgid "Copied to clipboard!"
 msgstr ""
 
@@ -25638,6 +25638,722 @@ msgstr ""
 msgid "What to replace an undefined value with when inserting it into a template using a ZNUNY_ placeholder."
 msgstr "במה להחליף ערך לא מוגדר בעת הוספתו לתבנית באמצעות מציין מיקום ZNUNY_."
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Certificate/key is stored in VirtualFS."
+msgstr "התעודה/המפתח מאוחסנים ב-VirtualFS."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "No certificate/key set."
+msgstr "לא הוגדרה תעודה/מפתח."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "View certificate details"
+msgstr "הצגת פרטי התעודה"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "The selected certificate/key is not available. Please select or upload it again."
+msgstr "התעודה/המפתח שנבחרו אינם זמינים. נא לבחור או להעלות אותם שוב."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "- Select an existing certificate/key -"
+msgstr "- בחירת תעודה/מפתח קיימים -"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Paste"
+msgstr "הדבק"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Use certificate from metadata"
+msgstr "שימוש בתעודה מתוך המטא-נתונים"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Extracts the signing certificate embedded in the Identity Provider metadata and stores it here, instead of uploading it separately."
+msgstr "מחלץ את תעודת החתימה המוטמעת במטא-נתונים של ספק הזהויות ושומר אותה כאן, במקום להעלות אותה בנפרד."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Paste the PEM text including the BEGIN and END lines."
+msgstr "הדביקו את טקסט PEM כולל שורות BEGIN ו-END."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Common Name"
+msgstr "שם משותף"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Key size"
+msgstr "גודל מפתח"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Validity (days)"
+msgstr "תוקף (ימים)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Generate self-signed certificate"
+msgstr "חולל תעודה בחתימה עצמית"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Authentication Management"
+msgstr "ניהול אימות"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Agent authentication"
+msgstr "אימות סוכן"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Basic settings"
+msgstr "הגדרות בסיסיות"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Slot"
+msgstr "חריץ"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Determines which numbered AuthModule<N> slot this configuration occupies. Only unused slots are offered."
+msgstr "קובע איזה חריץ ממוספר AuthModule<N> הגדרה זו תופסת. מוצעים רק חריצים שאינם בשימוש."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SAML request settings"
+msgstr "הגדרות בקשת SAML"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Login button text"
+msgstr "טקסט כפתור ההתחברות"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Assertion consumer URL"
+msgstr "URL צרכן הצהרות"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Automatically derived from this system's HTTP type, FQDN and script alias - not editable."
+msgstr "נגזר אוטומטית מסוג ה-HTTP, מה-FQDN ומכינוי הסקריפט של מערכת זו - לא ניתן לעריכה."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Znuny appends a \";IsSAMLLogin=1;Count=<N>;\" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration's slot), so the value the Identity Provider actually receives is:"
+msgstr "Znuny מוסיף את הסיומת \";IsSAMLLogin=1;Count=<N>;\" ל-URL זה בעת בניית בקשת SAML היוצאת בפועל (<N> הוא החריץ של הגדרה זו), ולכן הערך שספק הזהויות מקבל בפועל הוא:"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Copy to clipboard"
+msgstr "העתק ללוח"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honor the value from the request. If your IdP's field rejects semicolons, register the base URL instead."
+msgstr "חלק מספקי הזהויות דורשים לרשום בדיוק ערך זה כ-ACS URL. אחרים מקבלים את ה-URL הבסיסי שלמעלה ומכבדים את הערך מהבקשה. אם השדה ב-IdP דוחה נקודה-פסיק, רשמו במקום זאת את ה-URL הבסיסי."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Download SP metadata XML"
+msgstr "הורד XML של מטא-נתוני SP"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Issuer (SP entity ID)"
+msgstr "מנפיק (מזהה ישות SP)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Requested NameID format"
+msgstr "תבנית NameID מבוקשת"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Unspecified"
+msgstr "לא צוין"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Persistent"
+msgstr "קבוע"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Transient"
+msgstr "זמני"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Sent as the NameIDPolicy Format in the outgoing request and published in the SP metadata. Change this only if your Identity Provider requires a specific format."
+msgstr "נשלח כתבנית NameIDPolicy בבקשה היוצאת ומתפרסם במטא-נתוני SP. שנו זאת רק אם ספק הזהויות דורש תבנית מסוימת."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Load metadata from URL"
+msgstr "טעינת מטא-נתונים מ-URL"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Switch off to paste the metadata XML instead. Switching clears the entered URL or XML and the SSL options."
+msgstr "כבו כדי להדביק את XML המטא-נתונים במקום זאת. החלפה מוחקת את ה-URL או ה-XML שהוזנו ואת אפשרויות ה-SSL."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Please select a metadata source."
+msgstr "נא לבחור מקור מטא-נתונים."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Metadata URL"
+msgstr "URL מטא-נתונים"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Verify"
+msgstr "אמת"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Metadata XML"
+msgstr "XML מטא-נתונים"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Use custom SSL options for metadata URL fetch"
+msgstr "שימוש באפשרויות SSL מותאמות לאחזור URL המטא-נתונים"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SSL CA file"
+msgstr "קובץ SSL CA"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SSL CA path"
+msgstr "נתיב SSL CA"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Verify hostname"
+msgstr "אמת שם מארח"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Certificates and keys"
+msgstr "תעודות ומפתחות"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SP signing key (used to sign outgoing requests)"
+msgstr "מפתח חתימה של SP (משמש לחתימה על בקשות יוצאות)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SP signing certificate (matches the key above)"
+msgstr "תעודת חתימה של SP (תואמת למפתח שלמעלה)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Required for the SP metadata's KeyDescriptor to be published. \"Generate\" above already produces this together with the key - only needed as a separate step if you uploaded your own key."
+msgstr "נדרש כדי ש-KeyDescriptor במטא-נתוני SP יפורסם. \"חולל\" שלמעלה כבר יוצר זאת יחד עם המפתח - נדרש כשלב נפרד רק אם העליתם מפתח משלכם."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Signing algorithm"
+msgstr "אלגוריתם חתימה"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SHA-256 (default)"
+msgstr "SHA-256 (ברירת מחדל)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SHA-384"
+msgstr "SHA-384"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SHA-512"
+msgstr "SHA-512"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "SHA-1 (legacy, not recommended)"
+msgstr "SHA-1 (מיושן, לא מומלץ)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Used to sign the outgoing request when a signing key is set above. Only change this if your Identity Provider requires a specific algorithm."
+msgstr "משמש לחתימה על הבקשה היוצאת כאשר מפתח חתימה מוגדר למעלה. שנו זאת רק אם ספק הזהויות דורש אלגוריתם מסוים."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Decrypt encrypted assertions"
+msgstr "פענוח הצהרות מוצפנות"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Uses the SP signing key above to decrypt SAML assertions the Identity Provider encrypts. Has no effect on responses that aren't encrypted, so it's safe to leave enabled. Requires a signing key above."
+msgstr "משתמש במפתח החתימה של SP שלמעלה כדי לפענח הצהרות SAML שספק הזהויות מצפין. אין לכך השפעה על תגובות שאינן מוצפנות, לכן בטוח להשאיר זאת מופעל. דורש מפתח חתימה למעלה."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Identity provider CA certificate"
+msgstr "תעודת CA של ספק הזהויות"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Required for SAML login to work. Without it, Net::SAML2 cannot verify the Identity Provider's response signature and authentication will fail."
+msgstr "נדרש כדי שהתחברות SAML תפעל. בלעדיה, Net::SAML2 אינו יכול לאמת את חתימת התגובה של ספק הזהויות והאימות ייכשל."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Attribute, group and role sync"
+msgstr "סנכרון מאפיינים, קבוצות ותפקידים"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+msgid "Customer authentication"
+msgstr "אימות לקוח"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+msgid "Determines which numbered Customer::AuthModule<N> slot this configuration occupies. Only unused slots are offered."
+msgstr "קובע איזה חריץ ממוספר Customer::AuthModule<N> הגדרה זו תופסת. מוצעים רק חריצים שאינם בשימוש."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "SAML wizard"
+msgstr "אשף SAML"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Add agent SAML authentication"
+msgstr "הוסף אימות SAML לסוכן"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Add customer SAML authentication"
+msgstr "הוסף אימות SAML ללקוח"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Deploy configuration"
+msgstr "פרוס הגדרה"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Sync"
+msgstr "סנכרון"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Slot %s"
+msgstr "חריץ %s"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Only invalid configurations can be deleted. Set this configuration to invalid first."
+msgstr "ניתן למחוק רק הגדרות לא תקינות. הגדירו תחילה הגדרה זו כלא תקינה."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Enable sync"
+msgstr "הפעל סנכרון"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Also registers Kernel::System::Auth::Sync::SAML for the same slot, to sync attributes/groups/roles from the SAML assertion on every login."
+msgstr "רושם גם את Kernel::System::Auth::Sync::SAML לאותו חריץ, כדי לסנכרן מאפיינים/קבוצות/תפקידים מהצהרת SAML בכל התחברות."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "The AuthSyncModule for this slot is already configured outside of AdminAuthentication - sync cannot be enabled for it."
+msgstr "ה-AuthSyncModule של חריץ זה כבר מוגדר מחוץ ל-AdminAuthentication - לא ניתן להפעיל עבורו סנכרון."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "User attribute sync map"
+msgstr "מפת סנכרון מאפייני משתמש"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Maps Znuny user attributes (left) to SAML assertion attribute names (right)."
+msgstr "ממפה מאפייני משתמש של Znuny (שמאל) לשמות מאפיינים בהצהרת SAML (ימין)."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Znuny attribute"
+msgstr "מאפיין Znuny"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "SAML attribute URI"
+msgstr "URI של מאפיין SAML"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Initial groups for new users"
+msgstr "קבוצות ראשוניות למשתמשים חדשים"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Groups (with rw permission) granted only when a brand-new agent is created via sync. Ctrl/Cmd-click to select multiple."
+msgstr "קבוצות (עם הרשאת rw) שמוענקות רק כאשר נוצר סוכן חדש לגמרי באמצעות סנכרון. Ctrl/Cmd-click לבחירת כמה פריטים."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "SAML attribute carrying group values"
+msgstr "מאפיין SAML הנושא ערכי קבוצה"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Group sync rules (by group value)"
+msgstr "כללי סנכרון קבוצה (לפי ערך קבוצה)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Maps a SAML group value to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions."
+msgstr "ממפה ערך קבוצה של SAML לקבוצה של Znuny ולהרשאות. Ctrl/Cmd-click לבחירת כמה הרשאות."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "SAML value"
+msgstr "ערך SAML"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Group sync rules (by arbitrary attribute/value)"
+msgstr "כללי סנכרון קבוצה (לפי מאפיין/ערך כלשהו)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Maps any SAML attribute name/value combination to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions."
+msgstr "ממפה כל שילוב של שם/ערך מאפיין SAML לקבוצה של Znuny ולהרשאות. Ctrl/Cmd-click לבחירת כמה הרשאות."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "SAML attribute"
+msgstr "מאפיין SAML"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Role sync requires at least one active role. Create or activate a role under Admin → Roles."
+msgstr "סנכרון תפקידים דורש לפחות תפקיד פעיל אחד. צרו או הפעילו תפקיד תחת ניהול → תפקידים."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "SAML attribute carrying role values"
+msgstr "מאפיין SAML הנושא ערכי תפקיד"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Role sync rules (by role value)"
+msgstr "כללי סנכרון תפקיד (לפי ערך תפקיד)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Maps a SAML role value to one or more Znuny roles, active or inactive."
+msgstr "ממפה ערך תפקיד של SAML לתפקיד של Znuny, פעיל או לא פעיל."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Role sync rules (by arbitrary attribute/value)"
+msgstr "כללי סנכרון תפקיד (לפי מאפיין/ערך כלשהו)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+msgid "Maps any SAML attribute name/value combination to one or more Znuny roles, active or inactive."
+msgstr "ממפה כל שילוב של שם/ערך מאפיין SAML לתפקיד של Znuny, פעיל או לא פעיל."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Setup steps"
+msgstr "שלבי הגדרה"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Setup wizard"
+msgstr "אשף הגדרה"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "SAML setup wizard"
+msgstr "אשף הגדרת SAML"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Step"
+msgstr "שלב"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "What are you setting up?"
+msgstr "מה אתם מגדירים?"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Agent authentication - staff logging into the agent interface"
+msgstr "אימות סוכן - צוות מתחבר לממשק הסוכן"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Customer authentication - customers logging into the customer portal"
+msgstr "אימות לקוח - לקוחות מתחברים לפורטל הלקוחות"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Login with SSO"
+msgstr "התחברות עם SSO"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "User sync (optional)"
+msgstr "סנכרון משתמש (אופציונלי)"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Optionally sync user attributes, groups and roles from the SAML assertion on every login. This can also be set up later on the edit screen."
+msgstr "ניתן לסנכרן מאפייני משתמש, קבוצות ותפקידים מהצהרת SAML בכל התחברות. ניתן להגדיר זאת גם מאוחר יותר במסך העריכה."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Review"
+msgstr "סקירה"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective."
+msgstr "לחצו על שמור כדי ליצור הגדרת SAML זו. היא עדיין לא תהיה פעילה - השתמשו אחר כך בפעולה פרוס הגדרה בעמוד מבט-על כדי להחיל אותה."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "If you skipped the Identity Provider CA certificate here and provided metadata instead, it will be derived from that metadata automatically during Deploy."
+msgstr "אם דילגתם כאן על תעודת CA של ספק הזהויות וסיפקתם במקום זאת מטא-נתונים, היא תיגזר ממטא-נתונים אלה אוטומטית במהלך הפריסה."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only)."
+msgstr "אפשר לחזור לכל שלב קודם כדי לבצע שינויים, או להשתמש אחר כך במסך העריכה המלא לאפשרויות מתקדמות כגון סנכרון מאפיינים/קבוצות/תפקידים (אימות סוכן בלבד)."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Perl module Net::SAML2 is not installed. SAML authentication cannot work until it is installed on the server."
+msgstr "מודול Perl בשם Net::SAML2 אינו מותקן. אימות SAML לא יכול לפעול עד שיותקן בשרת."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Authentication configuration is not in sync with the deployed configuration, please deploy."
+msgstr "הגדרת האימות אינה מסונכרנת עם ההגדרה שנפרסה, נא לפרוס."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Only invalid authentication configurations can be deleted. Please set the configuration to invalid first."
+msgstr "ניתן למחוק רק הגדרות אימות לא תקינות. נא להגדיר תחילה את ההגדרה כלא תקינה."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Invalid or missing Role."
+msgstr "תפקיד לא תקין או חסר."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "No file was uploaded."
+msgstr "לא הועלה קובץ."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Error storing the uploaded file."
+msgstr "שגיאה בשמירת הקובץ שהועלה."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Only the SP signing key can be generated."
+msgstr "ניתן לחולל רק את מפתח החתימה של SP."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Error generating certificate. Please check the system log."
+msgstr "שגיאה בחילול התעודה. נא לבדוק את יומן המערכת."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Error storing the generated key in VirtualFS."
+msgstr "שגיאה בשמירת המפתח שחולל ב-VirtualFS."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Error storing the generated certificate in VirtualFS."
+msgstr "שגיאה בשמירת התעודה שחוללה ב-VirtualFS."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Could not find a certificate in the metadata. Please check the URL/XML and try again."
+msgstr "לא נמצאה תעודה במטא-נתונים. נא לבדוק את ה-URL/XML ולנסות שוב."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Error storing the certificate."
+msgstr "שגיאה בשמירת התעודה."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Could not read the certificate from VirtualFS."
+msgstr "לא ניתן לקרוא את התעודה מ-VirtualFS."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "The authentication configuration was not deployed. The previously deployed configuration is still active."
+msgstr "הגדרת האימות לא נפרסה. ההגדרה שנפרסה קודם עדיין פעילה."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Please check the system log for details."
+msgstr "נא לבדוק את יומן המערכת לפרטים."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "This is not an unencrypted private key in PEM format (-----BEGIN PRIVATE KEY-----)."
+msgstr "זה אינו מפתח פרטי לא מוצפן בתבנית PEM (-----BEGIN PRIVATE KEY-----)."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "This is not a certificate in PEM format (-----BEGIN CERTIFICATE-----)."
+msgstr "זו אינה תעודה בתבנית PEM (-----BEGIN CERTIFICATE-----)."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "The private key could not be read. Only unencrypted private keys are supported."
+msgstr "לא ניתן לקרוא את המפתח הפרטי. נתמכים רק מפתחות פרטיים לא מוצפנים."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "The certificate could not be read."
+msgstr "לא ניתן לקרוא את התעודה."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Could not read the SP signing key."
+msgstr "לא ניתן לקרוא את מפתח החתימה של SP."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Could not read the IdP CA certificate."
+msgstr "לא ניתן לקרוא את תעודת CA של IdP."
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "No IdP CA certificate was uploaded and none could be taken from the IdP metadata."
+msgstr "לא הועלתה תעודת CA של IdP ולא ניתן היה לקחת אחת ממטא-נתוני IdP."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Could not decrypt the SP signing key. Please check the configured encryption key."
+msgstr "לא ניתן לפענח את מפתח החתימה של SP. נא לבדוק את מפתח ההצפנה שהוגדר."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Net::SAML2 is not installed on the server, metadata cannot be verified."
+msgstr "Net::SAML2 אינו מותקן בשרת, לא ניתן לאמת את המטא-נתונים."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Metadata URL is empty."
+msgstr "URL המטא-נתונים ריק."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Metadata XML is empty."
+msgstr "XML המטא-נתונים ריק."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Could not parse the metadata. Please check the URL/XML and try again."
+msgstr "לא ניתן לנתח את המטא-נתונים. נא לבדוק את ה-URL/XML ולנסות שוב."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Perl module Crypt::OpenSSL::X509 is not installed, certificate details cannot be parsed."
+msgstr "מודול Perl בשם Crypt::OpenSSL::X509 אינו מותקן, לא ניתן לנתח את פרטי התעודה."
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "Could not parse the certificate."
+msgstr "לא ניתן לנתח את התעודה."
+
+#. Perl Module: Kernel/System/AuthenticationConfig.pm
+msgid "No authentication plugin is registered for this type."
+msgstr "לא רשום תוסף אימות עבור סוג זה."
+
+#. Perl Module: Kernel/System/AuthenticationConfig.pm
+msgid "Could not write the certificate files."
+msgstr "לא ניתן לכתוב את קובצי התעודה."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Registers the SAML 2.0 authentication plugin for AdminAuthentication."
+msgstr "רושם את תוסף האימות של SAML 2.0 עבור AdminAuthentication."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?"
+msgstr "החלפת מקור המטא-נתונים מסירה את URL או XML המטא-נתונים שהוזנו ואת אפשרויות ה-SSL. המשך?"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Change metadata source"
+msgstr "שינוי מקור המטא-נתונים"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Uploaded key"
+msgstr "מפתח שהועלה"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "EXPIRED"
+msgstr "פג תוקף"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "expires"
+msgstr "יפוג"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "used by %s configuration(s)"
+msgstr "בשימוש על ידי %s הגדרה/הגדרות"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Could not read the certificate."
+msgstr "לא ניתן היה לקרוא את התעודה."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Certificate (PEM)"
+msgstr "תעודה (PEM)"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Issuer"
+msgstr "מנפיק"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Valid from"
+msgstr "בתוקף מ-"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Valid until"
+msgstr "בתוקף עד"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Serial"
+msgstr "מספר סידורי"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Fingerprint (SHA-256)"
+msgstr "טביעת אצבע (SHA-256)"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Show raw PEM"
+msgstr "הצג PEM גולמי"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Certificate details"
+msgstr "פרטי תעודה"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Metadata is valid."
+msgstr "המטא-נתונים תקינים."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Entity ID"
+msgstr "מזהה ישות"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "SSO URL"
+msgstr "SSO URL"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Includes a signing certificate."
+msgstr "כולל תעודת חתימה."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "No signing certificate found in the metadata."
+msgstr "לא נמצאה תעודת חתימה במטא-נתונים."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Found %s attribute(s) in the metadata."
+msgstr "נמצאו %s מאפיינים במטא-נתונים."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Verifying..."
+msgstr "מאמת..."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Metadata verification failed."
+msgstr "אימות המטא-נתונים נכשל."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Upload failed."
+msgstr "ההעלאה נכשלה."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Please paste a certificate or key first."
+msgstr "נא להדביק תחילה תעודה או מפתח."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Saving the pasted certificate/key failed."
+msgstr "שמירת התעודה/המפתח שהודבקו נכשלה."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Certificate generation failed."
+msgstr "חילול התעודה נכשל."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Please select a metadata source (URL or XML) first."
+msgstr "נא לבחור תחילה מקור מטא-נתונים (URL או XML)."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Could not find a certificate in the metadata."
+msgstr "לא נמצאה תעודה במטא-נתונים."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Do you really want to delete this SAML configuration?"
+msgstr "האם אתם בטוחים שברצונכם למחוק הגדרת SAML זו?"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Delete SAML configuration"
+msgstr "מחק הגדרת SAML"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "There was an error deleting the SAML configuration."
+msgstr "אירעה שגיאה במחיקת הגדרת SAML."
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "(pasted XML)"
+msgstr "(XML שהודבק)"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Not configured yet"
+msgstr "עדיין לא הוגדר"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Identity provider metadata"
+msgstr "מטא-נתוני ספק הזהויות"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "SP signing key"
+msgstr "מפתח חתימה של SP"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Configured"
+msgstr "מוגדר"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Not set"
+msgstr "לא הוגדר"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "SP signing certificate"
+msgstr "תעודת חתימה של SP"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Not set (will be derived automatically from metadata during Deploy, if possible)"
+msgstr "לא הוגדר (ייגזר אוטומטית מהמטא-נתונים במהלך הפריסה, אם אפשר)"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "User sync"
+msgstr "סנכרון משתמש"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Enabled (%s attribute mappings, %s group rules, %s role rules)"
+msgstr "מופעל (%s מיפויי מאפיינים, %s כללי קבוצות, %s כללי תפקידים)"
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Please fill in all required fields before continuing."
+msgstr "נא למלא את כל השדות הנדרשים לפני שממשיכים."
+
+#. SysConfig
+msgid "Manage agent and customer authentication (e.g. SAML 2.0)."
+msgstr "ניהול אימות של סוכן ולקוח (לדוגמה SAML 2.0)."
+
+#. SysConfig
+msgid "SAML"
+msgstr "SAML"
+
 #. Perl Module: Kernel/Modules/AgentTicketQueue.pm
 msgid "System default"
 msgstr ""
@@ -25721,4 +26437,64 @@ msgstr "קיבולת יומן ה-redo של InnoDB"
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
 msgid "The setting innodb_redo_log_capacity must be at least 256 MB."
 msgstr "ההגדרה innodb_redo_log_capacity חייבת להיות לפחות 256 MB."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Paste key"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+msgid "Paste certificate"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Login attribute"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Please enter attribute names separated by commas."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+msgid "Optional. By default the NameID is the login. Enter one or more SAML attribute names (Name or FriendlyName), separated by commas, to take the login from the first of these attributes the assertion contains instead, e.g. if the Identity Provider sends a persistent NameID. The attribute must have exactly one value, otherwise the login fails. Changing this changes the login of existing users."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Deployment failed"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Fix the configurations below and deploy again. Or set a configuration to invalid: its login stops working and the other configurations are deployed."
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+msgid "Set to invalid and deploy the rest"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+msgid "If you skipped the Identity Provider CA certificate here, it is taken from the metadata when saving. Please check it on the edit screen afterwards."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Authentication configuration is not in sync with the deployed configuration, but it can't be deployed: a valid configuration has a problem, see the status below. Fix it or set it to invalid, then deploy."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Authentication configuration not found."
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminAuthentication.pm
+msgid "Could not set the authentication configuration to invalid."
+msgstr ""
+
+#. Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+msgid "No IdP CA certificate is stored. It is taken from the IdP metadata on every deploy. Save the configuration to store it."
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "NameID (default)"
+msgstr ""
+
+#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+msgid "Not set (will be taken from the metadata when saving)"
+msgstr ""
 

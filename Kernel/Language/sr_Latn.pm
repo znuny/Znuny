@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.850963056520366;
+    $Self->{Completeness}        = 0.853004291845494;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -274,6 +274,169 @@ sub Data {
         'Do you really want to delete this attachment?' => 'Da li stvarno želite da obrišete ovaj prilog?',
         'Attachment' => 'Prilog',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+        'Certificate/key is stored in VirtualFS.' => 'Sertifikat/ključ je sačuvan u VirtualFS.',
+        'No certificate/key set.' => 'Nije postavljen sertifikat/ključ.',
+        'View certificate details' => 'Prikaži detalje sertifikata',
+        'The selected certificate/key is not available. Please select or upload it again.' =>
+            'Izabrani sertifikat/ključ nije dostupan. Molimo izaberite ga ili ga ponovo otpremite.',
+        '- Select an existing certificate/key -' => '- Izaberite postojeći sertifikat/ključ -',
+        'Paste key' => '',
+        'Paste certificate' => '',
+        'Generate' => 'Generiši',
+        'Use certificate from metadata' => 'Koristi sertifikat iz meta podataka',
+        'Extracts the signing certificate embedded in the Identity Provider metadata and stores it here, instead of uploading it separately.' =>
+            'Izvlači sertifikat za potpisivanje ugrađen u meta podatke provajdera identiteta i čuva ga ovde, umesto da ga otpremite zasebno.',
+        'Paste the PEM text including the BEGIN and END lines.' => 'Nalepite PEM tekst uključujući redove BEGIN i END.',
+        'Common Name' => 'Zajedničko ime',
+        'Key size' => 'Veličina ključa',
+        'Validity (days)' => 'Važnost (dani)',
+        'Generate self-signed certificate' => 'Generiši samopotpisani sertifikat',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+        'Authentication Management' => 'Upravljanje autentifikacijom',
+        'Agent authentication' => 'Autentifikacija operatera',
+        'Basic settings' => 'Osnovna podešavanja',
+        'Slot' => 'Slot',
+        'Determines which numbered AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Određuje koji numerisani slot AuthModule<N> zauzima ova konfiguracija. Nude se samo neiskorišćeni slotovi.',
+        'SAML request settings' => 'Podešavanja SAML zahteva',
+        'Login button text' => 'Tekst dugmeta za prijavu',
+        'Assertion consumer URL' => 'URL potrošača tvrdnje',
+        'Automatically derived from this system\'s HTTP type, FQDN and script alias - not editable.' =>
+            'Automatski se izvodi iz HTTP tipa, FQDN i alijasa skripte ovog sistema - nije moguće uređivati.',
+        'Znuny appends a ";IsSAMLLogin=1;Count=<N>;" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration\'s slot), so the value the Identity Provider actually receives is:' =>
+            'Znuny dodaje sufiks ";IsSAMLLogin=1;Count=<N>;" ovom URL pri izgradnji stvarnog odlaznog SAML zahteva (<N> je slot ove konfiguracije), tako da je vrednost koju provajder identiteta zaista prima:',
+        'Copy to clipboard' => 'Kopiraj u ostavu',
+        'Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honor the value from the request. If your IdP\'s field rejects semicolons, register the base URL instead.' =>
+            'Neki provajderi identiteta zahtevaju da se tačno ova vrednost registruje kao ACS URL. Drugi prihvataju osnovni URL iznad i poštuju vrednost iz zahteva. Ako polje vašeg IdP odbija tačke-zareze, registrujte osnovni URL.',
+        'Download SP metadata XML' => 'Preuzmi XML meta podataka SP',
+        'Issuer (SP entity ID)' => 'Izdavalac (ID entiteta SP)',
+        'Requested NameID format' => 'Zahtevani format NameID',
+        'Unspecified' => 'Neodređeno',
+        'Persistent' => 'Trajno',
+        'Transient' => 'Privremeno',
+        'Email address' => 'Imejl adresa',
+        'Sent as the NameIDPolicy Format in the outgoing request and published in the SP metadata. Change this only if your Identity Provider requires a specific format.' =>
+            'Šalje se kao NameIDPolicy Format u odlaznom zahtevu i objavljuje se u meta podacima SP. Promenite ovo samo ako vaš provajder identiteta zahteva određeni format.',
+        'Login attribute' => '',
+        'Please enter attribute names separated by commas.' => '',
+        'Optional. By default the NameID is the login. Enter one or more SAML attribute names (Name or FriendlyName), separated by commas, to take the login from the first of these attributes the assertion contains instead, e.g. if the Identity Provider sends a persistent NameID. The attribute must have exactly one value, otherwise the login fails. Changing this changes the login of existing users.' =>
+            '',
+        'Load metadata from URL' => 'Učitaj meta podatke sa URL',
+        'Switch off to paste the metadata XML instead. Switching clears the entered URL or XML and the SSL options.' =>
+            'Isključite da biste umesto toga nalepili XML meta podataka. Prebacivanje briše uneti URL ili XML i SSL opcije.',
+        'Please select a metadata source.' => 'Molimo izaberite izvor meta podataka.',
+        'Metadata URL' => 'URL meta podataka',
+        'Verify' => 'Proveri',
+        'Metadata XML' => 'XML meta podataka',
+        'Use custom SSL options for metadata URL fetch' => 'Koristi prilagođene SSL opcije za preuzimanje URL meta podataka',
+        'SSL CA file' => 'SSL CA datoteka',
+        'SSL CA path' => 'SSL CA putanja',
+        'Verify hostname' => 'Proveri ime hosta',
+        'Certificates and keys' => 'Sertifikati i ključevi',
+        'SP signing key (used to sign outgoing requests)' => 'Ključ za potpisivanje SP (koristi se za potpisivanje odlaznih zahteva)',
+        'SP signing certificate (matches the key above)' => 'Sertifikat za potpisivanje SP (odgovara ključu iznad)',
+        'Required for the SP metadata\'s KeyDescriptor to be published. "Generate" above already produces this together with the key - only needed as a separate step if you uploaded your own key.' =>
+            'Potrebno da bi se KeyDescriptor meta podataka SP objavio. "Generiši" iznad već pravi ovo zajedno sa ključem - potrebno je kao zaseban korak samo ako ste otpremili sopstveni ključ.',
+        'Signing algorithm' => 'Algoritam potpisivanja',
+        'SHA-256 (default)' => 'SHA-256 (podrazumevano)',
+        'SHA-384' => 'SHA-384',
+        'SHA-512' => 'SHA-512',
+        'SHA-1 (legacy, not recommended)' => 'SHA-1 (zastarelo, nije preporučeno)',
+        'Used to sign the outgoing request when a signing key is set above. Only change this if your Identity Provider requires a specific algorithm.' =>
+            'Koristi se za potpisivanje odlaznog zahteva kada je gore postavljen ključ za potpisivanje. Promenite ovo samo ako vaš provajder identiteta zahteva određeni algoritam.',
+        'Decrypt encrypted assertions' => 'Dešifruj šifrovane tvrdnje',
+        'Uses the SP signing key above to decrypt SAML assertions the Identity Provider encrypts. Has no effect on responses that aren\'t encrypted, so it\'s safe to leave enabled. Requires a signing key above.' =>
+            'Koristi gornji ključ za potpisivanje SP za dešifrovanje SAML tvrdnji koje šifruje provajder identiteta. Nema uticaja na odgovore koji nisu šifrovani, pa je bezbedno ostaviti ga omogućenim. Zahteva ključ za potpisivanje iznad.',
+        'Identity provider CA certificate' => 'CA sertifikat provajdera identiteta',
+        'Required for SAML login to work. Without it, Net::SAML2 cannot verify the Identity Provider\'s response signature and authentication will fail.' =>
+            'Potrebno da bi SAML prijava radila. Bez toga Net::SAML2 ne može da proveri potpis odgovora provajdera identiteta i autentifikacija neće uspeti.',
+        'Attribute, group and role sync' => 'Sinhronizacija atributa, grupa i uloga',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+        'Customer authentication' => 'Autentifikacija klijenta',
+        'Determines which numbered Customer::AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Određuje koji numerisani slot Customer::AuthModule<N> zauzima ova konfiguracija. Nude se samo neiskorišćeni slotovi.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+        'SAML wizard' => 'SAML čarobnjak',
+        'Add agent SAML authentication' => 'Dodaj SAML autentifikaciju operatera',
+        'Add customer SAML authentication' => 'Dodaj SAML autentifikaciju klijenta',
+        'Deploy configuration' => 'Rasporedi konfiguraciju',
+        'Deployment failed' => '',
+        'Fix the configurations below and deploy again. Or set a configuration to invalid: its login stops working and the other configurations are deployed.' =>
+            '',
+        'Problem' => 'Problem',
+        'Edit' => 'Urediti',
+        'Set to invalid and deploy the rest' => '',
+        'Sync' => 'Sinhronizuj',
+        'Status' => 'Status',
+        'Metadata' => 'Meta podaci',
+        'Slot %s' => 'Slot %s',
+        'Default' => 'Podrazumevano',
+        'Yes' => 'Da',
+        'No' => 'Ne',
+        'OK' => 'U redu',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+        'Enable sync' => 'Omogući sinhronizaciju',
+        'Also registers Kernel::System::Auth::Sync::SAML for the same slot, to sync attributes/groups/roles from the SAML assertion on every login.' =>
+            'Takođe registruje Kernel::System::Auth::Sync::SAML za isti slot, da bi se pri svakoj prijavi sinhronizovali atributi/grupe/uloge iz SAML tvrdnje.',
+        'The AuthSyncModule for this slot is already configured outside of AdminAuthentication - sync cannot be enabled for it.' =>
+            'AuthSyncModule za ovaj slot je već konfigurisan izvan AdminAuthentication - sinhronizacija ne može da se omogući za njega.',
+        'User attribute sync map' => 'Mapa sinhronizacije korisničkih atributa',
+        'Maps Znuny user attributes (left) to SAML assertion attribute names (right).' =>
+            'Mapira korisničke atribute Znuny (levo) na nazive atributa SAML tvrdnje (desno).',
+        'Znuny attribute' => 'Atribut Znuny',
+        'SAML attribute URI' => 'URI SAML atributa',
+        'Initial groups for new users' => 'Početne grupe za nove korisnike',
+        'Groups (with rw permission) granted only when a brand-new agent is created via sync. Ctrl/Cmd-click to select multiple.' =>
+            'Grupe (sa rw dozvolom) koje se dodeljuju samo kada se putem sinhronizacije kreira potpuno novi operater. Ctrl/Cmd-klik za izbor više stavki.',
+        'SAML attribute carrying group values' => 'SAML atribut koji nosi vrednosti grupe',
+        'Group sync rules (by group value)' => 'Pravila sinhronizacije grupa (prema vrednosti grupe)',
+        'Maps a SAML group value to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Mapira vrednost SAML grupe na Znuny grupu i dozvole. Ctrl/Cmd-klik za izbor više dozvola.',
+        'SAML value' => 'SAML vrednost',
+        'Group sync rules (by arbitrary attribute/value)' => 'Pravila sinhronizacije grupa (prema proizvoljnom atributu/vrednosti)',
+        'Maps any SAML attribute name/value combination to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Mapira bilo koju kombinaciju naziva/vrednosti SAML atributa na Znuny grupu i dozvole. Ctrl/Cmd-klik za izbor više dozvola.',
+        'SAML attribute' => 'SAML atribut',
+        'Role sync requires at least one active role. Create or activate a role under Admin → Roles.' =>
+            'Sinhronizacija uloga zahteva najmanje jednu aktivnu ulogu. Kreirajte ili aktivirajte ulogu u Admin → Uloge.',
+        'SAML attribute carrying role values' => 'SAML atribut koji nosi vrednosti uloge',
+        'Role sync rules (by role value)' => 'Pravila sinhronizacije uloga (prema vrednosti uloge)',
+        'Maps a SAML role value to one or more Znuny roles, active or inactive.' =>
+            'Mapira vrednost SAML uloge na Znuny ulogu, aktivnu ili neaktivnu.',
+        'Active' => 'Aktivno',
+        'Role sync rules (by arbitrary attribute/value)' => 'Pravila sinhronizacije uloga (prema proizvoljnom atributu/vrednosti)',
+        'Maps any SAML attribute name/value combination to one or more Znuny roles, active or inactive.' =>
+            'Mapira bilo koju kombinaciju naziva/vrednosti SAML atributa na Znuny ulogu, aktivnu ili neaktivnu.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+        'Setup steps' => 'Koraci podešavanja',
+        'Setup wizard' => 'Čarobnjak za podešavanje',
+        'SAML setup wizard' => 'Čarobnjak za podešavanje SAML',
+        'Step' => 'Korak',
+        'What are you setting up?' => 'Šta podešavate?',
+        'Agent authentication - staff logging into the agent interface' =>
+            'Autentifikacija operatera - osoblje koje se prijavljuje u interfejs operatera',
+        'Customer authentication - customers logging into the customer portal' =>
+            'Autentifikacija klijenta - klijenti koji se prijavljuju na klijentski portal',
+        'Login with SSO' => 'Prijava putem SSO',
+        'User sync (optional)' => 'Sinhronizacija korisnika (opciono)',
+        'Optionally sync user attributes, groups and roles from the SAML assertion on every login. This can also be set up later on the edit screen.' =>
+            'Opciono sinhronizujte korisničke atribute, grupe i uloge iz SAML tvrdnje pri svakoj prijavi. Ovo se može podesiti i kasnije na ekranu za uređivanje.',
+        'Review' => 'Provera',
+        'Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective.' =>
+            'Kliknite na Sačuvaj da biste kreirali ovu SAML konfiguraciju. Još neće biti aktivna - nakon toga koristite radnju Rasporedi na stranici pregleda da bi stupila na snagu.',
+        'If you skipped the Identity Provider CA certificate here, it is taken from the metadata when saving. Please check it on the edit screen afterwards.' =>
+            '',
+        'You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only).' =>
+            'Možete da se vratite na bilo koji prethodni korak da biste uneli izmene ili nakon toga da koristite puni ekran za uređivanje za napredne opcije kao što je sinhronizacija atributa/grupa/uloga (samo autentifikacija operatera).',
+        'Back' => 'Nazad',
+        'Next' => 'Sledeće',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
         'Add Auto Response' => 'Dodaj Automatski Odgovor',
         'Filter for Auto Responses' => 'Filter za automatske odgovore',
@@ -331,9 +494,7 @@ sub Data {
             'Možete izmeniti redosled sortiranja kolona klikom na naslove kolona.',
         'Account Status' => 'Status naloga',
         'Account status for: %s' => 'Status naloga za: %s',
-        'Status' => 'Status',
         'Account' => 'Nalog',
-        'Edit' => 'Urediti',
         'No accounts found.' => 'Nisu pronađeni nalozi.',
         'Communication Log Details (%s)' => 'Detalji komunikacionog loga (%s)',
         'Direction' => 'Smer',
@@ -452,7 +613,6 @@ sub Data {
         'Change Customer Relations for Customer User' => 'Promeni relacije sa klijentima za klijent korisnika',
         'Change Customer User Relations for Customer' => 'Promeni relacije sa klijent korisnicima za klijenta',
         'Toggle active state for all' => 'Promeni aktivno stanje za sve',
-        'Active' => 'Aktivno',
         'Toggle active state for %s' => 'Promeni aktivno stanje za %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
@@ -1589,14 +1749,11 @@ sub Data {
         'Download package' => 'Preuzmi paket',
         'Rebuild package' => 'Obnovi paket(rebuild)',
         'Package Information' => 'Informacije o paketu',
-        'Metadata' => 'Meta podaci',
         'Change Log' => 'Promeni log',
         'Date' => 'Datum',
         'List of Files' => 'Spisak datoteka',
         'Permission' => 'Dozvola',
         'Size' => 'Veličina',
-        'Problem' => 'Problem',
-        'OK' => 'U redu',
         'Download file from package!' => 'Preuzmi datoteku iz paketa!',
         'Required' => 'Obavezno',
         'Primary Key' => 'Primarni ključ',
@@ -2140,7 +2297,6 @@ sub Data {
         'System Email Addresses Management' => 'Upravljanje sistemskom imejl adresom',
         'Add System Email Address' => 'Dodaj sistemsku imejl adresu',
         'Edit System Email Address' => 'Uredi sistemsku imejl adresu',
-        'Email address' => 'Imejl adresa',
         'Display name' => 'Prikaži naziv',
         'This email address is already used as system email address.' => 'Ova imejl adresa je već upotrebljena kao sistemska imejl adresa.',
         'The display name and email address will be shown on mail you send.' =>
@@ -2355,8 +2511,6 @@ sub Data {
         'All-day' => 'Celodnevno',
         'Repeat' => 'Ponavljanje',
         'Notification' => 'Obaveštenje',
-        'Yes' => 'Da',
-        'No' => 'Ne',
         'No calendars found. Please add a calendar first by using Manage Calendars page.' =>
             'Nije pronađen nijedan kalendar. Molimo prvo dodajte kalendar korišćenjem ekrana Upravljanje kalendarima.',
 
@@ -2886,7 +3040,6 @@ sub Data {
         'Save filter settings as default' => 'Sačuvaj podešavanja filtera kao podrazumevana',
         'Event Type' => 'Tip događaja',
         'Save as default' => 'Sačuvaj kao podrazumevano',
-        'Back' => 'Nazad',
         'Change Queue' => 'Promeni Red',
         'Add Filter' => 'Dodaj Filter',
         'Set' => 'Podesi',
@@ -3134,7 +3287,6 @@ sub Data {
         'Phone' => 'Poziv',
         'Web site' => 'Veb sajt',
         'Community' => '',
-        'Next' => 'Sledeće',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => 'Podešavanje odlazne pošte',
@@ -3637,6 +3789,34 @@ sub Data {
             'Svi operateri sa (najmanje) dozvolom pregleda termina (kalendara)',
         'All agents with write permission for the appointment (calendar)' =>
             'Svi operateri sa dozvolom pisanja u terminu (kalendaru)',
+
+        # Perl Module: Kernel/Modules/AdminAuthentication.pm
+        'Perl module Net::SAML2 is not installed. SAML authentication cannot work until it is installed on the server.' =>
+            'Perl modul Net::SAML2 nije instaliran. SAML autentifikacija ne može da radi dok se ne instalira na serveru.',
+        'Authentication configuration is not in sync with the deployed configuration, but it can\'t be deployed: a valid configuration has a problem, see the status below. Fix it or set it to invalid, then deploy.' =>
+            '',
+        'Authentication configuration is not in sync with the deployed configuration, please deploy.' =>
+            'Konfiguracija autentifikacije nije sinhronizovana sa raspoređenom konfiguracijom, molimo rasporedite.',
+        'No IdP CA certificate was uploaded and none could be taken from the IdP metadata.' =>
+            'Nije otpremljen CA sertifikat IdP i nijedan nije mogao da se uzme iz meta podataka IdP.',
+        'Only invalid authentication configurations can be deleted. Please set the configuration to invalid first.' =>
+            'Samo nevažeće konfiguracije autentifikacije mogu da se obrišu. Molimo prvo postavite konfiguraciju kao nevažeću.',
+        'Invalid or missing Role.' => 'Nevažeća ili nedostajuća uloga.',
+        'No file was uploaded.' => 'Nijedna datoteka nije otpremljena.',
+        'Error storing the uploaded file.' => 'Greška pri čuvanju otpremljene datoteke.',
+        'Only the SP signing key can be generated.' => 'Može da se generiše samo ključ za potpisivanje SP.',
+        'Error generating certificate. Please check the system log.' => 'Greška pri generisanju sertifikata. Molimo proverite sistemski dnevnik.',
+        'Error storing the generated key in VirtualFS.' => 'Greška pri čuvanju generisanog ključa u VirtualFS.',
+        'Error storing the generated certificate in VirtualFS.' => 'Greška pri čuvanju generisanog sertifikata u VirtualFS.',
+        'Could not find a certificate in the metadata. Please check the URL/XML and try again.' =>
+            'Nije pronađen sertifikat u meta podacima. Molimo proverite URL/XML i pokušajte ponovo.',
+        'Error storing the certificate.' => 'Greška pri čuvanju sertifikata.',
+        'Could not read the certificate from VirtualFS.' => 'Nije moguće pročitati sertifikat iz VirtualFS.',
+        'The authentication configuration was not deployed. The previously deployed configuration is still active.' =>
+            'Konfiguracija autentifikacije nije raspoređena. Prethodno raspoređena konfiguracija je i dalje aktivna.',
+        'Please check the system log for details.' => 'Za detalje proverite sistemski dnevnik.',
+        'Authentication configuration not found.' => '',
+        'Could not set the authentication configuration to invalid.' => '',
 
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => 'Automatski odgovor dodat!',
@@ -5043,6 +5223,34 @@ sub Data {
         'Session invalid. Please log in again.' => 'Sesija je nevažeća. Molimo prijavite se ponovo.',
         'Session has timed out. Please log in again.' => 'Vreme sesije je isteklo. Molimo prijavite se ponovo.',
 
+        # Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+        'This is not an unencrypted private key in PEM format (-----BEGIN PRIVATE KEY-----).' =>
+            'Ovo nije nešifrovani privatni ključ u PEM formatu (-----BEGIN PRIVATE KEY-----).',
+        'This is not a certificate in PEM format (-----BEGIN CERTIFICATE-----).' =>
+            'Ovo nije sertifikat u PEM formatu (-----BEGIN CERTIFICATE-----).',
+        'The private key could not be read. Only unencrypted private keys are supported.' =>
+            'Privatni ključ nije moguće pročitati. Podržani su samo nešifrovani privatni ključevi.',
+        'The certificate could not be read.' => 'Sertifikat nije moguće pročitati.',
+        'Could not read the SP signing key.' => 'Nije moguće pročitati ključ za potpisivanje SP.',
+        'Could not read the IdP CA certificate.' => 'Nije moguće pročitati CA sertifikat IdP.',
+        'No IdP CA certificate is stored. It is taken from the IdP metadata on every deploy. Save the configuration to store it.' =>
+            '',
+        'Could not decrypt the SP signing key. Please check the configured encryption key.' =>
+            'Nije moguće dešifrovati ključ za potpisivanje SP. Molimo proverite konfigurisani ključ za šifrovanje.',
+        'Net::SAML2 is not installed on the server, metadata cannot be verified.' =>
+            'Net::SAML2 nije instaliran na serveru, meta podaci ne mogu da se provere.',
+        'Metadata URL is empty.' => 'URL meta podataka je prazan.',
+        'Metadata XML is empty.' => 'XML meta podataka je prazan.',
+        'Could not parse the metadata. Please check the URL/XML and try again.' =>
+            'Nije moguće raščlaniti meta podatke. Molimo proverite URL/XML i pokušajte ponovo.',
+        'Perl module Crypt::OpenSSL::X509 is not installed, certificate details cannot be parsed.' =>
+            'Perl modul Crypt::OpenSSL::X509 nije instaliran, detalji sertifikata ne mogu da se raščlane.',
+        'Could not parse the certificate.' => 'Nije moguće raščlaniti sertifikat.',
+
+        # Perl Module: Kernel/System/AuthenticationConfig.pm
+        'No authentication plugin is registered for this type.' => 'Nije registrovan dodatak za autentifikaciju za ovaj tip.',
+        'Could not write the certificate files.' => 'Nije moguće upisati datoteke sertifikata.',
+
         # Perl Module: Kernel/System/AutoResponse.pm
         'Couldn\'t read auto response configuration file. Please make sure the file is valid.' =>
             '',
@@ -5563,7 +5771,6 @@ sub Data {
         'All Settings' => 'Sva podešavanja',
 
         # Perl Module: Kernel/System/SysConfig/BaseValueType.pm
-        'Default' => 'Podrazumevano',
         'Value is not correct! Please, consider updating this field.' => 'Vrednost nije ispravna! Molimo osvežite ovo polje.',
         'Value doesn\'t satisfy regex (%s).' => 'Vrednost ne zadovoljava regularni izraz (%s).',
 
@@ -6304,6 +6511,8 @@ sub Data {
             'Registracija modula interfejsa (prikaz ličnih omiljenih kao podnavigacija administratorskog menija).',
         'Frontend module registration (disable company link if no company feature is used).' =>
             'Registracija modula pristupa (onemogućuje vezu klijent ako se ne koristi svojstvo klijenata).',
+        'Registers the SAML 2.0 authentication plugin for AdminAuthentication.' =>
+            'Registruje dodatak za autentifikaciju SAML 2.0 za AdminAuthentication.',
         'Frontend module registration for the customer interface.' => 'Registracija modula pristupa za interfejs klijenta.',
         'Activates the available themes on the system. Value 1 means active, 0 means inactive.' =>
             'Aktivira raspoložive teme - šablone u sistemu. Vrednost 1 znači aktivno, 0 znači neaktivno.',
@@ -8404,6 +8613,55 @@ sub Data {
             'Greška prilikom brisanja priloga. Molimo proverite log datoteku za više informacija.',
         'Attachment was deleted successfully.' => 'Prilog je uspešno obrisan.',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?' =>
+            'Promena izvora meta podataka uklanja uneti URL ili XML meta podataka i SSL opcije. Nastavi?',
+        'Change metadata source' => 'Promeni izvor meta podataka',
+        'Uploaded key' => 'Otpremljeni ključ',
+        'EXPIRED' => 'ISTEKLO',
+        'expires' => 'ističe',
+        'used by %s configuration(s)' => 'koristi %s konfiguracija',
+        'Could not read the certificate.' => 'Sertifikat nije moguće pročitati.',
+        'Certificate (PEM)' => 'Sertifikat (PEM)',
+        'Issuer' => 'Izdavalac',
+        'Valid from' => 'Važeći od',
+        'Valid until' => 'Važeći do',
+        'Serial' => 'Serijski broj',
+        'Fingerprint (SHA-256)' => 'Otisak (SHA-256)',
+        'Show raw PEM' => 'Prikaži sirovi PEM',
+        'Certificate details' => 'Detalji sertifikata',
+        'Metadata is valid.' => 'Meta podaci su važeći.',
+        'Entity ID' => 'ID entiteta',
+        'SSO URL' => 'SSO URL',
+        'Includes a signing certificate.' => 'Uključuje sertifikat za potpisivanje.',
+        'No signing certificate found in the metadata.' => 'U meta podacima nije pronađen sertifikat za potpisivanje.',
+        'Found %s attribute(s) in the metadata.' => 'Pronađeno je %s atributa u meta podacima.',
+        'Verifying...' => 'Provera...',
+        'Metadata verification failed.' => 'Provera meta podataka nije uspela.',
+        'Upload failed.' => 'Otpremanje nije uspelo.',
+        'Please paste a certificate or key first.' => 'Molimo prvo nalepite sertifikat ili ključ.',
+        'Saving the pasted certificate/key failed.' => 'Čuvanje nalepljenog sertifikata/ključa nije uspelo.',
+        'Certificate generation failed.' => 'Generisanje sertifikata nije uspelo.',
+        'Please select a metadata source (URL or XML) first.' => 'Prvo izaberite izvor meta podataka (URL ili XML).',
+        'Could not find a certificate in the metadata.' => 'Nije pronađen sertifikat u meta podacima.',
+        'Copied to clipboard!' => '',
+        'Do you really want to delete this SAML configuration?' => 'Da li stvarno želite da obrišete ovu SAML konfiguraciju?',
+        'Delete SAML configuration' => 'Obriši SAML konfiguraciju',
+        'There was an error deleting the SAML configuration.' => 'Došlo je do greške pri brisanju SAML konfiguracije.',
+        'NameID (default)' => '',
+        '(pasted XML)' => '(nalepljeni XML)',
+        'Not configured yet' => 'Još nije konfigurisano',
+        'Identity provider metadata' => 'Meta podaci provajdera identiteta',
+        'SP signing key' => 'Ključ za potpisivanje SP',
+        'Configured' => 'Konfigurisano',
+        'Not set' => 'Nije postavljeno',
+        'SP signing certificate' => 'Sertifikat za potpisivanje SP',
+        'Not set (will be taken from the metadata when saving)' => '',
+        'User sync' => 'Sinhronizacija korisnika',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)' =>
+            'Omogućeno (%s mapiranja atributa, %s pravila grupa, %s pravila uloga)',
+        'Please fill in all required fields before continuing.' => 'Molimo popunite sva obavezna polja pre nego što nastavite.',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.AutoResponse.js
         'Delete this %s' => '',
         'Deleting the %s and its data. This may take a while...' => '',
@@ -8610,9 +8868,6 @@ sub Data {
         'Please select attachments for download.' => '',
         'Show less' => '',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
-        'Copied to clipboard!' => '',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
         'First select a customer user, then select a customer ID to assign to this ticket.' =>
             'Prvo odaberite klijent korisnika, onda možete odabrati ID klijenta za dodelu ovom tiketu.',
@@ -8657,9 +8912,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Search.js
         'Please remove the following words from your search as they cannot be searched for:' =>
             'Molimo da uklonite sledeće reči iz vaše pretrage jer se ne mogu tražiti:',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.SharedSecretGenerator.js
-        'Generate' => 'Generiši',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
@@ -9224,6 +9476,7 @@ Vaša tehnička podrška
         'Manage POP3 or IMAP accounts to fetch email from.' => 'Upravljanje POP3 ili IMAP nalozima za preuzimanje email-a od.',
         'Manage S/MIME certificates for email encryption.' => 'Upravljaj S/MIME sertifikatima za imej enkripciju.',
         'Manage System Configuration Deployments.' => 'Upravljanje rasporedima sistemske konfiguracije.',
+        'Manage agent and customer authentication (e.g. SAML 2.0).' => 'Upravljanje autentifikacijom operatera i klijenata (npr. SAML 2.0).',
         'Manage different calendars.' => 'Upravljanje različitim kalendarima.',
         'Manage existing sessions.' => 'Upravljanje postojećim sesijama.',
         'Manage outbound email profiles.' => '',
@@ -9349,6 +9602,7 @@ Vaša tehnička podrška
         'Running Process Tickets' => 'Aktivni proces tiketi',
         'Russian' => 'Ruski',
         'S/MIME Certificates' => 'S/MIME sertifikati',
+        'SAML' => 'SAML',
         'Schedule a maintenance period.' => 'Planiranje perioda održavanja.',
         'Screen after marking as seen' => '',
         'Screen after marking as unseen' => '',
@@ -9580,6 +9834,7 @@ Vaša tehnička podrška
         '%s MB',
         '%s TB',
         '%s of %s',
+        '(pasted XML)',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9594,6 +9849,7 @@ Vaša tehnička podrška
         'Add new entry',
         'Add to favourites',
         'Agent',
+        'Agent authentication',
         'All occurrences',
         'All-day',
         'An Error Occurred',
@@ -9616,6 +9872,7 @@ Vaša tehnička podrška
         'Article filter',
         'As soon as you use this button or link, you will leave this screen and its current state will be saved automatically. Do you want to continue?',
         'Ascending sort applied, ',
+        'Assertion consumer URL',
         'Attachment was deleted successfully.',
         'Attachments',
         'Aug',
@@ -9626,6 +9883,11 @@ Vaša tehnička podrška
         'Calendar',
         'Cancel',
         'Cannot proceed',
+        'Certificate (PEM)',
+        'Certificate details',
+        'Certificate generation failed.',
+        'Certificate/key is stored in VirtualFS.',
+        'Change metadata source',
         'Clear',
         'Clear all',
         'Clear all filters',
@@ -9638,27 +9900,34 @@ Vaša tehnička podrška
         'Clone',
         'Clone Process',
         'Clone web service',
+        'Close',
         'Close preview',
         'Close this dialog',
         'Collapse',
         'Complex %s with %s arguments',
+        'Configured',
         'Confirm',
         'Copied to clipboard!',
         'Copy Ticket Number',
         'Copy Ticket Number + Title',
         'Copy ticket information',
+        'Could not find a certificate in the metadata.',
         'Could not load activities.',
         'Could not open popup window. Please disable any popup blockers for this application.',
+        'Could not read the certificate.',
         'Current selection',
         'Currently not possible',
+        'Customer authentication',
         'Customer interface does not support articles not visible for customers.',
         'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',
         'December',
+        'Decrypt encrypted assertions',
         'Delete',
         'Delete Entity',
+        'Delete SAML configuration',
         'Delete conditions',
         'Delete draft',
         'Delete error handling module',
@@ -9692,10 +9961,12 @@ Vaša tehnička podrška
         'Deployment successful. You\'re being redirected...',
         'Descending sort applied, ',
         'Description',
+        'Disabled',
         'Dismiss',
         'Do not show this warning again.',
         'Do you really want to continue?',
         'Do you really want to delete "%s"?',
+        'Do you really want to delete this SAML configuration?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
         'Do you really want to delete this key?',
@@ -9712,11 +9983,14 @@ Vaša tehnička podrška
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
+        'EXPIRED',
         'Edit Field Details',
         'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)',
         'End date',
+        'Entity ID',
         'Error',
         'Error during AJAX communication',
         'Error during AJAX communication. Status: %s, Error: %s',
@@ -9730,8 +10004,10 @@ Vaša tehnička podrška
         'February',
         'Filter',
         'Filters',
+        'Fingerprint (SHA-256)',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
+        'Found %s attribute(s) in the metadata.',
         'Fr',
         'Fri',
         'Friday',
@@ -9741,13 +10017,18 @@ Vaša tehnička podrška
         'Grouped',
         'Help',
         'Hide EntityIDs',
+        'Identity provider CA certificate',
+        'Identity provider metadata',
         'If you now leave this page, all open popup windows will be closed, too!',
         'Import web service',
+        'Includes a signing certificate.',
         'Information about the Znuny Daemon',
         'Insert selected customer user(s) into the "%s:" field.',
         'Invalid date (need a future date)!',
         'Invalid date (need a past date)!',
         'Invalid date!',
+        'Issuer',
+        'Issuer (SP entity ID)',
         'It is going to be deleted from the field, please try again.',
         'It is not possible to add a new event trigger because the event is not set.',
         'It is not possible to set this entry to invalid. All affected configuration settings have to be changed beforehand.',
@@ -9765,6 +10046,8 @@ Vaša tehnička podrška
         'Loading, please wait...',
         'Loading...',
         'Location',
+        'Login attribute',
+        'Login button text',
         'Mail check successful.',
         'Mapping for Key',
         'Mapping for Key %s',
@@ -9772,15 +10055,20 @@ Vaša tehnička podrška
         'March',
         'May',
         'May_long',
+        'Metadata is valid.',
+        'Metadata verification failed.',
         'Mo',
         'Mon',
         'Monday',
         'Month',
         'Name',
+        'NameID (default)',
         'Namespace %s could not be initialized, because %s could not be found.',
         'Next',
+        'No',
         'No Data Available.',
         'No TransitionActions assigned.',
+        'No certificate/key set.',
         'No data found.',
         'No dialogs assigned yet. Just pick an activity dialog from the list on the left and drag it here.',
         'No matches found.',
@@ -9788,10 +10076,14 @@ Vaša tehnička podrška
         'No response from get package upgrade result.',
         'No response from get package upgrade run status.',
         'No response from package upgrade all.',
+        'No signing certificate found in the metadata.',
         'No sort applied, ',
         'No space left for the following files: %s',
         'No working hours',
         'Not available',
+        'Not configured yet',
+        'Not set',
+        'Not set (will be taken from the metadata when saving)',
         'Notice',
         'Notification',
         'Nov',
@@ -9808,10 +10100,13 @@ Vaša tehnička podrška
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
+        'Please fill in all required fields before continuing.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
+        'Please paste a certificate or key first.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select a metadata source (URL or XML) first.',
         'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
@@ -9845,11 +10140,15 @@ Vaša tehnička podrška
         'Restore web service configuration',
         'Rule',
         'Running',
+        'SP signing certificate',
+        'SP signing key',
+        'SSO URL',
         'Sa',
         'Sat',
         'Saturday',
         'Save',
         'Save and update automatically',
+        'Saving the pasted certificate/key failed.',
         'Scale preview content',
         'Search',
         'Search attributes',
@@ -9862,6 +10161,7 @@ Vaša tehnička podrška
         'Select files or drop them here',
         'Sep',
         'September',
+        'Serial',
         'Setting a template will overwrite any text or attachment.',
         'Settings',
         'Show',
@@ -9870,7 +10170,9 @@ Vaša tehnička podrška
         'Show less',
         'Show more',
         'Show or hide the content.',
+        'Show raw PEM',
         'Slide the navigation bar',
+        'Slot',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',
         'Sorry, but you can\'t disable all methods for this notification.',
         'Sorry, the only existing condition can\'t be removed.',
@@ -9885,12 +10187,14 @@ Vaša tehnička podrška
         'Status',
         'Stream',
         'Su',
+        'Subject',
         'Successful',
         'Sun',
         'Sunday',
         'Support Bundle',
         'Switch to desktop mode',
         'Switch to mobile mode',
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?',
         'Team',
         'Th',
         'The activities could not be marked as seen.',
@@ -9912,6 +10216,7 @@ Vaša tehnička podrška
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',
+        'There was an error deleting the SAML configuration.',
         'There was an error deleting the attachment. Please check the logs for more information.',
         'There was an error. Please save all settings you are editing and check the logs for more information.',
         'This Activity cannot be deleted because it is the Start Activity.',
@@ -9943,15 +10248,22 @@ Vaša tehnička podrška
         'Tu',
         'Tue',
         'Tuesday',
+        'Type',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.',
         'Unknown',
         'Unlock setting.',
         'Update All Packages',
         'Update all packages',
         'Update manually',
+        'Upload failed.',
         'Upload information',
+        'Uploaded key',
         'Uploading...',
         'Use options below to narrow down for which tickets appointments will be automatically created.',
+        'User sync',
+        'Valid from',
+        'Valid until',
+        'Verifying...',
         'WARNING: When you change the name of the group \'admin\', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement.',
         'Warning',
         'We',
@@ -9968,12 +10280,14 @@ Vaša tehnička podrška
         'activate to remove the sort',
         'and %s more...',
         'day',
+        'expires',
         'month',
         'more',
         'no',
         'none',
         'or',
         'sorting is disabled',
+        'used by %s configuration(s)',
         'week',
         'yes',
     ];

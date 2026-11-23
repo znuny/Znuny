@@ -1,0 +1,184 @@
+# --
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+# Sync settings (UserSyncMap, initial groups, group and role sync rules) for agent
+# authentication. Used by the edit screen and the setup wizard. Only the widget content:
+# the including template provides the surrounding WidgetSimple.
+
+<fieldset class="TableLike">
+    <div class="field-wrapper">
+        <label for="SyncEnabled">[% Translate("Enable sync") | html %]</label>
+        <div class="Field">
+            <span class="ToggleSwitch">
+                <input type="checkbox" id="SyncEnabled" name="SyncEnabled" value="1" role="switch" data-sync-enabled-toggle [% Data.SyncEnabled ? 'checked="checked"' : '' %] [% Data.SyncEnabledInvalid ? 'class="ServerError"' : '' %] />
+                <span class="ToggleSwitchSlider" aria-hidden="true"></span>
+            </span>
+            <p class="FieldExplanation">[% Translate("Also registers Kernel::System::Auth::Sync::SAML for the same slot, to sync attributes/groups/roles from the SAML assertion on every login.") | html %]</p>
+            [% IF Data.SyncEnabledInvalid %]
+                <p class="ServerError">[% Translate("The AuthSyncModule for this slot is already configured outside of AdminAuthentication - sync cannot be enabled for it.") | html %]</p>
+            [% END %]
+        </div>
+    </div>
+</fieldset>
+
+<fieldset class="TableLike SyncField[% IF !Data.SyncEnabled %] Hidden[% END %]">
+
+    <!-- UserSyncMap -->
+    <div class="field-wrapper">
+        <label>[% Translate("User attribute sync map") | html %]</label>
+        <div class="Field">
+            <p class="FieldExplanation">[% Translate("Maps Znuny user attributes (left) to SAML assertion attribute names (right).") | html %]</p>
+            <div data-row-container="UserSyncMap">
+                [% FOR Row IN Data.UserSyncMapRows %]
+                    <div class="ValueRow single-row-inputs full-width" data-row-type="UserSyncMap">
+                        <div class="field-wrapper UserSyncMapKeyField"><div class="Field"><input type="text" name="UserSyncMapKey_[% loop.count %]" value="[% Row.Key | html %]" placeholder="[% Translate("Znuny attribute") | html %]" /></div></div>
+                        <div class="field-wrapper UserSyncMapValueField"><div class="Field"><input type="text" name="UserSyncMapValue_[% loop.count %]" value="[% Row.Value | html %]" placeholder="[% Translate("SAML attribute URI") | html %]" /></div></div>
+                        <a href="#" class="RemoveButton" data-remove-row><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+                    </div>
+                [% END %]
+            </div>
+            <div class="Hidden ValueTemplate single-row-inputs full-width" data-row-type="UserSyncMap">
+                <div class="field-wrapper UserSyncMapKeyField"><div class="Field"><input type="text" name="UserSyncMapKey" value="" placeholder="[% Translate("Znuny attribute") | html %]" /></div></div>
+                <div class="field-wrapper UserSyncMapValueField"><div class="Field"><input type="text" name="UserSyncMapValue" value="" placeholder="[% Translate("SAML attribute URI") | html %]" /></div></div>
+                <a href="#" class="RemoveButton" data-remove-row><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
+            <button type="button" class="CallForAction btn-main btn-primary-ghost btn-width-max" data-add-row="UserSyncMap"><span><i class="fa fa-plus"></i> [% Translate("Add") | html %]</span></button>
+        </div>
+    </div>
+
+    <!-- UserSyncInitialGroups -->
+    <div class="field-wrapper">
+        <label for="UserSyncInitialGroups">[% Translate("Initial groups for new users") | html %]</label>
+        <div class="Field">
+            [% Data.InitialGroupsSelection %]
+            <p class="FieldExplanation">[% Translate("Groups (with rw permission) granted only when a brand-new agent is created via sync. Ctrl/Cmd-click to select multiple.") | html %]</p>
+        </div>
+    </div>
+
+    <!-- UserSyncGroupsDefinition -->
+    <div class="field-wrapper">
+        <label for="UserSyncGroupsDefinitionAttribute">[% Translate("SAML attribute carrying group values") | html %]</label>
+        <div class="Field">
+            <input type="text" id="UserSyncGroupsDefinitionAttribute" name="UserSyncGroupsDefinitionAttribute" value="[% Data.UserSyncGroupsDefinitionAttribute | html %]" class="W50pc" placeholder="e.g. MemberOf" />
+        </div>
+    </div>
+    <div class="field-wrapper">
+        <label>[% Translate("Group sync rules (by group value)") | html %]</label>
+        <div class="Field">
+            <p class="FieldExplanation">[% Translate("Maps a SAML group value to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.") | html %]</p>
+            <div data-row-container="UserSyncGroupsDefinition">
+                [% FOR Row IN Data.UserSyncGroupsDefinitionRows %]
+                    <div class="ValueRow single-row-inputs full-width" data-row-type="UserSyncGroupsDefinition">
+                        <div class="field-wrapper"><div class="Field"><input type="text" name="UserSyncGroupsDefinitionSAMLValue_[% loop.count %]" value="[% Row.SAMLValue | html %]" placeholder="[% Translate("SAML value") | html %]" /></div></div>
+                        <div class="field-wrapper"><div class="Field">[% Row.GroupSelectHTML %]</div></div>
+                        <div class="field-wrapper"><div class="Field">[% Row.PermSelectHTML %]</div></div>
+                        <a href="#" class="RemoveButton" data-remove-row><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+                    </div>
+                [% END %]
+            </div>
+            <div class="Hidden ValueTemplate single-row-inputs full-width" data-row-type="UserSyncGroupsDefinition">
+                <div class="field-wrapper"><div class="Field"><input type="text" name="UserSyncGroupsDefinitionSAMLValue" value="" placeholder="[% Translate("SAML value") | html %]" /></div></div>
+                <div class="field-wrapper"><div class="Field">[% Data.UserSyncGroupsDefinitionGroupTemplate %]</div></div>
+                <div class="field-wrapper"><div class="Field">[% Data.UserSyncGroupsDefinitionPermTemplate %]</div></div>
+                <a href="#" class="RemoveButton" data-remove-row><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
+            <button type="button" class="CallForAction btn-main btn-primary-ghost btn-width-max" data-add-row="UserSyncGroupsDefinition"><span><i class="fa fa-plus"></i> [% Translate("Add") | html %]</span></button>
+        </div>
+    </div>
+
+    <!-- UserSyncAttributeGroupsDefinition -->
+    <div class="field-wrapper">
+        <label>[% Translate("Group sync rules (by arbitrary attribute/value)") | html %]</label>
+        <div class="Field">
+            <p class="FieldExplanation">[% Translate("Maps any SAML attribute name/value combination to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.") | html %]</p>
+            <div data-row-container="UserSyncAttributeGroupsDefinition">
+                [% FOR Row IN Data.UserSyncAttributeGroupsDefinitionRows %]
+                    <div class="ValueRow single-row-inputs full-width" data-row-type="UserSyncAttributeGroupsDefinition">
+                        <div class="field-wrapper"><div class="Field"><input type="text" name="UserSyncAttributeGroupsDefinitionAttribute_[% loop.count %]" value="[% Row.Attribute | html %]" placeholder="[% Translate("SAML attribute") | html %]" /></div></div>
+                        <div class="field-wrapper"><div class="Field"><input type="text" name="UserSyncAttributeGroupsDefinitionSAMLValue_[% loop.count %]" value="[% Row.SAMLValue | html %]" placeholder="[% Translate("SAML value") | html %]" /></div></div>
+                        <div class="field-wrapper"><div class="Field">[% Row.GroupSelectHTML %]</div></div>
+                        <div class="field-wrapper"><div class="Field">[% Row.PermSelectHTML %]</div></div>
+                        <a href="#" class="RemoveButton" data-remove-row><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+                    </div>
+                [% END %]
+            </div>
+            <div class="Hidden ValueTemplate single-row-inputs full-width" data-row-type="UserSyncAttributeGroupsDefinition">
+                <div class="field-wrapper"><div class="Field"><input type="text" name="UserSyncAttributeGroupsDefinitionAttribute" value="" placeholder="[% Translate("SAML attribute") | html %]" /></div></div>
+                <div class="field-wrapper"><div class="Field"><input type="text" name="UserSyncAttributeGroupsDefinitionSAMLValue" value="" placeholder="[% Translate("SAML value") | html %]" /></div></div>
+                <div class="field-wrapper"><div class="Field">[% Data.UserSyncAttributeGroupsDefinitionGroupTemplate %]</div></div>
+                <div class="field-wrapper"><div class="Field">[% Data.UserSyncAttributeGroupsDefinitionPermTemplate %]</div></div>
+                <a href="#" class="RemoveButton" data-remove-row><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
+            <button type="button" class="CallForAction btn-main btn-primary-ghost btn-width-max" data-add-row="UserSyncAttributeGroupsDefinition"><span><i class="fa fa-plus"></i> [% Translate("Add") | html %]</span></button>
+        </div>
+    </div>
+
+    <!-- UserSyncRolesDefinition -->
+    [% UNLESS Data.HasRoles %]
+        <div class="field-wrapper">
+            <p class="FieldExplanation ServerError">[% Translate("Role sync requires at least one active role. Create or activate a role under Admin → Roles.") | html %]</p>
+        </div>
+    [% END %]
+    <div class="field-wrapper">
+        <label for="UserSyncRolesDefinitionAttribute">[% Translate("SAML attribute carrying role values") | html %]</label>
+        <div class="Field">
+            <input type="text" id="UserSyncRolesDefinitionAttribute" name="UserSyncRolesDefinitionAttribute" value="[% Data.UserSyncRolesDefinitionAttribute | html %]" class="W50pc" placeholder="e.g. Role" [% UNLESS Data.HasRoles %]disabled="disabled"[% END %] />
+        </div>
+    </div>
+    <div class="field-wrapper">
+        <label>[% Translate("Role sync rules (by role value)") | html %]</label>
+        <div class="Field">
+            <p class="FieldExplanation">[% Translate("Maps a SAML role value to one or more Znuny roles, active or inactive.") | html %]</p>
+            <div data-row-container="UserSyncRolesDefinition">
+                [% FOR Row IN Data.UserSyncRolesDefinitionRows %]
+                    <div class="ValueRow single-row-inputs full-width" data-row-type="UserSyncRolesDefinition">
+                        <div class="field-wrapper"><div class="Field"><input type="text" name="UserSyncRolesDefinitionSAMLValue_[% loop.count %]" value="[% Row.SAMLValue | html %]" placeholder="[% Translate("SAML value") | html %]" /></div></div>
+                        <div class="field-wrapper"><div class="Field">[% Row.RoleSelectHTML %]</div></div>
+                        <div class="field-wrapper"><div class="Field"><label class="InlineCheckboxLabel"><input type="checkbox" name="UserSyncRolesDefinitionActive_[% loop.count %]" value="1" [% IF Row.Active %]checked="checked"[% END %] /> [% Translate("Active") | html %]</label></div></div>
+                        <a href="#" class="RemoveButton" data-remove-row><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+                    </div>
+                [% END %]
+            </div>
+            <div class="Hidden ValueTemplate single-row-inputs full-width" data-row-type="UserSyncRolesDefinition">
+                <div class="field-wrapper"><div class="Field"><input type="text" name="UserSyncRolesDefinitionSAMLValue" value="" placeholder="[% Translate("SAML value") | html %]" /></div></div>
+                <div class="field-wrapper"><div class="Field">[% Data.UserSyncRolesDefinitionRoleTemplate %]</div></div>
+                <div class="field-wrapper"><div class="Field"><label class="InlineCheckboxLabel"><input type="checkbox" name="UserSyncRolesDefinitionActive" value="1" /> [% Translate("Active") | html %]</label></div></div>
+                <a href="#" class="RemoveButton" data-remove-row><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
+            <button type="button" class="CallForAction btn-main btn-primary-ghost btn-width-max[% UNLESS Data.HasRoles %] Disabled[% END %]" data-add-row="UserSyncRolesDefinition" [% UNLESS Data.HasRoles %]disabled="disabled" aria-disabled="true"[% END %]><span><i class="fa fa-plus"></i> [% Translate("Add") | html %]</span></button>
+        </div>
+    </div>
+
+    <!-- UserSyncAttributeRolesDefinition -->
+    <div class="field-wrapper">
+        <label>[% Translate("Role sync rules (by arbitrary attribute/value)") | html %]</label>
+        <div class="Field">
+            <p class="FieldExplanation">[% Translate("Maps any SAML attribute name/value combination to one or more Znuny roles, active or inactive.") | html %]</p>
+            <div data-row-container="UserSyncAttributeRolesDefinition">
+                [% FOR Row IN Data.UserSyncAttributeRolesDefinitionRows %]
+                    <div class="ValueRow single-row-inputs full-width" data-row-type="UserSyncAttributeRolesDefinition">
+                        <div class="field-wrapper"><div class="Field"><input type="text" name="UserSyncAttributeRolesDefinitionAttribute_[% loop.count %]" value="[% Row.Attribute | html %]" placeholder="[% Translate("SAML attribute") | html %]" /></div></div>
+                        <div class="field-wrapper"><div class="Field"><input type="text" name="UserSyncAttributeRolesDefinitionSAMLValue_[% loop.count %]" value="[% Row.SAMLValue | html %]" placeholder="[% Translate("SAML value") | html %]" /></div></div>
+                        <div class="field-wrapper"><div class="Field">[% Row.RoleSelectHTML %]</div></div>
+                        <div class="field-wrapper"><div class="Field"><label class="InlineCheckboxLabel"><input type="checkbox" name="UserSyncAttributeRolesDefinitionActive_[% loop.count %]" value="1" [% IF Row.Active %]checked="checked"[% END %] /> [% Translate("Active") | html %]</label></div></div>
+                        <a href="#" class="RemoveButton" data-remove-row><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+                    </div>
+                [% END %]
+            </div>
+            <div class="Hidden ValueTemplate single-row-inputs full-width" data-row-type="UserSyncAttributeRolesDefinition">
+                <div class="field-wrapper"><div class="Field"><input type="text" name="UserSyncAttributeRolesDefinitionAttribute" value="" placeholder="[% Translate("SAML attribute") | html %]" /></div></div>
+                <div class="field-wrapper"><div class="Field"><input type="text" name="UserSyncAttributeRolesDefinitionSAMLValue" value="" placeholder="[% Translate("SAML value") | html %]" /></div></div>
+                <div class="field-wrapper"><div class="Field">[% Data.UserSyncAttributeRolesDefinitionRoleTemplate %]</div></div>
+                <div class="field-wrapper"><div class="Field"><label class="InlineCheckboxLabel"><input type="checkbox" name="UserSyncAttributeRolesDefinitionActive" value="1" /> [% Translate("Active") | html %]</label></div></div>
+                <a href="#" class="RemoveButton" data-remove-row><i class="fa fa-minus-square-o"></i><span class="InvisibleText">[% Translate("Remove") | html %]</span></a>
+            </div>
+            <button type="button" class="CallForAction btn-main btn-primary-ghost btn-width-max[% UNLESS Data.HasRoles %] Disabled[% END %]" data-add-row="UserSyncAttributeRolesDefinition" [% UNLESS Data.HasRoles %]disabled="disabled" aria-disabled="true"[% END %]><span><i class="fa fa-plus"></i> [% Translate("Add") | html %]</span></button>
+        </div>
+    </div>
+
+</fieldset>

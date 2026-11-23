@@ -36,11 +36,10 @@ sub Run {
     my $Verbose = $Param{CommandlineOptions}->{Verbose} || 0;
 
     my @Tasks = (
-
-        # {
-        #     Message => 'Message',
-        #     Module  => 'ModuleName',
-        # },
+        {
+            Message => 'Create database table authentication_config.',
+            Module  => 'AuthenticationConfig',
+        },
     );
 
     return 1   if !@Tasks;

@@ -97,6 +97,10 @@ Get module options. Currently there is just one option, "PreAuth".
 sub GetOption {
     my ( $Self, %Param ) = @_;
 
+    # The default slot (Customer::AuthModule without number) may be empty, e.g. if only SAML
+    # is configured in numbered slots. No backend there means no options (e.g. no PreAuth).
+    return if !$Self->{Backend};
+
     return $Self->{Backend}->GetOption(%Param);
 }
 
@@ -138,10 +142,18 @@ sub Auth {
         # next on no success
         next COUNT if !$User;
 
+        # SAML logins can't carry a two factor token, the identity provider posts the response
+        # to Znuny. MFA has to be enforced by the identity provider instead. Decided by the
+        # backend that authenticated the user, never by the IsSAMLLogin request parameter, which
+        # could be sent along with a username/password login to skip two factor authentication.
+        my $SkipTwoFactorAuth = $Self->{"Backend$MainCount"}->isa('Kernel::System::CustomerAuth::SAML');
+
         # check 2factor auth backends
         my $TwoFactorAuth;
         TWOFACTORSOURCE:
         for my $Count ( '', 1 .. 10 ) {
+
+            last TWOFACTORSOURCE if $SkipTwoFactorAuth;
 
             # return on no config setting
             next TWOFACTORSOURCE if !$Self->{"AuthTwoFactorBackend$Count"};
@@ -288,6 +300,107 @@ sub GetLastErrorMessage {
     my ( $Self, %Param ) = @_;
 
     return $Self->{LastErrorMessage};
+}
+
+=head2 GetSAMLSLOData()
+
+Returns the NameID/NameIDFormat/SessionIndex of the last successful SAML
+login on the given backend slot, if that slot's backend supports it (only
+Kernel::System::CustomerAuth::SAML does). Returns an empty list otherwise.
+
+    my %SLOData = $CustomerAuthObject->GetSAMLSLOData(
+        Count => $Count,
+    );
+
+=cut
+
+sub GetSAMLSLOData {
+    my ( $Self, %Param ) = @_;
+
+    my $Count = $Param{Count} // '';
+
+    my $Backend = $Self->{"Backend$Count"};
+    return if !$Backend;
+    return if !$Backend->can('GetLastSLOData');
+
+    return $Backend->GetLastSLOData();
+}
+
+=head2 InitiateSAMLLogout()
+
+Builds a SAML LogoutRequest redirect URL for the given backend slot, if that
+slot's backend supports it (only Kernel::System::CustomerAuth::SAML does).
+Returns undef if not supported, or if the Identity Provider doesn't
+advertise Single Logout.
+
+    my $URL = $CustomerAuthObject->InitiateSAMLLogout(
+        Count        => $Count,
+        NameID       => $NameID,
+        NameIDFormat => $NameIDFormat, # optional
+        SessionIndex => $SessionIndex,
+    );
+
+=cut
+
+sub InitiateSAMLLogout {
+    my ( $Self, %Param ) = @_;
+
+    my $Count = $Param{Count} // '';
+
+    my $Backend = $Self->{"Backend$Count"};
+    return if !$Backend;
+    return if !$Backend->can('CreateLogoutURL');
+
+    return $Backend->CreateLogoutURL(%Param);
+}
+
+=head2 GetSAMLLogoutRequestID()
+
+Returns the ID of the LogoutRequest built by the last InitiateSAMLLogout()
+call on the given backend slot, if that slot's backend supports it (only
+Kernel::System::CustomerAuth::SAML does). For replay protection.
+
+    my $LogoutRequestID = $CustomerAuthObject->GetSAMLLogoutRequestID(
+        Count => $Count,
+    );
+
+=cut
+
+sub GetSAMLLogoutRequestID {
+    my ( $Self, %Param ) = @_;
+
+    my $Count = $Param{Count} // '';
+
+    my $Backend = $Self->{"Backend$Count"};
+    return if !$Backend;
+    return if !$Backend->can('GetLastLogoutRequestID');
+
+    return $Backend->GetLastLogoutRequestID();
+}
+
+=head2 VerifySAMLLogoutResponse()
+
+Verifies and parses an inbound SAML LogoutResponse redirect on the given
+backend slot, if that slot's backend supports it (only
+Kernel::System::CustomerAuth::SAML does). Returns undef otherwise.
+
+    my $LogoutResponse = $CustomerAuthObject->VerifySAMLLogoutResponse(
+        Count       => $Count,
+        QueryString => $QueryString,
+    );
+
+=cut
+
+sub VerifySAMLLogoutResponse {
+    my ( $Self, %Param ) = @_;
+
+    my $Count = $Param{Count} // '';
+
+    my $Backend = $Self->{"Backend$Count"};
+    return if !$Backend;
+    return if !$Backend->can('VerifySAMLLogoutResponse');
+
+    return $Backend->VerifySAMLLogoutResponse(%Param);
 }
 
 1;

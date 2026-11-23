@@ -841,6 +841,9 @@ sub Login {
         $Param{UserNameAutocomplete} = $DisableLoginAutocomplete ? 'off' : 'username';
         $Param{PasswordAutocomplete} = $DisableLoginAutocomplete ? 'off' : 'current-password';
 
+        # Only SAML configured: the SAML login buttons are the only way to log in.
+        $Param{ShowLoginForm} = $Self->_LoginFormNeeded( ConfigKey => 'AuthModule' );
+
         $Self->Block(
             Name => 'LoginBox',
             Data => \%Param,
@@ -921,7 +924,7 @@ sub Login {
         # get lost password
         if (
             $ConfigObject->Get('LostPassword')
-            && $ConfigObject->Get('AuthModule') eq 'Kernel::System::Auth::DB'
+            && ( $ConfigObject->Get('AuthModule') // '' ) eq 'Kernel::System::Auth::DB'
             )
         {
             $Self->Block(
@@ -4297,6 +4300,9 @@ sub CustomerLogin {
         $Param{UserNameAutocomplete} = $DisableLoginAutocomplete ? 'off' : 'username';
         $Param{PasswordAutocomplete} = $DisableLoginAutocomplete ? 'off' : 'current-password';
 
+        # Only SAML configured: the SAML login buttons are the only way to log in.
+        $Param{ShowLoginForm} = $Self->_LoginFormNeeded( ConfigKey => 'Customer::AuthModule' );
+
         $Self->Block(
             Name => 'LoginBox',
             Data => \%Param,
@@ -4357,7 +4363,7 @@ sub CustomerLogin {
         # get lost password output
         if (
             $ConfigObject->Get('CustomerPanelLostPassword')
-            && $ConfigObject->Get('Customer::AuthModule') eq
+            && ( $ConfigObject->Get('Customer::AuthModule') // '' ) eq
             'Kernel::System::CustomerAuth::DB'
             )
         {
@@ -4374,7 +4380,7 @@ sub CustomerLogin {
         # get create account output
         if (
             $ConfigObject->Get('CustomerPanelCreateAccount')
-            && $ConfigObject->Get('Customer::AuthModule') eq
+            && ( $ConfigObject->Get('Customer::AuthModule') // '' ) eq
             'Kernel::System::CustomerAuth::DB'
             )
 
@@ -7030,6 +7036,43 @@ sub _BuildLastViewsOutput {
     );
 
     return $LastViewHTML;
+}
+
+=head2 _LoginFormNeeded()
+
+Checks if at least one configured authentication module needs the username/password
+login form. SAML (login button) and HTTPBasicAuth (authenticated by the web server)
+don't, every other module (DB, LDAP, Radius, modules from packages) does.
+
+    my $LoginFormNeeded = $LayoutObject->_LoginFormNeeded(
+        ConfigKey => 'AuthModule',    # or 'Customer::AuthModule'
+    );
+
+=cut
+
+sub _LoginFormNeeded {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    my %ModulesWithoutLoginForm = map { $_ => 1 } qw(
+        Kernel::System::Auth::SAML
+        Kernel::System::Auth::HTTPBasicAuth
+        Kernel::System::CustomerAuth::SAML
+        Kernel::System::CustomerAuth::HTTPBasicAuth
+    );
+
+    COUNT:
+    for my $Count ( '', 1 .. 10 ) {
+        my $Module = $ConfigObject->Get("$Param{ConfigKey}$Count");
+
+        next COUNT if !$Module;
+        next COUNT if $ModulesWithoutLoginForm{$Module};
+
+        return 1;
+    }
+
+    return 0;
 }
 
 =head2 _GetShortcutIconsForInterface()

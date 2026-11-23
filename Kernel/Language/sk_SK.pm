@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.17950742027155;
+    $Self->{Completeness}        = 0.20110361741263;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -268,6 +268,169 @@ sub Data {
         'Do you really want to delete this attachment?' => 'Chceš skutočne vymazať túto prílohu?',
         'Attachment' => 'Príloha',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
+        'Certificate/key is stored in VirtualFS.' => 'Certifikát/kľúč je uložený vo VirtualFS.',
+        'No certificate/key set.' => 'Nie je nastavený žiadny certifikát/kľúč.',
+        'View certificate details' => 'Zobraziť podrobnosti certifikátu',
+        'The selected certificate/key is not available. Please select or upload it again.' =>
+            'Vybraný certifikát/kľúč nie je k dispozícii. Vyberte ho alebo ho znova nahrajte.',
+        '- Select an existing certificate/key -' => '- Vyberte existujúci certifikát/kľúč -',
+        'Paste key' => '',
+        'Paste certificate' => '',
+        'Generate' => '',
+        'Use certificate from metadata' => 'Použiť certifikát z metadát',
+        'Extracts the signing certificate embedded in the Identity Provider metadata and stores it here, instead of uploading it separately.' =>
+            'Extrahuje podpisový certifikát vložený v metadátach poskytovateľa identity a uloží ho sem, takže ho netreba nahrávať samostatne.',
+        'Paste the PEM text including the BEGIN and END lines.' => 'Vložte text PEM vrátane riadkov BEGIN a END.',
+        'Common Name' => 'Bežný názov (CN)',
+        'Key size' => 'Dĺžka kľúča',
+        'Validity (days)' => 'Platnosť (dni)',
+        'Generate self-signed certificate' => 'Generovať certifikát s vlastným podpisom',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditAgentAuth.tt
+        'Authentication Management' => 'Správa autentifikácie',
+        'Agent authentication' => 'Autentifikácia agentov',
+        'Basic settings' => 'Základné nastavenia',
+        'Slot' => 'Slot',
+        'Determines which numbered AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Určuje, ktorý číslovaný slot AuthModule<N> táto konfigurácia obsadí. Ponúkajú sa iba nepoužité sloty.',
+        'SAML request settings' => 'Nastavenia požiadavky SAML',
+        'Login button text' => 'Text prihlasovacieho tlačidla',
+        'Assertion consumer URL' => 'URL príjemcu asercií',
+        'Automatically derived from this system\'s HTTP type, FQDN and script alias - not editable.' =>
+            'Odvodené automaticky z typu HTTP, FQDN a aliasu skriptu tohto systému - nedá sa upraviť.',
+        'Znuny appends a ";IsSAMLLogin=1;Count=<N>;" suffix to this URL when building the actual outgoing SAML request (<N> is this configuration\'s slot), so the value the Identity Provider actually receives is:' =>
+            'Znuny pri zostavovaní skutočnej odchádzajúcej požiadavky SAML pripojí k tejto URL príponu „;IsSAMLLogin=1;Count=<N>;“ (<N> je slot tejto konfigurácie), takže hodnota, ktorú poskytovateľ identity skutočne dostane, je:',
+        'Copy to clipboard' => 'Kopírovať do schránky',
+        'Some Identity Providers require this exact value to be registered as the ACS URL. Others accept the base URL above and honor the value from the request. If your IdP\'s field rejects semicolons, register the base URL instead.' =>
+            'Niektorí poskytovatelia identity vyžadujú, aby bola ako URL ACS zaregistrovaná presne táto hodnota. Iní akceptujú vyššie uvedenú základnú URL a rešpektujú hodnotu z požiadavky. Ak pole vo vašom IdP odmieta bodkočiarky, zaregistrujte namiesto toho základnú URL.',
+        'Download SP metadata XML' => 'Stiahnuť metadáta SP (XML)',
+        'Issuer (SP entity ID)' => 'Vydavateľ (ID entity SP)',
+        'Requested NameID format' => 'Požadovaný formát NameID',
+        'Unspecified' => 'Nešpecifikovaný',
+        'Persistent' => 'Trvalý',
+        'Transient' => 'Prechodný',
+        'Email address' => '',
+        'Sent as the NameIDPolicy Format in the outgoing request and published in the SP metadata. Change this only if your Identity Provider requires a specific format.' =>
+            'Odosiela sa ako NameIDPolicy Format v odchádzajúcej požiadavke a publikuje sa v metadátach SP. Zmeňte iba vtedy, ak váš poskytovateľ identity vyžaduje konkrétny formát.',
+        'Login attribute' => '',
+        'Please enter attribute names separated by commas.' => '',
+        'Optional. By default the NameID is the login. Enter one or more SAML attribute names (Name or FriendlyName), separated by commas, to take the login from the first of these attributes the assertion contains instead, e.g. if the Identity Provider sends a persistent NameID. The attribute must have exactly one value, otherwise the login fails. Changing this changes the login of existing users.' =>
+            '',
+        'Load metadata from URL' => 'Načítať metadáta z URL',
+        'Switch off to paste the metadata XML instead. Switching clears the entered URL or XML and the SSL options.' =>
+            'Vypnite, ak chcete namiesto toho vložiť metadáta XML. Prepnutím sa vymaže zadaná URL alebo XML a možnosti SSL.',
+        'Please select a metadata source.' => 'Vyberte zdroj metadát.',
+        'Metadata URL' => 'URL metadát',
+        'Verify' => 'Overiť',
+        'Metadata XML' => 'XML metadát',
+        'Use custom SSL options for metadata URL fetch' => 'Použiť vlastné možnosti SSL pri načítaní metadát z URL',
+        'SSL CA file' => 'Súbor CA pre SSL',
+        'SSL CA path' => 'Cesta CA pre SSL',
+        'Verify hostname' => 'Overovať názov hostiteľa',
+        'Certificates and keys' => 'Certifikáty a kľúče',
+        'SP signing key (used to sign outgoing requests)' => 'Podpisový kľúč SP (slúži na podpisovanie odchádzajúcich požiadaviek)',
+        'SP signing certificate (matches the key above)' => 'Podpisový certifikát SP (zodpovedá vyššie uvedenému kľúču)',
+        'Required for the SP metadata\'s KeyDescriptor to be published. "Generate" above already produces this together with the key - only needed as a separate step if you uploaded your own key.' =>
+            'Potrebný na publikovanie KeyDescriptor v metadátach SP. „Generovať“ vyššie ho už vytvára spolu s kľúčom - ako samostatný krok je potrebný iba vtedy, ak ste nahrali vlastný kľúč.',
+        'Signing algorithm' => 'Podpisový algoritmus',
+        'SHA-256 (default)' => 'SHA-256 (predvolený)',
+        'SHA-384' => 'SHA-384',
+        'SHA-512' => 'SHA-512',
+        'SHA-1 (legacy, not recommended)' => 'SHA-1 (zastaraný, neodporúča sa)',
+        'Used to sign the outgoing request when a signing key is set above. Only change this if your Identity Provider requires a specific algorithm.' =>
+            'Slúži na podpísanie odchádzajúcej požiadavky, ak je vyššie nastavený podpisový kľúč. Zmeňte iba vtedy, ak váš poskytovateľ identity vyžaduje konkrétny algoritmus.',
+        'Decrypt encrypted assertions' => 'Dešifrovať šifrované asercie',
+        'Uses the SP signing key above to decrypt SAML assertions the Identity Provider encrypts. Has no effect on responses that aren\'t encrypted, so it\'s safe to leave enabled. Requires a signing key above.' =>
+            'Používa vyššie uvedený podpisový kľúč SP na dešifrovanie asercií SAML, ktoré poskytovateľ identity šifruje. Na nešifrované odpovede nemá žiadny vplyv, preto je bezpečné nechať voľbu zapnutú. Vyžaduje vyššie uvedený podpisový kľúč.',
+        'Identity provider CA certificate' => 'Certifikát CA poskytovateľa identity',
+        'Required for SAML login to work. Without it, Net::SAML2 cannot verify the Identity Provider\'s response signature and authentication will fail.' =>
+            'Potrebný na fungovanie prihlásenia SAML. Bez neho Net::SAML2 nemôže overiť podpis odpovede poskytovateľa identity a autentifikácia zlyhá.',
+        'Attribute, group and role sync' => 'Synchronizácia atribútov, skupín a rolí',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/EditCustomerAuth.tt
+        'Customer authentication' => 'Autentifikácia zákazníkov',
+        'Determines which numbered Customer::AuthModule<N> slot this configuration occupies. Only unused slots are offered.' =>
+            'Určuje, ktorý číslovaný slot Customer::AuthModule<N> táto konfigurácia obsadí. Ponúkajú sa iba nepoužité sloty.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
+        'SAML wizard' => 'Sprievodca SAML',
+        'Add agent SAML authentication' => 'Pridať autentifikáciu SAML pre agentov',
+        'Add customer SAML authentication' => 'Pridať autentifikáciu SAML pre zákazníkov',
+        'Deploy configuration' => 'Nasadiť konfiguráciu',
+        'Deployment failed' => '',
+        'Fix the configurations below and deploy again. Or set a configuration to invalid: its login stops working and the other configurations are deployed.' =>
+            '',
+        'Problem' => 'Problém',
+        'Edit' => 'Upraviť',
+        'Set to invalid and deploy the rest' => '',
+        'Sync' => 'Synchronizácia',
+        'Status' => 'Stav',
+        'Metadata' => '',
+        'Slot %s' => 'Slot %s',
+        'Default' => '',
+        'Yes' => 'Áno',
+        'No' => 'Nie',
+        'OK' => '',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
+        'Enable sync' => 'Zapnúť synchronizáciu',
+        'Also registers Kernel::System::Auth::Sync::SAML for the same slot, to sync attributes/groups/roles from the SAML assertion on every login.' =>
+            'Zaregistruje aj Kernel::System::Auth::Sync::SAML pre rovnaký slot, aby sa pri každom prihlásení synchronizovali atribúty/skupiny/roly z asercie SAML.',
+        'The AuthSyncModule for this slot is already configured outside of AdminAuthentication - sync cannot be enabled for it.' =>
+            'AuthSyncModule pre tento slot je už nakonfigurovaný mimo AdminAuthentication - synchronizáciu preň nemožno zapnúť.',
+        'User attribute sync map' => 'Mapovanie synchronizácie atribútov užívateľa',
+        'Maps Znuny user attributes (left) to SAML assertion attribute names (right).' =>
+            'Mapuje atribúty užívateľa Znuny (vľavo) na názvy atribútov asercie SAML (vpravo).',
+        'Znuny attribute' => 'Atribút Znuny',
+        'SAML attribute URI' => 'URI atribútu SAML',
+        'Initial groups for new users' => 'Počiatočné skupiny pre nových užívateľov',
+        'Groups (with rw permission) granted only when a brand-new agent is created via sync. Ctrl/Cmd-click to select multiple.' =>
+            'Skupiny (s povolením rw), ktoré sa pridelia iba pri vytvorení úplne nového agenta synchronizáciou. Na výber viacerých položiek kliknite so stlačeným Ctrl/Cmd.',
+        'SAML attribute carrying group values' => 'Atribút SAML obsahujúci hodnoty skupín',
+        'Group sync rules (by group value)' => 'Pravidlá synchronizácie skupín (podľa hodnoty skupiny)',
+        'Maps a SAML group value to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Mapuje hodnotu skupiny SAML na skupinu Znuny a povolenia. Na výber viacerých povolení kliknite so stlačeným Ctrl/Cmd.',
+        'SAML value' => 'Hodnota SAML',
+        'Group sync rules (by arbitrary attribute/value)' => 'Pravidlá synchronizácie skupín (podľa ľubovoľného atribútu/hodnoty)',
+        'Maps any SAML attribute name/value combination to a Znuny group and permissions. Ctrl/Cmd-click to select multiple permissions.' =>
+            'Mapuje ľubovoľnú kombináciu názvu/hodnoty atribútu SAML na skupinu Znuny a povolenia. Na výber viacerých povolení kliknite so stlačeným Ctrl/Cmd.',
+        'SAML attribute' => 'Atribút SAML',
+        'Role sync requires at least one active role. Create or activate a role under Admin → Roles.' =>
+            'Synchronizácia rolí vyžaduje aspoň jednu aktívnu rolu. Vytvorte alebo aktivujte rolu v časti Admin → Funkcie.',
+        'SAML attribute carrying role values' => 'Atribút SAML obsahujúci hodnoty rolí',
+        'Role sync rules (by role value)' => 'Pravidlá synchronizácie rolí (podľa hodnoty roly)',
+        'Maps a SAML role value to one or more Znuny roles, active or inactive.' =>
+            'Mapuje hodnotu roly SAML na rolu Znuny, aktívnu alebo neaktívnu.',
+        'Active' => '',
+        'Role sync rules (by arbitrary attribute/value)' => 'Pravidlá synchronizácie rolí (podľa ľubovoľného atribútu/hodnoty)',
+        'Maps any SAML attribute name/value combination to one or more Znuny roles, active or inactive.' =>
+            'Mapuje ľubovoľnú kombináciu názvu/hodnoty atribútu SAML na rolu Znuny, aktívnu alebo neaktívnu.',
+
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
+        'Setup steps' => 'Kroky nastavenia',
+        'Setup wizard' => 'Sprievodca nastavením',
+        'SAML setup wizard' => 'Sprievodca nastavením SAML',
+        'Step' => 'Krok',
+        'What are you setting up?' => 'Čo nastavujete?',
+        'Agent authentication - staff logging into the agent interface' =>
+            'Autentifikácia agentov - zamestnanci prihlasujúci sa do rozhrania agenta',
+        'Customer authentication - customers logging into the customer portal' =>
+            'Autentifikácia zákazníkov - zákazníci prihlasujúci sa do zákazníckeho portálu',
+        'Login with SSO' => 'Prihlásiť sa cez SSO',
+        'User sync (optional)' => 'Synchronizácia užívateľov (voliteľné)',
+        'Optionally sync user attributes, groups and roles from the SAML assertion on every login. This can also be set up later on the edit screen.' =>
+            'Voliteľne synchronizujte atribúty užívateľov, skupiny a roly z asercie SAML pri každom prihlásení. Dá sa to nastaviť aj neskôr na obrazovke úprav.',
+        'Review' => 'Kontrola',
+        'Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective.' =>
+            'Kliknutím na Uložiť vytvoríte túto konfiguráciu SAML. Zatiaľ nebude aktívna - potom ju aktivujte akciou Nasadiť na stránke prehľadu.',
+        'If you skipped the Identity Provider CA certificate here, it is taken from the metadata when saving. Please check it on the edit screen afterwards.' =>
+            '',
+        'You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only).' =>
+            'Môžete sa vrátiť k ľubovoľnému predchádzajúcemu kroku a vykonať zmeny, alebo neskôr použiť úplnú obrazovku úprav pre pokročilé možnosti, ako je synchronizácia atribútov/skupín/rolí (iba autentifikácia agentov).',
+        'Back' => 'Späť',
+        'Next' => 'Ďalej',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminAutoResponse.tt
         'Add Auto Response' => 'Pridať automatickú odpoveď',
         'Filter for Auto Responses' => '',
@@ -325,9 +488,7 @@ sub Data {
             '',
         'Account Status' => '',
         'Account status for: %s' => '',
-        'Status' => 'Stav',
         'Account' => '',
-        'Edit' => 'Upraviť',
         'No accounts found.' => '',
         'Communication Log Details (%s)' => '',
         'Direction' => 'Smerovanie',
@@ -446,7 +607,6 @@ sub Data {
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
         'Toggle active state for all' => '',
-        'Active' => '',
         'Toggle active state for %s' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
@@ -1583,14 +1743,11 @@ sub Data {
         'Download package' => '',
         'Rebuild package' => '',
         'Package Information' => '',
-        'Metadata' => '',
         'Change Log' => '',
         'Date' => 'údaje',
         'List of Files' => '',
         'Permission' => 'Povolenie',
         'Size' => 'Veľkosť',
-        'Problem' => 'Problém',
-        'OK' => '',
         'Download file from package!' => '',
         'Required' => '',
         'Primary Key' => '',
@@ -2134,7 +2291,6 @@ sub Data {
         'System Email Addresses Management' => '',
         'Add System Email Address' => '',
         'Edit System Email Address' => '',
-        'Email address' => '',
         'Display name' => '',
         'This email address is already used as system email address.' => '',
         'The display name and email address will be shown on mail you send.' =>
@@ -2349,8 +2505,6 @@ sub Data {
         'All-day' => 'Všetky dni',
         'Repeat' => '',
         'Notification' => 'Notifikácia',
-        'Yes' => 'Áno',
-        'No' => 'Nie',
         'No calendars found. Please add a calendar first by using Manage Calendars page.' =>
             '',
 
@@ -2880,7 +3034,6 @@ sub Data {
         'Save filter settings as default' => 'Uložiť nastavenie filtra ako predvolené',
         'Event Type' => 'Typ udalosti',
         'Save as default' => 'Uložiť do prednastavených',
-        'Back' => 'Späť',
         'Change Queue' => 'Zmeň rad',
         'Add Filter' => 'Pridať filter',
         'Set' => 'Nastav',
@@ -3128,7 +3281,6 @@ sub Data {
         'Phone' => 'Telefón',
         'Web site' => '',
         'Community' => '',
-        'Next' => 'Ďalej',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/InstallerConfigureMail.tt
         'Configure Outbound Mail' => '',
@@ -3631,6 +3783,34 @@ sub Data {
             '',
         'All agents with write permission for the appointment (calendar)' =>
             '',
+
+        # Perl Module: Kernel/Modules/AdminAuthentication.pm
+        'Perl module Net::SAML2 is not installed. SAML authentication cannot work until it is installed on the server.' =>
+            'Modul Perl Net::SAML2 nie je nainštalovaný. Autentifikácia SAML nebude fungovať, kým nebude nainštalovaný na serveri.',
+        'Authentication configuration is not in sync with the deployed configuration, but it can\'t be deployed: a valid configuration has a problem, see the status below. Fix it or set it to invalid, then deploy.' =>
+            '',
+        'Authentication configuration is not in sync with the deployed configuration, please deploy.' =>
+            'Konfigurácia autentifikácie nie je synchronizovaná s nasadenou konfiguráciou, vykonajte nasadenie.',
+        'No IdP CA certificate was uploaded and none could be taken from the IdP metadata.' =>
+            'Nebol nahraný žiadny certifikát CA IdP a z metadát IdP sa nepodarilo žiadny získať.',
+        'Only invalid authentication configurations can be deleted. Please set the configuration to invalid first.' =>
+            'Zmazať možno iba neplatné konfigurácie autentifikácie. Najprv nastavte konfiguráciu ako neplatnú.',
+        'Invalid or missing Role.' => 'Neplatná alebo chýbajúca rola.',
+        'No file was uploaded.' => 'Nebol nahraný žiadny súbor.',
+        'Error storing the uploaded file.' => 'Chyba pri ukladaní nahraného súboru.',
+        'Only the SP signing key can be generated.' => 'Generovať možno iba podpisový kľúč SP.',
+        'Error generating certificate. Please check the system log.' => 'Chyba pri generovaní certifikátu. Skontrolujte systémový log.',
+        'Error storing the generated key in VirtualFS.' => 'Chyba pri ukladaní vygenerovaného kľúča do VirtualFS.',
+        'Error storing the generated certificate in VirtualFS.' => 'Chyba pri ukladaní vygenerovaného certifikátu do VirtualFS.',
+        'Could not find a certificate in the metadata. Please check the URL/XML and try again.' =>
+            'V metadátach sa nenašiel žiadny certifikát. Skontrolujte URL/XML a skúste to znova.',
+        'Error storing the certificate.' => 'Chyba pri ukladaní certifikátu.',
+        'Could not read the certificate from VirtualFS.' => 'Certifikát sa nepodarilo načítať z VirtualFS.',
+        'The authentication configuration was not deployed. The previously deployed configuration is still active.' =>
+            'Konfigurácia autentifikácie nebola nasadená. Predtým nasadená konfigurácia je stále aktívna.',
+        'Please check the system log for details.' => 'Podrobnosti nájdete v systémovom logu.',
+        'Authentication configuration not found.' => '',
+        'Could not set the authentication configuration to invalid.' => '',
 
         # Perl Module: Kernel/Modules/AdminAutoResponse.pm
         'Auto Response added!' => '',
@@ -5037,6 +5217,34 @@ sub Data {
         'Session invalid. Please log in again.' => 'Neplatná relácia. Prihláste sa znova prosím.',
         'Session has timed out. Please log in again.' => 'Časový limit relácie vypršal. Prihláste sa znova prosím.',
 
+        # Perl Module: Kernel/System/Authentication/Plugin/SAML.pm
+        'This is not an unencrypted private key in PEM format (-----BEGIN PRIVATE KEY-----).' =>
+            'Toto nie je nešifrovaný súkromný kľúč vo formáte PEM (-----BEGIN PRIVATE KEY-----).',
+        'This is not a certificate in PEM format (-----BEGIN CERTIFICATE-----).' =>
+            'Toto nie je certifikát vo formáte PEM (-----BEGIN CERTIFICATE-----).',
+        'The private key could not be read. Only unencrypted private keys are supported.' =>
+            'Súkromný kľúč sa nepodarilo načítať. Podporované sú iba nešifrované súkromné kľúče.',
+        'The certificate could not be read.' => 'Certifikát sa nepodarilo načítať.',
+        'Could not read the SP signing key.' => 'Podpisový kľúč SP sa nepodarilo načítať.',
+        'Could not read the IdP CA certificate.' => 'Certifikát CA IdP sa nepodarilo načítať.',
+        'No IdP CA certificate is stored. It is taken from the IdP metadata on every deploy. Save the configuration to store it.' =>
+            '',
+        'Could not decrypt the SP signing key. Please check the configured encryption key.' =>
+            'Podpisový kľúč SP sa nepodarilo dešifrovať. Skontrolujte nakonfigurovaný šifrovací kľúč.',
+        'Net::SAML2 is not installed on the server, metadata cannot be verified.' =>
+            'Net::SAML2 nie je na serveri nainštalovaný, metadáta nemožno overiť.',
+        'Metadata URL is empty.' => 'URL metadát je prázdna.',
+        'Metadata XML is empty.' => 'XML metadát je prázdne.',
+        'Could not parse the metadata. Please check the URL/XML and try again.' =>
+            'Metadáta sa nepodarilo spracovať. Skontrolujte URL/XML a skúste to znova.',
+        'Perl module Crypt::OpenSSL::X509 is not installed, certificate details cannot be parsed.' =>
+            'Modul Perl Crypt::OpenSSL::X509 nie je nainštalovaný, podrobnosti certifikátu nemožno spracovať.',
+        'Could not parse the certificate.' => 'Certifikát sa nepodarilo spracovať.',
+
+        # Perl Module: Kernel/System/AuthenticationConfig.pm
+        'No authentication plugin is registered for this type.' => 'Pre tento typ nie je zaregistrovaný žiadny autentifikačný plugin.',
+        'Could not write the certificate files.' => 'Súbory certifikátov sa nepodarilo zapísať.',
+
         # Perl Module: Kernel/System/AutoResponse.pm
         'Couldn\'t read auto response configuration file. Please make sure the file is valid.' =>
             '',
@@ -5557,7 +5765,6 @@ sub Data {
         'All Settings' => '',
 
         # Perl Module: Kernel/System/SysConfig/BaseValueType.pm
-        'Default' => '',
         'Value is not correct! Please, consider updating this field.' => '',
         'Value doesn\'t satisfy regex (%s).' => '',
 
@@ -6298,6 +6505,8 @@ sub Data {
             '',
         'Frontend module registration (disable company link if no company feature is used).' =>
             '',
+        'Registers the SAML 2.0 authentication plugin for AdminAuthentication.' =>
+            'Registruje autentifikačný plugin SAML 2.0 pre AdminAuthentication.',
         'Frontend module registration for the customer interface.' => '',
         'Activates the available themes on the system. Value 1 means active, 0 means inactive.' =>
             '',
@@ -8398,6 +8607,55 @@ sub Data {
             '',
         'Attachment was deleted successfully.' => '',
 
+        # JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?' =>
+            'Prepnutím zdroja metadát sa odstráni zadaná URL alebo XML metadát a možnosti SSL. Pokračovať?',
+        'Change metadata source' => 'Zmeniť zdroj metadát',
+        'Uploaded key' => 'Nahraný kľúč',
+        'EXPIRED' => 'VYPRŠAL',
+        'expires' => 'vyprší',
+        'used by %s configuration(s)' => 'použité v konfiguráciách: %s',
+        'Could not read the certificate.' => 'Certifikát sa nepodarilo načítať.',
+        'Certificate (PEM)' => 'Certifikát (PEM)',
+        'Issuer' => 'Vydavateľ',
+        'Valid from' => 'Platný od',
+        'Valid until' => 'Platný do',
+        'Serial' => 'Sériové číslo',
+        'Fingerprint (SHA-256)' => 'Odtlačok (SHA-256)',
+        'Show raw PEM' => 'Zobraziť nespracovaný PEM',
+        'Certificate details' => 'Podrobnosti certifikátu',
+        'Metadata is valid.' => 'Metadáta sú platné.',
+        'Entity ID' => 'ID entity',
+        'SSO URL' => 'URL SSO',
+        'Includes a signing certificate.' => 'Obsahuje podpisový certifikát.',
+        'No signing certificate found in the metadata.' => 'V metadátach sa nenašiel žiadny podpisový certifikát.',
+        'Found %s attribute(s) in the metadata.' => 'Počet atribútov nájdených v metadátach: %s.',
+        'Verifying...' => 'Overovanie...',
+        'Metadata verification failed.' => 'Overenie metadát zlyhalo.',
+        'Upload failed.' => 'Nahrávanie zlyhalo.',
+        'Please paste a certificate or key first.' => 'Najprv vložte certifikát alebo kľúč.',
+        'Saving the pasted certificate/key failed.' => 'Uloženie vloženého certifikátu/kľúča zlyhalo.',
+        'Certificate generation failed.' => 'Generovanie certifikátu zlyhalo.',
+        'Please select a metadata source (URL or XML) first.' => 'Najprv vyberte zdroj metadát (URL alebo XML).',
+        'Could not find a certificate in the metadata.' => 'V metadátach sa nenašiel žiadny certifikát.',
+        'Copied to clipboard!' => '',
+        'Do you really want to delete this SAML configuration?' => 'Naozaj chcete zmazať túto konfiguráciu SAML?',
+        'Delete SAML configuration' => 'Zmazať konfiguráciu SAML',
+        'There was an error deleting the SAML configuration.' => 'Pri mazaní konfigurácie SAML sa vyskytla chyba.',
+        'NameID (default)' => '',
+        '(pasted XML)' => '(vložené XML)',
+        'Not configured yet' => 'Zatiaľ nenakonfigurované',
+        'Identity provider metadata' => 'Metadáta poskytovateľa identity',
+        'SP signing key' => 'Podpisový kľúč SP',
+        'Configured' => 'Nakonfigurované',
+        'Not set' => 'Nenastavené',
+        'SP signing certificate' => 'Podpisový certifikát SP',
+        'Not set (will be taken from the metadata when saving)' => '',
+        'User sync' => 'Synchronizácia užívateľov',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)' =>
+            'Zapnutá (mapovania atribútov: %s, pravidlá skupín: %s, pravidlá rolí: %s)',
+        'Please fill in all required fields before continuing.' => 'Pred pokračovaním vyplňte všetky povinné polia.',
+
         # JS File: var/httpd/htdocs/js/Core.Agent.Admin.AutoResponse.js
         'Delete this %s' => '',
         'Deleting the %s and its data. This may take a while...' => '',
@@ -8604,9 +8862,6 @@ sub Data {
         'Please select attachments for download.' => '',
         'Show less' => '',
 
-        # JS File: var/httpd/htdocs/js/Core.Agent.CopyTicketNumber.js
-        'Copied to clipboard!' => '',
-
         # JS File: var/httpd/htdocs/js/Core.Agent.CustomerSearch.js
         'First select a customer user, then select a customer ID to assign to this ticket.' =>
             '',
@@ -8651,9 +8906,6 @@ sub Data {
         # JS File: var/httpd/htdocs/js/Core.Agent.Search.js
         'Please remove the following words from your search as they cannot be searched for:' =>
             'Prosím vymažte nasledujúce slová z Vášho vyhľadávania, nie je ich možné použiť na tento účel',
-
-        # JS File: var/httpd/htdocs/js/Core.Agent.SharedSecretGenerator.js
-        'Generate' => '',
 
         # JS File: var/httpd/htdocs/js/Core.Agent.SortedTree.js
         'This element has children elements and can currently not be removed.' =>
@@ -9207,6 +9459,7 @@ Thanks for your help!
         'Manage POP3 or IMAP accounts to fetch email from.' => '',
         'Manage S/MIME certificates for email encryption.' => '',
         'Manage System Configuration Deployments.' => '',
+        'Manage agent and customer authentication (e.g. SAML 2.0).' => 'Správa autentifikácie agentov a zákazníkov (napr. SAML 2.0).',
         'Manage different calendars.' => '',
         'Manage existing sessions.' => '',
         'Manage outbound email profiles.' => '',
@@ -9332,6 +9585,7 @@ Thanks for your help!
         'Running Process Tickets' => '',
         'Russian' => '',
         'S/MIME Certificates' => 'S/MIME Certifikáty',
+        'SAML' => 'SAML',
         'Schedule a maintenance period.' => '',
         'Screen after marking as seen' => '',
         'Screen after marking as unseen' => '',
@@ -9563,6 +9817,7 @@ Thanks for your help!
         '%s MB',
         '%s TB',
         '%s of %s',
+        '(pasted XML)',
         '+%s more',
         'A key with this name (\'%s\') already exists.',
         'A package upgrade was recently finished. Click here to see the results.',
@@ -9577,6 +9832,7 @@ Thanks for your help!
         'Add new entry',
         'Add to favourites',
         'Agent',
+        'Agent authentication',
         'All occurrences',
         'All-day',
         'An Error Occurred',
@@ -9599,6 +9855,7 @@ Thanks for your help!
         'Article filter',
         'As soon as you use this button or link, you will leave this screen and its current state will be saved automatically. Do you want to continue?',
         'Ascending sort applied, ',
+        'Assertion consumer URL',
         'Attachment was deleted successfully.',
         'Attachments',
         'Aug',
@@ -9609,6 +9866,11 @@ Thanks for your help!
         'Calendar',
         'Cancel',
         'Cannot proceed',
+        'Certificate (PEM)',
+        'Certificate details',
+        'Certificate generation failed.',
+        'Certificate/key is stored in VirtualFS.',
+        'Change metadata source',
         'Clear',
         'Clear all',
         'Clear all filters',
@@ -9621,27 +9883,34 @@ Thanks for your help!
         'Clone',
         'Clone Process',
         'Clone web service',
+        'Close',
         'Close preview',
         'Close this dialog',
         'Collapse',
         'Complex %s with %s arguments',
+        'Configured',
         'Confirm',
         'Copied to clipboard!',
         'Copy Ticket Number',
         'Copy Ticket Number + Title',
         'Copy ticket information',
+        'Could not find a certificate in the metadata.',
         'Could not load activities.',
         'Could not open popup window. Please disable any popup blockers for this application.',
+        'Could not read the certificate.',
         'Current selection',
         'Currently not possible',
+        'Customer authentication',
         'Customer interface does not support articles not visible for customers.',
         'Customer user address book',
         'Date/Time',
         'Day',
         'Dec',
         'December',
+        'Decrypt encrypted assertions',
         'Delete',
         'Delete Entity',
+        'Delete SAML configuration',
         'Delete conditions',
         'Delete draft',
         'Delete error handling module',
@@ -9675,10 +9944,12 @@ Thanks for your help!
         'Deployment successful. You\'re being redirected...',
         'Descending sort applied, ',
         'Description',
+        'Disabled',
         'Dismiss',
         'Do not show this warning again.',
         'Do you really want to continue?',
         'Do you really want to delete "%s"?',
+        'Do you really want to delete this SAML configuration?',
         'Do you really want to delete this certificate?',
         'Do you really want to delete this dynamic field? ALL associated data will be LOST!',
         'Do you really want to delete this key?',
@@ -9695,11 +9966,14 @@ Thanks for your help!
         'Draft title',
         'Duplicate event.',
         'Duplicated entry',
+        'EXPIRED',
         'Edit Field Details',
         'Edit Transition "%s"',
         'Edit this setting',
         'Edit this transition',
+        'Enabled (%s attribute mappings, %s group rules, %s role rules)',
         'End date',
+        'Entity ID',
         'Error',
         'Error during AJAX communication',
         'Error during AJAX communication. Status: %s, Error: %s',
@@ -9713,8 +9987,10 @@ Thanks for your help!
         'February',
         'Filter',
         'Filters',
+        'Fingerprint (SHA-256)',
         'Finished',
         'First select a customer user, then select a customer ID to assign to this ticket.',
+        'Found %s attribute(s) in the metadata.',
         'Fr',
         'Fri',
         'Friday',
@@ -9724,13 +10000,18 @@ Thanks for your help!
         'Grouped',
         'Help',
         'Hide EntityIDs',
+        'Identity provider CA certificate',
+        'Identity provider metadata',
         'If you now leave this page, all open popup windows will be closed, too!',
         'Import web service',
+        'Includes a signing certificate.',
         'Information about the Znuny Daemon',
         'Insert selected customer user(s) into the "%s:" field.',
         'Invalid date (need a future date)!',
         'Invalid date (need a past date)!',
         'Invalid date!',
+        'Issuer',
+        'Issuer (SP entity ID)',
         'It is going to be deleted from the field, please try again.',
         'It is not possible to add a new event trigger because the event is not set.',
         'It is not possible to set this entry to invalid. All affected configuration settings have to be changed beforehand.',
@@ -9748,6 +10029,8 @@ Thanks for your help!
         'Loading, please wait...',
         'Loading...',
         'Location',
+        'Login attribute',
+        'Login button text',
         'Mail check successful.',
         'Mapping for Key',
         'Mapping for Key %s',
@@ -9755,15 +10038,20 @@ Thanks for your help!
         'March',
         'May',
         'May_long',
+        'Metadata is valid.',
+        'Metadata verification failed.',
         'Mo',
         'Mon',
         'Monday',
         'Month',
         'Name',
+        'NameID (default)',
         'Namespace %s could not be initialized, because %s could not be found.',
         'Next',
+        'No',
         'No Data Available.',
         'No TransitionActions assigned.',
+        'No certificate/key set.',
         'No data found.',
         'No dialogs assigned yet. Just pick an activity dialog from the list on the left and drag it here.',
         'No matches found.',
@@ -9771,10 +10059,14 @@ Thanks for your help!
         'No response from get package upgrade result.',
         'No response from get package upgrade run status.',
         'No response from package upgrade all.',
+        'No signing certificate found in the metadata.',
         'No sort applied, ',
         'No space left for the following files: %s',
         'No working hours',
         'Not available',
+        'Not configured yet',
+        'Not set',
+        'Not set (will be taken from the metadata when saving)',
         'Notice',
         'Notification',
         'Nov',
@@ -9791,10 +10083,13 @@ Thanks for your help!
         'Please either turn some off first or increase the limit in configuration.',
         'Please enter at least one search value or * to find anything.',
         'Please enter at least one search word to find anything.',
+        'Please fill in all required fields before continuing.',
         'Please only select at most %s files for upload.',
         'Please only select one file for upload.',
+        'Please paste a certificate or key first.',
         'Please remove the following words from your search as they cannot be searched for:',
         'Please see the documentation or ask your admin for further information.',
+        'Please select a metadata source (URL or XML) first.',
         'Please select attachments for download.',
         'Please turn off Compatibility Mode in Internet Explorer!',
         'Please wait...',
@@ -9828,11 +10123,15 @@ Thanks for your help!
         'Restore web service configuration',
         'Rule',
         'Running',
+        'SP signing certificate',
+        'SP signing key',
+        'SSO URL',
         'Sa',
         'Sat',
         'Saturday',
         'Save',
         'Save and update automatically',
+        'Saving the pasted certificate/key failed.',
         'Scale preview content',
         'Search',
         'Search attributes',
@@ -9845,6 +10144,7 @@ Thanks for your help!
         'Select files or drop them here',
         'Sep',
         'September',
+        'Serial',
         'Setting a template will overwrite any text or attachment.',
         'Settings',
         'Show',
@@ -9853,7 +10153,9 @@ Thanks for your help!
         'Show less',
         'Show more',
         'Show or hide the content.',
+        'Show raw PEM',
         'Slide the navigation bar',
+        'Slot',
         'Sorry, but you can\'t disable all methods for notifications marked as mandatory.',
         'Sorry, but you can\'t disable all methods for this notification.',
         'Sorry, the only existing condition can\'t be removed.',
@@ -9868,12 +10170,14 @@ Thanks for your help!
         'Status',
         'Stream',
         'Su',
+        'Subject',
         'Successful',
         'Sun',
         'Sunday',
         'Support Bundle',
         'Switch to desktop mode',
         'Switch to mobile mode',
+        'Switching the metadata source removes the entered metadata URL or XML and the SSL options. Continue?',
         'Team',
         'Th',
         'The activities could not be marked as seen.',
@@ -9895,6 +10199,7 @@ Thanks for your help!
         'There are currently no elements available to select from.',
         'There are no more drafts available.',
         'There is a package upgrade process running, click here to see status information about the upgrade progress.',
+        'There was an error deleting the SAML configuration.',
         'There was an error deleting the attachment. Please check the logs for more information.',
         'There was an error. Please save all settings you are editing and check the logs for more information.',
         'This Activity cannot be deleted because it is the Start Activity.',
@@ -9926,15 +10231,22 @@ Thanks for your help!
         'Tu',
         'Tue',
         'Tuesday',
+        'Type',
         'Unfortunately deploying is currently not possible, maybe because another agent is already deploying. Please try again later.',
         'Unknown',
         'Unlock setting.',
         'Update All Packages',
         'Update all packages',
         'Update manually',
+        'Upload failed.',
         'Upload information',
+        'Uploaded key',
         'Uploading...',
         'Use options below to narrow down for which tickets appointments will be automatically created.',
+        'User sync',
+        'Valid from',
+        'Valid until',
+        'Verifying...',
         'WARNING: When you change the name of the group \'admin\', before making the appropriate changes in the SysConfig, you will be locked out of the administrations panel! If this happens, please rename the group back to admin per SQL statement.',
         'Warning',
         'We',
@@ -9951,12 +10263,14 @@ Thanks for your help!
         'activate to remove the sort',
         'and %s more...',
         'day',
+        'expires',
         'month',
         'more',
         'no',
         'none',
         'or',
         'sorting is disabled',
+        'used by %s configuration(s)',
         'week',
         'yes',
     ];
