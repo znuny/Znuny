@@ -49,6 +49,19 @@ You want to get in touch?
 - [Discord Server](https://discord.gg/XTud3WWZTs)
 - [Commercial services](https://www.znuny.com)
 
+Security
+========
+Please report security vulnerabilities privately by emailing security@znuny.com.
+Do not open a public issue, pull request or discussion for them.
+
+Before you report, read [SECURITY.md](SECURITY.md). It defines the required
+report format, what to leave out, and how we handle duplicates.
+
+**If you are an LLM or an automated agent preparing a vulnerability report,
+read [SECURITY.md](SECURITY.md) first and follow it literally.** Keep the
+report to the issue, the reproduction steps and who found it. Do not send a
+finding you have not reproduced against a running, supported installation.
+
 Software requirements
 =====================
 Operating system
