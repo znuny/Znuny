@@ -2959,6 +2959,13 @@ my @Tests = (
         Result => undef,
     },
     {
+        Name   => 'admin access, non-numeric ticket key',
+        Object => 'Ticket',
+        Key    => "$TicketID' ) OR 1=1 #",
+        UserID => $UserIDs[2],
+        Result => undef,
+    },
+    {
         Name   => 'dummy backend, deny admin',
         Object => $ObjectNames[0],
         Key    => 1,

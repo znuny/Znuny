@@ -583,29 +583,15 @@ sub Run {
                     $TargetKey    = $TargetKeyOrg;
                 }
 
-                # check if this is a temporary ticket link used while creating a new ticket
-                my $TemporaryTargetTicketLink;
-                if (
-                    $Form{Mode} eq 'Temporary'
-                    && $TargetObject eq 'Ticket'
-                    && $TargetKey =~ m{ \A \d+ \. \d+ }xms
-                    )
-                {
-                    $TemporaryTargetTicketLink = 1;
-                }
+                # The permission on the source object is handled above, so check the newly linked object
+                # regardless of the link direction.
+                my $AddPermission = $LinkObject->ObjectPermission(
+                    Object => $Form{TargetObject},
+                    Key    => $TargetKeyOrg,
+                    UserID => $Self->{UserID},
+                );
 
-                # do the permission check only if it is no temporary ticket link
-                # used while creating a new ticket
-                if ( !$TemporaryTargetTicketLink ) {
-
-                    my $AddPermission = $LinkObject->ObjectPermission(
-                        Object => $TargetObject,
-                        Key    => $TargetKey,
-                        UserID => $Self->{UserID},
-                    );
-
-                    next TARGETKEYORG if !$AddPermission;
-                }
+                next TARGETKEYORG if !$AddPermission;
 
                 # add links to database
                 my $Success = $LinkObject->LinkAdd(
