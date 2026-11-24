@@ -910,6 +910,22 @@ sub Run {
             return $Output;
         }
 
+        # Reject targets that are not linked, or that this agent may not use,
+        # before any ticket is changed.
+        if ( $Self->{Subaction} eq 'Store' ) {
+            my $LinkedTicketsPermitted = $Self->_LinkedTicketWritePermitted(
+                LinkedTicketIDs => $Param{LinkedTicketIDs},
+            );
+            if ( !$LinkedTicketsPermitted ) {
+                return $LayoutObject->NoPermission(
+                    Message => $LayoutObject->{LanguageObject}->Translate(
+                        'You need %s permissions!', $Config->{Permission}
+                    ),
+                    WithHeader => 'yes',
+                );
+            }
+        }
+
         # set new title
         if ( $Config->{Title} ) {
             if ( defined $GetParam{Title} ) {
@@ -3239,10 +3255,38 @@ sub _GetQueues {
     return \%Queues;
 }
 
+sub _LinkedTicketWritePermitted {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+
+    my $Config               = $ConfigObject->Get("Ticket::Frontend::$Self->{Action}");
+    my $AllowedLinkedTickets = $Self->_GetLinkedTickets() || {};
+
+    for my $LinkedTicketID ( @{ $Param{LinkedTicketIDs} // [] } ) {
+        if (
+            !IsPositiveInteger($LinkedTicketID)
+            || !$AllowedLinkedTickets->{$LinkedTicketID}
+            )
+        {
+            return 0;
+        }
+
+        my $Access = $TicketObject->TicketPermission(
+            Type     => $Config->{Permission},
+            TicketID => $LinkedTicketID,
+            UserID   => $Self->{UserID},
+        );
+        return 0 if !$Access;
+    }
+
+    return 1;
+}
+
 sub _GetLinkedTickets {
     my ( $Self, %Param ) = @_;
 
-    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
     my $LinkObject   = $Kernel::OM->Get('Kernel::System::LinkObject');
     my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
 
@@ -3254,7 +3298,7 @@ sub _GetLinkedTickets {
         Key1    => $Self->{TicketID},
         Object2 => 'Ticket',
         State   => 'Valid',
-        UserID  => 1,
+        UserID  => $Self->{UserID},
     );
 
     # fill up hash for BuildSelection()
@@ -3263,9 +3307,20 @@ sub _GetLinkedTickets {
     KEY:
     for my $Key ( sort keys %LinkList ) {
         if ( $LinkList{$Key}->{StateType} ne 'merged' ) {
+            next KEY if !$Self->_LinkedTicketVisible(
+                TicketID => $Key,
+            );
             $ResultList{$Key} = $LinkList{$Key}->{TicketNumber} . ' - ' . $LinkList{$Key}->{Title};
             next KEY;
         }
+
+        # Do not read the history of a merged ticket the agent cannot see.
+        next KEY if !$TicketObject->TicketPermission(
+            Type     => 'ro',
+            TicketID => $Key,
+            UserID   => $Self->{UserID},
+            LogNo    => 1,
+        );
 
         # open ticket
         # get first article
@@ -3276,23 +3331,65 @@ sub _GetLinkedTickets {
         );
 
         my $MergedTicketID;
+        HISTORYLINE:
         for my $HistoryLine (@HistoryLines) {
             my %HistoryData = %{$HistoryLine};
 
-            if ( $HistoryData{HistoryType} eq 'Merged' ) {
-                $HistoryData{Name} =~ /to \(\d*\/(\d{1,})\)/;
+            next HISTORYLINE if $HistoryData{HistoryType} ne 'Merged';
+
+            # Current history stores %%TicketNumber%%TicketID%%TicketNumber%%TicketID.
+            # Older rows use the display text "to (TicketNumber/TicketID)".
+            if ( $HistoryData{Name} =~ /^.*%%\d+?%%(\d+?)$/ ) {
+                $MergedTicketID = $1;
+            }
+            elsif ( $HistoryData{Name} =~ /to \(\d*\/(\d+)\)/ ) {
                 $MergedTicketID = $1;
             }
         }
 
         # use only the last "merged" result
-        my %MergedTicketData = $TicketObject->TicketGet(
-            TicketID => $MergedTicketID
+        next KEY if !$MergedTicketID;
+        next KEY if !$Self->_LinkedTicketVisible(
+            TicketID => $MergedTicketID,
         );
+
+        my %MergedTicketData = $TicketObject->TicketGet(
+            TicketID => $MergedTicketID,
+            UserID   => $Self->{UserID},
+        );
+        next KEY if !%MergedTicketData;
+
         $ResultList{$MergedTicketID} = $MergedTicketData{TicketNumber} . ' - ' . $MergedTicketData{Title};
     }
 
     return \%ResultList;
+}
+
+sub _LinkedTicketVisible {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+
+    return if !$Param{TicketID};
+
+    my $CanRead = $TicketObject->TicketPermission(
+        Type     => 'ro',
+        TicketID => $Param{TicketID},
+        UserID   => $Self->{UserID},
+        LogNo    => 1,
+    );
+    return if !$CanRead;
+
+    my $Config = $ConfigObject->Get("Ticket::Frontend::$Self->{Action}");
+    return if !$Config->{Permission};
+
+    return $TicketObject->TicketPermission(
+        Type     => $Config->{Permission},
+        TicketID => $Param{TicketID},
+        UserID   => $Self->{UserID},
+        LogNo    => 1,
+    );
 }
 
 1;

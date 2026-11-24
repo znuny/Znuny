@@ -1,4 +1,5 @@
 # 7.5.1 2026-??-??
+ - 2026-11-25 Security: The "Note to linked ticket" dialog no longer writes to tickets that are not linked or that the agent may not use, and no longer shows linked tickets the agent may not see.
  - 2026-11-25 Security: Database queries now reject non-integer values for parameters "Limit" and "Start" before they are added to SQL.
  - 2026-11-25 Security: Agent ticket bulk action now requires write permission on the merge target and the link target.
  - 2026-11-25 Security: Process ticket split now requires read permission on the source ticket before its data is used/shown.
