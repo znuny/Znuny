@@ -18,6 +18,7 @@
 
             <div class="Field SpacingTop Hidden" id="TestError">
                 <p class="ErrorBox">[% Translate("Error while testing configuration. Please check the configuration.") | html %]</p>
+                <p class="ErrorMessage" id="TestErrorDetails"></p>
             </div>
 
             <div class="Field SpacingTop Hidden" id="TestSuccess">

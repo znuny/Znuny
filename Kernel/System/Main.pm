@@ -81,6 +81,17 @@ sub Require {
         return;
     }
 
+    if ( $Module !~ m{\A[A-Za-z_][A-Za-z0-9_]*(?:::[A-Za-z0-9_]+)*\z} ) {
+        if ( !$Param{Silent} ) {
+            $Kernel::OM->Get('Kernel::System::Log')->Log(
+                Caller   => 1,
+                Priority => 'error',
+                Message  => "Invalid module name '$Module'!",
+            );
+        }
+        return;
+    }
+
     eval {
         my $FileName = $Module =~ s{::}{/}smxgr;
         require $FileName . '.pm';

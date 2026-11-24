@@ -430,6 +430,7 @@ Znuny.DynamicField.Webservice = (function (TargetNS) {
                         $Button.prop('disabled', false);
 
                         if (Result['Success'] != 1) {
+                            $('#TestErrorDetails').text(Result['ErrorMessage'] || '');
                             $('#TestError').removeClass('Hidden');
                             return;
                         }

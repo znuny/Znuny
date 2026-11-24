@@ -133,6 +133,20 @@ sub Test {
         return $Result;
     }
 
+    my $BackendConfig = $Self->_BackendConfigGet(
+        DynamicFieldConfig => $DynamicFieldConfig,
+    );
+    my $BackendObject;
+    if ( IsHashRefWithData($BackendConfig) ) {
+        $BackendObject = $Self->_BackendObjectGet(
+            BackendConfig => $BackendConfig,
+        );
+    }
+    if ( !$BackendObject ) {
+        $Result->{ErrorMessage} = 'Invalid web service backend configuration.';
+        return $Result;
+    }
+
     my @StoredValue     = split /\s*,\s*/, $DynamicFieldConfig->{StoredValue};
     my @DisplayedValues = split /\s*,\s*/, $DynamicFieldConfig->{DisplayedValues};
     my %Attributes      = map { $_ => 1 } ( 'DisplayValue', @StoredValue, @DisplayedValues );
@@ -1505,6 +1519,14 @@ sub _BackendObjectGet {
 
     my $BackendConfig = $Param{BackendConfig};
     $BackendConfig->{Backend} ||= 'DirectRequest';
+
+    if ( $BackendConfig->{Backend} !~ m{\A[A-Za-z_][A-Za-z0-9_]*\z} ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Invalid webservice backend '$BackendConfig->{Backend}'.",
+        );
+        return;
+    }
 
     my $BaseClassName = "Kernel::System::DynamicField::Webservice::$BackendConfig->{Backend}";
 
