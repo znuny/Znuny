@@ -11,6 +11,7 @@ package Kernel::Modules::AgentTicketBulk;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language              qw(Translatable);
@@ -755,9 +756,10 @@ sub Run {
         my %ACLCompatGetParam;
         $ACLCompatGetParam{OwnerID} = $GetParam{OwnerID};
 
-        # if the tickets are to merged, precompute the ticket to merge to.
-        # (it's the same for all tickets, so do it only once):
+        # If the tickets are to be merged or linked to a parent, precompute the target.
+        # It is the same for all tickets, so do it only once.
         my $MainTicketID;
+        my $LinkParentTicketID;
 
         if ( ( $Self->{Subaction} eq 'Do' ) && ( !%Error ) ) {
 
@@ -766,15 +768,37 @@ sub Run {
                 $MainTicketID = $TicketObject->TicketIDLookup(
                     TicketNumber => $GetParam{'MergeTo'},
                 );
+
+                # Same response as an unknown ticket number, so a denied target
+                # does not confirm that the ticket number exists.
+                if ($MainTicketID) {
+                    my $MainTicketAccess = $TicketObject->TicketPermission(
+                        Type     => 'rw',
+                        TicketID => $MainTicketID,
+                        UserID   => $Self->{UserID},
+                    );
+                    if ( !$MainTicketAccess ) {
+                        $Error{'MergeToInvalid'} = 'ServerError';
+                        $MainTicketID = undef;
+                    }
+                }
             }
 
             # merge to oldest
             elsif ( $GetParam{'MergeToSelection'} eq 'OptionMergeToOldest' ) {
 
-                # find oldest
+                # find oldest ticket the agent can write
                 my $OldestCreateTime;
                 my $OldestTicketID;
+                TICKETIDCHECK:
                 for my $TicketIDCheck (@TicketIDs) {
+                    my $TicketAccess = $TicketObject->TicketPermission(
+                        Type     => 'rw',
+                        TicketID => $TicketIDCheck,
+                        UserID   => $Self->{UserID},
+                    );
+                    next TICKETIDCHECK if !$TicketAccess;
+
                     my %Ticket = $TicketObject->TicketGet(
                         TicketID      => $TicketIDCheck,
                         DynamicFields => 0,
@@ -785,6 +809,27 @@ sub Run {
                     }
                 }
                 $MainTicketID = $OldestTicketID;
+            }
+
+            # link to parent
+            if ( $GetParam{'LinkTogetherParent'} ) {
+                $LinkParentTicketID = $TicketObject->TicketIDLookup(
+                    TicketNumber => $GetParam{'LinkTogetherParent'},
+                );
+
+                # Same response as an unknown ticket number, so a denied target
+                # does not confirm that the ticket number exists.
+                if ($LinkParentTicketID) {
+                    my $LinkParentAccess = $TicketObject->TicketPermission(
+                        Type     => 'rw',
+                        TicketID => $LinkParentTicketID,
+                        UserID   => $Self->{UserID},
+                    );
+                    if ( !$LinkParentAccess ) {
+                        $Error{'LinkTogetherParentInvalid'} = 'ServerError';
+                        $LinkParentTicketID = undef;
+                    }
+                }
             }
         }
 
@@ -1200,35 +1245,46 @@ sub Run {
 
                 # merge
                 if ( $MainTicketID && $MainTicketID ne $TicketID ) {
-                    $TicketObject->TicketMerge(
-                        MainTicketID  => $MainTicketID,
-                        MergeTicketID => $TicketID,
-                        UserID        => $Self->{UserID},
+                    my $MainTicketAccess = $TicketObject->TicketPermission(
+                        Type     => 'rw',
+                        TicketID => $MainTicketID,
+                        UserID   => $Self->{UserID},
                     );
+                    if ($MainTicketAccess) {
+                        $TicketObject->TicketMerge(
+                            MainTicketID  => $MainTicketID,
+                            MergeTicketID => $TicketID,
+                            UserID        => $Self->{UserID},
+                        );
+                    }
                 }
 
                 # get link object
                 my $LinkObject = $Kernel::OM->Get('Kernel::System::LinkObject');
 
                 # link all tickets to a parent
-                if ( $GetParam{'LinkTogetherParent'} ) {
-                    my $MainTicketID = $TicketObject->TicketIDLookup(
-                        TicketNumber => $GetParam{'LinkTogetherParent'},
+                if ( $GetParam{'LinkTogetherParent'} && $LinkParentTicketID ) {
+                    my $LinkParentAccess = $TicketObject->TicketPermission(
+                        Type     => 'rw',
+                        TicketID => $LinkParentTicketID,
+                        UserID   => $Self->{UserID},
                     );
+                    if ($LinkParentAccess) {
 
-                    TICKETIDPARTNER:
-                    for my $TicketIDPartner (@TicketIDs) {
+                        TICKETIDPARTNER:
+                        for my $TicketIDPartner (@TicketIDs) {
 
-                        next TICKETIDPARTNER if $MainTicketID eq $TicketID;
-                        $LinkObject->LinkAdd(
-                            SourceObject => 'Ticket',
-                            SourceKey    => $MainTicketID,
-                            TargetObject => 'Ticket',
-                            TargetKey    => $TicketID,
-                            Type         => 'ParentChild',
-                            State        => 'Valid',
-                            UserID       => $Self->{UserID},
-                        );
+                            next TICKETIDPARTNER if $LinkParentTicketID eq $TicketID;
+                            $LinkObject->LinkAdd(
+                                SourceObject => 'Ticket',
+                                SourceKey    => $LinkParentTicketID,
+                                TargetObject => 'Ticket',
+                                TargetKey    => $TicketID,
+                                Type         => 'ParentChild',
+                                State        => 'Valid',
+                                UserID       => $Self->{UserID},
+                            );
+                        }
                     }
                 }
 
@@ -1238,6 +1294,13 @@ sub Run {
                     for my $TicketIDPartner (@TicketIDs) {
 
                         next TICKETIDPARTNER if $TicketID == $TicketIDPartner;
+
+                        my $PartnerAccess = $TicketObject->TicketPermission(
+                            Type     => 'rw',
+                            TicketID => $TicketIDPartner,
+                            UserID   => $Self->{UserID},
+                        );
+                        next TICKETIDPARTNER if !$PartnerAccess;
 
                         $LinkObject->LinkAdd(
                             SourceObject => 'Ticket',
