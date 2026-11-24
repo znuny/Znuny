@@ -127,9 +127,10 @@
          * @return {Array} Array of customer objects
          */
         extractCustomerData: function() {
-            var customers, customerDataScript, cleanedJson, customerData, extractedCustomers, configGetKey;
+            var customers, customerDataScript, cleanedJson, customerData, extractedCustomers, configGetKey, that;
 
             customers = [];
+            that = this;
 
             // Get customer data from JSON
             try {
@@ -144,15 +145,7 @@
                     customerData = JSON.parse(cleanedJson);
                     if (Array.isArray(customerData) && customerData.length > 0) {
                         extractedCustomers = customerData.map(function (customer) {
-                            var hasErrors = Boolean(customer.disabled);
-
-                            return {
-                            value: customer.customerKey,
-                            name: customer.customerElement,
-                            selected: customer.selected,
-                            disabled: customer.disabled,
-                            errors: hasErrors ? customer.errors : {}
-                            };
+                            return that.decodeTemplateCustomer(customer);
                         });
 
                         return extractedCustomers;
@@ -173,15 +166,7 @@
                     customerData = JSON.parse(cleanedJson);
                     if (Array.isArray(customerData) && customerData.length > 0) {
                         extractedCustomers = customerData.map(function (customer) {
-                            var hasErrors = Boolean(customer.disabled);
-
-                            return {
-                                value: customer.customerKey,
-                                name: customer.customerElement,
-                                selected: customer.selected,
-                                disabled: customer.disabled,
-                                errors: hasErrors ? customer.errors : {}
-                            };
+                            return that.decodeTemplateCustomer(customer);
                         });
 
                         return extractedCustomers;
@@ -214,6 +199,55 @@
             }
 
             return customers;
+        },
+
+        /**
+         * Converts one customer entry of the customerData JSON into plain text values.
+         * The template writes these values with the TT "html" filter.
+         *
+         * @method decodeTemplateCustomer
+         * @param {Object} customer - Customer entry as written by the template
+         * @return {Object} Customer object with plain text values
+         */
+        decodeTemplateCustomer: function (customer) {
+            var errors, that;
+
+            errors = {};
+            that = this;
+
+            if (customer.disabled && customer.errors) {
+                Object.keys(customer.errors).forEach(function (key) {
+                    errors[key] = typeof customer.errors[key] === 'string'
+                        ? that.decodeHtmlEntities(customer.errors[key])
+                        : customer.errors[key];
+                });
+            }
+
+            return {
+                value: this.decodeHtmlEntities(customer.customerKey),
+                name: this.decodeHtmlEntities(customer.customerElement),
+                selected: customer.selected,
+                disabled: customer.disabled,
+                errors: errors
+            };
+        },
+
+        /**
+         * Reverses the TT "html" filter (&amp; &lt; &gt; &quot; &#39;).
+         *
+         * @method decodeHtmlEntities
+         * @param {String} str - The string to decode
+         * @return {String} The decoded string
+         */
+        decodeHtmlEntities: function (str) {
+            str = (str === null || typeof str === 'undefined') ? '' : String(str);
+
+            return str
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&quot;/g, '"')
+                .replace(/&#39;/g, '\'')
+                .replace(/&amp;/g, '&');
         },
 
         /**
@@ -594,20 +628,14 @@
         },
 
         /**
-         * Escapes HTML in a string if it's not already escaped
+         * Escapes HTML in a string. Input must be plain text.
          *
          * @method escapeHtml
          * @param {String} str - The string to escape
          * @return {String} The escaped string
          */
         escapeHtml: function(str) {
-            // Check if the string already contains HTML entities
-            if (str.indexOf('&lt;') !== -1 || str.indexOf('&gt;') !== -1 || str.indexOf('&quot;') !== -1) {
-                // String is already escaped, return as is
-                return str;
-            }
-            // String is not escaped, apply escaping
-            return str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            return this.escapeHtmlAttr(str);
         },
 
         /**
@@ -699,7 +727,7 @@
                 if (errors[key] !== false && typeof errors[key] === 'string') {
                     errorsHtml += '<p>' + this.escapeHtmlAttr(errors[key]) + '</p>';
                 }
-            });
+            }, this);
 
             errorsHtml += '</div>';
             return errorsHtml;
@@ -780,7 +808,7 @@
         },
 
         /**
-         * Escapes HTML attribute special characters if not already escaped
+         * Escapes HTML special characters for text and attribute values. Input must be plain text.
          *
          * @method escapeHtmlAttr
          * @param {String} str - The string to escape
@@ -788,16 +816,11 @@
          */
         escapeHtmlAttr: function (str) {
             str = (str === null || typeof str === 'undefined') ? '' : String(str);
-            // Check if the string already contains HTML entities
-            if (str.indexOf('&amp;') !== -1 || str.indexOf('&quot;') !== -1 ||
-                str.indexOf('&lt;') !== -1 || str.indexOf('&gt;') !== -1) {
-                // String is already escaped, return as is
-                return str;
-            }
-            // String is not escaped, apply escaping
+
             return str
                 .replace(/&/g, '&amp;')
                 .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;')
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;');
         },
