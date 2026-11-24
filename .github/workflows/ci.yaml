@@ -103,6 +103,20 @@ jobs:
     name: Database:InitialInsert
     runs-on: ubuntu-latest
     container: debian:12-slim
+    env:
+      DB: mysql
+      MYSQL_USER: "znuny"
+      MYSQL_ROOT_PASSWORD: "secret"
+      MYSQL_PASSWORD: "secret"
+      MYSQL_DATABASE: "znuny"
+    services:
+      mariadb:
+        image: mariadb:10
+        env:
+          MYSQL_USER: "znuny"
+          MYSQL_ROOT_PASSWORD: "secret"
+          MYSQL_PASSWORD: "secret"
+          MYSQL_DATABASE: "znuny"
     steps:
       - name: Check out repository code
         uses: actions/checkout@v7
