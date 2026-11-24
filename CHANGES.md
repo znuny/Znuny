@@ -63,6 +63,7 @@
  - 2026-10-27 Fixed: Customer user e-mail address uniqueness is now checked across all customer user backends.
  - 2026-10-26 Fixed: PostMaster filter ExternalTicketNumberRecognition ignores CC.
  - 2026-10-26 Fixed: Customers already selected on a ticket still appeared as selectable in the customer user address book.
+ - 2026-10-19 Security: Generic interface XSLT mapping no longer evaluates regex replacements as Perl code and restricts file, network and write access. Thanks to Gabriel Rodrigues and João Pedro Gonçalves (Hakai Offensive Security (hakaisecurity.io)) for reporting this issue.
  - 2026-10-23 Fixed: SAML auth IdP metadata download now uses the WebUserAgent config options.
  - 2026-10-19 Fixed: Console command to export/import dynamic field configs used different format than the GUI version.
  - 2026-10-16 Fixed: Closing the "add draft" dialog via the header X, a click outside the dialog, or Escape left form validation disabled, so the ticket action could be submitted without required fields.

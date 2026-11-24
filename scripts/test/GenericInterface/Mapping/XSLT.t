@@ -27,7 +27,512 @@ my $DebuggerObject = Kernel::GenericInterface::Debugger->new(
     CommunicationType => 'Provider',
 );
 
+my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
+my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+
+my $RandomID = $HelperObject->GetRandomID();
+my $TempDir  = $Kernel::OM->Get('Kernel::Config')->Get('TempDir');
+
+my $SecretContent = "SecretContent$RandomID";
+my $SecretFile    = "$TempDir/XSLTSecret$RandomID.xml";
+$MainObject->FileWrite(
+    Location => $SecretFile,
+    Content  => \"<Secret>$SecretContent</Secret>",
+);
+
+# A valid style sheet outside of Kernel/GenericInterface/Mapping. Importing it must be denied,
+#   even though it is a style sheet, because only the shipped style sheets may be imported.
+my $SecretXSLFile = "$TempDir/XSLTSecret$RandomID.xsl";
+$MainObject->FileWrite(
+    Location => $SecretXSLFile,
+    Content  => \qq{<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:template match="/RootElement"><NewRootElement><Secret>$SecretContent</Secret></NewRootElement></xsl:template>
+</xsl:stylesheet>},
+);
+
+# A plain text file, because external entities can read any text file, not only XML files.
+my $SecretTextFile = "$TempDir/XSLTSecret$RandomID.txt";
+$MainObject->FileWrite(
+    Location => $SecretTextFile,
+    Content  => \"$SecretContent plain text",
+);
+
+my $WrittenFile = "$TempDir/XSLTWritten$RandomID.xml";
+
+# Resources which must not be loaded via xsl:import or xsl:include.
+#   They are resolved while parsing the style sheet, where the security callbacks
+#   for document() and exsl:document are not applied.
+#   The supported import of the shipped style sheets is tested further below
+#   ('Test replacement with custom functions').
+my @ForbiddenImports = (
+    {
+        Name => 'style sheet in temp directory',
+        Href => $SecretXSLFile,
+    },
+    {
+        Name => 'style sheet in temp directory via file URI',
+        Href => "file://$SecretXSLFile",
+    },
+    {
+        Name => 'system configuration file',
+        Href => "$Home/Kernel/Config/Files/XML/Framework.xml",
+    },
+    {
+        Name => 'path leaving the mapping directory',
+        Href => "$Home/Kernel/GenericInterface/Mapping/../../Config.pm",
+    },
+    {
+        Name => 'network URL',
+        Href => "http://127.0.0.1:1/$RandomID.xsl",
+    },
+);
+
+# Create one test for xsl:import and one for xsl:include for every forbidden resource.
+my @ForbiddenImportTests;
+for my $ForbiddenImport (@ForbiddenImports) {
+    for my $Element (qw(import include)) {
+        push @ForbiddenImportTests, {
+            Name   => "Test xsl:$Element of $ForbiddenImport->{Name} is denied",
+            Config => {
+                Template => qq{<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:$Element href="$ForbiddenImport->{Href}" />
+<xsl:output method="xml" encoding="utf-8" indent="yes"/>
+<xsl:template match="/RootElement">
+<NewRootElement><NewKey>NewValue</NewKey></NewRootElement>
+</xsl:template>
+</xsl:stylesheet>},
+            },
+            Data => {
+                Key => 'Value',
+            },
+            ResultData       => undef,
+            ResultSuccess    => 0,
+            ConfigSuccess    => 1,
+            ForbiddenContent => $SecretContent,
+        };
+    }
+}
+
+my $AllowedStyleSheet = '<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:output method="xml" encoding="utf-8" indent="yes"/>
+<xsl:template match="/RootElement">
+<NewRootElement><NewKey>Imported</NewKey></NewRootElement>
+</xsl:template>
+</xsl:stylesheet>';
+
 my @MappingTests = (
+    {
+        Name   => 'Test document() local file read is denied',
+        Config => {
+            Template => qq{<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:output method="xml" encoding="utf-8" indent="yes"/>
+<xsl:template match="/RootElement">
+<NewRootElement><File><xsl:copy-of select="document('$SecretFile')"/></File></NewRootElement>
+</xsl:template>
+</xsl:stylesheet>},
+        },
+        Data => {
+            Key => 'Value',
+        },
+        ResultData       => undef,
+        ResultSuccess    => 0,
+        ConfigSuccess    => 1,
+        ForbiddenContent => $SecretContent,
+    },
+    {
+        Name   => 'Test document() local file read via file URI is denied',
+        Config => {
+            Template => qq{<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:output method="xml" encoding="utf-8" indent="yes"/>
+<xsl:template match="/RootElement">
+<NewRootElement><File><xsl:copy-of select="document('file://$SecretFile')"/></File></NewRootElement>
+</xsl:template>
+</xsl:stylesheet>},
+        },
+        Data => {
+            Key => 'Value',
+        },
+        ResultData       => undef,
+        ResultSuccess    => 0,
+        ConfigSuccess    => 1,
+        ForbiddenContent => $SecretContent,
+    },
+    {
+        Name   => 'Test document() of system configuration file is denied',
+        Config => {
+            Template => qq{<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:output method="xml" encoding="utf-8" indent="yes"/>
+<xsl:template match="/RootElement">
+<NewRootElement><File><xsl:copy-of select="document('$Home/Kernel/Config/Files/XML/Framework.xml')"/></File></NewRootElement>
+</xsl:template>
+</xsl:stylesheet>},
+        },
+        Data => {
+            Key => 'Value',
+        },
+        ResultData       => undef,
+        ResultSuccess    => 0,
+        ConfigSuccess    => 1,
+        ForbiddenContent => 'otrs_config',
+    },
+    {
+        Name   => 'Test document() network read is denied',
+        Config => {
+            Template => qq{<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:output method="xml" encoding="utf-8" indent="yes"/>
+<xsl:template match="/RootElement">
+<NewRootElement><File><xsl:copy-of select="document('http://127.0.0.1:1/$RandomID')"/></File></NewRootElement>
+</xsl:template>
+</xsl:stylesheet>},
+        },
+        Data => {
+            Key => 'Value',
+        },
+        ResultData    => undef,
+        ResultSuccess => 0,
+        ConfigSuccess => 1,
+    },
+    {
+        Name   => 'Test document() of a mapping style sheet is allowed',
+        Config => {
+            Template => qq{<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:output method="xml" encoding="utf-8" indent="yes"/>
+<xsl:template match="/RootElement">
+<NewRootElement><Loaded><xsl:value-of select="document('$Home/Kernel/GenericInterface/Mapping/ZnunyFunctions.xsl')/*[1]/\@version"/></Loaded></NewRootElement>
+</xsl:template>
+</xsl:stylesheet>},
+        },
+        Data => {
+            Key => 'Value',
+        },
+        ResultData => {
+            Loaded => '1.0',
+        },
+        ResultSuccess => 1,
+        ConfigSuccess => 1,
+    },
+    {
+        Name                   => 'Test xsl:import of an allowed HTTPS prefix',
+        AllowedIncludePrefixes => [
+            'https://znuny.example/xslt/',
+        ],
+        WebUserAgentResponses => {
+            'https://znuny.example/xslt/allowed.xsl' => {
+                Status  => '200 OK',
+                Content => \$AllowedStyleSheet,
+            },
+        },
+        Config => {
+            Template => '<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:import href="https://znuny.example/xslt/allowed.xsl"/>
+<xsl:output method="xml" encoding="utf-8" indent="yes"/>
+</xsl:stylesheet>',
+        },
+        Data => {
+            Key => 'Value',
+        },
+        ResultData => {
+            NewKey => 'Imported',
+        },
+        ResultSuccess => 1,
+        ConfigSuccess => 1,
+    },
+    {
+        Name                   => 'Test xsl:import outside the configured HTTPS prefix is denied',
+        AllowedIncludePrefixes => [
+            'https://znuny.example/xslt/allowed.xsl',
+        ],
+        WebUserAgentResponses => {
+            'https://znuny.example/xslt/other.xsl' => {
+                Status  => '200 OK',
+                Content => \$AllowedStyleSheet,
+            },
+        },
+        Config => {
+            Template => '<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:import href="https://znuny.example/xslt/other.xsl"/>
+<xsl:output method="xml" encoding="utf-8" indent="yes"/>
+<xsl:template match="/RootElement">
+<NewRootElement><NewKey>Local</NewKey></NewRootElement>
+</xsl:template>
+</xsl:stylesheet>',
+        },
+        Data => {
+            Key => 'Value',
+        },
+        ResultData    => undef,
+        ResultSuccess => 0,
+        ConfigSuccess => 1,
+    },
+    {
+        Name                   => 'Test xsl:import with a different case is denied',
+        AllowedIncludePrefixes => [
+            'https://znuny.example/xslt/',
+        ],
+        WebUserAgentResponses => {
+            'https://Znuny.example/xslt/allowed.xsl' => {
+                Status  => '200 OK',
+                Content => \$AllowedStyleSheet,
+            },
+        },
+        Config => {
+            Template => '<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:import href="https://Znuny.example/xslt/allowed.xsl"/>
+<xsl:output method="xml" encoding="utf-8" indent="yes"/>
+</xsl:stylesheet>',
+        },
+        Data => {
+            Key => 'Value',
+        },
+        ResultData    => undef,
+        ResultSuccess => 0,
+        ConfigSuccess => 1,
+    },
+    {
+        Name                   => 'Test xsl:import of a neighboring host is denied',
+        AllowedIncludePrefixes => [
+            'https://znuny.example/xslt/',
+        ],
+        WebUserAgentResponses => {
+            'https://znuny.example.evil/xslt/allowed.xsl' => {
+                Status  => '200 OK',
+                Content => \$AllowedStyleSheet,
+            },
+        },
+        Config => {
+            Template => '<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:import href="https://znuny.example.evil/xslt/allowed.xsl"/>
+<xsl:output method="xml" encoding="utf-8" indent="yes"/>
+</xsl:stylesheet>',
+        },
+        Data => {
+            Key => 'Value',
+        },
+        ResultData    => undef,
+        ResultSuccess => 0,
+        ConfigSuccess => 1,
+    },
+    {
+        Name                   => 'Test an include prefix that does not start with https:// is ignored',
+        AllowedIncludePrefixes => [
+            'http://znuny.example/xslt/',
+        ],
+        WebUserAgentResponses => {
+            'http://znuny.example/xslt/allowed.xsl' => {
+                Status  => '200 OK',
+                Content => \$AllowedStyleSheet,
+            },
+        },
+        Config => {
+            Template => '<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:import href="http://znuny.example/xslt/allowed.xsl"/>
+<xsl:output method="xml" encoding="utf-8" indent="yes"/>
+</xsl:stylesheet>',
+        },
+        Data => {
+            Key => 'Value',
+        },
+        ResultData    => undef,
+        ResultSuccess => 0,
+        ConfigSuccess => 1,
+    },
+    {
+        Name                   => 'Test xsl:import follows a redirect that stays inside the prefix',
+        AllowedIncludePrefixes => [
+            'https://znuny.example/xslt/',
+        ],
+        WebUserAgentResponses => {
+            'https://znuny.example/xslt/start.xsl' => {
+                Status   => '302 Found',
+                Location => 'https://znuny.example/xslt/allowed.xsl',
+            },
+            'https://znuny.example/xslt/allowed.xsl' => {
+                Status  => '200 OK',
+                Content => \$AllowedStyleSheet,
+            },
+        },
+        Config => {
+            Template => '<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:import href="https://znuny.example/xslt/start.xsl"/>
+<xsl:output method="xml" encoding="utf-8" indent="yes"/>
+</xsl:stylesheet>',
+        },
+        Data => {
+            Key => 'Value',
+        },
+        ResultData => {
+            NewKey => 'Imported',
+        },
+        ResultSuccess => 1,
+        ConfigSuccess => 1,
+    },
+    {
+        Name                   => 'Test xsl:import denies a redirect outside the prefix',
+        AllowedIncludePrefixes => [
+            'https://znuny.example/xslt/',
+        ],
+        WebUserAgentResponses => {
+            'https://znuny.example/xslt/start.xsl' => {
+                Status   => '302 Found',
+                Location => 'https://evil.example/secret.xsl',
+            },
+            'https://evil.example/secret.xsl' => {
+                Status  => '200 OK',
+                Content => \$AllowedStyleSheet,
+            },
+        },
+        Config => {
+            Template => '<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:import href="https://znuny.example/xslt/start.xsl"/>
+<xsl:output method="xml" encoding="utf-8" indent="yes"/>
+</xsl:stylesheet>',
+        },
+        Data => {
+            Key => 'Value',
+        },
+        ResultData    => undef,
+        ResultSuccess => 0,
+        ConfigSuccess => 1,
+    },
+    {
+        Name   => 'Test exsl:document file write is denied',
+        Config => {
+            Template => qq{<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0"
+ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+ xmlns:exsl="http://exslt.org/common"
+ extension-element-prefixes="exsl">
+<xsl:output method="xml" encoding="utf-8" indent="yes"/>
+<xsl:template match="/RootElement">
+<exsl:document href="$WrittenFile"><Written/></exsl:document>
+<NewRootElement><NewKey>NewValue</NewKey></NewRootElement>
+</xsl:template>
+</xsl:stylesheet>},
+        },
+        Data => {
+            Key => 'Value',
+        },
+        ResultData     => undef,
+        ResultSuccess  => 0,
+        ConfigSuccess  => 1,
+        ForbiddenFiles => [$WrittenFile],
+    },
+    @ForbiddenImportTests,
+
+    # External entities in the template could read local files or URLs while loading the template.
+    {
+        Name   => 'Test external entity of XML file in template is denied',
+        Config => {
+            Template => qq{<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xsl:stylesheet [<!ENTITY secret SYSTEM "file://$SecretFile">]>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:output method="xml" encoding="utf-8" indent="yes"/>
+<xsl:template match="/RootElement">
+<NewRootElement><File>&secret;</File></NewRootElement>
+</xsl:template>
+</xsl:stylesheet>},
+        },
+        Data => {
+            Key => 'Value',
+        },
+        ResultData       => undef,
+        ResultSuccess    => 0,
+        ConfigSuccess    => 1,
+        ForbiddenContent => $SecretContent,
+    },
+    {
+        Name   => 'Test external entity of plain text file in template is denied',
+        Config => {
+            Template => qq{<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xsl:stylesheet [<!ENTITY secret SYSTEM "$SecretTextFile">]>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:output method="xml" encoding="utf-8" indent="yes"/>
+<xsl:template match="/RootElement">
+<NewRootElement><File>&secret;</File></NewRootElement>
+</xsl:template>
+</xsl:stylesheet>},
+        },
+        Data => {
+            Key => 'Value',
+        },
+        ResultData       => undef,
+        ResultSuccess    => 0,
+        ConfigSuccess    => 1,
+        ForbiddenContent => $SecretContent,
+    },
+
+    # The mapped data is passed to XML::Simple, which treats a string without XML markup as a file name
+    #   and expands entities of a DOCTYPE. With method="text", a template can produce both.
+    {
+        Name   => 'Test text output used as file name is denied',
+        Config => {
+            Template => qq{<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:output method="text" encoding="utf-8"/>
+<xsl:template match="/RootElement"><xsl:text>$SecretFile</xsl:text></xsl:template>
+</xsl:stylesheet>},
+        },
+        Data => {
+            Key => 'Value',
+        },
+        ResultData       => undef,
+        ResultSuccess    => 0,
+        ConfigSuccess    => 1,
+        ForbiddenContent => $SecretContent,
+    },
+    {
+        Name   => 'Test text output with external entity is denied',
+        Config => {
+            Template => qq{<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:output method="text" encoding="utf-8"/>
+<xsl:template match="/RootElement"><xsl:text>&lt;!DOCTYPE NewRootElement [&lt;!ENTITY secret SYSTEM "file://$SecretTextFile"&gt;]&gt;&lt;NewRootElement&gt;&lt;File&gt;&amp;secret;&lt;/File&gt;&lt;/NewRootElement&gt;</xsl:text></xsl:template>
+</xsl:stylesheet>},
+        },
+        Data => {
+            Key => 'Value',
+        },
+        ResultData       => undef,
+        ResultSuccess    => 0,
+        ConfigSuccess    => 1,
+        ForbiddenContent => $SecretContent,
+    },
+
+    # Well-formed XML produced with method="text" must still be accepted.
+    {
+        Name   => 'Test well-formed text output is accepted',
+        Config => {
+            Template => qq{<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:output method="text" encoding="utf-8"/>
+<xsl:template match="/RootElement"><xsl:text>&lt;NewRootElement&gt;&lt;NewKey&gt;NewValue&lt;/NewKey&gt;&lt;/NewRootElement&gt;</xsl:text></xsl:template>
+</xsl:stylesheet>},
+        },
+        Data => {
+            Key => 'Value',
+        },
+        ResultData => {
+            NewKey => 'NewValue',
+        },
+        ResultSuccess => 1,
+        ConfigSuccess => 1,
+    },
     {
         Name   => 'Test invalid xml',
         Config => {
@@ -370,8 +875,31 @@ my @MappingTests = (
     },
 );
 
+my %WebUserAgentResponseByURL;
+my $OriginalWebUserAgentRequest = \&Kernel::System::WebUserAgent::Request;
+
+{
+    no warnings 'redefine';    ## no critic
+
+    *Kernel::System::WebUserAgent::Request = sub {
+        my ( $WebUserAgentObject, %Param ) = @_;
+
+        my $Response = $WebUserAgentResponseByURL{ $Param{URL} // '' };
+        return ( Status => '500 No mock' ) if ref $Response ne 'HASH';
+
+        return %{$Response};
+    };
+}
+
 TEST:
 for my $Test (@MappingTests) {
+
+    $ConfigObject->Set(
+        Key   => 'GenericInterface::Mapping::XSLT::AllowedIncludeURLPrefixes',
+        Value => $Test->{AllowedIncludePrefixes} // [],
+    );
+
+    %WebUserAgentResponseByURL = %{ $Test->{WebUserAgentResponses} // {} };
 
     # create a mapping instance
     my $MappingObject = Kernel::GenericInterface::Mapping->new(
@@ -424,6 +952,22 @@ for my $Test (@MappingTests) {
         );
     }
 
+    if ( $Test->{ForbiddenContent} ) {
+        my $ResultDump = $MainObject->Dump( $MappingResult, 'ascii' );
+        $Self->False(
+            index( $ResultDump, $Test->{ForbiddenContent} ) > -1 ? 1 : 0,
+            $Test->{Name} . ' result does not contain forbidden content',
+        );
+    }
+
+    for my $ForbiddenFile ( @{ $Test->{ForbiddenFiles} // [] } ) {
+        $Self->False(
+            -e $ForbiddenFile ? 1 : 0,
+            $Test->{Name} . " file $ForbiddenFile was not created",
+        );
+        unlink $ForbiddenFile;
+    }
+
     # instantiate another object
     my $SecondMappingObject = Kernel::GenericInterface::Mapping->new(
         DebuggerObject => $DebuggerObject,
@@ -439,5 +983,12 @@ for my $Test (@MappingTests) {
         $Test->{Name} . ' SecondMappingObject was correctly instantiated',
     );
 }
+
+{
+    no warnings 'redefine';    ## no critic
+    *Kernel::System::WebUserAgent::Request = $OriginalWebUserAgentRequest;
+}
+
+unlink $SecretFile, $SecretXSLFile, $SecretTextFile;
 
 1;

@@ -77,6 +77,9 @@ Simple GET request:
         # Returns the response content (if available) if the request was not successful.
         # Otherwise only the status will be returned (default behavior).
         ReturnResponseContentOnError => 1, # optional
+
+        # Do not follow redirects. The Location header is returned for the caller to handle.
+        NoRedirect => 1, # optional, defaults to 0
     );
 
 Or a POST request; attributes can be a hashref like this:
@@ -202,6 +205,11 @@ sub Request {
     # set timeout
     $UserAgent->timeout( $Self->{Timeout} );
 
+    # The caller checks each redirect target itself.
+    if ( $Param{NoRedirect} ) {
+        $UserAgent->max_redirect(0);
+    }
+
     # set user agent
     my $UserAgentString = $ConfigObject->Get('WebUserAgent::UserAgent');
     $UserAgentString //= $ConfigObject->Get('Product') . ' ' . $ConfigObject->Get('Version');
@@ -243,6 +251,8 @@ sub Request {
         $EncodeObject->EncodeInput( \$ResponseContent );
     }
 
+    my $Location = $Response->header('Location');
+
     if ( !$Response->is_success() ) {
         if ( !$Param{NoLog} ) {
             $LogObject->Log(
@@ -254,6 +264,10 @@ sub Request {
         my %Response = (
             Status => $Response->status_line(),
         );
+
+        if ( IsStringWithData($Location) ) {
+            $Response{Location} = $Location;
+        }
 
         if (
             $Param{ReturnResponseContentOnError}

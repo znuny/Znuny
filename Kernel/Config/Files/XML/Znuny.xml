@@ -244,6 +244,15 @@
     <!--
         Generic interface
     -->
+    <Setting Name="GenericInterface::Mapping::XSLT::AllowedIncludeURLPrefixes" Required="0" Valid="1">
+        <Description Translatable="1">HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored.</Description>
+        <Navigation>GenericInterface::Mapping</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="String"></DefaultItem>
+            </Array>
+        </Value>
+    </Setting>
     <Setting Name="GenericInterface::Invoker::Module###Ticket::Generic" Required="1" Valid="1">
         <Description Translatable="1">GenericInterface module registration for the invoker layer.</Description>
         <Navigation>GenericInterface::Invoker::ModuleRegistration</Navigation>

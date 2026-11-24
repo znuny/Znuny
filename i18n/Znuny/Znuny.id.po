@@ -26563,3 +26563,7 @@ msgstr "Jumlah maksimum percobaan pendaftaran mandiri per alamat IP dalam jendel
 msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
 msgstr "Jendela waktu dalam detik untuk rate limiting pendaftaran mandiri. Percobaan dalam jendela ini dihitung terhadap maksimum."
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
+msgstr "Awalan URL HTTPS yang dapat dimuat oleh pemetaan XSLT dengan xsl:import, xsl:include, atau document(). Setiap entri harus diawali dengan https:// dan dibandingkan secara persis, termasuk besar kecil huruf, dengan awal URL yang diminta. Awalan host harus diakhiri dengan garis miring, misalnya https://znuny.de/. Awalan juga dapat menamai satu sumber daya, misalnya https://blabla.com/xslt/onlythisfile.txt. Daftar kosong menolak setiap URL jaringan. Entri yang tidak diawali dengan https:// diabaikan."
+

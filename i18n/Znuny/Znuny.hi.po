@@ -26549,3 +26549,7 @@ msgstr "rate limiting विंडो के भीतर प्रति IP प
 msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
 msgstr "स्व-पंजीकरण rate limiting के लिए समय विंडो (सेकंड में)। इस विंडो के भीतर के प्रयास अधिकतम के विरुद्ध गिने जाते हैं।"
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
+msgstr "HTTPS URL उपसर्ग जिन्हें एक XSLT मैपिंग xsl:import, xsl:include या document() से लोड कर सकती है। प्रत्येक प्रविष्टि https:// से शुरू होनी चाहिए और अनुरोधित URL की शुरुआत से अक्षरों के आकार सहित ठीक उसी रूप में तुलना की जाती है। होस्ट उपसर्ग स्लैश पर समाप्त होना चाहिए, उदाहरण के लिए https://znuny.de/। एक उपसर्ग एक ही संसाधन का नाम भी दे सकता है, उदाहरण के लिए https://blabla.com/xslt/onlythisfile.txt। खाली सूची प्रत्येक नेटवर्क URL को अस्वीकार करती है। जो प्रविष्टियाँ https:// से शुरू नहीं होतीं, उन्हें अनदेखा किया जाता है।"
+

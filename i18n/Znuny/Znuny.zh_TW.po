@@ -26551,3 +26551,7 @@ msgstr "在 rate limiting 視窗內每個 IP 位址允許的最大自助註冊�
 msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
 msgstr "自助註冊 rate limiting 的時間視窗（秒）。此視窗內的嘗試次數計入最大值。"
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
+msgstr "XSLT 對應可透過 xsl:import、xsl:include 或 document() 載入的 HTTPS URL 前綴。每一項都必須以 https:// 開頭，並與所要求 URL 的開頭精確比較（包括大小寫）。主機前綴應以斜線結尾，例如 https://znuny.de/。前綴也可以指定單一資源，例如 https://blabla.com/xslt/onlythisfile.txt。空白清單會拒絕所有網路 URL。不以 https:// 開頭的項目會被忽略。"
+

@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.999847024629035;
+    $Self->{Completeness}        = 0.99984704802692;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -8180,6 +8180,8 @@ sub Data {
             'Dialoge, für die es möglich ist, Standardspalten zu aktivieren oder zu deaktivieren.',
         'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
             'Aktiviert historische Werte für die Auswahl in dynamischen Feldtypen, die auf BaseSelect basieren (Dropdown und Multiselect). Deaktivieren Sie dies, wenn es zu Leistungsproblemen aufgrund zu vieler unterschiedlicher gespeicherter Werte kommt.',
+        'HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored.' =>
+            'HTTPS-URL-Präfixe, die ein XSLT-Mapping mit xsl:import, xsl:include oder document() laden darf. Jeder Eintrag muss mit https:// beginnen und wird exakt, einschließlich Groß- und Kleinschreibung, mit dem Anfang der angeforderten URL verglichen. Ein Host-Präfix sollte mit einem Schrägstrich enden, zum Beispiel https://znuny.de/. Ein Präfix kann auch eine einzelne Ressource benennen, zum Beispiel https://blabla.com/xslt/onlythisfile.txt. Eine leere Liste untersagt jede Netzwerk-URL. Einträge, die nicht mit https:// beginnen, werden ignoriert.',
         'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             'Globales Mapping von Ticket::Generic-Invoker-Name (Schlüssel) zu einer Liste von Feldern (Inhalt), die base-64-kodiert werden sollen. Bitte beacheten, dass dies auch je Invoker konfiguriert werden kann. Felder müssen in der folgenden Form angegeben werden: Feld1->Feld2;Feld3->Feld4->Feld5;Feld6. Eine verschachtelte Datenstruktur kann also durch Verbindung der Felder mit \'->\' angegeben werden. Inhalte aus verschiedenen Feldern je Invoker können kodiert werden, indem die Felder mit \';\' voneinander getrennt werden. Bitte beachten Sie die Dokumentation des Pakets für weitere Informationen.',
         'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>

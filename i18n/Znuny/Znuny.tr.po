@@ -26549,3 +26549,7 @@ msgstr "Rate limiting penceresi içinde IP adresi başına izin verilen maksimum
 msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
 msgstr "Kendi kendine kayıt rate limiting için saniye cinsinden zaman penceresi. Bu penceredeki denemeler maksimuma karşı sayılır."
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
+msgstr "Bir XSLT eşlemesinin xsl:import, xsl:include veya document() ile yükleyebileceği HTTPS URL önekleri. Her girdi https:// ile başlamalı ve büyük/küçük harf dahil olmak üzere istenen URL'nin başlangıcıyla tam olarak karşılaştırılır. Bir ana bilgisayar öneki eğik çizgi ile bitmelidir, örneğin https://znuny.de/. Bir önek tek bir kaynağı da adlandırabilir, örneğin https://blabla.com/xslt/onlythisfile.txt. Boş bir liste her ağ URL'sini reddeder. https:// ile başlamayan girdiler yok sayılır."
+

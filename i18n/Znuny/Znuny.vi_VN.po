@@ -26563,3 +26563,7 @@ msgstr "Số lượng tối đa lần thử tự đăng ký được phép cho m
 msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
 msgstr "Cửa sổ thời gian tính bằng giây cho rate limiting tự đăng ký. Các lần thử trong cửa sổ này được tính so với mức tối đa."
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
+msgstr "Tiền tố URL HTTPS mà ánh xạ XSLT có thể tải bằng xsl:import, xsl:include hoặc document(). Mỗi mục phải bắt đầu bằng https:// và được so sánh chính xác, kể cả chữ hoa và chữ thường, với phần đầu của URL được yêu cầu. Tiền tố máy chủ nên kết thúc bằng dấu gạch chéo, ví dụ https://znuny.de/. Tiền tố cũng có thể chỉ định một tài nguyên, ví dụ https://blabla.com/xslt/onlythisfile.txt. Danh sách trống từ chối mọi URL mạng. Các mục không bắt đầu bằng https:// sẽ bị bỏ qua."
+

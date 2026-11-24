@@ -26549,3 +26549,7 @@ msgstr "Maksimalan broj pokušaja samoregistracije po IP adresi unutar prozora r
 msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
 msgstr "Vremenski prozor u sekundama za rate limiting samoregistracije. Pokušaji unutar ovog prozora broje se prema maksimumu."
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
+msgstr "HTTPS URL prefiksi koje XSLT mapiranje smije učitati pomoću xsl:import, xsl:include ili document(). Svaki unos mora započinjati s https:// i uspoređuje se točno, uključujući velika i mala slova, s početkom zatraženog URL-a. Prefiks glavnog računala treba završavati kosom crtom, na primjer https://znuny.de/. Prefiks može imenovati i jedan resurs, na primjer https://blabla.com/xslt/onlythisfile.txt. Prazan popis zabranjuje svaki mrežni URL. Unosi koji ne počinju s https:// zanemaruju se."
+
