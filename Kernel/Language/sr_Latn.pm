@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.851829174957906;
+    $Self->{Completeness}        = 0.851919840905614;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4480,6 +4480,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => 'Termin nije pronađen!',
+        'No permission!' => 'Bez dozvole!',
         'Never' => 'Nikada',
         'Every Day' => 'Svaki dan',
         'Every Week' => 'Svake sedmice',
@@ -4504,7 +4505,6 @@ sub Data {
         'after the appointment has been started' => 'pošto termin započne',
         'before the appointment ends' => 'pre nego što se termin završi',
         'after the appointment has been ended' => 'pošto se termin završi',
-        'No permission!' => 'Bez dozvole!',
         'Cannot delete ticket appointment!' => 'Nije moguće obrisati termin tiketa!',
         'No permissions!' => 'Bez dozvole!',
 
@@ -5839,6 +5839,7 @@ sub Data {
             'Ova imejl adresa već postoji. Molimo, prijavite se ili resetujte vašu lozinku.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Registracija ove imejl adrese nije dozvoljeno. Molimo da kontaktirate podršku.',
+        'Could not create account. Please try again later.' => 'Nalog nije mogao da se napravi. Pokušajte ponovo kasnije.',
         'Added via Customer Panel (%s)' => 'Dodato preko klijentskog panela (%s)',
         'Customer user can\'t be added!' => 'Ne može se dodati klijent korisnik!',
         'Can\'t send account info!' => 'Ne mogu poslati info o nalogu!',
@@ -8468,6 +8469,12 @@ sub Data {
             '',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Određuje polja klijent korisnika koja samoregistracija prihvata iz zahteva. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword i ValidID se nikada ne uzimaju iz zahteva.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Maksimalan broj pokušaja samoregistracije po IP adresi u prozoru rate limiting. Postavite 0 za onemogućavanje.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Vremenski prozor u sekundama za rate limiting samoregistracije. Pokušaji u ovom prozoru se broje prema maksimumu.',
         'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
             '',
         'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>

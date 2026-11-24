@@ -11,6 +11,7 @@ package Kernel::System::Web::InterfaceCustomer;
 
 use strict;
 use warnings;
+use utf8;
 
 use Digest::SHA qw(sha256_hex);
 
@@ -23,6 +24,7 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::Output::HTML::Layout',
     'Kernel::System::AuthSession',
+    'Kernel::System::Cache',
     'Kernel::System::CustomerAuth',
     'Kernel::System::CustomerGroup',
     'Kernel::System::CustomerUser',
@@ -1048,24 +1050,41 @@ sub Run {
 
         my $UserTitleMandatory;
 
-        # get params
+        # Self-registration must not accept identity or customer-scope fields from the request.
+        my %ForbiddenField = (
+            UserLogin       => 1,
+            UserCustomerID  => 1,
+            UserCustomerIDs => 1,
+            UserPassword    => 1,
+            ValidID         => 1,
+            Source          => 1,
+            UserID          => 1,
+            ID              => 1,
+        );
+
+        my $AllowedFields = $ConfigObject->Get('CustomerPanelCreateAccount::AllowedFields')
+            // [ 'UserTitle', 'UserFirstname', 'UserLastname', 'UserEmail' ];
+        my %AllowedFields = map { $_ => 1 } @{$AllowedFields};
+
         my %GetParams;
+        ENTRY:
         for my $Entry ( @{ $ConfigObject->Get('CustomerUser')->{Map} } ) {
-            $GetParams{ $Entry->[0] } = $ParamObject->GetParam( Param => $Entry->[0] )
-                || '';
-            if ( !defined $UserTitleMandatory && $Entry->[0] && $Entry->[0] eq 'UserTitle' ) {
+            my $Field = $Entry->[0] || '';
+            if ( !defined $UserTitleMandatory && $Field eq 'UserTitle' ) {
                 $UserTitleMandatory = $Entry->[4];
             }
-        }
-        $GetParams{ValidID} = 1;
+            next ENTRY if !$Field;
+            next ENTRY if $ForbiddenField{$Field};
+            next ENTRY if ( $Entry->[5] // '' ) eq 'dynamic_field';
+            next ENTRY if !$AllowedFields{$Field};
 
-        # check needed params
-        if ( !$GetParams{UserCustomerID} ) {
-            $GetParams{UserCustomerID} = $GetParams{UserEmail};
+            $GetParams{$Field} = $ParamObject->GetParam( Param => $Field ) || '';
         }
-        if ( !$GetParams{UserLogin} ) {
-            $GetParams{UserLogin} = $GetParams{UserEmail};
-        }
+
+        # Login and customer id always come from the submitted email address.
+        $GetParams{UserLogin}      = $GetParams{UserEmail} || '';
+        $GetParams{UserCustomerID} = $GetParams{UserEmail} || '';
+        $GetParams{ValidID}        = 1;
 
         # get new password
         $GetParams{UserPassword} = $UserObject->GenerateRandomPassword();
@@ -1157,6 +1176,28 @@ sub Run {
                 ),
             );
 
+            return;
+        }
+
+        if ( $Self->_CreateAccountRateLimitReached() ) {
+
+            # send data to JS
+            $LayoutObject->AddJSData(
+                Key   => 'SignupError',
+                Value => 1,
+            );
+
+            $LayoutObject->Print(
+                Output => \$LayoutObject->CustomerLogin(
+                    Title              => 'Login',
+                    Message            => Translatable('Could not create account. Please try again later.'),
+                    UserTitle          => $GetParams{UserTitle},
+                    UserFirstname      => $GetParams{UserFirstname},
+                    UserLastname       => $GetParams{UserLastname},
+                    UserEmail          => $GetParams{UserEmail},
+                    UserTitleMandatory => $UserTitleMandatory,
+                ),
+            );
             return;
         }
 
@@ -1777,6 +1818,63 @@ sub _AuditRemoteAddr {
         return ( split /,\s*/, $ENV{HTTP_X_FORWARDED_FOR} )[0];
     }
     return $ENV{REMOTE_ADDR} || 'unknown';
+}
+
+sub _CreateAccountRateLimitReached {
+    my $Self = shift;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+    my $CacheObject  = $Kernel::OM->Get('Kernel::System::Cache');
+
+    my $MaxAttempts = $ConfigObject->Get('CustomerPanelCreateAccount::RateLimitMaxAttempts') // 5;
+    return 0 if !$MaxAttempts;
+
+    my $Window = $ConfigObject->Get('CustomerPanelCreateAccount::RateLimitWindow') // 600;
+
+    # Use the connection address. A client-supplied X-Forwarded-For header must not choose the counter.
+    my $IP  = $ENV{REMOTE_ADDR} || 'unknown';
+    my $Now = time();
+
+    my $Entry = $CacheObject->Get(
+        Type => 'CustomerCreateAccount',
+        Key  => "IP::$IP",
+    ) // {
+        count   => 0,
+        expires => $Now + $Window,
+    };
+
+    if ( $Now >= $Entry->{expires} ) {
+        $Entry = {
+            count   => 0,
+            expires => $Now + $Window,
+        };
+    }
+
+    $Entry->{count}++;
+
+    $CacheObject->Set(
+        Type  => 'CustomerCreateAccount',
+        Key   => "IP::$IP",
+        Value => $Entry,
+        TTL   => $Entry->{expires} - $Now,
+    );
+
+    return 0 if $Entry->{count} <= $MaxAttempts;
+
+    if ( $Entry->{count} == $MaxAttempts + 1 ) {
+        my $DateTimeObject = $Kernel::OM->Create('Kernel::System::DateTime');
+        my $DateTimeString = $DateTimeObject->ToString();
+
+        $LogObject->Log(
+            Priority => 'notice',
+            Message  => 'AuditLog CustomerCreateAccountRateLimitReached'
+                . " IP=$IP"
+                . " Timestamp=$DateTimeString",
+        );
+    }
+
+    return 1;
 }
 
 sub _PasswordResetRateLimitReached {

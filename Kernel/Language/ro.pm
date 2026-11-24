@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.298331547527935;
+    $Self->{Completeness}        = 0.298760899495181;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4474,6 +4474,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => '',
         'Never' => '',
         'Every Day' => '',
         'Every Week' => '',
@@ -4498,7 +4499,6 @@ sub Data {
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
         'after the appointment has been ended' => '',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5833,6 +5833,7 @@ sub Data {
             'Această adresă de e-mail există deja. Vă rugăm să vă autentificați sau să vă resetați parola.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Această adresă de e-mail nu este permisă la înregistrarea. Vă rugăm să contactați personalul de asistență.',
+        'Could not create account. Please try again later.' => 'Contul nu a putut fi creat. Încercați din nou mai târziu.',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '',
         'Can\'t send account info!' => '',
@@ -8462,6 +8463,12 @@ sub Data {
             '',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Definește câmpurile de client utilizator pe care autoînregistrarea le acceptă din cerere. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword și ValidID nu sunt niciodată preluate din cerere.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Numărul maxim de încercări de autoînregistrare permise per adresă IP în fereastra de rate limiting. Setați 0 pentru a dezactiva rate limiting.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Fereastră de timp în secunde pentru rate limiting la autoînregistrare. Încercările din această fereastră se numără față de maximum.',
         'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
             '',
         'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>

@@ -4708,6 +4708,40 @@
         </Value>
     </Setting>
 
+    <!--
+        Customer self-registration
+    -->
+    <Setting Name="CustomerPanelCreateAccount::AllowedFields" Required="1" Valid="1">
+        <Description Translatable="1">Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.</Description>
+        <Navigation>Frontend::Customer</Navigation>
+        <Value>
+            <Array>
+                <Item>UserTitle</Item>
+                <Item>UserFirstname</Item>
+                <Item>UserLastname</Item>
+                <Item>UserEmail</Item>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="CustomerPanelCreateAccount::RateLimitMaxAttempts" Required="1" Valid="1">
+        <Description Translatable="1">Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.</Description>
+        <Navigation>Frontend::Customer</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^[0-9]{1,4}$">5</Item>
+        </Value>
+    </Setting>
+    <Setting Name="CustomerPanelCreateAccount::RateLimitWindow" Required="1" Valid="1">
+        <Description Translatable="1">Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.</Description>
+        <Navigation>Frontend::Customer</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^[1-9]\d{0,7}$">600</Item>
+        </Value>
+    </Setting>
+
+
+    <!--
+        PDF preview
+    -->
     <Setting Name="ArticleZoomPDFPreview###Width" UserPreferencesGroup="Advanced" UserModificationPossible="1" Required="0" Valid="1">
         <Description Translatable="1">Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).</Description>
         <Navigation>Core::Znuny::ZoomArticlePDFPreview</Navigation>

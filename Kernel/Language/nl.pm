@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d-%m-%Y';
     $Self->{DateInputFormat}     = '%d-%m-%Y';
     $Self->{DateInputFormatLong} = '%d-%m-%Y - %T';
-    $Self->{Completeness}        = 0.490127047298332;
+    $Self->{Completeness}        = 0.49043903931467;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4480,6 +4480,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => 'Afspraak niet gevonden!',
+        'No permission!' => '',
         'Never' => 'Nooit',
         'Every Day' => 'Elke dag',
         'Every Week' => 'Elke week',
@@ -4504,7 +4505,6 @@ sub Data {
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
         'after the appointment has been ended' => '',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5839,6 +5839,7 @@ sub Data {
             'Dit e-mail adres bestaat reeds. Gelieve in te loggen of uw wachtwoord te resetten.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Het is niet toegestaan om u met dit e-mailadres te registreren. Gelieve contact op te nemen met de Support afdeling.',
+        'Could not create account. Please try again later.' => 'Account kon niet worden aangemaakt. Probeer het later opnieuw.',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '',
         'Can\'t send account info!' => '',
@@ -8468,6 +8469,12 @@ sub Data {
             '',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Bepaalt de klantgebruikersvelden die zelfregistratie uit het verzoek overneemt. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword en ValidID worden nooit uit het verzoek overgenomen.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Maximaal aantal toegestane zelfregistratiepogingen per IP-adres binnen het rate limiting-venster. Stel in op 0 om rate limiting uit te schakelen.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Tijdsvenster in seconden voor rate limiting bij zelfregistratie. Pogingen binnen dit venster tellen mee voor het maximum.',
         'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
             '',
         'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>

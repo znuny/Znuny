@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.999846930965866;
+    $Self->{Completeness}        = 0.999847024629035;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4475,6 +4475,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => 'Termin wurde nicht gefunden!',
+        'No permission!' => 'Keine Berechtigung!',
         'Never' => 'Niemals',
         'Every Day' => 'Jeden Tag',
         'Every Week' => 'Jede Woche',
@@ -4499,7 +4500,6 @@ sub Data {
         'after the appointment has been started' => 'nachdem der Termin begonnen hat',
         'before the appointment ends' => 'bevor der Termin endet',
         'after the appointment has been ended' => 'nachdem der Termin geendet hat',
-        'No permission!' => 'Keine Berechtigung!',
         'Cannot delete ticket appointment!' => 'Ticket-Termin konnte nicht gelöscht werden!',
         'No permissions!' => 'Keine Berechtigung!',
 
@@ -5834,6 +5834,7 @@ sub Data {
             'Diese E-Mail-Adresse existiert bereits. Bitte melden Sie sich an oder setzen Ihr Passwort zurück.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Diese E-Mail-Adresse darf nicht registriert werden. Bitte wenden Sie sich an die Supportabteilung.',
+        'Could not create account. Please try again later.' => 'Konto konnte nicht angelegt werden. Bitte versuchen Sie es später erneut.',
         'Added via Customer Panel (%s)' => 'Mittels Kundenbereich hinzugefügt (%s)',
         'Customer user can\'t be added!' => 'Kundenbenutzer kann nicht angelegt werden!',
         'Can\'t send account info!' => 'Kann Zugangsinformation nicht senden!',
@@ -8463,6 +8464,12 @@ sub Data {
             'Namen von Systemkonfigurationsoptionen mit E-Mail-Adressen, die ebenfalls in einem Profil für ausgehende E-Mails auswählbar sein sollen (neben Systemadressen).',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             'Liste der Sitzungen (Schlüssel), die durch die Unteraktion UpdateAJAX des Frontend-Moduls AgentSession aktualisiert werden dürfen. Dabei handelt es sich um reguläre Ausdrücke.',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Legt die Kundenbenutzerfelder fest, die bei der Selbstregistrierung aus der Anfrage übernommen werden. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword und ValidID werden niemals aus der Anfrage übernommen.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Maximale Anzahl an Selbstregistrierungsversuchen pro IP-Adresse innerhalb des Rate-Limit-Zeitfensters. Auf 0 setzen, um das Rate Limiting zu deaktivieren.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Zeitfenster in Sekunden für das Rate Limiting bei der Selbstregistrierung. Versuche innerhalb dieses Zeitfensters werden gegen das Maximum gezählt.',
         'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
             'Definiert die Breite für die PDF-Vorschau-Komponente für AgentTicketZoom. Geben Sie die Anzahl (Pixel) oder den Prozentwert (relativ) ein.',
         'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>

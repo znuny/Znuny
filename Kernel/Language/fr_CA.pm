@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.336598806061534;
+    $Self->{Completeness}        = 0.3370047422365;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4482,6 +4482,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => '',
         'Never' => '',
         'Every Day' => '',
         'Every Week' => '',
@@ -4506,7 +4507,6 @@ sub Data {
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
         'after the appointment has been ended' => '',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5841,6 +5841,7 @@ sub Data {
             '',
         'This email address is not allowed to register. Please contact support staff.' =>
             '',
+        'Could not create account. Please try again later.' => 'Impossible de créer le compte. Veuillez réessayer plus tard.',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => 'Le client n\'a pu être ajouté!',
         'Can\'t send account info!' => '',
@@ -8470,6 +8471,12 @@ sub Data {
             '',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Définit les champs d\'utilisateur client que l\'auto-inscription accepte depuis la requête. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword et ValidID ne sont jamais pris dans la requête.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Nombre maximal de tentatives d\'auto-inscription autorisées par adresse IP dans la fenêtre de rate limiting. Mettre 0 pour désactiver.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Fenêtre temporelle en secondes pour le rate limiting de l\'auto-inscription. Les tentatives dans cette fenêtre sont comptées par rapport au maximum.',
         'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
             '',
         'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>

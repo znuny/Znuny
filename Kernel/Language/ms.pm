@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.527169753558855;
+    $Self->{Completeness}        = 0.527459079088267;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4474,6 +4474,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => '',
         'Never' => '',
         'Every Day' => '',
         'Every Week' => '',
@@ -4498,7 +4499,6 @@ sub Data {
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
         'after the appointment has been ended' => '',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5833,6 +5833,7 @@ sub Data {
             'Alamat emel ini telah wujud. Sila log masuk atau tetapkan semula kata laluan anda. ',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Alamat e-mel tidak dibenarkan mendaftar. Sila hubungi kakitangan sokongan.',
+        'Could not create account. Please try again later.' => 'Akaun tidak dapat dibuat. Sila cuba lagi kemudian.',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '',
         'Can\'t send account info!' => '',
@@ -8464,6 +8465,12 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
             '',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Mentakrifkan medan pengguna pelanggan yang pendaftaran sendiri terima daripada permintaan. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword dan ValidID tidak pernah diambil daripada permintaan.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Bilangan maksimum percubaan pendaftaran sendiri dibenarkan setiap alamat IP dalam tetingkap rate limiting. Tetapkan 0 untuk melumpuhkan.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Tetingkap masa dalam saat untuk rate limiting pendaftaran sendiri. Percubaan dalam tetingkap ini dikira berbanding maksimum.',
         'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
             '',
         'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>

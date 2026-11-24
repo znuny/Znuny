@@ -35,7 +35,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.583499158120312;
+    $Self->{Completeness}        = 0.583754015603488;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4483,6 +4483,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => '',
         'Never' => '',
         'Every Day' => '',
         'Every Week' => '',
@@ -4507,7 +4508,6 @@ sub Data {
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
         'after the appointment has been ended' => '',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5842,6 +5842,7 @@ sub Data {
             'L\'indirizzo email inserito esiste già. Effettuare l\'accesso o reimposta la password.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'L\'indirizzo email inserito non è abilitato per la registrazione. Contatta il supporto tecnico.',
+        'Could not create account. Please try again later.' => 'Impossibile creare l\'account. Riprovare più tardi.',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '',
         'Can\'t send account info!' => '',
@@ -8475,6 +8476,12 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
             '',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Definisce i campi dell\'utenza cliente che l\'autoregistrazione accetta dalla richiesta. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword e ValidID non vengono mai presi dalla richiesta.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Numero massimo di tentativi di autoregistrazione consentiti per indirizzo IP nella finestra di rate limiting. Impostare 0 per disabilitare.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Finestra temporale in secondi per il rate limiting dell\'autoregistrazione. I tentativi in questa finestra vengono conteggiati rispetto al massimo.',
         'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
             '',
         'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>

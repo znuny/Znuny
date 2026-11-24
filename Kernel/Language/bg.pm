@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y - %T';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.215674269095362;
+    $Self->{Completeness}        = 0.216154199173933;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4475,6 +4475,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => '',
         'Never' => '',
         'Every Day' => '',
         'Every Week' => '',
@@ -4499,7 +4500,6 @@ sub Data {
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
         'after the appointment has been ended' => '',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5834,6 +5834,7 @@ sub Data {
             'Този Е-мейл адрес вече съществува. Моля, влезте или задайте нова парола.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Този Е-мейл адрес не може да се регистрира. Моля, свържете се с екипа за поддръжка.',
+        'Could not create account. Please try again later.' => 'Профилът не можа да бъде създаден. Моля, опитайте отново по-късно.',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '',
         'Can\'t send account info!' => '',
@@ -8463,6 +8464,12 @@ sub Data {
             '',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Определя полетата на клиентския потребител, които саморегистрацията приема от заявката. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword и ValidID никога не се вземат от заявката.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Максимален брой опити за саморегистрация на IP адрес в рамките на прозореца за rate limiting. Задайте 0, за да деактивирате rate limiting.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Времеви прозорец в секунди за rate limiting при саморегистрация. Опитите в този прозорец се броят спрямо максимума.',
         'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
             '',
         'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>

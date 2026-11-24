@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%m/%d/%Y';
     $Self->{DateInputFormat}     = '%m/%d/%Y';
     $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
-    $Self->{Completeness}        = 0.436246747283025;
+    $Self->{Completeness}        = 0.436591708734894;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -4477,6 +4477,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => '',
         'Never' => '',
         'Every Day' => '',
         'Every Week' => '',
@@ -4501,7 +4502,6 @@ sub Data {
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
         'after the appointment has been ended' => '',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5836,6 +5836,7 @@ sub Data {
             'Anwani ya barua pepe hii tayari ipo. Tafadhali ingia au weka upya neno lako la siri.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Anuani ya barua hii pepe hairuhusiwi kusajili. Tafadhali wasiliana na wafanyakazi wa msaada.',
+        'Could not create account. Please try again later.' => 'Akaunti haikuweza kuundwa. Tafadhali jaribu tena baadaye.',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '',
         'Can\'t send account info!' => '',
@@ -8468,6 +8469,12 @@ Mfano:
             '',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Inafafanua sehemu za mtumiaji wa mteja ambazo usajili wa kibinafsi hukubali kutoka kwa ombi. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword na ValidID hazichukuliwi kamwe kutoka kwa ombi.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Idadi ya juu ya majaribio ya usajili wa kibinafsi kwa anwani ya IP ndani ya dirisha la rate limiting. Weka 0 kuzima rate limiting.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Dirisha la muda kwa sekunde kwa rate limiting ya usajili wa kibinafsi. Majaribio ndani ya dirisha hili huhesabiwa dhidi ya kiwango cha juu.',
         'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
             '',
         'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>

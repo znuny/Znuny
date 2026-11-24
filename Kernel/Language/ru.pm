@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.833613959895913;
+    $Self->{Completeness}        = 0.833715771760747;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4486,6 +4486,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => 'Мероприятия не найдены!',
+        'No permission!' => 'Нет прав доступа!',
         'Never' => 'Никогда',
         'Every Day' => 'Каждый день',
         'Every Week' => 'Каждую неделю',
@@ -4510,7 +4511,6 @@ sub Data {
         'after the appointment has been started' => 'после начала мероприятия',
         'before the appointment ends' => 'до окончания мероприятия',
         'after the appointment has been ended' => 'после окончания мероприятия',
-        'No permission!' => 'Нет прав доступа!',
         'Cannot delete ticket appointment!' => 'Невозможно удалить мероприятие заявки!',
         'No permissions!' => 'Нет прав доступа!',
 
@@ -5845,6 +5845,7 @@ sub Data {
             'Такой адрес электронной почты уже существует. Пожалуйста, войдите или сбросьте свой пароль.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Этот адрес почты не разрешен для регистрации. Обратитесь к персоналу поддержки.',
+        'Could not create account. Please try again later.' => 'Не удалось создать учетную запись. Повторите попытку позже.',
         'Added via Customer Panel (%s)' => 'Добавлено через Customer Panel/Панель клиента (%s)',
         'Customer user can\'t be added!' => 'Невозможно добавить клиента!',
         'Can\'t send account info!' => 'Не удается отправить информацию аккаунта!',
@@ -8474,6 +8475,12 @@ sub Data {
             '',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Определяет поля учетной записи клиента, которые саморегистрация принимает из запроса. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword и ValidID никогда не берутся из запроса.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Максимальное число попыток саморегистрации на IP-адрес в окне rate limiting. 0 отключает rate limiting.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Временное окно в секундах для rate limiting саморегистрации. Попытки в этом окне учитываются относительно максимума.',
         'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
             '',
         'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>

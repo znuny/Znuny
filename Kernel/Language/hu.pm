@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.994948721873565;
+    $Self->{Completeness}        = 0.994951812758146;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4480,6 +4480,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => 'Az időpont nem található!',
+        'No permission!' => 'Nincs jogosultság!',
         'Never' => 'Soha',
         'Every Day' => 'Minden nap',
         'Every Week' => 'Minden héten',
@@ -4504,7 +4505,6 @@ sub Data {
         'after the appointment has been started' => 'miután az időpont elkezdődött',
         'before the appointment ends' => 'az időpont vége előtt',
         'after the appointment has been ended' => 'miután az időpont véget ért',
-        'No permission!' => 'Nincs jogosultság!',
         'Cannot delete ticket appointment!' => 'Nem lehet törölni a jegyidőpontot!',
         'No permissions!' => 'Nincsenek jogosultságok!',
 
@@ -5839,6 +5839,7 @@ sub Data {
             'Ez az e-mail-cím már létezik. Jelentkezzen be, vagy állítsa vissza a jelszavát.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Ez az e-mail-cím nem megengedett a regisztráláshoz. Vegye fel a kapcsolatot a támogató csapattal.',
+        'Could not create account. Please try again later.' => 'A fiók létrehozása nem sikerült. Próbálja meg később újra.',
         'Added via Customer Panel (%s)' => 'Hozzáadva az ügyfélpanelen keresztül (%s)',
         'Customer user can\'t be added!' => 'Az ügyfél-felhasználót nem lehet hozzáadni!',
         'Can\'t send account info!' => 'Nem lehet elküldeni a fiókinformációkat!',
@@ -8468,6 +8469,12 @@ sub Data {
             'E-mail-címekkel rendelkező rendszerbeállítási lehetőségek nevei, amelyek szintén kiválaszthatók egy kimenő e-mail-profilhoz (a rendszercímeken kívül).',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             'Azon munkamenetek (kulcsok) listája, amelyeknél engedélyezett, hogy az ügyintéző munkamenetei előtétprogram-modul UpdateAJAX alművelete frissítse azokat. Ezek reguláris kifejezések.',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Meghatározza azokat az ügyfél-felhasználó mezőket, amelyeket az önregisztráció a kérésből elfogad. A UserLogin, UserCustomerID, UserCustomerIDs, UserPassword és ValidID soha nem a kérésből származik.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Az önregisztrációs próbálkozások maximális száma IP-címenként a korlát időablakában. A 0 érték kikapcsolja a korlátozást.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Az önregisztráció korlátozásának időablaka másodpercben. Az ablakon belüli próbálkozások beleszámítanak a maximumba.',
         'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
             'Meghatározza a PDF-előnézeti összetevő szélességét az AgentTicketZoom felületen. Adjon meg egy számot (képpont) vagy egy százalékos értéket (relatív).',
         'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>

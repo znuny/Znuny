@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.317924383897138;
+    $Self->{Completeness}        = 0.318341746978736;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4478,6 +4478,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => '',
         'Never' => '',
         'Every Day' => '每天',
         'Every Week' => '每週',
@@ -4502,7 +4503,6 @@ sub Data {
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
         'after the appointment has been ended' => '',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5837,6 +5837,7 @@ sub Data {
             '這個e-mail已存在，請登入系統或更改您的密碼。',
         'This email address is not allowed to register. Please contact support staff.' =>
             '這個e-mail不允許註冊，請聯繫技術人員。',
+        'Could not create account. Please try again later.' => '無法建立帳戶。請稍後再試。',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '',
         'Can\'t send account info!' => '',
@@ -8466,6 +8467,12 @@ sub Data {
             '',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            '定義自助註冊從請求中接受的客戶使用者欄位。UserLogin、UserCustomerID、UserCustomerIDs、UserPassword 和 ValidID 絕不會從請求中取得。',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            '在 rate limiting 視窗內每個 IP 位址允許的最大自助註冊嘗試次數。設為 0 可停用 rate limiting。',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            '自助註冊 rate limiting 的時間視窗（秒）。此視窗內的嘗試次數計入最大值。',
         'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
             '',
         'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>

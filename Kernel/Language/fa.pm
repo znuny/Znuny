@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.60048982090923;
+    $Self->{Completeness}        = 0.600734281780633;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4480,6 +4480,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => '',
         'Never' => '',
         'Every Day' => '',
         'Every Week' => '',
@@ -4504,7 +4505,6 @@ sub Data {
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
         'after the appointment has been ended' => '',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5839,6 +5839,7 @@ sub Data {
             'این آدرس ایمیل در حال حاضر وجود دارد. لطفا وارد شوید و یارمز عبور خود را بازیابی کنید.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'این آدرس ایمیل مجاز به ثبت نام نیست . لطفا با کارکنان پشتیبانی تماس بگیرید.',
+        'Could not create account. Please try again later.' => 'ایجاد حساب ممکن نشد. لطفاً بعداً دوباره تلاش کنید.',
         'Added via Customer Panel (%s)' => 'اضافه شده از طریق پنل مشتری ( %s )',
         'Customer user can\'t be added!' => 'کاربران مشتری نمی توانند اضافه شود!',
         'Can\'t send account info!' => 'نمی توانید اطلاعات حساب را ارسال کنید!',
@@ -8468,6 +8469,12 @@ sub Data {
             '',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'فیلدهای کاربر مشتری را مشخص می‌کند که خودثبت‌نام از درخواست می‌پذیرد. UserLogin، UserCustomerID، UserCustomerIDs، UserPassword و ValidID هرگز از درخواست گرفته نمی‌شوند.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'حداکثر تعداد تلاش‌های خودثبت‌نام مجاز برای هر آدرس IP در بازه rate limiting. 0 برای غیرفعال کردن.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'بازه زمانی rate limiting برای خودثبت‌نام بر حسب ثانیه. تلاش‌ها در این بازه در برابر حداکثر شمارش می‌شوند.',
         'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
             '',
         'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>

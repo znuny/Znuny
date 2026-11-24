@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d %T';
-    $Self->{Completeness}        = 0.82932802694015;
+    $Self->{Completeness}        = 0.829432461373719;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -4474,6 +4474,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '약속을 찾을 수 없습니다!',
+        'No permission!' => '비허가!',
         'Never' => '절대로',
         'Every Day' => '매일',
         'Every Week' => '매주',
@@ -4498,7 +4499,6 @@ sub Data {
         'after the appointment has been started' => '약속이 시작된 후',
         'before the appointment ends' => '약속이 끝나기 전에',
         'after the appointment has been ended' => '약속이 끝난 후',
-        'No permission!' => '비허가!',
         'Cannot delete ticket appointment!' => '티켓 예약을 삭제할 수 없습니다!',
         'No permissions!' => '비허가!',
 
@@ -5833,6 +5833,7 @@ sub Data {
             '이 전자 메일 주소는 이미 있습니다. 로그인하거나 비밀번호를 재설정하십시오.',
         'This email address is not allowed to register. Please contact support staff.' =>
             '이 이메일 주소는 등록 할 수 없습니다. 지원 담당자에게 문의하십시오.',
+        'Could not create account. Please try again later.' => '계정을 만들 수 없습니다. 나중에 다시 시도하십시오.',
         'Added via Customer Panel (%s)' => '고객 패널을 통해 추가 (%s)',
         'Customer user can\'t be added!' => '고객 사용자를 추가 할 수 없습니다!',
         'Can\'t send account info!' => '계정 정보를 보낼 수 없습니다!',
@@ -8462,6 +8463,12 @@ sub Data {
             '',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            '셀프 등록이 요청에서 받아들이는 고객 사용자 필드를 정의합니다. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, ValidID는 요청에서 가져오지 않습니다.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'rate limiting 창 내 IP 주소당 허용되는 셀프 등록 시도 최대 수. 0으로 설정하면 rate limiting을 비활성화합니다.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            '셀프 등록 rate limiting을 위한 시간 창(초). 이 창 내 시도는 최대값에 대해 집계됩니다.',
         'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
             '',
         'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>

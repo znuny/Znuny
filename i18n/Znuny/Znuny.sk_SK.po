@@ -26533,3 +26533,19 @@ msgstr ""
 msgid "Link customer companies to services."
 msgstr ""
 
+#. Perl Module: Kernel/System/Web/InterfaceCustomer.pm
+msgid "Could not create account. Please try again later."
+msgstr "Účet sa nepodarilo vytvoriť. Skúste to znova neskôr."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request."
+msgstr "Definuje polia používateľa, ktoré samoregistrácia prijíma z požiadavky. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword a ValidID sa z požiadavky nikdy nepreberajú."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting."
+msgstr "Maximálny počet pokusov o samoregistráciu na IP adresu v rámci okna rate limitu. Nastavte 0 na vypnutie rate limitu."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
+msgstr "Časové okno v sekundách pre rate limiting samoregistrácie. Pokusy v tomto okne sa počítajú voči maximu."
+

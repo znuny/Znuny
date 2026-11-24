@@ -26544,3 +26544,19 @@ msgstr ""
 msgid "Link customer companies to services."
 msgstr ""
 
+#. Perl Module: Kernel/System/Web/InterfaceCustomer.pm
+msgid "Could not create account. Please try again later."
+msgstr "계정을 만들 수 없습니다. 나중에 다시 시도하십시오."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request."
+msgstr "셀프 등록이 요청에서 받아들이는 고객 사용자 필드를 정의합니다. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, ValidID는 요청에서 가져오지 않습니다."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting."
+msgstr "rate limiting 창 내 IP 주소당 허용되는 셀프 등록 시도 최대 수. 0으로 설정하면 rate limiting을 비활성화합니다."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
+msgstr "셀프 등록 rate limiting을 위한 시간 창(초). 이 창 내 시도는 최대값에 대해 집계됩니다."
+

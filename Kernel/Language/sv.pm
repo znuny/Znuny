@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.33751722026634;
+    $Self->{Completeness}        = 0.337922594462292;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4477,6 +4477,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => 'Saknar rättigheter!',
         'Never' => 'Aldrig',
         'Every Day' => 'Varje dag',
         'Every Week' => 'Varje vecka',
@@ -4501,7 +4502,6 @@ sub Data {
         'after the appointment has been started' => 'efter händelsen börjat',
         'before the appointment ends' => 'innan händelsen slutar',
         'after the appointment has been ended' => 'efter händelsen har slutat',
-        'No permission!' => 'Saknar rättigheter!',
         'Cannot delete ticket appointment!' => 'Kunde inte ta bort kalenderhändelsen!',
         'No permissions!' => 'Rättigheter saknas!',
 
@@ -5836,6 +5836,7 @@ sub Data {
             'Den här e-postadressen finns redan. Vänligen logga in eller återställ ditt lösenord.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Denna e-post adress är inte tillåten att registrera. Vänligen kontakta support personal.',
+        'Could not create account. Please try again later.' => 'Kontot kunde inte skapas. Försök igen senare.',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '',
         'Can\'t send account info!' => '',
@@ -8465,6 +8466,12 @@ sub Data {
             '',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Definierar kundanvändarfälten som självregistrering accepterar från begäran. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword och ValidID hämtas aldrig från begäran.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Maximalt antal försök till självregistrering per IP-adress inom rate limit-fönstret. Sätt till 0 för att inaktivera rate limiting.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Tidsfönster i sekunder för rate limiting vid självregistrering. Försök inom detta fönster räknas mot maximum.',
         'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
             '',
         'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>

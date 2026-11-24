@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%m/%d';
     $Self->{DateInputFormat}     = '%Y/%m/%d';
     $Self->{DateInputFormatLong} = '%Y/%m/%d - %T';
-    $Self->{Completeness}        = 0.66110515842645;
+    $Self->{Completeness}        = 0.661312528682882;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4481,6 +4481,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '予約が見つかりません！',
+        'No permission!' => '権限がない!',
         'Never' => 'なし',
         'Every Day' => '毎日',
         'Every Week' => '毎週',
@@ -4505,7 +4506,6 @@ sub Data {
         'after the appointment has been started' => '予定の開始後',
         'before the appointment ends' => '予定の終了前',
         'after the appointment has been ended' => '予定の終了後',
-        'No permission!' => '権限がない!',
         'Cannot delete ticket appointment!' => 'チケット予約を削除できません！',
         'No permissions!' => '権限がない!',
 
@@ -5840,6 +5840,7 @@ sub Data {
             'このe-mailアドレスはすでに存在します。ログインまたはパスワードのリセットを行ってください。',
         'This email address is not allowed to register. Please contact support staff.' =>
             'このemailアドレスの登録は認められていません。サポートにお問い合わせください。',
+        'Could not create account. Please try again later.' => 'アカウントを作成できませんでした。しばらくしてから再度お試しください。',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '顧客ユーザーが追加できませんでした。',
         'Can\'t send account info!' => '',
@@ -8478,6 +8479,12 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             '',
         'List of session (keys) that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession. These are regular expressions.' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'セルフ登録がリクエストから受け付ける顧客ユーザーフィールドを定義します。UserLogin、UserCustomerID、UserCustomerIDs、UserPassword、ValidID はリクエストから取得されません。',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'rate limiting ウィンドウ内で IP アドレスごとに許可されるセルフ登録試行の最大数。0 で rate limiting を無効化。',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'セルフ登録の rate limiting 用の時間ウィンドウ（秒）。このウィンドウ内の試行は最大値に対してカウントされます。',
         'Defines the width for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
             '',
         'Defines the height for the PDF preview component for AgentTicketZoom. Enter number (pixels) or percent value (relative).' =>
