@@ -218,8 +218,9 @@ sub Run {
 
     # set new password
     my $Success = $Self->{UserObject}->SetPassword(
-        UserLogin => $Param{UserData}->{UserLogin},
-        PW        => $Pw,
+        UserLogin     => $Param{UserData}->{UserLogin},
+        PW            => $Pw,
+        KeepSessionID => $Self->{SessionID},
     );
     return if !$Success;
 

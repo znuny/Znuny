@@ -1,4 +1,5 @@
 # 7.5.1 2026-??-??
+ - 2026-11-25 CVE-2026-78357: Sessions are now removed when a customer user is invalidated or renamed in the admin interface (as already done for agents), and when an agent or customer user password is changed. The session used to self-change the password via user preferences is kept.
  - 2026-11-25 Security: Customer self-registration no longer accepts UserLogin, UserCustomerID, or any field outside CustomerPanelCreateAccount::AllowedFields. Login and customer ID are taken from the email address, and creation is rate-limited per IP address. Customer self-registration is now disabled by default.
  - 2026-11-25 Security: The "Note to linked ticket" dialog no longer writes to tickets that are not linked or that the agent may not use, and no longer shows linked tickets the agent may not see.
  - 2026-11-25 Security: Database queries now reject non-integer values for parameters "Limit" and "Start" before they are added to SQL.
