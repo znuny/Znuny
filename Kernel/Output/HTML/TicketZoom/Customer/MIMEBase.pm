@@ -149,26 +149,22 @@ sub ArticleRender {
         ResultType => 'plain',
     );
 
-    if ( !$ShowHTML ) {
+    # Quote plain text for the page.
+    # Also when the HTML view is on, because that view still prints the plain text here.
+    $ArticleContent = $LayoutObject->Ascii2Html(
+        NewLine        => $ConfigObject->Get('DefaultViewNewLine'),
+        Text           => $ArticleContent,
+        VMax           => $ConfigObject->Get('DefaultViewLines') || 5000,
+        HTMLResultMode => 1,
+        LinkFeature    => 1,
+    );
 
-        # html quoting
-        $ArticleContent = $LayoutObject->Ascii2Html(
-            NewLine        => $ConfigObject->Get('DefaultViewNewLine'),
-            Text           => $ArticleContent,
-            VMax           => $ConfigObject->Get('DefaultViewLines') || 5000,
-            HTMLResultMode => 1,
-            LinkFeature    => 1,
-        );
-
-        $UnshortenedArticleContent = $LayoutObject->Ascii2Html(
-            NewLine => $ConfigObject->Get('DefaultViewNewLine'),
-            Text    => $UnshortenedArticleContent,
-
-            #             VMax           => $ConfigObject->Get('DefaultViewLines') || 5000,
-            HTMLResultMode => 1,
-            LinkFeature    => 1,
-        );
-    }
+    $UnshortenedArticleContent = $LayoutObject->Ascii2Html(
+        NewLine        => $ConfigObject->Get('DefaultViewNewLine'),
+        Text           => $UnshortenedArticleContent,
+        HTMLResultMode => 1,
+        LinkFeature    => 1,
+    );
 
     my %SafeArticleContent = $HTMLUtilsObject->Safety(
         String       => $ArticleContent,

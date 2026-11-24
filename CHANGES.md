@@ -27,6 +27,7 @@
  - 2026-11-11 Added: Queue and service navigation layouts.
  - 2026-11-11 Changed: Package repository index file is now packages.xml. otrs.xml is no longer requested or served. Package downloads now log the URL when the request returns no content.
  - 2026-11-11 Fixed: User search with option PostMasterSearch now also searches the login for a matching email address as a fallback to the email address stored in the user preferences.
+ - 2026-11-10 Security: Customer ticket zoom now escapes the plain-text article body outside the sandbox iframe. Thanks to Timotej Doležal (ESET) for reporting the issue.
  - 2026-11-10 Fixed: Moving or resizing an appointment in the calendar or resource overview via drag and drop removed linked tickets.
  - 2026-11-09 Fixed: Ticket reply (AgentTicketCompose) quoted the last customer article as plain text instead of the selected article if the template also had the type Note.
  - 2026-11-05 Added: New config option TemplateGenerator::EmptyValueReplacement to choose the text shown for missing values of placeholders in templates.
