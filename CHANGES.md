@@ -1,4 +1,5 @@
 # 6.5.27 2026-??-??
+ - 2026-11-25 Fixed: Support bundle generation could hang because the Perl module audit walked the home directory.
  - 2026-11-25 Security: Fixed permission checks when using dynamic fields of type Webservice. Thanks to @kta1kri for reporting the issue.
  - 2026-11-25 Security: PictureUpload inline file responses now send the sandbox Content-Security-Policy used by other attachment downloads. Attachment responses also now send X-Content-Type-Options: nosniff. Thanks to @kta1kri for reporting the issue.
  - 2026-11-25 CVE-2026-78357: Sessions are now removed when a customer user is invalidated or renamed in the admin interface (as already done for agents), and when an agent or customer user password is changed. The session used to self-change the password via user preferences is kept.

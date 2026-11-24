@@ -14,14 +14,13 @@ use warnings;
 use utf8;
 use Kernel::System::VariableCheck qw(:all);
 
-use File::Basename;
-use FindBin qw($Bin);
+use Cwd qw();
 
 use parent qw(Kernel::System::Console::BaseCommand);
 
 our @ObjectDependencies = (
+    'Kernel::Config',
     'Kernel::System::Environment',
-    'Kernel::System::Log',
 );
 
 sub Configure {
@@ -36,7 +35,6 @@ sub Run {
     my ( $Self, %Param ) = @_;
 
     my $EnvironmentObject = $Kernel::OM->Get('Kernel::System::Environment');
-    my $LogObject         = $Kernel::OM->Get('Kernel::System::Log');
 
     my $Version = $EnvironmentObject->ModuleVersionGet( Module => 'CPAN::Audit' );
     if ( !$Version ) {
@@ -55,26 +53,23 @@ sub Run {
         interactive => 0,
     );
 
-    my @PathsToScan;
-
     # We need to pass an explicit list of paths to be scanned by CPAN::Audit, otherwise it will fallback to @INC which
     #   includes our complete tree, with article storage, cache, temp files, etc. It can result in a downgraded
     #   performance if this command is run often.
     #   Please see bug#14666 for more information.
-    PATH:
-    for my $Path (@INC) {
-        next PATH if $Path && $Path eq '.';                          # Current folder
-        next PATH if $Path && $Path eq dirname($Bin);                # OTRS home folder
-        next PATH if $Path && $Path eq dirname($Bin) . '/Custom';    # Custom folder
-        push @PathsToScan, $Path;
+    my @PathsToScan = $Self->_PathsToScanGet();
+
+    if ( !@PathsToScan ) {
+        $Self->Print("No advisories found.\n");
+        return $Self->ExitCodeOk();
     }
 
-    # Workaround for CPAN::Audit::Installed. It does not use the passed param(s), but @ARGV instead.
+    # Workaround for older CPAN::Audit::Installed versions that read @ARGV instead of the passed params.
     local @ARGV = @PathsToScan;
 
-    my $Result = $Audit->command('installed');
+    my $Result = $Audit->command( 'installed', @PathsToScan );
 
-    if ( IsHashRefWithData($Result) ) {
+    if ( IsHashRefWithData($Result) && IsHashRefWithData( $Result->{dists} ) ) {
         my $ModuleCounter;
         my $AdvisoryCounter;
         my $String;
@@ -108,9 +103,49 @@ sub Run {
         $String .= "\nTotal $AdvisoryCounter advisories found in $ModuleCounter modules.\n";
         $Self->Print($String);
     }
+    else {
+        $Self->Print("No advisories found.\n");
+    }
 
     # return everytime exit code 0
     return $Self->ExitCodeOk();
+}
+
+sub _PathsToScanGet {
+    my ( $Self, @Paths ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    my $Home = $ConfigObject->Get('Home');
+    $Home = Cwd::realpath($Home) || $Home;
+    $Home =~ s{/\z}{};
+
+    my $CpanLib = Cwd::realpath("$Home/Kernel/cpan-lib") || "$Home/Kernel/cpan-lib";
+    $CpanLib =~ s{/\z}{};
+
+    if ( !@Paths ) {
+        @Paths = @INC;
+    }
+
+    my @PathsToScan;
+    PATH:
+    for my $Path (@Paths) {
+        next PATH if !$Path;
+        next PATH if $Path eq '.';
+
+        my $ResolvedPath = Cwd::realpath($Path) || $Path;
+        $ResolvedPath =~ s{/\z}{};
+
+        next PATH if $ResolvedPath eq $Home;
+
+        my $IsUnderHome   = $ResolvedPath                              =~ m{\A\Q$Home/\E};
+        my $IsCpanLibPath = $ResolvedPath eq $CpanLib || $ResolvedPath =~ m{\A\Q$CpanLib/\E};
+        next PATH if $IsUnderHome && !$IsCpanLibPath;
+
+        push @PathsToScan, $ResolvedPath;
+    }
+
+    return @PathsToScan;
 }
 
 1;
