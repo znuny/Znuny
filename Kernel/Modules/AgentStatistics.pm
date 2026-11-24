@@ -402,6 +402,9 @@ sub EditAction {
     my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
 
+    # challenge token check for write action
+    $LayoutObject->ChallengeTokenCheck();
+
     my %Errors;
 
     my $Stat = $Kernel::OM->Get('Kernel::System::Stats')->StatsGet(
@@ -470,8 +473,10 @@ sub EditAction {
             # This part is only needed if the block time is selected
             # perhaps a separate function is better
             my %Time;
-            $Data{UseAsXvalue}[0]{TimeScaleCount}
-                = $ParamObject->GetParam( Param => $SelectedElement . 'TimeScaleCount' ) || 1;
+            $Data{UseAsXvalue}[0]{TimeScaleCount} = $Self->_WholeNumberParam(
+                Value   => $ParamObject->GetParam( Param => $SelectedElement . 'TimeScaleCount' ),
+                Default => 1,
+            );
             my $TimeSelect = $ParamObject->GetParam( Param => $SelectedElement . 'TimeSelect' ) || 'Absolut';
 
             if ( $TimeSelect eq 'Absolut' ) {
@@ -519,11 +524,13 @@ sub EditAction {
                 $Data{UseAsXvalue}[0]{TimeRelativeUnit} = $ParamObject->GetParam(
                     Param => $SelectedElement . 'TimeRelativeUnit'
                 );
-                $Data{UseAsXvalue}[0]{TimeRelativeCount} = $ParamObject->GetParam(
-                    Param => $SelectedElement . 'TimeRelativeCount'
+                $Data{UseAsXvalue}[0]{TimeRelativeCount} = $Self->_WholeNumberParam(
+                    Value   => $ParamObject->GetParam( Param => $SelectedElement . 'TimeRelativeCount' ),
+                    Default => 0,
                 );
-                $Data{UseAsXvalue}[0]{TimeRelativeUpcomingCount} = $ParamObject->GetParam(
-                    Param => $SelectedElement . 'TimeRelativeUpcomingCount'
+                $Data{UseAsXvalue}[0]{TimeRelativeUpcomingCount} = $Self->_WholeNumberParam(
+                    Value   => $ParamObject->GetParam( Param => $SelectedElement . 'TimeRelativeUpcomingCount' ),
+                    Default => 0,
                 );
             }
         }
@@ -558,9 +565,10 @@ sub EditAction {
             if ( $ObjectAttribute->{Block} eq 'Time' ) {
 
                 # for working with extended time
-                $Data{UseAsValueSeries}[$Index]{TimeScaleCount} = $ParamObject->GetParam(
-                    Param => $Element . 'TimeScaleCount'
-                ) || 1;
+                $Data{UseAsValueSeries}[$Index]{TimeScaleCount} = $Self->_WholeNumberParam(
+                    Value   => $ParamObject->GetParam( Param => $Element . 'TimeScaleCount' ),
+                    Default => 1,
+                );
 
                 # check if the current selected value is allowed for the x axis selected time scale
                 my $SelectedXAxisTimeScaleValue = $Data{UseAsXvalue}[0]{SelectedValues}[0];
@@ -664,11 +672,13 @@ sub EditAction {
                     $Data{UseAsRestriction}[$Index]{TimeRelativeUnit} = $ParamObject->GetParam(
                         Param => $Element . 'TimeRelativeUnit'
                     );
-                    $Data{UseAsRestriction}[$Index]{TimeRelativeCount} = $ParamObject->GetParam(
-                        Param => $Element . 'TimeRelativeCount'
+                    $Data{UseAsRestriction}[$Index]{TimeRelativeCount} = $Self->_WholeNumberParam(
+                        Value   => $ParamObject->GetParam( Param => $Element . 'TimeRelativeCount' ),
+                        Default => 0,
                     );
-                    $Data{UseAsRestriction}[$Index]{TimeRelativeUpcomingCount} = $ParamObject->GetParam(
-                        Param => $Element . 'TimeRelativeUpcomingCount'
+                    $Data{UseAsRestriction}[$Index]{TimeRelativeUpcomingCount} = $Self->_WholeNumberParam(
+                        Value   => $ParamObject->GetParam( Param => $Element . 'TimeRelativeUpcomingCount' ),
+                        Default => 0,
                     );
                 }
             }
@@ -859,6 +869,9 @@ sub AddAction {
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $ParamObject  = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    # challenge token check for write action
+    $LayoutObject->ChallengeTokenCheck();
 
     my %Errors;
 
@@ -1096,6 +1109,18 @@ sub _TimeInSeconds {
     );
 
     return $TimeInSeconds{ $Param{TimeUnit} };
+}
+
+sub _WholeNumberParam {
+    my ( $Self, %Param ) = @_;
+
+    my $Default = $Param{Default} // 0;
+    my $Value   = $Param{Value};
+
+    return $Default if !defined $Value;
+    return $Default if $Value !~ m{\A\d+\z};
+
+    return $Value;
 }
 
 1;

@@ -327,8 +327,12 @@ sub StatsParamsWidget {
                                 Name => 'TimeRelativeFixed',
                                 Data => {
                                     TimeRelativeUnit  => $TimeScale->{ $ObjectAttribute->{TimeRelativeUnit} }->{Value},
-                                    TimeRelativeCount => $ObjectAttribute->{TimeRelativeCount},
-                                    TimeRelativeUpcomingCount => $ObjectAttribute->{TimeRelativeUpcomingCount},
+                                    TimeRelativeCount => $LayoutObject->Ascii2Html(
+                                        Text => $ObjectAttribute->{TimeRelativeCount} // '',
+                                    ),
+                                    TimeRelativeUpcomingCount => $LayoutObject->Ascii2Html(
+                                        Text => $ObjectAttribute->{TimeRelativeUpcomingCount} // '',
+                                    ),
                                 },
                             );
                         }

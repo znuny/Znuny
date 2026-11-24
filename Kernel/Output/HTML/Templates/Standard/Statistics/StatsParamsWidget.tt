@@ -83,7 +83,7 @@
                     [% Translate("The past complete %s and the current+upcoming complete %s %s") | html | ReplacePlaceholders(Data.TimeRelativeCount, Data.TimeRelativeUpcomingCount, Data.TimeRelativeUnit) %]<br/>
 [% RenderBlockEnd("TimeRelativeFixed") %]
 [% RenderBlockStart("TimeScaleFixed") %]
-                    [% Translate("Scale") | html %]: [% Data.Count %] [% Translate(Data.Scale) | html %]
+                    [% Translate("Scale") | html %]: [% Data.Count | html %] [% Translate(Data.Scale) | html %]
 [% RenderBlockEnd("TimeScaleFixed") %]
 [% RenderBlockStart("Fixed") %]
                 <div title="[% Data.Value | html %]">

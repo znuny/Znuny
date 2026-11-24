@@ -20,6 +20,7 @@
  - 2026-11-17 Added: Process management: Clone activity dialogs and transition actions from the Edit Activity and Edit Path screens.
  - 2026-11-13 Fixed: Importing a web service with an invalid configuration showed a success notice even though nothing was stored. Thanks to @natanaraujo3001-crypto for reporting the issue. [#870](https://github.com/znuny/Znuny/issues/870)
  - 2026-11-13 Fixed: SecureMode setting description now says GenericAgent, Package Manager and SQL Box are disabled when SecureMode is not enabled. Thanks to @BuilderNSV for reporting the issue. [#715](https://github.com/znuny/Znuny/issues/715)
+ - 2026-11-12 Security: Statistics add and edit actions now require a ChallengeToken, and stored time scale values are HTML-escaped when shown. Thanks to Timotej Doležal (ESET) for reporting the issue.
  - 2026-11-12 Fixed: Follow-up on a closed ticket no longer locks the last owner when the state is kept or stays closed.
  - 2026-11-11 Added: Queue and service navigation layouts.
  - 2026-11-11 Changed: Package repository index file is now packages.xml. otrs.xml is no longer requested or served. Package downloads now log the URL when the request returns no content.
