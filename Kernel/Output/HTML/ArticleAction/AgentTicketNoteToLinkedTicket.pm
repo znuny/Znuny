@@ -11,6 +11,7 @@ package Kernel::Output::HTML::ArticleAction::AgentTicketNoteToLinkedTicket;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::Language qw(Translatable);
 
@@ -68,18 +69,56 @@ sub CheckAccess {
         return if !$Ok;
     }
 
-    # get linked tickets (there must be linked tickets to create a note for a linked ticket)
-    my %LinkList = $LinkObject->LinkKeyListWithData(
+    # Expanded ticket zoom renders every shown article in this same request and
+    # calls CheckAccess for each one. This is why the result will be
+    # stored in $Self->{LinkedTicketAccess}.
+    my $TicketID = $Param{Ticket}->{TicketID};
+    if ( exists $Self->{LinkedTicketAccess}->{$TicketID} ) {
+        return $Self->{LinkedTicketAccess}->{$TicketID};
+    }
+
+    # Offer the action only when a linked ticket can be read and used.
+    my %LinkKeyList = $LinkObject->LinkKeyList(
         Object1 => 'Ticket',
-        Key1    => $Param{Ticket}->{TicketID},
+        Key1    => $TicketID,
         Object2 => 'Ticket',
         State   => 'Valid',
-        UserID  => 1,
+        UserID  => $Param{UserID},
     );
 
-    return if !%LinkList;
+    if ( !%LinkKeyList ) {
+        $Self->{LinkedTicketAccess}->{$TicketID} = 0;
+        return;
+    }
 
-    return 1;
+    my $Permission = $Config->{Permission} || '';
+
+    LINKEDTICKETID:
+    for my $LinkedTicketID ( sort keys %LinkKeyList ) {
+        my $CanRead = $TicketObject->TicketPermission(
+            Type     => 'ro',
+            TicketID => $LinkedTicketID,
+            UserID   => $Param{UserID},
+            LogNo    => 1,
+        );
+        next LINKEDTICKETID if !$CanRead;
+
+        if ($Permission) {
+            my $CanUse = $TicketObject->TicketPermission(
+                Type     => $Permission,
+                TicketID => $LinkedTicketID,
+                UserID   => $Param{UserID},
+                LogNo    => 1,
+            );
+            next LINKEDTICKETID if !$CanUse;
+        }
+
+        $Self->{LinkedTicketAccess}->{$TicketID} = 1;
+        return 1;
+    }
+
+    $Self->{LinkedTicketAccess}->{$TicketID} = 0;
+    return;
 }
 
 sub GetConfig {
