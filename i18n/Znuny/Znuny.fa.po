@@ -13570,9 +13570,9 @@ msgstr ""
 msgid "Customer user \"%s\" already exists."
 msgstr ""
 
-#. Perl Module: Kernel/System/CustomerUser/DB.pm
+#. Perl Module: Kernel/System/CustomerUser.pm
 msgid "This email address is already in use for another customer user."
-msgstr ""
+msgstr "این آدرس ایمیل در حال حاضر برای کاربر مشترک دیگری استفاده می‌شود."
 
 #. Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
 msgid "before/after"

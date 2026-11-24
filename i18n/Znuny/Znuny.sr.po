@@ -13574,7 +13574,7 @@ msgstr "Ово подешавање може бити прегажено у ли
 msgid "Customer user \"%s\" already exists."
 msgstr "Клијент корисник \"%s\" већ постоји."
 
-#. Perl Module: Kernel/System/CustomerUser/DB.pm
+#. Perl Module: Kernel/System/CustomerUser.pm
 msgid "This email address is already in use for another customer user."
 msgstr "Ова адреса електронске поште је већ искоришћена за другог клијент корисника."
 

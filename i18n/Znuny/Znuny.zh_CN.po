@@ -13574,7 +13574,7 @@ msgstr "这个设置可以在用户偏好设置中被覆盖，但默认不会处
 msgid "Customer user \"%s\" already exists."
 msgstr "客户用户“%s”已经存在。"
 
-#. Perl Module: Kernel/System/CustomerUser/DB.pm
+#. Perl Module: Kernel/System/CustomerUser.pm
 msgid "This email address is already in use for another customer user."
 msgstr "这个电子邮件地址已被其他客户用户使用。"
 

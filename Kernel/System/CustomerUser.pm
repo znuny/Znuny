@@ -941,6 +941,12 @@ sub CustomerUserAdd {
         }
     }
 
+    # check email address across all backends
+    return if !$Self->_IsCustomerUserEmailUnique(
+        Source    => $Param{Source},
+        UserEmail => $Param{UserEmail},
+    );
+
     # store customer user data
     my $Result = $Self->{ $Param{Source} }->CustomerUserAdd(%Param);
     return if !$Result;
@@ -1012,6 +1018,20 @@ sub CustomerUserUpdate {
         return;
     }
 
+    # Only check when the address changes. An unchanged address must still
+    # allow other updates (login lockout, customer company rename).
+    if (
+        $Param{UserEmail}
+        && lc $Param{UserEmail} ne lc( $User{UserEmail} // '' )
+        )
+    {
+        return if !$Self->_IsCustomerUserEmailUnique(
+            Source           => $User{Source},
+            UserEmail        => $Param{UserEmail},
+            ExcludeUserLogin => $Param{ID} || $User{UserLogin},
+        );
+    }
+
     my $Result = $Self->{ $User{Source} }->CustomerUserUpdate(%Param);
     return if !$Result;
 
@@ -1027,6 +1047,51 @@ sub CustomerUserUpdate {
     );
 
     return $Result;
+}
+
+sub _IsCustomerUserEmailUnique {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject      = $Kernel::OM->Get('Kernel::System::Log');
+    my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
+
+    # Nothing to compare.
+    return 1 if !$Param{UserEmail};
+
+    my $Source  = $Param{Source} || 'CustomerUser';
+    my $Backend = $Self->{$Source};
+
+    # Disabled, or this source is not loaded.
+    return 1 if !$Backend;
+    return 1 if !$Backend->{CustomerUserMap}->{CustomerUserEmailUniqCheck};
+
+    my %Result = $Self->CustomerSearch(
+        Valid            => 0,
+        PostMasterSearch => $Param{UserEmail},
+    );
+
+    if ( $Param{ExcludeUserLogin} ) {
+        my $ExcludeUserLogin = lc $Param{ExcludeUserLogin};
+
+        USERLOGIN:
+        for my $UserLogin ( sort keys %Result ) {
+            next USERLOGIN if lc $UserLogin ne $ExcludeUserLogin;
+
+            delete $Result{$UserLogin};
+        }
+    }
+
+    if (%Result) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => $LanguageObject->Translate(
+                'This email address is already in use for another customer user.'
+            ),
+        );
+        return;
+    }
+
+    return 1;
 }
 
 =head2 SetPassword()

@@ -5296,8 +5296,6 @@ sub Data {
 
         # Perl Module: Kernel/System/CustomerUser.pm
         'Customer user "%s" already exists.' => '客户用户“%s”已经存在。',
-
-        # Perl Module: Kernel/System/CustomerUser/DB.pm
         'This email address is already in use for another customer user.' =>
             '这个电子邮件地址已被其他客户用户使用。',
 

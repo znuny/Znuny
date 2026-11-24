@@ -5290,8 +5290,6 @@ sub Data {
 
         # Perl Module: Kernel/System/CustomerUser.pm
         'Customer user "%s" already exists.' => 'Клієнт "%s" вже існує.',
-
-        # Perl Module: Kernel/System/CustomerUser/DB.pm
         'This email address is already in use for another customer user.' =>
             'Ця адреса поштової скриньки вже використана іншим клієнтом.',
 

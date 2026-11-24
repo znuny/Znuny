@@ -5295,8 +5295,6 @@ sub Data {
 
         # Perl Module: Kernel/System/CustomerUser.pm
         'Customer user "%s" already exists.' => 'A(z) „%s” ügyfél-felhasználó már létezik.',
-
-        # Perl Module: Kernel/System/CustomerUser/DB.pm
         'This email address is already in use for another customer user.' =>
             'Ez az e-mail-cím már használatban van egy másik ügyfél-felhasználónál.',
 
