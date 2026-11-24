@@ -1,4 +1,5 @@
 # 7.5.1 2026-??-??
+ - 2026-11-25 Security: Fixed access to articles of tickets without permission on PostgreSQL 16+ by rejecting non-numeric article IDs. Thanks to Timotej Doležal (ESET) for reporting this issue.
  - 2026-11-25 Security: S/MIME certificate and private-key filenames are confined to their directories, and the admin read and download actions require a challenge token.
  - 2026-11-25 Security: Process management: Example process import now rejects files that are outside of the examples directory.
  - 2026-11-25 Security: Generic interface operations TicketCreate and TicketUpdate no longer let a customer user set an agent article sender or other agent-related ticket fields.
