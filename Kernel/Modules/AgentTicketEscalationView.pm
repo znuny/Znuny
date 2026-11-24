@@ -263,7 +263,10 @@ sub Run {
     }
 
     # do shown tickets lookup
-    my $Limit         = $ParamObject->GetParam( Param => 'Limit' ) || 2000;
+    my $Limit = $ParamObject->GetParam( Param => 'Limit' );
+    if ( !IsPositiveInteger($Limit) ) {
+        $Limit = 2000;
+    }
     my $OriginalLimit = 10_000;
 
     my $ElementChanged = $ParamObject->GetParam( Param => 'ElementChanged' ) || '';

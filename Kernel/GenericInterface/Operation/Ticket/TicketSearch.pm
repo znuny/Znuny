@@ -300,8 +300,10 @@ sub Run {
 
     # all needed variables
     $Self->{SearchLimit} = $Param{Data}->{Limit}
-        || $Self->{Config}->{SearchLimit}
-        || 500;
+        || $Self->{Config}->{SearchLimit};
+    if ( !IsPositiveInteger( $Self->{SearchLimit} ) ) {
+        $Self->{SearchLimit} = 500;
+    }
     $Self->{SortBy} = $Param{Data}->{SortBy}
         || $Self->{Config}->{'SortBy::Default'}
         || 'Age';
