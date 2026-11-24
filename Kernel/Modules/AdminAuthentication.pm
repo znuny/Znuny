@@ -358,7 +358,7 @@ sub _Save {
     }
 
     # Optional login attribute(s), comma separated. Written into the generated Perl config file.
-    my @UserLoginAttributes = grep {length} map { s{\A\s+|\s+\z}{}gr } split /,/, $GetParam{UserLoginAttribute} // '';
+    my @UserLoginAttributes = grep {length} map {s{\A\s+|\s+\z}{}gr} split /,/, $GetParam{UserLoginAttribute} // '';
     if ( grep {m{[\x00-\x1F\x7F]}} @UserLoginAttributes ) {
         $Errors{UserLoginAttributeInvalid} = 'ServerError';
     }

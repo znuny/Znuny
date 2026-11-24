@@ -329,7 +329,7 @@ sub _LoginAttributes {
 
     my @Attributes = ref $Config eq 'ARRAY' ? @{$Config} : split /\s*,\s*/, $Config;
 
-    return grep { defined $_ && length $_ } map { s{\A\s+|\s+\z}{}gr } @Attributes;
+    return grep { defined $_ && length $_ } map {s{\A\s+|\s+\z}{}gr} @Attributes;
 }
 
 # Values of an attribute, read only from the assertion whose signature Net::SAML2 verified.

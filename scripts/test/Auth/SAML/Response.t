@@ -394,7 +394,8 @@ my $GetLogin = sub {
         XPath  => XML::LibXML::XPathContext->new( XML::LibXML->load_xml( string => $XML ) ),
         ID     => '_signed',
         NameID => 'persistent-id-123',
-    }, 'UnitTest::SAMLLoginAssertionStub';
+        },
+        'UnitTest::SAMLLoginAssertionStub';
 
     return $ResponseObject->GetLogin();
 };
