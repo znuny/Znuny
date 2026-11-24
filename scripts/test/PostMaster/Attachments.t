@@ -28,8 +28,8 @@ my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
 
 # ensure that the appropriate X-Headers are available in the config
 my %NeededXHeaders = (
-    'X-OTRS-AttachmentExists' => 1,
-    'X-OTRS-AttachmentCount'  => 1,
+    'X-Znuny-AttachmentExists' => 1,
+    'X-Znuny-AttachmentCount'  => 1,
 );
 
 my $XHeaders          = $ConfigObject->Get('PostmasterX-Header');

@@ -12,7 +12,8 @@ package Kernel::Modules::AdminPostMasterFilter;
 use strict;
 use warnings;
 
-use Kernel::Language              qw(Translatable);
+use Kernel::Language qw(Translatable);
+use Kernel::System::PostMaster::Header;
 use Kernel::System::VariableCheck qw(:all);
 
 our $ObjectManagerDisabled = 1;
@@ -364,6 +365,7 @@ sub _MaskUpdate {
 
     my $PostMasterFilterObject = $Kernel::OM->Get('Kernel::System::PostMaster::Filter');
     my $ConfigObject           = $Kernel::OM->Get('Kernel::Config');
+    my $PostMasterHeaderObject = Kernel::System::PostMaster::Header->new();
 
     my %Data    = %{ $Param{Data} };
     my $Counter = 0;
@@ -383,7 +385,9 @@ sub _MaskUpdate {
             if ( $Item->{Key} && length $Item->{Value} ) {
                 $Counter++;
                 $Data{"SetValue$Counter"}  = $Item->{Value};
-                $Data{"SetHeader$Counter"} = $Item->{Key};
+                $Data{"SetHeader$Counter"} = $PostMasterHeaderObject->ZnunyHeaderGet(
+                    Header => $Item->{Key},
+                );
             }
         }
     }

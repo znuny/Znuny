@@ -100,6 +100,71 @@ Body
         },
     },
     {
+        Name  => 'X-Znuny-Loop',
+        Email =>
+            'From: test@home.com
+To: test@home.com
+X-Znuny-Loop: yes
+Subject: Testmail
+
+Body
+',
+        EmailParams => {
+            From           => 'test@home.com',
+            'X-OTRS-Loop'  => 'yes',
+            'X-Znuny-Loop' => 'yes',
+        },
+    },
+    {
+        Name  => 'X-Znuny-Loop wins over X-OTRS-Loop',
+        Email =>
+            'From: test@home.com
+To: test@home.com
+X-OTRS-Loop: no
+X-Znuny-Loop: yes
+Subject: Testmail
+
+Body
+',
+        EmailParams => {
+            From           => 'test@home.com',
+            'X-OTRS-Loop'  => 'yes',
+            'X-Znuny-Loop' => 'yes',
+        },
+    },
+    {
+        Name    => 'X-OTRS-Loop untrusted',
+        Trusted => 0,
+        Email   =>
+            'From: test@home.com
+To: test@home.com
+X-OTRS-Loop: yes
+Subject: Testmail
+
+Body
+',
+        EmailParams => {
+            From          => 'test@home.com',
+            'X-OTRS-Loop' => '',
+        },
+    },
+    {
+        Name    => 'X-Znuny-Loop untrusted',
+        Trusted => 0,
+        Email   =>
+            'From: test@home.com
+To: test@home.com
+X-Znuny-Loop: yes
+Subject: Testmail
+
+Body
+',
+        EmailParams => {
+            From          => 'test@home.com',
+            'X-OTRS-Loop' => '',
+        },
+    },
+    {
         Name  => 'Auto-submitted: auto-generated',
         Email =>
             'From: test@home.com
@@ -162,6 +227,7 @@ for my $Test (@Tests) {
     my $PostMasterObject = Kernel::System::PostMaster->new(
         CommunicationLogObject => $CommunicationLogObject,
         Email                  => \@Email,
+        Trusted                => defined $Test->{Trusted} ? $Test->{Trusted} : 1,
     );
 
     my $EmailParams = $PostMasterObject->GetEmailParams();

@@ -104,9 +104,16 @@ $Self->True(
 for my $Filter (@Filters) {
     my %ConvertedStructure;
     for my $Attribute (qw(Match Not Set)) {
-        $ConvertedStructure{$Attribute} = [
-            map { Key => $_, Value => $Filter->{$Attribute}->{$_} }, sort keys %{ $Filter->{$Attribute} }
-        ];
+        $ConvertedStructure{$Attribute} = [];
+        for my $Key ( sort keys %{ $Filter->{$Attribute} } ) {
+            my $ExportKey = $Key;
+            $ExportKey =~ s{\AX-OTRS-}{X-Znuny-}i;
+
+            push @{ $ConvertedStructure{$Attribute} }, {
+                Key   => $ExportKey,
+                Value => $Filter->{$Attribute}->{$Key},
+            };
+        }
     }
     $Filter->{ConvertedStructure} = \%ConvertedStructure;
 }

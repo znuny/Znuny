@@ -30,7 +30,7 @@ my $UnitTestHelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
 #
 my @RandomHeaderNames;
 for ( 0 .. 1 ) {
-    push @RandomHeaderNames, 'X-OTRS-Test-' . $UnitTestHelperObject->GetRandomNumber();
+    push @RandomHeaderNames, 'X-Znuny-Test-' . $UnitTestHelperObject->GetRandomNumber();
 }
 my @Tests = (
     {

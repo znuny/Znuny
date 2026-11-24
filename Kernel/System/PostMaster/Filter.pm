@@ -12,7 +12,8 @@ package Kernel::System::PostMaster::Filter;
 use strict;
 use warnings;
 
-use Kernel::Language              qw(Translatable);
+use Kernel::Language qw(Translatable);
+use Kernel::System::PostMaster::Header;
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
@@ -101,7 +102,7 @@ add a filter
         ],
         Set = [
             {
-                Key   => 'X-OTRS-Queue',
+                Key   => 'X-Znuny-Queue',
                 Value => 'Some::Queue',
             },
             # ...
@@ -125,7 +126,8 @@ sub FilterAdd {
     }
 
     # get database object
-    my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+    my $DBObject               = $Kernel::OM->Get('Kernel::System::DB');
+    my $PostMasterHeaderObject = Kernel::System::PostMaster::Header->new();
 
     my @Not = @{ $Param{Not} || [] };
 
@@ -135,13 +137,23 @@ sub FilterAdd {
 
         for my $Index ( 0 .. ( scalar @Data ) - 1 ) {
 
+            my $Key = $Data[$Index]->{Key};
+
+            # The edit screen only lists X-Znuny Set headers. Keep old X-OTRS
+            # names working at runtime, but store the name the screen can show.
+            if ( $Type eq 'Set' ) {
+                $Key = $PostMasterHeaderObject->ZnunyHeaderGet(
+                    Header => $Key,
+                );
+            }
+
             return if !$DBObject->Do(
                 SQL =>
                     'INSERT INTO postmaster_filter (f_name, f_stop, f_type, f_key, f_value, f_not)'
                     . ' VALUES (?, ?, ?, ?, ?, ?)',
                 Bind => [
-                    \$Param{Name},         \$Param{StopAfterMatch}, \$Type,
-                    \$Data[$Index]->{Key}, \$Data[$Index]->{Value}, \$Not[$Index]->{Value},
+                    \$Param{Name}, \$Param{StopAfterMatch}, \$Type,
+                    \$Key,         \$Data[$Index]->{Value}, \$Not[$Index]->{Value},
                 ],
             );
         }
@@ -323,7 +335,7 @@ returns PostMaster filters hashes in an array with data:
             }],
             'Set' => [{
                 'Value' => '2',
-                'Key' => 'X-OTRS-AttachmentExists'
+                'Key' => 'X-Znuny-AttachmentExists'
             }],
             'Not' => [{
                 'Value' => undef,
@@ -339,7 +351,7 @@ returns PostMaster filters hashes in an array with data:
             }],
             'Set' => [{
                 'Value' => '3',
-                'Key' => 'X-OTRS-AttachmentExists'
+                'Key' => 'X-Znuny-AttachmentExists'
             }],
             'Not' => [{
                 'Key' => 'Precedence',
@@ -632,7 +644,7 @@ Returns:
         'StopAfterMatch' => 0,
         'Set' => [{
             'Value' => '2',
-            'Key' => 'X-OTRS-AttachmentExists'
+            'Key' => 'X-Znuny-AttachmentExists'
         }],
         'Match' => [{
             'Value' => '2',
@@ -721,7 +733,8 @@ sub FilterInsertErrorsCheck {
 
     my %Errors;
 
-    my %Headers = $Self->FilterHeadersGet();
+    my %Headers                = $Self->FilterHeadersGet();
+    my $PostMasterHeaderObject = Kernel::System::PostMaster::Header->new();
 
     if (@Match) {
         my $InvalidCount = 0;
@@ -769,7 +782,14 @@ sub FilterInsertErrorsCheck {
             if ( !length $SetKey ) {
                 $Errors{"SetHeader${InvalidCount}Invalid"} = 'Missing';
             }
-            elsif ( !$Headers{Set}{$SetKey} ) {
+            elsif (
+                !$Headers{Set}{
+                    $PostMasterHeaderObject->ZnunyHeaderGet(
+                        Header => $SetKey,
+                    )
+                }
+                )
+            {
                 $Errors{"SetHeader${InvalidCount}Invalid"} = 'InvalidSetHeaderValue';
             }
             if ( !length $SetValue ) {
@@ -809,10 +829,13 @@ get valid PostMaster headers
 sub FilterHeadersGet {
     my ( $Self, %Param ) = @_;
 
-    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $ConfigObject           = $Kernel::OM->Get('Kernel::Config');
+    my $PostMasterHeaderObject = Kernel::System::PostMaster::Header->new();
 
     # all headers
-    my @Headers = @{ $ConfigObject->Get('PostmasterX-Header') };
+    my @Headers = $PostMasterHeaderObject->HeaderListWithAliasesGet(
+        Headers => $ConfigObject->Get('PostmasterX-Header'),
+    );
 
     # add Dynamic Field headers
     my $DynamicFields = $Kernel::OM->Get('Kernel::System::DynamicField')->DynamicFieldList(
@@ -822,18 +845,23 @@ sub FilterHeadersGet {
     );
 
     for my $DynamicField ( values %$DynamicFields ) {
-        push @Headers, 'X-OTRS-DynamicField-' . $DynamicField;
-        push @Headers, 'X-OTRS-FollowUp-DynamicField-' . $DynamicField;
+        push @Headers, $PostMasterHeaderObject->HeaderAliasesGet(
+            Header => 'X-Znuny-DynamicField-' . $DynamicField,
+        );
+        push @Headers, $PostMasterHeaderObject->HeaderAliasesGet(
+            Header => 'X-Znuny-FollowUp-DynamicField-' . $DynamicField,
+        );
     }
 
     my %MatchHeader = map { $_ => $_ } @Headers;
 
     $MatchHeader{Body} = 'Body';
 
-    # otrs header
+    # Show new X-Znuny headers for setting values; old   X-OTRS headers are still accepted.
+
     my %SetHeader;
     for my $HeaderKey ( sort keys %MatchHeader ) {
-        if ( $HeaderKey =~ /^x-otrs/i ) {
+        if ( $HeaderKey =~ /^x-znuny/i ) {
             $SetHeader{$HeaderKey} = $HeaderKey;
         }
     }

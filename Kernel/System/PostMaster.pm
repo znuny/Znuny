@@ -17,6 +17,7 @@ use Kernel::System::PostMaster::DestQueue;
 use Kernel::System::PostMaster::NewTicket;
 use Kernel::System::PostMaster::FollowUp;
 use Kernel::System::PostMaster::Reject;
+use Kernel::System::PostMaster::Header;
 
 use Kernel::System::VariableCheck qw(IsHashRefWithData);
 
@@ -52,7 +53,7 @@ Don't use the constructor directly, use the ObjectManager instead:
         'Kernel::System::PostMaster',
         ObjectParams => {
             Email   => \@ArrayOfEmailContent,
-            Trusted => 1,                       # 1|0 ignore X-OTRS header if false
+            Trusted => 1,                       # 1|0 ignore X-OTRS/X-Znuny header if false
         },
     );
 
@@ -88,7 +89,11 @@ sub new {
             || die "Found no '$Option' option in configuration!";
     }
 
-    # should I use x-otrs headers?
+    $Self->{'PostmasterX-Header'} = [ @{ $Self->{'PostmasterX-Header'} } ];
+
+    $Self->{PostMasterHeaderObject} = Kernel::System::PostMaster::Header->new();
+
+    # should I use x-otrs/x-znuny headers?
     $Self->{Trusted} = defined $Param{Trusted} ? $Param{Trusted} : 1;
 
     if ( $Self->{Trusted} ) {
@@ -103,22 +108,21 @@ sub new {
             ResultType => 'HASH',
         );
 
-        # create a lookup table
-        my %HeaderLookup = map { $_ => 1 } @{ $Self->{'PostmasterX-Header'} };
-
         for my $DynamicField ( values %$DynamicFields ) {
             for my $Header (
-                'X-OTRS-DynamicField-' . $DynamicField,
-                'X-OTRS-FollowUp-DynamicField-' . $DynamicField,
+                'X-Znuny-DynamicField-' . $DynamicField,
+                'X-Znuny-FollowUp-DynamicField-' . $DynamicField,
                 )
             {
-
-                # only add the header if is not alreday in the config
-                if ( !$HeaderLookup{$Header} ) {
-                    push @{ $Self->{'PostmasterX-Header'} }, $Header;
-                }
+                push @{ $Self->{'PostmasterX-Header'} }, $Header;
             }
         }
+
+        $Self->{'PostmasterX-Header'} = [
+            $Self->{PostMasterHeaderObject}->HeaderListWithAliasesGet(
+                Headers => $Self->{'PostmasterX-Header'},
+            ),
+        ];
     }
 
     return $Self;
@@ -140,7 +144,7 @@ return params
     2 = follow up / open/reopen
     3 = follow up / close -> new ticket
     4 = follow up / close -> reject
-    5 = ignored (because of X-OTRS-Ignore header)
+    5 = ignored (because of X-Znuny-Ignore/X-OTRS-Ignore header)
 
 =cut
 
@@ -151,6 +155,10 @@ sub Run {
 
     # ConfigObject section / get params
     my $GetParam = $Self->GetEmailParams();
+
+    $Self->{PostMasterHeaderObject}->HeaderHashNormalize(
+        Header => $GetParam,
+    );
 
     # check if follow up
     my ( $Tn, $TicketID ) = $Self->CheckFollowUp( GetParam => $GetParam );
@@ -186,11 +194,16 @@ sub Run {
             }
 
             # modify params
-            my $Run = $FilterObject->Run(
+            my %GetParamBefore = %{$GetParam};
+            my $Run            = $FilterObject->Run(
                 GetParam  => $GetParam,
                 JobConfig => $Jobs{$Job},
                 TicketID  => $TicketID,
                 UserID    => $Self->{PostmasterUserID},
+            );
+            $Self->{PostMasterHeaderObject}->HeaderHashNormalize(
+                Header         => $GetParam,
+                PreviousHeader => \%GetParamBefore,
             );
             if ( !$Run ) {
                 $Self->{CommunicationLogObject}->ObjectLog(
@@ -211,7 +224,7 @@ sub Run {
             Key           => 'Kernel::System::PostMaster',
             Value         =>
                 "Ignored Email (From: $GetParam->{'From'}, Message-ID: $GetParam->{'Message-ID'}) "
-                . "because the X-OTRS-Ignore is set (X-OTRS-Ignore: $GetParam->{'X-OTRS-Ignore'}).",
+                . "because X-Znuny-Ignore/X-OTRS-Ignore is set (Value: $GetParam->{'X-OTRS-Ignore'}).",
         );
         return (5);
     }
@@ -250,11 +263,16 @@ sub Run {
             }
 
             # modify params
-            my $Run = $FilterObject->Run(
+            my %GetParamBefore = %{$GetParam};
+            my $Run            = $FilterObject->Run(
                 GetParam  => $GetParam,
                 JobConfig => $Jobs{$Job},
                 TicketID  => $TicketID,
                 UserID    => $Self->{PostmasterUserID},
+            );
+            $Self->{PostMasterHeaderObject}->HeaderHashNormalize(
+                Header         => $GetParam,
+                PreviousHeader => \%GetParamBefore,
             );
             if ( !$Run ) {
                 $Self->{CommunicationLogObject}->ObjectLog(
@@ -467,12 +485,17 @@ sub Run {
             }
 
             # modify params
-            my $Run = $FilterObject->Run(
+            my %GetParamBefore = %{$GetParam};
+            my $Run            = $FilterObject->Run(
                 TicketID  => $TicketID,
                 GetParam  => $GetParam,
                 JobConfig => $Jobs{$Job},
                 Return    => $Return[0],
                 UserID    => $Self->{PostmasterUserID},
+            );
+            $Self->{PostMasterHeaderObject}->HeaderHashNormalize(
+                Header         => $GetParam,
+                PreviousHeader => \%GetParamBefore,
             );
 
             if ( !$Run ) {
@@ -577,8 +600,8 @@ sub GetEmailParams {
     HEADER:
     for my $Param ( @{ $Self->{'PostmasterX-Header'} } ) {
 
-        # do not scan x-otrs headers if mailbox is not marked as trusted
-        next HEADER if ( !$Self->{Trusted} && $Param =~ /^x-otrs/i );
+        # do not scan x-otrs/x-znuny headers if mailbox is not marked as trusted
+        next HEADER if ( !$Self->{Trusted} && $Param =~ /^x-(?:otrs|znuny)/i );
 
         $GetParam{$Param} = $Self->{ParserObject}->GetParam( WHAT => $Param );
 
@@ -599,6 +622,11 @@ sub GetEmailParams {
     if ( $GetParam{'Reply-To'} ) {
         $GetParam{'ReplyTo'} = $GetParam{'Reply-To'};
     }
+
+    $Self->{PostMasterHeaderObject}->HeaderHashNormalize(
+        Header => \%GetParam,
+    );
+
     if (
         $GetParam{'Mailing-List'}
         || $GetParam{'Precedence'}
@@ -611,8 +639,15 @@ sub GetEmailParams {
         )
         )
     {
-        $GetParam{'X-OTRS-Loop'} = 'yes';
+        $GetParam{'X-OTRS-Loop'}  = 'yes';
+        $GetParam{'X-Znuny-Loop'} = 'yes';
     }
+
+    # untrusted mail skips these headers, keep them empty like trusted mail does
+    for my $Key (qw(X-OTRS-Loop X-Znuny-Loop)) {
+        $GetParam{$Key} //= '';
+    }
+
     if ( !$GetParam{'X-Sender'} ) {
 
         # get sender email
@@ -653,6 +688,10 @@ sub GetEmailParams {
             $GetParam{$Key} = 1;
         }
     }
+
+    $Self->{PostMasterHeaderObject}->HeaderHashNormalize(
+        Header => \%GetParam,
+    );
 
     # Get body.
     $GetParam{Body} = $Self->{ParserObject}->GetMessageBody();

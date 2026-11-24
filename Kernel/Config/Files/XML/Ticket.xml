@@ -12206,7 +12206,7 @@
         <Description Translatable="1">Defines the PostMaster header to be used on the filter for keeping the current state of the ticket.</Description>
         <Navigation>Core::Email::PostMaster</Navigation>
         <Value>
-            <Item ValueType="String">X-OTRS-FollowUp-State-Keep</Item>
+            <Item ValueType="String">X-Znuny-FollowUp-State-Keep</Item>
         </Value>
     </Setting>
     <Setting Name="PostmasterFollowUpOnUnlockAgentNotifyOnlyToOwner" Required="1" Valid="1">
@@ -12270,56 +12270,56 @@
                 <Item>Envelope-To</Item>
                 <Item>X-Envelope-To</Item>
                 <Item>Return-Path</Item>
-                <Item>X-OTRS-AttachmentExists</Item>
-                <Item>X-OTRS-AttachmentCount</Item>
-                <Item>X-OTRS-Owner</Item>
-                <Item>X-OTRS-OwnerID</Item>
-                <Item>X-OTRS-Responsible</Item>
-                <Item>X-OTRS-ResponsibleID</Item>
-                <Item>X-OTRS-Loop</Item>
-                <Item>X-OTRS-Priority</Item>
-                <Item>X-OTRS-PriorityID</Item>
-                <Item>X-OTRS-Queue</Item>
-                <Item>X-OTRS-QueueID</Item>
-                <Item>X-OTRS-Lock</Item>
-                <Item>X-OTRS-Ignore</Item>
-                <Item>X-OTRS-State</Item>
-                <Item>X-OTRS-StateID</Item>
-                <Item>X-OTRS-State-PendingTime</Item>
-                <Item>X-OTRS-Type</Item>
-                <Item>X-OTRS-TypeID</Item>
-                <Item>X-OTRS-Service</Item>
-                <Item>X-OTRS-ServiceID</Item>
-                <Item>X-OTRS-SLA</Item>
-                <Item>X-OTRS-SLAID</Item>
-                <Item>X-OTRS-Title</Item>
-                <Item>X-OTRS-CustomerNo</Item>
-                <Item>X-OTRS-CustomerUser</Item>
-                <Item>X-OTRS-SenderType</Item>
-                <Item>X-OTRS-IsVisibleForCustomer</Item>
-                <Item>X-OTRS-FollowUp-Owner</Item>
-                <Item>X-OTRS-FollowUp-OwnerID</Item>
-                <Item>X-OTRS-FollowUp-Responsible</Item>
-                <Item>X-OTRS-FollowUp-ResponsibleID</Item>
-                <Item>X-OTRS-FollowUp-Priority</Item>
-                <Item>X-OTRS-FollowUp-PriorityID</Item>
-                <Item>X-OTRS-FollowUp-Queue</Item>
-                <Item>X-OTRS-FollowUp-QueueID</Item>
-                <Item>X-OTRS-FollowUp-Lock</Item>
-                <Item>X-OTRS-FollowUp-State</Item>
-                <Item>X-OTRS-FollowUp-StateID</Item>
-                <Item>X-OTRS-FollowUp-State-PendingTime</Item>
-                <Item>X-OTRS-FollowUp-Type</Item>
-                <Item>X-OTRS-FollowUp-TypeID</Item>
-                <Item>X-OTRS-FollowUp-Service</Item>
-                <Item>X-OTRS-FollowUp-ServiceID</Item>
-                <Item>X-OTRS-FollowUp-SLA</Item>
-                <Item>X-OTRS-FollowUp-SLAID</Item>
-                <Item>X-OTRS-FollowUp-SenderType</Item>
-                <Item>X-OTRS-FollowUp-IsVisibleForCustomer</Item>
-                <Item>X-OTRS-FollowUp-Title</Item>
-                <Item>X-OTRS-FollowUp-State-Keep</Item>
-                <Item>X-OTRS-BodyDecrypted</Item>
+                <Item>X-Znuny-AttachmentExists</Item>
+                <Item>X-Znuny-AttachmentCount</Item>
+                <Item>X-Znuny-Owner</Item>
+                <Item>X-Znuny-OwnerID</Item>
+                <Item>X-Znuny-Responsible</Item>
+                <Item>X-Znuny-ResponsibleID</Item>
+                <Item>X-Znuny-Loop</Item>
+                <Item>X-Znuny-Priority</Item>
+                <Item>X-Znuny-PriorityID</Item>
+                <Item>X-Znuny-Queue</Item>
+                <Item>X-Znuny-QueueID</Item>
+                <Item>X-Znuny-Lock</Item>
+                <Item>X-Znuny-Ignore</Item>
+                <Item>X-Znuny-State</Item>
+                <Item>X-Znuny-StateID</Item>
+                <Item>X-Znuny-State-PendingTime</Item>
+                <Item>X-Znuny-Type</Item>
+                <Item>X-Znuny-TypeID</Item>
+                <Item>X-Znuny-Service</Item>
+                <Item>X-Znuny-ServiceID</Item>
+                <Item>X-Znuny-SLA</Item>
+                <Item>X-Znuny-SLAID</Item>
+                <Item>X-Znuny-Title</Item>
+                <Item>X-Znuny-CustomerNo</Item>
+                <Item>X-Znuny-CustomerUser</Item>
+                <Item>X-Znuny-SenderType</Item>
+                <Item>X-Znuny-IsVisibleForCustomer</Item>
+                <Item>X-Znuny-FollowUp-Owner</Item>
+                <Item>X-Znuny-FollowUp-OwnerID</Item>
+                <Item>X-Znuny-FollowUp-Responsible</Item>
+                <Item>X-Znuny-FollowUp-ResponsibleID</Item>
+                <Item>X-Znuny-FollowUp-Priority</Item>
+                <Item>X-Znuny-FollowUp-PriorityID</Item>
+                <Item>X-Znuny-FollowUp-Queue</Item>
+                <Item>X-Znuny-FollowUp-QueueID</Item>
+                <Item>X-Znuny-FollowUp-Lock</Item>
+                <Item>X-Znuny-FollowUp-State</Item>
+                <Item>X-Znuny-FollowUp-StateID</Item>
+                <Item>X-Znuny-FollowUp-State-PendingTime</Item>
+                <Item>X-Znuny-FollowUp-Type</Item>
+                <Item>X-Znuny-FollowUp-TypeID</Item>
+                <Item>X-Znuny-FollowUp-Service</Item>
+                <Item>X-Znuny-FollowUp-ServiceID</Item>
+                <Item>X-Znuny-FollowUp-SLA</Item>
+                <Item>X-Znuny-FollowUp-SLAID</Item>
+                <Item>X-Znuny-FollowUp-SenderType</Item>
+                <Item>X-Znuny-FollowUp-IsVisibleForCustomer</Item>
+                <Item>X-Znuny-FollowUp-Title</Item>
+                <Item>X-Znuny-FollowUp-State-Keep</Item>
+                <Item>X-Znuny-BodyDecrypted</Item>
             </Array>
         </Value>
     </Setting>
@@ -12336,7 +12336,7 @@
                 </Item>
                 <Item Key="Set">
                     <Hash>
-                        <Item Key="X-OTRS-Ignore">yes</Item>
+                        <Item Key="X-Znuny-Ignore">yes</Item>
                     </Hash>
                 </Item>
             </Hash>
@@ -12355,8 +12355,8 @@
                 </Item>
                 <Item Key="Set">
                     <Hash>
-                        <Item Key="X-OTRS-DynamicField-TicketFreeKey1">SomeNumber</Item>
-                        <Item Key="X-OTRS-DynamicField-TicketFreeText1">[***]</Item>
+                        <Item Key="X-Znuny-DynamicField-TicketFreeKey1">SomeNumber</Item>
+                        <Item Key="X-Znuny-DynamicField-TicketFreeText1">[***]</Item>
                     </Hash>
                 </Item>
             </Hash>
@@ -12375,7 +12375,7 @@
                 </Item>
                 <Item Key="Set">
                     <Hash>
-                        <Item Key="X-OTRS-Ignore">yes</Item>
+                        <Item Key="X-Znuny-Ignore">yes</Item>
                     </Hash>
                 </Item>
             </Hash>
@@ -12551,7 +12551,7 @@ Thanks for your help!
         </Value>
     </Setting>
     <Setting Name="PostMaster::CheckFollowUpModule###0000-BounceEmail" Required="0" Valid="1">
-        <Description Translatable="1">Executes follow-up checks on Znuny Header 'X-OTRS-Bounce'.</Description>
+        <Description Translatable="1">Executes follow-up checks on Znuny Header 'X-Znuny-Bounce'.</Description>
         <Navigation>Core::Email::PostMaster</Navigation>
         <Value>
             <Hash>

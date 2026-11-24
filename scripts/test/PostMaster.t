@@ -343,9 +343,22 @@ for my $TicketSubjectConfig ( 'Right', 'Left' ) {
                 my %FilterData = $PostMasterFilter->FilterGet(
                     Name => $Filter->{Name},
                 );
+
+                my @ExpectedSet;
+                for my $SetItem ( @{ $Filter->{Set} } ) {
+                    my $Key = $SetItem->{Key};
+                    $Key =~ s{\AX-OTRS-}{X-Znuny-}i;
+                    push @ExpectedSet, {
+                        Key   => $Key,
+                        Value => $SetItem->{Value},
+                    };
+                }
+                my %ExpectedFilter = %{$Filter};
+                $ExpectedFilter{Set} = \@ExpectedSet;
+
                 $Self->IsDeeply(
                     \%FilterData,
-                    $Filter,
+                    \%ExpectedFilter,
                     "Added filter $Filter->{Name}",
                 );
             }

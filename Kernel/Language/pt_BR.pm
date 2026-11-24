@@ -8012,7 +8012,7 @@ sub Data {
             'Módulo para coletar certificados S/MIME de usuários clientes em mensagens recebidas.',
         'Module to check if a incoming e-mail message is bounce.' => '',
         'Module used to detect if attachments are present.' => 'Módulo utilizado para detectar se anexos estão presentes.',
-        'Executes follow-up checks on Znuny Header \'X-OTRS-Bounce\'.' =>
+        'Executes follow-up checks on Znuny Header \'X-Znuny-Bounce\'.' =>
             '',
         'Checks if an E-Mail is a followup to an existing ticket by searching the subject for a valid ticket number.' =>
             'Verifica se o e-mail é uma continuação de um ticket existente ao pesquisar no assunto por um número de ticket válido.',

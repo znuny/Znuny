@@ -276,6 +276,10 @@ sub _TasksGet {
             Module  => 'scripts::Migration::Znuny::MigrateSysConfigSettings',
         },
         {
+            Message => 'Migrate PostMaster X-Headers',
+            Module  => 'scripts::Migration::Znuny::MigratePostMasterXHeaders',
+        },
+        {
             Message => 'Clean up excess activities',
             Module  => 'scripts::Migration::Znuny::CleanupActivities',
         },

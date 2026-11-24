@@ -76,7 +76,7 @@ $Self->IsDeeply(
         ],
         'Set' => [
             {
-                'Key'   => 'X-OTRS-DynamicField-test',
+                'Key'   => 'X-Znuny-DynamicField-test',
                 'Value' => '123'
             }
         ],
@@ -139,7 +139,7 @@ $Self->IsDeeply(
         ],
         'Set' => [
             {
-                'Key'   => 'X-OTRS-DynamicField-test',
+                'Key'   => 'X-Znuny-DynamicField-test',
                 'Value' => '333'
             }
         ],
@@ -193,7 +193,7 @@ $Self->IsDeeply(
         ],
         'Set' => [
             {
-                'Key'   => 'X-OTRS-DynamicField-test2',
+                'Key'   => 'X-Znuny-DynamicField-test2',
                 'Value' => '555'
             }
         ],

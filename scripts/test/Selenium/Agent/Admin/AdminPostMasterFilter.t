@@ -160,7 +160,7 @@ $Selenium->RunTest(
         $Selenium->find_element( "#MatchValue1", 'css' )->send_keys($PostMasterBody);
         $Selenium->InputFieldValueSet(
             Element => '#SetHeader1',
-            Value   => 'X-OTRS-Priority',
+            Value   => 'X-Znuny-Priority',
         );
         $Selenium->find_element( "#SetValue1", 'css' )->send_keys($PostMasterPriority);
 
@@ -199,7 +199,7 @@ $Selenium->RunTest(
         );
         $Self->Is(
             $Selenium->find_element( '#SetHeader1', 'css' )->get_value(),
-            "X-OTRS-Priority",
+            "X-Znuny-Priority",
             "#SetHeader1 stored value",
         );
         $Self->Is(
@@ -269,7 +269,7 @@ $Selenium->RunTest(
         $Selenium->find_element( "#MatchValue1", 'css' )->send_keys($PostMasterBody);
         $Selenium->InputFieldValueSet(
             Element => '#SetHeader1',
-            Value   => 'X-OTRS-Priority',
+            Value   => 'X-Znuny-Priority',
         );
         $Selenium->find_element( "#SetValue1", 'css' )->send_keys($PostMasterPriority);
         $Selenium->execute_script("\$('#Submit').click();");
