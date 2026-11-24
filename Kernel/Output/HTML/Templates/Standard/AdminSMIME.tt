@@ -198,7 +198,7 @@
                                 </a>
 [% RenderBlockEnd("CertificateRelationAdd") %]
 [% RenderBlockStart("CertificateRead") %]
-                                <a class="CertificateRead" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Read;Type=[% Data.Type | uri %];Filename=[% Data.Filename | uri %]" title="[% Translate("Read certificate") | html %]">
+                                <a class="CertificateRead" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Read;Type=[% Data.Type | uri %];Filename=[% Data.Filename | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Translate("Read certificate") | html %]">
                                     [% Translate("Read certificate") | html %]
                                 </a>
 [% RenderBlockEnd("CertificateRead") %]
@@ -207,10 +207,10 @@
                             <td>[% Data.Type | html %]</td>
                             <td>[% Data.Subject | html %]</td>
                             <td>
-                                <a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Download;Type=[% Data.Type | uri %];Filename=[% Data.Filename | uri %]" title="[% Data.Hash | html %]">[% Data.Hash | truncate(12) | html %]</a>
+                                <a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=Download;Type=[% Data.Type | uri %];Filename=[% Data.Filename | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Data.Hash | html %]">[% Data.Hash | truncate(12) | html %]</a>
                             </td>
                             <td>
-                                <a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=DownloadFingerprint;Type=[% Data.Type | uri %];Filename=[% Data.Filename | uri %]" title="[% Data.Fingerprint | html %]">[% Data.Fingerprint | truncate(12) | html %]</a>
+                                <a class="AsBlock" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=DownloadFingerprint;Type=[% Data.Type | uri %];Filename=[% Data.Filename | uri %];[% Env("ChallengeTokenParam") | html %]" title="[% Data.Fingerprint | html %]">[% Data.Fingerprint | truncate(12) | html %]</a>
                             </td>
                             <td>[% Data.StartDate | html %]</td>
                             <td>[% Data.EndDate | html %]</td>
