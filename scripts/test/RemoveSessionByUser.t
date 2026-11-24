@@ -103,4 +103,174 @@ for my $TestUserLogin (@TestUserLogins) {
 
 # Restore to the previous state is done by RestoreDatabase.
 
+my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+
+# Same login, both types. Omitting UserType still removes every matching session.
+my ( $SharedLogin, $SharedUserID ) = $HelperObject->TestUserCreate();
+$HelperObject->TestCustomerUserCreate(
+    UserLogin => $SharedLogin,
+);
+
+my %SharedUserData = $UserObject->GetUserData(
+    UserID        => $SharedUserID,
+    NoOutOfOffice => 1,
+);
+my %SharedCustomerUserData = $CustomerUserObject->CustomerUserDataGet(
+    User => $SharedLogin,
+);
+
+my $SharedAgentSessionID = $SessionObject->CreateSessionID(
+    %SharedUserData,
+    UserLastRequest => $Kernel::OM->Create('Kernel::System::DateTime')->ToEpoch(),
+    UserType        => 'User',
+    SessionSource   => 'AgentInterface',
+);
+my $SharedCustomerSessionID = $SessionObject->CreateSessionID(
+    %SharedCustomerUserData,
+    UserLastRequest => $Kernel::OM->Create('Kernel::System::DateTime')->ToEpoch(),
+    UserType        => 'Customer',
+    SessionSource   => 'CustomerInterface',
+);
+$Self->True(
+    $SharedAgentSessionID && $SharedCustomerSessionID,
+    "Sessions for shared login '$SharedLogin' are created",
+);
+
+$Success = $SessionObject->RemoveSessionByUser(
+    UserLogin => $SharedLogin,
+    UserType  => 'Agent',
+);
+$Self->False(
+    $Success,
+    'RemoveSessionByUser() rejects an invalid UserType',
+);
+$Self->True(
+    _SessionExists(
+        UserLogin => $SharedLogin,
+        UserType  => 'User',
+    ),
+    "Agent session for '$SharedLogin' is kept after an invalid UserType",
+);
+$Self->True(
+    _SessionExists(
+        UserLogin => $SharedLogin,
+        UserType  => 'Customer',
+    ),
+    "Customer session for '$SharedLogin' is kept after an invalid UserType",
+);
+
+$Success = $SessionObject->RemoveSessionByUser(
+    UserLogin => $SharedLogin,
+);
+$Self->True(
+    $Success,
+    "Sessions for shared login '$SharedLogin' are deleted without UserType",
+);
+$Self->False(
+    _SessionExists(
+        UserLogin => $SharedLogin,
+        UserType  => 'User',
+    ),
+    "Agent session for '$SharedLogin' is not found",
+);
+$Self->False(
+    _SessionExists(
+        UserLogin => $SharedLogin,
+        UserType  => 'Customer',
+    ),
+    "Customer session for '$SharedLogin' is not found",
+);
+
+# Same login again. UserType removes only the given type.
+my ( $TypedLogin, $TypedUserID ) = $HelperObject->TestUserCreate();
+$HelperObject->TestCustomerUserCreate(
+    UserLogin => $TypedLogin,
+);
+
+my %TypedUserData = $UserObject->GetUserData(
+    UserID        => $TypedUserID,
+    NoOutOfOffice => 1,
+);
+my %TypedCustomerUserData = $CustomerUserObject->CustomerUserDataGet(
+    User => $TypedLogin,
+);
+
+$Self->True(
+    $SessionObject->CreateSessionID(
+        %TypedUserData,
+        UserLastRequest => $Kernel::OM->Create('Kernel::System::DateTime')->ToEpoch(),
+        UserType        => 'User',
+        SessionSource   => 'AgentInterface',
+    ),
+    "Agent session for '$TypedLogin' is created",
+);
+$Self->True(
+    $SessionObject->CreateSessionID(
+        %TypedCustomerUserData,
+        UserLastRequest => $Kernel::OM->Create('Kernel::System::DateTime')->ToEpoch(),
+        UserType        => 'Customer',
+        SessionSource   => 'CustomerInterface',
+    ),
+    "Customer session for '$TypedLogin' is created",
+);
+
+$Success = $SessionObject->RemoveSessionByUser(
+    UserLogin => $TypedLogin,
+    UserType  => 'User',
+);
+$Self->True(
+    $Success,
+    "Agent session for '$TypedLogin' is deleted",
+);
+$Self->False(
+    _SessionExists(
+        UserLogin => $TypedLogin,
+        UserType  => 'User',
+    ),
+    "Agent session for '$TypedLogin' is not found",
+);
+$Self->True(
+    _SessionExists(
+        UserLogin => $TypedLogin,
+        UserType  => 'Customer',
+    ),
+    "Customer session for '$TypedLogin' is kept",
+);
+
+$Success = $SessionObject->RemoveSessionByUser(
+    UserLogin => $TypedLogin,
+    UserType  => 'Customer',
+);
+$Self->True(
+    $Success,
+    "Customer session for '$TypedLogin' is deleted",
+);
+$Self->False(
+    _SessionExists(
+        UserLogin => $TypedLogin,
+        UserType  => 'Customer',
+    ),
+    "Customer session for '$TypedLogin' is not found",
+);
+
+sub _SessionExists {
+    my (%Param) = @_;
+
+    my $SessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
+
+    SESSIONID:
+    for my $SessionID ( $SessionObject->GetAllSessionIDs() ) {
+        my %SessionData = $SessionObject->GetSessionIDData(
+            SessionID => $SessionID,
+        );
+
+        next SESSIONID if ( $SessionData{UserLogin} // '' ) ne $Param{UserLogin};
+        next SESSIONID if ( $SessionData{UserType}  // '' ) ne $Param{UserType};
+
+        return 1;
+    }
+
+    return 0;
+}
+
 1;

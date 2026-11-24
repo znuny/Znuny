@@ -55,6 +55,7 @@
  - 2026-10-30 Changed: SOPM root tag can now also be 'package' instead of 'otrs_package'.
  - 2026-10-29 Fixed: calendar appointment failed to create ticket if relative period was zero. Thanks to @Fawkespami for reporting the issue. [#821](https://github.com/znuny/Znuny/issues/821)
  - 2026-10-29 Fixed: SAML login now verifies assertion signatures against the configured IdP certificate (AuthModule::SAML::IdPCACert and Customer::AuthModule::SAML::IdPCACert). Net::SAML2 0.89 or higher is now required (fixes CVE-2026-18089, CVE-2026-18092 and CVE-2026-18108). Thanks to the following reporters: HARIPRASAD M., Fabian Bührmann.
+ - 2026-10-27 Fixed: Removing sessions by user login also removed the other user type when an agent and a customer user shared the same login.
  - 2026-10-27 Fixed: Customer user e-mail address uniqueness is now checked across all customer user backends.
  - 2026-10-26 Fixed: PostMaster filter ExternalTicketNumberRecognition ignores CC.
  - 2026-10-26 Fixed: Customers already selected on a ticket still appeared as selectable in the customer user address book.
