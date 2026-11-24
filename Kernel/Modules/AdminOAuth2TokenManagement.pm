@@ -376,7 +376,7 @@ sub _AddTokenConfigByTemplateFile {
     );
     if ( !IsHashRefWithData($TokenConfigTemplate) ) {
         return $LayoutObject->ErrorScreen(
-            Message => "Error reading file for token config template $TokenConfigTemplateFilename.",
+            Message => 'Error reading file for token config template.',
             Comment => Translatable('Please contact the administrator.'),
         );
     }
@@ -610,7 +610,7 @@ sub _SaveTokenConfig {
         );
         if ( !IsHashRefWithData($TokenConfigTemplate) ) {
             return $LayoutObject->ErrorScreen(
-                Message => "Error reading file for token config template $GetParam{TokenConfigTemplateFilename}.",
+                Message => 'Error reading file for token config template.',
                 Comment => Translatable('Please contact the administrator.'),
             );
         }
@@ -975,8 +975,33 @@ sub _GetTokenConfigTemplate {
         return;
     }
 
-    my $TokenConfigTemplateFilePath = $Self->{TokenConfigTemplateFilesBasePath}
-        . '/' . $Param{TokenConfigTemplateFilename} . '.yml';
+    # Only read a template file that is already in the template directory.
+    # The request value is compared to those basenames and is never joined onto a path.
+    my @TokenConfigTemplateFilePaths = $MainObject->DirectoryRead(
+        Directory => $Self->{TokenConfigTemplateFilesBasePath},
+        Filter    => '*.yml',
+        Silent    => 1,
+    );
+
+    my $TokenConfigTemplateFilePath;
+
+    FILEPATH:
+    for my $FilePath (@TokenConfigTemplateFilePaths) {
+        my $Filename = fileparse( $FilePath, '.yml' );
+        next FILEPATH if $Filename ne $Param{TokenConfigTemplateFilename};
+
+        $TokenConfigTemplateFilePath = $FilePath;
+        last FILEPATH;
+    }
+
+    if ( !$TokenConfigTemplateFilePath ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => 'Token config template filename is not allowed.',
+        );
+        return;
+    }
+
     my $TokenConfigTemplateFileContent = $MainObject->FileRead(
         Location => $TokenConfigTemplateFilePath,
         Result   => 'SCALAR',
