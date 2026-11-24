@@ -104,6 +104,24 @@ my $CheckUpload = sub {
             'image/',
             'Response content type',
         );
+
+        $Self->Is(
+            $Response->header('Content-Security-Policy'),
+            "default-src 'none'; img-src * data:; script-src 'none'; object-src 'self'; frame-src 'none'; style-src 'unsafe-inline'",
+            'Response content security policy',
+        );
+
+        $Self->Is(
+            $Response->header('Referrer-Policy'),
+            'no-referrer',
+            'Response referrer policy',
+        );
+
+        $Self->Is(
+            $Response->header('X-Content-Type-Options'),
+            'nosniff',
+            'Response content type options',
+        );
     }
 };
 

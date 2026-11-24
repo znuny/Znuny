@@ -11,6 +11,7 @@ package Kernel::Modules::PictureUpload;
 
 use strict;
 use warnings;
+use utf8;
 
 our $ObjectManagerDisabled = 1;
 
@@ -107,6 +108,7 @@ sub Run {
             return $LayoutObject->Attachment(
                 Type => 'inline',
                 %{$Attachment},
+                Sandbox => 1,
             );
         }
     }

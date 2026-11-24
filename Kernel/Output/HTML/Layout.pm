@@ -2646,7 +2646,11 @@ sub Attachment {
         $Output .= "X-Frame-Options: SAMEORIGIN\n";
     }
 
-    if ( $Param{Sandbox} && !$Kernel::OM->Get('Kernel::Config')->Get('DisableContentSecurityPolicy') ) {
+    # HTML pages set this header in HTTPHeaders.tt. Attachment responses are CGI output,
+    # so the static-file web server header does not cover them.
+    $Output .= "X-Content-Type-Options: nosniff\n";
+
+    if ( $Param{Sandbox} && !$ConfigObject->Get('DisableContentSecurityPolicy') ) {
 
         # Disallow external and inline scripts, active content, frames, but keep allowing inline styles
         #   as this is a common use case in emails.
