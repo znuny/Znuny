@@ -498,6 +498,21 @@ sub Run {
             s/ (?: \A\s+ | \s+\z ) //gx for values %{ $Ticket->{PendingTime} };
         }
 
+        if ( $UserType eq 'Customer' ) {
+            delete $Ticket->{CustomerUser};
+            delete $Ticket->{CustomerID};
+
+            FIELD:
+            for my $Field (qw(Owner OwnerID Responsible ResponsibleID Lock LockID)) {
+                next FIELD if !IsStringWithData( $Ticket->{$Field} );
+
+                return $Self->ReturnError(
+                    ErrorCode    => 'TicketUpdate.InvalidParameter',
+                    ErrorMessage => "TicketUpdate: Ticket->$Field parameter is not allowed for customers!",
+                );
+            }
+        }
+
         # check Ticket attribute values
         my $TicketCheck = $Self->_CheckTicket(
             Ticket    => $Ticket,
@@ -554,6 +569,33 @@ sub Run {
         }
         if ( !$Article->{HistoryComment} ) {
             $Article->{HistoryComment} = $Self->{Config}->{HistoryComment} || '';
+        }
+
+        if ( $UserType eq 'Customer' ) {
+            delete $Article->{SenderTypeID};
+            delete $Article->{ArticleSend};
+            delete $Article->{Cc};
+            delete $Article->{Bcc};
+
+            $Article->{SenderType}           = 'customer';
+            $Article->{IsVisibleForCustomer} = 1;
+
+            my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+            my %CustomerUserData   = $CustomerUserObject->CustomerUserDataGet(
+                User => $PermissionUserID,
+            );
+            if ( %CustomerUserData && $CustomerUserData{UserEmail} ) {
+                if ( $CustomerUserData{UserFullname} ) {
+                    $Article->{From}
+                        = '"' . $CustomerUserData{UserFullname} . '" <' . $CustomerUserData{UserEmail} . '>';
+                }
+                else {
+                    $Article->{From} = $CustomerUserData{UserEmail};
+                }
+            }
+            else {
+                $Article->{From} = $PermissionUserID;
+            }
         }
 
         # check Article attribute values

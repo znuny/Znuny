@@ -499,6 +499,11 @@ sub Run {
         }
     }
 
+    if ( $UserType eq 'Customer' ) {
+        $Ticket->{CustomerUser} = $PermissionUserID;
+        delete $Ticket->{CustomerID};
+    }
+
     # check Ticket attribute values
     my $TicketCheck = $Self->_CheckTicket( Ticket => $Ticket );
 
@@ -518,6 +523,25 @@ sub Run {
             ErrorCode    => 'TicketCreate.AccessDenied',
             ErrorMessage => "TicketCreate: Can not create tickets in given Queue or QueueID!",
         );
+    }
+
+    if ( $UserType eq 'Customer' ) {
+        FIELD:
+        for my $Field (qw(Owner OwnerID Responsible ResponsibleID Lock LockID)) {
+            next FIELD if !IsStringWithData( $Ticket->{$Field} );
+
+            return $Self->ReturnError(
+                ErrorCode    => 'TicketCreate.InvalidParameter',
+                ErrorMessage => "TicketCreate: Ticket->$Field parameter is not allowed for customers!",
+            );
+        }
+
+        if ( IsHashRefWithData( $Ticket->{PendingTime} ) ) {
+            return $Self->ReturnError(
+                ErrorCode    => 'TicketCreate.InvalidParameter',
+                ErrorMessage => 'TicketCreate: Ticket->PendingTime parameter is not allowed for customers!',
+            );
+        }
     }
 
     # isolate Article parameter
@@ -558,6 +582,33 @@ sub Run {
         }
         if ( !$Article->{HistoryComment} ) {
             $Article->{HistoryComment} = $Self->{Config}->{HistoryComment} || '';
+        }
+
+        if ( $UserType eq 'Customer' ) {
+            delete $Article->{SenderTypeID};
+            delete $Article->{ArticleSend};
+            delete $Article->{Cc};
+            delete $Article->{Bcc};
+
+            $Article->{SenderType}           = 'customer';
+            $Article->{IsVisibleForCustomer} = 1;
+
+            my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+            my %CustomerUserData   = $CustomerUserObject->CustomerUserDataGet(
+                User => $PermissionUserID,
+            );
+            if ( %CustomerUserData && $CustomerUserData{UserEmail} ) {
+                if ( $CustomerUserData{UserFullname} ) {
+                    $Article->{From}
+                        = '"' . $CustomerUserData{UserFullname} . '" <' . $CustomerUserData{UserEmail} . '>';
+                }
+                else {
+                    $Article->{From} = $CustomerUserData{UserEmail};
+                }
+            }
+            else {
+                $Article->{From} = $PermissionUserID;
+            }
         }
 
         # check Article attribute values
