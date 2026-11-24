@@ -26,6 +26,7 @@
  - 2026-11-13 Fixed: SecureMode setting description now says GenericAgent, Package Manager and SQL Box are disabled when SecureMode is not enabled. Thanks to @BuilderNSV for reporting the issue. [#715](https://github.com/znuny/Znuny/issues/715)
  - 2026-11-12 Security: Statistics add and edit actions now require a ChallengeToken, and stored time scale values are HTML-escaped when shown. Thanks to Timotej Doležal (ESET) for reporting the issue.
  - 2026-11-12 Fixed: Follow-up on a closed ticket no longer locks the last owner when the state is kept or stays closed.
+ - 2026-11-11 Security: Fixed XSS via URL parameter Action in installer. Thanks to Elisa Popowicz (AWARE7) for reporting this issue.
  - 2026-11-11 Added: Queue and service navigation layouts.
  - 2026-11-11 Changed: Package repository index file is now packages.xml. otrs.xml is no longer requested or served. Package downloads now log the URL when the request returns no content.
  - 2026-11-11 Fixed: User search with option PostMasterSearch now also searches the login for a matching email address as a fallback to the email address stored in the user preferences.
