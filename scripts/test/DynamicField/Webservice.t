@@ -449,6 +449,20 @@ $Self->True(
     '_BackendObjectGet - WebserviceMultiselect',
 );
 
+for my $InvalidBackend ( '../Webservice/DirectRequest', '../../../../evil', 'DirectRequest::Evil', 'Direct Request' ) {
+    my $BackendObject = $DynamicFieldWebserviceObject->_BackendObjectGet(
+        BackendConfig => {
+            %{$BackendConfigTextInvokerGet},
+            Backend => $InvalidBackend,
+        },
+    );
+
+    $Self->False(
+        $BackendObject,
+        "_BackendObjectGet - invalid backend '$InvalidBackend' is rejected",
+    );
+}
+
 # Search
 
 my @SearchTest = (
@@ -1291,6 +1305,30 @@ my @Tests = (
                 'Key'
             ],
             Success => 1
+        },
+    },
+    {
+        Name => 'Test (failing) - invalid backend',
+        Data => {
+            Config => {
+                'Webservice'               => $Param{WebserviceName},
+                'InvokerSearch'            => 'TestSearch',
+                'InvokerGet'               => 'TestGet',
+                'Backend'                  => '../../../../NotExisting',
+                'StoredValue'              => 'Key',
+                'DisplayedValues'          => 'Key,Value',
+                'DisplayedValuesSeparator' => '|',
+                'Limit'                    => 5,
+                'SearchTerms'              => '***',
+            },
+            FieldType        => 'WebserviceDropdown',
+            DynamicFieldName => $Param{DynamicFieldTextName},
+            UserID           => 1,
+        },
+        ExpectedResult => {
+            Data         => [],
+            Success      => 0,
+            ErrorMessage => 'Invalid web service backend configuration.',
         },
     },
 );

@@ -67,4 +67,24 @@ $Self->IsDeeply(
     '%INC hash unchanged by invalid load',
 );
 
+for my $InvalidModule ( '../evil', 'Foo/Bar', 'Foo::Bar.pm', 'Foo;Bar', '::Foo', 'Foo::', 'Foo:Bar', "Foo\nBar" ) {
+    $Self->Is(
+        scalar $MainObject->Require( $InvalidModule, Silent => 1 ),
+        scalar undef,
+        "Invalid module name '$InvalidModule' is rejected",
+    );
+}
+
+$Self->IsDeeply(
+    \%INC,
+    \%OldINC,
+    '%INC hash unchanged by invalid module names',
+);
+
+$Self->Is(
+    scalar $MainObject->Require( '', Silent => 1 ),
+    scalar undef,
+    'Empty module name is rejected',
+);
+
 1;

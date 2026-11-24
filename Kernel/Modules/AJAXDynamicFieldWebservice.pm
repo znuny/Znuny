@@ -19,8 +19,10 @@ our @ObjectDependencies = (
     'Kernel::System::DynamicField',
     'Kernel::System::DynamicField::Backend',
     'Kernel::System::Encode',
+    'Kernel::System::Group',
     'Kernel::System::Log',
     'Kernel::System::Main',
+    'Kernel::System::Ticket',
     'Kernel::System::Web::Request',
     'Kernel::System::DynamicField::Webservice',
 );
@@ -62,6 +64,21 @@ sub Run {
     my $UserType = $LayoutObject->{SessionSource} || '';
     if ($UserType) {
         $UserType =~ s/Interface//;
+    }
+
+    if ( $Subaction && ( $Subaction eq 'Autocomplete' || $Subaction eq 'AutoFill' ) ) {
+        my $HasPermission = $Self->_RequestPermissionCheck(
+            DynamicFieldName => $DynamicFieldName,
+            TicketID         => $TicketID,
+            UserID           => $UserID,
+            UserType         => $UserType,
+        );
+        if ( !$HasPermission ) {
+            return $LayoutObject->Attachment(
+                ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
+                Content     => '{}',
+            );
+        }
     }
 
     my %GetParam = $ParamObject->GetParams(
@@ -119,6 +136,16 @@ sub Run {
         );
     }
     elsif ( $Subaction eq 'Test' ) {
+        my $HasAdminPermission = $UserType eq 'Agent' && $Self->_HasAdminDynamicFieldWebservicePermission(
+            UserID => $UserID,
+        );
+        if ( !$HasAdminPermission ) {
+            return $LayoutObject->Attachment(
+                ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
+                Content     => '{}',
+            );
+        }
+
         my $ConfigRegex       = qr/\AConfig\[(.*?)\]\z/;
         my $ConfigParamsRegex = qr/\AConfig\[ConfigParams\]\[(.+?)\]\z/;
         my @ParamNames        = $ParamObject->GetParamNames();
@@ -271,7 +298,12 @@ sub _Test {
         UserType         => $Param{UserType},
     );
 
-    return $Result if !$Result->{Success};
+    if ( !$Result->{Success} ) {
+        if ( $Result->{ErrorMessage} ) {
+            $Result->{ErrorMessage} = $LayoutObject->{LanguageObject}->Translate( $Result->{ErrorMessage} );
+        }
+        return $Result;
+    }
 
     for my $Attribute ( sort keys %{ $Result->{Search} } ) {
         $LayoutObject->Block(
@@ -328,6 +360,154 @@ sub _Test {
 
     $Result->{TestDataHTML} = $TestDataHTML;
     return $Result;
+}
+
+sub _RequestPermissionCheck {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+
+    return if !$Param{UserID};
+
+    my $UserType = $Param{UserType} // '';
+
+    if ( $Param{TicketID} ) {
+        my $TicketPermissionFunction = $UserType eq 'Customer' ? 'TicketCustomerPermission' : 'TicketPermission';
+
+        my $HasTicketPermission = $TicketObject->$TicketPermissionFunction(
+            Type     => 'ro',
+            TicketID => $Param{TicketID},
+            UserID   => $Param{UserID},
+        );
+        if ( !$HasTicketPermission ) {
+            $LogObject->Log(
+                Priority => 'notice',
+                Message  =>
+                    "Web service dynamic field request denied: no permission on ticket $Param{TicketID} for user $Param{UserID}.",
+            );
+            return;
+        }
+    }
+
+    return 1 if $UserType ne 'Customer';
+
+    my $IsActive = $Self->_DynamicFieldIsActiveInCustomerInterface(
+        DynamicFieldName => $Param{DynamicFieldName},
+    );
+    if ( !$IsActive ) {
+        $LogObject->Log(
+            Priority => 'notice',
+            Message  =>
+                "Web service dynamic field request denied: dynamic field $Param{DynamicFieldName} is not active in the customer interface.",
+        );
+        return;
+    }
+
+    return 1;
+}
+
+sub _DynamicFieldIsActiveInCustomerInterface {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    my $DynamicFieldName = $Param{DynamicFieldName};
+    return if !$DynamicFieldName;
+
+    my $DynamicFieldScreenRegistrations = $ConfigObject->Get('DynamicFieldScreens') // {};
+
+    my %ScreenConfigKeys = (
+        'Ticket::Frontend::CustomerTicketZoom###FollowUpDynamicField' => 1,
+    );
+
+    REGISTRATION:
+    for my $Registration ( sort keys %{$DynamicFieldScreenRegistrations} ) {
+        my $Screens = $DynamicFieldScreenRegistrations->{$Registration};
+        next REGISTRATION if !IsHashRefWithData($Screens);
+
+        SCREENCONFIGKEY:
+        for my $ScreenConfigKey ( sort keys %{$Screens} ) {
+            next SCREENCONFIGKEY if ( $Screens->{$ScreenConfigKey} // '' ) !~ m{\ACustomer};
+
+            $ScreenConfigKeys{$ScreenConfigKey} = 1;
+        }
+    }
+
+    SCREENCONFIGKEY:
+    for my $ScreenConfigKey ( sort keys %ScreenConfigKeys ) {
+        my @Keys   = split '###', $ScreenConfigKey;
+        my $Config = $ConfigObject->Get( shift @Keys );
+
+        KEY:
+        for my $Key (@Keys) {
+            last KEY if !IsHashRefWithData($Config);
+            $Config = $Config->{$Key};
+        }
+        next SCREENCONFIGKEY if !IsHashRefWithData($Config);
+
+        return 1 if $Config->{$DynamicFieldName};
+    }
+
+    my $ActivityDialogs = $ConfigObject->Get('Process::ActivityDialog') // {};
+
+    ACTIVITYDIALOGENTITYID:
+    for my $ActivityDialogEntityID ( sort keys %{$ActivityDialogs} ) {
+        my $ActivityDialog = $ActivityDialogs->{$ActivityDialogEntityID};
+        next ACTIVITYDIALOGENTITYID if !IsHashRefWithData($ActivityDialog);
+        next ACTIVITYDIALOGENTITYID if !IsHashRefWithData( $ActivityDialog->{Fields} );
+        next ACTIVITYDIALOGENTITYID if !$ActivityDialog->{Fields}->{"DynamicField_$DynamicFieldName"};
+
+        my $Interfaces = $ActivityDialog->{Interface} // [];
+        if ( ref $Interfaces ne 'ARRAY' ) {
+            $Interfaces = [$Interfaces];
+        }
+
+        return 1 if grep { $_ eq 'CustomerInterface' } @{$Interfaces};
+    }
+
+    return;
+}
+
+sub _HasAdminDynamicFieldWebservicePermission {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $GroupObject  = $Kernel::OM->Get('Kernel::System::Group');
+
+    return if !$Param{UserID};
+
+    my $FrontendModules = $ConfigObject->Get('Frontend::Module') // {};
+    my $ModuleReg       = $FrontendModules->{AdminDynamicFieldWebservice};
+    return if !IsHashRefWithData($ModuleReg);
+
+    my %PermissionTypes = (
+        Group   => 'rw',
+        GroupRo => 'ro',
+    );
+
+    PERMISSION:
+    for my $Permission ( sort keys %PermissionTypes ) {
+        my $Groups = $ModuleReg->{$Permission};
+        next PERMISSION if !$Groups;
+
+        if ( ref $Groups ne 'ARRAY' ) {
+            $Groups = [$Groups];
+        }
+
+        GROUPNAME:
+        for my $GroupName ( @{$Groups} ) {
+            next GROUPNAME if !$GroupName;
+
+            return 1 if $GroupObject->PermissionCheck(
+                UserID    => $Param{UserID},
+                GroupName => $GroupName,
+                Type      => $PermissionTypes{$Permission},
+            );
+        }
+    }
+
+    return;
 }
 
 sub _SerializeFieldValues {
