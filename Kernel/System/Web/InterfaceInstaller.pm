@@ -97,6 +97,9 @@ sub Run {
     $Param{Subaction}  = $ParamObject->GetParam( Param => 'Subaction' )  || '';
     $Param{NextScreen} = $ParamObject->GetParam( Param => 'NextScreen' ) || '';
 
+    # security check Action Param (replace non word chars)
+    $Param{Action} =~ s/\W//g;
+
     $Kernel::OM->ObjectParamAdd(
         'Kernel::Output::HTML::Layout' => {
             %Param,

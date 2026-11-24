@@ -9,6 +9,7 @@
  - 2026-11-20 Changed: Improved date picker calendar handling for non-working days and pending default times.
  - 2026-11-12 Fixed: Follow-up on a closed ticket no longer locks the last owner when the state is kept or stays closed.
  - 2026-11-12 Fixed: User search with option PostMasterSearch now also searches the login for a matching email address as a fallback to the email address stored in the user preferences.
+ - 2026-11-11 Security: Fixed XSS via URL parameter Action in installer. Thanks to Elisa Popowicz (AWARE7) for reporting this issue.
  - 2026-11-11 Security: Statistics add and edit actions now require a ChallengeToken, and stored time scale values are HTML-escaped when shown. Thanks to Timotej Doležal (ESET) for reporting the issue.
  - 2026-11-11 Fixed: Importing a web service with an invalid configuration showed a success notice even though nothing was stored. Thanks to @natanaraujo3001-crypto for reporting the issue. [#870](https://github.com/znuny/Znuny/issues/870)
  - 2026-11-10 Fixed: Moving or resizing an appointment in the calendar or resource overview via drag and drop removed linked tickets.
