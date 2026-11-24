@@ -101,6 +101,17 @@ $Self->IsDeeply(
     '_MetaArticleGet()',
 );
 
+%ResultHash = $ArticleBackendObject->_MetaArticleGet(
+    ArticleID => "${ArticleID}_1",
+    TicketID  => $TicketID,
+);
+
+$Self->IsDeeply(
+    \%ResultHash,
+    {},
+    '_MetaArticleGet() - ArticleID with digit group separator',
+);
+
 my @MetaArticleIndex = (
     {%ArticleHash},
     {%ArticleHash2},
@@ -224,6 +235,36 @@ my @ArticleListTests = (
         Filter => {
             OnlyFirst => 1,
             OnlyLast  => 1,
+        },
+        Result => [],
+    },
+    {
+        Name   => 'ArticleID',
+        Filter => {
+            ArticleID => $ArticleID,
+        },
+        Result => [
+            {%ArticleHash},
+        ],
+    },
+    {
+        Name   => 'ArticleID with digit group separator',
+        Filter => {
+            ArticleID => "${ArticleID}_${ArticleID2}",
+        },
+        Result => [],
+    },
+    {
+        Name   => 'ArticleID with leading zero',
+        Filter => {
+            ArticleID => "0$ArticleID",
+        },
+        Result => [],
+    },
+    {
+        Name   => 'ArticleID with trailing text',
+        Filter => {
+            ArticleID => "$ArticleID abc",
         },
         Result => [],
     },

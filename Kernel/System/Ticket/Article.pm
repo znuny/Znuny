@@ -240,6 +240,9 @@ sub ArticleList {
     return if !@MetaArticleList;
 
     if ( $Param{ArticleID} ) {
+
+        # Non-canonical values like '1_6' compare numerically as 1 in Perl, but PostgreSQL 16+ resolves them to 16.
+        return if !IsPositiveInteger( $Param{ArticleID} );
         @MetaArticleList = grep { $_->{ArticleID} == $Param{ArticleID} } @MetaArticleList;
     }
 
