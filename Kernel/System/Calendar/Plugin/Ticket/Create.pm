@@ -126,6 +126,9 @@ sub RenderOutput {
         return if !$Access;
     }
 
+    # agents below "move_into" may only view the ticket creation settings
+    $Param{ReadOnly} = defined $Param{PermissionLevel} && $Param{PermissionLevel} < 2 ? 1 : 0;
+
     if ( $Param{Plugin}->{Data}->{QueueID} && !IsArrayRefWithData( $Param{Plugin}->{Data}->{QueueID} ) ) {
         $Param{Plugin}->{Data}->{QueueID} = [ $Param{Plugin}->{Data}->{QueueID} ];
     }
@@ -1037,6 +1040,7 @@ sub _TicketCreateTimeTypeSelection {
         Multiple       => 0,
         Class          => 'Modernize W75pc',
         PossibleNone   => 0,
+        Disabled       => $Param{ReadOnly} ? 1 : 0,
     );
 }
 
@@ -1089,6 +1093,7 @@ sub _TicketCreateOffsetUnitSelection {
         Multiple       => 0,
         Class          => 'Modernize W75pc',
         PossibleNone   => 0,
+        Disabled       => $Param{ReadOnly} ? 1 : 0,
     );
 }
 
@@ -1113,6 +1118,7 @@ sub _TicketCreateOffsetPointSelection {
         Multiple       => 0,
         Class          => 'Modernize W75pc',
         PossibleNone   => 0,
+        Disabled       => $Param{ReadOnly} ? 1 : 0,
     );
 }
 
@@ -1129,7 +1135,7 @@ sub _QueueSelection {
 
     my %Queues = $Self->_GetQueues(%Param);
 
-    return $LayoutObject->AgentQueueListOption(
+    my $QueueStrg = $LayoutObject->AgentQueueListOption(
         ID                 => 'Plugin_' . $Param{Plugin}->{PluginKey} . '_QueueID',
         Name               => 'Plugin_' . $Param{Plugin}->{PluginKey} . '_QueueID',
         Data               => \%Queues,
@@ -1141,6 +1147,13 @@ sub _QueueSelection {
         Class              => 'Modernize W75pc',
         Max                => 100,
     );
+
+    # AgentQueueListOption() has no disabled option for the tree view
+    if ( $Param{ReadOnly} ) {
+        $QueueStrg =~ s{<select}{<select disabled="disabled"}xms;
+    }
+
+    return $QueueStrg;
 }
 
 sub _OwnerSelection {
@@ -1159,6 +1172,7 @@ sub _OwnerSelection {
         Translation  => 0,
         Class        => 'Modernize W75pc',
         Max          => 100,
+        Disabled     => $Param{ReadOnly} ? 1 : 0,
     );
 }
 
@@ -1178,6 +1192,7 @@ sub _ResponsibleUserSelection {
         Translation  => 0,
         Class        => 'Modernize W75pc',
         Max          => 100,
+        Disabled     => $Param{ReadOnly} ? 1 : 0,
     );
 }
 
@@ -1205,6 +1220,7 @@ sub _StateSelection {
         Translation  => 1,
         Class        => 'Modernize W75pc',
         Max          => 100,
+        Disabled     => $Param{ReadOnly} ? 1 : 0,
     );
 }
 
@@ -1227,6 +1243,7 @@ sub _TicketPendingTimeOffsetUnitSelection {
         Multiple       => 0,
         Class          => 'Modernize W75pc',
         PossibleNone   => 0,
+        Disabled       => $Param{ReadOnly} ? 1 : 0,
     );
 }
 
@@ -1252,6 +1269,7 @@ sub _PrioritySelection {
         SelectedID  => $Param{Plugin}->{Data}->{PriorityID} || $PriorityDefaultID,
         Class       => 'Modernize W75pc',
         Translation => 1,
+        Disabled    => $Param{ReadOnly} ? 1 : 0,
     );
 }
 
@@ -1269,6 +1287,7 @@ sub _LockSelection {
         SelectedID   => $Param{Plugin}->{Data}->{LockID} || 1,
         Class        => 'Modernize W75pc',
         PossibleNone => 0,
+        Disabled     => $Param{ReadOnly} ? 1 : 0,
     );
 }
 
@@ -1292,6 +1311,7 @@ sub _TypeSelection {
         Class        => 'Modernize W75pc',
         PossibleNone => 0,
         Translation  => 1,
+        Disabled     => $Param{ReadOnly} ? 1 : 0,
     );
 }
 
@@ -1317,6 +1337,7 @@ sub _ServiceSelection {
         Class        => 'Modernize W75pc',
         TreeView     => $TreeView,
         PossibleNone => 1,
+        Disabled     => $Param{ReadOnly} ? 1 : 0,
     );
 }
 
@@ -1334,6 +1355,7 @@ sub _SLASelection {
         SelectedID   => $Param{Plugin}->{Data}->{SLAID},
         Class        => 'Modernize W75pc',
         PossibleNone => 1,
+        Disabled     => $Param{ReadOnly} ? 1 : 0,
     );
 }
 
@@ -1360,6 +1382,7 @@ sub _ProcessSelection {
         Class        => 'Modernize W75pc',
         TreeView     => $Config->{'ProcessTreeView'} || 0,
         PossibleNone => 1,
+        Disabled     => $Param{ReadOnly} ? 1 : 0,
     );
 }
 

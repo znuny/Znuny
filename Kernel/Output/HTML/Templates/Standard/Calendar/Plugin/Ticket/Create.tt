@@ -16,7 +16,7 @@
             <label for="Offset">[% Translate("Time") | html %]</label>
             <div class="Field flex-row">
                 <div style="flex:auto">
-                    <input type="number" class="Modernize" id="Plugin_[% Data.Plugin.PluginKey | html %]_TicketCreateOffset" name="Plugin_[% Data.Plugin.PluginKey | html %]_TicketCreateOffset" value="[% Data.Plugin.Data.TicketCreateOffset | html %]" size="5" maxlength="2" min="0" max="31" />
+                    <input type="number" class="Modernize" id="Plugin_[% Data.Plugin.PluginKey | html %]_TicketCreateOffset" name="Plugin_[% Data.Plugin.PluginKey | html %]_TicketCreateOffset" value="[% Data.Plugin.Data.TicketCreateOffset | html %]" size="5" maxlength="2" min="0" max="31" [% IF Data.ReadOnly %]readonly="readonly"[% END %]/>
                 </div>
                 <div>
                     [% Data.TicketCreateOffsetUnitStrg %]
@@ -56,7 +56,7 @@
             <input type="hidden" id="Plugin_[% Data.Plugin.PluginKey | html %]_CustomerUserID" name="Plugin_[% Data.Plugin.PluginKey | html %]_CustomerUserID" value="[% Data.Plugin.Data.CustomerUserID | html %]"/>
             <label for="CustomerAutoComplete" class="[% Data.MandatoryClass | html %]">[% Translate("Customer user") | html %]</label>
             <div class="Field">
-                <input type="text" id="Plugin_[% Data.Plugin.PluginKey | html %]_CustomerAutoComplete" name="Plugin_[% Data.Plugin.PluginKey | html %]_CustomerAutoComplete" value="[% Data.Plugin.Data.CustomerAutoComplete | html %]" class="CustomerAutoComplete [% Data.CustomerUserIDServerError | html %]" autocomplete="off" />
+                <input type="text" id="Plugin_[% Data.Plugin.PluginKey | html %]_CustomerAutoComplete" name="Plugin_[% Data.Plugin.PluginKey | html %]_CustomerAutoComplete" value="[% Data.Plugin.Data.CustomerAutoComplete | html %]" class="CustomerAutoComplete [% Data.CustomerUserIDServerError | html %]" autocomplete="off" [% IF Data.ReadOnly %]readonly="readonly"[% END %]/>
             </div>
         </div>
 
@@ -79,7 +79,7 @@
             <div class="Field">
                 <input type="hidden" class="Modernize" id="Plugin_[% Data.Plugin.PluginKey | html %]_PendingStateIDs" name="Plugin_[% Data.Plugin.PluginKey | html %]_PendingStateIDs" value="[% Data.PendingStateIDs | html %]" />
                 <div>
-                    <input type="number" class="Modernize" id="Plugin_[% Data.Plugin.PluginKey | html %]_TicketPendingTimeOffset" name="Plugin_[% Data.Plugin.PluginKey | html %]_TicketPendingTimeOffset" value="[% Data.Plugin.Data.TicketPendingTimeOffset | html %]" size="5" maxlength="6" min="0" max="999999" />
+                    <input type="number" class="Modernize" id="Plugin_[% Data.Plugin.PluginKey | html %]_TicketPendingTimeOffset" name="Plugin_[% Data.Plugin.PluginKey | html %]_TicketPendingTimeOffset" value="[% Data.Plugin.Data.TicketPendingTimeOffset | html %]" size="5" maxlength="6" min="0" max="999999" [% IF Data.ReadOnly %]readonly="readonly"[% END %]/>
                 </div>
                 <div class="SpacingTopSmall">
                     [% Data.TicketPendingTimeOffsetUnitStrg %]
@@ -134,7 +134,7 @@
         <div class="field-wrapper">
             <div class="CheckboxContainer">
                 <div class="Field" style="width: auto">
-                    <input type="checkbox" id="Plugin_[% Data.Plugin.PluginKey | html %]_Link" name="Plugin_[% Data.Plugin.PluginKey | html %]_Link" [% Data.Plugin.Data.Link | html %] />
+                    <input type="checkbox" id="Plugin_[% Data.Plugin.PluginKey | html %]_Link" name="Plugin_[% Data.Plugin.PluginKey | html %]_Link" [% Data.Plugin.Data.Link | html %] [% IF Data.ReadOnly %]disabled="disabled"[% END %]/>
                 </div>
                 <label for="Plugin_[% Data.Plugin.PluginKey | html %]_Link">[% Translate("Link") | html %]</label>
             </div>

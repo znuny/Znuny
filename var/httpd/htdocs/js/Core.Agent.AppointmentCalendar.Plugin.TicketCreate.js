@@ -50,6 +50,11 @@ Core.Agent.AppointmentCalendar.Plugin.TicketCreate = (function (TargetNS) {
                 ToggleFields();
                 TogglePendingState();
 
+                // read-only agents may only view the ticket creation settings
+                if (Core.Config.Get('CalendarPermissionLevel') < 2) {
+                    return;
+                }
+
                 // show or hide Attributes
                 $('#' + PluginKeySelector + 'TicketCreateTimeType').on('change.PluginKeyTicketCreate', function() {
                     ToggleFields();

@@ -1902,7 +1902,7 @@ my $AppointmentDeleteTitle = "Appointment-$RandomID";
             Title      => "Appointment-RO-$RandomID",
             StartTime  => '2016-07-04 19:45:00',
             EndTime    => '2016-07-04 19:45:00',
-            UserID     => $UserID,
+            UserID     => 1,
         },
         Config => {
             UserID => $UserID,
@@ -1993,6 +1993,89 @@ $Self->Is(
     ${ $Emails->[0]{Body} },
     $Test,
     'Sent email contains correct data',
+);
+
+#
+# Calendar permission checks for create and move
+#
+my $ReadOnlyCreateID = $AppointmentObject->AppointmentCreate(
+    CalendarID => $Calendar2{CalendarID},
+    Title      => "Appointment-RO-Create-$RandomID",
+    StartTime  => '2016-08-01 10:00:00',
+    EndTime    => '2016-08-01 11:00:00',
+    UserID     => $UserID,
+);
+$Self->False(
+    $ReadOnlyCreateID,
+    'AppointmentCreate - read-only user cannot create in calendar 2',
+);
+
+my $RootCreateID = $AppointmentObject->AppointmentCreate(
+    CalendarID => $Calendar2{CalendarID},
+    Title      => "Appointment-Root-Create-$RandomID",
+    StartTime  => '2016-08-01 12:00:00',
+    EndTime    => '2016-08-01 13:00:00',
+    UserID     => 1,
+);
+$Self->True(
+    $RootCreateID,
+    'AppointmentCreate - root user can create in calendar 2',
+);
+
+my $MoveSourceID = $AppointmentObject->AppointmentCreate(
+    CalendarID => $Calendar{CalendarID},
+    Title      => "Appointment-Move-$RandomID",
+    StartTime  => '2016-08-02 10:00:00',
+    EndTime    => '2016-08-02 11:00:00',
+    UserID     => 1,
+);
+$Self->True(
+    $MoveSourceID,
+    'AppointmentCreate - source appointment for move checks',
+);
+
+my $MoveDenied = $AppointmentObject->AppointmentUpdate(
+    AppointmentID => $MoveSourceID,
+    CalendarID    => $Calendar2{CalendarID},
+    Title         => "Appointment-Move-$RandomID",
+    StartTime     => '2016-08-02 10:00:00',
+    EndTime       => '2016-08-02 11:00:00',
+    UserID        => $UserID,
+);
+$Self->False(
+    $MoveDenied,
+    'AppointmentUpdate - read-only user cannot move into calendar 2',
+);
+
+my %MoveDeniedAppointment = $AppointmentObject->AppointmentGet(
+    AppointmentID => $MoveSourceID,
+);
+$Self->Is(
+    $MoveDeniedAppointment{CalendarID},
+    $Calendar{CalendarID},
+    'AppointmentUpdate - appointment stays on calendar 1',
+);
+
+my $MoveAllowed = $AppointmentObject->AppointmentUpdate(
+    AppointmentID => $RootCreateID,
+    CalendarID    => $Calendar{CalendarID},
+    Title         => "Appointment-Root-Create-$RandomID",
+    StartTime     => '2016-08-01 12:00:00',
+    EndTime       => '2016-08-01 13:00:00',
+    UserID        => $UserID,
+);
+$Self->True(
+    $MoveAllowed,
+    'AppointmentUpdate - user with rw can move into calendar 1',
+);
+
+my %MoveAllowedAppointment = $AppointmentObject->AppointmentGet(
+    AppointmentID => $RootCreateID,
+);
+$Self->Is(
+    $MoveAllowedAppointment{CalendarID},
+    $Calendar{CalendarID},
+    'AppointmentUpdate - appointment moved to calendar 1',
 );
 
 #

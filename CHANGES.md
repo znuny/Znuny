@@ -1,4 +1,5 @@
 # 7.5.1 2026-??-??
+ - 2026-11-25 Security: Appointment read, create, and move now require the matching calendar permission.
  - 2026-11-25 Security: Stopped unit test helper and FS article storage from creating files and directories outside their allowed paths. Thanks for reporting to Tim Püttmanns (maxence).
  - 2026-11-25 Security: Form drafts could be loaded or deleted through a ticket they do not belong to, AgentTicketZoom draft deletion had no challenge token check, and ChallengeTokenCheck accepted tokens of other session types with the same UserID. Thanks to Timotej Doležal for reporting this issue.
  - 2026-11-25 Security: Fixed SQL injection via ticket link keys in the link cleanup of ticket merges on MySQL/MariaDB. Thanks to Timotej Doležal (ESET) for reporting this issue.
