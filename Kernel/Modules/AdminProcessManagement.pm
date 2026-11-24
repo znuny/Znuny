@@ -16,6 +16,8 @@ use utf8;
 use Data::Dumper;
 use MIME::Base64;
 
+use Cwd qw(abs_path);
+
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language              qw(Translatable);
 
@@ -96,8 +98,6 @@ sub Run {
 
         my $Content;
 
-        my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
-
         my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
 
         my $ExampleProcess = $ParamObject->GetParam( Param => 'ExampleProcess' );
@@ -105,21 +105,25 @@ sub Run {
 
         if ($ExampleProcess) {
 
-            my $ExampleProcessFilename = $ParamObject->GetParam( Param => 'ExampleProcess' );
-            $ExampleProcessFilename =~ s{/+|\.{2,}}{}smx;    # remove slashes and ..
+            my %ExampleFile = $Self->_ExampleProcessLocationGet(
+                Filename => $ExampleProcess,
+            );
 
-            if ( !$ExampleProcessFilename ) {
-                return $Kernel::OM->Get('Kernel::Output::HTML::Layout')->FatalError(
+            if ( !%ExampleFile ) {
+                return $LayoutObject->FatalError(
                     Message => Translatable('Need ExampleProcesses!'),
                 );
             }
 
-            # extract file name without extension
-            $ExampleProcessFilename =~ m{(.*?)\.yml$}smx;
-            $FileWithoutExtension = $1;
+            $FileWithoutExtension = $ExampleFile{FileWithoutExtension};
 
-            # run _pre.pm if available
-            if ( -e "$Home/var/processes/examples/" . $FileWithoutExtension . "_pre.pm" ) {
+            # Run _pre.pm if it stays inside the examples directory.
+            my $PreFile = $Self->_ExampleProcessHookLocationGet(
+                FileWithoutExtension => $FileWithoutExtension,
+                Hook                 => 'pre',
+            );
+
+            if ($PreFile) {
 
                 my $BackendName = 'var::processes::examples::' . $FileWithoutExtension . '_pre';
 
@@ -144,14 +148,16 @@ sub Run {
             }
 
             $Content = $MainObject->FileRead(
-                Location => "$Home/var/processes/examples/$ExampleProcessFilename",
+                Location => $ExampleFile{Location},
                 Mode     => 'utf8',
             );
 
             if ( !$Content ) {
-                return $Kernel::OM->Get('Kernel::Output::HTML::Layout')->FatalError(
-                    Message =>
-                        $LayoutObject->{LanguageObject}->Translate( 'Could not read %s!', $ExampleProcessFilename ),
+                return $LayoutObject->FatalError(
+                    Message => $LayoutObject->{LanguageObject}->Translate(
+                        'Could not read %s!',
+                        $FileWithoutExtension . '.yml',
+                    ),
                 );
             }
 
@@ -183,31 +189,34 @@ sub Run {
             );
         }
         else {
-            # Run _post.pm if available.
-            if (
-                $ExampleProcess
-                && -e "$Home/var/processes/examples/" . $FileWithoutExtension . "_post.pm"
-                )
-            {
-                my $BackendName = 'var::processes::examples::' . $FileWithoutExtension . '_post';
-
-                my $Loaded = $MainObject->Require(
-                    $BackendName,
+            # Run _post.pm if it stays inside the examples directory.
+            if ($ExampleProcess) {
+                my $PostFile = $Self->_ExampleProcessHookLocationGet(
+                    FileWithoutExtension => $FileWithoutExtension,
+                    Hook                 => 'post',
                 );
 
-                if ($Loaded) {
+                if ($PostFile) {
+                    my $BackendName = 'var::processes::examples::' . $FileWithoutExtension . '_post';
 
-                    my $BackendPost = $Kernel::OM->Get(
+                    my $Loaded = $MainObject->Require(
                         $BackendName,
                     );
 
-                    my %Status = $BackendPost->Run();
-                    if ( !$Status{Success} ) {
+                    if ($Loaded) {
 
-                        # show the error screen
-                        return $LayoutObject->ErrorScreen(
-                            Message => $Status{Error},
+                        my $BackendPost = $Kernel::OM->Get(
+                            $BackendName,
                         );
+
+                        my %Status = $BackendPost->Run();
+                        if ( !$Status{Success} ) {
+
+                            # show the error screen
+                            return $LayoutObject->ErrorScreen(
+                                Message => $Status{Error},
+                            );
+                        }
                     }
                 }
             }
@@ -2473,6 +2482,61 @@ sub _ProcessPreferencesSet {
     }
 
     return 1;
+}
+
+sub _ExampleProcessLocationGet {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    my $Filename         = $Param{Filename};
+    my $Home             = $ConfigObject->Get('Home');
+    my $ExampleDirectory = "$Home/var/processes/examples";
+
+    return if !IsStringWithData($Filename);
+    return if $Filename !~ m{\A[A-Za-z0-9_][A-Za-z0-9_.-]*\.yml\z}xms;
+
+    my $Base = abs_path($ExampleDirectory);
+    return if !IsStringWithData($Base);
+
+    my $Location = abs_path("$ExampleDirectory/$Filename");
+    return if !IsStringWithData($Location);
+    return if $Location !~ m{\A\Q$Base\E/}xms;
+    return if !-f $Location;
+
+    my ($FileWithoutExtension) = $Filename =~ m{\A(.+)\.yml\z}xms;
+    return if !IsStringWithData($FileWithoutExtension);
+
+    return (
+        Location             => $Location,
+        FileWithoutExtension => $FileWithoutExtension,
+    );
+}
+
+sub _ExampleProcessHookLocationGet {
+    my ( $Self, %Param ) = @_;
+
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    my $FileWithoutExtension = $Param{FileWithoutExtension};
+    my $Hook                 = $Param{Hook};
+    my $Home                 = $ConfigObject->Get('Home');
+    my $ExampleDirectory     = "$Home/var/processes/examples";
+
+    return if !IsStringWithData($FileWithoutExtension);
+    return if $FileWithoutExtension !~ m{\A[A-Za-z0-9_]+\z}xms;
+    return if !IsStringWithData($Hook);
+    return if $Hook !~ m{\A(?:pre|post)\z}xms;
+
+    my $Base = abs_path($ExampleDirectory);
+    return if !IsStringWithData($Base);
+
+    my $Location = abs_path("$ExampleDirectory/${FileWithoutExtension}_${Hook}.pm");
+    return if !IsStringWithData($Location);
+    return if $Location !~ m{\A\Q$Base\E/}xms;
+    return if !-f $Location;
+
+    return $Location;
 }
 
 1;
