@@ -551,6 +551,136 @@ $Self->True(
     "Mutual child TicketID $TicketIDs[2] is merged to TicketID $TicketIDs[1]"
 );
 
+# Link keys stored in link_relation must not be able to inject SQL into the merge link cleanup.
+my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+
+my @InjectionTicketIDs;
+for my $Item ( 1 .. 4 ) {
+    my $TicketID = $TicketObject->TicketCreate(
+        Title        => 'Ticket_LinkKeyInjection_Merge_Test' . $Item,
+        Queue        => 'Raw',
+        Lock         => 'unlock',
+        Priority     => '3 normal',
+        State        => 'new',
+        CustomerNo   => '123456',
+        CustomerUser => 'customer@example.com',
+        OwnerID      => 1,
+        UserID       => 1,
+    );
+    $Self->True(
+        $TicketID,
+        "TicketID $TicketID created for link key injection test.",
+    );
+
+    push @InjectionTicketIDs, $TicketID;
+}
+
+my ( $InjectionMainTicketID, $InjectionMergeTicketID, $UnrelatedSourceTicketID, $UnrelatedTargetTicketID )
+    = @InjectionTicketIDs;
+
+$LinkAddSuccess = $LinkObject->LinkAdd(
+    SourceObject => 'Ticket',
+    SourceKey    => $UnrelatedSourceTicketID,
+    TargetObject => 'Ticket',
+    TargetKey    => $UnrelatedTargetTicketID,
+    Type         => 'Normal',
+    State        => 'Valid',
+    UserID       => 1,
+);
+$Self->True(
+    $LinkAddSuccess,
+    "Link added between unrelated TicketID $UnrelatedSourceTicketID and TicketID $UnrelatedTargetTicketID.",
+);
+
+my $TicketLinkObjectID = $LinkObject->ObjectLookup(
+    Name => 'Ticket',
+);
+my $NormalLinkTypeID = $LinkObject->TypeLookup(
+    Name   => 'Normal',
+    UserID => 1,
+);
+my $ValidLinkStateID = $LinkObject->StateLookup(
+    Name => 'Valid',
+);
+
+my $InjectionTargetKey = "$InjectionMainTicketID' ) OR 1=1 #";
+
+for my $SourceKey ( $InjectionMainTicketID, $InjectionMergeTicketID ) {
+    my $Success = $DBObject->Do(
+        SQL => '
+            INSERT INTO link_relation
+                (source_object_id, source_key, target_object_id, target_key,
+                type_id, state_id, create_time, create_by)
+            VALUES (?, ?, ?, ?, ?, ?, current_timestamp, 1)',
+        Bind => [
+            \$TicketLinkObjectID, \$SourceKey,
+            \$TicketLinkObjectID, \$InjectionTargetKey,
+            \$NormalLinkTypeID,   \$ValidLinkStateID,
+        ],
+    );
+    $Self->True(
+        $Success,
+        "Link from TicketID $SourceKey with target key '$InjectionTargetKey' inserted.",
+    );
+}
+
+$MergeSuccess = $TicketObject->TicketMerge(
+    MainTicketID  => $InjectionMainTicketID,
+    MergeTicketID => $InjectionMergeTicketID,
+    UserID        => 1,
+);
+$Self->True(
+    $MergeSuccess,
+    "TicketID $InjectionMergeTicketID is successfully merged to TicketID $InjectionMainTicketID",
+);
+
+$DBObject->Prepare(
+    SQL => '
+        SELECT COUNT(*)
+        FROM link_relation
+        WHERE source_object_id = ?
+            AND source_key = ?
+            AND target_object_id = ?
+            AND target_key = ?',
+    Bind => [
+        \$TicketLinkObjectID, \$UnrelatedSourceTicketID,
+        \$TicketLinkObjectID, \$UnrelatedTargetTicketID,
+    ],
+);
+
+my $UnrelatedLinkCount = 0;
+while ( my @Row = $DBObject->FetchrowArray() ) {
+    $UnrelatedLinkCount = $Row[0];
+}
+
+$Self->Is(
+    $UnrelatedLinkCount,
+    1,
+    "Link between unrelated TicketID $UnrelatedSourceTicketID and TicketID $UnrelatedTargetTicketID survives the merge.",
+);
+
+$DBObject->Prepare(
+    SQL => '
+        SELECT source_key
+        FROM link_relation
+        WHERE target_object_id = ?
+            AND target_key = ?',
+    Bind => [
+        \$TicketLinkObjectID, \$InjectionTargetKey,
+    ],
+);
+
+my @InjectionSourceKeys;
+while ( my @Row = $DBObject->FetchrowArray() ) {
+    push @InjectionSourceKeys, $Row[0];
+}
+
+$Self->IsDeeply(
+    \@InjectionSourceKeys,
+    [$InjectionMainTicketID],
+    "Only the duplicate link of merged TicketID $InjectionMergeTicketID is removed.",
+);
+
 # Cleanup is done by RestoreDatabase.
 
 1;

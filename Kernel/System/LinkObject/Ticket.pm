@@ -11,6 +11,7 @@ package Kernel::System::LinkObject::Ticket;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 
@@ -149,10 +150,13 @@ checks read permission for a given object and UserID.
 sub ObjectPermission {
     my ( $Self, %Param ) = @_;
 
+    my $LogObject    = $Kernel::OM->Get('Kernel::System::Log');
+    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+
     # check needed stuff
     for my $Argument (qw(Object Key UserID)) {
         if ( !$Param{$Argument} ) {
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
+            $LogObject->Log(
                 Priority => 'error',
                 Message  => "Need $Argument!",
             );
@@ -160,7 +164,16 @@ sub ObjectPermission {
         }
     }
 
-    return $Kernel::OM->Get('Kernel::System::Ticket')->TicketPermission(
+    # MySQL/MariaDB would coerce a non-numeric key to its leading number when comparing it with ticket.id.
+    if ( $Param{Key} !~ m{\A\d+\z} ) {
+        $LogObject->Log(
+            Priority => 'notice',
+            Message  => "Invalid ticket key '$Param{Key}'!",
+        );
+        return;
+    }
+
+    return $TicketObject->TicketPermission(
         Type     => 'ro',
         TicketID => $Param{Key},
         UserID   => $Param{UserID},
@@ -172,6 +185,7 @@ sub ObjectPermission {
 return a hash of object descriptions
 
 Return
+
     %Description = (
         Normal => "Ticket# 1234455",
         Long   => "Ticket# 1234455: The Ticket Title",

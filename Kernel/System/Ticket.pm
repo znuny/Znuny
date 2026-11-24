@@ -43,6 +43,7 @@ our @ObjectDependencies = (
     'Kernel::System::Lock',
     'Kernel::System::Log',
     'Kernel::System::Main',
+    'Kernel::System::Mention',
     'Kernel::System::Priority',
     'Kernel::System::Queue',
     'Kernel::System::SLA',
@@ -6675,18 +6676,24 @@ sub TicketMergeLinkedObjects {
     }
     if (@Relations) {
 
-        my $SQL = "DELETE FROM link_relation
-                 WHERE target_object_id = ?
-                   AND source_object_id = ?
-                   AND source_key = ?
-                   AND target_key IN ( '${\(join '\',\'', @Relations)}' )";
+        my %InCondition = $DBObject->QueryInCondition(
+            Key      => 'target_key',
+            Values   => \@Relations,
+            BindMode => 1,
+        );
 
-        $DBObject->Prepare(
-            SQL  => $SQL,
+        $DBObject->Do(
+            SQL => "
+                DELETE FROM link_relation
+                WHERE target_object_id = ?
+                  AND source_object_id = ?
+                  AND source_key = ?
+                  AND $InCondition{SQL}",
             Bind => [
                 \$TicketObjectID,
                 \$TicketObjectID,
                 \$Param{MergeTicketID},
+                @{ $InCondition{Values} },
             ],
         );
     }
