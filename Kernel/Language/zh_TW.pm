@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.310865029690258;
+    $Self->{Completeness}        = 0.311025517573423;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -5059,10 +5059,8 @@ sub Data {
 
         # Perl Module: Kernel/System/CustomerUser.pm
         'Customer user "%s" already exists.' => '',
-
-        # Perl Module: Kernel/System/CustomerUser/DB.pm
         'This email address is already in use for another customer user.' =>
-            '',
+            '此郵件地址已被其他用戶使用。',
 
         # Perl Module: Kernel/System/DynamicField/Driver/BaseDateTime.pm
         'before/after' => '相對',

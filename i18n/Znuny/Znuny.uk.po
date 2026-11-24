@@ -13668,7 +13668,7 @@ msgstr ""
 msgid "Customer user \"%s\" already exists."
 msgstr "Клієнт \"%s\" вже існує."
 
-#. Perl Module: Kernel/System/CustomerUser/DB.pm
+#. Perl Module: Kernel/System/CustomerUser.pm
 msgid "This email address is already in use for another customer user."
 msgstr "Ця адреса поштової скриньки вже використана іншим клієнтом."
 

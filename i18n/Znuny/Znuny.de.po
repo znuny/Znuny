@@ -13687,7 +13687,7 @@ msgstr "Diese Einstellung kann in den Benutzereinstellungen überschrieben werde
 msgid "Customer user \"%s\" already exists."
 msgstr "Kundenbenutzer \"%s\" existiert bereits."
 
-#. Perl Module: Kernel/System/CustomerUser/DB.pm
+#. Perl Module: Kernel/System/CustomerUser.pm
 msgid "This email address is already in use for another customer user."
 msgstr "Diese E-Mail-Adresse wird bereits für einen anderen Kundenbenutzer verwendet."
 

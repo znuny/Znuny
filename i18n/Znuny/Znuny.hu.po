@@ -13660,7 +13660,7 @@ msgstr "Ez a beállítás felülbírálható a felhasználói beállításokban,
 msgid "Customer user \"%s\" already exists."
 msgstr "A(z) „%s” ügyfél-felhasználó már létezik."
 
-#. Perl Module: Kernel/System/CustomerUser/DB.pm
+#. Perl Module: Kernel/System/CustomerUser.pm
 msgid "This email address is already in use for another customer user."
 msgstr "Ez az e-mail-cím már használatban van egy másik ügyfél-felhasználónál."
 

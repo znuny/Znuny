@@ -5060,8 +5060,6 @@ sub Data {
 
         # Perl Module: Kernel/System/CustomerUser.pm
         'Customer user "%s" already exists.' => 'Użytkownik klienta "%s" już istnieje.',
-
-        # Perl Module: Kernel/System/CustomerUser/DB.pm
         'This email address is already in use for another customer user.' =>
             'Ten adres e-mail jest już używany przez innego użytkownika klienta.',
 
