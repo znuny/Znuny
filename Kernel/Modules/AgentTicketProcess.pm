@@ -83,6 +83,21 @@ sub Run {
 
     # get the ticket information on link actions
     if ( $Self->{LinkTicketID} ) {
+
+        # split pre-fill is only allowed for a source ticket the agent can read
+        my $Access = $TicketObject->TicketPermission(
+            Type     => 'ro',
+            TicketID => $Self->{LinkTicketID},
+            UserID   => $Self->{UserID},
+        );
+
+        if ( !$Access ) {
+            return $LayoutObject->NoPermission(
+                Message    => Translatable('You need ro permission!'),
+                WithHeader => 'yes',
+            );
+        }
+
         my %TicketData = $TicketObject->TicketGet(
             TicketID => $Self->{LinkTicketID},
             UserID   => $Self->{UserID},
@@ -96,6 +111,17 @@ sub Run {
 
     # get the article information on link actions
     if ( $Self->{ArticleID} ) {
+
+        # an article may only be loaded for the permitted source ticket
+        if ( !$Self->{LinkTicketID} ) {
+            return $LayoutObject->ErrorScreen(
+                Message => $LayoutObject->{LanguageObject}->Translate(
+                    'Article does not belong to ticket %s!',
+                    $Self->{LinkTicketID},
+                ),
+            );
+        }
+
         my $ArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForArticle(
             TicketID  => $Self->{LinkTicketID},
             ArticleID => $Self->{ArticleID},
@@ -105,6 +131,16 @@ sub Run {
             TicketID  => $Self->{LinkTicketID},
             ArticleID => $Self->{ArticleID},
         );
+
+        # check if article is from the same ticket we checked permissions for
+        if ( !$Article{TicketID} || $Article{TicketID} ne $Self->{LinkTicketID} ) {
+            return $LayoutObject->ErrorScreen(
+                Message => $LayoutObject->{LanguageObject}->Translate(
+                    'Article does not belong to ticket %s!',
+                    $Self->{LinkTicketID},
+                ),
+            );
+        }
 
         $Self->{LinkArticleData} = \%Article;
 
@@ -5964,7 +6000,7 @@ sub _StoreActivityDialog {
 
         if ( !$Access ) {
             return $LayoutObject->NoPermission(
-                Message    => "You need ro permission!",
+                Message    => Translatable('You need ro permission!'),
                 WithHeader => 'yes',
             );
         }
