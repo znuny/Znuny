@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.211220110361741;
+    $Self->{Completeness}        = 0.210929129037196;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -534,6 +534,20 @@ sub Data {
         'Please note' => '',
         'This customer backend is read only!' => '',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+        'Edit default services' => 'Redaguoti standartinius servisus',
+        'Filter for Services' => 'Filtruoti paslaugas',
+        'Filter for services' => '',
+        'Customers' => 'Klientai',
+        'Services' => 'Paslaugos',
+        'Service Level Agreements' => 'Aptarnavimo lygio sutartys',
+        'Manage Customer Company Service Relations' => '',
+        'Search Results' => 'Paieškos rezultatai',
+        'Customer Companies' => 'Kliento organizacijos',
+        'Toggle active state for all' => 'Perjungti visiems aktyvią būseną',
+        'Inherit from' => '',
+        'Toggle active state for %s' => 'Perjungti %s aktyvią būseną',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
         'Notice' => 'Perspėjimas',
         'This feature is disabled!' => 'Ši ypatybė yra išjungta!',
@@ -548,10 +562,8 @@ sub Data {
         'Select the customer:group permissions.' => 'Pasirinkite klientą: grupės leidimai.',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Jeigu nėra nieko pasirinkta, tai šioje grupėje nėra nustatytų leidimų (klientui užduotys bus nepasiekiamos).',
-        'Customers' => 'Klientai',
         'Groups' => 'Grupės',
         'Manage Customer-Group Relations' => 'Valdyti klientas-grupė sąsajas',
-        'Search Results' => 'Paieškos rezultatai',
         'Change Group Relations for Customer' => 'Pakeisti klientui grupės sąsajas(ryšius)',
         'Change Customer Relations for Group' => 'Pakeisti grupei kliento sąsajas(ryšius)',
         'Toggle %s Permission for all' => 'Įjungti %s leidimą visiems',
@@ -607,8 +619,6 @@ sub Data {
         'Manage Customer User-Customer Relations' => '',
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
-        'Toggle active state for all' => 'Perjungti visiems aktyvią būseną',
-        'Toggle active state for %s' => 'Perjungti %s aktyvią būseną',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
         'Just use this feature if you want to define group permissions for customer users.' =>
@@ -626,11 +636,6 @@ sub Data {
         'Customer User Default Groups:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-        'Edit default services' => 'Redaguoti standartinius servisus',
-        'Filter for Services' => 'Filtruoti paslaugas',
-        'Filter for services' => '',
-        'Services' => 'Paslaugos',
-        'Service Level Agreements' => 'Aptarnavimo lygio sutartys',
         'Manage Customer User-Service Relations' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
@@ -3863,6 +3868,10 @@ sub Data {
         'Customer Company %s already exists!' => '',
         'Customer company added!' => '',
 
+        # Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+        'Allocate Customer Companies to Service' => '',
+        'Allocate Services to Customer Company' => '',
+
         # Perl Module: Kernel/Modules/AdminCustomerGroup.pm
         'No configuration for \'CustomerGroupPermissionContext\' found!' =>
             '',
@@ -6618,6 +6627,8 @@ sub Data {
             '',
         'Event module that updates customer users after an update of the Customer.' =>
             '',
+        'Event module that updates customer company service membership if the customer ID changes.' =>
+            '',
         'Event module that updates customer company object name for dynamic fields.' =>
             '',
         'Event module that updates customer user search profiles if login changes.' =>
@@ -6801,6 +6812,8 @@ sub Data {
         'Retains all services in listings even if they are children of invalid elements.' =>
             '',
         'Allows default services to be selected also for non existing customers.' =>
+            '',
+        'Defines if the Customer Company ↔ Service functionality should always be used or only as a fallback if no Customer User ↔ Services relationship exists.' =>
             '',
         'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
             '',
@@ -9136,6 +9149,7 @@ Thanks for your help!
             '',
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             '',
+        'Always' => '',
         'Always show RichText if available' => '',
         'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => '',
@@ -9259,7 +9273,7 @@ Thanks for your help!
         'Croatian' => '',
         'Current action description.' => '',
         'Customer Administration' => '',
-        'Customer Companies' => 'Kliento organizacijos',
+        'Customer Company ↔ Services' => '',
         'Customer IDs' => '',
         'Customer Information Center Search.' => '',
         'Customer Information Center search.' => '',
@@ -9430,6 +9444,7 @@ Thanks for your help!
         'Link Object.' => '',
         'Link agents to groups.' => 'Susieti agentus su grupėmis.',
         'Link agents to roles.' => 'Susieti agentus su rolėmis.',
+        'Link customer companies to services.' => '',
         'Link customer users to customers.' => '',
         'Link customer users to groups.' => '',
         'Link customer users to services.' => '',

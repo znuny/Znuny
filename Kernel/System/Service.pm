@@ -18,6 +18,7 @@ our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::System::Cache',
     'Kernel::System::CheckItem',
+    'Kernel::System::CustomerUser',
     'Kernel::System::DB',
     'Kernel::System::DynamicField',
     'Kernel::System::GeneralCatalog',
@@ -1093,6 +1094,8 @@ returns a list of customeruser/service members
     ServiceID: service id
     CustomerUserLogin: customer user login
     DefaultServices: activate or deactivate default services
+    CustomerCompanyService: include services assigned to customer companies (optional)
+    CustomerID: limit company services to this customer company (optional)
 
     Result: HASH -> returns a hash of key => service id, value => service name
             Name -> returns an array of user names
@@ -1117,6 +1120,9 @@ returns a list of customeruser/service members
 
 sub CustomerUserServiceMemberList {
     my ( $Self, %Param ) = @_;
+
+    my $ConfigObject       = $Kernel::OM->Get('Kernel::Config');
+    my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
 
     # check needed stuff
     if ( !$Param{Result} ) {
@@ -1160,6 +1166,16 @@ sub CustomerUserServiceMemberList {
     # create cache key
     my $CacheKey = 'CustomerUserServiceMemberList::' . $Param{Result} . '::'
         . 'DefaultServices::' . $Param{DefaultServices} . '::';
+
+    # Follow DefaultServices when CustomerCompanyService is not passed.
+    if ( !defined $Param{CustomerCompanyService} ) {
+        $Param{CustomerCompanyService} = $Param{DefaultServices} // 0;
+    }
+    $CacheKey .= 'CustomerCompanyService::' . $Param{CustomerCompanyService} . '::';
+    if ( defined $Param{CustomerID} && $Param{CustomerID} ne '' ) {
+        $CacheKey .= 'CustomerID::' . $Param{CustomerID} . '::';
+    }
+
     if ( $Param{ServiceID} ) {
         $CacheKey .= 'ServiceID::' . $Param{ServiceID};
     }
@@ -1181,6 +1197,10 @@ sub CustomerUserServiceMemberList {
 
     # get database object
     my $DBObject = $Kernel::OM->Get('Kernel::System::DB');
+
+    # Keep originals for company lookup before Quote() rewrites %Param.
+    my $CustomerIDParam        = $Param{CustomerID};
+    my $CustomerUserLoginParam = $Param{CustomerUserLogin};
 
     # db quote
     for my $Key ( sort keys %Param ) {
@@ -1220,6 +1240,46 @@ sub CustomerUserServiceMemberList {
             $Data{ $Row[0] } = $Row[2];
         }
     }
+
+    if ( $Param{CustomerCompanyService} ) {
+
+        my $UseCustomerCompanyServices = $ConfigObject->Get('Ticket::Service::Behavior::CustomerCompany');
+
+        if ( $UseCustomerCompanyServices || !%Data ) {
+
+            if ( $Param{ServiceID} ) {
+                my %CustomerCompanyServiceResult = $Self->CustomerCompanyServiceMemberList(
+                    ServiceID => $Param{ServiceID},
+                    Result    => 'HASH',
+                );
+
+                @Data{ keys %CustomerCompanyServiceResult } = values %CustomerCompanyServiceResult;
+            }
+            elsif ($CustomerUserLoginParam) {
+
+                my @CustomerIDs;
+                if ( defined $CustomerIDParam && $CustomerIDParam ne '' ) {
+                    @CustomerIDs = ($CustomerIDParam);
+                }
+                else {
+                    @CustomerIDs = $CustomerUserObject->CustomerIDs(
+                        User => $CustomerUserLoginParam,
+                    );
+                }
+
+                for my $CustomerID (@CustomerIDs) {
+
+                    my %CustomerCompanyServiceResult = $Self->CustomerCompanyServiceMemberList(
+                        CustomerID => $CustomerID,
+                        Result     => 'HASH',
+                    );
+
+                    @Data{ keys %CustomerCompanyServiceResult } = values %CustomerCompanyServiceResult;
+                }
+            }
+        }
+    }
+
     if (
         $Param{CustomerUserLogin}
         && $Param{CustomerUserLogin} ne '<DEFAULT>'
@@ -1315,6 +1375,199 @@ sub CustomerUserServiceMemberAdd {
 
     $Kernel::OM->Get('Kernel::System::Cache')->CleanUp(
         Type => $Self->{CacheType},
+    );
+
+    return $Success;
+}
+
+=head2 CustomerCompanyServiceMemberList()
+
+returns a list of customer company/service members
+
+    ServiceID: service id
+    CustomerID: customer company id
+    Result: HASH -> returns a hash of key => service id, value => service name
+            Name -> returns an array of names
+            ID   -> returns an array of ids
+
+    Example (get services of customer company):
+
+    $ServiceObject->CustomerCompanyServiceMemberList(
+        CustomerID => 'Demo GmbH',
+        Result     => 'HASH',
+    );
+
+    Example (get customer companies of service):
+
+    $ServiceObject->CustomerCompanyServiceMemberList(
+        ServiceID => $ID,
+        Result    => 'HASH',
+    );
+
+=cut
+
+sub CustomerCompanyServiceMemberList {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject   = $Kernel::OM->Get('Kernel::System::Log');
+    my $DBObject    = $Kernel::OM->Get('Kernel::System::DB');
+    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
+    my $ValidObject = $Kernel::OM->Get('Kernel::System::Valid');
+
+    # check needed stuff
+    if ( !$Param{Result} ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => 'Need Result!',
+        );
+        return;
+    }
+
+    # check more needed stuff
+    if ( !$Param{ServiceID} && !$Param{CustomerID} ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => 'Need ServiceID or CustomerID!',
+        );
+        return;
+    }
+
+    # create cache key
+    my $CacheKey = 'CustomerCompanyServiceMemberList::' . $Param{Result} . '::';
+    if ( $Param{ServiceID} ) {
+        $CacheKey .= 'ServiceID::' . $Param{ServiceID};
+    }
+    elsif ( $Param{CustomerID} ) {
+        $CacheKey .= 'CustomerID::' . $Param{CustomerID};
+    }
+
+    # check cache
+    my $Cache = $CacheObject->Get(
+        Type => $Self->{CacheType},
+        Key  => $CacheKey,
+    );
+    if ( $Param{Result} eq 'HASH' ) {
+        return %{$Cache} if ref $Cache eq 'HASH';
+    }
+    else {
+        return @{$Cache} if ref $Cache eq 'ARRAY';
+    }
+
+    # sql
+    my $SQL = 'SELECT scc.service_id, scc.customer_id, s.name '
+        . ' FROM '
+        . ' service_customer_company scc, service s'
+        . ' WHERE '
+        . " s.valid_id IN ( ${\(join ', ', $ValidObject->ValidIDsGet())} ) AND "
+        . ' s.id = scc.service_id AND ';
+
+    my @SQLBind;
+    if ( $Param{ServiceID} ) {
+        $SQL .= " scc.service_id = ?";
+        push @SQLBind, \$Param{ServiceID};
+    }
+    elsif ( $Param{CustomerID} ) {
+        $SQL .= " scc.customer_id = ?";
+        push @SQLBind, \$Param{CustomerID};
+    }
+
+    $DBObject->Prepare(
+        SQL  => $SQL,
+        Bind => \@SQLBind,
+    );
+
+    my %Data;
+    my @Data;
+    while ( my @Row = $DBObject->FetchrowArray() ) {
+
+        if ( $Param{ServiceID} ) {
+            $Data{ $Row[1] } = $Row[0];
+        }
+        else {
+            $Data{ $Row[0] } = $Row[2];
+        }
+    }
+
+    # return result
+    if ( $Param{Result} eq 'HASH' ) {
+        $CacheObject->Set(
+            Type  => $Self->{CacheType},
+            TTL   => $Self->{CacheTTL},
+            Key   => $CacheKey,
+            Value => \%Data,
+        );
+        return %Data;
+    }
+    if ( $Param{Result} eq 'Name' ) {
+        @Data = values %Data;
+    }
+    else {
+        @Data = keys %Data;
+    }
+    $CacheObject->Set(
+        Type  => $Self->{CacheType},
+        TTL   => $Self->{CacheTTL},
+        Key   => $CacheKey,
+        Value => \@Data,
+    );
+
+    return @Data;
+}
+
+=head2 CustomerCompanyServiceMemberAdd()
+
+to add a member to a service
+
+if 'Active' is 0, the customer company is removed from the service
+
+    $ServiceObject->CustomerCompanyServiceMemberAdd(
+        CustomerID => 'Test1',
+        ServiceID  => 6,
+        Active     => 1,
+        UserID     => 123,
+    );
+
+=cut
+
+sub CustomerCompanyServiceMemberAdd {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject   = $Kernel::OM->Get('Kernel::System::Log');
+    my $DBObject    = $Kernel::OM->Get('Kernel::System::DB');
+    my $CacheObject = $Kernel::OM->Get('Kernel::System::Cache');
+
+    # check needed stuff
+    for my $Argument (qw(CustomerID ServiceID UserID)) {
+        if ( !$Param{$Argument} ) {
+            $LogObject->Log(
+                Priority => 'error',
+                Message  => "Need $Argument!",
+            );
+            return;
+        }
+    }
+
+    # delete existing relation
+    return if !$DBObject->Do(
+        SQL  => 'DELETE FROM service_customer_company WHERE customer_id = ? AND service_id = ?',
+        Bind => [ \$Param{CustomerID}, \$Param{ServiceID} ],
+    );
+
+    $CacheObject->CleanUp(
+        Type => $Self->{CacheType},
+    );
+
+    # return if relation is not active
+    if ( !$Param{Active} ) {
+        return;
+    }
+
+    # insert new relation
+    my $Success = $DBObject->Do(
+        SQL => 'INSERT INTO service_customer_company '
+            . '(customer_id, service_id, create_time, create_by) '
+            . 'VALUES (?, ?, current_timestamp, ?)',
+        Bind => [ \$Param{CustomerID}, \$Param{ServiceID}, \$Param{UserID} ]
     );
 
     return $Success;

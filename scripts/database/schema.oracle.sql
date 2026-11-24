@@ -3753,6 +3753,70 @@ END;
 --
 ;
 -- ----------------------------------------------------------
+--  create table service_customer_company
+-- ----------------------------------------------------------
+CREATE TABLE service_customer_company (
+    id NUMBER (20, 0) NOT NULL,
+    customer_id VARCHAR2 (200) NOT NULL,
+    service_id NUMBER (12, 0) NOT NULL,
+    create_time DATE NOT NULL,
+    create_by NUMBER (12, 0) NOT NULL
+);
+ALTER TABLE service_customer_company ADD CONSTRAINT PK_service_customer_company PRIMARY KEY (id);
+BEGIN
+    EXECUTE IMMEDIATE 'DROP SEQUENCE SE_service_customer_company';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE SEQUENCE SE_service_customer_company
+INCREMENT BY 1
+START WITH 1
+NOMAXVALUE
+NOCYCLE
+CACHE 20
+ORDER
+;
+BEGIN
+    EXECUTE IMMEDIATE 'DROP TRIGGER SE_service_customer_company_t';
+EXCEPTION
+    WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+CREATE OR REPLACE TRIGGER SE_service_customer_company_t
+BEFORE INSERT ON service_customer_company
+FOR EACH ROW
+BEGIN
+    IF :new.id IS NULL THEN
+        SELECT SE_service_customer_company.nextval
+        INTO :new.id
+        FROM DUAL;
+    END IF;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX service_customer_company_cus4e ON service_customer_company (customer_id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX service_customer_company_ser8e ON service_customer_company (service_id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+-- ----------------------------------------------------------
 --  create table sla
 -- ----------------------------------------------------------
 CREATE TABLE sla (

@@ -999,6 +999,19 @@ CREATE TABLE service_customer_user (
     INDEX service_customer_user_service_id (service_id)
 );
 # ----------------------------------------------------------
+#  create table service_customer_company
+# ----------------------------------------------------------
+CREATE TABLE service_customer_company (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    customer_id VARCHAR (200) NOT NULL,
+    service_id INTEGER NOT NULL,
+    create_time DATETIME NOT NULL,
+    create_by INTEGER NOT NULL,
+    PRIMARY KEY(id),
+    INDEX service_customer_company_customer_id (customer_id(10)),
+    INDEX service_customer_company_service_id (service_id)
+);
+# ----------------------------------------------------------
 #  create table sla
 # ----------------------------------------------------------
 CREATE TABLE sla (

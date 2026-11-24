@@ -84,7 +84,7 @@ sub Run {
     for my $Key (
         qw(Year Month Day Hour Minute To Cc Bcc TimeUnits PriorityID Subject Body
         TypeID ServiceID SLAID OwnerAll ResponsibleAll NewResponsibleID NewUserID
-        NextStateID StandardTemplateID Dest ArticleID LinkTicketID
+        NextStateID StandardTemplateID Dest ArticleID LinkTicketID CustomerID
         )
         )
     {
@@ -1613,6 +1613,7 @@ sub Run {
             }
 
             # get services
+            $GetParam{CustomerID} = $CustomerID;
             my $Services = $Self->_GetServices(
                 %GetParam,
                 %ACLCompatGetParam,
@@ -2697,6 +2698,9 @@ sub _GetServices {
 
     # get service list
     if ( $Param{CustomerUserID} ) {
+        if ( !$Param{TicketID} && $Self->{TicketID} ) {
+            $Param{TicketID} = $Self->{TicketID};
+        }
         %Service = $Kernel::OM->Get('Kernel::System::Ticket')->TicketServiceList(
             %Param,
             Action => $Self->{Action},

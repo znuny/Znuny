@@ -33,7 +33,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.856223175965665;
+    $Self->{Completeness}        = 0.855043624674728;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -540,6 +540,20 @@ sub Data {
         'Please note' => '请注意',
         'This customer backend is read only!' => '客户后端是只读的！',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+        'Edit default services' => '修改默认服务',
+        'Filter for Services' => '服务过滤器',
+        'Filter for services' => '服务过滤器',
+        'Customers' => '客户',
+        'Services' => '服务',
+        'Service Level Agreements' => '服务级别协议',
+        'Manage Customer Company Service Relations' => '',
+        'Search Results' => '搜索结果',
+        'Customer Companies' => '客户单位',
+        'Toggle active state for all' => '全部激活/不激活状态',
+        'Inherit from' => '',
+        'Toggle active state for %s' => '%s 激活/不激活状态',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
         'Notice' => 'Notice（注意）',
         'This feature is disabled!' => '该功能已关闭！',
@@ -554,10 +568,8 @@ sub Data {
         'Select the customer:group permissions.' => '选择客户:组权限。',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             '如果没有选择，就不具备该组的任何权限 (客户不能创建或读取工单)。',
-        'Customers' => '客户',
         'Groups' => '组',
         'Manage Customer-Group Relations' => '管理客户与组的关系',
-        'Search Results' => '搜索结果',
         'Change Group Relations for Customer' => '此客户属于哪些组',
         'Change Customer Relations for Group' => '哪些客户属于此组',
         'Toggle %s Permission for all' => '全部授予/取消 %s 权限',
@@ -613,8 +625,6 @@ sub Data {
         'Manage Customer User-Customer Relations' => '管理客户用户和客户的关联',
         'Change Customer Relations for Customer User' => '修改客户用户和客户的关联',
         'Change Customer User Relations for Customer' => '修改客户关联的用户',
-        'Toggle active state for all' => '全部激活/不激活状态',
-        'Toggle active state for %s' => '%s 激活/不激活状态',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
         'Just use this feature if you want to define group permissions for customer users.' =>
@@ -632,11 +642,6 @@ sub Data {
         'Customer User Default Groups:' => '客户用户的默认组：',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-        'Edit default services' => '修改默认服务',
-        'Filter for Services' => '服务过滤器',
-        'Filter for services' => '服务过滤器',
-        'Services' => '服务',
-        'Service Level Agreements' => '服务级别协议',
         'Manage Customer User-Service Relations' => '管理客户-服务之间的联系',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
@@ -3869,6 +3874,10 @@ sub Data {
         'Customer Company %s already exists!' => '客户单位 %s 已经存在！',
         'Customer company added!' => '客户单位已添加！',
 
+        # Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+        'Allocate Customer Companies to Service' => '',
+        'Allocate Services to Customer Company' => '',
+
         # Perl Module: Kernel/Modules/AdminCustomerGroup.pm
         'No configuration for \'CustomerGroupPermissionContext\' found!' =>
             '找不到\'CustomerGroupPermissionContext（客户组权限上下文）\'的配置！',
@@ -6624,6 +6633,8 @@ sub Data {
             '在图形用户界面中显示的所有客户单位事件列表。',
         'Event module that updates customer users after an update of the Customer.' =>
             '更新客户资料后更新客户用户的事件模块。',
+        'Event module that updates customer company service membership if the customer ID changes.' =>
+            '',
         'Event module that updates customer company object name for dynamic fields.' =>
             '更新客户单位动态字段的对象名称的事件模块。',
         'Event module that updates customer user search profiles if login changes.' =>
@@ -6808,6 +6819,8 @@ sub Data {
             '在列表中保留所有的服务，即使他们是无效的子元素。',
         'Allows default services to be selected also for non existing customers.' =>
             '允许未知客户选择默认服务。',
+        'Defines if the Customer Company ↔ Service functionality should always be used or only as a fallback if no Customer User ↔ Services relationship exists.' =>
+            '',
         'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
             '激活工单归档系统，将一些工单移出日常范围以便拥有更快速的系统响应。要搜索这些工单，需要在工单搜索时启用“归档搜索”。',
         'Controls if the ticket and article seen flags are removed when a ticket is archived.' =>
@@ -9152,6 +9165,7 @@ Thanks for your help!
             '允许拥有一个基本版式的工单概览视图（如果CustomerInfo => 1还将显示客户信息）。',
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             '允许拥有一个简洁版式的工单概览视图（如果CustomerInfo => 1还将显示客户信息）。',
+        'Always' => '',
         'Always show RichText if available' => '始终显示富文本（如果有富文本）',
         'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => '回复',
@@ -9275,7 +9289,7 @@ Thanks for your help!
         'Croatian' => '克罗地亚语',
         'Current action description.' => '',
         'Customer Administration' => '客户管理',
-        'Customer Companies' => '客户单位',
+        'Customer Company ↔ Services' => '',
         'Customer IDs' => '客户ID',
         'Customer Information Center Search.' => '客户信息中心搜索。',
         'Customer Information Center search.' => '客户信息中心搜索。',
@@ -9446,6 +9460,7 @@ Thanks for your help!
         'Link Object.' => '链接对象。',
         'Link agents to groups.' => '链接服务人员到组。',
         'Link agents to roles.' => '链接服务人员到角色。',
+        'Link customer companies to services.' => '',
         'Link customer users to customers.' => '链接客户用户到客户。',
         'Link customer users to groups.' => '链接客户用户到组。',
         'Link customer users to services.' => '链接客户用户到服务。',

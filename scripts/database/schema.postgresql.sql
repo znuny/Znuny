@@ -1760,6 +1760,39 @@ END IF;
 END$$;
 ;
 -- ----------------------------------------------------------
+--  create table service_customer_company
+-- ----------------------------------------------------------
+CREATE TABLE service_customer_company (
+    id bigserial NOT NULL,
+    customer_id VARCHAR (200) NOT NULL,
+    service_id INTEGER NOT NULL,
+    create_time timestamp(0) NOT NULL,
+    create_by INTEGER NOT NULL,
+    PRIMARY KEY(id)
+);
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_indexes
+    WHERE LOWER(indexname) = LOWER('service_customer_company_customer_id')
+    ) THEN
+    CREATE INDEX service_customer_company_customer_id ON service_customer_company (customer_id);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_indexes
+    WHERE LOWER(indexname) = LOWER('service_customer_company_service_id')
+    ) THEN
+    CREATE INDEX service_customer_company_service_id ON service_customer_company (service_id);
+END IF;
+END$$;
+;
+-- ----------------------------------------------------------
 --  create table sla
 -- ----------------------------------------------------------
 CREATE TABLE sla (

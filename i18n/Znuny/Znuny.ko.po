@@ -1078,7 +1078,7 @@ msgstr "고객 : 그룹 권한을 선택하십시오."
 msgid "If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer)."
 msgstr "아무 것도 선택하지 않으면이 그룹에 사용 권한이 없습니다 (티켓 고객에게 제공되지 않습니다)."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
 msgid "Customers"
 msgstr "고객"
 
@@ -1090,7 +1090,7 @@ msgstr "그룹"
 msgid "Manage Customer-Group Relations"
 msgstr "고객-그룹 관계 관리"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
 msgid "Search Results"
 msgstr "검색결과"
 
@@ -1270,7 +1270,7 @@ msgstr "고객 사용자를 위한 고객관계 변경"
 msgid "Change Customer User Relations for Customer"
 msgstr "고객의 고객 사용자 관계 변경"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
 msgid "Toggle active state for all"
 msgstr "모든 사용자의 활성 상태를 토글합니다."
 
@@ -1278,7 +1278,7 @@ msgstr "모든 사용자의 활성 상태를 토글합니다."
 msgid "Active"
 msgstr "유효한"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
 msgid "Toggle active state for %s"
 msgstr "%s의 활성 상태 토글"
 
@@ -1318,23 +1318,23 @@ msgstr "고객 사용자 - 그룹 관계 관리"
 msgid "Customer User Default Groups:"
 msgstr "고객 사용자 기본 그룹 : "
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
 msgid "Edit default services"
 msgstr "기본 서비스 수정"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
 msgid "Filter for Services"
 msgstr "서비스 필터링"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
 msgid "Filter for services"
 msgstr "서비스 필터링"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
 msgid "Services"
 msgstr "서비스"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
 msgid "Service Level Agreements"
 msgstr "서비스 수준 계약"
 
@@ -22128,7 +22128,7 @@ msgstr "크로아티아 사람"
 msgid "Customer Administration"
 msgstr "고객 관리"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
 msgid "Customer Companies"
 msgstr "고객사"
 
@@ -26506,5 +26506,41 @@ msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
 msgid "Not set (will be taken from the metadata when saving)"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+msgid "Manage Customer Company Service Relations"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+msgid "Inherit from"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+msgid "Allocate Customer Companies to Service"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+msgid "Allocate Services to Customer Company"
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Event module that updates customer company service membership if the customer ID changes."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Defines if the Customer Company ↔ Service functionality should always be used or only as a fallback if no Customer User ↔ Services relationship exists."
+msgstr ""
+
+#. SysConfig
+msgid "Always"
+msgstr ""
+
+#. SysConfig
+msgid "Customer Company ↔ Services"
+msgstr ""
+
+#. SysConfig
+msgid "Link customer companies to services."
 msgstr ""
 

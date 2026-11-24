@@ -890,6 +890,7 @@ sub _GetServices {
             %Param,
             Action         => $Self->{Action},
             CustomerUserID => $Self->{UserID},
+            CustomerID     => $Self->{UserCustomerID},
         );
     }
     return \%Service;
@@ -1114,6 +1115,7 @@ sub _MaskNew {
                 %Param,
                 Action         => $Self->{Action},
                 CustomerUserID => $Self->{UserID},
+                CustomerID     => $Self->{UserCustomerID},
             );
         }
 

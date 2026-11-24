@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.172900061312078;
+    $Self->{Completeness}        = 0.172661870503597;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -533,6 +533,20 @@ sub Data {
         'Please note' => '',
         'This customer backend is read only!' => '',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+        'Edit default services' => 'Những dịch vụ chỉnh sửa mặc định',
+        'Filter for Services' => 'Bộ lọc cho các dịch vụ',
+        'Filter for services' => '',
+        'Customers' => 'Những khách hàng',
+        'Services' => 'Những dịch vụ',
+        'Service Level Agreements' => 'Những Thỏa thuận Mức độ Dịch vụ',
+        'Manage Customer Company Service Relations' => '',
+        'Search Results' => 'Kết quả tìm kiếm',
+        'Customer Companies' => 'Công ty khách hàng',
+        'Toggle active state for all' => 'Trạng thái hoạt động Toggle cho tất cả',
+        'Inherit from' => '',
+        'Toggle active state for %s' => 'Toggle trạng thái hoạt động cho% s',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
         'Notice' => 'Lưu ý',
         'This feature is disabled!' => 'Tính năng này đã bị vô hiệu hóa!',
@@ -547,10 +561,8 @@ sub Data {
         'Select the customer:group permissions.' => 'Chọn khách hàng: cho phép nhóm.',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Nếu không có gì được chọn, sau đó không có quyền truy cập trong nhóm này (vé sẽ không có sẵn cho khách hàng).',
-        'Customers' => 'Những khách hàng',
         'Groups' => 'Nhóm',
         'Manage Customer-Group Relations' => 'Nhóm quản lý quan hệ khách hàng',
-        'Search Results' => 'Kết quả tìm kiếm',
         'Change Group Relations for Customer' => 'Thay đổi quan hệ nhóm cho khách hàng',
         'Change Customer Relations for Group' => 'Thay đổi quan hệ khách hàng cho Tập đoàn',
         'Toggle %s Permission for all' => 'Toggle% s Cho phép tất cả',
@@ -606,8 +618,6 @@ sub Data {
         'Manage Customer User-Customer Relations' => '',
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
-        'Toggle active state for all' => 'Trạng thái hoạt động Toggle cho tất cả',
-        'Toggle active state for %s' => 'Toggle trạng thái hoạt động cho% s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
         'Just use this feature if you want to define group permissions for customer users.' =>
@@ -625,11 +635,6 @@ sub Data {
         'Customer User Default Groups:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-        'Edit default services' => 'Những dịch vụ chỉnh sửa mặc định',
-        'Filter for Services' => 'Bộ lọc cho các dịch vụ',
-        'Filter for services' => '',
-        'Services' => 'Những dịch vụ',
-        'Service Level Agreements' => 'Những Thỏa thuận Mức độ Dịch vụ',
         'Manage Customer User-Service Relations' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
@@ -3862,6 +3867,10 @@ sub Data {
         'Customer Company %s already exists!' => '',
         'Customer company added!' => '',
 
+        # Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+        'Allocate Customer Companies to Service' => '',
+        'Allocate Services to Customer Company' => '',
+
         # Perl Module: Kernel/Modules/AdminCustomerGroup.pm
         'No configuration for \'CustomerGroupPermissionContext\' found!' =>
             '',
@@ -6617,6 +6626,8 @@ sub Data {
             '',
         'Event module that updates customer users after an update of the Customer.' =>
             '',
+        'Event module that updates customer company service membership if the customer ID changes.' =>
+            '',
         'Event module that updates customer company object name for dynamic fields.' =>
             '',
         'Event module that updates customer user search profiles if login changes.' =>
@@ -6800,6 +6811,8 @@ sub Data {
         'Retains all services in listings even if they are children of invalid elements.' =>
             '',
         'Allows default services to be selected also for non existing customers.' =>
+            '',
+        'Defines if the Customer Company ↔ Service functionality should always be used or only as a fallback if no Customer User ↔ Services relationship exists.' =>
             '',
         'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
             '',
@@ -9147,6 +9160,7 @@ Cảm ơn sự giúp đỡ của bạn!
             '',
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             '',
+        'Always' => '',
         'Always show RichText if available' => '',
         'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => 'Trả lời',
@@ -9270,7 +9284,7 @@ Cảm ơn sự giúp đỡ của bạn!
         'Croatian' => '',
         'Current action description.' => '',
         'Customer Administration' => '',
-        'Customer Companies' => 'Công ty khách hàng',
+        'Customer Company ↔ Services' => '',
         'Customer IDs' => '',
         'Customer Information Center Search.' => '',
         'Customer Information Center search.' => '',
@@ -9441,6 +9455,7 @@ Cảm ơn sự giúp đỡ của bạn!
         'Link Object.' => '',
         'Link agents to groups.' => '',
         'Link agents to roles.' => '',
+        'Link customer companies to services.' => '',
         'Link customer users to customers.' => '',
         'Link customer users to groups.' => '',
         'Link customer users to services.' => '',

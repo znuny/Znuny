@@ -35,7 +35,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.384886572654813;
+    $Self->{Completeness}        = 0.384356344711465;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -542,6 +542,20 @@ sub Data {
         'Please note' => 'Vær oppmerksom på',
         'This customer backend is read only!' => '',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+        'Edit default services' => 'Endre standardtjenester',
+        'Filter for Services' => 'Filter for tjenester',
+        'Filter for services' => '',
+        'Customers' => 'Kunder',
+        'Services' => 'Tjenester',
+        'Service Level Agreements' => 'Tjenestenivåavtaler',
+        'Manage Customer Company Service Relations' => '',
+        'Search Results' => 'Søkeresultat',
+        'Customer Companies' => 'Kundefirma',
+        'Toggle active state for all' => 'Slå av/på aktivisering for alle',
+        'Inherit from' => '',
+        'Toggle active state for %s' => 'Slå av/på aktivisering for %s',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
         'Notice' => 'Notis',
         'This feature is disabled!' => 'Denne funksjonen er deaktivert!',
@@ -556,10 +570,8 @@ sub Data {
         'Select the customer:group permissions.' => 'Velg rettigheter for kunde:gruppe',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Hvis ingenting blir valgt vil det ikke være noen rettigheter for denne gruppen (saker vil ikke være synlige for brukeren).',
-        'Customers' => 'Kunder',
         'Groups' => 'Grupper',
         'Manage Customer-Group Relations' => 'Administrere forhold mellom Kunde og Gruppe',
-        'Search Results' => 'Søkeresultat',
         'Change Group Relations for Customer' => 'Endre grupperettigheter for Kunde',
         'Change Customer Relations for Group' => 'Endre kundekoplinger for gruppe',
         'Toggle %s Permission for all' => 'Slå av/på %s-tilgang for alle',
@@ -615,8 +627,6 @@ sub Data {
         'Manage Customer User-Customer Relations' => '',
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
-        'Toggle active state for all' => 'Slå av/på aktivisering for alle',
-        'Toggle active state for %s' => 'Slå av/på aktivisering for %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
         'Just use this feature if you want to define group permissions for customer users.' =>
@@ -634,11 +644,6 @@ sub Data {
         'Customer User Default Groups:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-        'Edit default services' => 'Endre standardtjenester',
-        'Filter for Services' => 'Filter for tjenester',
-        'Filter for services' => '',
-        'Services' => 'Tjenester',
-        'Service Level Agreements' => 'Tjenestenivåavtaler',
         'Manage Customer User-Service Relations' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
@@ -3871,6 +3876,10 @@ sub Data {
         'Customer Company %s already exists!' => '',
         'Customer company added!' => 'Kundebedrift lagt til!',
 
+        # Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+        'Allocate Customer Companies to Service' => '',
+        'Allocate Services to Customer Company' => '',
+
         # Perl Module: Kernel/Modules/AdminCustomerGroup.pm
         'No configuration for \'CustomerGroupPermissionContext\' found!' =>
             '',
@@ -6626,6 +6635,8 @@ sub Data {
             '',
         'Event module that updates customer users after an update of the Customer.' =>
             '',
+        'Event module that updates customer company service membership if the customer ID changes.' =>
+            '',
         'Event module that updates customer company object name for dynamic fields.' =>
             '',
         'Event module that updates customer user search profiles if login changes.' =>
@@ -6809,6 +6820,8 @@ sub Data {
         'Retains all services in listings even if they are children of invalid elements.' =>
             '',
         'Allows default services to be selected also for non existing customers.' =>
+            '',
+        'Defines if the Customer Company ↔ Service functionality should always be used or only as a fallback if no Customer User ↔ Services relationship exists.' =>
             '',
         'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
             'Slår på arkiveringssystemet for saker. Dette øker hastigheten på systemet ved å fjerne noen av sakene ut av den daglige bruken. For å søke etter slike saker må man søke etter arkiverte saker.',
@@ -9144,6 +9157,7 @@ Thanks for your help!
             'Tillater å bruke medium saksoversikt (KundeInfo => 1 - viser også kundeinformasjon).',
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             'Tillater å bruke liten saksoversikt (Kunde-info => 1 - vis også kundeinformasjon)',
+        'Always' => '',
         'Always show RichText if available' => '',
         'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => 'Svar',
@@ -9267,7 +9281,7 @@ Thanks for your help!
         'Croatian' => 'Kroatisk',
         'Current action description.' => '',
         'Customer Administration' => '',
-        'Customer Companies' => 'Kundefirma',
+        'Customer Company ↔ Services' => '',
         'Customer IDs' => '',
         'Customer Information Center Search.' => '',
         'Customer Information Center search.' => '',
@@ -9438,6 +9452,7 @@ Thanks for your help!
         'Link Object.' => '',
         'Link agents to groups.' => 'Koble saksbehandlere til grupper',
         'Link agents to roles.' => 'Koble saksbehandlere til roller',
+        'Link customer companies to services.' => '',
         'Link customer users to customers.' => '',
         'Link customer users to groups.' => '',
         'Link customer users to services.' => '',

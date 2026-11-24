@@ -2009,6 +2009,28 @@ BEGIN
 IF NOT EXISTS (
     SELECT 1
     FROM pg_constraint
+    WHERE LOWER(conname) = LOWER('FK_service_customer_company_service_id_id')
+    ) THEN
+    ALTER TABLE service_customer_company ADD CONSTRAINT FK_service_customer_company_service_id_id FOREIGN KEY (service_id) REFERENCES service (id);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_constraint
+    WHERE LOWER(conname) = LOWER('FK_service_customer_company_create_by_id')
+    ) THEN
+    ALTER TABLE service_customer_company ADD CONSTRAINT FK_service_customer_company_create_by_id FOREIGN KEY (create_by) REFERENCES users (id);
+END IF;
+END$$;
+;
+DO $$
+BEGIN
+IF NOT EXISTS (
+    SELECT 1
+    FROM pg_constraint
     WHERE LOWER(conname) = LOWER('FK_sla_create_by_id')
     ) THEN
     ALTER TABLE sla ADD CONSTRAINT FK_sla_create_by_id FOREIGN KEY (create_by) REFERENCES users (id);

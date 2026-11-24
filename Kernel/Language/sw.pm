@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%m/%d/%Y';
     $Self->{DateInputFormat}     = '%m/%d/%Y';
     $Self->{DateInputFormatLong} = '%m/%d/%Y - %T';
-    $Self->{Completeness}        = 0.436695278969957;
+    $Self->{Completeness}        = 0.43609367824889;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -536,6 +536,20 @@ sub Data {
         'Please note' => 'Tafadhali jua',
         'This customer backend is read only!' => '',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+        'Edit default services' => 'Hariri huduma chaguo-msingi.',
+        'Filter for Services' => 'Chuja kwa jili ya huduma',
+        'Filter for services' => '',
+        'Customers' => 'Wateja',
+        'Services' => 'Huduma',
+        'Service Level Agreements' => 'Makubaliano ya kiwango cha huduma',
+        'Manage Customer Company Service Relations' => '',
+        'Search Results' => 'Majibu ya kutafuta',
+        'Customer Companies' => 'Kampuni ya mteja',
+        'Toggle active state for all' => 'Geuza hali amilifu kwa wote',
+        'Inherit from' => '',
+        'Toggle active state for %s' => 'Geuza hali amilifu kwa %s',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
         'Notice' => 'Taarifa',
         'This feature is disabled!' => 'Kipengele hiki hakijaruhusiwa.',
@@ -550,10 +564,8 @@ sub Data {
         'Select the customer:group permissions.' => 'Chagua ruhusa za kikundi za mteja',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Kama hakuna kilichochaguliwa, basi hakuna ruhusa katika kikundi hiki (tiketi zitakuwa hazipatikani kwa wateja).',
-        'Customers' => 'Wateja',
         'Groups' => 'Makundi',
         'Manage Customer-Group Relations' => 'Simamia mahusiano ya Mteja-Kikundi',
-        'Search Results' => 'Majibu ya kutafuta',
         'Change Group Relations for Customer' => 'Badili uhusiano wa kikundi kwa mteja',
         'Change Customer Relations for Group' => 'Badili uhusiano wa mteja kwa kikundi',
         'Toggle %s Permission for all' => 'Geuza ruhusa %s kwa wote',
@@ -609,8 +621,6 @@ sub Data {
         'Manage Customer User-Customer Relations' => '',
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
-        'Toggle active state for all' => 'Geuza hali amilifu kwa wote',
-        'Toggle active state for %s' => 'Geuza hali amilifu kwa %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
         'Just use this feature if you want to define group permissions for customer users.' =>
@@ -628,11 +638,6 @@ sub Data {
         'Customer User Default Groups:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-        'Edit default services' => 'Hariri huduma chaguo-msingi.',
-        'Filter for Services' => 'Chuja kwa jili ya huduma',
-        'Filter for services' => '',
-        'Services' => 'Huduma',
-        'Service Level Agreements' => 'Makubaliano ya kiwango cha huduma',
         'Manage Customer User-Service Relations' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
@@ -3865,6 +3870,10 @@ sub Data {
         'Customer Company %s already exists!' => '',
         'Customer company added!' => 'Kampuni ya mteja imeongezwa!',
 
+        # Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+        'Allocate Customer Companies to Service' => '',
+        'Allocate Services to Customer Company' => '',
+
         # Perl Module: Kernel/Modules/AdminCustomerGroup.pm
         'No configuration for \'CustomerGroupPermissionContext\' found!' =>
             '',
@@ -6620,6 +6629,8 @@ sub Data {
             'Orodha ya matukio yote ya Kampuni ya mteja yataonyeshwa katika GUI.',
         'Event module that updates customer users after an update of the Customer.' =>
             'Moduli ya tukio inayosasisha mteja mtumiaji baada ya usasishaji wa mteja.',
+        'Event module that updates customer company service membership if the customer ID changes.' =>
+            '',
         'Event module that updates customer company object name for dynamic fields.' =>
             '',
         'Event module that updates customer user search profiles if login changes.' =>
@@ -6804,6 +6815,8 @@ sub Data {
             'Inaacha huduma zote katika orodha hata kama ni vipengele vidogo vya vipengele batili. ',
         'Allows default services to be selected also for non existing customers.' =>
             'Inaruhusu huduma chaguo-msingi kuchaguliwa pia kwa wateja wasiokuwepo.',
+        'Defines if the Customer Company ↔ Service functionality should always be used or only as a fallback if no Customer User ↔ Services relationship exists.' =>
+            '',
         'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
             'Inaamilisha mfumo wa uhifadhi wa tiketi kuwa na mfumo wa haraka kwa kuhamisha baadhi ya tiketi nje ya upeo wa kila siku. Kutafuta tiketi hizi, bendera ya hifadhi za nyaraka inabidi iwezeshwa katika utafutaji wa tiketi.',
         'Controls if the ticket and article seen flags are removed when a ticket is archived.' =>
@@ -9141,6 +9154,7 @@ Thanks for your help!
             'Inaruhusu kuwa na mapitio ya tiketi ya umbizo ya kati (Taarifa za mteja =>1 - inaonyesha pia taarifa za mteja).',
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             'Inaruhusu kuwa na marejeo ya tiketi ya umbizo dogo (Taarifa za mteja =>1 - inaonyesha pia taarifa za mteja).',
+        'Always' => '',
         'Always show RichText if available' => '',
         'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => 'jibu',
@@ -9264,7 +9278,7 @@ Thanks for your help!
         'Croatian' => '',
         'Current action description.' => '',
         'Customer Administration' => 'Usimamizi wa mteja',
-        'Customer Companies' => 'Kampuni ya mteja',
+        'Customer Company ↔ Services' => '',
         'Customer IDs' => '',
         'Customer Information Center Search.' => '',
         'Customer Information Center search.' => '',
@@ -9435,6 +9449,7 @@ Thanks for your help!
         'Link Object.' => '',
         'Link agents to groups.' => 'Muuanganishe wakala kwenye makundi.',
         'Link agents to roles.' => 'Muuanganishe wakala kwenye majukumu.',
+        'Link customer companies to services.' => '',
         'Link customer users to customers.' => '',
         'Link customer users to groups.' => '',
         'Link customer users to services.' => '',

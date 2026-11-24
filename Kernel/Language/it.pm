@@ -35,7 +35,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.584150827713059;
+    $Self->{Completeness}        = 0.583346089086178;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -542,6 +542,20 @@ sub Data {
         'Please note' => 'Nota',
         'This customer backend is read only!' => 'Questo backend del cliente è di sola lettura!',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+        'Edit default services' => 'Modifica servizi di default',
+        'Filter for Services' => 'Filtri per i servizi',
+        'Filter for services' => 'Filtri per i servizi',
+        'Customers' => 'Clienti',
+        'Services' => 'Servizi',
+        'Service Level Agreements' => 'Accordi sul livello di servizio',
+        'Manage Customer Company Service Relations' => '',
+        'Search Results' => 'Risultato della ricerca',
+        'Customer Companies' => 'Aziende dei clienti',
+        'Toggle active state for all' => 'Imposta stato attivo per tutti',
+        'Inherit from' => '',
+        'Toggle active state for %s' => 'Imposta stato attivo per %s',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
         'Notice' => 'Notifica',
         'This feature is disabled!' => 'Questa funzione è disabilitata!',
@@ -556,10 +570,8 @@ sub Data {
         'Select the customer:group permissions.' => 'Seleziona i permessi cliente:gruppo.',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Se non si effettua una selezione, non ci saranno permessi in questo gruppo (i ticket non saranno disponibili al cliente).',
-        'Customers' => 'Clienti',
         'Groups' => 'Gruppi',
         'Manage Customer-Group Relations' => 'Gestisci relazioni Cliente-Gruppo',
-        'Search Results' => 'Risultato della ricerca',
         'Change Group Relations for Customer' => 'Cambia relazioni di gruppo per il cliente',
         'Change Customer Relations for Group' => 'Cambia relazioni dei clienti per il gruppo',
         'Toggle %s Permission for all' => 'Imposta permesso %s per tutti',
@@ -615,8 +627,6 @@ sub Data {
         'Manage Customer User-Customer Relations' => 'Gestione associazioni utenze cliente ↔ cliente',
         'Change Customer Relations for Customer User' => 'Modifica le relazioni con il cliente per l\'utenza cliente',
         'Change Customer User Relations for Customer' => 'Modifica le relazioni utenza cliente per cliente',
-        'Toggle active state for all' => 'Imposta stato attivo per tutti',
-        'Toggle active state for %s' => 'Imposta stato attivo per %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
         'Just use this feature if you want to define group permissions for customer users.' =>
@@ -634,11 +644,6 @@ sub Data {
         'Customer User Default Groups:' => 'Gruppi predefiniti utenza cliente:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-        'Edit default services' => 'Modifica servizi di default',
-        'Filter for Services' => 'Filtri per i servizi',
-        'Filter for services' => 'Filtri per i servizi',
-        'Services' => 'Servizi',
-        'Service Level Agreements' => 'Accordi sul livello di servizio',
         'Manage Customer User-Service Relations' => 'Gestire le utenza cliente con il servizio clienti',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
@@ -3871,6 +3876,10 @@ sub Data {
         'Customer Company %s already exists!' => 'La società cliente %s esite già!',
         'Customer company added!' => 'Azienda del cliente aggiunta!',
 
+        # Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+        'Allocate Customer Companies to Service' => '',
+        'Allocate Services to Customer Company' => '',
+
         # Perl Module: Kernel/Modules/AdminCustomerGroup.pm
         'No configuration for \'CustomerGroupPermissionContext\' found!' =>
             'Nessuna configurazione trovata per \'CustomerGroupPermissionContext\' trovata!',
@@ -6630,6 +6639,8 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
             '',
         'Event module that updates customer users after an update of the Customer.' =>
             '',
+        'Event module that updates customer company service membership if the customer ID changes.' =>
+            '',
         'Event module that updates customer company object name for dynamic fields.' =>
             '',
         'Event module that updates customer user search profiles if login changes.' =>
@@ -6814,6 +6825,8 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
             '',
         'Allows default services to be selected also for non existing customers.' =>
             'Permette l’inserimento di servizi di default anche per clienti non registrati.',
+        'Defines if the Customer Company ↔ Service functionality should always be used or only as a fallback if no Customer User ↔ Services relationship exists.' =>
+            '',
         'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
             'Attiva il sistema di archivio dei ticket per avere un sistema più veloce spostando alcuni ticket fuori dall\'ambito giornaliero. Per cercare questi ticket, il contrassegno dell\'archivio deve essere abilitato nella ricerca dei ticket.',
         'Controls if the ticket and article seen flags are removed when a ticket is archived.' =>
@@ -9159,6 +9172,7 @@ Il tuo helpdesk.
             'Permette di avere il formato medio nella visualizzazione dei ticket (CustomerInfo =>1 - mostra anche le informazioni del cliente)',
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             'Permette di avere il formato piccolo nella visualizzazione dei ticket (CustomerInfo =>1 - mostra anche le informazioni del cliente)',
+        'Always' => '',
         'Always show RichText if available' => '',
         'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => 'Rispondi',
@@ -9282,7 +9296,7 @@ Il tuo helpdesk.
         'Croatian' => 'Croato',
         'Current action description.' => '',
         'Customer Administration' => 'Amministrazione clienti',
-        'Customer Companies' => 'Aziende dei clienti',
+        'Customer Company ↔ Services' => '',
         'Customer IDs' => '',
         'Customer Information Center Search.' => '',
         'Customer Information Center search.' => '',
@@ -9453,6 +9467,7 @@ Il tuo helpdesk.
         'Link Object.' => '',
         'Link agents to groups.' => 'Collega gli agenti ai gruppi.',
         'Link agents to roles.' => 'Collega gli agenti ai ruoli.',
+        'Link customer companies to services.' => '',
         'Link customer users to customers.' => '',
         'Link customer users to groups.' => '',
         'Link customer users to services.' => '',

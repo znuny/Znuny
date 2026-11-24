@@ -195,6 +195,11 @@
                                         <input type="checkbox" id="SelectAllItemsSelected" name="ItemsSelected" title="[% Translate("Toggle active state for all") | html %]" value="" />
                                         [% Translate("Active") | html %]
                                     </th>
+[% RenderBlockStart("InheritFromColumn") %]
+                                    <th>
+                                        [% Translate("Inherit from") | html %]
+                                    </th>
+[% RenderBlockEnd("InheritFromColumn") %]
                                 </tr>
                             </thead>
                             <tbody>
@@ -209,8 +214,11 @@
                                 <tr>
                                     <td><a href="[% Env("Baselink") %]Action=[% Data.ActionNeHome | uri %];Subaction=[% Data.SubactionRow | uri %];[% Data.IDRowStrg | uri %]=[% Data.ID | uri %]">[% Data.Name | html %]</a></td>
                                     <td>
-                                        <input type="checkbox" name="ItemsSelected" title="[% Translate("Toggle active state for %s", Data.Name) | html %]" value="[% Data.ID | html %]" [% Data.Checked | html %]/>
+                                        <input type="checkbox" name="ItemsSelected" title="[% Translate("Toggle active state for %s", Data.Name) | html %]" value="[% Data.ID | html %]" [% Data.InheritFrom | html %] [% Data.Checked | html %] [% Data.Disabled | html %]/>
                                         <input type="hidden" name="ItemsAll" value="[% Data.ID | html %]"/>
+                                    </td>
+                                    <td [% Data.HideInheritFromColumn %]>
+                                        [% Translate(Data.InheritFromText) | html %]
                                     </td>
                                 </tr>
 [% RenderBlockEnd("AllocateItemRow") %]

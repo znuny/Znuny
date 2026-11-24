@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.853004291845494;
+    $Self->{Completeness}        = 0.851829174957906;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -534,6 +534,20 @@ sub Data {
         'Please note' => 'Напомињемо',
         'This customer backend is read only!' => 'Овај извор клијената се може само прегледати.',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+        'Edit default services' => 'Уреди подразумеване услуге',
+        'Filter for Services' => 'Филтер за сервисе',
+        'Filter for services' => 'Филтер за сервисе',
+        'Customers' => 'Клијенти',
+        'Services' => 'Услуге',
+        'Service Level Agreements' => 'Споразуми о нивоу услуга',
+        'Manage Customer Company Service Relations' => '',
+        'Search Results' => 'Резултат претраге',
+        'Customer Companies' => 'Фирме клијенти',
+        'Toggle active state for all' => 'Промени активно стање за све',
+        'Inherit from' => '',
+        'Toggle active state for %s' => 'Промени активно стање за %s',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
         'Notice' => 'Напомена',
         'This feature is disabled!' => 'Ова функција је искључена!',
@@ -548,10 +562,8 @@ sub Data {
         'Select the customer:group permissions.' => 'Изабери клијент:група дозволе.',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Ако ништа није изабрано, онда нема дозвола у овој групи (тикети неће бити доступни клијенту).',
-        'Customers' => 'Клијенти',
         'Groups' => 'Групе',
         'Manage Customer-Group Relations' => 'Управљање релацијама клијент-група',
-        'Search Results' => 'Резултат претраге',
         'Change Group Relations for Customer' => 'Промени везе са групама за клијента',
         'Change Customer Relations for Group' => 'Промени везе са клијентима за групу',
         'Toggle %s Permission for all' => 'Промени %s дозволе за све',
@@ -607,8 +619,6 @@ sub Data {
         'Manage Customer User-Customer Relations' => 'Управљање релацијама клијент корисник-клијент',
         'Change Customer Relations for Customer User' => 'Промени релације са клијентима за клијент корисника',
         'Change Customer User Relations for Customer' => 'Промени релације са клијент корисницима за клијента',
-        'Toggle active state for all' => 'Промени активно стање за све',
-        'Toggle active state for %s' => 'Промени активно стање за %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
         'Just use this feature if you want to define group permissions for customer users.' =>
@@ -626,11 +636,6 @@ sub Data {
         'Customer User Default Groups:' => 'Подразумеване групе за клијент корисника:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-        'Edit default services' => 'Уреди подразумеване услуге',
-        'Filter for Services' => 'Филтер за сервисе',
-        'Filter for services' => 'Филтер за сервисе',
-        'Services' => 'Услуге',
-        'Service Level Agreements' => 'Споразуми о нивоу услуга',
         'Manage Customer User-Service Relations' => 'Управљање релацијама клијент корисници-сервиси',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
@@ -3863,6 +3868,10 @@ sub Data {
         'Customer Company %s already exists!' => 'Клијентска фирма %s већ постоји!',
         'Customer company added!' => 'Додата фирма клијента!',
 
+        # Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+        'Allocate Customer Companies to Service' => '',
+        'Allocate Services to Customer Company' => '',
+
         # Perl Module: Kernel/Modules/AdminCustomerGroup.pm
         'No configuration for \'CustomerGroupPermissionContext\' found!' =>
             'Конфигурација за \'CustomerGroupPermissionContext\' није пронађена!',
@@ -6618,6 +6627,8 @@ sub Data {
             'Листа свих догађаја на клијент фирмама за приказ у графичком интерфејсу.',
         'Event module that updates customer users after an update of the Customer.' =>
             'Модул догађаја који ажурира клијента корисника после ажурирања клијента.',
+        'Event module that updates customer company service membership if the customer ID changes.' =>
+            '',
         'Event module that updates customer company object name for dynamic fields.' =>
             'Модул догађаја који ажурира назив клијент фирме за динамичка поља.',
         'Event module that updates customer user search profiles if login changes.' =>
@@ -6802,6 +6813,8 @@ sub Data {
             'Задржи све сервисе у листи чак иако су деца неважећих елемената.',
         'Allows default services to be selected also for non existing customers.' =>
             'Дозвољава да подразумеване услуге буду изабране и за непостојеће клијенте.',
+        'Defines if the Customer Company ↔ Service functionality should always be used or only as a fallback if no Customer User ↔ Services relationship exists.' =>
+            '',
         'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
             'Активира архивски систем ради убрзања рада, тако што ћете неке тикете уклонити ван дневног праћења. Да бисте пронашли ове тикете, маркер архиве мора бити омогућен за претрагу тикета.',
         'Controls if the ticket and article seen flags are removed when a ticket is archived.' =>
@@ -9147,6 +9160,7 @@ Thanks for your help!
             'Дозвољава поседовање средњег формата прегледа тикета ( CustomerInfo => 1 - такође приказује информације о клијенту).',
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             'Дозвољава поседовање малог формата прегледа тикета ( CustomerInfo => 1  - такође приказује информације о клијенту).',
+        'Always' => '',
         'Always show RichText if available' => 'Увек прикажи RichText ако је доступан',
         'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => 'Одговор',
@@ -9270,7 +9284,7 @@ Thanks for your help!
         'Croatian' => 'Хрватски',
         'Current action description.' => '',
         'Customer Administration' => 'Администрација клијената',
-        'Customer Companies' => 'Фирме клијенти',
+        'Customer Company ↔ Services' => '',
         'Customer IDs' => 'ID клијента',
         'Customer Information Center Search.' => 'Претрага клијентског информативног центра.',
         'Customer Information Center search.' => 'Претрага клијентског информативног центра.',
@@ -9441,6 +9455,7 @@ Thanks for your help!
         'Link Object.' => 'Повежи објекат.',
         'Link agents to groups.' => 'Повежи оператере са гупама.',
         'Link agents to roles.' => 'Повежи оператере са улогама.',
+        'Link customer companies to services.' => '',
         'Link customer users to customers.' => 'Повежи клијент кориснике са клијентима.',
         'Link customer users to groups.' => 'Повеђу клијент кориснике са групама.',
         'Link customer users to services.' => 'Повежи клијент кориснике са сервисима.',

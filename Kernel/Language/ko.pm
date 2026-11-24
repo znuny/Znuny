@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d %T';
-    $Self->{Completeness}        = 0.830472103004292;
+    $Self->{Completeness}        = 0.82932802694015;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -533,6 +533,20 @@ sub Data {
         'Please note' => '주의 사항',
         'This customer backend is read only!' => '이 고객 백엔드는 읽기전용입니다!',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+        'Edit default services' => '기본 서비스 수정',
+        'Filter for Services' => '서비스 필터링',
+        'Filter for services' => '서비스 필터링',
+        'Customers' => '고객',
+        'Services' => '서비스',
+        'Service Level Agreements' => '서비스 수준 계약',
+        'Manage Customer Company Service Relations' => '',
+        'Search Results' => '검색결과',
+        'Customer Companies' => '고객사',
+        'Toggle active state for all' => '모든 사용자의 활성 상태를 토글합니다.',
+        'Inherit from' => '',
+        'Toggle active state for %s' => '%s의 활성 상태 토글',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
         'Notice' => '공지',
         'This feature is disabled!' => '부가기능이 불가능으로 설정됨!',
@@ -547,10 +561,8 @@ sub Data {
         'Select the customer:group permissions.' => '고객 : 그룹 권한을 선택하십시오.',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             '아무 것도 선택하지 않으면이 그룹에 사용 권한이 없습니다 (티켓 고객에게 제공되지 않습니다).',
-        'Customers' => '고객',
         'Groups' => '그룹',
         'Manage Customer-Group Relations' => '고객-그룹 관계 관리',
-        'Search Results' => '검색결과',
         'Change Group Relations for Customer' => '고객과 그룹의 관계를 변경',
         'Change Customer Relations for Group' => '그룹과 고객의 관계를 변경',
         'Toggle %s Permission for all' => '%s 토글 모든 권한',
@@ -606,8 +618,6 @@ sub Data {
         'Manage Customer User-Customer Relations' => '고객 사용자 - 고객 관계 관리',
         'Change Customer Relations for Customer User' => '고객 사용자를 위한 고객관계 변경',
         'Change Customer User Relations for Customer' => '고객의 고객 사용자 관계 변경',
-        'Toggle active state for all' => '모든 사용자의 활성 상태를 토글합니다.',
-        'Toggle active state for %s' => '%s의 활성 상태 토글',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
         'Just use this feature if you want to define group permissions for customer users.' =>
@@ -625,11 +635,6 @@ sub Data {
         'Customer User Default Groups:' => '고객 사용자 기본 그룹 : ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-        'Edit default services' => '기본 서비스 수정',
-        'Filter for Services' => '서비스 필터링',
-        'Filter for services' => '서비스 필터링',
-        'Services' => '서비스',
-        'Service Level Agreements' => '서비스 수준 계약',
         'Manage Customer User-Service Relations' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
@@ -3862,6 +3867,10 @@ sub Data {
         'Customer Company %s already exists!' => '고객 회사 %s가 이미 존재합니다!',
         'Customer company added!' => '고객 회사가 추가되었습니다!',
 
+        # Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+        'Allocate Customer Companies to Service' => '',
+        'Allocate Services to Customer Company' => '',
+
         # Perl Module: Kernel/Modules/AdminCustomerGroup.pm
         'No configuration for \'CustomerGroupPermissionContext\' found!' =>
             '\'CustomerGroupPermissionContext\'에 대한 구성이 없습니다!',
@@ -6617,6 +6626,8 @@ sub Data {
             'GUI에 표시 될 모든 CustomerCompany 이벤트 목록.',
         'Event module that updates customer users after an update of the Customer.' =>
             '고객 업데이트 후 고객 사용자를 업데이트 하는 이벤트 모듈입니다.',
+        'Event module that updates customer company service membership if the customer ID changes.' =>
+            '',
         'Event module that updates customer company object name for dynamic fields.' =>
             '동적 필드에 대한 고객 회사 개체 이름을 업데이트하는 이벤트 모듈입니다.',
         'Event module that updates customer user search profiles if login changes.' =>
@@ -6801,6 +6812,8 @@ sub Data {
             '서비스가 잘못된 요소의 하위 항목인 경우에도 목록의 모든 서비스를 유지합니다.',
         'Allows default services to be selected also for non existing customers.' =>
             '기존 고객이 아닌 경우에도 기본 서비스를 선택할 수 있습니다.',
+        'Defines if the Customer Company ↔ Service functionality should always be used or only as a fallback if no Customer User ↔ Services relationship exists.' =>
+            '',
         'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
             '일일 범위에서 일부 티켓을 이동하여 티켓 아카이브 시스템이 더 빠른 시스템을 갖도록 활성화합니다. 이 티켓을 검색하려면 티켓 검색에서 아카이브 플래그를 사용 가능하게 설정해야 합니다.',
         'Controls if the ticket and article seen flags are removed when a ticket is archived.' =>
@@ -9146,6 +9159,7 @@ Thanks for your help!
             '중간 형식 티켓 개요 (CustomerInfo => 1 - 고객 정보도 표시)를 허용합니다.',
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             '작은 형식의 티켓 개요를 가질 수 있습니다 (CustomerInfo => 1 - 고객 정보 표시).',
+        'Always' => '',
         'Always show RichText if available' => '가능한 경우 리치 텍스트 표시',
         'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => '응답',
@@ -9269,7 +9283,7 @@ Thanks for your help!
         'Croatian' => '크로아티아 사람',
         'Current action description.' => '',
         'Customer Administration' => '고객 관리',
-        'Customer Companies' => '고객사',
+        'Customer Company ↔ Services' => '',
         'Customer IDs' => '고객 ID',
         'Customer Information Center Search.' => '고객 정보 센터 검색',
         'Customer Information Center search.' => '고객 정보 센터 검색',
@@ -9440,6 +9454,7 @@ Thanks for your help!
         'Link Object.' => '링크 개체.',
         'Link agents to groups.' => '에이전트를 그룹에 연결하십시오.',
         'Link agents to roles.' => '에이전트를 역할에 연결하십시오.',
+        'Link customer companies to services.' => '',
         'Link customer users to customers.' => '고객 사용자와 고객을 연결하십시오.',
         'Link customer users to groups.' => '고객 사용자를 그룹에 연결하십시오.',
         'Link customer users to services.' => '고객 사용자를 서비스에 연결하십시오.',

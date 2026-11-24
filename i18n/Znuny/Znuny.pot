@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2026-11-23 12:09+0000\n"
+"POT-Creation-Date: 2026-11-24 08:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1570,6 +1570,54 @@ msgstr ""
 msgid "This customer backend is read only!"
 msgstr ""
 
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+msgid "Edit default services"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+msgid "Filter for Services"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+msgid "Filter for services"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+msgid "Customers"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+msgid "Services"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+msgid "Service Level Agreements"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+msgid "Manage Customer Company Service Relations"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+msgid "Search Results"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+msgid "Customer Companies"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+msgid "Toggle active state for all"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+msgid "Inherit from"
+msgstr ""
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+msgid "Toggle active state for %s"
+msgstr ""
+
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
 msgid "Notice"
 msgstr ""
@@ -1611,19 +1659,11 @@ msgid "If nothing is selected, then there are no permissions in this group (tick
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
-msgid "Customers"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
 msgid "Groups"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
 msgid "Manage Customer-Group Relations"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
-msgid "Search Results"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
@@ -1798,14 +1838,6 @@ msgstr ""
 msgid "Change Customer User Relations for Customer"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
-msgid "Toggle active state for all"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
-msgid "Toggle active state for %s"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
 msgid "Just use this feature if you want to define group permissions for customer users."
 msgstr ""
@@ -1840,26 +1872,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
 msgid "Customer User Default Groups:"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-msgid "Edit default services"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-msgid "Filter for Services"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-msgid "Filter for services"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-msgid "Services"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-msgid "Service Level Agreements"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
@@ -11186,6 +11198,14 @@ msgstr ""
 msgid "Customer company added!"
 msgstr ""
 
+#. Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+msgid "Allocate Customer Companies to Service"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+msgid "Allocate Services to Customer Company"
+msgstr ""
+
 #. Perl Module: Kernel/Modules/AdminCustomerGroup.pm
 msgid "No configuration for 'CustomerGroupPermissionContext' found!"
 msgstr ""
@@ -17823,6 +17843,10 @@ msgid "Event module that updates customer users after an update of the Customer.
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Event module that updates customer company service membership if the customer ID changes."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Event module that updates customer company object name for dynamic fields."
 msgstr ""
 
@@ -18236,6 +18260,10 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Allows default services to be selected also for non existing customers."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Defines if the Customer Company ↔ Service functionality should always be used or only as a fallback if no Customer User ↔ Services relationship exists."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
@@ -23602,6 +23630,10 @@ msgid "Allows having a small format ticket overview (CustomerInfo => 1 - shows a
 msgstr ""
 
 #. SysConfig
+msgid "Always"
+msgstr ""
+
+#. SysConfig
 msgid "Always show RichText if available"
 msgstr ""
 
@@ -24062,7 +24094,7 @@ msgid "Customer Administration"
 msgstr ""
 
 #. SysConfig
-msgid "Customer Companies"
+msgid "Customer Company ↔ Services"
 msgstr ""
 
 #. SysConfig
@@ -24691,6 +24723,10 @@ msgstr ""
 
 #. SysConfig
 msgid "Link agents to roles."
+msgstr ""
+
+#. SysConfig
+msgid "Link customer companies to services."
 msgstr ""
 
 #. SysConfig

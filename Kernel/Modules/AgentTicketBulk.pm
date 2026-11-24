@@ -2286,6 +2286,7 @@ sub _GetServices {
             # of the queue of the ticket. This ensures that ACLs work.
             QueueID        => $SelectedQueueID || $Ticket{QueueID},
             TicketID       => $Ticket{TicketID},
+            CustomerID     => $Ticket{CustomerID},
             CustomerUserID => $CustomerUserID,
             UserID         => $Self->{UserID},
         );

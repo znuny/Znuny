@@ -3702,6 +3702,7 @@ sub _RenderSLA {
     # activity dialog displays the service list will be initially empty, see bug#10059
     if ( IsHashRefWithData( $Param{Ticket} ) ) {
         $GetServicesParam{CustomerUserID} ||= $Param{Ticket}->{CustomerUserID} ||= '';
+        $GetServicesParam{CustomerID}     ||= $Param{Ticket}->{CustomerID}     ||= '';
     }
 
     my $Services = $Self->_GetServices(
@@ -3883,6 +3884,7 @@ sub _RenderService {
     # activity dialog displays the service list will be initially empty, see bug#10059
     if ( IsHashRefWithData( $Param{Ticket} ) ) {
         $GetServicesParam{CustomerUserID} ||= $Param{Ticket}->{CustomerUserID} ||= '';
+        $GetServicesParam{CustomerID}     ||= $Param{Ticket}->{CustomerID}     ||= '';
     }
 
     my $Services = $Self->_GetServices(
@@ -6667,6 +6669,9 @@ sub _GetServices {
 
     # get service list
     if ( $Param{CustomerUserID} ) {
+        if ( !$Param{TicketID} && $Self->{TicketID} ) {
+            $Param{TicketID} = $Self->{TicketID};
+        }
         %Service = $Kernel::OM->Get('Kernel::System::Ticket')->TicketServiceList(
             %Param,
             Action => $Self->{Action},

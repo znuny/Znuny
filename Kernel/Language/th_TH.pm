@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.516247700797057;
+    $Self->{Completeness}        = 0.515536506964641;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -533,6 +533,20 @@ sub Data {
         'Please note' => '',
         'This customer backend is read only!' => '',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+        'Edit default services' => 'แก้ไขการบริการเริ่มต้น',
+        'Filter for Services' => 'ตัวกรองสำหรับการบริการ',
+        'Filter for services' => '',
+        'Customers' => 'ลูกค้า',
+        'Services' => 'การบริการ',
+        'Service Level Agreements' => 'ข้อตกลงระดับการให้บริการ',
+        'Manage Customer Company Service Relations' => '',
+        'Search Results' => 'ผลการค้นหา',
+        'Customer Companies' => 'บริษัทลูกค้า',
+        'Toggle active state for all' => 'สลับสถานะการทำงานทั้งหมด',
+        'Inherit from' => '',
+        'Toggle active state for %s' => 'สลับสถานะการทำงานสำหรับ %s',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
         'Notice' => 'การแจ้งให้ทราบ',
         'This feature is disabled!' => 'ฟีเจอร์นี้จะถูกปิดใช้งาน!',
@@ -547,10 +561,8 @@ sub Data {
         'Select the customer:group permissions.' => 'เลือกลูกค้า: สิทธิ์ของกลุ่ม',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'หากไม่มีอะไรถูกเลือกแล้วจะไม่มีสิทธิ์ในกลุ่มนี้ (ตั๋วจะไม่สามารถใช้ได้สำหรับลูกค้า)',
-        'Customers' => 'ลูกค้า',
         'Groups' => 'กลุ่ม',
         'Manage Customer-Group Relations' => 'จัดการความสัมพันธ์กับกลุ่มลูกค้า',
-        'Search Results' => 'ผลการค้นหา',
         'Change Group Relations for Customer' => 'เปลี่ยนกลุ่มความสัมพันธ์ระหว่างลูกค้า',
         'Change Customer Relations for Group' => 'เปลี่ยนความสัมพันธ์ของลูกค้าสำหรับกลุ่ม',
         'Toggle %s Permission for all' => 'สลับ %s การอนุญาตทั้งหมด',
@@ -606,8 +618,6 @@ sub Data {
         'Manage Customer User-Customer Relations' => '',
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
-        'Toggle active state for all' => 'สลับสถานะการทำงานทั้งหมด',
-        'Toggle active state for %s' => 'สลับสถานะการทำงานสำหรับ %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
         'Just use this feature if you want to define group permissions for customer users.' =>
@@ -625,11 +635,6 @@ sub Data {
         'Customer User Default Groups:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-        'Edit default services' => 'แก้ไขการบริการเริ่มต้น',
-        'Filter for Services' => 'ตัวกรองสำหรับการบริการ',
-        'Filter for services' => '',
-        'Services' => 'การบริการ',
-        'Service Level Agreements' => 'ข้อตกลงระดับการให้บริการ',
         'Manage Customer User-Service Relations' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
@@ -3865,6 +3870,10 @@ sub Data {
         'Customer Company %s already exists!' => 'ลูกค้าบริษัท %s มีอยู่แล้ว!',
         'Customer company added!' => 'เพิ่มลูกค้าบริษัทแล้ว!',
 
+        # Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+        'Allocate Customer Companies to Service' => '',
+        'Allocate Services to Customer Company' => '',
+
         # Perl Module: Kernel/Modules/AdminCustomerGroup.pm
         'No configuration for \'CustomerGroupPermissionContext\' found!' =>
             '',
@@ -6621,6 +6630,8 @@ sub Data {
             '',
         'Event module that updates customer users after an update of the Customer.' =>
             'โมดูลเหตุการณ์ที่ปรับปรุงผู้ใช้ลูกค้าหลังจากการปรับปรุงของลูกค้า',
+        'Event module that updates customer company service membership if the customer ID changes.' =>
+            '',
         'Event module that updates customer company object name for dynamic fields.' =>
             '',
         'Event module that updates customer user search profiles if login changes.' =>
@@ -6805,6 +6816,8 @@ sub Data {
             '',
         'Allows default services to be selected also for non existing customers.' =>
             'อนุญาตให้การบริการเริ่มต้นเป็นตัวเลือกสำหรับลูกค้าที่มียังไม่มี',
+        'Defines if the Customer Company ↔ Service functionality should always be used or only as a fallback if no Customer User ↔ Services relationship exists.' =>
+            '',
         'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
             'เปิดใช้งานระบบเก็บตั๋วจะมีระบบที่เร็วขึ้นโดยการย้ายตั๋วบางส่วนออกจากขอบเขตประจำวัน ในการค้นหาตั๋วเหล่านี้ค่าสถานะหน่วยเก็บถาวรจะต้องมีการเปิดใช้งานในการค้นหาตั๋ว',
         'Controls if the ticket and article seen flags are removed when a ticket is archived.' =>
@@ -9152,6 +9165,7 @@ Thanks for your help!
             'อนุญาตให้มีรูปแบบภาพรวมของตั๋วขนาดกลาง (customerinfo => 1 - แสดงข้อมูลของลูกค้าอีกด้วย)',
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             'อนุญาตให้มีรูปแบบภาพรวมของตั๋วขนาดเล็ก (customerinfo => 1 - แสดงข้อมูลของลูกค้าอีกด้วย)',
+        'Always' => '',
         'Always show RichText if available' => 'แสดง RichText อยู่เสมอด้วยถ้ามี',
         'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => 'ตอบ',
@@ -9275,7 +9289,7 @@ Thanks for your help!
         'Croatian' => 'ภาษาโครเอเชีย',
         'Current action description.' => '',
         'Customer Administration' => 'การบริหารลูกค้า',
-        'Customer Companies' => 'บริษัทลูกค้า',
+        'Customer Company ↔ Services' => '',
         'Customer IDs' => '',
         'Customer Information Center Search.' => 'การค้นหาศูนย์ข้อมูลลูกค้า',
         'Customer Information Center search.' => '',
@@ -9446,6 +9460,7 @@ Thanks for your help!
         'Link Object.' => 'วัตถุการเชื่อมโยง',
         'Link agents to groups.' => 'ตัวแทนเชื่อมโยงไปยังกลุ่ม',
         'Link agents to roles.' => 'ลิ้งตัวแทนกับบทบาท',
+        'Link customer companies to services.' => '',
         'Link customer users to customers.' => '',
         'Link customer users to groups.' => '',
         'Link customer users to services.' => '',

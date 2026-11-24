@@ -37,6 +37,10 @@ sub Run {
 
     my @Tasks = (
         {
+            Message => 'Create database table service_customer_company.',
+            Module  => 'ServiceCustomerCompany',
+        },
+        {
             Message => 'Create database table authentication_config.',
             Module  => 'AuthenticationConfig',
         },

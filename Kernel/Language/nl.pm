@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d-%m-%Y';
     $Self->{DateInputFormat}     = '%d-%m-%Y';
     $Self->{DateInputFormatLong} = '%d-%m-%Y - %T';
-    $Self->{Completeness}        = 0.490649908031882;
+    $Self->{Completeness}        = 0.489973978264197;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -539,6 +539,20 @@ sub Data {
         'Please note' => 'Let op',
         'This customer backend is read only!' => 'Deze klanten backend is niet te wijzigen!',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+        'Edit default services' => 'Beheer standaard services',
+        'Filter for Services' => 'Filter op services',
+        'Filter for services' => 'Filter voor Services',
+        'Customers' => 'Bedrijven',
+        'Services' => 'Services',
+        'Service Level Agreements' => 'Service Level Agreements',
+        'Manage Customer Company Service Relations' => '',
+        'Search Results' => 'Zoekresultaat',
+        'Customer Companies' => 'Bedrijven',
+        'Toggle active state for all' => 'Alles actief aan/uit',
+        'Inherit from' => '',
+        'Toggle active state for %s' => 'Actief aan/uit voor %s',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
         'Notice' => 'Notitie',
         'This feature is disabled!' => 'Deze functie is niet geactiveerd.',
@@ -553,10 +567,8 @@ sub Data {
         'Select the customer:group permissions.' => 'Selecteer de permissies voor bedrijf:groep.',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Als niets geselecteerd is, zijn er geen permissies in deze groep (de klant zal geen tickets kunnen zien).',
-        'Customers' => 'Bedrijven',
         'Groups' => 'Groepen',
         'Manage Customer-Group Relations' => 'Beheer Bedrijf - Groep koppelingen',
-        'Search Results' => 'Zoekresultaat',
         'Change Group Relations for Customer' => 'Bewerk gekoppelde groepen voor deze klant',
         'Change Customer Relations for Group' => 'Bewerk gekoppelde klanten voor deze groep',
         'Toggle %s Permission for all' => '%s permissies aan/uit',
@@ -612,8 +624,6 @@ sub Data {
         'Manage Customer User-Customer Relations' => 'Beheer Klant Gebruiker-Klant koppelingen',
         'Change Customer Relations for Customer User' => 'Bewerk Klan Relaties voor Klant gebruiker',
         'Change Customer User Relations for Customer' => 'Wijzig Klant Gebruiker koppelingen voor Klant',
-        'Toggle active state for all' => 'Alles actief aan/uit',
-        'Toggle active state for %s' => 'Actief aan/uit voor %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
         'Just use this feature if you want to define group permissions for customer users.' =>
@@ -631,11 +641,6 @@ sub Data {
         'Customer User Default Groups:' => 'Klant Gebruiker Standaard Groepen:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-        'Edit default services' => 'Beheer standaard services',
-        'Filter for Services' => 'Filter op services',
-        'Filter for services' => 'Filter voor Services',
-        'Services' => 'Services',
-        'Service Level Agreements' => 'Service Level Agreements',
         'Manage Customer User-Service Relations' => 'Beheer Klantgebruiker-Service relaties',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
@@ -3868,6 +3873,10 @@ sub Data {
         'Customer Company %s already exists!' => 'Bedrijf %s bestaat al!',
         'Customer company added!' => 'Bedrijf toegevoegd!',
 
+        # Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+        'Allocate Customer Companies to Service' => '',
+        'Allocate Services to Customer Company' => '',
+
         # Perl Module: Kernel/Modules/AdminCustomerGroup.pm
         'No configuration for \'CustomerGroupPermissionContext\' found!' =>
             '',
@@ -6623,6 +6632,8 @@ sub Data {
             '',
         'Event module that updates customer users after an update of the Customer.' =>
             '',
+        'Event module that updates customer company service membership if the customer ID changes.' =>
+            '',
         'Event module that updates customer company object name for dynamic fields.' =>
             '',
         'Event module that updates customer user search profiles if login changes.' =>
@@ -6807,6 +6818,8 @@ sub Data {
             '',
         'Allows default services to be selected also for non existing customers.' =>
             'Staat toe om standaard services te selecteren voor niet bestaande klanten.',
+        'Defines if the Customer Company ↔ Service functionality should always be used or only as a fallback if no Customer User ↔ Services relationship exists.' =>
+            '',
         'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
             'Activeert het ticket archief systeem, tickets worden uit de dagelijkse scope gehouden wat het systeem versnelt. Om te zoeken op deze ticket moet dit specifiek worden aangegeven in het zoekscherm.',
         'Controls if the ticket and article seen flags are removed when a ticket is archived.' =>
@@ -9152,6 +9165,7 @@ Het Helpdesk Team
             '',
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             '',
+        'Always' => '',
         'Always show RichText if available' => '',
         'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => 'Antwoord',
@@ -9275,7 +9289,7 @@ Het Helpdesk Team
         'Croatian' => '',
         'Current action description.' => '',
         'Customer Administration' => 'Beheer klanten',
-        'Customer Companies' => 'Bedrijven',
+        'Customer Company ↔ Services' => '',
         'Customer IDs' => '',
         'Customer Information Center Search.' => '',
         'Customer Information Center search.' => '',
@@ -9446,6 +9460,7 @@ Het Helpdesk Team
         'Link Object.' => 'Koppel Object',
         'Link agents to groups.' => 'Koppel behandelaars aan groepen.',
         'Link agents to roles.' => 'Koppel behandelaars aan rollen.',
+        'Link customer companies to services.' => '',
         'Link customer users to customers.' => 'Koppel klanten aan bedrijven.',
         'Link customer users to groups.' => 'Koppel klanten aan groepen.',
         'Link customer users to services.' => 'Koppel klanten aan services.',

@@ -5913,6 +5913,76 @@ via the Preferences button after logging in.
             </Hash>
         </Value>
     </Setting>
+    <Setting Name="Frontend::Module###AdminCustomerCompanyService" Required="0" Valid="1">
+        <Description Translatable="1">Frontend module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
+        <Value>
+            <Item ValueType="FrontendRegistration">
+                <Hash>
+                    <Item Key="GroupRo">
+                        <Array>
+                        </Array>
+                    </Item>
+                    <Item Key="Group">
+                        <Array>
+                            <Item>admin</Item>
+                        </Array>
+                    </Item>
+                    <Item Key="Description">Admin</Item>
+                    <Item Key="Title" Translatable="1">Customer Company ↔ Services</Item>
+                    <Item Key="NavBarName">Admin</Item>
+                </Hash>
+            </Item>
+        </Value>
+    </Setting>
+    <Setting Name="Loader::Module::AdminCustomerCompanyService###001-Framework" Required="0" Valid="1">
+        <Description Translatable="1">Loader module registration for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::Loader</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="JavaScript">
+                    <Array>
+                        <Item>Core.Agent.Admin.CustomerCompanyService.js</Item>
+                    </Array>
+                </Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::Navigation###AdminCustomerCompanyService###001-Framework" Required="0" Valid="0">
+        <Description Translatable="1">Main menu item registration.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::MainMenu</Navigation>
+        <Value>
+            <Array>
+                <DefaultItem ValueType="FrontendNavigation">
+                    <Hash>
+                    </Hash>
+                </DefaultItem>
+            </Array>
+        </Value>
+    </Setting>
+    <Setting Name="Frontend::NavigationModule###AdminCustomerCompanyService" Required="0" Valid="1">
+        <Description Translatable="1">Admin area navigation for the agent interface.</Description>
+        <Navigation>Frontend::Admin::ModuleRegistration::AdminOverview</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Group">
+                    <Array>
+                        <Item>admin</Item>
+                    </Array>
+                </Item>
+                <Item Key="GroupRo">
+                    <Array>
+                    </Array>
+                </Item>
+                <Item Key="Module">Kernel::Output::HTML::NavBar::ModuleAdmin</Item>
+                <Item Key="Name" Translatable="1">Customer Company ↔ Services</Item>
+                <Item Key="Block">Users</Item>
+                <Item Key="Description" Translatable="1">Link customer companies to services.</Item>
+                <Item Key="IconBig">fa-building-o</Item>
+                <Item Key="IconSmall">fa-wrench</Item>
+            </Hash>
+        </Value>
+    </Setting>
     <Setting Name="Frontend::Module###AdminCustomerUserCustomer" Required="0" Valid="1">
         <Description Translatable="1">Frontend module registration for the agent interface.</Description>
         <Navigation>Frontend::Admin::ModuleRegistration</Navigation>
@@ -8487,6 +8557,17 @@ via the Preferences button after logging in.
         <Value>
             <Hash>
                 <Item Key="Module">Kernel::System::CustomerCompany::Event::CustomerUserUpdate</Item>
+                <Item Key="Event">\ACustomerCompanyUpdate\z</Item>
+                <Item Key="Transaction">0</Item>
+            </Hash>
+        </Value>
+    </Setting>
+    <Setting Name="CustomerCompany::EventModulePost###2200-UpdateServiceMembership" Required="0" Valid="1">
+        <Description Translatable="1">Event module that updates customer company service membership if the customer ID changes.</Description>
+        <Navigation>Core::Event::CustomerCompany</Navigation>
+        <Value>
+            <Hash>
+                <Item Key="Module">Kernel::System::CustomerCompany::Event::ServiceUpdate</Item>
                 <Item Key="Event">\ACustomerCompanyUpdate\z</Item>
                 <Item Key="Transaction">0</Item>
             </Hash>

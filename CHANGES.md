@@ -1,4 +1,5 @@
 # 7.5.1 2026-??-??
+ - 2026-11-24 Added: Services can be assigned to customer companies. Ticket dialogs offer the services of the selected customer company. Integrated package Znuny-CustomerCompanyService.
  - 2026-11-23 Fixed: UsedSpace is calculated too early in Core.UI.js. Thanks to @BuilderNSV for reporting the issue. [#604](https://github.com/znuny/Znuny/issues/604)
  - 2026-11-23 Added: Admin module to configure SAML2 authentication.
  - 2026-11-20 Fixed: Date and DateTime dynamic fields ignored the user time zone when restricting dates to the past or the future.

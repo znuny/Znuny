@@ -1,0 +1,264 @@
+# --
+# Copyright (C) 2001-2021 OTRS AG, https://otrs.com/
+# Copyright (C) 2021 Znuny GmbH, https://znuny.org/
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (GPL). If you
+# did not receive this file, see https://www.gnu.org/licenses/gpl-3.0.txt.
+# --
+
+# Note: This is based on Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
+# Mainly CustomerUser has been replaced by CustomerCompany.
+
+[% RenderBlockStart("Overview") %]
+<div class="MainBox ARIARoleMain LayoutFixedSidebar SidebarFirst ActionsSideBar AdminManagement">
+    <div class="SidebarColumn ActionsSideBarComp">
+[% RenderBlockStart("ActionList") %]
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2>[% Translate("Actions") | html %]</h2>
+            </div>
+            <div class="Content">
+                <ul class="ActionList">
+[% RenderBlockStart("ActionOverview") %]
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];CustomerCompanySearch=[% Data.CustomerCompanySearch | uri %]" class="CallForAction btn-main btn-primary-center"><span><i class="fa fa-caret-left"></i>[% Translate("Go to overview") | html %]</span></a>
+                    </li>
+[% RenderBlockEnd("ActionOverview") %]
+
+[% RenderBlockStart("Search") %]
+                    <li>
+                        <form class="SearchBox" action="[% Env("CGIHandle") %]" method="post">
+                            <i class="fa fa-search"></i>
+                            <input type="hidden" name="Action" value="[% Env("Action") %]" />
+                            <input type="text" name="CustomerCompanySearch" id="CustomerCompanySearch" value="[% Data.CustomerCompanySearch | html %]" title="[% Translate("Search") | html %]" />
+[% RenderBlockStart("SearchAllocateService") %]
+                            <input type="hidden" name="Subaction" value="[% Data.Subaction | html %]" />
+                            <input type="hidden" name="ServiceID" value="[% Data.ServiceID | html %]" />
+[% RenderBlockEnd("SearchAllocateService") %]
+                            <p class="FieldExplanation">
+                                <label for="CustomerCompanySearch">
+                                    [% Translate("Wildcards like '*' are allowed.") | html %]
+                                </label>
+                            </p>
+                        </form>
+                    </li>
+[% RenderBlockEnd("Search") %]
+[% RenderBlockStart("Default") %]
+                    <li>
+                        <a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=AllocateCustomerCompany" class="CallForAction btn-main btn-primary-center">
+                            <span>[% Translate("Edit default services") | html %]</span>
+                        </a>
+                    </li>
+[% RenderBlockEnd("Default") %]
+                </ul>
+            </div>
+        </div>
+[% RenderBlockEnd("ActionList") %]
+[% RenderBlockStart("Filter") %]
+        <div class="WidgetSimple">
+            <div class="Header">
+                <h2><label for="FilterServices">[% Translate("Filter for Services") | html %]</label></h2>
+            </div>
+            <div class="Content">
+                <ul>
+                    <li>
+                        <form action="">
+                            <fieldset>
+                                <input type="text" placeholder="[% Translate("Just start typing to filter...") | html %]" id="FilterServices" class="FilterBox" name="FilterServices" value="" title="[% Translate("Filter for services") | html %]" />
+                            </fieldset>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+[% RenderBlockEnd("Filter") %]
+        <div class='WidgetSimple'>
+            <div class='Header'>
+                <h2>[% Translate('Related Actions') | html %]</h2>
+            </div>
+            <div class='Content'>
+                <ul class='ActionList SpacingTop'>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminCustomerCompany' class='CallForAction btn-main btn-primary-ghost'>
+                            <span>
+                                [% Translate('Customers') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminService' class='CallForAction btn-main btn-primary-ghost'>
+                            <span>
+                                [% Translate('Services') | html %]
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href='[% Env("Baselink") %]Action=AdminSLA' class='CallForAction btn-main btn-primary-ghost'>
+                            <span>
+                                [% Translate('Service Level Agreements') | html %]
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="ContentColumn">
+        <h1 class="InvisibleText">[% Translate("Manage Customer Company Service Relations") | html %]</h1>
+
+        [% BreadcrumbPath = [
+                {
+                    Name => Translate('Manage Customer Company Service Relations'),
+                    Link => Data.OverviewLink,
+                },
+            ]
+        %]
+
+        [% IF Data.Type %]
+                [% USE EditTitle = String(Translate(Data.BreadcrumbTitle)) %]
+                [% IF Data.Name %]
+                    [% BreadcrumbPath.push({ Name => EditTitle.append(" '", Data.Name, "'") }) %]
+                [% ELSE %]
+                    [% BreadcrumbPath.push({ Name => EditTitle.append("") }) %]
+                [% END %]
+        [% END %]
+
+        [% INCLUDE "Breadcrumb.tt" Path = BreadcrumbPath %]
+
+        <div class="WidgetSimple">
+[% RenderBlockStart("Result") %]
+            <div class="Header">
+                <h2>[% Translate("Search Results") | html %]:</h2>
+            </div>
+            <div class="Content LayoutGrid ColumnsWithSpacing modal-col-wrapper modal-col-container">
+                <div class="Size1of2">
+                    <ul class="Tablelike" id="Customers">
+                        <li class="FilterMessage Hidden">[% Translate("No matches found.") | html %]</li>
+                        <li class="Header">[% Translate("Customer Companies") | html %]
+[% RenderBlockStart("ResultCustomerCompanyCount") %]
+                            ([% Data.CustomerCompanyCount | html %])
+[% RenderBlockEnd("ResultCustomerCompanyCount") %]
+[% RenderBlockStart("ResultCustomerCompanyCountLimit") %]
+                            (<span class='Error'>[% Data.CustomerCompanyCount | html %]</span>)
+[% RenderBlockEnd("ResultCustomerCompanyCountLimit") %]
+                        </li>
+[% RenderBlockStart("ResultCompanyRow") %]
+                        <li><a href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=AllocateCustomerCompany;CustomerID=[% Data.ID | uri %];CustomerCompanySearch=[% Data.CustomerCompanySearch | uri %];ServiceSearch=[% Data.ServiceSearch | uri %]" class="AsBlock">[% Data.Name | html %]</a></li>
+[% RenderBlockEnd("ResultCompanyRow") %]
+[% RenderBlockStart("NoDataFoundMsg") %]
+                        <li>[% Translate("No data found.") | html %]</li>
+[% RenderBlockEnd("NoDataFoundMsg") %]
+                    </ul>
+                </div>
+                <div class="Size1of2">
+                    <ul class="Tablelike" id="Service">
+                        <li class="Header">[% Translate("Services") | html %]
+                        </li>
+                        <li class="FilterMessage Hidden">[% Translate("No matches found.") | html %]</li>
+[% RenderBlockStart("NoServiceFoundMsg") %]
+                        <li>[% Translate("No data found.") | html %]</li>
+[% RenderBlockEnd("NoServiceFoundMsg") %]
+[% RenderBlockStart("ResultServiceRow") %]
+                        <li class="OneRow"><a title="[% Data.Name | html %]" href="[% Env("Baselink") %]Action=[% Env("Action") %];Subaction=AllocateService;ServiceID=[% Data.ID | uri %];CustomerCompanySearch=[% Data.CustomerCompanySearch | uri %]" class="AsBlock">[% Data.Name | html %]</a></li>
+[% RenderBlockEnd("ResultServiceRow") %]
+                    </ul>
+                </div>
+            </div>
+[% RenderBlockEnd("Result") %]
+
+[% RenderBlockStart("AllocateItem") %]
+            <div class="Header">
+                <h2>
+                    [% Translate(Data.BreadcrumbTitle) | html %]
+                    <a href="[% Env("Baselink") %]Action=[% Data.ActionHome | uri %];Subaction=[% Data.SubactionHeader | uri %];[% Data.IDHeaderStrg | uri %]=[% Data.ID | uri %]">[% Data.Name | html %]</a>
+                </h2>
+            </div>
+            <div class="Content LayoutGrid ColumnsWithSpacing">
+                <form action="[% Env("CGIHandle") %]" method="post" name="matrix">
+                    <input type="hidden" name="Action" value="[% Env("Action") %]"/>
+                    <input type="hidden" name="Subaction" value="Allocate[% Data.Type | html %]Save"/>
+                    <input type="hidden" name="CustomerCompanySearch" value="[% Data.CustomerCompanySearch | html %]"/>
+                    <input type="hidden" name="ID" value="[% Data.ID | html %]"/>
+                    [% IF Data.Subaction == 'AllocateService' OR Data.Subaction == 'AllocateCustomerCompany' %]
+                        <input type="hidden" name="ContinueAfterSave" id="ContinueAfterSave" value=""/>
+                    [% END %]
+
+                    <div class="DataTable scroll-bar-styled bar-no-left-border">
+                        <table class="DataTable VariableWidth" id="[% Data.NeType | html %]">
+                            <thead>
+                                <tr>
+                                    <th>[% Translate(Data.VisibleNeType) | html %]
+[% RenderBlockStart("AllocateItemCount") %]
+                                        ([% Data.ItemCount | html %])
+[% RenderBlockEnd("AllocateItemCount") %]
+[% RenderBlockStart("AllocateItemCountLimit") %]
+                                        (<span class="Error">[% Data.ItemCount | html %]</span>)
+[% RenderBlockEnd("AllocateItemCountLimit") %]
+                                    </th>
+                                    <th>
+                                        <input type="checkbox" id="SelectAllItemsSelected" name="ItemsSelected" title="[% Translate("Toggle active state for all") | html %]" value="" />
+                                        [% Translate("Active") | html %]
+                                    </th>
+[% RenderBlockStart("InheritFromColumn") %]
+                                    <th>
+                                        [% Translate("Inherit from") | html %]
+                                    </th>
+[% RenderBlockEnd("InheritFromColumn") %]
+                                </tr>
+                            </thead>
+                            <tbody>
+[% RenderBlockStart("NoDataFoundMsgList") %]
+                                <tr>
+                                    <td colspan="[% Data.ColSpan | html %]">
+                                        [% Translate("No data found.") | html %]
+                                    </td>
+                                </tr>
+[% RenderBlockEnd("NoDataFoundMsgList") %]
+[% RenderBlockStart("AllocateItemRow") %]
+                                <tr>
+                                    <td><a href="[% Env("Baselink") %]Action=[% Data.ActionNeHome | uri %];Subaction=[% Data.SubactionRow | uri %];[% Data.IDRowStrg | uri %]=[% Data.ID | uri %]">[% Data.Name | html %]</a></td>
+                                    <td>
+                                        <input type="checkbox" name="ItemsSelected" title="[% Translate("Toggle active state for %s", Data.Name) | html %]" value="[% Data.ID | html %]" [% Data.InheritFrom | html %] [% Data.Checked | html %] [% Data.Disabled | html %]/>
+                                        <input type="hidden" name="ItemsAll" value="[% Data.ID | html %]"/>
+                                    </td>
+                                    [% IF Data.InheritFromText %]
+                                        <td [% Data.HideInheritFromColumn %]>
+                                            [% Translate(Data.InheritFromText) | html %]
+                                        </td>
+                                    [% END %]
+                                </tr>
+[% RenderBlockEnd("AllocateItemRow") %]
+                                <tr class="FilterMessage Hidden">
+                                    <td colspan="3">[% Translate("No matches found.") | html %]</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="field-wrapper form-button-actions">
+                        <div class="Field buttons-field">
+                            <a href="[% Env("Baselink") %]Action=[% Env("Action") %]" class="btn-cancel-ghost btn-main btn-width-md">[% Translate("Cancel") | html %]</a>
+
+                            [% IF Data.Subaction == 'AllocateService' OR Data.Subaction == 'AllocateCustomerCompany' %]
+                                <button class="btn-primary-ghost btn-main btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]">
+                                    <span>[% Translate("Save and finish") | html %]</span>
+                                </button>
+
+
+                                <button class="btn-primary btn-main btn-width-md" id="SubmitAndContinue" type="button" value="[% Translate("Save") | html %]">
+                                    <span>[% Translate("Save") | html %]</span>
+                                </button>
+                            [% ELSE %]
+                                <button class="btn-primary btn-main btn-width-md" id="Submit" type="submit" value="[% Translate("Save") | html %]">
+                                    <span>[% Translate("Save") | html %]</span>
+                                </button>
+                            [% END %]
+                        </div>
+                    </div>
+                </form>
+            </div>
+[% RenderBlockEnd("AllocateItem") %]
+        </div>
+    </div>
+</div>
+[% RenderBlockEnd("Overview") %]

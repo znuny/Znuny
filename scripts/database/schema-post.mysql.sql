@@ -729,6 +729,14 @@ SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHER
 SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE service_customer_user ADD CONSTRAINT FK_service_customer_user_create_by_id FOREIGN KEY (create_by) REFERENCES users (id)', 'SELECT ''INFO: Foreign key constraint FK_service_customer_user_create_by_id does already exist, skipping.''' );
 PREPARE FKStatement FROM @FKSQLStatement;
 EXECUTE FKStatement;
+SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHERE table_schema = DATABASE() AND table_name = 'service_customer_company' AND constraint_name = 'FK_service_customer_company_service_id_id');
+SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE service_customer_company ADD CONSTRAINT FK_service_customer_company_service_id_id FOREIGN KEY (service_id) REFERENCES service (id)', 'SELECT ''INFO: Foreign key constraint FK_service_customer_company_service_id_id does already exist, skipping.''' );
+PREPARE FKStatement FROM @FKSQLStatement;
+EXECUTE FKStatement;
+SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHERE table_schema = DATABASE() AND table_name = 'service_customer_company' AND constraint_name = 'FK_service_customer_company_create_by_id');
+SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE service_customer_company ADD CONSTRAINT FK_service_customer_company_create_by_id FOREIGN KEY (create_by) REFERENCES users (id)', 'SELECT ''INFO: Foreign key constraint FK_service_customer_company_create_by_id does already exist, skipping.''' );
+PREPARE FKStatement FROM @FKSQLStatement;
+EXECUTE FKStatement;
 SET @FKExists := (SELECT COUNT(*) FROM information_schema.table_constraints WHERE table_schema = DATABASE() AND table_name = 'sla' AND constraint_name = 'FK_sla_create_by_id');
 SET @FKSQLStatement := IF( @FKExists = 0, 'ALTER TABLE sla ADD CONSTRAINT FK_sla_create_by_id FOREIGN KEY (create_by) REFERENCES users (id)', 'SELECT ''INFO: Foreign key constraint FK_sla_create_by_id does already exist, skipping.''' );
 PREPARE FKStatement FROM @FKSQLStatement;

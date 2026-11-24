@@ -1558,6 +1558,27 @@
     </ForeignKey>
 </Table>
 
+<!-- service_customer_company - relation customer company <-> service -->
+<Table Name="service_customer_company">
+    <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="BIGINT"/>
+    <Column Name="customer_id" Required="true" Size="200" Type="VARCHAR"/>
+    <Column Name="service_id" Required="true" Type="INTEGER"/>
+    <Column Name="create_time" Required="true" Type="DATE"/>
+    <Column Name="create_by" Required="true" Type="INTEGER"/>
+    <Index Name="service_customer_company_customer_id">
+        <IndexColumn Name="customer_id" Size="10"/>
+    </Index>
+    <Index Name="service_customer_company_service_id">
+        <IndexColumn Name="service_id"/>
+    </Index>
+    <ForeignKey ForeignTable="service">
+        <Reference Local="service_id" Foreign="id"/>
+    </ForeignKey>
+    <ForeignKey ForeignTable="users">
+        <Reference Local="create_by" Foreign="id"/>
+    </ForeignKey>
+</Table>
+
 <!-- sla -->
 <Table Name="sla">
     <Column Name="id" Required="true" PrimaryKey="true" AutoIncrement="true" Type="INTEGER"/>

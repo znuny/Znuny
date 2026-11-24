@@ -22,23 +22,80 @@ Core.Agent.Admin = Core.Agent.Admin || {};
  */
 Core.Agent.Admin.CustomerUserService = (function (TargetNS) {
 
-    /*
-    * @name Init
-    * @memberof Core.Agent.Admin.CustomerUserService
-    * @function
-    * @description
-    *      This function initializes filter and "SelectAll" actions.
-    */
+    var DefaultServiceData = {};
+
+    /**
+     * @name HideShowDefaultServices
+     * @memberof Core.Agent.Admin.CustomerUserService
+     * @function
+     * @description
+     *      Hides or shows default services when other services are selected.
+     * @returns {Boolean} Returns true when the allocate-service view is skipped.
+     */
+    TargetNS.HideShowDefaultServices = function () {
+
+        // skip if we are in the 'AllocateService' view
+        if (
+            $('input[name=Subaction]').length
+            && $('input[name=Subaction]').val() === 'AllocateService'
+            )
+        {
+            return true;
+        }
+
+        // A manually selected service removes inherited default service marks.
+        if ($('tbody input[type=checkbox]:enabled:checked').length > 0) {
+
+            $('tbody input[type=checkbox][disabled=disabled]').each(function () {
+
+                if ($(this).data('inherit') !== 'DefaultService') {
+                    return true;
+                }
+
+                DefaultServiceData[$(this).parent().prev().text().trim()] = $(this).parent().next().text().trim();
+
+                $(this).removeAttr('disabled');
+                $(this).parent().next().text('');
+
+                if (!$('#SelectAllItemsSelected').prop('checked')) {
+                    $(this).prop('checked', false);
+                }
+            });
+        }
+        else {
+
+            $('tbody input[type=checkbox]:enabled').each(function () {
+
+                if ($(this).data('inherit') !== 'DefaultService') {
+                    return true;
+                }
+
+                $(this).attr('disabled', 'disabled');
+                $(this).prop('checked', true);
+                $(this).parent().next().text(DefaultServiceData[$(this).parent().prev().text().trim()]);
+            });
+        }
+    };
+
+    /**
+     * @name Init
+     * @memberof Core.Agent.Admin.CustomerUserService
+     * @function
+     * @description
+     *      This function initializes filter and "SelectAll" actions.
+     */
     TargetNS.Init = function () {
 
-        // initialize "SelectAll" checkbox and bind click event on "SelectAll" for each relation item
-        Core.Form.InitSelectAllCheckboxes($('table td input[type="checkbox"][name=ItemsSelected]'), $('#SelectAllItemsSelected'));
+        // Skip disabled checkboxes when selecting all.
+        Core.Form.InitSelectAllCheckboxes($('table td input[type="checkbox"][name=ItemsSelected]:not(:disabled)'), $('#SelectAllItemsSelected'));
 
-        $('input[type="checkbox"][name=ItemsSelected]').click(function () {
+        $('input[type="checkbox"][name=ItemsSelected]:not(:disabled)').on('click', function () {
             Core.Form.SelectAllCheckboxes($(this), $('#SelectAllItemsSelected'));
+            TargetNS.HideShowDefaultServices();
         });
 
-        // initialize table filter
+        $('#SelectAllItemsSelected').on('click', TargetNS.HideShowDefaultServices);
+
         Core.UI.Table.InitTableFilter($("#FilterServices"), $("#Service"));
     };
 

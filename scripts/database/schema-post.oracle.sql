@@ -2916,6 +2916,38 @@ END;
 --
 ;
 BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE service_customer_company ADD CONSTRAINT FK_service_customer_company_f8 FOREIGN KEY (service_id) REFERENCES service (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_service_customer_company_f2 ON service_customer_company (service_id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'ALTER TABLE service_customer_company ADD CONSTRAINT FK_service_customer_company_a2 FOREIGN KEY (create_by) REFERENCES users (id)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
+    EXECUTE IMMEDIATE 'CREATE INDEX FK_service_customer_company_32 ON service_customer_company (create_by)';
+EXCEPTION
+  WHEN OTHERS THEN NULL;
+END;
+/
+--
+;
+BEGIN
     EXECUTE IMMEDIATE 'ALTER TABLE sla ADD CONSTRAINT FK_sla_create_by_id FOREIGN KEY (create_by) REFERENCES users (id)';
 EXCEPTION
   WHEN OTHERS THEN NULL;

@@ -33,6 +33,8 @@ sub Run {
     my ( $Self, %Param ) = @_;
 
     my @PackageNames = (
+        'Znuny4OTRS-CustomerCompanyService',
+        'Znuny-CustomerCompanyService',
 
         # Packages newly merged into the framework for this version.
         'Znuny-AdvancedAttachments',

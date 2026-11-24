@@ -2653,6 +2653,9 @@ sub _GetServices {
 
     # get service list
     if ( $Param{CustomerUserID} ) {
+        if ( !$Param{TicketID} && $Self->{TicketID} ) {
+            $Param{TicketID} = $Self->{TicketID};
+        }
         %Service = $TicketObject->TicketServiceList(
             %Param,
             Action => $Self->{Action},

@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%m/%d';
     $Self->{DateInputFormat}     = '%Y/%m/%d';
     $Self->{DateInputFormatLong} = '%Y/%m/%d - %T';
-    $Self->{Completeness}        = 0.661863887185776;
+    $Self->{Completeness}        = 0.660952089392316;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -537,6 +537,20 @@ sub Data {
         'Please note' => '注意',
         'This customer backend is read only!' => 'この顧客情報は読み取り専用です！',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+        'Edit default services' => '既定のサービス編集',
+        'Filter for Services' => 'サービスでフィルタ',
+        'Filter for services' => 'サービスでフィルター',
+        'Customers' => '顧客',
+        'Services' => 'サービス',
+        'Service Level Agreements' => 'サービスレベル契約（SLA）',
+        'Manage Customer Company Service Relations' => '',
+        'Search Results' => '検索結果',
+        'Customer Companies' => '顧客企業',
+        'Toggle active state for all' => 'すべての有効なステータスを切り替え',
+        'Inherit from' => '',
+        'Toggle active state for %s' => '有効なステータス %s を切り替え',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
         'Notice' => '通知',
         'This feature is disabled!' => 'この機能は無効にされています。',
@@ -551,10 +565,8 @@ sub Data {
         'Select the customer:group permissions.' => '顧客：グループ権限を選択',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             '何も選択しない場合、このグループは権限がありません (チケットは顧客が使用できません)',
-        'Customers' => '顧客',
         'Groups' => 'グループ',
         'Manage Customer-Group Relations' => '顧客-グループ関連性管理',
-        'Search Results' => '検索結果',
         'Change Group Relations for Customer' => '顧客に対するグループの関連性を変更',
         'Change Customer Relations for Group' => 'グループに対する顧客の関連性を変更',
         'Toggle %s Permission for all' => '%s の全権限を切り替え',
@@ -610,8 +622,6 @@ sub Data {
         'Manage Customer User-Customer Relations' => '顧客ユーザー - 顧客の関係を管理',
         'Change Customer Relations for Customer User' => '顧客ユーザーと顧客の関係を変更',
         'Change Customer User Relations for Customer' => '顧客ユーザーと顧客の関係を変更',
-        'Toggle active state for all' => 'すべての有効なステータスを切り替え',
-        'Toggle active state for %s' => '有効なステータス %s を切り替え',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
         'Just use this feature if you want to define group permissions for customer users.' =>
@@ -629,11 +639,6 @@ sub Data {
         'Customer User Default Groups:' => '顧客ユーザーのデフォルト・グループ',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-        'Edit default services' => '既定のサービス編集',
-        'Filter for Services' => 'サービスでフィルタ',
-        'Filter for services' => 'サービスでフィルター',
-        'Services' => 'サービス',
-        'Service Level Agreements' => 'サービスレベル契約（SLA）',
         'Manage Customer User-Service Relations' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
@@ -3869,6 +3874,10 @@ sub Data {
         'Customer Company %s already exists!' => '顧客企業 %s は、既に存在します！',
         'Customer company added!' => '顧客企業を追加しました。',
 
+        # Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+        'Allocate Customer Companies to Service' => '',
+        'Allocate Services to Customer Company' => '',
+
         # Perl Module: Kernel/Modules/AdminCustomerGroup.pm
         'No configuration for \'CustomerGroupPermissionContext\' found!' =>
             '',
@@ -6624,6 +6633,8 @@ sub Data {
             '',
         'Event module that updates customer users after an update of the Customer.' =>
             '顧客情報が更新された際に顧客ユーザー情報を更新するイベント・モジュール',
+        'Event module that updates customer company service membership if the customer ID changes.' =>
+            '',
         'Event module that updates customer company object name for dynamic fields.' =>
             '',
         'Event module that updates customer user search profiles if login changes.' =>
@@ -6807,6 +6818,8 @@ sub Data {
         'Retains all services in listings even if they are children of invalid elements.' =>
             '',
         'Allows default services to be selected also for non existing customers.' =>
+            '',
+        'Defines if the Customer Company ↔ Service functionality should always be used or only as a fallback if no Customer User ↔ Services relationship exists.' =>
             '',
         'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
             'チケット・アーカイブ・システムを有効にすることで、チケットの一部をデイリーの範囲から外し、システムのスピードを速くします。これらのチケットを検索する際には、チケット検索においてアーカイブ・フラッグを有効にする必要があります。',
@@ -9160,6 +9173,7 @@ Thanks for your help!
             '中程度のフォーマットでのチケット一覧の表示を許可します（CustomerInfo => 1 - 顧客情報も表示します)。',
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             '小さいフォーマットでのチケット一覧の表示を許可します（CustomerInfo => 1 - 顧客情報も表示します)。',
+        'Always' => '',
         'Always show RichText if available' => '',
         'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => '回答',
@@ -9283,7 +9297,7 @@ Thanks for your help!
         'Croatian' => 'クロアチア',
         'Current action description.' => '',
         'Customer Administration' => '顧客管理',
-        'Customer Companies' => '顧客企業',
+        'Customer Company ↔ Services' => '',
         'Customer IDs' => '顧客ID',
         'Customer Information Center Search.' => '顧客情報センターの検索',
         'Customer Information Center search.' => '',
@@ -9454,6 +9468,7 @@ Thanks for your help!
         'Link Object.' => 'リンク・オブジェクト',
         'Link agents to groups.' => '担当者をグループへ連結',
         'Link agents to roles.' => '担当者をロールへ連結',
+        'Link customer companies to services.' => '',
         'Link customer users to customers.' => '顧客のユーザーを顧客にリンクさせる。',
         'Link customer users to groups.' => '顧客のユーザーをグループにリンクさせる。',
         'Link customer users to services.' => '顧客のユーザーをサービスにリンクさせる。',

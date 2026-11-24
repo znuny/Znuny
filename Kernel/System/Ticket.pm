@@ -2482,6 +2482,7 @@ to get all possible services for a ticket (depends on workflow, if configured)
     my %Services = $TicketObject->TicketServiceList(
         CustomerUserID => 123,
         QueueID        => 123,
+        CustomerID     => 'example-customer',    # optional, selected customer number
     );
 
     my %Services = $TicketObject->TicketServiceList(
@@ -2530,15 +2531,29 @@ sub TicketServiceList {
             $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Service::KeepChildren'),
     );
 
+    # The customer number in the form wins. If the form has none, use the ticket's.
+    if ( ( !defined $Param{CustomerID} || $Param{CustomerID} eq '' ) && $Param{TicketID} ) {
+        my %Ticket = $Self->TicketGet(
+            TicketID      => $Param{TicketID},
+            DynamicFields => 0,
+        );
+        $Param{CustomerID} = $Ticket{CustomerID} || '';
+    }
+
     my %Services;
     if ( $Param{CustomerUserID} ) {
 
         # Return all Services in relation with CustomerUser.
-        my %CustomerServices = $ServiceObject->CustomerUserServiceMemberList(
+        my %CustomerServiceParam = (
             Result            => 'HASH',
             CustomerUserLogin => $Param{CustomerUserID},
             UserID            => 1,
         );
+        if ( $Param{CustomerID} ) {
+            $CustomerServiceParam{CustomerID} = $Param{CustomerID};
+        }
+
+        my %CustomerServices = $ServiceObject->CustomerUserServiceMemberList(%CustomerServiceParam);
 
         # Filter Services based on relation with CustomerUser and KeepChildren config.
         %Services = map { $_ => $CustomerServices{$_} } grep { defined $CustomerServices{$_} } sort keys %AllServices;

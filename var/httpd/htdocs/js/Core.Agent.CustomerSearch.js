@@ -94,6 +94,7 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
             },
             SignatureURL;
         Core.AJAX.FunctionCall(Core.Config.Get('Baselink'), Data, function (Response) {
+            var ServiceUpdateFields;
 
             $('#CustomerID').val(Response.CustomerID);
             $('#ShowCustomerID').html(Response.CustomerID);
@@ -104,28 +105,36 @@ Core.Agent.CustomerSearch = (function (TargetNS) {
             // show customer info
             $('#CustomerInfo .Content').html(Response.CustomerTableHTMLString);
 
-            // only execute this part, if in AgentTicketEmail or AgentTicketPhone
-            if (Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketPhone') {
-                // reset service
-                $('#ServiceID').attr('selectedIndex', 0);
-                // update services (trigger ServiceID change event)
-                Core.AJAX.FormUpdate($('#CustomerID').closest('form'), 'AJAXUpdate', 'ServiceID', ['Dest', 'SelectedCustomerUser', 'Signature', 'NextStateID', 'PriorityID', 'ServiceID', 'SLAID', 'CryptKeyID', 'OwnerAll', 'ResponsibleAll', 'TicketFreeText1', 'TicketFreeText2', 'TicketFreeText3', 'TicketFreeText4', 'TicketFreeText5', 'TicketFreeText6', 'TicketFreeText7', 'TicketFreeText8', 'TicketFreeText9', 'TicketFreeText10', 'TicketFreeText11', 'TicketFreeText12', 'TicketFreeText13', 'TicketFreeText14', 'TicketFreeText15', 'TicketFreeText16']);
+            // Reload services whenever the form has a service field.
+            if ($('#ServiceID').length) {
 
-                // Update signature if needed.
-                if ($('#Dest').val() !== '') {
-                    SignatureURL = Core.Config.Get('Baselink') + 'Action=' + Core.Config.Get('Action') + ';Subaction=Signature;Dest=' + $('#Dest').val() + ';SelectedCustomerUser=' + $('#SelectedCustomerUser').val();
-                    if (!Core.Config.Get('SessionIDCookie')) {
-                        SignatureURL += ';' + Core.Config.Get('SessionName') + '=' + Core.Config.Get('SessionID');
-                    }
-                    $('#Signature').attr('src', SignatureURL);
+                $('#ServiceID').prop('selectedIndex', 0);
+
+                if (typeof Core.Config.Get('CustomerFieldsToUpdate') !== 'undefined') {
+                    ServiceUpdateFields = Core.Config.Get('CustomerFieldsToUpdate');
                 }
+                else {
+                    ServiceUpdateFields = [
+                        'Dest', 'SelectedCustomerUser', 'Signature', 'NextStateID', 'PriorityID', 'ServiceID', 'SLAID',
+                        'CryptKeyID', 'OwnerAll', 'ResponsibleAll', 'TypeID', 'NewOwnerID', 'NewResponsibleID',
+                        'NewStateID', 'NewPriorityID', 'NewQueueID'
+                    ];
+                }
+
+                Core.AJAX.FormUpdate($('#CustomerID').closest('form'), 'AJAXUpdate', 'ServiceID', ServiceUpdateFields);
             }
-            if (Core.Config.Get('Action') === 'AgentTicketProcess' &&
-                typeof Core.Config.Get('CustomerFieldsToUpdate') !== 'undefined'){
-                // reset service
-                $('#ServiceID').attr('selectedIndex', 0);
-                // update services (trigger ServiceID change event)
-                Core.AJAX.FormUpdate($('#CustomerID').closest('form'), 'AJAXUpdate', 'ServiceID', Core.Config.Get('CustomerFieldsToUpdate'));
+
+            // Update signature if needed (new phone/email ticket screens).
+            if (
+                (Core.Config.Get('Action') === 'AgentTicketEmail' || Core.Config.Get('Action') === 'AgentTicketPhone')
+                && $('#Dest').val() !== ''
+                )
+            {
+                SignatureURL = Core.Config.Get('Baselink') + 'Action=' + Core.Config.Get('Action') + ';Subaction=Signature;Dest=' + $('#Dest').val() + ';SelectedCustomerUser=' + $('#SelectedCustomerUser').val();
+                if (!Core.Config.Get('SessionIDCookie')) {
+                    SignatureURL += ';' + Core.Config.Get('SessionName') + '=' + Core.Config.Get('SessionID');
+                }
+                $('#Signature').attr('src', SignatureURL);
             }
         });
     }

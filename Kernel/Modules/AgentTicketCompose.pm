@@ -2832,6 +2832,9 @@ sub _GetServices {
 
     # get service list
     if ( $Param{CustomerUserID} ) {
+        if ( !$Param{TicketID} && $Self->{TicketID} ) {
+            $Param{TicketID} = $Self->{TicketID};
+        }
         %Service = $Kernel::OM->Get('Kernel::System::Ticket')->TicketServiceList(
             %Param,
             Action => $Self->{Action},

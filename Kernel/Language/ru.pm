@@ -38,7 +38,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.834763948497854;
+    $Self->{Completeness}        = 0.833613959895913;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -545,6 +545,20 @@ sub Data {
         'Please note' => 'Помните',
         'This customer backend is read only!' => 'Этот бэкенд клиентов только для чтения!',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+        'Edit default services' => 'Редактировать сервисы по умолчанию',
+        'Filter for Services' => 'Фильтр для Сервисов',
+        'Filter for services' => 'Фильтр для Сервисов',
+        'Customers' => 'Компании',
+        'Services' => 'Сервисы',
+        'Service Level Agreements' => 'Соглашения об Уровне Сервиса',
+        'Manage Customer Company Service Relations' => '',
+        'Search Results' => 'Результаты поиска',
+        'Customer Companies' => 'Компании клиента',
+        'Toggle active state for all' => 'Сделать активным для всех',
+        'Inherit from' => '',
+        'Toggle active state for %s' => 'Сделать активным для %s',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
         'Notice' => 'Замечание',
         'This feature is disabled!' => 'Данная функция отключена!',
@@ -559,10 +573,8 @@ sub Data {
         'Select the customer:group permissions.' => 'Выберите разрешения клиент:группа.',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Если ничего не выбрано, тогда у клиентов в этой группе не будет прав (заявки будут недоступны клиенту).',
-        'Customers' => 'Компании',
         'Groups' => 'Группы',
         'Manage Customer-Group Relations' => 'Управлять связями Клиент ↔ Группа',
-        'Search Results' => 'Результаты поиска',
         'Change Group Relations for Customer' => 'Изменить связи Группы с Клиентами',
         'Change Customer Relations for Group' => 'Изменить связь клиентов с группой',
         'Toggle %s Permission for all' => 'Переключить разрешение "%s" для всех',
@@ -618,8 +630,6 @@ sub Data {
         'Manage Customer User-Customer Relations' => 'Управление Клиент ↔ Компания связями',
         'Change Customer Relations for Customer User' => 'Изменить связи Компаний с Клиентом',
         'Change Customer User Relations for Customer' => 'Изменить связи Клиентов с Компанией',
-        'Toggle active state for all' => 'Сделать активным для всех',
-        'Toggle active state for %s' => 'Сделать активным для %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
         'Just use this feature if you want to define group permissions for customer users.' =>
@@ -637,11 +647,6 @@ sub Data {
         'Customer User Default Groups:' => 'Группы клиента по-умолчанию:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-        'Edit default services' => 'Редактировать сервисы по умолчанию',
-        'Filter for Services' => 'Фильтр для Сервисов',
-        'Filter for services' => 'Фильтр для Сервисов',
-        'Services' => 'Сервисы',
-        'Service Level Agreements' => 'Соглашения об Уровне Сервиса',
         'Manage Customer User-Service Relations' => 'Управление Клиент ↔ Сервис связями',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
@@ -3874,6 +3879,10 @@ sub Data {
         'Customer Company %s already exists!' => 'Компания клиента %s уже существует!',
         'Customer company added!' => 'Компания клиента добавлена!',
 
+        # Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+        'Allocate Customer Companies to Service' => '',
+        'Allocate Services to Customer Company' => '',
+
         # Perl Module: Kernel/Modules/AdminCustomerGroup.pm
         'No configuration for \'CustomerGroupPermissionContext\' found!' =>
             'Не найдено настроек для \'CustomerGroupPermissionContext\'!',
@@ -6629,6 +6638,8 @@ sub Data {
             'Список всех событий для Компаний клиента отображаемых в интерфейсе.',
         'Event module that updates customer users after an update of the Customer.' =>
             'Модуль обработки события, который обновляет заявки клиентов после обновления учетной записи клиента.',
+        'Event module that updates customer company service membership if the customer ID changes.' =>
+            '',
         'Event module that updates customer company object name for dynamic fields.' =>
             '',
         'Event module that updates customer user search profiles if login changes.' =>
@@ -6813,6 +6824,8 @@ sub Data {
             'Оставляет все сервисы в списке, даже если они являются потомками от недействительных элементов.',
         'Allows default services to be selected also for non existing customers.' =>
             'Разрешает установить Сервис по умолчанию для несуществующих клиентов.',
+        'Defines if the Customer Company ↔ Service functionality should always be used or only as a fallback if no Customer User ↔ Services relationship exists.' =>
+            '',
         'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
             'Включить функцию архивирования заявок для ускорения работы, путем перемещения некоторых заявок из ежедневного объема. Для поиска таких заявок необходимо включить архивный флажок при создании поискового запроса',
         'Controls if the ticket and article seen flags are removed when a ticket is archived.' =>
@@ -9158,6 +9171,7 @@ Thanks for your help!
             'Допускает использование medium режима просмотра заявок (CustomerInfo => 1 - показывает также информацию о клиенте).',
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             'Допускает использование small(краткий) режима просмотра заявок (CustomerInfo => 1 - показывает также информацию о клиенте).',
+        'Always' => '',
         'Always show RichText if available' => 'Всегда показывать RichText если доступно',
         'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => 'Ответ',
@@ -9281,7 +9295,7 @@ Thanks for your help!
         'Croatian' => 'Хорватский',
         'Current action description.' => '',
         'Customer Administration' => 'Управление Компаниями',
-        'Customer Companies' => 'Компании клиента',
+        'Customer Company ↔ Services' => '',
         'Customer IDs' => 'Компании клиента',
         'Customer Information Center Search.' => 'Поиск в центре информации о компаниях.',
         'Customer Information Center search.' => 'Поиск в центре информации о компаниях.',
@@ -9452,6 +9466,7 @@ Thanks for your help!
         'Link Object.' => 'Связать объект.',
         'Link agents to groups.' => 'Связать агентов с группами.',
         'Link agents to roles.' => 'Связать агентов с ролями.',
+        'Link customer companies to services.' => '',
         'Link customer users to customers.' => 'Связать клиентов с компаниями.',
         'Link customer users to groups.' => 'Связать клиентов с группами.',
         'Link customer users to services.' => 'Связать клиентов с сервисами.',

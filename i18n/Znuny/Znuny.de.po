@@ -1136,7 +1136,7 @@ msgstr "Wählen Sie die Gruppenberechtigungen für Kunden aus."
 msgid "If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer)."
 msgstr "Wenn nichts ausgewählt ist, hat der Kunde in dieser Gruppe keine Rechte (und kann nicht auf Tickets zugreifen)."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
 msgid "Customers"
 msgstr "Kunden"
 
@@ -1148,7 +1148,7 @@ msgstr "Gruppen"
 msgid "Manage Customer-Group Relations"
 msgstr "Kunden-Gruppen-Zuordnungen verwalten"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
 msgid "Search Results"
 msgstr "Suchergebnisse"
 
@@ -1324,7 +1324,7 @@ msgstr "Kundenbeziehungen für Kundenbenutzer ändern"
 msgid "Change Customer User Relations for Customer"
 msgstr "Kundenbenutzerbeziehungen für Kunde ändern"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
 msgid "Toggle active state for all"
 msgstr "Aktiv-Status für alle umschalten"
 
@@ -1332,7 +1332,7 @@ msgstr "Aktiv-Status für alle umschalten"
 msgid "Active"
 msgstr "Aktiv"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserCustomer.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
 msgid "Toggle active state for %s"
 msgstr "Aktiv-Status für %s umschalten"
 
@@ -1372,23 +1372,23 @@ msgstr "Zuordnungen zwischen Kundenbenutzern und Gruppen verwalten"
 msgid "Customer User Default Groups:"
 msgstr "Standardgruppen des Kundenbenutzers:"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
 msgid "Edit default services"
 msgstr "Standardservices bearbeiten"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
 msgid "Filter for Services"
 msgstr "Filter für Services"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
 msgid "Filter for services"
 msgstr "Filter für Services"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
 msgid "Services"
 msgstr "Services"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
 msgid "Service Level Agreements"
 msgstr "Service-Level-Vereinbarungen"
 
@@ -23221,7 +23221,7 @@ msgstr "Beschreibung der aktuellen Aktion."
 msgid "Customer Administration"
 msgstr "Kundenverwaltung"
 
-#. SysConfig
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
 msgid "Customer Companies"
 msgstr "Kunden"
 
@@ -26184,4 +26184,40 @@ msgstr "Authentifizierung für Agenten und Kunden verwalten (z. B. SAML 2.0)."
 #. SysConfig
 msgid "SAML"
 msgstr "SAML"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+msgid "Manage Customer Company Service Relations"
+msgstr "Kundenunternehmen-Service-Zuordnungen verwalten"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+msgid "Inherit from"
+msgstr "Geerbt von"
+
+#. Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+msgid "Allocate Customer Companies to Service"
+msgstr "Kundenunternehmen zu Services zuordnen"
+
+#. Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+msgid "Allocate Services to Customer Company"
+msgstr "Services zu Kundenunternehmen zuordnen"
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Event module that updates customer company service membership if the customer ID changes."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Defines if the Customer Company ↔ Service functionality should always be used or only as a fallback if no Customer User ↔ Services relationship exists."
+msgstr "Definiert, ob die Funktion „Kundenunternehmen ↔ Service“ immer verwendet werden soll oder nur als Fallback, wenn keine Zuordnung „Kundenbenutzer ↔ Services“ vorhanden ist."
+
+#. SysConfig
+msgid "Always"
+msgstr "Immer"
+
+#. SysConfig
+msgid "Customer Company ↔ Services"
+msgstr "Kundenunternehmen ↔ Services"
+
+#. SysConfig
+msgid "Link customer companies to services."
+msgstr "Kundenunternehmen zu Services zuordnen."
 

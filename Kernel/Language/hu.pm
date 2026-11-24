@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.996321275291232;
+    $Self->{Completeness}        = 0.994948721873565;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -539,6 +539,20 @@ sub Data {
         'Please note' => 'Ne feledje',
         'This customer backend is read only!' => 'Ez az ügyfél háttérprogram csak olvasható!',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+        'Edit default services' => 'Alapértelmezett szolgáltatások szerkesztése',
+        'Filter for Services' => 'Szűrő a szolgáltatásokhoz',
+        'Filter for services' => 'Szűrő a szolgáltatásokhoz',
+        'Customers' => 'Ügyfelek',
+        'Services' => 'Szolgáltatások',
+        'Service Level Agreements' => 'Szolgáltatási megállapodások',
+        'Manage Customer Company Service Relations' => '',
+        'Search Results' => 'Keresési eredmények',
+        'Customer Companies' => 'Ügyfél-vállalatok',
+        'Toggle active state for all' => 'Aktivált állapot ki- és bekapcsolása mindenkinek',
+        'Inherit from' => '',
+        'Toggle active state for %s' => 'Aktivált állapot ki- és bekapcsolása ehhez: %s',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
         'Notice' => 'Értesítés',
         'This feature is disabled!' => 'Ez a szolgáltatás le van tiltva!',
@@ -553,10 +567,8 @@ sub Data {
         'Select the customer:group permissions.' => 'Az ügyfél:csoport jogosultságok kiválasztása.',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Ha semmi sincs kiválasztva, akkor ebben a csoportban nincsenek jogosultságok (a jegyek nem lesznek elérhetők az ügyfeleknek).',
-        'Customers' => 'Ügyfelek',
         'Groups' => 'Csoportok',
         'Manage Customer-Group Relations' => 'Ügyfél–Csoport kapcsolatok kezelése',
-        'Search Results' => 'Keresési eredmények',
         'Change Group Relations for Customer' => 'Csoportkapcsolatok megváltoztatása egy ügyfélnél',
         'Change Customer Relations for Group' => 'Ügyfélkapcsolatok megváltoztatása egy csoportnál',
         'Toggle %s Permission for all' => 'A(z) %s jogosultság ki- vagy bekapcsolása mindenkinek',
@@ -612,8 +624,6 @@ sub Data {
         'Manage Customer User-Customer Relations' => 'Ügyfél-felhasználó–Ügyfél kapcsolatok kezelése',
         'Change Customer Relations for Customer User' => 'Ügyfélkapcsolatok megváltoztatása egy ügyfél-felhasználónál',
         'Change Customer User Relations for Customer' => 'Ügyfél-felhasználó kapcsolatok megváltoztatása egy ügyfélnél',
-        'Toggle active state for all' => 'Aktivált állapot ki- és bekapcsolása mindenkinek',
-        'Toggle active state for %s' => 'Aktivált állapot ki- és bekapcsolása ehhez: %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
         'Just use this feature if you want to define group permissions for customer users.' =>
@@ -631,11 +641,6 @@ sub Data {
         'Customer User Default Groups:' => 'Ügyfél-felhasználó alapértelmezett csoportjai:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-        'Edit default services' => 'Alapértelmezett szolgáltatások szerkesztése',
-        'Filter for Services' => 'Szűrő a szolgáltatásokhoz',
-        'Filter for services' => 'Szűrő a szolgáltatásokhoz',
-        'Services' => 'Szolgáltatások',
-        'Service Level Agreements' => 'Szolgáltatási megállapodások',
         'Manage Customer User-Service Relations' => 'Ügyfél-felhasználó–Szolgáltatás kapcsolatok kezelése',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
@@ -3868,6 +3873,10 @@ sub Data {
         'Customer Company %s already exists!' => 'A(z) %s ügyfél-vállalat már létezik!',
         'Customer company added!' => 'Ügyfél-vállalat hozzáadva!',
 
+        # Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+        'Allocate Customer Companies to Service' => '',
+        'Allocate Services to Customer Company' => '',
+
         # Perl Module: Kernel/Modules/AdminCustomerGroup.pm
         'No configuration for \'CustomerGroupPermissionContext\' found!' =>
             'Nem található beállítás a „CustomerGroupPermissionContext” értékéhez!',
@@ -6623,6 +6632,8 @@ sub Data {
             'Az összes ügyfélvállalat-esemény listája, amelyek megjelennek a grafikus felületen.',
         'Event module that updates customer users after an update of the Customer.' =>
             'Eseménymodul, amely frissíti az ügyfél-felhasználókat az ügyfél frissítése után.',
+        'Event module that updates customer company service membership if the customer ID changes.' =>
+            '',
         'Event module that updates customer company object name for dynamic fields.' =>
             'Eseménymodul, amely frissíti az ügyfél-vállalat objektum nevét a dinamikus mezőknél.',
         'Event module that updates customer user search profiles if login changes.' =>
@@ -6807,6 +6818,8 @@ sub Data {
             'Megtartja a listázásokban lévő összes szolgáltatást akkor is, ha azok érvénytelen elemek gyermekei.',
         'Allows default services to be selected also for non existing customers.' =>
             'Lehetővé teszi az alapértelmezett szolgáltatások kiválasztását a nem létező ügyfelekhez is.',
+        'Defines if the Customer Company ↔ Service functionality should always be used or only as a fallback if no Customer User ↔ Services relationship exists.' =>
+            '',
         'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
             'Aktiválja a jegyarchiválási rendszert, hogy a rendszer gyorsabb legyen, azáltal hogy egyes jegyeket áthelyez a napi hatókörön kívülre. Ezen jegyek kereséséhez engedélyezni kell az archiválási jelzőt a jegykeresésben.',
         'Controls if the ticket and article seen flags are removed when a ticket is archived.' =>
@@ -9152,6 +9165,7 @@ Az Ön ügyfélszolgálati csapata
             'Lehetővé teszi a közepes formátumú jegyáttekintőt (CustomerInfo => 1 – megjeleníti az ügyfél-információkat is).',
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             'Lehetővé teszi a kis formátumú jegyáttekintőt (CustomerInfo => 1 – megjeleníti az ügyfél-információkat is).',
+        'Always' => '',
         'Always show RichText if available' => 'Mindig RichText szöveget jelenítsen meg, ha elérhető',
         'An additional screen to add notes to a linked ticket.' => 'További képernyő egy kapcsolt jegyhez való jegyzetek hozzáadásához.',
         'Answer' => 'Válasz',
@@ -9275,7 +9289,7 @@ Az Ön ügyfélszolgálati csapata
         'Croatian' => 'Horvát',
         'Current action description.' => 'Jelenlegi művelet leírása.',
         'Customer Administration' => 'Ügyfél adminisztráció',
-        'Customer Companies' => 'Ügyfél-vállalatok',
+        'Customer Company ↔ Services' => '',
         'Customer IDs' => 'Ügyfél-azonosítók',
         'Customer Information Center Search.' => 'Ügyfélinformációs-központ keresés.',
         'Customer Information Center search.' => 'Ügyfélinformációs-központ keresés.',
@@ -9446,6 +9460,7 @@ Az Ön ügyfélszolgálati csapata
         'Link Object.' => 'Objektum összekapcsolása.',
         'Link agents to groups.' => 'Ügyintézők összekapcsolása csoportokkal.',
         'Link agents to roles.' => 'Ügyintézők összekapcsolása szerepekkel.',
+        'Link customer companies to services.' => '',
         'Link customer users to customers.' => 'Ügyfél-felhasználók összekapcsolása ügyfelekkel.',
         'Link customer users to groups.' => 'Ügyfél-felhasználók összekapcsolása csoportokkal.',
         'Link customer users to services.' => 'Ügyfél-felhasználók összekapcsolása szolgáltatásokkal.',

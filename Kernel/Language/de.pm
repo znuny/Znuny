@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 1;
+    $Self->{Completeness}        = 0.999846930965866;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -534,6 +534,20 @@ sub Data {
         'Please note' => 'Bitte beachten',
         'This customer backend is read only!' => 'Dieses Kunden-Backend kann nicht bearbeitet werden!',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+        'Edit default services' => 'Standardservices bearbeiten',
+        'Filter for Services' => 'Filter für Services',
+        'Filter for services' => 'Filter für Services',
+        'Customers' => 'Kunden',
+        'Services' => 'Services',
+        'Service Level Agreements' => 'Service-Level-Vereinbarungen',
+        'Manage Customer Company Service Relations' => 'Kundenunternehmen-Service-Zuordnungen verwalten',
+        'Search Results' => 'Suchergebnisse',
+        'Customer Companies' => 'Kunden',
+        'Toggle active state for all' => 'Aktiv-Status für alle umschalten',
+        'Inherit from' => 'Geerbt von',
+        'Toggle active state for %s' => 'Aktiv-Status für %s umschalten',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
         'Notice' => 'Bemerkung',
         'This feature is disabled!' => 'Diese Funktion ist deaktiviert!',
@@ -548,10 +562,8 @@ sub Data {
         'Select the customer:group permissions.' => 'Wählen Sie die Gruppenberechtigungen für Kunden aus.',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Wenn nichts ausgewählt ist, hat der Kunde in dieser Gruppe keine Rechte (und kann nicht auf Tickets zugreifen).',
-        'Customers' => 'Kunden',
         'Groups' => 'Gruppen',
         'Manage Customer-Group Relations' => 'Kunden-Gruppen-Zuordnungen verwalten',
-        'Search Results' => 'Suchergebnisse',
         'Change Group Relations for Customer' => 'Gruppenzuordnungen verwalten für Kunden',
         'Change Customer Relations for Group' => 'Kundenzuordnungen verwalten für Gruppe',
         'Toggle %s Permission for all' => 'Recht %s für alle umschalten',
@@ -607,8 +619,6 @@ sub Data {
         'Manage Customer User-Customer Relations' => 'Beziehungen zwischen Kundenbenutzern und Kunden verwalten',
         'Change Customer Relations for Customer User' => 'Kundenbeziehungen für Kundenbenutzer ändern',
         'Change Customer User Relations for Customer' => 'Kundenbenutzerbeziehungen für Kunde ändern',
-        'Toggle active state for all' => 'Aktiv-Status für alle umschalten',
-        'Toggle active state for %s' => 'Aktiv-Status für %s umschalten',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
         'Just use this feature if you want to define group permissions for customer users.' =>
@@ -626,11 +636,6 @@ sub Data {
         'Customer User Default Groups:' => 'Standardgruppen des Kundenbenutzers:',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-        'Edit default services' => 'Standardservices bearbeiten',
-        'Filter for Services' => 'Filter für Services',
-        'Filter for services' => 'Filter für Services',
-        'Services' => 'Services',
-        'Service Level Agreements' => 'Service-Level-Vereinbarungen',
         'Manage Customer User-Service Relations' => 'Kundenbenutzer-Service-Zuordnungen verwalten',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
@@ -3863,6 +3868,10 @@ sub Data {
         'Customer Company %s already exists!' => 'Das Kundenunternehmen %s existiert bereits!',
         'Customer company added!' => 'Kundenunternehmen hinzugefügt!',
 
+        # Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+        'Allocate Customer Companies to Service' => 'Kundenunternehmen zu Services zuordnen',
+        'Allocate Services to Customer Company' => 'Services zu Kundenunternehmen zuordnen',
+
         # Perl Module: Kernel/Modules/AdminCustomerGroup.pm
         'No configuration for \'CustomerGroupPermissionContext\' found!' =>
             'Keine Konfiguration für \'CustomerGroupPermissionContext\' gefunden!',
@@ -6618,6 +6627,8 @@ sub Data {
             'Liste aller Kundenereignisse, welche in der grafischen Benutzeroberfläche angezeigt werden sollen.',
         'Event module that updates customer users after an update of the Customer.' =>
             'Ereignis-Modul, das Kundenbenutzer aktualisiert nach einem Update des Kunden.',
+        'Event module that updates customer company service membership if the customer ID changes.' =>
+            '',
         'Event module that updates customer company object name for dynamic fields.' =>
             'Eventmodul, das den Kundenunternehmen-Objektnamen für Dynamische Felder aktualisiert.',
         'Event module that updates customer user search profiles if login changes.' =>
@@ -6802,6 +6813,8 @@ sub Data {
             'Behält alle Services in Auflistungen bei, auch, wenn sie Kind-Services von ungültigen Elementen sind.',
         'Allows default services to be selected also for non existing customers.' =>
             'Ermöglicht das Standard-Services auch für nicht angelegte Kunden ausgewählt werden können.',
+        'Defines if the Customer Company ↔ Service functionality should always be used or only as a fallback if no Customer User ↔ Services relationship exists.' =>
+            'Definiert, ob die Funktion „Kundenunternehmen ↔ Service“ immer verwendet werden soll oder nur als Fallback, wenn keine Zuordnung „Kundenbenutzer ↔ Services“ vorhanden ist.',
         'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
             'Aktiviert das Ticket Archivsystem, um ein schnelleres System zu haben, indem einige Tickets aus dem täglichen Anwendungsbereich verschoben werden. Um diese Tickets in der Suche zu finden, muss das Archiv-Flag in der Ticketsuche aktiviert werden.',
         'Controls if the ticket and article seen flags are removed when a ticket is archived.' =>
@@ -9146,6 +9159,7 @@ Ihr Helpdesk-Team
             'Ermöglicht eine Ticket-Übersicht mit einigen Ticketinformationen (Customer => 1 - zeigt auch die Kundeninformation).',
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             'Ermöglicht die Benutzung der kleinenTicketübersicht (CustomerInfo => 1 - zeigt auch die Kundeninformation ).',
+        'Always' => 'Immer',
         'Always show RichText if available' => 'RichText immer verwenden, wenn verfügbar',
         'An additional screen to add notes to a linked ticket.' => 'Ein zusätzlicher Dialog zum Hinzufügen von Notizen an ein verlinktes Ticket.',
         'Answer' => 'Beantworten',
@@ -9269,7 +9283,7 @@ Ihr Helpdesk-Team
         'Croatian' => 'Kroatisch',
         'Current action description.' => 'Beschreibung der aktuellen Aktion.',
         'Customer Administration' => 'Kundenverwaltung',
-        'Customer Companies' => 'Kunden',
+        'Customer Company ↔ Services' => 'Kundenunternehmen ↔ Services',
         'Customer IDs' => 'Kundennummern',
         'Customer Information Center Search.' => 'Kunden-Informationszentrum-Suche.',
         'Customer Information Center search.' => 'Kunden-Informationszentrum-Suche.',
@@ -9440,6 +9454,7 @@ Ihr Helpdesk-Team
         'Link Object.' => 'Link-Objekt.',
         'Link agents to groups.' => 'Agenten zu Gruppen zuordnen.',
         'Link agents to roles.' => 'Agenten zu Rollen zuordnen.',
+        'Link customer companies to services.' => 'Kundenunternehmen zu Services zuordnen.',
         'Link customer users to customers.' => 'Kundenbenutzer zu Kunden zuordnen.',
         'Link customer users to groups.' => 'Kundenbenutzer zu Gruppen zuordnen.',
         'Link customer users to services.' => 'Kundenbenutzer zu Services zuordnen.',

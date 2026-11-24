@@ -141,6 +141,16 @@
             <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
+    <Setting Name="Ticket::Service::Behavior::CustomerCompany" Required="1" Valid="1">
+        <Description Translatable="1">Defines if the Customer Company ↔ Service functionality should always be used or only as a fallback if no Customer User ↔ Services relationship exists.</Description>
+        <Navigation>Core::Ticket</Navigation>
+        <Value>
+            <Item ValueType="Select" SelectedID="1">
+                <Item ValueType="Option" Value="1" Translatable="1">Always</Item>
+                <Item ValueType="Option" Value="0" Translatable="1">Fallback</Item>
+            </Item>
+        </Value>
+    </Setting>
     <Setting Name="Ticket::ArchiveSystem" Required="1" Valid="1">
         <Description Translatable="1">Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.</Description>
         <Navigation>Core::Ticket</Navigation>

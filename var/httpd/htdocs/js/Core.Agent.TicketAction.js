@@ -130,6 +130,36 @@ Core.Agent.TicketAction = (function (TargetNS) {
 
     /**
      * @private
+     * @name UpdateServicesForCustomerID
+     * @memberof Core.Agent.TicketAction
+     * @function
+     * @description
+     *      Reload the service list for the customer ID currently in the form.
+     */
+    function UpdateServicesForCustomerID() {
+        var ServiceUpdateFields;
+
+        if (!$('#ServiceID').length) {
+            return;
+        }
+
+        if (typeof Core.Config.Get('CustomerFieldsToUpdate') !== 'undefined') {
+            ServiceUpdateFields = Core.Config.Get('CustomerFieldsToUpdate');
+        }
+        else {
+            ServiceUpdateFields = [
+                'Dest', 'SelectedCustomerUser', 'Signature', 'NextStateID', 'PriorityID', 'ServiceID', 'SLAID',
+                'CryptKeyID', 'OwnerAll', 'ResponsibleAll', 'TypeID', 'NewOwnerID', 'NewResponsibleID',
+                'NewStateID', 'NewPriorityID', 'NewQueueID'
+            ];
+        }
+
+        $('#ServiceID').prop('selectedIndex', 0);
+        Core.AJAX.FormUpdate($('#CustomerID').closest('form'), 'AJAXUpdate', 'ServiceID', ServiceUpdateFields);
+    }
+
+    /**
+     * @private
      * @name CloseCustomerIDSelection
      * @memberof Core.Agent.TicketAction
      * @function
@@ -140,6 +170,8 @@ Core.Agent.TicketAction = (function (TargetNS) {
     function CloseCustomerIDSelection(CustomerID) {
         $('#CustomerID').val(CustomerID);
         $('#ShowCustomerID').html(CustomerID);
+
+        UpdateServicesForCustomerID();
 
         Core.UI.Dialog.CloseDialog($('.Dialog'));
     }
@@ -190,6 +222,12 @@ Core.Agent.TicketAction = (function (TargetNS) {
         $('#SelectionCustomerID').on('click', function () {
             OpenCustomerIDSelection();
             return false;
+        });
+
+        // Typing a customer ID does not go through the selection dialog.
+        $('#CustomerID').on('change', function () {
+            $('#ShowCustomerID').html($(this).val());
+            UpdateServicesForCustomerID();
         });
 
         // Deactivate the fields in the template.

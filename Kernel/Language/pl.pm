@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.643470263641937;
+    $Self->{Completeness}        = 0.642583805296189;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -537,6 +537,20 @@ sub Data {
         'Please note' => 'Zwróć uwagę',
         'This customer backend is read only!' => 'Ten backend klienta jest tylko do odczytu!',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+        'Edit default services' => 'Edytuj domyślną usługę',
+        'Filter for Services' => 'Filtruj usługi',
+        'Filter for services' => 'Filtr usług',
+        'Customers' => 'Klienci',
+        'Services' => 'Usługi',
+        'Service Level Agreements' => 'Poziomy SLA',
+        'Manage Customer Company Service Relations' => '',
+        'Search Results' => 'Wyniki wyszukiwania',
+        'Customer Companies' => 'Firmy klientów',
+        'Toggle active state for all' => 'Przełącz stan aktywności dla wszystkich',
+        'Inherit from' => '',
+        'Toggle active state for %s' => 'Przełącz stan aktywności dla %s',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
         'Notice' => 'Uwaga',
         'This feature is disabled!' => 'Ta funkcja jest wyłączona!',
@@ -552,10 +566,8 @@ sub Data {
         'Select the customer:group permissions.' => 'Wybierz uprawnienia klient:grupa',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Jeśli nic nie zostało zaznaczone, wtedy nie ma uprawnień w tej grupie (zgłoszenia nie będą dostępne dla klienta).',
-        'Customers' => 'Klienci',
         'Groups' => 'Grupy',
         'Manage Customer-Group Relations' => 'Zarządzaj relacjami Klient-Grupa',
-        'Search Results' => 'Wyniki wyszukiwania',
         'Change Group Relations for Customer' => 'Zmień relacje grupy dla klienta',
         'Change Customer Relations for Group' => 'Zmień relacje klienta do grup',
         'Toggle %s Permission for all' => 'Przełącz uprawnienie %s dla wszystkich',
@@ -611,8 +623,6 @@ sub Data {
         'Manage Customer User-Customer Relations' => 'Zarządzaj relacjami Użytkownik klienta - Klient',
         'Change Customer Relations for Customer User' => 'Zmień relacje Klienta dla Użytkownika klienta',
         'Change Customer User Relations for Customer' => 'Zmień relacje Użytkownika klienta do Klienta',
-        'Toggle active state for all' => 'Przełącz stan aktywności dla wszystkich',
-        'Toggle active state for %s' => 'Przełącz stan aktywności dla %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
         'Just use this feature if you want to define group permissions for customer users.' =>
@@ -630,11 +640,6 @@ sub Data {
         'Customer User Default Groups:' => 'Domyślna Grupa Użytkownika klienta',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-        'Edit default services' => 'Edytuj domyślną usługę',
-        'Filter for Services' => 'Filtruj usługi',
-        'Filter for services' => 'Filtr usług',
-        'Services' => 'Usługi',
-        'Service Level Agreements' => 'Poziomy SLA',
         'Manage Customer User-Service Relations' => 'Zarządzaj relacjami Użytkownik klienta - Usługi',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
@@ -3867,6 +3872,10 @@ sub Data {
         'Customer Company %s already exists!' => 'Firma klienta %s już istnieje!',
         'Customer company added!' => 'Firma dodana!',
 
+        # Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+        'Allocate Customer Companies to Service' => '',
+        'Allocate Services to Customer Company' => '',
+
         # Perl Module: Kernel/Modules/AdminCustomerGroup.pm
         'No configuration for \'CustomerGroupPermissionContext\' found!' =>
             '',
@@ -6622,6 +6631,8 @@ sub Data {
             'Lista wszystkich wydarzeń związanych z CustomerCompany do wyświetlenia w interfejsie uźytkownika.',
         'Event module that updates customer users after an update of the Customer.' =>
             '',
+        'Event module that updates customer company service membership if the customer ID changes.' =>
+            '',
         'Event module that updates customer company object name for dynamic fields.' =>
             '',
         'Event module that updates customer user search profiles if login changes.' =>
@@ -6806,6 +6817,8 @@ sub Data {
             '',
         'Allows default services to be selected also for non existing customers.' =>
             'Pozwala na wybranie domyślnych serwisów dla nieistniejącyh klientów.',
+        'Defines if the Customer Company ↔ Service functionality should always be used or only as a fallback if no Customer User ↔ Services relationship exists.' =>
+            '',
         'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
             'Aktywuje archiwum złoszeń by uzyskać szybsze działanie systemu poprzez przeniesienie zgłoszeń z dziennego zakresu. By wyszukiwać te zgłoszenia flaga archiwum musi zostać aktywowana w oknie wyszukiwania zgłoszeń.',
         'Controls if the ticket and article seen flags are removed when a ticket is archived.' =>
@@ -9150,6 +9163,7 @@ Twój Zespół Helpdesk.
             'Włącza przegląd listy zgłoszeń z niektórymi informacjami o zgłoszeniach (Klient => 1 - pokazuje również informacje o kliencie).',
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             '',
+        'Always' => '',
         'Always show RichText if available' => '',
         'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => 'Odpowiedz',
@@ -9273,7 +9287,7 @@ Twój Zespół Helpdesk.
         'Croatian' => 'Chorwacki',
         'Current action description.' => '',
         'Customer Administration' => 'Zarządzanie klientami',
-        'Customer Companies' => 'Firmy klientów',
+        'Customer Company ↔ Services' => '',
         'Customer IDs' => '',
         'Customer Information Center Search.' => '',
         'Customer Information Center search.' => 'Wyszukiwanie w Centrum informacji o Kliencie.',
@@ -9444,6 +9458,7 @@ Twój Zespół Helpdesk.
         'Link Object.' => 'Połącz Obiekt.',
         'Link agents to groups.' => 'Zarządzanie relacjami Agenci <-> Grupy',
         'Link agents to roles.' => 'Zarządzanie relacjami Agenci <-> Role',
+        'Link customer companies to services.' => '',
         'Link customer users to customers.' => 'Połącz użytkowników klientów z klientami',
         'Link customer users to groups.' => 'Połącz użytkowników klientów z grupami',
         'Link customer users to services.' => 'Połącz użytkowników klientów z usługami',

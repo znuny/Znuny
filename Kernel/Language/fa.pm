@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.60116492949111;
+    $Self->{Completeness}        = 0.600336751875096;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -539,6 +539,20 @@ sub Data {
         'Please note' => '',
         'This customer backend is read only!' => '',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+        'Edit default services' => 'ویرایش خدمات پیش‌فرض',
+        'Filter for Services' => 'فیلتر برای خدمات',
+        'Filter for services' => '',
+        'Customers' => 'مشترکین',
+        'Services' => 'خدمات',
+        'Service Level Agreements' => 'توافقات سطح سرویس',
+        'Manage Customer Company Service Relations' => '',
+        'Search Results' => 'نتیجه جستجو',
+        'Customer Companies' => 'شرکت/سازمان‌های مشترک',
+        'Toggle active state for all' => 'اعمال وضعیت فعال برای همه',
+        'Inherit from' => '',
+        'Toggle active state for %s' => 'اعمال وضعیت فعال برای %s',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
         'Notice' => 'توجه',
         'This feature is disabled!' => 'این ویژگی غیر فعال است',
@@ -553,10 +567,8 @@ sub Data {
         'Select the customer:group permissions.' => 'انتخاب دسترسی‌های مشترک:گروه',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'اگرچیزی انتخاب نشود، هیچ دسترسی در این گروه موجود نیست (درخواست‌ها برای مشترک در دسترس نیست)',
-        'Customers' => 'مشترکین',
         'Groups' => 'گروه‌ها',
         'Manage Customer-Group Relations' => 'مدیریت روابط مشترک-گروه',
-        'Search Results' => 'نتیجه جستجو',
         'Change Group Relations for Customer' => 'تغییر ارتباطات گروه برای مشترک',
         'Change Customer Relations for Group' => 'تغییر ارتباطات مشترک برای گروه',
         'Toggle %s Permission for all' => 'اعمال دسترسی %s برای همه',
@@ -612,8 +624,6 @@ sub Data {
         'Manage Customer User-Customer Relations' => '',
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
-        'Toggle active state for all' => 'اعمال وضعیت فعال برای همه',
-        'Toggle active state for %s' => 'اعمال وضعیت فعال برای %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
         'Just use this feature if you want to define group permissions for customer users.' =>
@@ -631,11 +641,6 @@ sub Data {
         'Customer User Default Groups:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-        'Edit default services' => 'ویرایش خدمات پیش‌فرض',
-        'Filter for Services' => 'فیلتر برای خدمات',
-        'Filter for services' => '',
-        'Services' => 'خدمات',
-        'Service Level Agreements' => 'توافقات سطح سرویس',
         'Manage Customer User-Service Relations' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
@@ -3868,6 +3873,10 @@ sub Data {
         'Customer Company %s already exists!' => 'ضوابط شرکت %s قبل وجود دارد!',
         'Customer company added!' => 'شرکت مشترک افزوده شد.',
 
+        # Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+        'Allocate Customer Companies to Service' => '',
+        'Allocate Services to Customer Company' => '',
+
         # Perl Module: Kernel/Modules/AdminCustomerGroup.pm
         'No configuration for \'CustomerGroupPermissionContext\' found!' =>
             '',
@@ -6623,6 +6632,8 @@ sub Data {
             'فهرست از تمام وقایع CustomerCompany در رابط کاربری گرافیکی نمایش داده می شود.',
         'Event module that updates customer users after an update of the Customer.' =>
             'ماژول رویداد که به روز رسانی به کاربران مشتری پس از به روز رسانی از مشتری می باشد.',
+        'Event module that updates customer company service membership if the customer ID changes.' =>
+            '',
         'Event module that updates customer company object name for dynamic fields.' =>
             '',
         'Event module that updates customer user search profiles if login changes.' =>
@@ -6807,6 +6818,8 @@ sub Data {
             'حفظ تمام خدمات در لیست حتی اگر آنها کودکان از عناصر نامعتبر است.',
         'Allows default services to be selected also for non existing customers.' =>
             'اجازه می دهد تا خدمات به طور پیش فرض به همچنین برای مشتریان غیر موجود انتخاب شود.',
+        'Defines if the Customer Company ↔ Service functionality should always be used or only as a fallback if no Customer User ↔ Services relationship exists.' =>
+            '',
         'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
             'سیستم آرشیو درخواست را با انتقال برخی درخواست‌ها به خارج از ناحیه روزانه به منظور داشتن سیستمی سریع‌تر، فعال می‌کند. برای جستجوی این درخواست‌ها باید چک آرشیو در جستجوی درخواست انتخاب شده باشد.',
         'Controls if the ticket and article seen flags are removed when a ticket is archived.' =>
@@ -9152,6 +9165,7 @@ Thanks for your help!
             'اجازه می دهد تا داشتن یک دید کلی قطع متوسط ​​بلیط (CustomerInfo => 1 - نشان می دهد نیز اطلاعات مربوط به مشتری).',
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             'اجازه می دهد تا داشتن یک دید کلی فرمت کوچک بلیط (CustomerInfo => 1 - نشان می دهد نیز اطلاعات مربوط به مشتری).',
+        'Always' => '',
         'Always show RichText if available' => 'همیشه RichText  نشان می دهد اگر موجود باشد',
         'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => 'پاسخ',
@@ -9275,7 +9289,7 @@ Thanks for your help!
         'Croatian' => 'کرواتی',
         'Current action description.' => '',
         'Customer Administration' => 'اداره مشتری',
-        'Customer Companies' => 'شرکت/سازمان‌های مشترک',
+        'Customer Company ↔ Services' => '',
         'Customer IDs' => '',
         'Customer Information Center Search.' => ' جستجو مرکز اطلاعات مشتری.',
         'Customer Information Center search.' => '',
@@ -9446,6 +9460,7 @@ Thanks for your help!
         'Link Object.' => 'شی لینک.',
         'Link agents to groups.' => 'برقراری ارتباط بین کارشناسان و گروه‌ها',
         'Link agents to roles.' => 'برقراری ارتباط بین کارشناسان و نقش‌ها',
+        'Link customer companies to services.' => '',
         'Link customer users to customers.' => '',
         'Link customer users to groups.' => '',
         'Link customer users to services.' => '',

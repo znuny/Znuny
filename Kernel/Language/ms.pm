@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.527743715511956;
+    $Self->{Completeness}        = 0.527016684524721;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -533,6 +533,20 @@ sub Data {
         'Please note' => '',
         'This customer backend is read only!' => '',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+        'Edit default services' => 'Standard Perkhidmatan sunting',
+        'Filter for Services' => 'Tapisan Perkhidmatan',
+        'Filter for services' => '',
+        'Customers' => 'Pelanggan',
+        'Services' => 'Servis',
+        'Service Level Agreements' => 'Tahap Persetujuan Perkhidmatan',
+        'Manage Customer Company Service Relations' => '',
+        'Search Results' => 'Search Results',
+        'Customer Companies' => 'Firma Pelanggan',
+        'Toggle active state for all' => 'ubah keadaan aktif untuk semua',
+        'Inherit from' => '',
+        'Toggle active state for %s' => 'ubah keadaan aktif untuk %s',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
         'Notice' => 'Catatan',
         'This feature is disabled!' => 'Ciri ini dilumpuhkan!',
@@ -547,10 +561,8 @@ sub Data {
         'Select the customer:group permissions.' => 'Pilih pelanggan: dari kumpulan hak',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Jika tiada apa yang dipilih, maka terdapat tiada kebenaran dalam kumpulan ini (tiket tidak akan disediakan untuk pelanggan).',
-        'Customers' => 'Pelanggan',
         'Groups' => 'Kumpulan',
         'Manage Customer-Group Relations' => 'Pelanggan tugasan kumpulan Mengurus',
-        'Search Results' => 'Search Results',
         'Change Group Relations for Customer' => 'Kumpulan tugasan untuk menguruskan pelanggan',
         'Change Customer Relations for Group' => 'Tukar Perhubungan Pelanggan untuk Kumpulan',
         'Toggle %s Permission for all' => 'Toggle Kebenaran %s untuk semua',
@@ -606,8 +618,6 @@ sub Data {
         'Manage Customer User-Customer Relations' => '',
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
-        'Toggle active state for all' => 'ubah keadaan aktif untuk semua',
-        'Toggle active state for %s' => 'ubah keadaan aktif untuk %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
         'Just use this feature if you want to define group permissions for customer users.' =>
@@ -625,11 +635,6 @@ sub Data {
         'Customer User Default Groups:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-        'Edit default services' => 'Standard Perkhidmatan sunting',
-        'Filter for Services' => 'Tapisan Perkhidmatan',
-        'Filter for services' => '',
-        'Services' => 'Servis',
-        'Service Level Agreements' => 'Tahap Persetujuan Perkhidmatan',
         'Manage Customer User-Service Relations' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
@@ -3862,6 +3867,10 @@ sub Data {
         'Customer Company %s already exists!' => 'Syarikat Pengguna %s telah wujud!',
         'Customer company added!' => 'Syarikat pelanggan ditambah!',
 
+        # Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+        'Allocate Customer Companies to Service' => '',
+        'Allocate Services to Customer Company' => '',
+
         # Perl Module: Kernel/Modules/AdminCustomerGroup.pm
         'No configuration for \'CustomerGroupPermissionContext\' found!' =>
             '',
@@ -6617,6 +6626,8 @@ sub Data {
             'Senarai semua acara PelangganSyarikat untuk dipaparkan dalam GUI.',
         'Event module that updates customer users after an update of the Customer.' =>
             'Modul acara yang mengemaskini pengguna pelanggan selepas satu kemas kini Pelanggan.',
+        'Event module that updates customer company service membership if the customer ID changes.' =>
+            '',
         'Event module that updates customer company object name for dynamic fields.' =>
             '',
         'Event module that updates customer user search profiles if login changes.' =>
@@ -6801,6 +6812,8 @@ sub Data {
             'Mengekalkan semua servis dalam penyenaraian walaupun ianya adalah anak kepada elemen yang tidak sah.',
         'Allows default services to be selected also for non existing customers.' =>
             'Membolehkan perkhidmatan asal dipilih juga untuk pelanggan yang tidak wujud.',
+        'Defines if the Customer Company ↔ Service functionality should always be used or only as a fallback if no Customer User ↔ Services relationship exists.' =>
+            '',
         'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
             'Mengaktifkan sistem arkib tiket untuk mempunyai sistem yang lebih laju dengan memindahkan sebahagian tiket keluar daripada skop harian. Untuk mencari tiket ini, bendera arkib mestilah diaktifkan pada carian tiket.',
         'Controls if the ticket and article seen flags are removed when a ticket is archived.' =>
@@ -9149,6 +9162,7 @@ Kumpulan MejaBantuan Anda
             'Membolehkan mempunyai format tiket gambaran sederhana (CustomerInfo => 1 - juga menunjukkan maklumat pelanggan).',
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             'Membolehkan mempunyai format tiket gambaran kecil (InfoPelanggan => 1 - juga menunjukkan maklumat pelanggan).',
+        'Always' => '',
         'Always show RichText if available' => '',
         'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => 'Jawapan',
@@ -9272,7 +9286,7 @@ Kumpulan MejaBantuan Anda
         'Croatian' => 'Croatia',
         'Current action description.' => '',
         'Customer Administration' => 'Pentadbiran Pelanggan',
-        'Customer Companies' => 'Firma Pelanggan',
+        'Customer Company ↔ Services' => '',
         'Customer IDs' => '',
         'Customer Information Center Search.' => '',
         'Customer Information Center search.' => '',
@@ -9443,6 +9457,7 @@ Kumpulan MejaBantuan Anda
         'Link Object.' => '',
         'Link agents to groups.' => 'Pautan ejen kepada kumpulan.',
         'Link agents to roles.' => 'Pautan ejen kepada peranan.',
+        'Link customer companies to services.' => '',
         'Link customer users to customers.' => '',
         'Link customer users to groups.' => '',
         'Link customer users to services.' => '',

@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.229920294297977;
+    $Self->{Completeness}        = 0.229603551201592;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -538,6 +538,20 @@ sub Data {
         'Please note' => '',
         'This customer backend is read only!' => '',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+        'Edit default services' => 'Uredi privzete storitve',
+        'Filter for Services' => 'Filter za storitve',
+        'Filter for services' => '',
+        'Customers' => 'Stranke',
+        'Services' => 'Storitve',
+        'Service Level Agreements' => 'SLA',
+        'Manage Customer Company Service Relations' => '',
+        'Search Results' => 'Rezultati iskanja',
+        'Customer Companies' => 'Podjetja stranke',
+        'Toggle active state for all' => 'Preklopi na aktivno stanje za vse',
+        'Inherit from' => '',
+        'Toggle active state for %s' => 'Preklopi na aktivno stanje za %s',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
         'Notice' => 'Opomba',
         'This feature is disabled!' => 'Ta funkcija je izključena!',
@@ -552,10 +566,8 @@ sub Data {
         'Select the customer:group permissions.' => 'Izberi dovoljenja za uporabnika:skupina',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Če ni nič izbrano, potem ni nobenih dovoljenj v tej skupini (zahtevki ne bodo na voljo za stranke).',
-        'Customers' => 'Stranke',
         'Groups' => 'Skupine',
         'Manage Customer-Group Relations' => 'Upravljanje članstva strank v skupini',
-        'Search Results' => 'Rezultati iskanja',
         'Change Group Relations for Customer' => 'Spremeni povezave s skupinami za stranko',
         'Change Customer Relations for Group' => 'Spremeni povezave stank z skupinami',
         'Toggle %s Permission for all' => 'Spremeni %s dovolenja za vse',
@@ -611,8 +623,6 @@ sub Data {
         'Manage Customer User-Customer Relations' => '',
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
-        'Toggle active state for all' => 'Preklopi na aktivno stanje za vse',
-        'Toggle active state for %s' => 'Preklopi na aktivno stanje za %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
         'Just use this feature if you want to define group permissions for customer users.' =>
@@ -630,11 +640,6 @@ sub Data {
         'Customer User Default Groups:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-        'Edit default services' => 'Uredi privzete storitve',
-        'Filter for Services' => 'Filter za storitve',
-        'Filter for services' => '',
-        'Services' => 'Storitve',
-        'Service Level Agreements' => 'SLA',
         'Manage Customer User-Service Relations' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
@@ -3867,6 +3872,10 @@ sub Data {
         'Customer Company %s already exists!' => '',
         'Customer company added!' => '',
 
+        # Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+        'Allocate Customer Companies to Service' => '',
+        'Allocate Services to Customer Company' => '',
+
         # Perl Module: Kernel/Modules/AdminCustomerGroup.pm
         'No configuration for \'CustomerGroupPermissionContext\' found!' =>
             '',
@@ -6622,6 +6631,8 @@ sub Data {
             '',
         'Event module that updates customer users after an update of the Customer.' =>
             '',
+        'Event module that updates customer company service membership if the customer ID changes.' =>
+            '',
         'Event module that updates customer company object name for dynamic fields.' =>
             '',
         'Event module that updates customer user search profiles if login changes.' =>
@@ -6805,6 +6816,8 @@ sub Data {
         'Retains all services in listings even if they are children of invalid elements.' =>
             '',
         'Allows default services to be selected also for non existing customers.' =>
+            '',
+        'Defines if the Customer Company ↔ Service functionality should always be used or only as a fallback if no Customer User ↔ Services relationship exists.' =>
             '',
         'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
             'Aktiviranje arhiva sistema za pospešitev dela, odstranjevanje nekaterih zahtevkov iz dnevnega spremljanja. Če želite poiskati zahtevek, mora biti označen arhiv omogočen za iskanje zahtevkov.',
@@ -9140,6 +9153,7 @@ Thanks for your help!
             '',
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             '',
+        'Always' => '',
         'Always show RichText if available' => '',
         'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => 'Odgovor',
@@ -9263,7 +9277,7 @@ Thanks for your help!
         'Croatian' => '',
         'Current action description.' => '',
         'Customer Administration' => '',
-        'Customer Companies' => 'Podjetja stranke',
+        'Customer Company ↔ Services' => '',
         'Customer IDs' => '',
         'Customer Information Center Search.' => '',
         'Customer Information Center search.' => '',
@@ -9434,6 +9448,7 @@ Thanks for your help!
         'Link Object.' => '',
         'Link agents to groups.' => 'Poveži operaterje s skupinami.',
         'Link agents to roles.' => 'Poveži operaterje z vlogami.',
+        'Link customer companies to services.' => '',
         'Link customer users to customers.' => '',
         'Link customer users to groups.' => '',
         'Link customer users to services.' => '',

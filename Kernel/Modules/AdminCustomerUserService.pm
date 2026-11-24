@@ -30,10 +30,12 @@ sub new {
 sub Run {
     my ( $Self, %Param ) = @_;
 
-    my $LayoutObject       = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
-    my $ParamObject        = $Kernel::OM->Get('Kernel::System::Web::Request');
-    my $ServiceObject      = $Kernel::OM->Get('Kernel::System::Service');
-    my $CustomerUserObject = $Kernel::OM->Get('Kernel::System::CustomerUser');
+    my $LayoutObject          = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+    my $ParamObject           = $Kernel::OM->Get('Kernel::System::Web::Request');
+    my $ServiceObject         = $Kernel::OM->Get('Kernel::System::Service');
+    my $CustomerUserObject    = $Kernel::OM->Get('Kernel::System::CustomerUser');
+    my $ConfigObject          = $Kernel::OM->Get('Kernel::Config');
+    my $CustomerCompanyObject = $Kernel::OM->Get('Kernel::System::CustomerCompany');
 
     # set search limit
     my $SearchLimit = 200;
@@ -66,12 +68,63 @@ sub Run {
             UserID       => $Self->{UserID},
         );
 
+        my %InheritData;
+
         if ( $Param{CustomerUserLogin} eq '<DEFAULT>' ) {
             $Param{Name} = q{};
         }
         else {
             $Param{Name} = $CustomerUserObject->CustomerName( UserLogin => $Param{CustomerUserLogin} )
                 . " ($Param{CustomerUserLogin})";
+
+            my $UseCompanyServicesAlways = $ConfigObject->Get('Ticket::Service::Behavior::CustomerCompany');
+
+            if ( $UseCompanyServicesAlways || !scalar keys %ServiceMemberList ) {
+
+                my @CustomerIDs = $CustomerUserObject->CustomerIDs(
+                    User => $Param{CustomerUserLogin},
+                );
+
+                my %CompanyServices;
+                my %ServiceIDCompanyID;
+                for my $CustomerID (@CustomerIDs) {
+
+                    my %CustomerCompanyServiceResult = $ServiceObject->CustomerCompanyServiceMemberList(
+                        CustomerID => $CustomerID,
+                        Result     => 'HASH',
+                    );
+
+                    @CompanyServices{ keys %CustomerCompanyServiceResult } = values %CustomerCompanyServiceResult;
+
+                    for my $ServiceID ( sort keys %CustomerCompanyServiceResult ) {
+                        $ServiceIDCompanyID{$ServiceID} = $CustomerID;
+                    }
+                }
+
+                for my $ServiceID ( sort keys %CompanyServices ) {
+
+                    my $CustomerID      = $ServiceIDCompanyID{$ServiceID};
+                    my %CustomerCompany = $CustomerCompanyObject->CustomerCompanyGet(
+                        CustomerID => $CustomerID,
+                    );
+                    my $InheritText = $CustomerCompany{CustomerCompanyName} . ' (' . $CustomerID . ')';
+
+                    $InheritData{$ServiceID} = $InheritText;
+                }
+            }
+
+            if ( !scalar keys %ServiceMemberList && !scalar keys %InheritData ) {
+
+                my %DefaultServices = $ServiceObject->CustomerUserServiceMemberList(
+                    CustomerUserLogin => '<DEFAULT>',
+                    Result            => 'HASH',
+                    DefaultServices   => 0,
+                );
+
+                for my $ServiceID ( sort keys %DefaultServices ) {
+                    $InheritData{$ServiceID} = 'Default Service';
+                }
+            }
         }
 
         $Output .= $Self->_Change(
@@ -79,6 +132,7 @@ sub Run {
             Name               => $Param{Name},
             Data               => \%ServiceData,
             Selected           => \%ServiceMemberList,
+            InheritFrom        => \%InheritData,
             CustomerUserSearch => $Param{CustomerUserSearch},
             ServiceSearch      => $Param{ServiceSearch},
             SearchLimit        => $SearchLimit,
@@ -148,12 +202,62 @@ sub Run {
             $CustomerData{ $User{UserID} } = $CustomerUser;
         }
 
+        my %DefaultServices = $ServiceObject->CustomerUserServiceMemberList(
+            CustomerUserLogin => '<DEFAULT>',
+            Result            => 'HASH',
+            DefaultServices   => 0,
+        );
+
+        my $UseCompanyServicesAlways = $ConfigObject->Get('Ticket::Service::Behavior::CustomerCompany');
+
+        my %InheritData;
+        if ( $DefaultServices{ $Param{ServiceID} } ) {
+
+            USER:
+            for my $UserID ( sort keys %CustomerData ) {
+
+                my %ServiceMemberList = $ServiceObject->CustomerUserServiceMemberList(
+                    CustomerUserLogin      => $UserID,
+                    Result                 => 'HASH',
+                    DefaultServices        => 0,
+                    CustomerCompanyService => 1,
+                );
+
+                next USER if scalar keys %ServiceMemberList;
+
+                $InheritData{$UserID} = 'Default Service';
+            }
+        }
+        if ( $UseCompanyServicesAlways || !scalar keys %CustomerUserMemberList ) {
+
+            for my $UserID ( sort keys %CustomerData ) {
+
+                my @CustomerIDs = $CustomerUserObject->CustomerIDs(
+                    User => $UserID,
+                );
+
+                CUSTOMERID:
+                for my $CustomerID (@CustomerIDs) {
+
+                    my %CustomerCompanyServiceResult = $ServiceObject->CustomerCompanyServiceMemberList(
+                        CustomerID => $CustomerID,
+                        Result     => 'HASH',
+                    );
+
+                    if ( $CustomerCompanyServiceResult{ $Param{ServiceID} } ) {
+                        $InheritData{$UserID} = 'Customer Company';
+                    }
+                }
+            }
+        }
+
         $Output .= $Self->_Change(
             ID                 => $Param{ServiceID},
             Name               => $Service{Name},
             ItemList           => \@CustomerUserKeyList,
             Data               => \%CustomerData,
             Selected           => \%CustomerUserMemberList,
+            InheritFrom        => \%InheritData,
             CustomerUserSearch => $Param{CustomerUserSearch},
             SearchLimit        => $SearchLimit,
             Type               => 'Service',
@@ -429,7 +533,7 @@ sub _Change {
         },
     );
 
-    my $ColSpan = 2;
+    my $ColSpan = 3;
 
     if ( $NeType eq 'CustomerUser' ) {
 
@@ -482,11 +586,33 @@ sub _Change {
 
     }
 
+    $Param{InheritFrom} ||= {};
+
+    my $HideInheritFromColumn = 'style="display: none;"';
+    if ( $Param{Type} ne 'CustomerUser' || $Param{ID} ne '<DEFAULT>' ) {
+        $HideInheritFromColumn = '';
+
+        $LayoutObject->Block(
+            Name => 'InheritFromColumn',
+        );
+    }
+
     # output rows
     for my $ID ( sort { uc( $Data{$a} ) cmp uc( $Data{$b} ) } keys %Data ) {
 
+        # A service the user already has must stay editable. A disabled checkbox
+        # is not sent on save, and the save would delete that direct link.
+        my $Disabled = '';
+        if ( $Param{InheritFrom}->{$ID} && !$Param{Selected}->{$ID} ) {
+            $Disabled = "disabled='disabled'";
+        }
+
         # set checked
-        my $Checked = $Param{Selected}->{$ID} ? "checked='checked'" : '';
+        my $Checked = ( $Param{Selected}->{$ID} || $Param{InheritFrom}->{$ID} ) ? "checked='checked'" : '';
+
+        # set data-inherit checkbox information
+        my $InheritFrom = $Param{InheritFrom}->{$ID} ? "data-inherit='" . $Param{InheritFrom}->{$ID} . "'" : '';
+        $InheritFrom =~ s{\s+}{}xmsg;
 
         # Recover original Service Name
         if ( $NeType eq 'Service' ) {
@@ -497,12 +623,16 @@ sub _Change {
         $LayoutObject->Block(
             Name => 'AllocateItemRow',
             Data => {
-                ActionNeHome => 'Admin' . $NeType,
-                Name         => $Data{$ID},
-                ID           => $ID,
-                Checked      => $Checked,
-                SubactionRow => $Subaction{$NeType},
-                IDRowStrg    => $IDStrg{$NeType},
+                ActionNeHome          => 'Admin' . $NeType,
+                Name                  => $Data{$ID},
+                ID                    => $ID,
+                Checked               => $Checked,
+                Disabled              => $Disabled,
+                InheritFrom           => $InheritFrom,
+                InheritFromText       => $Param{InheritFrom}->{$ID},
+                HideInheritFromColumn => $HideInheritFromColumn,
+                SubactionRow          => $Subaction{$NeType},
+                IDRowStrg             => $IDStrg{$NeType},
 
             },
         );

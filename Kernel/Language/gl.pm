@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.460453709380748;
+    $Self->{Completeness}        = 0.459819378539721;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -534,6 +534,20 @@ sub Data {
         'Please note' => 'Por favor lembre',
         'This customer backend is read only!' => '',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+        'Edit default services' => 'Edite os servizos predeterminados',
+        'Filter for Services' => 'Filtrar por Servicios',
+        'Filter for services' => '',
+        'Customers' => 'Clientes',
+        'Services' => 'Servizos',
+        'Service Level Agreements' => 'Acordos de nivel de servizos',
+        'Manage Customer Company Service Relations' => '',
+        'Search Results' => 'Resultados da busca',
+        'Customer Companies' => 'Empresas do cliente',
+        'Toggle active state for all' => 'Conmute o estado activo a todos',
+        'Inherit from' => '',
+        'Toggle active state for %s' => 'Conmutar o estado activo para %s',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
         'Notice' => 'Aviso',
         'This feature is disabled!' => 'Esta funcionalidade está desactivada!',
@@ -548,10 +562,8 @@ sub Data {
         'Select the customer:group permissions.' => 'Seleccionar os permisos cliente:grupo.',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'Se non hai nada seleccionado, daquela non hai permisos neste grupo (os tíckets non estarán a disposición do cliente).',
-        'Customers' => 'Clientes',
         'Groups' => 'Grupos',
         'Manage Customer-Group Relations' => 'Xestionar as relacións cliente-grupo',
-        'Search Results' => 'Resultados da busca',
         'Change Group Relations for Customer' => 'Cambiar as relacións de grupo do cliente',
         'Change Customer Relations for Group' => 'Cambiar as relacións de cliente do grupo',
         'Toggle %s Permission for all' => 'Conmutar o permiso %s para todos',
@@ -607,8 +619,6 @@ sub Data {
         'Manage Customer User-Customer Relations' => '',
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
-        'Toggle active state for all' => 'Conmute o estado activo a todos',
-        'Toggle active state for %s' => 'Conmutar o estado activo para %s',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
         'Just use this feature if you want to define group permissions for customer users.' =>
@@ -626,11 +636,6 @@ sub Data {
         'Customer User Default Groups:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-        'Edit default services' => 'Edite os servizos predeterminados',
-        'Filter for Services' => 'Filtrar por Servicios',
-        'Filter for services' => '',
-        'Services' => 'Servizos',
-        'Service Level Agreements' => 'Acordos de nivel de servizos',
         'Manage Customer User-Service Relations' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
@@ -3863,6 +3868,10 @@ sub Data {
         'Customer Company %s already exists!' => '',
         'Customer company added!' => 'Empresa do cliente engadida!',
 
+        # Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+        'Allocate Customer Companies to Service' => '',
+        'Allocate Services to Customer Company' => '',
+
         # Perl Module: Kernel/Modules/AdminCustomerGroup.pm
         'No configuration for \'CustomerGroupPermissionContext\' found!' =>
             '',
@@ -6618,6 +6627,8 @@ sub Data {
             'Lista de tódolos eventos de ClienteCompañia para ser mostrados na GUI.',
         'Event module that updates customer users after an update of the Customer.' =>
             'Módulo de evento que actualiza os usuarios clientes despois de unha actualización de Cliente.',
+        'Event module that updates customer company service membership if the customer ID changes.' =>
+            '',
         'Event module that updates customer company object name for dynamic fields.' =>
             '',
         'Event module that updates customer user search profiles if login changes.' =>
@@ -6802,6 +6813,8 @@ sub Data {
             'Retén tódolos servizos en listas incluso se son fillos de elementos invalidos.',
         'Allows default services to be selected also for non existing customers.' =>
             'Permite que os servizos por omisión sexan seleccionados tamén para clientes non existentes.',
+        'Defines if the Customer Company ↔ Service functionality should always be used or only as a fallback if no Customer User ↔ Services relationship exists.' =>
+            '',
         'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
             'Activa o sistema de arquivo de ticket para ter un sistema máis rápido movendo algúns tickets fóra do alcance diario. Para buscar estes tickets, a bandeira de arquivo ten que estar permitida na busca de ticket.',
         'Controls if the ticket and article seen flags are removed when a ticket is archived.' =>
@@ -9136,6 +9149,7 @@ Thanks for your help!
             'Permite ter unha visión xeral de ticket de formato medio (CustomerInfo => 1 - mostra tamén a información de clientes).',
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             'Permite ter unha visión xeral de ticket de formato pequeno (CustomerInfo => 1 - mostra tamén a información de clientes).',
+        'Always' => '',
         'Always show RichText if available' => '',
         'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => 'Resposta',
@@ -9259,7 +9273,7 @@ Thanks for your help!
         'Croatian' => '',
         'Current action description.' => '',
         'Customer Administration' => 'Administración de clientes',
-        'Customer Companies' => 'Empresas do cliente',
+        'Customer Company ↔ Services' => '',
         'Customer IDs' => '',
         'Customer Information Center Search.' => '',
         'Customer Information Center search.' => '',
@@ -9430,6 +9444,7 @@ Thanks for your help!
         'Link Object.' => '',
         'Link agents to groups.' => 'Ligar axentes a grupos.',
         'Link agents to roles.' => 'Ligar axentes a papeis.',
+        'Link customer companies to services.' => '',
         'Link customer users to customers.' => '',
         'Link customer users to groups.' => '',
         'Link customer users to services.' => '',

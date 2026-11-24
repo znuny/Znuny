@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.271765787860208;
+    $Self->{Completeness}        = 0.271391397520282;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -536,6 +536,20 @@ sub Data {
         'Please note' => '',
         'This customer backend is read only!' => '',
 
+        # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerCompanyService.tt
+        'Edit default services' => 'तयशुदा सेवाएं संपादित करें',
+        'Filter for Services' => 'सेवाओं के लिए निस्पादक',
+        'Filter for services' => '',
+        'Customers' => 'ग्राहकों',
+        'Services' => 'सेवाएँ',
+        'Service Level Agreements' => 'सेवा लेवल समझौतॆ',
+        'Manage Customer Company Service Relations' => '',
+        'Search Results' => 'खोज परिणाम:',
+        'Customer Companies' => 'ग्राहक की कंपनियां',
+        'Toggle active state for all' => 'सभी के लिए सक्रिय स्थिति स्विच करें',
+        'Inherit from' => '',
+        'Toggle active state for %s' => 'सक्रिय स्थिति स्विच करें %s के लिए',
+
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerGroup.tt
         'Notice' => 'समन',
         'This feature is disabled!' => 'यह सुविधा निष्क्रिय है।',
@@ -550,10 +564,8 @@ sub Data {
         'Select the customer:group permissions.' => 'ग्राहक:समूह अनुमतियाँ चुनें।',
         'If nothing is selected, then there are no permissions in this group (tickets will not be available for the customer).' =>
             'अगर कुछ भी नहीं चुना जाता है,तो फिर इस समूह में कोई अनुमतियाँ नहीं हैं(टिकट ग्राहकों के लिए उपलब्ध नहीं होगा)। ',
-        'Customers' => 'ग्राहकों',
         'Groups' => 'समूहों',
         'Manage Customer-Group Relations' => 'ग्राहक-समूह संबंधों का प्रबंधन करें',
-        'Search Results' => 'खोज परिणाम:',
         'Change Group Relations for Customer' => 'ग्राहक के लिए समूह संबंधों को बदलें',
         'Change Customer Relations for Group' => 'समूह के लिए ग्राहक संबंधों को बदलें',
         'Toggle %s Permission for all' => 'स्विच %s सभी के लिए अनुमति है',
@@ -609,8 +621,6 @@ sub Data {
         'Manage Customer User-Customer Relations' => '',
         'Change Customer Relations for Customer User' => '',
         'Change Customer User Relations for Customer' => '',
-        'Toggle active state for all' => 'सभी के लिए सक्रिय स्थिति स्विच करें',
-        'Toggle active state for %s' => 'सक्रिय स्थिति स्विच करें %s के लिए',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserGroup.tt
         'Just use this feature if you want to define group permissions for customer users.' =>
@@ -628,11 +638,6 @@ sub Data {
         'Customer User Default Groups:' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminCustomerUserService.tt
-        'Edit default services' => 'तयशुदा सेवाएं संपादित करें',
-        'Filter for Services' => 'सेवाओं के लिए निस्पादक',
-        'Filter for services' => '',
-        'Services' => 'सेवाएँ',
-        'Service Level Agreements' => 'सेवा लेवल समझौतॆ',
         'Manage Customer User-Service Relations' => '',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminDynamicField.tt
@@ -3865,6 +3870,10 @@ sub Data {
         'Customer Company %s already exists!' => '',
         'Customer company added!' => '',
 
+        # Perl Module: Kernel/Modules/AdminCustomerCompanyService.pm
+        'Allocate Customer Companies to Service' => '',
+        'Allocate Services to Customer Company' => '',
+
         # Perl Module: Kernel/Modules/AdminCustomerGroup.pm
         'No configuration for \'CustomerGroupPermissionContext\' found!' =>
             '',
@@ -6620,6 +6629,8 @@ sub Data {
             '',
         'Event module that updates customer users after an update of the Customer.' =>
             '',
+        'Event module that updates customer company service membership if the customer ID changes.' =>
+            '',
         'Event module that updates customer company object name for dynamic fields.' =>
             '',
         'Event module that updates customer user search profiles if login changes.' =>
@@ -6803,6 +6814,8 @@ sub Data {
         'Retains all services in listings even if they are children of invalid elements.' =>
             '',
         'Allows default services to be selected also for non existing customers.' =>
+            '',
+        'Defines if the Customer Company ↔ Service functionality should always be used or only as a fallback if no Customer User ↔ Services relationship exists.' =>
             '',
         'Activates the ticket archive system to have a faster system by moving some tickets out of the daily scope. To search for these tickets, the archive flag has to be enabled in the ticket search.' =>
             'प्रणाली तेज बनाने के लिए टिकटों को दैनिक दायरे से बाहर ले जाने वाले टिकट संग्रह प्रणाली को सक्रिय करता है। इन टिकटों को खोजने के लिए,संग्रह चिह्नक को टिकट खोज में सक्रिय किया जाना चाहिए।',
@@ -9138,6 +9151,7 @@ Thanks for your help!
             'एक मध्यम प्रारूप टिकट अवलोकन होने की अनुमति देता है(ग्राहक जानकारी =>1 - यह भी ग्राहकों की जानकारी दिखाता है)।',
         'Allows having a small format ticket overview (CustomerInfo => 1 - shows also the customer information).' =>
             'एक छोटे प्रारूप टिकट अवलोकन होने की अनुमति देता है(ग्राहक जानकारी =>1 - यह भी ग्राहकों की जानकारी दिखाता है)।',
+        'Always' => '',
         'Always show RichText if available' => '',
         'An additional screen to add notes to a linked ticket.' => '',
         'Answer' => '',
@@ -9261,7 +9275,7 @@ Thanks for your help!
         'Croatian' => '',
         'Current action description.' => '',
         'Customer Administration' => '',
-        'Customer Companies' => 'ग्राहक की कंपनियां',
+        'Customer Company ↔ Services' => '',
         'Customer IDs' => '',
         'Customer Information Center Search.' => '',
         'Customer Information Center search.' => '',
@@ -9432,6 +9446,7 @@ Thanks for your help!
         'Link Object.' => '',
         'Link agents to groups.' => 'प्रतिनिधिओं को समूहों से जोडें।',
         'Link agents to roles.' => 'प्रतिनिधिओं को भूमिकाओं से जोडें।',
+        'Link customer companies to services.' => '',
         'Link customer users to customers.' => '',
         'Link customer users to groups.' => '',
         'Link customer users to services.' => '',
