@@ -3515,10 +3515,6 @@ msgid "Controller mapping for Invoker"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "The controller that the invoker should send requests to. Variables marked by a ':' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password)."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Valid request command for Invoker"
 msgstr ""
 
@@ -26552,4 +26548,8 @@ msgstr "Vremenski prozor u sekundama za rate limiting samoregistracije. Pokušaj
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
 msgstr "HTTPS URL prefiksi koje XSLT mapiranje smije učitati pomoću xsl:import, xsl:include ili document(). Svaki unos mora započinjati s https:// i uspoređuje se točno, uključujući velika i mala slova, s početkom zatraženog URL-a. Prefiks glavnog računala treba završavati kosom crtom, na primjer https://znuny.de/. Prefiks može imenovati i jedan resurs, na primjer https://blabla.com/xslt/onlythisfile.txt. Prazan popis zabranjuje svaki mrežni URL. Unosi koji ne počinju s https:// zanemaruju se."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "The controller that the invoker should send requests to. Variables marked by a ':' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
+msgstr "Kontroler kojem invoker treba slati zahtjeve. Varijable označene s ':' zamjenjuju se iz odlaznih podataka nakon mapiranja (ako je konfigurirano). Ugniježđena polja koriste točku (npr. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
 

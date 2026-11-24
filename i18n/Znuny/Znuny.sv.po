@@ -3515,10 +3515,6 @@ msgid "Controller mapping for Invoker"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "The controller that the invoker should send requests to. Variables marked by a ':' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password)."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Valid request command for Invoker"
 msgstr ""
 
@@ -26552,4 +26548,8 @@ msgstr "Tidsfönster i sekunder för rate limiting vid självregistrering. Förs
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
 msgstr "HTTPS-URL-prefix som en XSLT-mappning får läsa in med xsl:import, xsl:include eller document(). Varje post måste börja med https:// och jämförs exakt, inklusive skiftläge, med början av den begärda URL:en. Ett värdprefix bör sluta med ett snedstreck, till exempel https://znuny.de/. Ett prefix kan också namnge en enskild resurs, till exempel https://blabla.com/xslt/onlythisfile.txt. En tom lista nekar alla nätverks-URL:er. Poster som inte börjar med https:// ignoreras."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "The controller that the invoker should send requests to. Variables marked by a ':' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
+msgstr "Den controller som anroparen ska skicka förfrågningar till. Variabler markerade med ':' ersätts från utgående data efter mappningen (om den är konfigurerad). Nästlade fält använder en punkt (t.ex. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
 

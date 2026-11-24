@@ -3537,10 +3537,6 @@ msgid "Controller mapping for Invoker"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "The controller that the invoker should send requests to. Variables marked by a ':' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password)."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Valid request command for Invoker"
 msgstr ""
 
@@ -26587,4 +26583,8 @@ msgstr "Janela temporal em segundos para rate limiting de autorregisto. As tenta
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
 msgstr "Prefixos de URL HTTPS que um mapeamento XSLT pode carregar com xsl:import, xsl:include ou document(). Cada entrada deve começar por https:// e é comparada exatamente, incluindo maiúsculas e minúsculas, com o início do URL pedido. Um prefixo de anfitrião deve terminar com uma barra, por exemplo https://znuny.de/. Um prefixo também pode designar um único recurso, por exemplo https://blabla.com/xslt/onlythisfile.txt. Uma lista vazia recusa todos os URL de rede. As entradas que não começam por https:// são ignoradas."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "The controller that the invoker should send requests to. Variables marked by a ':' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
+msgstr "O controlador para o qual o invoker deve enviar os pedidos. As variáveis marcadas com ':' são substituídas a partir dos dados de saída após o mapeamento (se estiver configurado). Os campos imbricados usam um ponto (p. ex. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
 

@@ -1382,8 +1382,8 @@ sub Data {
             'Пълният път на директорията на сертифициращия орган, където сертификатите на СО се съхраняват във файловата система.',
         'e.g. /opt/znuny/var/certificates/SOAP/CA' => 'Например /opt/znuny/var/certificates/SOAP/CA',
         'Controller mapping for Invoker' => 'Картографиране на контролера за заявка',
-        'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
-            'Контролерът, към който заявката трябва да се изпрати. Променливите, маркирани с ":", ще бъдат заменени от стойността на данните и ще бъдат предадени заедно с искането. (Напр. / Ticket /: TicketID? UserLogin =: UserLogin & Password =: Password).',
+        'The controller that the invoker should send requests to. Variables marked by a \':\' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).' =>
+            'Контролерът, към който трябва да се изпращат заявките. Променливите, маркирани с \':\', се заменят от изходящите данни след картографирането (ако е конфигурирано). Вложените полета използват точка (напр. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).',
         'Valid request command for Invoker' => 'Валидна команда за заявка',
         'A specific HTTP command to use for the requests with this Invoker (optional).' =>
             'Конкретна HTTP команда, която да се използва за заявките (оптимално).',

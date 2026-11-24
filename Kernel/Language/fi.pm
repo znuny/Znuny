@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.208167635362496;
+    $Self->{Completeness}        = 0.208320587335577;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1383,8 +1383,8 @@ sub Data {
             '',
         'e.g. /opt/znuny/var/certificates/SOAP/CA' => '',
         'Controller mapping for Invoker' => '',
-        'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
-            '',
+        'The controller that the invoker should send requests to. Variables marked by a \':\' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).' =>
+            'Ohjain, jolle invokerin tulee lähettää pyynnöt. Muuttujat, jotka on merkitty merkillä \':\', korvataan lähtevistä tiedoista mäppäyksen jälkeen (jos se on määritetty). Sisäkkäiset kentät käyttävät pistettä (esim. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).',
         'Valid request command for Invoker' => '',
         'A specific HTTP command to use for the requests with this Invoker (optional).' =>
             '',

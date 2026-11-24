@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.318446007953503;
+    $Self->{Completeness}        = 0.318598959926583;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1384,8 +1384,8 @@ sub Data {
             '認証機構目錄的完整路徑，文件系統中存儲CA証書存儲地方。',
         'e.g. /opt/znuny/var/certificates/SOAP/CA' => '',
         'Controller mapping for Invoker' => '',
-        'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
-            '',
+        'The controller that the invoker should send requests to. Variables marked by a \':\' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).' =>
+            '呼叫者應傳送請求的目標控制器。以\':\'標記的變數會在對應之後（若已設定）從傳出資料取代。巢狀欄位使用句點（例如 /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password）。',
         'Valid request command for Invoker' => '',
         'A specific HTTP command to use for the requests with this Invoker (optional).' =>
             '',

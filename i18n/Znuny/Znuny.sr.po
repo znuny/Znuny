@@ -3515,10 +3515,6 @@ msgid "Controller mapping for Invoker"
 msgstr "Мапирање контролера за позиваоца"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "The controller that the invoker should send requests to. Variables marked by a ':' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password)."
-msgstr "Контролер коме ће позивалац прослеђивати захтеве. Променљиве обележене са ':' ће бити замењене њиховим вредностима и прослеђене заједно са захтевом (нпр. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password)."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Valid request command for Invoker"
 msgstr "Важећа команда захтева за позиваоца"
 
@@ -26563,4 +26559,8 @@ msgstr "Временски прозор у секундама за rate limiting
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
 msgstr "HTTPS URL префикси које XSLT мапирање може да учита помоћу xsl:import, xsl:include или document(). Сваки унос мора да почиње са https:// и упоређује се тачно, укључујући велика и мала слова, са почетком захтеваног URL-а. Префикс домаћина треба да се завршава косом цртом, на пример https://znuny.de/. Префикс може да именује и један ресурс, на пример https://blabla.com/xslt/onlythisfile.txt. Празна листа одбија сваку мрежну URL адресу. Уноси који не почињу са https:// се занемарују."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "The controller that the invoker should send requests to. Variables marked by a ':' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
+msgstr "Контролер коме позивалац прослеђује захтеве. Променљиве обележене са ':' замењују се из одлазних података након мапирања (ако је подешено). Угњеждена поља користе тачку (нпр. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
 

@@ -1387,8 +1387,8 @@ sub Data {
             'مسیر کامل دایرکتوری که در آن اقتدار صدور گواهینامه گواهی CA ها در سیستم فایل ذخیره می شود.',
         'e.g. /opt/znuny/var/certificates/SOAP/CA' => 'به عنوان مثال / انتخاب کردن / Znuny / ور / گواهی / SOAP / CA',
         'Controller mapping for Invoker' => ' برای  کنترل نگاشت Invoker',
-        'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
-            'کنترل که فراخواننده باید درخواست برای ارسال. متغیرهای مشخص شده توسط \':\' خواهد شد با مقدار داده جایگزین و سرانجام همراه با درخواست. (به عنوان مثال / درخواست /: TicketID صفحهی =: صفحهی و رمز عبور =: رمز عبور).',
+        'The controller that the invoker should send requests to. Variables marked by a \':\' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).' =>
+            'کنترلری که فراخوان باید درخواست‌ها را به آن ارسال کند. متغیرهای مشخص‌شده با \':\' پس از نگاشت (در صورت پیکربندی) از داده‌های خروجی جایگزین می‌شوند. فیلدهای تودرتو از نقطه استفاده می‌کنند (مثلاً /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).',
         'Valid request command for Invoker' => 'درخواست فرماندهی معتبر برای Invoker',
         'A specific HTTP command to use for the requests with this Invoker (optional).' =>
             'فرمان HTTP خاص برای استفاده برای درخواست با این Invoker (اختیاری).',

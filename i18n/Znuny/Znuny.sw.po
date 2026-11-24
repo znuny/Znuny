@@ -3515,10 +3515,6 @@ msgid "Controller mapping for Invoker"
 msgstr "Kiendeshaji kiunganishaji kwa ajili ya kichochezi"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "The controller that the invoker should send requests to. Variables marked by a ':' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password)."
-msgstr "Kiendashaji ambacho kichochezi kinatakiwa kitume maombi kwenda. Vishika nafasi vimewekwa alama na ':' kitabadilishwa na thamani ya data na itapitishwa na ombi. (mfano/Tiketi/:Kitambulisho cha tiketi=: Kuingia kwa mtumiaji & neno la siri=:neno la siri). "
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Valid request command for Invoker"
 msgstr "Amri halali ya maombi kwa ajili ya kichochezi"
 
@@ -26556,4 +26552,8 @@ msgstr "Dirisha la muda kwa sekunde kwa rate limiting ya usajili wa kibinafsi. M
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
 msgstr "Viambishi awali vya URL za HTTPS ambavyo ramani ya XSLT inaweza kupakia kwa xsl:import, xsl:include au document(). Kila ingizo lazima lianze na https:// na linalinganishwa kikamilifu, ikiwa ni pamoja na herufi kubwa na ndogo, na mwanzo wa URL iliyoombwa. Kiambishi awali cha seva kinapaswa kuishia na kistari cha mlalo, kwa mfano https://znuny.de/. Kiambishi awali kinaweza pia kutaja rasilimali moja, kwa mfano https://blabla.com/xslt/onlythisfile.txt. Orodha tupu inakataa kila URL ya mtandao. Maingizo yasiyoanza na https:// yanapuuzwa."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "The controller that the invoker should send requests to. Variables marked by a ':' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
+msgstr "Kiendeshaji ambacho kichochezi kinapaswa kukitumia kutuma maombi. Vishika nafasi vilivyowekwa alama ya ':' hubadilishwa kutoka data zinazotoka baada ya kuunganisha (ikiwa kimesanidiwa). Sehemu zilizowekwa ndani hutumia nukta (mfano /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
 

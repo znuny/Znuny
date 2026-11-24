@@ -3517,10 +3517,6 @@ msgid "Controller mapping for Invoker"
 msgstr "Vezérlő leképezés a meghívóhoz"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "The controller that the invoker should send requests to. Variables marked by a ':' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password)."
-msgstr "Az a vezérlő, amelyhez a meghívónak kéréseket kell küldenie. A kettősponttal „:” megjelölt változók az adatok értékével lesznek helyettesítve és a kéréssel együtt kerülnek átadásra. (például /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password)."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Valid request command for Invoker"
 msgstr "Érvényes kérés parancs a meghívóhoz"
 
@@ -26565,4 +26561,8 @@ msgstr "Az önregisztráció korlátozásának időablaka másodpercben. Az abla
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
 msgstr "HTTPS URL-előtagok, amelyeket egy XSLT-leképezés betölthet az xsl:import, xsl:include vagy document() használatával. Minden bejegyzésnek https:// előtaggal kell kezdődnie, és a kis- és nagybetűket is figyelembe véve pontosan összehasonlításra kerül a kért URL elejével. A gazdagép előtagjának perjellel kell végződnie, például https://znuny.de/. Egy előtag egyetlen erőforrást is megnevezhet, például https://blabla.com/xslt/onlythisfile.txt. Az üres lista minden hálózati URL-t megtagad. A https:// előtaggal nem kezdődő bejegyzéseket a rendszer figyelmen kívül hagyja."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "The controller that the invoker should send requests to. Variables marked by a ':' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
+msgstr "Az a vezérlő, amelyhez a meghívónak a kéréseket kell küldenie. A ':' jellel megjelölt változók a leképezés után (ha be van állítva) a kimenő adatokból kerülnek behelyettesítésre. A beágyazott mezők pontot használnak (például /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
 

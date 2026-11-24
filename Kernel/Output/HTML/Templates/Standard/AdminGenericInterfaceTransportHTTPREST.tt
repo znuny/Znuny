@@ -498,7 +498,7 @@
                                     <div id="InvokerControllerMapping[% Data.Invoker | html %]Error" class="TooltipErrorMessage"><p>[% Translate("This field is required.") | html %]</p></div>
                                     <div id="InvokerControllerMapping[% Data.Invoker | html %]ServerError" class="TooltipErrorMessage"><p>[% Translate(Data.ServerErrorMessage) | html %]</p></div>
                                     <p class="FieldExplanation">
-                                        [% Translate("The controller that the invoker should send requests to. Variables marked by a ':' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).") | html %]
+                                        [% Translate("The controller that the invoker should send requests to. Variables marked by a ':' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).") | html %]
                                     </p>
                                 </div>
                             </div>

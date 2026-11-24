@@ -30,7 +30,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.643010094830223;
+    $Self->{Completeness}        = 0.643163046803304;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1386,8 +1386,8 @@ sub Data {
             'Pełna ścieżka do katalogu gdzie znajdują się certyfikaty CA.',
         'e.g. /opt/znuny/var/certificates/SOAP/CA' => 'np. /opt/znuny/var/certificates/SOAP/CA',
         'Controller mapping for Invoker' => '',
-        'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
-            '',
+        'The controller that the invoker should send requests to. Variables marked by a \':\' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).' =>
+            'Kontroler, do którego invoker powinien wysyłać żądania. Zmienne oznaczone \':\' są zastępowane wartościami z danych wychodzących po mapowaniu (jeśli jest skonfigurowane). Zagnieżdżone pola używają kropki (np. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).',
         'Valid request command for Invoker' => '',
         'A specific HTTP command to use for the requests with this Invoker (optional).' =>
             '',

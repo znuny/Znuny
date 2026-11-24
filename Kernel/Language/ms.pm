@@ -1381,8 +1381,8 @@ sub Data {
             'Laluan penuh direktori pihak berkuasa pemerakuan yang mana sijil CA disimpan dalam sistem fail.',
         'e.g. /opt/znuny/var/certificates/SOAP/CA' => 'contoh: /opt/znuny/var/certificates/SOAP/CA',
         'Controller mapping for Invoker' => 'Pengawal pemetaan untuk Invoker',
-        'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
-            'Pengawal yang invoker perlu hantar permintaan untuk. Pembolehubah ditandai dengan \':\' akan dapat digantikan dengan nilai data dan diluluskan bersama-sama dengan permintaan itu. (contoh/Tiket/:TicketID Userlogin=:Userlogin&Kata Laluan=:Kata laluan).',
+        'The controller that the invoker should send requests to. Variables marked by a \':\' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).' =>
+            'Pengawal yang invoker perlu hantar permintaan kepadanya. Pembolehubah yang ditandai dengan \':\' digantikan daripada data keluar selepas pemetaan (jika dikonfigurasi). Medan bersarang menggunakan titik (contoh: /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).',
         'Valid request command for Invoker' => 'Arahan permohonan sah untuk Invoker',
         'A specific HTTP command to use for the requests with this Invoker (optional).' =>
             'Arahan HTTP spesifik untuk digunakan bagi permintaan dengan Invoker (pilihan) ini.',

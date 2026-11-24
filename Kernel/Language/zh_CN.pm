@@ -1388,8 +1388,8 @@ sub Data {
             '认证机构目录的完整路径，文件系统中存储CA证书的地方。',
         'e.g. /opt/znuny/var/certificates/SOAP/CA' => '例如：/opt/znuny/var/certificates/SOAP/CA',
         'Controller mapping for Invoker' => '调用程序的控制器映射',
-        'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
-            '控制器接受调用程序发送的请求。以“:“作为标记的变量将被数据值和其它传递参数替换。',
+        'The controller that the invoker should send requests to. Variables marked by a \':\' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).' =>
+            '调用程序应向其发送请求的控制器。以\':\'标记的变量会在映射后（若已配置）从传出数据中替换。嵌套字段使用点（例如 /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password）。',
         'Valid request command for Invoker' => '调用程序有效的请求命令',
         'A specific HTTP command to use for the requests with this Invoker (optional).' =>
             '调用程序用于请求的特定的HTTP命令。',

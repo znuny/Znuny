@@ -3515,10 +3515,6 @@ msgid "Controller mapping for Invoker"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "The controller that the invoker should send requests to. Variables marked by a ':' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password)."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Valid request command for Invoker"
 msgstr ""
 
@@ -26554,4 +26550,8 @@ msgstr "自助註冊 rate limiting 的時間視窗（秒）。此視窗內的嘗
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
 msgstr "XSLT 對應可透過 xsl:import、xsl:include 或 document() 載入的 HTTPS URL 前綴。每一項都必須以 https:// 開頭，並與所要求 URL 的開頭精確比較（包括大小寫）。主機前綴應以斜線結尾，例如 https://znuny.de/。前綴也可以指定單一資源，例如 https://blabla.com/xslt/onlythisfile.txt。空白清單會拒絕所有網路 URL。不以 https:// 開頭的項目會被忽略。"
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "The controller that the invoker should send requests to. Variables marked by a ':' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
+msgstr "呼叫者應傳送請求的目標控制器。以':'標記的變數會在對應之後（若已設定）從傳出資料取代。巢狀欄位使用句點（例如 /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password）。"
 

@@ -3515,10 +3515,6 @@ msgid "Controller mapping for Invoker"
 msgstr "호출자에 대한 컨트롤러 매핑"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "The controller that the invoker should send requests to. Variables marked by a ':' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password)."
-msgstr "호출자가 요청을 보내야하는 컨트롤러. ':'로 표시된 변수는 데이터 값으로 대체되고 요청과 함께 전달됩니다. (예 : / Ticket / : TicketID? UserLogin = : UserLogin & Password = : Password)."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Valid request command for Invoker"
 msgstr "호출자에 대한 유효한 요청 명령"
 
@@ -26563,4 +26559,8 @@ msgstr "셀프 등록 rate limiting을 위한 시간 창(초). 이 창 내 시�
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
 msgstr "XSLT 매핑이 xsl:import, xsl:include 또는 document()로 불러올 수 있는 HTTPS URL 접두사입니다. 각 항목은 https://로 시작해야 하며, 대소문자를 포함하여 요청된 URL의 시작 부분과 정확히 비교됩니다. 호스트 접두사는 슬래시로 끝나야 합니다. 예: https://znuny.de/. 접두사는 하나의 리소스를 지정할 수도 있습니다. 예: https://blabla.com/xslt/onlythisfile.txt. 빈 목록은 모든 네트워크 URL을 거부합니다. https://로 시작하지 않는 항목은 무시됩니다."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "The controller that the invoker should send requests to. Variables marked by a ':' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
+msgstr "호출자가 요청을 보내야 하는 컨트롤러. ':'로 표시된 변수는 매핑 후(구성된 경우) 나가는 데이터에서 대체됩니다. 중첩 필드는 점을 사용합니다(예: /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
 

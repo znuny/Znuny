@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d/%m/%Y';
     $Self->{DateInputFormat}     = '%d/%m/%Y';
     $Self->{DateInputFormatLong} = '%d/%m/%Y - %T';
-    $Self->{Completeness}        = 0.272101560110125;
+    $Self->{Completeness}        = 0.272254512083206;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1384,8 +1384,8 @@ sub Data {
             '',
         'e.g. /opt/znuny/var/certificates/SOAP/CA' => '',
         'Controller mapping for Invoker' => '',
-        'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
-            '',
+        'The controller that the invoker should send requests to. Variables marked by a \':\' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).' =>
+            'इनवोकर को अनुरोध भेजने वाला नियंत्रक। \':\' से चिह्नित चर मैपिंग के बाद (यदि कॉन्फ़िगर किया गया हो) आउटगोइंग डेटा से प्रतिस्थापित किए जाते हैं। नेस्टेड फ़ील्ड बिंदु का उपयोग करते हैं (उदा. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)।',
         'Valid request command for Invoker' => '',
         'A specific HTTP command to use for the requests with this Invoker (optional).' =>
             '',

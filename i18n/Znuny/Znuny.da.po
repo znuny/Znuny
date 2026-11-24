@@ -3515,10 +3515,6 @@ msgid "Controller mapping for Invoker"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "The controller that the invoker should send requests to. Variables marked by a ':' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password)."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Valid request command for Invoker"
 msgstr ""
 
@@ -26552,4 +26548,8 @@ msgstr "Tidsvindue i sekunder for rate limiting ved selvregistrering. Forsøg in
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
 msgstr "HTTPS-URL-præfikser, som en XSLT-tilknytning må indlæse med xsl:import, xsl:include eller document(). Hver post skal starte med https:// og sammenlignes nøjagtigt, inklusive store og små bogstaver, med starten af den anmodede URL. Et værtspræfiks bør slutte med en skråstreg, for eksempel https://znuny.de/. Et præfiks kan også navngive én ressource, for eksempel https://blabla.com/xslt/onlythisfile.txt. En tom liste afviser alle netværks-URL'er. Poster, der ikke starter med https://, ignoreres."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "The controller that the invoker should send requests to. Variables marked by a ':' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
+msgstr "Den controller, som invokeren skal sende anmodninger til. Variabler markeret med ':' erstattes ud fra de udgående data efter mapping (hvis det er konfigureret). Indlejrede felter bruger et punktum (f.eks. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
 

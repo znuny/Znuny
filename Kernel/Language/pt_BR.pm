@@ -1385,8 +1385,8 @@ sub Data {
             'O caminho completo do diretório da autoridade certificadora onde os certificados AC serão armazenados no sistema de arquivos.',
         'e.g. /opt/znuny/var/certificates/SOAP/CA' => 'ex. /opt/znuny/var/certificates/SOAP/CA',
         'Controller mapping for Invoker' => 'Mapeamento do controlador para o invoker',
-        'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
-            'O controlador para o qual o invoker necessita enviar requisições. Variáveis marcadas com um \':\' serão substituídas pelos valores dos dados e repassadas com a requisição (ex.: /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).',
+        'The controller that the invoker should send requests to. Variables marked by a \':\' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).' =>
+            'O controlador para o qual o invoker deve enviar requisições. Variáveis marcadas com \':\' são substituídas a partir dos dados de saída após o mapeamento (se configurado). Campos aninhados usam um ponto (ex.: /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).',
         'Valid request command for Invoker' => 'Comando válido da requisição para o invoker',
         'A specific HTTP command to use for the requests with this Invoker (optional).' =>
             'Um comando HTTP específico para usar para as requisições com este invoker (opcional).',

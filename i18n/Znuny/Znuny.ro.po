@@ -3515,10 +3515,6 @@ msgid "Controller mapping for Invoker"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "The controller that the invoker should send requests to. Variables marked by a ':' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password)."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Valid request command for Invoker"
 msgstr ""
 
@@ -26552,4 +26548,8 @@ msgstr "Fereastră de timp în secunde pentru rate limiting la autoînregistrare
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
 msgstr "Prefixe de URL HTTPS pe care o mapare XSLT le poate încărca cu xsl:import, xsl:include sau document(). Fiecare intrare trebuie să înceapă cu https:// și este comparată exact, inclusiv majusculele și minusculele, cu începutul URL-ului solicitat. Un prefix de gazdă trebuie să se termine cu o bară oblică, de exemplu https://znuny.de/. Un prefix poate denumi și o singură resursă, de exemplu https://blabla.com/xslt/onlythisfile.txt. O listă goală refuză orice URL de rețea. Intrările care nu încep cu https:// sunt ignorate."
+
+#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
+msgid "The controller that the invoker should send requests to. Variables marked by a ':' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
+msgstr "Controlerul către care invoker-ul trebuie să trimită cererile. Variabilele marcate cu ':' sunt înlocuite din datele de ieșire după mapare (dacă este configurată). Câmpurile imbricate folosesc un punct (de ex. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
 
