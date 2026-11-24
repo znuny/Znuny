@@ -23,7 +23,6 @@ our @ObjectDependencies = (
     'Kernel::System::Encode',
     'Kernel::System::Log',
     'Kernel::System::Main',
-    'Kernel::System::DateTime',
     'Kernel::System::Storable',
 );
 
@@ -604,13 +603,15 @@ you also can use DBI bind values, required for large strings:
 sub Prepare {
     my ( $Self, %Param ) = @_;
 
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
     my $SQL   = $Param{SQL};
     my $Limit = $Param{Limit} || '';
     my $Start = $Param{Start} || '';
 
     # check needed stuff
     if ( !$Param{SQL} ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => 'Need SQL!',
         );
@@ -618,13 +619,30 @@ sub Prepare {
     }
 
     if ( $Param{Bind} && ref $Param{Bind} ne 'ARRAY' ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => 'Bind must be and array reference!',
         );
     }
 
     $Self->{_PreparedOnSlaveDB} = 0;
+
+    # Limit and Start are interpolated into SQL. Only non-negative integers are safe.
+    # 0 and an empty value stay "no limit clause".
+    if ( $Limit && $Limit !~ m{\A [0-9]+ \z}xms ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => 'Limit must be a non-negative integer!',
+        );
+        return;
+    }
+    if ( $Start && $Start !~ m{\A [0-9]+ \z}xms ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => 'Start must be a non-negative integer!',
+        );
+        return;
+    }
 
     # Route SELECT statements to the DB slave if requested and a slave is configured.
     if (
@@ -652,6 +670,15 @@ sub Prepare {
     if ($Limit) {
         if ($Start) {
             $Limit = $Limit + $Start;
+
+            # Addition can stringify as Inf or scientific notation.
+            if ( $Limit !~ m{\A [0-9]+ \z}xms ) {
+                $LogObject->Log(
+                    Priority => 'error',
+                    Message  => 'Limit must be a non-negative integer!',
+                );
+                return;
+            }
             $Self->{LimitStart} = $Start;
         }
         if ( $Self->{Backend}->{'DB::Limit'} eq 'limit' ) {
