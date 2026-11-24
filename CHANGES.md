@@ -23,6 +23,7 @@
  - 2026-11-10 Fixed: Moving or resizing an appointment in the calendar or resource overview via drag and drop removed linked tickets.
  - 2026-11-06 Fixed: Customer user e-mail address uniqueness is now checked across all customer user backends.
  - 2026-10-29 Fixed: calendar appointment failed to create ticket if relative period was zero. Thanks to @Fawkespami for reporting the issue. [#821](https://github.com/znuny/Znuny/issues/821)
+ - 2026-10-27 Fixed: Removing sessions by user login also removed the other user type when an agent and a customer user shared the same login.
  - 2026-10-26 Fixed: PostMaster filter ExternalTicketNumberRecognition ignores CC.
  - 2026-10-20 Fixed: Console command to export/import dynamic field configs used different format than the GUI version.
  - 2026-10-08 Fixed: Uninitialized values in Kernel/System/ACL/DB/ACL.pm

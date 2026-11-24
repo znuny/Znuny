@@ -115,8 +115,14 @@ sub Run {
     # Delete the session when the preference is updated by an admin user
     # to force a login with fresh session data for the affected user.
     if ( !$Param{UpdateSessionData} ) {
+        my $UserType = 'User';
+        if ( $Self->{UserObject} && $Self->{UserObject}->isa('Kernel::System::CustomerUser') ) {
+            $UserType = 'Customer';
+        }
+
         $SessionObject->RemoveSessionByUser(
             UserLogin => $Param{UserData}->{UserLogin},
+            UserType  => $UserType,
         );
     }
 

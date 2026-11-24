@@ -216,6 +216,7 @@ sub Run {
                 if ( $OldUserLogin ne $GetParam{UserLogin} || !grep { $_ eq $GetParam{ValidID} } @ValidIDList ) {
                     $Kernel::OM->Get('Kernel::System::AuthSession')->RemoveSessionByUser(
                         UserLogin => $OldUserLogin,
+                        UserType  => 'User',
                     );
                 }
 

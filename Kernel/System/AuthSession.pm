@@ -366,29 +366,44 @@ sub RemoveSessionID {
 
 =head2 RemoveSessionByUser()
 
-Removes all sessions that match the given user login (no distinction between agent and customer user).
+Removes all sessions that match the given user login.
 
     $SessionObject->RemoveSessionByUser(
-        UserLogin => 'some_user_login'
+        UserLogin => 'some_user_login',
+        UserType  => 'User',                # optional, 'User' or 'Customer'
     );
 
-Returns true (session deleted) or false (if session can't get deleted).
+C<UserType> limits removal to agent sessions (C<User>) or customer user sessions
+(C<Customer>). If it is omitted, sessions are matched by C<UserLogin> only. An
+agent and a customer user who share that login then both lose their sessions.
 
-B<NOTE>: Sessions are matched by C<UserLogin> only. The user type (agent or
-customer user) is not considered. If an agent and a customer user share the
-same login, all of their sessions are removed. This is a known limitation.
-See issue #1027.
+Returns true (session deleted) or false (if session can't get deleted).
 
 =cut
 
 sub RemoveSessionByUser {
     my ( $Self, %Param ) = @_;
 
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
     # Check needed stuff.
     if ( !$Param{UserLogin} ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
+        $LogObject->Log(
             Priority => 'error',
             Message  => 'Need UserLogin!'
+        );
+        return;
+    }
+
+    if (
+        $Param{UserType}
+        && $Param{UserType} ne 'User'
+        && $Param{UserType} ne 'Customer'
+        )
+    {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => 'Got wrong UserType!'
         );
         return;
     }
@@ -402,6 +417,15 @@ sub RemoveSessionByUser {
         );
 
         next SESSIONID if $SessionData{UserLogin} ne $Param{UserLogin};
+
+        # Keep the previous behavior when UserType is omitted.
+        if (
+            $Param{UserType}
+            && ( ( $SessionData{UserType} // '' ) ne $Param{UserType} )
+            )
+        {
+            next SESSIONID;
+        }
 
         $Self->{Backend}->RemoveSessionID(
             SessionID => $SessionID,
