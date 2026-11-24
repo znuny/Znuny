@@ -1198,8 +1198,8 @@ sub Data {
             'CA 인증서가 파일 시스템에 저장되는 인증 기관 디렉토리의 전체 경로입니다.',
         'e.g. /opt/otrs/var/certificates/SOAP/CA' => '예 : / opt / otrs / var / certificates / SOAP / CA',
         'Controller mapping for Invoker' => '호출자에 대한 컨트롤러 매핑',
-        'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
-            '호출자가 요청을 보내야하는 컨트롤러. \':\'로 표시된 변수는 데이터 값으로 대체되고 요청과 함께 전달됩니다. (예 : / Ticket / : TicketID? UserLogin = : UserLogin & Password = : Password).',
+        'The controller that the invoker should send requests to. Variables marked by a \':\' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).' =>
+            '호출자가 요청을 보내야 하는 컨트롤러. \':\'로 표시된 변수는 매핑 이후(설정된 경우) 나가는 데이터에서 바뀝니다. 중첩 필드는 점을 사용합니다(예: /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).',
         'Valid request command for Invoker' => '호출자에 대한 유효한 요청 명령',
         'A specific HTTP command to use for the requests with this Invoker (optional).' =>
             '이 Invoker (선택 사항)로 요청에 사용할 특정 HTTP 명령입니다.',

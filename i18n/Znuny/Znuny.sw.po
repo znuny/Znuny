@@ -3272,8 +3272,8 @@ msgid "Controller mapping for Invoker"
 msgstr "Kiendeshaji kiunganishaji kwa ajili ya kichochezi"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "The controller that the invoker should send requests to. Variables marked by a ':' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password)."
-msgstr "Kiendashaji ambacho kichochezi kinatakiwa kitume maombi kwenda. Vishika nafasi vimewekwa alama na ':' kitabadilishwa na thamani ya data na itapitishwa na ombi. (mfano/Tiketi/:Kitambulisho cha tiketi=: Kuingia kwa mtumiaji & neno la siri=:neno la siri). "
+msgid "The controller that the invoker should send requests to. Variables marked by a ':' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
+msgstr "Kiendeshaji ambacho kichochezi kinatakiwa kitume maombi. Vishika nafasi vilivyowekwa alama ya ':' vinabadilishwa kutoka data zinazotoka baada ya kuunganisha (ikiwa kimesanidiwa). Sehemu zilizowekwa ndani hutumia nukta (mfano /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Valid request command for Invoker"

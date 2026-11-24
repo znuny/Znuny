@@ -31,6 +31,7 @@
  - 2026-10-20 Fixed: Console command to export/import dynamic field configs used different format than the GUI version.
  - 2026-10-19 Security: Generic interface XSLT mapping no longer evaluates regex replacements as Perl code and restricts file, network and write access. Thanks to Gabriel Rodrigues and João Pedro Gonçalves (Hakai Offensive Security (hakaisecurity.io)) for reporting this issue.
  - 2026-10-08 Fixed: Uninitialized values in Kernel/System/ACL/DB/ACL.pm
+ - 2026-10-05 Fixed: REST invoker controller mapping help text now states that placeholders are replaced from outgoing data after mapping and that nested fields use a dot (e.g. :Ticket.TicketID). Thanks to @killermoehre for reporting the issue. [#804](https://github.com/znuny/Znuny/issues/804)
  - 2026-10-02 Changed: Enabled the use of URL parameter RequestedURL within existing sessions.
  - 2026-09-04 Fixed: Process transition action "DynamicFieldSet" now correctly saves multiple values for all multiselect-type dynamic fields (e.g. ConfigItemMultiselect, WebserviceMultiselect).
  - 2026-07-10 Fixed: Performance problem in PostMaster module DestQueue caused by too many communication log entries to be created.

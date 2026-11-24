@@ -3269,8 +3269,8 @@ msgid "Controller mapping for Invoker"
 msgstr "Vezérlő leképezés a meghívóhoz"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "The controller that the invoker should send requests to. Variables marked by a ':' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password)."
-msgstr "Az a vezérlő, amelyhez a meghívónak kéréseket kell küldenie. A kettősponttal „:” megjelölt változók az adatok értékével lesznek helyettesítve és a kéréssel együtt kerülnek átadásra. (például /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password)."
+msgid "The controller that the invoker should send requests to. Variables marked by a ':' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
+msgstr "Az a vezérlő, amelyhez a meghívónak kéréseket kell küldenie. A ':' jellel megjelölt változók a kimenő adatokból kerülnek helyettesítésre a leképezés után (ha be van állítva). A beágyazott mezők pontot használnak (például /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Valid request command for Invoker"

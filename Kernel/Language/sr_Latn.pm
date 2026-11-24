@@ -1204,8 +1204,8 @@ sub Data {
             'Cela putanja direktorijuma sertifikacionog tela gde se skladište CA sertifikati u sistemu datoteka.',
         'e.g. /opt/otrs/var/certificates/SOAP/CA' => 'npr. /opt/otrs/var/certificates/SOAP/CA',
         'Controller mapping for Invoker' => 'Mapiranje kontrolera za pozivaoca',
-        'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
-            'Kontroler kome će pozivalac prosleđivati zahteve. Promenljive obeležene sa \':\' će biti zamenjene njihovim vrednostima i prosleđene zajedno sa zahtevom (npr. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).',
+        'The controller that the invoker should send requests to. Variables marked by a \':\' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).' =>
+            'Kontroler kome će pozivalac prosleđivati zahteve. Promenljive obeležene sa \':\' zamenjuju se iz izlaznih podataka nakon mapiranja (ako je podešeno). Ugnježdena polja koriste tačku (npr. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).',
         'Valid request command for Invoker' => 'Važeća komanda zahteva za pozivaoca',
         'A specific HTTP command to use for the requests with this Invoker (optional).' =>
             'Specifična HTTP komanda za primenu na zahteve sa ovim pozivaocem (neobavezno).',

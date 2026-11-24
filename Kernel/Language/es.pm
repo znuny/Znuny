@@ -1204,8 +1204,8 @@ sub Data {
             'La ruta completa del directorio de la autoridad de certificación donde los certificados de CA se almacenan en el sistema de archivos .',
         'e.g. /opt/otrs/var/certificates/SOAP/CA' => 'ej. /opt/otrs/var/certificates/SOAP/CA',
         'Controller mapping for Invoker' => 'Asignación del Controlador para el Invocador',
-        'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
-            'El controlador al que el invocador debe enviar peticiones a. Variables marcadas por un \'.\' quedarán reemplazadas por los valores de los datos y pasados con la petición (e.j. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).',
+        'The controller that the invoker should send requests to. Variables marked by a \':\' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).' =>
+            'El controlador al que el invocador debe enviar peticiones. Las variables marcadas con \':\' se sustituyen a partir de los datos salientes después del mapeo (si está configurado). Los campos anidados usan un punto (p. ej. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).',
         'Valid request command for Invoker' => 'Comando petición válido para Invocador',
         'A specific HTTP command to use for the requests with this Invoker (optional).' =>
             'Comando HTTP específico para usar por peticiones con este invocador (opcional).',

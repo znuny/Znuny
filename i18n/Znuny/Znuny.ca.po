@@ -3269,8 +3269,8 @@ msgid "Controller mapping for Invoker"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "The controller that the invoker should send requests to. Variables marked by a ':' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password)."
-msgstr ""
+msgid "The controller that the invoker should send requests to. Variables marked by a ':' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
+msgstr "El controlador al qual l'invocador ha d'enviar les peticions. Les variables marcades amb ':' se substitueixen a partir de les dades de sortida després de l'assignació (si està configurada). Els camps imbricats utilitzen un punt (p. ex. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Valid request command for Invoker"

@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.339961513790892;
+    $Self->{Completeness}        = 0.34012187299551;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1201,8 +1201,8 @@ sub Data {
             '',
         'e.g. /opt/otrs/var/certificates/SOAP/CA' => '',
         'Controller mapping for Invoker' => '',
-        'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
-            '',
+        'The controller that the invoker should send requests to. Variables marked by a \':\' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).' =>
+            'Den controller som anroparen ska skicka förfrågningar till. Variabler markerade med \':\' ersätts från utgående data efter mappningen (om den är konfigurerad). Nästlade fält använder en punkt (t.ex. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).',
         'Valid request command for Invoker' => '',
         'A specific HTTP command to use for the requests with this Invoker (optional).' =>
             '',

@@ -1201,8 +1201,8 @@ sub Data {
             'Njia kamili na jina la mipangilio orodha ya cheti cha mamlaka ambazo zinahakikisha cheti SSL.',
         'e.g. /opt/otrs/var/certificates/SOAP/CA' => 'Mfano /opt/otrs/var/certificates/SOAP/CA',
         'Controller mapping for Invoker' => 'Kiendeshaji kiunganishaji kwa ajili ya kichochezi',
-        'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
-            'Kiendashaji ambacho kichochezi kinatakiwa kitume maombi kwenda. Vishika nafasi vimewekwa alama na \':\' kitabadilishwa na thamani ya data na itapitishwa na ombi. (mfano/Tiketi/:Kitambulisho cha tiketi=: Kuingia kwa mtumiaji & neno la siri=:neno la siri). ',
+        'The controller that the invoker should send requests to. Variables marked by a \':\' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).' =>
+            'Kiendeshaji ambacho kichochezi kinatakiwa kitume maombi. Vishika nafasi vilivyowekwa alama ya \':\' vinabadilishwa kutoka data zinazotoka baada ya kuunganisha (ikiwa kimesanidiwa). Sehemu zilizowekwa ndani hutumia nukta (mfano /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).',
         'Valid request command for Invoker' => 'Amri halali ya maombi kwa ajili ya kichochezi',
         'A specific HTTP command to use for the requests with this Invoker (optional).' =>
             'Amri maalum ya HTTP ya kutumia kwa ajili ya maombi kwa ajili ya kichochezi hiki (Hiari). ',

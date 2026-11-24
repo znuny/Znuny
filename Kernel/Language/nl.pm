@@ -1204,8 +1204,8 @@ sub Data {
             'Het volledige pad van de directory waar de CA-certificaten worden opgeslagen.',
         'e.g. /opt/otrs/var/certificates/SOAP/CA' => 'bijvoorbeeld /opt/otrs/var/certificates/SOAP/CA',
         'Controller mapping for Invoker' => 'Controller mapping voor Invoker',
-        'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
-            'De controller waar de invoker zijn verzoeken naar moet versturen. Variabelen die beginnen met een \':\' worden vervangen door de data waarde en doorgegeven met het verzoek. (bijvoorbeeld Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).',
+        'The controller that the invoker should send requests to. Variables marked by a \':\' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).' =>
+            'De controller waar de invoker zijn verzoeken naar moet versturen. Variabelen die gemarkeerd zijn met \':\' worden vervangen vanuit de uitgaande data na de mapping (indien geconfigureerd). Geneste velden gebruiken een punt (bijvoorbeeld /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).',
         'Valid request command for Invoker' => 'Geldig verzoek commando voor Invoker',
         'A specific HTTP command to use for the requests with this Invoker (optional).' =>
             'Een specifiek HTTP commando om te gebruiken voor de verzoeken met deze Invoker (optioneel).',

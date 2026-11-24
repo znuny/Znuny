@@ -1210,8 +1210,8 @@ sub Data {
             'Полный путь к каталогу certification authority, в котором хранятся CA certificates. ',
         'e.g. /opt/otrs/var/certificates/SOAP/CA' => 'например, /opt/otrs/var/certificates/SOAP/CA',
         'Controller mapping for Invoker' => 'Controller mapping для Invoker',
-        'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
-            'Контроллер, на который invoker должен отправлять запросы. Переменные, помеченные \':\', будут заменены значением и переданы вместе с запросом. (например, /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).',
+        'The controller that the invoker should send requests to. Variables marked by a \':\' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).' =>
+            'Контроллер, на который invoker должен отправлять запросы. Переменные, помеченные \':\', заменяются из исходящих данных после сопоставления (если оно настроено). Вложенные поля используют точку (например, /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).',
         'Valid request command for Invoker' => 'Допустимая команда запроса для Invoker',
         'A specific HTTP command to use for the requests with this Invoker (optional).' =>
             'Конкретная команда HTTP для использования в запросах этого Invoker (необязательна).',

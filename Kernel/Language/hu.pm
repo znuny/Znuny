@@ -1204,8 +1204,8 @@ sub Data {
             'A hitelesítés-szolgáltató könyvtárának teljes elérési útja, ahol a CA tanúsítványok tárolva vannak a fájlrendszeren.',
         'e.g. /opt/otrs/var/certificates/SOAP/CA' => 'például /opt/otrs/var/certificates/SOAP/CA',
         'Controller mapping for Invoker' => 'Vezérlő leképezés a meghívóhoz',
-        'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
-            'Az a vezérlő, amelyhez a meghívónak kéréseket kell küldenie. A kettősponttal „:” megjelölt változók az adatok értékével lesznek helyettesítve és a kéréssel együtt kerülnek átadásra. (például /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).',
+        'The controller that the invoker should send requests to. Variables marked by a \':\' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).' =>
+            'Az a vezérlő, amelyhez a meghívónak kéréseket kell küldenie. A \':\' jellel megjelölt változók a kimenő adatokból kerülnek helyettesítésre a leképezés után (ha be van állítva). A beágyazott mezők pontot használnak (például /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).',
         'Valid request command for Invoker' => 'Érvényes kérés parancs a meghívóhoz',
         'A specific HTTP command to use for the requests with this Invoker (optional).' =>
             'A kérésekhez használandó megadott HTTP parancs ezzel a meghívóval (opcionális).',

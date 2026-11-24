@@ -3279,8 +3279,8 @@ msgid "Controller mapping for Invoker"
 msgstr "调用程序的控制器映射"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "The controller that the invoker should send requests to. Variables marked by a ':' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password)."
-msgstr "控制器接受调用程序发送的请求。以“:“作为标记的变量将被数据值和其它传递参数替换。"
+msgid "The controller that the invoker should send requests to. Variables marked by a ':' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
+msgstr "调用程序应向其发送请求的控制器。以 ':' 标记的变量会在映射之后（如果已配置）从出站数据中替换。嵌套字段使用点号（例如 /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password）。"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Valid request command for Invoker"

@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.700769724182168;
+    $Self->{Completeness}        = 0.700930083386786;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1203,8 +1203,8 @@ sub Data {
             '',
         'e.g. /opt/otrs/var/certificates/SOAP/CA' => '例… /opt/otrs/var/certificates/SOAP/CA',
         'Controller mapping for Invoker' => 'API実行元に対するコントローラ・マッピング',
-        'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
-            '',
+        'The controller that the invoker should send requests to. Variables marked by a \':\' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).' =>
+            'API実行元がリクエストを送信するコントローラ。\':\' で示された変数は、マッピング後（設定されている場合）の送信データから置き換えられます。ネストしたフィールドはドットを使用します（例: /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password）。',
         'Valid request command for Invoker' => '呼び出し元に対する有効な要求コマンド',
         'A specific HTTP command to use for the requests with this Invoker (optional).' =>
             'この呼び出し元のリクエストに使用する、特定のHTTPコマンド(オプション)',

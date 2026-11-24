@@ -1199,8 +1199,8 @@ sub Data {
             'Повний шлях у файловій системі до директорії сертифікаційної авторизації де зберігаються СА сертифікати.',
         'e.g. /opt/otrs/var/certificates/SOAP/CA' => 'наприклад /opt/otrs/var/certificates/SOAP/CA',
         'Controller mapping for Invoker' => 'Відображення контролера для активатора.',
-        'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
-            'Контролер, якому активатор має посилати запити. Змінні, позначені як \':\' будуть замінені на значення даних та передаватись разом із запитом. (наприклад /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).',
+        'The controller that the invoker should send requests to. Variables marked by a \':\' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).' =>
+            'Контролер, якому активатор має посилати запити. Змінні, позначені \':\', замінюються з вихідних даних після відображення (якщо його налаштовано). Вкладені поля використовують крапку (наприклад /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).',
         'Valid request command for Invoker' => 'Чинна команда запиту для активатора',
         'A specific HTTP command to use for the requests with this Invoker (optional).' =>
             'Конкретна HTTP команда  що буде використовуватись для запитів з цим активатором (необов\'язково).',

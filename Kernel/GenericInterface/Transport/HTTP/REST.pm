@@ -892,9 +892,9 @@ sub RequesterPerformRequest {
         Flattened => \%FlattenedParamData,
     );
 
-    # Replace any URI params with their actual value.
-    #    for example: from /Ticket/:TicketData.TicketID/:Other
-    #    to /Ticket/1/2 (considering that $Param{Data} contains {TicketData}->{TicketID} = 1 and {Other} = 2).
+    # Replace any URI params with their actual value from outgoing data after mapping.
+    #    for example: from /Ticket/:Ticket.TicketID/:Other
+    #    to /Ticket/1/2 (considering that $Param{Data} contains {Ticket}->{TicketID} = 1 and {Other} = 2).
     FLATTENEDPARAMDATA:
     for my $FlattenedParamName ( sort keys %FlattenedParamData ) {
         next FLATTENEDPARAMDATA if $Controller !~ m{:$FlattenedParamName(?=/|\?|$)}ms;

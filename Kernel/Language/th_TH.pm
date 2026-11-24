@@ -1198,8 +1198,8 @@ sub Data {
             'เส้นทางแบบเต็มของไดเรกทอรีผู้มีสิทธิ์ออกใบรับรองซึ่งใบรับรองCAจะถูกเก็บไว้ในระบบไฟล์',
         'e.g. /opt/otrs/var/certificates/SOAP/CA' => 'เช่น /opt/otrs/var/certificates/SOAP/CA',
         'Controller mapping for Invoker' => 'ตัวควบคุมการทำแผนที่สำหรับผู้ร้องขอ',
-        'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
-            'ตัวควบคุมที่ผู้ร้องขอควรส่งการร้องขอไป ตัวแปรถูกทำเครื่องหมายด้วย \':\' จะได้รับการแทนที่ด้วยค่าข้อมูลและผ่านไปตามคำขอต่อไป (เช่น / ตั๋ว /: TicketID UserLogin =: UserLogin&Password =: รหัสผ่าน)',
+        'The controller that the invoker should send requests to. Variables marked by a \':\' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).' =>
+            'ตัวควบคุมที่ผู้ร้องขอควรส่งการร้องขอไป ตัวแปรที่ทำเครื่องหมายด้วย \':\' จะถูกแทนที่จากข้อมูลขาออกหลังการทำแผนที่ (หากมีการกำหนดค่า) ฟิลด์ที่ซ้อนกันใช้จุด (เช่น /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)',
         'Valid request command for Invoker' => 'คำสั่งคำขอที่ถูกต้องสำหรับผู้ร้องขอ',
         'A specific HTTP command to use for the requests with this Invoker (optional).' =>
             'คำสั่ง HTTP ที่เฉพาะเจาะจงที่จะใช้สำหรับการร้องขอด้วย Invoker นี้ (ถ้ามี)',

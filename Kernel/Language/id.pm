@@ -1198,8 +1198,8 @@ sub Data {
             'Path lengkap direktori otoritas sertifikasi di mana sertifikat CA disimpan dalam berkas sistem ',
         'e.g. /opt/otrs/var/certificates/SOAP/CA' => 'Misalnya /opt/otrs/var/certificates/SOAP/CA',
         'Controller mapping for Invoker' => 'Kontroler pemetaan untuk invoker',
-        'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
-            'Kontroler yang Invoker harus mengirim permintaan. Variabel ditandai dengan \' : \' akan diganti dengan nilai data dan diteruskan dengan permintaan . ( contoh /Tiket/:TicketID?UserLogin=:UserLogin&Password=:Password).',
+        'The controller that the invoker should send requests to. Variables marked by a \':\' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).' =>
+            'Kontroler yang Invoker harus mengirim permintaan. Variabel yang ditandai dengan \':\' diganti dari data keluar setelah pemetaan (jika dikonfigurasi). Bidang bertingkat menggunakan titik (contoh /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).',
         'Valid request command for Invoker' => 'Permintaan perintah yang sah untuk invoker',
         'A specific HTTP command to use for the requests with this Invoker (optional).' =>
             'Perintah HTTP tertentu untuk menggunakan permintaan dengan Invoker ini ( opsional ) ',

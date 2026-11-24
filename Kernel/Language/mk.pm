@@ -1198,8 +1198,8 @@ sub Data {
             'Целосна патека од цертификат издавачот директориумот каде CA сертификатите се сместени во системот со датотеки.',
         'e.g. /opt/otrs/var/certificates/SOAP/CA' => 'на пример: /opt/otrs/var/certificates/SOAP/CA',
         'Controller mapping for Invoker' => 'Контролор за мапирање на Повикувачи',
-        'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
-            'Контролерот на кој повикувачот треба да испраќа барања. Променливи означени со \':\'  ќе бидат заменети со податочните вредности и ќе бидат проследени со останатите во барањето. (п.р.  /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).',
+        'The controller that the invoker should send requests to. Variables marked by a \':\' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).' =>
+            'Контролерот на кој повикувачот треба да испраќа барања. Променливите означени со \':\' се заменуваат од појдовните податоци по мапирањето (ако е конфигурирано). Вгнездените полиња користат точка (пр. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).',
         'Valid request command for Invoker' => 'Валидно барање на командата за Повикувачи',
         'A specific HTTP command to use for the requests with this Invoker (optional).' =>
             'Специфични HTTP команди за да се користат со овој Повикувач (опционално).',

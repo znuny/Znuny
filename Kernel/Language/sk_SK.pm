@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.186337395766517;
+    $Self->{Completeness}        = 0.186497754971135;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1198,8 +1198,8 @@ sub Data {
             '',
         'e.g. /opt/otrs/var/certificates/SOAP/CA' => '',
         'Controller mapping for Invoker' => '',
-        'The controller that the invoker should send requests to. Variables marked by a \':\' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password).' =>
-            '',
+        'The controller that the invoker should send requests to. Variables marked by a \':\' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).' =>
+            'Kontrolér, ktorému má invoker odosielať požiadavky. Premenné označené \':\' sa nahrádzajú z odchádzajúcich údajov po mapovaní (ak je nakonfigurované). Vnorené polia používajú bodku (napr. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password).',
         'Valid request command for Invoker' => '',
         'A specific HTTP command to use for the requests with this Invoker (optional).' =>
             '',

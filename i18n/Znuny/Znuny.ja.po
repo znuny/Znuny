@@ -3282,8 +3282,8 @@ msgid "Controller mapping for Invoker"
 msgstr "API実行元に対するコントローラ・マッピング"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "The controller that the invoker should send requests to. Variables marked by a ':' will get replaced by the data value and passed along with the request. (e.g. /Ticket/:TicketID?UserLogin=:UserLogin&Password=:Password)."
-msgstr ""
+msgid "The controller that the invoker should send requests to. Variables marked by a ':' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
+msgstr "API実行元がリクエストを送信するコントローラ。':' で示された変数は、マッピング後（設定されている場合）の送信データから置き換えられます。ネストしたフィールドはドットを使用します（例: /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password）。"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "Valid request command for Invoker"
