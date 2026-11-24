@@ -220,7 +220,7 @@ sub VerifyLogoutRedirect {
         return;
     }
 
-    if ( $Param{ExpectedLogoutRequestID} && $LogoutResponse->in_response_to ne $Param{ExpectedLogoutRequestID} ) {
+    if ( $Param{ExpectedLogoutRequestID} && $LogoutResponse->in_response_to() ne $Param{ExpectedLogoutRequestID} ) {
         $LogObject->Log(
             Priority => 'notice',
             Message  => "SAML LogoutResponse InResponseTo (count: $Self->{Count}) does not match the expected"
