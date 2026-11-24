@@ -1,4 +1,5 @@
 # 7.5.1 2026-??-??
+ - 2026-11-25 Security: S/MIME certificate and private-key filenames are confined to their directories, and the admin read and download actions require a challenge token.
  - 2026-11-25 Security: Process management: Example process import now rejects files that are outside of the examples directory.
  - 2026-11-25 Security: Generic interface operations TicketCreate and TicketUpdate no longer let a customer user set an agent article sender or other agent-related ticket fields.
  - 2026-11-25 Security: Admin OAuth2 token template names can no longer read YAML files outside of the template directory.

@@ -3015,6 +3015,186 @@ for my $Count ( 1 .. 3 ) {
     );
 }
 
+# Filename confinement: only a single path component inside the certificate
+# and private directories may be read or deleted.
+{
+    my $SampleDirectory = $ConfigObject->Get('Home') . '/scripts/test/sample/SMIME/';
+    my $CertString      = $MainObject->FileRead(
+        Directory => $SampleDirectory,
+        Filename  => 'SMIMECertificate-1.asc',
+    );
+    my %CertificateAdd = $SMIMEObject->CertificateAdd(
+        Certificate => ${$CertString},
+    );
+    $Self->True(
+        $CertificateAdd{Successful} || '',
+        'Filename confinement CertificateAdd()',
+    );
+
+    my $KeyString = $MainObject->FileRead(
+        Directory => $SampleDirectory,
+        Filename  => 'SMIMEPrivateKey-1.asc',
+    );
+    my $Secret = $MainObject->FileRead(
+        Directory => $SampleDirectory,
+        Filename  => 'SMIMEPrivateKeyPass-1.asc',
+    );
+    my %PrivateAdd = $SMIMEObject->PrivateAdd(
+        Private => ${$KeyString},
+        Secret  => ${$Secret},
+    );
+    $Self->True(
+        $PrivateAdd{Successful} || '',
+        'Filename confinement PrivateAdd()',
+    );
+
+    my $CertificateFilename = $CertificateAdd{Filename} || '';
+    my $PrivateFilename     = $PrivateAdd{Filename}     || '';
+
+    my $StoredCertificate = $SMIMEObject->CertificateGet(
+        Filename => $CertificateFilename,
+    );
+    $Self->Is(
+        $StoredCertificate // '',
+        ${$CertString},
+        'CertificateGet() reads a stored certificate filename',
+    );
+
+    my $StoredCertificateText = $SMIMEObject->CertificateRead(
+        Filename => $CertificateFilename,
+    );
+    $Self->True(
+        $StoredCertificateText,
+        'CertificateRead() reads a stored certificate filename',
+    );
+
+    my ( $StoredPrivate, $StoredSecret ) = $SMIMEObject->PrivateGet(
+        Filename => $PrivateFilename,
+    );
+    $Self->True(
+        $StoredPrivate && $StoredSecret,
+        'PrivateGet() reads a stored private key filename',
+    );
+
+    my $UnsafeFilename = '../smime-confinement-outside.txt';
+    my $OutsideContent = 'smime-confinement-outside';
+    my $OutsideFile    = $ConfigObject->Get('Home') . '/var/tmp/smime-confinement-outside.txt';
+    my $OutsideWrite   = $MainObject->FileWrite(
+        Location => $OutsideFile,
+        Content  => \$OutsideContent,
+    );
+    $Self->True(
+        $OutsideWrite,
+        'Created file outside the S/MIME directories',
+    );
+
+    $Self->Is(
+        scalar $SMIMEObject->CertificateGet( Filename => $UnsafeFilename ) // '',
+        '',
+        'CertificateGet() rejects a filename that is not a single path component',
+    );
+    $Self->Is(
+        scalar $SMIMEObject->CertificateRead( Filename => $UnsafeFilename ) // '',
+        '',
+        'CertificateRead() rejects a filename that is not a single path component',
+    );
+
+    my $UnsafePrivate = $SMIMEObject->PrivateGet(
+        Filename => $UnsafeFilename,
+    );
+    $Self->False(
+        $UnsafePrivate,
+        'PrivateGet() rejects a filename that is not a single path component',
+    );
+
+    my %UnsafeCertificateRemove = $SMIMEObject->CertificateRemove(
+        Filename => $UnsafeFilename,
+    );
+    $Self->False(
+        $UnsafeCertificateRemove{Successful},
+        'CertificateRemove() rejects a filename that is not a single path component',
+    );
+
+    my %UnsafePrivateRemove = $SMIMEObject->PrivateRemove(
+        Filename => $UnsafeFilename,
+    );
+    $Self->False(
+        $UnsafePrivateRemove{Successful},
+        'PrivateRemove() rejects a filename that is not a single path component',
+    );
+
+    my $OutsideAfter = $MainObject->FileRead(
+        Location => $OutsideFile,
+    );
+    $Self->True(
+        $OutsideAfter && ${$OutsideAfter} eq $OutsideContent,
+        'Rejected filenames leave the file outside the S/MIME directories unchanged',
+    );
+
+    my $TargetContent = 'smime-confinement-target';
+    my $TargetFile    = $ConfigObject->Get('Home') . '/var/tmp/smime-confinement-target.txt';
+    my $TargetWrite   = $MainObject->FileWrite(
+        Location => $TargetFile,
+        Content  => \$TargetContent,
+    );
+    $Self->True(
+        $TargetWrite,
+        'Created symlink target outside the certificate directory',
+    );
+
+    my $SymlinkName    = 'symlink1.0';
+    my $SymlinkPath    = "$CertPath/$SymlinkName";
+    my $SymlinkCreated = symlink( $TargetFile, $SymlinkPath );
+    $Self->True(
+        $SymlinkCreated,
+        'Created a certificate directory symlink to a file outside that directory',
+    );
+
+    $Self->Is(
+        scalar $SMIMEObject->CertificateGet( Filename => $SymlinkName ) // '',
+        '',
+        'CertificateGet() rejects a symlink that leaves the certificate directory',
+    );
+
+    my %SymlinkRemove = $SMIMEObject->CertificateRemove(
+        Filename => $SymlinkName,
+    );
+    $Self->False(
+        $SymlinkRemove{Successful},
+        'CertificateRemove() rejects a symlink that leaves the certificate directory',
+    );
+
+    my $TargetAfter = $MainObject->FileRead(
+        Location => $TargetFile,
+    );
+    $Self->True(
+        $TargetAfter && ${$TargetAfter} eq $TargetContent,
+        'CertificateRemove() does not delete the symlink target',
+    );
+
+    if ( -l $SymlinkPath ) {
+        unlink $SymlinkPath;
+    }
+    unlink $TargetFile;
+    unlink $OutsideFile;
+
+    my %PrivateRemoveResult = $SMIMEObject->PrivateRemove(
+        Filename => $PrivateFilename,
+    );
+    $Self->True(
+        $PrivateRemoveResult{Successful},
+        'PrivateRemove() deletes a stored private key filename',
+    );
+
+    my %CertificateRemoveResult = $SMIMEObject->CertificateRemove(
+        Filename => $CertificateFilename,
+    );
+    $Self->True(
+        $CertificateRemoveResult{Successful},
+        'CertificateRemove() deletes a stored certificate filename',
+    );
+}
+
 File::Path::rmtree($CertPath);
 File::Path::rmtree($PrivatePath);
 

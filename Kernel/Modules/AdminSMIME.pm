@@ -334,6 +334,10 @@ sub Run {
     # download fingerprint
     # ------------------------------------------------------------ #
     elsif ( $Self->{Subaction} eq 'DownloadFingerprint' ) {
+
+        # challenge token check for write action
+        $LayoutObject->ChallengeTokenCheck();
+
         my $Filename = $ParamObject->GetParam( Param => 'Filename' ) || '';
         if ( !$Filename ) {
             return $LayoutObject->ErrorScreen(
@@ -345,7 +349,12 @@ sub Run {
         $Hash =~ s{(.+)\.\d}{$1}xms;
 
         my $Certificate = $SMIMEObject->CertificateGet( Filename => $Filename );
-        my %Attributes  = $SMIMEObject->CertificateAttributes( Certificate => $Certificate );
+        if ( !$Certificate ) {
+            return $LayoutObject->ErrorScreen(
+                Message => Translatable('Need param Filename to download!'),
+            );
+        }
+        my %Attributes = $SMIMEObject->CertificateAttributes( Certificate => $Certificate );
         return $LayoutObject->Attachment(
             ContentType => 'text/plain',
             Content     => $Attributes{Fingerprint},
@@ -358,6 +367,10 @@ sub Run {
     # download key
     # ------------------------------------------------------------ #
     elsif ( $Self->{Subaction} eq 'Download' ) {
+
+        # challenge token check for write action
+        $LayoutObject->ChallengeTokenCheck();
+
         my $Filename = $ParamObject->GetParam( Param => 'Filename' ) || '';
 
         my $Type = $ParamObject->GetParam( Param => 'Type' ) || '';
@@ -381,6 +394,12 @@ sub Run {
         # download certificate
         else {
             $Download = $SMIMEObject->CertificateGet( Filename => $Filename );
+        }
+
+        if ( !defined $Download || !length $Download ) {
+            return $LayoutObject->ErrorScreen(
+                Message => Translatable('Need param Filename to download!'),
+            );
         }
 
         return $LayoutObject->Attachment(
@@ -545,6 +564,10 @@ sub Run {
     # read certificate
     # ------------------------------------------------------------ #
     elsif ( $Self->{Subaction} eq 'Read' ) {
+
+        # challenge token check for write action
+        $LayoutObject->ChallengeTokenCheck();
+
         my $Filename = $ParamObject->GetParam( Param => 'Filename' ) || '';
         if ( !$Filename ) {
             return $LayoutObject->ErrorScreen(

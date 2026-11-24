@@ -12,6 +12,8 @@ package Kernel::System::Crypt::SMIME;
 use strict;
 use warnings;
 
+use Cwd qw(abs_path);
+
 use Kernel::System::VariableCheck qw(:all);
 
 our @ObjectDependencies = (
@@ -1278,8 +1280,14 @@ sub CertificateGet {
         return if !$Param{Filename};
     }
 
-    my $File           = "$Self->{CertPath}/$Param{Filename}";
-    my $CertificateRef = $Kernel::OM->Get('Kernel::System::Main')->FileRead( Location => $File );
+    my $File = $Self->_FilePathGet(
+        Directory => $Self->{CertPath},
+        Filename  => $Param{Filename},
+    );
+    return if !$File;
+
+    my $MainObject     = $Kernel::OM->Get('Kernel::System::Main');
+    my $CertificateRef = $MainObject->FileRead( Location => $File );
 
     return if !$CertificateRef;
     return $$CertificateRef;
@@ -1321,6 +1329,18 @@ sub CertificateRemove {
 
     my %Result;
 
+    my $File = $Self->_FilePathGet(
+        Directory => $Self->{CertPath},
+        Filename  => $Param{Filename},
+    );
+    if ( !$File ) {
+        %Result = (
+            Successful => 0,
+            Message    => 'Invalid filename!',
+        );
+        return %Result;
+    }
+
     my %CertificateAttributes = $Self->CertificateAttributes(
         Certificate => $Self->CertificateGet( Filename => $Param{Filename} ),
         Filename    => $Param{Filename},
@@ -1357,9 +1377,9 @@ sub CertificateRemove {
     my $Success = 1;
 
     # remove certificate
-    my $Cert = unlink "$Self->{CertPath}/$Param{Filename}";
+    my $Cert = unlink $File;
     if ( !$Cert ) {
-        $Message = "Impossible to remove certificate: $Self->{CertPath}/$Param{Filename}: $!!";
+        $Message = "Impossible to remove certificate: $File: $!!";
         $Success = 0;
     }
 
@@ -1545,7 +1565,11 @@ sub CertificateRead {
         return if !$Param{Filename};
     }
 
-    my $File = "$Self->{CertPath}/$Param{Filename}";
+    my $File = $Self->_FilePathGet(
+        Directory => $Self->{CertPath},
+        Filename  => $Param{Filename},
+    );
+    return if !$File;
 
     # check if file exists and can be readed
     if ( !-e $File ) {
@@ -1813,13 +1837,28 @@ sub PrivateAdd {
         Filename    => $Certificates[0]->{Filename},
     );
     if ( $CertificateAttributes{Hash} ) {
-        my $File = "$Self->{PrivatePath}/$Certificates[0]->{Filename}";
+        my $File = $Self->_FilePathGet(
+            Directory => $Self->{PrivatePath},
+            Filename  => $Certificates[0]->{Filename},
+        );
+        my $SecretFile = $Self->_FilePathGet(
+            Directory => $Self->{PrivatePath},
+            Filename  => $Certificates[0]->{Filename} . '.P',
+        );
+        if ( !$File || !$SecretFile ) {
+            %Result = (
+                Successful => 0,
+                Message    => 'Invalid filename!',
+            );
+            return %Result;
+        }
+
         ## no critic
-        if ( open( my $PrivKeyFH, '>', "$File" ) ) {
+        if ( open( my $PrivKeyFH, '>', $File ) ) {
             ## use critic
             print $PrivKeyFH $Param{Private};
             close $PrivKeyFH;
-            open( my $PassFH, '>', "$File.P" );    ## no critic
+            open( my $PassFH, '>', $SecretFile );    ## no critic
             print $PassFH $Param{Secret};
             close $PassFH;
             %Result = (
@@ -1913,7 +1952,11 @@ sub PrivateGet {
         return if !$Param{Filename};
     }
 
-    my $File = "$Self->{PrivatePath}/$Param{Filename}";
+    my $File = $Self->_FilePathGet(
+        Directory => $Self->{PrivatePath},
+        Filename  => $Param{Filename},
+    );
+    return if !$File;
 
     # get main object
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
@@ -1926,8 +1969,13 @@ sub PrivateGet {
     return if !$Private;
 
     # read secret
-    $File = "$Self->{PrivatePath}/$Param{Filename}.P";
-    my $Secret = $MainObject->FileRead( Location => $File );
+    my $SecretFile = $Self->_FilePathGet(
+        Directory => $Self->{PrivatePath},
+        Filename  => "$Param{Filename}.P",
+    );
+    return if !$SecretFile;
+
+    my $Secret = $MainObject->FileRead( Location => $SecretFile );
 
     return ( $$Private, $$Secret ) if ( $Private && $Secret );
 
@@ -1976,19 +2024,34 @@ sub PrivateRemove {
         return %Return if !$Param{Filename};
     }
 
-    my $SecretDelete = unlink "$Self->{PrivatePath}/$Param{Filename}.P";
+    my $SecretFile = $Self->_FilePathGet(
+        Directory => $Self->{PrivatePath},
+        Filename  => "$Param{Filename}.P",
+    );
+    my $PrivateFile = $Self->_FilePathGet(
+        Directory => $Self->{PrivatePath},
+        Filename  => $Param{Filename},
+    );
+    if ( !$SecretFile || !$PrivateFile ) {
+        %Return = (
+            Successful => 0,
+            Message    => 'Invalid filename!',
+        );
+        return %Return;
+    }
+
+    my $SecretDelete = unlink $SecretFile;
 
     # abort if secret is not deleted
     if ( !$SecretDelete ) {
         %Return = (
             Successful => 0,
-            Message    =>
-                "Delete private aborted, not possible to delete Secret: $Self->{PrivatePath}/$Param{Filename}.P, $!!",
+            Message    => "Delete private aborted, not possible to delete Secret: $SecretFile, $!!",
         );
         return %Return;
     }
 
-    my $PrivateDelete = unlink "$Self->{PrivatePath}/$Param{Filename}";
+    my $PrivateDelete = unlink $PrivateFile;
     if ($PrivateDelete) {
 
         my $Certificate = $Self->CertificateGet(
@@ -2032,7 +2095,7 @@ sub PrivateRemove {
 
     %Return = (
         Successful => 0,
-        Message    => "Impossible to delete key $Param{Filename} $!!"
+        Message    => "Impossible to delete key $PrivateFile $!!"
     );
 
     return %Return;
@@ -3035,6 +3098,60 @@ sub _CleanOutput {
     }
 
     return $Output;
+}
+
+# Return the path of Filename inside Directory.
+# Filename must be one path component, and an existing file must stay inside Directory.
+sub _FilePathGet {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    if ( !IsStringWithData( $Param{Directory} ) || !IsStringWithData( $Param{Filename} ) ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => 'Need Directory and Filename!',
+        );
+        return;
+    }
+
+    # One path component, without a parent-directory reference.
+    if (
+        $Param{Filename} !~ m{\A[A-Za-z0-9][A-Za-z0-9._+\-]*\z}xms
+        || $Param{Filename} =~ m{\.\.}xms
+        )
+    {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => 'Invalid filename!',
+        );
+        return;
+    }
+
+    my $BaseDirectory = abs_path( $Param{Directory} );
+    if ( !$BaseDirectory ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Can't resolve directory $Param{Directory}!",
+        );
+        return;
+    }
+
+    my $Path = "$BaseDirectory/$Param{Filename}";
+
+    # A missing name is still inside the directory. An existing file or symlink must resolve there.
+    if ( -e $Path || -l $Path ) {
+        my $ResolvedPath = abs_path($Path);
+        if ( !$ResolvedPath || $ResolvedPath !~ m{\A\Q$BaseDirectory\E/}xms ) {
+            $LogObject->Log(
+                Priority => 'error',
+                Message  => 'Invalid filename!',
+            );
+            return;
+        }
+    }
+
+    return $Path;
 }
 
 sub _CertificateFilename {

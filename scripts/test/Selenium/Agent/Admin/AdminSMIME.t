@@ -207,11 +207,28 @@ $Selenium->RunTest(
             $BaseURL . "Action=Login;User=$TestUserLogin;Password=$TestUserLogin;"
         );
 
+        my $ResponseAdminSMIME = $UserAgent->get(
+            $BaseURL . 'Action=AdminSMIME',
+        );
+        my $AdminSMIMEContent = $ResponseAdminSMIME->content() // '';
+        my $ChallengeToken    = '';
+        if ( $AdminSMIMEContent =~ m{name="ChallengeToken"\s+value="([^"]+)"}xms ) {
+            $ChallengeToken = $1;
+        }
+        elsif ( $AdminSMIMEContent =~ m{ChallengeToken=([^;"&\s]+)}xms ) {
+            $ChallengeToken = $1;
+        }
+        $Self->True(
+            $ChallengeToken,
+            'AdminSMIME challenge token found for download request',
+        );
+
         for my $TestSMIME (qw(key cert)) {
 
             # Check for test created Certificate and Private key download file name.
             my $Response = $UserAgent->get(
-                $BaseURL . "Action=AdminSMIME;Subaction=Download;Type=$TestSMIME;Filename=097aa832.0"
+                $BaseURL
+                    . "Action=AdminSMIME;Subaction=Download;Type=$TestSMIME;Filename=097aa832.0;ChallengeToken=$ChallengeToken"
             );
             if ( $ResponseLogin->is_success() && $Response->is_success() ) {
 
