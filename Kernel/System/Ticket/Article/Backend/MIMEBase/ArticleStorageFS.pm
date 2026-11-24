@@ -11,7 +11,9 @@ package Kernel::System::Ticket::Article::Backend::MIMEBase::ArticleStorageFS;
 
 use strict;
 use warnings;
+use utf8;
 
+use Cwd                qw(abs_path);
 use File::Path         qw();
 use MIME::Base64       qw();
 use Time::HiRes        qw();
@@ -52,18 +54,12 @@ sub new {
     my $Self = $Type->SUPER::new(%Param);
 
     my $ArticleContentPath = $Self->BuildArticleContentPath();
-    my $ArticleDir         = "$Self->{ArticleDataDir}/$ArticleContentPath/";
+    my $ArticleDir         = $Self->_ArticleDirectoryCreate(
+        SubPath => $ArticleContentPath,
+    );
 
-    File::Path::mkpath( $ArticleDir, 0, 0770 );    ## no critic
-
-    # Check write permissions.
-    if ( !-w $ArticleDir ) {
-
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'notice',
-            Message  => "Can't write $ArticleDir! try: \$OTRS_HOME/bin/znuny.SetPermissions.pl!",
-        );
-        die "Can't write $ArticleDir! try: \$OTRS_HOME/bin/znuny.SetPermissions.pl!";
+    if ( !$ArticleDir ) {
+        die "Can't write $Self->{ArticleDataDir}/$ArticleContentPath/! try: \$OTRS_HOME/bin/znuny.SetPermissions.pl!";
     }
 
     # Get activated cache backend configuration.
@@ -251,15 +247,20 @@ sub ArticleWritePlain {
     my $ContentPath = $Self->_ArticleContentPathGet(
         ArticleID => $Param{ArticleID},
     );
-    my $Path = $Self->{ArticleDataDir} . '/' . $ContentPath . '/' . $Param{ArticleID};
+    my $SubPath = $ContentPath . '/' . $Param{ArticleID};
 
     # debug
     if ( defined $Self->{Debug} && $Self->{Debug} > 1 ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log( Message => "->WriteArticle: $Path" );
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Message => "->WriteArticle: $Self->{ArticleDataDir}/$SubPath",
+        );
     }
 
     # write article to fs 1:1
-    File::Path::mkpath( [$Path], 0, 0770 );    ## no critic
+    my $Path = $Self->_ArticleDirectoryCreate(
+        SubPath => $SubPath,
+    );
+    return if !$Path;
 
     # write article to fs
     my $Success = $Kernel::OM->Get('Kernel::System::Main')->FileWrite(
@@ -308,7 +309,10 @@ sub ArticleWriteAttachment {
     );
 
     # define path
-    $Param{Path} = $Self->{ArticleDataDir} . '/' . $ContentPath . '/' . $Param{ArticleID};
+    $Param{Path} = $Self->_ArticleDirectoryCreate(
+        SubPath => $ContentPath . '/' . $Param{ArticleID},
+    );
+    return if !$Param{Path};
 
     # get main object
     my $MainObject = $Kernel::OM->Get('Kernel::System::Main');
@@ -345,17 +349,6 @@ sub ArticleWriteAttachment {
     }
 
     $Param{Filename} = $NewFileName;
-
-    # write attachment to backend
-    if ( !-d $Param{Path} ) {
-        if ( !File::Path::mkpath( [ $Param{Path} ], 0, 0770 ) ) {    ## no critic
-            $Kernel::OM->Get('Kernel::System::Log')->Log(
-                Priority => 'error',
-                Message  => "Can't create $Param{Path}: $!",
-            );
-            return;
-        }
-    }
 
     # write attachment content type to fs
     my $SuccessContentType = $MainObject->FileWrite(
@@ -906,6 +899,97 @@ sub ArticleAttachment {
     }
 
     return %Data;
+}
+
+=head2 _ArticleDirectoryCreate()
+
+Creates a subdirectory below the already existing ArticleDataDir.
+
+    my $Directory = $BackendObject->_ArticleDirectoryCreate(
+        SubPath => '2026/11/04',
+    );
+
+The configured ArticleDataDir itself is never created. Returns the absolute
+path of the subdirectory, or undef when the base directory is missing, the
+subpath is invalid, or the directory cannot be created.
+
+=cut
+
+sub _ArticleDirectoryCreate {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    my $ArticleDataDir = $Self->{ArticleDataDir};
+
+    if ( !-d $ArticleDataDir ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "ArticleDataDir '$ArticleDataDir' does not exist!",
+        );
+        return;
+    }
+
+    my $BaseDir = abs_path($ArticleDataDir);
+    if ( !$BaseDir ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "ArticleDataDir '$ArticleDataDir' could not be resolved!",
+        );
+        return;
+    }
+
+    my $SubPath = $Param{SubPath} // '';
+
+    if (
+        !IsStringWithData($SubPath)
+        || $SubPath =~ m{\A/}
+        || $SubPath =~ m{\.\.}
+        || $SubPath =~ m{\0}
+        )
+    {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Invalid article subdirectory '$SubPath'!",
+        );
+        return;
+    }
+
+    my $TargetDir = $BaseDir . '/' . $SubPath;
+
+    if ( !-d $TargetDir ) {
+        my $Created = File::Path::mkpath( $TargetDir, 0, 0770 );    ## no critic
+        if ( !$Created ) {
+            $LogObject->Log(
+                Priority => 'error',
+                Message  => "Can't create $TargetDir: $!",
+            );
+            return;
+        }
+    }
+
+    my $RealTarget = abs_path($TargetDir);
+    if (
+        !$RealTarget
+        || ( $RealTarget ne $BaseDir && index( $RealTarget, $BaseDir . '/' ) != 0 )
+        )
+    {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Article directory '$TargetDir' is outside '$BaseDir'!",
+        );
+        return;
+    }
+
+    if ( !-w $RealTarget ) {
+        $LogObject->Log(
+            Priority => 'notice',
+            Message  => "Can't write $RealTarget! try: \$OTRS_HOME/bin/znuny.SetPermissions.pl!",
+        );
+        return;
+    }
+
+    return $RealTarget;
 }
 
 1;

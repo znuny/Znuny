@@ -157,6 +157,62 @@ $Self->True(
 
 $HelperObject->CustomFileCleanup();
 
+# A slash in the identifier must not escape Kernel/Config/Files, even if the
+# intermediate directory used by that traversal exists.
+my $Home          = $ConfigObject->Get('Home');
+my $SneekName     = 'Sneek' . $RandomNumber;
+my $TraversalFile = "$Home/Kernel/Config/Files/$SneekName.pm";
+my $SanitizedFile = "$Home/Kernel/Config/Files/ZZZZUnitTest..$SneekName.pm";
+my $TraversalDir  = "$Home/Kernel/Config/Files/ZZZZUnitTest";
+my $CreatedTraversalDir;
+
+if ( !-d $TraversalDir ) {
+    if ( !mkdir $TraversalDir, 0770 ) {
+        die "Could not create $TraversalDir: $!";
+    }
+    $CreatedTraversalDir = 1;
+}
+
+$HelperObject->CustomCodeActivate(
+    Code       => "package Kernel::Config::Files::ZZZZUnitTestTraversal; sub Load {} 1;\n",
+    Identifier => "/../$SneekName",
+);
+
+$Self->False(
+    -e $TraversalFile,
+    "Traversal identifier did not create $SneekName.pm",
+);
+
+$Self->True(
+    -f $SanitizedFile,
+    'Sanitized custom code file stays in Kernel/Config/Files',
+);
+
+$HelperObject->CustomFileCleanup();
+
+$Self->False(
+    -e $SanitizedFile,
+    'Sanitized custom code file was removed by CustomFileCleanup',
+);
+
+if ($CreatedTraversalDir) {
+    rmdir $TraversalDir;
+}
+
+my $EmptyIdentifierDied;
+eval {
+    $HelperObject->CustomCodeActivate(
+        Code       => "1;\n",
+        Identifier => '/',
+    );
+};
+$EmptyIdentifierDied = 1 if $@;
+
+$Self->True(
+    $EmptyIdentifierDied,
+    'Identifier with only slashes is rejected',
+);
+
 $NewConfigObject = Kernel::Config->new();
 $Self->Is(
     scalar $NewConfigObject->Get('nonexisting_dummy'),
