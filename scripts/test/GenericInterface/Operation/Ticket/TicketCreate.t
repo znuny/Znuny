@@ -631,6 +631,13 @@ my $Password2  = $UserLogin2;
 my $CustomerUserLogin = $HelperObject->TestCustomerUserCreate();
 my $CustomerPassword  = $CustomerUserLogin;
 
+$ServiceObject->CustomerUserServiceMemberAdd(
+    CustomerUserLogin => $CustomerUserLogin,
+    ServiceID         => $ServiceID,
+    Active            => 1,
+    UserID            => 1,
+);
+
 # create a customer that will not have permissions
 my $CustomerUserLogin2 = $HelperObject->TestCustomerUserCreate();
 my $CustomerPassword2  = $CustomerUserLogin2;
@@ -886,10 +893,11 @@ my @Tests        = (
         Operation => 'TicketCreate',
     },
     {
-        Name           => 'Invalid CustomerUser',
-        SuccessRequest => 1,
-        SuccessCreate  => 0,
-        RequestData    => {
+        Name                => 'Invalid CustomerUser',
+        SuccessRequest      => 1,
+        SuccessCreate       => 0,
+        DependsOnEmailCheck => 1,
+        RequestData         => {
             Ticket => {
                 Title        => 'Ticket Title',
                 CustomerUser => 'Invalid@Email@' . $RandomID,
@@ -2043,10 +2051,11 @@ my @Tests        = (
         Operation => 'TicketCreate',
     },
     {
-        Name           => 'Invalid From',
-        SuccessRequest => 1,
-        SuccessCreate  => 0,
-        RequestData    => {
+        Name                => 'Invalid From',
+        SuccessRequest      => 1,
+        SuccessCreate       => 0,
+        DependsOnEmailCheck => 1,
+        RequestData         => {
             Ticket => {
                 Title         => 'Ticket Title',
                 CustomerUser  => $TestCustomerUserLogin,
@@ -3541,11 +3550,12 @@ my @Tests        = (
         Operation => 'TicketCreate',
     },
     {
-        Name             => 'Ticket with external customer user - invalid address',
-        SuccessRequest   => 1,
-        SuccessCreate    => 0,
-        ExternalCustomer => 1,
-        RequestData      => {
+        Name                => 'Ticket with external customer user - invalid address',
+        SuccessRequest      => 1,
+        SuccessCreate       => 0,
+        ExternalCustomer    => 1,
+        DependsOnEmailCheck => 1,
+        RequestData         => {
             Ticket => {
                 Title        => 'Ticket Title',
                 CustomerUser => 'someonesomehots.com',
@@ -3773,35 +3783,26 @@ my @Tests        = (
         SuccessCreate  => 1,
         RequestData    => {
             Ticket => {
-                Title         => 'Ticket Title',
-                CustomerUser  => $TestCustomerUserLogin,
-                QueueID       => $Queues[0]->{QueueID},
-                TypeID        => $TypeID,
-                ServiceID     => $ServiceID,
-                SLAID         => $SLAID,
-                StateID       => $StateID,
-                PriorityID    => $PriorityID,
-                OwnerID       => $OwnerID,
-                ResponsibleID => $ResponsibleID,
-                PendingTime   => {
-                    Year   => 2012,
-                    Month  => 12,
-                    Day    => 16,
-                    Hour   => 20,
-                    Minute => 48,
-                },
+                Title        => 'Ticket Title',
+                CustomerUser => $CustomerUserLogin,
+                QueueID      => $Queues[0]->{QueueID},
+                TypeID       => $TypeID,
+                ServiceID    => $ServiceID,
+                SLAID        => $SLAID,
+                StateID      => $StateID,
+                PriorityID   => $PriorityID,
             },
             Article => {
-                Subject                         => 'Article subject',
-                Body                            => 'Article body',
-                AutoResponseType                => 'auto reply',
-                SenderTypeID                    => 1,
-                IsVisibleForCustomer            => 1,
-                From                            => 'enjoy@znuny.com',
-                ContentType                     => 'text/plain; charset=UTF8',
-                HistoryType                     => 'NewTicket',
-                HistoryComment                  => '% % ',
-                TimeUnit                        => 25,
+                Subject              => 'Article subject',
+                Body                 => 'Article body',
+                AutoResponseType     => 'auto reply',
+                SenderType           => 'customer',
+                IsVisibleForCustomer => 1,
+                From           => "\"$CustomerUserLogin $CustomerUserLogin\" <$CustomerUserLogin\@localunittest.com>",
+                ContentType    => 'text/plain; charset=UTF8',
+                HistoryType    => 'NewTicket',
+                HistoryComment => '% % ',
+                TimeUnit       => 25,
                 ForceNotificationToUserID       => [$UserID],
                 ExcludeNotificationToUserID     => [$UserID],
                 ExcludeMuteNotificationToUserID => [$UserID],
@@ -3833,8 +3834,6 @@ my @Tests        = (
                 CustomerUser  => $TestCustomerUserLogin,
                 QueueID       => $Queues[1]->{QueueID},
                 TypeID        => $TypeID,
-                ServiceID     => $ServiceID,
-                SLAID         => $SLAID,
                 StateID       => $StateID,
                 PriorityID    => $PriorityID,
                 OwnerID       => $OwnerID,
@@ -4540,6 +4539,10 @@ $Self->Is(
     'DebuggerObject instantiate correctly'
 );
 
+# Kernel::Config::Load() runs again after the config files, so CheckEmailAddresses
+# from Kernel/Config.pm is what the web service sees.
+my $WebserviceEmailCheck = Kernel::Config->new()->Get('CheckEmailAddresses');
+
 TEST:
 for my $Test (@Tests) {
 
@@ -4747,7 +4750,7 @@ for my $Test (@Tests) {
                     "$Test->{Name} - local Ticket->$Attribute" . 'ID' . " match test definition.",
                 );
             }
-            else {
+            elsif ( IsStringWithData( $Test->{RequestData}->{Ticket}->{$Attribute} ) ) {
                 $Self->Is(
                     $LocalTicketData{$Attribute},
                     $Test->{RequestData}->{Ticket}->{$Attribute},
@@ -4967,11 +4970,20 @@ for my $Test (@Tests) {
                 . " local and remote tests."
         );
 
-        $Self->IsDeeply(
-            $LocalResult,
-            $RequesterResult,
-            "$Test->{Name} - Local result matched with remote result."
-        );
+        # The web service keeps CheckEmailAddresses from Kernel/Config.pm.
+        if ( $Test->{DependsOnEmailCheck} && !$WebserviceEmailCheck ) {
+            $Self->True(
+                1,
+                "$Test->{Name} - local/remote compare skipped, web service has email address checks disabled",
+            );
+        }
+        else {
+            $Self->IsDeeply(
+                $LocalResult,
+                $RequesterResult,
+                "$Test->{Name} - Local result matched with remote result."
+            );
+        }
     }
 }
 

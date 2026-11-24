@@ -1,4 +1,5 @@
 # 7.5.1 2026-??-??
+ - 2026-11-25 Security: Generic interface operations TicketCreate and TicketUpdate no longer let a customer user set an agent article sender or other agent-related ticket fields.
  - 2026-11-25 Security: Admin OAuth2 token template names can no longer read YAML files outside of the template directory.
  - 2026-11-24 Added: Services can be assigned to customer companies. Ticket dialogs offer the services of the selected customer company. Integrated package Znuny-CustomerCompanyService.
  - 2026-11-23 Fixed: UsedSpace is calculated too early in Core.UI.js. Thanks to @BuilderNSV for reporting the issue. [#604](https://github.com/znuny/Znuny/issues/604)
