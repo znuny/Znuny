@@ -1577,6 +1577,17 @@
     </Setting>
 
     <!--
+        Consecutive process transitions in one request.
+    -->
+    <Setting Name="Process::Transition::MaxTransitionsPerRequest" Required="1" Valid="1">
+        <Description Translatable="1">Maximum number of process transitions evaluated for one ticket in a single request, so a transition action that changes ticket data can advance the following activity immediately. Set this to 1 to evaluate only one transition per request. Values must be from 1 to 99. A cyclic process runs until this limit on every ticket update. Reaching the limit writes a notice to the system log. Set the minimum log level to notice, info or debug to keep that notice.</Description>
+        <Navigation>Core::ProcessManagement</Navigation>
+        <Value>
+            <Item ValueType="String" ValueRegex="^([1-9]|[1-9][0-9])$">1</Item>
+        </Value>
+    </Setting>
+
+    <!--
         Advanced Bulk Action
     -->
     <Setting Name="Ticket::Frontend::AgentTicketBulk###Service" Required="0" Valid="1">

@@ -21367,6 +21367,10 @@ msgid "Format string for output of attachments in the selection list. \"%1$d\": 
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of process transitions evaluated for one ticket in a single request, so a transition action that changes ticket data can advance the following activity immediately. Set this to 1 to evaluate only one transition per request."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Sets the service in the ticket bulk screen in the agent interface (Ticket::Service needs to be enabled)."
 msgstr ""
 

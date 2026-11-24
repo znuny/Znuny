@@ -11,6 +11,9 @@ package Kernel::System::Ticket::Event::TicketProcessTransitions;
 
 use strict;
 use warnings;
+use utf8;
+
+use Kernel::System::VariableCheck qw(IsHashRefWithData IsPositiveInteger);
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -110,21 +113,81 @@ sub Run {
     #   processed in the mean time, before the chache is set, see bug#9748
     $TicketObject->{$CacheKey}->{ $Param{Data}->{TicketID} } = 1;
 
-    my $TransitionApplied = $ProcessObject->ProcessTransition(
-        ProcessEntityID  => $ProcessEntityID,
-        ActivityEntityID => $ActivityEntityID,
-        TicketID         => $Param{Data}->{TicketID},
-        UserID           => $Param{UserID},
-    );
+    # A transition action can change the ticket in this request, for example when a web
+    # service writes a dynamic field. Nested events are blocked by the loop guard above
+    # (bug#9748), so the new activity is evaluated here. The limit stops cyclic processes.
+    # SysConfig accepts 1 to 99. A larger stored value is capped here so one ticket update
+    # cannot run an unbounded number of transitions.
+    my $MaxTransitionsPerRequest = $ConfigObject->Get('Process::Transition::MaxTransitionsPerRequest');
+    if ( !IsPositiveInteger($MaxTransitionsPerRequest) ) {
+        $MaxTransitionsPerRequest = 1;
+    }
 
-    if ( $Self->{Debug} ) {
-        $Kernel::OM->Get('Kernel::System::Log')->Log(
-            Priority => 'error',
-            Message  =>
-                "Transition for to TicketID: $Param{Data}->{TicketID}"
-                . "  ProcessEntityID: $ProcessEntityID OldActivityEntityID: $ActivityEntityID "
-                . ( $TransitionApplied ? "was applied." : "was not applied." ),
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    # Set when the last allowed step still moved the ticket to another activity.
+    # Further transitions were not evaluated.
+    my $TransitionLimitReached = 0;
+
+    STEP:
+    for my $Step ( 1 .. $MaxTransitionsPerRequest ) {
+        my $TransitionApplied = $ProcessObject->ProcessTransition(
+            ProcessEntityID  => $ProcessEntityID,
+            ActivityEntityID => $ActivityEntityID,
+            TicketID         => $Param{Data}->{TicketID},
+            UserID           => $Param{UserID},
         );
+
+        if ( $Self->{Debug} ) {
+            $LogObject->Log(
+                Priority => 'error',
+                Message  =>
+                    "Transition for to TicketID: $Param{Data}->{TicketID}"
+                    . "  ProcessEntityID: $ProcessEntityID OldActivityEntityID: $ActivityEntityID "
+                    . "Step: $Step "
+                    . ( $TransitionApplied ? "was applied." : "was not applied." ),
+            );
+        }
+
+        last STEP if !$TransitionApplied;
+
+        my %TicketAfterTransition = $TicketObject->TicketGet(
+            TicketID      => $Param{Data}->{TicketID},
+            DynamicFields => 1,
+            Silent        => 1,
+        );
+
+        my $NextActivityEntityID = $TicketAfterTransition{"DynamicField_$ActivityIDField"};
+
+        last STEP if !$NextActivityEntityID;
+        last STEP if $NextActivityEntityID eq $ActivityEntityID;
+
+        $ActivityEntityID = $NextActivityEntityID;
+
+        if ( $Step == $MaxTransitionsPerRequest ) {
+            $TransitionLimitReached = 1;
+        }
+    }
+
+    if ($TransitionLimitReached) {
+        my $ProcessName  = $ProcessList->{$ProcessEntityID} || $ProcessEntityID;
+        my $ActivityName = $ActivityEntityID;
+        my $Activities   = $ConfigObject->Get('Process::Activity');
+
+        if ( IsHashRefWithData($Activities) && IsHashRefWithData( $Activities->{$ActivityEntityID} ) ) {
+            $ActivityName = $Activities->{$ActivityEntityID}->{Name} || $ActivityEntityID;
+        }
+
+        my $TransitionDebugEnabled = $ConfigObject->Get('ProcessManagement::Transition::Debug::Enabled');
+
+        if ($TransitionDebugEnabled) {
+            $LogObject->Log(
+                Priority => 'notice',
+                Message  => "Process transition limit of $MaxTransitionsPerRequest reached for TicketID "
+                    . "$Param{Data}->{TicketID} (Process: $ProcessName, Activity: $ActivityName). "
+                    . 'A cyclic process keeps applying transitions up to this limit on every ticket update.',
+            );
+        }
     }
 
     return 1;

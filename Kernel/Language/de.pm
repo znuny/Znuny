@@ -8260,6 +8260,8 @@ sub Data {
         'Keep dynamic field attachments after each transition.' => 'Anhänge in dynamischem Feld nach jeder Transition beibehalten.',
         'Format string for output of attachments in the selection list. "%1$d": article number; "%2$s": filename; "%3$s": translated object type (e.g. Article => Artikel); "%4$s": translated attachment label (e.g. "Anhang").' =>
             'Formatierter String zur Ausgabe der Anhänge in Auswahllisten. "%1$d": Artikelnummer; "%2$s": Dateiname; "%3$s": übersetzter Objekttyp (z. B. Article => Artikel); "%4$s": übersetztes Anhang-Label (z. B. "Anhang").',
+        'Maximum number of process transitions evaluated for one ticket in a single request, so a transition action that changes ticket data can advance the following activity immediately. Set this to 1 to evaluate only one transition per request.' =>
+            'Maximale Anzahl an Prozesstransitionen, die für ein Ticket in einem einzelnen Request ausgewertet werden, damit eine Transitionsaktion, die Ticketdaten ändert, die folgende Aktivität sofort weiterführen kann. Setzen Sie diesen Wert auf 1, um pro Request nur eine Transition auszuwerten.',
         'Sets the service in the ticket bulk screen in the agent interface (Ticket::Service needs to be enabled).' =>
             'Setzt den Service in der Ticket-Sammelaktion in der Agentenoberfläche (Ticket::Service muss aktiviert sein).',
         'Dynamic fields shown in the ticket bulk screen of the agent interface.' =>
