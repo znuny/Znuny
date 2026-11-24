@@ -7,19 +7,19 @@
 # --
 
 [% RenderBlockStart("ActivityList") %]
-    <li class="Activity" data-activity-id="[% Data.ID %]" data-activity-state="[% Data.State %]">
-        <a href="[% Data.Link %]" target="[% Data.LinkTarget %]" class="activity-link activity dropdown-item">
+    <li class="Activity" data-activity-id="[% Data.ID | html %]" data-activity-state="[% Data.State | html %]">
+        <a href="[% Data.Link | html %]" target="[% Data.LinkTarget | html %]" class="activity-link activity dropdown-item">
             <span class="iconWrapper">
-                <i class="activity-icon [% Data.Icon %]"></i>
-                <span class="ActivityState activity-[% Data.State %]"></span>
+                <i class="activity-icon [% Data.Icon | html %]"></i>
+                <span class="ActivityState activity-[% Data.State | html %]"></span>
             </span>
             <span class="textWrapper">
-                <p class="activity-title">[% Data.Title %]</p>
-                <p class="activity-text">[% Data.Text | truncate(100) %]</p>
+                <p class="activity-title">[% Data.Title | html %]</p>
+                <p class="activity-text">[% Data.Text | truncate(100) | html %]</p>
                 <p class="activity-time">[% Data.CreateTime | Localize("TimeShort") %]</p>
             </span>
         </a>
-        <span class="activity-delete icon-hover" data-activity-id="[% Data.ID %]">
+        <span class="activity-delete icon-hover" data-activity-id="[% Data.ID | html %]">
             <i class="fa fa-close"></i>
         </span>
     </li>

@@ -46,6 +46,11 @@ sub Run {
     my $Success;
     my %GetParams = $Self->_GetParams();
 
+    # challenge token check for write actions
+    if ( $Self->{Subaction} ne 'Load' ) {
+        $LayoutObject->ChallengeTokenCheck();
+    }
+
     if ( $GetParams{Subaction} eq "Add" ) {
         $Data{ActivityID} = $ActivityObject->Add(
             %GetParams,
@@ -53,18 +58,28 @@ sub Run {
             CreateBy => $Self->{UserID},
         );
 
-        $Data{Success} = 1 if $Data{ActivityID};
+        if ( $Data{ActivityID} ) {
+            $Data{Success} = 1;
 
-        my %Activity = $ActivityObject->Get(
-            UserID => $Self->{UserID},
-            ID     => $Data{ActivityID},
-        );
+            my %Activity = $ActivityObject->Get(
+                UserID => $Self->{UserID},
+                ID     => $Data{ActivityID},
+            );
 
-        %Data = ( %Data, %Activity );
+            %Data = ( %Data, %Activity );
+        }
     }
     elsif ( $GetParams{Subaction} eq "Update" ) {
-        $Data{Success} = $ActivityObject->DataUpdate(
-            %GetParams,
+        my %UpdateParams;
+
+        ATTRIBUTE:
+        for my $Attribute (qw(Type Title Text State Link)) {
+            next ATTRIBUTE if !exists $GetParams{$Attribute};
+            $UpdateParams{$Attribute} = $GetParams{$Attribute};
+        }
+
+        $Data{Success} = $ActivityObject->Update(
+            %UpdateParams,
             ID     => $GetParams{ActivityID},
             UserID => $Self->{UserID},
         );
@@ -116,10 +131,16 @@ sub Run {
         splice( @Activities, -$RemoveRecords, $RemoveRecords ) if $RemoveRecords > 0;
 
         for my $Activity (@Activities) {
+            my $Link = $Activity->{Link};
+            if ( !$ActivityObject->IsValidLink( Link => $Link ) ) {
+                $Link = '#';
+            }
+
             $LayoutObject->Block(
                 Name => 'ActivityList',
                 Data => {
                     %{$Activity},
+                    Link       => $Link,
                     LinkTarget => $LinkTarget,
                 },
             );

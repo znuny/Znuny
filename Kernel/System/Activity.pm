@@ -15,6 +15,8 @@ use utf8;
 
 use List::Util qw(any);
 
+use Kernel::System::VariableCheck qw(:all);
+
 use parent qw(Kernel::System::DBCRUD);
 
 our @ObjectDependencies = (
@@ -68,6 +70,8 @@ sub Add {
     my ( $Self, %Param ) = @_;
 
     my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
+
+    return if !$Self->_CheckParams(%Param);
 
     my $Title = $HTMLUtilsObject->ToAscii( String => $Param{Title} );
     my $Text  = $HTMLUtilsObject->ToAscii( String => $Param{Text} );
@@ -199,6 +203,103 @@ sub CleanupExcessActivities {
     }
 
     return $ScheduledTasks;
+}
+
+=head2 Update()
+
+Updates the given attributes of an activity of the given user.
+Only the given attributes will be changed.
+
+    my $Success = $ActivityObject->Update(
+        ID     => 123,
+        UserID => 1,
+
+        # optional
+        Type  => '...',
+        Title => '...',
+        Text  => '...',
+        State => '...',    # 'new' or 'seen'
+        Link  => '...',
+    );
+
+Returns:
+
+    my $Success = 1;
+
+=cut
+
+sub Update {
+    my ( $Self, %Param ) = @_;
+
+    my $HTMLUtilsObject = $Kernel::OM->Get('Kernel::System::HTMLUtils');
+    my $LogObject       = $Kernel::OM->Get('Kernel::System::Log');
+
+    my %UpdateParams;
+
+    NEEDED:
+    for my $Needed (qw(ID UserID)) {
+        next NEEDED if defined $Param{$Needed};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "Need $Needed!",
+        );
+        return;
+    }
+
+    return if !$Self->_CheckParams(%Param);
+
+    ATTRIBUTE:
+    for my $Attribute (qw(Type Title Text State Link)) {
+        next ATTRIBUTE if !exists $Param{$Attribute};
+        $UpdateParams{$Attribute} = $Param{$Attribute};
+    }
+
+    ATTRIBUTE:
+    for my $Attribute (qw(Title Text)) {
+        next ATTRIBUTE if !defined $UpdateParams{$Attribute};
+        $UpdateParams{$Attribute} = $HTMLUtilsObject->ToAscii( String => $UpdateParams{$Attribute} );
+    }
+
+    return $Self->DataUpdate(
+        %UpdateParams,
+        ID     => $Param{ID},
+        UserID => $Param{UserID},
+    );
+}
+
+=head2 IsValidLink()
+
+Checks if the given link can safely be used as link of an activity.
+Allowed are absolute http(s) URLs and relative URLs without scheme.
+
+    my $IsValid = $ActivityObject->IsValidLink(
+        Link => 'index.pl?Action=AgentTicketZoom;TicketID=1',
+    );
+
+Returns:
+
+    my $IsValid = 1;
+
+=cut
+
+sub IsValidLink {
+    my ( $Self, %Param ) = @_;
+
+    my $Link = $Param{Link};
+
+    return if !IsStringWithData($Link);
+
+    # characters that are not allowed unencoded in a URL or could be used to break out of an HTML attribute
+    return if $Link =~ m{[\s"'<>\\`[:cntrl:]]}xms;
+
+    return 1 if $Link =~ m{\A https?://}xmsi;
+
+    # any other scheme (e.g. javascript:, data:) or protocol-relative URLs
+    return if $Link =~ m{\A [a-z][a-z0-9+.\-]* :}xmsi;
+    return if $Link =~ m{\A //}xms;
+
+    return 1;
 }
 
 =head2 GetLink()
@@ -643,6 +744,35 @@ sub InitConfig {
     my $Config = $ConfigObject->Get('Activity');
     %{ $Self->{TypeIconMap} }  = %{ $Config->{TypeIconMapping}  || {} };
     %{ $Self->{EventTypeMap} } = %{ $Config->{EventTypeMapping} || {} };
+
+    $Self->{ValidStates} = {
+        new  => 1,
+        seen => 1,
+    };
+
+    return 1;
+}
+
+sub _CheckParams {
+    my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
+
+    if ( defined $Param{State} && !$Self->{ValidStates}->{ $Param{State} } ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => 'Invalid activity state given!',
+        );
+        return;
+    }
+
+    if ( defined $Param{Link} && !$Self->IsValidLink( Link => $Param{Link} ) ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => 'Invalid activity link given!',
+        );
+        return;
+    }
 
     return 1;
 }

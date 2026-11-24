@@ -8,6 +8,8 @@
  - 2026-11-24 Added: Services can be assigned to customer companies. Ticket dialogs offer the services of the selected customer company. Integrated package Znuny-CustomerCompanyService.
  - 2026-11-23 Fixed: UsedSpace is calculated too early in Core.UI.js. Thanks to @BuilderNSV for reporting the issue. [#604](https://github.com/znuny/Znuny/issues/604)
  - 2026-11-23 Added: Admin module to configure SAML2 authentication.
+ - 2026-11-20 Security: Activity notification bell rendered titles and texts of ticket and appointment notifications as HTML (stored XSS via entity-encoded e-mail subject). Thanks to Timotej Doležal (ESET) for reporting the issue.
+ - 2026-11-20 Security: Activity frontend module did not check the challenge token and stored/rendered activity state and link unvalidated and unescaped (stored XSS in the notification bell). Thanks to Timotej Doležal (ESET) for reporting the issue.
  - 2026-11-20 Fixed: Date and DateTime dynamic fields ignored the user time zone when restricting dates to the past or the future.
  - 2026-11-20 Fixed: Recipients listed on folded To and Cc lines were sent as Bcc by the MSGraph backend and were missing from the received message.
  - 2026-11-20 Added: Content filter for articles in the article filter dialog of agent ticket details view.
