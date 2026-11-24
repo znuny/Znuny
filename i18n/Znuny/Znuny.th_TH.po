@@ -25861,3 +25861,7 @@ msgstr "จำนวนครั้งสูงสุดของการลง
 msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
 msgstr "ช่วงเวลาเป็นวินาทีสำหรับการจำกัดการลงทะเบียนด้วยตนเอง ความพยายามในช่วงเวลานี้จะถูกนับรวมในจำนวนสูงสุด"
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
+msgstr "คำนำหน้า URL แบบ HTTPS ที่การแมป XSLT สามารถโหลดได้ด้วย xsl:import, xsl:include หรือ document() แต่ละรายการต้องขึ้นต้นด้วย https:// และถูกเปรียบเทียบแบบตรงทุกตัวอักษร รวมถึงตัวพิมพ์ใหญ่และตัวพิมพ์เล็ก กับส่วนต้นของ URL ที่ร้องขอ คำนำหน้าโฮสต์ควรลงท้ายด้วยเครื่องหมายทับ เช่น https://znuny.de/ คำนำหน้ายังสามารถระบุทรัพยากรเดียวได้ เช่น https://blabla.com/xslt/onlythisfile.txt รายการว่างจะปฏิเสธ URL บนเครือข่ายทั้งหมด รายการที่ไม่ได้ขึ้นต้นด้วย https:// จะถูกละเว้น"
+

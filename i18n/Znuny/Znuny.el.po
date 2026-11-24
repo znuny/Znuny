@@ -25853,3 +25853,7 @@ msgstr "Μέγιστος αριθμός προσπαθειών αυτοεγγρ�
 msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
 msgstr "Χρονικό παράθυρο σε δευτερόλεπτα για τον περιορισμό της αυτοεγγραφής. Οι προσπάθειες εντός αυτού του παραθύρου προσμετρώνται στο μέγιστο."
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
+msgstr "Προθέματα διευθύνσεων URL HTTPS που μια αντιστοίχιση XSLT μπορεί να φορτώσει με xsl:import, xsl:include ή document(). Κάθε καταχώριση πρέπει να αρχίζει με https:// και συγκρίνεται ακριβώς, συμπεριλαμβανομένων των πεζών και κεφαλαίων, με την αρχή της ζητούμενης διεύθυνσης URL. Ένα πρόθεμα κεντρικού υπολογιστή πρέπει να τελειώνει με κάθετο, για παράδειγμα https://znuny.de/. Ένα πρόθεμα μπορεί επίσης να ονομάζει έναν πόρο, για παράδειγμα https://blabla.com/xslt/onlythisfile.txt. Μια κενή λίστα απορρίπτει κάθε διεύθυνση URL δικτύου. Οι καταχωρίσεις που δεν αρχίζουν με https:// αγνοούνται."
+

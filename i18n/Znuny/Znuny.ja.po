@@ -25879,3 +25879,7 @@ msgstr "レート制限の時間枠内で、1 つの IP アドレスに許可す
 msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
 msgstr "自己登録のレート制限に使う時間枠（秒）。この時間枠内の試行は上限にカウントされます。"
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
+msgstr "XSLTマッピングが xsl:import、xsl:include または document() で読み込める HTTPS URL のプレフィックス。各項目は https:// で始まる必要があり、大文字と小文字を含めて要求された URL の先頭と完全に比較されます。ホストのプレフィックスはスラッシュで終わる必要があります。例: https://znuny.de/。プレフィックスは単一のリソースを指定することもできます。例: https://blabla.com/xslt/onlythisfile.txt。空の一覧はすべてのネットワーク URL を拒否します。https:// で始まらない項目は無視されます。"
+

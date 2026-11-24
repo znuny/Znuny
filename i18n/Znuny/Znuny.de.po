@@ -25940,3 +25940,7 @@ msgstr "Maximale Anzahl an Selbstregistrierungsversuchen pro IP-Adresse innerhal
 msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
 msgstr "Zeitfenster in Sekunden für das Rate Limiting bei der Selbstregistrierung. Versuche innerhalb dieses Zeitfensters werden gegen das Maximum gezählt."
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
+msgstr "HTTPS-URL-Präfixe, die ein XSLT-Mapping mit xsl:import, xsl:include oder document() laden darf. Jeder Eintrag muss mit https:// beginnen und wird exakt, einschließlich Groß- und Kleinschreibung, mit dem Anfang der angeforderten URL verglichen. Ein Host-Präfix sollte mit einem Schrägstrich enden, zum Beispiel https://znuny.de/. Ein Präfix kann auch eine einzelne Ressource benennen, zum Beispiel https://blabla.com/xslt/onlythisfile.txt. Eine leere Liste untersagt jede Netzwerk-URL. Einträge, die nicht mit https:// beginnen, werden ignoriert."
+

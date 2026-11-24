@@ -25859,3 +25859,7 @@ msgstr "在速率限制时间窗口内，每个 IP 地址允许的最大自助�
 msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
 msgstr "自助注册速率限制的时间窗口（秒）。此窗口内的尝试计入上限。"
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
+msgstr "XSLT 映射可通过 xsl:import、xsl:include 或 document() 加载的 HTTPS URL 前缀。每一项都必须以 https:// 开头，并与所请求 URL 的开头进行精确比较（包括大小写）。主机前缀应以斜杠结尾，例如 https://znuny.de/。前缀也可以指定单个资源，例如 https://blabla.com/xslt/onlythisfile.txt。空列表会拒绝所有网络 URL。不以 https:// 开头的项会被忽略。"
+

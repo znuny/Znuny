@@ -25857,3 +25857,7 @@ msgstr "속도 제한 시간 창 안에서 IP 주소당 허용되는 최대 자�
 msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
 msgstr "자가 등록 속도 제한의 시간 창(초). 이 창 안의 시도는 최대값에 포함됩니다."
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
+msgstr "XSLT 매핑이 xsl:import, xsl:include 또는 document()로 불러올 수 있는 HTTPS URL 접두사입니다. 각 항목은 https://로 시작해야 하며, 대소문자를 포함하여 요청된 URL의 시작 부분과 정확히 비교됩니다. 호스트 접두사는 슬래시로 끝나야 합니다. 예: https://znuny.de/. 접두사는 하나의 리소스를 지정할 수도 있습니다. 예: https://blabla.com/xslt/onlythisfile.txt. 빈 목록은 모든 네트워크 URL을 거부합니다. https://로 시작하지 않는 항목은 무시됩니다."
+

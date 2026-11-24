@@ -25850,3 +25850,7 @@ msgstr "Az önregisztrációs próbálkozások maximális száma IP-címenként 
 msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
 msgstr "Az önregisztráció korlátozásának időablaka másodpercben. Az ablakon belüli próbálkozások beleszámítanak a maximumba."
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
+msgstr "HTTPS URL-előtagok, amelyeket egy XSLT-leképezés betölthet az xsl:import, xsl:include vagy document() használatával. Minden bejegyzésnek https:// előtaggal kell kezdődnie, és a kis- és nagybetűket is figyelembe véve pontosan összehasonlításra kerül a kért URL elejével. A gazdagép előtagjának perjellel kell végződnie, például https://znuny.de/. Egy előtag egyetlen erőforrást is megnevezhet, például https://blabla.com/xslt/onlythisfile.txt. Az üres lista minden hálózati URL-t megtagad. A https:// előtaggal nem kezdődő bejegyzéseket a rendszer figyelmen kívül hagyja."
+

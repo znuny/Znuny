@@ -33,7 +33,183 @@ my $DebuggerObject = Kernel::GenericInterface::Debugger->new(
     CommunicationType => 'Provider',
 );
 
+my $TempDir = $Kernel::OM->Get('Kernel::Config')->Get('TempDir');
+
+my %InjectionFiles = map { $_ => "$TempDir/XSLTRegExpInjection${_}_$RandomNumber" } qw(Pre Post Array);
+
+my $IdentityTemplate = '<?xml version="1.0" encoding="UTF-8"?>
+<xsl:transform version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:template match="@*|node()">
+        <xsl:copy>
+            <xsl:apply-templates select="@*|node()"/>
+        </xsl:copy>
+    </xsl:template>
+</xsl:transform>';
+
 my @MappingTests = (
+    {
+        Name   => 'Test RegExp code injection is not executed (Pre RegExp)',
+        Config => {
+            PreRegExFilter => [
+                {
+                    Search  => '.*',
+                    Replace => q[${\system('touch ] . $InjectionFiles{Pre} . q[')}],
+                },
+            ],
+            Template => $IdentityTemplate,
+        },
+        Data => {
+            TicketID => $RandomNumber,
+        },
+
+        # The literal replacement is no valid XML element name.
+        ResultData     => undef,
+        ResultSuccess  => 0,
+        ConfigSuccess  => 1,
+        ForbiddenFiles => [ $InjectionFiles{Pre} ],
+    },
+    {
+        Name   => 'Test RegExp code injection is used literally (Post RegExp)',
+        Config => {
+            PostRegExFilter => [
+                {
+                    Search  => '^(\D*)ID$',
+                    Replace => q[${\system('touch ] . $InjectionFiles{Post} . q[')}$1],
+                },
+            ],
+            Template => $IdentityTemplate,
+        },
+        Data => {
+            TicketID => $RandomNumber,
+        },
+        ResultData => {
+            q[${\system('touch ] . $InjectionFiles{Post} . q[')}Ticket] => $RandomNumber,
+        },
+        ResultSuccess  => 1,
+        ConfigSuccess  => 1,
+        ForbiddenFiles => [ $InjectionFiles{Post} ],
+    },
+    {
+        Name   => 'Test RegExp array interpolation injection is used literally (Post RegExp)',
+        Config => {
+            PostRegExFilter => [
+                {
+                    Search  => '^TicketID$',
+                    Replace => '@{[ system(\'touch ' . $InjectionFiles{Array} . '\') ]}',
+                },
+            ],
+            Template => $IdentityTemplate,
+        },
+        Data => {
+            TicketID => $RandomNumber,
+        },
+        ResultData => {
+            '@{[ system(\'touch ' . $InjectionFiles{Array} . '\') ]}' => $RandomNumber,
+        },
+        ResultSuccess  => 1,
+        ConfigSuccess  => 1,
+        ForbiddenFiles => [ $InjectionFiles{Array} ],
+    },
+    {
+        Name   => 'Test RegExp ${N} syntax (Post RegExp)',
+        Config => {
+            PostRegExFilter => [
+                {
+                    Search  => '^(\D*)ID$',
+                    Replace => '${1}Number',
+                },
+            ],
+            Template => $IdentityTemplate,
+        },
+        Data => {
+            TicketID => $RandomNumber,
+        },
+        ResultData => {
+            'TicketNumber' => $RandomNumber,
+        },
+        ResultSuccess => 1,
+        ConfigSuccess => 1,
+    },
+    {
+        Name   => 'Test RegExp named captures (Pre RegExp)',
+        Config => {
+            PreRegExFilter => [
+                {
+                    Search  => '^(?<number>\d+) (?<text>.+?)$',
+                    Replace => '_$+{text}_$+{number}',
+                },
+            ],
+            Template => $IdentityTemplate,
+        },
+        Data => {
+            '16 elementname' => $RandomNumber,
+        },
+        ResultData => {
+            '_elementname_16' => $RandomNumber,
+        },
+        ResultSuccess => 1,
+        ConfigSuccess => 1,
+    },
+    {
+        Name   => 'Test RegExp escaped dollar before a name (Post RegExp)',
+        Config => {
+            PostRegExFilter => [
+                {
+                    Search  => '^AdaptiveCardSchema$',
+                    Replace => '\$schema',
+                },
+            ],
+            Template => $IdentityTemplate,
+        },
+        Data => {
+            AdaptiveCardSchema => 'http://adaptivecards.io/schemas/adaptive-card.json',
+        },
+        ResultData => {
+            '$schema' => 'http://adaptivecards.io/schemas/adaptive-card.json',
+        },
+        ResultSuccess => 1,
+        ConfigSuccess => 1,
+    },
+    {
+        Name   => 'Test RegExp escaped dollar before a digit stays literal (Post RegExp)',
+        Config => {
+            PostRegExFilter => [
+                {
+                    Search  => '^(Ticket)ID$',
+                    Replace => '\$1',
+                },
+            ],
+            Template => $IdentityTemplate,
+        },
+        Data => {
+            TicketID => $RandomNumber,
+        },
+        ResultData => {
+            '$1' => $RandomNumber,
+        },
+        ResultSuccess => 1,
+        ConfigSuccess => 1,
+    },
+    {
+        Name   => 'Test RegExp partial match keeps prefix and suffix (Post RegExp)',
+        Config => {
+            PostRegExFilter => [
+                {
+                    Search  => '(o+)',
+                    Replace => '[$1$2]',
+                },
+            ],
+            Template => $IdentityTemplate,
+        },
+        Data => {
+            Fooboo => $RandomNumber,
+        },
+        ResultData => {
+            'F[oo]boo' => $RandomNumber,
+        },
+        ResultSuccess => 1,
+        ConfigSuccess => 1,
+    },
     {
         Name   => 'Test RegExp (Pre RegExp)',
         Config => {
@@ -338,6 +514,14 @@ for my $Test (@MappingTests) {
             $MappingResult->{ErrorMessage},
             $Test->{Name} . ' error message found',
         );
+    }
+
+    for my $ForbiddenFile ( @{ $Test->{ForbiddenFiles} // [] } ) {
+        $Self->False(
+            -e $ForbiddenFile ? 1 : 0,
+            $Test->{Name} . " file $ForbiddenFile was not created",
+        );
+        unlink $ForbiddenFile;
     }
 
     # Instantiate another object.

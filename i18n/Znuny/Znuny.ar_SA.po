@@ -25838,3 +25838,7 @@ msgstr "الحد الأقصى لمحاولات التسجيل الذاتي لك�
 msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
 msgstr "النافذة الزمنية بالثواني لتقييد التسجيل الذاتي. تُحتسب المحاولات ضمن هذه النافذة ضمن الحد الأقصى."
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
+msgstr "بادئات عناوين HTTPS التي يمكن لتعيين XSLT تحميلها باستخدام xsl:import أو xsl:include أو document(). يجب أن يبدأ كل إدخال بـ https:// ويُقارن تمامًا، بما في ذلك حالة الأحرف، مع بداية عنوان URL المطلوب. يجب أن تنتهي بادئة المضيف بشرطة مائلة، على سبيل المثال https://znuny.de/. يمكن للبادئة أيضًا أن تسمي موردًا واحدًا، على سبيل المثال https://blabla.com/xslt/onlythisfile.txt. تمنع القائمة الفارغة كل عنوان URL على الشبكة. يتم تجاهل الإدخالات التي لا تبدأ بـ https://."
+

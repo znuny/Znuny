@@ -25845,3 +25845,7 @@ msgstr "Didžiausias saviregistracijos bandymų skaičius vienam IP adresui ribo
 msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
 msgstr "Laiko langas sekundėmis saviregistracijos ribojimui. Bandymai šiame lange skaičiuojami iki didžiausio skaičiaus."
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
+msgstr "HTTPS URL prefiksai, kuriuos XSLT atvaizdavimas gali įkelti naudojant xsl:import, xsl:include arba document(). Kiekvienas įrašas turi prasidėti https:// ir lyginamas tiksliai, įskaitant didžiąsias ir mažąsias raides, su užklausto URL pradžia. Pagrindinio kompiuterio prefiksas turėtų baigtis pasviruoju brūkšniu, pavyzdžiui https://znuny.de/. Prefiksas taip pat gali nurodyti vieną išteklių, pavyzdžiui https://blabla.com/xslt/onlythisfile.txt. Tuščias sąrašas draudžia visus tinklo URL. Įrašai, kurie neprasideda https://, yra ignoruojami."
+

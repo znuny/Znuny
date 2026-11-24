@@ -25851,3 +25851,7 @@ msgstr "Idadi ya juu ya majaribio ya usajili wa kibinafsi kwa anwani ya IP ndani
 msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
 msgstr "Dirisha la muda kwa sekunde kwa kikomo cha usajili wa kibinafsi. Majaribio ndani ya dirisha hili yanahesabiwa kwenye kiwango cha juu."
 
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored."
+msgstr "Viambishi awali vya URL za HTTPS ambavyo ramani ya XSLT inaweza kupakia kwa xsl:import, xsl:include au document(). Kila ingizo lazima lianze na https:// na linalinganishwa kikamilifu, ikiwa ni pamoja na herufi kubwa na ndogo, na mwanzo wa URL iliyoombwa. Kiambishi awali cha seva kinapaswa kuishia na kistari cha mlalo, kwa mfano https://znuny.de/. Kiambishi awali kinaweza pia kutaja rasilimali moja, kwa mfano https://blabla.com/xslt/onlythisfile.txt. Orodha tupu inakataa kila URL ya mtandao. Maingizo yasiyoanza na https:// yanapuuzwa."
+

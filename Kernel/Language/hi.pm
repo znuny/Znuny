@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.2542101042502;
+    $Self->{Completeness}        = 0.254329698524695;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7868,6 +7868,8 @@ sub Data {
             '',
         'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
             '',
+        'HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored.' =>
+            'HTTPS URL उपसर्ग जिन्हें एक XSLT मैपिंग xsl:import, xsl:include या document() से लोड कर सकती है। प्रत्येक प्रविष्टि https:// से शुरू होनी चाहिए और अनुरोधित URL की शुरुआत से अक्षरों के आकार सहित ठीक उसी रूप में तुलना की जाती है। होस्ट उपसर्ग स्लैश पर समाप्त होना चाहिए, उदाहरण के लिए https://znuny.de/। एक उपसर्ग एक ही संसाधन का नाम भी दे सकता है, उदाहरण के लिए https://blabla.com/xslt/onlythisfile.txt। खाली सूची प्रत्येक नेटवर्क URL को अस्वीकार करती है। जो प्रविष्टियाँ https:// से शुरू नहीं होतीं, उन्हें अनदेखा किया जाता है।',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>

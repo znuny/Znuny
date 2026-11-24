@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.211387329591018;
+    $Self->{Completeness}        = 0.211513790891597;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -7869,6 +7869,8 @@ sub Data {
             '',
         'Enables historical values for selection in dynamic field types that are based on BaseSelect (Dropdown and Multiselect). Disable this if there are performance problems because of too many different stored values.' =>
             '',
+        'HTTPS URL prefixes that an XSLT mapping may load with xsl:import, xsl:include, or document(). Each entry must start with https:// and is compared exactly, including case, with the start of the requested URL. A host prefix should end with a slash, for example https://znuny.de/. A prefix can also name one resource, for example https://blabla.com/xslt/onlythisfile.txt. An empty list denies every network URL. Entries that do not start with https:// are ignored.' =>
+            'Predpone naslovov URL HTTPS, ki jih preslikava XSLT lahko naloži z xsl:import, xsl:include ali document(). Vsak vnos se mora začeti z https:// in se natančno, vključno z velikostjo črk, primerja z začetkom zahtevanega naslova URL. Predpona gostitelja naj se konča s poševnico, na primer https://znuny.de/. Predpona lahko poimenuje tudi en vir, na primer https://blabla.com/xslt/onlythisfile.txt. Prazen seznam zavrne vsak omrežni naslov URL. Vnosi, ki se ne začnejo z https://, se prezrejo.',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Content of different fields can be given by separating those fields by \';\'.' =>
             '',
         'Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>

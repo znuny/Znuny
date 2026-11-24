@@ -29,6 +29,7 @@
  - 2026-10-27 Fixed: Removing sessions by user login also removed the other user type when an agent and a customer user shared the same login.
  - 2026-10-26 Fixed: PostMaster filter ExternalTicketNumberRecognition ignores CC.
  - 2026-10-20 Fixed: Console command to export/import dynamic field configs used different format than the GUI version.
+ - 2026-10-19 Security: Generic interface XSLT mapping no longer evaluates regex replacements as Perl code and restricts file, network and write access. Thanks to Gabriel Rodrigues and João Pedro Gonçalves (Hakai Offensive Security (hakaisecurity.io)) for reporting this issue.
  - 2026-10-08 Fixed: Uninitialized values in Kernel/System/ACL/DB/ACL.pm
  - 2026-10-02 Changed: Enabled the use of URL parameter RequestedURL within existing sessions.
  - 2026-09-04 Fixed: Process transition action "DynamicFieldSet" now correctly saves multiple values for all multiselect-type dynamic fields (e.g. ConfigItemMultiselect, WebserviceMultiselect).
