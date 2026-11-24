@@ -11,12 +11,14 @@ package Kernel::System::User;
 
 use strict;
 use warnings;
+use utf8;
 
 use Crypt::PasswdMD5 qw(unix_md5_crypt apache_md5_crypt);
 use Digest::SHA;
 
 our @ObjectDependencies = (
     'Kernel::Config',
+    'Kernel::System::AuthSession',
     'Kernel::System::Cache',
     'Kernel::System::CheckItem',
     'Kernel::System::DB',
@@ -831,8 +833,9 @@ sub UserSearch {
 to set users passwords
 
     $UserObject->SetPassword(
-        UserLogin => 'some-login',
-        PW        => 'some-new-password'
+        UserLogin     => 'some-login',
+        PW            => 'some-new-password',
+        KeepSessionID => '1234567890123456',    # optional, keep this session
     );
 
 =cut
@@ -999,6 +1002,13 @@ sub SetPassword {
         Key    => 'UserLoginFailed',
         Value  => 0,
         UserID => $User{UserID},
+    );
+
+    # Drop existing sessions so a previous login cannot be reused.
+    my $SessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
+    $SessionObject->RemoveSessionByUser(
+        UserLogin     => $User{UserLogin},
+        KeepSessionID => $Param{KeepSessionID},
     );
 
     return 1;

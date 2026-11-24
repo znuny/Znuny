@@ -11,6 +11,7 @@ package Kernel::System::AuthSession;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::Language qw(Translatable);
 
@@ -369,8 +370,9 @@ sub RemoveSessionID {
 Removes all sessions that match the given user login.
 
     $SessionObject->RemoveSessionByUser(
-        UserLogin => 'some_user_login',
-        UserType  => 'User',                # optional, 'User' or 'Customer'
+        UserLogin     => 'some_user_login',
+        UserType      => 'User',                # optional, 'User' or 'Customer'
+        KeepSessionID => '1234567890123456',    # optional, keep this session
     );
 
 C<UserType> limits removal to agent sessions (C<User>) or customer user sessions
@@ -412,6 +414,10 @@ sub RemoveSessionByUser {
 
     SESSIONID:
     for my $SessionID (@SessionIDs) {
+
+        # Keep the session that performed the change, when one was given.
+        next SESSIONID if $Param{KeepSessionID} && $SessionID eq $Param{KeepSessionID};
+
         my %SessionData = $Self->{Backend}->GetSessionIDData(
             SessionID => $SessionID,
         );

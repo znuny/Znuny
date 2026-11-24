@@ -11,6 +11,7 @@ package Kernel::System::CustomerUser::DB;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 
@@ -20,6 +21,7 @@ use Digest::SHA;
 our @ObjectDependencies = (
     'Kernel::Config',
     'Kernel::Language',
+    'Kernel::System::AuthSession',
     'Kernel::System::Cache',
     'Kernel::System::CheckItem',
     'Kernel::System::DB',
@@ -1854,6 +1856,13 @@ sub SetPassword {
         );
 
         $Self->_CustomerUserCacheClear( UserLogin => $Param{UserLogin} );
+
+        # Drop existing sessions so a previous login cannot be reused.
+        my $SessionObject = $Kernel::OM->Get('Kernel::System::AuthSession');
+        $SessionObject->RemoveSessionByUser(
+            UserLogin     => $Param{UserLogin},
+            KeepSessionID => $Param{KeepSessionID},
+        );
 
         return 1;
     }

@@ -1097,8 +1097,9 @@ sub _IsCustomerUserEmailUnique {
 to set customer users passwords
 
     $CustomerUserObject->SetPassword(
-        UserLogin => 'some-login',
-        PW        => 'some-new-password'
+        UserLogin     => 'some-login',
+        PW            => 'some-new-password',
+        KeepSessionID => '1234567890123456',    # optional, keep this session
     );
 
 =cut

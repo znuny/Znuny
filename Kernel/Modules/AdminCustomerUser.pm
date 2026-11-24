@@ -11,6 +11,7 @@ package Kernel::Modules::AdminCustomerUser;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::CheckItem;
 use Kernel::System::VariableCheck qw(:all);
@@ -369,6 +370,25 @@ sub Run {
             }
 
             if ( $UpdateSuccess || $UpdateOnlyPreferences ) {
+
+                # If the login changed or the customer user is set to invalid,
+                #   remove all sessions of that user.
+                if (
+                    $UpdateSuccess
+                    && $CurrentUserData{UserLogin}
+                    && (
+                        ( $CurrentUserData{UserLogin} // '' ) ne ( $GetParam{UserLogin} // '' )
+                        || (
+                            $GetParam{ValidID}
+                            && !grep { $_ eq $GetParam{ValidID} } @ValidIDList
+                        )
+                    )
+                    )
+                {
+                    $Kernel::OM->Get('Kernel::System::AuthSession')->RemoveSessionByUser(
+                        UserLogin => $CurrentUserData{UserLogin},
+                    );
+                }
 
                 # set dynamic field values
                 my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');

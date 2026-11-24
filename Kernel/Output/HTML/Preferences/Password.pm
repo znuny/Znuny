@@ -11,6 +11,7 @@ package Kernel::Output::HTML::Preferences::Password;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::Language qw(Translatable);
 
@@ -217,8 +218,9 @@ sub Run {
 
     # set new password
     my $Success = $Self->{UserObject}->SetPassword(
-        UserLogin => $Param{UserData}->{UserLogin},
-        PW        => $Pw,
+        UserLogin     => $Param{UserData}->{UserLogin},
+        PW            => $Pw,
+        KeepSessionID => $Self->{SessionID},
     );
     return if !$Success;
 
