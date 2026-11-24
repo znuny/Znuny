@@ -588,7 +588,7 @@ $Selenium->RunTest(
             Location    => 'Straubing',
             StartTime   => $StartTimeObject->ToString(),
             EndTime     => $EndTimeObject->ToString(),
-            UserID      => $UserID,
+            UserID      => 1,
             TimezoneID  => 0,
         );
 
@@ -712,6 +712,14 @@ $Selenium->RunTest(
             );
         }
 
+        # Ticket creation settings are visible, but cannot be changed.
+        $Self->True(
+            $Selenium->execute_script(
+                "return \$('#Plugin_TicketCreate_TicketCreateTimeType').prop('disabled');"
+            ),
+            'Plugin_TicketCreate_TicketCreateTimeType is disabled',
+        );
+
         # Elements that should be on page.
         for my $Element (qw(EditFormCancel)) {
             $Selenium->WaitFor(
@@ -726,6 +734,31 @@ $Selenium->RunTest(
         }
 
         # Click on cancel.
+        $Selenium->find_element( '#EditFormCancel', 'css' )->click();
+        $Selenium->WaitFor(
+            JavaScript =>
+                'return typeof($) === "function" && !$(".Dialog:visible").length && !$(".CalendarWidget.Loading").length;'
+        );
+
+        # Calendars without "create" permission are not offered for new appointments.
+        $Selenium->execute_script("\$('#AppointmentCreateButton').trigger('click');");
+        $Selenium->WaitFor( JavaScript => "return typeof(\$) === 'function' && \$('#Title').length;" );
+
+        $Self->Is(
+            $Selenium->execute_script(
+                "return \$('#CalendarID option[value=\"$Calendar4{CalendarID}\"]').length;"
+            ),
+            0,
+            "CalendarID $Calendar4{CalendarID} (ro) is not offered for a new appointment",
+        );
+        $Self->Is(
+            $Selenium->execute_script(
+                "return \$('#CalendarID option[value=\"$Calendar1{CalendarID}\"]').length;"
+            ),
+            1,
+            "CalendarID $Calendar1{CalendarID} (rw) is offered for a new appointment",
+        );
+
         $Selenium->find_element( '#EditFormCancel', 'css' )->click();
         $Selenium->WaitFor(
             JavaScript =>

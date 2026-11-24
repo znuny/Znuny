@@ -143,6 +143,31 @@ sub AppointmentCreate {
         }
     }
 
+    my $CalendarObject = $Kernel::OM->Get('Kernel::System::Calendar');
+    my $LogObject      = $Kernel::OM->Get('Kernel::System::Log');
+
+    my $Permission = $CalendarObject->CalendarPermissionGet(
+        CalendarID => $Param{CalendarID},
+        UserID     => $Param{UserID},
+    );
+
+    my @RequiredPermissions = ( 'create', 'rw' );
+
+    if ( !$Permission || !grep { $Permission eq $_ } @RequiredPermissions ) {
+        $LogObject->Log(
+            Priority => 'error',
+            Message  =>
+                "User($Param{UserID}) has no permission to create an appointment in Calendar($Param{CalendarID})!",
+        );
+        return;
+    }
+
+    return $Self->_AppointmentCreate(%Param);
+}
+
+sub _AppointmentCreate {
+    my ( $Self, %Param ) = @_;
+
     # prepare possible notification params
     $Self->_AppointmentNotificationPrepare(
         Data => \%Param,
@@ -1400,6 +1425,28 @@ sub AppointmentUpdate {
         AppointmentID => $Param{AppointmentID},
     );
 
+    # moving to another calendar requires "create" on the destination
+    if ( $PreviousCalendarID && $PreviousCalendarID ne $Param{CalendarID} ) {
+        my $CalendarObject = $Kernel::OM->Get('Kernel::System::Calendar');
+        my $LogObject      = $Kernel::OM->Get('Kernel::System::Log');
+
+        my $Permission = $CalendarObject->CalendarPermissionGet(
+            CalendarID => $Param{CalendarID},
+            UserID     => $Param{UserID},
+        );
+
+        my @RequiredPermissions = ( 'create', 'rw' );
+
+        if ( !$Permission || !grep { $Permission eq $_ } @RequiredPermissions ) {
+            $LogObject->Log(
+                Priority => 'error',
+                Message  =>
+                    "User($Param{UserID}) has no permission to move an appointment to Calendar($Param{CalendarID})!",
+            );
+            return;
+        }
+    }
+
     # set recurrence exclude list
     my @RecurrenceExclude = @{ $Param{RecurrenceExclude} // [] };
 
@@ -2368,7 +2415,7 @@ sub _AppointmentRecurringCreate {
             # skip excluded appointments
             next UNTIL_TIME if grep { $StartTime eq $_ } @RecurrenceExclude;
 
-            $Self->AppointmentCreate(
+            $Self->_AppointmentCreate(
                 %{ $Param{Appointment} },
                 ParentID     => $Param{ParentID},
                 StartTime    => $StartTime,
@@ -2417,7 +2464,7 @@ sub _AppointmentRecurringCreate {
             # skip excluded appointments
             next COUNT if grep { $StartTime eq $_ } @RecurrenceExclude;
 
-            $Self->AppointmentCreate(
+            $Self->_AppointmentCreate(
                 %{ $Param{Appointment} },
                 ParentID     => $Param{ParentID},
                 StartTime    => $StartTime,

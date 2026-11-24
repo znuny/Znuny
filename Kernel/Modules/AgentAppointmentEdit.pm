@@ -101,33 +101,28 @@ sub Run {
             ValidID => $ValidID,
         );
 
-        # transform data for select box
-        my @CalendarData = map {
-            {
-                Key   => $_->{CalendarID},
-                Value => $_->{CalendarName},
-            }
-        } @Calendars;
+        # transform data for select box, only calendars with at least "create" permission
+        my @CalendarData;
+        CALENDAR:
+        for my $Calendar (@Calendars) {
+            my $CalendarPermission = $CalendarObject->CalendarPermissionGet(
+                CalendarID => $Calendar->{CalendarID},
+                UserID     => $Self->{UserID},
+            );
+
+            next CALENDAR if !$CalendarPermission;
+            next CALENDAR if ( $PermissionLevel{$CalendarPermission} || 0 ) < 3;
+
+            push @CalendarData, {
+                Key   => $Calendar->{CalendarID},
+                Value => $Calendar->{CalendarName},
+            };
+        }
 
         # transform data for ID lookup
         my %CalendarLookup = map {
             $_->{CalendarID} => $_->{CalendarName}
         } @Calendars;
-
-        for my $Calendar (@CalendarData) {
-
-            # check permissions
-            my $CalendarPermission = $CalendarObject->CalendarPermissionGet(
-                CalendarID => $Calendar->{Key},
-                UserID     => $Self->{UserID},
-            );
-
-            if ( $PermissionLevel{$CalendarPermission} < 3 ) {
-
-                # permissions < create
-                $Calendar->{Disabled} = 1;
-            }
-        }
 
         # define year boundaries
         my ( %YearPeriodPast, %YearPeriodFuture );
@@ -169,6 +164,20 @@ sub Run {
                 CalendarID => $Appointment{CalendarID},
                 UserID     => $Self->{UserID},
             );
+
+            # at least read permission is required to open the appointment
+            if ( !$Permissions || ( $PermissionLevel{$Permissions} || 0 ) < 1 ) {
+                my $Output = $LayoutObject->Error(
+                    Message => Translatable('No permission!'),
+                );
+                return $LayoutObject->Attachment(
+                    NoCache     => 1,
+                    ContentType => 'text/html',
+                    Charset     => $LayoutObject->{UserCharset},
+                    Content     => $Output,
+                    Type        => 'inline',
+                );
+            }
 
             # Get start time components.
             my $StartTimeObject = $Kernel::OM->Create(
@@ -1071,12 +1080,14 @@ sub Run {
     # ------------------------------------------------------------ #
     elsif ( $Self->{Subaction} eq 'EditAppointment' ) {
         my %Appointment;
+        my $PermissionDenied;
+
         if ( $GetParam{AppointmentID} ) {
             %Appointment = $AppointmentObject->AppointmentGet(
                 AppointmentID => $GetParam{AppointmentID},
             );
 
-            # check permissions
+            # check permissions on the current calendar
             $Permissions = $CalendarObject->CalendarPermissionGet(
                 CalendarID => $Appointment{CalendarID},
                 UserID     => $Self->{UserID},
@@ -1089,26 +1100,62 @@ sub Run {
                 $RequiredPermission = 3;
             }
 
-            if ( $PermissionLevel{$Permissions} < $RequiredPermission ) {
-
-                # no permission
-
-                # build JSON output
-                $JSON = $LayoutObject->JSONEncode(
-                    Data => {
-                        Success => 0,
-                        Error   => Translatable('No permission!'),
-                    },
-                );
-
-                # send JSON response
-                return $LayoutObject->Attachment(
-                    ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
-                    Content     => $JSON,
-                    Type        => 'inline',
-                    NoCache     => 1,
-                );
+            if ( !$Permissions || ( $PermissionLevel{$Permissions} || 0 ) < $RequiredPermission ) {
+                $PermissionDenied = 1;
             }
+
+            # destination calendar requires "create" as well
+            if (
+                !$PermissionDenied
+                && $GetParam{CalendarID}
+                && $GetParam{CalendarID} != $Appointment{CalendarID}
+                )
+            {
+                my $DestinationPermission = $CalendarObject->CalendarPermissionGet(
+                    CalendarID => $GetParam{CalendarID},
+                    UserID     => $Self->{UserID},
+                );
+
+                if ( !$DestinationPermission || ( $PermissionLevel{$DestinationPermission} || 0 ) < 3 ) {
+                    $PermissionDenied = 1;
+                }
+            }
+        }
+        else {
+
+            # creating an appointment requires "create" on the target calendar
+            if ( !$GetParam{CalendarID} ) {
+                $PermissionDenied = 1;
+            }
+            else {
+                $Permissions = $CalendarObject->CalendarPermissionGet(
+                    CalendarID => $GetParam{CalendarID},
+                    UserID     => $Self->{UserID},
+                );
+
+                if ( !$Permissions || ( $PermissionLevel{$Permissions} || 0 ) < 3 ) {
+                    $PermissionDenied = 1;
+                }
+            }
+        }
+
+        if ($PermissionDenied) {
+
+            # build JSON output
+            $JSON = $LayoutObject->JSONEncode(
+                Data => {
+                    Success => 0,
+                    Error   => Translatable('No permission!'),
+                },
+            );
+
+            # send JSON response
+            return $LayoutObject->Attachment(
+                ContentType => 'application/json; charset=' . $LayoutObject->{Charset},
+                Content     => $JSON,
+                Type        => 'inline',
+                NoCache     => 1,
+            );
         }
 
         if ( $GetParam{AllDay} ) {
