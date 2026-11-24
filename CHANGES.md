@@ -11,6 +11,7 @@
  - 2026-10-08 Fixed: Uninitialized values in Kernel/System/ACL/DB/ACL.pm
  - 2026-10-02 Changed: Enabled the use of URL parameter RequestedURL within existing sessions.
  - 2026-09-04 Fixed: Process transition action "DynamicFieldSet" now correctly saves multiple values for all multiselect-type dynamic fields (e.g. ConfigItemMultiselect, WebserviceMultiselect).
+ - 2026-07-10 Fixed: Performance problem in PostMaster module DestQueue caused by too many communication log entries to be created.
 
 # 6.5.26 2026-10-14
  - 2026-10-07 Security: Form IDs for attachment uploads are now generated and handled securely. Thanks to @kta1kri for reporting the issue.

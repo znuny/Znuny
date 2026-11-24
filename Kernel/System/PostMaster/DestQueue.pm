@@ -61,13 +61,13 @@ sub GetQueueID {
     my @EmailAddresses = $Self->{ParserObject}->SplitAddressLine( Line => $Recipient );
 
     # check addresses
+    my @NonMatchedEmailAddresses;
     EMAIL:
     for my $Email (@EmailAddresses) {
 
         next EMAIL if !$Email;
 
         my $Address = $Self->{ParserObject}->GetEmailAddress( Email => $Email );
-
         next EMAIL if !$Address;
 
         # lookup queue id if recipiend address
@@ -88,12 +88,20 @@ sub GetQueueID {
 
         # Address/Email not matched with any that is configured in the system
         #   or any error occured while checking it.
+        push @NonMatchedEmailAddresses, $Email;
+    }
+
+    # Create combined log entry for non-matching email addresses instead a log per address.
+    # This prevents performance problem if the email contains very many email addresses.
+    if (@NonMatchedEmailAddresses) {
+        my $NonMatchedEmailAddressesString = join ', ', @NonMatchedEmailAddresses;
 
         $Self->{CommunicationLogObject}->ObjectLog(
             ObjectLogType => 'Message',
             Priority      => 'Debug',
             Key           => ref($Self),
-            Value         => "No match for email: $Email (MessageID:$GetParam{'Message-ID'})!",
+            Value         =>
+                "No match for email address(es) (MessageID:$GetParam{'Message-ID'}): $NonMatchedEmailAddressesString",
         );
     }
 
