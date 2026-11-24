@@ -839,16 +839,31 @@ use warnings;
 sub CustomCodeActivate {
     my ( $Self, %Param ) = @_;
 
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+    my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
+
     my $Code       = $Param{Code};
     my $Identifier = $Param{Identifier} || $Self->GetRandomNumber();
 
     die "Need 'Code'" if !defined $Code;
 
-    my $PackageName = "ZZZZUnitTest$Identifier";
+    # Identifier is only a file name suffix. Slashes would write outside Kernel/Config/Files.
+    $Identifier =~ s{[\\/]}{}g;
+    $Identifier =~ s{\0}{}g;
 
-    my $Home     = $Kernel::OM->Get('Kernel::Config')->Get('Home');
-    my $FileName = "$Home/Kernel/Config/Files/$PackageName.pm";
-    $Kernel::OM->Get('Kernel::System::Main')->FileWrite(
+    die "Need 'Identifier'" if !length $Identifier;
+
+    my $PackageName = "ZZZZUnitTest$Identifier";
+    my $Home        = $ConfigObject->Get('Home');
+    my $Directory   = "$Home/Kernel/Config/Files";
+    my $FileName    = "$Directory/$PackageName.pm";
+
+    my $FileDirectory = $FileName;
+    $FileDirectory =~ s{/[^/]+\z}{};
+
+    die "Could not write $FileName" if $FileDirectory ne $Directory;
+
+    $MainObject->FileWrite(
         Location => $FileName,
         Mode     => 'utf8',
         Content  => \$Code,
@@ -892,7 +907,9 @@ Switch the article storage directory to a temporary one to prevent collisions;
 sub UseTmpArticleDir {
     my ( $Self, %Param ) = @_;
 
-    my $Home = $Kernel::OM->Get('Kernel::Config')->Get('Home');
+    my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
+
+    my $Home = $ConfigObject->Get('Home');
 
     my $TmpArticleDir;
     TRY:
@@ -904,13 +921,17 @@ sub UseTmpArticleDir {
         last TRY;
     }
 
+    if ( !mkdir $TmpArticleDir, 0770 ) {
+        die "Could not create $TmpArticleDir: $!";
+    }
+
+    $Self->{TmpArticleDir} = $TmpArticleDir;
+
     $Self->ConfigSettingChange(
         Valid => 1,
         Key   => 'Ticket::Article::Backend::MIMEBase::ArticleDataDir',
         Value => $TmpArticleDir,
     );
-
-    $Self->{TmpArticleDir} = $TmpArticleDir;
 
     return 1;
 }
