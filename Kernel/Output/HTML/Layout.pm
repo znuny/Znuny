@@ -923,6 +923,8 @@ sub ChallengeTokenCheck {
         my %Data = $SessionObject->GetSessionIDData( SessionID => $SessionID );
         next SESSION if !$Data{UserID};
         next SESSION if $Data{UserID} ne $Self->{UserID};
+        next SESSION if !$Data{UserType};
+        next SESSION if $Data{UserType} ne ( $Self->{UserType} // '' );
         next SESSION if !$Data{UserChallengeToken};
 
         # check ChallengeToken

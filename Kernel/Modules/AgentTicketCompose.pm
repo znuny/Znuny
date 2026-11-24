@@ -11,6 +11,7 @@ package Kernel::Modules::AgentTicketCompose;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 use Kernel::Language              qw(Translatable);
@@ -34,6 +35,8 @@ sub new {
     {
         $Self->{LoadedFormDraftID} = $Kernel::OM->Get('Kernel::System::Web::Request')->LoadFormDraft(
             FormDraftID => $Kernel::OM->Get('Kernel::System::Web::Request')->GetParam( Param => 'FormDraftID' ),
+            ObjectType  => 'Ticket',
+            ObjectID    => $Self->{TicketID},
             UserID      => $Self->{UserID},
         );
     }
@@ -620,6 +623,8 @@ sub Run {
             elsif ( $FormDraftAction eq 'Delete' && $GetParam{FormDraftID} ) {
                 $FormDraftActionOk = $Kernel::OM->Get('Kernel::System::FormDraft')->FormDraftDelete(
                     FormDraftID => $GetParam{FormDraftID},
+                    ObjectType  => 'Ticket',
+                    ObjectID    => $Self->{TicketID},
                     UserID      => $Self->{UserID},
                 );
             }
@@ -1120,6 +1125,8 @@ sub Run {
             $GetParam{FormDraftID}
             && !$Kernel::OM->Get('Kernel::System::FormDraft')->FormDraftDelete(
                 FormDraftID => $GetParam{FormDraftID},
+                ObjectType  => 'Ticket',
+                ObjectID    => $Self->{TicketID},
                 UserID      => $Self->{UserID},
             )
             )

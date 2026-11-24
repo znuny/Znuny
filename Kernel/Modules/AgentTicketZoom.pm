@@ -404,12 +404,18 @@ sub Run {
     my $MainObject  = $Kernel::OM->Get('Kernel::System::Main');
 
     if ( $Self->{Subaction} eq 'FormDraftDelete' ) {
+
+        # challenge token check for write action
+        $LayoutObject->ChallengeTokenCheck();
+
         my %Response;
 
         my $FormDraftID = $ParamObject->GetParam( Param => 'FormDraftID' ) || '';
         if ($FormDraftID) {
             $Response{Success} = $Kernel::OM->Get('Kernel::System::FormDraft')->FormDraftDelete(
                 FormDraftID => $FormDraftID,
+                ObjectType  => 'Ticket',
+                ObjectID    => $Self->{TicketID},
                 UserID      => $Self->{UserID},
             );
         }
