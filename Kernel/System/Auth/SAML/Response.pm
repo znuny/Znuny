@@ -99,9 +99,19 @@ sub DecodeResponse {
         my $Post = Net::SAML2::Binding::POST->new(%TrustParams);
         return if !$Post;
 
-        $Self->{XMLString} = $Post->handle_response(
-            $Param{Response},
-        );
+        # Dies if the signature check fails, e.g. for a tampered response.
+        eval {
+            $Self->{XMLString} = $Post->handle_response(
+                $Param{Response},
+            );
+        };
+        if ($@) {
+            $LogObject->Log(
+                Priority => 'error',
+                Message  => "Error verifying SAML response (count: $Self->{Count}): $@",
+            );
+            return;
+        }
     }
 
     return if !$Self->{XMLString};
@@ -257,9 +267,15 @@ sub GetAttributeValues {
 
     return if !$Self->IsValid();
 
+    return if !IsStringWithData($Name);
+
     # Note: $Self->{Assertion}->attributes() does not work here because it only
     # return the last one of attributes with the same name.
+    # Therefore the attributes are read from the XML, but only from the assertion
+    # whose signature Net::SAML2 verified: the response passes through the user's
+    # browser, so further, unsigned assertions may have been added to it.
 
+    # XPath context of the document Net::SAML2 verified.
     # Deliberately not $Self->{XMLDOM} (the raw, pre-decryption response) - for an
     # encrypted assertion that only ever contains the opaque EncryptedAssertion blob.
     # $Self->{Assertion}->xpath is the context Net::SAML2 built from the *decrypted* XML.
@@ -267,14 +283,16 @@ sub GetAttributeValues {
     return if !$XPath;
 
     $XPath->registerNs(
-        'samlp',
-        'urn:oasis:names:tc:SAML:2.0:protocol',
-    );
-
-    $XPath->registerNs(
         'saml',
         'urn:oasis:names:tc:SAML:2.0:assertion',
     );
+
+    # ID of the assertion the trusted signature refers to.
+    my $AssertionID = $Self->{Assertion}->id();
+    return if !IsStringWithData($AssertionID);
+
+    my @AssertionNodes = grep { ( $_->getAttribute('ID') // '' ) eq $AssertionID }
+        $XPath->findnodes('//saml:Assertion');
 
     # Matches by FriendlyName too, in addition to Name - some Identity Providers (or their
     # metadata) only advertise one or the other.
@@ -293,7 +311,25 @@ sub GetAttributeValues {
     my @Entries = $XPath->findnodes($Query);
     return if !@Entries;
 
-    my @Values = map { $_->textContent() } @Entries;
+    # Net::SAML2 already rejects a signed ID that matches more than one element,
+    # so anything other than exactly one match means the response was tampered with.
+    return if @AssertionNodes != 1;
+
+    # The name is compared in Perl instead of being put into the XPath expression,
+    # so quotes in a configured attribute name can't break the query.
+    my @Values;
+    ATTRIBUTENODE:
+    for my $AttributeNode (
+        $XPath->findnodes( './saml:AttributeStatement/saml:Attribute', $AssertionNodes[0] )
+        )
+    {
+        my $AttributeName         = $AttributeNode->getAttribute('Name')         // '';
+        my $AttributeFriendlyName = $AttributeNode->getAttribute('FriendlyName') // '';
+        next ATTRIBUTENODE if $AttributeName ne $Name && $AttributeFriendlyName ne $Name;
+
+        push @Values, map { $_->textContent() } $XPath->findnodes( './saml:AttributeValue', $AttributeNode );
+    }
+    return if !@Values;
 
     return \@Values;
 }

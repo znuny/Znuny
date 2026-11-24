@@ -16,6 +16,8 @@ use vars (qw($Self));
 use Kernel::System::Auth::SAML::Response;
 
 use MIME::Base64;
+use POSIX ();
+use XML::Sig;
 use XML::LibXML;
 
 $Kernel::OM->ObjectParamAdd(
@@ -184,6 +186,7 @@ $Self->Is(
 {
     no warnings 'once';    ## no critic
     *UnitTest::SAMLAssertionStub::xpath = sub { return $_[0]->{XPath} };
+    *UnitTest::SAMLAssertionStub::id    = sub { return $_[0]->{ID} };
 }
 
 my $GetAttributeValues = sub {
@@ -199,7 +202,11 @@ my $GetAttributeValues = sub {
     my $XPath = XML::LibXML::XPathContext->new( XML::LibXML->load_xml( string => $XML ) );
 
     $ResponseObject->{IsValid}   = 1;
-    $ResponseObject->{Assertion} = bless { XPath => $XPath }, 'UnitTest::SAMLAssertionStub';
+    $ResponseObject->{Assertion} = bless {
+        XPath => $XPath,
+        ID    => 'ID_bbbbbbbb-bbbb-cccc-dddd-eeeeeeeeeeee',
+        },
+        'UnitTest::SAMLAssertionStub';
 
     return $ResponseObject->GetAttributeValues($Name) || [];
 };
@@ -314,6 +321,207 @@ $Self->Is(
 );
 
 #
+# Attributes must only be read from the signed assertion.
+#
+# The SAML response passes through the user's browser (HTTP-POST binding), so a user
+# can add further, unsigned assertions to a validly signed response. These must not
+# contribute attribute values (e.g. groups/roles for the user sync).
+#
+my $SampleDirectory = $ConfigObject->Get('Home') . '/scripts/test/sample/SAML';
+my $IdPSigningKey   = "$SampleDirectory/IdPSigningKey.pem";
+my $IdPSigningCert  = "$SampleDirectory/IdPSigningCertificate.pem";
+
+my $Now          = time();
+my $NotBefore    = POSIX::strftime( '%Y-%m-%dT%H:%M:%SZ', gmtime( $Now - 300 ) );
+my $NotOnOrAfter = POSIX::strftime( '%Y-%m-%dT%H:%M:%SZ', gmtime( $Now + 300 ) );
+my $IdPEntityID  = 'https://idp.example.org/';
+
+my $BuildAssertion = sub {
+    my %Param = @_;
+
+    # Two separate "Group" attributes, as e.g. Keycloak sends multi-valued attributes.
+    my $GroupAttributes = join '', map {
+        '<saml:Attribute Name="Group"><saml:AttributeValue>' . $_ . '</saml:AttributeValue></saml:Attribute>'
+    } @{ $Param{Groups} };
+
+    return '<saml:Assertion xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" ID="'
+        . $Param{ID}
+        . '" IssueInstant="' . $NotBefore . '" Version="2.0">'
+        . '<saml:Issuer>' . $IdPEntityID . '</saml:Issuer>'
+        . '<saml:Subject><saml:NameID>' . $Param{NameID} . '</saml:NameID>'
+        . '<saml:SubjectConfirmation Method="urn:oasis:names:tc:SAML:2.0:cm:bearer">'
+        . '<saml:SubjectConfirmationData InResponseTo="' . $ExpectedSAMLRequestID
+        . '" NotOnOrAfter="' . $NotOnOrAfter
+        . '" Recipient="https://example.com/znuny/index.pl?Action=Login"/>'
+        . '</saml:SubjectConfirmation></saml:Subject>'
+        . '<saml:Conditions NotBefore="' . $NotBefore . '" NotOnOrAfter="' . $NotOnOrAfter . '">'
+        . '<saml:AudienceRestriction><saml:Audience>' . $Issuer . '</saml:Audience></saml:AudienceRestriction>'
+        . '</saml:Conditions>'
+        . '<saml:AuthnStatement AuthnInstant="' . $NotBefore . '" SessionIndex="_session"/>'
+        . '<saml:AttributeStatement>'
+        . '<saml:Attribute Name="email"><saml:AttributeValue>'
+        . $Param{Email}
+        . '</saml:AttributeValue></saml:Attribute>'
+        . $GroupAttributes
+        . '</saml:AttributeStatement>'
+        . '</saml:Assertion>';
+};
+
+my $BuildResponse = sub {
+    my $Content = shift;
+
+    return '<samlp:Response xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol" '
+        . 'xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" ID="_response" Version="2.0" '
+        . 'IssueInstant="' . $NotBefore . '" '
+        . 'Destination="https://example.com/znuny/index.pl?Action=Login" '
+        . 'InResponseTo="' . $ExpectedSAMLRequestID . '">'
+        . '<saml:Issuer>' . $IdPEntityID . '</saml:Issuer>'
+        . '<samlp:Status><samlp:StatusCode Value="urn:oasis:names:tc:SAML:2.0:status:Success"/></samlp:Status>'
+        . $Content
+        . '</samlp:Response>';
+};
+
+my $Sign = sub {
+    my $XML = shift;
+
+    my $SignedXML = XML::Sig->new(
+        {
+            key                => $IdPSigningKey,
+            cert               => $IdPSigningCert,
+            x509               => 1,
+            no_xml_declaration => 1,
+        }
+    )->sign($XML);
+    $SignedXML =~ s{\A<\?xml[^>]*\?>\s*}{};
+
+    return $SignedXML;
+};
+
+my $SignedAssertion = $Sign->(
+    $BuildAssertion->(
+        ID     => '_signed',
+        NameID => 'unittest@znuny.org',
+        Email  => 'unittest@znuny.org',
+        Groups => [ 'users', 'faq' ],
+    )
+);
+my $InjectedAssertion = $BuildAssertion->(
+    ID     => '_injected',
+    NameID => 'unittest@znuny.org',
+    Email  => 'attacker@example.com',
+    Groups => ['admin'],
+);
+my $InjectedAssertionWithSignedID = $BuildAssertion->(
+    ID     => '_signed',
+    NameID => 'unittest@znuny.org',
+    Email  => 'attacker@example.com',
+    Groups => ['admin'],
+);
+
+# Signed whole response with an assertion added afterwards.
+my $SignedResponse = $Sign->(
+    $BuildResponse->(
+        $BuildAssertion->(
+            ID     => '_signed',
+            NameID => 'unittest@znuny.org',
+            Email  => 'unittest@znuny.org',
+            Groups => [ 'users', 'faq' ],
+        )
+    )
+);
+( my $TamperedSignedResponse = $SignedResponse ) =~ s{</samlp:Response>\s*\z}{$InjectedAssertion</samlp:Response>};
+
+my @Tests = (
+    {
+        Name     => 'Signed assertion only',
+        Response => $BuildResponse->($SignedAssertion),
+        Expected => {
+            Decoded => 1,
+            Groups  => [ 'users', 'faq' ],
+            Email   => 'unittest@znuny.org',
+        },
+    },
+    {
+        Name     => 'Unsigned assertion added after the signed one',
+        Response => $BuildResponse->( $SignedAssertion . $InjectedAssertion ),
+        Expected => {
+            Decoded => 1,
+            Groups  => [ 'users', 'faq' ],
+            Email   => 'unittest@znuny.org',
+        },
+    },
+    {
+        Name     => 'Unsigned assertion added before the signed one',
+        Response => $BuildResponse->( $InjectedAssertion . $SignedAssertion ),
+        Expected => {
+            Decoded => 1,
+            Groups  => [ 'users', 'faq' ],
+            Email   => 'unittest@znuny.org',
+        },
+    },
+    {
+        Name     => 'Unsigned assertion with the ID of the signed one',
+        Response => $BuildResponse->( $SignedAssertion . $InjectedAssertionWithSignedID ),
+        Expected => {
+            Decoded => 0,
+        },
+    },
+    {
+        Name     => 'Signed response with an assertion added afterwards',
+        Response => $TamperedSignedResponse,
+        Expected => {
+            Decoded => 0,
+        },
+    },
+);
+
+TEST:
+for my $Test (@Tests) {
+    my $ResponseObject = Kernel::System::Auth::SAML::Response->new(
+        Count  => 2,
+        Config => {
+            Issuer    => $Issuer,
+            IdPCACert => $IdPSigningCert,
+        },
+    );
+
+    my $Decoded = $ResponseObject->DecodeResponse(
+        Response => MIME::Base64::encode_base64( $Test->{Response}, '' ),
+    );
+
+    if ( !$Test->{Expected}->{Decoded} ) {
+        $Self->False(
+            scalar $Decoded,
+            "$Test->{Name}: DecodeResponse() must fail.",
+        );
+        next TEST;
+    }
+
+    $Self->True(
+        scalar $Decoded,
+        "$Test->{Name}: DecodeResponse() must be successful.",
+    );
+    $Self->True(
+        scalar $ResponseObject->IsValid( ExpectedSAMLRequestID => $ExpectedSAMLRequestID ),
+        "$Test->{Name}: IsValid() must be successful.",
+    );
+    $Self->Is(
+        scalar $ResponseObject->GetNameID(),
+        'unittest@znuny.org',
+        "$Test->{Name}: GetNameID() must return the NameID of the signed assertion.",
+    );
+    $Self->IsDeeply(
+        $ResponseObject->GetAttributeValues('Group'),
+        $Test->{Expected}->{Groups},
+        "$Test->{Name}: GetAttributeValues() must only return values of the signed assertion.",
+    );
+    $Self->Is(
+        scalar $ResponseObject->GetFirstAttributeValue('email'),
+        $Test->{Expected}->{Email},
+        "$Test->{Name}: GetFirstAttributeValue() must return the value of the signed assertion.",
+    );
+}
+
 # GetLogin(): NameID, or the configured login attribute of the signed assertion.
 #
 {
