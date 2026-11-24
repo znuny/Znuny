@@ -1,4 +1,5 @@
 # 7.5.1 2026-??-??
+ - 2026-11-25 Changed: ZNUNY_ smart tags now work alongside OTRS_ tags, in any letter case, in appointment notifications, recipient fields, transition actions, config values, and merge, bounce and next-state tags.
  - 2026-11-25 Fixed: Process did not advance to the next activity when a transition action changed a dynamic field in the same request, for example a web service invoker result. The new config option Process::Transition::MaxTransitionsPerRequest (default 1) limits the transitions evaluated per request.
  - 2026-11-25 Security: Fixed permission checks when using dynamic fields of type Webservice. Thanks to @kta1kri for reporting the issue.
  - 2026-11-25 Security: SAML user sync now only uses attributes of the signed assertion. Thanks to Timotej Doležal (ESET) for reporting this issue.

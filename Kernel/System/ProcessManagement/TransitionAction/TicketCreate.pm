@@ -150,7 +150,7 @@ sub Run {
 
     if (
         defined $Param{Config}->{Body}
-        && $Param{Config}->{Body} =~ /OTRS_TICKET_DynamicField_/
+        && $Param{Config}->{Body} =~ /(?:OTRS|ZNUNY)_TICKET_DynamicField_/i
         )
     {
         MATCH:

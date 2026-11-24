@@ -12,6 +12,7 @@ package Kernel::System::Calendar::Plugin;
 
 use strict;
 use warnings;
+use utf8;
 
 our @ObjectDependencies = (
     'Kernel::Config',
@@ -624,7 +625,9 @@ sub InitConfig {
 
         if ( defined $Self->{Plugins}->{$PluginKey}->{URL} ) {
             my $URL = $Self->{Plugins}->{$PluginKey}->{URL};
-            $URL =~ s{<OTRS_CONFIG_(.+?)>}{$ConfigObject->Get($1)}egx;
+
+            # Accept <OTRS_CONFIG_...> and <ZNUNY_CONFIG_...> in any letter case.
+            $URL =~ s{<(?i:(?:OTRS|ZNUNY)_CONFIG_)(.+?)>}{$ConfigObject->Get($1) // ''}egx;
             $Self->{Plugins}->{$PluginKey}->{URL} = $URL || '';
         }
     }

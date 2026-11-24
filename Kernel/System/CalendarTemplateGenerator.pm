@@ -263,6 +263,10 @@ sub _Replace {
         $Param{Text} =~ s/(\n|\r)//g;
     }
 
+    # Map OTRS_ and ZNUNY_ prefixes to canonical ZNUNY_, in any letter case.
+    my $NormalizedStart = quotemeta $Start;
+    $Param{Text} =~ s/${NormalizedStart}(?i:(?:OTRS|ZNUNY)_)/$Start . 'ZNUNY_'/eg;
+
     # get needed objects
     my $AppointmentObject = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
     my $CalendarObject    = $Kernel::OM->Get('Kernel::System::Calendar');
@@ -303,13 +307,13 @@ sub _Replace {
     # replace the secret config options before the normal config options
     for my $SecretConfigOption (@SecretConfigOptions) {
 
-        my $Tag = $Start . 'OTRS_CONFIG_' . $SecretConfigOption . $End;
-        $Param{Text} =~ s{$Tag}{xxx}gx;
+        my $Tag = $Start . 'ZNUNY_CONFIG_' . $SecretConfigOption . $End;
+        $Param{Text} =~ s{$Tag}{xxx}gix;
     }
 
     # replace config options
-    my $Tag = $Start . 'OTRS_CONFIG_';
-    $Param{Text} =~ s{$Tag(.+?)$End}{$ConfigObject->Get($1) // ''}egx;
+    my $Tag = $Start . 'ZNUNY_CONFIG_';
+    $Param{Text} =~ s{$Tag(.+?)$End}{$ConfigObject->Get($1) // ''}egix;
 
     # cleanup
     $Param{Text} =~ s/$Tag.+?$End/-/gi;
@@ -361,7 +365,7 @@ sub _Replace {
     # ------------------------------------------------------------ #
 
     # replace config options
-    $Tag = $Start . 'OTRS_APPOINTMENT_';
+    $Tag = $Start . 'ZNUNY_APPOINTMENT_';
 
     # replace appointment tags
     ATTRIBUTE:
@@ -547,7 +551,7 @@ sub _Replace {
         $Replacement ||= '';
 
         # replace the tags
-        $Param{Text} =~ s{$MatchTag$End}{$Replacement}egx;
+        $Param{Text} =~ s{$MatchTag$End}{$Replacement}egix;
     }
 
     # cleanup
@@ -558,7 +562,7 @@ sub _Replace {
     # ------------------------------------------------------------ #
 
     # replace config options
-    $Tag = $Start . 'OTRS_CALENDAR_';
+    $Tag = $Start . 'ZNUNY_CALENDAR_';
 
     # replace appointment tags
     ATTRIBUTE:
@@ -627,7 +631,7 @@ sub _Replace {
         }
 
         # replace the tags
-        $Param{Text} =~ s{$MatchTag$End}{$Replacement}egx;
+        $Param{Text} =~ s{$MatchTag$End}{$Replacement}egix;
     }
 
     # cleanup
@@ -640,7 +644,7 @@ sub _Replace {
         my $Keys = join '|', map {quotemeta} grep { defined $H{$_} } keys %H;
 
         # Add all keys also as lowercase to be able to match case insensitive,
-        #   e. g. <OTRS_CUSTOMER_From> and <OTRS_CUSTOMER_FROM>.
+        #   e. g. <ZNUNY_CUSTOMER_From> and <ZNUNY_CUSTOMER_FROM>.
         for my $Key ( sort keys %H ) {
             $H{ lc $Key } = $H{$Key};
         }
@@ -648,11 +652,11 @@ sub _Replace {
         $Param{Text} =~ s/(?:$Tag)($Keys)$End/$H{ lc $1 }/ieg;
     };
 
-    # get recipient data and replace it with <OTRS_...
-    $Tag = $Start . 'OTRS_';
+    # get recipient data and replace it with <ZNUNY_...
+    $Tag = $Start . 'ZNUNY_';
 
-    # include more readable tag <OTRS_NOTIFICATION_RECIPIENT
-    my $RecipientTag = $Start . 'OTRS_NOTIFICATION_RECIPIENT_';
+    # include more readable tag <ZNUNY_NOTIFICATION_RECIPIENT
+    my $RecipientTag = $Start . 'ZNUNY_NOTIFICATION_RECIPIENT_';
 
     if (%Recipient) {
 

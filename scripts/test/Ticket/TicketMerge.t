@@ -451,6 +451,75 @@ $Self->Is(
     'Check article body of merged ticket'
 );
 
+# AutomaticMergeText must accept ZNUNY_ and OTRS_ tags in any letter case.
+my @MergeTagTests = (
+    {
+        Name => 'ZNUNY_ tags',
+        Text => 'Merged <ZNUNY_TICKET> into <ZNUNY_MERGE_TO_TICKET>.',
+    },
+    {
+        Name => 'lowercase znuny_ tags',
+        Text => 'Merged <znuny_ticket> into <znuny_merge_to_ticket>.',
+    },
+    {
+        Name => 'mixed case OTRS_ tags',
+        Text => 'Merged <Otrs_Ticket> into <Otrs_Merge_To_Ticket>.',
+    },
+);
+
+for my $MergeTagTest (@MergeTagTests) {
+    $HelperObject->ConfigSettingChange(
+        Valid => 1,
+        Key   => 'Ticket::Frontend::AutomaticMergeText',
+        Value => $MergeTagTest->{Text},
+    );
+
+    my @MergeTagTicketIDs;
+    for my $Count ( 1 .. 2 ) {
+        my $TicketID = $TicketObject->TicketCreate(
+            Title        => 'MergeTag_' . $Count,
+            Queue        => 'Raw',
+            Lock         => 'unlock',
+            Priority     => '3 normal',
+            State        => 'new',
+            CustomerNo   => '123456',
+            CustomerUser => 'customer@example.com',
+            OwnerID      => 1,
+            UserID       => 1,
+        );
+        push @MergeTagTicketIDs, $TicketID;
+    }
+
+    my %MainTagTicket = $TicketObject->TicketGet(
+        TicketID => $MergeTagTicketIDs[0],
+        UserID   => 1
+    );
+    my %MergeTagTicket = $TicketObject->TicketGet(
+        TicketID => $MergeTagTicketIDs[1],
+        UserID   => 1
+    );
+
+    $Self->True(
+        $TicketObject->TicketMerge(
+            MainTicketID  => $MergeTagTicketIDs[0],
+            MergeTicketID => $MergeTagTicketIDs[1],
+            UserID        => $UserID,
+        ),
+        "$MergeTagTest->{Name}: TicketMerge() successful",
+    );
+
+    my @MergeTagArticles = $ArticleObject->ArticleList(
+        TicketID => $MergeTagTicketIDs[1],
+    );
+    my %MergeTagArticle = $ArticleBackendObject->ArticleGet( %{ pop @MergeTagArticles } );
+
+    $Self->Is(
+        $MergeTagArticle{Body},
+        "Merged $MergeTagTicket{TicketNumber} into $MainTagTicket{TicketNumber}.",
+        "$MergeTagTest->{Name}: tags are replaced in merge article body",
+    );
+}
+
 # Linking objects and linking tickets.
 my $RandomID = $HelperObject->GetRandomID();
 

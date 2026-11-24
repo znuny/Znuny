@@ -317,9 +317,10 @@ sub _OverrideTicketID {
 
 Replaces ticket attributes.
 
-C<OTRS_FIRST_ARTICLE_...>
-C<OTRS_LAST_ARTICLE_...>
-C<OTRS_TICKET_DynamicField_Name1_Value> or C<OTRS_Ticket_DynamicField_Name1_Value>.
+C<OTRS_FIRST_ARTICLE_...> or C<ZNUNY_FIRST_ARTICLE_...>
+C<OTRS_LAST_ARTICLE_...> or C<ZNUNY_LAST_ARTICLE_...>
+C<OTRS_TICKET_DynamicField_Name1_Value>, C<ZNUNY_TICKET_DynamicField_Name1_Value>
+or C<OTRS_Ticket_DynamicField_Name1_Value>.
 C<OTRS_Ticket_*> is deprecated and should be removed in further versions of OTRS.
 
     my $Success = $TransitionActionBaseObject->_ReplaceTicketAttributes(
@@ -350,7 +351,8 @@ sub _ReplaceTicketAttributes {
     # if we have a TicketArticleCreate transition action then we can't use the data of the parameters
     # for the template generator
     #
-    # ContentType/Attachment (added below when resolving <OTRS_FIRST_ARTICLE_Body>/<OTRS_LAST_ARTICLE_Body>)
+    # ContentType/Attachment (added below when resolving <OTRS_FIRST_ARTICLE_Body>/<ZNUNY_FIRST_ARTICLE_Body>
+    # or <OTRS_LAST_ARTICLE_Body>/<ZNUNY_LAST_ARTICLE_Body>)
     # are only meaningful for transition actions that actually build an article Body; for any other
     # caller (e.g. DynamicFieldSet) they must not be added to Config, or they get mistaken for
     # (missing) dynamic field names, even if the config attribute they were resolved for happens
@@ -380,9 +382,9 @@ sub _ReplaceTicketAttributes {
 
     # if we have a list of articles given
     # then we get the data of the articles to replace the new tags
-    # <OTRS_FIRST_ARTICLE_...>
+    # <OTRS_FIRST_ARTICLE_...> / <ZNUNY_FIRST_ARTICLE_...>
     # and
-    # <OTRS_LAST_ARTICLE_...>
+    # <OTRS_LAST_ARTICLE_...> / <ZNUNY_LAST_ARTICLE_...>
     my %ArticleReplacements;
     my @ArticleIDs = $ArticleObject->ArticleIndex(
         TicketID => $Param{Ticket}->{TicketID},
@@ -410,26 +412,26 @@ sub _ReplaceTicketAttributes {
 
         # html content
         if ($RichText) {
-            for my $ArticleType (qw(FIRST LAST)) {
+            for my $ArticlePosition (qw(FIRST LAST)) {
 
                 my %ArticleAttachmentIndex = $ArticleObject->ArticleAttachmentIndex(
                     TicketID         => $Param{Ticket}->{TicketID},
-                    ArticleID        => $ArticleReplacements{$ArticleType}->{ArticleID},
+                    ArticleID        => $ArticleReplacements{$ArticlePosition}->{ArticleID},
                     UserID           => 1,
-                    Article          => $ArticleReplacements{$ArticleType},
+                    Article          => $ArticleReplacements{$ArticlePosition},
                     ExcludePlainText => 1,
                     ExcludeHTMLBody  => 1,
                 );
 
-                $ArticleAttachments{$ArticleType} ||= [];
+                $ArticleAttachments{$ArticlePosition} ||= [];
                 for my $AttachmentLocalID ( sort keys %ArticleAttachmentIndex ) {
                     my %Attachment = $ArticleObject->ArticleAttachment(
                         TicketID  => $Param{Ticket}->{TicketID},
-                        ArticleID => $ArticleReplacements{$ArticleType}->{ArticleID},
+                        ArticleID => $ArticleReplacements{$ArticlePosition}->{ArticleID},
                         FileID    => $AttachmentLocalID,
                         UserID    => $Param{UserID},
                     );
-                    push @{ $ArticleAttachments{$ArticleType} }, \%Attachment;
+                    push @{ $ArticleAttachments{$ArticlePosition} }, \%Attachment;
                 }
             }
         }
@@ -446,7 +448,7 @@ sub _ReplaceTicketAttributes {
         REPLACEMENT:
         while (
             $Param{Config}->{$Attribute}
-            && $Param{Config}->{$Attribute} =~ m{<OTRS_TICKET_([A-Za-z0-9_]+)>}msxi
+            && $Param{Config}->{$Attribute} =~ m{<(?:OTRS|ZNUNY)_TICKET_([A-Za-z0-9_]+)>}msxi
             && $Count++ < 1000
             )
         {
@@ -472,7 +474,7 @@ sub _ReplaceTicketAttributes {
                 );
 
                 $Param{Config}->{$Attribute}
-                    =~ s{<OTRS_TICKET_$TicketAttribute>}{$DisplayValueStrg->{Value} // ''}ige;
+                    =~ s{<(?:OTRS|ZNUNY)_TICKET_$TicketAttribute>}{$DisplayValueStrg->{Value} // ''}ige;
 
                 next REPLACEMENT;
             }
@@ -491,7 +493,7 @@ sub _ReplaceTicketAttributes {
                 );
 
                 $Param{Config}->{$Attribute}
-                    =~ s{<OTRS_TICKET_$TicketAttribute>}{$ValueStrg->{Value} // ''}ige;
+                    =~ s{<(?:OTRS|ZNUNY)_TICKET_$TicketAttribute>}{$ValueStrg->{Value} // ''}ige;
 
                 next REPLACEMENT;
             }
@@ -500,7 +502,7 @@ sub _ReplaceTicketAttributes {
             # this will allow replacements for "<OTRS_TICKET_Title> <OTRS_TICKET_Queue"
             if ( !ref $Param{Ticket}->{$TicketAttribute} ) {
                 $Param{Config}->{$Attribute}
-                    =~ s{<OTRS_TICKET_$TicketAttribute>}{$Param{Ticket}->{$TicketAttribute} // ''}ige;
+                    =~ s{<(?:OTRS|ZNUNY)_TICKET_$TicketAttribute>}{$Param{Ticket}->{$TicketAttribute} // ''}ige;
             }
             else {
 
@@ -514,15 +516,23 @@ sub _ReplaceTicketAttributes {
 
             # FIRST and LAST
             TAG:
-            for my $ArticleType ( sort keys %ArticleReplacements ) {
+            for my $ArticlePosition ( sort keys %ArticleReplacements ) {
 
-                next TAG if !IsHashRefWithData( $ArticleReplacements{$ArticleType} );
+                next TAG if !IsHashRefWithData( $ArticleReplacements{$ArticlePosition} );
 
-                my %Article = %{ $ArticleReplacements{$ArticleType} };
+                my %Article = %{ $ArticleReplacements{$ArticlePosition} };
 
                 ARTICLEATTRIBUTE:
                 for my $ArticleAttribute ( sort keys %Article ) {
-                    my $CurrentTag = "<OTRS_${ArticleType}_ARTICLE_${ArticleAttribute}>";
+
+                    # OTRS_* stays valid. ZNUNY_* must be resolved here as well, otherwise
+                    # TemplateGenerator treats ZNUNY_FIRST / ZNUNY_LAST as the user-name tags
+                    # and replaces ZNUNY_FIRST_ARTICLE_* / ZNUNY_LAST_ARTICLE_* with '-'.
+                    my @CurrentTags;
+                    TAGPREFIX:
+                    for my $TagPrefix (qw(OTRS ZNUNY)) {
+                        push @CurrentTags, "<${TagPrefix}_${ArticlePosition}_ARTICLE_${ArticleAttribute}>";
+                    }
 
                     # get value for the tag
                     my $Value = $Article{$ArticleAttribute} || '';
@@ -547,19 +557,31 @@ sub _ReplaceTicketAttributes {
                         $Value = $HTMLUtilsObject->ToHTML( String => $Value );
                     }
 
+                    my $TagFound = 0;
+                    CURRENTTAG:
+                    for my $CurrentTag (@CurrentTags) {
+                        next CURRENTTAG if $Param{Config}->{$Attribute} !~ m{\Q$CurrentTag\E}xmsi;
+
+                        $TagFound = 1;
+                        last CURRENTTAG;
+                    }
+
                     if (
                         $ArticleAttribute eq 'Body'
                         && $Value
-                        && $Param{Config}->{$Attribute} =~ m{\Q$CurrentTag\E}xmsi
+                        && $TagFound
                         )
                     {
                         # skip 'LAST_ARTICLE_BODY' if there is only one article
                         if (
                             scalar(@ArticleIDs) eq 1
-                            && $CurrentTag =~ m{\<OTRS\_LAST\_ARTICLE\_Body\>}xmsi
+                            && $ArticlePosition eq 'LAST'
+                            && $ArticleAttribute =~ m{\ABody\z}i
                             )
                         {
-                            $Param{Config}->{$Attribute} =~ s{\Q$CurrentTag\E}{}xmsig;
+                            for my $CurrentTag (@CurrentTags) {
+                                $Param{Config}->{$Attribute} =~ s{\Q$CurrentTag\E}{}xmsig;
+                            }
                             next TAG;
                         }
 
@@ -568,11 +590,11 @@ sub _ReplaceTicketAttributes {
                             my $Charset;
                             my $Content = '';
                             ATTACHMENT:
-                            for my $ArticleAttachment ( @{ $ArticleAttachments{$ArticleType} } ) {
+                            for my $ArticleAttachment ( @{ $ArticleAttachments{$ArticlePosition} } ) {
 
                                 if ( $ArticleAttachment->{Filename} =~ /^file-[12]/ ) {
                                     $ArticleAttachment->{Filename}
-                                        = $ArticleType . '-' . $ArticleAttachment->{Filename};
+                                        = $ArticlePosition . '-' . $ArticleAttachment->{Filename};
                                 }
 
                                 # To prevent filename collisions with attachments of first and last article,
@@ -618,7 +640,7 @@ sub _ReplaceTicketAttributes {
                             # embedded images), regular file attachments must only be added via
                             # Attachments/AttachmentIDs/AttachmentsReuse
                             my @InlineAttachments = grep { ( $_->{Disposition} // '' ) eq 'inline' }
-                                @{ $ArticleAttachments{$ArticleType} };
+                                @{ $ArticleAttachments{$ArticlePosition} };
 
                             if (@InlineAttachments) {
                                 $Param{Config}->{Attachment} ||= [];
@@ -630,7 +652,9 @@ sub _ReplaceTicketAttributes {
                     }
 
                     # replace tag in data
-                    $Param{Config}->{$Attribute} =~ s{\Q$CurrentTag\E}{$Value}xmsig;
+                    for my $CurrentTag (@CurrentTags) {
+                        $Param{Config}->{$Attribute} =~ s{\Q$CurrentTag\E}{$Value}xmsig;
+                    }
                 }
             }
         }
@@ -819,8 +843,8 @@ sub _ReplaceAdditionalAttributes {
 
                 # protect OTRS_TA_*/ZNUNY_TA_* placeholders (e.g. OTRS_TA_Template,
                 # ZNUNY_TA_Salutation, OTRS_TA_Signature) from being stripped by ToAscii below,
-                # since they are meant to survive this pass untouched (see the OTRS_TA dummy
-                # dynamic field in TemplateGenerator::_Replace) and get replaced later in
+                # since they are meant to survive this pass untouched (see the ZNUNY_TA dummy
+                # dynamic field in TemplateGenerator::_DefaultReplacements) and get replaced later in
                 # ArticleSend/Run
                 my @TAPlaceholders;
                 $ConfigValue =~ s{(<|&lt;)((?:OTRS|ZNUNY)_TA_[A-Za-z0-9]+)(>|&gt;)}{

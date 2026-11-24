@@ -986,8 +986,7 @@ sub Run {
 
         # replace <OTRS_TICKET_STATE> with next ticket state name
         if ( $StateData{Name} ) {
-            $GetParam{Body} =~ s/<OTRS_TICKET_STATE>/$StateData{Name}/g;
-            $GetParam{Body} =~ s/&lt;OTRS_TICKET_STATE&gt;/$StateData{Name}/g;
+            $GetParam{Body} =~ s/(&lt;|<)(?i:(?:OTRS|ZNUNY)_TICKET_STATE)(&gt;|>)/$StateData{Name}/g;
         }
 
         # get pre loaded attachments

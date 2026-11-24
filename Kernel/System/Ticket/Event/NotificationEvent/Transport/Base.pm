@@ -167,11 +167,11 @@ sub GetTransportEventData {
 
 =head2 _ReplaceTicketAttributes()
 
-returns the specified field with replaced OTRS tags
+returns the specified field with replaced smart tags (ZNUNY_ preferred, OTRS_ still accepted)
 
     my $RecipientEmail = $Self->_ReplaceTicketAttributes(
         Ticket => $Param{Ticket},
-        Field  => '<OTRS_TICKET_DynamicField_Name1>',       # value of DynamicField_Name1 is 'two@stars.com'
+        Field  => '<ZNUNY_TICKET_DynamicField_Name1>',       # value of DynamicField_Name1 is 'two@stars.com'
     );
 
 returns:
@@ -195,7 +195,7 @@ sub _ReplaceTicketAttributes {
     REPLACEMENT:
     while (
         $Param{Field}
-        && $Param{Field} =~ m{<OTRS_TICKET_([A-Za-z0-9_]+)>}msi
+        && $Param{Field} =~ m{<(?:OTRS|ZNUNY)_TICKET_([A-Za-z0-9_]+)>}msi
         && $Count++ < 1000
         )
     {
@@ -220,7 +220,7 @@ sub _ReplaceTicketAttributes {
                 Value              => $DisplayValue,
             );
 
-            $Param{Field} =~ s{<OTRS_TICKET_$TicketAttribute>}{$DisplayValueStrg->{Value} // ''}ig;
+            $Param{Field} =~ s{<(?:OTRS|ZNUNY)_TICKET_$TicketAttribute>}{$DisplayValueStrg->{Value} // ''}ig;
 
             next REPLACEMENT;
         }
@@ -238,7 +238,7 @@ sub _ReplaceTicketAttributes {
             $TicketAttributeValue = join ', ', grep { defined $_ && length $_ } @{ $Param{Ticket}->{$TicketAttribute} };
         }
 
-        $Param{Field} =~ s{<OTRS_TICKET_$TicketAttribute>}{$TicketAttributeValue}ig;
+        $Param{Field} =~ s{<(?:OTRS|ZNUNY)_TICKET_$TicketAttribute>}{$TicketAttributeValue}ig;
     }
 
     return $Param{Field};

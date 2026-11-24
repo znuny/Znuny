@@ -2318,7 +2318,7 @@ sub new {
             next KEY if !defined $Key;
 
             if ( defined $Self->{$Key} ) {
-                $Self->{$Key} =~ s/\<OTRS_CONFIG_(.+?)\>/$Self->{$1}/g;
+                $Self->{$Key} =~ s/\<(?i:(?:OTRS|ZNUNY)_CONFIG_)(.+?)\>/$Self->{$1}/g;
             }
             else {
                 print STDERR "ERROR: $Key not defined!\n";

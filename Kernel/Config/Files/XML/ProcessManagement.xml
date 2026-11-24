@@ -653,12 +653,12 @@
         </Value>
     </Setting>
     <Setting Name="ProcessManagement::Transition::Debug::Filter###00-Default" Required="0" Valid="0">
-        <Description Translatable="1">Filter for debugging Transitions. Note: More filters can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;.</Description>
+        <Description Translatable="1">Filter for debugging Transitions. Note: More filters can be added in the format &lt;ZNUNY_TICKET_Attribute&gt; e.g. &lt;ZNUNY_TICKET_Priority&gt;.</Description>
         <Navigation>Core::ProcessManagement</Navigation>
         <Value>
             <Hash>
                 <Item Key="TransitionEntityID"></Item>
-                <Item Key="&lt;OTRS_TICKET_TicketNumber&gt;"></Item>
+                <Item Key="&lt;ZNUNY_TICKET_TicketNumber&gt;"></Item>
             </Hash>
         </Value>
     </Setting>

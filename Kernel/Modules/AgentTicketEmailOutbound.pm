@@ -1154,7 +1154,7 @@ sub SendEmail {
 
     # replace <OTRS_TICKET_STATE> with next ticket state name
     if ($NextState) {
-        $GetParam{Body} =~ s/(&lt;|<)OTRS_TICKET_STATE(&gt;|>)/$NextState/g;
+        $GetParam{Body} =~ s/(&lt;|<)(?i:(?:OTRS|ZNUNY)_TICKET_STATE)(&gt;|>)/$NextState/g;
     }
 
     # get pre loaded attachments

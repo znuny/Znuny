@@ -159,31 +159,49 @@ for my $Test (@Tests) {
             Title => 'Title 1234',
         },
     },
+    {
+        Name => "_ReplaceTicketAttributes: Title <ZNUNY_TICKET_Title>",
+        Data => {
+            UserID => 1,
+            Ticket => {
+                %Ticket,
+            },
+            Config => {
+                UserID => 1,
+                Title  => 'Title <ZNUNY_TICKET_Title>',
+            },
+        },
+        ExpectedResult => {
+            Title => "Title $Ticket{Title}",
+        },
+    },
 );
 
 for my $Test (@Tests) {
 
-    my $ID = $DynamicFieldObject->DynamicFieldAdd(
-        Name       => 'UnitTest' . $RandomID,
-        Label      => 'UnitTest' . $RandomID,
-        FieldOrder => 1,
-        FieldType  => 'Text',
-        ObjectType => 'Ticket',
-        ValidID    => 1,
-        UserID     => 1,
-        Config     => {
-            DefaultValue => "",
-        },
-        %{ $Test->{DynamicField} },
-    );
+    if ( $Test->{DynamicField} ) {
+        my $ID = $DynamicFieldObject->DynamicFieldAdd(
+            Name       => 'UnitTest' . $RandomID,
+            Label      => 'UnitTest' . $RandomID,
+            FieldOrder => 1,
+            FieldType  => 'Text',
+            ObjectType => 'Ticket',
+            ValidID    => 1,
+            UserID     => 1,
+            Config     => {
+                DefaultValue => "",
+            },
+            %{ $Test->{DynamicField} },
+        );
 
-    my $Success = $HelperObject->DynamicFieldSet(
-        Field    => 'UnitTest' . $RandomID,
-        ObjectID => $TicketID,
-        Value    => $Test->{Values}->{DynamicField},
-    );
+        $HelperObject->DynamicFieldSet(
+            Field    => 'UnitTest' . $RandomID,
+            ObjectID => $TicketID,
+            Value    => $Test->{Values}->{DynamicField},
+        );
+    }
 
-    $Success = $Self->_ReplaceTicketAttributes(
+    my $Success = $Self->_ReplaceTicketAttributes(
         %{ $Test->{Data} },
     );
 
@@ -282,6 +300,48 @@ $Self->IsDeeply(
     \@CopiedAttachmentFilenames,
     [ 'inline' . $RandomID . '.png' ],
     '_ReplaceTicketAttributes: only inline attachments are copied automatically via <OTRS_FIRST_ARTICLE_Body>, regular file attachments are not',
+);
+
+my $ArticleObject      = $Kernel::OM->Get('Kernel::System::Ticket::Article');
+my @ZnunyTagArticleIDs = $ArticleObject->ArticleIndex(
+    TicketID => $TicketID,
+);
+my %ZnunyTagFirstArticle = $ArticleObject->ArticleGet(
+    TicketID  => $TicketID,
+    ArticleID => $ZnunyTagArticleIDs[0],
+    UserID    => 1,
+);
+my %ZnunyTagLastArticle = $ArticleObject->ArticleGet(
+    TicketID  => $TicketID,
+    ArticleID => $ZnunyTagArticleIDs[-1],
+    UserID    => 1,
+);
+
+my %ZnunyArticleTagConfig = (
+    UserID => 1,
+    Title  => 'Title <ZNUNY_FIRST_ARTICLE_Subject> <OTRS_LAST_ARTICLE_Subject>',
+);
+
+my $ZnunyArticleTagSuccess = $Self->_ReplaceTicketAttributes(
+    UserID => 1,
+    Ticket => \%AttachmentTicket,
+    Config => \%ZnunyArticleTagConfig,
+);
+
+$Self->_ReplaceAdditionalAttributes(
+    UserID => 1,
+    Ticket => \%AttachmentTicket,
+    Config => \%ZnunyArticleTagConfig,
+);
+
+$Self->True(
+    $ZnunyArticleTagSuccess,
+    '_ReplaceTicketAttributes: ZNUNY_FIRST_ARTICLE_Subject call successful',
+);
+$Self->Is(
+    $ZnunyArticleTagConfig{Title},
+    "Title $ZnunyTagFirstArticle{Subject} $ZnunyTagLastArticle{Subject}",
+    '_ReplaceTicketAttributes: ZNUNY_FIRST_ARTICLE_Subject and OTRS_LAST_ARTICLE_Subject survive the template generator',
 );
 
 # _ReplaceAdditionalAttributes

@@ -11,6 +11,8 @@ use strict;
 use warnings;
 use utf8;
 
+use URI::Escape;
+
 use vars (qw($Self));
 
 my $DynamicFieldObject = $Kernel::OM->Get('Kernel::System::DynamicField');
@@ -463,6 +465,50 @@ my @Tests = (
         Result   => 'Test Standard',
     },
     {
+        Name => 'ZNUNY customer from (canonical prefix)',
+        Data => {
+            From => 'test@home.com',
+        },
+        RichText => 0,
+        Template => 'Test <ZNUNY_CUSTOMER_From>',
+        Result   => 'Test test@home.com',
+    },
+    {
+        Name     => 'ZNUNY config value (canonical prefix)',
+        Data     => {},
+        RichText => 0,
+        Template => 'Test <ZNUNY_CONFIG_DefaultTheme>',
+        Result   => 'Test Standard',
+    },
+    {
+        Name     => 'ZNUNY config value, any letter case',
+        Data     => {},
+        RichText => 0,
+        Template => 'Test <znuny_config_DefaultTheme>',
+        Result   => 'Test Standard',
+    },
+    {
+        Name     => 'OTRS config value, any letter case',
+        Data     => {},
+        RichText => 0,
+        Template => 'Test <otrs_CONFIG_DefaultTheme>',
+        Result   => 'Test Standard',
+    },
+    {
+        Name     => 'ZNUNY secret config value, any letter case',
+        Data     => {},
+        RichText => 0,
+        Template => 'Test <znuny_config_DatabasePw>',
+        Result   => 'Test xxx',
+    },
+    {
+        Name     => 'ZNUNY ticket ticketid (canonical prefix)',
+        Data     => {},
+        RichText => 0,
+        Template => 'Test <ZNUNY_TICKET_TicketID>',
+        Result   => "Test $TicketID",
+    },
+    {
         Name     => 'OTRS secret config values, must be masked (even unknown settings)',
         Data     => {},
         RichText => 0,
@@ -690,6 +736,14 @@ mailto-Link <a href="mailto:skywalker@znuny.org?body=From%3A%20test%40home.com">
         Result   => "Test $TestUsers[3]->{UserFullname} -",
     },
     {
+        Name     => 'ZNUNY <ZNUNY_NOTIFICATION_RECIPIENT_UserFullname> (recipient field)',
+        Data     => {},
+        RichText => 0,
+        Template =>
+            'Test <ZNUNY_NOTIFICATION_RECIPIENT_UserFullname> <ZNUNY_NOTIFICATION_RECIPIENT_nonexisting>',
+        Result => "Test $TestUsers[3]->{UserFullname} -",
+    },
+    {
         Name     => 'OTRS <OTRS_TICKET_EscalationResponseTime>',
         Data     => {},
         RichText => 0,
@@ -901,6 +955,96 @@ $Self->Is(
 <p>description</p>
 <p>$RandomID</p>",
     "Appointment description tag correctly replaced.",
+);
+
+my $CalendarTemplateGeneratorObject = $Kernel::OM->Get('Kernel::System::CalendarTemplateGenerator');
+my @CalendarTagTests                = (
+    {
+        Name   => 'Appointment title, lowercase znuny tag',
+        Text   => 'Title <znuny_appointment_title>',
+        Result => "Title Test Appointment $RandomID",
+    },
+    {
+        Name   => 'Appointment title, mixed-case otrs tag',
+        Text   => 'Title <OtRs_APPOINTMENT_TITLE>',
+        Result => "Title Test Appointment $RandomID",
+    },
+    {
+        Name   => 'Calendar name, lowercase znuny tag',
+        Text   => 'Calendar <znuny_calendar_calendarname>',
+        Result => "Calendar My Calendar $RandomID",
+    },
+    {
+        Name   => 'Config tag, mixed case',
+        Text   => 'Theme <znuny_config_DefaultTheme>',
+        Result => 'Theme Standard',
+    },
+    {
+        Name   => 'Secret config tag, mixed case',
+        Text   => 'Pw <ZnUnY_CoNfIg_DatabasePw>',
+        Result => 'Pw xxx',
+    },
+    {
+        Name   => 'Unknown appointment tag still becomes a dash',
+        Text   => 'Missing <znuny_appointment_nosuch>',
+        Result => 'Missing -',
+    },
+);
+
+for my $CalendarTagTest (@CalendarTagTests) {
+    my $CalendarResult = $CalendarTemplateGeneratorObject->_Replace(
+        Text          => $CalendarTagTest->{Text},
+        RichText      => 0,
+        AppointmentID => $AppointmentID,
+        CalendarID    => $Calendar{CalendarID},
+        UserID        => $UserID,
+    );
+    $Self->Is(
+        $CalendarResult,
+        $CalendarTagTest->{Result},
+        $CalendarTagTest->{Name},
+    );
+}
+
+# Calendar mailto URL: tags inside subject/body of a mailto href are replaced.
+my $CalendarMailtoResult = $CalendarTemplateGeneratorObject->_Replace(
+    Text =>
+        'Link <a href="mailto:skywalker@znuny.org?subject=%3CZNUNY_APPOINTMENT_TITLE%3E&amp;body=%3CZNUNY_CALENDAR_CALENDARNAME%3E">Mail</a>',
+    RichText      => 0,
+    AppointmentID => $AppointmentID,
+    CalendarID    => $Calendar{CalendarID},
+    UserID        => $UserID,
+);
+$Self->Is(
+    $CalendarMailtoResult,
+    'Link <a href="mailto:skywalker@znuny.org?subject='
+        . URI::Escape::uri_escape_utf8("Test Appointment $RandomID")
+        . '&amp;body='
+        . URI::Escape::uri_escape_utf8("My Calendar $RandomID")
+        . '">Mail</a>',
+    'Calendar mailto URL replaces ZNUNY_ appointment and calendar tags',
+);
+
+# Merge and bounce tags are mapped to the ZNUNY_ prefix.
+# The merge replacement itself is tested in Ticket/TicketMerge.t.
+my $NormalizedMerge = $TemplateGeneratorObject->_NormalizeTags(
+    Text  => 'Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>.',
+    Start => '<',
+);
+$Self->Is(
+    $NormalizedMerge,
+    'Merged Ticket <ZNUNY_TICKET> to <ZNUNY_MERGE_TO_TICKET>.',
+    '_NormalizeTags maps merge tags from OTRS_ to ZNUNY_',
+);
+
+my $NormalizedBounce = $TemplateGeneratorObject->_NormalizeTags(
+    Text  => 'Bounced "<OTRS_TICKET>" to "<OTRS_BOUNCE_TO>".',
+    Start => '<',
+);
+$Self->Is(
+    $NormalizedBounce,
+    'Bounced "<ZNUNY_TICKET>" to "<ZNUNY_BOUNCE_TO>".',
+    '_NormalizeTags maps bounce tags from OTRS_ to ZNUNY_',
 );
 
 # Cleanup is done by RestoreDatabase.

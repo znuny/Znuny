@@ -235,6 +235,73 @@ my @Tests = (
             RecipientEmail => 'aaatest@znuny.com, bbbtest@znuny.com, ccctest@znuny.com, info@znuny.com',
         },
     },
+    {
+        Name => 'RecipientEmail with text field, ZNUNY_ tag',
+        Data => {
+            DynamicField => {
+                'TestText' . $RandomID => 'aaatest@znuny.com',
+            },
+            RecipientEmail => 'info@znuny.com, <ZNUNY_TICKET_DynamicField_TestText' . $RandomID . '>',
+        },
+        Expected => {
+            RecipientEmail => 'info@znuny.com, aaatest@znuny.com',
+        },
+    },
+    {
+        Name => 'RecipientEmail with text field, lowercase znuny_ tag',
+        Data => {
+            DynamicField => {
+                'TestText' . $RandomID => 'aaatest@znuny.com',
+            },
+            RecipientEmail => 'info@znuny.com, <znuny_ticket_DynamicField_TestText' . $RandomID . '>',
+        },
+        Expected => {
+            RecipientEmail => 'info@znuny.com, aaatest@znuny.com',
+        },
+    },
+    {
+        Name => 'RecipientEmail with dropdown field, ZNUNY_ tag',
+        Data => {
+            DynamicField => {
+                'TestDropdown' . $RandomID => 'bbbtest@znuny.com',
+            },
+            RecipientEmail => 'info@znuny.com, <ZNUNY_TICKET_DynamicField_TestDropdown' . $RandomID . '>',
+        },
+        Expected => {
+            RecipientEmail => 'info@znuny.com, bbbtest@znuny.com',
+        },
+    },
+    {
+        Name => 'RecipientEmail with multiple values in multiselect field, ZNUNY_ tag',
+        Data => {
+            DynamicField => {
+                'TestMultiselect' . $RandomID => [
+                    'aaatest@znuny.com',
+                    'bbbtest@znuny.com',
+                ]
+            },
+            RecipientEmail => '<ZNUNY_TICKET_DynamicField_TestMultiselect' . $RandomID . '>, info@znuny.com',
+        },
+        Expected => {
+            RecipientEmail => 'aaatest@znuny.com, bbbtest@znuny.com, info@znuny.com',
+        },
+    },
+    {
+        Name => 'RecipientEmail with mixed OTRS_ and ZNUNY_ tags',
+        Data => {
+            DynamicField => {
+                'TestText' . $RandomID     => 'aaatest@znuny.com',
+                'TestDropdown' . $RandomID => 'bbbtest@znuny.com',
+            },
+            RecipientEmail => '<OTRS_TICKET_DynamicField_TestText'
+                . $RandomID
+                . '>, <ZNUNY_TICKET_DynamicField_TestDropdown'
+                . $RandomID . '>',
+        },
+        Expected => {
+            RecipientEmail => 'aaatest@znuny.com, bbbtest@znuny.com',
+        },
+    },
 );
 
 my $Count = 0;

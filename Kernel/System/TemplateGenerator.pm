@@ -136,7 +136,7 @@ sub Salutation {
     }
 
     # get list unsupported tags for standard template
-    my @ListOfUnSupportedTag = qw(OTRS_AGENT_SUBJECT OTRS_AGENT_BODY OTRS_CUSTOMER_BODY OTRS_CUSTOMER_SUBJECT);
+    my @ListOfUnSupportedTag = qw(ZNUNY_AGENT_SUBJECT ZNUNY_AGENT_BODY ZNUNY_CUSTOMER_BODY ZNUNY_CUSTOMER_SUBJECT);
 
     my $SalutationText = $Self->_RemoveUnSupportedTag(
         Text                 => $Salutation{Text} || '',
@@ -247,7 +247,7 @@ sub Signature {
     }
 
     # get list unsupported tags for standard template
-    my @ListOfUnSupportedTag = qw(OTRS_AGENT_SUBJECT OTRS_AGENT_BODY OTRS_CUSTOMER_BODY OTRS_CUSTOMER_SUBJECT);
+    my @ListOfUnSupportedTag = qw(ZNUNY_AGENT_SUBJECT ZNUNY_AGENT_BODY ZNUNY_CUSTOMER_BODY ZNUNY_CUSTOMER_SUBJECT);
 
     my $SignatureText = $Self->_RemoveUnSupportedTag(
         Text                 => $Signature{Text} || '',
@@ -457,7 +457,7 @@ sub Template {
     $Language //= $Kernel::OM->Get('Kernel::Config')->Get('DefaultLanguage') || 'en';
 
     # get list unsupported tags for standard template
-    my @ListOfUnSupportedTag = qw(OTRS_AGENT_SUBJECT OTRS_AGENT_BODY OTRS_CUSTOMER_BODY OTRS_CUSTOMER_SUBJECT);
+    my @ListOfUnSupportedTag = qw(ZNUNY_AGENT_SUBJECT ZNUNY_AGENT_BODY ZNUNY_CUSTOMER_BODY ZNUNY_CUSTOMER_SUBJECT);
 
     my %SupportedTypes = (
         Answer  => 1,
@@ -1076,15 +1076,25 @@ sub NotificationEvent {
         $End   = '&gt;';
     }
 
-    # replace <OTRS_CUSTOMER_DATA_*> tags early from CustomerMessageParams, the rests will be replaced
+    # Map legacy OTRS-prefixed tags to canonical Znuny tags before early replacement.
+    $Notification{Body} = $Self->_NormalizeTags(
+        Text  => $Notification{Body},
+        Start => $Start,
+    );
+    $Notification{Subject} = $Self->_NormalizeTags(
+        Text  => $Notification{Subject},
+        Start => '<',
+    );
+
+    # replace <ZNUNY_CUSTOMER_DATA_*> tags early from CustomerMessageParams, the rests will be replaced
     # by ticket customer user
     KEY:
     for my $Key ( sort keys %{ $Param{CustomerMessageParams} || {} } ) {
 
         next KEY if !$Param{CustomerMessageParams}->{$Key};
 
-        $Notification{Body}    =~ s/${Start}OTRS_CUSTOMER_DATA_$Key${End}/$Param{CustomerMessageParams}->{$Key}/gi;
-        $Notification{Subject} =~ s/<OTRS_CUSTOMER_DATA_$Key>/$Param{CustomerMessageParams}->{$Key}{$Key}/gi;
+        $Notification{Body}    =~ s/${Start}ZNUNY_CUSTOMER_DATA_$Key${End}/$Param{CustomerMessageParams}->{$Key}/gi;
+        $Notification{Subject} =~ s/<ZNUNY_CUSTOMER_DATA_$Key>/$Param{CustomerMessageParams}->{$Key}{$Key}/gi;
     }
 
     # do text/plain to text/html convert
@@ -1201,7 +1211,7 @@ sub _FixMailto {
 
             # TODO: now we only recurse if any placeholders are found at all,
             # but it would be better to completely eliminate recursion
-            if($SubjectOrBodyContentUnescaped =~ / (?: < | %3C ) OTRS_ /xi ) {
+            if($SubjectOrBodyContentUnescaped =~ / (?: < | %3C ) (?: OTRS | ZNUNY ) _ /xi ) {
                 $SubjectOrBodyContentUnescaped = $Self->_Replace(
                     %$Param,
                     Text     => $SubjectOrBodyContentUnescaped,
@@ -1279,8 +1289,8 @@ sub _FindRecipientTimeZone {
 
 # Dropdown, Checkbox and MultipleSelect DynamicFields, can store values (keys) that are
 # different from the the values to display
-# <OTRS_TICKET_DynamicField_NameX> returns the stored key
-# <OTRS_TICKET_DynamicField_NameX_Value> returns the display value
+# <ZNUNY_TICKET_DynamicField_NameX> returns the stored key
+# <ZNUNY_TICKET_DynamicField_NameX_Value> returns the display value
 sub _ReplaceDynamicField {
     my ( $Self, $LanguageObject, $Ticket, $RecipientTimeZone, $Name ) = @_;
 
@@ -1372,7 +1382,7 @@ sub _ReplaceDynamicField {
 #          also set, the value found in brackets is passed as an argument
 #          to the sub.
 # Brackets: a boolean value indicating whether to match tags of the format
-#           <OTRS_FOO_BAR[thing]> with "thing" being passed to a Special
+#           <ZNUNY_FOO_BAR[thing]> with "thing" being passed to a Special
 #           sub.
 # Dynamic: this will add a match-everything part after the prefix, so as to
 #          be able to match tags with arbitrary names. The value must be a
@@ -1473,7 +1483,7 @@ sub _DefaultReplacements {
     };
 
     my %Replacements = (
-        OTRS_AGENT => {
+        ZNUNY_AGENT => {
             Hash    => { %$CurrentUser, %{ $Param->{DataAgent} // {} } },
             Special => {
                 subject => sub {
@@ -1490,7 +1500,7 @@ sub _DefaultReplacements {
             Brackets => 1,
         },
 
-        OTRS_CUSTOMER => {
+        ZNUNY_CUSTOMER => {
             Special => {
                 subject => sub {
                     my ($Chars) = @_;
@@ -1523,7 +1533,7 @@ sub _DefaultReplacements {
             Brackets => 1,    # will unintentionally allow REALNAME[foo] with brackets being ignored
         },
 
-        OTRS_EMAIL => {
+        ZNUNY_EMAIL => {
             Special => {
                 date => sub {
                     my ($Timezone) = @_;
@@ -1540,24 +1550,24 @@ sub _DefaultReplacements {
             Brackets => 1,
         },
 
-        OTRS_FIRST => {
+        ZNUNY_FIRST => {
             Hash => {
                 name => $CurrentUser->{UserFirstname},
             },
         },
 
-        OTRS_LAST => {
+        ZNUNY_LAST => {
             Hash => {
                 name => $CurrentUser->{UserLastname},
             },
         },
 
-        OTRS_NOTIFICATION_RECIPIENT => {
+        ZNUNY_NOTIFICATION_RECIPIENT => {
             Hash    => $Recipient,
             Special => {
 
-                # This is needed to match OTRS_QUEUE. It will also allow
-                # OTRS_NOTIFICATION_RECIPIENT_QUEUE which hopefully nobody will
+                # This is needed to match ZNUNY_QUEUE. It will also allow
+                # ZNUNY_NOTIFICATION_RECIPIENT_QUEUE which hopefully nobody will
                 # use but it should do no harm.
                 queue => sub {
                     return $Ticket->{Queue} // $Self->{DefaultReplacement};
@@ -1574,26 +1584,27 @@ sub _DefaultReplacements {
             Brackets => 1,
         },
 
-        OTRS_OWNER => {
+        ZNUNY_OWNER => {
             Hash => $Owner,
         },
 
-        OTRS_RESPONSIBLE => {
+        ZNUNY_RESPONSIBLE => {
             Hash => $Responsible,
         },
 
-        OTRS_TA => {
+        ZNUNY_TA => {
 
-            # This is a dummy "dynamicfield" function to just leave OTRS_TA_* tags
+            # This is a dummy "dynamicfield" function to just leave _TA_* tags
             # (needed for process management) alone instead of catching them as
-            # unknown <OTRS_*> tags
+            # unknown tags. Kernel::System::ProcessManagement::TransitionAction::ArticleSend
+            # resolves them later and still expects the OTRS_TA_ spelling.
             Dynamic => sub {
                 my ($Name) = @_;
                 return "<OTRS_TA_$Name>";
             },
         },
 
-        OTRS_TICKET => {
+        ZNUNY_TICKET => {
             Special => {
                 last_article_id => sub {
                     return '' if !$Ticket->{TicketID};
@@ -1654,7 +1665,7 @@ sub _DefaultReplacements {
             },
         },
 
-        OTRS_TICKET_DYNAMICFIELD => {
+        ZNUNY_TICKET_DYNAMICFIELD => {
             Dynamic => sub {
                 my ($Name) = @_;
                 $Self->_ReplaceDynamicField( $Objects->{Language}, $Ticket, $RecipientTimeZone, $Name );
@@ -1675,14 +1686,11 @@ sub _DefaultReplacements {
 
     # Set up some aliases for tag readability
     # TODO optimize this during RE generation to avoid duplicate Hash key lists?
-    $Replacements{OTRS_CURRENT}            = $Replacements{OTRS_AGENT};
-    $Replacements{OTRS_CUSTOMER_DATA}      = $Replacements{OTRS_CUSTOMER};
-    $Replacements{OTRS_TICKET_OWNER}       = $Replacements{OTRS_OWNER};
-    $Replacements{OTRS_TICKET_RESPONSIBLE} = $Replacements{OTRS_RESPONSIBLE};
-    $Replacements{OTRS}                    = $Replacements{OTRS_NOTIFICATION_RECIPIENT};
-
-    # ZNUNY_TA_* is the same dummy pass-through as OTRS_TA_*, see its own definition above
-    $Replacements{ZNUNY_TA} = $Replacements{OTRS_TA};
+    $Replacements{ZNUNY_CURRENT}            = $Replacements{ZNUNY_AGENT};
+    $Replacements{ZNUNY_CUSTOMER_DATA}      = $Replacements{ZNUNY_CUSTOMER};
+    $Replacements{ZNUNY_TICKET_OWNER}       = $Replacements{ZNUNY_OWNER};
+    $Replacements{ZNUNY_TICKET_RESPONSIBLE} = $Replacements{ZNUNY_RESPONSIBLE};
+    $Replacements{ZNUNY}                    = $Replacements{ZNUNY_NOTIFICATION_RECIPIENT};
 
     return \%Replacements;
 }
@@ -1747,6 +1755,12 @@ sub _Replacements {
             ( $Start, $End ) = ( '<', '>' );
         }
 
+        # Map legacy OTRS-prefixed tags to canonical Znuny tags.
+        $Text = $Self->_NormalizeTags(
+            Text  => $Text,
+            Start => $Start,
+        );
+
         # Fill a bunch of data structures if their corresponding params are set
         if ( $Param{TicketData} ) {
             %Ticket = %{ $Param{TicketData} };
@@ -1787,14 +1801,14 @@ sub _Replacements {
 
         # Replace config options.
         # TODO: integrate in main RE?
-        $Tag = $Start . 'OTRS_CONFIG_';
+        $Tag = $Start . 'ZNUNY_CONFIG_';
         $Text =~ s{$Tag(.+?)$End}{
             my $Key   = $1;
             my $Value = $ConfigObject->Get($Key) // '';
 
             # Mask sensitive config options and return the function's return value
             $Self->_MaskSensitiveValue( $Key, $Value, 1 );
-        }egx;
+        }egix;
 
         my %Recipient = %{ $Param{Recipient} || {} };
         if ( !%Recipient && $Param{RecipientID} ) {
@@ -1933,7 +1947,7 @@ sub _Replacements {
             @SpecialKeys = keys %{ $Spec->{Special} } if $Spec->{Special};
 
             # Catchall for unknown name in e.g.
-            # OTRS_TICKET_DynamicField_$NAME and OTRS_TICKET_DynamicField_${NAME}_Value
+            # ZNUNY_TICKET_DynamicField_$NAME and ZNUNY_TICKET_DynamicField_${NAME}_Value
             @Dynamic = '.+?' if $Spec->{Dynamic};
 
             # This will produce garbage if @HashKeys, @SpecialKeys and @Dynamic are
@@ -1962,12 +1976,12 @@ sub _Replacements {
 
         # Follow-up for bug#10825.
         # Set data for replacing of specific tags in Templates:
-        # - OTRS_AGENT_SUBJECT, OTRS_AGENT_BODY - subject/body of the CURRENT/LATEST agent article
-        # - OTRS_CUSTOMER_SUBJECT, OTRS_CUSTOMER_BODY - subject/body of the CURRENT/LATEST customer article
-        # - OTRS_AGENT_SUBJECT[n]    - first n characters of the subject of the CURRENT/LATEST agent article
-        # - OTRS_AGENT_BODY[n]       - first n lines of the body of the CURRENT/LATEST agent article
-        # - OTRS_CUSTOMER_SUBJECT[n] - first n characters of the subject of the CURRENT/LATEST customer article
-        # - OTRS_CUSTOMER_BODY[n]    - first n lines of the body of the CURRENT/LATEST customer article
+        # - ZNUNY_AGENT_SUBJECT, ZNUNY_AGENT_BODY - subject/body of the CURRENT/LATEST agent article
+        # - ZNUNY_CUSTOMER_SUBJECT, ZNUNY_CUSTOMER_BODY - subject/body of the CURRENT/LATEST customer article
+        # - ZNUNY_AGENT_SUBJECT[n]    - first n characters of the subject of the CURRENT/LATEST agent article
+        # - ZNUNY_AGENT_BODY[n]       - first n lines of the body of the CURRENT/LATEST agent article
+        # - ZNUNY_CUSTOMER_SUBJECT[n] - first n characters of the subject of the CURRENT/LATEST customer article
+        # - ZNUNY_CUSTOMER_BODY[n]    - first n lines of the body of the CURRENT/LATEST customer article
         #
         # For Note template we need the last article.
         # For Answer, $Param{Data} has selected or last article data, depends whether ArticleID is sent or not.
@@ -2019,7 +2033,7 @@ sub _Replacements {
             elsif ( grep { $_ eq 'Answer' || $_ eq 'Forward' } @{ $Param{Template} } ) {
 
                 # If $Param{Data} has agent article data, we will set subject and body in $Param{DataAgent}
-                # to values from $Param{Data} in order to right replacing of OTRS_AGENT_SUBJECT/BODY tags.
+                # to values from $Param{Data} in order to right replacing of ZNUNY_AGENT_SUBJECT/BODY tags.
                 if ( $Param{Data}->{SenderType} && $Param{Data}->{SenderType} eq 'agent' ) {
                     $Param{DataAgent}->{Subject} = $Param{Data}->{Subject};
                     $Param{DataAgent}->{Body}    = $Param{Data}->{Body};
@@ -2104,9 +2118,51 @@ sub _RemoveUnSupportedTag {
         $Param{Text} =~ s/(\n|\r)//g;
     }
 
-    # Cleanup all not supported tags with and without number, e.g. OTRS_CUSTOMER_BODY and OTRS_CUSTOMER_BODY[n].
+    # Map legacy OTRS-prefixed tags to canonical Znuny tags.
+    $Param{Text} = $Self->_NormalizeTags(
+        Text  => $Param{Text},
+        Start => $Start,
+    );
+
+    # Cleanup all not supported tags with and without number, e.g. ZNUNY_CUSTOMER_BODY and ZNUNY_CUSTOMER_BODY[n].
     my $NotSupportedTag = $Start . "(?:" . join( "|", @{ $Param{ListOfUnSupportedTag} } ) . ")(\\[.*?\\])?" . $End;
     $Param{Text} =~ s/$NotSupportedTag/$Self->{DefaultReplacement}/gi;
+
+    return $Param{Text};
+}
+
+=head2 _NormalizeTags()
+
+Converts legacy OTRS-prefixed smart tags to the canonical Znuny prefix.
+
+C<< E<lt>ZNUNY_...E<gt> >> is the preferred tag prefix. During the transition period,
+C<< E<lt>OTRS_...E<gt> >> and C<< E<lt>ZNUNY_...E<gt> >> are both accepted in any letter case and
+mapped to C<< E<lt>ZNUNY_...E<gt> >>.
+
+    my $Text = $TemplateGeneratorObject->_NormalizeTags(
+        Text  => $SomeTextWithTags,
+        Start => '<' or '&lt;'
+    );
+
+=cut
+
+sub _NormalizeTags {
+    my ( $Self, %Param ) = @_;
+
+    return $Param{Text} if !defined $Param{Text};
+
+    if ( !$Param{Start} ) {
+        $Kernel::OM->Get('Kernel::System::Log')->Log(
+            Priority => 'error',
+            Message  => 'Need Start!',
+        );
+        return $Param{Text};
+    }
+
+    # Escape the start marker for regex matching
+    my $NormalizedStart = quotemeta( $Param{Start} );
+
+    $Param{Text} =~ s/${NormalizedStart}(?i:(?:OTRS|ZNUNY)_)/$Param{Start} . 'ZNUNY_'/eg;
 
     return $Param{Text};
 }
