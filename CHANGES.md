@@ -1,4 +1,5 @@
 # 7.5.1 2026-??-??
+ - 2026-11-25 Security: Form drafts could be loaded or deleted through a ticket they do not belong to, AgentTicketZoom draft deletion had no challenge token check, and ChallengeTokenCheck accepted tokens of other session types with the same UserID. Thanks to Timotej Doležal for reporting this issue.
  - 2026-11-25 Security: Fixed SQL injection via ticket link keys in the link cleanup of ticket merges on MySQL/MariaDB. Thanks to Timotej Doležal (ESET) for reporting this issue.
  - 2026-11-25 Security: Fixed access to articles of tickets without permission on PostgreSQL 16+ by rejecting non-numeric article IDs. Thanks to Timotej Doležal (ESET) for reporting this issue.
  - 2026-11-25 Security: S/MIME certificate and private-key filenames are confined to their directories, and the admin read and download actions require a challenge token.

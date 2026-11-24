@@ -492,7 +492,9 @@ for transparent use by frontend module.
 
     my $FormDraftID = $ParamObject->LoadFormDraft(
         FormDraftID => 123,
-        UserID  => 1,
+        ObjectType  => 'Ticket',    # optional, draft must belong to this object type
+        ObjectID    => 12,          # optional, draft must belong to this object ID
+        UserID      => 1,
     );
 
 =cut
@@ -512,6 +514,11 @@ sub LoadFormDraft {
     # Verify action.
     my $Action = $Self->GetParam( Param => 'Action' );
     return if $FormDraft->{Action} ne $Action;
+
+    # Verify object.
+    for my $ValidateParam (qw(ObjectType ObjectID)) {
+        return if exists $Param{$ValidateParam} && ( $Param{$ValidateParam} // '' ) ne $FormDraft->{$ValidateParam};
+    }
 
     # add draft name to form data
     $FormDraft->{FormData}->{FormDraftTitle} = $FormDraft->{Title};

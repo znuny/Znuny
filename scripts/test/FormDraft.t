@@ -13,8 +13,11 @@ use utf8;
 
 use vars (qw($Self));
 
+use CGI ();
+
 # Get FormDraft object.
 my $FormDraftObject = $Kernel::OM->Get('Kernel::System::FormDraft');
+my $TicketObject    = $Kernel::OM->Get('Kernel::System::Ticket');
 
 # Get Helper object.
 $Kernel::OM->ObjectParamAdd(
@@ -408,6 +411,150 @@ for my $Test (@Tests) {
         );
     }
 }
+
+# Create a second ticket the draft does not belong to.
+my $OtherTicketID = $TicketObject->TicketCreate(
+    Title        => 'Other Ticket Title',
+    Queue        => 'Raw',
+    Lock         => 'unlock',
+    Priority     => '3 normal',
+    State        => 'closed successful',
+    CustomerNo   => '123465',
+    CustomerUser => 'unittest@znuny.com',
+    OwnerID      => 1,
+    UserID       => 1,
+);
+$Self->True(
+    $OtherTicketID,
+    "TicketCreate() $OtherTicketID",
+);
+
+# Test LoadFormDraft() and FormDraftDelete() with object restriction.
+my @ObjectRestrictionTests = (
+    {
+        Name       => 'foreign ObjectID',
+        ObjectType => 'Ticket',
+        ObjectID   => $OtherTicketID,
+        Success    => 0,
+    },
+    {
+        Name       => 'foreign ObjectType',
+        ObjectType => 'UnitTest',
+        ObjectID   => $TicketID,
+        Success    => 0,
+    },
+    {
+        Name       => 'undefined ObjectID',
+        ObjectType => 'Ticket',
+        ObjectID   => undef,
+        Success    => 0,
+    },
+    {
+        Name       => 'matching object',
+        ObjectType => 'Ticket',
+        ObjectID   => $TicketID,
+        Success    => 1,
+    },
+);
+
+OBJECTRESTRICTIONTEST:
+for my $Test (@ObjectRestrictionTests) {
+    CGI::initialize_globals();
+    my $ParamObject = $Kernel::OM->Create(
+        'Kernel::System::Web::Request',
+        ObjectParams => {
+            WebRequest => CGI->new('Action=AgentTicketNote'),
+        },
+    );
+
+    my $LoadedFormDraftID = $ParamObject->LoadFormDraft(
+        FormDraftID => $FormDraftID,
+        ObjectType  => $Test->{ObjectType},
+        ObjectID    => $Test->{ObjectID},
+        UserID      => 1,
+    );
+    my $LoadedSubject = $ParamObject->GetParam( Param => 'Subject' );
+
+    if ( $Test->{Success} ) {
+        $Self->Is(
+            $LoadedFormDraftID,
+            $FormDraftID,
+            "LoadFormDraft() with $Test->{Name}",
+        );
+        $Self->True(
+            $LoadedSubject,
+            "LoadFormDraft() with $Test->{Name} - form data loaded",
+        );
+
+        # Deletion with matching object is tested below on a separate draft.
+        next OBJECTRESTRICTIONTEST;
+    }
+
+    $Self->False(
+        $LoadedFormDraftID,
+        "LoadFormDraft() with $Test->{Name}",
+    );
+    $Self->False(
+        $LoadedSubject,
+        "LoadFormDraft() with $Test->{Name} - no form data loaded",
+    );
+
+    my $Success = $FormDraftObject->FormDraftDelete(
+        FormDraftID => $FormDraftID,
+        ObjectType  => $Test->{ObjectType},
+        ObjectID    => $Test->{ObjectID},
+        UserID      => 1,
+    );
+    $Self->False(
+        $Success,
+        "FormDraftDelete() with $Test->{Name}",
+    );
+
+    my $FormDraft = $FormDraftObject->FormDraftGet(
+        FormDraftID => $FormDraftID,
+        GetContent  => 0,
+        UserID      => 1,
+    );
+    $Self->Is(
+        $FormDraft->{FormDraftID},
+        $FormDraftID,
+        "FormDraftDelete() with $Test->{Name} - draft still exists",
+    );
+}
+
+my $OtherFormDraftAdd = $FormDraftObject->FormDraftAdd(
+    FormData => {
+        Subject => 'UnitTest Subject',
+        Body    => 'UnitTest Body',
+    },
+    ObjectType => 'Ticket',
+    ObjectID   => $OtherTicketID,
+    Action     => 'AgentTicketNote',
+    Title      => 'UnitTest FormDraft - Other Ticket',
+    UserID     => 1,
+);
+$Self->True(
+    $OtherFormDraftAdd,
+    'FormDraftAdd() on other ticket',
+);
+
+my $OtherFormDraftList = $FormDraftObject->FormDraftListGet(
+    ObjectType => 'Ticket',
+    ObjectID   => $OtherTicketID,
+    UserID     => 1,
+) // [];
+my $OtherFormDraftID = $OtherFormDraftList->[0]->{FormDraftID};
+
+my $OtherFormDraftDelete = $FormDraftObject->FormDraftDelete(
+    FormDraftID => $OtherFormDraftID,
+    ObjectType  => 'Ticket',
+    ObjectID    => $OtherTicketID,
+    UserID      => 1,
+);
+$Self->True(
+    $OtherFormDraftDelete,
+    'FormDraftDelete() with matching object',
+);
 
 # Test FormDraftDelete().
 my $FormDraftDelete = $FormDraftObject->FormDraftDelete(

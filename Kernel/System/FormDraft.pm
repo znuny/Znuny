@@ -11,6 +11,7 @@ package Kernel::System::FormDraft;
 
 use strict;
 use warnings;
+use utf8;
 
 use Kernel::System::VariableCheck qw(:all);
 use MIME::Base64;
@@ -448,6 +449,8 @@ remove draft
 
     my $Success = $FormDraftObject->FormDraftDelete(
         FormDraftID => 123,
+        ObjectType  => 'Ticket',    # optional, draft must belong to this object type
+        ObjectID    => 12,          # optional, draft must belong to this object ID
         UserID      => 123,
     );
 
@@ -455,6 +458,8 @@ remove draft
 
 sub FormDraftDelete {
     my ( $Self, %Param ) = @_;
+
+    my $LogObject = $Kernel::OM->Get('Kernel::System::Log');
 
     # check needed stuff
     for my $Needed (qw(FormDraftID UserID)) {
@@ -478,6 +483,18 @@ sub FormDraftDelete {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
             Message  => "FormDraft with ID '$Param{FormDraftID}' not found!",
+        );
+        return;
+    }
+
+    VALIDATEPARAM:
+    for my $ValidateParam (qw(ObjectType ObjectID)) {
+        next VALIDATEPARAM if !exists $Param{$ValidateParam};
+        next VALIDATEPARAM if ( $Param{$ValidateParam} // '' ) eq $FormDraft->{$ValidateParam};
+
+        $LogObject->Log(
+            Priority => 'error',
+            Message  => "FormDraft with ID '$Param{FormDraftID}' does not belong to the given $ValidateParam!",
         );
         return;
     }
