@@ -25826,3 +25826,19 @@ msgstr "InnoDB रीडू लॉग क्षमता"
 msgid "The setting innodb_redo_log_capacity must be at least 256 MB."
 msgstr "सेटिंग innodb_redo_log_capacity कम से कम 256 MB होनी चाहिए।"
 
+#. Perl Module: Kernel/System/Web/InterfaceCustomer.pm
+msgid "Could not create account. Please try again later."
+msgstr "खाता नहीं बनाया जा सका। कृपया बाद में फिर कोशिश करें।"
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request."
+msgstr "उन ग्राहक उपयोगकर्ता फ़ील्ड को परिभाषित करता है जिन्हें स्वयं-पंजीकरण अनुरोध से स्वीकार करता है। UserLogin, UserCustomerID, UserCustomerIDs, UserPassword और ValidID कभी अनुरोध से नहीं लिए जाते।"
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting."
+msgstr "दर-सीमा विंडो में प्रति IP पते की अधिकतम स्वयं-पंजीकरण कोशिशें। सीमा बंद करने के लिए 0 रखें।"
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
+msgstr "स्वयं-पंजीकरण दर-सीमा के लिए सेकंड में समय विंडो। इस विंडो की कोशिशें अधिकतम में गिनी जाती हैं।"
+

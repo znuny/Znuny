@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.138180067404911;
+    $Self->{Completeness}        = 0.138732959101844;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4206,6 +4206,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => '',
         'Never' => '',
         'Every Day' => '',
         'Every Week' => '',
@@ -4230,7 +4231,6 @@ sub Data {
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
         'after the appointment has been ended' => '',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5600,6 +5600,7 @@ sub Data {
             'Αυτός ο λογαριασμός email έχει ήδη δηλωθεί. Παρακαλούμε συνδεθείτε στο σύστημα ή επαναφέρετε το συνθηματικό σας.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Η εν λόγω διεύθυνση δεν επιτρέπεται να καταχωρηθεί. Παρακαλούμε επικοινωνήστε με το προσωπικό υποστήριξης.',
+        'Could not create account. Please try again later.' => 'Δεν ήταν δυνατή η δημιουργία του λογαριασμού. Δοκιμάστε ξανά αργότερα.',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '',
         'Can\'t send account info!' => '',
@@ -8100,6 +8101,12 @@ sub Data {
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Ορίζει τα πεδία χρήστη πελάτη που η αυτοεγγραφή αποδέχεται από το αίτημα. Τα UserLogin, UserCustomerID, UserCustomerIDs, UserPassword και ValidID δεν λαμβάνονται ποτέ από το αίτημα.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Μέγιστος αριθμός προσπαθειών αυτοεγγραφής ανά διεύθυνση IP εντός του παραθύρου περιορισμού. Ορίστε 0 για απενεργοποίηση του περιορισμού.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Χρονικό παράθυρο σε δευτερόλεπτα για τον περιορισμό της αυτοεγγραφής. Οι προσπάθειες εντός αυτού του παραθύρου προσμετρώνται στο μέγιστο.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'Προσωρινά Ακυρο',

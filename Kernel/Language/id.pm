@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.619804204782539;
+    $Self->{Completeness}        = 0.620048115477145;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -4202,6 +4202,7 @@ bin/otrs.Daemon.pl status\').',
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => '',
         'Never' => '',
         'Every Day' => '',
         'Every Week' => '',
@@ -4226,7 +4227,6 @@ bin/otrs.Daemon.pl status\').',
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
         'after the appointment has been ended' => '',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5596,6 +5596,7 @@ bin/otrs.Daemon.pl status\').',
             'Alamat email ini telah digunakan. Silahkan log in atau atur ulang kata sandi anda',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Alamat email ini tidak diizinkan untuk mendaftar. Silahkan untuk menghubungi staff Pendukung.',
+        'Could not create account. Please try again later.' => 'Akun tidak dapat dibuat. Silakan coba lagi nanti.',
         'Added via Customer Panel (%s)' => 'Ditambahkan melalui Panel Pelanggan (%s)',
         'Customer user can\'t be added!' => 'Pengguna pelanggan tidak dapat ditambahkan!',
         'Can\'t send account info!' => 'Tidak dapat mengirim info akun!',
@@ -8097,6 +8098,12 @@ bin/otrs.Daemon.pl status\').',
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Menentukan bidang pengguna pelanggan yang diterima pendaftaran mandiri dari permintaan. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, dan ValidID tidak pernah diambil dari permintaan.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Jumlah maksimum percobaan pendaftaran mandiri per alamat IP dalam jendela batas. Atur ke 0 untuk menonaktifkan batas.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Jendela waktu dalam detik untuk batas pendaftaran mandiri. Percobaan dalam jendela ini dihitung terhadap maksimum.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'tidak valid sementara',

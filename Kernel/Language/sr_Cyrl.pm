@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.912855079441502;
+    $Self->{Completeness}        = 0.912910986367282;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4200,6 +4200,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => 'Термин није пронађен!',
+        'No permission!' => 'Без дозволе!',
         'Never' => 'Никада',
         'Every Day' => 'Сваки дан',
         'Every Week' => 'Сваке седмице',
@@ -4224,7 +4225,6 @@ sub Data {
         'after the appointment has been started' => 'пошто термин започне',
         'before the appointment ends' => 'пре него што се термин заврши',
         'after the appointment has been ended' => 'пошто се термин заврши',
-        'No permission!' => 'Без дозволе!',
         'Cannot delete ticket appointment!' => 'Није могуће обрисати термин тикета!',
         'No permissions!' => 'Без дозволе!',
 
@@ -5594,6 +5594,7 @@ sub Data {
             'Ова имејл адреса већ постоји. Молимо, пријавите се или ресетујте вашу лозинку.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Регистрација ове имејл адресе није дозвољено. Молимо да контактирате подршку.',
+        'Could not create account. Please try again later.' => 'Налог није могао да буде креиран. Покушајте поново касније.',
         'Added via Customer Panel (%s)' => 'Додато преко клијентског панела (%s)',
         'Customer user can\'t be added!' => 'Не може се додати клијент корисник!',
         'Can\'t send account info!' => 'Не могу послати инфо о налогу!',
@@ -8094,6 +8095,12 @@ sub Data {
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Дефинише поља корисника клијента која саморегистрација прихвата из захтева. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword и ValidID се никада не узимају из захтева.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Највећи број покушаја саморегистрације по IP адреси у прозору ограничења. Поставите 0 да бисте искључили ограничење.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Временски прозор у секундама за ограничење саморегистрације. Покушаји у овом прозору се рачунају у максимум.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'неважећи-привремено',

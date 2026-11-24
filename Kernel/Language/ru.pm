@@ -37,7 +37,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.852511635371529;
+    $Self->{Completeness}        = 0.852606255012029;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4212,6 +4212,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => 'Мероприятия не найдены!',
+        'No permission!' => 'Нет прав доступа!',
         'Never' => 'Никогда',
         'Every Day' => 'Каждый день',
         'Every Week' => 'Каждую неделю',
@@ -4236,7 +4237,6 @@ sub Data {
         'after the appointment has been started' => 'после начала мероприятия',
         'before the appointment ends' => 'до окончания мероприятия',
         'after the appointment has been ended' => 'после окончания мероприятия',
-        'No permission!' => 'Нет прав доступа!',
         'Cannot delete ticket appointment!' => 'Невозможно удалить мероприятие заявки!',
         'No permissions!' => 'Нет прав доступа!',
 
@@ -5606,6 +5606,7 @@ sub Data {
             'Такой адрес электронной почты уже существует. Пожалуйста, войдите, или сбросьте свой пароль.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Этот адрес почты не разрешен для регистрации. Обратитесь к персоналу поддержки.',
+        'Could not create account. Please try again later.' => 'Не удалось создать учётную запись. Повторите попытку позже.',
         'Added via Customer Panel (%s)' => 'Добавлено через Customer Panel/Панель клиента (%s)',
         'Customer user can\'t be added!' => 'Невозможно добавить клиента!',
         'Can\'t send account info!' => 'Не удается отправить информацию аккаунта!',
@@ -8106,6 +8107,12 @@ sub Data {
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Определяет поля пользователя клиента, которые саморегистрация принимает из запроса. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword и ValidID никогда не берутся из запроса.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Максимальное число попыток саморегистрации с одного IP-адреса в пределах окна ограничения. Установите 0, чтобы отключить ограничение.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Временное окно в секундах для ограничения саморегистрации. Попытки в этом окне учитываются в максимуме.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'временно недействительный',

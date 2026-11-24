@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.216337666506179;
+    $Self->{Completeness}        = 0.216840417000802;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4204,6 +4204,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => '',
         'Never' => '',
         'Every Day' => '',
         'Every Week' => '',
@@ -4228,7 +4229,6 @@ sub Data {
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
         'after the appointment has been ended' => '',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5598,6 +5598,7 @@ sub Data {
             'Ova e-mail adresa već postoji. Molimo prijavite se ili obnovite svoju lozinku.',
         'This email address is not allowed to register. Please contact support staff.' =>
             '',
+        'Could not create account. Please try again later.' => 'Račun nije moguće stvoriti. Pokušajte ponovno kasnije.',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '',
         'Can\'t send account info!' => '',
@@ -8098,6 +8099,12 @@ sub Data {
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Određuje polja korisnika klijenta koja samoregistracija prihvaća iz zahtjeva. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword i ValidID nikada se ne uzimaju iz zahtjeva.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Najveći broj pokušaja samoregistracije po IP adresi unutar prozora ograničenja. Postavite 0 da biste isključili ograničenje.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Vremenski prozor u sekundama za ograničenje samoregistracije. Pokušaji unutar ovog prozora uračunavaju se u maksimum.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'neispravno-privremeno',

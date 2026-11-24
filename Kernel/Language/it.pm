@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.619001765366715;
+    $Self->{Completeness}        = 0.619246190858059;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4209,6 +4209,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => '',
         'Never' => '',
         'Every Day' => '',
         'Every Week' => '',
@@ -4233,7 +4234,6 @@ sub Data {
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
         'after the appointment has been ended' => '',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5603,6 +5603,7 @@ sub Data {
             'L\'indirizzo email inserito esiste già. Effettuare l\'accesso o reimposta la password.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'L\'indirizzo email inserito non è abilitato per la registrazione. Contatta il supporto tecnico.',
+        'Could not create account. Please try again later.' => 'Impossibile creare l\'account. Riprovare più tardi.',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '',
         'Can\'t send account info!' => '',
@@ -8107,6 +8108,12 @@ NOTA: i sistemi di terze parti richiedono una configurazione a se.',
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Definisce i campi utente cliente che l\'autoregistrazione accetta dalla richiesta. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword e ValidID non vengono mai presi dalla richiesta.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Numero massimo di tentativi di autoregistrazione consentiti per indirizzo IP nella finestra di limitazione. Impostare 0 per disattivare la limitazione.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Finestra temporale in secondi per la limitazione dell\'autoregistrazione. I tentativi in questa finestra vengono conteggiati nel massimo.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'non valido-temporaneamente',

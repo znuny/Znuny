@@ -4200,6 +4200,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => 'Termin wurde nicht gefunden!',
+        'No permission!' => 'Keine Berechtigung!',
         'Never' => 'Niemals',
         'Every Day' => 'Jeden Tag',
         'Every Week' => 'Jede Woche',
@@ -4224,7 +4225,6 @@ sub Data {
         'after the appointment has been started' => 'nachdem der Termin begonnen hat',
         'before the appointment ends' => 'bevor der Termin endet',
         'after the appointment has been ended' => 'nachdem der Termin geendet hat',
-        'No permission!' => 'Keine Berechtigung!',
         'Cannot delete ticket appointment!' => 'Ticket-Termin konnte nicht gelöscht werden!',
         'No permissions!' => 'Keine Berechtigung!',
 
@@ -5594,6 +5594,7 @@ sub Data {
             'Diese E-Mail-Adresse existiert bereits. Bitte melden Sie sich an oder setzen Ihr Passwort zurück.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Diese E-Mail-Adresse darf nicht registriert werden. Bitte wenden Sie sich an die Supportabteilung.',
+        'Could not create account. Please try again later.' => 'Konto konnte nicht angelegt werden. Bitte versuchen Sie es später erneut.',
         'Added via Customer Panel (%s)' => 'Mittels Kundenbereich hinzugefügt (%s)',
         'Customer user can\'t be added!' => 'Kundenbenutzer kann nicht angelegt werden!',
         'Can\'t send account info!' => 'Kann Zugangsinformation nicht senden!',
@@ -8094,6 +8095,12 @@ sub Data {
             'Liste von Benutzereinstellungen (Keys), für die ein Update per UpdateAJAX-Subaction über das Frontendmodul AgentPreferences erlaubt ist. Eingabe als reguläre Ausdrücke.',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             'Sobald das Limit der beobachteten Tickets pro Nutzer erreicht ist, werden die ältesten Einträge aus der Beobachtungsliste entfernt. Deaktivieren Sie diese Einstellung oder setzen Sie sie auf 0, um das Limit zu deaktivieren (Standard).',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Legt die Kundenbenutzerfelder fest, die bei der Selbstregistrierung aus der Anfrage übernommen werden. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword und ValidID werden niemals aus der Anfrage übernommen.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Maximale Anzahl an Selbstregistrierungsversuchen pro IP-Adresse innerhalb des Rate-Limit-Zeitfensters. Auf 0 setzen, um das Rate Limiting zu deaktivieren.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Zeitfenster in Sekunden für das Rate Limiting bei der Selbstregistrierung. Versuche innerhalb dieses Zeitfensters werden gegen das Maximum gezählt.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'ungültig-temporär',

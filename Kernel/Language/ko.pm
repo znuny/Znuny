@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%M-%D';
     $Self->{DateInputFormat}     = '%Y-%M-%D';
     $Self->{DateInputFormatLong} = '%Y-%M-%D %T';
-    $Self->{Completeness}        = 0.887658481784625;
+    $Self->{Completeness}        = 0.887730553327987;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -4200,6 +4200,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '약속을 찾을 수 없습니다!',
+        'No permission!' => '비허가!',
         'Never' => '절대로',
         'Every Day' => '매일',
         'Every Week' => '매주',
@@ -4224,7 +4225,6 @@ sub Data {
         'after the appointment has been started' => '약속이 시작된 후',
         'before the appointment ends' => '약속이 끝나기 전에',
         'after the appointment has been ended' => '약속이 끝난 후',
-        'No permission!' => '비허가!',
         'Cannot delete ticket appointment!' => '티켓 예약을 삭제할 수 없습니다!',
         'No permissions!' => '비허가!',
 
@@ -5594,6 +5594,7 @@ sub Data {
             '이 전자 메일 주소는 이미 있습니다. 로그인하거나 비밀번호를 재설정하십시오.',
         'This email address is not allowed to register. Please contact support staff.' =>
             '이 이메일 주소는 등록 할 수 없습니다. 지원 담당자에게 문의하십시오.',
+        'Could not create account. Please try again later.' => '계정을 만들 수 없습니다. 나중에 다시 시도하십시오.',
         'Added via Customer Panel (%s)' => '고객 패널을 통해 추가 (%s)',
         'Customer user can\'t be added!' => '고객 사용자를 추가 할 수 없습니다!',
         'Can\'t send account info!' => '계정 정보를 보낼 수 없습니다!',
@@ -8094,6 +8095,12 @@ sub Data {
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            '자가 등록이 요청에서 받아들이는 고객 사용자 필드를 정의합니다. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, ValidID는 요청에서 가져오지 않습니다.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            '속도 제한 시간 창 안에서 IP 주소당 허용되는 최대 자가 등록 시도 횟수. 0으로 설정하면 속도 제한을 끕니다.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            '자가 등록 속도 제한의 시간 창(초). 이 창 안의 시도는 최대값에 포함됩니다.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '유효하지 않은 일시적',

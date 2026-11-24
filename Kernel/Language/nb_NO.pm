@@ -34,7 +34,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.386294334777724;
+    $Self->{Completeness}        = 0.386688051323176;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4209,6 +4209,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => '',
         'Never' => 'Aldri',
         'Every Day' => 'Hver dag',
         'Every Week' => 'Hver uke',
@@ -4233,7 +4234,6 @@ sub Data {
         'after the appointment has been started' => 'etter at avtalen har begynt',
         'before the appointment ends' => 'før avtalen slutter',
         'after the appointment has been ended' => 'etter at avtalen er slutt',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5603,6 +5603,7 @@ sub Data {
             'Epostadressen finnes allerede. Vennligst logg inn eller nullstill passordet ditt.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Denne epostadressen er ikke tillatt å registrere. Kontakt brukerstøtten.',
+        'Could not create account. Please try again later.' => 'Kontoen kunne ikke opprettes. Prøv igjen senere.',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '',
         'Can\'t send account info!' => '',
@@ -8103,6 +8104,12 @@ sub Data {
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Angir kundebroukerfeltene som selvregistrering godtar fra forespørselen. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword og ValidID hentes aldri fra forespørselen.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Maksimalt antall selvregistreringsforsøk per IP-adresse innenfor begrensningsvinduet. Sett til 0 for å slå av begrensningen.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Tidsvindu i sekunder for begrensning av selvregistrering. Forsøk innenfor dette vinduet telles mot maksimum.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'midlertidig ugyldig',

@@ -31,7 +31,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.615631519820254;
+    $Self->{Completeness}        = 0.615878107457899;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4206,6 +4206,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '¡Cita no encontrada!',
+        'No permission!' => '¡No tiene permisos!',
         'Never' => 'Nunca',
         'Every Day' => 'Cada Día',
         'Every Week' => 'Cada Semana',
@@ -4230,7 +4231,6 @@ sub Data {
         'after the appointment has been started' => 'después del inicio de la cita',
         'before the appointment ends' => 'antes del fin de la cita',
         'after the appointment has been ended' => 'después del fin de la cita',
-        'No permission!' => '¡No tiene permisos!',
         'Cannot delete ticket appointment!' => 'La cita no puede ser borrada!',
         'No permissions!' => '¡No tiene permisos!',
 
@@ -5601,6 +5601,7 @@ sub Data {
             'La cuenta de correo ya existe. Por favor inicie sesión o restablezca su contraseña.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Esta cuenta no está permitida para registrarse. Por favor, póngase en contacto con el personal de apoyo.',
+        'Could not create account. Please try again later.' => 'No se ha podido crear la cuenta. Inténtelo de nuevo más tarde.',
         'Added via Customer Panel (%s)' => 'Añadido a través de Panel de clientes (%s)',
         'Customer user can\'t be added!' => '¡El usuario del cliente no puede ser agregado!',
         'Can\'t send account info!' => '¡No se puede enviar información de la cuenta!',
@@ -8107,6 +8108,12 @@ El control del acceso adicional para demostrar o no demostrar éste enlace puede
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Define los campos de usuario cliente que el autorregistro acepta de la petición. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword y ValidID nunca se toman de la petición.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Número máximo de intentos de autorregistro permitidos por dirección IP dentro del intervalo de limitación. Establezca 0 para desactivar la limitación.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Intervalo de tiempo en segundos para la limitación del autorregistro. Los intentos dentro de este intervalo se cuentan para el máximo.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'temporalmente-no-válido',

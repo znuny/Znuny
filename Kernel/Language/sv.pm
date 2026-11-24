@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.339431872893597;
+    $Self->{Completeness}        = 0.339855653568565;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4203,6 +4203,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => 'Saknar rättigheter!',
         'Never' => 'Aldrig',
         'Every Day' => 'Varje dag',
         'Every Week' => 'Varje vecka',
@@ -4227,7 +4228,6 @@ sub Data {
         'after the appointment has been started' => 'efter händelsen börjat',
         'before the appointment ends' => 'innan händelsen slutar',
         'after the appointment has been ended' => 'efter händelsen har slutat',
-        'No permission!' => 'Saknar rättigheter!',
         'Cannot delete ticket appointment!' => 'Kunde inte ta bort kalenderhändelsen!',
         'No permissions!' => 'Rättigheter saknas!',
 
@@ -5597,6 +5597,7 @@ sub Data {
             'Den här e-postadressen finns redan. Vänligen logga in eller återställ ditt lösenord.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Denna e-post adress är inte tillåten att registrera. Vänligen kontakta support personal.',
+        'Could not create account. Please try again later.' => 'Kontot kunde inte skapas. Försök igen senare.',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '',
         'Can\'t send account info!' => '',
@@ -8097,6 +8098,12 @@ sub Data {
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Anger de kundanvändarfält som självregistrering accepterar från begäran. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword och ValidID hämtas aldrig från begäran.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Högsta antal självregistreringsförsök per IP-adress inom begränsningsfönstret. Ange 0 för att inaktivera begränsningen.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Tidsfönster i sekunder för begränsning av självregistrering. Försök inom detta fönster räknas mot maxvärdet.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '* ogiltig-tillfälligt',

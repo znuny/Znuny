@@ -25835,3 +25835,19 @@ msgstr "Uwezo wa kumbukumbu ya redo ya InnoDB"
 msgid "The setting innodb_redo_log_capacity must be at least 256 MB."
 msgstr "Mpangilio wa innodb_redo_log_capacity lazima uwe angalau 256 MB."
 
+#. Perl Module: Kernel/System/Web/InterfaceCustomer.pm
+msgid "Could not create account. Please try again later."
+msgstr "Akaunti haikuweza kuundwa. Tafadhali jaribu tena baadaye."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request."
+msgstr "Inafafanua sehemu za mtumiaji mteja ambazo usajili wa kibinafsi unakubali kutoka kwenye ombi. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword na ValidID hazichukuliwi kamwe kutoka kwenye ombi."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting."
+msgstr "Idadi ya juu ya majaribio ya usajili wa kibinafsi kwa anwani ya IP ndani ya dirisha la kikomo. Weka 0 ili kuzima kikomo."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
+msgstr "Dirisha la muda kwa sekunde kwa kikomo cha usajili wa kibinafsi. Majaribio ndani ya dirisha hili yanahesabiwa kwenye kiwango cha juu."
+

@@ -24,7 +24,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.551115390787996;
+    $Self->{Completeness}        = 0.5514033680834;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4199,6 +4199,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => '',
         'Never' => '',
         'Every Day' => '',
         'Every Week' => '',
@@ -4223,7 +4224,6 @@ sub Data {
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
         'after the appointment has been ended' => '',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5593,6 +5593,7 @@ sub Data {
             'Alamat emel ini telah wujud. Sila log masuk atau tetapkan semula kata laluan anda. ',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Alamat e-mel tidak dibenarkan mendaftar. Sila hubungi kakitangan sokongan.',
+        'Could not create account. Please try again later.' => 'Akaun tidak dapat dibuat. Sila cuba lagi kemudian.',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '',
         'Can\'t send account info!' => '',
@@ -8095,6 +8096,12 @@ Search_DynamicField_XTimeSlotStartMonth=01; Search_DynamicField_XTimeSlotStartDa
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Mentakrifkan medan pengguna pelanggan yang pendaftaran sendiri terima daripada permintaan. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword dan ValidID tidak sekali-kali diambil daripada permintaan.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Bilangan maksimum percubaan pendaftaran sendiri bagi setiap alamat IP dalam tetingkap had. Tetapkan 0 untuk mematikan had.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Tetingkap masa dalam saat untuk had pendaftaran sendiri. Percubaan dalam tetingkap ini dikira ke arah maksimum.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'tidak sah-sementara',

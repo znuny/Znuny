@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y/%M/%D';
     $Self->{DateInputFormat}     = '%Y/%M/%D';
     $Self->{DateInputFormatLong} = '%Y/%M/%D - %T';
-    $Self->{Completeness}        = 0.700529610014444;
+    $Self->{Completeness}        = 0.700721732157177;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4207,6 +4207,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '予約が見つかりません！',
+        'No permission!' => '権限がない!',
         'Never' => 'なし',
         'Every Day' => '毎日',
         'Every Week' => '毎週',
@@ -4231,7 +4232,6 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
         'after the appointment has been started' => '予定の開始後',
         'before the appointment ends' => '予定の終了前',
         'after the appointment has been ended' => '予定の終了後',
-        'No permission!' => '権限がない!',
         'Cannot delete ticket appointment!' => 'チケット予約を削除できません！',
         'No permissions!' => '権限がない!',
 
@@ -5601,6 +5601,7 @@ OTRSが443ポートを用いてcloud.otrs.comに接続できることを確認�
             'このe-mailアドレスはすでに存在します。ログインまたはパスワードのリセットを行ってください。',
         'This email address is not allowed to register. Please contact support staff.' =>
             'このemailアドレスの登録は認められていません。サポートにお問い合わせください。',
+        'Could not create account. Please try again later.' => 'アカウントを作成できませんでした。後でもう一度お試しください。',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '顧客ユーザーが追加できませんでした。',
         'Can\'t send account info!' => '',
@@ -8110,6 +8111,12 @@ Contentはダイナミック・フィールドの形式によって設定内容�
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            '自己登録がリクエストから受け付ける顧客ユーザー項目を定義します。UserLogin、UserCustomerID、UserCustomerIDs、UserPassword、ValidID はリクエストから読み取られません。',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'レート制限の時間枠内で、1 つの IP アドレスに許可する自己登録の最大試行回数。0 にするとレート制限を無効にします。',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            '自己登録のレート制限に使う時間枠（秒）。この時間枠内の試行は上限にカウントされます。',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '無効-暫定',

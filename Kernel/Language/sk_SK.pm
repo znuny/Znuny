@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.185684480821698;
+    $Self->{Completeness}        = 0.186206896551724;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4200,6 +4200,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => '',
         'Never' => '',
         'Every Day' => '',
         'Every Week' => '',
@@ -4224,7 +4225,6 @@ sub Data {
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
         'after the appointment has been ended' => '',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5594,6 +5594,7 @@ sub Data {
             'Email adresa existuje. Prihláste sa alebo vynulujte heslo.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Zadanú adresu nie je možné použiť pre registráciu. Kontaktujte prosím systémovú podporu.',
+        'Could not create account. Please try again later.' => 'Účet sa nepodarilo vytvoriť. Skúste to neskôr znova.',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '',
         'Can\'t send account info!' => '',
@@ -8094,6 +8095,12 @@ sub Data {
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Určuje polia zákazníckeho používateľa, ktoré samoregistrácia prijme z požiadavky. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword a ValidID sa z požiadavky nikdy nepreberajú.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Maximálny počet pokusov o samoregistráciu na IP adresu v rámci okna obmedzenia. Hodnotou 0 obmedzenie vypnete.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Časové okno v sekundách pre obmedzenie samoregistrácie. Pokusy v tomto okne sa započítavajú do maxima.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'dočasne neplatný',

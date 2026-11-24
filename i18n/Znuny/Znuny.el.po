@@ -25837,3 +25837,19 @@ msgstr "Χωρητικότητα αρχείου καταγραφής redo του
 msgid "The setting innodb_redo_log_capacity must be at least 256 MB."
 msgstr "Η ρύθμιση innodb_redo_log_capacity πρέπει να είναι τουλάχιστον 256 MB."
 
+#. Perl Module: Kernel/System/Web/InterfaceCustomer.pm
+msgid "Could not create account. Please try again later."
+msgstr "Δεν ήταν δυνατή η δημιουργία του λογαριασμού. Δοκιμάστε ξανά αργότερα."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request."
+msgstr "Ορίζει τα πεδία χρήστη πελάτη που η αυτοεγγραφή αποδέχεται από το αίτημα. Τα UserLogin, UserCustomerID, UserCustomerIDs, UserPassword και ValidID δεν λαμβάνονται ποτέ από το αίτημα."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting."
+msgstr "Μέγιστος αριθμός προσπαθειών αυτοεγγραφής ανά διεύθυνση IP εντός του παραθύρου περιορισμού. Ορίστε 0 για απενεργοποίηση του περιορισμού."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
+msgstr "Χρονικό παράθυρο σε δευτερόλεπτα για τον περιορισμό της αυτοεγγραφής. Οι προσπάθειες εντός αυτού του παραθύρου προσμετρώνται στο μέγιστο."
+

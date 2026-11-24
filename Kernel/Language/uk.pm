@@ -26,7 +26,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.455304124538597;
+    $Self->{Completeness}        = 0.455653568564555;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -4201,6 +4201,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => 'Подія не знайдена!',
+        'No permission!' => 'Немає повноважень!',
         'Never' => 'Ніколи',
         'Every Day' => 'Щодня',
         'Every Week' => 'Щотижня',
@@ -4225,7 +4226,6 @@ sub Data {
         'after the appointment has been started' => 'після початку події',
         'before the appointment ends' => 'перед завершенням події',
         'after the appointment has been ended' => 'після завершення події',
-        'No permission!' => 'Немає повноважень!',
         'Cannot delete ticket appointment!' => 'Не можливо видалити подію заявки',
         'No permissions!' => 'Немає повновавжень!',
 
@@ -5595,6 +5595,7 @@ sub Data {
             'Ця електронна адреса вже існує. Будь ласка, увійдіть або скиньте пароль.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Цю адреса електронної пошти не можна зареєструвати. Будь ласка, зв\'яжіться з підтримкою.',
+        'Could not create account. Please try again later.' => 'Не вдалося створити обліковий запис. Спробуйте пізніше.',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '',
         'Can\'t send account info!' => '',
@@ -8095,6 +8096,12 @@ sub Data {
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Визначає поля користувача клієнта, які самореєстрація приймає із запиту. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword і ValidID ніколи не беруться із запиту.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Максимальна кількість спроб самореєстрації з однієї IP-адреси в межах вікна обмеження. Встановіть 0, щоб вимкнути обмеження.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Часове вікно в секундах для обмеження самореєстрації. Спроби в цьому вікні зараховуються до максимуму.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'тимчасово недійсний',

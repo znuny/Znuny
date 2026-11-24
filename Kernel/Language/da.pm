@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.356764564275397;
+    $Self->{Completeness}        = 0.357177225340818;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4202,6 +4202,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => '',
         'Never' => '',
         'Every Day' => '',
         'Every Week' => '',
@@ -4226,7 +4227,6 @@ sub Data {
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
         'after the appointment has been ended' => '',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5597,6 +5597,7 @@ Opdater venligst dit framework først!',
             'Denne mail-adresse eksisterer allerede. Log ind eller nulstil dit password.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Denne mail-adresse har ikke tilladelse til at registrere. Kontakt venligst supporten.',
+        'Could not create account. Please try again later.' => 'Kontoen kunne ikke oprettes. Prøv igen senere.',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '',
         'Can\'t send account info!' => '',
@@ -8097,6 +8098,12 @@ Opdater venligst dit framework først!',
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Angiver de kundebrougerfelter, som selvregistrering accepterer fra anmodningen. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword og ValidID tages aldrig fra anmodningen.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Maksimalt antal selvregistreringsforsøg pr. IP-adresse inden for begrænsningsvinduet. Sæt til 0 for at deaktivere begrænsningen.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Tidsvindue i sekunder for begrænsning af selvregistrering. Forsøg inden for dette vindue tælles med i maksimum.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'ugyldig-midlertidigt',

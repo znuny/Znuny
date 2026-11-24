@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.297063071738084;
+    $Self->{Completeness}        = 0.297514033680834;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4200,6 +4200,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => '',
         'Never' => '',
         'Every Day' => '',
         'Every Week' => '',
@@ -4224,7 +4225,6 @@ sub Data {
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
         'after the appointment has been ended' => '',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5594,6 +5594,7 @@ sub Data {
             'Această adresă de e-mail există deja. Vă rugăm să vă autentificați sau să vă resetați parola.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Această adresă de e-mail nu este permisă la înregistrarea. Vă rugăm să contactați personalul de asistență.',
+        'Could not create account. Please try again later.' => 'Contul nu a putut fi creat. Încercați din nou mai târziu.',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '',
         'Can\'t send account info!' => '',
@@ -8094,6 +8095,12 @@ sub Data {
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Definește câmpurile de utilizator client pe care autoînregistrarea le acceptă din cerere. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword și ValidID nu sunt niciodată preluate din cerere.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Numărul maxim de încercări de autoînregistrare permise pentru o adresă IP în fereastra de limitare. Setați 0 pentru a dezactiva limitarea.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Fereastra de timp în secunde pentru limitarea autoînregistrării. Încercările din această fereastră sunt numărate la maximum.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'invalid-temporar',

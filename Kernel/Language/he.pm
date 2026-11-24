@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.221312790884288;
+    $Self->{Completeness}        = 0.221812349639134;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4206,6 +4206,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => '',
         'Never' => '',
         'Every Day' => '',
         'Every Week' => '',
@@ -4230,7 +4231,6 @@ sub Data {
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
         'after the appointment has been ended' => '',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5600,6 +5600,7 @@ sub Data {
             '',
         'This email address is not allowed to register. Please contact support staff.' =>
             '',
+        'Could not create account. Please try again later.' => 'לא ניתן ליצור את החשבון. נסו שוב מאוחר יותר.',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '',
         'Can\'t send account info!' => '',
@@ -8100,6 +8101,12 @@ sub Data {
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'מגדיר את שדות משתמש הלקוח שרישום עצמי מקבל מהבקשה. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword ו-ValidID לעולם אינם נלקחים מהבקשה.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'המספר המרבי של ניסיונות רישום עצמי לכתובת IP בחלון ההגבלה. הגדירו 0 כדי לבטל את ההגבלה.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'חלון זמן בשניות להגבלת הרישום העצמי. ניסיונות בחלון זה נספרים למקסימום.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'לא תקף זמנית',

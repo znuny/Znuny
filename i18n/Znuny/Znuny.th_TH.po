@@ -25845,3 +25845,19 @@ msgstr "ความจุ Redo Log ของ InnoDB"
 msgid "The setting innodb_redo_log_capacity must be at least 256 MB."
 msgstr "การตั้งค่า innodb_redo_log_capacity ต้องมีอย่างน้อย 256 MB"
 
+#. Perl Module: Kernel/System/Web/InterfaceCustomer.pm
+msgid "Could not create account. Please try again later."
+msgstr "ไม่สามารถสร้างบัญชีได้ โปรดลองอีกครั้งในภายหลัง"
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request."
+msgstr "กำหนดฟิลด์ผู้ใช้ลูกค้าที่การลงทะเบียนด้วยตนเองรับจากคำขอ UserLogin, UserCustomerID, UserCustomerIDs, UserPassword และ ValidID จะไม่ถูกอ่านจากคำขอ"
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting."
+msgstr "จำนวนครั้งสูงสุดของการลงทะเบียนด้วยตนเองต่อที่อยู่ IP ภายในช่วงเวลาจำกัด ตั้งเป็น 0 เพื่อปิดการจำกัด"
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
+msgstr "ช่วงเวลาเป็นวินาทีสำหรับการจำกัดการลงทะเบียนด้วยตนเอง ความพยายามในช่วงเวลานี้จะถูกนับรวมในจำนวนสูงสุด"
+

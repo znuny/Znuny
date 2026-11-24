@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.634087626384208;
+    $Self->{Completeness}        = 0.634322373696872;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4206,6 +4206,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => '',
         'Never' => '',
         'Every Day' => '',
         'Every Week' => '',
@@ -4230,7 +4231,6 @@ sub Data {
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
         'after the appointment has been ended' => '',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5600,6 +5600,7 @@ sub Data {
             'این آدرس ایمیل در حال حاضر وجود دارد. لطفا وارد شوید و یارمز عبور خود را بازیابی کنید.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'این آدرس ایمیل مجاز به ثبت نام نیست . لطفا با کارکنان پشتیبانی تماس بگیرید.',
+        'Could not create account. Please try again later.' => 'ایجاد حساب ممکن نشد. لطفاً بعداً دوباره تلاش کنید.',
         'Added via Customer Panel (%s)' => 'اضافه شده از طریق پنل مشتری ( %s )',
         'Customer user can\'t be added!' => 'کاربران مشتری نمی توانند اضافه شود!',
         'Can\'t send account info!' => 'نمی توانید اطلاعات حساب را ارسال کنید!',
@@ -8100,6 +8101,12 @@ sub Data {
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'فیلدهای کاربر مشتری را که ثبت‌نام خودکار از درخواست می‌پذیرد مشخص می‌کند. UserLogin، UserCustomerID، UserCustomerIDs، UserPassword و ValidID هرگز از درخواست گرفته نمی‌شوند.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'بیشترین تعداد تلاش ثبت‌نام خودکار برای هر نشانی IP در پنجره محدودیت. برای خاموش کردن محدودیت مقدار را 0 بگذارید.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'پنجره زمانی به ثانیه برای محدودیت ثبت‌نام خودکار. تلاش‌ها در این پنجره در حداکثر محاسبه می‌شوند.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'موقتا غیر معتبر',

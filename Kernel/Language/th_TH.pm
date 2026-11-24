@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D/%M/%Y';
     $Self->{DateInputFormat}     = '%D/%M/%Y';
     $Self->{DateInputFormatLong} = '%D/%M/%Y - %T';
-    $Self->{Completeness}        = 0.537634408602151;
+    $Self->{Completeness}        = 0.537931034482759;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -4203,6 +4203,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => '',
         'Never' => '',
         'Every Day' => '',
         'Every Week' => '',
@@ -4227,7 +4228,6 @@ sub Data {
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
         'after the appointment has been ended' => '',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5597,6 +5597,7 @@ sub Data {
             'อีเมลนี้มีอยู่แล้วกรุณาเข้าสู่ระบบหรือรีเซ็ตรหัสผ่านของคุณ',
         'This email address is not allowed to register. Please contact support staff.' =>
             'ที่อยู่อีเมลนี้ไม่ได้รับอนุญาตให้ลงทะเบียน กรุณาติดต่อเจ้าหน้าที่ฝ่ายสนับสนุน',
+        'Could not create account. Please try again later.' => 'ไม่สามารถสร้างบัญชีได้ โปรดลองอีกครั้งในภายหลัง',
         'Added via Customer Panel (%s)' => 'เพิ่มผ่านแผงลูกค้า (%s)',
         'Customer user can\'t be added!' => 'ผู้ใช้ลูกค้าไม่สามารถเพิ่ม!',
         'Can\'t send account info!' => 'ไม่สามารถส่งข้อมูลบัญชี!',
@@ -8100,6 +8101,12 @@ sub Data {
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'กำหนดฟิลด์ผู้ใช้ลูกค้าที่การลงทะเบียนด้วยตนเองรับจากคำขอ UserLogin, UserCustomerID, UserCustomerIDs, UserPassword และ ValidID จะไม่ถูกอ่านจากคำขอ',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'จำนวนครั้งสูงสุดของการลงทะเบียนด้วยตนเองต่อที่อยู่ IP ภายในช่วงเวลาจำกัด ตั้งเป็น 0 เพื่อปิดการจำกัด',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'ช่วงเวลาเป็นวินาทีสำหรับการจำกัดการลงทะเบียนด้วยตนเอง ความพยายามในช่วงเวลานี้จะถูกนับรวมในจำนวนสูงสุด',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'ไม่ถูกต้องชั่วคราว',

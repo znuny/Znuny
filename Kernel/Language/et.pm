@@ -25,7 +25,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.164339592360777;
+    $Self->{Completeness}        = 0.164875701684042;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4200,6 +4200,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => '',
         'Never' => '',
         'Every Day' => '',
         'Every Week' => '',
@@ -4224,7 +4225,6 @@ sub Data {
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
         'after the appointment has been ended' => '',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5594,6 +5594,7 @@ sub Data {
             '',
         'This email address is not allowed to register. Please contact support staff.' =>
             '',
+        'Could not create account. Please try again later.' => 'Kontot ei saanud luua. Palun proovige hiljem uuesti.',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '',
         'Can\'t send account info!' => '',
@@ -8094,6 +8095,12 @@ sub Data {
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Määrab kliendikasutaja väljad, mille iseregistreerimine päringust vastu võtab. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword ja ValidID ei võeta päringust kunagi.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Iseregistreerimise katsete ülempiir ühe IP-aadressi kohta piirangu aknas. Piirangu väljalülitamiseks määrake 0.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Iseregistreerimise piirangu ajaaken sekundites. Selles aknas tehtud katsed arvestatakse ülempiiri sisse.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'ajutiselt kehtetu',

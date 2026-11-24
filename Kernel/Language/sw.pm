@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%M/%D/%Y';
     $Self->{DateInputFormat}     = '%M/%D/%Y';
     $Self->{DateInputFormatLong} = '%M/%D/%Y - %T';
-    $Self->{Completeness}        = 0.441341678703258;
+    $Self->{Completeness}        = 0.441700080192462;
 
     # csv separator
     $Self->{Separator}         = ',';
@@ -4203,6 +4203,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => '',
         'Never' => '',
         'Every Day' => '',
         'Every Week' => '',
@@ -4227,7 +4228,6 @@ sub Data {
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
         'after the appointment has been ended' => '',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5597,6 +5597,7 @@ sub Data {
             'Anwani ya barua pepe hii tayari ipo. Tafadhali ingia au weka upya neno lako la siri.',
         'This email address is not allowed to register. Please contact support staff.' =>
             'Anuani ya barua hii pepe hairuhusiwi kusajili. Tafadhali wasiliana na wafanyakazi wa msaada.',
+        'Could not create account. Please try again later.' => 'Akaunti haikuweza kuundwa. Tafadhali jaribu tena baadaye.',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '',
         'Can\'t send account info!' => '',
@@ -8100,6 +8101,12 @@ Mfano:
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Inafafanua sehemu za mtumiaji mteja ambazo usajili wa kibinafsi unakubali kutoka kwenye ombi. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword na ValidID hazichukuliwi kamwe kutoka kwenye ombi.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Idadi ya juu ya majaribio ya usajili wa kibinafsi kwa anwani ya IP ndani ya dirisha la kikomo. Weka 0 ili kuzima kikomo.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Dirisha la muda kwa sekunde kwa kikomo cha usajili wa kibinafsi. Majaribio ndani ya dirisha hili yanahesabiwa kwenye kiwango cha juu.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'isiyo halali kwa muda mfupi',

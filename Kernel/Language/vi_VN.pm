@@ -24,7 +24,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%D.%M.%Y';
     $Self->{DateInputFormat}     = '%D.%M.%Y';
     $Self->{DateInputFormatLong} = '%D.%M.%Y - %T';
-    $Self->{Completeness}        = 0.147969828277965;
+    $Self->{Completeness}        = 0.148516439454691;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -4199,6 +4199,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => '',
         'Never' => '',
         'Every Day' => '',
         'Every Week' => '',
@@ -4223,7 +4224,6 @@ sub Data {
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
         'after the appointment has been ended' => '',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5593,6 +5593,7 @@ sub Data {
             'Địa chỉ email này đã tồn tại. Vui lòng đăng nhập hoặc thiết lập lại mật khẩu của bạn',
         'This email address is not allowed to register. Please contact support staff.' =>
             '',
+        'Could not create account. Please try again later.' => 'Không thể tạo tài khoản. Vui lòng thử lại sau.',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '',
         'Can\'t send account info!' => '',
@@ -8093,6 +8094,12 @@ sub Data {
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            'Xác định các trường người dùng khách hàng mà tự đăng ký chấp nhận từ yêu cầu. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword và ValidID không bao giờ được lấy từ yêu cầu.',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            'Số lần thử tự đăng ký tối đa cho mỗi địa chỉ IP trong cửa sổ giới hạn. Đặt 0 để tắt giới hạn.',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            'Cửa sổ thời gian tính bằng giây cho giới hạn tự đăng ký. Các lần thử trong cửa sổ này được tính vào mức tối đa.',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => 'tạm thời không hợp lệ',

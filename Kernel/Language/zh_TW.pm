@@ -28,7 +28,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%M.%D';
     $Self->{DateInputFormat}     = '%Y.%M.%D';
     $Self->{DateInputFormatLong} = '%Y.%M.%D - %T';
-    $Self->{Completeness}        = 0.311025517573423;
+    $Self->{Completeness}        = 0.311467522052927;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -4204,6 +4204,7 @@ sub Data {
 
         # Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
         'Appointment not found!' => '',
+        'No permission!' => '',
         'Never' => '',
         'Every Day' => '每天',
         'Every Week' => '每週',
@@ -4228,7 +4229,6 @@ sub Data {
         'after the appointment has been started' => '',
         'before the appointment ends' => '',
         'after the appointment has been ended' => '',
-        'No permission!' => '',
         'Cannot delete ticket appointment!' => '',
         'No permissions!' => '',
 
@@ -5598,6 +5598,7 @@ sub Data {
             '這個e-mail已存在，請登入系統或更改您的密碼。',
         'This email address is not allowed to register. Please contact support staff.' =>
             '這個e-mail不允許註冊，請聯繫技術人員。',
+        'Could not create account. Please try again later.' => '無法建立帳戶。請稍後再試。',
         'Added via Customer Panel (%s)' => '',
         'Customer user can\'t be added!' => '',
         'Can\'t send account info!' => '',
@@ -8098,6 +8099,12 @@ sub Data {
             '',
         'Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default).' =>
             '',
+        'Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request.' =>
+            '定義自助註冊從請求中接受的客戶使用者欄位。UserLogin、UserCustomerID、UserCustomerIDs、UserPassword 和 ValidID 絕不會從請求中讀取。',
+        'Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting.' =>
+            '在速率限制時間視窗內，每個 IP 位址允許的最大自助註冊嘗試次數。設為 0 可停用速率限制。',
+        'Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum.' =>
+            '自助註冊速率限制的時間視窗（秒）。此視窗內的嘗試會計入上限。',
 
         # XML Definition: scripts/database/initial_insert.xml
         'invalid-temporarily' => '暫時無效',

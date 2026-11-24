@@ -25829,3 +25829,19 @@ msgstr "Dung lượng nhật ký redo của InnoDB"
 msgid "The setting innodb_redo_log_capacity must be at least 256 MB."
 msgstr "Thiết lập innodb_redo_log_capacity phải ít nhất là 256 MB."
 
+#. Perl Module: Kernel/System/Web/InterfaceCustomer.pm
+msgid "Could not create account. Please try again later."
+msgstr "Không thể tạo tài khoản. Vui lòng thử lại sau."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request."
+msgstr "Xác định các trường người dùng khách hàng mà tự đăng ký chấp nhận từ yêu cầu. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword và ValidID không bao giờ được lấy từ yêu cầu."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting."
+msgstr "Số lần thử tự đăng ký tối đa cho mỗi địa chỉ IP trong cửa sổ giới hạn. Đặt 0 để tắt giới hạn."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
+msgstr "Cửa sổ thời gian tính bằng giây cho giới hạn tự đăng ký. Các lần thử trong cửa sổ này được tính vào mức tối đa."
+

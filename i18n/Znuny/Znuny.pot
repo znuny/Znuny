@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2026-10-09 10:02+0000\n"
+"POT-Creation-Date: 2026-11-24 10:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -12091,6 +12091,10 @@ msgid "Appointment not found!"
 msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
+msgid "No permission!"
+msgstr ""
+
+#. Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
 msgid "Never"
 msgstr ""
 
@@ -12184,10 +12188,6 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
 msgid "after the appointment has been ended"
-msgstr ""
-
-#. Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
-msgid "No permission!"
 msgstr ""
 
 #. Perl Module: Kernel/Modules/AgentAppointmentEdit.pm
@@ -14258,7 +14258,7 @@ msgstr ""
 msgid "Customer user \"%s\" already exists."
 msgstr ""
 
-#. Perl Module: Kernel/System/CustomerUser/DB.pm
+#. Perl Module: Kernel/System/CustomerUser.pm
 msgid "This email address is already in use for another customer user."
 msgstr ""
 
@@ -15460,6 +15460,10 @@ msgstr ""
 
 #. Perl Module: Kernel/System/Web/InterfaceCustomer.pm
 msgid "This email address is not allowed to register. Please contact support staff."
+msgstr ""
+
+#. Perl Module: Kernel/System/Web/InterfaceCustomer.pm
+msgid "Could not create account. Please try again later."
 msgstr ""
 
 #. Perl Module: Kernel/System/Web/InterfaceCustomer.pm
@@ -20944,6 +20948,18 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Once limit of watched tickets per user is reached, the oldest entries will be removed from the watch list. Disable this setting or set it to 0 to disable the limit (default)."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
 msgstr ""
 
 #. XML Definition: scripts/database/initial_insert.xml

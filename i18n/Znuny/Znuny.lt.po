@@ -25829,3 +25829,19 @@ msgstr "InnoDB redo žurnalo talpa"
 msgid "The setting innodb_redo_log_capacity must be at least 256 MB."
 msgstr "Nustatymas innodb_redo_log_capacity turi būti bent 256 MB."
 
+#. Perl Module: Kernel/System/Web/InterfaceCustomer.pm
+msgid "Could not create account. Please try again later."
+msgstr "Paskyros sukurti nepavyko. Bandykite vėliau dar kartą."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Defines the customer user fields that self-registration accepts from the request. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword, and ValidID are never taken from the request."
+msgstr "Nurodo kliento naudotojo laukus, kuriuos saviregistracija priima iš užklausos. UserLogin, UserCustomerID, UserCustomerIDs, UserPassword ir ValidID niekada neimami iš užklausos."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of self-registration attempts allowed per IP address within the rate limit window. Set to 0 to disable rate limiting."
+msgstr "Didžiausias saviregistracijos bandymų skaičius vienam IP adresui ribojimo lange. Nustatykite 0, kad išjungtumėte ribojimą."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Time window in seconds for self-registration rate limiting. Attempts within this window are counted against the maximum."
+msgstr "Laiko langas sekundėmis saviregistracijos ribojimui. Bandymai šiame lange skaičiuojami iki didžiausio skaičiaus."
+

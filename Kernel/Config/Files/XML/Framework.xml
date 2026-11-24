@@ -3779,7 +3779,7 @@ You can log in via the following URL:
         <Description Translatable="1">Enables customers to create their own accounts.</Description>
         <Navigation>Frontend::Customer</Navigation>
         <Value>
-            <Item ValueType="Checkbox">1</Item>
+            <Item ValueType="Checkbox">0</Item>
         </Value>
     </Setting>
     <Setting Name="CustomerPanelCreateAccount::MailRestrictions::Whitelist" Required="0" Valid="0">
