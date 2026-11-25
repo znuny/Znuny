@@ -689,7 +689,7 @@ EOF
 
 Dumps a single Perl value as a hash accessor assignment line, for plugins
 to build their Deploy() output with (see the example below). Generic
-Data::Dumper-style utility, no authentication-type awareness.
+C<Data::Dumper>-style utility, no authentication-type awareness.
 
     my $Line = $AuthenticationConfigObject->DumpAssignment(
         Accessor => "\$Self->{'AuthModule::SAML::Issuer1'}",
