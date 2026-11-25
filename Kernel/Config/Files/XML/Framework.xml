@@ -9214,7 +9214,7 @@ via the Preferences button after logging in.
         </Value>
     </Setting>
     <Setting Name="Attachment###ShowAttachmentsCount" Required="0" Valid="1">
-        <Description Translatable="1">Number of a attachments shown by default.</Description>
+        <Description Translatable="1">Number of attachments shown by default.</Description>
         <Navigation>Core</Navigation>
         <Value>
             <!-- 0 => no limit -->
@@ -9222,7 +9222,7 @@ via the Preferences button after logging in.
         </Value>
     </Setting>
     <Setting Name="Attachment###AgentTicketZoom###ShowAttachmentsCount" Required="0" Valid="1">
-        <Description Translatable="1">Number of a attachments shown in AgentTicketZoom.</Description>
+        <Description Translatable="1">Number of attachments shown in AgentTicketZoom.</Description>
         <Navigation>Core</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="^[0-9]{1,3}$">5</Item>
