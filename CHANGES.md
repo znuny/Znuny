@@ -1,4 +1,4 @@
-# 7.5.1 2026-??-??
+# 7.5.1 2026-11-25
  - 2026-11-25 Changed: ZNUNY_ smart tags now work alongside OTRS_ tags, in any letter case, in appointment notifications, recipient fields, transition actions, config values, and merge, bounce and next-state tags.
  - 2026-11-25 Fixed: Process did not advance to the next activity when a transition action changed a dynamic field in the same request, for example a web service invoker result. The new config option Process::Transition::MaxTransitionsPerRequest (default 1) limits the transitions evaluated per request.
  - 2026-11-25 Security: Fixed permission checks when using dynamic fields of type Webservice. Thanks to @kta1kri for reporting the issue.
@@ -799,6 +799,45 @@
  - 2022-08-22 Core.UI.InputFields.js - Changed the behaviour of the Core.UI.InputFields.js. Now no fields are automatically enlarged or reduced.
  - 2022-08-08 Admin - Added counter of AdminSettingPages per widget and additional focus by filter.
  - 2022-07-15 Frontend::ToolBarModule - Refactored the Toolbar registration, position and view.
+
+# 6.5.27 2026-11-25
+ - 2026-11-25 Fixed: Support bundle generation could hang because the Perl module audit walked the home directory.
+ - 2026-11-25 Security: Fixed permission checks when using dynamic fields of type Webservice. Thanks to @kta1kri for reporting the issue.
+ - 2026-11-25 Security: PictureUpload inline file responses now send the sandbox Content-Security-Policy used by other attachment downloads. Attachment responses also now send X-Content-Type-Options: nosniff. Thanks to @kta1kri for reporting the issue.
+ - 2026-11-25 CVE-2026-78357: Sessions are now removed when a customer user is invalidated or renamed in the admin interface (as already done for agents), and when an agent or customer user password is changed. The session used to self-change the password via user preferences is kept.
+ - 2026-11-25 Security: Customer self-registration no longer accepts UserLogin, UserCustomerID, or any field outside CustomerPanelCreateAccount::AllowedFields. Login and customer ID are taken from the email address, and creation is rate-limited per IP address. Customer self-registration is now disabled by default.
+ - 2026-11-25 Security: The "Note to linked ticket" dialog no longer writes to tickets that are not linked or that the agent may not use, and no longer shows linked tickets the agent may not see.
+ - 2026-11-25 Security: Database queries now reject non-integer values for parameters "Limit" and "Start" before they are added to SQL.
+ - 2026-11-25 Security: Agent ticket bulk action now requires write permission on the merge target and the link target.
+ - 2026-11-25 Security: Process ticket split now requires read permission on the source ticket before its data is used/shown.
+ - 2026-11-25 Security: Appointment read, create, and move now require the matching calendar permission.
+ - 2026-11-25 Security: Stopped unit test helper and FS article storage from creating files and directories outside their allowed paths. Thanks for reporting to Tim Püttmanns (maxence).
+ - 2026-11-25 Security: Form drafts could be loaded or deleted through a ticket they do not belong to, AgentTicketZoom draft deletion had no challenge token check, and ChallengeTokenCheck accepted tokens of other session types with the same UserID. Thanks to Timotej Doležal for reporting this issue.
+ - 2026-11-25 Security: Fixed SQL injection via ticket link keys in the link cleanup of ticket merges on MySQL/MariaDB. Thanks to Timotej Doležal (ESET) for reporting this issue.
+ - 2026-11-25 Security: Fixed access to articles of tickets without permission on PostgreSQL 16+ by rejecting non-numeric article IDs. Thanks to Timotej Doležal (ESET) for reporting this issue.
+ - 2026-11-25 Security: S/MIME certificate and private-key filenames are confined to their directories, and the admin read and download actions require a challenge token.
+ - 2026-11-25 Security: Process management: Example process import now rejects files that are outside of the examples directory.
+ - 2026-11-25 Security: Generic interface operations TicketCreate and TicketUpdate no longer let a customer user set an agent article sender or other agent-related ticket fields.
+ - 2026-11-25 Security: Admin OAuth2 token template names can no longer read YAML files outside the template directory.
+ - 2026-11-23 Fixed: UsedSpace is calculated too early in Core.UI.js. Thanks to @BuilderNSV for reporting the issue. [#604](https://github.com/znuny/Znuny/issues/604)
+ - 2026-11-20 Changed: Improved date picker calendar handling for non-working days and pending default times.
+ - 2026-11-12 Fixed: Follow-up on a closed ticket no longer locks the last owner when the state is kept or stays closed.
+ - 2026-11-12 Fixed: User search with option PostMasterSearch now also searches the login for a matching email address as a fallback to the email address stored in the user preferences.
+ - 2026-11-11 Security: Fixed XSS via URL parameter Action in installer. Thanks to Elisa Popowicz (AWARE7) for reporting this issue.
+ - 2026-11-11 Security: Statistics add and edit actions now require a ChallengeToken, and stored time scale values are HTML-escaped when shown. Thanks to Timotej Doležal (ESET) for reporting the issue.
+ - 2026-11-11 Fixed: Importing a web service with an invalid configuration showed a success notice even though nothing was stored. Thanks to @natanaraujo3001-crypto for reporting the issue. [#870](https://github.com/znuny/Znuny/issues/870)
+ - 2026-11-10 Fixed: Moving or resizing an appointment in the calendar or resource overview via drag and drop removed linked tickets.
+ - 2026-11-06 Fixed: Customer user e-mail address uniqueness is now checked across all customer user backends.
+ - 2026-10-29 Fixed: calendar appointment failed to create ticket if relative period was zero. Thanks to @Fawkespami for reporting the issue. [#821](https://github.com/znuny/Znuny/issues/821)
+ - 2026-10-27 Fixed: Removing sessions by user login also removed the other user type when an agent and a customer user shared the same login.
+ - 2026-10-26 Fixed: PostMaster filter ExternalTicketNumberRecognition ignores CC.
+ - 2026-10-20 Fixed: Console command to export/import dynamic field configs used different format than the GUI version.
+ - 2026-10-19 Security: Generic interface XSLT mapping no longer evaluates regex replacements as Perl code and restricts file, network and write access. Thanks to Gabriel Rodrigues and João Pedro Gonçalves (Hakai Offensive Security (hakaisecurity.io)) for reporting this issue.
+ - 2026-10-08 Fixed: Uninitialized values in Kernel/System/ACL/DB/ACL.pm
+ - 2026-10-05 Fixed: REST invoker controller mapping help text now states that placeholders are replaced from outgoing data after mapping and that nested fields use a dot (e.g. :Ticket.TicketID). Thanks to @killermoehre for reporting the issue. [#804](https://github.com/znuny/Znuny/issues/804)
+ - 2026-10-02 Changed: Enabled the use of URL parameter RequestedURL within existing sessions.
+ - 2026-09-04 Fixed: Process transition action "DynamicFieldSet" now correctly saves multiple values for all multiselect-type dynamic fields (e.g. ConfigItemMultiselect, WebserviceMultiselect).
+ - 2026-07-10 Fixed: Performance problem in PostMaster module DestQueue caused by too many communication log entries to be created.
 
 # 6.5.26 2026-10-14
  - 2026-10-07 Security: Form IDs for attachment uploads are now generated and handled securely. Thanks to @kta1kri for reporting the issue.
