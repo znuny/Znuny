@@ -168,7 +168,7 @@ Please see the [Roadmap](https://www.znuny.org/en/roadmap) for an EOL overview.
 | 7.1     | :x:                |
 | 7.2     | :x:                |
 | 7.3     | :x:                |
-| 7.5     | :heavy_check_mark: |
+| LTS 7.5 | :heavy_check_mark: |
 
 Unsupported versions do not receive security fixes and contain known vulnerabilities.
 Please upgrade to a supported version.
