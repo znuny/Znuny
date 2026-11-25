@@ -29,7 +29,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y.%m.%d';
     $Self->{DateInputFormat}     = '%Y.%m.%d';
     $Self->{DateInputFormatLong} = '%Y.%m.%d - %T';
-    $Self->{Completeness}        = 0.318598959926583;
+    $Self->{Completeness}        = 0.320691237192231;
 
     # csv separator
     $Self->{Separator}         = '';
@@ -1340,10 +1340,10 @@ sub Data {
         'JWT authentication: Payload' => '',
         'Payload for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3' =>
             '',
-        'Available placeholders (prefixed with OTRS_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion.' =>
-            '',
-        'Placeholder usage example: Key1=<OTRS_JWT_ExpirationDateTimestamp>' =>
-            '',
+        'Available placeholders (prefixed with ZNUNY_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion.' =>
+            '可用的佔位符號（前置字元為 ZNUNY_JWT）：ExpirationDateTimestamp、ExpirationDateString。此外，若支援 X.509 憑證：CertSubject、CertIssuer、CertSerial、CertNotBefore、CertNotAfter、CertEmail、CertVersion。',
+        'Placeholder usage example: Key1=<ZNUNY_JWT_ExpirationDateTimestamp>' =>
+            '佔位符號使用範例：Key1=<ZNUNY_JWT_ExpirationDateTimestamp>',
         'JWT authentication: Additional header data' => '',
         'Additional header data for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3' =>
             '',
@@ -1609,8 +1609,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => '',
-        'You can use Znuny-tags like <OTRS_TICKET_DynamicField_...> to insert values from the current ticket.' =>
-            '',
+        'You can use Znuny-tags like <ZNUNY_TICKET_DynamicField_...> to insert values from the current ticket.' =>
+            '您可以使用 Znuny 標籤（例如 <ZNUNY_TICKET_DynamicField_...>）插入目前工單的值。',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportWebserviceSettings.tt
         'Web service name' => '',
@@ -5986,8 +5986,8 @@ sub Data {
             '',
         'Defines the system identifier. Every ticket number and http session string contains this ID. This ensures that only tickets which belong to your system will be processed as follow-ups (useful when communicating between two instances of Znuny).' =>
             '',
-        'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
-            '',
+        'Defines the fully qualified domain name of the system. This setting is used as a variable, ZNUNY_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
+            '定義系統的完整網域名稱。此設定用作變數 ZNUNY_CONFIG_FQDN，它出現在應用程式使用的所有訊息形式中，用來建立系統內工單的連結。',
         'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
             '',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5996,12 +5996,12 @@ sub Data {
             '',
         'When support data is collected via SupportDataCollector, certain SysConfig values marked with ValueType="Password" are automatically masked. This prevents passwords from appearing in plain text in the support data. This setting defines the settings that contain complex configuration hashes that should not be masked when generating the support data.' =>
             '',
-        'Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server\'s settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, OTRS_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
-            '',
+        'Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server\'s settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, ZNUNY_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
+            '定義網頁伺服器用來提供應用程式的通訊協定類型。如果要使用 https 協定而非純文字 http，必須在這裡指定。因為這不會影響網頁伺服器的設定或行為，所以不會改變存取應用程式的方式；若設定錯誤，也不會阻止您登入應用程式。此設定只用作變數 ZNUNY_CONFIG_HttpType，它出現在應用程式使用的所有訊息形式中，用來建立系統內工單的連結。',
         'Whether to force redirect all requests from http to https protocol. Please check that your web server is configured correctly for https protocol before enable this option.' =>
             '',
-        'Sets the prefix to the scripts folder on the server, as configured on the web server. This setting is used as a variable, OTRS_CONFIG_ScriptAlias which is found in all forms of messaging used by the application, to build links to the tickets within the system.' =>
-            '',
+        'Sets the prefix to the scripts folder on the server, as configured on the web server. This setting is used as a variable, ZNUNY_CONFIG_ScriptAlias which is found in all forms of messaging used by the application, to build links to the tickets within the system.' =>
+            '依照網頁伺服器的組態，設定伺服器上指令碼資料夾的前置字元。此設定用作變數 ZNUNY_CONFIG_ScriptAlias，它出現在應用程式使用的所有訊息形式中，用來建立系統內工單的連結。',
         'Defines the system administrator\'s email address. It will be displayed in the error screens of the application.' =>
             '',
         'Company name which will be included in outgoing emails as an X-Header.' =>
@@ -6338,8 +6338,8 @@ sub Data {
         'Enables fetch S/MIME from CustomerUser backend support.' => '',
         'Specifies the name that should be used by the application when sending notifications. The sender name is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com).' =>
             '',
-        'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
-            '',
+        'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the ZNUNY_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
+            '指定應用程式傳送通知時應使用的電子郵件地址。電子郵件地址用來組成通知寄件者的完整顯示名稱（例如 "Znuny Notifications" znuny@your.example.com）。您可以使用組態中設定的變數 ZNUNY_CONFIG_FQDN，或選擇另一個電子郵件地址。',
         'Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).' =>
             '定義密碼重設權杖的有效期（秒）。超過此時間後權杖失效，需要重新請求。預設值：3600（1 小時）。',
         'Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.' =>
@@ -6770,8 +6770,8 @@ sub Data {
         'If enabled debugging information for transitions is logged.' => '',
         'Defines the priority in which the information is logged and presented.' =>
             '',
-        'Filter for debugging Transitions. Note: More filters can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;.' =>
-            '',
+        'Filter for debugging Transitions. Note: More filters can be added in the format &lt;ZNUNY_TICKET_Attribute&gt; e.g. &lt;ZNUNY_TICKET_Priority&gt;.' =>
+            '用於偵錯轉移的篩選器。注意：可以依格式 <ZNUNY_TICKET_Attribute> 新增更多篩選器，例如 <ZNUNY_TICKET_Priority>。',
         'Parameters for the dashboard backend of the running process tickets overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             '',
         'DynamicField backend registration.' => '',
@@ -7963,8 +7963,8 @@ sub Data {
             '',
         'Cache time in seconds for the DB ACL backend.' => '',
         'If enabled debugging information for ACLs is logged.' => '',
-        'Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;.' =>
-            '',
+        'Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;ZNUNY_TICKET_Attribute&gt; e.g. &lt;ZNUNY_TICKET_Priority&gt;.' =>
+            '用於偵錯 ACL 的篩選器。注意：可以依格式 <ZNUNY_TICKET_Attribute> 新增更多工單屬性，例如 <ZNUNY_TICKET_Priority>。',
         'Maximal auto email responses to own email-address a day (Loop-Protection).' =>
             '',
         'Maximal auto email responses to own email-address a day, configurable by email address (Loop-Protection).' =>
@@ -8189,8 +8189,8 @@ sub Data {
             '',
         'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
             '',
-        'Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic.' =>
-            '',
+        'Maximum number of parallel instances when using ZNUNY_AsynchronousInvokerExecution in invoker Ticket::Generic.' =>
+            '在呼叫程式 Ticket::Generic 中使用 ZNUNY_AsynchronousInvokerExecution 時的平行執行個體數目上限。',
         'Enables support for huge XML data in load_xml calls of CPAN library XML::LibXML. This should only be enabled if absolutely needed. Disabling this option (default) protects against denial of service through entity expansion attacks. Before enabling this option ensure that alternative measures to protect the application against this type of attack have been taken.' =>
             '',
         'Shows a link in the menu to create a unit test for the current ticket.' =>
@@ -8262,6 +8262,8 @@ sub Data {
             '',
         'Keep dynamic field attachments after each transition.' => '',
         'Format string for output of attachments in the selection list. "%1$d": article number; "%2$s": filename; "%3$s": translated object type (e.g. Article => Artikel); "%4$s": translated attachment label (e.g. "Anhang").' =>
+            '',
+        'Maximum number of process transitions evaluated for one ticket in a single request, so a transition action that changes ticket data can advance the following activity immediately. Set this to 1 to evaluate only one transition per request. Values must be from 1 to 99. A cyclic process runs until this limit on every ticket update. Reaching the limit writes a notice to the system log. Set the minimum log level to notice, info or debug to keep that notice.' =>
             '',
         'Sets the service in the ticket bulk screen in the agent interface (Ticket::Service needs to be enabled).' =>
             '',
@@ -9365,10 +9367,10 @@ Thanks for your help!
         'Execute SQL statements.' => '執行SQL命令',
         'External' => '',
         'External Link' => '',
-        'Filter for debugging ACLs. Note: More ticket attributes can be added in the format <OTRS_TICKET_Attribute> e.g. <OTRS_TICKET_Priority>.' =>
-            '',
-        'Filter for debugging Transitions. Note: More filters can be added in the format <OTRS_TICKET_Attribute> e.g. <OTRS_TICKET_Priority>.' =>
-            '',
+        'Filter for debugging ACLs. Note: More ticket attributes can be added in the format <ZNUNY_TICKET_Attribute> e.g. <ZNUNY_TICKET_Priority>.' =>
+            '用於偵錯 ACL 的篩選器。注意：可以依格式 <ZNUNY_TICKET_Attribute>（例如 <ZNUNY_TICKET_Priority>）新增更多工單屬性。',
+        'Filter for debugging Transitions. Note: More filters can be added in the format <ZNUNY_TICKET_Attribute> e.g. <ZNUNY_TICKET_Priority>.' =>
+            '用於偵錯轉移的篩選器。注意：可以依格式 <ZNUNY_TICKET_Attribute>（例如 <ZNUNY_TICKET_Priority>）新增更多篩選器。',
         'Filter incoming emails.' => '過濾收到的郵件.',
         'Finnish' => '',
         'First Christmas Day' => '聖誕節',
@@ -9509,7 +9511,7 @@ Thanks for your help!
         'Mentions.' => '',
         'Merge this ticket and all articles into another ticket' => '',
         'Merged Ticket (%s/%s) to (%s/%s).' => '',
-        'Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>.' => '',
+        'Merged Ticket <ZNUNY_TICKET> to <ZNUNY_MERGE_TO_TICKET>.' => '工單 <ZNUNY_TICKET> 已合併至 <ZNUNY_MERGE_TO_TICKET>。',
         'Minute' => '',
         'Miscellaneous' => '',
         'Module to filter and manipulate incoming messages. Get a 4 digit number to ticket free text, use regex in Match e. g. From => \'(.+?)@.+?\', and use () as [***] in Set =>.' =>
@@ -9800,10 +9802,10 @@ Thanks for your help!
         'Webservice' => '',
         'YAML' => '',
         'Yes, but hide archived tickets' => '',
-        'Your email with ticket number "<OTRS_TICKET>" is bounced to "<OTRS_BOUNCE_TO>". Contact this address for further information.' =>
-            '',
-        'Your email with ticket number "<OTRS_TICKET>" is merged to "<OTRS_MERGE_TO_TICKET>".' =>
-            '您的單號為"<OTRS_TICKET>"的郵件工單 被合併到單號"<OTRS_MERGE_TO_TICKET>" !',
+        'Your email with ticket number "<ZNUNY_TICKET>" is bounced to "<ZNUNY_BOUNCE_TO>". Contact this address for further information.' =>
+            '您工單編號為「<ZNUNY_TICKET>」的郵件已退回至「<ZNUNY_BOUNCE_TO>」。請與這個地址聯絡以取得更多資訊。',
+        'Your email with ticket number "<ZNUNY_TICKET>" is merged to "<ZNUNY_MERGE_TO_TICKET>".' =>
+            '您的單號為"<ZNUNY_TICKET>"的郵件工單 被合併到單號"<ZNUNY_MERGE_TO_TICKET>" !',
         'Your queue selection of your preferred queues. You also get notified about those queues via email if enabled.' =>
             '',
         'Your service selection of your preferred services. You also get notified about those services via email if enabled.' =>

@@ -820,7 +820,7 @@ sub Run {
             my $Subject = $ConfigObject->Get('CustomerPanelSubjectLostPasswordToken')
                 || 'ERROR: CustomerPanelSubjectLostPasswordToken is missing!';
             for my $UserKey ( sort keys %UserData ) {
-                $Body =~ s/<OTRS_$UserKey>/$UserData{$UserKey}/gi;
+                $Body =~ s/<(?:OTRS|ZNUNY)_$UserKey>/$UserData{$UserKey}/gi;
             }
             my $Sent = $EmailObject->Send(
                 To       => $UserData{UserEmail},
@@ -1007,7 +1007,7 @@ sub Run {
             my $Subject = $ConfigObject->Get('CustomerPanelSubjectLostPassword')
                 || 'Password Reset Successful';
             for my $UserKey ( sort keys %UserData ) {
-                $Body =~ s/<OTRS_$UserKey>/$UserData{$UserKey}/gi;
+                $Body =~ s/<(?:OTRS|ZNUNY)_$UserKey>/$UserData{$UserKey}/gi;
             }
             $EmailObject->Send(
                 To       => $UserData{UserEmail},
@@ -1241,7 +1241,7 @@ sub Run {
         my $Subject = $ConfigObject->Get('CustomerPanelSubjectNewAccount')
             || 'New Znuny Account!';
         for my $Key ( sort keys %GetParams ) {
-            $Body =~ s/<OTRS_$Key>/$GetParams{$Key}/gi;
+            $Body =~ s/<(?:OTRS|ZNUNY)_$Key>/$GetParams{$Key}/gi;
         }
 
         # send account info

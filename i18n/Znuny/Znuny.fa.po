@@ -419,10 +419,6 @@ msgid "Add Notification"
 msgstr "افزودن اعلان"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Export Notifications"
-msgstr "ارسال اطلاعات"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
 msgid "Filter for Notifications"
 msgstr ""
 
@@ -431,20 +427,8 @@ msgid "Filter for notifications"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Here you can upload a configuration file to import appointment notifications to your system. The file needs to be in .yml format as exported by the appointment notification module."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
 msgid "Overwrite existing notifications?"
 msgstr "بازنویسی اطلاعات موجود؟"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Upload Notification configuration"
-msgstr "هشدار از طریق بارگذاری پیکربندی "
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Import Notification configuration"
-msgstr " هشدار از طریق دریافت پیکربندی"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
 msgid "Appointment Notification Management"
@@ -3003,14 +2987,6 @@ msgid "MacOS Shortcuts"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingXSLT.tt
-msgid "Comment code"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingXSLT.tt
-msgid "Uncomment code"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingXSLT.tt
 msgid "Auto format code"
 msgstr ""
 
@@ -3375,12 +3351,12 @@ msgid "Payload for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "Available placeholders (prefixed with OTRS_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion."
-msgstr ""
+msgid "Available placeholders (prefixed with ZNUNY_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion."
+msgstr "جانگهدارهای موجود (با پیشوند ZNUNY_JWT): ExpirationDateTimestamp، ExpirationDateString. علاوه بر این، اگر پشتیبانی گواهی X.509 وجود داشته باشد: CertSubject، CertIssuer، CertSerial، CertNotBefore، CertNotAfter، CertEmail، CertVersion."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "Placeholder usage example: Key1=<OTRS_JWT_ExpirationDateTimestamp>"
-msgstr ""
+msgid "Placeholder usage example: Key1=<ZNUNY_JWT_ExpirationDateTimestamp>"
+msgstr "نمونه استفاده از جانگهدار: Key1=<ZNUNY_JWT_ExpirationDateTimestamp>"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "JWT authentication: Additional header data"
@@ -4043,10 +4019,6 @@ msgid "Example: mail.example.com"
 msgstr "مثال: mail.example.com"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
-msgid "IMAP Folder"
-msgstr "پوشه IMAP"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
 msgid "Only modify this if you need to fetch mail from a different folder than INBOX."
 msgstr "فقط این را تغییر دهید اگر شما نیاز به دریافت نامه از پوشه های مختلف از صندوق."
 
@@ -4078,10 +4050,6 @@ msgstr ""
 msgid "Links"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
-msgid "View the admin manual on Github"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
 msgid "Filter for Items"
 msgstr ""
@@ -4097,10 +4065,6 @@ msgstr ""
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
 msgid "Set as favorite"
 msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
-msgid "Here you can upload a configuration file to import Ticket Notifications to your system. The file needs to be in .yml format as exported by the Ticket Notification module."
-msgstr "در اینجا شما می توانید یک فایل پیکربندی برای واردات اطلاعیه بلیط را به سیستم خود را بارگذاری کنید. فایل نیاز به در فرمت .yml باشد که توسط ماژول اطلاع رسانی بلیط صادر می شود."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
 msgid "Ticket Notification Management"
@@ -4167,8 +4131,8 @@ msgid "Use comma or semicolon to separate email addresses."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
-msgid "You can use Znuny-tags like <OTRS_TICKET_DynamicField_...> to insert values from the current ticket."
-msgstr ""
+msgid "You can use Znuny-tags like <ZNUNY_TICKET_DynamicField_...> to insert values from the current ticket."
+msgstr "می‌توانید از برچسب‌های Znuny مانند <ZNUNY_TICKET_DynamicField_...> برای درج مقدارهای درخواست جاری استفاده کنید."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportWebserviceSettings.tt
 msgid "Web service name"
@@ -4841,10 +4805,6 @@ msgstr "در اینجا شما می توانید یک فایل پیکربندی 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Upload process configuration"
 msgstr " روند  بارگذاری پیکربندی"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-msgid "Import process configuration"
-msgstr " روند دریافت پیکربندی"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Ready2Adopt Processes"
@@ -7235,10 +7195,6 @@ msgid "Go back to editing this agent"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
-msgid "Set up your personal preferences. Save each setting by clicking the checkmark on the right."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
 msgid "You can use the navigation tree below to only show settings from certain groups."
 msgstr ""
 
@@ -7357,10 +7313,6 @@ msgstr "پروسه"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentSplitSelection.tt
 msgid "Split"
 msgstr "جدا ساختن"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
-msgid "Read more about statistics in Znuny"
-msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
 msgid "Statistics Management"
@@ -7491,34 +7443,6 @@ msgid "This statistic contains configuration errors and can currently not be use
 msgstr "این آمار شامل خطاهای پیکربندی هستند و در حال حاضر قابل استفاده نیستند."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Change Free Text of %s%s%s"
-msgstr "تغییر متن رایگان از %s %s %s"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Change Owner of %s%s%s"
-msgstr "تغییر صاحب %s %s %s"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Close %s%s%s"
-msgstr "نزدیک %s %s %s"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Add Note to %s%s%s"
-msgstr "اضافه کردن یادداشت به %s %s %s"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Set Pending Time for %s%s%s"
-msgstr "تنظیم انتظار زمان برای %s %s %s"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Change Priority of %s%s%s"
-msgstr "تغییر اولویت %s %s %s"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Change Responsible of %s%s%s"
-msgstr "تغییر مسئول %s %s %s"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "The ticket has been locked"
 msgstr "درخواست تحویل گرفته شده است"
 
@@ -7529,10 +7453,6 @@ msgstr "تنظیمات درخواست"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Service invalid."
 msgstr "سرویس نامعتبر"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "SLA invalid."
-msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Team Data"
@@ -7553,10 +7473,6 @@ msgstr "لطفا یک صاحب جدید مشخص نمایید!"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Owner invalid."
 msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "New Responsible"
-msgstr " مسئول جدید"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Please set a new responsible!"
@@ -7581,14 +7497,6 @@ msgstr ""
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "For all pending* states."
 msgstr "برای همه کشورهای * در انتظار."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Dynamic Info"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Add Article"
-msgstr "اضافه کردن نوشته"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Inform"
@@ -7621,10 +7529,6 @@ msgstr "ایجاد یک مقاله"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Setting a template will overwrite any text or attachment."
 msgstr "تنظیم یک قالب هر گونه متن یا پیوست بازنویسی."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
-msgid "Bounce %s%s%s"
-msgstr "پریدن %s %s %s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
 msgid "Bounce to"
@@ -7691,10 +7595,6 @@ msgid "Execute Bulk Action"
 msgstr "ادراه کردن میزان عمل"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
-msgid "Compose Answer for %s%s%s"
-msgstr "نوشتن پاسخ برای %s %s %s"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid "Date Invalid!"
 msgstr "تاریخ نامعتبر!"
 
@@ -7710,10 +7610,6 @@ msgstr "این آدرس به عنوان آدرس سیستم ثبت شده و م�
 msgid "Please include at least one recipient"
 msgstr "لطفا حداقل یک گیرنده را قراردهید"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Remove Ticket Customer"
-msgstr "حذف و ضوابط درخواست"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid "Please remove this entry and enter a new one with the correct value."
 msgstr "لطفا این مطلب را حذف و یک مطلب جدید با مقدار صحیح را وارد کنید."
@@ -7722,17 +7618,9 @@ msgstr "لطفا این مطلب را حذف و یک مطلب جدید با مق
 msgid "This address already exists on the address list."
 msgstr "این آدرس در لیست آدرس ها موجود است."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Remove Cc"
-msgstr "حذف رونوشت"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid "Bcc"
 msgstr "رونوشت پنهان"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Remove Bcc"
-msgstr "حذف کپی به"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
 msgid "Change Customer of %s%s%s"
@@ -7751,20 +7639,12 @@ msgid "Create New Email Ticket"
 msgstr "ساخت درخواست ایمیلی جدید"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
-msgid "Example Template"
-msgstr "به عنوان مثال قالب"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid "To customer user"
 msgstr "به کاربران مشتری"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid "Please include at least one customer user for the ticket."
 msgstr "لطفا حداقل یک کاربر مشتری برای درخواست قرار دهید"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
-msgid "Remove Ticket Customer User"
-msgstr "حذف درخواست  کاربرمشتری"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid "From queue"
@@ -7774,21 +7654,9 @@ msgstr "از صف درخواست"
 msgid "Get all"
 msgstr "گرفتن همه"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
-msgid "Outbound Email for %s%s%s"
-msgstr "عازم ناحیه دور دست ایمیل برای %s %s %s"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
 msgid "Resend Email for %s%s%s"
 msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "All fields marked with an asterisk (*) are mandatory."
-msgstr "همه فیلدهایی که با ستاره مشخص شده اند (*) الزامی است."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Cancel & close"
-msgstr "لغو کنید و ببندید"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Undo & close"
@@ -7818,10 +7686,6 @@ msgstr "بلیط %s : زمان حل به پایان رسیده است ( %s / %s 
 msgid "Ticket %s: solution time will be over in %s %s!"
 msgstr "بلیط %s : زمان حل بیش از در خواهد %s / %s !"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketForward.tt
-msgid "Forward %s%s%s"
-msgstr "رو به جلو %s %s %s"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
 msgid "History of %s%s%s"
 msgstr "تاریخ %s %s %s"
@@ -7845,10 +7709,6 @@ msgstr "زمان ساختن"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Article"
 msgstr "نوشته"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMerge.tt
-msgid "Merge %s%s%s"
-msgstr "ادغام %s %s %s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMerge.tt
 msgid "Merge Settings"
@@ -7879,10 +7739,6 @@ msgid "Need a valid email address."
 msgstr "به آدرس ایمیل معتبر نیاز است."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
-msgid "Move %s%s%s"
-msgstr "حرکت %s %s %s"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
 msgid "New Queue"
 msgstr "لیست درخواست جدید"
 
@@ -7893,10 +7749,6 @@ msgstr "ارتباطات"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
 msgid "Move"
 msgstr "انتقال"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
-msgid "Add note to linked %s%s%s"
-msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
 msgid "Notes"
@@ -7998,17 +7850,9 @@ msgstr "ساخت درخواست تلفنی جدید"
 msgid "Please include at least one customer for the ticket."
 msgstr "لطفا حداقل یک مشتری برای درخواست قراردهید"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
-msgid "Select this customer as the main customer."
-msgstr "این مشتری را به عنوان مشتری اصلی انتخاب کنید."
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhone.tt
 msgid "To queue"
 msgstr "به صف درخواست"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhoneCommon.tt
-msgid "Phone Call for %s%s%s"
-msgstr "تماس بگیرید تلفن تماس برای %s %s %s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPlain.tt
 msgid "View Email Plain Text for %s%s%s"
@@ -8195,10 +8039,6 @@ msgid "Article Overview - %s Article(s)"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
-msgid "Page %s"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "Add Filter"
 msgstr "افزودن فیلتر"
 
@@ -8342,10 +8182,6 @@ msgstr "تا زمانی که"
 msgid "Locked"
 msgstr "تحویل گرفته شده"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
-msgid "%s Ticket(s)"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon/TicketInformation.tt
 msgid "Accounted time"
 msgstr "زمان محاسبه شده"
@@ -8418,10 +8254,6 @@ msgstr "خطا"
 msgid "An Error Occurred"
 msgstr "خطا"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
-msgid "Traceback"
-msgstr "بازبینی"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
 msgid "Powered by %s"
 msgstr ""
@@ -8491,10 +8323,6 @@ msgid "Your password"
 msgstr "رمز عبور شما"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
-msgid "Forgot password?"
-msgstr "رمز عبور را فراموش کردید؟"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "2 Factor Token"
 msgstr "2 فاکتور رمز"
 
@@ -8513,10 +8341,6 @@ msgstr "درخواست رمز عبور جدید"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Your User Name"
 msgstr "نام کاربری شما"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
-msgid "A new password will be sent to your email address."
-msgstr "رمز عبور جدید برای آدرس ایمیل شما ارسال خواهد شد."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
@@ -8685,10 +8509,6 @@ msgstr "اطلاعات رویداد"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/DashboardEventsTicketCalendar.tt
 msgid "Ticket fields"
 msgstr "زمینه های درخواست"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-msgid "Error Details"
-msgstr "جزئیات خطا"
 
 #. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
 msgid "Expand"
@@ -10045,22 +9865,6 @@ msgstr ""
 #. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
 msgid "There was an error creating the Notification"
 msgstr "خطایی در ایجاد هشدار  وجود دارد"
-
-#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
-msgid "Notifications could not be Imported due to a unknown error, please check Znuny logs for more information"
-msgstr "اطلاعیه نمی تواند به دلیل یک خطای ناشناخته وارد شود، لطفا Znuny سیاهه های مربوط را بررسی کنید برای اطلاعات بیشتر"
-
-#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
-msgid "The following Notifications have been added successfully: %s"
-msgstr "این اعلانها با موفقیت اضافه شده است: %s"
-
-#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
-msgid "The following Notifications have been updated successfully: %s"
-msgstr "این اعلانها  با موفقیت به روز شده است: %s"
-
-#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
-msgid "There where errors adding/updating the following Notifications: %s. Please check the log file for more information."
-msgstr "وجود دارد که در آن خطاهای اضافه کردن / به روز رسانی اطلاعیه زیر است: %s . لطفا ورود به سیستم فایل برای اطلاعات بیشتر."
 
 #. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
 msgid "Notification updated!"
@@ -12482,14 +12286,6 @@ msgstr "نمایش یک مطلب"
 msgid "Show all articles"
 msgstr "نمایش تمام مطالب"
 
-#. Perl Module: Kernel/Modules/AJAXAttachment.pm
-msgid "Got no FormID."
-msgstr ""
-
-#. Perl Module: Kernel/Modules/AJAXAttachment.pm
-msgid "Error: the file could not be deleted properly. Please contact your administrator (missing FileID)."
-msgstr ""
-
 #. Perl Module: Kernel/Modules/CustomerTicketArticleContent.pm
 msgid "ArticleID is needed!"
 msgstr ""
@@ -12708,10 +12504,6 @@ msgstr "خطا: لطفا مقدار را برای innodb_log_file_size در پا
 
 #. Perl Module: Kernel/Modules/Installer.pm
 msgid "Wrong default storage engine (%s is %s, but it needs to be InnoDB)."
-msgstr ""
-
-#. Perl Module: Kernel/Modules/Installer.pm
-msgid "Wrong database collation (%s is %s, but it needs to be utf8)."
 msgstr ""
 
 #. Perl Module: Kernel/Modules/Mentions.pm
@@ -13172,10 +12964,6 @@ msgstr "شما گزینه خارج از دفتردارید،می خواهید غ
 
 #. Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationInvalidCheck.pm
 msgid "You have %s invalid setting(s) deployed. Click here to show invalid settings."
-msgstr ""
-
-#. JS File: var/httpd/htdocs/js/Core.SystemConfiguration.js
-msgid "You have undeployed settings, would you like to deploy them?"
 msgstr ""
 
 #. Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationOutOfSyncCheck.pm
@@ -13935,28 +13723,12 @@ msgid "Client Connection Charset"
 msgstr "اتصال مشتری نویسهگان"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "Setting character_set_client needs to be utf8."
-msgstr "تنظیم character_set_client نیاز به UTF8 باشد."
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
 msgid "Server Database Charset"
 msgstr "سرور مجموعه کاراکتر پایگاه"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "This character set is not yet supported. Please convert your database to the character set 'utf8'."
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "The setting character_set_database needs to be 'utf8'."
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
 msgid "Table Charset"
 msgstr "جدول مجموعه کاراکتر"
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "There were tables found which do not have 'utf8' as charset."
-msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
 msgid "InnoDB Log File Size"
@@ -14638,14 +14410,6 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
-#. Perl Module: Kernel/System/SysConfig/ValueType/Date.pm
-msgid "System was not able to calculate user Date in OTRSTimeZone!"
-msgstr ""
-
-#. Perl Module: Kernel/System/SysConfig/ValueType/DateTime.pm
-msgid "System was not able to calculate user DateTime in OTRSTimeZone!"
-msgstr ""
-
 #. Perl Module: Kernel/System/SysConfig/ValueType/FrontendNavigation.pm
 msgid "Value is not correct! Please, consider updating this module."
 msgstr ""
@@ -14689,14 +14453,6 @@ msgstr "این ویژگی فعال نیست."
 #. Perl Module: Kernel/System/Web/InterfaceAgent.pm
 msgid "Sent password reset instructions. Please check your email."
 msgstr "دستورالعمل تنظیم مجدد کلمه عبور ارسال شد. لطفا ایمیل خود را چک نمایید."
-
-#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
-msgid "Invalid Token!"
-msgstr "کد بازیابی معتبر نیست"
-
-#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
-msgid "Sent new password to %s. Please check your email."
-msgstr "کلمه عبور جدید به %s ارسال شد. لطفا ایمیل خود را چک نمایید."
 
 #. Perl Module: Kernel/System/Web/InterfaceAgent.pm
 msgid "Error: invalid session."
@@ -15071,10 +14827,6 @@ msgid "Defines the system identifier. Every ticket number and http session strin
 msgstr "تعریف می کند شناسه سیستم. هر عدد بلیط و جلسه HTTP رشته شامل این ID. این تضمین می کند که تنها بلیط که متعلق به سیستم شما خواهد شد به شرح زیر یو پی اس (در هنگام برقراری ارتباط بین دو نمونه از Znuny مفید) پردازش شده است."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system."
-msgstr "تعریف می کند که نام مناسب دامنه از سیستم. این تنظیم به عنوان یک متغیر، OTRS_CONFIG_FQDN است که در تمام اشکال پیام استفاده شده توسط برنامه، برای ساخت لینک به بلیط در سیستم شما یافت استفاده می شود."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID)."
 msgstr ""
 
@@ -15087,16 +14839,8 @@ msgid "Defines the timeout (in seconds, minimum is 20 seconds) for the support d
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server's settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, OTRS_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system."
-msgstr "تعریف می کند نوع پروتکل مورد استفاده توسط وب سرور، برای خدمت به نرم افزار است. اگر پروتکل HTTPS به جای HTTP ساده استفاده می شود، در اینجا باید مشخص شود. از آنجا که این هیچ در تنظیمات و یا رفتار وب سرور تاثیر می گذارد، آن را به روش دسترسی به برنامه را تغییر دهید، و اگر آن اشتباه است، آن را به شما از ورود به نرم افزار جلوگیری نمی کند. این تنظیم فقط به عنوان یک متغیر، OTRS_CONFIG_HttpType است که در تمام اشکال پیام استفاده شده توسط برنامه پیدا شده است استفاده می شود، برای ساخت لینک به بلیط در سیستم خود را."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Whether to force redirect all requests from http to https protocol. Please check that your web server is configured correctly for https protocol before enable this option."
 msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Sets the prefix to the scripts folder on the server, as configured on the web server. This setting is used as a variable, OTRS_CONFIG_ScriptAlias which is found in all forms of messaging used by the application, to build links to the tickets within the system."
-msgstr "پیشوند به پوشه Scripts بر روی سرور، به عنوان بر روی وب سرور پیکربندی تنظیم می کند. این تنظیم به عنوان یک متغیر، OTRS_CONFIG_ScriptAlias ​​است که در تمام اشکال پیام استفاده شده توسط برنامه پیدا شده است استفاده می شود، برای ساخت لینک به بلیط در سیستم."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the system administrator's email address. It will be displayed in the error screens of the application."
@@ -15171,10 +14915,6 @@ msgid "Defines the URL rich text editor path."
 msgstr "تعریف می کند URL غنی مسیر ویرایشگر متن."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the default CSS used in rich text editors."
-msgstr "تعریف می کند که CSS به طور پیش فرض مورد استفاده در ویرایشگرهای متن غنی است."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.)."
 msgstr "تعریف می کند اگر حالت پیشرفته استفاده شود (را قادر می سازد استفاده از جدول، جایگزین، زیرنویس، بالانویس، چسباندن از Word، و غیره)."
 
@@ -15196,18 +14936,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the selectable fonts in the rich text editor."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the selectable format tags in the rich text editor."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines additional plugins for use in the rich text editor."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines extra content that is allowed for use in the rich text editor."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -15427,10 +15155,6 @@ msgid "Defines the module that shows all the currently logged in customers in th
 msgstr "ماژول است که همه به در حال حاضر در مشتریان در رابط عامل وارد تعریف می کند."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the module to display a notification in the agent interface, if there are modified sysconfig settings that are not deployed yet."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the module to display a notification in the agent interface, if there are invalid sysconfig settings deployed."
 msgstr ""
 
@@ -15531,19 +15255,11 @@ msgid "Defines the period of time (in minutes) before customer is marked as \"aw
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "This setting is deprecated. Set OTRSTimeZone instead."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Sets the time zone that will be assigned to newly created users and will be used for users that haven't yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user's time zone."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "If enabled, users that haven't selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -15811,23 +15527,11 @@ msgid "Specifies the name that should be used by the application when sending no
 msgstr "نامی است که باید توسط نرم افزار در هنگام ارسال اطلاعیه استفاده می شود مشخص می کند. نام فرستنده استفاده می شود برای ساخت نام صفحه نمایش کامل برای کارشناسی ارشد اطلاع رسانی (یعنی \\\\ \"Znuny اطلاعیه \" znuny@your.example.com)."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. \"Znuny Notifications\" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address."
-msgstr "آدرس ایمیل که باید توسط نرم افزار در هنگام ارسال اطلاعیه استفاده می شود مشخص می کند. آدرس ایمیل استفاده می شود برای ساخت نام صفحه نمایش کامل برای کارشناسی ارشد اطلاع رسانی (یعنی \\\\ \"Znuny اطلاعیه \" znuny@your.example.com). شما می توانید متغیر OTRS_CONFIG_FQDN به عنوان مجموعه ای در configuation خود استفاده کنید، یا آدرس ایمیل دیگر را انتخاب کنید."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the subject for notification mails sent to agents, with token about new requested password."
 msgstr "تعریف می کند این موضوع برای ایمیل های آگاه سازی فرستاده شده به عوامل، با رمز در مورد کلمه عبور جدید درخواست شده است."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the body text for notification mails sent to agents, with token about new requested password."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the subject for notification mails sent to agents, about new password."
-msgstr "تعریف می کند این موضوع برای ایمیل های آگاه سازی فرستاده شده به عوامل، در مورد رمز عبور جدید."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the body text for notification mails sent to agents, about new password."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -15996,14 +15700,6 @@ msgstr "تعریف می کند این موضوع برای ایمیل های آگ
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the body text for notification mails sent to customers, with token about new requested password."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the subject for notification mails sent to customers, about new password."
-msgstr "تعریف می کند این موضوع برای ایمیل های آگاه سازی فرستاده شده به مشتریان، در مورد رمز عبور جدید."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the body text for notification mails sent to customers, about new password."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -16699,8 +16395,8 @@ msgid "Defines the priority in which the information is logged and presented."
 msgstr "تعریف می کند که اولویت است که در آن اطلاعات وارد شده و ارائه شده است."
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
-msgid "Filter for debugging Transitions. Note: More filters can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;."
-msgstr ""
+msgid "Filter for debugging Transitions. Note: More filters can be added in the format &lt;ZNUNY_TICKET_Attribute&gt; e.g. &lt;ZNUNY_TICKET_Priority&gt;."
+msgstr "فیلتر برای اشکال‌زدایی انتقال‌ها. توجه: فیلترهای بیشتری را می‌توان با قالب <ZNUNY_TICKET_Attribute> افزود، برای مثال <ZNUNY_TICKET_Priority>."
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
 msgid "Parameters for the dashboard backend of the running process tickets overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin. \"Mandatory\" determines if the plugin is always shown and can not be removed by agents."
@@ -19131,8 +18827,8 @@ msgid "If enabled debugging information for ACLs is logged."
 msgstr "اگر اطلاعات اشکال زدایی فعال برای ACL ها وارد شده است."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;."
-msgstr ""
+msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;ZNUNY_TICKET_Attribute&gt; e.g. &lt;ZNUNY_TICKET_Priority&gt;."
+msgstr "فیلتر برای اشکال‌زدایی ACLها. توجه: ویژگی‌های بیشتری از درخواست را می‌توان با قالب <ZNUNY_TICKET_Attribute> افزود، برای مثال <ZNUNY_TICKET_Priority>."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Maximal auto email responses to own email-address a day (Loop-Protection)."
@@ -19256,10 +18952,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Module used to detect if attachments are present."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Executes follow-up checks on Znuny Header 'X-OTRS-Bounce'."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
@@ -19599,18 +19291,6 @@ msgid "Screens for which it is possible to enable or disable default columns."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Content of different fields can be given by separating those fields by ';'."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Different fields can be omitted by separating them by ';'."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Enables support for huge XML data in load_xml calls of CPAN library XML::LibXML. This should only be enabled if absolutely needed. Disabling this option (default) protects against denial of service through entity expansion attacks. Before enabling this option ensure that alternative measures to protect the application against this type of attack have been taken."
 msgstr ""
 
@@ -19936,10 +19616,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Maximum length of displayed attachment filenames in the article preview of ticket zoom view."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "General settings for autocompletion in rich text editor."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
@@ -21077,10 +20753,6 @@ msgstr "با عرض پوزش، اما شما می توانید از تمام ر�
 #. JS File: var/httpd/htdocs/js/Core.Agent.Preferences.js
 msgid "Sorry, but you can't disable all methods for this notification."
 msgstr "با عرض پوزش، اما شما می توانید از تمام روش برای این اطلاع رسانی را غیر فعال کنید."
-
-#. JS File: var/httpd/htdocs/js/Core.Agent.Preferences.js
-msgid "Please note that at least one of the settings you have changed requires a page reload. Click here to reload the current screen."
-msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Preferences.js
 msgid "An unknown error occurred. Please contact the administrator."
@@ -22413,12 +22085,12 @@ msgid "External Link"
 msgstr ""
 
 #. SysConfig
-msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format <OTRS_TICKET_Attribute> e.g. <OTRS_TICKET_Priority>."
-msgstr "فیلتر برای اشکال زدایی ACL ها است. توجه: چند ویژگی بلیط را می توان در قالب <OTRS_TICKET_Attribute> به عنوان مثال <OTRS_TICKET_Priority> اضافه شده است."
+msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format <ZNUNY_TICKET_Attribute> e.g. <ZNUNY_TICKET_Priority>."
+msgstr "فیلتر برای اشکال زدایی ACL ها است. توجه: چند ویژگی بلیط را می توان در قالب <ZNUNY_TICKET_Attribute> به عنوان مثال <ZNUNY_TICKET_Priority> اضافه شده است."
 
 #. SysConfig
-msgid "Filter for debugging Transitions. Note: More filters can be added in the format <OTRS_TICKET_Attribute> e.g. <OTRS_TICKET_Priority>."
-msgstr "فیلتر برای اشکال زدایی انتقال. توجه: بیشتر فیلتر را می توان در قالب <OTRS_TICKET_Attribute> به عنوان مثال <OTRS_TICKET_Priority> اضافه شده است."
+msgid "Filter for debugging Transitions. Note: More filters can be added in the format <ZNUNY_TICKET_Attribute> e.g. <ZNUNY_TICKET_Priority>."
+msgstr "فیلتر برای اشکال زدایی انتقال. توجه: بیشتر فیلتر را می توان در قالب <ZNUNY_TICKET_Attribute> به عنوان مثال <ZNUNY_TICKET_Priority> اضافه شده است."
 
 #. SysConfig
 msgid "Filter incoming emails."
@@ -22913,10 +22585,6 @@ msgid "Merged Ticket (%s/%s) to (%s/%s)."
 msgstr ""
 
 #. SysConfig
-msgid "Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>."
-msgstr "با هم ادغام شدند بلیط <OTRS_TICKET> تا <OTRS_MERGE_TO_TICKET>."
-
-#. SysConfig
 msgid "Minute"
 msgstr ""
 
@@ -23015,10 +22683,6 @@ msgstr ""
 #. SysConfig
 msgid "OAuth2 token"
 msgstr ""
-
-#. SysConfig
-msgid "OTRS"
-msgstr "OTRS"
 
 #. SysConfig
 msgid "Open an external link!"
@@ -23949,14 +23613,6 @@ msgid "Yes, but hide archived tickets"
 msgstr "بله، اما آرشیو درخواست پنهان است"
 
 #. SysConfig
-msgid "Your email with ticket number \"<OTRS_TICKET>\" is bounced to \"<OTRS_BOUNCE_TO>\". Contact this address for further information."
-msgstr "ایمیل خود را با تعداد درخواست  \\\\ \"<OTRS_TICKET> \" منعکس است با \\\\ \"<OTRS_BOUNCE_TO> \". این آدرس برای کسب اطلاعات بیشتر تماس بگیرید."
-
-#. SysConfig
-msgid "Your email with ticket number \"<OTRS_TICKET>\" is merged to \"<OTRS_MERGE_TO_TICKET>\"."
-msgstr "Email شما با شماره درخواست  \"<OTRS_TICKET>\" با درخواست \"<OTRS_MERGE_TO_TICKET>\"  ادغام گردید."
-
-#. SysConfig
 msgid "Your queue selection of your preferred queues. You also get notified about those queues via email if enabled."
 msgstr "انتخاب صف خود را از صف نظر خود را. شما همچنین دریافت در مورد کسانی که صف از طریق ایمیل مطلع اگر فعال باشد."
 
@@ -24090,14 +23746,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "The Apple touch icon for the agent interface for the skin \"default\"."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
-msgid "Mark tickets as seen"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
-msgid "Mark tickets as unseen"
 msgstr ""
 
 #. Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
@@ -24244,14 +23892,6 @@ msgstr ""
 msgid "Save changes"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
-msgid "cancel"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Select one or more recipients from the customer user address book."
-msgstr ""
-
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
 msgid "There were non-system tables found which do not have 'utf8mb4' as charset."
 msgstr ""
@@ -24354,14 +23994,6 @@ msgstr ""
 
 #. Perl Module: Kernel/Output/HTML/Notification/TranslationCheck.pm
 msgid "The translations in the database are not synchronous. Please synchronize all translations."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "Frontend module registration for the agent admin interface."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "This configuration defines the cache settings for the Znuny-DatabasBackend (default: 1 day)."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
@@ -24756,14 +24388,6 @@ msgstr ""
 msgid "Defines which ContentTypes are permitted for the attachment preview."
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.UI.js
-msgid "An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator."
-msgstr ""
-
-#. SysConfig
-msgid "AsPopup"
-msgstr ""
-
 #. SysConfig
 msgid "Create new process ticket via category."
 msgstr ""
@@ -24777,10 +24401,6 @@ msgid "LinkTarget"
 msgstr ""
 
 #. SysConfig
-msgid "Process Ticket Catalog"
-msgstr ""
-
-#. SysConfig
 msgid "Process Ticket Category: Define a process category."
 msgstr ""
 
@@ -24790,10 +24410,6 @@ msgstr ""
 
 #. SysConfig
 msgid "Process Ticket Category: Define a process link target."
-msgstr ""
-
-#. SysConfig
-msgid "Process Ticket Catalog."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
@@ -24982,10 +24598,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid "Customer suggestions"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
-msgid "Undo & Close"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
@@ -25214,14 +24826,6 @@ msgstr ""
 
 #. SysConfig
 msgid "Ticket information"
-msgstr ""
-
-#. Perl Module: Kernel/Modules/AgentSession.pm
-msgid "Invalid subaction!"
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "List of session keys that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession."
 msgstr ""
 
 #. SysConfig
@@ -25553,10 +25157,6 @@ msgid "Shows a link to preview article attachments in the zoom view of the artic
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Output filter to show attachment selection in certain agent ticket dialogs."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Shows a link in the menu to select and download all attachments of the ticket."
 msgstr ""
 
@@ -25663,10 +25263,6 @@ msgstr "گواهینامه/کلید انتخاب‌شده در دسترس نیس
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
 msgid "- Select an existing certificate/key -"
 msgstr "- یک گواهینامه/کلید موجود را انتخاب کنید -"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
-msgid "Paste"
-msgstr "جای‌گذاری"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
 msgid "Use certificate from metadata"
@@ -25904,10 +25500,6 @@ msgstr "همگام‌سازی"
 msgid "Slot %s"
 msgstr "شکاف %s"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
-msgid "Only invalid configurations can be deleted. Set this configuration to invalid first."
-msgstr "فقط پیکربندی‌های نامعتبر را می‌توان حذف کرد. ابتدا این پیکربندی را نامعتبر کنید."
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
 msgid "Enable sync"
 msgstr "فعال‌سازی همگام‌سازی"
@@ -26043,10 +25635,6 @@ msgstr "بازبینی"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
 msgid "Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective."
 msgstr "برای ایجاد این پیکربندی SAML روی ذخیره کلیک کنید. هنوز فعال نخواهد بود - بعدا در صفحه پیش نمایش از عمل استقرار پیکربندی استفاده کنید تا اعمال شود."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
-msgid "If you skipped the Identity Provider CA certificate here and provided metadata instead, it will be derived from that metadata automatically during Deploy."
-msgstr "اگر اینجا گواهینامه CA ارائه‌دهنده هویت را رد کردید و به جای آن ابرداده دادید, هنگام استقرار به‌طور خودکار از آن ابرداده استخراج می‌شود."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
 msgid "You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only)."
@@ -26337,10 +25925,6 @@ msgid "SP signing certificate"
 msgstr "گواهینامه امضای SP"
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
-msgid "Not set (will be derived automatically from metadata during Deploy, if possible)"
-msgstr "تنظیم نشده (در صورت امکان هنگام استقرار به‌طور خودکار از ابرداده استخراج می‌شود)"
-
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
 msgid "User sync"
 msgstr "همگام‌سازی کاربر"
 
@@ -26563,4 +26147,44 @@ msgstr "پیشوندهای نشانی HTTPS که یک نگاشت XSLT می‌ت�
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "The controller that the invoker should send requests to. Variables marked by a ':' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
 msgstr "کنترلری که فراخوان باید درخواست‌ها را به آن ارسال کند. متغیرهای مشخص‌شده با ':' پس از نگاشت (در صورت پیکربندی) از داده‌های خروجی جایگزین می‌شوند. فیلدهای تودرتو از نقطه استفاده می‌کنند (مثلاً /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the fully qualified domain name of the system. This setting is used as a variable, ZNUNY_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system."
+msgstr "تعریف می کند که نام مناسب دامنه از سیستم. این تنظیم به عنوان یک متغیر، ZNUNY_CONFIG_FQDN است که در تمام اشکال پیام استفاده شده توسط برنامه، برای ساخت لینک به بلیط در سیستم شما یافت استفاده می شود."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server's settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, ZNUNY_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system."
+msgstr "تعریف می کند نوع پروتکل مورد استفاده توسط وب سرور، برای خدمت به نرم افزار است. اگر پروتکل HTTPS به جای HTTP ساده استفاده می شود، در اینجا باید مشخص شود. از آنجا که این هیچ در تنظیمات و یا رفتار وب سرور تاثیر می گذارد، آن را به روش دسترسی به برنامه را تغییر دهید، و اگر آن اشتباه است، آن را به شما از ورود به نرم افزار جلوگیری نمی کند. این تنظیم فقط به عنوان یک متغیر، ZNUNY_CONFIG_HttpType است که در تمام اشکال پیام استفاده شده توسط برنامه پیدا شده است استفاده می شود، برای ساخت لینک به بلیط در سیستم خود را."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Sets the prefix to the scripts folder on the server, as configured on the web server. This setting is used as a variable, ZNUNY_CONFIG_ScriptAlias which is found in all forms of messaging used by the application, to build links to the tickets within the system."
+msgstr "پیشوند به پوشه Scripts بر روی سرور، به عنوان بر روی وب سرور پیکربندی تنظیم می کند. این تنظیم به عنوان یک متغیر، ZNUNY_CONFIG_ScriptAlias ​​است که در تمام اشکال پیام استفاده شده توسط برنامه پیدا شده است استفاده می شود، برای ساخت لینک به بلیط در سیستم."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. \"Znuny Notifications\" znuny@your.example.com). You can use the ZNUNY_CONFIG_FQDN variable as set in your configuation, or choose another email address."
+msgstr "آدرس ایمیل که باید توسط نرم افزار در هنگام ارسال اطلاعیه استفاده می شود مشخص می کند. آدرس ایمیل استفاده می شود برای ساخت نام صفحه نمایش کامل برای کارشناسی ارشد اطلاع رسانی (یعنی \\\\ \"Znuny اطلاعیه \" znuny@your.example.com). شما می توانید متغیر ZNUNY_CONFIG_FQDN به عنوان مجموعه ای در configuation خود استفاده کنید، یا آدرس ایمیل دیگر را انتخاب کنید."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Executes follow-up checks on Znuny Header 'X-Znuny-Bounce'."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of parallel instances when using ZNUNY_AsynchronousInvokerExecution in invoker Ticket::Generic."
+msgstr "بیشترین تعداد نمونه‌های موازی هنگام استفاده از ZNUNY_AsynchronousInvokerExecution در فراخوان Ticket::Generic."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of process transitions evaluated for one ticket in a single request, so a transition action that changes ticket data can advance the following activity immediately. Set this to 1 to evaluate only one transition per request. Values must be from 1 to 99. A cyclic process runs until this limit on every ticket update. Reaching the limit writes a notice to the system log. Set the minimum log level to notice, info or debug to keep that notice."
+msgstr ""
+
+#. SysConfig
+msgid "Merged Ticket <ZNUNY_TICKET> to <ZNUNY_MERGE_TO_TICKET>."
+msgstr "با هم ادغام شدند بلیط <ZNUNY_TICKET> تا <ZNUNY_MERGE_TO_TICKET>."
+
+#. SysConfig
+msgid "Your email with ticket number \"<ZNUNY_TICKET>\" is bounced to \"<ZNUNY_BOUNCE_TO>\". Contact this address for further information."
+msgstr "ایمیل خود را با تعداد درخواست  \\\\ \"<ZNUNY_TICKET> \" منعکس است با \\\\ \"<ZNUNY_BOUNCE_TO> \". این آدرس برای کسب اطلاعات بیشتر تماس بگیرید."
+
+#. SysConfig
+msgid "Your email with ticket number \"<ZNUNY_TICKET>\" is merged to \"<ZNUNY_MERGE_TO_TICKET>\"."
+msgstr "Email شما با شماره درخواست  \"<ZNUNY_TICKET>\" با درخواست \"<ZNUNY_MERGE_TO_TICKET>\"  ادغام گردید."
 

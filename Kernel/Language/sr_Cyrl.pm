@@ -27,7 +27,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%d.%m.%Y';
     $Self->{DateInputFormat}     = '%d.%m.%Y';
     $Self->{DateInputFormatLong} = '%d.%m.%Y - %T';
-    $Self->{Completeness}        = 0.851942490058122;
+    $Self->{Completeness}        = 0.85242391803028;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1338,10 +1338,10 @@ sub Data {
         'JWT authentication: Payload' => '',
         'Payload for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3' =>
             '',
-        'Available placeholders (prefixed with OTRS_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion.' =>
-            '',
-        'Placeholder usage example: Key1=<OTRS_JWT_ExpirationDateTimestamp>' =>
-            '',
+        'Available placeholders (prefixed with ZNUNY_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion.' =>
+            'Доступни чувари места (са префиксом ZNUNY_JWT): ExpirationDateTimestamp, ExpirationDateString. Поред тога, ако је присутна подршка за сертификате X.509: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion.',
+        'Placeholder usage example: Key1=<ZNUNY_JWT_ExpirationDateTimestamp>' =>
+            'Пример употребе чувара места: Key1=<ZNUNY_JWT_ExpirationDateTimestamp>',
         'JWT authentication: Additional header data' => '',
         'Additional header data for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3' =>
             '',
@@ -1607,8 +1607,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => 'Користите зарез или тачку-зарез за одвајање имејл адреса.',
-        'You can use Znuny-tags like <OTRS_TICKET_DynamicField_...> to insert values from the current ticket.' =>
-            'Можете користити Znuny тагове као <OTRS_TICKET_DynamicField_...> за уметање вредности из тренутног тикета.',
+        'You can use Znuny-tags like <ZNUNY_TICKET_DynamicField_...> to insert values from the current ticket.' =>
+            'Можете користити Znuny тагове као <ZNUNY_TICKET_DynamicField_...> за уметање вредности из тренутног тикета.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportWebserviceSettings.tt
         'Web service name' => '',
@@ -5983,8 +5983,8 @@ sub Data {
             'Дефинише назив апликације, који се приказује у веб интерфејсу, картицама и насловној траци веб претраживача.',
         'Defines the system identifier. Every ticket number and http session string contains this ID. This ensures that only tickets which belong to your system will be processed as follow-ups (useful when communicating between two instances of Znuny).' =>
             'Дефинише идентификатор система. Сваки број тикета и низ знакова „http” сесије садрши овај ИД. Ово осигурава да ће само тикети који припадају вашем систему бити обрађени као операције праћења (корисно када се одвија комуникација између две „Znuny” инстанце).',
-        'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
-            'Дефинише потпуно квалификовано име домена система. Ово подешавање се користи као променљива OTRS_CONFIG_FQDN, која се налази у свим формама порука и користи од стране апликације, за грађење веза до тикета унутар вашег система.',
+        'Defines the fully qualified domain name of the system. This setting is used as a variable, ZNUNY_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
+            'Дефинише потпуно квалификовано име домена система. Ово подешавање се користи као променљива ZNUNY_CONFIG_FQDN, која се налази у свим формама порука и користи од стране апликације, за грађење веза до тикета унутар вашег система.',
         'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
             '',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5993,12 +5993,12 @@ sub Data {
             'Дефинише предвиђено време (у секундама, минимум је 20 секунди) за прикупљање података подршке путем модула јавог интерфејса \'PublicSupportDataCollector\' (нпр. кад се користи путем Znuny системског сервиса).',
         'When support data is collected via SupportDataCollector, certain SysConfig values marked with ValueType="Password" are automatically masked. This prevents passwords from appearing in plain text in the support data. This setting defines the settings that contain complex configuration hashes that should not be masked when generating the support data.' =>
             '',
-        'Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server\'s settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, OTRS_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
-            'Дефинише тип протокола коришћеног од стране веб сервера, за потребе апликације. Ако се користи https протокол уместо plain http, мора бити овде назначено. Пошто ово нема утицаја на подешавања или понашање веб сервера, неће променити начин приступа апликацији и, ако је то погрешно, неће вас спречити да се пријавите у апликацију. Ово подешавање се користи само као променљива, OTRS_CONFIG_HttpType која се налази у свим облицима порука коришћених од стране апликације, да изграде везе са тикетима у вашем систему.',
+        'Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server\'s settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, ZNUNY_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
+            'Дефинише тип протокола коришћеног од стране веб сервера, за потребе апликације. Ако се користи https протокол уместо plain http, мора бити овде назначено. Пошто ово нема утицаја на подешавања или понашање веб сервера, неће променити начин приступа апликацији и, ако је то погрешно, неће вас спречити да се пријавите у апликацију. Ово подешавање се користи само као променљива, ZNUNY_CONFIG_HttpType која се налази у свим облицима порука коришћених од стране апликације, да изграде везе са тикетима у вашем систему.',
         'Whether to force redirect all requests from http to https protocol. Please check that your web server is configured correctly for https protocol before enable this option.' =>
             'Одређује да ли ће сви захтеви са http бити преусмерени на https протокол. Молимо проверите да ли је ваш веб сервер правилно подешен за https протокол пре укључивања ове опције.',
-        'Sets the prefix to the scripts folder on the server, as configured on the web server. This setting is used as a variable, OTRS_CONFIG_ScriptAlias which is found in all forms of messaging used by the application, to build links to the tickets within the system.' =>
-            'Дефинише путању фолдера са скриптама на серверу, према подешавању веб сервера. Ова опција се користи као променљива OTRS_CONFIG_ScriptAlias у свим облицима комуникације широм система, ради генерисања веза ка тикетима.',
+        'Sets the prefix to the scripts folder on the server, as configured on the web server. This setting is used as a variable, ZNUNY_CONFIG_ScriptAlias which is found in all forms of messaging used by the application, to build links to the tickets within the system.' =>
+            'Дефинише путању фолдера са скриптама на серверу, према подешавању веб сервера. Ова опција се користи као променљива ZNUNY_CONFIG_ScriptAlias у свим облицима комуникације широм система, ради генерисања веза ка тикетима.',
         'Defines the system administrator\'s email address. It will be displayed in the error screens of the application.' =>
             'Дефинише имејл адресу систем администратора. Она ће бити приказана на екранима за грешке у апликацији.',
         'Company name which will be included in outgoing emails as an X-Header.' =>
@@ -6335,8 +6335,8 @@ sub Data {
         'Enables fetch S/MIME from CustomerUser backend support.' => 'Омогућава подршку за прибављање „S/MIME” из подршке позадинског система клијента корисника.',
         'Specifies the name that should be used by the application when sending notifications. The sender name is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com).' =>
             'Дефинише назив које ће апликација користити приликом слања обавештења. Назив се користи у називу пошиљаоца обавештења (нпр. "Znuny Notifications" znuny@your.example.com).',
-        'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
-            'Дефинише имејл адресу коју ће апликација користити приликом слања обавештења. Имејл адреса се користи у називу пошиљаоца обавештења (нпр. "Znuny Notifications" znuny@your.example.com). Можете користити променљиву OTRS_CONFIG_FQDN из ваше конфигурације, или одредите другу имејл адресу.',
+        'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the ZNUNY_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
+            'Дефинише имејл адресу коју ће апликација користити приликом слања обавештења. Имејл адреса се користи у називу пошиљаоца обавештења (нпр. "Znuny Notifications" znuny@your.example.com). Можете користити променљиву ZNUNY_CONFIG_FQDN из ваше конфигурације, или одредите другу имејл адресу.',
         'Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).' =>
             'Дефинише период важења у секундама за токене ресетовања лозинке. После тога токен истиче и потребан је нови захтев. Подразумевано: 3600 (1 сат).',
         'Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.' =>
@@ -6767,8 +6767,8 @@ sub Data {
         'If enabled debugging information for transitions is logged.' => 'Ако је активирано, исправљање грешака за транзиције се бележи.',
         'Defines the priority in which the information is logged and presented.' =>
             'Дефинише приоритет по ком се информације бележе и приказују.',
-        'Filter for debugging Transitions. Note: More filters can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;.' =>
-            '',
+        'Filter for debugging Transitions. Note: More filters can be added in the format &lt;ZNUNY_TICKET_Attribute&gt; e.g. &lt;ZNUNY_TICKET_Priority&gt;.' =>
+            'Филтер за отклањање грешака код транзиција. Напомена: још филтера може да се дода у формату <ZNUNY_TICKET_Attribute>, нпр. <ZNUNY_TICKET_Priority>.',
         'Parameters for the dashboard backend of the running process tickets overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             'Параметри за додатак листе процес тикета у току контролне табле у интерфејсу оператера. "Limit" дефинише подразумевани број приказаних ставки. "Group" се користи да ограничи приступ додатку (нпр. Group: admin;group1;group2;). "Default" одређује да ли је додатак подразумевано активиран или да је неопходно да га корисник мануелно активира. "CacheTTLLocal" је време у минутима за кеширање додатка. "Mandatory" одређује да ли је додатак увек приказан и не може бити искључен од стране оператера.',
         'DynamicField backend registration.' => 'Регистрација модула динамичких поља.',
@@ -7960,8 +7960,8 @@ sub Data {
             'Дефинише које су ставке слободне за \'Action\' у трећем нивоу ACL структуре.',
         'Cache time in seconds for the DB ACL backend.' => 'Време кеширања у секундама за ACL модул базе података.',
         'If enabled debugging information for ACLs is logged.' => 'Ако је активирано, исправљање грешака за ACL се бележи.',
-        'Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;.' =>
-            '',
+        'Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;ZNUNY_TICKET_Attribute&gt; e.g. &lt;ZNUNY_TICKET_Priority&gt;.' =>
+            'Филтер за отклањање грешака у ACL листама. Напомена: још атрибута тикета може да се дода у формату <ZNUNY_TICKET_Attribute>, нпр. <ZNUNY_TICKET_Priority>.',
         'Maximal auto email responses to own email-address a day (Loop-Protection).' =>
             'Максимум аутоматских имејл одговора дневно на сопствену адресу (Заштита од петље)',
         'Maximal auto email responses to own email-address a day, configurable by email address (Loop-Protection).' =>
@@ -8009,8 +8009,8 @@ sub Data {
             'Модул за извлачење корисничких SMIME сертификата из долазних порука.',
         'Module to check if a incoming e-mail message is bounce.' => 'Модул за проверу да ли је долазна имејл порука одбијена.',
         'Module used to detect if attachments are present.' => 'Модул за детекцију да ли су присутни прилози.',
-        'Executes follow-up checks on Znuny Header \'X-OTRS-Bounce\'.' =>
-            'Извршава провере наставка на „Znuny” заглављу „X-OTRS-Bounce”.',
+        'Executes follow-up checks on Znuny Header \'X-Znuny-Bounce\'.' =>
+            '',
         'Checks if an E-Mail is a followup to an existing ticket by searching the subject for a valid ticket number.' =>
             'Проверава да ли је имејл настављање на постојећи тикет претрагом предмета важећих бројева тикета.',
         'Executes follow-up checks on In-Reply-To or References headers for mails that don\'t have a ticket number in the subject.' =>
@@ -8186,8 +8186,8 @@ sub Data {
             '',
         'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
             '',
-        'Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic.' =>
-            '',
+        'Maximum number of parallel instances when using ZNUNY_AsynchronousInvokerExecution in invoker Ticket::Generic.' =>
+            'Највећи број паралелних примерака при коришћењу ZNUNY_AsynchronousInvokerExecution у позиваоцу Ticket::Generic.',
         'Enables support for huge XML data in load_xml calls of CPAN library XML::LibXML. This should only be enabled if absolutely needed. Disabling this option (default) protects against denial of service through entity expansion attacks. Before enabling this option ensure that alternative measures to protect the application against this type of attack have been taken.' =>
             '',
         'Shows a link in the menu to create a unit test for the current ticket.' =>
@@ -8259,6 +8259,8 @@ sub Data {
             '',
         'Keep dynamic field attachments after each transition.' => '',
         'Format string for output of attachments in the selection list. "%1$d": article number; "%2$s": filename; "%3$s": translated object type (e.g. Article => Artikel); "%4$s": translated attachment label (e.g. "Anhang").' =>
+            '',
+        'Maximum number of process transitions evaluated for one ticket in a single request, so a transition action that changes ticket data can advance the following activity immediately. Set this to 1 to evaluate only one transition per request. Values must be from 1 to 99. A cyclic process runs until this limit on every ticket update. Reaching the limit writes a notice to the system log. Set the minimum log level to notice, info or debug to keep that notice.' =>
             '',
         'Sets the service in the ticket bulk screen in the agent interface (Ticket::Service needs to be enabled).' =>
             '',
@@ -9373,10 +9375,10 @@ Thanks for your help!
         'Execute SQL statements.' => 'Изврши SQL наредбе.',
         'External' => 'Екстерно',
         'External Link' => 'Екстерна веза',
-        'Filter for debugging ACLs. Note: More ticket attributes can be added in the format <OTRS_TICKET_Attribute> e.g. <OTRS_TICKET_Priority>.' =>
-            'Филтер за отклањање грешака у ACL листама. Напомена: атрибути тикета могу бити додати у формату <OTRS_TICKET_Attribute> нпр. <OTRS_TICKET_Priority>.',
-        'Filter for debugging Transitions. Note: More filters can be added in the format <OTRS_TICKET_Attribute> e.g. <OTRS_TICKET_Priority>.' =>
-            'Филтер за отклањање грешака код транзиција. Напомена: филтери могу бити додати у формату <OTRS_TICKET_Attribute> нпр. <OTRS_TICKET_Priority>.',
+        'Filter for debugging ACLs. Note: More ticket attributes can be added in the format <ZNUNY_TICKET_Attribute> e.g. <ZNUNY_TICKET_Priority>.' =>
+            'Филтер за отклањање грешака у ACL листама. Напомена: атрибути тикета могу бити додати у формату <ZNUNY_TICKET_Attribute> нпр. <ZNUNY_TICKET_Priority>.',
+        'Filter for debugging Transitions. Note: More filters can be added in the format <ZNUNY_TICKET_Attribute> e.g. <ZNUNY_TICKET_Priority>.' =>
+            'Филтер за отклањање грешака код транзиција. Напомена: филтери могу бити додати у формату <ZNUNY_TICKET_Attribute> нпр. <ZNUNY_TICKET_Priority>.',
         'Filter incoming emails.' => 'Филтрирање долазних порука.',
         'Finnish' => 'Фински',
         'First Christmas Day' => 'Први дан Божића',
@@ -9517,7 +9519,7 @@ Thanks for your help!
         'Mentions.' => '',
         'Merge this ticket and all articles into another ticket' => 'Споји овај тикет и све чланке у други тикет',
         'Merged Ticket (%s/%s) to (%s/%s).' => 'Спојен тикет (%s/%s) у (%s/%s)',
-        'Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>.' => 'Тикет <OTRS_TICKET> спојен у <OTRS_MERGE_TO_TICKET>.',
+        'Merged Ticket <ZNUNY_TICKET> to <ZNUNY_MERGE_TO_TICKET>.' => 'Тикет <ZNUNY_TICKET> спојен у <ZNUNY_MERGE_TO_TICKET>.',
         'Minute' => 'Минут',
         'Miscellaneous' => 'Разно',
         'Module to filter and manipulate incoming messages. Get a 4 digit number to ticket free text, use regex in Match e. g. From => \'(.+?)@.+?\', and use () as [***] in Set =>.' =>
@@ -9808,10 +9810,10 @@ Thanks for your help!
         'Webservice' => '',
         'YAML' => '',
         'Yes, but hide archived tickets' => 'Да, али склони архивиране тикете',
-        'Your email with ticket number "<OTRS_TICKET>" is bounced to "<OTRS_BOUNCE_TO>". Contact this address for further information.' =>
-            'Ваш имејл са бројем тикета "<OTRS_TICKET>" је преусмерен на тикет "<OTRS_BOUNCE_TO>"!',
-        'Your email with ticket number "<OTRS_TICKET>" is merged to "<OTRS_MERGE_TO_TICKET>".' =>
-            'Ваш имејл са бројем тикета "<OTRS_TICKET>" је припојен тикету "<OTRS_MERGE_TO_TICKET>"!',
+        'Your email with ticket number "<ZNUNY_TICKET>" is bounced to "<ZNUNY_BOUNCE_TO>". Contact this address for further information.' =>
+            'Ваш имејл са бројем тикета "<ZNUNY_TICKET>" је преусмерен на тикет "<ZNUNY_BOUNCE_TO>"!',
+        'Your email with ticket number "<ZNUNY_TICKET>" is merged to "<ZNUNY_MERGE_TO_TICKET>".' =>
+            'Ваш имејл са бројем тикета "<ZNUNY_TICKET>" је припојен тикету "<ZNUNY_MERGE_TO_TICKET>"!',
         'Your queue selection of your preferred queues. You also get notified about those queues via email if enabled.' =>
             'Избор редова по вашој жељи. Уколико је укључено, добијаћете и обавештења о овим редовима путем имејла.',
         'Your service selection of your preferred services. You also get notified about those services via email if enabled.' =>

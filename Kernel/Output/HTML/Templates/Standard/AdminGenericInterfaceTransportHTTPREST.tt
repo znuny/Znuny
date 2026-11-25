@@ -308,9 +308,9 @@
                                                 <p class="FieldExplanation">
                                                     [% Translate("Payload for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3") | html %]
                                                     <br />
-                                                    [% Translate("Available placeholders (prefixed with OTRS_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion.") | html %]
+                                                    [% Translate("Available placeholders (prefixed with ZNUNY_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion.") | html %]
                                                     <br />
-                                                    [% Translate("Placeholder usage example: Key1=<OTRS_JWT_ExpirationDateTimestamp>") | html %]
+                                                    [% Translate("Placeholder usage example: Key1=<ZNUNY_JWT_ExpirationDateTimestamp>") | html %]
                                                 </p>
                                             </div>
                                         </div>
@@ -324,9 +324,9 @@
                                                 <p class="FieldExplanation">
                                                     [% Translate("Additional header data for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3") | html %]
                                                     <br />
-                                                    [% Translate("Available placeholders (prefixed with OTRS_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion.") | html %]
+                                                    [% Translate("Available placeholders (prefixed with ZNUNY_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion.") | html %]
                                                     <br />
-                                                    [% Translate("Placeholder usage example: Key1=<OTRS_JWT_ExpirationDateTimestamp>") | html %]
+                                                    [% Translate("Placeholder usage example: Key1=<ZNUNY_JWT_ExpirationDateTimestamp>") | html %]
                                                 </p>
                                             </div>
                                         </div>

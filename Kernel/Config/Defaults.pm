@@ -98,7 +98,7 @@ sub LoadDefaults {
 
     # AdminEmail
     # (Email of the system admin.)
-    $Self->{AdminEmail} = 'support@<OTRS_CONFIG_FQDN>';
+    $Self->{AdminEmail} = 'support@<ZNUNY_CONFIG_FQDN>';
 
     # Organization
     # (If this is anything other than '', then the email will have an
@@ -130,10 +130,10 @@ sub LoadDefaults {
 
     # DatabaseDSN
     # The database DSN for MySQL ==> more: "perldoc DBD::mysql"
-    $Self->{DatabaseDSN} = "DBI:mysql:database=<OTRS_CONFIG_Database>;host=<OTRS_CONFIG_DatabaseHost>;";
+    $Self->{DatabaseDSN} = "DBI:mysql:database=<ZNUNY_CONFIG_Database>;host=<ZNUNY_CONFIG_DatabaseHost>;";
 
     # The database DSN for PostgreSQL ==> more: "perldoc DBD::Pg"
-#    $Self->{DatabaseDSN} = "DBI:Pg:dbname=<OTRS_CONFIG_Database>;host=<OTRS_CONFIG_DatabaseHost>;";
+#    $Self->{DatabaseDSN} = "DBI:Pg:dbname=<ZNUNY_CONFIG_Database>;host=<ZNUNY_CONFIG_DatabaseHost>;";
 
     # The database DSN for Oracle ==> more: "perldoc DBD::oracle"
 #    $Self->{DatabaseDSN} = "DBI:Oracle://$Self->{DatabaseHost}:1521/$Self->{Database}";
@@ -291,15 +291,15 @@ sub LoadDefaults {
 
     # Frontend::JavaScriptPath
     # (URL JavaScript path.)
-    $Self->{'Frontend::JavaScriptPath'} = '<OTRS_CONFIG_Frontend::WebPath>js/';
+    $Self->{'Frontend::JavaScriptPath'} = '<ZNUNY_CONFIG_Frontend::WebPath>js/';
 
     # Frontend::CSSPath
     # (URL CSS path.)
-    $Self->{'Frontend::CSSPath'} = '<OTRS_CONFIG_Frontend::WebPath>css/';
+    $Self->{'Frontend::CSSPath'} = '<ZNUNY_CONFIG_Frontend::WebPath>css/';
 
     # Frontend::ImagePath
     # (URL image path of icons for navigation.)
-    $Self->{'Frontend::ImagePath'} = '<OTRS_CONFIG_Frontend::WebPath>skins/Agent/default/img/';
+    $Self->{'Frontend::ImagePath'} = '<ZNUNY_CONFIG_Frontend::WebPath>skins/Agent/default/img/';
 
     # DefaultViewNewLine
     # (insert new line in text messages after max x chars and
@@ -370,7 +370,7 @@ sub LoadDefaults {
 #    $Self->{'LogModule::SysLog::Charset'} = 'utf-8';
 
     # param for LogModule Kernel::System::Log::File (required!)
-    $Self->{'LogModule::LogFile'} = '<OTRS_CONFIG_Home>/var/log/znuny.log';
+    $Self->{'LogModule::LogFile'} = '<ZNUNY_CONFIG_Home>/var/log/znuny.log';
 
     # param if the date (yyyy-mm) should be added as suffix to
     # logfile [0|1]
@@ -968,7 +968,7 @@ sub LoadDefaults {
     # SessionDir
     # directory for all sessen id information (just needed if
     # $Self->{SessionModule}='Kernel::System::AuthSession::FS)
-    $Self->{SessionDir} = '<OTRS_CONFIG_Home>/var/sessions';
+    $Self->{SessionDir} = '<ZNUNY_CONFIG_Home>/var/sessions';
 
     # SessionTable*
     # (just needed if $Self->{SessionModule}='Kernel::System::AuthSession::DB)
@@ -1081,14 +1081,14 @@ sub LoadDefaults {
     $Self->{Home} = '/opt/znuny';
 
     # tmp dir
-    $Self->{TempDir} = '<OTRS_CONFIG_Home>/var/tmp';
+    $Self->{TempDir} = '<ZNUNY_CONFIG_Home>/var/tmp';
 
     # article dir
-    $Self->{'Ticket::Article::Backend::MIMEBase::ArticleDataDir'} = '<OTRS_CONFIG_Home>/var/article';
+    $Self->{'Ticket::Article::Backend::MIMEBase::ArticleDataDir'} = '<ZNUNY_CONFIG_Home>/var/article';
 
     # html template dirs
-    $Self->{TemplateDir}       = '<OTRS_CONFIG_Home>/Kernel/Output';
-    $Self->{CustomTemplateDir} = '<OTRS_CONFIG_Home>/Custom/Kernel/Output';
+    $Self->{TemplateDir}       = '<ZNUNY_CONFIG_Home>/Kernel/Output';
+    $Self->{CustomTemplateDir} = '<ZNUNY_CONFIG_Home>/Custom/Kernel/Output';
 
     # --------------------------------------------------- #
     # CommonCSS                                           #
@@ -1416,17 +1416,17 @@ sub LoadDefaults {
 
     # notification sender
     $Self->{NotificationSenderName}  = 'Znuny Notifications';
-    $Self->{NotificationSenderEmail} = 'znuny@<OTRS_CONFIG_FQDN>';
+    $Self->{NotificationSenderEmail} = 'znuny@<ZNUNY_CONFIG_FQDN>';
 
     # notification email for new password
     $Self->{NotificationSubjectLostPassword} = 'Your Znuny password has been reset';
-    $Self->{NotificationBodyLostPassword} = 'Hi <OTRS_USERFIRSTNAME>,
+    $Self->{NotificationBodyLostPassword} = 'Hi <ZNUNY_USERFIRSTNAME>,
 
 Your Znuny password has been successfully reset.
 
 You can log in via the following URL:
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl
 
 If you did not make this change, please contact your administrator immediately.
             ';
@@ -1506,13 +1506,13 @@ If you did not make this change, please contact your administrator immediately.
     # notification email about new password               #
     # --------------------------------------------------- #
     $Self->{CustomerPanelSubjectLostPassword} = 'Your Znuny password has been reset';
-    $Self->{CustomerPanelBodyLostPassword} = 'Hi <OTRS_USERFIRSTNAME>,
+    $Self->{CustomerPanelBodyLostPassword} = 'Hi <ZNUNY_USERFIRSTNAME>,
 
 Your Znuny password has been successfully reset.
 
 You can log in via the following URL:
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>customer.pl
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>customer.pl
 
 If you did not make this change, please contact your administrator immediately.
             ';
@@ -1521,19 +1521,19 @@ If you did not make this change, please contact your administrator immediately.
     # notification email about new account                #
     # --------------------------------------------------- #
     $Self->{CustomerPanelSubjectNewAccount} = 'New Znuny Account!';
-    $Self->{CustomerPanelBodyNewAccount}    = 'Hi <OTRS_USERFIRSTNAME>,
+    $Self->{CustomerPanelBodyNewAccount}    = 'Hi <ZNUNY_USERFIRSTNAME>,
 
 You or someone impersonating you has created a new Znuny account for
 you.
 
-Full name: <OTRS_USERFIRSTNAME> <OTRS_USERLASTNAME>
-User name: <OTRS_USERLOGIN>
-Password : <OTRS_USERPASSWORD>
+Full name: <ZNUNY_USERFIRSTNAME> <ZNUNY_USERLASTNAME>
+User name: <ZNUNY_USERLOGIN>
+Password : <ZNUNY_USERPASSWORD>
 
 You can log in via the following URL. We encourage you to change your password
 via the Preferences button after logging in.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>customer.pl
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>customer.pl
             ';
 
     # --------------------------------------------------- #
@@ -2318,7 +2318,7 @@ sub new {
             next KEY if !defined $Key;
 
             if ( defined $Self->{$Key} ) {
-                $Self->{$Key} =~ s/\<(?i:(?:OTRS|ZNUNY)_CONFIG_)(.+?)\>/$Self->{$1}/g;
+                $Self->{$Key} =~ s/\<(?:OTRS|ZNUNY)_CONFIG_(.+?)\>/$Self->{$1}/g;
             }
             else {
                 print STDERR "ERROR: $Key not defined!\n";

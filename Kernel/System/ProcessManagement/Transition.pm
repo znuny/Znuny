@@ -221,7 +221,7 @@ sub TransitionCheck {
             next DEBUGFILTER if !$Self->{TransitionDebugFilters}->{$DebugFilter};
             next DEBUGFILTER if ref $Param{Data} ne 'HASH';
 
-            if ( $DebugFilter =~ m{<(?:OTRS|ZNUNY)_TICKET_([^>]+)>}msxi ) {
+            if ( $DebugFilter =~ m{<(?:OTRS|ZNUNY)_TICKET_([^>]+)>}msx ) {
                 my $TicketParam = $1;
 
                 if (

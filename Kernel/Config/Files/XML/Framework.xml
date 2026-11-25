@@ -62,7 +62,7 @@
         </Value>
     </Setting>
     <Setting Name="FQDN" Required="1" Valid="1" ConfigLevel="200">
-        <Description Translatable="1">Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.</Description>
+        <Description Translatable="1">Defines the fully qualified domain name of the system. This setting is used as a variable, ZNUNY_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.</Description>
         <Navigation>Core</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">yourhost.example.com</Item>
@@ -100,7 +100,7 @@
         </Value>
     </Setting>
     <Setting Name="HttpType" Required="1" Valid="1" ConfigLevel="200">
-        <Description Translatable="1">Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server's settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, OTRS_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system.</Description>
+        <Description Translatable="1">Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server's settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, ZNUNY_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
             <Item ValueType="Select" SelectedID="http">
@@ -117,7 +117,7 @@
         </Value>
     </Setting>
     <Setting Name="ScriptAlias" Required="1" Valid="1" ConfigLevel="200">
-        <Description Translatable="1">Sets the prefix to the scripts folder on the server, as configured on the web server. This setting is used as a variable, OTRS_CONFIG_ScriptAlias which is found in all forms of messaging used by the application, to build links to the tickets within the system.</Description>
+        <Description Translatable="1">Sets the prefix to the scripts folder on the server, as configured on the web server. This setting is used as a variable, ZNUNY_CONFIG_ScriptAlias which is found in all forms of messaging used by the application, to build links to the tickets within the system.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="">znuny/</Item>
@@ -127,7 +127,7 @@
         <Description Translatable="1">Defines the system administrator's email address. It will be displayed in the error screens of the application.</Description>
         <Navigation>Core::Email</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">support@&lt;OTRS_CONFIG_FQDN&gt;</Item>
+            <Item ValueType="String" ValueRegex="">support@&lt;ZNUNY_CONFIG_FQDN&gt;</Item>
         </Value>
     </Setting>
     <Setting Name="Organization" Required="1" Valid="1">
@@ -402,21 +402,21 @@
         <Description Translatable="1">Defines the URL image path of icons for navigation.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Frontend::WebPath&gt;skins/Agent/default/img/</Item>
+            <Item ValueType="String" ValueRegex="">&lt;ZNUNY_CONFIG_Frontend::WebPath&gt;skins/Agent/default/img/</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::CSSPath" Required="1" Valid="1" ConfigLevel="200">
         <Description Translatable="1">Defines the URL CSS path.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Frontend::WebPath&gt;css/</Item>
+            <Item ValueType="String" ValueRegex="">&lt;ZNUNY_CONFIG_Frontend::WebPath&gt;css/</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::JavaScriptPath" Required="1" Valid="1" ConfigLevel="200">
         <Description Translatable="1">Defines the URL java script path.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Frontend::WebPath&gt;js/</Item>
+            <Item ValueType="String" ValueRegex="">&lt;ZNUNY_CONFIG_Frontend::WebPath&gt;js/</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::RichText" Required="1" Valid="1" ConfigLevel="200">
@@ -430,7 +430,7 @@
         <Description Translatable="1">Defines the URL rich text editor path.</Description>
         <Navigation>Frontend::Base</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Frontend::WebPath&gt;js/thirdparty/ckeditor5-classic-48.0.0/</Item>
+            <Item ValueType="String" ValueRegex="">&lt;ZNUNY_CONFIG_Frontend::WebPath&gt;js/thirdparty/ckeditor5-classic-48.0.0/</Item>
         </Value>
     </Setting>
     <Setting Name="Frontend::RichText::CSS::Content::Path###InternalArticleStyles" Required="1" Valid="1" ConfigLevel="200">
@@ -880,7 +880,7 @@
         <Description Translatable="1">If "file" was selected for LogModule, a logfile must be specified. If the file doesn't exist, it will be created by the system.</Description>
         <Navigation>Core::Log</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Home&gt;/var/log/znuny.log</Item>
+            <Item ValueType="String" ValueRegex="">&lt;ZNUNY_CONFIG_Home&gt;/var/log/znuny.log</Item>
         </Value>
     </Setting>
     <Setting Name="LogModule::LogFile::Date" Required="1" Valid="1">
@@ -1180,7 +1180,7 @@
                 <Item Key="Module">Kernel::Output::HTML::Notification::Generic</Item>
                 <Item Key="Priority">Warning</Item>
                 <Item Key="Text">The Znuny Website</Item>
-                <Item Key="File">&lt;OTRS_CONFIG_Home&gt;/var/notify.txt</Item>
+                <Item Key="File">&lt;ZNUNY_CONFIG_Home&gt;/var/notify.txt</Item>
                 <Item Key="Link">http://www.znuny.com</Item>
             </Hash>
         </Value>
@@ -1294,7 +1294,7 @@
         <Description Translatable="1">If "FS" was selected for SessionModule, a directory where the session data will be stored must be specified.</Description>
         <Navigation>Core::Session</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Home&gt;/var/sessions</Item>
+            <Item ValueType="String" ValueRegex="">&lt;ZNUNY_CONFIG_Home&gt;/var/sessions</Item>
         </Value>
     </Setting>
     <Setting Name="SessionTable" Required="1" Valid="1">
@@ -3090,7 +3090,7 @@
         <Description Translatable="1">Specifies the path of the file for the logo in the page header (gif|jpg|png).</Description>
         <Navigation>Core::PDF</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Home&gt;/var/httpd/htdocs/skins/Agent/default/img/logo.png</Item>
+            <Item ValueType="String" ValueRegex="">&lt;ZNUNY_CONFIG_Home&gt;/var/httpd/htdocs/skins/Agent/default/img/logo.png</Item>
         </Value>
     </Setting>
     <Setting Name="PDF::LogoSize" Required="1" Valid="1">
@@ -3330,10 +3330,10 @@
         </Value>
     </Setting>
     <Setting Name="NotificationSenderEmail" Required="1" Valid="1">
-        <Description Translatable="1">Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.</Description>
+        <Description Translatable="1">Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the ZNUNY_CONFIG_FQDN variable as set in your configuation, or choose another email address.</Description>
         <Navigation>Core::Email</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">znuny@&lt;OTRS_CONFIG_FQDN&gt;</Item>
+            <Item ValueType="String" ValueRegex="">znuny@&lt;ZNUNY_CONFIG_FQDN&gt;</Item>
         </Value>
     </Setting>
     <Setting Name="PasswordResetTokenExpiry" Required="1" Valid="1">
@@ -3368,7 +3368,7 @@
         <Description Translatable="1">Defines the body text for notification mails sent to agents, with token about new requested password.</Description>
         <Navigation>Frontend::Agent</Navigation>
         <Value>
-            <Item ValueType="Textarea">Hi &lt;OTRS_USERFIRSTNAME&gt;,
+            <Item ValueType="Textarea">Hi &lt;ZNUNY_USERFIRSTNAME&gt;,
 
 You or someone impersonating you has requested to change your Znuny
 password.
@@ -3376,7 +3376,7 @@ password.
 If you want to do this, click on the link below to set a new password.
 This link is valid for a limited time.
 
-&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=LostPassword;Token=&lt;OTRS_TOKEN&gt;
+&lt;ZNUNY_CONFIG_HttpType&gt;://&lt;ZNUNY_CONFIG_FQDN&gt;/&lt;ZNUNY_CONFIG_ScriptAlias&gt;index.pl?Action=LostPassword;Token=&lt;ZNUNY_TOKEN&gt;
 
 If you did not request a new password, please ignore this email.
             </Item>
@@ -3393,13 +3393,13 @@ If you did not request a new password, please ignore this email.
         <Description Translatable="1">Defines the body text for notification mails sent to agents, confirming that the password has been reset.</Description>
         <Navigation>Frontend::Agent</Navigation>
         <Value>
-            <Item ValueType="Textarea">Hi &lt;OTRS_USERFIRSTNAME&gt;,
+            <Item ValueType="Textarea">Hi &lt;ZNUNY_USERFIRSTNAME&gt;,
 
 Your Znuny password has been successfully reset.
 
 You can log in via the following URL:
 
-&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl
+&lt;ZNUNY_CONFIG_HttpType&gt;://&lt;ZNUNY_CONFIG_FQDN&gt;/&lt;ZNUNY_CONFIG_ScriptAlias&gt;index.pl
 
 If you did not make this change, please contact your administrator immediately.
             </Item>
@@ -3452,7 +3452,7 @@ If you did not make this change, please contact your administrator immediately.
         <Description Translatable="1">Specifies the path of the file for the performance log.</Description>
         <Navigation>Core::PerformanceLog</Navigation>
         <Value>
-            <Item ValueType="String" ValueRegex="">&lt;OTRS_CONFIG_Home&gt;/var/log/Performance.log</Item>
+            <Item ValueType="String" ValueRegex="">&lt;ZNUNY_CONFIG_Home&gt;/var/log/Performance.log</Item>
         </Value>
     </Setting>
     <Setting Name="PerformanceLog::FileMax" Required="1" Valid="1" ConfigLevel="200">
@@ -3969,7 +3969,7 @@ If you did not make this change, please contact your administrator immediately.
         <Description Translatable="1">Defines the body text for notification mails sent to customers, with token about new requested password.</Description>
         <Navigation>Frontend::Customer</Navigation>
         <Value>
-            <Item ValueType="Textarea">Hi &lt;OTRS_USERFIRSTNAME&gt;,
+            <Item ValueType="Textarea">Hi &lt;ZNUNY_USERFIRSTNAME&gt;,
 
 You or someone impersonating you has requested to change your Znuny
 password.
@@ -3977,7 +3977,7 @@ password.
 If you want to do this, click on the link below to set a new password.
 This link is valid for a limited time.
 
-&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;customer.pl?Action=CustomerLostPassword;Token=&lt;OTRS_TOKEN&gt;
+&lt;ZNUNY_CONFIG_HttpType&gt;://&lt;ZNUNY_CONFIG_FQDN&gt;/&lt;ZNUNY_CONFIG_ScriptAlias&gt;customer.pl?Action=CustomerLostPassword;Token=&lt;ZNUNY_TOKEN&gt;
 
 If you did not request a new password, please ignore this email.
             </Item>
@@ -3994,13 +3994,13 @@ If you did not request a new password, please ignore this email.
         <Description Translatable="1">Defines the body text for notification mails sent to customers, confirming that the password has been reset.</Description>
         <Navigation>Frontend::Customer</Navigation>
         <Value>
-            <Item ValueType="Textarea">Hi &lt;OTRS_USERFIRSTNAME&gt;,
+            <Item ValueType="Textarea">Hi &lt;ZNUNY_USERFIRSTNAME&gt;,
 
 Your Znuny password has been successfully reset.
 
 You can log in via the following URL:
 
-&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;customer.pl
+&lt;ZNUNY_CONFIG_HttpType&gt;://&lt;ZNUNY_CONFIG_FQDN&gt;/&lt;ZNUNY_CONFIG_ScriptAlias&gt;customer.pl
 
 If you did not make this change, please contact your administrator immediately.
             </Item>
@@ -4017,19 +4017,19 @@ If you did not make this change, please contact your administrator immediately.
         <Description Translatable="1">Defines the body text for notification mails sent to customers, about new account.</Description>
         <Navigation>Frontend::Customer</Navigation>
         <Value>
-            <Item ValueType="Textarea">Hi &lt;OTRS_USERFIRSTNAME&gt;,
+            <Item ValueType="Textarea">Hi &lt;ZNUNY_USERFIRSTNAME&gt;,
 
 You or someone impersonating you has created a new Znuny account for
 you.
 
-Full name: &lt;OTRS_USERFIRSTNAME&gt; &lt;OTRS_USERLASTNAME&gt;
-User name: &lt;OTRS_USERLOGIN&gt;
-Password : &lt;OTRS_USERPASSWORD&gt;
+Full name: &lt;ZNUNY_USERFIRSTNAME&gt; &lt;ZNUNY_USERLASTNAME&gt;
+User name: &lt;ZNUNY_USERLOGIN&gt;
+Password : &lt;ZNUNY_USERPASSWORD&gt;
 
 You can log in via the following URL. We encourage you to change your password
 via the Preferences button after logging in.
 
-&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;customer.pl
+&lt;ZNUNY_CONFIG_HttpType&gt;://&lt;ZNUNY_CONFIG_FQDN&gt;/&lt;ZNUNY_CONFIG_ScriptAlias&gt;customer.pl
             </Item>
         </Value>
     </Setting>

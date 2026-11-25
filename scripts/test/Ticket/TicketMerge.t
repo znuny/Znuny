@@ -442,8 +442,8 @@ my $LanguageObject = $Kernel::OM->Get('Kernel::Language');
 
 my $Body = $Kernel::OM->Get('Kernel::Config')->Get('Ticket::Frontend::AutomaticMergeText');
 $Body = $LanguageObject->Translate($Body);
-$Body =~ s{<OTRS_TICKET>}{$MergeTicket{TicketNumber}}xms;
-$Body =~ s{<OTRS_MERGE_TO_TICKET>}{$MainTicket{TicketNumber}}xms;
+$Body =~ s{<(?:OTRS|ZNUNY)_TICKET>}{$MergeTicket{TicketNumber}}xms;
+$Body =~ s{<(?:OTRS|ZNUNY)_MERGE_TO_TICKET>}{$MainTicket{TicketNumber}}xms;
 
 $Self->Is(
     $Body,
@@ -451,19 +451,15 @@ $Self->Is(
     'Check article body of merged ticket'
 );
 
-# AutomaticMergeText must accept ZNUNY_ and OTRS_ tags in any letter case.
+# AutomaticMergeText must accept exact ZNUNY_ and OTRS_ tags.
 my @MergeTagTests = (
     {
         Name => 'ZNUNY_ tags',
         Text => 'Merged <ZNUNY_TICKET> into <ZNUNY_MERGE_TO_TICKET>.',
     },
     {
-        Name => 'lowercase znuny_ tags',
-        Text => 'Merged <znuny_ticket> into <znuny_merge_to_ticket>.',
-    },
-    {
-        Name => 'mixed case OTRS_ tags',
-        Text => 'Merged <Otrs_Ticket> into <Otrs_Merge_To_Ticket>.',
+        Name => 'OTRS_ tags',
+        Text => 'Merged <OTRS_TICKET> into <OTRS_MERGE_TO_TICKET>.',
     },
 );
 

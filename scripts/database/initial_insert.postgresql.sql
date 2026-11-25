@@ -193,7 +193,7 @@ INSERT INTO ticket_state (name, comments, type_id, valid_id, color, create_by, c
 -- ----------------------------------------------------------
 INSERT INTO salutation (name, text, content_type, comments, valid_id, create_by, create_time, change_by, change_time)
     VALUES
-    ('system standard salutation (en)', 'Dear <OTRS_CUSTOMER_REALNAME>,
+    ('system standard salutation (en)', 'Dear <ZNUNY_CUSTOMER_REALNAME>,
 
 Thank you for your request.
 
@@ -206,7 +206,7 @@ INSERT INTO signature (name, text, content_type, comments, valid_id, create_by, 
     ('system standard signature (en)', '
 Your Ticket-Team
 
- <OTRS_Agent_UserFirstname> <OTRS_Agent_UserLastname>
+ <ZNUNY_Agent_UserFirstname> <ZNUNY_Agent_UserLastname>
 
 --
  Super Support - Waterford Business Park
@@ -338,14 +338,14 @@ It could contain something like:
 Thanks for your email. A new ticket has been created.
 
 You wrote:
-<OTRS_CUSTOMER_EMAIL[6]>
+<ZNUNY_CUSTOMER_EMAIL[6]>
 
 Your email will be answered by a human ASAP
 
 Have fun with Znuny! :-)
 
 Your Znuny Team
-', 'RE: <OTRS_CUSTOMER_SUBJECT[24]>', 'text/plain', '', 1, 1, current_timestamp, 1, current_timestamp);
+', 'RE: <ZNUNY_CUSTOMER_SUBJECT[24]>', 'text/plain', '', 1, 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table auto_response
 -- ----------------------------------------------------------
@@ -358,7 +358,7 @@ INSERT INTO auto_response (type_id, system_address_id, name, text0, text1, conte
 Please create a new ticket.
 
 Your Znuny Team
-', 'Your email has been rejected! (RE: <OTRS_CUSTOMER_SUBJECT[24]>)', 'text/plain', '', 1, 1, current_timestamp, 1, current_timestamp);
+', 'Your email has been rejected! (RE: <ZNUNY_CUSTOMER_SUBJECT[24]>)', 'text/plain', '', 1, 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table auto_response
 -- ----------------------------------------------------------
@@ -367,14 +367,14 @@ INSERT INTO auto_response (type_id, system_address_id, name, text0, text1, conte
     (3, 1, 'default follow-up (after a ticket follow-up has been added)', 'Thanks for your follow-up email
 
 You wrote:
-<OTRS_CUSTOMER_EMAIL[6]>
+<ZNUNY_CUSTOMER_EMAIL[6]>
 
 Your email will be answered by a human ASAP.
 
 Have fun with Znuny!
 
 Your Znuny Team
-', 'RE: <OTRS_CUSTOMER_SUBJECT[24]>', 'text/plain', '', 1, 1, current_timestamp, 1, current_timestamp);
+', 'RE: <ZNUNY_CUSTOMER_SUBJECT[24]>', 'text/plain', '', 1, 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table auto_response
 -- ----------------------------------------------------------
@@ -385,14 +385,14 @@ INSERT INTO auto_response (type_id, system_address_id, name, text0, text1, conte
 -- A new ticket has been created for you. --
 
 You wrote:
-<OTRS_CUSTOMER_EMAIL[6]>
+<ZNUNY_CUSTOMER_EMAIL[6]>
 
 Your email will be answered by a human ASAP.
 
 Have fun with Znuny!
 
 Your Znuny Team
-', 'New ticket has been created! (RE: <OTRS_CUSTOMER_SUBJECT[24]>)', 'text/plain', '', 1, 1, current_timestamp, 1, current_timestamp);
+', 'New ticket has been created! (RE: <ZNUNY_CUSTOMER_SUBJECT[24]>)', 'text/plain', '', 1, 1, current_timestamp, 1, current_timestamp);
 -- ----------------------------------------------------------
 --  insert into table ticket_type
 -- ----------------------------------------------------------
@@ -1888,1556 +1888,1556 @@ INSERT INTO notification_event_item (notification_id, event_key, event_value)
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (1, 'text/plain', 'en', 'Ticket Created: <OTRS_TICKET_Title>', 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (1, 'text/plain', 'en', 'Ticket Created: <ZNUNY_TICKET_Title>', 'Hi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] has been created in queue <OTRS_TICKET_Queue>.
+ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] has been created in queue <ZNUNY_TICKET_Queue>.
 
-<OTRS_CUSTOMER_REALNAME> wrote:
-<OTRS_CUSTOMER_BODY[30]>
+<ZNUNY_CUSTOMER_REALNAME> wrote:
+<ZNUNY_CUSTOMER_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (2, 'text/plain', 'en', 'Unlocked Ticket Follow-Up: <OTRS_CUSTOMER_SUBJECT[24]>', 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (2, 'text/plain', 'en', 'Unlocked Ticket Follow-Up: <ZNUNY_CUSTOMER_SUBJECT[24]>', 'Hi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-the unlocked ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] received a follow-up.
+the unlocked ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] received a follow-up.
 
-<OTRS_CUSTOMER_REALNAME> wrote:
-<OTRS_CUSTOMER_BODY[30]>
+<ZNUNY_CUSTOMER_REALNAME> wrote:
+<ZNUNY_CUSTOMER_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (3, 'text/plain', 'en', 'Locked Ticket Follow-Up: <OTRS_CUSTOMER_SUBJECT[24]>', 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (3, 'text/plain', 'en', 'Locked Ticket Follow-Up: <ZNUNY_CUSTOMER_SUBJECT[24]>', 'Hi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-the locked ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] received a follow-up.
+the locked ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] received a follow-up.
 
-<OTRS_CUSTOMER_REALNAME> wrote:
-<OTRS_CUSTOMER_BODY[30]>
+<ZNUNY_CUSTOMER_REALNAME> wrote:
+<ZNUNY_CUSTOMER_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (4, 'text/plain', 'en', 'Ticket Lock Timeout: <OTRS_TICKET_Title>', 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (4, 'text/plain', 'en', 'Ticket Lock Timeout: <ZNUNY_TICKET_Title>', 'Hi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] has reached its lock timeout period and is now unlocked.
+ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] has reached its lock timeout period and is now unlocked.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (5, 'text/plain', 'en', 'Ticket Owner Update to <OTRS_OWNER_UserFullname>: <OTRS_TICKET_Title>', 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (5, 'text/plain', 'en', 'Ticket Owner Update to <ZNUNY_OWNER_UserFullname>: <ZNUNY_TICKET_Title>', 'Hi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-the owner of ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] has been updated to <OTRS_TICKET_OWNER_UserFullname> by <OTRS_CURRENT_UserFullname>.
+the owner of ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] has been updated to <ZNUNY_TICKET_OWNER_UserFullname> by <ZNUNY_CURRENT_UserFullname>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (6, 'text/plain', 'en', 'Ticket Responsible Update to <OTRS_RESPONSIBLE_UserFullname>: <OTRS_TICKET_Title>', 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (6, 'text/plain', 'en', 'Ticket Responsible Update to <ZNUNY_RESPONSIBLE_UserFullname>: <ZNUNY_TICKET_Title>', 'Hi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-the responsible agent of ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] has been updated to <OTRS_TICKET_RESPONSIBLE_UserFullname> by <OTRS_CURRENT_UserFullname>.
+the responsible agent of ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] has been updated to <ZNUNY_TICKET_RESPONSIBLE_UserFullname> by <ZNUNY_CURRENT_UserFullname>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (7, 'text/plain', 'en', 'Ticket Note: <OTRS_AGENT_SUBJECT[24]>', 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (7, 'text/plain', 'en', 'Ticket Note: <ZNUNY_AGENT_SUBJECT[24]>', 'Hi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-<OTRS_CURRENT_UserFullname> wrote:
-<OTRS_AGENT_BODY[30]>
+<ZNUNY_CURRENT_UserFullname> wrote:
+<ZNUNY_AGENT_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (8, 'text/plain', 'en', 'Ticket Queue Update to <OTRS_TICKET_Queue>: <OTRS_TICKET_Title>', 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (8, 'text/plain', 'en', 'Ticket Queue Update to <ZNUNY_TICKET_Queue>: <ZNUNY_TICKET_Title>', 'Hi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] has been updated to queue <OTRS_TICKET_Queue>.
+ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] has been updated to queue <ZNUNY_TICKET_Queue>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (9, 'text/plain', 'en', 'Locked Ticket Pending Reminder Time Reached: <OTRS_TICKET_Title>', 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (9, 'text/plain', 'en', 'Locked Ticket Pending Reminder Time Reached: <ZNUNY_TICKET_Title>', 'Hi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-the pending reminder time of the locked ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] has been reached.
+the pending reminder time of the locked ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] has been reached.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (10, 'text/plain', 'en', 'Unlocked Ticket Pending Reminder Time Reached: <OTRS_TICKET_Title>', 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (10, 'text/plain', 'en', 'Unlocked Ticket Pending Reminder Time Reached: <ZNUNY_TICKET_Title>', 'Hi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-the pending reminder time of the unlocked ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] has been reached.
+the pending reminder time of the unlocked ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] has been reached.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (11, 'text/plain', 'en', 'Ticket Escalation! <OTRS_TICKET_Title>', 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (11, 'text/plain', 'en', 'Ticket Escalation! <ZNUNY_TICKET_Title>', 'Hi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] is escalated!
+ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] is escalated!
 
-Escalated at: <OTRS_TICKET_EscalationDestinationDate>
-Escalated since: <OTRS_TICKET_EscalationDestinationIn>
+Escalated at: <ZNUNY_TICKET_EscalationDestinationDate>
+Escalated since: <ZNUNY_TICKET_EscalationDestinationIn>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (12, 'text/plain', 'en', 'Ticket Escalation Warning! <OTRS_TICKET_Title>', 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (12, 'text/plain', 'en', 'Ticket Escalation Warning! <ZNUNY_TICKET_Title>', 'Hi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] will escalate!
+ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] will escalate!
 
-Escalation at: <OTRS_TICKET_EscalationDestinationDate>
-Escalation in: <OTRS_TICKET_EscalationDestinationIn>
+Escalation at: <ZNUNY_TICKET_EscalationDestinationDate>
+Escalation in: <ZNUNY_TICKET_EscalationDestinationIn>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (13, 'text/plain', 'en', 'Ticket Service Update to <OTRS_TICKET_Service>: <OTRS_TICKET_Title>', 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (13, 'text/plain', 'en', 'Ticket Service Update to <ZNUNY_TICKET_Service>: <ZNUNY_TICKET_Title>', 'Hi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-the service of ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] has been updated to <OTRS_TICKET_Service>.
+the service of ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] has been updated to <ZNUNY_TICKET_Service>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (14, 'text/html', 'en', 'Reminder: <OTRS_APPOINTMENT_TITLE>', '<p>Hi &lt;OTRS_NOTIFICATION_RECIPIENT_UserFirstname&gt;,</p>
+    (14, 'text/html', 'en', 'Reminder: <ZNUNY_APPOINTMENT_TITLE>', '<p>Hi &lt;ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname&gt;,</p>
 <p></p>
-<p>appointment &quot;&lt;OTRS_APPOINTMENT_TITLE&gt;&quot; has reached its notification time.</p>
+<p>appointment &quot;&lt;ZNUNY_APPOINTMENT_TITLE&gt;&quot; has reached its notification time.</p>
 <p></p>
-<p>Description: &lt;OTRS_APPOINTMENT_DESCRIPTION&gt;</p>
-<p>Location: &lt;OTRS_APPOINTMENT_LOCATION&gt;</p>
-<p>Calendar: <span style="color: &lt;OTRS_CALENDAR_COLOR&gt;;">■</span> &lt;OTRS_CALENDAR_CALENDARNAME&gt;</p>
-<p>Start date: &lt;OTRS_APPOINTMENT_STARTTIME&gt;</p>
-<p>End date: &lt;OTRS_APPOINTMENT_ENDTIME&gt;</p>
-<p>All-day: &lt;OTRS_APPOINTMENT_ALLDAY&gt;</p>
-<p>Repeat: &lt;OTRS_APPOINTMENT_RECURRING&gt;</p>
+<p>Description: &lt;ZNUNY_APPOINTMENT_DESCRIPTION&gt;</p>
+<p>Location: &lt;ZNUNY_APPOINTMENT_LOCATION&gt;</p>
+<p>Calendar: <span style="color: &lt;ZNUNY_CALENDAR_COLOR&gt;;">■</span> &lt;ZNUNY_CALENDAR_CALENDARNAME&gt;</p>
+<p>Start date: &lt;ZNUNY_APPOINTMENT_STARTTIME&gt;</p>
+<p>End date: &lt;ZNUNY_APPOINTMENT_ENDTIME&gt;</p>
+<p>All-day: &lt;ZNUNY_APPOINTMENT_ALLDAY&gt;</p>
+<p>Repeat: &lt;ZNUNY_APPOINTMENT_RECURRING&gt;</p>
 <p></p>
-<p><a href="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;" title="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;">&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;</a></p>
+<p><a href="&lt;ZNUNY_CONFIG_HttpType&gt;://&lt;ZNUNY_CONFIG_FQDN&gt;/&lt;ZNUNY_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;ZNUNY_APPOINTMENT_APPOINTMENTID&gt;" title="&lt;ZNUNY_CONFIG_HttpType&gt;://&lt;ZNUNY_CONFIG_FQDN&gt;/&lt;ZNUNY_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;ZNUNY_APPOINTMENT_APPOINTMENTID&gt;">&lt;ZNUNY_CONFIG_HttpType&gt;://&lt;ZNUNY_CONFIG_FQDN&gt;/&lt;ZNUNY_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;ZNUNY_APPOINTMENT_APPOINTMENTID&gt;</a></p>
 <p></p>
-<p>-- &lt;OTRS_CONFIG_NotificationSenderName&gt;</p>');
+<p>-- &lt;ZNUNY_CONFIG_NotificationSenderName&gt;</p>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (15, 'text/plain', 'en', 'Email Delivery Failure', 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (15, 'text/plain', 'en', 'Email Delivery Failure', 'Hi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-Please note, that the delivery of an email article of [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] has failed. Please check the email address of your recipient for mistakes and try again. You can manually resend the article from the ticket if required.
+Please note, that the delivery of an email article of [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] has failed. Please check the email address of your recipient for mistakes and try again. You can manually resend the article from the ticket if required.
 
 Error Message:
-<OTRS_AGENT_TransmissionStatusMessage>
+<ZNUNY_AGENT_TransmissionStatusMessage>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_TICKET_LAST_ARTICLE_ID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>;ArticleID=<ZNUNY_TICKET_LAST_ARTICLE_ID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (16, 'text/plain', 'en', 'Mention in ticket: <OTRS_TICKET_Title>', 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (16, 'text/plain', 'en', 'Mention in ticket: <ZNUNY_TICKET_Title>', 'Hi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-you have been mentioned in ticket <OTRS_TICKET_NUMBER>.
-<OTRS_AGENT_BODY[5]>
+you have been mentioned in ticket <ZNUNY_TICKET_NUMBER>.
+<ZNUNY_AGENT_BODY[5]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (1, 'text/plain', 'de', 'Ticket erstellt: <OTRS_TICKET_Title>', 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+    (1, 'text/plain', 'de', 'Ticket erstellt: <ZNUNY_TICKET_Title>', 'Hallo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname> <ZNUNY_NOTIFICATION_RECIPIENT_UserLastname>,
 
-das Ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] wurde in der Queue <OTRS_TICKET_Queue> erstellt.
+das Ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] wurde in der Queue <ZNUNY_TICKET_Queue> erstellt.
 
-<OTRS_CUSTOMER_REALNAME> schrieb:
-<OTRS_CUSTOMER_BODY[30]>
+<ZNUNY_CUSTOMER_REALNAME> schrieb:
+<ZNUNY_CUSTOMER_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (2, 'text/plain', 'de', 'Nachfrage zum freigegebenen Ticket: <OTRS_CUSTOMER_SUBJECT[24]>', 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+    (2, 'text/plain', 'de', 'Nachfrage zum freigegebenen Ticket: <ZNUNY_CUSTOMER_SUBJECT[24]>', 'Hallo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname> <ZNUNY_NOTIFICATION_RECIPIENT_UserLastname>,
 
-zum freigegebenen Ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] gibt es eine Nachfrage.
+zum freigegebenen Ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] gibt es eine Nachfrage.
 
-<OTRS_CUSTOMER_REALNAME> schrieb:
-<OTRS_CUSTOMER_BODY[30]>
+<ZNUNY_CUSTOMER_REALNAME> schrieb:
+<ZNUNY_CUSTOMER_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (3, 'text/plain', 'de', 'Nachfrage zum gesperrten Ticket: <OTRS_CUSTOMER_SUBJECT[24]>', 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+    (3, 'text/plain', 'de', 'Nachfrage zum gesperrten Ticket: <ZNUNY_CUSTOMER_SUBJECT[24]>', 'Hallo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname> <ZNUNY_NOTIFICATION_RECIPIENT_UserLastname>,
 
-zum gesperrten Ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] gibt es eine Nachfrage.
+zum gesperrten Ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] gibt es eine Nachfrage.
 
-<OTRS_CUSTOMER_REALNAME> schrieb:
-<OTRS_CUSTOMER_BODY[30]>
+<ZNUNY_CUSTOMER_REALNAME> schrieb:
+<ZNUNY_CUSTOMER_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (4, 'text/plain', 'de', 'Ticketsperre aufgehoben: <OTRS_TICKET_Title>', 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+    (4, 'text/plain', 'de', 'Ticketsperre aufgehoben: <ZNUNY_TICKET_Title>', 'Hallo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname> <ZNUNY_NOTIFICATION_RECIPIENT_UserLastname>,
 
-die Sperrzeit des Tickets [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] ist abgelaufen. Es ist jetzt freigegeben.
+die Sperrzeit des Tickets [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] ist abgelaufen. Es ist jetzt freigegeben.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (5, 'text/plain', 'de', 'Änderung des Ticket-Besitzers auf <OTRS_OWNER_UserFullname>: <OTRS_TICKET_Title>', 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+    (5, 'text/plain', 'de', 'Änderung des Ticket-Besitzers auf <ZNUNY_OWNER_UserFullname>: <ZNUNY_TICKET_Title>', 'Hallo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname> <ZNUNY_NOTIFICATION_RECIPIENT_UserLastname>,
 
-der Besitzer des Tickets [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] wurde von <OTRS_CURRENT_UserFullname> geändert auf <OTRS_TICKET_OWNER_UserFullname>.
+der Besitzer des Tickets [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] wurde von <ZNUNY_CURRENT_UserFullname> geändert auf <ZNUNY_TICKET_OWNER_UserFullname>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (6, 'text/plain', 'de', 'Änderung des Ticket-Verantwortlichen auf <OTRS_RESPONSIBLE_UserFullname>: <OTRS_TICKET_Title>', 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+    (6, 'text/plain', 'de', 'Änderung des Ticket-Verantwortlichen auf <ZNUNY_RESPONSIBLE_UserFullname>: <ZNUNY_TICKET_Title>', 'Hallo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname> <ZNUNY_NOTIFICATION_RECIPIENT_UserLastname>,
 
-der Verantwortliche für das Ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] wurde von <OTRS_CURRENT_UserFullname> geändert auf <OTRS_TICKET_RESPONSIBLE_UserFullname>.
+der Verantwortliche für das Ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] wurde von <ZNUNY_CURRENT_UserFullname> geändert auf <ZNUNY_TICKET_RESPONSIBLE_UserFullname>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (7, 'text/plain', 'de', 'Ticket-Notiz: <OTRS_AGENT_SUBJECT[24]>', 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+    (7, 'text/plain', 'de', 'Ticket-Notiz: <ZNUNY_AGENT_SUBJECT[24]>', 'Hallo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname> <ZNUNY_NOTIFICATION_RECIPIENT_UserLastname>,
 
-<OTRS_CURRENT_UserFullname> schrieb:
-<OTRS_AGENT_BODY[30]>
+<ZNUNY_CURRENT_UserFullname> schrieb:
+<ZNUNY_AGENT_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (8, 'text/plain', 'de', 'Ticket-Queue geändert zu <OTRS_TICKET_Queue>: <OTRS_TICKET_Title>', 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+    (8, 'text/plain', 'de', 'Ticket-Queue geändert zu <ZNUNY_TICKET_Queue>: <ZNUNY_TICKET_Title>', 'Hallo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname> <ZNUNY_NOTIFICATION_RECIPIENT_UserLastname>,
 
-das Ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] wurde in die Queue <OTRS_TICKET_Queue> verschoben.
+das Ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] wurde in die Queue <ZNUNY_TICKET_Queue> verschoben.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (9, 'text/plain', 'de', 'Erinnerungszeit des gesperrten Tickets erreicht: <OTRS_TICKET_Title>', 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+    (9, 'text/plain', 'de', 'Erinnerungszeit des gesperrten Tickets erreicht: <ZNUNY_TICKET_Title>', 'Hallo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname> <ZNUNY_NOTIFICATION_RECIPIENT_UserLastname>,
 
-die Erinnerungszeit für das gesperrte Ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] wurde erreicht.
+die Erinnerungszeit für das gesperrte Ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] wurde erreicht.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (10, 'text/plain', 'de', 'Erinnerungszeit des freigegebenen Tickets erreicht: <OTRS_TICKET_Title>', 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+    (10, 'text/plain', 'de', 'Erinnerungszeit des freigegebenen Tickets erreicht: <ZNUNY_TICKET_Title>', 'Hallo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname> <ZNUNY_NOTIFICATION_RECIPIENT_UserLastname>,
 
-die Erinnerungszeit für das freigegebene Ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] wurde erreicht.
+die Erinnerungszeit für das freigegebene Ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] wurde erreicht.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (11, 'text/plain', 'de', 'Ticket-Eskalation! <OTRS_TICKET_Title>', 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+    (11, 'text/plain', 'de', 'Ticket-Eskalation! <ZNUNY_TICKET_Title>', 'Hallo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname> <ZNUNY_NOTIFICATION_RECIPIENT_UserLastname>,
 
-das Ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] ist eskaliert!
+das Ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] ist eskaliert!
 
-Eskaliert am: <OTRS_TICKET_EscalationDestinationDate>
-Eskaliert seit: <OTRS_TICKET_EscalationDestinationIn>
+Eskaliert am: <ZNUNY_TICKET_EscalationDestinationDate>
+Eskaliert seit: <ZNUNY_TICKET_EscalationDestinationIn>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (12, 'text/plain', 'de', 'Ticket-Eskalations-Warnung! <OTRS_TICKET_Title>', 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+    (12, 'text/plain', 'de', 'Ticket-Eskalations-Warnung! <ZNUNY_TICKET_Title>', 'Hallo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname> <ZNUNY_NOTIFICATION_RECIPIENT_UserLastname>,
 
-das Ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] wird bald eskalieren!
+das Ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] wird bald eskalieren!
 
-Eskalation um: <OTRS_TICKET_EscalationDestinationDate>
-Eskalation in: <OTRS_TICKET_EscalationDestinationIn>
+Eskalation um: <ZNUNY_TICKET_EscalationDestinationDate>
+Eskalation in: <ZNUNY_TICKET_EscalationDestinationIn>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (13, 'text/plain', 'de', 'Ticket-Service aktualisiert zu <OTRS_TICKET_Service>: <OTRS_TICKET_Title>', 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+    (13, 'text/plain', 'de', 'Ticket-Service aktualisiert zu <ZNUNY_TICKET_Service>: <ZNUNY_TICKET_Title>', 'Hallo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname> <ZNUNY_NOTIFICATION_RECIPIENT_UserLastname>,
 
-der Service des Tickets [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] wurde geändert zu <OTRS_TICKET_Service>.
+der Service des Tickets [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] wurde geändert zu <ZNUNY_TICKET_Service>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (14, 'text/html', 'de', 'Erinnerung: <OTRS_APPOINTMENT_TITLE>', '<p>Hallo &lt;OTRS_NOTIFICATION_RECIPIENT_UserFirstname&gt;,</p>
+    (14, 'text/html', 'de', 'Erinnerung: <ZNUNY_APPOINTMENT_TITLE>', '<p>Hallo &lt;ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname&gt;,</p>
 <p></p>
-<p>Termin &quot;&lt;OTRS_APPOINTMENT_TITLE&gt;&quot; hat seine Benachrichtigungszeit erreicht.</p>
+<p>Termin &quot;&lt;ZNUNY_APPOINTMENT_TITLE&gt;&quot; hat seine Benachrichtigungszeit erreicht.</p>
 <p></p>
-<p>Beschreibung: &lt;OTRS_APPOINTMENT_DESCRIPTION&gt;</p>
-<p>Standort: &lt;OTRS_APPOINTMENT_LOCATION&gt;</p>
-<p>Kalender: <span style="color: &lt;OTRS_CALENDAR_COLOR&gt;;">■</span> &lt;OTRS_CALENDAR_CALENDARNAME&gt;</p>
-<p>Startzeitpunkt: &lt;OTRS_APPOINTMENT_STARTTIME&gt;</p>
-<p>Endzeitpunkt: &lt;OTRS_APPOINTMENT_ENDTIME&gt;</p>
-<p>Ganztägig: &lt;OTRS_APPOINTMENT_ALLDAY&gt;</p>
-<p>Wiederholung: &lt;OTRS_APPOINTMENT_RECURRING&gt;</p>
+<p>Beschreibung: &lt;ZNUNY_APPOINTMENT_DESCRIPTION&gt;</p>
+<p>Standort: &lt;ZNUNY_APPOINTMENT_LOCATION&gt;</p>
+<p>Kalender: <span style="color: &lt;ZNUNY_CALENDAR_COLOR&gt;;">■</span> &lt;ZNUNY_CALENDAR_CALENDARNAME&gt;</p>
+<p>Startzeitpunkt: &lt;ZNUNY_APPOINTMENT_STARTTIME&gt;</p>
+<p>Endzeitpunkt: &lt;ZNUNY_APPOINTMENT_ENDTIME&gt;</p>
+<p>Ganztägig: &lt;ZNUNY_APPOINTMENT_ALLDAY&gt;</p>
+<p>Wiederholung: &lt;ZNUNY_APPOINTMENT_RECURRING&gt;</p>
 <p></p>
-<p><a href="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;" title="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;">&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;</a></p>
+<p><a href="&lt;ZNUNY_CONFIG_HttpType&gt;://&lt;ZNUNY_CONFIG_FQDN&gt;/&lt;ZNUNY_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;ZNUNY_APPOINTMENT_APPOINTMENTID&gt;" title="&lt;ZNUNY_CONFIG_HttpType&gt;://&lt;ZNUNY_CONFIG_FQDN&gt;/&lt;ZNUNY_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;ZNUNY_APPOINTMENT_APPOINTMENTID&gt;">&lt;ZNUNY_CONFIG_HttpType&gt;://&lt;ZNUNY_CONFIG_FQDN&gt;/&lt;ZNUNY_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;ZNUNY_APPOINTMENT_APPOINTMENTID&gt;</a></p>
 <p></p>
-<p>-- &lt;OTRS_CONFIG_NotificationSenderName&gt;<p>');
+<p>-- &lt;ZNUNY_CONFIG_NotificationSenderName&gt;<p>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (15, 'text/plain', 'de', 'Fehler beim Versand einer E-Mail', 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (15, 'text/plain', 'de', 'Fehler beim Versand einer E-Mail', 'Hallo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-bitte beachten Sie, dass der Versand eines E-Mail-Artikels für [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] fehlgeschlagen ist. Bitte überprüfen Sie die E-Mail-Adresse des Empfängers auf Fehler und versuchen Sie es erneut. Sie können den Artikel bei Bedarf manuell aus dem Ticket erneut senden.
+bitte beachten Sie, dass der Versand eines E-Mail-Artikels für [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] fehlgeschlagen ist. Bitte überprüfen Sie die E-Mail-Adresse des Empfängers auf Fehler und versuchen Sie es erneut. Sie können den Artikel bei Bedarf manuell aus dem Ticket erneut senden.
 
 Fehlermeldung:
-<OTRS_AGENT_TransmissionStatusMessage>
+<ZNUNY_AGENT_TransmissionStatusMessage>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_TICKET_LAST_ARTICLE_ID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>;ArticleID=<ZNUNY_TICKET_LAST_ARTICLE_ID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (16, 'text/plain', 'de', 'Erwähnung in Ticket: <OTRS_TICKET_Title>', 'Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+    (16, 'text/plain', 'de', 'Erwähnung in Ticket: <ZNUNY_TICKET_Title>', 'Hallo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname> <ZNUNY_NOTIFICATION_RECIPIENT_UserLastname>,
 
-Sie wurden erwähnt in Ticket <OTRS_TICKET_NUMBER>.
-<OTRS_AGENT_BODY[5]>
+Sie wurden erwähnt in Ticket <ZNUNY_TICKET_NUMBER>.
+<ZNUNY_AGENT_BODY[5]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (1, 'text/plain', 'es_MX', 'Se ha creado un ticket: <OTRS_TICKET_Title>', 'Hola <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (1, 'text/plain', 'es_MX', 'Se ha creado un ticket: <ZNUNY_TICKET_Title>', 'Hola <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-el ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] se ha creado en la fila <OTRS_TICKET_Queue>.
+el ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] se ha creado en la fila <ZNUNY_TICKET_Queue>.
 
-<OTRS_CUSTOMER_REALNAME> escribió:
-<OTRS_CUSTOMER_BODY[30]>
+<ZNUNY_CUSTOMER_REALNAME> escribió:
+<ZNUNY_CUSTOMER_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (2, 'text/plain', 'es_MX', 'Seguimiento a ticket desbloqueado: <OTRS_CUSTOMER_SUBJECT[24]>', 'Hola <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (2, 'text/plain', 'es_MX', 'Seguimiento a ticket desbloqueado: <ZNUNY_CUSTOMER_SUBJECT[24]>', 'Hola <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-el ticket desbloqueado [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] recibió un seguimiento.
+el ticket desbloqueado [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] recibió un seguimiento.
 
-<OTRS_CUSTOMER_REALNAME> escribió:
-<OTRS_CUSTOMER_BODY[30]>
+<ZNUNY_CUSTOMER_REALNAME> escribió:
+<ZNUNY_CUSTOMER_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (3, 'text/plain', 'es_MX', 'Seguimiento a ticket bloqueado: <OTRS_CUSTOMER_SUBJECT[24]>', 'Hola <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (3, 'text/plain', 'es_MX', 'Seguimiento a ticket bloqueado: <ZNUNY_CUSTOMER_SUBJECT[24]>', 'Hola <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-el ticket bloqueado [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] recibió un seguimiento.
+el ticket bloqueado [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] recibió un seguimiento.
 
-<OTRS_CUSTOMER_REALNAME> escribió:
-<OTRS_CUSTOMER_BODY[30]>
+<ZNUNY_CUSTOMER_REALNAME> escribió:
+<ZNUNY_CUSTOMER_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (4, 'text/plain', 'es_MX', 'Terminó tiempo de bloqueo: <OTRS_TICKET_Title>', 'Hola <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (4, 'text/plain', 'es_MX', 'Terminó tiempo de bloqueo: <ZNUNY_TICKET_Title>', 'Hola <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-el ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>]  ha alcanzado su tiempo de espera como bloqueado y ahora se encuentra desbloqueado.
+el ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>]  ha alcanzado su tiempo de espera como bloqueado y ahora se encuentra desbloqueado.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (5, 'text/plain', 'es_MX', 'Actualización del propietario de ticket a <OTRS_OWNER_UserFullname>: <OTRS_TICKET_Title>', 'Hola <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (5, 'text/plain', 'es_MX', 'Actualización del propietario de ticket a <ZNUNY_OWNER_UserFullname>: <ZNUNY_TICKET_Title>', 'Hola <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-el propietario del ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] se ha modificado  a <OTRS_TICKET_OWNER_UserFullname> por <OTRS_CURRENT_UserFullname>.
+el propietario del ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] se ha modificado  a <ZNUNY_TICKET_OWNER_UserFullname> por <ZNUNY_CURRENT_UserFullname>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (6, 'text/plain', 'es_MX', 'Actualización del responsable de ticket a <OTRS_RESPONSIBLE_UserFullname>: <OTRS_TICKET_Title>', 'Hola <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (6, 'text/plain', 'es_MX', 'Actualización del responsable de ticket a <ZNUNY_RESPONSIBLE_UserFullname>: <ZNUNY_TICKET_Title>', 'Hola <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-el agente responsable del ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] se ha modificado a <OTRS_TICKET_RESPONSIBLE_UserFullname> por <OTRS_CURRENT_UserFullname>.
+el agente responsable del ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] se ha modificado a <ZNUNY_TICKET_RESPONSIBLE_UserFullname> por <ZNUNY_CURRENT_UserFullname>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (7, 'text/plain', 'es_MX', 'Nota de ticket: <OTRS_AGENT_SUBJECT[24]>', 'Hola <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (7, 'text/plain', 'es_MX', 'Nota de ticket: <ZNUNY_AGENT_SUBJECT[24]>', 'Hola <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-<OTRS_CURRENT_UserFullname> escribió:
-<OTRS_AGENT_BODY[30]>
+<ZNUNY_CURRENT_UserFullname> escribió:
+<ZNUNY_AGENT_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (8, 'text/plain', 'es_MX', 'La fila del ticket ha cambiado a <OTRS_TICKET_Queue>: <OTRS_TICKET_Title>', 'Hola <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (8, 'text/plain', 'es_MX', 'La fila del ticket ha cambiado a <ZNUNY_TICKET_Queue>: <ZNUNY_TICKET_Title>', 'Hola <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-el ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] ha cambiado de fila a <OTRS_TICKET_Queue>.
+el ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] ha cambiado de fila a <ZNUNY_TICKET_Queue>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (9, 'text/plain', 'es_MX', 'Recordatorio pendiente en ticket bloqueado se ha alcanzado: <OTRS_TICKET_Title>', 'Hola <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (9, 'text/plain', 'es_MX', 'Recordatorio pendiente en ticket bloqueado se ha alcanzado: <ZNUNY_TICKET_Title>', 'Hola <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-el tiempo del recordatorio pendiente para el ticket bloqueado [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] se ha alcanzado.
+el tiempo del recordatorio pendiente para el ticket bloqueado [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] se ha alcanzado.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (10, 'text/plain', 'es_MX', 'Recordatorio pendiente en ticket desbloqueado se ha alcanzado: <OTRS_TICKET_Title>', 'Hola <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (10, 'text/plain', 'es_MX', 'Recordatorio pendiente en ticket desbloqueado se ha alcanzado: <ZNUNY_TICKET_Title>', 'Hola <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-el tiempo del recordatorio pendiente para el ticket desbloqueado [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] se ha alcanzado.
+el tiempo del recordatorio pendiente para el ticket desbloqueado [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] se ha alcanzado.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (11, 'text/plain', 'es_MX', '¡Escalación de ticket! <OTRS_TICKET_Title>', 'Hola <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (11, 'text/plain', 'es_MX', '¡Escalación de ticket! <ZNUNY_TICKET_Title>', 'Hola <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-el ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] se ha escalado!
+el ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] se ha escalado!
 
-Escaló: <OTRS_TICKET_EscalationDestinationDate>
-Escalado desde: <OTRS_TICKET_EscalationDestinationIn>
+Escaló: <ZNUNY_TICKET_EscalationDestinationDate>
+Escalado desde: <ZNUNY_TICKET_EscalationDestinationIn>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (12, 'text/plain', 'es_MX', 'Aviso de escalación de ticket! <OTRS_TICKET_Title>', 'Hola <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (12, 'text/plain', 'es_MX', 'Aviso de escalación de ticket! <ZNUNY_TICKET_Title>', 'Hola <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-el ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] se encuentra proximo a escalar!
+el ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] se encuentra proximo a escalar!
 
-Escalará: <OTRS_TICKET_EscalationDestinationDate>
-Escalará en: <OTRS_TICKET_EscalationDestinationIn>
+Escalará: <ZNUNY_TICKET_EscalationDestinationDate>
+Escalará en: <ZNUNY_TICKET_EscalationDestinationIn>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (13, 'text/plain', 'es_MX', 'El servicio del ticket ha cambiado a <OTRS_TICKET_Service>: <OTRS_TICKET_Title>', 'Hola <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (13, 'text/plain', 'es_MX', 'El servicio del ticket ha cambiado a <ZNUNY_TICKET_Service>: <ZNUNY_TICKET_Title>', 'Hola <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-el servicio del ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] se ha cambiado a <OTRS_TICKET_Service>.
+el servicio del ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] se ha cambiado a <ZNUNY_TICKET_Service>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (1, 'text/plain', 'zh_CN', '票据编制 工单已创建：<OTRS_TICKET_Title>', '您好 <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (1, 'text/plain', 'zh_CN', '票据编制 工单已创建：<ZNUNY_TICKET_Title>', '您好 <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-票据工单 [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] 已在等待队列 已在队列<OTRS_TICKET_Queue> 中被编制完成。中被创建完成
+票据工单 [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] 已在等待队列 已在队列<ZNUNY_TICKET_Queue> 中被编制完成。中被创建完成
 
-<OTRS_CUSTOMER_REALNAME> 写道：
-<OTRS_CUSTOMER_BODY[30]>
+<ZNUNY_CUSTOMER_REALNAME> 写道：
+<ZNUNY_CUSTOMER_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (2, 'text/plain', 'zh_CN', '解锁票据的后续作业解锁工单的后续： <OTRS_CUSTOMER_SUBJECT[24]>', '您好<OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (2, 'text/plain', 'zh_CN', '解锁票据的后续作业解锁工单的后续： <ZNUNY_CUSTOMER_SUBJECT[24]>', '您好<ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-解锁票据解锁工单[<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] 已获得一项后续作业。
+解锁票据解锁工单[<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] 已获得一项后续作业。
 
-<OTRS_CUSTOMER_REALNAME> 写道:
-<OTRS_CUSTOMER_BODY[30]>
+<ZNUNY_CUSTOMER_REALNAME> 写道:
+<ZNUNY_CUSTOMER_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (3, 'text/plain', 'zh_CN', '加锁票据的后续作业 锁定工单后续：<OTRS_CUSTOMER_SUBJECT[24]>', '您好 <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (3, 'text/plain', 'zh_CN', '加锁票据的后续作业 锁定工单后续：<ZNUNY_CUSTOMER_SUBJECT[24]>', '您好 <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-加锁票据锁定工单 [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] 已获得一项后续作业。
+加锁票据锁定工单 [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] 已获得一项后续作业。
 
-<OTRS_CUSTOMER_REALNAME> 写道：
-<OTRS_CUSTOMER_BODY[30]>
+<ZNUNY_CUSTOMER_REALNAME> 写道：
+<ZNUNY_CUSTOMER_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (4, 'text/plain', 'zh_CN', '票据加锁超时工单锁定超时：<OTRS_TICKET_Title>', '您好 <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (4, 'text/plain', 'zh_CN', '票据加锁超时工单锁定超时：<ZNUNY_TICKET_Title>', '您好 <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-票据工单 [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] 已达到其锁定时限，现在解锁。
+票据工单 [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] 已达到其锁定时限，现在解锁。
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (5, 'text/plain', 'zh_CN', '票据的拥有人升级为工单所有者更新为 <OTRS_OWNER_UserFullname>: <OTRS_TICKET_Title>', '您好 <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (5, 'text/plain', 'zh_CN', '票据的拥有人升级为工单所有者更新为 <ZNUNY_OWNER_UserFullname>: <ZNUNY_TICKET_Title>', '您好 <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-票据的所有人工单的所有者 [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] 已被该信为 <OTRS_TICKET_OWNER_UserFullname> 的 <OTRS_CURRENT_UserFullname>。
+票据的所有人工单的所有者 [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] 已被该信为 <ZNUNY_TICKET_OWNER_UserFullname> 的 <ZNUNY_CURRENT_UserFullname>。
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (6, 'text/plain', 'zh_CN', '票据的负责人 工单负责人更新为<OTRS_RESPONSIBLE_UserFullname>: <OTRS_TICKET_Title>', '您好 <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (6, 'text/plain', 'zh_CN', '票据的负责人 工单负责人更新为<ZNUNY_RESPONSIBLE_UserFullname>: <ZNUNY_TICKET_Title>', '您好 <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-工单的负责人 [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] 已被升级为 已被更新为 <OTRS_TICKET_RESPONSIBLE_UserFullname> 的 <OTRS_CURRENT_UserFullname>.
+工单的负责人 [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] 已被升级为 已被更新为 <ZNUNY_TICKET_RESPONSIBLE_UserFullname> 的 <ZNUNY_CURRENT_UserFullname>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (7, 'text/plain', 'zh_CN', '票据备注工单备注：<OTRS_AGENT_SUBJECT[24]>', '您好 <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (7, 'text/plain', 'zh_CN', '票据备注工单备注：<ZNUNY_AGENT_SUBJECT[24]>', '您好 <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-<OTRS_CURRENT_UserFullname> 写道：
-<OTRS_AGENT_BODY[30]>
+<ZNUNY_CURRENT_UserFullname> 写道：
+<ZNUNY_AGENT_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (8, 'text/plain', 'zh_CN', '票据序列已升级为工单队列更新为<OTRS_TICKET_Queue>: <OTRS_TICKET_Title>', '您好 <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (8, 'text/plain', 'zh_CN', '票据序列已升级为工单队列更新为<ZNUNY_TICKET_Queue>: <ZNUNY_TICKET_Title>', '您好 <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-票据工单 [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] 已被升级为序列已被更新为队列 <OTRS_TICKET_Queue>。
+票据工单 [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] 已被升级为序列已被更新为队列 <ZNUNY_TICKET_Queue>。
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (9, 'text/plain', 'zh_CN', '已达到锁定票据即将到期的提醒时间已到达锁定工单挂起提醒时间：<OTRS_TICKET_Title>', '您好 <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (9, 'text/plain', 'zh_CN', '已达到锁定票据即将到期的提醒时间已到达锁定工单挂起提醒时间：<ZNUNY_TICKET_Title>', '您好 <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-锁定票据即将到期的提醒时间锁定工单挂起提醒时间 [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] 已到达。
+锁定票据即将到期的提醒时间锁定工单挂起提醒时间 [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] 已到达。
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (10, 'text/plain', 'zh_CN', '未锁定票据即将到期的提醒时间已到已到未锁定工单的挂起提醒时间：<OTRS_TICKET_Title>', '您好 <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (10, 'text/plain', 'zh_CN', '未锁定票据即将到期的提醒时间已到已到未锁定工单的挂起提醒时间：<ZNUNY_TICKET_Title>', '您好 <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-未锁定票据即将到期的提醒时间未锁定工单的挂起提醒时间 [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] 已到已到达。
+未锁定票据即将到期的提醒时间未锁定工单的挂起提醒时间 [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] 已到已到达。
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (11, 'text/plain', 'zh_CN', '票据升级！工单升级！<OTRS_TICKET_Title>', '您好 <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (11, 'text/plain', 'zh_CN', '票据升级！工单升级！<ZNUNY_TICKET_Title>', '您好 <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-票据工单 [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] 已被升级！
+票据工单 [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] 已被升级！
 
-升级地点升级开始时间：<OTRS_TICKET_EscalationDestinationDate>
-升级开始时间升级在：<OTRS_TICKET_EscalationDestinationIn>内
+升级地点升级开始时间：<ZNUNY_TICKET_EscalationDestinationDate>
+升级开始时间升级在：<ZNUNY_TICKET_EscalationDestinationIn>内
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (12, 'text/plain', 'zh_CN', '工单升级警告Ticket Escalation Warning! <OTRS_TICKET_Title>', '您好  <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (12, 'text/plain', 'zh_CN', '工单升级警告Ticket Escalation Warning! <ZNUNY_TICKET_Title>', '您好  <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-票据工单 [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] 将升级！
+票据工单 [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] 将升级！
 
-升级地点升级开始时间：<OTRS_TICKET_EscalationDestinationDate>
-升级开始时间升级在：<OTRS_TICKET_EscalationDestinationIn>内
+升级地点升级开始时间：<ZNUNY_TICKET_EscalationDestinationDate>
+升级开始时间升级在：<ZNUNY_TICKET_EscalationDestinationIn>内
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (13, 'text/plain', 'zh_CN', '票据服务升级为工单服务更新为<OTRS_TICKET_Service>: <OTRS_TICKET_Title>', '您好 <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (13, 'text/plain', 'zh_CN', '票据服务升级为工单服务更新为<ZNUNY_TICKET_Service>: <ZNUNY_TICKET_Title>', '您好 <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-票据服务工单服务 [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] 已被升级为已被更新为 <OTRS_TICKET_Service>。
+票据服务工单服务 [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] 已被升级为已被更新为 <ZNUNY_TICKET_Service>。
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (1, 'text/plain', 'pt_BR', 'Ticket criado: <OTRS_TICKET_Title>', 'Oi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (1, 'text/plain', 'pt_BR', 'Ticket criado: <ZNUNY_TICKET_Title>', 'Oi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-o ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] foi criado na fila <OTRS_TICKET_Queue>.
+o ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] foi criado na fila <ZNUNY_TICKET_Queue>.
 
-<OTRS_CUSTOMER_REALNAME> escreveu:
-<OTRS_CUSTOMER_BODY[30]>
+<ZNUNY_CUSTOMER_REALNAME> escreveu:
+<ZNUNY_CUSTOMER_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (2, 'text/plain', 'pt_BR', 'Acompanhamento do ticket desbloqueado: <OTRS_CUSTOMER_SUBJECT[24]>', 'Oi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (2, 'text/plain', 'pt_BR', 'Acompanhamento do ticket desbloqueado: <ZNUNY_CUSTOMER_SUBJECT[24]>', 'Oi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-o ticket desbloqueado [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] recebeu uma resposta.
+o ticket desbloqueado [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] recebeu uma resposta.
 
-<OTRS_CUSTOMER_REALNAME> escreveu:
-<OTRS_CUSTOMER_BODY[30]>
+<ZNUNY_CUSTOMER_REALNAME> escreveu:
+<ZNUNY_CUSTOMER_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (3, 'text/plain', 'pt_BR', 'Acompanhamento do ticket bloqueado: <OTRS_CUSTOMER_SUBJECT[24]>', 'Oi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (3, 'text/plain', 'pt_BR', 'Acompanhamento do ticket bloqueado: <ZNUNY_CUSTOMER_SUBJECT[24]>', 'Oi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-o ticket bloqueado [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] recebeu uma resposta.
+o ticket bloqueado [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] recebeu uma resposta.
 
-<OTRS_CUSTOMER_REALNAME> escreveu:
-<OTRS_CUSTOMER_BODY[30]>
+<ZNUNY_CUSTOMER_REALNAME> escreveu:
+<ZNUNY_CUSTOMER_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (4, 'text/plain', 'pt_BR', 'Tempo limite de bloqueio do ticket: <OTRS_TICKET_Title>', 'Oi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (4, 'text/plain', 'pt_BR', 'Tempo limite de bloqueio do ticket: <ZNUNY_TICKET_Title>', 'Oi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-o ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] atingiu o seu período de tempo limite de bloqueio e agora está desbloqueado.
+o ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] atingiu o seu período de tempo limite de bloqueio e agora está desbloqueado.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (5, 'text/plain', 'pt_BR', 'Atualização de proprietário de ticket para <OTRS_OWNER_UserFullname>: <OTRS_TICKET_Title>', 'Oi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (5, 'text/plain', 'pt_BR', 'Atualização de proprietário de ticket para <ZNUNY_OWNER_UserFullname>: <ZNUNY_TICKET_Title>', 'Oi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-o proprietário do ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] foi atualizado para <OTRS_TICKET_OWNER_UserFullname> por <OTRS_CURRENT_UserFullname>.
+o proprietário do ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] foi atualizado para <ZNUNY_TICKET_OWNER_UserFullname> por <ZNUNY_CURRENT_UserFullname>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (6, 'text/plain', 'pt_BR', 'Atualização de responsável de ticket para <OTRS_RESPONSIBLE_UserFullname>: <OTRS_TICKET_Title>', 'Oi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (6, 'text/plain', 'pt_BR', 'Atualização de responsável de ticket para <ZNUNY_RESPONSIBLE_UserFullname>: <ZNUNY_TICKET_Title>', 'Oi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-o agente responsável do ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] foi atualizado para <OTRS_TICKET_RESPONSIBLE_UserFullname> por <OTRS_CURRENT_UserFullname>.
+o agente responsável do ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] foi atualizado para <ZNUNY_TICKET_RESPONSIBLE_UserFullname> por <ZNUNY_CURRENT_UserFullname>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (7, 'text/plain', 'pt_BR', 'Observação sobre o ticket: <OTRS_AGENT_SUBJECT[24]>', 'Oi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (7, 'text/plain', 'pt_BR', 'Observação sobre o ticket: <ZNUNY_AGENT_SUBJECT[24]>', 'Oi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-<OTRS_CURRENT_UserFullname> escreveu:
-<OTRS_AGENT_BODY[30]>
+<ZNUNY_CURRENT_UserFullname> escreveu:
+<ZNUNY_AGENT_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (8, 'text/plain', 'pt_BR', 'Atualização da fila do ticket para <OTRS_TICKET_Queue>: <OTRS_TICKET_Title>', 'Oi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (8, 'text/plain', 'pt_BR', 'Atualização da fila do ticket para <ZNUNY_TICKET_Queue>: <ZNUNY_TICKET_Title>', 'Oi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-o ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] foi atualizado na fila <OTRS_TICKET_Queue>.
+o ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] foi atualizado na fila <ZNUNY_TICKET_Queue>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (9, 'text/plain', 'pt_BR', 'Tempo de Lembrete de Pendência do Ticket Bloqueado Atingido: <OTRS_TICKET_Title>', 'Oi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (9, 'text/plain', 'pt_BR', 'Tempo de Lembrete de Pendência do Ticket Bloqueado Atingido: <ZNUNY_TICKET_Title>', 'Oi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-o tempo de lembrete pendente do ticket bloqueado [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] foi atingido.
+o tempo de lembrete pendente do ticket bloqueado [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] foi atingido.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (10, 'text/plain', 'pt_BR', 'Tempo de Lembrete Pendente do Ticket Desbloqueado Atingido: <OTRS_TICKET_Title>', 'Oi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (10, 'text/plain', 'pt_BR', 'Tempo de Lembrete Pendente do Ticket Desbloqueado Atingido: <ZNUNY_TICKET_Title>', 'Oi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-o tempo de lembrete pendente do ticket desbloqueado [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] foi atingido.
+o tempo de lembrete pendente do ticket desbloqueado [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] foi atingido.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (11, 'text/plain', 'pt_BR', 'Escalonamento do ticket! <OTRS_TICKET_Title>', 'Oi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (11, 'text/plain', 'pt_BR', 'Escalonamento do ticket! <ZNUNY_TICKET_Title>', 'Oi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-o ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] foi escalonado!
+o ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] foi escalonado!
 
-Escalonado em: <OTRS_TICKET_EscalationDestinationDate>
-Escalonado desde: <OTRS_TICKET_EscalationDestinationIn>
+Escalonado em: <ZNUNY_TICKET_EscalationDestinationDate>
+Escalonado desde: <ZNUNY_TICKET_EscalationDestinationIn>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (12, 'text/plain', 'pt_BR', 'Aviso de escalonamento do ticket! <OTRS_TICKET_Title>', 'Oi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (12, 'text/plain', 'pt_BR', 'Aviso de escalonamento do ticket! <ZNUNY_TICKET_Title>', 'Oi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-o ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] será escalonado!
+o ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] será escalonado!
 
-Escalonamento em: <OTRS_TICKET_EscalationDestinationDate>
-Escalonamento em: <OTRS_TICKET_EscalationDestinationIn>
+Escalonamento em: <ZNUNY_TICKET_EscalationDestinationDate>
+Escalonamento em: <ZNUNY_TICKET_EscalationDestinationIn>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (13, 'text/plain', 'pt_BR', 'Atualização do serviço do ticket para <OTRS_TICKET_Service>: <OTRS_TICKET_Title>', 'Oi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (13, 'text/plain', 'pt_BR', 'Atualização do serviço do ticket para <ZNUNY_TICKET_Service>: <ZNUNY_TICKET_Title>', 'Oi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-o serviço do ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] foi atualizado para <OTRS_TICKET_Service>.
+o serviço do ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] foi atualizado para <ZNUNY_TICKET_Service>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (1, 'text/plain', 'hu', 'Jegy létrehozva: <OTRS_TICKET_Title>', 'Kedves <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>!
+    (1, 'text/plain', 'hu', 'Jegy létrehozva: <ZNUNY_TICKET_Title>', 'Kedves <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>!
 
-A(z) [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] jegy létrejött a következő várólistában: <OTRS_TICKET_Queue>.
+A(z) [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] jegy létrejött a következő várólistában: <ZNUNY_TICKET_Queue>.
 
-<OTRS_CUSTOMER_REALNAME> ezt írta:
-<OTRS_CUSTOMER_BODY[30]>
+<ZNUNY_CUSTOMER_REALNAME> ezt írta:
+<ZNUNY_CUSTOMER_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (2, 'text/plain', 'hu', 'Feloldott jegy követése: <OTRS_CUSTOMER_SUBJECT[24]>', 'Kedves <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>!
+    (2, 'text/plain', 'hu', 'Feloldott jegy követése: <ZNUNY_CUSTOMER_SUBJECT[24]>', 'Kedves <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>!
 
-A feloldott [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] jegy egy követő üzenetet kapott.
+A feloldott [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] jegy egy követő üzenetet kapott.
 
-<OTRS_CUSTOMER_REALNAME> ezt írta:
-<OTRS_CUSTOMER_BODY[30]>
+<ZNUNY_CUSTOMER_REALNAME> ezt írta:
+<ZNUNY_CUSTOMER_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (3, 'text/plain', 'hu', 'Zárolt jegy követése: <OTRS_CUSTOMER_SUBJECT[24]>', 'Kedves <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>!
+    (3, 'text/plain', 'hu', 'Zárolt jegy követése: <ZNUNY_CUSTOMER_SUBJECT[24]>', 'Kedves <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>!
 
-A zárolt [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] jegy egy követő üzenetet kapott.
+A zárolt [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] jegy egy követő üzenetet kapott.
 
-<OTRS_CUSTOMER_REALNAME> ezt írta:
-<OTRS_CUSTOMER_BODY[30]>
+<ZNUNY_CUSTOMER_REALNAME> ezt írta:
+<ZNUNY_CUSTOMER_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (4, 'text/plain', 'hu', 'Jegyzár időkorlát: <OTRS_TICKET_Title>', 'Kedves <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>!
+    (4, 'text/plain', 'hu', 'Jegyzár időkorlát: <ZNUNY_TICKET_Title>', 'Kedves <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>!
 
-A(z) [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] jegy elérte a zárolás időkorlátjának időtartamát, és most feloldásra került.
+A(z) [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] jegy elérte a zárolás időkorlátjának időtartamát, és most feloldásra került.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (5, 'text/plain', 'hu', 'Jegytulajdonos frissítés <OTRS_OWNER_UserLastname> <OTRS_OWNER_UserFirstname> ügyintézőre: <OTRS_TICKET_Title>', 'Kedves <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>!
+    (5, 'text/plain', 'hu', 'Jegytulajdonos frissítés <ZNUNY_OWNER_UserLastname> <ZNUNY_OWNER_UserFirstname> ügyintézőre: <ZNUNY_TICKET_Title>', 'Kedves <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>!
 
-A(z) [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] jegy tulajdonosát <OTRS_CURRENT_UserLastname> <OTRS_CURRENT_UserFirstname> frissítette <OTRS_OWNER_UserLastname> <OTRS_OWNER_UserFirstname> ügyintézőre.
+A(z) [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] jegy tulajdonosát <ZNUNY_CURRENT_UserLastname> <ZNUNY_CURRENT_UserFirstname> frissítette <ZNUNY_OWNER_UserLastname> <ZNUNY_OWNER_UserFirstname> ügyintézőre.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (6, 'text/plain', 'hu', 'Jegyfelelős frissítés <OTRS_RESPONSIBLE_UserLastname> <OTRS_RESPONSIBLE_UserFirstname> ügyintézőre: <OTRS_TICKET_Title>', 'Kedves <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>!
+    (6, 'text/plain', 'hu', 'Jegyfelelős frissítés <ZNUNY_RESPONSIBLE_UserLastname> <ZNUNY_RESPONSIBLE_UserFirstname> ügyintézőre: <ZNUNY_TICKET_Title>', 'Kedves <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>!
 
-A(z) [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] jegy felelős ügyintézőjét <OTRS_CURRENT_UserLastname> <OTRS_CURRENT_UserFirstname> frissítette <OTRS_RESPONSIBLE_UserLastname> <OTRS_RESPONSIBLE_UserFirstname> ügyintézőre.
+A(z) [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] jegy felelős ügyintézőjét <ZNUNY_CURRENT_UserLastname> <ZNUNY_CURRENT_UserFirstname> frissítette <ZNUNY_RESPONSIBLE_UserLastname> <ZNUNY_RESPONSIBLE_UserFirstname> ügyintézőre.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (7, 'text/plain', 'hu', 'Új jegyzet: <OTRS_AGENT_SUBJECT[24]>', 'Kedves <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>!
+    (7, 'text/plain', 'hu', 'Új jegyzet: <ZNUNY_AGENT_SUBJECT[24]>', 'Kedves <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>!
 
-<OTRS_CURRENT_UserLastname> <OTRS_CURRENT_UserFirstname> ezt írta:
-<OTRS_AGENT_BODY[30]>
+<ZNUNY_CURRENT_UserLastname> <ZNUNY_CURRENT_UserFirstname> ezt írta:
+<ZNUNY_AGENT_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (8, 'text/plain', 'hu', 'Jegy várólista frissítés <OTRS_TICKET_Queue> várólistára: <OTRS_TICKET_Title>', 'Kedves <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>!
+    (8, 'text/plain', 'hu', 'Jegy várólista frissítés <ZNUNY_TICKET_Queue> várólistára: <ZNUNY_TICKET_Title>', 'Kedves <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>!
 
-A(z) [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] jegyet áthelyezték a következő várólistába: <OTRS_TICKET_Queue>.
+A(z) [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] jegyet áthelyezték a következő várólistába: <ZNUNY_TICKET_Queue>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (9, 'text/plain', 'hu', 'Zárolt jegy „emlékeztető függőben” ideje elérve: <OTRS_TICKET_Title>', 'Kedves <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>!
+    (9, 'text/plain', 'hu', 'Zárolt jegy „emlékeztető függőben” ideje elérve: <ZNUNY_TICKET_Title>', 'Kedves <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>!
 
-A zárolt [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] jegy elérte az „emlékeztető függőben” idejét.
+A zárolt [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] jegy elérte az „emlékeztető függőben” idejét.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (10, 'text/plain', 'hu', 'Feloldott jegy „emlékeztető függőben” ideje elérve: <OTRS_TICKET_Title>', 'Kedves <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>!
+    (10, 'text/plain', 'hu', 'Feloldott jegy „emlékeztető függőben” ideje elérve: <ZNUNY_TICKET_Title>', 'Kedves <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>!
 
-A feloldott [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] jegy elérte az „emlékeztető függőben” idejét.
+A feloldott [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] jegy elérte az „emlékeztető függőben” idejét.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (11, 'text/plain', 'hu', 'Jegyeszkaláció! <OTRS_TICKET_Title>', 'Kedves <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>!
+    (11, 'text/plain', 'hu', 'Jegyeszkaláció! <ZNUNY_TICKET_Title>', 'Kedves <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>!
 
-A(z) [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] jegy eszkalálódott!
+A(z) [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] jegy eszkalálódott!
 
-Eszkaláció időpontja: <OTRS_TICKET_EscalationDestinationDate>
-Eszkaláció óta eltelt idő: <OTRS_TICKET_EscalationDestinationIn>
+Eszkaláció időpontja: <ZNUNY_TICKET_EscalationDestinationDate>
+Eszkaláció óta eltelt idő: <ZNUNY_TICKET_EscalationDestinationIn>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (12, 'text/plain', 'hu', 'Jegyeszkaláció figyelmeztetés! <OTRS_TICKET_Title>', 'Kedves <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>!
+    (12, 'text/plain', 'hu', 'Jegyeszkaláció figyelmeztetés! <ZNUNY_TICKET_Title>', 'Kedves <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>!
 
-A(z) [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] jegy eszkalálódni fog!
+A(z) [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] jegy eszkalálódni fog!
 
-Eszkaláció időpontja: <OTRS_TICKET_EscalationDestinationDate>
-Eszkalációig fennmaradó idő: <OTRS_TICKET_EscalationDestinationIn>
+Eszkaláció időpontja: <ZNUNY_TICKET_EscalationDestinationDate>
+Eszkalációig fennmaradó idő: <ZNUNY_TICKET_EscalationDestinationIn>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (13, 'text/plain', 'hu', 'Jegyszolgáltatás frissítve <OTRS_TICKET_Service> szolgáltatásra: <OTRS_TICKET_Title>', 'Kedves <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>!
+    (13, 'text/plain', 'hu', 'Jegyszolgáltatás frissítve <ZNUNY_TICKET_Service> szolgáltatásra: <ZNUNY_TICKET_Title>', 'Kedves <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>!
 
-A(z) [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] jegy szolgáltatása frissítve lett a következőre: <OTRS_TICKET_Service>.
+A(z) [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] jegy szolgáltatása frissítve lett a következőre: <ZNUNY_TICKET_Service>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (14, 'text/html', 'hu', 'Emlékeztető: <OTRS_APPOINTMENT_TITLE>', '<p>Kedves &lt;OTRS_NOTIFICATION_RECIPIENT_UserFirstname&gt;!</p>
+    (14, 'text/html', 'hu', 'Emlékeztető: <ZNUNY_APPOINTMENT_TITLE>', '<p>Kedves &lt;ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname&gt;!</p>
 <p></p>
-<p>A következő esemény elérte az értesítési idejét: &lt;OTRS_APPOINTMENT_TITLE&gt;</p>
+<p>A következő esemény elérte az értesítési idejét: &lt;ZNUNY_APPOINTMENT_TITLE&gt;</p>
 <p></p>
-<p>Leírás: &lt;OTRS_APPOINTMENT_DESCRIPTION&gt;</p>
-<p>Hely: &lt;OTRS_APPOINTMENT_LOCATION&gt;</p>
-<p>Naptár: <span style="color: &lt;OTRS_CALENDAR_COLOR&gt;;">■</span> &lt;OTRS_CALENDAR_CALENDARNAME&gt;</p>
-<p>Kezdési dátum: &lt;OTRS_APPOINTMENT_STARTTIME&gt;</p>
-<p>Befejezési dátum: &lt;OTRS_APPOINTMENT_ENDTIME&gt;</p>
-<p>Egész napos: &lt;OTRS_APPOINTMENT_ALLDAY&gt;</p>
-<p>Ismétlődés: &lt;OTRS_APPOINTMENT_RECURRING&gt;</p>
+<p>Leírás: &lt;ZNUNY_APPOINTMENT_DESCRIPTION&gt;</p>
+<p>Hely: &lt;ZNUNY_APPOINTMENT_LOCATION&gt;</p>
+<p>Naptár: <span style="color: &lt;ZNUNY_CALENDAR_COLOR&gt;;">■</span> &lt;ZNUNY_CALENDAR_CALENDARNAME&gt;</p>
+<p>Kezdési dátum: &lt;ZNUNY_APPOINTMENT_STARTTIME&gt;</p>
+<p>Befejezési dátum: &lt;ZNUNY_APPOINTMENT_ENDTIME&gt;</p>
+<p>Egész napos: &lt;ZNUNY_APPOINTMENT_ALLDAY&gt;</p>
+<p>Ismétlődés: &lt;ZNUNY_APPOINTMENT_RECURRING&gt;</p>
 <p></p>
-<p><a href="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;" title="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;">&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;</a></p>
+<p><a href="&lt;ZNUNY_CONFIG_HttpType&gt;://&lt;ZNUNY_CONFIG_FQDN&gt;/&lt;ZNUNY_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;ZNUNY_APPOINTMENT_APPOINTMENTID&gt;" title="&lt;ZNUNY_CONFIG_HttpType&gt;://&lt;ZNUNY_CONFIG_FQDN&gt;/&lt;ZNUNY_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;ZNUNY_APPOINTMENT_APPOINTMENTID&gt;">&lt;ZNUNY_CONFIG_HttpType&gt;://&lt;ZNUNY_CONFIG_FQDN&gt;/&lt;ZNUNY_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;ZNUNY_APPOINTMENT_APPOINTMENTID&gt;</a></p>
 <p></p>
-<p>-- &lt;OTRS_CONFIG_NotificationSenderName&gt;</p>');
+<p>-- &lt;ZNUNY_CONFIG_NotificationSenderName&gt;</p>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (15, 'text/plain', 'hu', 'E-mail kézbesítési hiba', 'Kedves <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>!
+    (15, 'text/plain', 'hu', 'E-mail kézbesítési hiba', 'Kedves <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>!
 
-Felhívjuk a figyelmét, hogy a(z) [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] jegy e-mail bejegyzésének kézbesítése nem sikerült. Ellenőrizze, hogy nincs-e a címzett e-mail címében hiba, és próbálja meg újra. Kézileg is újraküldheti a bejegyzést a jegyből, ha szükséges.
+Felhívjuk a figyelmét, hogy a(z) [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] jegy e-mail bejegyzésének kézbesítése nem sikerült. Ellenőrizze, hogy nincs-e a címzett e-mail címében hiba, és próbálja meg újra. Kézileg is újraküldheti a bejegyzést a jegyből, ha szükséges.
 
 Hibaüzenet:
-<OTRS_AGENT_TransmissionStatusMessage>
+<ZNUNY_AGENT_TransmissionStatusMessage>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>;ArticleID=<OTRS_TICKET_LAST_ARTICLE_ID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>;ArticleID=<ZNUNY_TICKET_LAST_ARTICLE_ID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (1, 'text/plain', 'sr_Cyrl', 'Oтворен тикет: <OTRS_TICKET_Title>', 'Здраво <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (1, 'text/plain', 'sr_Cyrl', 'Oтворен тикет: <ZNUNY_TICKET_Title>', 'Здраво <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-тикет [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] је отворен у реду <OTRS_TICKET_Queue>.
+тикет [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] је отворен у реду <ZNUNY_TICKET_Queue>.
 
-<OTRS_CUSTOMER_REALNAME> је написао/ла:
-<OTRS_CUSTOMER_BODY[30]>
+<ZNUNY_CUSTOMER_REALNAME> је написао/ла:
+<ZNUNY_CUSTOMER_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (2, 'text/plain', 'sr_Cyrl', 'Наставак откључаног тикета: <OTRS_CUSTOMER_SUBJECT[24]>', 'Здраво <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (2, 'text/plain', 'sr_Cyrl', 'Наставак откључаног тикета: <ZNUNY_CUSTOMER_SUBJECT[24]>', 'Здраво <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-откључани тикет [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] је примио наставак.
+откључани тикет [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] је примио наставак.
 
-<OTRS_CUSTOMER_REALNAME> је написао/ла:
-<OTRS_CUSTOMER_BODY[30]>
+<ZNUNY_CUSTOMER_REALNAME> је написао/ла:
+<ZNUNY_CUSTOMER_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (3, 'text/plain', 'sr_Cyrl', 'Наставак закључаног тикета: <OTRS_CUSTOMER_SUBJECT[24]>', 'Здраво <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (3, 'text/plain', 'sr_Cyrl', 'Наставак закључаног тикета: <ZNUNY_CUSTOMER_SUBJECT[24]>', 'Здраво <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-закључани тикет [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] је примио наставак.
+закључани тикет [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] је примио наставак.
 
-<OTRS_CUSTOMER_REALNAME> је написао/ла:
-<OTRS_CUSTOMER_BODY[30]>
+<ZNUNY_CUSTOMER_REALNAME> је написао/ла:
+<ZNUNY_CUSTOMER_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (4, 'text/plain', 'sr_Cyrl', 'Истек закључаног тикета: <OTRS_TICKET_Title>', 'Здраво <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (4, 'text/plain', 'sr_Cyrl', 'Истек закључаног тикета: <ZNUNY_TICKET_Title>', 'Здраво <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-тикет [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] је достигао време откључавања.
+тикет [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] је достигао време откључавања.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (5, 'text/plain', 'sr_Cyrl', 'Промена власника тикета на <OTRS_OWNER_UserFullname>: <OTRS_TICKET_Title>', 'Здраво <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (5, 'text/plain', 'sr_Cyrl', 'Промена власника тикета на <ZNUNY_OWNER_UserFullname>: <ZNUNY_TICKET_Title>', 'Здраво <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-власник тикета [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] је промењен на <OTRS_TICKET_OWNER_UserFullname> од стране <OTRS_CURRENT_UserFullname>.
+власник тикета [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] је промењен на <ZNUNY_TICKET_OWNER_UserFullname> од стране <ZNUNY_CURRENT_UserFullname>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (6, 'text/plain', 'sr_Cyrl', 'Промена одговорног за тикет на <OTRS_RESPONSIBLE_UserFullname>: <OTRS_TICKET_Title>', 'Здраво <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (6, 'text/plain', 'sr_Cyrl', 'Промена одговорног за тикет на <ZNUNY_RESPONSIBLE_UserFullname>: <ZNUNY_TICKET_Title>', 'Здраво <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-одговорни оператер тикета [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] је промењен на <OTRS_TICKET_RESPONSIBLE_UserFullname> од стране <OTRS_CURRENT_UserFullname>.
+одговорни оператер тикета [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] је промењен на <ZNUNY_TICKET_RESPONSIBLE_UserFullname> од стране <ZNUNY_CURRENT_UserFullname>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (7, 'text/plain', 'sr_Cyrl', 'Напомена тикета: <OTRS_AGENT_SUBJECT[24]>', 'Здраво <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (7, 'text/plain', 'sr_Cyrl', 'Напомена тикета: <ZNUNY_AGENT_SUBJECT[24]>', 'Здраво <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-<OTRS_CURRENT_UserFullname> је написао/ла:
-<OTRS_AGENT_BODY[30]>
+<ZNUNY_CURRENT_UserFullname> је написао/ла:
+<ZNUNY_AGENT_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (8, 'text/plain', 'sr_Cyrl', 'Промена реда тикета у <OTRS_TICKET_Queue>: <OTRS_TICKET_Title>', 'Здраво <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (8, 'text/plain', 'sr_Cyrl', 'Промена реда тикета у <ZNUNY_TICKET_Queue>: <ZNUNY_TICKET_Title>', 'Здраво <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-тикету [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] је промењен ред у <OTRS_TICKET_Queue>.
+тикету [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] је промењен ред у <ZNUNY_TICKET_Queue>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (9, 'text/plain', 'sr_Cyrl', 'Истек закључаног тикета на чекању: <OTRS_TICKET_Title>', 'Здраво <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (9, 'text/plain', 'sr_Cyrl', 'Истек закључаног тикета на чекању: <ZNUNY_TICKET_Title>', 'Здраво <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-време закључаног тикета на чекању [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] је достигнуто.
+време закључаног тикета на чекању [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] је достигнуто.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (10, 'text/plain', 'sr_Cyrl', 'Истек откључаног тикета на чекању: <OTRS_TICKET_Title>', 'Здраво <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (10, 'text/plain', 'sr_Cyrl', 'Истек откључаног тикета на чекању: <ZNUNY_TICKET_Title>', 'Здраво <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-време откључаног тикета на чекању [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] је достигнуто.
+време откључаног тикета на чекању [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] је достигнуто.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (11, 'text/plain', 'sr_Cyrl', 'Ескалација тикета! <OTRS_TICKET_Title>', 'Здраво <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (11, 'text/plain', 'sr_Cyrl', 'Ескалација тикета! <ZNUNY_TICKET_Title>', 'Здраво <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-тикет [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] је ескалирао!
+тикет [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] је ескалирао!
 
-Време ескалације: <OTRS_TICKET_EscalationDestinationDate>
-Ескалиран од: <OTRS_TICKET_EscalationDestinationIn>
+Време ескалације: <ZNUNY_TICKET_EscalationDestinationDate>
+Ескалиран од: <ZNUNY_TICKET_EscalationDestinationIn>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (12, 'text/plain', 'sr_Cyrl', 'Упозорење на ескалацију тикета! <OTRS_TICKET_Title>', 'Здраво <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (12, 'text/plain', 'sr_Cyrl', 'Упозорење на ескалацију тикета! <ZNUNY_TICKET_Title>', 'Здраво <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-тикет [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] ће ескалирати!
+тикет [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] ће ескалирати!
 
-Време ескалације: <OTRS_TICKET_EscalationDestinationDate>
-Ескалира за: <OTRS_TICKET_EscalationDestinationIn>
+Време ескалације: <ZNUNY_TICKET_EscalationDestinationDate>
+Ескалира за: <ZNUNY_TICKET_EscalationDestinationIn>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (13, 'text/plain', 'sr_Cyrl', 'Промена сервиса тикета на <OTRS_TICKET_Service>: <OTRS_TICKET_Title>', 'Здраво <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (13, 'text/plain', 'sr_Cyrl', 'Промена сервиса тикета на <ZNUNY_TICKET_Service>: <ZNUNY_TICKET_Title>', 'Здраво <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-сервис тикета [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] је промењен на <OTRS_TICKET_Service>.
+сервис тикета [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] је промењен на <ZNUNY_TICKET_Service>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (14, 'text/html', 'sr_Cyrl', 'Подсетник: <OTRS_APPOINTMENT_TITLE>', '<p>Здраво &lt;OTRS_NOTIFICATION_RECIPIENT_UserFirstname&gt;,</p>
+    (14, 'text/html', 'sr_Cyrl', 'Подсетник: <ZNUNY_APPOINTMENT_TITLE>', '<p>Здраво &lt;ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname&gt;,</p>
 <p></p>
-<p>време је за обавештење у вези термина &quot;&lt;OTRS_APPOINTMENT_TITLE&gt;&quot;.</p>
+<p>време је за обавештење у вези термина &quot;&lt;ZNUNY_APPOINTMENT_TITLE&gt;&quot;.</p>
 <p></p>
-<p>Опис: &lt;OTRS_APPOINTMENT_DESCRIPTION&gt;</p>
-<p>Локација: &lt;OTRS_APPOINTMENT_LOCATION&gt;</p>
-<p>Календар: <span style="color: &lt;OTRS_CALENDAR_COLOR&gt;;">■</span> &lt;OTRS_CALENDAR_CALENDARNAME&gt;</p>
-<p>Датум почетка: &lt;OTRS_APPOINTMENT_STARTTIME&gt;</p>
-<p>Датум краја: &lt;OTRS_APPOINTMENT_ENDTIME&gt;</p>
-<p>Целодневно: &lt;OTRS_APPOINTMENT_ALLDAY&gt;</p>
-<p>Понављање: &lt;OTRS_APPOINTMENT_RECURRING&gt;</p>
+<p>Опис: &lt;ZNUNY_APPOINTMENT_DESCRIPTION&gt;</p>
+<p>Локација: &lt;ZNUNY_APPOINTMENT_LOCATION&gt;</p>
+<p>Календар: <span style="color: &lt;ZNUNY_CALENDAR_COLOR&gt;;">■</span> &lt;ZNUNY_CALENDAR_CALENDARNAME&gt;</p>
+<p>Датум почетка: &lt;ZNUNY_APPOINTMENT_STARTTIME&gt;</p>
+<p>Датум краја: &lt;ZNUNY_APPOINTMENT_ENDTIME&gt;</p>
+<p>Целодневно: &lt;ZNUNY_APPOINTMENT_ALLDAY&gt;</p>
+<p>Понављање: &lt;ZNUNY_APPOINTMENT_RECURRING&gt;</p>
 <p></p>
-<p><a href="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;" title="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;">&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;</a></p>
+<p><a href="&lt;ZNUNY_CONFIG_HttpType&gt;://&lt;ZNUNY_CONFIG_FQDN&gt;/&lt;ZNUNY_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;ZNUNY_APPOINTMENT_APPOINTMENTID&gt;" title="&lt;ZNUNY_CONFIG_HttpType&gt;://&lt;ZNUNY_CONFIG_FQDN&gt;/&lt;ZNUNY_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;ZNUNY_APPOINTMENT_APPOINTMENTID&gt;">&lt;ZNUNY_CONFIG_HttpType&gt;://&lt;ZNUNY_CONFIG_FQDN&gt;/&lt;ZNUNY_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;ZNUNY_APPOINTMENT_APPOINTMENTID&gt;</a></p>
 <p></p>
-<p>-- &lt;OTRS_CONFIG_NotificationSenderName&gt;</p>');
+<p>-- &lt;ZNUNY_CONFIG_NotificationSenderName&gt;</p>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (1, 'text/plain', 'sr_Latn', 'Otvoren tiket: <OTRS_TICKET_Title>', 'Zdravo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (1, 'text/plain', 'sr_Latn', 'Otvoren tiket: <ZNUNY_TICKET_Title>', 'Zdravo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-tiket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] je otvoren u redu <OTRS_TICKET_Queue>.
+tiket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] je otvoren u redu <ZNUNY_TICKET_Queue>.
 
-<OTRS_CUSTOMER_REALNAME> je napisao/la:
-<OTRS_CUSTOMER_BODY[30]>
+<ZNUNY_CUSTOMER_REALNAME> je napisao/la:
+<ZNUNY_CUSTOMER_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (2, 'text/plain', 'sr_Latn', 'Nastavak otključanog tiketa: <OTRS_CUSTOMER_SUBJECT[24]>', 'Zdravo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (2, 'text/plain', 'sr_Latn', 'Nastavak otključanog tiketa: <ZNUNY_CUSTOMER_SUBJECT[24]>', 'Zdravo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-otključani tiket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] je primio nastavak.
+otključani tiket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] je primio nastavak.
 
-<OTRS_CUSTOMER_REALNAME> je napisao/la:
-<OTRS_CUSTOMER_BODY[30]>
+<ZNUNY_CUSTOMER_REALNAME> je napisao/la:
+<ZNUNY_CUSTOMER_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (3, 'text/plain', 'sr_Latn', 'Nastavak zaključanog tiketa: <OTRS_CUSTOMER_SUBJECT[24]>', 'Zdravo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (3, 'text/plain', 'sr_Latn', 'Nastavak zaključanog tiketa: <ZNUNY_CUSTOMER_SUBJECT[24]>', 'Zdravo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-zaključani tiket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] je primio nastavak.
+zaključani tiket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] je primio nastavak.
 
-<OTRS_CUSTOMER_REALNAME> je napisao/la:
-<OTRS_CUSTOMER_BODY[30]>
+<ZNUNY_CUSTOMER_REALNAME> je napisao/la:
+<ZNUNY_CUSTOMER_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (4, 'text/plain', 'sr_Latn', 'Istek zaključanog tiketa: <OTRS_TICKET_Title>', 'Zdravo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (4, 'text/plain', 'sr_Latn', 'Istek zaključanog tiketa: <ZNUNY_TICKET_Title>', 'Zdravo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-tiket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] je dostigao vreme otključavanja.
+tiket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] je dostigao vreme otključavanja.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (5, 'text/plain', 'sr_Latn', 'Promena vlasnika tiketa na <OTRS_OWNER_UserFullname>: <OTRS_TICKET_Title>', 'Zdravo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (5, 'text/plain', 'sr_Latn', 'Promena vlasnika tiketa na <ZNUNY_OWNER_UserFullname>: <ZNUNY_TICKET_Title>', 'Zdravo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-vlasnik tiketa [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] je promenjen na <OTRS_TICKET_OWNER_UserFullname> by <OTRS_CURRENT_UserFullname>.
+vlasnik tiketa [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] je promenjen na <ZNUNY_TICKET_OWNER_UserFullname> by <ZNUNY_CURRENT_UserFullname>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (6, 'text/plain', 'sr_Latn', 'Promena odgovornog za tiket na <OTRS_RESPONSIBLE_UserFullname>: <OTRS_TICKET_Title>', 'Zdravo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (6, 'text/plain', 'sr_Latn', 'Promena odgovornog za tiket na <ZNUNY_RESPONSIBLE_UserFullname>: <ZNUNY_TICKET_Title>', 'Zdravo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-odgovorni operater tiketa [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] je promenjen na <OTRS_TICKET_RESPONSIBLE_UserFullname> by <OTRS_CURRENT_UserFullname>.
+odgovorni operater tiketa [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] je promenjen na <ZNUNY_TICKET_RESPONSIBLE_UserFullname> by <ZNUNY_CURRENT_UserFullname>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (7, 'text/plain', 'sr_Latn', 'Napomena tiketa: <OTRS_AGENT_SUBJECT[24]>', 'Zdravo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (7, 'text/plain', 'sr_Latn', 'Napomena tiketa: <ZNUNY_AGENT_SUBJECT[24]>', 'Zdravo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-<OTRS_CURRENT_UserFullname> je napisao/la:
-<OTRS_AGENT_BODY[30]>
+<ZNUNY_CURRENT_UserFullname> je napisao/la:
+<ZNUNY_AGENT_BODY[30]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (8, 'text/plain', 'sr_Latn', 'Promena reda tiketa u <OTRS_TICKET_Queue>: <OTRS_TICKET_Title>', 'Zdravo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (8, 'text/plain', 'sr_Latn', 'Promena reda tiketa u <ZNUNY_TICKET_Queue>: <ZNUNY_TICKET_Title>', 'Zdravo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-tiketu [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] je promenjen red u <OTRS_TICKET_Queue>.
+tiketu [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] je promenjen red u <ZNUNY_TICKET_Queue>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (9, 'text/plain', 'sr_Latn', 'Istek zaključanog tiketa na čekanju: <OTRS_TICKET_Title>', 'Zdravo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (9, 'text/plain', 'sr_Latn', 'Istek zaključanog tiketa na čekanju: <ZNUNY_TICKET_Title>', 'Zdravo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-vreme zaključanog tiketa na čekanju [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] je dostignuto.
+vreme zaključanog tiketa na čekanju [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] je dostignuto.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (10, 'text/plain', 'sr_Latn', 'Istek otključanog tiketa na čekanju: <OTRS_TICKET_Title>', 'Zdravo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (10, 'text/plain', 'sr_Latn', 'Istek otključanog tiketa na čekanju: <ZNUNY_TICKET_Title>', 'Zdravo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-vreme otključanog tiketa na čekanju [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] je dostignuto.
+vreme otključanog tiketa na čekanju [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] je dostignuto.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (11, 'text/plain', 'sr_Latn', 'Eskalacija tiketa! <OTRS_TICKET_Title>', 'Zdravo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (11, 'text/plain', 'sr_Latn', 'Eskalacija tiketa! <ZNUNY_TICKET_Title>', 'Zdravo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-tiket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] je eskalirao!
+tiket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] je eskalirao!
 
-Vreme eskalacije: <OTRS_TICKET_EscalationDestinationDate>
-Eskaliran od: <OTRS_TICKET_EscalationDestinationIn>
+Vreme eskalacije: <ZNUNY_TICKET_EscalationDestinationDate>
+Eskaliran od: <ZNUNY_TICKET_EscalationDestinationIn>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (12, 'text/plain', 'sr_Latn', 'Upozorenje na eskalaciju tiketa! <OTRS_TICKET_Title>', 'Zdravo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (12, 'text/plain', 'sr_Latn', 'Upozorenje na eskalaciju tiketa! <ZNUNY_TICKET_Title>', 'Zdravo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-tiket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] će eskalirati!
+tiket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] će eskalirati!
 
-Vreme eskalacije: <OTRS_TICKET_EscalationDestinationDate>
-Eskalira za: <OTRS_TICKET_EscalationDestinationIn>
+Vreme eskalacije: <ZNUNY_TICKET_EscalationDestinationDate>
+Eskalira za: <ZNUNY_TICKET_EscalationDestinationIn>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (13, 'text/plain', 'sr_Latn', 'Promena servisa tiketa na <OTRS_TICKET_Service>: <OTRS_TICKET_Title>', 'Zdravo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+    (13, 'text/plain', 'sr_Latn', 'Promena servisa tiketa na <ZNUNY_TICKET_Service>: <ZNUNY_TICKET_Title>', 'Zdravo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-servis tiketa [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] je promenjen na <OTRS_TICKET_Service>.
+servis tiketa [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] je promenjen na <ZNUNY_TICKET_Service>.
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>');
+-- <ZNUNY_CONFIG_NotificationSenderName>');
 -- ----------------------------------------------------------
 --  insert into table notification_event_message
 -- ----------------------------------------------------------
 INSERT INTO notification_event_message (notification_id, content_type, language, subject, text)
     VALUES
-    (14, 'text/html', 'sr_Latn', 'Podsetnik: <OTRS_APPOINTMENT_TITLE>', '<p>Zdravo &lt;OTRS_NOTIFICATION_RECIPIENT_UserFirstname&gt;,</p>
+    (14, 'text/html', 'sr_Latn', 'Podsetnik: <ZNUNY_APPOINTMENT_TITLE>', '<p>Zdravo &lt;ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname&gt;,</p>
 <p></p>
-<p>vreme je za obaveštenje u vezi termina &quot;&lt;OTRS_APPOINTMENT_TITLE&gt;&quot;.</p>
+<p>vreme je za obaveštenje u vezi termina &quot;&lt;ZNUNY_APPOINTMENT_TITLE&gt;&quot;.</p>
 <p></p>
-<p>Opis: &lt;OTRS_APPOINTMENT_DESCRIPTION&gt;</p>
-<p>Lokacije: &lt;OTRS_APPOINTMENT_LOCATION&gt;</p>
-<p>Kalendar: <span style="color: &lt;OTRS_CALENDAR_COLOR&gt;;">■</span> &lt;OTRS_CALENDAR_CALENDARNAME&gt;</p>
-<p>Datum početka: &lt;OTRS_APPOINTMENT_STARTTIME&gt;</p>
-<p>Datum kraja: &lt;OTRS_APPOINTMENT_ENDTIME&gt;</p>
-<p>Celodnevno: &lt;OTRS_APPOINTMENT_ALLDAY&gt;</p>
-<p>Ponavljanje: &lt;OTRS_APPOINTMENT_RECURRING&gt;</p>
+<p>Opis: &lt;ZNUNY_APPOINTMENT_DESCRIPTION&gt;</p>
+<p>Lokacije: &lt;ZNUNY_APPOINTMENT_LOCATION&gt;</p>
+<p>Kalendar: <span style="color: &lt;ZNUNY_CALENDAR_COLOR&gt;;">■</span> &lt;ZNUNY_CALENDAR_CALENDARNAME&gt;</p>
+<p>Datum početka: &lt;ZNUNY_APPOINTMENT_STARTTIME&gt;</p>
+<p>Datum kraja: &lt;ZNUNY_APPOINTMENT_ENDTIME&gt;</p>
+<p>Celodnevno: &lt;ZNUNY_APPOINTMENT_ALLDAY&gt;</p>
+<p>Ponavljanje: &lt;ZNUNY_APPOINTMENT_RECURRING&gt;</p>
 <p></p>
-<p><a href="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;" title="&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;">&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt;</a></p>
+<p><a href="&lt;ZNUNY_CONFIG_HttpType&gt;://&lt;ZNUNY_CONFIG_FQDN&gt;/&lt;ZNUNY_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;ZNUNY_APPOINTMENT_APPOINTMENTID&gt;" title="&lt;ZNUNY_CONFIG_HttpType&gt;://&lt;ZNUNY_CONFIG_FQDN&gt;/&lt;ZNUNY_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;ZNUNY_APPOINTMENT_APPOINTMENTID&gt;">&lt;ZNUNY_CONFIG_HttpType&gt;://&lt;ZNUNY_CONFIG_FQDN&gt;/&lt;ZNUNY_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;ZNUNY_APPOINTMENT_APPOINTMENTID&gt;</a></p>
 <p></p>
-<p>-- &lt;OTRS_CONFIG_NotificationSenderName&gt;</p>');
+<p>-- &lt;ZNUNY_CONFIG_NotificationSenderName&gt;</p>');
 -- ----------------------------------------------------------
 --  insert into table dynamic_field
 -- ----------------------------------------------------------

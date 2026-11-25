@@ -419,10 +419,6 @@ msgid "Add Notification"
 msgstr "알림 추가"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Export Notifications"
-msgstr "알림 Export"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
 msgid "Filter for Notifications"
 msgstr "알림 필터"
 
@@ -431,20 +427,8 @@ msgid "Filter for notifications"
 msgstr "알림 필터"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Here you can upload a configuration file to import appointment notifications to your system. The file needs to be in .yml format as exported by the appointment notification module."
-msgstr "여기서 구성 파일을 업로드하여 약속 알림을 시스템에 가져올 수 있습니다. 파일은 약속 알림 모듈에서 내 보낸 .yml 형식이어야합니다."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
 msgid "Overwrite existing notifications?"
 msgstr "존재하는 알림을 덮어쓰시겠습니까?"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Upload Notification configuration"
-msgstr "알림 설정을 업로드하시겠습니까?"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Import Notification configuration"
-msgstr "알림 설정 Import"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
 msgid "Appointment Notification Management"
@@ -3003,14 +2987,6 @@ msgid "MacOS Shortcuts"
 msgstr "MacOS 단축키"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingXSLT.tt
-msgid "Comment code"
-msgstr "주석 코드"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingXSLT.tt
-msgid "Uncomment code"
-msgstr "코드 주석 처리 해제"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingXSLT.tt
 msgid "Auto format code"
 msgstr "자동 형식 코드"
 
@@ -3375,12 +3351,12 @@ msgid "Payload for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "Available placeholders (prefixed with OTRS_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion."
-msgstr ""
+msgid "Available placeholders (prefixed with ZNUNY_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion."
+msgstr "사용 가능한 자리 표시자(접두사 ZNUNY_JWT): ExpirationDateTimestamp, ExpirationDateString. 추가로 X.509 인증서를 지원하는 경우: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "Placeholder usage example: Key1=<OTRS_JWT_ExpirationDateTimestamp>"
-msgstr ""
+msgid "Placeholder usage example: Key1=<ZNUNY_JWT_ExpirationDateTimestamp>"
+msgstr "자리 표시자 사용 예: Key1=<ZNUNY_JWT_ExpirationDateTimestamp>"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "JWT authentication: Additional header data"
@@ -4043,10 +4019,6 @@ msgid "Example: mail.example.com"
 msgstr "예 : mail.example.com"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
-msgid "IMAP Folder"
-msgstr "IMAP 폴더"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
 msgid "Only modify this if you need to fetch mail from a different folder than INBOX."
 msgstr "INBOX가 아닌 다른 폴더에서 메일을 가져와야하는 경우에만 수정하십시오."
 
@@ -4078,10 +4050,6 @@ msgstr "오른쪽에있는 항목 위로 커서를 이동하고 별 모양 아�
 msgid "Links"
 msgstr "링크"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
-msgid "View the admin manual on Github"
-msgstr "Github에서 관리자 매뉴얼보기"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
 msgid "Filter for Items"
 msgstr "항목 필터링"
@@ -4097,10 +4065,6 @@ msgstr "죄송합니다. 검색 결과와 일치하지 않습니다."
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
 msgid "Set as favorite"
 msgstr "즐겨찾기로 설정"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
-msgid "Here you can upload a configuration file to import Ticket Notifications to your system. The file needs to be in .yml format as exported by the Ticket Notification module."
-msgstr "여기서 구성 파일을 업로드하여 시스템에 티켓 알림을 가져올 수 있습니다. 티켓 알림 모듈에서 내 보낸 파일은 .yml 형식이어야합니다."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
 msgid "Ticket Notification Management"
@@ -4167,7 +4131,7 @@ msgid "Use comma or semicolon to separate email addresses."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
-msgid "You can use Znuny-tags like <OTRS_TICKET_DynamicField_...> to insert values from the current ticket."
+msgid "You can use Znuny-tags like <ZNUNY_TICKET_DynamicField_...> to insert values from the current ticket."
 msgstr "<OTRS_TICKET_DynamicField _...>와 같은 Znuny 태그를 사용하여 현재 티켓의 값을 삽입 할 수 있습니다."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportWebserviceSettings.tt
@@ -4841,10 +4805,6 @@ msgstr "여기서 구성 파일을 업로드하여 시스템에 프로세스를 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Upload process configuration"
 msgstr "업로드 프로세스 구성"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-msgid "Import process configuration"
-msgstr "프로세스 구성 가져오기"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Ready2Adopt Processes"
@@ -7235,10 +7195,6 @@ msgid "Go back to editing this agent"
 msgstr "이 에이전트 편집으로 돌아가기"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
-msgid "Set up your personal preferences. Save each setting by clicking the checkmark on the right."
-msgstr "개인적인 취향을 설정하십시오. 오른쪽의 체크 표시를 클릭하여 각 설정을 저장 하십시오."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
 msgid "You can use the navigation tree below to only show settings from certain groups."
 msgstr "아래 탐색 트리를 사용하여 특정 그룹의 설정만 표시할 수 있습니다."
 
@@ -7357,10 +7313,6 @@ msgstr "프로세스"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentSplitSelection.tt
 msgid "Split"
 msgstr "분리"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
-msgid "Read more about statistics in Znuny"
-msgstr "Znuny의 통계에 대해 자세히 알아보십시오."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
 msgid "Statistics Management"
@@ -7491,34 +7443,6 @@ msgid "This statistic contains configuration errors and can currently not be use
 msgstr "이 통계에는 구성 오류가 있으며 현재 사용할 수 없습니다."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Change Free Text of %s%s%s"
-msgstr "%s%s%s의 자유 텍스트 변경 "
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Change Owner of %s%s%s"
-msgstr "%s%s%s의 소유자 변경"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Close %s%s%s"
-msgstr "닫기 %s%s%s"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Add Note to %s%s%s"
-msgstr "%s%s%s에 메모 추가"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Set Pending Time for %s%s%s"
-msgstr "%s%s%s의 보류 시간 설정"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Change Priority of %s%s%s"
-msgstr "%s%s%s의 우선 순위 변경"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Change Responsible of %s%s%s"
-msgstr "%s%s%s의 책임 변경"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "The ticket has been locked"
 msgstr "티켓이 잠겼습니다."
 
@@ -7529,10 +7453,6 @@ msgstr "티켓 설정"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Service invalid."
 msgstr "서비스가 유효하지 않습니다."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "SLA invalid."
-msgstr "SLA가 유효하지 않습니다."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Team Data"
@@ -7553,10 +7473,6 @@ msgstr "새 주인을 설정하십시오!"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Owner invalid."
 msgstr "소유자가 유효하지 않습니다."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "New Responsible"
-msgstr "새로운 책임"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Please set a new responsible!"
@@ -7581,14 +7497,6 @@ msgstr "상태가 유효하지 않습니다."
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "For all pending* states."
 msgstr "모든 보류 * 상태."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Dynamic Info"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Add Article"
-msgstr "기사 추가"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Inform"
@@ -7621,10 +7529,6 @@ msgstr "기사 작성"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Setting a template will overwrite any text or attachment."
 msgstr "템플릿을 설정하면 텍스트나 첨부파일을 덮어씁니다."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
-msgid "Bounce %s%s%s"
-msgstr "바운스 %s%s%s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
 msgid "Bounce to"
@@ -7691,10 +7595,6 @@ msgid "Execute Bulk Action"
 msgstr "일괄 작업 실행"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
-msgid "Compose Answer for %s%s%s"
-msgstr "%s%s%s에 대한 답변 작성"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid "Date Invalid!"
 msgstr "잘못된 날짜!"
 
@@ -7710,10 +7610,6 @@ msgstr "이 주소는 시스템 주소로 등록되어 있으므로 사용할 �
 msgid "Please include at least one recipient"
 msgstr "수신자를 한 명 이상 포함하십시오."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Remove Ticket Customer"
-msgstr "티켓 고객 제거"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid "Please remove this entry and enter a new one with the correct value."
 msgstr "이 항목을 제거하고 올바른 값으로 새 항목을 입력하십시오."
@@ -7722,17 +7618,9 @@ msgstr "이 항목을 제거하고 올바른 값으로 새 항목을 입력하�
 msgid "This address already exists on the address list."
 msgstr "이 주소는 이미 주소록에 있습니다."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Remove Cc"
-msgstr "참조 삭제"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid "Bcc"
 msgstr "숨은 참조"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Remove Bcc"
-msgstr "숨은 참조 제거"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
 msgid "Change Customer of %s%s%s"
@@ -7751,20 +7639,12 @@ msgid "Create New Email Ticket"
 msgstr "새 전자 메일 티켓 만들기"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
-msgid "Example Template"
-msgstr "템플릿 예제"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid "To customer user"
 msgstr "고객 사용자에게"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid "Please include at least one customer user for the ticket."
 msgstr "적어도 한 명의 고객 사용자를 티켓에 포함하십시오."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
-msgid "Remove Ticket Customer User"
-msgstr "티켓 고객 사용자 제거"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid "From queue"
@@ -7774,25 +7654,9 @@ msgstr "대기열에서"
 msgid "Get all"
 msgstr "모든 것을 가져라"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
-msgid "Outbound Email for %s%s%s"
-msgstr "%s%s%s의 발신 이메일"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Select one or more recipients from the customer user address book."
-msgstr "고객 사용자 주소록에서 하나 이상의 수신자를 선택하십시오."
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
 msgid "Resend Email for %s%s%s"
 msgstr "%s%s%s에게 이메일 다시 보내기"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "All fields marked with an asterisk (*) are mandatory."
-msgstr "별표 (*)로 표시된 모든 필드는 필수 항목입니다."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Cancel & close"
-msgstr "취소 및 닫기"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Undo & close"
@@ -7822,10 +7686,6 @@ msgstr "티켓 %s : 해결 시간이 끝났습니다 (%s / %s)!"
 msgid "Ticket %s: solution time will be over in %s %s!"
 msgstr "티켓 %s : 해결 시간은 %s / %s로 끝납니다!"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketForward.tt
-msgid "Forward %s%s%s"
-msgstr "전달 %s%s%s"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
 msgid "History of %s%s%s"
 msgstr "%s%s%s의 기록"
@@ -7849,10 +7709,6 @@ msgstr "Created"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Article"
 msgstr "조"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMerge.tt
-msgid "Merge %s%s%s"
-msgstr "병합 %s%s%s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMerge.tt
 msgid "Merge Settings"
@@ -7883,10 +7739,6 @@ msgid "Need a valid email address."
 msgstr "유효한 이메일 주소가 필요합니다."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
-msgid "Move %s%s%s"
-msgstr "%s%s%s 로 이동"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
 msgid "New Queue"
 msgstr "새로운 대기열"
 
@@ -7897,10 +7749,6 @@ msgstr "통신"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
 msgid "Move"
 msgstr "이동"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
-msgid "Add note to linked %s%s%s"
-msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
 msgid "Notes"
@@ -8002,17 +7850,9 @@ msgstr "새로운 폰 티켓 생성"
 msgid "Please include at least one customer for the ticket."
 msgstr "최소한 한 명의 고객을 티켓에 포함하십시오."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
-msgid "Select this customer as the main customer."
-msgstr "이 고객을 주요 고객으로 선택하십시오."
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhone.tt
 msgid "To queue"
 msgstr "대기열에 넣기"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhoneCommon.tt
-msgid "Phone Call for %s%s%s"
-msgstr "%s%s%s 통화 중입니다."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPlain.tt
 msgid "View Email Plain Text for %s%s%s"
@@ -8199,10 +8039,6 @@ msgid "Article Overview - %s Article(s)"
 msgstr "기사 개관 - %s건의 기사"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
-msgid "Page %s"
-msgstr "페이지 %s"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "Add Filter"
 msgstr "필터 추가"
 
@@ -8346,10 +8182,6 @@ msgstr "대기 시간까지"
 msgid "Locked"
 msgstr "잠김"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
-msgid "%s Ticket(s)"
-msgstr "%s개 티켓"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon/TicketInformation.tt
 msgid "Accounted time"
 msgstr "소요 시간"
@@ -8422,10 +8254,6 @@ msgstr "오류"
 msgid "An Error Occurred"
 msgstr "에러 발생됨"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
-msgid "Traceback"
-msgstr "역 추적"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
 msgid "Powered by %s"
 msgstr ""
@@ -8495,10 +8323,6 @@ msgid "Your password"
 msgstr "너의 비밀번호"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
-msgid "Forgot password?"
-msgstr "비밀번호를 잊으셨나요?"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "2 Factor Token"
 msgstr "2 요소 토큰"
 
@@ -8517,10 +8341,6 @@ msgstr "새 비밀번호 요청"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Your User Name"
 msgstr "사용자 이름"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
-msgid "A new password will be sent to your email address."
-msgstr "새 비밀번호가 이메일 주소로 전송됩니다."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
@@ -8689,10 +8509,6 @@ msgstr "이벤트 정보"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/DashboardEventsTicketCalendar.tt
 msgid "Ticket fields"
 msgstr "타켓 필드"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-msgid "Error Details"
-msgstr "오류 정보"
 
 #. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
 msgid "Expand"
@@ -10049,22 +9865,6 @@ msgstr ""
 #. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
 msgid "There was an error creating the Notification"
 msgstr "알림을 만드는 중 오류가 발생했습니다."
-
-#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
-msgid "Notifications could not be Imported due to a unknown error, please check Znuny logs for more information"
-msgstr "알 수없는 오류로 인해 알림을 가져올 수 없습니다. 자세한 내용은 Znuny 로그를 확인하십시오."
-
-#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
-msgid "The following Notifications have been added successfully: %s"
-msgstr "다음 알림이 성공적으로 추가되었습니다 : %s"
-
-#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
-msgid "The following Notifications have been updated successfully: %s"
-msgstr "다음 알림이 성공적으로 업데이트되었습니다 : %s"
-
-#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
-msgid "There where errors adding/updating the following Notifications: %s. Please check the log file for more information."
-msgstr "다음 알림을 추가 / 업데이트하는 중에 오류가 발생합니다 : %s. 자세한 정보는 로그 파일을 확인하십시오."
 
 #. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
 msgid "Notification updated!"
@@ -12486,14 +12286,6 @@ msgstr "기사 한 개 표시"
 msgid "Show all articles"
 msgstr "모든 기사 표시"
 
-#. Perl Module: Kernel/Modules/AJAXAttachment.pm
-msgid "Got no FormID."
-msgstr "FormID 없음."
-
-#. Perl Module: Kernel/Modules/AJAXAttachment.pm
-msgid "Error: the file could not be deleted properly. Please contact your administrator (missing FileID)."
-msgstr "오류 : 파일을 제대로 삭제할 수 없습니다. 관리자에게 문의하십시오 (누락 된 FileID)."
-
 #. Perl Module: Kernel/Modules/CustomerTicketArticleContent.pm
 msgid "ArticleID is needed!"
 msgstr "ArticleID이 필요합니다!"
@@ -12713,10 +12505,6 @@ msgstr "오류 : 데이터베이스의 innodb_log_file_size 값을 최소 %s MB 
 #. Perl Module: Kernel/Modules/Installer.pm
 msgid "Wrong default storage engine (%s is %s, but it needs to be InnoDB)."
 msgstr ""
-
-#. Perl Module: Kernel/Modules/Installer.pm
-msgid "Wrong database collation (%s is %s, but it needs to be utf8)."
-msgstr "잘못된 데이터베이스 정렬 (%s는 %s이지만 utf8이어야합니다)."
 
 #. Perl Module: Kernel/Modules/Mentions.pm
 msgid "%s users will be mentioned"
@@ -13177,10 +12965,6 @@ msgstr "부재 중 기능을 사용하도록 설정 했습니까? 사용하지 �
 #. Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationInvalidCheck.pm
 msgid "You have %s invalid setting(s) deployed. Click here to show invalid settings."
 msgstr "배포된 %s 설정(들)이 잘못되었습니다. 잘못된 설정을 보려면 여기를 클릭하십시오."
-
-#. JS File: var/httpd/htdocs/js/Core.SystemConfiguration.js
-msgid "You have undeployed settings, would you like to deploy them?"
-msgstr "배포 취소 설정이 있습니다. 배포하시겠습니까?"
 
 #. Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationOutOfSyncCheck.pm
 msgid "The configuration is being updated, please be patient..."
@@ -13939,28 +13723,12 @@ msgid "Client Connection Charset"
 msgstr "클라이언트 연결 문자 세트"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "Setting character_set_client needs to be utf8."
-msgstr "character_set_client 설정은 utf8이어야합니다."
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
 msgid "Server Database Charset"
 msgstr "서버 데이터베이스 문자 세트"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "This character set is not yet supported. Please convert your database to the character set 'utf8'."
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "The setting character_set_database needs to be 'utf8'."
-msgstr "설정 character_set_database는 'utf8'이어야합니다."
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
 msgid "Table Charset"
 msgstr "표 문자 집합"
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "There were tables found which do not have 'utf8' as charset."
-msgstr "'utf8'이없는 테이블이 charset으로 발견되었습니다."
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
 msgid "InnoDB Log File Size"
@@ -14642,14 +14410,6 @@ msgstr "사용"
 msgid "Disabled"
 msgstr "불구가 된"
 
-#. Perl Module: Kernel/System/SysConfig/ValueType/Date.pm
-msgid "System was not able to calculate user Date in OTRSTimeZone!"
-msgstr "시스템이 OTRSTimeZone에서 사용자 날짜를 계산할 수 없습니다!"
-
-#. Perl Module: Kernel/System/SysConfig/ValueType/DateTime.pm
-msgid "System was not able to calculate user DateTime in OTRSTimeZone!"
-msgstr "시스템은 OTRSTimeZone에서 사용자 DateTime을 계산할 수 없었습니다!"
-
 #. Perl Module: Kernel/System/SysConfig/ValueType/FrontendNavigation.pm
 msgid "Value is not correct! Please, consider updating this module."
 msgstr "값이 올바르지 않습니다! 이 모듈을 업데이트 하십시오."
@@ -14693,14 +14453,6 @@ msgstr "기능이 활성화되지 않았습니다!"
 #. Perl Module: Kernel/System/Web/InterfaceAgent.pm
 msgid "Sent password reset instructions. Please check your email."
 msgstr "보낸 암호 재설정 지침. 이메일을 확인하십시오."
-
-#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
-msgid "Invalid Token!"
-msgstr "잘못된 토큰!"
-
-#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
-msgid "Sent new password to %s. Please check your email."
-msgstr "새 암호를 %s로 보냈습니다. 이메일을 확인하십시오."
 
 #. Perl Module: Kernel/System/Web/InterfaceAgent.pm
 msgid "Error: invalid session."
@@ -15075,10 +14827,6 @@ msgid "Defines the system identifier. Every ticket number and http session strin
 msgstr "시스템 식별자를 정의합니다. 모든 티켓 번호와 http 세션 문자열에는이 ID가 들어 있습니다. 이렇게하면 시스템에 속한 티켓 만 후속 조치로 처리됩니다 (Znuny의 두 인스턴스간에 통신 할 때 유용함)."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system."
-msgstr "시스템의 정규화 된 도메인 이름을 정의합니다. 이 설정은 응용 프로그램에서 사용하는 모든 형식의 메시징에있는 변수 인 OTRS_CONFIG_FQDN으로 사용되어 시스템 내의 티켓에 대한 링크를 만듭니다."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID)."
 msgstr ""
 
@@ -15091,16 +14839,8 @@ msgid "Defines the timeout (in seconds, minimum is 20 seconds) for the support d
 msgstr "공개 모듈 'PublicSupportDataCollector'(예 : Znuny 데몬에서 사용)를 사용하여 지원 데이터 수집에 대한 시간 초과 (최소, 20 초)를 정의합니다."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server's settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, OTRS_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system."
-msgstr "응용 프로그램을 제공하기 위해 웹 서버에서 사용하는 프로토콜 유형을 정의합니다. https 프로토콜이 일반 http 대신 사용되는 경우 여기에 지정해야합니다. 이것은 웹 서버의 설정이나 동작에 영향을 미치지 않으므로 응용 프로그램에 대한 액세스 방법을 변경하지 않으며, 틀린 경우 응용 프로그램에 로그인하지 못하게하지 않습니다. 이 설정은 응용 프로그램에서 사용하는 모든 형식의 메시징에서 찾을 수있는 OTRS_CONFIG_HttpType 변수로만 사용되어 시스템 내의 티켓에 대한 링크를 만듭니다."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Whether to force redirect all requests from http to https protocol. Please check that your web server is configured correctly for https protocol before enable this option."
 msgstr "http에서 https 프로토콜로 모든 요청을 강제로 리디렉션할지 여부입니다. 이 옵션을 활성화하기 전에 웹 서버가 https 프로토콜에 맞게 올바르게 구성되어 있는지 확인하십시오."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Sets the prefix to the scripts folder on the server, as configured on the web server. This setting is used as a variable, OTRS_CONFIG_ScriptAlias which is found in all forms of messaging used by the application, to build links to the tickets within the system."
-msgstr "접두어를 웹 서버에 구성된대로 서버의 scripts 폴더에 설정합니다. 이 설정은 응용 프로그램에서 사용하는 모든 형식의 메시징에서 발견되는 변수 인 OTRS_CONFIG_ScriptAlias로 사용되어 시스템 내의 티켓에 대한 링크를 작성합니다."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the system administrator's email address. It will be displayed in the error screens of the application."
@@ -15175,10 +14915,6 @@ msgid "Defines the URL rich text editor path."
 msgstr "URL 서식있는 텍스트 편집기 경로를 정의합니다."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the default CSS used in rich text editors."
-msgstr "서식있는 텍스트 편집기에 사용되는 기본 CSS를 정의합니다."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.)."
 msgstr "확장 모드를 사용해야하는지 정의합니다 (테이블, 바꾸기, 아래 첨자, 위 첨자, 단어 붙여 넣기 등 사용 가능)."
 
@@ -15200,18 +14936,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the selectable fonts in the rich text editor."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the selectable format tags in the rich text editor."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines additional plugins for use in the rich text editor."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines extra content that is allowed for use in the rich text editor."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -15431,10 +15155,6 @@ msgid "Defines the module that shows all the currently logged in customers in th
 msgstr "에이전트 인터페이스에 현재 로그인 한 모든 고객을 표시하는 모듈을 정의합니다."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the module to display a notification in the agent interface, if there are modified sysconfig settings that are not deployed yet."
-msgstr "아직 배포되지 않은 수정 된 sysconfig 설정이있는 경우 에이전트 인터페이스에 알림을 표시 할 모듈을 정의합니다."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the module to display a notification in the agent interface, if there are invalid sysconfig settings deployed."
 msgstr "잘못된 sysconfig 설정이 배포 된 경우 에이전트 인터페이스에 알림을 표시 할 모듈을 정의합니다."
 
@@ -15535,20 +15255,12 @@ msgid "Defines the period of time (in minutes) before customer is marked as \"aw
 msgstr "비활성 상태 (예 : '로그인 사용자'위젯 또는 채팅)로 인해 고객이 '자리 비움'으로 표시되기까지의 시간 (분)을 정의합니다."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "This setting is deprecated. Set OTRSTimeZone instead."
-msgstr "이 설정은 사용되지 않습니다. 대신 OTRSTimeZone을 설정하십시오."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created."
 msgstr "Znuny에 의해 내부적으로 사용되는 시간대를 e로 설정합니다. 지. 날짜와 시간을 데이터베이스에 저장하십시오. 경고 :이 설정은 일단 설정하고 티켓 또는 날짜 / 시간이 포함 된 다른 데이터를 작성한 후에 변경하면 안됩니다."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Sets the time zone that will be assigned to newly created users and will be used for users that haven't yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user's time zone."
 msgstr "새로 생성 된 사용자에게 할당되고 아직 시간대를 설정하지 않은 사용자에게 사용될 시간대를 설정합니다. 이 시간대는 Znuny 시간대와 사용자 시간대 사이의 날짜와 시간을 변환하기 위해 기본값으로 사용됩니다."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "If enabled, users that haven't selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC."
-msgstr "사용하도록 설정하면 아직 시간대를 선택하지 않은 사용자에게 알림이 전송됩니다. 참고 : (1) 사용자가 아직 시간대를 선택하지 않았으며 (2) OTRSTimeZone과 UserDefaultTimeZone이 일치하고 (3) UTC로 설정되지 않은 경우 알림이 표시되지 않습니다."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Maximum Number of a calendar shown in a dropdown."
@@ -15815,24 +15527,12 @@ msgid "Specifies the name that should be used by the application when sending no
 msgstr "알림을 보낼 때 응용 프로그램에서 사용해야하는 이름을 지정합니다. 발신자 이름은 알림 마스터의 전체 표시 이름 (예 : \"Znuny Notifications\"znuny@your.example.com)을 작성하는 데 사용됩니다."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. \"Znuny Notifications\" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address."
-msgstr "알림을 보낼 때 응용 프로그램에서 사용해야하는 전자 메일 주소를 지정합니다. 이메일 주소는 알림 마스터의 전체 표시 이름 (예 : \"Znuny Notifications\"znuny@your.example.com)을 작성하는 데 사용됩니다. OTRS_CONFIG_FQDN 변수를 설정에 사용하거나 다른 이메일 주소를 선택할 수 있습니다."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the subject for notification mails sent to agents, with token about new requested password."
 msgstr "에이전트에게 보낸 알림 메일의 제목을 정의하고 요청 된 새 비밀번호에 대한 토큰을 사용합니다."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the body text for notification mails sent to agents, with token about new requested password."
 msgstr "에이전트에게 보낸 알림 메일의 본문 텍스트를 정의하고 요청된 새 비밀번호에 대한 토큰을 지정합니다."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the subject for notification mails sent to agents, about new password."
-msgstr "에이전트에 보내는 알림 메일의 제목과 새 암호를 정의합니다."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the body text for notification mails sent to agents, about new password."
-msgstr "에이전트에 보내는 알림 메일의 본문 텍스트를 새 암호로 정의합니다."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that \"rw\" is always the last registered permission."
@@ -16001,14 +15701,6 @@ msgstr "새로운 요청된 비밀번호에 대한 토큰과 함께 고객에게
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the body text for notification mails sent to customers, with token about new requested password."
 msgstr "새로운 요청된 비밀번호에 대한 토큰과 함께 고객에게 발송된 통지 메일의 본문 텍스트를 정의합니다."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the subject for notification mails sent to customers, about new password."
-msgstr "고객에게 보낸 알림 메일 제목과 새 비밀번호를 정의합니다."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the body text for notification mails sent to customers, about new password."
-msgstr "새 비밀번호에 대한 알림 메일의 본문 텍스트를 고객에게 전달합니다."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the subject for notification mails sent to customers, about new account."
@@ -16703,8 +16395,8 @@ msgid "Defines the priority in which the information is logged and presented."
 msgstr "정보가 기록되고 표시되는 우선 순위를 정의합니다."
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
-msgid "Filter for debugging Transitions. Note: More filters can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;."
-msgstr ""
+msgid "Filter for debugging Transitions. Note: More filters can be added in the format &lt;ZNUNY_TICKET_Attribute&gt; e.g. &lt;ZNUNY_TICKET_Priority&gt;."
+msgstr "전환 디버깅용 필터. 참고: 필터는 <ZNUNY_TICKET_Attribute> 형식으로 더 추가할 수 있습니다. 예: <ZNUNY_TICKET_Priority>."
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
 msgid "Parameters for the dashboard backend of the running process tickets overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin. \"Mandatory\" determines if the plugin is always shown and can not be removed by agents."
@@ -19135,8 +18827,8 @@ msgid "If enabled debugging information for ACLs is logged."
 msgstr "활성화 된 경우 ACL에 대한 디버깅 정보가 기록됩니다."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;."
-msgstr ""
+msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;ZNUNY_TICKET_Attribute&gt; e.g. &lt;ZNUNY_TICKET_Priority&gt;."
+msgstr "ACL 디버깅용 필터. 참고: 티켓 속성은 <ZNUNY_TICKET_Attribute> 형식으로 더 추가할 수 있습니다. 예: <ZNUNY_TICKET_Priority>."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Maximal auto email responses to own email-address a day (Loop-Protection)."
@@ -19261,10 +18953,6 @@ msgstr "들어오는 전자 메일 메시지가 바운드되는지 확인하는 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Module used to detect if attachments are present."
 msgstr "첨부 파일이 있는지 감지하는데 사용되는 모듈입니다."
-
-#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Executes follow-up checks on Znuny Header 'X-OTRS-Bounce'."
-msgstr "Znuny Header 'X-OTRS-Bounce'에 대한 후속 검사를 실행합니다."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Checks if an E-Mail is a followup to an existing ticket by searching the subject for a valid ticket number."
@@ -19603,18 +19291,6 @@ msgid "Screens for which it is possible to enable or disable default columns."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Content of different fields can be given by separating those fields by ';'."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Different fields can be omitted by separating them by ';'."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Enables support for huge XML data in load_xml calls of CPAN library XML::LibXML. This should only be enabled if absolutely needed. Disabling this option (default) protects against denial of service through entity expansion attacks. Before enabling this option ensure that alternative measures to protect the application against this type of attack have been taken."
 msgstr ""
 
@@ -19940,10 +19616,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Maximum length of displayed attachment filenames in the article preview of ticket zoom view."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "General settings for autocompletion in rich text editor."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
@@ -21081,10 +20753,6 @@ msgstr "죄송합니다. 하지만 필수로 표시된 알림에 대해서는 �
 #. JS File: var/httpd/htdocs/js/Core.Agent.Preferences.js
 msgid "Sorry, but you can't disable all methods for this notification."
 msgstr "죄송합니다만 이 알림에 대한 모든 방법을 사용중지 할 수는 없습니다."
-
-#. JS File: var/httpd/htdocs/js/Core.Agent.Preferences.js
-msgid "Please note that at least one of the settings you have changed requires a page reload. Click here to reload the current screen."
-msgstr "변경한 설정 중 적어도 하나는 페이지를 새로고침해야 합니다. 현재 화면을 다시 로드하려면 여기를 클릭하십시오."
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Preferences.js
 msgid "An unknown error occurred. Please contact the administrator."
@@ -22417,11 +22085,11 @@ msgid "External Link"
 msgstr "외부 링크"
 
 #. SysConfig
-msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format <OTRS_TICKET_Attribute> e.g. <OTRS_TICKET_Priority>."
+msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format <ZNUNY_TICKET_Attribute> e.g. <ZNUNY_TICKET_Priority>."
 msgstr "ACL 디버깅 용 필터. 참고 : 더 많은 티켓 속성을 1과 같은 형식으로 추가 할 수 있습니다. 2."
 
 #. SysConfig
-msgid "Filter for debugging Transitions. Note: More filters can be added in the format <OTRS_TICKET_Attribute> e.g. <OTRS_TICKET_Priority>."
+msgid "Filter for debugging Transitions. Note: More filters can be added in the format <ZNUNY_TICKET_Attribute> e.g. <ZNUNY_TICKET_Priority>."
 msgstr "전환 디버깅을위한 필터. 참고 : 더 많은 필터를 1과 같은 형식으로 추가 할 수 있습니다. 2."
 
 #. SysConfig
@@ -22917,10 +22585,6 @@ msgid "Merged Ticket (%s/%s) to (%s/%s)."
 msgstr "합쳐진 티켓 (%s/%s) ~ (%s/ 1 %s)."
 
 #. SysConfig
-msgid "Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>."
-msgstr "Merged Ticket 1 to 2."
-
-#. SysConfig
 msgid "Minute"
 msgstr "분"
 
@@ -23019,10 +22683,6 @@ msgstr ""
 #. SysConfig
 msgid "OAuth2 token"
 msgstr ""
-
-#. SysConfig
-msgid "OTRS"
-msgstr "OTRS"
 
 #. SysConfig
 msgid "Open an external link!"
@@ -23953,14 +23613,6 @@ msgid "Yes, but hide archived tickets"
 msgstr "예, 보관된 티켓은 숨깁니다."
 
 #. SysConfig
-msgid "Your email with ticket number \"<OTRS_TICKET>\" is bounced to \"<OTRS_BOUNCE_TO>\". Contact this address for further information."
-msgstr "티켓 번호가 \"1\"인 이메일은 \"2\"로 반송됩니다. 자세한 내용은이 주소로 문의하십시오."
-
-#. SysConfig
-msgid "Your email with ticket number \"<OTRS_TICKET>\" is merged to \"<OTRS_MERGE_TO_TICKET>\"."
-msgstr "티켓 번호가 \"1\"인 이메일은 \"2\"로 병합됩니다."
-
-#. SysConfig
 msgid "Your queue selection of your preferred queues. You also get notified about those queues via email if enabled."
 msgstr "선호하는 대기열에 대한 대기열 선택. 또한 활성화된 경우 이메일을 통해 대기열에 대한 알림을 받습니다."
 
@@ -24094,14 +23746,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "The Apple touch icon for the agent interface for the skin \"default\"."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
-msgid "Mark tickets as seen"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
-msgid "Mark tickets as unseen"
 msgstr ""
 
 #. Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
@@ -24248,10 +23892,6 @@ msgstr ""
 msgid "Save changes"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
-msgid "cancel"
-msgstr ""
-
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
 msgid "There were non-system tables found which do not have 'utf8mb4' as charset."
 msgstr ""
@@ -24354,14 +23994,6 @@ msgstr ""
 
 #. Perl Module: Kernel/Output/HTML/Notification/TranslationCheck.pm
 msgid "The translations in the database are not synchronous. Please synchronize all translations."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "Frontend module registration for the agent admin interface."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "This configuration defines the cache settings for the Znuny-DatabasBackend (default: 1 day)."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
@@ -24756,14 +24388,6 @@ msgstr ""
 msgid "Defines which ContentTypes are permitted for the attachment preview."
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.UI.js
-msgid "An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator."
-msgstr ""
-
-#. SysConfig
-msgid "AsPopup"
-msgstr ""
-
 #. SysConfig
 msgid "Create new process ticket via category."
 msgstr ""
@@ -24777,10 +24401,6 @@ msgid "LinkTarget"
 msgstr ""
 
 #. SysConfig
-msgid "Process Ticket Catalog"
-msgstr ""
-
-#. SysConfig
 msgid "Process Ticket Category: Define a process category."
 msgstr ""
 
@@ -24790,10 +24410,6 @@ msgstr ""
 
 #. SysConfig
 msgid "Process Ticket Category: Define a process link target."
-msgstr ""
-
-#. SysConfig
-msgid "Process Ticket Catalog."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
@@ -24982,10 +24598,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid "Customer suggestions"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
-msgid "Undo & Close"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
@@ -25214,14 +24826,6 @@ msgstr ""
 
 #. SysConfig
 msgid "Ticket information"
-msgstr ""
-
-#. Perl Module: Kernel/Modules/AgentSession.pm
-msgid "Invalid subaction!"
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "List of session keys that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession."
 msgstr ""
 
 #. SysConfig
@@ -25553,10 +25157,6 @@ msgid "Shows a link to preview article attachments in the zoom view of the artic
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Output filter to show attachment selection in certain agent ticket dialogs."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Shows a link in the menu to select and download all attachments of the ticket."
 msgstr ""
 
@@ -25663,10 +25263,6 @@ msgstr "선택한 인증서/키를 사용할 수 없습니다. 다시 선택하�
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
 msgid "- Select an existing certificate/key -"
 msgstr "- 기존 인증서/키 선택 -"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
-msgid "Paste"
-msgstr "붙여넣기"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
 msgid "Use certificate from metadata"
@@ -25904,10 +25500,6 @@ msgstr "동기화"
 msgid "Slot %s"
 msgstr "슬롯 %s"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
-msgid "Only invalid configurations can be deleted. Set this configuration to invalid first."
-msgstr "무효 상태인 구성만 삭제할 수 있습니다. 먼저 이 구성을 무효로 설정하십시오."
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
 msgid "Enable sync"
 msgstr "동기화 사용"
@@ -26043,10 +25635,6 @@ msgstr "검토"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
 msgid "Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective."
 msgstr "\"저장\"을 클릭하면 이 SAML 구성이 생성됩니다. 아직 활성화되지는 않습니다 - 이후 개요 페이지에서 \"구성 배포\"를 사용하여 적용하십시오."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
-msgid "If you skipped the Identity Provider CA certificate here and provided metadata instead, it will be derived from that metadata automatically during Deploy."
-msgstr "여기에서 ID 공급자 CA 인증서를 건너뛰고 대신 메타 데이터를 제공한 경우, 배포 중에 해당 메타 데이터에서 자동으로 가져옵니다."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
 msgid "You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only)."
@@ -26337,10 +25925,6 @@ msgid "SP signing certificate"
 msgstr "SP 서명 인증서"
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
-msgid "Not set (will be derived automatically from metadata during Deploy, if possible)"
-msgstr "설정되지 않음 (가능한 경우 배포 중에 메타 데이터에서 자동으로 가져옴)"
-
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
 msgid "User sync"
 msgstr "사용자 동기화"
 
@@ -26563,4 +26147,44 @@ msgstr "XSLT 매핑이 xsl:import, xsl:include 또는 document()로 불러올 �
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "The controller that the invoker should send requests to. Variables marked by a ':' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
 msgstr "호출자가 요청을 보내야 하는 컨트롤러. ':'로 표시된 변수는 매핑 후(구성된 경우) 나가는 데이터에서 대체됩니다. 중첩 필드는 점을 사용합니다(예: /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the fully qualified domain name of the system. This setting is used as a variable, ZNUNY_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system."
+msgstr "시스템의 정규화 된 도메인 이름을 정의합니다. 이 설정은 응용 프로그램에서 사용하는 모든 형식의 메시징에있는 변수 인 ZNUNY_CONFIG_FQDN으로 사용되어 시스템 내의 티켓에 대한 링크를 만듭니다."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server's settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, ZNUNY_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system."
+msgstr "응용 프로그램을 제공하기 위해 웹 서버에서 사용하는 프로토콜 유형을 정의합니다. https 프로토콜이 일반 http 대신 사용되는 경우 여기에 지정해야합니다. 이것은 웹 서버의 설정이나 동작에 영향을 미치지 않으므로 응용 프로그램에 대한 액세스 방법을 변경하지 않으며, 틀린 경우 응용 프로그램에 로그인하지 못하게하지 않습니다. 이 설정은 응용 프로그램에서 사용하는 모든 형식의 메시징에서 찾을 수있는 ZNUNY_CONFIG_HttpType 변수로만 사용되어 시스템 내의 티켓에 대한 링크를 만듭니다."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Sets the prefix to the scripts folder on the server, as configured on the web server. This setting is used as a variable, ZNUNY_CONFIG_ScriptAlias which is found in all forms of messaging used by the application, to build links to the tickets within the system."
+msgstr "접두어를 웹 서버에 구성된대로 서버의 scripts 폴더에 설정합니다. 이 설정은 응용 프로그램에서 사용하는 모든 형식의 메시징에서 발견되는 변수 인 ZNUNY_CONFIG_ScriptAlias로 사용되어 시스템 내의 티켓에 대한 링크를 작성합니다."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. \"Znuny Notifications\" znuny@your.example.com). You can use the ZNUNY_CONFIG_FQDN variable as set in your configuation, or choose another email address."
+msgstr "알림을 보낼 때 응용 프로그램에서 사용해야하는 전자 메일 주소를 지정합니다. 이메일 주소는 알림 마스터의 전체 표시 이름 (예 : \"Znuny Notifications\"znuny@your.example.com)을 작성하는 데 사용됩니다. ZNUNY_CONFIG_FQDN 변수를 설정에 사용하거나 다른 이메일 주소를 선택할 수 있습니다."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Executes follow-up checks on Znuny Header 'X-Znuny-Bounce'."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of parallel instances when using ZNUNY_AsynchronousInvokerExecution in invoker Ticket::Generic."
+msgstr "호출자 Ticket::Generic에서 ZNUNY_AsynchronousInvokerExecution을 사용할 때 병렬 인스턴스의 최대 수."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of process transitions evaluated for one ticket in a single request, so a transition action that changes ticket data can advance the following activity immediately. Set this to 1 to evaluate only one transition per request. Values must be from 1 to 99. A cyclic process runs until this limit on every ticket update. Reaching the limit writes a notice to the system log. Set the minimum log level to notice, info or debug to keep that notice."
+msgstr ""
+
+#. SysConfig
+msgid "Merged Ticket <ZNUNY_TICKET> to <ZNUNY_MERGE_TO_TICKET>."
+msgstr "Merged Ticket 1 to 2."
+
+#. SysConfig
+msgid "Your email with ticket number \"<ZNUNY_TICKET>\" is bounced to \"<ZNUNY_BOUNCE_TO>\". Contact this address for further information."
+msgstr "티켓 번호가 \"1\"인 이메일은 \"2\"로 반송됩니다. 자세한 내용은이 주소로 문의하십시오."
+
+#. SysConfig
+msgid "Your email with ticket number \"<ZNUNY_TICKET>\" is merged to \"<ZNUNY_MERGE_TO_TICKET>\"."
+msgstr "티켓 번호가 \"1\"인 이메일은 \"2\"로 병합됩니다."
 

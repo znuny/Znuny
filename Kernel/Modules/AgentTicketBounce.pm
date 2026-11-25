@@ -250,9 +250,9 @@ sub Run {
         # make sure body is rich text
         if ( $LayoutObject->{BrowserRichText} ) {
 
-            # prepare bounce tags
-            $Param{BounceText} =~ s/<((?i:(?:OTRS|ZNUNY)_TICKET))>/&lt;$1&gt;/g;
-            $Param{BounceText} =~ s/<((?i:(?:OTRS|ZNUNY)_BOUNCE_TO))>/&lt;$1&gt;/g;
+            # prepare bounce tags (ZNUNY_ preferred; OTRS_ still accepted)
+            $Param{BounceText} =~ s/<(?:OTRS|ZNUNY)_TICKET>/&lt;ZNUNY_TICKET&gt;/g;
+            $Param{BounceText} =~ s/<(?:OTRS|ZNUNY)_BOUNCE_TO>/&lt;ZNUNY_BOUNCE_TO&gt;/g;
 
             $Param{BounceText} = $LayoutObject->Ascii2RichText(
                 String => $Param{BounceText},
@@ -450,8 +450,8 @@ $Param{Signature}";
             if ( $LayoutObject->{BrowserRichText} ) {
 
                 # prepare bounce tags
-                $Param{Body} =~ s/&lt;((?i:(?:OTRS|ZNUNY)_TICKET))&gt;/&amp;lt;$1&amp;gt;/g;
-                $Param{Body} =~ s/&lt;((?i:(?:OTRS|ZNUNY)_BOUNCE_TO))&gt;/&amp;lt;$1&amp;gt;/g;
+                $Param{Body} =~ s/&lt;(?:OTRS|ZNUNY)_TICKET&gt;/&amp;lt;ZNUNY_TICKET&amp;gt;/gi;
+                $Param{Body} =~ s/&lt;(?:OTRS|ZNUNY)_BOUNCE_TO&gt;/&amp;lt;ZNUNY_BOUNCE_TO&amp;gt;/gi;
             }
 
             $Param{InformationFormat}   = $Param{Body};
@@ -516,8 +516,8 @@ $Param{Signature}";
             }
 
             # replace placeholders
-            $Param{Body} =~ s/(&lt;|<)(?i:(?:OTRS|ZNUNY)_TICKET)(&gt;|>)/$Ticket{TicketNumber}/g;
-            $Param{Body} =~ s/(&lt;|<)(?i:(?:OTRS|ZNUNY)_BOUNCE_TO)(&gt;|>)/$Param{BounceTo}/g;
+            $Param{Body} =~ s/(&lt;|<)(?:OTRS|ZNUNY)_TICKET(&gt;|>)/$Ticket{TicketNumber}/g;
+            $Param{Body} =~ s/(&lt;|<)(?:OTRS|ZNUNY)_BOUNCE_TO(&gt;|>)/$Param{BounceTo}/g;
 
             # send
             my $ArticleID = $ArticleBackendObject->ArticleSend(

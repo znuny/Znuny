@@ -419,10 +419,6 @@ msgid "Add Notification"
 msgstr "Dodaj obvestilo"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Export Notifications"
-msgstr "Izvozi obvestila"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
 msgid "Filter for Notifications"
 msgstr ""
 
@@ -431,20 +427,8 @@ msgid "Filter for notifications"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Here you can upload a configuration file to import appointment notifications to your system. The file needs to be in .yml format as exported by the appointment notification module."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
 msgid "Overwrite existing notifications?"
 msgstr "Povozite obstoječa obvestila?"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Upload Notification configuration"
-msgstr "Naložite konfiguracijo obvestil"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Import Notification configuration"
-msgstr "Uvozite konfiguracijo obvestil"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
 msgid "Appointment Notification Management"
@@ -3003,14 +2987,6 @@ msgid "MacOS Shortcuts"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingXSLT.tt
-msgid "Comment code"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingXSLT.tt
-msgid "Uncomment code"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingXSLT.tt
 msgid "Auto format code"
 msgstr ""
 
@@ -3375,12 +3351,12 @@ msgid "Payload for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "Available placeholders (prefixed with OTRS_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion."
-msgstr ""
+msgid "Available placeholders (prefixed with ZNUNY_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion."
+msgstr "Razpoložljivi nadomestni znaki (s predpono ZNUNY_JWT): ExpirationDateTimestamp, ExpirationDateString. Poleg tega, če je podprta uporaba potrdil X.509: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "Placeholder usage example: Key1=<OTRS_JWT_ExpirationDateTimestamp>"
-msgstr ""
+msgid "Placeholder usage example: Key1=<ZNUNY_JWT_ExpirationDateTimestamp>"
+msgstr "Primer uporabe nadomestnega znaka: Key1=<ZNUNY_JWT_ExpirationDateTimestamp>"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "JWT authentication: Additional header data"
@@ -4043,10 +4019,6 @@ msgid "Example: mail.example.com"
 msgstr "Primer: mail.example.com"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
-msgid "IMAP Folder"
-msgstr "IMAP mapa"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
 msgid "Only modify this if you need to fetch mail from a different folder than INBOX."
 msgstr "Spremeni samo, če morate elektronska sporočila pobirati iz druge mape namesto mape Prejeto."
 
@@ -4078,10 +4050,6 @@ msgstr ""
 msgid "Links"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
-msgid "View the admin manual on Github"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
 msgid "Filter for Items"
 msgstr ""
@@ -4097,10 +4065,6 @@ msgstr ""
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
 msgid "Set as favorite"
 msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
-msgid "Here you can upload a configuration file to import Ticket Notifications to your system. The file needs to be in .yml format as exported by the Ticket Notification module."
-msgstr "Tu lahko naložite konfiguracijsko datoteko za uvoz obvestil o zahtevkih v vaš sistem. Datoteka mora biti v .yml formatu, kot je izvožena iz modla za upravljanje z obvestili o zahtevkih."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
 msgid "Ticket Notification Management"
@@ -4167,8 +4131,8 @@ msgid "Use comma or semicolon to separate email addresses."
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
-msgid "You can use Znuny-tags like <OTRS_TICKET_DynamicField_...> to insert values from the current ticket."
-msgstr ""
+msgid "You can use Znuny-tags like <ZNUNY_TICKET_DynamicField_...> to insert values from the current ticket."
+msgstr "Za vstavljanje vrednosti iz trenutnega zahtevka lahko uporabite oznake Znuny, na primer <ZNUNY_TICKET_DynamicField_...>."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportWebserviceSettings.tt
 msgid "Web service name"
@@ -4840,10 +4804,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Upload process configuration"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-msgid "Import process configuration"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
@@ -7235,10 +7195,6 @@ msgid "Go back to editing this agent"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
-msgid "Set up your personal preferences. Save each setting by clicking the checkmark on the right."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
 msgid "You can use the navigation tree below to only show settings from certain groups."
 msgstr ""
 
@@ -7356,10 +7312,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentSplitSelection.tt
 msgid "Split"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
-msgid "Read more about statistics in Znuny"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
@@ -7491,34 +7443,6 @@ msgid "This statistic contains configuration errors and can currently not be use
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Change Free Text of %s%s%s"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Change Owner of %s%s%s"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Close %s%s%s"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Add Note to %s%s%s"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Set Pending Time for %s%s%s"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Change Priority of %s%s%s"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Change Responsible of %s%s%s"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "The ticket has been locked"
 msgstr "Zahtevek je prevzet"
 
@@ -7529,10 +7453,6 @@ msgstr "Nastavitve zahtevkov"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Service invalid."
 msgstr "Neveljavna storitev"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "SLA invalid."
-msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Team Data"
@@ -7552,10 +7472,6 @@ msgstr "Prosimo, da se določi nov lastnik!"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Owner invalid."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "New Responsible"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
@@ -7580,14 +7496,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "For all pending* states."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Dynamic Info"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Add Article"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
@@ -7620,10 +7528,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Setting a template will overwrite any text or attachment."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
-msgid "Bounce %s%s%s"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
@@ -7691,10 +7595,6 @@ msgid "Execute Bulk Action"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
-msgid "Compose Answer for %s%s%s"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid "Date Invalid!"
 msgstr "Nepravilen datum!"
 
@@ -7710,10 +7610,6 @@ msgstr ""
 msgid "Please include at least one recipient"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Remove Ticket Customer"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid "Please remove this entry and enter a new one with the correct value."
 msgstr ""
@@ -7722,17 +7618,9 @@ msgstr ""
 msgid "This address already exists on the address list."
 msgstr "Ta naslov že obstaja na seznamu naslovov."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Remove Cc"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid "Bcc"
 msgstr "Bcc"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Remove Bcc"
-msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
 msgid "Change Customer of %s%s%s"
@@ -7751,14 +7639,6 @@ msgid "Create New Email Ticket"
 msgstr "Odpri nov zahtevek E-pošte"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
-msgid "Example Template"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
-msgid "Remove Ticket Customer User"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid "From queue"
 msgstr "Iz vrste"
 
@@ -7768,14 +7648,6 @@ msgstr "Dobi vse"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
 msgid "Resend Email for %s%s%s"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "All fields marked with an asterisk (*) are mandatory."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Cancel & close"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
@@ -7806,10 +7678,6 @@ msgstr ""
 msgid "Ticket %s: solution time will be over in %s %s!"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketForward.tt
-msgid "Forward %s%s%s"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
 msgid "History of %s%s%s"
 msgstr ""
@@ -7833,10 +7701,6 @@ msgstr ""
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Article"
 msgstr "Članek"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMerge.tt
-msgid "Merge %s%s%s"
-msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMerge.tt
 msgid "Merge Settings"
@@ -7867,10 +7731,6 @@ msgid "Need a valid email address."
 msgstr "Potreben je veljavni naslov E-pošte."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
-msgid "Move %s%s%s"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
 msgid "New Queue"
 msgstr "Nova vrsta"
 
@@ -7881,10 +7741,6 @@ msgstr ""
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
 msgid "Move"
 msgstr "Premakni"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
-msgid "Add note to linked %s%s%s"
-msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
 msgid "Notes"
@@ -7985,10 +7841,6 @@ msgstr ""
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhone.tt
 msgid "To queue"
 msgstr "V vrsto"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhoneCommon.tt
-msgid "Phone Call for %s%s%s"
-msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPlain.tt
 msgid "View Email Plain Text for %s%s%s"
@@ -8175,10 +8027,6 @@ msgid "Article Overview - %s Article(s)"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
-msgid "Page %s"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "Add Filter"
 msgstr "Dodaj filter"
 
@@ -8322,10 +8170,6 @@ msgstr "Čakati do"
 msgid "Locked"
 msgstr "Status"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
-msgid "%s Ticket(s)"
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon/TicketInformation.tt
 msgid "Accounted time"
 msgstr "Obračunan čas"
@@ -8398,10 +8242,6 @@ msgstr "Napaka"
 msgid "An Error Occurred"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
-msgid "Traceback"
-msgstr "Slijeđevina"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
 msgid "Powered by %s"
 msgstr ""
@@ -8471,10 +8311,6 @@ msgid "Your password"
 msgstr "Vaše geslo"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
-msgid "Forgot password?"
-msgstr "Ste pozabili geslo?"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "2 Factor Token"
 msgstr ""
 
@@ -8493,10 +8329,6 @@ msgstr "Zahtevaj novo geslo"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Your User Name"
 msgstr "Vaše uporabniško ime"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
-msgid "A new password will be sent to your email address."
-msgstr "Novo geslo bo poslano na vašo e-pošto."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
@@ -8665,10 +8497,6 @@ msgstr ""
 #. TT Template: Kernel/Output/HTML/Templates/Standard/DashboardEventsTicketCalendar.tt
 msgid "Ticket fields"
 msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-msgid "Error Details"
-msgstr "Podrobnosti o napaki"
 
 #. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
 msgid "Expand"
@@ -10024,22 +9852,6 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
 msgid "There was an error creating the Notification"
-msgstr ""
-
-#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
-msgid "Notifications could not be Imported due to a unknown error, please check Znuny logs for more information"
-msgstr ""
-
-#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
-msgid "The following Notifications have been added successfully: %s"
-msgstr ""
-
-#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
-msgid "The following Notifications have been updated successfully: %s"
-msgstr ""
-
-#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
-msgid "There where errors adding/updating the following Notifications: %s. Please check the log file for more information."
 msgstr ""
 
 #. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
@@ -12462,14 +12274,6 @@ msgstr "Prikaži en članek"
 msgid "Show all articles"
 msgstr "Prikaži vse članke"
 
-#. Perl Module: Kernel/Modules/AJAXAttachment.pm
-msgid "Got no FormID."
-msgstr ""
-
-#. Perl Module: Kernel/Modules/AJAXAttachment.pm
-msgid "Error: the file could not be deleted properly. Please contact your administrator (missing FileID)."
-msgstr ""
-
 #. Perl Module: Kernel/Modules/CustomerTicketArticleContent.pm
 msgid "ArticleID is needed!"
 msgstr ""
@@ -12688,10 +12492,6 @@ msgstr ""
 
 #. Perl Module: Kernel/Modules/Installer.pm
 msgid "Wrong default storage engine (%s is %s, but it needs to be InnoDB)."
-msgstr ""
-
-#. Perl Module: Kernel/Modules/Installer.pm
-msgid "Wrong database collation (%s is %s, but it needs to be utf8)."
 msgstr ""
 
 #. Perl Module: Kernel/Modules/Mentions.pm
@@ -13152,10 +12952,6 @@ msgstr "Vklopljeno imate opcijo Odsotnosti z delovnega mesta, ali želite to opc
 
 #. Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationInvalidCheck.pm
 msgid "You have %s invalid setting(s) deployed. Click here to show invalid settings."
-msgstr ""
-
-#. JS File: var/httpd/htdocs/js/Core.SystemConfiguration.js
-msgid "You have undeployed settings, would you like to deploy them?"
 msgstr ""
 
 #. Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationOutOfSyncCheck.pm
@@ -13915,27 +13711,11 @@ msgid "Client Connection Charset"
 msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "Setting character_set_client needs to be utf8."
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
 msgid "Server Database Charset"
 msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "This character set is not yet supported. Please convert your database to the character set 'utf8'."
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "The setting character_set_database needs to be 'utf8'."
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
 msgid "Table Charset"
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "There were tables found which do not have 'utf8' as charset."
 msgstr ""
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
@@ -14618,14 +14398,6 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
-#. Perl Module: Kernel/System/SysConfig/ValueType/Date.pm
-msgid "System was not able to calculate user Date in OTRSTimeZone!"
-msgstr ""
-
-#. Perl Module: Kernel/System/SysConfig/ValueType/DateTime.pm
-msgid "System was not able to calculate user DateTime in OTRSTimeZone!"
-msgstr ""
-
 #. Perl Module: Kernel/System/SysConfig/ValueType/FrontendNavigation.pm
 msgid "Value is not correct! Please, consider updating this module."
 msgstr ""
@@ -14669,14 +14441,6 @@ msgstr "Funkcija ni aktivna!"
 #. Perl Module: Kernel/System/Web/InterfaceAgent.pm
 msgid "Sent password reset instructions. Please check your email."
 msgstr "Poslana navodila za ponastavitev gesla. Prosimo, preverite e-pošto."
-
-#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
-msgid "Invalid Token!"
-msgstr "Nepravilna oznaka!"
-
-#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
-msgid "Sent new password to %s. Please check your email."
-msgstr "Poslano vam je bilo novo geslo za %s. rosimo, preverite e-pošto."
 
 #. Perl Module: Kernel/System/Web/InterfaceAgent.pm
 msgid "Error: invalid session."
@@ -15051,10 +14815,6 @@ msgid "Defines the system identifier. Every ticket number and http session strin
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID)."
 msgstr ""
 
@@ -15067,15 +14827,7 @@ msgid "Defines the timeout (in seconds, minimum is 20 seconds) for the support d
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server's settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, OTRS_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Whether to force redirect all requests from http to https protocol. Please check that your web server is configured correctly for https protocol before enable this option."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Sets the prefix to the scripts folder on the server, as configured on the web server. This setting is used as a variable, OTRS_CONFIG_ScriptAlias which is found in all forms of messaging used by the application, to build links to the tickets within the system."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -15151,10 +14903,6 @@ msgid "Defines the URL rich text editor path."
 msgstr "Določa URL pot do aplikacije za urejanje \"RTF\" datotek"
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the default CSS used in rich text editors."
-msgstr "Določa privzet CSS uporabljen v \"RTF\" urejanju."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.)."
 msgstr ""
 
@@ -15176,18 +14924,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the selectable fonts in the rich text editor."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the selectable format tags in the rich text editor."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines additional plugins for use in the rich text editor."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines extra content that is allowed for use in the rich text editor."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -15407,10 +15143,6 @@ msgid "Defines the module that shows all the currently logged in customers in th
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the module to display a notification in the agent interface, if there are modified sysconfig settings that are not deployed yet."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the module to display a notification in the agent interface, if there are invalid sysconfig settings deployed."
 msgstr ""
 
@@ -15511,19 +15243,11 @@ msgid "Defines the period of time (in minutes) before customer is marked as \"aw
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "This setting is deprecated. Set OTRSTimeZone instead."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Sets the time zone that will be assigned to newly created users and will be used for users that haven't yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user's time zone."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "If enabled, users that haven't selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -15791,23 +15515,11 @@ msgid "Specifies the name that should be used by the application when sending no
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. \"Znuny Notifications\" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the subject for notification mails sent to agents, with token about new requested password."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the body text for notification mails sent to agents, with token about new requested password."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the subject for notification mails sent to agents, about new password."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the body text for notification mails sent to agents, about new password."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -15976,14 +15688,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the body text for notification mails sent to customers, with token about new requested password."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the subject for notification mails sent to customers, about new password."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the body text for notification mails sent to customers, about new password."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -16679,8 +16383,8 @@ msgid "Defines the priority in which the information is logged and presented."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
-msgid "Filter for debugging Transitions. Note: More filters can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;."
-msgstr ""
+msgid "Filter for debugging Transitions. Note: More filters can be added in the format &lt;ZNUNY_TICKET_Attribute&gt; e.g. &lt;ZNUNY_TICKET_Priority&gt;."
+msgstr "Filter za razhroščevanje prehodov. Opomba: več filtrov je mogoče dodati v obliki <ZNUNY_TICKET_Attribute>, npr. <ZNUNY_TICKET_Priority>."
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
 msgid "Parameters for the dashboard backend of the running process tickets overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin. \"Mandatory\" determines if the plugin is always shown and can not be removed by agents."
@@ -19111,8 +18815,8 @@ msgid "If enabled debugging information for ACLs is logged."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;."
-msgstr ""
+msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;ZNUNY_TICKET_Attribute&gt; e.g. &lt;ZNUNY_TICKET_Priority&gt;."
+msgstr "Filter za razhroščevanje ACL. Opomba: več atributov zahtevka je mogoče dodati v obliki <ZNUNY_TICKET_Attribute>, npr. <ZNUNY_TICKET_Priority>."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Maximal auto email responses to own email-address a day (Loop-Protection)."
@@ -19236,10 +18940,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Module used to detect if attachments are present."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Executes follow-up checks on Znuny Header 'X-OTRS-Bounce'."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
@@ -19579,18 +19279,6 @@ msgid "Screens for which it is possible to enable or disable default columns."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Content of different fields can be given by separating those fields by ';'."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Different fields can be omitted by separating them by ';'."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Enables support for huge XML data in load_xml calls of CPAN library XML::LibXML. This should only be enabled if absolutely needed. Disabling this option (default) protects against denial of service through entity expansion attacks. Before enabling this option ensure that alternative measures to protect the application against this type of attack have been taken."
 msgstr ""
 
@@ -19916,10 +19604,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Maximum length of displayed attachment filenames in the article preview of ticket zoom view."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "General settings for autocompletion in rich text editor."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
@@ -21056,10 +20740,6 @@ msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Preferences.js
 msgid "Sorry, but you can't disable all methods for this notification."
-msgstr ""
-
-#. JS File: var/httpd/htdocs/js/Core.Agent.Preferences.js
-msgid "Please note that at least one of the settings you have changed requires a page reload. Click here to reload the current screen."
 msgstr ""
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Preferences.js
@@ -22382,12 +22062,12 @@ msgid "External Link"
 msgstr ""
 
 #. SysConfig
-msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format <OTRS_TICKET_Attribute> e.g. <OTRS_TICKET_Priority>."
-msgstr ""
+msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format <ZNUNY_TICKET_Attribute> e.g. <ZNUNY_TICKET_Priority>."
+msgstr "Filter za razhroščevanje ACL. Opomba: dodatne atribute zahtevka je mogoče dodati v obliki <ZNUNY_TICKET_Attribute> (npr. <ZNUNY_TICKET_Priority>)."
 
 #. SysConfig
-msgid "Filter for debugging Transitions. Note: More filters can be added in the format <OTRS_TICKET_Attribute> e.g. <OTRS_TICKET_Priority>."
-msgstr ""
+msgid "Filter for debugging Transitions. Note: More filters can be added in the format <ZNUNY_TICKET_Attribute> e.g. <ZNUNY_TICKET_Priority>."
+msgstr "Filter za razhroščevanje prehodov. Opomba: dodatne filtre je mogoče dodati v obliki <ZNUNY_TICKET_Attribute> (npr. <ZNUNY_TICKET_Priority>)."
 
 #. SysConfig
 msgid "Filter incoming emails."
@@ -22882,10 +22562,6 @@ msgid "Merged Ticket (%s/%s) to (%s/%s)."
 msgstr ""
 
 #. SysConfig
-msgid "Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>."
-msgstr ""
-
-#. SysConfig
 msgid "Minute"
 msgstr ""
 
@@ -22984,10 +22660,6 @@ msgstr ""
 #. SysConfig
 msgid "OAuth2 token"
 msgstr ""
-
-#. SysConfig
-msgid "OTRS"
-msgstr "OTRS"
 
 #. SysConfig
 msgid "Open an external link!"
@@ -23918,14 +23590,6 @@ msgid "Yes, but hide archived tickets"
 msgstr ""
 
 #. SysConfig
-msgid "Your email with ticket number \"<OTRS_TICKET>\" is bounced to \"<OTRS_BOUNCE_TO>\". Contact this address for further information."
-msgstr ""
-
-#. SysConfig
-msgid "Your email with ticket number \"<OTRS_TICKET>\" is merged to \"<OTRS_MERGE_TO_TICKET>\"."
-msgstr "Vaše sporočilo E-pošte s številko zahtevka \"<OTRS_TICKET>\" je združena z zahtevkom \"<OTRS_MERGE_TO_TICKET>\"!"
-
-#. SysConfig
 msgid "Your queue selection of your preferred queues. You also get notified about those queues via email if enabled."
 msgstr ""
 
@@ -24059,14 +23723,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "The Apple touch icon for the agent interface for the skin \"default\"."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
-msgid "Mark tickets as seen"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
-msgid "Mark tickets as unseen"
 msgstr ""
 
 #. Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
@@ -24213,28 +23869,12 @@ msgstr ""
 msgid "Save changes"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
-msgid "cancel"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Select one or more recipients from the customer user address book."
-msgstr ""
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid "To customer user"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid "Please include at least one customer user for the ticket."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
-msgid "Select this customer as the main customer."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
-msgid "Outbound Email for %s%s%s"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketOverviewSmall.tt
@@ -24343,14 +23983,6 @@ msgstr ""
 
 #. Perl Module: Kernel/Output/HTML/Notification/TranslationCheck.pm
 msgid "The translations in the database are not synchronous. Please synchronize all translations."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "Frontend module registration for the agent admin interface."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "This configuration defines the cache settings for the Znuny-DatabasBackend (default: 1 day)."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
@@ -24745,14 +24377,6 @@ msgstr ""
 msgid "Defines which ContentTypes are permitted for the attachment preview."
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.UI.js
-msgid "An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator."
-msgstr ""
-
-#. SysConfig
-msgid "AsPopup"
-msgstr ""
-
 #. SysConfig
 msgid "Create new process ticket via category."
 msgstr ""
@@ -24766,10 +24390,6 @@ msgid "LinkTarget"
 msgstr ""
 
 #. SysConfig
-msgid "Process Ticket Catalog"
-msgstr ""
-
-#. SysConfig
 msgid "Process Ticket Category: Define a process category."
 msgstr ""
 
@@ -24779,10 +24399,6 @@ msgstr ""
 
 #. SysConfig
 msgid "Process Ticket Category: Define a process link target."
-msgstr ""
-
-#. SysConfig
-msgid "Process Ticket Catalog."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
@@ -24971,10 +24587,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid "Customer suggestions"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
-msgid "Undo & Close"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
@@ -25203,14 +24815,6 @@ msgstr ""
 
 #. SysConfig
 msgid "Ticket information"
-msgstr ""
-
-#. Perl Module: Kernel/Modules/AgentSession.pm
-msgid "Invalid subaction!"
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "List of session keys that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession."
 msgstr ""
 
 #. SysConfig
@@ -25542,10 +25146,6 @@ msgid "Shows a link to preview article attachments in the zoom view of the artic
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Output filter to show attachment selection in certain agent ticket dialogs."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Shows a link in the menu to select and download all attachments of the ticket."
 msgstr ""
 
@@ -25652,10 +25252,6 @@ msgstr "Izbrani certifikat/ključ ni na voljo. Izberite ga ali ga ponovno nalož
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
 msgid "- Select an existing certificate/key -"
 msgstr "- Izberite obstoječi certifikat/ključ -"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
-msgid "Paste"
-msgstr "Prilepi"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
 msgid "Use certificate from metadata"
@@ -25893,10 +25489,6 @@ msgstr "Sinhronizacija"
 msgid "Slot %s"
 msgstr "Slot %s"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
-msgid "Only invalid configurations can be deleted. Set this configuration to invalid first."
-msgstr "Izbrisati je mogoče le neveljavne konfiguracije. Najprej nastavite to konfiguracijo kot neveljavno."
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
 msgid "Enable sync"
 msgstr "Omogoči sinhronizacijo"
@@ -26032,10 +25624,6 @@ msgstr "Pregled nastavitev"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
 msgid "Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective."
 msgstr "Kliknite Shrani, da ustvarite to konfiguracijo SAML. Še ne bo aktivna - nato jo uveljavite z dejanjem Uveljavi na strani s pregledom."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
-msgid "If you skipped the Identity Provider CA certificate here and provided metadata instead, it will be derived from that metadata automatically during Deploy."
-msgstr "Če ste tukaj izpustili certifikat CA ponudnika identitete in namesto tega podali meta-podatke, bo med uveljavitvijo samodejno izpeljan iz teh meta-podatkov."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
 msgid "You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only)."
@@ -26326,10 +25914,6 @@ msgid "SP signing certificate"
 msgstr "Podpisni certifikat SP"
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
-msgid "Not set (will be derived automatically from metadata during Deploy, if possible)"
-msgstr "Ni nastavljeno (med uveljavitvijo bo po možnosti samodejno izpeljano iz meta-podatkov)"
-
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
 msgid "User sync"
 msgstr "Sinhronizacija uporabnikov"
 
@@ -26552,4 +26136,44 @@ msgstr "Predpone naslovov URL HTTPS, ki jih preslikava XSLT lahko naloži z xsl:
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "The controller that the invoker should send requests to. Variables marked by a ':' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
 msgstr "Krmilnik, na katerega naj invoker pošilja zahteve. Spremenljivke, označene z ':', se nadomestijo iz odhodnih podatkov po preslikavi (če je ta nastavljena). Ugnezdena polja uporabljajo piko (npr. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the fully qualified domain name of the system. This setting is used as a variable, ZNUNY_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system."
+msgstr "Določa popolnoma kvalificirano ime domene sistema. Ta nastavitev se uporablja kot spremenljivka ZNUNY_CONFIG_FQDN, ki je v vseh oblikah sporočil, ki jih uporablja aplikacija, za sestavo povezav do zahtevkov v vašem sistemu."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server's settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, ZNUNY_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system."
+msgstr "Določa vrsto protokola, ki ga spletni strežnik uporablja za streženje aplikacije. Če se namesto navadnega http uporablja protokol https, je to treba navesti tukaj. Ker to ne vpliva na nastavitve ali vedenje spletnega strežnika, ne spremeni načina dostopa do aplikacije in, če je napačno, ne prepreči prijave v aplikacijo. Ta nastavitev se uporablja samo kot spremenljivka ZNUNY_CONFIG_HttpType, ki je v vseh oblikah sporočil, ki jih uporablja aplikacija, za sestavo povezav do zahtevkov v vašem sistemu."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Sets the prefix to the scripts folder on the server, as configured on the web server. This setting is used as a variable, ZNUNY_CONFIG_ScriptAlias which is found in all forms of messaging used by the application, to build links to the tickets within the system."
+msgstr "Nastavi predpono mape skript na strežniku, kot je konfigurirana na spletnem strežniku. Ta nastavitev se uporablja kot spremenljivka ZNUNY_CONFIG_ScriptAlias, ki je v vseh oblikah sporočil, ki jih uporablja aplikacija, za sestavo povezav do zahtevkov v sistemu."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. \"Znuny Notifications\" znuny@your.example.com). You can use the ZNUNY_CONFIG_FQDN variable as set in your configuation, or choose another email address."
+msgstr "Določa e-poštni naslov, ki ga mora aplikacija uporabiti pri pošiljanju obvestil. E-poštni naslov se uporabi za sestavo polnega prikaznega imena pošiljatelja obvestil (na primer \"Znuny Notifications\" znuny@your.example.com). Uporabite lahko spremenljivko ZNUNY_CONFIG_FQDN, kot je nastavljena v konfiguraciji, ali izberete drug e-poštni naslov."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Executes follow-up checks on Znuny Header 'X-Znuny-Bounce'."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of parallel instances when using ZNUNY_AsynchronousInvokerExecution in invoker Ticket::Generic."
+msgstr "Največje število vzporednih primerkov pri uporabi ZNUNY_AsynchronousInvokerExecution v klicatelju Ticket::Generic."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of process transitions evaluated for one ticket in a single request, so a transition action that changes ticket data can advance the following activity immediately. Set this to 1 to evaluate only one transition per request. Values must be from 1 to 99. A cyclic process runs until this limit on every ticket update. Reaching the limit writes a notice to the system log. Set the minimum log level to notice, info or debug to keep that notice."
+msgstr ""
+
+#. SysConfig
+msgid "Merged Ticket <ZNUNY_TICKET> to <ZNUNY_MERGE_TO_TICKET>."
+msgstr "Zahtevek <ZNUNY_TICKET> je združen z <ZNUNY_MERGE_TO_TICKET>."
+
+#. SysConfig
+msgid "Your email with ticket number \"<ZNUNY_TICKET>\" is bounced to \"<ZNUNY_BOUNCE_TO>\". Contact this address for further information."
+msgstr "Vaše sporočilo e-pošte s številko zahtevka \"<ZNUNY_TICKET>\" je bilo preusmerjeno na \"<ZNUNY_BOUNCE_TO>\". Za dodatne informacije se obrnite na ta naslov."
+
+#. SysConfig
+msgid "Your email with ticket number \"<ZNUNY_TICKET>\" is merged to \"<ZNUNY_MERGE_TO_TICKET>\"."
+msgstr "Vaše sporočilo E-pošte s številko zahtevka \"<ZNUNY_TICKET>\" je združena z zahtevkom \"<ZNUNY_MERGE_TO_TICKET>\"!"
 

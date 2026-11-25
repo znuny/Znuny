@@ -781,27 +781,27 @@ returns Notification hashes in an array with data:
             'Message' => {
                 'en' => {
                     'ContentType' => 'text/plain',
-                    'Body' => 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+                    'Body' => 'Hi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-you have been mentioned in ticket <OTRS_TICKET_NUMBER>.
-<OTRS_AGENT_BODY[5]>
+you have been mentioned in ticket <ZNUNY_TICKET_NUMBER>.
+<ZNUNY_AGENT_BODY[5]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>',
-                    'Subject' => 'Mention in ticket: <OTRS_TICKET_Title>'
+-- <ZNUNY_CONFIG_NotificationSenderName>',
+                    'Subject' => 'Mention in ticket: <ZNUNY_TICKET_Title>'
                 },
                 'de' => {
                     'ContentType' => 'text/plain',
-                    'Body'        => "Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+                    'Body'        => "Hallo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname> <ZNUNY_NOTIFICATION_RECIPIENT_UserLastname>,
 
-Sie wurden erw\x{e4}hnt in Ticket <OTRS_TICKET_NUMBER>.
-<OTRS_AGENT_BODY[5]>
+Sie wurden erw\x{e4}hnt in Ticket <ZNUNY_TICKET_NUMBER>.
+<ZNUNY_AGENT_BODY[5]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>",
-                    'Subject' => "Erw\x{e4}hnung in Ticket: <OTRS_TICKET_Title>"
+-- <ZNUNY_CONFIG_NotificationSenderName>",
+                    'Subject' => "Erw\x{e4}hnung in Ticket: <ZNUNY_TICKET_Title>"
                 }
             }
         }
@@ -1164,27 +1164,27 @@ Returns:
         'Message' => {
             'en' => {
                 'ContentType' => 'text/plain',
-                'Body'        => 'Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+                'Body'        => 'Hi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-you have been mentioned in ticket <OTRS_TICKET_NUMBER>.
-<OTRS_AGENT_BODY[5]>
+you have been mentioned in ticket <ZNUNY_TICKET_NUMBER>.
+<ZNUNY_AGENT_BODY[5]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>',
-                'Subject' => 'Mention in ticket: <OTRS_TICKET_Title>'
+-- <ZNUNY_CONFIG_NotificationSenderName>',
+                'Subject' => 'Mention in ticket: <ZNUNY_TICKET_Title>'
             },
             'de' => {
                 'ContentType' => 'text/plain',
-                'Body'        => "Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+                'Body'        => "Hallo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname> <ZNUNY_NOTIFICATION_RECIPIENT_UserLastname>,
 
-Sie wurden erw\x{e4}hnt in Ticket <OTRS_TICKET_NUMBER>.
-<OTRS_AGENT_BODY[5]>
+Sie wurden erw\x{e4}hnt in Ticket <ZNUNY_TICKET_NUMBER>.
+<ZNUNY_AGENT_BODY[5]>
 
-<OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+<ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
--- <OTRS_CONFIG_NotificationSenderName>",
-                'Subject' => "Erw\x{e4}hnung in Ticket: <OTRS_TICKET_Title>"
+-- <ZNUNY_CONFIG_NotificationSenderName>",
+                'Subject' => "Erw\x{e4}hnung in Ticket: <ZNUNY_TICKET_Title>"
             }
         }
     )

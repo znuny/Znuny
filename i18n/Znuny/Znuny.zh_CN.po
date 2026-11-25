@@ -419,10 +419,6 @@ msgid "Add Notification"
 msgstr "添加通知"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Export Notifications"
-msgstr "导出通知"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
 msgid "Filter for Notifications"
 msgstr "通知过滤器"
 
@@ -431,20 +427,8 @@ msgid "Filter for notifications"
 msgstr "通知过滤器"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Here you can upload a configuration file to import appointment notifications to your system. The file needs to be in .yml format as exported by the appointment notification module."
-msgstr "在这里你可以上传一个配置文件以便导入预约通知，必须是与预约通知模块导出的文件一样的.yml格式。"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
 msgid "Overwrite existing notifications?"
 msgstr "覆盖现有的通知吗?"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Upload Notification configuration"
-msgstr "上传通知配置"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Import Notification configuration"
-msgstr "导入通知配置"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
 msgid "Appointment Notification Management"
@@ -3003,14 +2987,6 @@ msgid "MacOS Shortcuts"
 msgstr "MacOS快捷键"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingXSLT.tt
-msgid "Comment code"
-msgstr "注释代码"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingXSLT.tt
-msgid "Uncomment code"
-msgstr "取消注释"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingXSLT.tt
 msgid "Auto format code"
 msgstr "自动格式化代码"
 
@@ -3375,12 +3351,12 @@ msgid "Payload for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "Available placeholders (prefixed with OTRS_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion."
-msgstr ""
+msgid "Available placeholders (prefixed with ZNUNY_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion."
+msgstr "可用的占位符（前缀为 ZNUNY_JWT）：ExpirationDateTimestamp、ExpirationDateString。此外，如果支持 X.509 证书：CertSubject、CertIssuer、CertSerial、CertNotBefore、CertNotAfter、CertEmail、CertVersion。"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "Placeholder usage example: Key1=<OTRS_JWT_ExpirationDateTimestamp>"
-msgstr ""
+msgid "Placeholder usage example: Key1=<ZNUNY_JWT_ExpirationDateTimestamp>"
+msgstr "占位符用法示例：Key1=<ZNUNY_JWT_ExpirationDateTimestamp>"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "JWT authentication: Additional header data"
@@ -4043,10 +4019,6 @@ msgid "Example: mail.example.com"
 msgstr "样例：mail.example.com"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
-msgid "IMAP Folder"
-msgstr "IMAP文件夹"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
 msgid "Only modify this if you need to fetch mail from a different folder than INBOX."
 msgstr "仅当你打算从其它文件夹(非INBOX)读取邮件时，才有必要修改此项."
 
@@ -4078,10 +4050,6 @@ msgstr "你可以移动鼠标到条目的右上角并点击星形图标来将条
 msgid "Links"
 msgstr "链接"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
-msgid "View the admin manual on Github"
-msgstr "查看Github上的管理手册"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
 msgid "Filter for Items"
 msgstr "条目过滤器"
@@ -4097,10 +4065,6 @@ msgstr "对不起，你的搜索不匹配任何条目。"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
 msgid "Set as favorite"
 msgstr "添加到收藏夹"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
-msgid "Here you can upload a configuration file to import Ticket Notifications to your system. The file needs to be in .yml format as exported by the Ticket Notification module."
-msgstr "在这里你可以上传一个配置文件以便导入工单通知，必须是与工单通知模块导出的文件一样的.yml格式。"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
 msgid "Ticket Notification Management"
@@ -4167,8 +4131,8 @@ msgid "Use comma or semicolon to separate email addresses."
 msgstr "使用逗号或分号分隔电子邮件地址。"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
-msgid "You can use Znuny-tags like <OTRS_TICKET_DynamicField_...> to insert values from the current ticket."
-msgstr "你可以使用诸如<OTRS_TICKET_DynamicField_...>之类的Znuny标签来插入当前工单中的值。"
+msgid "You can use Znuny-tags like <ZNUNY_TICKET_DynamicField_...> to insert values from the current ticket."
+msgstr "你可以使用诸如<ZNUNY_TICKET_DynamicField_...>之类的Znuny标签来插入当前工单中的值。"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportWebserviceSettings.tt
 msgid "Web service name"
@@ -4841,10 +4805,6 @@ msgstr "你可以上传流程配置文件，以便将流程配置导入到你的
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Upload process configuration"
 msgstr "上传流程配置"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-msgid "Import process configuration"
-msgstr "导入流程配置"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Ready2Adopt Processes"
@@ -7235,10 +7195,6 @@ msgid "Go back to editing this agent"
 msgstr "去编辑这个服务人员"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
-msgid "Set up your personal preferences. Save each setting by clicking the checkmark on the right."
-msgstr "设置你的个人偏好。 通过单击右侧的钩形符号来保存每个设置。"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
 msgid "You can use the navigation tree below to only show settings from certain groups."
 msgstr "你可以使用下面的导航树仅显示某些组的设置。"
 
@@ -7357,10 +7313,6 @@ msgstr "流程"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentSplitSelection.tt
 msgid "Split"
 msgstr "拆分"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
-msgid "Read more about statistics in Znuny"
-msgstr "详细了解OTR关于统计的信息"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
 msgid "Statistics Management"
@@ -7491,34 +7443,6 @@ msgid "This statistic contains configuration errors and can currently not be use
 msgstr "统计包含有错误配置，当前不能使用。"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Change Free Text of %s%s%s"
-msgstr "修改%s%s%s的自由文本"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Change Owner of %s%s%s"
-msgstr "变更工单%s%s%s的所有者"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Close %s%s%s"
-msgstr "关闭%s%s%s"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Add Note to %s%s%s"
-msgstr "添加备注到"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Set Pending Time for %s%s%s"
-msgstr "为%s%s%s添加挂起时间"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Change Priority of %s%s%s"
-msgstr "变更工单%s%s%s的优先级"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Change Responsible of %s%s%s"
-msgstr "变更工单%s%s%s的负责人"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "The ticket has been locked"
 msgstr "工单已锁定"
 
@@ -7529,10 +7453,6 @@ msgstr "工单设置"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Service invalid."
 msgstr "服务无效。"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "SLA invalid."
-msgstr "SLA无效。"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Team Data"
@@ -7553,10 +7473,6 @@ msgstr "请指定新的所有者！"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Owner invalid."
 msgstr "所有者无效。"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "New Responsible"
-msgstr "新的负责人"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Please set a new responsible!"
@@ -7581,14 +7497,6 @@ msgstr "状态无效。"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "For all pending* states."
 msgstr "适用于各种挂起状态。"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Dynamic Info"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Add Article"
-msgstr "添加信件"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Inform"
@@ -7621,10 +7529,6 @@ msgstr "创建一封信件"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Setting a template will overwrite any text or attachment."
 msgstr "设置一个模板将覆盖任何文本或附件。"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
-msgid "Bounce %s%s%s"
-msgstr "退回%s%s%s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
 msgid "Bounce to"
@@ -7691,10 +7595,6 @@ msgid "Execute Bulk Action"
 msgstr "执行批量操作"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
-msgid "Compose Answer for %s%s%s"
-msgstr "撰写工单%s%s%s的回复邮件"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid "Date Invalid!"
 msgstr "日期无效！"
 
@@ -7710,10 +7610,6 @@ msgstr "这个邮件地址：%s已被注册为系统邮件地址，不能使用�
 msgid "Please include at least one recipient"
 msgstr "请包括至少一个收件人"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Remove Ticket Customer"
-msgstr "移除工单客户"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid "Please remove this entry and enter a new one with the correct value."
 msgstr "请删除这个条目并重新输入一个正确的值。"
@@ -7722,17 +7618,9 @@ msgstr "请删除这个条目并重新输入一个正确的值。"
 msgid "This address already exists on the address list."
 msgstr "地址列表已有这个地址。"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Remove Cc"
-msgstr "移除Cc"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid "Bcc"
 msgstr "暗送"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Remove Bcc"
-msgstr "移除Bcc"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
 msgid "Change Customer of %s%s%s"
@@ -7751,20 +7639,12 @@ msgid "Create New Email Ticket"
 msgstr "创建邮件工单"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
-msgid "Example Template"
-msgstr "模板样例"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid "To customer user"
 msgstr "选择客户用户"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid "Please include at least one customer user for the ticket."
 msgstr "请包括至少一个客户用户。"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
-msgid "Remove Ticket Customer User"
-msgstr "移除客户用户"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid "From queue"
@@ -7774,25 +7654,9 @@ msgstr "从队列"
 msgid "Get all"
 msgstr "获取全部"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
-msgid "Outbound Email for %s%s%s"
-msgstr "%s%s%s的外发邮件"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Select one or more recipients from the customer user address book."
-msgstr "从客户用户通讯录中选择一个或多个收件人。"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
 msgid "Resend Email for %s%s%s"
 msgstr "重新发送电子邮件给%s%s%s"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "All fields marked with an asterisk (*) are mandatory."
-msgstr "所有带“*”的字段都是强制要求输入的字段."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Cancel & close"
-msgstr "取消并关闭"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Undo & close"
@@ -7822,10 +7686,6 @@ msgstr "工单%s: 解决时间已超时(%s/%s)！"
 msgid "Ticket %s: solution time will be over in %s %s!"
 msgstr "工单%s：解决时间将在%s/%s内超时！"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketForward.tt
-msgid "Forward %s%s%s"
-msgstr "转发%s%s%s"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
 msgid "History of %s%s%s"
 msgstr "%s%s%s历史"
@@ -7849,10 +7709,6 @@ msgstr "创建时间"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Article"
 msgstr "信件"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMerge.tt
-msgid "Merge %s%s%s"
-msgstr "合并%s%s%s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMerge.tt
 msgid "Merge Settings"
@@ -7883,10 +7739,6 @@ msgid "Need a valid email address."
 msgstr "需要有效的邮件地址。"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
-msgid "Move %s%s%s"
-msgstr "转移%s%s%s"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
 msgid "New Queue"
 msgstr "新队列"
 
@@ -7897,10 +7749,6 @@ msgstr "通信"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
 msgid "Move"
 msgstr "转移"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
-msgid "Add note to linked %s%s%s"
-msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
 msgid "Notes"
@@ -8002,17 +7850,9 @@ msgstr "创建电话工单"
 msgid "Please include at least one customer for the ticket."
 msgstr "请包括至少一个客户用户。"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
-msgid "Select this customer as the main customer."
-msgstr "选择这个客户用户作为主要联系人。"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhone.tt
 msgid "To queue"
 msgstr "队列"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhoneCommon.tt
-msgid "Phone Call for %s%s%s"
-msgstr "%s%s%s的电话"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPlain.tt
 msgid "View Email Plain Text for %s%s%s"
@@ -8199,10 +8039,6 @@ msgid "Article Overview - %s Article(s)"
 msgstr "信件概览-%s个信件"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
-msgid "Page %s"
-msgstr "第%s页"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "Add Filter"
 msgstr "添加过滤器"
 
@@ -8346,10 +8182,6 @@ msgstr "挂起至"
 msgid "Locked"
 msgstr "锁定状态"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
-msgid "%s Ticket(s)"
-msgstr "%s个工单"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon/TicketInformation.tt
 msgid "Accounted time"
 msgstr "所用工时"
@@ -8422,10 +8254,6 @@ msgstr "Error（错误）"
 msgid "An Error Occurred"
 msgstr "发生了一个错误"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
-msgid "Traceback"
-msgstr "追溯"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
 msgid "Powered by %s"
 msgstr ""
@@ -8495,10 +8323,6 @@ msgid "Your password"
 msgstr "你的密码"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
-msgid "Forgot password?"
-msgstr "密码忘记?"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "2 Factor Token"
 msgstr "双因素令牌"
 
@@ -8517,10 +8341,6 @@ msgstr "请求新密码"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Your User Name"
 msgstr "你的用户名"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
-msgid "A new password will be sent to your email address."
-msgstr "新密码将会发送到您的邮箱中。"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
@@ -8689,10 +8509,6 @@ msgstr "事件信息"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/DashboardEventsTicketCalendar.tt
 msgid "Ticket fields"
 msgstr "工单字段"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-msgid "Error Details"
-msgstr "详细错误信息"
 
 #. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
 msgid "Expand"
@@ -10049,22 +9865,6 @@ msgstr "%s (副本)"
 #. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
 msgid "There was an error creating the Notification"
 msgstr "创建通知时出现了一个错误"
-
-#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
-msgid "Notifications could not be Imported due to a unknown error, please check Znuny logs for more information"
-msgstr "由于一个未知错误不能导入通知，请检查Znuny日志以获取更多信息"
-
-#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
-msgid "The following Notifications have been added successfully: %s"
-msgstr "下列通知已成功添加：%s"
-
-#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
-msgid "The following Notifications have been updated successfully: %s"
-msgstr "下列通知已成功更新：%s"
-
-#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
-msgid "There where errors adding/updating the following Notifications: %s. Please check the log file for more information."
-msgstr "添加/更新下列通知时出现错误：%s，请检查Znuny日志以获取更多信息。"
 
 #. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
 msgid "Notification updated!"
@@ -12486,14 +12286,6 @@ msgstr "显示单一信件"
 msgid "Show all articles"
 msgstr "显示所有信件"
 
-#. Perl Module: Kernel/Modules/AJAXAttachment.pm
-msgid "Got no FormID."
-msgstr "没有获取到表单ID。"
-
-#. Perl Module: Kernel/Modules/AJAXAttachment.pm
-msgid "Error: the file could not be deleted properly. Please contact your administrator (missing FileID)."
-msgstr "错误：文件无法正确删除，请联系您的管理员（缺少文件ID）。"
-
 #. Perl Module: Kernel/Modules/CustomerTicketArticleContent.pm
 msgid "ArticleID is needed!"
 msgstr "需要信件ID！"
@@ -12713,10 +12505,6 @@ msgstr "错误：请设置数据库参数innodb_log_file_size至少为%s MB（�
 #. Perl Module: Kernel/Modules/Installer.pm
 msgid "Wrong default storage engine (%s is %s, but it needs to be InnoDB)."
 msgstr ""
-
-#. Perl Module: Kernel/Modules/Installer.pm
-msgid "Wrong database collation (%s is %s, but it needs to be utf8)."
-msgstr "错误的数据库排序规则（%s是%s，但需要是utf8）。"
 
 #. Perl Module: Kernel/Modules/Mentions.pm
 msgid "%s users will be mentioned"
@@ -13177,10 +12965,6 @@ msgstr "你已设置为不在办公室，是否取消它?"
 #. Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationInvalidCheck.pm
 msgid "You have %s invalid setting(s) deployed. Click here to show invalid settings."
 msgstr "您已经部署了%s个无效的设置，点击此处显示无效的设置。"
-
-#. JS File: var/httpd/htdocs/js/Core.SystemConfiguration.js
-msgid "You have undeployed settings, would you like to deploy them?"
-msgstr "你有取消部署的设置，是否要部署它们？"
 
 #. Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationOutOfSyncCheck.pm
 msgid "The configuration is being updated, please be patient..."
@@ -13939,28 +13723,12 @@ msgid "Client Connection Charset"
 msgstr "客户端连接字符集"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "Setting character_set_client needs to be utf8."
-msgstr "character_set_client 需要设置为utf8。"
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
 msgid "Server Database Charset"
 msgstr "服务器端数据库字符集"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "This character set is not yet supported. Please convert your database to the character set 'utf8'."
-msgstr ""
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "The setting character_set_database needs to be 'utf8'."
-msgstr "character_set_database 需要设置为'utf8'。"
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
 msgid "Table Charset"
 msgstr "表字符集"
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "There were tables found which do not have 'utf8' as charset."
-msgstr "字符集没有设置成 'utf8'的表。"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
 msgid "InnoDB Log File Size"
@@ -14642,14 +14410,6 @@ msgstr "已启用"
 msgid "Disabled"
 msgstr "已禁用"
 
-#. Perl Module: Kernel/System/SysConfig/ValueType/Date.pm
-msgid "System was not able to calculate user Date in OTRSTimeZone!"
-msgstr "系统无法在OTRSTimeZone中计算用户的日期！"
-
-#. Perl Module: Kernel/System/SysConfig/ValueType/DateTime.pm
-msgid "System was not able to calculate user DateTime in OTRSTimeZone!"
-msgstr "系统无法在OTRSTimeZone中计算用户的日期时间！"
-
 #. Perl Module: Kernel/System/SysConfig/ValueType/FrontendNavigation.pm
 msgid "Value is not correct! Please, consider updating this module."
 msgstr "值不正确！ 请考虑更新这个模块。"
@@ -14693,14 +14453,6 @@ msgstr "功能尚未激活!"
 #. Perl Module: Kernel/System/Web/InterfaceAgent.pm
 msgid "Sent password reset instructions. Please check your email."
 msgstr "密码重置说明已发送，请检查邮件。"
-
-#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
-msgid "Invalid Token!"
-msgstr "令牌无效！"
-
-#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
-msgid "Sent new password to %s. Please check your email."
-msgstr "新密码已发送到%s，请检查邮件。"
 
 #. Perl Module: Kernel/System/Web/InterfaceAgent.pm
 msgid "Error: invalid session."
@@ -15075,10 +14827,6 @@ msgid "Defines the system identifier. Every ticket number and http session strin
 msgstr "定义本系统的标识符。每个工单编号和HTTP会话字符串均包含这个ID。这确保只有属于本系统的工单才会被跟进处理（在两套Znuny实例间通信时有用）。"
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system."
-msgstr "定义本系统的正式域名。这个设置用于变量OTRS_CONFIG_FQDN，在所有的消息表单中使用，以创建系统内部到工单的链接。"
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID)."
 msgstr ""
 
@@ -15091,16 +14839,8 @@ msgid "Defines the timeout (in seconds, minimum is 20 seconds) for the support d
 msgstr "使用公共模块“PublicSupportDataCollector”（例如用于Znuny守护进程的模块）来定义支持数据收集的超时（以秒为单位，最小为20秒）。"
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server's settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, OTRS_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system."
-msgstr "定义本系统的WEB服务器使用的协议类型。如果要用HTTPS协议代替明文的HTTP协议，就在这里指定。 因为这个设置并不影响WEB服务器的设置或行为，所以不会改变访问本系统的方式。 如果设置错误，也不会阻止您登录系统。这个设置只是作为一个变量OTRS_CONFIG_HttpType使用，可以在系统使用的所有消息的表单中找到，用来创建在系统内到工单的链接。"
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Whether to force redirect all requests from http to https protocol. Please check that your web server is configured correctly for https protocol before enable this option."
 msgstr "是否强制将所有请求从http重定向到https协议。启用此选项之前，请检查Web服务器是否正确配置了https协议。"
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Sets the prefix to the scripts folder on the server, as configured on the web server. This setting is used as a variable, OTRS_CONFIG_ScriptAlias which is found in all forms of messaging used by the application, to build links to the tickets within the system."
-msgstr "设置配置的web服务器上脚本目录的前缀，这个设置用于变量OTRS_CONFIG_ScriptAlias，此变量可在系统的所有消息表单中找到，用来在系统内创建到工单的链接。"
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the system administrator's email address. It will be displayed in the error screens of the application."
@@ -15175,10 +14915,6 @@ msgid "Defines the URL rich text editor path."
 msgstr "定义富文本编辑器的URL地址。"
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the default CSS used in rich text editors."
-msgstr "定义用于富文本编辑器的默认CSS。"
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.)."
 msgstr "定义是否使用增强模式（启用表格、替换、下标、上标、从WORD粘贴等功能）。"
 
@@ -15200,18 +14936,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the selectable fonts in the rich text editor."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the selectable format tags in the rich text editor."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines additional plugins for use in the rich text editor."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines extra content that is allowed for use in the rich text editor."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
@@ -15431,10 +15155,6 @@ msgid "Defines the module that shows all the currently logged in customers in th
 msgstr "定义服务人员界面显示当前登录的所有客户人员的模块。"
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the module to display a notification in the agent interface, if there are modified sysconfig settings that are not deployed yet."
-msgstr "如果修改过系统配置设置但还没有部署，定义在服务人员界面中显示一条通知的模块。"
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the module to display a notification in the agent interface, if there are invalid sysconfig settings deployed."
 msgstr "如果部署了无效的系统配置设置，定义在服务人员界面中显示一条通知的模块。"
 
@@ -15535,20 +15255,12 @@ msgid "Defines the period of time (in minutes) before customer is marked as \"aw
 msgstr "定义由于不活动而将客户标记为“离开”的时间（单位：分钟）（例如：在“已登录的用户”小部件或聊天中）。"
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "This setting is deprecated. Set OTRSTimeZone instead."
-msgstr "此设置已弃用。 替代方式是设置OTRSTimeZone。"
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created."
 msgstr "将Znuny内部使用的时区设置如在数据库中存储日期和时间。 警告：此设置一旦设置就不能更改，包含日期/时间的工单或其他数据已据此创建。"
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Sets the time zone that will be assigned to newly created users and will be used for users that haven't yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user's time zone."
 msgstr "设置将分配给新创建的用户的时区，并将用于尚未设置时区的用户。 这是默认使用的时区，用于转换Znuny时区与用户时区之间的日期和时间。"
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "If enabled, users that haven't selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC."
-msgstr "如果启用，那么尚未选择时区的用户将被通知选择时区。 注意：如果（1）用户尚未选择时区，并且（2）OTRSTimeZone和UserDefaultTimeZone相同，（3）未设置为UTC，则不会显示通知。"
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Maximum Number of a calendar shown in a dropdown."
@@ -15815,24 +15527,12 @@ msgid "Specifies the name that should be used by the application when sending no
 msgstr "指定系统发送通知的姓名，这个发件人姓名用于创建通知管理员完整的显示名称（如\"Znuny通知\"znuny@your.example.com）。"
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. \"Znuny Notifications\" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address."
-msgstr "指定系统发送通知的邮件地址。这个邮件地址用来创建通知管理员的完整显示名称（如\"Znuny通知\"znuny@your.example.com），您可以使用配置的变量OTRS_CONFIG_FQDN，或者选择另外的邮件地址。"
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the subject for notification mails sent to agents, with token about new requested password."
 msgstr "定义发送给服务人员关于请求的新密码的链接的通知邮件的主题。"
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the body text for notification mails sent to agents, with token about new requested password."
 msgstr "定义发送给服务人员关于请求的新密码的链接的通知邮件的正文。"
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the subject for notification mails sent to agents, about new password."
-msgstr "定义发送给服务人员关于新密码的通知邮件的主题。"
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the body text for notification mails sent to agents, about new password."
-msgstr "定义发送给服务人员关于新密码的通知邮件的正文。"
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that \"rw\" is always the last registered permission."
@@ -16001,14 +15701,6 @@ msgstr "定义发送给客户关于请求的新密码的链接的通知邮件的
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the body text for notification mails sent to customers, with token about new requested password."
 msgstr "定义发送给客户关于请求的新密码的链接的通知邮件的正文。"
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the subject for notification mails sent to customers, about new password."
-msgstr "定义发送给客户关于新密码的通知邮件的主题。"
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the body text for notification mails sent to customers, about new password."
-msgstr "定义发送给客户关于新密码的通知邮件的正文。"
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the subject for notification mails sent to customers, about new account."
@@ -16703,8 +16395,8 @@ msgid "Defines the priority in which the information is logged and presented."
 msgstr "定义信息被记录和呈现的优先级。"
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
-msgid "Filter for debugging Transitions. Note: More filters can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;."
-msgstr ""
+msgid "Filter for debugging Transitions. Note: More filters can be added in the format &lt;ZNUNY_TICKET_Attribute&gt; e.g. &lt;ZNUNY_TICKET_Priority&gt;."
+msgstr "用于调试转换的过滤器。注意：可以按格式 <ZNUNY_TICKET_Attribute> 添加更多过滤器，例如 <ZNUNY_TICKET_Priority>。"
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
 msgid "Parameters for the dashboard backend of the running process tickets overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin. \"Mandatory\" determines if the plugin is always shown and can not be removed by agents."
@@ -19135,8 +18827,8 @@ msgid "If enabled debugging information for ACLs is logged."
 msgstr "如果启用了此选项，将记录ACL的调试信息。"
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;."
-msgstr ""
+msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;ZNUNY_TICKET_Attribute&gt; e.g. &lt;ZNUNY_TICKET_Priority&gt;."
+msgstr "用于调试 ACL 的过滤器。注意：可以按格式 <ZNUNY_TICKET_Attribute> 添加更多工单属性，例如 <ZNUNY_TICKET_Priority>。"
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Maximal auto email responses to own email-address a day (Loop-Protection)."
@@ -19261,10 +18953,6 @@ msgstr "检查传入的电子邮件是否退回的模块。"
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Module used to detect if attachments are present."
 msgstr "用于检测是否存在附件的模块。"
-
-#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Executes follow-up checks on Znuny Header 'X-OTRS-Bounce'."
-msgstr "对Znuny头'X-OTRS-Bounce'执行后续检查。"
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Checks if an E-Mail is a followup to an existing ticket by searching the subject for a valid ticket number."
@@ -19603,18 +19291,6 @@ msgid "Screens for which it is possible to enable or disable default columns."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Content of different fields can be given by separating those fields by ';'."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Different fields can be omitted by separating them by ';'."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Enables support for huge XML data in load_xml calls of CPAN library XML::LibXML. This should only be enabled if absolutely needed. Disabling this option (default) protects against denial of service through entity expansion attacks. Before enabling this option ensure that alternative measures to protect the application against this type of attack have been taken."
 msgstr ""
 
@@ -19940,10 +19616,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Maximum length of displayed attachment filenames in the article preview of ticket zoom view."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "General settings for autocompletion in rich text editor."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
@@ -21081,10 +20753,6 @@ msgstr "抱歉，你不能将标记为强制的通知的所有传输方法都禁
 #. JS File: var/httpd/htdocs/js/Core.Agent.Preferences.js
 msgid "Sorry, but you can't disable all methods for this notification."
 msgstr "抱歉，你不能将本通知的所有传输方法都禁用掉。"
-
-#. JS File: var/httpd/htdocs/js/Core.Agent.Preferences.js
-msgid "Please note that at least one of the settings you have changed requires a page reload. Click here to reload the current screen."
-msgstr "请注意，你更改的设置至少有一个需要重新加载页面。 点击这里重新加载当前屏幕。"
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Preferences.js
 msgid "An unknown error occurred. Please contact the administrator."
@@ -22416,12 +22084,12 @@ msgid "External Link"
 msgstr "外部链接"
 
 #. SysConfig
-msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format <OTRS_TICKET_Attribute> e.g. <OTRS_TICKET_Priority>."
-msgstr "调试ACL的过滤器。注意：可以按以下格式添加更多的工单属性 <OTRS_TICKET_属性>，例如：<OTRS_TICKET_Priority>。"
+msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format <ZNUNY_TICKET_Attribute> e.g. <ZNUNY_TICKET_Priority>."
+msgstr "调试ACL的过滤器。注意：可以按以下格式添加更多的工单属性 <ZNUNY_TICKET_属性>，例如：<ZNUNY_TICKET_Priority>。"
 
 #. SysConfig
-msgid "Filter for debugging Transitions. Note: More filters can be added in the format <OTRS_TICKET_Attribute> e.g. <OTRS_TICKET_Priority>."
-msgstr "调试转换的过滤器。注意：可以按以下格式添加更多的过滤器 <OTRS_TICKET_属性>，例如：<OTRS_TICKET_Priority>。"
+msgid "Filter for debugging Transitions. Note: More filters can be added in the format <ZNUNY_TICKET_Attribute> e.g. <ZNUNY_TICKET_Priority>."
+msgstr "调试转换的过滤器。注意：可以按以下格式添加更多的过滤器 <ZNUNY_TICKET_属性>，例如：<ZNUNY_TICKET_Priority>。"
 
 #. SysConfig
 msgid "Filter incoming emails."
@@ -22916,10 +22584,6 @@ msgid "Merged Ticket (%s/%s) to (%s/%s)."
 msgstr "已将工单(%s/%s)合并到(%s/%s)。"
 
 #. SysConfig
-msgid "Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>."
-msgstr "合并工单<OTRS_TICKET>到 <OTRS_MERGE_TO_TICKET>。"
-
-#. SysConfig
 msgid "Minute"
 msgstr "分钟"
 
@@ -23018,10 +22682,6 @@ msgstr ""
 #. SysConfig
 msgid "OAuth2 token"
 msgstr ""
-
-#. SysConfig
-msgid "OTRS"
-msgstr "OTRS"
 
 #. SysConfig
 msgid "Open an external link!"
@@ -23952,14 +23612,6 @@ msgid "Yes, but hide archived tickets"
 msgstr "是，但隐藏已归档的工单"
 
 #. SysConfig
-msgid "Your email with ticket number \"<OTRS_TICKET>\" is bounced to \"<OTRS_BOUNCE_TO>\". Contact this address for further information."
-msgstr "您的工单号为“<OTRS_TICKET>”的邮件已经退回给“<OTRS_BOUNCE_TO>”，请联系这个地址以获得更多的信息。"
-
-#. SysConfig
-msgid "Your email with ticket number \"<OTRS_TICKET>\" is merged to \"<OTRS_MERGE_TO_TICKET>\"."
-msgstr "您的单号为\"<OTRS_TICKET>\"的邮件已被合并到工单\"<OTRS_MERGE_TO_TICKET>\" 。"
-
-#. SysConfig
 msgid "Your queue selection of your preferred queues. You also get notified about those queues via email if enabled."
 msgstr "你的优先队列中选择的队列，如果启用了，你还会得到有关这些队列的电子邮件通知。"
 
@@ -24093,14 +23745,6 @@ msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "The Apple touch icon for the agent interface for the skin \"default\"."
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
-msgid "Mark tickets as seen"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
-msgid "Mark tickets as unseen"
 msgstr ""
 
 #. Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
@@ -24247,10 +23891,6 @@ msgstr ""
 msgid "Save changes"
 msgstr ""
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
-msgid "cancel"
-msgstr ""
-
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
 msgid "There were non-system tables found which do not have 'utf8mb4' as charset."
 msgstr ""
@@ -24353,14 +23993,6 @@ msgstr ""
 
 #. Perl Module: Kernel/Output/HTML/Notification/TranslationCheck.pm
 msgid "The translations in the database are not synchronous. Please synchronize all translations."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "Frontend module registration for the agent admin interface."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "This configuration defines the cache settings for the Znuny-DatabasBackend (default: 1 day)."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
@@ -24755,14 +24387,6 @@ msgstr ""
 msgid "Defines which ContentTypes are permitted for the attachment preview."
 msgstr ""
 
-#. JS File: var/httpd/htdocs/js/Core.UI.js
-msgid "An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator."
-msgstr ""
-
-#. SysConfig
-msgid "AsPopup"
-msgstr ""
-
 #. SysConfig
 msgid "Create new process ticket via category."
 msgstr ""
@@ -24776,10 +24400,6 @@ msgid "LinkTarget"
 msgstr ""
 
 #. SysConfig
-msgid "Process Ticket Catalog"
-msgstr ""
-
-#. SysConfig
 msgid "Process Ticket Category: Define a process category."
 msgstr ""
 
@@ -24789,10 +24409,6 @@ msgstr ""
 
 #. SysConfig
 msgid "Process Ticket Category: Define a process link target."
-msgstr ""
-
-#. SysConfig
-msgid "Process Ticket Catalog."
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
@@ -24981,10 +24597,6 @@ msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid "Customer suggestions"
-msgstr ""
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
-msgid "Undo & Close"
 msgstr ""
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
@@ -25213,14 +24825,6 @@ msgstr ""
 
 #. SysConfig
 msgid "Ticket information"
-msgstr ""
-
-#. Perl Module: Kernel/Modules/AgentSession.pm
-msgid "Invalid subaction!"
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "List of session keys that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession."
 msgstr ""
 
 #. SysConfig
@@ -25552,10 +25156,6 @@ msgid "Shows a link to preview article attachments in the zoom view of the artic
 msgstr ""
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Output filter to show attachment selection in certain agent ticket dialogs."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Shows a link in the menu to select and download all attachments of the ticket."
 msgstr ""
 
@@ -25662,10 +25262,6 @@ msgstr "所选证书/密钥不可用。请重新选择或上传。"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
 msgid "- Select an existing certificate/key -"
 msgstr "- 选择现有证书/密钥 -"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
-msgid "Paste"
-msgstr "粘贴"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
 msgid "Use certificate from metadata"
@@ -25903,10 +25499,6 @@ msgstr "同步"
 msgid "Slot %s"
 msgstr "槽位 %s"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
-msgid "Only invalid configurations can be deleted. Set this configuration to invalid first."
-msgstr "只能删除无效的配置。请先将此配置设置为无效。"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
 msgid "Enable sync"
 msgstr "启用同步"
@@ -26042,10 +25634,6 @@ msgstr "确认"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
 msgid "Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective."
 msgstr "点击“保存”以创建此SAML配置。该配置尚不会生效 - 之后请在概览页面使用“部署配置”使其生效。"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
-msgid "If you skipped the Identity Provider CA certificate here and provided metadata instead, it will be derived from that metadata automatically during Deploy."
-msgstr "如果您在此处跳过了身份提供者CA证书而提供了元数据，则在部署时将自动从该元数据中获取。"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
 msgid "You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only)."
@@ -26336,10 +25924,6 @@ msgid "SP signing certificate"
 msgstr "SP签名证书"
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
-msgid "Not set (will be derived automatically from metadata during Deploy, if possible)"
-msgstr "未设置 (如果可能，将在部署时从元数据中自动获取)"
-
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
 msgid "User sync"
 msgstr "用户同步"
 
@@ -26562,4 +26146,44 @@ msgstr "XSLT 映射可通过 xsl:import、xsl:include 或 document() 加载的 H
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "The controller that the invoker should send requests to. Variables marked by a ':' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
 msgstr "调用程序应向其发送请求的控制器。以':'标记的变量会在映射后（若已配置）从传出数据中替换。嵌套字段使用点（例如 /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password）。"
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the fully qualified domain name of the system. This setting is used as a variable, ZNUNY_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system."
+msgstr "定义本系统的正式域名。这个设置用于变量ZNUNY_CONFIG_FQDN，在所有的消息表单中使用，以创建系统内部到工单的链接。"
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server's settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, ZNUNY_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system."
+msgstr "定义本系统的WEB服务器使用的协议类型。如果要用HTTPS协议代替明文的HTTP协议，就在这里指定。 因为这个设置并不影响WEB服务器的设置或行为，所以不会改变访问本系统的方式。 如果设置错误，也不会阻止您登录系统。这个设置只是作为一个变量ZNUNY_CONFIG_HttpType使用，可以在系统使用的所有消息的表单中找到，用来创建在系统内到工单的链接。"
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Sets the prefix to the scripts folder on the server, as configured on the web server. This setting is used as a variable, ZNUNY_CONFIG_ScriptAlias which is found in all forms of messaging used by the application, to build links to the tickets within the system."
+msgstr "设置配置的web服务器上脚本目录的前缀，这个设置用于变量ZNUNY_CONFIG_ScriptAlias，此变量可在系统的所有消息表单中找到，用来在系统内创建到工单的链接。"
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. \"Znuny Notifications\" znuny@your.example.com). You can use the ZNUNY_CONFIG_FQDN variable as set in your configuation, or choose another email address."
+msgstr "指定系统发送通知的邮件地址。这个邮件地址用来创建通知管理员的完整显示名称（如\"Znuny通知\"znuny@your.example.com），您可以使用配置的变量ZNUNY_CONFIG_FQDN，或者选择另外的邮件地址。"
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Executes follow-up checks on Znuny Header 'X-Znuny-Bounce'."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of parallel instances when using ZNUNY_AsynchronousInvokerExecution in invoker Ticket::Generic."
+msgstr "在调用程序 Ticket::Generic 中使用 ZNUNY_AsynchronousInvokerExecution 时的最大并行实例数。"
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of process transitions evaluated for one ticket in a single request, so a transition action that changes ticket data can advance the following activity immediately. Set this to 1 to evaluate only one transition per request. Values must be from 1 to 99. A cyclic process runs until this limit on every ticket update. Reaching the limit writes a notice to the system log. Set the minimum log level to notice, info or debug to keep that notice."
+msgstr ""
+
+#. SysConfig
+msgid "Merged Ticket <ZNUNY_TICKET> to <ZNUNY_MERGE_TO_TICKET>."
+msgstr "合并工单<ZNUNY_TICKET>到 <ZNUNY_MERGE_TO_TICKET>。"
+
+#. SysConfig
+msgid "Your email with ticket number \"<ZNUNY_TICKET>\" is bounced to \"<ZNUNY_BOUNCE_TO>\". Contact this address for further information."
+msgstr "您的工单号为“<ZNUNY_TICKET>”的邮件已经退回给“<ZNUNY_BOUNCE_TO>”，请联系这个地址以获得更多的信息。"
+
+#. SysConfig
+msgid "Your email with ticket number \"<ZNUNY_TICKET>\" is merged to \"<ZNUNY_MERGE_TO_TICKET>\"."
+msgstr "您的单号为\"<ZNUNY_TICKET>\"的邮件已被合并到工单\"<ZNUNY_MERGE_TO_TICKET>\" 。"
 

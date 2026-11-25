@@ -21,21 +21,21 @@
                 [% SmartTagTemplate = "SmartTags/" _ Env("Action") _ ".tt" %]
                 [% INCLUDE $SmartTagTemplate %]
 
-                <dt><code class="bold">&lt;OTRS_RESPONSIBLE_*&gt;</code></dt>
+                <dt><code class="bold">&lt;ZNUNY_RESPONSIBLE_*&gt;</code></dt>
                 <dd class="flex-row">
                     [% Translate("Ticket responsible options") | html %] [% Translate("e. g.") | html %]
-                    <code>&lt;OTRS_RESPONSIBLE_UserFirstname&gt;</code>
+                    <code>&lt;ZNUNY_RESPONSIBLE_UserFirstname&gt;</code>
                 </dd>
 
-                <dt><code class="bold">&lt;OTRS_CURRENT_*&gt;</code></dt>
+                <dt><code class="bold">&lt;ZNUNY_CURRENT_*&gt;</code></dt>
                 <dd class="flex-row">
                     [% Translate("Options of the current user who requested this action") | html %] [% Translate("e. g.") | html %]
-                    <code>&lt;OTRS_CURRENT_UserFirstname&gt;</code>
+                    <code>&lt;ZNUNY_CURRENT_UserFirstname&gt;</code>
                 </dd>
 
-                <dt><code class="bold">&lt;OTRS_CONFIG_*&gt;</code></dt>
+                <dt><code class="bold">&lt;ZNUNY_CONFIG_*&gt;</code></dt>
                 <dd class="flex-row">
-                    [% Translate("Config options") | html %] [% Translate("e. g.") | html %] <code>&lt;OTRS_CONFIG_HttpType&gt;</code>
+                    [% Translate("Config options") | html %] [% Translate("e. g.") | html %] <code>&lt;ZNUNY_CONFIG_HttpType&gt;</code>
                 </dd>
             </dl>
             <div class="WidgetSimple SpacingTop Collapsed">
@@ -48,17 +48,17 @@
                 <div class="Content">
                     <div class="code-container">
                         <p><textarea rows="10" cols="80" name="TemplateExample">
-Dear &lt;OTRS_CUSTOMER_DATA_UserFirstname&gt; &lt;OTRS_CUSTOMER_DATA_UserLastname&gt;,
+Dear &lt;ZNUNY_CUSTOMER_DATA_UserFirstname&gt; &lt;ZNUNY_CUSTOMER_DATA_UserLastname&gt;,
 
-your ticket "&lt;OTRS_TICKET_Title&gt;" was created on &lt;OTRS_TICKET_Created&gt; in queue &lt;OTRS_TICKET_Queue&gt; and has the number &lt;OTRS_CONFIG_TicketHook&gt;&lt;OTRS_TICKET_TicketNumber&gt;.
+your ticket "&lt;ZNUNY_TICKET_Title&gt;" was created on &lt;ZNUNY_TICKET_Created&gt; in queue &lt;ZNUNY_TICKET_Queue&gt; and has the number &lt;ZNUNY_CONFIG_TicketHook&gt;&lt;ZNUNY_TICKET_TicketNumber&gt;.
 
-If you have questions, ask for your assigned Agent &lt;OTRS_OWNER_UserFirstname&gt; &lt;OTRS_OWNER_UserLastname&gt; ...
+If you have questions, ask for your assigned Agent &lt;ZNUNY_OWNER_UserFirstname&gt; &lt;ZNUNY_OWNER_UserLastname&gt; ...
                         </textarea></p>
                         <p><textarea rows="10" cols="80" name="TemplateExample">
-Dear &lt;OTRS_NOTIFICATION_RECIPIENT_UserFirstname&gt;,
+Dear &lt;ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname&gt;,
 
-appointment &quot;&lt;OTRS_APPOINTMENT_TITLE&gt;&quot; has reached the notification time.
-See more details online: &lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;OTRS_APPOINTMENT_APPOINTMENTID&gt; ...
+appointment &quot;&lt;ZNUNY_APPOINTMENT_TITLE&gt;&quot; has reached the notification time.
+See more details online: &lt;ZNUNY_CONFIG_HttpType&gt;://&lt;ZNUNY_CONFIG_FQDN&gt;/&lt;ZNUNY_CONFIG_ScriptAlias&gt;index.pl?Action=AgentAppointmentCalendarOverview;AppointmentID=&lt;ZNUNY_APPOINTMENT_APPOINTMENTID&gt; ...
                         </textarea></p>
                     </div>
                 </div>

@@ -201,7 +201,7 @@ sub Run {
     $Param{UserID} = $Self->_OverrideUserID(%Param);
 
     # Convert DynamicField value to HTML string, see bug#14229.
-    if ( $Param{Config}->{Body} =~ /(?:OTRS|ZNUNY)_TICKET_DynamicField_/i ) {
+    if ( $Param{Config}->{Body} =~ /(?:OTRS|ZNUNY)_TICKET_DynamicField_/ ) {
         MATCH:
         for my $Match ( sort keys %{ $Param{Ticket} } ) {
             if ( $Match =~ m/DynamicField_(.*)/ && $Param{Ticket}->{$Match} ) {

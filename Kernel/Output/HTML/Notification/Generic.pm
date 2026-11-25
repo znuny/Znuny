@@ -44,8 +44,7 @@ sub Run {
     }
     elsif ( $Param{Config}->{File} ) {
 
-        my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
-        $Param{Config}->{File} =~ s{<(?:OTRS|ZNUNY)_CONFIG_(.+?)>}{$ConfigObject->Get($1)}egix;
+        $Param{Config}->{File} =~ s{<(?:OTRS|ZNUNY)_CONFIG_(.+?)>}{$Kernel::OM->Get('Kernel::Config')->Get($1)}egx;
 
         return '' if !-e $Param{Config}->{File};
 

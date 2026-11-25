@@ -365,9 +365,9 @@ sub Run {
                     );
                 }
                 my %Ticket = $TicketObject->TicketGet( TicketID => $Self->{TicketID} );
-                $GetParam{Body} =~ s/(&lt;|<)(?i:(?:OTRS|ZNUNY)_TICKET)(&gt;|>)/$Ticket{TicketNumber}/g;
+                $GetParam{Body} =~ s/(&lt;|<)(?:OTRS|ZNUNY)_TICKET(&gt;|>)/$Ticket{TicketNumber}/g;
                 $GetParam{Body}
-                    =~ s/(&lt;|<)(?i:(?:OTRS|ZNUNY)_MERGE_TO_TICKET)(&gt;|>)/$GetParam{'MainTicketNumber'}/g;
+                    =~ s/(&lt;|<)(?:OTRS|ZNUNY)_MERGE_TO_TICKET(&gt;|>)/$GetParam{'MainTicketNumber'}/g;
 
                 my $EmailArticleBackendObject = $Kernel::OM->Get('Kernel::System::Ticket::Article')->BackendForChannel(
                     ChannelName => 'Email',

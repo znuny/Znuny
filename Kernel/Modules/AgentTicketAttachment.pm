@@ -122,7 +122,7 @@ sub Run {
         for my $Key ( sort keys %{ $ConfigObject->Get('MIME-Viewer') } ) {
             if ( $Data{ContentType} =~ /^$Key/i ) {
                 $Viewer = $ConfigObject->Get('MIME-Viewer')->{$Key};
-                $Viewer =~ s/\<(?:OTRS|ZNUNY)_CONFIG_(.+?)\>/$ConfigObject->{$1}/gi;
+                $Viewer =~ s/\<(?:OTRS|ZNUNY)_CONFIG_(.+?)\>/$ConfigObject->{$1}/g;
             }
         }
     }

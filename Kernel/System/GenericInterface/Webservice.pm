@@ -593,9 +593,9 @@ sub WebserviceList {
 
 =head2 WebserviceConfigReplace()
 
-Replaces OTRS_CONFIG_* and ZNUNY_CONFIG_* tags in arrays, hashes and strings recursively.
+Replaces E<lt>ZNUNY_CONFIG_*E<gt> / E<lt>OTRS_CONFIG_*E<gt> tags in arrays, hashes and strings recursively.
 
-    my $Data   = '<OTRS_CONFIG_Home>';
+    my $Data   = '<ZNUNY_CONFIG_Home>';
     my $Result = $WebserviceObject->WebserviceConfigReplace($Data);
 
 Returns:

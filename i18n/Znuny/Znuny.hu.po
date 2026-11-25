@@ -421,10 +421,6 @@ msgid "Add Notification"
 msgstr "Értesítés hozzáadása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Export Notifications"
-msgstr "Értesítések exportálása"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
 msgid "Filter for Notifications"
 msgstr "Szűrő az értesítésekhez"
 
@@ -433,20 +429,8 @@ msgid "Filter for notifications"
 msgstr "Szűrő az értesítésekhez"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Here you can upload a configuration file to import appointment notifications to your system. The file needs to be in .yml format as exported by the appointment notification module."
-msgstr "Itt tud egy beállítófájlt feltölteni az időpont-értesítések importálásához a rendszerre. A fájlnak .yml formátumban kell lennie, ahogy az időpont-értesítés modul exportálta."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
 msgid "Overwrite existing notifications?"
 msgstr "Felülírja a meglévő értesítéseket?"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Upload Notification configuration"
-msgstr "Értesítés beállítások feltöltése"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
-msgid "Import Notification configuration"
-msgstr "Értesítés beállítások importálása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAppointmentNotificationEvent.tt
 msgid "Appointment Notification Management"
@@ -3005,14 +2989,6 @@ msgid "MacOS Shortcuts"
 msgstr "MacOS gyorsbillentyűk"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingXSLT.tt
-msgid "Comment code"
-msgstr "Kód megjegyzésbe tétele"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingXSLT.tt
-msgid "Uncomment code"
-msgstr "Kód megjegyzés eltávolítása"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceMappingXSLT.tt
 msgid "Auto format code"
 msgstr "Kód automatikus formázása"
 
@@ -3377,12 +3353,12 @@ msgid "Payload for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1
 msgstr "Hasznos adatok a JWT-hez. Kulcs-érték párokat adjon meg (pontosvesszővel elválasztva), például: Kulcs1=Érték1;Kulcs2=Érték2;Kulcs3=Érték3"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "Available placeholders (prefixed with OTRS_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion."
-msgstr "Az elérhető helykitöltők (OTRS_JWT előtaggal): ExpirationDateTimestamp, ExpirationDateString. Ezenkívül, ha az X.509 tanúsítvány támogatása megvan: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion."
+msgid "Available placeholders (prefixed with ZNUNY_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion."
+msgstr "Az elérhető helykitöltők (ZNUNY_JWT előtaggal): ExpirationDateTimestamp, ExpirationDateString. Ezenkívül, ha az X.509 tanúsítvány támogatása megvan: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
-msgid "Placeholder usage example: Key1=<OTRS_JWT_ExpirationDateTimestamp>"
-msgstr "Helykitöltő használati példa: Kulcs1=<OTRS_JWT_ExpirationDateTimestamp>"
+msgid "Placeholder usage example: Key1=<ZNUNY_JWT_ExpirationDateTimestamp>"
+msgstr "Helykitöltő használati példa: Kulcs1=<ZNUNY_JWT_ExpirationDateTimestamp>"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "JWT authentication: Additional header data"
@@ -4045,10 +4021,6 @@ msgid "Example: mail.example.com"
 msgstr "Példa: mail.example.com"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
-msgid "IMAP Folder"
-msgstr "IMAP mappa"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminMailAccount.tt
 msgid "Only modify this if you need to fetch mail from a different folder than INBOX."
 msgstr "Ezt csak akkor módosítsa, ha az INBOX mappától eltérőből szükséges a levél lekérése."
 
@@ -4080,10 +4052,6 @@ msgstr "Hozzáadhat kedvenceket, ha a kurzort a jobb oldalon lévő elemek föl�
 msgid "Links"
 msgstr "Hivatkozások"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
-msgid "View the admin manual on Github"
-msgstr "Az adminisztrátori kézikönyv megtekintése a GitHubon"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminArticleColor.tt
 msgid "Filter for Items"
 msgstr "Szűrő az elemekhez"
@@ -4099,10 +4067,6 @@ msgstr "Sajnáljuk, a keresése nem illeszkedik egyetlen elemre sem."
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNavigationBar.tt
 msgid "Set as favorite"
 msgstr "Beállítás kedvencként"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
-msgid "Here you can upload a configuration file to import Ticket Notifications to your system. The file needs to be in .yml format as exported by the Ticket Notification module."
-msgstr "Itt tud egy beállítófájlt feltölteni a jegyértesítések importálásához a rendszerre. A fájlnak .yml formátumban kell lennie, ahogy a jegyértesítés modul exportálta."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEvent.tt
 msgid "Ticket Notification Management"
@@ -4169,8 +4133,8 @@ msgid "Use comma or semicolon to separate email addresses."
 msgstr "Használjon vesszőt vagy pontosvesszőt az e-mail-címek elválasztásához."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
-msgid "You can use Znuny-tags like <OTRS_TICKET_DynamicField_...> to insert values from the current ticket."
-msgstr "Használhatja a Znuny címkéket (mint például <OTRS_TICKET_DynamicField_...>) értékek beszúrásához a jelenlegi jegyből."
+msgid "You can use Znuny-tags like <ZNUNY_TICKET_DynamicField_...> to insert values from the current ticket."
+msgstr "Használhatja a Znuny címkéket (mint például <ZNUNY_TICKET_DynamicField_...>) értékek beszúrásához a jelenlegi jegyből."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportWebserviceSettings.tt
 msgid "Web service name"
@@ -4843,10 +4807,6 @@ msgstr "Itt tölthet fel egy beállítófájlt, hogy folyamatot importáljon a r
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Upload process configuration"
 msgstr "Folyamat-beállítás feltöltése"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
-msgid "Import process configuration"
-msgstr "Folyamat-beállítás importálása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminProcessManagement.tt
 msgid "Ready2Adopt Processes"
@@ -7237,10 +7197,6 @@ msgid "Go back to editing this agent"
 msgstr "Vissza az ügyintéző szerkesztéséhez"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
-msgid "Set up your personal preferences. Save each setting by clicking the checkmark on the right."
-msgstr "Állítsa be a személyes beállításait. Az egyes beállításokat a jobb oldalán lévő pipára kattintva mentheti el."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentPreferences.tt
 msgid "You can use the navigation tree below to only show settings from certain groups."
 msgstr "Használhatja a lenti navigációs fát a csak bizonyos csoportokban lévő beállítások megjelenítéséhez."
 
@@ -7359,10 +7315,6 @@ msgstr "Folyamat"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentSplitSelection.tt
 msgid "Split"
 msgstr "Felosztás"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
-msgid "Read more about statistics in Znuny"
-msgstr "Tudjon meg többet az Znuny-ben lévő statisztikákról"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentStatisticsAdd.tt
 msgid "Statistics Management"
@@ -7493,34 +7445,6 @@ msgid "This statistic contains configuration errors and can currently not be use
 msgstr "Ez a statisztika beállítási hibákat tartalmaz, és jelenleg nem használható."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Change Free Text of %s%s%s"
-msgstr "%s%s%s szabad szövegének módosítása"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Change Owner of %s%s%s"
-msgstr "%s%s%s tulajdonosának módosítása"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Close %s%s%s"
-msgstr "%s%s%s lezárása"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Add Note to %s%s%s"
-msgstr "Jegyzet hozzáadása ehhez: %s%s%s"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Set Pending Time for %s%s%s"
-msgstr "%s%s%s várakozási idejének beállítása"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Change Priority of %s%s%s"
-msgstr "%s%s%s prioritásának módosítása"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Change Responsible of %s%s%s"
-msgstr "%s%s%s felelősének módosítása"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "The ticket has been locked"
 msgstr "A jegy zárolva lett"
 
@@ -7531,10 +7455,6 @@ msgstr "Jegybeállítások"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Service invalid."
 msgstr "Érvénytelen szolgáltatás."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "SLA invalid."
-msgstr "Az SLA érvénytelen."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Team Data"
@@ -7555,10 +7475,6 @@ msgstr "Állítson be új tulajdonost!"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Owner invalid."
 msgstr "A tulajdonos érvénytelen."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "New Responsible"
-msgstr "Új felelős"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Please set a new responsible!"
@@ -7583,14 +7499,6 @@ msgstr "Az állapot érvénytelen."
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "For all pending* states."
 msgstr "Minden függőben* állapotnál."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Dynamic Info"
-msgstr "Dinamikus információ"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
-msgid "Add Article"
-msgstr "Bejegyzés hozzáadása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Inform"
@@ -7623,10 +7531,6 @@ msgstr "Egy bejegyzés létrehozása"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Setting a template will overwrite any text or attachment."
 msgstr "Egy sablon beállítása felül fog írni minden szöveget vagy mellékletet."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
-msgid "Bounce %s%s%s"
-msgstr "%s%s%s átirányítása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
 msgid "Bounce to"
@@ -7693,10 +7597,6 @@ msgid "Execute Bulk Action"
 msgstr "Tömeges művelet végrehajtása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
-msgid "Compose Answer for %s%s%s"
-msgstr "Válasz írása erre: %s%s%s"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid "Date Invalid!"
 msgstr "Érvénytelen dátum!"
 
@@ -7712,10 +7612,6 @@ msgstr "Ez a cím rendszercímként van regisztrálva és nem használható: %s"
 msgid "Please include at least one recipient"
 msgstr "Vegyen fel legalább egy címzettet"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Remove Ticket Customer"
-msgstr "Jegy ügyfél eltávolítása"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid "Please remove this entry and enter a new one with the correct value."
 msgstr "Távolítsa el ezt a bejegyzést, és adjon meg egy újat a helyes értékkel."
@@ -7724,17 +7620,9 @@ msgstr "Távolítsa el ezt a bejegyzést, és adjon meg egy újat a helyes ért�
 msgid "This address already exists on the address list."
 msgstr "Ez a cím már létezik a címlistában."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Remove Cc"
-msgstr "Másolat eltávolítása"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid "Bcc"
 msgstr "Rejtett másolat"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Remove Bcc"
-msgstr "Rejtett másolat eltávolítása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCustomer.tt
 msgid "Change Customer of %s%s%s"
@@ -7753,20 +7641,12 @@ msgid "Create New Email Ticket"
 msgstr "Új e-mail jegy létrehozása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
-msgid "Example Template"
-msgstr "Példa sablon"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid "To customer user"
 msgstr "Ügyfél-felhasználónak"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid "Please include at least one customer user for the ticket."
 msgstr "Vegyen fel legalább egy ügyfél-felhasználót a jegyhez."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
-msgid "Remove Ticket Customer User"
-msgstr "Jegy ügyfél-felhasználójának eltávolítása"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
 msgid "From queue"
@@ -7776,25 +7656,9 @@ msgstr "Várólistából"
 msgid "Get all"
 msgstr "Összes lekérése"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
-msgid "Outbound Email for %s%s%s"
-msgstr "Kimenő e-mail ehhez: %s%s%s"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Select one or more recipients from the customer user address book."
-msgstr "Egy vagy több címzett kiválasztása az ügyfél-felhasználó címjegyzékből."
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
 msgid "Resend Email for %s%s%s"
 msgstr "E-mail újraküldése ennél: %s%s%s"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "All fields marked with an asterisk (*) are mandatory."
-msgstr "A csillaggal (*) megjelölt összes mező kötelező."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailResend.tt
-msgid "Cancel & close"
-msgstr "Megszakítás és bezárás"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Undo & close"
@@ -7824,10 +7688,6 @@ msgstr "%s jegy: a megoldási idő lejárt (%s %s)!"
 msgid "Ticket %s: solution time will be over in %s %s!"
 msgstr "%s jegy: a megoldási idő le fog járni: %s %s!"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketForward.tt
-msgid "Forward %s%s%s"
-msgstr "%s%s%s továbbítása"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketHistory.tt
 msgid "History of %s%s%s"
 msgstr "%s%s%s előzményei"
@@ -7851,10 +7711,6 @@ msgstr "Létrehozás ideje"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon.tt
 msgid "Article"
 msgstr "Bejegyzés"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMerge.tt
-msgid "Merge %s%s%s"
-msgstr "%s%s%s egyesítése"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMerge.tt
 msgid "Merge Settings"
@@ -7885,10 +7741,6 @@ msgid "Need a valid email address."
 msgstr "Érvényes e-mail-cím szükséges."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
-msgid "Move %s%s%s"
-msgstr "%s%s%s áthelyezése"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
 msgid "New Queue"
 msgstr "Új várólista"
 
@@ -7899,10 +7751,6 @@ msgstr "Kommunikáció"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketMove.tt
 msgid "Move"
 msgstr "Áthelyezés"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
-msgid "Add note to linked %s%s%s"
-msgstr "Jegyzet hozzáadása ehhez: kapcsolt s%s%s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketNoteToLinkedTicket.tt
 msgid "Notes"
@@ -8004,17 +7852,9 @@ msgstr "Új telefonos jegy létrehozása"
 msgid "Please include at least one customer for the ticket."
 msgstr "Vegyen fel legalább egy ügyfelet a jegyhez."
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmail.tt
-msgid "Select this customer as the main customer."
-msgstr "Az ügyfél kijelölése fő ügyfélként."
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhone.tt
 msgid "To queue"
 msgstr "Várólistába"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPhoneCommon.tt
-msgid "Phone Call for %s%s%s"
-msgstr "Telefonhívás ehhez: %s%s%s"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketPlain.tt
 msgid "View Email Plain Text for %s%s%s"
@@ -8201,10 +8041,6 @@ msgid "Article Overview - %s Article(s)"
 msgstr "Bejegyzés áttekintő – %s bejegyzés"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
-msgid "Page %s"
-msgstr "%s. oldal"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom.tt
 msgid "Add Filter"
 msgstr "Szűrő hozzáadása"
 
@@ -8348,10 +8184,6 @@ msgstr "Várakozás eddig"
 msgid "Locked"
 msgstr "Zárolva"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketZoom/TicketInformation.tt
-msgid "%s Ticket(s)"
-msgstr "%s jegy"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketActionCommon/TicketInformation.tt
 msgid "Accounted time"
 msgstr "Elszámolt idő"
@@ -8424,10 +8256,6 @@ msgstr "Hiba"
 msgid "An Error Occurred"
 msgstr "Hiba történt"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerError.tt
-msgid "Traceback"
-msgstr "Visszakövetés"
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerFooter.tt
 msgid "Powered by %s"
 msgstr "A gépházban: %s"
@@ -8497,10 +8325,6 @@ msgid "Your password"
 msgstr "A jelszava"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
-msgid "Forgot password?"
-msgstr "Elfelejtette a jelszót?"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "2 Factor Token"
 msgstr "Kétlépcsős token"
 
@@ -8519,10 +8343,6 @@ msgstr "Új jelszó kérése"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Your User Name"
 msgstr "A felhasználóneve"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
-msgid "A new password will be sent to your email address."
-msgstr "Az új jelszó el lesz küldve az e-mail-címére."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/CustomerLogin.tt
 msgid "Back to login"
@@ -8691,10 +8511,6 @@ msgstr "Esemény információk"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/DashboardEventsTicketCalendar.tt
 msgid "Ticket fields"
 msgstr "Jegymezők"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/Error.tt
-msgid "Error Details"
-msgstr "Hiba részletei"
 
 #. JS File: var/httpd/htdocs/js/Core.UI.Nav.js
 msgid "Expand"
@@ -10051,22 +9867,6 @@ msgstr "%s (másolat)"
 #. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
 msgid "There was an error creating the Notification"
 msgstr "Hiba történt az értesítés létrehozásakor"
-
-#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
-msgid "Notifications could not be Imported due to a unknown error, please check Znuny logs for more information"
-msgstr "Az értesítéseket nem sikerült importálni egy ismeretlen hiba miatt, további információkért nézze meg az Znuny naplókat"
-
-#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
-msgid "The following Notifications have been added successfully: %s"
-msgstr "A következő értesítések sikeresen hozzá lettek adva: %s"
-
-#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
-msgid "The following Notifications have been updated successfully: %s"
-msgstr "A következő értesítések sikeresen frissítve lettek: %s"
-
-#. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
-msgid "There where errors adding/updating the following Notifications: %s. Please check the log file for more information."
-msgstr "Hibák történtek a következő értesítések hozzáadásakor vagy frissítésekor: %s. További információkért nézze meg a naplófájlt."
 
 #. Perl Module: Kernel/Modules/AdminAppointmentNotificationEvent.pm
 msgid "Notification updated!"
@@ -12488,14 +12288,6 @@ msgstr "Egy bejegyzés megjelenítése"
 msgid "Show all articles"
 msgstr "Összes bejegyzés megjelenítése"
 
-#. Perl Module: Kernel/Modules/AJAXAttachment.pm
-msgid "Got no FormID."
-msgstr "Nem érkezett űrlap-azonosító."
-
-#. Perl Module: Kernel/Modules/AJAXAttachment.pm
-msgid "Error: the file could not be deleted properly. Please contact your administrator (missing FileID)."
-msgstr "Hiba: a fájlt nem sikerült megfelelően törölni. Vegye fel a kapcsolatot a rendszergazdával (hiányzó fájlazonosító)."
-
 #. Perl Module: Kernel/Modules/CustomerTicketArticleContent.pm
 msgid "ArticleID is needed!"
 msgstr "Bejegyzésazonosító szükséges!"
@@ -12715,10 +12507,6 @@ msgstr "Hiba: állítsa be az adatbázison az innodb_log_file_size értékét le
 #. Perl Module: Kernel/Modules/Installer.pm
 msgid "Wrong default storage engine (%s is %s, but it needs to be InnoDB)."
 msgstr "Hibás alapértelmezett tárolómotor (a %s %s, de InnoDB kell legyen)."
-
-#. Perl Module: Kernel/Modules/Installer.pm
-msgid "Wrong database collation (%s is %s, but it needs to be utf8)."
-msgstr "Hibás adatbázis egyeztetés (a %s értéke %s, de utf8 értékűnek kell lennie)."
 
 #. Perl Module: Kernel/Modules/Mentions.pm
 msgid "%s users will be mentioned"
@@ -13179,10 +12967,6 @@ msgstr "Engedélyezte az Irodán kívül funkciót, szeretné letiltani azt?"
 #. Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationInvalidCheck.pm
 msgid "You have %s invalid setting(s) deployed. Click here to show invalid settings."
 msgstr "%s érvénytelen beállítása van üzembe állítva. Kattintson ide az érvénytelen beállítások megtekintéséhez."
-
-#. JS File: var/httpd/htdocs/js/Core.SystemConfiguration.js
-msgid "You have undeployed settings, would you like to deploy them?"
-msgstr "Olyan beállításai vannak, melyek nincsenek üzembe állítva. Szeretné üzembe állítani azokat?"
 
 #. Perl Module: Kernel/Output/HTML/Notification/SystemConfigurationOutOfSyncCheck.pm
 msgid "The configuration is being updated, please be patient..."
@@ -13941,28 +13725,12 @@ msgid "Client Connection Charset"
 msgstr "Kliens kapcsolat karakterkészlete"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "Setting character_set_client needs to be utf8."
-msgstr "A character_set_client beállításnak utf8 értékűnek kell lennie."
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
 msgid "Server Database Charset"
 msgstr "Kiszolgáló adatbázis karakterkészlete"
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "This character set is not yet supported. Please convert your database to the character set 'utf8'."
-msgstr "Ez a karakterkészlet még nem támogatott. Alakítsa át az adatbázisát „utf8” karakterkészletűre."
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "The setting character_set_database needs to be 'utf8'."
-msgstr "A character_set_database beállításnak „utf8” értékűnek kell lennie."
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
 msgid "Table Charset"
 msgstr "Tábla karakterkészlete"
-
-#. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
-msgid "There were tables found which do not have 'utf8' as charset."
-msgstr "Olyan táblák találhatók, amelyek nem „utf8” karakterkészletűek."
 
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/InnoDBLogFileSize.pm
 msgid "InnoDB Log File Size"
@@ -14644,14 +14412,6 @@ msgstr "Engedélyezve"
 msgid "Disabled"
 msgstr "Letiltva"
 
-#. Perl Module: Kernel/System/SysConfig/ValueType/Date.pm
-msgid "System was not able to calculate user Date in OTRSTimeZone!"
-msgstr "A rendszer nem volt képes kiszámítani a felhasználó dátumát az OTRS időzónájában!"
-
-#. Perl Module: Kernel/System/SysConfig/ValueType/DateTime.pm
-msgid "System was not able to calculate user DateTime in OTRSTimeZone!"
-msgstr "A rendszer nem volt képes kiszámítani a felhasználó dátumát és idejét az OTRS időzónájában!"
-
 #. Perl Module: Kernel/System/SysConfig/ValueType/FrontendNavigation.pm
 msgid "Value is not correct! Please, consider updating this module."
 msgstr "Az érték nem helyes! Érdemes lenne frissíteni ezt a modult."
@@ -14695,14 +14455,6 @@ msgstr "A funkció nem aktív!"
 #. Perl Module: Kernel/System/Web/InterfaceAgent.pm
 msgid "Sent password reset instructions. Please check your email."
 msgstr "A jelszó visszaállítási utasítások elküldve. Nézze meg a leveleit."
-
-#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
-msgid "Invalid Token!"
-msgstr "Érvénytelen token!"
-
-#. Perl Module: Kernel/System/Web/InterfaceAgent.pm
-msgid "Sent new password to %s. Please check your email."
-msgstr "Az új jelszó elküldve erre a címre: %s. Nézze meg a leveleit."
 
 #. Perl Module: Kernel/System/Web/InterfaceAgent.pm
 msgid "Error: invalid session."
@@ -15077,10 +14829,6 @@ msgid "Defines the system identifier. Every ticket number and http session strin
 msgstr "Meghatározza a rendszer azonosítóját. Minden jegyszám és HTTP munkamenet szöveg tartalmazza ezt az azonosítót. Ez biztosítja, hogy csak azok a jegyek legyenek feldolgozva követőként, amelyek a rendszerhez tartoznak (hasznos a Znuny két példánya közötti kommunikációkor)."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system."
-msgstr "Meghatározza a rendszer teljes képzésű tartománynevét. Ezt a beállítást az OTRS_CONFIG_FQDN változójaként használják, amely az alkalmazás által használt üzenetküldés összes űrlapján megtalálható a jegyekre mutató hivatkozások készítéséhez a rendszeren belül."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID)."
 msgstr "Meghatározza a teljes képzésű tartománynevet a külső azonosítók előállításához (azaz üzenetazonosító, tartalomazonosító)."
 
@@ -15093,16 +14841,8 @@ msgid "Defines the timeout (in seconds, minimum is 20 seconds) for the support d
 msgstr "Meghatározza az időkorlátot (másodpercben, a minimum 20 másodperc) a támogatási adatok gyűjtéséhez a nyilvános „PublicSupportDataCollector” modullal (például a Znuny démonból használva)."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server's settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, OTRS_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system."
-msgstr "Meghatározza a webkiszolgáló által használt protokoll típusát az alkalmazás kiszolgálásához. Ha https protokollt fognak használni az egyszerű http helyett, akkor azt itt kell megadni. Mivel ez nem befolyásolja a webkiszolgáló beállításait vagy viselkedését, ezért nem fogja megváltoztatni az alkalmazáshoz való hozzáférés módját, és ha rossz, nem fogja megakadályozni az alkalmazásba való belépést. Ezt a beállítást csak az OTRS_CONFIG_HttpType változójaként használják, amely az alkalmazás által használt üzenetküldés összes űrlapján megtalálható a jegyekre mutató hivatkozások készítéséhez a rendszeren belül."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Whether to force redirect all requests from http to https protocol. Please check that your web server is configured correctly for https protocol before enable this option."
 msgstr "Kényszerítse-e az összes kérés átirányítását HTTP-ről HTTPS protokollra. Ellenőrizze, hogy a webkiszolgálója helyesen van-e beállítva a HTTPS protokollhoz, mielőtt ezt a lehetőséget engedélyezné."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Sets the prefix to the scripts folder on the server, as configured on the web server. This setting is used as a variable, OTRS_CONFIG_ScriptAlias which is found in all forms of messaging used by the application, to build links to the tickets within the system."
-msgstr "Beállítja a kiszolgálón lévő parancsfájlok mappájának előtagját, ahogy a webkiszolgálón be van állítva. Ezt a beállítást az OTRS_CONFIG_ScriptAlias változójaként használják, amely az alkalmazás által használt üzenetküldés összes űrlapján megtalálható a jegyekre mutató hivatkozások készítéséhez a rendszeren belül."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the system administrator's email address. It will be displayed in the error screens of the application."
@@ -15177,10 +14917,6 @@ msgid "Defines the URL rich text editor path."
 msgstr "Meghatározza az URL Rich Text szerkesztő útvonalát."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the default CSS used in rich text editors."
-msgstr "Meghatározza a RichText szerkesztőkben használt alapértelmezett CSS-t."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines if the enhanced mode should be used (enables use of table, replace, subscript, superscript, paste from word, etc.)."
 msgstr "Meghatározza, hogy a bővített módot kell használni (táblázat, csere, alsó index, felső index, beillesztés Wordből, stb. használatát engedélyezi)."
 
@@ -15203,18 +14939,6 @@ msgstr "Meghatározza a Rich Text szerkesztőben kiválasztható betűméreteket
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the selectable fonts in the rich text editor."
 msgstr "Meghatározza a Rich Text szerkesztőben kiválasztható betűkészleteket."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the selectable format tags in the rich text editor."
-msgstr "Meghatározza a Rich Text szerkesztőben kiválasztható formátumcímkéket."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines additional plugins for use in the rich text editor."
-msgstr "Meghatározza a további bővítményeket a Rich Text szerkesztőben való használathoz."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines extra content that is allowed for use in the rich text editor."
-msgstr "Meghatározza azt a további tartalmat, amely használata megengedett a Rich Text szerkesztőben."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Global settings for all popup profiles."
@@ -15433,10 +15157,6 @@ msgid "Defines the module that shows all the currently logged in customers in th
 msgstr "Meghatározza azt a modult, amely megjeleníti az összes aktuálisan bejelentkezett ügyfelet az ügyintézői felületen."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the module to display a notification in the agent interface, if there are modified sysconfig settings that are not deployed yet."
-msgstr "Meghatározza azt a modult, amely egy értesítést jelenít meg az ügyintézői felületen, ha olyan módosított rendszerbeállítások vannak, amelyek még nincsenek üzembe állítva."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the module to display a notification in the agent interface, if there are invalid sysconfig settings deployed."
 msgstr "Meghatározza azt a modult, amely egy értesítést jelenít meg az ügyintézői felületen, ha érvénytelen rendszerbeállítások vannak üzembe állítva."
 
@@ -15537,20 +15257,12 @@ msgid "Defines the period of time (in minutes) before customer is marked as \"aw
 msgstr "Meghatározza azt az időtartamot (percben), mielőtt az ügyfél „távol” lesz inaktivitás miatt (például a „Bejelentkezett felhasználók” felületi elemben vagy a csevegésnél)."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "This setting is deprecated. Set OTRSTimeZone instead."
-msgstr "Ez a beállítás elavult. Állítsa be az OTRSTimeZone beállítást helyette."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Sets the time zone being used internally by Znuny to e. g. store dates and times in the database. WARNING: This setting must not be changed once set and tickets or any other data containing date/time have been created."
 msgstr "Beállítja a Znuny által belsőleg használt időzónát, hogy például dátumokat és időket tároljon az adatbázisban. FIGYELEM: ezt a beállítást nem szabad megváltoztatni, miután beállították, és jegyek vagy bármilyen dátumot és időt tartalmazó egyéb adatok létrejöttek."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Sets the time zone that will be assigned to newly created users and will be used for users that haven't yet set a time zone. This is the time zone being used as default to convert date and time between the Znuny time zone and the user's time zone."
 msgstr "Beállítja az időzónát, amely hozzá lesz rendelve az újonnan létrehozott felhasználókhoz, valamint olyan felhasználóknál lesz használva, akiknek még nincs beállított időzónájuk. Ez az alapértelmezetten használt időzóna a Znuny időzónája és a felhasználó időzónája közötti dátum és idő átalakításához."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "If enabled, users that haven't selected a time zone yet will be notified to do so. Note: Notification will not be shown if (1) user has not yet selected a time zone and (2) OTRSTimeZone and UserDefaultTimeZone do match and (3) are not set to UTC."
-msgstr "Ha engedélyezve van, akkor azok a felhasználók, akik még nem választottak időzónát, értesítve lesznek, hogy válasszanak. Megjegyzés: az értesítés nem lesz megjelenítve, ha (1) a felhasználó még nem választott időzónát és (2) az OTRS időzónája, valamint a felhasználó alapértelmezett időzónája megegyezik és (3) nincsenek UTC-re állítva."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Maximum Number of a calendar shown in a dropdown."
@@ -15817,24 +15529,12 @@ msgid "Specifies the name that should be used by the application when sending no
 msgstr "Azt a nevet adja meg, amelyet az alkalmazás az értesítések elküldésekor használjon. A küldő neve a teljes megjelenítési név összeállításához lesz használva az értesítési mesternél (azaz \"Znuny értesítések\" <znuny@your.example.com>)."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. \"Znuny Notifications\" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address."
-msgstr "Azt az e-mail-címet adja meg, amelyet az alkalmazás az értesítések elküldésekor használjon. Az e-mail-cím a teljes megjelenítési név összeállításához lesz használva az értesítési mesternél (azaz \"Znuny értesítések\" <znuny@your.example.com>). Használhatja az OTRS_CONFIG_FQDN változót, ahogy a konfigurációban be van állítva, vagy válasszon egy másik e-mail-címet."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the subject for notification mails sent to agents, with token about new requested password."
 msgstr "Meghatározza a kért új jelszóval kapcsolatosan a tokennel rendelkező ügyintézőknek küldött értesítési levelek tárgyát."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the body text for notification mails sent to agents, with token about new requested password."
 msgstr "Meghatározza a kért új jelszóval kapcsolatosan a tokennel rendelkező ügyintézőknek küldött értesítési levelek törzsének szövegét."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the subject for notification mails sent to agents, about new password."
-msgstr "Meghatározza az új jelszóval kapcsolatosan az ügyintézőknek küldött értesítési levelek tárgyát."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the body text for notification mails sent to agents, about new password."
-msgstr "Meghatározza az új jelszóval kapcsolatosan az ügyintézőknek küldött értesítési levelek törzsének szövegét."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Standard available permissions for agents within the application. If more permissions are needed, they can be entered here. Permissions must be defined to be effective. Some other good permissions have also been provided built-in: note, close, pending, customer, freetext, move, compose, responsible, forward, and bounce. Make sure that \"rw\" is always the last registered permission."
@@ -16003,14 +15703,6 @@ msgstr "Meghatározza a kért új jelszóval kapcsolatosan a tokennel rendelkez�
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the body text for notification mails sent to customers, with token about new requested password."
 msgstr "Meghatározza a kért új jelszóval kapcsolatosan a tokennel rendelkező ügyfeleknek küldött értesítési levelek törzsének szövegét."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the subject for notification mails sent to customers, about new password."
-msgstr "Meghatározza az új jelszóval kapcsolatosan az ügyfeleknek küldött értesítési levelek tárgyát."
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Defines the body text for notification mails sent to customers, about new password."
-msgstr "Meghatározza az új jelszóval kapcsolatosan az ügyfeleknek küldött értesítési levelek törzsének szövegét."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Defines the subject for notification mails sent to customers, about new account."
@@ -16705,8 +16397,8 @@ msgid "Defines the priority in which the information is logged and presented."
 msgstr "Meghatározza azt a prioritást, amelyben az információk naplózva lesznek és bemutatásra kerülnek."
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
-msgid "Filter for debugging Transitions. Note: More filters can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;."
-msgstr "Szűrő az átmenetek hibakereséséhez. Megjegyzés: több szűrő is hozzáadható &lt;OTRS_TICKET_Attribútum&gt; formátumban, például &lt;OTRS_TICKET_Priority&gt;."
+msgid "Filter for debugging Transitions. Note: More filters can be added in the format &lt;ZNUNY_TICKET_Attribute&gt; e.g. &lt;ZNUNY_TICKET_Priority&gt;."
+msgstr "Szűrő az átmenetek hibakereséséhez. Megjegyzés: több szűrő is hozzáadható &lt;ZNUNY_TICKET_Attribútum&gt; formátumban, például &lt;ZNUNY_TICKET_Priority&gt;."
 
 #. XML Definition: Kernel/Config/Files/XML/ProcessManagement.xml
 msgid "Parameters for the dashboard backend of the running process tickets overview of the agent interface . \"Limit\" is the number of entries shown by default. \"Group\" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). \"Default\" determines if the plugin is enabled by default or if the user needs to enable it manually. \"CacheTTLLocal\" is the cache time in minutes for the plugin. \"Mandatory\" determines if the plugin is always shown and can not be removed by agents."
@@ -19137,8 +18829,8 @@ msgid "If enabled debugging information for ACLs is logged."
 msgstr "Ha engedélyezve van, akkor az ACL-ek hibakeresési információi naplózva lesznek."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;."
-msgstr "Szűrő az ACL-ek hibakereséséhez. Megjegyzés: több jegyattribútum is hozzáadható &lt;OTRS_TICKET_Attribútum&gt; formátumban, például &lt;OTRS_TICKET_Priority&gt;."
+msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;ZNUNY_TICKET_Attribute&gt; e.g. &lt;ZNUNY_TICKET_Priority&gt;."
+msgstr "Szűrő az ACL-ek hibakereséséhez. Megjegyzés: több jegyattribútum is hozzáadható &lt;ZNUNY_TICKET_Attribútum&gt; formátumban, például &lt;ZNUNY_TICKET_Priority&gt;."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Maximal auto email responses to own email-address a day (Loop-Protection)."
@@ -19263,10 +18955,6 @@ msgstr "Egy modul annak ellenőrzéséhez, hogy egy bejövő e-mail üzenet áti
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Module used to detect if attachments are present."
 msgstr "Egy modul annak használatához, hogy felismerje, ha a melléklet létezik."
-
-#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
-msgid "Executes follow-up checks on Znuny Header 'X-OTRS-Bounce'."
-msgstr "Követő ellenőrzéseket hajt végre az „X-OTRS-Bounce” Znuny fejlécen."
 
 #. XML Definition: Kernel/Config/Files/XML/Ticket.xml
 msgid "Checks if an E-Mail is a followup to an existing ticket by searching the subject for a valid ticket number."
@@ -19605,18 +19293,6 @@ msgid "Screens for which it is possible to enable or disable default columns."
 msgstr "Azok a képernyők, amelyeknél lehetőség van alapértelmezett oszlopok engedélyezésére vagy letiltására."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "Mapping of Ticket::Generic invoker name (key) to list of fields (content) whose values will be base-64 encoded. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Content of different fields can be given by separating those fields by ';'."
-msgstr "A Ticket::Generic meghívó nevének (kulcs) leképezése a mezők (tartalom) listájára, amelyek értékei Base64 kódolásúak lesznek. A mezőket a következő formában kell megadni: Mező1->Mező2;Mező3->Mező4->Mező5;Mező6. Így egy beágyazott adatstruktúra a mezők „->” jelöléssel történő összekapcsolásával adható meg. A különböző mezők tartalmát a mezők „;” karakterrel való elválasztásával lehet megadni."
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "Mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with '->'. Different fields can be omitted by separating them by ';'."
-msgstr "A Ticket::Generic meghívó nevének (kulcs) leképezése a mezők (tartalom) listájára, amelyek eltávolításra kerülnek a kérésből. A mezőket a következő formában kell megadni: Mező1->Mező2;Mező3->Mező4->Mező5;Mező6. Így egy beágyazott adatstruktúra a mezők „->” jelöléssel történő összekapcsolásával adható meg. A különböző mezőket „;” karakterrel elválasztva lehet kihagyni."
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic."
-msgstr "Párhuzamosan futtatott példányok legnagyobb száma az OTRS_AsynchronousInvokerExecution használatakor a Ticket::Generic meghívóban."
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Enables support for huge XML data in load_xml calls of CPAN library XML::LibXML. This should only be enabled if absolutely needed. Disabling this option (default) protects against denial of service through entity expansion attacks. Before enabling this option ensure that alternative measures to protect the application against this type of attack have been taken."
 msgstr "Engedélyezi a hatalmas XML-adatok támogatását az XML::LibXML CPAN-programkönyvtár load_xml hívásaiban. Ezt csak akkor szabad engedélyezni, ha feltétlenül szükséges. A beállítás letiltása (alapértelmezett) védelmet nyújt az entitásbővítési támadások általi szolgáltatásmegtagadás ellen. A beállítás engedélyezése előtt győződjön meg arról, hogy az alkalmazás ilyen típusú támadások elleni védelmére hoztak-e alternatív intézkedéseket."
 
@@ -19943,10 +19619,6 @@ msgstr "Újraindexeli az S/MIME-tanúsítványmappákat. Megjegyzés: az S/MIME 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Maximum length of displayed attachment filenames in the article preview of ticket zoom view."
 msgstr "A megjelenített mellékletfájlnevek legnagyobb hossza a jegynagyítás nézet bejegyzés-előnézetében."
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "General settings for autocompletion in rich text editor."
-msgstr "Általános beállítások a Rich Text szerkesztőben lévő automatikus kiegészítéshez."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Rich text editor configuration for autocompletion module."
@@ -21083,10 +20755,6 @@ msgstr "Sajnáljuk, de nem tud minden módszert letiltani a kötelezőként megj
 #. JS File: var/httpd/htdocs/js/Core.Agent.Preferences.js
 msgid "Sorry, but you can't disable all methods for this notification."
 msgstr "Sajnáljuk, de nem tud minden módszert letiltani ennél az értesítésnél."
-
-#. JS File: var/httpd/htdocs/js/Core.Agent.Preferences.js
-msgid "Please note that at least one of the settings you have changed requires a page reload. Click here to reload the current screen."
-msgstr "Ne feledje, hogy a megváltoztatott beállítások legalább egyike oldalújratöltést igényel. Kattintson ide a jelenlegi képernyő újratöltéséhez."
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Preferences.js
 msgid "An unknown error occurred. Please contact the administrator."
@@ -22419,12 +22087,12 @@ msgid "External Link"
 msgstr "Külső hivatkozás"
 
 #. SysConfig
-msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format <OTRS_TICKET_Attribute> e.g. <OTRS_TICKET_Priority>."
-msgstr "Szűrő az ACL-ek hibakereséséhez. Megjegyzés: több jegyattribútum is hozzáadható <OTRS_TICKET_Attribútum> formátumban, például <OTRS_TICKET_Priority>."
+msgid "Filter for debugging ACLs. Note: More ticket attributes can be added in the format <ZNUNY_TICKET_Attribute> e.g. <ZNUNY_TICKET_Priority>."
+msgstr "Szűrő az ACL-ek hibakereséséhez. Megjegyzés: több jegyattribútum is hozzáadható <ZNUNY_TICKET_Attribútum> formátumban, például <ZNUNY_TICKET_Priority>."
 
 #. SysConfig
-msgid "Filter for debugging Transitions. Note: More filters can be added in the format <OTRS_TICKET_Attribute> e.g. <OTRS_TICKET_Priority>."
-msgstr "Szűrő az átmenetek hibakereséséhez. Megjegyzés: több szűrő is hozzáadható <OTRS_TICKET_Attribútum> formátumban, például <OTRS_TICKET_Priority>."
+msgid "Filter for debugging Transitions. Note: More filters can be added in the format <ZNUNY_TICKET_Attribute> e.g. <ZNUNY_TICKET_Priority>."
+msgstr "Szűrő az átmenetek hibakereséséhez. Megjegyzés: több szűrő is hozzáadható <ZNUNY_TICKET_Attribútum> formátumban, például <ZNUNY_TICKET_Priority>."
 
 #. SysConfig
 msgid "Filter incoming emails."
@@ -22919,10 +22587,6 @@ msgid "Merged Ticket (%s/%s) to (%s/%s)."
 msgstr "Jegy (%s/%s) egyesítve ezzel: (%s/%s)."
 
 #. SysConfig
-msgid "Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>."
-msgstr "A(z) <OTRS_TICKET> jegy egyesítve a következővel: <OTRS_MERGE_TO_TICKET>."
-
-#. SysConfig
 msgid "Minute"
 msgstr "Perc"
 
@@ -23021,10 +22685,6 @@ msgstr "OAuth2"
 #. SysConfig
 msgid "OAuth2 token"
 msgstr "OAuth2-token"
-
-#. SysConfig
-msgid "OTRS"
-msgstr "OTRS"
 
 #. SysConfig
 msgid "Open an external link!"
@@ -23955,14 +23615,6 @@ msgid "Yes, but hide archived tickets"
 msgstr "Igen, de az archivált jegyek elrejtése"
 
 #. SysConfig
-msgid "Your email with ticket number \"<OTRS_TICKET>\" is bounced to \"<OTRS_BOUNCE_TO>\". Contact this address for further information."
-msgstr "Az Ön „<OTRS_TICKET>” számú jegyhez rendelt e-mailje átirányításra került a következő címre: „<OTRS_BOUNCE_TO>”. További információkért vegye fel ezzel a címmel a kapcsolatot."
-
-#. SysConfig
-msgid "Your email with ticket number \"<OTRS_TICKET>\" is merged to \"<OTRS_MERGE_TO_TICKET>\"."
-msgstr "Az Ön „<OTRS_TICKET>” jegyszámú levele egyesítve lett a következővel: „<OTRS_MERGE_TO_TICKET>”."
-
-#. SysConfig
 msgid "Your queue selection of your preferred queues. You also get notified about those queues via email if enabled."
 msgstr "Az előnyben részesített várólistáknak a várólista kiválasztása. Értesítést is kaphat azokról a várólistákról e-mailben, ha engedélyezve van."
 
@@ -24097,14 +23749,6 @@ msgstr "A gyorshivatkozás-ikon az ügyintézői felülethez az „alapértelmez
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "The Apple touch icon for the agent interface for the skin \"default\"."
 msgstr "Az Apple érintésikon az ügyintézői felülethez az „alapértelmezett” felszínnél."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
-msgid "Mark tickets as seen"
-msgstr "Jegyek megjelölése olvasottként"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBulk.tt
-msgid "Mark tickets as unseen"
-msgstr "Jegyek megjelölése olvasatlanként"
 
 #. Perl Module: Kernel/Output/HTML/ArticleAction/MarkArticleSeenUnseen.pm
 msgid "Mark article as unseen"
@@ -24250,10 +23894,6 @@ msgstr "Hozzáadja az AgentTicketActionCommon mezőleképezését egy ismeretlen
 msgid "Save changes"
 msgstr "Változtatások mentése"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketBounce.tt
-msgid "cancel"
-msgstr "mégse"
-
 #. Perl Module: Kernel/System/SupportDataCollector/Plugin/Database/mysql/Charset.pm
 msgid "There were non-system tables found which do not have 'utf8mb4' as charset."
 msgstr "Olyan nem rendszertáblák találhatók, amelyek nem „utf8mb4” karakterkészletűek."
@@ -24357,14 +23997,6 @@ msgstr "Valóban törölni szeretné ezt az objektumot? Az összes hozzárendelt
 #. Perl Module: Kernel/Output/HTML/Notification/TranslationCheck.pm
 msgid "The translations in the database are not synchronous. Please synchronize all translations."
 msgstr "Az adatbázisban lévő fordítások nincsenek szinkronizálva. Szinkronizálja az összes fordítást."
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "Frontend module registration for the agent admin interface."
-msgstr "Előtétprogram-modul regisztráció az ügyintéző adminisztrátori felületéhez."
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "This configuration defines the cache settings for the Znuny-DatabasBackend (default: 1 day)."
-msgstr "Ez a beállítás határozza meg a Znuny adatbázis-háttérprogramjának gyorsítótár-beállításait (alapértelmezett: 1 nap)."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Defines a module to display a notification if translation deployment is needed."
@@ -24758,14 +24390,6 @@ msgstr "Folyamatikon meghatározása."
 msgid "Defines which ContentTypes are permitted for the attachment preview."
 msgstr "Meghatározza, hogy mely tartalomtípusok engedélyezettek a melléklet előnézetéhez."
 
-#. JS File: var/httpd/htdocs/js/Core.UI.js
-msgid "An unknown error occurred when preview the attachment. Please try again. If the error persists, please contact your system administrator."
-msgstr "Ismeretlen hiba történt a melléklet előnézete során. Próbálja meg újra. Ha a hiba továbbra is fennáll, akkor vegye fel a kapcsolatot a rendszergazdával."
-
-#. SysConfig
-msgid "AsPopup"
-msgstr "Felugróként"
-
 #. SysConfig
 msgid "Create new process ticket via category."
 msgstr "Új folyamatjegy létrehozása kategórián keresztül."
@@ -24779,10 +24403,6 @@ msgid "LinkTarget"
 msgstr "Hivatkozás célja"
 
 #. SysConfig
-msgid "Process Ticket Catalog"
-msgstr "Folyamatjegy-katalógus"
-
-#. SysConfig
 msgid "Process Ticket Category: Define a process category."
 msgstr "Folyamatjegy kategóriája: folyamatkategória meghatározása."
 
@@ -24793,10 +24413,6 @@ msgstr "Folyamatjegy kategóriája: folyamatikon meghatározása."
 #. SysConfig
 msgid "Process Ticket Category: Define a process link target."
 msgstr "Folyamatjegy kategóriája: folyamat hivatkozáscéljának meghatározása."
-
-#. SysConfig
-msgid "Process Ticket Catalog."
-msgstr "Folyamatjegy-katalógus."
 
 #. XML Definition: Kernel/Config/Files/XML/Znuny.xml
 msgid "Limits the amount of emails which are sent within one batch. Disable this setting to have no limit."
@@ -24985,10 +24601,6 @@ msgstr "Címjegyzék"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketCompose.tt
 msgid "Customer suggestions"
 msgstr "Ügyféljavaslatok"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AgentTicketEmailOutbound.tt
-msgid "Undo & Close"
-msgstr "Visszavonás és bezárás"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminSendmailConfig.tt
 msgid "Add Outbound Email Profile"
@@ -25217,14 +24829,6 @@ msgstr "Jelenlegi művelet leírása."
 #. SysConfig
 msgid "Ticket information"
 msgstr "Jegyinformációk"
-
-#. Perl Module: Kernel/Modules/AgentSession.pm
-msgid "Invalid subaction!"
-msgstr "Érvénytelen alművelet!"
-
-#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
-msgid "List of session keys that are allowed to be updated by UpdateAJAX subaction of frontend module AgentSession."
-msgstr "Azon munkamenetkulcsok listája, amelyeknél engedélyezett, hogy az ügyintéző-munkameneti előtétprogram-modul UpdateAJAX alművelete frissítse azokat."
 
 #. SysConfig
 msgid "Agent Session."
@@ -25587,10 +25191,6 @@ msgid "Shows a link to preview article attachments in the zoom view of the artic
 msgstr "Egy hivatkozást jelenít meg a bejegyzés mellékleteinek előnézetéhez a bejegyzés nagyított nézetében az ügyintézői felületen."
 
 #. XML Definition: Kernel/Config/Files/XML/Framework.xml
-msgid "Output filter to show attachment selection in certain agent ticket dialogs."
-msgstr ""
-
-#. XML Definition: Kernel/Config/Files/XML/Framework.xml
 msgid "Shows a link in the menu to select and download all attachments of the ticket."
 msgstr "Egy hivatkozást jelenít meg a menüben a jegy összes mellékletének kijelöléséhez és letöltéséhez."
 
@@ -25665,10 +25265,6 @@ msgstr "A kiválasztott tanúsítvány/kulcs nem érhető el. Válassza ki vagy 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
 msgid "- Select an existing certificate/key -"
 msgstr "- Válasszon egy meglévő tanúsítványt/kulcsot -"
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
-msgid "Paste"
-msgstr "Beillesztés"
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/CertificateWidget.tt
 msgid "Use certificate from metadata"
@@ -25906,10 +25502,6 @@ msgstr "Szinkronizálás"
 msgid "Slot %s"
 msgstr "%s. hely"
 
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Overview.tt
-msgid "Only invalid configurations can be deleted. Set this configuration to invalid first."
-msgstr "Csak az érvénytelen beállítások törölhetők. Először állítsa érvénytelenre ezt a beállítást."
-
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/SyncSettings.tt
 msgid "Enable sync"
 msgstr "Szinkronizálás engedélyezése"
@@ -26045,10 +25637,6 @@ msgstr "Összegzés"
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
 msgid "Click Save to create this SAML configuration. It will not be active yet - use the Deploy action on the overview page afterwards to make it effective."
 msgstr "Kattintson a Mentés gombra a SAML-beállítás létrehozásához. Ez még nem lesz aktív - utána használja az áttekintő oldalon az Üzembe állítás műveletet, hogy érvénybe lépjen."
-
-#. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
-msgid "If you skipped the Identity Provider CA certificate here and provided metadata instead, it will be derived from that metadata automatically during Deploy."
-msgstr "Ha itt kihagyta az identitásszolgáltató CA tanúsítványát, és helyette metaadatokat adott meg, akkor az üzembe állításkor automatikusan a metaadatokból lesz származtatva."
 
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminAuthentication/Wizard.tt
 msgid "You can go back to any previous step to make changes, or use the full edit screen afterwards for advanced options such as attribute/group/role sync (agent authentication only)."
@@ -26339,10 +25927,6 @@ msgid "SP signing certificate"
 msgstr "SP aláíró tanúsítvány"
 
 #. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
-msgid "Not set (will be derived automatically from metadata during Deploy, if possible)"
-msgstr "Nincs megadva (üzembe állításkor lehetőség szerint automatikusan a metaadatokból lesz származtatva)"
-
-#. JS File: var/httpd/htdocs/js/Core.Agent.Admin.Authentication.js
 msgid "User sync"
 msgstr "Felhasználó-szinkronizálás"
 
@@ -26565,4 +26149,44 @@ msgstr "HTTPS URL-előtagok, amelyeket egy XSLT-leképezés betölthet az xsl:im
 #. TT Template: Kernel/Output/HTML/Templates/Standard/AdminGenericInterfaceTransportHTTPREST.tt
 msgid "The controller that the invoker should send requests to. Variables marked by a ':' are replaced from the outgoing data after mapping (if configured). Nested fields use a dot (e.g. /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
 msgstr "Az a vezérlő, amelyhez a meghívónak a kéréseket kell küldenie. A ':' jellel megjelölt változók a leképezés után (ha be van állítva) a kimenő adatokból kerülnek behelyettesítésre. A beágyazott mezők pontot használnak (például /Ticket/:Ticket.TicketID?UserLogin=:UserLogin&Password=:Password)."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the fully qualified domain name of the system. This setting is used as a variable, ZNUNY_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system."
+msgstr "Meghatározza a rendszer teljes képzésű tartománynevét. Ezt a beállítást a ZNUNY_CONFIG_FQDN változójaként használják, amely az alkalmazás által használt üzenetküldés összes űrlapján megtalálható a jegyekre mutató hivatkozások készítéséhez a rendszeren belül."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server's settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, ZNUNY_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system."
+msgstr "Meghatározza a webkiszolgáló által használt protokoll típusát az alkalmazás kiszolgálásához. Ha https protokollt fognak használni az egyszerű http helyett, akkor azt itt kell megadni. Mivel ez nem befolyásolja a webkiszolgáló beállításait vagy viselkedését, ezért nem fogja megváltoztatni az alkalmazáshoz való hozzáférés módját, és ha rossz, nem fogja megakadályozni az alkalmazásba való belépést. Ezt a beállítást csak a ZNUNY_CONFIG_HttpType változójaként használják, amely az alkalmazás által használt üzenetküldés összes űrlapján megtalálható a jegyekre mutató hivatkozások készítéséhez a rendszeren belül."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Sets the prefix to the scripts folder on the server, as configured on the web server. This setting is used as a variable, ZNUNY_CONFIG_ScriptAlias which is found in all forms of messaging used by the application, to build links to the tickets within the system."
+msgstr "Beállítja a kiszolgálón lévő parancsfájlok mappájának előtagját, ahogy a webkiszolgálón be van állítva. Ezt a beállítást a ZNUNY_CONFIG_ScriptAlias változójaként használják, amely az alkalmazás által használt üzenetküldés összes űrlapján megtalálható a jegyekre mutató hivatkozások készítéséhez a rendszeren belül."
+
+#. XML Definition: Kernel/Config/Files/XML/Framework.xml
+msgid "Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. \"Znuny Notifications\" znuny@your.example.com). You can use the ZNUNY_CONFIG_FQDN variable as set in your configuation, or choose another email address."
+msgstr "Azt az e-mail-címet adja meg, amelyet az alkalmazás az értesítések elküldésekor használjon. Az e-mail-cím a teljes megjelenítési név összeállításához lesz használva az értesítési mesternél (azaz \"Znuny értesítések\" <znuny@your.example.com>). Használhatja a ZNUNY_CONFIG_FQDN változót, ahogy a konfigurációban be van állítva, vagy válasszon egy másik e-mail-címet."
+
+#. XML Definition: Kernel/Config/Files/XML/Ticket.xml
+msgid "Executes follow-up checks on Znuny Header 'X-Znuny-Bounce'."
+msgstr ""
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of parallel instances when using ZNUNY_AsynchronousInvokerExecution in invoker Ticket::Generic."
+msgstr "Párhuzamosan futtatott példányok legnagyobb száma a ZNUNY_AsynchronousInvokerExecution használatakor a Ticket::Generic meghívóban."
+
+#. XML Definition: Kernel/Config/Files/XML/Znuny.xml
+msgid "Maximum number of process transitions evaluated for one ticket in a single request, so a transition action that changes ticket data can advance the following activity immediately. Set this to 1 to evaluate only one transition per request. Values must be from 1 to 99. A cyclic process runs until this limit on every ticket update. Reaching the limit writes a notice to the system log. Set the minimum log level to notice, info or debug to keep that notice."
+msgstr ""
+
+#. SysConfig
+msgid "Merged Ticket <ZNUNY_TICKET> to <ZNUNY_MERGE_TO_TICKET>."
+msgstr "A(z) <ZNUNY_TICKET> jegy egyesítve a következővel: <ZNUNY_MERGE_TO_TICKET>."
+
+#. SysConfig
+msgid "Your email with ticket number \"<ZNUNY_TICKET>\" is bounced to \"<ZNUNY_BOUNCE_TO>\". Contact this address for further information."
+msgstr "Az Ön „<ZNUNY_TICKET>” számú jegyhez rendelt e-mailje átirányításra került a következő címre: „<ZNUNY_BOUNCE_TO>”. További információkért vegye fel ezzel a címmel a kapcsolatot."
+
+#. SysConfig
+msgid "Your email with ticket number \"<ZNUNY_TICKET>\" is merged to \"<ZNUNY_MERGE_TO_TICKET>\"."
+msgstr "Az Ön „<ZNUNY_TICKET>” jegyszámú levele egyesítve lett a következővel: „<ZNUNY_MERGE_TO_TICKET>”."
 

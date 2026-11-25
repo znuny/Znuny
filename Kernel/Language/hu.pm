@@ -32,7 +32,7 @@ sub Data {
     $Self->{DateFormatShort}     = '%Y-%m-%d';
     $Self->{DateInputFormat}     = '%Y-%m-%d';
     $Self->{DateInputFormatLong} = '%Y-%m-%d - %T';
-    $Self->{Completeness}        = 0.994952584888345;
+    $Self->{Completeness}        = 0.994647499617679;
 
     # csv separator
     $Self->{Separator}         = ';';
@@ -1343,10 +1343,10 @@ sub Data {
         'JWT authentication: Payload' => 'JWT-hitelesítés: hasznos adatok',
         'Payload for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3' =>
             'Hasznos adatok a JWT-hez. Kulcs-érték párokat adjon meg (pontosvesszővel elválasztva), például: Kulcs1=Érték1;Kulcs2=Érték2;Kulcs3=Érték3',
-        'Available placeholders (prefixed with OTRS_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion.' =>
-            'Az elérhető helykitöltők (OTRS_JWT előtaggal): ExpirationDateTimestamp, ExpirationDateString. Ezenkívül, ha az X.509 tanúsítvány támogatása megvan: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion.',
-        'Placeholder usage example: Key1=<OTRS_JWT_ExpirationDateTimestamp>' =>
-            'Helykitöltő használati példa: Kulcs1=<OTRS_JWT_ExpirationDateTimestamp>',
+        'Available placeholders (prefixed with ZNUNY_JWT): ExpirationDateTimestamp, ExpirationDateString. Additionally if X.509 certificate support is present: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion.' =>
+            'Az elérhető helykitöltők (ZNUNY_JWT előtaggal): ExpirationDateTimestamp, ExpirationDateString. Ezenkívül, ha az X.509 tanúsítvány támogatása megvan: CertSubject, CertIssuer, CertSerial, CertNotBefore, CertNotAfter, CertEmail, CertVersion.',
+        'Placeholder usage example: Key1=<ZNUNY_JWT_ExpirationDateTimestamp>' =>
+            'Helykitöltő használati példa: Kulcs1=<ZNUNY_JWT_ExpirationDateTimestamp>',
         'JWT authentication: Additional header data' => 'JWT-hitelesítés: további fejlécadatok',
         'Additional header data for JWT. Give key/value pairs (separated by ;), e.g.: Key1=Value1;Key2=Value2;Key3=Value3' =>
             'További fejlécadatok a JWT-hez. Kulcs-érték párokat adjon meg (pontosvesszővel elválasztva), például: Kulcs1=Érték1;Kulcs2=Érték2;Kulcs3=Érték3',
@@ -1612,8 +1612,8 @@ sub Data {
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportEmailSettings.tt
         'Use comma or semicolon to separate email addresses.' => 'Használjon vesszőt vagy pontosvesszőt az e-mail-címek elválasztásához.',
-        'You can use Znuny-tags like <OTRS_TICKET_DynamicField_...> to insert values from the current ticket.' =>
-            'Használhatja a Znuny címkéket (mint például <OTRS_TICKET_DynamicField_...>) értékek beszúrásához a jelenlegi jegyből.',
+        'You can use Znuny-tags like <ZNUNY_TICKET_DynamicField_...> to insert values from the current ticket.' =>
+            'Használhatja a Znuny címkéket (mint például <ZNUNY_TICKET_DynamicField_...>) értékek beszúrásához a jelenlegi jegyből.',
 
         # TT Template: Kernel/Output/HTML/Templates/Standard/AdminNotificationEventTransportWebserviceSettings.tt
         'Web service name' => 'Webszolgáltatás neve',
@@ -5988,8 +5988,8 @@ sub Data {
             'Meghatározza annak az alkalmazásnak a nevét, amely a webes felületen, a füleken és a webböngésző címsorában jelenik meg.',
         'Defines the system identifier. Every ticket number and http session string contains this ID. This ensures that only tickets which belong to your system will be processed as follow-ups (useful when communicating between two instances of Znuny).' =>
             'Meghatározza a rendszer azonosítóját. Minden jegyszám és HTTP munkamenet szöveg tartalmazza ezt az azonosítót. Ez biztosítja, hogy csak azok a jegyek legyenek feldolgozva követőként, amelyek a rendszerhez tartoznak (hasznos a Znuny két példánya közötti kommunikációkor).',
-        'Defines the fully qualified domain name of the system. This setting is used as a variable, OTRS_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
-            'Meghatározza a rendszer teljes képzésű tartománynevét. Ezt a beállítást az OTRS_CONFIG_FQDN változójaként használják, amely az alkalmazás által használt üzenetküldés összes űrlapján megtalálható a jegyekre mutató hivatkozások készítéséhez a rendszeren belül.',
+        'Defines the fully qualified domain name of the system. This setting is used as a variable, ZNUNY_CONFIG_FQDN which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
+            'Meghatározza a rendszer teljes képzésű tartománynevét. Ezt a beállítást a ZNUNY_CONFIG_FQDN változójaként használják, amely az alkalmazás által használt üzenetküldés összes űrlapján megtalálható a jegyekre mutató hivatkozások készítéséhez a rendszeren belül.',
         'Defines the fully qualified domain name for external IDs generation (i.e. Message-ID, ContentID).' =>
             'Meghatározza a teljes képzésű tartománynevet a külső azonosítók előállításához (azaz üzenetazonosító, tartalomazonosító).',
         'Defines the HTTP hostname for the support data collection with the public module \'PublicSupportDataCollector\' (e.g. used from the Znuny Daemon).' =>
@@ -5998,12 +5998,12 @@ sub Data {
             'Meghatározza az időkorlátot (másodpercben, a minimum 20 másodperc) a támogatási adatok gyűjtéséhez a nyilvános „PublicSupportDataCollector” modullal (például a Znuny démonból használva).',
         'When support data is collected via SupportDataCollector, certain SysConfig values marked with ValueType="Password" are automatically masked. This prevents passwords from appearing in plain text in the support data. This setting defines the settings that contain complex configuration hashes that should not be masked when generating the support data.' =>
             'Ha támogatási adatok kerülnek begyűjtésre a támogatási adatgyűjtőn keresztül, akkor a ValueType="Password" jelöléssel ellátott bizonyos rendszerbeállítási értékek automatikusan el lesznek takarva. Ez megakadályozza, hogy a jelszavak egyszerű szövegként jelenjenek meg a támogatási adatokban. Ez a beállítás határozza meg azokat a beállításokat, amelyek olyan összetett beállítási kivonatokat tartalmaznak, amelyeket nem szabad eltakarni a támogatási adatok előállításakor.',
-        'Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server\'s settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, OTRS_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
-            'Meghatározza a webkiszolgáló által használt protokoll típusát az alkalmazás kiszolgálásához. Ha https protokollt fognak használni az egyszerű http helyett, akkor azt itt kell megadni. Mivel ez nem befolyásolja a webkiszolgáló beállításait vagy viselkedését, ezért nem fogja megváltoztatni az alkalmazáshoz való hozzáférés módját, és ha rossz, nem fogja megakadályozni az alkalmazásba való belépést. Ezt a beállítást csak az OTRS_CONFIG_HttpType változójaként használják, amely az alkalmazás által használt üzenetküldés összes űrlapján megtalálható a jegyekre mutató hivatkozások készítéséhez a rendszeren belül.',
+        'Defines the type of protocol, used by the web server, to serve the application. If https protocol will be used instead of plain http, it must be specified here. Since this has no affect on the web server\'s settings or behavior, it will not change the method of access to the application and, if it is wrong, it will not prevent you from logging into the application. This setting is only used as a variable, ZNUNY_CONFIG_HttpType which is found in all forms of messaging used by the application, to build links to the tickets within your system.' =>
+            'Meghatározza a webkiszolgáló által használt protokoll típusát az alkalmazás kiszolgálásához. Ha https protokollt fognak használni az egyszerű http helyett, akkor azt itt kell megadni. Mivel ez nem befolyásolja a webkiszolgáló beállításait vagy viselkedését, ezért nem fogja megváltoztatni az alkalmazáshoz való hozzáférés módját, és ha rossz, nem fogja megakadályozni az alkalmazásba való belépést. Ezt a beállítást csak a ZNUNY_CONFIG_HttpType változójaként használják, amely az alkalmazás által használt üzenetküldés összes űrlapján megtalálható a jegyekre mutató hivatkozások készítéséhez a rendszeren belül.',
         'Whether to force redirect all requests from http to https protocol. Please check that your web server is configured correctly for https protocol before enable this option.' =>
             'Kényszerítse-e az összes kérés átirányítását HTTP-ről HTTPS protokollra. Ellenőrizze, hogy a webkiszolgálója helyesen van-e beállítva a HTTPS protokollhoz, mielőtt ezt a lehetőséget engedélyezné.',
-        'Sets the prefix to the scripts folder on the server, as configured on the web server. This setting is used as a variable, OTRS_CONFIG_ScriptAlias which is found in all forms of messaging used by the application, to build links to the tickets within the system.' =>
-            'Beállítja a kiszolgálón lévő parancsfájlok mappájának előtagját, ahogy a webkiszolgálón be van állítva. Ezt a beállítást az OTRS_CONFIG_ScriptAlias változójaként használják, amely az alkalmazás által használt üzenetküldés összes űrlapján megtalálható a jegyekre mutató hivatkozások készítéséhez a rendszeren belül.',
+        'Sets the prefix to the scripts folder on the server, as configured on the web server. This setting is used as a variable, ZNUNY_CONFIG_ScriptAlias which is found in all forms of messaging used by the application, to build links to the tickets within the system.' =>
+            'Beállítja a kiszolgálón lévő parancsfájlok mappájának előtagját, ahogy a webkiszolgálón be van állítva. Ezt a beállítást a ZNUNY_CONFIG_ScriptAlias változójaként használják, amely az alkalmazás által használt üzenetküldés összes űrlapján megtalálható a jegyekre mutató hivatkozások készítéséhez a rendszeren belül.',
         'Defines the system administrator\'s email address. It will be displayed in the error screens of the application.' =>
             'Meghatározza a rendszer adminisztrátorának e-mail-címét. Ez az alkalmazás hibaképernyőin lesz megjelenítve.',
         'Company name which will be included in outgoing emails as an X-Header.' =>
@@ -6340,8 +6340,8 @@ sub Data {
         'Enables fetch S/MIME from CustomerUser backend support.' => 'Engedélyezi az S/MIME lekérését az ügyfél-felhasználó háttérprogram támogatásából.',
         'Specifies the name that should be used by the application when sending notifications. The sender name is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com).' =>
             'Azt a nevet adja meg, amelyet az alkalmazás az értesítések elküldésekor használjon. A küldő neve a teljes megjelenítési név összeállításához lesz használva az értesítési mesternél (azaz "Znuny értesítések" <znuny@your.example.com>).',
-        'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the OTRS_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
-            'Azt az e-mail-címet adja meg, amelyet az alkalmazás az értesítések elküldésekor használjon. Az e-mail-cím a teljes megjelenítési név összeállításához lesz használva az értesítési mesternél (azaz "Znuny értesítések" <znuny@your.example.com>). Használhatja az OTRS_CONFIG_FQDN változót, ahogy a konfigurációban be van állítva, vagy válasszon egy másik e-mail-címet.',
+        'Specifies the email address that should be used by the application when sending notifications. The email address is used to build the complete display name for the notification master (i.e. "Znuny Notifications" znuny@your.example.com). You can use the ZNUNY_CONFIG_FQDN variable as set in your configuation, or choose another email address.' =>
+            'Azt az e-mail-címet adja meg, amelyet az alkalmazás az értesítések elküldésekor használjon. Az e-mail-cím a teljes megjelenítési név összeállításához lesz használva az értesítési mesternél (azaz "Znuny értesítések" <znuny@your.example.com>). Használhatja a ZNUNY_CONFIG_FQDN változót, ahogy a konfigurációban be van állítva, vagy válasszon egy másik e-mail-címet.',
         'Defines the validity period in seconds for password reset tokens. After this time the token expires and a new reset request is required. Default: 3600 (1 hour).' =>
             'Meghatározza a jelszó-visszaállítási tokenek érvényességi időszakát másodpercben. Ezen idő után a token lejár, és új visszaállítási kérés szükséges. Alapértelmezetten: 3600 (1 óra).',
         'Maximum number of password reset requests allowed per IP address or username within the rate limit window. Set to 0 to disable rate limiting. Default: 5.' =>
@@ -6772,8 +6772,8 @@ sub Data {
         'If enabled debugging information for transitions is logged.' => 'Ha engedélyezve van, akkor az átmenetek hibakeresési információi naplózva lesznek.',
         'Defines the priority in which the information is logged and presented.' =>
             'Meghatározza azt a prioritást, amelyben az információk naplózva lesznek és bemutatásra kerülnek.',
-        'Filter for debugging Transitions. Note: More filters can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;.' =>
-            'Szűrő az átmenetek hibakereséséhez. Megjegyzés: több szűrő is hozzáadható &lt;OTRS_TICKET_Attribútum&gt; formátumban, például &lt;OTRS_TICKET_Priority&gt;.',
+        'Filter for debugging Transitions. Note: More filters can be added in the format &lt;ZNUNY_TICKET_Attribute&gt; e.g. &lt;ZNUNY_TICKET_Priority&gt;.' =>
+            'Szűrő az átmenetek hibakereséséhez. Megjegyzés: több szűrő is hozzáadható &lt;ZNUNY_TICKET_Attribútum&gt; formátumban, például &lt;ZNUNY_TICKET_Priority&gt;.',
         'Parameters for the dashboard backend of the running process tickets overview of the agent interface . "Limit" is the number of entries shown by default. "Group" is used to restrict the access to the plugin (e. g. Group: admin;group1;group2;). "Default" determines if the plugin is enabled by default or if the user needs to enable it manually. "CacheTTLLocal" is the cache time in minutes for the plugin. "Mandatory" determines if the plugin is always shown and can not be removed by agents.' =>
             'Paraméterek az ügyintézői felület futó folyamatjegyek áttekintésének vezérlőpult háttérprogramjához. A „Limit” az alapértelmezetten megjelenített bejegyzések száma. A „Group” használható a hozzáférés korlátozásához a bővítményre (például Group: admin;csoport1;csoport2;). A „Default” azt határozza meg, hogy a bővítmény alapértelmezetten engedélyezve van, vagy hogy a felhasználónak kézzel kell engedélyeznie azt. A „CacheTTLLocal” a bővítmény gyorsítótár ideje percben. A „Mandatory” határozza meg, hogy a bővítmény mindig megjelenjen, és az ügyintézők ne tudják eltávolítani.',
         'DynamicField backend registration.' => 'Dinamikus mező háttérprogram regisztráció.',
@@ -7965,8 +7965,8 @@ sub Data {
             'Meghatározza, hogy mely elemek érhetők el az „Action” szakasznál az ACL szerkezet harmadik szintjén.',
         'Cache time in seconds for the DB ACL backend.' => 'Gyorsítótárazás ideje másodpercben a DB ACL háttérprogramnál.',
         'If enabled debugging information for ACLs is logged.' => 'Ha engedélyezve van, akkor az ACL-ek hibakeresési információi naplózva lesznek.',
-        'Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;OTRS_TICKET_Attribute&gt; e.g. &lt;OTRS_TICKET_Priority&gt;.' =>
-            'Szűrő az ACL-ek hibakereséséhez. Megjegyzés: több jegyattribútum is hozzáadható &lt;OTRS_TICKET_Attribútum&gt; formátumban, például &lt;OTRS_TICKET_Priority&gt;.',
+        'Filter for debugging ACLs. Note: More ticket attributes can be added in the format &lt;ZNUNY_TICKET_Attribute&gt; e.g. &lt;ZNUNY_TICKET_Priority&gt;.' =>
+            'Szűrő az ACL-ek hibakereséséhez. Megjegyzés: több jegyattribútum is hozzáadható &lt;ZNUNY_TICKET_Attribútum&gt; formátumban, például &lt;ZNUNY_TICKET_Priority&gt;.',
         'Maximal auto email responses to own email-address a day (Loop-Protection).' =>
             'Automatikus válaszok maximalizálása a saját e-mail-címre naponta (hurok védelem).',
         'Maximal auto email responses to own email-address a day, configurable by email address (Loop-Protection).' =>
@@ -8014,8 +8014,8 @@ sub Data {
             'Egy modul a bejövő üzenetek ügyfél-felhasználói S/MIME tanúsítványainak lekéréséhez.',
         'Module to check if a incoming e-mail message is bounce.' => 'Egy modul annak ellenőrzéséhez, hogy egy bejövő e-mail üzenet átirányítás-e.',
         'Module used to detect if attachments are present.' => 'Egy modul annak használatához, hogy felismerje, ha a melléklet létezik.',
-        'Executes follow-up checks on Znuny Header \'X-OTRS-Bounce\'.' =>
-            'Követő ellenőrzéseket hajt végre az „X-OTRS-Bounce” Znuny fejlécen.',
+        'Executes follow-up checks on Znuny Header \'X-Znuny-Bounce\'.' =>
+            '',
         'Checks if an E-Mail is a followup to an existing ticket by searching the subject for a valid ticket number.' =>
             'Azt ellenőrzi a tárgyban történő érvényes jegyszám keresésével, hogy egy e-mail egy meglévő jegy követője-e.',
         'Executes follow-up checks on In-Reply-To or References headers for mails that don\'t have a ticket number in the subject.' =>
@@ -8191,8 +8191,8 @@ sub Data {
             'A Ticket::Generic meghívó nevének (kulcs) globális leképezése a mezők (tartalom) listájára, amelyek értékei Base64 kódolásúak lesznek. Ne feledje, hogy ez meghívónként is beállítható. A mezőket a következő formában kell megadni: Mező1->Mező2;Mező3->Mező4->Mező5;Mező6. Így egy beágyazott adatstruktúra a mezők „->” jelöléssel történő összekapcsolásával adható meg. A különböző mezők tartalmát a mezők „;” karakterrel való elválasztásával lehet megadni.',
         'Global mapping of Ticket::Generic invoker name (key) to list of fields (content) which will be removed from the request. Note that this can also be configured per invoker. Fields have to be given in the following form: Field1->Field2;Field3->Field4->Field5;Field6. So a nested data structure can be given by connecting the fields with \'->\'. Different fields can be omitted by separating them by \';\'.' =>
             'A Ticket::Generic meghívó nevének (kulcs) globális leképezése a mezők (tartalom) listájára, amelyek eltávolításra kerülnek a kérésből. Ne feledje, hogy ez meghívónként is beállítható. A mezőket a következő formában kell megadni: Mező1->Mező2;Mező3->Mező4->Mező5;Mező6. Így egy beágyazott adatstruktúra a mezők „->” jelöléssel történő összekapcsolásával adható meg. A különböző mezőket „;” karakterrel elválasztva lehet kihagyni.',
-        'Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic.' =>
-            'Párhuzamosan futtatott példányok legnagyobb száma az OTRS_AsynchronousInvokerExecution használatakor a Ticket::Generic meghívóban.',
+        'Maximum number of parallel instances when using ZNUNY_AsynchronousInvokerExecution in invoker Ticket::Generic.' =>
+            'Párhuzamosan futtatott példányok legnagyobb száma a ZNUNY_AsynchronousInvokerExecution használatakor a Ticket::Generic meghívóban.',
         'Enables support for huge XML data in load_xml calls of CPAN library XML::LibXML. This should only be enabled if absolutely needed. Disabling this option (default) protects against denial of service through entity expansion attacks. Before enabling this option ensure that alternative measures to protect the application against this type of attack have been taken.' =>
             'Engedélyezi a hatalmas XML-adatok támogatását az XML::LibXML CPAN-programkönyvtár load_xml hívásaiban. Ezt csak akkor szabad engedélyezni, ha feltétlenül szükséges. A beállítás letiltása (alapértelmezett) védelmet nyújt az entitásbővítési támadások általi szolgáltatásmegtagadás ellen. A beállítás engedélyezése előtt győződjön meg arról, hogy az alkalmazás ilyen típusú támadások elleni védelmére hoztak-e alternatív intézkedéseket.',
         'Shows a link in the menu to create a unit test for the current ticket.' =>
@@ -8265,6 +8265,8 @@ sub Data {
         'Keep dynamic field attachments after each transition.' => 'A dinamikus mező mellékleteinek megtartása minden egyes átmenet után.',
         'Format string for output of attachments in the selection list. "%1$d": article number; "%2$s": filename; "%3$s": translated object type (e.g. Article => Artikel); "%4$s": translated attachment label (e.g. "Anhang").' =>
             'A mellékletek kimenetének formázási karakterlánca a kiválasztási listában. „%1$d”: bejegyzés száma, „%2$s”: fájlnév, „%3$s”: lefordított objektumtípus (például Article => Bejegyzés), „%4$s”: lefordított mellékletcímke (például „Melléklet”).',
+        'Maximum number of process transitions evaluated for one ticket in a single request, so a transition action that changes ticket data can advance the following activity immediately. Set this to 1 to evaluate only one transition per request. Values must be from 1 to 99. A cyclic process runs until this limit on every ticket update. Reaching the limit writes a notice to the system log. Set the minimum log level to notice, info or debug to keep that notice.' =>
+            '',
         'Sets the service in the ticket bulk screen in the agent interface (Ticket::Service needs to be enabled).' =>
             'Beállítja a szolgáltatást az ügyintézői felület jegy tömeges képernyőjén (a Ticket::Service modulnak engedélyezve kell lennie).',
         'Dynamic fields shown in the ticket bulk screen of the agent interface.' =>
@@ -9378,10 +9380,10 @@ Az Ön ügyfélszolgálati csapata
         'Execute SQL statements.' => 'SQL utasítások végrehajtása.',
         'External' => 'Külső',
         'External Link' => 'Külső hivatkozás',
-        'Filter for debugging ACLs. Note: More ticket attributes can be added in the format <OTRS_TICKET_Attribute> e.g. <OTRS_TICKET_Priority>.' =>
-            'Szűrő az ACL-ek hibakereséséhez. Megjegyzés: több jegyattribútum is hozzáadható <OTRS_TICKET_Attribútum> formátumban, például <OTRS_TICKET_Priority>.',
-        'Filter for debugging Transitions. Note: More filters can be added in the format <OTRS_TICKET_Attribute> e.g. <OTRS_TICKET_Priority>.' =>
-            'Szűrő az átmenetek hibakereséséhez. Megjegyzés: több szűrő is hozzáadható <OTRS_TICKET_Attribútum> formátumban, például <OTRS_TICKET_Priority>.',
+        'Filter for debugging ACLs. Note: More ticket attributes can be added in the format <ZNUNY_TICKET_Attribute> e.g. <ZNUNY_TICKET_Priority>.' =>
+            'Szűrő az ACL-ek hibakereséséhez. Megjegyzés: több jegyattribútum is hozzáadható <ZNUNY_TICKET_Attribútum> formátumban, például <ZNUNY_TICKET_Priority>.',
+        'Filter for debugging Transitions. Note: More filters can be added in the format <ZNUNY_TICKET_Attribute> e.g. <ZNUNY_TICKET_Priority>.' =>
+            'Szűrő az átmenetek hibakereséséhez. Megjegyzés: több szűrő is hozzáadható <ZNUNY_TICKET_Attribútum> formátumban, például <ZNUNY_TICKET_Priority>.',
         'Filter incoming emails.' => 'Bejövő e-mailek szűrése.',
         'Finnish' => 'Finn',
         'First Christmas Day' => 'Karácsony első napja',
@@ -9522,7 +9524,7 @@ Az Ön ügyfélszolgálati csapata
         'Mentions.' => 'Említések.',
         'Merge this ticket and all articles into another ticket' => 'A jegy és minden bejegyzés egyesítése egy másik jegybe',
         'Merged Ticket (%s/%s) to (%s/%s).' => 'Jegy (%s/%s) egyesítve ezzel: (%s/%s).',
-        'Merged Ticket <OTRS_TICKET> to <OTRS_MERGE_TO_TICKET>.' => 'A(z) <OTRS_TICKET> jegy egyesítve a következővel: <OTRS_MERGE_TO_TICKET>.',
+        'Merged Ticket <ZNUNY_TICKET> to <ZNUNY_MERGE_TO_TICKET>.' => 'A(z) <ZNUNY_TICKET> jegy egyesítve a következővel: <ZNUNY_MERGE_TO_TICKET>.',
         'Minute' => 'Perc',
         'Miscellaneous' => 'Egyebek',
         'Module to filter and manipulate incoming messages. Get a 4 digit number to ticket free text, use regex in Match e. g. From => \'(.+?)@.+?\', and use () as [***] in Set =>.' =>
@@ -9813,10 +9815,10 @@ Az Ön ügyfélszolgálati csapata
         'Webservice' => 'Webszolgáltatás',
         'YAML' => 'YAML',
         'Yes, but hide archived tickets' => 'Igen, de az archivált jegyek elrejtése',
-        'Your email with ticket number "<OTRS_TICKET>" is bounced to "<OTRS_BOUNCE_TO>". Contact this address for further information.' =>
-            'Az Ön „<OTRS_TICKET>” számú jegyhez rendelt e-mailje átirányításra került a következő címre: „<OTRS_BOUNCE_TO>”. További információkért vegye fel ezzel a címmel a kapcsolatot.',
-        'Your email with ticket number "<OTRS_TICKET>" is merged to "<OTRS_MERGE_TO_TICKET>".' =>
-            'Az Ön „<OTRS_TICKET>” jegyszámú levele egyesítve lett a következővel: „<OTRS_MERGE_TO_TICKET>”.',
+        'Your email with ticket number "<ZNUNY_TICKET>" is bounced to "<ZNUNY_BOUNCE_TO>". Contact this address for further information.' =>
+            'Az Ön „<ZNUNY_TICKET>” számú jegyhez rendelt e-mailje átirányításra került a következő címre: „<ZNUNY_BOUNCE_TO>”. További információkért vegye fel ezzel a címmel a kapcsolatot.',
+        'Your email with ticket number "<ZNUNY_TICKET>" is merged to "<ZNUNY_MERGE_TO_TICKET>".' =>
+            'Az Ön „<ZNUNY_TICKET>” jegyszámú levele egyesítve lett a következővel: „<ZNUNY_MERGE_TO_TICKET>”.',
         'Your queue selection of your preferred queues. You also get notified about those queues via email if enabled.' =>
             'Az előnyben részesített várólistáknak a várólista kiválasztása. Értesítést is kaphat azokról a várólistákról e-mailben, ha engedélyezve van.',
         'Your service selection of your preferred services. You also get notified about those services via email if enabled.' =>

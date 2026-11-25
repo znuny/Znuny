@@ -193,7 +193,7 @@ Core.Agent.Admin.GenericInterfaceTransportHTTPREST = (function (TargetNS) {
                     // The click above added an empty key/value pair to the top of
                     // the request headers, so use the first one.
                     $('input.DefaultValueKeyItem').first().val('Authorization');
-                    $('input.DefaultValueItem').first().val('Bearer <OTRS_OAUTH2_TOKEN>');
+                    $('input.DefaultValueItem').first().val('Bearer <ZNUNY_OAUTH2_TOKEN>');
                 }
             }
         });

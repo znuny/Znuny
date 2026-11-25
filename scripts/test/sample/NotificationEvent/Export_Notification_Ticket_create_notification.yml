@@ -25,115 +25,115 @@
   Message:
     de:
       Body: |-
-        Hallo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname> <OTRS_NOTIFICATION_RECIPIENT_UserLastname>,
+        Hallo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname> <ZNUNY_NOTIFICATION_RECIPIENT_UserLastname>,
 
-        das Ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] wurde in der Queue <OTRS_TICKET_Queue> erstellt.
+        das Ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] wurde in der Queue <ZNUNY_TICKET_Queue> erstellt.
 
-        <OTRS_CUSTOMER_REALNAME> schrieb:
-        <OTRS_CUSTOMER_BODY[30]>
+        <ZNUNY_CUSTOMER_REALNAME> schrieb:
+        <ZNUNY_CUSTOMER_BODY[30]>
 
-        <OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+        <ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
-        -- <OTRS_CONFIG_NotificationSenderName>
+        -- <ZNUNY_CONFIG_NotificationSenderName>
       ContentType: text/plain
-      Subject: 'Ticket erstellt: <OTRS_TICKET_Title>'
+      Subject: 'Ticket erstellt: <ZNUNY_TICKET_Title>'
     en:
       Body: |-
-        Hi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+        Hi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-        ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] has been created in queue <OTRS_TICKET_Queue>.
+        ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] has been created in queue <ZNUNY_TICKET_Queue>.
 
-        <OTRS_CUSTOMER_REALNAME> wrote:
-        <OTRS_CUSTOMER_BODY[30]>
+        <ZNUNY_CUSTOMER_REALNAME> wrote:
+        <ZNUNY_CUSTOMER_BODY[30]>
 
-        <OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+        <ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
-        -- <OTRS_CONFIG_NotificationSenderName>
+        -- <ZNUNY_CONFIG_NotificationSenderName>
       ContentType: text/plain
-      Subject: 'Ticket Created: <OTRS_TICKET_Title>'
+      Subject: 'Ticket Created: <ZNUNY_TICKET_Title>'
     es_MX:
       Body: |-
-        Hola <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+        Hola <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-        el ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] se ha creado en la fila <OTRS_TICKET_Queue>.
+        el ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] se ha creado en la fila <ZNUNY_TICKET_Queue>.
 
-        <OTRS_CUSTOMER_REALNAME> escribió:
-        <OTRS_CUSTOMER_BODY[30]>
+        <ZNUNY_CUSTOMER_REALNAME> escribió:
+        <ZNUNY_CUSTOMER_BODY[30]>
 
-        <OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+        <ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
-        -- <OTRS_CONFIG_NotificationSenderName>
+        -- <ZNUNY_CONFIG_NotificationSenderName>
       ContentType: text/plain
-      Subject: 'Se ha creado un ticket: <OTRS_TICKET_Title>'
+      Subject: 'Se ha creado un ticket: <ZNUNY_TICKET_Title>'
     hu:
       Body: |-
-        Kedves <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>!
+        Kedves <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>!
 
-        A(z) [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] jegy létrejött a következő várólistában: <OTRS_TICKET_Queue>.
+        A(z) [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] jegy létrejött a következő várólistában: <ZNUNY_TICKET_Queue>.
 
-        <OTRS_CUSTOMER_REALNAME> ezt írta:
-        <OTRS_CUSTOMER_BODY[30]>
+        <ZNUNY_CUSTOMER_REALNAME> ezt írta:
+        <ZNUNY_CUSTOMER_BODY[30]>
 
-        <OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+        <ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
-        -- <OTRS_CONFIG_NotificationSenderName>
+        -- <ZNUNY_CONFIG_NotificationSenderName>
       ContentType: text/plain
-      Subject: 'Jegy létrehozva: <OTRS_TICKET_Title>'
+      Subject: 'Jegy létrehozva: <ZNUNY_TICKET_Title>'
     pt_BR:
       Body: |-
-        Oi <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+        Oi <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-        o ticket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] foi criado na fila <OTRS_TICKET_Queue>.
+        o ticket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] foi criado na fila <ZNUNY_TICKET_Queue>.
 
-        <OTRS_CUSTOMER_REALNAME> escreveu:
-        <OTRS_CUSTOMER_BODY[30]>
+        <ZNUNY_CUSTOMER_REALNAME> escreveu:
+        <ZNUNY_CUSTOMER_BODY[30]>
 
-        <OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+        <ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
-        -- <OTRS_CONFIG_NotificationSenderName>
+        -- <ZNUNY_CONFIG_NotificationSenderName>
       ContentType: text/plain
-      Subject: 'Ticket criado: <OTRS_TICKET_Title>'
+      Subject: 'Ticket criado: <ZNUNY_TICKET_Title>'
     sr_Cyrl:
       Body: |-
-        Здраво <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+        Здраво <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-        тикет [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] је отворен у реду <OTRS_TICKET_Queue>.
+        тикет [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] је отворен у реду <ZNUNY_TICKET_Queue>.
 
-        <OTRS_CUSTOMER_REALNAME> је написао/ла:
-        <OTRS_CUSTOMER_BODY[30]>
+        <ZNUNY_CUSTOMER_REALNAME> је написао/ла:
+        <ZNUNY_CUSTOMER_BODY[30]>
 
-        <OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+        <ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
-        -- <OTRS_CONFIG_NotificationSenderName>
+        -- <ZNUNY_CONFIG_NotificationSenderName>
       ContentType: text/plain
-      Subject: 'Oтворен тикет: <OTRS_TICKET_Title>'
+      Subject: 'Oтворен тикет: <ZNUNY_TICKET_Title>'
     sr_Latn:
       Body: |-
-        Zdravo <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+        Zdravo <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-        tiket [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] je otvoren u redu <OTRS_TICKET_Queue>.
+        tiket [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] je otvoren u redu <ZNUNY_TICKET_Queue>.
 
-        <OTRS_CUSTOMER_REALNAME> je napisao/la:
-        <OTRS_CUSTOMER_BODY[30]>
+        <ZNUNY_CUSTOMER_REALNAME> je napisao/la:
+        <ZNUNY_CUSTOMER_BODY[30]>
 
-        <OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+        <ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
-        -- <OTRS_CONFIG_NotificationSenderName>
+        -- <ZNUNY_CONFIG_NotificationSenderName>
       ContentType: text/plain
-      Subject: 'Otvoren tiket: <OTRS_TICKET_Title>'
+      Subject: 'Otvoren tiket: <ZNUNY_TICKET_Title>'
     zh_CN:
       Body: |-
-        您好 <OTRS_NOTIFICATION_RECIPIENT_UserFirstname>,
+        您好 <ZNUNY_NOTIFICATION_RECIPIENT_UserFirstname>,
 
-        票据工单 [<OTRS_CONFIG_Ticket::Hook><OTRS_CONFIG_Ticket::HookDivider><OTRS_TICKET_TicketNumber>] 已在等待队列 已在队列<OTRS_TICKET_Queue> 中被编制完成。中被创建完成
+        票据工单 [<ZNUNY_CONFIG_Ticket::Hook><ZNUNY_CONFIG_Ticket::HookDivider><ZNUNY_TICKET_TicketNumber>] 已在等待队列 已在队列<ZNUNY_TICKET_Queue> 中被编制完成。中被创建完成
 
-        <OTRS_CUSTOMER_REALNAME> 写道：
-        <OTRS_CUSTOMER_BODY[30]>
+        <ZNUNY_CUSTOMER_REALNAME> 写道：
+        <ZNUNY_CUSTOMER_BODY[30]>
 
-        <OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<OTRS_TICKET_TicketID>
+        <ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>index.pl?Action=AgentTicketZoom;TicketID=<ZNUNY_TICKET_TicketID>
 
-        -- <OTRS_CONFIG_NotificationSenderName>
+        -- <ZNUNY_CONFIG_NotificationSenderName>
       ContentType: text/plain
-      Subject: 票据编制 工单已创建：<OTRS_TICKET_Title>
+      Subject: 票据编制 工单已创建：<ZNUNY_TICKET_Title>
   Name: Ticket create notification
   ValidID: 1

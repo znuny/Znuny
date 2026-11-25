@@ -6425,8 +6425,8 @@ sub TicketMerge {
 
     my $Body = $ConfigObject->Get('Ticket::Frontend::AutomaticMergeText');
     $Body = $LanguageObject->Translate($Body);
-    $Body =~ s{<(?i:(?:OTRS|ZNUNY)_TICKET)>}{$MergeTicket{TicketNumber}}gxms;
-    $Body =~ s{<(?i:(?:OTRS|ZNUNY)_MERGE_TO_TICKET)>}{$MainTicket{TicketNumber}}gxms;
+    $Body =~ s{<(?:OTRS|ZNUNY)_TICKET>}{$MergeTicket{TicketNumber}}gxms;
+    $Body =~ s{<(?:OTRS|ZNUNY)_MERGE_TO_TICKET>}{$MainTicket{TicketNumber}}gxms;
 
     my $ArticleObject = $Kernel::OM->Get('Kernel::System::Ticket::Article');
 

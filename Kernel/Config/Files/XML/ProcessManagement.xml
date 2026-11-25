@@ -827,9 +827,9 @@
                         <Item Key="Attachments">optional, StdAttachmentName1,StdAttachmentName2</Item>
                         <Item Key="AttachmentIDs">optional, 1,2,3</Item>
                         <Item Key="AttachmentsReuse">optional, 0|1</Item>
-                        <Item Key="Template">(optional) Template 1 (use template to replace in Body by Tag OTRS_TA_TEMPLATE)</Item>
-                        <Item Key="Salutation">(optional) Salutation 1 (use salutation to replace in Body by Tag OTRS_TA_SALUTATION)</Item>
-                        <Item Key="Signature">(optional) Signature 1 (use signature to replace in Body by Tag OTRS_TA_SIGNATURE)</Item>
+                        <Item Key="Template">(optional) Template 1 (use template to replace in Body by Tag ZNUNY_TA_TEMPLATE)</Item>
+                        <Item Key="Salutation">(optional) Salutation 1 (use salutation to replace in Body by Tag ZNUNY_TA_SALUTATION)</Item>
+                        <Item Key="Signature">(optional) Signature 1 (use signature to replace in Body by Tag ZNUNY_TA_SIGNATURE)</Item>
                         <Item Key="UseTicketHook">(optional) 1|0</Item>
                     </Hash>
                 </Item>

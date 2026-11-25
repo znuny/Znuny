@@ -63,7 +63,7 @@ sub new {
 
 =head2 NotificationEvent()
 
-replace all OTRS smart tags in the notification body and subject
+replace OTRS_ and ZNUNY_ smart tags in the notification body and subject
 
     my %NotificationEvent = $CalendarTemplateGeneratorObject->NotificationEvent(
         AppointmentID => 123,
@@ -265,7 +265,7 @@ sub _Replace {
 
     # Map OTRS_ and ZNUNY_ prefixes to canonical ZNUNY_, in any letter case.
     my $NormalizedStart = quotemeta $Start;
-    $Param{Text} =~ s/${NormalizedStart}(?i:(?:OTRS|ZNUNY)_)/$Start . 'ZNUNY_'/eg;
+    $Param{Text} =~ s/${NormalizedStart}(?:(?:OTRS|ZNUNY)_)/$Start . 'ZNUNY_'/eg;
 
     # get needed objects
     my $AppointmentObject = $Kernel::OM->Get('Kernel::System::Calendar::Appointment');
@@ -308,12 +308,12 @@ sub _Replace {
     for my $SecretConfigOption (@SecretConfigOptions) {
 
         my $Tag = $Start . 'ZNUNY_CONFIG_' . $SecretConfigOption . $End;
-        $Param{Text} =~ s{$Tag}{xxx}gix;
+        $Param{Text} =~ s{$Tag}{xxx}gx;
     }
 
     # replace config options
     my $Tag = $Start . 'ZNUNY_CONFIG_';
-    $Param{Text} =~ s{$Tag(.+?)$End}{$ConfigObject->Get($1) // ''}egix;
+    $Param{Text} =~ s{$Tag(.+?)$End}{$ConfigObject->Get($1) // ''}egx;
 
     # cleanup
     $Param{Text} =~ s/$Tag.+?$End/-/gi;

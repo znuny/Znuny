@@ -625,9 +625,7 @@ sub InitConfig {
 
         if ( defined $Self->{Plugins}->{$PluginKey}->{URL} ) {
             my $URL = $Self->{Plugins}->{$PluginKey}->{URL};
-
-            # Accept <OTRS_CONFIG_...> and <ZNUNY_CONFIG_...> in any letter case.
-            $URL =~ s{<(?i:(?:OTRS|ZNUNY)_CONFIG_)(.+?)>}{$ConfigObject->Get($1) // ''}egx;
+            $URL =~ s{<(?:OTRS|ZNUNY)_CONFIG_(.+?)>}{$ConfigObject->Get($1) // ''}egx;
             $Self->{Plugins}->{$PluginKey}->{URL} = $URL || '';
         }
     }

@@ -481,27 +481,6 @@ my @Tests = (
         Result   => 'Test Standard',
     },
     {
-        Name     => 'ZNUNY config value, any letter case',
-        Data     => {},
-        RichText => 0,
-        Template => 'Test <znuny_config_DefaultTheme>',
-        Result   => 'Test Standard',
-    },
-    {
-        Name     => 'OTRS config value, any letter case',
-        Data     => {},
-        RichText => 0,
-        Template => 'Test <otrs_CONFIG_DefaultTheme>',
-        Result   => 'Test Standard',
-    },
-    {
-        Name     => 'ZNUNY secret config value, any letter case',
-        Data     => {},
-        RichText => 0,
-        Template => 'Test <znuny_config_DatabasePw>',
-        Result   => 'Test xxx',
-    },
-    {
         Name     => 'ZNUNY ticket ticketid (canonical prefix)',
         Data     => {},
         RichText => 0,
@@ -960,33 +939,33 @@ $Self->Is(
 my $CalendarTemplateGeneratorObject = $Kernel::OM->Get('Kernel::System::CalendarTemplateGenerator');
 my @CalendarTagTests                = (
     {
-        Name   => 'Appointment title, lowercase znuny tag',
-        Text   => 'Title <znuny_appointment_title>',
+        Name   => 'Appointment title, ZNUNY tag',
+        Text   => 'Title <ZNUNY_APPOINTMENT_TITLE>',
         Result => "Title Test Appointment $RandomID",
     },
     {
-        Name   => 'Appointment title, mixed-case otrs tag',
-        Text   => 'Title <OtRs_APPOINTMENT_TITLE>',
+        Name   => 'Appointment title, OTRS tag',
+        Text   => 'Title <OTRS_APPOINTMENT_TITLE>',
         Result => "Title Test Appointment $RandomID",
     },
     {
-        Name   => 'Calendar name, lowercase znuny tag',
-        Text   => 'Calendar <znuny_calendar_calendarname>',
+        Name   => 'Calendar name, ZNUNY tag',
+        Text   => 'Calendar <ZNUNY_CALENDAR_CALENDARNAME>',
         Result => "Calendar My Calendar $RandomID",
     },
     {
-        Name   => 'Config tag, mixed case',
-        Text   => 'Theme <znuny_config_DefaultTheme>',
+        Name   => 'Config tag',
+        Text   => 'Theme <ZNUNY_CONFIG_DefaultTheme>',
         Result => 'Theme Standard',
     },
     {
-        Name   => 'Secret config tag, mixed case',
-        Text   => 'Pw <ZnUnY_CoNfIg_DatabasePw>',
+        Name   => 'Secret config tag',
+        Text   => 'Pw <ZNUNY_CONFIG_DatabasePw>',
         Result => 'Pw xxx',
     },
     {
         Name   => 'Unknown appointment tag still becomes a dash',
-        Text   => 'Missing <znuny_appointment_nosuch>',
+        Text   => 'Missing <ZNUNY_APPOINTMENT_NOSUCH>',
         Result => 'Missing -',
     },
 );

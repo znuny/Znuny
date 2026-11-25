@@ -97,14 +97,14 @@ Runs TransitionAction ArticleSend.
             AttachmentIDs    => '1,2,3',                                           # optional, comma separated StandardAttachment ID
             AttachmentsReuse => 1                                                  # optional, 1|0 - Reuse of attachments stored in the dynamic field configured in Process::DynamicFieldProcessManagementAttachment.
 
-            Template   => 'Template 1',                                            # Use template to replace in Body by Tag <OTRS_TA_TEMPLATE>
-            TemplateID => 1,                                                       # Use template id to replace in Body by Tag <OTRS_TA_TEMPLATE>
+            Template   => 'Template 1',                                            # Use template to replace in Body by Tag <ZNUNY_TA_TEMPLATE>
+            TemplateID => 1,                                                       # Use template id to replace in Body by Tag <ZNUNY_TA_TEMPLATE>
 
-            Salutation   => 'Salutation 1',                                        # Use salutation to replace in Body by Tag <OTRS_TA_SALUTATION>
-            SalutationID => 1,                                                     # Use salutation id to replace in Body by Tag <OTRS_TA_SALUTATION>
+            Salutation   => 'Salutation 1',                                        # Use salutation to replace in Body by Tag <ZNUNY_TA_SALUTATION>
+            SalutationID => 1,                                                     # Use salutation id to replace in Body by Tag <ZNUNY_TA_SALUTATION>
 
-            Signature   => 'Signature 1',                                          # Use signature to replace in Body by Tag <OTRS_TA_SIGNATURE>
-            SignatureID => 1,                                                      # Use signature id to replace in Body by Tag <OTRS_TA_SIGNATURE>
+            Signature   => 'Signature 1',                                          # Use signature to replace in Body by Tag <ZNUNY_TA_SIGNATURE>
+            SignatureID => 1,                                                      # Use signature id to replace in Body by Tag <ZNUNY_TA_SIGNATURE>
 
             UseTicketHook => 0,                                                    # optional, default: 1 - if you don't want to a ticket hook
         }
@@ -232,7 +232,7 @@ sub Run {
             UserID     => $Param{UserID},
         );
 
-        $Param{Config}->{Body} =~ s{(<|&lt;)OTRS_TA_Template(>|&gt;)}{$Text}xmsi;
+        $Param{Config}->{Body} =~ s{(<|&lt;)(?:OTRS|ZNUNY)_TA_Template(>|&gt;)}{$Text}xmsi;
     }
 
     # get salutation for the mail
@@ -259,7 +259,7 @@ sub Run {
             UserID     => $Param{UserID},
         );
 
-        $Param{Config}->{Body} =~ s{(<|&lt;)OTRS_TA_Salutation(>|&gt;)}{$Text}xmsi;
+        $Param{Config}->{Body} =~ s{(<|&lt;)(?:OTRS|ZNUNY)_TA_Salutation(>|&gt;)}{$Text}xmsi;
     }
 
     # get signature for the mail
@@ -286,7 +286,7 @@ sub Run {
             UserID     => $Param{UserID},
         );
 
-        $Param{Config}->{Body} =~ s{(<|&lt;)OTRS_TA_Signature(>|&gt;)}{$Text}xmsi;
+        $Param{Config}->{Body} =~ s{(<|&lt;)(?:OTRS|ZNUNY)_TA_Signature(>|&gt;)}{$Text}xmsi;
     }
 
     # add ticket hook for subject

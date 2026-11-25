@@ -186,11 +186,11 @@ TransitionActions:
     ChangeTime: 2023-05-19 13:21:14
     Config:
       Config:
-        Body: Hi <OTRS_CUSTOMER_DATA_UserFirstname> <OTRS_CUSTOMER_DATA_UserLastname>,  A
-          new user has been registered for you by your organization. Go to <OTRS_CONFIG_HttpType>://<OTRS_CONFIG_FQDN>/<OTRS_CONFIG_ScriptAlias>customer.pl
-          and use the lost password option to reset your password.  -- <OTRS_CONFIG_NotificationSenderName>
+        Body: Hi <ZNUNY_CUSTOMER_DATA_UserFirstname> <ZNUNY_CUSTOMER_DATA_UserLastname>,  A
+          new user has been registered for you by your organization. Go to <ZNUNY_CONFIG_HttpType>://<ZNUNY_CONFIG_FQDN>/<ZNUNY_CONFIG_ScriptAlias>customer.pl
+          and use the lost password option to reset your password.  -- <ZNUNY_CONFIG_NotificationSenderName>
         Charset: utf=8
-        From: <OTRS_CONFIG_NotificationSenderEmail>
+        From: <ZNUNY_CONFIG_NotificationSenderEmail>
         HistoryComment: Registration Email
         HistoryType: SendAutoReply
         IsVisibleForCustomer: '1'
@@ -199,7 +199,7 @@ TransitionActions:
         NoAgentNotify: '1'
         SenderType: system
         Subject: Activation Mail
-        To: <OTRS_CUSTOMER_DATA_UserEmail>
+        To: <ZNUNY_CUSTOMER_DATA_UserEmail>
         UseTicketHook: '0'
       Module: Kernel::System::ProcessManagement::TransitionAction::ArticleSend
       Scope: Global

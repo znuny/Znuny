@@ -417,7 +417,7 @@
                 <Item Key="Name" Translatable="1">Ticket</Item>
                 <Item Key="Block">Link</Item>
                 <Item Key="Prio">1000</Item>
-                <Item Key="URL">&lt;OTRS_CONFIG_HttpType&gt;://&lt;OTRS_CONFIG_FQDN&gt;/&lt;OTRS_CONFIG_ScriptAlias&gt;index.pl?Action=AgentTicketZoom;TicketID=%s</Item>
+                <Item Key="URL">&lt;ZNUNY_CONFIG_HttpType&gt;://&lt;ZNUNY_CONFIG_FQDN&gt;/&lt;ZNUNY_CONFIG_ScriptAlias&gt;index.pl?Action=AgentTicketZoom;TicketID=%s</Item>
             </Hash>
         </Value>
     </Setting>

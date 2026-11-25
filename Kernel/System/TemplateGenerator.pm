@@ -1597,10 +1597,10 @@ sub _DefaultReplacements {
             # This is a dummy "dynamicfield" function to just leave _TA_* tags
             # (needed for process management) alone instead of catching them as
             # unknown tags. Kernel::System::ProcessManagement::TransitionAction::ArticleSend
-            # resolves them later and still expects the OTRS_TA_ spelling.
+            # resolves them later and accepts both OTRS_TA_ and ZNUNY_TA_ spelling.
             Dynamic => sub {
                 my ($Name) = @_;
-                return "<OTRS_TA_$Name>";
+                return "<ZNUNY_TA_$Name>";
             },
         },
 
@@ -2162,7 +2162,7 @@ sub _NormalizeTags {
     # Escape the start marker for regex matching
     my $NormalizedStart = quotemeta( $Param{Start} );
 
-    $Param{Text} =~ s/${NormalizedStart}(?i:(?:OTRS|ZNUNY)_)/$Param{Start} . 'ZNUNY_'/eg;
+    $Param{Text} =~ s/${NormalizedStart}OTRS_/$Param{Start} . 'ZNUNY_'/eg;
 
     return $Param{Text};
 }

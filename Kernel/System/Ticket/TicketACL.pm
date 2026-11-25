@@ -351,7 +351,7 @@ sub TicketAcl {
             next DEBUGFILTER if $DebugFilter eq 'ACLName';
             next DEBUGFILTER if !$Self->{ACLDebugFilters}->{$DebugFilter};
 
-            if ( $DebugFilter =~ m{<(?:OTRS|ZNUNY)_TICKET_([^>]+)>}msxi ) {
+            if ( $DebugFilter =~ m{<(?:OTRS|ZNUNY)_TICKET_([^>]+)>}msx ) {
                 my $TicketParam = $1;
 
                 if (

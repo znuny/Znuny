@@ -292,7 +292,7 @@
         </Value>
     </Setting>
     <Setting Name="GenericInterface::Invoker::Ticket::Generic::HandleResponse::MaximumParallelInstances" Required="1" Valid="1" ConfigLevel="200">
-        <Description Translatable="1">Maximum number of parallel instances when using OTRS_AsynchronousInvokerExecution in invoker Ticket::Generic.</Description>
+        <Description Translatable="1">Maximum number of parallel instances when using ZNUNY_AsynchronousInvokerExecution in invoker Ticket::Generic.</Description>
         <Navigation>Core</Navigation>
         <Value>
             <Item ValueType="String" ValueRegex="^[1-9]\d*$">1</Item>
