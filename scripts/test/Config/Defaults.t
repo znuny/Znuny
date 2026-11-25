@@ -107,6 +107,12 @@ my %IgnoreEntries = (
 
     # This settings is modified in daemon.xml and needs to be excluded from this test.
     'DaemonModules' => 1,
+
+    # This setting is overridden in FrameworkITSMCore.xml if ITSM is installed.
+    'ProductName' => 1,
+
+    # The default in Framework.xml is intentionally disabled (secure by default), Defaults.pm still has the old value.
+    'CustomerPanelCreateAccount' => 1,
 );
 
 my $SysConfigObject = $Kernel::OM->Get('Kernel::System::SysConfig');

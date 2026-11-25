@@ -116,10 +116,10 @@ sub Run {
     # A transition action can change the ticket in this request, for example when a web
     # service writes a dynamic field. Nested events are blocked by the loop guard above
     # (bug#9748), so the new activity is evaluated here. The limit stops cyclic processes.
-    # SysConfig accepts 1 to 99. A larger stored value is capped here so one ticket update
-    # cannot run an unbounded number of transitions.
+    # SysConfig accepts 1 to 99. An invalid or larger stored value falls back to the default of 1,
+    # so one ticket update cannot run an unbounded number of transitions.
     my $MaxTransitionsPerRequest = $ConfigObject->Get('Process::Transition::MaxTransitionsPerRequest');
-    if ( !IsPositiveInteger($MaxTransitionsPerRequest) ) {
+    if ( !IsPositiveInteger($MaxTransitionsPerRequest) || $MaxTransitionsPerRequest > 99 ) {
         $MaxTransitionsPerRequest = 1;
     }
 

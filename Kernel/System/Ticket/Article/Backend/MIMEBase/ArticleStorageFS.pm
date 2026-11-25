@@ -59,7 +59,7 @@ sub new {
     );
 
     if ( !$ArticleDir ) {
-        die "Can't write $Self->{ArticleDataDir}/$ArticleContentPath/! try: \$OTRS_HOME/bin/znuny.SetPermissions.pl!";
+        die "Can't write $Self->{ArticleDataDir}/$ArticleContentPath/! try: \$ZNUNY_HOME/bin/znuny.SetPermissions.pl!";
     }
 
     # Get activated cache backend configuration.
@@ -984,7 +984,7 @@ sub _ArticleDirectoryCreate {
     if ( !-w $RealTarget ) {
         $LogObject->Log(
             Priority => 'notice',
-            Message  => "Can't write $RealTarget! try: \$OTRS_HOME/bin/znuny.SetPermissions.pl!",
+            Message  => "Can't write $RealTarget! try: \$ZNUNY_HOME/bin/znuny.SetPermissions.pl!",
         );
         return;
     }

@@ -48,6 +48,11 @@ if ( !$IsITSMInstalled ) {
     $SkipITSM = 1;
 }
 
+my $SkipImportExport;
+if ( !$Kernel::OM->Get('Kernel::System::Main')->Require( 'Kernel::System::ImportExport', Silent => 1 ) ) {
+    $SkipImportExport = 1;
+}
+
 my $Home = $ConfigObject->Get('Home');
 
 # get main object
@@ -105,6 +110,7 @@ for my $Directory ( sort @DirectoriesToSearch ) {
             next OPERATION if $1 eq 'Kernel::System::Calendar::Appointment' && $SkipCalendar;
             next OPERATION if $1 eq 'Kernel::System::Calendar::Team'        && $SkipTeam;
             next OPERATION if $1 eq 'Kernel::System::GeneralCatalog'        && $SkipITSM;
+            next OPERATION if $1 eq 'Kernel::System::ImportExport'          && $SkipImportExport;
             next OPERATION if $1 eq 'Kernel::System::OTRSBusiness';
 
             # load object

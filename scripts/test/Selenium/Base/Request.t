@@ -28,11 +28,26 @@ my $SeleniumTestAgent = sub {
 
 my $SeleniumTestCustomer = sub {
 
+    my $HelperObject = $Kernel::OM->Get('Kernel::System::UnitTest::Helper');
+
+    # customer self-registration is disabled by default, enable it so the 'Signup' link is rendered
+    $HelperObject->ConfigSettingChange(
+        Valid => 1,
+        Key   => 'CustomerPanelCreateAccount',
+        Value => 1,
+    );
+
     # perform request to the login page
     $SeleniumObject->CustomerRequest();
 
     $SeleniumObject->PageContains(
         String => 'Signup',
+    );
+
+    # restore default so the public test runs with self-registration disabled
+    $HelperObject->ConfigSettingChange(
+        Valid => 0,
+        Key   => 'CustomerPanelCreateAccount',
     );
 };
 

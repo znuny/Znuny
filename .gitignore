@@ -43,6 +43,7 @@ var/httpd/htdocs/skins/*/*/css-cache
 var/sessions/Data*
 var/sessions/State*
 var/article/*
+!var/article/.keep
 var/cron/*
 !var/cron/*.dist
 .cache

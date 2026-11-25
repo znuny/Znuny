@@ -34,12 +34,39 @@ my $Password = $UserLogin;
 my $CustomerUserLogin = $HelperObject->TestCustomerUserCreate();
 my $CustomerPassword  = $CustomerUserLogin;
 
+# disable DNS lookups (localunittest.com has no MX record)
+$HelperObject->ConfigSettingChange(
+    Valid => 1,
+    Key   => 'CheckMXRecord',
+    Value => 0,
+);
+
+my $WebserviceID = $Kernel::OM->Get('Kernel::System::GenericInterface::Webservice')->WebserviceAdd(
+    Name   => 'TicketCustomerRestrictions' . $RandomID,
+    Config => {
+        Debugger => {
+            DebugThreshold => 'debug',
+        },
+        Provider => {
+            Transport => {
+                Type => '',
+            },
+        },
+    },
+    ValidID => 1,
+    UserID  => 1,
+);
+$Self->True(
+    $WebserviceID,
+    'Added web service',
+);
+
 my $DebuggerObject = Kernel::GenericInterface::Debugger->new(
     DebuggerConfig => {
         DebugThreshold => 'debug',
         TestMode       => 1,
     },
-    WebserviceID      => 1,
+    WebserviceID      => $WebserviceID,
     CommunicationType => 'Provider',
 );
 
@@ -48,7 +75,7 @@ my $RunOperation = sub {
 
     my $OperationObject = "Kernel::GenericInterface::Operation::Ticket::$Param{Operation}"->new(
         DebuggerObject => $DebuggerObject,
-        WebserviceID   => 1,
+        WebserviceID   => $WebserviceID,
     );
 
     return $OperationObject->Run(
@@ -88,7 +115,7 @@ my %ForgedArticle = (
     ContentType          => 'text/plain; charset=UTF8',
     SenderType           => 'agent',
     IsVisibleForCustomer => 0,
-    From                 => 'IT Support <helpdesk@example.com>',
+    From                 => 'IT Support <helpdesk@localunittest.com>',
 );
 
 my $CustomerCreate = $RunOperation->(
@@ -143,9 +170,9 @@ my $CustomerIdentity = $RunOperation->(
         Article => {
             %ForgedArticle,
             ArticleSend => 1,
-            To          => 'someone@example.com',
-            Cc          => 'cc@example.com',
-            Bcc         => 'bcc@example.com',
+            To          => 'someone@localunittest.com',
+            Cc          => 'cc@localunittest.com',
+            Bcc         => 'bcc@localunittest.com',
         },
     },
 );

@@ -309,7 +309,7 @@ my @ServicesNewCustomerID = $ServiceObject->CustomerCompanyServiceMemberList(
 );
 $Self->IsDeeply(
     \@ServicesNewCustomerID,
-    [$ServiceID1],
+    [$ServiceID2],
     'CustomerCompanyServiceMemberList() - services follow the new customer ID',
 );
 

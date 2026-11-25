@@ -183,6 +183,13 @@ $HelperObject->ConfigSettingChange(
     },
 );
 
+# The transition limit notice is only written if transition debugging is enabled.
+$HelperObject->ConfigSettingChange(
+    Valid => 1,
+    Key   => 'ProcessManagement::Transition::Debug::Enabled',
+    Value => 1,
+);
+
 my $TicketObject              = $Kernel::OM->Get('Kernel::System::Ticket');
 my $DynamicFieldObject        = $Kernel::OM->Get('Kernel::System::DynamicField');
 my $DynamicFieldBackendObject = $Kernel::OM->Get('Kernel::System::DynamicField::Backend');
@@ -303,43 +310,45 @@ my $ActivityForMaxTransitionsPerRequest = sub {
 
 my $ActivityMiddleName = $Dump->{Activity}->{$ActivityMiddle}->{Name};
 
-my $WithinLimit = $ActivityForMaxTransitionsPerRequest->( MaxTransitionsPerRequest => 1 );
+# SysConfig default is 1: only the first matching transition runs.
+my $DefaultLimit = $ActivityForMaxTransitionsPerRequest->( MaxTransitionsPerRequest => 1 );
 
 $Self->Is(
-    $WithinLimit->{ActivityEntityID},
-    $ActivityEnd,
-    'Ten allowed steps advance across both matching transitions',
-);
-$Self->Is(
-    $WithinLimit->{TransitionCount},
-    2,
-    'Ten allowed steps apply both matching transitions',
-);
-$Self->True(
-    index( $WithinLimit->{Log}, 'Process transition limit of' ) == -1,
-    'Finishing inside the limit writes no transition-limit notice',
-);
-
-my $StoppedAtLimit = $ActivityForMaxTransitionsPerRequest->( MaxTransitionsPerRequest => 1 );
-
-$Self->Is(
-    $StoppedAtLimit->{ActivityEntityID},
+    $DefaultLimit->{ActivityEntityID},
     $ActivityMiddle,
-    'One allowed step stops after the first matching transition',
+    'Default of 1 stops after the first matching transition',
 );
 $Self->Is(
-    $StoppedAtLimit->{TransitionCount},
+    $DefaultLimit->{TransitionCount},
     1,
-    'One allowed step applies one transition',
+    'Default of 1 applies one transition',
 );
 
-my $LimitNotice = "Process transition limit of 1 reached for TicketID $StoppedAtLimit->{TicketID} "
+my $LimitNotice = "Process transition limit of 1 reached for TicketID $DefaultLimit->{TicketID} "
     . "(Process: $ProcessName, Activity: $ActivityMiddleName). "
     . 'A cyclic process keeps applying transitions up to this limit on every ticket update.';
 
 $Self->True(
-    index( $StoppedAtLimit->{Log}, $LimitNotice ) != -1,
+    index( $DefaultLimit->{Log}, $LimitNotice ) != -1,
     'Stopping on the last allowed step writes a transition-limit notice',
+);
+
+# A limit above the matching transitions finishes the path and writes no notice.
+my $WithinLimit = $ActivityForMaxTransitionsPerRequest->( MaxTransitionsPerRequest => 3 );
+
+$Self->Is(
+    $WithinLimit->{ActivityEntityID},
+    $ActivityEnd,
+    'A limit above the matching transitions advances across both',
+);
+$Self->Is(
+    $WithinLimit->{TransitionCount},
+    2,
+    'A limit above the matching transitions applies both',
+);
+$Self->True(
+    index( $WithinLimit->{Log}, 'Process transition limit of' ) == -1,
+    'Finishing inside the limit writes no transition-limit notice',
 );
 
 my $CycleProcessName = "Cycle $RandomID";
@@ -451,31 +460,31 @@ $Self->True(
     'A cycle that is still moving on the last step writes a transition-limit notice',
 );
 
-# A stored value above the SysConfig maximum must not run that many transitions.
-my $CycleAboveCap = $ActivityForMaxTransitionsPerRequest->(
+# A stored value above the SysConfig maximum (99) falls back to the default of 1.
+my $CycleAboveMax = $ActivityForMaxTransitionsPerRequest->(
     MaxTransitionsPerRequest => 1000,
     ProcessEntityID          => $CycleProcessEntityID,
     ActivityEntityID         => $CycleActivityA,
 );
 
 $Self->Is(
-    $CycleAboveCap->{TransitionCount},
-    99,
-    'A stored limit of 1000 is capped at 99 transitions',
+    $CycleAboveMax->{TransitionCount},
+    1,
+    'A stored limit of 1000 falls back to the default of 1 transition',
 );
 $Self->Is(
-    $CycleAboveCap->{ActivityEntityID},
+    $CycleAboveMax->{ActivityEntityID},
     $CycleActivityB,
-    '99 transitions on a two-activity cycle stop on the other activity',
+    'The fallback limit of 1 stops on the other activity of the cycle',
 );
 
-my $CappedNotice = "Process transition limit of 99 reached for TicketID $CycleAboveCap->{TicketID} "
+my $FallbackNotice = "Process transition limit of 1 reached for TicketID $CycleAboveMax->{TicketID} "
     . "(Process: $CycleProcessName, Activity: $CycleActivityBName). "
     . 'A cyclic process keeps applying transitions up to this limit on every ticket update.';
 
 $Self->True(
-    index( $CycleAboveCap->{Log}, $CappedNotice ) != -1,
-    'The capped limit is the value written to the notice',
+    index( $CycleAboveMax->{Log}, $FallbackNotice ) != -1,
+    'The fallback limit of 1 is the value written to the notice',
 );
 
 1;

@@ -587,6 +587,13 @@ $Selenium->RunTest(
             "Checkbox Unchecked stays selected after reload for Search_DynamicField_$ArticleCheckboxName",
         );
 
+        # Filter dialog is still open and its overlay blocks the reset link. Reload page to get rid of it.
+        $Selenium->VerifiedRefresh();
+        $Selenium->WaitFor(
+            JavaScript =>
+                'return typeof($) === "function" && $("#ResetArticleFilter").length && !$(".Dialog:visible").length && !$("#Overlay:visible").length;'
+        );
+
         $Selenium->find_element( "#ResetArticleFilter", 'css' )->click();
         $Selenium->WaitFor( JavaScript => 'return typeof($) === "function" && !$("#ResetArticleFilter").length;' );
 
