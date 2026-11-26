@@ -44,6 +44,10 @@ sub Run {
             Message => 'Create database table authentication_config.',
             Module  => 'AuthenticationConfig',
         },
+        {
+            Message => 'Alters content_type column sizes in article_data_mime_attachment and web_upload_cache.',
+            Module  => 'ContentTypeColumnLength',
+        },
     );
 
     return 1   if !@Tasks;

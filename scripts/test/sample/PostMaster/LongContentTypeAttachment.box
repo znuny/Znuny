@@ -1,0 +1,42 @@
+From: Maintenance Team <maintenance@example.com>
+To: helpdesk@example.net
+Subject: Quarterly maintenance schedule
+Date: Mon, 05 Oct 2026 09:30:00 +0000
+Message-ID: <quarterly-maintenance-schedule@example.com>
+MIME-Version: 1.0
+Content-Type: multipart/mixed;
+ boundary="----=_Part_LongContentType"
+
+------=_Part_LongContentType
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+
+Hello,
+
+please find the maintenance schedule attached.
+
+Regards
+------=_Part_LongContentType
+Content-Transfer-Encoding: base64
+Content-Type: application/pdf;
+ name="=?UTF-8?Q?=D0=93=D1=80=D0=B0=D1=84=D1=96=D0=BA_=D0=BF=D0=BB=D0=B0=D0=BD?=
+ =?UTF-8?Q?=D0=BE=D0=B2=D0=BE=D0=B3=D0=BE_=D1=82=D0=B5=D1=85=D0=BD=D1=96?=
+ =?UTF-8?Q?=D1=87=D0=BD=D0=BE=D0=B3=D0=BE_=D0=BE=D0=B1=D1=81=D0=BB=D1=83?=
+ =?UTF-8?Q?=D0=B3=D0=BE=D0=B2=D1=83=D0=B2=D0=B0=D0=BD=D0=BD=D1=8F_=D1=81?=
+ =?UTF-8?Q?=D0=B5=D1=80=D0=B2=D0=B5=D1=80=D0=BD=D0=BE=D0=B3=D0=BE_=D0=BE?=
+ =?UTF-8?Q?=D0=B1=D0=BB=D0=B0=D0=B4=D0=BD=D0=B0=D0=BD=D0=BD=D1=8F_=D0=BD?=
+ =?UTF-8?Q?=D0=B0_=D1=87=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D1=82=D0=B8=D0=B9?=
+ =?UTF-8?Q?_=D0=BA=D0=B2=D0=B0=D1=80=D1=82=D0=B0=D0=BB=2Epdf?="
+Content-Disposition: attachment;
+ filename*0*=UTF-8''%D0%93%D1%80%D0%B0%D1%84%D1%96%D0%BA%20%D0%BF%D0%BB%D0%B0%D0;
+ filename*1*=%BD%D0%BE%D0%B2%D0%BE%D0%B3%D0%BE%20%D1%82%D0%B5%D1%85%D0%BD;
+ filename*2*=%D1%96%D1%87%D0%BD%D0%BE%D0%B3%D0%BE%20%D0%BE%D0%B1%D1%81%D0;
+ filename*3*=%BB%D1%83%D0%B3%D0%BE%D0%B2%D1%83%D0%B2%D0%B0%D0%BD%D0%BD%D1;
+ filename*4*=%8F%20%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%BD%D0%BE%D0%B3;
+ filename*5*=%D0%BE%20%D0%BE%D0%B1%D0%BB%D0%B0%D0%B4%D0%BD%D0%B0%D0%BD%D0;
+ filename*6*=%BD%D1%8F%20%D0%BD%D0%B0%20%D1%87%D0%B5%D1%82%D0%B2%D0%B5%D1;
+ filename*7*=%80%D1%82%D0%B8%D0%B9%20%D0%BA%D0%B2%D0%B0%D1%80%D1%82%D0%B0;
+ filename*8*=%D0%BB.pdf
+
+Wm51bnkgdW5pdCB0ZXN0IGF0dGFjaG1lbnQ=
+------=_Part_LongContentType--
