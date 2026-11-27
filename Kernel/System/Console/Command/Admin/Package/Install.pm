@@ -26,7 +26,8 @@ sub Configure {
     $Self->Description('Install a package.');
     $Self->AddOption(
         Name        => 'force',
-        Description => 'Force package installation even if validation fails.',
+        Description =>
+            'Force package installation even if validation fails. Has no effect if the package is already installed (see Admin::Package::Upgrade).',
         Required    => 0,
         HasValue    => 0,
     );
@@ -65,7 +66,10 @@ sub Run {
 
     # check if package is installed
     if ( $Kernel::OM->Get('Kernel::System::Package')->PackageIsInstalled( Name => $Structure{Name}->{Content} ) ) {
-        $Self->PrintError("Package is already installed.");
+        $Self->PrintError(
+            "Package is already installed. Use Admin::Package::Upgrade to change its version"
+                . " (add --force to reinstall the same version or to install an older one)."
+        );
         return $Self->ExitCodeError();
     }
 
