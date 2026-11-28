@@ -57,6 +57,31 @@ sub CheckAccess {
     # check Acl
     return if !$Param{AclActionLookup}->{AgentTicketNote};
 
+    my $TicketObject = $Kernel::OM->Get('Kernel::System::Ticket');
+
+    my $Config = $ConfigObject->Get('Ticket::Frontend::AgentTicketNote');
+    if ( $Config->{Permission} ) {
+        my $Ok = $TicketObject->TicketPermission(
+            Type     => $Config->{Permission},
+            TicketID => $Param{Ticket}->{TicketID},
+            UserID   => $Param{UserID},
+            LogNo    => 1,
+        );
+        return if !$Ok;
+    }
+    if ( $Config->{RequiredLock} ) {
+        my $Locked = $TicketObject->TicketLockGet(
+            TicketID => $Param{Ticket}->{TicketID}
+        );
+        if ($Locked) {
+            my $AccessOk = $TicketObject->OwnerCheck(
+                TicketID => $Param{Ticket}->{TicketID},
+                OwnerID  => $Param{UserID},
+            );
+            return if !$AccessOk;
+        }
+    }
+
     return 1;
 }
 
