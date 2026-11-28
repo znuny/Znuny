@@ -220,6 +220,64 @@ sub Run {
             }
         }
 
+        # Check if queue is used by any System E-mail Address or Mail Accounts
+        my $SystemAddressObject = $Kernel::OM->Get('Kernel::System::SystemAddress');
+        my $MailAccountObject = $Kernel::OM->Get('Kernel::System::MailAccount');
+        my $IsQueueUsedBySystemAddress;
+        my $IsQueueUsedByMailAccount;
+        if ( $GetParam{QueueID} ) {
+            my %SystemAddressList = $SystemAddressObject->SystemAddressList( Valid => 1 );
+            SYSTEMADDRESS:
+            for my $SystemAddressID ( keys %SystemAddressList ) {
+                my %SystemAddress = $SystemAddressObject->SystemAddressGet( ID => $SystemAddressID );
+                if ( $SystemAddress{QueueID} && $SystemAddress{QueueID} == $GetParam{QueueID} ) {
+                    $IsQueueUsedBySystemAddress = 1;
+                    last SYSTEMADDRESS;
+                }
+            }
+            my %MailAccountList = $MailAccountObject->MailAccountList( Valid => 1 );
+            MAILACCOUNT:
+            for my $MAID ( keys %MailAccountList ) {
+                my %MA = $MailAccountObject->MailAccountGet( ID => $MAID );
+                if ( $MA{QueueID} && $MA{QueueID} == $GetParam{QueueID} ) {
+                    $IsQueueUsedByMailAccount = 1;
+                    last MAILACCOUNT;
+                }
+            }
+        }
+
+        if ( $IsQueueUsedBySystemAddress && $IsQueueUsedByMailAccount ) {
+            # Both usages present: combined handling
+            if (
+                $Kernel::OM->Get('Kernel::System::Valid')->ValidLookup( ValidID => $GetParam{ValidID} )
+                ne 'valid'
+                )
+            {
+                $Errors{ValidIDInvalid} = 'ServerError';
+                $Errors{ValidOptionServerError} = 'InSystemAddressAndMailAccount';
+            }
+        }
+        elsif ($IsQueueUsedBySystemAddress) {
+            if (
+                $Kernel::OM->Get('Kernel::System::Valid')->ValidLookup( ValidID => $GetParam{ValidID} )
+                ne 'valid'
+                )
+            {
+                $Errors{ValidIDInvalid}         = 'ServerError';
+                $Errors{ValidOptionServerError} = 'InSystemAddress';
+            }
+        }
+        elsif ($IsQueueUsedByMailAccount) {
+            if (
+                $Kernel::OM->Get('Kernel::System::Valid')->ValidLookup( ValidID => $GetParam{ValidID} )
+                ne 'valid'
+                )
+            {
+                $Errors{ValidIDInvalid}         = 'ServerError';
+                $Errors{ValidOptionServerError} = 'InMailAccount';
+            }
+        }
+
         # if no errors occurred
         if ( !%Errors ) {
 
