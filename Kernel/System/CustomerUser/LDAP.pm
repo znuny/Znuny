@@ -377,7 +377,7 @@ sub CustomerSearch {
     {
         $Kernel::OM->Get('Kernel::System::Log')->Log(
             Priority => 'error',
-            Message  => 'Need Search, UserLogin, PostMasterSearch or CustomerID!'
+            Message  => 'Need Search, UserLogin, PostMasterSearch, CustomerIDRaw or CustomerID!'
         );
         return;
     }
