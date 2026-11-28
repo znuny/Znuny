@@ -91,6 +91,7 @@
                     </li>
 [% RenderBlockEnd("Search") %]
 [% RenderBlockStart("AlwaysGroupsConfig") %]
+                    [% IF Data.AdminSystemConfigurationPermission %]
                     <li>
                         <a href="[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=View;Setting=CustomerGroupAlwaysGroups" class="CallForAction Fullsize Center"><span><i class="fa fa-edit"></i>[% Translate("Edit Customer User Default Groups") | html %]</span></a>
                         <p class="FieldExplanation">
@@ -98,6 +99,7 @@
                             [% Translate("You can manage these groups via the configuration setting \"CustomerGroupAlwaysGroups\".") | html %]
                         </p>
                     </li>
+                    [% END %]
 
 [% RenderBlockEnd("AlwaysGroupsConfig") %]
                 </ul>

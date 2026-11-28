@@ -25,6 +25,16 @@ sub new {
     my $Self = {%Param};
     bless( $Self, $Type );
 
+    $Self->{AdminMailAccountPermission} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Permission(
+        Action => 'AdminMailAccount',
+        Type   => 'rw',
+    );
+
+    $Self->{AdminSystemConfigurationPermission} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Permission(
+        Action => 'AdminSystemConfiguration',
+        Type   => 'rw',
+    );
+
     return $Self;
 }
 
@@ -110,6 +120,9 @@ sub Run {
     my $ConfigObject = $Kernel::OM->Get('Kernel::Config');
     my $MainObject   = $Kernel::OM->Get('Kernel::System::Main');
     my $Notification = $ParamObject->GetParam( Param => 'Notification' ) || '';
+
+    $Param{AdminMailAccountPermission}         = $Self->{AdminMailAccountPermission};
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     # ------------------------------------------------------------ #
     # change
@@ -577,6 +590,9 @@ sub _Edit {
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
 
+    $Param{AdminMailAccountPermission}         = $Self->{AdminMailAccountPermission};
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
+
     $LayoutObject->Block(
         Name => 'Overview',
         Data => \%Param,
@@ -948,6 +964,9 @@ sub _Overview {
     my ( $Self, %Param ) = @_;
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    $Param{AdminMailAccountPermission}         = $Self->{AdminMailAccountPermission};
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     $LayoutObject->Block(
         Name => 'Overview',

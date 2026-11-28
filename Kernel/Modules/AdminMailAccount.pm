@@ -24,6 +24,11 @@ sub new {
     my $Self = {%Param};
     bless( $Self, $Type );
 
+    $Self->{AdminSystemConfigurationPermission} = $Kernel::OM->Get('Kernel::Output::HTML::Layout')->Permission(
+        Action => 'AdminSystemConfiguration',
+        Type   => 'rw',
+    );
+
     return $Self;
 }
 
@@ -34,6 +39,8 @@ sub Run {
     my $LogObject         = $Kernel::OM->Get('Kernel::System::Log');
     my $ParamObject       = $Kernel::OM->Get('Kernel::System::Web::Request');
     my $MailAccountObject = $Kernel::OM->Get('Kernel::System::MailAccount');
+
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     my %GetParam = ();
     my @Params   = (
@@ -384,6 +391,8 @@ sub _Overview {
     my $LayoutObject      = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
     my $MailAccountObject = $Kernel::OM->Get('Kernel::System::MailAccount');
 
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
+
     my %Backend = $MailAccountObject->MailAccountBackendList();
 
     $LayoutObject->Block(
@@ -440,6 +449,8 @@ sub _MaskUpdateMailAccount {
     my ( $Self, %Param ) = @_;
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     # get valid list
     my %ValidList        = $Kernel::OM->Get('Kernel::System::Valid')->ValidList();
@@ -519,6 +530,8 @@ sub _MaskAddMailAccount {
     my ( $Self, %Param ) = @_;
 
     my $LayoutObject = $Kernel::OM->Get('Kernel::Output::HTML::Layout');
+
+    $Param{AdminSystemConfigurationPermission} = $Self->{AdminSystemConfigurationPermission};
 
     # get valid list
     my %ValidList        = $Kernel::OM->Get('Kernel::System::Valid')->ValidList();

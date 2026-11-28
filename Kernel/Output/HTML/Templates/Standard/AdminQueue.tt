@@ -87,6 +87,7 @@
                             </span>
                         </a>
                     </li>
+                    [% IF Data.AdminMailAccountPermission %]
                     <li>
                         <a href='[% Env("Baselink") %]Action=AdminMailAccount' class='CallForAction Fullsize Center'>
                             <span>
@@ -94,6 +95,7 @@
                             </span>
                         </a>
                     </li>
+                    [% END %]
                     <li>
                         <a href='[% Env("Baselink") %]Action=AdminSalutation' class='CallForAction Fullsize Center'>
                             <span>
@@ -122,6 +124,7 @@
                             </span>
                         </a>
                     </li>
+                    [% IF Data.AdminSystemConfigurationPermission %]
                     <li>
                         <a href='[% Env("Baselink") %]Action=AdminSystemConfiguration;Subaction=Search;Search=TimeWorkingHours' class='CallForAction Fullsize Center'>
                             <span>
@@ -136,6 +139,7 @@
                             </span>
                         </a>
                     </li>
+                    [% END %]
                 </ul>
             </div>
         </div>
